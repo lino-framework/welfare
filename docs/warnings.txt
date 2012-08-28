@@ -1,0 +1,4 @@
+include/sitemap.rst:2: (WARNING/2) toctree contains reference to nonexisting document u'admin/index'
+include/sitemap.rst:2: (WARNING/2) toctree contains reference to nonexisting document u'blog/index'
+include/sitemap.rst:2: (WARNING/2) toctree contains reference to nonexisting document u'autodoc/index'
+T:\hgwork\welfare\docs\fr\user\intro.rst:: WARNING: document isn't included in any toctree
