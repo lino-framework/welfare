@@ -23,15 +23,15 @@ import os
 
 #~ __version__ = file(os.path.join(os.path.dirname(
     #~ __file__),'..','VERSION')).read().strip()
-__version__ = "1.4.11"
+__version__ = "0.1.0"
 """
 Version number. 
 """
 
 __author__ = "Luc Saffre <luc.saffre@gmx.net>"
 
-__url__ = "http://lino.saffre-rumma.net"
-#~ __url__ = "http://code.google.com/p/lino/"
+#~ __url__ = "http://lino-welfare.saffre-rumma.net"
+__url__ = "http://code.google.com/p/lino-welfare/"
 
 __copyright__ = """\
 Copyright (c) 2002-2012 Luc Saffre.

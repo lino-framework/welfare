@@ -1,5 +1,6 @@
 ======================
-Guide de l'utilisateur
+User Guide
 ======================
 
-En construction.
+An English user guide isn't yet on our to-do list.
+Please refer to the other languages.

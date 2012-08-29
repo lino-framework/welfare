@@ -2,8 +2,6 @@ DJANGO_ADMIN = python l:\\snapshots\\django\\django\\bin\\django-admin.py
 LANGS        = en de fr
 #~ LANGS        = de
 SITENAME               = lino-welfare
-#~ DJANGO_SETTINGS_MODULE = dsbe.demo.settings
-#~ DJANGO_SETTINGS_MODULE = lino.demos.std.settings
 TEMPDIR                = C:\\temp\\sphinxbuild\\$(SITENAME)
 #~ TEMPDIR                = /cygdrive/c/temp/sphinxbuild/$(SITENAME)
 BUILDDIR               = $(TEMPDIR)\\html
@@ -27,7 +25,7 @@ PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
 
 
-.PHONY: help clean html show web pickle htmlhelp latex changes linkcheck makedocs
+.PHONY: help clean html web pickle htmlhelp latex changes linkcheck upload
 
 clean:
 	-rm -rf $(CACHEDIR)
@@ -51,10 +49,8 @@ html:
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)."
 
 
-show:
-	$(OPENHTML) $(BUILDDIR)\index.html
-  
 upload:
+	python ../setup.py upload_sphinx --upload-dir $(BUILDDIR)
 	cd $(BUILDDIR) && rsync -r --progress --delete --times ./ luc@saffre-rumma.net:~/public_html/sphinxbuild/$(SITENAME)
 
 

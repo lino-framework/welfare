@@ -16,6 +16,22 @@
 Transaction 25
 --------------
 
+Uncomplete list of TIs
+
+=== ======= ================================
+IT  Status  Description
+=== ======= ================================
+000 ok      National Number
+001 ok      Residences
+002 -       Dossier de référence
+003 ok      Ascertained Legal Main Addresses
+005 ok      Address Change Intention
+019 ok      Address Change Declaration
+024 ok      Address References
+=== ======= ================================
+    
+
+
 """
 
 import datetime
@@ -842,25 +858,6 @@ def IT251(n):
     
 
 class RowHandlers:
-  
-    """
-    List of supported TIs
-
-    === ======= ================================
-    IT  Status
-    === ======= ================================
-    000 ok      National Number
-    001 ok      Residences
-    002 -       Dossier de référence
-    003 ok      Ascertained Legal Main Addresses
-    005 ok      Address Change Intention
-    019 ok      Address Change Declaration
-    024 ok      Address References
-    === ======= ================================
-    
-    
-    
-    """
   
     @staticmethod
     def IT000(n,name):

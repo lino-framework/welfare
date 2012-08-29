@@ -13,30 +13,21 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Default settings for :doc:`/pcsw/index`.
+Default settings of a Lino/Welfare site.
 
 """
 
 import os
-import lino
+#~ import lino
 
 from lino.apps.std.settings import *
 
 class Lino(Lino):
-    """
-    Lino/Welfare is
-    the first of the real-world demo applications that are part 
-    of the Lino project.
-    It is a tool for social assistants that help receivers 
-    of public aid to find a suitable job or education, 
-    adapted to Belgian *Public Centres for Social Welfare* 
-    (Centres Publics d'Action Sociale).
-    """
     source_dir = os.path.dirname(__file__)
     title = "Lino/PCSW"
     #~ domain = "pcsw.saffre-rumma.net"
     help_url = "http://lino.saffre-rumma.net/pcsw/index.html"
-    migration_module = 'lino_welfare.migrate'
+    migration_module = 'lino_welfare.modlib.pcsw.migrate'
     
     #~ project_model = 'contacts.Person'
     project_model = 'contacts.Person'
@@ -58,6 +49,12 @@ class Lino(Lino):
         
     def get_main_action(self,user):
         return self.modules.lino.Home.default_action
+        
+    def using(self,*args,**kw):
+        from lino_welfare import __version__, __url__
+        yield ("Lino/Welfare",__version__,__url__)
+        for u in super(Lino,self).using(*args,**kw):
+            yield u
         
         
     anonymous_user_profile = '400'

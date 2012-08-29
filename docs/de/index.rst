@@ -12,5 +12,9 @@ Nachrichten
 Inhalt
 ======
 
-.. include:: ../include/sitemap.rst
+.. toctree::
+   :maxdepth: 1
 
+   about/index
+   user/index
+   

@@ -13,7 +13,8 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 import os
-from distutils.core import setup
+#~ from distutils.core import setup
+from setuptools import setup
 #~ from distutils.core import setup, Distribution
 import lino_welfare
 
@@ -32,7 +33,7 @@ setup(name='lino-welfare',
       author='Luc Saffre',
       author_email='luc.saffre@gmail.com',
       requires=['lino'],
-      url="http://lino.saffre-rumma.net",
+      url="http://code.google.com/p/lino-welfare/",
       classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2

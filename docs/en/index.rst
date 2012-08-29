@@ -13,5 +13,11 @@ News
 Content
 ========
 
-.. include:: ../include/sitemap.rst
+.. toctree::
+   :maxdepth: 1
 
+   about/index
+   admin/index
+   blog/index
+   autodoc/index
+   
