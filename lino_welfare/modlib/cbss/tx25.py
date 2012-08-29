@@ -87,7 +87,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
     wsdl_parts = ('cache','wsdl','RetrieveTIGroupsV3.wsdl')
     
     #~ language = babel.LanguageField()
-    language = RequestLanguages.field()
+    language = RequestLanguages.field(blank=True)
     history = models.BooleanField(
         verbose_name=_("History"),default=False,
         help_text = "Whatever this means.")

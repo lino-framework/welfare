@@ -1378,4 +1378,4 @@ def migrate_from_1_4_10(globals_dict):
     globals_dict.update(objects=new_objects)
     
     #~ return '1.4.11'
-    return '0.0.1'
+    return '0.1.0'

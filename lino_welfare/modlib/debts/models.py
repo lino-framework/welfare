@@ -582,7 +582,7 @@ class Entry(SequencedBudgetComponent):
     allow_cascaded_delete = True
     
     #~ group = models.ForeignKey(AccountGroup)
-    account_type = AccountTypes.field()
+    account_type = AccountTypes.field(blank=True)
     account = models.ForeignKey(accounts.Account)
     partner = models.ForeignKey('contacts.Partner',blank=True,null=True)
     #~ name = models.CharField(_("Remark"),max_length=200,blank=True)

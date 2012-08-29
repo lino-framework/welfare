@@ -357,7 +357,7 @@ This is empty for requests than haven't been sent.
 Read-only.""")
     
     #~ status = RequestStates.field(default=RequestStates.new,editable=False)
-    status = RequestStates.field(editable=False)
+    status = RequestStates.field(editable=False,blank=True)
     environment = models.CharField(max_length=4,editable=False,verbose_name=_("T/A/B"))
     ticket  = models.CharField(max_length=36,editable=False,verbose_name=_("Ticket"))
     #~ environment = Environment.field(blank=True,null=True)
@@ -1047,7 +1047,7 @@ class IdentifyPersonRequest(SSDNRequest,WithPerson):
       verbose_name=_('Middle name'),
       help_text="Whatever this means...")
       
-    gender = Gender.field()
+    gender = Gender.field(blank=True)
         
     tolerance = models.IntegerField(verbose_name=_('Tolerance'),
       default=0,

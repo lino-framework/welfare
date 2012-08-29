@@ -1,0 +1,1 @@
+T:\hgwork\welfare\docs\fr\user\intro.rst:: WARNING: document isn't included in any toctree
