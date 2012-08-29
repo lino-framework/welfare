@@ -1664,7 +1664,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
     aged_to = models.IntegerField(_("Aged to"),
         blank=True,null=True)
     #~ gender = contacts.GenderField()
-    gender = Gender.field()
+    gender = Gender.field(blank=True)
 
     
     only_my_persons = models.BooleanField(_("Only my persons")) # ,default=True)
@@ -1714,8 +1714,8 @@ class MyPersonSearches(PersonSearches,mixins.ByUser):
 class WantedLanguageKnowledge(dd.Model):
     search = models.ForeignKey(PersonSearch)
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
-    spoken = HowWell.field(verbose_name=_("spoken"))
-    written = HowWell.field(verbose_name=_("written"))
+    spoken = HowWell.field(blank=True,verbose_name=_("spoken"))
+    written = HowWell.field(blank=True,verbose_name=_("written"))
 
 class WantedSkill(properties.PropertyOccurence):
     class Meta:

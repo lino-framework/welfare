@@ -140,8 +140,8 @@ class LanguageKnowledge(dd.Model):
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
     #~ language = models.ForeignKey("countries.Language")
     #~ language = fields.LanguageField()
-    spoken = HowWell.field(verbose_name=_("spoken"))
-    written = HowWell.field(verbose_name=_("written"))
+    spoken = HowWell.field(blank=True,verbose_name=_("spoken"))
+    written = HowWell.field(blank=True,verbose_name=_("written"))
     native = models.BooleanField(verbose_name=_("native language"))
     cef_level = CefLevel.field(blank=True) # ,null=True)
     

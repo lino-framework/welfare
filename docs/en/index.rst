@@ -17,6 +17,7 @@ Content
    :maxdepth: 1
 
    about/index
+   releases/index
    admin/index
    blog/index
    autodoc/index
