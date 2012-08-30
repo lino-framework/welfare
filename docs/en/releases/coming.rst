@@ -13,4 +13,4 @@ Coming
   Später kommt dort mindestens ein weiterer Kontenplan "Buchhaltung" hinzu.
 
 - Database migration is automatic.
-  Details see :func:`lino.apps.pcsw.migrate.migrate_from_1_4_10`.
+  Details see :func:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_10`.

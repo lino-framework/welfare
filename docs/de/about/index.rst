@@ -5,4 +5,5 @@ Was ist Lino für ÖSHZ
   :maxdepth: 2
 
   fiche
+  modules
 
