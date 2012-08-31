@@ -1422,7 +1422,7 @@ def migrate_from_1_4_10(globals_dict):
                 if v:
                     lost[n] = v
             if lost:
-                dblogger.warning("Person without NISS: lost=%s",lost)
+                dblogger.warning("Lost data for Person %s without NISS: %s",partner_ptr_id,lost)
     globals_dict.update(create_contacts_person=create_contacts_person)
     
     

@@ -727,7 +727,8 @@ class Study(CountryCity):
     class Meta:
         verbose_name = _("study or education")
         verbose_name_plural = _("Studies & education")
-    person = models.ForeignKey(settings.LINO.person_model) #,verbose_name=_("Person"))
+    #~ person = models.ForeignKey(settings.LINO.person_model) #,verbose_name=_("Person"))
+    person = models.ForeignKey('pcsw.Client') 
     type = models.ForeignKey(StudyType,verbose_name=_("Study type"))
     content = models.CharField(max_length=200,
         blank=True, # null=True,
@@ -784,7 +785,8 @@ class Experience(SectorFunction):
     class Meta:
         verbose_name = _("Job Experience")
         verbose_name_plural = _("Job Experiences")
-    person = models.ForeignKey(settings.LINO.person_model,verbose_name=_("Person"))
+    #~ person = models.ForeignKey(settings.LINO.person_model,verbose_name=_("Person"))
+    person = models.ForeignKey('pcsw.Client')
     #~ company = models.ForeignKey("contacts.Company",verbose_name=_("Company"))
     company = models.CharField(max_length=200,verbose_name=_("company"))
     #~ type = models.ForeignKey(JobType,verbose_name=_("job type"))
@@ -956,7 +958,8 @@ class Candidature(SectorFunction):
         verbose_name = _("Job Candidature")
         verbose_name_plural = _('Job Candidatures')
         
-    person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.LINO.person_model)
+    person = models.ForeignKey('pcsw.Client')
     
     job = models.ForeignKey("jobs.Job",
         blank=True,null=True)

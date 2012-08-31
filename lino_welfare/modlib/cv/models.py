@@ -136,7 +136,8 @@ class LanguageKnowledge(dd.Model):
     allow_cascaded_delete = True
     
     #~ person = models.ForeignKey("contacts.Person")
-    person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.LINO.person_model)
+    person = models.ForeignKey('pcsw.Client')
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
     #~ language = models.ForeignKey("countries.Language")
     #~ language = fields.LanguageField()
@@ -184,7 +185,8 @@ class PersonProperty(properties.PropertyOccurence):
         verbose_name_plural = _("Properties")
         
     #~ person = models.ForeignKey("contacts.Person")
-    person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.LINO.person_model)
+    person = models.ForeignKey('pcsw.Client')
     remark = models.CharField(max_length=200,
         blank=True,# null=True,
         verbose_name=_("Remark"))
