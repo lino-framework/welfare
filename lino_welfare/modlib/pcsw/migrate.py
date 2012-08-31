@@ -1381,7 +1381,7 @@ def migrate_from_1_4_10(globals_dict):
             is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
             activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2)
-        if national_id:
+        if national_id and national_id.strip() != '0':
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
                 #~ birth_date=birth_date,
                 #~ first_name=first_name,last_name=last_name,title=title,gender=gender,
@@ -1424,8 +1424,46 @@ def migrate_from_1_4_10(globals_dict):
             if lost:
                 dblogger.warning("Person without NISS: lost=%s",lost)
             
-            
     globals_dict.update(create_contacts_person=create_contacts_person)
+    
+    cal_Event = resolve_model("cal.Event")
+    cal_Task = resolve_model("cal.Task")
+    lino_HelpText = resolve_model("lino.HelpText")
+    outbox_Attachment = resolve_model("outbox.Attachment")
+    outbox_Mail = resolve_model("outbox.Mail")
+    postings_Posting = resolve_model("postings.Posting")
+    uploads_Upload = resolve_model("uploads.Upload")
+    def new_content_type_id(m):
+        if m is None: return m
+        # if not fmn: return None
+        # m = resolve_model(fmn)
+        if m is contacts_Person:
+            m = pcsw_Client
+        ct = ContentType.objects.get_for_model(m)
+        if ct is None: return None
+        return ct.pk
+    
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return cal_Event(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,build_time=build_time,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,transparent=transparent,place_id=place_id,priority_id=priority_id,state=state)    
+    def create_cal_task(id, owner_type_id, owner_id, user_id, created, modified, project_id, start_date, start_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, due_date, due_time, percent, state):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return cal_Task(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,start_date=start_date,start_time=start_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,due_date=due_date,due_time=due_time,percent=percent,state=state)        
+    def create_lino_helptext(id, content_type_id, field, help_text):
+        content_type_id = new_content_type_id(content_type_id)
+        return lino_HelpText(id=id,content_type_id=content_type_id,field=field,help_text=help_text)        
+    def create_outbox_attachment(id, owner_type_id, owner_id, mail_id):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return outbox_Attachment(id=id,owner_type_id=owner_type_id,owner_id=owner_id,mail_id=mail_id)
+    def create_outbox_mail(id, owner_type_id, owner_id, user_id, project_id, date, subject, body, sent):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return outbox_Mail(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,project_id=project_id,date=date,subject=subject,body=body,sent=sent)        
+    def create_postings_posting(id, owner_type_id, owner_id, user_id, project_id, partner_id, state, date):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return postings_Posting(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,project_id=project_id,partner_id=partner_id,state=state,date=date)    
+    def create_uploads_upload(id, owner_type_id, owner_id, user_id, created, modified, file, mimetype, type_id, valid_until, description):
+        owner_type_id = new_content_type_id(owner_type_id)
+        return uploads_Upload(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,file=file,mimetype=mimetype,type_id=type_id,valid_until=valid_until,description=description)    
     
     accounts_Chart = resolve_model("accounts.Chart")    
     objects = globals_dict['objects']
