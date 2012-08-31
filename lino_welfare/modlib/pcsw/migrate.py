@@ -33,7 +33,6 @@ from django.conf import settings
 from lino.core.modeltools import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
-from lino import __version__
 
 def install(globals_dict):
     "Backward compat when loading dumpy fixtures created before 1.4.4"
@@ -1331,10 +1330,10 @@ def migrate_from_1_4_10(globals_dict):
     - add a Default accounts.Chart for debts module
     - debts.Account renamed to accounts.Account
     - debts.AccountGroup renamed to accounts.AccountGroup
+    - convert Persons to Clients
     """
     
     countries_City = resolve_model("countries.City")
-    contacts_Partner = resolve_model("contacts.Partner")
     def convert_region(region):
         region = region.strip()
         if not region: return None
@@ -1346,6 +1345,8 @@ def migrate_from_1_4_10(globals_dict):
             o.save()
             logger.info("Created region %s",o)
             return o
+            
+    contacts_Partner = resolve_model("contacts.Partner")
     def create_contacts_partner(id, country_id, city_id, name, addr1, street_prefix, street, street_no, street_box, addr2, zip_code, region, language, email, url, phone, gsm, fax, remarks):
         region = convert_region(region)
         return contacts_Partner(id=id,country_id=country_id,city_id=city_id,name=name,addr1=addr1,street_prefix=street_prefix,street=street,street_no=street_no,street_box=street_box,addr2=addr2,zip_code=zip_code,region=region,language=language,email=email,url=url,phone=phone,gsm=gsm,fax=fax,remarks=remarks)    
@@ -1369,6 +1370,60 @@ def migrate_from_1_4_10(globals_dict):
         #~ return debts_AccountGroup(id=id,chart_id=1,name=name,seqno=seqno,account_type=account_type,help_text=help_text,name_fr=name_fr,name_en=name_en)    
         return debts_AccountGroup(id=id,chart_id=1,name=name,ref=str(seqno),account_type=account_type,help_text=help_text,name_fr=name_fr,name_en=name_en)    
     globals_dict.update(create_debts_accountgroup=create_debts_accountgroup)
+    
+    contacts_Person = resolve_model("contacts.Person")
+    pcsw_Client = resolve_model("pcsw.Client")
+    from lino.utils.mti import create_child
+    def create_contacts_person(partner_ptr_id, birth_date, first_name, last_name, title, gender, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, remarks2, gesdos_id, is_cpas, is_senior, group_id, coached_from, coached_until, coach1_id, coach2_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, broker_id, faculty_id):
+        if national_id:
+            return create_child(contacts_Partner,partner_ptr_id,pcsw_Client,birth_date=birth_date,
+                first_name=first_name,last_name=last_name,title=title,gender=gender,
+                is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
+                activity_id=activity_id,
+                bank_account1=bank_account1,bank_account2=bank_account2,
+                remarks2=remarks2,gesdos_id=gesdos_id,is_cpas=is_cpas,
+                is_senior=is_senior,group_id=group_id,
+                coached_from=coached_from,coached_until=coached_until,
+                coach1_id=coach1_id,coach2_id=coach2_id,birth_place=birth_place,
+                birth_country_id=birth_country_id,civil_state=civil_state,
+                national_id=national_id,
+                health_insurance_id=health_insurance_id,pharmacy_id=pharmacy_id,
+                nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,residence_type=residence_type,in_belgium_since=in_belgium_since,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_agents=job_agents,job_office_contact_id=job_office_contact_id,broker_id=broker_id,faculty_id=faculty_id)    
+        lost_fields = """
+        remarks2 gesdos_id is_cpas
+        is_senior group_id 
+        coached_from coached_until
+        coach1_id coach2_id birth_place 
+        birth_country_id civil_state
+        national_id
+        health_insurance_id pharmacy_id
+        nationality_id card_number card_valid_from
+        card_valid_until card_type card_issuer
+        noble_condition residence_type
+        in_belgium_since unemployed_since
+        needs_residence_permit needs_work_permit
+        work_permit_suspended_until aid_type_id 
+        income_ag income_wg income_kg income_rente
+        income_misc is_seeking unavailable_until
+        unavailable_why obstacles skills job_agents
+        job_office_contact_id broker_id faculty_id
+        """.split()
+        lost = dict()
+        for n in lost_fields:
+            v = locals().get(n)
+            if v:
+                lost[n] = v
+        if lost:
+            dblogger.warning("Person without NISS: lost=%s",lost)
+        return create_child(contacts_Partner,partner_ptr_id,contacts_Person,
+            birth_date=birth_date,
+            first_name=first_name,last_name=last_name,title=title,gender=gender,
+            is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
+            activity_id=activity_id,
+            bank_account1=bank_account1,bank_account2=bank_account2)
+            
+            
+    globals_dict.update(create_contacts_person=create_contacts_person)
     
     accounts_Chart = resolve_model("accounts.Chart")    
     objects = globals_dict['objects']
