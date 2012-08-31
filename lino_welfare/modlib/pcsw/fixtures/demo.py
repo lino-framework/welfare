@@ -225,12 +225,14 @@ def objects():
     Sector = resolve_model('jobs.Sector')
     User = resolve_model('users.User')
     Country = resolve_model('countries.Country')
+    Client = resolve_model('pcsw.Client')
     
     rt = RoleType.objects.get(pk=4) # It manager
     rt.use_in_contracts = False
     rt.save()
 
     person = Instantiator(Person).build
+    client = Instantiator(Client).build
     company = Instantiator(Company).build
     #~ contact = Instantiator(Contact).build
     role = Instantiator(Role).build
@@ -283,30 +285,38 @@ def objects():
     yield company(name=u"Behindertenstätten Eupen",city=eupen,country='BE')
     yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country='BE')
     
+    def person2client(p,**kw):
+        c = mti.insert_child(p,Client,**kw)
+        c.save()
+        return Client.objects.get(pk=p.pk)
+    
     luc = Person.objects.get(name__exact="Saffre Luc")
+    luc = person2client(luc,national_id = '680601 053-29')
     luc.birth_place = 'Eupen'
     luc.birth_date = '1968-06-01'
     luc.birth_country = be
-    luc.national_id = '680601 053-29'
     luc.full_clean()
     luc.save()
     
-    ly = person(first_name="Ly",last_name="Rumma",
-      city=vigala,country='EE',card_number='123',birth_country=ee,
-      birth_date='0000-04-27',
+    ly = client(first_name="Ly",last_name="Rumma",
+      city=vigala,country='EE',
+      card_number='123',birth_country=ee,birth_date='0000-04-27',
+      national_id='1234',
       #~ birth_date=i2d(19680101),birth_date_circa=True,
       #~ newcomer=True,
       gender=Gender.female)
     yield ly
-    mari = person(first_name="Mari",last_name="Saffre",
+    mari = client(first_name="Mari",last_name="Saffre",
       city=vigala,country='EE',card_number='124',birth_country=ee,
       birth_date=i2d(20020405),
+      national_id='1235',
       #~ newcomer=True,
       gender=Gender.female)
     yield mari
-    iiris = person(first_name="Iiris",last_name="Saffre",
+    iiris = client(first_name="Iiris",last_name="Saffre",
       city=vigala,country='EE',card_number='125',birth_country=ee,
       birth_date=i2d(20080324),
+      national_id='1236',
       #~ newcomer=True,
       gender=Gender.female)
     yield iiris
@@ -320,11 +330,12 @@ def objects():
     #~ yield link(a=cpas,b=gerd,type=4)
     
     # see :doc:`/blog/2011/1007`
-    tatjana = person(
+    tatjana = client(
         first_name=u"Tatjana",last_name=u"Kasennova",
         #~ first_name=u"Татьяна",last_name=u"Казеннова",
         # name="Казеннова Татьяна",
         city=kettenis,country='BE', 
+        national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
         newcomer=True,
         gender=Gender.female)
@@ -339,14 +350,15 @@ def objects():
     adg_dir = role(company=adg,person=bernard,type=1)
     #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir
-    try:
-      bernard.job_office_contact = adg_dir
-      bernard.clean()
-      bernard.save()
-    except ValidationError:
-        pass
-    else:
-        raise Exception("Expected ValidationError")
+    
+    #~ try:
+      #~ bernard.job_office_contact = adg_dir
+      #~ bernard.clean()
+      #~ bernard.save()
+    #~ except ValidationError:
+        #~ pass
+    #~ else:
+        #~ raise Exception("Expected ValidationError")
       
     DIRECTORS = (annette,hans,andreas,bernard)
     
@@ -391,8 +403,9 @@ def objects():
     
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
-    for client in Person.objects.all():
-        if not client in DIRECTORS:
+    for person in Person.objects.all():
+        if not person in DIRECTORS:
+            client = person2client(person,national_id=str(person.pk))
             count += 1
             if count % 3:
                 client.is_active = True
@@ -409,7 +422,7 @@ def objects():
             client.clean()
             client.save()
             
-    CLIENTS = Cycler(Person.objects.filter(is_active=True,newcomer=False))
+    CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
     
     #~ oshz = Company.objects.get(name=u"ÖSHZ Eupen")
     

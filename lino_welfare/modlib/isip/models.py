@@ -180,9 +180,9 @@ class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator)
         #~ related_name="%(app_label)s_%(class)s_ptr",
         #~ parent_link=True)
   
-    person = models.ForeignKey(settings.LINO.person_model,
-        related_name="%(app_label)s_%(class)s_set_by_person",
-        verbose_name=_("Person"))
+    #~ person = models.ForeignKey(settings.LINO.person_model,
+    person = models.ForeignKey('pcsw.Client',
+        related_name="%(app_label)s_%(class)s_set_by_person")
         
     company = models.ForeignKey(settings.LINO.company_model,
         related_name="%(app_label)s_%(class)s_set_by_company",

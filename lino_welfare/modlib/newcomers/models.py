@@ -45,7 +45,7 @@ from lino.modlib.cal.utils import DurationUnits
 from lino_welfare.modlib.pcsw import models as welfare
 
 def amonthago():
-  return DurationUnits.months.add_duration(datetime.date.today(),-1)
+    return DurationUnits.months.add_duration(datetime.date.today(),-1)
         
 
 
@@ -142,9 +142,9 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     pass
 
     
-class Newcomers(welfare.AllPersons):
+class Newcomers(welfare.AllClients):
     """
-    Persons who have the "Newcomer" checkbox on.
+    Clients who have the "Newcomer" checkbox on.
     """
     required = dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
@@ -163,7 +163,7 @@ class NewcomersByFaculty(Newcomers):
     master_key = 'faculty'
     column_names = "name_column broker address_column *"
         
-class NewClients(welfare.AllPersons):
+class NewClients(welfare.AllClients):
     required=dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
@@ -181,7 +181,7 @@ class NewClients(welfare.AllPersons):
     @classmethod
     def get_request_queryset(self,ar):
         """
-        We only want the Persons who actually have at least one client.
+        We only want the Clients who actually have at least one client.
         We store the corresponding request in the user object 
         under the name `my_persons`.
         """
@@ -267,11 +267,11 @@ class UsersByNewcomer(users.Users):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return welfare.PersonsByCoach1.request(ar.ui,master_instance=obj)
+        return welfare.ClientsByCoach1.request(ar.ui,master_instance=obj)
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
-        return welfare.MyActivePersons.request(ar.ui,subst_user=obj)
+        return welfare.MyActiveClients.request(ar.ui,subst_user=obj)
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):
@@ -296,13 +296,13 @@ settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
         ))
 
 
-dd.inject_field(welfare.Person,
+dd.inject_field(welfare.Client,
     'broker',
     models.ForeignKey(Broker,
         blank=True,null=True),
     """The Broker who sent this Newcomer.
     """)
-dd.inject_field(welfare.Person,
+dd.inject_field(welfare.Client,
     'faculty',
     models.ForeignKey(Faculty,
         blank=True,null=True),

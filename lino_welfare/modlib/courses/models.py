@@ -381,8 +381,8 @@ class CourseRequest(dd.Model):
         verbose_name = _("Course Requests")
         verbose_name_plural = _('Course Requests')
         
-    #~ person = models.ForeignKey("contacts.Person",
-    person = models.ForeignKey(settings.LINO.person_model,
+    person = models.ForeignKey("pcsw.Client",
+    #~ person = models.ForeignKey(settings.LINO.person_model,
         verbose_name=_("Person"),
         help_text=u"Die Person, die die Anfrage macht.")
     

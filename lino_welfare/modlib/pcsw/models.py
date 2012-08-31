@@ -211,15 +211,10 @@ class ResidenceType(ChoiceList):
     label = _("Residence type")
     
 add = ResidenceType.add_item
-add('1', _("Registry of citizens"))
-add('2', _("Registry of foreigners"))
-add('3', _("Waiting for registry"))
+add('1', _("Registry of citizens"))    # Bevölkerungsregister registre de la population
+add('2', _("Registry of foreigners"))  # Fremdenregister        Registre des étrangers      vreemdelingenregister 
+add('3', _("Waiting for registry"))    # Warteregister
 
-#~ RESIDENCE_TYPE_CHOICES = (
-  #~ (1  , _("Registry of citizens")   ), # Bevölkerungsregister registre de la population
-  #~ (2  , _("Registry of foreigners") ), # Fremdenregister        Registre des étrangers      vreemdelingenregister 
-  #~ (3  , _("Waiting for registry")   ), # Warteregister
-#~ )
 
 class BeIdCardType(ChoiceList):
     """
@@ -262,58 +257,8 @@ add('17', _("Foreigner card F"))
         #~ de=u"Aufenthaltskarte für Familienangehörige eines Unionsbürgers",
 add('18', _("Foreigner card F+"))
 
-#~ BEID_CARD_TYPES = {
-  #~ '1' : dict(en=u"Belgian citizen",de=u"Belgischer Staatsbürger",fr=u"Citoyen belge"),
-  #~ '6' : dict(en=u"Kids card (< 12 year)",de=u"Kind unter 12 Jahren"),
-  #~ '8' : dict(en=u"Habilitation",fr=u"Habilitation",nl=u"Machtiging"),
-  #~ '11' : dict(
-        #~ en=u"Foreigner card type A",
-        #~ nl=u"Bewijs van inschrijving in het vreemdelingenregister - Tijdelijk verblijf",
-        #~ fr=u"Certificat d'inscription au registre des étrangers - Séjour temporaire",
-        #~ de=u"Bescheinigung der Eintragung im Ausländerregister - Vorübergehender Aufenthalt",
-      #~ ),
-  #~ '12' : dict(
-        #~ en=u"Foreigner card type B",
-        #~ nl=u"Bewijs van inschrijving in het vreemdelingenregister",
-        #~ fr=u"Certificat d'inscription au registre des étrangers",
-        #~ de=u"Bescheinigung der Eintragung im Ausländerregister",
-      #~ ),
-  #~ '13' : dict(
-        #~ en=u"Foreigner card type C",
-        #~ nl=u"Identiteitskaart voor vreemdeling",
-        #~ fr=u"Carte d'identité d'étranger",
-        #~ de=u"Personalausweis für Ausländer",
-      #~ ),
-  #~ '14' : dict(
-        #~ en=u"Foreigner card type D",
-        #~ nl=u"EG - langdurig ingezetene",
-        #~ fr=u"Résident de longue durée - CE",
-        #~ de=u"Daueraufenthalt - EG",
-      #~ ),
-  #~ '15' : dict(
-        #~ en=u"Foreigner card type E",
-        #~ nl=u"Verklaring van inschrijving",
-        #~ fr=u"Attestation d’enregistrement",
-        #~ de=u"Anmeldebescheinigung",
-      #~ ),
-  #~ '16' : dict(
-        #~ en=u"Foreigner card type E+",
-      #~ ),
-  #~ '17' : dict(
-        #~ en=u"Foreigner card type F",
-        #~ nl=u"Verblijfskaart van een familielid van een burger van de Unie",
-        #~ fr=u"Carte de séjour de membre de la famille d’un citoyen de l’Union",
-        #~ de=u"Aufenthaltskarte für Familienangehörige eines Unionsbürgers",
-      #~ ),
-  #~ '18' : dict(
-        #~ en=u"Foreigner card type F+",
-      #~ ),
-#~ }
-
-
 
 class CpasPartner(dd.Model,mixins.DiffingMixin):
-#~ class Partner(mixins.DiffingMixin,contacts.Contact):
     """
     """
     
@@ -363,7 +308,6 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
     @classmethod
     def site_setup(cls,site):
         super(CpasPartner,cls).site_setup(site)
-        #~ self.imported_fields = dd.fields_list(contacts.Partner,
         cls.declare_imported_fields('''
           name remarks region zip_code city country 
           street_prefix street street_no street_box 
@@ -391,10 +335,8 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
         if settings.LINO.is_imported_partner(self):
             return _("Cannot delete companies and persons imported from TIM")
         return super(CpasPartner,self).disable_delete()
-          
 
 
-#~ class Person(CpasPartner,contacts.PersonMixin,contacts.Partner,contacts.Born,Printable):
 class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
     """
     Represents a physical person.
@@ -407,8 +349,29 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
         verbose_name_plural = _("Persons") # :doc:`/tickets/14`
         
     def get_queryset(self):
-        return self.model.objects.select_related(
-            'country','city','coach1','coach2','nationality')
+        return self.model.objects.select_related('country','city')
+        
+    def update_owned_instance(self,owned):
+        owned.project = self
+        super(Person,self).update_owned_instance(owned)
+
+    def get_print_language(self,pm):
+        "Used by DirectPrintAction"
+        return self.language
+        
+    @classmethod
+    def site_setup(cls,site):
+        super(Person,cls).site_setup(site)
+        cls.declare_imported_fields(
+          '''name first_name last_name title birth_date gender
+          ''')
+        
+        
+class Client(Person):
+  
+    class Meta:
+        verbose_name = _("Client") 
+        verbose_name_plural = _("Clients") 
         
     remarks2 = models.TextField(_("Remarks (Social Office)"),blank=True) # ,null=True)
     gesdos_id = models.CharField(max_length=40,blank=True,
@@ -451,7 +414,8 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
         #~ choices=CIVIL_STATE_CHOICES) 
     civil_state = CivilState.field(blank=True) 
     national_id = models.CharField(max_length=200,
-        blank=True,verbose_name=_("National ID")
+        unique=True,verbose_name=_("National ID")
+        #~ blank=True,verbose_name=_("National ID")
         #~ ,validators=[niss_validator]
         )
         
@@ -548,15 +512,17 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
       
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content')
     
+
+
+
+
     @classmethod
     def site_setup(cls,site):
-        #~ cls.PERSON_TIM_FIELDS = dd.fields_list(cls,
-        super(Person,cls).site_setup(site)
+        super(Client,cls).site_setup(site)
         cls.declare_imported_fields(
-        #~ cls._imported_fields = dd.fields_list(cls,
-          '''name first_name last_name title remarks remarks2
+          '''remarks remarks2
           zip_code city country street street_no street_box 
-          birth_date gender birth_place coach1 language 
+          birth_place coach1 language 
           phone fax email 
           card_type card_number card_valid_from card_valid_until
           noble_condition card_issuer
@@ -566,6 +532,10 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
           nationality
           ''')
 
+    def get_queryset(self):
+        return self.model.objects.select_related(
+            'country','city','coach1','coach2','nationality')
+        
     
     
     @chooser()
@@ -577,17 +547,6 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
             return sc.job_office.rolesbycompany.all()
             #~ return links.Link.objects.filter(a=sc.job_office)
         return []
-        
-    #~ @classmethod
-    #~ def setup_report(model,table):
-        #~ u"""
-        #~ rpt.add_action(DirectPrintAction('auskblatt',_("Auskunftsblatt"),'persons/auskunftsblatt.odt'))
-        #~ Zur Zeit scheint es so, dass das Auskunftsblatt eher überflüssig wird.
-        #~ """
-        # table.add_action(DirectPrintAction(table,'eid',_("eID sheet"),'eid-content'))
-        #~ table.add_action(DirectPrintAction('eid',_("eID sheet"),'eid-content'))
-        # table.add_action(DirectPrintAction('cv',_("Curiculum vitae"),'persons/cv.odt'))
-        # table.set_detail_layout(PersonDetail(table))
         
     def __unicode__(self):
         #~ return u"%s (%s)" % (self.get_full_name(salutation=False),self.pk)
@@ -613,7 +572,7 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
     def full_clean(self,*args,**kw):
         if not isrange(self.coached_from,self.coached_until):
             raise ValidationError(u'Coaching period ends before it started.')
-        super(Person,self).full_clean(*args,**kw)
+        super(Client,self).full_clean(*args,**kw)
             
     #~ def clean(self):
         #~ if self.job_office_contact: 
@@ -630,15 +589,12 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
         #~ return _("Not specified") # self.card_type
     #~ card_type_text.return_type = dd.DisplayField(_("eID card type"))
         
-    def get_print_language(self,pm):
-        "Used by DirectPrintAction"
-        return self.language
         
     def save(self,*args,**kw):
         if self.job_office_contact: 
             if self.job_office_contact.person == self:
                 raise ValidationError(_("Circular reference"))
-        super(Person,self).save(*args,**kw)
+        super(Client,self).save(*args,**kw)
         self.update_reminders()
         
     def update_reminders(self):
@@ -664,11 +620,8 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
             babel.run_with_language(user.language,f)
               
           
-    #~ def get_auto_task_defaults(self,**kw):
-    def update_owned_instance(self,owned):
-        owned.project = self
-        super(Person,self).update_owned_instance(owned)
-        
+
+
     @classmethod
     def get_reminders(model,ui,user,today,back_until):
         q = Q(coach1__exact=user) | Q(coach2__exact=user)
@@ -812,6 +765,20 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
         #~ return rr.renderer.quick_add_buttons(r)
 
 
+    @dd.virtualfield(models.DateField(_("Contract starts")))
+    def applies_from(obj,ar):
+        c = obj.get_active_contract()
+        if c is not None:
+            return c.applies_from
+            
+    @dd.virtualfield(models.DateField(_("Contract ends")))
+    def applies_until(obj,ar):
+        c = obj.get_active_contract()
+        if c is not None:
+            return c.applies_until
+
+
+
 class PartnerDetail(contacts.PartnerDetail):
     #~ general = contacts.PartnerDetail.main
     #~ main = "general debts.BudgetsByPartner"
@@ -829,8 +796,6 @@ class Partners(contacts.Partners):
     *and* for households.Households.
     """
     
-    #~ app_label = 'contacts'
-    
     detail_layout = PartnerDetail()
     
 
@@ -842,7 +807,7 @@ class AllPartners(contacts.AllPartners,Partners):
 
 class Household(CpasPartner,households.Household):
     """
-    for lino.apps.pcsw we want to inherit also from CpasPartner
+    for lino_welfare we want to inherit also from CpasPartner
     """
     class Meta(households.Household.Meta):
         app_label = 'households'
@@ -960,7 +925,7 @@ class Companies(Partners):
 
 
 
-class PersonDetail(dd.FormLayout):
+class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
@@ -1128,14 +1093,14 @@ class PersonDetail(dd.FormLayout):
 
             
 
-#~ class AllPersons(contacts.Persons):
-class AllPersons(Partners):
+#~ class AllClients(contacts.Persons):
+class AllClients(Partners):
     """
     List of all Persons.
     """
     #~ debug_actions = True
-    model = settings.LINO.person_model
-    detail_layout = PersonDetail()
+    model = Client # settings.LINO.person_model
+    detail_layout = ClientDetail()
     insert_layout = dd.FormLayout("""
     title first_name last_name
     gender language
@@ -1144,7 +1109,7 @@ class AllPersons(Partners):
     order_by = "last_name first_name id".split()
     column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
     
-    app_label = 'contacts'
+    #~ app_label = 'contacts'
     
     
     @classmethod
@@ -1159,11 +1124,11 @@ class AllPersons(Partners):
             #~ return self.__class__.PERSON_TIM_FIELDS
         #~ return []
         
-class Persons(AllPersons):
+class Clients(AllClients):
     """
     All Persons except newcomers and inactive persons.
     """
-    app_label = 'contacts'
+    #~ app_label = 'contacts'
     #~ use_as_default_table = False 
     known_values = dict(is_active=True,newcomer=False)
     #~ filter = dict(is_active=True,newcomer=False)
@@ -1173,10 +1138,10 @@ class Persons(AllPersons):
     def get_actor_label(self):
         return self.model._meta.verbose_name_plural
 
-Person._lino_choices_table = Persons
+Client._lino_choices_table = Clients
 
     
-class PersonsByNationality(AllPersons):
+class ClientsByNationality(AllClients):
     #~ app_label = 'contacts'
     master_key = 'nationality'
     order_by = "city name".split()
@@ -1204,7 +1169,7 @@ def only_my_persons(qs,user):
     #~ return qs.filter(Q(coach1__exact=user) | Q(coach2__exact=user))
     return qs.filter(Q(coach1=user) | Q(coach2=user))
 
-class PersonsByCoach1(Persons):
+class ClientsByCoach1(Clients):
     master_key = 'coach1'
     label = _("Primary clients by coach")
     
@@ -1215,7 +1180,7 @@ class PersonsByCoach1(Persons):
     @classmethod
     def get_request_queryset(self,rr):
         #~ rr.master_instance = rr.get_user()
-        qs = super(PersonsByCoach1,self).get_request_queryset(rr)
+        qs = super(ClientsByCoach1,self).get_request_queryset(rr)
         #~ only_my_persons(qs,rr.get_user())
         qs = only_coached_persons(qs,datetime.date.today())
         #~ qs = qs.filter()
@@ -1233,9 +1198,9 @@ class PersonsByCoach1(Persons):
             #~ return False
         #~ return super(IntegTable,self).get_permission(action,user,obj)
         
-class MyPersons(Persons):
+class MyClients(Clients):
     u"""
-    Show only persons attended 
+    Show only Clients attended 
     by the requesting user (or another user, 
     specified via :attr:`lino.ui.requests.URL_PARAMS_SUBST_USER`),
     either as primary or as secondary attendant.
@@ -1261,7 +1226,7 @@ class MyPersons(Persons):
         
     @classmethod
     def get_request_queryset(self,rr):
-        qs = super(MyPersons,self).get_request_queryset(rr)
+        qs = super(MyClients,self).get_request_queryset(rr)
         qs = only_coached_persons(only_my_persons(qs,rr.get_user()),datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
@@ -1271,19 +1236,19 @@ class MyPersons(Persons):
         #~ q2 = Q(coached_from__isnull=False) | Q(coached_until__isnull=False,coached_until__gte=today)
         #~ return qs.filter(q1,q2)
         
-    @dd.virtualfield(models.DateField(_("Contract starts")))
-    def applies_from(self,obj,ar):
-        c = obj.get_active_contract()
-        if c is not None:
-            return c.applies_from
+    #~ @dd.virtualfield(models.DateField(_("Contract starts")))
+    #~ def applies_from(self,obj,ar):
+        #~ c = obj.get_active_contract()
+        #~ if c is not None:
+            #~ return c.applies_from
             
-    @dd.virtualfield(models.DateField(_("Contract ends")))
-    def applies_until(self,obj,ar):
-        c = obj.get_active_contract()
-        if c is not None:
-            return c.applies_until
+    #~ @dd.virtualfield(models.DateField(_("Contract ends")))
+    #~ def applies_until(self,obj,ar):
+        #~ c = obj.get_active_contract()
+        #~ if c is not None:
+            #~ return c.applies_until
 
-class MyPersonsByGroup(MyPersons):
+class MyClientsByGroup(MyClients):
     master_key = 'group'
     
     @classmethod
@@ -1291,7 +1256,7 @@ class MyPersonsByGroup(MyPersons):
         return _("%(phase)s clients of %(user)s") % dict(
           phase=rr.master_instance, user=rr.get_user())
     
-class MyActivePersons(MyPersons):
+class MyActiveClients(MyClients):
   
     @classmethod
     def get_title(self,rr):
@@ -1299,7 +1264,7 @@ class MyActivePersons(MyPersons):
         
     @classmethod
     def get_request_queryset(self,rr):
-        qs = super(MyActivePersons,self).get_request_queryset(rr)
+        qs = super(MyActiveClients,self).get_request_queryset(rr)
         qs = qs.filter(group__active=True)
         return qs
   
@@ -1310,10 +1275,10 @@ class MyActivePersons(MyPersons):
 
 
   
-#~ class InvalidClients(Persons):
-class ClientsTest(Persons):
+#~ class InvalidClients(Clients):
+class ClientsTest(Clients):
     """
-    Table of persons whose data seems unlogical or inconsistent.
+    Table of Clients whose data seems unlogical or inconsistent.
     """
     required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
@@ -1398,7 +1363,7 @@ class UsersWithClients(dd.VirtualTable):
         #~ for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
             #~ def w(pg):
                 #~ def func(self,obj,ar):
-                    #~ return MyPersonsByGroup.request(
+                    #~ return MyClientsByGroup.request(
                       #~ ar.ui,master_instance=pg,subst_user=obj)
                 #~ return func
             #~ vf = dd.RequestField(w(pg),verbose_name=pg.name)
@@ -1420,7 +1385,7 @@ class UsersWithClients(dd.VirtualTable):
             for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
                 def w(pg):
                     def func(self,obj,ar):
-                        return MyPersonsByGroup.request(
+                        return MyClientsByGroup.request(
                           ar.ui,master_instance=pg,subst_user=obj)
                     return func
                 vf = dd.RequestField(w(pg),verbose_name=pg.name)
@@ -1453,13 +1418,14 @@ class UsersWithClients(dd.VirtualTable):
         if ar.get_user().profile.level < UserLevels.admin:
             qs = qs.exclude(profile__gte=UserLevels.admin)
         for user in qs.order_by('username'):
-            r = MyPersons.request(ar.ui,subst_user=user)
+            r = MyClients.request(ar.ui,subst_user=user)
             if r.get_total_count():
                 user.my_persons = r
                 #~ user._detail_action = users.MySettings.default_action
                 yield user
                 
-    @dd.virtualfield('contacts.Person.coach1')
+    @dd.virtualfield('pcsw.Client.coach1')
+    #~ @dd.virtualfield(dd.ForeignKey(User))
     def user(self,obj,ar):
         return obj
         
@@ -1469,11 +1435,11 @@ class UsersWithClients(dd.VirtualTable):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return PersonsByCoach1.request(ar.ui,master_instance=obj)
+        return ClientsByCoach1.request(ar.ui,master_instance=obj)
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
-        return MyActivePersons.request(ar.ui,subst_user=obj)
+        return MyActiveClients.request(ar.ui,subst_user=obj)
 
 
 #
@@ -1559,7 +1525,8 @@ class Exclusion(dd.Model):
         verbose_name_plural = _('exclusions')
         
     #~ person = models.ForeignKey("contacts.Person")
-    person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.LINO.person_model)
+    person = models.ForeignKey('pcsw.Client')
     type = models.ForeignKey("pcsw.ExclusionType",verbose_name=_("Reason"))
     excluded_from = models.DateField(blank=True,null=True,verbose_name=_("from"))
     excluded_until = models.DateField(blank=True,null=True,verbose_name=_("until"))
@@ -1681,7 +1648,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
         verbose_name=_("until"))
     
     def result(self):
-        for p in PersonsBySearch().request(master_instance=self):
+        for p in ClientsBySearch().request(master_instance=self):
             yield p
         
     def __unicode__(self):
@@ -1704,7 +1671,7 @@ class PersonSearches(dd.Table):
     id:8 title 
     only_my_persons coached_by period_from period_until aged_from:10 aged_to:10 gender:10
     pcsw.LanguageKnowledgesBySearch pcsw.WantedPropsBySearch pcsw.UnwantedPropsBySearch
-    pcsw.PersonsBySearch
+    pcsw.ClientsBySearch
     """
     
 class MyPersonSearches(PersonSearches,mixins.ByUser):
@@ -1751,8 +1718,8 @@ class UnwantedPropsBySearch(dd.Table):
     master_key = 'search'
     model = UnwantedSkill
 
-#~ class PersonsBySearch(dd.Table):
-class PersonsBySearch(AllPersons):
+#~ class ClientsBySearch(dd.Table):
+class ClientsBySearch(AllClients):
     """
     This is the slave report of a PersonSearch that shows the 
     Persons matching the search criteria. 
@@ -1777,7 +1744,7 @@ class PersonsBySearch(AllPersons):
         """
         Here is the code that builds the query. It can be quite complex.
         See :srcref:`/lino/apps/pcsw/models.py` 
-        (search this file for "PersonsBySearch").
+        (search this file for "ClientsBySearch").
         """
         search = rr.master_instance
         if search is None:
@@ -2034,18 +2001,21 @@ class Home(cal.Home):
     coming_reminders:40x16 missed_reminders:40x16
     """
 
+#~ def setup_master_menu(site,ui,user,m): 
+    #~ m.add_action(AllClients)
+
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:
     if user.profile.integ_level:
         #~ mypersons = m.add_menu("mypersons",self.modules.pcsw.MyPersons.label)
-        mypersons = m.add_menu("mypersons",MyPersons.label)
-        mypersons.add_action(MyPersons)
+        mypersons = m.add_menu("mypersons",MyClients.label)
+        mypersons.add_action(MyClients)
         for pg in PersonGroup.objects.order_by('ref_name'):
             mypersons.add_action(
-              MyPersonsByGroup,
+              MyClientsByGroup,
               label=pg.name,
               params=dict(master_instance=pg))
-            #~ m.add_action('contacts.MyPersonsByGroup',label=pg.name,
+            #~ m.add_action('contacts.MyClientsByGroup',label=pg.name,
             #~ params=dict(master_id=pg.pk))
   
 

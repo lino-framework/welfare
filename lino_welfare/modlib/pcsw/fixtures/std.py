@@ -265,13 +265,15 @@ def objects():
     
     I = Instantiator('lino.HelpText','content_type field help_text').build
     
-    t = ContentType.objects.get_for_model(Person)
+    Client = resolve_model('pcsw.Client')
+    t = ContentType.objects.get_for_model(Client)
     yield I(t,'in_belgium_since',"""\
 Since when this person in Belgium lives.
 <b>Important:</b> help_text can be formatted.""")
     yield I(t,'noble_condition',"""\
 The eventual noble condition of this person. Imported from TIM.
 """)
+    t = ContentType.objects.get_for_model(Person)
     yield I(t,'birth_date',u"""\
 Unkomplette Geburtsdaten sind erlaubt, z.B. 
 <ul>

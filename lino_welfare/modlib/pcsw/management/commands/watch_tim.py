@@ -70,6 +70,7 @@ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import convert_sex,
 Country = resolve_model('countries.Country')
 City = resolve_model('countries.City')
 Person = resolve_model(settings.LINO.person_model)
+Client = resolve_model('pcsw.Client')
 Company = resolve_model(settings.LINO.company_model)
 Household = resolve_model('households.Household')
 households_Type = resolve_model("households.Type")
@@ -81,7 +82,7 @@ def PAR_model(data):
     
     """
     if data.get('NB2',False):
-        return Person
+        return Client
     if data.get('NOTVA',False):
         if data.get('ALLO','') in (u"Eheleute",):
             return Household
@@ -253,29 +254,30 @@ class PAR(Controller):
             #~ obj.is_deprecated = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
             obj.is_deprecated = ("W" in data['ATTRIB'])
         
-        if obj.__class__ is Person:
+        if issubclass(obj.__class__,Person):
             par2person(data,obj)
             #~ mapper.update(title='ALLO')
             title = data.get('ALLO','')
             if title in ("Herr","Herrn","Frau",u"Fräulein","Madame","Monsieur"):
                 title = ''
             obj.title = title
-            mapper.update(gesdos_id='NB1')
-            if data.has_key('IDUSR'):
-                username = settings.TIM2LINO_USERNAME(data['IDUSR'])
-                if username:
-                    try:
-                        obj.coach1 = auth.User.objects.get(username=username)
-                    except auth.User.DoesNotExist,e:
-                        dblogger.warning(
-                          u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
-                          data['IDUSR'],username,obj2str(obj))
-                else:
-                    obj.coach1 = None
-                    #~ obj.user = None
             if data.has_key('FIRME'):
                 for k,v in name2kw(data['FIRME']).items():
                     setattr(obj,k,v)
+            if obj.__class__ is Client:
+                mapper.update(gesdos_id='NB1')
+                if data.has_key('IDUSR'):
+                    username = settings.TIM2LINO_USERNAME(data['IDUSR'])
+                    if username:
+                        try:
+                            obj.coach1 = auth.User.objects.get(username=username)
+                        except auth.User.DoesNotExist,e:
+                            dblogger.warning(
+                              u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
+                              data['IDUSR'],username,obj2str(obj))
+                    else:
+                        obj.coach1 = None
+                        #~ obj.user = None
         elif obj.__class__ is Company:
             mapper.update(prefix='ALLO')
             mapper.update(vat_id='NOTVA')
@@ -312,6 +314,10 @@ class PAR(Controller):
         
     def get_object(self,kw):
         id = kw['id']
+        try:
+            return Client.objects.get(pk=id)
+        except Client.DoesNotExist:
+            pass
         try:
             return Person.objects.get(pk=id)
         except Person.DoesNotExist:

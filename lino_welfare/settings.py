@@ -30,7 +30,7 @@ class Lino(Lino):
     migration_module = 'lino_welfare.modlib.pcsw.migrate'
     
     #~ project_model = 'contacts.Person'
-    project_model = 'contacts.Person'
+    project_model = 'pcsw.Client'
     user_model = 'users.User'
     
     languages = ('de', 'fr', 'nl', 'en')
@@ -88,7 +88,7 @@ class Lino(Lino):
         tb.add_action(self.modules.contacts.Persons.detail_action)
         self.on_each_app('setup_quicklinks',ui,user,tb)
         
-        tb.add_action(self.modules.pcsw.MyPersons)
+        tb.add_action(self.modules.pcsw.MyClients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
         #~ tb.add_action(self.modules.pcsw.Home)
@@ -106,6 +106,7 @@ class Lino(Lino):
         if user.profile.level:
             m.add_action(self.modules.contacts.Companies)
             m.add_action(self.modules.contacts.Persons)
+            m.add_action(self.modules.pcsw.Clients)
             #~ m.add_action('contacts.Persons.detail')
             #~ m.add_action('contacts.Persons',label="Alle Personen",params={})
             m.add_action(self.modules.contacts.AllPartners)
@@ -171,7 +172,7 @@ class Lino(Lino):
           
             m = main.add_menu("explorer",_("Explorer"))
             
-            m.add_action(self.modules.contacts.AllPersons)
+            m.add_action(self.modules.pcsw.AllClients)
             
             self.on_each_app('setup_explorer_menu',ui,user,m)
             
@@ -258,7 +259,7 @@ INSTALLED_APPS = (
   'lino.modlib.properties',
   'lino.modlib.contacts',
   #~ 'lino.modlib.projects',
-  'lino.modlib.notes',
+  #~ 'lino.modlib.notes',
   #~ 'lino.modlib.links',
   'lino.modlib.uploads',
   #~ 'lino.modlib.thirds',
@@ -276,6 +277,7 @@ INSTALLED_APPS = (
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.courses',
   'lino_welfare.modlib.pcsw',
+  'lino.modlib.notes', # because demo fixture creates notes for Clients 
 )
 
 
