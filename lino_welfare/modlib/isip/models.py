@@ -406,10 +406,11 @@ class OverlappingContractsTest:
         ap = con1.active_period()
         if ap[0] is None and ap[1] is None:
             return
-        cp = (self.person.coached_from,self.person.coached_until)
-        if not encompass(cp,ap):
-            return _("Date range %(p1)s lies outside of coached period %(p2)s.") \
-                % dict(p2=rangefmt(cp),p1=rangefmt(ap))
+        if False:
+            cp = (self.person.coached_from,self.person.coached_until)
+            if not encompass(cp,ap):
+                return _("Date range %(p1)s lies outside of coached period %(p2)s.") \
+                    % dict(p2=rangefmt(cp),p1=rangefmt(ap))
         for (p2,con2) in self.actives:
             if con1 != con2 and overlap2(ap,p2):
                 return _("Date range overlaps with %(ctype)s #%(id)s") % dict(

@@ -1446,24 +1446,31 @@ def migrate_from_1_4_10(globals_dict):
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)
         return cal_Event(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,build_time=build_time,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,transparent=transparent,place_id=place_id,priority_id=priority_id,state=state)    
+    globals_dict.update(create_cal_event=create_cal_event)
     def create_cal_task(id, owner_type_id, owner_id, user_id, created, modified, project_id, start_date, start_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, due_date, due_time, percent, state):
         owner_type_id = new_content_type_id(owner_type_id)
         return cal_Task(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,start_date=start_date,start_time=start_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,due_date=due_date,due_time=due_time,percent=percent,state=state)        
+    globals_dict.update(create_cal_task=create_cal_task)
     def create_lino_helptext(id, content_type_id, field, help_text):
         content_type_id = new_content_type_id(content_type_id)
         return lino_HelpText(id=id,content_type_id=content_type_id,field=field,help_text=help_text)        
+    globals_dict.update(create_lino_helptext=create_lino_helptext)
     def create_outbox_attachment(id, owner_type_id, owner_id, mail_id):
         owner_type_id = new_content_type_id(owner_type_id)
         return outbox_Attachment(id=id,owner_type_id=owner_type_id,owner_id=owner_id,mail_id=mail_id)
+    globals_dict.update(create_outbox_attachment=create_outbox_attachment)
     def create_outbox_mail(id, owner_type_id, owner_id, user_id, project_id, date, subject, body, sent):
         owner_type_id = new_content_type_id(owner_type_id)
         return outbox_Mail(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,project_id=project_id,date=date,subject=subject,body=body,sent=sent)        
+    globals_dict.update(create_outbox_mail=create_outbox_mail)
     def create_postings_posting(id, owner_type_id, owner_id, user_id, project_id, partner_id, state, date):
         owner_type_id = new_content_type_id(owner_type_id)
         return postings_Posting(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,project_id=project_id,partner_id=partner_id,state=state,date=date)    
+    globals_dict.update(create_postings_posting=create_postings_posting)
     def create_uploads_upload(id, owner_type_id, owner_id, user_id, created, modified, file, mimetype, type_id, valid_until, description):
         owner_type_id = new_content_type_id(owner_type_id)
         return uploads_Upload(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,file=file,mimetype=mimetype,type_id=type_id,valid_until=valid_until,description=description)    
+    globals_dict.update(create_uploads_upload=create_uploads_upload)
     
     accounts_Chart = resolve_model("accounts.Chart")    
     objects = globals_dict['objects']
