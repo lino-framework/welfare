@@ -1423,16 +1423,11 @@ def migrate_from_1_4_10(globals_dict):
                     lost[n] = v
             if lost:
                 dblogger.warning("Person without NISS: lost=%s",lost)
-            
     globals_dict.update(create_contacts_person=create_contacts_person)
     
-    cal_Event = resolve_model("cal.Event")
-    cal_Task = resolve_model("cal.Task")
-    lino_HelpText = resolve_model("lino.HelpText")
-    outbox_Attachment = resolve_model("outbox.Attachment")
-    outbox_Mail = resolve_model("outbox.Mail")
-    postings_Posting = resolve_model("postings.Posting")
-    uploads_Upload = resolve_model("uploads.Upload")
+    
+    
+    from django.contrib.contenttypes.models import ContentType
     def new_content_type_id(m):
         if m is None: return m
         # if not fmn: return None
@@ -1442,6 +1437,13 @@ def migrate_from_1_4_10(globals_dict):
         ct = ContentType.objects.get_for_model(m)
         if ct is None: return None
         return ct.pk
+    cal_Event = resolve_model("cal.Event")
+    cal_Task = resolve_model("cal.Task")
+    lino_HelpText = resolve_model("lino.HelpText")
+    outbox_Attachment = resolve_model("outbox.Attachment")
+    outbox_Mail = resolve_model("outbox.Mail")
+    postings_Posting = resolve_model("postings.Posting")
+    uploads_Upload = resolve_model("uploads.Upload")
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)
