@@ -1381,7 +1381,8 @@ def migrate_from_1_4_10(globals_dict):
             is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
             activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2)
-        if national_id and national_id.strip() != '0' and not is_deprecated:
+        #~ if national_id and national_id.strip() != '0' and not is_deprecated:
+        if national_id and national_id.strip() != '0':
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
                 #~ birth_date=birth_date,
                 #~ first_name=first_name,last_name=last_name,title=title,gender=gender,

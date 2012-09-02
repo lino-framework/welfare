@@ -414,7 +414,8 @@ class Client(Person):
         #~ choices=CIVIL_STATE_CHOICES) 
     civil_state = CivilState.field(blank=True) 
     national_id = models.CharField(max_length=200,
-        unique=True,verbose_name=_("National ID")
+        #~ unique=True,
+        verbose_name=_("National ID")
         #~ blank=True,verbose_name=_("National ID")
         #~ ,validators=[niss_validator]
         )
