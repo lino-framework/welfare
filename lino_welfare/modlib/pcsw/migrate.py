@@ -1381,7 +1381,7 @@ def migrate_from_1_4_10(globals_dict):
             is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
             activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2)
-        if national_id and national_id.strip() != '0':
+        if national_id and national_id.strip() != '0' and not is_deprecated:
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
                 #~ birth_date=birth_date,
                 #~ first_name=first_name,last_name=last_name,title=title,gender=gender,
@@ -1422,7 +1422,13 @@ def migrate_from_1_4_10(globals_dict):
                 if v:
                     lost[n] = v
             if lost:
-                dblogger.warning("Lost data for Person %s without NISS: %s",partner_ptr_id,lost)
+                dblogger.warning("Lost data for Person %s without NISS: %s",
+                    partner_ptr_id,lost)
+                p = contacts_Person.objects.get(pk=partner_ptr_id)
+                if p.remarks:
+                    p.remarks += '\n'
+                p.remarks += '20120901 lost: ' + repr(lost)
+                p.save()
     globals_dict.update(create_contacts_person=create_contacts_person)
     
     

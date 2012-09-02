@@ -727,7 +727,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ i = 0
     #~ L = len(props)
     #~ assert L > 10 
-    PERSONS = Cycler(Person.objects.all())
+    PERSONS = Cycler(Client.objects.all())
     for prop in Property.objects.order_by('id'):
         for n in range(10):
             #~ prop = PROPS.pop()
@@ -763,7 +763,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     standby = persongroup(u"Standby",ref_name='9',active=False)
     yield standby
     
-    for p in Person.objects.all():
+    for p in Client.objects.all():
         if p.zip_code == '4700':
             p.languageknowledge_set.create(language_id='ger',native=True)
             p.is_cpas = True
@@ -782,7 +782,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
       c.short_code = short_code
       c.save()
       
-    p = Person.objects.get(name=u"Ärgerlich Erna")
+    p = Client.objects.get(name=u"Ärgerlich Erna")
     p.birth_date = i2d(19800301)
     #~ p.coached_from = i2d(20100301)
     p.coached_from = settings.LINO.demo_date(-7*30)
@@ -798,7 +798,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         #~ summary=u"Anrufen Termin",
         #~ owner=p)
     
-    p = Person.objects.get(name=u"Eierschal Emil")
+    p = Client.objects.get(name=u"Eierschal Emil")
     p.birth_date = i2d(19800501)
     #~ p.coached_from = i2d(20100801)
     p.coached_from = settings.LINO.demo_date(-2*30)
@@ -811,7 +811,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.national_id = 'INVALID-45'
     p.save()
 
-    p = Person.objects.get(name=u"Bastiaensen Laurent")
+    p = Client.objects.get(name=u"Bastiaensen Laurent")
     p.birth_date = i2d(19810601)
     p.coached_from = None
     #~ p.coached_until = i2d(20101031)
@@ -825,7 +825,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.national_id = '931229 211-83'
     p.save()
 
-    p = Person.objects.get(name=u"Chantraine Marc")
+    p = Client.objects.get(name=u"Chantraine Marc")
     p.birth_date = i2d(19500301)
     p.coached_from = settings.LINO.demo_date(10)
     p.coached_until = None
@@ -835,7 +835,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.gender = Gender.male
     p.save()
 
-    p = Person.objects.get(name=u"Charlier Ulrike")
+    p = Client.objects.get(name=u"Charlier Ulrike")
     p.birth_date = i2d(19600401)
     p.coached_from = settings.LINO.demo_date(-3*30)
     p.coached_until = None
@@ -846,7 +846,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.save()
 
 
-    p = Person.objects.get(name=u"Collard Charlotte")
+    p = Client.objects.get(name=u"Collard Charlotte")
     p.birth_date = i2d(19800401)
     p.coached_from = settings.LINO.demo_date(-6*30)
     p.coached_until = None
@@ -869,7 +869,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ yield event(settings.LINO.demo_date(+1),annette,u"Problem Kühlschrank")
     #~ yield event(settings.LINO.demo_date(+2),andreas,u"Mein dritter Termin")
 
-    i = pcsw.Person.objects.order_by('name').__iter__()
+    i = pcsw.Client.objects.order_by('name').__iter__()
     p = i.next()
     offset = 0
     for f in jobs.Function.objects.all():
