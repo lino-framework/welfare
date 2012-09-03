@@ -3,17 +3,7 @@
 
 - added `Account.ref` to debts std fixtures
 
-::
-
-  WARNING Abandoning with 12 unsaved instances from /usr/local/django/test_dsbe/fixtures/b20120831_164454.py:
-  - notes.Note {'project': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 87415 ist nicht vorhanden.']} (1 object(s) with primary key 2501)
-  - notes.Note {'project': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 96000137 ist nicht vorhanden.']} (3 object(s) with primary key 650, 740, 837)
-  - cal.Task {'project': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 87415 ist nicht vorhanden.']} (1 object(s) with primary key 2031)
-  - cv.LanguageKnowledge {'person': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 87415 ist nicht vorhanden.']} (1 object(s) with primary key 560)
-  - cv.LanguageKnowledge {'person': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 200043 ist nicht vorhanden.']} (1 object(s) with primary key 220)
-  - isip.Contract Client matching query does not exist. (1 object(s) with primary key 72)
-  - outbox.Attachment Controllers of Attachment must define a method `get_target_url`. (1 object(s) with primary key 1)
-  - jobs.Study {'person': [u'Modell Klient mit dem Prim\xe4rschl\xfcssel 96000137 ist nicht vorhanden.']} (3 object(s) with primary key 130, 131, 132)
-  Installed 43166 object(s) from 1 fixture(s)
-  INFO Lino initdb done ('b20120831_164454',) on database test_dsbe.
-
+- Researched on a mysterious message 
+  "outbox.Attachment Controllers of Attachment must define a method `get_target_url`. (1 object(s) with primary key 1)"
+  during data migration.
+  

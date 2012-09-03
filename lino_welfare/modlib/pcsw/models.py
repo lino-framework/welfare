@@ -1353,27 +1353,6 @@ class UsersWithClients(dd.VirtualTable):
     
     slave_grid_format = 'html'    
     
-    #~ @classmethod
-    #~ def before_ui_handle(self,ui):
-        #~ """
-        #~ Builds columns dynamically from the :class:`PersonGroup` database table.
-        #~ Called when kernel setup is done, 
-        #~ before the UI handle is being instantiated.
-        #~ """
-        #~ self.column_names = 'user:10'
-        #~ for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
-            #~ def w(pg):
-                #~ def func(self,obj,ar):
-                    #~ return MyClientsByGroup.request(
-                      #~ ar.ui,master_instance=pg,subst_user=obj)
-                #~ return func
-            #~ vf = dd.RequestField(w(pg),verbose_name=pg.name)
-            #~ self.add_virtual_field('G'+pg.ref_name,vf)
-            #~ self.column_names += ' ' + vf.name 
-            
-        #~ self.column_names += ' primary_clients active_clients row_total'
-        #~ super(OverviewClientsByUser,self).before_ui_handle(ui)
-        
     @classmethod
     def setup_columns(self):
         """
