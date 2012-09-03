@@ -1442,7 +1442,10 @@ def migrate_from_1_4_10(globals_dict):
         if m is contacts_Person:
             m = pcsw_Client
         ct = ContentType.objects.get_for_model(m)
-        if ct is None: return None
+        if ct is None: 
+            raise Exception("Ignored GFK to unknown model %s" % m)
+            #~ logger.warning("Ignored GFK to unknown model %s",m)
+            #~ return None
         return ct.pk
     cal_Event = resolve_model("cal.Event")
     cal_Task = resolve_model("cal.Task")
