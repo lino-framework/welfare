@@ -302,18 +302,11 @@ class PAR(Controller):
             if v is not None:
                 kw[n] = v
         old_class = obj.__class__
-        #~ msg = obj.disable_delete()
-        #~ if msg:
-            #~ raise Exception(unicode_string(msg))
-        #~ obj = obj.contact_ptr
         obj = obj.partner_ptr
         mti.delete_child(obj,old_class)
         newobj = mti.insert_child(obj,new_class)
-        #~ obj.delete()
-        #~ newobj = new_class(**kw)
         self.applydata(newobj,data)
         self.validate_and_save(newobj)
-        #~ newobj.save()
         
     def get_object(self,kw):
         id = kw['id']

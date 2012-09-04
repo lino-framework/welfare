@@ -266,9 +266,6 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
         abstract = True
         app_label = 'contacts'
   
-    #~ id = models.AutoField(primary_key=True,verbose_name=_("Partner #"))
-    #~ id = models.CharField(max_length=10,primary_key=True,verbose_name=_("ID"))
-    
     is_active = models.BooleanField(
         verbose_name=_("is active"),default=True,
         help_text = "Only active Persons may be used when creating new operations.")
@@ -322,7 +319,6 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
             is_person is_company
               ''')
         
-    #~ @classmethod
     def disabled_fields(self,ar):
         #~ logger.info("20120731 CpasPartner.disabled_fields()")
         #~ raise Exception("20120731 CpasPartner.disabled_fields()")
@@ -330,11 +326,10 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
             return self._imported_fields
         return []
         
-    def disable_delete(self):
-        #~ if settings.TIM2LINO_IS_IMPORTED_PARTNER(self):
-        if settings.LINO.is_imported_partner(self):
+    def disable_delete(self,ar):
+        if ar is not None and settings.LINO.is_imported_partner(self):
             return _("Cannot delete companies and persons imported from TIM")
-        return super(CpasPartner,self).disable_delete()
+        return super(CpasPartner,self).disable_delete(ar)
 
 
 class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
@@ -521,7 +516,7 @@ class Client(Person):
     def site_setup(cls,site):
         super(Client,cls).site_setup(site)
         cls.declare_imported_fields(
-          '''remarks remarks2
+          '''remarks2
           zip_code city country street street_no street_box 
           birth_place coach1 language 
           phone fax email 
@@ -818,9 +813,9 @@ class Household(CpasPartner,households.Household):
         #~ super(Household,cls).site_setup(site)
         #~ cls.declare_imported_fields('type')
           
-    def disable_delete(self):
+    def disable_delete(self,ar):
         # skip the is_imported_partner test
-        return super(CpasPartner,self).disable_delete()
+        return super(CpasPartner,self).disable_delete(ar)
         
 
     
@@ -840,9 +835,8 @@ class Company(CpasPartner,contacts.Company):
         super(Company,cls).site_setup(site)
         #~ cls._imported_fields = dd.fields_list(cls,
         cls.declare_imported_fields(
-            '''name remarks
-            zip_code city country street street_no street_box 
-            language vat_id
+            '''name 
+            vat_id prefix
             phone fax email 
             bank_account1 bank_account2 activity''')
 

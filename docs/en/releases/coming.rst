@@ -8,6 +8,11 @@ Coming
   Klienten sind Personen, über die Lino mehr wissen will als über normale 
   Leute. Um einen Klienten anzulegen, 
   muss man mindestens auch die NISS kennen.
+  
+- Bug "Imbiss Firat": watch_tim konnte seit 20120728 nicht mehr von 
+  Person nach Firma konvertieren. Also z.B. wenn man die MWSt-Nr 
+  eines Partners in TIM löschte. Dann kam die Fehlermeldung 
+  "Aus TIM importierte Partner d\xfcrfen nicht gelöscht werden."
 
 - countries.City.type und Partner.region.
   Visible in Detail of "All Partners" : Lino now features a field "region" 

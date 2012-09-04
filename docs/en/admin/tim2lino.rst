@@ -1,8 +1,6 @@
 Konvertierung TIM nach Lino
 ===========================
 
-.. currentmodule:: lino.apps.dsbe.models
-
 
 In der :xfile:`settings.py` gibt es folgende Optionen, 
 die für die Synchronisierung von Belang sind::
@@ -62,3 +60,15 @@ Hier eine Liste der möglichen Partnerattribute in TIM:
 - A : Altfall (automatisch)
 - E : Eingeschlafener Debitor (automatisch)
 - N : Neuzugang
+
+
+
+Doppelte NISS
+
+TIM contains duplicate clients having the same `national_id`.
+But we want to keep the `unique=True` requirement on `Client.national_id`.
+--> How to solve this:
+legacy Clients marked `is_deprecated ` automaticaly 
+get a suffix " (A)" appended to their `national_id`.
+(both watch_tim and migrate)
+
