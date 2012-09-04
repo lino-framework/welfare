@@ -237,7 +237,6 @@ class PAR(Controller):
         mapper.update(
             id='IDPAR', 
             remarks='MEMO',
-            national_id='NB2',
             bank_account1='COMPTE1',
             bank_account2='COMPTE2',
         )
@@ -255,7 +254,6 @@ class PAR(Controller):
             obj.is_deprecated = ("W" in data['ATTRIB'])
         
         if issubclass(obj.__class__,Person):
-            par2person(data,obj)
             #~ mapper.update(title='ALLO')
             title = data.get('ALLO','')
             if title in ("Herr","Herrn","Frau",u"Fräulein","Madame","Monsieur"):
@@ -265,7 +263,12 @@ class PAR(Controller):
                 for k,v in name2kw(data['FIRME']).items():
                     setattr(obj,k,v)
             if obj.__class__ is Client:
+                par2person(data,obj)
                 mapper.update(gesdos_id='NB1')
+                if data.has_key('NB2'):
+                    obj.national_id = data['NB2']
+                    if obj.is_deprecated:
+                        obj.national_id += ' (A)'
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if username:

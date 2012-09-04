@@ -50,11 +50,15 @@ class Lino(Lino):
     def get_main_action(self,user):
         return self.modules.lino.Home.default_action
         
-    def using(self,*args,**kw):
+    def get_application_info(self):
         from lino_welfare import __version__, __url__
-        yield ("Lino/Welfare",__version__,__url__)
-        for u in super(Lino,self).using(*args,**kw):
-            yield u
+        return ("Lino/Welfare",__version__,__url__)
+        
+    #~ def using(self,*args,**kw):
+        #~ from lino_welfare import __version__, __url__
+        #~ yield ("Lino/Welfare",__version__,__url__)
+        #~ for u in super(Lino,self).using(*args,**kw):
+            #~ yield u
         
         
     anonymous_user_profile = '400'

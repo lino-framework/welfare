@@ -1,0 +1,10 @@
+20120904
+========
+
+The legacy database (TIM) contains duplicate clients havnig the same `national_id`.
+But we want to keep the `unique=True` requirement on `Client.national_id`.
+How to solve this:
+legacy Clients marked `is_deprecated ` now automaticaly 
+get a suffix " (A)" appended to their `national_id`.
+(both watch_tim and migrate)
+

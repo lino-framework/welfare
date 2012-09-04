@@ -1,6 +1,14 @@
 Coming
 ======
 
+- Lino unterscheidet jetzt zwischen Klienten und Personen.
+  Unter "Personen" stehen alle Menschen, die Lino kennt. 
+  Das sind nicht nur Klienten, sondern auch Benutzer und Kontaktpersonen 
+  in Firmen oder Institutionen.
+  Klienten sind Personen, über die Lino mehr wissen will als über normale 
+  Leute. Um einen Klienten anzulegen, 
+  muss man mindestens auch die NISS kennen.
+
 - countries.City.type und Partner.region.
   Visible in Detail of "All Partners" : Lino now features a field "region" 
   to specify addresses. For Belgian addresses it contains the *province*.
