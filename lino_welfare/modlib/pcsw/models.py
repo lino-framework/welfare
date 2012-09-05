@@ -258,12 +258,13 @@ add('17', _("Foreigner card F"))
 add('18', _("Foreigner card F+"))
 
 
-class CpasPartner(dd.Model,mixins.DiffingMixin):
+#~ class CpasPartner(dd.Model,mixins.DiffingMixin):
+class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
     """
     """
     
     class Meta:
-        abstract = True
+        #~ abstract = True
         app_label = 'contacts'
   
     is_active = models.BooleanField(
@@ -304,8 +305,9 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
         
     @classmethod
     def site_setup(cls,site):
-        super(CpasPartner,cls).site_setup(site)
+        super(Partner,cls).site_setup(site)
         cls.declare_imported_fields('''
+          created modified
           name remarks region zip_code city country 
           street_prefix street street_no street_box 
           addr2
@@ -314,7 +316,7 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
           bank_account1 bank_account2 activity 
           is_active newcomer is_deprecated 
           ''')
-        if cls is CpasPartner: # not e.g. on JobProvider who has no own site_setup()
+        if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
             is_person is_company
               ''')
@@ -329,10 +331,10 @@ class CpasPartner(dd.Model,mixins.DiffingMixin):
     def disable_delete(self,ar):
         if ar is not None and settings.LINO.is_imported_partner(self):
             return _("Cannot delete companies and persons imported from TIM")
-        return super(CpasPartner,self).disable_delete(ar)
+        return super(Partner,self).disable_delete(ar)
 
 
-class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
+class Person(Partner,contacts.Person,contacts.Born,Printable):
     """
     Represents a physical person.
     
@@ -342,6 +344,10 @@ class Person(CpasPartner,contacts.Person,contacts.Born,Printable):
         app_label = 'contacts'
         verbose_name = _("Person") # :doc:`/tickets/14`
         verbose_name_plural = _("Persons") # :doc:`/tickets/14`
+        
+    is_client = mti.EnableChild('pcsw.Client',verbose_name=_("is Client"),
+        help_text=_("Whether this Person is a Client."))
+        
         
     def get_queryset(self):
         return self.model.objects.select_related('country','city')
@@ -780,7 +786,7 @@ class PartnerDetail(contacts.PartnerDetail):
     #~ main = "general debts.BudgetsByPartner"
     bottom_box = """
     remarks 
-    is_person is_company #is_user is_household
+    is_person is_company #is_user is_household created modified
     """
     #~ def setup_handle(self,h):
         #~ h.general.label = _("General")
@@ -791,8 +797,14 @@ class Partners(contacts.Partners):
     Base class for Companies and Persons tables,
     *and* for households.Households.
     """
-    
     detail_layout = PartnerDetail()
+    
+
+class PersonDetail(contacts.PersonDetail):
+    bottom_box = """remarks contacts.RolesByPerson
+    is_client created modified
+    """
+  
     
 
 class AllPartners(contacts.AllPartners,Partners):
@@ -801,9 +813,9 @@ class AllPartners(contacts.AllPartners,Partners):
 
 
 
-class Household(CpasPartner,households.Household):
+class Household(Partner,households.Household):
     """
-    for lino_welfare we want to inherit also from CpasPartner
+    for lino_welfare we want to inherit also from Partner
     """
     class Meta(households.Household.Meta):
         app_label = 'households'
@@ -815,17 +827,14 @@ class Household(CpasPartner,households.Household):
           
     def disable_delete(self,ar):
         # skip the is_imported_partner test
-        return super(CpasPartner,self).disable_delete(ar)
+        return super(Partner,self).disable_delete(ar)
         
 
-    
-class Company(CpasPartner,contacts.Company):
+class Company(Partner,contacts.Company):
   
-    """
-    Inner class Meta is necessary because of :doc:`/tickets/14`.
-    """
     
     class Meta(contacts.Company.Meta):
+        abstract = False
         app_label = 'contacts'
         
     @classmethod
@@ -833,25 +842,14 @@ class Company(CpasPartner,contacts.Company):
         #~ if cls.model is None:
             #~ raise Exception("%r.model is None" % cls)
         super(Company,cls).site_setup(site)
-        #~ cls._imported_fields = dd.fields_list(cls,
         cls.declare_imported_fields(
             '''name 
             vat_id prefix
             phone fax email 
             bank_account1 bank_account2 activity''')
 
-        
-    #~ vat_id = models.CharField(max_length=200,blank=True)
-    #~ type = models.ForeignKey('contacts.CompanyType',blank=True,null=True,verbose_name=_("Company type"))
-    #~ prefix = models.CharField(max_length=200,blank=True) 
     # todo: remove hourly_rate after data migration. this is now in Job
     hourly_rate = dd.PriceField(_("hourly rate"),blank=True,null=True)
-    #~ is_courseprovider = mti.EnableChild('pcsw.CourseProvider',verbose_name=_("Course provider"))
-    
-    #~ def disabled_fields(self,request):
-        #~ if settings.TIM2LINO_IS_IMPORTED_PARTNER(self):
-            #~ return settings.LINO.COMPANY_TIM_FIELDS
-        #~ return []
     
   
     
@@ -1882,6 +1880,8 @@ def customize_contacts():
         """)
         
 
+        
+
 def customize_notes():
     """
     Application-specific changes to :mod:`lino.modlib.notes`.
@@ -2072,27 +2072,9 @@ def site_setup(site):
     # owner
     """,window_size=(60,'auto'))
 
-  
-    #~ from lino.modlib.cal import models as cal
 
-    #~ class EventDetail(cal.EventDetail):
-        #~ # inherits the start and end panels
-        #~ main = """
-        #~ type summary user project
-        #~ start end #all_day #duration status 
-        #~ place priority access_class transparent #rset 
-        #~ calendar owner created:20 modified:20 user_modified 
-        #~ description GuestsByEvent
-        #~ """
-    #~ site.modules.cal.Events.set_detail_layout(EventDetail())
-    
-    #~ site.modules.cal.Events.set_detail_layout("""
-    #~ type summary user project
-    #~ start end #all_day #duration state workflow_buttons 
-    #~ place priority access_class transparent #rset 
-    #~ calendar owner created:20 modified:20 user_modified 
-    #~ description GuestsByEvent
-    #~ """)
+    site.modules.contacts.Persons.set_detail_layout(PersonDetail())
+
     
     site.modules.cal.Events.set_detail_layout("general more")
     site.modules.cal.Events.add_detail_panel("general","""

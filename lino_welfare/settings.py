@@ -40,7 +40,7 @@ class Lino(Lino):
     remote_user_header = "REMOTE_USER"
     
     override_modlib_models = [
-        'contacts.Person','contacts.Company',
+        'contacts.Partner', 'contacts.Person', 'contacts.Company',
         'households.Household'
         ]
         

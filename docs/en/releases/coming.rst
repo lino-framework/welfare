@@ -9,6 +9,8 @@ Coming
   Leute. Um einen Klienten anzulegen, 
   muss man mindestens auch die NISS kennen.
   
+- Tx25 : ein paar neue TI handler.  
+  
 - Bug "Imbiss Firat": watch_tim konnte seit 20120728 nicht mehr von 
   Person nach Firma konvertieren. Also z.B. wenn man die MWSt-Nr 
   eines Partners in TIM löschte. Dann kam die Fehlermeldung 
@@ -27,3 +29,8 @@ Coming
 
 - Database migration is automatic.
   Details see :func:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_10`.
+  
+- Note that version number jumps down from 1.4.10 to 0.1
+  Lino (the framework) changes to version 1.5.0, but this is no longer relevant 
+  for database migrations. Lino/Welfare starts with 0.1.
+  
