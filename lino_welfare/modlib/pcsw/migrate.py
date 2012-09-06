@@ -1347,10 +1347,10 @@ def migrate_from_1_4_10(globals_dict):
             return o
             
     contacts_Partner = resolve_model("contacts.Partner")
-    NOW = datetime.datetime.now()
+    NOW = datetime.datetime(2012,9,6,0,0)
     def create_contacts_partner(id, country_id, city_id, name, addr1, street_prefix, street, street_no, street_box, addr2, zip_code, region, language, email, url, phone, gsm, fax, remarks):
         region = convert_region(region)
-        return contacts_Partner(id=id,country_id=country_id,city_id=city_id,name=name,addr1=addr1,street_prefix=street_prefix,street=street,street_no=street_no,street_box=street_box,addr2=addr2,zip_code=zip_code,region=region,language=language,email=email,url=url,phone=phone,gsm=gsm,fax=fax,remarks=remarks,created=NOW)
+        return contacts_Partner(id=id,country_id=country_id,city_id=city_id,name=name,addr1=addr1,street_prefix=street_prefix,street=street,street_no=street_no,street_box=street_box,addr2=addr2,zip_code=zip_code,region=region,language=language,email=email,url=url,phone=phone,gsm=gsm,fax=fax,remarks=remarks,modified=NOW,created=NOW)
     globals_dict.update(create_contacts_partner=create_contacts_partner)
     
     from lino.modlib.countries.models import CityTypes
