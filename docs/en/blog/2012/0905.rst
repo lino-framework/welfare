@@ -54,3 +54,6 @@ TODO: statt "AJAX communication failed" sollte er zumindest sagen
 "Kann Person X nicht zu einem Klienten machen, weil Klient Y noch keine NISS bekommen hat"
 
 Aber jetzt erstmal Checkin und Feierabend.
+
+
+

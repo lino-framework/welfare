@@ -36,9 +36,10 @@ from lino import dd
 from lino.utils import dblogger
 #~ from lino.utils import printable
 from lino import mixins
-from lino.modlib.contacts import models as contacts
+#~ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.notes import models as notes
 notes = dd.resolve_app('notes')
+contacts = dd.resolve_app('contacts')
 
 #~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
@@ -150,21 +151,9 @@ class ContractEndings(dd.Table):
     order_by = ['name']
 
 
-#~ def contract_contact_choices(company):
-    #~ return links.Link.objects.filter(
-        #~ type__use_in_contracts=True,
-        #~ a_id=company.pk)
-
-def contract_contact_choices(company):
-    return contacts.Role.objects.filter(
-        type__use_in_contracts=True,
-        company=company)
-        #~ company__id=company.pk)
 
 
-
-
-class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
+class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
     """Abstract base class for 
     :class:`lino_welfare.modlib.jobs.models.Contract`
     and
@@ -184,22 +173,6 @@ class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator)
     person = models.ForeignKey('pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_person")
         
-    company = models.ForeignKey(settings.LINO.company_model,
-        related_name="%(app_label)s_%(class)s_set_by_company",
-        verbose_name=_("Company"),
-        blank=True,null=True)
-        
-    #~ contact = models.ForeignKey("links.Link",
-      #~ related_name="%(app_label)s_%(class)s_set_by_contact",
-      #~ blank=True,null=True,
-      #~ verbose_name=_("represented by"))
-    contact = models.ForeignKey("contacts.Role",
-      related_name="%(app_label)s_%(class)s_set_by_contact",
-      blank=True,null=True,
-      verbose_name=_("represented by"))
-    #~ contact = models.ForeignKey("contacts.Contact",
-      #~ blank=True,null=True,
-      #~ verbose_name=_("represented by"))
     language = babel.LanguageField()
     
     applies_from = models.DateField(_("applies from"),blank=True,null=True)
@@ -252,16 +225,14 @@ class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator)
     recipient = property(get_recipient)
         
         
-    @chooser()
-    def contact_choices(cls,company):
-        if company is not None:
-            #~ return company.rolesbyparent.all()
-            #~ return company.rolesbyparent.filter(type__use_in_contracts=True)
-            #~ return links.Link.objects.filter(type__use_in_contracts=True,a=company)
-            #~ return contacts.Role.objects.filter(
-                #~ type__use_in_contracts=True,company=company)
-            return contract_contact_choices(company)
-        return []
+    @classmethod
+    def contact_choices_queryset(cls,company):
+        return contacts.Role.objects.filter(
+            type__use_in_contracts=True,
+            company=company)
+            #~ company__id=company.pk)
+
+        
 
     def dsbe_person(self):
         """Used in document templates."""
@@ -286,6 +257,7 @@ class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator)
         super(ContractBase,self).on_create(ar)
         self.person_changed(ar)
       
+                    
     def full_clean(self,*args,**kw):
         r = self.active_period()
         if not isrange(*r):
@@ -294,17 +266,6 @@ class ContractBase(mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator)
         if self.type_id and self.type.exam_policy_id:
             if not self.exam_policy_id:
                 self.exam_policy_id = self.type.exam_policy_id
-        if self.company:
-            if self.contact is None \
-              or self.contact.company is None \
-              or self.contact.company.pk != self.company.pk:
-                qs = contract_contact_choices(self.company)
-                #~ qs = self.company.rolesbyparent.all()
-                if qs.count() == 1:
-                    self.contact = qs[0]
-                else:
-                    #~ print "20120227 clear contact!"
-                    self.contact = None
         # The severe test is ready and now also activated :
         if True:
           if self.person_id is not None:

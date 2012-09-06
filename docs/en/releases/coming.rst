@@ -1,13 +1,34 @@
 Coming
 ======
 
+TODO
+
+- Ist Person.is_client jetzt readonly auf importierten Personen? 
+
+- statt "AJAX communication failed" sollte er zumindest sagen 
+  "IntegrityError: column national_id is not unique", oder (die Luxus-Version) 
+  "Kann Person X nicht zu einem Klienten machen, weil Klient Y noch keine NISS bekommen hat"
+  
+- Tabellen "Coachings" (Begleitungen) und "Thirds" ("Drittpartner" oder "Externe Kontakte") 
+  und ThirdType
+
+
+DONE
+
 - Lino unterscheidet jetzt zwischen Klienten und Personen.
-  Unter "Personen" stehen alle Menschen, die Lino kennt. 
-  Das sind nicht nur Klienten, sondern auch Benutzer und Kontaktpersonen 
-  in Firmen oder Institutionen.
-  Klienten sind Personen, über die Lino mehr wissen will als über normale 
+  Unter "Personen" verstehen wir *alle Menschen, die Lino kennt*. 
+  Das sind nicht nur Klienten, sondern auch die Benutzer, 
+  alle Kontaktpersonen in Firmen oder Institutionen,
+  ...
+  "Klienten" sind Personen, über die Lino mehr wissen will als über normale 
   Leute. Um einen Klienten anzulegen, 
-  muss man mindestens auch die NISS kennen.
+  muss man mindestens auch die NISS eingeben.
+  
+  Im Detail einer Person gibt es ein Feld "ist Klient". 
+  Damit kann man eine bestehende Person zu einem Klienten machen.
+  
+  
+- Neue Felder "Erstellt am/um" und "Letzte Änderung" pro `Partner`.
   
 - Tx25 : ein paar neue TI handler.  
   

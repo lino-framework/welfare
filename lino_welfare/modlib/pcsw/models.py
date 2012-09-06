@@ -364,7 +364,7 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
     def site_setup(cls,site):
         super(Person,cls).site_setup(site)
         cls.declare_imported_fields(
-          '''name first_name last_name title birth_date gender
+          '''name first_name last_name title birth_date gender is_client
           ''')
         
         
@@ -922,11 +922,12 @@ class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
-    main = "tab1 tab2 tab3 tab4 tab5 tab5b history contracts calendar misc"
+    main = "tab1 tab2 coaching tab3 tab4 tab5 tab5b history contracts calendar misc "
     
     tab1 = """
     box1 box2
     box4 image:15 #overview 
+    CoachingsByProject
     """
     
     box1 = """
@@ -959,11 +960,10 @@ class ClientDetail(dd.FormLayout):
 
 
     status = """
-    in_belgium_since:15 residence_type gesdos_id health_insurance
-    #pharmacy
-    coach1:12 coach2:12 group:16 coached_from:12 coached_until:12
-    bank_account1:12 bank_account2:12 broker:12 faculty:12
+    in_belgium_since:15 residence_type gesdos_id group:16 
+    bank_account1:12 bank_account2:12 
     """
+    
       
     income = """
     aid_type   
@@ -975,9 +975,21 @@ class ClientDetail(dd.FormLayout):
     suche = """
     is_seeking unemployed_since work_permit_suspended_until
     unavailable_until:15 unavailable_why:30
-    job_office_contact job_agents
+    # job_office_contact job_agents
     pcsw.ExclusionsByPerson:50x5
     """
+    
+    coaching = dd.Panel("""
+    broker:12 faculty:12
+    coach1:12 coach2:12 coached_from:12 coached_until:12 
+    health_insurance pharmacy job_office_contact 
+    job_agents
+    ThirdsByProject
+    # CoachingsByProject
+    """,label=_("Coaching"))
+    
+    
+    
       
     papers = """
     needs_residence_permit needs_work_permit 
@@ -1040,7 +1052,7 @@ class ClientDetail(dd.FormLayout):
     """
     
     misc = """
-    activity pharmacy 
+    activity 
     is_active is_cpas is_senior is_deprecated newcomer
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
@@ -1523,43 +1535,6 @@ class ExclusionsByPerson(Exclusions):
     column_names = 'excluded_from excluded_until type remark'
 
 
-#
-# COACHING TYPES 
-#
-#~ class CoachingType(dd.Model):
-    #~ class Meta:
-        #~ verbose_name = _("coaching type")
-        #~ verbose_name_plural = _('coaching types')
-        
-    #~ name = models.CharField(max_length=200)
-    
-    #~ def __unicode__(self):
-        #~ return unicode(self.name)
-
-#~ class CoachingTypes(dd.Table):
-    #~ model = CoachingType
-    
-#
-# COACHINGS
-#
-#~ class Coaching(dd.Model):
-    #~ class Meta:
-        #~ verbose_name = _("coaching")
-        #~ verbose_name_plural = _('coachings')
-    #~ person = models.ForeignKey("contacts.Person",verbose_name=_("Client"))
-    #~ coach = models.ForeignKey("auth.User",verbose_name=_("Coach"))
-    #~ type = models.ForeignKey("pcsw.CoachingType",verbose_name=_("Coaching type"))
-    #~ remark = models.CharField(max_length=200,blank=False,verbose_name=_("Remark"))
-    
-
-#~ class Coachings(dd.Table):
-    #~ model = Coaching
-    
-#~ class CoachingsByPerson(Coachings):
-    #~ master_key = 'person'
-    #~ column_names = 'coach type remark *'
-    #~ label = _('Coaches')
-
 
 #
 # AID TYPES
@@ -1815,6 +1790,73 @@ class OverlappingContracts(dd.Table):
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
+class ThirdTypes(ChoiceList):
+    label = _("Third type")
+    
+add = ThirdTypes.add_item
+add('10', _("Health insurance"),'health_insurance')
+add('20', _("Pharmacy"),'pharmacy')
+add('30', _("Attorney"),'attorney')
+add('40', _("Job office"),'job_office')
+add('90', _("Other"),'other')
+
+
+class Third(mixins.ProjectRelated,contacts.CompanyContact):
+    """
+    project : the Client
+    company : the Company
+    contact : the Contact person in that Company
+    """
+    type = ThirdTypes.field(blank=True)
+    remark = models.TextField(_("Remarks"),blank=True) # ,null=True)
+    
+class Thirds(dd.Table):
+    model = Third
+    
+class ThirdsByProject(Thirds):
+    master_key = 'project'
+
+    
+    
+class CoachingStates(ChoiceList):
+    label = _("Coaching state")
+add = CoachingStates.add_item
+add('10', _("Newcomer"),'newcomer')
+add('20', _("Primary coach"),'primary')
+add('30', _("Secondary coach"),'secondary')
+add('40', _("Closed"),'closed')
+
+
+class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
+    workflow_state_field = 'state'
+    start_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("Coached from"))
+    end_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("until"))
+    state = CoachingStates.field()
+    
+
+class Coachings(dd.Table):
+    model = Coaching
+    
+class CoachingsByProject(Coachings):
+    master_key = 'project'
+    
+class MyCoachings(Coachings,mixins.ByUser):
+    parameters = dict(
+        group=models.ForeignKey(PersonGroup,blank=True,null=True),
+        today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
+        )
+    params_template = "group today"
+    
+    @classmethod
+    def get_request_queryset(self,ar):
+        qs = super(MyCoachings,self).get_request_queryset(ar)
+        if ar.param_values.group:
+            qs = qs.filter(project__group=ar.param_values.group)
+        return qs
 
 
 
@@ -1978,10 +2020,14 @@ class Home(cal.Home):
 #~ def setup_master_menu(site,ui,user,m): 
     #~ m.add_action(AllClients)
 
+def setup_explorer_menu(site,ui,user,m): 
+    m = m.add_menu("pcsw",_("PCSW"))
+    m.add_action(Coachings)
+    m.add_action(Thirds)
+    
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:
     if user.profile.integ_level:
-        #~ mypersons = m.add_menu("mypersons",self.modules.pcsw.MyPersons.label)
         mypersons = m.add_menu("mypersons",MyClients.label)
         mypersons.add_action(MyClients)
         for pg in PersonGroup.objects.order_by('ref_name'):
@@ -1989,8 +2035,14 @@ def setup_my_menu(site,ui,user,m):
               MyClientsByGroup,
               label=pg.name,
               params=dict(master_instance=pg))
-            #~ m.add_action('contacts.MyClientsByGroup',label=pg.name,
-            #~ params=dict(master_id=pg.pk))
+              
+        mycoachings = m.add_menu("mycoachings",MyCoachings.label)
+        mycoachings.add_action(MyCoachings)
+        #~ for pg in PersonGroup.objects.order_by('ref_name'):
+            #~ mycoachings.add_action(
+              #~ MyCoachingsByGroup,
+              #~ label=pg.name,
+              #~ params=dict(master_instance=pg))
   
 
 def site_setup(site):
@@ -2125,7 +2177,6 @@ def site_setup(site):
         
         right = """
         uploads.UploadsByController
-        # thirds.ThirdsByController:30
         outbox.MailsByController
         postings.PostingsByController
         cal.TasksByController

@@ -32,7 +32,7 @@ extensions = [
   #~ 'sphinx.ext.inheritance_diagram',
   #~ 'sphinx.ext.todo',
   #~ 'sphinx.ext.extlinks',
-  #~ 'sphinx.ext.graphviz',
+  'sphinx.ext.graphviz',
   'sphinx.ext.intersphinx',
   #~ 'sphinx.ext.doctest',
 ]
