@@ -344,7 +344,8 @@ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrint
                 #~ if self.overlaps_with(con):
                     #~ msgs.append(_("Dates overlap with %s") % con)
         #~ return msgs
-          
+
+dd.update_field(ContractBase,'contact',verbose_name=_("represented by"))
 
 class OverlappingContractsTest:
     """
