@@ -1331,6 +1331,8 @@ def migrate_from_1_4_10(globals_dict):
     - debts.Account renamed to accounts.Account
     - debts.AccountGroup renamed to accounts.AccountGroup
     - convert Persons to Clients
+    - fill Coachings from fields coached_from, coached_until, coach1, coach2
+    - fill pcsw.Thirds from fields health_insurance, pharmacy, job_office_contact
     """
     
     countries_City = resolve_model("countries.City")
