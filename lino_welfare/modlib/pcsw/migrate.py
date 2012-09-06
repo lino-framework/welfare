@@ -1436,7 +1436,7 @@ def migrate_from_1_4_10(globals_dict):
                 yield pcsw_Third(
                     project_id=partner_ptr_id,
                     type=ThirdTypes.job_office,
-                    company_id=settings.LINO.job_office.id,
+                    company_id=settings.LINO.site_config.job_office.id,
                     contact_id=job_office_contact_id)
         else:
             lost_fields = """
