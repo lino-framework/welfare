@@ -1807,7 +1807,6 @@ class ProjectContact(mixins.ProjectRelated,contacts.CompanyContact):
     contact : the Contact person in that Company
     """
     class Meta:
-        app_label = 'properties'
         verbose_name = _("Contact")
         verbose_name_plural = _("Contacts")
     type = ProjectContactTypes.field(blank=True)
@@ -1832,6 +1831,15 @@ add('40', _("Closed"),'closed')
 
 
 class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
+    """
+    A Coaching (Begleitung, accompagnement) 
+    is when a Client is being coached by a User (a social assistant) 
+    during a given period.
+    """
+    class Meta:
+        verbose_name = _("Coaching")
+        verbose_name_plural = _("Coachings")
+        
     workflow_state_field = 'state'
     start_date = models.DateField(
         blank=True,null=True,
