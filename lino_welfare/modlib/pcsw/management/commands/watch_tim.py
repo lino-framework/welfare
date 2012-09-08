@@ -267,8 +267,8 @@ class PAR(Controller):
                 mapper.update(gesdos_id='NB1')
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
-                    if obj.is_deprecated:
-                        obj.national_id += ' (A)'
+                    #~ if obj.is_deprecated:
+                        #~ obj.national_id += ' (A)'
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if username:

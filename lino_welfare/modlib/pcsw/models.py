@@ -927,7 +927,6 @@ class ClientDetail(dd.FormLayout):
     tab1 = """
     box1 box2
     box4 image:15 #overview 
-    CoachingsByProject
     """
     
     box1 = """
@@ -984,8 +983,7 @@ class ClientDetail(dd.FormLayout):
     coach1:12 coach2:12 coached_from:12 coached_until:12 
     health_insurance pharmacy job_office_contact 
     job_agents
-    ThirdsByProject
-    # CoachingsByProject
+    ContactsByProject:40 CoachingsByProject:40
     """,label=_("Coaching"))
     
     
@@ -1790,10 +1788,10 @@ class OverlappingContracts(dd.Table):
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
-class ThirdTypes(ChoiceList):
-    label = _("Third type")
+class ProjectContactTypes(ChoiceList):
+    label = _("Project Contact type")
     
-add = ThirdTypes.add_item
+add = ProjectContactTypes.add_item
 add('10', _("Health insurance"),'health_insurance')
 add('20', _("Pharmacy"),'pharmacy')
 add('30', _("Attorney"),'attorney')
@@ -1801,20 +1799,26 @@ add('40', _("Job office"),'job_office')
 add('90', _("Other"),'other')
 
 
-class Third(mixins.ProjectRelated,contacts.CompanyContact):
+#~ class Third(mixins.ProjectRelated,contacts.CompanyContact):
+class ProjectContact(mixins.ProjectRelated,contacts.CompanyContact):
     """
     project : the Client
     company : the Company
     contact : the Contact person in that Company
     """
-    type = ThirdTypes.field(blank=True)
+    class Meta:
+        app_label = 'properties'
+        verbose_name = _("Contact")
+        verbose_name_plural = _("Contacts")
+    type = ProjectContactTypes.field(blank=True)
     remark = models.TextField(_("Remarks"),blank=True) # ,null=True)
     
-class Thirds(dd.Table):
-    model = Third
+class ProjectContacts(dd.Table):
+    model = ProjectContact
     
-class ThirdsByProject(Thirds):
+class ContactsByProject(ProjectContacts):
     master_key = 'project'
+    column_names = 'type company contact remark *'
 
     
     
@@ -1843,6 +1847,7 @@ class Coachings(dd.Table):
     
 class CoachingsByProject(Coachings):
     master_key = 'project'
+    column_names = 'start_date end_date user state *'
     
 class MyCoachings(Coachings,mixins.ByUser):
     parameters = dict(
@@ -2023,7 +2028,7 @@ class Home(cal.Home):
 def setup_explorer_menu(site,ui,user,m): 
     m = m.add_menu("pcsw",_("PCSW"))
     m.add_action(Coachings)
-    m.add_action(Thirds)
+    m.add_action(ProjectContacts)
     
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:
