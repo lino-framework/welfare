@@ -267,14 +267,14 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
         #~ abstract = True
         app_label = 'contacts'
   
-    is_active = models.BooleanField(
-        verbose_name=_("is active"),default=True,
-        help_text = "Only active Persons may be used when creating new operations.")
+    #~ is_active = models.BooleanField(
+        #~ verbose_name=_("is active"),default=True,
+        #~ help_text = "Only active Persons may be used when creating new operations.")
     
-    newcomer = models.BooleanField(
-        verbose_name=_("newcomer"),default=False)
-    """Means that there's no responsible user for this partner yet. 
-    New partners may not be used when creating new operations."""
+    #~ newcomer = models.BooleanField(
+        #~ verbose_name=_("newcomer"),default=False)
+    #~ """Means that there's no responsible user for this partner yet. 
+    #~ New partners may not be used when creating new operations."""
     
     is_deprecated = models.BooleanField(
         verbose_name=_("deprecated"),default=False)
@@ -314,7 +314,7 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
           language 
           phone fax email url
           bank_account1 bank_account2 activity 
-          is_active newcomer is_deprecated 
+          is_deprecated 
           ''')
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
@@ -367,12 +367,24 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           '''name first_name last_name title birth_date gender is_client
           ''')
         
-        
+    
+class ClientStates(ChoiceList):
+    label = _("Client state")
+add = ClientStates.add_item
+add('10', _("Newcomer"),'newcomer')       # "N" in PAR->Attrib
+add('20', _("Active"),'active')           # neither newcomer nor former
+add('30', _("Official"),'official')       # the client is "integrated"
+add('40', _("Former"),'former')           # IdPrt == "I"
+add('50', _("Invalid"),'invalid')         # duplicate or doesn't correspond to a real person
+
+    
 class Client(Person):
   
     class Meta:
         verbose_name = _("Client") 
         verbose_name_plural = _("Clients") 
+        
+    workflow_state_field = 'client_state'
         
     remarks2 = models.TextField(_("Remarks (Social Office)"),blank=True) # ,null=True)
     gesdos_id = models.CharField(max_length=40,blank=True,
@@ -512,6 +524,8 @@ class Client(Person):
       verbose_name=_("Contact person at local job office"),
       related_name='persons_job_office')
       
+    client_state = ClientStates.field()
+    
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content')
     
 
@@ -960,7 +974,7 @@ class ClientDetail(dd.FormLayout):
 
     status = """
     in_belgium_since:15 residence_type gesdos_id group:16 
-    bank_account1:12 bank_account2:12 
+    bank_account1:12 bank_account2:12 client_state
     """
     
       
@@ -1051,7 +1065,7 @@ class ClientDetail(dd.FormLayout):
     
     misc = """
     activity 
-    is_active is_cpas is_senior is_deprecated newcomer
+    is_cpas is_senior is_deprecated 
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
     """
@@ -1133,7 +1147,8 @@ class Clients(AllClients):
     """
     #~ app_label = 'contacts'
     #~ use_as_default_table = False 
-    known_values = dict(is_active=True,newcomer=False)
+    #~ known_values = dict(is_active=True,newcomer=False)
+    known_values = dict(client_state=ClientStates.active)
     #~ filter = dict(is_active=True,newcomer=False)
     #~ label = Person.Meta.verbose_name_plural + ' ' + _("(unfiltered)")
     
@@ -1168,9 +1183,15 @@ def only_coached_persons_filter(today,
     return Q(q1,range_filter(today,d1field,d2field))
     
   
-def only_my_persons(qs,user):
-    #~ return qs.filter(Q(coach1__exact=user) | Q(coach2__exact=user))
-    return qs.filter(Q(coach1=user) | Q(coach2=user))
+def only_coached_by(qs,user):
+    #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
+    return qs.filter(pcsw_coaching_set_by_project__user=user)
+    
+def only_coached_since(qs,since):
+    #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
+    return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
+            
+    
 
 class ClientsByCoach1(Clients):
     master_key = 'coach1'
@@ -1184,7 +1205,7 @@ class ClientsByCoach1(Clients):
     def get_request_queryset(self,rr):
         #~ rr.master_instance = rr.get_user()
         qs = super(ClientsByCoach1,self).get_request_queryset(rr)
-        #~ only_my_persons(qs,rr.get_user())
+        #~ only_coached_by(qs,rr.get_user())
         qs = only_coached_persons(qs,datetime.date.today())
         #~ qs = qs.filter()
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
@@ -1230,7 +1251,7 @@ class MyClients(Clients):
     @classmethod
     def get_request_queryset(self,rr):
         qs = super(MyClients,self).get_request_queryset(rr)
-        qs = only_coached_persons(only_my_persons(qs,rr.get_user()),datetime.date.today())
+        qs = only_coached_persons(only_coached_by(qs,rr.get_user()),datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
         #~ today = datetime.date.today()
@@ -1310,7 +1331,7 @@ class ClientsTest(Clients):
         qs = self.get_request_queryset(ar)
         
         if ar.param_values.user:
-            qs = only_my_persons(qs,ar.param_values.user)
+            qs = only_coached_by(qs,ar.param_values.user)
         
         if ar.param_values.today:
             qs = only_coached_persons(qs,ar.param_values.today)
@@ -1579,7 +1600,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
     gender = Gender.field(blank=True)
 
     
-    only_my_persons = models.BooleanField(_("Only my persons")) # ,default=True)
+    only_my_persons = models.BooleanField(_("Only my clients")) # ,default=True)
     
     coached_by = dd.ForeignKey(settings.LINO.user_model,
         verbose_name=_("Coached by"),
@@ -1715,10 +1736,10 @@ class ClientsBySearch(AllClients):
             #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
             
         if search.only_my_persons:
-            qs = only_my_persons(qs,search.user)
+            qs = only_coached_by(qs,search.user)
         
         if search.coached_by:
-            qs = only_my_persons(qs,search.coached_by)
+            qs = only_coached_by(qs,search.coached_by)
             
         if search.period_from:
             qs = only_coached_persons(qs,search.period_from)
@@ -1821,13 +1842,19 @@ class ContactsByProject(ProjectContacts):
 
     
     
-class CoachingStates(ChoiceList):
-    label = _("Coaching state")
-add = CoachingStates.add_item
-add('10', _("Newcomer"),'newcomer')
-add('20', _("Primary coach"),'primary')
-add('30', _("Secondary coach"),'secondary')
-add('40', _("Closed"),'closed')
+#~ class CoachingStates(ChoiceList):
+    #~ label = _("Coaching state")
+#~ add = CoachingStates.add_item
+#~ add('10', _("New"),'new')
+#~ add('20', _("Active"),'active')
+#~ add('30', _("Standby"),'standby')
+#~ add('40', _("Closed"),'closed')
+
+class CoachingTypes(ChoiceList):
+    label = _("Coaching type")
+add = CoachingTypes.add_item
+add('10', _("Primary coach"),'primary')
+add('20', _("Secondary coach"),'secondary')
 
 
 class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
@@ -1840,35 +1867,40 @@ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
         
-    workflow_state_field = 'state'
+    #~ workflow_state_field = 'state'
     start_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("Coached from"))
     end_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("until"))
-    state = CoachingStates.field()
+    #~ state = CoachingStates.field(default=CoachingStates.new)
+    type = CoachingTypes.field()
     
+dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
     
 class CoachingsByProject(Coachings):
     master_key = 'project'
-    column_names = 'start_date end_date user state *'
+    column_names = 'start_date end_date user type *'
     
 class MyCoachings(Coachings,mixins.ByUser):
     parameters = dict(
+        type=CoachingTypes.field(blank=True),
         group=models.ForeignKey(PersonGroup,blank=True,null=True),
         today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
         )
-    params_template = "group today"
+    params_template = "type group today"
     
     @classmethod
     def get_request_queryset(self,ar):
         qs = super(MyCoachings,self).get_request_queryset(ar)
         if ar.param_values.group:
             qs = qs.filter(project__group=ar.param_values.group)
+        if ar.param_values.type:
+            qs = qs.filter(type=ar.param_values.type)
         return qs
 
 

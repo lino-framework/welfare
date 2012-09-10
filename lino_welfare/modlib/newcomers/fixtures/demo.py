@@ -27,6 +27,7 @@ def objects():
     #~ from lino.modlib.users.models import 
     from lino_welfare.modlib.newcomers.models import Broker, Faculty, Competence
     from lino_welfare.modlib.pcsw.models import Person
+    from lino_welfare.modlib.pcsw import models as pcsw
     
     I = Instantiator(Broker).build
     #~ yield I(**babel_values('name',
@@ -67,6 +68,9 @@ def objects():
     USERS = Cycler(User.objects.filter(profile__in=profiles))
     for i in range(7):
         yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    for p in Person.objects.filter(newcomer=True):
+    #~ for p in Person.objects.filter(newcomer=True):
+    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
         p.faculty = FACULTIES.pop()
         p.save()
+        
+        

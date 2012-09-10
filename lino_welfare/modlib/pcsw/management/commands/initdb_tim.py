@@ -161,7 +161,7 @@ def country2kw(row,kw):
             dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
       
 def par2person(row,person):
-    person.is_active = iif(row['IDPRT']=='I',False,True)
+    #~ person.is_active = iif(row['IDPRT']=='I',False,True)
     if row['IDPRT'] == 'S':
         person.is_cpas = True
     elif row['IDPRT'] == 'A':

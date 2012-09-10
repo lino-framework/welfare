@@ -243,7 +243,7 @@ The monthly amount available for distribution among debtors."""))
         #~ for t in types:
         #~ types = [AccountTypes.items_dict[t] for t in types]
         #~ types = [t for t in types]
-        for g in AccountGroup.objects.filter(**kw).order_by('seqno'):
+        for g in accounts.Group.objects.filter(**kw).order_by('ref'):
             if Entry.objects.filter(budget=self,account__group=g).count():
                 yield g
         
@@ -251,7 +251,7 @@ The monthly amount available for distribution among debtors."""))
         """
         Return a TableRequest showing the Entries for the given `group`, 
         using the table layout depending on AccountType.
-        Shows all Entries of the specified `AccountGroup`.
+        Shows all Entries of the specified `accounts.Group`.
         """
         t = entries_table_for_group(group)
         sar = ar.spawn(t,master_instance=self,
@@ -321,7 +321,7 @@ The monthly amount available for distribution among debtors."""))
         flt = models.Q(required_for_household=True)
         flt = flt | models.Q(required_for_person=True)
         required = accounts.Account.objects.filter(flt)\
-            .order_by('seqno').values_list('id',flat=True)
+            .order_by('ref').values_list('id',flat=True)
         missing = set(required)
         seqno = 1
         for e in Entry.objects.filter(budget=self).order_by('seqno'):

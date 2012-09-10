@@ -27,7 +27,13 @@ DONE
   Im Detail einer Person gibt es ein Feld "ist Klient". 
   Damit kann man eine bestehende Person zu einem Klienten machen.
   
+- Neues Feld Status eines Klienten. 
+  is_active ersetzt durch ClientStates.active, 
+  newcomer ersetzt durch ClientStates.newcomer.
   
+- Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
+  `Begleiter 1 und 2`. Siehe auch Begleitungsart (primär, sekundär). 
+
 - Neue Felder "Erstellt am/um" und "Letzte Änderung" pro `Partner`.
   
 - Tx25 : ein paar neue TI handler.  

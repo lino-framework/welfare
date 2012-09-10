@@ -42,7 +42,8 @@ from lino.modlib.cal.utils import DurationUnits
 
 
 #~ from lino_welfare.models import Person
-from lino_welfare.modlib.pcsw import models as welfare
+#~ from lino_welfare.modlib.pcsw import models as welfare
+from lino_welfare.modlib.pcsw import models as pcsw
 
 def amonthago():
     return DurationUnits.months.add_duration(datetime.date.today(),-1)
@@ -142,7 +143,7 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     pass
 
     
-class Newcomers(welfare.AllClients):
+class Newcomers(pcsw.AllClients):
     """
     Clients who have the "Newcomer" checkbox on.
     """
@@ -150,7 +151,8 @@ class Newcomers(welfare.AllClients):
     #~ required_user_groups = ['newcomers']
     
     #~ filter = dict(newcomer=True)
-    known_values = dict(newcomer=True)
+    #~ known_values = dict(newcomer=True)
+    known_values = dict(client_state=pcsw.ClientStates.newcomer)
     #~ use_as_default_table = False
     column_names = "name_column broker faculty address_column *"
     
@@ -163,7 +165,7 @@ class NewcomersByFaculty(Newcomers):
     master_key = 'faculty'
     column_names = "name_column broker address_column *"
         
-class NewClients(welfare.AllClients):
+class NewClients(pcsw.AllClients):
     required=dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
@@ -189,11 +191,10 @@ class NewClients(welfare.AllClients):
         qs = super(NewClients,self).get_request_queryset(ar)
         
         if ar.param_values.coached_by:
-            qs = welfare.only_my_persons(qs,ar.param_values.coached_by)
+            qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
             
         if ar.param_values.since:
-            qs = qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
-            
+            qs = pcsw.only_coached_since(qs,ar.param_values.since)
         return qs
             
     
@@ -267,11 +268,11 @@ class UsersByNewcomer(users.Users):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return welfare.ClientsByCoach1.request(ar.ui,master_instance=obj)
+        return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
-        return welfare.MyActiveClients.request(ar.ui,subst_user=obj)
+        return pcsw.MyActiveClients.request(ar.ui,subst_user=obj)
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):
@@ -296,13 +297,13 @@ settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
         ))
 
 
-dd.inject_field(welfare.Client,
+dd.inject_field(pcsw.Client,
     'broker',
     models.ForeignKey(Broker,
         blank=True,null=True),
     """The Broker who sent this Newcomer.
     """)
-dd.inject_field(welfare.Client,
+dd.inject_field(pcsw.Client,
     'faculty',
     models.ForeignKey(Faculty,
         blank=True,null=True),

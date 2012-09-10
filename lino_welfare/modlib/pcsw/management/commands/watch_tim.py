@@ -51,7 +51,7 @@ from django.utils.encoding import force_unicode
 
 import lino
 
-from lino.core.modeltools import resolve_model
+from lino import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words, unicode_string
 
@@ -64,16 +64,17 @@ from lino.utils.daemoncommand import DaemonCommand
 
 #~ from lino.apps.pcsw.models  import is_valid_niss
 
+from lino_welfare.modlib.pcsw import models as pcsw
 from lino_welfare.modlib.pcsw.management.commands.initdb_tim import convert_sex, \
     ADR_id, country2kw, par2person, pxs2person, isolang
 
-Country = resolve_model('countries.Country')
-City = resolve_model('countries.City')
-Person = resolve_model(settings.LINO.person_model)
-Client = resolve_model('pcsw.Client')
-Company = resolve_model(settings.LINO.company_model)
-Household = resolve_model('households.Household')
-households_Type = resolve_model("households.Type")
+Country = dd.resolve_model('countries.Country')
+City = dd.resolve_model('countries.City')
+Person = dd.resolve_model(settings.LINO.person_model)
+Client = dd.resolve_model('pcsw.Client')
+Company = dd.resolve_model(settings.LINO.company_model)
+Household = dd.resolve_model('households.Household')
+households_Type = dd.resolve_model("households.Type")
 
 #~ def is_company(data):
 def PAR_model(data):
@@ -184,9 +185,9 @@ class Controller:
         else:
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
         self.applydata(obj,kw['data'])
+        dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
         #~ obj.save()
-        dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         
     def PUT(self,**kw):
         #~ dblogger.info("%s.PUT(%s)",self.__class__.__name__,kw)
@@ -202,10 +203,10 @@ class Controller:
         if self.PUT_special(obj,**kw):
             return 
         self.applydata(obj,kw['data'])
+        dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
         #~ obj.save()
         #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
-        dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         
     def PUT_special(self,obj,**kw):
         pass
@@ -249,7 +250,7 @@ class PAR(Controller):
         
         #~ dblogger.info("20111223 %r",data)
         if data.has_key('ATTRIB'):
-            obj.newcomer = ("N" in data['ATTRIB'])
+            #~ obj.newcomer = ("N" in data['ATTRIB'])
             #~ obj.is_deprecated = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
             obj.is_deprecated = ("W" in data['ATTRIB'])
         
@@ -265,22 +266,43 @@ class PAR(Controller):
             if obj.__class__ is Client:
                 par2person(data,obj)
                 mapper.update(gesdos_id='NB1')
+                if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
+                    obj.client_state = pcsw.ClientStates.newcomer
+                elif data['IDPRT'] == 'I':
+                    obj.client_state = pcsw.ClientStates.former
+                else:
+                    obj.client_state = pcsw.ClientStates.active
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
+                    if obj.pk is None:
+                        obj.save() # must force a pre save() here to save related coachings
                     if username:
+                        u = auth.User.objects.get(username=username)
+                        #~ try:
+                            #~ u = auth.User.objects.get(username=username)
+                        #~ except auth.User.DoesNotExist,e:
+                            #~ dblogger.warning(
+                              #~ u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
+                              #~ data['IDUSR'],username,obj2str(obj))
+                        obj.coach1 = u
                         try:
-                            obj.coach1 = auth.User.objects.get(username=username)
-                        except auth.User.DoesNotExist,e:
-                            dblogger.warning(
-                              u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
-                              data['IDUSR'],username,obj2str(obj))
+                            coaching = pcsw.Coaching.objects.get(project=obj,type=pcsw.CoachingTypes.primary)
+                        except pcsw.Coaching.DoesNotExist,e:
+                            coaching = pcsw.Coaching(project=obj,type=pcsw.CoachingTypes.primary)
+                        coaching.user = u
+                        coaching.save()
                     else:
                         obj.coach1 = None
-                        #~ obj.user = None
+                        try:
+                            coaching = pcsw.Coaching.objects.get(project=obj,type=pcsw.CoachingTypes.primary)
+                            coaching.delete()
+                        except pcsw.Coaching.DoesNotExist,e:
+                            pass
+                        
         elif obj.__class__ is Company:
             mapper.update(prefix='ALLO')
             mapper.update(vat_id='NOTVA')
@@ -534,12 +556,13 @@ def watch(data_dir):
         try:
             process_line(i,ln)
         except Exception,e:
+            #~ raise
             fd_failed.write("// %s %r\n%s\n\n" % (
                 time.strftime("%Y-%m-%d %H:%M:%S"),e,ln))
             #~ fd_failed.write(ln+'\n')
             #~ dblogger.warning("%s:%d: %r\nin changelog line %s", watching,i,e,ln)
             dblogger.warning(
-                "Exception '%s' while processing changelog line:\n%s", 
+                "Exception '%r' while processing changelog line:\n%s", 
                 e,ln)
             # for ValidationError we don't want a full traceback with mail to the admins.
             if not isinstance(e,ValidationError):

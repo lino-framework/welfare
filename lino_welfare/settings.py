@@ -214,7 +214,6 @@ class Lino(Lino):
         from lino.core.modeltools import models_by_abc
         from django.db.models import Q
         from lino.modlib.isip import models as isip
-        #~ from lino_welfare.models import only_my_persons
         
         for obj in self.modules.contacts.Person.objects.filter(
           Q(coach2=user)|Q(coach2__isnull=True,coach1=user)):

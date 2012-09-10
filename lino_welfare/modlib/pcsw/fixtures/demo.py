@@ -103,6 +103,24 @@ Sales | Vente | Verkauf
 Administration & Finance | Administration & Finance | Verwaltung & Finanzwesen
 """
 
+def coachings(p,coach1,coach2,coached_from,coached_until=None):
+    if coach1:
+        yield pcsw.Coaching(
+            project=p,
+            type=pcsw.CoachingTypes.primary,
+            #~ state=pcsw.CoachingStates.active,
+            user=coach1,
+            start_date=coached_from,
+            end_date=coached_until)
+    if coach2:
+        yield pcsw.Coaching(
+            project = p,
+            type=pcsw.CoachingTypes.secondary,
+            #~ state=pcsw.CoachingStates.active,
+            user=coach2,
+            start_date=coached_from,
+            end_date=coached_until)
+
 
 
 def objects():
@@ -285,8 +303,16 @@ def objects():
     yield company(name=u"Behindertenstätten Eupen",city=eupen,country='BE')
     yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country='BE')
     
+    yield company(name=u"Alliance Nationale des Mutualités Chrétiennes",country='BE')
+    yield company(name=u"Mutualité Chrétienne de Verviers - Eupen",country='BE')
+    yield company(name=u"Union Nationale des Mutualités Neutres",country='BE')
+    yield company(name=u"Mutualia - Mutualité Neutre",country='BE')
+    yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège",country='BE')
+    
+    
     def person2client(p,**kw):
         c = mti.insert_child(p,Client,**kw)
+        c.client_state = pcsw.ClientStates.active
         c.save()
         return Client.objects.get(pk=p.pk)
     
@@ -302,6 +328,7 @@ def objects():
       city=vigala,country='EE',
       card_number='123',birth_country=ee,birth_date='0000-04-27',
       national_id='1234',
+      client_state=pcsw.ClientStates.newcomer,
       #~ birth_date=i2d(19680101),birth_date_circa=True,
       #~ newcomer=True,
       gender=Gender.female)
@@ -310,6 +337,7 @@ def objects():
       city=vigala,country='EE',card_number='124',birth_country=ee,
       birth_date=i2d(20020405),
       national_id='1235',
+      client_state=pcsw.ClientStates.newcomer,
       #~ newcomer=True,
       gender=Gender.female)
     yield mari
@@ -318,6 +346,7 @@ def objects():
       birth_date=i2d(20080324),
       national_id='1236',
       #~ newcomer=True,
+      client_state=pcsw.ClientStates.newcomer,
       gender=Gender.female)
     yield iiris
     
@@ -337,7 +366,8 @@ def objects():
         city=kettenis,country='BE', 
         national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
-        newcomer=True,
+        client_state=pcsw.ClientStates.newcomer,
+        #~ newcomer=True,
         gender=Gender.female)
     yield tatjana
     
@@ -408,21 +438,29 @@ def objects():
             client = person2client(person,national_id=str(person.pk))
             count += 1
             if count % 3:
-                client.is_active = True
-                client.coached_from = settings.LINO.demo_date(-7 * count)
-                if count % 6:
-                    client.coached_until = settings.LINO.demo_date(-7 * count)
+                #~ client.is_active = True
+                client.client_state=pcsw.ClientStates.active
+                args = [client,AGENTS.pop()]
                 if count % 2:
-                    client.coach1 = AGENTS.pop()
+                    args.append(None)
                 else:
-                    client.coach2 = AGENTS.pop()
+                    args.append(AGENTS.pop())
+                args.append(settings.LINO.demo_date(-7 * count))
+                if count % 6:
+                    args.append(settings.LINO.demo_date(-7 * count))
+                yield coachings(*args)
                     
             elif count % 8:
-                client.newcomer = True
+                #~ client.newcomer = True
+                client.client_state=pcsw.ClientStates.newcomer
+            else:
+                client.client_state=pcsw.ClientStates.former
+                
             client.clean()
             client.save()
             
-    CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
+    #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
+    CLIENTS = Cycler(Client.objects.filter(client_state=pcsw.ClientStates.active))
     
     #~ oshz = Company.objects.get(name=u"ÖSHZ Eupen")
     
@@ -767,7 +805,8 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         if p.zip_code == '4700':
             p.languageknowledge_set.create(language_id='ger',native=True)
             p.is_cpas = True
-            p.is_active = True
+            #~ p.is_active = True
+            p.client_state = pcsw.ClientStates.active
             #~ p.native_language_id = 'ger'
             p.birth_country_id = 'BE'
             p.nationality_id = 'BE'
@@ -782,16 +821,19 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
       c.short_code = short_code
       c.save()
       
+    root = User.objects.get(username='root')
+      
     p = Client.objects.get(name=u"Ärgerlich Erna")
     p.birth_date = i2d(19800301)
-    #~ p.coached_from = i2d(20100301)
-    p.coached_from = settings.LINO.demo_date(-7*30)
-    p.coached_until = None
-    p.coach1 = User.objects.get(username='root')
-    p.coach2 = alicia # User.objects.get(username='alicia')
+    #~ p.coached_from = settings.LINO.demo_date(-7*30)
+    #~ p.coached_until = None
+    #~ p.coach1 = root
+    #~ p.coach2 = alicia # User.objects.get(username='alicia')
     p.gender = Gender.female 
     p.group = pg1
     p.save()
+    
+    yield coachings(p,root,alicia,settings.LINO.demo_date(-7*30))
     
     #~ task = Instantiator('cal.Task').build
     #~ yield task(user=root,start_date=i2d(20110717),
@@ -800,62 +842,63 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     
     p = Client.objects.get(name=u"Eierschal Emil")
     p.birth_date = i2d(19800501)
-    #~ p.coached_from = i2d(20100801)
-    p.coached_from = settings.LINO.demo_date(-2*30)
-    #~ p.coached_until = i2d(20101031)
-    p.coached_until = settings.LINO.demo_date(10*30)
-    p.coach1 = User.objects.get(username='root')
-    #~ p.coach2 = User.objects.get(username='user')
+    #~ p.coached_from = settings.LINO.demo_date(-2*30)
+    #~ p.coached_until = settings.LINO.demo_date(10*30)
+    #~ p.coach1 = User.objects.get(username='root')
     p.group = pg2
     p.gender = Gender.male
     p.national_id = 'INVALID-45'
     p.save()
+    
+    yield coachings(p,root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
 
     p = Client.objects.get(name=u"Bastiaensen Laurent")
     p.birth_date = i2d(19810601)
-    p.coached_from = None
-    #~ p.coached_until = i2d(20101031)
-    p.coached_until = settings.LINO.demo_date(-2*30)
-    #~ p.unavailable_until = i2d(20110712)
+    #~ p.coached_from = None
+    #~ p.coached_until = settings.LINO.demo_date(-2*30)
     p.unavailable_until = settings.LINO.demo_date(2*30)
-    p.coach1 = User.objects.get(username='root')
-    p.coach2 = alicia # User.objects.get(username='alicia')
+    #~ p.coach1 = User.objects.get(username='root')
+    #~ p.coach2 = alicia # User.objects.get(username='alicia')
     p.group = pg1
     p.gender = Gender.male
-    p.national_id = '931229 211-83'
+    p.national_id = '810601 211-83'
     p.save()
 
+    yield coachings(p,root,alicia,None,settings.LINO.demo_date(-2*30))
+    
     p = Client.objects.get(name=u"Chantraine Marc")
     p.birth_date = i2d(19500301)
-    p.coached_from = settings.LINO.demo_date(10)
-    p.coached_until = None
-    p.coach1 = User.objects.get(username='root')
-    #~ p.coach2 = User.objects.get(username='user')
+    #~ p.coached_from = settings.LINO.demo_date(10)
+    #~ p.coached_until = None
+    #~ p.coach1 = User.objects.get(username='root')
     p.group = pg2
     p.gender = Gender.male
     p.save()
 
+    yield coachings(p,root,None,settings.LINO.demo_date(10),None)
+    
     p = Client.objects.get(name=u"Charlier Ulrike")
     p.birth_date = i2d(19600401)
-    p.coached_from = settings.LINO.demo_date(-3*30)
-    p.coached_until = None
-    p.coach1 = alicia # User.objects.get(username='alicia')
-    #~ p.coach2 = User.objects.get(username='user')
+    #~ p.coached_from = settings.LINO.demo_date(-3*30)
+    #~ p.coached_until = None
+    #~ p.coach1 = alicia # User.objects.get(username='alicia')
     p.gender = Gender.female
     p.group = pg1
     p.save()
+    
+    yield coachings(p,alicia,None,settings.LINO.demo_date(-3*30),None)
 
 
     p = Client.objects.get(name=u"Collard Charlotte")
     p.birth_date = i2d(19800401)
-    p.coached_from = settings.LINO.demo_date(-6*30)
-    p.coached_until = None
-    p.coach1 = User.objects.get(username='root')
-    #~ p.coach2 = User.objects.get(username='user')
+    #~ p.coached_from = settings.LINO.demo_date(-6*30)
+    #~ p.coached_until = None
+    #~ p.coach1 = User.objects.get(username='root')
     p.gender = Gender.female
     p.group = standby
     p.save()
     
+    yield coachings(p,root,None,settings.LINO.demo_date(-6*30),None)
 
     #~ etype = Instantiator('cal.EventType','name').build
     #~ yield etype("interner Termin")
