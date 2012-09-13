@@ -103,11 +103,12 @@ Sales | Vente | Verkauf
 Administration & Finance | Administration & Finance | Verwaltung & Finanzwesen
 """
 
-def coachings(p,coach1,coach2,coached_from,coached_until=None):
+def coachings(p,type,coach1,coach2,coached_from,coached_until=None):
     if coach1:
         yield pcsw.Coaching(
             project=p,
-            type=pcsw.CoachingTypes.primary,
+            type=type,
+            primary=True,
             #~ state=pcsw.CoachingStates.active,
             user=coach1,
             start_date=coached_from,
@@ -115,7 +116,7 @@ def coachings(p,coach1,coach2,coached_from,coached_until=None):
     if coach2:
         yield pcsw.Coaching(
             project = p,
-            type=pcsw.CoachingTypes.secondary,
+            type=type,
             #~ state=pcsw.CoachingStates.active,
             user=coach2,
             start_date=coached_from,
@@ -427,9 +428,14 @@ def objects():
     charles = User(username="charles",partner=charles,profile='500') 
     yield charles
     
+    yield pcsw.CoachingType(name="DSBE")
+    yield pcsw.CoachingType(name="ASD")
+    yield pcsw.CoachingType(name="Schuldnerberatung")
+    
     
     #~ USERS = Cycler(root,melanie,hubert,alicia)
     AGENTS = Cycler(melanie,hubert,alicia)
+    COACHINGTYPES = Cycler(pcsw.CoachingType.objects.all())
     
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
@@ -440,7 +446,7 @@ def objects():
             if count % 3:
                 #~ client.is_active = True
                 client.client_state=pcsw.ClientStates.active
-                args = [client,AGENTS.pop()]
+                args = [client,COACHINGTYPES.pop(),AGENTS.pop()]
                 if count % 2:
                     args.append(None)
                 else:
@@ -833,7 +839,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.group = pg1
     p.save()
     
-    yield coachings(p,root,alicia,settings.LINO.demo_date(-7*30))
+    yield coachings(p,COACHINGTYPES.pop(),root,alicia,settings.LINO.demo_date(-7*30))
     
     #~ task = Instantiator('cal.Task').build
     #~ yield task(user=root,start_date=i2d(20110717),
@@ -850,7 +856,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.national_id = 'INVALID-45'
     p.save()
     
-    yield coachings(p,root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
+    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
 
     p = Client.objects.get(name=u"Bastiaensen Laurent")
     p.birth_date = i2d(19810601)
@@ -864,7 +870,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.national_id = '810601 211-83'
     p.save()
 
-    yield coachings(p,root,alicia,None,settings.LINO.demo_date(-2*30))
+    yield coachings(p,COACHINGTYPES.pop(),root,alicia,None,settings.LINO.demo_date(-2*30))
     
     p = Client.objects.get(name=u"Chantraine Marc")
     p.birth_date = i2d(19500301)
@@ -875,7 +881,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.gender = Gender.male
     p.save()
 
-    yield coachings(p,root,None,settings.LINO.demo_date(10),None)
+    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(10),None)
     
     p = Client.objects.get(name=u"Charlier Ulrike")
     p.birth_date = i2d(19600401)
@@ -886,7 +892,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.group = pg1
     p.save()
     
-    yield coachings(p,alicia,None,settings.LINO.demo_date(-3*30),None)
+    yield coachings(p,COACHINGTYPES.pop(),alicia,None,settings.LINO.demo_date(-3*30),None)
 
 
     p = Client.objects.get(name=u"Collard Charlotte")
@@ -898,7 +904,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     p.group = standby
     p.save()
     
-    yield coachings(p,root,None,settings.LINO.demo_date(-6*30),None)
+    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-6*30),None)
 
     #~ etype = Instantiator('cal.EventType','name').build
     #~ yield etype("interner Termin")
