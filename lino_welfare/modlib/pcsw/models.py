@@ -671,6 +671,11 @@ class Client(Person):
             _("coaching ends"),tab=1):
             yield o
         
+    @dd.displayfield(_("Actions"))
+    def read_beid_card(self,ar):
+        return '[<a href="javascript:Lino.read_beid_card(%r)">%s</a>]' % (
+          str(ar.requesting_panel),unicode(_("Read eID card")))
+      
     @dd.virtualfield(dd.HtmlBox())
     def image(self,request):
         url = self.get_image_url(request)
@@ -963,7 +968,7 @@ class ClientDetail(dd.FormLayout):
     """
     
     eid_panel = """
-    card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
+    read_beid_card:12 card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
     """
 
     box4 = """
@@ -1107,7 +1112,8 @@ class ClientDetail(dd.FormLayout):
         lh.card_issuer.label = _("issued by")
         lh.card_type.label = _("eID card type")
 
-
+if not settings.LINO.use_beid_jslib:
+    ClientDetail.eid_panel = ClientDetail.eid_panel.replace('read_beid_card:12 ')
             
 
 #~ class AllClients(contacts.Persons):

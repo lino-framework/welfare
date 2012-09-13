@@ -7,3 +7,8 @@ Der Endspurt vor dem Release der Version 0.1.0 hat begonnen.
   der auf primär (Begleiter 1) oder sekundär (Begleiter 2) steht.
   
 - Wie nennen wir die Tabelle mit den Krankenkassen, Kontaktpersonen ADG, Rechtsanwälten, Apotheken...? "Klientenkontakte" (ClientContacts) oder "Drittpersonen" (Thirds)?
+
+- Neuer Button "eId-Karte einlesen" auf einem Klienten.
+  Momentan zeigt er die eingelesenen Daten nur am Bildschirm an.  
+  Dank an Johan De Schutter und seine 
+  `eid-javascript-lib <http://code.google.com/p/eid-javascript-lib/>`_.
