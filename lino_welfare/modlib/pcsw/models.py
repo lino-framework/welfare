@@ -1148,13 +1148,29 @@ class Clients(AllClients):
     #~ app_label = 'contacts'
     #~ use_as_default_table = False 
     #~ known_values = dict(is_active=True,newcomer=False)
-    known_values = dict(client_state=ClientStates.active)
+    known_values = dict(is_deprecated=False)
+    #~ known_values = dict(client_state=ClientStates.active)
     #~ filter = dict(is_active=True,newcomer=False)
     #~ label = Person.Meta.verbose_name_plural + ' ' + _("(unfiltered)")
+    parameters = dict(
+      client_state=ClientStates.field(blank=True),
+      group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
+          verbose_name=_("Integration phase"))
+      )
+    params_layout = 'group client_state'
     
     @classmethod
     def get_actor_label(self):
         return self.model._meta.verbose_name_plural
+    
+    @classmethod
+    def get_request_queryset(self,ar):
+        qs = super(clients,self).get_request_queryset(ar)
+        if ar.param_values.group:
+            qs = qs.filter(group=ar.param_values.group)
+        if ar.param_values.client_state:
+            qs = qs.filter(client_state=ar.param_values.client_state)
+        return qs
 
 Client._lino_choices_table = Clients
 
