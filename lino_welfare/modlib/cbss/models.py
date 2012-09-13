@@ -1774,7 +1774,7 @@ def site_setup(self):
     
     Adds a new tab "CBSS" to the Detail of `pcsw.Clients`.
     """
-    self.modules.pcsw.AllClients.add_detail_tab('cbss',"""
+    self.modules.pcsw.Clients.add_detail_tab('cbss',"""
     cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
     cbss_summary
     """,MODULE_LABEL,required=dict(user_groups='cbss')
