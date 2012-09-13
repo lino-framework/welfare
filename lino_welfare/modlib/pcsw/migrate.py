@@ -1421,6 +1421,11 @@ def migrate_from_1_4_10(globals_dict):
         if national_id and national_id.strip() != '0':
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
+            client_state = pcsw.ClientStates.active
+            if newcomer:
+                client_state = pcsw.ClientStates.newcomer
+            elif not is_active:
+                client_state = pcsw.ClientStates.former
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
                 #~ birth_date=birth_date,
                 #~ first_name=first_name,last_name=last_name,title=title,gender=gender,
@@ -1434,6 +1439,7 @@ def migrate_from_1_4_10(globals_dict):
                 birth_place=birth_place,
                 birth_country_id=birth_country_id,civil_state=civil_state,
                 national_id=national_id,
+                client_state=client_state,
                 health_insurance_id=health_insurance_id,pharmacy_id=pharmacy_id,
                 nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,residence_type=residence_type,in_belgium_since=in_belgium_since,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_agents=job_agents,
                 job_office_contact_id=job_office_contact_id,broker_id=broker_id,faculty_id=faculty_id)

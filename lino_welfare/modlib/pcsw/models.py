@@ -2109,6 +2109,20 @@ def setup_my_menu(site,ui,user,m):
               #~ params=dict(master_instance=pg))
   
 
+MODULE_LABEL = _("PCSW")
+
+def setup_config_menu(site,ui,user,m): 
+    m  = m.add_menu("pcsw",MODULE_LABEL)
+    #~ config_pcsw     = cfg.add_menu("pcsw",_("SIS"))
+    #~ config_pcsw.add_action(self.modules.pcsw.PersonGroups)
+    #~ config_pcsw.add_action(self.modules.pcsw.Activities)
+    #~ config_pcsw.add_action(self.modules.pcsw.ExclusionTypes)
+    #~ config_pcsw.add_action(self.modules.pcsw.AidTypes)
+    m.add_action(PersonGroups)
+    m.add_action(Activities)
+    m.add_action(ExclusionTypes)
+    m.add_action(CoachingTypes)
+
 def site_setup(site):
     """
     This is the place where we can override or 

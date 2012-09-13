@@ -140,11 +140,6 @@ class Lino(Lino):
             
             self.on_each_app('setup_config_menu',ui,user,cfg)
             
-            config_pcsw     = cfg.add_menu("pcsw",_("SIS"))
-            config_pcsw.add_action(self.modules.pcsw.PersonGroups)
-            config_pcsw.add_action(self.modules.pcsw.Activities)
-            config_pcsw.add_action(self.modules.pcsw.ExclusionTypes)
-            config_pcsw.add_action(self.modules.pcsw.AidTypes)
             
             
         if user.profile.level >= UserLevels.manager: # is_staff:
