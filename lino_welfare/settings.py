@@ -146,7 +146,7 @@ class Lino(Lino):
           
             m = main.add_menu("explorer",_("Explorer"))
             
-            m.add_action(self.modules.pcsw.AllClients)
+            #~ m.add_action(self.modules.pcsw.AllClients)
             
             self.on_each_app('setup_explorer_menu',ui,user,m)
             

@@ -1111,89 +1111,38 @@ class ClientDetail(dd.FormLayout):
             
 
 #~ class AllClients(contacts.Persons):
-class AllClients(Partners):
-    """
-    List of all Persons.
-    """
-    #~ debug_actions = True
-    model = Client # settings.LINO.person_model
-    detail_layout = ClientDetail()
-    insert_layout = dd.FormLayout("""
-    title first_name last_name
-    gender language
-    """,window_size=(60,'auto'))
+#~ class AllClients(Partners):
+    #~ """
+    #~ List of all Persons.
+    #~ """
+    #~ model = Client # settings.LINO.person_model
+    #~ detail_layout = ClientDetail()
+    #~ insert_layout = dd.FormLayout("""
+    #~ title first_name last_name
+    #~ gender language
+    #~ """,window_size=(60,'auto'))
     
-    order_by = "last_name first_name id".split()
-    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    #~ order_by = "last_name first_name id".split()
+    #~ column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
     
-    #~ app_label = 'contacts'
-    
-    
-    @classmethod
-    def get_actor_label(self):
-        return string_concat(
-          self.model._meta.verbose_name_plural,' ',_("(all)"))
     
     #~ @classmethod
-    #~ def disabled_fields(self,request):
-        #~ if settings.TIM2LINO_IS_IMPORTED_PARTNER(self):
-            #~ # return settings.LINO.PERSON_TIM_FIELDS
-            #~ return self.__class__.PERSON_TIM_FIELDS
-        #~ return []
-        
-class Clients(AllClients):
-    """
-    All Persons except newcomers and inactive persons.
-    """
-    #~ app_label = 'contacts'
-    #~ use_as_default_table = False 
-    #~ known_values = dict(is_active=True,newcomer=False)
-    known_values = dict(is_deprecated=False)
-    #~ known_values = dict(client_state=ClientStates.active)
-    #~ filter = dict(is_active=True,newcomer=False)
-    #~ label = Person.Meta.verbose_name_plural + ' ' + _("(unfiltered)")
-    parameters = dict(
-      client_state=ClientStates.field(blank=True),
-      group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
-          verbose_name=_("Integration phase"))
-      )
-    params_layout = 'group client_state'
-    
-    @classmethod
-    def get_actor_label(self):
-        return self.model._meta.verbose_name_plural
-    
-    @classmethod
-    def get_request_queryset(self,ar):
-        qs = super(Clients,self).get_request_queryset(ar)
-        if ar.param_values.group:
-            qs = qs.filter(group=ar.param_values.group)
-        if ar.param_values.client_state:
-            qs = qs.filter(client_state=ar.param_values.client_state)
-        return qs
-
-Client._lino_choices_table = Clients
-
-    
-class ClientsByNationality(AllClients):
-    #~ app_label = 'contacts'
-    master_key = 'nationality'
-    order_by = "city name".split()
-    column_names = "city street street_no street_box addr2 name country language *"
+    #~ def get_actor_label(self):
+        #~ return string_concat(
+          #~ self.model._meta.verbose_name_plural,' ',_("(all)"))
     
 
 
-def only_coached_persons(qs,*args,**kw):
+def unused_only_coached_persons(qs,*args,**kw):
     return qs.filter(only_coached_persons_filter(*args,**kw))
     
 
-def only_coached_persons_filter(today,
+def unused_only_coached_persons_filter(today,
       d1field='coached_from',
       d2field='coached_until'):
     """
     coached_from and coached_until
     """
-    #~ period_until = period_until or period_from
     # Person with both fields empty is not considered coached:
     q1 = Q(**{d2field+'__isnull':False}) | Q(**{d1field+'__isnull':False})
     return Q(q1,range_filter(today,d1field,d2field))
@@ -1207,36 +1156,77 @@ def only_coached_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
             
+def only_coached_on(qs,today):
+    #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
+    return qs.filter(
+        pcsw_coaching_set_by_project__end_date__lte=today,
+        pcsw_coaching_set_by_project__start_date__gte=today) 
+            
     
 
-class ClientsByCoach1(Clients):
-    master_key = 'coach1'
-    label = _("Primary clients by coach")
+
+
+#~ class Clients(AllClients):
+class Clients(Partners):
+    """
+    All Persons except newcomers and inactive persons.
+    """
+    #~ app_label = 'contacts'
+    #~ use_as_default_table = False 
+    #~ known_values = dict(is_active=True,newcomer=False)
+    #~ known_values = dict(is_deprecated=False)
+    #~ known_values = dict(client_state=ClientStates.active)
+    #~ filter = dict(is_active=True,newcomer=False)
+    #~ label = Person.Meta.verbose_name_plural + ' ' + _("(unfiltered)")
+    
+    model = Client # settings.LINO.person_model
+    detail_layout = ClientDetail()
+    insert_layout = dd.FormLayout("""
+    title first_name last_name
+    gender language
+    """,window_size=(60,'auto'))
+    
+    order_by = "last_name first_name id".split()
+    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    
+    parameters = dict(
+      only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
+      show_deprecated = models.BooleanField(_("Show deprecated"),default=False),
+      client_state = ClientStates.field(blank=True),
+      group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
+          verbose_name=_("Integration phase"))
+      )
+    params_layout = 'group client_state'
+    
+    #~ @classmethod
+    #~ def get_actor_label(self):
+        #~ return self.model._meta.verbose_name_plural
     
     @classmethod
-    def get_title(self,rr):
-        return _("Primary clients of %s") % rr.master_instance
-        
-    @classmethod
-    def get_request_queryset(self,rr):
-        #~ rr.master_instance = rr.get_user()
-        qs = super(ClientsByCoach1,self).get_request_queryset(rr)
-        #~ only_coached_by(qs,rr.get_user())
-        qs = only_coached_persons(qs,datetime.date.today())
-        #~ qs = qs.filter()
-        #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
+    def get_request_queryset(self,ar):
+        qs = super(Clients,self).get_request_queryset(ar)
+        if not ar.param_values.show_deprecated:
+            qs = qs.filter(is_deprecated=False)
+        if ar.param_values.group:
+            qs = qs.filter(group=ar.param_values.group)
+        if ar.param_values.only_coached_on:
+            qs = only_coached_()
+        if ar.param_values.client_state:
+            qs = qs.filter(client_state=ar.param_values.client_state)
         return qs
 
-#~ class IntegTable(dd.Table):
-    #~ """
-    #~ Abstract base class for all tables that are visible only to 
-    #~ Integration Agents (users with a non-empty `integ_level`).
-    #~ """
-    #~ @classmethod
-    #~ def get_permission(self,action,user,obj):
-        #~ if not user.integ_level:
-            #~ return False
-        #~ return super(IntegTable,self).get_permission(action,user,obj)
+Client._lino_choices_table = Clients
+
+    
+class ClientsByNationality(Clients):
+    #~ app_label = 'contacts'
+    master_key = 'nationality'
+    order_by = "city name".split()
+    column_names = "city street street_no street_box addr2 name country language *"
+    
+
+
+
         
 class MyClients(Clients):
     u"""
@@ -1288,6 +1278,25 @@ class MyClients(Clients):
         #~ if c is not None:
             #~ return c.applies_until
 
+class MyPrimaryClients(MyClients):
+    #~ master_key = 'coach1'
+    label = _("Primary clients by coach")
+    
+    @classmethod
+    def get_title(self,rr):
+        return _("Primary clients of %s") % rr.master_instance
+        
+    @classmethod
+    def get_request_queryset(self,rr):
+        #~ rr.master_instance = rr.get_user()
+        qs = super(MyPrimaryClients,self).get_request_queryset(rr)
+        #~ only_coached_by(qs,rr.get_user())
+        #~ qs = only_coached_persons(qs,datetime.date.today())
+        qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
+        #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
+        return qs
+
+
 class MyClientsByGroup(MyClients):
     master_key = 'group'
     
@@ -1325,13 +1334,14 @@ class ClientsTest(Clients):
     label = _("Data Test Clients")
     parameters = dict(
       user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
-      today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
+      only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
+      #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
       invalid_niss = models.BooleanField(_("Check NISS validity"),default=True),
       overlapping_contracts = models.BooleanField(_("Check for overlapping contracts"),default=True),
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
     )
-    params_template = """overlapping_contracts invalid_niss user today"""
+    params_template = """overlapping_contracts invalid_niss user only_coached_on"""
     #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
     
@@ -1349,8 +1359,8 @@ class ClientsTest(Clients):
         if ar.param_values.user:
             qs = only_coached_by(qs,ar.param_values.user)
         
-        if ar.param_values.today:
-            qs = only_coached_persons(qs,ar.param_values.today)
+        #~ if ar.param_values.today:
+            #~ qs = only_coached_persons(qs,ar.param_values.today)
             
         logger.info("Building ClientsTest data rows...")
         #~ for p in qs.order_by('name'):
@@ -1454,7 +1464,7 @@ class UsersWithClients(dd.VirtualTable):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return ClientsByCoach1.request(ar.ui,master_instance=obj)
+        return MyPrimaryClients.request(ar.ui,master_instance=obj)
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
@@ -1695,7 +1705,7 @@ class UnwantedPropsBySearch(dd.Table):
     model = UnwantedSkill
 
 #~ class ClientsBySearch(dd.Table):
-class ClientsBySearch(AllClients):
+class ClientsBySearch(Clients):
     """
     This is the slave report of a PersonSearch that shows the 
     Persons matching the search criteria. 
