@@ -1164,8 +1164,8 @@ def only_coached_on(qs,today):
     """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(
-        pcsw_coaching_set_by_project__end_date__lte=today,
-        pcsw_coaching_set_by_project__start_date__gte=today) 
+        pcsw_coaching_set_by_project__end_date__gte=today,
+        pcsw_coaching_set_by_project__start_date__lte=today) 
             
     
 
@@ -1201,7 +1201,7 @@ class Clients(Partners):
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
           verbose_name=_("Integration phase"))
       )
-    params_layout = 'group client_state'
+    params_layout = 'group client_state only_coached_on show_deprecated'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1222,17 +1222,14 @@ class Clients(Partners):
 
 Client._lino_choices_table = Clients
 
-    
 class ClientsByNationality(Clients):
     #~ app_label = 'contacts'
     master_key = 'nationality'
     order_by = "city name".split()
     column_names = "city street street_no street_box addr2 name country language *"
-    
 
 
 
-        
 class MyClients(Clients):
     u"""
     Show only Clients attended 
@@ -1354,9 +1351,6 @@ class ClientsTest(Clients):
     @classmethod
     def get_data_rows(self,ar):
         """
-        We only want the users who actually have at least one client.
-        We store the corresponding request in the user object 
-        under the name `my_persons`.
         """
         from lino_welfare.modlib.isip.models import OverlappingContractsTest
         #~ qs = Person.objects.all()
@@ -1442,7 +1436,6 @@ class UsersWithClients(dd.VirtualTable):
         
         The list displays only integration agents, 
         i.e. users with a nonempty `integ_level`.
-        
         With one subtility: system admins also have a nonempty `integ_level`, 
         but normal users don't want to see them. 
         So we add the rule that only system admins see other system admins.
