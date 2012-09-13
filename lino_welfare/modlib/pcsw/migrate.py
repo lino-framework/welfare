@@ -1341,6 +1341,7 @@ def migrate_from_1_4_10(globals_dict):
     contacts_Partner = resolve_model("contacts.Partner")
     contacts_Company = resolve_model("contacts.Company")
     contacts_Person = resolve_model("contacts.Person")
+    households_Household = resolve_model("households.Household")
     pcsw_Client = resolve_model("pcsw.Client")
     pcsw_Coaching = resolve_model("pcsw.Coaching")
     pcsw_ProjectContact = resolve_model("pcsw.ProjectContact")
@@ -1395,10 +1396,18 @@ def migrate_from_1_4_10(globals_dict):
     
     def create_contacts_company(partner_ptr_id, prefix, vat_id, type_id, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, hourly_rate):
         return create_child(contacts_Partner,partner_ptr_id,contacts_Company,prefix=prefix,vat_id=vat_id,type_id=type_id,
-        #~ is_active=is_active,
-        #~ newcomer=newcomer,
-        is_deprecated=is_deprecated,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,hourly_rate=hourly_rate)
+            #~ is_active=is_active,
+            #~ newcomer=newcomer,
+            is_deprecated=is_deprecated,activity_id=activity_id,
+            bank_account1=bank_account1,bank_account2=bank_account2,
+            hourly_rate=hourly_rate)
     globals_dict.update(create_contacts_company=create_contacts_company)
+    
+    def create_households_household(partner_ptr_id, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, prefix, type_id):
+        return create_child(contacts_Partner,partner_ptr_id,households_Household,
+          #~ is_active=is_active,newcomer=newcomer,
+          is_deprecated=is_deprecated,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,prefix=prefix,type_id=type_id)    
+    globals_dict.update(create_households_household=create_households_household)
     
     def create_contacts_person(partner_ptr_id, birth_date, first_name, last_name, title, gender, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, remarks2, gesdos_id, is_cpas, is_senior, group_id, coached_from, coached_until, coach1_id, coach2_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, broker_id, faculty_id):
         yield create_child(contacts_Partner,partner_ptr_id,contacts_Person,
