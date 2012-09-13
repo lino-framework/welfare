@@ -1907,8 +1907,8 @@ class CoachingsByProject(Coachings):
     
 class MyCoachings(Coachings,mixins.ByUser):
     parameters = dict(
-        type=CoachingTypes.field(blank=True),
-        group=models.ForeignKey(PersonGroup,blank=True,null=True),
+        type=dd.ForeignKey(CoachingType,null=True,blank=True),
+        group=dd.ForeignKey(PersonGroup,blank=True,null=True),
         today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
         )
     params_template = "type group today"
