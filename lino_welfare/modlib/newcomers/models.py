@@ -176,7 +176,7 @@ class NewClients(pcsw.Clients):
         since = models.DateField(_("Since"),blank=True,default=amonthago),
         **pcsw.Clients.parameters
     )
-    params_template = "coached_by since " + pcsw.Clients.params_template
+    params_layout = "coached_by since " + pcsw.Clients.params_layout
     
     column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
     
