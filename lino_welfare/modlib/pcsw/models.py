@@ -1165,7 +1165,7 @@ class Clients(AllClients):
     
     @classmethod
     def get_request_queryset(self,ar):
-        qs = super(clients,self).get_request_queryset(ar)
+        qs = super(Clients,self).get_request_queryset(ar)
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.client_state:
