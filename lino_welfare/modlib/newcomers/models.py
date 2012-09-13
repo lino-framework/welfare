@@ -143,7 +143,7 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     pass
 
     
-class Newcomers(pcsw.AllClients):
+class Newcomers(pcsw.Clients):
     """
     Clients who have the "Newcomer" checkbox on.
     """
