@@ -314,7 +314,7 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
           language 
           phone fax email url
           bank_account1 bank_account2 activity 
-          #is_active is_deprecated 
+          is_deprecated 
           ''')
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
