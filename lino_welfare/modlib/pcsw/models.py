@@ -1338,7 +1338,7 @@ class ClientsTest(Clients):
     label = _("Data Test Clients")
     parameters = dict(
       user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
-      only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
+      #~ only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
       #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
       invalid_niss = models.BooleanField(_("Check NISS validity"),default=True),
       overlapping_contracts = models.BooleanField(_("Check for overlapping contracts"),default=True),
