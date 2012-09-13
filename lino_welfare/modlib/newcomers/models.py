@@ -165,7 +165,7 @@ class NewcomersByFaculty(Newcomers):
     master_key = 'faculty'
     column_names = "name_column broker address_column *"
         
-class NewClients(pcsw.AllClients):
+class NewClients(pcsw.Clients):
     required=dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
@@ -174,8 +174,9 @@ class NewClients(pcsw.AllClients):
     parameters = dict(
         coached_by = models.ForeignKey(users.User,verbose_name=_("Coached by"),blank=True),
         since = models.DateField(_("Since"),blank=True,default=amonthago),
+        **pcsw.Clients.parameters
     )
-    params_template = "coached_by since"
+    params_template = "coached_by since *"
     
     column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
     

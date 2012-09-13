@@ -1041,7 +1041,7 @@ MODULE_LABEL = _("Debts mediation")
 def site_setup(site):
     site.modules.contacts.Partners.add_detail_tab('debts.BudgetsByPartner')
     site.modules.contacts.Persons.add_detail_tab('debts.BudgetsByPartner')
-    site.modules.pcsw.AllClients.add_detail_tab('debts.BudgetsByPartner')
+    site.modules.pcsw.Clients.add_detail_tab('debts.BudgetsByPartner')
     site.modules.households.Households.add_detail_tab('debts.BudgetsByPartner')
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
