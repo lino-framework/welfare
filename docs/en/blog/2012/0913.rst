@@ -1,0 +1,6 @@
+20120913
+========
+
+Der Endspurt vor dem Release der Version 0.1.0 hat begonnen.
+Ein Coaching hat keinen Status, wohl aber einen Typ (`type`), 
+der auf primär (Begleiter 1) oder sekundär (Begleiter 2) steht.

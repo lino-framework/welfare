@@ -1379,7 +1379,8 @@ def migrate_from_1_4_10(globals_dict):
     pcsw_Coaching = resolve_model("pcsw.Coaching")
     pcsw_ProjectContact = resolve_model("pcsw.ProjectContact")
     from lino.utils.mti import create_child
-    from lino_welfare.modlib.pcsw.models import CoachingStates, ProjectContactTypes
+    from lino_welfare.modlib.pcsw.models import ProjectContactTypes
+    from lino_welfare.modlib.pcsw import models as pcsw
     def create_contacts_person(partner_ptr_id, birth_date, first_name, last_name, title, gender, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, remarks2, gesdos_id, is_cpas, is_senior, group_id, coached_from, coached_until, coach1_id, coach2_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, broker_id, faculty_id):
         yield create_child(contacts_Partner,partner_ptr_id,contacts_Person,
             birth_date=birth_date,
@@ -1414,14 +1415,14 @@ def migrate_from_1_4_10(globals_dict):
                     start_date=coached_from,
                     end_date=coached_until,
                     user_id=coach2_id,
-                    state=CoachingStates.secondary)
+                    state=pcsw.CoachingTypes.secondary)
             if coach1_id:
                 yield pcsw_Coaching(
                     project_id=partner_ptr_id,
                     start_date=coached_from,
                     end_date=coached_until,
                     user_id=coach1_id,
-                    state=CoachingStates.primary)
+                    state=pcsw.CoachingTypes.primary)
             if health_insurance_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,
