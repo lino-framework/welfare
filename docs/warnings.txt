@@ -1,0 +1,2 @@
+T:\hgwork\welfare\docs\fr\user\screenshots.rst:: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.3.png
+T:\hgwork\welfare\docs\fr\user\intro.rst:: WARNING: document isn't included in any toctree

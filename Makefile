@@ -20,6 +20,9 @@ help:
 	@echo "  tests  run Lino test suite"
   
 
+ss:
+	phantomjs --config=screenshots-config.json screenshots.js
+  
 mm:
 	pwd
 	for MOD in $(MODULES); do \

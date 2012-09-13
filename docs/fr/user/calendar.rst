@@ -9,6 +9,10 @@ Cycle de vie d'un rendez-vous
 Le panneau calendrier
 ---------------------
 
+.. image:: /gen/screenshots/cal.CalendarPanel.png
+  :scale: 40
+
+
 Agendas
 -------
 
@@ -31,3 +35,15 @@ de votre équipe).
 
 Procurations
 ------------
+
+
+.. image:: /gen/screenshots/cal.CalendarPanel-su.png
+  :scale: 40
+
+
+Détail d'un évènement
+---------------------
+
+.. image:: /gen/screenshots/cal.Event.detail.png
+  :scale: 40
+

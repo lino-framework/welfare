@@ -7,3 +7,4 @@ Benutzerhandbuch
 
    calendar
    courses
+   screenshots

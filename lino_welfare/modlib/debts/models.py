@@ -389,22 +389,6 @@ class BudgetDetail(dd.FormLayout):
     """
     Defines the Detail form of a :class:`Budget`.
     
-    The following four screenshots were obsolete 
-    already a few hours after their publication...
-    
-    .. image:: /screenshots/debts.Budget.Detail.1.jpg
-      :scale: 50
-      
-    .. image:: /screenshots/debts.Budget.Detail.2.jpg
-      :scale: 50
-
-    .. image:: /screenshots/debts.Budget.Detail.3.jpg
-      :scale: 50
-
-    .. image:: /screenshots/debts.Budget.Detail.4.jpg
-      :scale: 50
-
-    
     
     """
     main = "general entries1 entries2 summary_tab preview"

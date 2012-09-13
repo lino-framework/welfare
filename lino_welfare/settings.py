@@ -54,12 +54,6 @@ class Lino(Lino):
         from lino_welfare import __version__, __url__
         return ("Lino/Welfare",__version__,__url__)
         
-    #~ def using(self,*args,**kw):
-        #~ from lino_welfare import __version__, __url__
-        #~ yield ("Lino/Welfare",__version__,__url__)
-        #~ for u in super(Lino,self).using(*args,**kw):
-            #~ yield u
-        
         
     anonymous_user_profile = '400'
     
@@ -131,30 +125,11 @@ class Lino(Lino):
             m.add_action(self.modules.notes.MyNotes)
             
             self.on_each_app('setup_my_menu',ui,user,m)
-            #~ self.modules.isip.setup_my_menu(self,ui,user,m)
-            #~ self.modules.jobs.setup_my_menu(self,ui,user,m)
-            #~ self.modules.households.setup_my_menu(self,ui,user,m)
-            #~ self.modules.newcomers.setup_my_menu(self,ui,user,m)
-            #~ self.modules.debts.setup_my_menu(self,ui,user,m)
-            
-            #~ self.modules.cal.setup_my_menu(self,ui,user,m)
-            #~ self.modules.outbox.setup_my_menu(self,ui,user,m)
-            #~ m.add_action(self.modules.uploads.MyUploads)
             m.add_action(self.modules.lino.MyTextFieldTemplates)
 
-            #~ m.add_instance_action(user,label="My user preferences")
-        
-
-        #~ self.modules.newcomers.setup_main_menu(self,ui,user,m)
         
         self.on_each_app('setup_main_menu',ui,user,main)
-        #~ self.modules.newcomers.setup_main_menu(self,ui,user,main)
-        #~ self.modules.debts.setup_main_menu(self,ui,user,main)
-        #~ self.modules.courses.setup_main_menu(self,ui,user,main)
-        #~ self.modules.jobs.setup_main_menu(self,ui,user,main)
         
-        #~ sitemenu = system.add_site_menu(self)
-        #~ if False:
         m = main.add_menu("lst",_("Listings"))
         m.add_action(self.modules.jobs.JobsOverview)
         m.add_action(self.modules.pcsw.UsersWithClients)
