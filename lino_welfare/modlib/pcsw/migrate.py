@@ -1449,21 +1449,33 @@ def migrate_from_1_4_10(globals_dict):
                 if user_id in (200085,200093,200096,200099): return 1 # DSBE
                 return 2
             if coach2_id:
-                yield pcsw_Coaching(
+                ti = user2type(coach2_id)
+                kw = dict(
                     project_id=partner_ptr_id,
-                    start_date=coached_from,
-                    end_date=coached_until,
                     user_id=coach2_id,
-                    type_id=user2type(coach2_id))
+                    type_id=ti)
+                if ti == 1:
+                    kw.update(start_date=coached_from,end_date=coached_until)
+                yield pcsw_Coaching(**kw)
             if coach1_id:
-                yield pcsw_Coaching(
+              
+                ti = user2type(coach1_id)
+                kw = dict(
                     project_id=partner_ptr_id,
-                    start_date=coached_from,
-                    end_date=coached_until,
-                    primary=True,
                     user_id=coach1_id,
-                    #~ state=pcsw.CoachingTypes.primary,
-                    type_id=user2type(coach1_id))
+                    primary=True,
+                    type_id=ti)
+                if ti == 1:
+                    kw.update(start_date=coached_from,end_date=coached_until)
+                yield pcsw_Coaching(**kw)
+              
+                #~ yield pcsw_Coaching(
+                    #~ project_id=partner_ptr_id,
+                    #~ start_date=coached_from,
+                    #~ end_date=coached_until,
+                    #~ primary=True,
+                    #~ user_id=coach1_id,
+                    #~ type_id=user2type(coach1_id))
             if health_insurance_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,

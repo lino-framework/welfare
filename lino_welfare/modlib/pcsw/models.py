@@ -1210,7 +1210,7 @@ class Clients(Partners):
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.only_coached_on:
-            qs = only_coached_()
+            qs = only_coached_on(ar.param_values.only_coached_on)
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
         return qs
@@ -1257,7 +1257,7 @@ class MyClients(Clients):
     @classmethod
     def get_request_queryset(self,rr):
         qs = super(MyClients,self).get_request_queryset(rr)
-        qs = only_coached_persons(only_coached_by(qs,rr.get_user()),datetime.date.today())
+        qs = only_coached_on(only_coached_by(qs,rr.get_user()),datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
         #~ today = datetime.date.today()
@@ -1762,10 +1762,10 @@ class ClientsBySearch(Clients):
             qs = only_coached_by(qs,search.coached_by)
             
         if search.period_from:
-            qs = only_coached_persons(qs,search.period_from)
+            qs = only_coached_since(qs,search.period_from)
             
         if search.period_until:
-            qs = only_coached_persons(qs,search.period_until)
+            qs = only_coached_until(qs,search.period_until)
           
         required_id_sets = []
         
