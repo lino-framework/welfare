@@ -1336,6 +1336,30 @@ def migrate_from_1_4_10(globals_dict):
     """
     
     countries_City = resolve_model("countries.City")
+    debts_Account = resolve_model("accounts.Account")    
+    debts_AccountGroup = resolve_model("accounts.Group")
+    contacts_Partner = resolve_model("contacts.Partner")
+    contacts_Company = resolve_model("contacts.Company")
+    contacts_Person = resolve_model("contacts.Person")
+    pcsw_Client = resolve_model("pcsw.Client")
+    pcsw_Coaching = resolve_model("pcsw.Coaching")
+    pcsw_ProjectContact = resolve_model("pcsw.ProjectContact")
+    cal_Event = resolve_model("cal.Event")
+    cal_Task = resolve_model("cal.Task")
+    lino_HelpText = resolve_model("lino.HelpText")
+    outbox_Attachment = resolve_model("outbox.Attachment")
+    outbox_Mail = resolve_model("outbox.Mail")
+    postings_Posting = resolve_model("postings.Posting")
+    uploads_Upload = resolve_model("uploads.Upload")
+    pcsw_CoachingType = resolve_model("pcsw.CoachingType")
+    
+    NOW = datetime.datetime(2012,9,6,0,0)
+    
+    from lino.modlib.countries.models import CityTypes
+    from lino.utils.mti import create_child
+    #~ from lino_welfare.modlib.pcsw.models import ProjectContactTypes
+    from lino_welfare.modlib.pcsw import models as pcsw
+    
     def convert_region(region):
         region = region.strip()
         if not region: return None
@@ -1348,44 +1372,40 @@ def migrate_from_1_4_10(globals_dict):
             logger.info("Created region %s",o)
             return o
             
-    contacts_Partner = resolve_model("contacts.Partner")
-    NOW = datetime.datetime(2012,9,6,0,0)
     def create_contacts_partner(id, country_id, city_id, name, addr1, street_prefix, street, street_no, street_box, addr2, zip_code, region, language, email, url, phone, gsm, fax, remarks):
         region = convert_region(region)
         return contacts_Partner(id=id,country_id=country_id,city_id=city_id,name=name,addr1=addr1,street_prefix=street_prefix,street=street,street_no=street_no,street_box=street_box,addr2=addr2,zip_code=zip_code,region=region,language=language,email=email,url=url,phone=phone,gsm=gsm,fax=fax,remarks=remarks,modified=NOW,created=NOW)
     globals_dict.update(create_contacts_partner=create_contacts_partner)
     
-    from lino.modlib.countries.models import CityTypes
     def create_countries_city(id, name, country_id, zip_code, inscode):
         return countries_City(id=id,name=name,
             type=CityTypes.city,
             country_id=country_id,zip_code=zip_code,inscode=inscode)    
     globals_dict.update(create_countries_city=create_countries_city)
     
-    debts_Account = resolve_model("accounts.Account")    
     def create_debts_account(id, name, seqno, group_id, type, required_for_household, required_for_person, periods, help_text, name_fr, name_en):
         if periods is not None: periods = Decimal(periods)
         return debts_Account(id=id,name=name,seqno=seqno,group_id=group_id,type=type,required_for_household=required_for_household,required_for_person=required_for_person,periods=periods,help_text=help_text,name_fr=name_fr,name_en=name_en)
     globals_dict.update(create_debts_account=create_debts_account)
     
-    debts_AccountGroup = resolve_model("accounts.Group")
     def create_debts_accountgroup(id, name, seqno, account_type, help_text, name_fr, name_en):
         #~ return debts_AccountGroup(id=id,chart_id=1,name=name,seqno=seqno,account_type=account_type,help_text=help_text,name_fr=name_fr,name_en=name_en)    
         return debts_AccountGroup(id=id,chart_id=1,name=name,ref=str(seqno),account_type=account_type,help_text=help_text,name_fr=name_fr,name_en=name_en)    
     globals_dict.update(create_debts_accountgroup=create_debts_accountgroup)
     
-    contacts_Person = resolve_model("contacts.Person")
-    pcsw_Client = resolve_model("pcsw.Client")
-    pcsw_Coaching = resolve_model("pcsw.Coaching")
-    pcsw_ProjectContact = resolve_model("pcsw.ProjectContact")
-    from lino.utils.mti import create_child
-    from lino_welfare.modlib.pcsw.models import ProjectContactTypes
-    from lino_welfare.modlib.pcsw import models as pcsw
+    def create_contacts_company(partner_ptr_id, prefix, vat_id, type_id, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, hourly_rate):
+        return create_child(contacts_Partner,partner_ptr_id,contacts_Company,prefix=prefix,vat_id=vat_id,type_id=type_id,
+        #~ is_active=is_active,
+        #~ newcomer=newcomer,
+        is_deprecated=is_deprecated,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,hourly_rate=hourly_rate)
+    globals_dict.update(create_contacts_company=create_contacts_company)
+    
     def create_contacts_person(partner_ptr_id, birth_date, first_name, last_name, title, gender, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, remarks2, gesdos_id, is_cpas, is_senior, group_id, coached_from, coached_until, coach1_id, coach2_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, broker_id, faculty_id):
         yield create_child(contacts_Partner,partner_ptr_id,contacts_Person,
             birth_date=birth_date,
             first_name=first_name,last_name=last_name,title=title,gender=gender,
-            is_active=is_active,newcomer=newcomer,is_deprecated=is_deprecated,
+            #~ is_active=is_active,newcomer=newcomer,
+            is_deprecated=is_deprecated,
             activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2)
         #~ if national_id and national_id.strip() != '0' and not is_deprecated:
@@ -1432,17 +1452,17 @@ def migrate_from_1_4_10(globals_dict):
             if health_insurance_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,
-                    type=ProjectContactTypes.health_insurance,
+                    type=pcsw.ProjectContactTypes.health_insurance,
                     company_id=health_insurance_id)
             if pharmacy_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,
-                    type=ProjectContactTypes.pharmacy,
+                    type=pcsw.ProjectContactTypes.pharmacy,
                     company_id=pharmacy_id)
             if job_office_contact_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,
-                    type=ProjectContactTypes.job_office,
+                    type=pcsw.ProjectContactTypes.job_office,
                     company_id=settings.LINO.site_config.job_office.id,
                     contact_id=job_office_contact_id)
         else:
@@ -1495,14 +1515,6 @@ def migrate_from_1_4_10(globals_dict):
             #~ logger.warning("Ignored GFK to unknown model %s",m)
             #~ return None
         return ct.pk
-    cal_Event = resolve_model("cal.Event")
-    cal_Task = resolve_model("cal.Task")
-    lino_HelpText = resolve_model("lino.HelpText")
-    outbox_Attachment = resolve_model("outbox.Attachment")
-    outbox_Mail = resolve_model("outbox.Mail")
-    postings_Posting = resolve_model("postings.Posting")
-    uploads_Upload = resolve_model("uploads.Upload")
-    pcsw_CoachingType = resolve_model("pcsw.CoachingType")
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)

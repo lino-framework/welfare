@@ -267,9 +267,9 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
         #~ abstract = True
         app_label = 'contacts'
   
-    is_active = models.BooleanField(
-        verbose_name=_("is active"),default=True,
-        help_text = "Only active Persons may be used when creating new operations.")
+    #~ is_active = models.BooleanField(
+        #~ verbose_name=_("is active"),default=True,
+        #~ help_text = "Only active Persons may be used when creating new operations.")
     
     #~ newcomer = models.BooleanField(
         #~ verbose_name=_("newcomer"),default=False)
@@ -314,7 +314,7 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
           language 
           phone fax email url
           bank_account1 bank_account2 activity 
-          is_active is_deprecated 
+          #is_active is_deprecated 
           ''')
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
@@ -372,7 +372,7 @@ class ClientStates(ChoiceList):
     label = _("Client state")
 add = ClientStates.add_item
 add('10', _("Newcomer"),'newcomer')       # "N" in PAR->Attrib
-add('20', _("Active"),'active')           # neither newcomer nor former
+add('20', _("Active"),'active')           # neither newcomer nor former, IdPrt != "I"
 add('30', _("Official"),'official')       # the client is "integrated"
 add('40', _("Former"),'former')           # IdPrt == "I"
 add('50', _("Invalid"),'invalid')         # duplicate or doesn't correspond to a real person
