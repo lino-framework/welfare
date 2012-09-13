@@ -1262,7 +1262,8 @@ class MyClients(Clients):
     @classmethod
     def get_request_queryset(self,rr):
         qs = super(MyClients,self).get_request_queryset(rr)
-        qs = only_coached_on(qs,only_coached_by(qs,rr.get_user()),datetime.date.today())
+        qs = only_coached_by(qs,rr.get_user())
+        qs = only_coached_on(qs,datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
         #~ today = datetime.date.today()
