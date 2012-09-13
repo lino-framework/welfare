@@ -8,3 +8,4 @@ Benutzerhandbuch
    calendar
    courses
    screenshots
+   tim2lino

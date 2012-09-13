@@ -7,4 +7,3 @@ Site Administrator's manual
 
    install
    testlauf
-   tim2lino

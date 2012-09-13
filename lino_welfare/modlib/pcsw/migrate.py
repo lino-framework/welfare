@@ -1409,20 +1409,26 @@ def migrate_from_1_4_10(globals_dict):
                 nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,residence_type=residence_type,in_belgium_since=in_belgium_since,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_agents=job_agents,
                 job_office_contact_id=job_office_contact_id,broker_id=broker_id,faculty_id=faculty_id)
             #~ if coached_from or coached_until:
+            def user2type(user_id):
+                #~ pcsw_CoachingType
+                if user_id in (200085,200093,200096,200099): return 1 # DSBE
+                return 2
             if coach2_id:
                 yield pcsw_Coaching(
                     project_id=partner_ptr_id,
                     start_date=coached_from,
                     end_date=coached_until,
                     user_id=coach2_id,
-                    state=pcsw.CoachingTypes.secondary)
+                    type_id=user2type(coach2_id))
             if coach1_id:
                 yield pcsw_Coaching(
                     project_id=partner_ptr_id,
                     start_date=coached_from,
                     end_date=coached_until,
+                    primary=True,
                     user_id=coach1_id,
-                    state=pcsw.CoachingTypes.primary)
+                    #~ state=pcsw.CoachingTypes.primary,
+                    type_id=user2type(coach1_id))
             if health_insurance_id:
                 yield pcsw_ProjectContact(
                     project_id=partner_ptr_id,
@@ -1496,6 +1502,7 @@ def migrate_from_1_4_10(globals_dict):
     outbox_Mail = resolve_model("outbox.Mail")
     postings_Posting = resolve_model("postings.Posting")
     uploads_Upload = resolve_model("uploads.Upload")
+    pcsw_CoachingType = resolve_model("pcsw.CoachingType")
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)
@@ -1530,6 +1537,9 @@ def migrate_from_1_4_10(globals_dict):
     objects = globals_dict['objects']
     def new_objects():
         yield accounts_Chart(name="debts Default")
+        yield pcsw_CoachingType(name="DSBE")
+        yield pcsw_CoachingType(name="ASD")
+        yield pcsw_CoachingType(name="Schuldnerberatung")
         yield objects()
     globals_dict.update(objects=new_objects)
     

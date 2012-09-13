@@ -267,9 +267,9 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
         #~ abstract = True
         app_label = 'contacts'
   
-    #~ is_active = models.BooleanField(
-        #~ verbose_name=_("is active"),default=True,
-        #~ help_text = "Only active Persons may be used when creating new operations.")
+    is_active = models.BooleanField(
+        verbose_name=_("is active"),default=True,
+        help_text = "Only active Persons may be used when creating new operations.")
     
     #~ newcomer = models.BooleanField(
         #~ verbose_name=_("newcomer"),default=False)
@@ -314,7 +314,7 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
           language 
           phone fax email url
           bank_account1 bank_account2 activity 
-          is_deprecated 
+          is_active is_deprecated 
           ''')
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
@@ -1562,12 +1562,6 @@ class AidType(babel.BabelNamed):
     class Meta:
         verbose_name = _("aid type")
         verbose_name_plural = _('aid types')
-        
-    #~ name = babel.BabelCharField(_("designation"),max_length=200)
-    
-    #~ def __unicode__(self):
-        #~ return unicode(babel.babelattr(self,'name'))
-#~ add_babel_field(AidType,'name')
 
 class AidTypes(dd.Table):
     model = AidType
@@ -1850,11 +1844,34 @@ class ContactsByProject(ProjectContacts):
 #~ add('30', _("Standby"),'standby')
 #~ add('40', _("Closed"),'closed')
 
-class CoachingTypes(ChoiceList):
-    label = _("Coaching type")
-add = CoachingTypes.add_item
-add('10', _("Primary coach"),'primary')
-add('20', _("Secondary coach"),'secondary')
+class CoachingType(babel.BabelNamed):
+    class Meta:
+        verbose_name = _("Coaching type")
+        verbose_name_plural = _('Coaching types')
+
+class CoachingTypes(dd.Table):
+    model = CoachingType
+    column_names = 'name *'
+    #~ required_user_level = UserLevels.manager
+    required = dict(user_level='manager')
+
+#~ _("Integration"),'integ')     # DSBE
+#~ _("General"),'general')       # ASD
+#~ _("Debt mediation"),'debts')  # Schuldnerberatung
+#~ _("Accounting"),'accounting') # Buchhaltung
+#~ _("Human resources"),'human') # Personaldienst
+#~ _("Human resources"),'human') # Altenheim
+#~ _("Human resources"),'human') # Mosaik
+#~ _("Human resources"),'human') # Sekretariat
+#~ _("Human resources"),'human') # Häusliche Hilfe
+#~ _("Human resources"),'human') # Energiedienst
+
+#~ class CoachingTypes(ChoiceList):
+    #~ label = _("Coaching type")
+#~ add = CoachingTypes.add_item
+#~ add('10', _("Primary coach"),'primary')
+#~ add('20', _("Secondary coach"),'secondary')
+
 
 
 class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
@@ -1875,7 +1892,9 @@ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
         blank=True,null=True,
         verbose_name=_("until"))
     #~ state = CoachingStates.field(default=CoachingStates.new)
-    type = CoachingTypes.field()
+    #~ type = CoachingTypes.field()
+    type = dd.ForeignKey(CoachingType)
+    primary = models.BooleanField(_("Primary"))
     
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
