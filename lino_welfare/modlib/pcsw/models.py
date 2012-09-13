@@ -1157,6 +1157,11 @@ def only_coached_since(qs,since):
     return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
             
 def only_coached_on(qs,today):
+    """
+    Add a filter to the Queryset `qs` (on model Client) 
+    which leaves only the clients that are (were) coached 
+    on the specified date.
+    """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(
         pcsw_coaching_set_by_project__end_date__lte=today,
@@ -1210,7 +1215,7 @@ class Clients(Partners):
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.only_coached_on:
-            qs = only_coached_on(ar.param_values.only_coached_on)
+            qs = only_coached_on(qs,ar.param_values.only_coached_on)
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
         return qs
@@ -1257,7 +1262,7 @@ class MyClients(Clients):
     @classmethod
     def get_request_queryset(self,rr):
         qs = super(MyClients,self).get_request_queryset(rr)
-        qs = only_coached_on(only_coached_by(qs,rr.get_user()),datetime.date.today())
+        qs = only_coached_on(qs,only_coached_by(qs,rr.get_user()),datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
         #~ today = datetime.date.today()
