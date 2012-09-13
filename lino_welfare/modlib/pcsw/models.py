@@ -1333,6 +1333,7 @@ class ClientsTest(Clients):
     Table of Clients whose data seems unlogical or inconsistent.
     """
     required = dict(user_level='manager')
+    use_as_default_table = False
     #~ required_user_level = UserLevels.manager
     label = _("Data Test Clients")
     parameters = dict(
@@ -1341,6 +1342,7 @@ class ClientsTest(Clients):
       #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
       invalid_niss = models.BooleanField(_("Check NISS validity"),default=True),
       overlapping_contracts = models.BooleanField(_("Check for overlapping contracts"),default=True),
+      **Clients.parameters
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
     )
