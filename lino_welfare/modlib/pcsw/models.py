@@ -941,9 +941,9 @@ class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
-    main = "tab1 tab2 coaching tab3 tab4 tab5 tab5b history contracts calendar misc "
+    main = "general tab2 coaching tab3 tab4 tab5 tab5b history contracts calendar misc "
     
-    tab1 = """
+    general = """
     box1 box2
     box4 image:15 #overview 
     """
@@ -978,8 +978,8 @@ class ClientDetail(dd.FormLayout):
 
 
     status = """
-    in_belgium_since:15 residence_type gesdos_id group:16 
-    bank_account1:12 bank_account2:12 client_state
+    in_belgium_since:15 residence_type gesdos_id 
+    bank_account1:12 bank_account2:12 
     """
     
       
@@ -999,8 +999,9 @@ class ClientDetail(dd.FormLayout):
     
     coaching = dd.Panel("""
     broker:12 faculty:12
-    coach1:12 coach2:12 coached_from:12 coached_until:12 
-    health_insurance pharmacy job_office_contact 
+    group:16 client_state
+    # coach1:12 coach2:12 coached_from:12 coached_until:12 
+    # health_insurance pharmacy job_office_contact 
     job_agents
     ContactsByProject:40 CoachingsByProject:40
     """,label=_("Coaching"))
@@ -1077,7 +1078,7 @@ class ClientDetail(dd.FormLayout):
     
     def setup_handle(self,lh):
       
-        lh.tab1.label = _("Person")
+        lh.general.label = _("Person")
         lh.tab2.label = _("Status")
         lh.tab3.label = _("Education")
         lh.tab4.label = _("Languages")
@@ -1156,7 +1157,7 @@ def unused_only_coached_persons_filter(today,
   
 def only_coached_by(qs,user):
     #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
-    return qs.filter(pcsw_coaching_set_by_project__user=user)
+    return qs.filter(pcsw_coaching_set_by_project__user=user).distinct()
     
 def only_coached_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
@@ -1173,7 +1174,7 @@ def only_coached_on(qs,today):
         Q(pcsw_coaching_set_by_project__end_date__isnull=True)
           |Q(pcsw_coaching_set_by_project__end_date__gte=today),
         Q(pcsw_coaching_set_by_project__start_date__isnull=True)
-          |Q(pcsw_coaching_set_by_project__start_date__lte=today))
+          |Q(pcsw_coaching_set_by_project__start_date__lte=today)).distinct()
             
     
 
@@ -1200,7 +1201,7 @@ class Clients(Partners):
     """,window_size=(60,'auto'))
     
     order_by = "last_name first_name id".split()
-    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
     
     parameters = dict(
       only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
@@ -1259,7 +1260,7 @@ class MyClients(Clients):
     label = _("My clients")
     #~ order_by = ['last_name','first_name']
     #~ column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
-    column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    column_names = "name_column:20 client_state applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
     
     @classmethod
     def get_title(self,rr):
@@ -1293,7 +1294,15 @@ class MyClients(Clients):
         #~ if c is not None:
             #~ return c.applies_until
 
-class MyPrimaryClients(MyClients):
+class MyClientsByGroup(MyClients):
+    master_key = 'group'
+    
+    @classmethod
+    def get_title(self,rr):
+        return _("%(phase)s clients of %(user)s") % dict(
+          phase=rr.master_instance, user=rr.get_user())
+    
+class MyPrimaryClients(MyClients): # "Komplette Akten"
     #~ master_key = 'coach1'
     label = _("Primary clients by coach")
     
@@ -1307,19 +1316,11 @@ class MyPrimaryClients(MyClients):
         qs = super(MyPrimaryClients,self).get_request_queryset(rr)
         #~ only_coached_by(qs,rr.get_user())
         #~ qs = only_coached_persons(qs,datetime.date.today())
-        qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
+        qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
 
-class MyClientsByGroup(MyClients):
-    master_key = 'group'
-    
-    @classmethod
-    def get_title(self,rr):
-        return _("%(phase)s clients of %(user)s") % dict(
-          phase=rr.master_instance, user=rr.get_user())
-    
 class MyActiveClients(MyClients):
   
     @classmethod
@@ -2165,6 +2166,12 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(Activities)
     m.add_action(ExclusionTypes)
     m.add_action(CoachingTypes)
+    
+def setup_explorer_menu(site,ui,user,m):
+    m  = m.add_menu("pcsw",MODULE_LABEL)
+    m.add_action(Exclusions)
+    m.add_action(PersonSearches)
+    
 
 def site_setup(site):
     """

@@ -161,12 +161,18 @@ class LanguageKnowledge(dd.Model):
             return unicode(self.language)
       
     
-class LanguageKnowledgesByPerson(dd.Table):
+class LanguageKnowledges(dd.Table):
     model = LanguageKnowledge
+
+class LanguageKnowledgesByPerson(LanguageKnowledges):
     master_key = 'person'
     #~ label = _("Language knowledge")
     #~ button_label = _("Languages")
     column_names = "language native spoken written cef_level"
+    
+class KnowledgesByLanguage(LanguageKnowledges):
+    master_key = 'language'
+    column_names = "person native spoken written cef_level"
 
 # 
 # PROPERTIES
@@ -252,45 +258,51 @@ class ObstaclesByPerson(ConfiguredPropsByPerson):
     
     
 
+def site_setup(site):
+    site.modules.countries.Languages.set_detail_layout("""
+    id iso2 name
+    cv.KnowledgesByLanguage
+    """)
 
 
 
-"""
-Here we add some specific fields to the 
-standard model SiteConfig.
-http://osdir.com/ml/django-users/2009-11/msg00696.html
-"""
-
-from lino.models import SiteConfig
-    
-dd.inject_field(SiteConfig,
-    'propgroup_skills',
-    models.ForeignKey('properties.PropGroup',
-        blank=True,null=True,
-        verbose_name=_("Skills Property Group"),
-        related_name='skills_sites'),
-    """The property group to be used as master 
-    for the SkillsByPerson report.""")
-dd.inject_field(SiteConfig,
-    'propgroup_softskills',
-    models.ForeignKey('properties.PropGroup',
-        blank=True,null=True,
-        verbose_name=_("Soft Skills Property Group"),
-        related_name='softskills_sites',
-        ),
-    """The property group to be used as master 
-    for the SoftSkillsByPerson report."""
-    )
-dd.inject_field(SiteConfig,
-    'propgroup_obstacles',
-    models.ForeignKey('properties.PropGroup',
-        blank=True,null=True,
-        verbose_name=_("Obstacles Property Group"),
-        related_name='obstacles_sites',
-        ),
-    """The property group to be used as master 
-    for the ObstaclesByPerson report."""
-    )
+def customize_siteconfig():
 
 
+    from lino.models import SiteConfig
+        
+    dd.inject_field(SiteConfig,
+        'propgroup_skills',
+        models.ForeignKey('properties.PropGroup',
+            blank=True,null=True,
+            verbose_name=_("Skills Property Group"),
+            related_name='skills_sites'),
+        """The property group to be used as master 
+        for the SkillsByPerson report.""")
+    dd.inject_field(SiteConfig,
+        'propgroup_softskills',
+        models.ForeignKey('properties.PropGroup',
+            blank=True,null=True,
+            verbose_name=_("Soft Skills Property Group"),
+            related_name='softskills_sites',
+            ),
+        """The property group to be used as master 
+        for the SoftSkillsByPerson report."""
+        )
+    dd.inject_field(SiteConfig,
+        'propgroup_obstacles',
+        models.ForeignKey('properties.PropGroup',
+            blank=True,null=True,
+            verbose_name=_("Obstacles Property Group"),
+            related_name='obstacles_sites',
+            ),
+        """The property group to be used as master 
+        for the ObstaclesByPerson report."""
+        )
 
+
+customize_siteconfig()
+
+def setup_explorer_menu(site,ui,user,m):
+    m = m.add_menu("cv",_("CV"))
+    m.add_action(LanguageKnowledges)

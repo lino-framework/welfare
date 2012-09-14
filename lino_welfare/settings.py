@@ -112,8 +112,9 @@ class Lino(Lino):
         if user.profile.integ_level:
             m.add_action(self.modules.pcsw.MyPersonSearches)
             
-        self.modules.isip.setup_master_menu(self,ui,user,m)
-        self.modules.households.setup_master_menu(self,ui,user,m)
+        #~ self.modules.isip.setup_master_menu(self,ui,user,m)
+        #~ self.modules.households.setup_master_menu(self,ui,user,m)
+        self.on_each_app('setup_master_menu',ui,user,m)
         
 
         #~ if user is None:
@@ -151,8 +152,7 @@ class Lino(Lino):
             self.on_each_app('setup_explorer_menu',ui,user,m)
             
             #~ m.add_action(self.modules.uploads.Uploads)
-            m.add_action(self.modules.pcsw.Exclusions)
-            m.add_action(self.modules.pcsw.PersonSearches)
+            #~ m.add_action(self.modules.cv.LanguageKnowledges)
             #~ m.add_action(self.modules.lino.ContentTypes)
             m.add_action(self.modules.properties.Properties)
             #~ m.add_action(self.modules.thirds.Thirds)

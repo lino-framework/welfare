@@ -40,7 +40,9 @@ from lino import dd
 from lino.utils.choicelists import Gender
 from lino_welfare.modlib.jobs import models as jobs
 from lino.modlib.contacts import models as contacts
+from lino.modlib.countries import models as countries
 from lino_welfare.modlib.pcsw import models as pcsw
+from lino_welfare.modlib.isip import models as isip
 
 #~ dblogger.info('Loading')
 
@@ -52,9 +54,36 @@ from lino_welfare.modlib.pcsw import models as pcsw
   #~ dict(name="Python website",url="http://www.python.org"),
   #~ dict(name="Google",url="http://www.google.com"),
 #~ ]
-ROW_COUNTER = 0
-MAX_LINKS_PER_OWNER = 4
-DATE = settings.LINO.demo_date() # i2d(20061014)
+
+
+#~ def coaching_stories(state):
+COACHING_STORIES = dict()
+COACHING_STORIES[pcsw.ClientStates.former] =  Cycler(
+    [ 
+        (-1000,-500,True) 
+    ],[ 
+        (None,-60,True) 
+    ],[ 
+        (-900,-430,False),
+        (-430,-200,True),
+    ])
+COACHING_STORIES[pcsw.ClientStates.active] = Cycler(
+    [ 
+        (-800,-440,False),
+        (-440,-210,False),
+        (-210,None,True),
+    ],[ 
+        (-220,None,True),
+    ],[
+        (-810,None,True),
+        (-440,-230,False),
+        (-230,None,False),
+    ])
+    
+#~ COACHING_STORIES = Cycler(coaching_stories())
+
+        
+
     
 
 
@@ -103,7 +132,9 @@ Sales | Vente | Verkauf
 Administration & Finance | Administration & Finance | Verwaltung & Finanzwesen
 """
 
-def coachings(p,type,coach1,coach2,coached_from,coached_until=None):
+
+
+def unused_coachings(p,type,coach1,coach2,coached_from,coached_until=None):
     if coach1:
         yield pcsw.Coaching(
             project=p,
@@ -126,7 +157,7 @@ def coachings(p,type,coach1,coach2,coached_from,coached_until=None):
 
 def objects():
   
-    sector = Instantiator('jobs.Sector').build
+    sector = Instantiator(jobs.Sector).build
     for ln in SECTORS_LIST.splitlines():
         if ln:
             a = ln.split('|')
@@ -135,7 +166,7 @@ def objects():
                 yield sector(**babel_values('name',**kw))
                 
     horeca = jobs.Sector.objects.get(pk=5)
-    function = Instantiator('jobs.Function',sector=horeca).build
+    function = Instantiator(jobs.Function,sector=horeca).build
     yield function(**babel_values('name',
           de=u"Kellner",
           fr=u'Serveur',
@@ -157,7 +188,7 @@ def objects():
           en=u'Dishwasher',
           ))
 
-    contractType = Instantiator('jobs.ContractType',"ref",
+    contractType = Instantiator(jobs.ContractType,"ref",
         exam_policy=3,
         build_method='appypdf',
         template=u'art60-7.odt').build
@@ -198,7 +229,7 @@ def objects():
           en=u'town',
           ))
     
-    contractType = Instantiator('isip.ContractType',"ref",
+    contractType = Instantiator(isip.ContractType,"ref",
       exam_policy=1,
       build_method='appypdf',template=u'vse.odt').build
     yield contractType("vsea",**babel_values('name',
@@ -239,11 +270,11 @@ def objects():
     RoleType = resolve_model('contacts.RoleType')
     #~ Link = resolve_model('links.Link')
     #~ Contract = resolve_model('jobs.Contract')
-    JobProvider = resolve_model('jobs.JobProvider')
-    Function = resolve_model('jobs.Function')
-    Sector = resolve_model('jobs.Sector')
+    #~ JobProvider = resolve_model('jobs.JobProvider')
+    #~ Function = resolve_model('jobs.Function')
+    #~ Sector = resolve_model('jobs.Sector')
     User = resolve_model('users.User')
-    Country = resolve_model('countries.Country')
+    #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
     
     rt = RoleType.objects.get(pk=4) # It manager
@@ -259,10 +290,10 @@ def objects():
     #~ exam_policy = Instantiator('isip.ExamPolicy').build
 
     City = resolve_model('countries.City')
-    Job = resolve_model('jobs.Job')
+    #~ Job = resolve_model('jobs.Job')
     #~ City = settings.LINO.modules.countries.City
     StudyType = resolve_model('jobs.StudyType')
-    Country = resolve_model('countries.Country')
+    #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
   
     
@@ -272,8 +303,8 @@ def objects():
     eupen = City.objects.get(name__exact='Eupen')
     kettenis = City.objects.get(name__exact='Kettenis')
     vigala = City.objects.get(name__exact='Vigala')
-    ee = Country.objects.get(pk='EE')
-    be = Country.objects.get(isocode__exact='BE')
+    ee = countries.Country.objects.get(pk='EE')
+    be = belgium = countries.Country.objects.get(isocode__exact='BE')
     #~ luc = person(first_name="Luc",last_name="Saffre",city=vigala,country='EE',card_number='122')
     #~ yield luc
     andreas = Person.objects.get(name__exact="Arens Andreas")
@@ -325,29 +356,27 @@ def objects():
     luc.full_clean()
     luc.save()
     
-    ly = client(first_name="Ly",last_name="Rumma",
+    ly = person(first_name="Ly",last_name="Rumma",
       city=vigala,country='EE',
-      card_number='123',birth_country=ee,birth_date='0000-04-27',
-      national_id='1234',
-      client_state=pcsw.ClientStates.newcomer,
-      #~ birth_date=i2d(19680101),birth_date_circa=True,
-      #~ newcomer=True,
+      #~ card_number='123',birth_country=ee,birth_date='0000-04-27',
+      #~ national_id='1234',
+      #~ client_state=pcsw.ClientStates.newcomer,
       gender=Gender.female)
     yield ly
-    mari = client(first_name="Mari",last_name="Saffre",
-      city=vigala,country='EE',card_number='124',birth_country=ee,
-      birth_date=i2d(20020405),
-      national_id='1235',
-      client_state=pcsw.ClientStates.newcomer,
-      #~ newcomer=True,
+    mari = person(first_name="Mari",last_name="Saffre",
+      city=vigala,country='EE',
+      #~ card_number='124',birth_country=ee,
+      #~ birth_date=i2d(20020405),
+      #~ national_id='1235',
+      #~ client_state=pcsw.ClientStates.newcomer,
       gender=Gender.female)
     yield mari
-    iiris = client(first_name="Iiris",last_name="Saffre",
-      city=vigala,country='EE',card_number='125',birth_country=ee,
-      birth_date=i2d(20080324),
-      national_id='1236',
-      #~ newcomer=True,
-      client_state=pcsw.ClientStates.newcomer,
+    iiris = person(first_name="Iiris",last_name="Saffre",
+      city=vigala,country='EE',
+      #~ card_number='125',birth_country=ee,
+      #~ birth_date=i2d(20080324),
+      #~ national_id='1236',
+      #~ client_state=pcsw.ClientStates.newcomer,
       gender=Gender.female)
     yield iiris
     
@@ -363,7 +392,6 @@ def objects():
     tatjana = client(
         first_name=u"Tatjana",last_name=u"Kasennova",
         #~ first_name=u"Татьяна",last_name=u"Казеннова",
-        # name="Казеннова Татьяна",
         city=kettenis,country='BE', 
         national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
@@ -428,7 +456,8 @@ def objects():
     charles = User(username="charles",partner=charles,profile='500') 
     yield charles
     
-    yield pcsw.CoachingType(name="DSBE")
+    DSBE = pcsw.CoachingType(name="DSBE")
+    yield DSBE
     yield pcsw.CoachingType(name="ASD")
     yield pcsw.CoachingType(name="Schuldnerberatung")
     
@@ -440,23 +469,25 @@ def objects():
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
     for person in Person.objects.all():
-        if not person in DIRECTORS:
+        if User.objects.filter(partner=person).count() == 0:
+          if contacts.Role.objects.filter(person=person).count() == 0:
+            #~ if not person in DIRECTORS:
             client = person2client(person,national_id=str(person.pk))
             count += 1
-            if count % 3:
+            if count % 2:
                 #~ client.is_active = True
                 client.client_state=pcsw.ClientStates.active
-                args = [client,COACHINGTYPES.pop(),AGENTS.pop()]
-                if count % 2:
-                    args.append(None)
-                else:
-                    args.append(AGENTS.pop())
-                args.append(settings.LINO.demo_date(-7 * count))
-                if count % 6:
-                    args.append(settings.LINO.demo_date(-7 * count))
-                yield coachings(*args)
+                #~ args = [client,COACHINGTYPES.pop(),AGENTS.pop()]
+                #~ if count % 2:
+                    #~ args.append(None)
+                #~ else:
+                    #~ args.append(AGENTS.pop())
+                #~ args.append(settings.LINO.demo_date(-7 * count))
+                #~ if count % 6:
+                    #~ args.append(settings.LINO.demo_date(-7 * count))
+                #~ yield coachings(*args)
                     
-            elif count % 8:
+            elif count % 5:
                 #~ client.newcomer = True
                 client.client_state=pcsw.ClientStates.newcomer
             else:
@@ -544,6 +575,8 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ abi = StudyContent.objects.get(name=u"Abitur")
     abi = u"Abitur"
     study = Instantiator('jobs.Study').build
+    
+    gerd = CLIENTS.pop()
         
     yield study(person=luc,type=schule,content=abi,
       started='19740901',stopped='19860630')
@@ -571,49 +604,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     yield langk(person=iiris,language='est',written='0',spoken='3')
     
     
-    from lino_welfare.modlib.isip.models import ContractType, Contract
-    
-    def check_contract(cont):
-        #~ cont.save() # otherwise autofield counter not reset between isip.Contract and jobs.Contract
-        modified = False
-        if cont.person.coached_from is None or cont.person.coached_from > cont.applies_from:
-            cont.person.coached_from = cont.applies_from
-            modified = True
-        if cont.applies_until is None:
-            cont.person.coached_until = None 
-            modified = True
-        else:
-            if cont.person.coached_until is None or cont.person.coached_until < cont.applies_until:
-                cont.person.coached_until = cont.applies_until
-                modified = True
-        if modified:
-            cont.person.full_clean()
-            cont.person.save()
-        return cont
-    
-    CTYPES = Cycler(ContractType.objects.all())
-    
-    #~ contract = Instantiator(Contract,
-      #~ 'type applies_from applies_until',
-      #~ user=root).build
-    #~ yield contract(1,i2d(20110906),i2d(20111206),person=hans)
-    #~ yield contract(1,settings.LINO.demo_date(days=-5*30),
-        #~ settings.LINO.demo_date(days=30),person=hans)
-        
-        
-    DURATIONS = Cycler(30,312,480)
-    CTYPES = Cycler(ContractType.objects.all())
-    
-    for i in range(20):
-        af = settings.LINO.demo_date(-100+i*7)
-        yield check_contract(Contract(type=CTYPES.pop(),
-            applies_from=af,
-            applies_until=af+datetime.timedelta(days=DURATIONS.pop()),
-            #~ applies_until=settings.LINO.demo_date(-i*7+DURATIONS.pop()),
-            person=CLIENTS.pop(),user=AGENTS.pop()))
-        
-    
-    jobtype = Instantiator('jobs.JobType','name').build
+    jobtype = Instantiator(jobs.JobType,'name').build
     art607 = jobtype(u'Sozialwirtschaft = "majorés"')
     yield art607 
     yield jobtype(u'Intern')
@@ -622,86 +613,56 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ yield jobtype(u'VSE')
     yield jobtype(u'Sonstige')
     
-    from lino_welfare.modlib.jobs.models import ContractType, JobType, Job, Contract, Candidature
-    #~ CTYPES = Cycler(*[x for x in ContractType.objects.all()])
-    #~ JTYPES = Cycler(*[x for x in JobType.objects.all()])
-    CTYPES = Cycler(ContractType.objects.all())
-    JTYPES = Cycler(JobType.objects.all())
-    
-    
-    rcycle = mti.insert_child(rcycle,JobProvider)
+    rcycle = mti.insert_child(rcycle,jobs.JobProvider)
     yield rcycle 
-    bisa = mti.insert_child(bisa,JobProvider)
+    bisa = mti.insert_child(bisa,jobs.JobProvider)
     yield bisa 
-    proaktiv = mti.insert_child(proaktiv,JobProvider)
+    proaktiv = mti.insert_child(proaktiv,jobs.JobProvider)
     yield proaktiv
     
-    #~ PROVIDERS = Cycler(*[x for x in JobProvider.objects.all()])
-    #~ SECTORS = Cycler(*[x for x in Sector.objects.all()])
-    #~ FUNCTIONS = Cycler(*[x for x in Function.objects.all()])
-    PROVIDERS = Cycler(JobProvider.objects.all())
-    SECTORS = Cycler(Sector.objects.all())
-    FUNCTIONS = Cycler(Function.objects.all())
+    #~ job = Instantiator('jobs.Job','provider type contract_type name').build
+    #~ bisajob = job(bisa,art607,1,"bisa")
+    #~ yield bisajob
+    #~ rcyclejob = job(rcycle,art607,2,"rcycle")
+    #~ yield rcyclejob 
+    #~ proaktivjob = job(proaktiv,art607,2,"proaktiv",sector=horeca,function=1)
+    #~ yield proaktivjob
     
-    job = Instantiator('jobs.Job','provider type contract_type name').build
-    bisajob = job(bisa,art607,1,"bisa")
-    yield bisajob
-    rcyclejob = job(rcycle,art607,2,"rcycle")
-    yield rcyclejob 
-    proaktivjob = job(proaktiv,art607,2,"proaktiv",sector=horeca,function=1)
-    yield proaktivjob
     
-    for i in range(5):
+    # isip (VSE)
+    
+    
+    ISIP_DURATIONS = Cycler(30,312,480)
+    ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
+    
+    
+    # jobs (Art.60-7)
+    
+    #~ from lino_welfare.modlib.jobs.models import Job
+    #~ CTYPES = Cycler(*[x for x in ContractType.objects.all()])
+    #~ JTYPES = Cycler(*[x for x in JobType.objects.all()])
+    JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
+    JTYPES = Cycler(jobs.JobType.objects.all())
+    
+    PROVIDERS = Cycler(jobs.JobProvider.objects.all())
+    SECTORS = Cycler(jobs.Sector.objects.all())
+    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    
+    for i in range(8):
         f = FUNCTIONS.pop()
-        yield Job(provider=PROVIDERS.pop(),
+        yield jobs.Job(provider=PROVIDERS.pop(),
           type=JTYPES.pop(),
-          contract_type=CTYPES.pop(),
+          contract_type=JOBS_CONTRACT_TYPES.pop(),
           name=unicode(f),
           sector=SECTORS.pop(),function=f)
     
-    #~ JOBS = Cycler(*[x for x in Job.objects.all()])
-    JOBS = Cycler(Job.objects.all())
-    if False:
-        contract = Instantiator('jobs.Contract',
-          'type applies_from applies_until job contact',
-          user=root).build
-        yield contract(1,settings.LINO.demo_date(-30),
-            settings.LINO.demo_date(+60),rcyclejob,rcycle_dir,person=hans)
-        yield contract(1,settings.LINO.demo_date(-29),
-            settings.LINO.demo_date(+61),bisajob,bisa_dir,person=ulrike)
-        yield contract(1,settings.LINO.demo_date(-29),None,bisajob,bisa_dir,person=andreas)
-        yield contract(1,settings.LINO.demo_date(-28),None,
-            rcyclejob,rcycle_dir,person=annette)
-        yield contract(1,
-            settings.LINO.demo_date(-10),settings.LINO.demo_date(+20),
-            bisajob,bisa_dir,person=tatjana)
-        yield contract(2,
-            settings.LINO.demo_date(20),settings.LINO.demo_date(+120),
-            proaktivjob,proaktiv_dir,person=tatjana)
-        yield contract(2,
-            settings.LINO.demo_date(-120),settings.LINO.demo_date(-20),
-            proaktivjob,proaktiv_dir,person=ulrike)
+    JOBS = Cycler(jobs.Job.objects.all())
         
-    DURATIONS = Cycler(312,480,624)
-    contract = Instantiator('jobs.Contract').build
-    for i in range(20):
-        yield check_contract(Contract(
-            type=CTYPES.pop(),
-            applies_from=settings.LINO.demo_date(-600+i*40),
-            duration=DURATIONS.pop(),
-            job=JOBS.pop(),person=CLIENTS.pop(),user=AGENTS.pop()))
-
-    
-    #~ jobrequest = Instantiator('jobs.Candidature','job person date_submitted').build
-    #~ yield jobrequest(bisajob,tatjana,settings.LINO.demo_date(-5))
-    #~ yield jobrequest(rcyclejob,luc,settings.LINO.demo_date(-30))
-    
     for i in range(30):
-        yield Candidature(job=JOBS.pop(),person=CLIENTS.pop(),
+        yield jobs.Candidature(job=JOBS.pop(),person=CLIENTS.pop(),
           date_submitted=settings.LINO.demo_date(-30+i))
     
 
-    
     
 
     #~ from lino.sites.pcsw.models import Course, CourseContent, CourseRequest
@@ -721,10 +682,16 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     yield CourseContent(id=1,name=u"Deutsch")
     yield CourseContent(id=2,name=u"Französisch")
     
+    COURSECONTENTS = Cycler(CourseContent.objects.all())
+    
     creq = Instantiator('courses.CourseRequest').build
-    yield creq(person=ulrike,content=1,date_submitted=settings.LINO.demo_date(-30))
-    yield creq(person=tatjana,content=1,date_submitted=settings.LINO.demo_date(-30))
-    yield creq(person=erna,content=2,date_submitted=settings.LINO.demo_date(-30))
+    for i in range(20):
+        yield creq(
+            person=CLIENTS.pop(),content=COURSECONTENTS.pop(),
+            date_submitted=settings.LINO.demo_date(-i*2))
+    #~ yield creq(person=ulrike,content=1,date_submitted=settings.LINO.demo_date(-30))
+    #~ yield creq(person=tatjana,content=1,date_submitted=settings.LINO.demo_date(-30))
+    #~ yield creq(person=erna,content=2,date_submitted=settings.LINO.demo_date(-30))
     
     offer = Instantiator('courses.CourseOffer').build
     course = Instantiator('courses.Course').build
@@ -732,7 +699,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ yield course(offer=1,start_date=i2d(20110110))
     yield course(offer=1,start_date=settings.LINO.demo_date(+30))
     
-    yield offer(provider=kap,title=u"Deutsch fur Anfanger",content=1)
+    yield offer(provider=kap,title=u"Deutsch für Anfänger",content=1)
     #~ yield course(offer=2,start_date=i2d(20110117))
     yield course(offer=2,start_date=settings.LINO.demo_date(+16))
     
@@ -786,14 +753,14 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
             
             
             
-    langk = Instantiator('cv.LanguageKnowledge',
-        'person:name language written spoken').build
-    yield langk(u"Ausdemwald Alfons",'est','1','1')
-    yield langk(u"Ausdemwald Alfons",'ger','4','3')
-    yield langk(u"Bastiaensen Laurent",'ger','4','3')
-    yield langk(u"Bastiaensen Laurent",'fre','4','3')
-    yield langk(u"Eierschal Emil",'ger','4','3')
-    yield langk(u"Ärgerlich Erna",'ger','4','4')
+    #~ langk = Instantiator('cv.LanguageKnowledge',
+        #~ 'person:name language written spoken').build
+    #~ yield langk(u"Ausdemwald Alfons",'est','1','1')
+    #~ yield langk(u"Ausdemwald Alfons",'ger','4','3')
+    #~ yield langk(u"Bastiaensen Laurent",'ger','4','3')
+    #~ yield langk(u"Bastiaensen Laurent",'fre','4','3')
+    #~ yield langk(u"Eierschal Emil",'ger','4','3')
+    #~ yield langk(u"Ärgerlich Erna",'ger','4','4')
     
     persongroup = Instantiator('pcsw.PersonGroup','name').build
     #~ pg1 = persongroup(u"Art. 60 § 7",ref_name='1')
@@ -808,104 +775,120 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     standby = persongroup(u"Standby",ref_name='9',active=False)
     yield standby
     
-    for p in Client.objects.all():
+    COUNTRIES = Cycler(countries.Country.objects.all())
+    
+    for i,p in enumerate(Client.objects.all()):
+        if i % 2:
+            country = belgium
+        else:
+            country = COUNTRIES.pop()
+        p.birth_country_id = country
+        p.nationality_id = country
+        
+        # youngest client is 16; 170 days between each client
+        p.birth_date = settings.LINO.demo_date(-170*i - 16*365)
+        
+        if i % 3:
+            p.languageknowledge_set.create(language_id='eng',written='3',spoken='3')
+        elif i % 5:
+            p.languageknowledge_set.create(language_id='eng',written='4',spoken='4')
         if p.zip_code == '4700':
             p.languageknowledge_set.create(language_id='ger',native=True)
+            if i % 2:
+                p.languageknowledge_set.create(language_id='fre',written='2',spoken='2')
             p.is_cpas = True
             #~ p.is_active = True
-            p.client_state = pcsw.ClientStates.active
+            #~ p.client_state = pcsw.ClientStates.active
             #~ p.native_language_id = 'ger'
-            p.birth_country_id = 'BE'
-            p.nationality_id = 'BE'
-            p.save()
+        p.save()
 
     for short_code,isocode in (
         ('B', 'BE'),
         ('D', 'DE'),
         ('F', 'FR'),
       ):
-      c = Country.objects.get(pk=isocode)
+      c = countries.Country.objects.get(pk=isocode)
       c.short_code = short_code
       c.save()
       
     root = User.objects.get(username='root')
       
-    p = Client.objects.get(name=u"Ärgerlich Erna")
-    p.birth_date = i2d(19800301)
+    #~ p = Client.objects.get(name=u"Ärgerlich Erna")
+    #~ p.birth_date = i2d(19800301)
     #~ p.coached_from = settings.LINO.demo_date(-7*30)
     #~ p.coached_until = None
     #~ p.coach1 = root
     #~ p.coach2 = alicia # User.objects.get(username='alicia')
-    p.gender = Gender.female 
-    p.group = pg1
-    p.save()
+    #~ p.gender = Gender.female 
+    #~ p.group = pg1
+    #~ p.save()
     
-    yield coachings(p,COACHINGTYPES.pop(),root,alicia,settings.LINO.demo_date(-7*30))
+    #~ yield coachings(p,COACHINGTYPES.pop(),root,alicia,settings.LINO.demo_date(-7*30))
     
     #~ task = Instantiator('cal.Task').build
     #~ yield task(user=root,start_date=i2d(20110717),
         #~ summary=u"Anrufen Termin",
         #~ owner=p)
     
-    p = Client.objects.get(name=u"Eierschal Emil")
-    p.birth_date = i2d(19800501)
+    #~ p = Client.objects.get(name=u"Eierschal Emil")
+    #~ p.birth_date = i2d(19800501)
     #~ p.coached_from = settings.LINO.demo_date(-2*30)
     #~ p.coached_until = settings.LINO.demo_date(10*30)
     #~ p.coach1 = User.objects.get(username='root')
-    p.group = pg2
-    p.gender = Gender.male
-    p.national_id = 'INVALID-45'
-    p.save()
+    #~ p.group = pg2
+    #~ p.gender = Gender.male
+    #~ p.national_id = 'INVALID-45'
+    #~ p.save()
     
-    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
+    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
 
-    p = Client.objects.get(name=u"Bastiaensen Laurent")
-    p.birth_date = i2d(19810601)
+    #~ p = Client.objects.get(name=u"Bastiaensen Laurent")
+    #~ p.birth_date = i2d(19810601)
     #~ p.coached_from = None
     #~ p.coached_until = settings.LINO.demo_date(-2*30)
-    p.unavailable_until = settings.LINO.demo_date(2*30)
+    #~ p.unavailable_until = settings.LINO.demo_date(2*30)
     #~ p.coach1 = User.objects.get(username='root')
     #~ p.coach2 = alicia # User.objects.get(username='alicia')
-    p.group = pg1
-    p.gender = Gender.male
-    p.national_id = '810601 211-83'
-    p.save()
+    #~ p.group = pg1
+    #~ p.gender = Gender.male
+    #~ p.national_id = '810601 211-83'
+    #~ p.save()
 
-    yield coachings(p,COACHINGTYPES.pop(),root,alicia,None,settings.LINO.demo_date(-2*30))
+    #~ yield coachings(p,COACHINGTYPES.pop(),root,alicia,None,settings.LINO.demo_date(-2*30))
     
-    p = Client.objects.get(name=u"Chantraine Marc")
-    p.birth_date = i2d(19500301)
+    #~ p = Client.objects.get(name=u"Chantraine Marc")
+    #~ p.birth_date = i2d(19500301)
     #~ p.coached_from = settings.LINO.demo_date(10)
     #~ p.coached_until = None
     #~ p.coach1 = User.objects.get(username='root')
-    p.group = pg2
-    p.gender = Gender.male
-    p.save()
+    #~ p.group = pg2
+    #~ p.gender = Gender.male
+    #~ p.save()
 
-    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(10),None)
+    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(10),None)
     
-    p = Client.objects.get(name=u"Charlier Ulrike")
-    p.birth_date = i2d(19600401)
+    #~ p = Client.objects.get(name=u"Charlier Ulrike")
+    #~ p.birth_date = i2d(19600401)
     #~ p.coached_from = settings.LINO.demo_date(-3*30)
     #~ p.coached_until = None
     #~ p.coach1 = alicia # User.objects.get(username='alicia')
-    p.gender = Gender.female
-    p.group = pg1
-    p.save()
+    #~ p.gender = Gender.female
+    #~ p.group = pg1
+    #~ p.save()
     
-    yield coachings(p,COACHINGTYPES.pop(),alicia,None,settings.LINO.demo_date(-3*30),None)
+    #~ yield coachings(p,COACHINGTYPES.pop(),alicia,None,settings.LINO.demo_date(-3*30),None)
 
 
-    p = Client.objects.get(name=u"Collard Charlotte")
-    p.birth_date = i2d(19800401)
+    #~ p = Client.objects.get(name=u"Collard Charlotte")
+    #~ p.birth_date = i2d(19800401)
     #~ p.coached_from = settings.LINO.demo_date(-6*30)
     #~ p.coached_until = None
     #~ p.coach1 = User.objects.get(username='root')
-    p.gender = Gender.female
-    p.group = standby
-    p.save()
+    #~ p.gender = Gender.female
+    #~ p.group = standby
+    #~ p.save()
     
-    yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-6*30),None)
+    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-6*30),None)
 
     #~ etype = Instantiator('cal.EventType','name').build
     #~ yield etype("interner Termin")
@@ -928,3 +911,40 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
             date_submitted=settings.LINO.demo_date(offset))
         p = i.next()
         offset -= 1
+        
+    PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
+    for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
+    #~ for i in range(30):
+        #~ client = CLIENTS.pop()
+        if not client.group:
+            client.group = PERSONGROUPS.pop()
+            PERSONGROUPS.pop()
+            #~ for i in range(5-client.group.id): PERSONGROUPS.pop() # 
+            client.save()
+        periods = COACHING_STORIES[client.client_state].pop()
+        for a,b,primary in periods:
+            kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS.pop(),primary=primary)
+            if a is not None:
+                kw.update(start_date=settings.LINO.demo_date(a))
+            if b is not None:
+                kw.update(end_date=settings.LINO.demo_date(b))
+            yield pcsw.Coaching(**kw)
+
+    JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
+    #~ jobs_contract = Instantiator('jobs.Contract').build
+    for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
+        af = coaching.start_date or settings.LINO.demo_date(-600+i*40)
+        kw = dict(applies_from=af,person=coaching.project,user=coaching.user)
+        if i % 2:
+            yield jobs.Contract(
+                type=JOBS_CONTRACT_TYPES.pop(),
+                duration=JOBS_CONTRACT_DURATIONS.pop(),
+                job=JOBS.pop(),**kw)
+        else:
+            #~ af = settings.LINO.demo_date(-100+i*7)
+            yield isip.Contract(type=ISIP_CONTRACT_TYPES.pop(),
+                #~ applies_from=af,
+                applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
+                
+
+    
