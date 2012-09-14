@@ -799,10 +799,11 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ pg1 = persongroup(u"Art. 60 § 7",ref_name='1')
     pg1 = persongroup(u"Bilan",ref_name='1')
     yield pg1
-    pg2 = persongroup(u"Préformation",ref_name='2')
+    #~ pg2 = persongroup(u"Préformation",ref_name='2')
+    pg2 = persongroup(u"Formation",ref_name='2')
     yield pg2
-    yield persongroup(u"Formation",ref_name='3')
-    yield persongroup(u"Recherche active emplois",ref_name='4')
+    #~ yield persongroup(u"Formation",ref_name='3')
+    yield persongroup(u"Recherche",ref_name='4')
     yield persongroup(u"Travail",ref_name='4bis')
     standby = persongroup(u"Standby",ref_name='9',active=False)
     yield standby

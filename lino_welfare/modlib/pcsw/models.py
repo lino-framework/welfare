@@ -1165,13 +1165,15 @@ def only_coached_since(qs,since):
 def only_coached_on(qs,today):
     """
     Add a filter to the Queryset `qs` (on model Client) 
-    which leaves only the clients that are (were) coached 
+    which leaves only the clients that are (or were or will be) coached 
     on the specified date.
     """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(
-        pcsw_coaching_set_by_project__end_date__gte=today,
-        pcsw_coaching_set_by_project__start_date__lte=today) 
+        Q(pcsw_coaching_set_by_project__end_date__isnull=True)
+          |Q(pcsw_coaching_set_by_project__end_date__gte=today),
+        Q(pcsw_coaching_set_by_project__start_date__isnull=True)
+          |Q(pcsw_coaching_set_by_project__start_date__lte=today))
             
     
 
@@ -1224,6 +1226,7 @@ class Clients(Partners):
             qs = only_coached_on(qs,ar.param_values.only_coached_on)
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
+        #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
 Client._lino_choices_table = Clients
@@ -1263,9 +1266,12 @@ class MyClients(Clients):
         return _("Clients of %s") % rr.get_user()
         
     @classmethod
-    def get_request_queryset(self,rr):
-        qs = super(MyClients,self).get_request_queryset(rr)
-        qs = only_coached_by(qs,rr.get_user())
+    def get_request_queryset(self,ar):
+        qs = super(MyClients,self).get_request_queryset(ar)
+        u = ar.get_user()
+        qs = only_coached_by(qs,u)
+        #~ if u is not None and u.username == 'root':
+        #~ logger.info('20120914 MyClients.get_request_queryset %s',ar)
         #~ qs = only_coached_on(qs,datetime.date.today())
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
@@ -1352,7 +1358,7 @@ class ClientsTest(Clients):
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
     )
-    params_template = """overlapping_contracts invalid_niss user only_coached_on"""
+    params_template = """overlapping_contracts invalid_niss user group client_state only_coached_on"""
     #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
     
@@ -1442,8 +1448,7 @@ class UsersWithClients(dd.VirtualTable):
         We store the corresponding request in the user object 
         under the name `my_persons`.
         
-        The list displays only integration agents, 
-        i.e. users with a nonempty `integ_level`.
+        The list displays only integration agents, i.e. users with a nonempty `integ_level`.
         With one subtility: system admins also have a nonempty `integ_level`, 
         but normal users don't want to see them. 
         So we add the rule that only system admins see other system admins.
@@ -1933,12 +1938,6 @@ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
-    
-class CoachingsByProject(Coachings):
-    master_key = 'project'
-    column_names = 'start_date end_date user type *'
-    
-class MyCoachings(Coachings,mixins.ByUser):
     parameters = dict(
         type=dd.ForeignKey(CoachingType,null=True,blank=True),
         group=dd.ForeignKey(PersonGroup,blank=True,null=True),
@@ -1948,13 +1947,24 @@ class MyCoachings(Coachings,mixins.ByUser):
     
     @classmethod
     def get_request_queryset(self,ar):
-        qs = super(MyCoachings,self).get_request_queryset(ar)
+        qs = super(Coachings,self).get_request_queryset(ar)
         if ar.param_values.group:
             qs = qs.filter(project__group=ar.param_values.group)
         if ar.param_values.type:
             qs = qs.filter(type=ar.param_values.type)
         return qs
 
+    
+class CoachingsByProject(Coachings):
+    master_key = 'project'
+    column_names = 'start_date end_date user type *'
+
+class CoachingsByUser(Coachings):
+    master_key = 'user'
+    column_names = 'start_date end_date project type *'
+
+class MyCoachings(Coachings,mixins.ByUser):
+    column_names = 'start_date end_date project type *'
 
 
 
@@ -2268,12 +2278,17 @@ def site_setup(site):
     #~ newcomers_level newcomer_quota
     #~ debts_level
     #~ """)
+    
     site.modules.users.Users.set_detail_layout("""
     box1:50 box2:25
     remarks AuthoritiesGiven 
     """,
     box2="""
     newcomer_quota
+    """)
+    
+    site.modules.users.Users.add_detail_tab('coaching',"""
+    pcsw.CoachingsByUser
     """)
     
         
