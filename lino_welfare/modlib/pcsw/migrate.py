@@ -1420,7 +1420,7 @@ def migrate_from_1_4_10(globals_dict):
         if national_id.strip() == '0':
             national_id = ''
         if gesdos_id and not national_id:
-            national_id = gesdos_id
+            national_id = str(partner_ptr_id)
         if national_id:
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
