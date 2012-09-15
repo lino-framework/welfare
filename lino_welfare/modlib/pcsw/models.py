@@ -57,7 +57,7 @@ from lino.modlib.uploads import models as uploads
 from lino.modlib.cal import models as cal
 from lino.modlib.users import models as users
 from lino.utils.choicelists import HowWell, Gender
-from lino.utils.choicelists import ChoiceList
+from lino.utils.choicelists import ChoiceList, Choice
 from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
@@ -856,6 +856,20 @@ class Company(Partner,contacts.Company):
         abstract = False
         app_label = 'contacts'
         
+    #~ # to be maintaned with ClientContactTypes
+    #~ dd.inject_field(Company,'is_health_insurance',models.BooleanField(verbose_name=_("Health insurance"),default=False))
+    #~ dd.inject_field(Company,'is_pharmacy',models.BooleanField(verbose_name=_("Pharmacy"),default=False))
+    #~ dd.inject_field(Company,'is_attorney',models.BooleanField(verbose_name=_("Attorney"),default=False))
+    #~ dd.inject_field(Company,'is_job_office',models.BooleanField(verbose_name=_("Job office"),default=False))
+    
+    # to be maintaned with ClientContactTypes
+    is_health_insurance = models.BooleanField(verbose_name=_("Health insurance"),default=False)
+    is_pharmacy = models.BooleanField(verbose_name=_("Pharmacy"),default=False)
+    is_attorney = models.BooleanField(verbose_name=_("Attorney"),default=False)
+    is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
+        
+        
+        
     @classmethod
     def site_setup(cls,site):
         #~ if cls.model is None:
@@ -868,7 +882,7 @@ class Company(Partner,contacts.Company):
             bank_account1 bank_account2 activity''')
 
     # todo: remove hourly_rate after data migration. this is now in Job
-    hourly_rate = dd.PriceField(_("hourly rate"),blank=True,null=True)
+    #~ hourly_rate = dd.PriceField(_("hourly rate"),blank=True,null=True)
     
   
     
@@ -893,7 +907,7 @@ class CompanyDetail(dd.FormLayout):
 
     box5 = """
     remarks 
-    is_courseprovider is_jobprovider
+    is_courseprovider is_jobprovider is_health_insurance is_pharmacy is_attorney is_job_office
     """
 
     bottom_box = "box5 contacts.RolesByCompany"
@@ -1003,7 +1017,7 @@ class ClientDetail(dd.FormLayout):
     # coach1:12 coach2:12 coached_from:12 coached_until:12 
     # health_insurance pharmacy job_office_contact 
     job_agents
-    ContactsByProject:40 CoachingsByProject:40
+    ContactsByClient:40 CoachingsByProject:40
     """,label=_("Coaching"))
     
     
@@ -1171,6 +1185,8 @@ def only_coached_on(qs,today):
     """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(
+        Q(pcsw_coaching_set_by_project__end_date__isnull=False)
+          |Q(pcsw_coaching_set_by_project__start_date__isnull=False),
         Q(pcsw_coaching_set_by_project__end_date__isnull=True)
           |Q(pcsw_coaching_set_by_project__end_date__gte=today),
         Q(pcsw_coaching_set_by_project__start_date__isnull=True)
@@ -1842,36 +1858,78 @@ class OverlappingContracts(dd.Table):
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
-class ProjectContactTypes(ChoiceList):
-    label = _("Project Contact type")
+class ClientContactType(Choice):
+  
+    def __init__(self,choicelist,value,text,name,companies_table,**kw):
+        #~ self.company_filter_field = company_filter_field
+        self.companies_table = companies_table
+        super(ClientContactType,self).__init__(choicelist,value,text,name,**kw)
+        
+    #~ def company_choices(self):
+        #~ if self.company_filter_field:
+            #~ return self.company_filter_field.request().data_iterator
+        #~ return Company.objects.all()
     
-add = ProjectContactTypes.add_item
-add('10', _("Health insurance"),'health_insurance')
-add('20', _("Pharmacy"),'pharmacy')
-add('30', _("Attorney"),'attorney')
-add('40', _("Job office"),'job_office')
-add('90', _("Other"),'other')
+class ClientContactTypes(ChoiceList):
+    label = _("Client Contact type")
+    item_class = ClientContactType
+    
+class HealthInsurances(Companies):
+    label = _("Health insurances")
+    known_values = dict(is_health_insurance=True)
+class Pharmacies(Companies):
+    label = _("Pharmacies")
+    known_values = dict(is_pharmacy=True)
+class Attorneys(Companies):
+    label = _("Attorneys")
+    known_values = dict(is_attorney=True)
+class JobOffices(Companies):
+    label = _("Job offices")
+    known_values = dict(is_job_office=True)
+    
+add = ClientContactTypes.add_item
+#~ add('10', _("Health insurance"),'health_insurance','is_health_insurance')
+#~ add('20', _("Pharmacy"),        'pharmacy',        'is_pharmacy')
+#~ add('30', _("Attorney"),        'attorney',        'is_attorney')
+#~ add('40', _("Job office"),      'job_office',      'is_job_office')
+add('10', _("Health insurance"),'health_insurance',HealthInsurances)
+add('20', _("Pharmacy"),        'pharmacy',        Pharmacies)
+add('30', _("Attorney"),        'attorney',        Attorneys)
+add('40', _("Job office"),      'job_office',      JobOffices)
+add('90', _("Other"),           'other',           Companies)
 
 
 #~ class Third(mixins.ProjectRelated,contacts.CompanyContact):
-class ProjectContact(mixins.ProjectRelated,contacts.CompanyContact):
+class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
     """
     project : the Client
     company : the Company
     contact : the Contact person in that Company
     """
     class Meta:
-        verbose_name = _("Contact")
-        verbose_name_plural = _("Contacts")
-    type = ProjectContactTypes.field(blank=True)
+        verbose_name = _("Client Contact")
+        verbose_name_plural = _("Client Contacts")
+    type = ClientContactTypes.field(blank=True)
     remark = models.TextField(_("Remarks"),blank=True) # ,null=True)
     
-class ProjectContacts(dd.Table):
-    model = ProjectContact
+    @dd.chooser()
+    def company_choices(self,type):
+        if not type:  
+            return Companies.request().data_iterator
+        type = ClientContactTypes.get_by_value(type)
+        return type.companies_table.request().data_iterator
+        #~ return ClientContactTypes.get_by_value(type).company_choices()
+        
+dd.update_field(ClientContact,'contact',verbose_name=_("Contact person"))
+          
     
-class ContactsByProject(ProjectContacts):
+class ClientContacts(dd.Table):
+    model = ClientContact
+    
+class ContactsByClient(ClientContacts):
     master_key = 'project'
     column_names = 'type company contact remark *'
+    label = _("Contacts")
 
     
     
@@ -2020,14 +2078,13 @@ def customize_contacts():
     """
     Injects application-specific fields to :mod:`contacts <lino.modlib.contacts>`.
     """
-    dd.inject_field('contacts.RoleType',
+    dd.inject_field(contacts.RoleType,
         'use_in_contracts',
         models.BooleanField(
             verbose_name=_("usable in contracts"),
-            default=True
-        ),"""Whether Links of this type can be used as contact person of a job contract.
-        Deserves more documentation.
-        """)
+            default=True,
+            help_text=_("Whether Links of this type can be used as contact person of a job contract.")))
+        
         
 
         
@@ -2131,7 +2188,7 @@ class Home(cal.Home):
 def setup_explorer_menu(site,ui,user,m): 
     m = m.add_menu("pcsw",_("PCSW"))
     m.add_action(Coachings)
-    m.add_action(ProjectContacts)
+    m.add_action(ClientContacts)
     
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:

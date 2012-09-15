@@ -1344,7 +1344,7 @@ def migrate_from_1_4_10(globals_dict):
     households_Household = resolve_model("households.Household")
     pcsw_Client = resolve_model("pcsw.Client")
     pcsw_Coaching = resolve_model("pcsw.Coaching")
-    pcsw_ProjectContact = resolve_model("pcsw.ProjectContact")
+    pcsw_ClientContact = resolve_model("pcsw.ClientContact")
     cal_Event = resolve_model("cal.Event")
     cal_Task = resolve_model("cal.Task")
     lino_HelpText = resolve_model("lino.HelpText")
@@ -1358,7 +1358,6 @@ def migrate_from_1_4_10(globals_dict):
     
     from lino.modlib.countries.models import CityTypes
     from lino.utils.mti import create_child
-    #~ from lino_welfare.modlib.pcsw.models import ProjectContactTypes
     from lino_welfare.modlib.pcsw import models as pcsw
     
     def convert_region(region):
@@ -1477,19 +1476,19 @@ def migrate_from_1_4_10(globals_dict):
                     #~ user_id=coach1_id,
                     #~ type_id=user2type(coach1_id))
             if health_insurance_id:
-                yield pcsw_ProjectContact(
+                yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ProjectContactTypes.health_insurance,
+                    type=pcsw.ClientContactTypes.health_insurance,
                     company_id=health_insurance_id)
             if pharmacy_id:
-                yield pcsw_ProjectContact(
+                yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ProjectContactTypes.pharmacy,
+                    type=pcsw.ClientContactTypes.pharmacy,
                     company_id=pharmacy_id)
             if job_office_contact_id:
-                yield pcsw_ProjectContact(
+                yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ProjectContactTypes.job_office,
+                    type=pcsw.ClientContactTypes.job_office,
                     company_id=settings.LINO.site_config.job_office.id,
                     contact_id=job_office_contact_id)
         else:

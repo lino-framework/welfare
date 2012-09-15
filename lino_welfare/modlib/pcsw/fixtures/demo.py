@@ -313,34 +313,46 @@ def objects():
     ulrike = Person.objects.get(name__exact="Charlier Ulrike")
     erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
     
-    cpas = company(name=u"ÖSHZ Eupen",city=eupen,country='BE')
+    cpas = company(name=u"ÖSHZ Eupen",city=eupen,country=belgium)
     yield cpas
-    bisa = company(name=u"BISA",city=eupen,country='BE')
+    bisa = company(name=u"BISA",city=eupen,country=belgium)
     yield bisa 
     bisa_dir = role(company=bisa,person=annette,type=1)
     yield bisa_dir 
-    rcycle = company(name=u"R-Cycle Sperrgutsortierzentrum",city=eupen,country='BE')
+    rcycle = company(name=u"R-Cycle Sperrgutsortierzentrum",city=eupen,country=belgium)
     yield rcycle
     rcycle_dir = role(company=rcycle,person=andreas,type=1)
     yield rcycle_dir
     yield role(company=rcycle,person=erna,type=2)
     yield role(company=rcycle,person=ulrike,type=4) # IT manager : no contracts
-    yield company(name=u"Die neue Alternative V.o.G.",city=eupen,country='BE')
-    proaktiv = company(name=u"Pro Aktiv V.o.G.",city=eupen,country='BE')
+    yield company(name=u"Die neue Alternative V.o.G.",city=eupen,country=belgium)
+    proaktiv = company(name=u"Pro Aktiv V.o.G.",city=eupen,country=belgium)
     yield proaktiv
     proaktiv_dir = role(company=proaktiv,person=hans,type=1)
     yield role(company=proaktiv,person=ulrike,type=4) # IT manager : no contracts
     yield proaktiv_dir
-    yield company(name=u"Werkstatt Cardijn V.o.G.",city=eupen,country='BE')
-    yield company(name=u"Behindertenstätten Eupen",city=eupen,country='BE')
-    yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country='BE')
+    yield company(name=u"Werkstatt Cardijn V.o.G.",city=eupen,country=belgium)
+    yield company(name=u"Behindertenstätten Eupen",city=eupen,country=belgium)
+    yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country=belgium)
     
-    yield company(name=u"Alliance Nationale des Mutualités Chrétiennes",country='BE')
-    yield company(name=u"Mutualité Chrétienne de Verviers - Eupen",country='BE')
-    yield company(name=u"Union Nationale des Mutualités Neutres",country='BE')
-    yield company(name=u"Mutualia - Mutualité Neutre",country='BE')
-    yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège",country='BE')
+    kw = dict(is_health_insurance=True,country=belgium)
+    yield company(name=u"Alliance Nationale des Mutualités Chrétiennes",**kw)
+    yield company(name=u"Mutualité Chrétienne de Verviers - Eupen",**kw)
+    yield company(name=u"Union Nationale des Mutualités Neutres",**kw)
+    yield company(name=u"Mutualia - Mutualité Neutre",**kw)
+    yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège",**kw)
     
+    kw = dict(is_pharmacy=True,country=belgium,city=eupen)
+    yield company(name=u"Apotheke Reul",street=u'Klosterstraße',street_no=20,**kw)
+    yield company(name=u"Apotheke Schunck",street=u'Bergstraße',street_no=59,**kw)
+    yield company(name=u"Pharmacies Populaires de Verviers",street=u'Aachener Straße',street_no=258,**kw)
+    yield company(name=u"Bosten-Bocken A",street=u'Haasstraße',street_no=6,**kw)
+    
+    kw = dict(is_attorney=True,country=belgium,city=eupen)
+    yield company(name=u"Brüll Christine",street=u'Schilsweg',street_no=4,**kw)
+    yield company(name=u"Brocal Catherine",street=u'Neustraße',street_no=115,**kw)
+    yield company(name=u"Bourseaux Alexandre",street=u'Aachener Straße',street_no=21,**kw)
+    yield company(name=u"Baguette Stéphanie",street=u'Gospertstraße',street_no=24,**kw)
     
     def person2client(p,**kw):
         c = mti.insert_child(p,Client,**kw)
@@ -403,7 +415,7 @@ def objects():
     from django.core.exceptions import ValidationError
     # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`
     bernard = Person.objects.get(name__exact="Bodard Bernard")
-    adg = company(name=u"Arbeitsamt der D.G.",city=eupen,country='BE')
+    adg = company(name=u"Arbeitsamt der D.G.",city=eupen,country=belgium,is_job_office=True)
     settings.LINO.update_site_config(job_office=adg)
     yield adg
     adg_dir = role(company=adg,person=bernard,type=1)
