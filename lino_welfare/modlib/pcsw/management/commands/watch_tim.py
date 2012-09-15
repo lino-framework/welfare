@@ -82,7 +82,9 @@ def PAR_model(data):
     - wer eine Nationalregisternummer hat ist eine Person, selbst wenn er auch eine MwSt-Nummer hat.
     
     """
-    if data.get('NB2',False):
+    if data.get('NB2',False): # NISS
+        return Client
+    if data.get('NB1',False): # gesdos-Nr
         return Client
     if data.get('NOTVA',False):
         if data.get('ALLO','') in (u"Eheleute",):
@@ -276,6 +278,10 @@ class PAR(Controller):
                     obj.national_id = data['NB2']
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
+                #~ if data.has_key('NB1'):
+                    #~ obj.gesdos_id = data['NB1']
+                #~ if not obj.national_id:
+                    #~ obj.national_id = str()
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if obj.pk is None:
@@ -332,6 +338,11 @@ class PAR(Controller):
         
     def get_object(self,kw):
         id = kw['id']
+        #~ model = PAR_model(kw['data'])
+        #~ try:
+            #~ return model.objects.get(pk=id)
+        #~ except model.DoesNotExist:
+            #~ pass
         try:
             return Client.objects.get(pk=id)
         except Client.DoesNotExist:

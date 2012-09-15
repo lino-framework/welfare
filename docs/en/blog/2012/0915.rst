@@ -9,5 +9,5 @@
   Also bei Kontaktart "Krankenkasse" kann man nur noch Krankenkassen 
   auswählen etc.
   
-- tim2lino : Personen, die keine NISS aber wohl eine Gesdos-Nr haben, 
-  bleiben jetzt ebenfalls Klienten in Lino, und kriegen die Gesdos-Nr als NISS.
+- tim2lino, migrate: Personen, die keine NISS aber wohl eine Gesdos-Nr haben, 
+  bleiben jetzt ebenfalls Klienten, und kriegen die Partner-Nr als NISS.

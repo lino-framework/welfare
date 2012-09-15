@@ -1399,7 +1399,8 @@ def migrate_from_1_4_10(globals_dict):
             #~ newcomer=newcomer,
             is_deprecated=is_deprecated,activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2,
-            hourly_rate=hourly_rate)
+            #~ hourly_rate=hourly_rate
+            )
     globals_dict.update(create_contacts_company=create_contacts_company)
     
     def create_households_household(partner_ptr_id, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, prefix, type_id):
