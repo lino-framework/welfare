@@ -1417,7 +1417,11 @@ def migrate_from_1_4_10(globals_dict):
             activity_id=activity_id,
             bank_account1=bank_account1,bank_account2=bank_account2)
         #~ if national_id and national_id.strip() != '0' and not is_deprecated:
-        if national_id and national_id.strip() != '0':
+        if national_id.strip() == '0':
+            national_id = ''
+        if gesdos_id and not national_id:
+            national_id = gesdos_id
+        if national_id:
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
             client_state = pcsw.ClientStates.active
@@ -1492,11 +1496,13 @@ def migrate_from_1_4_10(globals_dict):
                     company_id=settings.LINO.site_config.job_office.id,
                     contact_id=job_office_contact_id)
         else:
+            #~ silently ignored if lost: 
+            #~ is_cpas is_senior coach1_id coach2_id 
             lost_fields = """
-            remarks2 gesdos_id is_cpas
-            is_senior group_id 
+            remarks2 gesdos_id 
+            group_id 
             coached_from coached_until
-            coach1_id coach2_id birth_place 
+            birth_place 
             birth_country_id civil_state
             national_id
             health_insurance_id pharmacy_id
