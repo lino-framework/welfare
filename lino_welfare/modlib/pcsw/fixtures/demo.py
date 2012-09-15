@@ -925,6 +925,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         offset -= 1
         
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
+    AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,melanie, hubert, melanie)
     for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     #~ for i in range(30):
         #~ client = CLIENTS.pop()
@@ -935,7 +936,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
             client.save()
         periods = COACHING_STORIES[client.client_state].pop()
         for a,b,primary in periods:
-            kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS.pop(),primary=primary)
+            kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
             if a is not None:
                 kw.update(start_date=settings.LINO.demo_date(a))
             if b is not None:

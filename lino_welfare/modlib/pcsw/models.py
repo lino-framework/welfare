@@ -1221,12 +1221,15 @@ class Clients(Partners):
     
     parameters = dict(
       only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
+      only_primary = models.BooleanField(_("Only primary clients"),default=False),
       show_deprecated = models.BooleanField(_("Show deprecated"),default=False),
       client_state = ClientStates.field(blank=True),
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
-          verbose_name=_("Integration phase"))
+          verbose_name=_("Integration phase")),
+      only_active = models.BooleanField(_("Only active clients"),default=False,
+        help_text=_("Show only clients in 'active' integration phases")),
       )
-    params_layout = 'group client_state only_coached_on show_deprecated'
+    params_layout = 'group client_state only_coached_on only_primary show_deprecated'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1241,6 +1244,12 @@ class Clients(Partners):
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.only_coached_on:
             qs = only_coached_on(qs,ar.param_values.only_coached_on)
+        if ar.param_values.only_active:
+            qs = qs.filter(group__active=True)
+        if ar.param_values.only_primary:
+            qs = qs.filter(
+              pcsw_coaching_set_by_project__primary=True,
+              pcsw_coaching_set_by_project__user=ar.get_user())
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
@@ -1310,44 +1319,39 @@ class MyClients(Clients):
         #~ if c is not None:
             #~ return c.applies_until
 
-class MyClientsByGroup(MyClients):
-    master_key = 'group'
+#~ class MyClientsByGroup(MyClients):
+    #~ master_key = 'group'
     
-    @classmethod
-    def get_title(self,rr):
-        return _("%(phase)s clients of %(user)s") % dict(
-          phase=rr.master_instance, user=rr.get_user())
+    #~ @classmethod
+    #~ def get_title(self,rr):
+        #~ return _("%(phase)s clients of %(user)s") % dict(
+          #~ phase=rr.master_instance, user=rr.get_user())
     
-class MyPrimaryClients(MyClients): # "Komplette Akten"
-    #~ master_key = 'coach1'
-    label = _("Primary clients by coach")
+#~ class MyPrimaryClients(MyClients): # "Komplette Akten"
+    #~ label = _("Primary clients by coach")
     
-    @classmethod
-    def get_title(self,rr):
-        return _("Primary clients of %s") % rr.master_instance
+    #~ @classmethod
+    #~ def get_title(self,rr):
+        #~ return _("Primary clients of %s") % rr.master_instance
         
-    @classmethod
-    def get_request_queryset(self,rr):
-        #~ rr.master_instance = rr.get_user()
-        qs = super(MyPrimaryClients,self).get_request_queryset(rr)
-        #~ only_coached_by(qs,rr.get_user())
-        #~ qs = only_coached_persons(qs,datetime.date.today())
-        qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
-        #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
-        return qs
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ qs = super(MyPrimaryClients,self).get_request_queryset(ar)
+        #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
+        #~ return qs
 
 
-class MyActiveClients(MyClients):
+#~ class MyActiveClients(MyClients):
   
-    @classmethod
-    def get_title(self,rr):
-        return _("Active clients of %s") % rr.get_user()
+    #~ @classmethod
+    #~ def get_title(self,rr):
+        #~ return _("Active clients of %s") % rr.get_user()
         
-    @classmethod
-    def get_request_queryset(self,rr):
-        qs = super(MyActiveClients,self).get_request_queryset(rr)
-        qs = qs.filter(group__active=True)
-        return qs
+    #~ @classmethod
+    #~ def get_request_queryset(self,rr):
+        #~ qs = super(MyActiveClients,self).get_request_queryset(rr)
+        #~ qs = qs.filter(group__active=True)
+        #~ return qs
   
 
 #~ if True: # dd.is_installed('pcsw'):
@@ -1445,8 +1449,10 @@ class UsersWithClients(dd.VirtualTable):
             for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
                 def w(pg):
                     def func(self,obj,ar):
-                        return MyClientsByGroup.request(
-                          ar.ui,master_instance=pg,subst_user=obj)
+                        #~ return MyClientsByGroup.request(
+                          #~ ar.ui,master_instance=pg,subst_user=obj)
+                        return MyClients.request(
+                          ar.ui,subst_user=obj,param_values=dict(group=pg))
                     return func
                 vf = dd.RequestField(w(pg),verbose_name=pg.name)
                 self.add_virtual_field('G'+pg.ref_name,vf)
@@ -1493,11 +1499,13 @@ class UsersWithClients(dd.VirtualTable):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return MyPrimaryClients.request(ar.ui,master_instance=obj)
+        #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
+        return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
-        return MyActiveClients.request(ar.ui,subst_user=obj)
+        #~ return MyActiveClients.request(ar.ui,subst_user=obj)
+        return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_active=True))
 
 
 #
@@ -2185,24 +2193,27 @@ class Home(cal.Home):
 #~ def setup_master_menu(site,ui,user,m): 
     #~ m.add_action(AllClients)
 
+MODULE_LABEL = _("PCSW")
+
 def setup_explorer_menu(site,ui,user,m): 
-    m = m.add_menu("pcsw",_("PCSW"))
+    m = m.add_menu("pcsw",MODULE_LABEL)
     m.add_action(Coachings)
     m.add_action(ClientContacts)
     
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:
     if user.profile.integ_level:
-        mypersons = m.add_menu("mypersons",MyClients.label)
-        mypersons.add_action(MyClients)
-        for pg in PersonGroup.objects.order_by('ref_name'):
-            mypersons.add_action(
-              MyClientsByGroup,
-              label=pg.name,
-              params=dict(master_instance=pg))
+        #~ mypersons = m.add_menu("mypersons",MyClients.label)
+        #~ mypersons.add_action(MyClients)
+        #~ for pg in PersonGroup.objects.order_by('ref_name'):
+            #~ mypersons.add_action(
+              #~ MyClientsByGroup,
+              #~ label=pg.name,
+              #~ params=dict(master_instance=pg))
               
-        mycoachings = m.add_menu("mycoachings",MyCoachings.label)
-        mycoachings.add_action(MyCoachings)
+        #~ m = m.add_menu("coachings",MyCoachings.label)
+        m.add_action(MyClients)
+        m.add_action(MyCoachings)
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
             #~ mycoachings.add_action(
               #~ MyCoachingsByGroup,
@@ -2210,7 +2221,6 @@ def setup_my_menu(site,ui,user,m):
               #~ params=dict(master_instance=pg))
   
 
-MODULE_LABEL = _("PCSW")
 
 def setup_config_menu(site,ui,user,m): 
     m  = m.add_menu("pcsw",MODULE_LABEL)

@@ -27,9 +27,13 @@ DONE
   Im Detail einer Person gibt es ein Feld "ist Klient". 
   Damit kann man eine bestehende Person zu einem Klienten machen.
   
-- Neues Feld Status eines Klienten. 
+- Neues Feld "Status" eines Klienten. 
   is_active ersetzt durch ClientStates.active, 
   newcomer ersetzt durch ClientStates.newcomer.
+  
+- Das Menü "Meine Klienten" hat jetzt kein Untermenü mehr mit allen 
+  Integrationsphasen, weil man das jetzt in den Parametern von 
+  "Meine Klienten" angeben kann. 
   
 - Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
   `Begleiter 1 und 2`. Siehe auch Begleitungsart (primär, sekundär). 
