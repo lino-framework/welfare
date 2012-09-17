@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-29 05:59+0100\n"
+"POT-Creation-Date: 2012-09-17 14:33+0100\n"
 "PO-Revision-Date: 2012-06-01 15:05+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -40,65 +40,69 @@ msgstr "Sprachkenntnis"
 msgid "language knowledges"
 msgstr "Sprachkenntnisse"
 
-#: .\models.py:140
+#: .\models.py:141
 msgid "Language"
 msgstr "Sprache"
 
-#: .\models.py:143
+#: .\models.py:144
 msgid "spoken"
 msgstr "Wort"
 
-#: .\models.py:144
+#: .\models.py:145
 msgid "written"
 msgstr "Schrift"
 
-#: .\models.py:145
+#: .\models.py:146
 msgid "native language"
 msgstr "Muttersprache"
 
-#: .\models.py:154
+#: .\models.py:155
 #, python-format
 msgid "%s (s/w)"
 msgstr "%s (W/S)"
 
-#: .\models.py:156
+#: .\models.py:157
 #, python-format
 msgid "%s (s)"
 msgstr "%s (W)"
 
-#: .\models.py:158
+#: .\models.py:159
 #, python-format
 msgid "%s (w)"
 msgstr "%s (S)"
 
-#: .\models.py:183
+#: .\models.py:190
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: .\models.py:184
+#: .\models.py:191
 msgid "Properties"
 msgstr "Eigenschaften"
 
-#: .\models.py:190
+#: .\models.py:198
 msgid "Remark"
 msgstr "Bemerkung"
 
-#: .\models.py:233
+#: .\models.py:241
 #, python-format
 msgid "(Site setting %s is empty)"
 msgstr ""
 
-#: .\models.py:268
+#: .\models.py:278
 msgid "Skills Property Group"
 msgstr "Eigenschaftsgruppe Fähigkeiten"
 
-#: .\models.py:276
+#: .\models.py:286
 msgid "Soft Skills Property Group"
 msgstr "Eigenschaftsgruppe Sozialkompetenzen"
 
-#: .\models.py:286
+#: .\models.py:296
 msgid "Obstacles Property Group"
 msgstr "Eigenschaftsgruppe Hindernisse"
+
+#: .\models.py:307
+msgid "CV"
+msgstr ""
 
 #~ msgid "Civil state"
 #~ msgstr "Zivilstand"

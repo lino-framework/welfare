@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-29 05:59+0100\n"
+"POT-Creation-Date: 2012-09-17 14:33+0100\n"
 "PO-Revision-Date: 2012-02-05 02:06+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
@@ -16,73 +16,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: .\models.py:58
+#: .\models.py:55
 msgid "Broker"
 msgstr "Vermittler"
 
-#: .\models.py:59
+#: .\models.py:56
 msgid "Brokers"
 msgstr "Vermittler"
 
-#: .\models.py:87
+#: .\models.py:84
 msgid "Faculty"
 msgstr "Fachbereich"
 
-#: .\models.py:88
+#: .\models.py:85
 msgid "Faculties"
 msgstr "Fachbereiche"
 
-#: .\models.py:111
+#: .\models.py:108
 msgid "Competence"
 msgstr "Kompetenz"
 
-#: .\models.py:112
+#: .\models.py:109
 msgid "Competences"
 msgstr "Kompetenzen"
 
-#: .\models.py:160 .\models.py:287
+#: .\models.py:158 .\models.py:291
 msgid "Newcomers"
 msgstr "Neuzugänge"
 
-#: .\models.py:169 .\models.py:276
+#: .\models.py:167 .\models.py:280
 msgid "New Clients"
 msgstr "Neue Klienten"
 
-#: .\models.py:173
-msgid "Coached by"
-msgstr "Begleitet durch"
-
-#: .\models.py:174
-msgid "Since"
-msgstr "Seit"
-
-#: .\models.py:215
+#: .\models.py:219
 msgid "Users by Newcomer"
 msgstr "Sozis vorschlagen"
 
-#: .\models.py:219
+#: .\models.py:223
 msgid "Show suggested agents for"
 msgstr "Zeige Vorschläge für"
 
-#: .\models.py:221
+#: .\models.py:225
 msgid "Count Newcomers since"
 msgstr "Neue Klienten seit"
 
-#: .\models.py:268
+#: .\models.py:272
 msgid "Primary clients"
 msgstr "Komplette Akten"
 
-#: .\models.py:272
+#: .\models.py:276
 msgid "Active clients"
 msgstr "Aktive Klienten"
 
-#: .\models.py:280
+#: .\models.py:284
 msgid "Score"
 msgstr "Quote"
 
-#: .\models.py:292
+#: .\models.py:296
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
+
+#~ msgid "Coached by"
+#~ msgstr "Begleitet durch"
+
+#~ msgid "Since"
+#~ msgstr "Seit"
 
 #~ msgid "is Newcomers user"
 #~ msgstr "Neuzugänge"
