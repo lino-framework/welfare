@@ -1496,10 +1496,15 @@ class UsersWithClients(dd.VirtualTable):
         So we add the rule that only system admins see other system admins.
         
         """
-        profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-        qs = users.User.objects.filter(profile__in=profiles)
+        #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
         if ar.get_user().profile.level < UserLevels.admin:
-            qs = qs.exclude(profile__gte=UserLevels.admin)
+            profiles = [p for p in dd.UserProfiles.items() 
+                if p.integ_level and p.level < UserLevels.admin]
+        else:
+            profiles = [p for p in dd.UserProfiles.items() if p.integ_level ]
+            #~ qs = qs.exclude(profile__gte=UserLevels.admin)
+                  
+        qs = users.User.objects.filter(profile__in=profiles)
         for user in qs.order_by('username'):
             #~ r = MyClients.request(ar.ui,subst_user=user)
             r = Clients.request(ar.ui,param_values=dict(coached_by=user))
