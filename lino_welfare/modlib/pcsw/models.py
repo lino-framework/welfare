@@ -1193,8 +1193,7 @@ def only_coached_on(qs,today):
           |Q(pcsw_coaching_set_by_project__start_date__lte=today)).distinct()
             
     
-
-
+#~ from lino.modlib.cal.utils import amonthago
 
 #~ class Clients(AllClients):
 class Clients(Partners):
@@ -1226,10 +1225,14 @@ class Clients(Partners):
       client_state = ClientStates.field(blank=True),
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
           verbose_name=_("Integration phase")),
+      coached_by = models.ForeignKey(users.User,blank=True,null=True,
+          verbose_name=_("Coached by")),
+      coached_since = models.DateField(_("Coached since"),blank=True),
+      #~ coached_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
       only_active = models.BooleanField(_("Only active clients"),default=False,
         help_text=_("Show only clients in 'active' integration phases")),
       )
-    params_layout = 'group client_state only_coached_on only_primary show_deprecated'
+    params_layout = 'coached_by group client_state only_coached_on only_primary show_deprecated'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1238,6 +1241,9 @@ class Clients(Partners):
     @classmethod
     def get_request_queryset(self,ar):
         qs = super(Clients,self).get_request_queryset(ar)
+        if ar.param_values.coached_since:
+            qs = only_coached_since(qs,ar.param_values.coached_since)
+        
         if not ar.param_values.show_deprecated:
             qs = qs.filter(is_deprecated=False)
         if ar.param_values.group:
@@ -1246,16 +1252,24 @@ class Clients(Partners):
             qs = only_coached_on(qs,ar.param_values.only_coached_on)
         if ar.param_values.only_active:
             qs = qs.filter(group__active=True)
+        if ar.param_values.coached_by:
+            qs = only_coached_by(qs,ar.param_values.coached_by)
+            #~ qs = qs.filter(pcsw_coaching_set_by_project__user=ar.param_values.coached_by)
         if ar.param_values.only_primary:
+            #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
             qs = qs.filter(
               pcsw_coaching_set_by_project__primary=True,
-              pcsw_coaching_set_by_project__user=ar.get_user())
+              pcsw_coaching_set_by_project__user=ar.param_values.coached_by)
+            #~ qs = qs.filter(
+              #~ pcsw_coaching_set_by_project__primary=True,
+              #~ pcsw_coaching_set_by_project__user=ar.get_user())
+            #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
-Client._lino_choices_table = Clients
+#~ Client._lino_choices_table = Clients
 
 class ClientsByNationality(Clients):
     #~ app_label = 'contacts'
@@ -1370,7 +1384,7 @@ class ClientsTest(Clients):
     #~ required_user_level = UserLevels.manager
     label = _("Data Test Clients")
     parameters = dict(
-      user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
+      #~ user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
       #~ only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
       #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
       invalid_niss = models.BooleanField(_("Check NISS validity"),default=True),
@@ -1379,7 +1393,7 @@ class ClientsTest(Clients):
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
     )
-    params_template = """overlapping_contracts invalid_niss user group client_state only_coached_on"""
+    params_template = """invalid_niss overlapping_contracts coached_by"""
     #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
     
@@ -1391,13 +1405,13 @@ class ClientsTest(Clients):
         #~ qs = Person.objects.all()
         qs = self.get_request_queryset(ar)
         
-        if ar.param_values.user:
-            qs = only_coached_by(qs,ar.param_values.user)
+        #~ if ar.param_values.user:
+            #~ qs = only_coached_by(qs,ar.param_values.user)
         
         #~ if ar.param_values.today:
             #~ qs = only_coached_persons(qs,ar.param_values.today)
             
-        logger.info("Building ClientsTest data rows...")
+        #~ logger.info("Building ClientsTest data rows...")
         #~ for p in qs.order_by('name'):
         for person in qs:
             messages = []
@@ -1451,8 +1465,10 @@ class UsersWithClients(dd.VirtualTable):
                     def func(self,obj,ar):
                         #~ return MyClientsByGroup.request(
                           #~ ar.ui,master_instance=pg,subst_user=obj)
-                        return MyClients.request(
-                          ar.ui,subst_user=obj,param_values=dict(group=pg))
+                        #~ return MyClients.request(
+                          #~ ar.ui,subst_user=obj,param_values=dict(group=pg))
+                        return Clients.request(ar.ui,
+                            param_values=dict(group=pg,coached_by=obj))
                     return func
                 vf = dd.RequestField(w(pg),verbose_name=pg.name)
                 self.add_virtual_field('G'+pg.ref_name,vf)
@@ -1482,7 +1498,8 @@ class UsersWithClients(dd.VirtualTable):
         if ar.get_user().profile.level < UserLevels.admin:
             qs = qs.exclude(profile__gte=UserLevels.admin)
         for user in qs.order_by('username'):
-            r = MyClients.request(ar.ui,subst_user=user)
+            #~ r = MyClients.request(ar.ui,subst_user=user)
+            r = Clients.request(ar.ui,param_values=dict(coached_by=user))
             if r.get_total_count():
                 user.my_persons = r
                 #~ user._detail_action = users.MySettings.default_action
@@ -1500,12 +1517,13 @@ class UsersWithClients(dd.VirtualTable):
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
         #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
-        return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
+        #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
+        return Clients.request(ar.ui,param_values=dict(only_primary=True,coached_by=obj))
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_active=True))
+        return Clients.request(ar.ui,param_values=dict(only_active=True,coached_by=obj))
 
 
 #
@@ -1861,7 +1879,8 @@ class OverlappingContracts(dd.Table):
         #~ rr.master_instance = rr.get_user()
         qs = super(OverlappingContracts,self).get_request_queryset(rr)
         #~ only_my_persons(qs,rr.get_user())
-        qs = only_coached_persons(qs,datetime.date.today())
+        #~ qs = only_coached_persons(qs,datetime.date.today())
+        qs = only_coached_at(qs,datetime.date.today())
         #~ qs = qs.filter()
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs

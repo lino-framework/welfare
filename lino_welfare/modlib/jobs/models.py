@@ -1257,8 +1257,9 @@ class JobsOverview(mixins.EmptyTable):
                         if not until or (ct.applies_from <= today and until >= today):
                             actives.append(ct)
                 qs = job.candidature_set.order_by('date_submitted')
-                qs = pcsw.only_coached_persons(qs,today,
-                    'person__coached_from','person__coached_until')
+                #~ qs = pcsw.only_coached_persons(qs,today,
+                    #~ 'person__coached_from','person__coached_until')
+                qs = pcsw.only_coached_at(qs,today)
                 for cand in qs:
                     #~ if not req.contract:
                     candidates.append(cand)

@@ -38,16 +38,12 @@ from django.conf import settings
 #~ from lino import choices_method, simple_choices_method
 #~ from lino.modlib.contacts import models as contacts
 from lino.modlib.users import models as users
-from lino.modlib.cal.utils import DurationUnits
+from lino.modlib.cal.utils import amonthago
 
 
 #~ from lino_welfare.models import Person
 #~ from lino_welfare.modlib.pcsw import models as welfare
 from lino_welfare.modlib.pcsw import models as pcsw
-
-def amonthago():
-    return DurationUnits.months.add_duration(datetime.date.today(),-1)
-        
 
 
 class Broker(dd.Model):
@@ -171,18 +167,24 @@ class NewClients(pcsw.Clients):
     label = _("New Clients")
     use_as_default_table = False
     
-    parameters = dict(
-        coached_by = models.ForeignKey(users.User,verbose_name=_("Coached by"),blank=True),
-        since = models.DateField(_("Since"),blank=True,default=amonthago),
-        **pcsw.Clients.parameters
-    )
-    params_layout = "coached_by since " + pcsw.Clients.params_layout
+    #~ parameters = dict(
+        #~ coached_by = models.ForeignKey(users.User,verbose_name=_("Coached by"),blank=True),
+        #~ since = models.DateField(_("Since"),blank=True,default=amonthago),
+        #~ **pcsw.Clients.parameters
+    #~ )
+    #~ params_layout = "since " + pcsw.Clients.params_layout
     
     column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
     
     
     @classmethod
-    def get_request_queryset(self,ar):
+    def param_defaults(self,**kw):
+        kw = super(NewClients,self).param_defaults(**kw)
+        kw.update(coached_since=amonthago())
+        return kw
+        
+    @classmethod
+    def unused_get_request_queryset(self,ar):
         """
         We only want the Clients who actually have at least one client.
         We store the corresponding request in the user object 
@@ -191,8 +193,8 @@ class NewClients(pcsw.Clients):
         #~ qs = Person.objects.all()
         qs = super(NewClients,self).get_request_queryset(ar)
         
-        if ar.param_values.coached_by:
-            qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
+        #~ if ar.param_values.coached_by:
+            #~ qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
             
         if ar.param_values.since:
             qs = pcsw.only_coached_since(qs,ar.param_values.since)

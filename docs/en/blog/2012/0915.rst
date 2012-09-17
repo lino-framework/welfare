@@ -14,8 +14,9 @@
   
 - Removed obsolete field Company.hourly_rate  
 
-- Removed the tables MyClientsByGroup, MyActiveClients and MyPrimaryClients
-  because these cases are now handled via `Clients.parameters`.
+- Removed the tables MyClients, MyClientsByGroup, 
+  MyActiveClients and MyPrimaryClients because these cases 
+  are now handled via `Clients.parameters`.
 
 Uff! die Tabelle UsersWithclients in der Demo-Datenbank hat jetzt eine 
 einigermaßen realistische Füllung:
