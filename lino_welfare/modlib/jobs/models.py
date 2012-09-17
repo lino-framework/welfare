@@ -1259,7 +1259,7 @@ class JobsOverview(mixins.EmptyTable):
                 qs = job.candidature_set.order_by('date_submitted')
                 #~ qs = pcsw.only_coached_persons(qs,today,
                     #~ 'person__coached_from','person__coached_until')
-                qs = pcsw.only_coached_at(qs,today)
+                qs = pcsw.only_coached_on(qs,today)
                 for cand in qs:
                     #~ if not req.contract:
                     candidates.append(cand)

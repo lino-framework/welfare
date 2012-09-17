@@ -1,6 +1,7 @@
 20120917
 ========
 
+- Fixed bug in testing:  when trying to show 
 ::
 
   AttributeError 'module' object has no attribute 'only_coached_persons'
