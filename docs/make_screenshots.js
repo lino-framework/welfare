@@ -38,6 +38,7 @@ add_screenshot('/api/debts/Budgets/2?tab=1&ul='+LANGUAGE,'debts.Budget.detail.1.
 add_screenshot('/api/debts/Budgets/2?tab=2&ul='+LANGUAGE,'debts.Budget.detail.2.png');
 add_screenshot('/api/debts/Budgets/2?tab=3&ul='+LANGUAGE,'debts.Budget.detail.3.png');
 add_screenshot('/api/debts/Budgets/2?tab=4&ul='+LANGUAGE,'debts.Budget.detail.4.png');
+add_screenshot('/api/jobs/JobsOverview?ul='+LANGUAGE,'jobs.JobsOverview.png');
     
   
 //~ Start working

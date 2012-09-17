@@ -9,11 +9,11 @@ extension.
 
 .. toctree::
 
-    modlib.welfare
-    modlib.debts
-    modlib.cv
-    modlib.isip
-    modlib.jobs
-    modlib.courses
-    modlib.cbss
-    modlib.newcomers
+    lino_welfare.welfare
+    lino_welfare.debts
+    lino_welfare.cv
+    lino_welfare.isip
+    lino_welfare.jobs
+    lino_welfare.courses
+    lino_welfare.cbss
+    lino_welfare.newcomers

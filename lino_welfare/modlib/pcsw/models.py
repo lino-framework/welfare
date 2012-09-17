@@ -1177,20 +1177,23 @@ def only_coached_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
             
-def only_coached_on(qs,today):
+def only_coached_on(qs,today,join=None):
     """
     Add a filter to the Queryset `qs` (on model Client) 
     which leaves only the clients that are (or were or will be) coached 
     on the specified date.
     """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
+    n = 'pcsw_coaching_set_by_project'
+    if join: 
+        n = join + '__' + n
     return qs.filter(
-        Q(pcsw_coaching_set_by_project__end_date__isnull=False)
-          |Q(pcsw_coaching_set_by_project__start_date__isnull=False),
-        Q(pcsw_coaching_set_by_project__end_date__isnull=True)
-          |Q(pcsw_coaching_set_by_project__end_date__gte=today),
-        Q(pcsw_coaching_set_by_project__start_date__isnull=True)
-          |Q(pcsw_coaching_set_by_project__start_date__lte=today)).distinct()
+        Q(**{n+'__end_date__isnull':False})
+          |Q(**{n+'__start_date__isnull':False}),
+        Q(**{n+'__end_date__isnull':True})
+          |Q(**{n+'__end_date__gte':today}),
+        Q(**{n+'__start_date__isnull':True})
+          |Q(**{n+'__start_date__lte':today})).distinct()
             
     
 #~ from lino.modlib.cal.utils import amonthago

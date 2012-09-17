@@ -1,4 +1,0 @@
-20120906
-========
-
-Added new models pcsw.Coaching and `pcsw.Third`.

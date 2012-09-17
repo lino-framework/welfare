@@ -232,3 +232,8 @@ from lino.utils.sphinx import setup
 html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 
 #~ todo_include_todos = True
+
+
+intersphinx_mapping = {
+  'lino': ('http://packages.python.org/lino', None )
+}

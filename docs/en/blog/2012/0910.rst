@@ -1,5 +1,0 @@
-20120910
-========
-
-Worked on the new ProjectContacts and Coaching tables. 
-CoachingType, ClientState, demo fixtures and watch_tim.
