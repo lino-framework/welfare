@@ -615,6 +615,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
 
     @chooser()
     def account_choices(cls,account_type):
+        #~ print '20120918 account_choices', account_type
         return accounts.Account.objects.filter(type=account_type)
         
     @chooser()
@@ -704,6 +705,11 @@ class EntriesByType(Entries):
             #~ print 20120411, unicode(self.label)
             self.known_values = dict(account_type=self._account_type)
             
+    #~ @chooser()
+    #~ def account_choices(cls):
+        #~ print '20120918 account_choices', account_type
+        #~ return accounts.Account.objects.filter(type=cls._account_type)
+        
 class EntriesByBudget(Entries):
     master_key = 'budget'
     column_names = "account description amount actor:10 periods:10 remark todo seqno"
@@ -716,9 +722,11 @@ class ExpensesByBudget(EntriesByBudget,EntriesByType):
     _account_type = AccountTypes.expense
         
 class IncomesByBudget(EntriesByBudget,EntriesByType):
+    "Incomes By Budget"
     _account_type = AccountTypes.income
     
 class LiabilitiesByBudget(EntriesByBudget,EntriesByType):
+    "Liabilities By Budget"
     _account_type = AccountTypes.liability
     column_names = "account partner remark amount actor:10 distribute monthly_rate todo seqno"
     

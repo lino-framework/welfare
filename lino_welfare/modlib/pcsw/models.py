@@ -144,16 +144,6 @@ def niss_validator(national_id):
               expected=xtest, found=found)
             )
 
-
-
-#~ CIVIL_STATE_CHOICES = [
-  #~ ('1', _("single")   ),
-  #~ ('2', _("married")  ),
-  #~ ('3', _("divorced") ),
-  #~ ('4', _("widowed")  ),
-  #~ ('5', _("separated")  ), # Getrennt von Tisch und Bett / 
-#~ ]
-
 class CivilState(ChoiceList):
     """
     Civil states, using Belgian codes.
@@ -162,7 +152,7 @@ class CivilState(ChoiceList):
     label = _("Civil state")
     
     @classmethod
-    def old2new(cls,old):
+    def old2new(cls,old): # was used for migrating to 1.4...
         if old == '1': return cls.single
         if old == '2': return cls.married
         if old == '3': return cls.divorced
@@ -180,7 +170,7 @@ add('22', _("Married (living with another partner)"))
 add('30', _("Widowed"),'widowed')
 add('33', _("Widow cohabitating"))
 add('40', _("Divorced"),'divorced')
-add('50', _("Separated"),'separated')
+add('50', _("Separated"),'separated') # Getrennt von Tisch und Bett / 
 
 
 #~ '10', 'Célibataire', 'Ongehuwd', 'ledig'
@@ -372,7 +362,7 @@ class ClientStates(ChoiceList):
     label = _("Client state")
 add = ClientStates.add_item
 add('10', _("Newcomer"),'newcomer')       # "N" in PAR->Attrib
-add('20', _("Active"),'active')           # neither newcomer nor former, IdPrt != "I"
+add('20', _("Coached"),'coached')         # neither newcomer nor former, IdPrt != "I"
 add('30', _("Official"),'official')       # the client is "integrated"
 add('40', _("Former"),'former')           # IdPrt == "I"
 add('50', _("Invalid"),'invalid')         # duplicate or doesn't correspond to a real person
@@ -554,7 +544,7 @@ class Client(Person):
         
     
     
-    @chooser()
+    @dd.chooser()
     def job_office_contact_choices(cls):
         sc = settings.LINO.site_config # get_site_config()
         if sc.job_office is not None:
@@ -1175,7 +1165,8 @@ def only_coached_by(qs,user):
     
 def only_coached_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
-    return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
+    #~ return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
+    return qs.filter(pcsw_coaching_set_by_project__start_date__gte=since) 
             
 def only_coached_on(qs,today,join=None):
     """
@@ -1207,7 +1198,7 @@ class Clients(Partners):
     #~ use_as_default_table = False 
     #~ known_values = dict(is_active=True,newcomer=False)
     #~ known_values = dict(is_deprecated=False)
-    #~ known_values = dict(client_state=ClientStates.active)
+    #~ known_values = dict(client_state=ClientStates.coached)
     #~ filter = dict(is_active=True,newcomer=False)
     #~ label = Person.Meta.verbose_name_plural + ' ' + _("(unfiltered)")
     
@@ -1230,12 +1221,12 @@ class Clients(Partners):
           verbose_name=_("Integration phase")),
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
           verbose_name=_("Coached by")),
-      coached_since = models.DateField(_("Coached since"),blank=True),
+      coached_since = models.DateField(_("New since"),blank=True),
       #~ coached_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
       only_active = models.BooleanField(_("Only active clients"),default=False,
         help_text=_("Show only clients in 'active' integration phases")),
       )
-    params_layout = 'coached_by group client_state only_coached_on only_primary show_deprecated'
+    params_layout = 'coached_by group client_state only_coached_on only_primary show_deprecated coached_since'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1272,6 +1263,15 @@ class Clients(Partners):
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
+    @classmethod
+    def get_title(self,ar):
+        title = super(Clients,self).get_title(ar)
+        if ar.param_values.coached_since:
+            title += _(" new since ") + str(ar.param_values.coached_since)
+        if ar.param_values.coached_by:
+            title += _(" of ") + unicode(ar.param_values.coached_by)
+        return title
+        
 #~ Client._lino_choices_table = Clients
 
 class ClientsByNationality(Clients):
@@ -1283,58 +1283,46 @@ class ClientsByNationality(Clients):
 
 
 class MyClients(Clients):
-    u"""
-    Show only Clients attended 
-    by the requesting user (or another user, 
-    specified via :attr:`lino.ui.requests.URL_PARAMS_SUBST_USER`),
-    either as primary or as secondary attendant.
-    
-    Damit jemand als begleitet gilt, muss mindestens eines der 
-    beiden Daten coached_from und coached_until ausgefüllt sein.
-    
-    """
-    required = dict(user_groups = ['integ'])
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    
-    #~ app_label = 'contacts'
-    use_as_default_table = False
     label = _("My clients")
-    #~ order_by = ['last_name','first_name']
-    #~ column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
-    column_names = "name_column:20 client_state applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    required = dict(user_groups = ['integ'])
+    use_as_default_table = False
     
     @classmethod
-    def get_title(self,rr):
-        return _("Clients of %s") % rr.get_user()
+    def param_defaults(self,ar,**kw):
+        kw = super(MyClients,self).param_defaults(ar,**kw)
+        kw.update(coached_by=ar.get_user())
+        #~ print "20120918 MyClients.param_defaults", kw['coached_by']
+        return kw
         
-    @classmethod
-    def get_request_queryset(self,ar):
-        qs = super(MyClients,self).get_request_queryset(ar)
-        u = ar.get_user()
-        qs = only_coached_by(qs,u)
-        #~ if u is not None and u.username == 'root':
-        #~ logger.info('20120914 MyClients.get_request_queryset %s',ar)
-        #~ qs = only_coached_on(qs,datetime.date.today())
-        #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
-        return qs
-        #~ today = datetime.date.today()
-        #~ Q = models.Q
-        #~ q1 = Q(coach1__exact=rr.user) | Q(coach2__exact=rr.user)
-        #~ q2 = Q(coached_from__isnull=False) | Q(coached_until__isnull=False,coached_until__gte=today)
-        #~ return qs.filter(q1,q2)
+    
+  
+#~ class UnusedMyClients(Clients):
+    #~ u"""
+    #~ Show only Clients attended 
+    #~ by the requesting user (or another user, 
+    #~ specified via :attr:`lino.ui.requests.URL_PARAMS_SUBST_USER`),
+    #~ either as primary or as secondary attendant.
+    
+    #~ Damit jemand als begleitet gilt, muss mindestens eines der 
+    #~ beiden Daten coached_from und coached_until ausgefüllt sein.
+    
+    #~ """
+    #~ required = dict(user_groups = ['integ'])
+    #~ use_as_default_table = False
+    #~ label = _("My clients")
+    #~ column_names = "name_column:20 client_state applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    
+    #~ @classmethod
+    #~ def get_title(self,rr):
+        #~ return _("Clients of %s") % rr.get_user()
         
-    #~ @dd.virtualfield(models.DateField(_("Contract starts")))
-    #~ def applies_from(self,obj,ar):
-        #~ c = obj.get_active_contract()
-        #~ if c is not None:
-            #~ return c.applies_from
-            
-    #~ @dd.virtualfield(models.DateField(_("Contract ends")))
-    #~ def applies_until(self,obj,ar):
-        #~ c = obj.get_active_contract()
-        #~ if c is not None:
-            #~ return c.applies_until
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ qs = super(MyClients,self).get_request_queryset(ar)
+        #~ u = ar.get_user()
+        #~ qs = only_coached_by(qs,u)
+        #~ return qs
+        
 
 #~ class MyClientsByGroup(MyClients):
     #~ master_key = 'group'
@@ -1396,7 +1384,7 @@ class ClientsTest(Clients):
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
     )
-    params_template = """invalid_niss overlapping_contracts coached_by"""
+    params_layout = """invalid_niss overlapping_contracts coached_by"""
     #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
     
@@ -1716,7 +1704,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
 class PersonSearches(dd.Table):
     required = dict(user_groups='integ')
     model = PersonSearch
-    detail_template = """
+    detail_layout = """
     id:8 title 
     only_my_persons coached_by period_from period_until aged_from:10 aged_to:10 gender:10
     pcsw.LanguageKnowledgesBySearch pcsw.WantedPropsBySearch pcsw.UnwantedPropsBySearch
@@ -2025,33 +2013,34 @@ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
         verbose_name=_("until"))
     #~ state = CoachingStates.field(default=CoachingStates.new)
     #~ type = CoachingTypes.field()
-    type = dd.ForeignKey(CoachingType)
+    type = dd.ForeignKey(CoachingType,blank=True,null=True)
     primary = models.BooleanField(_("Primary"))
     
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
-    parameters = dict(
-        type=dd.ForeignKey(CoachingType,null=True,blank=True),
-        group=dd.ForeignKey(PersonGroup,blank=True,null=True),
-        today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
-        )
-    params_template = "type group today"
+    #~ parameters = dict(
+        #~ type=dd.ForeignKey(CoachingType,null=True,blank=True),
+        #~ group=dd.ForeignKey(PersonGroup,blank=True,null=True),
+        #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
+        #~ )
+    #~ params_layout = "type group today"
     
-    @classmethod
-    def get_request_queryset(self,ar):
-        qs = super(Coachings,self).get_request_queryset(ar)
-        if ar.param_values.group:
-            qs = qs.filter(project__group=ar.param_values.group)
-        if ar.param_values.type:
-            qs = qs.filter(type=ar.param_values.type)
-        return qs
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ qs = super(Coachings,self).get_request_queryset(ar)
+        #~ if ar.param_values.group:
+            #~ qs = qs.filter(project__group=ar.param_values.group)
+        #~ if ar.param_values.type:
+            #~ qs = qs.filter(type=ar.param_values.type)
+        #~ return qs
 
     
 class CoachingsByProject(Coachings):
     master_key = 'project'
-    column_names = 'start_date end_date user type *'
+    order_by = ['start_date']
+    column_names = 'start_date end_date type user *'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
@@ -2211,7 +2200,7 @@ def customize_sqlite():
 class Home(cal.Home):
     label = cal.Home.label
     app_label = 'lino'
-    detail_template = """
+    detail_layout = """
     quick_links:80x1
     pcsw.UsersWithClients:80x8
     coming_reminders:40x16 missed_reminders:40x16
@@ -2240,6 +2229,7 @@ def setup_my_menu(site,ui,user,m):
               
         #~ m = m.add_menu("coachings",MyCoachings.label)
         m.add_action(MyClients)
+        #~ m.add_action(Clients)
         m.add_action(MyCoachings)
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
             #~ mycoachings.add_action(

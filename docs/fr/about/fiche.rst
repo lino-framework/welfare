@@ -1,8 +1,8 @@
 Fiche technique
 ===============
 
-Lino est un framework (librarie de construction d’applications), et « Lino pour CPAS » est
-une des applications principales développées également par l’auteur du framework.
+Note: Lino est un framework (librarie de construction d’applications), 
+et « Lino pour CPAS » est une application développée avec Lino.
 
 Charactéristiques du framework
 ------------------------------
@@ -19,17 +19,25 @@ Charactéristiques du framework
 - Filtres et fonctions de recherche intuitifs et avancés
 - Authentication annuaire LDAP
 - Customisation facile
-- Système sophistiqué pour définir et modifier les workflows Fonctionnalités générales secrétariat
-- Gestion des contacts avec personnes et organisations.
+- Système sophistiqué pour définir et modifier les workflows 
+
+Fonctionnalités générales secrétariat
+-------------------------------------
+
+- Gestion des contacts avec personnes et organisations
 - Calendrier
 - Messagerie électronique
-- Gestion des envois (courriers, mails, SMS, ...) Fonctionnalités spécifiques aux CPAS 
+- Gestion des envois (courriers, mails, SMS, ...) 
 
-Signalétiques
--------------
+Fonctionnalités spécifiques aux CPAS 
+-------------------------------------
 
-- Les signalétiques spécifiques aux CPAS (Clients, Ménages,...) sont intégrées de 
-  manière transparente dans la gestion générale des contacts.
+- Les données signalétiques spécifiques aux CPAS (Clients, Ménages,...) 
+  sont intégrées de manière transparente dans la gestion générale des contacts.
+  
+- Un même client peut être accompagné par plusieurs agents dans des services différents.
+
+- Lecture de la carte d'identité électronique (eID)
   
 
 Historique client

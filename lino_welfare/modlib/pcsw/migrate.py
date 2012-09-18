@@ -1425,7 +1425,7 @@ def migrate_from_1_4_10(globals_dict):
         if national_id:
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
-            client_state = pcsw.ClientStates.active
+            client_state = pcsw.ClientStates.coached
             if newcomer:
                 client_state = pcsw.ClientStates.newcomer
             elif not is_active:

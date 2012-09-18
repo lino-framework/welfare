@@ -67,7 +67,7 @@ COACHING_STORIES[pcsw.ClientStates.former] =  Cycler(
         (-900,-430,False),
         (-430,-200,True),
     ])
-COACHING_STORIES[pcsw.ClientStates.active] = Cycler(
+COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
     [ 
         (-800,-440,False),
         (-440,-210,False),
@@ -356,7 +356,7 @@ def objects():
     
     def person2client(p,**kw):
         c = mti.insert_child(p,Client,**kw)
-        c.client_state = pcsw.ClientStates.active
+        c.client_state = pcsw.ClientStates.coached
         c.save()
         return Client.objects.get(pk=p.pk)
     
@@ -488,7 +488,7 @@ def objects():
             count += 1
             if count % 2:
                 #~ client.is_active = True
-                client.client_state=pcsw.ClientStates.active
+                client.client_state=pcsw.ClientStates.coached
                 #~ args = [client,COACHINGTYPES.pop(),AGENTS.pop()]
                 #~ if count % 2:
                     #~ args.append(None)
@@ -509,7 +509,7 @@ def objects():
             client.save()
             
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
-    CLIENTS = Cycler(Client.objects.filter(client_state=pcsw.ClientStates.active))
+    CLIENTS = Cycler(Client.objects.filter(client_state=pcsw.ClientStates.coached))
     
     #~ oshz = Company.objects.get(name=u"ÖSHZ Eupen")
     
@@ -810,7 +810,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
                 p.languageknowledge_set.create(language_id='fre',written='2',spoken='2')
             p.is_cpas = True
             #~ p.is_active = True
-            #~ p.client_state = pcsw.ClientStates.active
+            #~ p.client_state = pcsw.ClientStates.coached
             #~ p.native_language_id = 'ger'
         p.save()
 

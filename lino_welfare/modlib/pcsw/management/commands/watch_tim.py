@@ -273,7 +273,7 @@ class PAR(Controller):
                 elif data['IDPRT'] == 'I':
                     obj.client_state = pcsw.ClientStates.former
                 else:
-                    obj.client_state = pcsw.ClientStates.active
+                    obj.client_state = pcsw.ClientStates.coached
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
                     #~ if obj.is_deprecated:

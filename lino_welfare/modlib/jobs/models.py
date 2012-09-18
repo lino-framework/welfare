@@ -1166,7 +1166,7 @@ if True: # settings.LINO.user_model:
           show_coming = models.BooleanField(_("coming contracts"),default=True),
           today = models.DateField(_("on"),blank=True,default=datetime.date.today),
         )
-        params_template = """type show_past show_active show_coming today user"""
+        params_layout = """type show_past show_active show_coming today user"""
         #~ params_panel_hidden = False
         
         #~ master_key = 'user'
@@ -1222,18 +1222,21 @@ class JobsOverview(mixins.EmptyTable):
     detail_template = "body"
     
     parameters = dict(
-      date = models.DateField(default=datetime.date.today,blank=True,null=True),
+      #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
+      date = models.DateField(blank=True,null=True),
       contract_type = models.ForeignKey(ContractType,blank=True,null=True),
       job_type = models.ForeignKey(JobType,blank=True,null=True),
       )
     params_panel_hidden = True
 
-    @dd.displayfield(_("Body"))
+    #~ @dd.displayfield(_("Body"))
+    @dd.virtualfield(dd.HtmlBox())
     def body(cls,self,ar):
         #~ logger.info("20120221 3 body(%s)",req)
         #~ logger.info("Waiting 5 seconds...")
         #~ time.sleep(5)
-        today = self.date or datetime.date.today()
+        #~ today = self.date or datetime.date.today()
+        today = ar.param_values.date or datetime.date.today()
         html = ''
         rows = []
           

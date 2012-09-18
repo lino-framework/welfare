@@ -178,8 +178,8 @@ class NewClients(pcsw.Clients):
     
     
     @classmethod
-    def param_defaults(self,**kw):
-        kw = super(NewClients,self).param_defaults(**kw)
+    def param_defaults(self,ar,**kw):
+        kw = super(NewClients,self).param_defaults(ar,**kw)
         kw.update(coached_since=amonthago())
         return kw
         
@@ -225,7 +225,7 @@ class UsersByNewcomer(users.Users):
         since = models.DateField(_("Count Newcomers since"),
             blank=True,default=amonthago),
     )
-    params_template = "for_client since"
+    params_layout = "for_client since"
     
     @chooser()
     def for_client_choices(cls):

@@ -1,4 +1,0 @@
-20120828
-========
-
-Lino for Belgian Welfare centres has finally forked to a separate project.
