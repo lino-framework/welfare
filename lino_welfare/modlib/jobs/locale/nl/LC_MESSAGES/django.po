@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 14:33+0100\n"
+"POT-Creation-Date: 2012-09-18 23:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Job Providers"
 msgstr ""
 
-#: .\models.py:196 .\models.py:832 .\models.py:1316
+#: .\models.py:196 .\models.py:832 .\models.py:1319
 msgid "Jobs"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Candidature by %(person)s"
 msgstr ""
 
-#: .\models.py:1094 .\models.py:1098 .\models.py:1282
+#: .\models.py:1094 .\models.py:1098 .\models.py:1285
 msgid "Candidates"
 msgstr ""
 
@@ -275,14 +275,10 @@ msgstr ""
 msgid "Contracts Situation"
 msgstr ""
 
-#: .\models.py:1231
-msgid "Body"
-msgstr ""
-
-#: .\models.py:1308
+#: .\models.py:1311
 msgid "is Job Provider"
 msgstr ""
 
-#: .\models.py:1330 .\models.py:1345
+#: .\models.py:1333 .\models.py:1348
 msgid "~Jobs"
 msgstr ""

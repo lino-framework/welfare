@@ -253,8 +253,7 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
     """
     """
     
-    class Meta:
-        #~ abstract = True
+    class Meta(contacts.Partner.Meta):
         app_label = 'contacts'
   
     #~ is_active = models.BooleanField(
@@ -267,10 +266,10 @@ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
     #~ New partners may not be used when creating new operations."""
     
     is_deprecated = models.BooleanField(
-        verbose_name=_("deprecated"),default=False)
+        verbose_name=_("obsolete"),default=False)
     """Means that data of this partner may be obsolete because 
     there were no confirmations recently. 
-    Deprecated partners may not be used when creating new operations."""
+    Obsolete partners may not be used when creating new operations."""
     
     activity = models.ForeignKey("pcsw.Activity",
         blank=True,null=True)
@@ -389,19 +388,19 @@ class Client(Person):
     #~ is_dsbe = models.BooleanField(verbose_name=_("is coached"),default=False)
     #~ "Indicates whether this Person is coached."
     
-    coached_from = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("Coached from"))
-    coached_until = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("until"))
+    #~ coached_from = models.DateField(
+        #~ blank=True,null=True,
+        #~ verbose_name=_("Coached from"))
+    #~ coached_until = models.DateField(
+        #~ blank=True,null=True,
+        #~ verbose_name=_("until"))
     
-    coach1 = dd.ForeignKey(settings.LINO.user_model,
-        blank=True,null=True,
-        verbose_name=_("Coach 1"),related_name='coached1')
-    coach2 = dd.ForeignKey(settings.LINO.user_model,
-        blank=True,null=True,
-        verbose_name=_("Coach 2"),related_name='coached2')
+    #~ coach1 = dd.ForeignKey(settings.LINO.user_model,
+        #~ blank=True,null=True,
+        #~ verbose_name=_("Coach 1"),related_name='coached1')
+    #~ coach2 = dd.ForeignKey(settings.LINO.user_model,
+        #~ blank=True,null=True,
+        #~ verbose_name=_("Coach 2"),related_name='coached2')
         
     birth_place = models.CharField(_("Birth place"),
         max_length=200,
@@ -528,7 +527,7 @@ class Client(Person):
         cls.declare_imported_fields(
           '''remarks2
           zip_code city country street street_no street_box 
-          birth_place coach1 language 
+          birth_place language 
           phone fax email 
           card_type card_number card_valid_from card_valid_until
           noble_condition card_issuer
@@ -536,11 +535,12 @@ class Client(Person):
           is_cpas is_senior 
           gesdos_id 
           nationality
-          ''')
+          ''') # coach1 
 
     def get_queryset(self):
         return self.model.objects.select_related(
-            'country','city','coach1','coach2','nationality')
+            #~ 'country','city','coach1','coach2','nationality')
+            'country','city','nationality')
         
     
     
@@ -575,10 +575,10 @@ class Client(Person):
             if qs1.count() == 1: return qs1[0]
             if qs2.count() == 1: return qs2[0]
         
-    def full_clean(self,*args,**kw):
-        if not isrange(self.coached_from,self.coached_until):
-            raise ValidationError(u'Coaching period ends before it started.')
-        super(Client,self).full_clean(*args,**kw)
+    #~ def full_clean(self,*args,**kw):
+        #~ if not isrange(self.coached_from,self.coached_until):
+            #~ raise ValidationError(u'Coaching period ends before it started.')
+        #~ super(Client,self).full_clean(*args,**kw)
             
     #~ def clean(self):
         #~ if self.job_office_contact: 
@@ -603,11 +603,24 @@ class Client(Person):
         super(Client,self).save(*args,**kw)
         self.update_reminders()
         
+    def get_primary_coach(self):
+        """
+        Return the one and only primary coach 
+        (or `None` if there's less or more than one).
+        """
+        qs = self.pcsw_coaching_set_by_project.filter(primary=True).distinct()
+        if qs.count == 1:
+            return qs[0].user
+        return None
+    
+    primary_coach = property(get_primary_coach)
+        
     def update_reminders(self):
         """
         Creates or updates automatic tasks controlled directly by this Person.
         """
-        user = self.coach2 or self.coach1
+        #~ user = self.coach2 or self.coach1
+        user = self.get_primary_coach()
         if user:
             def f():
                 M = DurationUnits.months
@@ -620,9 +633,9 @@ class Client(Person):
                 update_reminder(3,self,user,
                   self.work_permit_suspended_until,
                   _("work permit suspension ends in 1 month"),1,M)
-                update_reminder(4,self,user,
-                  self.coached_until,
-                  _("coaching ends in 1 month"),1,M)
+                #~ update_reminder(4,self,user,
+                  #~ self.coached_until,
+                  #~ _("coaching ends in 1 month"),1,M)
             babel.run_with_language(user.language,f)
               
           
@@ -1163,7 +1176,7 @@ def only_coached_by(qs,user):
     #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
     return qs.filter(pcsw_coaching_set_by_project__user=user).distinct()
     
-def only_coached_since(qs,since):
+def only_new_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     #~ return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
     return qs.filter(pcsw_coaching_set_by_project__start_date__gte=since) 
@@ -1210,23 +1223,23 @@ class Clients(Partners):
     """,window_size=(60,'auto'))
     
     order_by = "last_name first_name id".split()
-    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
+    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     parameters = dict(
-      only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
+      coached_by = models.ForeignKey(users.User,blank=True,null=True,
+          verbose_name=_("Coached by")),
+      coached_on = models.DateField(_("Coached on"),blank=True,null=True,default=datetime.date.today),
       only_primary = models.BooleanField(_("Only primary clients"),default=False),
-      show_deprecated = models.BooleanField(_("Show deprecated"),default=False),
+      also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
       client_state = ClientStates.field(blank=True),
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
           verbose_name=_("Integration phase")),
-      coached_by = models.ForeignKey(users.User,blank=True,null=True,
-          verbose_name=_("Coached by")),
-      coached_since = models.DateField(_("New since"),blank=True),
-      #~ coached_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
+      new_since = models.DateField(_("New clients since"),blank=True),
+      #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
       only_active = models.BooleanField(_("Only active clients"),default=False,
         help_text=_("Show only clients in 'active' integration phases")),
       )
-    params_layout = 'coached_by group client_state only_coached_on only_primary show_deprecated coached_since'
+    params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1235,15 +1248,15 @@ class Clients(Partners):
     @classmethod
     def get_request_queryset(self,ar):
         qs = super(Clients,self).get_request_queryset(ar)
-        if ar.param_values.coached_since:
-            qs = only_coached_since(qs,ar.param_values.coached_since)
+        if ar.param_values.new_since:
+            qs = only_new_since(qs,ar.param_values.new_since)
         
-        if not ar.param_values.show_deprecated:
+        if not ar.param_values.also_obsolete:
             qs = qs.filter(is_deprecated=False)
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
-        if ar.param_values.only_coached_on:
-            qs = only_coached_on(qs,ar.param_values.only_coached_on)
+        if ar.param_values.coached_on:
+            qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.only_active:
             qs = qs.filter(group__active=True)
         if ar.param_values.coached_by:
@@ -1265,11 +1278,30 @@ class Clients(Partners):
 
     @classmethod
     def get_title(self,ar):
-        title = super(Clients,self).get_title(ar)
-        if ar.param_values.coached_since:
-            title += _(" new since ") + str(ar.param_values.coached_since)
+        #~ title = super(Clients,self).get_title(ar)
+        title = Client._meta.verbose_name_plural
+        #~ if ar.param_values.new_since:
+            #~ title = _("New clients since") + ' ' + str(ar.param_values.new_since)
+            #~ title += _(" new since ") + str(ar.param_values.new_since)
         if ar.param_values.coached_by:
             title += _(" of ") + unicode(ar.param_values.coached_by)
+        if ar.param_values.coached_on:
+            title += _(" on ") + babel.dtos(ar.param_values.coached_on)
+        tags = []
+        if ar.param_values.client_state:
+            tags.append(unicode(ar.param_values.client_state))
+        if ar.param_values.only_active:
+            tags.append(unicode(_("active")))
+        if ar.param_values.only_primary:
+            tags.append(unicode(_("primary")))
+        if ar.param_values.also_obsolete:
+            tags.append(unicode(_("obsolete")))
+        if ar.param_values.group:
+            tags.append(unicode(ar.param_values.group))
+        if ar.param_values.new_since:
+            tags.append(unicode(_("new since")) + ' ' + babel.dtos(ar.param_values.new_since))
+        if len(tags):
+            title += " (%s)" % (', '.join(tags))
         return title
         
 #~ Client._lino_choices_table = Clients
@@ -1501,8 +1533,9 @@ class UsersWithClients(dd.VirtualTable):
                 #~ user._detail_action = users.MySettings.default_action
                 yield user
                 
-    @dd.virtualfield('pcsw.Client.coach1')
+    #~ @dd.virtualfield('pcsw.Client.coach1')
     #~ @dd.virtualfield(dd.ForeignKey(User))
+    @dd.virtualfield('pcsw.Coaching.user')
     def user(self,obj,ar):
         return obj
         
@@ -1813,7 +1846,7 @@ class ClientsBySearch(Clients):
             qs = only_coached_by(qs,search.coached_by)
             
         if search.period_from:
-            qs = only_coached_since(qs,search.period_from)
+            qs = only_new_since(qs,search.period_from)
             
         if search.period_until:
             qs = only_coached_until(qs,search.period_until)
@@ -2016,6 +2049,11 @@ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
     type = dd.ForeignKey(CoachingType,blank=True,null=True)
     primary = models.BooleanField(_("Primary"))
     
+    def full_clean(self,*args,**kw):
+        if not isrange(self.start_date,self.end_date):
+            raise ValidationError(_("Coaching period ends before it started."))
+        super(Coaching,self).full_clean(*args,**kw)
+        
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
@@ -2211,11 +2249,6 @@ class Home(cal.Home):
 
 MODULE_LABEL = _("PCSW")
 
-def setup_explorer_menu(site,ui,user,m): 
-    m = m.add_menu("pcsw",MODULE_LABEL)
-    m.add_action(Coachings)
-    m.add_action(ClientContacts)
-    
 def setup_my_menu(site,ui,user,m): 
     #~ if user.is_spis:
     if user.profile.integ_level:
@@ -2251,8 +2284,11 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(ExclusionTypes)
     m.add_action(CoachingTypes)
     
+    
 def setup_explorer_menu(site,ui,user,m):
     m  = m.add_menu("pcsw",MODULE_LABEL)
+    m.add_action(Coachings)
+    m.add_action(ClientContacts)
     m.add_action(Exclusions)
     m.add_action(PersonSearches)
     

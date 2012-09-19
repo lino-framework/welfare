@@ -174,13 +174,14 @@ class NewClients(pcsw.Clients):
     #~ )
     #~ params_layout = "since " + pcsw.Clients.params_layout
     
-    column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
+    #~ column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
+    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
     
     
     @classmethod
     def param_defaults(self,ar,**kw):
         kw = super(NewClients,self).param_defaults(ar,**kw)
-        kw.update(coached_since=amonthago())
+        kw.update(new_since=amonthago())
         return kw
         
     @classmethod
@@ -197,7 +198,7 @@ class NewClients(pcsw.Clients):
             #~ qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
             
         if ar.param_values.since:
-            qs = pcsw.only_coached_since(qs,ar.param_values.since)
+            qs = pcsw.only_new_since(qs,ar.param_values.since)
         return qs
             
     

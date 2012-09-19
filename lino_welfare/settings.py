@@ -183,11 +183,14 @@ class Lino(Lino):
         """
         from lino.core.modeltools import models_by_abc
         from django.db.models import Q
-        from lino.modlib.isip import models as isip
+        from lino_welfare.modlib.isip import models as isip
         
-        for obj in self.modules.contacts.Person.objects.filter(
-          Q(coach2=user)|Q(coach2__isnull=True,coach1=user)):
-            yield obj
+        #~ for obj in self.modules.contacts.Person.objects.filter(
+          #~ Q(coach2=user)|Q(coach2__isnull=True,coach1=user)):
+            #~ yield obj
+        for obj in self.modules.pcsw.Coaching.objects.filter(
+            user=user,primary=True):
+            yield obj.project
         for obj in self.modules.uploads.Upload.objects.filter(user=user):
             yield obj
         for model in models_by_abc(isip.ContractBase):

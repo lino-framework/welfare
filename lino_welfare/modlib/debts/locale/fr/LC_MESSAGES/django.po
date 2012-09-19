@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 14:33+0100\n"
+"POT-Creation-Date: 2012-09-18 23:22+0100\n"
 "PO-Revision-Date: 2012-06-24 22:41+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -122,8 +122,8 @@ msgstr "Entrée"
 msgid "Budget Entries"
 msgstr "Entrées"
 
-#: .\models.py:573 .\models.py:861 .\models.py:865 .\models.py:869
-#: .\models.py:873 .\models.py:877 .\models.py:973
+#: .\models.py:573 .\models.py:869 .\models.py:873 .\models.py:877
+#: .\models.py:881 .\models.py:885 .\models.py:981
 msgid "Amount"
 msgstr "Montant"
 
@@ -139,11 +139,11 @@ msgstr "distribuer"
 msgid "To Do"
 msgstr ""
 
-#: .\models.py:591 .\models.py:624 .\models.py:850 .\models.py:969
+#: .\models.py:591 .\models.py:625 .\models.py:858 .\models.py:977
 msgid "Description"
 msgstr ""
 
-#: .\models.py:600 .\models.py:1094
+#: .\models.py:600 .\models.py:1102
 msgid "Periods"
 msgstr "Périodes"
 
@@ -151,52 +151,52 @@ msgstr "Périodes"
 msgid "Monthly rate"
 msgstr "Montant mensuel"
 
-#: .\models.py:650
+#: .\models.py:651
 msgid "Periods must be > 0"
 msgstr ""
 
-#: .\models.py:654
+#: .\models.py:655
 #, python-format
 msgid "Cannot set 'Distribute' when 'Monthly rate' is %r"
 msgstr ""
 
-#: .\models.py:846
+#: .\models.py:854
 msgid "Total"
 msgstr ""
 
-#: .\models.py:943
+#: .\models.py:951
 msgid "Overview"
 msgstr "Apercu"
 
-#: .\models.py:991
+#: .\models.py:999
 msgid "Debts distribution"
 msgstr "Répartition au marc-le-franc"
 
-#: .\models.py:1019
+#: .\models.py:1027
 msgid "%"
 msgstr ""
 
-#: .\models.py:1023
+#: .\models.py:1031
 msgid "Monthly payback suggested"
 msgstr "Remboursement mensuel"
 
-#: .\models.py:1030
+#: .\models.py:1038
 msgid "Creditor"
 msgstr "Créancier"
 
-#: .\models.py:1031
+#: .\models.py:1039
 msgid "Debt"
 msgstr "Dette"
 
-#: .\models.py:1036
+#: .\models.py:1044
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
-#: .\models.py:1085
+#: .\models.py:1093
 msgid "Required for Households"
 msgstr "obligatoire pour ménages"
 
-#: .\models.py:1090
+#: .\models.py:1098
 msgid "Required for Persons"
 msgstr "obligatoire pour personnes"
 

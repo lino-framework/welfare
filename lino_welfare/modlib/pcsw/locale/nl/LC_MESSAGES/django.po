@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 14:33+0100\n"
+"POT-Creation-Date: 2012-09-19 00:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,809 +36,824 @@ msgstr ""
 msgid "Check digit is %(found)d but should be %(expected)d"
 msgstr ""
 
-#: .\models.py:162
+#: .\models.py:152
 msgid "Civil state"
 msgstr ""
 
-#: .\models.py:174
+#: .\models.py:164
 msgid "Single"
 msgstr ""
 
-#: .\models.py:175
+#: .\models.py:165
 msgid "Single cohabitating"
 msgstr ""
 
-#: .\models.py:176
+#: .\models.py:166
 msgid "Single with child"
 msgstr ""
 
-#: .\models.py:177
+#: .\models.py:167
 msgid "Married"
 msgstr ""
 
-#: .\models.py:178
+#: .\models.py:168
 msgid "Married (living alone)"
 msgstr ""
 
-#: .\models.py:179
+#: .\models.py:169
 msgid "Married (living with another partner)"
 msgstr ""
 
-#: .\models.py:180
+#: .\models.py:170
 msgid "Widowed"
 msgstr ""
 
-#: .\models.py:181
+#: .\models.py:171
 msgid "Widow cohabitating"
 msgstr ""
 
-#: .\models.py:182
+#: .\models.py:172
 msgid "Divorced"
 msgstr ""
 
-#: .\models.py:183
+#: .\models.py:173
 msgid "Separated"
 msgstr ""
 
-#: .\models.py:211
+#: .\models.py:201
 msgid "Residence type"
 msgstr ""
 
-#: .\models.py:214
+#: .\models.py:204
 msgid "Registry of citizens"
 msgstr ""
 
-#: .\models.py:215
+#: .\models.py:205
 msgid "Registry of foreigners"
 msgstr ""
 
-#: .\models.py:216
+#: .\models.py:206
 msgid "Waiting for registry"
 msgstr ""
 
-#: .\models.py:224 .\models.py:1128
+#: .\models.py:214 .\models.py:1118
 msgid "eID card type"
 msgstr ""
 
-#: .\models.py:227
+#: .\models.py:217
 msgid "Belgian citizen"
 msgstr ""
 
-#: .\models.py:229
+#: .\models.py:219
 msgid "Kids card (< 12 year)"
 msgstr ""
 
-#: .\models.py:231
+#: .\models.py:221
 msgid "Habilitation"
 msgstr ""
 
-#: .\models.py:233
+#: .\models.py:223
 msgid "Foreigner card A"
 msgstr ""
 
-#: .\models.py:237
+#: .\models.py:227
 msgid "Foreigner card B"
 msgstr ""
 
-#: .\models.py:241
+#: .\models.py:231
 msgid "Foreigner card C"
 msgstr ""
 
-#: .\models.py:245
+#: .\models.py:235
 msgid "Foreigner card D"
 msgstr ""
 
-#: .\models.py:249
+#: .\models.py:239
 msgid "Foreigner card E"
 msgstr ""
 
-#: .\models.py:253
+#: .\models.py:243
 msgid "Foreigner card E+"
 msgstr ""
 
-#: .\models.py:254
+#: .\models.py:244
 msgid "Foreigner card F"
 msgstr ""
 
-#: .\models.py:258
+#: .\models.py:248
 msgid "Foreigner card F+"
 msgstr ""
 
-#: .\models.py:280
+#: .\models.py:270
 msgid "deprecated"
 msgstr ""
 
-#: .\models.py:291
+#: .\models.py:281
 msgid "Bank account 1"
 msgstr ""
 
-#: .\models.py:295
+#: .\models.py:285
 msgid "Bank account 2"
 msgstr ""
 
-#: .\models.py:333
+#: .\models.py:323
 msgid "Cannot delete companies and persons imported from TIM"
 msgstr ""
 
-#: .\models.py:345 .\models.py:1095
+#: .\models.py:335 .\models.py:1085
 msgid "Person"
 msgstr ""
 
-#: .\models.py:346
+#: .\models.py:336
 msgid "Persons"
 msgstr ""
 
-#: .\models.py:348
+#: .\models.py:338
 msgid "is Client"
 msgstr ""
 
-#: .\models.py:349
+#: .\models.py:339
 msgid "Whether this Person is a Client."
 msgstr ""
 
-#: .\models.py:372
+#: .\models.py:362
 msgid "Client state"
 msgstr ""
 
-#: .\models.py:374
+#: .\models.py:364
 msgid "Newcomer"
 msgstr ""
 
-#: .\models.py:375
-msgid "Active"
+#: .\models.py:365
+msgid "Coached"
 msgstr ""
 
-#: .\models.py:376
+#: .\models.py:366
 msgid "Official"
 msgstr ""
 
-#: .\models.py:377
+#: .\models.py:367
 msgid "Former"
 msgstr ""
 
-#: .\models.py:378
+#: .\models.py:368
 msgid "Invalid"
 msgstr ""
 
-#: .\models.py:384
+#: .\models.py:374
 msgid "Client"
 msgstr ""
 
-#: .\models.py:385
+#: .\models.py:375
 msgid "Clients"
 msgstr ""
 
-#: .\models.py:389
+#: .\models.py:379
 msgid "Remarks (Social Office)"
 msgstr ""
 
-#: .\models.py:392
+#: .\models.py:382
 msgid "Gesdos ID"
 msgstr ""
 
-#: .\models.py:394
+#: .\models.py:384
 msgid "receives social help"
 msgstr ""
 
-#: .\models.py:395
+#: .\models.py:385
 msgid "is senior"
 msgstr ""
 
-#: .\models.py:398 .\models.py:1230
+#: .\models.py:388 .\models.py:1223
 msgid "Integration phase"
 msgstr ""
 
-#: .\models.py:404 .\models.py:2017
+#: .\models.py:394 .\models.py:2029
 msgid "Coached from"
 msgstr ""
 
-#: .\models.py:407 .\models.py:455 .\models.py:1619 .\models.py:1692
-#: .\models.py:2020
+#: .\models.py:397 .\models.py:445 .\models.py:1631 .\models.py:1704
+#: .\models.py:2032
 msgid "until"
 msgstr ""
 
-#: .\models.py:411
+#: .\models.py:401
 msgid "Coach 1"
 msgstr ""
 
-#: .\models.py:414
+#: .\models.py:404
 msgid "Coach 2"
 msgstr ""
 
-#: .\models.py:416
+#: .\models.py:406
 msgid "Birth place"
 msgstr ""
 
-#: .\models.py:423
+#: .\models.py:413
 msgid "Birth country"
 msgstr ""
 
-#: .\models.py:431
+#: .\models.py:421
 msgid "National ID"
 msgstr ""
 
-#: .\models.py:437 .\models.py:866 .\models.py:1925
+#: .\models.py:427 .\models.py:856 .\models.py:1937
 msgid "Health insurance"
 msgstr ""
 
-#: .\models.py:439 .\models.py:867 .\models.py:1926
+#: .\models.py:429 .\models.py:857 .\models.py:1938
 msgid "Pharmacy"
 msgstr ""
 
-#: .\models.py:444
+#: .\models.py:434
 msgid "Nationality"
 msgstr ""
 
-#: .\models.py:449
+#: .\models.py:439
 msgid "eID card number"
 msgstr ""
 
-#: .\models.py:452
+#: .\models.py:442
 msgid "ID card valid from"
 msgstr ""
 
-#: .\models.py:466
+#: .\models.py:456
 msgid "eID card issuer"
 msgstr ""
 
-#: .\models.py:480
+#: .\models.py:470
 msgid "noble condition"
 msgstr ""
 
-#: .\models.py:491
+#: .\models.py:481
 msgid "Lives in Belgium since"
 msgstr ""
 
-#: .\models.py:493
+#: .\models.py:483
 msgid "Seeking work since"
 msgstr ""
 
-#: .\models.py:495
+#: .\models.py:485
 msgid "Needs residence permit"
 msgstr ""
 
-#: .\models.py:496
+#: .\models.py:486
 msgid "Needs work permit"
 msgstr ""
 
-#: .\models.py:498
+#: .\models.py:488
 msgid "suspended until"
 msgstr ""
 
-#: .\models.py:502
+#: .\models.py:492
 msgid "unemployment benefit"
 msgstr ""
 
-#: .\models.py:503
+#: .\models.py:493
 msgid "waiting pay"
 msgstr ""
 
-#: .\models.py:504
+#: .\models.py:494
 msgid "sickness benefit"
 msgstr ""
 
-#: .\models.py:505
+#: .\models.py:495
 msgid "retirement pension"
 msgstr ""
 
-#: .\models.py:506
+#: .\models.py:496
 msgid "other incomes"
 msgstr ""
 
-#: .\models.py:508
+#: .\models.py:498
 msgid "is seeking work"
 msgstr ""
 
-#: .\models.py:509
+#: .\models.py:499
 msgid "Unavailable until"
 msgstr ""
 
-#: .\models.py:512
+#: .\models.py:502
 msgid "reason"
 msgstr ""
 
-#: .\models.py:514
+#: .\models.py:504
 msgid "Obstacles"
 msgstr ""
 
-#: .\models.py:515
+#: .\models.py:505
 msgid "Other skills"
 msgstr ""
 
-#: .\models.py:518
+#: .\models.py:508
 msgid "Job agents"
 msgstr ""
 
-#: .\models.py:524
+#: .\models.py:514
 msgid "Contact person at local job office"
 msgstr ""
 
-#: .\models.py:529
+#: .\models.py:519
 msgid "eID sheet"
 msgstr ""
 
-#: .\models.py:612
+#: .\models.py:602
 msgid "Circular reference"
 msgstr ""
 
-#: .\models.py:626
+#: .\models.py:616
 msgid "eID card expires in 2 months"
 msgstr ""
 
-#: .\models.py:629
+#: .\models.py:619
 msgid "becomes available again in 1 month"
 msgstr ""
 
-#: .\models.py:632
+#: .\models.py:622
 msgid "work permit suspension ends in 1 month"
 msgstr ""
 
-#: .\models.py:635
+#: .\models.py:625
 msgid "coaching ends in 1 month"
 msgstr ""
 
-#: .\models.py:662
+#: .\models.py:652
 msgid "eID card expires"
 msgstr ""
 
-#: .\models.py:665
+#: .\models.py:655
 msgid "becomes available again"
 msgstr ""
 
-#: .\models.py:668
+#: .\models.py:658
 msgid "work permit suspension ends"
 msgstr ""
 
-#: .\models.py:671
+#: .\models.py:661
 msgid "coaching ends"
 msgstr ""
 
-#: .\models.py:674
+#: .\models.py:664
 msgid "Actions"
 msgstr ""
 
-#: .\models.py:677
+#: .\models.py:667
 msgid "Read eID card"
 msgstr ""
 
-#: .\models.py:732
+#: .\models.py:722
 msgid "not filled in"
 msgstr ""
 
-#: .\models.py:743
+#: .\models.py:733
 msgid "Overview"
 msgstr ""
 
-#: .\models.py:745
+#: .\models.py:735
 msgid "Residence permit"
 msgstr ""
 
-#: .\models.py:756
+#: .\models.py:746
 msgid "Work permit"
 msgstr ""
 
-#: .\models.py:765
+#: .\models.py:755
 msgid "driving licence"
 msgstr ""
 
-#: .\models.py:789
+#: .\models.py:779
 msgid "Contract starts"
 msgstr ""
 
-#: .\models.py:795
+#: .\models.py:785
 msgid "Contract ends"
 msgstr ""
 
-#: .\models.py:868 .\models.py:1927
+#: .\models.py:858 .\models.py:1939
 msgid "Attorney"
 msgstr ""
 
-#: .\models.py:869 .\models.py:1928
+#: .\models.py:859 .\models.py:1940
 msgid "Job office"
 msgstr ""
 
-#: .\models.py:932 .\models.py:2355
+#: .\models.py:922 .\models.py:2369
 msgid "General"
 msgstr ""
 
-#: .\models.py:933
+#: .\models.py:923
 msgid "Notes"
 msgstr ""
 
-#: .\models.py:1021 .\models.py:2011
+#: .\models.py:1011 .\models.py:2023
 msgid "Coaching"
 msgstr ""
 
-#: .\models.py:1096
+#: .\models.py:1086
 msgid "Status"
 msgstr ""
 
-#: .\models.py:1097
+#: .\models.py:1087
 msgid "Education"
 msgstr ""
 
-#: .\models.py:1098
+#: .\models.py:1088
 msgid "Languages"
 msgstr ""
 
-#: .\models.py:1099
+#: .\models.py:1089
 msgid "Competences"
 msgstr ""
 
-#: .\models.py:1100
+#: .\models.py:1090
 msgid "Job Requests"
 msgstr ""
 
-#: .\models.py:1101
+#: .\models.py:1091
 msgid "History"
 msgstr ""
 
-#: .\models.py:1102
+#: .\models.py:1092
 msgid "Contracts"
 msgstr ""
 
-#: .\models.py:1103
+#: .\models.py:1093
 msgid "Calendar"
 msgstr ""
 
-#: .\models.py:1104
+#: .\models.py:1094
 msgid "Miscellaneous"
 msgstr ""
 
-#: .\models.py:1108
+#: .\models.py:1098
 msgid "Address"
 msgstr ""
 
-#: .\models.py:1109
+#: .\models.py:1099
 msgid "Contact"
 msgstr ""
 
-#: .\models.py:1110
+#: .\models.py:1100
 msgid "Birth"
 msgstr ""
 
-#: .\models.py:1111
+#: .\models.py:1101
 msgid "eID card"
 msgstr ""
 
-#: .\models.py:1113
+#: .\models.py:1103
 msgid "Papers"
 msgstr ""
 
-#: .\models.py:1115
+#: .\models.py:1105
 msgid "Job search"
 msgstr ""
 
-#: .\models.py:1124
+#: .\models.py:1114
 msgid "number"
 msgstr ""
 
-#: .\models.py:1125
+#: .\models.py:1115
 msgid "valid from"
 msgstr ""
 
-#: .\models.py:1126
+#: .\models.py:1116
 msgid "valid until"
 msgstr ""
 
-#: .\models.py:1127
+#: .\models.py:1117
 msgid "issued by"
 msgstr ""
 
-#: .\models.py:1225
-msgid "Only coached on"
-msgstr ""
-
-#: .\models.py:1226
-msgid "Only primary clients"
-msgstr ""
-
-#: .\models.py:1227
-msgid "Show deprecated"
-msgstr ""
-
-#: .\models.py:1232 .\models.py:1684
+#: .\models.py:1217 .\models.py:1696
 msgid "Coached by"
 msgstr ""
 
-#: .\models.py:1233
-msgid "Coached since"
+#: .\models.py:1218
+msgid "Only coached on"
 msgstr ""
 
-#: .\models.py:1235
+#: .\models.py:1219
+msgid "Only primary clients"
+msgstr ""
+
+#: .\models.py:1220
+msgid "Also obsolete clients"
+msgstr ""
+
+#: .\models.py:1224
+msgid "New clients since"
+msgstr ""
+
+#: .\models.py:1226
 msgid "Only active clients"
 msgstr ""
 
-#: .\models.py:1236
+#: .\models.py:1227
 msgid "Show only clients in 'active' integration phases"
 msgstr ""
 
-#: .\models.py:1302
+#: .\models.py:1274
+msgid " of "
+msgstr ""
+
+#: .\models.py:1276
+msgid " on "
+msgstr ""
+
+#: .\models.py:1281
+msgid "active"
+msgstr ""
+
+#: .\models.py:1283
+msgid "primary"
+msgstr ""
+
+#: .\models.py:1285
+msgid "obsolete"
+msgstr ""
+
+#: .\models.py:1289
+msgid "new since"
+msgstr ""
+
+#: .\models.py:1305
 msgid "My clients"
 msgstr ""
 
-#: .\models.py:1309
-#, python-format
-msgid "Clients of %s"
-msgstr ""
-
-#: .\models.py:1388
+#: .\models.py:1395
 msgid "Data Test Clients"
 msgstr ""
 
-#: .\models.py:1393
+#: .\models.py:1400
 msgid "Check NISS validity"
 msgstr ""
 
-#: .\models.py:1394
+#: .\models.py:1401
 msgid "Check for overlapping contracts"
 msgstr ""
 
-#: .\models.py:1438
+#: .\models.py:1445
 msgid "Error message"
 msgstr ""
 
-#: .\models.py:1452
+#: .\models.py:1459
 msgid "Users with their Clients"
 msgstr ""
 
-#: .\models.py:1516
+#: .\models.py:1528
 msgid "Total"
 msgstr ""
 
-#: .\models.py:1520
+#: .\models.py:1532
 msgid "Primary clients"
 msgstr ""
 
-#: .\models.py:1526
+#: .\models.py:1538
 msgid "Active clients"
 msgstr ""
 
-#: .\models.py:1538
+#: .\models.py:1550
 msgid "Designation"
 msgstr ""
 
-#: .\models.py:1539
+#: .\models.py:1551
 msgid "Reference name"
 msgstr ""
 
-#: .\models.py:1540
+#: .\models.py:1552
 msgid "Considered active"
 msgstr ""
 
-#: .\models.py:1543
+#: .\models.py:1555
 msgid "Integration Phase"
 msgstr ""
 
-#: .\models.py:1544
+#: .\models.py:1556
 msgid "Integration Phases"
 msgstr ""
 
-#: .\models.py:1566
+#: .\models.py:1578
 msgid "activity"
 msgstr ""
 
-#: .\models.py:1567
+#: .\models.py:1579
 msgid "activities"
 msgstr ""
 
-#: .\models.py:1569
+#: .\models.py:1581
 msgid "Appears in Listing 104"
 msgstr ""
 
-#: .\models.py:1591
+#: .\models.py:1603
 msgid "exclusion type"
 msgstr ""
 
-#: .\models.py:1592
+#: .\models.py:1604
 msgid "exclusion types"
 msgstr ""
 
-#: .\models.py:1611
+#: .\models.py:1623
 msgid "exclusion"
 msgstr ""
 
-#: .\models.py:1612
+#: .\models.py:1624
 msgid "exclusions"
 msgstr ""
 
-#: .\models.py:1617
+#: .\models.py:1629
 msgid "Reason"
 msgstr ""
 
-#: .\models.py:1618
+#: .\models.py:1630
 msgid "from"
 msgstr ""
 
-#: .\models.py:1620
+#: .\models.py:1632
 msgid "Remark"
 msgstr ""
 
-#: .\models.py:1647
+#: .\models.py:1659
 msgid "aid type"
 msgstr ""
 
-#: .\models.py:1648
+#: .\models.py:1660
 msgid "aid types"
 msgstr ""
 
-#: .\models.py:1668
+#: .\models.py:1680
 msgid "Person Search"
 msgstr ""
 
-#: .\models.py:1669
+#: .\models.py:1681
 msgid "Person Searches"
 msgstr ""
 
-#: .\models.py:1672
+#: .\models.py:1684
 msgid "Search Title"
 msgstr ""
 
-#: .\models.py:1673
+#: .\models.py:1685
 msgid "Aged from"
 msgstr ""
 
-#: .\models.py:1675
+#: .\models.py:1687
 msgid "Aged to"
 msgstr ""
 
-#: .\models.py:1681
+#: .\models.py:1693
 msgid "Only my clients"
 msgstr ""
 
-#: .\models.py:1689
+#: .\models.py:1701
 msgid "Period from"
 msgstr ""
 
-#: .\models.py:1699
+#: .\models.py:1711
 msgid "Unnamed"
 msgstr ""
 
-#: .\models.py:1704
+#: .\models.py:1716
 msgid "Print"
 msgstr ""
 
-#: .\models.py:1727
+#: .\models.py:1739
 msgid "Language"
 msgstr ""
 
-#: .\models.py:1728
+#: .\models.py:1740
 msgid "spoken"
 msgstr ""
 
-#: .\models.py:1729
+#: .\models.py:1741
 msgid "written"
 msgstr ""
 
-#: .\models.py:1734
+#: .\models.py:1746
 msgid "Wanted property"
 msgstr ""
 
-#: .\models.py:1735 .\models.py:1755
+#: .\models.py:1747 .\models.py:1767
 msgid "Wanted properties"
 msgstr ""
 
-#: .\models.py:1742
+#: .\models.py:1754
 msgid "Unwanted property"
 msgstr ""
 
-#: .\models.py:1743 .\models.py:1761
+#: .\models.py:1755 .\models.py:1773
 msgid "Unwanted properties"
 msgstr ""
 
-#: .\models.py:1749
+#: .\models.py:1761
 msgid "Wanted language knowledges"
 msgstr ""
 
-#: .\models.py:1781
+#: .\models.py:1793
 msgid "Found persons"
 msgstr ""
 
-#: .\models.py:1873
+#: .\models.py:1885
 msgid "Overlapping Contracts"
 msgstr ""
 
-#: .\models.py:1904
+#: .\models.py:1916
 msgid "Client Contact type"
 msgstr ""
 
-#: .\models.py:1908
+#: .\models.py:1920
 msgid "Health insurances"
 msgstr ""
 
-#: .\models.py:1911
+#: .\models.py:1923
 msgid "Pharmacies"
 msgstr ""
 
-#: .\models.py:1914
+#: .\models.py:1926
 msgid "Attorneys"
 msgstr ""
 
-#: .\models.py:1917
+#: .\models.py:1929
 msgid "Job offices"
 msgstr ""
 
-#: .\models.py:1929
+#: .\models.py:1941
 msgid "Other"
 msgstr ""
 
-#: .\models.py:1940
+#: .\models.py:1952
 msgid "Client Contact"
 msgstr ""
 
-#: .\models.py:1941
+#: .\models.py:1953
 msgid "Client Contacts"
 msgstr ""
 
-#: .\models.py:1943
+#: .\models.py:1955
 msgid "Remarks"
 msgstr ""
 
-#: .\models.py:1953
+#: .\models.py:1965
 msgid "Contact person"
 msgstr ""
 
-#: .\models.py:1962
+#: .\models.py:1974
 msgid "Contacts"
 msgstr ""
 
-#: .\models.py:1976
+#: .\models.py:1988
 msgid "Coaching type"
 msgstr ""
 
-#: .\models.py:1977
+#: .\models.py:1989
 msgid "Coaching types"
 msgstr ""
 
-#: .\models.py:2012
+#: .\models.py:2024
 msgid "Coachings"
 msgstr ""
 
-#: .\models.py:2024
+#: .\models.py:2036
 msgid "Primary"
 msgstr ""
 
-#: .\models.py:2026
+#: .\models.py:2038
 msgid "Coach"
 msgstr ""
 
-#: .\models.py:2033
-msgid "only active on"
-msgstr ""
-
-#: .\models.py:2072
+#: .\models.py:2085
 msgid "Local job office"
 msgstr ""
 
-#: .\models.py:2083
+#: .\models.py:2096
 msgid "Upload Type for residence permit"
 msgstr ""
 
-#: .\models.py:2093
+#: .\models.py:2106
 msgid "Upload Type for work permit"
 msgstr ""
 
-#: .\models.py:2102
+#: .\models.py:2115
 msgid "Upload Type for driving licence"
 msgstr ""
 
-#: .\models.py:2114
+#: .\models.py:2127
 msgid "usable in contracts"
 msgstr ""
 
-#: .\models.py:2116
+#: .\models.py:2129
 msgid ""
 "Whether Links of this type can be used as contact person of a job contract."
 msgstr ""
 
-#: .\models.py:2218
+#: .\models.py:2231
 msgid "PCSW"
 msgstr ""
 
-#: .\models.py:2359
+#: .\models.py:2373
 msgid "More"
 msgstr ""
 
-#: .\models.py:2428
+#: .\models.py:2442
 msgid "Integration"
 msgstr ""
