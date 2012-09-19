@@ -162,7 +162,7 @@ def migrate_from_1_4_10(globals_dict):
                 #~ pcsw_CoachingType
                 if user_id in (200085,200093,200096,200099): return 1 # DSBE
                 return 2
-            if coach2_id:
+            if coach2_id and coach2_id != coach1_id:
                 ti = user2type(coach2_id)
                 kw = dict(
                     project_id=partner_ptr_id,

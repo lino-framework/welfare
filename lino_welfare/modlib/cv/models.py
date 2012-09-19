@@ -226,13 +226,15 @@ class ConfiguredPropsByPerson(PropsByPerson):
     :class`SoftSkillsByPerson` and
     :class`ObstaclesByPerson`.
     """
+    
     propgroup_config_name = None
+    
     typo_check = False # to avoid warning "ConfiguredPropsByPerson 
                        # defines new attribute(s) propgroup_config_name"
-    #~ def setup_actions(self):
+                       
     @classmethod
-    #~ def class_init(self):
-    def site_setup(self,site):
+    def after_site_setup(self,site):
+        super(ConfiguredPropsByPerson,self).after_site_setup(site)
         if self.propgroup_config_name:
             #~ pg = getattr(settings.LINO.site_config,self.propgroup_config_name)
             pg = getattr(site.site_config,self.propgroup_config_name)
@@ -240,12 +242,7 @@ class ConfiguredPropsByPerson(PropsByPerson):
             if pg is None:
                 self.label = _("(Site setting %s is empty)" % self.propgroup_config_name)
             else:
-                #~ def f():
-                    #~ return babelattr(pg,'name')
-                #~ self.label = lazy(f,unicode)()
                 self.label = lazy(babelattr,unicode)(pg,'name')
-                #~ self.label = babelattr(pg,'name')
-        super(PropsByPerson,self).class_init()
         
 class SkillsByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_skills'

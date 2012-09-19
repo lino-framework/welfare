@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-19 00:17+0100\n"
-"PO-Revision-Date: 2012-09-19 01:18+0100\n"
+"PO-Revision-Date: 2012-09-19 10:49+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -345,7 +345,7 @@ msgstr "Hindernisse"
 
 #: .\models.py:505
 msgid "Other skills"
-msgstr "Sonstige Fähikeiten"
+msgstr "Sonstige Fähigkeiten"
 
 #: .\models.py:508
 msgid "Job agents"

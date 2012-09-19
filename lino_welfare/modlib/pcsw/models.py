@@ -963,6 +963,7 @@ class ClientDetail(dd.FormLayout):
     general = """
     box1 box2
     box4 image:15 #overview 
+    created modified
     """
     
     box1 = """
@@ -996,7 +997,7 @@ class ClientDetail(dd.FormLayout):
 
     status = """
     in_belgium_since:15 residence_type gesdos_id 
-    bank_account1:12 bank_account2:12 
+    bank_account1:12 bank_account2:12 broker:12 faculty:12
     """
     
       
@@ -1015,7 +1016,6 @@ class ClientDetail(dd.FormLayout):
     """
     
     coaching = dd.Panel("""
-    broker:12 faculty:12
     group:16 client_state
     # coach1:12 coach2:12 coached_from:12 coached_until:12 
     # health_insurance pharmacy job_office_contact 

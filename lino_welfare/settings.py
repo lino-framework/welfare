@@ -23,11 +23,13 @@ import os
 from lino.apps.std.settings import *
 
 class Lino(Lino):
+    """
+    """
     source_dir = os.path.dirname(__file__)
     title = "Lino/PCSW"
     #~ domain = "pcsw.saffre-rumma.net"
-    help_url = "http://lino.saffre-rumma.net/pcsw/index.html"
-    migration_module = 'lino_welfare.modlib.pcsw.migrate'
+    help_url = "http://packages.python.org/lino-welfare"
+    migration_module = 'lino_welfare.migrate'
     
     #~ project_model = 'contacts.Person'
     project_model = 'pcsw.Client'
@@ -201,24 +203,9 @@ class Lino(Lino):
 
 LINO = Lino(__file__,globals())
 
-
-#~ PROJECT_DIR = abspath(dirname(__file__))
-#~ DATA_DIR = join(PROJECT_DIR,"data")
-#~ LINO_SETTINGS = join(PROJECT_DIR,"lino_settings.py")
-
-#~ MEDIA_ROOT = join(LINO.project_dir,'media')
-#~ MEDIA_ROOT = join(PROJECT_DIR,'media')
-
 #~ TIME_ZONE = 'Europe/Brussels'
 TIME_ZONE = None
 
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
-#~ LANGUAGE_CODE = 'de'
-#~ LANGUAGE_CODE = 'de-BE'
-#~ LANGUAGE_CODE = 'fr-BE'
-
-#~ SITE_ID = 1 # see also fill.py
 
 INSTALLED_APPS = (
   #~ 'django.contrib.auth',

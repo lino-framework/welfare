@@ -5,13 +5,6 @@ TODO
 
 - Ist Person.is_client jetzt readonly auf importierten Personen? 
 
-- statt "AJAX communication failed" sollte er zumindest sagen 
-  "IntegrityError: column national_id is not unique", oder (die Luxus-Version) 
-  "Kann Person X nicht zu einem Klienten machen, weil Klient Y noch keine NISS bekommen hat"
-  
-- Tabellen "Coachings" (Begleitungen) und "Thirds" ("Drittpartner" oder "Externe Kontakte") 
-  und ThirdType
-
 
 DONE
 
@@ -26,6 +19,9 @@ DONE
   
   Im Detail einer Person gibt es ein Feld "ist Klient". 
   Damit kann man eine bestehende Person zu einem Klienten machen.
+  
+- Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
+  nicht gemacht. Ist das schlimm?
   
 - Neues Feld "Status" eines Klienten. 
   is_active ersetzt durch ClientStates.active, 
