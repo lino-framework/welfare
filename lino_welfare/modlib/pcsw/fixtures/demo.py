@@ -262,6 +262,7 @@ def objects():
     #~ yield contractType(u"VSE Work & Job")
     
   
+    ClientContactType = resolve_model('pcsw.ClientContactType')
   
     Person = resolve_model(settings.LINO.person_model)
     Company = resolve_model(settings.LINO.company_model)
@@ -335,20 +336,29 @@ def objects():
     yield company(name=u"Behindertenstätten Eupen",city=eupen,country=belgium)
     yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country=belgium)
     
-    kw = dict(is_health_insurance=True,country=belgium)
+    cct = ClientContactType(name="Krankenkasse")
+    yield cct
+    kw = dict(client_contact_type=cct,country=belgium)
+    #~ kw = dict(is_health_insurance=True,country=belgium)
     yield company(name=u"Alliance Nationale des Mutualités Chrétiennes",**kw)
     yield company(name=u"Mutualité Chrétienne de Verviers - Eupen",**kw)
     yield company(name=u"Union Nationale des Mutualités Neutres",**kw)
     yield company(name=u"Mutualia - Mutualité Neutre",**kw)
     yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège",**kw)
     
-    kw = dict(is_pharmacy=True,country=belgium,city=eupen)
+    cct = ClientContactType(name="Apotheke")
+    yield cct
+    kw = dict(client_contact_type=cct,country=belgium)
+    #~ kw = dict(is_pharmacy=True,country=belgium,city=eupen)
     yield company(name=u"Apotheke Reul",street=u'Klosterstraße',street_no=20,**kw)
     yield company(name=u"Apotheke Schunck",street=u'Bergstraße',street_no=59,**kw)
     yield company(name=u"Pharmacies Populaires de Verviers",street=u'Aachener Straße',street_no=258,**kw)
     yield company(name=u"Bosten-Bocken A",street=u'Haasstraße',street_no=6,**kw)
     
-    kw = dict(is_attorney=True,country=belgium,city=eupen)
+    cct = ClientContactType(name="Rechtsanwalt")
+    yield cct
+    kw = dict(client_contact_type=cct,country=belgium,city=eupen)
+    #~ kw = dict(is_attorney=True,country=belgium,city=eupen)
     yield company(name=u"Brüll Christine",street=u'Schilsweg',street_no=4,**kw)
     yield company(name=u"Brocal Catherine",street=u'Neustraße',street_no=115,**kw)
     yield company(name=u"Bourseaux Alexandre",street=u'Aachener Straße',street_no=21,**kw)
@@ -415,9 +425,13 @@ def objects():
     from django.core.exceptions import ValidationError
     # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`
     bernard = Person.objects.get(name__exact="Bodard Bernard")
-    adg = company(name=u"Arbeitsamt der D.G.",city=eupen,country=belgium,is_job_office=True)
-    settings.LINO.update_site_config(job_office=adg)
+    
+    cct = ClientContactType(name="Arbeitsvermittler")
+    yield cct
+    kw = dict(client_contact_type=cct,country=belgium,city=eupen)
+    adg = company(name=u"Arbeitsamt der D.G.",**kw)
     yield adg
+    settings.LINO.update_site_config(job_office=adg)
     adg_dir = role(company=adg,person=bernard,type=1)
     #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir

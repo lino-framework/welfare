@@ -148,14 +148,23 @@ class Newcomers(pcsw.Clients):
     
     #~ filter = dict(newcomer=True)
     #~ known_values = dict(newcomer=True)
-    known_values = dict(client_state=pcsw.ClientStates.newcomer)
-    #~ use_as_default_table = False
+    #~ known_values = dict(client_state=pcsw.ClientStates.newcomer)
+    use_as_default_table = False
     column_names = "name_column broker faculty address_column *"
     
     #~ @classmethod
     #~ def get_actor_label(self):
         #~ return _("Newcomers")
     label = _("Newcomers")
+    
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(Newcomers,self).param_defaults(ar,**kw)
+        kw.update(client_state=pcsw.ClientStates.newcomer)
+        kw.update(coached_on=None)
+        return kw
+        
+    
         
 class NewcomersByFaculty(Newcomers):
     master_key = 'faculty'

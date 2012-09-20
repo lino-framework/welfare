@@ -866,11 +866,12 @@ class Company(Partner,contacts.Company):
     #~ dd.inject_field(Company,'is_job_office',models.BooleanField(verbose_name=_("Job office"),default=False))
     
     # to be maintaned with ClientContactTypes
-    is_health_insurance = models.BooleanField(verbose_name=_("Health insurance"),default=False)
-    is_pharmacy = models.BooleanField(verbose_name=_("Pharmacy"),default=False)
-    is_attorney = models.BooleanField(verbose_name=_("Attorney"),default=False)
-    is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
+    #~ is_health_insurance = models.BooleanField(verbose_name=_("Health insurance"),default=False)
+    #~ is_pharmacy = models.BooleanField(verbose_name=_("Pharmacy"),default=False)
+    #~ is_attorney = models.BooleanField(verbose_name=_("Attorney"),default=False)
+    #~ is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
         
+    client_contact_type = dd.ForeignKey('pcsw.ClientContactType',blank=True,null=True)
         
         
     @classmethod
@@ -908,9 +909,14 @@ class CompanyDetail(dd.FormLayout):
 
     address_box = "box3 box4"
 
+    #~ box5 = """
+    #~ remarks 
+    #~ is_courseprovider is_jobprovider is_health_insurance is_pharmacy is_attorney is_job_office
+    #~ """
+
     box5 = """
     remarks 
-    is_courseprovider is_jobprovider is_health_insurance is_pharmacy is_attorney is_job_office
+    is_courseprovider is_jobprovider client_contact_type
     """
 
     bottom_box = "box5 contacts.RolesByCompany"
@@ -1228,7 +1234,7 @@ class Clients(Partners):
     parameters = dict(
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
           verbose_name=_("Coached by")),
-      coached_on = models.DateField(_("Coached on"),blank=True,null=True,default=datetime.date.today),
+      coached_on = models.DateField(_("Coached on"),blank=True,null=True),
       only_primary = models.BooleanField(_("Only primary clients"),default=False),
       also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
       client_state = ClientStates.field(blank=True),
@@ -1534,7 +1540,7 @@ class UsersWithClients(dd.VirtualTable):
                 yield user
                 
     #~ @dd.virtualfield('pcsw.Client.coach1')
-    #~ @dd.virtualfield(dd.ForeignKey(User))
+    #~ @dd.virtualfield(dd.ForeignKey(settings.LINO.user_model,verbose_name=_("Coach")))
     @dd.virtualfield('pcsw.Coaching.user')
     def user(self,obj,ar):
         return obj
@@ -1637,12 +1643,14 @@ class Exclusion(dd.Model):
         verbose_name = _("exclusion")
         verbose_name_plural = _('exclusions')
         
-    #~ person = models.ForeignKey("contacts.Person")
-    #~ person = models.ForeignKey(settings.LINO.person_model)
     person = models.ForeignKey('pcsw.Client')
-    type = models.ForeignKey("pcsw.ExclusionType",verbose_name=_("Reason"))
-    excluded_from = models.DateField(blank=True,null=True,verbose_name=_("from"))
-    excluded_until = models.DateField(blank=True,null=True,verbose_name=_("until"))
+    type = models.ForeignKey("pcsw.ExclusionType",
+        verbose_name=_("Reason"),
+        blank=True,null=True)
+    excluded_from = models.DateField(blank=True,null=True,
+        verbose_name=_("from"))
+    excluded_until = models.DateField(blank=True,null=True,
+        verbose_name=_("until"))
     remark = models.CharField(max_length=200,blank=True,verbose_name=_("Remark"))
     
     def __unicode__(self):
@@ -1914,48 +1922,45 @@ class OverlappingContracts(dd.Table):
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
-class ClientContactType(Choice):
-  
-    def __init__(self,choicelist,value,text,name,companies_table,**kw):
-        #~ self.company_filter_field = company_filter_field
-        self.companies_table = companies_table
-        super(ClientContactType,self).__init__(choicelist,value,text,name,**kw)
+class ClientContactType(babel.BabelNamed):
+    class Meta:
+        verbose_name = _("Client Contact type")
+        verbose_name_plural = _("Client Contact types")
         
-    #~ def company_choices(self):
-        #~ if self.company_filter_field:
-            #~ return self.company_filter_field.request().data_iterator
-        #~ return Company.objects.all()
+class ClientContactTypes(dd.Table):
+    model = ClientContactType
+
+#~ class ClientContactType(Choice):
+  
+    #~ def __init__(self,choicelist,value,text,name,companies_table,**kw):
+        #~ self.companies_table = companies_table
+        #~ super(ClientContactType,self).__init__(choicelist,value,text,name,**kw)
+        
+#~ class ClientContactTypes(ChoiceList):
+    #~ label = _("Client Contact type")
+    #~ item_class = ClientContactType
     
-class ClientContactTypes(ChoiceList):
-    label = _("Client Contact type")
-    item_class = ClientContactType
+#~ class HealthInsurances(Companies):
+    #~ label = _("Health insurances")
+    #~ known_values = dict(is_health_insurance=True)
+#~ class Pharmacies(Companies):
+    #~ label = _("Pharmacies")
+    #~ known_values = dict(is_pharmacy=True)
+#~ class Attorneys(Companies):
+    #~ label = _("Attorneys")
+    #~ known_values = dict(is_attorney=True)
+#~ class JobOffices(Companies):
+    #~ label = _("Job offices")
+    #~ known_values = dict(is_job_office=True)
     
-class HealthInsurances(Companies):
-    label = _("Health insurances")
-    known_values = dict(is_health_insurance=True)
-class Pharmacies(Companies):
-    label = _("Pharmacies")
-    known_values = dict(is_pharmacy=True)
-class Attorneys(Companies):
-    label = _("Attorneys")
-    known_values = dict(is_attorney=True)
-class JobOffices(Companies):
-    label = _("Job offices")
-    known_values = dict(is_job_office=True)
-    
-add = ClientContactTypes.add_item
-#~ add('10', _("Health insurance"),'health_insurance','is_health_insurance')
-#~ add('20', _("Pharmacy"),        'pharmacy',        'is_pharmacy')
-#~ add('30', _("Attorney"),        'attorney',        'is_attorney')
-#~ add('40', _("Job office"),      'job_office',      'is_job_office')
-add('10', _("Health insurance"),'health_insurance',HealthInsurances)
-add('20', _("Pharmacy"),        'pharmacy',        Pharmacies)
-add('30', _("Attorney"),        'attorney',        Attorneys)
-add('40', _("Job office"),      'job_office',      JobOffices)
-add('90', _("Other"),           'other',           Companies)
+#~ add = ClientContactTypes.add_item
+#~ add('10', _("Health insurance"),'health_insurance',HealthInsurances)
+#~ add('20', _("Pharmacy"),        'pharmacy',        Pharmacies)
+#~ add('30', _("Attorney"),        'attorney',        Attorneys)
+#~ add('40', _("Job office"),      'job_office',      JobOffices)
+#~ add('90', _("Other"),           'other',           Companies)
 
 
-#~ class Third(mixins.ProjectRelated,contacts.CompanyContact):
 class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
     """
     project : the Client
@@ -1965,16 +1970,17 @@ class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
     class Meta:
         verbose_name = _("Client Contact")
         verbose_name_plural = _("Client Contacts")
-    type = ClientContactTypes.field(blank=True)
+    #~ type = ClientContactTypes.field(blank=True)
+    type = dd.ForeignKey(ClientContactType,blank=True,null=True)
     remark = models.TextField(_("Remarks"),blank=True) # ,null=True)
     
     @dd.chooser()
     def company_choices(self,type):
         if not type:  
             return Companies.request().data_iterator
-        type = ClientContactTypes.get_by_value(type)
-        return type.companies_table.request().data_iterator
-        #~ return ClientContactTypes.get_by_value(type).company_choices()
+        return Companies.request(client_contact_type=type).data_iterator
+        #~ type = ClientContactTypes.get_by_value(type)
+        #~ return type.companies_table.request().data_iterator
         
 dd.update_field(ClientContact,'contact',verbose_name=_("Contact person"))
           
@@ -2033,6 +2039,7 @@ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
     is when a Client is being coached by a User (a social assistant) 
     during a given period.
     """
+    #~ required = dict(user_level='manager')
     class Meta:
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
@@ -2058,6 +2065,7 @@ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
+    #~ debug_permissions = True
     #~ parameters = dict(
         #~ type=dd.ForeignKey(CoachingType,null=True,blank=True),
         #~ group=dd.ForeignKey(PersonGroup,blank=True,null=True),
@@ -2175,6 +2183,9 @@ def customize_notes():
         master_key = 'project'
         column_names = "date event_type type subject body user company *"
         order_by = ["-date"]
+        #~ debug_permissions = 20120920
+
+        
       
     class NotesByCompany(Notes):
         master_key = 'company'
@@ -2283,6 +2294,7 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(Activities)
     m.add_action(ExclusionTypes)
     m.add_action(CoachingTypes)
+    m.add_action(ClientContactTypes)
     
     
 def setup_explorer_menu(site,ui,user,m):

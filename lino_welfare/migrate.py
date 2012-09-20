@@ -193,17 +193,20 @@ def migrate_from_1_4_10(globals_dict):
             if health_insurance_id:
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ClientContactTypes.health_insurance,
+                    #~ type=pcsw.ClientContactTypes.health_insurance,
+                    type_id=1,
                     company_id=health_insurance_id)
             if pharmacy_id:
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ClientContactTypes.pharmacy,
+                    #~ type=pcsw.ClientContactTypes.pharmacy,
+                    type_id=2,
                     company_id=pharmacy_id)
             if job_office_contact_id:
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
-                    type=pcsw.ClientContactTypes.job_office,
+                    #~ type=pcsw.ClientContactTypes.job_office,
+                    type_id=3,
                     company_id=settings.LINO.site_config.job_office.id,
                     contact_id=job_office_contact_id)
         else:
@@ -292,6 +295,10 @@ def migrate_from_1_4_10(globals_dict):
     objects = globals_dict['objects']
     def new_objects():
         yield accounts_Chart(name="debts Default")
+        yield pcsw_ClientContactType(name="Krankenkasse")
+        yield pcsw_ClientContactType(name="Apotheke")
+        yield pcsw_ClientContactType(name="Arbeitsvermittler")
+        yield pcsw_ClientContactType(name="Gerichtsvollzieher")
         yield pcsw_CoachingType(name="DSBE")
         yield pcsw_CoachingType(name="ASD")
         yield pcsw_CoachingType(name="Schuldnerberatung")
