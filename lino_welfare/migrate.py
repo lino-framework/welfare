@@ -63,6 +63,7 @@ def migrate_from_1_4_10(globals_dict):
     postings_Posting = resolve_model("postings.Posting")
     uploads_Upload = resolve_model("uploads.Upload")
     pcsw_CoachingType = resolve_model("pcsw.CoachingType")
+    pcsw_ClientContactType = resolve_model("pcsw.ClientContactType")
     
     NOW = datetime.datetime(2012,9,6,0,0)
     
