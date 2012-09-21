@@ -338,7 +338,9 @@ class PAR(Controller):
         
     def get_object(self,kw):
         id = kw['id']
+        #~ possible_models = [Client, Person, Company, Household]
         #~ model = PAR_model(kw['data'])
+        #~ delete_child
         #~ try:
             #~ return model.objects.get(pk=id)
         #~ except model.DoesNotExist:

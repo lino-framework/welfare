@@ -1671,11 +1671,11 @@ Used in the http header of new-style requests.
     
     
 dd.inject_quick_add_buttons(
-    pcsw.Person,'cbss_identify_person',IdentifyRequestsByPerson)
+    pcsw.Client,'cbss_identify_person',IdentifyRequestsByPerson)
 dd.inject_quick_add_buttons(
-    pcsw.Person,'cbss_manage_access',ManageAccessRequestsByPerson)
+    pcsw.Client,'cbss_manage_access',ManageAccessRequestsByPerson)
 dd.inject_quick_add_buttons(
-    pcsw.Person,'cbss_retrieve_ti_groups',RetrieveTIGroupsRequestsByPerson)
+    pcsw.Client,'cbss_retrieve_ti_groups',RetrieveTIGroupsRequestsByPerson)
 
 def cbss_summary(self,ar):
     """

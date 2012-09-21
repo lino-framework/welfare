@@ -69,7 +69,7 @@ def objects():
     for i in range(7):
         yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
     #~ for p in Person.objects.filter(newcomer=True):
-    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
+    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
         p.faculty = FACULTIES.pop()
         p.save()
         

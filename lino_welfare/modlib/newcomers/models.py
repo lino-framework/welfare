@@ -45,6 +45,7 @@ from lino.modlib.cal.utils import amonthago
 #~ from lino_welfare.modlib.pcsw import models as welfare
 from lino_welfare.modlib.pcsw import models as pcsw
 
+MODULE_LABEL = _("Newcomers")
 
 class Broker(dd.Model):
     """
@@ -96,7 +97,7 @@ class Faculties(dd.Table):
     detail_template = """
     id name
     CompetencesByFaculty
-    NewcomersByFaculty
+    ClientsByFaculty
     """
 
 class Competence(mixins.AutoUser,mixins.Sequenced):
@@ -139,77 +140,105 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     pass
 
     
-class Newcomers(pcsw.Clients):
-    """
-    Clients who have the "Newcomer" checkbox on.
-    """
-    required = dict(user_groups=['newcomers'])
-    #~ required_user_groups = ['newcomers']
+#~ class Newcomers(pcsw.Clients):
+    #~ """
+    #~ Clients who have the "Newcomer" checkbox on.
+    #~ """
+    #~ required = dict(user_groups=['newcomers'])
     
-    #~ filter = dict(newcomer=True)
-    #~ known_values = dict(newcomer=True)
-    #~ known_values = dict(client_state=pcsw.ClientStates.newcomer)
-    use_as_default_table = False
-    column_names = "name_column broker faculty address_column *"
+    #~ use_as_default_table = False
+    #~ column_names = "name_column broker faculty address_column *"
+    
+    #~ label = _("Newcomers")
     
     #~ @classmethod
-    #~ def get_actor_label(self):
-        #~ return _("Newcomers")
-    label = _("Newcomers")
-    
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(Newcomers,self).param_defaults(ar,**kw)
-        kw.update(client_state=pcsw.ClientStates.newcomer)
-        kw.update(coached_on=None)
-        return kw
+    #~ def param_defaults(self,ar,**kw):
+        #~ kw = super(Newcomers,self).param_defaults(ar,**kw)
+        #~ kw.update(client_state=pcsw.ClientStates.newcomer)
+        #~ kw.update(coached_on=None)
+        #~ return kw
         
     
         
-class NewcomersByFaculty(Newcomers):
-    master_key = 'faculty'
-    column_names = "name_column broker address_column *"
+#~ class NewcomersByFaculty(Newcomers):
+    #~ master_key = 'faculty'
+    #~ column_names = "name_column broker address_column *"
         
+class NewClientDetail(pcsw.ClientDetail):
+    main = "general newcomers"
+    
+    newcomers = dd.Panel("""
+    broker:12 faculty:12  
+    """,label=_(MODULE_LABEL))
+    
+
 class NewClients(pcsw.Clients):
     required=dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
     use_as_default_table = False
     
-    #~ parameters = dict(
-        #~ coached_by = models.ForeignKey(users.User,verbose_name=_("Coached by"),blank=True),
-        #~ since = models.DateField(_("Since"),blank=True,default=amonthago),
-        #~ **pcsw.Clients.parameters
-    #~ )
-    #~ params_layout = "since " + pcsw.Clients.params_layout
+    detail_layout = NewClientDetail()
     
-    #~ column_names = "name_column:20 coached_from coached_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10 *"
     column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
     
+    #~ @classmethod
+    #~ def param_defaults(self,ar,**kw):
+        #~ kw = super(NewClients,self).param_defaults(ar,**kw)
+        #~ kw.update(new_since=amonthago())
+        #~ return kw
+        
+        
+    parameters = dict(
+      also_refused = models.BooleanField(_("Also refused clients"),default=False),
+      also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
+      #~ new_since = models.DateField(_("New clients since"),blank=True),
+      new_since = models.DateField(_("New clients since"),default=amonthago),
+      )
+    params_layout = 'also_refused also_obsolete new_since'
     
     @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(NewClients,self).param_defaults(ar,**kw)
-        kw.update(new_since=amonthago())
-        return kw
-        
-    @classmethod
-    def unused_get_request_queryset(self,ar):
-        """
-        We only want the Clients who actually have at least one client.
-        We store the corresponding request in the user object 
-        under the name `my_persons`.
-        """
-        #~ qs = Person.objects.all()
+    def get_request_queryset(self,ar):
+        # Note that we skip pcsw.Clients mro parent
         qs = super(NewClients,self).get_request_queryset(ar)
-        
-        #~ if ar.param_values.coached_by:
-            #~ qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
-            
-        if ar.param_values.since:
-            qs = pcsw.only_new_since(qs,ar.param_values.since)
+        #~ qs = qs.filter(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
+        #~ if ar.param_values.new_since:
+        qs = pcsw.only_new_since(qs,ar.param_values.new_since)
+        if not ar.param_values.also_obsolete:
+            qs = qs.filter(is_deprecated=False)
+        if not ar.param_values.also_refused:
+            qs = qs.filter(is_deprecated=False)
+        #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
-            
+
+    @classmethod
+    def get_title(self,ar):
+        #~ title = super(Clients,self).get_title(ar)
+        title = pcsw.Client._meta.verbose_name_plural
+        #~ if ar.param_values.new_since:
+            #~ title = _("New clients since") + ' ' + str(ar.param_values.new_since)
+            #~ title += _(" new since ") + str(ar.param_values.new_since)
+        #~ if ar.param_values.coached_by:
+            #~ title += _(" of ") + unicode(ar.param_values.coached_by)
+        #~ if ar.param_values.coached_on:
+            #~ title += _(" on ") + babel.dtos(ar.param_values.coached_on)
+        tags = []
+        #~ if ar.param_values.client_state:
+            #~ tags.append(unicode(ar.param_values.client_state))
+        if ar.param_values.also_refused:
+            tags.append(unicode(_("refused")))
+        if ar.param_values.also_obsolete:
+            tags.append(unicode(_("obsolete")))
+        if ar.param_values.new_since:
+            tags.append(unicode(_("new since")) + ' ' + babel.dtos(ar.param_values.new_since))
+        if len(tags):
+            title += " (%s)" % (', '.join(tags))
+        return title
+        
+        
+class ClientsByFaculty(NewClients):
+    master_key = 'faculty'
+    column_names = "name_column broker address_column *"
     
     
         
@@ -272,7 +301,7 @@ class UsersByNewcomer(users.Users):
             user.new_clients = NewClients.request(
               ar.ui,param_values=dict(
                 coached_by=user,
-                since=ar.param_values.since))
+                coached_since=ar.param_values.since))
             yield user
                 
     #~ @dd.virtualfield('contacts.Person.coach1')
@@ -281,7 +310,8 @@ class UsersByNewcomer(users.Users):
         
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
-        return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
+        #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
+        return pcsw.CoachingsByUser.request(ar.ui,master_instance=obj)
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
@@ -298,7 +328,6 @@ class UsersByNewcomer(users.Users):
         else:
             return None
         
-MODULE_LABEL = _("Newcomers")
 
 #~ settings.LINO.add_user_field('newcomers_level',UserLevels.field(MODULE_LABEL))
 #~ settings.LINO.add_user_group('newcomers',MODULE_LABEL)
@@ -330,9 +359,9 @@ def setup_main_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.user:
         #~ return
     m  = m.add_menu("newcomers",MODULE_LABEL)
-    m.add_action(Newcomers)
-    m.add_action(UsersByNewcomer)
+    #~ m.add_action(Newcomers)
     m.add_action(NewClients)
+    m.add_action(UsersByNewcomer)
             
   
 def setup_master_menu(site,ui,user,m): pass

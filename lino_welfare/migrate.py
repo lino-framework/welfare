@@ -138,7 +138,7 @@ def migrate_from_1_4_10(globals_dict):
                 #~ national_id += ' (A)'
             client_state = pcsw.ClientStates.coached
             if newcomer:
-                client_state = pcsw.ClientStates.newcomer
+                client_state = pcsw.ClientStates.new
             elif not is_active:
                 client_state = pcsw.ClientStates.former
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
@@ -161,8 +161,8 @@ def migrate_from_1_4_10(globals_dict):
             #~ if coached_from or coached_until:
             def user2type(user_id):
                 #~ pcsw_CoachingType
-                if user_id in (200085,200093,200096,200099): return 1 # DSBE
-                return 2
+                if user_id in (200085,200093,200096,200099): return 2 # DSBE
+                return 1
             if coach2_id and coach2_id != coach1_id:
                 ti = user2type(coach2_id)
                 kw = dict(
@@ -172,8 +172,8 @@ def migrate_from_1_4_10(globals_dict):
                 if ti == 1:
                     kw.update(start_date=coached_from,end_date=coached_until)
                 yield pcsw_Coaching(**kw)
+                
             if coach1_id:
-              
                 ti = user2type(coach1_id)
                 kw = dict(
                     project_id=partner_ptr_id,
@@ -300,8 +300,8 @@ def migrate_from_1_4_10(globals_dict):
         yield pcsw_ClientContactType(name="Apotheke")
         yield pcsw_ClientContactType(name="Arbeitsvermittler")
         yield pcsw_ClientContactType(name="Gerichtsvollzieher")
-        yield pcsw_CoachingType(name="DSBE")
         yield pcsw_CoachingType(name="ASD")
+        yield pcsw_CoachingType(name="DSBE")
         yield pcsw_CoachingType(name="Schuldnerberatung")
         yield objects()
     globals_dict.update(objects=new_objects)

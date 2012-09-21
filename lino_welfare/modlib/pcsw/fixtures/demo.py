@@ -68,16 +68,23 @@ COACHING_STORIES[pcsw.ClientStates.former] =  Cycler(
         (-430,-200,True),
     ])
 COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
-    [ 
-        (-800,-440,False),
-        (-440,-210,False),
-        (-210,None,True),
+       # start end primary
+    [   # hintereinander betreut durch drei verschiedene Benutzer
+        (-800, -440, True),
+        (-440, -210, True),
+        (-210, None, True),
     ],[ 
-        (-220,None,True),
+        (-220, None, True),
+    ],[ 
+        (-10,  None, True),
     ],[
-        (-810,None,True),
-        (-440,-230,False),
-        (-230,None,False),
+        (-810, None, True),
+        (-440, -230, False),
+        (-230, None, False),
+    ],[
+        (-210, None, True),
+        (-160, None, False),
+        (-50, None, False),
     ])
     
 #~ COACHING_STORIES = Cycler(coaching_stories())
@@ -417,7 +424,7 @@ def objects():
         city=kettenis,country='BE', 
         national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
-        client_state=pcsw.ClientStates.newcomer,
+        client_state=pcsw.ClientStates.new,
         #~ newcomer=True,
         gender=Gender.female)
     yield tatjana
@@ -482,9 +489,11 @@ def objects():
     charles = User(username="charles",partner=charles,profile='500') 
     yield charles
     
+    # id must be 1 (see isip.ContactBase.person_changed
+    yield pcsw.CoachingType(name="ASD",id=1) 
+    
     DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
-    yield pcsw.CoachingType(name="ASD")
     yield pcsw.CoachingType(name="Schuldnerberatung")
     
     
@@ -515,7 +524,7 @@ def objects():
                     
             elif count % 5:
                 #~ client.newcomer = True
-                client.client_state=pcsw.ClientStates.newcomer
+                client.client_state=pcsw.ClientStates.new
             else:
                 client.client_state=pcsw.ClientStates.former
                 
@@ -940,22 +949,25 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
     AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,melanie, hubert, melanie)
-    for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
+    #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.new):
+    for client in pcsw.Client.objects.all():
     #~ for i in range(30):
         #~ client = CLIENTS.pop()
-        if not client.group:
-            client.group = PERSONGROUPS.pop()
-            PERSONGROUPS.pop()
-            #~ for i in range(5-client.group.id): PERSONGROUPS.pop() # 
-            client.save()
-        periods = COACHING_STORIES[client.client_state].pop()
-        for a,b,primary in periods:
-            kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
-            if a is not None:
-                kw.update(start_date=settings.LINO.demo_date(a))
-            if b is not None:
-                kw.update(end_date=settings.LINO.demo_date(b))
-            yield pcsw.Coaching(**kw)
+        story = COACHING_STORIES.get(client.client_state)
+        if story:
+            if not client.group:
+                client.group = PERSONGROUPS.pop()
+                PERSONGROUPS.pop()
+                #~ for i in range(5-client.group.id): PERSONGROUPS.pop() # 
+                client.save()
+            periods = story.pop()
+            for a,b,primary in periods:
+                kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
+                if a is not None:
+                    kw.update(start_date=settings.LINO.demo_date(a))
+                if b is not None:
+                    kw.update(end_date=settings.LINO.demo_date(b))
+                yield pcsw.Coaching(**kw)
 
     JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
     #~ jobs_contract = Instantiator('jobs.Contract').build

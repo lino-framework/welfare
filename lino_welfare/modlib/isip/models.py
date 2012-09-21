@@ -234,24 +234,32 @@ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrint
 
         
 
-    def dsbe_person(self):
-        """Used in document templates."""
-        if self.person_id is not None:
-            if self.person.coach2_id is not None:
-                return self.person.coach2_id
-            return self.person.coach1 or self.user
+    #~ def dsbe_person(self): removed 20120921 because no longer used
+        #~ """Used in document templates."""
+        #~ if self.person_id is not None:
+            #~ if self.person.coach2_id is not None:
+                #~ return self.person.coach2_id
+            #~ return self.person.coach1 or self.user
             
-        #~ try:
-            #~ return self.person.coaching_set.get(type__name__exact='DSBE').coach        
-        #~ except Exception,e:
-            #~ return self.person.user or self.user
             
     def person_changed(self,request):
+        """
+        If the contract's author is the client's primary coach, 
+        then set user_asd to None,
+        otherwise set user_asd to the primary coach.
+        We suppose that only integration agents write contracts.
+        """
         if self.person_id is not None:
-            if self.person.coach1_id is None or self.person.coach1_id == self.user_id:
-                self.user_asd = None
-            else:
-                self.user_asd = self.person.coach1
+            #~ pc = self.person.get_primary_coach()
+            #~ qs = self.person.get_coachings(self.applies_from,active=True)
+            qs = self.person.get_coachings(self.applies_from,type_id=1)
+            if qs.count() == 1:
+                pc = qs[0]
+                if pc is None or pc == self.user:
+                #~ if self.person.coach1_id is None or self.person.coach1_id == self.user_id:
+                    self.user_asd = None
+                else:
+                    self.user_asd = pc
                 
     def on_create(self,ar):
         super(ContractBase,self).on_create(ar)
