@@ -80,6 +80,21 @@ class Lino(Lino):
         #~ for p in dd.UserProfiles.items():
             #~ print 20120715, repr(p)
             
+        
+    def on_site_startup(self):
+        """
+        A Lino/Welfare site by default watches the changes to certain Client fields
+        and to all Contract fields.
+        """
+        
+        self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
+        
+        # ContractBase is abstract, so it's not under self.modules
+        from lino_welfare.modlib.isip.models import ContractBase
+        ContractBase.watch_changes()
+        
+                
+            
 
     def setup_quicklinks(self,ui,user,tb):
         #~ tb.add_action(self.modules.contacts.Persons().detail)
@@ -102,25 +117,18 @@ class Lino(Lino):
         m = main.add_menu("master",_("Master"))
         
         m = main.add_menu("contacts",_("Contacts"))
-        #~ if user.is_spis:
+
         if user.profile.level:
             m.add_action(self.modules.contacts.Companies)
             m.add_action(self.modules.contacts.Persons)
             m.add_action(self.modules.pcsw.Clients)
-            #~ m.add_action('contacts.Persons.detail')
-            #~ m.add_action('contacts.Persons',label="Alle Personen",params={})
             m.add_action(self.modules.contacts.AllPartners)
-            #~ m.add_action(self.modules.pcsw.Newcomers)
         if user.profile.integ_level:
             m.add_action(self.modules.pcsw.MyPersonSearches)
             
-        #~ self.modules.isip.setup_master_menu(self,ui,user,m)
-        #~ self.modules.households.setup_master_menu(self,ui,user,m)
         self.on_each_app('setup_master_menu',ui,user,m)
         
-
-        #~ if user is None:
-            #~ return main
+            
         if user.profile.level and not user.profile.readonly:
           
             m = main.add_menu("my",_("My menu"))
@@ -149,32 +157,14 @@ class Lino(Lino):
           
             m = main.add_menu("explorer",_("Explorer"))
             
-            #~ m.add_action(self.modules.pcsw.AllClients)
-            
             self.on_each_app('setup_explorer_menu',ui,user,m)
             
-            #~ m.add_action(self.modules.uploads.Uploads)
-            #~ m.add_action(self.modules.cv.LanguageKnowledges)
-            #~ m.add_action(self.modules.lino.ContentTypes)
             m.add_action(self.modules.properties.Properties)
-            #~ m.add_action(self.modules.thirds.Thirds)
-            
-            
-            #~ self.modules.cal.setup_explorer_menu(self,ui,user,m)
-            
-            #~ lst = m.add_menu("lst",_("Listings"))
-            #~ for listing in LISTINGS:
-                #~ lst.add_action(listing)
-            
 
         
         m = main.add_menu("site",_("Site"))
         self.modules.lino.setup_site_menu(self,ui,user,m)
         
-        #~ m = main.add_menu("help",_("Help"))
-        #~ m.add_item('userman',_("~User Manual"),
-            #~ href='http://lino.saffre-rumma.net/pcsw/index.html')
-            
         return main
       
     def get_reminder_generators_by_user(self,user):

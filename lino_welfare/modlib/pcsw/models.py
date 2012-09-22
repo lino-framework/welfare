@@ -249,7 +249,8 @@ add('18', _("Foreigner card F+"))
 
 
 #~ class CpasPartner(dd.Model,mixins.DiffingMixin):
-class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
+#~ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
+class Partner(contacts.Partner,mixins.CreatedModified):
     """
     """
     
@@ -1046,13 +1047,25 @@ class ClientDetail(dd.FormLayout):
     """,label=_("Status"))
     
       
+    #~ coaching = dd.Panel("""
+    #~ group:16 client_state
+    #~ # coach1:12 coach2:12 coached_from:12 coached_until:12 
+    #~ # health_insurance pharmacy job_office_contact 
+    #~ job_agents
+    #~ ContactsByClient:40 CoachingsByProject:40
+    #~ """,label=_("Coaching"))
+    
     coaching = dd.Panel("""
+    coaching_left:30 lino.ChangesByObject:30
+    ContactsByClient:40 CoachingsByProject:40
+    """,label=_("Coaching"))
+    
+    coaching_left = """
     group:16 client_state
     # coach1:12 coach2:12 coached_from:12 coached_until:12 
     # health_insurance pharmacy job_office_contact 
     job_agents
-    ContactsByClient:40 CoachingsByProject:40
-    """,label=_("Coaching"))
+    """
     
     
     

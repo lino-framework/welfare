@@ -153,7 +153,8 @@ class ContractEndings(dd.Table):
 
 
 
-class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
+#~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
+class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenerator):
     """Abstract base class for 
     :class:`lino_welfare.modlib.jobs.models.Contract`
     and
