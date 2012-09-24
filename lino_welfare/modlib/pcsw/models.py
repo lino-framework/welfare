@@ -362,11 +362,11 @@ class ClientStates(ChoiceList):
     label = _("Client state")
 add = ClientStates.add_item
 add('10', _("New"),'new')           # "N" in PAR->Attrib
-add('20', _("Refused"),'refused')   # "N" in PAR->Attrib
+add('20', _("Refused"),'refused')   
 add('30', _("Coached"),'coached')   # neither newcomer nor former, IdPrt != "I"
 add('40', _("Official"),'official') # the client is "integrated"
 add('50', _("Former"),'former')     # IdPrt == "I"
-add('60', _("Invalid"),'invalid')   # duplicate or doesn't correspond to a real person
+#~ add('60', _("Invalid"),'invalid')   # duplicate or doesn't correspond to a real person
 
     
 class Client(Person):
@@ -515,7 +515,7 @@ class Client(Person):
       verbose_name=_("Contact person at local job office"),
       related_name='persons_job_office')
       
-    client_state = ClientStates.field()
+    client_state = ClientStates.field(default=ClientStates.new)
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content')
     
@@ -976,40 +976,40 @@ class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
-    main = "general tab2 coaching"
+    main = "general status_tab coaching history calendar outbox misc"
     
     general = dd.Panel("""
     box1 box2
-    box4 image:15 #overview 
-    created modified
+    box4 image:15 #overview     
     """,label=_("Person"))
     
-    box1 = """
+    box1 = dd.Panel("""
     last_name first_name:15 title:10
     country city zip_code:10
     street_prefix street:25 street_no street_box
     addr2:40
-    """
+    """,label = _("Address"))
     
-    box2 = """
+    box2 = dd.Panel("""
     id:12 language
     email
     phone fax
     gsm
-    """
+    """,label = _("Contact"))
     
-    box3 = """
+    box3 = dd.Panel("""
     gender:10 birth_date age:10 civil_state:15 noble_condition 
     birth_country birth_place nationality:15 national_id:15 
-    """
+    """,label = _("Birth"))
     
-    eid_panel = """
+    eid_panel = dd.Panel("""
     read_beid_card:12 card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
-    """
+    """,label = _("eID card"))
 
     box4 = """
     box3
     eid_panel
+    created modified
     """
 
 
@@ -1026,22 +1026,22 @@ class ClientDetail(dd.FormLayout):
     income_misc  
     """
       
-    suche = """
+    suche = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
     unavailable_until:15 unavailable_why:30
     # job_office_contact job_agents
     pcsw.ExclusionsByPerson:50x5
-    """
+    """,label = _("Job search"))
     
     
       
-    papers = """
+    papers = dd.Panel("""
     needs_residence_permit needs_work_permit 
     residence_permit work_permit driving_licence
     uploads.UploadsByController
-    """
+    """,label = _("Papers"))
     
-    tab2 = dd.Panel("""
+    status_tab = dd.Panel("""
     status:55 income:25
     suche:40  papers:40
     """,label=_("Status"))
@@ -1056,7 +1056,7 @@ class ClientDetail(dd.FormLayout):
     #~ """,label=_("Coaching"))
     
     coaching = dd.Panel("""
-    coaching_left:30 lino.ChangesByObject:30
+    coaching_left
     ContactsByClient:40 CoachingsByProject:40
     """,label=_("Coaching"))
     
@@ -1067,10 +1067,46 @@ class ClientDetail(dd.FormLayout):
     job_agents
     """
     
+    history = dd.Panel("""
+    pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
+    lino.ChangesByObject:30
+    """,label = _("History"))
+    
+    outbox = dd.Panel("""
+    outbox.MailsByProject
+    postings.PostingsByProject
+    """,label = _("Outbox"))
+    
+    calendar = dd.Panel("""
+    cal.EventsByProject
+    cal.TasksByProject
+    """,label = _("Calendar"))
+    
+    misc = dd.Panel("""
+    activity 
+    is_cpas is_senior is_deprecated 
+    remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
+    # links.LinksToThis:30 links.LinksFromThis:30 
+    """,label = _("Miscellaneous"))
+    
+if not settings.LINO.use_beid_jslib:
+    ClientDetail.eid_panel = ClientDetail.eid_panel.replace('read_beid_card:12 ')
+    
+if settings.LINO.is_installed('cbss'):
+    ClientDetail.main += ' cbss' 
+    ClientDetail.cbss = dd.Panel("""
+cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
+cbss_summary
+""",label=_("CBSS"),required=dict(user_groups='cbss'))
+
+
     
     
 class IntegClientDetail(ClientDetail):
-    main = "general tab2 coaching tab3 tab4 tab5 tab5b history contracts calendar misc "
+    #~ main = "general status_tab coaching tab3 tab4 tab5 tab5b history contracts calendar misc"
+    
+    # we insert our new tab panels behind the coaching tab
+    main = ClientDetail.main.replace("coaching ","coaching tab3 tab4 tab5 tab5b contracts ")
     
     
     tab3 = """
@@ -1089,55 +1125,38 @@ class IntegClientDetail(ClientDetail):
     cv.ObstaclesByPerson obstacles 
     """
 
-    tab5b = """
+    tab5b = dd.Panel("""
     jobs.CandidaturesByPerson
-    """
+    """,label = _("Job Requests"))
       
-    history = """
-    pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
-    outbox.MailsByProject:60 postings.PostingsByProject:40
-    """
-    
-    contracts = """
+    contracts = dd.Panel("""
     isip.ContractsByPerson
     jobs.ContractsByPerson
-    """
-    
-    calendar = """
-    cal.EventsByProject
-    cal.TasksByProject
-    """
-    
-    misc = """
-    activity 
-    is_cpas is_senior is_deprecated 
-    remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
-    # links.LinksToThis:30 links.LinksFromThis:30 
-    """
+    """,label = _("Contracts"))
     
     def setup_handle(self,lh):
       
         #~ lh.general.label = _("Person")
-        #~ lh.tab2.label = _("Status")
+        #~ lh.status_tab.label = _("Status")
         lh.tab3.label = _("Education")
         lh.tab4.label = _("Languages")
         lh.tab5.label = _("Competences")
-        lh.tab5b.label = _("Job Requests")
-        lh.history.label = _("History")
-        lh.contracts.label = _("Contracts")
-        lh.calendar.label = _("Calendar")
-        lh.misc.label = _("Miscellaneous")
+        #~ lh.tab5b.label = _("Job Requests")
+        #~ lh.history.label = _("History")
+        #~ lh.contracts.label = _("Contracts")
+        #~ lh.calendar.label = _("Calendar")
+        #~ lh.misc.label = _("Miscellaneous")
         #~ lh.cbss.label = _("CBSS")
         
       
-        lh.box1.label = _("Address")
-        lh.box2.label = _("Contact")
-        lh.box3.label = _("Birth")
-        lh.eid_panel.label = _("eID card")
+        #~ lh.box1.label = _("Address")
+        #~ lh.box2.label = _("Contact")
+        #~ lh.box3.label = _("Birth")
+        #~ lh.eid_panel.label = _("eID card")
         
-        lh.papers.label = _("Papers")
+        #~ lh.papers.label = _("Papers")
         #~ lh.income.label = _("Income")
-        lh.suche.label = _("Job search")
+        #~ lh.suche.label = _("Job search")
         
         # override default field labels
         #~ lh.eid_panel.card_number.label = _("number")
@@ -1152,8 +1171,7 @@ class IntegClientDetail(ClientDetail):
         lh.card_issuer.label = _("issued by")
         lh.card_type.label = _("eID card type")
 
-if not settings.LINO.use_beid_jslib:
-    ClientDetail.eid_panel = ClientDetail.eid_panel.replace('read_beid_card:12 ')
+    
             
 
 #~ class AllClients(contacts.Persons):
@@ -1228,15 +1246,17 @@ def only_active_coachings_filter(today,prefix=''):
         Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':today}))
 
     
+
+
 #~ from lino.modlib.cal.utils import amonthago
 
 #~ class Clients(AllClients):
 class Clients(Partners):
     model = Client # settings.LINO.person_model
     insert_layout = dd.FormLayout("""
-    title first_name last_name
-    gender language
+    first_name last_name
     national_id
+    gender language
     """,window_size=(60,'auto'))
     column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     detail_layout = ClientDetail()
@@ -1244,6 +1264,7 @@ class Clients(Partners):
 class IntegClients(Clients):
     detail_layout = IntegClientDetail()
     order_by = "last_name first_name id".split()
+    allow_create = False # see blog/2012/0922
     
     parameters = dict(
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
@@ -1333,9 +1354,9 @@ class ClientsByNationality(Clients):
 
 
 
-class MyClients(Clients):
+class MyClients(IntegClients):
     label = _("My clients")
-    required = dict(user_groups = ['integ'])
+    required = dict(user_groups = 'integ')
     use_as_default_table = False
     
     @classmethod

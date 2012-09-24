@@ -63,10 +63,10 @@ if cbss:
       
         User = dd.resolve_model(settings.LINO.user_model)
         root = User.objects.get(username='root')
-        Person = dd.resolve_model(settings.LINO.person_model)
+        Client = dd.resolve_model('pcsw.Client')
         #~ PERSONS = Cycler(Person.objects.filter(coached_from__isnull=False).order_by('id'))
-        PERSONS = Cycler(Person.objects.all().order_by('id'))
-        mustermann = PERSONS.pop()
+        CLIENTS = Cycler(Client.objects.all().order_by('id'))
+        mustermann = CLIENTS.pop()
         for model,kw,fn in DEMO_REQUESTS:
             kw.update(person=mustermann)
             kw.update(user=root)

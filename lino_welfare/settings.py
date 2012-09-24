@@ -87,7 +87,8 @@ class Lino(Lino):
         and to all Contract fields.
         """
         
-        self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
+        #~ self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
+        self.modules.pcsw.Client.watch_changes()
         
         # ContractBase is abstract, so it's not under self.modules
         from lino_welfare.modlib.isip.models import ContractBase
@@ -225,11 +226,11 @@ INSTALLED_APPS = (
   'lino_welfare.modlib.cv',
   'lino_welfare.modlib.isip',
   'lino_welfare.modlib.jobs',
-  'lino_welfare.modlib.cbss',
   'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.courses',
-  'lino_welfare.modlib.pcsw',
+  'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
+  'lino_welfare.modlib.cbss',
   'lino.modlib.notes', # because demo fixture creates notes for Clients 
 )
 

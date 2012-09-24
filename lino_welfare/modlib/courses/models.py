@@ -98,7 +98,7 @@ class CourseProvider(pcsw.Company):
     
     def disable_delete(self,ar):
         # skip the is_imported_partner test
-        return super(pcsw.CpasPartner,self).disable_delete(ar)
+        return super(pcsw.Partner,self).disable_delete(ar)
         
     
     

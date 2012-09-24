@@ -344,7 +344,7 @@ class CBSSRequest(mixins.AutoUser,mixins.Printable,mixins.Duplicable):
         abstract = True
         
     person = models.ForeignKey(
-        settings.LINO.person_model,
+        'pcsw.Client', # settings.LINO.person_model,
         verbose_name=_("Client"))
     
     sent = models.DateTimeField(
@@ -1774,11 +1774,17 @@ def site_setup(self):
     
     Adds a new tab "CBSS" to the Detail of `pcsw.Clients`.
     """
-    self.modules.pcsw.Clients.add_detail_tab('cbss',"""
-    cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
-    cbss_summary
-    """,MODULE_LABEL,required=dict(user_groups='cbss')
-    )
+    #~ self.modules.pcsw.Clients.add_detail_tab('cbss',"""
+    #~ cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
+    #~ cbss_summary
+    #~ """,MODULE_LABEL,required=dict(user_groups='cbss')
+    #~ )
+    #~ from lino_welfare.modlib.pcsw.models import ClientDetail
+    #~ ClientDetail.add_tabpanel('cbss',"""
+    #~ cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
+    #~ cbss_summary
+    #~ """,MODULE_LABEL,required=dict(user_groups='cbss')
+    #~ )
     #~ required_user_groups=['cbss']
     #~ cbss.IdentifyRequestsByPerson
     #~ self.modules.contacts.AllPersons.add_detail_panel('cbssrequests',"""

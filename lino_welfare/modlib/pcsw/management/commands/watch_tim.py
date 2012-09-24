@@ -119,7 +119,7 @@ country city zip_code region language email url phone gsm remarks'''.split()
     #~ user = "watch_tim"
 #~ REQUEST = PseudoRequest()
 
-REQUEST = dblogger.PseudoRequest("watch_tim")
+#~ 20120921 REQUEST = dblogger.PseudoRequest("watch_tim")
 
 class Controller:
     "Deserves more documentation."
@@ -139,14 +139,14 @@ class Controller:
     def validate_and_save(self,obj):
         "Deserves more documentation."
         obj.full_clean()
-        dblogger.log_changes(REQUEST,obj)
+        #~ 20120921 dblogger.log_changes(REQUEST,obj)
         obj.save()
                 
     def old_validate_and_save(self,obj):
         "Deserves more documentation."
         try:
             obj.full_clean()
-            dblogger.log_changes(REQUEST,obj)
+            #~ 20120921 dblogger.log_changes(REQUEST,obj)
             obj.save()
         except ValidationError,e:
             # here we only log an obj2str() of the object 
@@ -164,7 +164,7 @@ class Controller:
             dblogger.warning("%s:%s : DELETE failed (does not exist)",
                 kw['alias'],kw['id'])
             return
-        dblogger.log_deleted(REQUEST,obj)
+        #~ 20120921 dblogger.log_deleted(REQUEST,obj)
         obj.delete()
         dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],obj2str(obj))
         
