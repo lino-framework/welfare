@@ -1252,6 +1252,7 @@ def only_active_coachings_filter(today,prefix=''):
 
 #~ class Clients(AllClients):
 class Clients(Partners):
+    #~ debug_permissions = True # '20120925'
     model = Client # settings.LINO.person_model
     insert_layout = dd.FormLayout("""
     first_name last_name
@@ -1505,9 +1506,9 @@ class ClientsTest(Clients):
 #~ class OverviewClientsByUser(dd.VirtualTable):
 class UsersWithClients(dd.VirtualTable):
     """
-    New implementation of persons_by_user
-    A customized overview report.
+    A customized overview table.
     """
+    #~ debug_permissions = True
     required = dict(user_groups='integ newcomers')
     #~ label = _("Overview Clients By User")
     label = _("Users with their Clients")
@@ -2283,6 +2284,7 @@ def customize_sqlite():
 
 
 class Home(cal.Home):
+    #~ debug_permissions = True
     label = cal.Home.label
     app_label = 'lino'
     detail_layout = """
