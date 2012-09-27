@@ -585,11 +585,11 @@ class CBSSRequestDetail(dd.FormLayout):
     result
     """
     
-    technical = """
+    technical = dd.Panel("""
     response_xml 
     info_messages
     debug_messages
-    """
+    """,label=_("Technical"),required=dict(user_groups='cbss',user_level='admin'))
     
     info = """
     id person user environment sent status ticket
@@ -602,11 +602,12 @@ class CBSSRequestDetail(dd.FormLayout):
         lh.request.label = _("Request")
         lh.info.label = _("Request information")
         lh.result.label = _("Result")
-        lh.technical.label = _("Technical")
+        # 20120927
+        #~ lh.technical.label = _("Technical")
+        #~ lh.technical.required.update(user_level='admin')
         #~ lh.technical.required_user_level = UserLevels.manager
         #~ lh.technical.read_permission = perms.Required(user_groups = ['cbss'])
         #~ lh.technical.required = dict(user_level='admin')
-        lh.technical.required.update(user_level='admin')
 
         #~ lh.response.label = _("Response")
         #~ lh.log.label = _("Log")
@@ -1697,7 +1698,7 @@ def cbss_summary(self,ar):
     html = '<div class="htmlText">%s</div>' % html
     return html
     
-dd.inject_field(pcsw.Person,
+dd.inject_field(pcsw.Client,
     'cbss_summary',
     dd.VirtualField(dd.HtmlBox(_("CBSS summary")),cbss_summary))
     

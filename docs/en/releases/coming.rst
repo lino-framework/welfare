@@ -9,6 +9,10 @@ TODO
 
 - DSBE kann `Status` eines Klienten nicht bearbeiten.
 
+- "Uncaught No center region defined in BorderLayout ext-comp-1575"
+  wenn ich als Kerstin den Sprachen-Reiter eines Klienen anzeige. 
+  Er zeigt dann die untere Tabelle "Kursanfragen" nicht an.
+
 
 DONE
 
