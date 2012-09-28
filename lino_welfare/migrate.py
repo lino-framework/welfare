@@ -208,12 +208,13 @@ def migrate_from_1_4_10(globals_dict):
                     type_id=2,
                     company_id=pharmacy_id)
             if job_office_contact_id:
+                contact = contacts_Role.objects.get(pk=job_office_contact_id)
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
                     company_id=settings.LINO.site_config.job_office.id,
-                    contact_id=job_office_contact_id)
+                    contact_person=contact.person)
         else:
             #~ silently ignored if lost: 
             #~ is_cpas is_senior coach1_id coach2_id 
@@ -297,7 +298,7 @@ def migrate_from_1_4_10(globals_dict):
     globals_dict.update(create_uploads_upload=create_uploads_upload)
     
     def create_isip_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, duties_company, duties_person):
-        contact = contacts_Role.objects.get(contact_id)
+        contact = contacts_Role.objects.get(pk=contact_id)
         return isip_Contract(id=id,user_id=user_id,build_time=build_time,
           client_id=person_id,
           company_id=company_id,
@@ -309,7 +310,7 @@ def migrate_from_1_4_10(globals_dict):
     
     def create_jobs_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, job_id, duration, regime_id, schedule_id, hourly_rate, refund_rate, reference_person, responsibilities, remark):
         if hourly_rate is not None: hourly_rate = Decimal(hourly_rate)
-        contact = contacts_Role.objects.get(contact_id)
+        contact = contacts_Role.objects.get(pk=contact_id)
         return jobs_Contract(id=id,user_id=user_id,build_time=build_time,
           client_id=person_id,
           company_id=company_id,
