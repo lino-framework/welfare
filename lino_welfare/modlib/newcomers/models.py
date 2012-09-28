@@ -165,10 +165,12 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     #~ column_names = "name_column broker address_column *"
         
 class NewClientDetail(pcsw.ClientDetail):
-    main = "general newcomers"
+    main = pcsw.ClientDetail.main + " newcomers"
     
     newcomers = dd.Panel("""
     broker:12 faculty:12  
+    client_state workflow_buttons
+    AvailableCoachesByClient
     """,label=_(MODULE_LABEL))
     
 
@@ -180,7 +182,7 @@ class NewClients(pcsw.Clients):
     
     detail_layout = NewClientDetail()
     
-    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
+    column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
     
     #~ @classmethod
     #~ def param_defaults(self,ar,**kw):
@@ -193,21 +195,30 @@ class NewClients(pcsw.Clients):
       also_refused = models.BooleanField(_("Also refused clients"),default=False),
       also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
       #~ new_since = models.DateField(_("New clients since"),blank=True),
-      new_since = models.DateField(_("New clients since"),default=amonthago),
+      new_since = models.DateField(_("Also newly coached clients since"),default=amonthago,blank=True,null=True),
+      coached_by = models.ForeignKey(users.User,blank=True,null=True,
+          verbose_name=_("Coached by")),
       )
-    params_layout = 'also_refused also_obsolete new_since'
+    params_layout = 'also_refused also_obsolete new_since coached_by'
     
     @classmethod
     def get_request_queryset(self,ar):
         # Note that we skip pcsw.Clients mro parent
         qs = super(NewClients,self).get_request_queryset(ar)
-        #~ qs = qs.filter(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
-        #~ if ar.param_values.new_since:
-        qs = pcsw.only_new_since(qs,ar.param_values.new_since)
+        
+        q = models.Q(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
+        if ar.param_values.new_since:
+            q = q | models.Q(
+                client_state=pcsw.ClientStates.coached,
+                pcsw_coaching_set_by_project__start_date__gte=ar.param_values.new_since)
+        qs = qs.filter(q)
+
+        if ar.param_values.coached_by:
+            qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
         if not ar.param_values.also_obsolete:
             qs = qs.filter(is_deprecated=False)
-        if not ar.param_values.also_refused:
-            qs = qs.filter(is_deprecated=False)
+        #~ if not ar.param_values.also_refused:
+            #~ qs = qs.filter(client_status=False)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
@@ -244,7 +255,8 @@ class ClientsByFaculty(NewClients):
         
 #~ class UsersByNewcomer(dd.VirtualTable):
 #~ class UsersByNewcomer(dd.Table):
-class UsersByNewcomer(users.Users):
+#~ class UsersByNewcomer(users.Users):
+class AvailableCoaches(users.Users):
     """
     A list of the Users that are susceptible to become responsible for a Newcomer.
     """
@@ -255,7 +267,8 @@ class UsersByNewcomer(users.Users):
     #~ model = users.User
     editable = False # even root should not edit here
     #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
-    label = _("Users by Newcomer")
+    #~ label = _("Users by Newcomer")
+    label = _("Available Coaches")
     column_names = 'name_column primary_clients active_clients new_clients newcomer_quota newcomer_score'
     parameters = dict(
         for_client = models.ForeignKey('contacts.Person',
@@ -273,7 +286,7 @@ class UsersByNewcomer(users.Users):
     @classmethod
     def get_request_queryset(self,ar):
         profiles = [p for p in UserProfiles.items() if p.integ_level]
-        return super(UsersByNewcomer,self,ar).filter(models.Q(profile__in=profiles))
+        return super(AvailableCoaches,self,ar).filter(models.Q(profile__in=profiles))
         
         
     #~ @classmethod
@@ -289,19 +302,18 @@ class UsersByNewcomer(users.Users):
         We store the corresponding request in the user object 
         under the name `my_persons`.
         """
-        qs = super(UsersByNewcomer,self).get_request_queryset(ar)
-        
-        Q = models.Q
-        #~ for user in users.User.objects.filter(
+        qs = super(AvailableCoaches,self).get_request_queryset(ar)
         for user in qs:
             if ar.param_values.for_client:
                 r = Competence.objects.filter(user=user,faculty=ar.param_values.for_client.faculty)
                 if r.count() == 0:
                     continue
+            #~ else:
+                #~ logger.info("20120928 AvailableCoaches.get_data_rows : no for_client")
             user.new_clients = NewClients.request(
               ar.ui,param_values=dict(
                 coached_by=user,
-                coached_since=ar.param_values.since))
+                new_since=ar.param_values.since))
             yield user
                 
     #~ @dd.virtualfield('contacts.Person.coach1')
@@ -315,7 +327,8 @@ class UsersByNewcomer(users.Users):
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
-        return pcsw.MyActiveClients.request(ar.ui,subst_user=obj)
+        #~ return pcsw.MyActiveClients.request(ar.ui,subst_user=obj)
+        return pcsw.IntegClients.request(ar.ui,param_values=dict(coached_by=obj,only_active=True))
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):
@@ -328,6 +341,33 @@ class UsersByNewcomer(users.Users):
         else:
             return None
         
+
+class AvailableCoachesByClient(AvailableCoaches):
+    #~ master_key = 'for_client'
+    master = pcsw.Client
+
+    @classmethod
+    def get_data_rows(self,ar):
+        ar.param_values.for_client = ar.master_instance
+        return super(AvailableCoachesByClient,self).get_data_rows(ar)
+        
+    @dd.action(label=_("Attribute"))
+    def attribute_coach(obj,ar):
+        client = ar.master_instance
+        pcsw.Coaching(project=client,user=obj,start_date=datetime.date.today()).save()
+        client.client_state = pcsw.ClientStates.coached
+        client.save()
+        msg = _("Client %(client)s now coached by %(user)s") % dict(client=client,user=obj)
+        return ar.success_response(refresh=True,message=msg,alert=True)
+        
+        
+
+
+
+
+
+
+
 
 #~ settings.LINO.add_user_field('newcomers_level',UserLevels.field(MODULE_LABEL))
 #~ settings.LINO.add_user_group('newcomers',MODULE_LABEL)
@@ -361,7 +401,7 @@ def setup_main_menu(site,ui,user,m):
     m  = m.add_menu("newcomers",MODULE_LABEL)
     #~ m.add_action(Newcomers)
     m.add_action(NewClients)
-    m.add_action(UsersByNewcomer)
+    m.add_action(AvailableCoaches)
             
   
 def setup_master_menu(site,ui,user,m): pass

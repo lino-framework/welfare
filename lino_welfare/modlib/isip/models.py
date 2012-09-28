@@ -15,7 +15,7 @@
 """
 ISIP (Individualized Social Integration 
 Projects, fr. "PIIS", german "VSE")
-are contracts between a PCSW and a Person.
+are contracts between a PCSW and a Client.
 
 """
 
@@ -154,8 +154,13 @@ class ContractEndings(dd.Table):
 
 
 #~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
-class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenerator):
-    """Abstract base class for 
+class ContractBase(
+    #~ contacts.CompanyContact,
+    contacts.ContactRelated,
+    mixins.TypedPrintable,
+    cal.EventGenerator):
+    """
+    Abstract base class for 
     :class:`lino_welfare.modlib.jobs.models.Contract`
     and
     :class:`lino_welfare.modlib.isip.models.Contract`
@@ -171,8 +176,8 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
         #~ parent_link=True)
   
     #~ person = models.ForeignKey(settings.LINO.person_model,
-    person = models.ForeignKey('pcsw.Client',
-        related_name="%(app_label)s_%(class)s_set_by_person")
+    client = models.ForeignKey('pcsw.Client',
+        related_name="%(app_label)s_%(class)s_set_by_client")
         
     language = babel.LanguageField()
     
@@ -209,7 +214,7 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
         #~ return u'%s#%s (%s)' % (self.job.name,self.pk,
             #~ self.person.get_full_name(salutation=False))
         return u'%s#%s (%s)' % (self._meta.verbose_name,self.pk,
-            self.person.get_full_name(salutation=False))
+            self.client.get_full_name(salutation=False))
     
     #~ def __unicode__(self):
         #~ msg = _("Contract # %s")
@@ -218,21 +223,37 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
         #~ return msg % self.pk
         
     def get_recipient(self):
-        if self.contact:
-            return self.contact
+        contact = self.get_contact()
+        #~ if self.contact_person:
+        if contact is not None:
+            #~ contacts = self.get_contact_set()
+            return contact
         if self.company:
             return self.company
-        return self.person
+        return self.client
     recipient = property(get_recipient)
+    
+    # backwards compat for document templates
+    def get_person(self): 
+        return self.client
+    person = property(get_person)
         
         
-    @classmethod
-    def contact_choices_queryset(cls,company):
-        return contacts.Role.objects.filter(
-            type__use_in_contracts=True,
-            company=company)
-            #~ company__id=company.pk)
+    #~ @classmethod
+    #~ def contact_choices_queryset(cls,company):
+        #~ return contacts.Role.objects.filter(
+            #~ type__use_in_contracts=True,
+            #~ company=company)
 
+    @classmethod
+    def contact_person_choices_queryset(cls,company):
+        return settings.LINO.person_model.objects.filter(rolesbyperson__company=company,
+            rolesbyperson__type__use_in_contracts=True)
+            
+    @dd.chooser()
+    def contact_role_choices(cls):
+        return contacts.RoleType.objects.filter(use_in_contracts=True)
+        
         
 
     #~ def dsbe_person(self): removed 20120921 because no longer used
@@ -243,17 +264,17 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
             #~ return self.person.coach1 or self.user
             
             
-    def person_changed(self,request):
+    def client_changed(self,request):
         """
         If the contract's author is the client's primary coach, 
         then set user_asd to None,
         otherwise set user_asd to the primary coach.
         We suppose that only integration agents write contracts.
         """
-        if self.person_id is not None:
+        if self.client_id is not None:
             #~ pc = self.person.get_primary_coach()
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
-            qs = self.person.get_coachings(self.applies_from,type_id=1)
+            qs = self.client.get_coachings(self.applies_from,type_id=1)
             if qs.count() == 1:
                 pc = qs[0]
                 if pc is None or pc == self.user:
@@ -264,7 +285,7 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
                 
     def on_create(self,ar):
         super(ContractBase,self).on_create(ar)
-        self.person_changed(ar)
+        self.client_changed(ar)
       
                     
     def full_clean(self,*args,**kw):
@@ -277,8 +298,8 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
                 self.exam_policy_id = self.type.exam_policy_id
         # The severe test is ready and now also activated :
         if True:
-          if self.person_id is not None:
-            msg = OverlappingContractsTest(self.person).check(self)
+          if self.client_id is not None:
+            msg = OverlappingContractsTest(self.client).check(self)
             if msg:
                 raise ValidationError(msg)
             
@@ -290,7 +311,7 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
         #~ contacts.PartnerDocument.update_owned_task(self,task)
         #~ task.company = self.company
         if isinstance(other,mixins.ProjectRelated):
-            other.project = self.person
+            other.project = self.client
         super(ContractBase,self).update_owned_instance(other)
         
     def after_update_owned_instance(self,other):
@@ -354,21 +375,21 @@ class ContractBase(contacts.CompanyContact,mixins.TypedPrintable,cal.EventGenera
                     #~ msgs.append(_("Dates overlap with %s") % con)
         #~ return msgs
 
-dd.update_field(ContractBase,'contact',verbose_name=_("represented by"))
+#~ dd.update_field(ContractBase,'contact_person',verbose_name=_("represented by"))
 
 class OverlappingContractsTest:
     """
     Volatile object used to test for overlapping contracts.
     """
-    def __init__(self,person):
+    def __init__(self,client):
         """
-        Test whether this person has overlapping contracts.
+        Test whether this client has overlapping contracts.
         """
         #~ from lino_welfare.modlib.isip.models import ContractBase
-        self.person = person
+        self.client = client
         self.actives = []
         for model in models_by_abc(ContractBase):
-            for con1 in model.objects.filter(person=person):
+            for con1 in model.objects.filter(client=client):
                 p1 = con1.active_period()
                 #~ if p1:
                 self.actives.append((p1,con1))
@@ -378,7 +399,7 @@ class OverlappingContractsTest:
         if ap[0] is None and ap[1] is None:
             return
         if False:
-            cp = (self.person.coached_from,self.person.coached_until)
+            cp = (self.client.coached_from,self.client.coached_until)
             if not encompass(cp,ap):
                 return _("Date range %(p1)s lies outside of coached period %(p2)s.") \
                     % dict(p2=rangefmt(cp),p1=rangefmt(ap))
@@ -439,7 +460,7 @@ class Contract(ContractBase):
         Contract.user.verbose_name=_("responsible (DSBE)")
         #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
         cls.PRINTABLE_FIELDS = dd.fields_list(cls,
-            'person company contact type '
+            'client company contact_person contact_role type '
             'applies_from applies_until '
             'language '
             'stages goals duties_dsbe duties_company '
@@ -458,8 +479,8 @@ class Contract(ContractBase):
 
 class ContractDetail(dd.FormLayout):    
     general = """
-    id:8 person:25 user:15 user_asd:15 language:8
-    type company contact:20     
+    id:8 client:25 user:15 user_asd:15 language:8
+    type company contact_person contact_role
     applies_from applies_until exam_policy
     
     date_decided date_issued 
@@ -491,21 +512,21 @@ class Contracts(dd.Table):
     
     
 class ContractsByPerson(Contracts):
-    master_key = 'person'
+    master_key = 'client'
     column_names = 'applies_from applies_until user type *'
 
         
 class ContractsByType(Contracts):
     master_key = 'type'
-    column_names = "applies_from person user *"
+    column_names = "applies_from client user *"
     order_by = ["applies_from"]
 
 class MyContracts(Contracts,mixins.ByUser):
-    column_names = "applies_from person *"
+    column_names = "applies_from client *"
     #~ label = _("My ISIP contracts")
     #~ label = _("My PIIS contracts")
     #~ order_by = "reminder_date"
-    #~ column_names = "reminder_date person company *"
+    #~ column_names = "reminder_date client company *"
     order_by = ["applies_from"]
     #~ filter = dict(reminder_date__isnull=False)
 

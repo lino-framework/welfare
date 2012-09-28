@@ -45,32 +45,18 @@ def objects():
     yield I(**babel_values('name', de=u"Laufende Beihilfe", fr=u"Laufende Beihilfe",en=u"Laufende Beihilfe"))
     
     
-    #~ root = User.objects.get(username="root")
-    #~ root.newcomers_level = UserLevel.expert
-    #~ root.save()
-
-    #~ I = Instantiator(User).build
-    #~ yield I(username="caroline",is_newcomers=True,first_name="Caroline",last_name="Carnol")
-    #~ yield I(username="caroline",newcomers_level=UserLevel.user,first_name="Caroline",last_name="Carnol")
+    #~ User = resolve_model('users.User')
+    #~ yield User(username="caroline",
+        #~ first_name="Caroline",last_name="Carnol",
+        #~ profile='200') # UserProfiles.caroline)
     
-    User = resolve_model('users.User')
-    yield User(username="caroline",
-        first_name="Caroline",last_name="Carnol",
-        profile='200') # UserProfiles.caroline)
-        #~ newcomers_level=UserLevel.user)
-    #~ yield I(username="doris",first_name="Doris",last_name="Decker",profile='caroline')
-    
-    FACULTIES = Cycler(Faculty.objects.all())
-    #~ USERS = Cycler(User.objects.filter(is_spis=True))
-    #~ USERS = Cycler(User.objects.filter(integ_level__isnull=False))
-    profiles = [p for p in UserProfiles.items() if p.integ_level]
-    #~ USERS = Cycler(User.objects.filter(profile__in=(UserProfiles.melanie,UserProfiles.hubert)))
-    USERS = Cycler(User.objects.filter(profile__in=profiles))
-    for i in range(7):
-        yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    #~ for p in Person.objects.filter(newcomer=True):
-    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
-        p.faculty = FACULTIES.pop()
-        p.save()
+    #~ FACULTIES = Cycler(Faculty.objects.all())
+    #~ profiles = [p for p in UserProfiles.items() if p.integ_level]
+    #~ USERS = Cycler(User.objects.filter(profile__in=profiles))
+    #~ for i in range(7):
+        #~ yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
+    #~ for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
+        #~ p.faculty = FACULTIES.pop()
+        #~ p.save()
         
         

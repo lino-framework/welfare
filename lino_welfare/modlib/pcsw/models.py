@@ -76,6 +76,7 @@ from lino.utils.ranges import isrange
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
 from lino.core.modeltools import obj2str
+from lino.core import actions
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.models import DurationUnits, update_reminder
@@ -357,15 +358,52 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           '''name first_name last_name title birth_date gender is_client
           ''')
         
+class RefuseNewClient(dd.Dialog):
+    title = _("Refuse new client")
+    reason = models.CharField(max_length=200,verbose_name=_("Reason"))
+    dummy = models.BooleanField(verbose_name=_("Dummy"))
+    detail_layout = """
+    reason
+    dummy
+    """
     
 class ClientStates(ChoiceList):
     label = _("Client state")
+    
+    @classmethod
+    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
+      
+        if newstate.name == 'refused':
+            dlg = ar.dialog(RefuseNewClient)
+            obj.set_change_summary(dlg.reason)
+            
+        elif newstate.name == 'former':
+            count = 0
+            if obj.pcsw_coaching_set_by_project.filter(end_date__isnull=True).count():
+                raise actions.Warning(_("You must first fill end_date of existing coachings!"))
+            #~ for c in obj.pcsw_coaching_set_by_project.filter(user=ar.get_user()):
+                #~ count += 1
+                #~ if not c.end_date:
+            #~ if not count:
+                #~ if ar.get_user().profile.integ_level < UserLevels.admin:
+                    #~ raise actions.Warning(_("No coaching found!"))
+            if issubclass(ar.actor,IntegClients):
+                ar.confirm(_("This will remove %s from this table.") % unicode(obj))
+                kw.update(refresh_all=True)
+                
 add = ClientStates.add_item
-add('10', _("New"),'new')           # "N" in PAR->Attrib
-add('20', _("Refused"),'refused')   
-add('30', _("Coached"),'coached')   # neither newcomer nor former, IdPrt != "I"
-add('40', _("Official"),'official') # the client is "integrated"
-add('50', _("Former"),'former')     # IdPrt == "I"
+add('10', _("New"),'new', # "N" in PAR->Attrib
+    required=dict(states=['refused','coached'],user_groups='newcomers'))           
+add('20', _("Refused"),'refused',
+    action_label=_("Refuse"),
+    required=dict(states=['new'],user_groups='newcomers'))   
+# coached: neither newcomer nor former, IdPrt != "I"
+add('30', _("Coached"),'coached',
+    required=dict(states=['new','official'],user_groups='newcomers'))   
+add('40', _("Official"),'official',
+    required=dict(states=['coached'])) # the client is "integrated"
+add('50', _("Former"),'former',
+    required=dict(states=['coached'],user_groups='newcomers'))     # former: IdPrt == "I"
 #~ add('60', _("Invalid"),'invalid')   # duplicate or doesn't correspond to a real person
 
     
@@ -545,9 +583,9 @@ class Client(Person):
             'country','city','nationality')
             
     def get_coachings(self,today=None,**flt):
-        qs = self.coaching_set.filter(**flt)
+        qs = self.pcsw_coaching_set_by_project.filter(**flt)
         if today is not None:
-            qs = self.coaching_set.filter(only_active_coachings_filter(today))
+            qs = self.pcsw_coaching_set_by_project.filter(only_active_coachings_filter(today))
         return qs
         #~ if qs.count() == 1:
             #~ return qs[0]
@@ -1057,14 +1095,11 @@ class ClientDetail(dd.FormLayout):
     
     coaching = dd.Panel("""
     coaching_left
-    ContactsByClient:40 CoachingsByProject:40
+    pcsw.ContactsByClient:40 pcsw.CoachingsByProject:40
     """,label=_("Coaching"))
     
     coaching_left = """
-    group:16 client_state
-    # coach1:12 coach2:12 coached_from:12 coached_until:12 
-    # health_insurance pharmacy job_office_contact 
-    job_agents
+    group:16 job_agents
     """
     
     history = dd.Panel("""
@@ -1273,7 +1308,7 @@ class IntegClients(Clients):
       coached_on = models.DateField(_("Coached on"),blank=True,null=True),
       only_primary = models.BooleanField(_("Only primary clients"),default=False),
       also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
-      client_state = ClientStates.field(blank=True),
+      #~ client_state = ClientStates.field(blank=True),
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
           verbose_name=_("Integration phase")),
       new_since = models.DateField(_("New clients since"),blank=True),
@@ -1281,7 +1316,8 @@ class IntegClients(Clients):
       only_active = models.BooleanField(_("Only active clients"),default=False,
         help_text=_("Show only clients in 'active' integration phases")),
       )
-    params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
+    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
+    params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1313,8 +1349,9 @@ class IntegClients(Clients):
               #~ pcsw_coaching_set_by_project__primary=True,
               #~ pcsw_coaching_set_by_project__user=ar.get_user())
             #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
-        if ar.param_values.client_state:
-            qs = qs.filter(client_state=ar.param_values.client_state)
+        #~ if ar.param_values.client_state:
+            #~ qs = qs.filter(client_state=ar.param_values.client_state)
+        qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
@@ -1330,8 +1367,8 @@ class IntegClients(Clients):
         if ar.param_values.coached_on:
             title += _(" on ") + babel.dtos(ar.param_values.coached_on)
         tags = []
-        if ar.param_values.client_state:
-            tags.append(unicode(ar.param_values.client_state))
+        #~ if ar.param_values.client_state:
+            #~ tags.append(unicode(ar.param_values.client_state))
         if ar.param_values.only_active:
             tags.append(unicode(_("active")))
         if ar.param_values.only_primary:
@@ -1996,11 +2033,13 @@ class ClientContactTypes(dd.Table):
 #~ add('90', _("Other"),           'other',           Companies)
 
 
-class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
+#~ class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
+class ClientContact(mixins.ProjectRelated,contacts.ContactRelated):
     """
     project : the Client
     company : the Company
-    contact : the Contact person in that Company
+    contact_person : the Contact person in the Company
+    contact_role : the role of the contact person in the Company
     """
     class Meta:
         verbose_name = _("Client Contact")
@@ -2017,7 +2056,7 @@ class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
         #~ type = ClientContactTypes.get_by_value(type)
         #~ return type.companies_table.request().data_iterator
         
-dd.update_field(ClientContact,'contact',verbose_name=_("Contact person"))
+dd.update_field(ClientContact,'contact_person',verbose_name=_("Contact person"))
           
     
 class ClientContacts(dd.Table):
@@ -2025,7 +2064,7 @@ class ClientContacts(dd.Table):
     
 class ContactsByClient(ClientContacts):
     master_key = 'project'
-    column_names = 'type company contact remark *'
+    column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
 
     

@@ -3,21 +3,26 @@ Coming
 
 TODO
 
-- #1141 20120924 : KBSS-Panel auch ohne Erlaubnis sichtbar
+- in den Verträgen (VSE und Art 60-7) das bisherige 
+  Feld `contact` ersetzen durch zwei Felder `contact_person` 
+  und `contact_function`. 
+
+- Workflow Klientenstatus. 
+  DSBE soll `Status` eines Klienten nicht bearbeiten können. 
 
 - Ist Person.is_client jetzt readonly auf importierten Personen? 
-
-- DSBE kann `Status` eines Klienten nicht bearbeiten.
 
 - "Uncaught No center region defined in BorderLayout ext-comp-1575"
   wenn ich als Kerstin den Sprachen-Reiter eines Klienen anzeige. 
   Er zeigt dann die untere Tabelle "Kursanfragen" nicht an.
 
+NACH DEM RELEASE
+
+- Verträge .odt : 
+  `self.contact.person` ersetzen durch `self.contact_person` 
+  `self.contact.type` ersetzen durch `self.contact_role` 
 
 DONE
-
-- Neue Tabelle "Änderungen" auf Klienten und Verträgen zeigt 
-  geloggte Änderungen im Webinterface statt in der `system.log`.
 
 - Lino unterscheidet jetzt zwischen Klienten und Personen.
   Unter "Personen" verstehen wir *alle Menschen, die Lino kennt*. 
@@ -29,11 +34,14 @@ DONE
   Im Detail einer Person gibt es ein Feld "ist Klient". 
   Damit kann man eine bestehende Person zu einem Klienten machen.
   
-- Neues Feld "Status" eines Klienten. 
-  `is_active` ersetzt durch Status "Belgeitet", 
+  Klienten haben ein neues Feld "Status". 
+  `is_active` ersetzt durch Status "Begleitet", 
   newcomer ersetzt Status "Neu".
   Siehe :doc:`/user/clients`.
   
+- Neue Tabelle "Änderungen" auf Klienten und Verträgen zeigt 
+  geloggte Änderungen im Webinterface statt in der `system.log`.
+
 - Das Menü "Meine Klienten" hat jetzt kein Untermenü mehr mit allen 
   Integrationsphasen, weil man das jetzt in den Parametern von 
   "Meine Klienten" angeben kann. 

@@ -489,6 +489,12 @@ def objects():
     charles = User(username="charles",partner=charles,profile='500') 
     yield charles
     
+    
+    yield User(username="caroline",
+        first_name="Caroline",last_name="Carnol",
+        profile='200') # UserProfiles.caroline)
+    
+    
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(name="ASD",id=1) 
     
@@ -973,7 +979,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ jobs_contract = Instantiator('jobs.Contract').build
     for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         af = coaching.start_date or settings.LINO.demo_date(-600+i*40)
-        kw = dict(applies_from=af,person=coaching.project,user=coaching.user)
+        kw = dict(applies_from=af,client=coaching.project,user=coaching.user)
         if i % 2:
             yield jobs.Contract(
                 type=JOBS_CONTRACT_TYPES.pop(),
@@ -986,4 +992,14 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
                 
 
+    newcomers = dd.resolve_app('newcomers')
+    from lino.core.perms import UserProfiles
     
+    FACULTIES = Cycler(newcomers.Faculty.objects.all())
+    profiles = [p for p in UserProfiles.items() if p.integ_level]
+    USERS = Cycler(User.objects.filter(profile__in=profiles))
+    for i in range(7):
+        yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
+    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
+        p.faculty = FACULTIES.pop()
+        p.save()

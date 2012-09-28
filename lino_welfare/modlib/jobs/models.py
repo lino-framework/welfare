@@ -454,16 +454,16 @@ class Contract(ContractBase):
         #~ return msgs
         
     def full_clean(self,*args,**kw):
-        if self.person_id is not None:
+        if self.client_id is not None:
             #~ if not self.user_asd:
                 #~ if self.person.user != self.user:
                     #~ self.user_asd = self.person.user
             if self.applies_from:
-                if self.person.birth_date:
+                if self.client.birth_date:
                     def duration(refdate):
                         if type(refdate) != datetime.date:
                             raise Exception("%r is not a date!" % refdate)
-                        delta = refdate - self.person.birth_date.as_date()
+                        delta = refdate - self.client.birth_date.as_date()
                         age = delta.days / 365
                         if age < 36:
                             return 312
@@ -510,7 +510,7 @@ class Contract(ContractBase):
         #~ resolve_field('jobs.Contract.user').verbose_name=_("responsible (DSBE)")
         #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
         cls.PRINTABLE_FIELDS = dd.fields_list(cls,
-            'person job company contact type '
+            'client job company contact_person contact_role type '
             'applies_from applies_until duration '
             'language schedule regime hourly_rate refund_rate '
             'reference_person responsibilities '
@@ -520,8 +520,8 @@ class Contract(ContractBase):
 
 class ContractDetail(dd.FormLayout):
     box1 = """
-    id:8 person:25 user:15 user_asd:15 language:8
-    job type company contact:20     
+    id:8 client:25 user:15 user_asd:15 language:8
+    job type company contact_person contact_role
     applies_from duration applies_until exam_policy
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
     date_decided date_issued date_ended ending
@@ -546,10 +546,10 @@ class Contracts(dd.Table):
     model = Contract
     column_names = 'id job applies_from applies_until user type *'
     order_by = ['id']
-    active_fields = 'job company contact'.split()
+    active_fields = 'job company contact_person contact_role'.split()
     
     #~ detail_template = """
-    #~ id:8 person:25 user:15 user_asd:15 language:8
+    #~ id:8 client:25 user:15 user_asd:15 language:8
     #~ job type company contact:20     
     #~ applies_from duration applies_until 
     #~ regime:20 schedule:30 hourly_rate:10 refund_rate:10
@@ -562,21 +562,21 @@ class Contracts(dd.Table):
     
     
 class ContractsByPerson(Contracts):
-    master_key = 'person'
+    master_key = 'client'
     column_names = 'job applies_from applies_until user type *'
 
         
 class ContractsByProvider(Contracts):
     master_key = 'company'
-    column_names = 'person job applies_from applies_until user type *'
+    column_names = 'client job applies_from applies_until user type *'
 
 class ContractsByType(Contracts):
     master_key = 'type'
-    column_names = "applies_from person job user *"
+    column_names = "applies_from client job user *"
     order_by = ["applies_from"]
 
 class ContractsByJob(Contracts):
-    column_names = 'person applies_from applies_until user type *'
+    column_names = 'client applies_from applies_until user type *'
     master_key = 'job'
 
 class ContractsByRegime(Contracts):
@@ -592,10 +592,10 @@ class ContractsBySchedule(Contracts):
     column_names = 'job applies_from applies_until user type *'
 
 class MyContracts(Contracts,mixins.ByUser):
-    column_names = "applies_from person job *"
+    column_names = "applies_from client job *"
     #~ label = _("My contracts")
     #~ order_by = "reminder_date"
-    #~ column_names = "reminder_date person company *"
+    #~ column_names = "reminder_date client company *"
     order_by = ["applies_from"]
     #~ filter = dict(reminder_date__isnull=False)
 
@@ -1171,8 +1171,8 @@ if True: # settings.LINO.user_model:
         
         #~ master_key = 'user'
         #~ group_by = ['type']
-        group_by = ['person__group']
-        column_names = 'id applies_from applies_until job person person__city person__national_id person__gender user type *'
+        group_by = ['client__group']
+        column_names = 'id applies_from applies_until job client client__city client__national_id client__gender user type *'
         
         @classmethod
         def get_request_queryset(cls,rr):

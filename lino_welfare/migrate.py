@@ -64,6 +64,10 @@ def migrate_from_1_4_10(globals_dict):
     uploads_Upload = resolve_model("uploads.Upload")
     pcsw_CoachingType = resolve_model("pcsw.CoachingType")
     pcsw_ClientContactType = resolve_model("pcsw.ClientContactType")
+    accounts_Chart = resolve_model("accounts.Chart")    
+    isip_Contract = resolve_model("isip.Contract")
+    jobs_Contract = resolve_model("jobs.Contract")
+    contacts_Role = resolve_model("contacts.Role")
     
     NOW = datetime.datetime(2012,9,6,0,0)
     
@@ -292,7 +296,28 @@ def migrate_from_1_4_10(globals_dict):
         return uploads_Upload(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,file=file,mimetype=mimetype,type_id=type_id,valid_until=valid_until,description=description)    
     globals_dict.update(create_uploads_upload=create_uploads_upload)
     
-    accounts_Chart = resolve_model("accounts.Chart")    
+    def create_isip_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, duties_company, duties_person):
+        contact = contacts_Role.objects.get(contact_id)
+        return isip_Contract(id=id,user_id=user_id,build_time=build_time,
+          client_id=person_id,
+          company_id=company_id,
+          contact_person=contact.person,
+          contact_role=contact.type,
+          #~ contact_id=contact_id,
+          language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,stages=stages,goals=goals,duties_asd=duties_asd,duties_dsbe=duties_dsbe,duties_company=duties_company,duties_person=duties_person)    
+    globals_dict.update(create_isip_contract=create_isip_contract)
+    
+    def create_jobs_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, job_id, duration, regime_id, schedule_id, hourly_rate, refund_rate, reference_person, responsibilities, remark):
+        if hourly_rate is not None: hourly_rate = Decimal(hourly_rate)
+        contact = contacts_Role.objects.get(contact_id)
+        return jobs_Contract(id=id,user_id=user_id,build_time=build_time,
+          client_id=person_id,
+          company_id=company_id,
+          contact_person=contact.person,
+          contact_role=contact.type,
+          language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,job_id=job_id,duration=duration,regime_id=regime_id,schedule_id=schedule_id,hourly_rate=hourly_rate,refund_rate=refund_rate,reference_person=reference_person,responsibilities=responsibilities,remark=remark)    
+    globals_dict.update(create_jobs_contract=create_jobs_contract)
+    
     objects = globals_dict['objects']
     def new_objects():
         yield accounts_Chart(name="debts Default")
