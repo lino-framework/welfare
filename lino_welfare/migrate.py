@@ -43,6 +43,8 @@ def migrate_from_1_4_10(globals_dict):
     - convert Persons to Clients
     - fill Coachings from fields coached_from, coached_until, coach1, coach2
     - fill pcsw.Thirds from fields health_insurance, pharmacy, job_office_contact
+    - in jobs.Contracts and jobs.Contracts rename `person` to `client`, 
+      replace `contact` by `contact_person` and `contact_role`
     """
     
     countries_City = resolve_model("countries.City")
@@ -208,13 +210,19 @@ def migrate_from_1_4_10(globals_dict):
                     type_id=2,
                     company_id=pharmacy_id)
             if job_office_contact_id:
-                contact = contacts_Role.objects.get(pk=job_office_contact_id)
+                try:
+                    contact = contacts_Role.objects.get(pk=job_office_contact_id)
+                    cp = contact.person
+                except contacts_Role.DoesNotExist:
+                    cp = None
+                    logger.warning("20120928 lost job_office_contact_id %d of client %d",
+                      job_office_contact_id,partner_ptr_id)
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
                     company_id=settings.LINO.site_config.job_office.id,
-                    contact_person=contact.person)
+                    contact_person=cp)
         else:
             #~ silently ignored if lost: 
             #~ is_cpas is_senior coach1_id coach2_id 
