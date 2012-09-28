@@ -12,6 +12,11 @@ TODO
 - "Uncaught No center region defined in BorderLayout ext-comp-1575"
   wenn ich als Kerstin den Sprachen-Reiter eines Klienen anzeige. 
   Er zeigt dann die untere Tabelle "Kursanfragen" nicht an.
+  
+- migrate issues::
+
+    WARNING:root:create_child() Company 3502 from Partner : ignored non-local fields 
+    {'is_deprecated': False, 'bank_account1': u'731-1234567-89', 'bank_account2': u''}
 
 Nach dem release
 ----------------

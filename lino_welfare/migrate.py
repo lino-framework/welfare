@@ -215,7 +215,7 @@ def migrate_from_1_4_10(globals_dict):
                     cp = contact.person
                 except contacts_Role.DoesNotExist:
                     cp = None
-                    logger.warning("20120928 lost job_office_contact_id %d of client %d",
+                    dblogger.warning("20120928 lost job_office_contact_id %d of client %d",
                       job_office_contact_id,partner_ptr_id)
                 yield pcsw_ClientContact(
                     project_id=partner_ptr_id,
