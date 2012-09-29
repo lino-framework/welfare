@@ -52,7 +52,7 @@ def migrate_from_1_4_10(globals_dict):
     debts_AccountGroup = resolve_model("accounts.Group")
     contacts_Partner = resolve_model("contacts.Partner")
     contacts_Company = resolve_model("contacts.Company")
-    contacts_Person = resolve_model("contacts.Person")
+    contacts_Person = resolve_model("pcsw.Person")
     households_Household = resolve_model("households.Household")
     pcsw_Client = resolve_model("pcsw.Client")
     pcsw_Coaching = resolve_model("pcsw.Coaching")
@@ -222,7 +222,7 @@ def migrate_from_1_4_10(globals_dict):
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
                     company_id=settings.LINO.site_config.job_office.id)
-                obj._before_dumpy_save = add_contact_fields(job_office_contact_id)
+                obj._before_dumpy_save = add_contact_fields(obj,job_office_contact_id)
                 yield obj
         else:
             #~ silently ignored if lost: 
@@ -306,11 +306,11 @@ def migrate_from_1_4_10(globals_dict):
         return uploads_Upload(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,file=file,mimetype=mimetype,type_id=type_id,valid_until=valid_until,description=description)    
     globals_dict.update(create_uploads_upload=create_uploads_upload)
     
-    def add_contact_fields(contact_id):
-        def fn(self):
+    def add_contact_fields(obj,contact_id):
+        def fn():
             contact = find_contact(contact_id)
-            self.contact_person=contact.person
-            self.contact_role=contact.type
+            obj.contact_person=contact.person
+            obj.contact_role=contact.type
         return fn
     
     def create_isip_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, duties_company, duties_person):
@@ -322,7 +322,7 @@ def migrate_from_1_4_10(globals_dict):
           #~ contact_role=contact.type,
           #~ contact_id=contact_id,
           language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,stages=stages,goals=goals,duties_asd=duties_asd,duties_dsbe=duties_dsbe,duties_company=duties_company,duties_person=duties_person)    
-        obj._before_dumpy_save = add_contact_fields(contact_id)
+        obj._before_dumpy_save = add_contact_fields(obj,contact_id)
         return obj
           
     globals_dict.update(create_isip_contract=create_isip_contract)
@@ -333,7 +333,7 @@ def migrate_from_1_4_10(globals_dict):
           client_id=person_id,
           company_id=company_id,
           language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,job_id=job_id,duration=duration,regime_id=regime_id,schedule_id=schedule_id,hourly_rate=hourly_rate,refund_rate=refund_rate,reference_person=reference_person,responsibilities=responsibilities,remark=remark)
-        obj._before_dumpy_save = add_contact_fields(contact_id)
+        obj._before_dumpy_save = add_contact_fields(obj,contact_id)
         return obj
     globals_dict.update(create_jobs_contract=create_jobs_contract)
     
