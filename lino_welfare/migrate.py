@@ -77,6 +77,13 @@ def migrate_from_1_4_10(globals_dict):
     from lino.utils.mti import create_child
     from lino_welfare.modlib.pcsw import models as pcsw
     
+    def find_contact(contact_id):
+        try:
+            return contacts_Role.objects.get(pk=contact_id)
+        except contacts_Role.DoesNotExist:
+            return None
+    
+    
     def convert_region(region):
         region = region.strip()
         if not region: return None
@@ -210,19 +217,13 @@ def migrate_from_1_4_10(globals_dict):
                     type_id=2,
                     company_id=pharmacy_id)
             if job_office_contact_id:
-                try:
-                    contact = contacts_Role.objects.get(pk=job_office_contact_id)
-                    cp = contact.person
-                except contacts_Role.DoesNotExist:
-                    cp = None
-                    dblogger.warning("20120928 lost job_office_contact_id %d of client %d",
-                      job_office_contact_id,partner_ptr_id)
-                yield pcsw_ClientContact(
+                obj = pcsw_ClientContact(
                     project_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
-                    company_id=settings.LINO.site_config.job_office.id,
-                    contact_person=cp)
+                    company_id=settings.LINO.site_config.job_office.id)
+                obj._before_dumpy_save = add_contact_fields(job_office_contact_id)
+                yield obj
         else:
             #~ silently ignored if lost: 
             #~ is_cpas is_senior coach1_id coach2_id 
@@ -305,26 +306,35 @@ def migrate_from_1_4_10(globals_dict):
         return uploads_Upload(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,file=file,mimetype=mimetype,type_id=type_id,valid_until=valid_until,description=description)    
     globals_dict.update(create_uploads_upload=create_uploads_upload)
     
+    def add_contact_fields(contact_id):
+        def fn(self):
+            contact = find_contact(contact_id)
+            self.contact_person=contact.person
+            self.contact_role=contact.type
+        return fn
+    
     def create_isip_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, duties_company, duties_person):
-        contact = contacts_Role.objects.get(pk=contact_id)
-        return isip_Contract(id=id,user_id=user_id,build_time=build_time,
+        #~ contact = find_contact(contact_id)
+        obj = isip_Contract(id=id,user_id=user_id,build_time=build_time,
           client_id=person_id,
           company_id=company_id,
-          contact_person=contact.person,
-          contact_role=contact.type,
+          #~ contact_person=contact.person,
+          #~ contact_role=contact.type,
           #~ contact_id=contact_id,
           language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,stages=stages,goals=goals,duties_asd=duties_asd,duties_dsbe=duties_dsbe,duties_company=duties_company,duties_person=duties_person)    
+        obj._before_dumpy_save = add_contact_fields(contact_id)
+        return obj
+          
     globals_dict.update(create_isip_contract=create_isip_contract)
     
     def create_jobs_contract(id, user_id, build_time, person_id, company_id, contact_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, job_id, duration, regime_id, schedule_id, hourly_rate, refund_rate, reference_person, responsibilities, remark):
         if hourly_rate is not None: hourly_rate = Decimal(hourly_rate)
-        contact = contacts_Role.objects.get(pk=contact_id)
-        return jobs_Contract(id=id,user_id=user_id,build_time=build_time,
+        obj = jobs_Contract(id=id,user_id=user_id,build_time=build_time,
           client_id=person_id,
           company_id=company_id,
-          contact_person=contact.person,
-          contact_role=contact.type,
-          language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,job_id=job_id,duration=duration,regime_id=regime_id,schedule_id=schedule_id,hourly_rate=hourly_rate,refund_rate=refund_rate,reference_person=reference_person,responsibilities=responsibilities,remark=remark)    
+          language=language,applies_from=applies_from,applies_until=applies_until,date_decided=date_decided,date_issued=date_issued,user_asd_id=user_asd_id,exam_policy_id=exam_policy_id,ending_id=ending_id,date_ended=date_ended,type_id=type_id,job_id=job_id,duration=duration,regime_id=regime_id,schedule_id=schedule_id,hourly_rate=hourly_rate,refund_rate=refund_rate,reference_person=reference_person,responsibilities=responsibilities,remark=remark)
+        obj._before_dumpy_save = add_contact_fields(contact_id)
+        return obj
     globals_dict.update(create_jobs_contract=create_jobs_contract)
     
     objects = globals_dict['objects']

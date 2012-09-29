@@ -13,10 +13,13 @@ TODO
   wenn ich als Kerstin den Sprachen-Reiter eines Klienen anzeige. 
   Er zeigt dann die untere Tabelle "Kursanfragen" nicht an.
   
-- migrate issues::
+- Bei der Datenübernahme kommen noch eine Serie Warnungen::
 
     WARNING:root:create_child() Company 3502 from Partner : ignored non-local fields 
     {'is_deprecated': False, 'bank_account1': u'731-1234567-89', 'bank_account2': u''}
+    
+    WARNING:root:create_child() Person 84756 from Partner : ignored non-local fields 
+    {'is_deprecated': True, 'bank_account1': u'448-1234567-73', 'bank_account2': u''}
 
 Nach dem release
 ----------------
