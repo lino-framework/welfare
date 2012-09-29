@@ -53,7 +53,6 @@ def migrate_from_1_4_10(globals_dict):
     contacts_Partner = resolve_model("contacts.Partner")
     contacts_Company = resolve_model("contacts.Company")
     contacts_Person = resolve_model("contacts.Person")
-    pcsw_Person = resolve_model("pcsw.Person")
     households_Household = resolve_model("households.Household")
     pcsw_Client = resolve_model("pcsw.Client")
     pcsw_Coaching = resolve_model("pcsw.Coaching")
@@ -255,7 +254,7 @@ def migrate_from_1_4_10(globals_dict):
             if lost:
                 dblogger.warning("Lost data for Person %s without NISS: %s",
                     partner_ptr_id,lost)
-                p = pcsw_Person.objects.get(pk=partner_ptr_id)
+                p = contacts_Person.objects.get(pk=partner_ptr_id)
                 if p.remarks:
                     p.remarks += '\n'
                 p.remarks += '20120901 lost: ' + repr(lost)
