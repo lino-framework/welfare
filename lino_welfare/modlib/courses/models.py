@@ -123,7 +123,8 @@ class CourseProviderDetail(pcsw.CompanyDetail):
 
   
 
-class CourseProviders(pcsw.Companies):
+#~ class CourseProviders(pcsw.Companies):
+class CourseProviders(contacts.Companies):
     """
     List of Companies that have `Company.is_courseprovider` activated.
     """

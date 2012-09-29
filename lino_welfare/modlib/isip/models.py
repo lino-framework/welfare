@@ -276,12 +276,12 @@ class ContractBase(
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
             qs = self.client.get_coachings(self.applies_from,type_id=1)
             if qs.count() == 1:
-                pc = qs[0]
-                if pc is None or pc == self.user:
+                integ_agent = qs[0].user
+                if integ_agent is None or integ_agent == self.user:
                 #~ if self.person.coach1_id is None or self.person.coach1_id == self.user_id:
                     self.user_asd = None
                 else:
-                    self.user_asd = pc
+                    self.user_asd = integ_agent
                 
     def on_create(self,ar):
         super(ContractBase,self).on_create(ar)
@@ -509,6 +509,10 @@ class Contracts(dd.Table):
     #~ active_fields = ('company','contact')
     active_fields = ['company']
     detail_layout = ContractDetail()
+    insert_layout = dd.FormLayout("""
+    client
+    type company
+    """,window_size=(60,'auto'))    
     
     
 class ContractsByPerson(Contracts):

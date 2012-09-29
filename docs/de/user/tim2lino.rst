@@ -79,7 +79,7 @@ Außer wenn `PAR->Allo` es einen der Werte "Eheleute",
 Die Regeln beim Übernehmen der diversen Flags aus TIM sind:
 
 - `newcomer` : `True` wenn Attribut N in TIM gesetzt ist
-- `is_deprecated` : `True` wenn Attribut W in TIM gesetzt ist
+- `is_deprecated` (Altdaten) : `True` wenn Attribut W in TIM gesetzt ist.
 - `is_active` : False wenn Partnerart I (ansonsten True)
 - `is_cpas` : True wenn Partnerart S
 - `is_senior` : True wenn Partnerart A

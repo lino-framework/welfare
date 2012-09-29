@@ -88,6 +88,7 @@ from lino.modlib.countries.models import Country, City
 from lino_welfare.modlib.pcsw import models as pcsw
 from lino_welfare.modlib.isip.models import ContractBase
 
+contacts = dd.resolve_app('contacts')
 
 
 #~ SCHEDULE_CHOICES = {
@@ -198,7 +199,8 @@ class JobProviderDetail(pcsw.CompanyDetail):
   
 
 
-class JobProviders(pcsw.Companies,dd.Table):
+#~ class JobProviders(pcsw.Companies,dd.Table):
+class JobProviders(contacts.Companies,dd.Table):
     """
     List of Companies that have `Company.is_jobprovider` activated.
     """

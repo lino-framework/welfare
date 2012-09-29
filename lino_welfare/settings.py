@@ -117,13 +117,13 @@ class Lino(Lino):
         
         m = main.add_menu("master",_("Master"))
         
-        m = main.add_menu("contacts",_("Contacts"))
+        #~ m = main.add_menu("contacts",_("Contacts"))
 
         if user.profile.level:
-            m.add_action(self.modules.contacts.Companies)
-            m.add_action(self.modules.contacts.Persons)
+            #~ m.add_action(self.modules.contacts.Companies)
+            #~ m.add_action(self.modules.contacts.Persons)
             m.add_action(self.modules.pcsw.Clients)
-            m.add_action(self.modules.contacts.AllPartners)
+            #~ m.add_action(self.modules.contacts.AllPartners)
         if user.profile.integ_level:
             m.add_action(self.modules.pcsw.MyPersonSearches)
             

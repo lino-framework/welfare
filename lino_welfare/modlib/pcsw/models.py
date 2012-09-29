@@ -858,30 +858,28 @@ class PartnerDetail(contacts.PartnerDetail):
     #~ main = "general debts.BudgetsByPartner"
     bottom_box = """
     remarks 
-    is_person is_company #is_user is_household created modified
+    activity bank_account1 bank_account2 is_deprecated
+    is_person is_company #is_user is_household created modified 
     """
     #~ def setup_handle(self,h):
         #~ h.general.label = _("General")
     
-
-class Partners(contacts.Partners):
-    """
-    Base class for Companies and Persons tables,
-    *and* for households.Households.
-    """
-    detail_layout = PartnerDetail()
-    
-
 class PersonDetail(contacts.PersonDetail):
     bottom_box = """remarks contacts.RolesByPerson
+    activity bank_account1 bank_account2 is_deprecated
     is_client created modified
     """
   
-    
 
-class AllPartners(contacts.AllPartners,Partners):
-    app_label = 'contacts'
-    #~ pass
+#~ class Partners(contacts.Partners):
+    #~ """
+    #~ Base class for Companies and Persons tables,
+    #~ *and* for households.Households.
+    #~ """
+    #~ detail_layout = PartnerDetail()
+
+#~ class AllPartners(contacts.AllPartners,Partners):
+    #~ app_label = 'contacts'
 
 
 
@@ -941,7 +939,8 @@ class Company(Partner,contacts.Company):
   
     
 
-class CompanyDetail(dd.FormLayout):
+#~ class CompanyDetail(dd.FormLayout):
+class CompanyDetail(contacts.CompanyDetail):
   
     box3 = """
     country region
@@ -995,16 +994,12 @@ class CompanyDetail(dd.FormLayout):
 #~ if settings.LINO.company_model is None:
     #~ raise Exception("settings.LINO.company_model is None")
 
-#~ class Companies(reports.Report):
-#~ class Companies(contacts.Contacts):
-class Companies(Partners):
-    #~ hide_details = [Contact]
-    model = settings.LINO.company_model
-    detail_layout = CompanyDetail()
+#~ class Companies(Partners):
+    #~ model = settings.LINO.company_model
+    #~ detail_layout = CompanyDetail()
         
-    order_by = ["name"]
-    app_label = 'contacts'
-    #~ column_names = ''
+    #~ order_by = ["name"]
+    #~ app_label = 'contacts'
     
 
 
@@ -1286,7 +1281,7 @@ def only_active_coachings_filter(today,prefix=''):
 #~ from lino.modlib.cal.utils import amonthago
 
 #~ class Clients(AllClients):
-class Clients(Partners):
+class Clients(contacts.Partners):
     #~ debug_permissions = True # '20120925'
     model = Client # settings.LINO.person_model
     insert_layout = dd.FormLayout("""
@@ -2462,6 +2457,9 @@ def site_setup(site):
     """,window_size=(60,'auto'))
 
 
+    site.modules.contacts.Partners.set_detail_layout(PartnerDetail())
+    site.modules.contacts.Companies.set_detail_layout(CompanyDetail())
+    
     site.modules.contacts.Persons.set_detail_layout(PersonDetail())
 
     

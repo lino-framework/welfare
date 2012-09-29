@@ -20,8 +20,11 @@ TODO
     
     WARNING:root:create_child() Person 84756 from Partner : ignored non-local fields 
     {'is_deprecated': True, 'bank_account1': u'448-1234567-73', 'bank_account2': u''}
+    
+    WARNING:root:create_child() Person 6729 from Partner : ignored non-local fields 
+    {'is_deprecated': True, 'bank_account1': u'340-1234567-30', 'bank_account2': u''}    
 
-Nach dem release
+Nach dem Release
 ----------------
 
 - Verträge .odt : 
@@ -88,6 +91,8 @@ Nebenwirkungen
   
 - Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
   nicht gemacht. Ist das schlimm?
+  
+- Diverse Umstrukturierungen im Hauptmenü.  
   
 - countries.City.type und Partner.region.
   Visible in Detail of "All Partners" : Lino now features a field "region" 
