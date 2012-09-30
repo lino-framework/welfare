@@ -973,6 +973,7 @@ class CompanyDetail(contacts.CompanyDetail):
     intro_box = """
     prefix name id language 
     vat_id:12 activity:20 type:20 #hourly_rate
+    activity bank_account1 bank_account2 is_deprecated
     """
 
     general = """

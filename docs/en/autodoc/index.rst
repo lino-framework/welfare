@@ -17,6 +17,20 @@ extension.
     :members:
     :show-inheritance:
 
+`migrate`
+----------
+
+.. automodule:: lino_welfare.migrate
+    :members:
+    :show-inheritance:
+
+`migrate_old`
+-------------
+
+.. automodule:: lino_welfare.migrate_old
+    :members:
+    :show-inheritance:
+
 
 .. toctree::
 
