@@ -367,7 +367,7 @@ class RefuseNewClient(dd.Dialog):
     dummy
     """
     
-class ClientStates(ChoiceList):
+class ClientStates(dd.Workflow):
     label = _("Client state")
     
     @classmethod
@@ -392,20 +392,25 @@ class ClientStates(ChoiceList):
                 kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("New"),'new', # "N" in PAR->Attrib
-    required=dict(states=['refused','coached'],user_groups='newcomers'))           
-add('20', _("Refused"),'refused',
-    action_label=_("Refuse"),
-    required=dict(states=['new'],user_groups='newcomers'))   
+add('10', _("New"),'new') # "N" in PAR->Attrib
+    #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
+add('20', _("Refused"),'refused')
+    #~ action_label=_("Refuse"),
+    #~ required=dict(states=['new'],user_groups='newcomers'))   
 # coached: neither newcomer nor former, IdPrt != "I"
-add('30', _("Coached"),'coached',
-    required=dict(states=['new','official'],user_groups='newcomers'))   
-add('40', _("Official"),'official',
-    required=dict(states=['coached'])) # the client is "integrated"
-add('50', _("Former"),'former',
-    required=dict(states=['coached'],user_groups='newcomers'))     # former: IdPrt == "I"
+add('30', _("Coached"),'coached')
+    #~ required=dict(states=['new','official'],user_groups='newcomers'))   
+#~ add('40', _("Official"),'official',
+    #~ required=dict(states=['coached'])) # the client is "integrated"
+add('50', _("Former"),'former')
+    #~ required=dict(states=['coached'],user_groups='newcomers'))     # former: IdPrt == "I"
 #~ add('60', _("Invalid"),'invalid')   # duplicate or doesn't correspond to a real person
 
+ClientStates.new.add_workflow(states='refused coached',user_groups='newcomers')
+ClientStates.refused.add_workflow(_("Refuse"),states='new',user_groups='newcomers')
+ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),states='coached',user_groups='newcomers')
+#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
     
 class Client(Person):
   
@@ -2065,13 +2070,66 @@ class ContactsByClient(ClientContacts):
 
     
     
-#~ class CoachingStates(ChoiceList):
-    #~ label = _("Coaching state")
-#~ add = CoachingStates.add_item
+
+class CoachingStates(dd.Workflow):
+    """
+Lifecycle of a :class:`Coaching`.
+    
+    
+.. graphviz:: 
+
+   digraph foo {
+      suggested -> refused [label="[refuse]"];
+      standby -> refused;
+      suggested -> active [label="[accept]"];
+      standby -> active [label="[reactivate]"];
+      active -> standby;
+      standby -> ended [label="[end coaching]"];
+      active -> ended [label="[end coaching]"];
+      
+   }
+   
+
+    """
+    label = _("Coaching state")
+    
+    @classmethod
+    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
+      
+        if newstate.name == 'ended':
+            ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
+              user=obj.user,client=obj.project))
+            obj.end_date = datetime.date.today()
+    
+add = CoachingStates.add_item
 #~ add('10', _("New"),'new')
-#~ add('20', _("Active"),'active')
-#~ add('30', _("Standby"),'standby')
-#~ add('40', _("Closed"),'closed')
+add('10', _("Suggested"),'suggested')
+add('20', _("Refused"),'refused')
+#~ add('30', _("Confirmed"),'confirmed')
+add('30', _("Active"),'active')
+add('40', _("Standby"),'standby')
+add('50', _("Ended"),'ended')
+
+#~ CoachingStates.suggested.set_required(owner=False)
+CoachingStates.refused.add_workflow(states='suggested standby',owner=True)
+CoachingStates.active.add_workflow(_("Accept"),states='suggested',owner=True)
+CoachingStates.active.add_workflow(_("Reactivate"),
+    states='standby',owner=True,
+    help_text=_("Client has become active again after having been standby."))
+CoachingStates.standby.add_workflow(states='active',owner=True)
+CoachingStates.ended.add_workflow(_("End coaching"),
+    states='active standby',owner=True,
+    help_text=_("User no longer coaches this client."))
+
+"""
+CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
+CoachingStates.add_transition('suggested','active',_("Accept"),owner=True)
+CoachingStates.add_transition('active','standby',_("Standby"),owner=True)
+CoachingStates.add_transition('active','ended',_("End coaching"),owner=True)
+
+"""
+    
+
 
 class CoachingType(babel.BabelNamed):
     class Meta:
@@ -2105,23 +2163,24 @@ class CoachingTypes(dd.Table):
 
 class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
     """
-    A Coaching (Begleitung, accompagnement) 
-    is when a Client is being coached by a User (a social assistant) 
-    during a given period.
+A Coaching (Begleitung, accompagnement) 
+is when a Client is being coached by a User (a social assistant) 
+during a given period.
     """
     #~ required = dict(user_level='manager')
     class Meta:
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
         
-    #~ workflow_state_field = 'state'
+    workflow_state_field = 'state'
+    
     start_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("Coached from"))
     end_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("until"))
-    #~ state = CoachingStates.field(default=CoachingStates.new)
+    state = CoachingStates.field(default=CoachingStates.active)
     #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType,blank=True,null=True)
     primary = models.BooleanField(_("Primary"))
@@ -2137,6 +2196,7 @@ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
+    
     #~ debug_permissions = True
     #~ parameters = dict(
         #~ type=dd.ForeignKey(CoachingType,null=True,blank=True),
@@ -2158,14 +2218,17 @@ class Coachings(dd.Table):
 class CoachingsByProject(Coachings):
     master_key = 'project'
     order_by = ['start_date']
-    column_names = 'start_date end_date type user *'
+    column_names = 'start_date end_date type user state workflow_buttons *'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
     column_names = 'start_date end_date project type *'
 
 class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date project type *'
+    column_names = 'start_date end_date project type state workflow_buttons *'
+
+class MySuggestedCoachings(MyCoachings):
+    known_values = dict(state=CoachingStates.suggested)
 
 
 
@@ -2348,6 +2411,7 @@ def setup_my_menu(site,ui,user,m):
         m.add_action(MyClients)
         #~ m.add_action(Clients)
         m.add_action(MyCoachings)
+        m.add_action(MySuggestedCoachings)
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
             #~ mycoachings.add_action(
               #~ MyCoachingsByGroup,

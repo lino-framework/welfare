@@ -343,8 +343,9 @@ class CourseOffersByProvider(CourseOffers):
 
 
 
-class CourseRequestStates(ChoiceList):
+class CourseRequestStates(dd.Workflow):
     label = _("State")
+    
     @classmethod
     def migrate(cls,old):
         """
@@ -359,17 +360,23 @@ class CourseRequestStates(ChoiceList):
           }
         return getattr(cls,cv[old])
         
+    @classmethod
+    def allow_state_candidate(cls,self,user):
+        if self.course:
+            return True
+        return False
+    
 add = CourseRequestStates.add_item
 add('10', _("Candidate"),"candidate") # required=dict(states=['','registered']))   # Unregister
 add('20', _("Registered"),"registered") # required=dict(states=['candidate'])) # Register
-add('30', _("Passed"),"passed",
-  required=dict(states=['registered']))   # bestanden
+add('30', _("Passed"),"passed")   # bestanden
 add('40', _("Award"),"award")   # gut bestanden
-add('50', pgettext_lazy(u"courses",u"Failed"),"failed",
-  required=dict(states=['registered']))   # nicht bestanden
-add('60', _("Aborted"),"aborted",
-  required=dict(states=['registered']))   # abgebrochen
-    
+add('50', pgettext_lazy(u"courses",u"Failed"),"failed")   # nicht bestanden
+add('60', _("Aborted"),"aborted")   # abgebrochen
+
+CourseRequestStates.passed.add_workflow(states="registered")
+CourseRequestStates.failed.add_workflow(states="registered")
+CourseRequestStates.aborted.add_workflow(states="registered")
     
 class CourseRequest(dd.Model):
     """
@@ -465,10 +472,6 @@ class CourseRequest(dd.Model):
             if not self.date_ended:
                 self.date_ended = datetime.date.today()
       
-    def allow_state_candidate(self,user):
-        if self.course:
-            return True
-        return False
         
         
 class CourseRequests(dd.Table):

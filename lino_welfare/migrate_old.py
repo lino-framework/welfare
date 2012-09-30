@@ -1050,16 +1050,16 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(create_mails_recipient=create_mails_recipient)
     
     cal_Event = resolve_model("cal.Event")
-    from lino.modlib.cal.utils import EventState, TaskState, GuestState
+    from lino.modlib.cal.utils import EventStates, TaskState, GuestState
     new_content_type_id = globals_dict['new_content_type_id']
     def create_cal_event(id, user_id, created, modified, owner_type_id, owner_id, project_id, build_time, calendar_id, uid, start_date, start_time, summary, description, access_class_id, sequence, auto_type, user_modified, rset_id, end_date, end_time, transparent, type_id, place_id, priority_id, status_id):
         owner_type_id = new_content_type_id(owner_type_id)
-        state = EventState.migrate(status_id)
+        state = EventStates.migrate(status_id)
         if state is None:
             if start_date < datetime.date.today():
-                state = EventState.obsolete
+                state = EventStates.obsolete
             elif user_modified:
-                state = EventState.draft
+                state = EventStates.draft
         calendar_id = type_id or 2
         return cal_Event(id=id,user_id=user_id,created=created,modified=modified,owner_type_id=owner_type_id,owner_id=owner_id,project_id=project_id,build_time=build_time,calendar_id=calendar_id,uid=uid,start_date=start_date,start_time=start_time,summary=summary,description=description,
             #~ access_class_id=access_class_id,

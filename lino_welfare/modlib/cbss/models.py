@@ -196,7 +196,7 @@ def cbss2address(obj,**data):
     
     
     
-class RequestStates(ChoiceList):
+class RequestStates(dd.Workflow):
     """
     The status of a :class:`CBSSRequest`.
     """
