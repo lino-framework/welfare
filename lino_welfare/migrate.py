@@ -41,9 +41,9 @@ def migrate_from_1_4_10(globals_dict):
     - debts.Account renamed to accounts.Account
     - debts.AccountGroup renamed to accounts.AccountGroup
     - convert Persons to Clients
-    - fill Coachings from fields coached_from, coached_until, coach1, coach2
-    - fill pcsw.Thirds from fields health_insurance, pharmacy, job_office_contact
-    - in jobs.Contracts and jobs.Contracts rename `person` to `client`, 
+    - fill pcsw.Coachings from fields coached_from, coached_until, coach1, coach2
+    - fill pcsw.ClientContacts from fields health_insurance, pharmacy, job_office_contact
+    - jobs.Contracts and isip.Contracts: rename `person` to `client`, 
       replace `contact` by `contact_person` and `contact_role`
     """
     
@@ -132,9 +132,16 @@ def migrate_from_1_4_10(globals_dict):
     globals_dict.update(create_contacts_company=create_contacts_company)
     
     def create_households_household(partner_ptr_id, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, prefix, type_id):
+        p = contacts_Partner.objects.get(pk=partner_ptr_id)
+        p.is_deprecated=is_deprecated
+        p.activity_id=activity_id
+        p.bank_account1=bank_account1
+        p.bank_account2=bank_account2
+        p.save()
         return create_child(contacts_Partner,partner_ptr_id,households_Household,
           #~ is_active=is_active,newcomer=newcomer,
-          is_deprecated=is_deprecated,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,prefix=prefix,type_id=type_id)    
+          #~ is_deprecated=is_deprecated,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,
+          prefix=prefix,type_id=type_id)    
     globals_dict.update(create_households_household=create_households_household)
     
     def create_contacts_person(partner_ptr_id, birth_date, first_name, last_name, title, gender, is_active, newcomer, is_deprecated, activity_id, bank_account1, bank_account2, remarks2, gesdos_id, is_cpas, is_senior, group_id, coached_from, coached_until, coach1_id, coach2_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, broker_id, faculty_id):
