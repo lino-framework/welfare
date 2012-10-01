@@ -34,6 +34,8 @@ from lino.core.modeltools import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
 
+SINCE_ALWAYS = datetime.date(1901,1,1)
+
 def migrate_from_1_4_10(globals_dict):
     """
     - convert contacts.Partner.region from a CHAR to a FK(City)
@@ -208,6 +210,8 @@ def migrate_from_1_4_10(globals_dict):
                     type_id=ti)
                 if ti == 1:
                     kw.update(start_date=coached_from,end_date=coached_until)
+                else:
+                    kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
                 
             if coach1_id:
@@ -219,6 +223,8 @@ def migrate_from_1_4_10(globals_dict):
                     type_id=ti)
                 if ti == 1:
                     kw.update(start_date=coached_from,end_date=coached_until)
+                else:
+                    kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
               
                 #~ yield pcsw_Coaching(
