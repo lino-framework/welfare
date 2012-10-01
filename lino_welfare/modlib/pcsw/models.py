@@ -400,11 +400,12 @@ add('20', _("Refused"),'refused')
 # coached: neither newcomer nor former, IdPrt != "I"
 add('30', _("Coached"),'coached')
 add('50', _("Former"),'former')
+add('60', _("Invalid"),'invalid')
 
-ClientStates.new.add_workflow(states='refused coached',user_groups='newcomers')
-ClientStates.refused.add_workflow(_("Refuse"),states='new',user_groups='newcomers')
+ClientStates.new.add_workflow(states='refused coached invalid',user_groups='newcomers')
+ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers')
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),states='coached new',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
     
 class Client(Person):

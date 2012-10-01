@@ -164,17 +164,18 @@ def migrate_from_1_4_10(globals_dict):
         #~ if national_id and national_id.strip() != '0' and not is_deprecated:
         if national_id.strip() == '0':
             national_id = ''
-        if gesdos_id and not national_id:
-            national_id = str(partner_ptr_id)
         remarks2 = remarks2.strip()
-        if national_id or remarks2:
+        if national_id or gesdos_id or remarks2 :
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
             client_state = pcsw.ClientStates.coached
             if newcomer:
                 client_state = pcsw.ClientStates.new
-            elif not is_active or not national_id:
+            elif not is_active:
                 client_state = pcsw.ClientStates.former
+            elif not national_id:
+                national_id = str(partner_ptr_id)
+                client_state = pcsw.ClientStates.invalid
             #~ if partner_ptr_id == 20560:
                 #~ national_id += 'b'
             #~ elif partner_ptr_id == 6748:
