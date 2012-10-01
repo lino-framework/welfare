@@ -351,14 +351,18 @@ class AvailableCoachesByClient(AvailableCoaches):
         ar.param_values.for_client = ar.master_instance
         return super(AvailableCoachesByClient,self).get_data_rows(ar)
         
-    @dd.action(label=_("Attribute"))
-    def attribute_coach(obj,ar):
+    @dd.action(label=_("Assign"))
+    def assign_coach(obj,ar):
         client = ar.master_instance
-        pcsw.Coaching(project=client,user=obj,start_date=datetime.date.today()).save()
+        msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
+        ar.confirm(msg,_("Are you sure?"))
+        pcsw.Coaching(project=client,user=obj,
+            start_date=datetime.date.today(),
+            state=pcsw.CoachingStates.suggested).save()
         client.client_state = pcsw.ClientStates.coached
         client.save()
-        msg = _("Client %(client)s now coached by %(user)s") % dict(client=client,user=obj)
-        return ar.success_response(refresh=True,message=msg,alert=True)
+        msg = _("Client %(client)s is now being coached by %(user)s") % dict(client=client,user=obj)
+        return ar.success_response(refresh_all=True,message=msg,alert=True)
         
         
 

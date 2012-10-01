@@ -72,6 +72,7 @@ from lino.utils import babel
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
+from lino.utils.xmlgen import html as xghtml
 
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
@@ -97,6 +98,7 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
     #~ User = resolve_model(settings.LINO.user_model,strict=True)
 
 households = dd.resolve_app('households')
+cal = dd.resolve_app('cal')
 
 def is_valid_niss(national_id):
     try:
@@ -395,21 +397,14 @@ add = ClientStates.add_item
 add('10', _("New"),'new') # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
 add('20', _("Refused"),'refused')
-    #~ action_label=_("Refuse"),
-    #~ required=dict(states=['new'],user_groups='newcomers'))   
 # coached: neither newcomer nor former, IdPrt != "I"
 add('30', _("Coached"),'coached')
-    #~ required=dict(states=['new','official'],user_groups='newcomers'))   
-#~ add('40', _("Official"),'official',
-    #~ required=dict(states=['coached'])) # the client is "integrated"
 add('50', _("Former"),'former')
-    #~ required=dict(states=['coached'],user_groups='newcomers'))     # former: IdPrt == "I"
-#~ add('60', _("Invalid"),'invalid')   # duplicate or doesn't correspond to a real person
 
 ClientStates.new.add_workflow(states='refused coached',user_groups='newcomers')
 ClientStates.refused.add_workflow(_("Refuse"),states='new',user_groups='newcomers')
-ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),states='coached',user_groups='newcomers')
+#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),states='coached new',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
     
 class Client(Person):
@@ -1352,7 +1347,8 @@ class IntegClients(Clients):
             #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
         #~ if ar.param_values.client_state:
             #~ qs = qs.filter(client_state=ar.param_values.client_state)
-        qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
+        #~ qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
+        qs = qs.filter(client_state=ClientStates.coached)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
@@ -2111,13 +2107,13 @@ add('40', _("Standby"),'standby')
 add('50', _("Ended"),'ended')
 
 #~ CoachingStates.suggested.set_required(owner=False)
-CoachingStates.refused.add_workflow(states='suggested standby',owner=True)
-CoachingStates.active.add_workflow(_("Accept"),states='suggested',owner=True)
-CoachingStates.active.add_workflow(_("Reactivate"),
+CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
+CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
+CoachingStates.active.add_workflow(_("reactivate"),
     states='standby',owner=True,
     help_text=_("Client has become active again after having been standby."))
 CoachingStates.standby.add_workflow(states='active',owner=True)
-CoachingStates.ended.add_workflow(_("End coaching"),
+CoachingStates.ended.add_workflow(_("end coaching"),
     states='active standby',owner=True,
     help_text=_("User no longer coaches this client."))
 
@@ -2192,6 +2188,9 @@ during a given period.
             self.start_date = datetime.date.today()
         super(Coaching,self).full_clean(*args,**kw)
         
+    def summary_row(self,ar,**kw):
+        return xghtml.E.p(ar.href_to(self.project)," (%s)" % self.state.text)
+        
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
@@ -2228,6 +2227,7 @@ class MyCoachings(Coachings,mixins.ByUser):
     column_names = 'start_date end_date project type state workflow_buttons *'
 
 class MySuggestedCoachings(MyCoachings):
+    label = _("Suggested coachings")
     known_values = dict(state=CoachingStates.suggested)
 
 
@@ -2387,9 +2387,46 @@ class Home(cal.Home):
     app_label = 'lino'
     detail_layout = """
     quick_links:80x1
+    welcome
     pcsw.UsersWithClients:80x8
     coming_reminders:40x16 missed_reminders:40x16
     """
+    
+    @dd.virtualfield(dd.HtmlBox(_('Welcome')))
+    def welcome(cls,self,ar):
+        MAXITEMS = 2
+        u = ar.get_user()
+        story = []
+        
+        intro = [_("Hello, "),u.first_name,'! ']
+        story.append(xghtml.E.p(*intro))
+        
+        warnings = []
+        
+        for T in (MySuggestedCoachings,cal.MyTasksToDo):
+            r = T.request(user=u)
+            if r.get_total_count() != 0:
+                #~ for obj in r.data_iterator[-MAXITEMS]:
+                    #~ chunks = [obj.summary_row(ar)]
+                    #~ sep = ' : '
+                    #~ for a in T.get_workflow_actions(ar,obj):
+                        #~ chunks.append(sep)
+                        #~ chunks.append(ar.row_action_button(obj,a))
+                        #~ sep = ', '
+                    
+                warnings.append(xghtml.E.li(
+                    _("You have %d entries in ") % r.get_total_count(),
+                    ar.href_to_request(r,T.label)))
+        
+        #~ warnings.append(xghtml.E.li("Test 1"))
+        #~ warnings.append(xghtml.E.li("Second test"))
+        if len(warnings):
+            story.append(xghtml.E.h3(_("Warnings")))
+            story.append(xghtml.E.ul(*warnings))
+        else:
+            story.append(xghtml.E.p(_("Congratulatons: you have no warnings.")))
+        return xghtml.E.div(*story,class_="htmlText",style="margin:5px")
+        
 
 #~ def setup_master_menu(site,ui,user,m): 
     #~ m.add_action(AllClients)
@@ -2407,7 +2444,7 @@ def setup_my_menu(site,ui,user,m):
               #~ label=pg.name,
               #~ params=dict(master_instance=pg))
               
-        #~ m = m.add_menu("coachings",MyCoachings.label)
+        m = m.add_menu("pcsw",MODULE_LABEL)
         m.add_action(MyClients)
         #~ m.add_action(Clients)
         m.add_action(MyCoachings)
@@ -2618,3 +2655,8 @@ customize_sqlite()
 #~ customize_user_profiles()
 #~ setup_user_profiles()
   
+
+
+
+    
+    
