@@ -45,6 +45,8 @@ from lino.modlib.cal.utils import amonthago
 #~ from lino_welfare.modlib.pcsw import models as welfare
 from lino_welfare.modlib.pcsw import models as pcsw
 
+outbox = dd.resolve_app('outbox')
+
 MODULE_LABEL = _("Newcomers")
 
 class Broker(dd.Model):
@@ -352,17 +354,37 @@ class AvailableCoachesByClient(AvailableCoaches):
         return super(AvailableCoachesByClient,self).get_data_rows(ar)
         
     @dd.action(label=_("Assign"))
-    def assign_coach(obj,ar):
+    def assign_coach(obj,ar,**kw):
         client = ar.master_instance
+        if not pcsw.is_valid_niss(client.national_id):
+            return ar.error_response(alert=True,
+                message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
+                % dict(client=client,niss=client.national_id))
         msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
         ar.confirm(msg,_("Are you sure?"))
-        pcsw.Coaching(project=client,user=obj,
+        coaching = pcsw.Coaching(project=client,user=obj,
             start_date=datetime.date.today(),
-            state=pcsw.CoachingStates.suggested).save()
+            state=pcsw.CoachingStates.suggested)
+        coaching.save()
         client.client_state = pcsw.ClientStates.coached
         client.save()
-        msg = _("Client %(client)s is now being coached by %(user)s") % dict(client=client,user=obj)
-        return ar.success_response(refresh_all=True,message=msg,alert=True)
+        msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
+        
+        if obj.partner:
+            m = outbox.Mail(user=ar.get_user(),
+                subject='Newcomer has been assigned',
+                body = """Hallo Kollege,\n%s""" % msg,
+                project=client,
+                owner=coaching)
+            m.full_clean()
+            m.save()
+            for t,p in [(outbox.RecipientType.to,obj.partner)]:
+                r = outbox.Recipient(mail=m,type=t,partner=p)
+                r.full_clean()
+                r.save()
+            js = ar.renderer.instance_handler(ar,m)
+            kw.update(eval_js=js)
+        return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
         
         
 

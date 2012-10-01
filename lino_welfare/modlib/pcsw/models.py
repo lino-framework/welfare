@@ -646,10 +646,18 @@ class Client(Person):
     #~ card_type_text.return_type = dd.DisplayField(_("eID card type"))
         
         
-    def save(self,*args,**kw):
+    def full_clean(self,*args,**kw):
         if self.job_office_contact: 
-            if self.job_office_contact.person == self:
+            if self.job_office_contact.person_id == self.id:
                 raise ValidationError(_("Circular reference"))
+        if not self.national_id:
+            self.national_id = str(self.id)
+        if self.client_state == ClientStates.coached:
+            niss_validator(self.national_id)
+        super(Client,self).full_clean(*args,**kw)
+        
+      
+    def save(self,*args,**kw):
         super(Client,self).save(*args,**kw)
         self.update_reminders()
         

@@ -166,20 +166,21 @@ def migrate_from_1_4_10(globals_dict):
             national_id = ''
         if gesdos_id and not national_id:
             national_id = str(partner_ptr_id)
-        if national_id:
+        remarks2 = remarks2.strip()
+        if national_id or remarks2:
             #~ if is_deprecated:
                 #~ national_id += ' (A)'
             client_state = pcsw.ClientStates.coached
             if newcomer:
                 client_state = pcsw.ClientStates.new
-            elif not is_active:
+            elif not is_active or not national_id:
                 client_state = pcsw.ClientStates.former
-            if partner_ptr_id == 20560:
-                national_id += 'b'
-            elif partner_ptr_id == 6748:
-                national_id += 'a'
-            elif partner_ptr_id == 22050:
-                national_id += 'a'
+            #~ if partner_ptr_id == 20560:
+                #~ national_id += 'b'
+            #~ elif partner_ptr_id == 6748:
+                #~ national_id += 'a'
+            #~ elif partner_ptr_id == 22050:
+                #~ national_id += 'a'
             yield create_child(contacts_Person,partner_ptr_id,pcsw_Client,
                 #~ birth_date=birth_date,
                 #~ first_name=first_name,last_name=last_name,title=title,gender=gender,
@@ -259,14 +260,15 @@ def migrate_from_1_4_10(globals_dict):
         else:
             #~ silently ignored if lost: 
             #~ is_cpas is_senior coach1_id coach2_id 
+            #~ health_insurance_id 
             lost_fields = """
-            remarks2 gesdos_id 
+            gesdos_id 
             group_id 
             coached_from coached_until
             birth_place 
             birth_country_id civil_state
             national_id
-            health_insurance_id pharmacy_id
+            pharmacy_id
             nationality_id card_number card_valid_from
             card_valid_until card_type card_issuer
             noble_condition residence_type
