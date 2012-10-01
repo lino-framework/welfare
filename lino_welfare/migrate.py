@@ -34,7 +34,7 @@ from lino.core.modeltools import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
 
-SINCE_ALWAYS = datetime.date(1901,1,1)
+SINCE_ALWAYS = datetime.date(1990,1,1)
 
 def migrate_from_1_4_10(globals_dict):
     """
