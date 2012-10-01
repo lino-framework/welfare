@@ -209,7 +209,8 @@ def migrate_from_1_4_10(globals_dict):
                     user_id=coach2_id,
                     type_id=ti)
                 if ti == 1:
-                    kw.update(start_date=coached_from,end_date=coached_until)
+                    kw.update(start_date=coached_from or SINCE_ALWAYS,
+                        end_date=coached_until)
                 else:
                     kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
@@ -222,7 +223,8 @@ def migrate_from_1_4_10(globals_dict):
                     primary=True,
                     type_id=ti)
                 if ti == 1:
-                    kw.update(start_date=coached_from,end_date=coached_until)
+                    kw.update(start_date=coached_from or SINCE_ALWAYS,
+                        end_date=coached_until)
                 else:
                     kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
