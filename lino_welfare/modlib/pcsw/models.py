@@ -2398,7 +2398,7 @@ class Home(cal.Home):
         u = ar.get_user()
         story = []
         
-        intro = [_("Hello, "),u.first_name,'! ']
+        intro = [_("Hi, "),u.first_name,'! ']
         story.append(xghtml.E.p(*intro))
         
         warnings = []
