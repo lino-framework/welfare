@@ -2403,7 +2403,7 @@ class Home(cal.Home):
     
     @dd.virtualfield(dd.HtmlBox(_('Welcome')))
     def welcome(cls,self,ar):
-        MAXITEMS = 2
+        #~ MAXITEMS = 2
         u = ar.get_user()
         story = []
         
@@ -2414,6 +2414,8 @@ class Home(cal.Home):
         
         for T in (MySuggestedCoachings,cal.MyTasksToDo):
             r = T.request(user=u)
+            #~ r = T.request(subst_user=u)
+            #~ r = ar.spawn(T)
             if r.get_total_count() != 0:
                 #~ for obj in r.data_iterator[-MAXITEMS]:
                     #~ chunks = [obj.summary_row(ar)]

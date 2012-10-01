@@ -205,31 +205,26 @@ def migrate_from_1_4_10(globals_dict):
                 #~ pcsw_CoachingType
                 if user_id in (200085,200093,200096,200099): return 2 # DSBE
                 return 1
+            kw = dict(project_id=partner_ptr_id)
+            kw.update(start_date=coached_from or SINCE_ALWAYS,end_date=coached_until)
             if coach2_id and coach2_id != coach1_id:
                 ti = user2type(coach2_id)
-                kw = dict(
-                    project_id=partner_ptr_id,
+                kw.update(
                     user_id=coach2_id,
                     type_id=ti)
-                if ti == 1:
-                    kw.update(start_date=coached_from or SINCE_ALWAYS,
-                        end_date=coached_until)
-                else:
-                    kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
                 
             if coach1_id:
                 ti = user2type(coach1_id)
-                kw = dict(
-                    project_id=partner_ptr_id,
+                kw.update(
                     user_id=coach1_id,
                     primary=True,
                     type_id=ti)
-                if ti == 1:
-                    kw.update(start_date=coached_from or SINCE_ALWAYS,
-                        end_date=coached_until)
-                else:
-                    kw.update(start_date=SINCE_ALWAYS)
+                #~ if ti == 1:
+                    #~ kw.update(start_date=coached_from or SINCE_ALWAYS,
+                        #~ end_date=coached_until)
+                #~ else:
+                    #~ kw.update(start_date=SINCE_ALWAYS)
                 yield pcsw_Coaching(**kw)
               
                 #~ yield pcsw_Coaching(

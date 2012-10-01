@@ -355,6 +355,9 @@ class AvailableCoachesByClient(AvailableCoaches):
         
     @dd.action(label=_("Assign"))
     def assign_coach(obj,ar,**kw):
+        """
+        Assign a coach to a newcomer.
+        """
         client = ar.master_instance
         if not pcsw.is_valid_niss(client.national_id):
             return ar.error_response(alert=True,

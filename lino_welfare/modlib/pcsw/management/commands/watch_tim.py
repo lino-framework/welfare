@@ -66,7 +66,7 @@ from lino.utils.daemoncommand import DaemonCommand
 
 from lino_welfare.modlib.pcsw import models as pcsw
 from lino_welfare.modlib.pcsw.management.commands.initdb_tim import convert_sex, \
-    ADR_id, country2kw, par2person, pxs2person, isolang
+    ADR_id, country2kw, isolang
 
 Country = dd.resolve_model('countries.Country')
 City = dd.resolve_model('countries.City')
@@ -75,6 +75,78 @@ Client = dd.resolve_model('pcsw.Client')
 Company = dd.resolve_model(settings.LINO.company_model)
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
+
+CCTYPE_HEALTH_INSURANCE = 1
+CCTYPE_PHARMACY = 2
+
+
+def par2client(row,person):
+    #~ person.is_active = iif(row['IDPRT']=='I',False,True)
+    if row['IDPRT'] == 'S':
+        person.is_cpas = True
+    elif row['IDPRT'] == 'A':
+        person.is_senior = True
+        
+def pxs2client(row,person):
+  
+    kw = {}
+    store(kw,
+      card_number=row['CARDNUMBER'],
+      card_issuer=row.get('CARDISSUER',''),      # 20110110
+      noble_condition=row.get('NOBLEECOND',''),      # 20110110
+      birth_place=row.get('BIRTHPLACE',''),
+      remarks2=row.get('MEMO',''),
+      gender=convert_sex(row['SEXE'])
+    )
+    for k,v in kw.items():
+        setattr(person,k,v)
+    
+    par2client(row,person)    
+        
+    if row.has_key('CARDTYPE'):
+        #~ row.card_type = pcsw.BeIdCardType.items_dict.get(row['CARDTYPE'].strip(),'')
+        from lino.apps.pcsw import models as pcsw
+        if row['CARDTYPE'] == 0:
+            person.card_type = pcsw.BeIdCardType.blank_item
+        else:
+            person.card_type = pcsw.BeIdCardType.get_by_value(str(row['CARDTYPE']))
+            
+    if row['IDMUT']:
+        pk = ADR_id(row['IDMUT'])
+        cc = pcsw.ClientContact.objects.get(
+            project=person,
+            type_id=CCTYPE_HEALTH_INSURANCE,
+            company_id=pk)
+        ...
+        try:
+            person.health_insurance = Company.objects.get(pk=pk)
+        except ValueError,e:
+            dblogger.warning(u"%s : invalid health_insurance %r",obj2str(person),row['IDMUT'])
+        except pcsw.ClientContact.DoesNotExist,e:
+            dblogger.warning(u"%s : health_insurance %s not found",obj2str(person),row['IDMUT'])
+  
+    if row['APOTHEKE']:
+        try:
+            person.pharmacy = Company.objects.get(pk=int(row['APOTHEKE']))
+        except ValueError,e:
+            dblogger.warning(u"%s : invalid pharmacy %r",obj2str(person),row['APOTHEKE'])
+        except Company.DoesNotExist,e:
+            dblogger.warning(u"%s : pharmacy %s not found",obj2str(person),row['APOTHEKE'])
+            
+    nat = row['NATIONALIT']
+    if nat:
+        try:
+            country = Country.objects.get(short_code__exact=nat)
+        except Country.DoesNotExist:
+            country = Country(isocode=nat,name=nat,short_code=nat)
+            country.save()
+        person.nationality=country
+        
+    store_date(row,person,'GEBDAT','birth_date')
+    store_date(row,person,'VALID1','card_valid_from')
+    store_date(row,person,'VALID2','card_valid_until')
+            
+
 
 #~ def is_company(data):
 def PAR_model(data):
@@ -266,7 +338,7 @@ class PAR(Controller):
                 for k,v in name2kw(data['FIRME']).items():
                     setattr(obj,k,v)
             if obj.__class__ is Client:
-                par2person(data,obj)
+                par2client(data,obj)
                 mapper.update(gesdos_id='NB1')
                 if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
                     obj.client_state = pcsw.ClientStates.newcomer
@@ -276,6 +348,8 @@ class PAR(Controller):
                     obj.client_state = pcsw.ClientStates.coached
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
+                else:
+                    obj.national_id = str(obj.id)
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
                 #~ if data.has_key('NB1'):
@@ -294,17 +368,17 @@ class PAR(Controller):
                             #~ dblogger.warning(
                               #~ u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
                               #~ data['IDUSR'],username,obj2str(obj))
-                        obj.coach1 = u
+                        #~ obj.coach1 = u
                         try:
-                            coaching = pcsw.Coaching.objects.get(project=obj,type=pcsw.CoachingTypes.primary)
+                            coaching = pcsw.Coaching.objects.get(project=obj,primary=True)
                         except pcsw.Coaching.DoesNotExist,e:
-                            coaching = pcsw.Coaching(project=obj,type=pcsw.CoachingTypes.primary)
+                            coaching = pcsw.Coaching(project=obj,primary=True)
                         coaching.user = u
                         coaching.save()
                     else:
-                        obj.coach1 = None
+                        #~ obj.coach1 = None
                         try:
-                            coaching = pcsw.Coaching.objects.get(project=obj,type=pcsw.CoachingTypes.primary)
+                            coaching = pcsw.Coaching.objects.get(project=obj,primary=True)
                             coaching.delete()
                         except pcsw.Coaching.DoesNotExist,e:
                             pass
@@ -418,8 +492,8 @@ class PXS(Controller):
     def get_object(self,kw):
         id = kw['id']
         try:
-            return Person.objects.get(pk=id)
-        except Person.DoesNotExist:
+            return pcsw.Client.objects.get(pk=id)
+        except pcsw.Client.DoesNotExist:
             pass
             
     def applydata(self,obj,data,**d):
@@ -429,7 +503,7 @@ class PXS(Controller):
             birth_date='GEBDAT',
         )
         Controller.applydata(self,obj,data,**d)
-        pxs2person(data,obj)
+        pxs2client(data,obj)
         
     #~ def POST(self,**kw):
         #~ """Deserves more documentation."""

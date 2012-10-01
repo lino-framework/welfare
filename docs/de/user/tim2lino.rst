@@ -5,18 +5,17 @@ Die NISS
 --------
 
 - Es kann Klienten ohne NISS geben. 
-  Die sind dann allerdings "inoffiziell", d.h. nicht "integriert" 
-  oder "ohne Akte beim Ministerium"
+  Die sind dann allerdings "inoffiziell" bzw. "nicht integriert" bzw. "ohne Akte beim Ministerium".
+  In TIM haben diese Klienten entweder eine leere NISS oder eine 0 dort stehen.
+  *Lino trägt im Feld `NISS` die Partnernummer ein, wenn es nicht ausgefüllt ist.*
   
 - Ein "Numéro bis" ist eine provisorische NISS, 
   die z.B. auch 680000 formatiert ist.
-  So eine Bis-Nummer kann also dann auch 
-  irgendwann mal ändern.
+  So eine Bis-Nummer kann also dann auch irgendwann mal ändern.
   
 
 watch_tim
 ---------
-
 
 In der :xfile:`settings.py` gibt es folgende Optionen, 
 die für die Synchronisierung von Belang sind::
@@ -55,11 +54,10 @@ nach :class:`households.Household`
 oder
 nach :class:`pcsw.Client` je nach folgenden Regeln:
 
-- Wenn PAR->NB2 unleer ist, wird es ein Klient
-- Wenn PAR->NoTva leer ist oder nicht. 
-- Wenn `PAR->Allo` einen der Werte "Eheleute", "Herr und Frau" enthält, 
-  dann wird es ein Haushalt.
-
+- Wenn PAR->NB2 (NISS), Gesdos-Nr oder PAR->Memo unleer ist, wird es ein Klient.
+- Ansonsten, wenn `PAR->Allo` einen der Werte "Eheleute", "Herr und Frau" enthält, dann wird es ein Haushalt.
+- Ansonsten, wenn PAR->NoTva leer ist, wird es eine Person,
+- Ansonsten wird es eine Firma.
 
 Alle Partner stehen auch in ´contacts.Parter´.
 Das jeweilige id entspricht der Partnernummer (PAR->IdPar) 
@@ -69,8 +67,7 @@ aus TIM.
 Personen und Firmen mit einem id über 200.000 
 (und unter 800.000) sind *in Lino* erstellt worden.
 
-`PAR->Allo` geht nach :attr:`Person.title` 
-oder :attr:`Company.prefix`.
+`PAR->Allo` geht nach :attr:`Person.title` oder :attr:`Company.prefix`.
 Außer wenn `PAR->Allo` es einen der Werte "Eheleute", 
 "Herr und Frau" enthält, dann wird es ein Haushalt.
 
@@ -95,13 +92,8 @@ Hier eine Liste der möglichen Partnerattribute in TIM:
 - N : Neuzugang
 
 
+Begleitungen
+------------
 
-Doppelte NISS
-
-TIM contains duplicate clients having the same `national_id`.
-But we want to keep the `unique=True` requirement on `Client.national_id`.
---> How to solve this:
-legacy Clients marked `is_deprecated ` automaticaly 
-get a suffix " (A)" appended to their `national_id`.
-(both watch_tim and migrate)
-
+In TIM haben wir nur PAR->IdUsr, den "hauptverantwortlichen Sozi". 
+Lino kann pro Klient mehrere Begleitungen haben.
