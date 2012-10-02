@@ -139,7 +139,7 @@ class Schedules(dd.Table):
     required = dict(user_groups='integ',user_level='manager')
     model = Schedule
     order_by = ['name']
-    detail_template = """
+    detail_layout = """
     id name
     ContractsBySchedule
     """
@@ -156,7 +156,7 @@ class Regimes(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = Regime
     order_by = ['name']
-    detail_template = """
+    detail_layout = """
     id name
     ContractsByRegime
     """
@@ -249,7 +249,7 @@ class ContractTypes(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = ContractType
     column_names = 'name ref build_method template *'
-    detail_template = """
+    detail_layout = """
     id name 
     ref build_method template
     ContractsByType
@@ -272,7 +272,7 @@ class Sectors(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = Sector
     order_by = ['name']
-    detail_template = """
+    detail_layout = """
     id name
     remark FunctionsBySector
     CandidaturesBySector
@@ -300,7 +300,7 @@ class Functions(dd.Table):
     model = Function
     column_names = 'name sector *'
     order_by = ['name']
-    detail_template = """
+    detail_layout = """
     id name sector
     remark
     CandidaturesByFunction
@@ -550,7 +550,7 @@ class Contracts(dd.Table):
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'.split()
     
-    #~ detail_template = """
+    #~ detail_layout = """
     #~ id:8 client:25 user:15 user_asd:15 language:8
     #~ job type company contact:20     
     #~ applies_from duration applies_until 
@@ -682,7 +682,7 @@ class Offers(dd.Table):
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Offer
-    detail_template = """
+    detail_layout = """
     name provider sector function
     selection_from selection_until start_date
     remark 
@@ -1109,7 +1109,7 @@ class Jobs(dd.Table):
     #~ order_by = ['start_date']
     column_names = 'name provider * id'
     
-    detail_template = """
+    detail_layout = """
     name provider contract_type type id 
     sector function capacity hourly_rate 
     remark CandidaturesByJob
@@ -1124,7 +1124,7 @@ class JobTypes(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = JobType
     order_by = ['name']
-    detail_template = """
+    detail_layout = """
     id name 
     JobsByType
     """
@@ -1221,7 +1221,7 @@ class JobsOverview(mixins.EmptyTable):
     required = dict(user_groups=['integ'])
     label = _("Contracts Situation") 
     #~ detail_layout = JobsOverviewDetail()
-    detail_template = "body"
+    detail_layout = "body"
     
     parameters = dict(
       #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),

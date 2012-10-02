@@ -32,6 +32,7 @@ from lino.utils.restify import restify
 from lino.utils import dblogger
 #~ from lino.models import update_site_config
 from lino.utils import mti
+from lino.utils.niss import gen_niss
 from lino import dd
 
 #~ from django.contrib.auth import models as auth
@@ -509,11 +510,18 @@ def objects():
     
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
-    for person in Person.objects.all():
+    for person in Person.objects.filter(gender__isnull=False):
         if User.objects.filter(partner=person).count() == 0:
           if contacts.Role.objects.filter(person=person).count() == 0:
             #~ if not person in DIRECTORS:
-            client = person2client(person,national_id=str(person.pk))
+            birth_date = settings.LINO.demo_date(-170*count - 16*365)  # '810601 211-83'
+            national_id = gen_niss(birth_date,person.gender)
+                
+            client = person2client(person,
+                national_id=national_id,
+                birth_date=birth_date)
+            # youngest client is 16; 170 days between each client
+            
             count += 1
             if count % 2:
                 #~ client.is_active = True
@@ -534,7 +542,7 @@ def objects():
             else:
                 client.client_state=pcsw.ClientStates.former
                 
-            client.clean()
+            client.full_clean()
             client.save()
             
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
@@ -826,9 +834,6 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         p.birth_country_id = country
         p.nationality_id = country
         
-        # youngest client is 16; 170 days between each client
-        p.birth_date = settings.LINO.demo_date(-170*i - 16*365)
-        
         if i % 3:
             p.languageknowledge_set.create(language_id='eng',written='3',spoken='3')
         elif i % 5:
@@ -968,7 +973,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
                 client.save()
             periods = story.pop()
             for a,b,primary in periods:
-                kw = dict(project=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
+                kw = dict(client=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
                 if a is not None:
                     kw.update(start_date=settings.LINO.demo_date(a))
                 if b is not None:
@@ -979,7 +984,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     #~ jobs_contract = Instantiator('jobs.Contract').build
     for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         af = coaching.start_date or settings.LINO.demo_date(-600+i*40)
-        kw = dict(applies_from=af,client=coaching.project,user=coaching.user)
+        kw = dict(applies_from=af,client=coaching.client,user=coaching.user)
         if i % 2:
             yield jobs.Contract(
                 type=JOBS_CONTRACT_TYPES.pop(),

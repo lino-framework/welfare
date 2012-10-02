@@ -105,7 +105,7 @@ class ContractTypes(dd.Table):
     required=dict(user_groups = ['integ'],user_level='manager')
     model = ContractType
     column_names = 'name ref build_method template *'
-    detail_template = """
+    detail_layout = """
     id name 
     ref build_method template
     ContractsByType

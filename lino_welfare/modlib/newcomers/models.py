@@ -28,7 +28,7 @@ from lino import dd
 #~ from lino.utils.babel import default_language
 #~ from lino import reports
 #~ from lino import layouts
-from lino.core.perms import UserProfiles
+from lino.core.perms import UserProfiles, UserLevels
 from lino.utils.restify import restify
 #~ from lino.utils import printable
 from lino.utils.choosers import chooser
@@ -96,7 +96,7 @@ class Faculties(dd.Table):
     model = Faculty
     column_names = 'name *'
     order_by = ["name"]
-    detail_template = """
+    detail_layout = """
     id name
     CompetencesByFaculty
     ClientsByFaculty
@@ -212,7 +212,7 @@ class NewClients(pcsw.Clients):
         if ar.param_values.new_since:
             q = q | models.Q(
                 client_state=pcsw.ClientStates.coached,
-                pcsw_coaching_set_by_project__start_date__gte=ar.param_values.new_since)
+                coachings_by_client__start_date__gte=ar.param_values.new_since)
         qs = qs.filter(q)
 
         if ar.param_values.coached_by:
@@ -365,15 +365,28 @@ class AvailableCoachesByClient(AvailableCoaches):
                 % dict(client=client,niss=client.national_id))
         msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
         ar.confirm(msg,_("Are you sure?"))
-        coaching = pcsw.Coaching(project=client,user=obj,
+        
+        
+        coaching = pcsw.Coaching(client=client,user=obj,
             start_date=datetime.date.today(),
+            type=obj.coaching_type,
             state=pcsw.CoachingStates.suggested)
+        if not obj.profile:
+            coaching.state = pcsw.CoachingStates.active
         coaching.save()
         client.client_state = pcsw.ClientStates.coached
+        client.full_clean()
         client.save()
         msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
         
-        if obj.partner:
+        recipients = []
+        recipients.append(
+            dict(name=unicode(obj),address=obj.email,type=outbox.RecipientType.to))
+        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+            recipients.append(
+                dict(name=unicode(u),address=u.email,type=outbox.RecipientType.to))
+            
+        if len(recipients):
             m = outbox.Mail(user=ar.get_user(),
                 subject='Newcomer has been assigned',
                 body = """Hallo Kollege,\n%s""" % msg,
@@ -381,12 +394,15 @@ class AvailableCoachesByClient(AvailableCoaches):
                 owner=coaching)
             m.full_clean()
             m.save()
-            for t,p in [(outbox.RecipientType.to,obj.partner)]:
-                r = outbox.Recipient(mail=m,type=t,partner=p)
+            #~ for t,p in [(outbox.RecipientType.to,obj.partner)]:
+            for rec in recipients:
+                r = outbox.Recipient(mail=m,**rec)
                 r.full_clean()
                 r.save()
-            js = ar.renderer.instance_handler(ar,m)
-            kw.update(eval_js=js)
+            interactive = (ar.get_user().profile.office_level > UserLevels.user)
+            if interactive:
+                js = ar.renderer.instance_handler(ar,m)
+                kw.update(eval_js=js)
         return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
         
         
@@ -421,8 +437,8 @@ dd.inject_field(pcsw.Client,
     """The Faculty this client has been attributed to.
     """)
 
-def site_setup(site):
-    site.modules.users.Users.add_detail_tab('newcomers.CompetencesByUser')
+#~ def site_setup(site):
+    #~ site.modules.users.Users.add_detail_tab('newcomers.CompetencesByUser')
   
 def setup_main_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.user:

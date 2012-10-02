@@ -17,6 +17,7 @@ Contains PCSW-specific models and tables that have not yet been
 moved into a separate module because they are really very PCSW specific.
 
 See also :doc:`/pcsw/models`.
+
 """
 
 import logging
@@ -100,52 +101,7 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
 
-def is_valid_niss(national_id):
-    try:
-        niss_validator(national_id)
-        return True
-    except ValidationError:
-        return False
-        
-def niss_validator(national_id):
-    """
-    Checks whether the specified `national_id` is a valid 
-    Belgian NISS (No. d'identification de sécurité sociale).
-    
-    Official format is ``YYMMDDx123-97``, where ``YYMMDD`` is the birth date, 
-    ``x`` indicates the century (``*`` for the 19th, `` `` (space) for the 20th
-    and ``=`` for the 21st century), ``123`` is a sequential number for persons 
-    born the same day (odd numbers for men and even numbers for women), 
-    and ``97`` is a check digit (remainder of previous digits divided by 97).
-    
-    """
-    national_id = national_id.strip()
-    if not national_id:
-        return
-    if len(national_id) != 13:
-        raise ValidationError(
-          force_unicode(_('Invalid Belgian SSIN %s : ') % national_id) 
-          + force_unicode(_('An SSIN has always 13 positions'))
-          ) 
-    xtest = national_id[:6] + national_id[7:10]
-    if national_id[6] == "=":
-        xtest = "2" + xtest
-    try:
-        xtest = int(xtest)
-    except ValueError,e:
-        raise ValidationError(
-          _('Invalid Belgian SSIN %s : ') % national_id + str(e)
-          )
-    xtest = abs((xtest-97*(int(xtest/97)))-97)
-    if xtest == 0:
-        xtest = 97
-    found = int(national_id[11:13])
-    if xtest != found:
-        raise ValidationError(
-            force_unicode(_("Invalid Belgian SSIN %s :") % national_id)
-            + _("Check digit is %(found)d but should be %(expected)d") % dict(
-              expected=xtest, found=found)
-            )
+from lino.utils.niss import niss_validator, is_valid_niss
 
 class CivilState(ChoiceList):
     """
@@ -345,10 +301,6 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
     def get_queryset(self):
         return self.model.objects.select_related('country','city')
         
-    def update_owned_instance(self,owned):
-        owned.project = self
-        super(Person,self).update_owned_instance(owned)
-
     def get_print_language(self,pm):
         "Used by DirectPrintAction"
         return self.language
@@ -369,6 +321,14 @@ class RefuseNewClient(dd.Dialog):
     dummy
     """
     
+class RefuseNewClient(dd.ChangeStateAction):    
+    label = _("Refuse")
+    required = dict(states='new invalid',user_groups='newcomers')
+    parameters = dict(
+      reason = models.CharField(max_length=200,verbose_name=_("Reason")),
+      dummy = models.BooleanField(verbose_name=_("Dummy RefuseNewClient")),
+    )  
+    
 class ClientStates(dd.Workflow):
     label = _("Client state")
     
@@ -376,14 +336,16 @@ class ClientStates(dd.Workflow):
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):
       
         if newstate.name == 'refused':
+            print ar.action_param_values
+            
             dlg = ar.dialog(RefuseNewClient)
             obj.set_change_summary(dlg.reason)
             
         elif newstate.name == 'former':
             count = 0
-            if obj.pcsw_coaching_set_by_project.filter(end_date__isnull=True).count():
+            if obj.coachings_by_client.filter(end_date__isnull=True).count():
                 raise actions.Warning(_("You must first fill end_date of existing coachings!"))
-            #~ for c in obj.pcsw_coaching_set_by_project.filter(user=ar.get_user()):
+            #~ for c in obj.coachings_by_client.filter(user=ar.get_user()):
                 #~ count += 1
                 #~ if not c.end_date:
             #~ if not count:
@@ -403,7 +365,8 @@ add('50', _("Former"),'former')
 add('60', _("Invalid"),'invalid')
 
 ClientStates.new.add_workflow(states='refused coached invalid',user_groups='newcomers')
-ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers')
+ClientStates.refused.add_workflow(RefuseNewClient)   
+#~ ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers')
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
 ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
@@ -584,15 +547,17 @@ class Client(Person):
             'country','city','nationality')
             
     def get_coachings(self,today=None,**flt):
-        qs = self.pcsw_coaching_set_by_project.filter(**flt)
+        qs = self.coachings_by_client.filter(**flt)
         if today is not None:
-            qs = self.pcsw_coaching_set_by_project.filter(only_active_coachings_filter(today))
+            qs = self.coachings_by_client.filter(only_active_coachings_filter(today))
         return qs
         #~ if qs.count() == 1:
             #~ return qs[0]
         #~ elif qs.count() != 0:
             #~ logger.error("get_primary_coach() found more than 1 primary coachings for %s",self)
         #~ return None
+        
+        
     
     
     @dd.chooser()
@@ -609,6 +574,10 @@ class Client(Person):
         #~ return u"%s (%s)" % (self.get_full_name(salutation=False),self.pk)
         return u"%s %s (%s)" % (self.last_name.upper(),self.first_name,self.pk)
         
+    def update_owned_instance(self,owned):
+        owned.project = self
+        super(Client,self).update_owned_instance(owned)
+
     def get_active_contract(self):
         """
         Return the one and only active contract on this client.
@@ -667,7 +636,7 @@ class Client(Person):
         Return the one and only primary coach 
         (or `None` if there's less or more than one).
         """
-        qs = self.pcsw_coaching_set_by_project.filter(primary=True).distinct()
+        qs = self.coachings_by_client.filter(primary=True).distinct()
         if qs.count == 1:
             return qs[0].user
         return None
@@ -1095,12 +1064,12 @@ class ClientDetail(dd.FormLayout):
     #~ # coach1:12 coach2:12 coached_from:12 coached_until:12 
     #~ # health_insurance pharmacy job_office_contact 
     #~ job_agents
-    #~ ContactsByClient:40 CoachingsByProject:40
+    #~ ContactsByClient:40 CoachingsByClient:40
     #~ """,label=_("Coaching"))
     
     coaching = dd.Panel("""
     coaching_left
-    pcsw.ContactsByClient:40 pcsw.CoachingsByProject:40
+    pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
     """,label=_("Coaching"))
     
     coaching_left = """
@@ -1254,12 +1223,12 @@ def unused_only_coached_persons_filter(today,
   
 def only_coached_by(qs,user):
     #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
-    return qs.filter(pcsw_coaching_set_by_project__user=user).distinct()
+    return qs.filter(coachings_by_client__user=user).distinct()
     
 def only_new_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
-    #~ return qs.filter(pcsw_coaching_set_by_project__end_date__gte=since) 
-    return qs.filter(pcsw_coaching_set_by_project__start_date__gte=since) 
+    #~ return qs.filter(coaching_set__end_date__gte=since) 
+    return qs.filter(coachings_by_client__start_date__gte=since) 
             
 def only_coached_on(qs,today,join=None):
     """
@@ -1268,7 +1237,7 @@ def only_coached_on(qs,today,join=None):
     on the specified date.
     """
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
-    n = 'pcsw_coaching_set_by_project__'
+    n = 'coachings_by_client__'
     if join: 
         n = join + '__' + n
     return qs.filter(only_active_coachings_filter(today,n)).distinct()
@@ -1306,6 +1275,7 @@ class IntegClients(Clients):
     detail_layout = IntegClientDetail()
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
+    use_as_default_table = False
     
     parameters = dict(
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
@@ -1344,16 +1314,16 @@ class IntegClients(Clients):
             qs = qs.filter(group__active=True)
         if ar.param_values.coached_by:
             qs = only_coached_by(qs,ar.param_values.coached_by)
-            #~ qs = qs.filter(pcsw_coaching_set_by_project__user=ar.param_values.coached_by)
+            #~ qs = qs.filter(coachings_by_client__user=ar.param_values.coached_by)
         if ar.param_values.only_primary:
-            #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
+            #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
             qs = qs.filter(
-              pcsw_coaching_set_by_project__primary=True,
-              pcsw_coaching_set_by_project__user=ar.param_values.coached_by)
+              coachings_by_client__primary=True,
+              coachings_by_client__user=ar.param_values.coached_by)
             #~ qs = qs.filter(
-              #~ pcsw_coaching_set_by_project__primary=True,
-              #~ pcsw_coaching_set_by_project__user=ar.get_user())
-            #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True)
+              #~ coachings_by_client__primary=True,
+              #~ coachings_by_client__user=ar.get_user())
+            #~ qs = qs.filter(coachings_by_client__primary=True)
         #~ if ar.param_values.client_state:
             #~ qs = qs.filter(client_state=ar.param_values.client_state)
         #~ qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
@@ -1458,7 +1428,7 @@ class MyClients(IntegClients):
     #~ @classmethod
     #~ def get_request_queryset(self,ar):
         #~ qs = super(MyPrimaryClients,self).get_request_queryset(ar)
-        #~ qs = qs.filter(pcsw_coaching_set_by_project__primary=True).distinct()
+        #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
         #~ return qs
 
 
@@ -2040,7 +2010,7 @@ class ClientContactTypes(dd.Table):
 
 
 #~ class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
-class ClientContact(mixins.ProjectRelated,contacts.ContactRelated):
+class ClientContact(contacts.ContactRelated):
     """
     project : the Client
     company : the Company
@@ -2051,6 +2021,7 @@ class ClientContact(mixins.ProjectRelated,contacts.ContactRelated):
         verbose_name = _("Client Contact")
         verbose_name_plural = _("Client Contacts")
     #~ type = ClientContactTypes.field(blank=True)
+    client = dd.ForeignKey(Client)
     type = dd.ForeignKey(ClientContactType,blank=True,null=True)
     remark = models.TextField(_("Remarks"),blank=True) # ,null=True)
     
@@ -2069,7 +2040,7 @@ class ClientContacts(dd.Table):
     model = ClientContact
     
 class ContactsByClient(ClientContacts):
-    master_key = 'project'
+    master_key = 'client'
     column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
 
@@ -2103,7 +2074,7 @@ Lifecycle of a :class:`Coaching`.
       
         if newstate.name == 'ended':
             ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
-              user=obj.user,client=obj.project))
+              user=obj.user,client=obj.client))
             obj.end_date = datetime.date.today()
     
 add = CoachingStates.add_item
@@ -2166,7 +2137,8 @@ class CoachingTypes(dd.Table):
 
 
 
-class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
+#~ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
+class Coaching(mixins.UserAuthored):
     """
 A Coaching (Begleitung, accompagnement) 
 is when a Client is being coached by a User (a social assistant) 
@@ -2179,6 +2151,7 @@ during a given period.
         
     workflow_state_field = 'state'
     
+    client = models.ForeignKey(Client,related_name="coachings_by_client")
     start_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("Coached from"))
@@ -2198,7 +2171,7 @@ during a given period.
         super(Coaching,self).full_clean(*args,**kw)
         
     def summary_row(self,ar,**kw):
-        return xghtml.E.p(ar.href_to(self.project)," (%s)" % self.state.text)
+        return xghtml.E.p(ar.href_to(self.client)," (%s)" % self.state.text)
         
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
@@ -2223,17 +2196,17 @@ class Coachings(dd.Table):
         #~ return qs
 
     
-class CoachingsByProject(Coachings):
-    master_key = 'project'
+class CoachingsByClient(Coachings):
+    master_key = 'client'
     order_by = ['start_date']
     column_names = 'start_date end_date type user state workflow_buttons *'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
-    column_names = 'start_date end_date project type *'
+    column_names = 'start_date end_date client type *'
 
 class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date project type state workflow_buttons *'
+    column_names = 'start_date end_date client type state workflow_buttons *'
 
 class MySuggestedCoachings(MyCoachings):
     label = _("Suggested coachings")
@@ -2241,6 +2214,18 @@ class MySuggestedCoachings(MyCoachings):
 
 
 
+def customize_users():
+    dd.inject_field(settings.LINO.user_model,
+        'coaching_type',
+        dd.ForeignKey(CoachingType,
+            blank=True,null=True,
+            help_text="""The default CoachingType used when creating Coachings."""))
+    dd.inject_field(settings.LINO.user_model,
+        'coaching_supervisor',
+        models.BooleanField(_("Coaching Supervisor"),
+            help_text="""Whether thi user is notified about newly assigned coachings."""))
+        
+  
 def customize_siteconfig():
     """
     Injects application-specific fields to :class:`SiteConfig <lino.models.SiteConfig>`.
@@ -2254,10 +2239,9 @@ def customize_siteconfig():
         models.ForeignKey(settings.LINO.company_model,
             blank=True,null=True,
             verbose_name=_("Local job office"),
-            related_name='job_office_sites'),
-        """The Company whose contact persons will be 
-        choices for `Person.job_office_contact`.
-        """)
+            related_name='job_office_sites',
+            help_text="""The Company whose contact persons 
+            will be choices for `Person.job_office_contact`."""))
         
     dd.inject_field(SiteConfig,
         'residence_permit_upload_type',
@@ -2607,16 +2591,22 @@ def site_setup(site):
     #~ """)
     
     site.modules.users.Users.set_detail_layout("""
-    box1:50 box2:25
+    box1:50 #box2:25
     remarks AuthoritiesGiven 
     """,
-    box2="""
-    newcomer_quota
+    coaching_a="""
+    newcomer_quota 
+    coaching_type 
+    coaching_supervisor
+    newcomers.CompetencesByUser
     """)
+    #~ box2="""
+    #~ newcomer_quota 
+    #~ """)
     
     site.modules.users.Users.add_detail_tab('coaching',"""
-    pcsw.CoachingsByUser
-    """)
+    coaching_a:20 pcsw.CoachingsByUser:40
+    """,_("Coaching"),)
     
         
     site.modules.notes.Notes.set_detail_layout(
@@ -2662,6 +2652,8 @@ customize_siteconfig()
 customize_contacts()        
 customize_notes()
 customize_sqlite()
+customize_users()
+
 #~ customize_user_groups()
 #~ customize_user_profiles()
 #~ setup_user_profiles()
@@ -2669,5 +2661,3 @@ customize_sqlite()
 
 
 
-    
-    

@@ -205,7 +205,7 @@ def migrate_from_1_4_10(globals_dict):
                 #~ pcsw_CoachingType
                 if user_id in (200085,200093,200096,200099): return 2 # DSBE
                 return 1
-            kw = dict(project_id=partner_ptr_id)
+            kw = dict(client_id=partner_ptr_id)
             kw.update(start_date=coached_from or SINCE_ALWAYS,end_date=coached_until)
             if coach2_id and coach2_id != coach1_id:
                 ti = user2type(coach2_id)
@@ -228,7 +228,7 @@ def migrate_from_1_4_10(globals_dict):
                 yield pcsw_Coaching(**kw)
               
                 #~ yield pcsw_Coaching(
-                    #~ project_id=partner_ptr_id,
+                    #~ client_id=partner_ptr_id,
                     #~ start_date=coached_from,
                     #~ end_date=coached_until,
                     #~ primary=True,
@@ -236,19 +236,19 @@ def migrate_from_1_4_10(globals_dict):
                     #~ type_id=user2type(coach1_id))
             if health_insurance_id:
                 yield pcsw_ClientContact(
-                    project_id=partner_ptr_id,
+                    client_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.health_insurance,
                     type_id=1,
                     company_id=health_insurance_id)
             if pharmacy_id:
                 yield pcsw_ClientContact(
-                    project_id=partner_ptr_id,
+                    client_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.pharmacy,
                     type_id=2,
                     company_id=pharmacy_id)
             if job_office_contact_id:
                 obj = pcsw_ClientContact(
-                    project_id=partner_ptr_id,
+                    client_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
                     company_id=settings.LINO.site_config.job_office.id)

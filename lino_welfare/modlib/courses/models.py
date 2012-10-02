@@ -313,7 +313,7 @@ class Courses(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = Course
     order_by = ['start_date']
-    detail_template = """
+    detail_layout = """
     id:8 start_date offer title 
     remark
     courses.ParticipantsByCourse
@@ -332,7 +332,7 @@ class CourseOffers(dd.Table):
     required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = CourseOffer
-    detail_template = """
+    detail_layout = """
     id:8 title content provider
     description
     CoursesByOffer
@@ -477,7 +477,7 @@ class CourseRequest(dd.Model):
 class CourseRequests(dd.Table):
     model = CourseRequest
     required=dict(user_groups=['integ'],user_level='manager')
-    detail_template = """
+    detail_layout = """
     date_submitted person content offer urgent 
     course state date_ended id:8 
     remark  uploads.UploadsByController 
