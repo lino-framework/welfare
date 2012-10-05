@@ -80,8 +80,8 @@ from lino.utils.xmlgen import html as xghtml
 from lino.utils.babel import dtos
 
 from lino.utils.choicelists import ChoiceList
-from lino.utils.choicelists import Gender
-from lino.modlib.users.models import UserLevels
+#~ from lino.utils.choicelists import Gender
+#~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.contacts import models as contacts
 from lino.core.modeltools import makedirs_if_missing
 #~ from lino.mixins.printable import DirectPrintAction
@@ -104,6 +104,7 @@ except ImportError, e:
 
 
 countries = dd.resolve_app('countries')
+contacts = dd.resolve_app('contacts')
 
 _clients_dict = dict()
 
@@ -125,9 +126,9 @@ def xsdpath(*parts):
 CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 
 def gender2cbss(gender):
-    if gender == Gender.male:
+    if gender == contacts.Gender.male:
         return '1'
-    elif gender == Gender.female:
+    elif gender == contacts.Gender.female:
         return '2'
     else:
         return '0'
@@ -135,9 +136,9 @@ def gender2cbss(gender):
 
 def cbss2gender(v):
     if v == '1':
-        return Gender.male
+        return contacts.Gender.male
     elif v == '2':
-        return Gender.female
+        return contacts.Gender.female
     return None
       
 def cbss2date(s):
@@ -1048,7 +1049,7 @@ class IdentifyPersonRequest(SSDNRequest,WithPerson):
       verbose_name=_('Middle name'),
       help_text="Whatever this means...")
       
-    gender = Gender.field(blank=True)
+    gender = contacts.Gender.field(blank=True)
         
     tolerance = models.IntegerField(verbose_name=_('Tolerance'),
       default=0,
@@ -1317,7 +1318,7 @@ class IdentifyPersonResult(dd.VirtualTable):
         return obj.first_name
         #~ return obj.childAtPath('/Basic/FirstName').text
             
-    @dd.virtualfield(Gender.field())
+    @dd.virtualfield(contacts.Gender.field())
     def gender(self,obj,ar):
         return obj.gender
         #~ return cbss2gender(obj.childAtPath('/Basic/Gender').text)
@@ -1820,7 +1821,7 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(Purposes)
   
 def setup_explorer_menu(site,ui,user,m):
-    if user.profile.cbss_level < UserLevels.manager: 
+    if user.profile.cbss_level < dd.UserLevels.manager: 
         return
     m  = m.add_menu("cbss",MODULE_LABEL)
     m.add_action(IdentifyPersonRequests)

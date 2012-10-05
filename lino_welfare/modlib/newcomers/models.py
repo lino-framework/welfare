@@ -28,7 +28,7 @@ from lino import dd
 #~ from lino.utils.babel import default_language
 #~ from lino import reports
 #~ from lino import layouts
-from lino.core.perms import UserProfiles, UserLevels
+#~ from lino.core.perms import UserProfiles, UserLevels
 from lino.utils.restify import restify
 #~ from lino.utils import printable
 from lino.utils.choosers import chooser
@@ -287,7 +287,7 @@ class AvailableCoaches(users.Users):
         
     @classmethod
     def get_request_queryset(self,ar):
-        profiles = [p for p in UserProfiles.items() if p.integ_level]
+        profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
         return super(AvailableCoaches,self,ar).filter(models.Q(profile__in=profiles))
         
         
@@ -399,7 +399,7 @@ class AvailableCoachesByClient(AvailableCoaches):
                 r = outbox.Recipient(mail=m,**rec)
                 r.full_clean()
                 r.save()
-            interactive = (ar.get_user().profile.office_level > UserLevels.user)
+            interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
             if interactive:
                 js = ar.renderer.instance_handler(ar,m)
                 kw.update(eval_js=js)

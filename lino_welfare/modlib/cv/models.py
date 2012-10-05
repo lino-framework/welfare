@@ -53,8 +53,8 @@ uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.users import models as users
-from lino.utils.choicelists import HowWell, Gender
-from lino.utils.choicelists import ChoiceList
+#~ from lino.utils.choicelists import HowWell
+#~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
@@ -89,7 +89,9 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 
 
 
-class CefLevel(ChoiceList):
+
+
+class CefLevel(dd.ChoiceList):
     """
     Levels of the Common European Framework (CEF).
     
@@ -141,8 +143,8 @@ class LanguageKnowledge(dd.Model):
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
     #~ language = models.ForeignKey("countries.Language")
     #~ language = fields.LanguageField()
-    spoken = HowWell.field(blank=True,verbose_name=_("spoken"))
-    written = HowWell.field(blank=True,verbose_name=_("written"))
+    spoken = properties.HowWell.field(blank=True,verbose_name=_("spoken"))
+    written = properties.HowWell.field(blank=True,verbose_name=_("written"))
     native = models.BooleanField(verbose_name=_("native language"))
     cef_level = CefLevel.field(blank=True) # ,null=True)
     

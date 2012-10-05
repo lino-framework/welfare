@@ -57,10 +57,9 @@ from lino.modlib.notes import models as notes
 from lino.modlib.uploads import models as uploads
 from lino.modlib.cal import models as cal
 from lino.modlib.users import models as users
-from lino.utils.choicelists import HowWell, Gender
-from lino.utils.choicelists import ChoiceList, Choice
-from lino.modlib.users.models import UserLevels
-#~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
+#~ from lino.utils.choicelists import Gender
+#~ from lino.utils.choicelists import ChoiceList
+#~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config
 from lino.core.modeltools import get_field
@@ -103,7 +102,7 @@ cal = dd.resolve_app('cal')
 
 from lino.utils.niss import niss_validator, is_valid_niss
 
-class CivilState(ChoiceList):
+class CivilState(dd.ChoiceList):
     """
     Civil states, using Belgian codes.
     
@@ -152,7 +151,7 @@ add('50', _("Separated"),'separated') # Getrennt von Tisch und Bett /
 
 # http://en.wikipedia.org/wiki/European_driving_licence
 
-class ResidenceType(ChoiceList):
+class ResidenceType(dd.ChoiceList):
     """
     Types of registries for the Belgian residence.
     
@@ -165,7 +164,7 @@ add('2', _("Registry of foreigners"))  # Fremdenregister        Registre des ét
 add('3', _("Waiting for registry"))    # Warteregister
 
 
-class BeIdCardType(ChoiceList):
+class BeIdCardType(dd.ChoiceList):
     """
     List of Belgian Identification Card Types.
     
@@ -1100,7 +1099,7 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Miscellaneous"))
     
 if not settings.LINO.use_beid_jslib:
-    ClientDetail.eid_panel = ClientDetail.eid_panel.replace('read_beid_card:12 ')
+    ClientDetail.eid_panel.replace('read_beid_card:12 ','')
     
 if settings.LINO.is_installed('cbss'):
     ClientDetail.main += ' cbss' 
@@ -1573,9 +1572,9 @@ class UsersWithClients(dd.VirtualTable):
         
         """
         #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-        if ar.get_user().profile.level < UserLevels.admin:
+        if ar.get_user().profile.level < dd.UserLevels.admin:
             profiles = [p for p in dd.UserProfiles.items() 
-                if p.integ_level and p.level < UserLevels.admin]
+                if p.integ_level and p.level < dd.UserLevels.admin]
         else:
             profiles = [p for p in dd.UserProfiles.items() if p.integ_level ]
             #~ qs = qs.exclude(profile__gte=UserLevels.admin)
@@ -1759,7 +1758,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
     aged_to = models.IntegerField(_("Aged to"),
         blank=True,null=True)
     #~ gender = contacts.GenderField()
-    gender = Gender.field(blank=True)
+    gender = contacts.Gender.field(blank=True)
 
     
     only_my_persons = models.BooleanField(_("Only my clients")) # ,default=True)
@@ -1809,8 +1808,8 @@ class MyPersonSearches(PersonSearches,mixins.ByUser):
 class WantedLanguageKnowledge(dd.Model):
     search = models.ForeignKey(PersonSearch)
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
-    spoken = HowWell.field(blank=True,verbose_name=_("spoken"))
-    written = HowWell.field(blank=True,verbose_name=_("written"))
+    spoken = properties.HowWell.field(blank=True,verbose_name=_("spoken"))
+    written = properties.HowWell.field(blank=True,verbose_name=_("written"))
 
 class WantedSkill(properties.PropertyOccurence):
     class Meta:

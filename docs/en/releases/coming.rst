@@ -28,8 +28,9 @@ Lösung gemeldeter Probleme
 --------------------------
 
 - "Bei einer Firma wechselt der Direktor. 
-  In den Kontaktpersonen der Firma wollen wir den alten Direktor nicht mehr sehen,
-  aber es gibt Verträge, bei denen der die Firma vertritt."
+  In den Kontaktpersonen der Firma wollen wir den alten 
+  Direktor nicht mehr sehen,
+  aber es gibt Verträge, bei denen er die Firma vertritt."
   --> in den Verträgen (VSE und Art 60-7) wurde das bisherige 
   Feld `contact` ersetzt durch zwei Felder `contact_person` 
   und `contact_function`. 
@@ -42,6 +43,10 @@ Lösung gemeldeter Probleme
   "Aus TIM importierte Partner d\xfcrfen nicht gelöscht werden."
 
 - AG-Sperren: Feld "Begründung" darf jetzt leer sein.  
+
+- Wenn hochgeladene Datei Sonderzeichen im Namen hat, werden diese ab jetzt auf dem Server durch Unterstriche ersetzt (statt dass Lino im "Bitte warten..."-Modus steckenbleibt und der Systemverwalter per E-Mail einen Traceback  `UnicodeEncodeError 'ascii' codec can't encode character u'...' in position ...: ordinal not in range(128)` kriegt.
+
+
 
 Neue Features
 --------------
@@ -61,13 +66,13 @@ Neue Features
   newcomer ersetzt Status "Neu".
   Siehe :doc:`/user/clients`.
   
+- Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
+  `Begleiter 1 und 2`. Siehe auch Begleitungsart (primär, sekundär). 
+  
 - Neue Tabelle "Änderungen" auf Klienten und Verträgen zeigt 
   geloggte Änderungen im Webinterface statt in der `system.log`.
 
 - Neue Felder "Erstellt am/um" und "Letzte Änderung" pro `Partner`.
-  
-- Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
-  `Begleiter 1 und 2`. Siehe auch Begleitungsart (primär, sekundär). 
   
 - Neue Tabelle "Klientenkontakte" ersetzt die bisherigen Felder 
   `Ansprechpartner ADG`,  `Krankenkasse`, und `Apotheke`.

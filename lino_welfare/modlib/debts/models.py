@@ -59,9 +59,9 @@ from lino.modlib.notes import models as notes
 from lino.modlib.uploads import models as uploads
 from lino.modlib.cal import models as cal
 #~ from lino.modlib.users import models as users
-from lino.utils.choicelists import HowWell, Gender
+#~ from lino.utils.choicelists import HowWell, Gender
 #~ from lino.core.perms import UserLevels
-from lino.utils.choicelists import ChoiceList
+#~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
@@ -345,10 +345,10 @@ The monthly amount available for distribution among debtors."""))
                 for m in household.member_set.all():
                     #~ if m.role and m.role.header:
                         #~ header = m.role.header
-                    if m.person.gender == Gender.male and not mr:
+                    if m.person.gender == contacts.Gender.male and not mr:
                         header = unicode(_("Mr."))
                         mr = True
-                    elif m.person.gender == Gender.female and not mrs:
+                    elif m.person.gender == contacts.Gender.female and not mrs:
                         header = unicode(_("Mrs."))
                         mrs = True
                     else:

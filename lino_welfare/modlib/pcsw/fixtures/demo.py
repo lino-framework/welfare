@@ -24,6 +24,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
 
+from lino import dd
 from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
 from lino.core.modeltools import resolve_model
@@ -33,12 +34,11 @@ from lino.utils import dblogger
 #~ from lino.models import update_site_config
 from lino.utils import mti
 from lino.utils.niss import gen_niss
-from lino import dd
 
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
-#~ from lino.modlib.contacts.utils import GENDER_FEMALE, GENDER_MALE
-from lino.utils.choicelists import Gender
+from lino.modlib.contacts.utils import Gender
+#~ from lino.utils.choicelists import Gender
 from lino_welfare.modlib.jobs import models as jobs
 from lino.modlib.contacts import models as contacts
 from lino.modlib.countries import models as countries
@@ -998,10 +998,10 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
                 
 
     newcomers = dd.resolve_app('newcomers')
-    from lino.core.perms import UserProfiles
+    #~ from lino.utils.choicelists import UserProfiles
     
     FACULTIES = Cycler(newcomers.Faculty.objects.all())
-    profiles = [p for p in UserProfiles.items() if p.integ_level]
+    profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
     USERS = Cycler(User.objects.filter(profile__in=profiles))
     for i in range(7):
         yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())

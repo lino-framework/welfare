@@ -117,7 +117,7 @@ class Lino(Lino):
     def setup_menu(self,ui,user,main):
         from django.utils.translation import ugettext_lazy as _
         from django.db import models
-        from lino.modlib.users.models import UserLevels
+        from lino.utils.choicelists import UserLevels
         
         m = main.add_menu("master",_("Master"))
         
