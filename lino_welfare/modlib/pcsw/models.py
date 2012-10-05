@@ -312,22 +312,23 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           '''name first_name last_name title birth_date gender is_client
           ''')
         
-class RefuseNewClient(dd.Dialog):
-    title = _("Refuse new client")
-    reason = models.CharField(max_length=200,verbose_name=_("Reason"))
-    dummy = models.BooleanField(verbose_name=_("Dummy"))
-    detail_layout = """
-    reason
-    dummy
-    """
+#~ class RefuseNewClientDialog(dd.Dialog):
+    #~ title = _("Refuse new client")
+    #~ reason = models.CharField(max_length=200,verbose_name=_("Reason"))
+    #~ dummy = models.BooleanField(verbose_name=_("Dummy"))
+    #~ detail_layout = """
+    #~ reason
+    #~ dummy
+    #~ """
     
-class RefuseNewClient(dd.ChangeStateAction):    
+class RefuseNewClient(dd.ChangeStateAction):
     label = _("Refuse")
     required = dict(states='new invalid',user_groups='newcomers')
     parameters = dict(
       reason = models.CharField(max_length=200,verbose_name=_("Reason")),
       dummy = models.BooleanField(verbose_name=_("Dummy RefuseNewClient")),
     )  
+    #~ params_layout = """reason dummy"""
     
 class ClientStates(dd.Workflow):
     label = _("Client state")
@@ -338,7 +339,7 @@ class ClientStates(dd.Workflow):
         if newstate.name == 'refused':
             print ar.action_param_values
             
-            dlg = ar.dialog(RefuseNewClient)
+            dlg = ar.dialog(RefuseNewClientDialog)
             obj.set_change_summary(dlg.reason)
             
         elif newstate.name == 'former':

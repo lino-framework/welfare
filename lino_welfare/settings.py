@@ -50,7 +50,10 @@ class Lino(Lino):
         return __file__
         
     def get_main_action(self,user):
-        return self.modules.lino.Home.default_action
+        a = self.modules.lino.Home.default_action
+        if a is None:
+            raise Exception("20121004 self.modules.lino.Home.get_url_action('default_action') returned None")
+        return a
         
     def get_application_info(self):
         from lino_welfare import __version__, __url__
@@ -101,7 +104,8 @@ class Lino(Lino):
         #~ tb.add_action(self.modules.contacts.Persons().detail)
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
-        tb.add_action(self.modules.pcsw.Clients.detail_action)
+        #~ tb.add_action(self.modules.pcsw.Clients.detail_action)
+        tb.add_action('pcsw.Clients','detail_action')
         self.on_each_app('setup_quicklinks',ui,user,tb)
         
         tb.add_action(self.modules.pcsw.MyClients)

@@ -412,6 +412,8 @@ class PAR(Controller):
         
     def get_object(self,kw):
         id = kw['id']
+        if not id:
+            return None
         #~ possible_models = [Client, Person, Company, Household]
         #~ model = PAR_model(kw['data'])
         #~ delete_child
@@ -512,7 +514,8 @@ class PXS(Controller):
         #~ self.PUT(**kw)
         
         
-class PLZ(PAR):
+#~ class PLZ(PAR): # 20121003 why was this? caused AttributeError 'City' object has no attribute 'street'
+class PLZ(Controller):
   
     model = City
     
