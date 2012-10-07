@@ -167,11 +167,11 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     #~ column_names = "name_column broker address_column *"
         
 class NewClientDetail(pcsw.ClientDetail):
-    main = pcsw.ClientDetail.main + " newcomers"
+    main = "newcomers " + pcsw.ClientDetail.main
     
     newcomers = dd.Panel("""
     broker:12 faculty:12  
-    client_state workflow_buttons
+    workflow_buttons
     AvailableCoachesByClient
     """,label=_(MODULE_LABEL))
     

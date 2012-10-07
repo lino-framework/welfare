@@ -324,6 +324,7 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
 class RefuseNewClient(dd.ChangeStateAction):
     label = _("Refuse")
     required = dict(states='new invalid',user_groups='newcomers')
+    help_text=_("Write a refusal note and remove the new client request.")
     parameters = dict(
       reason = models.CharField(max_length=200,verbose_name=_("Reason")),
       dummy = models.BooleanField(verbose_name=_("Dummy RefuseNewClient")),
@@ -366,7 +367,7 @@ add('50', _("Former"),'former')
 add('60', _("Invalid"),'invalid')
 
 ClientStates.new.add_workflow(states='refused coached invalid',user_groups='newcomers')
-ClientStates.refused.add_workflow(RefuseNewClient)   
+ClientStates.refused.add_workflow(RefuseNewClient)
 #~ ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers')
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
 ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
@@ -1277,6 +1278,7 @@ class IntegClients(Clients):
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
     use_as_default_table = False
+    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     parameters = dict(
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
@@ -2593,7 +2595,7 @@ def site_setup(site):
     calendar summary user project 
     start end 
     place priority access_class transparent #rset 
-    owner state workflow_buttons
+    owner workflow_buttons
     description GuestsByEvent 
     """,_("General"))
     site.modules.cal.Events.add_detail_panel("more","""

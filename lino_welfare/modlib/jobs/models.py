@@ -431,9 +431,13 @@ class Contract(ContractBase):
             return df 
         return df + self.PRINTABLE_FIELDS
         
-    #~ def save(self,*args,**kw):
-        #~ if self.job_id is not None:
-            #~ qs = self.person.candidature_set.filter(contract=self)
+    def save(self,*args,**kw):
+        if self.job_id is not None:
+            if self.applies_until is not None and self.applies_until > datetime.date.today():
+                for candi in self.client.candidature_set.filter(active=True):
+                    candi.active = False
+                    candi.save()
+            #~ qs = self.client.candidature_set.filter(contract=self)
             #~ if qs.count() == 0:
                 #~ qs = self.person.candidature_set.filter(job=self.job,contract=None)
                 #~ if qs.count() == 1: 
@@ -442,8 +446,8 @@ class Contract(ContractBase):
                     #~ obj.save()
                     #~ dblogger.info(u'Marked job request %s as satisfied by %s' % (
                       #~ obj,self))
-        #~ r = super(Contract,self).save(*args,**kw)
-        #~ return r
+        r = super(Contract,self).save(*args,**kw)
+        return r
         
     #~ def data_control(self):
         #~ "Used by :class:`lino.models.DataControlListing`."
