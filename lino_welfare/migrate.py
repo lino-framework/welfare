@@ -72,6 +72,7 @@ def migrate_from_1_4_10(globals_dict):
     isip_Contract = resolve_model("isip.Contract")
     jobs_Contract = resolve_model("jobs.Contract")
     contacts_Role = resolve_model("contacts.Role")
+    properties_PropType = resolve_model("properties.PropType")
     
     NOW = datetime.datetime(2012,9,6,0,0)
     
@@ -367,6 +368,14 @@ def migrate_from_1_4_10(globals_dict):
         obj._before_dumpy_save = add_contact_fields(obj,contact_id)
         return obj
     globals_dict.update(create_jobs_contract=create_jobs_contract)
+    
+    def create_properties_proptype(id, name, choicelist, default_value, limit_to_choices, multiple_choices, name_fr, name_en):
+        if choicelist == 'HowWell':
+            choicelist = 'properties.HowWell'
+        elif choicelist == 'Gender':
+            choicelist = 'contacts.Gender'
+        return properties_PropType(id=id,name=name,choicelist=choicelist,default_value=default_value,limit_to_choices=limit_to_choices,multiple_choices=multiple_choices,name_fr=name_fr,name_en=name_en)    
+    globals_dict.update(create_properties_proptype=create_properties_proptype)
     
     objects = globals_dict['objects']
     def new_objects():
