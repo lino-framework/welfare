@@ -206,9 +206,18 @@ add('17', _("Foreigner card F"))
 add('18', _("Foreigner card F+"))
 
 
+class ImportedFields(object):
+    _imported_fields = set()
+    
+    @classmethod
+    def declare_imported_fields(cls,names):
+        cls._imported_fields = cls._imported_fields | set(dd.fields_list(cls,names))
+        #~ logger.info('20120801 %s.declare_imported_fields() --> %s' % (
+            #~ cls,cls._imported_fields))
+        
 #~ class CpasPartner(dd.Model,mixins.DiffingMixin):
 #~ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
-class Partner(contacts.Partner,mixins.CreatedModified):
+class Partner(contacts.Partner,mixins.CreatedModified,ImportedFields):
     """
     """
     
@@ -242,14 +251,6 @@ class Partner(contacts.Partner,mixins.CreatedModified):
         blank=True,# null=True,
         verbose_name=_("Bank account 2"))
         
-        
-    _imported_fields = set()
-    
-    @classmethod
-    def declare_imported_fields(cls,names):
-        cls._imported_fields = cls._imported_fields | set(dd.fields_list(cls,names))
-        #~ logger.info('20120801 %s.declare_imported_fields() --> %s' % (
-            #~ cls,cls._imported_fields))
         
     @classmethod
     def site_setup(cls,site):
@@ -1078,7 +1079,7 @@ class ClientDetail(dd.FormLayout):
     
     history = dd.Panel("""
     pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
-    lino.ChangesByObject:30
+    lino.ChangesByMaster:30
     """,label = _("History"))
     
     outbox = dd.Panel("""
@@ -2138,7 +2139,7 @@ class CoachingTypes(dd.Table):
 
 
 #~ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
-class Coaching(mixins.UserAuthored):
+class Coaching(mixins.UserAuthored,ImportedFields):
     """
 A Coaching (Begleitung, accompagnement) 
 is when a Client is being coached by a User (a social assistant) 
@@ -2163,12 +2164,39 @@ during a given period.
     type = dd.ForeignKey(CoachingType,blank=True,null=True)
     primary = models.BooleanField(_("Primary"))
     
+    def disabled_fields(self,ar):
+        #~ logger.info("20120731 CpasPartner.disabled_fields()")
+        #~ raise Exception("20120731 CpasPartner.disabled_fields()")
+        if settings.LINO.is_imported_partner(self.client):
+            if self.primary:
+                return self._imported_fields
+        return []
+        
+    def disable_delete(self,ar):
+        if ar is not None and settings.LINO.is_imported_partner(self):
+            if self.primary:
+                return _("Cannot delete companies and persons imported from TIM")
+        return super(Coaching,self).disable_delete(ar)
+        
+    @classmethod
+    def site_setup(cls,site):
+        super(Coaching,cls).site_setup(site)
+        cls.declare_imported_fields('''client user''')
+        
     def full_clean(self,*args,**kw):
         if not isrange(self.start_date,self.end_date):
             raise ValidationError(_("Coaching period ends before it started."))
         if not self.start_date and not self.end_date:
             self.start_date = datetime.date.today()
         super(Coaching,self).full_clean(*args,**kw)
+        
+    def save(self,*args,**kw):
+        super(Coaching,self).save(*args,**kw)
+        if self.primary:
+            for c in self.client.coachings_by_client.exclude(id=self.id):
+                if c.primary:
+                    c.primary = False
+                    c.save()
         
     def summary_row(self,ar,**kw):
         return xghtml.E.p(ar.href_to(self.client)," (%s)" % self.state.text)
@@ -2199,14 +2227,14 @@ class Coachings(dd.Table):
 class CoachingsByClient(Coachings):
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date type user state workflow_buttons *'
+    column_names = 'start_date end_date user type primary workflow_buttons *'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
     column_names = 'start_date end_date client type *'
 
 class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date client type state workflow_buttons *'
+    column_names = 'start_date end_date client type workflow_buttons *'
 
 class MySuggestedCoachings(MyCoachings):
     label = _("Suggested coachings")

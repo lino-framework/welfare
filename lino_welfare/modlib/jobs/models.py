@@ -983,6 +983,8 @@ class Candidature(SectorFunction):
         blank=True,null=True,
         verbose_name=_("Remark"))
         
+    active = models.BooleanField(_("Active"),default=True)
+        
     def __unicode__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
@@ -1014,7 +1016,7 @@ class Candidatures(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = Candidature
     order_by = ['date_submitted']
-    column_names = 'date_submitted job:25 * id'
+    column_names = 'date_submitted job:25 active * id'
 
 class CandidaturesByPerson(Candidatures):
     required = dict(user_groups='integ')
