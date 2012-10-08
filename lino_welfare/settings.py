@@ -96,11 +96,15 @@ class Lino(Lino):
         self.modules.pcsw.ClientContact.watch_changes(master_key='client')
         self.modules.jobs.Candidature.watch_changes(master_key='person')
         self.modules.notes.Note.watch_changes(master_key='project')
+        self.modules.outbox.Mail.watch_changes(master_key='project')
+        self.modules.debts.Budget.watch_changes(master_key='partner')
         
         # ContractBase is abstract, so it's not under self.modules
         from lino_welfare.modlib.isip.models import ContractBase
         ContractBase.watch_changes(master_key='client')
         
+        from lino_welfare.modlib.cbss.models import CBSSRequest
+        CBSSRequest.watch_changes(master_key='person')
                 
             
 

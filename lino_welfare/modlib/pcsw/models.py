@@ -99,6 +99,7 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
+newcomers = dd.resolve_app('newcomers')
 
 from lino.utils.niss import niss_validator, is_valid_niss
 
@@ -559,6 +560,13 @@ class Client(Person):
             #~ logger.error("get_primary_coach() found more than 1 primary coachings for %s",self)
         #~ return None
         
+        
+    def get_default_table(self,ar):
+        if ar.get_user().profile.integ_level and self.client_state == ClientStates.coached:
+            return IntegClients
+        if ar.get_user().profile.newcomer_level:
+            return newcomers.NewClients
+        return Clients # self._lino_default_table
         
     
     
@@ -2164,26 +2172,37 @@ during a given period.
     state = CoachingStates.field(default=CoachingStates.active)
     #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType,blank=True,null=True)
-    primary = models.BooleanField(_("Primary"))
+    primary = models.BooleanField(_("Primary"),
+        help_text=_("""There's at most one primary coach per client. 
+Enabling this field will automatically make the other coachings non-primary."""))
     
+    @classmethod
+    def site_setup(cls,site):
+        super(Coaching,cls).site_setup(site)
+        cls.declare_imported_fields('''client user primary''')
+        
     def disabled_fields(self,ar):
-        #~ logger.info("20120731 CpasPartner.disabled_fields()")
-        #~ raise Exception("20120731 CpasPartner.disabled_fields()")
         if settings.LINO.is_imported_partner(self.client):
             if self.primary:
                 return self._imported_fields
+            return ['primary']
         return []
         
     def disable_delete(self,ar):
-        if ar is not None and settings.LINO.is_imported_partner(self):
+        if ar is not None and settings.LINO.is_imported_partner(self.client):
             if self.primary:
                 return _("Cannot delete companies and persons imported from TIM")
         return super(Coaching,self).disable_delete(ar)
         
-    @classmethod
-    def site_setup(cls,site):
-        super(Coaching,cls).site_setup(site)
-        cls.declare_imported_fields('''client user''')
+    def after_ui_save(self,ar,**kw):
+        kw = super(Coaching,self).after_ui_save(ar,**kw)
+        if self.primary:
+            for c in self.client.coachings_by_client.exclude(id=self.id):
+                if c.primary:
+                    c.primary = False
+                    c.save()
+                    kw.update(refresh_all=True)
+        return kw
         
     def full_clean(self,*args,**kw):
         if not isrange(self.start_date,self.end_date):
@@ -2192,13 +2211,8 @@ during a given period.
             self.start_date = datetime.date.today()
         super(Coaching,self).full_clean(*args,**kw)
         
-    def save(self,*args,**kw):
-        super(Coaching,self).save(*args,**kw)
-        if self.primary:
-            for c in self.client.coachings_by_client.exclude(id=self.id):
-                if c.primary:
-                    c.primary = False
-                    c.save()
+    #~ def save(self,*args,**kw):
+        #~ super(Coaching,self).save(*args,**kw)
         
     def summary_row(self,ar,**kw):
         return xghtml.E.p(ar.href_to(self.client)," (%s)" % self.state.text)
