@@ -564,7 +564,7 @@ class Client(Person):
     def get_default_table(self,ar):
         if ar.get_user().profile.integ_level and self.client_state == ClientStates.coached:
             return IntegClients
-        if ar.get_user().profile.newcomer_level:
+        if ar.get_user().profile.newcomers_level: 
             return newcomers.NewClients
         return Clients # self._lino_default_table
         

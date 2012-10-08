@@ -7,77 +7,131 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-18 23:22+0100\n"
-"PO-Revision-Date: 2012-02-05 02:06+0200\n"
+"POT-Creation-Date: 2012-10-08 04:32+0100\n"
+"PO-Revision-Date: 2012-10-08 06:42+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.3\n"
 
-#: .\models.py:55
-msgid "Broker"
-msgstr "Vermittler"
-
-#: .\models.py:56
-msgid "Brokers"
-msgstr "Vermittler"
-
-#: .\models.py:84
-msgid "Faculty"
-msgstr "Fachbereich"
-
-#: .\models.py:85
-msgid "Faculties"
-msgstr "Fachbereiche"
-
-#: .\models.py:108
-msgid "Competence"
-msgstr "Kompetenz"
-
-#: .\models.py:109
-msgid "Competences"
-msgstr "Kompetenzen"
-
-#: .\models.py:158 .\models.py:291
+#: .\models.py:50
 msgid "Newcomers"
 msgstr "Neuzugänge"
 
-#: .\models.py:167 .\models.py:280
+#: .\models.py:58
+msgid "Broker"
+msgstr "Vermittler"
+
+#: .\models.py:59
+msgid "Brokers"
+msgstr "Vermittler"
+
+#: .\models.py:87
+msgid "Faculty"
+msgstr "Fachbereich"
+
+#: .\models.py:88
+msgid "Faculties"
+msgstr "Fachbereiche"
+
+#: .\models.py:111
+msgid "Competence"
+msgstr "Kompetenz"
+
+#: .\models.py:112
+msgid "Competences"
+msgstr "Kompetenzen"
+
+#: .\models.py:182 .\models.py:335
 msgid "New Clients"
 msgstr "Neue Klienten"
 
-#: .\models.py:219
-msgid "Users by Newcomer"
-msgstr "Sozis vorschlagen"
+#: .\models.py:197
+msgid "Also refused clients"
+msgstr "Auch abgelehnte Klienten"
 
-#: .\models.py:223
+#: .\models.py:198
+msgid "Also obsolete clients"
+msgstr "Auch veraltte Klienten"
+
+#: .\models.py:200
+msgid "Also newly coached clients since"
+msgstr "Auch neu begleitete Klienten seit"
+
+#: .\models.py:202
+msgid "Coached by"
+msgstr "Begleitet durch"
+
+#: .\models.py:242
+msgid "refused"
+msgstr "abgelehnt"
+
+#: .\models.py:244
+msgid "obsolete"
+msgstr "Altdaten"
+
+#: .\models.py:246
+msgid "new since"
+msgstr "Neue Klienten seit"
+
+#: .\models.py:273
+msgid "Available Coaches"
+msgstr "Verfügbare Begleiter"
+
+#: .\models.py:277
 msgid "Show suggested agents for"
 msgstr "Zeige Vorschläge für"
 
-#: .\models.py:225
+#: .\models.py:279
 msgid "Count Newcomers since"
 msgstr "Neue Klienten seit"
 
-#: .\models.py:272
+#: .\models.py:325
 msgid "Primary clients"
 msgstr "Komplette Akten"
 
-#: .\models.py:276
+#: .\models.py:330
 msgid "Active clients"
 msgstr "Aktive Klienten"
 
-#: .\models.py:284
+#: .\models.py:339
 msgid "Score"
 msgstr "Quote"
 
-#: .\models.py:296
+#: .\models.py:356
+msgid "Assign"
+msgstr "Zuweisen"
+
+#: .\models.py:364
+#, python-format
+msgid "Cannot assign client %(client)s with invalid NISS %(niss)s."
+msgstr ""
+"Klient %(client)s mit ungültiger NR-Nummer %(niss)s kann nicht zugewiesen "
+"werden."
+
+#: .\models.py:366
+#, python-format
+msgid "Assign client %(client)s for coaching by %(user)s."
+msgstr "Kliente %(client)s zuweisen zu Begleiter %(user)s."
+
+#: .\models.py:367
+msgid "Are you sure?"
+msgstr "Sind Sie sicher?"
+
+#: .\models.py:380
+#, python-format
+msgid "Client %(client)s has been assigned to %(user)s"
+msgstr "Klient %(client)s wurde zugewiesen zu Begleiter %(user)s"
+
+#: .\models.py:420
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
 
-#~ msgid "Coached by"
-#~ msgstr "Begleitet durch"
+#~ msgid "Users by Newcomer"
+#~ msgstr "Sozis vorschlagen"
 
 #~ msgid "Since"
 #~ msgstr "Seit"

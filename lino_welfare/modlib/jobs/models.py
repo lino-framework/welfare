@@ -431,7 +431,22 @@ class Contract(ContractBase):
             return df 
         return df + self.PRINTABLE_FIELDS
         
-    def save(self,*args,**kw):
+    def after_ui_save(self,ar,**kw):
+        kw = super(Contract,self).after_ui_save(ar,**kw)
+        if self.job_id is not None:
+            if self.applies_until is not None and self.applies_until > datetime.date.today():
+                n = 0
+                for candi in self.client.candidature_set.filter(active=True):
+                    candi.active = False
+                    candi.save()
+                    n += 1
+                if n:
+                    kw.update(message=kw['message']+' '
+                      +unicode(_("(%d candidatures have been marked inactive)")) % n)
+                    kw.update(alert=_("Success"))
+        return kw
+        
+    def unused_save(self,*args,**kw):
         if self.job_id is not None:
             if self.applies_until is not None and self.applies_until > datetime.date.today():
                 for candi in self.client.candidature_set.filter(active=True):
