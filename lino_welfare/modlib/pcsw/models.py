@@ -359,7 +359,7 @@ class ClientStates(dd.Workflow):
                 kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("New"),'new') # "N" in PAR->Attrib
+add('10', _("Newcomer"),'new') # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
 add('20', _("Refused"),'refused')
 # coached: neither newcomer nor former, IdPrt != "I"
@@ -373,6 +373,8 @@ ClientStates.refused.add_workflow(RefuseNewClient)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
 ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+
+
     
 class Client(Person):
   
@@ -588,23 +590,6 @@ class Client(Person):
         owned.project = self
         super(Client,self).update_owned_instance(owned)
 
-    def get_active_contract(self):
-        """
-        Return the one and only active contract on this client.
-        If there are more than 1 active contracts, return None.
-        """
-        v = datetime.date.today()
-        q1 = Q(applies_from__isnull=True) | Q(applies_from__lte=v)
-        q2 = Q(applies_until__isnull=True) | Q(applies_until__gte=v)
-        q3 = Q(date_ended__isnull=True) | Q(date_ended__gte=v)
-        flt = Q(q1,q2,q3)
-        #~ flt = range_filter(datetime.date.today(),'applies_from','applies_until')
-        qs1 = self.isip_contract_set_by_person.filter(flt)
-        qs2 = self.jobs_contract_set_by_person.filter(flt)
-        if qs1.count() + qs2.count() == 1:
-            if qs1.count() == 1: return qs1[0]
-            if qs2.count() == 1: return qs2[0]
-        
     #~ def full_clean(self,*args,**kw):
         #~ if not isrange(self.coached_from,self.coached_until):
             #~ raise ValidationError(u'Coaching period ends before it started.')
@@ -812,21 +797,47 @@ class Client(Person):
         return rr.renderer.quick_upload_buttons(r)
     #~ driving_licence.return_type = dd.DisplayField(_("driving licence"))
     
-    #~ @dd.displayfield(_("CBSS Identify Person"))
-    #~ def cbss_identify_person(self,rr):
-        #~ r = rr.spawn(
-              #~ settings.LINO.modules.cbss.IdentifyRequestsByPerson,
-              #~ master_instance=self)
-        #~ return rr.renderer.quick_add_buttons(r)
-
-    #~ @dd.displayfield(_("CBSS Retrieve TI Groups"))
-    #~ def cbss_retrieve_ti_groups(self,rr):
-        #~ r = rr.spawn(
-              #~ settings.LINO.modules.cbss.RetrieveTIGroupsRequestsByPerson,
-              #~ master_instance=self)
-        #~ return rr.renderer.quick_add_buttons(r)
-
-
+    def get_active_contract(self):
+        """
+        Return the one and only "active contract" of this client.
+        
+        There might be no active contract today, 
+        but one contract in the future *or* one contract in the past.
+        
+        Or there may be several contracts,
+        and only one of them ends in the future.
+        
+        Otherwise return `None`, meaning that Lino fails 
+        to decide which contact must be 
+        considerd "active"..
+        
+        """
+        
+        def the_one_and_only(qs1,qs2):
+            if qs1.count() + qs2.count() == 1:
+                if qs1.count() == 1: return qs1[0]
+                if qs2.count() == 1: return qs2[0]
+              
+        # past and future
+        qs1 = self.isip_contract_set_by_client.all()
+        qs2 = self.jobs_contract_set_by_client.all()
+        c = the_one_and_only(qs1,qs2)
+        if c is not None: return c
+        
+        # only present and future
+        today = datetime.date.today()
+        #~ q1 = Q(applies_from__isnull=True) | Q(applies_from__lte=today)
+        #~ q2 = Q(applies_until__isnull=True) | Q(applies_until__gte=today)
+        q2 = Q(applies_until__gte=today)
+        q3 = Q(date_ended__isnull=True) | Q(date_ended__gte=today)
+        #~ flt = Q(q1,q2,q3)
+        flt = Q(q2,q3)
+        qs1 = self.isip_contract_set_by_client.filter(flt)
+        qs2 = self.jobs_contract_set_by_client.filter(flt)
+        
+        return the_one_and_only(qs1,qs2)
+        
+        
     @dd.virtualfield(models.DateField(_("Contract starts")))
     def applies_from(obj,ar):
         c = obj.get_active_contract()
@@ -1286,7 +1297,7 @@ class IntegClients(Clients):
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
     use_as_default_table = False
-    column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
+    column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     parameters = dict(
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
@@ -2063,19 +2074,6 @@ class CoachingStates(dd.Workflow):
 Lifecycle of a :class:`Coaching`.
     
     
-.. graphviz:: 
-
-   digraph foo {
-      suggested -> refused [label="[refuse]"];
-      standby -> refused;
-      suggested -> active [label="[accept]"];
-      standby -> active [label="[reactivate]"];
-      active -> standby;
-      standby -> ended [label="[end coaching]"];
-      active -> ended [label="[end coaching]"];
-      
-   }
-   
 
     """
     label = _("Coaching state")
@@ -2419,7 +2417,7 @@ def customize_sqlite():
 
 
 class Home(cal.Home):
-    #~ debug_permissions = True
+    debug_permissions = True
     label = cal.Home.label
     app_label = 'lino'
     detail_layout = """
@@ -2483,7 +2481,7 @@ def setup_my_menu(site,ui,user,m):
               #~ label=pg.name,
               #~ params=dict(master_instance=pg))
               
-        m = m.add_menu("pcsw",MODULE_LABEL)
+        #~ m = m.add_menu("pcsw",MODULE_LABEL)
         m.add_action(MyClients)
         #~ m.add_action(Clients)
         m.add_action(MyCoachings)

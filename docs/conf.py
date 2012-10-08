@@ -16,6 +16,7 @@ import lino_welfare
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.settings'
 
+
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
