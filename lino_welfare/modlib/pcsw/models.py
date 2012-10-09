@@ -340,6 +340,8 @@ class RefuseNewClient(dd.ChangeStateAction):
 class ClientStates(dd.Workflow):
     label = _("Client state")
     
+    #~ debug_permissions = True
+    
     @classmethod
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):
       
@@ -2422,7 +2424,7 @@ def customize_sqlite():
 
 
 class Home(cal.Home):
-    debug_permissions = True
+    #~ debug_permissions = True
     label = cal.Home.label
     app_label = 'lino'
     detail_layout = """

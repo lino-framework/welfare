@@ -419,14 +419,14 @@ The raw XML response received.
         self.environment = ''
         super(CBSSRequest,self).on_duplicate(ar,master)
         
-    def get_row_permission(self,user,state,action):
+    def get_row_permission(self,user,state,ba):
         """
         CBSS requests that have a `ticket` may never be modified.
         """
         #~ logger.info("20120622 CBSSRequest.get_row_permission %s %s", self.ticket, action.readonly)
-        if self.ticket and not action.readonly: 
+        if self.ticket and not ba.action.readonly: 
             return False
-        return super(CBSSRequest,self).get_row_permission(user,state,action)
+        return super(CBSSRequest,self).get_row_permission(user,state,ba)
         
     def on_cbss_ok(self,reply):
         """

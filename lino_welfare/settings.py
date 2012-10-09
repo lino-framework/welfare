@@ -113,7 +113,7 @@ class Lino(Lino):
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
         #~ tb.add_action(self.modules.pcsw.Clients.detail_action)
-        tb.add_action('pcsw.Clients','detail_action')
+        tb.add_action('pcsw.Clients','detail')
         self.on_each_app('setup_quicklinks',ui,user,tb)
         
         tb.add_action(self.modules.pcsw.MyClients)
