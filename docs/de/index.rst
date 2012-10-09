@@ -16,5 +16,6 @@ Inhalt
    :maxdepth: 1
 
    about/index
+   releases/index
    user/index
    

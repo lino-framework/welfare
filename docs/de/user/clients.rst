@@ -1,19 +1,36 @@
+========
 Klienten
 ========
 
 
+Klienten
+========
+
 Klienten gibt es momentan in drei Tabellen:
 
-- Clients : allgemeine Liste, die jeder Bentuzer sehen darf.
+- Clients : allgemeine Liste, die jeder Benutzer sehen darf.
 
-- IntegClients : DSBE-Spezifische Kundenliste.
+- IntegClients : DSBE-spezifische Kundenliste.
   Zeigt immer nur **begleitete** Kunden. 
+  Hier kann man keine neuen Klienten anlegen.
   Die Reiter Kompetenzen, Verträge... finden sich nur hier.
   
 - NewClients : spezielle Liste für Kundenverwaltung, insbesondere 
   die Zuweisung von Neuanträgen.
 
 
+
+
+Arbeitsabläufe
+==============
+
+Wortschatz:
+
+- Workflow : Arbeitsablauf
+- Life cycle : Lebenzyklus
+- engl. "State" = Zustand oder Stadium
+
+  
 
 
 Arbeitsablauf eines Klienten
@@ -38,11 +55,19 @@ Arbeitsablauf eines Klienten
 
 
 
+
+
 Der Zustand eines Klienten kann sein:
 
 - **Neuantrag** : 
   Die Person hat Antrag auf Begleitung gestellt. 
-  Antrag wird überprüft und der Klient muss einem Sozi zugewiesen werden.
+  Antrag wird überprüft und der Klient muss einem Sachbearbeiter 
+  oder Sozi zugewiesen werden.
+  
+  Im Detail-Reiter 
+  :screen:`Neuanträge <pcsw.Client.detail.newcomers>`
+  kann man einem Neuzugang 
+  einen **Begleiter zuweisen**, wodurch der Klient ins Stadium "Begleitet" wechelt.
   
 - **Abgelehnt** : 
   Die Prüfung des Antrags hat ergeben, dass diese Person kein Anrecht 
@@ -60,16 +85,7 @@ Der Zustand eines Klienten kann sein:
   Klient ist laut TIM weder Ehemalig noch Neuantrag, 
   hat aber keine gültige NISS.
   
-Veraltete Klienten 
---------------------
-
-Wie alle Partner haben auch Klienten ein Ankreuzfeld "veraltet",
-das unabhängig vom Zustand existiert.
-Wird benutzt z.B. in folgenden Fällen:
-
-- Der Klient wurde versehentlich als Dublette eines existierenden 
-  Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
-  weil Dokumente existieren).
+  
   
 
 
@@ -96,9 +112,27 @@ Begleitungen
    }
 
 
+Veraltete Klienten 
+--------------------
+
+Wie alle Partner haben auch Klienten ein Ankreuzfeld "veraltet",
+das unabhängig vom Zustand existiert.
+Wird benutzt z.B. in folgenden Fällen:
+
+- Der Klient wurde versehentlich als Dublette eines existierenden 
+  Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
+  weil Dokumente existieren).
+  
 
 Screenshots
------------
+===========
+
+.. screenshot:: pcsw.Client.detail.newcomers
+
+Neuanträge
+----------
+
+
 
 .. image:: /gen/screenshots/pcsw.Client.detail.png
   :scale: 20

@@ -325,12 +325,17 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
 class RefuseNewClient(dd.ChangeStateAction):
     label = _("Refuse")
     required = dict(states='new invalid',user_groups='newcomers')
-    help_text=_("Write a refusal note and remove the new client request.")
+    help_text = _("Write a refusal note and remove the new client request.")
     parameters = dict(
       reason = models.CharField(max_length=200,verbose_name=_("Reason")),
       dummy = models.BooleanField(verbose_name=_("Dummy RefuseNewClient")),
     )  
     #~ params_layout = """reason dummy"""
+    
+    def run(self,row,ar,**kw):
+        logger.info("20121009 RefuseNewClient.run() %s",ar)
+        super(RefuseNewClient,self).run(row,ar,**kw)
+    
     
 class ClientStates(dd.Workflow):
     label = _("Client state")
@@ -359,7 +364,8 @@ class ClientStates(dd.Workflow):
                 kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("Newcomer"),'new') # "N" in PAR->Attrib
+add('10', _("Newcomer"),'new',
+    required=dict(states="refused coached invalid")) # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
 add('20', _("Refused"),'refused')
 # coached: neither newcomer nor former, IdPrt != "I"
