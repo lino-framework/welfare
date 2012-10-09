@@ -327,13 +327,13 @@ class RefuseNewClient(dd.ChangeStateAction):
     required = dict(states='new invalid',user_groups='newcomers')
     help_text = _("Write a refusal note and remove the new client request.")
     parameters = dict(
-      reason = models.CharField(max_length=200,verbose_name=_("Reason")),
-      dummy = models.BooleanField(verbose_name=_("Dummy RefuseNewClient")),
+      reason = models.CharField(_("Reason"),max_length=200,blank=False),
+      dummy = models.BooleanField(_("Dummy RefuseNewClient")),
     )  
     #~ params_layout = """reason dummy"""
     
     def run(self,row,ar,**kw):
-        logger.info("20121009 RefuseNewClient.run() %s",ar)
+        logger.info("20121009 RefuseNewClient.run() %s",ar.action_param_values)
         super(RefuseNewClient,self).run(row,ar,**kw)
     
     
@@ -346,8 +346,8 @@ class ClientStates(dd.Workflow):
         if newstate.name == 'refused':
             print ar.action_param_values
             
-            dlg = ar.dialog(RefuseNewClientDialog)
-            obj.set_change_summary(dlg.reason)
+            #~ dlg = ar.dialog(RefuseNewClientDialog)
+            obj.set_change_summary(ar.action_param_values.reason)
             
         elif newstate.name == 'former':
             count = 0
@@ -364,8 +364,7 @@ class ClientStates(dd.Workflow):
                 kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("Newcomer"),'new',
-    required=dict(states="refused coached invalid")) # "N" in PAR->Attrib
+add('10', _("Newcomer"),'new') # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
 add('20', _("Refused"),'refused')
 # coached: neither newcomer nor former, IdPrt != "I"
