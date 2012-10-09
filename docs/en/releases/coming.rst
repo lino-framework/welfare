@@ -6,7 +6,7 @@ TODO
 
 Was ich noch machen muss:
 
-- Aktions-Dialoge (wird benötigt für Aktion "Ablehnen" eines Neuantrags.)
+- Aktions-Dialoge (wird benötigt für Aktion "Ablehnen" eines Neuantrags)
 
 - watch_tim
 
@@ -16,16 +16,26 @@ Was ich noch machen muss:
 
 - Personensuchen und Begleitungen
 
+- Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
+  Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
+  
+- Wenn Admin als Alicia arbeitet, sieht er in `Meine Begleitunge`  
+  dennoch nur die Seinen, nicht die von Alicia.
 
-Besichtigung
-------------
 
-Wo ich während der nächsten Besichtigung auf deine Ideen hoffe:
+Feedback erwünscht
+------------------
+
+Wo ich bei Gelegenheit auf deine Ideen hoffe:
 
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
   Siehe :doc:`/user/clients`.
 
 - Das Hauptmenü ist stellenweise verwirrend. Konkrete Ideen?
+
+- Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
+  Das ist nicht realistisch.
+
 
 
 Nach dem Release
@@ -79,6 +89,8 @@ Lösung gemeldeter Probleme
 
 Neue Features
 --------------
+
+- Willkommensgruß. Die Idee ist, dass dort idealerweise keine Warnungen stehen sollten.
 
 - Lino unterscheidet jetzt zwischen Klienten und Personen.
   Unter "Personen" verstehen wir *alle Menschen, die Lino kennt*. 
