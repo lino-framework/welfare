@@ -116,7 +116,7 @@ class Lino(Lino):
         tb.add_action('pcsw.Clients','detail')
         self.on_each_app('setup_quicklinks',ui,user,tb)
         
-        tb.add_action(self.modules.pcsw.MyClients)
+        tb.add_action(self.modules.pcsw.IntegClients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
         #~ tb.add_action(self.modules.pcsw.Home)
@@ -126,30 +126,34 @@ class Lino(Lino):
         from django.utils.translation import ugettext_lazy as _
         from django.db import models
         from lino.utils.choicelists import UserLevels
-        
-        m = main.add_menu("master",_("Master"))
+        from lino import dd
+        contacts = dd.resolve_app("contacts")
         
         #~ m = main.add_menu("contacts",_("Contacts"))
+        #~ m = main.add_menu("contacts",contacts.MODULE_LABEL)
+        #~ m.add_action(self.modules.pcsw.Clients)
 
-        if user.profile.level:
+        #~ if user.profile.level:
             #~ m.add_action(self.modules.contacts.Companies)
             #~ m.add_action(self.modules.contacts.Persons)
-            m.add_action(self.modules.pcsw.Clients)
             #~ m.add_action(self.modules.contacts.AllPartners)
-        if user.profile.integ_level:
-            m.add_action(self.modules.pcsw.MyPersonSearches)
             
+        m = main.add_menu("master",_("Master"))
         self.on_each_app('setup_master_menu',ui,user,m)
         
+        #~ if user.profile.integ_level:
+            #~ m = main.get_item("contacts")
+            #~ m.add_action(self.modules.pcsw.MyPersonSearches)
+            
             
         if user.profile.level and not user.profile.readonly:
           
             m = main.add_menu("my",_("My menu"))
             #~ m.add_action('projects.Projects')
-            m.add_action(self.modules.notes.MyNotes)
+            #~ m.add_action(self.modules.notes.MyNotes)
             
             self.on_each_app('setup_my_menu',ui,user,m)
-            m.add_action(self.modules.lino.MyTextFieldTemplates)
+            #~ m.add_action(self.modules.lino.MyTextFieldTemplates)
 
         
         self.on_each_app('setup_main_menu',ui,user,main)
@@ -169,7 +173,6 @@ class Lino(Lino):
         if user.profile.level >= UserLevels.manager: # is_staff:
           
             m = main.add_menu("explorer",_("Explorer"))
-            
             self.on_each_app('setup_explorer_menu',ui,user,m)
             
             m.add_action(self.modules.properties.Properties)
@@ -235,13 +238,13 @@ INSTALLED_APPS = (
   'lino.modlib.households',
   'lino.modlib.accounts',
   
+  'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
   'lino_welfare.modlib.cv',
   'lino_welfare.modlib.isip',
   'lino_welfare.modlib.jobs',
   'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.courses',
-  'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
   'lino_welfare.modlib.cbss',
   'lino.modlib.notes', # because demo fixture creates notes for Clients 
 )

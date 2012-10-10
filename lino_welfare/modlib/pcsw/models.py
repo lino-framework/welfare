@@ -1300,6 +1300,7 @@ class Clients(contacts.Partners):
     detail_layout = ClientDetail()
     
 class IntegClients(Clients):
+    label = _("Integration Clients")
     detail_layout = IntegClientDetail()
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
@@ -1397,17 +1398,18 @@ class ClientsByNationality(Clients):
 
 
 
-class MyClients(IntegClients):
-    label = _("My clients")
-    required = dict(user_groups = 'integ')
-    use_as_default_table = False
+#~ class MyClients(IntegClients):
+    #~ label = _("Integration Clients")
+    #~ # label = _("My clients")
+    #~ required = dict(user_groups = 'integ')
+    #~ use_as_default_table = False
     
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(MyClients,self).param_defaults(ar,**kw)
-        kw.update(coached_by=ar.get_user())
-        #~ print "20120918 MyClients.param_defaults", kw['coached_by']
-        return kw
+    #~ @classmethod
+    #~ def param_defaults(self,ar,**kw):
+        #~ kw = super(MyClients,self).param_defaults(ar,**kw)
+        #~ kw.update(coached_by=ar.get_user())
+        #~ # print "20120918 MyClients.param_defaults", kw['coached_by']
+        #~ return kw
         
     
   
@@ -2476,10 +2478,12 @@ class Home(cal.Home):
     #~ m.add_action(AllClients)
 
 MODULE_LABEL = _("PCSW")
+INTEG_MODULE_LABEL = _("Integration")
 
-def setup_my_menu(site,ui,user,m): 
+#~ def setup_my_menu(site,ui,user,m): 
+def setup_main_menu(site,ui,user,m): 
     #~ if user.is_spis:
-    if user.profile.integ_level:
+    #~ if user.profile.integ_level:
         #~ mypersons = m.add_menu("mypersons",MyClients.label)
         #~ mypersons.add_action(MyClients)
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
@@ -2488,18 +2492,23 @@ def setup_my_menu(site,ui,user,m):
               #~ label=pg.name,
               #~ params=dict(master_instance=pg))
               
-        #~ m = m.add_menu("pcsw",MODULE_LABEL)
-        m.add_action(MyClients)
+        pm = m.add_menu("pcsw",MODULE_LABEL)
+        pm.add_action(Clients)
+        #~ m.add_action(MyClients)
         #~ m.add_action(Clients)
-        m.add_action(MyCoachings)
-        m.add_action(MySuggestedCoachings)
+        pm.add_action(MyCoachings)
+        pm.add_action(MySuggestedCoachings)
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
             #~ mycoachings.add_action(
               #~ MyCoachingsByGroup,
               #~ label=pg.name,
               #~ params=dict(master_instance=pg))
   
+        m = m.add_menu("integ",INTEG_MODULE_LABEL)
+        m.add_action(IntegClients)
+        m.add_action(MyPersonSearches)
 
+        
 
 def setup_config_menu(site,ui,user,m): 
     m  = m.add_menu("pcsw",MODULE_LABEL)
@@ -2695,7 +2704,7 @@ def site_setup(site):
     #~ site.modules.courses.CourseProviders.set_detail_layout(CourseProviderDetail())
     
     
-dd.add_user_group('integ',_("Integration"))
+dd.add_user_group('integ',INTEG_MODULE_LABEL)
 
 customize_siteconfig()
 customize_contacts()        

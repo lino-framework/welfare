@@ -443,10 +443,10 @@ dd.inject_field(pcsw.Client,
 def setup_main_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.user:
         #~ return
-    m  = m.add_menu("newcomers",MODULE_LABEL)
+    #~ m  = m.add_menu("newcomers",MODULE_LABEL)
+    m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     #~ m.add_action(Newcomers)
     m.add_action(NewClients)
-    m.add_action(AvailableCoaches)
             
   
 def setup_master_menu(site,ui,user,m): pass
@@ -465,6 +465,7 @@ def setup_explorer_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.manager:
         #~ return
     m.add_action(Competences)
+    m.add_action(AvailableCoaches)
   
 dd.add_user_group('newcomers',MODULE_LABEL)
   

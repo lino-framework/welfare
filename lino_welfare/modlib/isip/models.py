@@ -40,6 +40,7 @@ from lino import mixins
 #~ from lino.modlib.notes import models as notes
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
+pcsw = dd.resolve_app('pcsw')
 
 #~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
@@ -377,6 +378,48 @@ class ContractBase(
 
 #~ dd.update_field(ContractBase,'contact_person',verbose_name=_("represented by"))
 
+
+class ContractBaseTable(dd.Table):
+  
+    parameters = dict(
+      user = dd.ForeignKey(settings.LINO.user_model,blank=True),
+      show_past = models.BooleanField(_("past contracts"),default=True),
+      show_active = models.BooleanField(_("active contracts"),default=True),
+      show_coming = models.BooleanField(_("coming contracts"),default=True),
+      today = models.DateField(_("on"),blank=True,default=datetime.date.today),
+    )
+    
+    params_layout = """user type show_past show_active show_coming today"""
+    params_panel_hidden = True
+    
+    @classmethod
+    def get_request_queryset(cls,rr):
+        #~ logger.info("20120608.get_request_queryset param_values = %r",rr.param_values)
+        qs = super(ContractBaseTable,cls).get_request_queryset(rr)
+        #~ user = rr.param_values.get('user',None)
+        if rr.param_values.user:
+            qs = qs.filter(user=rr.param_values.user)
+        if rr.param_values.type:
+            qs = qs.filter(type=rr.param_values.type)
+        today = rr.param_values.today or datetime.date.today()
+        #~ today = rr.param_values.get('today',None) or datetime.date.today()
+        #~ show_active = rr.param_values.get('show_active',True)
+        if today:
+            if not rr.param_values.show_active:
+                flt = range_filter(today,'applies_from','applies_until')
+                #~ logger.info("20120114 flt = %r",flt)
+                qs = qs.exclude(flt)
+            #~ show_past = rr.param_values.get('show_past',True)
+            if not rr.param_values.show_past:
+                qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
+            #~ show_coming = rr.param_values.get('show_coming',True)
+            if not rr.param_values.show_coming:
+                qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
+        return qs
+    
+    
+
+
 class OverlappingContractsTest:
     """
     Volatile object used to test for overlapping contracts.
@@ -501,10 +544,10 @@ class ContractDetail(dd.FormLayout):
         dh.isip.label = _("ISIP")
 
 
-class Contracts(dd.Table):
-    required = dict(user_groups = ['integ'])
+class Contracts(ContractBaseTable):
+    required = dict(user_groups='integ')
     model = Contract
-    column_names = 'id applies_from applies_until user type *'
+    column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
     #~ active_fields = ('company','contact')
     active_fields = ['company']
@@ -513,7 +556,29 @@ class Contracts(dd.Table):
     client
     type company
     """,window_size=(60,'auto'))    
+    parameters = dict(
+      type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
+      **ContractBaseTable.parameters)
     
+
+class MyContracts(Contracts):
+#~ class MyContracts(Contracts,mixins.ByUser):
+    #~ column_names = "applies_from client *"
+    #~ label = _("My ISIP contracts")
+    #~ label = _("My PIIS contracts")
+    #~ order_by = "reminder_date"
+    #~ column_names = "reminder_date client company *"
+    #~ order_by = ["applies_from"]
+    #~ filter = dict(reminder_date__isnull=False)
+      
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(MyContracts,self).param_defaults(ar,**kw)
+        kw.update(user=ar.get_user())
+        return kw
+      
+
+
     
 class ContractsByPerson(Contracts):
     master_key = 'client'
@@ -525,26 +590,20 @@ class ContractsByType(Contracts):
     column_names = "applies_from client user *"
     order_by = ["applies_from"]
 
-class MyContracts(Contracts,mixins.ByUser):
-    column_names = "applies_from client *"
-    #~ label = _("My ISIP contracts")
-    #~ label = _("My PIIS contracts")
-    #~ order_by = "reminder_date"
-    #~ column_names = "reminder_date client company *"
-    order_by = ["applies_from"]
-    #~ filter = dict(reminder_date__isnull=False)
 
 
-
-
-def setup_main_menu(site,ui,user,m): pass
+def setup_main_menu(site,ui,user,m): 
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m.add_action(MyContracts)
+    
 def setup_master_menu(site,ui,user,m): pass
 
-def setup_my_menu(site,ui,user,m): 
-    m.add_action(MyContracts)
+def setup_my_menu(site,ui,user,m): pass
+    #~ m.add_action(MyContracts)
   
 def setup_config_menu(site,ui,user,m): 
-    m  = m.add_menu("isip",_("ISIPs"))
+    #~ m  = m.add_menu("isip",_("ISIPs"))
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(ContractTypes)
     m.add_action(ContractEndings)
     m.add_action(ExamPolicies)

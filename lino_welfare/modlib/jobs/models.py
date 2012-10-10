@@ -86,9 +86,10 @@ from lino.modlib.countries.models import Country, City
 #~ from lino.apps.pcsw import models as pcsw
 #~ pcsw = dd.resolve_app('lino_welfare')
 from lino_welfare.modlib.pcsw import models as pcsw
-from lino_welfare.modlib.isip.models import ContractBase
+#~ from lino_welfare.modlib.isip.models import ContractBase
 
 contacts = dd.resolve_app('contacts')
+isip = dd.resolve_app('isip')
 
 
 #~ SCHEDULE_CHOICES = {
@@ -313,7 +314,7 @@ class FunctionsBySector(Functions):
 #
 # JOB CONTRACTS
 # 
-class Contract(ContractBase):
+class Contract(isip.ContractBase):
     """
     A Contract
     
@@ -560,7 +561,8 @@ class ContractDetail(dd.FormLayout):
     """
     
   
-class Contracts(dd.Table):
+#~ class Contracts(dd.Table):
+class Contracts(isip.ContractBaseTable):
     required = dict(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
@@ -568,17 +570,12 @@ class Contracts(dd.Table):
     column_names = 'id job applies_from applies_until user type *'
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'.split()
-    
-    #~ detail_layout = """
-    #~ id:8 client:25 user:15 user_asd:15 language:8
-    #~ job type company contact:20     
-    #~ applies_from duration applies_until 
-    #~ regime:20 schedule:30 hourly_rate:10 refund_rate:10
-    #~ date_decided date_issued date_ended ending
-    #~ reference_person build_time
-    #~ responsibilities cal.TasksByController cal.EventsByController 
-    #~ """
     detail_layout = ContractDetail()
+    
+    parameters = dict(
+      type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
+      **isip.ContractBaseTable.parameters)
+    
     
     
     
@@ -612,14 +609,20 @@ class ContractsBySchedule(Contracts):
     master_key = 'schedule'
     column_names = 'job applies_from applies_until user type *'
 
-class MyContracts(Contracts,mixins.ByUser):
+#~ class MyContracts(Contracts,mixins.ByUser):
+class MyContracts(Contracts):
     column_names = "applies_from client job *"
     #~ label = _("My contracts")
     #~ order_by = "reminder_date"
     #~ column_names = "reminder_date client company *"
-    order_by = ["applies_from"]
+    #~ order_by = ["applies_from"]
     #~ filter = dict(reminder_date__isnull=False)
 
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(MyContracts,self).param_defaults(ar,**kw)
+        kw.update(user=ar.get_user())
+        return kw
 
 
 
@@ -1177,50 +1180,11 @@ if True: # settings.LINO.user_model:
         Shows the job contracts owned by this user.
         """
         label = _("Job Contracts Search")
-        
-        use_as_default_table = False
-        
-        parameters = dict(
-          user = dd.ForeignKey(settings.LINO.user_model,blank=True),
-          #~ user = models.ForeignKey(settings.LINO.user_model,blank=True),
-          type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
-          show_past = models.BooleanField(_("past contracts"),default=True),
-          show_active = models.BooleanField(_("active contracts"),default=True),
-          show_coming = models.BooleanField(_("coming contracts"),default=True),
-          today = models.DateField(_("on"),blank=True,default=datetime.date.today),
-        )
-        params_layout = """type show_past show_active show_coming today user"""
-        #~ params_panel_hidden = False
-        
-        #~ master_key = 'user'
-        #~ group_by = ['type']
         group_by = ['client__group']
         column_names = 'id applies_from applies_until job client client__city client__national_id client__gender user type *'
         
-        @classmethod
-        def get_request_queryset(cls,rr):
-            #~ logger.info("20120608.get_request_queryset param_values = %r",rr.param_values)
-            qs = super(ContractsSearch,cls).get_request_queryset(rr)
-            #~ user = rr.param_values.get('user',None)
-            if rr.param_values.user:
-                qs = qs.filter(user=rr.param_values.user)
-            if rr.param_values.type:
-                qs = qs.filter(type=rr.param_values.type)
-            today = rr.param_values.today or datetime.date.today()
-            #~ today = rr.param_values.get('today',None) or datetime.date.today()
-            #~ show_active = rr.param_values.get('show_active',True)
-            if today:
-                if not rr.param_values.show_active:
-                    flt = range_filter(today,'applies_from','applies_until')
-                    #~ logger.info("20120114 flt = %r",flt)
-                    qs = qs.exclude(flt)
-                #~ show_past = rr.param_values.get('show_past',True)
-                if not rr.param_values.show_past:
-                    qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
-                #~ show_coming = rr.param_values.get('show_coming',True)
-                if not rr.param_values.show_coming:
-                    qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
-            return qs
+        use_as_default_table = False
+        
             
         def on_group_break(self,group):
             if group == 0:
@@ -1335,25 +1299,27 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
         )
 
+MODULE_LABEL = _("Jobs")
 
 def setup_main_menu(site,ui,user,m): 
     #~ if user.profile.integ_level < UserLevels.user:
         #~ return
-    m = m.add_menu("jobs",_("Jobs"))
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    #~ m = m.add_menu("jobs",MODULE_LABEL)
+    m.add_action(MyContracts)
     m.add_action(JobProviders)
     m.add_action(Jobs)
     m.add_action(Offers)
-    m.add_action(ContractsSearch)
+    #~ m.add_action(ContractsSearch)
 
-def setup_my_menu(site,ui,user,m): 
-    #~ if user.profile.integ_level < UserLevels.user:
-        #~ return
-    m.add_action(MyContracts)
+#~ def setup_my_menu(site,ui,user,m): 
+    #~ m.add_action(MyContracts)
   
 def setup_config_menu(site,ui,user,m): 
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
-    m  = m.add_menu("jobs",_("~Jobs"))
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    #~ m  = m.add_menu("jobs",MODULE_LABEL)
     m.add_action(ContractTypes)
     m.add_action(JobTypes)
     m.add_action(Sectors)
@@ -1368,7 +1334,8 @@ def setup_config_menu(site,ui,user,m):
 def setup_explorer_menu(site,ui,user,m):
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
-    m  = m.add_menu("jobs",_("~Jobs"))
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    #~ m  = m.add_menu("jobs",MODULE_LABEL)
     m.add_action(Contracts)
     m.add_action(Candidatures)
     m.add_action(Studies)

@@ -6,7 +6,14 @@ TODO
 
 Was ich noch machen muss:
 
-- Aktions-Dialoge (wird benötigt für Aktion "Ablehnen" eines Neuantrags)
+- Aktions-Dialoge für Aktion "Ablehnen" eines Neuantrags (RefuseNewClient)
+
+  - Dialogfenster schließt sich nicht nach OK und success.
+  - reason ist blank=True, aber das prüft er nicht nach.
+  - Das Dummy-Feld muss ich durch etwas Unauffälligeres ersetzen...
+  - Im JS-Code werden die Felder doppelt definiert.
+
+- Das Hauptmenü ist stellenweise verwirrend.
 
 - watch_tim
 
@@ -31,11 +38,8 @@ Wo ich bei Gelegenheit auf deine Ideen hoffe:
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
   Siehe :doc:`/user/clients`.
 
-- Das Hauptmenü ist stellenweise verwirrend. Konkrete Ideen?
-
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.
-
 
 
 Nach dem Release
@@ -131,10 +135,18 @@ Nebenwirkungen
   Integrationsphasen, weil man das jetzt in den Parametern von 
   "Meine Klienten" angeben kann. 
   
+- Sorry, aber ich muss euch eine Umstrukturierung des Hauptmenüs zumuten.  
+  Liegt daran, dass jetzt bald auch andere Dienste in Lino arbeiten.
+  Das Menü "Mein Menü" ist weg. 
+  Die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
+  Also z.B. 
+
+  - :menuselection:`Mein Menü --> Meine VSEs` steht jetzt unter :menuselection:`DSBE --> Meine VSEs` 
+  - :menuselection:`Mein Menü --> Meine Art.-60§7-Konventionen` steht jetzt unter 
+    :menuselection:`DSBE --> Meine Art.-60§7-Konventionen` 
+  
 - Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
   nicht gemacht. Ist das schlimm?
-  
-- Diverse Umstrukturierungen im Hauptmenü.  
   
 - countries.City.type und Partner.region.
   Visible in Detail of "All Partners" : Lino now features a field "region" 

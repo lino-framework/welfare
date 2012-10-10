@@ -85,6 +85,7 @@ from lino.modlib.accounts.utils import AccountTypes
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')
 properties = dd.resolve_app('properties')
+pcsw = dd.resolve_app('pcsw')
 
 from lino.mixins.printable import decfmt
 
@@ -1055,13 +1056,14 @@ def site_setup(site):
         #~ user_groups=['debts'],user_level='manager')
 
 
-def setup_main_menu(site,ui,user,m):  pass
+def setup_main_menu(site,ui,user,m):
+    m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
+    m.add_action(MyBudgets)
+  
   
 def setup_master_menu(site,ui,user,m): pass
 
-def setup_my_menu(site,ui,user,m): 
-    #~ if user.profile.debts_level < UserLevels.user: 
-        #~ return
+def uused_setup_my_menu(site,ui,user,m): 
     m  = m.add_menu("debts",MODULE_LABEL)
     m.add_action(MyBudgets)
   
