@@ -177,7 +177,7 @@ class NewClientDetail(pcsw.ClientDetail):
     
 
 class NewClients(pcsw.Clients):
-    required=dict(user_groups=['newcomers'])
+    required = dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
     use_as_default_table = False
@@ -200,16 +200,23 @@ class NewClients(pcsw.Clients):
       new_since = models.DateField(_("Also newly coached clients since"),default=amonthago,blank=True,null=True),
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
           verbose_name=_("Coached by")),
+      #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
       )
     params_layout = 'also_refused also_obsolete new_since coached_by'
     
     @classmethod
     def get_request_queryset(self,ar):
         # Note that we skip pcsw.Clients mro parent
-        qs = super(NewClients,self).get_request_queryset(ar)
+        qs = super(pcsw.Clients,self).get_request_queryset(ar)
+        #~ qs = dd.Table.get_request_queryset(ar)
         
-        q = models.Q(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
+        q = models.Q(client_state=pcsw.ClientStates.new)
+        
+        if ar.param_values.also_refused:
+            q = q | models.Q(client_state=pcsw.ClientStates.refused)
+        #~ q = models.Q(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
         if ar.param_values.new_since:
+            #~ qs = pcsw.only_new_since(qs,ar.param_values.new_since)
             q = q | models.Q(
                 client_state=pcsw.ClientStates.coached,
                 coachings_by_client__start_date__gte=ar.param_values.new_since)
@@ -225,28 +232,18 @@ class NewClients(pcsw.Clients):
         return qs
 
     @classmethod
-    def get_title(self,ar):
-        #~ title = super(Clients,self).get_title(ar)
-        title = pcsw.Client._meta.verbose_name_plural
-        #~ if ar.param_values.new_since:
-            #~ title = _("New clients since") + ' ' + str(ar.param_values.new_since)
-            #~ title += _(" new since ") + str(ar.param_values.new_since)
-        #~ if ar.param_values.coached_by:
-            #~ title += _(" of ") + unicode(ar.param_values.coached_by)
-        #~ if ar.param_values.coached_on:
-            #~ title += _(" on ") + babel.dtos(ar.param_values.coached_on)
-        tags = []
-        #~ if ar.param_values.client_state:
-            #~ tags.append(unicode(ar.param_values.client_state))
+    def get_title_tags(self,ar):
         if ar.param_values.also_refused:
-            tags.append(unicode(_("refused")))
+            yield unicode(self.parameters['also_refused'].verbose_name)
         if ar.param_values.also_obsolete:
-            tags.append(unicode(_("obsolete")))
+            yield unicode(self.parameters['also_obsolete'].verbose_name)
+            #~ tags.append(unicode(_("obsolete")))
         if ar.param_values.new_since:
-            tags.append(unicode(_("new since")) + ' ' + babel.dtos(ar.param_values.new_since))
-        if len(tags):
-            title += " (%s)" % (', '.join(tags))
-        return title
+            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
+        if ar.param_values.coached_by:
+            yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+      
+        
         
         
 class ClientsByFaculty(NewClients):
@@ -443,8 +440,8 @@ dd.inject_field(pcsw.Client,
 def setup_main_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.user:
         #~ return
-    #~ m  = m.add_menu("newcomers",MODULE_LABEL)
-    m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
+    m  = m.add_menu("newcomers",MODULE_LABEL)
+    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     #~ m.add_action(Newcomers)
     m.add_action(NewClients)
             

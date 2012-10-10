@@ -12,6 +12,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+
 import decimal
 #~ from dateutil.relativedelta import relativedelta
 #~ ONE_DAY = relativedelta(days=1)
@@ -499,9 +500,19 @@ def objects():
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(name="ASD",id=1) 
     
+    obj = User.objects.get(username="caroline")
+    obj.coaching_type_id = 1
+    obj.save()
+    
     DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
     yield pcsw.CoachingType(name="Schuldnerberatung")
+    
+    
+    alicia.coaching_type= DSBE
+    alicia.save()
+    
+    
     
     
     #~ USERS = Cycler(root,melanie,hubert,alicia)
@@ -1008,3 +1019,5 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
         p.faculty = FACULTIES.pop()
         p.save()
+
+#~ print "20121010 pcsw.fixtures.demo has been imported"

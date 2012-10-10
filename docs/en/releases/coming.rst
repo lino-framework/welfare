@@ -6,40 +6,33 @@ TODO
 
 Was ich noch machen muss:
 
-- Aktions-Dialoge für Aktion "Ablehnen" eines Neuantrags (RefuseNewClient)
+- ClientDetail pro Benutzer statt pro Tabelle?
 
-  - Dialogfenster schließt sich nicht nach OK und success.
-  - reason ist blank=True, aber das prüft er nicht nach.
-  - Das Dummy-Feld muss ich durch etwas Unauffälligeres ersetzen...
-  - Im JS-Code werden die Felder doppelt definiert.
+- state changes with notify=True ist noch nicht fertig.
 
-- Das Hauptmenü ist stellenweise verwirrend.
-
-- watch_tim
+- watch_tim (aber das mach ich erst, wenn testlino bereit ist)
 
 - Datenübernahme macht noch ein paar Warnungen
-
-- Ausdruck Art. 60§7-Übersicht produziert leeres PDF
-
-- Personensuchen und Begleitungen
 
 - Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
   Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
   
-- Wenn Admin als Alicia arbeitet, sieht er in `Meine Begleitunge`  
-  dennoch nur die Seinen, nicht die von Alicia.
-
 
 Feedback erwünscht
 ------------------
 
 Wo ich bei Gelegenheit auf deine Ideen hoffe:
 
+- :`Integration --> Meine Personensuchen`: die Bedingungen "Begleitet von", 
+  "Periode",  "Alter", "Geschlecht" sind jetzt Parameter in der allgemeine Klientenliste. 
+  Aber Sprachkenntnisse und Eigenschaften sind nicht so einfach 
+
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
   Siehe :doc:`/user/clients`.
 
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.
+
 
 
 Nach dem Release
@@ -131,14 +124,10 @@ Neue Features
 Nebenwirkungen  
 --------------
 
-- Das Menü "Meine Klienten" hat jetzt kein Untermenü mehr mit allen 
-  Integrationsphasen, weil man das jetzt in den Parametern von 
-  "Meine Klienten" angeben kann. 
-  
 - Sorry, aber ich muss euch eine Umstrukturierung des Hauptmenüs zumuten.  
   Liegt daran, dass jetzt bald auch andere Dienste in Lino arbeiten.
-  Das Menü "Mein Menü" ist weg. 
-  Die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
+  Zum Beispiel ist das Menü "Mein Menü" weg:
+  die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
   Also z.B. 
 
   - :menuselection:`Mein Menü --> Meine VSEs` steht jetzt unter :menuselection:`DSBE --> Meine VSEs` 

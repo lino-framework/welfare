@@ -16,12 +16,6 @@
 Starts a daemon that 
 watches the specified directory for a file :xfile:`changelog.json` 
 to appear.
-
-See also 
-:doc:`/blog/2010/1210`
-:doc:`/blog/2010/1211`
-:doc:`/blog/2010/1214`
-
 """
 
 import os
@@ -191,6 +185,8 @@ country city zip_code region language email url phone gsm remarks'''.split()
     #~ user = "watch_tim"
 #~ REQUEST = PseudoRequest()
 
+from lino.core import changes
+REQUEST = changes.PseudoRequest("watch_tim")
 #~ 20120921 REQUEST = dblogger.PseudoRequest("watch_tim")
 
 class Controller:
@@ -236,8 +232,14 @@ class Controller:
             dblogger.warning("%s:%s : DELETE failed (does not exist)",
                 kw['alias'],kw['id'])
             return
+        msg = obj.disable_delete(ar)
+        if msg:
+            dblogger.warning("%s:%s : DELETE failed: %s",kw['alias'],kw['id'],msg)
+            return
+            
         #~ 20120921 dblogger.log_deleted(REQUEST,obj)
         obj.delete()
+        changes.log_delete(REQUEST,obj)
         dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],obj2str(obj))
         
     #~ def prepare_data(self,data):
@@ -256,11 +258,14 @@ class Controller:
                 dblogger.warning("%s:%s (%s) : ignored POST %s",
                     kw['alias'],kw['id'],obj,kw['data'])
                 return
+            watcher = changes.Watcher(obj,True)
         else:
+            watcher = changes.Watcher(obj,False)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
+        watcher.log_changes(REQUEST)
         #~ obj.save()
         
     def PUT(self,**kw):
@@ -276,9 +281,11 @@ class Controller:
                 return 
         if self.PUT_special(obj,**kw):
             return 
+        watcher = changes.Watcher(obj,False)
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
+        watcher.log_changes(REQUEST)
         #~ obj.save()
         #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
         

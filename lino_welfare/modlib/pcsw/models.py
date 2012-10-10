@@ -313,28 +313,11 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           '''name first_name last_name title birth_date gender is_client
           ''')
         
-#~ class RefuseNewClientDialog(dd.Dialog):
-    #~ title = _("Refuse new client")
-    #~ reason = models.CharField(max_length=200,verbose_name=_("Reason"))
-    #~ dummy = models.BooleanField(verbose_name=_("Dummy"))
-    #~ detail_layout = """
-    #~ reason
-    #~ dummy
-    #~ """
     
-class RefuseNewClient(dd.ChangeStateAction):
-    label = _("Refuse")
-    required = dict(states='new invalid',user_groups='newcomers')
-    help_text = _("Write a refusal note and remove the new client request.")
-    parameters = dict(
-      reason = models.CharField(_("Reason"),max_length=200,blank=False),
-      dummy = models.BooleanField(_("Dummy RefuseNewClient")),
-    )  
-    #~ params_layout = """reason dummy"""
-    
-    def run(self,row,ar,**kw):
-        logger.info("20121009 RefuseNewClient.run() %s",ar.action_param_values)
-        super(RefuseNewClient,self).run(row,ar,**kw)
+#~ class RefuseNewClient(NotifyingChangeStateAction):
+    #~ label = _("Refuse")
+    #~ required = dict(states='new invalid',user_groups='newcomers')
+    #~ # help_text = _("Write a refusal note and remove the new client request.")
     
     
 class ClientStates(dd.Workflow):
@@ -346,10 +329,10 @@ class ClientStates(dd.Workflow):
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):
       
         if newstate.name == 'refused':
-            print ar.action_param_values
+            pass
+            #~ print ar.action_param_values
             
             #~ dlg = ar.dialog(RefuseNewClientDialog)
-            obj.set_change_summary(ar.action_param_values.reason)
             
         elif newstate.name == 'former':
             count = 0
@@ -368,15 +351,15 @@ class ClientStates(dd.Workflow):
 add = ClientStates.add_item
 add('10', _("Newcomer"),'new') # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
-add('20', _("Refused"),'refused')
+add('20', _("Refused"),'refused',help_text = _("An application to become a client has been refused."))
 # coached: neither newcomer nor former, IdPrt != "I"
 add('30', _("Coached"),'coached')
 add('50', _("Former"),'former')
 add('60', _("Invalid"),'invalid')
 
 ClientStates.new.add_workflow(states='refused coached invalid',user_groups='newcomers')
-ClientStates.refused.add_workflow(RefuseNewClient)
-#~ ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers')
+#~ ClientStates.refused.add_workflow(RefuseNewClient)
+ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers',notify=True)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
 ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
@@ -871,9 +854,10 @@ class PartnerDetail(contacts.PartnerDetail):
         #~ h.general.label = _("General")
     
 class PersonDetail(contacts.PersonDetail):
-    bottom_box = """remarks contacts.RolesByPerson
+    bottom_box = """
     activity bank_account1 bank_account2 is_deprecated
     is_client created modified
+    remarks contacts.RolesByPerson households.MembersByPerson
     """
   
 
@@ -1298,6 +1282,100 @@ class Clients(contacts.Partners):
     """,window_size=(60,'auto'))
     column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     detail_layout = ClientDetail()
+    parameters = dict(
+        aged_from = models.IntegerField(_("Aged from"),
+            blank=True,null=True),
+        aged_to = models.IntegerField(_("Aged to"),
+            blank=True,null=True),
+        gender = contacts.Gender.field(blank=True),
+        coached_by = models.ForeignKey(users.User,blank=True,null=True,
+            verbose_name=_("Coached by")),
+        coached_on = models.DateField(_("Coached on"),blank=True,null=True),
+        only_primary = models.BooleanField(_("Only primary clients"),default=False),
+        also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
+        client_state = ClientStates.field(blank=True),
+        new_since = models.DateField(_("Newly coached since"),blank=True),
+        )
+    params_layout = """
+    client_state coached_by aged_from aged_to gender
+    coached_on only_primary also_obsolete new_since
+    """
+    
+    @classmethod
+    def get_request_queryset(self,ar):
+        #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
+        qs = super(Clients,self).get_request_queryset(ar)
+        if ar.param_values.new_since:
+            qs = only_new_since(qs,ar.param_values.new_since)
+        
+        if not ar.param_values.also_obsolete:
+            qs = qs.filter(is_deprecated=False)
+        if ar.param_values.coached_on:
+            qs = only_coached_on(qs,ar.param_values.coached_on)
+        if ar.param_values.coached_by:
+            qs = only_coached_by(qs,ar.param_values.coached_by)
+            #~ qs = qs.filter(coachings_by_client__user=ar.param_values.coached_by)
+        if ar.param_values.only_primary:
+            qs = qs.filter(
+              coachings_by_client__primary=True,
+              coachings_by_client__user=ar.param_values.coached_by)
+        if ar.param_values.client_state:
+            qs = qs.filter(client_state=ar.param_values.client_state)
+            
+        today = datetime.date.today()
+        if ar.param_values.gender:
+            qs = qs.filter(gender__exact=ar.param_values.gender)
+        if ar.param_values.aged_from:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
+            #~ qs = qs.filter(q1|q2)
+            min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
+            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
+        if ar.param_values.aged_to:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
+            #~ qs = qs.filter(q1|q2)
+            max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
+            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
+            
+        return qs
+        
+
+    @classmethod
+    def get_title(self,ar):
+        title = super(Clients,self).get_title(ar)
+        #~ title = Client._meta.verbose_name_plural
+        #~ if ar.param_values.coached_by:
+            #~ title += _(" of ") + unicode(ar.param_values.coached_by)
+        tags = list(self.get_title_tags(ar))
+        if len(tags):
+            title += " (%s)" % (', '.join(tags))
+        return title
+        
+    @classmethod
+    def get_title_tags(self,ar):
+        if ar.param_values.aged_from or ar.param_values.aged_to:
+            yield unicode(_("Aged %(min)s to %(max)s") % dict(
+              min=ar.param_values.aged_from or'...',
+              max=ar.param_values.aged_to or '...'))
+        if ar.param_values.gender:
+            yield unicode(ar.param_values.gender)
+        if ar.param_values.client_state:
+            yield unicode(ar.param_values.client_state)
+        if ar.param_values.only_primary:
+            #~ yield unicode(_("primary"))
+            yield unicode(self.parameters['only_primary'].verbose_name)
+        if ar.param_values.also_obsolete:
+            yield unicode(self.parameters['also_obsolete'].verbose_name)
+        if ar.param_values.coached_by:
+            yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+        if ar.param_values.new_since:
+            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
+        if ar.param_values.coached_on:
+            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
+        
     
 class IntegClients(Clients):
     label = _("Integration Clients")
@@ -1308,21 +1386,18 @@ class IntegClients(Clients):
     column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     parameters = dict(
-      coached_by = models.ForeignKey(users.User,blank=True,null=True,
-          verbose_name=_("Coached by")),
-      coached_on = models.DateField(_("Coached on"),blank=True,null=True),
-      only_primary = models.BooleanField(_("Only primary clients"),default=False),
-      also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
-      #~ client_state = ClientStates.field(blank=True),
       group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
           verbose_name=_("Integration phase")),
-      new_since = models.DateField(_("New clients since"),blank=True),
       #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
       only_active = models.BooleanField(_("Only active clients"),default=False,
         help_text=_("Show only clients in 'active' integration phases")),
-      )
+      **Clients.parameters)
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
-    params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
+    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
+    params_layout = """
+    coached_by coached_on only_primary also_obsolete new_since
+    aged_from aged_to gender group only_active 
+    """
     
     #~ @classmethod
     #~ def get_actor_label(self):
@@ -1330,65 +1405,26 @@ class IntegClients(Clients):
     
     @classmethod
     def get_request_queryset(self,ar):
+        ar.param_values.update(client_state = ClientStates.coached)
         qs = super(IntegClients,self).get_request_queryset(ar)
-        if ar.param_values.new_since:
-            qs = only_new_since(qs,ar.param_values.new_since)
-        
-        if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_deprecated=False)
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
-        if ar.param_values.coached_on:
-            qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.only_active:
             qs = qs.filter(group__active=True)
-        if ar.param_values.coached_by:
-            qs = only_coached_by(qs,ar.param_values.coached_by)
-            #~ qs = qs.filter(coachings_by_client__user=ar.param_values.coached_by)
-        if ar.param_values.only_primary:
-            #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
-            qs = qs.filter(
-              coachings_by_client__primary=True,
-              coachings_by_client__user=ar.param_values.coached_by)
-            #~ qs = qs.filter(
-              #~ coachings_by_client__primary=True,
-              #~ coachings_by_client__user=ar.get_user())
-            #~ qs = qs.filter(coachings_by_client__primary=True)
-        #~ if ar.param_values.client_state:
-            #~ qs = qs.filter(client_state=ar.param_values.client_state)
         #~ qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
-        qs = qs.filter(client_state=ClientStates.coached)
+        #~ qs = qs.filter(client_state=ClientStates.coached)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
-
-    @classmethod
-    def get_title(self,ar):
-        #~ title = super(Clients,self).get_title(ar)
-        title = Client._meta.verbose_name_plural
-        #~ if ar.param_values.new_since:
-            #~ title = _("New clients since") + ' ' + str(ar.param_values.new_since)
-            #~ title += _(" new since ") + str(ar.param_values.new_since)
-        if ar.param_values.coached_by:
-            title += _(" of ") + unicode(ar.param_values.coached_by)
-        if ar.param_values.coached_on:
-            title += _(" on ") + babel.dtos(ar.param_values.coached_on)
-        tags = []
-        #~ if ar.param_values.client_state:
-            #~ tags.append(unicode(ar.param_values.client_state))
-        if ar.param_values.only_active:
-            tags.append(unicode(_("active")))
-        if ar.param_values.only_primary:
-            tags.append(unicode(_("primary")))
-        if ar.param_values.also_obsolete:
-            tags.append(unicode(_("obsolete")))
-        if ar.param_values.group:
-            tags.append(unicode(ar.param_values.group))
-        if ar.param_values.new_since:
-            tags.append(unicode(_("new since")) + ' ' + babel.dtos(ar.param_values.new_since))
-        if len(tags):
-            title += " (%s)" % (', '.join(tags))
-        return title
         
+    @classmethod
+    def get_title_tags(self,ar):
+        for t in super(IntegClients,self).get_title_tags(ar):
+            yield t
+        if ar.param_values.only_active:
+            yield unicode(ar.actor.parameters['only_active'].verbose_name)
+        if ar.param_values.group:
+            yield unicode(ar.param_values.group)
+            
 
 class ClientsByNationality(Clients):
     #~ app_label = 'contacts'
@@ -2079,21 +2115,16 @@ class ContactsByClient(ClientContacts):
     
 
 class CoachingStates(dd.Workflow):
-    """
-Lifecycle of a :class:`Coaching`.
-    
-    
-
-    """
+    """Lifecycle of a :class:`Coaching`."""
     label = _("Coaching state")
     
-    @classmethod
-    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
-      
-        if newstate.name == 'ended':
-            ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
-              user=obj.user,client=obj.client))
-            obj.end_date = datetime.date.today()
+    #~ @classmethod
+    #~ def before_state_change(cls,obj,ar,kw,oldstate,newstate):
+        
+        #~ if newstate.name == 'ended':
+            #~ ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
+              #~ user=obj.user,client=obj.client))
+            #~ obj.end_date = datetime.date.today()
     
 add = CoachingStates.add_item
 #~ add('10', _("New"),'new')
@@ -2104,16 +2135,22 @@ add('30', _("Active"),'active')
 add('40', _("Standby"),'standby')
 add('50', _("Ended"),'ended')
 
+#~ class EndCoaching(NotifyingChangeStateAction):
+    #~ label = _("End coaching")
+    #~ help_text = _("User no longer coaches this client.")  
+    #~ required = dict(states='active standby',user_groups='integ',owner=True)
+
 #~ CoachingStates.suggested.set_required(owner=False)
 CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
 CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
-CoachingStates.active.add_workflow(_("reactivate"),
-    states='standby',owner=True,
-    help_text=_("Client has become active again after having been standby."))
+CoachingStates.active.add_workflow(_("Reactivate"),
+    states='standby ended',owner=True,
+    help_text=_("Client has become active again after having been ended or standby."))
 CoachingStates.standby.add_workflow(states='active',owner=True)
-CoachingStates.ended.add_workflow(_("end coaching"),
-    states='active standby',owner=True,
-    help_text=_("User no longer coaches this client."))
+#~ CoachingStates.ended.add_workflow(EndCoaching)
+CoachingStates.ended.add_workflow(_("End coaching"),
+    help_text=_("User no longer coaches this client."),
+    states='active standby',user_groups='integ',owner=True,notify=True)
 
 """
 CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
@@ -2250,14 +2287,14 @@ class Coachings(dd.Table):
 class CoachingsByClient(Coachings):
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date user type primary workflow_buttons *'
+    column_names = 'start_date end_date user type primary workflow_buttons id'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
-    column_names = 'start_date end_date client type *'
+    column_names = 'start_date end_date client type primary workflow_buttons id'
 
 class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date client type workflow_buttons *'
+    column_names = 'start_date end_date client type primary workflow_buttons id'
 
 class MySuggestedCoachings(MyCoachings):
     label = _("Suggested coachings")
@@ -2614,7 +2651,6 @@ def site_setup(site):
 
     site.modules.contacts.Partners.set_detail_layout(PartnerDetail())
     site.modules.contacts.Companies.set_detail_layout(CompanyDetail())
-    
     site.modules.contacts.Persons.set_detail_layout(PersonDetail())
 
     
