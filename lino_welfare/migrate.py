@@ -173,7 +173,7 @@ def migrate_from_1_4_10(globals_dict):
                 national_id = str(partner_ptr_id)
             client_state = pcsw.ClientStates.coached
             if newcomer:
-                client_state = pcsw.ClientStates.new
+                client_state = pcsw.ClientStates.newcomer
             elif not is_active:
                 client_state = pcsw.ClientStates.former
             elif national_id == str(partner_ptr_id):

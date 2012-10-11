@@ -43,8 +43,9 @@ from lino.modlib.cal.utils import amonthago
 
 #~ from lino_welfare.models import Person
 #~ from lino_welfare.modlib.pcsw import models as welfare
-from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino_welfare.modlib.pcsw import models as pcsw
 
+pcsw = dd.resolve_app('pcsw')
 outbox = dd.resolve_app('outbox')
 
 MODULE_LABEL = _("Newcomers")
@@ -166,15 +167,18 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
     #~ master_key = 'faculty'
     #~ column_names = "name_column broker address_column *"
         
-class NewClientDetail(pcsw.ClientDetail):
-    main = "newcomers " + pcsw.ClientDetail.main
+#~ class NewClientDetail(pcsw.ClientDetail):
+    #~ main = "newcomers " + pcsw.ClientDetail.main
     
-    newcomers = dd.Panel("""
-    broker:12 faculty:12  
-    workflow_buttons
-    AvailableCoachesByClient
-    """,label=_(MODULE_LABEL))
-    
+    #~ newcomers = dd.Panel("""
+    #~ broker:12 faculty:12  
+    #~ workflow_buttons
+    #~ newcomers.AvailableCoachesByClient
+    #~ """,label=_(newcomers.MODULE_LABEL))
+
+#~ print pcsw, dir(pcsw)
+
+
 
 class NewClients(pcsw.Clients):
     required = dict(user_groups=['newcomers'])
@@ -182,7 +186,7 @@ class NewClients(pcsw.Clients):
     label = _("New Clients")
     use_as_default_table = False
     
-    detail_layout = NewClientDetail()
+    #~ detail_layout = NewClientDetail()
     
     column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
     
@@ -210,7 +214,7 @@ class NewClients(pcsw.Clients):
         qs = super(pcsw.Clients,self).get_request_queryset(ar)
         #~ qs = dd.Table.get_request_queryset(ar)
         
-        q = models.Q(client_state=pcsw.ClientStates.new)
+        q = models.Q(client_state=pcsw.ClientStates.newcomer)
         
         if ar.param_values.also_refused:
             q = q | models.Q(client_state=pcsw.ClientStates.refused)
@@ -252,9 +256,6 @@ class ClientsByFaculty(NewClients):
     
     
         
-#~ class UsersByNewcomer(dd.VirtualTable):
-#~ class UsersByNewcomer(dd.Table):
-#~ class UsersByNewcomer(users.Users):
 class AvailableCoaches(users.Users):
     """
     A list of the Users that are susceptible to become responsible for a Newcomer.
@@ -280,7 +281,7 @@ class AvailableCoaches(users.Users):
     
     @chooser()
     def for_client_choices(cls):
-        return Newcomers.request().data_iterator
+        return NewClients.request().data_iterator
         
     @classmethod
     def get_request_queryset(self,ar):
@@ -288,19 +289,18 @@ class AvailableCoaches(users.Users):
         return super(AvailableCoaches,self,ar).filter(models.Q(profile__in=profiles))
         
         
-    #~ @classmethod
-    #~ def get_permission(self,action,user):
-        #~ return isinstance(p.actors.ReadPermission)
-        #~ return True
-        
         
     @classmethod
     def get_data_rows(self,ar):
         """
         We only want the users who actually have at least one client.
         We store the corresponding request in the user object 
-        under the name `my_persons`.
+        under the name `new_clients`.
         """
+        client = ar.param_values.for_client
+        if client and client.client_state != pcsw.ClientStates.newcomer:
+            return
+            
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
         for user in qs:
             if ar.param_values.for_client:
@@ -344,6 +344,7 @@ class AvailableCoaches(users.Users):
 class AvailableCoachesByClient(AvailableCoaches):
     #~ master_key = 'for_client'
     master = pcsw.Client
+    label = _("Available Coaches")
 
     @classmethod
     def get_data_rows(self,ar):
@@ -406,7 +407,14 @@ class AvailableCoachesByClient(AvailableCoaches):
 
 
 
-
+#~ def customize_pcsw():
+    #~ pcsw.ClientDetail.main.replace('general status_tab','general newcomers status_tab')
+    #~ pcsw.ClientDetail.newcomers = dd.Panel("""
+    #~ broker:12 faculty:12  
+    #~ workflow_buttons
+    #~ newcomers.AvailableCoachesByClient
+    #~ """,label=MODULE_LABEL,required=dict(user_groups='newcomers'))
+    
 
 
 
@@ -434,8 +442,38 @@ dd.inject_field(pcsw.Client,
     """The Faculty this client has been attributed to.
     """)
 
-#~ def site_setup(site):
+def site_setup(site):
     #~ site.modules.users.Users.add_detail_tab('newcomers.CompetencesByUser')
+    #~ site.modules.pcsw.Clients.add_detail_tab('newcomers',"""
+    #~ broker:12 faculty:12  
+    #~ workflow_buttons
+    #~ newcomers.AvailableCoachesByClient
+    #~ """,MODULE_LABEL,required=dict(user_groups='newcomers'))
+    
+    #~ site.modules.pcsw.Clients.detail_layout.coaching.replace('coaching_left',"""
+    #~ coaching_left
+    #~ newcomers_left newcomers.AvailableCoachesByClient
+    #~ """)
+    
+    site.modules.pcsw.Clients.detail_layout.coaching.replace('workflow_buttons',"""
+    newcomers_left newcomers.AvailableCoachesByClient
+    """)
+    
+    site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""
+    workflow_buttons
+    broker:12 
+    faculty:12  
+    """)
+    
+    #~ coaching = dd.Panel("""
+    #~ pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
+    #~ """,label=_("Coaching"))
+    
+    #~ coaching_left = """
+    #~ group:16 job_agents
+    #~ """
+    
+    
   
 def setup_main_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.user:
@@ -465,4 +503,5 @@ def setup_explorer_menu(site,ui,user,m):
     m.add_action(AvailableCoaches)
   
 dd.add_user_group('newcomers',MODULE_LABEL)
-  
+
+#~ customize_pcsw()

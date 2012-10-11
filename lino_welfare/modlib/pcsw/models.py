@@ -49,14 +49,7 @@ from lino import dd
 #~ from lino.core import perms
 #~ from lino.utils import printable
 from lino import mixins
-#~ from lino import actions
 #~ from lino import fields
-from lino.modlib.contacts import models as contacts
-from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
-from lino.modlib.uploads import models as uploads
-from lino.modlib.cal import models as cal
-from lino.modlib.users import models as users
 #~ from lino.utils.choicelists import Gender
 #~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.users.models import UserLevels
@@ -79,6 +72,12 @@ from lino.mixins.printable import DirectPrintAction, Printable
 from lino.core.modeltools import obj2str
 from lino.core import actions
 
+from lino.modlib.contacts import models as contacts
+from lino.modlib.notes import models as notes
+#~ from lino.modlib.links import models as links
+from lino.modlib.uploads import models as uploads
+from lino.modlib.cal import models as cal
+from lino.modlib.users import models as users
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.models import DurationUnits, update_reminder
 from lino.modlib.properties import models as properties
@@ -99,7 +98,7 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
-newcomers = dd.resolve_app('newcomers')
+#~ newcomers = dd.resolve_app('newcomers')
 
 from lino.utils.niss import niss_validator, is_valid_niss
 
@@ -326,30 +325,41 @@ class ClientStates(dd.Workflow):
     #~ debug_permissions = True
     
     @classmethod
+    def allow_state_newcomer(cls,obj,user):
+        if obj.client_state == ClientStates.coached:
+            if obj.coachings_by_client.count() > 0:
+                return False
+        return True
+        
+    #~ @classmethod
+    #~ def allow_state_former(cls,obj,user):
+        #~ if obj.client_state == ClientStates.coached:
+            #~ if obj.coachings_by_client.filter(end_date__isnull=True).count():
+                #~ return False
+        #~ return True
+        
+    @classmethod
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):
       
-        if newstate.name == 'refused':
-            pass
-            #~ print ar.action_param_values
+        #~ if newstate.name == 'refused':
+            #~ pass
             
-            #~ dlg = ar.dialog(RefuseNewClientDialog)
-            
-        elif newstate.name == 'former':
-            count = 0
-            if obj.coachings_by_client.filter(end_date__isnull=True).count():
-                raise actions.Warning(_("You must first fill end_date of existing coachings!"))
-            #~ for c in obj.coachings_by_client.filter(user=ar.get_user()):
-                #~ count += 1
-                #~ if not c.end_date:
-            #~ if not count:
-                #~ if ar.get_user().profile.integ_level < UserLevels.admin:
-                    #~ raise actions.Warning(_("No coaching found!"))
-            if issubclass(ar.actor,IntegClients):
-                ar.confirm(_("This will remove %s from this table.") % unicode(obj))
-                kw.update(refresh_all=True)
+        if newstate.name == 'former':
+            qs = obj.coachings_by_client.filter(end_date__isnull=True)
+            if qs.count():
+                ar.confirm(_("This will end %d coachings of %s.") % (qs.count(),unicode(obj)))
+                for co in qs:
+                    co.state = CoachingStates.ended
+                    co.end_date = datetime.date.today()
+                    co.save()
+                #~ obj.set_change_summary()
+                #~ raise actions.Warning(_("You must first fill end_date of existing coachings!"))
+            #~ if issubclass(ar.actor,IntegClients):
+                #~ ar.confirm(_("This will remove %s from this table.") % unicode(obj))
+                #~ kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("Newcomer"),'new') # "N" in PAR->Attrib
+add('10', _("Newcomer"),'newcomer') # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
 add('20', _("Refused"),'refused',help_text = _("An application to become a client has been refused."))
 # coached: neither newcomer nor former, IdPrt != "I"
@@ -357,11 +367,11 @@ add('30', _("Coached"),'coached')
 add('50', _("Former"),'former')
 add('60', _("Invalid"),'invalid')
 
-ClientStates.new.add_workflow(states='refused coached invalid',user_groups='newcomers')
+ClientStates.newcomer.add_workflow(states='refused coached invalid',user_groups='newcomers')
 #~ ClientStates.refused.add_workflow(RefuseNewClient)
-ClientStates.refused.add_workflow(_("Refuse"),states='new invalid',user_groups='newcomers',notify=True)
+ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),states='coached new invalid',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),states='coached invalid',user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
 
@@ -512,7 +522,7 @@ class Client(Person):
       verbose_name=_("Contact person at local job office"),
       related_name='persons_job_office')
       
-    client_state = ClientStates.field(default=ClientStates.new)
+    client_state = ClientStates.field(default=ClientStates.newcomer)
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content')
     
@@ -553,12 +563,12 @@ class Client(Person):
         #~ return None
         
         
-    def get_default_table(self,ar):
-        if ar.get_user().profile.integ_level and self.client_state == ClientStates.coached:
-            return IntegClients
-        if ar.get_user().profile.newcomers_level: 
-            return newcomers.NewClients
-        return Clients # self._lino_default_table
+    #~ def get_default_table(self,ar):
+        #~ if ar.get_user().profile.integ_level and self.client_state == ClientStates.coached:
+            #~ return IntegClients
+        #~ if ar.get_user().profile.newcomers_level: 
+            #~ return newcomers.NewClients
+        #~ return Clients # self._lino_default_table
         
     
     
@@ -1000,7 +1010,7 @@ class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
-    main = "general status_tab coaching history calendar outbox misc"
+    main = "general status_tab coaching tab3 tab4 tab5 tab5b contracts history calendar outbox misc"
     
     general = dd.Panel("""
     box1 box2
@@ -1040,6 +1050,7 @@ class ClientDetail(dd.FormLayout):
     status = """
     in_belgium_since:15 residence_type gesdos_id 
     bank_account1:12 bank_account2:12 
+    job_agents group:16
     """
     
       
@@ -1080,13 +1091,12 @@ class ClientDetail(dd.FormLayout):
     #~ """,label=_("Coaching"))
     
     coaching = dd.Panel("""
-    coaching_left
+    workflow_buttons
     pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
     """,label=_("Coaching"))
     
-    coaching_left = """
-    group:16 job_agents
-    """
+    #~ coaching_left = """
+    #~ """
     
     history = dd.Panel("""
     pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
@@ -1104,11 +1114,44 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Calendar"))
     
     misc = dd.Panel("""
-    activity 
+    activity client_state
     is_cpas is_senior is_deprecated 
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
     """,label = _("Miscellaneous"))
+    
+    
+    tab3 = dd.Panel("""
+    jobs.StudiesByPerson 
+    jobs.ExperiencesByPerson:40
+    """,label = _("Education"))
+    
+    tab4 = dd.Panel("""
+    cv.LanguageKnowledgesByPerson 
+    courses.CourseRequestsByPerson  
+    # skills obstacles
+    """,label = _("Languages"))
+    
+    tab5 = dd.Panel("""
+    cv.SkillsByPerson cv.SoftSkillsByPerson  skills
+    cv.ObstaclesByPerson obstacles 
+    """,label = _("Competences"))
+
+    tab5b = dd.Panel("""
+    jobs.CandidaturesByPerson
+    """,label = _("Job Requests"))
+      
+    contracts = dd.Panel("""
+    isip.ContractsByPerson
+    jobs.ContractsByPerson
+    """,label = _("Contracts"))
+    
+    def setup_handle(self,lh):
+        lh.card_number.label = _("number")
+        lh.card_valid_from.label = _("valid from")
+        lh.card_valid_until.label = _("valid until")
+        lh.card_issuer.label = _("issued by")
+        lh.card_type.label = _("eID card type")
     
 if not settings.LINO.use_beid_jslib:
     ClientDetail.eid_panel.replace('read_beid_card:12 ','')
@@ -1121,79 +1164,6 @@ cbss_summary
 """,label=_("CBSS"),required=dict(user_groups='cbss'))
 
 
-    
-    
-class IntegClientDetail(ClientDetail):
-    #~ main = "general status_tab coaching tab3 tab4 tab5 tab5b history contracts calendar misc"
-    
-    # we insert our new tab panels behind the coaching tab
-    main = ClientDetail.main.replace("coaching ","coaching tab3 tab4 tab5 tab5b contracts ")
-    
-    
-    tab3 = """
-    jobs.StudiesByPerson 
-    jobs.ExperiencesByPerson:40
-    """
-    
-    tab4 = """
-    cv.LanguageKnowledgesByPerson 
-    courses.CourseRequestsByPerson  
-    # skills obstacles
-    """
-    
-    tab5 = """
-    cv.SkillsByPerson cv.SoftSkillsByPerson  skills
-    cv.ObstaclesByPerson obstacles 
-    """
-
-    tab5b = dd.Panel("""
-    jobs.CandidaturesByPerson
-    """,label = _("Job Requests"))
-      
-    contracts = dd.Panel("""
-    isip.ContractsByPerson
-    jobs.ContractsByPerson
-    """,label = _("Contracts"))
-    
-    def setup_handle(self,lh):
-      
-        #~ lh.general.label = _("Person")
-        #~ lh.status_tab.label = _("Status")
-        lh.tab3.label = _("Education")
-        lh.tab4.label = _("Languages")
-        lh.tab5.label = _("Competences")
-        #~ lh.tab5b.label = _("Job Requests")
-        #~ lh.history.label = _("History")
-        #~ lh.contracts.label = _("Contracts")
-        #~ lh.calendar.label = _("Calendar")
-        #~ lh.misc.label = _("Miscellaneous")
-        #~ lh.cbss.label = _("CBSS")
-        
-      
-        #~ lh.box1.label = _("Address")
-        #~ lh.box2.label = _("Contact")
-        #~ lh.box3.label = _("Birth")
-        #~ lh.eid_panel.label = _("eID card")
-        
-        #~ lh.papers.label = _("Papers")
-        #~ lh.income.label = _("Income")
-        #~ lh.suche.label = _("Job search")
-        
-        # override default field labels
-        #~ lh.eid_panel.card_number.label = _("number")
-        #~ lh.eid_panel.card_valid_from.label = _("valid from")
-        #~ lh.eid_panel.card_valid_until.label = _("valid until")
-        #~ lh.eid_panel.card_issuer.label = _("issued by")
-        #~ lh.eid_panel.card_type.label = _("eID card type")
-        
-        lh.card_number.label = _("number")
-        lh.card_valid_from.label = _("valid from")
-        lh.card_valid_until.label = _("valid until")
-        lh.card_issuer.label = _("issued by")
-        lh.card_type.label = _("eID card type")
-
-    
-            
 
 #~ class AllClients(contacts.Persons):
 #~ class AllClients(Partners):
@@ -1379,7 +1349,7 @@ class Clients(contacts.Partners):
     
 class IntegClients(Clients):
     label = _("Integration Clients")
-    detail_layout = IntegClientDetail()
+    #~ detail_layout = IntegClientDetail()
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
     use_as_default_table = False
@@ -2095,8 +2065,8 @@ class ClientContact(contacts.ContactRelated):
     @dd.chooser()
     def company_choices(self,type):
         if not type:  
-            return Companies.request().data_iterator
-        return Companies.request(client_contact_type=type).data_iterator
+            return contacts.Companies.request().data_iterator
+        return contacts.Companies.request(client_contact_type=type).data_iterator
         #~ type = ClientContactTypes.get_by_value(type)
         #~ return type.companies_table.request().data_iterator
         
@@ -2238,6 +2208,17 @@ Enabling this field will automatically make the other coachings non-primary.""")
                 return _("Cannot delete companies and persons imported from TIM")
         return super(Coaching,self).disable_delete(ar)
         
+    def before_ui_save(self,ar,**kw):
+        #~ logger.info("20121011 before_ui_save %s",self)
+        super(Coaching,self).before_ui_save(ar,**kw)
+        if not self.type:
+            self.type = ar.get_user().coaching_type
+        if not self.start_date:
+            self.start_date = datetime.date.today()
+            
+    def __unicode__(self):
+        return _("Coaching of %(client)s by %(user)s") % dict(client=self.client,user=self.user)
+            
     def after_ui_save(self,ar,**kw):
         kw = super(Coaching,self).after_ui_save(ar,**kw)
         if self.primary:
@@ -2247,6 +2228,17 @@ Enabling this field will automatically make the other coachings non-primary.""")
                     c.save()
                     kw.update(refresh_all=True)
         return kw
+        
+    #~ def get_row_permission(self,user,state,ba):
+        #~ """
+        #~ """
+        #~ logger.info("20121011 get_row_permission %s %s",self,ba)
+        #~ if isinstance(ba.action,actions.SubmitInsert):
+            #~ if not user.coaching_type:
+                #~ return False
+        #~ return super(Coaching,self).get_row_permission(user,state,ba)
+      
+      
         
     def full_clean(self,*args,**kw):
         if not isrange(self.start_date,self.end_date):
@@ -2265,6 +2257,21 @@ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     model = Coaching
+    
+    @classmethod
+    def get_create_permission(self,ar):
+        logger.info("20121011 Coachings.get_create_permission()")
+        if not ar.get_user().coaching_type:
+            return 
+        return super(Coachings,self).get_create_permission(ar)
+        
+    #~ @classmethod
+    #~ def create_instance(self,ar,**kw):
+        #~ logger.info("20121011 Coachings.create_instance()")
+        #~ if not ar.get_user().coaching_type:
+            #~ return 
+        #~ return super(Coachings,self).create_instance(ar,**kw)
+    
     
     #~ debug_permissions = True
     #~ parameters = dict(
@@ -2301,8 +2308,8 @@ class MySuggestedCoachings(MyCoachings):
     known_values = dict(state=CoachingStates.suggested)
 
 
-
 def customize_users():
+  
     dd.inject_field(settings.LINO.user_model,
         'coaching_type',
         dd.ForeignKey(CoachingType,

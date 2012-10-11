@@ -238,12 +238,12 @@ INSTALLED_APPS = (
   'lino.modlib.households',
   'lino.modlib.accounts',
   
+  'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
   'lino_welfare.modlib.cv',
   'lino_welfare.modlib.isip',
   'lino_welfare.modlib.jobs',
   'lino_welfare.modlib.courses',
-  'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.cbss',
   'lino.modlib.notes', # notes demo fixture creates notes for Clients 

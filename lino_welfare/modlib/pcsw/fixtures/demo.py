@@ -426,7 +426,7 @@ def objects():
         city=kettenis,country='BE', 
         national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
-        client_state=pcsw.ClientStates.new,
+        client_state=pcsw.ClientStates.newcomer,
         #~ newcomer=True,
         gender=Gender.female)
     yield tatjana
@@ -549,7 +549,7 @@ def objects():
                     
             elif count % 5:
                 #~ client.newcomer = True
-                client.client_state=pcsw.ClientStates.new
+                client.client_state=pcsw.ClientStates.newcomer
             else:
                 client.client_state=pcsw.ClientStates.former
                 
@@ -971,7 +971,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
     AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,melanie, hubert, melanie)
-    #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.new):
+    #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     for client in pcsw.Client.objects.all():
     #~ for i in range(30):
         #~ client = CLIENTS.pop()
@@ -1016,7 +1016,7 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
     USERS = Cycler(User.objects.filter(profile__in=profiles))
     for i in range(7):
         yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
+    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
         p.faculty = FACULTIES.pop()
         p.save()
 

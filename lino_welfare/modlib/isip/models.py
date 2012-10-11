@@ -63,9 +63,9 @@ from lino.core.modeltools import obj2str, models_by_abc
 
 #~ from lino.modlib.cal.models import update_auto_task
 
-from lino.modlib.cal import models as cal
+#~ from lino.modlib.cal import models as cal
 
-
+cal = dd.resolve_app('cal')
 
 #~ class IntegTable(dd.Table):
   

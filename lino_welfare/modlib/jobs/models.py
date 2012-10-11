@@ -85,11 +85,12 @@ from lino.modlib.countries.models import Country, City
 #~ from lino.apps.pcsw.models import Company, Companies, CompanyDetail
 #~ from lino.apps.pcsw import models as pcsw
 #~ pcsw = dd.resolve_app('lino_welfare')
-from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.isip.models import ContractBase
 
 contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
+pcsw = dd.resolve_app('pcsw')
 
 
 #~ SCHEDULE_CHOICES = {

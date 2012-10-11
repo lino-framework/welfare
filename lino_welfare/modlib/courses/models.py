@@ -68,7 +68,10 @@ from lino.modlib.cal.models import update_reminder
 #~ from lino.modlib.contacts.models import Contact
 from lino.core.modeltools import resolve_model, UnresolvedModel
 
-from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino_welfare.modlib.pcsw import models as pcsw
+
+pcsw = dd.resolve_app('pcsw')
+
 
 #~ # not used here, but these modules are required in INSTALLED_APPS, 
 #~ # and other code may import them using 
