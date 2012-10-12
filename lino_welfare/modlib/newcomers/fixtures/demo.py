@@ -60,3 +60,17 @@ def objects():
         #~ p.save()
         
         
+        
+    newcomers = dd.resolve_app('newcomers')
+    users = dd.resolve_app('users')
+    
+    FACULTIES = Cycler(newcomers.Faculty.objects.all())
+    profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
+    USERS = Cycler(users.User.objects.filter(profile__in=profiles))
+    for i in range(7):
+        yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
+    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
+        p.faculty = FACULTIES.pop()
+        p.save()
+
+        

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-09 04:21+0100\n"
-"PO-Revision-Date: 2012-10-09 06:53+0200\n"
+"POT-Creation-Date: 2012-10-12 02:10+0100\n"
+"PO-Revision-Date: 2012-10-12 04:14+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,905 +17,922 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: .\models.py:111
+#: .\models.py:115
 msgid "Civil state"
 msgstr "Zivilstand"
 
-#: .\models.py:123
+#: .\models.py:127
 msgid "Single"
 msgstr "Ledig"
 
-#: .\models.py:124
+#: .\models.py:128
 msgid "Single cohabitating"
 msgstr "Ledig zusammenwohnend"
 
-#: .\models.py:125
+#: .\models.py:129
 msgid "Single with child"
 msgstr "Ledig mit Kind"
 
-#: .\models.py:126
+#: .\models.py:130
 msgid "Married"
 msgstr "Verheiratet"
 
-#: .\models.py:127
+#: .\models.py:131
 msgid "Married (living alone)"
 msgstr "Verheirated (allein lebend)"
 
-#: .\models.py:128
+#: .\models.py:132
 msgid "Married (living with another partner)"
 msgstr "Verheirated (mit anderem Partner lebend)"
 
-#: .\models.py:129
+#: .\models.py:133
 msgid "Widowed"
 msgstr "Verwitwet"
 
-#: .\models.py:130
+#: .\models.py:134
 msgid "Widow cohabitating"
 msgstr "Verwitwet (zusammenwohnend)"
 
-#: .\models.py:131
+#: .\models.py:135
 msgid "Divorced"
 msgstr "Geschieden"
 
-#: .\models.py:132
+#: .\models.py:136
 msgid "Separated"
 msgstr "Getrennt von Tisch und Bett"
 
-#: .\models.py:160
+#: .\models.py:164
 msgid "Residence type"
 msgstr "Register"
 
-#: .\models.py:163
+#: .\models.py:167
 msgid "Registry of citizens"
 msgstr "Bevölkerungsregister"
 
-#: .\models.py:164
+#: .\models.py:168
 msgid "Registry of foreigners"
 msgstr "Fremdenregister"
 
-#: .\models.py:165
+#: .\models.py:169
 msgid "Waiting for registry"
 msgstr "Warteregister"
 
-#: .\models.py:173 .\models.py:1202
+#: .\models.py:177 .\models.py:1161
 msgid "eID card type"
 msgstr "eID-Kartenart"
 
-#: .\models.py:176
+#: .\models.py:180
 msgid "Belgian citizen"
 msgstr "Belgischer Staatsbürger"
 
-#: .\models.py:178
+#: .\models.py:182
 msgid "Kids card (< 12 year)"
 msgstr "Kind unter 12 Jahren"
 
-#: .\models.py:180
+#: .\models.py:184
 msgid "Habilitation"
 msgstr "Habilitierung"
 
-#: .\models.py:182
+#: .\models.py:186
 msgid "Foreigner card A"
 msgstr ""
 "A (Bescheinigung der Eintragung im Ausländerregister - Vorübergehender "
 "Aufenthalt)"
 
-#: .\models.py:186
+#: .\models.py:190
 msgid "Foreigner card B"
 msgstr "B (Bescheinigung der Eintragung im Ausländerregister)"
 
-#: .\models.py:190
+#: .\models.py:194
 msgid "Foreigner card C"
 msgstr "C (Personalausweis für Ausländer)"
 
-#: .\models.py:194
+#: .\models.py:198
 msgid "Foreigner card D"
 msgstr "D (Daueraufenthalt - EG)"
 
-#: .\models.py:198
+#: .\models.py:202
 msgid "Foreigner card E"
 msgstr "E (Anmeldebescheinigung)"
 
-#: .\models.py:202
+#: .\models.py:206
 msgid "Foreigner card E+"
 msgstr "E+"
 
-#: .\models.py:203
+#: .\models.py:207
 msgid "Foreigner card F"
 msgstr "F (Aufenthaltskarte für Familienangehörige eines Unionsbürgers)"
 
-#: .\models.py:207
+#: .\models.py:211
 msgid "Foreigner card F+"
 msgstr "F+"
 
-#: .\models.py:238 .\models.py:1375
+#: .\models.py:242
 msgid "obsolete"
 msgstr "veraltet"
 
-#: .\models.py:249
+#: .\models.py:253
 msgid "Bank account 1"
 msgstr "Bankkonto 1"
 
-#: .\models.py:253
+#: .\models.py:257
 msgid "Bank account 2"
 msgstr "Bankkonto 2"
 
-#: .\models.py:283 .\models.py:2192
+#: .\models.py:287 .\models.py:2221
 msgid "Cannot delete companies and persons imported from TIM"
 msgstr "Aus TIM importierte Partner dürfen nicht gelöscht werden."
 
-#: .\models.py:295 .\models.py:1017
+#: .\models.py:299 .\models.py:1025
 msgid "Person"
 msgstr "Person"
 
-#: .\models.py:296
+#: .\models.py:300
 msgid "Persons"
 msgstr "Personen"
 
-#: .\models.py:298
+#: .\models.py:302
 msgid "is Client"
 msgstr "ist Klient"
 
-#: .\models.py:299
+#: .\models.py:303
 msgid "Whether this Person is a Client."
 msgstr "Ob diese Person ein Klient ist"
 
-#: .\models.py:326
-msgid "Refuse"
-msgstr "Ablehnen"
-
 #: .\models.py:328
-msgid "Write a refusal note and remove the new client request."
-msgstr ""
-
-#: .\models.py:330 .\models.py:1719
-msgid "Reason"
-msgstr "Grund"
-
-#: .\models.py:331
-msgid "Dummy RefuseNewClient"
-msgstr ""
-
-#: .\models.py:336
 msgid "Client state"
 msgstr "Status"
 
-#: .\models.py:350
-msgid "You must first fill end_date of existing coachings!"
-msgstr "Bitte zuerst das Enddatum aller existierenden Begleitungen ausfüllen!"
-
-#: .\models.py:358
+#: .\models.py:356
 #, python-format
-msgid "This will remove %s from this table."
+msgid "This will end %(count)d coachings of %(client)s."
 msgstr ""
 
-#: .\models.py:362
+#: .\models.py:369
 msgid "Newcomer"
 msgstr "Neuantrag"
 
-#: .\models.py:364 .\models.py:2092
+#: .\models.py:371 .\models.py:2115
 msgid "Refused"
 msgstr "Abgelehnt"
 
-#: .\models.py:366
+#: .\models.py:371
+msgid "An application to become a client has been refused."
+msgstr ""
+
+#: .\models.py:373
 msgid "Coached"
 msgstr "Begleitet"
 
-#: .\models.py:367 .\models.py:374
+#: .\models.py:374 .\models.py:381
 msgid "Former"
 msgstr "Ehemalig"
 
-#: .\models.py:368
+#: .\models.py:375
 msgid "Invalid"
 msgstr "Ungültig"
 
-#: .\models.py:382
+#: .\models.py:379
+msgid "Refuse"
+msgstr "Ablehnen"
+
+#: .\models.py:389
 msgid "Client"
 msgstr "Klient"
 
-#: .\models.py:383
+#: .\models.py:390
 msgid "Clients"
 msgstr "Klienten"
 
-#: .\models.py:387
+#: .\models.py:394
 msgid "Remarks (Social Office)"
 msgstr "Bemerkungen (Sozialsekretariat)"
 
-#: .\models.py:390
+#: .\models.py:397
 msgid "Gesdos ID"
 msgstr "Gesdos-Nr"
 
-#: .\models.py:392
+#: .\models.py:399
 msgid "receives social help"
 msgstr "Sozialhilfeempfänger"
 
-#: .\models.py:393
+#: .\models.py:400
 msgid "is senior"
 msgstr "Altenheim"
 
-#: .\models.py:396 .\models.py:1310
+#: .\models.py:403 .\models.py:1357
 msgid "Integration phase"
 msgstr "Integrationsphase"
 
-#: .\models.py:414
+#: .\models.py:421
 msgid "Birth place"
 msgstr "Geburtsort"
 
-#: .\models.py:421
+#: .\models.py:428
 msgid "Birth country"
 msgstr "Geburtsland"
 
-#: .\models.py:429
+#: .\models.py:436
 msgid "National ID"
 msgstr "NR-Nummer"
 
-#: .\models.py:435
+#: .\models.py:442
 msgid "Health insurance"
 msgstr "Krankenkasse"
 
-#: .\models.py:437
+#: .\models.py:444
 msgid "Pharmacy"
 msgstr "Apotheke"
 
-#: .\models.py:442
+#: .\models.py:449
 msgid "Nationality"
 msgstr "Staatsangehörigkeit"
 
-#: .\models.py:447
+#: .\models.py:454
 msgid "eID card number"
 msgstr "eID-Kartennummer"
 
-#: .\models.py:450
+#: .\models.py:457
 msgid "ID card valid from"
 msgstr "ID-Karte gültig von"
 
-#: .\models.py:453 .\models.py:1724 .\models.py:1797 .\models.py:2169
+#: .\models.py:460 .\models.py:1752 .\models.py:1825 .\models.py:2198
 msgid "until"
 msgstr "bis"
 
-#: .\models.py:464
+#: .\models.py:471
 msgid "eID card issuer"
 msgstr "eID-Karte ausgestellt durch"
 
-#: .\models.py:478
+#: .\models.py:485
 msgid "noble condition"
 msgstr "Adelstitel"
 
-#: .\models.py:489
+#: .\models.py:496
 msgid "Lives in Belgium since"
 msgstr "Lebt in Belgien seit"
 
-#: .\models.py:491
+#: .\models.py:498
 msgid "Seeking work since"
 msgstr "eingetragen seit"
 
-#: .\models.py:493
+#: .\models.py:500
 msgid "Needs residence permit"
 msgstr "Braucht Aufenthaltserlaubnis"
 
-#: .\models.py:494
+#: .\models.py:501
 msgid "Needs work permit"
 msgstr "Braucht Arb.Erl."
 
-#: .\models.py:496
+#: .\models.py:503
 msgid "suspended until"
 msgstr "Wartezeit bis"
 
-#: .\models.py:500
+#: .\models.py:507
 msgid "unemployment benefit"
 msgstr "Arbeitslosengeld"
 
-#: .\models.py:501
+#: .\models.py:508
 msgid "waiting pay"
 msgstr "Wartegeld"
 
-#: .\models.py:502
+#: .\models.py:509
 msgid "sickness benefit"
 msgstr "Krankengeld"
 
-#: .\models.py:503
+#: .\models.py:510
 msgid "retirement pension"
 msgstr "Rente"
 
-#: .\models.py:504
+#: .\models.py:511
 msgid "other incomes"
 msgstr "andere Einkommen"
 
-#: .\models.py:506
+#: .\models.py:513
 msgid "is seeking work"
 msgstr "Arbeit suchend"
 
-#: .\models.py:507
+#: .\models.py:514
 msgid "Unavailable until"
 msgstr "Nicht verfügbar bis"
 
-#: .\models.py:510
+#: .\models.py:517
 msgid "reason"
 msgstr "Grund"
 
-#: .\models.py:512
+#: .\models.py:519
 msgid "Obstacles"
 msgstr "Hindernisse"
 
-#: .\models.py:513
+#: .\models.py:520
 msgid "Other skills"
 msgstr "Sonstige Fähigkeiten"
 
-#: .\models.py:516
+#: .\models.py:523
 msgid "Job agents"
 msgstr "Interim-Agenturen"
 
-#: .\models.py:522
+#: .\models.py:529
 msgid "Contact person at local job office"
 msgstr "Kontaktperson ADG"
 
-#: .\models.py:527
+#: .\models.py:534
 msgid "eID sheet"
 msgstr "eID-Inhalt"
 
-#: .\models.py:617
+#: .\models.py:624
 msgid "Circular reference"
 msgstr "Redundanter RÜckbezug"
 
-#: .\models.py:652
+#: .\models.py:659
 msgid "eID card expires in 2 months"
 msgstr "eID-Karte läuft in 2 Monaten ab"
 
-#: .\models.py:655
+#: .\models.py:662
 msgid "becomes available again in 1 month"
 msgstr "wird wieder verfügbar in 1 Monat"
 
-#: .\models.py:658
+#: .\models.py:665
 msgid "work permit suspension ends in 1 month"
 msgstr "Arbeitslosen-Wartezeit endet in 1 Monat"
 
-#: .\models.py:688
+#: .\models.py:695
 msgid "eID card expires"
 msgstr "eID-Karte läuft aus"
 
-#: .\models.py:691
+#: .\models.py:698
 msgid "becomes available again"
 msgstr "ist wieder verfügbar"
 
-#: .\models.py:694
+#: .\models.py:701
 msgid "work permit suspension ends"
 msgstr "Arbeitslosen-Wartezeit endet"
 
-#: .\models.py:697
+#: .\models.py:704
 msgid "coaching ends"
 msgstr "Begleitung endet"
 
-#: .\models.py:700
+#: .\models.py:707
 msgid "Actions"
 msgstr "Aktionen"
 
-#: .\models.py:703
+#: .\models.py:710
 msgid "Read eID card"
 msgstr "eID-Karte einlesen"
 
-#: .\models.py:758
+#: .\models.py:765
 msgid "not filled in"
 msgstr "nicht ausgefüllt"
 
-#: .\models.py:769
+#: .\models.py:776
 msgid "Overview"
 msgstr "Übersicht"
 
-#: .\models.py:771
+#: .\models.py:778
 msgid "Residence permit"
 msgstr "Aufenthaltserlaubnis"
 
-#: .\models.py:782
+#: .\models.py:789
 msgid "Work permit"
 msgstr "Arbeitserlaubnis"
 
-#: .\models.py:791
+#: .\models.py:798
 msgid "driving licence"
 msgstr "Führerschein"
 
-#: .\models.py:841
+#: .\models.py:848
 msgid "Contract starts"
 msgstr "Vertrag beginnt"
 
-#: .\models.py:847
+#: .\models.py:854
 msgid "Contract ends"
 msgstr "Vertrag endet"
 
-#: .\models.py:990 .\models.py:2612
+#: .\models.py:998 .\models.py:2684
 msgid "General"
 msgstr "Allgemein"
 
-#: .\models.py:991
+#: .\models.py:999
 msgid "Notes"
 msgstr "Notizen"
 
-#: .\models.py:1024
+#: .\models.py:1032
 msgid "Address"
 msgstr "Adresse"
 
-#: .\models.py:1031
+#: .\models.py:1039
 msgid "Contact"
 msgstr "Kontakt"
 
-#: .\models.py:1036
+#: .\models.py:1044
 msgid "Birth"
 msgstr "Geburtsangaben"
 
-#: .\models.py:1040
+#: .\models.py:1048
 msgid "eID card"
 msgstr "eID-Karte"
 
-#: .\models.py:1067
+#: .\models.py:1076
 msgid "Job search"
 msgstr "Arbeitssuche"
 
-#: .\models.py:1075
+#: .\models.py:1084
 msgid "Papers"
 msgstr "Papiere"
 
-#: .\models.py:1080
+#: .\models.py:1089
 msgid "Status"
 msgstr "Status"
 
-#: .\models.py:1094 .\models.py:2158 .\models.py:2651
+#: .\models.py:1103 .\models.py:2187 .\models.py:2723
 msgid "Coaching"
 msgstr "Begleitung"
 
-#: .\models.py:1103
+#: .\models.py:1111
 msgid "History"
 msgstr "Chronik"
 
-#: .\models.py:1108
-msgid "Outbox"
-msgstr "Postausgang"
+#: .\models.py:1116
+msgid "Correspondence"
+msgstr "Korrespondenz"
 
-#: .\models.py:1113
+#: .\models.py:1121
 msgid "Calendar"
 msgstr "Kalender"
 
-#: .\models.py:1120
+#: .\models.py:1128
 msgid "Miscellaneous"
 msgstr "Sonstiges"
 
-#: .\models.py:1130
-msgid "CBSS"
-msgstr "KBSS"
-
-#: .\models.py:1160
-msgid "Job Requests"
-msgstr "Stellenanfragen"
-
-#: .\models.py:1165
-msgid "Contracts"
-msgstr "Verträge"
-
-#: .\models.py:1171
+#: .\models.py:1134
 msgid "Education"
 msgstr "Ausbildung"
 
-#: .\models.py:1172
+#: .\models.py:1140
 msgid "Languages"
 msgstr "Sprachen"
 
-#: .\models.py:1173
+#: .\models.py:1145
 msgid "Competences"
 msgstr "Kompetenzen"
 
-#: .\models.py:1198
+#: .\models.py:1149
+msgid "Job Requests"
+msgstr "Stellenanfragen"
+
+#: .\models.py:1154
+msgid "Contracts"
+msgstr "Verträge"
+
+#: .\models.py:1157
 msgid "number"
 msgstr "Nummer"
 
-#: .\models.py:1199
+#: .\models.py:1158
 msgid "valid from"
 msgstr "Gültig von"
 
-#: .\models.py:1200
+#: .\models.py:1159
 msgid "valid until"
 msgstr "Gültig bis"
 
-#: .\models.py:1201
+#: .\models.py:1160
 msgid "issued by"
 msgstr "Ausgestellt durch"
 
-#: .\models.py:1304 .\models.py:1490 .\models.py:1789
-msgid "Coached by"
-msgstr "Begleitet von"
+#: .\models.py:1171
+msgid "CBSS"
+msgstr "KBSS"
 
-#: .\models.py:1305
-msgid "Coached on"
-msgstr "Begleitet am"
+#: .\models.py:1254
+msgid "All Clients"
+msgstr "Alle Klienten"
 
-#: .\models.py:1306
-msgid "Only primary clients"
-msgstr "Nur komplette Akten"
-
-#: .\models.py:1307
-msgid "Also obsolete clients"
-msgstr "Auch veraltete Klienten"
-
-#: .\models.py:1311
-msgid "New clients since"
-msgstr "Neue seit"
-
-#: .\models.py:1313
-msgid "Only active clients"
-msgstr "Nur aktive Klienten"
-
-#: .\models.py:1314
-msgid "Show only clients in 'active' integration phases"
-msgstr ""
-
-#: .\models.py:1364
-msgid " of "
-msgstr " von "
-
-#: .\models.py:1366
-msgid " on "
-msgstr " am "
-
-#: .\models.py:1371
-msgid "active"
-msgstr "aktive"
-
-#: .\models.py:1373
-msgid "primary"
-msgstr "Komplette Akte"
-
-#: .\models.py:1379
-msgid "new since"
-msgstr "neu seit"
-
-#: .\models.py:1394
-msgid "My clients"
-msgstr "Meine Klienten"
-
-#: .\models.py:1484
-msgid "Data Test Clients"
-msgstr "Datenkontrolle Klienten"
-
-#: .\models.py:1491
-msgid "Check NISS validity"
-msgstr "auf gültige NISS prüfen"
-
-#: .\models.py:1492
-msgid "Check for overlapping contracts"
-msgstr "auf Vertragsüberschneidungen prüfen"
-
-#: .\models.py:1535
-msgid "Error message"
-msgstr "Fehlermeldung"
-
-#: .\models.py:1549
-msgid "Users with their Clients"
-msgstr "Benutzer und ihre Klienten"
-
-#: .\models.py:1619
-msgid "Total"
-msgstr "Total"
-
-#: .\models.py:1623
-msgid "Primary clients"
-msgstr "Komplette Akten"
-
-#: .\models.py:1629
-msgid "Active clients"
-msgstr "Aktive Klienten"
-
-#: .\models.py:1641
-msgid "Designation"
-msgstr "Bezeichnung"
-
-#: .\models.py:1642
-msgid "Reference name"
-msgstr "Referenzname"
-
-#: .\models.py:1643
-msgid "Considered active"
-msgstr "aktive Phase"
-
-#: .\models.py:1646
-msgid "Integration Phase"
-msgstr "Integrationsphase"
-
-#: .\models.py:1647
-msgid "Integration Phases"
-msgstr "Integrationsphasen"
-
-#: .\models.py:1669
-msgid "activity"
-msgstr "Beruf"
-
-#: .\models.py:1670
-msgid "activities"
-msgstr "Berufe"
-
-#: .\models.py:1672
-msgid "Appears in Listing 104"
-msgstr "Listing 104"
-
-#: .\models.py:1694
-msgid "exclusion type"
-msgstr "AG-Sperrgrund"
-
-#: .\models.py:1695
-msgid "exclusion types"
-msgstr "AG-Sperrgründe"
-
-#: .\models.py:1714
-msgid "exclusion"
-msgstr "AG-Sperre"
-
-#: .\models.py:1715
-msgid "exclusions"
-msgstr "AG-Sperren"
-
-#: .\models.py:1722
-msgid "from"
-msgstr "von"
-
-#: .\models.py:1725
-msgid "Remark"
-msgstr "Bemerkung"
-
-#: .\models.py:1752
-msgid "aid type"
-msgstr "Sozialhilfeart"
-
-#: .\models.py:1753
-msgid "aid types"
-msgstr "Sozialhilfearten"
-
-#: .\models.py:1773
-msgid "Person Search"
-msgstr "Personensuche"
-
-#: .\models.py:1774
-msgid "Person Searches"
-msgstr "Personensuchen"
-
-#: .\models.py:1777
-msgid "Search Title"
-msgstr "Titel Suchliste"
-
-#: .\models.py:1778
+#: .\models.py:1264 .\models.py:1806
 msgid "Aged from"
 msgstr "Alter von"
 
-#: .\models.py:1780
+#: .\models.py:1266 .\models.py:1808
 msgid "Aged to"
 msgstr "Alter bis"
 
-#: .\models.py:1786
+#: .\models.py:1270 .\models.py:1518 .\models.py:1817
+msgid "Coached by"
+msgstr "Begleitet durch"
+
+#: .\models.py:1271
+msgid "Coached on"
+msgstr "Begleitet am"
+
+#: .\models.py:1272
+msgid "Only primary clients"
+msgstr "Nur komplette Akten"
+
+#: .\models.py:1273
+msgid "Also obsolete clients"
+msgstr "Auch veraltete Klienten"
+
+#: .\models.py:1275
+msgid "Newly coached since"
+msgstr "Neu begleitet seit"
+
+#: .\models.py:1327
+#, fuzzy, python-format
+msgid "Aged %(min)s to %(max)s"
+msgstr "Alter %(min)s bis %(max)s"
+
+#: .\models.py:1349
+msgid "Integration Clients"
+msgstr "DSBE-Klienten"
+
+#: .\models.py:1360
+msgid "Language knowledge"
+msgstr "Sprachkenntnis"
+
+#: .\models.py:1363
+msgid "Wanted skill"
+msgstr "Erwünschte Eigenschaft"
+
+#: .\models.py:1365
+msgid "Only active clients"
+msgstr "Nur aktive Klienten"
+
+#: .\models.py:1366
+msgid "Show only clients in 'active' integration phases"
+msgstr ""
+
+#: .\models.py:1512
+msgid "Data Test Clients"
+msgstr "Datenkontrolle Klienten"
+
+#: .\models.py:1519
+msgid "Check NISS validity"
+msgstr "auf gültige NISS prüfen"
+
+#: .\models.py:1520
+msgid "Check for overlapping contracts"
+msgstr "auf Vertragsüberschneidungen prüfen"
+
+#: .\models.py:1563
+msgid "Error message"
+msgstr "Fehlermeldung"
+
+#: .\models.py:1577
+msgid "Users with their Clients"
+msgstr "Benutzer und ihre Klienten"
+
+#: .\models.py:1647
+msgid "Total"
+msgstr "Total"
+
+#: .\models.py:1651
+msgid "Primary clients"
+msgstr "Komplette Akten"
+
+#: .\models.py:1657
+msgid "Active clients"
+msgstr "Aktive Klienten"
+
+#: .\models.py:1669
+msgid "Designation"
+msgstr "Bezeichnung"
+
+#: .\models.py:1670
+msgid "Reference name"
+msgstr "Referenzname"
+
+#: .\models.py:1671
+msgid "Considered active"
+msgstr "aktive Phase"
+
+#: .\models.py:1674
+msgid "Integration Phase"
+msgstr "Integrationsphase"
+
+#: .\models.py:1675
+msgid "Integration Phases"
+msgstr "Integrationsphasen"
+
+#: .\models.py:1697
+msgid "activity"
+msgstr "Beruf"
+
+#: .\models.py:1698
+msgid "activities"
+msgstr "Berufe"
+
+#: .\models.py:1700
+msgid "Appears in Listing 104"
+msgstr "Listing 104"
+
+#: .\models.py:1722
+msgid "exclusion type"
+msgstr "AG-Sperrgrund"
+
+#: .\models.py:1723
+msgid "exclusion types"
+msgstr "AG-Sperrgründe"
+
+#: .\models.py:1742
+msgid "exclusion"
+msgstr "AG-Sperre"
+
+#: .\models.py:1743
+msgid "exclusions"
+msgstr "AG-Sperren"
+
+#: .\models.py:1747
+msgid "Reason"
+msgstr "Grund"
+
+#: .\models.py:1750
+msgid "from"
+msgstr "von"
+
+#: .\models.py:1753
+msgid "Remark"
+msgstr "Bemerkung"
+
+#: .\models.py:1780
+msgid "aid type"
+msgstr "Sozialhilfeart"
+
+#: .\models.py:1781
+msgid "aid types"
+msgstr "Sozialhilfearten"
+
+#: .\models.py:1801
+msgid "Person Search"
+msgstr "Personensuche"
+
+#: .\models.py:1802
+msgid "Person Searches"
+msgstr "Personensuchen"
+
+#: .\models.py:1805
+msgid "Search Title"
+msgstr "Titel Suchliste"
+
+#: .\models.py:1814
 msgid "Only my clients"
 msgstr "Nur meine Klienten"
 
-#: .\models.py:1794
+#: .\models.py:1822
 msgid "Period from"
 msgstr "Periode vom"
 
-#: .\models.py:1804
+#: .\models.py:1832
 msgid "Unnamed"
 msgstr "Unbenannt"
 
-#: .\models.py:1809
+#: .\models.py:1837
 msgid "Print"
 msgstr "Drucken"
 
-#: .\models.py:1832
+#: .\models.py:1860
 msgid "Language"
 msgstr "Sprache"
 
-#: .\models.py:1833
+#: .\models.py:1861
 msgid "spoken"
 msgstr "Wort"
 
-#: .\models.py:1834
+#: .\models.py:1862
 msgid "written"
 msgstr "Schrift"
 
-#: .\models.py:1839
+#: .\models.py:1867
 msgid "Wanted property"
 msgstr "Gesuchte Eigenschaft"
 
-#: .\models.py:1840 .\models.py:1860
+#: .\models.py:1868 .\models.py:1888
 msgid "Wanted properties"
 msgstr "Gesuchte Eigenschaften"
 
-#: .\models.py:1847
+#: .\models.py:1875
 msgid "Unwanted property"
 msgstr "Unerwünschte Eigenschaft"
 
-#: .\models.py:1848 .\models.py:1866
+#: .\models.py:1876 .\models.py:1894
 msgid "Unwanted properties"
 msgstr "Unerwünschte Eigenschaften"
 
-#: .\models.py:1854
+#: .\models.py:1882
 msgid "Wanted language knowledges"
 msgstr "Erwünschte Sprachkenntnisse"
 
-#: .\models.py:1885
+#: .\models.py:1913
 msgid "Found persons"
 msgstr "Gefundene Personen"
 
-#: .\models.py:1977
+#: .\models.py:2005
 msgid "Overlapping Contracts"
 msgstr "Vertragsüberschneidungen "
 
-#: .\models.py:1997
+#: .\models.py:2025
 msgid "Client Contact type"
 msgstr "Klientenkontaktart"
 
-#: .\models.py:1998
+#: .\models.py:2026
 msgid "Client Contact types"
 msgstr "Klientenkontaktarten"
 
-#: .\models.py:2043
+#: .\models.py:2071
 msgid "Client Contact"
 msgstr "Kontakt"
 
-#: .\models.py:2044
+#: .\models.py:2072
 msgid "Client Contacts"
 msgstr "Klientenkontakte"
 
-#: .\models.py:2048
+#: .\models.py:2076
 msgid "Remarks"
 msgstr "Bemerkungen"
 
-#: .\models.py:2058
+#: .\models.py:2086
 msgid "Contact person"
 msgstr "Kontaktperson"
 
-#: .\models.py:2067
+#: .\models.py:2095
 msgid "Contacts"
 msgstr "Kontakte"
 
-#: .\models.py:2079
+#: .\models.py:2102
 msgid "Coaching state"
 msgstr "Begleitungsstadium"
 
-#: .\models.py:2085
-#, python-format
-msgid "%(user)s stops coaching %(client)s! Are you sure?"
-msgstr "%(user)s beendet die Beleitung von %(client)s! Sind Sie sicher?"
-
-#: .\models.py:2091
+#: .\models.py:2114
 msgid "Suggested"
 msgstr "Vorgeschlagen"
 
-#: .\models.py:2094
+#: .\models.py:2117
 msgid "Active"
 msgstr "aktiv"
 
-#: .\models.py:2095
+#: .\models.py:2118
 msgid "Standby"
 msgstr ""
 
-#: .\models.py:2096
+#: .\models.py:2119
 msgid "Ended"
 msgstr "Beendet"
 
-#: .\models.py:2099
+#: .\models.py:2127
 msgid "refuse"
 msgstr "ablehnen"
 
-#: .\models.py:2100
+#: .\models.py:2128
 msgid "accept"
 msgstr "annehmen"
 
-#: .\models.py:2101
-msgid "reactivate"
-msgstr "reaktivieren"
+#: .\models.py:2129
+msgid "Reactivate"
+msgstr "Reaktivieren"
 
-#: .\models.py:2103
-msgid "Client has become active again after having been standby."
+#: .\models.py:2131
+msgid "Client has become active again after having been ended or standby."
 msgstr ""
 
-#: .\models.py:2105
-msgid "end coaching"
+#: .\models.py:2134
+msgid "End coaching"
 msgstr "Begleitung beenden"
 
-#: .\models.py:2107
+#: .\models.py:2135
 msgid "User no longer coaches this client."
 msgstr ""
 
-#: .\models.py:2121
+#: .\models.py:2150
 msgid "Coaching type"
-msgstr "Begleitungsart"
+msgstr "Begleitungsdienst"
 
-#: .\models.py:2122
+#: .\models.py:2151
 msgid "Coaching types"
-msgstr "Begleitungsarten"
+msgstr "Begleitungsdienste"
 
-#: .\models.py:2159
+#: .\models.py:2188
 msgid "Coachings"
 msgstr "Begleitungen"
 
-#: .\models.py:2166
+#: .\models.py:2195
 msgid "Coached from"
 msgstr "Begleitet seit"
 
-#: .\models.py:2173
+#: .\models.py:2202
 msgid "Primary"
 msgstr "Komplette Akte"
 
-#: .\models.py:2174
+#: .\models.py:2203
 msgid ""
 "There's at most one primary coach per client. \n"
 "Enabling this field will automatically make the other coachings non-primary."
 msgstr ""
 
-#: .\models.py:2207
+#: .\models.py:2233
+#, python-format
+msgid "Coaching of %(client)s by %(user)s"
+msgstr "Begleitung %(client)s durch %(user)s"
+
+#: .\models.py:2258
 msgid "Coaching period ends before it started."
 msgstr "Begleitungsperiode endet bevor sie startet."
 
-#: .\models.py:2218
+#: .\models.py:2269
 msgid "Coach"
 msgstr "Begleiter"
 
-#: .\models.py:2254
+#: .\models.py:2320
 msgid "Suggested coachings"
 msgstr "Begleitungsvorschläge"
 
-#: .\models.py:2267
+#: .\models.py:2333
 msgid "Coaching Supervisor"
 msgstr "Supervisor Begleitungen"
 
-#: .\models.py:2283
+#: .\models.py:2349
 msgid "Local job office"
 msgstr "Lokales Arbeitsamt"
 
-#: .\models.py:2293
+#: .\models.py:2359
 msgid "Upload Type for residence permit"
 msgstr "Upload-Art Aufenthaltserlaubnis"
 
-#: .\models.py:2303
+#: .\models.py:2369
 msgid "Upload Type for work permit"
 msgstr "Upload-Art Arbeitserlaubnis"
 
-#: .\models.py:2312
+#: .\models.py:2378
 msgid "Upload Type for driving licence"
 msgstr "Upload-Art Führerschein"
 
-#: .\models.py:2324
+#: .\models.py:2390
 msgid "usable in contracts"
 msgstr "erlaubt in Verträgen"
 
-#: .\models.py:2326
+#: .\models.py:2392
 msgid ""
 "Whether Links of this type can be used as contact person of a job contract."
 msgstr ""
 
-#: .\models.py:2430
+#: .\models.py:2496
 msgid "Welcome"
 msgstr "Willkommen"
 
-#: .\models.py:2436
+#: .\models.py:2502
 msgid "Hi, "
 msgstr "Hallo, "
 
-#: .\models.py:2455
+#: .\models.py:2521
 #, python-format
 msgid "You have %d entries in "
 msgstr "Sie haben %d Einträge in "
 
-#: .\models.py:2461
+#: .\models.py:2527
 msgid "Warnings"
 msgstr "Warnungen"
 
-#: .\models.py:2464
+#: .\models.py:2530
 msgid "Congratulatons: you have no warnings."
 msgstr "Glückwunsch, Sie haben keine Warnungen."
 
-#: .\models.py:2471
+#: .\models.py:2537
 msgid "PCSW"
 msgstr "ÖSHZ"
 
-#: .\models.py:2616
+#: .\models.py:2538
+msgid "Integration"
+msgstr "DSBE"
+
+#: .\models.py:2688
 msgid "More"
 msgstr "Mehr"
 
-#: .\models.py:2691
-msgid "Integration"
-msgstr "Integration"
+#~ msgid "You must first fill end_date of existing coachings!"
+#~ msgstr ""
+#~ "Bitte zuerst das Enddatum aller existierenden Begleitungen ausfüllen!"
+
+#~ msgid "New clients since"
+#~ msgstr "Neue seit"
+
+#~ msgid " of "
+#~ msgstr " von "
+
+#~ msgid " on "
+#~ msgstr " am "
+
+#~ msgid "active"
+#~ msgstr "aktive"
+
+#~ msgid "primary"
+#~ msgstr "Komplette Akte"
+
+#~ msgid "new since"
+#~ msgstr "neu seit"
+
+#~ msgid "My clients"
+#~ msgstr "Meine Klienten"
+
+#~ msgid "%(user)s stops coaching %(client)s! Are you sure?"
+#~ msgstr "%(user)s beendet die Beleitung von %(client)s! Sind Sie sicher?"
 
 #~ msgid "New"
 #~ msgstr "Neu"
@@ -956,9 +973,6 @@ msgstr "Integration"
 #~ msgid "Other"
 #~ msgstr "Sonstige"
 
-#~ msgid "Only coached on"
-#~ msgstr "Nur begleitete am"
-
 #~ msgid "deprecated"
 #~ msgstr "Altdaten"
 
@@ -983,17 +997,11 @@ msgstr "Integration"
 #~ msgid "Primary clients of %s"
 #~ msgstr "Komplette Akten von %s"
 
-#~ msgid "%(phase)s clients of %(user)s"
-#~ msgstr "%(phase)s-Klienten von %(user)s"
-
 #~ msgid "Active clients of %s"
 #~ msgstr "Aktive Klienten von %s"
 
 #~ msgid "Cannot delete contacts imported from TIM"
 #~ msgstr "Aus TIM importierte Partner dürfen nicht gelöscht werden."
-
-#~ msgid "Integration Agent"
-#~ msgstr "Integrations-Assisten"
 
 #~ msgid "Integration Agent (Senior)"
 #~ msgstr "Integrations-Assistent (Dienstleiter)"
@@ -1151,9 +1159,6 @@ msgstr "Integration"
 
 #~ msgid "proficient use of language"
 #~ msgstr "Exzellente Sprachverwendung"
-
-#~ msgid "language knowledge"
-#~ msgstr "Sprachkenntnis"
 
 #~ msgid "language knowledges"
 #~ msgstr "Sprachkenntnisse"
@@ -1539,9 +1544,6 @@ msgstr "Integration"
 
 #~ msgid "Unwanted skill"
 #~ msgstr "Unerwünschte Fähikeit"
-
-#~ msgid "Wanted skills"
-#~ msgstr "Benötigte Eigenschaften"
 
 #~ msgid "Skill type"
 #~ msgstr "Fähigkeit"

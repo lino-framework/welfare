@@ -7,142 +7,163 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.modlib.jobs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-09 04:22+0100\n"
-"PO-Revision-Date: 2012-06-25 14:38+0200\n"
+"POT-Creation-Date: 2012-10-12 02:10+0100\n"
+"PO-Revision-Date: 2012-10-12 04:17+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: .\models.py:95
+#: .\models.py:96
 msgid "ISIP Type"
 msgstr "VSE-Art"
 
-#: .\models.py:96
+#: .\models.py:97
 msgid "ISIP Types"
 msgstr "VSE-Arten"
 
-#: .\models.py:98
+#: .\models.py:99
 msgid "Reference"
 msgstr "Referenz"
 
-#: .\models.py:125
+#: .\models.py:126
 msgid "Examination Policy"
 msgstr "Auswertungsstrategie"
 
-#: .\models.py:126
+#: .\models.py:127
 msgid "Examination Policies"
 msgstr "Auswertungsstrategien"
 
-#: .\models.py:139
+#: .\models.py:140
 msgid "Contract Ending"
 msgstr "Vertragsbeendigung"
 
-#: .\models.py:140
+#: .\models.py:141
 msgid "Contract Endings"
 msgstr "Vertragsbeendigungen"
 
-#: .\models.py:142
+#: .\models.py:143
 msgid "designation"
 msgstr "Bezeichnung"
 
-#: .\models.py:184
+#: .\models.py:185
 msgid "applies from"
 msgstr "Laufzeit von"
 
-#: .\models.py:185
+#: .\models.py:186
 msgid "applies until"
 msgstr "Laufzeit bis"
 
-#: .\models.py:186
+#: .\models.py:187
 msgid "date decided"
 msgstr "Beschlossen am"
 
-#: .\models.py:187
+#: .\models.py:188
 msgid "date issued"
 msgstr "Ausgestellt am"
 
-#: .\models.py:190
+#: .\models.py:191
 msgid "responsible (ASD)"
 msgstr "Verantwortlicher (ASD)"
 
-#: .\models.py:202
+#: .\models.py:203
 msgid "Ending"
 msgstr "Beendigung"
 
-#: .\models.py:203
+#: .\models.py:204
 msgid "date ended"
 msgstr "Beendet am"
 
-#: .\models.py:336
+#: .\models.py:337
 #, python-format
 msgid "Evaluation %d"
 msgstr "Auswertung %d"
 
-#: .\models.py:348
+#: .\models.py:349
 msgid "Contract ends in a month"
 msgstr "Vertrag endet in einem Monat"
 
-#: .\models.py:404
+#: .\models.py:386
+msgid "past contracts"
+msgstr "Vergangene"
+
+#: .\models.py:387
+msgid "active contracts"
+msgstr "Aktive Verträge"
+
+#: .\models.py:388
+msgid "coming contracts"
+msgstr "Kommende"
+
+#: .\models.py:389
+msgid "on"
+msgstr "am"
+
+#: .\models.py:447
 #, python-format
 msgid "Date range %(p1)s lies outside of coached period %(p2)s."
 msgstr "Datumsbereich %(p1)s außerhalb Begleitungsperiode %(p2)s."
 
-#: .\models.py:408
+#: .\models.py:451
 #, python-format
 msgid "Date range overlaps with %(ctype)s #%(id)s"
 msgstr "Datumsbereich überschneidet sich mit %(ctype)s #%(id)s"
 
-#: .\models.py:420
+#: .\models.py:463
 #, python-format
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: .\models.py:434 .\models.py:501
+#: .\models.py:477 .\models.py:544
 msgid "ISIP"
 msgstr "VSE"
 
-#: .\models.py:435 .\models.py:547
+#: .\models.py:478
 msgid "ISIPs"
 msgstr "VSEs"
 
-#: .\models.py:439
+#: .\models.py:482
 msgid "Contract Type"
 msgstr "Vertragsart"
 
-#: .\models.py:441
+#: .\models.py:484
 msgid "stages"
 msgstr "Etappen"
 
-#: .\models.py:443
+#: .\models.py:486
 msgid "goals"
 msgstr "Zielsetzungen"
 
-#: .\models.py:445
+#: .\models.py:488
 msgid "duties ASD"
 msgstr "Verpflichtungen ASD"
 
-#: .\models.py:447
+#: .\models.py:490
 msgid "duties DSBE"
 msgstr "Verpflichtungen DSBE"
 
-#: .\models.py:449
+#: .\models.py:492
 msgid "duties company"
 msgstr "Verpflichtungen Firma"
 
-#: .\models.py:451
+#: .\models.py:494
 msgid "duties person"
 msgstr "Verpflichtungen Person"
 
-#: .\models.py:460
+#: .\models.py:503
 msgid "responsible (DSBE)"
 msgstr "Verantwortlicher (DSBE)"
 
-#: .\models.py:500
+#: .\models.py:543
 msgid "General"
 msgstr "Allgemein"
+
+#: .\models.py:560
+msgid "Only contracts of type"
+msgstr "Vertragsart"
 
 #~ msgid "represented by"
 #~ msgstr "Vertreten durch"
@@ -158,9 +179,6 @@ msgstr "Allgemein"
 
 #~ msgid "Duration unit"
 #~ msgstr "Zeiteinheit"
-
-#~ msgid "My PIIS contracts"
-#~ msgstr "Meine VSEs"
 
 #~ msgid "ISIP Contract"
 #~ msgstr "VSE-Vertrag"
@@ -248,9 +266,6 @@ msgstr "Allgemein"
 
 #~ msgid "contract title"
 #~ msgstr "Vertragstitel"
-
-#~ msgid "contract type"
-#~ msgstr "Vertragsart"
 
 #~ msgid "Status"
 #~ msgstr "Status"

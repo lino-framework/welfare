@@ -194,7 +194,7 @@ The monthly amount available for distribution among debtors."""))
         if len(l) > 0:
             main_header = _("Common")
         else:
-            main_header = _("Betrag")
+            main_header = _("Amount")
         l.insert(0,MainActor(self,main_header))
         setattr(self,attname,l)
         return l

@@ -352,7 +352,9 @@ class ClientStates(dd.Workflow):
         if newstate.name == 'former':
             qs = obj.coachings_by_client.filter(end_date__isnull=True)
             if qs.count():
-                ar.confirm(_("This will end %d coachings of %s.") % (qs.count(),unicode(obj)))
+                ar.confirm(
+                    _("This will end %(count)d coachings of %(client)s.") % dict(
+                        count=qs.count(),client=unicode(obj)))
                 for co in qs:
                     co.state = CoachingStates.ended
                     co.end_date = datetime.date.today()
@@ -441,7 +443,7 @@ class Client(Person):
     pharmacy = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
         verbose_name=_("Pharmacy"),related_name='pharmacy_for')
     
-    nationality = dd.ForeignKey('countries.Country',
+    nationality = dd.ForeignKey(countries.Country,
         blank=True,null=True,
         related_name='by_nationality',
         verbose_name=_("Nationality"))
@@ -1111,7 +1113,7 @@ class ClientDetail(dd.FormLayout):
     outbox = dd.Panel("""
     outbox.MailsByProject
     postings.PostingsByProject
-    """,label = _("Outbox"))
+    """,label = _("Correspondence"))
     
     calendar = dd.Panel("""
     cal.EventsByProject
@@ -1212,10 +1214,10 @@ def only_coached_by(qs,user):
     #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
     return qs.filter(coachings_by_client__user=user).distinct()
     
-def only_new_since(qs,since):
+#~ def only_new_since(qs,since):
     #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     #~ return qs.filter(coaching_set__end_date__gte=since) 
-    return qs.filter(coachings_by_client__start_date__gte=since) 
+    #~ return qs.filter(coachings_by_client__start_date__gte=since) 
             
 def only_coached_on(qs,today,join=None):
     """
@@ -1249,7 +1251,7 @@ def only_active_coachings_filter(today,prefix=''):
 #~ class Clients(AllClients):
 class Clients(contacts.Partners):
     #~ debug_permissions = True # '20120925'
-    title = _("PCSW Clients")
+    title = _("All Clients")
     model = Client # settings.LINO.person_model
     insert_layout = dd.FormLayout("""
     first_name last_name
@@ -1266,23 +1268,25 @@ class Clients(contacts.Partners):
         gender = contacts.Gender.field(blank=True),
         coached_by = models.ForeignKey(users.User,blank=True,null=True,
             verbose_name=_("Coached by")),
+        nationality = models.ForeignKey(countries.Country,blank=True,null=True,
+            verbose_name=_("Nationality")),
         coached_on = models.DateField(_("Coached on"),blank=True,null=True),
         only_primary = models.BooleanField(_("Only primary clients"),default=False),
         also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
         client_state = ClientStates.field(blank=True),
-        new_since = models.DateField(_("Newly coached since"),blank=True),
+        #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         )
     params_layout = """
-    client_state coached_by aged_from aged_to gender 
-    coached_on only_primary also_obsolete new_since
+    client_state coached_by coached_on only_primary also_obsolete 
+    aged_from aged_to gender nationality
     """
     
     @classmethod
     def get_request_queryset(self,ar):
         #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
         qs = super(Clients,self).get_request_queryset(ar)
-        if ar.param_values.new_since:
-            qs = only_new_since(qs,ar.param_values.new_since)
+        #~ if ar.param_values.new_since:
+            #~ qs = only_new_since(qs,ar.param_values.new_since)
         
         if not ar.param_values.also_obsolete:
             qs = qs.filter(is_deprecated=False)
@@ -1301,6 +1305,8 @@ class Clients(contacts.Partners):
         today = datetime.date.today()
         if ar.param_values.gender:
             qs = qs.filter(gender__exact=ar.param_values.gender)
+        if ar.param_values.nationality:
+            qs = qs.filter(nationality__exact=ar.param_values.nationality)
         if ar.param_values.aged_from:
             #~ q1 = models.Q(birth_date__isnull=True)
             #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
@@ -1336,8 +1342,8 @@ class Clients(contacts.Partners):
             yield unicode(self.parameters['also_obsolete'].verbose_name)
         if ar.param_values.coached_by:
             yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
-        if ar.param_values.new_since:
-            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
+        #~ if ar.param_values.new_since:
+            #~ yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
         if ar.param_values.coached_on:
             yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
         
@@ -1366,9 +1372,9 @@ class IntegClients(Clients):
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
-    coached_by coached_on only_primary also_obsolete new_since
-    aged_from aged_to gender 
-    language wanted_property group only_active 
+    client_state coached_by coached_on only_primary also_obsolete 
+    aged_from aged_to gender nationality
+    language wanted_property group only_active only_primary 
     """
     
     #~ @classmethod
@@ -1376,8 +1382,16 @@ class IntegClients(Clients):
         #~ return self.model._meta.verbose_name_plural
     
     @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(IntegClients,self).param_defaults(ar,**kw)
+        kw.update(client_state=ClientStates.coached)
+        #~ kw.update(coached_by=ar.get_user())
+        #~ # print "20120918 MyClients.param_defaults", kw['coached_by']
+        return kw
+        
+    @classmethod
     def get_request_queryset(self,ar):
-        ar.param_values.update(client_state = ClientStates.coached)
+        #~ ar.param_values.update(client_state = ClientStates.coached)
         qs = super(IntegClients,self).get_request_queryset(ar)
         if ar.param_values.language:
             qs = qs.filter(
@@ -2271,7 +2285,7 @@ class Coachings(dd.Table):
     
     @classmethod
     def get_create_permission(self,ar):
-        logger.info("20121011 Coachings.get_create_permission()")
+        #~ logger.info("20121011 Coachings.get_create_permission()")
         if not ar.get_user().coaching_type:
             return 
         return super(Coachings,self).get_create_permission(ar)
@@ -2561,7 +2575,7 @@ def setup_main_menu(site,ui,user,m):
   
         m = m.add_menu("integ",INTEG_MODULE_LABEL)
         m.add_action(IntegClients)
-        m.add_action(MyPersonSearches)
+        #~ m.add_action(MyPersonSearches)
 
         
 
@@ -2579,6 +2593,12 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(ClientContactTypes)
     
     
+def setup_reports_menu(site,ui,user,m):
+    m.add_action(site.modules.jobs.JobsOverview)
+    m.add_action(site.modules.pcsw.UsersWithClients)
+    m.add_action(site.modules.pcsw.ClientsTest)
+        
+  
 def setup_explorer_menu(site,ui,user,m):
     m  = m.add_menu("pcsw",MODULE_LABEL)
     m.add_action(Coachings)

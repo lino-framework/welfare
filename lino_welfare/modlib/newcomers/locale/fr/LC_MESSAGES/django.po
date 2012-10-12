@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-09 04:22+0100\n"
+"POT-Creation-Date: 2012-10-12 02:11+0100\n"
 "PO-Revision-Date: 2012-06-25 13:19+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -16,118 +16,109 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: .\models.py:50
+#: .\models.py:51
 msgid "Newcomers"
 msgstr "Nouvelles demandes"
 
-#: .\models.py:58
+#: .\models.py:59
 msgid "Broker"
 msgstr "Intermédiaire "
 
-#: .\models.py:59
+#: .\models.py:60
 msgid "Brokers"
 msgstr "Intermédiaires"
 
-#: .\models.py:87
+#: .\models.py:88
 msgid "Faculty"
 msgstr "Spécificité"
 
-#: .\models.py:88
+#: .\models.py:89
 msgid "Faculties"
 msgstr "Spécificités"
 
-#: .\models.py:111
+#: .\models.py:112
 msgid "Competence"
 msgstr "Compétence"
 
-#: .\models.py:112
+#: .\models.py:113
 msgid "Competences"
 msgstr "Compétences"
 
-#: .\models.py:182 .\models.py:335
+#: .\models.py:186 .\models.py:332
 msgid "New Clients"
 msgstr "Nouveaux clients"
 
-#: .\models.py:197
+#: .\models.py:201
 msgid "Also refused clients"
 msgstr ""
 
-#: .\models.py:198
+#: .\models.py:202
 #, fuzzy
 msgid "Also obsolete clients"
 msgstr "Clients actifs"
 
-#: .\models.py:200
+#: .\models.py:204
 msgid "Also newly coached clients since"
 msgstr ""
 
-#: .\models.py:202
+#: .\models.py:206
 msgid "Coached by"
 msgstr "AI"
 
-#: .\models.py:242
-msgid "refused"
-msgstr ""
-
-#: .\models.py:244
-msgid "obsolete"
-msgstr ""
-
-#: .\models.py:246
-#, fuzzy
-msgid "new since"
-msgstr "Considérer nouveau depuis"
-
-#: .\models.py:273
+#: .\models.py:271 .\models.py:347
 msgid "Available Coaches"
 msgstr ""
 
-#: .\models.py:277
+#: .\models.py:275
 msgid "Show suggested agents for"
 msgstr "Montrer agents proposés pour"
 
-#: .\models.py:279
+#: .\models.py:277
 msgid "Count Newcomers since"
 msgstr "Considérer nouveau depuis"
 
-#: .\models.py:325
+#: .\models.py:322
 msgid "Primary clients"
 msgstr "Dossiers complets"
 
-#: .\models.py:330
+#: .\models.py:327
 msgid "Active clients"
 msgstr "Clients actifs"
 
-#: .\models.py:339
+#: .\models.py:336
 msgid "Score"
 msgstr "Score"
 
-#: .\models.py:356
+#: .\models.py:354
 msgid "Assign"
 msgstr ""
 
-#: .\models.py:364
+#: .\models.py:362
 #, python-format
 msgid "Cannot assign client %(client)s with invalid NISS %(niss)s."
 msgstr ""
 
-#: .\models.py:366
+#: .\models.py:364
 #, python-format
 msgid "Assign client %(client)s for coaching by %(user)s."
 msgstr ""
 
-#: .\models.py:367
+#: .\models.py:365
 msgid "Are you sure?"
 msgstr ""
 
-#: .\models.py:380
+#: .\models.py:378
 #, python-format
 msgid "Client %(client)s has been assigned to %(user)s"
 msgstr ""
 
-#: .\models.py:420
+#: .\models.py:425
 msgid "Newcomers Quota"
 msgstr "Quota nouvelles demandes"
+
+#, fuzzy
+#~ msgid "new since"
+#~ msgstr "Considérer nouveau depuis"
 
 #~ msgid "Users by Newcomer"
 #~ msgstr "Agents par nouvelle demande"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-09 04:22+0100\n"
+"POT-Creation-Date: 2012-10-12 02:10+0100\n"
 "PO-Revision-Date: 2012-06-25 14:37+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -16,133 +16,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: .\models.py:95
+#: .\models.py:96
 msgid "ISIP Type"
 msgstr "Type de PIIS"
 
-#: .\models.py:96
+#: .\models.py:97
 msgid "ISIP Types"
 msgstr "Types de PIIS"
 
-#: .\models.py:98
+#: .\models.py:99
 msgid "Reference"
 msgstr "référence"
 
-#: .\models.py:125
+#: .\models.py:126
 msgid "Examination Policy"
 msgstr "Méthode d'examination"
 
-#: .\models.py:126
+#: .\models.py:127
 msgid "Examination Policies"
 msgstr "Méthode d'examination"
 
-#: .\models.py:139
+#: .\models.py:140
 msgid "Contract Ending"
 msgstr "Rupture/fin de contrat"
 
-#: .\models.py:140
+#: .\models.py:141
 msgid "Contract Endings"
 msgstr "Ruptures/fins de contrat"
 
-#: .\models.py:142
+#: .\models.py:143
 msgid "designation"
 msgstr "désignation"
 
-#: .\models.py:184
+#: .\models.py:185
 msgid "applies from"
 msgstr "Début de contrat"
 
-#: .\models.py:185
+#: .\models.py:186
 msgid "applies until"
 msgstr "Fin prévue"
 
-#: .\models.py:186
+#: .\models.py:187
 msgid "date decided"
 msgstr "Décidé le"
 
-#: .\models.py:187
+#: .\models.py:188
 msgid "date issued"
 msgstr "Délivré le"
 
-#: .\models.py:190
+#: .\models.py:191
 msgid "responsible (ASD)"
 msgstr "Responsable (SSG)"
 
-#: .\models.py:202
+#: .\models.py:203
 msgid "Ending"
 msgstr "Cause d'abandon"
 
-#: .\models.py:203
+#: .\models.py:204
 msgid "date ended"
 msgstr "Abandon le"
 
-#: .\models.py:336
+#: .\models.py:337
 #, python-format
 msgid "Evaluation %d"
 msgstr "Evaluation %d"
 
-#: .\models.py:348
+#: .\models.py:349
 msgid "Contract ends in a month"
 msgstr "Projet termine dans un mois"
 
-#: .\models.py:404
+#: .\models.py:386
+#, fuzzy
+msgid "past contracts"
+msgstr "Mes contrats PIIS"
+
+#: .\models.py:387
+#, fuzzy
+msgid "active contracts"
+msgstr "Mes contrats PIIS"
+
+#: .\models.py:388
+#, fuzzy
+msgid "coming contracts"
+msgstr "Mes contrats PIIS"
+
+#: .\models.py:389
+msgid "on"
+msgstr ""
+
+#: .\models.py:447
 #, python-format
 msgid "Date range %(p1)s lies outside of coached period %(p2)s."
 msgstr "Période %(p1)s hors période d'accompagnement %(p2)s."
 
-#: .\models.py:408
+#: .\models.py:451
 #, python-format
 msgid "Date range overlaps with %(ctype)s #%(id)s"
 msgstr "Projet chevauche avec %(ctype)s #%(id)s"
 
-#: .\models.py:420
+#: .\models.py:463
 #, python-format
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: .\models.py:434 .\models.py:501
+#: .\models.py:477 .\models.py:544
 msgid "ISIP"
 msgstr "PIIS"
 
-#: .\models.py:435 .\models.py:547
+#: .\models.py:478
 msgid "ISIPs"
 msgstr "PIISs"
 
-#: .\models.py:439
+#: .\models.py:482
 msgid "Contract Type"
 msgstr "Type de contrat"
 
-#: .\models.py:441
+#: .\models.py:484
 msgid "stages"
 msgstr "stages"
 
-#: .\models.py:443
+#: .\models.py:486
 msgid "goals"
 msgstr "buts"
 
-#: .\models.py:445
+#: .\models.py:488
 msgid "duties ASD"
 msgstr "devoirs SSG"
 
-#: .\models.py:447
+#: .\models.py:490
 msgid "duties DSBE"
 msgstr "devois ISP"
 
-#: .\models.py:449
+#: .\models.py:492
 msgid "duties company"
 msgstr "devoirs entreprise"
 
-#: .\models.py:451
+#: .\models.py:494
 msgid "duties person"
 msgstr "Devoirs personne"
 
-#: .\models.py:460
+#: .\models.py:503
 msgid "responsible (DSBE)"
 msgstr "Responsable (ISP)"
 
-#: .\models.py:500
+#: .\models.py:543
 msgid "General"
 msgstr "Général"
+
+#: .\models.py:560
+#, fuzzy
+msgid "Only contracts of type"
+msgstr "type de contrat"
 
 #~ msgid "represented by"
 #~ msgstr "représenté par"
@@ -152,9 +176,6 @@ msgstr "Général"
 
 #~ msgid "Company"
 #~ msgstr "Société"
-
-#~ msgid "My PIIS contracts"
-#~ msgstr "Mes contrats PIIS"
 
 #~ msgid "ISIP Contract"
 #~ msgstr "Contrat PIIS"
@@ -235,9 +256,6 @@ msgstr "Général"
 
 #~ msgid "contract title"
 #~ msgstr "intitulé du contrat"
-
-#~ msgid "contract type"
-#~ msgstr "type de contrat"
 
 #~ msgid "Status"
 #~ msgstr "Statut"

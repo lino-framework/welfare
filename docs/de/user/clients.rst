@@ -6,17 +6,25 @@ Klienten
 Klienten
 ========
 
-Klienten gibt es momentan in drei Tabellen:
+Klienten gibt es momentan in drei Tabellen, die sich durch Kolonnenreihenfolge 
+und Filterparameter unterscheiden:
 
-- Clients : allgemeine Liste, die jeder Benutzer sehen darf.
+- :menuselection:`ÖSHZ --> Klienten` : 
+  allgemeine Liste, die jeder Benutzer sehen darf.
 
-- IntegClients : DSBE-spezifische Kundenliste.
+- :menuselection:`DSBE --> Klienten` 
   Zeigt immer nur **begleitete** Kunden. 
   Hier kann man keine neuen Klienten anlegen.
   Die Reiter Kompetenzen, Verträge... finden sich nur hier.
   
-- NewClients : spezielle Liste für Kundenverwaltung, insbesondere 
-  die Zuweisung von Neuanträgen.
+- :menuselection:`Neuanträge --> Klienten` 
+  spezielle Liste für die Zuweisung von Neuanträgen.
+
+N.B. 
+Das Detail, das bei Doppelklick angezeigt wird, 
+ist bei allen drei Listen das Gleice. 
+Das hängt vom Benutzerprofil ab.
+
 
 
 

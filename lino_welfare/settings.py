@@ -158,10 +158,8 @@ class Lino(Lino):
         
         self.on_each_app('setup_main_menu',ui,user,main)
         
-        m = main.add_menu("lst",_("Listings"))
-        m.add_action(self.modules.jobs.JobsOverview)
-        m.add_action(self.modules.pcsw.UsersWithClients)
-        m.add_action(self.modules.pcsw.ClientsTest)
+        m = main.add_menu("reports",_("Listings"))
+        self.on_each_app('setup_reports_menu',ui,user,m)
         
         if user.profile.level >= UserLevels.manager: # is_staff:
             cfg = main.add_menu("config",_("Configure"))
@@ -238,12 +236,13 @@ INSTALLED_APPS = (
   'lino.modlib.households',
   'lino.modlib.accounts',
   
-  'lino_welfare.modlib.newcomers',
+  # NOTE: ordering influences (1) main menu (2) fixtures loading
   'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
   'lino_welfare.modlib.cv',
   'lino_welfare.modlib.isip',
   'lino_welfare.modlib.jobs',
   'lino_welfare.modlib.courses',
+  'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.cbss',
   'lino.modlib.notes', # notes demo fixture creates notes for Clients 

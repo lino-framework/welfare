@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-09 04:22+0100\n"
+"POT-Creation-Date: 2012-10-12 02:19+0100\n"
 "PO-Revision-Date: 2012-09-19 00:26+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -17,187 +17,183 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.3\n"
 
-#: .\models.py:152
+#: .\models.py:153
 msgid "Budget"
 msgstr "Budget"
 
-#: .\models.py:153
+#: .\models.py:154
 msgid "Budgets"
 msgstr "Budgets"
 
-#: .\models.py:157
+#: .\models.py:158
 msgid "Date"
 msgstr "Datum"
 
-#: .\models.py:161
+#: .\models.py:162
 msgid "Print to-do list"
 msgstr "To-do-Liste drucken"
 
-#: .\models.py:170
+#: .\models.py:171
 msgid "Introduction"
 msgstr "Einleitung"
 
-#: .\models.py:171
+#: .\models.py:172
 msgid "Conclusion"
 msgstr "Schlussfolgerung"
 
-#: .\models.py:172
+#: .\models.py:173
 msgid "Disposable amount"
 msgstr "Verfügbarer Betrag"
 
-#: .\models.py:172
+#: .\models.py:173
 msgid "The monthly amount available for distribution among debtors."
 msgstr ""
 
-#: .\models.py:183
+#: .\models.py:184
 msgid "New"
 msgstr "Neu"
 
-#: .\models.py:185
+#: .\models.py:186
 #, python-format
 msgid "Budget %(pk)d for %(partner)s"
 msgstr "Budget Nr. %(pk)d für %(partner)s"
 
-#: .\models.py:194
+#: .\models.py:195
 msgid "Common"
 msgstr "Gemeinsam"
 
-#: .\models.py:196
-msgid "Betrag"
-msgstr ""
+#: .\models.py:197 .\models.py:574 .\models.py:870 .\models.py:874
+#: .\models.py:878 .\models.py:882 .\models.py:886 .\models.py:982
+msgid "Amount"
+msgstr "Betrag"
 
-#: .\models.py:349
+#: .\models.py:350
 msgid "Mr."
 msgstr "Herr"
 
-#: .\models.py:352
+#: .\models.py:353
 msgid "Mrs."
 msgstr "Frau"
 
-#: .\models.py:374
+#: .\models.py:375
 msgid "Preview"
 msgstr "Vorschau"
 
-#: .\models.py:431
+#: .\models.py:432
 msgid "General"
 msgstr "Allgemein"
 
-#: .\models.py:432
+#: .\models.py:433
 msgid "Expenses & Income"
 msgstr "Ausgaben und Einkünfte"
 
-#: .\models.py:433
+#: .\models.py:434
 msgid "Liabilities & Assets"
 msgstr "Verpflichtungen & Vermögen"
 
-#: .\models.py:434
+#: .\models.py:435
 msgctxt "debts"
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: .\models.py:513
+#: .\models.py:514
 msgid "Budget Actor"
 msgstr "Budget-Akteur"
 
-#: .\models.py:514
+#: .\models.py:515
 msgid "Budget Actors"
 msgstr "Budget-Akteure"
 
-#: .\models.py:524
+#: .\models.py:525
 msgid "Header"
 msgstr "Kolonnenüberschrift"
 
-#: .\models.py:525 .\models.py:587
+#: .\models.py:526 .\models.py:588
 msgid "Remark"
 msgstr "Bemerkung"
 
-#: .\models.py:541
+#: .\models.py:542
 msgid "Actor"
 msgstr "Akteur"
 
-#: .\models.py:561
+#: .\models.py:562
 msgid "Budget Entry"
 msgstr "Eintrag"
 
-#: .\models.py:562
+#: .\models.py:563
 msgid "Budget Entries"
 msgstr "Einträge"
 
-#: .\models.py:573 .\models.py:869 .\models.py:873 .\models.py:877
-#: .\models.py:881 .\models.py:885 .\models.py:981
-msgid "Amount"
-msgstr "Betrag"
-
-#: .\models.py:580
+#: .\models.py:581
 msgid "Circa"
 msgstr "ca."
 
-#: .\models.py:582
+#: .\models.py:583
 msgid "Distribute"
 msgstr "Verteilen"
 
-#: .\models.py:586
+#: .\models.py:587
 msgid "To Do"
 msgstr "to do"
 
-#: .\models.py:591 .\models.py:625 .\models.py:858 .\models.py:977
+#: .\models.py:592 .\models.py:626 .\models.py:859 .\models.py:978
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models.py:600 .\models.py:1102
+#: .\models.py:601 .\models.py:1105
 msgid "Periods"
 msgstr "Perioden"
 
-#: .\models.py:605
+#: .\models.py:606
 msgid "Monthly rate"
 msgstr "Monatsrte"
 
-#: .\models.py:651
+#: .\models.py:652
 msgid "Periods must be > 0"
 msgstr ""
 
-#: .\models.py:655
+#: .\models.py:656
 #, python-format
 msgid "Cannot set 'Distribute' when 'Monthly rate' is %r"
 msgstr ""
 
-#: .\models.py:854
+#: .\models.py:855
 msgid "Total"
 msgstr ""
 
-#: .\models.py:951
+#: .\models.py:952
 msgid "Overview"
 msgstr "Übersicht"
 
-#: .\models.py:999
+#: .\models.py:1000
 msgid "Debts distribution"
 msgstr "Schuldenverteilung"
 
-#: .\models.py:1027
+#: .\models.py:1028
 msgid "%"
 msgstr ""
 
-#: .\models.py:1031
+#: .\models.py:1032
 msgid "Monthly payback suggested"
 msgstr "Betrag der monatlichen Rückzahlung"
 
-#: .\models.py:1038
+#: .\models.py:1039
 msgid "Creditor"
 msgstr "Kreditor"
 
-#: .\models.py:1039
+#: .\models.py:1040
 msgid "Debt"
 msgstr "Schuld"
 
-#: .\models.py:1044
+#: .\models.py:1045
 msgid "Debts mediation"
 msgstr "Schuldnerberatung"
 
-#: .\models.py:1093
+#: .\models.py:1096
 msgid "Required for Households"
 msgstr "verpflichtend für Haushalte"
 
-#: .\models.py:1098
+#: .\models.py:1101
 msgid "Required for Persons"
 msgstr "verpflichtend für Personen"
 

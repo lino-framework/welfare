@@ -1008,16 +1008,4 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
                 
 
-    newcomers = dd.resolve_app('newcomers')
-    #~ from lino.utils.choicelists import UserProfiles
-    
-    FACULTIES = Cycler(newcomers.Faculty.objects.all())
-    profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-    USERS = Cycler(User.objects.filter(profile__in=profiles))
-    for i in range(7):
-        yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
-        p.faculty = FACULTIES.pop()
-        p.save()
-
 #~ print "20121010 pcsw.fixtures.demo has been imported"

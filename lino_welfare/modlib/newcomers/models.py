@@ -201,7 +201,9 @@ class NewClients(pcsw.Clients):
       also_refused = models.BooleanField(_("Also refused clients"),default=False),
       also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
       #~ new_since = models.DateField(_("New clients since"),blank=True),
-      new_since = models.DateField(_("Also newly coached clients since"),default=amonthago,blank=True,null=True),
+      new_since = models.DateField(_("Also newly coached clients since"),
+          #~ default=amonthago,
+          blank=True,null=True),
       coached_by = models.ForeignKey(users.User,blank=True,null=True,
           verbose_name=_("Coached by")),
       #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
@@ -220,7 +222,6 @@ class NewClients(pcsw.Clients):
             q = q | models.Q(client_state=pcsw.ClientStates.refused)
         #~ q = models.Q(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
         if ar.param_values.new_since:
-            #~ qs = pcsw.only_new_since(qs,ar.param_values.new_since)
             q = q | models.Q(
                 client_state=pcsw.ClientStates.coached,
                 coachings_by_client__start_date__gte=ar.param_values.new_since)
@@ -250,7 +251,7 @@ class NewClients(pcsw.Clients):
         
         
         
-class ClientsByFaculty(NewClients):
+class ClientsByFaculty(pcsw.Clients):
     master_key = 'faculty'
     column_names = "name_column broker address_column *"
     
@@ -340,19 +341,18 @@ class AvailableCoaches(users.Users):
         else:
             return None
         
-
-class AvailableCoachesByClient(AvailableCoaches):
-    #~ master_key = 'for_client'
-    master = pcsw.Client
-    label = _("Available Coaches")
-
-    @classmethod
-    def get_data_rows(self,ar):
-        ar.param_values.for_client = ar.master_instance
-        return super(AvailableCoachesByClient,self).get_data_rows(ar)
-        
-    @dd.action(label=_("Assign"))
-    def assign_coach(obj,ar,**kw):
+class AssignCoach(dd.RowAction):
+    label=_("Assign")
+    parameters = dict(
+        interactive = models.BooleanField(_("Edit notification mail")),
+        dummy = models.BooleanField(_("Dummy option"))
+    )
+    params_layout = """
+    interactive
+    dummy
+    """
+    
+    def run(self,obj,ar,**kw):
         """
         Assign a coach to a newcomer.
         """
@@ -361,7 +361,7 @@ class AvailableCoachesByClient(AvailableCoaches):
             return ar.error_response(alert=True,
                 message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
                 % dict(client=client,niss=client.national_id))
-        msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
+        msg = _("Assign client %(client)s for coaching by %(agent)s.") % dict(client=client,agent=obj)
         ar.confirm(msg,_("Are you sure?"))
         
         
@@ -375,7 +375,9 @@ class AvailableCoachesByClient(AvailableCoaches):
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
-        msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
+        #~ msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
+        body = _("""%(user)s executed the following action:\n%(msg)s
+        """) % dict(client=client,agent=obj,user=ar.get_user(),msg=msg)
         
         recipients = []
         recipients.append(
@@ -386,8 +388,8 @@ class AvailableCoachesByClient(AvailableCoaches):
             
         if len(recipients):
             m = outbox.Mail(user=ar.get_user(),
-                subject='Newcomer has been assigned',
-                body = """Hallo Kollege,\n%s""" % msg,
+                subject=_('Newcomer has been assigned'),
+                body = body,
                 project=client,
                 owner=coaching)
             m.full_clean()
@@ -397,11 +399,79 @@ class AvailableCoachesByClient(AvailableCoaches):
                 r = outbox.Recipient(mail=m,**rec)
                 r.full_clean()
                 r.save()
-            interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
-            if interactive:
+            #~ interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
+            if ar.action_param_values.interactive:
                 js = ar.renderer.instance_handler(ar,m)
                 kw.update(eval_js=js)
+            else:
+                m.send_mail.run(m,ar)
         return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
+    
+
+class AvailableCoachesByClient(AvailableCoaches):
+    #~ master_key = 'for_client'
+    master = pcsw.Client
+    label = _("Available Coaches")
+    
+    assign_coach = AssignCoach()
+
+    @classmethod
+    def get_data_rows(self,ar):
+        ar.param_values.for_client = ar.master_instance
+        return super(AvailableCoachesByClient,self).get_data_rows(ar)
+        
+    #~ @dd.action(label=_("Assign"))
+    #~ def assign_coach(obj,ar,**kw):
+        #~ """
+        #~ Assign a coach to a newcomer.
+        #~ """
+        #~ client = ar.master_instance
+        #~ if not pcsw.is_valid_niss(client.national_id):
+            #~ return ar.error_response(alert=True,
+                #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
+                #~ % dict(client=client,niss=client.national_id))
+        #~ msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
+        #~ ar.confirm(msg,_("Are you sure?"))
+        
+        
+        #~ coaching = pcsw.Coaching(client=client,user=obj,
+            #~ start_date=datetime.date.today(),
+            #~ type=obj.coaching_type,
+            #~ state=pcsw.CoachingStates.suggested)
+        #~ if not obj.profile:
+            #~ coaching.state = pcsw.CoachingStates.active
+        #~ coaching.save()
+        #~ client.client_state = pcsw.ClientStates.coached
+        #~ client.full_clean()
+        #~ client.save()
+        #~ msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
+        
+        #~ recipients = []
+        #~ recipients.append(
+            #~ dict(name=unicode(obj),address=obj.email,type=outbox.RecipientType.to))
+        #~ for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+            #~ recipients.append(
+                #~ dict(name=unicode(u),address=u.email,type=outbox.RecipientType.to))
+            
+        #~ if len(recipients):
+            #~ m = outbox.Mail(user=ar.get_user(),
+                #~ subject=_('Newcomer has been assigned'),
+                #~ body = """Hallo Kollege,\n%s""" % msg,
+                #~ project=client,
+                #~ owner=coaching)
+            #~ m.full_clean()
+            #~ m.save()
+            #~ # for t,p in [(outbox.RecipientType.to,obj.partner)]:
+            #~ for rec in recipients:
+                #~ r = outbox.Recipient(mail=m,**rec)
+                #~ r.full_clean()
+                #~ r.save()
+            #~ m.send_mail.run(m,ar)
+            #~ interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
+            #~ if interactive:
+                #~ js = ar.renderer.instance_handler(ar,m)
+                #~ kw.update(eval_js=js)
+        #~ return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
         
         
 
@@ -500,6 +570,8 @@ def setup_explorer_menu(site,ui,user,m):
     #~ if user.profile.newcomers_level < UserLevels.manager:
         #~ return
     m.add_action(Competences)
+
+def setup_reports_menu(site,ui,user,m):
     m.add_action(AvailableCoaches)
   
 dd.add_user_group('newcomers',MODULE_LABEL)
