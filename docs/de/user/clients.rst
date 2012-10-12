@@ -124,6 +124,30 @@ Wird benutzt z.B. in folgenden Fällen:
   weil Dokumente existieren).
   
 
+Regeln
+------
+  
+- Ein Neuantrag kann keine Begleitungen haben. 
+  (Ein Klient mit Begleitungen, selbst abgeschlossene, 
+  kann nicht wieder zum Neuantrag werden. 
+  Höchstens zu einem Ehemaligen.)
+  
+- Wenn ein Klient ins Stadium Ehemalig wechselt, werden automatisch 
+  alle laufenden Begleitungen beendet.
+  Ein Ehemaliger kann keine *laufenden* Begleitungen haben.
+  
+- Nur Benutzer mit einem unleeren Feld 
+  `Begleitungsart (Dienst)` in den Benutzereinstellungen
+  dürfen manuell Begleitungen erstellen.
+  
+- Wenn man ein Coaching manuell erstellt, 
+  wird `Beginndatum` aufs Tagesdatum 
+  und `Begleitungsart (Dienst)` auf die des Benutzers ausgefüllt.
+  
+- Importierte Klienten haben eine importierte primäre 
+  Begleitung, die nicht geändert werden kann.
+  
+
 Screenshots
 ===========
 

@@ -6,32 +6,28 @@ TODO
 
 Was ich noch machen muss:
 
-- Aktions-Dialoge (wird benötigt für Aktion "Ablehnen" eines Neuantrags)
+- state changes with notify=True ist noch nicht fertig.
 
-- watch_tim
+- watch_tim (aber das mach ich erst, wenn testlino bereit ist)
 
 - Datenübernahme macht noch ein paar Warnungen
-
-- Ausdruck Art. 60§7-Übersicht produziert leeres PDF
-
-- Personensuchen und Begleitungen
 
 - Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
   Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
   
-- Wenn Admin als Alicia arbeitet, sieht er in `Meine Begleitunge`  
-  dennoch nur die Seinen, nicht die von Alicia.
-
 
 Feedback erwünscht
 ------------------
 
 Wo ich bei Gelegenheit auf deine Ideen hoffe:
 
+- Der Menübefehl :menuselection:`Integration --> Meine Personensuchen` ist 
+  funktional ersetzt durch die Filterparameter der Tabellen "Klienten"
+  bzw. "DSBE-Klienten". Die Anordnung der Filteparameter muss 
+  noch auf Ergonomie überprüft werden.
+
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
   Siehe :doc:`/user/clients`.
-
-- Das Hauptmenü ist stellenweise verwirrend. Konkrete Ideen?
 
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.
@@ -127,14 +123,18 @@ Neue Features
 Nebenwirkungen  
 --------------
 
-- Das Menü "Meine Klienten" hat jetzt kein Untermenü mehr mit allen 
-  Integrationsphasen, weil man das jetzt in den Parametern von 
-  "Meine Klienten" angeben kann. 
+- Sorry, aber ich muss euch eine Umstrukturierung des Hauptmenüs zumuten.  
+  Liegt daran, dass jetzt bald auch andere Dienste in Lino arbeiten.
+  Zum Beispiel ist das Menü "Mein Menü" weg:
+  die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
+  Also z.B. 
+
+  - :menuselection:`Mein Menü --> Meine VSEs` steht jetzt unter :menuselection:`DSBE --> Meine VSEs` 
+  - :menuselection:`Mein Menü --> Meine Art.-60§7-Konventionen` steht jetzt unter 
+    :menuselection:`DSBE --> Meine Art.-60§7-Konventionen` 
   
 - Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
   nicht gemacht. Ist das schlimm?
-  
-- Diverse Umstrukturierungen im Hauptmenü.  
   
 - countries.City.type und Partner.region.
   Visible in Detail of "All Partners" : Lino now features a field "region" 

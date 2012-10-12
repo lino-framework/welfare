@@ -75,13 +75,13 @@ from lino.core import actions
 from lino.modlib.contacts import models as contacts
 from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
-from lino.modlib.uploads import models as uploads
-from lino.modlib.cal import models as cal
-from lino.modlib.users import models as users
-from lino.modlib.countries.models import CountryCity
+#~ from lino.modlib.uploads import models as uploads
+#~ from lino.modlib.cal import models as cal
+#~ from lino.modlib.users import models as users
+#~ from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.models import DurationUnits, update_reminder
-from lino.modlib.properties import models as properties
-from lino_welfare.modlib.cv import models as cv
+#~ from lino.modlib.properties import models as properties
+#~ from lino_welfare.modlib.cv import models as cv
 #~ from lino.modlib.contacts.models import Contact
 from lino.core.modeltools import resolve_model, UnresolvedModel
 
@@ -98,6 +98,11 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
+properties = dd.resolve_app('properties')
+countries = dd.resolve_app('countries')
+cv = dd.resolve_app('cv')
+uploads = dd.resolve_app('uploads')
+users = dd.resolve_app('users')
 #~ newcomers = dd.resolve_app('newcomers')
 
 from lino.utils.niss import niss_validator, is_valid_niss
@@ -1244,6 +1249,7 @@ def only_active_coachings_filter(today,prefix=''):
 #~ class Clients(AllClients):
 class Clients(contacts.Partners):
     #~ debug_permissions = True # '20120925'
+    title = _("PCSW Clients")
     model = Client # settings.LINO.person_model
     insert_layout = dd.FormLayout("""
     first_name last_name
@@ -1267,7 +1273,7 @@ class Clients(contacts.Partners):
         new_since = models.DateField(_("Newly coached since"),blank=True),
         )
     params_layout = """
-    client_state coached_by aged_from aged_to gender
+    client_state coached_by aged_from aged_to gender 
     coached_on only_primary also_obsolete new_since
     """
     
@@ -1314,17 +1320,6 @@ class Clients(contacts.Partners):
         
 
     @classmethod
-    def get_title(self,ar):
-        title = super(Clients,self).get_title(ar)
-        #~ title = Client._meta.verbose_name_plural
-        #~ if ar.param_values.coached_by:
-            #~ title += _(" of ") + unicode(ar.param_values.coached_by)
-        tags = list(self.get_title_tags(ar))
-        if len(tags):
-            title += " (%s)" % (', '.join(tags))
-        return title
-        
-    @classmethod
     def get_title_tags(self,ar):
         if ar.param_values.aged_from or ar.param_values.aged_to:
             yield unicode(_("Aged %(min)s to %(max)s") % dict(
@@ -1348,25 +1343,32 @@ class Clients(contacts.Partners):
         
     
 class IntegClients(Clients):
-    label = _("Integration Clients")
     #~ detail_layout = IntegClientDetail()
+    title = _("Integration Clients")
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
     use_as_default_table = False
     column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     parameters = dict(
-      group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
-          verbose_name=_("Integration phase")),
-      #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
-      only_active = models.BooleanField(_("Only active clients"),default=False,
-        help_text=_("Show only clients in 'active' integration phases")),
-      **Clients.parameters)
+        group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
+            verbose_name=_("Integration phase")),
+        #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
+        language = dd.ForeignKey(countries.Language,
+            verbose_name=_("Language knowledge"),
+            blank=True,null=True),
+        wanted_property = dd.ForeignKey(properties.Property,
+            verbose_name=_("Wanted skill"),
+            blank=True,null=True),
+        only_active = models.BooleanField(_("Only active clients"),default=False,
+          help_text=_("Show only clients in 'active' integration phases")),
+        **Clients.parameters)
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
     coached_by coached_on only_primary also_obsolete new_since
-    aged_from aged_to gender group only_active 
+    aged_from aged_to gender 
+    language wanted_property group only_active 
     """
     
     #~ @classmethod
@@ -1377,6 +1379,13 @@ class IntegClients(Clients):
     def get_request_queryset(self,ar):
         ar.param_values.update(client_state = ClientStates.coached)
         qs = super(IntegClients,self).get_request_queryset(ar)
+        if ar.param_values.language:
+            qs = qs.filter(
+                languageknowledge__language=ar.param_values.language).distinct()
+        if ar.param_values.wanted_property:
+            qs = qs.filter(
+                personproperty__property=ar.param_values.wanted_property).distinct()
+                
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.only_active:
@@ -1392,6 +1401,8 @@ class IntegClients(Clients):
             yield t
         if ar.param_values.only_active:
             yield unicode(ar.actor.parameters['only_active'].verbose_name)
+        if ar.param_values.language:
+            yield unicode(ar.actor.parameters['language'].verbose_name) + ' '+unicode(ar.param_values.language)
         if ar.param_values.group:
             yield unicode(ar.param_values.group)
             
@@ -1844,7 +1855,7 @@ class MyPersonSearches(PersonSearches,mixins.ByUser):
     
 class WantedLanguageKnowledge(dd.Model):
     search = models.ForeignKey(PersonSearch)
-    language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
+    language = models.ForeignKey(countries.Language,verbose_name=_("Language"))
     spoken = properties.HowWell.field(blank=True,verbose_name=_("spoken"))
     written = properties.HowWell.field(blank=True,verbose_name=_("written"))
 
