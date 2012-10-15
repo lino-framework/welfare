@@ -9,21 +9,24 @@ Klienten
 Klienten gibt es momentan in drei Tabellen, die sich durch Kolonnenreihenfolge 
 und Filterparameter unterscheiden:
 
-- :menuselection:`ÖSHZ --> Klienten` : 
+- "Alle Klienten" 
+  (Menü :menuselection:`ÖSHZ --> Klienten`) : 
   allgemeine Liste, die jeder Benutzer sehen darf.
 
-- :menuselection:`DSBE --> Klienten` 
+- DSBE-Klienten
+  (Menü :menuselection:`DSBE --> Klienten`)
   Zeigt immer nur **begleitete** Kunden. 
   Hier kann man keine neuen Klienten anlegen.
   Die Reiter Kompetenzen, Verträge... finden sich nur hier.
   
-- :menuselection:`Neuanträge --> Klienten` 
+- Neue Klienten
+  (Menü :menuselection:`Neuanträge --> Klienten`):
   spezielle Liste für die Zuweisung von Neuanträgen.
 
 N.B. 
 Das Detail, das bei Doppelklick angezeigt wird, 
-ist bei allen drei Listen das Gleice. 
-Das hängt vom Benutzerprofil ab.
+ist bei allen drei Listen das Gleiche. 
+Das hängt vom :doc:`Benutzerprofil </user/userprofiles>` ab.
 
 
 

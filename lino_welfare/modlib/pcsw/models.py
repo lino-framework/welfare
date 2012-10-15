@@ -318,11 +318,6 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           ''')
         
     
-#~ class RefuseNewClient(NotifyingChangeStateAction):
-    #~ label = _("Refuse")
-    #~ required = dict(states='new invalid',user_groups='newcomers')
-    #~ # help_text = _("Write a refusal note and remove the new client request.")
-    
     
 class ClientStates(dd.Workflow):
     label = _("Client state")
@@ -373,13 +368,6 @@ add('20', _("Refused"),'refused',help_text = _("An application to become a clien
 add('30', _("Coached"),'coached')
 add('50', _("Former"),'former')
 add('60', _("Invalid"),'invalid')
-
-ClientStates.newcomer.add_workflow(states='refused coached invalid',user_groups='newcomers')
-#~ ClientStates.refused.add_workflow(RefuseNewClient)
-ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
-#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),states='coached invalid',user_groups='newcomers')
-#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
 
     
@@ -859,6 +847,51 @@ class Client(Person):
 
 
 
+
+
+
+    
+
+class RefuseNewcomer(dd.ChangeStateAction):
+    label = _("Refuse")
+    required = dict(states='newcomer invalid',user_groups='newcomers')
+    # help_text = _("Write a refusal note and remove the new client request.")
+    
+    show_in_workflow = True
+    parameters = dict(
+        client = dd.ForeignKey(Client,editable=False),
+        remark = dd.RichTextField(_("Remarks"),blank=True),
+        interactive = models.BooleanField(_("Edit notification mail")),
+        #~ dummy = models.BooleanField(_("Dummy option"))
+    )
+    #~ params_layout = dd.ActionParamsFormLayout("""
+    params_layout = dd.Panel("""
+    client
+    remark
+    interactive
+    """,window_size=(50,20))
+    
+    def action_param_defaults(self,ar,obj,**kw):
+        kw = super(RefuseNewcomer,self).action_param_defaults(ar,obj,**kw)
+        if obj is not None:
+            kw.update(client=obj)
+        return kw
+    
+
+
+ClientStates.newcomer.add_workflow(states='refused coached invalid',user_groups='newcomers')
+ClientStates.refused.add_workflow(RefuseNewcomer)
+#~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
+#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),states='coached invalid',user_groups='newcomers')
+#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+
+
+
+
+
+
+
 class PartnerDetail(contacts.PartnerDetail):
     #~ general = contacts.PartnerDetail.main
     #~ main = "general debts.BudgetsByPartner"
@@ -1160,7 +1193,7 @@ class ClientDetail(dd.FormLayout):
         lh.card_issuer.label = _("issued by")
         lh.card_type.label = _("eID card type")
     
-if not settings.LINO.use_beid_jslib:
+if not settings.LINO.use_eid_jslib:
     ClientDetail.eid_panel.replace('read_beid_card:12 ','')
     
 if settings.LINO.is_installed('cbss'):
@@ -1350,6 +1383,7 @@ class Clients(contacts.Partners):
     
 class IntegClients(Clients):
     #~ detail_layout = IntegClientDetail()
+    required = dict(user_groups = 'integ')
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
@@ -2130,10 +2164,32 @@ add('30', _("Active"),'active')
 add('40', _("Standby"),'standby')
 add('50', _("Ended"),'ended')
 
-#~ class EndCoaching(NotifyingChangeStateAction):
-    #~ label = _("End coaching")
-    #~ help_text = _("User no longer coaches this client.")  
+class EndCoaching(dd.ChangeStateAction):
+    label = _("End coaching")
+    help_text = _("User no longer coaches this client.")  
     #~ required = dict(states='active standby',user_groups='integ',owner=True)
+    #~ show_in_workflow = True
+    parameters = dict(
+        client = dd.ForeignKey(Client,editable=False),
+        coach = dd.ForeignKey(users.User,editable=False,verbose_name=_("no longer coached by")),
+        remark = dd.RichTextField(_("Remarks"),blank=True),
+        interactive = models.BooleanField(_("Edit notification mail")),
+        #~ dummy = models.BooleanField(_("Dummy option"))
+    )
+    #~ params_layout = dd.ActionParamsFormLayout("""
+    params_layout = dd.Panel("""
+    client  coach
+    remark
+    interactive
+    """,window_size=(50,20))
+    
+    def action_param_defaults(self,ar,obj,**kw):
+        kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
+        if obj is not None:
+            kw.update(client=obj.client)
+            kw.update(coach=obj.user)
+        return kw
+    
 
 #~ CoachingStates.suggested.set_required(owner=False)
 CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
@@ -2142,10 +2198,10 @@ CoachingStates.active.add_workflow(_("Reactivate"),
     states='standby ended',owner=True,
     help_text=_("Client has become active again after having been ended or standby."))
 CoachingStates.standby.add_workflow(states='active',owner=True)
-#~ CoachingStates.ended.add_workflow(EndCoaching)
-CoachingStates.ended.add_workflow(_("End coaching"),
-    help_text=_("User no longer coaches this client."),
-    states='active standby',user_groups='integ',owner=True,notify=True)
+CoachingStates.ended.add_workflow(EndCoaching)
+#~ CoachingStates.ended.add_workflow(_("End coaching"),
+    #~ help_text=_("User no longer coaches this client."),
+    #~ states='active standby',user_groups='integ',owner=True,notify=True)
 
 """
 CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
@@ -2779,6 +2835,7 @@ def site_setup(site):
     
     
 dd.add_user_group('integ',INTEG_MODULE_LABEL)
+#~ dd.add_user_group('coach',INTEG_MODULE_LABEL)
 
 customize_siteconfig()
 customize_contacts()        

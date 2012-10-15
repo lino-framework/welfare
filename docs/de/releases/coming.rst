@@ -6,20 +6,22 @@ TODO
 
 Was ich noch machen muss:
 
-- state changes with notify=True ist noch nicht fertig.
-
 - watch_tim (aber das mach ich erst, wenn testlino bereit ist)
 
 - Datenübernahme macht noch ein paar Warnungen
 
-- Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
-  Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
-  
 
 Feedback erwünscht
 ------------------
 
 Wo ich bei Gelegenheit auf deine Ideen hoffe:
+
+- Notizen erstellen und Change.summary wieder raus?
+
+- Gibt es Benutzer, die keine eigenen Begleitungen machen können?
+  (für die der Menübefehl 
+  :menuselection:`ÖSHZ --> Meine Begleitungen` irritierend wäre?)
+  Zum Beispiel Caroline.
 
 - Der Menübefehl :menuselection:`Integration --> Meine Personensuchen` ist 
   funktional ersetzt durch die Filterparameter der Tabellen "Klienten"
@@ -32,7 +34,13 @@ Wo ich bei Gelegenheit auf deine Ideen hoffe:
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.
 
+- Was mich noch stört: nach erfolgreicher Zuweisung eines Klienten 
+  springt er ohne viele Wort auf den nächsten Klienten. Verwirrend?
 
+- Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
+  Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
+  Muss das noch korrigiert werden?
+  
 
 Nach dem Release
 ----------------

@@ -270,7 +270,7 @@ class AvailableCoaches(users.Users):
     #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
     #~ label = _("Users by Newcomer")
     label = _("Available Coaches")
-    column_names = 'name_column primary_clients active_clients new_clients newcomer_quota newcomer_score'
+    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota newcomer_score'
     parameters = dict(
         for_client = models.ForeignKey('contacts.Person',
             verbose_name=_("Show suggested agents for"),
@@ -343,15 +343,29 @@ class AvailableCoaches(users.Users):
         
 class AssignCoach(dd.RowAction):
     label=_("Assign")
+    show_in_workflow = True
     parameters = dict(
+        client = dd.ForeignKey(pcsw.Client,editable=False),
+        coach = dd.ForeignKey(users.User,editable=False),
+        remark = dd.RichTextField(_("Remarks"),blank=True),
         interactive = models.BooleanField(_("Edit notification mail")),
-        dummy = models.BooleanField(_("Dummy option"))
+        #~ dummy = models.BooleanField(_("Dummy option"))
     )
-    params_layout = """
+    #~ params_layout = dd.ActionParamsFormLayout("""
+    params_layout = dd.Panel("""
+    client
+    coach
+    remark
     interactive
-    dummy
-    """
+    """,window_size=(50,20))
     
+    def action_param_defaults(self,ar,obj,**kw):
+        kw = super(AssignCoach,self).action_param_defaults(ar,obj,**kw)
+        if obj is not None:
+            kw.update(client=ar.master_instance)
+            kw.update(coach=obj)
+        return kw
+        
     def run(self,obj,ar,**kw):
         """
         Assign a coach to a newcomer.
@@ -362,7 +376,7 @@ class AssignCoach(dd.RowAction):
                 message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
                 % dict(client=client,niss=client.national_id))
         msg = _("Assign client %(client)s for coaching by %(agent)s.") % dict(client=client,agent=obj)
-        ar.confirm(msg,_("Are you sure?"))
+        #~ ar.confirm(msg,_("Are you sure?"))
         
         
         coaching = pcsw.Coaching(client=client,user=obj,
