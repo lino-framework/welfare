@@ -523,8 +523,8 @@ class Client(Person):
     
 
 
-    def update_system_note(self,note):
-        note.project = self
+    #~ def update_system_note(self,note):
+        #~ note.project = self
             
 
 
@@ -849,48 +849,34 @@ class Client(Person):
             return c.applies_until
 
 
-
-
-
+    def get_system_note_type(self,ar):
+        return settings.LINO.site_config.system_note_type
+        
+    def get_system_note_recipients(self,ar,silent):
+        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+            yield "%s <%s>" % (unicode(u),u.email)
+            
 
     
 
-class RefuseClient(dd.ChangeStateAction,dd.NotifyingAction):
+class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
     label = _("Refuse")
     required = dict(states='newcomer invalid',user_groups='newcomers')
     # help_text = _("Write a refusal note and remove the new client request.")
     
-    #~ show_in_workflow = True
-    #~ parameters = dict(
-        #~ client = dd.ForeignKey(Client,editable=False),
-        #~ remark = dd.RichTextField(_("Remarks"),blank=True),
-        #~ interactive = models.BooleanField(_("Edit notification mail")),
-    #~ )
-    #~ params_layout = dd.ActionParamsFormLayout("""
-    #~ params_layout = dd.Panel("""
-    #~ client
-    #~ remark
-    #~ interactive
-    #~ """,window_size=(50,20))
-    
+    def get_notify_subject(self,ar,obj,**kw):
+        return _("%(client)s has been refused.") % dict(client=obj)
+            
     #~ def action_param_defaults(self,ar,obj,**kw):
         #~ kw = super(RefuseClient,self).action_param_defaults(ar,obj,**kw)
         #~ if obj is not None:
-            #~ kw.update(client=obj)
+            #~ kw.update(notify_subject=
+                #~ _("%(client)s has been refused.") 
+                #~ % dict(client=obj))
         #~ return kw
         
-    def action_param_defaults(self,ar,obj,**kw):
-        kw = super(RefuseClient,self).action_param_defaults(ar,obj,**kw)
-        if obj is not None:
-            kw.update(notify_subject=
-                _("%(client)s has been refused.") 
-                % dict(client=obj))
-            #~ kw.update(client=ar.master_instance)
-            #~ kw.update(coach=obj)
-        return kw
-        
-    def update_system_note_kw(self,ar,kw,obj):
-        return kw.update(project=obj)
+    #~ def update_system_note_kw(self,ar,kw,obj):
+        #~ return kw.update(project=obj)
         
     
 
@@ -1308,13 +1294,18 @@ class Clients(contacts.Partners):
     #~ debug_permissions = True # '20120925'
     title = _("All Clients")
     model = Client # settings.LINO.person_model
+    params_panel_hidden = True
+    
     insert_layout = dd.FormLayout("""
     first_name last_name
     national_id
     gender language
     """,window_size=(60,'auto'))
+    
     column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
+    
     detail_layout = ClientDetail()
+    
     parameters = dict(
         aged_from = models.IntegerField(_("Aged from"),
             blank=True,null=True),
@@ -1406,6 +1397,7 @@ class Clients(contacts.Partners):
 class IntegClients(Clients):
     #~ detail_layout = IntegClientDetail()
     required = dict(user_groups = 'integ')
+    params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
     allow_create = False # see blog/2012/0922
@@ -2181,8 +2173,8 @@ class CoachingStates(dd.Workflow):
     
 add = CoachingStates.add_item
 #~ add('10', _("New"),'new')
-add('10', _("Suggested"),'suggested')
-add('20', _("Refused"),'refused')
+#~ add('10', _("Suggested"),'suggested')
+#~ add('20', _("Refused"),'refused')
 #~ add('30', _("Confirmed"),'confirmed')
 add('30', _("Active"),'active')
 add('40', _("Standby"),'standby')
@@ -2192,56 +2184,31 @@ class EndCoaching(dd.ChangeStateAction,dd.NotifyingAction):
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")  
     required = dict(states='active standby',user_groups='integ',owner=True)
-    #~ show_in_workflow = True
-    #~ parameters = dict(
-        #~ client = dd.ForeignKey(Client,editable=False),
-        #~ coach = dd.ForeignKey(users.User,editable=False,verbose_name=_("no longer coached by")),
-        #~ remark = dd.RichTextField(_("Remarks"),blank=True),
-        #~ interactive = models.BooleanField(_("Edit notification mail")),
-    #~ )
-    #~ params_layout = dd.ActionParamsFormLayout("""
-    #~ params_layout = dd.Panel("""
-    #~ client  coach
-    #~ remark
-    #~ interactive
-    #~ """,window_size=(50,20))
-    
+        
+        
+    def get_notify_subject(self,ar,obj,**kw):
+        return _("%(client)s no longer coached by %(coach)s") % dict(
+            client=obj.client,coach=obj.user)
+            
     #~ def action_param_defaults(self,ar,obj,**kw):
         #~ kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
         #~ if obj is not None:
-            #~ kw.update(client=obj.client)
-            #~ kw.update(coach=obj.user)
+            #~ kw.update(notify_subject=
+                #~ _("%(client)s no longer coached by %(coach)s") 
+                #~ % dict(client=obj.client,coach=obj.user))
         #~ return kw
         
-    #~ def run(self,obj,ar,**kw):
-        #~ kw = super(EndCoaching,self).run(obj,ar,**kw)
-        #~ return kw
-        
-    #~ def before_row_save(self,row,ar):
-        #~ row.end_date = datetime.date.today()
-        
-        
-    def action_param_defaults(self,ar,obj,**kw):
-        kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
-        if obj is not None:
-            kw.update(notify_subject=
-                _("%(client)s no longer coached by %(coach)s") 
-                % dict(client=obj.client,coach=obj.user))
-            #~ kw.update(client=ar.master_instance)
-            #~ kw.update(coach=obj)
-        return kw
-        
-    def update_system_note_kw(self,ar,kw,obj):
-        if obj is not None:
-            return kw.update(project=obj.client)
+    #~ def update_system_note_kw(self,ar,kw,obj):
+        #~ if obj is not None:
+            #~ return kw.update(project=obj.client)
             
           
         
     
 
 #~ CoachingStates.suggested.set_required(owner=False)
-CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
-CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
+#~ CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
+#~ CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
 CoachingStates.active.add_workflow(_("Reactivate"),
     states='standby ended',owner=True,
     help_text=_("Client has become active again after having been ended or standby."))
@@ -2346,8 +2313,8 @@ Enabling this field will automatically make the other coachings non-primary.""")
         if not self.start_date:
             self.start_date = datetime.date.today()
             
-    def update_system_note(self,note):
-        note.project = self.client
+    #~ def update_system_note(self,note):
+        #~ note.project = self.client
             
     def __unicode__(self):
         #~ return _("Coaching of %(client)s by %(user)s") % dict(client=self.client,user=self.user)
@@ -2388,6 +2355,17 @@ Enabling this field will automatically make the other coachings non-primary.""")
     def summary_row(self,ar,**kw):
         return xghtml.E.p(ar.href_to(self.client)," (%s)" % self.state.text)
         
+    def get_related_project(self,ar):
+        return self.client
+        
+    def get_system_note_type(self,ar):
+        return settings.LINO.site_config.system_note_type
+        
+    def get_system_note_recipients(self,ar,silent):
+        yield "%s <%s>" % (unicode(self.user),self.user.email)
+        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+            yield "%s <%s>" % (unicode(u),u.email)
+            
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
@@ -2441,9 +2419,10 @@ class CoachingsByUser(Coachings):
 class MyCoachings(Coachings,mixins.ByUser):
     column_names = 'start_date end_date client type primary workflow_buttons id'
 
-class MySuggestedCoachings(MyCoachings):
-    label = _("Suggested coachings")
-    known_values = dict(state=CoachingStates.suggested)
+#~ class MySuggestedCoachings(MyCoachings):
+    #~ label = _("Suggested coachings")
+    #~ known_values = dict(state=CoachingStates.suggested)
+
 
 
 def customize_users():
@@ -2629,7 +2608,8 @@ class Home(cal.Home):
         
         warnings = []
         
-        for T in (MySuggestedCoachings,cal.MyTasksToDo):
+        #~ for T in (MySuggestedCoachings,cal.MyTasksToDo):
+        for T in (cal.MyPendingInvitations,cal.MyTasksToDo,cal.MyEventsSuggested):
             r = T.request(user=u)
             #~ r = T.request(subst_user=u)
             #~ r = ar.spawn(T)
@@ -2676,12 +2656,15 @@ def setup_main_menu(site,ui,user,m):
               
         #~ pm = m.add_menu("pcsw",MODULE_LABEL)
         pm = m.add_menu("contacts",contacts.MODULE_LABEL)
-        pm.add_separator('-')
+        if False:
+            pm.add_separator('-')
         pm.add_action(Clients)
         #~ m.add_action(MyClients)
         #~ m.add_action(Clients)
-        pm.add_action(MyCoachings)
-        pm.add_action(MySuggestedCoachings)
+        if False:
+            pm.add_action(MyCoachings)
+            #~ pm.add_action(MySuggestedCoachings)
+            
         #~ for pg in PersonGroup.objects.order_by('ref_name'):
             #~ mycoachings.add_action(
               #~ MyCoachingsByGroup,
@@ -2754,7 +2737,7 @@ def site_setup(site):
     
     
     site.modules.lino.SiteConfigs.set_detail_layout("""
-    site_company notification_notetype default_build_method 
+    site_company system_note_type default_build_method 
     next_partner_id:20 job_office
     propgroup_skills propgroup_softskills propgroup_obstacles
     residence_permit_upload_type work_permit_upload_type driving_licence_upload_type

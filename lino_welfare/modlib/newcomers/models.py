@@ -357,16 +357,21 @@ class AssignCoach(dd.NotifyingAction):
     #~ interactive
     #~ """,window_size=(60,20))
     
-    def action_param_defaults(self,ar,obj,**kw):
-        kw = super(AssignCoach,self).action_param_defaults(ar,obj,**kw)
-        if obj is not None:
-            kw.update(notify_subject=_('New client for %s') % obj)
-            kw.update(notify_body = _("Assign %(coach)s as coach for client %(client)s.") 
-                % dict(client=ar.master_instance,coach=obj))
+    def get_notify_subject(self,ar,obj,**kw):
+        return _('New client for %s') % obj
             
-            #~ kw.update(client=ar.master_instance)
-            #~ kw.update(coach=obj)
-        return kw
+    def get_notify_body(self,ar,obj,**kw):
+        return _("Assign %(coach)s as coach for client %(client)s.") % dict(
+            client=ar.master_instance,coach=obj)
+            
+    #~ def action_param_defaults(self,ar,obj,**kw):
+        #~ kw = super(AssignCoach,self).action_param_defaults(ar,obj,**kw)
+        #~ if obj is not None:
+            #~ kw.update(notify_subject=_('New client for %s') % obj)
+            #~ kw.update(notify_body = _("Assign %(coach)s as coach for client %(client)s.") 
+                #~ % dict(client=ar.master_instance,coach=obj))
+            
+        #~ return kw
         
     def get_row_permission(self,ar,state,ba):
         if not pcsw.is_valid_niss(ar.master_instance.national_id):
@@ -381,6 +386,7 @@ class AssignCoach(dd.NotifyingAction):
         Assign a coach to a newcomer.
         """
         client = ar.master_instance
+        
         #~ if not pcsw.is_valid_niss(client.national_id):
             #~ return ar.error_response(alert=True,
                 #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
@@ -390,16 +396,14 @@ class AssignCoach(dd.NotifyingAction):
         coaching = pcsw.Coaching(client=client,user=obj,
             start_date=datetime.date.today(),
             type=obj.coaching_type,
-            state=pcsw.CoachingStates.suggested)
-        if not obj.profile:
-            coaching.state = pcsw.CoachingStates.active
+            state=pcsw.CoachingStates.active)
+        #~ if not obj.profile:
+            #~ coaching.state = pcsw.CoachingStates.active
         coaching.save()
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
         
-        #~ note_kw = dict()
-        #~ self.update_system_note_kw(ar,note_kw,coaching)
         self.add_system_note(ar,coaching)
         
         #~ if len(recipients):
