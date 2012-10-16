@@ -393,21 +393,21 @@ class BudgetDetail(dd.FormLayout):
     
     """
     main = "general entries1 entries2 summary_tab preview"
-    general = """
+    general = dd.Panel("""
     date partner id user 
     intro
     ActorsByBudget
-    """
+    """,label = _("General"))
     
-    entries1 = """
+    entries1 = dd.Panel("""
     ExpensesByBudget 
     IncomesByBudget 
-    """
+    """,label = _("Expenses & Income"))
     
-    entries2 = """
+    entries2 = dd.Panel("""
     LiabilitiesByBudget 
     AssetsByBudget
-    """
+    """,label = _("Liabilities & Assets"))
     
     tmp_tab = """
     PrintExpensesByBudget 
@@ -415,10 +415,11 @@ class BudgetDetail(dd.FormLayout):
     """
     
     
-    summary_tab = """
+    summary_tab = dd.Panel("""
     BudgetSummary:30x5 summary1
     DistByBudget
-    """
+    """,label = pgettext_lazy(u"debts",u"Summary"))
+    
     summary1 = """
     conclusion:30x5 
     dist_amount build_time
@@ -428,11 +429,11 @@ class BudgetDetail(dd.FormLayout):
     #~ ExpensesSummaryByBudget IncomesSummaryByBudget 
     #~ LiabilitiesSummaryByBudget AssetsSummaryByBudget
     
-    def setup_handle(self,h):
-        h.general.label = _("General")
-        h.entries1.label = _("Expenses & Income")
-        h.entries2.label = _("Liabilities & Assets")
-        h.summary_tab.label = pgettext_lazy(u"debts",u"Summary")
+    #~ def setup_handle(self,h):
+        #~ h.general.label = _("General")
+        #~ h.entries1.label = _("Expenses & Income")
+        #~ h.entries2.label = _("Liabilities & Assets")
+        #~ h.summary_tab.label = pgettext_lazy(u"debts",u"Summary")
         #~ h.tmp_tab.label = _("Preview")
         
     

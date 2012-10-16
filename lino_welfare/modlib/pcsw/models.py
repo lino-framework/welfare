@@ -523,6 +523,9 @@ class Client(Person):
     
 
 
+    def update_system_note(self,note):
+        note.project = self
+            
 
 
     @classmethod
@@ -852,35 +855,48 @@ class Client(Person):
 
     
 
-class RefuseNewcomer(dd.ChangeStateAction):
+class RefuseClient(dd.ChangeStateAction,dd.NotifyingAction):
     label = _("Refuse")
     required = dict(states='newcomer invalid',user_groups='newcomers')
     # help_text = _("Write a refusal note and remove the new client request.")
     
-    show_in_workflow = True
-    parameters = dict(
-        client = dd.ForeignKey(Client,editable=False),
-        remark = dd.RichTextField(_("Remarks"),blank=True),
-        interactive = models.BooleanField(_("Edit notification mail")),
-        #~ dummy = models.BooleanField(_("Dummy option"))
-    )
+    #~ show_in_workflow = True
+    #~ parameters = dict(
+        #~ client = dd.ForeignKey(Client,editable=False),
+        #~ remark = dd.RichTextField(_("Remarks"),blank=True),
+        #~ interactive = models.BooleanField(_("Edit notification mail")),
+    #~ )
     #~ params_layout = dd.ActionParamsFormLayout("""
-    params_layout = dd.Panel("""
-    client
-    remark
-    interactive
-    """,window_size=(50,20))
+    #~ params_layout = dd.Panel("""
+    #~ client
+    #~ remark
+    #~ interactive
+    #~ """,window_size=(50,20))
     
+    #~ def action_param_defaults(self,ar,obj,**kw):
+        #~ kw = super(RefuseClient,self).action_param_defaults(ar,obj,**kw)
+        #~ if obj is not None:
+            #~ kw.update(client=obj)
+        #~ return kw
+        
     def action_param_defaults(self,ar,obj,**kw):
-        kw = super(RefuseNewcomer,self).action_param_defaults(ar,obj,**kw)
+        kw = super(RefuseClient,self).action_param_defaults(ar,obj,**kw)
         if obj is not None:
-            kw.update(client=obj)
+            kw.update(notify_subject=
+                _("%(client)s has been refused.") 
+                % dict(client=obj))
+            #~ kw.update(client=ar.master_instance)
+            #~ kw.update(coach=obj)
         return kw
+        
+    def update_system_note_kw(self,ar,kw,obj):
+        return kw.update(project=obj)
+        
     
 
 
 ClientStates.newcomer.add_workflow(states='refused coached invalid',user_groups='newcomers')
-ClientStates.refused.add_workflow(RefuseNewcomer)
+ClientStates.refused.add_workflow(RefuseClient)
 #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
 ClientStates.former.add_workflow(_("Former"),states='coached invalid',user_groups='newcomers')
@@ -1013,23 +1029,23 @@ class CompanyDetail(contacts.CompanyDetail):
     intro_box = """
     prefix name id language 
     vat_id:12 activity:20 type:20 #hourly_rate
-    activity bank_account1 bank_account2 is_deprecated
+    bank_account1 bank_account2 is_deprecated
     """
 
-    general = """
+    general = dd.Panel("""
     intro_box
     address_box
     bottom_box
-    """
+    """,label = _("General"))
     
     notes = "pcsw.NotesByCompany"
     
     main = "general notes"
 
-    def setup_handle(self,lh):
+    #~ def setup_handle(self,lh):
       
-        lh.general.label = _("General")
-        lh.notes.label = _("Notes")
+        #~ lh.general.label = _("General")
+        #~ lh.notes.label = _("Notes")
 
 
 #~ if settings.LINO.company_model is None:
@@ -1186,12 +1202,18 @@ class ClientDetail(dd.FormLayout):
     jobs.ContractsByPerson
     """,label = _("Contracts"))
     
-    def setup_handle(self,lh):
-        lh.card_number.label = _("number")
-        lh.card_valid_from.label = _("valid from")
-        lh.card_valid_until.label = _("valid until")
-        lh.card_issuer.label = _("issued by")
-        lh.card_type.label = _("eID card type")
+    #~ def setup_handle(self,lh):
+        #~ lh.card_number.label = _("number")
+        #~ lh.card_valid_from.label = _("valid from")
+        #~ lh.card_valid_until.label = _("valid until")
+        #~ lh.card_issuer.label = _("issued by")
+        #~ lh.card_type.label = _("eID card type")
+    def override_labels(self):
+        return dict(card_number = _("number"),
+        card_valid_from = _("valid from"),
+        card_valid_until = _("valid until"),
+        card_issuer = _("issued by"),
+        card_type = _("eID card type"))
     
 if not settings.LINO.use_eid_jslib:
     ClientDetail.eid_panel.replace('read_beid_card:12 ','')
@@ -1408,7 +1430,7 @@ class IntegClients(Clients):
     params_layout = """
     client_state coached_by coached_on only_primary also_obsolete 
     aged_from aged_to gender nationality
-    language wanted_property group only_active only_primary 
+    language wanted_property group only_active 
     """
     
     #~ @classmethod
@@ -2147,13 +2169,15 @@ class CoachingStates(dd.Workflow):
     """Lifecycle of a :class:`Coaching`."""
     label = _("Coaching state")
     
-    #~ @classmethod
-    #~ def before_state_change(cls,obj,ar,kw,oldstate,newstate):
+    @classmethod
+    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
         
-        #~ if newstate.name == 'ended':
+        if newstate.name == 'ended':
             #~ ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
               #~ user=obj.user,client=obj.client))
-            #~ obj.end_date = datetime.date.today()
+            obj.end_date = datetime.date.today()
+        elif newstate.name in ('active','standby'):
+            obj.end_date = None
     
 add = CoachingStates.add_item
 #~ add('10', _("New"),'new')
@@ -2164,31 +2188,55 @@ add('30', _("Active"),'active')
 add('40', _("Standby"),'standby')
 add('50', _("Ended"),'ended')
 
-class EndCoaching(dd.ChangeStateAction):
+class EndCoaching(dd.ChangeStateAction,dd.NotifyingAction):
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")  
-    #~ required = dict(states='active standby',user_groups='integ',owner=True)
+    required = dict(states='active standby',user_groups='integ',owner=True)
     #~ show_in_workflow = True
-    parameters = dict(
-        client = dd.ForeignKey(Client,editable=False),
-        coach = dd.ForeignKey(users.User,editable=False,verbose_name=_("no longer coached by")),
-        remark = dd.RichTextField(_("Remarks"),blank=True),
-        interactive = models.BooleanField(_("Edit notification mail")),
-        #~ dummy = models.BooleanField(_("Dummy option"))
-    )
+    #~ parameters = dict(
+        #~ client = dd.ForeignKey(Client,editable=False),
+        #~ coach = dd.ForeignKey(users.User,editable=False,verbose_name=_("no longer coached by")),
+        #~ remark = dd.RichTextField(_("Remarks"),blank=True),
+        #~ interactive = models.BooleanField(_("Edit notification mail")),
+    #~ )
     #~ params_layout = dd.ActionParamsFormLayout("""
-    params_layout = dd.Panel("""
-    client  coach
-    remark
-    interactive
-    """,window_size=(50,20))
+    #~ params_layout = dd.Panel("""
+    #~ client  coach
+    #~ remark
+    #~ interactive
+    #~ """,window_size=(50,20))
     
+    #~ def action_param_defaults(self,ar,obj,**kw):
+        #~ kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
+        #~ if obj is not None:
+            #~ kw.update(client=obj.client)
+            #~ kw.update(coach=obj.user)
+        #~ return kw
+        
+    #~ def run(self,obj,ar,**kw):
+        #~ kw = super(EndCoaching,self).run(obj,ar,**kw)
+        #~ return kw
+        
+    #~ def before_row_save(self,row,ar):
+        #~ row.end_date = datetime.date.today()
+        
+        
     def action_param_defaults(self,ar,obj,**kw):
         kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
         if obj is not None:
-            kw.update(client=obj.client)
-            kw.update(coach=obj.user)
+            kw.update(notify_subject=
+                _("%(client)s no longer coached by %(coach)s") 
+                % dict(client=obj.client,coach=obj.user))
+            #~ kw.update(client=ar.master_instance)
+            #~ kw.update(coach=obj)
         return kw
+        
+    def update_system_note_kw(self,ar,kw,obj):
+        if obj is not None:
+            return kw.update(project=obj.client)
+            
+          
+        
     
 
 #~ CoachingStates.suggested.set_required(owner=False)
@@ -2250,6 +2298,7 @@ A Coaching (Begleitung, accompagnement)
 is when a Client is being coached by a User (a social assistant) 
 during a given period.
     """
+    
     #~ required = dict(user_level='manager')
     class Meta:
         verbose_name = _("Coaching")
@@ -2297,8 +2346,13 @@ Enabling this field will automatically make the other coachings non-primary.""")
         if not self.start_date:
             self.start_date = datetime.date.today()
             
+    def update_system_note(self,note):
+        note.project = self.client
+            
     def __unicode__(self):
-        return _("Coaching of %(client)s by %(user)s") % dict(client=self.client,user=self.user)
+        #~ return _("Coaching of %(client)s by %(user)s") % dict(client=self.client,user=self.user)
+        #~ return self.user.username+' / '+self.client.first_name+' '+self.client.last_name[0]
+        return self.user.username+' / '+self.client.last_name+' '+self.client.first_name[0]
             
     def after_ui_save(self,ar,**kw):
         kw = super(Coaching,self).after_ui_save(ar,**kw)
@@ -2373,6 +2427,9 @@ class Coachings(dd.Table):
 
     
 class CoachingsByClient(Coachings):
+  
+    #~ debug_permissions = 20121016
+    
     master_key = 'client'
     order_by = ['start_date']
     column_names = 'start_date end_date user type primary workflow_buttons id'
@@ -2695,7 +2752,8 @@ def site_setup(site):
     
     
     site.modules.lino.SiteConfigs.set_detail_layout("""
-    site_company:20 default_build_method:20 next_partner_id:20 job_office:20
+    site_company notification_notetype default_build_method 
+    next_partner_id:20 job_office
     propgroup_skills propgroup_softskills propgroup_obstacles
     residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
     # lino.ModelsBySite

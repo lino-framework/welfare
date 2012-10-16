@@ -6,7 +6,8 @@ TODO
 
 Was ich noch machen muss:
 
-- watch_tim (aber das mach ich erst, wenn testlino bereit ist)
+- watch_tim (aber das mach ich erst, wenn testlino bereit ist). 
+  U.a. auch DatCrea aus TIM übernehmen.
 
 - Datenübernahme macht noch ein paar Warnungen
 
@@ -16,7 +17,12 @@ Feedback erwünscht
 
 Wo ich bei Gelegenheit auf deine Ideen hoffe:
 
-- Notizen erstellen und Change.summary wieder raus?
+- Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
+  Siehe :doc:`/user/clients`.
+
+- Wie/wo soll die "Begründung" (RefuseNewcomer, EndCoaching, AssignCoach) 
+  gespeichert werden?
+  Notizen erstellen und Change.summary wieder raus?
 
 - Gibt es Benutzer, die keine eigenen Begleitungen machen können?
   (für die der Menübefehl 
@@ -27,9 +33,6 @@ Wo ich bei Gelegenheit auf deine Ideen hoffe:
   funktional ersetzt durch die Filterparameter der Tabellen "Klienten"
   bzw. "DSBE-Klienten". Die Anordnung der Filteparameter muss 
   noch auf Ergonomie überprüft werden.
-
-- Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
-  Siehe :doc:`/user/clients`.
 
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.

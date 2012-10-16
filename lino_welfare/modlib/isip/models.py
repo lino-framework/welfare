@@ -521,7 +521,7 @@ class Contract(ContractBase):
 
 
 class ContractDetail(dd.FormLayout):    
-    general = """
+    general = dd.Panel("""
     id:8 client:25 user:15 user_asd:15 language:8
     type company contact_person contact_role
     applies_from applies_until exam_policy
@@ -529,19 +529,19 @@ class ContractDetail(dd.FormLayout):
     date_decided date_issued 
     date_ended ending
     cal.TasksByController cal.EventsByController
-    """
+    """,label = _("General"))
     
-    isip = """
+    isip = dd.Panel("""
     stages        goals
     duties_asd    duties_dsbe
     duties_company duties_person
-    """
+    """,label = _("ISIP"))
     
     main = "general isip"
     
-    def setup_handle(self,dh):
-        dh.general.label = _("General")
-        dh.isip.label = _("ISIP")
+    #~ def setup_handle(self,dh):
+        #~ dh.general.label = _("General")
+        #~ dh.isip.label = _("ISIP")
 
 
 class Contracts(ContractBaseTable):

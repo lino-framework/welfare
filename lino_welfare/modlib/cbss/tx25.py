@@ -194,7 +194,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
   
 class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
   
-    parameters = "national_id language history"
+    parameters = dd.Panel("national_id language history",label=_("Parameters"))
     
     result = "cbss.RetrieveTIGroupsResult"
     

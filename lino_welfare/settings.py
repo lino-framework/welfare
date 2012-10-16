@@ -204,6 +204,14 @@ class Lino(Lino):
                 yield obj
                 
                 
+    def get_system_note_recipients(self,note):
+        recipients = []
+        obj = note.owner
+        if isinstance(obj,self.modules.pcsw.Coaching):
+            yield "%s <%s>" % (unicode(obj.user),obj.user.email)
+            for u in self.user_model.objects.filter(coaching_supervisor=True):
+                yield "%s <%s>" % (unicode(u),o.email)
+            
 
 LINO = Lino(__file__,globals())
 

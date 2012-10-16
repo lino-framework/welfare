@@ -341,43 +341,51 @@ class AvailableCoaches(users.Users):
         else:
             return None
         
-class AssignCoach(dd.RowAction):
+#~ class AssignCoach(dd.RowAction):
+class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
     show_in_workflow = True
-    parameters = dict(
-        client = dd.ForeignKey(pcsw.Client,editable=False),
-        coach = dd.ForeignKey(users.User,editable=False),
-        remark = dd.RichTextField(_("Remarks"),blank=True),
-        interactive = models.BooleanField(_("Edit notification mail")),
-        #~ dummy = models.BooleanField(_("Dummy option"))
-    )
+    #~ parameters = dict(
+        #~ client = dd.ForeignKey(pcsw.Client,editable=False),
+        #~ coach = dd.ForeignKey(users.User,editable=False),
+        #~ **dd.NotifyingAction.parameters)
     #~ params_layout = dd.ActionParamsFormLayout("""
-    params_layout = dd.Panel("""
-    client
-    coach
-    remark
-    interactive
-    """,window_size=(50,20))
+    #~ params_layout = dd.Panel("""
+    #~ client
+    #~ coach
+    #~ remark
+    #~ interactive
+    #~ """,window_size=(60,20))
     
     def action_param_defaults(self,ar,obj,**kw):
         kw = super(AssignCoach,self).action_param_defaults(ar,obj,**kw)
         if obj is not None:
-            kw.update(client=ar.master_instance)
-            kw.update(coach=obj)
+            kw.update(notify_subject=_('New client for %s') % obj)
+            kw.update(notify_body = _("Assign %(coach)s as coach for client %(client)s.") 
+                % dict(client=ar.master_instance,coach=obj))
+            
+            #~ kw.update(client=ar.master_instance)
+            #~ kw.update(coach=obj)
         return kw
+        
+    def get_row_permission(self,ar,state,ba):
+        if not pcsw.is_valid_niss(ar.master_instance.national_id):
+            logger.info("20121016 %s has invalid NISS ",ar.master_instance)
+            return False
+            #~ _("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
+                #~ % dict(client=client,niss=client.national_id))
+        return super(AssignCoach,self).get_row_permission(ar,state,ba)
         
     def run(self,obj,ar,**kw):
         """
         Assign a coach to a newcomer.
         """
         client = ar.master_instance
-        if not pcsw.is_valid_niss(client.national_id):
-            return ar.error_response(alert=True,
-                message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
-                % dict(client=client,niss=client.national_id))
-        msg = _("Assign client %(client)s for coaching by %(agent)s.") % dict(client=client,agent=obj)
+        #~ if not pcsw.is_valid_niss(client.national_id):
+            #~ return ar.error_response(alert=True,
+                #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
+                #~ % dict(client=client,niss=client.national_id))
         #~ ar.confirm(msg,_("Are you sure?"))
-        
         
         coaching = pcsw.Coaching(client=client,user=obj,
             start_date=datetime.date.today(),
@@ -389,36 +397,29 @@ class AssignCoach(dd.RowAction):
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
-        #~ msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
-        body = _("""%(user)s executed the following action:\n%(msg)s
-        """) % dict(client=client,agent=obj,user=ar.get_user(),msg=msg)
         
-        recipients = []
-        recipients.append(
-            dict(name=unicode(obj),address=obj.email,type=outbox.RecipientType.to))
-        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
-            recipients.append(
-                dict(name=unicode(u),address=u.email,type=outbox.RecipientType.to))
-            
-        if len(recipients):
-            m = outbox.Mail(user=ar.get_user(),
-                subject=_('Newcomer has been assigned'),
-                body = body,
-                project=client,
-                owner=coaching)
-            m.full_clean()
-            m.save()
-            #~ for t,p in [(outbox.RecipientType.to,obj.partner)]:
-            for rec in recipients:
-                r = outbox.Recipient(mail=m,**rec)
-                r.full_clean()
-                r.save()
-            #~ interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
-            if ar.action_param_values.interactive:
-                js = ar.renderer.instance_handler(ar,m)
-                kw.update(eval_js=js)
-            else:
-                m.send_mail.run(m,ar)
+        #~ note_kw = dict()
+        #~ self.update_system_note_kw(ar,note_kw,coaching)
+        self.add_system_note(ar,coaching)
+        
+        #~ if len(recipients):
+            #~ m = outbox.Mail(user=ar.get_user(),
+                #~ subject=_('Newcomer has been assigned'),
+                #~ body = body,
+                #~ project=client,
+                #~ owner=coaching)
+            #~ m.full_clean()
+            #~ m.save()
+            #~ for rec in recipients:
+                #~ r = outbox.Recipient(mail=m,**rec)
+                #~ r.full_clean()
+                #~ r.save()
+            #~ if ar.action_param_values.interactive:
+                #~ js = ar.renderer.instance_handler(ar,m)
+                #~ kw.update(eval_js=js)
+            #~ else:
+                #~ m.send_mail.run(m,ar)
+        msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
         return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
     
 

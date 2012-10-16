@@ -580,11 +580,11 @@ class CBSSRequestDetail(dd.FormLayout):
     #~ main = 'request response'
     main = 'request technical'
     
-    request = """
+    request = dd.Panel("""
     info
     parameters
     result
-    """
+    """,label=_("Request"))
     
     technical = dd.Panel("""
     response_xml 
@@ -592,17 +592,17 @@ class CBSSRequestDetail(dd.FormLayout):
     debug_messages
     """,label=_("Technical"),required=dict(user_groups='cbss',user_level='admin'))
     
-    info = """
+    info = dd.Panel("""
     id person user environment sent status ticket
-    """
+    """,label = _("Request information"))
     
     
     #~ response = "response_xml\nlogged_messages"
     
-    def setup_handle(self,lh):
-        lh.request.label = _("Request")
-        lh.info.label = _("Request information")
-        lh.result.label = _("Result")
+    #~ def setup_handle(self,lh):
+        #~ lh.request.label = _("Request")
+        #~ lh.info.label = _("Request information")
+        #~ lh.result.label = _("Result")
         # 20120927
         #~ lh.technical.label = _("Technical")
         #~ lh.technical.required.update(user_level='admin')
@@ -612,7 +612,7 @@ class CBSSRequestDetail(dd.FormLayout):
 
         #~ lh.response.label = _("Response")
         #~ lh.log.label = _("Log")
-        lh.parameters.label = _("Parameters")
+        #~ lh.parameters.label = _("Parameters")
     
 
 class SSDNRequest(CBSSRequest):
@@ -1194,36 +1194,40 @@ Element '{http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson}BirthDat
     
     
 class IdentifyPersonRequestDetail(CBSSRequestDetail):
-    p1 = """
+    p1 = dd.Panel("""
     national_id
     spacer
-    """
-    p2 = """
+    """,label = _("Using the national ID"))
+    
+    p2 = dd.Panel("""
     first_name middle_name last_name
     birth_date tolerance  gender 
-    """
-    parameters = "p1 p2"
+    """,label = _("Using phonetic search"))
     
-    result = "IdentifyPersonResult"
+    parameters = dd.Panel("p1 p2",label = _("Parameters"))
     
-    def setup_handle(self,lh):
-        lh.p1.label = _("Using the national ID")
-        lh.p2.label = _("Using phonetic search")
-        CBSSRequestDetail.setup_handle(self,lh)
+    result = dd.Panel("IdentifyPersonResult",label = _("Result"))
+    
+    #~ def setup_handle(self,lh):
+        #~ lh.p1.label = _("Using the national ID")
+        #~ lh.p2.label = _("Using phonetic search")
+        #~ CBSSRequestDetail.setup_handle(self,lh)
     
 class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
     window_size = (60,'auto')
+    
     main = """
     person national_id
     p2
     """
-    p2 = """
+    
+    p2 = dd.Panel("""
     first_name middle_name last_name
     birth_date tolerance  gender 
-    """
+    """,label = _("Phonetic search"))
     
-    def setup_handle(self,lh):
-        lh.p2.label = _("Phonetic search")
+    #~ def setup_handle(self,lh):
+        #~ lh.p2.label = _("Phonetic search")
 
 class CBSSRequests(dd.Table):
     #~ create_required = dict(user_level='user')
@@ -1549,42 +1553,46 @@ The SSIN of the person to register/unregister/list.
 
 
 class ManageAccessRequestDetail(CBSSRequestDetail):
-    p1 = """
+  
+    p1 = dd.Panel("""
     action start_date end_date 
     purpose query_register
-    """
-    proof = """
+    """,label = _("Requested action"))
+    
+    proof = dd.Panel("""
     national_id sis_card_no id_card_no
     first_name last_name birth_date 
-    """
-    parameters = "p1 proof"
+    """,label = _("Proof of authentication"))
+    parameters = dd.Panel("p1 proof",label=_("Parameters"))
     
-    def setup_handle(self,lh):
-        lh.p1.label = _("Requested action")
-        lh.proof.label = _("Proof of authentication")
-        CBSSRequestDetail.setup_handle(self,lh)
+    #~ def setup_handle(self,lh):
+        #~ lh.p1.label = _("Requested action")
+        #~ lh.proof.label = _("Proof of authentication")
+        #~ CBSSRequestDetail.setup_handle(self,lh)
         
 class ManageAccessRequestInsert(dd.FormLayout):
     window_size = (60,'auto')
     
-    p1 = """
+    p1 = dd.Panel("""
     action start_date end_date 
     purpose query_register
-    """
-    proof = """
+    """,label = _("Requested action"))
+    
+    proof = dd.Panel("""
     national_id sis_card_no id_card_no
     first_name last_name birth_date 
-    """
+    """,label = _("Proof of authentication"))
+    
     main = """
     person
     p1 
     proof
     """
     
-    def setup_handle(self,lh):
-        lh.p1.label = _("Requested action")
-        lh.proof.label = _("Proof of authentication")
-        super(ManageAccessRequestInsert,self).setup_handle(lh)
+    #~ def setup_handle(self,lh):
+        #~ lh.p1.label = _("Requested action")
+        #~ lh.proof.label = _("Proof of authentication")
+        #~ super(ManageAccessRequestInsert,self).setup_handle(lh)
     
         
     

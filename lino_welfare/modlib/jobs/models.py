@@ -188,15 +188,17 @@ class JobProviderDetail(pcsw.CompanyDetail):
     
     """
     box5 = "remarks" 
-    jobs = """
+    
+    jobs = dd.Panel("""
     JobsByProvider
     ContractsByProvider
-    """
+    """,label = _("Jobs"))
+    
     main = "general notes jobs"
     
-    def setup_handle(self,lh):
-        pcsw.CompanyDetail.setup_handle(self,lh)
-        lh.jobs.label = _("Jobs")
+    #~ def setup_handle(self,lh):
+        #~ pcsw.CompanyDetail.setup_handle(self,lh)
+        #~ lh.jobs.label = _("Jobs")
 
   
 
