@@ -15,20 +15,6 @@ Was ich noch machen muss:
 Feedback erwünscht
 ------------------
 
-Wo ich bei Gelegenheit auf deine Ideen hoffe:
-
-- Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
-  Siehe :doc:`/user/clients`.
-
-- Wie/wo soll die "Begründung" (RefuseNewcomer, EndCoaching, AssignCoach) 
-  gespeichert werden?
-  Notizen erstellen und Change.summary wieder raus?
-
-- Gibt es Benutzer, die keine eigenen Begleitungen machen können?
-  (für die der Menübefehl 
-  :menuselection:`ÖSHZ --> Meine Begleitungen` irritierend wäre?)
-  Zum Beispiel Caroline.
-
 - Der Menübefehl :menuselection:`Integration --> Meine Personensuchen` ist 
   funktional ersetzt durch die Filterparameter der Tabellen "Klienten"
   bzw. "DSBE-Klienten". Die Anordnung der Filteparameter muss 
@@ -37,8 +23,26 @@ Wo ich bei Gelegenheit auf deine Ideen hoffe:
 - Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
   Das ist nicht realistisch.
 
-- Was mich noch stört: nach erfolgreicher Zuweisung eines Klienten 
-  springt er ohne viele Wort auf den nächsten Klienten. Verwirrend?
+- Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
+
+  - Kommentare zu :doc:`/user/clients`. Brauchen wir nicht eher ein Wiki?
+
+  - Bei den Aktionen RefuseNewcomer, EndCoaching und AssignCoach
+    wird eine Notiz erstellt (d.h. auch vorher ein Dialogfenster gefragt). 
+    Bei anderen Zustandsänderungen (z.B. Standby) nicht.
+    
+  - Nach erfolgreicher Zuweisung eines Klienten 
+    springt er ohne viele Wort auf den nächsten Klienten. Verwirrend?
+
+- Alle Änderungen werden zusätzlich auch in ChangesByMaster gespeichert. 
+
+- Gibt es Benutzer, die keine eigenen Begleitungen machen können?
+  (für die der Menübefehl 
+  :menuselection:`ÖSHZ --> Meine Begleitungen` irritierend wäre?)
+  Zum Beispiel Caroline.
+  
+- Sollte Kerstin nicht per défaut nur die von ihr begleiteten Klienten sehen?
+  Aber wer weist ihr ihre Begleitungen zu?
 
 - Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
   Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.

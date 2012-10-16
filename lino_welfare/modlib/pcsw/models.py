@@ -2674,7 +2674,9 @@ def setup_main_menu(site,ui,user,m):
               #~ label=pg.name,
               #~ params=dict(master_instance=pg))
               
-        pm = m.add_menu("pcsw",MODULE_LABEL)
+        #~ pm = m.add_menu("pcsw",MODULE_LABEL)
+        pm = m.add_menu("contacts",contacts.MODULE_LABEL)
+        pm.add_separator('-')
         pm.add_action(Clients)
         #~ m.add_action(MyClients)
         #~ m.add_action(Clients)
