@@ -1052,7 +1052,7 @@ class ClientDetail(dd.FormLayout):
     
     #~ actor = 'contacts.Person'
     
-    main = "general status_tab coaching tab3 tab4 tab5 tab5b contracts history calendar outbox misc"
+    main = "general status_tab coaching education languages competences jobs contracts history calendar outbox misc"
     
     general = dd.Panel("""
     box1 box2
@@ -1163,30 +1163,30 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Miscellaneous"))
     
     
-    tab3 = dd.Panel("""
+    education = dd.Panel("""
     jobs.StudiesByPerson 
     jobs.ExperiencesByPerson:40
-    """,label = _("Education"))
+    """,label = _("Education"),required=dict(user_groups='integ'))
     
-    tab4 = dd.Panel("""
+    languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson 
     courses.CourseRequestsByPerson  
     # skills obstacles
-    """,label = _("Languages"))
+    """,label = _("Languages"),required=dict(user_groups='integ'))
     
-    tab5 = dd.Panel("""
+    competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson  skills
     cv.ObstaclesByPerson obstacles 
-    """,label = _("Competences"))
+    """,label = _("Competences"),required=dict(user_groups='integ'))
 
-    tab5b = dd.Panel("""
+    jobs = dd.Panel("""
     jobs.CandidaturesByPerson
-    """,label = _("Job Requests"))
+    """,label = _("Job Requests"),required=dict(user_groups='integ'))
       
     contracts = dd.Panel("""
     isip.ContractsByPerson
     jobs.ContractsByPerson
-    """,label = _("Contracts"))
+    """,label = _("Contracts"),required=dict(user_groups='integ'))
     
     #~ def setup_handle(self,lh):
         #~ lh.card_number.label = _("number")
@@ -1386,11 +1386,15 @@ class Clients(contacts.Partners):
             yield unicode(self.parameters['only_primary'].verbose_name)
         if ar.param_values.also_obsolete:
             yield unicode(self.parameters['also_obsolete'].verbose_name)
+            
         if ar.param_values.coached_by:
-            yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
-        #~ if ar.param_values.new_since:
-            #~ yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
-        if ar.param_values.coached_on:
+            if ar.param_values.coached_on:
+                yield unicode(self.parameters['coached_by'].verbose_name) \
+                    + ' ' + unicode(ar.param_values.coached_by) \
+                    + _(' on %(date)s') % dict(date=babel.dtos(ar.param_values.coached_on))
+            else:
+                yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+        elif ar.param_values.coached_on:
             yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
         
     
