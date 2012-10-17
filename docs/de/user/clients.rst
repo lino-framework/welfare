@@ -85,6 +85,7 @@ Der Zustand eines Klienten kann sein:
   auf Begleitung durch unser ÖSHZ hat.
   
 - **Begleitet** :
+  Es gibt im ÖSHZ mindestens eine Person, die "sich um die Person kümmert".
   Damit ein Klient im Status "Begleitet" sein kann, muss mindestens 
   eine aktive Begleitung existieren
   (diese Regel gilt jedoch nicht für importierte Klienten).

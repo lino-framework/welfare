@@ -92,6 +92,15 @@ Hier eine Liste der möglichen Partnerattribute in TIM:
 - N : Neuzugang
 
 
+
+Der Unterschied zwischen W und A ist lediglich, das A automatisch verteilt wird. 
+W ist eigentlich das Gleiche wie inaktiv.
+
+
+
+
+
+
 Begleitungen
 ------------
 

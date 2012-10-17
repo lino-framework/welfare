@@ -165,16 +165,19 @@ class LanguageKnowledge(dd.Model):
     
 class LanguageKnowledges(dd.Table):
     model = LanguageKnowledge
+    required = dict(user_groups='integ',user_level='manager')
 
 class LanguageKnowledgesByPerson(LanguageKnowledges):
     master_key = 'person'
     #~ label = _("Language knowledge")
     #~ button_label = _("Languages")
     column_names = "language native spoken written cef_level"
+    required = dict(user_groups='integ')
     
 class KnowledgesByLanguage(LanguageKnowledges):
     master_key = 'language'
     column_names = "person native spoken written cef_level"
+    required = dict(user_groups='integ')
 
 # 
 # PROPERTIES
@@ -203,10 +206,12 @@ class PersonProperty(properties.PropertyOccurence):
 class PersonProperties(dd.Table):
     model = PersonProperty
     hidden_columns = frozenset(['group'])
+    required = dict(user_groups='integ',user_level='manager')
     
 class PropsByPerson(PersonProperties):
     master_key = 'person'
     column_names = "property value remark *"
+    required = dict(user_groups='integ')
     
     
 class PersonPropsByProp(PersonProperties):

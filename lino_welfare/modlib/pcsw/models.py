@@ -1160,19 +1160,19 @@ class ClientDetail(dd.FormLayout):
     is_cpas is_senior is_deprecated 
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
-    """,label = _("Miscellaneous"))
+    """,label = _("Miscellaneous"),required=dict(user_level='manager'))
     
     
     education = dd.Panel("""
     jobs.StudiesByPerson 
     jobs.ExperiencesByPerson:40
-    """,label = _("Education"),required=dict(user_groups='integ'))
+    """,label = _("Education"))
     
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson 
     courses.CourseRequestsByPerson  
     # skills obstacles
-    """,label = _("Languages"),required=dict(user_groups='integ'))
+    """,label = _("Languages"))
     
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson  skills
@@ -1181,12 +1181,12 @@ class ClientDetail(dd.FormLayout):
 
     jobs = dd.Panel("""
     jobs.CandidaturesByPerson
-    """,label = _("Job Requests"),required=dict(user_groups='integ'))
+    """,label = _("Job Requests"))
       
     contracts = dd.Panel("""
     isip.ContractsByPerson
     jobs.ContractsByPerson
-    """,label = _("Contracts"),required=dict(user_groups='integ'))
+    """,label = _("Contracts"))
     
     #~ def setup_handle(self,lh):
         #~ lh.card_number.label = _("number")
@@ -1329,7 +1329,7 @@ class Clients(contacts.Partners):
     
     @classmethod
     def get_request_queryset(self,ar):
-        logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
+        #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
         qs = super(Clients,self).get_request_queryset(ar)
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)

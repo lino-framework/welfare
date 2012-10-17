@@ -726,12 +726,14 @@ class StudyType(babel.BabelNamed):
         verbose_name_plural = _("study types")
 
 class StudyTypes(dd.Table):
+    required = dict(user_groups='integ')
     #~ label = _('Study types')
     model = StudyType
     order_by = ["name"]
 
 
 class HistoryByPerson(dd.Table):
+    required = dict(user_groups='integ')
     master_key = 'person'
     order_by = ["started"]
     
@@ -785,6 +787,7 @@ class Study(CountryCity):
 
 class Studies(dd.Table):
     "General list of Studies (all Persons)"
+    required = dict(user_groups='integ')
     model = Study
     order_by = "country city type content".split()
 
@@ -831,6 +834,7 @@ class Experience(SectorFunction):
         return unicode(self.title)
   
 class Experiences(dd.Table):
+    required = dict(user_groups='integ')
     model = Experience
   
 class ExperiencesByFunction(Experiences):
@@ -840,6 +844,7 @@ class ExperiencesByFunction(Experiences):
     
 class ExperiencesByPerson(Experiences,HistoryByPerson):
     "List of job experiences for a known person"
+    required = dict(user_groups='integ')
     #~ model = Experience
     column_names = "company started stopped title sector function country remarks"
     
