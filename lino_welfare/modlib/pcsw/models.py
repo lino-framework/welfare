@@ -1329,7 +1329,7 @@ class Clients(contacts.Partners):
     
     @classmethod
     def get_request_queryset(self,ar):
-        #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
+        logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
         qs = super(Clients,self).get_request_queryset(ar)
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
