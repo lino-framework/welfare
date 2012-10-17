@@ -465,6 +465,7 @@ class MyBudgets(Budgets,mixins.ByUser):
     
 class BudgetsByPartner(Budgets):
     master_key = 'partner'
+    label = _("Is partner of these budgets:")
     
 
     
@@ -553,6 +554,10 @@ class Actors(dd.Table):
 class ActorsByBudget(Actors):
     master_key = 'budget'
     column_names = "seqno partner header remark *"
+    
+class ActorsByPartner(Actors):
+    master_key = 'partner'
+    label = _("Is actor in these budgets:")
     
 
 
@@ -1049,10 +1054,16 @@ MODULE_LABEL = _("Debts mediation")
 #~ settings.LINO.add_user_group('debts',MODULE_LABEL)
 
 def site_setup(site):
-    site.modules.contacts.Partners.add_detail_tab('debts.BudgetsByPartner')
-    site.modules.contacts.Persons.add_detail_tab('debts.BudgetsByPartner')
-    site.modules.pcsw.Clients.add_detail_tab('debts.BudgetsByPartner')
-    site.modules.households.Households.add_detail_tab('debts.BudgetsByPartner')
+    for T in (site.modules.contacts.Partners,
+            site.modules.contacts.Persons,
+            site.modules.pcsw.Clients,
+            site.modules.households.Households):
+        #~ T.add_detail_tab('debts.BudgetsByPartner')
+        T.add_detail_tab('debts',"""
+        debts.BudgetsByPartner
+        debts.ActorsByPartner
+        """,MODULE_LABEL)
+    
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
 

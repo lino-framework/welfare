@@ -315,8 +315,6 @@ def objects():
     vigala = City.objects.get(name__exact='Vigala')
     ee = countries.Country.objects.get(pk='EE')
     be = belgium = countries.Country.objects.get(isocode__exact='BE')
-    #~ luc = person(first_name="Luc",last_name="Saffre",city=vigala,country='EE',card_number='122')
-    #~ yield luc
     andreas = Person.objects.get(name__exact="Arens Andreas")
     annette = Person.objects.get(name__exact="Arens Annette")
     hans = Person.objects.get(name__exact="Altenberg Hans")
@@ -431,8 +429,6 @@ def objects():
         gender=Gender.female)
     yield tatjana
     
-    from django.core.exceptions import ValidationError
-    # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`
     bernard = Person.objects.get(name__exact="Bodard Bernard")
     
     cct = ClientContactType(name="Arbeitsvermittler")
@@ -445,6 +441,8 @@ def objects():
     #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir
     
+    #~ from django.core.exceptions import ValidationError
+    #~ # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`
     #~ try:
       #~ bernard.job_office_contact = adg_dir
       #~ bernard.clean()
@@ -521,7 +519,8 @@ def objects():
     
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
-    for person in Person.objects.filter(gender__isnull=False):
+    #~ for person in Person.objects.filter(gender__isnull=False):
+    for person in Person.objects.exclude(gender=''):
         if User.objects.filter(partner=person).count() == 0:
           if contacts.Role.objects.filter(person=person).count() == 0:
             #~ if not person in DIRECTORS:
@@ -588,47 +587,7 @@ def objects():
         yield Note(user=USERS.pop(),
           date=settings.LINO.demo_date(days=i),
           subject=SUBJECTS.pop())
-    
 
-    if False:
-        #~ yield note(user=root,date=settings.LINO.demo_date(),
-        yield note(user=root,date=i2d(20091006),
-            subject="Programmierung",company=cpas,
-            type=1,event_type=1)
-        yield note(user=user,date=i2d(20091007),subject="Testen",company=cpas)
-        yield note(user=root,date=i2d(20100517),subject="Programmierung",company=cpas)
-        yield note(user=user,date=i2d(20100518),subject="Testen",company=cpas)
-        yield note(user=user,date=i2d(20110526),subject="Formatted notes",
-            company=cpas,body=restify(u"""\
-Formatted notes
-===============
-
-Lino has now a WYSIWYG text editor. 
-
-Examples
---------
-
-- Enumerations like this list
-- Character formatting : **bold**, *italics*, ``typewriter``.
-- External `Links <http://lino.saffre-rumma.net/todo.html>`_
-- Tables:
-
-  ============ =======
-  Package      Version
-  ============ =======
-  mercurial    1
-  apache2      2 
-  tinymce      3
-  ============ =======
-  
-Lorem ipsum 
------------
-
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.  
-
-"""))
     
     schule = StudyType.objects.get(pk=1)
     uni = StudyType.objects.get(pk=4)
