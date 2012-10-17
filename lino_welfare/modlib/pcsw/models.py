@@ -1656,7 +1656,7 @@ class UsersWithClients(dd.VirtualTable):
                         #~ return MyClients.request(
                           #~ ar.ui,subst_user=obj,param_values=dict(group=pg))
                         return IntegClients.request(ar.ui,
-                            param_values=dict(group=pg,coached_by=obj))
+                            param_values=dict(group=pg,coached_by=obj,coached_on=))
                     return func
                 vf = dd.RequestField(w(pg),verbose_name=pg.name)
                 self.add_virtual_field('G'+pg.ref_name,vf)

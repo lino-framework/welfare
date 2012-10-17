@@ -10,7 +10,7 @@ Klienten gibt es momentan in drei Tabellen, die sich durch Kolonnenreihenfolge
 und Filterparameter unterscheiden:
 
 - "Alle Klienten" 
-  (Menü :menuselection:`ÖSHZ --> Klienten`) : 
+  (Menü :menuselection:`Kontakte --> Klienten`) : 
   allgemeine Liste, die jeder Benutzer sehen darf.
 
 - DSBE-Klienten
@@ -123,16 +123,47 @@ Begleitungen
    }
 
 
-Veraltete Klienten 
---------------------
+Ehemalige Klienten 
+------------------
 
-Wie alle Partner haben auch Klienten ein Ankreuzfeld "veraltet",
-das unabhängig vom Zustand existiert.
+Falls es ein importierter Partner ist, 
+hatte er in TIM entweder das Attribut 
+`W (Warnung bei Auswahl)` bekommen
+oder wurde in die Partnerart `I (Inaktive)` klassiert.
+
 Wird benutzt z.B. in folgenden Fällen:
 
 - Der Klient wurde versehentlich als Dublette eines existierenden 
   Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
-  weil Dokumente existieren).
+  weil Dokumente existieren). 
+  
+
+Veraltete Klienten (Altfälle)
+-----------------------------
+
+Wie alle Partner haben auch Klienten ein Ankreuzfeld "veraltet",
+das *unabhängig vom Zustand* existiert. 
+
+Das Attribut "veraltet" bedeutet: 
+die Daten des Partners werden nicht mehr gepflegt, alle Angaben verstehen sich 
+als "so war es, bevor dieser Partner aufhörte, uns zu interessieren".
+
+Es versteht sich von selbst, dass Altfälle normalerweise 
+ignoriert werden.
+Also "begleitete" Klienten können trotzdem 
+wie vom Erdboden verschwunden sein, weil sie als veraltet markiert wurden.
+
+
+  
+  
+
+Inaktive aus TIM
+
+Partner in TIM und Lino (auch Firmen) können "Altfälle" sein.
+Das Attribut "veraltet" bedeutet: 
+die Person wird *nicht* mehr begleitet und auch ihre Daten nicht mehr gepflegt, alle Angaben verstehen sich als "so war es, bevor diese Person aufhörte, uns zu interessieren".
+
+  
   
 
 Regeln
