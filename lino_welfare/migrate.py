@@ -33,6 +33,7 @@ from django.conf import settings
 from lino.core.modeltools import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
+from lino import dd
 
 SINCE_ALWAYS = datetime.date(1990,1,1)
 
@@ -74,11 +75,14 @@ def migrate_from_1_4_10(globals_dict):
     contacts_Role = resolve_model("contacts.Role")
     properties_PropType = resolve_model("properties.PropType")
     
+    cal = dd.resolve_app('cal')
+    pcsw = dd.resolve_app('pcsw')
+    
     NOW = datetime.datetime(2012,9,6,0,0)
     
     from lino.modlib.countries.models import CityTypes
     from lino.utils.mti import create_child
-    from lino_welfare.modlib.pcsw import models as pcsw
+    #~ from lino_welfare.modlib.pcsw import models as pcsw
     
     def find_contact(contact_id):
         try:
@@ -311,10 +315,12 @@ def migrate_from_1_4_10(globals_dict):
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)
+        if not state: state = cal.EventStates.draft
         return cal_Event(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,build_time=build_time,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,transparent=transparent,place_id=place_id,priority_id=priority_id,state=state)    
     globals_dict.update(create_cal_event=create_cal_event)
     def create_cal_task(id, owner_type_id, owner_id, user_id, created, modified, project_id, start_date, start_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, due_date, due_time, percent, state):
         owner_type_id = new_content_type_id(owner_type_id)
+        if not state: state = cal.TaskStates.todo
         return cal_Task(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,start_date=start_date,start_time=start_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,due_date=due_date,due_time=due_time,percent=percent,state=state)        
     globals_dict.update(create_cal_task=create_cal_task)
     def create_lino_helptext(id, content_type_id, field, help_text):
