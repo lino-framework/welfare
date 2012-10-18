@@ -1152,7 +1152,7 @@ class ClientDetail(dd.FormLayout):
     
     history = dd.Panel("""
     pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
-    lino.ChangesByMaster:30
+    # lino.ChangesByMaster
     """,label = _("History"))
     
     outbox = dd.Panel("""
@@ -2299,7 +2299,7 @@ during a given period.
     class Meta:
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
-        
+    allow_cascaded_delete = ['client']
     workflow_state_field = 'state'
     
     client = models.ForeignKey(Client,related_name="coachings_by_client")
@@ -2818,6 +2818,12 @@ def site_setup(site):
     site.modules.contacts.Partners.set_detail_layout(PartnerDetail())
     site.modules.contacts.Companies.set_detail_layout(CompanyDetail())
     site.modules.contacts.Persons.set_detail_layout(PersonDetail())
+    #~ for T in (site.modules.contacts.Partners,
+            #~ site.modules.contacts.Persons,
+            #~ site.modules.contacts.Companies,
+            #~ site.modules.pcsw.Clients):
+        #~ T.add_detail_tab('changes','lino.ChangesByMaster')
+    site.modules.contacts.Partners.add_detail_tab('changes','lino.ChangesByMaster')
 
     
     site.modules.cal.Events.set_detail_layout("general more")

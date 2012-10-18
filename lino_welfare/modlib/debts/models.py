@@ -516,7 +516,7 @@ class Actor(ActorBase,SequencedBudgetComponent):
         verbose_name = _("Budget Actor")
         verbose_name_plural = _("Budget Actors")
         
-    allow_cascaded_delete = True
+    allow_cascaded_delete = ['budget']
         
     #~ budget = models.ForeignKey(Budget,related_name="actors")
     #~ budget = models.ForeignKey(Budget)
@@ -570,7 +570,7 @@ class Entry(SequencedBudgetComponent):
         #~ unique_together = ['budget','account','name']
         #~ unique_together = ['actor','account']
         
-    allow_cascaded_delete = True
+    allow_cascaded_delete = ['budget']
     
     #~ group = models.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
@@ -1076,7 +1076,7 @@ def setup_main_menu(site,ui,user,m):
   
 def setup_master_menu(site,ui,user,m): pass
 
-def uused_setup_my_menu(site,ui,user,m): 
+def unused_setup_my_menu(site,ui,user,m): 
     m  = m.add_menu("debts",MODULE_LABEL)
     m.add_action(MyBudgets)
   

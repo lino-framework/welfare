@@ -91,20 +91,24 @@ class Lino(Lino):
         """
         
         #~ self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
-        self.modules.pcsw.Client.watch_changes()
-        self.modules.pcsw.Coaching.watch_changes(master_key='client')
-        self.modules.pcsw.ClientContact.watch_changes(master_key='client')
-        self.modules.jobs.Candidature.watch_changes(master_key='person')
-        self.modules.notes.Note.watch_changes(master_key='project')
-        self.modules.outbox.Mail.watch_changes(master_key='project')
-        self.modules.debts.Budget.watch_changes(master_key='partner')
+        self.modules.contacts.Partner.watch_changes()
+        self.modules.contacts.Person.watch_changes(master_key='partner_ptr')
+        self.modules.contacts.Company.watch_changes(master_key='partner_ptr')
+        self.modules.pcsw.Client.watch_changes(master_key='partner_ptr')
+        self.modules.pcsw.Coaching.watch_changes(master_key='client__partner_ptr')
+        self.modules.pcsw.ClientContact.watch_changes(master_key='client__partner_ptr')
+        self.modules.jobs.Candidature.watch_changes(master_key='person__partner_ptr')
+        
+        #~ self.modules.notes.Note.watch_changes(master_key='project')
+        #~ self.modules.outbox.Mail.watch_changes(master_key='project')
+        #~ self.modules.debts.Budget.watch_changes(master_key='partner')
         
         # ContractBase is abstract, so it's not under self.modules
         from lino_welfare.modlib.isip.models import ContractBase
-        ContractBase.watch_changes(master_key='client')
+        ContractBase.watch_changes(master_key='client__partner_ptr')
         
         from lino_welfare.modlib.cbss.models import CBSSRequest
-        CBSSRequest.watch_changes(master_key='person')
+        CBSSRequest.watch_changes(master_key='person__partner_ptr')
                 
             
 

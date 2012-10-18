@@ -135,7 +135,7 @@ class LanguageKnowledge(dd.Model):
         verbose_name = _("language knowledge")
         verbose_name_plural = _("language knowledges")
         
-    allow_cascaded_delete = True
+    allow_cascaded_delete = ['person']
     
     #~ person = models.ForeignKey("contacts.Person")
     #~ person = models.ForeignKey(settings.LINO.person_model)
@@ -188,7 +188,7 @@ class PersonProperty(properties.PropertyOccurence):
     """A given property defined for a given person. 
     See :mod:`lino.modlib.properties`."""
     
-    allow_cascaded_delete = True
+    allow_cascaded_delete = ['person']
     
     class Meta:
         app_label = 'properties'

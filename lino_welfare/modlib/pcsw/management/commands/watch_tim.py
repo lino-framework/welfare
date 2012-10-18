@@ -72,6 +72,13 @@ households_Type = dd.resolve_model("households.Type")
 CCTYPE_HEALTH_INSURANCE = 1
 CCTYPE_PHARMACY = 2
 
+def store(kw,**d):
+    for k,v in d.items():
+        if v is not None:
+        # see :doc:`/blog/2011/0711`
+        #~ if v:
+            kw[k] = v
+
 def convert_sex(v):
     if v in ('W','F'): return 'F'
     if v == 'M': return 'M'
@@ -102,6 +109,36 @@ def par2client(row,person):
     elif row['IDPRT'] == 'A':
         person.is_senior = True
         
+
+def checkcc(person,cIdAdr,nType):
+    pk = ADR_id(cIdAdr)
+    try:
+        Company.objects.get(pk=pk)
+    except ValueError,e:
+        dblogger.warning(u"%s : invalid health_insurance %r",obj2str(person),row['IDMUT'])
+        return
+    except pcsw.ClientContact.DoesNotExist,e:
+        dblogger.warning(u"%s : health_insurance %s not found",obj2str(person),row['IDMUT'])
+        return
+    qs = pcsw.ClientContact.objects.filter(
+        client=person,
+        type_id=nType)
+    if qs.count() == 0:
+        cc = pcsw.ClientContact(
+            client=person,
+            company_id=pk,
+            type_id=nType)
+        cc.save()
+    elif qs.count() == 1:
+        cc = qs[0]
+        if cc.company_id != pk:
+            cc.company_id = pk
+            cc.save()
+    else:
+        dblogger.warning(u"%s : more than 1 ClientContact (type=%r)",obj2str(person),nType)
+
+
+
 def pxs2client(row,person):
   
     kw = {}
@@ -127,26 +164,16 @@ def pxs2client(row,person):
             person.card_type = pcsw.BeIdCardType.get_by_value(str(row['CARDTYPE']))
             
     if row['IDMUT']:
-        pk = ADR_id(row['IDMUT'])
-        cc = pcsw.ClientContact.objects.get(
-            project=person,
-            type_id=CCTYPE_HEALTH_INSURANCE,
-            company_id=pk)
-        ...
-        try:
-            person.health_insurance = Company.objects.get(pk=pk)
-        except ValueError,e:
-            dblogger.warning(u"%s : invalid health_insurance %r",obj2str(person),row['IDMUT'])
-        except pcsw.ClientContact.DoesNotExist,e:
-            dblogger.warning(u"%s : health_insurance %s not found",obj2str(person),row['IDMUT'])
-  
+        checkcc(person,row['IDMUT'],CCTYPE_HEALTH_INSURANCE)
     if row['APOTHEKE']:
-        try:
-            person.pharmacy = Company.objects.get(pk=int(row['APOTHEKE']))
-        except ValueError,e:
-            dblogger.warning(u"%s : invalid pharmacy %r",obj2str(person),row['APOTHEKE'])
-        except Company.DoesNotExist,e:
-            dblogger.warning(u"%s : pharmacy %s not found",obj2str(person),row['APOTHEKE'])
+        checkcc(person,row['APOTHEKE'],CCTYPE_PHARMACY)
+        
+        #~ try:
+            #~ person.pharmacy = Company.objects.get(pk=int(row['APOTHEKE']))
+        #~ except ValueError,e:
+            #~ dblogger.warning(u"%s : invalid pharmacy %r",obj2str(person),row['APOTHEKE'])
+        #~ except Company.DoesNotExist,e:
+            #~ dblogger.warning(u"%s : pharmacy %s not found",obj2str(person),row['APOTHEKE'])
             
     nat = row['NATIONALIT']
     if nat:
@@ -176,9 +203,9 @@ def country2kw(row,kw):
             else:
                 if activity:
                     try:
-                        activity = Activity.objects.get(pk=activity)
-                    except Activity.DoesNotExist:
-                        activity = Activity(id=activity,name=unicode(activity))
+                        activity = pcsw.Activity.objects.get(pk=activity)
+                    except pcsw.Activity.DoesNotExist:
+                        activity = pcsw.Activity(id=activity,name=unicode(activity))
                         activity.save(force_insert=True)
                     kw.update(activity=activity)
         
@@ -357,9 +384,9 @@ class Controller:
             else:
                 dblogger.warning("%s:%s : PUT ignored (row does not exist)",kw['alias'],kw['id'])
                 return 
-        if self.PUT_special(obj,**kw):
-            return 
         watcher = changes.Watcher(obj,False)
+        if self.PUT_special(watcher,obj,**kw):
+            return 
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
@@ -367,7 +394,7 @@ class Controller:
         #~ obj.save()
         #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
         
-    def PUT_special(self,obj,**kw):
+    def PUT_special(self,watcher,**kw):
         pass
         
 def ADR_applydata(obj,data,**kw):
@@ -455,11 +482,13 @@ class PAR(Controller):
                               #~ data['IDUSR'],username,obj2str(obj))
                         #~ obj.coach1 = u
                         try:
-                            coaching = pcsw.Coaching.objects.get(project=obj,primary=True)
+                            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
+                            if coaching.user != u:
+                                coaching.user = u
+                                coaching.save()
                         except pcsw.Coaching.DoesNotExist,e:
-                            coaching = pcsw.Coaching(project=obj,primary=True)
-                        coaching.user = u
-                        coaching.save()
+                            coaching = pcsw.Coaching(client=obj,primary=True,user=u)
+                            coaching.save()
                     else:
                         #~ obj.coach1 = None
                         try:
@@ -481,25 +510,11 @@ class PAR(Controller):
             
         Controller.applydata(self,obj,data,**mapper)
         
-    def swapclass(self,obj,new_class,data):
-        kw = {}
-        for n in CONTACT_FIELDS:
-            kw[n] = getattr(obj,n)
-            v = data.get(n,None)
-            if v is not None:
-                kw[n] = v
-        old_class = obj.__class__
-        obj = obj.partner_ptr
-        mti.delete_child(obj,old_class)
-        newobj = mti.insert_child(obj,new_class)
-        self.applydata(newobj,data)
-        self.validate_and_save(newobj)
-        
     def get_object(self,kw):
         id = kw['id']
         if not id:
             return None
-        #~ possible_models = [Client, Person, Company, Household]
+        #~ possible_models = [Client, Person, Company, Household, Partner]
         #~ model = PAR_model(kw['data'])
         #~ delete_child
         #~ try:
@@ -523,24 +538,40 @@ class PAR(Controller):
         except Household.DoesNotExist:
             pass
         
-    def PUT_special(self,obj,**kw):
+    def PUT_special(self,watcher,**kw):
+        obj = watcher.watched
         model = PAR_model(kw['data'])
         if obj.__class__ != model:
             dblogger.info("%s:%s (%s) : %s becomes %s",kw['alias'],kw['id'],obj2str(obj),
                 obj.__class__.__name__,model.__name__)
-            self.swapclass(obj,model,kw['data'])
+            self.swapclass(watcher,model,kw['data'])
             return True
-        #~ if is_company(kw['data']):
-            #~ if obj.__class__ is Person:
-                #~ dblogger.info("%s:%s (%s) : Person becomes Company",kw['alias'],kw['id'],obj2str(obj))
-                #~ self.swapclass(obj,Company,kw['data'])
-                #~ return True
-        #~ else:
-            #~ if obj.__class__ is Company:
-                #~ dblogger.info("%s:%s (%s) : Company becomes Person",kw['alias'],kw['id'],obj2str(obj))
-                #~ self.swapclass(obj,Person,kw['data'])
-                #~ return True
             
+    def swapclass(self,watcher,new_class,data):
+        obj = watcher.watched
+        #~ kw = {}
+        #~ for n in CONTACT_FIELDS:
+            #~ kw[n] = getattr(obj,n)
+            #~ v = data.get(n,None)
+            #~ if v is not None:
+                #~ kw[n] = v
+        old_class = obj.__class__
+        if issubclass(old_class,new_class):
+            #~ it was a Client and becomes a Person
+            mti.delete_child(obj,old_class)
+            changes.log_delete(REQUEST,obj)
+            newobj =  new_class.objects.get(pk=obj.id)
+        elif issubclass(new_class,old_class):
+            #~ it was only a Person and becomes a Client
+            newobj = mti.insert_child(obj,new_class)
+        else:
+            obj = obj.partner_ptr
+            mti.delete_child(obj,old_class)
+            newobj = mti.insert_child(obj,new_class)
+        self.applydata(newobj,data)
+        self.validate_and_save(newobj)
+        return newobj
+        
     def create_object(self,kw):
         return PAR_model(kw['data'])()
         #~ if is_company(kw['data']):
