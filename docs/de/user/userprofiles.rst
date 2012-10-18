@@ -1,7 +1,7 @@
 Benutzerprofile
 ===============
 
-Standardmäßig gibt es folgende Bentuzerprofile:
+Standardmäßig gibt es folgende Benutzerprofile:
 
 
 === ========================== ====== ====== ===== ==== ========= ===== ===========

@@ -49,7 +49,6 @@ from lino import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words, unicode_string
 
-from lino.utils import confirm
 from lino.utils import dblogger
 from lino.utils import mti
 from lino.core.modeltools import obj2str
@@ -58,10 +57,10 @@ from lino.utils.daemoncommand import DaemonCommand
 
 #~ from lino.apps.pcsw.models  import is_valid_niss
 
-from lino_welfare.modlib.pcsw import models as pcsw
-from lino_welfare.modlib.pcsw.management.commands.initdb_tim import convert_sex, \
-    ADR_id, country2kw, isolang
+#~ from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
 
+pcsw = dd.resolve_app('pcsw')
 Country = dd.resolve_model('countries.Country')
 City = dd.resolve_model('countries.City')
 Person = dd.resolve_model(settings.LINO.person_model)
@@ -72,6 +71,28 @@ households_Type = dd.resolve_model("households.Type")
 
 CCTYPE_HEALTH_INSURANCE = 1
 CCTYPE_PHARMACY = 2
+
+def convert_sex(v):
+    if v in ('W','F'): return 'F'
+    if v == 'M': return 'M'
+    return None
+      
+def isolang(x):
+    if x == 'K' : return 'et'
+    if x == 'E' : return 'en'
+    if x == 'D' : return 'de'
+    if x == 'F' : return 'fr'
+    if x == 'N' : return 'nl'
+      
+def ADR_id(cIdAdr):
+    assert len(cIdAdr) == 3
+    #~ assert [cIdAdr:-3] == '000'
+    try:
+        return 199000+int(cIdAdr)
+    except ValueError,e:
+        return None
+
+
 
 
 def par2client(row,person):
@@ -140,6 +161,63 @@ def pxs2client(row,person):
     store_date(row,person,'VALID1','card_valid_from')
     store_date(row,person,'VALID2','card_valid_until')
             
+
+
+def country2kw(row,kw):
+    # for both PAR and ADR
+    
+    if row.has_key('PROF'):
+        activity = row['PROF']
+        if activity:
+            try:
+                activity = int(activity)
+            except ValueError:
+                dblogger.debug("Ignored invalid value PROF = %r",activity)
+            else:
+                if activity:
+                    try:
+                        activity = Activity.objects.get(pk=activity)
+                    except Activity.DoesNotExist:
+                        activity = Activity(id=activity,name=unicode(activity))
+                        activity.save(force_insert=True)
+                    kw.update(activity=activity)
+        
+    country = row['PAYS']
+    if country:
+        try:
+            country = Country.objects.get(short_code__exact=country)
+        except Country.DoesNotExist:
+            country = Country(isocode=country,name=country,short_code=country)
+            country.save()
+        kw.update(country=country)
+    
+    email = row['EMAIL']
+    if email and is_valid_email(email):
+        kw.update(email=email)
+    store(kw,
+      phone=row['TEL'],
+      fax=row['FAX'],
+      )
+      
+    kw.update(street2kw(join_words(row['RUE'],row['RUENUM'],row['RUEBTE'])))
+    
+    zip_code = row['CP']
+    if zip_code:
+        kw.update(zip_code=zip_code)
+        try:
+            city = City.objects.get(
+              country=country,
+              zip_code__exact=zip_code,
+              )
+            kw.update(city=city)
+        except City.DoesNotExist,e:
+            city = City(zip_code=zip_code,name=zip_code,country=country)
+            city.save()
+            kw.update(city=city)
+            #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
+        except City.MultipleObjectsReturned,e:
+            dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
+
 
 
 #~ def is_company(data):
@@ -333,7 +411,7 @@ class PAR(Controller):
         if data.has_key('ATTRIB'):
             #~ obj.newcomer = ("N" in data['ATTRIB'])
             #~ obj.is_deprecated = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
-            obj.is_deprecated = ("W" in data['ATTRIB'])
+            obj.is_obsolete = ("W" in data['ATTRIB'])
         
         if issubclass(obj.__class__,Person):
             #~ mapper.update(title='ALLO')

@@ -46,6 +46,8 @@ from lino.modlib.countries import models as countries
 from lino_welfare.modlib.pcsw import models as pcsw
 from lino_welfare.modlib.isip import models as isip
 
+contacts = dd.resolve_app('contacts')
+
 #~ dblogger.info('Loading')
 
 
@@ -949,6 +951,11 @@ def objects():
                 if b is not None:
                     kw.update(end_date=settings.LINO.demo_date(b))
                 yield pcsw.Coaching(**kw)
+                
+    for i,p in enumerate(pcsw.Partner.objects.all()):
+        if i % 10 == 0:
+            p.is_obsolete = True
+            p.save()
 
     JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
     #~ jobs_contract = Instantiator('jobs.Contract').build

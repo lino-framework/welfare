@@ -186,6 +186,10 @@ class NewClients(pcsw.Clients):
     label = _("New Clients")
     use_as_default_table = False
     
+    help_text = u"""\
+Liste der neuen Klienten zwecks Zuweisung 
+eines Begleiters oder Ablehnen des Hilfeantrags."""
+    
     #~ detail_layout = NewClientDetail()
     
     column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
@@ -198,13 +202,18 @@ class NewClients(pcsw.Clients):
         
         
     parameters = dict(
-      also_refused = models.BooleanField(_("Also refused clients"),default=False),
-      also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
+      also_refused = models.BooleanField(_("Also refused clients"),
+          default=False),
+      also_obsolete = models.BooleanField(
+          _("Also deprecated clients"),
+          default=False),
       #~ new_since = models.DateField(_("New clients since"),blank=True),
       new_since = models.DateField(_("Also newly coached clients since"),
           #~ default=amonthago,
-          blank=True,null=True),
-      coached_by = models.ForeignKey(users.User,blank=True,null=True,
+          blank=True,null=True,help_text=u"""\
+Auch Klienten, die erst seit Kurzem begleitet sind."""),
+      coached_by = models.ForeignKey(users.User,
+          blank=True,null=True,
           verbose_name=_("Coached by")),
       #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
       )
@@ -230,7 +239,7 @@ class NewClients(pcsw.Clients):
         if ar.param_values.coached_by:
             qs = pcsw.only_coached_by(qs,ar.param_values.coached_by)
         if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_deprecated=False)
+            qs = qs.filter(is_obsolete=False)
         #~ if not ar.param_values.also_refused:
             #~ qs = qs.filter(client_status=False)
         #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
@@ -345,6 +354,9 @@ class AvailableCoaches(users.Users):
 class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
     show_in_workflow = True
+    help_text=u"""
+Diesen Benutzer als Begleiter für diesen Klienten eintragen und den Zustand des Klienten auf "Begleitet" setzen.
+Anschließend wird der Klient in der Liste "Neue Klienten" nicht mehr sichbar sein."""
     #~ parameters = dict(
         #~ client = dd.ForeignKey(pcsw.Client,editable=False),
         #~ coach = dd.ForeignKey(users.User,editable=False),

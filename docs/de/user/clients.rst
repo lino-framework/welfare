@@ -6,7 +6,7 @@ Klienten
 Klienten
 ========
 
-Klienten gibt es momentan in drei Tabellen, die sich durch Kolonnenreihenfolge 
+Klienten gibt es in drei Tabellen, die sich durch Kolonnenreihenfolge 
 und Filterparameter unterscheiden:
 
 - "Alle Klienten" 
@@ -15,6 +15,7 @@ und Filterparameter unterscheiden:
 
 - DSBE-Klienten
   (Menü :menuselection:`DSBE --> Klienten`)
+  spezielle Liste für die Kollegen im DSBE.
   Zeigt immer nur **begleitete** Kunden. 
   Hier kann man keine neuen Klienten anlegen.
   Die Reiter Kompetenzen, Verträge... finden sich nur hier.
@@ -29,43 +30,12 @@ ist bei allen drei Listen das Gleiche.
 Das hängt vom :doc:`Benutzerprofil </user/userprofiles>` ab.
 
 
-
-
-
 Arbeitsabläufe
 ==============
-
-Wortschatz:
-
-- Workflow : Arbeitsablauf
-- Life cycle : Lebenzyklus
-- engl. "State" = Zustand oder Stadium
-
-  
 
 
 Arbeitsablauf eines Klienten
 ----------------------------
-
-.. graphviz:: 
-   
-   digraph foo {
-      newcomer -> refused [label="Neuantrag ablehnen"];
-      newcomer -> coached [label="Begleiter zuweisen"];
-      refused -> newcomer [label="Neuantrag wiederholen"];
-      coached -> newcomer [label="Begleitung abbrechen"];
-      coached -> former [label="Begleitung beenden"];
-      invalid -> newcomer [label="NISS wurde korrigiert"];
-      
-      newcomer [label="Neuantrag"];
-      refused [label="Abgelehnt"];
-      invalid [label="Ungültig"];
-      former [label="Ehemalig"];
-      coached [label="Begleitet"];
-   }
-
-
-
 
 
 Der Zustand eines Klienten kann sein:
@@ -91,13 +61,45 @@ Der Zustand eines Klienten kann sein:
   (diese Regel gilt jedoch nicht für importierte Klienten).
 
 - **Ehemalig** :
-  Es existiert keine *aktive* Begleitung.
+  War mal begleitet, aber jetzt nicht mehr. Es existiert keine *aktive* Begleitung.
+  Falls es ein importierter Partner ist, 
+  hatte er in TIM entweder das Attribut `W (Warnung bei Auswahl)`
+  oder die Partnerart `I (Inaktive)`.
+
   
 - **Ungültig** :
-  Klient ist laut TIM weder Ehemalig noch Neuantrag, 
-  hat aber keine gültige NISS.
+  Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.
   
   
+  
+.. graphviz:: 
+   
+   digraph foo {
+      newcomer -> refused [label="Neuantrag ablehnen"];
+      newcomer -> coached [label="Begleiter zuweisen"];
+      refused -> newcomer [label="Neuantrag wiederholen"];
+      coached -> newcomer [label="Begleitung abbrechen"];
+      coached -> former [label="Begleitung beenden"];
+      invalid -> newcomer [label="NISS wurde korrigiert"];
+      
+      newcomer [label="Neuantrag"];
+      refused [label="Abgelehnt"];
+      invalid [label="Ungültig"];
+      former [label="Ehemalig"];
+      coached [label="Begleitet"];
+   }
+
+
+
+Dubletten
+---------
+
+Der Klient wurde versehentlich als Dublette eines existierenden 
+Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
+weil Dokumente mit der Partnernummer existieren). 
+
+In Lino setzt man solche Klienten einfach in den Zustand "Ungültig".
+
   
 
 
@@ -127,17 +129,6 @@ Begleitungen
 Ehemalige Klienten 
 ------------------
 
-Falls es ein importierter Partner ist, 
-hatte er in TIM entweder das Attribut 
-`W (Warnung bei Auswahl)` bekommen
-oder wurde in die Partnerart `I (Inaktive)` klassiert.
-
-Wird benutzt z.B. in folgenden Fällen:
-
-- Der Klient wurde versehentlich als Dublette eines existierenden 
-  Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
-  weil Dokumente existieren). 
-  
 
 Veraltete Klienten (Altfälle)
 -----------------------------
@@ -155,17 +146,6 @@ Also "begleitete" Klienten können trotzdem
 wie vom Erdboden verschwunden sein, weil sie als veraltet markiert wurden.
 
 
-  
-  
-
-Inaktive aus TIM
-
-Partner in TIM und Lino (auch Firmen) können "Altfälle" sein.
-Das Attribut "veraltet" bedeutet: 
-die Person wird *nicht* mehr begleitet und auch ihre Daten nicht mehr gepflegt, alle Angaben verstehen sich als "so war es, bevor diese Person aufhörte, uns zu interessieren".
-
-  
-  
 
 Regeln
 ------
@@ -210,3 +190,13 @@ Neuanträge
 .. image:: /gen/screenshots/pcsw.Client.detail.2.png
   :scale: 20
 
+
+
+Anhang
+==============
+
+- Workflow : Arbeitsablauf
+- Life cycle : Lebenzyklus
+- engl. "State" = Zustand oder Stadium
+
+  

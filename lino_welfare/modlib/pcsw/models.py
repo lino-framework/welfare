@@ -238,15 +238,13 @@ class Partner(contacts.Partner,mixins.CreatedModified,ImportedFields):
     #~ """Means that there's no responsible user for this partner yet. 
     #~ New partners may not be used when creating new operations."""
     
-    is_deprecated = models.BooleanField(
-        verbose_name=_("obsolete"),default=False)
-    """Means that data of this partner may be obsolete because 
-    there were no confirmations recently. 
-    Obsolete partners may not be used when creating new operations."""
+    is_obsolete = models.BooleanField(
+        verbose_name=_("obsolete"),default=False,help_text=u"""\
+Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und 
+für neue Operationen nicht benutzt werden können.""")
     
     activity = models.ForeignKey("pcsw.Activity",
         blank=True,null=True)
-    "Pointer to :class:`pcsw.Activity`. May be empty."
     
     bank_account1 = models.CharField(max_length=40,
         blank=True,# null=True,
@@ -268,7 +266,7 @@ class Partner(contacts.Partner,mixins.CreatedModified,ImportedFields):
           language 
           phone fax email url
           bank_account1 bank_account2 activity 
-          is_deprecated 
+          is_obsolete 
           ''')
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
@@ -361,13 +359,25 @@ class ClientStates(dd.Workflow):
                 #~ kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
-add('10', _("Newcomer"),'newcomer') # "N" in PAR->Attrib
+add('10', _("Newcomer"),'newcomer',help_text=u"""\
+Klient hat Antrag auf Hilfe eingereicht, 
+der jedoch noch nicht genehmigt wurde 
+oder es wurde noch kein Sachbearbeiter oder Sozi zur Begleitung zugewiesen.
+(TIM: Attribut "N" (Neuantrag) gesetzt)""") # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))           
-add('20', _("Refused"),'refused',help_text = _("An application to become a client has been refused."))
+add('20', _("Refused"),'refused',help_text=u"""\
+Alle bisherigen Hilfsanträge wurden abgelehnt.
+(TIM kennt diesen Aktenzustand nicht)""")
 # coached: neither newcomer nor former, IdPrt != "I"
-add('30', _("Coached"),'coached')
-add('50', _("Former"),'former')
-add('60', _("Invalid"),'invalid')
+add('30', _("Coached"),'coached',help_text=u"""\
+Es gibt mindestens eine Person im ÖSHZ, die sich um die Person kümmert.
+(TIM: IdPrt == "S" und Attribut N (Neuantrag) nicht gesetzt)""")
+add('50', _("Former"),'former',help_text=u"""\
+War mal begleitet, ist es aber jetzt nicht mehr. 
+Es existiert keine *aktive* Begleitung.
+(TIM: Attribut `W (Warnung bei Auswahl)` oder Partnerart `I (Inaktive)`)""")
+add('60', _("Invalid"),'invalid',help_text=u"""\
+Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
 
 
     
@@ -899,7 +909,7 @@ class PartnerDetail(contacts.PartnerDetail):
     #~ main = "general debts.BudgetsByPartner"
     bottom_box = """
     remarks 
-    activity bank_account1 bank_account2 is_deprecated
+    activity bank_account1 bank_account2 is_obsolete
     is_person is_company #is_user is_household created modified 
     """
     #~ def setup_handle(self,h):
@@ -907,7 +917,7 @@ class PartnerDetail(contacts.PartnerDetail):
     
 class PersonDetail(contacts.PersonDetail):
     bottom_box = """
-    activity bank_account1 bank_account2 is_deprecated
+    activity bank_account1 bank_account2 is_obsolete
     is_client created modified
     remarks contacts.RolesByPerson households.MembersByPerson
     """
@@ -1015,7 +1025,7 @@ class CompanyDetail(contacts.CompanyDetail):
     intro_box = """
     prefix name id language 
     vat_id:12 activity:20 type:20 #hourly_rate
-    bank_account1 bank_account2 is_deprecated
+    bank_account1 bank_account2 is_obsolete
     """
 
     general = dd.Panel("""
@@ -1157,7 +1167,7 @@ class ClientDetail(dd.FormLayout):
     
     misc = dd.Panel("""
     activity client_state
-    is_cpas is_senior is_deprecated 
+    is_cpas is_senior is_obsolete 
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
     """,label = _("Miscellaneous"),required=dict(user_level='manager'))
@@ -1308,18 +1318,32 @@ class Clients(contacts.Partners):
     
     parameters = dict(
         aged_from = models.IntegerField(_("Aged from"),
-            blank=True,null=True),
+            blank=True,null=True,help_text=u"""\
+Nur Klienten, die mindestens so alt sind."""),
         aged_to = models.IntegerField(_("Aged to"),
-            blank=True,null=True),
-        gender = contacts.Gender.field(blank=True),
-        coached_by = models.ForeignKey(users.User,blank=True,null=True,
-            verbose_name=_("Coached by")),
+            blank=True,null=True,help_text=u"""\
+Nur Klienten, die höchstens so alt sind."""),
+        gender = contacts.Gender.field(blank=True,help_text=u"""\
+Nur Klienten, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
+        coached_by = models.ForeignKey(users.User,
+            blank=True,null=True,
+            verbose_name=_("Coached by"),help_text=u"""\
+Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
         nationality = models.ForeignKey(countries.Country,blank=True,null=True,
             verbose_name=_("Nationality")),
-        coached_on = models.DateField(_("Coached on"),blank=True,null=True),
-        only_primary = models.BooleanField(_("Only primary clients"),default=False),
-        also_obsolete = models.BooleanField(_("Also obsolete clients"),default=False),
-        client_state = ClientStates.field(blank=True),
+        coached_on = models.DateField(_("Coached on"),
+            blank=True,null=True,help_text=u"""\
+Nur Klienten, die zu diesem Datum effektiv begleitet waren 
+(d.h. die mindestens eine aktive Begleitung an diesem Datum haben)"""),
+        only_primary = models.BooleanField(
+            _("Only primary clients"),default=False,help_text=u"""\
+Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
+        also_obsolete = models.BooleanField(
+            _("Also obsolete clients"),
+            default=False,help_text=u"""\
+Auch Altfälle (d.h. Klienten, die als Altfall markiert sind)."""),
+        client_state = ClientStates.field(blank=True,help_text=u"""\
+Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         )
     params_layout = """
@@ -1335,16 +1359,15 @@ class Clients(contacts.Partners):
             #~ qs = only_new_since(qs,ar.param_values.new_since)
         
         if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_deprecated=False)
+            qs = qs.filter(is_obsolete=False)
         if ar.param_values.coached_on:
             qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.coached_by:
             qs = only_coached_by(qs,ar.param_values.coached_by)
             #~ qs = qs.filter(coachings_by_client__user=ar.param_values.coached_by)
         if ar.param_values.only_primary:
-            qs = qs.filter(
-              coachings_by_client__primary=True,
-              coachings_by_client__user=ar.param_values.coached_by)
+            qs = qs.filter(coachings_by_client__primary=True)
+              #~ coachings_by_client__user=ar.param_values.coached_by)
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
             
@@ -1399,6 +1422,7 @@ class Clients(contacts.Partners):
         
     
 class IntegClients(Clients):
+    help_text = u"""Wie Kontakte --> Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
     required = dict(user_groups = 'integ')
     params_panel_hidden = True
