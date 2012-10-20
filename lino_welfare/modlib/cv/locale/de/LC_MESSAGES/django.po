@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-12 02:10+0100\n"
+"POT-Creation-Date: 2012-10-20 15:56+0100\n"
 "PO-Revision-Date: 2012-09-19 00:27+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -72,36 +72,36 @@ msgstr "%s (W)"
 msgid "%s (w)"
 msgstr "%s (S)"
 
-#: .\models.py:192
+#: .\models.py:195
 msgid "Property"
 msgstr "Eigenschaft"
 
-#: .\models.py:193
+#: .\models.py:196
 msgid "Properties"
 msgstr "Eigenschaften"
 
-#: .\models.py:200
+#: .\models.py:203
 msgid "Remark"
 msgstr "Bemerkung"
 
-#: .\models.py:245
+#: .\models.py:250
 #, python-format
 msgid "(Site setting %s is empty)"
 msgstr "(Site-Parameter %s ist leer)"
 
-#: .\models.py:277
+#: .\models.py:282
 msgid "Skills Property Group"
 msgstr "Eigenschaftsgruppe Fähigkeiten"
 
-#: .\models.py:285
+#: .\models.py:290
 msgid "Soft Skills Property Group"
 msgstr "Eigenschaftsgruppe Sozialkompetenzen"
 
-#: .\models.py:295
+#: .\models.py:300
 msgid "Obstacles Property Group"
 msgstr "Eigenschaftsgruppe Hindernisse"
 
-#: .\models.py:306
+#: .\models.py:311
 msgid "CV"
 msgstr ""
 

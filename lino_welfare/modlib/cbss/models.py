@@ -62,7 +62,7 @@ from appy.shared.xml_parser import XmlUnmarshaller
 
 from lino import mixins
 from lino import dd
-from lino.utils import Warning
+#~ from lino.utils import Warning
 from lino.utils import join_words
 from lino.utils import AttrDict, IncompleteDate
 from lino.core.modeltools import obj2str

@@ -40,7 +40,7 @@ from lino.utils import babel
 from lino.core.modeltools import resolve_model
 #Companies = resolve_model('contacts.Companies')
 from lino.utils.test import TestCase
-from lino.utils import Warning
+#~ from lino.utils import Warning
 
 
 #~ Person = resolve_model('contacts.Person')

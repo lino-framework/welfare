@@ -44,7 +44,7 @@ from django.utils.encoding import force_unicode
 
 from lino import mixins
 from lino import dd
-from lino.utils import Warning
+#~ from lino.utils import Warning
 from lino.utils import join_words
 from lino.utils import AttrDict, IncompleteDate
 from lino.core.modeltools import obj2str

@@ -12,6 +12,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+import logging
+logger = logging.getLogger(__name__)
+
 import os
 import sys
 import cgi
@@ -25,12 +28,14 @@ from django.utils.encoding import force_unicode
 
 from lino import tools
 from lino import dd
+from lino.core import changes
 #~ from lino.utils.babel import default_language
 #~ from lino import reports
 #~ from lino import layouts
 #~ from lino.core.perms import UserProfiles, UserLevels
 from lino.utils.restify import restify
 #~ from lino.utils import printable
+
 from lino.utils.choosers import chooser
 from lino.utils import babel
 from lino import mixins
@@ -302,19 +307,20 @@ class AvailableCoaches(users.Users):
         
     @classmethod
     def get_data_rows(self,ar):
-        """
-        We only want the users who actually have at least one client.
-        We store the corresponding request in the user object 
-        under the name `new_clients`.
-        """
         client = ar.param_values.for_client
-        if client and client.client_state != pcsw.ClientStates.newcomer:
-            return
+        if client:
+            if client.client_state != pcsw.ClientStates.newcomer:
+                raise Warning(_("Only for newcomers"))
+            if not pcsw.is_valid_niss(client.national_id):
+                raise Warning(_("Only for newcomers with valid SSIN"))
+            if not client.faculty:
+                raise Warning(_("Only for newcomers with given `faculty`."))
+                
             
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
         for user in qs:
-            if ar.param_values.for_client:
-                r = Competence.objects.filter(user=user,faculty=ar.param_values.for_client.faculty)
+            if client:
+                r = Competence.objects.filter(user=user,faculty=client.faculty)
                 if r.count() == 0:
                     continue
             #~ else:
@@ -354,20 +360,11 @@ class AvailableCoaches(users.Users):
 class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
     show_in_workflow = True
-    help_text=u"""
-Diesen Benutzer als Begleiter für diesen Klienten eintragen und den Zustand des Klienten auf "Begleitet" setzen.
-Anschließend wird der Klient in der Liste "Neue Klienten" nicht mehr sichbar sein."""
-    #~ parameters = dict(
-        #~ client = dd.ForeignKey(pcsw.Client,editable=False),
-        #~ coach = dd.ForeignKey(users.User,editable=False),
-        #~ **dd.NotifyingAction.parameters)
-    #~ params_layout = dd.ActionParamsFormLayout("""
-    #~ params_layout = dd.Panel("""
-    #~ client
-    #~ coach
-    #~ remark
-    #~ interactive
-    #~ """,window_size=(60,20))
+    help_text=u"""\
+Diesen Benutzer als Begleiter für diesen Klienten eintragen 
+und den Zustand des Klienten auf "Begleitet" setzen.
+Anschließend wird der Klient in der Liste "Neue Klienten" 
+nicht mehr angezeigt."""
     
     def get_notify_subject(self,ar,obj,**kw):
         return _('New client for %s') % obj
@@ -376,33 +373,27 @@ Anschließend wird der Klient in der Liste "Neue Klienten" nicht mehr sichbar se
         return _("Assign %(coach)s as coach for client %(client)s.") % dict(
             client=ar.master_instance,coach=obj)
             
-    #~ def action_param_defaults(self,ar,obj,**kw):
-        #~ kw = super(AssignCoach,self).action_param_defaults(ar,obj,**kw)
-        #~ if obj is not None:
-            #~ kw.update(notify_subject=_('New client for %s') % obj)
-            #~ kw.update(notify_body = _("Assign %(coach)s as coach for client %(client)s.") 
-                #~ % dict(client=ar.master_instance,coach=obj))
-            
-        #~ return kw
-        
-    def get_row_permission(self,ar,state,ba):
+    def unused_get_action_permission(self,ar,obj,state):
+        #~ logger.info("20121020 get_action_permission %s",ar.master_instance)
         if not pcsw.is_valid_niss(ar.master_instance.national_id):
-            logger.info("20121016 %s has invalid NISS ",ar.master_instance)
+            #~ logger.info("20121016 %s has invalid NISS ",ar.master_instance)
             return False
             #~ _("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
                 #~ % dict(client=client,niss=client.national_id))
-        return super(AssignCoach,self).get_row_permission(ar,state,ba)
+        return super(AssignCoach,self).get_action_permission(ar,obj,state)
+        #~ return super(AssignCoach,self).get_row_permission(ar,state,ba)
         
     def run(self,obj,ar,**kw):
         """
         Assign a coach to a newcomer.
         """
         client = ar.master_instance
-        
+        watcher = changes.Watcher(client)
         #~ if not pcsw.is_valid_niss(client.national_id):
             #~ return ar.error_response(alert=True,
                 #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
                 #~ % dict(client=client,niss=client.national_id))
+                
         #~ ar.confirm(msg,_("Are you sure?"))
         
         coaching = pcsw.Coaching(client=client,user=obj,
@@ -412,9 +403,11 @@ Anschließend wird der Klient in der Liste "Neue Klienten" nicht mehr sichbar se
         #~ if not obj.profile:
             #~ coaching.state = pcsw.CoachingStates.active
         coaching.save()
+        changes.log_create(coaching,ar.request)
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
+        watcher.log_diff(ar.request)
         
         self.add_system_note(ar,coaching)
         

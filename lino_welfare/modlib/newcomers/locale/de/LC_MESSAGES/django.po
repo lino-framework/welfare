@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-12 02:11+0100\n"
-"PO-Revision-Date: 2012-10-12 05:17+0200\n"
+"POT-Creation-Date: 2012-10-20 15:56+0100\n"
+"PO-Revision-Date: 2012-10-20 18:01+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
 "MIME-Version: 1.0\n"
@@ -17,106 +17,126 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: .\models.py:51
+#: .\models.py:56
 msgid "Newcomers"
 msgstr "Neuanträge"
 
-#: .\models.py:59
+#: .\models.py:64
 msgid "Broker"
 msgstr "Vermittler"
 
-#: .\models.py:60
+#: .\models.py:65
 msgid "Brokers"
 msgstr "Vermittler"
 
-#: .\models.py:88
+#: .\models.py:93
 msgid "Faculty"
 msgstr "Fachbereich"
 
-#: .\models.py:89
+#: .\models.py:94
 msgid "Faculties"
 msgstr "Fachbereiche"
 
-#: .\models.py:112
+#: .\models.py:117
 msgid "Competence"
 msgstr "Kompetenz"
 
-#: .\models.py:113
+#: .\models.py:118
 msgid "Competences"
 msgstr "Kompetenzen"
 
-#: .\models.py:186 .\models.py:332
+#: .\models.py:191 .\models.py:348
 msgid "New Clients"
 msgstr "Neue Klienten"
 
-#: .\models.py:201
+#: .\models.py:210
 msgid "Also refused clients"
 msgstr "Auch abgelehnte Klienten"
 
-#: .\models.py:202
-msgid "Also obsolete clients"
-msgstr "Auch veraltte Klienten"
+#: .\models.py:213
+msgid "Also deprecated clients"
+msgstr "Auch Altfälle"
 
-#: .\models.py:204
+#: .\models.py:216
 msgid "Also newly coached clients since"
 msgstr "Auch neu begleitete Klienten seit"
 
-#: .\models.py:206
+#: .\models.py:222
 msgid "Coached by"
 msgstr "Begleitet durch"
 
-#: .\models.py:271 .\models.py:347
+#: .\models.py:286 .\models.py:438
 msgid "Available Coaches"
 msgstr "Verfügbare Begleiter"
 
-#: .\models.py:275
+#: .\models.py:290
 msgid "Show suggested agents for"
 msgstr "Zeige Vorschläge für"
 
-#: .\models.py:277
+#: .\models.py:292
 msgid "Count Newcomers since"
 msgstr "Neue Klienten seit"
 
-#: .\models.py:322
+#: .\models.py:313
+msgid "Only for newcomers"
+msgstr "Nur für Neuzugänge"
+
+#: .\models.py:315
+msgid "Only for newcomers with valid SSIN"
+msgstr "Nur für Neuanträge mit gültiger NR-Nr."
+
+#: .\models.py:317
+msgid "Only for newcomers with given `faculty`."
+msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
+
+#: .\models.py:338
 msgid "Primary clients"
 msgstr "Komplette Akten"
 
-#: .\models.py:327
+#: .\models.py:343
 msgid "Active clients"
 msgstr "Aktive Klienten"
 
-#: .\models.py:336
+#: .\models.py:352
 msgid "Score"
 msgstr "Quote"
 
-#: .\models.py:354
+#: .\models.py:361
 msgid "Assign"
 msgstr "Zuweisen"
 
-#: .\models.py:362
+#: .\models.py:370
 #, python-format
-msgid "Cannot assign client %(client)s with invalid NISS %(niss)s."
-msgstr ""
-"Klient %(client)s mit ungültiger NR-Nummer %(niss)s kann nicht zugewiesen "
-"werden."
+msgid "New client for %s"
+msgstr "Neuer Klient für %s"
 
-#: .\models.py:364
+#: .\models.py:373
 #, python-format
-msgid "Assign client %(client)s for coaching by %(user)s."
-msgstr "Klient %(client)s zuweisen zu Begleiter %(user)s."
+msgid "Assign %(coach)s as coach for client %(client)s."
+msgstr "%(coach)s zuweisen als Begleiter für %(client)s."
 
-#: .\models.py:365
-msgid "Are you sure?"
-msgstr "Sind Sie sicher?"
-
-#: .\models.py:378
+#: .\models.py:431
 #, python-format
-msgid "Client %(client)s has been assigned to %(user)s"
-msgstr "Klient %(client)s wurde zugewiesen zu Begleiter %(user)s"
+msgid "Client %(client)s has been assigned to %(coach)s"
+msgstr "Klient %(client)s wurde zugewiesen zu Begleiter %(coach)s"
 
-#: .\models.py:425
+#: .\models.py:519
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
+
+#~ msgid "Also obsolete clients"
+#~ msgstr "Auch veraltte Klienten"
+
+#~ msgid "Cannot assign client %(client)s with invalid NISS %(niss)s."
+#~ msgstr ""
+#~ "Klient %(client)s mit ungültiger NR-Nummer %(niss)s kann nicht zugewiesen "
+#~ "werden."
+
+#~ msgid "Assign client %(client)s for coaching by %(user)s."
+#~ msgstr "Klient %(client)s zuweisen zu Begleiter %(user)s."
+
+#~ msgid "Are you sure?"
+#~ msgstr "Sind Sie sicher?"
 
 #~ msgid "refused"
 #~ msgstr "abgelehnt"
@@ -135,6 +155,3 @@ msgstr "Quote NZ"
 
 #~ msgid "is Newcomers user"
 #~ msgstr "Neuzugänge"
-
-#~ msgid "Show agents for newcomer"
-#~ msgstr "Sozis für Neuzugang:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-12 02:10+0100\n"
+"POT-Creation-Date: 2012-10-20 15:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: .\models.py:477 .\models.py:544
+#: .\models.py:477 .\models.py:538
 msgid "ISIP"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 msgid "responsible (DSBE)"
 msgstr ""
 
-#: .\models.py:543
+#: .\models.py:532
 msgid "General"
 msgstr ""
 

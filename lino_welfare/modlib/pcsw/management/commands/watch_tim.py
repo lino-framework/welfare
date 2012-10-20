@@ -363,15 +363,19 @@ class Controller:
                 dblogger.warning("%s:%s (%s) : ignored POST %s",
                     kw['alias'],kw['id'],obj,kw['data'])
                 return
-            watcher = changes.Watcher(obj,True)
+            #~ watcher = changes.Watcher(obj,True)
+            self.applydata(obj,kw['data'])
+            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
+            self.validate_and_save(obj)
+            changes.log_create(REQUEST,obj)
         else:
-            watcher = changes.Watcher(obj,False)
+            watcher = changes.Watcher(obj)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
-        self.applydata(obj,kw['data'])
-        dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
-        self.validate_and_save(obj)
-        watcher.log_changes(REQUEST)
-        #~ obj.save()
+            self.applydata(obj,kw['data'])
+            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
+            self.validate_and_save(obj)
+            watcher.log_diff(REQUEST)
+            #~ obj.save()
         
     def PUT(self,**kw):
         #~ dblogger.info("%s.PUT(%s)",self.__class__.__name__,kw)
@@ -384,13 +388,13 @@ class Controller:
             else:
                 dblogger.warning("%s:%s : PUT ignored (row does not exist)",kw['alias'],kw['id'])
                 return 
-        watcher = changes.Watcher(obj,False)
+        watcher = changes.Watcher(obj)
         if self.PUT_special(watcher,obj,**kw):
             return 
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
-        watcher.log_changes(REQUEST)
+        watcher.log_diff(REQUEST)
         #~ obj.save()
         #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
         
