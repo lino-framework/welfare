@@ -29,6 +29,8 @@ import atexit
 #~ import logging
 #~ logger = logging.getLogger(__name__)
 
+from dateutil import parser as dateparser
+
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ValidationError
 
@@ -40,7 +42,7 @@ from django.db.utils import DatabaseError
 # OperationalError
 from django.utils import simplejson
 #~ from django.contrib.auth import models as auth
-from lino.modlib.users import models as auth
+#~ from lino.modlib.users import models as users
 from django.utils.encoding import force_unicode
 
 import lino
@@ -52,8 +54,12 @@ from lino.utils import join_words, unicode_string
 from lino.utils import dblogger
 from lino.utils import mti
 from lino.core.modeltools import obj2str
+from lino.core import changes
+from lino.core.modeltools import is_valid_email
 
 from lino.utils.daemoncommand import DaemonCommand
+
+from lino.utils.niss import is_valid_niss
 
 #~ from lino.apps.pcsw.models  import is_valid_niss
 
@@ -61,6 +67,7 @@ from lino.utils.daemoncommand import DaemonCommand
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
 
 pcsw = dd.resolve_app('pcsw')
+users = dd.resolve_app('users')
 Country = dd.resolve_model('countries.Country')
 City = dd.resolve_model('countries.City')
 Person = dd.resolve_model(settings.LINO.person_model)
@@ -79,6 +86,13 @@ def store(kw,**d):
         #~ if v:
             kw[k] = v
 
+def store_date(row,obj,rowattr,objattr):
+    v = row[rowattr]
+    if v:
+        if isinstance(v,basestring):
+            v = dateparser.parse(v)
+        setattr(obj,objattr,v)
+      
 def convert_sex(v):
     if v in ('W','F'): return 'F'
     if v == 'M': return 'M'
@@ -110,16 +124,20 @@ def par2client(row,person):
         person.is_senior = True
         
 
-def checkcc(person,cIdAdr,nType):
-    pk = ADR_id(cIdAdr)
+def checkcc(person,pk,nType):
+    #~ pk = ADR_id(cIdAdr)
     try:
         Company.objects.get(pk=pk)
-    except ValueError,e:
-        dblogger.warning(u"%s : invalid health_insurance %r",obj2str(person),row['IDMUT'])
-        return
-    except pcsw.ClientContact.DoesNotExist,e:
-        dblogger.warning(u"%s : health_insurance %s not found",obj2str(person),row['IDMUT'])
-        return
+    #~ except ValueError,e:
+        #~ dblogger.warning(u"%s : invalid health_insurance or pharmacy %r",obj2str(person),cIdAdr)
+        #~ return
+    except Company.DoesNotExist,e:
+        raise Exception(
+            "%s : Pharmacy or Health Insurance %s doesn't exist" % 
+            (obj2str(person),pk))
+        #~ dblogger.warning(u"%s : Company %s doesn't exist (please create manually in Lino).",
+            #~ obj2str(person),pk)
+        #~ return
     qs = pcsw.ClientContact.objects.filter(
         client=person,
         type_id=nType)
@@ -129,11 +147,14 @@ def checkcc(person,cIdAdr,nType):
             company_id=pk,
             type_id=nType)
         cc.save()
+        changes.log_create(REQUEST,obj)
     elif qs.count() == 1:
         cc = qs[0]
         if cc.company_id != pk:
+            watcher = changes.Watcher(cc)
             cc.company_id = pk
             cc.save()
+            watcher.log_diff(REQUEST)
     else:
         dblogger.warning(u"%s : more than 1 ClientContact (type=%r)",obj2str(person),nType)
 
@@ -157,14 +178,14 @@ def pxs2client(row,person):
         
     if row.has_key('CARDTYPE'):
         #~ row.card_type = pcsw.BeIdCardType.items_dict.get(row['CARDTYPE'].strip(),'')
-        from lino.apps.pcsw import models as pcsw
+        #~ from lino.apps.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
             person.card_type = pcsw.BeIdCardType.blank_item
         else:
             person.card_type = pcsw.BeIdCardType.get_by_value(str(row['CARDTYPE']))
             
     if row['IDMUT']:
-        checkcc(person,row['IDMUT'],CCTYPE_HEALTH_INSURANCE)
+        checkcc(person,ADR_id(row['IDMUT']),CCTYPE_HEALTH_INSURANCE)
     if row['APOTHEKE']:
         checkcc(person,row['APOTHEKE'],CCTYPE_PHARMACY)
         
@@ -290,7 +311,6 @@ country city zip_code region language email url phone gsm remarks'''.split()
     #~ user = "watch_tim"
 #~ REQUEST = PseudoRequest()
 
-from lino.core import changes
 REQUEST = changes.PseudoRequest("watch_tim")
 #~ 20120921 REQUEST = dblogger.PseudoRequest("watch_tim")
 
@@ -311,6 +331,7 @@ class Controller:
         
     def validate_and_save(self,obj):
         "Deserves more documentation."
+        dblogger.info("20121022 validate_and_save %s",obj2str(obj,True))
         obj.full_clean()
         #~ 20120921 dblogger.log_changes(REQUEST,obj)
         obj.save()
@@ -343,8 +364,8 @@ class Controller:
             return
             
         #~ 20120921 dblogger.log_deleted(REQUEST,obj)
-        obj.delete()
         changes.log_delete(REQUEST,obj)
+        obj.delete()
         dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],obj2str(obj))
         
     #~ def prepare_data(self,data):
@@ -389,7 +410,7 @@ class Controller:
                 dblogger.warning("%s:%s : PUT ignored (row does not exist)",kw['alias'],kw['id'])
                 return 
         watcher = changes.Watcher(obj)
-        if self.PUT_special(watcher,obj,**kw):
+        if self.PUT_special(watcher,**kw):
             return 
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
@@ -413,6 +434,7 @@ def ADR_applydata(obj,data,**kw):
     country2kw(data,kw)
     for k,v in kw.items():
         setattr(obj,k,v)
+    
                 
 class PAR(Controller):
     "Deserves more documentation."
@@ -433,6 +455,9 @@ class PAR(Controller):
         )
         ADR_applydata(obj,data) # ,**mapper)
         #~ kw.update(street2kw(join_words(data['RUE'],
+        
+        store_date(data,obj,'DATCREA','created')
+        
         
         if data.has_key('LANGUE'):
             obj.language = isolang(data['LANGUE'])
@@ -456,18 +481,20 @@ class PAR(Controller):
             if obj.__class__ is Client:
                 par2client(data,obj)
                 mapper.update(gesdos_id='NB1')
-                if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
-                    obj.client_state = pcsw.ClientStates.newcomer
-                elif data['IDPRT'] == 'I':
-                    obj.client_state = pcsw.ClientStates.former
-                else:
-                    obj.client_state = pcsw.ClientStates.coached
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
                 else:
                     obj.national_id = str(obj.id)
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
+                if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
+                    obj.client_state = pcsw.ClientStates.newcomer
+                elif data['IDPRT'] == 'I':
+                    obj.client_state = pcsw.ClientStates.former
+                elif is_valid_niss(obj.national_id):
+                    obj.client_state = pcsw.ClientStates.coached
+                else:
+                    obj.client_state = pcsw.ClientStates.invalid
                 #~ if data.has_key('NB1'):
                     #~ obj.gesdos_id = data['NB1']
                 #~ if not obj.national_id:
@@ -477,27 +504,34 @@ class PAR(Controller):
                     if obj.pk is None:
                         obj.save() # must force a pre save() here to save related coachings
                     if username:
-                        u = auth.User.objects.get(username=username)
+                        u = users.User.objects.get(username=username)
                         #~ try:
-                            #~ u = auth.User.objects.get(username=username)
-                        #~ except auth.User.DoesNotExist,e:
+                            #~ u = users.User.objects.get(username=username)
+                        #~ except users.User.DoesNotExist,e:
                             #~ dblogger.warning(
                               #~ u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
                               #~ data['IDUSR'],username,obj2str(obj))
                         #~ obj.coach1 = u
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            if coaching.user != u:
+                            if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
+                                watcher = changes.Watcher(coaching)
                                 coaching.user = u
+                                coaching.start_date = obj.created
+                                coaching.end_date = None
                                 coaching.save()
+                                watcher.log_diff(REQUEST)
                         except pcsw.Coaching.DoesNotExist,e:
-                            coaching = pcsw.Coaching(client=obj,primary=True,user=u)
+                            coaching = pcsw.Coaching(client=obj,primary=True,user=u,start_date=obj.created)
                             coaching.save()
+                            changes.log_create(REQUEST,coaching)
                     else:
                         #~ obj.coach1 = None
                         try:
-                            coaching = pcsw.Coaching.objects.get(project=obj,primary=True)
+                            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
                             coaching.delete()
+                            changes.log_delete(REQUEST,coaching)
+                            
                         except pcsw.Coaching.DoesNotExist,e:
                             pass
                         
@@ -562,22 +596,27 @@ class PAR(Controller):
         old_class = obj.__class__
         if issubclass(old_class,new_class):
             #~ it was a Client and becomes a Person
+            changes.log_remove_child(REQUEST,obj,old_class)
             mti.delete_child(obj,old_class)
-            changes.log_delete(REQUEST,obj)
-            newobj =  new_class.objects.get(pk=obj.id)
+            #~ changes.log_delete(REQUEST,obj)
+            newobj = new_class.objects.get(pk=obj.id)
         elif issubclass(new_class,old_class):
             #~ it was only a Person and becomes a Client
+            changes.log_add_child(REQUEST,obj,new_class)
             newobj = mti.insert_child(obj,new_class)
         else:
             obj = obj.partner_ptr
+            changes.log_remove_child(REQUEST,obj,old_class)
             mti.delete_child(obj,old_class)
+            changes.log_add_child(REQUEST,obj,new_class)
             newobj = mti.insert_child(obj,new_class)
+            
         self.applydata(newobj,data)
         self.validate_and_save(newobj)
         return newobj
         
     def create_object(self,kw):
-        return PAR_model(kw['data'])()
+        return PAR_model(kw['data'])(id=kw['id'])
         #~ if is_company(kw['data']):
             #~ return Company()
         #~ else:
@@ -608,7 +647,7 @@ class PXS(Controller):
     def create_object(self,kw):
         raise Exception("Tried to create a Person from PXS")
         
-    def PUT_special(self,obj,**kw):
+    def PUT_special(self,watcher,**kw):
         pass
         
     def get_object(self,kw):

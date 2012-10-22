@@ -40,13 +40,9 @@ die für die Synchronisierung von Belang sind::
         if userid == "WRITE": return None
         return userid.lower()
 
-Die Krankenkassen (Adressen aus ADR mit ADR->Type == 'MUT') 
-erscheinen in Lino als :class:`Company`, 
-wobei deren `id` beim ersten Import (initdb_tim) 
-wie folgt ermittelt wurde:
 
-  id = val(ADR->IdMut) + 199000
-  
+
+
 Die Partner aus TIM kommen nach 
 :class:`contacts.Company`, 
 nach :class:`contacts.Person`, 
@@ -92,17 +88,78 @@ Hier eine Liste der möglichen Partnerattribute in TIM:
 - N : Neuzugang
 
 
-
 Der Unterschied zwischen W und A ist lediglich, das A automatisch verteilt wird. 
 W ist eigentlich das Gleiche wie inaktiv.
-
-
-
-
 
 
 Begleitungen
 ------------
 
-In TIM haben wir nur PAR->IdUsr, den "hauptverantwortlichen Sozi". 
-Lino kann pro Klient mehrere Begleitungen haben.
+Lino kann pro Klient mehrere Begleitungen haben, aber in 
+TIM haben wir nur PAR->IdUsr, den "hauptverantwortlichen Sozialarbeiter". 
+Das haben wir wie folgt gelöst:
+
+In Lino kann pro Klient immer nur eine Begleitung "primär" sein.
+Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
+Für importierte Partner wird die primäre Begleitung aus TIM wie folgt synchronisiert:
+
+- von : Erstelldatum des Kunden
+- bis : leer
+- Benutzer : der in TIM angegebene Benutzer
+
+Auf importierten Klienten sind diese Felder (auf der *primären* Begleitung) 
+schreibgeschützt. Auf importierten primären Begleitungen kann lediglich 
+der Begleitungsdienst und der Zustand manuell geändert werden.
+
+Das Ankreuzfeld "primär" kann auf importierten Klienten *nie* bearbeitet werden.
+
+Also man kann auf importierten Partnern in Lino zusätzliche Begleitungen 
+erstellen, aber diese können nicht primär sein.
+An diese sekundären Begleitungen geht watch_tim dann nicht ran.
+
+
+Krankenkassen
+-------------
+
+Die Krankenkassen (Adressen aus ADR mit ADR->Type == 'MUT') 
+erscheinen in Lino als :class:`Company`, 
+wobei deren `id` beim ersten Import (initdb_tim) 
+wie folgt ermittelt wurde:
+
+  id = val(ADR->IdMut) + 199000
+  
+Krankenakssen werden nicht mehr automatisch synchronisiert.
+Also falls des eine in TIM erstellt wird, muss die entsprechende 
+Organisation in Lino manuell erstellt werden.
+
+Klientenkontakte
+----------------
+
+
+Die Felder PXS->IdMut (Krankenasse) und PCS->Apotheke (Apotheke) 
+werden nach Lino synchronisiert als *Klientenkontakte*.
+
+Importierte Klienten sollten in ihren Klientenkontakten 
+deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
+
+Ansonsten findet watch_tim, dass er nicht dafür 
+zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)
+
+Alle anderen Klientenkontaktarten sind egal, 
+davon dürfen auch importierte Klienten so viele haben wie sie wollen.
+
+Beim Synchronisieren sind folgende Fehlermeldungen denkbar 
+(die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::
+
+    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 199630 doesn't exist
+    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 0000086256 doesn't exist
+
+Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also 
+dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt.
+
+Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese 
+Apotheke zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen.
+  
+  
+  
+  

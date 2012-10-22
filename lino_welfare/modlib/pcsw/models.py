@@ -2319,7 +2319,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
     @classmethod
     def site_setup(cls,site):
         super(Coaching,cls).site_setup(site)
-        cls.declare_imported_fields('''client user primary''')
+        cls.declare_imported_fields('''client user primary start_date end_date''')
         
     def disabled_fields(self,ar):
         if settings.LINO.is_imported_partner(self.client):
@@ -2615,56 +2615,16 @@ def customize_sqlite():
 
 
 
-class Home(cal.Home):
-    #~ debug_permissions = True
-    label = cal.Home.label
-    app_label = 'lino'
-    detail_layout = """
-    quick_links:80x1
-    welcome
-    pcsw.UsersWithClients:80x8
-    coming_reminders:40x16 missed_reminders:40x16
-    """
+#~ class Home(cal.Home):
+    #~ label = cal.Home.label
+    #~ app_label = 'lino'
+    #~ detail_layout = """
+    #~ quick_links:80x1
+    #~ welcome
+    #~ pcsw.UsersWithClients:80x8
+    #~ coming_reminders:40x16 missed_reminders:40x16
+    #~ """
     
-    @dd.virtualfield(dd.HtmlBox(_('Welcome')))
-    def welcome(cls,self,ar):
-        #~ MAXITEMS = 2
-        u = ar.get_user()
-        story = []
-        
-        intro = [_("Hi, "),u.first_name,'! ']
-        story.append(xghtml.E.p(*intro))
-        
-        warnings = []
-        
-        #~ for T in (MySuggestedCoachings,cal.MyTasksToDo):
-        for T in (cal.MyPendingInvitations,cal.MyTasksToDo,cal.MyEventsSuggested):
-            r = T.request(user=u)
-            #~ r = T.request(subst_user=u)
-            #~ r = ar.spawn(T)
-            if r.get_total_count() != 0:
-                #~ for obj in r.data_iterator[-MAXITEMS]:
-                    #~ chunks = [obj.summary_row(ar)]
-                    #~ sep = ' : '
-                    #~ for a in T.get_workflow_actions(ar,obj):
-                        #~ chunks.append(sep)
-                        #~ chunks.append(ar.row_action_button(obj,a))
-                        #~ sep = ', '
-                    
-                warnings.append(xghtml.E.li(
-                    _("You have %d entries in ") % r.get_total_count(),
-                    ar.href_to_request(r,T.label)))
-        
-        #~ warnings.append(xghtml.E.li("Test 1"))
-        #~ warnings.append(xghtml.E.li("Second test"))
-        if len(warnings):
-            story.append(xghtml.E.h3(_("Warnings")))
-            story.append(xghtml.E.ul(*warnings))
-        else:
-            story.append(xghtml.E.p(_("Congratulatons: you have no warnings.")))
-        return xghtml.E.div(*story,class_="htmlText",style="margin:5px")
-        
-
 #~ def setup_master_menu(site,ui,user,m): 
     #~ m.add_action(AllClients)
 
@@ -2756,6 +2716,13 @@ def site_setup(site):
         #~ detail_layout = HouseholdDetail()
         
 
+    site.modules.lino.Home.set_detail_layout("""
+    quick_links:80x1
+    welcome
+    pcsw.UsersWithClients:80x8
+    coming_reminders:40x16 missed_reminders:40x16
+    """)
+    
     site.modules.households.Households.set_detail_layout(box3="""
     country region
     city zip_code:10
