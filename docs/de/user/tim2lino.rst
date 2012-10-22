@@ -43,12 +43,12 @@ die für die Synchronisierung von Belang sind::
 
 
 
-Die Partner aus TIM kommen nach 
+Die Partner aus TIM kommen entweder nach 
 :class:`contacts.Company`, 
 nach :class:`contacts.Person`, 
 nach :class:`households.Household`
 oder
-nach :class:`pcsw.Client` je nach folgenden Regeln:
+nach :class:`pcsw.Client`. Die Entscheidung wird nach folgenden Regeln getroffen:
 
 - Wenn PAR->NB2 (NISS), Gesdos-Nr oder PAR->Memo unleer ist, wird es ein Klient.
 - Ansonsten, wenn `PAR->Allo` einen der Werte "Eheleute", "Herr und Frau" enthält, dann wird es ein Haushalt.
@@ -122,7 +122,7 @@ Krankenkassen
 -------------
 
 Die Krankenkassen (Adressen aus ADR mit ADR->Type == 'MUT') 
-erscheinen in Lino als :class:`Company`, 
+erscheinen in Lino als Organisation, 
 wobei deren `id` beim ersten Import (initdb_tim) 
 wie folgt ermittelt wurde:
 
@@ -134,7 +134,6 @@ Organisation in Lino manuell erstellt werden.
 
 Klientenkontakte
 ----------------
-
 
 Die Felder PXS->IdMut (Krankenasse) und PCS->Apotheke (Apotheke) 
 werden nach Lino synchronisiert als *Klientenkontakte*.

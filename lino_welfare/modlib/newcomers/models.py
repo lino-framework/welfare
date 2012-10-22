@@ -315,8 +315,8 @@ class AvailableCoaches(users.Users):
                 raise Warning(_("Only for newcomers with valid SSIN"))
             if not client.faculty:
                 raise Warning(_("Only for newcomers with given `faculty`."))
-                
-            
+
+        no_data = True
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
         for user in qs:
             if client:
@@ -330,6 +330,10 @@ class AvailableCoaches(users.Users):
                 coached_by=user,
                 new_since=ar.param_values.since))
             yield user
+            no_data = False
+            
+        if client and no_data:
+            raise Warning(_("No coaches available for %s.") % client)
                 
     #~ @dd.virtualfield('contacts.Person.coach1')
     #~ def user(self,obj,ar):

@@ -6,22 +6,26 @@ TODO
 
 Was ich noch machen muss:
 
-- watch_tim (aber das mach ich erst, wenn testlino bereit ist). 
-  U.a. auch DatCrea aus TIM übernehmen.
+- Letzte Tests mit watch_tim.
 
-- Datenübernahme macht noch ein paar Warnungen
+- Im Kontextmenü haben Bilderbuttons kein Label
+
+- Kann Partner.id nicht selbst bestimmen
 
 
 Feedback erwünscht
 ------------------
 
-- Der Menübefehl :menuselection:`Integration --> Meine Personensuchen` ist 
-  funktional ersetzt durch die Filterparameter der Tabellen "Klienten"
-  bzw. "DSBE-Klienten". Die Anordnung der Filteparameter muss 
-  noch auf Ergonomie überprüft werden.
+- Datenübernahme macht noch ein paar Warnungen
 
-- Alicia (z.B.) hat nach der Migration 80 Einträge in To-Do-Liste. 
-  Das ist nicht realistisch.
+- Wer kümmert sich um seriöse Icons für die neuen Bilderbuttons? 
+
+- Der Menübefehl 
+  :menuselection:`Kontakte --> Meine Personensuchen` wurde 
+  ersetzt durch die Filterparameter der Tabellen 
+  :menuselection:`Kontakte --> Klienten`
+  und :menuselection:`DSBE --> Klienten`
+  Die Anordnung der Filterparameter könnte noch auf Ergonomie überprüft werden.
 
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
 
@@ -34,7 +38,10 @@ Feedback erwünscht
   - Nach erfolgreicher Zuweisung eines Klienten 
     springt er ohne viele Worte auf den nächsten Klienten. Verwirrend?
 
-- Alle Änderungen werden zusätzlich auch in ChangesByMaster gespeichert.
+- Änderungsprotokoll. 
+  Alle Änderung werden jetzt in ChangesByMaster gespeichert.
+  Sind einsehbar im Detail Partner.
+  Konfiguration gemeinsam anschauen und klären, welche Tabellen protokoliert werden und welche nicht.
 
 - System-Notizen. Neuer Site-Parameter `System note type`. 
   System notes are a part of Lino's workflow management system. 
@@ -47,12 +54,7 @@ Feedback erwünscht
   Executing the action will then also trigger the sending of the 
   system note.
 
-- Gibt es Benutzer, die keine eigenen Begleitungen machen können?
-  (für die der Menübefehl 
-  :menuselection:`ÖSHZ --> Meine Begleitungen` irritierend wäre?)
-  Zum Beispiel Caroline.
-  
-- Sollte Kerstin nicht per défaut nur die von ihr begleiteten Klienten sehen?
+- Sollte Kerstin nicht par défaut nur die von ihr begleiteten Klienten sehen?
   Aber wer weist ihr ihre Begleitungen zu?
 
 - Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
@@ -107,6 +109,9 @@ Lösung gemeldeter Probleme
   keinen". Was natürlich falsch ist."
   Behoben.
 
+- Erstelldatum wird jetzt aus TIM synchronisiert. 
+  Allerdings haben wir bisher noch keine systematische nachträgliche 
+  Synchronisierung aller Partner gemacht.
 
 
 Neue Features
