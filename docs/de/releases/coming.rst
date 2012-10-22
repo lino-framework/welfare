@@ -8,10 +8,6 @@ Was ich noch machen muss:
 
 - Letzte Tests mit watch_tim.
 
-- Im Kontextmenü haben Bilderbuttons kein Label
-
-- Kann Partner.id nicht selbst bestimmen
-
 
 Feedback erwünscht
 ------------------
@@ -19,6 +15,8 @@ Feedback erwünscht
 - Datenübernahme macht noch ein paar Warnungen
 
 - Wer kümmert sich um seriöse Icons für die neuen Bilderbuttons? 
+
+- Wie übersetzen wir "primary"? "primär" oder "komplette Akte"?
 
 - Der Menübefehl 
   :menuselection:`Kontakte --> Meine Personensuchen` wurde 
@@ -64,6 +62,8 @@ Feedback erwünscht
 
 Nach dem Release
 ----------------
+
+- Benutzer konfigurieren: Begleitungsdienst und Kompetenzen
 
 - Verträge .odt : 
   `self.contact.person` ersetzen durch `self.contact_person` 
@@ -142,8 +142,8 @@ Neue Features
   das frühere Feld `newcomer` durch Status "Neuantrag".
   Siehe :doc:`/user/clients`.
   
-- Neue Tabelle "Änderungen" auf Klienten und Verträgen zeigt 
-  geloggte Änderungen im Webinterface statt in der `system.log`.
+- Neue Tabelle "Änderungen" 
+  zeigt geloggte Änderungen im Webinterface statt in der `system.log`.
 
 - Neue Felder "Erstellt am/um" und "Letzte Änderung" pro `Partner`.
   
@@ -154,15 +154,15 @@ Neue Features
 Nebenwirkungen  
 --------------
 
-- Sorry, aber ich muss euch eine Umstrukturierung des Hauptmenüs zumuten.  
+- Sorry, aber ich musste euch eine Umstrukturierung des Hauptmenüs zumuten.  
   Liegt daran, dass jetzt bald auch andere Dienste in Lino arbeiten.
   Zum Beispiel ist das Menü "Mein Menü" weg:
   die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
   Also z.B. 
 
-  - :menuselection:`Mein Menü --> Meine VSEs` steht jetzt unter :menuselection:`DSBE --> Meine VSEs` 
+  - :menuselection:`Mein Menü --> Meine VSEs` steht jetzt unter :menuselection:`DSBE --> VSEs` 
   - :menuselection:`Mein Menü --> Meine Art.-60§7-Konventionen` steht jetzt unter 
-    :menuselection:`DSBE --> Meine Art.-60§7-Konventionen` 
+    :menuselection:`DSBE --> Art.-60§7-Konventionen` 
   
 - Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
   nicht gemacht. Ist das schlimm?
@@ -181,7 +181,7 @@ Nebenwirkungen
 - Database migration is automatic.
   Details see :func:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_10`.
   
-- Note that version number jumps down from 1.4.10 to 0.1.0
+- Note that version number jumps down from 1.4.10 to 1.0
   Lino (the framework) changes to version 1.5.0, but this is no longer relevant 
-  for database migrations. Lino/Welfare starts with 0.1.0.
+  for database migrations. Lino/Welfare starts with 1.0.
   

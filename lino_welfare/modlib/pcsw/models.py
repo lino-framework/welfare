@@ -271,7 +271,7 @@ für neue Operationen nicht benutzt werden können.""")
         if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
             cls.declare_imported_fields('''
             is_person is_company
-              ''')
+            ''')
         
     def disabled_fields(self,ar):
         #~ logger.info("20120731 CpasPartner.disabled_fields()")
