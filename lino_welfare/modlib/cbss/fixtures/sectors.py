@@ -57,8 +57,8 @@ def objects():
             kw.update(code=code)
             if row[1]:
                 kw.update(subcode=int(row[1]))
-            kw.update(**babel.babel_values('name',de=row[5],fr=row[5],nl=row[3]))
-            kw.update(**babel.babel_values('abbr',de=row[4],fr=row[4],nl=row[2]))
+            kw.update(**babel.babel_values('name',de=row[5],fr=row[5],nl=row[3],en=row[5]))
+            kw.update(**babel.babel_values('abbr',de=row[4],fr=row[4],nl=row[2],en=row[4]))
             #~ print kw
             yield Sector(**kw)
         
