@@ -42,7 +42,7 @@ from lino import mixins
 from django.conf import settings
 #~ from lino import choices_method, simple_choices_method
 #~ from lino.modlib.contacts import models as contacts
-from lino.modlib.users import models as users
+#~ from lino.modlib.users import models as users
 from lino.modlib.cal.utils import amonthago
 
 
@@ -50,6 +50,8 @@ from lino.modlib.cal.utils import amonthago
 #~ from lino_welfare.modlib.pcsw import models as welfare
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 
+users = dd.resolve_app('users')
+contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
 outbox = dd.resolve_app('outbox')
 
@@ -227,7 +229,8 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
     @classmethod
     def get_request_queryset(self,ar):
         # Note that we skip pcsw.Clients mro parent
-        qs = super(pcsw.Clients,self).get_request_queryset(ar)
+        #~ qs = super(pcsw.Clients,self).get_request_queryset(ar)
+        qs = super(contacts.Persons,self).get_request_queryset(ar)
         #~ qs = dd.Table.get_request_queryset(ar)
         
         q = models.Q(client_state=pcsw.ClientStates.newcomer)
@@ -374,8 +377,8 @@ nicht mehr angezeigt."""
         return _('New client for %s') % obj
             
     def get_notify_body(self,ar,obj,**kw):
-        return _("Assign %(coach)s as coach for client %(client)s.") % dict(
-            client=ar.master_instance,coach=obj)
+        return _("Assign %(coach)s as %(faculty)s coach for client %(client)s.") % dict(
+            client=ar.master_instance,coach=obj,faculty=ar.master_instance.faculty)
             
     def unused_get_action_permission(self,ar,obj,state):
         #~ logger.info("20121020 get_action_permission %s",ar.master_instance)
@@ -407,7 +410,7 @@ nicht mehr angezeigt."""
         #~ if not obj.profile:
             #~ coaching.state = pcsw.CoachingStates.active
         coaching.save()
-        changes.log_create(coaching,ar.request)
+        changes.log_create(ar.request,coaching)
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()

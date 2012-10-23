@@ -8,7 +8,6 @@ Was ich noch machen muss:
 
 - Letzte Tests mit watch_tim.
 
-
 Feedback erwünscht
 ------------------
 

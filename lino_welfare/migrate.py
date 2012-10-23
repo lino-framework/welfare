@@ -70,6 +70,7 @@ def migrate_from_1_4_10(globals_dict):
     pcsw_CoachingType = resolve_model("pcsw.CoachingType")
     pcsw_ClientContactType = resolve_model("pcsw.ClientContactType")
     accounts_Chart = resolve_model("accounts.Chart")    
+    users_User = resolve_model("users.User")    
     isip_Contract = resolve_model("isip.Contract")
     jobs_Contract = resolve_model("jobs.Contract")
     contacts_Role = resolve_model("contacts.Role")
@@ -385,6 +386,7 @@ def migrate_from_1_4_10(globals_dict):
     
     objects = globals_dict['objects']
     def new_objects():
+        yield users_User(username="watch_tim",last_name="watch_tim")
         yield accounts_Chart(name="debts Default")
         yield pcsw_ClientContactType(name="Krankenkasse")
         yield pcsw_ClientContactType(name="Apotheke")

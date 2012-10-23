@@ -128,6 +128,7 @@ class Lino(Lino):
         
     def setup_menu(self,ui,user,main):
         from django.utils.translation import ugettext_lazy as _
+        from django.utils.translation import string_concat
         from django.db import models
         from lino.utils.choicelists import UserLevels
         from lino import dd
@@ -161,6 +162,15 @@ class Lino(Lino):
 
         
         self.on_each_app('setup_main_menu',ui,user,main)
+        
+        m = main.get_item("contacts")
+        m.clear()
+        m.add_action(self.modules.contacts.Persons)
+        m.add_action(self.modules.pcsw.Clients,label=string_concat(u' &nbsp; ',self.modules.pcsw.Clients.label))
+        m.add_action(self.modules.contacts.Companies)
+        m.add_action(self.modules.households.Households)
+        m.add_separator('-')
+        m.add_action(self.modules.contacts.Partners,label=_("Partners (all)"))
         
         m = main.add_menu("reports",_("Listings"))
         self.on_each_app('setup_reports_menu',ui,user,m)
@@ -206,7 +216,6 @@ class Lino(Lino):
         for model in models_by_abc(isip.ContractBase):
             for obj in model.objects.filter(user=user):
                 yield obj
-                
                 
 
 LINO = Lino(__file__,globals())

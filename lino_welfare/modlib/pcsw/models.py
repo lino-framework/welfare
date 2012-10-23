@@ -315,7 +315,75 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
           '''name first_name last_name title birth_date gender is_client
           ''')
         
+
+class PersonDetail(contacts.PersonDetail):
+    bottom_box = """
+    activity bank_account1 bank_account2 is_obsolete
+    is_client created modified
+    remarks contacts.RolesByPerson households.MembersByPerson
+    """
+  
+
+class Persons(contacts.Persons):
+    app_label = 'contacts'
+    detail_layout = PersonDetail()
     
+    params_panel_hidden = True
+    parameters = dict(
+        aged_from = models.IntegerField(_("Aged from"),
+            blank=True,null=True,help_text=u"""\
+Nur Personen, die mindestens so alt sind."""),
+        aged_to = models.IntegerField(_("Aged to"),
+            blank=True,null=True,help_text=u"""\
+Nur Personen, die höchstens so alt sind."""),
+        gender = contacts.Gender.field(blank=True,help_text=u"""\
+Nur Personen, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
+        also_obsolete = models.BooleanField(
+            _("Also obsolete clients"),
+            default=False,help_text=u"""\
+Auch veraltete Datensätze"""))
+
+    params_layout = """
+    aged_from aged_to gender also_obsolete 
+    """
+
+    @classmethod
+    def get_request_queryset(self,ar):
+        qs = super(Persons,self).get_request_queryset(ar)
+        if not ar.param_values.also_obsolete:
+            qs = qs.filter(is_obsolete=False)
+        if ar.param_values.gender:
+            qs = qs.filter(gender__exact=ar.param_values.gender)
+        today = datetime.date.today()
+        if ar.param_values.aged_from:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
+            #~ qs = qs.filter(q1|q2)
+            min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
+            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
+        if ar.param_values.aged_to:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
+            #~ qs = qs.filter(q1|q2)
+            max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
+            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
+        return qs
+  
+    @classmethod
+    def get_title_tags(self,ar):
+        for t in super(Persons,self).get_title_tags(ar):
+            yield t
+        if ar.param_values.aged_from or ar.param_values.aged_to:
+            yield unicode(_("Aged %(min)s to %(max)s") % dict(
+              min=ar.param_values.aged_from or'...',
+              max=ar.param_values.aged_to or '...'))
+        if ar.param_values.gender:
+            yield unicode(ar.param_values.gender)
+        if ar.param_values.also_obsolete:
+            yield unicode(self.parameters['also_obsolete'].verbose_name)
+      
     
 class ClientStates(dd.Workflow):
     label = _("Client state")
@@ -915,13 +983,6 @@ class PartnerDetail(contacts.PartnerDetail):
     #~ def setup_handle(self,h):
         #~ h.general.label = _("General")
     
-class PersonDetail(contacts.PersonDetail):
-    bottom_box = """
-    activity bank_account1 bank_account2 is_obsolete
-    is_client created modified
-    remarks contacts.RolesByPerson households.MembersByPerson
-    """
-  
 
 #~ class Partners(contacts.Partners):
     #~ """
@@ -1299,8 +1360,7 @@ def only_active_coachings_filter(today,prefix=''):
 
 #~ from lino.modlib.cal.utils import amonthago
 
-#~ class Clients(AllClients):
-class Clients(contacts.Partners):
+class Clients(Persons):
     #~ debug_permissions = True # '20120925'
     title = _("All Clients")
     model = Client # settings.LINO.person_model
@@ -1315,16 +1375,8 @@ class Clients(contacts.Partners):
     column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
     
     detail_layout = ClientDetail()
-    
+
     parameters = dict(
-        aged_from = models.IntegerField(_("Aged from"),
-            blank=True,null=True,help_text=u"""\
-Nur Klienten, die mindestens so alt sind."""),
-        aged_to = models.IntegerField(_("Aged to"),
-            blank=True,null=True,help_text=u"""\
-Nur Klienten, die höchstens so alt sind."""),
-        gender = contacts.Gender.field(blank=True,help_text=u"""\
-Nur Klienten, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
         coached_by = models.ForeignKey(users.User,
             blank=True,null=True,
             verbose_name=_("Coached by"),help_text=u"""\
@@ -1338,19 +1390,17 @@ Nur Klienten, die zu diesem Datum effektiv begleitet waren
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
-        also_obsolete = models.BooleanField(
-            _("Also obsolete clients"),
-            default=False,help_text=u"""\
-Auch Altfälle (d.h. Klienten, die als Altfall markiert sind)."""),
         client_state = ClientStates.field(blank=True,help_text=u"""\
 Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
-        )
+        **Persons.parameters)
     params_layout = """
-    client_state coached_by coached_on only_primary also_obsolete 
-    aged_from aged_to gender nationality
+    aged_from aged_to gender also_obsolete 
+    client_state coached_by coached_on only_primary nationality
     """
     
+            
+      
     @classmethod
     def get_request_queryset(self,ar):
         #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
@@ -1358,8 +1408,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
         
-        if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_obsolete=False)
         if ar.param_values.coached_on:
             qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.coached_by:
@@ -1371,44 +1419,20 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
             
-        today = datetime.date.today()
-        if ar.param_values.gender:
-            qs = qs.filter(gender__exact=ar.param_values.gender)
         if ar.param_values.nationality:
             qs = qs.filter(nationality__exact=ar.param_values.nationality)
-        if ar.param_values.aged_from:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
-            #~ qs = qs.filter(q1|q2)
-            min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
-            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
-        if ar.param_values.aged_to:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
-            #~ qs = qs.filter(q1|q2)
-            max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
-            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
-            
         return qs
         
 
     @classmethod
     def get_title_tags(self,ar):
-        if ar.param_values.aged_from or ar.param_values.aged_to:
-            yield unicode(_("Aged %(min)s to %(max)s") % dict(
-              min=ar.param_values.aged_from or'...',
-              max=ar.param_values.aged_to or '...'))
-        if ar.param_values.gender:
-            yield unicode(ar.param_values.gender)
+        for t in super(Clients,self).get_title_tags(ar):
+            yield t
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))
             yield unicode(self.parameters['only_primary'].verbose_name)
-        if ar.param_values.also_obsolete:
-            yield unicode(self.parameters['also_obsolete'].verbose_name)
             
         if ar.param_values.coached_by:
             if ar.param_values.coached_on:
@@ -1461,7 +1485,7 @@ class IntegClients(Clients):
     def param_defaults(self,ar,**kw):
         kw = super(IntegClients,self).param_defaults(ar,**kw)
         kw.update(client_state=ClientStates.coached)
-        #~ kw.update(coached_by=ar.get_user())
+        kw.update(coached_by=ar.get_user())
         #~ # print "20120918 MyClients.param_defaults", kw['coached_by']
         return kw
         
@@ -2463,8 +2487,9 @@ def customize_users():
             help_text="""The default CoachingType used when creating Coachings."""))
     dd.inject_field(settings.LINO.user_model,
         'coaching_supervisor',
-        models.BooleanField(_("Coaching Supervisor"),
-            help_text="""Whether thi user is notified about newly assigned coachings."""))
+        models.BooleanField(_("Notify me when a coach has been assigned"),
+            help_text=u"""\
+Wenn ein Neuantrag einem Begleiter zugewiesen wurde, wird außer dem Begleiter auch dieser Benutzer benachrichtigt."""))
         
   
 def customize_siteconfig():
@@ -2784,7 +2809,7 @@ def site_setup(site):
 
     site.modules.contacts.Partners.set_detail_layout(PartnerDetail())
     site.modules.contacts.Companies.set_detail_layout(CompanyDetail())
-    site.modules.contacts.Persons.set_detail_layout(PersonDetail())
+    #~ site.modules.contacts.Persons.set_detail_layout(PersonDetail())
     #~ for T in (site.modules.contacts.Partners,
             #~ site.modules.contacts.Persons,
             #~ site.modules.contacts.Companies,
