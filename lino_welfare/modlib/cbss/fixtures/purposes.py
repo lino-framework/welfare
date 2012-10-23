@@ -160,5 +160,5 @@ def objects():
                 labels.append(labels[0])
             elif len(labels) != 3:
                 raise Exception("Line %r : labels is %r" %(ln,labels))
-            yield Purpose(sector_code=sc,code=int(a[1]),**babel_values('name',fr=labels[0],nl=labels[1],de=labels[2]))
+            yield Purpose(sector_code=sc,code=int(a[1]),**babel_values('name',en=labels[0],fr=labels[0],nl=labels[1],de=labels[2]))
             
