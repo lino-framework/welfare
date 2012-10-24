@@ -330,21 +330,15 @@ class Persons(contacts.Persons):
     
     params_panel_hidden = True
     parameters = dict(
-        aged_from = models.IntegerField(_("Aged from"),
-            blank=True,null=True,help_text=u"""\
-Nur Personen, die mindestens so alt sind."""),
-        aged_to = models.IntegerField(_("Aged to"),
-            blank=True,null=True,help_text=u"""\
-Nur Personen, die höchstens so alt sind."""),
         gender = contacts.Gender.field(blank=True,help_text=u"""\
 Nur Personen, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
         also_obsolete = models.BooleanField(
-            _("Also obsolete clients"),
+            _("Also obsolete data"),
             default=False,help_text=u"""\
-Auch veraltete Datensätze"""))
+Auch Datensätze anzeigen, die als veraltet markiert sind."""))
 
     params_layout = """
-    aged_from aged_to gender also_obsolete 
+    gender also_obsolete 
     """
 
     @classmethod
@@ -354,31 +348,12 @@ Auch veraltete Datensätze"""))
             qs = qs.filter(is_obsolete=False)
         if ar.param_values.gender:
             qs = qs.filter(gender__exact=ar.param_values.gender)
-        today = datetime.date.today()
-        if ar.param_values.aged_from:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
-            #~ qs = qs.filter(q1|q2)
-            min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
-            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
-        if ar.param_values.aged_to:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
-            #~ qs = qs.filter(q1|q2)
-            max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
-            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
         return qs
   
     @classmethod
     def get_title_tags(self,ar):
         for t in super(Persons,self).get_title_tags(ar):
             yield t
-        if ar.param_values.aged_from or ar.param_values.aged_to:
-            yield unicode(_("Aged %(min)s to %(max)s") % dict(
-              min=ar.param_values.aged_from or'...',
-              max=ar.param_values.aged_to or '...'))
         if ar.param_values.gender:
             yield unicode(ar.param_values.gender)
         if ar.param_values.also_obsolete:
@@ -1377,6 +1352,12 @@ class Clients(Persons):
     detail_layout = ClientDetail()
 
     parameters = dict(
+        aged_from = models.IntegerField(_("Aged from"),
+            blank=True,null=True,help_text=u"""\
+Nur Klienten, die mindestens so alt sind."""),
+        aged_to = models.IntegerField(_("Aged to"),
+            blank=True,null=True,help_text=u"""\
+Nur Klienten, die höchstens so alt sind."""),
         coached_by = models.ForeignKey(users.User,
             blank=True,null=True,
             verbose_name=_("Coached by"),help_text=u"""\
@@ -1408,6 +1389,11 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
         
+        if ar.param_values.aged_from or ar.param_values.aged_to:
+            yield unicode(_("Aged %(min)s to %(max)s") % dict(
+              min=ar.param_values.aged_from or'...',
+              max=ar.param_values.aged_to or '...'))
+              
         if ar.param_values.coached_on:
             qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.coached_by:
@@ -1421,6 +1407,21 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             
         if ar.param_values.nationality:
             qs = qs.filter(nationality__exact=ar.param_values.nationality)
+        today = datetime.date.today()
+        if ar.param_values.aged_from:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
+            #~ qs = qs.filter(q1|q2)
+            min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
+            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
+        if ar.param_values.aged_to:
+            #~ q1 = models.Q(birth_date__isnull=True)
+            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
+            #~ qs = qs.filter(q1|q2)
+            max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
+            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
+            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
         return qs
         
 

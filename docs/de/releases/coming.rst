@@ -6,10 +6,17 @@ TODO
 
 Was ich noch machen muss:
 
+- "Partners (all)" ist in der settings.py ist in keiner `locale` drin.
+
 - Letzte Tests mit watch_tim.
+- Suche nach "Datenmigration 20121024"
 
 Feedback erwünscht
 ------------------
+
+- Meldung "20120912 lost : ..." in Bemerkung bei Melanie E. war irritierend.
+  Ist jetzt ausführlicher. 
+  Beispiele: Person 22340, 96000101, 96000137
 
 - Status, Zustand, Stadium, Phase?
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-24 00:52+0100\n"
-"PO-Revision-Date: 2012-10-24 02:57+0200\n"
+"PO-Revision-Date: 2012-10-24 03:54+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -169,7 +169,7 @@ msgstr "Alter bis"
 
 #: .\models.py:342
 msgid "Also obsolete clients"
-msgstr "Auch veraltete Klienten"
+msgstr "Auch veraltete Daten"
 
 #: .\models.py:379
 #, python-format
