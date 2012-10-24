@@ -168,7 +168,7 @@ msgid "Aged to"
 msgstr "Alter bis"
 
 #: .\models.py:342
-msgid "Also obsolete clients"
+msgid "Also obsolete data"
 msgstr "Auch veraltete Daten"
 
 #: .\models.py:379
