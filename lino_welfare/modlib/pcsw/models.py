@@ -361,7 +361,7 @@ Auch Datensätze anzeigen, die als veraltet markiert sind."""))
       
     
 class ClientStates(dd.Workflow):
-    label = _("Client state")
+    #~ label = _("Client state")
     
     #~ debug_permissions = True
     
@@ -572,7 +572,7 @@ class Client(Person):
       
     client_state = ClientStates.field(default=ClientStates.newcomer)
     
-    print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content')
+    print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
 
 
@@ -934,7 +934,7 @@ class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
     
 
 
-ClientStates.newcomer.add_workflow(states='refused coached invalid',user_groups='newcomers')
+ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
 ClientStates.refused.add_workflow(RefuseClient)
 #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
@@ -2234,7 +2234,7 @@ class ContactsByClient(ClientContacts):
 
 class CoachingStates(dd.Workflow):
     """Lifecycle of a :class:`Coaching`."""
-    label = _("Coaching state")
+    #~ label = _("Coaching state")
     
     @classmethod
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):

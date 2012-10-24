@@ -38,7 +38,7 @@ Arbeitsablauf eines Klienten
 ----------------------------
 
 
-Der Zustand eines Klienten kann sein:
+Der Bearbeitungszustand eines Klienten kann sein:
 
 - **Neuantrag** : 
   Die Person hat Antrag auf Begleitung gestellt. 
@@ -98,7 +98,7 @@ Der Klient wurde versehentlich als Dublette eines existierenden
 Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
 weil Dokumente mit der Partnernummer existieren). 
 
-In Lino setzt man solche Klienten einfach in den Zustand "Ungültig".
+In Lino setzt man solche Klienten einfach in den Bearbeitungszustand "Ungültig".
 
   
 
@@ -134,7 +134,7 @@ Veraltete Klienten (Altfälle)
 -----------------------------
 
 Wie alle Partner haben auch Klienten ein Ankreuzfeld "veraltet",
-das *unabhängig vom Zustand* existiert. 
+das *unabhängig vom Bearbeitungszustand* existiert. 
 
 Das Attribut "veraltet" bedeutet: 
 die Daten des Partners werden nicht mehr gepflegt, alle Angaben verstehen sich 
@@ -197,6 +197,6 @@ Anhang
 
 - Workflow : Arbeitsablauf
 - Life cycle : Lebenzyklus
-- engl. "State" = Zustand oder Stadium
+- engl. "State" = Bearbeitungszustand
 
   

@@ -166,7 +166,7 @@ class Lino(Lino):
         m = main.get_item("contacts")
         m.clear()
         m.add_action(self.modules.contacts.Persons)
-        m.add_action(self.modules.pcsw.Clients,label=string_concat(u' &nbsp; ',self.modules.pcsw.Clients.label))
+        m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
         m.add_action(self.modules.contacts.Companies)
         m.add_action(self.modules.households.Households)
         m.add_separator('-')
