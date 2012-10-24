@@ -78,6 +78,7 @@ def migrate_from_1_4_10(globals_dict):
     
     cal = dd.resolve_app('cal')
     pcsw = dd.resolve_app('pcsw')
+    postings = dd.resolve_app('postings')
     
     NOW = datetime.datetime(2012,9,6,0,0)
     
@@ -338,6 +339,8 @@ def migrate_from_1_4_10(globals_dict):
     globals_dict.update(create_outbox_mail=create_outbox_mail)
     def create_postings_posting(id, owner_type_id, owner_id, user_id, project_id, partner_id, state, date):
         owner_type_id = new_content_type_id(owner_type_id)
+        if not state:
+            state = postings.PostingStates.open
         return postings_Posting(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,project_id=project_id,partner_id=partner_id,state=state,date=date)    
     globals_dict.update(create_postings_posting=create_postings_posting)
     def create_uploads_upload(id, owner_type_id, owner_id, user_id, created, modified, file, mimetype, type_id, valid_until, description):
@@ -386,7 +389,7 @@ def migrate_from_1_4_10(globals_dict):
     
     objects = globals_dict['objects']
     def new_objects():
-        yield users_User(username="watch_tim",last_name="watch_tim")
+        yield users_User(username="watch_tim",modified=NOW,created=NOW)
         yield accounts_Chart(name="debts Default")
         yield pcsw_ClientContactType(name="Krankenkasse")
         yield pcsw_ClientContactType(name="Apotheke")
