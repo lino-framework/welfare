@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-20 15:56+0100\n"
+"POT-Creation-Date: 2012-10-24 00:52+0100\n"
 "PO-Revision-Date: 2012-06-24 22:41+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\models.py:607 .\models.py:1117
+#: .\models.py:607 .\models.py:1118
 msgid "Periods"
 msgstr "Périodes"
 
@@ -196,11 +196,11 @@ msgstr "Dette"
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
-#: .\models.py:1108
+#: .\models.py:1109
 msgid "Required for Households"
 msgstr "obligatoire pour ménages"
 
-#: .\models.py:1113
+#: .\models.py:1114
 msgid "Required for Persons"
 msgstr "obligatoire pour personnes"
 

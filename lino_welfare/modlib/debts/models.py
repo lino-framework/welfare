@@ -1071,6 +1071,7 @@ def site_setup(site):
 def setup_main_menu(site,ui,user,m):
     m  = m.add_menu("debts",MODULE_LABEL)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
+    m.add_action(pcsw.DebtsClients)
     m.add_action(MyBudgets)
   
   

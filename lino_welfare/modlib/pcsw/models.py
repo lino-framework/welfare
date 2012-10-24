@@ -1445,8 +1445,29 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
         
     
+class DebtsClients(Clients):
+    #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
+    #~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
+    help_text = u"""Wie Kontakte \u25b8 Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
+    required = dict(user_groups = 'debts')
+    params_panel_hidden = True
+    title = _("DM Clients")
+    order_by = "last_name first_name id".split()
+    allow_create = False # see blog/2012/0922
+    use_as_default_table = False
+    column_names = "name_column:20 national_id:10 gsm:10 address_column email phone:10 id "
+    
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(DebtsClients,self).param_defaults(ar,**kw)
+        kw.update(coached_by=ar.get_user())
+        return kw
+        
+    
 class IntegClients(Clients):
-    help_text = u"""Wie Kontakte --> Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
+    #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
+    #~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
+    help_text = u"""Wie Kontakte \u25b8 Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
     required = dict(user_groups = 'integ')
     params_panel_hidden = True

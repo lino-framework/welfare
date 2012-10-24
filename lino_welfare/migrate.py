@@ -294,7 +294,7 @@ def migrate_from_1_4_10(globals_dict):
                 p = contacts_Person.objects.get(pk=partner_ptr_id)
                 if p.remarks:
                     p.remarks += '\n'
-                p.remarks += '20120901 lost: ' + repr(lost)
+                p.remarks += u'''Datenmigration 20121024: Person hatte weder NISS noch Gesdos-Nr und wurde deshalb kein Klient. Folgende Angaben gingen dabei verloren : ''' + repr(lost)
                 p.save()
     globals_dict.update(create_contacts_person=create_contacts_person)
     
