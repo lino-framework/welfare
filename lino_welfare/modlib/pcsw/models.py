@@ -1389,11 +1389,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
         
-        if ar.param_values.aged_from or ar.param_values.aged_to:
-            yield unicode(_("Aged %(min)s to %(max)s") % dict(
-              min=ar.param_values.aged_from or'...',
-              max=ar.param_values.aged_to or '...'))
-              
         if ar.param_values.coached_on:
             qs = only_coached_on(qs,ar.param_values.coached_on)
         if ar.param_values.coached_by:
@@ -1429,6 +1424,11 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
     def get_title_tags(self,ar):
         for t in super(Clients,self).get_title_tags(ar):
             yield t
+        if ar.param_values.aged_from or ar.param_values.aged_to:
+            yield unicode(_("Aged %(min)s to %(max)s") % dict(
+              min=ar.param_values.aged_from or'...',
+              max=ar.param_values.aged_to or '...'))
+              
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
         if ar.param_values.only_primary:
