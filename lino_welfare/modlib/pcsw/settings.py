@@ -29,7 +29,7 @@ class Lino(Lino):
     title = "Lino/PCSW"
     #~ domain = "pcsw.saffre-rumma.net"
     help_url = "http://packages.python.org/lino-welfare"
-    migration_module = 'lino_welfare.migrate'
+    migration_module = 'lino_welfare.modlib.pcsw.migrate'
     
     #~ project_model = 'contacts.Person'
     project_model = 'pcsw.Client'
