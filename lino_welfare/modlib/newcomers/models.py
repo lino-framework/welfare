@@ -19,6 +19,7 @@ import os
 import sys
 import cgi
 import datetime
+import decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -279,7 +280,6 @@ class AvailableCoaches(users.Users):
     A list of the Users that are susceptible to become responsible for a Newcomer.
     """
     use_as_default_table = False
-    
     required = dict(user_groups=['newcomers'])
     #~ required_user_groups = ['newcomers']
     #~ model = users.User
@@ -287,7 +287,7 @@ class AvailableCoaches(users.Users):
     #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
     #~ label = _("Users by Newcomer")
     label = _("Available Coaches")
-    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota newcomer_score'
+    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota workload'
     parameters = dict(
         for_client = models.ForeignKey('contacts.Person',
             verbose_name=_("Show suggested agents for"),
@@ -319,7 +319,7 @@ class AvailableCoaches(users.Users):
             if not client.faculty:
                 raise Warning(_("Only for newcomers with given `faculty`."))
 
-        no_data = True
+        data = []
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
         for user in qs:
             if client:
@@ -332,11 +332,16 @@ class AvailableCoaches(users.Users):
               ar.ui,param_values=dict(
                 coached_by=user,
                 new_since=ar.param_values.since))
-            yield user
-            no_data = False
+            #~ yield user
+            data.append(user)
             
-        if client and no_data:
+        if client and len(data) == 0:
             raise Warning(_("No coaches available for %s.") % client)
+            
+        def fn(a,b):
+            return cmp(self.compute_workload(ar,a),self.compute_workload(ar,b))
+        data.sort(fn)
+        return data
                 
     #~ @dd.virtualfield('contacts.Person.coach1')
     #~ def user(self,obj,ar):
@@ -356,13 +361,26 @@ class AvailableCoaches(users.Users):
     def new_clients(self,obj,ar):
         return obj.new_clients
         
-    @dd.virtualfield(models.IntegerField(_("Score")))
-    def newcomer_score(self,obj,ar):
-        if obj.new_clients.get_total_count():
-            return 100 * obj.newcomer_quota / obj.new_clients.get_total_count()
-        else:
-            return None
+    @dd.virtualfield(models.CharField(_("Workload"),max_length=6))
+    def workload(self,obj,ar):
+        return "%+6.2f%%" % self.compute_workload(ar,obj)
         
+    #~ @dd.virtualfield(models.DecimalField(_("Workload"),max_digits=6,decimal_places=2))
+    #~ def workload(self,obj,ar):
+        #~ return self.compute_workload(ar,obj)
+        
+    #~ @dd.virtualfield(models.IntegerField(_("Quote")))
+    #~ def workload(self,obj,ar):
+        #~ if obj.new_clients.get_total_count():
+            #~ return 100 * obj.newcomer_quota / obj.new_clients.get_total_count()
+        #~ else:
+            #~ return None
+    @classmethod    
+    def compute_workload(cls,ar,obj):
+        delta = datetime.date.today() - ar.param_values.since
+        quota = obj.newcomer_quota * delta.days / 7.0
+        return decimal.Decimal(obj.new_clients.get_total_count() - quota)
+    
 #~ class AssignCoach(dd.RowAction):
 class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
@@ -377,8 +395,10 @@ nicht mehr angezeigt."""
         return _('New client for %s') % obj
             
     def get_notify_body(self,ar,obj,**kw):
-        return _("Assign %(coach)s as %(faculty)s coach for client %(client)s.") % dict(
-            client=ar.master_instance,coach=obj,faculty=ar.master_instance.faculty)
+        client = ar.master_instance
+        if client:
+            return _("Assign %(coach)s as %(faculty)s coach for client %(client)s.") % dict(
+                client=client,coach=obj,faculty=client.faculty)
             
     def unused_get_action_permission(self,ar,obj,state):
         #~ logger.info("20121020 get_action_permission %s",ar.master_instance)
@@ -445,6 +465,10 @@ class AvailableCoachesByClient(AvailableCoaches):
     label = _("Available Coaches")
     
     assign_coach = AssignCoach()
+    
+    slave_grid_format = 'html'
+    editable = False
+    hide_sums = True
 
     @classmethod
     def get_data_rows(self,ar):
@@ -525,9 +549,8 @@ class AvailableCoachesByClient(AvailableCoaches):
 settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
           _("Newcomers Quota"),
           default=0,
-          help_text="""Relative number expressing 
-          how many Newcomer requests this User is able to treat."""
-        ))
+          help_text=u"""\
+Wieviele Neuanträge dieser Benutzer pro Monat verkraften kann."""))
 
 
 dd.inject_field(pcsw.Client,
@@ -557,7 +580,7 @@ def site_setup(site):
     #~ """)
     
     site.modules.pcsw.Clients.detail_layout.coaching.replace('workflow_buttons',"""
-    newcomers_left newcomers.AvailableCoachesByClient
+    newcomers_left:20 newcomers.AvailableCoachesByClient:40
     """)
     
     site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""

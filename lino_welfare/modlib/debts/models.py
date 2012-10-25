@@ -558,6 +558,7 @@ class ActorsByBudget(Actors):
 class ActorsByPartner(Actors):
     master_key = 'partner'
     label = _("Is actor in these budgets:")
+    editable = False
     
 
 
