@@ -938,7 +938,9 @@ ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_
 ClientStates.refused.add_workflow(RefuseClient)
 #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
 #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),states='coached invalid',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),
+    states='coached invalid',
+    user_groups='newcomers')
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
 
@@ -2485,7 +2487,7 @@ class CoachingsByClient(Coachings):
     
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date user type primary workflow_buttons id'
+    column_names = 'start_date end_date user primary workflow_buttons type id'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'

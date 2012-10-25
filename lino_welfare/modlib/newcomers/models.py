@@ -466,7 +466,7 @@ class AvailableCoachesByClient(AvailableCoaches):
     
     assign_coach = AssignCoach()
     
-    slave_grid_format = 'html'
+    #~ slave_grid_format = 'html'
     editable = False
     hide_sums = True
 

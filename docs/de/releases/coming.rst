@@ -18,10 +18,6 @@ Feedback erwünscht
   Ist jetzt ausführlicher. 
   Beispiele: Person 22340, 96000101, 96000137
 
-- Status, Zustand, Stadium, Phase?
-
-- Wie übersetzen wir "primary"? "primär" oder "komplette Akte"?
-
 - Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
 
 - Kommentare zu :doc:`/user/clients`?
@@ -29,10 +25,9 @@ Feedback erwünscht
 - Bei den Aktionen RefuseNewcomer, EndCoaching und AssignCoach
   wird eine Notiz erstellt (d.h. auch vorher ein Dialogfenster gefragt). 
   Bei anderen Zustandsänderungen (z.B. Standby) nicht.
+  Z.B. "Als Ehemalig markieren": hier wird *keine* Notiz gemacht, 
+  sondern nur ein Eintrag im Änderungsprotokoll.
   
-- Nach erfolgreicher Zuweisung eines Klienten 
-  springt er ohne viele Worte auf den nächsten Klienten. Verwirrend?
-
 - Änderungsprotokoll. 
   Konfiguration gemeinsam anschauen und klären, welche Tabellen protokoliert werden und welche nicht.
 
