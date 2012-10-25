@@ -1251,7 +1251,7 @@ class RowHandlers:
         info = Info()
         yield datarow(group,n,n.Date,info)
         
-    
+
 class RetrieveTIGroupsResult(dd.VirtualTable):
     """
     Displays the response of an :class:`RetrieveTIGroupsRequest`
@@ -1280,7 +1280,7 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
             
     @classmethod
     def get_data_rows(self,ar):
-        try:
+        #~ try:
             rti = ar.master_instance
             if rti is None: 
                 #~ print "20120606 ipr is None"
@@ -1299,22 +1299,23 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
                 #~ print name, node.__class__
                 m = getattr(RowHandlers,node.__class__.__name__,None)
                 if m is None:
-                    yield AttrDict(
-                      info="No handler for %s (%s) in %s" % (
-                          name, node.__class__.__name__,rti),
-                      group='Error',
-                      type='',
-                      since=datetime.date.today(),
-                      )
+                    raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__)
+                    #~ yield AttrDict(
+                      #~ info="No handler for %s (%s) in %s" % (
+                          #~ name, node.__class__.__name__,rti),
+                      #~ group='Error',
+                      #~ type='',
+                      #~ since=datetime.date.today(),
+                      #~ )
                 else:
                     for row in m(node,name): yield row
-        except Exception, e:
-            yield AttrDict(
-              info=traceback.format_exc(e),
-              group='Traceback',
-              type='',
-              since=datetime.date.today(),
-              )
+        #~ except Exception, e:
+            #~ yield AttrDict(
+              #~ info=traceback.format_exc(e),
+              #~ group='Traceback',
+              #~ type='',
+              #~ since=datetime.date.today(),
+              #~ )
             
         
         

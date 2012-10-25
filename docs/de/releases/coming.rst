@@ -60,8 +60,10 @@ Lösung gemeldeter Probleme
 --------------------------
 
 - Im Schnellsuche-Feld braucht man 
-  jetzt nicht mehr TAB zu drücken, um die Suche zu starten.
-  (Endlich! Wartezeit 1 Jahr, Arbeitsaufwand 30 Minuten!)
+  jetzt nicht mehr [TAB] zu drücken, um die Suche zu starten,
+  sondern Lino tut das automatisch wenn man länger als eine 
+  Viertelsekunde lang nichts tippt.
+  (Endlich! Auf dieses Feature habt ihr ca. ein Jahr lang gewartet!)
 
 - Kontaktperson löschen geht nicht.
   "Bei einer Firma wechselt der Direktor. 
