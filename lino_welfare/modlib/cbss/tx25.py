@@ -1299,7 +1299,7 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
                 #~ print name, node.__class__
                 m = getattr(RowHandlers,node.__class__.__name__,None)
                 if m is None:
-                    raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__)
+                    raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__))
                     #~ yield AttrDict(
                       #~ info="No handler for %s (%s) in %s" % (
                           #~ name, node.__class__.__name__,rti),
