@@ -201,19 +201,25 @@ class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
     #~ def setup_handle(self,lh):
         #~ CBSSRequestDetail.setup_handle(self,lh)
         
-class RetrieveTIGroupsRequestInsert(dd.FormLayout):
-    window_size = (40,'auto')
-    main = """
-    person
-    national_id language 
-    history
-    """
+#~ class RetrieveTIGroupsRequestInsert(dd.FormLayout):
+    #~ window_size = (40,'auto')
+    #~ main = """
+    #~ person
+    #~ national_id language 
+    #~ history
+    #~ """
 
 class RetrieveTIGroupsRequests(CBSSRequests):
     #~ debug_permissions = True
     model = RetrieveTIGroupsRequest
     detail_layout = RetrieveTIGroupsRequestDetail()
-    insert_layout = RetrieveTIGroupsRequestInsert()
+    column_names = 'id user person national_id language history status ticket sent environment'
+    #~ insert_layout = RetrieveTIGroupsRequestInsert()
+    insert_layout = dd.FormLayout("""
+    person
+    national_id language 
+    history
+    """,window_size = (40,'auto'))
     #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
     required_user_groups = ['cbss']
         
