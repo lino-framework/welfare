@@ -302,7 +302,9 @@ def datarow(group,node,since,info):
         itnum = ''
     if hasattr(node,'Type'):
         group += " " + node.Type
+    if hasattr(node,'Status'):
         group += " " + node.Status
+    if hasattr(node,'Structure'):
         group += " " + node.Structure
     return AttrDict(group=group,
         type=itnum,since=rn2date(since),info=E.p(*info.chunks))
@@ -316,9 +318,10 @@ def NameType(n):
     info = Info()
     s = ' '.join([ln.Label for ln in n.LastName])
     info.chunks.append(E.b(s))
-    info.chunks.append(', ')
-    s = ' '.join([fn.Label for fn in n.FirstName])
-    info.chunks.append(s)
+    if hasattr(n,'FirstName'):
+        info.chunks.append(', ')
+        s = ' '.join([fn.Label for fn in n.FirstName])
+        info.chunks.append(s)
     return info
     
     
@@ -469,16 +472,22 @@ def IT006(n):
     info.add_deldate(n)
     return info
 
-def IT018(n):
+def IT011(n): # Pseudonymes
     info = Info()
-    info.addfrom(n,'Address','',AddressType)
+    info.addfrom(n,'Name','',NameType)
     info.add_deldate(n)
     return info
-
+  
 def IT013(n):
     info = Info()
     info.addfrom(n,'ModificationType','',ModificationTypeType)
     info.addfrom(n,'Graphic','')
+    info.add_deldate(n)
+    return info
+
+def IT018(n):
+    info = Info()
+    info.addfrom(n,'Address','',AddressType)
     info.add_deldate(n)
     return info
 
@@ -530,6 +539,18 @@ def IT141(n):
     info.add_deldate(n)
     return info
         
+def NationalityType(n):
+    return code_label(n)
+    
+def IT213(n): # Alias
+    info = Info()
+    info.addfrom(n,'Name','',NameType)
+    info.addfrom(n,'Nationality',None,NationalityType)
+    info.addfrom(n,'BirthDate',_(' born '),DateType)
+    info.addfrom(n,'BirthPlace',_(' in '))
+    info.add_deldate(n)
+    return info
+  
   
 def TypeOfLicenseType(n):
     return code_label(n)
@@ -906,6 +927,22 @@ class RowHandlers:
         #~ raise Exception(repr([n for n in fo]))
         for n in fo.AscertainedLegalMainAddress:
             info = IT003(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+            
+    @staticmethod
+    def Pseudonyms(fo,name):
+        group = _("Pseudonyms") # Pseudonymes
+        for n in fo.Pseudonym:
+            info = IT011(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+            
+    @staticmethod
+    def Aliases(fo,name):
+        group = _("Aliases")
+        for n in fo.Alias:
+            info = IT213(n)
             yield datarow(group,n,n.Date,info)
             group = ''
             
