@@ -5,8 +5,8 @@ ROOTDIR := `cygpath -m $(ROOTDIR)`
 #~ ROOTDIR := `cygpath -m \`pwd\``
 MODULES = pcsw courses cbss debts cv isip jobs newcomers 
 TESTS_OPTIONS = --verbosity=2 --traceback
-MMOPTS := -s -a --settings lino_welfare.settings
-CMOPTS := --settings lino_welfare.settings
+MMOPTS := -s -a --settings lino_welfare.modlib.pcsw.settings
+CMOPTS := --settings lino_welfare.modlib.pcsw.settings
 
 #LANGUAGES = de fr nl et
 #INPUT_FILES = lino\\actions.py lino\\ui\\extjs\\ext_ui.py lino\\modlib\\fields.py lino\\modlib\\system\\models.py
@@ -37,7 +37,7 @@ cm:
 	done
   
 tests:  
-	$(DJANGO_ADMIN) test --settings=lino_welfare.settings $(TESTS_OPTIONS)
+	$(DJANGO_ADMIN) test --settings=lino_welfare.modlib.pcsw.settings $(TESTS_OPTIONS)
 
 sdist:
 	python setup.py register sdist --formats=gztar,zip --dist-dir=docs/dist upload 

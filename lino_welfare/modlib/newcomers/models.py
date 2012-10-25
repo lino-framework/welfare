@@ -378,7 +378,7 @@ class AvailableCoaches(users.Users):
     @classmethod    
     def compute_workload(cls,ar,obj):
         delta = datetime.date.today() - ar.param_values.since
-        quota = obj.newcomer_quota * delta.days / 7.0
+        quota = obj.newcomer_quota * delta.days / decimal.Decimal('7.0')
         return decimal.Decimal(obj.new_clients.get_total_count() - quota)
     
 #~ class AssignCoach(dd.RowAction):

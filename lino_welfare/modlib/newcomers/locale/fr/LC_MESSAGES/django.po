@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-24 16:01+0100\n"
+"POT-Creation-Date: 2012-10-25 18:11+0100\n"
 "PO-Revision-Date: 2012-06-25 13:19+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -16,56 +16,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: .\models.py:58
+#: .\models.py:59
 msgid "Newcomers"
 msgstr "Nouvelles demandes"
 
-#: .\models.py:66
+#: .\models.py:67
 msgid "Broker"
 msgstr "Intermédiaire "
 
-#: .\models.py:67
+#: .\models.py:68
 msgid "Brokers"
 msgstr "Intermédiaires"
 
-#: .\models.py:95
+#: .\models.py:96
 msgid "Faculty"
 msgstr "Spécificité"
 
-#: .\models.py:96
+#: .\models.py:97
 msgid "Faculties"
 msgstr "Spécificités"
 
-#: .\models.py:119
+#: .\models.py:120
 msgid "Competence"
 msgstr "Compétence"
 
-#: .\models.py:120
+#: .\models.py:121
 msgid "Competences"
 msgstr "Compétences"
 
-#: .\models.py:193 .\models.py:355
+#: .\models.py:194 .\models.py:360
 msgid "New Clients"
 msgstr "Nouveaux clients"
 
-#: .\models.py:212
+#: .\models.py:213
 msgid "Also refused clients"
 msgstr ""
 
-#: .\models.py:215
+#: .\models.py:216
 #, fuzzy
 msgid "Also deprecated clients"
 msgstr "Clients actifs"
 
-#: .\models.py:218
+#: .\models.py:219
 msgid "Also newly coached clients since"
 msgstr ""
 
-#: .\models.py:224
+#: .\models.py:225
 msgid "Coached by"
 msgstr "AI"
 
-#: .\models.py:289 .\models.py:445
+#: .\models.py:289 .\models.py:465
 msgid "Available Coaches"
 msgstr ""
 
@@ -94,40 +94,43 @@ msgstr ""
 msgid "No coaches available for %s."
 msgstr ""
 
-#: .\models.py:345
+#: .\models.py:350
 msgid "Primary clients"
 msgstr "Dossiers complets"
 
-#: .\models.py:350
+#: .\models.py:355
 msgid "Active clients"
 msgstr "Clients actifs"
 
-#: .\models.py:359
-msgid "Score"
-msgstr "Score"
+#: .\models.py:364
+msgid "Workload"
+msgstr ""
 
-#: .\models.py:368
+#: .\models.py:386
 msgid "Assign"
 msgstr ""
 
-#: .\models.py:377
+#: .\models.py:395
 #, fuzzy, python-format
 msgid "New client for %s"
 msgstr "Nouveaux clients"
 
-#: .\models.py:380
+#: .\models.py:400
 #, python-format
 msgid "Assign %(coach)s as %(faculty)s coach for client %(client)s."
 msgstr ""
 
-#: .\models.py:438
+#: .\models.py:458
 #, python-format
 msgid "Client %(client)s has been assigned to %(coach)s"
 msgstr ""
 
-#: .\models.py:526
+#: .\models.py:550
 msgid "Newcomers Quota"
 msgstr "Quota nouvelles demandes"
+
+#~ msgid "Score"
+#~ msgstr "Score"
 
 #, fuzzy
 #~ msgid "new since"
