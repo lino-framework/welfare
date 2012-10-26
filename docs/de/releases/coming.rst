@@ -49,6 +49,8 @@ Feedback erwünscht
 Nach dem Release
 ----------------
 
+- SiteConfig : system_note_type
+
 - Benutzer konfigurieren: Begleitungsdienst und Kompetenzen
 
 - Verträge .odt : 

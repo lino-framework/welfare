@@ -392,7 +392,7 @@ class ClientStates(dd.Workflow):
                     _("This will end %(count)d coachings of %(client)s.") % dict(
                         count=qs.count(),client=unicode(obj)))
                 for co in qs:
-                    co.state = CoachingStates.ended
+                    #~ co.state = CoachingStates.ended
                     co.end_date = datetime.date.today()
                     co.save()
                 #~ obj.set_change_summary()
@@ -415,12 +415,38 @@ Alle bisherigen Hilfsanträge wurden abgelehnt.
 add('30', _("Coached"),'coached',help_text=u"""\
 Es gibt mindestens eine Person im ÖSHZ, die sich um die Person kümmert.
 (TIM: IdPrt == "S" und Attribut N (Neuantrag) nicht gesetzt)""")
+
 add('50', _("Former"),'former',help_text=u"""\
 War mal begleitet, ist es aber jetzt nicht mehr. 
 Es existiert keine *aktive* Begleitung.
 (TIM: Attribut `W (Warnung bei Auswahl)` oder Partnerart `I (Inaktive)`)""")
+
 add('60', _("Invalid"),'invalid',help_text=u"""\
 Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
+
+
+class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
+    label = _("Refuse")
+    required = dict(states='newcomer invalid',user_groups='newcomers')
+    # help_text = _("Write a refusal note and remove the new client request.")
+    
+    def get_notify_subject(self,ar,obj,**kw):
+        return _("%(client)s has been refused.") % dict(client=obj)
+            
+    
+
+
+ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
+ClientStates.refused.add_workflow(RefuseClient)
+#~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
+#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
+ClientStates.former.add_workflow(_("Former"),
+    states='coached invalid',
+    user_groups='newcomers')
+#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+
+
+
 
 
     
@@ -912,38 +938,6 @@ class Client(Person):
 
     
 
-class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
-    label = _("Refuse")
-    required = dict(states='newcomer invalid',user_groups='newcomers')
-    # help_text = _("Write a refusal note and remove the new client request.")
-    
-    def get_notify_subject(self,ar,obj,**kw):
-        return _("%(client)s has been refused.") % dict(client=obj)
-            
-    #~ def action_param_defaults(self,ar,obj,**kw):
-        #~ kw = super(RefuseClient,self).action_param_defaults(ar,obj,**kw)
-        #~ if obj is not None:
-            #~ kw.update(notify_subject=
-                #~ _("%(client)s has been refused.") 
-                #~ % dict(client=obj))
-        #~ return kw
-        
-    #~ def update_system_note_kw(self,ar,kw,obj):
-        #~ return kw.update(project=obj)
-        
-    
-
-
-ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
-ClientStates.refused.add_workflow(RefuseClient)
-#~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
-#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),
-    states='coached invalid',
-    user_groups='newcomers')
-#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
-
-
 
 
 
@@ -1260,82 +1254,40 @@ cbss_summary
 """,label=_("CBSS"),required=dict(user_groups='cbss'))
 
 
-
-#~ class AllClients(contacts.Persons):
-#~ class AllClients(Partners):
-    #~ """
-    #~ List of all Persons.
-    #~ """
-    #~ model = Client # settings.LINO.person_model
-    #~ detail_layout = ClientDetail()
-    #~ insert_layout = dd.FormLayout("""
-    #~ title first_name last_name
-    #~ gender language
-    #~ """,window_size=(60,'auto'))
-    
-    #~ order_by = "last_name first_name id".split()
-    #~ column_names = "name_column:20 national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
-    
-    
-    #~ @classmethod
-    #~ def get_actor_label(self):
-        #~ return string_concat(
-          #~ self.model._meta.verbose_name_plural,' ',_("(all)"))
-    
-
-
-def unused_only_coached_persons(qs,*args,**kw):
-    return qs.filter(only_coached_persons_filter(*args,**kw))
-    
-
-def unused_only_coached_persons_filter(today,
-      d1field='coached_from',
-      d2field='coached_until'):
-    """
-    coached_from and coached_until
-    """
-    # Person with both fields empty is not considered coached:
-    q1 = Q(**{d2field+'__isnull':False}) | Q(**{d1field+'__isnull':False})
-    return Q(q1,range_filter(today,d1field,d2field))
-    
   
 def only_coached_by(qs,user):
-    #~ return qs.filter(Q(coach1=user) | Q(coach2=user))
     return qs.filter(coachings_by_client__user=user).distinct()
     
-#~ def only_new_since(qs,since):
-    #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
-    #~ return qs.filter(coaching_set__end_date__gte=since) 
-    #~ return qs.filter(coachings_by_client__start_date__gte=since) 
-            
 def only_coached_on(qs,today,join=None):
     """
     Add a filter to the Queryset `qs` (on model Client) 
     which leaves only the clients that are (or were or will be) coached 
     on the specified date.
     """
-    #~ return qs.filter(coached_from__isnull=False,coached_from__gte=ar.param_values.since) 
     n = 'coachings_by_client__'
     if join: 
         n = join + '__' + n
     return qs.filter(only_active_coachings_filter(today,n)).distinct()
-    
-    #~ return qs.filter(
-        #~ # Q(**{n+'__end_date__isnull':False}) | Q(**{n+'__start_date__isnull':False}),
-        #~ Q(**{n+'__end_date__isnull':True})  | Q(**{n+'__end_date__gte':today}),
-        #~ Q(**{n+'__start_date__isnull':True}) | Q(**{n+'__start_date__lte':today})).distinct()
-
 
 def only_active_coachings_filter(today,prefix=''):
     return Q(
         #~ Q(**{n+'__end_date__isnull':False}) | Q(**{n+'__start_date__isnull':False}),
         Q(**{prefix+'end_date__isnull':True})  | Q(**{prefix+'end_date__gte':today}),
-        Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':today}))
+        Q(**{prefix+'start_date__lte':today}))
+        #~ Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':today}))
 
-    
+def add_coachings_filter(qs,user,today,primary):
+    if not (user or today or primary):
+        return qs
+    flt = Q()
+    if today:
+        flt &= only_active_coachings_filter(today,'coachings_by_client__')
+    if user:
+        flt &= Q(coachings_by_client__user=user)
+    if primary:
+        flt &= Q(coachings_by_client__primary=True)
+    return qs.filter(flt).distinct()
 
-
-#~ from lino.modlib.cal.utils import amonthago
 
 class Clients(Persons):
     #~ debug_permissions = True # '20120925'
@@ -1390,15 +1342,16 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         qs = super(Clients,self).get_request_queryset(ar)
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
+            
+        qs = add_coachings_filter(qs,ar.param_values.coached_by,ar.param_values.coached_on,ar.param_values.only_primary)
         
-        if ar.param_values.coached_on:
-            qs = only_coached_on(qs,ar.param_values.coached_on)
-        if ar.param_values.coached_by:
-            qs = only_coached_by(qs,ar.param_values.coached_by)
-            #~ qs = qs.filter(coachings_by_client__user=ar.param_values.coached_by)
-        if ar.param_values.only_primary:
-            qs = qs.filter(coachings_by_client__primary=True)
-              #~ coachings_by_client__user=ar.param_values.coached_by)
+        #~ if ar.param_values.coached_on:
+            #~ qs = only_coached_on(qs,ar.param_values.coached_on)
+        #~ if ar.param_values.coached_by:
+            #~ qs = only_coached_by(qs,ar.param_values.coached_by)
+        #~ if ar.param_values.only_primary:
+            #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
+            
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
             
@@ -1433,6 +1386,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
               
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
+            
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))
             yield unicode(self.parameters['only_primary'].verbose_name)
@@ -1789,12 +1743,14 @@ class UsersWithClients(dd.VirtualTable):
     def primary_clients(self,obj,ar):
         #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
         #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
-        return IntegClients.request(ar.ui,param_values=dict(only_primary=True,coached_by=obj))
+        return IntegClients.request(ar.ui,param_values=dict(
+            only_primary=True,coached_by=obj,coached_on=datetime.date.today()))
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        return IntegClients.request(ar.ui,param_values=dict(only_active=True,coached_by=obj))
+        return IntegClients.request(ar.ui,param_values=dict(
+            only_active=True,coached_by=obj,coached_on=datetime.date.today()))
 
 
 #
@@ -2234,28 +2190,25 @@ class ContactsByClient(ClientContacts):
     
     
 
-class CoachingStates(dd.Workflow):
-    """Lifecycle of a :class:`Coaching`."""
-    #~ label = _("Coaching state")
+#~ class CoachingStates(dd.Workflow):
+    #~ """Lifecycle of a :class:`Coaching`."""
     
-    @classmethod
-    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
+    #~ @classmethod
+    #~ def before_state_change(cls,obj,ar,kw,oldstate,newstate):
         
-        if newstate.name == 'ended':
-            #~ ar.confirm(_("%(user)s stops coaching %(client)s! Are you sure?") % dict(
-              #~ user=obj.user,client=obj.client))
-            obj.end_date = datetime.date.today()
-        elif newstate.name in ('active','standby'):
-            obj.end_date = None
+        #~ if newstate.name == 'ended':
+            #~ obj.end_date = datetime.date.today()
+        #~ elif newstate.name in ('active','standby'):
+            #~ obj.end_date = None
     
-add = CoachingStates.add_item
-#~ add('10', _("New"),'new')
-#~ add('10', _("Suggested"),'suggested')
-#~ add('20', _("Refused"),'refused')
-#~ add('30', _("Confirmed"),'confirmed')
-add('30', _("Active"),'active')
-add('40', _("Standby"),'standby')
-add('50', _("Ended"),'ended')
+#~ add = CoachingStates.add_item
+#~ # add('10', _("New"),'new')
+#~ # add('10', _("Suggested"),'suggested')
+#~ # add('20', _("Refused"),'refused')
+#~ # add('30', _("Confirmed"),'confirmed')
+#~ add('30', _("Active"),'active')
+#~ add('40', _("Standby"),'standby')
+#~ add('50', _("Ended"),'ended')
 
 class EndCoaching(dd.ChangeStateAction,dd.NotifyingAction):
     label = _("End coaching")
@@ -2283,17 +2236,17 @@ class EndCoaching(dd.ChangeStateAction,dd.NotifyingAction):
         
     
 
-#~ CoachingStates.suggested.set_required(owner=False)
-#~ CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
-#~ CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
-CoachingStates.active.add_workflow(_("Reactivate"),
-    states='standby ended',owner=True,
-    help_text=_("Client has become active again after having been ended or standby."))
-CoachingStates.standby.add_workflow(states='active',owner=True)
-CoachingStates.ended.add_workflow(EndCoaching)
-#~ CoachingStates.ended.add_workflow(_("End coaching"),
-    #~ help_text=_("User no longer coaches this client."),
-    #~ states='active standby',user_groups='integ',owner=True,notify=True)
+# CoachingStates.suggested.set_required(owner=False)
+# CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
+# CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
+#~ CoachingStates.active.add_workflow(_("Reactivate"),
+    #~ states='standby ended',owner=True,
+    #~ help_text=_("Client has become active again after having been ended or standby."))
+#~ CoachingStates.standby.add_workflow(states='active',owner=True)
+#~ CoachingStates.ended.add_workflow(EndCoaching)
+# CoachingStates.ended.add_workflow(_("End coaching"),
+    # help_text=_("User no longer coaches this client."),
+    # states='active standby',user_groups='integ',owner=True,notify=True)
 
 """
 CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
@@ -2357,7 +2310,7 @@ during a given period.
     end_date = models.DateField(
         blank=True,null=True,
         verbose_name=_("until"))
-    state = CoachingStates.field(default=CoachingStates.active)
+    #~ state = CoachingStates.field(default=CoachingStates.active)
     #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType,blank=True,null=True)
     primary = models.BooleanField(_("Primary"),
@@ -2487,14 +2440,14 @@ class CoachingsByClient(Coachings):
     
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date user primary workflow_buttons type id'
+    column_names = 'start_date end_date user primary type id'
 
 class CoachingsByUser(Coachings):
     master_key = 'user'
-    column_names = 'start_date end_date client type primary workflow_buttons id'
+    column_names = 'start_date end_date client type primary id'
 
 class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date client type primary workflow_buttons id'
+    column_names = 'start_date end_date client type primary id'
 
 #~ class MySuggestedCoachings(MyCoachings):
     #~ label = _("Suggested coachings")

@@ -336,7 +336,7 @@ class AvailableCoaches(users.Users):
             data.append(user)
             
         if client and len(data) == 0:
-            raise Warning(_("No coaches available for %s.") % client)
+            raise Warning(_("No coaches available for %s.") % client.faculty)
             
         def fn(a,b):
             return cmp(self.compute_workload(ar,a),self.compute_workload(ar,b))
@@ -381,23 +381,28 @@ class AvailableCoaches(users.Users):
         quota = obj.newcomer_quota * delta.days / decimal.Decimal('7.0')
         return decimal.Decimal(obj.new_clients.get_total_count() - quota)
     
-#~ class AssignCoach(dd.RowAction):
 class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
     show_in_workflow = True
-    help_text=u"""\
+    help_text = u"""\
 Diesen Benutzer als Begleiter für diesen Klienten eintragen 
 und den Zustand des Klienten auf "Begleitet" setzen.
 Anschließend wird der Klient in der Liste "Neue Klienten" 
 nicht mehr angezeigt."""
     
     def get_notify_subject(self,ar,obj,**kw):
-        return _('New client for %s') % obj
+        #~ return _('New client for %s') % obj
+        client = ar.master_instance
+        if client:
+            return _('%(client)s assigned to %(coach)s ') % dict(
+                client=client,coach=obj)
             
     def get_notify_body(self,ar,obj,**kw):
         client = ar.master_instance
         if client:
-            return _("Assign %(coach)s as %(faculty)s coach for client %(client)s.") % dict(
+            #~ return _("%(coach)s has been assigned as %(faculty)s coach for client %(client)s.") % dict(
+                #~ client=client,coach=obj,faculty=client.faculty)
+            return _("%(client)s is now coached by %(coach)s for %(faculty)s.") % dict(
                 client=client,coach=obj,faculty=client.faculty)
             
     def unused_get_action_permission(self,ar,obj,state):
@@ -425,8 +430,8 @@ nicht mehr angezeigt."""
         
         coaching = pcsw.Coaching(client=client,user=obj,
             start_date=datetime.date.today(),
-            type=obj.coaching_type,
-            state=pcsw.CoachingStates.active)
+            type=obj.coaching_type)
+            #~ state=pcsw.CoachingStates.active)
         #~ if not obj.profile:
             #~ coaching.state = pcsw.CoachingStates.active
         coaching.save()
@@ -438,25 +443,11 @@ nicht mehr angezeigt."""
         
         self.add_system_note(ar,coaching)
         
-        #~ if len(recipients):
-            #~ m = outbox.Mail(user=ar.get_user(),
-                #~ subject=_('Newcomer has been assigned'),
-                #~ body = body,
-                #~ project=client,
-                #~ owner=coaching)
-            #~ m.full_clean()
-            #~ m.save()
-            #~ for rec in recipients:
-                #~ r = outbox.Recipient(mail=m,**rec)
-                #~ r.full_clean()
-                #~ r.save()
-            #~ if ar.action_param_values.interactive:
-                #~ js = ar.renderer.instance_handler(ar,m)
-                #~ kw.update(eval_js=js)
-            #~ else:
-                #~ m.send_mail.run(m,ar)
-        msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
-        return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
+        #~ msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
+        #~ return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
+        #~ return ar.success_response(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
+        kw.update(refresh_all=True)
+        return kw
     
 
 class AvailableCoachesByClient(AvailableCoaches):

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 18:11+0100\n"
-"PO-Revision-Date: 2012-10-25 20:15+0200\n"
+"POT-Creation-Date: 2012-10-26 22:22+0100\n"
+"PO-Revision-Date: 2012-10-27 00:23+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr "Auch neu begleitete Klienten seit"
 msgid "Coached by"
 msgstr "Begleitet durch"
 
-#: .\models.py:289 .\models.py:465
+#: .\models.py:289 .\models.py:456
 msgid "Available Coaches"
 msgstr "Verfügbare Begleiter"
 
@@ -106,29 +106,30 @@ msgstr "Aktive Klienten"
 msgid "Workload"
 msgstr "Belastung"
 
-#: .\models.py:386
+#: .\models.py:385
 msgid "Assign"
 msgstr "Zuweisen"
 
-#: .\models.py:395
+#: .\models.py:397
 #, python-format
-msgid "New client for %s"
-msgstr "Neuer Klient für %s"
+msgid "%(client)s assigned to %(coach)s "
+msgstr "%(client)s zugewiesen zu %(coach)s"
 
-#: .\models.py:400
+#: .\models.py:405
 #, python-format
-msgid "Assign %(coach)s as %(faculty)s coach for client %(client)s."
-msgstr ""
-"%(coach)s zuweisen als Begleiter für %(client)s (Fachbereich %(faculty)s)."
+msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
+msgstr "%(client)s wird ab jetzt begleitet für %(faculty)s durch %(coach)s."
 
-#: .\models.py:458
-#, python-format
-msgid "Client %(client)s has been assigned to %(coach)s"
-msgstr "Klient %(client)s wurde zugewiesen zu Begleiter %(coach)s"
-
-#: .\models.py:550
+#: .\models.py:541
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
+
+#~ msgid "New client for %s"
+#~ msgstr "Neuer Klient für %s"
+
+#~ msgid "Assign %(coach)s as %(faculty)s coach for client %(client)s."
+#~ msgstr ""
+#~ "%(coach)s zuweisen als Begleiter für %(client)s (Fachbereich %(faculty)s)."
 
 #~ msgid "Score"
 #~ msgstr "Quote"

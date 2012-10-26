@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-25 18:11+0100\n"
+"POT-Creation-Date: 2012-10-26 22:22+0100\n"
 "PO-Revision-Date: 2012-06-25 13:19+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Coached by"
 msgstr "AI"
 
-#: .\models.py:289 .\models.py:465
+#: .\models.py:289 .\models.py:456
 msgid "Available Coaches"
 msgstr ""
 
@@ -106,28 +106,27 @@ msgstr "Clients actifs"
 msgid "Workload"
 msgstr ""
 
-#: .\models.py:386
+#: .\models.py:385
 msgid "Assign"
 msgstr ""
 
-#: .\models.py:395
-#, fuzzy, python-format
-msgid "New client for %s"
-msgstr "Nouveaux clients"
-
-#: .\models.py:400
+#: .\models.py:397
 #, python-format
-msgid "Assign %(coach)s as %(faculty)s coach for client %(client)s."
+msgid "%(client)s assigned to %(coach)s "
 msgstr ""
 
-#: .\models.py:458
+#: .\models.py:405
 #, python-format
-msgid "Client %(client)s has been assigned to %(coach)s"
+msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr ""
 
-#: .\models.py:550
+#: .\models.py:541
 msgid "Newcomers Quota"
 msgstr "Quota nouvelles demandes"
+
+#, fuzzy
+#~ msgid "New client for %s"
+#~ msgstr "Nouveaux clients"
 
 #~ msgid "Score"
 #~ msgstr "Score"
