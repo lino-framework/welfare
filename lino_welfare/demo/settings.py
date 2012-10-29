@@ -14,7 +14,7 @@
 import os
 from os.path import join, abspath, dirname
 
-from lino_welfare.settings import *
+from lino_welfare.modlib.pcsw.settings import *
 
 class Lino(Lino):
   
@@ -26,6 +26,7 @@ class Lino(Lino):
     use_jasmine = True
     use_davlink = False
     use_extensible = True
+    use_eid_jslib = False
           
     #~ def override_user_language(self):
         #~ return os.environ.get('OVERRIDE_USER_LANGUAGE')
