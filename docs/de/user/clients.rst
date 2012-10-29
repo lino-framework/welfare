@@ -61,7 +61,8 @@ Der Bearbeitungszustand eines Klienten kann sein:
   (diese Regel gilt jedoch nicht für importierte Klienten).
 
 - **Ehemalig** :
-  War mal begleitet, aber jetzt nicht mehr. Es existiert keine *aktive* Begleitung.
+  War mal begleitet, aber jetzt nicht mehr. 
+  Es existieren Begleitungen, aber keine davon ist *aktiv*.
   Falls es ein importierter Partner ist, 
   hatte er in TIM entweder das Attribut `W (Warnung bei Auswahl)`
   oder die Partnerart `I (Inaktive)`.
@@ -101,35 +102,6 @@ weil Dokumente mit der Partnernummer existieren).
 In Lino setzt man solche Klienten einfach in den Bearbeitungszustand "Ungültig".
 
   
-
-
-Begleitungen
-------------
-
-.. graphviz:: 
-   :caption: Arbeitsablauf einer Begleitung
-   
-   digraph foo {
-      suggested -> refused [label="[ablehnen]"];
-      standby -> refused;
-      suggested -> active [label="[akzeptieren]"];
-      standby -> active [label="[reaktivieren]"];
-      active -> standby;
-      standby -> ended [label="[beenden]"];
-      active -> ended [label="[beenden]"];
-      
-      active [label="Aktiv"];
-      suggested [label="Vorgeschlagen"];
-      refused [label="Abgelehnt"];
-      standby [label="Standby"];
-      ended [label="Beendet"];
-   }
-
-
-Ehemalige Klienten 
-------------------
-
-
 Veraltete Klienten (Altfälle)
 -----------------------------
 
@@ -140,11 +112,9 @@ Das Attribut "veraltet" bedeutet:
 die Daten des Partners werden nicht mehr gepflegt, alle Angaben verstehen sich 
 als "so war es, bevor dieser Partner aufhörte, uns zu interessieren".
 
-Es versteht sich von selbst, dass Altfälle normalerweise 
-ignoriert werden.
+Es versteht sich von selbst, dass Altfälle normalerweise ignoriert werden.
 Also "begleitete" Klienten können trotzdem 
-wie vom Erdboden verschwunden sein, weil sie als veraltet markiert wurden.
-
+wie vom Erdboden verschwunden scheinen, weil sie als veraltet markiert wurden.
 
 
 Regeln

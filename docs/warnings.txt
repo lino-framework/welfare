@@ -1,3 +1,4 @@
+WARNING: intersphinx inventory 'http://packages.python.org/lino/objects.inv' not fetchable due to <class 'urllib2.HTTPError'>: HTTP Error 404: Not Found
 T:\hgwork\welfare\docs\fr\user\screenshots.rst:: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.3.png
 T:\hgwork\welfare\docs\fr\user\screenshots.rst:: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.4.png
 T:\hgwork\welfare\docs\fr\user\intro.rst:: WARNING: document isn't included in any toctree
