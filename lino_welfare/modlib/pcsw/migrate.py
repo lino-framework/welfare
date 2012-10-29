@@ -400,7 +400,7 @@ def migrate_from_1_4_10(globals_dict):
     globals_dict.update(create_properties_proptype=create_properties_proptype)
     
     def create_isip_exampolicy(id, name, project_id, start_date, start_time, end_date, end_time, uid, summary, description, every, every_unit, calendar_id, name_fr, name_en):
-        return isip_ExamPolicy(id=id,name=name,project_id=project_id,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,summary=summary,description=description,every=every,every_unit=every_unit,calendar_id=calendar_id,name_fr=name_fr,name_en=name_en)    
+        return isip_ExamPolicy(id=id,name=name,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,summary=summary,description=description,every=every,every_unit=every_unit,calendar_id=calendar_id,name_fr=name_fr,name_en=name_en)    
     globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
     
     objects = globals_dict['objects']
