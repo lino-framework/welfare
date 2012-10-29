@@ -117,8 +117,8 @@ class ContractTypes(dd.Table):
 #
 # EXAMINATION POLICIES
 #
-#~ class ExamPolicy(babel.BabelNamed,cal.RecurrenceSet):
-class ExamPolicy(babel.BabelNamed,mixins.ProjectRelated,cal.RecurrenceSet):
+class ExamPolicy(babel.BabelNamed,cal.RecurrenceSet):
+#~ class ExamPolicy(babel.BabelNamed,mixins.ProjectRelated,cal.RecurrenceSet):
     """
     Examination policy. 
     This also decides about automatic tasks to be created.
