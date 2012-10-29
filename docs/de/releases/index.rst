@@ -1,7 +1,7 @@
 Releases
 ========
 
-Die aktuell stabile Version ist Teil von Lino 1.4, also nicht hier released.
+Die aktuell stabile Version ist :doc:`1.0.0`.
 
 Zur Zeit arbeiten wir an der :doc:`kommenden Version <coming>`.
 

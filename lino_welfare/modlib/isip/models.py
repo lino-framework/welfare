@@ -67,6 +67,9 @@ from lino.core.modeltools import obj2str, models_by_abc
 
 cal = dd.resolve_app('cal')
 
+COACHINGTYPE_ASD = 1          
+
+
 #~ class IntegTable(dd.Table):
   
     #~ @classmethod
@@ -265,7 +268,6 @@ class ContractBase(
                 #~ return self.person.coach2_id
             #~ return self.person.coach1 or self.user
             
-            
     def client_changed(self,request):
         """
         If the contract's author is the client's primary coach, 
@@ -276,14 +278,14 @@ class ContractBase(
         if self.client_id is not None:
             #~ pc = self.person.get_primary_coach()
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
-            qs = self.client.get_coachings(self.applies_from,type_id=1)
+            qs = self.client.get_coachings(self.applies_from,type__id=COACHINGTYPE_ASD)
             if qs.count() == 1:
-                integ_agent = qs[0].user
-                if integ_agent is None or integ_agent == self.user:
+                user_asd = qs[0].user
+                if user_asd is None or user_asd == self.user:
                 #~ if self.person.coach1_id is None or self.person.coach1_id == self.user_id:
                     self.user_asd = None
                 else:
-                    self.user_asd = integ_agent
+                    self.user_asd = user_asd
                 
     def on_create(self,ar):
         super(ContractBase,self).on_create(ar)
