@@ -329,7 +329,7 @@ def migrate_from_1_4_10(globals_dict):
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
         owner_type_id = new_content_type_id(owner_type_id)
-        if not state: state = cal.EventStates.draft
+        if not state: state = cal.EventStates.new
         return cal_Event(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,build_time=build_time,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,uid=uid,summary=summary,description=description,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,transparent=transparent,place_id=place_id,priority_id=priority_id,state=state)    
     globals_dict.update(create_cal_event=create_cal_event)
     def create_cal_task(id, owner_type_id, owner_id, user_id, created, modified, project_id, start_date, start_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, due_date, due_time, percent, state):
