@@ -75,6 +75,7 @@ def migrate_from_1_4_10(globals_dict):
     jobs_Contract = resolve_model("jobs.Contract")
     contacts_Role = resolve_model("contacts.Role")
     properties_PropType = resolve_model("properties.PropType")
+    isip_ExamPolicy = resolve_model("isip.ExamPolicy")    
     
     cal = dd.resolve_app('cal')
     pcsw = dd.resolve_app('pcsw')
@@ -397,6 +398,10 @@ def migrate_from_1_4_10(globals_dict):
             choicelist = 'contacts.Gender'
         return properties_PropType(id=id,name=name,choicelist=choicelist,default_value=default_value,limit_to_choices=limit_to_choices,multiple_choices=multiple_choices,name_fr=name_fr,name_en=name_en)    
     globals_dict.update(create_properties_proptype=create_properties_proptype)
+    
+    def create_isip_exampolicy(id, name, project_id, start_date, start_time, end_date, end_time, uid, summary, description, every, every_unit, calendar_id, name_fr, name_en):
+        return isip_ExamPolicy(id=id,name=name,project_id=project_id,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,summary=summary,description=description,every=every,every_unit=every_unit,calendar_id=calendar_id,name_fr=name_fr,name_en=name_en)    
+    globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
     
     objects = globals_dict['objects']
     def new_objects():
