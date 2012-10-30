@@ -140,12 +140,12 @@ def checkcc(person,pk,nType):
         #~ return
     qs = pcsw.ClientContact.objects.filter(
         client=person,
-        type_id=nType)
+        type__id=nType)
     if qs.count() == 0:
         cc = pcsw.ClientContact(
             client=person,
             company_id=pk,
-            type_id=nType)
+            type__id=nType)
         cc.save()
         changes.log_create(REQUEST,obj)
     elif qs.count() == 1:
