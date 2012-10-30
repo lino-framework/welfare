@@ -6,21 +6,11 @@ TODO
 
 Was ich noch machen muss:
 
-- Letzte Tests mit watch_tim.
-
 - Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
   Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
-  Muss das noch korrigiert werden?
   
 Feedback erwünscht
 ------------------
-
-- Meldung "20120912 lost : ..." in Bemerkung bei Melanie E. war irritierend.
-  Ist jetzt ausführlicher. 
-  Beispiele: Person 22340, 96000101, 96000137
-
-- Arbeitsablauf Klienten und Begleitungen testen und dokumentieren.
-  Kommentare zu :doc:`/user/clients`?
 
 - Änderungsprotokoll. 
   Konfiguration gemeinsam anschauen und klären, welche Tabellen protokoliert werden und welche nicht.
@@ -91,7 +81,8 @@ Lösung gemeldeter Probleme
 Neue Features
 --------------
 
-- Willkommensgruß. Die Idee ist, dass dort idealerweise keine Warnungen stehen sollten.
+- Willkommensgruß. 
+  Die Idee ist, dass dort idealerweise keine Warnungen stehen sollten.
 
 - Lino unterscheidet jetzt zwischen Klienten und Personen.
   Unter "Personen" verstehen wir *alle Menschen, die Lino kennt*. 
@@ -103,33 +94,36 @@ Neue Features
   Im Detail einer Person gibt es ein Feld "ist Klient". 
   Damit kann man eine bestehende Person zu einem Klienten machen.
   
-- Neue Tabelle "Klientenkontakte" ersetzt und erweitert die bisherigen Felder 
-  `Ansprechpartner ADG`, `Krankenkasse`, und `Apotheke`.
+- Überhaupt haben wir diverse Änderungen im Detail eines Klienten,
+  vor allem den neuen Reiter "Begleitungen":
   
-- Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
-  `Begleiter 1 und 2`. "Begleitungsart" ist Synonym für "Dienst" (umbenennen?).
-  Eine *primäre* Begleitung ist, was aus `TIM->IdUsr` importiert wurden.
+  - Arbeitsablauf Klienten. 
+    Das frühere Feld `is_active` wurde ersetzt durch Bearbeitsungszustand "Begleitet", 
+    das frühere Feld `newcomer` durch Zustand "Neuantrag".
+    Siehe :doc:`/user/clients`.
   
-- Arbeitsablauf Klienten und Begleitungen. 
-  haben ein neues Feld "Status". 
-  Das frühere Feld `is_active` wurde ersetzt durch Status "Begleitet", 
-  das frühere Feld `newcomer` durch Status "Neuantrag".
-  Siehe :doc:`/user/clients`.
+  - (für Neuanträge) eine Tabelle der "verfügbaren Begleiter"   
+  - Neue Tabelle "Klientenkontakte" (im Reiter "Begleitungen") 
+    ersetzt und erweitert die bisherigen Felder 
+    `Ansprechpartner ADG`, `Krankenkasse`, und `Apotheke`.
+  
+  - Neue Tabelle "Begleitungen" ersetzt die bisherigen Felder `Begleitet von/bis` und 
+    `Begleiter 1 und 2`. 
+    Eine *primäre* Begleitung ist, was aus `TIM->IdUsr` importiert wurden.
   
 - Neue Tabelle "Änderungen" 
   zeigt geloggte Änderungen im Webinterface statt in der `system.log`.
 
 - Neue Felder "Erstellt am/um" und "Letzte Änderung" pro `Partner`.
   
-- :menuselection:`Neuanträge --> Neue Klienten` hat jetzt einen Reiter "Neuanträge", 
-  wo Caroline u.a. die "verfügbaren Begleiter" sehen kann und per Mausklick zuweisen kann.
-  
+- Liste der offenen Kursanfragen  
 
 Nebenwirkungen  
 --------------
 
 - Sorry, aber ich musste euch eine Umstrukturierung des Hauptmenüs zumuten.  
-  Liegt daran, dass jetzt bald auch andere Dienste in Lino arbeiten.
+  Liegt daran, dass wir in vielen Listen jetzt die intuitiveren Filterparameter haben, 
+  und dass jetzt bald auch andere Dienste in Lino arbeiten.
   Zum Beispiel ist das Menü "Mein Menü" weg:
   die Befehle, die dort standen, sind jetzt unter ihren jeweiligen Titeln.
   Also z.B. 
@@ -138,15 +132,22 @@ Nebenwirkungen
   - :menuselection:`Mein Menü --> Meine Art.-60§7-Konventionen` steht jetzt unter 
     :menuselection:`DSBE --> Art.-60§7-Konventionen` 
   
-- Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan 
-  nicht gemacht. Ist das schlimm?
+- Die automatische Erinnerung "Begleitung endet in 1 Monat" wird momentan nicht gemacht. 
+  Ist das schlimm?
   
-- countries.City.type und Partner.region.
-  Visible in Detail of "All Partners" : Lino now features a field "region" 
+- Manche Personen haben unter Bemerkungen jetzt stehen:
+  "Datenmigration 20121024: Person hatte weder NISS noch Gesdos-Nr 
+  und wurde deshalb kein Klient. Folgende Angaben gingen dabei verloren : ..."
+  Beispiele: Person 22340, 96000101, 96000137
+
+- Im Detail von Personen und Partnern haben wir zwischen Land und Ort 
+  ein neues Feld "Region". Wird in Belgien nicht benutzt, aber ich habe 
+  mir noch nicht die Mühe gemacht, es euch zu verstecken.   
+  Lino now features a field "region" 
   to specify addresses. For Belgian addresses it contains the *province*.
   This field is not usually present in Belgian sites because it's not needed 
-  in our small country. But for a U.S. address 
-  for example it would contain the state.
+  in our small country. But for an address in the U.S. 
+  it would contain the state (or in Estonia the *maakond*).
 
 - Es gibt eine neue Tabelle "Kontenpläne" (Account Charts), in der bis 
   auf weiteres jedoch nur ein einziger Kontenplan "debts Default" steht. 

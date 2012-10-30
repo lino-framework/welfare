@@ -180,7 +180,8 @@ def pxs2client(row,person):
         #~ row.card_type = pcsw.BeIdCardType.items_dict.get(row['CARDTYPE'].strip(),'')
         #~ from lino.apps.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
-            person.card_type = pcsw.BeIdCardType.blank_item
+            #~ person.card_type = pcsw.BeIdCardType.blank_item
+            person.card_type = ''
         else:
             person.card_type = pcsw.BeIdCardType.get_by_value(str(row['CARDTYPE']))
             

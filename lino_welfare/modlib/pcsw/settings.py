@@ -101,6 +101,7 @@ class Lino(Lino):
         
         #~ self.modules.notes.Note.watch_changes(master_key='project')
         #~ self.modules.outbox.Mail.watch_changes(master_key='project')
+        #~ self.modules.cal.Event.watch_changes(master_key='project')
         #~ self.modules.debts.Budget.watch_changes(master_key='partner')
         
         # ContractBase is abstract, so it's not under self.modules
