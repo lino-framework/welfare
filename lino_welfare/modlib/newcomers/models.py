@@ -445,9 +445,9 @@ nicht mehr angezeigt."""
         
         #~ msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
         #~ return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
-        #~ return ar.success_response(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
-        kw.update(refresh_all=True)
-        return kw
+        return ar.success_response(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
+        #~ kw.update(refresh_all=True)
+        #~ return kw
     
 
 class AvailableCoachesByClient(AvailableCoaches):

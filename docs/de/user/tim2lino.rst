@@ -50,10 +50,12 @@ nach :class:`households.Household`
 oder
 nach :class:`pcsw.Client`. Die Entscheidung wird nach folgenden Regeln getroffen:
 
-- Wenn PAR->NB2 (NISS), Gesdos-Nr oder PAR->Memo unleer ist, wird es ein Klient.
-- Ansonsten, wenn `PAR->Allo` einen der Werte "Eheleute", "Herr und Frau" enthält, dann wird es ein Haushalt.
-- Ansonsten, wenn PAR->NoTva leer ist, wird es eine Person,
-- Ansonsten wird es eine Firma.
+- Wenn PAR->NB2 (NISS) oder Gesdos-Nr unleer, oder wenn Attribut N (Neuzugang) 
+  gesetzt ist, wird es ein **Klient**.
+- Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
+- Ansonsten, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
+  "Herr und Frau" enthält, dann wird es ein **Haushalt**.
+- Ansonsten wird es eine **Person**.
 
 Alle Partner stehen auch in ´contacts.Parter´.
 Das jeweilige id entspricht der Partnernummer (PAR->IdPar) 

@@ -271,17 +271,21 @@ def country2kw(row,kw):
 #~ def is_company(data):
 def PAR_model(data):
     """
-    - wer eine Nationalregisternummer hat ist eine Person, selbst wenn er auch eine MwSt-Nummer hat.
+    - wer eine NISS oder Gesdos-Nr hat ist ein Klient, selbst wenn er auch eine MwSt-Nummer hat.
+    - Neuzugänge (Attribut N) sind ebenfalls immer Klienten
     
     """
     if data.get('NB2',False): # NISS
         return Client
     if data.get('NB1',False): # gesdos-Nr
         return Client
+    attribs = data.get('ATTRIB',False)
+    if attribs and 'N' in attribs: # newcomer
+        return Client
     if data.get('NOTVA',False):
-        if data.get('ALLO','') in (u"Eheleute",):
-            return Household
         return Company
+    if data.get('ALLO','') in (u"Eheleute",):
+        return Household
     return Person
     
 
@@ -512,19 +516,37 @@ class PAR(Controller):
                               #~ u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
                               #~ data['IDUSR'],username,obj2str(obj))
                         #~ obj.coach1 = u
+                        """
+                        typical cases:
+                        - imported client has got assign_coach in Lino, then removed PARATTR_N in TIM
+                        """
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
+                            #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
+                            if coaching.user != u or coaching.end_date is not None or coaching.start_date is None:
                                 watcher = changes.Watcher(coaching)
                                 coaching.user = u
-                                coaching.start_date = obj.created
+                                if coaching.start_date is None:
+                                    coaching.start_date = obj.created
                                 coaching.end_date = None
                                 coaching.save()
                                 watcher.log_diff(REQUEST)
                         except pcsw.Coaching.DoesNotExist,e:
-                            coaching = pcsw.Coaching(client=obj,primary=True,user=u,start_date=obj.created)
-                            coaching.save()
-                            changes.log_create(REQUEST,coaching)
+                            try:
+                                coaching = pcsw.Coaching.objects.get(client=obj,user=u,end_date__isnull=True)
+                                watcher = changes.Watcher(coaching)
+                                coaching.primary = True
+                                coaching.save()
+                                watcher.log_diff(REQUEST)
+                            except pcsw.Coaching.DoesNotExist,e:
+                                coaching = pcsw.Coaching(client=obj,primary=True,user=u,start_date=obj.created)
+                                coaching.save()
+                                changes.log_create(REQUEST,coaching)
+                            except Exception,e:
+                                raise Exception("More than one primary coaching for %r by %r" % (obj,u))
+                        except Exception,e:
+                            raise Exception("More than one primary coaching for %r : %s" % (obj,e))
+
                     else:
                         #~ obj.coach1 = None
                         try:
