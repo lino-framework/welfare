@@ -1,6 +1,8 @@
 Version 1.0
 ===========
 
+Erste Inbetriebnahme am 30.10.2012, offizielles Release steht noch an.
+
 TODO
 ----
 

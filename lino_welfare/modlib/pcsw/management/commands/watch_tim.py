@@ -145,9 +145,9 @@ def checkcc(person,pk,nType):
         cc = pcsw.ClientContact(
             client=person,
             company_id=pk,
-            type__id=nType)
+            type=pcsw.ClientContactType.objects.get(id=nType))
         cc.save()
-        changes.log_create(REQUEST,obj)
+        changes.log_create(REQUEST,cc)
     elif qs.count() == 1:
         cc = qs[0]
         if cc.company_id != pk:
