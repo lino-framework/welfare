@@ -1,29 +1,39 @@
-Installing Lino/Welfare
+Installing Lino-Welfare
 =======================
 
-- First, install Lino as documented in `Installing Lino
-  <http://packages.python.org/lino/admin/install.html>`_
+- First, install Lino (the tramework) as documented 
+  in `Installing Lino <http://lino-framework.org/admin/install.html>`_
   
-- Download a copy of the Lino/Welfare repository to your snapshots 
+- Go to your snapshots directory::
+
+    cd ~/snapshots
+    
+- To **install a released version**, consult :doc:`/releases` 
+  to see which is the latest version, then download it using something 
+  like::
+  
+    wget http://pypi.python.org/packages/source/l/lino-welfare/lino-welfare-1.0.tar.gz
+    tar -xvzf lino-welfare-1.0.tar.gz
+  
+- To **install a development version**, 
+  download a copy of the Lino/Welfare repository to your snapshots 
   directory::
 
-    cd /var/snapshots
-    hg clone https://code.google.com/p/lino-welfare/
+    hg clone https://code.google.com/p/lino-welfare/ lino-welfare-dev
     
-- Add `/var/snapshots/lino-welfare` to your Python path. 
+- Add `~/snapshots/lino-welfare-dev` or `~/snapshots/lino-welfare-1.0`
+  to your `Python path <http://lino-framework.org/admin/pythonpath.html>`_. 
   To test whether this worked, you can issue the command::
   
-    python -m lino_welfare.settings
+    python -m lino_welfare.modlib.pcsw.settings
     
-  
-
 - In your project's `settings.py`, inherit from 
-  `lino_welfare.settings` by replacing the following line::
+  `lino_welfare.modlib.pcsw.settings` by replacing the following line::
 
-    from lino.apps.pcsw.settings import *
+    from lino.apps.presto.settings import *
     
   by this one::
     
-    from lino_welfare.settings import *
+    from lino_welfare.modlib.pcsw.settings import *
     
     

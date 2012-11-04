@@ -76,7 +76,8 @@ class Lino(Lino):
         add('200', _("Newcomers consultant"),       'U U _ U U _')
         add('300', _("Debts consultant"),           'U U _ _ _ U')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)
-        add('400', _("Readonly User"),              'U U U U U U', readonly=True)
+        #~ add('400', _("Readonly User"),              'U U U U U U', readonly=True)
+        add('400', _("Anonymous"),                  '_ _ _ _ _ _', readonly=True)
         add('500', _("CBSS only"),                  'U _ _ U _ _')
         add('900', _("Administrator"),              'A A A A A A',name='admin')
         
@@ -218,6 +219,39 @@ class Lino(Lino):
             for obj in model.objects.filter(user=user):
                 yield obj
                 
+    def get_installed_apps(self):
+        for a in super(Lino,self).get_installed_apps():
+            yield a
+            
+        yield 'lino.modlib.users'
+        #~ 'lino.modlib.workflows',
+        yield 'lino.modlib.countries'
+        #~ 'lino.modlib.documents',
+        yield 'lino.modlib.properties'
+        yield 'lino.modlib.contacts'
+        #~ 'lino.modlib.projects',
+        #~ 'lino.modlib.notes',
+        #~ 'lino.modlib.links',
+        yield 'lino.modlib.uploads'
+        #~ 'lino.modlib.thirds',
+        yield 'lino.modlib.outbox'
+        yield 'lino.modlib.cal'
+        yield 'lino.modlib.postings'
+        yield 'lino.modlib.households'
+        yield 'lino.modlib.accounts'
+        
+        # NOTE: ordering influences (1) main menu (2) fixtures loading
+        yield 'lino_welfare.modlib.pcsw' # pcsw.demo creates clients needed by cbss.demo
+        yield 'lino_welfare.modlib.cv'
+        yield 'lino_welfare.modlib.isip'
+        yield 'lino_welfare.modlib.jobs'
+        yield 'lino_welfare.modlib.courses'
+        yield 'lino_welfare.modlib.newcomers'
+        yield 'lino_welfare.modlib.debts'
+        yield 'lino_welfare.modlib.cbss'
+        yield 'lino.modlib.notes' # notes demo fixture creates notes for Clients 
+      
+                
 
 LINO = Lino(__file__,globals())
 
@@ -225,10 +259,11 @@ LINO = Lino(__file__,globals())
 TIME_ZONE = None
 
 
-INSTALLED_APPS = (
+#~ INSTALLED_APPS = (
+unused = (
   #~ 'django.contrib.auth',
   'django.contrib.contenttypes',
-  #~ 'django.contrib.sessions',
+  'django.contrib.sessions', # 20121103
   #~ 'django.contrib.sites',
   #~ 'django.contrib.markup',
   #~ 'lino.modlib.system',

@@ -383,7 +383,6 @@ class ContractBase(
 
 
 class ContractBaseTable(dd.Table):
-  
     parameters = dict(
       user = dd.ForeignKey(settings.LINO.user_model,blank=True),
       show_past = models.BooleanField(_("past contracts"),default=True),

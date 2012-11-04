@@ -23,7 +23,7 @@ import os
 
 #~ __version__ = file(os.path.join(os.path.dirname(
     #~ __file__),'..','VERSION')).read().strip()
-__version__ = "1.0"
+__version__ = "1.0.1"
 """
 Version number. 
 """
