@@ -44,7 +44,7 @@ LINO = Lino(__file__,globals())
 
 ADMINS = []
 
-LOGGING = dict(level='INFO')
+LOGGING = dict(level='INFO',filename=join(LINO.project_dir,'system.log'),tty=False)
 
 DEBUG = True
 

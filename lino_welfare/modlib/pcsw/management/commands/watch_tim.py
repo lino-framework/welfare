@@ -552,8 +552,8 @@ class PAR(Controller):
                         #~ obj.coach1 = None
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            coaching.delete()
                             changes.log_delete(REQUEST,coaching)
+                            coaching.delete()
                             
                         except pcsw.Coaching.DoesNotExist,e:
                             pass

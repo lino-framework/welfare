@@ -1,21 +1,14 @@
 Version 1.0
 ===========
 
-Erste Inbetriebnahme am 30.10.2012, offizielles Release steht noch an.
+Erste Inbetriebnahme am 30.10.2012, offizielles Release am 31.10.2012.
 
-TODO
-----
-
-Was ich noch machen muss:
-
-- Benutzer ohne Gruppe ``integ`` sehen trotzdem die DSBE-spezifische 
-  Tabelle "Benutzer und ihre Klienten" im Hauptbildschirm.
-  
 Feedback erwünscht
 ------------------
 
 - Änderungsprotokoll. 
   Konfiguration gemeinsam anschauen und klären, welche Tabellen protokoliert werden und welche nicht.
+
 
 
 Nach dem Release
