@@ -488,6 +488,10 @@ class PAR(Controller):
                 mapper.update(gesdos_id='NB1')
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
+                    if obj.national_id: 
+                        if not is_valid_niss(obj.national_id):
+                            dblogger.info("%s : invalid SSIN %s",obj2str(obj),obj.national_id)
+                            obj.national_id = None
                 #~ else 20121108:
                     #~ obj.national_id = str(obj.id)
                     #~ if obj.is_deprecated:
@@ -496,7 +500,7 @@ class PAR(Controller):
                     obj.client_state = pcsw.ClientStates.newcomer
                 elif data['IDPRT'] == 'I':
                     obj.client_state = pcsw.ClientStates.former
-                #~ elif is_valid_niss(obj.national_id):
+                #~ 
                 elif obj.national_id: # 20121108
                     obj.client_state = pcsw.ClientStates.coached
                 else:
