@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-26 22:22+0100\n"
-"PO-Revision-Date: 2012-10-20 17:57+0200\n"
+"POT-Creation-Date: 2012-11-08 20:28+0000\n"
+"PO-Revision-Date: 2012-11-08 22:31+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -361,12 +361,11 @@ msgstr "in Familie mit Vorstand "
 
 #: .\tx25.py:549
 msgid " born "
-msgstr ""
+msgstr " geboren "
 
 #: .\tx25.py:550
-#, fuzzy
 msgid " in "
-msgstr "in "
+msgstr " in "
 
 #: .\tx25.py:593 .\tx25.py:610 .\tx25.py:619 .\tx25.py:621 .\tx25.py:638
 #: .\tx25.py:698 .\tx25.py:1164
@@ -503,7 +502,7 @@ msgstr "Geprüfte legale Hauptadressen"
 
 #: .\tx25.py:935
 msgid "Pseudonyms"
-msgstr ""
+msgstr "Pseudonyme"
 
 #: .\tx25.py:943
 msgid "Aliases"
@@ -610,9 +609,8 @@ msgid "Declaration"
 msgstr "Deklaration"
 
 #: .\tx25.py:1195
-#, fuzzy
 msgid "Cessation"
-msgstr "Erstelldatum"
+msgstr "Beendigung"
 
 #: .\tx25.py:1203
 msgid "Passports"
