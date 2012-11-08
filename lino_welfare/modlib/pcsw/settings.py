@@ -251,16 +251,16 @@ class Lino(Lino):
         yield 'lino_welfare.modlib.cbss'
         yield 'lino.modlib.notes' # notes demo fixture creates notes for Clients 
       
-    def get_urls(self):
-        from django.conf.urls.defaults import patterns
-        rx = '^'
-        urlpatterns = patterns('')
-        if self.use_eid_jslib:
-            from lino_welfare import beid
-            urlpatterns += patterns('',
-                (rx+r'eid-jslib$', beid.EidJSlib.as_view()),
-            )
-        return urlpatterns
+    #~ def get_urls(self):
+        #~ from django.conf.urls.defaults import patterns
+        #~ rx = '^'
+        #~ urlpatterns = patterns('')
+        #~ if self.use_eid_jslib:
+            #~ from lino_welfare import beid
+            #~ urlpatterns += patterns('',
+                #~ (rx+r'eid-jslib$', beid.EidJSlib.as_view()),
+            #~ )
+        #~ return urlpatterns
         
                 
 
