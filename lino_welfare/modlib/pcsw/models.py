@@ -586,7 +586,7 @@ class Client(Person):
         unique=True,
         verbose_name=_("National ID")
         #~ blank=True,verbose_name=_("National ID")
-        ,validators=[niss_validator] # 20121108
+        #~ ,validators=[niss_validator] # 20121108
         )
         
     health_insurance = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
@@ -780,8 +780,8 @@ class Client(Person):
                 raise ValidationError(_("Circular reference"))
         #~ if not self.national_id:
             #~ self.national_id = str(self.id)
-        #~ 20121108 if self.client_state == ClientStates.coached:
-            #~ niss_validator(self.national_id)
+        if self.client_state == ClientStates.coached:
+            niss_validator(self.national_id)
         super(Client,self).full_clean(*args,**kw)
         
       
@@ -1489,7 +1489,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if ar.param_values.coached_by:
             s = unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
             if ar.param_values.and_coached_by:
-                s += " %s %s" % (_('and'),ar.param_values.coached_by)
+                s += " %s %s" % (unicode(_('and')),ar.param_values.and_coached_by)
                 
             if ar.param_values.coached_on:
                 yield s \
