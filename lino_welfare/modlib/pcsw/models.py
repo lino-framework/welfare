@@ -62,15 +62,18 @@ from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem
 from lino.utils.babel import language_choices
 #~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
 from lino.utils import babel 
+from lino.utils import join_words
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.xmlgen import html as xghtml
+from lino.utils import IncompleteDate
 
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
 from lino.core.modeltools import obj2str
 from lino.core import actions
+from lino.core import changes
 
 from lino.modlib.contacts import models as contacts
 from lino.modlib.notes import models as notes
@@ -446,8 +449,88 @@ ClientStates.former.add_workflow(_("Former"),
 #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
 
+class Getter(object):
+    def __init__(self,query_dict):
+        self.query_dict = query_dict
+        
+    def __getattr__(self,name):
+        return self.query_dict.get(name)
+
+from lino.core.modeltools import obj2str
+
+def card2client(data):
+    kw = dict()
+    def func(fldname,qname):
+        kw[fldname] = data[qname]
+    kw.update(first_name=join_words(
+        data['firstName1'],
+        data['firstName2'],
+        data['firstName3']))
+    #~ func('first_name','firstName1')
+    func('last_name','surname')
+    #~ func('card_valid_from','validityBeginDate')
+    #~ func('card_valid_until','validityEndDate')
+    #~ func('birth_date','birthDate')
+    kw.update(birth_date=IncompleteDate(*settings.LINO.parse_date(data['birthDate'])))
+    kw.update(card_valid_from=datetime.date(*settings.LINO.parse_date(data['validityBeginDate'])))
+    kw.update(card_valid_until=datetime.date(*settings.LINO.parse_date(data['validityEndDate'])))
+    func('national_id','nationalNumber')
+    return kw
 
 
+class BeIdReadCardAction(actions.ListAction):
+    """
+    client reads a belgian eid card (using :attr:`lino.Lino.use_eid_jslib`),
+    then sends the data to the server where this action's run method will 
+    be called.
+    """
+    js_handler = 'Lino.beid_read_card_handler'
+    http_method = 'POST'
+    sorry_msg = _("Sorry, I cannot handle that case: %s")
+
+    def run(self,row,ar,**kw):
+        assert row is None
+        #~ data = Getter(ar.request.POST)
+        data = ar.request.POST
+        attrs = card2client(data)
+        #~ ssin = data['nationalNumber']
+        ssin = data['nationalNumber']
+        qs = Client.objects.filter(national_id=ssin)
+        if qs.count() > 1:
+            return ar.error_response(self.sorry_msg % 
+                _("There are %(count)d clients with national id %(national_id)s.")
+                % dict(count=qs.count(),national_id=ssin))
+        if qs.count() == 0:
+            fkw = dict(last_name=attrs['last_name'])
+            fkw.update(national_id__isnull=True)
+            qs = Client.objects.filter(**fkw)
+            if qs.count():
+                pass
+            obj = Client(**attrs)
+            obj.full_clean()
+            obj.save()
+            changes.log_create(ar.request,obj)
+        if qs.count() == 1:
+            obj = qs[0]
+            watcher = changes.Watcher(obj)
+            diffs = []
+            for fldname,new in attrs.items():
+                fld = get_field(Client,fldname)
+                old = getattr(obj,fldname)
+                if old != new:
+                    diffs.append("%s : %s -> %s" % (fld.verbose_name,old,new))
+                    setattr(obj,fld.name,new)
+            if len(diffs):
+                msg = '\n<br/>'.join(diffs)
+                print msg
+                ar.confirm(msg)
+            obj.full_clean()
+            obj.save()
+            watcher.log_diff(ar.request)
+            return ar.success_response(_("%s has been saved.") % obj2unicode(elem))
+        #~ print 20121107, ar.request.POST
+        ar.confirm(_("national_id is %s : Are you sure?") % ssin)
+        return ar.success_response('Hallo')
 
     
 class Client(Person):
@@ -488,7 +571,7 @@ class Client(Person):
     birth_place = models.CharField(_("Birth place"),
         max_length=200,
         blank=True,
-        #null=True
+        #~ null=True
         )
     birth_country = models.ForeignKey("countries.Country",
         blank=True,null=True,
@@ -498,11 +581,12 @@ class Client(Person):
         #~ verbose_name=_("Civil state"),
         #~ choices=CIVIL_STATE_CHOICES) 
     civil_state = CivilState.field(blank=True) 
-    national_id = models.CharField(max_length=200,
+    #~ national_id = models.CharField(max_length=200,
+    national_id = dd.NullCharField(max_length=200,
         unique=True,
         verbose_name=_("National ID")
         #~ blank=True,verbose_name=_("National ID")
-        #~ ,validators=[niss_validator]
+        ,validators=[niss_validator] # 20121108
         )
         
     health_insurance = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
@@ -600,6 +684,8 @@ class Client(Person):
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
+    beid_read_card = BeIdReadCardAction(_("Read eID card"),required=dict(user_level='admin'))
+    
 
 
     #~ def update_system_note(self,note):
@@ -692,10 +778,10 @@ class Client(Person):
         if self.job_office_contact: 
             if self.job_office_contact.person_id == self.id:
                 raise ValidationError(_("Circular reference"))
-        if not self.national_id:
-            self.national_id = str(self.id)
-        if self.client_state == ClientStates.coached:
-            niss_validator(self.national_id)
+        #~ if not self.national_id:
+            #~ self.national_id = str(self.id)
+        #~ 20121108 if self.client_state == ClientStates.coached:
+            #~ niss_validator(self.national_id)
         super(Client,self).full_clean(*args,**kw)
         
       
@@ -773,11 +859,12 @@ class Client(Person):
         for o in find_them('coached_until', today, datetime.timedelta(days=30),
             _("coaching ends"),tab=1):
             yield o
+            
         
-    @dd.displayfield(_("Actions"))
-    def read_beid_card(self,ar):
-        return '[<a href="javascript:Lino.read_beid_card(%r)">%s</a>]' % (
-          str(ar.requesting_panel),unicode(_("Read eID card")))
+    #~ @dd.displayfield(_("Actions"))
+    #~ def read_beid_card(self,ar):
+        #~ return '[<a href="javascript:Lino.read_beid_card(%r)">%s</a>]' % (
+          #~ str(ar.requesting_panel),unicode(_("Read eID card")))
       
     @dd.virtualfield(dd.HtmlBox())
     def image(self,request):
@@ -1121,7 +1208,7 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Birth"))
     
     eid_panel = dd.Panel("""
-    read_beid_card:12 card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
+    card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
     """,label = _("eID card"))
 
     box4 = """
@@ -1316,6 +1403,10 @@ Nur Klienten, die höchstens so alt sind."""),
             blank=True,null=True,
             verbose_name=_("Coached by"),help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
+        and_coached_by = models.ForeignKey(users.User,
+            blank=True,null=True,
+            verbose_name=_("and by"),help_text=u"""\
+Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality = models.ForeignKey(countries.Country,blank=True,null=True,
             verbose_name=_("Nationality")),
         coached_on = models.DateField(_("Coached on"),
@@ -1331,7 +1422,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         **Persons.parameters)
     params_layout = """
     aged_from aged_to gender also_obsolete 
-    client_state coached_by coached_on only_primary nationality
+    client_state coached_by and_coached_by coached_on only_primary nationality
     """
     
             
@@ -1343,8 +1434,16 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
             
-        qs = add_coachings_filter(qs,ar.param_values.coached_by,ar.param_values.coached_on,ar.param_values.only_primary)
-        
+        qs = add_coachings_filter(qs,
+            ar.param_values.coached_by,
+            ar.param_values.coached_on,
+            ar.param_values.only_primary)
+        if ar.param_values.and_coached_by:
+            qs = add_coachings_filter(qs,
+                ar.param_values.and_coached_by,
+                ar.param_values.coached_on,
+                False)
+            
         #~ if ar.param_values.coached_on:
             #~ qs = only_coached_on(qs,ar.param_values.coached_on)
         #~ if ar.param_values.coached_by:
@@ -1387,20 +1486,23 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
             
+        if ar.param_values.coached_by:
+            s = unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+            if ar.param_values.and_coached_by:
+                s += " %s %s" % (_('and'),ar.param_values.coached_by)
+                
+            if ar.param_values.coached_on:
+                yield s \
+                    + _(' on %(date)s') % dict(date=babel.dtos(ar.param_values.coached_on))
+            else:
+                yield s
+        elif ar.param_values.coached_on:
+            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
+        
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))
             yield unicode(self.parameters['only_primary'].verbose_name)
             
-        if ar.param_values.coached_by:
-            if ar.param_values.coached_on:
-                yield unicode(self.parameters['coached_by'].verbose_name) \
-                    + ' ' + unicode(ar.param_values.coached_by) \
-                    + _(' on %(date)s') % dict(date=babel.dtos(ar.param_values.coached_on))
-            else:
-                yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
-        elif ar.param_values.coached_on:
-            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
-        
     
 class DebtsClients(Clients):
     #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
@@ -1450,7 +1552,7 @@ class IntegClients(Clients):
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
-    client_state coached_by coached_on only_primary also_obsolete 
+    client_state coached_by and_coached_by coached_on only_primary also_obsolete 
     aged_from aged_to gender nationality
     language wanted_property group only_active 
     """

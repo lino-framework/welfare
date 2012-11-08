@@ -302,8 +302,8 @@ def datarow(group,node,since,info):
         itnum = ''
     if hasattr(node,'Type'):
         group += " " + node.Type
-    if hasattr(node,'Status'):
-        group += " " + node.Status
+    #~ if hasattr(node,'Status'):
+        #~ group += " " + unicode(node.Status)
     if hasattr(node,'Structure'):
         group += " " + node.Structure
     return AttrDict(group=group,

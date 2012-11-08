@@ -488,15 +488,16 @@ class PAR(Controller):
                 mapper.update(gesdos_id='NB1')
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
-                else:
-                    obj.national_id = str(obj.id)
+                #~ else 20121108:
+                    #~ obj.national_id = str(obj.id)
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
                 if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
                     obj.client_state = pcsw.ClientStates.newcomer
                 elif data['IDPRT'] == 'I':
                     obj.client_state = pcsw.ClientStates.former
-                elif is_valid_niss(obj.national_id):
+                #~ elif is_valid_niss(obj.national_id):
+                elif obj.national_id: # 20121108
                     obj.client_state = pcsw.ClientStates.coached
                 else:
                     obj.client_state = pcsw.ClientStates.invalid

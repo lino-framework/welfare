@@ -27,6 +27,10 @@ set to ``"lino_welfare.modlib.pcsw.migrate"``.
 
 """
 
+import logging
+logger = logging.getLogger(__name__)
+
+
 import datetime
 from decimal import Decimal
 from django.conf import settings
@@ -419,3 +423,26 @@ def migrate_from_1_4_10(globals_dict):
     
     #~ return '1.4.11'
     return '1.0'
+    
+def migrate_from_1_0(globals_dict):
+    """
+    Set Client.national_id to None if equal to Client.id or invalid
+    """
+    #~ raise NotImplementedError()
+    
+    from lino.utils.niss import is_valid_niss
+    from lino.utils.mti import create_child
+    
+    
+    pcsw_Client = resolve_model("pcsw.Client")
+    contacts_Person = resolve_model("contacts.Person")
+    
+    def create_pcsw_client(person_ptr_id, remarks2, gesdos_id, is_cpas, is_senior, group_id, birth_place, birth_country_id, civil_state, national_id, health_insurance_id, pharmacy_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, residence_type, in_belgium_since, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_agents, job_office_contact_id, client_state, broker_id, faculty_id):
+        if not is_valid_niss(national_id):
+            if national_id != str(person_ptr_id):
+                logger.warning("Ignored invalid NISS %s for %d" % (national_id,person_ptr_id))
+                national_id = None
+        return create_child(contacts_Person,person_ptr_id,pcsw_Client,remarks2=remarks2,gesdos_id=gesdos_id,is_cpas=is_cpas,is_senior=is_senior,group_id=group_id,birth_place=birth_place,birth_country_id=birth_country_id,civil_state=civil_state,national_id=national_id,health_insurance_id=health_insurance_id,pharmacy_id=pharmacy_id,nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,residence_type=residence_type,in_belgium_since=in_belgium_since,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_agents=job_agents,job_office_contact_id=job_office_contact_id,client_state=client_state,broker_id=broker_id,faculty_id=faculty_id)
+    globals_dict.update(create_pcsw_client=create_pcsw_client)
+    
+    return '1.0.1'

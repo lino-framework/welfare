@@ -424,7 +424,7 @@ def objects():
         first_name=u"Tatjana",last_name=u"Kasennova",
         #~ first_name=u"Татьяна",last_name=u"Казеннова",
         city=kettenis,country='BE', 
-        national_id='1237',
+        #~ national_id='1237',
         birth_place="Moskau", # birth_country='SUHH',
         client_state=pcsw.ClientStates.newcomer,
         #~ newcomer=True,
@@ -474,7 +474,7 @@ def objects():
     
     alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
         email='alicia@example.com',
-        city=eupen,country='BE',gender=Gender.female)
+        city=eupen,country='BE',gender=Gender.female,language='fr')
     yield alicia
     alicia = User(username="alicia",partner=alicia,profile='100') 
     yield alicia
@@ -485,11 +485,17 @@ def objects():
     elmar = User(username="elmar",partner=elmar,profile='400') 
     yield elmar
     
-    charles = person(first_name=u"Charles",last_name=u"Cabeil-Esaice",
-        city=eupen,country='BE',gender=Gender.male)
-    yield charles
-    charles = User(username="charles",partner=charles,profile='500') 
-    yield charles
+    robert = person(first_name=u"Robert",last_name=u"Robinet",
+        city=eupen,country='BE',language='fr',gender=Gender.male)
+    yield robert
+    robert = User(username="robert",partner=robert,profile='900') 
+    yield robert
+    
+    #~ charles = person(first_name=u"Charles",last_name=u"Cabeil-Esaice",
+        #~ city=eupen,country='BE',gender=Gender.male)
+    #~ yield charles
+    #~ charles = User(username="charles",partner=charles,profile='500') 
+    #~ yield charles
     
     
     yield User(username="caroline",
@@ -829,7 +835,7 @@ def objects():
       c.short_code = short_code
       c.save()
       
-    root = User.objects.get(username='root')
+    #~ root = User.objects.get(username='root')
       
     #~ p = Client.objects.get(name=u"Ärgerlich Erna")
     #~ p.birth_date = i2d(19800301)
@@ -972,6 +978,10 @@ def objects():
             yield isip.Contract(type=ISIP_CONTRACT_TYPES.pop(),
                 #~ applies_from=af,
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
+                
+    for u in User.objects.exclude(profile=''):
+        u.set_password('1234')
+        u.save()
                 
 
 #~ print "20121010 pcsw.fixtures.demo has been imported"

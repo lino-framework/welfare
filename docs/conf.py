@@ -14,7 +14,7 @@
 import sys, os
 import lino_welfare
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
 
 
 # If your extensions are in another directory, add it here. If the directory
@@ -246,5 +246,6 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 
 
 intersphinx_mapping = {
-  'lino': ('http://packages.python.org/lino', None )
+  #~ 'lino': ('http://packages.python.org/lino', None )
+  'lino': ('http://www.lino-framework.org', None )
 }

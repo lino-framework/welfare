@@ -56,7 +56,7 @@ from lino.core.modeltools import resolve_model
 
 from lino.utils.instantiator import Instantiator
 #~ from lino.utils.choicelists import UserLevel
-from lino.modlib.users.models import UserProfiles
+from lino.dd import UserProfiles
 
 
 #~ def create_user(*args):

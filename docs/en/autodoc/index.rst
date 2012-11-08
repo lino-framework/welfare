@@ -13,21 +13,21 @@ extension.
 `settings`
 ----------
 
-.. automodule:: lino_welfare.settings
+.. automodule:: lino_welfare.modlib.pcsw.settings
     :members:
     :show-inheritance:
 
 `migrate`
 ----------
 
-.. automodule:: lino_welfare.migrate
+.. automodule:: lino_welfare.modlib.pcsw.migrate
     :members:
     :show-inheritance:
 
 `migrate_old`
 -------------
 
-.. automodule:: lino_welfare.migrate_old
+.. automodule:: lino_welfare.modlib.pcsw.migrate_old
     :members:
     :show-inheritance:
 
@@ -44,6 +44,5 @@ extension.
     lino_welfare.newcomers
 
 
-    lino_welfare.settings
 
 
