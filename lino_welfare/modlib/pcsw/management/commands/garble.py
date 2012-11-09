@@ -38,7 +38,7 @@ from lino.utils import Cycler, join_words
 
 #~ from lino.modlib.contacts.utils import name2kw, street2kw
 #~ from lino.utils import join_words
-from lino.utils.choicelists import Gender
+#~ from lino.utils.choicelists import Gender
 
 from lino import dd
 #~ from lino.core.modeltools import is_valid_email
@@ -82,7 +82,7 @@ NATIONALITIES = Cycler('BE','MA','BE','RU','BE','CD')
 #~ print 'Done'
 
       
-REQUEST = dblogger.PseudoRequest('garble')
+#~ REQUEST = dblogger.PseudoRequest('garble')
 
 class Command(BaseCommand):
     args = '(no arguments)'
@@ -93,6 +93,8 @@ class Command(BaseCommand):
         dbname = settings.DATABASES['default']['NAME']
         if not confirm("This is going to GARBLE your database (%s).\nAre you sure (y/n) ?" % dbname):
             raise CommandError("User abort.")
+            
+        contacts = dd.resolve_app('contacts')
             
         User = dd.resolve_model(settings.LINO.user_model)
         Person = dd.resolve_model(settings.LINO.person_model)
@@ -108,7 +110,7 @@ class Command(BaseCommand):
             else:
                 p.nationality = Country.objects.get(isocode=NATIONALITIES.pop())
                 p.last_name = LAST_NAMES.pop()
-                if p.gender == Gender.male:
+                if p.gender == contacts.Gender.male:
                     p.first_name = MALES.pop()
                     FEMALES.pop()
                 else:
@@ -120,8 +122,8 @@ class Command(BaseCommand):
                 p.save()
                 dblogger.info("%s from %s",unicode(p),unicode(p.nationality))
                 
-        MEN = Cycler(Person.objects.filter(gender=Gender.male).order_by('id'))
-        WOMEN = Cycler(Person.objects.filter(gender=Gender.female).order_by('id'))
+        MEN = Cycler(Person.objects.filter(gender=contacts.Gender.male).order_by('id'))
+        WOMEN = Cycler(Person.objects.filter(gender=contacts.Gender.female).order_by('id'))
         for h in Household.objects.all():
             if h.member_set.all().count() == 0:
                 he = MEN.pop()

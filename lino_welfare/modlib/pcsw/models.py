@@ -1421,7 +1421,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         **Persons.parameters)
     params_layout = """
-    aged_from aged_to gender also_obsolete 
+    aged_from aged_to gender also_obsolete
     client_state coached_by and_coached_by coached_on only_primary nationality
     """
     

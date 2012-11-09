@@ -193,7 +193,8 @@ class Lino(Lino):
 
         
         m = main.add_menu("site",_("Site"))
-        self.modules.lino.setup_site_menu(self,ui,user,m)
+        #~ self.modules.lino.setup_site_menu(self,ui,user,m)
+        self.on_each_app('setup_site_menu',ui,user,m)
         
         return main
       

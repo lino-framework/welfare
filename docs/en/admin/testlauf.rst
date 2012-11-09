@@ -1,23 +1,62 @@
-Manueller Testlauf DSBE
-=======================
+Manueller Testlauf
+==================
+
+Logdatei anzeigen
+-----------------
 
 - Um die system.log anzuzeigen, ein ssh-terminal auf lino öffnen und::
 
-    tail -f /var/log/lino/system.log
+    cd /usr/local/django/testlino
+    ./showlogs
+
+Navigation im Detail-Fenster
+----------------------------
+
+  
+- Anmelden als Administrator
+- :menuselection:`Kontakte --> Klienten`. 
+- Doppelklick auf einem Klienten der Liste, der nicht importiert ist.
+
+- Beachte oben rechts die *message area* des Navigators:
+  dort steht etwas im Stil "Record 4 von 57".
+  
+- Im Reiter "Sonstiges" das Feld "veraltet" einschalten. 
+
+- Sich den Namen des Klienten merken und dann Speichern.
+  Nach dem Speichern prüfen:
+  
+- ist der Klient noch der Gleiche?
+- wurden alle vier Navigationsbuttons deaktiviert?
+- steht die message area des Navigators auf "No navigation"?
+
 
 Speichern
 ---------
 
-- Detail einer *aus TIM importierten* Person aufrufen. 
+- :menuselection:`Kontakte --> Partner (alle)`. 
 
-  Ohne vorher was zu ändern den Speichern-Button der Person klicken.
-  Dadurch sollte sich nichts verändern und es dürfte *keine Änderung* in der system.log erscheinen.
-  :doc:`/blog/2011/0406`   
-  
-  Checkbox "circa" vom Geburtsdatum ankreuzen, Speichern. Bleibt sie angeschaltet?
-  Wieder ausschalten und wieder speichern. Bleibt sie ausgeschaltet?
+- Doppelklick auf dem ersten Partner der Liste
 
-  Im Reiter "Sprachen" eine neue Sprache in "Sprachkenntnisse" eingeben.
+- Im Navigator ist der Button "Vorige Seite" deaktiviert, die anderen drei Buttons nicht
+
+- Auf einem *aus TIM importierten* Partner:
+
+  - Ohne vorher was zu ändern den Speichern-Button klicken.
+    Dadurch sollte sich nichts verändern und es dürfte keine Änderung
+    im Änderungslog erscheinen.
+    
+
+
+- Auf einem Partner, der nicht importiert ist:
+
+  - Checkbox "veraltet" ankreuzen, Speichern. Bleibt sie angeschaltet?
+  - Wieder ausschalten und wieder speichern. Bleibt sie ausgeschaltet?
+
+
+Sprachkenntnisse
+----------------
+
+- Im Reiter "Sprachen" eine neue Sprache in "Sprachkenntnisse" eingeben.
   Die Änderung wird gleich nach Verlassen der Zelle in der :xfile:`system.log` 
   erscheinen.
   Dann den Speichern-Button der Person klicken.
@@ -25,7 +64,10 @@ Speichern
   in der :xfile:`system.log` erscheinen.
   :doc:`/blog/2011/0406`
 
-- Detail einer Firma aufrufen, die *kein Kursanbieter* ist.
+Polymorphie
+-----------
+
+- Detail einer Organisation aufrufen, die *kein Kursanbieter* ist.
 
   Ohne vorher was zu ändern den Speichern-Button klicken.
   Dabei sollte nichts passieren und es dürfte *keine Änderung* in der system.log erscheinen.

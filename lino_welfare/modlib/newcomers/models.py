@@ -314,6 +314,8 @@ class AvailableCoaches(users.Users):
         if client:
             if client.client_state != pcsw.ClientStates.newcomer:
                 raise Warning(_("Only for newcomers"))
+            if not client.national_id:
+                raise Warning(_("Only for newcomers with valid SSIN"))
             if not pcsw.is_valid_niss(client.national_id):
                 raise Warning(_("Only for newcomers with valid SSIN"))
             if not client.faculty:

@@ -4,18 +4,29 @@ Die kommende Version
 Neue Features
 -------------
 
-- Kliententabelle: Neben dem Parameter "Begleitet durch" gibt es jetzt ein 
-  weiteres Feld "und durch".
-  
-- eId-Karten einlesen. 
+- Neue Regel: die NR-Nr. eines Klienten darf ab jetzt *wohl* leer sein.
+  Die Konvention, dass bei Klienten mit unbekannter oder ungültiger
+  NR-Nr stattdessen die Partnernummer im Feld NR-Nr stehen muss, ist also nicht mehr nötig.
+  Wenn die NR-Nr ausgefüllt ist, muss sie weiterhin einzig sein.
+  Bei Dubletten kann man z.B. a, b dahinter setzen. 
+  Dadurch wird die Nummer (als NR-Nummer) freilich ungültig, 
+  was aber okay ist *solange der Klient nicht "Begleitet" ist*.
 
 - Lino is now able to do `Session-based authentication
   <http://lino-framework.org/blog/2012/1103.html>`_.
+  
+- eId-Karten einlesen : darf noch nicht benutzt werden. 
+  Button ist nur für Sysadmins sichtbar.
+
+  
 
 
 Behobene Fehler
 ---------------
 
+- Kliententabelle: Neben dem Parameter "Begleitet durch" gibt es jetzt ein 
+  weiteres Feld "und durch".
+  
 - Wenn man in TIM PAR->IdUsr auf leer setzte oder auf einen 
   Benutzer, den es in Lino nicht gibt, dann schaut watch_tim 
   nach, ob es eine primäre Begleitung für diesen Klienten gibt 
@@ -32,4 +43,11 @@ Behobene Fehler
   `1207 <http://lino-framework.org/blog/2012/1107.html>`_.
   
 - In der Tabelle "Resultate" einer Tx25 erschien manchmal lediglich eine Fehlermeldung 
-  "cannot concatenate 'str' and 'instance' objects"
+  "cannot concatenate 'str' and 'instance' objects".
+  
+  
+- Bei allen Windowsfenstern ist das Kreuzchen zum Schließen das *letzte*
+  Icon oben rechts, und *davor* das Maximieren. Bei Lino war es genau
+  umgekehrt. Jetzt nicht mehr.
+  
+  
