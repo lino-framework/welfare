@@ -225,6 +225,7 @@ class Lino(Lino):
             yield a
             
         yield 'lino.modlib.users'
+        yield 'lino.modlib.pages'
         #~ 'lino.modlib.workflows',
         yield 'lino.modlib.countries'
         #~ 'lino.modlib.documents',

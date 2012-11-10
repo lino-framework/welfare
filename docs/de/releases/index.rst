@@ -1,14 +1,17 @@
 Releases
 ========
 
-Die aktuell stabile Version ist :doc:`1.0.0`.
+- :doc:`1.0.1` : Pre-release (wird z.Zt. intensiv getestet)
 
-Zur Zeit arbeiten wir an der :doc:`kommenden Version <coming>`.
+- :doc:`1.0.0` : released (und schon veraltet)
+
+- :doc:`coming` : Planung hat begonnen
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
    coming
+   *
 
 

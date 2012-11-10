@@ -1,5 +1,5 @@
 Coming
 ======
 
-(This page is currently maintained in German only.)
+(This page currently not available in English. Try the other languages.)
 
