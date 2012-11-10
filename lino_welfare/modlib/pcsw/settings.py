@@ -41,6 +41,8 @@ class Lino(Lino):
     
     remote_user_header = "REMOTE_USER"
     
+    #~ admin_url = '/admin'
+    
     override_modlib_models = [
         'contacts.Partner', 'contacts.Person', 'contacts.Company',
         'households.Household'
@@ -225,7 +227,7 @@ class Lino(Lino):
             yield a
             
         yield 'lino.modlib.users'
-        yield 'lino.modlib.pages'
+        #~ yield 'lino.modlib.pages'
         #~ 'lino.modlib.workflows',
         yield 'lino.modlib.countries'
         #~ 'lino.modlib.documents',
@@ -270,44 +272,3 @@ LINO = Lino(__file__,globals())
 
 #~ TIME_ZONE = 'Europe/Brussels'
 TIME_ZONE = None
-
-
-#~ INSTALLED_APPS = (
-unused = (
-  #~ 'django.contrib.auth',
-  'django.contrib.contenttypes',
-  'django.contrib.sessions', # 20121103
-  #~ 'django.contrib.sites',
-  #~ 'django.contrib.markup',
-  #~ 'lino.modlib.system',
-  'lino',
-  'lino.modlib.users',
-  #~ 'lino.modlib.workflows',
-  'lino.modlib.countries',
-  #~ 'lino.modlib.documents',
-  'lino.modlib.properties',
-  'lino.modlib.contacts',
-  #~ 'lino.modlib.projects',
-  #~ 'lino.modlib.notes',
-  #~ 'lino.modlib.links',
-  'lino.modlib.uploads',
-  #~ 'lino.modlib.thirds',
-  'lino.modlib.outbox',
-  'lino.modlib.cal',
-  'lino.modlib.postings',
-  'lino.modlib.households',
-  'lino.modlib.accounts',
-  
-  # NOTE: ordering influences (1) main menu (2) fixtures loading
-  'lino_welfare.modlib.pcsw', # pcsw.demo creates clients needed by cbss.demo
-  'lino_welfare.modlib.cv',
-  'lino_welfare.modlib.isip',
-  'lino_welfare.modlib.jobs',
-  'lino_welfare.modlib.courses',
-  'lino_welfare.modlib.newcomers',
-  'lino_welfare.modlib.debts',
-  'lino_welfare.modlib.cbss',
-  'lino.modlib.notes', # notes demo fixture creates notes for Clients 
-)
-
-
