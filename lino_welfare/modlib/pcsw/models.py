@@ -477,7 +477,6 @@ def card2client(data):
     func('national_id','nationalNumber')
     return kw
 
-
 class BeIdReadCardAction(actions.ListAction):
     """
     client reads a belgian eid card (using :attr:`lino.Lino.use_eid_jslib`),
@@ -487,6 +486,12 @@ class BeIdReadCardAction(actions.ListAction):
     js_handler = 'Lino.beid_read_card_handler'
     http_method = 'POST'
     sorry_msg = _("Sorry, I cannot handle that case: %s")
+    
+    def get_view_permission(self,user):
+        if not settings.LINO.use_eid_jslib:
+            return False
+        return super(BeIdReadCardAction,self).get_view_permission(user)
+
 
     def run(self,row,ar,**kw):
         assert row is None
@@ -684,10 +689,9 @@ class Client(Person):
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
-    beid_read_card = BeIdReadCardAction(_("Read eID card"),required=dict(user_level='admin'))
+    beid_read_card = BeIdReadCardAction(_("Read eID card"),
+        required=dict(user_level='admin'))
     
-
-
     #~ def update_system_note(self,note):
         #~ note.project = self
             

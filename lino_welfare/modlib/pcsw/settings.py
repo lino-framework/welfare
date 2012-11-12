@@ -41,6 +41,8 @@ class Lino(Lino):
     
     remote_user_header = "REMOTE_USER"
     
+    use_eid_jslib = True
+    
     #~ admin_url = '/admin'
     
     override_modlib_models = [

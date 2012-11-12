@@ -5,9 +5,11 @@ invoke using
   
 */
 
+LINO_ROOT = '../../../lino'
+
 //~ Load library functions
 //~ phantom.libraryPath = '../../lino/media/phantomjs'
-phantom.injectJs('../../lino/media/phantomjs/screenshooter.js');
+phantom.injectJs(LINO_ROOT + '/media/phantomjs/screenshooter.js');
 
 //~ Configuration options
 SERVER_ROOT = 'http://127.0.0.1:8000';
@@ -16,7 +18,11 @@ var system = require('system');
 //~ var LANGUAGE = system.env.OVERRIDE_USER_LANGUAGE;
 var LANGUAGE = system.args[1];
 
-OUTPUT_ROOT = LANGUAGE + '/gen/screenshots';
+OUTPUT_ROOT = '../../docs/' + LANGUAGE + '/gen/screenshots';
+
+var fs = require('fs');
+
+if (!fs.exists(OUTPUT_ROOT)) { console.error('OUTPUT_ROOT does not exist:' + OUTPUT_ROOT); phantom.exit()}
 
 
 //~ Declare screenshots to take

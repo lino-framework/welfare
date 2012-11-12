@@ -27,6 +27,7 @@ class Lino(Lino):
     use_davlink = False
     use_extensible = True
     use_eid_jslib = False
+    remote_user_header = None # 20121003
           
     #~ def override_user_language(self):
         #~ return os.environ.get('OVERRIDE_USER_LANGUAGE')

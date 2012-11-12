@@ -58,3 +58,10 @@ Behobene Fehler
   
   
   
+Known bugs
+----------
+
+- Wenn man einem Klienten (Neuantrag) eine ungültige NISS eingibt, dann sagt Lino 
+  das nicht direkt.
+
+  
