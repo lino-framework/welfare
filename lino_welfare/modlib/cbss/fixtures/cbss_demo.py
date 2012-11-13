@@ -62,7 +62,7 @@ if cbss:
     def objects():
       
         User = dd.resolve_model(settings.LINO.user_model)
-        root = User.objects.get(username='root')
+        root = User.objects.get(username='hubert')
         Client = dd.resolve_model('pcsw.Client')
         #~ PERSONS = Cycler(Person.objects.filter(coached_from__isnull=False).order_by('id'))
         CLIENTS = Cycler(Client.objects.all().order_by('id'))

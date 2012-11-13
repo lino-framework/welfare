@@ -363,7 +363,7 @@ class Controller:
             dblogger.warning("%s:%s : DELETE failed (does not exist)",
                 kw['alias'],kw['id'])
             return
-        msg = obj.disable_delete(ar)
+        msg = obj.disable_delete(REQUEST)
         if msg:
             dblogger.warning("%s:%s : DELETE failed: %s",kw['alias'],kw['id'],msg)
             return

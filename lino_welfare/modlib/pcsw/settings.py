@@ -18,15 +18,15 @@ Default settings of a Lino/Welfare site.
 """
 
 import os
-#~ import lino
 
 from lino.apps.std.settings import *
+from lino_welfare import __version__, __url__, __name__
 
 class Lino(Lino):
     """
     """
     source_dir = os.path.dirname(__file__)
-    title = "Lino/PCSW"
+    title = __name__
     #~ domain = "pcsw.saffre-rumma.net"
     help_url = "http://packages.python.org/lino-welfare"
     migration_module = 'lino_welfare.modlib.pcsw.migrate'
@@ -50,6 +50,15 @@ class Lino(Lino):
         'households.Household'
         ]
         
+        
+    def get_application_description(self):
+        import lino
+        s = """
+        %s is a customizable <a href="%s">Lino</a> application 
+        to be used in Belgian Public Centres for Social Welfare.
+        """ % (__name__,lino.__url__)
+        return s
+        
     def get_app_source_file(self):
         return __file__
         
@@ -60,8 +69,7 @@ class Lino(Lino):
         return a
         
     def get_application_info(self):
-        from lino_welfare import __version__, __url__
-        return ("Lino/Welfare",__version__,__url__)
+        return (__name__,__version__,__url__)
         
         
     anonymous_user_profile = '400'

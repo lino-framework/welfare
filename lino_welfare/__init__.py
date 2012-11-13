@@ -20,6 +20,7 @@ file since it does not import any django module.
 
 import os
 
+__name__ = "Lino/Welfare"
 
 #~ __version__ = file(os.path.join(os.path.dirname(
     #~ __file__),'..','VERSION')).read().strip()

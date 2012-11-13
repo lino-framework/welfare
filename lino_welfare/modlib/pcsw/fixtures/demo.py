@@ -479,17 +479,17 @@ def objects():
     alicia = User(username="alicia",partner=alicia,profile='100') 
     yield alicia
     
-    elmar = person(first_name=u"Elmar",last_name=u"Elsen",
-        city=eupen,country='BE',gender=Gender.male)
-    yield elmar
-    elmar = User(username="elmar",partner=elmar,profile='400') 
-    yield elmar
+    #~ elmar = person(first_name=u"Elmar",last_name=u"Elsen",
+        #~ city=eupen,country='BE',gender=Gender.male)
+    #~ yield elmar
+    #~ elmar = User(username="elmar",partner=elmar,profile='400') 
+    #~ yield elmar
     
-    robert = person(first_name=u"Robert",last_name=u"Robinet",
-        city=eupen,country='BE',language='fr',gender=Gender.male)
-    yield robert
-    robert = User(username="robert",partner=robert,profile='900') 
-    yield robert
+    #~ robert = person(first_name=u"Robert",last_name=u"Robinet",
+        #~ city=eupen,country='BE',language='fr',gender=Gender.male)
+    #~ yield robert
+    #~ robert = User(username="robert",partner=robert,profile='900') 
+    #~ yield robert
     
     #~ charles = person(first_name=u"Charles",last_name=u"Cabeil-Esaice",
         #~ city=eupen,country='BE',gender=Gender.male)
