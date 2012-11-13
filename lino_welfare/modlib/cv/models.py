@@ -100,7 +100,8 @@ class CefLevel(dd.ChoiceList):
     | http://www.telc.net/en/what-telc-offers/cef-levels/a2/
     
     """
-    label = _("CEF level")
+    verbose_name = _("CEF level")
+    verbose_name_plural = _("CEF levels")
     show_values = True
     
     #~ @classmethod

@@ -201,7 +201,7 @@ class RequestStates(dd.Workflow):
     """
     The status of a :class:`CBSSRequest`.
     """
-    label = _("State")
+    #~ label = _("State")
 
 add = RequestStates.add_item
 #~ add('0',_("New"),'new')
@@ -1371,7 +1371,7 @@ class ManageAction(ChoiceList):
     Possible values for the 
     `action` field of a :class:`ManageAccessRequest`.
     """
-    label = _("Action")
+    verbose_name = _("Action")
 
 add = ManageAction.add_item
 add('1',_("Register"),'REGISTER')
@@ -1385,7 +1385,7 @@ class QueryRegister(ChoiceList):
     `query_register` field of a :class:`ManageAccessRequest`.
     
     """
-    label = _("Query Register")
+    verbose_name = _("Query Register")
 
 add = QueryRegister.add_item
 add('1',_("Primary"),'PRIMARY')

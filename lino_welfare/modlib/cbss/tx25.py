@@ -55,7 +55,7 @@ from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
 from lino.utils.babel import dtos
-from lino.utils.choicelists import ChoiceList
+#~ from lino.utils.choicelists import ChoiceList
 
 
 
@@ -68,8 +68,8 @@ except ImportError, e:
 from lino_welfare.modlib.cbss.models import NewStyleRequest,SSIN, get_client, \
   CBSSRequestDetail, CBSSRequests, cbss2gender, RequestStates, CBSS_ERROR_MESSAGE
   
-class RequestLanguages(ChoiceList):
-    label = _("Language")
+class RequestLanguages(dd.ChoiceList):
+    verbose_name = _("Language")
 add = RequestLanguages.add_item
 add("nl",_("Dutch"),"nl")
 add("fr",_("French"),"fr")

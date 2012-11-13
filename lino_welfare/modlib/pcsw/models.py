@@ -115,7 +115,8 @@ class CivilState(dd.ChoiceList):
     Civil states, using Belgian codes.
     
     """
-    label = _("Civil state")
+    verbose_name = _("Civil state")
+    verbose_name_plural = _("Civil states")
     
     @classmethod
     def old2new(cls,old): # was used for migrating to 1.4...
@@ -164,7 +165,7 @@ class ResidenceType(dd.ChoiceList):
     Types of registries for the Belgian residence.
     
     """
-    label = _("Residence type")
+    verbose_name = _("Residence type")
     
 add = ResidenceType.add_item
 add('1', _("Registry of citizens"))    # Bevölkerungsregister registre de la population
@@ -177,7 +178,7 @@ class BeIdCardType(dd.ChoiceList):
     List of Belgian Identification Card Types.
     
     """
-    label = _("eID card type")
+    verbose_name = _("eID card type")
     
 add = BeIdCardType.add_item
 add('1',_("Belgian citizen")) 
@@ -2800,6 +2801,7 @@ def setup_explorer_menu(site,ui,user,m):
     m.add_action(ClientContacts)
     m.add_action(Exclusions)
     m.add_action(PersonSearches)
+    m.add_action(CivilState)
     
 
 def site_setup(site):

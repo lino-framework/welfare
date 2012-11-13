@@ -61,7 +61,7 @@ from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
 from lino.core.modeltools import obj2str
-from lino.utils.choicelists import ChoiceList
+#~ from lino.utils.choicelists import ChoiceList
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.models import update_reminder
@@ -347,7 +347,7 @@ class CourseOffersByProvider(CourseOffers):
 
 
 class CourseRequestStates(dd.Workflow):
-    label = _("State")
+    #~ label = _("State")
     
     @classmethod
     def migrate(cls,old):
