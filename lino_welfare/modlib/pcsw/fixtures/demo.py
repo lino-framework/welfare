@@ -456,7 +456,7 @@ def objects():
       
     DIRECTORS = (annette,hans,andreas,bernard)
     
-    yield User(username='gerd',partner=gerd,profile='900')
+    #~ yield User(username='gerd',partner=gerd,profile='900')
     
     melanie = person(first_name=u"Mélanie",last_name=u"Mélard",
         email='melanie@example.com',
