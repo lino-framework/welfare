@@ -63,16 +63,16 @@ class Lino(Lino):
         return __file__
         
     def get_main_action(self,user):
-        a = self.modules.lino.Home.default_action
-        if a is None:
-            raise Exception("20121004 self.modules.lino.Home.get_url_action('default_action') returned None")
-        return a
+        return self.modules.lino.Home.default_action
+        #~ a = self.modules.lino.Home.default_action
+        #~ if a is None:
+            #~ raise Exception("20121004 self.modules.lino.Home.get_url_action('default_action') returned None")
+        #~ return a
         
     def get_application_info(self):
         return (__name__,__version__,__url__)
         
         
-    anonymous_user_profile = '400'
     
     #~ def setup_user_profiles(self):
     def setup_choicelists(self):
@@ -83,13 +83,13 @@ class Lino(Lino):
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset('* office integ cbss newcomers debts')
         add = dd.UserProfiles.add_item
+        add('000', _("Anonymous"),                  '_ _ _ _ _ _', name='anonymous', readonly=True)
         add('100', _("Integration Agent"),          'U U U U _ _')
         add('110', _("Integration Agent (Senior)"), 'U M M U _ _')
         add('200', _("Newcomers consultant"),       'U U _ U U _')
         add('300', _("Debts consultant"),           'U U _ _ _ U')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)
         #~ add('400', _("Readonly User"),              'U U U U U U', readonly=True)
-        add('400', _("Anonymous"),                  '_ _ _ _ _ _', readonly=True)
         add('500', _("CBSS only"),                  'U _ _ U _ _')
         add('900', _("Administrator"),              'A A A A A A',name='admin')
         
