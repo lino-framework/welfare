@@ -22,6 +22,8 @@ from lino.core.modeltools import resolve_model
 from lino.utils.babel import babel_values, babelitem
 #~ from lino.core.perms import UserProfiles
 
+from lino import dd
+
 def objects():
   
     #~ from lino.modlib.users.models import 
