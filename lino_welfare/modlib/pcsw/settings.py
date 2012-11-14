@@ -144,7 +144,6 @@ class Lino(Lino):
         from django.utils.translation import ugettext_lazy as _
         from django.utils.translation import string_concat
         from django.db import models
-        from lino.utils.choicelists import UserLevels
         from lino import dd
         contacts = dd.resolve_app("contacts")
         
@@ -189,14 +188,14 @@ class Lino(Lino):
         m = main.add_menu("reports",_("Listings"))
         self.on_each_app('setup_reports_menu',ui,user,m)
         
-        if user.profile.level >= UserLevels.manager: # is_staff:
+        if user.profile.level >= dd.UserLevels.manager: # is_staff:
             cfg = main.add_menu("config",_("Configure"))
             
             self.on_each_app('setup_config_menu',ui,user,cfg)
             
             
             
-        if user.profile.level >= UserLevels.manager: # is_staff:
+        if user.profile.level >= dd.UserLevels.manager: # is_staff:
           
             m = main.add_menu("explorer",_("Explorer"))
             self.on_each_app('setup_explorer_menu',ui,user,m)
