@@ -42,7 +42,7 @@ ONE_DAY = datetime.timedelta(days=1)
 
 from lino import dd
 #~ from lino import layouts
-from lino.core import perms
+#~ from lino.core import perms
 from lino.utils import dblogger
 #~ from lino.utils import printable
 from lino import mixins
