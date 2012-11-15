@@ -1,3 +1,5 @@
 Die kommende Version
 ====================
 
+Bugfixes
+--------
