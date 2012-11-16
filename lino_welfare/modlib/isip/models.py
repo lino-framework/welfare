@@ -547,7 +547,7 @@ class ContractDetail(dd.FormLayout):
 
 
 class Contracts(ContractBaseTable):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     model = Contract
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']

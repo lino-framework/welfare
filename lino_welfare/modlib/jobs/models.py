@@ -138,7 +138,7 @@ class Schedule(babel.BabelNamed):
         verbose_name_plural = _('Work Schedules')
         
 class Schedules(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     model = Schedule
     order_by = ['name']
     detail_layout = """
@@ -153,7 +153,7 @@ class Regime(babel.BabelNamed):
         verbose_name_plural = _('Work Regimes')
         
 class Regimes(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Regime
@@ -208,7 +208,7 @@ class JobProviders(contacts.Companies,dd.Table):
     """
     List of Companies that have `Company.is_jobprovider` activated.
     """
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     #~ use_as_default_table = False
@@ -248,7 +248,7 @@ class ContractType(mixins.PrintableType,babel.BabelNamed):
         
 
 class ContractTypes(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = ContractType
@@ -271,7 +271,7 @@ class Sector(babel.BabelNamed):
         verbose_name=_("Remark"))
         
 class Sectors(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Sector
@@ -298,7 +298,7 @@ class Function(babel.BabelNamed):
         #~ blank=True,null=True)
         
 class Functions(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Function
@@ -566,7 +566,7 @@ class ContractDetail(dd.FormLayout):
   
 #~ class Contracts(dd.Table):
 class Contracts(isip.ContractBaseTable):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Contract
@@ -574,6 +574,10 @@ class Contracts(isip.ContractBaseTable):
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'.split()
     detail_layout = ContractDetail()
+    insert_layout = dd.FormLayout("""
+    client
+    job
+    """,window_size=(60,'auto'))    
     
     parameters = dict(
       type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
@@ -703,7 +707,7 @@ class Offer(SectorFunction):
         return u'%s @ %s' % (self.function,self.provider)
   
 class Offers(dd.Table):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Offer
@@ -726,14 +730,14 @@ class StudyType(babel.BabelNamed):
         verbose_name_plural = _("study types")
 
 class StudyTypes(dd.Table):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ label = _('Study types')
     model = StudyType
     order_by = ["name"]
 
 
 class HistoryByPerson(dd.Table):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     master_key = 'person'
     order_by = ["started"]
     
@@ -787,7 +791,7 @@ class Study(CountryCity):
 
 class Studies(dd.Table):
     "General list of Studies (all Persons)"
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     model = Study
     order_by = "country city type content".split()
 
@@ -834,7 +838,7 @@ class Experience(SectorFunction):
         return unicode(self.title)
   
 class Experiences(dd.Table):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     model = Experience
   
 class ExperiencesByFunction(Experiences):
@@ -844,7 +848,7 @@ class ExperiencesByFunction(Experiences):
     
 class ExperiencesByPerson(Experiences,HistoryByPerson):
     "List of job experiences for a known person"
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ model = Experience
     column_names = "company started stopped title sector function country remarks"
     
@@ -1041,7 +1045,7 @@ class Candidatures(dd.Table):
     """
     List of :class:`Candidatures <Candidature>`.
     """
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Candidature
@@ -1049,7 +1053,7 @@ class Candidatures(dd.Table):
     column_names = 'date_submitted job:25 active * id'
 
 class CandidaturesByPerson(Candidatures):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
 
@@ -1060,7 +1064,7 @@ class CandidaturesByFunction(Candidatures):
     master_key = 'function'
 
 class CandidaturesByJob(Candidatures):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'job'
     column_names = 'date_submitted person:25 * id'
@@ -1134,7 +1138,7 @@ class ExperiencesByOffer(SectorFunctionByOffer):
 
 
 class Jobs(dd.Table):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = Job
@@ -1151,7 +1155,7 @@ class Jobs(dd.Table):
     
 
 class JobTypes(dd.Table):
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = JobType
@@ -1211,7 +1215,7 @@ COLS = 8
 class JobsOverview(mixins.EmptyTable):
     """
     """
-    required = dict(user_groups=['integ'])
+    required = dd.required(user_groups=['integ'])
     label = _("Contracts Situation") 
     #~ detail_layout = JobsOverviewDetail()
     detail_layout = "body"
