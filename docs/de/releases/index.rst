@@ -1,11 +1,12 @@
 Releases
 ========
 
-- :doc:`1.0.1` : Pre-release (wird z.Zt. intensiv getestet)
+- :doc:`coming` : Planung hat begonnen
+
+- :doc:`1.0.1` : released am 09.11.2012
 
 - :doc:`1.0.0` : released (und schon veraltet)
 
-- :doc:`coming` : Planung hat begonnen
 
 .. toctree::
    :maxdepth: 1

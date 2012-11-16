@@ -979,9 +979,5 @@ def objects():
                 #~ applies_from=af,
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
                 
-    for u in User.objects.exclude(profile=''):
-        u.set_password('1234')
-        u.save()
-                
 
 #~ print "20121010 pcsw.fixtures.demo has been imported"

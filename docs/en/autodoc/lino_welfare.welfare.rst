@@ -9,6 +9,15 @@ The :mod:`lino_welfare.modlib.pcsw` package
 .. automodule:: lino_welfare.modlib.pcsw
     :members:
     :show-inheritance:
+    
+
+`settings`
+----------
+
+.. automodule:: lino_welfare.modlib.pcsw.settings
+    :members:
+    :show-inheritance:
+    
 
 
 `models`
@@ -25,6 +34,14 @@ The :mod:`lino_welfare.modlib.pcsw` package
     :members:
     :show-inheritance:
     
+
+`migrate_old`
+-------------
+
+.. automodule:: lino_welfare.modlib.pcsw.migrate_old
+    :members:
+    :show-inheritance:
+
     
 
 Management commands

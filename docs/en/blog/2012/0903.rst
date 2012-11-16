@@ -1,9 +1,0 @@
-20120903
-========
-
-- added `Account.ref` to debts std fixtures
-
-- Researched on a mysterious message 
-  "outbox.Attachment Controllers of Attachment must define a method `get_target_url`. (1 object(s) with primary key 1)"
-  during data migration.
-  

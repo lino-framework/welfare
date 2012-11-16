@@ -235,6 +235,7 @@ class Lino(Lino):
         for a in super(Lino,self).get_installed_apps():
             yield a
             
+        yield 'django.contrib.contenttypes'
         yield 'lino.modlib.users'
         #~ yield 'lino.modlib.pages'
         #~ 'lino.modlib.workflows',
