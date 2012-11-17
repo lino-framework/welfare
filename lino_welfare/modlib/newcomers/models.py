@@ -39,6 +39,7 @@ from lino.utils.restify import restify
 
 from lino.utils.choosers import chooser
 from lino.utils import babel
+from lino.utils import ssin
 from lino import mixins
 from django.conf import settings
 #~ from lino import choices_method, simple_choices_method
@@ -316,7 +317,7 @@ class AvailableCoaches(users.Users):
                 raise Warning(_("Only for newcomers"))
             if not client.national_id:
                 raise Warning(_("Only for newcomers with valid SSIN"))
-            if not pcsw.is_valid_niss(client.national_id):
+            if not ssin.is_valid_ssin(client.national_id):
                 raise Warning(_("Only for newcomers with valid SSIN"))
             if not client.faculty:
                 raise Warning(_("Only for newcomers with given `faculty`."))
@@ -409,11 +410,11 @@ nicht mehr angezeigt."""
             
     def unused_get_action_permission(self,ar,obj,state):
         #~ logger.info("20121020 get_action_permission %s",ar.master_instance)
-        if not pcsw.is_valid_niss(ar.master_instance.national_id):
-            #~ logger.info("20121016 %s has invalid NISS ",ar.master_instance)
+        if not ssin.is_valid_ssin(ar.master_instance.national_id):
+            #~ logger.info("20121016 %s has invalid SSIN ",ar.master_instance)
             return False
-            #~ _("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
-                #~ % dict(client=client,niss=client.national_id))
+            #~ _("Cannot assign client %(client)s with invalid SSIN %(ssin)s.") 
+                #~ % dict(client=client,ssin=client.national_id))
         return super(AssignCoach,self).get_action_permission(ar,obj,state)
         #~ return super(AssignCoach,self).get_row_permission(ar,state,ba)
         
@@ -423,10 +424,10 @@ nicht mehr angezeigt."""
         """
         client = ar.master_instance
         watcher = changes.Watcher(client)
-        #~ if not pcsw.is_valid_niss(client.national_id):
+        #~ if not ssin.is_valid_ssin(client.national_id):
             #~ return ar.error_response(alert=True,
-                #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
-                #~ % dict(client=client,niss=client.national_id))
+                #~ message=_("Cannot assign client %(client)s with invalid SSIN %(ssin)s.") 
+                #~ % dict(client=client,ssin=client.national_id))
                 
         #~ ar.confirm(msg,_("Are you sure?"))
         
@@ -474,10 +475,10 @@ class AvailableCoachesByClient(AvailableCoaches):
         #~ Assign a coach to a newcomer.
         #~ """
         #~ client = ar.master_instance
-        #~ if not pcsw.is_valid_niss(client.national_id):
+        #~ if not ssin.is_valid_ssin(client.national_id):
             #~ return ar.error_response(alert=True,
-                #~ message=_("Cannot assign client %(client)s with invalid NISS %(niss)s.") 
-                #~ % dict(client=client,niss=client.national_id))
+                #~ message=_("Cannot assign client %(client)s with invalid SSIN %(ssin)s.") 
+                #~ % dict(client=client,ssin=client.national_id))
         #~ msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
         #~ ar.confirm(msg,_("Are you sure?"))
         

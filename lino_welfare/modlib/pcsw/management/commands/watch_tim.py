@@ -59,9 +59,8 @@ from lino.core.modeltools import is_valid_email
 
 from lino.utils.daemoncommand import DaemonCommand
 
-from lino.utils.niss import is_valid_niss
+from lino.utils.ssin import is_valid_ssin
 
-#~ from lino.apps.pcsw.models  import is_valid_niss
 
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
@@ -272,11 +271,11 @@ def country2kw(row,kw):
 #~ def is_company(data):
 def PAR_model(data):
     """
-    - wer eine NISS oder Gesdos-Nr hat ist ein Klient, selbst wenn er auch eine MwSt-Nummer hat.
+    - wer eine SSIN oder Gesdos-Nr hat ist ein Klient, selbst wenn er auch eine Mwst-Nummer hat.
     - Neuzugänge (Attribut N) sind ebenfalls immer Klienten
     
     """
-    if data.get('NB2',False): # NISS
+    if data.get('NB2',False): # SSIN
         return Client
     if data.get('NB1',False): # gesdos-Nr
         return Client
@@ -446,8 +445,8 @@ class PAR(Controller):
   
     #~ def prepare_data(self,data):
         #~ if data['NB2']:
-            #~ if not is_valid_niss(data['NB2']):
-                #~ dblogger.warning("Ignored invalid NISS %s" % data['NB2'])
+            #~ if not is_valid_ssin(data['NB2']):
+                #~ dblogger.warning("Ignored invalid SSIN %s" % data['NB2'])
                 #~ data['NB2'] = ''
         #~ return data
                 
@@ -489,7 +488,7 @@ class PAR(Controller):
                 if data.has_key('NB2'):
                     obj.national_id = data['NB2']
                     #~ if obj.national_id: 
-                        #~ if not is_valid_niss(obj.national_id):
+                        #~ if not is_valid_ssin(obj.national_id):
                             #~ dblogger.info("%s : invalid SSIN %s",obj2str(obj),obj.national_id)
                             #~ obj.national_id = None
                 #~ else 20121108:
@@ -501,7 +500,7 @@ class PAR(Controller):
                 elif data['IDPRT'] == 'I':
                     obj.client_state = pcsw.ClientStates.former
                 #~ 
-                elif obj.national_id and is_valid_niss(obj.national_id):
+                elif obj.national_id and is_valid_ssin(obj.national_id):
                     obj.client_state = pcsw.ClientStates.coached
                 else:
                     obj.client_state = pcsw.ClientStates.invalid

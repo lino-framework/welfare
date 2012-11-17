@@ -71,7 +71,7 @@ from lino.utils import IncompleteDate
 
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str
+from lino.core.modeltools import obj2str, obj2unicode
 from lino.core import actions
 from lino.core import changes
 
@@ -108,7 +108,8 @@ uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 #~ newcomers = dd.resolve_app('newcomers')
 
-from lino.utils.niss import niss_validator, is_valid_niss
+#~ from lino.utils.ssin import ssin_validator
+from lino.utils import ssin
 
 class CivilState(dd.ChoiceList):
     """
@@ -461,28 +462,51 @@ from lino.core.modeltools import obj2str
 
 def card2client(data):
     kw = dict()
-    def func(fldname,qname):
-        kw[fldname] = data[qname]
+    #~ def func(fldname,qname):
+        #~ kw[fldname] = data[qname]
+    kw.update(national_id=ssin.format_ssin(data['nationalNumber']))
     kw.update(first_name=join_words(
         data['firstName1'],
         data['firstName2'],
         data['firstName3']))
     #~ func('first_name','firstName1')
-    func('last_name','surname')
+    kw.update(last_name=data['surname'])
     #~ func('card_valid_from','validityBeginDate')
     #~ func('card_valid_until','validityEndDate')
     #~ func('birth_date','birthDate')
     kw.update(birth_date=IncompleteDate(*settings.LINO.parse_date(data['birthDate'])))
     kw.update(card_valid_from=datetime.date(*settings.LINO.parse_date(data['validityBeginDate'])))
     kw.update(card_valid_until=datetime.date(*settings.LINO.parse_date(data['validityEndDate'])))
-    func('national_id','nationalNumber')
+    kw.update(card_number=data['cardNumber'])
+    kw.update(card_issuer=data['issuingMunicipality'])
+    kw.update(noble_condition=data['nobleCondition'])
+    kw.update(street=data['street'])
+    kw.update(street_no=data['streetNumber'])
+    kw.update(street_box=data['boxNumber'])
+    kw.update(zip_code=data['zipCode'])
+    try:
+        city = countries.City.objects.get(country__isocode='BE',name=data['municipality'])
+        kw.update(city=city)
+    #~ except countries.City.DoesNotExist,e:
+    except Exception,e:
+        logger.warning("Could not extract city from eid card data %s",data)
+        logger.exception(e)
+        
+    #~ kw.update(country=data['country'])
+    #~ kw.update(card_issuer=data['sex'])
+    #~ kw.update(card_issuer=data['birthLocation'])
+    #~ kw.update(card_issuer=data['nationality'])
     return kw
 
 class BeIdReadCardAction(actions.ListAction):
     """
-    client reads a belgian eid card (using :attr:`lino.Lino.use_eid_jslib`),
+    Explore the data read from an eid card and decide what to do with it.
+    
+    Client reads a Belgian eId card using :attr:`lino.Lino.use_eid_jslib`,
     then sends the data to the server where this action's run method will 
-    be called.
+    be called. Possible actions are to create a new client or to update data 
+    in existing client.
+    
     """
     js_handler = 'Lino.beid_read_card_handler'
     http_method = 'POST'
@@ -493,50 +517,59 @@ class BeIdReadCardAction(actions.ListAction):
             return False
         return super(BeIdReadCardAction,self).get_view_permission(user)
 
-
     def run(self,row,ar,**kw):
         assert row is None
         #~ data = Getter(ar.request.POST)
         data = ar.request.POST
         attrs = card2client(data)
+        #~ print 20121117, attrs
         #~ ssin = data['nationalNumber']
-        ssin = data['nationalNumber']
-        qs = Client.objects.filter(national_id=ssin)
+        #~ ssin = attrs['national_id']
+        qs = Client.objects.filter(national_id=attrs['national_id'])
         if qs.count() > 1:
             return ar.error_response(self.sorry_msg % 
-                _("There are %(count)d clients with national id %(national_id)s.")
-                % dict(count=qs.count(),national_id=ssin))
+                _("There is already more than one client with national id %(national_id)s in our database.")
+                % attrs)
         if qs.count() == 0:
-            fkw = dict(last_name=attrs['last_name'])
+            fkw = dict(last_name=attrs['last_name'],first_name=attrs['first_name'])
             fkw.update(national_id__isnull=True)
             qs = Client.objects.filter(**fkw)
             if qs.count():
-                pass
+                return ar.error_response(self.sorry_msg % 
+                    _("There is at least one other client named %(first_name)s %(last_name)s.")
+                    % attrs)
+            ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
             obj = Client(**attrs)
             obj.full_clean()
             obj.save()
             changes.log_create(ar.request,obj)
-        if qs.count() == 1:
-            obj = qs[0]
-            watcher = changes.Watcher(obj)
-            diffs = []
-            for fldname,new in attrs.items():
-                fld = get_field(Client,fldname)
-                old = getattr(obj,fldname)
-                if old != new:
-                    diffs.append("%s : %s -> %s" % (fld.verbose_name,old,new))
-                    setattr(obj,fld.name,new)
-            if len(diffs):
-                msg = '\n<br/>'.join(diffs)
-                print msg
-                ar.confirm(msg)
-            obj.full_clean()
-            obj.save()
-            watcher.log_diff(ar.request)
-            return ar.success_response(_("%s has been saved.") % obj2unicode(elem))
-        #~ print 20121107, ar.request.POST
-        ar.confirm(_("national_id is %s : Are you sure?") % ssin)
-        return ar.success_response('Hallo')
+            return ar.success_response(
+                _("New client %(first_name)s %(last_name)s has been created") % attrs,
+                refresh=True)
+        assert qs.count() == 1
+        obj = qs[0]
+        watcher = changes.Watcher(obj)
+        diffs = []
+        for fldname,new in attrs.items():
+            fld = get_field(Client,fldname)
+            old = getattr(obj,fldname)
+            if old != new:
+                diffs.append("%s : %s -> %s" % (unicode(fld.verbose_name),obj2str(old),obj2str(new)))
+                setattr(obj,fld.name,new)
+        if len(diffs) == 0:
+            return ar.success_response(
+                _("Client %(first_name)s %(last_name)s is up-to-date") % attrs,
+                alert=_("Noting to do"))
+        msg = unicode(_("Click OK to apply the following changes:<br/>"))
+        msg += '\n<br/>'.join(diffs)
+        #~ print msg
+        ar.confirm(msg)
+        obj.full_clean()
+        obj.save()
+        watcher.log_diff(ar.request)
+        return ar.success_response(
+            _("%s has been saved.") % obj2unicode(obj),
+            refresh=True)
 
     
 class Client(Person):
@@ -592,7 +625,7 @@ class Client(Person):
         unique=True,
         verbose_name=_("National ID")
         #~ blank=True,verbose_name=_("National ID")
-        #~ ,validators=[niss_validator] # 20121108
+        #~ ,validators=[ssin.ssin_validator] # 20121108
         )
         
     health_insurance = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
@@ -786,7 +819,7 @@ class Client(Person):
         #~ if not self.national_id:
             #~ self.national_id = str(self.id)
         if self.client_state == ClientStates.coached:
-            niss_validator(self.national_id)
+            ssin.ssin_validator(self.national_id)
         super(Client,self).full_clean(*args,**kw)
         
       
@@ -1745,7 +1778,7 @@ class ClientsTest(Clients):
               
             if ar.param_values.invalid_niss:
                 try:
-                    niss_validator(person.national_id)
+                    ssin.ssin_validator(person.national_id)
                 except ValidationError,e:
                     messages += e.messages
           

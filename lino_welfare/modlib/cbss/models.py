@@ -69,6 +69,7 @@ from lino.core.modeltools import obj2str
 
 from lino.utils import babel
 from lino.utils.choosers import chooser
+from lino.utils.ssin import ssin_validator
 
 from lino.utils.xmlgen import html as xghtml
 
@@ -945,7 +946,7 @@ class SSIN(dd.Model):
   
     national_id = models.CharField(max_length=200,
         blank=True,verbose_name=_("National ID")
-        ,validators=[pcsw.niss_validator]
+        ,validators=[ssin_validator]
         )
         
     def get_ssin(self):
