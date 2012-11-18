@@ -171,13 +171,14 @@ def test01b(self):
     #~ from lino.modlib.notes.models import ContractType
     from lino.mixins.printable import PrintAction
     from lino.modlib.users.models import User
-    from lino_welfare.modlib.pcsw.models import Person
+    #~ from lino_welfare.modlib.pcsw.models import Person
+    from lino_welfare.modlib.pcsw.models import Client
     root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
     root.save()
     
     jp = JobProvider(name="Test")
     jp.save()
-    person = Person(first_name="Max",last_name="Mustermann")
+    person = Client(first_name="Max",last_name="Mustermann")
     person.full_clean()
     person.save()
     t = ContractType(id=1,build_method='pisa',template="",name=u'Art.60\xa77')
@@ -185,7 +186,7 @@ def test01b(self):
     job = Job(provider=jp,contract_type=t)
     #~ job = Job(contract_type=t,name="Test")
     job.save()
-    n = Contract(id=1,job=job,user=root,person=person)
+    n = Contract(id=1,job=job,user=root,client=person)
     n.full_clean()
     n.save()
     

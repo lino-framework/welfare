@@ -34,7 +34,7 @@ from lino.utils.restify import restify
 from lino.utils import dblogger
 #~ from lino.models import update_site_config
 from lino.utils import mti
-from lino.utils.niss import gen_niss
+from lino.utils.ssin import generate_ssin
 
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
@@ -533,7 +533,7 @@ def objects():
           if contacts.Role.objects.filter(person=person).count() == 0:
             #~ if not person in DIRECTORS:
             birth_date = settings.LINO.demo_date(-170*count - 16*365)  # '810601 211-83'
-            national_id = gen_niss(birth_date,person.gender)
+            national_id = generate_ssin(birth_date,person.gender)
                 
             client = person2client(person,
                 national_id=national_id,

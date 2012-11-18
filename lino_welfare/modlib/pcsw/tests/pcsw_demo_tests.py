@@ -58,7 +58,7 @@ from lino.utils.test import TestCase
 
 class DemoTest(TestCase):
     #~ fixtures = [ 'std','demo' ]
-    fixtures = 'std few_countries few_cities few_languages props cbss demo demo_events'.split()
+    fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
     #~ fixtures = 'std all_countries few_cities all_languages props demo'.split()
     never_build_site_cache = True
     

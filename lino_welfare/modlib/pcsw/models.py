@@ -462,6 +462,7 @@ from lino.core.modeltools import obj2str
 
 def card2client(data):
     kw = dict()
+    print 20121117, repr(data['picture'])
     #~ def func(fldname,qname):
         #~ kw[fldname] = data[qname]
     kw.update(national_id=ssin.format_ssin(data['nationalNumber']))

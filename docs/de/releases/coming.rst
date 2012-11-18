@@ -6,7 +6,7 @@ Neue Features
 
 - Funktion "eID-Karte einlesen" kann getestet werden. 
   Bilder liest er noch nicht ein.
-  Auch manche Angaben wie z.B. die Stadt könnten Probleme machen.
+  Auch manche Angaben wie z.B. die Stadt könnten Probleme machen. 
 
 Bugfixes
 --------
