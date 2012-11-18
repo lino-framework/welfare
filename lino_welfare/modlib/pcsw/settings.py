@@ -47,7 +47,7 @@ class Lino(Lino):
     
     #~ index_view_action = "pcsw.Home"
     
-    remote_user_header = "REMOTE_USER"
+    #~ remote_user_header = "REMOTE_USER"
     
     use_eid_jslib = True
     
