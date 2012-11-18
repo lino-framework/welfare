@@ -16,24 +16,28 @@ import os
 #~ from distutils.core import setup
 from setuptools import setup
 #~ from distutils.core import setup, Distribution
-import lino_welfare
+#~ import lino_welfare
 
 #~ class MyDistribution(Distribution):
 
 #~ VERSION = file(os.path.join(os.path.dirname(__file__),'VERSION')).read().strip()
+
+from lino_welfare.modlib.pcsw import settings
     
-setup(name='lino-welfare',
+setup(name=settings.LINO.python_name, # 'lino-welfare',
       #~ distclass=MyDistribution,
-      version=lino_welfare.__version__,
+      #~ dist_dir=os.path.join('docs','dist'),
+      version=settings.LINO.version, # lino_welfare.__version__,
       #~ version=VERSION,
-      description=u"A Lino application for Belgian Public Welfare Centres",
+      #~ description=u"A Lino application for Belgian Public Welfare Centres",
+      description=settings.LINO.description,
+      author=settings.LINO.author,
+      author_email=settings.LINO.author_email,
+      #~ url="http://code.google.com/p/lino-welfare/",
+      url=settings.LINO.url,
       license='GPL',
       packages=['lino_welfare'],
-      #~ dist_dir=os.path.join('docs','dist'),
-      author='Luc Saffre',
-      author_email='luc.saffre@gmail.com',
       requires=['lino'],
-      url="http://code.google.com/p/lino-welfare/",
       classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2

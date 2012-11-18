@@ -20,15 +20,23 @@ Default settings of a Lino/Welfare site.
 import os
 
 from lino.apps.std.settings import *
-from lino_welfare import __version__, __url__, __name__
+#~ from lino_welfare import __version__, __url__, __name__
 
 class Lino(Lino):
     """
     """
-    source_dir = os.path.dirname(__file__)
-    title = __name__
+    version = '1.0.2'
+    url = "http://code.google.com/p/lino-welfare/"
+    python_name = "lino_welfare"
+    short_name = "Lino/Welfare"
+    description = "a Lino application for Belgian Public Welfare Centres."
+    author = 'Luc Saffre'
+    author_email = 'luc.saffre@gmail.com'
+    
+    #~ source_dir = os.path.dirname(__file__)
+    #~ title = label # __name__
     #~ domain = "pcsw.saffre-rumma.net"
-    help_url = "http://packages.python.org/lino-welfare"
+    #~ help_url = "http://packages.python.org/lino-welfare"
     migration_module = 'lino_welfare.modlib.pcsw.migrate'
     
     #~ project_model = 'contacts.Person'
@@ -51,13 +59,13 @@ class Lino(Lino):
         ]
         
         
-    def get_application_description(self):
-        import lino
-        s = """
-        %s is a customizable <a href="%s">Lino</a> application 
-        to be used in Belgian Public Centres for Social Welfare.
-        """ % (__name__,lino.__url__)
-        return s
+    #~ def get_application_description(self):
+        #~ import lino
+        #~ s = """
+        #~ %s is a customizable <a href="%s">Lino</a> application 
+        #~ to be used in Belgian Public Centres for Social Welfare.
+        #~ """ % (self.label,lino.__url__)
+        #~ return s
         
     def get_app_source_file(self):
         return __file__
@@ -69,8 +77,8 @@ class Lino(Lino):
             #~ raise Exception("20121004 self.modules.lino.Home.get_url_action('default_action') returned None")
         #~ return a
         
-    def get_application_info(self):
-        return (__name__,__version__,__url__)
+    #~ def get_application_info(self):
+        #~ return (__name__,__version__,__url__)
         
         
     
