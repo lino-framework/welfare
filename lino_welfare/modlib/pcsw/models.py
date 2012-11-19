@@ -590,11 +590,12 @@ class BeIdReadCardAction(actions.ListAction):
                 changes.log_create(ar.request,obj)
                 return ar.success_response(
                     _("New client %(first_name)s %(last_name)s has been created") % attrs,
+                    alert=_("Success"),
                     refresh=True)
             elif qs.count() > 1:
                 return ar.error_response(self.sorry_msg % 
                     _("There is already more than one client named %(first_name)s %(last_name)s in our database.")
-                    % attrs)
+                    % attrs,alert=_("Oops!"))
                     
         assert qs.count() == 1
         obj = qs[0]
@@ -609,8 +610,9 @@ class BeIdReadCardAction(actions.ListAction):
         if len(diffs) == 0:
             return ar.success_response(
                 _("Client %(first_name)s %(last_name)s is up-to-date") % attrs,
-                alert=_("Noting to do"))
-        msg = unicode(_("Click OK to apply the following changes:<br/>"))
+                alert=_("Nothing to do"))
+        msg = unicode(_("Click OK to apply the following changes for client %(first_name)s %(last_name)s") % attrs)
+        msg += ' :<br/>'
         msg += '\n<br/>'.join(diffs)
         #~ print msg
         ar.confirm(msg)
@@ -619,6 +621,7 @@ class BeIdReadCardAction(actions.ListAction):
         watcher.log_diff(ar.request)
         return ar.success_response(
             _("%s has been saved.") % obj2unicode(obj),
+            alert=_("Success"),
             refresh=True)
 
     
