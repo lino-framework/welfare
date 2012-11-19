@@ -23,6 +23,7 @@ See also :doc:`/pcsw/models`.
 import logging
 logger = logging.getLogger(__name__)
 
+import base64
 import os
 import cgi
 import datetime
@@ -32,6 +33,7 @@ from django.db.models import Q
 from django.db.utils import DatabaseError
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.exceptions import MultipleObjectsReturned
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
@@ -156,6 +158,9 @@ add('50', _("Separated"),'separated') # Getrennt von Tisch und Bett /
 
 
 
+def card_number_to_picture_file(card_number):
+    #~ TODO: handle configurability of card_number_to_picture_file
+    return os.path.join(settings.MEDIA_ROOT,'beid',card_number+'.jpg')
 
 
 
@@ -462,7 +467,6 @@ from lino.core.modeltools import obj2str
 
 def card2client(data):
     kw = dict()
-    print 20121117, repr(data['picture'])
     #~ def func(fldname,qname):
         #~ kw[fldname] = data[qname]
     kw.update(national_id=ssin.format_ssin(data['nationalNumber']))
@@ -472,33 +476,76 @@ def card2client(data):
         data['firstName3']))
     #~ func('first_name','firstName1')
     kw.update(last_name=data['surname'])
+    
+    card_number = data['cardNumber']
+    fn = card_number_to_picture_file(card_number)
+    if os.path.exists(fn):
+        logger.warning("Overwriting existing image file %s.",fn)
+    fp = file(fn,'wb')
+    fp.write(base64.b64decode(data['picture']))
+    fp.close()
+    #~ print 20121117, repr(data['picture'])
+    #~ kw.update(picture_data_encoded=data['picture'])
+    
     #~ func('card_valid_from','validityBeginDate')
     #~ func('card_valid_until','validityEndDate')
     #~ func('birth_date','birthDate')
     kw.update(birth_date=IncompleteDate(*settings.LINO.parse_date(data['birthDate'])))
     kw.update(card_valid_from=datetime.date(*settings.LINO.parse_date(data['validityBeginDate'])))
     kw.update(card_valid_until=datetime.date(*settings.LINO.parse_date(data['validityEndDate'])))
-    kw.update(card_number=data['cardNumber'])
+    kw.update(card_number=card_number)
     kw.update(card_issuer=data['issuingMunicipality'])
     kw.update(noble_condition=data['nobleCondition'])
     kw.update(street=data['street'])
     kw.update(street_no=data['streetNumber'])
     kw.update(street_box=data['boxNumber'])
     kw.update(zip_code=data['zipCode'])
-    try:
-        city = countries.City.objects.get(country__isocode='BE',name=data['municipality'])
-        kw.update(city=city)
-    #~ except countries.City.DoesNotExist,e:
-    except Exception,e:
-        logger.warning("Could not extract city from eid card data %s",data)
-        logger.exception(e)
-        
-    #~ kw.update(country=data['country'])
-    #~ kw.update(card_issuer=data['sex'])
-    #~ kw.update(card_issuer=data['birthLocation'])
-    #~ kw.update(card_issuer=data['nationality'])
-    return kw
+    kw.update(birth_place=data['birthLocation'])
+    pk = data['country'].upper()
+    
+    msg1 = "BeIdReadCardAction %s" % kw.get('national_id')
 
+    try:
+        country = countries.Country.objects.get(isocode=pk)
+        kw.update(country=country)
+    except countries.Country.DoesNotExist,e:
+    #~ except Exception,e:
+        logger.warning("%s : no country with code %r",msg1,pk)
+    try:
+        city = countries.City.objects.get(country__isocode='BE',name__iexact=data['municipality'])
+        kw.update(city=city)
+    except countries.City.DoesNotExist,e:
+        logger.warning("%s : There is no city named %r in Belgium",msg1,data['municipality'])
+    except MultipleObjectsReturned,e:
+        logger.warning("%s : found more than one city named %r in Belgium",msg1,data['municipality'])
+        #~ logger.exception(e)
+    def sex2gender(sex):
+        if sex == 'M' : return contacts.Gender.male
+        if sex in 'FVW' : return contacts.Gender.female
+        logger.warning("%s : invalid sex code %r",msg1,sex)
+    kw.update(gender=sex2gender(data['sex']))
+    
+    def nationality2country(nationality):
+        try:
+            return countries.Country.objects.get(nationalities__icontains=nationality)
+        except countries.Country.DoesNotExist,e:
+            logger.warning("%s : no country for nationality %r",msg1,nationality)
+        except MultipleObjectsReturned,e:
+            logger.warning("%s : found more than one country for nationality %r",msg1,nationality)
+    kw.update(nationality=nationality2country(data['nationality']))
+    
+    def doctype2cardtype(dt):
+        #~ if dt == 1: return BeIdCardType.get_by_value("1")
+        return BeIdCardType.get_by_value(str(dt))
+    kw.update(card_type=doctype2cardtype(data['documentType']))
+    
+    unused = dict()
+    #~ unused.update(country=country)
+    #~ kw.update(sex=data['sex'])
+    unused.update(documentType=data['documentType'])
+    #~ logger.info("Unused data: %r", unused)
+    return kw
+    
 class BeIdReadCardAction(actions.ListAction):
     """
     Explore the data read from an eid card and decide what to do with it.
@@ -906,8 +953,8 @@ class Client(Person):
           #~ str(ar.requesting_panel),unicode(_("Read eID card")))
       
     @dd.virtualfield(dd.HtmlBox())
-    def image(self,request):
-        url = self.get_image_url(request)
+    def image(self,ar):
+        url = self.get_image_url(ar)
         #~ s = '<img src="%s" width="100%%" onclick="window.open(\'%s\')"/>' % (url,url)
         s = '<img src="%s" width="100%%"/>' % url
         s = '<a href="%s" target="_blank">%s</a>' % (url,s)
@@ -920,11 +967,12 @@ class Client(Person):
             return ("beid",self.card_number+".jpg")
         return ("pictures","contacts.Person.jpg")
         
-    def get_image_url(self,request):
+    def get_image_url(self,ar):
         #~ return settings.MEDIA_URL + "/".join(self.get_image_parts())
-        return request.ui.media_url(*self.get_image_parts())
+        return ar.ui.media_url(*self.get_image_parts())
         
     def get_image_path(self):
+        #~ TODO: handle configurability of card_number_to_picture_file
         return os.path.join(settings.MEDIA_ROOT,*self.get_image_parts())
         
     def get_skills_set(self):
@@ -1004,6 +1052,12 @@ class Client(Person):
         """
         Return the one and only "active contract" of this client.
         
+        If there is exactly one contract (past, active or future), 
+        return this one. Otherwise:
+        
+        - If there's exactly one that ends in the future, 
+          return this one.
+        
         There might be no active contract today, 
         but one contract in the future *or* one contract in the past.
         
@@ -1012,7 +1066,7 @@ class Client(Person):
         
         Otherwise return `None`, meaning that Lino fails 
         to decide which contact must be 
-        considerd "active"..
+        considerd "active".
         
         """
         
@@ -1024,10 +1078,12 @@ class Client(Person):
         # past and future
         qs1 = self.isip_contract_set_by_client.all()
         qs2 = self.jobs_contract_set_by_client.all()
+        if qs1.count() + qs2.count() == 0: 
+            return None
         c = the_one_and_only(qs1,qs2)
         if c is not None: return c
         
-        # only present and future
+        # only present and future contracts
         today = datetime.date.today()
         #~ q1 = Q(applies_from__isnull=True) | Q(applies_from__lte=today)
         #~ q2 = Q(applies_until__isnull=True) | Q(applies_until__gte=today)
@@ -1037,8 +1093,16 @@ class Client(Person):
         flt = Q(q2,q3)
         qs1 = self.isip_contract_set_by_client.filter(flt)
         qs2 = self.jobs_contract_set_by_client.filter(flt)
-        
-        return the_one_and_only(qs1,qs2)
+        if qs1.count() + qs2.count() > 0:
+            return the_one_and_only(qs1,qs2)
+        # there is no "present and future" contract, but more than exactly one,
+        # so they are all past: return the most recent contract.
+        qs1 = self.isip_contract_set_by_client.order_by('-applies_from')
+        qs2 = self.jobs_contract_set_by_client.order_by('-applies_from')
+        if qs1.count() == 0: return qs2[0]
+        if qs2.count() == 0: return qs1[0]
+        if qs2[0].applies_from > qs1[0].applies_from: return qs2[0].applies_from
+        return qs1[0].applies_from
         
         
     @dd.virtualfield(models.DateField(_("Contract starts")))
@@ -2668,6 +2732,19 @@ def customize_contacts():
             help_text=_("Whether Links of this type can be used as contact person of a job contract.")))
         
         
+def customize_countries():
+    """
+    Injects application-specific fields to :mod:`countries <lino.modlib.countries>`.
+    """
+    dd.inject_field(countries.Country,
+        'nationalities',
+        models.CharField(
+            verbose_name=_("Nationality texts (NL, FR, DE, EN)"),
+            max_length=200,
+            blank=True,
+            help_text=_("Space separated list of case insensitive nationality designations in 4 languages.")))
+        
+        
 
         
 
@@ -2904,6 +2981,7 @@ def site_setup(site):
     
     site.modules.countries.Countries.set_detail_layout("""
     isocode name short_code inscode
+    nationalities
     countries.CitiesByCountry jobs.StudiesByCountry
     """)
     
@@ -3027,6 +3105,7 @@ dd.add_user_group('integ',INTEG_MODULE_LABEL)
 #~ dd.add_user_group('coach',INTEG_MODULE_LABEL)
 
 customize_siteconfig()
+customize_countries()
 customize_contacts()        
 customize_notes()
 customize_sqlite()

@@ -445,3 +445,9 @@ def migrate_from_1_0(globals_dict):
     #~ globals_dict.update(create_pcsw_client=create_pcsw_client)
     
     return '1.0.1'
+    
+def migrate_from_1_0_1(globals_dict):
+    """
+    - New field `countries.Country.nationalities`
+    """
+    return '1.0.2'

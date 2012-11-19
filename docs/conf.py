@@ -64,7 +64,8 @@ copyright = u'2012, Luc Saffre'
 #
 #~ version = lino_welfare.__version__
 # The full version, including alpha/beta/rc tags.
-release = lino_welfare.__version__
+from lino_welfare.modlib.pcsw.settings import LINO
+release = LINO.version
 
 # The short X.Y version.
 version = '.'.join(release.split('.')[:2])
