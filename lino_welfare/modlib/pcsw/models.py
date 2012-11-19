@@ -1106,8 +1106,8 @@ class Client(Person):
         qs2 = self.jobs_contract_set_by_client.order_by('-applies_from')
         if qs1.count() == 0: return qs2[0]
         if qs2.count() == 0: return qs1[0]
-        if qs2[0].applies_from > qs1[0].applies_from: return qs2[0].applies_from
-        return qs1[0].applies_from
+        if qs2[0].applies_from > qs1[0].applies_from: return qs2[0]
+        return qs1[0]
         
         
     @dd.virtualfield(models.DateField(_("Contract starts")))
