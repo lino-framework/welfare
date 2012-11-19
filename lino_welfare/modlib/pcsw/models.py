@@ -579,21 +579,23 @@ class BeIdReadCardAction(actions.ListAction):
                 _("There is already more than one client with national id %(national_id)s in our database.")
                 % attrs)
         if qs.count() == 0:
-            fkw = dict(last_name=attrs['last_name'],first_name=attrs['first_name'])
+            fkw = dict(last_name__iexact=attrs['last_name'],first_name__iexact=attrs['first_name'])
             fkw.update(national_id__isnull=True)
             qs = Client.objects.filter(**fkw)
-            if qs.count():
+            if qs.count() == 0:
+                ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
+                obj = Client(**attrs)
+                obj.full_clean()
+                obj.save()
+                changes.log_create(ar.request,obj)
+                return ar.success_response(
+                    _("New client %(first_name)s %(last_name)s has been created") % attrs,
+                    refresh=True)
+            elif qs.count() > 1:
                 return ar.error_response(self.sorry_msg % 
-                    _("There is at least one other client named %(first_name)s %(last_name)s.")
+                    _("There is already more than one client named %(first_name)s %(last_name)s in our database.")
                     % attrs)
-            ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
-            obj = Client(**attrs)
-            obj.full_clean()
-            obj.save()
-            changes.log_create(ar.request,obj)
-            return ar.success_response(
-                _("New client %(first_name)s %(last_name)s has been created") % attrs,
-                refresh=True)
+                    
         assert qs.count() == 1
         obj = qs[0]
         watcher = changes.Watcher(obj)
