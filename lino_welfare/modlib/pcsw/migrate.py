@@ -456,4 +456,13 @@ def migrate_from_1_0_2(globals_dict):
     """
     - Removed field `countries.Country.nationalities`
     """
+    
+    countries_Country = resolve_model("countries.Country")
+    def create_countries_country(name, isocode, short_code, iso3, name_fr, name_en, nationalities, inscode):
+        return countries_Country(name=name,isocode=isocode,short_code=short_code,iso3=iso3,
+            name_fr=name_fr,name_en=name_en,
+            #~ nationalities=nationalities,
+            inscode=inscode)
+    globals_dict.update(create_countries_country=create_countries_country)
+    
     return '1.0.3'
