@@ -32,3 +32,11 @@ Bugfixes
 
 - Wenn ein Klient mehr als einen Vertrag hat, die alle vergangen sind, dann gilt der 
   zuletzt begonnenen Vertrag als aktiv. Beispiel Klient 22538.
+
+- Statt "Autor" eines Termins sagt Lino jetzt "Verantwortlicher". 
+  Wenn Alicia nicht da ist und Caroline mit einem Klienten einen Termin 
+  für Alicia vormerkt, dann steht dort Alicia und nicht Caroline. 
+  (Dass Caroline den Termin ursprünglich erstellt hat, sieht Alicia 
+  in der Mitteilung per E-Mail, ansonsten hält Lino diese Information 
+  für belanglos...)
+  

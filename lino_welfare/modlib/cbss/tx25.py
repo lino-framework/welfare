@@ -16,6 +16,24 @@
 Transaction 25
 --------------
 
+This implements the "transaction 25", called also 
+"Interrogation sur certains types d’informations légales" 
+(in `Codes d'interrogations
+<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_)
+
+See also:
+
+- Liste des types d'information (pdf)
+  http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/IT_FR_20111202.pdf
+
+- Lijst van de informatietypes (pdf)
+  http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/nl/instructies/IT_NL_20111202.pdf
+
+
+- DGIP > Registre national > Instructions
+  http://www.ibz.rrn.fgov.be/index.php?id=2485&L=0
+
+
 Uncomplete list of TIs
 
 === ======= ================================
