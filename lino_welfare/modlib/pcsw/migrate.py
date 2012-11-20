@@ -451,3 +451,9 @@ def migrate_from_1_0_1(globals_dict):
     - New field `countries.Country.nationalities`
     """
     return '1.0.2'
+    
+def migrate_from_1_0_2(globals_dict):
+    """
+    - Removed field `countries.Country.nationalities`
+    """
+    return '1.0.3'

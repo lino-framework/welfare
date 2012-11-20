@@ -1,5 +1,1 @@
-include/screenshots.rst:None: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.3.png
-include/screenshots.rst:None: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.4.png
-T:\hgwork\welfare\docs\fr\releases\index.rst:: WARNING: document isn't included in any toctree
-T:\hgwork\welfare\docs\fr\user\intro.rst:: WARNING: document isn't included in any toctree
-T:\hgwork\welfare\docs\fr\user\tim2lino.rst:: WARNING: document isn't included in any toctree
+Interrupted while building, starting debugger:

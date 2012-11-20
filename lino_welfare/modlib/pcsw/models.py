@@ -503,7 +503,7 @@ def card2client(data):
     kw.update(birth_place=data['birthLocation'])
     pk = data['country'].upper()
     
-    msg1 = "BeIdReadCardAction %s" % kw.get('national_id')
+    msg1 = "BeIdReadCardToClientsAction %s" % kw.get('national_id')
 
     try:
         country = countries.Country.objects.get(isocode=pk)
@@ -525,14 +525,15 @@ def card2client(data):
         logger.warning("%s : invalid sex code %r",msg1,sex)
     kw.update(gender=sex2gender(data['sex']))
     
-    def nationality2country(nationality):
-        try:
-            return countries.Country.objects.get(nationalities__icontains=nationality)
-        except countries.Country.DoesNotExist,e:
-            logger.warning("%s : no country for nationality %r",msg1,nationality)
-        except MultipleObjectsReturned,e:
-            logger.warning("%s : found more than one country for nationality %r",msg1,nationality)
-    kw.update(nationality=nationality2country(data['nationality']))
+    if False:
+        def nationality2country(nationality):
+            try:
+                return countries.Country.objects.get(nationalities__icontains=nationality)
+            except countries.Country.DoesNotExist,e:
+                logger.warning("%s : no country for nationality %r",msg1,nationality)
+            except MultipleObjectsReturned,e:
+                logger.warning("%s : found more than one country for nationality %r",msg1,nationality)
+        kw.update(nationality=nationality2country(data['nationality']))
     
     def doctype2cardtype(dt):
         #~ if dt == 1: return BeIdCardType.get_by_value("1")
@@ -546,25 +547,9 @@ def card2client(data):
     #~ logger.info("Unused data: %r", unused)
     return kw
     
-class BeIdReadCardAction(actions.ListAction):
-    """
-    Explore the data read from an eid card and decide what to do with it.
-    
-    Client reads a Belgian eId card using :attr:`lino.Lino.use_eid_jslib`,
-    then sends the data to the server where this action's run method will 
-    be called. Possible actions are to create a new client or to update data 
-    in existing client.
-    
-    """
-    js_handler = 'Lino.beid_read_card_handler'
-    http_method = 'POST'
+class BeIdReadCardToClientsAction(actions.BeIdReadCardAction):
     sorry_msg = _("Sorry, I cannot handle that case: %s")
     
-    def get_view_permission(self,user):
-        if not settings.LINO.use_eid_jslib:
-            return False
-        return super(BeIdReadCardAction,self).get_view_permission(user)
-
     def run(self,row,ar,**kw):
         assert row is None
         #~ data = Getter(ar.request.POST)
@@ -623,6 +608,7 @@ class BeIdReadCardAction(actions.ListAction):
             _("%s has been saved.") % obj2unicode(obj),
             alert=_("Success"),
             refresh=True)
+
 
     
 class Client(Person):
@@ -776,7 +762,7 @@ class Client(Person):
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
-    beid_read_card = BeIdReadCardAction(_("Read eID card"),
+    beid_read_card = BeIdReadCardToClientsAction(_("Read eID card"),
         required=dict(user_level='admin'))
     
     #~ def update_system_note(self,note):
@@ -2737,19 +2723,21 @@ def customize_contacts():
             help_text=_("Whether Links of this type can be used as contact person of a job contract.")))
         
         
-def customize_countries():
-    """
-    Injects application-specific fields to :mod:`countries <lino.modlib.countries>`.
-    """
-    dd.inject_field(countries.Country,
-        'nationalities',
-        models.CharField(
-            verbose_name=_("Nationality texts (NL, FR, DE, EN)"),
-            max_length=200,
-            blank=True,
-            help_text=_("Space separated list of case insensitive nationality designations in 4 languages.")))
-        
-        
+if False:
+  
+    def customize_countries():
+        """
+        Injects application-specific fields to :mod:`countries <lino.modlib.countries>`.
+        """
+        dd.inject_field(countries.Country,
+            'nationalities',
+            models.CharField(
+                verbose_name=_("Nationality texts (NL, FR, DE, EN)"),
+                max_length=200,
+                blank=True,
+                help_text=_("Space separated list of case insensitive nationality designations in 4 languages.")))
+            
+            
 
         
 
@@ -2986,7 +2974,7 @@ def site_setup(site):
     
     site.modules.countries.Countries.set_detail_layout("""
     isocode name short_code inscode
-    nationalities
+    # nationalities
     countries.CitiesByCountry jobs.StudiesByCountry
     """)
     
@@ -3110,7 +3098,7 @@ dd.add_user_group('integ',INTEG_MODULE_LABEL)
 #~ dd.add_user_group('coach',INTEG_MODULE_LABEL)
 
 customize_siteconfig()
-customize_countries()
+#~ customize_countries()
 customize_contacts()        
 customize_notes()
 customize_sqlite()
