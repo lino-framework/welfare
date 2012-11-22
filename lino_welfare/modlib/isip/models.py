@@ -594,21 +594,21 @@ class ContractsByType(Contracts):
 
 
 
-def setup_main_menu(site,ui,user,m): 
+def setup_main_menu(site,ui,profile,m): 
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(MyContracts)
     
-def setup_master_menu(site,ui,user,m): pass
+def setup_master_menu(site,ui,profile,m): pass
 
-def setup_my_menu(site,ui,user,m): pass
+def setup_my_menu(site,ui,profile,m): pass
     #~ m.add_action(MyContracts)
   
-def setup_config_menu(site,ui,user,m): 
+def setup_config_menu(site,ui,profile,m): 
     #~ m  = m.add_menu("isip",_("ISIPs"))
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(ContractTypes)
     m.add_action(ContractEndings)
     m.add_action(ExamPolicies)
   
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     m.add_action(Contracts)

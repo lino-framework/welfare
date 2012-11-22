@@ -1313,7 +1313,7 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
 
 MODULE_LABEL = _("Jobs")
 
-def setup_main_menu(site,ui,user,m): 
+def setup_main_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.user:
         #~ return
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
@@ -1327,7 +1327,7 @@ def setup_main_menu(site,ui,user,m):
 #~ def setup_my_menu(site,ui,user,m): 
     #~ m.add_action(MyContracts)
   
-def setup_config_menu(site,ui,user,m): 
+def setup_config_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
@@ -1343,7 +1343,7 @@ def setup_config_menu(site,ui,user,m):
     
     
   
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)

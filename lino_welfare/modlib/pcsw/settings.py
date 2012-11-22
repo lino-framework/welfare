@@ -91,7 +91,8 @@ class Lino(Lino):
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset('* office integ cbss newcomers debts')
         add = dd.UserProfiles.add_item
-        add('000', _("Anonymous"),                  '_ _ _ _ _ _', name='anonymous', readonly=True)
+        add('000', _("Anonymous"),                  '_ _ _ _ _ _', 
+            name='anonymous', readonly=True,authenticated=False)
         add('100', _("Integration Agent"),          'U U U U _ _')
         add('110', _("Integration Agent (Senior)"), 'U M M U _ _')
         add('200', _("Newcomers consultant"),       'U U _ U U _')
@@ -134,13 +135,13 @@ class Lino(Lino):
                 
             
 
-    def setup_quicklinks(self,ui,user,tb):
+    def setup_quicklinks(self,ar,tb):
         #~ tb.add_action(self.modules.contacts.Persons().detail)
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
         #~ tb.add_action(self.modules.contacts.Persons,'detail')
         #~ tb.add_action(self.modules.pcsw.Clients.detail_action)
         tb.add_action('pcsw.Clients','detail')
-        self.on_each_app('setup_quicklinks',ui,user,tb)
+        self.on_each_app('setup_quicklinks',ar,tb)
         
         tb.add_action(self.modules.pcsw.IntegClients)
         tb.add_action(self.modules.isip.MyContracts)
@@ -148,7 +149,7 @@ class Lino(Lino):
         #~ tb.add_action(self.modules.pcsw.Home)
         
         
-    def setup_menu(self,ui,user,main):
+    def setup_menu(self,ui,profile,main):
         from django.utils.translation import ugettext_lazy as _
         from django.utils.translation import string_concat
         from django.db import models
@@ -165,24 +166,24 @@ class Lino(Lino):
             #~ m.add_action(self.modules.contacts.AllPartners)
             
         m = main.add_menu("master",_("Master"))
-        self.on_each_app('setup_master_menu',ui,user,m)
+        self.on_each_app('setup_master_menu',ui,profile,m)
         
         #~ if user.profile.integ_level:
             #~ m = main.get_item("contacts")
             #~ m.add_action(self.modules.pcsw.MyPersonSearches)
             
             
-        if user.profile.level and not user.profile.readonly:
+        if profile.level and not profile.readonly:
           
             m = main.add_menu("my",_("My menu"))
             #~ m.add_action('projects.Projects')
             #~ m.add_action(self.modules.notes.MyNotes)
             
-            self.on_each_app('setup_my_menu',ui,user,m)
+            self.on_each_app('setup_my_menu',ui,profile,m)
             #~ m.add_action(self.modules.lino.MyTextFieldTemplates)
 
         
-        self.on_each_app('setup_main_menu',ui,user,main)
+        self.on_each_app('setup_main_menu',ui,profile,main)
         
         m = main.get_item("contacts")
         m.clear()
@@ -194,26 +195,26 @@ class Lino(Lino):
         m.add_action(self.modules.contacts.Partners,label=_("Partners (all)"))
         
         m = main.add_menu("reports",_("Listings"))
-        self.on_each_app('setup_reports_menu',ui,user,m)
+        self.on_each_app('setup_reports_menu',ui,profile,m)
         
-        if user.profile.level >= dd.UserLevels.manager: # is_staff:
+        if profile.level >= dd.UserLevels.manager: # is_staff:
             cfg = main.add_menu("config",_("Configure"))
             
-            self.on_each_app('setup_config_menu',ui,user,cfg)
+            self.on_each_app('setup_config_menu',ui,profile,cfg)
             
             
             
-        if user.profile.level >= dd.UserLevels.manager: # is_staff:
+        if profile.level >= dd.UserLevels.manager: # is_staff:
           
             m = main.add_menu("explorer",_("Explorer"))
-            self.on_each_app('setup_explorer_menu',ui,user,m)
+            self.on_each_app('setup_explorer_menu',ui,profile,m)
             
             m.add_action(self.modules.properties.Properties)
 
         
         m = main.add_menu("site",_("Site"))
         #~ self.modules.lino.setup_site_menu(self,ui,user,m)
-        self.on_each_app('setup_site_menu',ui,user,m)
+        self.on_each_app('setup_site_menu',ui,profile,m)
         
         return main
       

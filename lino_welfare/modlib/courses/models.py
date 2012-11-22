@@ -706,23 +706,23 @@ MODULE_LABEL = _("Courses")
         
 def site_setup(self): pass
     
-def setup_main_menu(site,ui,user,m):
-    if user.profile.integ_level:
+def setup_main_menu(site,ui,profile,m):
+    if profile.integ_level:
         m = m.add_menu("courses",MODULE_LABEL)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)
         m.add_action(PendingCourseRequests)
             
   
-def setup_master_menu(site,ui,user,m): pass
-def setup_my_menu(site,ui,user,m): pass
-def setup_config_menu(site,ui,user,m):
+def setup_master_menu(site,ui,profile,m): pass
+def setup_my_menu(site,ui,profile,m): pass
+def setup_config_menu(site,ui,profile,m):
     m = m.add_menu("courses",MODULE_LABEL)
     m.add_action(CourseContents)
     #~ m.add_action(CourseEndings)
             
   
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     m = m.add_menu("courses",MODULE_LABEL)
     m.add_action(Courses)
     m.add_action(CourseRequests)

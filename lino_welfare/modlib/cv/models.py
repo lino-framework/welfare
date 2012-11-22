@@ -308,6 +308,6 @@ def customize_siteconfig():
 
 customize_siteconfig()
 
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     m = m.add_menu("cv",_("CV"))
     m.add_action(LanguageKnowledges)

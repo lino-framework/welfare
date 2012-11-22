@@ -1069,20 +1069,20 @@ def site_setup(site):
         #~ user_groups=['debts'],user_level='manager')
 
 
-def setup_main_menu(site,ui,user,m):
+def setup_main_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     m.add_action(pcsw.DebtsClients)
     m.add_action(MyBudgets)
   
   
-def setup_master_menu(site,ui,user,m): pass
+def setup_master_menu(site,ui,profile,m): pass
 
-def unused_setup_my_menu(site,ui,user,m): 
+def unused_setup_my_menu(site,ui,profile,m): 
     m  = m.add_menu("debts",MODULE_LABEL)
     m.add_action(MyBudgets)
   
-def setup_config_menu(site,ui,user,m): 
+def setup_config_menu(site,ui,profile,m): 
     pass
     #~ if user.profile.debts_level < UserLevels.manager: 
         #~ return
@@ -1092,7 +1092,7 @@ def setup_config_menu(site,ui,user,m):
     #~ m.add_action(DebtTypes)
     #~ m.add_action(Accounts)
   
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     #~ if user.profile.debts_level < UserLevels.manager:
         #~ return
     m  = m.add_menu("debts",MODULE_LABEL)

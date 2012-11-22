@@ -2838,14 +2838,12 @@ def customize_sqlite():
     #~ coming_reminders:40x16 missed_reminders:40x16
     #~ """
     
-#~ def setup_master_menu(site,ui,user,m): 
-    #~ m.add_action(AllClients)
 
 MODULE_LABEL = _("PCSW")
 INTEG_MODULE_LABEL = _("Integration")
 
-#~ def setup_my_menu(site,ui,user,m): 
-def setup_main_menu(site,ui,user,m): 
+#~ def setup_my_menu(site,ui,profile,m): 
+def setup_main_menu(site,ui,profile,m): 
     #~ if user.is_spis:
     #~ if user.profile.integ_level:
         #~ mypersons = m.add_menu("mypersons",MyClients.label)
@@ -2879,7 +2877,7 @@ def setup_main_menu(site,ui,user,m):
 
         
 
-def setup_config_menu(site,ui,user,m): 
+def setup_config_menu(site,ui,profile,m): 
     m  = m.add_menu("pcsw",MODULE_LABEL)
     #~ config_pcsw     = cfg.add_menu("pcsw",_("SIS"))
     #~ config_pcsw.add_action(self.modules.pcsw.PersonGroups)
@@ -2893,13 +2891,13 @@ def setup_config_menu(site,ui,user,m):
     m.add_action(ClientContactTypes)
     
     
-def setup_reports_menu(site,ui,user,m):
+def setup_reports_menu(site,ui,profile,m):
     m.add_action(site.modules.jobs.JobsOverview)
     m.add_action(site.modules.pcsw.UsersWithClients)
     m.add_action(site.modules.pcsw.ClientsTest)
         
   
-def setup_explorer_menu(site,ui,user,m):
+def setup_explorer_menu(site,ui,profile,m):
     m  = m.add_menu("pcsw",MODULE_LABEL)
     m.add_action(Coachings)
     m.add_action(ClientContacts)

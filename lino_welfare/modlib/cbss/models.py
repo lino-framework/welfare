@@ -1813,8 +1813,8 @@ def site_setup(self):
     
     
     
-def setup_main_menu(site,ui,user,m): pass
-def setup_master_menu(site,ui,user,m): pass
+def setup_main_menu(site,ui,profile,m): pass
+def setup_master_menu(site,ui,profile,m): pass
   
 #~ def setup_my_menu(site,ui,user,m): 
     #~ if user.profile.cbss_level < UserLevels.user: 
@@ -1824,13 +1824,13 @@ def setup_master_menu(site,ui,user,m): pass
     #~ m.add_action(MyManageAccessRequests)
     #~ m.add_action(MyRetrieveTIGroupsRequests)
     
-def setup_config_menu(site,ui,user,m):
+def setup_config_menu(site,ui,profile,m):
     m  = m.add_menu("cbss",MODULE_LABEL)
     m.add_action(Sectors)
     m.add_action(Purposes)
   
-def setup_explorer_menu(site,ui,user,m):
-    if user.profile.cbss_level < dd.UserLevels.manager: 
+def setup_explorer_menu(site,ui,profile,m):
+    if profile.cbss_level < dd.UserLevels.manager: 
         return
     m  = m.add_menu("cbss",MODULE_LABEL)
     m.add_action(IdentifyPersonRequests)
