@@ -1,5 +1,152 @@
+===========================
 Konvertierung TIM nach Lino
 ===========================
+
+.. contents:: Inhalt
+   :local:
+   :depth: 2
+
+
+Partner
+=======
+
+Sowohl in TIM als auch in Lino gibt es eine Tabelle der **Partner**.
+Die Partnernummer ist die Gleiche in TIM wie in Lino.
+Im Hintergrund läuft ständig ein Programm namens :term:`watch_tim`, 
+das alle Änderungen in TIM automatisch nach Lino synchronisiert.
+
+Partner mit einer Nummer zwischen 200000 und 299999 
+sind **in Lino erstellt** worden und existieren also nicht in TIM.
+Alle anderen Partner sind **importierte** Partner, und die haben 
+die meisten Datenfelder in Lino schreibgeschützt.
+
+Lino *unterteilt* Partner etwas anders als TIM.
+
+TIM unterscheidet vier "Partnerarten":
+
+- S Sozialhilfeempfänger
+- A APH-Bewohner
+- V Verschiedene
+- I Inaktive Partner
+
+Lino hat folgende "Untertabellen der Tabelle Partner":
+
+.. graphviz:: 
+   
+   digraph foo {
+   
+    Partner -> Personen
+    Partner -> Organisationen
+    Partner -> Haushalte
+    Personen -> Klienten
+    Organisationen -> Stellenanbieter
+    Organisationen -> Kursanbieter
+  }
+
+
+..
+  :class:`contacts.Partner`
+  :class:`contacts.Company`
+  :class:`contacts.Person` 
+  :class:`pcsw.Client`
+  :class:`households.Household`
+  :class:`jobs.JobProvider`
+  :class:`courses.CourseProvider`
+
+Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
+
+- Wenn PAR->NB2 (NISS) oder Gesdos-Nr unleer, 
+  oder wenn Attribut N (Neuzugang) 
+  gesetzt ist, wird es ein **Klient**.
+- Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
+- Ansonsten, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
+  "Herr und Frau" enthält, dann wird es ein **Haushalt**.
+- Ansonsten wird es eine **Person**.
+
+Ob eine Organisation auch Kursanbieter oder Stellenabieter ist, 
+wird lediglich in Lino 
+(durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. 
+TIM kennt diese Nuance nicht.
+
+Veraltete Partner
+-----------------
+
+Das Attribut "veraltet" bedeutet: 
+
+- die Daten dieses Partners werden nicht mehr gepflegt, 
+- alle Angaben verstehen sich als "so war es, bevor dieser Partner 
+  aufhörte, uns zu interessieren".
+
+Altfälle werden normalerweise ignoriert.
+
+Also "begleitete" Klienten können trotzdem 
+wie vom Erdboden verschwunden scheinen, 
+weil sie als veraltet markiert wurden.
+
+Um auch veraltete Klienten zu sehen, 
+muss das Ankreuzfeld `Auch veraltete Klienten`
+im Parameter-Panel der Liste angekreuzt werden.
+
+
+Partnerattribute
+----------------
+
+Hier eine Liste der möglichen Partnerattribute in TIM, und was Lino daraus macht.
+
+====== ====================================== ========================================
+Attrib Bezeichnung in TIM                     in Lino
+====== ====================================== ========================================
+H      Versteckt                              wird ignoriert
+W      Warnung bei Auswahl                    `veraltet`im Reiter `Sonstiges`
+R      Schreibgeschützt                       wird ignoriert
+2      als Nebenpartner ignorieren            wird ignoriert
+A      Altfall (automatisch)                  wird ignoriert
+E      Eingeschlafener Debitor (automatisch)  wird ignoriert
+N      Neuzugang                              Klient im Bearbeitungszustand "Neuantrag"
+====== ====================================== ========================================
+
+Der Unterschied zwischen W und A ist lediglich, das A automatisch verteilt wird. 
+W ist eigentlich das Gleiche wie inaktiv.
+
+
+Anrede
+------
+
+`PAR->Allo` geht nach :attr:`Person.title` oder :attr:`Company.prefix`.
+Außer wenn `PAR->Allo` es einen der Werte "Eheleute", 
+"Herr und Frau" enthält, dann wird es ein Haushalt.
+
+
+
+
+Klienten
+========
+
+Klienten gibt es in drei **Tabellenansichten**, 
+die sich lediglich durch Kolonnenreihenfolge 
+und Filterparameter unterscheiden:
+
+- "Alle Klienten" 
+  (Menü :menuselection:`Kontakte --> Klienten`) : 
+  allgemeine Liste, die jeder Benutzer sehen darf.
+
+- DSBE-Klienten
+  (Menü :menuselection:`DSBE --> Klienten`)
+  spezielle Liste für die Kollegen im DSBE.
+  Zeigt immer nur **begleitete** Kunden. 
+  Hier kann man keine neuen Klienten anlegen.
+  Die Reiter Kompetenzen, Verträge... finden sich nur hier.
+  
+- Neue Klienten
+  (Menü :menuselection:`Neuanträge --> Klienten`):
+  spezielle Liste für die Zuweisung von Neuanträgen.
+
+N.B. 
+Das Detail, das bei Doppelklick angezeigt wird, 
+ist bei allen drei Ansichten das Gleiche. 
+Das hängt vom :doc:`Benutzerprofil </user/userprofiles>` ab.
+
+
 
 Die NISS
 --------
@@ -7,15 +154,201 @@ Die NISS
 - Es kann Klienten ohne NISS geben. 
   Die sind dann allerdings "inoffiziell" bzw. "nicht integriert" bzw. "ohne Akte beim Ministerium".
   In TIM haben diese Klienten entweder eine leere NISS oder eine 0 dort stehen.
-  *Lino trägt im Feld `NISS` die Partnernummer ein, wenn es nicht ausgefüllt ist.*
+  Die 0 wird als "leer" übertragen, denn 
+  in Lino kann es nicht zwei Klienten mit der gleichen NISS geben.
+  
+- Lino lässt auch ungültige NISS zu, aber
+  Klienten im Bearbeitungszustand "Begleitet" müssen eine *gültige* NISS haben.
   
 - Ein "Numéro bis" ist eine provisorische NISS, 
   die z.B. auch 680000 formatiert ist.
   So eine Bis-Nummer kann also dann auch irgendwann mal ändern.
   
 
-watch_tim
+
+Bearbeitungszustand
+-------------------
+
+Der Bearbeitungszustand eines Klienten kann sein:
+
+- **Neuantrag** : 
+  Die Person hat Antrag auf Begleitung gestellt. 
+  Antrag wird überprüft und der Klient muss einem Sachbearbeiter 
+  oder Sozi zugewiesen werden.
+  
+  Im Detail-Reiter 
+  :screen:`Neuanträge <pcsw.Client.detail.newcomers>`
+  kann man einem Neuzugang 
+  einen **Begleiter zuweisen**, wodurch der Klient ins Stadium "Begleitet" wechelt.
+  
+- **Abgelehnt** : 
+  Die Prüfung des Antrags hat ergeben, dass diese Person kein Anrecht 
+  auf Begleitung durch unser ÖSHZ hat.
+  
+- **Begleitet** :
+  Es gibt im ÖSHZ mindestens eine Person, die "sich um die Person kümmert".
+  Damit ein Klient im Status "Begleitet" sein kann, muss mindestens 
+  eine aktive Begleitung existieren.
+
+- **Ehemalig** :
+  War mal begleitet, aber jetzt nicht mehr. 
+  Es existieren Begleitungen, aber keine davon ist *aktiv*.
+  Falls es ein importierter Partner ist, 
+  hatte er in TIM entweder das Attribut `W (Warnung bei Auswahl)`
+  oder die Partnerart `I (Inaktive)`.
+
+  
+- **Ungültig** :
+  Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.
+  
+  
+  
+.. graphviz:: 
+   
+   digraph foo {
+      newcomer -> refused [label="Neuantrag ablehnen"];
+      newcomer -> coached [label="Begleiter zuweisen"];
+      refused -> newcomer [label="Neuantrag wiederholen"];
+      coached -> newcomer [label="Begleitung abbrechen"];
+      coached -> former [label="Begleitung beenden"];
+      invalid -> newcomer [label="NISS wurde korrigiert"];
+      
+      newcomer [label="Neuantrag"];
+      refused [label="Abgelehnt"];
+      invalid [label="Ungültig"];
+      former [label="Ehemalig"];
+      coached [label="Begleitet"];
+   }
+
+
+Bemerkung:
+Wie alle Partner haben auch Klienten (im Reiter "Sonstiges") 
+ein Ankreuzfeld "veraltet",
+das unabhängig vom Bearbeitungszustand_ existiert. 
+Siehe `Veraltete Partner`_.
+
+
+Sonstiges
 ---------
+
+Im Reiter :guilabel:`Sonstiges` gibt es drei Ankreuzfelder 
+
+- Sozialhilfeempfänger (`is_cpas`) : Angekreuzt , wenn in TIM Partnerart S war.
+- Altenheim (`is_senior`) : Angekreuzt , wenn in TIM Partnerart A war.
+- veraltet (`is_obsolete`) : Angekreuzt , wenn in TIM Partneraattribut W gesetzt war.
+
+
+.. Dubletten
+  Der Klient wurde versehentlich als Dublette eines existierenden 
+  Klienten angelegt (und darf jedoch nicht mehr gelöscht werden, 
+  weil Dokumente mit der Partnernummer existieren).
+  In Lino setzt man solche Klienten einfach in den 
+  Bearbeitungszustand "Ungültig".
+
+
+
+Begleitungen
+============
+
+Eine **Begleitung** ist, wenn sich eine bestimmte Person im ÖSHZ 
+um einen bestimmten Klienten während einer bestimmten Periode 
+"kümmert".
+
+Lino kann pro Klient mehrere Begleitungen haben, aber in 
+TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
+Deshalb gibt es folgende Regeln:
+
+In Lino kann pro Klient immer nur eine Begleitung "primär" sein.
+Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
+Für importierte Partner wird die primäre Begleitung aus TIM wie folgt synchronisiert:
+
+- von : Erstelldatum des Kunden
+- bis : leer
+- Benutzer : der in TIM angegebene Benutzer
+
+Auf importierten Klienten sind diese Felder (auf der *primären* Begleitung) 
+schreibgeschützt. Auf importierten primären Begleitungen kann lediglich 
+der Begleitungsdienst und der Zustand manuell geändert werden.
+
+Das Ankreuzfeld "primär" kann auf importierten Klienten *nie* bearbeitet werden.
+
+Also man kann auf importierten Klienten in Lino zusätzliche Begleitungen 
+erstellen, aber diese können nicht primär sein.
+An diese sekundären Begleitungen geht watch_tim dann nicht ran.
+
+
+Regeln
+======
+  
+- Ein Neuantrag kann keine Begleitungen haben. 
+  (Ein Klient mit Begleitungen, selbst abgeschlossene, 
+  kann nicht wieder zum Neuantrag werden. 
+  Höchstens zu einem Ehemaligen.)
+  
+- Wenn ein Klient ins Stadium Ehemalig wechselt, werden automatisch 
+  alle laufenden Begleitungen beendet.
+  Ein Ehemaliger kann keine *laufenden* Begleitungen haben.
+  
+- Nur Benutzer mit einem unleeren Feld 
+  `Begleitungsart (Dienst)` in den Benutzereinstellungen
+  dürfen manuell Begleitungen erstellen.
+  
+- Wenn man eine Begleitung manuell erstellt, 
+  wird `Beginndatum` aufs Tagesdatum 
+  und `Begleitungsart (Dienst)` auf die des Benutzers ausgefüllt.
+  
+- Importierte Klienten haben eine importierte primäre 
+  Begleitung, die nicht geändert werden kann.
+  
+
+
+Klientenkontakte
+================
+
+Die Felder PXS->IdMut (Krankenasse) und PXS->Apotheke (Apotheke) 
+werden nach Lino synchronisiert als *Klientenkontakte*.
+
+*Importierte* Klienten sollten in ihren Klientenkontakten 
+deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
+
+Ansonsten findet watch_tim, dass er nicht dafür 
+zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)
+
+Alle anderen Klientenkontaktarten sind egal, 
+davon dürfen auch importierte Klienten so viele haben wie sie wollen.
+
+Beim Synchronisieren sind folgende Fehlermeldungen denkbar 
+(die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::
+
+    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 199630 doesn't exist
+    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 0000086256 doesn't exist
+
+Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also 
+dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt.
+
+Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese 
+Apotheke zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen.
+
+Krankenkassen
+-------------
+
+Die Krankenkassen (Adressen aus `ADR` mit `ADR->Type == 'MUT'`) 
+erscheinen in Lino als Organisation, 
+wobei deren `id` beim ersten Import (initdb_tim) 
+wie folgt ermittelt wurde:
+
+  id = val(ADR->IdMut) + 199000
+  
+Krankenakssen werden nicht mehr automatisch synchronisiert.
+Also falls des eine in TIM erstellt wird, muss die entsprechende 
+Organisation in Lino manuell erstellt werden.
+
+
+  
+  
+
+Technisches
+===========
 
 In der :xfile:`settings.py` gibt es folgende Optionen, 
 die für die Synchronisierung von Belang sind::
@@ -41,126 +374,3 @@ die für die Synchronisierung von Belang sind::
         return userid.lower()
 
 
-
-
-Die Partner aus TIM kommen entweder nach 
-:class:`contacts.Company`, 
-nach :class:`contacts.Person`, 
-nach :class:`households.Household`
-oder
-nach :class:`pcsw.Client`. Die Entscheidung wird nach folgenden Regeln getroffen:
-
-- Wenn PAR->NB2 (NISS) oder Gesdos-Nr unleer, oder wenn Attribut N (Neuzugang) 
-  gesetzt ist, wird es ein **Klient**.
-- Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
-- Ansonsten, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
-  "Herr und Frau" enthält, dann wird es ein **Haushalt**.
-- Ansonsten wird es eine **Person**.
-
-Alle Partner stehen auch in ´contacts.Parter´.
-Das jeweilige id entspricht der Partnernummer (PAR->IdPar) 
-aus TIM.
-
-
-Personen und Firmen mit einem id über 200.000 
-(und unter 800.000) sind *in Lino* erstellt worden.
-
-`PAR->Allo` geht nach :attr:`Person.title` oder :attr:`Company.prefix`.
-Außer wenn `PAR->Allo` es einen der Werte "Eheleute", 
-"Herr und Frau" enthält, dann wird es ein Haushalt.
-
-
-
-Die Regeln beim Übernehmen der diversen Flags aus TIM sind:
-
-- `newcomer` : `True` wenn Attribut N in TIM gesetzt ist
-- `is_deprecated` (Altdaten) : `True` wenn Attribut W in TIM gesetzt ist.
-- `is_active` : False wenn Partnerart I (ansonsten True)
-- `is_cpas` : True wenn Partnerart S
-- `is_senior` : True wenn Partnerart A
-
-Hier eine Liste der möglichen Partnerattribute in TIM:
-
-- H : Versteckt
-- W : Warnung bei Auswahl
-- R : Schreibgeschützt
-- 2 : als Nebenpartner ignorieren
-- A : Altfall (automatisch)
-- E : Eingeschlafener Debitor (automatisch)
-- N : Neuzugang
-
-
-Der Unterschied zwischen W und A ist lediglich, das A automatisch verteilt wird. 
-W ist eigentlich das Gleiche wie inaktiv.
-
-
-Begleitungen
-------------
-
-Lino kann pro Klient mehrere Begleitungen haben, aber in 
-TIM haben wir nur PAR->IdUsr, den "hauptverantwortlichen Sozialarbeiter". 
-Das haben wir wie folgt gelöst:
-
-In Lino kann pro Klient immer nur eine Begleitung "primär" sein.
-Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
-Für importierte Partner wird die primäre Begleitung aus TIM wie folgt synchronisiert:
-
-- von : Erstelldatum des Kunden
-- bis : leer
-- Benutzer : der in TIM angegebene Benutzer
-
-Auf importierten Klienten sind diese Felder (auf der *primären* Begleitung) 
-schreibgeschützt. Auf importierten primären Begleitungen kann lediglich 
-der Begleitungsdienst und der Zustand manuell geändert werden.
-
-Das Ankreuzfeld "primär" kann auf importierten Klienten *nie* bearbeitet werden.
-
-Also man kann auf importierten Partnern in Lino zusätzliche Begleitungen 
-erstellen, aber diese können nicht primär sein.
-An diese sekundären Begleitungen geht watch_tim dann nicht ran.
-
-
-Krankenkassen
--------------
-
-Die Krankenkassen (Adressen aus ADR mit ADR->Type == 'MUT') 
-erscheinen in Lino als Organisation, 
-wobei deren `id` beim ersten Import (initdb_tim) 
-wie folgt ermittelt wurde:
-
-  id = val(ADR->IdMut) + 199000
-  
-Krankenakssen werden nicht mehr automatisch synchronisiert.
-Also falls des eine in TIM erstellt wird, muss die entsprechende 
-Organisation in Lino manuell erstellt werden.
-
-Klientenkontakte
-----------------
-
-Die Felder PXS->IdMut (Krankenasse) und PCS->Apotheke (Apotheke) 
-werden nach Lino synchronisiert als *Klientenkontakte*.
-
-Importierte Klienten sollten in ihren Klientenkontakten 
-deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
-
-Ansonsten findet watch_tim, dass er nicht dafür 
-zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)
-
-Alle anderen Klientenkontaktarten sind egal, 
-davon dürfen auch importierte Klienten so viele haben wie sie wollen.
-
-Beim Synchronisieren sind folgende Fehlermeldungen denkbar 
-(die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::
-
-    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 199630 doesn't exist
-    ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 0000086256 doesn't exist
-
-Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also 
-dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt.
-
-Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese 
-Apotheke zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen.
-  
-  
-  
-  
