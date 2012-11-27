@@ -2905,6 +2905,7 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(Exclusions)
     m.add_action(PersonSearches)
     m.add_action(CivilState)
+    m.add_action(ClientStates)
     
 
 def site_setup(site):
