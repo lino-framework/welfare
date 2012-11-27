@@ -182,6 +182,8 @@ class ContractBase(
     :class:`lino_welfare.modlib.isip.models.Contract`
     """
     
+    manager_level_field = 'integ_level'
+    
     TASKTYPE_CONTRACT_APPLIES_UNTIL = 1
     
     class Meta:
@@ -589,6 +591,9 @@ class MyContracts(Contracts):
     #~ column_names = "reminder_date client company *"
     #~ order_by = ["applies_from"]
     #~ filter = dict(reminder_date__isnull=False)
+    
+    #~ debug_permissions = 20121127
+
       
     @classmethod
     def param_defaults(self,ar,**kw):
