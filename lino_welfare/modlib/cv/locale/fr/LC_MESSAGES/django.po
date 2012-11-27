@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 20:28+0000\n"
+"POT-Creation-Date: 2012-11-27 12:02+0000\n"
 "PO-Revision-Date: 2012-06-08 11:59+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -20,88 +20,93 @@ msgstr ""
 msgid "CEF level"
 msgstr "Niveau CEF"
 
-#: .\models.py:113 .\models.py:114 .\models.py:115
+#: .\models.py:104
+#, fuzzy
+msgid "CEF levels"
+msgstr "Niveau CEF"
+
+#: .\models.py:114 .\models.py:115 .\models.py:116
 #, fuzzy
 msgid "basic language skills"
 msgstr "Langue maternelle"
 
-#: .\models.py:116 .\models.py:117 .\models.py:118
+#: .\models.py:117 .\models.py:118 .\models.py:119
 msgid "independent use of language"
 msgstr ""
 
-#: .\models.py:119 .\models.py:120 .\models.py:121
+#: .\models.py:120 .\models.py:121 .\models.py:122
 msgid "proficient use of language"
 msgstr ""
 
-#: .\models.py:135
+#: .\models.py:136
 msgid "language knowledge"
 msgstr "Connaissance de langue"
 
-#: .\models.py:136
+#: .\models.py:137
 msgid "language knowledges"
 msgstr "Connaissances de langue"
 
-#: .\models.py:143
+#: .\models.py:144
 msgid "Language"
 msgstr "Langue"
 
-#: .\models.py:146
+#: .\models.py:147
 msgid "spoken"
 msgstr "oral"
 
-#: .\models.py:147
+#: .\models.py:148
 msgid "written"
 msgstr "écrit"
 
-#: .\models.py:148
+#: .\models.py:149
 msgid "native language"
 msgstr "Langue maternelle"
 
-#: .\models.py:157
+#: .\models.py:158
 #, python-format
 msgid "%s (s/w)"
 msgstr "%s (parlé/écrit)"
 
-#: .\models.py:159
+#: .\models.py:160
 #, python-format
 msgid "%s (s)"
 msgstr "%s (écrit)"
 
-#: .\models.py:161
+#: .\models.py:162
 #, python-format
 msgid "%s (w)"
 msgstr "%s (parlé)"
 
-#: .\models.py:195
+#: .\models.py:196
 msgid "Property"
 msgstr "Propriété"
 
-#: .\models.py:196
+#: .\models.py:197
 msgid "Properties"
 msgstr "Propriétés"
 
-#: .\models.py:203
+#: .\models.py:204
 msgid "Remark"
 msgstr "Remarque"
 
-#: .\models.py:250
+#: .\models.py:251
 #, python-format
 msgid "(Site setting %s is empty)"
 msgstr "(les paramètres de site %s sont vides)"
 
-#: .\models.py:282
+#: .\models.py:283
 msgid "Skills Property Group"
 msgstr "Groupe de propriétés 'Skills'"
 
-#: .\models.py:290
+#: .\models.py:291
 msgid "Soft Skills Property Group"
 msgstr "Groupe de propriétés 'Soft Skills'"
 
-#: .\models.py:300
+#: .\models.py:301
 msgid "Obstacles Property Group"
 msgstr "Groupe de propriétés 'Obstacles'"
 
-#: .\models.py:311
+#: .\models.py:312
 msgid "CV"
 msgstr ""
 

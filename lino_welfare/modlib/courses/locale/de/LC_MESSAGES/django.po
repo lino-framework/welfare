@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 20:28+0000\n"
+"POT-Creation-Date: 2012-11-27 12:02+0000\n"
 "PO-Revision-Date: 2012-09-19 13:22+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -76,10 +76,6 @@ msgstr "Kandidatenliste"
 #: .\models.py:286
 msgid "List of participants"
 msgstr "Teilnehmerliste"
-
-#: .\models.py:350
-msgid "State"
-msgstr "Status"
 
 #: .\models.py:373
 msgid "Candidate"
@@ -179,6 +175,9 @@ msgstr "Adresse"
 #: .\models.py:671
 msgid "unknown age"
 msgstr "unbek. Alter"
+
+#~ msgid "State"
+#~ msgstr "Status"
 
 #~ msgid "%(person)s passed %(course)s"
 #~ msgstr "%(person)s hat bestanden in %(course)s"
