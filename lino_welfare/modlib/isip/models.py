@@ -135,6 +135,14 @@ class ExamPolicies(dd.Table):
     required=dict(user_groups = ['integ'],user_level='manager')
     model = ExamPolicy
     column_names = 'name *'
+    detail_layout = """
+    id name
+    # summary start_date end_date
+    # description
+    every every_unit calendar
+    isip.ContractsByPolicy    
+    jobs.ContractsByPolicy    
+    """
 
 #
 # CONTRACT ENDINGS
@@ -586,6 +594,10 @@ class ContractsByPerson(Contracts):
     master_key = 'client'
     column_names = 'applies_from applies_until user type *'
 
+class ContractsByPolicy(Contracts):
+    master_key = 'exam_policy'
+    #~ column_names = 'applies_from applies_until user type *'
+
         
 class ContractsByType(Contracts):
     master_key = 'type'
@@ -611,4 +623,5 @@ def setup_config_menu(site,ui,profile,m):
     m.add_action(ExamPolicies)
   
 def setup_explorer_menu(site,ui,profile,m):
+    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(Contracts)

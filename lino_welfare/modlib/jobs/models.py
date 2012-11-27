@@ -595,6 +595,9 @@ class ContractsByProvider(Contracts):
     master_key = 'company'
     column_names = 'client job applies_from applies_until user type *'
 
+class ContractsByPolicy(Contracts):
+    master_key = 'exam_policy'
+
 class ContractsByType(Contracts):
     master_key = 'type'
     column_names = "applies_from client job user *"

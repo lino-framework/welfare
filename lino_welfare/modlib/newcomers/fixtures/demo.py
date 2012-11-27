@@ -40,11 +40,11 @@ def objects():
     yield I(name="Other PCSW")
 
     I = Instantiator(Faculty).build
-    yield I(**babel_values('name', de=u"Eingliederungseinkommen", fr=u"EiEi",en=u"EiEi"))
-    yield I(**babel_values('name', de=u"DSBE", fr=u"DSBE",en=u"DSBE"))
-    yield I(**babel_values('name', de=u"Ausländerbeihilfe", fr=u"Ausländerbeihilfe",en=u"Ausländerbeihilfe"))
-    yield I(**babel_values('name', de=u"Finanzielle Begleitung", fr=u"Finanzielle Begleitung",en=u"Finanzielle Begleitung"))
-    yield I(**babel_values('name', de=u"Laufende Beihilfe", fr=u"Laufende Beihilfe",en=u"Laufende Beihilfe"))
+    yield I(**babel_values('name', de=u"Eingliederungseinkommen", fr=u"Revenu d'insertion",  en=u"EiEi"))
+    yield I(**babel_values('name', de=u"DSBE",                    fr=u"Insertion",           en=u"DSBE"))
+    yield I(**babel_values('name', de=u"Ausländerbeihilfe",       fr=u"Allocation étrangers",en=u"Ausländerbeihilfe"))
+    yield I(**babel_values('name', de=u"Finanzielle Begleitung",  fr=u"Aide financière",     en=u"Finanzielle Begleitung"))
+    yield I(**babel_values('name', de=u"Laufende Beihilfe",       fr=u"Aide courante",       en=u"Laufende Beihilfe"))
     
     
     #~ User = resolve_model('users.User')
