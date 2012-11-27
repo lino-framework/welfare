@@ -376,6 +376,8 @@ class ClientStates(dd.Workflow):
     
     #~ debug_permissions = True
     
+    verbose_name_plural = _("Client states")
+    
     @classmethod
     def allow_state_newcomer(cls,obj,user):
         if obj.client_state == ClientStates.coached:
