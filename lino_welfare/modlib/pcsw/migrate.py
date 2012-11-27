@@ -466,3 +466,6 @@ def migrate_from_1_0_2(globals_dict):
     globals_dict.update(create_countries_country=create_countries_country)
     
     return '1.0.3'
+
+def migrate_from_1_0_3(globals_dict):
+    return '1.0.4'

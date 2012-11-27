@@ -229,6 +229,7 @@ class ContractBase(
         #~ s += " (" + ui.href_to(self.person) + ")"
         #~ s += " (" + ui.href_to(self.person) + "/" + ui.href_to(self.provider) + ")"
         return s
+        
             
     def __unicode__(self):
         #~ return u'%s # %s' % (self._meta.verbose_name,self.pk)
