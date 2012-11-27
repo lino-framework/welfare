@@ -130,6 +130,9 @@ class ExamPolicy(babel.BabelNamed,cal.RecurrenceSet):
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
         
+    hidden_columns = 'summary description start_date start_time end_date end_time'
+    
+        
 
 class ExamPolicies(dd.Table):
     required=dict(user_groups = ['integ'],user_level='manager')
@@ -214,6 +217,9 @@ class ContractBase(
         blank=True,null=True,
         verbose_name=_("Ending"))
     date_ended = models.DateField(blank=True,null=True,verbose_name=_("date ended"))
+    
+    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended'
+    
     
     #~ def summary_row(self,ui,rr,**kw):
     def summary_row(self,ar,**kw):
@@ -503,6 +509,9 @@ class Contract(ContractBase):
         blank=True,null=True,format='html')
     duties_person = dd.RichTextField(_("duties person"),
         blank=True,null=True,format='html')
+        
+    hidden_columns = (ContractBase.hidden_columns 
+        + " stages goals duties_asd duties_dsbe duties_company duties_person")
     
     @classmethod
     def site_setup(cls,lino):

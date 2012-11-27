@@ -264,7 +264,8 @@ für neue Operationen nicht benutzt werden können.""")
         blank=True,# null=True,
         verbose_name=_("Bank account 2"))
         
-        
+    hidden_columns = 'created modified activity bank_account1 bank_account2'
+    
     @classmethod
     def site_setup(cls,site):
         super(Partner,cls).site_setup(site)
