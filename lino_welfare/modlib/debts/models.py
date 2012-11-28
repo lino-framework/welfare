@@ -346,10 +346,10 @@ The monthly amount available for distribution among debtors."""))
                 for m in household.member_set.all():
                     #~ if m.role and m.role.header:
                         #~ header = m.role.header
-                    if m.person.gender == contacts.Gender.male and not mr:
+                    if m.person.gender == mixins.Genders.male and not mr:
                         header = unicode(_("Mr."))
                         mr = True
-                    elif m.person.gender == contacts.Gender.female and not mrs:
+                    elif m.person.gender == mixins.Genders.female and not mrs:
                         header = unicode(_("Mrs."))
                         mrs = True
                     else:

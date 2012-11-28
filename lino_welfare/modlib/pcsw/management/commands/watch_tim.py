@@ -462,16 +462,14 @@ class PAR(Controller):
         
         store_date(data,obj,'DATCREA','created')
         
-        
         if data.has_key('LANGUE'):
             obj.language = isolang(data['LANGUE'])
-        
         
         #~ dblogger.info("20111223 %r",data)
         if data.has_key('ATTRIB'):
             #~ obj.newcomer = ("N" in data['ATTRIB'])
-            obj.is_obsolete = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
-            #~ obj.is_obsolete = ("W" in data['ATTRIB'])
+            #~ obj.is_obsolete = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
+            obj.is_obsolete = ("W" in data['ATTRIB'])
         
         if issubclass(obj.__class__,Person):
             #~ mapper.update(title='ALLO')

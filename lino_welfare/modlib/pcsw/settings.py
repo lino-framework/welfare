@@ -25,7 +25,7 @@ from lino.apps.std.settings import *
 class Lino(Lino):
     """
     """
-    version = '1.0.4' # released 2012-11-27
+    version = '1.0.5' # not yet released 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"

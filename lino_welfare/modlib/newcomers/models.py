@@ -57,6 +57,9 @@ contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
 outbox = dd.resolve_app('outbox')
 
+if not hasattr(pcsw,'Clients'):
+    print os.environ['DJANGO_SETTINGS_MODULE']
+
 MODULE_LABEL = _("Newcomers")
 
 class Broker(dd.Model):

@@ -40,6 +40,7 @@ from lino.utils import Cycler, join_words
 #~ from lino.utils import join_words
 #~ from lino.utils.choicelists import Gender
 
+from lino import mixins
 from lino import dd
 #~ from lino.core.modeltools import is_valid_email
 #~ import lino
@@ -110,7 +111,7 @@ class Command(BaseCommand):
             else:
                 p.nationality = Country.objects.get(isocode=NATIONALITIES.pop())
                 p.last_name = LAST_NAMES.pop()
-                if p.gender == contacts.Gender.male:
+                if p.gender == mixins.Genders.male:
                     p.first_name = MALES.pop()
                     FEMALES.pop()
                 else:
@@ -122,8 +123,8 @@ class Command(BaseCommand):
                 p.save()
                 dblogger.info("%s from %s",unicode(p),unicode(p.nationality))
                 
-        MEN = Cycler(Person.objects.filter(gender=contacts.Gender.male).order_by('id'))
-        WOMEN = Cycler(Person.objects.filter(gender=contacts.Gender.female).order_by('id'))
+        MEN = Cycler(Person.objects.filter(gender=mixins.Genders.male).order_by('id'))
+        WOMEN = Cycler(Person.objects.filter(gender=mixins.Genders.female).order_by('id'))
         for h in Household.objects.all():
             if h.member_set.all().count() == 0:
                 he = MEN.pop()

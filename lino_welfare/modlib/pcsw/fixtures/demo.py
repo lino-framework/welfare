@@ -26,6 +26,7 @@ from django.utils.translation import ugettext as _
 
 
 from lino import dd
+from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
 from lino.core.modeltools import resolve_model
@@ -38,7 +39,7 @@ from lino.utils.ssin import generate_ssin
 
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
-from lino.modlib.contacts.utils import Gender
+#~ from lino.modlib.contacts.utils import Gender
 #~ from lino.utils.choicelists import Gender
 from lino_welfare.modlib.jobs import models as jobs
 from lino.modlib.contacts import models as contacts
@@ -392,7 +393,7 @@ def objects():
       #~ card_number='123',birth_country=ee,birth_date='0000-04-27',
       #~ national_id='1234',
       #~ client_state=pcsw.ClientStates.newcomer,
-      gender=Gender.female)
+      gender=mixins.Genders.female)
     yield ly
     mari = person(first_name="Mari",last_name="Saffre",
       city=vigala,country='EE',
@@ -400,7 +401,7 @@ def objects():
       #~ birth_date=i2d(20020405),
       #~ national_id='1235',
       #~ client_state=pcsw.ClientStates.newcomer,
-      gender=Gender.female)
+      gender=mixins.Genders.female)
     yield mari
     iiris = person(first_name="Iiris",last_name="Saffre",
       city=vigala,country='EE',
@@ -408,13 +409,13 @@ def objects():
       #~ birth_date=i2d(20080324),
       #~ national_id='1236',
       #~ client_state=pcsw.ClientStates.newcomer,
-      gender=Gender.female)
+      gender=mixins.Genders.female)
     yield iiris
     
     gerd = person(first_name="Gerd",
       last_name="Xhonneux",city=kettenis,
       email='gerd@example.com',
-      name="Xhonneux Gerd",country='BE',gender=Gender.male)
+      name="Xhonneux Gerd",country='BE',gender=mixins.Genders.male)
     yield gerd
     yield role(company=cpas,person=gerd,type=4)
     #~ yield link(a=cpas,b=gerd,type=4)
@@ -428,7 +429,7 @@ def objects():
         birth_place="Moskau", # birth_country='SUHH',
         client_state=pcsw.ClientStates.newcomer,
         #~ newcomer=True,
-        gender=Gender.female)
+        gender=mixins.Genders.female)
     yield tatjana
     
     bernard = Person.objects.get(name__exact="Bodard Bernard")
@@ -460,39 +461,39 @@ def objects():
     
     melanie = person(first_name=u"Mélanie",last_name=u"Mélard",
         email='melanie@example.com',
-        city=eupen,country='BE',gender=Gender.female,language='fr')
+        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
     yield melanie
     melanie = User(username="melanie",partner=melanie,profile='110') 
     yield melanie
     
     hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
         email='hubert@example.com',
-        city=eupen,country='BE',gender=Gender.male)
+        city=eupen,country='BE',gender=mixins.Genders.male)
     yield hubert
     hubert = User(username="hubert",partner=hubert,profile='100') 
     yield hubert
     
     alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
         email='alicia@example.com',
-        city=eupen,country='BE',gender=Gender.female,language='fr')
+        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
     yield alicia
     alicia = User(username="alicia",partner=alicia,profile='100') 
     yield alicia
     
     #~ elmar = person(first_name=u"Elmar",last_name=u"Elsen",
-        #~ city=eupen,country='BE',gender=Gender.male)
+        #~ city=eupen,country='BE',gender=mixins.Genders.male)
     #~ yield elmar
     #~ elmar = User(username="elmar",partner=elmar,profile='400') 
     #~ yield elmar
     
     #~ robert = person(first_name=u"Robert",last_name=u"Robinet",
-        #~ city=eupen,country='BE',language='fr',gender=Gender.male)
+        #~ city=eupen,country='BE',language='fr',gender=mixins.Genders.male)
     #~ yield robert
     #~ robert = User(username="robert",partner=robert,profile='900') 
     #~ yield robert
     
     #~ charles = person(first_name=u"Charles",last_name=u"Cabeil-Esaice",
-        #~ city=eupen,country='BE',gender=Gender.male)
+        #~ city=eupen,country='BE',gender=mixins.Genders.male)
     #~ yield charles
     #~ charles = User(username="charles",partner=charles,profile='500') 
     #~ yield charles
@@ -843,7 +844,7 @@ def objects():
     #~ p.coached_until = None
     #~ p.coach1 = root
     #~ p.coach2 = alicia # User.objects.get(username='alicia')
-    #~ p.gender = Gender.female 
+    #~ p.gender = mixins.Genders.female 
     #~ p.group = pg1
     #~ p.save()
     
@@ -860,7 +861,7 @@ def objects():
     #~ p.coached_until = settings.LINO.demo_date(10*30)
     #~ p.coach1 = User.objects.get(username='root')
     #~ p.group = pg2
-    #~ p.gender = Gender.male
+    #~ p.gender = mixins.Genders.male
     #~ p.national_id = 'INVALID-45'
     #~ p.save()
     
@@ -874,7 +875,7 @@ def objects():
     #~ p.coach1 = User.objects.get(username='root')
     #~ p.coach2 = alicia # User.objects.get(username='alicia')
     #~ p.group = pg1
-    #~ p.gender = Gender.male
+    #~ p.gender = mixins.Genders.male
     #~ p.national_id = '810601 211-83'
     #~ p.save()
 
@@ -886,7 +887,7 @@ def objects():
     #~ p.coached_until = None
     #~ p.coach1 = User.objects.get(username='root')
     #~ p.group = pg2
-    #~ p.gender = Gender.male
+    #~ p.gender = mixins.Genders.male
     #~ p.save()
 
     #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(10),None)
@@ -896,7 +897,7 @@ def objects():
     #~ p.coached_from = settings.LINO.demo_date(-3*30)
     #~ p.coached_until = None
     #~ p.coach1 = alicia # User.objects.get(username='alicia')
-    #~ p.gender = Gender.female
+    #~ p.gender = mixins.Genders.female
     #~ p.group = pg1
     #~ p.save()
     
@@ -908,7 +909,7 @@ def objects():
     #~ p.coached_from = settings.LINO.demo_date(-6*30)
     #~ p.coached_until = None
     #~ p.coach1 = User.objects.get(username='root')
-    #~ p.gender = Gender.female
+    #~ p.gender = mixins.Genders.female
     #~ p.group = standby
     #~ p.save()
     

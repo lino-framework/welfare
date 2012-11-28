@@ -52,7 +52,6 @@ from lino import dd
 #~ from lino.utils import printable
 from lino import mixins
 #~ from lino import fields
-#~ from lino.utils.choicelists import Gender
 #~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.uploads.models import UploadsByPerson
@@ -84,7 +83,7 @@ from lino.modlib.notes import models as notes
 #~ from lino.modlib.cal import models as cal
 #~ from lino.modlib.users import models as users
 #~ from lino.modlib.countries.models import CountryCity
-from lino.modlib.cal.models import DurationUnits, update_reminder
+#~ from lino.modlib.cal.models import DurationUnits, update_reminder
 #~ from lino.modlib.properties import models as properties
 #~ from lino_welfare.modlib.cv import models as cv
 #~ from lino.modlib.contacts.models import Contact
@@ -297,7 +296,7 @@ für neue Operationen nicht benutzt werden können.""")
         return super(Partner,self).disable_delete(ar)
 
 
-class Person(Partner,contacts.Person,contacts.Born,Printable):
+class Person(Partner,contacts.Person,mixins.Born,Printable):
     """
     Represents a physical person.
     
@@ -325,7 +324,10 @@ class Person(Partner,contacts.Person,contacts.Born,Printable):
         cls.declare_imported_fields(
           '''name first_name last_name title birth_date gender is_client
           ''')
-        
+
+
+dd.update_field(Person,'first_name',blank=False)
+dd.update_field(Person,'last_name',blank=False)
 
 class PersonDetail(contacts.PersonDetail):
     bottom_box = """
@@ -341,7 +343,7 @@ class Persons(contacts.Persons):
     
     params_panel_hidden = True
     parameters = dict(
-        gender = contacts.Gender.field(blank=True,help_text=u"""\
+        gender = mixins.Genders.field(blank=True,help_text=u"""\
 Nur Personen, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
         also_obsolete = models.BooleanField(
             _("Also obsolete data"),
@@ -523,8 +525,8 @@ def card2client(data):
         logger.warning("%s : found more than one city named %r in Belgium",msg1,data['municipality'])
         #~ logger.exception(e)
     def sex2gender(sex):
-        if sex == 'M' : return contacts.Gender.male
-        if sex in 'FVW' : return contacts.Gender.female
+        if sex == 'M' : return mixins.Genders.male
+        if sex in 'FVW' : return mixins.Genders.female
         logger.warning("%s : invalid sex code %r",msg1,sex)
     kw.update(gender=sex2gender(data['sex']))
     
@@ -889,17 +891,17 @@ class Client(Person):
         user = self.get_primary_coach()
         if user:
             def f():
-                M = DurationUnits.months
-                update_reminder(1,self,user,
+                M = cal.DurationUnits.months
+                cal.update_reminder(1,self,user,
                   self.card_valid_until,
                   _("eID card expires in 2 months"),2,M)
-                update_reminder(2,self,user,
+                cal.update_reminder(2,self,user,
                   self.unavailable_until,
                   _("becomes available again in 1 month"),1,M)
-                update_reminder(3,self,user,
+                cal.update_reminder(3,self,user,
                   self.work_permit_suspended_until,
                   _("work permit suspension ends in 1 month"),1,M)
-                #~ update_reminder(4,self,user,
+                #~ cal.update_reminder(4,self,user,
                   #~ self.coached_until,
                   #~ _("coaching ends in 1 month"),1,M)
             babel.run_with_language(user.language,f)
@@ -2100,7 +2102,7 @@ class PersonSearch(mixins.AutoUser,mixins.Printable):
     aged_to = models.IntegerField(_("Aged to"),
         blank=True,null=True)
     #~ gender = contacts.GenderField()
-    gender = contacts.Gender.field(blank=True)
+    gender = mixins.Genders.field(blank=True)
 
     
     only_my_persons = models.BooleanField(_("Only my clients")) # ,default=True)

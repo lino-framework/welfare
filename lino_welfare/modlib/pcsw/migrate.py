@@ -469,3 +469,12 @@ def migrate_from_1_0_2(globals_dict):
 
 def migrate_from_1_0_3(globals_dict):
     return '1.0.4'
+
+def migrate_from_1_0_4(globals_dict):
+    properties_PropType = resolve_model("properties.PropType")
+    def create_properties_proptype(id, name, choicelist, default_value, limit_to_choices, multiple_choices, name_fr, name_en):
+        if choicelist == 'contacts.Gender':
+            choicelist = 'lino.Genders'
+        return properties_PropType(id=id,name=name,choicelist=choicelist,default_value=default_value,limit_to_choices=limit_to_choices,multiple_choices=multiple_choices,name_fr=name_fr,name_en=name_en)    
+    globals_dict.update(create_properties_proptype=create_properties_proptype)
+    return '1.0.5'

@@ -97,7 +97,7 @@ Hier eine Liste der möglichen Partnerattribute in TIM, und was Lino daraus mach
 Attrib Bezeichnung in TIM                     in Lino
 ====== ====================================== ========================================
 H      Versteckt                              wird ignoriert
-W      Warnung bei Auswahl                    `veraltet`im Reiter `Sonstiges`
+W      Warnung bei Auswahl                    `veraltet` im Reiter `Sonstiges`
 R      Schreibgeschützt                       wird ignoriert
 2      als Nebenpartner ignorieren            wird ignoriert
 A      Altfall (automatisch)                  wird ignoriert
@@ -105,8 +105,23 @@ E      Eingeschlafener Debitor (automatisch)  wird ignoriert
 N      Neuzugang                              Klient im Bearbeitungszustand "Neuantrag"
 ====== ====================================== ========================================
 
-Der Unterschied zwischen W und A ist lediglich, das A automatisch verteilt wird. 
-W ist eigentlich das Gleiche wie inaktiv.
+**Partnerattibut W** bewirkt in Lino das Gleiche 
+wie **Partnerart "Inaktive"**, nämlich dass dieser Partner 
+das Feld `veraltet` angekreuzt hat.
+
+Das **Partnerattibut A** (Altfall) aus TIM ist eine rein buchhalterische 
+Information (Partner hat seit dd.mm.yyyy keine buchhalterische Bewegung gehabt), 
+die momentan in Lino nicht importiert wird. 
+Falls sie mal in Lino sichtbar werden soll, 
+sollte sie als ein eigenes schreibgeschütztes Ankreuzfeld da stehen.
+
+"Ich sehe in "meiner" Liste in Lino einen bestimmten aus TIM importierten 
+Klienten, den ich schon seit Langem nicht mehr begleite."
+--> Um einen aus TIM importierten Klienten 
+nicht mehr "in meiner Liste" zu sehen, muss in TIM entweder 
+das Feld `PAR->IdUser` geändert, 
+die Partnerart auf Inaktiv gesetzt
+oder das Partnerattibut W eingeschaltet werden.
 
 
 Anrede
