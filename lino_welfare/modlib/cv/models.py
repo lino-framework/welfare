@@ -53,8 +53,6 @@ uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.users import models as users
-#~ from lino.utils.choicelists import HowWell
-#~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field

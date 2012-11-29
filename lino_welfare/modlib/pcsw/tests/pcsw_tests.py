@@ -259,8 +259,9 @@ def test04(self):
     Created :doc:`/blog/2011/0615`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
-    from lino.utils.choicelists import Gender
-    from lino.apps.pcsw.models import Person, Company
+    from lino.dd import Genders
+    Company = dd.resolve_model('contacts.Company')
+    Person = dd.resolve_model('contacts.Person')
     Country = dd.resolve_model('countries.Country')
     City = dd.resolve_model('countries.City')
     be = Country(isocode="BE",name="Belgique")
@@ -270,7 +271,7 @@ def test04(self):
     p = Person(
       first_name="Jean Louis",last_name="Dupont",
       street_prefix="Avenue de la", street="gare", street_no="3", street_box="b",
-      city=bxl, gender=Gender.male
+      city=bxl, gender=Genders.male
       )
     p.full_clean()
     p.save()

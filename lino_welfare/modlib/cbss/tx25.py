@@ -73,7 +73,6 @@ from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
 from lino.utils.babel import dtos
-#~ from lino.utils.choicelists import ChoiceList
 
 
 

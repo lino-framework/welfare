@@ -40,7 +40,6 @@ from lino.utils.ssin import generate_ssin
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
 #~ from lino.modlib.contacts.utils import Gender
-#~ from lino.utils.choicelists import Gender
 from lino_welfare.modlib.jobs import models as jobs
 from lino.modlib.contacts import models as contacts
 from lino.modlib.countries import models as countries

@@ -80,7 +80,7 @@ from lino.utils.xmlgen import html as xghtml
 
 from lino.utils.babel import dtos
 
-from lino.utils.choicelists import ChoiceList
+#~ from lino.utils.choicelists import ChoiceList
 #~ from lino.utils.choicelists import Gender
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.contacts import models as contacts
@@ -1367,7 +1367,7 @@ class IdentifyPersonResult(dd.VirtualTable):
 
 
 
-class ManageAction(ChoiceList):
+class ManageAction(dd.ChoiceList):
     """
     Possible values for the 
     `action` field of a :class:`ManageAccessRequest`.
@@ -1380,7 +1380,7 @@ add('2',_("Unregister"),'UNREGISTER')
 add('3',_("List"),'LIST')
 
 
-class QueryRegister(ChoiceList):
+class QueryRegister(dd.ChoiceList):
     """
     Possible values for the 
     `query_register` field of a :class:`ManageAccessRequest`.

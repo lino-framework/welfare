@@ -54,7 +54,6 @@ from lino.utils.htmlgen import UL
 #~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
 from lino.utils import babel 
 from lino.utils.choosers import chooser
-from lino.utils.choicelists import ChoiceList
 from lino.utils import mti
 from lino.utils.ranges import isrange, overlap, overlap2, encompass, rangefmt
 from lino.mixins.printable import DirectPrintAction

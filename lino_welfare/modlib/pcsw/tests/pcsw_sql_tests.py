@@ -55,7 +55,6 @@ from lino.utils import babel
 from lino.core.modeltools import resolve_model
 
 from lino.utils.instantiator import Instantiator
-#~ from lino.utils.choicelists import UserLevel
 from lino.dd import UserProfiles
 
 

@@ -52,7 +52,6 @@ from lino import dd
 #~ from lino.utils import printable
 from lino import mixins
 #~ from lino import fields
-#~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config

@@ -38,7 +38,6 @@ from lino.utils import Cycler, join_words
 
 #~ from lino.modlib.contacts.utils import name2kw, street2kw
 #~ from lino.utils import join_words
-#~ from lino.utils.choicelists import Gender
 
 from lino import mixins
 from lino import dd
