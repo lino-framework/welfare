@@ -20,4 +20,5 @@ Content
    releases/index
    admin/index
    autodoc/index
+   user/index
    

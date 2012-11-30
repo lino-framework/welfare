@@ -376,9 +376,40 @@ add('40', _("Award"),"award")   # gut bestanden
 add('50', pgettext_lazy(u"courses",u"Failed"),"failed")   # nicht bestanden
 add('60', _("Aborted"),"aborted")   # abgebrochen
 
-CourseRequestStates.passed.add_workflow(states="registered")
-CourseRequestStates.failed.add_workflow(states="registered")
-CourseRequestStates.aborted.add_workflow(states="registered")
+
+class RegisterCandidate(dd.ChangeStateAction):
+    label = _("Register")
+    required=dict(states=['candidate'])
+    help_text=_("Register this candidate for this course.")
+
+    def run(self,obj,ar,**kw):
+        assert isinstance(obj,CourseRequest)
+        if ar.master_instance is not None:
+            obj.course = ar.master_instance
+        if not obj.course:
+            return ar.error.response(_("Cannot register to unknown course."))
+        kw = super(RegisterCandidate,self).run(obj,ar,**kw)
+        kw.update(refresh_all=True)
+        kw.update(message=_("%(person)s has been registered to %(course)s") % dict(
+                person=obj.person,course=obj.course))
+        return kw
+    
+class UnRegisterCandidate(dd.ChangeStateAction):
+    label = _("Unregister")
+    required=dict(states=['registered'])
+    help_text=_("Register this candidate for this course.")
+
+    def run(self,obj,ar,**kw):
+        assert isinstance(obj,CourseRequest)
+        course = obj.course
+        obj.course = None
+        kw = super(UnRegisterCandidate,self).run(obj,ar,**kw)
+        kw.update(refresh_all=True)
+        kw.update(message=_("%(person)s has been unregistered from %(course)s") 
+            % dict(person=obj.person,course=course))
+        return kw
+        
+        
     
 class CourseRequest(dd.Model):
     """
@@ -502,7 +533,8 @@ class RequestsByCourse(CourseRequests):
         if obj.course is not None:
             obj.content = obj.course.offer.content
         return obj
-
+        
+        
 
 class ParticipantsByCourse(RequestsByCourse):
     """
@@ -540,19 +572,19 @@ class ParticipantsByCourse(RequestsByCourse):
           #~ message=_("%(person)s aborted from %(course)s") 
             #~ % dict(person=self.person,course=self.course))
             
-    @dd.action(_("Unregister"),required=dict(states=['registered']))
-    def unregister(self,ar):
-        """
-        Unregister the given :class:`Candidate` for the given :class:`Course`.
-        This action is available on a row of :class:`ParticipantsByCourse`.
-        """
-        course = self.course
-        self.state = CourseRequestStates.candidate
-        self.course = None
-        self.save()
-        return ar.success_response(refresh_all=True,
-          message=_("%(person)s has been unregistered from %(course)s") 
-            % dict(person=self.person,course=course))
+    #~ @dd.action(_("Unregister"),required=dict(states=['registered']))
+    #~ def unregister(self,ar):
+        #~ """
+        #~ Unregister the given :class:`Candidate` for the given :class:`Course`.
+        #~ This action is available on a row of :class:`ParticipantsByCourse`.
+        #~ """
+        #~ course = self.course
+        #~ self.state = CourseRequestStates.candidate
+        #~ self.course = None
+        #~ self.save()
+        #~ return ar.success_response(refresh_all=True,
+          #~ message=_("%(person)s has been unregistered from %(course)s") 
+            #~ % dict(person=self.person,course=course))
     
     
 
@@ -563,26 +595,23 @@ class CandidatesByCourse(RequestsByCourse):
     """
     label = _("Candidates")
     column_names = 'person remark:20 date_submitted state workflow_buttons:60 content'
-    #~ can_add = perms.never
     
-    #~ do_register = RegisterCandidate()
     
-        
-    @dd.action(_("Register"),required=dict(states=['candidate','']))
-    def register(self,ar):
-        """
-        Register the given :class:`Candidate` for the given :class:`Course`.
-        This action is available on a row of :class:`CandidatesByCourse`.
-        """
-        if ar.master_instance is not None:
-            self.course = ar.master_instance
-        if not self.course:
-            return ar.error.response(_("Cannot register to unknown course."))
-        self.state = CourseRequestStates.registered
-        self.save()
-        return ar.success_response(refresh_all=True,
-            message=_("%(person)s has been registered to %(course)s") % dict(
-                person=self.person,course=self.course))
+    #~ @dd.action(_("Register"),required=dict(states=['candidate']))
+    #~ def register(self,ar):
+        #~ """
+        #~ Register the given :class:`Candidate` for the given :class:`Course`.
+        #~ This action is available on a row of :class:`CandidatesByCourse`.
+        #~ """
+        #~ if ar.master_instance is not None:
+            #~ self.course = ar.master_instance
+        #~ if not self.course:
+            #~ return ar.error.response(_("Cannot register to unknown course."))
+        #~ self.state = CourseRequestStates.registered
+        #~ self.save()
+        #~ return ar.success_response(refresh_all=True,
+            #~ message=_("%(person)s has been registered to %(course)s") % dict(
+                #~ person=self.person,course=self.course))
         
     
     @classmethod
@@ -590,7 +619,8 @@ class CandidatesByCourse(RequestsByCourse):
         if rr.master_instance is None:
             return []
         return self.model.objects.filter(course__isnull=True,
-            content__exact=rr.master_instance.offer.content)
+            state=CourseRequestStates.candidate,
+            content=rr.master_instance.offer.content)
     
     @classmethod
     def create_instance(self,req,**kw):
@@ -726,4 +756,13 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(Courses)
     m.add_action(CourseRequests)
             
+            
+def setup_workflows(site):
+
+    CourseRequestStates.registered.add_workflow(RegisterCandidate)
+    CourseRequestStates.candidate.add_workflow(UnRegisterCandidate)
+    CourseRequestStates.passed.add_workflow(states="registered")
+    CourseRequestStates.failed.add_workflow(states="registered")
+    CourseRequestStates.aborted.add_workflow(states="registered")
+    
             

@@ -287,7 +287,7 @@ für neue Operationen nicht benutzt werden können.""")
         #~ raise Exception("20120731 CpasPartner.disabled_fields()")
         if settings.LINO.is_imported_partner(self):
             return self._imported_fields
-        return []
+        return set()
         
     def disable_delete(self,ar):
         if ar is not None and settings.LINO.is_imported_partner(self):
@@ -439,26 +439,77 @@ add('60', _("Invalid"),'invalid',help_text=u"""\
 Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
 
 
-class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
+#~ class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
+    #~ label = _("Refuse")
+    #~ required = dict(states='newcomer invalid',user_groups='newcomers')
+    #~ # help_text = _("Write a refusal note and remove the new client request.")
+    
+    #~ def get_notify_subject(self,ar,obj,**kw):
+        #~ return _("%(client)s has been refused.") % dict(client=obj)
+        
+class RefusalReasons(dd.ChoiceList):
+    pass
+    
+add = RefusalReasons.add_item
+add('10',_("Information request (No coaching needed)"))
+add('20',_("PCSW is not competent"))
+add('30',_("Client did not return"))
+        
+class RefuseClient(dd.ChangeStateAction):
     label = _("Refuse")
     required = dict(states='newcomer invalid',user_groups='newcomers')
-    # help_text = _("Write a refusal note and remove the new client request.")
     
-    def get_notify_subject(self,ar,obj,**kw):
-        return _("%(client)s has been refused.") % dict(client=obj)
+    #~ icon_file = 'flag_blue.png'
+    help_text=_("Refuse this newcomer request.")
+    
+    parameters = dict(
+        reason = RefusalReasons.field(),
+        remark = dd.RichTextField(_("Remark"),blank=True),
+        )
+    
+    params_layout = dd.Panel("""
+    reason
+    remark
+    """,window_size=(50,15))
+    
+    #~ def action_param_defaults(self,ar,obj,**kw):
+        #~ kw = super(AssignEvent,self).action_param_defaults(ar,obj,**kw)
+        #~ kw.update(
+            #~ remark=unicode(_("I made up this event for you. %s")) 
+                #~ % ar.get_user())
+        #~ return kw
+    
+    
+    def unused_run(self,obj,ar,**kw):
+        obj.refusal_reason = ar.action_param_values.reason
+        kw = super(RefuseClient,self).run(obj,ar,**kw)
+        #~ obj.save()
+        #~ kw.update(refresh=True)
+        return kw
+    
+        
+    def run(self,obj,ar,**kw):
+        assert isinstance(obj,Client)
+        obj.refusal_reason = ar.action_param_values.reason
+        subject = _("%(client)s has been refused.") % dict(client=obj)
+        body = unicode(ar.action_param_values.reason)
+        if ar.action_param_values.remark:
+            body += '\n' + ar.action_param_values.remark
+        kw.update(message=subject)
+        kw.update(alert=_("Success"))
+        kw = super(RefuseClient,self).run(obj,ar,**kw)
+        #~ self.add_system_note(ar,obj)
+        silent = False
+        ar.add_system_note(
+            obj,
+            subject,
+            body,
+            silent)
+        return kw
+
+        
             
     
-
-
-ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
-ClientStates.refused.add_workflow(RefuseClient)
-#~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
-#~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-ClientStates.former.add_workflow(_("Former"),
-    states='coached invalid',
-    user_groups='newcomers')
-#~ ClientStates.add_transition('new','refused',user_groups='newcomers')
-
 
 class Getter(object):
     def __init__(self,query_dict):
@@ -764,6 +815,9 @@ class Client(Person):
       
     client_state = ClientStates.field(default=ClientStates.newcomer)
     
+    refusal_reason = RefusalReasons.field(blank=True)
+    
+    
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
     beid_read_card = BeIdReadCardToClientsAction(_("Read eID card"),
@@ -790,6 +844,12 @@ class Client(Person):
           nationality
           ''') # coach1 
 
+    def disabled_fields(self,ar):
+        rv = super(Client,self).disabled_fields(ar)
+        if not ar.get_user().profile.newcomers_level:
+            rv = rv | set(['broker','faculty','refusal_reason'])
+        return rv
+        
     def get_queryset(self):
         return self.model.objects.select_related(
             #~ 'country','city','coach1','coach2','nationality')
@@ -1383,7 +1443,7 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Calendar"))
     
     misc = dd.Panel("""
-    activity client_state
+    activity client_state refusal_reason
     is_cpas is_senior is_obsolete 
     remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
     # links.LinksToThis:30 links.LinksFromThis:30 
@@ -2081,215 +2141,6 @@ class AidTypes(dd.Table):
 
 
 
-
-
-#
-# SEARCH
-#
-class PersonSearch(mixins.AutoUser,mixins.Printable):
-    """
-    Lino creates a new record in this table for each search request.
-    """
-    class Meta:
-        verbose_name = _("Person Search")
-        verbose_name_plural = _('Person Searches')
-        
-    title = models.CharField(max_length=200,
-        verbose_name=_("Search Title"))
-    aged_from = models.IntegerField(_("Aged from"),
-        blank=True,null=True)
-    aged_to = models.IntegerField(_("Aged to"),
-        blank=True,null=True)
-    #~ gender = contacts.GenderField()
-    gender = mixins.Genders.field(blank=True)
-
-    
-    only_my_persons = models.BooleanField(_("Only my clients")) # ,default=True)
-    
-    coached_by = dd.ForeignKey(settings.LINO.user_model,
-        verbose_name=_("Coached by"),
-        related_name='persons_coached',
-        blank=True,null=True)
-    period_from = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("Period from"))
-    period_until = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("until"))
-    
-    def result(self):
-        for p in ClientsBySearch().request(master_instance=self):
-            yield p
-        
-    def __unicode__(self):
-        return self._meta.verbose_name + ' "%s"' % (self.title or _("Unnamed"))
-        
-    #~ def get_print_language(self,pm):
-        #~ return DEFAULT_LANGUAGE
-
-    print_suchliste = DirectPrintAction(_("Print"),'suchliste')
-    
-    #~ @classmethod
-    #~ def setup_report(model,rpt):
-        # rpt.add_action(DirectPrintAction(rpt,'suchliste',_("Print"),'suchliste'))
-        #~ rpt.add_action(DirectPrintAction('suchliste',_("Print"),'suchliste'))
-        
-class PersonSearches(dd.Table):
-    required = dict(user_groups='integ')
-    model = PersonSearch
-    detail_layout = """
-    id:8 title 
-    only_my_persons coached_by period_from period_until aged_from:10 aged_to:10 gender:10
-    pcsw.LanguageKnowledgesBySearch pcsw.WantedPropsBySearch pcsw.UnwantedPropsBySearch
-    pcsw.ClientsBySearch
-    """
-    
-class MyPersonSearches(PersonSearches,mixins.ByUser):
-    #~ model = PersonSearch
-    pass
-    
-class WantedLanguageKnowledge(dd.Model):
-    search = models.ForeignKey(PersonSearch)
-    language = models.ForeignKey(countries.Language,verbose_name=_("Language"))
-    spoken = properties.HowWell.field(blank=True,verbose_name=_("spoken"))
-    written = properties.HowWell.field(blank=True,verbose_name=_("written"))
-
-class WantedSkill(properties.PropertyOccurence):
-    class Meta:
-        app_label = 'properties'
-        verbose_name = _("Wanted property")
-        verbose_name_plural = _("Wanted properties")
-        
-    search = models.ForeignKey(PersonSearch)
-    
-class UnwantedSkill(properties.PropertyOccurence):
-    class Meta:
-        app_label = 'properties'
-        verbose_name = _("Unwanted property")
-        verbose_name_plural = _("Unwanted properties")
-    search = models.ForeignKey(PersonSearch)
-    
-    
-class LanguageKnowledgesBySearch(dd.Table):
-    required = dict(user_groups='integ')
-    label = _("Wanted language knowledges")
-    master_key = 'search'
-    model = WantedLanguageKnowledge
-
-class WantedPropsBySearch(dd.Table):
-    required = dict(user_groups = 'integ')
-    label = _("Wanted properties")
-    master_key = 'search'
-    model = WantedSkill
-
-class UnwantedPropsBySearch(dd.Table):
-    required = dict(user_groups = 'integ')
-    label = _("Unwanted properties")
-    master_key = 'search'
-    model = UnwantedSkill
-
-#~ class ClientsBySearch(dd.Table):
-class ClientsBySearch(Clients):
-    """
-    Slave table of a PersonSearch, showing the Persons matching the search criteria. 
-    
-    It is a slave report without 
-    :attr:`master_key <lino.dd.Table.master_key>`,
-    which is allowed only because it also overrides
-    :meth:`get_request_queryset`
-    """
-  
-    required = dict(user_groups = 'integ')
-    #~ model = Person
-    master = PersonSearch
-    #~ 20110822 app_label = 'pcsw'
-    label = _("Found persons")
-    
-    #~ can_add = perms.never
-    #~ can_change = perms.never
-    
-    @classmethod
-    def get_request_queryset(self,rr):
-        """
-        Here is the code that builds the query. It can be quite complex.
-        See :srcref:`/lino/apps/pcsw/models.py` 
-        (search this file for "ClientsBySearch").
-        """
-        search = rr.master_instance
-        if search is None:
-            return []
-        kw = {}
-        qs = self.model.objects.order_by('name')
-        today = datetime.date.today()
-        if search.gender:
-            qs = qs.filter(gender__exact=search.gender)
-        if search.aged_from:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
-            #~ qs = qs.filter(q1|q2)
-            min_date = today - datetime.timedelta(days=search.aged_from*365)
-            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
-        if search.aged_to:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
-            #~ qs = qs.filter(q1|q2)
-            max_date = today - datetime.timedelta(days=search.aged_to*365)
-            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
-            
-        if search.only_my_persons:
-            qs = only_coached_by(qs,search.user)
-        
-        if search.coached_by:
-            qs = only_coached_by(qs,search.coached_by)
-            
-        if search.period_from:
-            qs = only_new_since(qs,search.period_from)
-            
-        if search.period_until:
-            qs = only_coached_until(qs,search.period_until)
-          
-        required_id_sets = []
-        
-        required_lk = [lk for lk in search.wantedlanguageknowledge_set.all()]
-        if required_lk:
-            # language requirements are OR'ed
-            ids = set()
-            for rlk in required_lk:
-                fkw = dict(language__exact=rlk.language)
-                if rlk.spoken is not None:
-                    fkw.update(spoken__gte=rlk.spoken)
-                if rlk.written is not None:
-                    fkw.update(written__gte=rlk.written)
-                q = cv.LanguageKnowledge.objects.filter(**fkw)
-                ids.update(q.values_list('person__id',flat=True))
-            required_id_sets.append(ids)
-            
-        rprops = [x for x in search.wantedskill_set.all()]
-        if rprops: # required properties
-            ids = set()
-            for rp in rprops:
-                fkw = dict(property__exact=rp.property) # filter keywords
-                if rp.value:
-                    fkw.update(value__gte=rp.value)
-                q = cv.PersonProperty.objects.filter(**fkw)
-                ids.update(q.values_list('person__id',flat=True))
-            required_id_sets.append(ids)
-          
-            
-        if required_id_sets:
-            s = set(required_id_sets[0])
-            for i in required_id_sets[1:]:
-                s.intersection_update(i)
-                # keep only elements found in both s and i.
-            qs = qs.filter(id__in=s)
-              
-        return qs
-
-
-
-
 class OverlappingContracts(dd.Table):
     required = dict(user_groups = 'integ')
     model = Person
@@ -2906,7 +2757,7 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(Coachings)
     m.add_action(ClientContacts)
     m.add_action(Exclusions)
-    m.add_action(PersonSearches)
+    #~ m.add_action(PersonSearches)
     m.add_action(CivilState)
     m.add_action(ClientStates)
     
@@ -3113,4 +2964,15 @@ customize_users()
   
 
 
+
+def setup_workflows(site):
+
+    ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
+    ClientStates.refused.add_workflow(RefuseClient)
+    #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
+    #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
+    ClientStates.former.add_workflow(_("Former"),
+        states='coached invalid',
+        user_groups='newcomers')
+    #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 

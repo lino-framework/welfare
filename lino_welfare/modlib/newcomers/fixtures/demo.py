@@ -40,11 +40,11 @@ def objects():
     yield I(name="Other PCSW")
 
     I = Instantiator(Faculty).build
-    yield I(**babel_values('name', de=u"Eingliederungseinkommen (EiEi)", fr=u"Revenu d'intégration sociale (RIS)",  en=u"EiEi"))
-    yield I(**babel_values('name', de=u"DSBE",                    fr=u"Service d'insertion socio-professionnelle",   en=u"DSBE"))
-    yield I(**babel_values('name', de=u"Ausländerbeihilfe",       fr=u"Aide sociale équivalente (pour étrangers)",en=u"Ausländerbeihilfe"))
-    yield I(**babel_values('name', de=u"Finanzielle Begleitung",  fr=u"Accompagnement budgétaire",     en=u"Finanzielle Begleitung"))
-    yield I(**babel_values('name', de=u"Laufende Beihilfe",       fr=u"Aide complémenataire",       en=u"Laufende Beihilfe"))
+    yield I(weight=10,**babel_values('name', de=u"Eingliederungseinkommen (EiEi)", fr=u"Revenu d'intégration sociale (RIS)",  en=u"EiEi"))
+    yield I(weight=5,**babel_values('name', de=u"DSBE",                    fr=u"Service d'insertion socio-professionnelle",   en=u"DSBE"))
+    yield I(weight=4,**babel_values('name', de=u"Ausländerbeihilfe",       fr=u"Aide sociale équivalente (pour étrangers)",en=u"Ausländerbeihilfe"))
+    yield I(weight=6,**babel_values('name', de=u"Finanzielle Begleitung",  fr=u"Accompagnement budgétaire",     en=u"Finanzielle Begleitung"))
+    yield I(weight=2,**babel_values('name', de=u"Laufende Beihilfe",       fr=u"Aide complémenataire",       en=u"Laufende Beihilfe"))
     
     
     #~ User = resolve_model('users.User')
@@ -66,12 +66,20 @@ def objects():
     newcomers = dd.resolve_app('newcomers')
     users = dd.resolve_app('users')
     
+    QUOTAS = Cycler(100,60,50,20)
     FACULTIES = Cycler(newcomers.Faculty.objects.all())
-    profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-    USERS = Cycler(users.User.objects.filter(profile__in=profiles))
+    
+    profiles = [p for p in dd.UserProfiles.items() if p.integ_level and p.level < dd.UserLevels.admin]
+    qs = users.User.objects.filter(profile__in=profiles)
+    for u in qs:
+        u.newcomer_quota = QUOTAS.pop()
+        yield u
+        
+    USERS = Cycler(qs)
     for i in range(7):
         yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.newcomer):
+        
+    for p in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.invalid):
         p.faculty = FACULTIES.pop()
         p.save()
 

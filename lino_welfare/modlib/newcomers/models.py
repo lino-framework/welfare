@@ -40,6 +40,7 @@ from lino.utils.restify import restify
 from lino.utils.choosers import chooser
 from lino.utils import babel
 from lino.utils import ssin
+from lino.utils import workdays
 from lino import mixins
 from django.conf import settings
 #~ from lino import choices_method, simple_choices_method
@@ -62,6 +63,10 @@ if not hasattr(pcsw,'Clients'):
 
 MODULE_LABEL = _("Newcomers")
 
+WORKLOAD_BASE = decimal.Decimal('10') # normal number of newcomers per month 
+MAX_WEIGHT = 10
+
+
 class Broker(dd.Model):
     """
     A Broker (Vermittler) is an external institution 
@@ -80,7 +85,7 @@ class Brokers(dd.Table):
     """
     List of Brokers on this site.
     """
-    required=dict(user_groups=['newcomers'],user_level='manager')
+    required = dict(user_groups='newcomers',user_level='manager')
     #~ required_user_level = UserLevels.manager
     model = Broker
     column_names = 'name *'
@@ -100,17 +105,23 @@ class Faculty(babel.BabelNamed):
         verbose_name = _("Faculty")
         verbose_name_plural = _("Faculties")
     #~ body = babel.BabelTextField(_("Body"),blank=True,format='html')
+    weight = models.IntegerField(
+          _("Work effort"), # Arbeitsaufwand
+          default=MAX_WEIGHT,
+          help_text=u"""\
+Wieviel Aufwand ein Neuantrag in diesem Fachbereich allgemein verursacht
+(0 = gar kein Aufwand, %d = maximaler Aufwand).""" % MAX_WEIGHT)    
     
 
 class Faculties(dd.Table):
-    required=dict(user_groups=['newcomers'],user_level='manager')
+    required = dict(user_groups='newcomers',user_level='manager')
     #~ required_user_groups = ['newcomers']
     #~ required_user_level = UserLevels.manager
     model = Faculty
-    column_names = 'name *'
+    column_names = 'name weight *'
     order_by = ["name"]
     detail_layout = """
-    id name
+    id name weight
     CompetencesByFaculty
     ClientsByFaculty
     """
@@ -125,12 +136,24 @@ class Competence(mixins.AutoUser,mixins.Sequenced):
         verbose_name_plural = _("Competences")
         
     faculty = models.ForeignKey(Faculty)
+    weight = models.IntegerField(
+          _("Work effort"), # Arbeitsaufwand
+          blank=True,
+          help_text=u"""\
+Wieviel Aufwand mir persönlich ein Neuantrag in diesem Fachbereich verursacht
+(0 = gar kein Aufwand, %d = maximaler Aufwand).""" % MAX_WEIGHT)    
     
+    
+    def full_clean(self,*args,**kw):
+        if self.weight is None:
+            self.weight = self.faculty.weight
+        super(Competence,self).full_clean(*args,**kw)
+
     def __unicode__(self):
         return u'%s #%s' % (self._meta.verbose_name,self.pk)
         
 class Competences(dd.Table):
-    required = dict(user_groups=['newcomers'],user_level='manager')
+    required = dict(user_groups='newcomers',user_level='manager')
     #~ required_user_groups = ['newcomers']
     #~ required_user_level = UserLevels.manager
     model = Competence
@@ -142,12 +165,12 @@ class CompetencesByUser(Competences):
     required = dict()
     #~ required_user_level = None
     master_key = 'user'
-    column_names = 'seqno faculty *'
+    column_names = 'seqno faculty weight *'
     order_by = ["seqno"]
 
 class CompetencesByFaculty(Competences):
     master_key = 'faculty'
-    column_names = 'user *'
+    column_names = 'user weight *'
     order_by = ["user"]
 
 
@@ -191,9 +214,16 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
 #~ print pcsw, dir(pcsw)
 
 
+def faculty_weight(user,faculty):
+    if not user or not faculty: return MAX_WEIGHT
+    try:
+        return Competence.objects.get(faculty=faculty,user=user).weight
+    except Competence.DoesNotExist:
+        return MAX_WEIGHT
+          
 
 class NewClients(pcsw.Clients):
-    required = dict(user_groups=['newcomers'])
+    required = dict(user_groups='newcomers')
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
     use_as_default_table = False
@@ -277,23 +307,22 @@ class ClientsByFaculty(pcsw.Clients):
     master_key = 'faculty'
     column_names = "name_column broker address_column *"
     
-    
         
 class AvailableCoaches(users.Users):
     """
     A list of the Users that are susceptible to become responsible for a Newcomer.
     """
     use_as_default_table = False
-    required = dict(user_groups=['newcomers'])
+    required = dict(user_groups='newcomers')
     #~ required_user_groups = ['newcomers']
     #~ model = users.User
     editable = False # even root should not edit here
     #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
     #~ label = _("Users by Newcomer")
     label = _("Available Coaches")
-    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota workload'
+    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota weight score'
     parameters = dict(
-        for_client = models.ForeignKey('contacts.Person',
+        for_client = models.ForeignKey('pcsw.Client',
             verbose_name=_("Show suggested agents for"),
             blank=True),
         since = models.DateField(_("Count Newcomers since"),
@@ -322,37 +351,68 @@ class AvailableCoaches(users.Users):
                 raise Warning(_("Only for newcomers with valid SSIN"))
             if not ssin.is_valid_ssin(client.national_id):
                 raise Warning(_("Only for newcomers with valid SSIN"))
-            if not client.faculty:
-                raise Warning(_("Only for newcomers with given `faculty`."))
-
+            #~ if not client.faculty:
+                #~ raise Warning(_("Only for newcomers with given `faculty`."))
+        
+        #~ total_new_clients = NewClients.request(
+              #~ ar.ui,param_values=dict(new_since=ar.param_values.since)
+              #~ ).get_total_count()
+        
+        #~ new_since = ar.param_values.since
+        #~ qs = pcsw.Client.objects.filter(
+                #~ client_state=pcsw.ClientStates.coached,
+                #~ coachings_by_client__start_date__gte=new_since)
+        
+        #~ qs = pcsw.Coaching.objects.filter(
+                #~ client__client_state=pcsw.ClientStates.coached,
+                #~ start_date__gte=new_since)
+        
+        total_weight = 0
+        #~ total_quota = 0
         data = []
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
+        qs = qs.filter(newcomer_quota__gt=0)
         for user in qs:
             if client:
-                r = Competence.objects.filter(user=user,faculty=client.faculty)
-                if r.count() == 0:
-                    continue
+                if client.faculty:
+                    r = Competence.objects.filter(user=user,faculty=client.faculty)
+                    if r.count() == 0:
+                        continue
+                #~ total_weight += faculty_weight(user,client.faculty)
+            #~ else:
+                #~ total_weight += faculty_weight(user,None)
             #~ else:
                 #~ logger.info("20120928 AvailableCoaches.get_data_rows : no for_client")
             user.new_clients = NewClients.request(
               ar.ui,param_values=dict(
                 coached_by=user,
                 new_since=ar.param_values.since))
-            #~ yield user
+                
+            user._weight = 0.0
+            user._score = 100.0 # decimal.Decimal('0')
+            for nc in user.new_clients:
+                user._weight += faculty_weight(user,nc.faculty)
+            if user.newcomer_quota != 0:
+                # e.g. weight counts double for those who work halftime for newcomers
+                # e.g. weight unchanged if user works 100% for newcomers
+                user._weight = user._weight / (user.newcomer_quota / 100.0)
+            total_weight += user._weight 
+            #~ total_quota += user.newcomer_quota
+                
             data.append(user)
             
-        if client and len(data) == 0:
-            raise Warning(_("No coaches available for %s.") % client.faculty)
-            
+        if len(data) == 0:
+            if client:
+                raise Warning(_("No coaches available for %s.") % client.faculty)
+        elif total_weight != 0 and len(data) > 1:
+            for user in data:
+                user._score = 100.0 - (user._weight * 100.0 / total_weight)
+                
         def fn(a,b):
-            return cmp(self.compute_workload(ar,a),self.compute_workload(ar,b))
+            return cmp(b._score,a._score)
         data.sort(fn)
         return data
                 
-    #~ @dd.virtualfield('contacts.Person.coach1')
-    #~ def user(self,obj,ar):
-        #~ return obj
-        
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
@@ -367,25 +427,25 @@ class AvailableCoaches(users.Users):
     def new_clients(self,obj,ar):
         return obj.new_clients
         
-    @dd.virtualfield(models.CharField(_("Workload"),max_length=6))
-    def workload(self,obj,ar):
-        return "%+6.2f%%" % self.compute_workload(ar,obj)
+    @dd.virtualfield(models.CharField(_("Score"),max_length=6))
+    def score(self,obj,ar):
+        #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
+        return "%6.0f%%" % obj._score
         
-    #~ @dd.virtualfield(models.DecimalField(_("Workload"),max_digits=6,decimal_places=2))
-    #~ def workload(self,obj,ar):
-        #~ return self.compute_workload(ar,obj)
+    @dd.virtualfield(models.IntegerField(_("Workload"),max_length=3))
+    def weight(self,obj,ar):
+        #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
+        return obj._weight
         
-    #~ @dd.virtualfield(models.IntegerField(_("Quote")))
-    #~ def workload(self,obj,ar):
-        #~ if obj.new_clients.get_total_count():
-            #~ return 100 * obj.newcomer_quota / obj.new_clients.get_total_count()
-        #~ else:
-            #~ return None
-    @classmethod    
-    def compute_workload(cls,ar,obj):
-        delta = datetime.date.today() - ar.param_values.since
-        quota = obj.newcomer_quota * delta.days / decimal.Decimal('7.0')
-        return decimal.Decimal(obj.new_clients.get_total_count() - quota)
+        
+    #~ @classmethod    
+    #~ def compute_workload(cls,ar,obj):
+        #~ delta = datetime.date.today() - ar.param_values.since
+        #~ quota = obj.newcomer_quota * delta.days / decimal.Decimal('7.0')
+        #~ return decimal.Decimal(obj.new_clients.get_total_count() - quota)
+        
+    
+        
     
 class AssignCoach(dd.NotifyingAction):
     label=_("Assign")
@@ -547,7 +607,9 @@ settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
           _("Newcomers Quota"),
           default=0,
           help_text=u"""\
-Wieviele Neuanträge dieser Benutzer pro Monat verkraften kann."""))
+Wieviel Arbeitszeit dieser Benutzer für Neuanträge zur Verfügung steht
+(100 = ganztags, 50 = halbtags, 0 = gar nicht).
+"""))
 
 
 dd.inject_field(pcsw.Client,
@@ -580,11 +642,17 @@ def site_setup(site):
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
     """)
     
-    site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""
-    workflow_buttons
-    broker:12 
-    faculty:12  
-    """)
+    #~ site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""
+    #~ workflow_buttons
+    #~ broker:12 
+    #~ faculty:12  
+    #~ """)
+    site.modules.pcsw.Clients.detail_layout.update(
+        newcomers_left=dd.Panel("""
+        workflow_buttons
+        broker:12 
+        faculty:12  
+        """,required=dict(user_groups='newcomers')))
     
     #~ coaching = dd.Panel("""
     #~ pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40

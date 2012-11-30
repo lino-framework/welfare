@@ -4,9 +4,7 @@ Benutzerhandbuch
 
 .. toctree::
    :maxdepth: 1
+   :glob:
 
-   clients
-   calendar
-   courses
-   screenshots
-   tim2lino
+   *
+

@@ -8,6 +8,6 @@ Please refer to the other languages.
    
 .. toctree::
    :maxdepth: 1
+   :glob:
 
-   screenshots
-   
+   *   
