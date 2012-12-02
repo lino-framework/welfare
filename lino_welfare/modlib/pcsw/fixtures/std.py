@@ -49,15 +49,15 @@ def objects():
     
     eventType = Instantiator('notes.EventType',"name remark").build
     
-    yield eventType(u"Aktennotiz",remark="Alle Notizen/Ereignisse, die keine andere Form haben")
-    yield eventType(u"Brief",remark="Brief an Kunde, Personen, Organisationen")
-    yield eventType(u"E-Mail","E-Mail an Kunde, Personen, Organisationen")
-    yield eventType(u"Einschreiben","Brief, der per Einschreiben an Kunde oder an externe Personen / Dienst verschickt wird	")
-    yield eventType(u"Gespräch EXTERN","Persönliches Gespräch außerhalb des ÖSHZ, wie z.B. Vorstellungsgespräch im Betrieb, Auswertungsgespräch, gemeinsamer Termin im Arbeitsamt, im Integrationsprojekt, .")
-    yield eventType(u"Gespräch INTERN","Persönliches Gespräch im ÖSHZ")
-    yield eventType(u"Hausbesuch","Hausbesuch beim Kunden")
-    yield eventType(u"Kontakt ÖSHZ intern","Kontakte mit Kollegen oder Diensten im ÖSHZ, z.B. Fallbesprechung mit Allgemeinem Sozialdienst, Energieberatung, Schuldnerberatung, Sekretariat, ...")
-    yield eventType(u"Telefonat","Telefonischer Kontakt mit dem Kunden, anderen Personen, Diensten oder Organisationen ....")
+    yield eventType(u"Aktennotiz",remark=u"Alle Notizen/Ereignisse, die keine andere Form haben")
+    yield eventType(u"Brief",remark=u"Brief an Kunde, Personen, Organisationen")
+    yield eventType(u"E-Mail",u"E-Mail an Kunde, Personen, Organisationen")
+    yield eventType(u"Einschreiben",u"Brief, der per Einschreiben an Kunde oder an externe Personen / Dienst verschickt wird	")
+    yield eventType(u"Gespräch EXTERN",u"Persönliches Gespräch außerhalb des ÖSHZ, wie z.B. Vorstellungsgespräch im Betrieb, Auswertungsgespräch, gemeinsamer Termin im Arbeitsamt, im Integrationsprojekt, .")
+    yield eventType(u"Gespräch INTERN",u"Persönliches Gespräch im ÖSHZ")
+    yield eventType(u"Hausbesuch",u"Hausbesuch beim Kunden")
+    yield eventType(u"Kontakt ÖSHZ intern",u"Kontakte mit Kollegen oder Diensten im ÖSHZ, z.B. Fallbesprechung mit Allgemeinem Sozialdienst, Energieberatung, Schuldnerberatung, Sekretariat, ...")
+    yield eventType(u"Telefonat",u"Telefonischer Kontakt mit dem Kunden, anderen Personen, Diensten oder Organisationen ....")
     
     #~ projectType = Instantiator('projects.ProjectType',"name").build
     #~ yield projectType(u"VSE Ausbildung")
@@ -267,10 +267,10 @@ def objects():
     
     Client = resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)
-    yield I(t,'in_belgium_since',"""\
+    yield I(t,'in_belgium_since',u"""\
 Since when this person in Belgium lives.
 <b>Important:</b> help_text can be formatted.""")
-    yield I(t,'noble_condition',"""\
+    yield I(t,'noble_condition',u"""\
 The eventual noble condition of this person. Imported from TIM.
 """)
     t = ContentType.objects.get_for_model(Person)
