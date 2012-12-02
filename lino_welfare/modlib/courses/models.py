@@ -397,7 +397,7 @@ class RegisterCandidate(dd.ChangeStateAction):
 class UnRegisterCandidate(dd.ChangeStateAction):
     label = _("Unregister")
     required=dict(states=['registered'])
-    help_text=_("Register this candidate for this course.")
+    help_text=_("Unregister this candidate from this course.")
 
     def run(self,obj,ar,**kw):
         assert isinstance(obj,CourseRequest)
@@ -431,15 +431,17 @@ class CourseRequest(dd.Model):
     
     content = models.ForeignKey("courses.CourseContent",
         verbose_name=_("Course content"),
-        help_text=u"Der gewünschte Kursinhalt (ein Objekt vom Typ :class:`CourseConent`.)")
+        help_text=u"Der gewünschte Kursinhalt.)")
     
     #~ date_submitted = models.DateField(_("date submitted"),auto_now_add=True)
     date_submitted = models.DateField(_("date submitted"),
-        help_text=u"Das Datum, an dem die Anfrage erstellt wurde.")
+        help_text=_("When this request has been submitted."))
+        #~ help_text=u"Das Datum, an dem die Anfrage erstellt wurde.")
     
     urgent = models.BooleanField(_("Needed for job search"),
         default=False,
-        help_text=u"Ankreuzen, wenn der Kurs für die Arbeitssuche benötigt wird.")
+        help_text=_("Check this if the request is needed for job search."))
+        #~ help_text=u"Ankreuzen, wenn der Kurs für die Arbeitssuche benötigt wird.")
     
     #~ """Empty means 'any provider'
     #~ """

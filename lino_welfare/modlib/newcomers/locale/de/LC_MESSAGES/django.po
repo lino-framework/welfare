@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-27 12:02+0000\n"
-"PO-Revision-Date: 2012-10-27 00:23+0200\n"
+"POT-Creation-Date: 2012-12-02 10:27+0000\n"
+"PO-Revision-Date: 2012-12-02 12:29+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
 "MIME-Version: 1.0\n"
@@ -17,112 +17,119 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: .\models.py:60
+#: .\models.py:64
 msgid "Newcomers"
 msgstr "Neuanträge"
 
-#: .\models.py:68
+#: .\models.py:76
 msgid "Broker"
 msgstr "Vermittler"
 
-#: .\models.py:69
+#: .\models.py:77
 msgid "Brokers"
 msgstr "Vermittler"
 
-#: .\models.py:97
+#: .\models.py:105
 msgid "Faculty"
 msgstr "Fachbereich"
 
-#: .\models.py:98
+#: .\models.py:106
 msgid "Faculties"
 msgstr "Fachbereiche"
 
-#: .\models.py:121
+#: .\models.py:109 .\models.py:140
+msgid "Work effort"
+msgstr "Aufwand"
+
+#: .\models.py:135
 msgid "Competence"
 msgstr "Kompetenz"
 
-#: .\models.py:122
+#: .\models.py:136
 msgid "Competences"
 msgstr "Kompetenzen"
 
-#: .\models.py:195 .\models.py:363
+#: .\models.py:228 .\models.py:426
 msgid "New Clients"
 msgstr "Neue Klienten"
 
-#: .\models.py:214
+#: .\models.py:247
 msgid "Also refused clients"
 msgstr "Auch abgelehnte Klienten"
 
-#: .\models.py:217
+#: .\models.py:250
 msgid "Also deprecated clients"
 msgstr "Auch veraltete Klienten"
 
-#: .\models.py:220
+#: .\models.py:253
 msgid "Also newly coached clients since"
 msgstr "Auch neu begleitete Klienten seit"
 
-#: .\models.py:226
+#: .\models.py:259
 msgid "Coached by"
 msgstr "Begleitet durch"
 
-#: .\models.py:290 .\models.py:459
+#: .\models.py:322 .\models.py:522
 msgid "Available Coaches"
 msgstr "Verfügbare Begleiter"
 
-#: .\models.py:294
+#: .\models.py:326
 msgid "Show suggested agents for"
 msgstr "Zeige Vorschläge für"
 
-#: .\models.py:296
+#: .\models.py:328
 msgid "Count Newcomers since"
 msgstr "Neue Klienten seit"
 
-#: .\models.py:317
+#: .\models.py:349
 msgid "Only for newcomers"
 msgstr "Nur für Neuzugänge"
 
-#: .\models.py:319 .\models.py:321
+#: .\models.py:351 .\models.py:353
 msgid "Only for newcomers with valid SSIN"
 msgstr "Nur für Neuanträge mit gültiger NR-Nr."
 
-#: .\models.py:323
-msgid "Only for newcomers with given `faculty`."
-msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
-
-#: .\models.py:342
+#: .\models.py:406
 #, python-format
 msgid "No coaches available for %s."
 msgstr "Keine Begleiter verfügbar für %s."
 
-#: .\models.py:353
+#: .\models.py:416
 msgid "Primary clients"
 msgstr "Komplette Akten"
 
-#: .\models.py:358
+#: .\models.py:421
 msgid "Active clients"
 msgstr "Aktive Klienten"
 
-#: .\models.py:367
+#: .\models.py:430
+msgid "Score"
+msgstr "Quote"
+
+#: .\models.py:435
 msgid "Workload"
 msgstr "Belastung"
 
-#: .\models.py:388
+#: .\models.py:451
 msgid "Assign"
 msgstr "Zuweisen"
 
-#: .\models.py:400
+#: .\models.py:463
 #, python-format
 msgid "%(client)s assigned to %(coach)s "
 msgstr "%(client)s zugewiesen zu %(coach)s"
 
-#: .\models.py:408
+#: .\models.py:471
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr "%(client)s wird ab jetzt begleitet für %(faculty)s durch %(coach)s."
 
-#: .\models.py:544
+#: .\models.py:607
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
+
+#~ msgid "Only for newcomers with given `faculty`."
+#~ msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
 
 #~ msgid "New client for %s"
 #~ msgstr "Neuer Klient für %s"
@@ -130,9 +137,6 @@ msgstr "Quote NZ"
 #~ msgid "Assign %(coach)s as %(faculty)s coach for client %(client)s."
 #~ msgstr ""
 #~ "%(coach)s zuweisen als Begleiter für %(client)s (Fachbereich %(faculty)s)."
-
-#~ msgid "Score"
-#~ msgstr "Quote"
 
 #~ msgid "Also obsolete clients"
 #~ msgstr "Auch veraltte Klienten"
