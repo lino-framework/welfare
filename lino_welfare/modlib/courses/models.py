@@ -197,6 +197,16 @@ class CourseContent(dd.Model):
         return unicode(self.name)
         
   
+class CourseContents(dd.Table):
+    model = CourseContent
+    order_by = ['name']
+    detail_layout = """
+    id name
+    courses.CourseOffersByContent
+    courses.CourseRequestsByContent
+    """
+    
+
 class CourseOffer(dd.Model):
     """
     """
@@ -326,10 +336,6 @@ class CoursesByOffer(Courses):
     master_key = 'offer'
     column_names = 'start_date * id'
 
-class CourseContents(dd.Table):
-    model = CourseContent
-    order_by = ['name']
-
 class CourseOffers(dd.Table):
     required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
@@ -342,6 +348,9 @@ class CourseOffers(dd.Table):
     
 class CourseOffersByProvider(CourseOffers):
     master_key = 'provider'
+
+class CourseOffersByContent(CourseOffers):
+    master_key = 'content'
 
 
 
@@ -525,6 +534,10 @@ class CourseRequestsByPerson(CourseRequests):
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 * id'
 
+class CourseRequestsByContent(CourseRequests):
+    required=dict(user_groups=['integ'])
+    master_key = 'content'
+        
 class RequestsByCourse(CourseRequests):
     required=dict(user_groups=['integ'])
     master_key = 'course'
@@ -535,7 +548,6 @@ class RequestsByCourse(CourseRequests):
         if obj.course is not None:
             obj.content = obj.course.offer.content
         return obj
-        
         
 
 class ParticipantsByCourse(RequestsByCourse):

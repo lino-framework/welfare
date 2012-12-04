@@ -5,14 +5,15 @@ Version 1.0.5
 ----------
 
 - Neuzugänge. Verfügbare Begleiter. 
-  In dieser Tabelle ist jetzt ein "Score".
+  In dieser Tabelle ist jetzt eine "Quote" in Prozent, die besagt, 
+  "wie sehr Lino diesen Sozi als Begleiter empfiehlt".
   
-- Sprachkurse verwalten: Registrieren / Entregistrieren funktionierte nicht.
+- Sprachkurse verwalten: Eintragen / Austragen funktionierte nicht.
 
 - VSE drucken jetzt nicht nur "Er" und "Sie" korrekt, sondern 
-  wenn Geschelcht des Klienten unbekannt ist, kriegt er keinen Rappel 
+  wenn Geschlecht des Klienten unbekannt ist, kriegt er keinen Rappel 
   sondern druckt wie früher "Er/Sie".
-  Kann sein, dass in der Dokumentvorlage noch Bugs sind.
+  Kann sein, dass ich in der Dokumentvorlage noch Stellen übersehen habe.
   Irgendwann sollten wir dann auch die Art60-7 an dieses neue Feature anpassen.
 
 - Termine vormerken. 
@@ -29,3 +30,7 @@ Upgrade instructions
   - `lino_welfare.modlib.newcomers.Faculty.weight` and `lino_welfare.modlib.newcomers.Competence.weight`
 
 - change local templates: replace `self.client.gender.fm(f,m)` by `self.client.fm(f,m,u)`
+
+- accounts.Account : ref max_length increased from 10 to 100.
+  ref fields in both accounts.Group and accounts.Account are now nullable
+

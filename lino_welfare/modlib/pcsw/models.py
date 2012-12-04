@@ -2864,8 +2864,8 @@ def site_setup(site):
     
     site.modules.cal.Events.set_detail_layout("general more")
     site.modules.cal.Events.add_detail_panel("general","""
-    calendar summary user project 
-    start end 
+    calendar summary project 
+    start end user assigned_to
     place priority access_class transparent #rset 
     owner workflow_buttons
     description GuestsByEvent 

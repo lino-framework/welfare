@@ -156,7 +156,8 @@ class Budget(mixins.AutoUser,mixins.CachedPrintable,mixins.Duplicable):
     #~ allow_cascaded_delete = True
     
     date = models.DateField(_("Date"),blank=True,default=datetime.date.today)
-    partner = models.ForeignKey('contacts.Partner',blank=True,null=True)
+    #~ partner = models.ForeignKey('contacts.Partner',blank=True,null=True)
+    partner = models.ForeignKey('contacts.Partner')
     #~ closed = models.BooleanField(verbose_name=_("Closed"))
     print_todos = models.BooleanField(
         verbose_name=_("Print to-do list"),

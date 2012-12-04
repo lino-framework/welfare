@@ -1,28 +1,59 @@
 Nouvelles demandes
 ==================
 
-Une nouvelle demande est une personne qui arrive au CPAS et demande de l'aide.
+Une nouvelle demande est quand une personne arrive au CPAS et 
+demande de l'aide.
 
-L'accueil introduit une fiche client à l'état "Nouvelle Demande".
+L'accueil crée dans ce cas une 
+fiche client à l'état "Nouvelle Demande". 
+Le cas le plus simple est si la personne a sa carte d'identité.
+(cfr `Lire une carte d'identité`_).
 
-Lino va alors aider à décider quel assistant social aura la responsabilité 
-de s'occuper de la nouvelle demande.
+Pour chaque nouvelle demande il faut si possible 
+remplir le champ 
+`Spécificité` dans l'onglet `Accompagnement` du Client 
+pour indiquer le type de problématique.
 
-- Pour chaque nouvelle demande il faut remplir le champ 
-  `Spécificité` dans l'onglet `Accompagnement` du Client 
-  pour indiquer le type de problématique.
+Lino va alors aider à décider quel agent social aura 
+la responsabilité de s'occuper de cette personne.
+Cette action s'appelle `Attribuer un accompagnateur`_.
+
+Attribuer un accompagnateur
+---------------------------
+
+Action réservée aux utilisateurs qui font partie du groupe "Nouvelles demandes".
   
-- Lino affiche alors, dans ce même onglet, une liste des `agents 
-  disponibles`_, triés selon la probabilité théorique de devenir 
-  candidat pour ce client.
+- :menuselection:`Nouvelles demandes --> Clients`. 
+  Trouver le client en question.
+  Double click sur ce client.
+
+- Lino affiche,  
+  dans l'onglet `Accompagnement` du Client, 
+  une `Liste des agents disponibles`_, 
+  triée selon un `Score`_ 
   
-  
+Score
+-----
+
+Le `score` dans la `Liste des agents disponibles`_ indique 
+"la probabilité théorique de devenir accompagnateur pour ce client".
+Ce score n'est bien sûr qu'un nombre théorique qui prend en compte certains facteurs.
+
+- :menuselection:`Nouvelles demandes --> Clients`. 
+
+
+
+Liste des agents disponibles
+----------------------------
+
+blabla
 
 Configuration
 -------------
 
-Avant d'attendre des résultat il faut donner à Lino certaines 
-informations de configuration.
+Avant d'attendre des résultat il faut donner à Lino certaines informations de configuration.
+
+- La liste des Spécificités (:menuselection:`Configuration --> Spécificités`
 
 - Lino doit savoir quel agent social a la "compétence" de s'occuper 
   d'une spécificité donnée. Cette information se trouve dans l'onglet 

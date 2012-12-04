@@ -22,10 +22,38 @@ import os
 from lino.apps.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
 
+"""
+Version history
+
+version  since         Lino version required   PyPI  changeset
+"""
+
+
+import datetime
+
+class Release:
+    def __init__(self,version,date,lino_version,pypi,changeset=None):
+        self.version = version
+        self.lino_version = lino_version
+        self.date = datetime.date(*map(int,date.split('-')))
+        self.pypi = pypi
+        self.changeset = changeset
+        
+releases = [
+    Release('1.0.5','2012-12-02','1.0.5',False),
+]
+
+#~ __doc__ += """
+#~ foo bar baz added afterwards!
+#~ """
+
+
 class Lino(Lino):
     """
+    version  released      PyPI  changeset
+    1.0.5    20121201..02  no
     """
-    version = '1.0.5' # not yet released 
+    version = '1.0.5+' # 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"
