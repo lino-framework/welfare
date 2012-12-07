@@ -232,7 +232,7 @@ class ContractType(mixins.PrintableType,babel.BabelNamed):
     
     """
   
-    _lino_preferred_width = 20 
+    preferred_foreignkey_width = 20 
     
     templates_group = 'jobs/Contract'
     
@@ -863,7 +863,7 @@ class Job(SectorFunction):
     A place where Clients can work. at some Job Provider
     """
     
-    _lino_preferred_width = 20 
+    preferred_foreignkey_width = 20 
     
     class Meta:
         verbose_name = _("Job")

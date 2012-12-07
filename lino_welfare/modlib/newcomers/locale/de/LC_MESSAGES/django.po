@@ -128,8 +128,8 @@ msgstr "%(client)s wird ab jetzt begleitet für %(faculty)s durch %(coach)s."
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
 
-#~ msgid "Only for newcomers with given `faculty`."
-#~ msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
+msgid "Only for newcomers with given `faculty`."
+msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
 
 #~ msgid "New client for %s"
 #~ msgstr "Neuer Klient für %s"

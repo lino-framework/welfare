@@ -313,7 +313,6 @@ class Lino(Lino):
             #~ )
         #~ return urlpatterns
         
-                
 
 LINO = Lino(__file__,globals())
 

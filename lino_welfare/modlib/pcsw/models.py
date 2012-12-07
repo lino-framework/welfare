@@ -921,8 +921,9 @@ class Client(Person):
                 raise ValidationError(_("Circular reference"))
         #~ if not self.national_id:
             #~ self.national_id = str(self.id)
-        if self.client_state == ClientStates.coached:
-            ssin.ssin_validator(self.national_id)
+        if False: # Regel deaktiviert seit 20121207
+            if self.client_state == ClientStates.coached:
+                ssin.ssin_validator(self.national_id)
         super(Client,self).full_clean(*args,**kw)
         
       

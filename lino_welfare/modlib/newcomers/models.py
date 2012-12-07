@@ -23,6 +23,7 @@ import decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import string_concat
 from django.db import IntegrityError
 from django.utils.encoding import force_unicode
 
@@ -64,7 +65,8 @@ if not hasattr(pcsw,'Clients'):
 MODULE_LABEL = _("Newcomers")
 
 WORKLOAD_BASE = decimal.Decimal('10') # normal number of newcomers per month 
-MAX_WEIGHT = 10
+MAX_WEIGHT = decimal.Decimal('10')
+HUNDRED = decimal.Decimal('100.0')
 
 
 class Broker(dd.Model):
@@ -214,12 +216,21 @@ class MyCompetences(mixins.ByUser,CompetencesByUser):
 #~ print pcsw, dir(pcsw)
 
 
-def faculty_weight(user,faculty):
-    if not user or not faculty: return MAX_WEIGHT
-    try:
-        return Competence.objects.get(faculty=faculty,user=user).weight
-    except Competence.DoesNotExist:
-        return MAX_WEIGHT
+def faculty_weight(user,client):
+    
+    if not client or not client.faculty: 
+        w = MAX_WEIGHT
+    else:
+        try:
+            w = Competence.objects.get(faculty=client.faculty,user=user).weight
+        except Competence.DoesNotExist:
+            w = MAX_WEIGHT
+    if user.newcomer_quota != 0:
+        # e.g. weight counts double for those who work halftime for newcomers
+        # e.g. weight unchanged if user works 100% for newcomers
+        w = w / (user.newcomer_quota / HUNDRED)
+    return w
+        
           
 
 class NewClients(pcsw.Clients):
@@ -320,13 +331,14 @@ class AvailableCoaches(users.Users):
     #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
     #~ label = _("Users by Newcomer")
     label = _("Available Coaches")
-    column_names = 'name_column workflow_buttons:10 primary_clients active_clients new_clients newcomer_quota weight score'
+    column_names = 'name_column workflow_buttons:10 primary_clients new_clients newcomer_quota current_weight added_weight score'
     parameters = dict(
         for_client = models.ForeignKey('pcsw.Client',
             verbose_name=_("Show suggested agents for"),
             blank=True),
-        since = models.DateField(_("Count Newcomers since"),
-            blank=True,default=amonthago),
+        since = models.DateField(_("New clients since"),
+            blank=True,default=amonthago,
+            help_text=_("New clients are those whose coaching started after this date")),
     )
     params_layout = "for_client since"
     
@@ -349,10 +361,10 @@ class AvailableCoaches(users.Users):
                 raise Warning(_("Only for newcomers"))
             if not client.national_id:
                 raise Warning(_("Only for newcomers with valid SSIN"))
-            if not ssin.is_valid_ssin(client.national_id):
-                raise Warning(_("Only for newcomers with valid SSIN"))
-            #~ if not client.faculty:
-                #~ raise Warning(_("Only for newcomers with given `faculty`."))
+            #~ if not ssin.is_valid_ssin(client.national_id):
+                #~ raise Warning(_("Only for newcomers with valid SSIN"))
+            if not client.faculty:
+                raise Warning(_("Only for newcomers with given `faculty`."))
         
         #~ total_new_clients = NewClients.request(
               #~ ar.ui,param_values=dict(new_since=ar.param_values.since)
@@ -367,7 +379,7 @@ class AvailableCoaches(users.Users):
                 #~ client__client_state=pcsw.ClientStates.coached,
                 #~ start_date__gte=new_since)
         
-        total_weight = 0
+        total_weight = decimal.Decimal('0')
         #~ total_quota = 0
         data = []
         qs = super(AvailableCoaches,self).get_request_queryset(ar)
@@ -388,28 +400,32 @@ class AvailableCoaches(users.Users):
                 coached_by=user,
                 new_since=ar.param_values.since))
                 
-            user._weight = 0.0
-            user._score = 100.0 # decimal.Decimal('0')
+            user._score = HUNDRED
+            user._hw = faculty_weight(user,client)
+            
+            user._weight = decimal.Decimal('0')
             for nc in user.new_clients:
-                user._weight += faculty_weight(user,nc.faculty)
-            if user.newcomer_quota != 0:
-                # e.g. weight counts double for those who work halftime for newcomers
-                # e.g. weight unchanged if user works 100% for newcomers
-                user._weight = user._weight / (user.newcomer_quota / 100.0)
+                user._weight += faculty_weight(user,nc)
             total_weight += user._weight 
+            total_weight += user._hw
             #~ total_quota += user.newcomer_quota
                 
             data.append(user)
             
+        #~ total_weight += user._hw
+        
         if len(data) == 0:
-            if client:
+            if client and client.faculty:
                 raise Warning(_("No coaches available for %s.") % client.faculty)
-        elif total_weight != 0 and len(data) > 1:
+        elif total_weight != 0:
             for user in data:
-                user._score = 100.0 - (user._weight * 100.0 / total_weight)
+                # hypothetic weight if this user would get this client
+                #~ user._score = 100.0 - (user._weight * 100.0 / total_weight)
+                user._score = HUNDRED * (user._weight + user._hw) / total_weight
+                #~ logger.info("%s (%s+%s)/%s = %s%%",user.username,user._weight,user._hw,total_weight,user._score)
                 
         def fn(a,b):
-            return cmp(b._score,a._score)
+            return cmp(a._score,b._score)
         data.sort(fn)
         return data
                 
@@ -418,24 +434,40 @@ class AvailableCoaches(users.Users):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
         return pcsw.CoachingsByUser.request(ar.ui,master_instance=obj)
         
-    @dd.requestfield(_("Active clients"))
-    def active_clients(self,obj,ar):
-        #~ return pcsw.MyActiveClients.request(ar.ui,subst_user=obj)
-        return pcsw.IntegClients.request(ar.ui,param_values=dict(coached_by=obj,only_active=True))
+    #~ @dd.requestfield(_("Active clients"))
+    #~ def active_clients(self,obj,ar):
+        #~ return pcsw.IntegClients.request(ar.ui,param_values=dict(coached_by=obj,only_active=True))
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):
         return obj.new_clients
         
-    @dd.virtualfield(models.CharField(_("Score"),max_length=6))
-    def score(self,obj,ar):
-        #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
-        return "%6.0f%%" % obj._score
-        
-    @dd.virtualfield(models.IntegerField(_("Workload"),max_length=3))
-    def weight(self,obj,ar):
+    @dd.virtualfield(models.DecimalField(_("Current workload"),
+        max_digits=8,decimal_places=0,
+        help_text=u"""\
+Momentane Gesamtbelastung dieses Benutzers durch neue Klienten. 
+Summe der Belastungspunkte pro neuem Klient."""))
+    def current_weight(self,obj,ar):
         #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
         return obj._weight
+        
+    @dd.virtualfield(models.DecimalField(_("Added workload"),
+        max_digits=8,decimal_places=0,
+        help_text=u"""\
+Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer verursachen würde."""))
+    def added_weight(self,obj,ar):
+        #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
+        return obj._hw
+        
+    #~ @dd.virtualfield(models.CharField(_("Score"),max_length=6,help_text=u"""\
+    @dd.virtualfield(models.DecimalField(string_concat(_("Added workload")," (%)"),
+        max_digits=8,decimal_places=2,
+    help_text=u"""\
+Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
+    def score(self,obj,ar):
+        #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
+        #~ return "%6.0f%%" % obj._score
+        return obj._score
         
         
     #~ @classmethod    
@@ -609,6 +641,9 @@ settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
           help_text=u"""\
 Wieviel Arbeitszeit dieser Benutzer für Neuanträge zur Verfügung steht
 (100 = ganztags, 50 = halbtags, 0 = gar nicht).
+Wenn zwei Benutzer die gleiche Belastungspunktzahl haben, 
+aber einer davon sich nur zu 50% um Neuanträge kümmert, 
+gilt er als doppelt so belastet wie sein Kollege.
 """))
 
 

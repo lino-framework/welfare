@@ -90,7 +90,8 @@ class ContractType(mixins.PrintableType,babel.BabelNamed):
     `exam_policy` is the default ExamPolicy for new Contracts.
     """
     
-    _lino_preferred_width = 20 
+    #~ _lino_preferred_width = 20 
+    preferred_foreignkey_width = 20 
     
     templates_group = 'isip/Contract'
     

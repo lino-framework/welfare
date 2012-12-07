@@ -345,7 +345,7 @@ def objects():
     yield company(name=u"Behindertenstätten Eupen",city=eupen,country=belgium)
     yield company(name=u"Beschützende Werkstätte Eupen",city=eupen,country=belgium)
     
-    cct = ClientContactType(name="Krankenkasse")
+    cct = ClientContactType(name=u"Krankenkasse")
     yield cct
     kw = dict(client_contact_type=cct,country=belgium)
     #~ kw = dict(is_health_insurance=True,country=belgium)
@@ -355,7 +355,7 @@ def objects():
     yield company(name=u"Mutualia - Mutualité Neutre",**kw)
     yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège",**kw)
     
-    cct = ClientContactType(name="Apotheke")
+    cct = ClientContactType(name=u"Apotheke")
     yield cct
     kw = dict(client_contact_type=cct,country=belgium)
     #~ kw = dict(is_pharmacy=True,country=belgium,city=eupen)
@@ -584,7 +584,7 @@ def objects():
     
     Note = resolve_model('notes.Note')
     USERS = Cycler(User.objects.all())
-    SUBJECTS = Cycler("""
+    SUBJECTS = Cycler(u"""
     Erstgespräch
     Versammlung beim AG
     Zwischenbericht

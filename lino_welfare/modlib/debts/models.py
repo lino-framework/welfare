@@ -146,9 +146,7 @@ class Budget(mixins.AutoUser,mixins.CachedPrintable,mixins.Duplicable):
     """
     Deserves more documentation.
     """
-    
-    #~ _lino_preferred_width = 30
-    
+   
     class Meta:
         verbose_name = _("Budget")
         verbose_name_plural = _("Budgets")
