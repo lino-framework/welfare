@@ -15,6 +15,17 @@
 """
 Default settings of a Lino/Welfare site.
 
+This file is also the central place of the version counter.
+
+For release notes see :mod:`lino.releases`.
+
+------------------------ ------------  ----- --------------
+version                  released      PyPI  Lino version
+------------------------ ------------  ----- --------------
+:doc:`/releases/1.0.5`   20121201..02  no    http://lino-framework.org/releases/1.5.2
+------------------------ ------------  ----- --------------
+
+
 """
 
 import os
@@ -22,38 +33,13 @@ import os
 from lino.apps.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
 
-"""
-Version history
-
-version  since         Lino version required   PyPI  changeset
-"""
-
 
 import datetime
 
-class Release:
-    def __init__(self,version,date,lino_version,pypi,changeset=None):
-        self.version = version
-        self.lino_version = lino_version
-        self.date = datetime.date(*map(int,date.split('-')))
-        self.pypi = pypi
-        self.changeset = changeset
-        
-releases = [
-    Release('1.0.5','2012-12-02','1.0.5',False),
-]
-
-#~ __doc__ += """
-#~ foo bar baz added afterwards!
-#~ """
-
-
 class Lino(Lino):
     """
-    version  released      PyPI  changeset
-    1.0.5    20121201..02  no
     """
-    version = '1.0.5+' # 
+    version = '1.0.6' # 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"

@@ -44,6 +44,9 @@ extensions = [
   #~ 'sphinx.ext.doctest',
 ]
 
+extensions.append('sphinxcontrib.autorun')
+
+
 primary_domain = 'py'
 
 

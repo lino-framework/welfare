@@ -33,8 +33,5 @@ Todo:
   Which then causes another traceback
   "FieldError at /api/pcsw/IntegClients / Cannot resolve keyword 'applies_from' into field."
   
-  Idea: implement the fields Client.applies_from and applies_until as 
-  "summary fields". This is a new concept: :doc:`/topics/summary_fields`
-
 - Inform about active column filters when building the title of table
   (using title tags).
