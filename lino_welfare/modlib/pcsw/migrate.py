@@ -488,7 +488,6 @@ def migrate_from_1_0_4(globals_dict):
     return '1.0.5'
 
 def migrate_from_1_0_5(globals_dict):
-    state '15'
     cal_Event = resolve_model("cal.Event")
     #~ new_content_type_id = globals_dict.get('new_content_type_id')
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
