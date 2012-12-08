@@ -25,7 +25,7 @@ def released(version,date,lino_version='',changeset=''):
 released('1.0.2',20121120,None,'a44bff391952')
 released('1.0.3',20121121)
 released('1.0.4',20121130)
-released('1.0.5',20121201,'1.5.2')
+released('1.0.5',20121201,'1.5.2','a7cb6e85afe7')
 released('1.0.6',20121210,'1.5.3')
 
 

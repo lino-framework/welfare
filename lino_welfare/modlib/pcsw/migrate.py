@@ -486,3 +486,17 @@ def migrate_from_1_0_4(globals_dict):
     
     
     return '1.0.5'
+
+def migrate_from_1_0_5(globals_dict):
+    state '15'
+    cal_Event = resolve_model("cal.Event")
+    #~ new_content_type_id = globals_dict.get('new_content_type_id')
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
+        owner_type_id = new_content_type_id(owner_type_id)
+        #~ if state and state.value == '15':
+        if state == '15':
+            state = '10'
+        return cal_Event(id=id,owner_type_id=owner_type_id,owner_id=owner_id,user_id=user_id,created=created,modified=modified,project_id=project_id,build_time=build_time,start_date=start_date,start_time=start_time,end_date=end_date,end_time=end_time,summary=summary,description=description,uid=uid,calendar_id=calendar_id,access_class=access_class,sequence=sequence,auto_type=auto_type,transparent=transparent,place_id=place_id,priority_id=priority_id,state=state)    
+    globals_dict.update(create_cal_event=create_cal_event)
+    return '1.0.6'
+
