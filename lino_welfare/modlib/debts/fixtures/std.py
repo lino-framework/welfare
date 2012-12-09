@@ -40,7 +40,7 @@ def objects():
     c = accounts.Chart(name="debts.default")
     yield c
     group = Instantiator('accounts.Group',chart=c).build
-    g = group(ref="10",account_type=AccountTypes.income,**babel_values('name',
+    g = group(ref="10",account_type=AccountTypes.incomes,**babel_values('name',
           de=u"Monatliche Einkünfte",
           fr=u"Revenus mensuels",
           en=u"Monthly incomes"
@@ -83,7 +83,7 @@ def objects():
           en=u"Andere"
           ))
 
-    g = group(ref="20",account_type=AccountTypes.income,**babel_values('name',
+    g = group(ref="20",account_type=AccountTypes.incomes,**babel_values('name',
           de=u"Jährliche Einkünfte",
           fr=u"Revenus annuels",
           en=u"Yearly incomes"
@@ -106,7 +106,7 @@ def objects():
           en=u"Gewerkschaftsprämie"
           ))
 
-    g = group(ref="30",account_type=AccountTypes.expense,**babel_values('name',
+    g = group(ref="30",account_type=AccountTypes.expenses,**babel_values('name',
           de=u"Monatliche Ausgaben",
           fr=u"Dépenses mensuelles",
           en=u"Monthly expenses"
@@ -230,7 +230,7 @@ def objects():
           ))
 
 
-    g = group(ref="40",account_type=AccountTypes.expense,**babel_values('name',
+    g = group(ref="40",account_type=AccountTypes.expenses,**babel_values('name',
           de=u"Steuern",
           fr=u"Taxes",
           en=u"Taxes"
@@ -268,7 +268,7 @@ def objects():
           en=u"Other"
           ))
 
-    g = group(ref="50",account_type=AccountTypes.expense,**babel_values('name',
+    g = group(ref="50",account_type=AccountTypes.expenses,**babel_values('name',
           de=u"Versicherungen",
           fr=u"Assurances",
           en=u"Insurances"
@@ -302,7 +302,7 @@ def objects():
           ))
           
           
-    g = group(ref="60",account_type=AccountTypes.asset,**babel_values('name',
+    g = group(ref="60",account_type=AccountTypes.assets,**babel_values('name',
           de=u"Aktiva, Vermögen, Kapital",
           fr=u"Actifs",
           en=u"Assets"
@@ -321,7 +321,7 @@ def objects():
           ))
     
     
-    g = group(ref="70",account_type=AccountTypes.liability,**babel_values('name',
+    g = group(ref="70",account_type=AccountTypes.liabilities,**babel_values('name',
           de=u"Guthaben, Schulden, Verbindlichkeit",
           fr=u"Créances et dettes",
           en=u"Liabilities"

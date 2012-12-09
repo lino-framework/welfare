@@ -726,19 +726,19 @@ class EntriesByBudget(Entries):
 
         
 class ExpensesByBudget(EntriesByBudget,EntriesByType):
-    _account_type = AccountTypes.expense
+    _account_type = AccountTypes.expenses
         
 class IncomesByBudget(EntriesByBudget,EntriesByType):
     "Incomes By Budget"
-    _account_type = AccountTypes.income
+    _account_type = AccountTypes.incomes
     
 class LiabilitiesByBudget(EntriesByBudget,EntriesByType):
     "Liabilities By Budget"
-    _account_type = AccountTypes.liability
+    _account_type = AccountTypes.liabilities
     column_names = "account partner remark amount actor:10 distribute monthly_rate todo seqno"
     
 class AssetsByBudget(EntriesByBudget,EntriesByType):
-    _account_type = AccountTypes.asset
+    _account_type = AccountTypes.assets
     column_names = "account remark amount actor todo seqno"
 
 
@@ -899,21 +899,21 @@ class PrintExpensesByBudget(PrintEntriesByBudget):
     """
     Print version of :class:`ExpensesByBudget` table.
     """
-    _account_type = AccountTypes.expense
+    _account_type = AccountTypes.expenses
     column_names = "description dynamic_amounts"
         
 class PrintIncomesByBudget(PrintEntriesByBudget):
     """
     Print version of :class:`IncomesByBudget` table.
     """
-    _account_type = AccountTypes.income
+    _account_type = AccountTypes.incomes
     column_names = "description dynamic_amounts"
     
 class PrintLiabilitiesByBudget(PrintEntriesByBudget):
     """
     Print version of :class:`LiabilitiesByBudget` table.
     """
-    _account_type = AccountTypes.liability
+    _account_type = AccountTypes.liabilities
     #~ column_names = "partner description total monthly_rate todo"
     column_names = "partner:20 description:20 dynamic_amounts"
     
@@ -921,7 +921,7 @@ class PrintAssetsByBudget(PrintEntriesByBudget):
     """
     Print version of :class:`AssetsByBudget` table.
     """
-    _account_type = AccountTypes.asset
+    _account_type = AccountTypes.assets
     column_names = "description dynamic_amounts"
 
 ENTRIES_BY_TYPE_TABLES = (
@@ -1004,7 +1004,7 @@ class DistByBudget(EntriesByBudget):
     column_names = "partner description amount dist_perc dist_amount"
     filter = models.Q(distribute=True)
     label = _("Debts distribution")
-    known_values = dict(account_type=AccountTypes.liability)
+    known_values = dict(account_type=AccountTypes.liabilities)
     
     @classmethod
     def get_data_rows(self,ar):

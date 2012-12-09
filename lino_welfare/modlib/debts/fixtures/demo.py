@@ -60,14 +60,14 @@ def objects():
     EXPENSE_AMOUNTS = Cycler([i*5.24 for i in range(10)])
     DEBT_AMOUNTS = Cycler([(i+1)*300 for i in range(5)])
     PARTNERS = Cycler(Company.objects.all())
-    LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liability))
+    LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liabilities))
     for b in Budget.objects.all():
         #~ n = min(3,b.actor_set.count())
         for e in b.entry_set.all():
             #~ for i in range(n):
-            if e.account.type == AccountTypes.income:
+            if e.account.type == AccountTypes.incomes:
                 amount = INCOME_AMOUNTS.pop()
-            elif e.account.type == AccountTypes.expense:
+            elif e.account.type == AccountTypes.expenses:
                 amount = EXPENSE_AMOUNTS.pop()
             if e.account.required_for_household:
                 e.amount = n2dec(amount)
