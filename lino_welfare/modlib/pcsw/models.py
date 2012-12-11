@@ -558,7 +558,7 @@ def card2client(data):
     kw.update(birth_place=data['birthLocation'])
     pk = data['country'].upper()
     
-    msg1 = "BeIdReadCardToClientsAction %s" % kw.get('national_id')
+    msg1 = "BeIdReadCardToClientAction %s" % kw.get('national_id')
 
     try:
         country = countries.Country.objects.get(isocode=pk)
@@ -602,43 +602,55 @@ def card2client(data):
     #~ logger.info("Unused data: %r", unused)
     return kw
     
-class BeIdReadCardToClientsAction(actions.BeIdReadCardAction):
-    sorry_msg = _("Sorry, I cannot handle that case: %s")
     
+   
+class BeIdReadCardAction(actions.BeIdReadCardAction):
+    """
+    base for 
+    """
+    sorry_msg = _("Sorry, I cannot handle that case: %s")
+  
     def run(self,row,ar,**kw):
-        assert row is None
-        #~ data = Getter(ar.request.POST)
         data = ar.request.POST
         attrs = card2client(data)
         #~ print 20121117, attrs
         #~ ssin = data['nationalNumber']
         #~ ssin = attrs['national_id']
-        qs = Client.objects.filter(national_id=attrs['national_id'])
-        if qs.count() > 1:
-            return ar.error_response(self.sorry_msg % 
-                _("There is already more than one client with national id %(national_id)s in our database.")
-                % attrs)
-        if qs.count() == 0:
-            fkw = dict(last_name__iexact=attrs['last_name'],first_name__iexact=attrs['first_name'])
-            fkw.update(national_id__isnull=True)
-            qs = Client.objects.filter(**fkw)
-            if qs.count() == 0:
-                ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
-                obj = Client(**attrs)
-                obj.full_clean()
-                obj.save()
-                changes.log_create(ar.request,obj)
-                return ar.success_response(
-                    _("New client %(first_name)s %(last_name)s has been created") % attrs,
-                    alert=_("Success"),
-                    refresh=True)
-            elif qs.count() > 1:
+        if row is None:
+            qs = Client.objects.filter(national_id=attrs['national_id'])
+            if qs.count() > 1:
                 return ar.error_response(self.sorry_msg % 
-                    _("There is already more than one client named %(first_name)s %(last_name)s in our database.")
-                    % attrs,alert=_("Oops!"))
-                    
-        assert qs.count() == 1
-        obj = qs[0]
+                    _("There is already more than one client with national id %(national_id)s in our database.")
+                    % attrs)
+            if qs.count() == 0:
+                fkw = dict(last_name__iexact=attrs['last_name'],first_name__iexact=attrs['first_name'])
+                """
+                currently we are very strict: if a client with same last_name and first_name 
+                exists, the user cannot (automatically) create a new client from eid card.
+                """
+                #~ fkw.update(national_id__isnull=True)
+                qs = Client.objects.filter(**fkw)
+                if qs.count() == 0:
+                    ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
+                    obj = Client(**attrs)
+                    obj.full_clean()
+                    obj.save()
+                    changes.log_create(ar.request,obj)
+                    return ar.success_response(
+                        _("New client %(first_name)s %(last_name)s has been created") % attrs,
+                        alert=_("Success"),
+                        refresh=True)
+                elif qs.count() > 1:
+                    return ar.error_response(self.sorry_msg % 
+                        _("There is already more than one client named %(first_name)s %(last_name)s in our database.")
+                        % attrs,alert=_("Oops!"))
+                        
+            assert qs.count() == 1
+            row = qs[0]
+        return self.process_row(ar,row,attrs)
+  
+  
+    def process_row(self,ar,obj,attrs):
         watcher = changes.Watcher(obj)
         diffs = []
         for fldname,new in attrs.items():
@@ -647,11 +659,11 @@ class BeIdReadCardToClientsAction(actions.BeIdReadCardAction):
             if old != new:
                 diffs.append("%s : %s -> %s" % (unicode(fld.verbose_name),obj2str(old),obj2str(new)))
                 setattr(obj,fld.name,new)
+                
         if len(diffs) == 0:
-            return ar.success_response(
-                _("Client %(first_name)s %(last_name)s is up-to-date") % attrs,
-                alert=_("Nothing to do"))
-        msg = unicode(_("Click OK to apply the following changes for client %(first_name)s %(last_name)s") % attrs)
+            return self.no_diffs_response(ar,obj)
+            
+        msg = unicode(_("Click OK to apply the following changes for %s") % obj)
         msg += ' :<br/>'
         msg += '\n<br/>'.join(diffs)
         #~ print msg
@@ -659,11 +671,46 @@ class BeIdReadCardToClientsAction(actions.BeIdReadCardAction):
         obj.full_clean()
         obj.save()
         watcher.log_diff(ar.request)
+        return self.saved_diffs_response(ar,obj)
+        
+        
+  
+class BeIdReadCardToClientAction(BeIdReadCardAction):
+    """
+    read beid card while being on a given client.
+    """
+    #~ list_action = False
+    label = _("Read eID card")
+    
+    def no_diffs_response(self,ar,obj):
+        return ar.success_response(
+            _("Client %s is up-to-date") % unicode(obj),
+            alert=_("Nothing to do"))
+  
+    def saved_diffs_response(self,ar,obj):
         return ar.success_response(
             _("%s has been saved.") % obj2unicode(obj),
             alert=_("Success"),
             refresh=True)
+            
+class FindByBeIdAction(BeIdReadCardAction):
+    """
+    main menu command: read beid data and find that client.
+    """
+    single_row = False
+          
+    required = dd.required(user_level='admin')
+    label = _("Find by eID card")
+    callable_from = tuple() # only explicitely callable
+    #~ list_action = True
+    
+    def no_diffs_response(self,ar,obj):
+        #~ open detail on that client
+        return ar.success_response(eval_js=ar.instance_handler(obj)) 
 
+    def saved_diffs_response(self,ar,obj):
+        return ar.success_response(
+            eval_js=ar.instance_handler(obj))
 
     
 class Client(Person):
@@ -820,8 +867,9 @@ class Client(Person):
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
-    beid_read_card = BeIdReadCardToClientsAction(_("Read eID card"),
-        required=dict(user_level='admin'))
+    #~ beid_read_card = BeIdReadCardToClientAction(required=dict(user_level='admin'))
+    read_beid = BeIdReadCardToClientAction(required=dict(user_level='admin'))
+    find_by_beid  = FindByBeIdAction()
     
     #~ def update_system_note(self,note):
         #~ note.project = self
@@ -1865,50 +1913,73 @@ class ClientsTest(Clients):
       #~ user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
       #~ only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
       #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
-      coached_by = models.ForeignKey(users.User,blank=True,null=True,
-          verbose_name=_("Coached by")),
+      #~ coached_by = models.ForeignKey(users.User,blank=True,null=True,
+          #~ verbose_name=_("Coached by")),
       invalid_niss = models.BooleanField(_("Check NISS validity"),default=True),
-      overlapping_contracts = models.BooleanField(_("Check for overlapping contracts"),default=True)
+      overlapping_contracts = models.BooleanField(_("Check for overlapping contracts"),default=True),
       #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
       #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
-    )
-    params_layout = """invalid_niss overlapping_contracts coached_by"""
+      **Clients.parameters)
+    params_layout = """
+    aged_from aged_to gender also_obsolete
+    client_state coached_by and_coached_by coached_on only_primary nationality
+    invalid_niss overlapping_contracts 
+    """
+    
+    #~ params_layout = """invalid_niss overlapping_contracts coached_by"""
     #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
     
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ return super(Clients,self).get_request_queryset(ar)
+    
+    
     @classmethod
-    def get_data_rows(self,ar):
+    def todo_get_row_by_pk(self,pk):
+        """
+        This would be to avoid "AttributeError 'Client' object has no attribute 'error_message'"
+        after a PUT from GridView.
+        One detail is missing: We should change the API to include `ar`.
+        But that's not so easy because we have for example 
+        lino.ui.extjs3.views.Templates.get
+        """
+        obj = super(ClientsTest,self).get_row_by_pk(pk)
+        if obj is None: 
+            return obj
+        return list(self.get_data_rows(ar,[obj]))[0]
+        
+      
+    @classmethod
+    def get_data_rows(self,ar,qs=None):
         """
         """
         from lino_welfare.modlib.isip.models import OverlappingContractsTest
         #~ qs = Person.objects.all()
-        qs = self.get_request_queryset(ar)
         
-        #~ if ar.param_values.user:
-            #~ qs = only_coached_by(qs,ar.param_values.user)
+        if qs is None:
+            qs = self.get_request_queryset(ar)
         
-        #~ if ar.param_values.today:
-            #~ qs = only_coached_persons(qs,ar.param_values.today)
-            
         #~ logger.info("Building ClientsTest data rows...")
         #~ for p in qs.order_by('name'):
-        for person in qs:
+        for obj in qs:
             messages = []
             if ar.param_values.overlapping_contracts:
-                messages += OverlappingContractsTest(person).check_all()
+                messages += OverlappingContractsTest(obj).check_all()
               
             if ar.param_values.invalid_niss:
                 try:
-                    ssin.ssin_validator(person.national_id)
+                    ssin.ssin_validator(obj.national_id)
                 except ValidationError,e:
                     messages += e.messages
           
             if messages:
-                #~ person.error_message = ';<br/>'.join([cgi.escape(m) for m in messages])
-                person.error_message = ';\n'.join(messages)
+                #~ client.error_message = ';<br/>'.join([cgi.escape(m) for m in messages])
+                obj.error_message = ';\n'.join(messages)
                 #~ logger.info("%s : %s", p, p.error_message)
-                yield person
-        logger.info("Building ClientsTest data rows: done")
+                yield obj
+                
+        #~ logger.info("Building ClientsTest data rows: done")
                 
         
     @dd.displayfield(_('Error message'))
@@ -2700,36 +2771,9 @@ INTEG_MODULE_LABEL = _("Integration")
 
 #~ def setup_my_menu(site,ui,profile,m): 
 def setup_main_menu(site,ui,profile,m): 
-    #~ if user.is_spis:
-    #~ if user.profile.integ_level:
-        #~ mypersons = m.add_menu("mypersons",MyClients.label)
-        #~ mypersons.add_action(MyClients)
-        #~ for pg in PersonGroup.objects.order_by('ref_name'):
-            #~ mypersons.add_action(
-              #~ MyClientsByGroup,
-              #~ label=pg.name,
-              #~ params=dict(master_instance=pg))
-              
-        #~ pm = m.add_menu("pcsw",MODULE_LABEL)
-        pm = m.add_menu("contacts",contacts.MODULE_LABEL)
-        if False:
-            pm.add_separator('-')
-        pm.add_action(Clients)
-        #~ m.add_action(MyClients)
-        #~ m.add_action(Clients)
-        if False:
-            pm.add_action(MyCoachings)
-            #~ pm.add_action(MySuggestedCoachings)
-            
-        #~ for pg in PersonGroup.objects.order_by('ref_name'):
-            #~ mycoachings.add_action(
-              #~ MyCoachingsByGroup,
-              #~ label=pg.name,
-              #~ params=dict(master_instance=pg))
-  
-        m = m.add_menu("integ",INTEG_MODULE_LABEL)
-        m.add_action(IntegClients)
-        #~ m.add_action(MyPersonSearches)
+    m = m.add_menu("integ",INTEG_MODULE_LABEL)
+    m.add_action(IntegClients)
+    #~ m.add_action(MyPersonSearches)
 
         
 

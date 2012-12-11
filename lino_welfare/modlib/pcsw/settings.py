@@ -162,6 +162,7 @@ class Lino(Lino):
         tb.add_action(self.modules.jobs.MyContracts)
         #~ tb.add_action(self.modules.pcsw.Home)
         
+        #~ tb.add_action(self.modules.pcsw.Clients,'find_by_beid')
         
     def setup_menu(self,ui,profile,main):
         from django.utils.translation import ugettext_lazy as _
@@ -203,6 +204,7 @@ class Lino(Lino):
         m.clear()
         m.add_action(self.modules.contacts.Persons)
         m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
+        m.add_action(self.modules.pcsw.Clients,'find_by_beid')
         m.add_action(self.modules.contacts.Companies)
         m.add_action(self.modules.households.Households)
         m.add_separator('-')
