@@ -1,25 +1,4 @@
 Die kommende Version
 ====================
 
-- In Comboboxen, die einen leeren Wert erlauben, 
-  steht eine leere Zeile jetzt auch in der Auswahlliste.
-  
-- Im Menü :menuselection:`Kalender` hat sich einiges geändert.
-  Die Liste der Termine hat jetzt ein Parameter-Panel.
-  
-- Das Zuweisen von Terminen wird jetzt über ein eigenes Feld 
-  "Zugewiesen zu" geregelt. Ein Termin kann unabhängig vom 
-  Bearbeitungsstatus zugewiesen werden, und der Status geht
-  dadurch nicht verloren.
 
-- Neuanträge / Tabelle "Verfügbare Begleiter":
-  - Klient *muss* einen FB zugewiesen bekommen haben.
-  - Klient *braucht keine* gültige NR-Nr zu haben
-  - Kolonne "Aktive Klienten" rausgeworfen (die Info war dort belanglos)
-  - Die Berechnung der Belastung wurde nochmals revidiert.
-  - Hilfetexte bei den wichtigsten Kolonnen
-
-Kleinkram
----------
-
-- Budget.partner war nullable. Jetzt nicht mehr.

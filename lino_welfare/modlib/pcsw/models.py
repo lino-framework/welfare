@@ -567,12 +567,16 @@ def card2client(data):
     #~ except Exception,e:
         logger.warning("%s : no country with code %r",msg1,pk)
     try:
-        city = countries.City.objects.get(country__isocode='BE',name__iexact=data['municipality'])
+        city = countries.City.objects.get(
+            country__isocode='BE',
+            name__iexact=data['municipality'])
         kw.update(city=city)
     except countries.City.DoesNotExist,e:
-        logger.warning("%s : There is no city named %r in Belgium",msg1,data['municipality'])
+        logger.warning("%s : There is no city named %r in Belgium",
+            msg1,data['municipality'])
     except MultipleObjectsReturned,e:
-        logger.warning("%s : found more than one city named %r in Belgium",msg1,data['municipality'])
+        logger.warning("%s : found more than one city named %r in Belgium",
+            msg1,data['municipality'])
         #~ logger.exception(e)
     def sex2gender(sex):
         if sex == 'M' : return mixins.Genders.male
@@ -583,11 +587,15 @@ def card2client(data):
     if False:
         def nationality2country(nationality):
             try:
-                return countries.Country.objects.get(nationalities__icontains=nationality)
+                return countries.Country.objects.get(
+                    nationalities__icontains=nationality)
             except countries.Country.DoesNotExist,e:
-                logger.warning("%s : no country for nationality %r",msg1,nationality)
+                logger.warning("%s : no country for nationality %r",
+                    msg1,nationality)
             except MultipleObjectsReturned,e:
-                logger.warning("%s : found more than one country for nationality %r",msg1,nationality)
+                logger.warning(
+                    "%s : found more than one country for nationality %r",
+                    msg1,nationality)
         kw.update(nationality=nationality2country(data['nationality']))
     
     def doctype2cardtype(dt):
@@ -620,12 +628,12 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
             qs = Client.objects.filter(national_id=attrs['national_id'])
             if qs.count() > 1:
                 return ar.error_response(self.sorry_msg % 
-                    _("There is already more than one client with national id %(national_id)s in our database.")
+                    _("There is more than one client with national id %(national_id)s in our database.")
                     % attrs)
             if qs.count() == 0:
                 fkw = dict(last_name__iexact=attrs['last_name'],first_name__iexact=attrs['first_name'])
                 """
-                currently we are very strict: if a client with same last_name and first_name 
+                if a client with same last_name and first_name 
                 exists, the user cannot (automatically) create a new client from eid card.
                 """
                 #~ fkw.update(national_id__isnull=True)
@@ -637,12 +645,12 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
                     obj.save()
                     changes.log_create(ar.request,obj)
                     return ar.success_response(
-                        _("New client %(first_name)s %(last_name)s has been created") % attrs,
+                        _("New client %s has been created") % obj,
                         alert=_("Success"),
                         refresh=True)
                 elif qs.count() > 1:
                     return ar.error_response(self.sorry_msg % 
-                        _("There is already more than one client named %(first_name)s %(last_name)s in our database.")
+                        _("There is more than one client named %(first_name)s %(last_name)s in our database.")
                         % attrs,alert=_("Oops!"))
                         
             assert qs.count() == 1
