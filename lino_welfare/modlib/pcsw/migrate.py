@@ -499,3 +499,5 @@ def migrate_from_1_0_5(globals_dict):
     globals_dict.update(create_cal_event=create_cal_event)
     return '1.0.6'
 
+def migrate_from_1_0_6(globals_dict):
+    return '1.0.7'

@@ -39,7 +39,7 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.6' # 
+    version = '1.0.7' # 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"
