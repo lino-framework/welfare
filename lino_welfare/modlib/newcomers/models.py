@@ -542,8 +542,8 @@ nicht mehr angezeigt."""
         self.add_system_note(ar,coaching)
         
         #~ msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
-        #~ return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
-        return ar.success_response(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
+        #~ return ar.success(refresh_all=True,message=msg,alert=True,**kw)
+        return ar.success(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
         #~ kw.update(refresh_all=True)
         #~ return kw
     
@@ -615,7 +615,7 @@ class AvailableCoachesByClient(AvailableCoaches):
             #~ if interactive:
                 #~ js = ar.renderer.instance_handler(ar,m)
                 #~ kw.update(eval_js=js)
-        #~ return ar.success_response(refresh_all=True,message=msg,alert=True,**kw)
+        #~ return ar.success(refresh_all=True,message=msg,alert=True,**kw)
         
         
 

@@ -27,6 +27,7 @@ released('1.0.3',20121121)
 released('1.0.4',20121130)
 released('1.0.5',20121201,'1.5.2','a7cb6e85afe7')
 released('1.0.6',20121210,'1.5.3')
+released('1.0.7',20121211,'dev')
 
 
 
@@ -40,7 +41,7 @@ def as_index_rst(language=None):
         version = ":doc:`/releases/%s`" % version
         s = "- %s released %s" % (version,babel.dtosl(date))
         if lino_version:
-            s += ", requires `" + lino_version 
+            s += ", requires Lino `" + lino_version 
             s += " <http://lino-framework.org/releases/" + lino_version + ".html>`_"
         if changeset:
             s += ", :checkin:`%s`" % changeset

@@ -19,13 +19,6 @@ This file is also the central place of the version counter.
 
 For release notes see :mod:`lino.releases`.
 
------------------------- ------------  ----- --------------
-version                  released      PyPI  Lino version
------------------------- ------------  ----- --------------
-:doc:`/releases/1.0.5`   20121201..02  no    http://lino-framework.org/releases/1.5.2
------------------------- ------------  ----- --------------
-
-
 """
 
 import os
@@ -39,7 +32,7 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.7' # 
+    version = '1.0.7+' # 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"

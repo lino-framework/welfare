@@ -402,13 +402,14 @@ class ClientStates(dd.Workflow):
         if newstate.name == 'former':
             qs = obj.coachings_by_client.filter(end_date__isnull=True)
             if qs.count():
-                ar.confirm(
+                def ok():
+                    for co in qs:
+                        #~ co.state = CoachingStates.ended
+                        co.end_date = datetime.date.today()
+                        co.save()
+                return ar.confirm(ok,
                     _("This will end %(count)d coachings of %(client)s.") % dict(
                         count=qs.count(),client=unicode(obj)))
-                for co in qs:
-                    #~ co.state = CoachingStates.ended
-                    co.end_date = datetime.date.today()
-                    co.save()
                 #~ obj.set_change_summary()
                 #~ raise actions.Warning(_("You must first fill end_date of existing coachings!"))
             #~ if issubclass(ar.actor,IntegClients):
@@ -533,14 +534,16 @@ def card2client(data):
     kw.update(last_name=data['surname'])
     
     card_number = data['cardNumber']
-    fn = card_number_to_picture_file(card_number)
-    if os.path.exists(fn):
-        logger.warning("Overwriting existing image file %s.",fn)
-    fp = file(fn,'wb')
-    fp.write(base64.b64decode(data['picture']))
-    fp.close()
-    #~ print 20121117, repr(data['picture'])
-    #~ kw.update(picture_data_encoded=data['picture'])
+    
+    if data.has_key('picture'):
+        fn = card_number_to_picture_file(card_number)
+        if os.path.exists(fn):
+            logger.warning("Overwriting existing image file %s.",fn)
+        fp = file(fn,'wb')
+        fp.write(base64.b64decode(data['picture']))
+        fp.close()
+        #~ print 20121117, repr(data['picture'])
+        #~ kw.update(picture_data_encoded=data['picture'])
     
     #~ func('card_valid_from','validityBeginDate')
     #~ func('card_valid_until','validityEndDate')
@@ -614,9 +617,12 @@ def card2client(data):
    
 class BeIdReadCardAction(actions.BeIdReadCardAction):
     """
-    base for 
+    Read beid card and store the data in a Client instance.
+    The base version is a row action (called on a given client).
     """
+    label = _("Read eID card")
     sorry_msg = _("Sorry, I cannot handle that case: %s")
+    required = dd.required(user_level='admin')
   
     def run(self,row,ar,**kw):
         data = ar.request.POST
@@ -627,7 +633,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
         if row is None:
             qs = Client.objects.filter(national_id=attrs['national_id'])
             if qs.count() > 1:
-                return ar.error_response(self.sorry_msg % 
+                return ar.error(self.sorry_msg % 
                     _("There is more than one client with national id %(national_id)s in our database.")
                     % attrs)
             if qs.count() == 0:
@@ -639,17 +645,17 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
                 #~ fkw.update(national_id__isnull=True)
                 qs = Client.objects.filter(**fkw)
                 if qs.count() == 0:
-                    ar.confirm(_("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
-                    obj = Client(**attrs)
-                    obj.full_clean()
-                    obj.save()
-                    changes.log_create(ar.request,obj)
-                    return ar.success_response(
-                        _("New client %s has been created") % obj,
-                        alert=_("Success"),
-                        refresh=True)
+                    def yes():
+                        obj = Client(**attrs)
+                        obj.full_clean()
+                        obj.save()
+                        changes.log_create(ar.request,obj)
+                        return self.goto_client_response(ar,obj,
+                            _("New client %s has been created") % obj)
+                    return ar.confirm(yes,
+                        _("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
                 elif qs.count() > 1:
-                    return ar.error_response(self.sorry_msg % 
+                    return ar.error(self.sorry_msg % 
                         _("There is more than one client named %(first_name)s %(last_name)s in our database.")
                         % attrs,alert=_("Oops!"))
                         
@@ -659,6 +665,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
   
   
     def process_row(self,ar,obj,attrs):
+        oldobj = obj
         watcher = changes.Watcher(obj)
         diffs = []
         for fldname,new in attrs.items():
@@ -669,37 +676,28 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
                 setattr(obj,fld.name,new)
                 
         if len(diffs) == 0:
-            return self.no_diffs_response(ar,obj)
+            #~ return self.no_diffs_response(ar,obj)
+            return self.goto_client_response(ar,obj,_("Client %s is up-to-date") % unicode(obj))
             
         msg = unicode(_("Click OK to apply the following changes for %s") % obj)
         msg += ' :<br/>'
         msg += '\n<br/>'.join(diffs)
         #~ print msg
-        ar.confirm(msg)
-        obj.full_clean()
-        obj.save()
-        watcher.log_diff(ar.request)
-        return self.saved_diffs_response(ar,obj)
+        def yes():
+            obj.full_clean()
+            obj.save()
+            watcher.log_diff(ar.request)
+            #~ return self.saved_diffs_response(ar,obj)
+            return self.goto_client_response(ar,obj,_("%s has been saved.") % obj2unicode(obj))
+        def no():
+            return self.goto_client_response(ar,oldobj)
+        return ar.prompt(msg,yes,no)
         
-        
+    def goto_client_response(self,ar,obj,msg=None):
+        if msg:
+            return ar.success(msg,_("Success"),refresh=True)
+        return ar.success(msg)
   
-class BeIdReadCardToClientAction(BeIdReadCardAction):
-    """
-    read beid card while being on a given client.
-    """
-    #~ list_action = False
-    label = _("Read eID card")
-    
-    def no_diffs_response(self,ar,obj):
-        return ar.success_response(
-            _("Client %s is up-to-date") % unicode(obj),
-            alert=_("Nothing to do"))
-  
-    def saved_diffs_response(self,ar,obj):
-        return ar.success_response(
-            _("%s has been saved.") % obj2unicode(obj),
-            alert=_("Success"),
-            refresh=True)
             
 class FindByBeIdAction(BeIdReadCardAction):
     """
@@ -707,20 +705,14 @@ class FindByBeIdAction(BeIdReadCardAction):
     """
     single_row = False
           
-    required = dd.required(user_level='admin')
-    label = _("Find by eID card")
+    #~ label = _("Find by eID card")
     callable_from = tuple() # only explicitely callable
-    #~ list_action = True
-    
-    def no_diffs_response(self,ar,obj):
-        #~ open detail on that client
-        return ar.success_response(eval_js=ar.instance_handler(obj)) 
 
-    def saved_diffs_response(self,ar,obj):
-        return ar.success_response(
-            eval_js=ar.instance_handler(obj))
+    def goto_client_response(self,ar,obj,msg=None):
+        return ar.success(msg,eval_js=ar.instance_handler(obj))
+        
 
-    
+
 class Client(Person):
   
     class Meta:
@@ -875,8 +867,7 @@ class Client(Person):
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
-    #~ beid_read_card = BeIdReadCardToClientAction(required=dict(user_level='admin'))
-    read_beid = BeIdReadCardToClientAction(required=dict(user_level='admin'))
+    read_beid = BeIdReadCardAction()
     find_by_beid  = FindByBeIdAction()
     
     #~ def update_system_note(self,note):

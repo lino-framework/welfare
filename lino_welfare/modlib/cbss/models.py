@@ -259,7 +259,7 @@ class unused_ExecuteRequest(dd.RowAction):
             #~ kw.update(message=_("Got valid response, but it contains warnings."))
             kw.update(alert=True)
         kw.update(refresh=True)
-        return ar.ui.success_response(**kw)
+        return ar.ui.success(**kw)
 
 
 
@@ -473,7 +473,7 @@ The raw XML response received.
             #~ kw.update(message=_("Got valid response, but it contains warnings."))
             kw.update(alert=True)
         #~ kw.update(refresh=True)
-        #~ return ar.success_response(**kw)
+        #~ return ar.success(**kw)
         return kw
 
         
@@ -537,7 +537,7 @@ The raw XML response received.
         #~ try:
             #~ self.validate_request()
             #~ self.save()
-            #~ return ar.ui.success_response(
+            #~ return ar.ui.success(
                 #~ message="%s validation passed." % self)
         #~ except Exception,e:
             #~ self.logmsg(traceback.format_exc(e))
