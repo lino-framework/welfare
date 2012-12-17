@@ -75,8 +75,10 @@ from lino.core.modeltools import obj2str, obj2unicode
 from lino.core import actions
 from lino.core import changes
 
+from lino.modlib.contacts.utils import street2kw
 from lino.modlib.contacts import models as contacts
-from lino.modlib.notes import models as notes
+
+#~ from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
 #~ from lino.modlib.uploads import models as uploads
 #~ from lino.modlib.cal import models as cal
@@ -557,6 +559,8 @@ def card2client(data):
     kw.update(street=data['street'])
     kw.update(street_no=data['streetNumber'])
     kw.update(street_box=data['boxNumber'])
+    if kw['street'] and not (kw['street_no'] or kw['street_box']):
+        kw = street2kw(kw['street'],**kw)
     kw.update(zip_code=data['zipCode'])
     kw.update(birth_place=data['birthLocation'])
     pk = data['country'].upper()
@@ -683,7 +687,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
         msg += ' :<br/>'
         msg += '\n<br/>'.join(diffs)
         #~ print msg
-        def yes():
+        def apply():
             obj.full_clean()
             obj.save()
             watcher.log_diff(ar.request)
@@ -691,7 +695,11 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
             return self.goto_client_response(ar,obj,_("%s has been saved.") % obj2unicode(obj))
         def no():
             return self.goto_client_response(ar,oldobj)
-        return ar.prompt(msg,yes,no)
+        cb = ar.callback(msg)
+        cb.add_choice('yes',apply,_("Yes"))
+        cb.add_choice('no',no,_("No"))
+        #~ cb.add_choice('cancel',no,_("Don't apply"))
+        return cb
         
     def goto_client_response(self,ar,obj,msg=None):
         if msg:
@@ -2671,9 +2679,10 @@ def customize_notes():
     """
     Application-specific changes to :mod:`lino.modlib.notes`.
     """
-    from lino.modlib.notes.models import Note, Notes
+    #~ from lino.modlib.notes.models import Note, Notes
+    notes = dd.resolve_app('notes')
 
-    dd.inject_field(Note,'company',
+    dd.inject_field(notes.Note,'company',
         models.ForeignKey(settings.LINO.company_model,
             blank=True,null=True,
             help_text="""\
@@ -2684,10 +2693,10 @@ def customize_notes():
         
     def get_person(self):
         return self.project
-    Note.person = property(get_person)
+    notes.Note.person = property(get_person)
         
       
-    class NotesByPerson(Notes):
+    class NotesByPerson(notes.Notes):
         master_key = 'project'
         column_names = "date event_type type subject body user company *"
         order_by = ["-date"]
@@ -2695,7 +2704,7 @@ def customize_notes():
 
         
       
-    class NotesByCompany(Notes):
+    class NotesByCompany(notes.Notes):
         master_key = 'company'
         column_names = "date project event_type type subject body user *"
         order_by = ["-date"]
