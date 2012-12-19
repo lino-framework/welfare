@@ -19,35 +19,21 @@ Transaction 25
 This implements the "transaction 25", called also 
 "Interrogation sur certains types d’informations légales" 
 (in `Codes d'interrogations
-<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_)
+<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
+
+All common information types are being handled. See :class:`RowHandlers` 
 
 See also:
 
-- Liste des types d'information (pdf)
-  http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/IT_FR_20111202.pdf
+- `Liste des types d'information (pdf)
+  <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/IT_FR_20111202.pdf>`__
 
-- Lijst van de informatietypes (pdf)
-  http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/nl/instructies/IT_NL_20111202.pdf
-
-
-- DGIP > Registre national > Instructions
-  http://www.ibz.rrn.fgov.be/index.php?id=2485&L=0
+- `Lijst van de informatietypes (pdf)
+  <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/nl/instructies/IT_NL_20111202.pdf>`__
 
 
-Uncomplete list of TIs
-
-=== ======= ================================
-IT  Status  Description
-=== ======= ================================
-000 ok      National Number
-001 ok      Residences
-002 -       Dossier de référence
-003 ok      Ascertained Legal Main Addresses
-005 ok      Address Change Intention
-019 ok      Address Change Declaration
-024 ok      Address References
-=== ======= ================================
-    
+- `DGIP > Registre national > Instructions
+  <http://www.ibz.rrn.fgov.be/index.php?id=2485&L=0>`__
 
 
 """
@@ -902,7 +888,14 @@ def IT251(n):
     
 
 class RowHandlers:
-  
+    """
+    The result of a Tx25 consist of data rows, each of which has a given type.
+    Consult the source code of this class to see how it works.
+    
+    TODO: present here a complete list of the supported TIs (generated from source code).
+    
+    """
+    
     @staticmethod
     def IT000(n,name):
         group = _("National Number")
@@ -1340,42 +1333,27 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
             
     @classmethod
     def get_data_rows(self,ar):
-        #~ try:
-            rti = ar.master_instance
-            if rti is None: 
-                #~ print "20120606 ipr is None"
-                return
-            #~ if not ipr.status in (RequestStates.ok,RequestStates.fictive):
-            #~ if not rti.status in (RequestStates.ok,RequestStates.warnings):
-                #~ return
-            reply = rti.get_service_reply()
-            if reply is None:
-                return
-                
-                
-            res = reply.rrn_it_implicit
+        rti = ar.master_instance
+        if rti is None: 
+            #~ print "20120606 ipr is None"
+            return
+        #~ if not ipr.status in (RequestStates.ok,RequestStates.fictive):
+        #~ if not rti.status in (RequestStates.ok,RequestStates.warnings):
+            #~ return
+        reply = rti.get_service_reply()
+        if reply is None:
+            return
             
-            for name, node in res:
-                #~ print name, node.__class__
-                m = getattr(RowHandlers,node.__class__.__name__,None)
-                if m is None:
-                    raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__))
-                    #~ yield AttrDict(
-                      #~ info="No handler for %s (%s) in %s" % (
-                          #~ name, node.__class__.__name__,rti),
-                      #~ group='Error',
-                      #~ type='',
-                      #~ since=datetime.date.today(),
-                      #~ )
-                else:
-                    for row in m(node,name): yield row
-        #~ except Exception, e:
-            #~ yield AttrDict(
-              #~ info=traceback.format_exc(e),
-              #~ group='Traceback',
-              #~ type='',
-              #~ since=datetime.date.today(),
-              #~ )
+            
+        res = reply.rrn_it_implicit
+        
+        for name, node in res:
+            #~ print name, node.__class__
+            m = getattr(RowHandlers,node.__class__.__name__,None)
+            if m is None:
+                raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__))
+            else:
+                for row in m(node,name): yield row
             
         
         

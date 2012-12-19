@@ -13,8 +13,9 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Fills the cbss.Purposes table from 
-http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_hoedanigheidscodes.pdf
+Fills the cbss.Purposes table with the official values defined in 
+`lijst_hoedanigheidscodes.pdf
+<http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_hoedanigheidscodes.pdf>`__.
 
 """
 

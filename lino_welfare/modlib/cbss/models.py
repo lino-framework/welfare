@@ -13,35 +13,27 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 u"""
-Adds models and tables used to make the following :term:`CBSS` requests
-(descriptions taken from `SYNTHESE_SERVICESXML_CPAS_FR.DOC`):
+Adds models and tables used to make :term:`CBSS` requests.
+
+Lino currently knows the following requests.
+It is technically easy to add more of them.
+
+(French chunks of text collected from various documents issued by 
+http://www.bcss.fgov.be):
 
 - :class:`IdentifyPersonRequest` :
-  Identifier la personne par son NISS ou ses données phonétiques et vérifier son identité par le numéro de carte SIS, de carte d'identité ou par ses données phonétiques ()
+  Identifier la personne par son NISS ou ses données phonétiques et vérifier 
+  son identité par le numéro de carte SIS, de carte d'identité 
+  ou par ses données phonétiques.
 
 - :class:`ManageAccessRequest`: 
-  Enregistrer, désenregistrer ou consulter (:class:`ManageAction`) un dossier 
+  Enregistrer, désenregistrer ou consulter un dossier 
   dans le registre du réseau de la sécurité sociale (registre BCSS) 
   et dans le répertoire sectoriel des CPAS géré par la SmalS-MvM (:class:`QueryRegister`).
   
-  - `ManageAction.REGISTER` : 
-    Ce service est sollicité au moment du démarrage de l’enquête sociale.  
-    Le CPAS déclare au réseau de la sécurité sociale qu’il possède un dossier pour lequel il a 
-    l’autorisation (dispositions légales et réglementaires) d’obtenir des informations des autres 
-    institutions en vue de compléter son enquête dans le cadre de l’octroi du revenu d’intégration.  
-    Cette déclaration concerne le répertoire sectoriel des CPAS à la SmalS-MvM et peut 
-    concerner plusieurs catégories de personnes : 
-    le demandeur, les cohabitants et les tiers concernés 
-    et ce, pour des finalités différentes. 
-  - `ManageAction.UNREGISTER` : 
-    L’opération contraire est aussi mise à disposition. 
-  - `ManageAction.LIST` : 
-    Il est en plus possible d’obtenir une liste des enregistrements 
-    dans le répertoire sectoriel des CPAS à la SmalS-MvM 
-    ainsi qu’au sein du réseau BCSS.
-  
-- :class:`RetrieveTIGroupsRequest`: 
+- :class:`RetrieveTIGroupsRequest <lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsRequest>`: 
   Obtenir des informations à propos d’une personne dans le cadre de l’enquête sociale.
+  
 
 """
 
@@ -296,8 +288,9 @@ class Sectors(dd.Table):
 
 class Purpose(babel.BabelNamed):
     u"""
-    Codes qualité (Hoedanigheidscodes),
-    http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_hoedanigheidscodes.pdf
+    Codes qualité (Hoedanigheidscodes). 
+    This table is usually filled with the official codes
+    by :mod:`lino_welfare.modlib.cbss.fixtures.purposes`.
     """
     class Meta:
         verbose_name = _("Purpose")
@@ -1368,9 +1361,26 @@ class IdentifyPersonResult(dd.VirtualTable):
 
 
 class ManageAction(dd.ChoiceList):
-    """
+    u"""
     Possible values for the 
     `action` field of a :class:`ManageAccessRequest`.
+    
+    
+    - `ManageAction.REGISTER` : 
+      Ce service est sollicité au moment du démarrage de l’enquête sociale.  
+      Le CPAS déclare au réseau de la sécurité sociale qu’il possède un dossier pour lequel il a 
+      l’autorisation (dispositions légales et réglementaires) d’obtenir des informations des autres 
+      institutions en vue de compléter son enquête dans le cadre de l’octroi du revenu d’intégration.  
+      Cette déclaration concerne le répertoire sectoriel des CPAS à la SmalS-MvM et peut 
+      concerner plusieurs catégories de personnes : 
+      le demandeur, les cohabitants et les tiers concernés et ce, pour des finalités différentes. 
+    - `ManageAction.UNREGISTER` : 
+      L’opération contraire est aussi mise à disposition. 
+    - `ManageAction.LIST` : 
+      Il est en plus possible d’obtenir une liste des enregistrements 
+      dans le répertoire sectoriel des CPAS à la SmalS-MvM 
+      ainsi qu’au sein du réseau BCSS.
+    
     """
     verbose_name = _("Action")
 
@@ -1400,6 +1410,13 @@ class ManageAccessRequest(SSDNRequest,WithPerson):
     Registering a person means that this PCSW is 
     going to maintain a dossier about this person.
     Users commonly say "to integrate" a person.
+    
+    Fields include:
+    
+    - action : one of the values in :class:`ManageAction`
+    - query_register : one of the values in :class:`QueryRegister`
+      
+    
     
     """
   

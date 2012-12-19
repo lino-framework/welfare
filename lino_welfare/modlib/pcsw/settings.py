@@ -20,12 +20,12 @@ This file is also the central place of the version counter.
 For release notes see :mod:`lino.releases`.
 
 """
-
 import os
 
 from lino.apps.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
 
+#~ print 20121219, __file__
 
 import datetime
 
