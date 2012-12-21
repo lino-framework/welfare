@@ -87,12 +87,20 @@ NATIONALITIES = Cycler('BE','MA','BE','RU','BE','CD')
 class Command(BaseCommand):
     args = '(no arguments)'
     help = 'Garbles person names in the database so that it may be used for a demo.'
+    
+    option_list = BaseCommand.option_list + (
+        make_option('--noinput', action='store_false', dest='interactive', default=True,
+            help='Do not prompt for input of any kind.'),
+    ) 
+
+    
 
     def handle(self, *args, **options):
             
         dbname = settings.DATABASES['default']['NAME']
-        if not confirm("This is going to GARBLE your database (%s).\nAre you sure (y/n) ?" % dbname):
-            raise CommandError("User abort.")
+        if options.get('interactive'):
+            if not confirm("This is going to GARBLE your database (%s).\nAre you sure (y/n) ?" % dbname):
+                raise CommandError("User abort.")
             
         contacts = dd.resolve_app('contacts')
             
