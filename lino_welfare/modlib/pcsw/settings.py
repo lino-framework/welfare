@@ -255,6 +255,7 @@ class Lino(Lino):
             
         yield 'django.contrib.contenttypes'
         yield 'lino.modlib.users'
+        #~ yield 'lino.modlib.codechanges'
         #~ yield 'lino.modlib.pages'
         #~ 'lino.modlib.workflows',
         yield 'lino.modlib.countries'

@@ -21,6 +21,7 @@ Garbles person names in the database so that it may be used for a demo.
 import os
 import sys
 #~ import datetime
+from optparse import make_option
 
 #~ from dateutil import parser as dateparser
 
