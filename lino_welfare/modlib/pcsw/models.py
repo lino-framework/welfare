@@ -1080,7 +1080,8 @@ class Client(Person):
         
     def get_image_url(self,ar):
         #~ return settings.MEDIA_URL + "/".join(self.get_image_parts())
-        return ar.ui.media_url(*self.get_image_parts())
+        #~ return ar.ui.media_url(*self.get_image_parts())
+        return settings.LINO.build_media_url(*self.get_image_parts())
         
     def get_image_path(self):
         #~ TODO: handle configurability of card_number_to_picture_file
