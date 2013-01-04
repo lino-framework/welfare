@@ -176,13 +176,13 @@ def pxs2client(row,person):
     par2client(row,person)    
         
     if row.has_key('CARDTYPE'):
-        #~ row.card_type = pcsw.BeIdCardType.items_dict.get(row['CARDTYPE'].strip(),'')
+        #~ row.card_type = pcsw.BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
         #~ from lino.apps.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
-            #~ person.card_type = pcsw.BeIdCardType.blank_item
+            #~ person.card_type = pcsw.BeIdCardTypes.blank_item
             person.card_type = ''
         else:
-            person.card_type = pcsw.BeIdCardType.get_by_value(str(row['CARDTYPE']))
+            person.card_type = pcsw.BeIdCardTypes.get_by_value(str(row['CARDTYPE']))
             
     if row['IDMUT']:
         checkcc(person,ADR_id(row['IDMUT']),CCTYPE_HEALTH_INSURANCE)

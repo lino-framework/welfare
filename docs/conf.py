@@ -234,7 +234,7 @@ latex_documents = [
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
 
-from lino.utils.sphinx import setup
+from lino.utils.sphinxconf import setup
 
 extlinks = {
   'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),
