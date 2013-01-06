@@ -58,7 +58,7 @@ from lino.utils import mti
 from lino.utils.ranges import isrange, overlap, overlap2, encompass, rangefmt
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str, models_by_abc
+from lino.core.modeltools import obj2str # , models_by_abc
 
 #~ from lino.modlib.cal.models import update_auto_task
 
@@ -450,7 +450,7 @@ class OverlappingContractsTest:
         #~ from lino_welfare.modlib.isip.models import ContractBase
         self.client = client
         self.actives = []
-        for model in models_by_abc(ContractBase):
+        for model in dd.models_by_base(ContractBase):
             for con1 in model.objects.filter(client=client):
                 p1 = con1.active_period()
                 #~ if p1:

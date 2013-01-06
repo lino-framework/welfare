@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2009-2012 Luc Saffre
+## Copyright 2009-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -233,7 +233,7 @@ class Lino(Lino):
         automatic reminders for the specified user.
         Used by :func:`lino.modlib.cal.update_reminders`.
         """
-        from lino.core.modeltools import models_by_abc
+        from lino.core.modeltools import models_by_base
         from django.db.models import Q
         from lino_welfare.modlib.isip import models as isip
         
@@ -245,7 +245,7 @@ class Lino(Lino):
             yield obj.project
         for obj in self.modules.uploads.Upload.objects.filter(user=user):
             yield obj
-        for model in models_by_abc(isip.ContractBase):
+        for model in models_by_base(isip.ContractBase):
             for obj in model.objects.filter(user=user):
                 yield obj
                 
