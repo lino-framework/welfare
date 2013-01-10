@@ -552,6 +552,9 @@ class Getter(object):
 
 from lino.core.modeltools import obj2str
 
+from lino.utils.instantiator import lookup_or_create
+
+
 def card2client(data):
     kw = dict()
     #~ def func(fldname,qname):
@@ -596,24 +599,16 @@ def card2client(data):
     
     msg1 = "BeIdReadCardToClientAction %s" % kw.get('national_id')
 
-    try:
-        country = countries.Country.objects.get(isocode=pk)
-        kw.update(country=country)
-    except countries.Country.DoesNotExist,e:
+    #~ try:
+    country = countries.Country.objects.get(isocode=pk)
+    kw.update(country=country)
+    #~ except countries.Country.DoesNotExist,e:
     #~ except Exception,e:
-        logger.warning("%s : no country with code %r",msg1,pk)
-    try:
-        city = countries.City.objects.get(
-            country__isocode='BE',
-            name__iexact=data['municipality'])
-        kw.update(city=city)
-    except countries.City.DoesNotExist,e:
-        logger.warning("%s : There is no city named %r in Belgium",
-            msg1,data['municipality'])
-    except MultipleObjectsReturned,e:
-        logger.warning("%s : found more than one city named %r in Belgium",
-            msg1,data['municipality'])
-        #~ logger.exception(e)
+        #~ logger.warning("%s : no country with code %r",msg1,pk)
+    #~ BE = countries.Country.objects.get(isocode='BE')
+    fld = countries.City._meta.get_field('name')
+    kw.update(city=lookup_or_create(
+        countries.City,fld,data['municipality'],country=country))
     def sex2gender(sex):
         if sex == 'M' : return mixins.Genders.male
         if sex in 'FVW' : return mixins.Genders.female
@@ -2741,6 +2736,17 @@ def customize_notes():
         column_names = "date project event_type type subject body user *"
         order_by = ["-date"]
         
+
+from lino.utils.instantiator import auto_created
+
+def on_auto_created(sender,**kw):
+    raise Warning("auto_create is not permitted here")
+    logger.info("20130110 auto_created %s %s",obj2str(sender),kw)
+    from django.core.mail import mail_admins
+    body = 'Record %s has been automatically created using %s' % (obj2str(sender),kw)
+    mail_admins('auto_created', body)
+
+auto_created.connect(on_auto_created)
 
 
 def customize_sqlite():
