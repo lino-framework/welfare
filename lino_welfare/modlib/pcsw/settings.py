@@ -32,13 +32,15 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.7+' # 
+    version = '1.0.8' # 
     url = "http://code.google.com/p/lino-welfare/"
     python_name = "lino_welfare"
     short_name = "Lino/Welfare"
     description = "a Lino application for Belgian Public Welfare Centres."
     author = 'Luc Saffre'
     author_email = 'luc.saffre@gmail.com'
+    
+    demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
     
     #~ source_dir = os.path.dirname(__file__)
     #~ title = label # __name__

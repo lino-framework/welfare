@@ -23,11 +23,15 @@ from setuptools import setup
 #~ VERSION = file(os.path.join(os.path.dirname(__file__),'VERSION')).read().strip()
 
 from lino_welfare.modlib.pcsw import settings
+
+VERSION = settings.LINO.version
+assert not "+" in VERSION
+assert not "-" in VERSION
     
 setup(name=settings.LINO.python_name, # 'lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
-      version=settings.LINO.version, # lino_welfare.__version__,
+      version=VERSION, # lino_welfare.__version__,
       #~ version=VERSION,
       #~ description=u"A Lino application for Belgian Public Welfare Centres",
       description=settings.LINO.description,

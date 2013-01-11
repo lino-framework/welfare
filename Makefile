@@ -40,13 +40,11 @@ tests:
 	$(DJANGO_ADMIN) test --settings=lino_welfare.modlib.pcsw.settings $(TESTS_OPTIONS)
 
 sdist:
-	python setup.py register sdist --formats=gztar,zip upload 
-	#~ python setup.py register sdist --formats=gztar,zip --dist-dir=docs/dist upload 
+	python setup.py sdist --formats=gztar,zip --dist-dir=../lino/docs/dl 
+	#~ python setup.py register sdist --formats=gztar,zip upload 
 	#~ python setup.py sdist --formats=gztar,zip --dist-dir=docs/dist
   
-html:
-	cd docs ; make html
-
 upload:
-	cd docs ; make upload
-	
+	python setup.py sdist --formats=gztar,zip upload 
+  
+  
