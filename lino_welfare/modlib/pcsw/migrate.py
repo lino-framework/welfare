@@ -501,3 +501,6 @@ def migrate_from_1_0_5(globals_dict):
 
 def migrate_from_1_0_6(globals_dict):
     return '1.0.7'
+
+def migrate_from_1_0_7(globals_dict):
+    return '1.0.8'

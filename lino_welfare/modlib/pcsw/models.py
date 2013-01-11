@@ -2742,9 +2742,9 @@ from lino.utils.instantiator import auto_create
 def on_auto_create(sender,**kw):
     #~ raise Warning("auto_create is not permitted here")
     logger.info("auto_create %s %s",obj2str(sender),kw)
-    #~ from django.core.mail import mail_admins
-    #~ body = 'Record %s has been automatically created using %s' % (obj2str(sender),kw)
-    #~ mail_admins('auto_create', body)
+    from django.core.mail import mail_admins
+    body = 'Record %s has been automatically created using %s' % (obj2str(sender),kw)
+    mail_admins('auto_create', body, fail_silently=True)
 
 auto_create.connect(on_auto_create)
 
