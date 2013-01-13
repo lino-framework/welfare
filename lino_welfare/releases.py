@@ -12,6 +12,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+raise Exception("No longer used")
 
 #~ from lino.utils import i2d, rstgen
 from lino.utils import i2d
@@ -28,6 +29,7 @@ released('1.0.4',20121130)
 released('1.0.5',20121201,'1.5.2','a7cb6e85afe7')
 released('1.0.6',20121210,'1.5.3')
 released('1.0.7',20121211,'dev')
+released('1.0.8',20131211,'dev')
 
 
 
