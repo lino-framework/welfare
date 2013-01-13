@@ -1,0 +1,26 @@
+Version 1.0.7
+=============
+
+Released 2012-12-11
+
+A little maintenance release in order to test the read eid functionality.
+
+- Es gibt nicht eine Aktion zum Einlesen einer belgischen eID-Karte, sondern zwei:
+
+  - Globale Aktion "Klient per eID-Karte finden" im Hauptmenü : 
+    Liest Daten von Karte ein und öffnet danach das Detail-Fenster 
+    des Klienten.
+    En passant prüft sie nach, ob alle Daten aktuell sind.
+    Falls es keinen Klienten gibt, wird er angelegt.
+
+  - Button "eID einlesen" wenn man auf dem Klienten steht: da hat 
+    man diesen Klienten schon ausgesucht und will nun, dass 
+    Lino dessen Daten aktualisiert.
+
+- :menuselection:`Listings --> Datenkontrolle Klienten` funktionierte nicht.
+
+- Menü "Buchhaltung": War noch nicht übersetzt.
+  "Gruppen" und "Konten" stehen jetzt unter "Konfigurierung" 
+  statt unter "Explorer".
+  Und im Explorer haben wir jetzt zur Info auch AccountTypes stehen.
+  
