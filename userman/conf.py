@@ -35,7 +35,7 @@ kernel.analyze_models()
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
   'sphinx.ext.autodoc',
-  'sphinx.ext.autosummary',
+  #~ 'sphinx.ext.autosummary',
   #~ 'sphinx.ext.inheritance_diagram',
   #~ 'sphinx.ext.todo',
   'sphinx.ext.extlinks',
@@ -46,6 +46,7 @@ extensions = [
 
 extensions.append('sphinxcontrib.autorun')
 
+file_insertion_enabled = True
 
 primary_domain = 'py'
 
@@ -65,7 +66,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u"Lino-Welfare"
-copyright = u'2012, Luc Saffre'
+copyright = u'2012-2013, Luc Saffre'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -255,7 +256,3 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 #~ todo_include_todos = True
 
 
-intersphinx_mapping = {
-  #~ 'lino': ('http://packages.python.org/lino', None )
-  'lino': ('http://www.lino-framework.org', None )
-}

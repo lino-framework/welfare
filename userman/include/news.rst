@@ -25,14 +25,3 @@
     Depuis aujourd'hui, Lino pour CPAS possède sa 
     propre page internet.
   
-
-.. only:: en
-
-  - **2012-11-04**
-    Try it out! Our first official live demo database 
-    has gone online at
-    http://welfare-demo.lino-framework.org
-  
-
-  - **2012-08-28** 
-    Lino for Belgian Welfare centres has forked to a separate project.

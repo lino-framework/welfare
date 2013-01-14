@@ -1,7 +1,8 @@
 Version 1.0.8
 =============
 
-Released 2013-01-12
+Pre-released since 2013-01-12.
+Requires :lino:`Lino 1.5.4 </releases/1.5.4>`
 
 Neuerungen
 ----------
@@ -15,6 +16,7 @@ Neuerungen
   - Städtenamen sind jetzt mehrsprachig, und wenn z.B. jemand in Kelmis wohnt, 
     findet er sowohl für deutschsprachige ("Kelmis") als auch für 
     französischsprachige Karten ("La Calamine") die gleiche Stadt.
+    Siehe auch :lino:`20130110 </blog/2013/0110>`
 
 - Tabelle "Verfügbare Begleiter" zeigt jetzt alle Begleiter 
   an, falls nötig mit vertikaler Scrollbar.

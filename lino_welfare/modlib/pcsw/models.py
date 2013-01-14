@@ -748,7 +748,10 @@ class FindByBeIdAction(BeIdReadCardAction):
 
 
 class Client(Person):
-  
+    """
+    A :class:`Client` is a specialized :class:`Person`.
+    
+    """
     class Meta:
         verbose_name = _("Client") 
         verbose_name_plural = _("Clients") 

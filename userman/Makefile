@@ -1,7 +1,7 @@
 DJANGO_ADMIN = python l:\\snapshots\\django\\django\\bin\\django-admin.py
-LANGS        = en de fr
+LANGS        = de fr
 #~ LANGS        = de
-SITENAME               = lino-welfare
+SITENAME               = welfare-userman
 TEMPDIR                = C:\\temp\\sphinxbuild\\$(SITENAME)
 #~ TEMPDIR                = /cygdrive/c/temp/sphinxbuild/$(SITENAME)
 BUILDDIR               = $(TEMPDIR)\\html
@@ -16,7 +16,8 @@ AUTODOC                = python l:\\snapshots\\sphinx-autopackage-script\\genera
 SPHINXOPTS    = -w warnings.txt -n -P
 #~ SPHINXOPTS    = -W 
 #~ SPHINXOPTS    = 
-SPHINXBUILD   = python l:\\snapshots\\sphinx\\sphinx-build.py
+#~ SPHINXBUILD   = python l:\\snapshots\\sphinx-dev\\sphinx-build.py
+SPHINXBUILD   = sphinx-build
 PAPER         =
 
 # Internal variables.

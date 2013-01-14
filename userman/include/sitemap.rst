@@ -4,6 +4,4 @@
 
    about/index
    user/index
-   admin/index
-   autodoc/index
    

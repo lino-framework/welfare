@@ -243,6 +243,7 @@ extlinks = {
   'extjs': ('http://www.sencha.com/deploy/dev/docs/?class=%s', ''),
   'extux': ('http://extjs-ux.org/ext-docs/?class=%s', ''),
   'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
+  'lino': ('http://www.lino-framework.org%s.html', ''),
 }
 
 
@@ -257,5 +258,5 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 
 intersphinx_mapping = {
   #~ 'lino': ('http://packages.python.org/lino', None )
-  'lino': ('http://www.lino-framework.org', None )
+  'lino': ('http://www.lino-framework.org', r'c:\temp\sphinxbuild\lino\html\objects.inv' )
 }
