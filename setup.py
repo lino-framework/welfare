@@ -28,8 +28,7 @@ VERSION = settings.LINO.version
 assert not "+" in VERSION
 assert not "-" in VERSION
     
-setup(#name=settings.LINO.python_name, # 
-      name='lino-welfare',
+setup(name=settings.LINO.pypi_name, #name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
       version=VERSION, # lino_welfare.__version__,

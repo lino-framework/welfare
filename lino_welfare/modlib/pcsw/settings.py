@@ -32,9 +32,9 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.8' # 
+    version = '1.0.8+' # 
     url = "http://code.google.com/p/lino-welfare/"
-    python_name = "lino_welfare"
+    pypi_name = "lino-welfare"
     short_name = "Lino/Welfare"
     description = "a Lino application for Belgian Public Welfare Centres."
     author = 'Luc Saffre'
