@@ -32,7 +32,7 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.8+' # 
+    version = '1.0.9' # 
     url = "http://code.google.com/p/lino-welfare/"
     pypi_name = "lino-welfare"
     short_name = "Lino/Welfare"
