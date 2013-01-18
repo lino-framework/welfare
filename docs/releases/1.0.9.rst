@@ -14,3 +14,4 @@ Version 1.0.9
   :attr:`show_internal_field_names <lino.Lino.show_internal_field_names>`
   zeigt in den Tooltips die internen Feldnamen an. 
   Find ich praktisch.
+  

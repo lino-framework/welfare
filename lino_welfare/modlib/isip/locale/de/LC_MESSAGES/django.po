@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.modlib.jobs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 15:43+0000\n"
-"PO-Revision-Date: 2012-10-12 04:17+0200\n"
+"POT-Creation-Date: 2013-01-18 12:34+0000\n"
+"PO-Revision-Date: 2013-01-18 14:25+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -38,40 +38,36 @@ msgid "Examination Policies"
 msgstr "Auswertungsstrategien"
 
 #: .\models.py:155
-msgid "Contract Ending"
-msgstr "Vertragsbeendigung"
+msgid "Reason of termination"
+msgstr "Beendigungsgrund"
 
-#: .\models.py:156
-msgid "Contract Endings"
-msgstr "Vertragsbeendigungen"
+#: .\models.py:157
+msgid "Reasons of termination"
+msgstr "Beendigungsgründe"
 
-#: .\models.py:158
+#: .\models.py:159
 msgid "designation"
 msgstr "Bezeichnung"
 
-#: .\models.py:202
+#: .\models.py:203
 msgid "applies from"
 msgstr "Laufzeit von"
 
-#: .\models.py:203
+#: .\models.py:204
 msgid "applies until"
 msgstr "Laufzeit bis"
 
-#: .\models.py:204
+#: .\models.py:205
 msgid "date decided"
 msgstr "Beschlossen am"
 
-#: .\models.py:205
+#: .\models.py:206
 msgid "date issued"
 msgstr "Ausgestellt am"
 
-#: .\models.py:208
+#: .\models.py:209
 msgid "responsible (ASD)"
 msgstr "Verantwortlicher (ASD)"
-
-#: .\models.py:220
-msgid "Ending"
-msgstr "Beendigung"
 
 #: .\models.py:221
 msgid "date ended"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 15:43+0000\n"
+"POT-Creation-Date: 2013-01-18 12:34+0000\n"
 "PO-Revision-Date: 2012-12-07 13:26+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
@@ -49,7 +49,7 @@ msgstr "Kompetenz"
 msgid "Competences"
 msgstr "Kompetenzen"
 
-#: .\models.py:239 .\models.py:441
+#: .\models.py:239 .\models.py:442
 msgid "New Clients"
 msgstr "Neue Klienten"
 
@@ -69,66 +69,66 @@ msgstr "Auch neu begleitete Klienten seit"
 msgid "Coached by"
 msgstr "Begleitet durch"
 
-#: .\models.py:333 .\models.py:554
+#: .\models.py:334 .\models.py:555
 msgid "Available Coaches"
 msgstr "Verfügbare Begleiter"
 
-#: .\models.py:337
+#: .\models.py:338
 msgid "Show suggested agents for"
 msgstr "Zeige Vorschläge für"
 
-#: .\models.py:339
+#: .\models.py:340
 msgid "New clients since"
 msgstr "Neue Klienten seit"
 
-#: .\models.py:341
+#: .\models.py:342
 msgid "New clients are those whose coaching started after this date"
 msgstr "Neue Klienten sind die, deren Begleitung nach diesem Datum beginnt"
 
-#: .\models.py:361
+#: .\models.py:362
 msgid "Only for newcomers"
 msgstr "Nur für Neuzugänge"
 
-#: .\models.py:363
+#: .\models.py:364
 msgid "Only for newcomers with valid SSIN"
 msgstr "Nur für Neuanträge mit gültiger NR-Nr."
 
-#: .\models.py:367
+#: .\models.py:368
 msgid "Only for newcomers with given `faculty`."
 msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
 
-#: .\models.py:419
+#: .\models.py:420
 #, python-format
 msgid "No coaches available for %s."
 msgstr "Keine Begleiter verfügbar für %s."
 
-#: .\models.py:432
+#: .\models.py:433
 msgid "Primary clients"
 msgstr "Komplette Akten"
 
-#: .\models.py:445
+#: .\models.py:446
 msgid "Current workload"
 msgstr "Belastung"
 
-#: .\models.py:454 .\models.py:463
+#: .\models.py:455 .\models.py:464
 msgid "Added workload"
 msgstr "Mehrbelastung"
 
-#: .\models.py:483
+#: .\models.py:484
 msgid "Assign"
 msgstr "Zuweisen"
 
-#: .\models.py:495
+#: .\models.py:496
 #, python-format
 msgid "%(client)s assigned to %(coach)s "
 msgstr "%(client)s zugewiesen zu %(coach)s"
 
-#: .\models.py:503
+#: .\models.py:504
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr "%(client)s wird ab jetzt begleitet für %(faculty)s durch %(coach)s."
 
-#: .\models.py:639
+#: .\models.py:640
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
 

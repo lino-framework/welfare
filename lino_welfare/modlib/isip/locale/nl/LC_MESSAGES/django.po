@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 15:43+0000\n"
+"POT-Creation-Date: 2013-01-18 12:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,39 +38,35 @@ msgid "Examination Policies"
 msgstr ""
 
 #: .\models.py:155
-msgid "Contract Ending"
+msgid "Reason of termination"
 msgstr ""
 
-#: .\models.py:156
-msgid "Contract Endings"
+#: .\models.py:157
+msgid "Reasons of termination"
 msgstr ""
 
-#: .\models.py:158
+#: .\models.py:159
 msgid "designation"
 msgstr ""
 
-#: .\models.py:202
+#: .\models.py:203
 msgid "applies from"
 msgstr ""
 
-#: .\models.py:203
+#: .\models.py:204
 msgid "applies until"
 msgstr ""
 
-#: .\models.py:204
+#: .\models.py:205
 msgid "date decided"
 msgstr ""
 
-#: .\models.py:205
+#: .\models.py:206
 msgid "date issued"
 msgstr ""
 
-#: .\models.py:208
+#: .\models.py:209
 msgid "responsible (ASD)"
-msgstr ""
-
-#: .\models.py:220
-msgid "Ending"
 msgstr ""
 
 #: .\models.py:221

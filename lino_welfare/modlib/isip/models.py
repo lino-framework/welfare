@@ -152,8 +152,9 @@ class ExamPolicies(dd.Table):
 #
 class ContractEnding(dd.Model):
     class Meta:
-        verbose_name = _("Contract Ending")
-        verbose_name_plural = _('Contract Endings')
+        verbose_name = _("Reason of termination")
+        #~ verbose_name = _("Contract Ending")
+        verbose_name_plural = _('Reasons of termination')
         
     name = models.CharField(_("designation"),max_length=200)
     
@@ -216,8 +217,7 @@ class ContractBase(
         
     ending = models.ForeignKey("isip.ContractEnding",
         related_name="%(app_label)s_%(class)s_set",
-        blank=True,null=True,
-        verbose_name=_("Ending"))
+        blank=True,null=True)
     date_ended = models.DateField(blank=True,null=True,verbose_name=_("date ended"))
     
     hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended'

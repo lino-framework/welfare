@@ -14,8 +14,8 @@
 
 """
 This package contains the **Debt Mediation** module 
-(Schuldnerberatung, Médiation de dettes) 
-for :mod:`lino.apps.pcsw`.
+(Schuldnerberatung, Médiation de dettes).
+
 It enables social consultants to create :class:`Budgets`.
 A :class:`Budget` collects financial 
 information like monthly income, monthly expenses and debts 
@@ -88,9 +88,6 @@ properties = dd.resolve_app('properties')
 pcsw = dd.resolve_app('pcsw')
 
 from lino.mixins.printable import decfmt
-
-MAX_SUB_BUDGETS = 3
-
 
 class PeriodsField(models.DecimalField):
     """
@@ -334,6 +331,8 @@ The monthly amount available for distribution among debtors."""))
                 seqno += 1
                 e = Entry(account_id=pk,budget=self,seqno=seqno)
                 e.periods = e.account.periods
+                if e.account.default_amount:
+                    e.amount = e.account.default_amount
                 e.full_clean()
                 e.save()
                 #~ print e
@@ -960,6 +959,7 @@ class BudgetSummary(dd.VirtualTable):
     master = Budget
     column_names = "desc amount"
     label = _("Overview")
+    slave_grid_format = 'html'
     
     @classmethod
     def get_data_rows(self,ar):
@@ -1071,6 +1071,8 @@ def site_setup(site):
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
 
+    site.modules.accounts.Accounts.column_names = "name default_amount required_for_household required_for_person group "
+    site.modules.accounts.AccountsByGroup.column_names = "name default_amount required_for_household required_for_person group "
 
 def setup_main_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)
@@ -1120,6 +1122,10 @@ def customize_accounts():
     dd.inject_field(accounts.Account,
         'periods',
         PeriodsField(_("Periods"))
+      )
+    dd.inject_field(accounts.Account,
+        'default_amount',
+        dd.PriceField(_("Default amount"),blank=True,null=True)
       )
 
 customize_accounts()

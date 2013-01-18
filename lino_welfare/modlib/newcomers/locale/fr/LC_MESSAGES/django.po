@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 15:43+0000\n"
+"POT-Creation-Date: 2013-01-18 12:34+0000\n"
 "PO-Revision-Date: 2012-06-25 13:19+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgstr "Compétence"
 msgid "Competences"
 msgstr "Compétences"
 
-#: .\models.py:239 .\models.py:441
+#: .\models.py:239 .\models.py:442
 msgid "New Clients"
 msgstr "Nouveaux clients"
 
@@ -69,67 +69,67 @@ msgstr ""
 msgid "Coached by"
 msgstr "AI"
 
-#: .\models.py:333 .\models.py:554
+#: .\models.py:334 .\models.py:555
 msgid "Available Coaches"
 msgstr ""
 
-#: .\models.py:337
+#: .\models.py:338
 msgid "Show suggested agents for"
 msgstr "Montrer agents proposés pour"
 
-#: .\models.py:339
+#: .\models.py:340
 #, fuzzy
 msgid "New clients since"
 msgstr "Nouveaux clients"
 
-#: .\models.py:341
+#: .\models.py:342
 msgid "New clients are those whose coaching started after this date"
 msgstr ""
 
-#: .\models.py:361
+#: .\models.py:362
 msgid "Only for newcomers"
 msgstr ""
 
-#: .\models.py:363
+#: .\models.py:364
 msgid "Only for newcomers with valid SSIN"
 msgstr ""
 
-#: .\models.py:367
+#: .\models.py:368
 msgid "Only for newcomers with given `faculty`."
 msgstr ""
 
-#: .\models.py:419
+#: .\models.py:420
 #, python-format
 msgid "No coaches available for %s."
 msgstr ""
 
-#: .\models.py:432
+#: .\models.py:433
 msgid "Primary clients"
 msgstr "Dossiers complets"
 
-#: .\models.py:445
+#: .\models.py:446
 msgid "Current workload"
 msgstr ""
 
-#: .\models.py:454 .\models.py:463
+#: .\models.py:455 .\models.py:464
 msgid "Added workload"
 msgstr ""
 
-#: .\models.py:483
+#: .\models.py:484
 msgid "Assign"
 msgstr ""
 
-#: .\models.py:495
+#: .\models.py:496
 #, python-format
 msgid "%(client)s assigned to %(coach)s "
 msgstr ""
 
-#: .\models.py:503
+#: .\models.py:504
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr ""
 
-#: .\models.py:639
+#: .\models.py:640
 msgid "Newcomers Quota"
 msgstr "Quota nouvelles demandes"
 
