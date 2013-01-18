@@ -1,0 +1,7 @@
+T:\hgwork\welfare\docs\autodoc\lino_welfare.courses.rst:13: WARNING: py:class reference target not found: Candidate
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.pcsw.models.CompanyDetail
+<autodoc>:1: WARNING: py:class reference target not found: lino.modlib.contacts.models.Companies
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests
+t:\hgwork\welfare\lino_welfare\modlib\courses\models.py:docstring of lino_welfare.modlib.courses.models.CourseRequestsByPerson:1: WARNING: py:class reference target not found: lino.modlib.pcsw.models.Client
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests

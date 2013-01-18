@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012 Luc Saffre
+## Copyright 2012-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -544,8 +544,13 @@ class Actors(dd.Table):
     column_names = "budget seqno partner header remark *"
 
 class ActorsByBudget(Actors):
+    """
+    The table used to edit Actors in a Budget's detail.
+    """
     master_key = 'budget'
     column_names = "seqno partner header remark *"
+    auto_fit_column_widths = True
+    
     
 class ActorsByPartner(Actors):
     master_key = 'partner'
@@ -710,9 +715,15 @@ class EntriesByType(Entries):
         #~ print '20120918 account_choices', account_type
         #~ return accounts.Account.objects.filter(type=cls._account_type)
         
+
 class EntriesByBudget(Entries):
+    """
+    Base class for the tables used to edit Entries by budget.
+    """
     master_key = 'budget'
     column_names = "account description amount actor:10 periods:10 remark todo seqno"
+    hidden_columns = "seqno"
+    auto_fit_column_widths = True
     required=dict(user_groups = ['debts'])
     #~ required_user_level = None
     order_by = ['seqno']
@@ -945,7 +956,7 @@ class BudgetSummary(dd.VirtualTable):
     A virtual table showing a list of summary numbers for this budget.
     """
     required=dict(user_groups = ['debts'])
-    #~ required_user_groups = ['debts']
+    auto_fit_column_widths = True
     master = Budget
     column_names = "desc amount"
     label = _("Overview")

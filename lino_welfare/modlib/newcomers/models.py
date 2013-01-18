@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012 Luc Saffre
+## Copyright 2012-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -325,6 +325,7 @@ class AvailableCoaches(users.Users):
     """
     use_as_default_table = False
     required = dict(user_groups='newcomers')
+    auto_fit_column_widths = True
     #~ required_user_groups = ['newcomers']
     #~ model = users.User
     editable = False # even root should not edit here

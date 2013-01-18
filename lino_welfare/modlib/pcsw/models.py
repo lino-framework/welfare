@@ -1422,7 +1422,9 @@ class CompanyDetail(contacts.CompanyDetail):
 
 
 class ClientDetail(dd.FormLayout):
-    
+    """
+    The layout of the detail window of a Client.
+    """
     #~ actor = 'contacts.Person'
     
     main = "general status_tab coaching education languages competences jobs contracts history calendar outbox misc"
@@ -1531,7 +1533,8 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state refusal_reason
     is_cpas is_senior is_obsolete 
-    remarks:30 remarks2:30 contacts.RolesByPerson:30 households.MembersByPerson:30
+    remarks:30 remarks2:30 
+    contacts.RolesByPerson:20 households.MembersByPerson:40
     # links.LinksToThis:30 links.LinksFromThis:30 
     """,label = _("Miscellaneous"),required=dict(user_level='manager'))
     
@@ -2559,6 +2562,9 @@ Enabling this field will automatically make the other coachings non-primary.""")
 dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
+    """
+    The table that shows all :class:`Coaching` instances.
+    """
     model = Coaching
     
     @classmethod
@@ -2595,12 +2601,15 @@ class Coachings(dd.Table):
 
     
 class CoachingsByClient(Coachings):
-  
+    """
+    The :class:`Coachings` table in a :class:`Clients` detail.
+    """
     #~ debug_permissions = 20121016
-    
     master_key = 'client'
     order_by = ['start_date']
     column_names = 'start_date end_date user primary type id'
+    hidden_columns = 'id'
+    auto_fit_column_widths = True
 
 class CoachingsByUser(Coachings):
     master_key = 'user'

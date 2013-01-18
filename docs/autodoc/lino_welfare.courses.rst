@@ -8,7 +8,6 @@
 .. automodule:: lino_welfare.modlib.courses
     :members:
     :show-inheritance:
-   
 
 
 `models`
@@ -18,5 +17,3 @@
     :members:
     :show-inheritance:
    
-
-

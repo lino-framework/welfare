@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2012 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -184,8 +184,12 @@ class KnowledgesByLanguage(LanguageKnowledges):
 
 
 class PersonProperty(properties.PropertyOccurence):
-    """A given property defined for a given person. 
-    See :mod:`lino.modlib.properties`."""
+    """
+    The occurence of a given 
+    :mod:`Property <lino.modlib.properties.models.Property>` 
+    on a given 
+    :class:`Client <lino_welfare.modlib.newcomers.models.Client>`.
+    """
     
     allow_cascaded_delete = ['person']
     
@@ -204,13 +208,20 @@ class PersonProperty(properties.PropertyOccurence):
 
 class PersonProperties(dd.Table):
     model = PersonProperty
-    hidden_columns = frozenset(['group'])
+    #~ hidden_columns = frozenset(['group'])
+    hidden_columns = 'group id'
     required = dict(user_groups='integ',user_level='manager')
     
 class PropsByPerson(PersonProperties):
+    """
+    Shows the :class:`PersonProperty` instances of a 
+    :class:`Client <lino_welfare.modlib.newcomers.models.Client>`.
+    """
     master_key = 'person'
     column_names = "property value remark *"
     required = dict(user_groups='integ')
+    #~ hidden_columns = 'id'
+    auto_fit_column_widths = True
     
     
 class PersonPropsByProp(PersonProperties):

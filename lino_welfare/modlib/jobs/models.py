@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2012 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -586,8 +586,18 @@ class Contracts(isip.ContractBaseTable):
     
     
 class ContractsByPerson(Contracts):
+    """
+    """
     master_key = 'client'
+    auto_fit_column_widths = True
     column_names = 'job applies_from applies_until user type *'
+    hidden_columns = """
+    language contact_person contact_role 
+    build_time regime schedule hourly_rate
+    date_decided date_issued user_asd exam_policy ending date_ended 
+    duration reference_person responsibilities remark
+    """
+    
 
         
 class ContractsByProvider(Contracts):
@@ -1055,9 +1065,14 @@ class Candidatures(dd.Table):
     column_names = 'date_submitted job:25 active * id'
 
 class CandidaturesByPerson(Candidatures):
+    """
+    ...
+    """
     required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
+    hidden_columns = 'id'
+    auto_fit_column_widths = True
 
 class CandidaturesBySector(Candidatures):
     master_key = 'sector'

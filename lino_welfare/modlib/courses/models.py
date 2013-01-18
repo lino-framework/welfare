@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2012 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -114,11 +114,8 @@ dd.inject_field(pcsw.Company,
     
 class CourseProviderDetail(pcsw.CompanyDetail):
     """
-    This is the same as CompanyDetail, except that we
-    
-    - remove MTI fields
-    - add a new tab "Courses"
-    
+    This is the same as CompanyDetail, except that we remove MTI fields
+    and add a tab :guilabel:`Courses`.
     """
     box5 = "remarks" 
     main = "general notes CourseOffersByProvider"
@@ -530,15 +527,25 @@ class CourseRequests(dd.Table):
     active_fields = ['offer']
 
 class CourseRequestsByPerson(CourseRequests):
+    """
+    Table of :class:`CourseRequest` instances of a 
+    :class:`lino.modlib.pcsw.models.Client`.
+    """
     required=dict(user_groups=['integ'])
     master_key = 'person'
-    column_names = 'date_submitted:10 content:15 offer:15 course:20 * id'
+    column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
+    hidden_columns = 'id'
+    auto_fit_column_widths = True
+    
 
 class CourseRequestsByContent(CourseRequests):
     required=dict(user_groups=['integ'])
     master_key = 'content'
         
 class RequestsByCourse(CourseRequests):
+    """
+    Table of :class:`CourseRequest` instances of a :class:`Course`.
+    """
     required=dict(user_groups=['integ'])
     master_key = 'course'
   
@@ -552,7 +559,7 @@ class RequestsByCourse(CourseRequests):
 
 class ParticipantsByCourse(RequestsByCourse):
     """
-    List of participating :class:`Candidates <Candidate>` for the given :class:`Course`.
+    List of participating candidates for the given :class:`Course`.
     """
     label = _("Participants")
     column_names = 'person remark:20 date_ended state workflow_buttons:60'
