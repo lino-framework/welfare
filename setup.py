@@ -22,26 +22,30 @@ from setuptools import setup
 
 #~ VERSION = file(os.path.join(os.path.dirname(__file__),'VERSION')).read().strip()
 
-from lino_welfare.modlib.pcsw import settings
+execfile(os.path.join(os.path.dirname(__file__),'lino_welfare','version.py'))
 
-VERSION = settings.LINO.version
-assert not "+" in VERSION
-assert not "-" in VERSION
+#~ from lino_welfare.modlib.pcsw import settings
+
+#~ VERSION = settings.LINO.version
+#~ assert not "+" in VERSION
+#~ assert not "-" in VERSION
     
-setup(name=settings.LINO.pypi_name, #name='lino-welfare',
+setup(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
-      version=VERSION, # lino_welfare.__version__,
+      version=__version__, 
       #~ version=VERSION,
-      #~ description=u"A Lino application for Belgian Public Welfare Centres",
-      description=settings.LINO.description,
-      author=settings.LINO.author,
-      author_email=settings.LINO.author_email,
-      #~ url="http://code.google.com/p/lino-welfare/",
+      description=u"A Lino application for Belgian Public Welfare Centres",
+      author = 'Luc Saffre',
+      author_email = 'luc.saffre@gmail.com',
+      #~ description=settings.LINO.description,
+      #~ author=settings.LINO.author,
+      #~ author_email=settings.LINO.author_email,
+      url="http://code.google.com/p/lino-welfare/",
       url=settings.LINO.url,
       license='GPL',
       packages=['lino_welfare'],
-      requires=['lino'],
+      requires=['lino','suds'],
       classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2

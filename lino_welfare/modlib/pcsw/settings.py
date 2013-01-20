@@ -24,6 +24,8 @@ import os
 
 from lino.apps.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
+#~ from lino_welfare.version import *
+import lino_welfare
 
 #~ print 20121219, __file__
 
@@ -32,10 +34,9 @@ import datetime
 class Lino(Lino):
     """
     """
-    version = '1.0.9' # 
+    version = lino_welfare.__version__
     url = "http://code.google.com/p/lino-welfare/"
-    pypi_name = "lino-welfare"
-    short_name = "Lino/Welfare"
+    short_name = "Lino Welfare"
     description = "a Lino application for Belgian Public Welfare Centres."
     author = 'Luc Saffre'
     author_email = 'luc.saffre@gmail.com'
@@ -76,8 +77,8 @@ class Lino(Lino):
         #~ """ % (self.label,lino.__url__)
         #~ return s
         
-    def get_app_source_file(self):
-        return __file__
+    #~ def get_app_source_file(self):
+        #~ return __file__
         
     def get_main_action(self,user):
         return self.modules.lino.Home.default_action
