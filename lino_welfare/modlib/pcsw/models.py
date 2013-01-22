@@ -325,6 +325,10 @@ für neue Operationen nicht benutzt werden können.""")
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner,self).disable_delete(ar)
 
+    def get_row_permission(self,ar,state,ba):
+        if isinstance(ba.action,dd.MergeAction) and settings.LINO.is_imported_partner(self):
+            return False
+        return super(Partner,self).get_row_permission(ar,state,ba)
 
 class Person(Partner,contacts.Person,mixins.Born,Printable):
     """
@@ -2749,8 +2753,8 @@ def customize_notes():
         order_by = ["-date"]
         
 
-from lino.utils.instantiator import auto_create
 
+@dd.receiver(dd.auto_create)
 def on_auto_create(sender,**kw):
     #~ raise Warning("auto_create is not permitted here")
     logger.info("auto_create %s %s",obj2str(sender),kw)
@@ -2758,7 +2762,7 @@ def on_auto_create(sender,**kw):
     body = 'Record %s has been automatically created using %s' % (obj2str(sender),kw)
     mail_admins('auto_create', body, fail_silently=True)
 
-auto_create.connect(on_auto_create)
+#~ dd.auto_create.connect(on_auto_create)
 
 
 def customize_sqlite():
@@ -3036,6 +3040,7 @@ def site_setup(site):
         """
     )
     
+    
     site.modules.notes.Notes.set_insert_layout("""
     event_type:25 type:25
     subject 
@@ -3050,8 +3055,18 @@ def site_setup(site):
     #~ """)
         
     #~ site.modules.courses.CourseProviders.set_detail_layout(CourseProviderDetail())
+
+@dd.receiver(dd.post_analyze)
+def set_merge_actions(sender,**kw):
+    #~ logger.info("%s.set_merge_actions()",__name__)
+    modules = sender.modules
+    for m in (modules.pcsw.Client,modules.contacts.Company):
+        #~ print repr(m)
+        m.merge_row = dd.MergeAction(m)
     
-    
+#~ dd.signals.pre_startup.connect()
+
+
 dd.add_user_group('integ',INTEG_MODULE_LABEL)
 #~ dd.add_user_group('coach',INTEG_MODULE_LABEL)
 

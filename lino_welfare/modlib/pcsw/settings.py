@@ -63,6 +63,12 @@ class Lino(Lino):
     
     #~ admin_url = '/admin'
     
+    #~ mergeable_models = [
+        #~ 'pcsw.Client', 
+        #~ 'contacts.Company',
+        #~ 'households.Household'
+        #~ ]
+        
     override_modlib_models = [
         'contacts.Partner', 'contacts.Person', 'contacts.Company',
         'households.Household'
