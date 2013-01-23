@@ -1,6 +1,9 @@
 Version 1.0.9
 =============
 
+Released 2013-01-18 (only unofficially)
+
+
 - Im Detail von Klienten und Budgets habe ich den neuen Parameter 
   :attr:`auto_fit_column_widths 
   <lino.core.tables.AbstractTable.auto_fit_column_widths>`

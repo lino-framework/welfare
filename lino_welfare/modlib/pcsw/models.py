@@ -73,7 +73,7 @@ from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
 from lino.core.modeltools import obj2str, obj2unicode
 from lino.core import actions
-from lino.core import changes
+#~ from lino.core import changes
 
 from lino.modlib.contacts.utils import street2kw
 from lino.modlib.contacts import models as contacts
@@ -683,7 +683,8 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
                         obj = Client(**attrs)
                         obj.full_clean()
                         obj.save()
-                        changes.log_create(ar.request,obj)
+                        #~ changes.log_create(ar.request,obj)
+                        dd.pre_ui_create.send(obj,request=ar.request)
                         return self.goto_client_response(ar,obj,
                             _("New client %s has been created") % obj)
                     return ar.confirm(yes,
@@ -700,7 +701,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
   
     def process_row(self,ar,obj,attrs):
         oldobj = obj
-        watcher = changes.Watcher(obj)
+        watcher = dd.ChangeWatcher(obj)
         diffs = []
         for fldname,new in attrs.items():
             fld = get_field(Client,fldname)
@@ -720,7 +721,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
         def apply():
             obj.full_clean()
             obj.save()
-            watcher.log_diff(ar.request)
+            watcher.send_update(ar.request)
             #~ return self.saved_diffs_response(ar,obj)
             return self.goto_client_response(ar,obj,_("%s has been saved.") % obj2unicode(obj))
         def no():
@@ -2967,7 +2968,7 @@ def site_setup(site):
             #~ site.modules.contacts.Companies,
             #~ site.modules.pcsw.Clients):
         #~ T.add_detail_tab('changes','lino.ChangesByMaster')
-    site.modules.contacts.Partners.add_detail_tab('changes','lino.ChangesByMaster')
+    site.modules.contacts.Partners.add_detail_tab('changes','changes.ChangesByMaster')
 
     
     site.modules.cal.Events.set_detail_layout("general more")

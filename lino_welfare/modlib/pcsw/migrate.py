@@ -504,3 +504,17 @@ def migrate_from_1_0_6(globals_dict):
 
 def migrate_from_1_0_7(globals_dict):
     return '1.0.8'
+def migrate_from_1_0_8(globals_dict):
+    return '1.0.9'
+def migrate_from_1_0_9(globals_dict):
+    """
+    lino.Change -> changes.Change
+    """
+    lino_Change = resolve_model("changes.Change")
+    new_content_type_id = globals_dict.get('new_content_type_id')
+    def create_lino_change(id, time, type, user_id, object_type_id, object_id, master_type_id, master_id, diff):
+        object_type_id = new_content_type_id(object_type_id)
+        master_type_id = new_content_type_id(master_type_id)
+        return lino_Change(id=id,time=time,type=type,user_id=user_id,object_type_id=object_type_id,object_id=object_id,master_type_id=master_type_id,master_id=master_id,diff=diff)    
+    globals_dict.update(create_lino_change=create_lino_change)
+    return '1.0.10'

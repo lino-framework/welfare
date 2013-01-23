@@ -30,7 +30,7 @@ from django.utils.encoding import force_unicode
 
 from lino import tools
 from lino import dd
-from lino.core import changes
+#~ from lino.core import changes
 #~ from lino.utils.babel import default_language
 #~ from lino import reports
 #~ from lino import layouts
@@ -519,7 +519,7 @@ nicht mehr angezeigt."""
         Assign a coach to a newcomer.
         """
         client = ar.master_instance
-        watcher = changes.Watcher(client)
+        watcher = dd.ChangeWatcher(client)
         #~ if not ssin.is_valid_ssin(client.national_id):
             #~ return ar.error_response(alert=True,
                 #~ message=_("Cannot assign client %(client)s with invalid SSIN %(ssin)s.") 
@@ -534,11 +534,12 @@ nicht mehr angezeigt."""
         #~ if not obj.profile:
             #~ coaching.state = pcsw.CoachingStates.active
         coaching.save()
-        changes.log_create(ar.request,coaching)
+        dd.pre_ui_create.send(coaching,request=ar.request)
+        #~ changes.log_create(ar.request,coaching)
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
-        watcher.log_diff(ar.request)
+        watcher.send_update(ar.request)
         
         self.add_system_note(ar,coaching)
         

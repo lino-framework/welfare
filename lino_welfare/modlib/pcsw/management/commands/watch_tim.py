@@ -54,7 +54,8 @@ from lino.utils import join_words, unicode_string
 from lino.utils import dblogger
 from lino.utils import mti
 from lino.core.modeltools import obj2str
-from lino.core import changes
+#~ from lino.core import changes
+#~ from lino.modlib import models as changes
 from lino.core.modeltools import is_valid_email
 
 from lino.utils.daemoncommand import DaemonCommand
@@ -146,14 +147,16 @@ def checkcc(person,pk,nType):
             company_id=pk,
             type=pcsw.ClientContactType.objects.get(id=nType))
         cc.save()
-        changes.log_create(REQUEST,cc)
+        dd.pre_ui_create.send(sender=cc,request=REQUEST)
+        #~ changes.log_create(REQUEST,cc)
     elif qs.count() == 1:
         cc = qs[0]
         if cc.company_id != pk:
-            watcher = changes.Watcher(cc)
+            watcher = dd.ChangeWatcher(cc)
             cc.company_id = pk
             cc.save()
-            watcher.log_diff(REQUEST)
+            watcher.send_update(REQUEST)
+            #~ watcher.log_diff(REQUEST)
     else:
         dblogger.warning(u"%s : more than 1 ClientContact (type=%r)",obj2str(person),nType)
 
@@ -311,12 +314,7 @@ def json2py(dct):
 CONTACT_FIELDS = '''id name street street_no street_box addr2 
 country city zip_code region language email url phone gsm remarks'''.split()
 
-#~ class PseudoRequest:
-    #~ user = "watch_tim"
-#~ REQUEST = PseudoRequest()
-
-REQUEST = changes.PseudoRequest("watch_tim")
-#~ 20120921 REQUEST = dblogger.PseudoRequest("watch_tim")
+REQUEST = dd.PseudoRequest("watch_tim")
 
 class Controller:
     "Deserves more documentation."
@@ -368,7 +366,8 @@ class Controller:
             return
             
         #~ 20120921 dblogger.log_deleted(REQUEST,obj)
-        changes.log_delete(REQUEST,obj)
+        dd.pre_ui_delete.send(sender=obj,request=REQUEST)
+        #~ changes.log_delete(REQUEST,obj)
         obj.delete()
         dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],obj2str(obj))
         
@@ -392,14 +391,16 @@ class Controller:
             self.applydata(obj,kw['data'])
             dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
             self.validate_and_save(obj)
-            changes.log_create(REQUEST,obj)
+            dd.pre_ui_create.send(sender=cc,request=REQUEST)
+            #~ changes.log_create(REQUEST,obj)
         else:
-            watcher = changes.Watcher(obj)
+            watcher = dd.ChangeWatcher(obj)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
             self.applydata(obj,kw['data'])
             dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
             self.validate_and_save(obj)
-            watcher.log_diff(REQUEST)
+            watcher.send_update(REQUEST)
+            #~ watcher.log_diff(REQUEST)
             #~ obj.save()
         
     def PUT(self,**kw):
@@ -413,13 +414,14 @@ class Controller:
             else:
                 dblogger.warning("%s:%s : PUT ignored (row does not exist)",kw['alias'],kw['id'])
                 return 
-        watcher = changes.Watcher(obj)
+        watcher = dd.ChangeWatcher(obj)
         if self.PUT_special(watcher,**kw):
             return 
         self.applydata(obj,kw['data'])
         dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
         self.validate_and_save(obj)
-        watcher.log_diff(REQUEST)
+        watcher.send_update(REQUEST)
+        #~ watcher.log_diff(REQUEST)
         #~ obj.save()
         #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
         
@@ -527,24 +529,27 @@ class PAR(Controller):
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
                             #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
                             if coaching.user != u or coaching.end_date is not None or coaching.start_date is None:
-                                watcher = changes.Watcher(coaching)
+                                watcher = dd.ChangeWatcher(coaching)
                                 coaching.user = u
                                 if coaching.start_date is None:
                                     coaching.start_date = obj.created
                                 coaching.end_date = None
                                 coaching.save()
-                                watcher.log_diff(REQUEST)
+                                watcher.send_update(REQUEST)
+                                #~ watcher.log_diff(REQUEST)
                         except pcsw.Coaching.DoesNotExist,e:
                             try:
                                 coaching = pcsw.Coaching.objects.get(client=obj,user=u,end_date__isnull=True)
-                                watcher = changes.Watcher(coaching)
+                                watcher = dd.ChangeWatcher(coaching)
                                 coaching.primary = True
                                 coaching.save()
-                                watcher.log_diff(REQUEST)
+                                watcher.send_update(REQUEST)
+                                #~ watcher.log_diff(REQUEST)
                             except pcsw.Coaching.DoesNotExist,e:
                                 coaching = pcsw.Coaching(client=obj,primary=True,user=u,start_date=obj.created)
                                 coaching.save()
-                                changes.log_create(REQUEST,coaching)
+                                dd.pre_ui_create.send(sender=coaching,request=REQUEST)
+                                #~ changes.log_create(REQUEST,coaching)
                             except Exception,e:
                                 raise Exception("More than one primary coaching for %r by %r" % (obj,u))
                         except Exception,e:
@@ -554,7 +559,8 @@ class PAR(Controller):
                         #~ obj.coach1 = None
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            changes.log_delete(REQUEST,coaching)
+                            dd.pre_ui_delete.send(sender=coaching,request=REQUEST)
+                            #~ changes.log_delete(REQUEST,coaching)
                             coaching.delete()
                             
                         except pcsw.Coaching.DoesNotExist,e:
@@ -621,19 +627,23 @@ class PAR(Controller):
         old_class = obj.__class__
         if issubclass(old_class,new_class):
             #~ it was a Client and becomes a Person
-            changes.log_remove_child(REQUEST,obj,old_class)
+            dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
+            #~ changes.log_remove_child(REQUEST,obj,old_class)
             mti.delete_child(obj,old_class)
             #~ changes.log_delete(REQUEST,obj)
             newobj = new_class.objects.get(pk=obj.id)
         elif issubclass(new_class,old_class):
             #~ it was only a Person and becomes a Client
-            changes.log_add_child(REQUEST,obj,new_class)
+            
+            dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
+            #~ changes.log_add_child(REQUEST,obj,new_class)
             newobj = mti.insert_child(obj,new_class)
         else:
             obj = obj.partner_ptr
-            changes.log_remove_child(REQUEST,obj,old_class)
+            #~ changes.log_remove_child(REQUEST,obj,old_class)
+            dd.pre_add_child.send(sender=obj,request=REQUEST,child=old_class)
             mti.delete_child(obj,old_class)
-            changes.log_add_child(REQUEST,obj,new_class)
+            #~ changes.log_add_child(REQUEST,obj,new_class)
             newobj = mti.insert_child(obj,new_class)
             
         self.applydata(newobj,data)

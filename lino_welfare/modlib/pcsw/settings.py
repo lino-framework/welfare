@@ -128,14 +128,16 @@ class Lino(Lino):
         and to all Contract fields.
         """
         
+        from lino.modlib.changes.models import watch_changes as wc
+        
         #~ self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
-        self.modules.contacts.Partner.watch_changes()
-        self.modules.contacts.Person.watch_changes(master_key='partner_ptr')
-        self.modules.contacts.Company.watch_changes(master_key='partner_ptr')
-        self.modules.pcsw.Client.watch_changes(master_key='partner_ptr')
-        self.modules.pcsw.Coaching.watch_changes(master_key='client__partner_ptr')
-        self.modules.pcsw.ClientContact.watch_changes(master_key='client__partner_ptr')
-        self.modules.jobs.Candidature.watch_changes(master_key='person__partner_ptr')
+        wc(self.modules.contacts.Partner)
+        wc(self.modules.contacts.Person,master_key='partner_ptr')
+        wc(self.modules.contacts.Company,master_key='partner_ptr')
+        wc(self.modules.pcsw.Client,master_key='partner_ptr')
+        wc(self.modules.pcsw.Coaching,master_key='client__partner_ptr')
+        wc(self.modules.pcsw.ClientContact,master_key='client__partner_ptr')
+        wc(self.modules.jobs.Candidature,master_key='person__partner_ptr')
         
         #~ self.modules.notes.Note.watch_changes(master_key='project')
         #~ self.modules.outbox.Mail.watch_changes(master_key='project')
@@ -144,10 +146,11 @@ class Lino(Lino):
         
         # ContractBase is abstract, so it's not under self.modules
         from lino_welfare.modlib.isip.models import ContractBase
-        ContractBase.watch_changes(master_key='client__partner_ptr')
+        #~ ContractBase.watch_changes(master_key='client__partner_ptr')
+        wc(ContractBase, master_key='client__partner_ptr')
         
         from lino_welfare.modlib.cbss.models import CBSSRequest
-        CBSSRequest.watch_changes(master_key='person__partner_ptr')
+        wc(CBSSRequest,master_key='person__partner_ptr')
                 
             
 
@@ -264,6 +267,7 @@ class Lino(Lino):
             
         yield 'django.contrib.contenttypes'
         yield 'lino.modlib.users'
+        yield 'lino.modlib.changes'
         #~ yield 'lino.modlib.codechanges'
         #~ yield 'lino.modlib.pages'
         #~ 'lino.modlib.workflows',

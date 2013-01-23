@@ -389,32 +389,21 @@ def objects():
     
     ly = person(first_name="Ly",last_name="Rumma",
       city=vigala,country='EE',
-      #~ card_number='123',birth_country=ee,birth_date='0000-04-27',
-      #~ national_id='1234',
-      #~ client_state=pcsw.ClientStates.newcomer,
       gender=mixins.Genders.female)
     yield ly
     mari = person(first_name="Mari",last_name="Saffre",
       city=vigala,country='EE',
-      #~ card_number='124',birth_country=ee,
-      #~ birth_date=i2d(20020405),
-      #~ national_id='1235',
-      #~ client_state=pcsw.ClientStates.newcomer,
       gender=mixins.Genders.female)
     yield mari
     iiris = person(first_name="Iiris",last_name="Saffre",
       city=vigala,country='EE',
-      #~ card_number='125',birth_country=ee,
-      #~ birth_date=i2d(20080324),
-      #~ national_id='1236',
-      #~ client_state=pcsw.ClientStates.newcomer,
       gender=mixins.Genders.female)
     yield iiris
     
     gerd = person(first_name="Gerd",
       last_name="Xhonneux",city=kettenis,
       email='gerd@example.com',
-      name="Xhonneux Gerd",country='BE',gender=mixins.Genders.male)
+      country='BE',gender=mixins.Genders.male)
     yield gerd
     yield role(company=cpas,person=gerd,type=4)
     #~ yield link(a=cpas,b=gerd,type=4)
