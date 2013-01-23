@@ -24,6 +24,8 @@ as base for the consultation and discussion with debtors.
 
 """
 
+from __future__ import unicode_literals
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -49,7 +51,7 @@ from django.utils.functional import lazy
 #~ from lino import reports
 from lino import dd
 #~ from lino import layouts
-#~ from lino.utils import printable
+from lino.utils.xmlgen.html import E
 from lino import mixins
 #~ from lino import actions
 #~ from lino import fields
@@ -365,16 +367,16 @@ The monthly amount available for distribution among debtors."""))
         
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
     def preview(self,ar):
-        html = ''
+        chunks = []
         def render(sar):
-            html = '<h2>%s</h2>' % cgi.escape(unicode(sar.get_title()))
-            html += ar.ui.table2xhtml(sar)
-            return html
+            chunks.append(E.h2(unicode(sar.get_title())))
+            chunks.append(ar.ui.table2xhtml(sar))
+            
         for grp in self.account_groups():
-            html += render(self.entries_by_group(ar,grp))
-        html += render(self.BudgetSummary(ar))
-        html += render(self.DistByBudget(ar))
-        return html
+            render(self.entries_by_group(ar,grp))
+        render(self.BudgetSummary(ar))
+        render(self.DistByBudget(ar))
+        return E.div(*chunks)
         
       
 class BudgetDetail(dd.FormLayout):
@@ -807,6 +809,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
         has_data = False
         def __init__(self,e):
             self.description = e.description
+            self.periods = e.periods
             self.partner = e.partner
             self.account = e.account
             #~ self.todos = [''] * len(e.budget.get_actors())
@@ -818,6 +821,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
         def matches(self,e):
             if e.partner != self.partner: return False
             if e.account != self.account: return False
+            if e.periods != self.periods: return False
             if e.description != self.description: return False
             return True
               
@@ -826,7 +830,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
                 i = 0
             else:
                 i = e.budget.get_actor_index(e.actor)
-            amount = e.amount / e.periods
+            amount = e.amount # / e.periods
             if amount != 0:
                 self.has_data = True
             self.amounts[i] += amount
@@ -863,10 +867,12 @@ class PrintEntriesByBudget(dd.VirtualTable):
         
     @dd.virtualfield(dd.PriceField(_("Total")))
     def total(self,obj,ar):
-        return obj.total
+        return obj.total / obj.periods
         
     @dd.displayfield(_("Description"))
     def description(self,obj,ar):
+        if obj.periods != 1:
+            return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
         return obj.description
         
     #~ @dd.displayfield(_("Partner"))
@@ -878,23 +884,23 @@ class PrintEntriesByBudget(dd.VirtualTable):
     
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount0(self,obj,ar):
-        return obj.amounts[0]
+        return obj.amounts[0] / obj.periods
         
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount1(self,obj,ar):
-        return obj.amounts[1]
+        return obj.amounts[1] / obj.periods
         
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount2(self,obj,ar):
-        return obj.amounts[2]
+        return obj.amounts[2] / obj.periods
         
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount3(self,obj,ar):
-        return obj.amounts[3]
+        return obj.amounts[3] / obj.periods
         
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount4(self,obj,ar):
-        return obj.amounts[4]
+        return obj.amounts[4] / obj.periods
   
   
   
@@ -992,12 +998,11 @@ class BudgetSummary(dd.VirtualTable):
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self,row,ar):
         return row[1]
-        
 
     
 #~ class DistByBudget(LiabilitiesByBudget):
 class DistByBudget(EntriesByBudget):
-    u"""
+    """
     Répartition au marc-le-franc.
     A table that distributes the monthly available amount
     proportionally among the debtors.
@@ -1009,6 +1014,7 @@ class DistByBudget(EntriesByBudget):
     filter = models.Q(distribute=True)
     label = _("Debts distribution")
     known_values = dict(account_type=AccountTypes.liabilities)
+    slave_grid_format = 'html'
     
     @classmethod
     def get_data_rows(self,ar):
