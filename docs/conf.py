@@ -13,6 +13,7 @@
 
 import sys, os
 import lino_welfare
+from lino.utils.sphinxconf import setup
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
 """
@@ -234,7 +235,6 @@ latex_documents = [
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
 
-from lino.utils.sphinxconf import setup
 
 extlinks = {
   'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),

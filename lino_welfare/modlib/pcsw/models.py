@@ -811,9 +811,9 @@ class Client(Person):
         #~ ,validators=[ssin.ssin_validator] # 20121108
         )
         
-    health_insurance = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
+    health_insurance = dd.ForeignKey('contacts.Company',blank=True,null=True,
         verbose_name=_("Health insurance"),related_name='health_insurance_for')
-    pharmacy = dd.ForeignKey(settings.LINO.company_model,blank=True,null=True,
+    pharmacy = dd.ForeignKey('contacts.Company',blank=True,null=True,
         verbose_name=_("Pharmacy"),related_name='pharmacy_for')
     
     nationality = dd.ForeignKey(countries.Country,
@@ -2653,7 +2653,7 @@ def customize_siteconfig():
     dd.inject_field(SiteConfig,
         'job_office',
         #~ models.ForeignKey("contacts.Company",
-        models.ForeignKey(settings.LINO.company_model,
+        models.ForeignKey('contacts.Company',
             blank=True,null=True,
             verbose_name=_("Local job office"),
             related_name='job_office_sites',
@@ -2727,7 +2727,7 @@ def customize_notes():
     notes = dd.resolve_app('notes')
 
     dd.inject_field(notes.Note,'company',
-        models.ForeignKey(settings.LINO.company_model,
+        models.ForeignKey('contacts.Company',
             blank=True,null=True,
             help_text="""\
     An optional third-party Organization that is related to this Note.

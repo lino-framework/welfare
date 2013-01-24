@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2010-2012 Luc Saffre
+## Copyright 2010-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -70,9 +70,9 @@ pcsw = dd.resolve_app('pcsw')
 users = dd.resolve_app('users')
 Country = dd.resolve_model('countries.Country')
 City = dd.resolve_model('countries.City')
-Person = dd.resolve_model(settings.LINO.person_model)
+Person = dd.resolve_model('contacts.Person')
 Client = dd.resolve_model('pcsw.Client')
-Company = dd.resolve_model(settings.LINO.company_model)
+Company = dd.resolve_model('contacts.Company')
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
 

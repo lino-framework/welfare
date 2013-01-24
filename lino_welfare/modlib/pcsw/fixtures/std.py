@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2011 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ from django.db import models
 from django.conf import settings
 from lino.utils.babel import babel_values, babelitem
 
-Person = resolve_model(settings.LINO.person_model)
-Company = resolve_model(settings.LINO.company_model)
+Person = resolve_model('contacts.Person')
+Company = resolve_model('contacts.Company')
 ExclusionType = resolve_model('pcsw.ExclusionType')
 
 #~ from lino.modlib.properties import models as properties 
@@ -152,9 +152,7 @@ def objects():
     yield excltype(u"ONEM-Auflagen nicht erfüllt")
     
     #~ linkType = Instantiator('links.LinkType',"a_type b_type name").build
-    Company = resolve_model(settings.LINO.company_model)
-    Person = resolve_model(settings.LINO.person_model)
-    
+   
     #~ yield linkType(
         #~ ContentType.objects.get_for_model(Company),
         #~ ContentType.objects.get_for_model(Person),

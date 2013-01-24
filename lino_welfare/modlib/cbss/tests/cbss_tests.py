@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## Copyright 2012 Luc Saffre
+## Copyright 2012-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ def test01(self):
     global luc
     #~ luc = Person(first_name='Luc',last_name='Saffre')
     #~ luc.save()
-    luc = create_and_get(settings.LINO.person_model,first_name='Luc',last_name='Saffre')
+    luc = create_and_get('contacts.Person',first_name='Luc',last_name='Saffre')
     
     # save site settings
     #~ saved_cbss_environment = settings.LINO.cbss_environment

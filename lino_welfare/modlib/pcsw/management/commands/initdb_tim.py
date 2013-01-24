@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2009-2012 Luc Saffre
+## Copyright 2009-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -52,8 +52,8 @@ from lino.core.modeltools import app_labels
 Activity = resolve_model('pcsw.Activity')
 Country = resolve_model('countries.Country')
 City = resolve_model('countries.City')
-Person = resolve_model(settings.LINO.person_model)
-Company = resolve_model(settings.LINO.company_model)
+Person = resolve_model('contacts.Person')
+Company = resolve_model('contacts.Company')
 
 
 

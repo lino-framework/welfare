@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2012 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -275,8 +275,8 @@ def objects():
   
     ClientContactType = resolve_model('pcsw.ClientContactType')
   
-    Person = resolve_model(settings.LINO.person_model)
-    Company = resolve_model(settings.LINO.company_model)
+    Person = resolve_model('contacts.Person')
+    Company = resolve_model('contacts.Company')
     #~ Contact = resolve_model('contacts.Contact')
     Role = resolve_model('contacts.Role')
     RoleType = resolve_model('contacts.RoleType')

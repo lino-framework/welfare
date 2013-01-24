@@ -269,7 +269,7 @@ class ContractBase(
 
     @classmethod
     def contact_person_choices_queryset(cls,company):
-        return settings.LINO.person_model.objects.filter(rolesbyperson__company=company,
+        return contacts.Person.objects.filter(rolesbyperson__company=company,
             rolesbyperson__type__use_in_contracts=True)
             
     @dd.chooser()

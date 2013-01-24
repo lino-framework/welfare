@@ -44,6 +44,7 @@ from django.core.exceptions import ValidationError
 #from lino.modlib.contacts.models import Contact, Companies
 #from lino.modlib.countries.models import Country
 
+from lino import dd
 from lino.utils import i2d
 from lino.utils.jsgen import py2js
 from lino.utils import babel
@@ -79,10 +80,11 @@ def test001(self):
     - total number of Person records
     - name of some person
     """
+    Person = dd.resolve_model('contacts.Person')
     #~ from lino.apps.pcsw.models import Person
-    self.assertEquals(settings.LINO.person_model.objects.count(), 78)
+    self.assertEquals(Person.objects.count(), 78)
     
-    p = settings.LINO.person_model.objects.get(pk=118)
+    p = Person.objects.get(pk=118)
     #~ self.assertEquals(unicode(p), "ARENS Annette (118)")
     #~ self.assertEquals(unicode(p), "AUSDEMWALD Alfons (118)")
     self.assertEquals(unicode(p), "COLLARD Charlotte (118)")
