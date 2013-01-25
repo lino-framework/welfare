@@ -100,6 +100,7 @@ class PeriodsField(models.DecimalField):
     """
     def __init__(self, *args, **kwargs):
         defaults = dict(
+            blank=True,
             default=1,
             #~ max_length=3,
             max_digits=3,
