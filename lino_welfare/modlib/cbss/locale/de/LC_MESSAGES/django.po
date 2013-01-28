@@ -267,11 +267,11 @@ msgstr ""
 
 #: .\models.py:1730
 msgid "CBSS summary"
-msgstr "Zusammenfassung KBSS"
+msgstr "Zusammenfassung ZDSS"
 
 #: .\models.py:1733
 msgid "CBSS"
-msgstr "KBSS"
+msgstr "ZDSS"
 
 #: .\models.py:1743 .\models.py:1751
 msgid "INS code"

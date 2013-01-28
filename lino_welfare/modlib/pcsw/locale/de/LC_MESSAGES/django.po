@@ -588,7 +588,7 @@ msgstr "Ausgestellt durch"
 
 #: .\models.py:1588
 msgid "CBSS"
-msgstr "KBSS"
+msgstr "ZDSS"
 
 #: .\models.py:1628
 msgid "All Clients"
@@ -904,7 +904,7 @@ msgstr "Schuldenberater"
 
 #: .\settings.py:111
 msgid "CBSS only"
-msgstr "nur KBSS"
+msgstr "nur ZDSS"
 
 #: .\settings.py:112
 msgid "Administrator"

@@ -528,9 +528,12 @@ class PAR(Controller):
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
                             #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
-                            if coaching.user != u or coaching.end_date is not None or coaching.start_date is None:
+                            if coaching.user != u or coaching.end_date is not None \
+                                or coaching.start_date is None\
+                                or coaching.type != u.coaching_type:
                                 watcher = dd.ChangeWatcher(coaching)
                                 coaching.user = u
+                                coaching.type = u.coaching_type
                                 if coaching.start_date is None:
                                     coaching.start_date = obj.created
                                 coaching.end_date = None
@@ -546,7 +549,9 @@ class PAR(Controller):
                                 watcher.send_update(REQUEST)
                                 #~ watcher.log_diff(REQUEST)
                             except pcsw.Coaching.DoesNotExist,e:
-                                coaching = pcsw.Coaching(client=obj,primary=True,user=u,start_date=obj.created)
+                                coaching = pcsw.Coaching(client=obj,primary=True,user=u,
+                                  type=u.coaching_type,
+                                  start_date=obj.created)
                                 coaching.save()
                                 dd.pre_ui_create.send(sender=coaching,request=REQUEST)
                                 #~ changes.log_create(REQUEST,coaching)

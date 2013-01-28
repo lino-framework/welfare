@@ -1,7 +1,7 @@
 Version 1.0.10
 ==============
 
-To be released 2013-01-24 (probably)
+To be released 2013-01-30 (probably)
 
 - Neuer Button "Merge" auf Kienten. 
   Experimentell. Noch nicht auf echten Daten benutzen.
@@ -11,3 +11,6 @@ To be released 2013-01-24 (probably)
   is "Reason of termination" (de: Beendigungsgrund, fr: Cause d'abandon).
   
 - BudgetSummary now also shows the original amounts for entries with periods other than 1
+
+- watch_tim setzte das Feld "Dienst" der primären Begleitung nicht.
+  

@@ -2545,6 +2545,8 @@ Enabling this field will automatically make the other coachings non-primary.""")
             raise ValidationError(_("Coaching period ends before it started."))
         if not self.start_date and not self.end_date:
             self.start_date = datetime.date.today()
+        if not self.type and self.user:
+            self.type = self.user.coaching_type
         super(Coaching,self).full_clean(*args,**kw)
         
     #~ def save(self,*args,**kw):
