@@ -55,9 +55,11 @@ Lino hat folgende "Untertabellen der Tabelle Partner":
 
 Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
 
-- Wenn PAR->NB2 (INSS) oder Gesdos-Nr unleer, 
+- Wenn mindestens eines der Felder
+  `PAR->NB2` (INSS), `PAR->NB1` (Gesdos-Nr) 
+  oder `PAR->IdUsr` (Sozialarbeiter) unleer ist, 
   oder wenn Attribut N (Neuzugang) 
-  gesetzt ist, wird es ein **Klient**.
+  gesetzt ist, dann wird es ein **Klient**.
 - Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
 - Ansonsten, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
   "Herr und Frau" enthält, dann wird es ein **Haushalt**.
@@ -279,11 +281,20 @@ Eine **Begleitung** ist, wenn sich eine bestimmte Person im ÖSHZ
 um einen bestimmten Klienten während einer bestimmten Periode 
 "kümmert".
 
-Lino kann pro Klient mehrere Begleitungen haben, aber in 
-TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
-Deshalb gibt es folgende Regeln:
+Die Felder **von** und **bis** einer Begleitung 
+definieren die **Begleitungsperiode**.
+Eine Begleitung ist (an einem gegebenen Datum `heute`) aktiv,
+wenn `von` **<=** `heute` und `bis` entweder leer oder **>=** `heute` ist.
+Das Feld `von` einer Begleitung kann nicht leer sein.
+Ein leeres Feld `bis` einer Begleitung bedeutet: unbefristet
 
-In Lino kann pro Klient immer nur eine Begleitung "primär" sein.
+Lino kann pro Klient mehrere Begleitungen haben, 
+
+
+aber in 
+TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
+Deshalb gibt es in Lino das Konzept der **primären** Begleitung.
+In Lino kann pro Klient eine Begleitung primär sein.
 Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
 Für importierte Partner wird die primäre Begleitung aus TIM wie folgt synchronisiert:
 
