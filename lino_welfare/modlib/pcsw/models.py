@@ -1008,6 +1008,9 @@ class Client(Person):
         if self.job_office_contact: 
             if self.job_office_contact.person_id == self.id:
                 raise ValidationError(_("Circular reference"))
+        if False:
+            if self.national_id:
+                ssin.ssin_validator(self.national_id)
         #~ if not self.national_id:
             #~ self.national_id = str(self.id)
         if False: # Regel deaktiviert seit 20121207

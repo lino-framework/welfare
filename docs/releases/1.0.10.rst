@@ -17,4 +17,20 @@ To be released 2013-01-30 (probably)
   
 - Deutsche Übersetzung von CBSS ist "ZDSS", nicht "KBSS".
 
+- Beträge in Budgets (Entry.amount) können jetzt leer sein. 
+  Man hat anfangs also nicht mehr lauter "0,00" da stehen, was optisch angenehmer ist.
 
+- In der Vorschau eines Budgets stand als Titel 
+  "Schuldenverteilung von Budget Nr. 4 für Klient Soundso"
+  statt einfach nur "Schuldenverteilung"
+  
+- Übersetzung und Hilfetexte dist_amount und DistByBudget  
+
+- help_text of slave tables is now being rendered as tooltip.
+  The tooltip is anchored to the "header" part of the containing panel
+
+- AvailableCoaches : meldete "Only for newcomers with valid SSIN", 
+  obwohl die Regel (dass begleitete Klienten eine gültige INSS haben müssen) 
+  seit 20121207 deaktiviert ist.
+
+- watch_tim wollte aus Klient ohne INSS in Lino eine Person machen.

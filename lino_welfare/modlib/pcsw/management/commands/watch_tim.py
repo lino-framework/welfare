@@ -285,6 +285,8 @@ def PAR_model(data):
     attribs = data.get('ATTRIB',False)
     if attribs and 'N' in attribs: # newcomer
         return Client
+    if data.get('IDUSR',False): # Sozi
+        return Client
     if data.get('NOTVA',False):
         return Company
     if data.get('ALLO','') in (u"Eheleute",):

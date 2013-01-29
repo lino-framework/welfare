@@ -55,7 +55,7 @@ Lino hat folgende "Untertabellen der Tabelle Partner":
 
 Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
 
-- Wenn PAR->NB2 (NISS) oder Gesdos-Nr unleer, 
+- Wenn PAR->NB2 (INSS) oder Gesdos-Nr unleer, 
   oder wenn Attribut N (Neuzugang) 
   gesetzt ist, wird es ein **Klient**.
 - Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
@@ -174,19 +174,18 @@ Das hängt vom :doc:`Benutzerprofil </user/userprofiles>` ab.
 
 
 
-Die NISS
+Die INSS
 --------
 
-- Es kann Klienten ohne NISS geben. 
+- Es kann Klienten ohne INSS geben. 
   Die sind dann allerdings "inoffiziell" bzw. "nicht integriert" bzw. "ohne Akte beim Ministerium".
-  In TIM haben diese Klienten entweder eine leere NISS oder eine 0 dort stehen.
+  In TIM haben diese Klienten entweder eine leere INSS oder eine 0 dort stehen.
   Die 0 wird als "leer" übertragen, denn 
-  in Lino kann es nicht zwei Klienten mit der gleichen NISS geben.
+  in Lino kann es nicht zwei Klienten mit der gleichen INSS geben.
   
-- Lino lässt auch ungültige NISS zu, aber
-  Klienten im Bearbeitungszustand "Begleitet" müssen eine *gültige* NISS haben.
+- Lino lässt auch ungültige INSS zu.
   
-- Ein "Numéro bis" ist eine provisorische NISS, 
+- Ein "Numéro bis" ist eine provisorische INSS, 
   die z.B. auch 680000 formatiert ist.
   So eine Bis-Nummer kann also dann auch irgendwann mal ändern.
   
@@ -225,7 +224,7 @@ Der Bearbeitungszustand eines Klienten kann sein:
 
   
 - **Ungültig** :
-  Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.
+  Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige INSS.
   
   
   
@@ -237,7 +236,7 @@ Der Bearbeitungszustand eines Klienten kann sein:
       refused -> newcomer [label="Neuantrag wiederholen"];
       coached -> newcomer [label="Begleitung abbrechen"];
       coached -> former [label="Begleitung beenden"];
-      invalid -> newcomer [label="NISS wurde korrigiert"];
+      invalid -> newcomer [label="INSS wurde korrigiert"];
       
       newcomer [label="Neuantrag"];
       refused [label="Abgelehnt"];
