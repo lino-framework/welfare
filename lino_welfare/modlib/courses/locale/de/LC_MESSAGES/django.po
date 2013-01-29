@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 12:34+0000\n"
+"POT-Creation-Date: 2013-01-29 00:47+0000\n"
 "PO-Revision-Date: 2012-12-02 12:29+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -57,7 +57,7 @@ msgstr "Beschreibung"
 msgid "Course"
 msgstr "Kurs"
 
-#: .\models.py:262 .\models.py:755
+#: .\models.py:262 .\models.py:754
 msgid "Courses"
 msgstr "Kurse"
 
@@ -65,7 +65,7 @@ msgstr "Kurse"
 msgid "start date"
 msgstr "Beginndatum"
 
-#: .\models.py:277 .\models.py:478
+#: .\models.py:277 .\models.py:477
 msgid "Remark"
 msgstr "Bemerkung"
 
@@ -136,59 +136,59 @@ msgstr "%(person)s wurde ausgetragen aus %(course)s"
 msgid "Course Requests"
 msgstr "Kursanfragen"
 
-#: .\models.py:433
+#: .\models.py:432
 msgid "Person"
 msgstr ""
 
-#: .\models.py:439
+#: .\models.py:438
 msgid "Course content"
 msgstr "Kursinhalt"
 
-#: .\models.py:443
+#: .\models.py:442
 msgid "date submitted"
 msgstr "Anfragedatum"
 
-#: .\models.py:444
+#: .\models.py:443
 msgid "When this request has been submitted."
 msgstr "Datum, an dem die Anfrage erstellt wurde."
 
-#: .\models.py:447
+#: .\models.py:446
 msgid "Needed for job search"
 msgstr "professionelle Eingliederung"
 
-#: .\models.py:449
+#: .\models.py:448
 msgid "Check this if the request is needed for job search."
 msgstr "Ankreuzen, wenn der Kurs für die Arbeitssuche benötigt wird."
 
-#: .\models.py:464
+#: .\models.py:463
 msgid "Course found"
 msgstr "Kurs gefunden"
 
-#: .\models.py:483
+#: .\models.py:482
 msgid "date ended"
 msgstr "Enddatum"
 
-#: .\models.py:564
+#: .\models.py:563
 msgid "Participants"
 msgstr "Teilnehmer"
 
-#: .\models.py:617
+#: .\models.py:616
 msgid "Candidates"
 msgstr "Kandidaten"
 
-#: .\models.py:659
+#: .\models.py:658
 msgid "Pending Course Requests"
 msgstr "Offene Kursanfragen"
 
-#: .\models.py:707
+#: .\models.py:706
 msgid "Age"
 msgstr "Alter"
 
-#: .\models.py:711
+#: .\models.py:710
 msgid "Address"
 msgstr "Adresse"
 
-#: .\models.py:721
+#: .\models.py:720
 msgid "unknown age"
 msgstr "unbek. Alter"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 12:34+0000\n"
+"POT-Creation-Date: 2013-01-29 00:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,90 +73,90 @@ msgstr ""
 msgid "date ended"
 msgstr ""
 
-#: .\models.py:357
+#: .\models.py:358
 #, python-format
 msgid "Evaluation %d"
 msgstr ""
 
-#: .\models.py:369
+#: .\models.py:370
 msgid "Contract ends in a month"
 msgstr ""
 
-#: .\models.py:405
+#: .\models.py:406
 msgid "past contracts"
 msgstr ""
 
-#: .\models.py:406
+#: .\models.py:407
 msgid "active contracts"
 msgstr ""
 
-#: .\models.py:407
+#: .\models.py:408
 msgid "coming contracts"
 msgstr ""
 
-#: .\models.py:408
+#: .\models.py:409
 msgid "on"
 msgstr ""
 
-#: .\models.py:466
+#: .\models.py:467
 #, python-format
 msgid "Date range %(p1)s lies outside of coached period %(p2)s."
 msgstr ""
 
-#: .\models.py:470
+#: .\models.py:471
 #, python-format
 msgid "Date range overlaps with %(ctype)s #%(id)s"
 msgstr ""
 
-#: .\models.py:482
+#: .\models.py:483
 #, python-format
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: .\models.py:496 .\models.py:560
+#: .\models.py:497 .\models.py:561
 msgid "ISIP"
 msgstr ""
 
-#: .\models.py:497
+#: .\models.py:498
 msgid "ISIPs"
 msgstr ""
 
-#: .\models.py:501
+#: .\models.py:502
 msgid "Contract Type"
 msgstr ""
 
-#: .\models.py:503
+#: .\models.py:504
 msgid "stages"
 msgstr ""
 
-#: .\models.py:505
+#: .\models.py:506
 msgid "goals"
 msgstr ""
 
-#: .\models.py:507
+#: .\models.py:508
 msgid "duties ASD"
 msgstr ""
 
-#: .\models.py:509
+#: .\models.py:510
 msgid "duties DSBE"
 msgstr ""
 
-#: .\models.py:511
+#: .\models.py:512
 msgid "duties company"
 msgstr ""
 
-#: .\models.py:513
+#: .\models.py:514
 msgid "duties person"
 msgstr ""
 
-#: .\models.py:525
+#: .\models.py:526
 msgid "responsible (DSBE)"
 msgstr ""
 
-#: .\models.py:554
+#: .\models.py:555
 msgid "General"
 msgstr ""
 
-#: .\models.py:582
+#: .\models.py:583
 msgid "Only contracts of type"
 msgstr ""

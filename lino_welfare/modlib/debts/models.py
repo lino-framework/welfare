@@ -159,7 +159,7 @@ class Budget(mixins.AutoUser,mixins.CachedPrintable,mixins.Duplicable):
     #~ closed = models.BooleanField(verbose_name=_("Closed"))
     print_todos = models.BooleanField(
         verbose_name=_("Print to-do list"),
-        help_text=u"""\
+        help_text="""\
 Einträge im Feld "To-do" werden nur ausgedruckt, 
 wenn die Option "To-dos drucken" des Budgets angekreuzt ist. 
 Diese Option wird aber momentan noch ignoriert 
@@ -169,8 +169,9 @@ Vielleicht mit Fußnoten?
 """)
     intro = dd.RichTextField(_("Introduction"),format="html",blank=True)
     conclusion = dd.RichTextField(_("Conclusion"),format="html",blank=True)
-    dist_amount = dd.PriceField(_("Disposable amount"),default=120,help_text=_("""\
-The monthly amount available for distribution among debtors."""))
+    dist_amount = dd.PriceField(_("Distributable amount"),default=120,
+        help_text=_("""\
+The total monthly amount available for debts distribution."""))
     
     #~ def duplicated_fields(self):
         #~ return dd.fields_list('partner print_todo intro conclusion dist_amount')
@@ -285,7 +286,9 @@ The monthly amount available for distribution among debtors."""))
         for e in Entry.objects.filter(*args,**kw).annotate(models.Sum(fldname)):
             amount = decimal.Decimal(0)
             for n in fldnames:
-                amount += getattr(e,n+'__sum',0)
+                a = getattr(e,n+'__sum',None)
+                if a is not None:
+                    amount += a
             #~ if e.periods is not None:
             if e.periods != 1:
                 amount = amount / decimal.Decimal(e.periods)
@@ -360,10 +363,12 @@ The monthly amount available for distribution among debtors."""))
                     a.save()
             
     def BudgetSummary(self,ar):
-        return ar.spawn(BudgetSummary,master_instance=self)
+        return ar.spawn(BudgetSummary,master_instance=self,
+            title=BudgetSummary.label)
         
     def DistByBudget(self,ar):
-        return ar.spawn(DistByBudget,master_instance=self)
+        return ar.spawn(DistByBudget,master_instance=self,
+            title=DistByBudget.label)
         
         
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
@@ -552,6 +557,7 @@ class ActorsByBudget(Actors):
     master_key = 'budget'
     column_names = "seqno partner header remark *"
     auto_fit_column_widths = True
+    help_text = _("To be filled if there is more than one person involved.")
     
     
 class ActorsByPartner(Actors):
@@ -577,7 +583,8 @@ class Entry(SequencedBudgetComponent):
     account = models.ForeignKey(accounts.Account)
     partner = models.ForeignKey('contacts.Partner',blank=True,null=True)
     #~ name = models.CharField(_("Remark"),max_length=200,blank=True)
-    amount = dd.PriceField(_("Amount"),default=0)
+    #~ amount = dd.PriceField(_("Amount"),default=0)
+    amount = dd.PriceField(_("Amount"),blank=True,null=True)
     actor = models.ForeignKey(Actor,
         blank=True,null=True,
         help_text="""\
@@ -832,10 +839,11 @@ class PrintEntriesByBudget(dd.VirtualTable):
             else:
                 i = e.budget.get_actor_index(e.actor)
             amount = e.amount # / e.periods
-            if amount != 0:
+            #~ if amount != 0:
+            if amount:
                 self.has_data = True
-            self.amounts[i] += amount
-            self.total += amount
+                self.amounts[i] += amount
+                self.total += amount
             if self.todo:
                 self.todo += ', '
             self.todo += e.todo
@@ -902,7 +910,6 @@ class PrintEntriesByBudget(dd.VirtualTable):
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount4(self,obj,ar):
         return obj.amounts[4] / obj.periods
-  
   
   
 class PrintExpensesByBudget(PrintEntriesByBudget):
@@ -1004,9 +1011,6 @@ class BudgetSummary(dd.VirtualTable):
 #~ class DistByBudget(LiabilitiesByBudget):
 class DistByBudget(EntriesByBudget):
     """
-    Répartition au marc-le-franc.
-    A table that distributes the monthly available amount
-    proportionally among the debtors.
     
     """
     #~ master = Budget
@@ -1016,6 +1020,11 @@ class DistByBudget(EntriesByBudget):
     label = _("Debts distribution")
     known_values = dict(account_type=AccountTypes.liabilities)
     slave_grid_format = 'html'
+    help_text=_("""\
+Répartition au marc-le-franc.
+A table with one row per entry in Liabilities which has "distribute" checked, 
+proportionally distributing the `Distributable amount` among the debtors.
+""")
     
     @classmethod
     def get_data_rows(self,ar):

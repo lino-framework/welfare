@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 12:34+0000\n"
-"PO-Revision-Date: 2012-10-20 17:58+0200\n"
+"POT-Creation-Date: 2013-01-29 00:47+0000\n"
+"PO-Revision-Date: 2013-01-29 02:53+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -42,168 +42,185 @@ msgid "Conclusion"
 msgstr "Schlussfolgerung"
 
 #: .\models.py:172
-msgid "Disposable amount"
-msgstr "Verfügbarer Betrag"
+msgid "Distributable amount"
+msgstr "Verteilbarer Betrag"
 
-#: .\models.py:172
-msgid "The monthly amount available for distribution among debtors."
-msgstr ""
+#: .\models.py:173
+msgid "The total monthly amount available for debts distribution."
+msgstr "Der monatlich verfügbare Gesamtbetrag für Tabelle Schuldenverteilung."
 
-#: .\models.py:183
+#: .\models.py:184
 msgid "New"
 msgstr "Neu"
 
-#: .\models.py:185
+#: .\models.py:186
 #, python-format
 msgid "Budget %(pk)d for %(partner)s"
 msgstr "Budget Nr. %(pk)d für %(partner)s"
 
-#: .\models.py:194
+#: .\models.py:195
 msgid "Common"
 msgstr "Gemeinsam"
 
-#: .\models.py:196 .\models.py:578 .\models.py:880 .\models.py:884
-#: .\models.py:888 .\models.py:892 .\models.py:896 .\models.py:992
+#: .\models.py:197 .\models.py:586 .\models.py:893 .\models.py:897
+#: .\models.py:901 .\models.py:905 .\models.py:909 .\models.py:1005
 msgid "Amount"
 msgstr "Betrag"
 
-#: .\models.py:349
+#: .\models.py:354
 msgid "Mr."
 msgstr "Herr"
 
-#: .\models.py:352
+#: .\models.py:357
 msgid "Mrs."
 msgstr "Frau"
 
-#: .\models.py:367
+#: .\models.py:374
 msgid "Preview"
 msgstr "Vorschau"
 
-#: .\models.py:392
+#: .\models.py:399
 msgid "General"
 msgstr "Allgemein"
 
-#: .\models.py:397
+#: .\models.py:404
 msgid "Expenses & Income"
 msgstr "Ausgaben und Einkünfte"
 
-#: .\models.py:402
+#: .\models.py:409
 msgid "Liabilities & Assets"
 msgstr "Verpflichtungen & Vermögen"
 
-#: .\models.py:413
+#: .\models.py:420
 msgctxt "debts"
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: .\models.py:460
+#: .\models.py:467
 msgid "Is partner of these budgets:"
 msgstr "Ist Hauptpartner in folgenden Budgets:"
 
-#: .\models.py:508
+#: .\models.py:515
 msgid "Budget Actor"
 msgstr "Budget-Akteur"
 
-#: .\models.py:509
+#: .\models.py:516
 msgid "Budget Actors"
 msgstr "Budget-Akteure"
 
-#: .\models.py:519
+#: .\models.py:526
 msgid "Header"
 msgstr "Kolonnenüberschrift"
 
-#: .\models.py:520 .\models.py:592
+#: .\models.py:527 .\models.py:600
 msgid "Remark"
 msgstr "Bemerkung"
 
-#: .\models.py:536
+#: .\models.py:543
 msgid "Actor"
 msgstr "Akteur"
 
-#: .\models.py:557
+#: .\models.py:564
 msgid "Is actor in these budgets:"
 msgstr "Ist Akteur in folgenden Budgets:"
 
-#: .\models.py:566
+#: .\models.py:573
 msgid "Budget Entry"
 msgstr "Eintrag"
 
-#: .\models.py:567
+#: .\models.py:574
 msgid "Budget Entries"
 msgstr "Einträge"
 
-#: .\models.py:585
+#: .\models.py:593
 msgid "Circa"
 msgstr "ca."
 
-#: .\models.py:587
+#: .\models.py:595
 msgid "Distribute"
 msgstr "Verteilen"
 
-#: .\models.py:591
+#: .\models.py:599
 msgid "To Do"
 msgstr "to do"
 
-#: .\models.py:596 .\models.py:630 .\models.py:869 .\models.py:988
+#: .\models.py:604 .\models.py:638 .\models.py:880 .\models.py:1001
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models.py:605 .\models.py:1122
+#: .\models.py:613 .\models.py:1139
 msgid "Periods"
 msgstr "Perioden"
 
-#: .\models.py:610
+#: .\models.py:618
 msgid "Monthly rate"
 msgstr "Monatsrte"
 
-#: .\models.py:656
+#: .\models.py:664
 msgid "Periods must be > 0"
 msgstr ""
 
-#: .\models.py:660
+#: .\models.py:668
 #, python-format
 msgid "Cannot set 'Distribute' when 'Monthly rate' is %r"
 msgstr ""
 
-#: .\models.py:865
+#: .\models.py:876
 msgid "Total"
 msgstr ""
 
-#: .\models.py:962
+#: .\models.py:974
 msgid "Overview"
 msgstr "Übersicht"
 
-#: .\models.py:1010
+#: .\models.py:1019
 msgid "Debts distribution"
 msgstr "Schuldenverteilung"
 
-#: .\models.py:1038
+#: .\models.py:1022
+msgid ""
+"Répartition au marc-le-franc.\n"
+"A table with one row per entry in Liabilities which has \"distribute\" "
+"checked, \n"
+"proportionally distributing the `Distributable amount` among the debtors.\n"
+msgstr ""
+"Répartition au marc-le-franc.\n"
+"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option "
+"\"verteilen\" angekreuzt ist. \n"
+"Der verfügbare Betrag wird dabei proportional zum geschuldeten Betrag "
+"aufgeteilt.\n"
+
+#: .\models.py:1053
 msgid "%"
 msgstr ""
 
-#: .\models.py:1042
+#: .\models.py:1057
 msgid "Monthly payback suggested"
 msgstr "Betrag der monatlichen Rückzahlung"
 
-#: .\models.py:1049
+#: .\models.py:1064
 msgid "Creditor"
 msgstr "Kreditor"
 
-#: .\models.py:1050
+#: .\models.py:1065
 msgid "Debt"
 msgstr "Schuld"
 
-#: .\models.py:1055
+#: .\models.py:1070
 msgid "Debts mediation"
 msgstr "Schuldnerberatung"
 
-#: .\models.py:1113
+#: .\models.py:1130
 msgid "Required for Households"
 msgstr "verpflichtend für Haushalte"
 
-#: .\models.py:1118
+#: .\models.py:1135
 msgid "Required for Persons"
 msgstr "verpflichtend für Personen"
+
+#: .\models.py:1143
+msgid "Default amount"
+msgstr "Standard-Betrag"
 
 #~ msgid "Account Type"
 #~ msgstr "Kontenart"

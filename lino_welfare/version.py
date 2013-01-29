@@ -1,5 +1,5 @@
 """
-This is the current Lino version number.
+This is the current version number for Lino-Welfare.
 
 After editing this file, also edit the following files:
 

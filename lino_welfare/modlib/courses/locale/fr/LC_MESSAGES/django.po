@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 12:34+0000\n"
+"POT-Creation-Date: 2013-01-29 00:47+0000\n"
 "PO-Revision-Date: 2012-07-05 10:33+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Course"
 msgstr "Cours"
 
-#: .\models.py:262 .\models.py:755
+#: .\models.py:262 .\models.py:754
 msgid "Courses"
 msgstr "Cours"
 
@@ -64,7 +64,7 @@ msgstr "Cours"
 msgid "start date"
 msgstr "Date de début"
 
-#: .\models.py:277 .\models.py:478
+#: .\models.py:277 .\models.py:477
 msgid "Remark"
 msgstr "Remarque"
 
@@ -135,59 +135,59 @@ msgstr ""
 msgid "Course Requests"
 msgstr "Demande de cours"
 
-#: .\models.py:433
+#: .\models.py:432
 msgid "Person"
 msgstr "Personne"
 
-#: .\models.py:439
+#: .\models.py:438
 msgid "Course content"
 msgstr "Contenu"
 
-#: .\models.py:443
+#: .\models.py:442
 msgid "date submitted"
 msgstr "Date déntrée"
 
-#: .\models.py:444
+#: .\models.py:443
 msgid "When this request has been submitted."
 msgstr ""
 
-#: .\models.py:447
+#: .\models.py:446
 msgid "Needed for job search"
 msgstr "cause professionnelle"
 
-#: .\models.py:449
+#: .\models.py:448
 msgid "Check this if the request is needed for job search."
 msgstr ""
 
-#: .\models.py:464
+#: .\models.py:463
 msgid "Course found"
 msgstr "Cours trouvé"
 
-#: .\models.py:483
+#: .\models.py:482
 msgid "date ended"
 msgstr "Date de fin"
 
-#: .\models.py:564
+#: .\models.py:563
 msgid "Participants"
 msgstr ""
 
-#: .\models.py:617
+#: .\models.py:616
 msgid "Candidates"
 msgstr ""
 
-#: .\models.py:659
+#: .\models.py:658
 msgid "Pending Course Requests"
 msgstr ""
 
-#: .\models.py:707
+#: .\models.py:706
 msgid "Age"
 msgstr ""
 
-#: .\models.py:711
+#: .\models.py:710
 msgid "Address"
 msgstr ""
 
-#: .\models.py:721
+#: .\models.py:720
 msgid "unknown age"
 msgstr "age inconnu"
 
