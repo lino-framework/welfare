@@ -393,7 +393,7 @@ class Controller:
             self.applydata(obj,kw['data'])
             dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
             self.validate_and_save(obj)
-            dd.pre_ui_create.send(sender=cc,request=REQUEST)
+            dd.pre_ui_create.send(sender=obj,request=REQUEST)
             #~ changes.log_create(REQUEST,obj)
         else:
             watcher = dd.ChangeWatcher(obj)
@@ -648,9 +648,10 @@ class PAR(Controller):
         else:
             obj = obj.partner_ptr
             #~ changes.log_remove_child(REQUEST,obj,old_class)
-            dd.pre_add_child.send(sender=obj,request=REQUEST,child=old_class)
+            dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
             mti.delete_child(obj,old_class)
             #~ changes.log_add_child(REQUEST,obj,new_class)
+            dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
             newobj = mti.insert_child(obj,new_class)
             
         self.applydata(newobj,data)
@@ -870,18 +871,18 @@ def main(*args,**options):
     if len(args) != 1:
         raise CommandError('Please specify the path to your TIM changelog directory')
     data_dir = args[0]
-    msg = "Started watch_tim %s on %s ..."
+    #~ msg = "Started watch_tim %s on %s ..."
     #~ logger.info(msg,data_dir)
-    dblogger.info(msg,lino.__version__,data_dir)
+    #~ dblogger.info(msg,lino.__version__,data_dir)
     
     settings.LINO.startup() 
         
-    def goodbye():
-        msg = "Stopped watch_tim %s on %s ..."
+    #~ def goodbye():
+        #~ msg = "Stopped watch_tim %s on %s ..."
         #~ logger.info(msg,data_dir)
-        dblogger.info(msg,lino.__version__,data_dir)
-    #~ signal.signal(signal.SIGTERM,on_SIGTERM)
-    atexit.register(goodbye)
+        #~ dblogger.info(msg,lino.__version__,data_dir)
+    #~ # signal.signal(signal.SIGTERM,on_SIGTERM)
+    #~ atexit.register(goodbye)
     
     #~ last_warning = None
     while True:
