@@ -281,36 +281,39 @@ Eine **Begleitung** ist, wenn sich eine bestimmte Person im ÖSHZ
 um einen bestimmten Klienten während einer bestimmten Periode 
 "kümmert".
 
-Die Felder **von** und **bis** einer Begleitung 
-definieren die **Begleitungsperiode**.
+Begleitungen werden nie direkt erzeugt 
+(durch Einfügen in der Tabelle "Begleitungen"),
+sondern indirekt durch das **Zuweisen** eines verfügbaren Begleiters.
+
+Die Felder **von** und **bis** einer Begleitung definieren die **Begleitungsperiode**.
+Das Feld `von` einer Begleitung kann nicht leer sein.
+Ein leeres Feld `bis` einer Begleitung bedeutet, dass das Ende nicht bekannt ist.
 Eine Begleitung ist (an einem gegebenen Datum `heute`) aktiv,
 wenn `von` **<=** `heute` und `bis` entweder leer oder **>=** `heute` ist.
-Das Feld `von` einer Begleitung kann nicht leer sein.
-Ein leeres Feld `bis` einer Begleitung bedeutet: unbefristet
 
-Lino kann pro Klient mehrere Begleitungen haben, 
-
-
-aber in 
-TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
-Deshalb gibt es in Lino das Konzept der **primären** Begleitung.
+Lino kann pro Klient mehrere Begleitungen haben,
+aber in TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
+Deshalb gibt es das Konzept der **primären** Begleitung.
 In Lino kann pro Klient eine Begleitung primär sein.
 Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
-Für importierte Partner wird die primäre Begleitung aus TIM wie folgt synchronisiert:
 
-- von : Erstelldatum des Kunden
-- bis : leer
-- Benutzer : der in TIM angegebene Benutzer
+Für die primäre Begleitung eines importierten Klienten gilt:
 
-Auf importierten Klienten sind diese Felder (auf der *primären* Begleitung) 
-schreibgeschützt. Auf importierten primären Begleitungen kann lediglich 
-der Begleitungsdienst und der Zustand manuell geändert werden.
+- Die Felder `primär`, `von`, `bis` und `Benutzer` sind schreibgeschützt und wie folgt belegt:
+  - `primär` = angekreuzt
+  - `von` = Erstelldatum des Partners in TIM
+  - `bis` = leer
+  - `Benutzer` : der in TIM angegebene Benutzer
 
-Das Ankreuzfeld "primär" kann auf importierten Klienten *nie* bearbeitet werden.
+- Der `Begleitungsdienst` kann manuell geändert werden, 
+  und `watch_tim` geht dann nicht mehr daran.
+  Beim ersten Erstellen gibt `watch_tim` ihnen folgende Werte:
 
+  - `Begleitungsdienst` = Begleitdienst des Begleiters zu diesem Zeitpunkt
+  
 Also man kann auf importierten Klienten in Lino zusätzliche Begleitungen 
 erstellen, aber diese können nicht primär sein.
-An diese sekundären Begleitungen geht watch_tim dann nicht ran.
+An diese sekundären Begleitungen geht `watch_tim` nicht ran.
 
 
 Regeln

@@ -1,4 +1,1 @@
-T:\hgwork\welfare\userman\fr\user\newcomers.rst:7: ERROR: Unknown target name: "lire une carte d'identit?".
-include/screenshots.rst:None: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.3.png
-include/screenshots.rst:None: WARNING: image file not readable: gen/screenshots/debts.Budget.detail.4.png
-T:\hgwork\welfare\userman\fr\releases\index.rst:: WARNING: document isn't included in any toctree
+Interrupted while building, starting debugger:

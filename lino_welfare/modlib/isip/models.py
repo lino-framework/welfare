@@ -359,14 +359,13 @@ class ContractBase(
         
     def update_reminders(self):
         super(ContractBase,self).update_reminders()
-        if self.applies_until:
-            date = cal.DurationUnits.months.add_duration(self.applies_until,-1)
-        else:
-            date = None
+        au = self.update_cal_until()
+        if au:
+            au = cal.DurationUnits.months.add_duration(au,-1)
         cal.update_auto_task(
           self.TASKTYPE_CONTRACT_APPLIES_UNTIL,
           self.user,
-          date,
+          au,
           _("Contract ends in a month"),
           self)
           #~ alarm_value=1,alarm_unit=DurationUnit.months)
