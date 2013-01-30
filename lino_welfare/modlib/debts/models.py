@@ -983,26 +983,26 @@ class BudgetSummary(dd.VirtualTable):
         budget = ar.master_instance
         if budget is None: 
             return
-        yield [u"Monatliche Einkünfte", budget.sum('amount','I',periods=1)]
+        yield ["Monatliche Einkünfte", budget.sum('amount','I',periods=1)]
         yi = budget.sum('amount','I',periods=12)
         if yi:
             yield [
-              (u"Jährliche Einkünfte (%s / 12)" 
+              ("Jährliche Einkünfte (%s / 12)" 
                 % decfmt(yi*12,places=2)), 
               yi]
               
         a = budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
         if a:
-            yield [u"Einkünfte mit sonstiger Periodizität", a]
+            yield ["Einkünfte mit sonstiger Periodizität", a]
             
-        yield [u"Monatliche Ausgaben", -budget.sum('amount','E',periods=1)]
+        yield ["Monatliche Ausgaben", -budget.sum('amount','E',periods=1)]
         a = budget.sum('amount','E',exclude=dict(periods__in=(1,12)))
         if a:
-            yield [u"Ausgaben mit sonstiger Periodizität", -a]
+            yield ["Ausgaben mit sonstiger Periodizität", -a]
         ye = budget.sum('amount','E',periods=12)
         if ye:
             yield [
-              (u"Monatliche Reserve für jährliche Ausgaben (%s / 12)" 
+              ("Monatliche Reserve für jährliche Ausgaben (%s / 12)" 
                 % decfmt(ye*12,places=2)), 
               -ye]
             
@@ -1012,10 +1012,20 @@ class BudgetSummary(dd.VirtualTable):
               #~ u"Monatliche Reserve für sonstige periodische Ausgaben", 
               #~ -ye]
             
-        yield [u"Raten der laufenden Kredite", -budget.sum('monthly_rate','L')]
+        a = budget.sum('monthly_rate','L')
+        if a:
+            yield ["Raten der laufenden Kredite", -a]
         #~ yield [u"Total Kredite / Schulden", budget.sum('amount','L')]
         #~ u"Restbetrag für Kredite und Zahlungsrückstände"
     
+    @classmethod
+    def get_sum_text(self,ar):
+        """
+        Return the text to display on the totals row.
+        """
+        #~ return E.b("Finanzielle Situation")
+        return "Finanzielle Situation"
+        
     @dd.displayfield(_("Description"))
     def desc(self,row,ar):
         return row[0]
