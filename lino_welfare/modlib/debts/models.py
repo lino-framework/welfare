@@ -271,7 +271,7 @@ The total monthly amount available for debts distribution."""))
         #~ kw.update(periods=12)
         #~ return self.sum(fldname,types,**kw)
         
-    def sum(self,fldname,types=None,*args,**kw): 
+    def sum(self,fldname,types=None,exclude=None,*args,**kw): 
         """
         Compute and return the sum of `fldname` (either ``amount`` or `monthly_rate`
         """
@@ -283,7 +283,10 @@ The total monthly amount available for debts distribution."""))
         rv = decimal.Decimal(0)
         #~ for e in Entry.objects.filter(budget=self,**kw).annotate(*sa):
         kw.update(budget=self)
-        for e in Entry.objects.filter(*args,**kw).annotate(models.Sum(fldname)):
+        qs = Entry.objects.filter(*args,**kw)
+        if exclude is not None:
+            qs = qs.exclude(**exclude)
+        for e in qs.annotate(models.Sum(fldname)):
             amount = decimal.Decimal(0)
             for n in fldnames:
                 a = getattr(e,n+'__sum',None)
@@ -981,7 +984,21 @@ class BudgetSummary(dd.VirtualTable):
         if budget is None: 
             return
         yield [u"Monatliche Einkünfte", budget.sum('amount','I',periods=1)]
+        yi = budget.sum('amount','I',periods=12)
+        if yi:
+            yield [
+              (u"Jährliche Einkünfte (%s / 12)" 
+                % decfmt(yi*12,places=2)), 
+              -yi]
+              
+        a = -budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
+        if a:
+            yield [u"Einkünfte mit sonstiger Periodizität", a]
+            
         yield [u"Monatliche Ausgaben", -budget.sum('amount','E',periods=1)]
+        a = -budget.sum('amount','E',exclude=dict(periods__in=(1,12)))
+        if a:
+            yield [u"Ausgaben mit sonstiger Periodizität", a]
         ye = budget.sum('amount','E',periods=12)
         if ye:
             yield [
