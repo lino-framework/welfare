@@ -989,16 +989,16 @@ class BudgetSummary(dd.VirtualTable):
             yield [
               (u"Jährliche Einkünfte (%s / 12)" 
                 % decfmt(yi*12,places=2)), 
-              -yi]
+              yi]
               
-        a = -budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
+        a = budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
         if a:
             yield [u"Einkünfte mit sonstiger Periodizität", a]
             
         yield [u"Monatliche Ausgaben", -budget.sum('amount','E',periods=1)]
-        a = -budget.sum('amount','E',exclude=dict(periods__in=(1,12)))
+        a = budget.sum('amount','E',exclude=dict(periods__in=(1,12)))
         if a:
-            yield [u"Ausgaben mit sonstiger Periodizität", a]
+            yield [u"Ausgaben mit sonstiger Periodizität", -a]
         ye = budget.sum('amount','E',periods=12)
         if ye:
             yield [
