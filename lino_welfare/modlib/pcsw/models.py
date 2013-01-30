@@ -2062,10 +2062,6 @@ class UsersWithClients(dd.VirtualTable):
             for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
                 def w(pg):
                     def func(self,obj,ar):
-                        #~ return MyClientsByGroup.request(
-                          #~ ar.ui,master_instance=pg,subst_user=obj)
-                        #~ return MyClients.request(
-                          #~ ar.ui,subst_user=obj,param_values=dict(group=pg))
                         return IntegClients.request(ar.ui,
                             param_values=dict(group=pg,coached_by=obj,coached_on=today))
                     return func
@@ -2093,7 +2089,8 @@ class UsersWithClients(dd.VirtualTable):
         
         """
         #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-        if ar.get_user().profile.level < dd.UserLevels.admin:
+        u = ar.get_user()
+        if u is None or u.profile.level < dd.UserLevels.admin:
             profiles = [p for p in dd.UserProfiles.items() 
                 if p.integ_level and p.level < dd.UserLevels.admin]
         else:

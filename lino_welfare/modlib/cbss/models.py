@@ -146,8 +146,8 @@ def cbss2civilstate(node):
     if not value:
         return value
     v = pcsw.CivilState.get_by_value(value)
-    if v is None:
-        print "20120601 cbss2civilstate None for ", repr(value)
+    #~ if v is None:
+        #~ print "20120601 cbss2civilstate None for ", repr(value)
     return unicode(v)
     
 def nodetext(node):

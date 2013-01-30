@@ -1,7 +1,7 @@
 Version 1.0.10
 ==============
 
-To be released 2013-01-30 (probably)
+Released 2013-01-30
 
 - Neuer Button "Merge" auf Kienten. 
   Experimentell. Noch nicht auf echten Daten benutzen.
@@ -34,3 +34,14 @@ To be released 2013-01-30 (probably)
   seit 20121207 deaktiviert ist.
 
 - watch_tim wollte aus Klient ohne INSS in Lino eine Person machen.
+
+- :class:`lino_welfare.modlib.isip.models.ContractBase`: `update_reminders` 
+  ignored premature ending (`date_ended`) when creating the reminder "Contracts ends in a month".
+  
+- Im BudgetSummary fehlten jährliche Einnahmen sowie 
+  Ausgaben und Einnahmen "mit sonstiger Periodizität".
+  
+- Der Text der letzten Zeile der Übersicht eines Budgets lautet jetzt nicht 
+  mehr "Total (5 Zeilen)" sondern 
+  
+- Summenzeilen werden jetzt in Fett gedruckt.  

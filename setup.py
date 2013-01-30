@@ -61,6 +61,5 @@ Operating System :: OS Independent
 Topic :: Database :: Front-Ends
 Topic :: Home Automation
 Topic :: Office/Business
-Topic :: Software Development :: Libraries :: Application Frameworks
-""".splitlines()
+Topic :: Software Development :: Libraries :: Application Frameworks""".splitlines()
       )

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2011-2012 Luc Saffre
+## Copyright 2011-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -71,6 +71,18 @@ except ImportError, e:
 from lino_welfare.modlib.cbss.models import NewStyleRequest,SSIN, get_client, \
   CBSSRequestDetail, CBSSRequests, cbss2gender, RequestStates, CBSS_ERROR_MESSAGE
   
+def reply_has_result(reply):
+    if reply.status.value == "NO_RESULT":
+        msg = CBSS_ERROR_MESSAGE % reply.status.code
+        keys = ('value','code','description')
+        msg += '\n'.join([
+            k+' : '+getattr(reply.status,k)
+                for k in keys])
+        for i in reply.status.information:
+            msg += "\n- %s = %s" % (i.fieldName,i.fieldValue)
+        raise Warning(msg)
+  
+  
 class RequestLanguages(dd.ChoiceList):
     verbose_name = _("Language")
 add = RequestLanguages.add_item
@@ -92,7 +104,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
     #~ language = babel.LanguageField()
     language = RequestLanguages.field(blank=True)
     history = models.BooleanField(
-        verbose_name=_("History"),default=False,
+        verbose_name=_("History"),default=True,
         help_text = "Whatever this means.")
         
     def get_print_language(self,pm):
@@ -171,16 +183,9 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         #~ self.response_xml = unicode(reply)
         reply = self.get_service_reply()
         self.ticket = reply.informationCBSS.ticketCBSS
-        if reply.status.value == "NO_RESULT":
-            msg = CBSS_ERROR_MESSAGE % reply.status.code
-            keys = ('value','code','description')
-            msg += '\n'.join([
-                k+' : '+getattr(reply.status,k)
-                    for k in keys])
-            for i in reply.status.information:
-                msg += "\n- %s = %s" % (i.fieldName,i.fieldValue)
-            self.status = RequestStates.warnings
-            raise Warning(msg)
+        self.status = RequestStates.warnings
+        
+        reply_has_result(reply)
             
         self.status = RequestStates.ok
         #~ self.response_xml = str(res)
@@ -1343,8 +1348,8 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
         reply = rti.get_service_reply()
         if reply is None:
             return
-            
-            
+        reply_has_result(reply)
+        
         res = reply.rrn_it_implicit
         
         for name, node in res:

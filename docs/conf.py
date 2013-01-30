@@ -12,14 +12,16 @@
 # serve to show the default.
 
 import sys, os
-import lino_welfare
-from lino.utils.sphinxconf import setup
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
 """
 Trigger loading of Djangos model cache in order to avoid side effects that 
 would occur when this happens later while importing one of the models modules.
 """
+
+import lino_welfare
+from lino.utils.sphinxconf import setup
+
 from lino.core import kernel
 kernel.analyze_models()
 
