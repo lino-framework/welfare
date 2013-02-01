@@ -1169,32 +1169,32 @@ class Client(Person):
     overview.return_type = dd.HtmlBox(_("Overview"))
     
     @dd.displayfield(_("Residence permit"))
-    def residence_permit(self,rr):
+    def residence_permit(self,ar):
         kv = dict(type=settings.LINO.site_config.residence_permit_upload_type)
-        r = rr.spawn(uploads.UploadsByController,
+        r = ar.spawn(uploads.UploadsByController,
               master_instance=self,
               known_values=kv)
-        return rr.renderer.quick_upload_buttons(r)
+        return ar.renderer.quick_upload_buttons(r)
         #~ rrr = uploads.UploadsByPerson().request(rr.ui,master_instance=self,known_values=kv)
         #~ return rr.ui.quick_upload_buttons(rrr)
     #~ residence_permit.return_type = dd.DisplayField(_("Residence permit"))
     
     @dd.displayfield(_("Work permit"))
-    def work_permit(self,rr):
+    def work_permit(self,ar):
         kv = dict(type=settings.LINO.site_config.work_permit_upload_type)
-        r = rr.spawn(uploads.UploadsByController,
+        r = ar.spawn(uploads.UploadsByController,
               master_instance=self,
               known_values=kv)
-        return rr.renderer.quick_upload_buttons(r)
+        return ar.renderer.quick_upload_buttons(r)
     #~ work_permit.return_type = dd.DisplayField(_("Work permit"))
     
     @dd.displayfield(_("driving licence"))
     #~ @dd.virtualfield(dd.DisplayField(_("driving licence")))
-    def driving_licence(self,rr):
+    def driving_licence(self,ar):
         kv = dict(type=settings.LINO.site_config.driving_licence_upload_type)
-        r = rr.spawn(uploads.UploadsByController,
+        r = ar.spawn(uploads.UploadsByController,
               master_instance=self,known_values=kv)
-        return rr.renderer.quick_upload_buttons(r)
+        return ar.renderer.quick_upload_buttons(r)
     #~ driving_licence.return_type = dd.DisplayField(_("driving licence"))
     
     def get_active_contract(self):
