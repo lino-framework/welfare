@@ -179,7 +179,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
                 msg += unicode(e.document)
                 self.status = RequestStates.failed
                 raise Warning(msg)
-            self.response_xml = reply
+            self.response_xml = reply.decode('utf-8') # 20130201
         else:
             self.response_xml = simulate_response
             
