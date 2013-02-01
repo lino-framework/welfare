@@ -517,7 +517,7 @@ class Contract(ContractBase):
         + " stages goals duties_asd duties_dsbe duties_company duties_person")
     
     @classmethod
-    def site_setup(cls,lino):
+    def on_analyze(cls,lino):
         """
         Here's how to override the default verbose_name of a field.
         """
@@ -532,7 +532,7 @@ class Contract(ContractBase):
             'duties_asd duties_person '
             'user user_asd exam_policy '
             'date_decided date_issued ')
-        #~ super(Contract,cls).site_setup(lino)
+        super(Contract,cls).on_analyze(lino)
         
     def disabled_fields(self,ar):
         #~ if self.must_build:

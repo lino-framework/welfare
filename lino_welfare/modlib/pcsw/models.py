@@ -296,8 +296,8 @@ für neue Operationen nicht benutzt werden können.""")
     hidden_columns = 'created modified activity bank_account1 bank_account2'
     
     @classmethod
-    def site_setup(cls,site):
-        super(Partner,cls).site_setup(site)
+    def on_analyze(cls,site):
+        super(Partner,cls).on_analyze(site)
         cls.declare_imported_fields('''
           created modified
           name remarks region zip_code city country 
@@ -353,8 +353,8 @@ class Person(Partner,contacts.Person,mixins.Born,Printable):
         return self.language
         
     @classmethod
-    def site_setup(cls,site):
-        super(Person,cls).site_setup(site)
+    def on_analyze(cls,site):
+        super(Person,cls).on_analyze(site)
         cls.declare_imported_fields(
           '''name first_name last_name title birth_date gender is_client
           ''')
@@ -918,8 +918,8 @@ class Client(Person):
 
 
     @classmethod
-    def site_setup(cls,site):
-        super(Client,cls).site_setup(site)
+    def on_analyze(cls,site):
+        super(Client,cls).on_analyze(site)
         cls.declare_imported_fields(
           '''remarks2
           zip_code city country street street_no street_box 
@@ -1314,8 +1314,8 @@ class Household(Partner,households.Household):
         app_label = 'households'
         
     #~ @classmethod
-    #~ def site_setup(cls,site):
-        #~ super(Household,cls).site_setup(site)
+    #~ def on_analyze(cls,site):
+        #~ super(Household,cls).on_analyze(site)
         #~ cls.declare_imported_fields('type')
           
     def disable_delete(self,ar):
@@ -1346,10 +1346,10 @@ class Company(Partner,contacts.Company):
         
         
     @classmethod
-    def site_setup(cls,site):
+    def on_analyze(cls,site):
         #~ if cls.model is None:
             #~ raise Exception("%r.model is None" % cls)
-        super(Company,cls).site_setup(site)
+        super(Company,cls).on_analyze(site)
         cls.declare_imported_fields(
             '''name 
             vat_id prefix
@@ -2486,8 +2486,8 @@ during a given period.
 Enabling this field will automatically make the other coachings non-primary."""))
     
     @classmethod
-    def site_setup(cls,site):
-        super(Coaching,cls).site_setup(site)
+    def on_analyze(cls,site):
+        super(Coaching,cls).on_analyze(site)
         cls.declare_imported_fields('''client user primary start_date end_date''')
         
     def disabled_fields(self,ar):

@@ -50,6 +50,7 @@ from lino import mixins
 from lino import dd
 #~ from lino.utils import Warning
 from lino.utils import join_words
+from lino.utils import assert_pure
 from lino.utils import AttrDict, IncompleteDate
 from lino.core.modeltools import obj2str
 
@@ -118,13 +119,15 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         
         
     def get_service_reply(self,**kwargs):
+        assert_pure(self.response_xml)
         client = get_client(self)
         meth = client.service.retrieveTI
         clientclass = meth.clientclass(kwargs)
         client = clientclass(meth.client, meth.method)
         #~ print 20120613, portSelector[0]
         #~ print '20120613b', dir(client)
-        return client.succeeded(client.method.binding.input, self.response_xml.encode('utf-8'))
+        s = self.response_xml.encode('utf-8')
+        return client.succeeded(client.method.binding.input,s)
         
     
     def execute_newstyle(self,client,infoCustomer,simulate_response):
@@ -1356,7 +1359,8 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
             #~ print name, node.__class__
             m = getattr(RowHandlers,node.__class__.__name__,None)
             if m is None:
-                raise Exception("No handler for %s (%s)" % (name, node.__class__.__name__))
+                raise Exception("No handler for %s (%s)" 
+                    % (name, node.__class__.__name__))
             else:
                 for row in m(node,name): yield row
             

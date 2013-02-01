@@ -526,7 +526,7 @@ class Contract(isip.ContractBase):
         super(Contract,self).full_clean(*args,**kw)
         
     @classmethod
-    def site_setup(cls,lino):
+    def on_analyze(cls,lino):
         """
         Here's how to override the default verbose_name of a field.
         """
@@ -540,7 +540,7 @@ class Contract(isip.ContractBase):
             'reference_person responsibilities '
             'user user_asd exam_policy '
             'date_decided date_issued ')
-        #~ super(Contract,cls).site_setup(lino)
+        super(Contract,cls).on_analyze(lino)
 
 class ContractDetail(dd.FormLayout):
     box1 = """

@@ -282,7 +282,6 @@ def site_setup(site):
 
 def customize_siteconfig():
 
-
     from lino.models import SiteConfig
         
     dd.inject_field(SiteConfig,
@@ -292,7 +291,7 @@ def customize_siteconfig():
             verbose_name=_("Skills Property Group"),
             related_name='skills_sites'),
         """The property group to be used as master 
-        for the SkillsByPerson report.""")
+        for the SkillsByPerson table.""")
     dd.inject_field(SiteConfig,
         'propgroup_softskills',
         models.ForeignKey('properties.PropGroup',
@@ -301,7 +300,7 @@ def customize_siteconfig():
             related_name='softskills_sites',
             ),
         """The property group to be used as master 
-        for the SoftSkillsByPerson report."""
+        for the SoftSkillsByPerson table."""
         )
     dd.inject_field(SiteConfig,
         'propgroup_obstacles',
@@ -311,7 +310,7 @@ def customize_siteconfig():
             related_name='obstacles_sites',
             ),
         """The property group to be used as master 
-        for the ObstaclesByPerson report."""
+        for the ObstaclesByPerson table."""
         )
 
 
