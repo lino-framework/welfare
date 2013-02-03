@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012 Luc Saffre
+## Copyright 2012-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -79,7 +79,7 @@ def objects():
     for i in range(7):
         yield newcomers.Competence(user=USERS.pop(),faculty=FACULTIES.pop())
         
-    for p in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.invalid):
+    for p in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.former):
         p.faculty = FACULTIES.pop()
         p.save()
 

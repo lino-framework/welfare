@@ -471,8 +471,8 @@ War mal begleitet, ist es aber jetzt nicht mehr.
 Es existiert keine *aktive* Begleitung.
 (TIM: Attribut `W (Warnung bei Auswahl)` oder Partnerart `I (Inaktive)`)""")
 
-add('60', _("Invalid"),'invalid',help_text=u"""\
-Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
+#~ add('60', _("Invalid"),'invalid',help_text=u"""\
+#~ Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
 
 
 #~ class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
@@ -493,7 +493,8 @@ add('30',_("Client did not return"))
         
 class RefuseClient(dd.ChangeStateAction):
     label = _("Refuse")
-    required = dict(states='newcomer invalid',user_groups='newcomers')
+    #~ required = dict(states='newcomer invalid',user_groups='newcomers')
+    required = dict(states='newcomer',user_groups='newcomers')
     
     #~ icon_file = 'flag_blue.png'
     help_text=_("Refuse this newcomer request.")
@@ -616,7 +617,7 @@ def card2client(data):
     def sex2gender(sex):
         if sex == 'M' : return mixins.Genders.male
         if sex in 'FVW' : return mixins.Genders.female
-        logger.warning("%s : invalid sex code %r",msg1,sex)
+        logger.warning("%s : invalid gender code %r",msg1,sex)
     kw.update(gender=sex2gender(data['sex']))
     
     if False:
@@ -3089,12 +3090,14 @@ customize_users()
 
 def setup_workflows(site):
 
-    ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
+    #~ ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
+    ClientStates.newcomer.add_workflow(states='refused coached former',user_groups='newcomers')
     ClientStates.refused.add_workflow(RefuseClient)
     #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
     #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
     ClientStates.former.add_workflow(_("Former"),
-        states='coached invalid',
+        #~ states='coached invalid',
+        states='coached',
         user_groups='newcomers')
     #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 

@@ -502,10 +502,12 @@ class PAR(Controller):
                 elif data['IDPRT'] == 'I':
                     obj.client_state = pcsw.ClientStates.former
                 #~ 
-                elif obj.national_id and is_valid_ssin(obj.national_id):
-                    obj.client_state = pcsw.ClientStates.coached
                 else:
-                    obj.client_state = pcsw.ClientStates.invalid
+                    obj.client_state = pcsw.ClientStates.coached
+                #~ elif obj.national_id and is_valid_ssin(obj.national_id):
+                    #~ obj.client_state = pcsw.ClientStates.coached
+                #~ else:
+                    #~ obj.client_state = pcsw.ClientStates.invalid
                 #~ if data.has_key('NB1'):
                     #~ obj.gesdos_id = data['NB1']
                 #~ if not obj.national_id:
