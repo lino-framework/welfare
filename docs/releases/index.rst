@@ -1,12 +1,13 @@
 Releases
 ========
 
-.. py2rst:
+.. py2rst::
 
   import lino_welfare
   v = lino_welfare.__version__
   v = v.replace('+','')
-  print("The current stable release is :doc:`%s`. We're currently working on :doc:`coming`." % v)
+  print("The current stable release is :doc:`%s`." % v)
+  print("We're currently working on :doc:`coming`.")
   
 
 .. toctree::
@@ -23,7 +24,8 @@ Older releases
    :maxdepth: 1
    :glob:
 
-   1.*
+   1.0.?
+   1.0.1?
 
 
 

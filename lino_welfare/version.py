@@ -1,16 +1,25 @@
-"""
-This is the current version number for Lino-Welfare.
+# -*- coding: UTF-8 -*-
+## Copyright 2002-2013 Luc Saffre
+## This file is part of the Lino project.
+## Lino is free software; you can redistribute it and/or modify 
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 3 of the License, or
+## (at your option) any later version.
+## Lino is distributed in the hope that it will be useful, 
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+## GNU General Public License for more details.
+## You should have received a copy of the GNU General Public License
+## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-After editing this file, also edit the following files:
+__version__ = '1.0.11'
 
-- Releases overview: edit ../docs/releases/index.rst
-- Release notes : ../docs/releases/<__version__>.rst
+#~ Note that this module may not have a docstring because any 
+#~ global variable defined here will override the global 
+#~ namespace of lino_welfare/__init__.py who includes it with execfile
+#~ 
+#~ After editing this file, also edit the following files:
+#~ 
+#~ - ../docs/releases/index.rst
+#~ - ../docs/releases/<__version__>.rst
 
-Related public URLs:
-
-- http://lino-framework.org/releases/
-- http://pypi.python.org/pypi/lino
-
-
-"""
-__version__ = '1.0.10+'
