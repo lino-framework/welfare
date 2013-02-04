@@ -402,6 +402,7 @@ The raw XML response received.
         Note that also the `user` will be set to the user who asked to duplicate
         (because this is a subclass of :mod:`lino.mixins.UserAuthored`.
         """
+        self.user = ar.get_user()
         self.debug_messages = ''
         self.info_messages = ''
         self.ticket = ''
@@ -409,7 +410,7 @@ The raw XML response received.
         self.request_xml = ''
         self.sent = None
         #~ self.status = RequestStates.new
-        self.status = RequestStates.blank_item
+        self.status = '' # RequestStates.blank_item
         self.environment = ''
         super(CBSSRequest,self).on_duplicate(ar,master)
         

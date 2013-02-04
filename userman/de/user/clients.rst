@@ -225,9 +225,6 @@ Der Bearbeitungszustand eines Klienten kann sein:
   oder die Partnerart `I (Inaktive)`.
 
   
-- **Ungültig** :
-  Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige INSS.
-  
   
   
 .. graphviz:: 
@@ -238,11 +235,9 @@ Der Bearbeitungszustand eines Klienten kann sein:
       refused -> newcomer [label="Neuantrag wiederholen"];
       coached -> newcomer [label="Begleitung abbrechen"];
       coached -> former [label="Begleitung beenden"];
-      invalid -> newcomer [label="INSS wurde korrigiert"];
       
       newcomer [label="Neuantrag"];
       refused [label="Abgelehnt"];
-      invalid [label="Ungültig"];
       former [label="Ehemalig"];
       coached [label="Begleitet"];
    }
