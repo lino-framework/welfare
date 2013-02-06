@@ -2652,7 +2652,7 @@ def customize_siteconfig():
     
     """
     
-    from lino.models import SiteConfig
+    from lino.web.models import SiteConfig
     dd.inject_field(SiteConfig,
         'job_office',
         #~ models.ForeignKey("contacts.Company",
@@ -2912,7 +2912,7 @@ def site_setup(site):
     """)
     
     
-    site.modules.lino.SiteConfigs.set_detail_layout("""
+    site.modules.web.SiteConfigs.set_detail_layout("""
     site_company system_note_type default_build_method 
     next_partner_id:20 job_office
     propgroup_skills propgroup_softskills propgroup_obstacles

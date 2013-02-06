@@ -1636,7 +1636,8 @@ class MyManageAccessRequests(ManageAccessRequests,mixins.ByUser):
 
 from lino_welfare.modlib.cbss.tx25 import *
     
-from lino.models import SiteConfig
+from lino.web.models import SiteConfig
+
 dd.inject_field(SiteConfig,
     'sector',
     models.ForeignKey(Sector,
@@ -1824,7 +1825,7 @@ def site_setup(self):
     #~ self.modules.contacts.AllPersons.add_detail_tab('cbss',"cbssrequests",MODULE_LABEL,required_user_groups=['cbss'])
     #~ 
     
-    self.modules.lino.SiteConfigs.add_detail_tab('cbss',"""
+    self.modules.web.SiteConfigs.add_detail_tab('cbss',"""
     cbss_org_unit sector ssdn_user_id ssdn_email
     cbss_http_username cbss_http_password
     """,MODULE_LABEL,required=dict(user_groups='cbss'))
