@@ -12,8 +12,6 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-__version__ = '1.0.11'
-
 #~ Note that this module may not have a docstring because any 
 #~ global variable defined here will override the global 
 #~ namespace of lino_welfare/__init__.py who includes it with execfile
@@ -22,4 +20,6 @@ __version__ = '1.0.11'
 #~ 
 #~ - ../docs/releases/index.rst
 #~ - ../docs/releases/<__version__>.rst
+
+__version__ = '1.0.12'
 
