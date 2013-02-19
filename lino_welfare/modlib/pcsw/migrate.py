@@ -535,9 +535,9 @@ def migrate_from_1_0_10(globals_dict):
 
 def migrate_from_1_0_11(globals_dict):
     """
-    - Moved models TextFieldTemplate, SiteConfig and HelpText from "lino" to "web"
+    - The app_label of TextFieldTemplate, SiteConfig and HelpText is no longer "lino" but "ui"
     """
-    globals_dict.update(lino_TextFieldTemplate = resolve_model("web.TextFieldTemplate"))
-    globals_dict.update(lino_SiteConfig = resolve_model("web.SiteConfig"))
-    globals_dict.update(lino_HelpText = resolve_model("web.HelpText"))
+    globals_dict.update(lino_TextFieldTemplate = resolve_model("ui.TextFieldTemplate"))
+    globals_dict.update(lino_SiteConfig = resolve_model("ui.SiteConfig"))
+    globals_dict.update(lino_HelpText = resolve_model("ui.HelpText"))
     return '1.0.12'

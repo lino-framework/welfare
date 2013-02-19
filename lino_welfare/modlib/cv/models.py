@@ -282,7 +282,7 @@ def site_setup(site):
 
 def customize_siteconfig():
 
-    from lino.web.models import SiteConfig
+    from lino.ui.models import SiteConfig
         
     dd.inject_field(SiteConfig,
         'propgroup_skills',

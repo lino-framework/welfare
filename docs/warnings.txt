@@ -1,3 +1,10 @@
+T:\hgwork\welfare\docs\releases\1.0.10.rst:6: ERROR: Unknown interpreted text role "linodoc".
+T:\hgwork\welfare\docs\admin\install.rst:11: WARNING: unknown document: /releases
+T:\hgwork\welfare\docs\admin\testlauf.rst:59: WARNING: xfile reference target not found: system.log
+T:\hgwork\welfare\docs\admin\testlauf.rst:59: WARNING: xfile reference target not found: system.log
+T:\hgwork\welfare\docs\admin\testlauf.rst:59: WARNING: unknown document: /blog/2011/0406
+T:\hgwork\welfare\docs\admin\testlauf.rst:72: WARNING: unknown document: /blog/2011/0406
+T:\hgwork\welfare\docs\admin\testlauf.rst:88: WARNING: unknown document: /blog/2011/0406
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:39: WARNING: py:class reference target not found: ExecuteRequest
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:60: WARNING: py:mod reference target not found: lino.mixins.UserAuthored
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:70: WARNING: py:class reference target not found: NotImplementedError
@@ -6,7 +13,40 @@ t:\hgwork\welfare\lino_welfare\modlib\cbss\models.py:docstring of lino_welfare.m
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:12: WARNING: py:class reference target not found: RowHandlers
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:18: WARNING: unknown document: /blog/2012/0603
 T:\hgwork\welfare\docs\autodoc\lino_welfare.cbss.rst:20: WARNING: term not in glossary: mod_wsgi
+T:\hgwork\welfare\docs\autodoc\lino_welfare.courses.rst:13: WARNING: py:class reference target not found: Candidate
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.pcsw.models.CompanyDetail
+<autodoc>:1: WARNING: py:class reference target not found: lino.modlib.contacts.models.Companies
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests
+t:\hgwork\welfare\lino_welfare\modlib\courses\models.py:docstring of lino_welfare.modlib.courses.models.CourseRequestsByPerson:1: WARNING: py:class reference target not found: lino.modlib.pcsw.models.Client
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.courses.models.CourseRequests
+t:\hgwork\welfare\lino_welfare\modlib\cv\models.py:docstring of lino_welfare.modlib.cv.models.PersonProperty:1: WARNING: py:mod reference target not found: lino.modlib.properties.models.Property
+t:\hgwork\welfare\lino_welfare\modlib\cv\models.py:docstring of lino_welfare.modlib.cv.models.PersonProperty:1: WARNING: py:class reference target not found: lino_welfare.modlib.newcomers.models.Client
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.cv.models.PersonProperties
+t:\hgwork\welfare\lino_welfare\modlib\cv\models.py:docstring of lino_welfare.modlib.cv.models.PropsByPerson:1: WARNING: py:class reference target not found: lino_welfare.modlib.newcomers.models.Client
+T:\hgwork\welfare\docs\autodoc\lino_welfare.debts.rst:17: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.ActorBase
+T:\hgwork\welfare\docs\autodoc\lino_welfare.debts.rst:17: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.SequencedBudgetComponent
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.Actors
+t:\hgwork\welfare\lino_welfare\modlib\debts\models.py:docstring of lino_welfare.modlib.debts.models.Budgets:1: WARNING: py:class reference target not found: BudgetsByPartner
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.Entries
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.SequencedBudgetComponent
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.EntriesByType
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.EntriesByType
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.debts.models.ActorBase
+<autodoc>:1: WARNING: py:class reference target not found: django.db.models.fields.DecimalField
+t:\hgwork\welfare\lino_welfare\modlib\debts\models.py:docstring of lino_welfare.modlib.debts.models.PrintAssetsByBudget:1: WARNING: py:class reference target not found: AssetsByBudget
+t:\hgwork\welfare\lino_welfare\modlib\debts\models.py:docstring of lino_welfare.modlib.debts.models.PrintExpensesByBudget:1: WARNING: py:class reference target not found: ExpensesByBudget
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.Contracts
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.Contracts
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.Contracts
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.Experiences
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.HistoryByPerson
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.pcsw.models.CompanyDetail
+<autodoc>:1: WARNING: py:class reference target not found: lino.modlib.contacts.models.Companies
+t:\hgwork\welfare\lino_welfare\modlib\jobs\models.py:docstring of lino_welfare.modlib.jobs.models.SectorFunctionByOffer:3: WARNING: py:attr reference target not found: lino.dd.Table.master_key
+<autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.jobs.models.HistoryByPerson
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:8: WARNING: py:mod reference target not found: lino.releases
+T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:14: WARNING: py:class reference target not found: lino.ui.Lino
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:22: WARNING: py:func reference target not found: lino.modlib.cal.update_reminders
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:7: WARNING: unknown document: /pcsw/models
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:51: WARNING: py:class reference target not found: lino.core.actions.BeIdReadCardAction
@@ -15,6 +55,7 @@ t:\hgwork\welfare\lino_welfare\modlib\pcsw\models.py:docstring of lino_welfare.m
 <autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.pcsw.models.ImportedFields
 t:\hgwork\welfare\lino_welfare\modlib\pcsw\models.py:docstring of lino_welfare.modlib.pcsw.models.CoachingsByClient:1: WARNING: py:class reference target not found: Clients
 <autodoc>:1: WARNING: py:class reference target not found: lino_welfare.modlib.pcsw.models.ImportedFields
+t:\hgwork\welfare\lino_welfare\modlib\pcsw\models.py:docstring of lino_welfare.modlib.pcsw.models.customize_siteconfig:1: WARNING: py:class reference target not found: lino.models.SiteConfig
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:4: WARNING: unknown document: /topics/dumpy
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:8: WARNING: py:mod reference target not found: lino_welfare.settings.Lino
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:29: WARNING: unknown document: /blog/2011/0915
@@ -45,3 +86,12 @@ T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:86: WARNING: unknown doc
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:101: WARNING: unknown document: /blog/2011/1222
 T:\hgwork\welfare\docs\autodoc\lino_welfare.welfare.rst:108: WARNING: unknown document: /blog/2011/1223
 t:\hgwork\welfare\lino_welfare\modlib\pcsw\tests\pcsw_demo_tests.py:docstring of lino_welfare.modlib.pcsw.tests.pcsw_demo_tests.test016:1: WARNING: unknown document: /blog/2011/1223
+T:\hgwork\welfare\docs\releases\1.0.0.rst:95: WARNING: unknown document: /user/clients
+T:\hgwork\welfare\docs\releases\1.0.4.rst:6: WARNING: unknown document: /blog/2012/1127
+T:\hgwork\welfare\docs\releases\1.0.4.rst:10: WARNING: unknown document: /blog/2012/1127
+T:\hgwork\welfare\docs\releases\1.0.4.rst:14: WARNING: unknown document: /blog/2012/1127
+T:\hgwork\welfare\docs\releases\1.0.4.rst:24: WARNING: unknown document: /blog/2012/1127
+T:\hgwork\welfare\docs\releases\1.0.4.rst:31: WARNING: py:class reference target not found: lino_welfare.modlib.isip.models.ExamPolicies
+T:\hgwork\welfare\docs\releases\1.0.4.rst:31: WARNING: unknown document: /blog/2012/1126
+T:\hgwork\welfare\docs\releases\1.0.9.rst:16: WARNING: py:attr reference target not found: lino.Lino.show_internal_field_names
+T:\hgwork\welfare\docs\todo.rst:4: WARNING: unknown document: /topics/summary_fields

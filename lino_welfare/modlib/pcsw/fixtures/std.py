@@ -261,7 +261,7 @@ def objects():
       en=u"Autre aide sociale",
       ))
     
-    I = Instantiator('web.HelpText','content_type field help_text').build
+    I = Instantiator('ui.HelpText','content_type field help_text').build
     
     Client = resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)

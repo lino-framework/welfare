@@ -2458,7 +2458,8 @@ class CoachingTypes(dd.Table):
 
 
 #~ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
-class Coaching(mixins.UserAuthored,ImportedFields):
+#~ class Coaching(mixins.UserAuthored,ImportedFields):
+class Coaching(dd.Model,ImportedFields):
     """
 A Coaching (Begleitung, accompagnement) 
 is when a Client is being coached by a User (a social assistant) 
@@ -2469,6 +2470,13 @@ during a given period.
     class Meta:
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
+        
+    user = models.ForeignKey(settings.LINO.user_model,
+        verbose_name=_("Coach"),
+        related_name="%(app_label)s_%(class)s_set_by_user",
+        #~ blank=True,null=True
+        )
+        
     allow_cascaded_delete = ['client']
     workflow_state_field = 'state'
     
@@ -2489,7 +2497,8 @@ Enabling this field will automatically make the other coachings non-primary.""")
     @classmethod
     def on_analyze(cls,site):
         super(Coaching,cls).on_analyze(site)
-        cls.declare_imported_fields('''client user primary start_date end_date''')
+        #~ cls.declare_imported_fields('''client user primary start_date end_date''')
+        cls.declare_imported_fields('''client user primary end_date''')
         
     def disabled_fields(self,ar):
         if settings.LINO.is_imported_partner(self.client):
@@ -2567,7 +2576,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
         for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
             yield "%s <%s>" % (unicode(u),u.email)
             
-dd.update_field(Coaching,'user',verbose_name=_("Coach"))
+#~ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
     """
@@ -2615,7 +2624,7 @@ class CoachingsByClient(Coachings):
     #~ debug_permissions = 20121016
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date user primary type id'
+    column_names = 'start_date end_date user:12 primary type:12 id'
     hidden_columns = 'id'
     auto_fit_column_widths = True
 
@@ -2623,8 +2632,8 @@ class CoachingsByUser(Coachings):
     master_key = 'user'
     column_names = 'start_date end_date client type primary id'
 
-class MyCoachings(Coachings,mixins.ByUser):
-    column_names = 'start_date end_date client type primary id'
+#~ class MyCoachings(Coachings,mixins.ByUser):
+    #~ column_names = 'start_date end_date client type primary id'
 
 #~ class MySuggestedCoachings(MyCoachings):
     #~ label = _("Suggested coachings")
@@ -2652,7 +2661,7 @@ def customize_siteconfig():
     
     """
     
-    from lino.web.models import SiteConfig
+    from lino.ui.models import SiteConfig
     dd.inject_field(SiteConfig,
         'job_office',
         #~ models.ForeignKey("contacts.Company",
@@ -2912,7 +2921,7 @@ def site_setup(site):
     """)
     
     
-    site.modules.web.SiteConfigs.set_detail_layout("""
+    site.modules.ui.SiteConfigs.set_detail_layout("""
     site_company system_note_type default_build_method 
     next_partner_id:20 job_office
     propgroup_skills propgroup_softskills propgroup_obstacles

@@ -1636,7 +1636,7 @@ class MyManageAccessRequests(ManageAccessRequests,mixins.ByUser):
 
 from lino_welfare.modlib.cbss.tx25 import *
     
-from lino.web.models import SiteConfig
+from lino.ui.models import SiteConfig
 
 dd.inject_field(SiteConfig,
     'sector',
@@ -1738,21 +1738,21 @@ MODULE_LABEL = _("CBSS")
 #~ settings.LINO.add_user_group('cbss',MODULE_LABEL)
 #~ settings.LINO.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
 
-dd.inject_field('countries.City',
-    'inscode',
-    models.CharField(
-        max_length=5,
-        verbose_name=_("INS code"),
-        blank=True,
-    ))
+#~ dd.inject_field('countries.City',
+    #~ 'inscode',
+    #~ models.CharField(
+        #~ max_length=5,
+        #~ verbose_name=_("INS code"),
+        #~ blank=True,
+    #~ ))
         
-dd.inject_field('countries.Country',
-    'inscode',
-    models.CharField(
-        max_length=3,
-        verbose_name=_("INS code"),
-        blank=True,
-    ))
+#~ dd.inject_field('countries.Country',
+    #~ 'inscode',
+    #~ models.CharField(
+        #~ max_length=3,
+        #~ verbose_name=_("INS code"),
+        #~ blank=True,
+    #~ ))
         
 
 
@@ -1825,7 +1825,7 @@ def site_setup(self):
     #~ self.modules.contacts.AllPersons.add_detail_tab('cbss',"cbssrequests",MODULE_LABEL,required_user_groups=['cbss'])
     #~ 
     
-    self.modules.web.SiteConfigs.add_detail_tab('cbss',"""
+    self.modules.ui.SiteConfigs.add_detail_tab('cbss',"""
     cbss_org_unit sector ssdn_user_id ssdn_email
     cbss_http_username cbss_http_password
     """,MODULE_LABEL,required=dict(user_groups='cbss'))

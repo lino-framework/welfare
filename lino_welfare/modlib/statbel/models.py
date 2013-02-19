@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012-2013 Luc Saffre
+## Copyright 2011-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -13,13 +13,30 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Loads all cbss specific default data.
+This just adds `inscode` fields to `countries.City` 
+and `countries.Country`.
+
 """
 
-from lino_welfare.modlib.cbss.fixtures import sectors, purposes
-from lino_welfare.modlib.statbel.fixtures import inscodes
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
-def objects():
-    yield sectors.objects()
-    yield purposes.objects()
-    yield inscodes.objects()
+from lino import dd
+
+
+dd.inject_field('countries.City',
+    'inscode',
+    models.CharField(
+        max_length=5,
+        verbose_name=_("INS code"),
+        blank=True,
+    ))
+        
+dd.inject_field('countries.Country',
+    'inscode',
+    models.CharField(
+        max_length=3,
+        verbose_name=_("INS code"),
+        blank=True,
+    ))
+        

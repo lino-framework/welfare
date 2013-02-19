@@ -272,9 +272,11 @@ Im Reiter :guilabel:`Sonstiges` gibt es drei Ankreuzfelder
 Begleitungen
 ============
 
-Eine **Begleitung** ist, wenn sich eine bestimmte Person im ÖSHZ 
+Eine **Begleitung** ist, wenn sich ein bestimmter Mitarbeiter des ÖSHZ 
 um einen bestimmten Klienten während einer bestimmten Periode 
 "kümmert".
+Ein Klient kann mehrere Begleitungen auf einmal haben, 
+z.B. eine im ASD und eine andere im DSBE.
 
 Begleitungen werden nie direkt erzeugt 
 (durch Einfügen in der Tabelle "Begleitungen"),
@@ -292,19 +294,22 @@ Deshalb gibt es das Konzept der **primären** Begleitung.
 In Lino kann pro Klient eine Begleitung primär sein.
 Diese entspricht dem Feld `PAR->IdUsr` aus TIM.
 
-Für die primäre Begleitung eines importierten Klienten gilt:
+Für die primäre Begleitung eines *importierten* Klienten gilt:
 
-- Die Felder `primär`, `von`, `bis` und `Benutzer` sind schreibgeschützt und wie folgt belegt:
+- Die Felder `primär`, `bis` und `Benutzer` sind schreibgeschützt und wie folgt belegt:
+
   - `primär` = angekreuzt
-  - `von` = Erstelldatum des Partners in TIM
   - `bis` = leer
   - `Benutzer` : der in TIM angegebene Benutzer
+  
+  Diese Angaben können also nur über TIM verändert werden.
 
-- Der `Begleitungsdienst` kann manuell geändert werden, 
+- Die Felder `von` und `Dienst` dagegen können manuell geändert werden, 
   und `watch_tim` geht dann nicht mehr daran.
   Beim ersten Erstellen gibt `watch_tim` ihnen folgende Werte:
 
-  - `Begleitungsdienst` = Begleitdienst des Begleiters zu diesem Zeitpunkt
+  - `Dienst` = Begleitdienst des Begleiters zu diesem Zeitpunkt
+  - `von` = Erstelldatum des Partners in TIM
   
 Also man kann auf importierten Klienten in Lino zusätzliche Begleitungen 
 erstellen, aber diese können nicht primär sein.
@@ -326,10 +331,6 @@ Regeln
 - Nur Benutzer mit einem unleeren Feld 
   `Begleitungsart (Dienst)` in den Benutzereinstellungen
   dürfen manuell Begleitungen erstellen.
-  
-- Wenn man eine Begleitung manuell erstellt, 
-  wird `Beginndatum` aufs Tagesdatum 
-  und `Begleitungsart (Dienst)` auf die des Benutzers ausgefüllt.
   
 - Importierte Klienten haben eine importierte primäre 
   Begleitung, die nicht geändert werden kann.

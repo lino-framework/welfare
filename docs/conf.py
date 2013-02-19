@@ -18,13 +18,9 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
 Trigger loading of Djangos model cache in order to avoid side effects that 
 would occur when this happens later while importing one of the models modules.
 """
+from django.conf import settings
 
-import lino_welfare
 from lino.utils.sphinxconf import setup
-
-from lino.core import kernel
-kernel.analyze_models()
-
 
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
