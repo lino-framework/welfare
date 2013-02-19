@@ -65,13 +65,6 @@ Fixtures
     :show-inheritance:
 
 
-:mod:`lino_welfare.modlib.cbss.fixtures.inscodes`
-------------------------------------------------------
-
-.. automodule:: lino_welfare.modlib.cbss.fixtures.inscodes
-    :members:
-    :show-inheritance:
-
 
 :mod:`lino_welfare.modlib.cbss.fixtures.cbss`
 ----------------------------------------------
