@@ -270,16 +270,16 @@ class Lino(Lino):
         yield 'lino.modlib.changes'
         #~ yield 'lino.modlib.codechanges'
         #~ yield 'lino.modlib.pages'
-        #~ 'lino.modlib.workflows',
+        #~ 'lino.modlib.workflows'
         yield 'lino.modlib.countries'
-        #~ 'lino.modlib.documents',
+        #~ 'lino.modlib.documents'
         yield 'lino.modlib.properties'
         yield 'lino.modlib.contacts'
-        #~ 'lino.modlib.projects',
+        #~ 'lino.modlib.projects'
         #~ 'lino.modlib.notes',
         #~ 'lino.modlib.links',
         yield 'lino.modlib.uploads'
-        #~ 'lino.modlib.thirds',
+        #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
         yield 'lino.modlib.cal'
         yield 'lino.modlib.postings'

@@ -24,7 +24,7 @@ import codecs
 import time
 import datetime
 #~ import signal
-import atexit
+#~ import atexit
 
 #~ import logging
 #~ logger = logging.getLogger(__name__)
@@ -514,29 +514,27 @@ class PAR(Controller):
                     #~ obj.national_id = str()
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
-                    if obj.pk is None:
-                        obj.save() # must force a pre save() here to save related coachings
                     if username:
                         u = users.User.objects.get(username=username)
-                        #~ try:
-                            #~ u = users.User.objects.get(username=username)
-                        #~ except users.User.DoesNotExist,e:
-                            #~ dblogger.warning(
-                              #~ u"PAR->IdUsr %r (converted to %r) doesn't exist! while saving %s",
-                              #~ data['IDUSR'],username,obj2str(obj))
-                        #~ obj.coach1 = u
                         """
                         typical cases:
-                        - imported client has got assign_coach in Lino, then removed PARATTR_N in TIM
+                        - imported client has been assigned a coach in Lino, 
+                          then filled IDUSR and removed PARATTR_N in TIM
                         """
-                        try:
-                            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
-                            if coaching.user != u or coaching.end_date is not None \
-                                or coaching.start_date is None\
-                                or coaching.type != u.coaching_type:
+                    else:
+                        u = None
+                        
+                    if obj.pk is None:
+                        obj.save() # must pre-save the client here to save related coachings
+                        
+                    try:
+                        coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
+                        #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
+                        if coaching.user == u:
+                            if coaching.end_date is not None \
+                                    or coaching.start_date is None\
+                                    or coaching.type != u.coaching_type:
                                 watcher = dd.ChangeWatcher(coaching)
-                                coaching.user = u
                                 coaching.type = u.coaching_type
                                 if coaching.start_date is None:
                                     coaching.start_date = obj.created
@@ -544,36 +542,52 @@ class PAR(Controller):
                                 coaching.save()
                                 watcher.send_update(REQUEST)
                                 #~ watcher.log_diff(REQUEST)
-                        except pcsw.Coaching.DoesNotExist,e:
-                            try:
-                                coaching = pcsw.Coaching.objects.get(client=obj,user=u,end_date__isnull=True)
-                                watcher = dd.ChangeWatcher(coaching)
-                                coaching.primary = True
-                                coaching.save()
-                                watcher.send_update(REQUEST)
-                                #~ watcher.log_diff(REQUEST)
-                            except pcsw.Coaching.DoesNotExist,e:
-                                coaching = pcsw.Coaching(client=obj,primary=True,user=u,
-                                  type=u.coaching_type,
-                                  start_date=obj.created)
+                        else:
+                            """
+                            If the coach has changed, maintain the old coaching in history.
+                            """
+                            watcher = dd.ChangeWatcher(coaching)
+                            coaching.primary = False
+                            coaching.end_date = datetime.date.today()
+                            coaching.save()
+                            watcher.send_update(REQUEST)
+                            
+                            if u is not None:
+                                coaching = pcsw.Coaching(
+                                    client=obj,primary=True,
+                                    user=u,
+                                    type=u.coaching_type,
+                                    start_date=datetime.date.today())
                                 coaching.save()
                                 dd.pre_ui_create.send(sender=coaching,request=REQUEST)
-                                #~ changes.log_create(REQUEST,coaching)
-                            except Exception,e:
-                                raise Exception("More than one primary coaching for %r by %r" % (obj,u))
-                        except Exception,e:
-                            raise Exception("More than one primary coaching for %r : %s" % (obj,e))
 
-                    else:
-                        #~ obj.coach1 = None
+                    except pcsw.Coaching.DoesNotExist,e:
                         try:
-                            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            dd.pre_ui_delete.send(sender=coaching,request=REQUEST)
-                            #~ changes.log_delete(REQUEST,coaching)
-                            coaching.delete()
-                            
+                            coaching = pcsw.Coaching.objects.get(client=obj,user=u,end_date__isnull=True)
+                            watcher = dd.ChangeWatcher(coaching)
+                            coaching.primary = True
+                            coaching.save()
+                            watcher.send_update(REQUEST)
+                            #~ watcher.log_diff(REQUEST)
                         except pcsw.Coaching.DoesNotExist,e:
-                            pass
+                            coaching = pcsw.Coaching(client=obj,primary=True,user=u,
+                              type=u.coaching_type,
+                              start_date=obj.created)
+                            coaching.save()
+                            dd.pre_ui_create.send(sender=coaching,request=REQUEST)
+                            #~ changes.log_create(REQUEST,coaching)
+                        except Exception,e:
+                            raise Exception("More than one primary coaching for %r by %r" % (obj,u))
+                    except Exception,e:
+                        raise Exception("More than one primary coaching for %r : %s" % (obj,e))
+
+                    #~ else:
+                        #~ try:
+                            #~ coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
+                            #~ dd.pre_ui_delete.send(sender=coaching,request=REQUEST)
+                            #~ coaching.delete()
+                        #~ except pcsw.Coaching.DoesNotExist,e:
+                            #~ pass
                         
         elif obj.__class__ is Company:
             mapper.update(prefix='ALLO')

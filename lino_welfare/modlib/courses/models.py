@@ -60,17 +60,9 @@ from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str
-
-from lino.modlib.countries.models import CountryCity
-from lino.modlib.cal.models import update_reminder
-#~ from lino.modlib.contacts.models import Contact
-from lino.core.modeltools import resolve_model, UnresolvedModel
-
-#~ from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino.core.modeltools import obj2str
 
 pcsw = dd.resolve_app('pcsw')
-
 
 #~ # not used here, but these modules are required in INSTALLED_APPS, 
 #~ # and other code may import them using 
@@ -80,11 +72,9 @@ pcsw = dd.resolve_app('pcsw')
 #~ # from lino.modlib.notes.models import NoteType
 #~ from lino.modlib.countries.models import Country, City
 
-if settings.LINO.user_model:
-    User = resolve_model(settings.LINO.user_model,strict=True)
+#~ if settings.LINO.user_model:
+    #~ User = dd.resolve_model(settings.LINO.user_model,strict=True)
 
-
-            
 #~ Company = resolve_model('contacts.Company')
 class CourseProvider(pcsw.Company):
     """
@@ -288,8 +278,12 @@ class Course(dd.Model,mixins.Printable):
             s += " " + unicode(self.offer)
         return s
   
-    print_candidates = DirectPrintAction(label=_("List of candidates"),tplname='candidates')
-    print_participants = DirectPrintAction(label=_("List of participants"),tplname='participants')
+    print_candidates = DirectPrintAction(
+      label=_("List of candidates"),
+      tplname='candidates')
+    print_participants = DirectPrintAction(
+      label=_("List of participants"),
+      tplname='participants')
     
     #~ @classmethod
     #~ def setup_report(model,rpt):
@@ -785,4 +779,3 @@ def setup_workflows(site):
     CourseRequestStates.failed.add_workflow(states="registered")
     CourseRequestStates.aborted.add_workflow(states="registered")
     
-            
