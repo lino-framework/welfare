@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## Copyright 2011-2012 Luc Saffre
+## Copyright 2011-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@ To run only this test suite::
 Functions named `test0*` do not modify any data.
 
 """
+
+from __future__ import unicode_literals
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -52,6 +55,7 @@ from lino.core.modeltools import resolve_model
 #Companies = resolve_model('contacts.Companies')
 from lino.utils.test import TestCase
 
+pcsw = dd.resolve_app('pcsw')
 
 #~ Person = resolve_model('contacts.Person')
 #~ Property = resolve_model('properties.Property')
@@ -87,7 +91,8 @@ def test001(self):
     p = Person.objects.get(pk=118)
     #~ self.assertEquals(unicode(p), "ARENS Annette (118)")
     #~ self.assertEquals(unicode(p), "AUSDEMWALD Alfons (118)")
-    self.assertEquals(unicode(p), "COLLARD Charlotte (118)")
+    #~ self.assertEquals(unicode(p), "COLLARD Charlotte (118)")
+    self.assertEquals(unicode(p), "Herrn Laurent BASTIAENSEN")
     #~ self.assertEquals(unicode(p), "BASTIAENSEN Laurent (118)")
     
         
@@ -98,21 +103,27 @@ def test002(self):
     See also :doc:`/blog/2011/0531`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
     """
-    from lino.modlib.users.models import User
-    u = User.objects.get(username='root')
-    lang = u.language
-    u.language = '' # HTTP_ACCEPT_LANGUAGE works only when User.language empty
-    u.save()
+    #~ from lino.modlib.users.models import User
+    #~ u = User.objects.get(username='rolf')
+    #~ lang = u.language
+    #~ u.language = '' # HTTP_ACCEPT_LANGUAGE works only when User.language empty
+    #~ u.save()
     
-    pk = 124
-    url = '/api/cv/SoftSkillsByPerson?mt=20&mk=%d&fmt=json' % pk
+    settings.LINO.ui # trigger ui instance
+    
+    obj = pcsw.Client.objects.get(pk=128)
+    ar = cv.SoftSkillsByPerson.request(master_instance=obj)
+    
+    pk = 128
+    mt = 44 
+    url = '/api/cv/SoftSkillsByPerson?mt=%d&mk=%d&fmt=json' % (mt,pk)
     
     if 'en' in babel.AVAILABLE_LANGUAGES:
-        response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='en')
+        response = self.client.get(url,REMOTE_USER='robin',HTTP_ACCEPT_LANGUAGE='en')
         #~ result = self.check_json_result(response,'count rows gc_choices disabled_actions title')
-        result = self.check_json_result(response,'count rows gc_choices title')
-        self.assertEqual(result['title'],"Properties of EVERTZ Bernd (%d)" % pk)
-        self.assertEqual(len(result['rows']),5)
+        result = self.check_json_result(response,'count rows title success no_data_text')
+        self.assertEqual(result['title'],"Soft skills of EVERS Eberhart (%d)" % pk)
+        self.assertEqual(len(result['rows']),2)
         row = result['rows'][0]
         self.assertEqual(row[0],"Obedient")
         #~ self.assertEqual(row[1],7)
@@ -120,14 +131,14 @@ def test002(self):
         self.assertEqual(row[3],"2")
         
     if 'de' in babel.AVAILABLE_LANGUAGES:
-        response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='de')
-        result = self.check_json_result(response,'count rows gc_choices title')
-        self.assertEqual(result['title'],"Eigenschaften von EVERTZ Bernd (%d)" % pk)
-        self.assertEqual(len(result['rows']),5)
+        response = self.client.get(url,REMOTE_USER='rolf',HTTP_ACCEPT_LANGUAGE='de')
+        result = self.check_json_result(response,'count rows title success no_data_text')
+        self.assertEqual(result['title'],"Eigenschaften von EVERS Eberhart (%d)" % pk)
+        self.assertEqual(len(result['rows']),2)
         row = result['rows'][0]
         self.assertEqual(row[0],"Gehorsam")
         #~ self.assertEqual(row[1],7)
-        self.assertEqual(row[2],u"mittelmäßig")
+        self.assertEqual(row[2],"mittelmäßig")
         self.assertEqual(row[3],"2")
         
     #~ 20111111 babel.set_language(None) # switch back to default language for subsequent tests
@@ -158,9 +169,9 @@ def test003(self):
     """
     cases = [
     #  [ id,         name, recno, first, prev, next, last ]
-       [ 119,  "Charlier",     8,   199,  201,  118, 166  ],
-       [ 167, u"Ärgerlich",   56,   199,  164,  166, 166  ],
-       [ 166, u"Östges",      57,   199,  167, None, 166  ],
+       [ 119, "Charlier",     8,   199,  201,  118, 166  ],
+       [ 167, "Ärgerlich",   56,   199,  164,  166, 166  ],
+       [ 166, "Östges",      57,   199,  167, None, 166  ],
     ]
     # 
     for case in cases:

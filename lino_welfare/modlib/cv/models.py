@@ -87,6 +87,7 @@ from lino.core.modeltools import resolve_model, UnresolvedModel
 
 
 
+from lino.ui.models import SiteConfig
 
 
 class CefLevel(dd.ChoiceList):
@@ -248,18 +249,28 @@ class ConfiguredPropsByPerson(PropsByPerson):
     
     typo_check = False # to avoid warning "ConfiguredPropsByPerson 
                        # defines new attribute(s) propgroup_config_name"
-                       
+
     @classmethod
     def after_site_setup(self,site):
+        """
+        This is being called once for each subclass.
+        """
+        #~ print "20130220 after_site_setup %s" % self
         super(ConfiguredPropsByPerson,self).after_site_setup(site)
         if self.propgroup_config_name:
-            #~ pg = getattr(settings.LINO.site_config,self.propgroup_config_name)
-            pg = getattr(site.site_config,self.propgroup_config_name)
-            self.known_values = dict(group=pg)
-            if pg is None:
-                self.label = _("(Site setting %s is empty)" % self.propgroup_config_name)
-            else:
-                self.label = lazy(babelattr,unicode)(pg,'name')
+            def adapt(sc):
+                #~ print "20130220 adapting %s to site config %r" % (self,sc)
+                pg = getattr(sc,self.propgroup_config_name)
+                self.known_values = dict(group=pg)
+                if pg is None:
+                    self.label = _("(Site setting %s is empty)" % self.propgroup_config_name)
+                else:
+                    self.label = lazy(babelattr,unicode)(pg,'name')
+            adapt(site.site_config)
+            
+            @dd.receiver(dd.post_save, sender=SiteConfig,weak=False)
+            def my_handler(sender, instance=None,**kwargs):
+                adapt(instance)
         
 class SkillsByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_skills'
@@ -282,7 +293,6 @@ def site_setup(site):
 
 def customize_siteconfig():
 
-    from lino.ui.models import SiteConfig
         
     dd.inject_field(SiteConfig,
         'propgroup_skills',

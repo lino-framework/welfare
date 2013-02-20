@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## Copyright 2011-2012 Luc Saffre
+## Copyright 2011-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -18,8 +18,10 @@ without any fixture. You can run only these tests by issuing::
 
   python manage.py test pcsw.QuickTest
 
-  
 """
+
+from __future__ import unicode_literals
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -43,6 +45,10 @@ from lino.utils.test import TestCase
 Person = dd.resolve_model('contacts.Person')
 Property = dd.resolve_model('properties.Property')
 PersonProperty = dd.resolve_model('properties.PersonProperty')
+cv = dd.resolve_app('cv')
+pcsw = dd.resolve_app('pcsw')
+contacts = dd.resolve_app('contacts')
+households = dd.resolve_app('households')
 
 #~ from lino.apps.pcsw.models import Person
 #~ from lino.modlib.cv.models import PersonProperty
@@ -57,60 +63,6 @@ class QuickTest(TestCase):
         #~ super(DemoTest,self).setUp()
             
   
-def test01(self):
-    """
-    Used on :doc:`/blog/2011/0414`.
-    See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
-    """
-    from lino.utils.dumpy import Serializer
-    from lino.apps.pcsw.models import Contact, Company
-    ser = Serializer()
-    #~ ser.models = [CourseProvider,Company]
-    ser.models = [Contact, Company]
-    ser.write_preamble = False
-    self.assertEqual(Contact._meta.parents,{})
-    parent_link_field = Company._meta.parents.get(Contact)
-    #~ print parent_link_field.name
-    #~ self.assertEqual(CourseProvider._meta.parents.get(Company),{})
-    #~ self.assertEqual(CourseProvider._meta.parents,{})
-    fields = [f.attname for f in Company._meta.fields]
-    local_fields = [f.attname for f in Company._meta.local_fields]
-    #~ self.assertEqual(','.join(local_fields),'contact_ptr_id')
-    self.assertEqual(','.join(local_fields),'contact_ptr_id,vat_id,type_id,is_active,activity_id,bank_account1,bank_account2,prefix,hourly_rate')
-    fields = [f.attname for f in Contact._meta.fields]
-    local_fields = [f.attname for f in Contact._meta.local_fields]
-    self.assertEqual(fields,local_fields)
-    #~ self.assertTrue(','.join([f.attname for f in local_fields]),'company_ptr_id')
-      
-    #~ foo = Company(name='Foo')
-    #~ foo.save()
-    bar = Contact(name='Bar')
-    bar.save()
-    
-    #~ ser.serialize([foo,bar])
-    ser.serialize([bar])
-    #~ print ser.stream.getvalue()
-    expected = """
-def create_contacts_contact(id, country_id, city_id, name, addr1, street_prefix, street, street_no, street_box, addr2, zip_code, region, language, email, url, phone, gsm, fax, remarks):
-    return contacts_Contact(id=id,country_id=country_id,city_id=city_id,name=name,addr1=addr1,street_prefix=street_prefix,street=street,street_no=street_no,street_box=street_box,addr2=addr2,zip_code=zip_code,region=region,language=language,email=email,url=url,phone=phone,gsm=gsm,fax=fax,remarks=remarks)
-def create_contacts_company(contact_ptr_id, vat_id, type_id, is_active, activity_id, bank_account1, bank_account2, prefix, hourly_rate):
-    return insert_child(contacts_Contact.objects.get(pk=contact_ptr_id),contacts_Company,vat_id=vat_id,type_id=type_id,is_active=is_active,activity_id=activity_id,bank_account1=bank_account1,bank_account2=bank_account2,prefix=prefix,hourly_rate=hourly_rate)
-
-
-def contacts_contact_objects():
-    yield create_contacts_contact(100,None,None,u'Bar',u'',u'',u'',u'',u'',u'',u'',u'',u'de',u'',u'',u'',u'',u'',u'')
-
-
-def objects():
-    yield contacts_contact_objects()
-
-settings.LINO.loading_from_dump = True
-
-from lino.apps.pcsw.migrate import install
-install(globals())
-"""
-    self.assertEqual(ser.stream.getvalue(),expected)
-    
 def test01(self):
     """
     Used on :doc:`/blog/2011/0414`.
@@ -160,7 +112,7 @@ install(globals())
 """)
 test01.skip = True
 
-def test01b(self):
+def test02(self):
     """
     Tests error handling when printing a contract whose type's 
     name contains non-ASCII char.
@@ -194,7 +146,7 @@ def test01b(self):
     if 'en' in babel.AVAILABLE_LANGUAGES:
         root.language='en'
         root.save()
-        url = '/api/jobs/Contract/1?an=print'
+        url = '/api/jobs/Contract/1?an=do_print'
         response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response,'success message alert')
         self.assertEqual(result['success'],False)
@@ -207,7 +159,7 @@ Invalid template '' configured for ContractType u'Art.60\\xa77' (expected filena
     
 
     
-def test02(self):
+def test03(self):
     """
     Testing whether `/api/notes/NoteTypes/1?fmt=json` 
     has no item `templateHidden`.
@@ -279,9 +231,9 @@ def test04(self):
     if 'fr' in babel.AVAILABLE_LANGUAGES:
         babel.set_language('fr')
         #~ self.assertEqual(p.get_titled_name,"Mr Jean Louis DUPONT")
-        self.assertEqual(p.full_name,"M. Jean Louis DUPONT")
+        self.assertEqual(p.full_name,"M. Jean Louis Dupont")
         self.assertEqual('\n'.join(p.address_lines()),u"""\
-M. Jean Louis DUPONT
+M. Jean Louis Dupont
 Avenue de la gare 3 b
 Bruxelles
 Belgique""")
@@ -297,29 +249,30 @@ def test05(self):
     contained non-ascii characters.
     See :doc:`/blog/2011/0728`.
     """
-    from lino.apps.pcsw.models import Activity, Person
+    #~ from lino.apps.pcsw.models import Activity, Person
     from lino.core.modeltools import obj2str
-    a = Activity(name=u"Sozialhilfeempfänger")
-    p = Person(last_name="Test",activity=a)
-    self.assertEqual(unicode(a),u"Sozialhilfeempfänger")
+    a = pcsw.Activity(name=u"Sozialhilfeempfänger")
+    p = pcsw.Client(last_name="Test",activity=a)
+    self.assertEqual(unicode(a),"Sozialhilfeempfänger")
     
     # Django pitfall: repr() of a model instance may return basestring containing non-ascii characters.
     self.assertEqual(type(repr(a)),str)
 
     # 
-    self.assertEqual(obj2str(a,True),"Activity(name=u'Sozialhilfeempf\\xe4nger')")
+    self.assertEqual(obj2str(a,True),"Activity(name='Sozialhilfeempf\\xe4nger')")
     a.save()
-    self.assertEqual(obj2str(a,True),u"Activity(id=1,name=u'Sozialhilfeempf\\xe4nger')")
+    self.assertEqual(obj2str(a,True),"Activity(id=1,name='Sozialhilfeempf\\xe4nger')")
     
-    expected = "Person(language=u'%s'," % babel.DEFAULT_LANGUAGE
-    expected += "last_name='Test',"
-    expected += "is_active=True"
+    expected = "Client(language='%s'," % babel.DEFAULT_LANGUAGE
+    expected += "last_name='Test'"
+    expected += ",client_state=ClientStates.newcomer:10"
+    #~ expected += ",is_active=True"
     #~ expected += r",activity=Activity(name=u'Sozialhilfeempf\xe4nger'))"
     #~ expected += ",activity=1"
     expected += ")"
     self.assertEqual(obj2str(p,True),expected)
     p.pk = 5
-    self.assertEqual(obj2str(p),"Person #5 (u'TEST  (5)')")
+    self.assertEqual(obj2str(p),"Client #5 (u'TEST  (5)')")
     
     
 def test06(self):
@@ -330,9 +283,9 @@ def test06(self):
     
     """
     from django.db import models
-    from lino.apps.pcsw.models import Person
-    from lino.core.modeltools import get_data_elem
-    de = get_data_elem(Person,'id')
+    #~ from lino.apps.pcsw.models import Person
+    from lino.core.fields import get_data_elem
+    de = get_data_elem(pcsw.Client,'id')
     #~ print de.__class__
     self.assertEqual(de.__class__,models.AutoField)
     self.assertEqual(de.primary_key,True)
@@ -348,14 +301,18 @@ def test07(self):
     """
     Bug 20120127 : VirtualFields had sneaked into wildcard columns.
     """
-    from lino.apps.pcsw.models import Companies
-    wcde = [de.name for de in Companies.wildcard_data_elems()]
+    #~ from lino.apps.pcsw.models import Companies
+    wcde = [de.name for de in contacts.Companies.wildcard_data_elems()]
+    #~ expected = '''\
+#~ id country city name addr1 street_prefix street street_no street_box 
+#~ addr2 zip_code region language email url phone gsm fax remarks 
+#~ partner_ptr prefix vat_id type is_active newcomer is_deprecated activity 
+#~ bank_account1 bank_account2 hourly_rate'''.split()
     expected = '''\
-id country city name addr1 street_prefix street street_no street_box 
-addr2 zip_code region language email url phone gsm fax remarks 
-partner_ptr prefix vat_id type is_active newcomer is_deprecated activity 
-bank_account1 bank_account2 hourly_rate'''.split()
-    
+    id created modified country city region zip_code name addr1 street_prefix 
+    street street_no street_box addr2 language email url phone gsm fax
+    remarks is_obsolete activity bank_account1 bank_account2 partner_ptr 
+    prefix vat_id type client_contact_type'''.split()
     s = ' '.join(wcde)
     #~ print s
     #~ print [de for de in Companies.wildcard_data_elems()]
@@ -393,11 +350,11 @@ def test08(self):
     check_disabled(p,df,'id first_name last_name bank_account1')
     check_enabled(p,df,'gsm')
                 
-    from lino.apps.pcsw.models import Household
+    #~ from lino.apps.pcsw.models import Household
     from lino.modlib.households.models import Households
-    h = Household(name="Test Household")
+    h = pcsw.Household(name="Test Household")
     h.save()
-    df = Households.disabled_fields(h,None)
+    df = households.Households.disabled_fields(h,None)
     #~ print df
     check_disabled(h,df,'name bank_account1')
     check_enabled(h,df,'gsm type')
@@ -405,3 +362,11 @@ def test08(self):
                 
     # restore is_imported_partner method
     settings.LINO.is_imported_partner = save_iip
+
+def test09(self):
+    obj = pcsw.Client(pk=128,first_name="Erwin",last_name="Evertz")
+    obj.full_clean()
+    obj.save()
+    ar = cv.SoftSkillsByPerson.request(master_instance=obj)
+    self.assertEqual(ar.get_request_url(),"")
+
