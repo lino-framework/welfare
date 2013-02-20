@@ -112,3 +112,10 @@ pcsw_sql_tests
     :members:
     :show-inheritance:
 
+watchtim_tests
+~~~~~~~~~~~~~~
+
+.. automodule:: lino_welfare.modlib.pcsw.tests.watchtim_tests
+    :members:
+    :show-inheritance:
+

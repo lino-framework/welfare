@@ -13,9 +13,9 @@ Gelöste Probleme
   Die bleibt jetzt ebenso als sekundäre und beendete Begleitung erhalten.
 
 
-- In den Begleitungen war eine Mausefalle: "Hubert kann eine Begleitung für 
-  Nadine zwar erstellen, aber danach kann er diese Begleitung 
-  weder ändern noch löschen".
+- In den Begleitungen war eine Mausefalle: "Hubert kann eine seiner 
+  Begleitungen zwar auf einen anderen Benutzer setzen, aber danach 
+  kann er diese Begleitung weder ändern noch löschen".
   Behoben.
   
 - das Beginndatum einer primären Begleitung eines importierten Klienten darf jetzt 

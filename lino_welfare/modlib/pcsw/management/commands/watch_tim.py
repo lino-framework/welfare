@@ -570,12 +570,13 @@ class PAR(Controller):
                             watcher.send_update(REQUEST)
                             #~ watcher.log_diff(REQUEST)
                         except pcsw.Coaching.DoesNotExist,e:
-                            coaching = pcsw.Coaching(client=obj,primary=True,user=u,
-                              type=u.coaching_type,
-                              start_date=obj.created)
-                            coaching.save()
-                            dd.pre_ui_create.send(sender=coaching,request=REQUEST)
-                            #~ changes.log_create(REQUEST,coaching)
+                            if u is not None:
+                                coaching = pcsw.Coaching(client=obj,primary=True,user=u,
+                                  type=u.coaching_type,
+                                  start_date=obj.created)
+                                coaching.save()
+                                dd.pre_ui_create.send(sender=coaching,request=REQUEST)
+                                #~ changes.log_create(REQUEST,coaching)
                         except Exception,e:
                             raise Exception("More than one primary coaching for %r by %r" % (obj,u))
                     except Exception,e:
@@ -822,8 +823,7 @@ controllers = dict(
   ADR=ADR(),
   )
 
-def process_line(i,ln):
-    dblogger.debug("process_line(%r,%r)",i,ln)
+def process_line(ln):
     d = simplejson.loads(ln,object_hook=json2py)
     kw = {}
     for k,v in d.items():
@@ -861,8 +861,9 @@ def watch(data_dir):
     i = 0
     for ln in fd_watching.readlines():
         i += 1
+        dblogger.debug("process_line(%r,%r)",i,ln)
         try:
-            process_line(i,ln)
+            process_line(ln)
         except Exception,e:
             #~ raise
             fd_failed.write("// %s %r\n%s\n\n" % (
