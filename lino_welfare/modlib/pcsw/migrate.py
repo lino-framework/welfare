@@ -541,3 +541,6 @@ def migrate_from_1_0_11(globals_dict):
     globals_dict.update(lino_SiteConfig = resolve_model("ui.SiteConfig"))
     globals_dict.update(lino_HelpText = resolve_model("ui.HelpText"))
     return '1.0.12'
+
+def migrate_from_1_0_12(globals_dict):
+    return '1.0.13'

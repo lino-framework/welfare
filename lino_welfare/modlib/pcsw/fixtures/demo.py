@@ -428,7 +428,9 @@ def objects():
     adg = company(name=u"Arbeitsamt der D.G.",**kw)
     adg.save()
     yield adg
-    settings.LINO.update_site_config(job_office=adg)
+    #~ settings.LINO.update_site_config(job_office=adg)
+    settings.LINO.site_config.job_office = adg
+    yield settings.LINO.site_config
     adg_dir = role(company=adg,person=bernard,type=1)
     #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir

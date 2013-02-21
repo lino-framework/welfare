@@ -176,14 +176,19 @@ def objects():
     yield uploadType(babelitem(de=u"Personalausweis",fr=u"Carte d'identité",en="ID card"))
     p = uploadType(babelitem(de=u"Aufenthaltserlaubnis",fr=u"Permis de séjour",en="Residence permit"))
     yield p
-    settings.LINO.update_site_config(residence_permit_upload_type=p)
+    #~ settings.LINO.update_site_config(residence_permit_upload_type=p)
+    settings.LINO.site_config.residence_permit_upload_type = p
     p = uploadType(babelitem(de=u"Arbeitserlaubnis",fr=u"Permis de travail",en="Work permit"))
     yield p
-    settings.LINO.update_site_config(work_permit_upload_type = p)
+    #~ settings.LINO.update_site_config(work_permit_upload_type = p)
+    settings.LINO.site_config.work_permit_upload_type = p
     yield uploadType(babelitem(de=u"Vertrag",fr=u"Contrat",en="Contract"))
     p = uploadType(babelitem(de=u"Führerschein",fr=u"Permis de conduire",en="Diving licence"))
     yield p
-    settings.LINO.update_site_config(driving_licence_upload_type = p)
+    #~ settings.LINO.update_site_config(driving_licence_upload_type = p)
+    settings.LINO.site_config.driving_licence_upload_type = p
+    
+    yield settings.LINO.site_config
     
     
     from lino.modlib.cal.utils import DurationUnits

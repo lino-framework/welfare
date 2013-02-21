@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2008-2012 Luc Saffre
+## Copyright 2008-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -51,11 +51,15 @@ def objects():
     obstacles.save()
     yield obstacles
     
-    settings.LINO.update_site_config(
-      propgroup_skills = skills,
-      propgroup_softskills = softskills,
-      propgroup_obstacles = obstacles,
-      )
+    #~ settings.LINO.update_site_config(
+      #~ propgroup_skills = skills,
+      #~ propgroup_softskills = softskills,
+      #~ propgroup_obstacles = obstacles,
+      #~ )
+    settings.LINO.site_config.propgroup_skills = skills
+    settings.LINO.site_config.propgroup_softskills = softskills
+    settings.LINO.site_config.propgroup_obstacles = obstacles
+    yield settings.LINO.site_config
     
     
     skill = Instantiator('properties.Property',group=skills,type=onoff).build
