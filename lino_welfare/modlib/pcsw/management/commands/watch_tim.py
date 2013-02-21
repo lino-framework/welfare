@@ -335,7 +335,7 @@ class Controller:
         
     def validate_and_save(self,obj):
         "Deserves more documentation."
-        dblogger.info("20121022 validate_and_save %s",obj2str(obj,True))
+        #~ dblogger.info("20121022 validate_and_save %s",obj2str(obj,True))
         obj.full_clean()
         #~ 20120921 dblogger.log_changes(REQUEST,obj)
         obj.save()
