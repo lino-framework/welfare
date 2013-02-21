@@ -426,6 +426,7 @@ def objects():
     yield cct
     kw = dict(client_contact_type=cct,country=belgium,city=eupen)
     adg = company(name=u"Arbeitsamt der D.G.",**kw)
+    adg.save()
     yield adg
     settings.LINO.update_site_config(job_office=adg)
     adg_dir = role(company=adg,person=bernard,type=1)

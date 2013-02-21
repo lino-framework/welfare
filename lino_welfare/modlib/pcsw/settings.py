@@ -127,6 +127,7 @@ class Lino(Lino):
         A Lino/Welfare site by default watches the changes to certain Client fields
         and to all Contract fields.
         """
+        super(Lino,self).on_site_startup()
         
         from lino.modlib.changes.models import watch_changes as wc
         
