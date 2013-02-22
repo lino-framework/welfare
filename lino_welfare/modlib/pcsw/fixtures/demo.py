@@ -12,6 +12,11 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+"""
+Adds PCSW-specific demo data.
+"""
+
+from __future__ import unicode_literals
 
 import decimal
 #~ from dateutil.relativedelta import relativedelta
@@ -451,9 +456,10 @@ def objects():
     
     #~ yield User(username='gerd',partner=gerd,profile='900')
     
-    melanie = person(first_name=u"Mélanie",last_name=u"Mélard",
+    melanie = person(first_name="Mélanie",last_name="Mélard",
         email='melanie@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
+        city=eupen,country='BE',gender=mixins.Genders.female,
+        language='fr')
     yield melanie
     melanie = User(username="melanie",partner=melanie,profile='110') 
     yield melanie
@@ -476,36 +482,17 @@ def objects():
     yield Authority(user=alicia,authorized=melanie)
     yield Authority(user=hubert,authorized=melanie)
     
-    #~ elmar = person(first_name=u"Elmar",last_name=u"Elsen",
-        #~ city=eupen,country='BE',gender=mixins.Genders.male)
-    #~ yield elmar
-    #~ elmar = User(username="elmar",partner=elmar,profile='400') 
-    #~ yield elmar
-    
-    #~ robert = person(first_name=u"Robert",last_name=u"Robinet",
-        #~ city=eupen,country='BE',language='fr',gender=mixins.Genders.male)
-    #~ yield robert
-    #~ robert = User(username="robert",partner=robert,profile='900') 
-    #~ yield robert
-    
-    #~ charles = person(first_name=u"Charles",last_name=u"Cabeil-Esaice",
-        #~ city=eupen,country='BE',gender=mixins.Genders.male)
-    #~ yield charles
-    #~ charles = User(username="charles",partner=charles,profile='500') 
-    #~ yield charles
-    
-    
-    yield User(username="caroline",
+    caroline = User(username="caroline",
         first_name="Caroline",last_name="Carnol",
         profile='200') # UserProfiles.caroline)
-    
+    yield caroline
     
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(name="ASD",id=1) 
     
-    obj = User.objects.get(username="caroline")
-    obj.coaching_type_id = 1
-    obj.save()
+    #~ caroline = User.objects.get(username="caroline")
+    caroline.coaching_type_id = 1
+    caroline.save()
     
     DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
@@ -832,97 +819,6 @@ def objects():
       c.short_code = short_code
       c.save()
       
-    #~ root = User.objects.get(username='root')
-      
-    #~ p = Client.objects.get(name=u"Ärgerlich Erna")
-    #~ p.birth_date = i2d(19800301)
-    #~ p.coached_from = settings.LINO.demo_date(-7*30)
-    #~ p.coached_until = None
-    #~ p.coach1 = root
-    #~ p.coach2 = alicia # User.objects.get(username='alicia')
-    #~ p.gender = mixins.Genders.female 
-    #~ p.group = pg1
-    #~ p.save()
-    
-    #~ yield coachings(p,COACHINGTYPES.pop(),root,alicia,settings.LINO.demo_date(-7*30))
-    
-    #~ task = Instantiator('cal.Task').build
-    #~ yield task(user=root,start_date=i2d(20110717),
-        #~ summary=u"Anrufen Termin",
-        #~ owner=p)
-    
-    #~ p = Client.objects.get(name=u"Eierschal Emil")
-    #~ p.birth_date = i2d(19800501)
-    #~ p.coached_from = settings.LINO.demo_date(-2*30)
-    #~ p.coached_until = settings.LINO.demo_date(10*30)
-    #~ p.coach1 = User.objects.get(username='root')
-    #~ p.group = pg2
-    #~ p.gender = mixins.Genders.male
-    #~ p.national_id = 'INVALID-45'
-    #~ p.save()
-    
-    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-2*30),settings.LINO.demo_date(10*30))
-
-    #~ p = Client.objects.get(name=u"Bastiaensen Laurent")
-    #~ p.birth_date = i2d(19810601)
-    #~ p.coached_from = None
-    #~ p.coached_until = settings.LINO.demo_date(-2*30)
-    #~ p.unavailable_until = settings.LINO.demo_date(2*30)
-    #~ p.coach1 = User.objects.get(username='root')
-    #~ p.coach2 = alicia # User.objects.get(username='alicia')
-    #~ p.group = pg1
-    #~ p.gender = mixins.Genders.male
-    #~ p.national_id = '810601 211-83'
-    #~ p.save()
-
-    #~ yield coachings(p,COACHINGTYPES.pop(),root,alicia,None,settings.LINO.demo_date(-2*30))
-    
-    #~ p = Client.objects.get(name=u"Chantraine Marc")
-    #~ p.birth_date = i2d(19500301)
-    #~ p.coached_from = settings.LINO.demo_date(10)
-    #~ p.coached_until = None
-    #~ p.coach1 = User.objects.get(username='root')
-    #~ p.group = pg2
-    #~ p.gender = mixins.Genders.male
-    #~ p.save()
-
-    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(10),None)
-    
-    #~ p = Client.objects.get(name=u"Charlier Ulrike")
-    #~ p.birth_date = i2d(19600401)
-    #~ p.coached_from = settings.LINO.demo_date(-3*30)
-    #~ p.coached_until = None
-    #~ p.coach1 = alicia # User.objects.get(username='alicia')
-    #~ p.gender = mixins.Genders.female
-    #~ p.group = pg1
-    #~ p.save()
-    
-    #~ yield coachings(p,COACHINGTYPES.pop(),alicia,None,settings.LINO.demo_date(-3*30),None)
-
-
-    #~ p = Client.objects.get(name=u"Collard Charlotte")
-    #~ p.birth_date = i2d(19800401)
-    #~ p.coached_from = settings.LINO.demo_date(-6*30)
-    #~ p.coached_until = None
-    #~ p.coach1 = User.objects.get(username='root')
-    #~ p.gender = mixins.Genders.female
-    #~ p.group = standby
-    #~ p.save()
-    
-    #~ yield coachings(p,COACHINGTYPES.pop(),root,None,settings.LINO.demo_date(-6*30),None)
-
-    #~ etype = Instantiator('cal.EventType','name').build
-    #~ yield etype("interner Termin")
-    #~ yield etype("Termin beim Klienten")
-    #~ yield etype("Termin beim Arbeitgeber")
-    
-    #~ event = Instantiator('cal.Event',
-      #~ 'start_date project summary',
-      #~ user=alicia).build
-    #~ yield event(settings.LINO.demo_date(+1),hans,u"Stand der Dinge")
-    #~ yield event(settings.LINO.demo_date(+1),annette,u"Problem Kühlschrank")
-    #~ yield event(settings.LINO.demo_date(+2),andreas,u"Mein dritter Termin")
-
     i = pcsw.Client.objects.order_by('name').__iter__()
     p = i.next()
     offset = 0
@@ -934,7 +830,7 @@ def objects():
         offset -= 1
         
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
-    AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,melanie, hubert, melanie)
+    AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,caroline, hubert,melanie, hubert, melanie)
     #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     for client in pcsw.Client.objects.all():
     #~ for i in range(30):
@@ -948,7 +844,10 @@ def objects():
                 client.save()
             periods = story.pop()
             for a,b,primary in periods:
-                kw = dict(client=client,type=COACHINGTYPES.pop(),user=AGENTS_SCATTERED.pop(),primary=primary)
+                kw = dict(client=client,
+                    type=COACHINGTYPES.pop(),
+                    user=AGENTS_SCATTERED.pop(),
+                    primary=primary)
                 if a is not None:
                     kw.update(start_date=settings.LINO.demo_date(a))
                 if b is not None:
