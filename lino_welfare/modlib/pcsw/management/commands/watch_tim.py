@@ -37,7 +37,6 @@ from django.core.exceptions import ValidationError
 
 from django.conf import settings
 
-
 from django.db.utils import DatabaseError
 # OperationalError
 from django.utils import simplejson
@@ -62,19 +61,35 @@ from lino.utils.daemoncommand import DaemonCommand
 
 from lino.utils.ssin import is_valid_ssin
 
-
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
 
+settings.LINO.startup()
+
 pcsw = dd.resolve_app('pcsw')
 users = dd.resolve_app('users')
+#~ contacts = dd.resolve_app('contacts')
+#~ households = dd.resolve_app('households')
+#~ countries = dd.resolve_app('countries')
+
+#~ Country = countries.Country
+#~ City = countries.City
 Country = dd.resolve_model('countries.Country')
 City = dd.resolve_model('countries.City')
+#~ Person = contacts.Person
+#~ Person = pcsw.Person
+#~ Company = contacts.Company
+#~ Company = pcsw.Company
 Person = dd.resolve_model('contacts.Person')
 Client = dd.resolve_model('pcsw.Client')
+Partner = dd.resolve_model('contacts.Partner')
+#~ Client = pcsw.Client
 Company = dd.resolve_model('contacts.Company')
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
+#~ Household = pcsw.Household 
+#~ Household = households.Household 
+#~ households_Type = households.Type
 
 CCTYPE_HEALTH_INSURANCE = 1
 CCTYPE_PHARMACY = 2
@@ -515,6 +530,7 @@ class PAR(Controller):
                 if data.has_key('IDUSR'):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if username:
+                        #~ print 20130222, username
                         u = users.User.objects.get(username=username)
                         """
                         typical cases:
@@ -630,6 +646,10 @@ class PAR(Controller):
             return Household.objects.get(pk=id)
         except Household.DoesNotExist:
             pass
+        try:
+            return Partner.objects.get(pk=id)
+        except Partner.DoesNotExist:
+            pass
         
     def PUT_special(self,watcher,**kw):
         obj = watcher.watched
@@ -649,6 +669,7 @@ class PAR(Controller):
             #~ if v is not None:
                 #~ kw[n] = v
         old_class = obj.__class__
+        #~ print 20130222, old_class, new_class
         if issubclass(old_class,new_class):
             #~ it was a Client and becomes a Person
             dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
@@ -658,22 +679,33 @@ class PAR(Controller):
             newobj = new_class.objects.get(pk=obj.id)
         elif issubclass(new_class,old_class):
             #~ it was only a Person and becomes a Client
-            
             dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
-            #~ changes.log_add_child(REQUEST,obj,new_class)
             newobj = mti.insert_child(obj,new_class)
+        elif new_class is Client and old_class is Company:
+            """
+            It's a Company and must become a Client (and remain a Company).
+            We must first create a Person.
+            """
+            partner = obj.partner_ptr
+            # create and save the Person:
+            dd.pre_add_child.send(sender=partner,request=REQUEST,child=Person)
+            person = mti.insert_child(partner,Person)
+            self.applydata(person,data)
+            self.validate_and_save(person)
+            # create the Client
+            dd.pre_add_child.send(sender=person,request=REQUEST,child=new_class)
+            newobj = mti.insert_child(person,new_class)
         else:
+            raise Exception("Cannot handle conversion from %s to %s" % (old_class,new_class))
             obj = obj.partner_ptr
-            #~ changes.log_remove_child(REQUEST,obj,old_class)
             dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
             mti.delete_child(obj,old_class)
-            #~ changes.log_add_child(REQUEST,obj,new_class)
             dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
             newobj = mti.insert_child(obj,new_class)
             
         self.applydata(newobj,data)
         self.validate_and_save(newobj)
-        return newobj
+        #~ return newobj
         
     def create_object(self,kw):
         return PAR_model(kw['data'])(id=kw['id'])
@@ -705,7 +737,7 @@ class PXS(Controller):
     """
     
     def create_object(self,kw):
-        raise Exception("Tried to create a Person from PXS")
+        raise Exception("Cannot create Client %s from PXS" % kw['id'])
         
     def PUT_special(self,watcher,**kw):
         pass

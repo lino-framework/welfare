@@ -2507,6 +2507,16 @@ Enabling this field will automatically make the other coachings non-primary.""")
             return ['primary']
         return []
         
+    def on_create(self,ar):
+        """
+        Default value for the `user` field is the requesting user.
+        """
+        if self.user_id is None:
+            u = ar.get_user()
+            if u is not None:
+                self.user = u
+        super(Coaching,self).on_create(ar)
+        
     def disable_delete(self,ar):
         if ar is not None and settings.LINO.is_imported_partner(self.client):
             if self.primary:
@@ -2516,8 +2526,6 @@ Enabling this field will automatically make the other coachings non-primary.""")
     def before_ui_save(self,ar,**kw):
         #~ logger.info("20121011 before_ui_save %s",self)
         super(Coaching,self).before_ui_save(ar,**kw)
-        if not self.user_id:
-            self.user = ar.get_user()
         if not self.type:
             self.type = ar.get_user().coaching_type
         if not self.start_date:

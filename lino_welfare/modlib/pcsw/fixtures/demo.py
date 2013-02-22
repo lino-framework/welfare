@@ -286,6 +286,7 @@ def objects():
     #~ Function = resolve_model('jobs.Function')
     #~ Sector = resolve_model('jobs.Sector')
     User = resolve_model('users.User')
+    Authority = resolve_model('users.Authority')
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
     
@@ -470,6 +471,10 @@ def objects():
     yield alicia
     alicia = User(username="alicia",partner=alicia,profile='100') 
     yield alicia
+    
+    yield Authority(user=alicia,authorized=hubert)
+    yield Authority(user=alicia,authorized=melanie)
+    yield Authority(user=hubert,authorized=melanie)
     
     #~ elmar = person(first_name=u"Elmar",last_name=u"Elsen",
         #~ city=eupen,country='BE',gender=mixins.Genders.male)

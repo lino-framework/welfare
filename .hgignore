@@ -14,6 +14,7 @@ dist
 tmp
 */SciTE.session
 */test.db
+*/default.db
 
 lino_welfare/demo/media
 lino_welfare.egg-info

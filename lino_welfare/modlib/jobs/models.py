@@ -328,6 +328,8 @@ class Contract(isip.ContractBase):
     - duration `624` -> 24 months 
     
     """
+    
+    
     class Meta:
         verbose_name = _("Job Contract")
         verbose_name_plural = _('Job Contracts')
@@ -565,6 +567,7 @@ class ContractDetail(dd.FormLayout):
   
 #~ class Contracts(dd.Table):
 class Contracts(isip.ContractBaseTable):
+    #~ debug_permissions = "20130222"
     required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
