@@ -1,0 +1,16 @@
+Version 1.0.14
+==============
+
+Fixed bugs:
+
+- Some more edge cases occured in 
+  :mod:`watch_tim <lino_welfare.modlib.pcsw.management.commands.watch_tim>`.
+  Details in
+  :mod:`watchtim_tests <lino_welfare.modlib.pcsw.tests.watchtim_tests>`.
+
+- When manually creating a Coaching, 
+  the default value for the `user` field wasn't 
+  correctly set to the requesting user
+  (leading to a "DoesNotExist at /api/pcsw/CoachingsByClient" traceback).
+  
+- "You have no permission to delete this row." when working as somebody else.

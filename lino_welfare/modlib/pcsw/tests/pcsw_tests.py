@@ -54,8 +54,6 @@ households = dd.resolve_app('households')
 #~ from lino.modlib.cv.models import PersonProperty
 #~ from lino.modlib.properties.models import Property
 
-
-
 class QuickTest(TestCase):
     pass
     #~ def setUp(self):
@@ -63,7 +61,7 @@ class QuickTest(TestCase):
         #~ super(DemoTest,self).setUp()
             
   
-def test01(self):
+def unused_test01(self):
     """
     Used on :doc:`/blog/2011/0414`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
@@ -110,7 +108,6 @@ def objects():
 from lino.apps.pcsw.migrate import install
 install(globals())
 """)
-test01.skip = True
 
 def test02(self):
     """
@@ -363,7 +360,7 @@ def test08(self):
     # restore is_imported_partner method
     settings.LINO.is_imported_partner = save_iip
 
-def test09(self):
+def unused_test09(self):
     obj = pcsw.Client(pk=128,first_name="Erwin",last_name="Evertz")
     obj.full_clean()
     obj.save()
