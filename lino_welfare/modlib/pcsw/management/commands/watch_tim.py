@@ -64,7 +64,7 @@ from lino.utils.ssin import is_valid_ssin
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
 
-settings.LINO.startup()
+settings.LINO.startup() # populate the model cache
 
 pcsw = dd.resolve_app('pcsw')
 users = dd.resolve_app('users')
@@ -460,7 +460,17 @@ def ADR_applydata(obj,data,**kw):
     
                 
 class PAR(Controller):
-    "Deserves more documentation."
+    """
+    Controller for synchronizing PAR from TIM to Lino.
+    Remember the possible hierarchy of "partner" models coming from TIM::
+
+      Partner
+      - Company
+      - Household
+      - Person
+        - Client
+    
+    """
   
     #~ def prepare_data(self,data):
         #~ if data['NB2']:
@@ -661,51 +671,48 @@ class PAR(Controller):
             return True
             
     def swapclass(self,watcher,new_class,data):
+        """
+        Convert the watched object to a new_class instance and apply data accordingly.
+        Caution: Here be dragons! See also file `watchtim_tests.py`.
+          
+        """
         obj = watcher.watched
-        #~ kw = {}
-        #~ for n in CONTACT_FIELDS:
-            #~ kw[n] = getattr(obj,n)
-            #~ v = data.get(n,None)
-            #~ if v is not None:
-                #~ kw[n] = v
         old_class = obj.__class__
+        partner = obj.partner_ptr
+        assert old_class is not new_class
+        newobj = None
         #~ print 20130222, old_class, new_class
-        if issubclass(old_class,new_class):
-            #~ it was a Client and becomes a Person
+        if old_class is Client:
+            # convert Client to Person, then continue as if old_class had been Person
             dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
-            #~ changes.log_remove_child(REQUEST,obj,old_class)
             mti.delete_child(obj,old_class)
-            #~ changes.log_delete(REQUEST,obj)
-            newobj = new_class.objects.get(pk=obj.id)
-        elif issubclass(new_class,old_class):
-            #~ it was only a Person and becomes a Client
-            dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
-            newobj = mti.insert_child(obj,new_class)
-        elif new_class is Client and old_class is Company:
-            """
-            It's a Company and must become a Client (and remain a Company).
-            We must first create a Person.
-            """
-            partner = obj.partner_ptr
-            # create and save the Person:
-            dd.pre_add_child.send(sender=partner,request=REQUEST,child=Person)
-            person = mti.insert_child(partner,Person)
+            newobj = obj = obj.person_ptr
+            old_class = Person
+            
+        if new_class is not old_class and not issubclass(new_class,old_class):
+            dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
+            mti.delete_child(obj,old_class)
+            newobj = obj = partner
+        
+        if new_class is Client:
+            # create the Person if necessary:
+            try:
+                person = Person.objects.get(pk=partner.id)
+            except Person.DoesNotExist:
+                dd.pre_add_child.send(sender=partner,request=REQUEST,child=Person)
+                person = mti.insert_child(partner,Person)
             self.applydata(person,data)
             self.validate_and_save(person)
             # create the Client
-            dd.pre_add_child.send(sender=person,request=REQUEST,child=new_class)
-            newobj = mti.insert_child(person,new_class)
-        else:
-            raise Exception("Cannot handle conversion from %s to %s" % (old_class,new_class))
-            obj = obj.partner_ptr
-            dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
-            mti.delete_child(obj,old_class)
+            newobj = obj = person
+            
+        if new_class is not Partner:
             dd.pre_add_child.send(sender=obj,request=REQUEST,child=new_class)
             newobj = mti.insert_child(obj,new_class)
+        if newobj is not None:    
+            self.applydata(newobj,data)
+            self.validate_and_save(newobj)
             
-        self.applydata(newobj,data)
-        self.validate_and_save(newobj)
-        #~ return newobj
         
     def create_object(self,kw):
         return PAR_model(kw['data'])(id=kw['id'])

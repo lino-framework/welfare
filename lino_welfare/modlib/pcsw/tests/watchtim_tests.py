@@ -78,8 +78,23 @@ PUT_MAX_MORITZ = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"2013
 "IDUSR":"ALICIA","DOMI1":""}}
 """
 
+# like previous, but IDUSR is empty
+PUT_MAX_MORITZ2 = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"20130222 12:06:01",
+"user":"MELANIE","data":{"IDPAR":"0000005088","FIRME":"Müller Max Moritz","NAME2":"",
+"RUE":"Werthplatz 12","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
+"COMPTE1":"001-1234567-89","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"",
+"DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"",
+"PROF":"80","CODE1":"RH","CODE2":"","CODE3":"",
+"DATCREA":{"__date__":{"year":1991,"month":8,"day":12}},
+"ALLO":"Herr","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
+"RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+"IMPDATE":{"__date__":{"year":1999,"month":5,"day":3}},"ATTRIB2":"",
+"CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
+"IDUSR":"","DOMI1":""}}
+"""
+
 POST_PXS = """{"method":"POST","alias":"PXS","id":"0000023635","time":"20130222 11:07:42",
-"user":"MELANIEL","data":{"IDPAR":"0000023635","NAME":"Heinz Hintz",
+"user":"MELANIEL","data":{"IDPAR":"0000023635","NAME":"Heinz Hinz",
 "GEBDAT":{"__date__":{"year":0,"month":0,"day":0}},"APOTHEKE":"","HILFE":"",
 "ANTEIL":"","IDMUT":"","VOLLMACHT":{"__date__":{"year":0,"month":0,"day":0}},
 "LAUFZEIT":{"__date__":{"year":0,"month":0,"day":0}},"DRINGEND":"","MONATLICH":"",
@@ -89,6 +104,31 @@ POST_PXS = """{"method":"POST","alias":"PXS","id":"0000023635","time":"20130222 
 "BIRTHPLACE":"","NOBLECOND":"","CARDISSUER":""}}
 """
 
+# // 2013-02-25 11:46:31 Exception("Cannot handle conversion from <class 'lino_welfare.modlib.pcsw.models.Household'> to <class 'lino_welfare.modlib.pcsw.models.Client'>",)
+PUT_PAR_POTTER = """{"method":"PUT","alias":"PAR","id":"0000004260","time":"20130225 11:44:16",
+"user":"WIL011","data":{"IDPAR":"0000004260","FIRME":"Voldemort-Potter Harald",
+"NAME2":"","RUE":"Schilsweg 26","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"","COMPTE1":"",
+"NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"",
+"LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"ER","CODE2":"","CODE3":"",
+"DATCREA":{"__date__":{"year":1985,"month":7,"day":23}},"ALLO":"Eheleute","NB1":"","NB2":"",
+"IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+"IMPDATE":{"__date__":{"year":2000,"month":6,"day":26}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+"MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"ALICIA","DOMI1":""}}
+"""
+
+#// 2013-02-25 12:00:37 Exception("Cannot handle conversion from <class 'lino_welfare.modlib.pcsw.models.Person'> to <class 'lino_welfare.modlib.pcsw.models.Household'>",)
+
+PUT_PAR_6283 = """
+{"method":"PUT","alias":"PAR","id":"0000006283","time":"20130225 11:52:56","user":"WIL011","data":
+{"IDPAR":"0000006283","FIRME":"Willekens-Delanuit Paul","NAME2":"","RUE":"Rotenbergplatz","CP":"4700",
+"IDPRT":"I","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
+"DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"",
+"CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1998,"month":11,"day":17}},
+"ALLO":"Eheleute","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  24","RUEBTE":"",
+"DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":1999,"month":8,"day":9}},
+"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+"MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
+"""
 
 
 User = dd.resolve_model('users.User')
@@ -97,6 +137,8 @@ Company = dd.resolve_model('contacts.Company')
 Person = dd.resolve_model('contacts.Person')
 Client = dd.resolve_model('pcsw.Client')
 Coaching = dd.resolve_model('pcsw.Coaching')
+Household = dd.resolve_model('households.Household')
+households_Type = dd.resolve_model("households.Type")
 
 class WatchTimTest(TestCase):
     pass
@@ -109,6 +151,7 @@ def test00(self):
     User(username='watch_tim').save()
     User(username='alicia').save()
     User(username='roger').save()
+    households_Type(name="Eheleute",pk=1).save()
     
 def test01(self):
     """
@@ -118,7 +161,12 @@ def test01(self):
     process_line(POST_GEORGES)
     georges = Client.objects.get(id=23633)
     self.assertEqual(georges.first_name,"Georges")
-    
+    georges.first_name = "Peter"
+    georges.save()
+    process_line(POST_GEORGES)
+    georges = Client.objects.get(id=23633)
+    self.assertEqual(georges.first_name,"Georges")
+
 def test02(self):
     """
     Company becomes Client
@@ -133,15 +181,25 @@ def test02(self):
     Company(name="Müller Max Moritz",id=5088).save()
     
     process_line(PUT_MAX_MORITZ)
-    company = Company.objects.get(id=5088) # has not been deleted
+    self.assertDoesNotExist(Company,id=5088)
+    #~ company = Company.objects.get(id=5088) # has not been deleted
     person = Person.objects.get(id=5088) # has been created
     client = Client.objects.get(id=5088) # has been created
-    company = Company.objects.get(id=5088) # has not been deleted
-    coaching = Coaching.objects.get(client=client,user__username='alicia') # has been created
+    coaching = Coaching.objects.get(client=client) # one coaching has been created
     self.assertEqual(person.first_name,"Max Moritz")
     self.assertEqual(client.first_name,"Max Moritz")
+    self.assertEqual(coaching.user.username,'alicia')
     self.assertEqual(coaching.primary,True)
     self.assertEqual(coaching.start_date,i2d(19910812))
+    
+    """
+    Client becomes Company
+    """
+    process_line(PUT_MAX_MORITZ2)
+    self.assertDoesNotExist(Client,id=5088)
+    company = Company.objects.get(id=5088) # has been deleted
+    self.assertDoesNotExist(Coaching,client_id=5088)
+    
 
 def test03(self):
     """
@@ -155,3 +213,27 @@ def test03(self):
     except Exception as e:
         self.assertEqual(str(e),"Cannot create Client 0000023635 from PXS")
     self.assertDoesNotExist(Client,id=23635)
+
+def test04(self):
+    """
+    Household becomes Client
+    """
+    Household(name="Voldemort-Potter Harald",id=4260).save()
+    process_line(PUT_PAR_POTTER)
+    client = Client.objects.get(id=4260) # has been created
+    self.assertDoesNotExist(Household,id=4260)
+    coaching = Coaching.objects.get(client=client) # one coaching has been created
+    self.assertEqual(client.first_name,"Harald")
+    self.assertEqual(coaching.primary,True)
+    self.assertEqual(coaching.user.username,'alicia')
+    self.assertEqual(coaching.start_date,i2d(19850723))
+
+def test05(self):
+    """
+    Person becomes Household 
+    """
+    Person(id=6283,first_name="Paul",last_name="Willekens-Delanuit").save()
+    process_line(PUT_PAR_6283)
+    household = Household.objects.get(id=6283) # has been created
+    self.assertDoesNotExist(Person,id=6283)
+      
