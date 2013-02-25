@@ -351,7 +351,7 @@ class CourseRequestStates(dd.Workflow):
     @classmethod
     def migrate(cls,old):
         """
-        Used by :meth:`lino.apps.pcsw.migrate.migrate_from_1_4_4`.
+        Used by :meth:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_4`.
         """
         cv = {
           None: 'candidate',

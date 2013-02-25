@@ -74,18 +74,6 @@ from lino.modlib.cal.models import update_reminder
 #~ from lino.modlib.contacts.models import Contact
 from lino.core.modeltools import resolve_model, UnresolvedModel
 
-#~ # not used here, but these modules are required in INSTALLED_APPS, 
-#~ # and other code may import them using 
-#~ # ``from lino.apps.pcsw.models import Property``
-
-#~ from lino.modlib.properties.models import Property
-#~ # from lino.modlib.notes.models import NoteType
-#~ from lino.modlib.countries.models import Country, City
-
-#~ if settings.LINO.user_model:
-    #~ User = resolve_model(settings.LINO.user_model,strict=True)
-
-
 
 from lino.ui.models import SiteConfig
 

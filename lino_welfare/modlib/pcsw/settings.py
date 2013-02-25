@@ -22,7 +22,7 @@ For release notes see :mod:`lino.releases`.
 """
 import os
 
-from lino.apps.std.settings import *
+from lino.projects.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
 #~ from lino_welfare.version import *
 import lino_welfare

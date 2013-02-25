@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-29 00:47+0000\n"
+"POT-Creation-Date: 2013-02-25 15:12+0000\n"
 "PO-Revision-Date: 2012-06-25 13:19+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -88,10 +88,6 @@ msgstr ""
 
 #: .\models.py:362
 msgid "Only for newcomers"
-msgstr ""
-
-#: .\models.py:364
-msgid "Only for newcomers with valid SSIN"
 msgstr ""
 
 #: .\models.py:368

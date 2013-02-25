@@ -42,15 +42,6 @@ from lino.core.modeltools import resolve_model
 from lino.utils.test import TestCase
 #~ from lino.utils import Warning
 
-
-#~ Person = resolve_model('contacts.Person')
-#~ Property = resolve_model('properties.Property')
-#~ PersonProperty = resolve_model('properties.PersonProperty')
-
-#~ from lino.apps.pcsw.models import Person
-#~ from lino.modlib.cv.models import PersonProperty
-#~ from lino.modlib.properties.models import Property
-
 from lino_welfare.modlib.cbss import models as cbss
 
 from lino.utils import IncompleteDate

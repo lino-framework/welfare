@@ -185,7 +185,7 @@ def pxs2person(row,person):
         
     if row.has_key('CARDTYPE'):
         #~ row.card_type = pcsw.BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
-        from lino.apps.pcsw import models as pcsw
+        from lino_welfare.modlib.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
             person.card_type = pcsw.BeIdCardTypes.blank_item
         else:

@@ -1,0 +1,10 @@
+Version 1.0.15
+==============
+
+- Unknown HTTP method 'OPTIONS'
+
+- "cercle vicieux" wegen Fehlalarm "Date range overlaps with ISIP #1".
+  Wrote new testcase 
+  :func:`test02 <lino_welfare.modlib.pcsw.tests.pcsw_tests.test02>`.
+  
+- Tx25 kennt jetzt "PseudoNationalNumbers"

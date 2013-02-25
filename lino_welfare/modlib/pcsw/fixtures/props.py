@@ -14,7 +14,7 @@
 
 """
 Installs a set of property types and property groups specific to 
-:mod:`lino.apps.pcsw`.
+:mod:`lino_welfare.modlib.pcsw`.
 
 """
 

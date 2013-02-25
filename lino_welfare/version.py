@@ -21,5 +21,5 @@
 #~ - ../docs/releases/index.rst
 #~ - ../docs/releases/<__version__>.rst
 
-__version__ = '1.0.14'
+__version__ = '1.0.15'
 

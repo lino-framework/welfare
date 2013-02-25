@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-29 00:47+0000\n"
+"POT-Creation-Date: 2013-02-25 15:12+0000\n"
 "PO-Revision-Date: 2012-12-07 13:26+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de\n"
@@ -89,10 +89,6 @@ msgstr "Neue Klienten sind die, deren Begleitung nach diesem Datum beginnt"
 msgid "Only for newcomers"
 msgstr "Nur für Neuzugänge"
 
-#: .\models.py:364
-msgid "Only for newcomers with valid SSIN"
-msgstr "Nur für Neuanträge mit gültiger NR-Nr."
-
 #: .\models.py:368
 msgid "Only for newcomers with given `faculty`."
 msgstr "Nur für Neuanträge mit Angabe in `Fachbereich`."
@@ -131,6 +127,9 @@ msgstr "%(client)s wird ab jetzt begleitet für %(faculty)s durch %(coach)s."
 #: .\models.py:641
 msgid "Newcomers Quota"
 msgstr "Quote NZ"
+
+#~ msgid "Only for newcomers with valid SSIN"
+#~ msgstr "Nur für Neuanträge mit gültiger NR-Nr."
 
 #~ msgid "Count Newcomers since"
 #~ msgstr "Neue Klienten seit"

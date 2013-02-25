@@ -27,13 +27,8 @@ Installing Lino-Welfare
   
     python -m lino_welfare.modlib.pcsw.settings
     
-- In your project's `settings.py`, inherit from 
-  `lino_welfare.modlib.pcsw.settings` by replacing the following line::
-
-    from lino.apps.presto.settings import *
-    
-  by this one::
+- In your project's `settings.py`, make sure that you inherit from 
+  the right `settings` module::
     
     from lino_welfare.modlib.pcsw.settings import *
-    
     

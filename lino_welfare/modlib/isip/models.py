@@ -29,7 +29,8 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_unicode 
+from django.utils import translation
+#~ from django.utils.encoding import force_unicode
 
 
 from lino import dd
@@ -318,11 +319,11 @@ class ContractBase(
         if self.type_id and self.type.exam_policy_id:
             if not self.exam_policy_id:
                 self.exam_policy_id = self.type.exam_policy_id
-        # The severe test is ready and now also activated :
-        if True:
-          if self.client_id is not None:
+                
+        if self.client_id is not None:
             msg = OverlappingContractsTest(self.client).check(self)
             if msg:
+                #~ print 20130225, translation._trans, translation.get_language()
                 raise ValidationError(msg)
             
         super(ContractBase,self).full_clean(*args,**kw)
@@ -452,9 +453,9 @@ class OverlappingContractsTest:
         self.actives = []
         for model in dd.models_by_base(ContractBase):
             for con1 in model.objects.filter(client=client):
-                p1 = con1.active_period()
-                #~ if p1:
-                self.actives.append((p1,con1))
+                ap = con1.active_period()
+                if ap[0] is None and ap[1] is None: continue
+                self.actives.append((ap,con1))
         
     def check(self,con1):
         ap = con1.active_period()

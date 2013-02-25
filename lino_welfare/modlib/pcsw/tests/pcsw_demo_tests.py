@@ -85,7 +85,7 @@ def test001(self):
     - name of some person
     """
     Person = dd.resolve_model('contacts.Person')
-    #~ from lino.apps.pcsw.models import Person
+    #~ from lino.projects.pcsw.models import Person
     self.assertEquals(Person.objects.count(), 78)
     
     p = Person.objects.get(pk=118)
@@ -241,7 +241,7 @@ def test006(self):
     Testing BabelValues.
     """
     from lino.utils import babel
-    from lino.apps.pcsw.models import Person
+    from lino_welfare.modlib.pcsw.models import Person
     #~ from lino.apps.pcsw.models import Property, PersonProperty
     Property = settings.LINO.modules.properties.Property
     PersonProperty = settings.LINO.modules.properties.PersonProperty
@@ -388,7 +388,7 @@ def test012(self):
     when the provider has exactly one contact person.
     """
     from lino_welfare.modlib.jobs.models import Contract, JobProvider, Job
-    from lino.apps.pcsw.models import Person
+    from lino_welfare.modlib.pcsw.models import Person
     from lino.modlib.users.models import User
     u = User.objects.get(username='root')
     #~ qs = Person.objects.order_by('last_name','first_name')

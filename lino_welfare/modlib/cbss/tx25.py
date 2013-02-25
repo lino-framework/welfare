@@ -506,7 +506,15 @@ def IT024(n):
     info = Info()
     info.add_deldate(n)
     return info
-  
+
+def IT208(n):
+    info = Info()
+    #~ info.addfrom(n,'Date','',DateType)
+    info.addfrom(n,'PseudoNationalNumber','')
+    info.add_deldate(n)
+    return info
+
+
 def FiliationType(n):
     return code_label(n)
 def ParentType(n):
@@ -514,6 +522,7 @@ def ParentType(n):
     info.addfrom(n,'Name','',NameType)
     info.addfrom(n,'NationalNumber',' (',NationalNumberType,')')
     return info
+    
 def IT110(n):
     #~ info = code_label(n.FiliationType)
     #~ info.addfrom(n.Parent1,'Name','',NameType)
@@ -1295,6 +1304,14 @@ class RowHandlers:
         group = _("Address Declaration Abroad") 
         for n in node.Address:
             info = IT018(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+        
+    @staticmethod
+    def PseudoNationalNumbers(node,name):
+        group = _("Pseudo National Numbers") # Pseudo-numéro national
+        for n in node.PseudoNationalNumber:
+            info = IT208(n)
             yield datarow(group,n,n.Date,info)
             group = ''
         

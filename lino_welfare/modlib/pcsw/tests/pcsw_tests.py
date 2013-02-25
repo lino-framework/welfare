@@ -34,6 +34,9 @@ from django.conf import settings
 #from lino.modlib.countries.models import Country
 #~ from lino.modlib.contacts.models import Companies
 
+from django.utils import translation
+from django.utils.encoding import force_unicode
+from django.core.exceptions import ValidationError
 
 from lino import dd
 from lino.utils import i2d
@@ -42,6 +45,8 @@ from lino.utils import babel
 #Companies = resolve_model('contacts.Companies')
 from lino.utils.test import TestCase
 
+contacts_RoleType = dd.resolve_model('contacts.RoleType')
+contacts_Role = dd.resolve_model('contacts.Role')
 Person = dd.resolve_model('contacts.Person')
 Property = dd.resolve_model('properties.Property')
 PersonProperty = dd.resolve_model('properties.PersonProperty')
@@ -50,7 +55,7 @@ pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 households = dd.resolve_app('households')
 
-#~ from lino.apps.pcsw.models import Person
+#~ from lino.projects.pcsw.models import Person
 #~ from lino.modlib.cv.models import PersonProperty
 #~ from lino.modlib.properties.models import Property
 
@@ -60,89 +65,44 @@ class QuickTest(TestCase):
         #~ settings.LINO.never_build_site_cache = True
         #~ super(DemoTest,self).setUp()
             
-  
-def unused_test01(self):
-    """
-    Used on :doc:`/blog/2011/0414`.
-    See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
-    """
-    from lino.utils.dumpy import Serializer
-    from lino.apps.pcsw.models import Company, CourseProvider
-    ser = Serializer()
-    #~ ser.models = [CourseProvider,Company]
-    ser.models = [CourseProvider]
-    ser.write_preamble = False
-    self.assertEqual(Company._meta.parents,{})
-    parent_link_field = CourseProvider._meta.parents.get(Company)
-    #~ print parent_link_field.name
-    #~ self.assertEqual(CourseProvider._meta.parents.get(Company),{})
-    #~ self.assertEqual(CourseProvider._meta.parents,{})
-    fields = [f.attname for f in CourseProvider._meta.fields]
-    local_fields = [f.attname for f in CourseProvider._meta.local_fields]
-    self.assertEqual(','.join(local_fields),'company_ptr_id')
-    fields = [f.attname for f in Company._meta.fields]
-    local_fields = [f.attname for f in Company._meta.local_fields]
-    self.assertEqual(fields,local_fields)
-    #~ self.assertTrue(','.join([f.attname for f in local_fields]),'company_ptr_id')
-      
-    #~ foo = Company(name='Foo')
-    #~ foo.save()
-    bar = CourseProvider(name='Bar')
-    bar.save()
-    
-    #~ ser.serialize([foo,bar])
-    ser.serialize([bar])
-    #~ print ser.stream.getvalue()
-    self.assertEqual(ser.stream.getvalue(),"""
-def create_pcsw_courseprovider(company_ptr_id):
-    return insert_child(Company.objects.get(pk=company_ptr_id),CourseProvider)
 
+isip_Contract = dd.resolve_model("isip.Contract")
+isip_ContractType = dd.resolve_model("isip.ContractType")
+jobs_Contract = dd.resolve_model("jobs.Contract")
+from lino_welfare.modlib.jobs.models import Contracts, ContractType, JobProvider, Job
+from lino.mixins.printable import PrintAction
+from lino.modlib.users.models import User
+#~ from lino_welfare.modlib.pcsw.models import Person
+from lino_welfare.modlib.pcsw.models import Client
 
-def pcsw_courseprovider_objects():
-    yield create_pcsw_courseprovider(1)
-
-
-def objects():
-    for o in pcsw_courseprovider_objects(): yield o
-
-from lino.apps.pcsw.migrate import install
-install(globals())
-""")
-
-def test02(self):
+def test01(self):
     """
     Tests error handling when printing a contract whose type's 
     name contains non-ASCII char.
     Created :doc:`/blog/2011/0615`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
-    from lino_welfare.modlib.jobs.models import Contracts, Contract, ContractType, JobProvider, Job
     #~ from lino.modlib.notes.models import ContractType
-    from lino.mixins.printable import PrintAction
-    from lino.modlib.users.models import User
-    #~ from lino_welfare.modlib.pcsw.models import Person
-    from lino_welfare.modlib.pcsw.models import Client
-    root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
-    root.save()
+    self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
+    self.user_root.save()
     
-    jp = JobProvider(name="Test")
-    jp.save()
-    person = Client(first_name="Max",last_name="Mustermann")
-    person.full_clean()
-    person.save()
+    self.job_provider = JobProvider(name="Test")
+    self.job_provider.save()
+    self.max_mustermann = Client(first_name="Max",last_name="Mustermann")
+    self.max_mustermann.full_clean()
+    self.max_mustermann.save()
     t = ContractType(id=1,build_method='pisa',template="",name=u'Art.60\xa77')
     t.save()
-    job = Job(provider=jp,contract_type=t)
-    #~ job = Job(contract_type=t,name="Test")
+    job = Job(provider=self.job_provider,contract_type=t)
     job.save()
-    n = Contract(id=1,job=job,user=root,client=person)
-    n.full_clean()
-    n.save()
+    self.jobs_contract_1 = jobs_Contract(id=1,job=job,
+        user=self.user_root,client=self.max_mustermann)
+    self.jobs_contract_1.full_clean()
+    self.jobs_contract_1.save()
+    self.assertEqual(self.jobs_contract_1.company,self.job_provider)
     
     
     if 'en' in babel.AVAILABLE_LANGUAGES:
-        root.language='en'
-        root.save()
         url = '/api/jobs/Contract/1?an=do_print'
         response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response,'success message alert')
@@ -150,9 +110,79 @@ def test02(self):
         self.assertEqual(result['alert'],True)
         self.assertEqual(
           result['message'],
-          u"""\
+          """\
 Invalid template '' configured for ContractType u'Art.60\\xa77' (expected filename ending with '.pisa.html').""")
 
+    
+def test02(self):
+    """
+    20130225 Melanie wrote: 
+    
+      ich kann keine 60/7 Konvention erstellen. 
+      Cercle vicieux: ich müsste den VSE beenden aber VSE kann nicht beendet
+      werden weil Datumüberschniedung mit 60/7 Konvention und genauso
+      andersrum.
+    
+    A dateless contract is a contract that has no begin date and no end date.
+    Lino allows multiple dateless contracts per client.
+    OverlappingContractsTest gave false alert when trying to save a date contract while 
+    another dateless contract existed.
+    
+    This test is based on the previous test (:func:`test01`) which created a dateless contract.
+    Now we try to create another contract.
+    The dateless contract should not cause problem here.
+    """
+    t = isip_ContractType(id=1,name='Test')
+    t.save()
+    self.isip_contract_1 = isip_Contract(id=1,
+        client=self.max_mustermann,
+        type=t,
+        user=self.user_root,
+        )
+    self.isip_contract_1.full_clean()
+    self.isip_contract_1.save()
+    self.isip_contract_1.applies_from=i2d(20130201)
+    self.isip_contract_1.applies_until=i2d(20130228)
+    self.isip_contract_1.full_clean()
+    self.isip_contract_1.save()
+    
+    """
+    if now somebody edits the first contract and inserts a start date,
+    then this should raise a ValidationError
+    """    
+    self.jobs_contract_1.applies_from=i2d(20130201)
+    #~ self.jobs_contract_1.applies_until=i2d(20130228)
+    #~ babel.set_language(None)
+    translation.deactivate_all()
+    try:
+        self.jobs_contract_1.full_clean()
+        self.fail("Expected a ValidationError")
+    except ValidationError as e:
+        self.assertEqual(force_unicode(e),"[u'Date range overlaps with ISIP #1']")
+    self.jobs_contract_1.applies_from = None
+    
+    #~ self.jobs_contract_1.save()
+
+
+def test02b(self):
+    """
+    If the job provider has a single contact person
+    that person will automatically get filled as default signer 
+    for a contract with this provider.
+    """
+    gf = contacts_RoleType(name="Geschäftsführer",use_in_contracts=True)
+    gf.full_clean() ; gf.save()
+    self.hans = Person(first_name="Hans",last_name="Dampf")
+    self.hans.full_clean() ; self.hans.save()
+    r = contacts_Role(person=self.hans,company=self.job_provider,type=gf)
+    r.full_clean() ; r.save()
+    qs = self.jobs_contract_1.contact_person_choices_queryset(self.job_provider)
+    self.assertEqual(qs.count(),1)
+    self.assertEqual(unicode(qs[0]),"Hans Dampf")
+    self.assertEqual(self.jobs_contract_1.contact_person,None)
+    self.jobs_contract_1.full_clean()
+    self.assertEqual(self.jobs_contract_1.contact_person,self.hans)
+    self.jobs_contract_1.save()
     
 
     
@@ -163,7 +193,6 @@ def test03(self):
     Created :doc:`/blog/2011/0509`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
-    #~ from lino.apps.pcsw.models import NoteType
     from lino.modlib.notes.models import NoteType
     i = NoteType(build_method='appyodt',template="Default.odt",id=1)
     i.save()
@@ -246,7 +275,6 @@ def test05(self):
     contained non-ascii characters.
     See :doc:`/blog/2011/0728`.
     """
-    #~ from lino.apps.pcsw.models import Activity, Person
     from lino.core.modeltools import obj2str
     a = pcsw.Activity(name=u"Sozialhilfeempfänger")
     p = pcsw.Client(last_name="Test",activity=a)
@@ -280,7 +308,6 @@ def test06(self):
     
     """
     from django.db import models
-    #~ from lino.apps.pcsw.models import Person
     from lino.core.fields import get_data_elem
     de = get_data_elem(pcsw.Client,'id')
     #~ print de.__class__
@@ -298,7 +325,6 @@ def test07(self):
     """
     Bug 20120127 : VirtualFields had sneaked into wildcard columns.
     """
-    #~ from lino.apps.pcsw.models import Companies
     wcde = [de.name for de in contacts.Companies.wildcard_data_elems()]
     #~ expected = '''\
 #~ id country city name addr1 street_prefix street street_no street_box 
@@ -347,7 +373,6 @@ def test08(self):
     check_disabled(p,df,'id first_name last_name bank_account1')
     check_enabled(p,df,'gsm')
                 
-    #~ from lino.apps.pcsw.models import Household
     from lino.modlib.households.models import Households
     h = pcsw.Household(name="Test Household")
     h.save()

@@ -76,16 +76,11 @@ from lino.modlib.cal.utils import DurationUnits
 
 # not used here, but these modules are required in INSTALLED_APPS, 
 # and other code may import them using 
-# ``from lino.apps.pcsw.models import Property``
+# ``from lino_welfare.modlib.pcsw.models import Property``
 
 from lino.modlib.properties.models import Property
 #~ from lino.modlib.notes.models import NoteType
 from lino.modlib.countries.models import Country, City
-#~ from lino.apps.pcsw.models import Company, Companies, CompanyDetail
-#~ from lino.apps.pcsw import models as pcsw
-#~ pcsw = dd.resolve_app('lino_welfare')
-#~ from lino_welfare.modlib.pcsw import models as pcsw
-#~ from lino_welfare.modlib.isip.models import ContractBase
 
 contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
