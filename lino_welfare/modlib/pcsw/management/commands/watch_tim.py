@@ -541,7 +541,8 @@ class PAR(Controller):
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if username:
                         #~ print 20130222, username
-                        u = users.User.objects.get(username=username)
+                        u = users.User.get_by_username(username)
+                        #~ u = users.User.objects.get(username=username)
                         """
                         typical cases:
                         - imported client has been assigned a coach in Lino, 

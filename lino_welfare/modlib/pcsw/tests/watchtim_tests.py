@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 #~ from django.utils import unittest
 #~ from django.test.client import Client
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 #from lino.igen import models
 #from lino.modlib.contacts.models import Contact, Companies
@@ -78,21 +79,6 @@ PUT_MAX_MORITZ = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"2013
 "IDUSR":"ALICIA","DOMI1":""}}
 """
 
-# like previous, but IDUSR is empty
-PUT_MAX_MORITZ2 = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"20130222 12:06:01",
-"user":"MELANIE","data":{"IDPAR":"0000005088","FIRME":"Müller Max Moritz","NAME2":"",
-"RUE":"Werthplatz 12","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
-"COMPTE1":"001-1234567-89","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"",
-"DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"",
-"PROF":"80","CODE1":"RH","CODE2":"","CODE3":"",
-"DATCREA":{"__date__":{"year":1991,"month":8,"day":12}},
-"ALLO":"Herr","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
-"RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
-"IMPDATE":{"__date__":{"year":1999,"month":5,"day":3}},"ATTRIB2":"",
-"CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
-"IDUSR":"","DOMI1":""}}
-"""
-
 POST_PXS = """{"method":"POST","alias":"PXS","id":"0000023635","time":"20130222 11:07:42",
 "user":"MELANIEL","data":{"IDPAR":"0000023635","NAME":"Heinz Hinz",
 "GEBDAT":{"__date__":{"year":0,"month":0,"day":0}},"APOTHEKE":"","HILFE":"",
@@ -128,6 +114,21 @@ PUT_PAR_6283 = """
 "DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":1999,"month":8,"day":9}},
 "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
 "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
+"""
+
+# 'ValidationError({'first_name': [u'This field cannot be blank.']})' 
+BELGACOM1 = """
+{"method":"PUT","alias":"PAR","id":"0000001334","time":"20121029 09:00:00","user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
+"NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
+"FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
+"DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
+"IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
+"DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
+"NB2":"","IDDEV":"","MEMO":"Foo\nbar\n","COMPTE2":"","RUENUM":"","RUEBTE":"",
+"DEBIT2":"   2242.31","CREDIT2":"",
+"IMPDATE":{"__date__":{"year":2012,"month":10,"day":24}},
+"ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
+"MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
 """
 
 
@@ -179,7 +180,6 @@ def test02(self):
     """
     
     Company(name="Müller Max Moritz",id=5088).save()
-    
     process_line(PUT_MAX_MORITZ)
     self.assertDoesNotExist(Company,id=5088)
     #~ company = Company.objects.get(id=5088) # has not been deleted
@@ -195,9 +195,10 @@ def test02(self):
     """
     Client becomes Company
     """
-    process_line(PUT_MAX_MORITZ2)
-    self.assertDoesNotExist(Client,id=5088)
-    company = Company.objects.get(id=5088) # has been deleted
+    PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
+    process_line(PUT_MAX_MORITZ)
+    company = Company.objects.get(id=5088) 
+    self.assertDoesNotExist(Client,id=5088) # has been deleted
     self.assertDoesNotExist(Coaching,client_id=5088)
     
 
@@ -237,3 +238,17 @@ def test05(self):
     household = Household.objects.get(id=6283) # has been created
     self.assertDoesNotExist(Person,id=6283)
       
+def test06(self):
+    """
+    ValidationError {'first_name': [u'This field cannot be blank.']}
+    """
+    self.assertDoesNotExist(Partner,id=1334)
+    try:
+        process_line(BELGACOM1)
+        self.fail("Expected a ValidationError")
+    except ValidationError as e:
+        self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
+    self.assertDoesNotExist(Partner,id=1334)
+    BELGACOM1 = BELGACOM1.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
+    process_line(BELGACOM1)
+    company = Company.objects.get(id=1334) 

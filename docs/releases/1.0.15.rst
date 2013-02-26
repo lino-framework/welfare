@@ -7,7 +7,7 @@ Version 1.0.15
   Wrote new testcase 
   :func:`test02 <lino_welfare.modlib.pcsw.tests.pcsw_tests.test02>`.
   
-- Tx25 kennt jetzt "PseudoNationalNumbers"
+- Tx25 kennt jetzt "Pseudo-Nationalnummern" (PseudoNationalNumbers)
 
 - watch_tim: 
   Had to completely rewrite 
