@@ -1,0 +1,13 @@
+Version 1.0.16
+==============
+
+- Fixed a bug in `lino_welfare.modlib.cbss.tx25`: 
+  Tx25 Nr 152 : 
+  Hubert hatte erstmals eine Tx25 für jemanden gemacht, der eine 
+  Legale Hauptadresse (LegalMainAddresses) mit leerem 
+  Feld `HouseNumber` hat. 
+  Jawohl, das gibt's, aber Lino vertrug es noch nicht.
+
+- Lino und der neue Präsident
+
+

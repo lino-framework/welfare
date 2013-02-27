@@ -271,8 +271,13 @@ def simpletype(v):
 def boldstring(v):
     return Info(xghtml.E.b(unicode(v)))
     
+def validate_element(c):
+    if c is None:
+        raise Exception("Invalid element %r" % c)
+        
 class Info(object):
     def __init__(self,*chunks):
+        for c in chunks: validate_element(c)
         self.chunks = list(chunks)
     def addfrom(self,node,name,prefix=None,fmt=boldstring,suffix=''):
         v = getattr(node,name,None)
@@ -517,12 +522,33 @@ def IT208(n):
 
 def FiliationType(n):
     return code_label(n)
+
 def ParentType(n):
     info = Info()
     info.addfrom(n,'Name','',NameType)
     info.addfrom(n,'NationalNumber',' (',NationalNumberType,')')
     return info
     
+def StreetType(n):
+    # we don't print the code of streets
+    info = Info()
+    info.addfrom(n,'Label','')
+    #~ info.addfrom(n,'NationalNumber',' (',NationalNumberType,')')
+    return info
+    #~ return code_label(n)
+
+def IT020(n):
+    def AddressType020(n):
+        info = Info()
+        info.addfrom(n,'ZipCode','')
+        info.addfrom(n,'Street','',StreetType)
+        info.addfrom(n,'HouseNumber',_('no. '))
+        info.addfrom(n,'Box',' ')
+        return info
+    info = Info()
+    info.addfrom(n,"Address",'',AddressType020)
+    return info
+  
 def IT110(n):
     #~ info = code_label(n.FiliationType)
     #~ info.addfrom(n.Parent1,'Name','',NameType)
@@ -1005,14 +1031,16 @@ class RowHandlers:
     def LegalMainAddresses(node,name):
         group = _("Legal Main Addresses")
         for n in node.LegalMainAddress:
-            info = Info()
-            info.chunks.append(E.b(n.Address.ZipCode))
-            info.chunks.append(', ')
-            info.chunks.append(n.Address.Street.Label)
-            info.chunks.append(' ')
-            info.chunks.append(n.Address.HouseNumber)
-            yield datarow(group,n,n.Date,info)
+            yield datarow(group,n,n.Date,IT020(n))
             group = ''
+            #~ info = Info()
+            #~ info.chunks.append(E.b(n.Address.ZipCode))
+            #~ info.chunks.append(', ')
+            #~ info.chunks.append(n.Address.Street.Label)
+            #~ info.chunks.append(' ')
+            #~ info.chunks.append(n.Address.HouseNumber)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
             
 
     @staticmethod

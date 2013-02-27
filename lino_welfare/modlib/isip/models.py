@@ -168,8 +168,13 @@ class ContractEndings(dd.Table):
     column_names = 'name *'
     order_by = ['name']
 
+FUNCTION_ID_SECRETARY = 3
+#~ FUNCTION_ID_PRESIDENT = 16
+FUNCTION_ID_PRESIDENT = 5
 
+def default_secretary(): return ContractBase.secretary_choices()[0]
 
+def default_president(): return ContractBase.president_choices()[0]
 
 #~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
 class ContractBase(
@@ -191,6 +196,9 @@ class ContractBase(
     class Meta:
         abstract = True
         
+    
+
+    
     #~ eventgenerator = models.OneToOneField(cal.EventGenerator,
         #~ related_name="%(app_label)s_%(class)s_ptr",
         #~ parent_link=True)
@@ -221,7 +229,30 @@ class ContractBase(
         blank=True,null=True)
     date_ended = models.DateField(blank=True,null=True,verbose_name=_("date ended"))
     
-    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended'
+    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended secretary president'
+    
+    secretary = models.ForeignKey("contacts.Person",
+      related_name="%(app_label)s_%(class)s_set_by_secretary",
+      default=default_secretary,
+      verbose_name=_("Secretary"))
+      
+    president = models.ForeignKey("contacts.Person",
+      related_name="%(app_label)s_%(class)s_set_by_president",
+      default=default_president,
+      verbose_name=_("President"))
+      
+    @chooser()
+    def secretary_choices(cls):
+        return settings.LINO.modules.contacts.Person.objects.filter(
+              rolesbyperson__company=settings.LINO.site_config.site_company,
+              rolesbyperson__type__id=FUNCTION_ID_SECRETARY)
+        
+    @chooser()
+    def president_choices(cls):
+        return settings.LINO.modules.contacts.Person.objects.filter(
+              rolesbyperson__company=settings.LINO.site_config.site_company,
+              rolesbyperson__type__id=FUNCTION_ID_PRESIDENT)
+        
     
     
     #~ def summary_row(self,ui,rr,**kw):
@@ -516,6 +547,9 @@ class Contract(ContractBase):
         
     hidden_columns = (ContractBase.hidden_columns 
         + " stages goals duties_asd duties_dsbe duties_company duties_person")
+        
+      
+        
     
     @classmethod
     def on_analyze(cls,lino):
@@ -549,8 +583,8 @@ class ContractDetail(dd.FormLayout):
     type company contact_person contact_role
     applies_from applies_until exam_policy
     
-    date_decided date_issued 
-    date_ended ending
+    date_decided date_issued date_ended ending:20
+    # secretary president
     cal.TasksByController cal.EventsByController
     """,label = _("General"))
     

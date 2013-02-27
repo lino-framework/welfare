@@ -545,8 +545,9 @@ class ContractDetail(dd.FormLayout):
     job type company contact_person contact_role
     applies_from duration applies_until exam_policy
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
-    date_decided date_issued date_ended ending
     reference_person build_time
+    date_decided date_issued date_ended ending:20
+    # secretary president
     responsibilities 
     """
     

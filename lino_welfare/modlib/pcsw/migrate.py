@@ -542,5 +542,12 @@ def migrate_from_1_0_11(globals_dict):
     globals_dict.update(lino_HelpText = resolve_model("ui.HelpText"))
     return '1.0.12'
 
-def migrate_from_1_0_12(globals_dict):
-    return '1.0.13'
+def migrate_from_1_0_12(globals_dict): return '1.0.13'
+def migrate_from_1_0_13(globals_dict): return '1.0.14'
+def migrate_from_1_0_14(globals_dict): return '1.0.15'
+def migrate_from_1_0_15(globals_dict): 
+    """
+    New fields secretary and president in Contract. 
+    """
+    ...
+    return '1.0.16'

@@ -426,6 +426,20 @@ def objects():
         gender=mixins.Genders.female)
     yield tatjana
     
+    
+    cpas = company(name=u"ÖSHZ Kettenis",city=kettenis,country='BE')
+    yield cpas
+    settings.LINO.site_config.site_company = cpas
+    yield settings.LINO.site_config
+    yield role(company=cpas,
+        person=Person.objects.get(name__exact="Radermacher Jean"),
+        type_id=isip.FUNCTION_ID_PRESIDENT)
+    yield role(company=cpas,
+        person=Person.objects.get(name__exact="Mießen Michael"),
+        type_id=isip.FUNCTION_ID_SECRETARY)
+    
+    
+    
     bernard = Person.objects.get(name__exact="Bodard Bernard")
     
     cct = ClientContactType(name="Arbeitsvermittler")
