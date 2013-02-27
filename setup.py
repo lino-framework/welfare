@@ -45,7 +45,7 @@ setup(name='lino-welfare',
       #~ url=settings.LINO.url,
       license='GPL',
       packages=['lino_welfare'],
-      requires=['lino','suds'],
+      requires=['lino','suds','vobject'],
       classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
