@@ -329,7 +329,8 @@ def objects():
     ulrike = Person.objects.get(name__exact="Charlier Ulrike")
     erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
     
-    cpas = company(name=u"ÖSHZ Eupen",city=eupen,country=belgium)
+    #~ cpas = company(name=u"ÖSHZ Eupen",city=eupen,country=belgium)
+    cpas = company(name=u"ÖSHZ Kettenis",city=kettenis,country=belgium)
     yield cpas
     bisa = company(name=u"BISA",city=eupen,country=belgium)
     yield bisa 
@@ -427,18 +428,20 @@ def objects():
     yield tatjana
     
     
-    cpas = company(name=u"ÖSHZ Kettenis",city=kettenis,country='BE')
-    yield cpas
-    settings.LINO.site_config.site_company = cpas
-    yield settings.LINO.site_config
+    michael = Person.objects.get(name__exact="Mießen Michael")
+    jean = Person.objects.get(name__exact="Radermacher Jean")
+    #~ yield cpas
+    sc = settings.LINO.site_config
+    sc.site_company = cpas
+    sc.signer1 = michael
+    sc.signer2 = jean
+    yield sc
     yield role(company=cpas,
-        person=Person.objects.get(name__exact="Radermacher Jean"),
-        type_id=isip.FUNCTION_ID_PRESIDENT)
+        person=michael,
+        type=sc.signer1_function)
     yield role(company=cpas,
-        person=Person.objects.get(name__exact="Mießen Michael"),
-        type_id=isip.FUNCTION_ID_SECRETARY)
-    
-    
+        person=jean,
+        type=sc.signer2_function)
     
     bernard = Person.objects.get(name__exact="Bodard Bernard")
     

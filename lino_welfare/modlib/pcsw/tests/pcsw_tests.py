@@ -75,6 +75,19 @@ from lino.modlib.users.models import User
 #~ from lino_welfare.modlib.pcsw.models import Person
 from lino_welfare.modlib.pcsw.models import Client
 
+def test00(self):
+    """
+    Some initialization
+    """
+    self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
+    self.user_root.save()
+    sc = settings.LINO.site_config
+    sc.signer1 = Person(first_name="Ernst",last_name="Keutgen") ; sc.signer1.save()
+    sc.signer2 = Person(first_name="Joseph",last_name="Ossemann") ; sc.signer2.save()
+    #~ president = contacts_RoleType(name="Präsident") ; president.save()
+    #~ secretary = contacts_RoleType(name="Sekretär"); secretary.save()
+    sc.full_clean() ; sc.save()
+  
 def test01(self):
     """
     Tests error handling when printing a contract whose type's 
@@ -82,9 +95,6 @@ def test01(self):
     Created :doc:`/blog/2011/0615`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
-    #~ from lino.modlib.notes.models import ContractType
-    self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
-    self.user_root.save()
     
     self.job_provider = JobProvider(name="Test")
     self.job_provider.save()
@@ -178,7 +188,8 @@ def test02b(self):
     r.full_clean() ; r.save()
     qs = self.jobs_contract_1.contact_person_choices_queryset(self.job_provider)
     self.assertEqual(qs.count(),1)
-    self.assertEqual(unicode(qs[0]),"Hans Dampf")
+    #~ self.assertEqual(unicode(qs[0]).upper(),"HANS DAMPF") # some configurations uppercase last_name
+    self.assertEqual(unicode(qs[0]),"Hans DAMPF") 
     self.assertEqual(self.jobs_contract_1.contact_person,None)
     self.jobs_contract_1.full_clean()
     self.assertEqual(self.jobs_contract_1.contact_person,self.hans)
@@ -257,9 +268,9 @@ def test04(self):
     if 'fr' in babel.AVAILABLE_LANGUAGES:
         babel.set_language('fr')
         #~ self.assertEqual(p.get_titled_name,"Mr Jean Louis DUPONT")
-        self.assertEqual(p.full_name,"M. Jean Louis Dupont")
+        self.assertEqual(p.full_name,"M. Jean Louis DUPONT")
         self.assertEqual('\n'.join(p.address_lines()),u"""\
-M. Jean Louis Dupont
+M. Jean Louis DUPONT
 Avenue de la gare 3 b
 Bruxelles
 Belgique""")

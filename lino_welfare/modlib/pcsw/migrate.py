@@ -547,7 +547,30 @@ def migrate_from_1_0_13(globals_dict): return '1.0.14'
 def migrate_from_1_0_14(globals_dict): return '1.0.15'
 def migrate_from_1_0_15(globals_dict): 
     """
-    New fields secretary and president in Contract. 
+    New fields `secretary` and `president` in Contract. 
     """
-    ...
+    Person = dd.resolve_model('contacts.Person')
+    S = Person.objects.get(pk=84719)
+    P = Person.objects.get(pk=86814)
+    #~ FUNCTION_ID_SECRETARY = 3
+    #~ FUNCTION_ID_PRESIDENT = 16
+    #~ oldf = globals_dict['create_lino_siteconfig']
+    #~ def newf(*args):
+        #~ obj = oldf(*args)
+        #~ obj.secretary_function = contacts.RoleType.objects.get(pk=3)
+        #~ obj.president_function = contacts.RoleType.objects.get(pk=16)
+        #~ obj.secretary = S
+        #~ obj.president = P
+        #~ return obj
+    #~ globals_dict['create_lino_siteconfig'] = newf
+
+    for fn in ('create_isip_contract','create_jobs_contract','create_lino_siteconfig'):
+        oldf = globals_dict[fn]
+        def newf(*args):
+            obj = oldf(*args)
+            obj.signer1 = S
+            obj.signer2 = P
+            return obj
+        globals_dict[fn] = newf
+
     return '1.0.16'

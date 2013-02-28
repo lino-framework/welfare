@@ -168,17 +168,64 @@ class ContractEndings(dd.Table):
     column_names = 'name *'
     order_by = ['name']
 
-FUNCTION_ID_SECRETARY = 3
+#~ FUNCTION_ID_SECRETARY = 3
 #~ FUNCTION_ID_PRESIDENT = 16
-FUNCTION_ID_PRESIDENT = 5
+#~ FUNCTION_ID_PRESIDENT = 5
 
-def default_secretary(): return ContractBase.secretary_choices()[0]
+def default_signer1(): 
+    return settings.LINO.site_config.signer1
+    #~ return SecretaryPresident.secretary_choices()[0]
 
-def default_president(): return ContractBase.president_choices()[0]
+def default_signer2(): 
+    return settings.LINO.site_config.signer2
+    #~ return SecretaryPresident.president_choices()[0]
+  
+class Signers(dd.Model):
+    """
+    Model mixin which adds two fields `signer1` and `signer2`,
+    the two in-house signers of contracts and official documents.
+    
+    Inherited by :class:`SiteConfig <lino.ui.models.SiteConfig>` 
+    and :class:`ContractBase`.
+    """
+    
+    class Meta:
+        abstract = True
+        
+    signer1 = models.ForeignKey("contacts.Person",
+      related_name="%(app_label)s_%(class)s_set_by_signer1",
+      #~ default=default_signer1,
+      verbose_name=_("Secretary"))
+      
+    signer2 = models.ForeignKey("contacts.Person",
+      related_name="%(app_label)s_%(class)s_set_by_signer2",
+      #~ default=default_signer2,
+      verbose_name=_("President"))
+      
+    @chooser()
+    def signer1_choices(cls):
+        sc = settings.LINO.site_config
+        kw = dict()
+        if sc.signer1_function:
+            kw.update(rolesbyperson__type=sc.signer1_function)
+        return settings.LINO.modules.contacts.Person.objects.filter(
+              rolesbyperson__company=sc.site_company,**kw)
+        
+    @chooser()
+    def signer2_choices(cls):
+        sc = settings.LINO.site_config
+        kw = dict()
+        if sc.signer2_function:
+            kw.update(rolesbyperson__type=sc.signer2_function)
+        return settings.LINO.modules.contacts.Person.objects.filter(
+              rolesbyperson__company=sc.site_company,**kw)
+      
+  
 
 #~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
 class ContractBase(
     #~ contacts.CompanyContact,
+    Signers,
     contacts.ContactRelated,
     mixins.TypedPrintable,
     cal.EventGenerator):
@@ -196,9 +243,6 @@ class ContractBase(
     class Meta:
         abstract = True
         
-    
-
-    
     #~ eventgenerator = models.OneToOneField(cal.EventGenerator,
         #~ related_name="%(app_label)s_%(class)s_ptr",
         #~ parent_link=True)
@@ -229,30 +273,7 @@ class ContractBase(
         blank=True,null=True)
     date_ended = models.DateField(blank=True,null=True,verbose_name=_("date ended"))
     
-    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended secretary president'
-    
-    secretary = models.ForeignKey("contacts.Person",
-      related_name="%(app_label)s_%(class)s_set_by_secretary",
-      default=default_secretary,
-      verbose_name=_("Secretary"))
-      
-    president = models.ForeignKey("contacts.Person",
-      related_name="%(app_label)s_%(class)s_set_by_president",
-      default=default_president,
-      verbose_name=_("President"))
-      
-    @chooser()
-    def secretary_choices(cls):
-        return settings.LINO.modules.contacts.Person.objects.filter(
-              rolesbyperson__company=settings.LINO.site_config.site_company,
-              rolesbyperson__type__id=FUNCTION_ID_SECRETARY)
-        
-    @chooser()
-    def president_choices(cls):
-        return settings.LINO.modules.contacts.Person.objects.filter(
-              rolesbyperson__company=settings.LINO.site_config.site_company,
-              rolesbyperson__type__id=FUNCTION_ID_PRESIDENT)
-        
+    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended signer1 signer2'
     
     
     #~ def summary_row(self,ui,rr,**kw):
@@ -429,6 +450,8 @@ class ContractBase(
         #~ return msgs
 
 #~ dd.update_field(ContractBase,'contact_person',verbose_name=_("represented by"))
+dd.update_field(ContractBase,'signer1', default=default_signer1)
+dd.update_field(ContractBase,'signer2', default=default_signer2)
 
 
 class ContractBaseTable(dd.Table):
@@ -584,7 +607,7 @@ class ContractDetail(dd.FormLayout):
     applies_from applies_until exam_policy
     
     date_decided date_issued date_ended ending:20
-    # secretary president
+    # signer1 signer2
     cal.TasksByController cal.EventsByController
     """,label = _("General"))
     
@@ -656,6 +679,28 @@ class ContractsByType(Contracts):
 
 
 
+def customize_siteconfig():
+    from lino.ui.models import SiteConfig
+    dd.inject_field(SiteConfig,
+        'signer1_function',
+        models.ForeignKey("contacts.RoleType",
+            blank=True,null=True,
+            verbose_name=_("First signer function"),
+            help_text=_("""Contact function to designate the secretary."""),
+            related_name="%(app_label)s_%(class)s_set_by_signer1"))
+    dd.inject_field(SiteConfig,
+        'signer2_function',
+        models.ForeignKey("contacts.RoleType",
+            blank=True,null=True,
+            verbose_name=_("Second signer function"),
+            help_text=_("Contact function to designate the president."),
+            related_name="%(app_label)s_%(class)s_set_by_signer2"))
+        
+customize_siteconfig()
+
+
+
+
 def setup_main_menu(site,ui,profile,m): 
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(MyContracts)
@@ -675,3 +720,4 @@ def setup_config_menu(site,ui,profile,m):
 def setup_explorer_menu(site,ui,profile,m):
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
     m.add_action(Contracts)
+

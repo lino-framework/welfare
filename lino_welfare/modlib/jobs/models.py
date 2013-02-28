@@ -547,7 +547,7 @@ class ContractDetail(dd.FormLayout):
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
     reference_person build_time
     date_decided date_issued date_ended ending:20
-    # secretary president
+    # signer1 signer2
     responsibilities 
     """
     

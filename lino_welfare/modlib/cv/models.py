@@ -75,7 +75,7 @@ from lino.modlib.cal.models import update_reminder
 from lino.core.modeltools import resolve_model, UnresolvedModel
 
 
-from lino.ui.models import SiteConfig
+#~ from lino.ui.models import SiteConfig
 
 
 class CefLevel(dd.ChoiceList):
@@ -247,15 +247,16 @@ class ConfiguredPropsByPerson(PropsByPerson):
         super(ConfiguredPropsByPerson,self).after_site_setup(site)
         if self.propgroup_config_name:
             def adapt(sc):
-                #~ print "20130220 adapting %s to site config %r" % (self,sc)
                 pg = getattr(sc,self.propgroup_config_name)
+                #~ print ("20130228 adapting %s to site config %r",self.propgroup_config_name,pg)
                 self.known_values = dict(group=pg)
                 if pg is None:
-                    self.label = _("(Site setting %s is empty)" % self.propgroup_config_name)
+                    self.label = _("(SiteConfig %s is empty)" % self.propgroup_config_name)
                 else:
                     self.label = lazy(babelattr,unicode)(pg,'name')
             adapt(site.site_config)
             
+            SiteConfig = site.modules.ui.SiteConfig
             @dd.receiver(dd.post_save, sender=SiteConfig,weak=False)
             def my_handler(sender, instance=None,**kwargs):
                 adapt(instance)
@@ -282,7 +283,7 @@ def site_setup(site):
 def customize_siteconfig():
 
         
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'propgroup_skills',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,
@@ -290,7 +291,7 @@ def customize_siteconfig():
             related_name='skills_sites'),
         """The property group to be used as master 
         for the SkillsByPerson table.""")
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'propgroup_softskills',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,
@@ -300,7 +301,7 @@ def customize_siteconfig():
         """The property group to be used as master 
         for the SoftSkillsByPerson table."""
         )
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'propgroup_obstacles',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,

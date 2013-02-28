@@ -97,6 +97,7 @@ countries = dd.resolve_app('countries')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
+isip = dd.resolve_app('isip')
 #~ newcomers = dd.resolve_app('newcomers')
 
 #~ from lino.utils.ssin import ssin_validator
@@ -318,6 +319,22 @@ für neue Operationen nicht benutzt werden können.""")
         if isinstance(ba.action,dd.MergeAction) and settings.LINO.is_imported_partner(self):
             return False
         return super(Partner,self).get_row_permission(ar,state,ba)
+        
+ui = dd.resolve_app('ui')
+
+class SiteConfig(ui.SiteConfig,isip.Signers):
+    """
+    This adds the :class:`lino_welfare.modlib.isip.models.Signers` 
+    mixin to Lino's standard SiteConfig.
+    
+    This trick having ``"ui.SiteConfig"`` in :attr:`lino.Lino.override_modlib_models`.
+    
+    """
+    class Meta:
+        app_label = 'ui'
+
+dd.update_field(SiteConfig,'signer1', blank=True,null=True)
+dd.update_field(SiteConfig,'signer2', blank=True,null=True)
 
 class Person(Partner,contacts.Person,mixins.Born,Printable):
     """
@@ -1992,7 +2009,7 @@ class ClientsTest(Clients):
     def get_data_rows(self,ar,qs=None):
         """
         """
-        from lino_welfare.modlib.isip.models import OverlappingContractsTest
+        #~ from lino_welfare.modlib.isip.models import OverlappingContractsTest
         #~ qs = Person.objects.all()
         
         if qs is None:
@@ -2003,7 +2020,7 @@ class ClientsTest(Clients):
         for obj in qs:
             messages = []
             if ar.param_values.overlapping_contracts:
-                messages += OverlappingContractsTest(obj).check_all()
+                messages += isip.OverlappingContractsTest(obj).check_all()
               
             if ar.param_values.invalid_niss:
                 try:
@@ -2657,13 +2674,11 @@ Wenn ein Neuantrag einem Begleiter zugewiesen wurde, wird außer dem Begleiter a
 def customize_siteconfig():
     """
     Injects application-specific fields to :class:`SiteConfig <lino.models.SiteConfig>`.
-    
     """
     
-    from lino.ui.models import SiteConfig
-    dd.inject_field(SiteConfig,
+    #~ from lino.ui.models import SiteConfig
+    dd.inject_field('ui.SiteConfig',
         'job_office',
-        #~ models.ForeignKey("contacts.Company",
         models.ForeignKey('contacts.Company',
             blank=True,null=True,
             verbose_name=_("Local job office"),
@@ -2671,27 +2686,22 @@ def customize_siteconfig():
             help_text="""The Company whose contact persons 
             will be choices for `Person.job_office_contact`."""))
         
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'residence_permit_upload_type',
-        #~ UploadType.objects.get(pk=2)
         models.ForeignKey("uploads.UploadType",
             blank=True,null=True,
             verbose_name=_("Upload Type for residence permit"),
-            related_name='residence_permit_sites'),
-        """The UploadType for `Person.residence_permit`.
-        """)
+            related_name='residence_permit_sites'))
         
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'work_permit_upload_type',
         #~ UploadType.objects.get(pk=2)
         models.ForeignKey("uploads.UploadType",
             blank=True,null=True,
             verbose_name=_("Upload Type for work permit"),
-            related_name='work_permit_sites'),
-        """The UploadType for `Person.work_permit`.
-        """)
+            related_name='work_permit_sites'))
 
-    dd.inject_field(SiteConfig,
+    dd.inject_field('ui.SiteConfig',
         'driving_licence_upload_type',
         models.ForeignKey("uploads.UploadType",
             blank=True,null=True,
@@ -2923,9 +2933,13 @@ def site_setup(site):
     site.modules.ui.SiteConfigs.set_detail_layout("""
     site_company system_note_type default_build_method 
     next_partner_id:20 job_office
+    signer1 signer2
+    constants
+    # lino.ModelsBySite
+    """,constants="""
     propgroup_skills propgroup_softskills propgroup_obstacles
     residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
-    # lino.ModelsBySite
+    signer1_function signer2_function 
     """)
     
     site.modules.properties.Properties.set_detail_layout("""

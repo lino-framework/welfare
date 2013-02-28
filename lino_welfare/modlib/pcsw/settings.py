@@ -70,8 +70,11 @@ class Lino(Lino):
         #~ ]
         
     override_modlib_models = [
-        'contacts.Partner', 'contacts.Person', 'contacts.Company',
-        'households.Household'
+        'contacts.Partner', 
+        'contacts.Person', 
+        'contacts.Company',
+        'households.Household',
+        'ui.SiteConfig'
         ]
         
         

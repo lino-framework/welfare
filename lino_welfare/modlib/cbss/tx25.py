@@ -520,6 +520,21 @@ def IT208(n):
     return info
 
 
+def IT073(n):
+    info = Info()
+    info.addfrom(n,'Category','',CategoryType)
+    info.addfrom(n,'CertificateNumber',_("no."))
+    info.add_deldate(n)
+    return info
+
+def IT074(n):
+    info = Info()
+    info.addfrom(n,'SerialNumber')
+    info.addfrom(n,'IdentificationNumber')
+    info.add_deldate(n)
+    return info
+
+
 def FiliationType(n):
     return code_label(n)
 
@@ -1340,6 +1355,22 @@ class RowHandlers:
         group = _("Pseudo National Numbers") # Pseudo-numéro national
         for n in node.PseudoNationalNumber:
             info = IT208(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+        
+    @staticmethod
+    def RetirementCertificates(node,name):
+        group = _("Retirement Certificates") # Certificats de pension
+        for n in node.RetirementCertificate:
+            info = IT073(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+        
+    @staticmethod
+    def SpecialRetirementCertificates(node,name):
+        group = _("Special Retirement Certificates") # Certificats de pension spéciale
+        for n in node.SpecialRetirementCertificate:
+            info = IT074(n)
             yield datarow(group,n,n.Date,info)
             group = ''
         

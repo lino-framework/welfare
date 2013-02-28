@@ -30,6 +30,7 @@ logger = logging.getLogger(__name__)
 #~ from django.test.client import Client
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils import translation
 
 #from lino.igen import models
 #from lino.modlib.contacts.models import Contact, Companies
@@ -116,19 +117,20 @@ PUT_PAR_6283 = """
 "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
 """
 
-# 'ValidationError({'first_name': [u'This field cannot be blank.']})' 
-BELGACOM1 = """
-{"method":"PUT","alias":"PAR","id":"0000001334","time":"20121029 09:00:00","user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
-"NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
-"FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
-"DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
-"IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
-"DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
-"NB2":"","IDDEV":"","MEMO":"Foo\nbar\n","COMPTE2":"","RUENUM":"","RUEBTE":"",
-"DEBIT2":"   2242.31","CREDIT2":"",
-"IMPDATE":{"__date__":{"year":2012,"month":10,"day":24}},
-"ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
-"MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
+
+"""
+// 2013-02-26 12:05:13 ValidationError({'national_id': [u'Client with this National ID already exists.']})
+{"method":"POST","alias":"PAR","id":"0000023624","time":"20130226 12:05:12","user":"MELANIEL",
+"data":{"IDPAR":"0000023624","FIRME":"Van Beneden Fon","NAME2":"","RUE":"Bergstrasse",
+"CP":"4700","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
+"IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"",
+"PROF":"80","CODE1":"","CODE2":"","CODE3":"",
+"DATCREA":{"__date__":{"year":2013,"month":2,"day":18}},"ALLO":"Frau",
+"NB1":"VAFO940702","NB2":"940702 234-24","IDDEV":"","MEMO":"","COMPTE2":"",
+"RUENUM":" 123","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+"IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},
+"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+"MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"WILMA","DOMI1":""}}
 """
 
 
@@ -180,6 +182,7 @@ def test02(self):
     """
     
     Company(name="Müller Max Moritz",id=5088).save()
+    global PUT_MAX_MORITZ
     process_line(PUT_MAX_MORITZ)
     self.assertDoesNotExist(Company,id=5088)
     #~ company = Company.objects.get(id=5088) # has not been deleted
@@ -242,13 +245,47 @@ def test06(self):
     """
     ValidationError {'first_name': [u'This field cannot be blank.']}
     """
+    ln = """{"method":"PUT","alias":"PAR","id":"0000001334","time":"20121029 09:00:00",
+    "user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
+    "NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
+    "FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
+    "DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
+    "IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
+    "DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
+    "NB2":"","IDDEV":"","MEMO":"Foo bar","COMPTE2":"","RUENUM":"","RUEBTE":"",
+    "DEBIT2":"   2242.31","CREDIT2":"",
+    "IMPDATE":{"__date__":{"year":2012,"month":10,"day":24}},
+    "ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
+    "MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
+    """
     self.assertDoesNotExist(Partner,id=1334)
+    translation.deactivate_all()
     try:
-        process_line(BELGACOM1)
+        process_line(ln)
         self.fail("Expected a ValidationError")
     except ValidationError as e:
         self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
     self.assertDoesNotExist(Partner,id=1334)
-    BELGACOM1 = BELGACOM1.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
-    process_line(BELGACOM1)
+    ln = ln.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
+    process_line(ln)
     company = Company.objects.get(id=1334) 
+
+def test07(self):
+    """
+    2013-02-28 10:05:41 ValueError('Cannot assign "u\'\'": "City.country" must be a "Country" instance.',)
+    """
+    ln = """{"method":"PUT","alias":"PAR","id":"0000023649","time":"20130228 10:05:41","user":"MELANIEL",
+    "data":{"IDPAR":"0000023649","FIRME":"Reinders Denis","NAME2":"","RUE":"Sch<94>nefelderweg",
+    "CP":"4700","IDPRT":"S","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
+    "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D","IDBUD":"",
+    "PROF":"80","CODE1":"","CODE2":"","CODE3":"",
+    "DATCREA":{"__date__":{"year":2013,"month":2,"day":28}},
+    "ALLO":"Herr","NB1":"","NB2":"791228 123-35","IDDEV":"","MEMO":"","COMPTE2":"",
+    "RUENUM":" 123","RUEBTE":"a","DEBIT2":"","CREDIT2":"",
+    "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+    "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
+    """
+    self.assertDoesNotExist(Client,id=23649)
+    process_line(ln)
+    obj = Client.objects.get(id=23649)
+    self.assertEqual(obj.first_name,"Denis")

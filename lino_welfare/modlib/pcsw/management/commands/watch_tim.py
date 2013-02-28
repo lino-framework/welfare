@@ -257,6 +257,24 @@ def country2kw(row,kw):
             country.save()
         kw.update(country=country)
     
+        zip_code = row['CP']
+        if zip_code:
+            kw.update(zip_code=zip_code)
+            try:
+                city = City.objects.get(
+                  country=country,
+                  zip_code__exact=zip_code,
+                  )
+                kw.update(city=city)
+            except City.DoesNotExist,e:
+                city = City(zip_code=zip_code,name=zip_code,country=country)
+                city.save()
+                kw.update(city=city)
+                #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
+            except City.MultipleObjectsReturned,e:
+                dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
+
+
     email = row['EMAIL']
     if email and is_valid_email(email):
         kw.update(email=email)
@@ -267,24 +285,6 @@ def country2kw(row,kw):
       
     kw.update(street2kw(join_words(row['RUE'],row['RUENUM'],row['RUEBTE'])))
     
-    zip_code = row['CP']
-    if zip_code:
-        kw.update(zip_code=zip_code)
-        try:
-            city = City.objects.get(
-              country=country,
-              zip_code__exact=zip_code,
-              )
-            kw.update(city=city)
-        except City.DoesNotExist,e:
-            city = City(zip_code=zip_code,name=zip_code,country=country)
-            city.save()
-            kw.update(city=city)
-            #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-        except City.MultipleObjectsReturned,e:
-            dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-
-
 
 #~ def is_company(data):
 def PAR_model(data):
