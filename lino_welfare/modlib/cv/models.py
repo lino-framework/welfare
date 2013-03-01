@@ -254,7 +254,11 @@ class ConfiguredPropsByPerson(PropsByPerson):
                     self.label = _("(SiteConfig %s is empty)" % self.propgroup_config_name)
                 else:
                     self.label = lazy(babelattr,unicode)(pg,'name')
-            adapt(site.site_config)
+            #~ adapt(site.site_config)
+            
+            @dd.receiver(dd.connection_created)
+            def my_callback(sender,**kw):
+                adapt(settings.LINO.site_config)
             
             SiteConfig = site.modules.ui.SiteConfig
             @dd.receiver(dd.post_save, sender=SiteConfig,weak=False)
