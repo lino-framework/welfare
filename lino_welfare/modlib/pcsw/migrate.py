@@ -550,8 +550,6 @@ def migrate_from_1_0_15(globals_dict):
     New fields `secretary` and `president` in Contract. 
     """
     Person = dd.resolve_model('contacts.Person')
-    S = Person.objects.get(pk=84719)
-    P = Person.objects.get(pk=86814)
     #~ FUNCTION_ID_SECRETARY = 3
     #~ FUNCTION_ID_PRESIDENT = 16
     #~ oldf = globals_dict['create_lino_siteconfig']
@@ -564,13 +562,29 @@ def migrate_from_1_0_15(globals_dict):
         #~ return obj
     #~ globals_dict['create_lino_siteconfig'] = newf
 
-    for fn in ('create_isip_contract','create_jobs_contract','create_lino_siteconfig'):
-        oldf = globals_dict[fn]
-        def newf(*args):
-            obj = oldf(*args)
-            obj.signer1 = S
-            obj.signer2 = P
-            return obj
-        globals_dict[fn] = newf
-
+    #~ for fn in ('create_isip_contract','create_jobs_contract','create_lino_siteconfig'):
+    #~ for fn in ('create_isip_contract','create_jobs_contract'):
+        #~ oldf = globals_dict[fn]
+        #~ def newf(*args):
+            #~ obj = oldf(*args)
+            #~ obj.signer1 = Person.objects.get(pk=84719)
+            #~ obj.signer2 = Person.objects.get(pk=86814)
+            #~ return obj
+        #~ globals_dict[fn] = newf
+    fn = 'create_isip_contract'
+    oldf = globals_dict[fn]
+    def newf(*args):
+        obj = oldf(*args)
+        obj.signer1 = Person.objects.get(pk=84719)
+        obj.signer2 = Person.objects.get(pk=86814)
+        return obj
+    globals_dict[fn] = newf
+    fn = 'create_jobs_contract'
+    oldf2 = globals_dict[fn]
+    def newf(*args):
+        obj = oldf2(*args)
+        obj.signer1 = Person.objects.get(pk=84719)
+        obj.signer2 = Person.objects.get(pk=86814)
+        return obj
+    globals_dict[fn] = newf
     return '1.0.16'
