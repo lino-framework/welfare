@@ -44,6 +44,8 @@ from django.utils import simplejson
 #~ from lino.modlib.users import models as users
 from django.utils.encoding import force_unicode
 
+from django_site.modeltools import is_valid_email
+
 import lino
 
 from lino import dd
@@ -54,7 +56,6 @@ from lino.utils import dblogger
 from lino.utils import mti
 #~ from lino.core import changes
 #~ from lino.modlib import models as changes
-from django_sites.modeltools import is_valid_email
 
 from lino.utils.daemoncommand import DaemonCommand
 

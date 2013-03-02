@@ -15,10 +15,6 @@
 """
 Default settings of a Lino/Welfare site.
 
-This file is also the central place of the version counter.
-
-For release notes see :mod:`lino.releases`.
-
 """
 import os
 
@@ -26,14 +22,11 @@ from lino.projects.std.settings import *
 #~ from lino_welfare import __version__, __url__, __name__
 #~ from lino_welfare.version import *
 import lino_welfare
+from lino_welfare.modlib import cbss
+from lino.modlib import cal
 
-#~ print 20121219, __file__
-
-import datetime
-
-class Site(Site):
-    """
-    """
+class Site(Site,cal.SiteMixin,cbss.SiteMixin):
+  
     version = lino_welfare.__version__
     url = "http://code.google.com/p/lino-welfare/"
     short_name = "Lino Welfare"
