@@ -105,7 +105,7 @@ class Command(BaseCommand):
             
         contacts = dd.resolve_app('contacts')
             
-        User = dd.resolve_model(settings.LINO.user_model)
+        User = dd.resolve_model(settings.SITE.user_model)
         Person = dd.resolve_model('contacts.Person')
         Household = dd.resolve_model('households.Household')
         Member = dd.resolve_model('households.Member')

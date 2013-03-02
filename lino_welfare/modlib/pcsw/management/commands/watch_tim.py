@@ -52,10 +52,9 @@ from lino.utils import join_words, unicode_string
 
 from lino.utils import dblogger
 from lino.utils import mti
-from lino.core.modeltools import obj2str
 #~ from lino.core import changes
 #~ from lino.modlib import models as changes
-from lino.core.modeltools import is_valid_email
+from django_sites.modeltools import is_valid_email
 
 from lino.utils.daemoncommand import DaemonCommand
 
@@ -64,7 +63,7 @@ from lino.utils.ssin import is_valid_ssin
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
 
-settings.LINO.startup() # populate the model cache
+settings.SITE.startup() # populate the model cache
 
 pcsw = dd.resolve_app('pcsw')
 users = dd.resolve_app('users')
@@ -144,14 +143,14 @@ def checkcc(person,pk,nType):
     try:
         Company.objects.get(pk=pk)
     #~ except ValueError,e:
-        #~ dblogger.warning(u"%s : invalid health_insurance or pharmacy %r",obj2str(person),cIdAdr)
+        #~ dblogger.warning(u"%s : invalid health_insurance or pharmacy %r",dd.obj2str(person),cIdAdr)
         #~ return
     except Company.DoesNotExist,e:
         raise Exception(
             "%s : Pharmacy or Health Insurance %s doesn't exist" % 
-            (obj2str(person),pk))
+            (dd.obj2str(person),pk))
         #~ dblogger.warning(u"%s : Company %s doesn't exist (please create manually in Lino).",
-            #~ obj2str(person),pk)
+            #~ dd.obj2str(person),pk)
         #~ return
     qs = pcsw.ClientContact.objects.filter(
         client=person,
@@ -173,7 +172,7 @@ def checkcc(person,pk,nType):
             watcher.send_update(REQUEST)
             #~ watcher.log_diff(REQUEST)
     else:
-        dblogger.warning(u"%s : more than 1 ClientContact (type=%r)",obj2str(person),nType)
+        dblogger.warning(u"%s : more than 1 ClientContact (type=%r)",dd.obj2str(person),nType)
 
 
 
@@ -210,9 +209,9 @@ def pxs2client(row,person):
         #~ try:
             #~ person.pharmacy = Company.objects.get(pk=int(row['APOTHEKE']))
         #~ except ValueError,e:
-            #~ dblogger.warning(u"%s : invalid pharmacy %r",obj2str(person),row['APOTHEKE'])
+            #~ dblogger.warning(u"%s : invalid pharmacy %r",dd.obj2str(person),row['APOTHEKE'])
         #~ except Company.DoesNotExist,e:
-            #~ dblogger.warning(u"%s : pharmacy %s not found",obj2str(person),row['APOTHEKE'])
+            #~ dblogger.warning(u"%s : pharmacy %s not found",dd.obj2str(person),row['APOTHEKE'])
             
     nat = row['NATIONALIT']
     if nat:
@@ -350,7 +349,7 @@ class Controller:
         
     def validate_and_save(self,obj):
         "Deserves more documentation."
-        #~ dblogger.info("20121022 validate_and_save %s",obj2str(obj,True))
+        #~ dblogger.info("20121022 validate_and_save %s",dd.obj2str(obj,True))
         obj.full_clean()
         #~ 20120921 dblogger.log_changes(REQUEST,obj)
         obj.save()
@@ -362,9 +361,9 @@ class Controller:
             #~ 20120921 dblogger.log_changes(REQUEST,obj)
             obj.save()
         except ValidationError,e:
-            # here we only log an obj2str() of the object 
+            # here we only log an dd.obj2str() of the object 
             # full traceback will be logged in watch() after process_line()
-            dblogger.warning("Validation failed for %s : %s",obj2str(obj),e)
+            dblogger.warning("Validation failed for %s : %s",dd.obj2str(obj),e)
             raise # re-raise (propagate) exception with original traceback
             #~ dblogger.exception(e)
                 
@@ -386,7 +385,7 @@ class Controller:
         dd.pre_ui_delete.send(sender=obj,request=REQUEST)
         #~ changes.log_delete(REQUEST,obj)
         obj.delete()
-        dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],obj2str(obj))
+        dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],dd.obj2str(obj))
         
     #~ def prepare_data(self,data):
         #~ return data
@@ -406,7 +405,7 @@ class Controller:
                 return
             #~ watcher = changes.Watcher(obj,True)
             self.applydata(obj,kw['data'])
-            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
+            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
             dd.pre_ui_create.send(sender=obj,request=REQUEST)
             #~ changes.log_create(REQUEST,obj)
@@ -414,7 +413,7 @@ class Controller:
             watcher = dd.ChangeWatcher(obj)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
             self.applydata(obj,kw['data'])
-            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
+            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
             watcher.send_update(REQUEST)
             #~ watcher.log_diff(REQUEST)
@@ -435,7 +434,7 @@ class Controller:
         if self.PUT_special(watcher,**kw):
             return 
         self.applydata(obj,kw['data'])
-        dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],obj2str(obj),kw['data'])
+        dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
         self.validate_and_save(obj)
         watcher.send_update(REQUEST)
         #~ watcher.log_diff(REQUEST)
@@ -516,7 +515,7 @@ class PAR(Controller):
                     obj.national_id = data['NB2']
                     #~ if obj.national_id: 
                         #~ if not is_valid_ssin(obj.national_id):
-                            #~ dblogger.info("%s : invalid SSIN %s",obj2str(obj),obj.national_id)
+                            #~ dblogger.info("%s : invalid SSIN %s",dd.obj2str(obj),obj.national_id)
                             #~ obj.national_id = None
                 #~ else 20121108:
                     #~ obj.national_id = str(obj.id)
@@ -666,7 +665,7 @@ class PAR(Controller):
         obj = watcher.watched
         model = PAR_model(kw['data'])
         if obj.__class__ != model:
-            dblogger.info("%s:%s (%s) : %s becomes %s",kw['alias'],kw['id'],obj2str(obj),
+            dblogger.info("%s:%s (%s) : %s becomes %s",kw['alias'],kw['id'],dd.obj2str(obj),
                 obj.__class__.__name__,model.__name__)
             self.swapclass(watcher,model,kw['data'])
             return True
@@ -932,7 +931,7 @@ def main(*args,**options):
     #~ logger.info(msg,data_dir)
     #~ dblogger.info(msg,lino.__version__,data_dir)
     
-    settings.LINO.startup() 
+    settings.SITE.startup() 
         
     #~ def goodbye():
         #~ msg = "Stopped watch_tim %s on %s ..."

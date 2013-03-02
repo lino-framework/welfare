@@ -309,7 +309,7 @@ def objects():
 
     City = resolve_model('countries.City')
     #~ Job = resolve_model('jobs.Job')
-    #~ City = settings.LINO.modules.countries.City
+    #~ City = settings.SITE.modules.countries.City
     StudyType = resolve_model('jobs.StudyType')
     #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
@@ -431,7 +431,7 @@ def objects():
     michael = Person.objects.get(name__exact="Mießen Michael")
     jean = Person.objects.get(name__exact="Radermacher Jean")
     #~ yield cpas
-    sc = settings.LINO.site_config
+    sc = settings.SITE.site_config
     sc.site_company = cpas
     sc.signer1 = michael
     sc.signer2 = jean
@@ -451,9 +451,9 @@ def objects():
     adg = company(name=u"Arbeitsamt der D.G.",**kw)
     adg.save()
     yield adg
-    #~ settings.LINO.update_site_config(job_office=adg)
-    settings.LINO.site_config.job_office = adg
-    yield settings.LINO.site_config
+    #~ settings.SITE.update_site_config(job_office=adg)
+    settings.SITE.site_config.job_office = adg
+    yield settings.SITE.site_config
     adg_dir = role(company=adg,person=bernard,type=1)
     #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir
@@ -533,7 +533,7 @@ def objects():
         if User.objects.filter(partner=person).count() == 0:
           if contacts.Role.objects.filter(person=person).count() == 0:
             #~ if not person in DIRECTORS:
-            birth_date = settings.LINO.demo_date(-170*count - 16*365)  # '810601 211-83'
+            birth_date = settings.SITE.demo_date(-170*count - 16*365)  # '810601 211-83'
             national_id = generate_ssin(birth_date,person.gender)
                 
             client = person2client(person,
@@ -550,9 +550,9 @@ def objects():
                     #~ args.append(None)
                 #~ else:
                     #~ args.append(AGENTS.pop())
-                #~ args.append(settings.LINO.demo_date(-7 * count))
+                #~ args.append(settings.SITE.demo_date(-7 * count))
                 #~ if count % 6:
-                    #~ args.append(settings.LINO.demo_date(-7 * count))
+                    #~ args.append(settings.SITE.demo_date(-7 * count))
                 #~ yield coachings(*args)
                     
             elif count % 5:
@@ -594,7 +594,7 @@ def objects():
     
     for i in range(10):
         yield Note(user=USERS.pop(),
-          date=settings.LINO.demo_date(days=i),
+          date=settings.SITE.demo_date(days=i),
           subject=SUBJECTS.pop())
 
     
@@ -688,7 +688,7 @@ def objects():
         
     for i in range(30):
         yield jobs.Candidature(job=JOBS.pop(),person=CLIENTS.pop(),
-          date_submitted=settings.LINO.demo_date(-30+i))
+          date_submitted=settings.SITE.demo_date(-30+i))
     
 
     
@@ -716,24 +716,24 @@ def objects():
     for i in range(20):
         yield creq(
             person=CLIENTS.pop(),content=COURSECONTENTS.pop(),
-            date_submitted=settings.LINO.demo_date(-i*2))
-    #~ yield creq(person=ulrike,content=1,date_submitted=settings.LINO.demo_date(-30))
-    #~ yield creq(person=tatjana,content=1,date_submitted=settings.LINO.demo_date(-30))
-    #~ yield creq(person=erna,content=2,date_submitted=settings.LINO.demo_date(-30))
+            date_submitted=settings.SITE.demo_date(-i*2))
+    #~ yield creq(person=ulrike,content=1,date_submitted=settings.SITE.demo_date(-30))
+    #~ yield creq(person=tatjana,content=1,date_submitted=settings.SITE.demo_date(-30))
+    #~ yield creq(person=erna,content=2,date_submitted=settings.SITE.demo_date(-30))
     
     offer = Instantiator('courses.CourseOffer').build
     course = Instantiator('courses.Course').build
     yield offer(provider=oikos,title=u"Deutsch für Anfänger",content=1)
     #~ yield course(offer=1,start_date=i2d(20110110))
-    yield course(offer=1,start_date=settings.LINO.demo_date(+30))
+    yield course(offer=1,start_date=settings.SITE.demo_date(+30))
     
     yield offer(provider=kap,title=u"Deutsch für Anfänger",content=1)
     #~ yield course(offer=2,start_date=i2d(20110117))
-    yield course(offer=2,start_date=settings.LINO.demo_date(+16))
+    yield course(offer=2,start_date=settings.SITE.demo_date(+16))
     
     yield offer(provider=kap,title=u"Français pour débutants",content=2)
     #~ yield course(offer=3,start_date=i2d(20110124))
-    yield course(offer=3,start_date=settings.LINO.demo_date(+16))
+    yield course(offer=3,start_date=settings.SITE.demo_date(+16))
     
     #~ baker = Properties.objects.get(pk=1)
     #~ baker.save()
@@ -842,7 +842,7 @@ def objects():
     for f in jobs.Function.objects.all():
         yield jobs.Candidature(person=p,function=f,sector=f.sector,
             #~ date_submitted=i2d(20111019))
-            date_submitted=settings.LINO.demo_date(offset))
+            date_submitted=settings.SITE.demo_date(offset))
         p = i.next()
         offset -= 1
         
@@ -866,9 +866,9 @@ def objects():
                     user=AGENTS_SCATTERED.pop(),
                     primary=primary)
                 if a is not None:
-                    kw.update(start_date=settings.LINO.demo_date(a))
+                    kw.update(start_date=settings.SITE.demo_date(a))
                 if b is not None:
-                    kw.update(end_date=settings.LINO.demo_date(b))
+                    kw.update(end_date=settings.SITE.demo_date(b))
                 yield pcsw.Coaching(**kw)
                 
     for i,p in enumerate(pcsw.Partner.objects.all()):
@@ -879,7 +879,7 @@ def objects():
     JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
     #~ jobs_contract = Instantiator('jobs.Contract').build
     for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
-        af = coaching.start_date or settings.LINO.demo_date(-600+i*40)
+        af = coaching.start_date or settings.SITE.demo_date(-600+i*40)
         kw = dict(applies_from=af,client=coaching.client,user=coaching.user)
         if i % 2:
             yield jobs.Contract(
@@ -887,7 +887,7 @@ def objects():
                 duration=JOBS_CONTRACT_DURATIONS.pop(),
                 job=JOBS.pop(),**kw)
         else:
-            #~ af = settings.LINO.demo_date(-100+i*7)
+            #~ af = settings.SITE.demo_date(-100+i*7)
             yield isip.Contract(type=ISIP_CONTRACT_TYPES.pop(),
                 #~ applies_from=af,
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)

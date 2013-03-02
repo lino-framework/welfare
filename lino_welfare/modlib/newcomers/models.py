@@ -28,7 +28,6 @@ from django.db import IntegrityError
 from django.utils.encoding import force_unicode
 
 
-from lino import tools
 from lino import dd
 #~ from lino.core import changes
 #~ from lino.utils.babel import default_language
@@ -595,7 +594,7 @@ class AvailableCoachesByClient(AvailableCoaches):
         #~ recipients = []
         #~ recipients.append(
             #~ dict(name=unicode(obj),address=obj.email,type=outbox.RecipientType.to))
-        #~ for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+        #~ for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
             #~ recipients.append(
                 #~ dict(name=unicode(u),address=u.email,type=outbox.RecipientType.to))
             
@@ -635,9 +634,9 @@ class AvailableCoachesByClient(AvailableCoaches):
 
 
 
-#~ settings.LINO.add_user_field('newcomers_level',UserLevels.field(MODULE_LABEL))
-#~ settings.LINO.add_user_group('newcomers',MODULE_LABEL)
-settings.LINO.add_user_field('newcomer_quota',models.IntegerField(
+#~ settings.SITE.add_user_field('newcomers_level',UserLevels.field(MODULE_LABEL))
+#~ settings.SITE.add_user_group('newcomers',MODULE_LABEL)
+settings.SITE.add_user_field('newcomer_quota',models.IntegerField(
           _("Newcomers Quota"),
           default=0,
           help_text=u"""\

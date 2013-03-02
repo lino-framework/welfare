@@ -68,14 +68,14 @@ from lino.modlib.cal import models as cal
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.core.modeltools import range_filter
+#~ from lino.core.modeltools import range_filter
 from lino.utils import babel 
 from lino.core import actions
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str
+#~ from lino.core.modeltools import obj2str
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.properties import models as properties
@@ -1097,8 +1097,8 @@ proportionally distributing the `Distributable amount` among the debtors.
     
 MODULE_LABEL = _("Debts mediation")
 
-#~ settings.LINO.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))
-#~ settings.LINO.add_user_group('debts',MODULE_LABEL)
+#~ settings.SITE.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))
+#~ settings.SITE.add_user_group('debts',MODULE_LABEL)
 
 def site_setup(site):
     for T in (site.modules.contacts.Partners,

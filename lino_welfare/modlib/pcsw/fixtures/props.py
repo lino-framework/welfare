@@ -51,15 +51,15 @@ def objects():
     obstacles.save()
     yield obstacles
     
-    #~ settings.LINO.update_site_config(
+    #~ settings.SITE.update_site_config(
       #~ propgroup_skills = skills,
       #~ propgroup_softskills = softskills,
       #~ propgroup_obstacles = obstacles,
       #~ )
-    settings.LINO.site_config.propgroup_skills = skills
-    settings.LINO.site_config.propgroup_softskills = softskills
-    settings.LINO.site_config.propgroup_obstacles = obstacles
-    yield settings.LINO.site_config
+    settings.SITE.site_config.propgroup_skills = skills
+    settings.SITE.site_config.propgroup_softskills = softskills
+    settings.SITE.site_config.propgroup_obstacles = obstacles
+    yield settings.SITE.site_config
     
     
     skill = Instantiator('properties.Property',group=skills,type=onoff).build

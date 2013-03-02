@@ -72,8 +72,8 @@ pcsw = dd.resolve_app('pcsw')
 #~ # from lino.modlib.notes.models import NoteType
 #~ from lino.modlib.countries.models import Country, City
 
-#~ if settings.LINO.user_model:
-    #~ User = dd.resolve_model(settings.LINO.user_model,strict=True)
+#~ if settings.SITE.user_model:
+    #~ User = dd.resolve_model(settings.SITE.user_model,strict=True)
 
 #~ Company = resolve_model('contacts.Company')
 class CourseProvider(pcsw.Company):

@@ -57,7 +57,6 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.core.modeltools import range_filter
 from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem
 from lino.utils.babel import language_choices
 #~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
@@ -66,7 +65,7 @@ from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str
+#~ from lino.core.modeltools import obj2str
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.properties import models as properties
@@ -126,7 +125,7 @@ class LanguageKnowledge(dd.Model):
     allow_cascaded_delete = ['person']
     
     #~ person = models.ForeignKey("contacts.Person")
-    #~ person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
     language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
     #~ language = models.ForeignKey("countries.Language")
@@ -188,7 +187,7 @@ class PersonProperty(properties.PropertyOccurence):
         verbose_name_plural = _("Properties")
         
     #~ person = models.ForeignKey("contacts.Person")
-    #~ person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
     remark = models.CharField(max_length=200,
         blank=True,# null=True,
@@ -239,31 +238,35 @@ class ConfiguredPropsByPerson(PropsByPerson):
                        # defines new attribute(s) propgroup_config_name"
 
     @classmethod
-    def after_site_setup(self,site):
+    def on_analyze(self,site):
+    #~ def after_site_setup(self,site):
         """
         This is being called once for each subclass.
         """
         #~ print "20130220 after_site_setup %s" % self
-        super(ConfiguredPropsByPerson,self).after_site_setup(site)
+        super(ConfiguredPropsByPerson,self).on_analyze(site)
         if self.propgroup_config_name:
-            def adapt(sc):
-                pg = getattr(sc,self.propgroup_config_name)
-                #~ print ("20130228 adapting %s to site config %r",self.propgroup_config_name,pg)
-                self.known_values = dict(group=pg)
-                if pg is None:
-                    self.label = _("(SiteConfig %s is empty)" % self.propgroup_config_name)
-                else:
-                    self.label = lazy(babelattr,unicode)(pg,'name')
-            #~ adapt(site.site_config)
+            def adapt():
+                try:
+                    sc = site.site_config
+                    pg = getattr(sc,self.propgroup_config_name)
+                    self.known_values = dict(group=pg)
+                    if pg is None:
+                        self.label = _("(SiteConfig %s is empty)" % self.propgroup_config_name)
+                    else:
+                        self.label = lazy(babelattr,unicode)(pg,'name')
+                    #~ print ("20130228 adapted %s to site config %r",self.propgroup_config_name,pg)
+                except DatabaseError as e:
+                    pass # database not initialized
             
-            @dd.receiver(dd.connection_created)
-            def my_callback(sender,**kw):
-                adapt(settings.LINO.site_config)
+            @dd.receiver(dd.connection_created,weak=False)
+            def my_connection_created(sender,**kw):
+                adapt()
             
             SiteConfig = site.modules.ui.SiteConfig
             @dd.receiver(dd.post_save, sender=SiteConfig,weak=False)
-            def my_handler(sender, instance=None,**kwargs):
-                adapt(instance)
+            def my_post_save(sender, instance=None,**kwargs):
+                adapt()
         
 class SkillsByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_skills'
@@ -273,6 +276,10 @@ class SoftSkillsByPerson(ConfiguredPropsByPerson):
         
 class ObstaclesByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_obstacles'
+    
+#~ @dd.receiver(dd.connection_created)
+#~ def my_callback(sender,**kw):
+    #~ raise Exception("20130302 connection_created")
     
     
 

@@ -44,6 +44,7 @@ from django.utils.functional import lazy
 #~ logger.debug(__file__+' : started')
 #~ from django.utils import translation
 
+#~ from django_sites.modeltools import range_filter
 
 #~ from lino import reports
 from lino import dd
@@ -57,7 +58,6 @@ from lino import mixins
 #~ from lino.models import get_site_config
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.core.modeltools import range_filter
 from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem
 from lino.utils.babel import language_choices
 #~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
@@ -71,7 +71,6 @@ from lino.utils import IncompleteDate
 
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str, obj2unicode
 from lino.core import actions
 #~ from lino.core import changes
 
@@ -306,17 +305,17 @@ für neue Operationen nicht benutzt werden können.""")
     def disabled_fields(self,ar):
         #~ logger.info("20120731 CpasPartner.disabled_fields()")
         #~ raise Exception("20120731 CpasPartner.disabled_fields()")
-        if settings.LINO.is_imported_partner(self):
+        if settings.SITE.is_imported_partner(self):
             return self._imported_fields
         return set()
         
     def disable_delete(self,ar):
-        if ar is not None and settings.LINO.is_imported_partner(self):
+        if ar is not None and settings.SITE.is_imported_partner(self):
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner,self).disable_delete(ar)
 
     def get_row_permission(self,ar,state,ba):
-        if isinstance(ba.action,dd.MergeAction) and settings.LINO.is_imported_partner(self):
+        if isinstance(ba.action,dd.MergeAction) and settings.SITE.is_imported_partner(self):
             return False
         return super(Partner,self).get_row_permission(ar,state,ba)
         
@@ -561,7 +560,6 @@ class Getter(object):
     def __getattr__(self,name):
         return self.query_dict.get(name)
 
-from lino.core.modeltools import obj2str
 
 from lino.utils.instantiator import lookup_or_create
 
@@ -593,9 +591,9 @@ def card2client(data):
     #~ func('card_valid_from','validityBeginDate')
     #~ func('card_valid_until','validityEndDate')
     #~ func('birth_date','birthDate')
-    kw.update(birth_date=IncompleteDate(*settings.LINO.parse_date(data['birthDate'])))
-    kw.update(card_valid_from=datetime.date(*settings.LINO.parse_date(data['validityBeginDate'])))
-    kw.update(card_valid_until=datetime.date(*settings.LINO.parse_date(data['validityEndDate'])))
+    kw.update(birth_date=IncompleteDate(*settings.SITE.parse_date(data['birthDate'])))
+    kw.update(card_valid_from=datetime.date(*settings.SITE.parse_date(data['validityBeginDate'])))
+    kw.update(card_valid_until=datetime.date(*settings.SITE.parse_date(data['validityEndDate'])))
     kw.update(card_number=card_number)
     kw.update(card_issuer=data['issuingMunicipality'])
     kw.update(noble_condition=data['nobleCondition'])
@@ -714,7 +712,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
             fld = get_field(Client,fldname)
             old = getattr(obj,fldname)
             if old != new:
-                diffs.append("%s : %s -> %s" % (unicode(fld.verbose_name),obj2str(old),obj2str(new)))
+                diffs.append("%s : %s -> %s" % (unicode(fld.verbose_name),dd.obj2str(old),dd.obj2str(new)))
                 setattr(obj,fld.name,new)
                 
         if len(diffs) == 0:
@@ -730,7 +728,7 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
             obj.save()
             watcher.send_update(ar.request)
             #~ return self.saved_diffs_response(ar,obj)
-            return self.goto_client_response(ar,obj,_("%s has been saved.") % obj2unicode(obj))
+            return self.goto_client_response(ar,obj,_("%s has been saved.") % dd.obj2unicode(obj))
         def no():
             return self.goto_client_response(ar,oldobj)
         cb = ar.callback(msg)
@@ -790,10 +788,10 @@ class Client(Person):
         #~ blank=True,null=True,
         #~ verbose_name=_("until"))
     
-    #~ coach1 = dd.ForeignKey(settings.LINO.user_model,
+    #~ coach1 = dd.ForeignKey(settings.SITE.user_model,
         #~ blank=True,null=True,
         #~ verbose_name=_("Coach 1"),related_name='coached1')
-    #~ coach2 = dd.ForeignKey(settings.LINO.user_model,
+    #~ coach2 = dd.ForeignKey(settings.SITE.user_model,
         #~ blank=True,null=True,
         #~ verbose_name=_("Coach 2"),related_name='coached2')
         
@@ -974,7 +972,7 @@ class Client(Person):
     
     @dd.chooser()
     def job_office_contact_choices(cls):
-        sc = settings.LINO.site_config # get_site_config()
+        sc = settings.SITE.site_config # get_site_config()
         if sc.job_office is not None:
             #~ return sc.job_office.contact_set.all()
             #~ return sc.job_office.rolesbyparent.all()
@@ -1125,7 +1123,7 @@ class Client(Person):
     def get_image_url(self,ar):
         #~ return settings.MEDIA_URL + "/".join(self.get_image_parts())
         #~ return ar.ui.media_url(*self.get_image_parts())
-        return settings.LINO.build_media_url(*self.get_image_parts())
+        return settings.SITE.build_media_url(*self.get_image_parts())
         
     def get_image_path(self):
         #~ TODO: handle configurability of card_number_to_picture_file
@@ -1133,7 +1131,7 @@ class Client(Person):
         
     def get_skills_set(self):
         return self.personproperty_set.filter(
-          group=settings.LINO.site_config.propgroup_skills)
+          group=settings.SITE.site_config.propgroup_skills)
     skills_set = property(get_skills_set)
     
     def properties_list(self,*prop_ids):
@@ -1177,7 +1175,7 @@ class Client(Person):
     
     @dd.displayfield(_("Residence permit"))
     def residence_permit(self,ar):
-        kv = dict(type=settings.LINO.site_config.residence_permit_upload_type)
+        kv = dict(type=settings.SITE.site_config.residence_permit_upload_type)
         r = ar.spawn(uploads.UploadsByController,
               master_instance=self,
               known_values=kv)
@@ -1188,7 +1186,7 @@ class Client(Person):
     
     @dd.displayfield(_("Work permit"))
     def work_permit(self,ar):
-        kv = dict(type=settings.LINO.site_config.work_permit_upload_type)
+        kv = dict(type=settings.SITE.site_config.work_permit_upload_type)
         r = ar.spawn(uploads.UploadsByController,
               master_instance=self,
               known_values=kv)
@@ -1198,7 +1196,7 @@ class Client(Person):
     @dd.displayfield(_("driving licence"))
     #~ @dd.virtualfield(dd.DisplayField(_("driving licence")))
     def driving_licence(self,ar):
-        kv = dict(type=settings.LINO.site_config.driving_licence_upload_type)
+        kv = dict(type=settings.SITE.site_config.driving_licence_upload_type)
         r = ar.spawn(uploads.UploadsByController,
               master_instance=self,known_values=kv)
         return ar.renderer.quick_upload_buttons(r)
@@ -1275,10 +1273,10 @@ class Client(Person):
 
 
     def get_system_note_type(self,ar):
-        return settings.LINO.site_config.system_note_type
+        return settings.SITE.site_config.system_note_type
         
     def get_system_note_recipients(self,ar,silent):
-        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+        for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
             yield "%s <%s>" % (unicode(u),u.email)
             
 
@@ -1422,11 +1420,11 @@ class CompanyDetail(contacts.CompanyDetail):
         #~ lh.notes.label = _("Notes")
 
 
-#~ if settings.LINO.company_model is None:
-    #~ raise Exception("settings.LINO.company_model is None")
+#~ if settings.SITE.company_model is None:
+    #~ raise Exception("settings.SITE.company_model is None")
 
 #~ class Companies(Partners):
-    #~ model = settings.LINO.company_model
+    #~ model = settings.SITE.company_model
     #~ detail_layout = CompanyDetail()
         
     #~ order_by = ["name"]
@@ -1592,10 +1590,10 @@ class ClientDetail(dd.FormLayout):
         card_issuer = _("issued by"),
         card_type = _("eID card type"))
     
-if not settings.LINO.use_eid_jslib:
+if not settings.SITE.use_eid_jslib:
     ClientDetail.eid_panel.replace('read_beid_card:12 ','')
     
-if settings.LINO.is_installed('cbss'):
+if settings.SITE.is_installed('cbss'):
     ClientDetail.main += ' cbss' 
     ClientDetail.cbss = dd.Panel("""
 cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
@@ -1641,7 +1639,7 @@ def add_coachings_filter(qs,user,today,primary):
 class Clients(Persons):
     #~ debug_permissions = True # '20120925'
     title = _("All Clients")
-    model = Client # settings.LINO.person_model
+    model = Client # settings.SITE.person_model
     params_panel_hidden = True
     
     insert_layout = dd.FormLayout("""
@@ -1965,7 +1963,7 @@ class ClientsTest(Clients):
     #~ required_user_level = UserLevels.manager
     label = _("Data Test Clients")
     parameters = dict(
-      #~ user = dd.ForeignKey(settings.LINO.user_model,blank=True,verbose_name=_("Coached by")),
+      #~ user = dd.ForeignKey(settings.SITE.user_model,blank=True,verbose_name=_("Coached by")),
       #~ only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
       #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
       #~ coached_by = models.ForeignKey(users.User,blank=True,null=True,
@@ -2057,29 +2055,34 @@ class UsersWithClients(dd.VirtualTable):
     slave_grid_format = 'html'    
     
     @classmethod
-    def setup_columns(self):
-        """
-        Builds columns dynamically from the :class:`PersonGroup` database table.
-        Called when kernel setup is done, 
-        before the UI handle is being instantiated.
-        """
-        self.column_names = 'user:10'
-        today = datetime.date.today()
-        try:
-            for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
-                def w(pg):
-                    def func(self,obj,ar):
-                        return IntegClients.request(ar.ui,
-                            param_values=dict(group=pg,coached_by=obj,coached_on=today))
-                    return func
-                vf = dd.RequestField(w(pg),verbose_name=pg.name)
-                self.add_virtual_field('G'+pg.ref_name,vf)
-                self.column_names += ' ' + vf.name 
-        except DatabaseError:
-            # happens during `make appdocs`
-            pass
-            
-        self.column_names += ' primary_clients active_clients row_total'
+    def on_analyze(self,site):
+        #~ if self.has_handle(site.ui):
+        #~ raise Exception("20130302 on_analyze called after handle")
+        
+        @dd.receiver(dd.connection_created,weak=False)
+        def on_connection_created(sender,**kw):
+            """
+            Builds columns dynamically from the :class:`PersonGroup` database table.
+            Called when kernel setup is done, 
+            before the UI handle is being instantiated.
+            """
+            self.column_names = 'user:10'
+            today = datetime.date.today()
+            try:
+                for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
+                    def w(pg):
+                        def func(self,obj,ar):
+                            return IntegClients.request(ar.ui,
+                                param_values=dict(group=pg,coached_by=obj,coached_on=today))
+                        return func
+                    vf = dd.RequestField(w(pg),verbose_name=pg.name)
+                    self.add_virtual_field('G'+pg.ref_name,vf)
+                    self.column_names += ' ' + vf.name 
+            except DatabaseError as e:
+                pass # happens e.g. if database isn't yet initialized
+                
+            self.column_names += ' primary_clients active_clients row_total'
+            settings.SITE.resolve_virtual_fields()
     
 
     @classmethod
@@ -2114,7 +2117,7 @@ class UsersWithClients(dd.VirtualTable):
                 yield user
                 
     #~ @dd.virtualfield('pcsw.Client.coach1')
-    #~ @dd.virtualfield(dd.ForeignKey(settings.LINO.user_model,verbose_name=_("Coach")))
+    #~ @dd.virtualfield(dd.ForeignKey(settings.SITE.user_model,verbose_name=_("Coach")))
     @dd.virtualfield('pcsw.Coaching.user')
     def user(self,obj,ar):
         return obj
@@ -2477,7 +2480,7 @@ during a given period.
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
         
-    user = models.ForeignKey(settings.LINO.user_model,
+    user = models.ForeignKey(settings.SITE.user_model,
         verbose_name=_("Coach"),
         related_name="%(app_label)s_%(class)s_set_by_user",
         #~ blank=True,null=True
@@ -2507,7 +2510,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
         cls.declare_imported_fields('''client user primary end_date''')
         
     def disabled_fields(self,ar):
-        if settings.LINO.is_imported_partner(self.client):
+        if settings.SITE.is_imported_partner(self.client):
             if self.primary:
                 return self._imported_fields
             return ['primary']
@@ -2524,7 +2527,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
         super(Coaching,self).on_create(ar)
         
     def disable_delete(self,ar):
-        if ar is not None and settings.LINO.is_imported_partner(self.client):
+        if ar is not None and settings.SITE.is_imported_partner(self.client):
             if self.primary:
                 return _("Cannot delete companies and persons imported from TIM")
         return super(Coaching,self).disable_delete(ar)
@@ -2585,11 +2588,11 @@ Enabling this field will automatically make the other coachings non-primary.""")
         return self.client
         
     def get_system_note_type(self,ar):
-        return settings.LINO.site_config.system_note_type
+        return settings.SITE.site_config.system_note_type
         
     def get_system_note_recipients(self,ar,silent):
         yield "%s <%s>" % (unicode(self.user),self.user.email)
-        for u in settings.LINO.user_model.objects.filter(coaching_supervisor=True):
+        for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
             yield "%s <%s>" % (unicode(u),u.email)
             
 #~ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
@@ -2659,12 +2662,12 @@ class CoachingsByUser(Coachings):
 
 def customize_users():
   
-    dd.inject_field(settings.LINO.user_model,
+    dd.inject_field(settings.SITE.user_model,
         'coaching_type',
         dd.ForeignKey(CoachingType,
             blank=True,null=True,
             help_text="""The default CoachingType used when creating Coachings."""))
-    dd.inject_field(settings.LINO.user_model,
+    dd.inject_field(settings.SITE.user_model,
         'coaching_supervisor',
         models.BooleanField(_("Notify me when a coach has been assigned"),
             help_text=u"""\
@@ -2779,9 +2782,9 @@ def customize_notes():
 @dd.receiver(dd.auto_create)
 def on_auto_create(sender,**kw):
     #~ raise Warning("auto_create is not permitted here")
-    logger.info("auto_create %s %s",obj2str(sender),kw)
+    logger.info("auto_create %s %s",dd.obj2str(sender),kw)
     from django.core.mail import mail_admins
-    body = 'Record %s has been automatically created using %s' % (obj2str(sender),kw)
+    body = 'Record %s has been automatically created using %s' % (dd.obj2str(sender),kw)
     mail_admins('auto_create', body, fail_silently=True)
 
 #~ dd.auto_create.connect(on_auto_create)

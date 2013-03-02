@@ -274,7 +274,7 @@ def migrate_from_1_4_10(globals_dict):
                     client_id=partner_ptr_id,
                     #~ type=pcsw.ClientContactTypes.job_office,
                     type_id=3,
-                    company_id=settings.LINO.site_config.job_office.id)
+                    company_id=settings.SITE.site_config.job_office.id)
                 obj._before_dumpy_save = add_contact_fields(obj,job_office_contact_id)
                 yield obj
         else:

@@ -31,7 +31,7 @@ import lino_welfare
 
 import datetime
 
-class Lino(Lino):
+class Site(Site):
     """
     """
     version = lino_welfare.__version__
@@ -130,7 +130,7 @@ class Lino(Lino):
         A Lino/Welfare site by default watches the changes to certain Client fields
         and to all Contract fields.
         """
-        super(Lino,self).on_site_startup()
+        super(Site,self).on_site_startup()
         
         from lino.modlib.changes.models import watch_changes as wc
         
@@ -266,7 +266,7 @@ class Lino(Lino):
                 yield obj
                 
     def get_installed_apps(self):
-        for a in super(Lino,self).get_installed_apps():
+        for a in super(Site,self).get_installed_apps():
             yield a
             
         yield 'django.contrib.contenttypes'
@@ -314,7 +314,7 @@ class Lino(Lino):
         #~ return urlpatterns
         
 
-LINO = Lino(__file__,globals())
+SITE = Site(__file__,globals())
 
 #~ TIME_ZONE = 'Europe/Brussels'
 TIME_ZONE = None

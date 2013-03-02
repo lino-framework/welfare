@@ -52,7 +52,6 @@ from lino import dd
 from lino.utils import join_words
 from lino.utils import assert_pure
 from lino.utils import AttrDict, IncompleteDate
-from lino.core.modeltools import obj2str
 
 from lino.utils import babel
 
@@ -60,7 +59,6 @@ from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
 from lino.utils.babel import dtos
-
 
 
 try:

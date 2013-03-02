@@ -146,7 +146,7 @@ households_Type = dd.resolve_model("households.Type")
 class WatchTimTest(TestCase):
     pass
     #~ def setUp(self):
-        #~ settings.LINO.never_build_site_cache = True
+        #~ settings.SITE.never_build_site_cache = True
         #~ super(DemoTest,self).setUp()
             
   

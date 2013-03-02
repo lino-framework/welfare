@@ -62,7 +62,7 @@ def objects():
             #~ print kw
             yield Sector(**kw)
         
-    if 'de' in settings.LINO.languages:
+    if 'de' in settings.SITE.languages:
         for code,subcode,abbr,name in GERMAN:
             sect = Sector.objects.get(code=code,subcode=subcode)
             if babel.DEFAULT_LANGUAGE == 'de':
@@ -74,7 +74,7 @@ def objects():
             sect.save()
 
     # default value for SiteConfig.sector is "CPAS"
-    #~ settings.LINO.site_config.sector = Sector.objects.get(code=17,subcode=1)
-    #~ settings.LINO.site_config.save()
+    #~ settings.SITE.site_config.sector = Sector.objects.get(code=17,subcode=1)
+    #~ settings.SITE.site_config.save()
 
 

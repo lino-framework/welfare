@@ -53,7 +53,7 @@ class QuickTest(TestCase):
     fixtures = 'sectors purposes democfg'.split()
     #~ pass
     #~ def setUp(self):
-        #~ settings.LINO.never_build_site_cache = False
+        #~ settings.SITE.never_build_site_cache = False
         #~ super(DemoTest,self).setUp()
             
 TIMEOUT_RESPONSE = '<urlopen error [Errno 10060] A connection attempt '\
@@ -75,31 +75,31 @@ def test01(self):
     """
     #~ create_and_get('cbss.Sector')
     #~ from lino.ui.extjs3 import urls # create cache/wsdl files
-    settings.LINO.startup() # create cache/wsdl files
+    settings.SITE.startup() # create cache/wsdl files
     
     global root
-    #~ User = resolve_model(settings.LINO.user_model)
+    #~ User = resolve_model(settings.SITE.user_model)
     #~ root = User(username='root')
     #~ root.save()
-    root = create_and_get(settings.LINO.user_model,username='root')
+    root = create_and_get(settings.SITE.user_model,username='root')
     
-    #~ Person = resolve_model(settings.LINO.person_model)
+    #~ Person = resolve_model(settings.SITE.person_model)
     global luc
     #~ luc = Person(first_name='Luc',last_name='Saffre')
     #~ luc.save()
     luc = create_and_get('contacts.Person',first_name='Luc',last_name='Saffre')
     
     # save site settings
-    #~ saved_cbss_environment = settings.LINO.cbss_environment
-    #~ saved_cbss_user_params = settings.LINO.cbss_user_params
-    saved_cbss_live_tests = settings.LINO.cbss_live_tests
+    #~ saved_cbss_environment = settings.SITE.cbss_environment
+    #~ saved_cbss_user_params = settings.SITE.cbss_user_params
+    saved_cbss_live_tests = settings.SITE.cbss_live_tests
     
     
     """
     set fictive user params and run some offline tests
     """
     
-    #~ settings.LINO.cbss_user_params = dict(
+    #~ settings.SITE.cbss_user_params = dict(
           #~ UserID='12345678901', 
           #~ Email='123@example.be', 
           #~ OrgUnit='123', 
@@ -184,7 +184,7 @@ Not actually sending because environment is empty. Request would be:
     #~ Now in test environment but still offline (set `cbss_live_tests` to False)
     #~ """
     
-    #~ settings.LINO.cbss_live_tests = False
+    #~ settings.SITE.cbss_live_tests = False
     #~ now = datetime.datetime(2012,5,9,18,34,50)
     #~ req.execute_request(now=now,environment='test')
 
@@ -226,21 +226,21 @@ Not actually sending because environment is empty. Request would be:
     Restore real user params.
     """
     
-    #~ settings.LINO.cbss_user_params = saved_cbss_user_params
-    #~ settings.LINO.cbss_environment = saved_cbss_environment 
-    settings.LINO.cbss_live_tests = saved_cbss_live_tests
+    #~ settings.SITE.cbss_user_params = saved_cbss_user_params
+    #~ settings.SITE.cbss_environment = saved_cbss_environment 
+    settings.SITE.cbss_live_tests = saved_cbss_live_tests
     
     """
     Skip live tests unless we are in test environment.
     Otherwise we would have to build /media/chache/wsdl files
     """
-    if settings.LINO.cbss_environment != 'test':
+    if settings.SITE.cbss_environment != 'test':
         return
         
     """
     Skip live tests if `cbss_live_tests` is False
     """
-    if not settings.LINO.cbss_live_tests:
+    if not settings.SITE.cbss_live_tests:
         return
     
     resp = req.execute_request()
@@ -302,7 +302,7 @@ def test02(self):
     """
     Execute a RetrieveTIGroupsRequest.
     """
-    #~ saved_cbss_environment = settings.LINO.cbss_environment
+    #~ saved_cbss_environment = settings.SITE.cbss_environment
     
 
     """
@@ -319,7 +319,7 @@ def test02(self):
     Note that NewStyleRequests have no validate_request method.
     """
     
-    #~ settings.LINO.cbss_environment = ''
+    #~ settings.SITE.cbss_environment = ''
     req.execute_request(environment='')
     #~ print req.response_xml
     expected = """\
@@ -335,20 +335,20 @@ Not actually sending because environment is empty. Request would be:
     Skip live tests unless we are in test environment.
     Otherwise we would have to build /media/chache/wsdl files
     """
-    if settings.LINO.cbss_environment != 'test':
+    if settings.SITE.cbss_environment != 'test':
         return
         
     #~ """
     #~ Skip live tests if `cbss_live_tests` is False
     #~ """
-    #~ if not settings.LINO.cbss_live_tests:
+    #~ if not settings.SITE.cbss_live_tests:
         #~ return
         
     """
     run the first request for real
     """
     reply = req.execute_request()
-    if settings.LINO.cbss_live_tests:
+    if settings.SITE.cbss_live_tests:
         if req.response_xml == TIMEOUT_RESPONSE:
             self.fail(TIMEOUT_MESSAGE)
         #~ print 20120523, reply
@@ -369,7 +369,7 @@ description : A validation error occurred.
         national_id='70100853190',
         language='fr',history=False)
     reply = req.execute_request()
-    if settings.LINO.cbss_live_tests:
+    if settings.SITE.cbss_live_tests:
         expected = """\
 CBSS error MSG00012:
 value : NO_RESULT
@@ -397,7 +397,7 @@ description : The given SSIN is not integrated correctly.
         # this fails to fail if the suite is being run a second time
         req = cbss.ManageAccessRequest(**kw)
         reply = req.execute_request()
-        if settings.LINO.cbss_live_tests:
+        if settings.SITE.cbss_live_tests:
             expected = """\
     CBSS error 10000:
     Severity : ERROR
@@ -412,7 +412,7 @@ description : The given SSIN is not integrated correctly.
     kw.update(birth_date=IncompleteDate(1968,6,1)) 
     req = cbss.ManageAccessRequest(**kw)
     reply = req.execute_request()
-    if False and settings.LINO.cbss_live_tests:
+    if False and settings.SITE.cbss_live_tests:
         expected = """\
 <ns3:ManageAccessReply xmlns:ns3="http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess">
    <ns3:OriginalRequest>
@@ -442,7 +442,7 @@ description : The given SSIN is not integrated correctly.
         national_id='68060105329',
         language='fr',history=False)
     reply = req.execute_request()
-    if settings.LINO.cbss_live_tests:
+    if settings.SITE.cbss_live_tests:
         expected = """\
 todo"""
         #~ print reply

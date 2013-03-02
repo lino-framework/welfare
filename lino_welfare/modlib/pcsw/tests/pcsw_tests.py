@@ -62,7 +62,7 @@ households = dd.resolve_app('households')
 class QuickTest(TestCase):
     pass
     #~ def setUp(self):
-        #~ settings.LINO.never_build_site_cache = True
+        #~ settings.SITE.never_build_site_cache = True
         #~ super(DemoTest,self).setUp()
             
 
@@ -81,7 +81,7 @@ def test00(self):
     """
     self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
     self.user_root.save()
-    sc = settings.LINO.site_config
+    sc = settings.SITE.site_config
     sc.signer1 = Person(first_name="Ernst",last_name="Keutgen") ; sc.signer1.save()
     sc.signer2 = Person(first_name="Joseph",last_name="Ossemann") ; sc.signer2.save()
     #~ president = contacts_RoleType(name="Präsident") ; president.save()
@@ -286,7 +286,6 @@ def test05(self):
     contained non-ascii characters.
     See :doc:`/blog/2011/0728`.
     """
-    from lino.core.modeltools import obj2str
     a = pcsw.Activity(name=u"Sozialhilfeempfänger")
     p = pcsw.Client(last_name="Test",activity=a)
     self.assertEqual(unicode(a),"Sozialhilfeempfänger")
@@ -295,9 +294,9 @@ def test05(self):
     self.assertEqual(type(repr(a)),str)
 
     # 
-    self.assertEqual(obj2str(a,True),"Activity(name='Sozialhilfeempf\\xe4nger')")
+    self.assertEqual(dd.obj2str(a,True),"Activity(name='Sozialhilfeempf\\xe4nger')")
     a.save()
-    self.assertEqual(obj2str(a,True),"Activity(id=1,name='Sozialhilfeempf\\xe4nger')")
+    self.assertEqual(dd.obj2str(a,True),"Activity(id=1,name='Sozialhilfeempf\\xe4nger')")
     
     expected = "Client(language='%s'," % babel.DEFAULT_LANGUAGE
     expected += "last_name='Test'"
@@ -306,9 +305,9 @@ def test05(self):
     #~ expected += r",activity=Activity(name=u'Sozialhilfeempf\xe4nger'))"
     #~ expected += ",activity=1"
     expected += ")"
-    self.assertEqual(obj2str(p,True),expected)
+    self.assertEqual(dd.obj2str(p,True),expected)
     p.pk = 5
-    self.assertEqual(obj2str(p),"Client #5 (u'TEST  (5)')")
+    self.assertEqual(dd.obj2str(p),"Client #5 (u'TEST  (5)')")
     
     
 def test06(self):
@@ -357,9 +356,9 @@ def test08(self):
     """
     Test disabled fields on imported partners
     """
-    save_iip = settings.LINO.is_imported_partner
+    save_iip = settings.SITE.is_imported_partner
     def f(obj): return True
-    settings.LINO.is_imported_partner = f
+    settings.SITE.is_imported_partner = f
     
     
     def check_disabled(obj,df,names):
@@ -394,7 +393,7 @@ def test08(self):
     
                 
     # restore is_imported_partner method
-    settings.LINO.is_imported_partner = save_iip
+    settings.SITE.is_imported_partner = save_iip
 
 def unused_test09(self):
     obj = pcsw.Client(pk=128,first_name="Erwin",last_name="Evertz")

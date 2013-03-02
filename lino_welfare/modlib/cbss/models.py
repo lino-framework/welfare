@@ -57,7 +57,7 @@ from lino import dd
 #~ from lino.utils import Warning
 from lino.utils import join_words
 from lino.utils import AttrDict, IncompleteDate
-from lino.core.modeltools import obj2str
+#~ from lino.core.modeltools import obj2str
 
 from lino.utils import babel
 from lino.utils.choosers import chooser
@@ -76,7 +76,7 @@ from lino.utils.babel import dtos
 #~ from lino.utils.choicelists import Gender
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.contacts import models as contacts
-from lino.core.modeltools import makedirs_if_missing
+#~ from lino.core.modeltools import makedirs_if_missing
 #~ from lino.mixins.printable import DirectPrintAction
 
 from lino_welfare.modlib.pcsw import models as pcsw
@@ -388,7 +388,7 @@ The raw XML response received.
     
     #~ def save(self,*args,**kw):
         #~ if not self.environment:
-            #~ self.environment = settings.LINO.cbss_environment or ''
+            #~ self.environment = settings.SITE.cbss_environment or ''
         #~ super(CBSSRequest,self).save(*args,**kw)
 
     #~ def disable_editing(self,ar):
@@ -484,7 +484,7 @@ The raw XML response received.
         if now is None:
             now = datetime.datetime.now()
         if environment is None:
-            environment = settings.LINO.cbss_environment or ''
+            environment = settings.SITE.cbss_environment or ''
             
         self.environment = environment
         self.sent = now
@@ -492,7 +492,7 @@ The raw XML response received.
         self.debug_messages = ''
         self.info_messages = ''
         
-        if not settings.LINO.cbss_live_tests:
+        if not settings.SITE.cbss_live_tests:
             if simulate_response is None and environment:
                 self.validate_request()
                 self.status = RequestStates.validated
@@ -504,7 +504,7 @@ The raw XML response received.
         
         retval = None
         try:
-            #~ if not settings.LINO.cbss_live_tests:
+            #~ if not settings.SITE.cbss_live_tests:
                 #~ self.validate_request()
             retval = self.execute_request_(now,simulate_response)
         except (IOError,Warning),e:
@@ -690,7 +690,7 @@ class SSDNRequest(CBSSRequest):
             xmlString = unicode(wrapped_srvreq)
             self.request_xml = xmlString
             #~ logger.info("20120521 Gonna sendXML(<xmlString>):\n%s",xmlString)
-            if not settings.LINO.cbss_live_tests:
+            if not settings.SITE.cbss_live_tests:
                 #~ raise Warning("NOT sending because `cbss_live_tests` is False:\n" + unicode(xmlString))
                 raise Warning(
                     "NOT sending because `cbss_live_tests` is False:\n" + xmlString)
@@ -775,9 +775,9 @@ class SSDNRequest(CBSSRequest):
         by adding AuthorizedUser and other information common 
         the all SSDN requests).
         """
-        #~ up  = settings.LINO.ssdn_user_params
-        #~ user_params = settings.LINO.cbss_user_params
-        sc = settings.LINO.site_config
+        #~ up  = settings.SITE.ssdn_user_params
+        #~ user_params = settings.SITE.cbss_user_params
+        sc = settings.SITE.site_config
         #~ au = E('common:AuthorizedUser',ns=NSCOMMON)
         #~ au.append(E('common:UserID').setText(up['UserID']))
         #~ au.append(E('common:Email').setText(up['Email']))
@@ -839,10 +839,10 @@ class NewStyleRequest(CBSSRequest):
         url = self.get_wsdl_uri()
         
         #~ logger.info("Instantiate Client at %s", url)
-        sc = settings.LINO.site_config
+        sc = settings.SITE.site_config
         #~ t = HttpAuthenticated(
-            #~ username=settings.LINO.cbss_username, 
-            #~ password=settings.LINO.cbss_password)
+            #~ username=settings.SITE.cbss_username, 
+            #~ password=settings.SITE.cbss_password)
         t = HttpAuthenticated(
             username=sc.cbss_http_username, 
             password=sc.cbss_http_password)
@@ -854,12 +854,12 @@ class NewStyleRequest(CBSSRequest):
       
         client = get_client(self)
 
-        #~ sc = settings.LINO.site_config
+        #~ sc = settings.SITE.site_config
         ci = client.factory.create('ns0:CustomerIdentificationType')
         #~ cbeNumber = client.factory.create('ns0:CbeNumberType')
-        #~ ci.cbeNumber = settings.LINO.cbss_cbe_number
-        #~ ci.cbeNumber = settings.LINO.site_config.site_company.vat_id
-        ci.cbeNumber = settings.LINO.site_config.cbss_org_unit
+        #~ ci.cbeNumber = settings.SITE.cbss_cbe_number
+        #~ ci.cbeNumber = settings.SITE.site_config.site_company.vat_id
+        ci.cbeNumber = settings.SITE.site_config.cbss_org_unit
         info = client.factory.create('ns0:InformationCustomerType')
         info.ticket = str(self.id)
         info.timestampSent = now
@@ -955,7 +955,7 @@ class SSIN(dd.Model):
         #~ super(SSIN,self).save(*args,**kw)
         
     def on_create(self,ar):
-        #~ print '20120629 SSIN.on_create', obj2str(self), ar
+        #~ print '20120629 SSIN.on_create', dd.obj2str(self), ar
         #~ super(ContractBase,self).on_create(request)
         self.person_changed(ar)
         super(SSIN,self).on_create(ar)
@@ -1343,7 +1343,7 @@ class IdentifyPersonResult(dd.VirtualTable):
         
         
             
-    #~ @dd.virtualfield(models.ForeignKey(settings.LINO.person_model))
+    #~ @dd.virtualfield(models.ForeignKey(settings.SITE.person_model))
     #~ @dd.displayfield(_("Person"))
     #~ def person(self,obj,ar):
         #~ from lino.apps.pcsw.models import Person
@@ -1475,13 +1475,13 @@ for register/unregister it is mandatory.""")
 
     def save(self,*args,**kw):
         if not self.sector_id:
-            self.sector = settings.LINO.site_config.sector
+            self.sector = settings.SITE.site_config.sector
         super(ManageAccessRequest,self).save(*args,**kw)
 
     @chooser()
     def purpose_choices(cls,sector):
         if not sector:
-            sector = settings.LINO.site_config.sector
+            sector = settings.SITE.site_config.sector
         if not sector:
             raise Exception("SiteConfig.sector is not set!")
         Q = models.Q
@@ -1734,9 +1734,9 @@ dd.inject_field(pcsw.Client,
 
 MODULE_LABEL = _("CBSS")
 
-#~ settings.LINO.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
-#~ settings.LINO.add_user_group('cbss',MODULE_LABEL)
-#~ settings.LINO.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
+#~ settings.SITE.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
+#~ settings.SITE.add_user_group('cbss',MODULE_LABEL)
+#~ settings.SITE.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
 
 #~ dd.inject_field('countries.City',
     #~ 'inscode',
@@ -1764,7 +1764,7 @@ def setup_site_cache(self,force):
     import logging
     logger = logging.getLogger(__name__)
     
-    environment = settings.LINO.cbss_environment
+    environment = settings.SITE.cbss_environment
     if not environment:
         return # silently return
         
@@ -1781,7 +1781,7 @@ def setup_site_cache(self,force):
                 return
         s = file(os.path.join(os.path.dirname(__file__),'WSDL',template)).read()
         s = s % context
-        makedirs_if_missing(os.path.dirname(fn))
+        settings.SITE.makedirs_if_missing(os.path.dirname(fn))
         open(fn,'wt').write(s)
         logger.info("Generated %s for environment %r.",fn,environment)
         

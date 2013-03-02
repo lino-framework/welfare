@@ -462,7 +462,7 @@ def unused_get_or_create_job(provider,contract_type,job_type,sector,function):
 
 class LinoMdbLoader(Loader):
     "Base for all Loaders in this module"
-    mdb_file = settings.LINO.legacy_data_path
+    mdb_file = settings.SITE.legacy_data_path
 
 
 
@@ -924,8 +924,8 @@ class EventLoader(LinoMdbLoader):
 
 def objects():
   
-    if not settings.LINO.legacy_data_path:
-        raise Exception("You must specify the name of your .mdb file in `settings.LINO.legacy_data_path`!")
+    if not settings.SITE.legacy_data_path:
+        raise Exception("You must specify the name of your .mdb file in `settings.SITE.legacy_data_path`!")
   
     phin = Instantiator('pcsw.PersonGroup','name').build
     yield phin('1')

@@ -29,5 +29,5 @@ class Command(BaseCommand):
       
         req = tcs.build_request("hello cbss service")
         print "Sending request..."
-        print tcs.execute('test',req,settings.LINO.cbss2_user_params)
+        print tcs.execute('test',req,settings.SITE.cbss2_user_params)
       

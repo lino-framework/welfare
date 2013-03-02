@@ -68,13 +68,13 @@ class DemoTest(TestCase):
     never_build_site_cache = True
     
     #~ def setUp(self):
-        #~ settings.LINO.never_build_site_cache = True
+        #~ settings.SITE.never_build_site_cache = True
         #~ super(DemoTest,self).setUp()
 
 
 class PseudoRequest:
     def __init__(self,name):
-        self.user = settings.LINO.user_model.objects.get(username=name)
+        self.user = settings.SITE.user_model.objects.get(username=name)
         self.subst_user = None
 
             
@@ -109,7 +109,7 @@ def test002(self):
     #~ u.language = '' # HTTP_ACCEPT_LANGUAGE works only when User.language empty
     #~ u.save()
     
-    settings.LINO.ui # trigger ui instance
+    settings.SITE.ui # trigger ui instance
     
     obj = pcsw.Client.objects.get(pk=128)
     ar = cv.SoftSkillsByPerson.request(master_instance=obj)
@@ -243,8 +243,8 @@ def test006(self):
     from lino.utils import babel
     from lino_welfare.modlib.pcsw.models import Person
     #~ from lino.apps.pcsw.models import Property, PersonProperty
-    Property = settings.LINO.modules.properties.Property
-    PersonProperty = settings.LINO.modules.properties.PersonProperty
+    Property = settings.SITE.modules.properties.Property
+    PersonProperty = settings.SITE.modules.properties.PersonProperty
     annette = Person.objects.get(pk=118)
     self.assertEquals(unicode(annette), "ARENS Annette (118)")
     
@@ -351,20 +351,20 @@ def test010(self):
     try:
         City(name="Eupen",country=be,zip_code='4700').save()
     except IntegrityError:
-        if settings.LINO.allow_duplicate_cities:
+        if settings.SITE.allow_duplicate_cities:
             self.fail("Got IntegrityError though allow_duplicate_cities should be allowed.")
     else:
-        if not settings.LINO.allow_duplicate_cities:
+        if not settings.SITE.allow_duplicate_cities:
             self.fail("Expected IntegrityError")
         
     
     try:
         be.city_set.create(name="Eupen",zip_code='4700')
     except IntegrityError:
-        if settings.LINO.allow_duplicate_cities:
+        if settings.SITE.allow_duplicate_cities:
             self.fail("Got IntegrityError though allow_duplicate_cities should be allowed.")
     else:
-        if not settings.LINO.allow_duplicate_cities:
+        if not settings.SITE.allow_duplicate_cities:
             self.fail("Expected IntegrityError")
         
     
@@ -496,9 +496,9 @@ def test101(self):
     bisaCompany = Company.objects.get(pk=185)
     
     # it should work even on an imported partner
-    save_iip = settings.LINO.is_imported_partner
+    save_iip = settings.SITE.is_imported_partner
     def f(obj): return True
-    settings.LINO.is_imported_partner = f
+    settings.SITE.is_imported_partner = f
     
     JOBS = Job.objects.filter(provider=bisaProvider)
     self.assertEqual(JOBS.count(),3)
@@ -524,5 +524,5 @@ def test101(self):
         pass
     
     # restore is_imported_partner method
-    settings.LINO.is_imported_partner = save_iip
+    settings.SITE.is_imported_partner = save_iip
     

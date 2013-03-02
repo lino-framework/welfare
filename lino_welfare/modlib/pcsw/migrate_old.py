@@ -28,7 +28,7 @@ from lino.utils import dblogger
 
 def install(globals_dict):
     "Backward compat when loading dumpy fixtures created before 1.4.4"
-    settings.LINO.install_migrations(globals_dict)
+    settings.SITE.install_migrations(globals_dict)
 
 
 def migrate_from_1_1_16(globals_dict):

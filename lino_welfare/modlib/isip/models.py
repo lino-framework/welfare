@@ -59,7 +59,6 @@ from lino.utils import mti
 from lino.utils.ranges import isrange, overlap, overlap2, encompass, rangefmt
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str # , models_by_abc
 
 #~ from lino.modlib.cal.models import update_auto_task
 
@@ -173,11 +172,11 @@ class ContractEndings(dd.Table):
 #~ FUNCTION_ID_PRESIDENT = 5
 
 def default_signer1(): 
-    return settings.LINO.site_config.signer1
+    return settings.SITE.site_config.signer1
     #~ return SecretaryPresident.secretary_choices()[0]
 
 def default_signer2(): 
-    return settings.LINO.site_config.signer2
+    return settings.SITE.site_config.signer2
     #~ return SecretaryPresident.president_choices()[0]
   
 class Signers(dd.Model):
@@ -204,20 +203,20 @@ class Signers(dd.Model):
       
     @chooser()
     def signer1_choices(cls):
-        sc = settings.LINO.site_config
+        sc = settings.SITE.site_config
         kw = dict()
         if sc.signer1_function:
             kw.update(rolesbyperson__type=sc.signer1_function)
-        return settings.LINO.modules.contacts.Person.objects.filter(
+        return settings.SITE.modules.contacts.Person.objects.filter(
               rolesbyperson__company=sc.site_company,**kw)
         
     @chooser()
     def signer2_choices(cls):
-        sc = settings.LINO.site_config
+        sc = settings.SITE.site_config
         kw = dict()
         if sc.signer2_function:
             kw.update(rolesbyperson__type=sc.signer2_function)
-        return settings.LINO.modules.contacts.Person.objects.filter(
+        return settings.SITE.modules.contacts.Person.objects.filter(
               rolesbyperson__company=sc.site_company,**kw)
       
   
@@ -247,7 +246,7 @@ class ContractBase(
         #~ related_name="%(app_label)s_%(class)s_ptr",
         #~ parent_link=True)
   
-    #~ person = models.ForeignKey(settings.LINO.person_model,
+    #~ person = models.ForeignKey(settings.SITE.person_model,
     client = models.ForeignKey('pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_client")
         
@@ -322,7 +321,7 @@ class ContractBase(
 
     @classmethod
     def contact_person_choices_queryset(cls,company):
-        return settings.LINO.modules.contacts.Person.objects.filter(
+        return settings.SITE.modules.contacts.Person.objects.filter(
             rolesbyperson__company=company,
             rolesbyperson__type__use_in_contracts=True)
             
@@ -456,7 +455,7 @@ dd.update_field(ContractBase,'signer2', default=default_signer2)
 
 class ContractBaseTable(dd.Table):
     parameters = dict(
-      user = dd.ForeignKey(settings.LINO.user_model,blank=True),
+      user = dd.ForeignKey(settings.SITE.user_model,blank=True),
       show_past = models.BooleanField(_("past contracts"),default=True),
       show_active = models.BooleanField(_("active contracts"),default=True),
       show_coming = models.BooleanField(_("coming contracts"),default=True),
@@ -596,7 +595,7 @@ class Contract(ContractBase):
         #~ if self.must_build:
         if not self.build_time:
             return []
-        #~ return df + settings.LINO.CONTRACT_PRINTABLE_FIELDS
+        #~ return df + settings.SITE.CONTRACT_PRINTABLE_FIELDS
         return self.PRINTABLE_FIELDS
 
 

@@ -44,8 +44,8 @@ if cbss:
         [ cbss.ManageAccessRequest, dict(
             national_id='680601 053-29',
             birth_date=IncompleteDate(1968,6,1),
-            start_date=settings.LINO.demo_date(),
-            end_date=settings.LINO.demo_date(15),
+            start_date=settings.SITE.demo_date(),
+            end_date=settings.SITE.demo_date(15),
             sector=cbss.Sector.objects.get(code=17,subcode=1),
             purpose=cbss.Purpose.objects.get(code=902),
             action=cbss.ManageAction.REGISTER,
@@ -61,7 +61,7 @@ if cbss:
 
     def objects():
       
-        User = dd.resolve_model(settings.LINO.user_model)
+        User = dd.resolve_model(settings.SITE.user_model)
         root = User.objects.get(username='hubert')
         Client = dd.resolve_model('pcsw.Client')
         #~ PERSONS = Cycler(Person.objects.filter(coached_from__isnull=False).order_by('id'))
@@ -80,6 +80,6 @@ if cbss:
             
             
         #~ Company = resolve_model('contacts.Company')
-        #~ settings.LINO.site_config.site_company = Company.objects.get(pk=1)
-        #~ settings.LINO.site_config.save()
+        #~ settings.SITE.site_config.site_company = Company.objects.get(pk=1)
+        #~ settings.SITE.site_config.save()
             

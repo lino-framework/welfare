@@ -59,7 +59,6 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.core.modeltools import range_filter
 from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem, language_choices
 from lino.utils.htmlgen import UL
 #~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
@@ -69,7 +68,6 @@ from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
-from lino.core.modeltools import obj2str
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
@@ -771,7 +769,7 @@ class Study(CountryCity):
     class Meta:
         verbose_name = _("study or education")
         verbose_name_plural = _("Studies & education")
-    #~ person = models.ForeignKey(settings.LINO.person_model) #,verbose_name=_("Person"))
+    #~ person = models.ForeignKey(settings.SITE.person_model) #,verbose_name=_("Person"))
     person = models.ForeignKey('pcsw.Client') 
     type = models.ForeignKey(StudyType,verbose_name=_("Study type"))
     content = models.CharField(max_length=200,
@@ -830,7 +828,7 @@ class Experience(SectorFunction):
     class Meta:
         verbose_name = _("Job Experience")
         verbose_name_plural = _("Job Experiences")
-    #~ person = models.ForeignKey(settings.LINO.person_model,verbose_name=_("Person"))
+    #~ person = models.ForeignKey(settings.SITE.person_model,verbose_name=_("Person"))
     person = models.ForeignKey('pcsw.Client')
     #~ company = models.ForeignKey("contacts.Company",verbose_name=_("Company"))
     company = models.CharField(max_length=200,verbose_name=_("company"))
@@ -1005,7 +1003,7 @@ class Candidature(SectorFunction):
         verbose_name = _("Job Candidature")
         verbose_name_plural = _('Job Candidatures')
         
-    #~ person = models.ForeignKey(settings.LINO.person_model)
+    #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
     
     job = models.ForeignKey("jobs.Job",
@@ -1198,10 +1196,10 @@ class ContractsByType(Contracts):
     
     
   
-if True: # settings.LINO.user_model:
+if True: # settings.SITE.user_model:
   
     from lino.core.modeltools import resolve_model, UnresolvedModel
-    #~ USER_MODEL = resolve_model(settings.LINO.user_model)
+    #~ USER_MODEL = resolve_model(settings.SITE.user_model)
     
     class ContractsSearch(Contracts):
         """

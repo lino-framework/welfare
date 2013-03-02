@@ -90,10 +90,10 @@ def test01(self):
     the startup probably has been done already and won't execute 
     another time.
     To make sure that these db lookups don't interfere here, we 
-    now call `settings.LINO.setup()` followed by `reset_queries()`.
+    now call `settings.SITE.setup()` followed by `reset_queries()`.
     
     """
-    settings.LINO.startup()
+    settings.SITE.startup()
     reset_queries()
     
     #~ 'SELECT "lino_helptext"."id", [...] FROM "lino_helptext" WHERE "lino_helptext"."help_text" IS NOT NULL',
@@ -108,7 +108,7 @@ def test01(self):
     #~ user = create_user('user','user@example.com','John','Jones',False,False)
     #~ user.save()
     #~ root = create_user('root','root@example.com','Dick','Dickens',True,True)    
-    user = Instantiator(settings.LINO.user_model,'username email first_name last_name profile').build
+    user = Instantiator(settings.SITE.user_model,'username email first_name last_name profile').build
     root = user('root','root@example.com','Dick','Dickens','900')    
     
     root.save()
