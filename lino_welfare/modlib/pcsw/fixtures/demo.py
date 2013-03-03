@@ -35,7 +35,7 @@ from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
 from lino.core.modeltools import resolve_model
-from lino.utils.babel import babel_values, default_language
+from north.babel import babel_values
 from lino.utils.restify import restify
 from lino.utils import dblogger
 #~ from lino.models import update_site_config

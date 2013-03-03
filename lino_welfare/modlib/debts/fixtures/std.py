@@ -26,7 +26,7 @@ from lino import dd
 from lino.utils import i2d
 from lino.utils.instantiator import Instantiator
 from lino.core.modeltools import resolve_model
-from lino.utils.babel import babel_values
+from north.babel import babel_values
 
 #~ from lino.modlib.debts.models import AccountTypes
 accounts = dd.resolve_app('accounts')

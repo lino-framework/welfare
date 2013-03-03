@@ -20,8 +20,7 @@ http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_va
 
 from django.conf import settings
 from lino.utils import ucsv
-#~ from lino.utils.babel import babel_values
-from lino.utils import babel
+from north import babel
 from lino.core.modeltools import resolve_model
 from os.path import join, dirname
 

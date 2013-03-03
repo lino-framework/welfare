@@ -59,7 +59,6 @@ from lino.utils import join_words
 from lino.utils import AttrDict, IncompleteDate
 #~ from lino.core.modeltools import obj2str
 
-from lino.utils import babel
 from lino.utils.choosers import chooser
 from lino.utils.ssin import ssin_validator
 
@@ -69,8 +68,6 @@ from lino.utils.xmlgen import html as xghtml
 #~ from lino.core.modeltools import resolve_model
 #~ from lino.utils.xmlgen import etree
 #~ from lino.utils.xmlgen import cbss
-
-from lino.utils.babel import dtos
 
 #~ from lino.utils.choicelists import ChoiceList
 #~ from lino.utils.choicelists import Gender
@@ -255,7 +252,7 @@ class unused_ExecuteRequest(dd.RowAction):
 
 
 
-class Sector(babel.BabelNamed):
+class Sector(dd.BabelNamed):
     """
     Default values filled from :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
     """
@@ -267,14 +264,14 @@ class Sector(babel.BabelNamed):
     #~ code = models.CharField(max_length=2,verbose_name=_("Code"),primary_key=True)
     code = models.IntegerField(max_length=2,verbose_name=_("Code"))
     subcode = models.IntegerField(max_length=2,verbose_name=_("Subcode"),default=0)
-    abbr = babel.BabelCharField(_("Abbreviation"),max_length=50,blank=True)
+    abbr = dd.BabelCharField(_("Abbreviation"),max_length=50,blank=True)
     
     
     def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + babel.BabelNamed.__unicode__(self)
+        #~ return '(' + str(self.code) + ') ' + dd.BabelNamed.__unicode__(self)
         if self.subcode != 0:
-            return str(self.code) + '.' + str(self.subcode) + ' - ' + babel.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + babel.BabelNamed.__unicode__(self)
+            return str(self.code) + '.' + str(self.subcode) + ' - ' + dd.BabelNamed.__unicode__(self)
+        return str(self.code) + ' - ' + dd.BabelNamed.__unicode__(self)
         
 
 class Sectors(dd.Table):
@@ -286,7 +283,7 @@ class Sectors(dd.Table):
     order_by = ['code','subcode']
     
 
-class Purpose(babel.BabelNamed):
+class Purpose(dd.BabelNamed):
     u"""
     Codes qualité (Hoedanigheidscodes). 
     This table is usually filled with the official codes
@@ -303,8 +300,8 @@ class Purpose(babel.BabelNamed):
     code = models.IntegerField(max_length=3,verbose_name=_("Code"))
     
     def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + babel.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + babel.BabelNamed.__unicode__(self)
+        #~ return '(' + str(self.code) + ') ' + dd.BabelNamed.__unicode__(self)
+        return str(self.code) + ' - ' + dd.BabelNamed.__unicode__(self)
         
 
 class Purposes(dd.Table):

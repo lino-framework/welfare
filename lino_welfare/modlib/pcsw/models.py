@@ -58,10 +58,7 @@ from lino import mixins
 #~ from lino.models import get_site_config
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem
-from lino.utils.babel import language_choices
-#~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
-from lino.utils import babel 
+from north import babel
 from lino.utils import join_words
 from lino.utils.choosers import chooser
 from lino.utils import mti

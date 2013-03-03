@@ -38,7 +38,7 @@ from lino.utils.restify import restify
 #~ from lino.utils import printable
 
 from lino.utils.choosers import chooser
-from lino.utils import babel
+from north import babel
 from lino.utils import ssin
 from lino.utils import workdays
 from lino import mixins
@@ -94,7 +94,7 @@ class Brokers(dd.Table):
 
 
 
-class Faculty(babel.BabelNamed):
+class Faculty(dd.BabelNamed):
     """
     A Faculty (Fachbereich) is a conceptual (not organizational)
     department of this PCSW. 
@@ -105,7 +105,7 @@ class Faculty(babel.BabelNamed):
     class Meta:
         verbose_name = _("Faculty")
         verbose_name_plural = _("Faculties")
-    #~ body = babel.BabelTextField(_("Body"),blank=True,format='html')
+    #~ body = dd.BabelTextField(_("Body"),blank=True,format='html')
     weight = models.IntegerField(
           _("Work effort"), # Arbeitsaufwand
           default=MAX_WEIGHT,

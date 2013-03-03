@@ -45,6 +45,9 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
+from north import babel
+from north.babel import dtos
+
 
 from lino import mixins
 from lino import dd
@@ -53,12 +56,9 @@ from lino.utils import join_words
 from lino.utils import assert_pure
 from lino.utils import AttrDict, IncompleteDate
 
-from lino.utils import babel
-
 from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
-from lino.utils.babel import dtos
 
 
 try:

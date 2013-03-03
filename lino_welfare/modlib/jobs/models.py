@@ -59,10 +59,8 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem, language_choices
 from lino.utils.htmlgen import UL
-#~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
-from lino.utils import babel 
+from north import babel
 from lino.utils.choosers import chooser
 #~ from lino.utils.choicelists import UserLevel
 from lino.utils import mti
@@ -123,7 +121,7 @@ pcsw = dd.resolve_app('pcsw')
 #~ }
 
 
-class Schedule(babel.BabelNamed):
+class Schedule(dd.BabelNamed):
     """List of choices for `jobs.Contract.schedule` field."""
     class Meta:
         verbose_name = _("Work Schedule")
@@ -138,7 +136,7 @@ class Schedules(dd.Table):
     ContractsBySchedule
     """
 
-class Regime(babel.BabelNamed):
+class Regime(dd.BabelNamed):
     """List of choices for `jobs.Contract.regime` field."""
     class Meta:
         verbose_name = _("Work Regime")
@@ -213,7 +211,7 @@ class JobProviders(contacts.Companies,dd.Table):
 #
 # CONTRACT TYPES 
 #
-class ContractType(mixins.PrintableType,babel.BabelNamed):
+class ContractType(mixins.PrintableType,dd.BabelNamed):
     """
     This is the homologue of 
     :class:`lino_welfare.modlib.isip.models.ContractType` (see there 
@@ -252,7 +250,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class Sector(babel.BabelNamed):
+class Sector(dd.BabelNamed):
     """Each Job should have an "Activity Sector"."""
     class Meta:
         verbose_name = _("Job Sector")
@@ -274,7 +272,7 @@ class Sectors(dd.Table):
     CandidaturesBySector
   """
 
-class Function(babel.BabelNamed):
+class Function(dd.BabelNamed):
     """Each Job may have a Function."""
     class Meta:
         verbose_name = _("Job Function")
@@ -400,13 +398,6 @@ class Contract(isip.ContractBase):
         return [ 312, 468, 624 ]
         #~ return [ 0, 25, 50, 100 ]
     
-    #~ @chooser(simple_values=True)
-    #~ def regime_choices(cls,language):
-        #~ return language_choices(language,REGIME_CHOICES)
-    
-    #~ @chooser(simple_values=True)
-    #~ def schedule_choices(cls,language):
-        #~ return language_choices(language,SCHEDULE_CHOICES)
     
     @chooser(simple_values=True)
     def refund_rate_choices(cls):
@@ -732,7 +723,7 @@ class Offers(dd.Table):
 #
 # STUDY TYPE
 #
-class StudyType(babel.BabelNamed):
+class StudyType(dd.BabelNamed):
     #~ text = models.TextField(_("Description"),blank=True,null=True)
     class Meta:
         verbose_name = _("study type")

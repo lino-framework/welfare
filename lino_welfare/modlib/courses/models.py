@@ -55,7 +55,7 @@ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.uploads import models as uploads
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.utils import babel 
+from north import babel 
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable

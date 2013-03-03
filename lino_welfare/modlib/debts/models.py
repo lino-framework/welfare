@@ -69,7 +69,6 @@ from lino.modlib.cal import models as cal
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
 #~ from lino.core.modeltools import range_filter
-from lino.utils import babel 
 from lino.core import actions
 from lino.utils.choosers import chooser
 from lino.utils import mti

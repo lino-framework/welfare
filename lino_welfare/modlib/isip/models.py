@@ -50,10 +50,7 @@ from lino.modlib.uploads import models as uploads
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.modeltools import get_field
 from lino.core.modeltools import resolve_field
-from lino.utils.babel import DEFAULT_LANGUAGE, babelattr, babeldict_getitem, language_choices
 from lino.utils.htmlgen import UL
-#~ from lino.utils.babel import add_babel_field, DEFAULT_LANGUAGE, babelattr, babeldict_getitem
-from lino.utils import babel 
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange, overlap, overlap2, encompass, rangefmt
@@ -81,7 +78,7 @@ COACHINGTYPE_ASD = 1
 #
 # CONTRACT TYPES 
 #
-class ContractType(mixins.PrintableType,babel.BabelNamed):
+class ContractType(mixins.PrintableType,dd.BabelNamed):
   
     """
     The contract type determines the print template to be used. 
@@ -120,8 +117,8 @@ class ContractTypes(dd.Table):
 #
 # EXAMINATION POLICIES
 #
-class ExamPolicy(babel.BabelNamed,cal.RecurrenceSet):
-#~ class ExamPolicy(babel.BabelNamed,mixins.ProjectRelated,cal.RecurrenceSet):
+class ExamPolicy(dd.BabelNamed,cal.RecurrenceSet):
+#~ class ExamPolicy(dd.BabelNamed,mixins.ProjectRelated,cal.RecurrenceSet):
     """
     Examination policy. 
     This also decides about automatic tasks to be created.
@@ -250,7 +247,7 @@ class ContractBase(
     client = models.ForeignKey('pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_client")
         
-    language = babel.LanguageField()
+    language = dd.LanguageField()
     
     applies_from = models.DateField(_("applies from"),blank=True,null=True)
     applies_until = models.DateField(_("applies until"),blank=True,null=True)

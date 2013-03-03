@@ -40,7 +40,6 @@ from django.utils import translation
 
 from lino import dd
 from lino.utils import i2d
-from lino.utils import babel
 #~ from lino.core.modeltools import resolve_model
 #Companies = resolve_model('contacts.Companies')
 from lino.utils.test import TestCase
