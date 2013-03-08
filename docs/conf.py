@@ -12,6 +12,10 @@
 # serve to show the default.
 
 import sys, os
+from unipath import Path
+DOCSDIR = Path(__file__).parent.absolute()
+sys.path.append(DOCSDIR)
+
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
 """
@@ -20,7 +24,6 @@ would occur when this happens later while importing one of the models modules.
 """
 from django.conf import settings
 
-from lino.utils.sphinxconf import setup
 
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
@@ -72,8 +75,8 @@ copyright = u'2012-2013, Luc Saffre'
 #
 #~ version = lino_welfare.__version__
 # The full version, including alpha/beta/rc tags.
-from lino_welfare.modlib.pcsw.settings import LINO
-release = LINO.version
+#~ from lino_welfare.modlib.pcsw.settings import LINO
+release = settings.SITE.version
 
 # The short X.Y version.
 version = '.'.join(release.split('.')[:2])
@@ -254,7 +257,20 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 #~ todo_include_todos = True
 
 
-intersphinx_mapping = {
-  #~ 'lino': ('http://packages.python.org/lino', None )
-  'lino': ('http://www.lino-framework.org', r'c:\temp\sphinxbuild\lino\html\objects.inv' )
-}
+
+HGWORK = DOCSDIR.ancestor(2)
+intersphinx_mapping = dict()
+intersphinx_mapping.update(site=(
+    'http://site.lino-framework.org',
+    Path(HGWORK,'site','docs','.build','objects.inv')))
+intersphinx_mapping.update(north=(
+    'http://north.lino-framework.org',
+    Path(HGWORK,'north','docs','.build','objects.inv')))
+intersphinx_mapping.update(lino=(
+    'http://www.lino-framework.org',
+    Path(HGWORK,'lino','docs','.build','objects.inv')))
+intersphinx_mapping.update(welfare=(
+    'http://welfare.lino-framework.org',
+    Path(HGWORK,'welfare','docs','.build','objects.inv')))
+
+from djangosite.utils.sphinxconf import setup
