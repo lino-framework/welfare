@@ -44,7 +44,7 @@ from django.utils.functional import lazy
 #~ logger.debug(__file__+' : started')
 #~ from django.utils import translation
 
-#~ from django_sites.modeltools import range_filter
+#~ from django_sites.dbutils import range_filter
 
 #~ from lino import reports
 from lino import dd
@@ -56,8 +56,8 @@ from lino import mixins
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config
-from lino.core.modeltools import get_field
-from lino.core.modeltools import resolve_field
+from lino.core.dbutils import get_field
+from lino.core.dbutils import resolve_field
 from north import babel
 from lino.utils import join_words
 from lino.utils.choosers import chooser
@@ -84,7 +84,7 @@ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.properties import models as properties
 #~ from lino_welfare.modlib.cv import models as cv
 #~ from lino.modlib.contacts.models import Contact
-from lino.core.modeltools import resolve_model, UnresolvedModel
+from lino.core.dbutils import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
@@ -1946,7 +1946,7 @@ class ClientsByNationality(Clients):
 
 #~ if True: # dd.is_installed('pcsw'):
 
-#~ from lino.core.modeltools import models_by_abc
+#~ from lino.core.dbutils import models_by_abc
 
 
   

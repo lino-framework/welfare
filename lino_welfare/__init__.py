@@ -11,22 +11,9 @@
 ## GNU General Public License for more details.
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
-"""
-Lino-Welfare is a modular customized application 
-developed for Belgian 
-*Public Centres for Social Welfare*. 
-
-It started as a part of the `Lino <http://code.google.com/p/lino/>`_
-project and forked off in August 2012 
-to become an independent project
-to be maintained by an independant organization. 
-"""
 
 import os
 
-execfile(os.path.join(os.path.dirname(__file__),'version.py'))
+execfile(os.path.join(os.path.dirname(__file__),'setup_info.py'))
+__version__ = SETUP_INFO['version']
 
-"""
-Note that the docstring of this module is 
-being included into :srcref:`/docs/index.rst`
-"""

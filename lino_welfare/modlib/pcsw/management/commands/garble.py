@@ -42,7 +42,7 @@ from lino.utils import Cycler, join_words
 
 from lino import mixins
 from lino import dd
-#~ from lino.core.modeltools import is_valid_email
+#~ from lino.core.dbutils import is_valid_email
 #~ import lino
 
 from lino.utils import confirm

@@ -57,8 +57,8 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.uploads import models as uploads
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.modeltools import get_field
-from lino.core.modeltools import resolve_field
+from lino.core.dbutils import get_field
+from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
 from north import babel
 from lino.utils.choosers import chooser
@@ -1189,7 +1189,7 @@ class ContractsByType(Contracts):
   
 if True: # settings.SITE.user_model:
   
-    from lino.core.modeltools import resolve_model, UnresolvedModel
+    from lino.core.dbutils import resolve_model, UnresolvedModel
     #~ USER_MODEL = resolve_model(settings.SITE.user_model)
     
     class ContractsSearch(Contracts):

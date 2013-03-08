@@ -20,7 +20,7 @@ Fills the cbss.Purposes table with the official values defined in
 """
 
 from north.babel import babel_values
-from lino.core.modeltools import resolve_model
+from lino.core.dbutils import resolve_model
 
 
 PURPOSES = u"""

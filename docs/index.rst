@@ -2,12 +2,12 @@
 Lino-Welfare Technical Reference
 ================================
 
-Welcome on the technical home page of *Lino-Welfare*.
+Welcome to the *Lino-Welfare* Technical Reference.
 
 .. py2rst::
 
   import lino_welfare
-  print lino_welfare.__doc__
+  print lino_welfare.SETUP_INFO['long_description']
 
 
 This document tree is in English and 

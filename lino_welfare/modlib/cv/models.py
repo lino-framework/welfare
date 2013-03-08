@@ -55,21 +55,21 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.users import models as users
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.modeltools import get_field
-from lino.core.modeltools import resolve_field
+from lino.core.dbutils import get_field
+from lino.core.dbutils import resolve_field
 from north.babel import DEFAULT_LANGUAGE, babelattr
 from north import babel 
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-#~ from lino.core.modeltools import obj2str
+#~ from lino.core.dbutils import obj2str
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.properties import models as properties
 from lino.modlib.cal.models import update_reminder
 #~ from lino.modlib.contacts.models import Contact
-from lino.core.modeltools import resolve_model, UnresolvedModel
+from lino.core.dbutils import resolve_model, UnresolvedModel
 
 
 #~ from lino.ui.models import SiteConfig

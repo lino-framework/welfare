@@ -34,7 +34,7 @@ from lino import dd
 from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
-from lino.core.modeltools import resolve_model
+from lino.core.dbutils import resolve_model
 from north.babel import babel_values
 from lino.utils.restify import restify
 from lino.utils import dblogger

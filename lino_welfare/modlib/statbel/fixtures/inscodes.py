@@ -41,7 +41,7 @@ the data used here comes from uncertain sources.
 
 from django.conf import settings
 from north.babel import babel_values
-from lino.core.modeltools import resolve_model
+from lino.core.dbutils import resolve_model
 from lino.utils import dblogger as logger
 
 ISO2INS = {

@@ -44,7 +44,7 @@ from django.utils import simplejson
 #~ from lino.modlib.users import models as users
 from django.utils.encoding import force_unicode
 
-from django_site.modeltools import is_valid_email
+from djangosite.dbutils import is_valid_email
 
 import lino
 

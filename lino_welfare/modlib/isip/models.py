@@ -48,8 +48,8 @@ from lino.modlib.uploads import models as uploads
 #~ from lino.utils.choicelists import HowWell
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.modeltools import get_field
-from lino.core.modeltools import resolve_field
+from lino.core.dbutils import get_field
+from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
 from lino.utils.choosers import chooser
 from lino.utils import mti

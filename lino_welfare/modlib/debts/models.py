@@ -66,22 +66,22 @@ from lino.modlib.cal import models as cal
 #~ from lino.utils.choicelists import ChoiceList
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.modeltools import get_field
-from lino.core.modeltools import resolve_field
-#~ from lino.core.modeltools import range_filter
+from lino.core.dbutils import get_field
+from lino.core.dbutils import resolve_field
+#~ from lino.core.dbutils import range_filter
 from lino.core import actions
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-#~ from lino.core.modeltools import obj2str
+#~ from lino.core.dbutils import obj2str
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.properties import models as properties
 #~ from lino.modlib.households import models as households
 from lino.modlib.accounts.utils import AccountTypes
 #~ from lino.modlib.contacts.models import Contact
-#~ from lino.core.modeltools import resolve_model, UnresolvedModel
+#~ from lino.core.dbutils import resolve_model, UnresolvedModel
 
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')

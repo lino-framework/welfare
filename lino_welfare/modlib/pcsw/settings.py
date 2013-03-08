@@ -242,7 +242,7 @@ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
         automatic reminders for the specified user.
         Used by :func:`lino.modlib.cal.update_reminders`.
         """
-        from lino.core.modeltools import models_by_base
+        from lino.core.dbutils import models_by_base
         from django.db.models import Q
         from lino_welfare.modlib.isip import models as isip
         

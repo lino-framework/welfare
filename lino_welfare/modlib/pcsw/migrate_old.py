@@ -22,7 +22,7 @@ but archived here as historic examples.
 import datetime
 from decimal import Decimal
 from django.conf import settings
-from lino.core.modeltools import resolve_model
+from lino.core.dbutils import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
 
@@ -1019,7 +1019,7 @@ def migrate_from_1_4_3(globals_dict):
     - notes.Note is now ProjectRelated 
       (and field `company` is injected by lino.apps.pcsw)
     """
-    from lino.core.modeltools import resolve_model
+    from lino.core.dbutils import resolve_model
     from lino.utils.mti import create_child
     from lino.modlib.users.models import UserProfiles
     #~ from lino.utils import mti
