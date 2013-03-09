@@ -43,7 +43,7 @@ extensions = [
   'sphinx.ext.extlinks',
   'sphinx.ext.graphviz',
   'sphinx.ext.intersphinx',
-  #~ 'sphinx.ext.doctest',
+  'sphinx.ext.doctest',
 ]
 
 #~ extensions.append('sphinxcontrib.autorun')

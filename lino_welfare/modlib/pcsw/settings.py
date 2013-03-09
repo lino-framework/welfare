@@ -24,15 +24,16 @@ from lino.projects.std.settings import *
 import lino_welfare
 from lino_welfare.modlib import cbss
 from lino.modlib import cal
+from lino_welfare import SETUP_INFO
 
 class Site(Site,cal.SiteMixin,cbss.SiteMixin):
   
-    version = lino_welfare.__version__
-    url = "http://code.google.com/p/lino-welfare/"
-    short_name = "Lino Welfare"
-    description = "a Lino application for Belgian Public Welfare Centres."
-    author = 'Luc Saffre'
-    author_email = 'luc.saffre@gmail.com'
+    version = SETUP_INFO['version'] # lino_welfare.__version__
+    url = SETUP_INFO['url'] # "http://code.google.com/p/lino-welfare/"
+    verbose_name = SETUP_INFO['name'] # "Lino Welfare"
+    #~ description = "a Lino application for Belgian Public Welfare Centres."
+    #~ author = 'Luc Saffre'
+    #~ author_email = 'luc.saffre@gmail.com'
     
     demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
     

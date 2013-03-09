@@ -1,6 +1,7 @@
 ==========================
 lino-welfare README
 ==========================
+
 A Lino application for Belgian Public Welfare Centres
 
 Description

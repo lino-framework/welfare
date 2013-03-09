@@ -6,3 +6,4 @@ global-include *.txt *.py *.BAT *.bat *.js *.css *.html \
   *.xsd \
   *.po *.mo Makefile
 prune docs
+prune htmlcov

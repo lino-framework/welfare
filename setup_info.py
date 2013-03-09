@@ -25,6 +25,7 @@ SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
       version='1.0.16', 
+      requires=['Lino (1.6.0)','suds','vobject'],
       #~ version=VERSION,
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\
@@ -49,7 +50,6 @@ possibly to be maintained by an independant organization.""",
       #~ url=settings.LINO.url,
       license='GPL',
       packages=['lino_welfare'],
-      requires=['lino','suds','vobject'],
       classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
