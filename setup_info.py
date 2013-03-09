@@ -24,12 +24,12 @@
 SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
-      version='1.0.16', 
+      version='1.0.17', 
       requires=['Lino (==1.6.0)','suds','vobject'],
       #~ version=VERSION,
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\
-Lino-Welfare is a modular customized Lino application for Belgian 
+Lino-Welfare is a modular customized application for Belgian 
 *Public Centres for Social Welfare*. 
 It currently covers the following functions of a PCSW:
 
