@@ -558,7 +558,7 @@ class Getter(object):
         return self.query_dict.get(name)
 
 
-from lino.utils.instantiator import lookup_or_create
+#~ from lino.utils.instantiator import lookup_or_create
 
 
 def card2client(data):
@@ -612,9 +612,9 @@ def card2client(data):
     #~ except Exception,e:
         #~ logger.warning("%s : no country with code %r",msg1,pk)
     #~ BE = countries.Country.objects.get(isocode='BE')
-    fld = countries.City._meta.get_field('name')
-    kw.update(city=lookup_or_create(
-        countries.City,fld,data['municipality'],country=country))
+    #~ fld = countries.City._meta.get_field()
+    kw.update(city=countries.City.lookup_or_create(
+        'name',data['municipality'],country=country))
     def sex2gender(sex):
         if sex == 'M' : return mixins.Genders.male
         if sex in 'FVW' : return mixins.Genders.female
