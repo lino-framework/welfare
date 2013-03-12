@@ -64,7 +64,7 @@ def objects():
     if 'de' in settings.SITE.languages:
         for code,subcode,abbr,name in GERMAN:
             sect = Sector.objects.get(code=code,subcode=subcode)
-            if babel.DEFAULT_LANGUAGE == 'de':
+            if settings.SITE.DEFAULT_LANGUAGE == 'de':
                 sect.abbr = abbr
                 sect.name = name
             else :

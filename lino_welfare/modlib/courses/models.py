@@ -234,7 +234,7 @@ class CourseOffer(dd.Model):
         
     def get_print_language(self,pm):
         "Used by DirectPrintAction"
-        return babel.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE
         
         
     
@@ -292,7 +292,7 @@ class Course(dd.Model,mixins.Printable):
         
     def get_print_language(self,pm):
         "Used by DirectPrintAction"
-        return babel.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE
         
     def participants(self):
         u"""

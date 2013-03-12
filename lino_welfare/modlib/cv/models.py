@@ -57,7 +57,7 @@ contacts = dd.resolve_app('contacts')
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
-from north.babel import DEFAULT_LANGUAGE, babelattr
+from north.babel import babelattr
 from north import babel 
 from lino.utils.choosers import chooser
 from lino.utils import mti

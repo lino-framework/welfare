@@ -109,7 +109,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
     def get_print_language(self,pm):
         if self.language.value in babel.AVAILABLE_LANGUAGES:
             return self.language.value
-        return babel.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE
         
     def fill_from_person(self,person):
         self.national_id = person.national_id
