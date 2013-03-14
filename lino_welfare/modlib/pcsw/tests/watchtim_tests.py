@@ -42,7 +42,7 @@ from lino import dd
 from lino.utils import i2d
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from lino.utils.test import TestCase
+from djangosite.utils.test import TestCase
 
 #~ Person = dd.resolve_model('contacts.Person')
 #~ Property = dd.resolve_model('properties.Property')

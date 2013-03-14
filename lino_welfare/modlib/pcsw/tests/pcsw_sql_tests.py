@@ -31,7 +31,7 @@ Fortunately Django gives a possibility to override this:
 
 [Note1] 
 Because we are applying Django's `override_settings` decorator *to the whole class*, 
-we need to also set :attr:`lino.utils.test.TestCase.defining_module`.
+we need to also set :attr:`djangosite.utils.test.TestCase.defining_module`.
 
 [Note2]
 class decorators don't work with older Python versions, so we remov
@@ -65,7 +65,7 @@ from lino.dd import UserProfiles
 
 
 
-from lino.utils.test import TestCase, reset_queries
+from djangosite.utils.test import TestCase, reset_queries
 
 #~ @override_settings(DEBUG=True) 
 #~ class SqlTest(TestCase):

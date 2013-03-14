@@ -17,7 +17,7 @@ DOCSDIR = Path(__file__).parent.absolute()
 sys.path.append(DOCSDIR)
 
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.modlib.pcsw.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 """
 Trigger loading of Djangos model cache in order to avoid side effects that 
 would occur when this happens later while importing one of the models modules.
@@ -66,7 +66,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u"Lino-Welfare"
+#~ project = u"Lino-Welfare"
+project = settings.SITE.title
 copyright = u'2012-2013, Luc Saffre'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -260,17 +261,9 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 
 HGWORK = DOCSDIR.ancestor(2)
 intersphinx_mapping = dict()
-intersphinx_mapping.update(site=(
-    'http://site.lino-framework.org',
-    Path(HGWORK,'site','docs','.build','objects.inv')))
-intersphinx_mapping.update(north=(
-    'http://north.lino-framework.org',
-    Path(HGWORK,'north','docs','.build','objects.inv')))
-intersphinx_mapping.update(lino=(
-    'http://www.lino-framework.org',
-    Path(HGWORK,'lino','docs','.build','objects.inv')))
-intersphinx_mapping.update(welfare=(
-    'http://welfare.lino-framework.org',
-    Path(HGWORK,'welfare','docs','.build','objects.inv')))
+for n in ('site','north','lino','welfare'):
+    p = Path(HGWORK,n,'docs','.build','objects.inv')
+    if p.exists():
+        intersphinx_mapping[n] = ('http://%s.lino-framework.org' % n,p)
 
 from djangosite.utils.sphinxconf import setup

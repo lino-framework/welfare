@@ -16,6 +16,8 @@
 Mises au travail (Conventions Article 60 §7)
 
 """
+from __future__ import unicode_literals
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -30,6 +32,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django.utils.encoding import force_unicode 
 
 #~ import lino
@@ -425,8 +428,10 @@ class Contract(isip.ContractBase):
         if self.job_id is not None:
             if self.applies_until is not None and self.applies_until > datetime.date.today():
                 n = 0
-                for candi in self.client.candidature_set.filter(active=True):
-                    candi.active = False
+                #~ for candi in self.client.candidature_set.filter(active=True):
+                for candi in self.client.candidature_set.filter(state=CandidatureStates.active):
+                    #~ candi.active = False
+                    candi.state = CandidatureStates.inactive
                     candi.save()
                     n += 1
                 if n:
@@ -434,35 +439,8 @@ class Contract(isip.ContractBase):
                       +unicode(_("(%d candidatures have been marked inactive)")) % n)
                     kw.update(alert=_("Success"))
         return kw
-        
-    def unused_save(self,*args,**kw):
-        if self.job_id is not None:
-            if self.applies_until is not None and self.applies_until > datetime.date.today():
-                for candi in self.client.candidature_set.filter(active=True):
-                    candi.active = False
-                    candi.save()
-            #~ qs = self.client.candidature_set.filter(contract=self)
-            #~ if qs.count() == 0:
-                #~ qs = self.person.candidature_set.filter(job=self.job,contract=None)
-                #~ if qs.count() == 1: 
-                    #~ obj = qs[0]
-                    #~ obj.contract = self
-                    #~ obj.save()
-                    #~ dblogger.info(u'Marked job request %s as satisfied by %s' % (
-                      #~ obj,self))
-        r = super(Contract,self).save(*args,**kw)
-        return r
-        
-    #~ def data_control(self):
-        #~ "Used by :class:`lino.models.DataControlListing`."
-        #~ msgs = []
-        #~ qs = self.person.candidature_set.filter(contract=self)
-        #~ if qs.count() > 1: 
-            #~ msgs.append(
-              #~ u'There are more than one job request using contract %s : %s' \
-              #~ % qs)
-        #~ return msgs
-        
+
+
     def full_clean(self,*args,**kw):
         if self.client_id is not None:
             #~ if not self.user_asd:
@@ -985,6 +963,14 @@ class Job(SectorFunction):
             
         #~ return qs
 
+class CandidatureStates(dd.ChoiceList):
+    verbose_name = _("Candidature state")
+    verbose_name_plural = _("Candidature states")
+    
+add = CandidatureStates.add_item
+add('10', _("Active"),'active')
+add('20', _("Probation"),'probation')
+add('30', _("Inactive"),'inactive')
     
 
 class Candidature(SectorFunction):
@@ -1002,8 +988,9 @@ class Candidature(SectorFunction):
         #~ verbose_name=_("Requested Job"))
     
     #~ date_submitted = models.DateField(_("date submitted"),auto_now_add=True)
-    date_submitted = models.DateField(_("date submitted"))
-    u"Datum, an dem die Anfrage erstellt wurde."
+    date_submitted = models.DateField(_("date submitted"),
+        help_text=_("Date when the IA introduced this candidature."))
+    #~ u"Datum, an dem die Anfrage erstellt wurde."
     
     #~ contract = models.ForeignKey("jobs.Contract",blank=True,null=True,
         #~ verbose_name=_("Contract found"))
@@ -1017,7 +1004,8 @@ class Candidature(SectorFunction):
         blank=True,null=True,
         verbose_name=_("Remark"))
         
-    active = models.BooleanField(_("Active"),default=True)
+    #~ active = models.BooleanField(_("Active"),default=True)
+    state = CandidatureStates.field(default=CandidatureStates.active)
         
     def __unicode__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(
@@ -1050,7 +1038,7 @@ class Candidatures(dd.Table):
     #~ required_user_level = UserLevels.manager
     model = Candidature
     order_by = ['date_submitted']
-    column_names = 'date_submitted job:25 active * id'
+    column_names = 'date_submitted job:25 state * id'
 
 class CandidaturesByPerson(Candidatures):
     """
@@ -1072,7 +1060,7 @@ class CandidaturesByJob(Candidatures):
     required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'job'
-    column_names = 'date_submitted person:25 * id'
+    column_names = 'date_submitted person:25 state * id'
   
     @classmethod
     def create_instance(self,req,**kw):
@@ -1216,7 +1204,6 @@ if True: # settings.SITE.user_model:
 
 COLS = 8
 
-
 class JobsOverview(mixins.EmptyTable):
     """
     """
@@ -1252,8 +1239,9 @@ class JobsOverview(mixins.EmptyTable):
             cells = []
             #~ for job in jobtype.job_set.all():
             for job in jobtype.job_set.order_by('provider'):
-                actives = []
+                working = []
                 candidates = []
+                probation = []
                 #~ qs = job.contract_set.all()
                 qs = job.contract_set.order_by('applies_from')
                 if ar.param_values.contract_type:
@@ -1262,15 +1250,19 @@ class JobsOverview(mixins.EmptyTable):
                     if ct.applies_from:
                         until = ct.date_ended or ct.applies_until
                         if not until or (ct.applies_from <= today and until >= today):
-                            actives.append(ct)
-                qs = job.candidature_set.order_by('date_submitted')
-                #~ qs = pcsw.only_coached_persons(qs,today,
-                    #~ 'person__coached_from','person__coached_until')
+                            working.append(ct)
+                            
+                qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.active)
                 qs = pcsw.only_coached_on(qs,today,'person')
                 for cand in qs:
-                    #~ if not req.contract:
                     candidates.append(cand)
-                if candidates + actives:
+                    
+                qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.probation)
+                qs = pcsw.only_coached_on(qs,today,'person')
+                for cand in qs:
+                    probation.append(cand)
+                    
+                if candidates + working + probation:
                     s = "<p>"
                     s += "<b>%s (%s)</b>" % (
                       cgi.escape(unicode(job)),job.capacity)
@@ -1280,16 +1272,13 @@ class JobsOverview(mixins.EmptyTable):
                     s += UL(['%s bis %s' % (
                       ct.person.last_name.upper(),
                       babel.dtos(ct.applies_until)
-                    ) for ct in actives])
-                    #~ s += "<li>"
-                    #~ for ct in actives:
-                        #~ s += '<li>%s</li>' % cgi.escape(unicode(ct.person))
-                    #~ s += "</li>"
+                    ) for ct in working])
                     if candidates:
                         s += "<p>%s:</p>" % cgi.escape(unicode(_("Candidates")))
                         s += UL([i.person for i in candidates])
-                        #~ for ct in candidates:
-                            #~ s += '<br>' + cgi.escape(unicode(ct.person))
+                    if probation:
+                        s += "<p>%s:</p>" % cgi.escape(unicode(_("Probation")))
+                        s += UL([i.person for i in probation])
                     cells.append(s)
             if cells:
                 html += '<h1>%s</h1>' % cgi.escape(unicode(jobtype))
@@ -1304,6 +1293,102 @@ class JobsOverview(mixins.EmptyTable):
         #~ html = str(html)
         #~ assert type(html) == type('')
         return html
+
+from lino.utils.xmlgen.html import E
+
+class NewJobsOverview(Jobs):
+    """
+    """
+    required = dd.required(user_groups=['integ'])
+    label = _("New Contracts Situation") 
+    column_names = "job_desc working candidates probation"
+    
+    parameters = dict(
+      #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
+      date = models.DateField(blank=True,null=True),
+      contract_type = models.ForeignKey(ContractType,blank=True,null=True),
+      job_type = models.ForeignKey(JobType,blank=True,null=True),
+      )
+    params_panel_hidden = True
+    
+    
+    @dd.displayfield(_("Job"))
+    def job_desc(self,obj,ar):
+        chunks = [ar.obj2html(obj,unicode(obj.function))]
+        chunks.append(pgettext_lazy("(place)"," at "))
+        chunks.append(ar.obj2html(obj.provider))
+        chunks.append(' (%d)' % obj.capacity)
+        if obj.remark:
+            chunks.append(' ')
+            chunks.append(E.i(job.remark))
+        return E.p(*chunks)
+        
+    @dd.displayfield(_("Working"))
+    def working(self,obj,ar):
+        return obj._working
+        
+    @dd.displayfield(_("Candidates"))
+    def candidates(self,obj,ar):
+        return obj._candidates
+        
+    @dd.displayfield(_("Probation"))
+    def probation(self,obj,ar):
+        return obj._probation
+        
+    @classmethod
+    def get_data_rows(self,ar):
+        """
+        """
+        data_rows = self.get_request_queryset(ar)
+        if ar.param_values.job_type:
+            data_rows = data_rows.filter(type=ar.param_values.job_type)
+        
+        today = ar.param_values.date or datetime.date.today()
+        
+        for job in data_rows:
+            showit = False
+            working = []
+            qs = job.contract_set.order_by('applies_from')
+            if ar.param_values.contract_type:
+                qs = qs.filter(type=ar.param_values.contract_type)
+            for ct in qs:
+                if ct.applies_from:
+                    until = ct.date_ended or ct.applies_until
+                    if not until or (ct.applies_from <= today and until >= today):
+                        working.append(ct)
+            if len(working) > 0:
+                job._working = E.ul(*[E.li(
+                    ar.obj2html(ct.person,ct.person.last_name.upper()),
+                    ' bis %s' % babel.dtos(ct.applies_until)) for ct in working])
+                showit = True
+            else:
+                job._working = ''
+    
+            candidates = []
+            qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.active)
+            qs = pcsw.only_coached_on(qs,today,'person')
+            for cand in qs:
+                candidates.append(cand)
+            if candidates:
+                #~ job._candidates = E.ul(*[E.li(unicode(i.person)) for i in candidates])
+                job._candidates = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in candidates])
+                showit = True
+            else:
+                job._candidates = ''
+                    
+            probation = []
+            qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.probation)
+            qs = pcsw.only_coached_on(qs,today,'person')
+            for cand in qs:
+                probation.append(cand)
+            if probation:
+                job._probation = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in probation])
+                showit = True
+            else:
+                job._probation = ''
+                
+            if showit: yield job
+                    
 
 
     
@@ -1327,6 +1412,7 @@ def setup_main_menu(site,ui,profile,m):
     m.add_action(JobProviders)
     m.add_action(Jobs)
     m.add_action(Offers)
+    m.add_action(NewJobsOverview)
     #~ m.add_action(ContractsSearch)
 
 #~ def setup_my_menu(site,ui,user,m): 

@@ -43,7 +43,7 @@ from lino.utils import i2d
 from north import babel
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from lino.utils.test import TestCase
+from djangosite.utils.test import TestCase
 
 contacts_RoleType = dd.resolve_model('contacts.RoleType')
 contacts_Role = dd.resolve_model('contacts.Role')
@@ -112,7 +112,7 @@ def test01(self):
     self.assertEqual(self.jobs_contract_1.company,self.job_provider)
     
     
-    if 'en' in babel.AVAILABLE_LANGUAGES:
+    if 'en' in settings.SITE.AVAILABLE_LANGUAGES:
         url = '/api/jobs/Contract/1?an=do_print'
         response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response,'success message alert')
@@ -265,7 +265,7 @@ def test04(self):
     p.full_clean()
     p.save()
     
-    if 'fr' in babel.AVAILABLE_LANGUAGES:
+    if 'fr' in settings.SITE.AVAILABLE_LANGUAGES:
         babel.set_language('fr')
         #~ self.assertEqual(p.get_titled_name,"Mr Jean Louis DUPONT")
         self.assertEqual(p.full_name,"M. Jean Louis DUPONT")

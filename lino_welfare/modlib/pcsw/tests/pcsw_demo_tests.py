@@ -53,7 +53,7 @@ from lino.utils.jsgen import py2js
 from north import babel
 from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from lino.utils.test import TestCase
+from djangosite.utils.test import TestCase
 
 pcsw = dd.resolve_app('pcsw')
 

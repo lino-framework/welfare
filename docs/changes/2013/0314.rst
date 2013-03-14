@@ -1,0 +1,22 @@
+==================================
+20130314 (Thursday, 14 March 2013)
+==================================
+
+
+Eine Kandidatur hatte bisher lediglich ein Ankreuzfeld "Aktiv". 
+Das wurde ersetzt durch ein Auswahlfeld "Zustand" mit den möglichen Werten 
+"Aktiv", "Probezeit", "Inaktiv" hat?
+
+jobs.CandidatureStates
+
+jobs.JobsOverview
+
+Okay
+
+.. py2rst::
+
+   settings.SITE.modules.jobs.CandidatureStates.to_rst()
+   
+.. py2rst::
+
+   settings.SITE.modules.jobs.JobsOverview.to_rst()

@@ -38,7 +38,7 @@ from django.core.exceptions import ValidationError
 from lino.utils import i2d
 from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from lino.utils.test import TestCase
+from djangosite.utils.test import TestCase
 #~ from lino.utils import Warning
 
 from lino_welfare.modlib.cbss import models as cbss

@@ -685,10 +685,13 @@ def objects():
           sector=SECTORS.pop(),function=f)
     
     JOBS = Cycler(jobs.Job.objects.all())
+    CSTATES = Cycler(jobs.CandidatureStates.objects())
         
-    for i in range(30):
-        yield jobs.Candidature(job=JOBS.pop(),person=CLIENTS.pop(),
-          date_submitted=settings.SITE.demo_date(-30+i))
+    for i in range(40):
+        yield jobs.Candidature(job=JOBS.pop(),
+          person=CLIENTS.pop(),
+          state=CSTATES.pop(),
+          date_submitted=settings.SITE.demo_date(-40+i))
     
 
     
