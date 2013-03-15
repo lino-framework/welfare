@@ -1,8 +1,0 @@
-=========
-Changelog
-=========
-
-.. blogger_index:: 
-
-
-

@@ -415,7 +415,7 @@ def objects():
     yield role(company=cpas,person=gerd,type=4)
     #~ yield link(a=cpas,b=gerd,type=4)
     
-    # see :doc:`/blog/2011/1007`
+    # see :blogentry:`20111007`
     tatjana = client(
         first_name=u"Tatjana",last_name=u"Kasennova",
         #~ first_name=u"Татьяна",last_name=u"Казеннова",

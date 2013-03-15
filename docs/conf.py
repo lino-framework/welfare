@@ -16,13 +16,13 @@ from unipath import Path
 DOCSDIR = Path(__file__).parent.absolute()
 sys.path.append(DOCSDIR)
 
-
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 """
 Trigger loading of Djangos model cache in order to avoid side effects that 
 would occur when this happens later while importing one of the models modules.
 """
 from django.conf import settings
+settings.SITE.startup()
 
 
 # If your extensions are in another directory, add it here. If the directory

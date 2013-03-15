@@ -836,7 +836,12 @@ class ExperiencesByPerson(Experiences,HistoryByPerson):
 
 class Job(SectorFunction):
     """
-    A place where Clients can work. at some Job Provider
+    A place where a Client can work. The Job Provider
+    
+    For illustration, here are the first 5 demo data:
+    
+    .. py2rst:: print jobs.Jobs.request(limit=5).to_rst()
+    
     """
     
     preferred_foreignkey_width = 20 
@@ -964,6 +969,13 @@ class Job(SectorFunction):
         #~ return qs
 
 class CandidatureStates(dd.ChoiceList):
+    """
+    
+    Possible values:
+    
+    .. py2rst:: print jobs.CandidatureStates.to_rst()
+    
+    """
     verbose_name = _("Candidature state")
     verbose_name_plural = _("Candidature states")
     
@@ -975,6 +987,12 @@ add('30', _("Inactive"),'inactive')
 
 class Candidature(SectorFunction):
     """
+    A candidature is when a Client applies for a known :class:`Job`.
+    
+    For illustration, here are the first 5 demo data:
+    
+    .. py2rst:: print jobs.Candidatures.request(limit=5).to_rst()
+    
     """
     class Meta:
         verbose_name = _("Job Candidature")

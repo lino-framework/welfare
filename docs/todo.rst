@@ -1,9 +1,7 @@
 To-do list
 ==========
 
-#.  implement the fields Client.applies_from and applies_until as 
-    "summary fields". This is a new concept: 
-    :doc:`/topics/summary_fields`
+#.  implement the fields Client.applies_from and applies_until as :ref:`summary_fields`. 
 
 #.  Wenn man den Begleitungszeitraum einer *Person* ändert, dann merkt Lino nicht,
     falls durch diese Änderung ein Vertrag ungültig wird.

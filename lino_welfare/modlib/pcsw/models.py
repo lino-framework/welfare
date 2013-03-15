@@ -16,8 +16,6 @@
 Contains PCSW-specific models and tables that have not yet been 
 moved into a separate module because they are really very PCSW specific.
 
-See also :doc:`/pcsw/models`.
-
 """
 
 import logging
@@ -94,6 +92,7 @@ cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
+#~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
 
 #~ from lino.utils.ssin import ssin_validator

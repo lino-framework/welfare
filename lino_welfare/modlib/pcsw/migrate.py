@@ -15,7 +15,7 @@
 """
 This is a real-world example of how the application developer 
 can provide automatic data migrations for 
-:doc:`python dumps </topics/dumpy>`.
+:ref:`dpy`.
 
 This module is used when loading a python dump that was 
 created by a previous version.

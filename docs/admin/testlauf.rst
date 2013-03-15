@@ -62,7 +62,7 @@ Sprachkenntnisse
   Dann den Speichern-Button der Person klicken.
   Dabei sollte nichts passieren und es dürfte *keine Änderung* 
   in der :xfile:`system.log` erscheinen.
-  :doc:`/blog/2011/0406`
+  :blogref:`20110406`
 
 Polymorphie
 -----------
@@ -71,7 +71,7 @@ Polymorphie
 
   Ohne vorher was zu ändern den Speichern-Button klicken.
   Dabei sollte nichts passieren und es dürfte *keine Änderung* in der system.log erscheinen.
-  :doc:`/blog/2011/0406`
+  :blogref:`20110406`
 
   Checkbox "Kursanbieter" einschalten und speichern.
   Die Checkbox sollte angeschaltet bleiben.
@@ -85,7 +85,7 @@ Polymorphie
   Im zweiten Browserfenster auf "Refresh" klicken : 
   Firma sollte aus der Liste verschwunden sein.
   
-  :doc:`/blog/2011/0406`
+  :blogref:`20110406`
 
 Einfügetexte
 ------------

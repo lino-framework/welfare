@@ -9,7 +9,6 @@ Welcome to the *Lino-Welfare* Technical Reference.
   import lino_welfare
   print lino_welfare.SETUP_INFO['long_description']
 
-
 This document tree is in English and 
 meant for system administrators and other developers.
 The `user manual <http://welfare-userman.lino-framework.org/>`__
@@ -25,6 +24,6 @@ Content
 
    admin/index
    releases/index
-   autodoc/index
+   API <api/lino_welfare>
    todo
    

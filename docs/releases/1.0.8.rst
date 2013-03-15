@@ -17,7 +17,7 @@ Neuerungen
   - Städtenamen sind jetzt mehrsprachig, und wenn z.B. jemand in Kelmis wohnt, 
     findet er sowohl für deutschsprachige ("Kelmis") als auch für 
     französischsprachige Karten ("La Calamine") die gleiche Stadt.
-    Siehe auch :lino:`20130110 </blog/2013/0110>`
+    Siehe auch :blogref:`20130110`
 
 - Tabelle "Verfügbare Begleiter" zeigt jetzt alle Begleiter 
   an, falls nötig mit vertikaler Scrollbar.

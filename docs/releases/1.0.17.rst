@@ -1,0 +1,25 @@
+Version 1.0.17
+==============
+
+Angefragte Änderungen
+---------------------
+
+(:blogref:`20130315`)
+Eine Kandidatur 
+(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`) 
+hatte bisher lediglich ein Ankreuzfeld "Aktiv". 
+Das wurde ersetzt durch ein Auswahlfeld "Zustand" mit den möglichen 
+Werten "Aktiv", "Probezeit", "Inaktiv".
+(:class:`CandidatureStates 
+<lino_welfare.modlib.jobs.models.CandidatureStates>`)
+
+Nicht zu verwechseln: eine *aktive* Kandidatur bedeutet, 
+dass der Klient *keinen* aktiven Art-60*7 hat.
+
+In der Übersicht Art-60*7 
+(:class:`JobsOverview <lino_welfare.modlib.jobs.models.JobsOverview>`)
+wird dieser Status der Kandidaturen jetzt berücksichtigt:
+Als "Kandidaten" stehen jetzt nur noch Kandidaturen 
+im Zustand "Aktiv" (bisher standen dort alle Kandidaturen).
+Als "Probezeit" stehen jetzt nur noch Kandidaturen im Zustand "Probezeit".
+

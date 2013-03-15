@@ -17,8 +17,7 @@ Neue Features
   Dadurch wird die Nummer (als NR-Nummer) freilich ungültig, 
   was aber okay ist *solange der Klient nicht "Begleitet" ist*.
 
-- Lino is now able to do `Session-based authentication
-  <http://lino-framework.org/blog/2012/1103.html>`_.
+- Lino is now able to do :blogref:`Session-based authentication <20121103>`.
   
 - eId-Karten einlesen : darf noch nicht benutzt werden. 
   Button ist nur für Sysadmins sichtbar.

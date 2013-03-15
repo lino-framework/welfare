@@ -99,8 +99,8 @@ def test001(self):
 def test002(self):
     """
     Tests whether SoftSkillsByPerson works and whether it returns language-specific labels.
-    Bug discovered :doc:`/blog/2011/0228`.
-    See also :doc:`/blog/2011/0531`.
+    Bug discovered :blogref:`20110228`.
+    See also :blogref:`20110531`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
     """
     #~ from lino.modlib.users.models import User
@@ -218,8 +218,7 @@ def test004(self):
 
 def test005(self):
     """
-    Simplification of test04, used to write :doc:`/tickets/27`.
-    See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
+    Simplification of test04, used to write Lino ticket #27.
     """
     url ='/api/countries/Countries/BE'
     value = 'Belgienx'
@@ -329,7 +328,7 @@ def test007(self):
 
 def test009(self):
     """
-    This tests for the bug discovered :doc:`/blog/2011/0610`.
+    This tests for the bug discovered :blogref:`20110610`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
     """
     #~ babel.set_language('en')
@@ -343,7 +342,7 @@ def test009(self):
 def test010(self):
     """
     Test the unique_together validation of City
-    See :doc:`/blog/2011/0610` and :doc:`/blog/2011/0611`.
+    See :blogref:`20110610` and :blogref:`20110611`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
     """
     from lino.modlib.countries.models import City, Country
@@ -371,7 +370,7 @@ def test010(self):
 def test011(self):
     """
     Tests whether the user problem 
-    described in :doc:`/blog/2011/1206` 
+    described in :blogref:`20111206` 
     is solved.
     """
     from lino_welfare.modlib.jobs.models import Contract
@@ -404,7 +403,7 @@ def test012(self):
 
 def test014(self):
     """
-    Tests for the bug discovered :doc:`/blog/2011/1222`.
+    Tests for the bug discovered :blogref:`20111222`.
     """
     for url in """\
     /choices/isip/Contract/person?start=0&limit=10&query=
@@ -420,7 +419,7 @@ def test014(self):
 
 def test015(self):
     """
-    Temporary bug on :doc:`/blog/2011/1223`.
+    Temporary bug on :blogref:`20111223`.
     """
     url = '/api/contacts/Persons/-99999?fmt=json&an=insert'
     response = self.client.get(url,REMOTE_USER='root')
@@ -447,7 +446,7 @@ def test015b(self):
 def test016(self):
     """
     All rows of persons_by_user now clickable.
-    See :doc:`/blog/2011/1223`.
+    See :blogref:`20111223`.
     """
     cases = [
       ['root', 19],

@@ -92,7 +92,7 @@ def test01(self):
     """
     Tests error handling when printing a contract whose type's 
     name contains non-ASCII char.
-    Created :doc:`/blog/2011/0615`.
+    Created :blogref:`20110615`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
     
@@ -201,7 +201,7 @@ def test03(self):
     """
     Testing whether `/api/notes/NoteTypes/1?fmt=json` 
     has no item `templateHidden`.
-    Created :doc:`/blog/2011/0509`.
+    Created :blogref:`20110509`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
     from lino.modlib.notes.models import NoteType
@@ -245,7 +245,7 @@ def test03(self):
 def test04(self):
     """
     Test some features used in document templates.
-    Created :doc:`/blog/2011/0615`.
+    Created :blogref:`20110615`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
     from lino.dd import Genders
@@ -284,7 +284,7 @@ def test05(self):
     obj2str() caused a UnicodeDecodeError when called on an object that had 
     a ForeignKey field pointing to another instance whose __unicode__() 
     contained non-ascii characters.
-    See :doc:`/blog/2011/0728`.
+    See :blogref:`20110728`.
     """
     a = pcsw.Activity(name=u"Sozialhilfeempfänger")
     p = pcsw.Client(last_name="Test",activity=a)
@@ -312,7 +312,7 @@ def test05(self):
     
 def test06(self):
     """
-    :doc:`/blog/2011/1003`.
+    :blogref:`20111003`.
     The `id` field of a Company or Person was never disabled 
     because Lino didn't recognize it as the primary key.
     

@@ -525,9 +525,9 @@ def migrate_from_1_2_1(globals_dict):
 def migrate_from_1_2_2(globals_dict):
     """
     - Moved Study, StudyType and JobExperience from `dsbe` to `jobs`
-      (see :doc:`/blog/2011/0915`).
+      (see :blogref:`20110915`).
     - Swap content of notes_NoteType and note.EventType
-      (see :doc:`/blog/2011/0928`).
+      (see :blogref:`20110928`).
     """
     
     globals_dict.update(dsbe_Study = resolve_model("jobs.Study"))
@@ -704,7 +704,7 @@ def migrate_from_1_2_6(globals_dict):
   
 def migrate_from_1_2_7(globals_dict):    
     """Convert `birth_date` fields to the new :class:`lino.fields.IncompleteDate` type.
-    See :doc:`/blog/2011/1119`.
+    See :blogref:`20111119`.
     """
     from lino.utils.mti import insert_child
     contacts_Contact = resolve_model("contacts.Contact")
@@ -1003,7 +1003,7 @@ def migrate_from_1_4_3(globals_dict):
     - renamed "lino.apps.dsbe" to "lino.apps.pcsw"
     - cal.Event.rset
     - new user permissions system (fields like `is_staff` replaced by `level`)
-    - manually handle invalid contracts and persons. See :doc:`/blog/2012/0418`.
+    - manually handle invalid contracts and persons. See :blogref:`20120418`.
     - removed field `title` from bcss.IdentifyPersonRequest
     - Users are no longer MTI subclass of Partner but have a FK `partner`. 
     - `cbss.IdentifyPersonRequest`: field `project` replaced by `person`.

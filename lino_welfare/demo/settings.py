@@ -16,7 +16,7 @@ from os.path import join, abspath, dirname
 
 from lino_welfare.modlib.pcsw.settings import *
 
-class Lino(Lino):
+class Site(Site):
   
     title = "Lino/Welfare demo"
     languages = 'de fr en'.split()
@@ -41,21 +41,11 @@ class Lino(Lino):
         return False
     
     
-LINO = Lino(__file__,globals()) 
+SITE = Site(__file__,globals()) 
 
 ADMINS = []
 
-LOGGING = dict(level='INFO',filename=join(LINO.project_dir,'system.log'),tty=False)
-
 DEBUG = True
-
-DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.sqlite3',
-          'NAME': join(LINO.project_dir,'test.db')
-      }
-  }
-  
 
 # uncomment for testing in temporary database:
 #~ DATABASES['default']['NAME'] = ':memory:'

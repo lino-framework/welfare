@@ -1,1 +1,0 @@
-T:\hgwork\welfare\docs\autodoc\lino_welfare.statbel.rst:: WARNING: document isn't included in any toctree

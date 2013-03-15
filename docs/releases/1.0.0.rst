@@ -95,7 +95,7 @@ Neue Features
   - Arbeitsablauf Klienten. 
     Das frühere Feld `is_active` wurde ersetzt durch Bearbeitsungszustand "Begleitet", 
     das frühere Feld `newcomer` durch Zustand "Neuantrag".
-    Siehe :doc:`/user/clients`.
+    Siehe `Benutzerhandbuch <http://welfare-userman.lino-framework.org/de/user/clients.html>`__.
   
   - (für Neuanträge) eine Tabelle der "verfügbaren Begleiter"   
   - Neue Tabelle "Klientenkontakte" (im Reiter "Begleitungen") 
