@@ -588,3 +588,26 @@ def migrate_from_1_0_15(globals_dict):
         return obj
     globals_dict[fn] = newf
     return '1.0.16'
+
+def migrate_from_1_0_16(globals_dict): 
+    """
+    jobs.Candidature : field `active` replaced by `state`
+    """
+    jobs_Candidature = resolve_model("jobs.Candidature")
+    CandidatureStates = settings.SITE.modules.jobs.CandidatureStates
+    def create_jobs_candidature(id, sector_id, function_id, person_id, job_id, date_submitted, remark, active):
+        kw = dict()
+        kw.update(id=id)
+        kw.update(sector_id=sector_id)
+        kw.update(function_id=function_id)
+        kw.update(person_id=person_id)
+        kw.update(job_id=job_id)
+        kw.update(date_submitted=date_submitted)
+        kw.update(remark=remark)
+        if active:
+            kw.update(state=CandidatureStates.active)
+        else:
+            kw.update(state=CandidatureStates.inactive)
+        return jobs_Candidature(**kw)
+    globals_dict.update(create_jobs_candidature=create_jobs_candidature)
+    return '1.6.2'
