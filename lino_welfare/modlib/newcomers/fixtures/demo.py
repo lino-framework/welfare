@@ -19,7 +19,7 @@ from lino.core.dbutils import resolve_model
 # from django.utils.translation import ugettext_lazy as _
 
 #~ from django.db import models
-from north.babel import babel_values
+from north.dbutils import babel_values
 #~ from lino.core.perms import UserProfiles
 
 from lino import dd

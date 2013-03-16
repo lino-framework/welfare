@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from north.babel import babel_values, babelitem
+from north.dbutils import babel_values, babelitem
 
 Person = resolve_model('contacts.Person')
 Company = resolve_model('contacts.Company')

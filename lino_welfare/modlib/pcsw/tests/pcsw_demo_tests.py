@@ -50,7 +50,7 @@ from django.core.exceptions import ValidationError
 from lino import dd
 from lino.utils import i2d
 from lino.utils.jsgen import py2js
-from north import babel
+#~ from north import babel
 from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
 from djangosite.utils.test import TestCase
@@ -118,7 +118,8 @@ def test002(self):
     mt = 44 
     url = '/api/cv/SoftSkillsByPerson?mt=%d&mk=%d&fmt=json' % (mt,pk)
     
-    if 'en' in babel.AVAILABLE_LANGUAGES:
+    #~ if 'en' in babel.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('en'):
         response = self.client.get(url,REMOTE_USER='robin',HTTP_ACCEPT_LANGUAGE='en')
         #~ result = self.check_json_result(response,'count rows gc_choices disabled_actions title')
         result = self.check_json_result(response,'count rows title success no_data_text')
@@ -130,7 +131,8 @@ def test002(self):
         self.assertEqual(row[2],"moderate")
         self.assertEqual(row[3],"2")
         
-    if 'de' in babel.AVAILABLE_LANGUAGES:
+    #~ if 'de' in babel.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('de'):
         response = self.client.get(url,REMOTE_USER='rolf',HTTP_ACCEPT_LANGUAGE='de')
         result = self.check_json_result(response,'count rows title success no_data_text')
         self.assertEqual(result['title'],"Eigenschaften von EVERS Eberhart (%d)" % pk)
@@ -249,22 +251,25 @@ def test006(self):
     
     p = Property.objects.get(id=2) # "Obedient"
     pp = PersonProperty.objects.filter(property=p)[0]
-    if 'en' in babel.AVAILABLE_LANGUAGES:
-        babel.set_language('en')
+    #~ if 'en' in babel.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('en'):
+        dd.set_language('en')
         self.assertEquals(unicode(p), u"Obedient")
         self.assertEquals(unicode(pp), u"not at all")
 
-    if 'de' in babel.AVAILABLE_LANGUAGES:
-        babel.set_language('de')
+    #~ if 'de' in babel.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('de'):
+        dd.set_language('de')
         self.assertEquals(unicode(p), u"Gehorsam")
         self.assertEquals(unicode(pp), u"gar nicht")
     
-    if 'fr' in babel.AVAILABLE_LANGUAGES:
-        babel.set_language('fr')
+    #~ if 'fr' in babel.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('fr'):
+        dd.set_language('fr')
         self.assertEquals(unicode(p), u"Obéissant")
         self.assertEquals(unicode(pp), u"pas du tout")
     
-    babel.set_language(None) # switch back to default language for subsequent tests
+    dd.set_language(None) # switch back to default language for subsequent tests
     
 
 def test007(self):
@@ -331,13 +336,13 @@ def test009(self):
     This tests for the bug discovered :blogref:`20110610`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
     """
-    #~ babel.set_language('en')
+    #~ dd.set_language('en')
     url = '/choices/jobs/StudiesByPerson/city?start=0&limit=30&country=&query='
     response = self.client.get(url,REMOTE_USER='root')
     result = self.check_json_result(response,'count rows')
     #~ self.assertEqual(result['title'],u"Choices for city")
     self.assertEqual(len(result['rows']),30)
-    #~ babel.set_language(None) # switch back to default language for subsequent tests
+    #~ dd.set_language(None) # switch back to default language for subsequent tests
 
 def test010(self):
     """
@@ -377,7 +382,7 @@ def test011(self):
     obj = Contract.objects.get(pk=5)
     translation.activate('de')
     self.assertEqual(obj.contact.person.get_full_name(),"Herrn Hans ALTENBERG")
-    #~ babel.set_language(None)
+    #~ dd.set_language(None)
     translation.deactivate()
     
     

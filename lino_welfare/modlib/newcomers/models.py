@@ -31,6 +31,7 @@ from django.utils.encoding import force_unicode
 from lino import dd
 #~ from lino.core import changes
 #~ from lino.utils.babel import default_language
+from lino.dd import dtos
 #~ from lino import reports
 #~ from lino import layouts
 #~ from lino.core.perms import UserProfiles, UserLevels
@@ -38,7 +39,7 @@ from lino.utils.restify import restify
 #~ from lino.utils import printable
 
 from lino.utils.choosers import chooser
-from north import babel
+#~ from north import babel
 from lino.utils import ssin
 from lino.utils import workdays
 from lino import mixins
@@ -306,7 +307,7 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
             yield unicode(self.parameters['also_obsolete'].verbose_name)
             #~ tags.append(unicode(_("obsolete")))
         if ar.param_values.new_since:
-            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + babel.dtos(ar.param_values.new_since)
+            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + dtos(ar.param_values.new_since)
         if ar.param_values.coached_by:
             yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
       

@@ -54,9 +54,10 @@ from lino import mixins
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config
+from lino.core import dbutils
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
-from north import babel
+#~ from north import babel
 from lino.utils import join_words
 from lino.utils.choosers import chooser
 from lino.utils import mti
@@ -1057,7 +1058,7 @@ class Client(Person):
                 #~ cal.update_reminder(4,self,user,
                   #~ self.coached_until,
                   #~ _("coaching ends in 1 month"),1,M)
-            babel.run_with_language(user.language,f)
+            dbutils.run_with_language(user.language,f)
               
           
 
@@ -1749,11 +1750,11 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 
             if ar.param_values.coached_on:
                 yield s \
-                    + _(' on %(date)s') % dict(date=babel.dtos(ar.param_values.coached_on))
+                    + _(' on %(date)s') % dict(date=dd.dtos(ar.param_values.coached_on))
             else:
                 yield s
         elif ar.param_values.coached_on:
-            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + babel.dtos(ar.param_values.coached_on)
+            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + dd.dtos(ar.param_values.coached_on)
         
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))
@@ -2251,7 +2252,7 @@ class ExclusionsByPerson(Exclusions):
 #
 # AID TYPES
 #
-class AidType(babel.BabelNamed):
+class AidType(dd.BabelNamed):
     class Meta:
         verbose_name = _("aid type")
         verbose_name_plural = _('aid types')
@@ -2287,7 +2288,7 @@ class OverlappingContracts(dd.Table):
         #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
         return qs
 
-class ClientContactType(babel.BabelNamed):
+class ClientContactType(dd.BabelNamed):
     class Meta:
         verbose_name = _("Client Contact type")
         verbose_name_plural = _("Client Contact types")
@@ -2432,7 +2433,7 @@ CoachingStates.add_transition('active','ended',_("End coaching"),owner=True)
     
 
 
-class CoachingType(babel.BabelNamed):
+class CoachingType(dd.BabelNamed):
     class Meta:
         verbose_name = _("Coaching type")
         verbose_name_plural = _('Coaching types')

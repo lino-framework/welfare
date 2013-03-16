@@ -53,9 +53,14 @@ from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
 from lino.utils.choosers import chooser
 from lino.utils import mti
-from lino.utils.ranges import isrange, overlap, overlap2, encompass, rangefmt
+from lino.utils.ranges import isrange, overlap, overlap2, encompass
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
+
+def rangefmt(r):
+    return dd.dtos(r[0]) + '...' + dd.dtos(r[1])
+    
+
 
 #~ from lino.modlib.cal.models import update_auto_task
 

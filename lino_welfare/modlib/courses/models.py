@@ -55,7 +55,8 @@ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.uploads import models as uploads
 #~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
 #~ from lino.modlib.uploads.models import UploadsByPerson
-from north import babel 
+#~ from north import babel 
+from lino.dd import dtos
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
@@ -234,7 +235,7 @@ class CourseOffer(dd.Model):
         
     def get_print_language(self,pm):
         "Used by DirectPrintAction"
-        return settings.SITE.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE.django_code
         
         
     
@@ -271,7 +272,7 @@ class Course(dd.Model,mixins.Printable):
         
     def __unicode__(self):
         #~ s = u"%s %s (%s)" % (self._meta.verbose_name,self.pk,babel.dtos(self.start_date))
-        s = babel.dtos(self.start_date)
+        s = dtos(self.start_date)
         if self.title:
             s += " " + self.title
         if self.offer:
@@ -292,7 +293,7 @@ class Course(dd.Model,mixins.Printable):
         
     def get_print_language(self,pm):
         "Used by DirectPrintAction"
-        return settings.SITE.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE.django_code
         
     def participants(self):
         u"""

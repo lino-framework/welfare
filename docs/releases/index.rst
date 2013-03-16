@@ -36,7 +36,7 @@ Versuch
 
   #~ from lino.utils import i2d, rstgen
   from lino.utils import i2d
-  from north import babel
+  from north import dbutils
 
   RELEASES = []
 
@@ -53,13 +53,13 @@ Versuch
 
   def as_index_rst(language=None):
       if language is not None:
-          babel.set_language(language)
+          dbutils.set_language(language)
           
       #~ t = rstgen.SimpleTable('version released lino_version changeset'.split())
       #~ print t.to_rst([r[:4] for r in RELEASES])
       for version,date,lino_version,changeset in RELEASES:
           version = ":doc:`/releases/%s`" % version
-          s = "- %s released %s" % (version,babel.dtosl(date))
+          s = "- %s released %s" % (version,dbutils.dtosl(date))
           if lino_version:
               s += ", requires Lino `" + lino_version 
               s += " <http://lino-framework.org/releases/" + lino_version + ".html>`_"

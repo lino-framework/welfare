@@ -63,10 +63,9 @@ contacts = dd.resolve_app('contacts')
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
-from north import babel
-from lino.utils.choosers import chooser
+#~ from north import babel
 #~ from lino.utils.choicelists import UserLevel
-from lino.utils import mti
+#~ from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
 
@@ -373,7 +372,7 @@ class Contract(isip.ContractBase):
                 #~ type__use_in_contracts=True,company=provider)
         #~ return []
         
-    @chooser()
+    @dd.chooser()
     def company_choices(cls):
         return JobProvider.objects.all()
         
@@ -396,13 +395,13 @@ class Contract(isip.ContractBase):
         #~ self.company = self.company
     
     
-    @chooser(simple_values=True)
+    @dd.chooser(simple_values=True)
     def duration_choices(cls):
         return [ 312, 468, 624 ]
         #~ return [ 0, 25, 50, 100 ]
     
     
-    @chooser(simple_values=True)
+    @dd.chooser(simple_values=True)
     def refund_rate_choices(cls):
         return [ 
         u"0%",
@@ -647,7 +646,7 @@ class SectorFunction(dd.Model):
     function = models.ForeignKey("jobs.Function",
         blank=True,null=True)
     
-    @chooser()
+    @dd.chooser()
     def function_choices(cls,sector):
         if sector is not None:
             return sector.function_set.all()
@@ -886,7 +885,7 @@ class Job(SectorFunction):
         return []
         
         
-    #~ @chooser()
+    #~ @dd.chooser()
     #~ def provider_choices(cls):
         #~ return CourseProviders.request().queryset
         
@@ -1029,7 +1028,7 @@ class Candidature(SectorFunction):
         return force_unicode(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
             
-    #~ @chooser()
+    #~ @dd.chooser()
     #~ def contract_choices(cls,job,person):
         #~ if person and job:
             #~ return person.contract_set.filter(job=job)
@@ -1289,7 +1288,7 @@ class JobsOverview(mixins.EmptyTable):
                     s += "</p>"
                     s += UL(['%s bis %s' % (
                       ct.person.last_name.upper(),
-                      babel.dtos(ct.applies_until)
+                      dd.dtos(ct.applies_until)
                     ) for ct in working])
                     if candidates:
                         s += "<p>%s:</p>" % cgi.escape(unicode(_("Candidates")))
@@ -1377,7 +1376,7 @@ class NewJobsOverview(Jobs):
             if len(working) > 0:
                 job._working = E.ul(*[E.li(
                     ar.obj2html(ct.person,ct.person.last_name.upper()),
-                    ' bis %s' % babel.dtos(ct.applies_until)) for ct in working])
+                    ' bis %s' % dd.dtos(ct.applies_until)) for ct in working])
                 showit = True
             else:
                 job._working = ''
@@ -1415,7 +1414,7 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
   
     dd.inject_field(pcsw.Company,
         'is_jobprovider',
-        mti.EnableChild('jobs.JobProvider',verbose_name=_("is Job Provider")),
+        dd.EnableChild('jobs.JobProvider',verbose_name=_("is Job Provider")),
         """Whether this Company is also a Job Provider."""
         )
 

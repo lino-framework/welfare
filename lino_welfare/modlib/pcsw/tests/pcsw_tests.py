@@ -40,7 +40,7 @@ from django.core.exceptions import ValidationError
 
 from lino import dd
 from lino.utils import i2d
-from north import babel
+#~ from north import babel
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
 from djangosite.utils.test import TestCase
@@ -112,7 +112,8 @@ def test01(self):
     self.assertEqual(self.jobs_contract_1.company,self.job_provider)
     
     
-    if 'en' in settings.SITE.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('en'):
+    #~ if 'en' in settings.SITE.AVAILABLE_LANGUAGES:
         url = '/api/jobs/Contract/1?an=do_print'
         response = self.client.get(url,REMOTE_USER='root',HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response,'success message alert')
@@ -265,8 +266,9 @@ def test04(self):
     p.full_clean()
     p.save()
     
-    if 'fr' in settings.SITE.AVAILABLE_LANGUAGES:
-        babel.set_language('fr')
+    #~ if 'fr' in settings.SITE.AVAILABLE_LANGUAGES:
+    if settings.SITE.get_language_info('fr'):
+        dd.set_language('fr')
         #~ self.assertEqual(p.get_titled_name,"Mr Jean Louis DUPONT")
         self.assertEqual(p.full_name,"M. Jean Louis DUPONT")
         self.assertEqual('\n'.join(p.address_lines()),u"""\
@@ -276,7 +278,7 @@ Bruxelles
 Belgique""")
     
     
-    babel.set_language(None)
+    dd.set_language(None)
         
         
 def test05(self):
@@ -298,7 +300,7 @@ def test05(self):
     a.save()
     self.assertEqual(dd.obj2str(a,True),"Activity(id=1,name='Sozialhilfeempf\\xe4nger')")
     
-    expected = "Client(language='%s'," % settings.SITE.DEFAULT_LANGUAGE
+    expected = "Client(language='%s'," % settings.SITE.DEFAULT_LANGUAGE.django_code
     expected += "last_name='Test'"
     expected += ",client_state=ClientStates.newcomer:10"
     #~ expected += ",is_active=True"

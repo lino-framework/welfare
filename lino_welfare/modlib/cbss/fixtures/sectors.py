@@ -17,10 +17,9 @@ Fills the Sectors table using the official data from
 http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_van_sectoren_liste_des_secteurs.xls    
 
 """
-
+from lino import dd
 from django.conf import settings
 from lino.utils import ucsv
-from north import babel
 from lino.core.dbutils import resolve_model
 from os.path import join, dirname
 
@@ -56,15 +55,18 @@ def objects():
             kw.update(code=code)
             if row[1]:
                 kw.update(subcode=int(row[1]))
-            kw.update(**babel.babel_values('name',de=row[5],fr=row[5],nl=row[3],en=row[5]))
-            kw.update(**babel.babel_values('abbr',de=row[4],fr=row[4],nl=row[2],en=row[4]))
+            kw.update(**dd.babel_values('name',de=row[5],fr=row[5],nl=row[3],en=row[5]))
+            kw.update(**dd.babel_values('abbr',de=row[4],fr=row[4],nl=row[2],en=row[4]))
             #~ print kw
             yield Sector(**kw)
-        
-    if 'de' in settings.SITE.languages:
+    
+    #~ if 'de' in settings.SITE.languages:
+    info = settings.SITE.get_language_info('de')
+    if info:
         for code,subcode,abbr,name in GERMAN:
             sect = Sector.objects.get(code=code,subcode=subcode)
-            if settings.SITE.DEFAULT_LANGUAGE == 'de':
+            #~ if settings.SITE.DEFAULT_LANGUAGE == 'de':
+            if info.index == 0:
                 sect.abbr = abbr
                 sect.name = name
             else :

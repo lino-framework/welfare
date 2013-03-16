@@ -45,8 +45,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
-from north import babel
-from north.babel import dtos
+#~ from north import babel
+from north.dbutils import dtos
 
 
 from lino import mixins
@@ -107,9 +107,10 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         help_text = "Whatever this means.")
         
     def get_print_language(self,pm):
-        if self.language.value in babel.AVAILABLE_LANGUAGES:
+        if settings.SITE.getlanguage_info(self.language.value):
+        #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
             return self.language.value
-        return settings.SITE.DEFAULT_LANGUAGE
+        return settings.SITE.DEFAULT_LANGUAGE.django_code
         
     def fill_from_person(self,person):
         self.national_id = person.national_id
@@ -351,15 +352,15 @@ def NameType(n):
     #~ return info
     
 def DateType(n):
-    return Info(babel.dtos(rn2date(n)))
+    return Info(dtos(rn2date(n)))
     
 def ForfeitureDateType(n):
-    info = Info(babel.dtos(rn2date(n)))
+    info = Info(dtos(rn2date(n)))
     info.addfrom(n,'Graphic',' (',simpletype,')')
     return info
     
 def ExpiryDateType(n):
-    info = Info(babel.dtos(rn2date(n)))
+    info = Info(dtos(rn2date(n)))
     info.addfrom(n,'Graphic',' (',simpletype,')')
     return info
     
