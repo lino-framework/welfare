@@ -1337,7 +1337,7 @@ class NewJobsOverview(Jobs):
         chunks.append(' (%d)' % obj.capacity)
         if obj.remark:
             chunks.append(' ')
-            chunks.append(E.i(job.remark))
+            chunks.append(E.i(obj.remark))
         return E.p(*chunks)
         
     @dd.displayfield(_("Working"))

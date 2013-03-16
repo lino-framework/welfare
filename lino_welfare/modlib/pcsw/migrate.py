@@ -610,4 +610,4 @@ def migrate_from_1_0_16(globals_dict):
             kw.update(state=CandidatureStates.inactive)
         return jobs_Candidature(**kw)
     globals_dict.update(create_jobs_candidature=create_jobs_candidature)
-    return '1.6.2'
+    return '1.1.0'
