@@ -1,6 +1,6 @@
-global-include *.txt *.py *.BAT *.bat *.js *.css *.html \
-  *.jar *.rtf *.java *.diff *.ico *.jpg *.dtl \
-  *.csv *.xml *.tab \
+global-include *.txt *.py *.bat *.js *.css *.html \
+  *.ico *.jpg *.dtl \
+  *.csv *.xml \
   *.odt \
   *.wsdl \
   *.xsd \

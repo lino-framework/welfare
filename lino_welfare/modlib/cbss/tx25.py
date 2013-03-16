@@ -101,7 +101,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
     wsdl_parts = ('cache','wsdl','RetrieveTIGroupsV3.wsdl')
     
     #~ language = babel.LanguageField()
-    language = RequestLanguages.field(blank=True)
+    language = RequestLanguages.field(blank=True,default=RequestLanguages.fr)
     history = models.BooleanField(
         verbose_name=_("History"),default=True,
         help_text = "Whatever this means.")
@@ -114,7 +114,8 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         
     def fill_from_person(self,person):
         self.national_id = person.national_id
-        self.language = person.language # .value # babel.DEFAULT_LANGUAGE
+        if RequestLanguages.get_by_value(person.language,None):
+            self.language = person.language # .value # babel.DEFAULT_LANGUAGE
         
         
     def get_service_reply(self,**kwargs):

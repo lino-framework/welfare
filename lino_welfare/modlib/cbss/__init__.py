@@ -25,10 +25,11 @@ class SiteMixin(object):
     
     """
     
-    cbss_environment = None
+    #~ cbss_environment = None
+    cbss_environment = 'test'
     """
     Either `None` or one of 'test', 'acpt' or 'prod'.
-    See :mod:`lino.modlib.cbss.models`.
+    See :mod:`lino_welfare.modlib.cbss.models`.
     Leaving this to `None` means that the cbss module is "inactive" even if installed.
     """
     
