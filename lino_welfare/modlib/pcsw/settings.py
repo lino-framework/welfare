@@ -30,7 +30,8 @@ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
   
     version = SETUP_INFO['version'] # lino_welfare.__version__
     url = SETUP_INFO['url'] # "http://code.google.com/p/lino-welfare/"
-    verbose_name = SETUP_INFO['name'] # "Lino Welfare"
+    #~ verbose_name = SETUP_INFO['name'] # "Lino Welfare"
+    verbose_name = "Lino Welfare"
     #~ description = "a Lino application for Belgian Public Welfare Centres."
     #~ author = 'Luc Saffre'
     #~ author_email = 'luc.saffre@gmail.com'
@@ -47,7 +48,8 @@ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
     project_model = 'pcsw.Client'
     user_model = 'users.User'
     
-    languages = ('de', 'fr', 'nl', 'en')
+    #~ languages = ('de', 'fr', 'nl', 'en')
+    languages = "de fr nl en"
     
     #~ index_view_action = "pcsw.Home"
     

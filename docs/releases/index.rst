@@ -3,19 +3,9 @@ Releases
 
 .. py2rst::
 
+  from djangosite.utils.sphinxconf import version2rst
   import lino_welfare
-  v = lino_welfare.__version__
-  v = v.replace('+','')
-  print("The current stable release is :doc:`%s`." % v)
-  print("We're currently working on :doc:`coming`.")
-  
-
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-
-   coming
-
+  version2rst(self,lino_welfare)
 
 Older releases
 --------------
@@ -26,6 +16,7 @@ Older releases
 
    1.0.?
    1.0.1?
+   1.1.?
 
 
 Versuch

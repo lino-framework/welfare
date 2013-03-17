@@ -78,19 +78,18 @@ from lino.utils.xmlgen import html as xghtml
 
 from lino_welfare.modlib.pcsw import models as pcsw
 
-try:
+#~ try:
   
-    import suds
-    from suds.client import Client
-    from suds.transport.http import HttpAuthenticated
-    from suds.transport.http import HttpTransport
-    from suds.sax.element import Element as E
-    from suds.sax.parser import Parser
-    PARSER = Parser()
+import suds
+from suds.client import Client
+from suds.transport.http import HttpAuthenticated
+from suds.transport.http import HttpTransport
+from suds.sax.element import Element as E
+from suds.sax.parser import Parser
+PARSER = Parser()
 
-except ImportError, e:
-    pass
-
+#~ except ImportError, e:
+    #~ pass
 
 
 countries = dd.resolve_app('countries')
