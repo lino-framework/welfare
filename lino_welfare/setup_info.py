@@ -25,7 +25,7 @@ SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
       version='1.1.0', 
-      requires=['Lino (==1.6.0)','suds','vobject'],
+      requires=['Lino==1.6.3','suds','vobject'],
       #~ version=VERSION,
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\

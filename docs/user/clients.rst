@@ -1,4 +1,4 @@
-.. _clients:
+.. _welfare.clients:
 
 ========
 Klienten
@@ -9,7 +9,7 @@ Klienten
    :depth: 2
 
 
-.. _contacts.Partner:
+.. _welfare.contacts.Partner:
 
 Partner
 =======
@@ -149,7 +149,7 @@ Außer wenn `PAR->Allo` es einen der Werte "Eheleute",
 "Herr und Frau" enthält, dann wird es ein Haushalt.
 
 
-.. _pcsw.Client:
+.. _welfare.pcsw.Client:
 
 Klient
 ------
@@ -157,7 +157,7 @@ Klient
 Ein Klient ist eine Person, für die wir eine Serie von 
 zusätzlichen Daten erfassen.
 
-.. _pcsw.Clients:
+.. _welfare.pcsw.Clients:
 
 Klienten
 ========
@@ -184,7 +184,7 @@ und Filterparameter unterscheiden:
 N.B. 
 Das Detail, das bei Doppelklick angezeigt wird, 
 ist bei allen drei Ansichten das Gleiche. 
-Das hängt vom :ref:`users.UserProfiles` ab.
+Das hängt vom :ref:`welfare.users.UserProfiles` ab.
 
 
 
@@ -433,7 +433,7 @@ Anhang
   
 
 
-.. _users.UserProfiles:
+.. _welfare.users.UserProfiles:
 
 Benutzerprofil 
 --------------

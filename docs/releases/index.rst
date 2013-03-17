@@ -19,9 +19,6 @@ Older releases
    1.1.?
 
 
-Versuch
--------
-
 
 .. py2rst::
 

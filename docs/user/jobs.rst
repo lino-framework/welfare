@@ -1,9 +1,10 @@
+.. _welfare.jobs:
+
 ========
 Art60*7
 ========
 
-
-.. _jobs.Job:
+.. _welfare.jobs.Job:
 
 Stelle
 ------
@@ -14,12 +15,13 @@ für den das ÖSHZ sich um die Besetzung kümmert.
 (:class:`Job <lino_welfare.modlib.jobs.models.Job>`) 
 
 
-.. _jobs.Candidature:
+.. _welfare.jobs.Candidature:
 
 Kandidatur 
 ----------
 
-Eine Kandidatur ist "wenn ein :ref:`pcsw.Client` sich für eine :ref:`jobs.Job`
+Eine Kandidatur ist "wenn ein :ref:`welfare.pcsw.Client` sich für 
+eine :ref:`welfare.jobs.Job`
 bewirbt".
 Das beinhaltet u.a. auch die Information, dass der verantwortliche 
 Begleiter die Person als für diese Stelle geeignet einstuft.
@@ -27,7 +29,7 @@ Begleiter die Person als für diese Stelle geeignet einstuft.
 (:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`) 
 
 
-.. _jobs.NewJobsOverview:
+.. _welfare.jobs.NewJobsOverview:
 
 Overview of current jobs
 ------------------------
