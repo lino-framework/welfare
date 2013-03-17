@@ -590,7 +590,7 @@ def migrate_from_1_0_15(globals_dict):
     return '1.0.16'
 
 def migrate_from_1_0_16(globals_dict): 
-    return '0.0.17' # was never used in production
+    return '1.0.17' # was never used in production
     
 def migrate_from_1_0_17(globals_dict): 
     """
