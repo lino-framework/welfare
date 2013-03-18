@@ -280,6 +280,7 @@ Im Reiter :guilabel:`Sonstiges` gibt es drei Ankreuzfelder
   Bearbeitungszustand "Ungültig".
 
 
+.. _welfare.pcsw.Coachings:
 
 Begleitungen
 ============
@@ -348,6 +349,7 @@ Regeln
   Begleitung, die nicht geändert werden kann.
   
 
+.. _welfare.pcsw.ClientContacts:
 
 Klientenkontakte
 ================
@@ -430,7 +432,6 @@ Anhang
 - Life cycle : Lebenzyklus
 - engl. "State" = Bearbeitungszustand
 
-  
 
 
 .. _welfare.users.UserProfiles:
