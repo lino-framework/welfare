@@ -12,17 +12,22 @@
 # serve to show the default.
 
 import sys, os
-from unipath import Path
-DOCSDIR = Path(__file__).parent.absolute()
-sys.path.append(DOCSDIR)
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-"""
-Trigger loading of Djangos model cache in order to avoid side effects that 
-would occur when this happens later while importing one of the models modules.
-"""
+from djangosite.utils.sphinxconf import configure
+configure(__file__,globals())
+
+
+#~ from unipath import Path
+#~ DOCSDIR = Path(__file__).parent.absolute()
+#~ sys.path.append(DOCSDIR)
+
+#~ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+#~ """
+#~ Trigger loading of Djangos model cache in order to avoid side effects that 
+#~ would occur when this happens later while importing one of the models modules.
+#~ """
 from django.conf import settings
-settings.SITE.startup()
+#~ settings.SITE.startup()
 
 
 # If your extensions are in another directory, add it here. If the directory
@@ -35,16 +40,16 @@ settings.SITE.startup()
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = [
-  'sphinx.ext.autodoc',
-  'sphinx.ext.autosummary',
-  #~ 'sphinx.ext.inheritance_diagram',
-  #~ 'sphinx.ext.todo',
-  'sphinx.ext.extlinks',
-  'sphinx.ext.graphviz',
-  'sphinx.ext.intersphinx',
-  'sphinx.ext.doctest',
-]
+#~ extensions = [
+  #~ 'sphinx.ext.autodoc',
+  #~ 'sphinx.ext.autosummary',
+  # 'sphinx.ext.inheritance_diagram',
+  # 'sphinx.ext.todo',
+  #~ 'sphinx.ext.extlinks',
+  #~ 'sphinx.ext.graphviz',
+  #~ 'sphinx.ext.intersphinx',
+  #~ 'sphinx.ext.doctest',
+#~ ]
 
 #~ extensions.append('sphinxcontrib.autorun')
 
@@ -259,11 +264,11 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 
 
 
-HGWORK = DOCSDIR.ancestor(2)
-intersphinx_mapping = dict()
-for n in ('site','north','lino','welfare'):
-    p = Path(HGWORK,n,'docs','.build','objects.inv')
-    if p.exists():
-        intersphinx_mapping[n] = ('http://%s.lino-framework.org' % n,p)
+#~ HGWORK = DOCSDIR.ancestor(2)
+#~ intersphinx_mapping = dict()
+#~ for n in ('site','north','lino','welfare'):
+    #~ p = Path(HGWORK,n,'docs','.build','objects.inv')
+    #~ if p.exists():
+        #~ intersphinx_mapping[n] = ('http://%s.lino-framework.org' % n,p)
 
-from djangosite.utils.sphinxconf import setup
+#~ from djangosite.utils.sphinxconf import setup

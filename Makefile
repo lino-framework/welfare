@@ -3,7 +3,7 @@ ROOTDIR := /cygdrive/t/hgwork/welfare
 #~ ROOTDIR = `pwd`
 ROOTDIR := `cygpath -m $(ROOTDIR)`
 #~ ROOTDIR := `cygpath -m \`pwd\``
-MODULES = pcsw courses cbss debts cv isip jobs newcomers 
+MODULES = pcsw courses cbss debts cv isip jobs newcomers belstat
 TESTS_OPTIONS = --verbosity=2 --traceback
 MMOPTS := -s -a --settings lino_welfare.modlib.pcsw.settings
 CMOPTS := --settings lino_welfare.modlib.pcsw.settings

@@ -4,7 +4,7 @@ Version 1.1.0
 Kandidaturen auf Probe
 ----------------------
 
-Eine :ref:`jobs.Candidature`
+Eine :ref:`welfare.jobs.Candidature`
 hatte bisher lediglich ein Ankreuzfeld "Aktiv". 
 Das wurde ersetzt durch ein Auswahlfeld "Zustand" mit den möglichen 
 Werten "Aktiv", "Probezeit", "Inaktiv".
@@ -33,5 +33,5 @@ Sonstiges
   
   
 - Ich experimentiere mit der Dokumentation 
-  Siehe z.B. :ref:`jobs.NewJobsOverview` und   
-  :ref:`clients`.
+  Siehe z.B. :ref:`welfare.jobs.NewJobsOverview` und   
+  :ref:`welfare.clients`.

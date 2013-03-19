@@ -20,4 +20,4 @@ project and forked off in August 2012
 to become an independent project,
 possibly to be maintained by an independant organization.
 
-Read more on http://code.google.com/p/lino-welfare/
+Read more on http://welfare.lino-framework.org

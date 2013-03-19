@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-25 15:11+0000\n"
+"POT-Creation-Date: 2013-03-18 08:28+0100\n"
 "PO-Revision-Date: 2012-12-02 12:29+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: \n"
@@ -17,178 +17,178 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: .\models.py:85
+#: .\models.py:86
 msgid "Course provider"
 msgstr "Kursanbieter"
 
-#: .\models.py:86
+#: .\models.py:87
 msgid "Course providers"
 msgstr "Kursanbieter"
 
-#: .\models.py:99
+#: .\models.py:100
 msgid "is Course Provider"
 msgstr "ist Kursanbieter"
 
-#: .\models.py:173
+#: .\models.py:174
 msgid "Course Content"
 msgstr "Kursinhalt"
 
-#: .\models.py:174
+#: .\models.py:175
 msgid "Course Contents"
 msgstr "Kursinhalte"
 
-#: .\models.py:178 .\models.py:205 .\models.py:259
+#: .\models.py:179 .\models.py:206 .\models.py:260
 msgid "Name"
 msgstr ""
 
-#: .\models.py:201
+#: .\models.py:202
 msgid "Course Offer"
 msgstr "Kursangebot"
 
-#: .\models.py:202
+#: .\models.py:203
 msgid "Course Offers"
 msgstr "Kursangebote"
 
-#: .\models.py:222
+#: .\models.py:223
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models.py:251
+#: .\models.py:252
 msgid "Course"
 msgstr "Kurs"
 
-#: .\models.py:252 .\models.py:748
+#: .\models.py:253 .\models.py:749
 msgid "Courses"
 msgstr "Kurse"
 
-#: .\models.py:261
+#: .\models.py:262
 msgid "start date"
 msgstr "Beginndatum"
 
-#: .\models.py:267 .\models.py:471
+#: .\models.py:268 .\models.py:472
 msgid "Remark"
 msgstr "Bemerkung"
 
-#: .\models.py:282
+#: .\models.py:283
 msgid "List of candidates"
 msgstr "Kandidatenliste"
 
-#: .\models.py:285
+#: .\models.py:286
 msgid "List of participants"
 msgstr "Teilnehmerliste"
 
-#: .\models.py:372
+#: .\models.py:373
 msgid "Candidate"
 msgstr "Kandidat"
 
-#: .\models.py:373
+#: .\models.py:374
 msgid "Registered"
 msgstr "Eingetragen"
 
-#: .\models.py:374
+#: .\models.py:375
 msgid "Passed"
 msgstr "Bestanden"
 
-#: .\models.py:375
+#: .\models.py:376
 msgid "Award"
 msgstr "Gut bestanden"
 
-#: .\models.py:376
+#: .\models.py:377
 msgctxt "courses"
 msgid "Failed"
 msgstr "Nicht bestanden"
 
-#: .\models.py:377
+#: .\models.py:378
 msgid "Aborted"
 msgstr "Abgebrochen"
 
-#: .\models.py:381
+#: .\models.py:382
 msgid "Register"
 msgstr "Eintragen"
 
-#: .\models.py:383
+#: .\models.py:384
 msgid "Register this candidate for this course."
 msgstr "Diesen Kandidaten für diesen Kurs eintragen."
 
-#: .\models.py:390
+#: .\models.py:391
 msgid "Cannot register to unknown course."
 msgstr ""
 
-#: .\models.py:393
+#: .\models.py:394
 #, python-format
 msgid "%(person)s has been registered to %(course)s"
 msgstr "%(person)s wurde eingetragen in %(course)s"
 
-#: .\models.py:398
+#: .\models.py:399
 msgid "Unregister"
 msgstr "Austragen"
 
-#: .\models.py:400
+#: .\models.py:401
 msgid "Unregister this candidate from this course."
 msgstr "Diesen Kandidaten aus diesen Kurs austragen."
 
-#: .\models.py:408
+#: .\models.py:409
 #, python-format
 msgid "%(person)s has been unregistered from %(course)s"
 msgstr "%(person)s wurde ausgetragen aus %(course)s"
 
-#: .\models.py:422 .\models.py:423
+#: .\models.py:423 .\models.py:424
 msgid "Course Requests"
 msgstr "Kursanfragen"
 
-#: .\models.py:426
+#: .\models.py:427
 msgid "Person"
 msgstr ""
 
-#: .\models.py:432
+#: .\models.py:433
 msgid "Course content"
 msgstr "Kursinhalt"
 
-#: .\models.py:436
+#: .\models.py:437
 msgid "date submitted"
 msgstr "Anfragedatum"
 
-#: .\models.py:437
+#: .\models.py:438
 msgid "When this request has been submitted."
 msgstr "Datum, an dem die Anfrage erstellt wurde."
 
-#: .\models.py:440
+#: .\models.py:441
 msgid "Needed for job search"
 msgstr "professionelle Eingliederung"
 
-#: .\models.py:442
+#: .\models.py:443
 msgid "Check this if the request is needed for job search."
 msgstr "Ankreuzen, wenn der Kurs für die Arbeitssuche benötigt wird."
 
-#: .\models.py:457
+#: .\models.py:458
 msgid "Course found"
 msgstr "Kurs gefunden"
 
-#: .\models.py:476
+#: .\models.py:477
 msgid "date ended"
 msgstr "Enddatum"
 
-#: .\models.py:557
+#: .\models.py:558
 msgid "Participants"
 msgstr "Teilnehmer"
 
-#: .\models.py:610
+#: .\models.py:611
 msgid "Candidates"
 msgstr "Kandidaten"
 
-#: .\models.py:652
+#: .\models.py:653
 msgid "Pending Course Requests"
 msgstr "Offene Kursanfragen"
 
-#: .\models.py:700
+#: .\models.py:701
 msgid "Age"
 msgstr "Alter"
 
-#: .\models.py:704
+#: .\models.py:705
 msgid "Address"
 msgstr "Adresse"
 
-#: .\models.py:714
+#: .\models.py:715
 msgid "unknown age"
 msgstr "unbek. Alter"
 
