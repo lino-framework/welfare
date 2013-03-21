@@ -1,0 +1,32 @@
+==========================
+Version 1.1.1
+==========================
+
+20130321 (Thursday, 21 March 2013)
+
+List of changes
+===============
+
+New features
+------------
+
+- Einfügetexte funktionieren jetzt wieder.
+
+- Es gibt jetzt die Notion von Benutzergruppen.
+  Diese entsprechen (momentan) in etwa den "Diensten" (:ref:`welfare.clients.CoachingType`).
+
+- Im Kalendermodul habe ich die Team-Mitgliedschaften ersetzt 
+  durch diese Benutzergruppen (diese Funktionalität wurde bisher 
+  nicht benutzt, insofern hatte ich da keine Skrupel).
+  
+
+Optimizations
+-------------
+
+Bugfixes
+--------
+
+Manual tasks after upgrade
+--------------------------
+
+

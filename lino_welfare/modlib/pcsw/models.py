@@ -3026,10 +3026,12 @@ def site_setup(site):
     #~ debts_level
     #~ """)
     
-    site.modules.users.Users.set_detail_layout("""
-    box1:50 #box2:25
-    remarks AuthoritiesGiven 
-    """,
+    
+    #~ site.modules.users.Users.set_detail_layout("""
+    #~ box1:50 MembershipsByUser:25
+    #~ remarks AuthoritiesGiven 
+    #~ """,
+    site.modules.users.Users.set_detail_layout(
     coaching_a="""
     newcomer_quota 
     coaching_type 

@@ -1,3 +1,5 @@
+.. _welfare.userman:
+
 User manual
 ===========
 
@@ -13,3 +15,4 @@ It is only in English.
 
    clients
    jobs
+   debts

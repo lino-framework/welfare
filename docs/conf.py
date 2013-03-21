@@ -27,7 +27,7 @@ configure(__file__,globals())
 #~ would occur when this happens later while importing one of the models modules.
 #~ """
 from django.conf import settings
-#~ settings.SITE.startup()
+settings.SITE.startup()
 
 
 # If your extensions are in another directory, add it here. If the directory

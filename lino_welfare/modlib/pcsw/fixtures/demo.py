@@ -52,6 +52,7 @@ from lino_welfare.modlib.pcsw import models as pcsw
 from lino_welfare.modlib.isip import models as isip
 
 contacts = dd.resolve_app('contacts')
+users = dd.resolve_app('users')
 
 #~ dblogger.info('Loading')
 
@@ -290,7 +291,6 @@ def objects():
     #~ JobProvider = resolve_model('jobs.JobProvider')
     #~ Function = resolve_model('jobs.Function')
     #~ Sector = resolve_model('jobs.Sector')
-    User = resolve_model('users.User')
     Authority = resolve_model('users.Authority')
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
@@ -471,6 +471,17 @@ def objects():
       
     DIRECTORS = (annette,hans,andreas,bernard)
     
+    ug_dsbe = users.Group(name="DSBE")
+    yield ug_dsbe 
+    ug_courses = users.Group(name="Courses")
+    yield ug_courses
+    ug_asd = users.Group(name="ASD")
+    yield ug_asd 
+    ug_sek = users.Group(name="Sekretariat")
+    yield ug_sek 
+    ug_staff = users.Group(name="Staff")
+    yield ug_staff 
+    
     #~ yield User(username='gerd',partner=gerd,profile='900')
     
     melanie = person(first_name="Mélanie",last_name="Mélard",
@@ -478,42 +489,65 @@ def objects():
         city=eupen,country='BE',gender=mixins.Genders.female,
         language='fr')
     yield melanie
-    melanie = User(username="melanie",partner=melanie,profile='110') 
+    melanie = users.User(username="melanie",partner=melanie,profile='110') 
     yield melanie
     
     hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
         email='hubert@example.com',
         city=eupen,country='BE',gender=mixins.Genders.male)
     yield hubert
-    hubert = User(username="hubert",partner=hubert,profile='100') 
+    hubert = users.User(username="hubert",partner=hubert,profile='100') 
     yield hubert
     
     alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
         email='alicia@example.com',
         city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
     yield alicia
-    alicia = User(username="alicia",partner=alicia,profile='100') 
+    alicia = users.User(username="alicia",partner=alicia,profile='100') 
     yield alicia
     
     yield Authority(user=alicia,authorized=hubert)
     yield Authority(user=alicia,authorized=melanie)
     yield Authority(user=hubert,authorized=melanie)
     
-    caroline = User(username="caroline",
+    yield users.Membership(user=alicia,group=ug_dsbe)
+    yield users.Membership(user=hubert,group=ug_dsbe)
+    yield users.Membership(user=melanie,group=ug_dsbe)
+    yield users.Membership(user=melanie,group=ug_courses)
+    yield users.Membership(user=melanie,group=ug_sek)
+    
+    caroline = users.User(username="caroline",
         first_name="Caroline",last_name="Carnol",
         profile='200') # UserProfiles.caroline)
     yield caroline
+    yield users.Membership(user=caroline,group=ug_asd)
     
     # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(name="ASD",id=1) 
+    yield pcsw.CoachingType(id=1,**babel_values('name',
+        de="ASD (Allgemeiner Sozialdienst)",
+        nl="ASD (Algemene Sociale Dienst)",
+        fr="SSG (Service social général)",
+        en="GSS (General Social Service)",
+        )) 
     
-    #~ caroline = User.objects.get(username="caroline")
+    #~ caroline = users.User.objects.get(username="caroline")
     caroline.coaching_type_id = 1
     caroline.save()
     
+    DSBE = pcsw.CoachingType(id=2,**babel_values('name',
+        de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
+        fr="Service intégration",
+        en="Integration service",
+        )) 
+    
     DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
-    yield pcsw.CoachingType(name="Schuldnerberatung")
+    #~ yield pcsw.CoachingType(name="Schuldnerberatung")
+    yield pcsw.CoachingType(**babel_values('name',
+        de="Schuldnerberatung",
+        fr="Médiation de dettes",
+        en="Debts mediation",
+        )) 
     
     
     alicia.coaching_type= DSBE
@@ -530,7 +564,7 @@ def objects():
     count = 0
     #~ for person in Person.objects.filter(gender__isnull=False):
     for person in Person.objects.exclude(gender=''):
-        if User.objects.filter(partner=person).count() == 0:
+        if users.User.objects.filter(partner=person).count() == 0:
           if contacts.Role.objects.filter(person=person).count() == 0:
             #~ if not person in DIRECTORS:
             birth_date = settings.SITE.demo_date(-170*count - 16*365)  # '810601 211-83'
@@ -584,7 +618,7 @@ def objects():
     
     
     Note = resolve_model('notes.Note')
-    USERS = Cycler(User.objects.all())
+    USERS = Cycler(users.User.objects.all())
     SUBJECTS = Cycler(u"""
     Erstgespräch
     Versammlung beim AG

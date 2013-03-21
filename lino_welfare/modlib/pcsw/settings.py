@@ -26,7 +26,8 @@ from lino_welfare.modlib import cbss
 from lino.modlib import cal
 from lino_welfare import SETUP_INFO
 
-class Site(Site,cal.SiteMixin,cbss.SiteMixin):
+#~ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
+class Site(Site,cbss.SiteMixin):
   
     version = SETUP_INFO['version'] # lino_welfare.__version__
     url = SETUP_INFO['url'] # "http://code.google.com/p/lino-welfare/"
@@ -239,27 +240,24 @@ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
         
         return main
       
-    def get_reminder_generators_by_user(self,user):
-        """
-        Yield a list of objects susceptible to generate 
-        automatic reminders for the specified user.
-        Used by :func:`lino.modlib.cal.update_reminders`.
-        """
-        from lino.core.dbutils import models_by_base
-        from django.db.models import Q
-        from lino_welfare.modlib.isip import models as isip
+    #~ def get_reminder_generators_by_user(self,user):
+        #~ """
+        #~ Yield a list of objects susceptible to generate 
+        #~ automatic reminders for the specified user.
+        #~ Used by :func:`lino.modlib.cal.update_reminders`.
+        #~ """
+        #~ from lino.core.dbutils import models_by_base
+        #~ from django.db.models import Q
+        #~ from lino_welfare.modlib.isip import models as isip
         
-        #~ for obj in self.modules.contacts.Person.objects.filter(
-          #~ Q(coach2=user)|Q(coach2__isnull=True,coach1=user)):
+        #~ for obj in self.modules.pcsw.Coaching.objects.filter(
+            #~ user=user,primary=True):
+            #~ yield obj.project
+        #~ for obj in self.modules.uploads.Upload.objects.filter(user=user):
             #~ yield obj
-        for obj in self.modules.pcsw.Coaching.objects.filter(
-            user=user,primary=True):
-            yield obj.project
-        for obj in self.modules.uploads.Upload.objects.filter(user=user):
-            yield obj
-        for model in models_by_base(isip.ContractBase):
-            for obj in model.objects.filter(user=user):
-                yield obj
+        #~ for model in models_by_base(isip.ContractBase):
+            #~ for obj in model.objects.filter(user=user):
+                #~ yield obj
                 
     def get_installed_apps(self):
         for a in super(Site,self).get_installed_apps():

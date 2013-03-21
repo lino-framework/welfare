@@ -291,9 +291,9 @@ um einen bestimmten Klienten während einer bestimmten Periode
 Ein Klient kann mehrere Begleitungen auf einmal haben, 
 z.B. eine im ASD und eine andere im DSBE.
 
-Begleitungen werden nie direkt erzeugt 
-(durch Einfügen in der Tabelle "Begleitungen"),
-sondern indirekt durch das **Zuweisen** eines verfügbaren Begleiters.
+Begleitungen werden entweder manuell erzeugt 
+durch `Einfügen` in der Tabelle "Begleitungen",
+oder indirekt durch das **Zuweisen** eines verfügbaren Begleiters.
 
 Die Felder **von** und **bis** einer Begleitung definieren die **Begleitungsperiode**.
 Das Feld `von` einer Begleitung kann nicht leer sein.
@@ -327,6 +327,20 @@ Für die primäre Begleitung eines *importierten* Klienten gilt:
 Also man kann auf importierten Klienten in Lino zusätzliche Begleitungen 
 erstellen, aber diese können nicht primär sein.
 An diese sekundären Begleitungen geht `watch_tim` nicht ran.
+
+.. _welfare.clients.CoachingType:
+
+Begleitungsdienst
+=================
+
+Jede Begleitung findet zwingend im Rahmen eines bestimmten 
+Dienstes statt.
+In der Demo-Datenbank gibt es folgende Begleitungsdienste:
+
+.. py2rst:: 
+
+    from django.conf import settings
+    print settings.SITE.modules.pcsw.CoachingTypes.to_rst()
 
 
 Regeln

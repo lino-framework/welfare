@@ -5,7 +5,7 @@ class Site(Site):
     title = "Lino-Welfare Technical Reference"
   
     #~ languages = ['en']
-    languages = 'en de fr'.split()
+    languages = 'de fr nl'
     #~ languages = ['de','fr']
     #~ languages = ['fr','de']
     #~ languages = ['de']

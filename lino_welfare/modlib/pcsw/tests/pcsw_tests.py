@@ -77,16 +77,18 @@ from lino_welfare.modlib.pcsw.models import Client
 
 def test00(self):
     """
-    Some initialization
+    Initialization.
     """
+    #~ print "20130321 test00 started"
     self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
     self.user_root.save()
+    signer1 = Person(first_name="Ernst",last_name="Keutgen") ; signer1.save()
+    signer2 = Person(first_name="Joseph",last_name="Ossemann") ; signer2.save()
     sc = settings.SITE.site_config
-    sc.signer1 = Person(first_name="Ernst",last_name="Keutgen") ; sc.signer1.save()
-    sc.signer2 = Person(first_name="Joseph",last_name="Ossemann") ; sc.signer2.save()
-    #~ president = contacts_RoleType(name="Präsident") ; president.save()
-    #~ secretary = contacts_RoleType(name="Sekretär"); secretary.save()
+    sc.signer1 = signer1
+    sc.signer2 = signer2
     sc.full_clean() ; sc.save()
+    #~ print "20130321 test00 done"
   
 def test01(self):
     """
@@ -96,6 +98,7 @@ def test01(self):
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
     """
     
+    #~ print "20130321 test01 started"
     self.job_provider = JobProvider(name="Test")
     self.job_provider.save()
     self.max_mustermann = Client(first_name="Max",last_name="Mustermann")

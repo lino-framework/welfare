@@ -378,7 +378,7 @@ class ContractBase(
             if msg:
                 #~ print 20130225, translation._trans, translation.get_language()
                 raise ValidationError(msg)
-            
+        #~ print 20130320, get_field(self.__class__,'signer1').default
         super(ContractBase,self).full_clean(*args,**kw)
         
 
