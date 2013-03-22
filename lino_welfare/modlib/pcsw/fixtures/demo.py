@@ -36,6 +36,8 @@ from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
 from north.dbutils import babel_values
+from north.dbutils import babel_values as babelkw
+from north.dbutils import field2kw
 from lino.utils.restify import restify
 from lino.utils import dblogger
 #~ from lino.models import update_site_config
@@ -471,16 +473,16 @@ def objects():
       
     DIRECTORS = (annette,hans,andreas,bernard)
     
-    ug_dsbe = users.Group(name="DSBE")
-    yield ug_dsbe 
-    ug_courses = users.Group(name="Courses")
-    yield ug_courses
-    ug_asd = users.Group(name="ASD")
-    yield ug_asd 
-    ug_sek = users.Group(name="Sekretariat")
-    yield ug_sek 
-    ug_staff = users.Group(name="Staff")
-    yield ug_staff 
+    #~ ug_dsbe = users.Group(name="DSBE")
+    #~ yield ug_dsbe 
+    #~ ug_courses = users.Group(name="Courses")
+    #~ yield ug_courses
+    #~ ug_asd = users.Group(name="ASD")
+    #~ yield ug_asd 
+    #~ ug_sek = users.Group(name="Sekretariat")
+    #~ yield ug_sek 
+    #~ ug_staff = users.Group(name="Staff")
+    #~ yield ug_staff 
     
     #~ yield User(username='gerd',partner=gerd,profile='900')
     
@@ -510,17 +512,17 @@ def objects():
     yield Authority(user=alicia,authorized=melanie)
     yield Authority(user=hubert,authorized=melanie)
     
-    yield users.Membership(user=alicia,group=ug_dsbe)
-    yield users.Membership(user=hubert,group=ug_dsbe)
-    yield users.Membership(user=melanie,group=ug_dsbe)
-    yield users.Membership(user=melanie,group=ug_courses)
-    yield users.Membership(user=melanie,group=ug_sek)
+    #~ yield users.Membership(user=alicia,group=ug_dsbe)
+    #~ yield users.Membership(user=hubert,group=ug_dsbe)
+    #~ yield users.Membership(user=melanie,group=ug_dsbe)
+    #~ yield users.Membership(user=melanie,group=ug_courses)
+    #~ yield users.Membership(user=melanie,group=ug_sek)
     
     caroline = users.User(username="caroline",
         first_name="Caroline",last_name="Carnol",
         profile='200') # UserProfiles.caroline)
     yield caroline
-    yield users.Membership(user=caroline,group=ug_asd)
+    #~ yield users.Membership(user=caroline,group=ug_asd)
     
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(id=1,**babel_values('name',
@@ -540,7 +542,7 @@ def objects():
         en="Integration service",
         )) 
     
-    DSBE = pcsw.CoachingType(name="DSBE")
+    #~ DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
     #~ yield pcsw.CoachingType(name="Schuldnerberatung")
     yield pcsw.CoachingType(**babel_values('name',
@@ -549,9 +551,11 @@ def objects():
         en="Debts mediation",
         )) 
     
-    
     alicia.coaching_type= DSBE
     alicia.save()
+    
+    for obj in pcsw.CoachingType.objects.all():
+        yield users.Team(**babelkw('name',**field2kw(obj,'name')))
     
     
     

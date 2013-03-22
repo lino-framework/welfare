@@ -33,6 +33,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import pprint
+import collections
 
 from django.db.utils import IntegrityError
 from django.conf import settings
@@ -53,7 +54,9 @@ from lino.utils.jsgen import py2js
 #~ from north import babel
 from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from djangosite.utils.test import TestCase
+#~ from djangosite.utils.test import TestCase
+from djangosite.utils.test import RemoteAuthTestCase
+
 
 pcsw = dd.resolve_app('pcsw')
 
@@ -61,9 +64,10 @@ pcsw = dd.resolve_app('pcsw')
 #~ Property = resolve_model('properties.Property')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
-class DemoTest(TestCase):
+class DemoTest(RemoteAuthTestCase):
     #~ fixtures = [ 'std','demo' ]
-    fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
+    fixtures = settings.SITE.demo_fixtures
+    #~ fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
     #~ fixtures = 'std all_countries few_cities all_languages props demo'.split()
     never_build_site_cache = True
     
@@ -77,8 +81,87 @@ class PseudoRequest:
         self.user = settings.SITE.user_model.objects.get(username=name)
         self.subst_user = None
 
-            
 def test001(self):
+    """
+    Test the number of rows returned for certain queries
+    """
+    cases = []
+    Query = collections.namedtuple('Query',
+      ['username','url_base','json_fields','expected_rows','kwargs'])
+    def add_case(username,url_base,json_fields,expected_rows,**kwargs):
+        cases.append(Query(username,url_base,json_fields,expected_rows,kwargs))
+        
+    json_fields = 'count rows title success no_data_text'
+    kw = dict(fmt='json',limit=10,start=0)
+    add_case('rolf','api/contacts/Companies',json_fields,37,**kw)
+    add_case('rolf','api/households/Households',json_fields,4,**kw)
+    add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
+    add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
+    add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
+    add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
+    add_case('rolf','api/countries/Countries',json_fields,9,**kw)
+    add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
+    add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
+    
+    json_fields = 'count rows title success no_data_text param_values'
+    add_case('rolf','api/contacts/Persons',json_fields,71,**kw)
+    add_case('rolf','api/pcsw/Clients',json_fields,59,**kw)
+    add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
+    add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
+    add_case('rolf','api/newcomers/NewClients',json_fields,25,**kw)
+    add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=118,**kw)
+    add_case('alicia','api/pcsw/IntegClients',json_fields,7,**kw)
+    add_case('hubert','api/pcsw/IntegClients',json_fields,22,**kw)
+    
+    
+    kw = dict(fmt='json',limit=20,start=0,su=6) # rolf working as alicia
+    add_case('rolf','api/pcsw/IntegClients',json_fields,7,**kw)
+    
+    
+    kw = dict() 
+    json_fields = 'count rows'
+    add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
+    add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
+    
+    failures = 0
+    for i,case in enumerate(cases):
+        url = settings.SITE.build_admin_url(case.url_base,**case.kwargs)
+        
+        response = self.client.get(url) 
+        self.assertEqual(response.status_code,403,"Status code for anonymous on GET %s" % url)
+        
+        response = self.client.get(url,REMOTE_USER=case.username)
+        #~ if response.status_code != 200:
+            #~ msg = "%s returned status_code %s" % (url,response.status_code)
+            #~ print "[%d] %s" % (i, msg)
+            #~ failures += 1
+            #~ continue
+        try:
+            result = self.check_json_result(response,case.json_fields,url)
+            
+            num = case.expected_rows
+            if not isinstance(num,tuple):
+                num = [num]
+            if result['count'] not in num:
+                msg = "%s got %s rows instead of %s" % (url,result['count'],num)
+                print "[%d] %s" % (i, msg)
+                failures += 1
+            
+        #~ except self.failureException as e:
+        except Exception as e:
+            print "[%d] %s:\n%s" % (i, url,e)
+            failures += 1
+            
+    if failures:
+        msg = "%d URL failures" % failures
+        self.fail(msg)
+
+
+
+
+
+
+def unused_test001(self):
     """
     Some simple tests:
     - total number of Person records
@@ -96,7 +179,7 @@ def test001(self):
     #~ self.assertEquals(unicode(p), "BASTIAENSEN Laurent (118)")
     
         
-def test002(self):
+def unused_test002(self):
     """
     Tests whether SoftSkillsByPerson works and whether it returns language-specific labels.
     Bug discovered :blogref:`20110228`.
@@ -165,7 +248,7 @@ def test002(self):
     
 
 
-def test003(self):
+def unused_test003(self):
     """
     Test whether the AJAX call issued for Detail of Annette Arens is correct.
     """
@@ -190,7 +273,7 @@ def test003(self):
         self.assertEqual(result['navinfo']['last'],case[6])
             
             
-def test004(self):
+def unused_test004(self):
     """
     Test whether date fields are correctly parsed.
     """
@@ -218,7 +301,7 @@ def test004(self):
         result = self.check_json_result(response,'navinfo disable_delete data id title')
         self.assertEqual(result['data']['applies_from'],value)
 
-def test005(self):
+def unused_test005(self):
     """
     Simplification of test04, used to write Lino ticket #27.
     """
@@ -237,7 +320,7 @@ def test005(self):
     self.assertEqual(result['data']['name'],value)
 
 
-def test006(self):
+def unused_test006(self):
     """
     Testing BabelValues.
     """
@@ -272,66 +355,7 @@ def test006(self):
     dd.set_language(None) # switch back to default language for subsequent tests
     
 
-def test007(self):
-    """
-    Test the number of rows returned for certain queries
-    """
-    cases = [
-      ['contacts/Companies', 24],
-      ['contacts/Persons', 53],
-      ['pcsw/MyPersons',19],
-      ['contacts/AllPersons', 74],
-      ['contacts/AllPartners', 105],
-      ['courses/Courses', 4],
-      ['courses/CourseProviders', 3],
-      ['courses/CourseOffers', 4],
-      ['countries/Countries', 6],
-      ['notes/Notes', 106],
-      ['isip/Contracts', 21],
-      ['jobs/JobProviders', 4],
-      ['jobs/Jobs', 9],
-      ['jobs/Contracts', 21], 
-      ['jobs/Candidatures', 35],
-      ['jobs/Studies', 3],
-      #~ ['cal/Events', (204,205)], # seems that sometimes 204 is the correct number (depending on demo_date)
-      ['cal/Events', (219,220,221,222)], # exact number can vary depending on demo_date
-      ['cal/Tasks', 46],
-      ['cal/Priorities', 10],
-      ['notes/MyNotes', 28],
-      ['properties/PropGroups', 4],
-      ['/api/cal/RemindersByUser?fmt=json&limit=30&start=0&mt=5&mk=103&',22],
-    ]
-    for case in cases:
-        if "?" in case[0]:
-            url = case[0]
-        else:
-            url = '/api/%s?fmt=json&limit=30&start=0' % case[0]
-        #~ logger.info("20120103 %s",url)
-        response = self.client.get(url,REMOTE_USER='root')
-        result = self.check_json_result(response,'count rows gc_choices disabled_actions title')
-        #~ if result['count'] != case[1]:
-            #~ logger.warning("%s",pprint.pformat(result['rows']))
-        num = case[1]
-        if not isinstance(num,tuple):
-            num = [num]
-        if not result['count'] in num:
-            self.fail(
-                "%s got %s rows instead of %s" % (case[0],result['count'],num))
-
-    cases = [
-      ['cv/SkillsByPerson/property',6],
-    ]
-    for case in cases:
-        url = '/choices/%s?fmt=json&limit=10&start=0' % case[0]
-        response = self.client.get(url,REMOTE_USER='root')
-        result = self.check_json_result(response,'count rows')
-        #~ if result['count'] != case[1]:
-            #~ logger.warning("%s",pprint.pformat(result['rows']))
-        self.assertEqual(result['count'],case[1],
-            "%s got %d rows instead of %d" % (case[0],result['count'],case[1]))
-
-
-def test009(self):
+def unused_test009(self):
     """
     This tests for the bug discovered :blogref:`20110610`.
     See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
@@ -344,7 +368,7 @@ def test009(self):
     self.assertEqual(len(result['rows']),30)
     #~ dd.set_language(None) # switch back to default language for subsequent tests
 
-def test010(self):
+def unused_test010(self):
     """
     Test the unique_together validation of City
     See :blogref:`20110610` and :blogref:`20110611`.
@@ -372,7 +396,7 @@ def test010(self):
             self.fail("Expected IntegrityError")
         
     
-def test011(self):
+def unused_test011(self):
     """
     Tests whether the user problem 
     described in :blogref:`20111206` 
@@ -386,7 +410,7 @@ def test011(self):
     translation.deactivate()
     
     
-def test012(self):
+def unused_test012(self):
     """
     Test whether the contact person of a jobs contract is correctly filled in
     when the provider has exactly one contact person.
@@ -406,7 +430,7 @@ def test012(self):
     #~ self.assertEqual(c.applies_until,p.coached_from+datetime.timedelta(days=))
     
 
-def test014(self):
+def unused_test014(self):
     """
     Tests for the bug discovered :blogref:`20111222`.
     """
@@ -422,7 +446,7 @@ def test014(self):
           #~ self.assertEqual(result['title'],u"Choices for city")
           self.assertEqual(len(result['rows']),min(result['count'],10))
 
-def test015(self):
+def unused_test015(self):
     """
     Temporary bug on :blogref:`20111223`.
     """
@@ -431,7 +455,7 @@ def test015(self):
     result = self.check_json_result(response,'data phantom title')
     self.assertEqual(result['phantom'],True)
 
-def test015b(self):
+def unused_test015b(self):
     """
     Test whether PropsByGroup has a detail.
     20120218 : "properties.PropsByGroup has no action u'detail'"
@@ -448,7 +472,7 @@ def test015b(self):
         self.assertEqual(result['id'],case[1])
 
 
-def test016(self):
+def unused_test016(self):
     """
     All rows of persons_by_user now clickable.
     See :blogref:`20111223`.
@@ -465,28 +489,25 @@ def test016(self):
         
         
 def test017(self):
-    from decimal import Decimal as D
     Budget = resolve_model('debts.Budget')
     bud = Budget.objects.get(pk=3)
-    cases = [
-      [ bud.msum('amount','I'), D('0') ],  #~ Monatliche Einkünfte
-      [ bud.msum('amount','E'), D('0') ],  #~ Monatliche Ausgaben
-      [ bud.ysum('amount','E')/12, D('0') ],   #~ Monatliche Reserve für jährliche Ausgaben
-      [ bud.sum('monthly_rate','L'), D('0') ], #~ Raten der laufenden Kredite
-      [ bud.sum('amount','L'), D('0.00')],  #Total Kredite / Schulden 
-      [ bud.ysum('amount','E'), D('0.00')],  # Jährliche Ausgaben 
-    ]
+    s = bud.BudgetSummary().to_rst()
+    #~ print s
+    self.assertEquivalent(s,"""
+    ========================================================= ==============
+     Beschreibung                                              Betrag
+    --------------------------------------------------------- --------------
+     Monatliche Einkünfte                                      5 000,00
+     Jährliche Einkünfte (2 400,00 / 12)                       200,00
+     Monatliche Ausgaben                                       -550,00
+     Monatliche Reserve für jährliche Ausgaben (236,00 / 12)   -19,67
+     Raten der laufenden Kredite                               -45,00
+     **Finanzielle Situation**                                 **4 585,33**
+    ========================================================= ==============
+    """)
     
-    for i,case in enumerate(cases):
-        found,expected = case
-        if found != expected:
-            self.fail("Case %i : expected %s but found %s" % (i,expected,found))
-
-    
-
         
-        
-def test101(self):
+def unused_test101(self):
     """
     First we try to uncheck the is_jobprovider checkbox on 
     the Company view of a JobProvider. 
@@ -496,8 +517,8 @@ def test101(self):
     JobProvider = resolve_model('jobs.JobProvider')
     Job = resolve_model('jobs.Job')
     Contract = resolve_model('jobs.Contract')
-    bisaProvider = JobProvider.objects.get(pk=185)
-    bisaCompany = Company.objects.get(pk=185)
+    bisaProvider = JobProvider.objects.get(name='BISA')
+    bisaCompany = Company.objects.get(name='BISA')
     
     # it should work even on an imported partner
     save_iip = settings.SITE.is_imported_partner
@@ -506,7 +527,7 @@ def test101(self):
     
     JOBS = Job.objects.filter(provider=bisaProvider)
     self.assertEqual(JOBS.count(),3)
-    rr = PseudoRequest('root')
+    rr = PseudoRequest('rolf')
     try:
         Company.is_jobprovider.set_value_in_object(rr,bisaCompany,False)
         self.fail("Expected ValidationError")
@@ -519,10 +540,10 @@ def test101(self):
         job.delete()
     Company.is_jobprovider.set_value_in_object(rr,bisaCompany,False)
     
-    bisaCompany = Company.objects.get(pk=185) # still exists
+    bisaCompany = Company.objects.get(name='BISA') # still exists
     
     try:
-        bisaProvider = JobProvider.objects.get(pk=185)
+        bisaProvider = JobProvider.objects.get(name='BISA')
         self.fail("Expected JobProvider.DoesNotExist")
     except JobProvider.DoesNotExist,e:
         pass

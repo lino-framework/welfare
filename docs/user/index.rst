@@ -3,7 +3,7 @@
 User manual
 ===========
 
-.. warning:: This is expermiental.
+.. warning:: This is experimental.
 
 This is an alternative to the German/French/Dutch 
 `user manual <http://welfare-userman.lino-framework.org/>`__.
@@ -16,3 +16,4 @@ It is only in English.
    clients
    jobs
    debts
+   accounts

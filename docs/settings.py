@@ -2,7 +2,7 @@ from lino_welfare.modlib.pcsw.settings import *
 
 class Site(Site):
   
-    title = "Lino-Welfare Technical Reference"
+    title = "Lino-Welfare Demo"
   
     #~ languages = ['en']
     languages = 'de fr nl'

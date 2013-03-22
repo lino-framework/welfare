@@ -364,7 +364,9 @@ The total monthly amount available for debts distribution."""))
                     a.full_clean()
                     a.save()
             
-    def BudgetSummary(self,ar):
+    def BudgetSummary(self,ar=None):
+        if ar is None:
+            return BudgetSummary.request(master_instance=self,title=BudgetSummary.label)
         return ar.spawn(BudgetSummary,master_instance=self,
             title=BudgetSummary.label)
         
@@ -1113,8 +1115,8 @@ def site_setup(site):
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
 
-    site.modules.accounts.Accounts.column_names = "name default_amount required_for_household required_for_person group "
-    site.modules.accounts.AccountsByGroup.column_names = "name default_amount required_for_household required_for_person group "
+    site.modules.accounts.Accounts.column_names = "ref name default_amount required_for_household required_for_person group "
+    site.modules.accounts.AccountsByGroup.column_names = "ref name default_amount required_for_household required_for_person group "
 
 def setup_main_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)

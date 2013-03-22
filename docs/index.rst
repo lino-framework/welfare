@@ -25,6 +25,7 @@ Content
    user/index
    admin/index
    releases/index
+   tested/index
    API <api/lino_welfare>
    todo
    

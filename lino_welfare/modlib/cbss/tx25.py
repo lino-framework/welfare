@@ -45,10 +45,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
-#~ from north import babel
-from north.dbutils import dtos
-
-
 from lino import mixins
 from lino import dd
 #~ from lino.utils import Warning
@@ -58,7 +54,6 @@ from lino.utils import AttrDict, IncompleteDate
 
 from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
-
 
 
 try:
@@ -254,7 +249,7 @@ def rn2date(rd):
     
 def deldate(n):
     if hasattr(n,'DelDate'):
-        return [' (' + unicode(_('until ')) + dtos(rn2date(n.DelDate)) + ')']
+        return [' (' + unicode(_('until ')) + dd.dtos(rn2date(n.DelDate)) + ')']
     #~ return [' (' + unicode(_('until today')) + ')']
     return []
     #~ return []
@@ -353,15 +348,15 @@ def NameType(n):
     #~ return info
     
 def DateType(n):
-    return Info(dtos(rn2date(n)))
+    return Info(dd.dtos(rn2date(n)))
     
 def ForfeitureDateType(n):
-    info = Info(dtos(rn2date(n)))
+    info = Info(dd.dtos(rn2date(n)))
     info.addfrom(n,'Graphic',' (',simpletype,')')
     return info
     
 def ExpiryDateType(n):
-    info = Info(dtos(rn2date(n)))
+    info = Info(dd.dtos(rn2date(n)))
     info.addfrom(n,'Graphic',' (',simpletype,')')
     return info
     
@@ -717,7 +712,7 @@ def IT199(n):
     #~ info.append(', type ')
     #~ info += code_label(n.PassportIdent.PassportType)
     #~ info.append(', expires ')
-    #~ info.append(E.b(dtos(rn2date(n.ExpiryDate))))
+    #~ info.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
     #~ info.append(', delivered by ')
     #~ info += code_label(n.Issuer.PosteDiplomatique)
     #~ info.append(_(' renewal no. '))
@@ -1234,7 +1229,7 @@ class RowHandlers:
             info.chunks.append(_('no. '))
             info.chunks.append(E.b(n.CardNumber))
             info.addfrom(n,'ExpiryDate',_('expires '),DateType)
-            #~ info.chunks.append(E.b(dtos(rn2date(n.ExpiryDate))))
+            #~ info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
             info.addfrom(n,'Delivery',_('delivered in '),DeliveryType)
             #~ info.chunks.append(', delivered in ')
             #~ info += code_label(n.Delivery.Place)

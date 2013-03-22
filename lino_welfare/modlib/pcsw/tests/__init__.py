@@ -12,7 +12,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-#~ from pcsw_demo_tests import * # disabled because not currently maintained
+from pcsw_demo_tests import * # disabled because not currently maintained
 from pcsw_tests import *
 #~ from pcsw_sql_tests import * # disabled because not currently maintained
 from watchtim_tests import *

@@ -856,8 +856,8 @@ class ADR(Controller):
 
 
 controllers = dict(
-  NAT=NAT(),
-  PLZ=PLZ(),
+  #~ NAT=NAT(),
+  #~ PLZ=PLZ(),
   PAR=PAR(),
   PXS=PXS(),
   ADR=ADR(),

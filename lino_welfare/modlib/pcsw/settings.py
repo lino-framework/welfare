@@ -49,6 +49,8 @@ class Site(Site,cbss.SiteMixin):
     project_model = 'pcsw.Client'
     user_model = 'users.User'
     
+    accounts_ref_length = 5
+    
     #~ languages = ('de', 'fr', 'nl', 'en')
     languages = "de fr nl en"
     

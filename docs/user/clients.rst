@@ -339,8 +339,7 @@ In der Demo-Datenbank gibt es folgende Begleitungsdienste:
 
 .. py2rst:: 
 
-    from django.conf import settings
-    print settings.SITE.modules.pcsw.CoachingTypes.to_rst()
+    print pcsw.CoachingTypes.to_rst()
 
 
 Regeln
