@@ -488,7 +488,8 @@ def unused_test016(self):
         self.assertEqual(result['count'],case[1])
         
         
-def test017(self):
+def unused_test017(self):
+    # moved to docs/tested
     Budget = resolve_model('debts.Budget')
     bud = Budget.objects.get(pk=3)
     s = bud.BudgetSummary().to_rst()

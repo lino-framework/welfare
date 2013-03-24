@@ -12,12 +12,21 @@ New features
 
 - Einfügetexte funktionieren jetzt wieder.
 
-- Es gibt jetzt die Notion von Benutzergruppen.
+- Es gibt jetzt die Notion von :ref:`Teams`.
   Diese entsprechen (momentan) in etwa den "Diensten" (:ref:`welfare.clients.CoachingType`).
 
 - Im Kalendermodul habe ich die Team-Mitgliedschaften ersetzt 
   durch diese Benutzergruppen (diese Funktionalität wurde bisher 
   nicht benutzt, insofern hatte ich da keine Skrupel).
+  
+- Schuldnerberatung: Die Auswahlliste der Konten war schon immer 
+  nach der Kontonummer ("Referenz") sortiert, aber dieses Feld 
+  war nirgendwo sichtbar. Jetzt überall: 
+  bei der Auswahl, bei der Konfigurierung... und sogar beim Ausdruck.
+  
+  Neues Site-Setting `accounts_ref_length` steht für Lino-Welfare 
+  standardmäßig auf 5.
+  
   
 
 Optimizations

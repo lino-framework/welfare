@@ -16,7 +16,7 @@
 This module contains "quick" tests that are run on a demo database 
 without any fixture. You can run only these tests by issuing::
 
-  python manage.py test pcsw.QuickTest
+  python manage.py test lino_welfare.QuickTest
 
 """
 
@@ -108,8 +108,11 @@ def test01(self):
     t.save()
     job = Job(provider=self.job_provider,contract_type=t)
     job.save()
-    self.jobs_contract_1 = jobs_Contract(id=1,job=job,
-        user=self.user_root,client=self.max_mustermann)
+    kw = dict()
+    kw['job'] = job
+    kw['user'] = self.user_root
+    kw['client'] = self.max_mustermann
+    self.jobs_contract_1 = jobs_Contract(id=1,**kw)
     self.jobs_contract_1.full_clean()
     self.jobs_contract_1.save()
     self.assertEqual(self.jobs_contract_1.company,self.job_provider)
@@ -184,6 +187,7 @@ def test02b(self):
     that person will automatically get filled as default signer 
     for a contract with this provider.
     """
+    settings.SITE.uppercase_last_name = True
     gf = contacts_RoleType(name="Geschäftsführer",use_in_contracts=True)
     gf.full_clean() ; gf.save()
     self.hans = Person(first_name="Hans",last_name="Dampf")
@@ -200,6 +204,31 @@ def test02b(self):
     self.jobs_contract_1.save()
     
 
+def test02c(self):
+    """
+    Test whether examination calendar events are being generated,
+    """
+    dd.set_language('en')
+    msg = u'Date range overlaps with ISIP #1'
+    self.jobs_contract_1.applies_from = i2d(20120325)
+    self.jobs_contract_1.applies_until = i2d(20130325)
+    try:
+        self.jobs_contract_1.full_clean()
+        self.fail("Expected ValidationError %r" % msg)
+    except ValidationError as e:
+        self.assertEqual(e.messages[0],msg)
+        
+    msg = 'Contract ends before it started.'
+    self.jobs_contract_1.applies_from = i2d(20130325)
+    self.jobs_contract_1.applies_until = i2d(20130131)
+    try:
+        self.jobs_contract_1.full_clean()
+        self.fail("Expected ValidationError %s" % msg)
+    except ValidationError as e:
+        self.assertEqual(e.messages[0],msg)
+    
+    self.jobs_contract_1.save()
+  
     
 def test03(self):
     """

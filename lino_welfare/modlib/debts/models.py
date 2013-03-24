@@ -88,6 +88,7 @@ households = dd.resolve_app('households')
 properties = dd.resolve_app('properties')
 pcsw = dd.resolve_app('pcsw')
 
+
 from lino.mixins.printable import decfmt
 
 class PeriodsField(models.DecimalField):
@@ -329,7 +330,8 @@ The total monthly amount available for debts distribution."""))
             .order_by('ref').values_list('id',flat=True)
         missing = set(required)
         seqno = 1
-        for e in Entry.objects.filter(budget=self).order_by('seqno'):
+        #~ for e in Entry.objects.filter(budget=self).order_by('seqno'):
+        for e in Entry.objects.filter(budget=self):
             #~ if e.item.pk in required:
             missing.discard(e.account.pk)
             seqno = max(seqno,e.seqno)
