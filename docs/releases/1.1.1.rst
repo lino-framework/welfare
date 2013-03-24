@@ -2,7 +2,7 @@
 Version 1.1.1
 ==========================
 
-20130321 (Thursday, 21 March 2013)
+Release process started Thursday, 21 March 2013
 
 List of changes
 ===============
@@ -23,10 +23,33 @@ New features
 Optimizations
 -------------
 
+- Internal renames
+
 Bugfixes
 --------
 
-Manual tasks after upgrade
---------------------------
 
+Upgrading existing sites
+========================
 
+- If you have production data to migrate, you must make a full 
+  Python backup *before* the upgrade::
+  
+    $ manage.py dumpdata --format=py > fixtures/backup.py
+
+- pip install -U lino_welfare
+
+- In your local :file:`settings.py` file, change::
+
+    from lino_welfare.modlib.pcsw.settings import *
+    
+  to::
+  
+    from lino_welfare.settings import *
+
+- If you have production data to migrate, you must now 
+  reapply the previously made backup using `dbinit`::
+
+    $ manage.py initdb backup
+    
+  

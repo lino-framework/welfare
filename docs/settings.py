@@ -1,4 +1,5 @@
-from lino_welfare.modlib.pcsw.settings import *
+#~ from lino_welfare.modlib.pcsw.settings import *
+from lino_welfare.settings import *
 
 class Site(Site):
   

@@ -69,6 +69,9 @@ Topic :: Software Development :: Libraries :: Application Frameworks""".splitlin
 
 SETUP_INFO.update(packages=[
   'lino_welfare',
+  'lino_welfare.management',
+  'lino_welfare.management.commands',
+  'lino_welfare.tests',
   'lino_welfare.modlib',
   'lino_welfare.modlib.cbss',
   'lino_welfare.modlib.cbss.fixtures',
@@ -85,11 +88,19 @@ SETUP_INFO.update(packages=[
   'lino_welfare.modlib.newcomers',
   'lino_welfare.modlib.newcomers.fixtures',
   'lino_welfare.modlib.pcsw',
-  'lino_welfare.modlib.pcsw.fixtures',
-  'lino_welfare.modlib.pcsw.management',
-  'lino_welfare.modlib.pcsw.management.commands',
-  'lino_welfare.modlib.pcsw.templates',
-  'lino_welfare.modlib.pcsw.tests',
+  'lino_welfare.fixtures',
   'lino_welfare.modlib.statbel',
   'lino_welfare.modlib.statbel.fixtures',
 ])
+
+SETUP_INFO.update(message_extractors = {
+    'lino_welfare': [
+        ('**/cache/**',          'ignore', None),
+        ('**.py',                'python', None),
+        ('**.js',                'javascript', None),
+        ('**/templates_jinja/**.html', 'jinja2', None),
+        #~ ('**/templates/**.txt',  'genshi', {
+            #~ 'template_class': 'genshi.template:TextTemplate'
+        #~ })
+    ],
+})
