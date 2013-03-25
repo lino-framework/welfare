@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare Demo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare Demo 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-25 00:55\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ..\index.rst:3
+# 145d3d90931a475e911e45955a888b70
+msgid "Lino-Welfare Technical Reference"
+msgstr ""
+
+#: ..\index.rst:5
+# 1e4d3224283547ab984dea063c2f55a5
+msgid "Welcome to the *Lino-Welfare* Technical Reference."
+msgstr ""
+
+#: Lino-Welfare is a modular customized application for Belgian 
+*Public Centres for Social Welfare*. 
+It currently covers the following functions of a PCSW:
+
+- General client management
+- Integration service
+- Debt mediation
+
+It started as a part of the `Lino <http://code.google.com/p/lino/>`_
+project and forked off in August 2012 
+to become an independent project,
+possibly to be maintained by an independant organization.
+:1
+# 4c8e33b7cdea41798bcc01cf08aa525a
+msgid "Lino-Welfare is a modular customized application for Belgian  *Public Centres for Social Welfare*.  It currently covers the following functions of a PCSW:"
+msgstr ""
+
+#: Lino-Welfare is a modular customized application for Belgian 
+*Public Centres for Social Welfare*. 
+It currently covers the following functions of a PCSW:
+
+- General client management
+- Integration service
+- Debt mediation
+
+It started as a part of the `Lino <http://code.google.com/p/lino/>`_
+project and forked off in August 2012 
+to become an independent project,
+possibly to be maintained by an independant organization.
+:5
+# 700e590356e34a63ab2dd8d08958392c
+msgid "General client management"
+msgstr ""
+
+#: Lino-Welfare is a modular customized application for Belgian 
+*Public Centres for Social Welfare*. 
+It currently covers the following functions of a PCSW:
+
+- General client management
+- Integration service
+- Debt mediation
+
+It started as a part of the `Lino <http://code.google.com/p/lino/>`_
+project and forked off in August 2012 
+to become an independent project,
+possibly to be maintained by an independant organization.
+:6
+# c483d3ae566245968341f2e9b4134248
+msgid "Integration service"
+msgstr ""
+
+#: Lino-Welfare is a modular customized application for Belgian 
+*Public Centres for Social Welfare*. 
+It currently covers the following functions of a PCSW:
+
+- General client management
+- Integration service
+- Debt mediation
+
+It started as a part of the `Lino <http://code.google.com/p/lino/>`_
+project and forked off in August 2012 
+to become an independent project,
+possibly to be maintained by an independant organization.
+:7
+# 6baf6764a86f4e19aa006bc671a670aa
+msgid "Debt mediation"
+msgstr ""
+
+#: Lino-Welfare is a modular customized application for Belgian 
+*Public Centres for Social Welfare*. 
+It currently covers the following functions of a PCSW:
+
+- General client management
+- Integration service
+- Debt mediation
+
+It started as a part of the `Lino <http://code.google.com/p/lino/>`_
+project and forked off in August 2012 
+to become an independent project,
+possibly to be maintained by an independant organization.
+:9
+# 5adb8d38e0464414829ee37da3c4510a
+msgid "It started as a part of the `Lino <http://code.google.com/p/lino/>`_ project and forked off in August 2012  to become an independent project, possibly to be maintained by an independant organization."
+msgstr ""
+
+#: ..\index.rst:12
+# cb664df8cbef4e2c9e73d522e069deda
+msgid "This document tree is in English and meant for system administrators and other developers. The `user manual <http://welfare-userman.lino-framework.org/>`__ is growing in German, French and Dutch as a separate document tree."
+msgstr ""
+
+#: ..\index.rst:20
+# f0821475c40746038d6e17ba6928b56f
+msgid "Content"
+msgstr ""
+

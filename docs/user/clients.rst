@@ -184,7 +184,7 @@ und Filterparameter unterscheiden:
 N.B. 
 Das Detail, das bei Doppelklick angezeigt wird, 
 ist bei allen drei Ansichten das Gleiche. 
-Das hängt vom :ref:`welfare.users.UserProfiles` ab.
+Das hängt vom :ref:`welfare.users.UserProfile` ab.
 
 
 
@@ -444,14 +444,3 @@ Anhang
 - Workflow : Arbeitsablauf
 - Life cycle : Lebenzyklus
 - engl. "State" = Bearbeitungszustand
-
-
-
-.. _welfare.users.UserProfiles:
-
-Benutzerprofil 
---------------
-
-Standardmäßig gibt es folgende Benutzerprofile:
-
-.. py2rst:: print lino.UserProfiles.to_rst()

@@ -25,6 +25,8 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
+import decimal
+
 #~ from django.utils import unittest
 #~ from django.test.client import Client
 from django.conf import settings
@@ -54,12 +56,14 @@ cv = dd.resolve_app('cv')
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 households = dd.resolve_app('households')
+debts = dd.resolve_app('debts')
 
 #~ from lino.projects.pcsw.models import Person
 #~ from lino.modlib.cv.models import PersonProperty
 #~ from lino.modlib.properties.models import Property
 
 class QuickTest(TestCase):
+    maxDiff = None
     pass
     #~ def setUp(self):
         #~ settings.SITE.never_build_site_cache = True
@@ -436,3 +440,58 @@ def unused_test09(self):
     ar = cv.SoftSkillsByPerson.request(master_instance=obj)
     self.assertEqual(ar.get_request_url(),"")
 
+
+def test10(self):
+    """
+    Creates a Budget, fills it with some data, duplicates it, 
+    modifies the duplicate,
+    """
+    from lino_welfare.modlib.debts.fixtures.std import objects
+    for obj in objects():
+        obj.save()
+    self.assertEqual(debts.Budget.objects.count(),0)
+    b1 = debts.Budget(partner=self.max_mustermann,user=self.user_root)
+    b1.fill_defaults()
+    amount = decimal.Decimal(0)
+    for e in b1.entry_set.all():
+        e.amount = amount 
+        amount += 2
+        e.full_clean()
+        e.save()
+    for e in b1.entry_set.filter(account__ref="3010"):
+        e.duplicate()
+    b1.full_clean()
+    b1.save()
+    self.assertEqual(b1.entry_set.count(),45)
+    self.assertEqual(debts.Budget.objects.count(),1)
+    s1 = b1.BudgetSummary().to_rst()
+    print s1
+    self.assertEqual(s1,"""\
+========================================================= ===============
+ Beschreibung                                              Betrag
+--------------------------------------------------------- ---------------
+ Monatliche Einkünfte                                      42,00
+ Jährliche Einkünfte (48,00 / 12)                          4,00
+ Monatliche Ausgaben                                       -986,00
+ Monatliche Reserve für jährliche Ausgaben (836,00 / 12)   -69,67
+ **Finanzielle Situation**                                 **-1 009,67**
+========================================================= ===============
+""")
+    
+    b2 = b1.duplicate()
+    self.assertEqual(debts.Budget.objects.count(),2)
+    #~ b2 = debts.Budget.objects.get(pk=res.get('goto_record_id'))
+    s2 = b2.BudgetSummary().to_rst()
+    self.assertEqual(s1,s2)
+    for e in b2.entry_set.all():
+        if e.amount:
+            e.amount = e.amount + 2
+            e.full_clean()
+            e.save()
+        
+    s1 = b1.BudgetSummary().to_rst()
+    s2 = b2.BudgetSummary().to_rst()
+    self.assertNotEqual(s1,s2)
+        
+    
+    

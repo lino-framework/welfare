@@ -1,0 +1,288 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare Demo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare Demo 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-25 00:55\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ..\admin\index.rst:3
+# 39905f7cec814a4288f581b40691740f
+msgid "Site Administrator's manual"
+msgstr ""
+
+#: ..\admin\install.rst:2
+# f71ebabbcec544d780b36a02ce86a9b6
+msgid "Installing Lino-Welfare"
+msgstr ""
+
+#: ..\admin\install.rst:4
+# 542ffd1c61894646917ea99eb63d4019
+msgid "First, install Lino (the tramework) as documented in `Quick Start <http://lino-framework.org/tutorials/quickstart.html>`_"
+msgstr ""
+
+#: ..\admin\install.rst:7
+# 387e58e09f8d49e9be685269d38dd027
+msgid "Go to your `hgwork` directory and download a copy of the Lino/Welfare repository::"
+msgstr ""
+
+#: ..\admin\install.rst:13
+# d9945a4f501d48c5ace4c5b71a4a0d54
+msgid "Use pip to install this as editable package::"
+msgstr ""
+
+#: ..\admin\install.rst:17
+# d594a98953a64d399519624a9dbd56d7
+msgid "To test whether this worked, you can issue the command::"
+msgstr ""
+
+#: ..\admin\install.rst:21
+# 11631f864bd04afb9d3991a4fc98a24d
+msgid "In your project's `settings.py`, make sure that you inherit from the right `settings` module::"
+msgstr ""
+
+#: ..\admin\testlauf.rst:2
+# 59c15af101b4430d95d427627aea5df4
+msgid "Manueller Testlauf"
+msgstr ""
+
+#: ..\admin\testlauf.rst:5
+# 9ea86d6940ab42bc8c31d83b8582a5e8
+msgid "Logdatei anzeigen"
+msgstr ""
+
+#: ..\admin\testlauf.rst:7
+# bf8402f1ba85416684bea329ac220df8
+msgid "Um die system.log anzuzeigen, ein ssh-terminal auf lino öffnen und::"
+msgstr ""
+
+#: ..\admin\testlauf.rst:13
+# dba7816c7191404db1248242c775486e
+msgid "Navigation im Detail-Fenster"
+msgstr ""
+
+#: ..\admin\testlauf.rst:16
+# 247e235c986541639ee035d7e7af5919
+msgid "Anmelden als Administrator"
+msgstr ""
+
+#: ..\admin\testlauf.rst:17
+# bdc1fc7771d844baa601e11c60f828fe
+msgid ":menuselection:`Kontakte --> Klienten`."
+msgstr ""
+
+#: ..\admin\testlauf.rst:18
+# 08c3f10ee9f04ca7ba19ac75ef582d74
+msgid "Doppelklick auf einem Klienten der Liste, der nicht importiert ist."
+msgstr ""
+
+#: ..\admin\testlauf.rst:20
+# 08e76f8f3d574138a611bbdb0ba3ce90
+msgid "Beachte oben rechts die *message area* des Navigators: dort steht etwas im Stil \"Record 4 von 57\"."
+msgstr ""
+
+#: ..\admin\testlauf.rst:23
+# a66afefe5b064b2889a037d77cb1fb06
+msgid "Im Reiter \"Sonstiges\" das Feld \"veraltet\" einschalten."
+msgstr ""
+
+#: ..\admin\testlauf.rst:25
+# e48181cbe27c4bef96b689f501d0aad3
+msgid "Sich den Namen des Klienten merken und dann Speichern. Nach dem Speichern prüfen:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:28
+# 3833d7fcd43a4ac4bfb4d9fead36de3c
+msgid "ist der Klient noch der Gleiche?"
+msgstr ""
+
+#: ..\admin\testlauf.rst:29
+# 6a0e8ff24a884b6f835ec3caf41cd2e2
+msgid "wurden alle vier Navigationsbuttons deaktiviert?"
+msgstr ""
+
+#: ..\admin\testlauf.rst:30
+# b6ec0f6f2f0b482e885569f6cbff218b
+msgid "steht die message area des Navigators auf \"No navigation\"?"
+msgstr ""
+
+#: ..\admin\testlauf.rst:34
+# 955174b29e51492f8951a319a4871767
+msgid "Speichern"
+msgstr ""
+
+#: ..\admin\testlauf.rst:36
+# c5bf2a03caea455297d156623043d393
+msgid ":menuselection:`Kontakte --> Partner (alle)`."
+msgstr ""
+
+#: ..\admin\testlauf.rst:38
+# 62f0870c32d9462a9130e086083bf532
+msgid "Doppelklick auf dem ersten Partner der Liste"
+msgstr ""
+
+#: ..\admin\testlauf.rst:40
+# 55ee501b9eb04e358e14397a8c25443c
+msgid "Im Navigator ist der Button \"Vorige Seite\" deaktiviert, die anderen drei Buttons nicht"
+msgstr ""
+
+#: ..\admin\testlauf.rst:42
+# 0c182830d1c942b9be4b3233cb753c91
+msgid "Auf einem *aus TIM importierten* Partner:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:44
+# 85e6c6646f7e4b38b3a2a47396a036e3
+msgid "Ohne vorher was zu ändern den Speichern-Button klicken. Dadurch sollte sich nichts verändern und es dürfte keine Änderung im Änderungslog erscheinen."
+msgstr ""
+
+#: ..\admin\testlauf.rst:50
+# cd960ecdba264d1fa66197818a15e90d
+msgid "Auf einem Partner, der nicht importiert ist:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:52
+# 96d505a45abb4cb8bcc0a17f2723d5e9
+msgid "Checkbox \"veraltet\" ankreuzen, Speichern. Bleibt sie angeschaltet?"
+msgstr ""
+
+#: ..\admin\testlauf.rst:53
+# f3ba7027d2454ea9b100bcf6f59f31e2
+msgid "Wieder ausschalten und wieder speichern. Bleibt sie ausgeschaltet?"
+msgstr ""
+
+#: ..\admin\testlauf.rst:57
+# 91ae0f239279475bb129a7db681650e0
+msgid "Sprachkenntnisse"
+msgstr ""
+
+#: ..\admin\testlauf.rst:59
+# da6324d62f0848d7950bc4043ba320a3
+msgid "Im Reiter \"Sprachen\" eine neue Sprache in \"Sprachkenntnisse\" eingeben. Die Änderung wird gleich nach Verlassen der Zelle in der :xfile:`system.log` erscheinen. Dann den Speichern-Button der Person klicken. Dabei sollte nichts passieren und es dürfte *keine Änderung* in der :xfile:`system.log` erscheinen. :blogref:`20110406`"
+msgstr ""
+
+#: ..\admin\testlauf.rst:68
+# 653f1ba12a394a138b4a2d579251983e
+msgid "Polymorphie"
+msgstr ""
+
+#: ..\admin\testlauf.rst:70
+# 3c21c92e9ebd492c9ec98a6f9e22b300
+msgid "Detail einer Organisation aufrufen, die *kein Kursanbieter* ist."
+msgstr ""
+
+#: ..\admin\testlauf.rst:72
+# 962ffa9094574d6196ccc634284a3b26
+msgid "Ohne vorher was zu ändern den Speichern-Button klicken. Dabei sollte nichts passieren und es dürfte *keine Änderung* in der system.log erscheinen. :blogref:`20110406`"
+msgstr ""
+
+#: ..\admin\testlauf.rst:76
+# a19fc81ae62344c2b9411711a138f184
+msgid "Checkbox \"Kursanbieter\" einschalten und speichern. Die Checkbox sollte angeschaltet bleiben."
+msgstr ""
+
+#: ..\admin\testlauf.rst:79
+# 46b087fdbc5a49248c773e5c316f11fe
+msgid "In einem zweiten Browserfenster :menuselection:`Kurse-->Kursanbieter` aufrufen: die Firma sollte dort nun sichtbar sein."
+msgstr ""
+
+#: ..\admin\testlauf.rst:82
+# 4a56aea9461e49c48942f254cd1283c8
+msgid "Checkbox \"Kursanbieter\" wieder ausschalten und speichern. Die Checkbox sollte ausgeschaltet bleiben."
+msgstr ""
+
+#: ..\admin\testlauf.rst:85
+# ff01839196954df6b21984fab915bf48
+msgid "Im zweiten Browserfenster auf \"Refresh\" klicken : Firma sollte aus der Liste verschwunden sein."
+msgstr ""
+
+#: ..\admin\testlauf.rst:88
+# 9e54a5c705a64c4db185cd575169cc4f
+msgid ":blogref:`20110406`"
+msgstr ""
+
+#: ..\admin\testlauf.rst:91
+# 0fe22c34cbf742b597bafc9f69eae089
+msgid "Einfügetexte"
+msgstr ""
+
+#: ..\admin\testlauf.rst:93
+# 888254dffd2a49b290e683660faa5bc0
+msgid "Notiz erstellen. Im Inhalt ein bisschen eintippen, einige Einfügetexte einfügen, speichern, drucken. Nach den Drucken sind die meisten Felder schreibgeschützt (blau). Auf :guilabel:`Cache löschen` klicken (Felder werden wieder bearbeitbar). Eine kleine Änderung im Inhalt machen, speichern, drucken. Prüfen, ob Änderung auch im Ausdruck sichtbar ist."
+msgstr ""
+
+#: ..\admin\testlauf.rst:100
+# cb40538a73f746a88c176efebd9ef640
+msgid "Eine weitere Notiz erstellen. Folgenden Textabschnitt (Quelle: Wikipedia) kopieren und einfügen:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:103
+# f00f4f6163bf43ea8b2ca51235ea0d6a
+msgid "**Interpunktionsregeln bei Aufzählungen**"
+msgstr ""
+
+#: ..\admin\testlauf.rst:105
+# dbdbdb99a2844b379967ed8838ade2ee
+msgid "Grundsätzlich werden aus Sicht der Interpunktionsregeln Aufzählungszeichen so behandelt, als seien sie nicht vorhanden. Das heißt, dass Interpunktion so gesetzt werden muss, als gäbe es keine typografische Gliederung."
+msgstr ""
+
+#: ..\admin\testlauf.rst:107
+# 3bc2df390e634c9d87063c3fc98da162
+msgid "Beispiel:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:109
+# e8a6a0551fd846c3ab47ca299060c491
+msgid "Der Mann erblickte ein gelbes Auto, einen schwarzen Hund, eine grüne Handtasche und ein braunes Pferd in seiner Küche."
+msgstr ""
+
+#: ..\admin\testlauf.rst:111
+# 2d6638620194443486fc39f83d9cd078
+msgid "Dieser Satz wird zu folgendem:"
+msgstr ""
+
+#: ..\admin\testlauf.rst:113
+# 8cbb878215534d659f1f9eb226f69b9a
+msgid "Der Mann erblickte"
+msgstr ""
+
+#: ..\admin\testlauf.rst:115
+# 4094fcc95def49528113581efb85ba66
+msgid "ein gelbes Auto,"
+msgstr ""
+
+#: ..\admin\testlauf.rst:116
+# dba5ba0c4e0a4dee8b8695a778002cce
+msgid "einen schwarzen Hund,"
+msgstr ""
+
+#: ..\admin\testlauf.rst:117
+# 2b19cab32b8e432a99b80f106b41f1ee
+msgid "eine grüne Handtasche"
+msgstr ""
+
+#: ..\admin\testlauf.rst:118
+# 9eb6c97c631d4d89a9a2cf748b0eef78
+msgid "und ein braunes Pferd"
+msgstr ""
+
+#: ..\admin\testlauf.rst:120
+# 2166c63dd81943b39439ff453e88037d
+msgid "in seiner Küche."
+msgstr ""
+
+#: ..\admin\testlauf.rst:122
+# a808684491804010ba055ff7d5a3e10f
+msgid "Speichern & drucken."
+msgstr ""
+

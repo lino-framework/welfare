@@ -7,6 +7,8 @@ env.django_databases.append('docs')
 
 #~ env.django_admin_tests.append('tutorials.fixtures1.settings')
 
-env.docs_doctests.append('tested/index.rst')
+# run only these with `fab t4`
+env.docs_doctests.append('tested/misc.rst')
+env.docs_doctests.append('tested/debts.rst')
 
-env.languages = 'en fr nl de'.split()
+env.languages = 'fr nl de'.split()

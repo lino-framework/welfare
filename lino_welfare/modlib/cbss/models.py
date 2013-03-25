@@ -237,7 +237,7 @@ class unused_ExecuteRequest(dd.RowAction):
             #~ return False
         #~ return super(ExecuteRequest,self).get_row_permission(user,obj)
       
-    def run(self,obj,ar,**kw):
+    def run_from_ui(self,obj,ar,**kw):
         obj.execute_request(ar)
         if obj.status == RequestStates.failed:
             kw.update(message=obj.debug_messages)

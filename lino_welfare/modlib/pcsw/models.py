@@ -504,15 +504,15 @@ class RefuseClient(dd.ChangeStateAction):
         #~ return kw
     
     
-    def unused_run(self,obj,ar,**kw):
+    def unused_run_from_ui(self,obj,ar,**kw):
         obj.refusal_reason = ar.action_param_values.reason
-        kw = super(RefuseClient,self).run(obj,ar,**kw)
+        kw = super(RefuseClient,self).run_from_ui(obj,ar,**kw)
         #~ obj.save()
         #~ kw.update(refresh=True)
         return kw
     
         
-    def run(self,obj,ar,**kw):
+    def run_from_ui(self,obj,ar,**kw):
         assert isinstance(obj,Client)
         obj.refusal_reason = ar.action_param_values.reason
         subject = _("%(client)s has been refused.") % dict(client=obj)
@@ -521,7 +521,7 @@ class RefuseClient(dd.ChangeStateAction):
             body += '\n' + ar.action_param_values.remark
         kw.update(message=subject)
         kw.update(alert=_("Success"))
-        kw = super(RefuseClient,self).run(obj,ar,**kw)
+        kw = super(RefuseClient,self).run_from_ui(obj,ar,**kw)
         #~ self.add_system_note(ar,obj)
         silent = False
         ar.add_system_note(
@@ -644,10 +644,10 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
     sorry_msg = _("Sorry, I cannot handle that case: %s")
     required = dd.required(user_level='admin')
   
-    def run(self,row,ar,**kw):
+    def run_from_ui(self,row,ar,**kw):
         data = ar.request.POST
         attrs = card2client(data)
-        logger.info("20130103 BeIdReadCardAction.run() : %s -> %s",data,attrs)
+        logger.info("20130103 BeIdReadCardAction.run_from_ui() : %s -> %s",data,attrs)
         #~ print 20121117, attrs
         #~ ssin = data['nationalNumber']
         #~ ssin = attrs['national_id']

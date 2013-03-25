@@ -514,7 +514,7 @@ nicht mehr angezeigt."""
         return super(AssignCoach,self).get_action_permission(ar,obj,state)
         #~ return super(AssignCoach,self).get_row_permission(ar,state,ba)
         
-    def run(self,obj,ar,**kw):
+    def run_from_ui(self,obj,ar,**kw):
         """
         Assign a coach to a newcomer.
         """
@@ -612,7 +612,7 @@ class AvailableCoachesByClient(AvailableCoaches):
                 #~ r = outbox.Recipient(mail=m,**rec)
                 #~ r.full_clean()
                 #~ r.save()
-            #~ m.send_mail.run(m,ar)
+            #~ m.send_mail.run_from_ui(m,ar)
             #~ interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
             #~ if interactive:
                 #~ js = ar.renderer.instance_handler(ar,m)

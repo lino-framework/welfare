@@ -32,7 +32,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
+from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode 
 
 #~ import lino
@@ -1332,7 +1332,7 @@ class NewJobsOverview(Jobs):
     @dd.displayfield(_("Job"))
     def job_desc(self,obj,ar):
         chunks = [ar.obj2html(obj,unicode(obj.function))]
-        chunks.append(pgettext_lazy("(place)"," at "))
+        chunks.append(pgettext("(place)"," at "))
         chunks.append(ar.obj2html(obj.provider))
         chunks.append(' (%d)' % obj.capacity)
         if obj.remark:
@@ -1340,7 +1340,7 @@ class NewJobsOverview(Jobs):
             chunks.append(E.i(obj.remark))
         return E.p(*chunks)
         
-    @dd.displayfield(_("Working"))
+    @dd.displayfield(pgettext("jobs","Working"))
     def working(self,obj,ar):
         return obj._working
         

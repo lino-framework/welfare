@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012 Luc Saffre
+## Copyright 2012-2013 Luc Saffre
 ## This file is part of the Lino project.
 ## Lino is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
@@ -60,6 +60,8 @@ def objects():
     DEBT_AMOUNTS = Cycler([(i+1)*300 for i in range(5)])
     PARTNERS = Cycler(Company.objects.all())
     LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liabilities))
+    EXPENSE_REMARKS = Cycler(_("Shopping"),_("Party"),_("Seminar"))
+    
     for b in Budget.objects.all():
         #~ n = min(3,b.actor_set.count())
         for e in b.entry_set.all():
@@ -68,6 +70,7 @@ def objects():
                 amount = INCOME_AMOUNTS.pop()
             elif e.account.type == AccountTypes.expenses:
                 amount = EXPENSE_AMOUNTS.pop()
+                e.remark = EXPENSE_REMARKS.pop()
             if e.account.required_for_household:
                 e.amount = n2dec(amount)
             if e.account.required_for_person:
@@ -88,5 +91,11 @@ def objects():
             else:
                 kw.update(monthly_rate=n2dec(amount/20))
             yield Entry(**kw)
+            
+            
+    for e in Entry.objects.filter(account__ref='3030'):
+        new = e.duplicate()
+        new.remark = EXPENSE_REMARKS.pop()
+        yield new
     
     

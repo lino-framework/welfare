@@ -12,7 +12,7 @@ New features
 
 - Einfügetexte funktionieren jetzt wieder.
 
-- Es gibt jetzt die Notion von :ref:`Teams`.
+- Es gibt jetzt die Notion von :ref:`welfare.users.Teams`.
   Diese entsprechen (momentan) in etwa den "Diensten" (:ref:`welfare.clients.CoachingType`).
 
 - Im Kalendermodul habe ich die Team-Mitgliedschaften ersetzt 

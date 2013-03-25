@@ -11,12 +11,13 @@ syntax: glob
 *.zip
 *.dtl.py
 *.js.py
+*.doctrees
 dist
 tmp
 */SciTE.session
 */test.db
 */default.db
-docs/media/cache
+docs/media
 docs/api
 
 lino_welfare/demo/media

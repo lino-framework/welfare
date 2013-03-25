@@ -5,9 +5,8 @@ User manual
 
 .. warning:: This is experimental.
 
-This is an alternative to the German/French/Dutch 
+This is the new implementation of the German/French/Dutch 
 `user manual <http://welfare-userman.lino-framework.org/>`__.
-It is only in English.
 
 
 .. toctree::
@@ -17,3 +16,6 @@ It is only in English.
    jobs
    debts
    accounts
+   users
+   cal
+   countries

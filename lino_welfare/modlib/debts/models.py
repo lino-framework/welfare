@@ -159,14 +159,19 @@ class Budget(mixins.AutoUser,mixins.CachedPrintable,mixins.Duplicable):
     #~ closed = models.BooleanField(verbose_name=_("Closed"))
     print_todos = models.BooleanField(
         verbose_name=_("Print to-do list"),
-        help_text="""\
+        help_text=_("""\
 Einträge im Feld "To-do" werden nur ausgedruckt, 
 wenn die Option "To-dos drucken" des Budgets angekreuzt ist. 
 Diese Option wird aber momentan noch ignoriert 
 (d.h. To-do-Liste wird gar nicht ausgedruckt), 
 weil wir noch überlegen müssen, *wie* sie ausgedruckt werden sollen. 
-Vielleicht mit Fußnoten?
-""")
+Vielleicht mit Fußnoten?"""))
+    print_empty_rows = models.BooleanField(
+        verbose_name=_("Print empty rows"),
+        help_text=_("""Check this to print also empty rows for later completion."""))
+    ignore_yearly_incomes = models.BooleanField(
+        verbose_name=_("Ignore yearly incomes"),
+        help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.BudgetSummary`."""))
     intro = dd.RichTextField(_("Introduction"),format="html",blank=True)
     conclusion = dd.RichTextField(_("Conclusion"),format="html",blank=True)
     dist_amount = dd.PriceField(_("Distributable amount"),default=120,
@@ -317,7 +322,7 @@ The total monthly amount available for debts distribution."""))
         self.fill_defaults(ar)
         return kw
         
-    def fill_defaults(self,ar):
+    def fill_defaults(self,ar=None):
         #~ if self.closed:
         if not self.partner or self.build_time:
             return
@@ -428,7 +433,7 @@ class BudgetDetail(dd.FormLayout):
     summary1 = """
     conclusion:30x5 
     dist_amount build_time
-    print_todos 
+    ignore_yearly_incomes print_empty_rows print_todos
     """
     
     #~ ExpensesSummaryByBudget IncomesSummaryByBudget 
@@ -464,8 +469,6 @@ class Budgets(dd.Table):
 
 
 class MyBudgets(Budgets,mixins.ByUser):
-    """
-    """
     pass
     
 class BudgetsByPartner(Budgets):
@@ -615,7 +618,7 @@ Beschreibung wird automatisch mit der Kontobezeichung
 ausgefüllt. Kann man aber manuell ändern. 
 Wenn man das Konto ändert, gehen manuelle Änderungen in diesem Feld verloren.
 Beim Ausdruck steht in Kolonne "Beschreibung"
-lediglich der Inhalt dieses Feld sowie 
+lediglich der Inhalt dieses Feldes, der eventuellen Bemerkung sowie 
 (falls angegeben bei Schulden) der Partner.""")
     periods = PeriodsField(_("Periods"),
         help_text=u"""\
@@ -820,11 +823,12 @@ class PrintEntriesByBudget(dd.VirtualTable):
         
     
     class Row:
-        has_data = False
         def __init__(self,e):
+            self.has_data = e.budget.print_empty_rows
             self.description = e.description
             self.periods = e.periods
             self.partner = e.partner
+            self.remarks = []
             self.account = e.account
             #~ self.todos = [''] * len(e.budget.get_actors())
             self.todo = ''
@@ -850,6 +854,8 @@ class PrintEntriesByBudget(dd.VirtualTable):
                 self.has_data = True
                 self.amounts[i] += amount
                 self.total += amount
+            if e.remark:
+                self.remarks.append(e.remark)
             if self.todo:
                 self.todo += ', '
             self.todo += e.todo
@@ -886,9 +892,14 @@ class PrintEntriesByBudget(dd.VirtualTable):
         
     @dd.displayfield(_("Description"))
     def description(self,obj,ar):
+        desc = obj.description
+        if len(obj.remarks) > 0:
+            desc += '; ' + ', '.join(obj.remarks)
         if obj.periods != 1:
-            return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
-        return obj.description
+            desc += " (%s / %s)" % (obj.total,obj.periods)
+        return desc
+            #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
+        #~ return obj.description
         
     #~ @dd.displayfield(_("Partner"))
     @dd.virtualfield(models.ForeignKey('contacts.Partner'))
@@ -971,9 +982,6 @@ def entries_table_for_group(group):
     
     
 class BudgetSummary(dd.VirtualTable):
-    """
-    A virtual table showing a list of summary numbers for this budget.
-    """
     required=dict(user_groups = ['debts'])
     auto_fit_column_widths = True
     master = Budget
@@ -987,12 +995,13 @@ class BudgetSummary(dd.VirtualTable):
         if budget is None: 
             return
         yield ["Monatliche Einkünfte", budget.sum('amount','I',periods=1)]
-        yi = budget.sum('amount','I',periods=12)
-        if yi:
-            yield [
-              ("Jährliche Einkünfte (%s / 12)" 
-                % decfmt(yi*12,places=2)), 
-              yi]
+        if not budget.ignore_yearly_incomes:
+            yi = budget.sum('amount','I',periods=12)
+            if yi:
+                yield [
+                  ("Jährliche Einkünfte (%s / 12)" 
+                    % decfmt(yi*12,places=2)), 
+                  yi]
               
         a = budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
         if a:
