@@ -3,7 +3,7 @@ from lino_welfare.settings import *
 
 class Site(Site):
   
-    title = "Lino-Welfare Demo"
+    title = "Lino-Welfare"
   
     #~ languages = ['en']
     languages = 'de fr nl'

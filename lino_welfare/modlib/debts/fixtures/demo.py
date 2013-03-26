@@ -60,7 +60,7 @@ def objects():
     DEBT_AMOUNTS = Cycler([(i+1)*300 for i in range(5)])
     PARTNERS = Cycler(Company.objects.all())
     LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liabilities))
-    EXPENSE_REMARKS = Cycler(_("Shopping"),_("Party"),_("Seminar"))
+    EXPENSE_REMARKS = Cycler(_("Shopping"),_("Cinema"),_("Seminar"))
     
     for b in Budget.objects.all():
         #~ n = min(3,b.actor_set.count())
@@ -70,7 +70,8 @@ def objects():
                 amount = INCOME_AMOUNTS.pop()
             elif e.account.type == AccountTypes.expenses:
                 amount = EXPENSE_AMOUNTS.pop()
-                e.remark = EXPENSE_REMARKS.pop()
+                if e.account.ref in ('3030','3071'):
+                    e.remark = EXPENSE_REMARKS.pop()
             if e.account.required_for_household:
                 e.amount = n2dec(amount)
             if e.account.required_for_person:

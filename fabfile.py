@@ -2,6 +2,7 @@ from djangosite.utils.fablib import *
 setup_from_project('lino_welfare')
 
 env.django_databases.append('docs')
+env.django_databases.append('userdocs')
 
 #~ env.django_doctests.append('tutorials.fixtures1.settings')
 

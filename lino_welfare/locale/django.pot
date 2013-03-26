@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-03-25 17:23+0100\n"
+"POT-Creation-Date: 2013-03-26 07:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1193,15 +1193,15 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:363
+#: lino_welfare/modlib/debts/models.py:360
 msgid "Mr."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:366
+#: lino_welfare/modlib/debts/models.py:363
 msgid "Mrs."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:385
+#: lino_welfare/modlib/debts/models.py:382
 msgid "Preview"
 msgstr ""
 
@@ -1334,15 +1334,15 @@ msgstr ""
 msgid "Default amount"
 msgstr ""
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
 msgid "Shopping"
 msgstr ""
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
-msgid "Party"
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
+msgid "Cinema"
 msgstr ""
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
 msgid "Seminar"
 msgstr ""
 

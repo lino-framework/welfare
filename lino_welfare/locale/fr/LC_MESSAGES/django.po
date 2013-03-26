@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-25 17:23+0100\n"
+"POT-Creation-Date: 2013-03-26 07:41+0100\n"
 "PO-Revision-Date: 2012-12-11 19:09+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -1201,15 +1201,15 @@ msgstr "Commun"
 msgid "Amount"
 msgstr "Montant"
 
-#: lino_welfare/modlib/debts/models.py:363
+#: lino_welfare/modlib/debts/models.py:360
 msgid "Mr."
 msgstr "Monsieur"
 
-#: lino_welfare/modlib/debts/models.py:366
+#: lino_welfare/modlib/debts/models.py:363
 msgid "Mrs."
 msgstr "Madame"
 
-#: lino_welfare/modlib/debts/models.py:385
+#: lino_welfare/modlib/debts/models.py:382
 msgid "Preview"
 msgstr "Prévisualisation"
 
@@ -1343,16 +1343,15 @@ msgstr "obligatoire pour personnes"
 msgid "Default amount"
 msgstr "Montant à répartir"
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
 msgid "Shopping"
 msgstr ""
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
-#, fuzzy
-msgid "Party"
-msgstr "Capacité"
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
+msgid "Cinema"
+msgstr ""
 
-#: lino_welfare/modlib/debts/fixtures/demo.py:92
+#: lino_welfare/modlib/debts/fixtures/demo.py:63
 #, fuzzy
 msgid "Seminar"
 msgstr "Remarque"
@@ -2653,6 +2652,6 @@ msgstr "Intégration"
 msgid "INS code"
 msgstr "Depuis"
 
-#~ msgid "Working"
-#~ msgstr ""
+#~ msgid "Party"
+#~ msgstr "Capacité"
 

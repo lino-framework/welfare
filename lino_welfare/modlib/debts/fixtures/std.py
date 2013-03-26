@@ -12,6 +12,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+
+
 import decimal
 from dateutil.relativedelta import relativedelta
 ONE_DAY = relativedelta(days=1)
@@ -322,30 +325,30 @@ def objects():
     
     
     g = group(ref="70",account_type=AccountTypes.liabilities,**babel_values('name',
-          de=u"Guthaben, Schulden, Verbindlichkeit",
-          fr=u"Créances et dettes",
-          en=u"Liabilities"
+          de="Guthaben, Schulden, Verbindlichkeit",
+          fr="Créances et dettes",
+          en="Liabilities"
           ))
     yield g
     account = Instantiator('accounts.Account',group=g).build
     yield account(ref="7010",**babel_values('name',
-          de=u"Kredite",
-          fr=u"Crédits",
-          en=u"Loans"
+          de="Kredite",
+          fr="Crédits",
+          en="Loans"
           ))
     yield account(ref="7020",**babel_values('name',
-          de=u"Schulden",
-          fr=u"Emprunts",
-          en=u"Debts"
+          de="Schulden",
+          fr="Emprunts",
+          en="Debts"
           ))
     yield account(ref="7030",**babel_values('name',
-          de=u"Gerichtsvollzieher",
-          fr=u"Huissier de justice",
-          en=u"Bailiff"
+          de="Gerichtsvollzieher",
+          fr="Huissier de justice",
+          en="Bailiff"
           ))
     yield account(ref="7040",**babel_values('name',
-          de=u"Zahlungsrückstände",
-          fr=u"Factures à payer",
-          en=u"Invoices to pay"
+          de="Zahlungsrückstände",
+          fr="Factures à payer",
+          en="Invoices to pay"
           ))
 

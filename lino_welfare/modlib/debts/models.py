@@ -171,7 +171,7 @@ Vielleicht mit Fußnoten?"""))
         help_text=_("""Check this to print also empty rows for later completion."""))
     ignore_yearly_incomes = models.BooleanField(
         verbose_name=_("Ignore yearly incomes"),
-        help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.BudgetSummary`."""))
+        help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.DebtsByBudget`."""))
     intro = dd.RichTextField(_("Introduction"),format="html",blank=True)
     conclusion = dd.RichTextField(_("Conclusion"),format="html",blank=True)
     dist_amount = dd.PriceField(_("Distributable amount"),default=120,
@@ -331,26 +331,23 @@ The total monthly amount available for debts distribution."""))
         self.save()
         flt = models.Q(required_for_household=True)
         flt = flt | models.Q(required_for_person=True)
-        required = accounts.Account.objects.filter(flt)\
-            .order_by('ref').values_list('id',flat=True)
-        missing = set(required)
-        seqno = 1
-        #~ for e in Entry.objects.filter(budget=self).order_by('seqno'):
-        for e in Entry.objects.filter(budget=self):
-            #~ if e.item.pk in required:
-            missing.discard(e.account.pk)
-            seqno = max(seqno,e.seqno)
-        #~ print 20120411, required, missing
-        for pk in required:
-            if pk in missing:
-                seqno += 1
-                e = Entry(account_id=pk,budget=self,seqno=seqno)
-                e.periods = e.account.periods
-                if e.account.default_amount:
-                    e.amount = e.account.default_amount
-                e.full_clean()
-                e.save()
-                #~ print e
+        #~ required =  # .values_list('id',flat=True)
+        #~ missing = set(required)
+        seqno = 0
+        #~ for e in Entry.objects.filter(budget=self):
+            #~ missing.discard(e.account.pk)
+            #~ seqno = max(seqno,e.seqno)
+        for acc in accounts.Account.objects.filter(flt).order_by('ref'):
+            #~ if pk in missing:
+            seqno += 1
+            e = Entry(account=acc,budget=self,seqno=seqno)
+            e.account_changed(ar)
+            e.periods = e.account.periods
+            if e.account.default_amount:
+                e.amount = e.account.default_amount
+            e.full_clean()
+            e.save()
+            #~ print e
         if self.actor_set.all().count() == 0:
             household = self.partner.get_mti_child('household')
             if household:
@@ -371,19 +368,22 @@ The total monthly amount available for debts distribution."""))
                     a.full_clean()
                     a.save()
             
-    def BudgetSummary(self,ar=None):
-        if ar is None:
-            return BudgetSummary.request(master_instance=self,title=BudgetSummary.label)
-        return ar.spawn(BudgetSummary,master_instance=self,
-            title=BudgetSummary.label)
+    #~ def BudgetSummary(self,ar=None):
+        #~ if ar is None:
+            #~ return BudgetSummary.request(master_instance=self,title=BudgetSummary.label)
+        #~ return ar.spawn(BudgetSummary,master_instance=self,
+            #~ title=BudgetSummary.label)
         
-    def DistByBudget(self,ar):
-        return ar.spawn(DistByBudget,master_instance=self,
-            title=DistByBudget.label)
+    #~ def DistByBudget(self,ar):
+        #~ return ar.spawn(DistByBudget,master_instance=self,
+            #~ title=DistByBudget.label)
         
         
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
     def preview(self,ar):
+        #~ raise Exception(20130325)
+        #~ if ar is None:
+            #~ ar = Budgets.request(username="rolf")
         chunks = []
         def render(sar):
             chunks.append(E.h2(unicode(sar.get_title())))
@@ -391,7 +391,9 @@ The total monthly amount available for debts distribution."""))
             
         for grp in self.account_groups():
             render(self.entries_by_group(ar,grp))
-        render(self.BudgetSummary(ar))
+        #~ render(self.BudgetSummary(ar))
+        render(self.ResultByBudget(ar))
+        render(self.DebtsByBudget(ar))
         render(self.DistByBudget(ar))
         return E.div(*chunks)
         
@@ -426,11 +428,15 @@ class BudgetDetail(dd.FormLayout):
     
     
     summary_tab = dd.Panel("""
-    BudgetSummary:30x5 summary1
+    summary1:30 summary2:40
     DistByBudget
     """,label = pgettext_lazy(u"debts",u"Summary"))
     
     summary1 = """
+    ResultByBudget
+    DebtsByBudget
+    """
+    summary2 = """
     conclusion:30x5 
     dist_amount build_time
     ignore_yearly_incomes print_empty_rows print_todos
@@ -667,7 +673,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     def account_changed(self,ar):
         if self.account_id:
             self.periods = self.account.periods
-            self.description = unicode(self.account)
+            self.description = dd.babelattr(self.account,'name')
 
     def full_clean(self,*args,**kw):
         if self.periods <= 0:
@@ -894,7 +900,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
     def description(self,obj,ar):
         desc = obj.description
         if len(obj.remarks) > 0:
-            desc += '; ' + ', '.join(obj.remarks)
+            desc += ' (%s)' % ', '.join(obj.remarks)
         if obj.periods != 1:
             desc += " (%s / %s)" % (obj.total,obj.periods)
         return desc
@@ -981,16 +987,42 @@ def entries_table_for_group(group):
     
     
     
-class BudgetSummary(dd.VirtualTable):
-    required=dict(user_groups = ['debts'])
+class SummaryTable(dd.VirtualTable):
     auto_fit_column_widths = True
-    master = Budget
     column_names = "desc amount"
-    label = _("Overview")
     slave_grid_format = 'html'
     
+    @dd.displayfield(_("Description"))
+    def desc(self,row,ar):
+        return row[0]
+        
+    @dd.virtualfield(dd.PriceField(_("Amount")))
+    def amount(self,row,ar):
+        return row[1]
+
+    @classmethod
+    def get_sum_text(self,ar):
+        """
+        Return the text to display on the totals row.
+        """
+        return self.label
+        
     @classmethod
     def get_data_rows(self,ar):
+        for row in self.get_summary_numbers(ar):
+            if row[1]: # don't show summary rows with value 0
+                yield row
+        
+    
+  
+#~ class BudgetSummary(SummaryTable):
+class ResultByBudget(SummaryTable):
+    label = _("Incomes & Expenses")
+    required=dict(user_groups = ['debts'])
+    master = Budget
+    
+    @classmethod
+    def get_summary_numbers(self,ar):
         budget = ar.master_instance
         if budget is None: 
             return
@@ -1004,13 +1036,12 @@ class BudgetSummary(dd.VirtualTable):
                   yi]
               
         a = budget.sum('amount','I',exclude=dict(periods__in=(1,12)))
-        if a:
-            yield ["Einkünfte mit sonstiger Periodizität", a]
+        yield ["Einkünfte mit sonstiger Periodizität", a]
             
         yield ["Monatliche Ausgaben", -budget.sum('amount','E',periods=1)]
-        a = budget.sum('amount','E',exclude=dict(periods__in=(1,12)))
-        if a:
-            yield ["Ausgaben mit sonstiger Periodizität", -a]
+        yield ["Ausgaben mit sonstiger Periodizität", 
+            -budget.sum('amount','E',exclude=dict(periods__in=(1,12)))]
+        
         ye = budget.sum('amount','E',periods=12)
         if ye:
             yield [
@@ -1024,28 +1055,32 @@ class BudgetSummary(dd.VirtualTable):
               #~ u"Monatliche Reserve für sonstige periodische Ausgaben", 
               #~ -ye]
             
-        a = budget.sum('monthly_rate','L')
-        if a:
-            yield ["Raten der laufenden Kredite", -a]
-        #~ yield [u"Total Kredite / Schulden", budget.sum('amount','L')]
-        #~ u"Restbetrag für Kredite und Zahlungsrückstände"
-    
+        yield ["Raten der laufenden Kredite", -budget.sum('monthly_rate','L')]
+            
     @classmethod
     def get_sum_text(self,ar):
-        """
-        Return the text to display on the totals row.
-        """
-        #~ return E.b("Finanzielle Situation")
-        return "Finanzielle Situation"
+        return "Restbetrag für Kredite und Zahlungsrückstände"
         
-    @dd.displayfield(_("Description"))
-    def desc(self,row,ar):
-        return row[0]
         
-    @dd.virtualfield(dd.PriceField(_("Amount")))
-    def amount(self,row,ar):
-        return row[1]
-
+class DebtsByBudget(SummaryTable):
+    label = _("Debts")
+    required=dict(user_groups = ['debts'])
+    master = Budget
+    
+    @classmethod
+    def get_summary_numbers(self,ar):
+        budget = ar.master_instance
+        if budget is None: 
+            return
+        for grp in budget.account_groups('L'):
+            for acc in grp.account_set.all():
+                yield [_("%s (distributable)") % dd.babelattr(acc,'name'), 
+                    budget.sum('amount',account=acc,distribute=True)]
+                yield [dd.babelattr(acc,'name'), 
+                    budget.sum('amount',account=acc,distribute=False)]
+        #~ "Total Kredite / Schulden"
+    
+        
     
 #~ class DistByBudget(LiabilitiesByBudget):
 class DistByBudget(EntriesByBudget):

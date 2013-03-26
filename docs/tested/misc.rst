@@ -3,10 +3,9 @@
 Miscellaneous
 =============
 
-..
-  >>> from lino.runtime import *
-  
->>> print jobs.NewJobsOverview.to_rst(username='rolf') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> from lino.runtime import *
+>>> ses = settings.SITE.login('rolf')
+>>> ses.show(jobs.NewJobsOverview) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 +--------------------------------------------------------------+------------------------------+-----------------+-----------------+
 | Stelle                                                       | Arbeitet                     | Kandidaten      | Probezeit       |
 +==============================================================+==============================+=================+=================+
@@ -45,7 +44,7 @@ Miscellaneous
 <BLANKLINE>
 
 
->>> print users.Teams.to_rst(username='rolf') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ==== =================================================== ============================== ===============================
  ID   Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)
 ---- --------------------------------------------------- ------------------------------ -------------------------------
@@ -56,7 +55,7 @@ Miscellaneous
 <BLANKLINE>
 
 
->>> print pcsw.CoachingTypes.to_rst(username='rolf') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(pcsw.CoachingTypes) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 =================================================== ============================== =============================== ====
  Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)               ID
 --------------------------------------------------- ------------------------------ ------------------------------- ----
