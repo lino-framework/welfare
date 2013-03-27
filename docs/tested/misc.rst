@@ -3,6 +3,8 @@
 Miscellaneous
 =============
 
+.. include:: /include/tested.rst
+  
 >>> from lino.runtime import *
 >>> ses = settings.SITE.login('rolf')
 >>> ses.show(jobs.NewJobsOverview) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE

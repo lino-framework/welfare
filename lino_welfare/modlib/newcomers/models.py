@@ -396,8 +396,7 @@ class AvailableCoaches(users.Users):
                 #~ total_weight += faculty_weight(user,None)
             #~ else:
                 #~ logger.info("20120928 AvailableCoaches.get_data_rows : no for_client")
-            user.new_clients = NewClients.request(
-              ar.ui,param_values=dict(
+            user.new_clients = NewClients.request(param_values=dict(
                 coached_by=user,
                 new_since=ar.param_values.since))
                 
@@ -433,11 +432,11 @@ class AvailableCoaches(users.Users):
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self,obj,ar):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
-        return pcsw.CoachingsByUser.request(ar.ui,master_instance=obj)
+        return pcsw.CoachingsByUser.request(master_instance=obj)
         
     #~ @dd.requestfield(_("Active clients"))
     #~ def active_clients(self,obj,ar):
-        #~ return pcsw.IntegClients.request(ar.ui,param_values=dict(coached_by=obj,only_active=True))
+        #~ return pcsw.IntegClients.request(param_values=dict(coached_by=obj,only_active=True))
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):

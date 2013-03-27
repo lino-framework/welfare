@@ -837,10 +837,6 @@ class Job(SectorFunction):
     """
     A place where a Client can work. The Job Provider
     
-    For illustration, here are the first 5 demo data:
-    
-    .. py2rst:: print jobs.Jobs.request(limit=5).to_rst()
-    
     """
     
     preferred_foreignkey_width = 20 
@@ -988,9 +984,6 @@ class Candidature(SectorFunction):
     """
     A candidature is when a Client applies for a known :class:`Job`.
     
-    For illustration, here are the first 5 demo data:
-    
-    .. py2rst:: print jobs.Candidatures.request(limit=5).to_rst()
     
     """
     class Meta:

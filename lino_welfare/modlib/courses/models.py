@@ -300,7 +300,7 @@ class Course(dd.Model,mixins.Printable):
         Liste von :class:`CourseRequest`-Instanzen, 
         die in diesem Kurs eingetragen sind. 
         """
-        return ParticipantsByCourse.request(master_instance=self).data_iterator
+        return ParticipantsByCourse.request(self).data_iterator
         
     def candidates(self):
         u"""
@@ -308,7 +308,7 @@ class Course(dd.Model,mixins.Printable):
         die noch in keinem Kurs eingetragen sind, aber für diesen Kurs in Frage 
         kommen. 
         """
-        return CandidatesByCourse.request(master_instance=self).data_iterator
+        return CandidatesByCourse.request(self).data_iterator
         
 
         

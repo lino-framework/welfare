@@ -105,6 +105,7 @@ language = 'en'
 # for source files.
 exclude_trees = [
   '.build', 
+  'include', 
   ]
 
 # The reST default role (used for this markup: `text`) to use for all documents.

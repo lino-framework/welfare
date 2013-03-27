@@ -2054,8 +2054,9 @@ class UsersWithClients(dd.VirtualTable):
                 for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
                     def w(pg):
                         def func(self,obj,ar):
-                            return IntegClients.request(ar.ui,
-                                param_values=dict(group=pg,coached_by=obj,coached_on=today))
+                            return IntegClients.request(
+                                param_values=dict(group=pg,
+                                    coached_by=obj,coached_on=today))
                         return func
                     vf = dd.RequestField(w(pg),verbose_name=pg.name)
                     self.add_virtual_field('G'+pg.ref_name,vf)
@@ -2092,7 +2093,7 @@ class UsersWithClients(dd.VirtualTable):
         qs = users.User.objects.filter(profile__in=profiles)
         for user in qs.order_by('username'):
             #~ r = MyClients.request(ar.ui,subst_user=user)
-            r = IntegClients.request(ar.ui,param_values=dict(coached_by=user))
+            r = IntegClients.request(param_values=dict(coached_by=user))
             if r.get_total_count():
                 user.my_persons = r
                 #~ user._detail_action = users.MySettings.default_action
@@ -2112,13 +2113,13 @@ class UsersWithClients(dd.VirtualTable):
     def primary_clients(self,obj,ar):
         #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
         #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
-        return IntegClients.request(ar.ui,param_values=dict(
+        return IntegClients.request(param_values=dict(
             only_primary=True,coached_by=obj,coached_on=datetime.date.today()))
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        return IntegClients.request(ar.ui,param_values=dict(
+        return IntegClients.request(param_values=dict(
             only_active=True,coached_by=obj,coached_on=datetime.date.today()))
 
 

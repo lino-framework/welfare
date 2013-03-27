@@ -44,5 +44,5 @@ Example (using fictive demo data):
 
 .. py2rst:: 
 
-    print jobs.NewJobsOverview.to_rst(username='rolf')
+    settings.SITE.login('rolf').show(jobs.NewJobsOverview)
     

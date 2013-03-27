@@ -458,14 +458,16 @@ def test10(self):
         amount += 2
         e.full_clean()
         e.save()
+    ses = settings.SITE.login("root")
     for e in b1.entry_set.filter(account__ref="3010"):
-        e.duplicate()
+        new = ses.run(e.duplicate)
+        #~ e.duplicate()
     b1.full_clean()
     b1.save()
     self.assertEqual(b1.entry_set.count(),45)
     self.assertEqual(debts.Budget.objects.count(),1)
-    s1 = b1.BudgetSummary().to_rst()
-    print s1
+    s1 = debts.ResultByBudget.request(b1).to_rst()
+    #~ print s1
     self.assertEqual(s1,"""\
 ========================================================= ===============
  Beschreibung                                              Betrag
@@ -474,14 +476,16 @@ def test10(self):
  Jährliche Einkünfte (48,00 / 12)                          4,00
  Monatliche Ausgaben                                       -986,00
  Monatliche Reserve für jährliche Ausgaben (836,00 / 12)   -69,67
- **Finanzielle Situation**                                 **-1 009,67**
+ **Restbetrag für Kredite und Zahlungsrückstände**         **-1 009,67**
 ========================================================= ===============
 """)
     
-    b2 = b1.duplicate()
+    #~ b2 = b1.duplicate()
+    b2 = ses.run(b1.duplicate)
     self.assertEqual(debts.Budget.objects.count(),2)
     #~ b2 = debts.Budget.objects.get(pk=res.get('goto_record_id'))
-    s2 = b2.BudgetSummary().to_rst()
+    #~ s2 = b2.BudgetSummary().to_rst()
+    s2 = debts.ResultByBudget.request(b2).to_rst()
     self.assertEqual(s1,s2)
     for e in b2.entry_set.all():
         if e.amount:
@@ -489,8 +493,10 @@ def test10(self):
             e.full_clean()
             e.save()
         
-    s1 = b1.BudgetSummary().to_rst()
-    s2 = b2.BudgetSummary().to_rst()
+    s1 = debts.ResultByBudget.request(b1).to_rst()
+    s2 = debts.ResultByBudget.request(b2).to_rst()
+    #~ s1 = b1.BudgetSummary().to_rst()
+    #~ s2 = b2.BudgetSummary().to_rst()
     self.assertNotEqual(s1,s2)
         
     

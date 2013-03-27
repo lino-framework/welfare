@@ -253,18 +253,20 @@ The total monthly amount available for debts distribution."""))
             if Entry.objects.filter(budget=self,account__group=g).count():
                 yield g
         
-    def entries_by_group(self,ar,group,**kw):
+    def entries_by_group(self,group,**kw):
         """
         Return a TableRequest showing the Entries for the given `group`, 
         using the table layout depending on AccountType.
         Shows all Entries of the specified `accounts.Group`.
         """
         t = entries_table_for_group(group)
-        sar = ar.spawn(t,master_instance=self,
+        #~ print '20130327 entries_by_group', self, t
+        ar = t.request(self,
             title=unicode(group),
             filter=models.Q(account__group=group),**kw)
+          
         #~ print 20120606, sar
-        return sar
+        return ar
         
     #~ def msum(self,fldname,types=None,**kw): 
         #~ # kw.update(account__yearly=False)
@@ -386,15 +388,25 @@ The total monthly amount available for debts distribution."""))
             #~ ar = Budgets.request(username="rolf")
         chunks = []
         def render(sar):
+            if sar.master_instance is None:
+                #~ raise Exception("20130327")
+                return
+            sar.setup_from(ar)
             chunks.append(E.h2(unicode(sar.get_title())))
             chunks.append(ar.ui.table2xhtml(sar))
             
         for grp in self.account_groups():
-            render(self.entries_by_group(ar,grp))
+            render(self.entries_by_group(grp))
         #~ render(self.BudgetSummary(ar))
-        render(self.ResultByBudget(ar))
-        render(self.DebtsByBudget(ar))
-        render(self.DistByBudget(ar))
+        #~ render(self.ResultByBudget(ar))
+        #~ render(self.DebtsByBudget(ar))
+        #~ render(self.DistByBudget(ar))
+        #~ render(self.result_by_budget())
+        #~ render(self.debts_by_budget())
+        #~ render(self.dist_by_budget(ar))
+        render(ResultByBudget.request(self))
+        render(DebtsByBudget.request(self))
+        render(DistByBudget.request(self))
         return E.div(*chunks)
         
       
@@ -748,7 +760,7 @@ class EntriesByBudget(Entries):
     column_names = "account description amount actor:10 periods:10 remark todo seqno"
     hidden_columns = "seqno"
     auto_fit_column_widths = True
-    required=dict(user_groups = ['debts'])
+    required = dict(user_groups = ['debts'])
     #~ required_user_level = None
     order_by = ['seqno']
 
@@ -794,8 +806,9 @@ class PrintEntriesByBudget(dd.VirtualTable):
     @classmethod
     def get_handle_name(self,ar):
         hname = ar.ui._handle_attr_name
-        #~ hname = super(PrintEntriesByBudget,self).get_handle_name(ar)
-        hname += str(len(ar.master_instance.get_actors()))
+        if ar.master_instance is not None:
+            #~ hname = super(PrintEntriesByBudget,self).get_handle_name(ar)
+            hname += str(len(ar.master_instance.get_actors()))
         return hname
         
     @classmethod
@@ -936,31 +949,23 @@ class PrintEntriesByBudget(dd.VirtualTable):
   
   
 class PrintExpensesByBudget(PrintEntriesByBudget):
-    """
-    Print version of :class:`ExpensesByBudget` table.
-    """
+    """Print version of :class:`ExpensesByBudget` table."""
     _account_type = AccountTypes.expenses
     column_names = "description dynamic_amounts"
         
 class PrintIncomesByBudget(PrintEntriesByBudget):
-    """
-    Print version of :class:`IncomesByBudget` table.
-    """
+    """Print version of :class:`IncomesByBudget` table."""
     _account_type = AccountTypes.incomes
     column_names = "description dynamic_amounts"
     
 class PrintLiabilitiesByBudget(PrintEntriesByBudget):
-    """
-    Print version of :class:`LiabilitiesByBudget` table.
-    """
+    """Print version of :class:`LiabilitiesByBudget` table."""
     _account_type = AccountTypes.liabilities
     #~ column_names = "partner description total monthly_rate todo"
     column_names = "partner:20 description:20 dynamic_amounts"
     
 class PrintAssetsByBudget(PrintEntriesByBudget):
-    """
-    Print version of :class:`AssetsByBudget` table.
-    """
+    """Print version of :class:`AssetsByBudget` table."""
     _account_type = AccountTypes.assets
     column_names = "description dynamic_amounts"
 

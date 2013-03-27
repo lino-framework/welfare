@@ -93,9 +93,9 @@ def objects():
                 kw.update(monthly_rate=n2dec(amount/20))
             yield Entry(**kw)
             
-            
+    ses = settings.SITE.login("kerstin")
     for e in Entry.objects.filter(account__ref='3030'):
-        new = e.duplicate()
+        new = ses.run(e.duplicate)
         new.remark = EXPENSE_REMARKS.pop()
         yield new
     
