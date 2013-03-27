@@ -614,3 +614,42 @@ def migrate_from_1_0_17(globals_dict):
         return jobs_Candidature(**kw)
     globals_dict.update(create_jobs_candidature=create_jobs_candidature)
     return '1.1.0'
+
+def migrate_from_1_1_0(globals_dict): 
+    """
+    - cal.Calendar.invite_team_members : ignore this field 
+      (set manually the Team where appropriate)
+    - 
+    """
+    cal_Calendar = resolve_model('cal.Calendar')
+    def create_cal_calendar(id, name, build_method, template, attach_to_email, email_template, type, description, url_template, username, password, readonly, invite_team_members, start_date, color):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(build_method=build_method)
+        kw.update(template=template)
+        kw.update(attach_to_email=attach_to_email)
+        kw.update(email_template=email_template)
+        kw.update(type=type)
+        kw.update(description=description)
+        kw.update(url_template=url_template)
+        kw.update(username=username)
+        kw.update(password=password)
+        kw.update(readonly=readonly)
+        #~ kw.update(invite_team_members=invite_team_members)
+        kw.update(start_date=start_date)
+        kw.update(color=color)
+        return cal_Calendar(**kw)
+    globals_dict.update(create_cal_calendar=create_cal_calendar)
+  
+   
+    pcsw_CoachingType = resolve_model('pcsw.CoachingType')
+    users_Team = resolve_model("users.Team")
+    def after_load():
+        for o in pcsw_CoachingType.objects.all():
+            kw = dict()
+            for n in 'id name name_fr'.split():
+                kw[n] = getattr(o,n)
+                users_Team(**kw).save()
+    globals_dict.update(after_load=after_load)
+    return '1.1.1'
