@@ -58,8 +58,13 @@ Upgrading existing sites
     from lino_welfare.settings import *
 
 - If you have production data to migrate, you must now 
-  reapply the previously made backup using `dbinit`::
+  load the previously made backup using `initdb`::
 
     $ manage.py initdb backup
-    
+    ...
+    INFO Loading /var/log/lino/backups/b20130327_204618.py...
+    INFO Migrating from version 1.1.0 to 1.1.1:
+        - cal.Calendar.invite_team_members : ignore this field
+          (set manually the Team where appropriate)
+        - new fields Budget.print_empty_rows, and Budget.ignore_yearly_incomes
   
