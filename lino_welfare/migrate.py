@@ -622,6 +622,7 @@ def migrate_from_1_1_0(globals_dict):
     - 
     """
     cal_Calendar = resolve_model('cal.Calendar')
+    bv2kw = globals_dict.get('bv2kw')
     def create_cal_calendar(id, name, build_method, template, attach_to_email, email_template, type, description, url_template, username, password, readonly, invite_team_members, start_date, color):
         kw = dict()
         kw.update(id=id)
@@ -650,6 +651,6 @@ def migrate_from_1_1_0(globals_dict):
             kw = dict()
             for n in 'id name name_fr'.split():
                 kw[n] = getattr(o,n)
-                users_Team(**kw).save()
+            users_Team(**kw).save()
     globals_dict.update(after_load=after_load)
     return '1.1.1'
