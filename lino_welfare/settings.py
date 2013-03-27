@@ -43,7 +43,7 @@ class Site(Site,cbss.SiteMixin):
     #~ title = label # __name__
     #~ domain = "pcsw.saffre-rumma.net"
     #~ help_url = "http://packages.python.org/lino-welfare"
-    migration_module = 'lino_welfare.modlib.pcsw.migrate'
+    migration_module = 'lino_welfare.migrate'
     
     #~ project_model = 'contacts.Person'
     project_model = 'pcsw.Client'
