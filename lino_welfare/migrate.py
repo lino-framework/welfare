@@ -620,7 +620,7 @@ def migrate_from_1_1_0(globals_dict):
     - cal.Calendar.invite_team_members : ignore this field 
       (set manually the Team where appropriate)
     - new fields Budget.print_empty_rows, and Budget.ignore_yearly_incomes
-    - cal.Membership are not converted. Create team meberships manually.
+    - cal.Membership are not converted. Create team memberships manually.
     """
     cal_Calendar = resolve_model('cal.Calendar')
     bv2kw = globals_dict.get('bv2kw')

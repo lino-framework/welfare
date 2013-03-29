@@ -1145,6 +1145,14 @@ proportionally distributing the `Distributable amount` among the debtors.
         d.update(amount=_("Debt"))
         return d
     
+    @dd.displayfield(_("Description"))
+    def description(self,obj,ar):
+        desc = obj.description
+        if obj.remark:
+            desc += ' (%s)' % obj.remarks
+        return desc
+            #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
+        #~ return obj.description
     
     
 MODULE_LABEL = _("Debts mediation")

@@ -1,5 +1,7 @@
+.. _welfare.1.1.1:
+
 ==========================
-Version 1.1.1
+Lino-Welfare 1.1.1
 ==========================
 
 Release process started Thursday, 21 March 2013
@@ -19,14 +21,28 @@ New features
 - Im Kalendermodul habe ich die Team-Mitgliedschaften ersetzt 
   durch diese Benutzergruppen (diese Funktionalität wurde bisher 
   nicht benutzt, insofern hatte ich da keine Skrupel).
+  Pro Kalender ist das Feld "Team-Einladungen verschicken" 
+  jetzt keine Checkbox mehr, sondern ein ForeignKey auf ein Team.
   
 - Schuldnerberatung: Die Auswahlliste der Konten war schon immer 
   nach der Kontonummer ("Referenz") sortiert, aber dieses Feld 
-  war nirgendwo sichtbar. Jetzt überall: 
-  bei der Auswahl, bei der Konfigurierung... und sogar beim Ausdruck.
+  war nirgendwo sichtbar. Jetzt wohl.
+  Neues Site-Setting `accounts_ref_length` (maximale Länge dieses Feldes) 
+  steht für Lino-Welfare standardmäßig auf 5.
   
-  Neues Site-Setting `accounts_ref_length` steht für Lino-Welfare 
-  standardmäßig auf 5.
+- Ausdruck Budget: hier wurde eine Tabelle nicht gedruckt 
+  (und traceback auf dem Server)  
+  
+- Bemerkungen wurden nicht gedruckt. Jetzt wohl
+
+- Neue Option "Jährliche Einkünte ignorieren" eines pro Budget (Reiter "Zusammenfassung"). 
+
+- Neue Option "Auch leere Einträge drucken" eines pro Budget (Reiter "Zusammenfassung"). Diese kann man ankreuzen, um einen "Blanko-Ausdruck" 
+  zu drucken.
+
+- Im Reiter "Zusammenfassung" gibt es jetzt eine weitere Tabelle "Schulden".
+
+
   
   
 
@@ -61,10 +77,18 @@ Upgrading existing sites
   load the previously made backup using `initdb`::
 
     $ manage.py initdb backup
+    
+  The output should look similar to::
+  
     ...
     INFO Loading /var/log/lino/backups/b20130327_204618.py...
     INFO Migrating from version 1.1.0 to 1.1.1:
+    
         - cal.Calendar.invite_team_members : ignore this field
           (set manually the Team where appropriate)
         - new fields Budget.print_empty_rows, and Budget.ignore_yearly_incomes
-  
+        - cal.Membership are not converted. Create team memberships manually.
+        
+    Installed 63654 object(s) from 1 fixture(s)
+    INFO Done manage.py initdb b20130327_204618 (PID 21893)  
+

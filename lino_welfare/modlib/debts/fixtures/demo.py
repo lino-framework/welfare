@@ -78,6 +78,7 @@ def objects():
                 for a in b.actor_set.all():
                     e.amount = n2dec(amount)
                     e.actor = a
+            #~ e.account_changed(None) # set description
             e.save()
         ACTORS = Cycler(None,*[a for a in b.actor_set.all()])
         for i in range(4):
@@ -91,7 +92,9 @@ def objects():
                 kw.update(distribute=True)
             else:
                 kw.update(monthly_rate=n2dec(amount/20))
-            yield Entry(**kw)
+            e = Entry(**kw)
+            e.account_changed(None) # set description
+            yield e
             
     ses = settings.SITE.login("kerstin")
     for e in Entry.objects.filter(account__ref='3030'):

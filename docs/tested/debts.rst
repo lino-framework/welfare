@@ -5,24 +5,40 @@ Debts mediation
 
 .. include:: /include/tested.rst
 
-Import names of installed apps (here we are going to use "accounts" and "debts"):
+The following statement imports a set of often-used global names::
 
 >>> from lino.runtime import *
 
-For example we can verify here that the demo database has three Budgets:
+We can now refer to every installed app via it's `app_label`.
+For example here is how we can verify here that the demo database 
+has three Budgets:
 
 >>> debts.Budget.objects.count()
 3
 
-"Log in" as user `rolf`:
+Or we can retrieve budget no. 3 from the database:
+
+>>> obj = debts.Budget.objects.get(pk=3)
+>>> obj
+Budget #3 (u'Budget Nr. 3 f\xfcr Altenberg-Charlier')
+
+Note that the current language is German because this is the 
+default language on this demo site::
+
+>>> settings.SITE.languages[0]
+LanguageInfo(django_code='de', name='de', index=0, suffix='')
+
+So far this was standard Django API. To use Lino's extended API we 
+first need to "log in" as user `rolf`:
 
 >>> ses = settings.SITE.login('rolf')
 
-This has e.g. the effect of switching to German.
-
-Let's look at budget no. 3.
-
->>> obj = debts.Budget.objects.get(pk=3)
+The :meth:`login <lino.ui.Site.login>` method doesn't require any 
+password because when somebody has command-line access we trust 
+that she has already authenticated. But it has e.g. the effect of 
+switching to that user's language (German here). It returns a 
+:class:`BaseRequest <lino.core.requests.BaseRequest>` object which 
+has a :meth:`show <lino.core.requests.BaseRequest.show>` method.
 
 Here is the textual representation of the "Expenses" panel:
 
@@ -73,6 +89,28 @@ Here are some more slave tables.
  Zahlungsrückstände      600,00
  **Schulden**            **3 600,00**
 ======================= ==============
+<BLANKLINE>
+
+>>> ses.show(debts.PrintLiabilitiesByBudget.request(obj))
+=========================== ==================== ============== ============== ============ ==============
+ Partner                     Beschreibung         Gemeinsam      Herr           Frau         Total
+--------------------------- -------------------- -------------- -------------- ------------ --------------
+ Bernd Brechts Bücherladen   Kredite              1 200,00                                   1 200,00
+ Reinhards Baumschule        Schulden                            1 500,00                    1 500,00
+ Moulin Rouge                Gerichtsvollzieher                                 300,00       300,00
+ Auto École Verte            Zahlungsrückstände   600,00                                     600,00
+ **Total (4 Zeilen)**                             **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+=========================== ==================== ============== ============== ============ ==============
+<BLANKLINE>
+
+>>> ses.show(debts.DistByBudget.request(obj))
+=========================== ============== ============== ============ ====================================
+ Kreditor                    Beschreibung   Schuld         %            Betrag der monatlichen Rückzahlung
+--------------------------- -------------- -------------- ------------ ------------------------------------
+ Bernd Brechts Bücherladen   Kredite        1 200,00       44,44        53,33
+ Reinhards Baumschule        Schulden       1 500,00       55,56        66,67
+ **Total (2 Zeilen)**                       **2 700,00**   **100,00**   **120,00**
+=========================== ============== ============== ============ ====================================
 <BLANKLINE>
 
 The following table shows the new feature (:blogref:`20130325`) 
@@ -127,6 +165,22 @@ Printing a Budget
  'refresh': True,
  'success': True}
 
+
+Something in French:
+
+>>> ses = settings.SITE.login('romain')
+>>> ses.show(debts.DistByBudget.request(obj))
+=========================== ============= ============== ============ =======================
+ Créancier                   Description   Dette          %            Remboursement mensuel
+--------------------------- ------------- -------------- ------------ -----------------------
+ Bernd Brechts Bücherladen   Kredite       1 200,00       44,44        53,33
+ Reinhards Baumschule        Schulden      1 500,00       55,56        66,67
+ **Total (2 lignes)**                      **2 700,00**   **100,00**   **120,00**
+=========================== ============= ============== ============ =======================
+<BLANKLINE>
+
+Note that the Description still shows German words because these are stored per Budget, 
+and Budget #3 is addressed to a German-speaking partner.
 
 
 Work in progress
