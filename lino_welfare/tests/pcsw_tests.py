@@ -470,7 +470,7 @@ def test10(self):
     #~ print s1
     self.assertEqual(s1,"""\
 ========================================================= ===============
- Beschreibung                                              Betrag
+ Description                                               Amount
 --------------------------------------------------------- ---------------
  Monatliche Einkünfte                                      42,00
  Jährliche Einkünfte (48,00 / 12)                          4,00
