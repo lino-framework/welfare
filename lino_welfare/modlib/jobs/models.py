@@ -975,9 +975,11 @@ class CandidatureStates(dd.ChoiceList):
     verbose_name_plural = _("Candidature states")
     
 add = CandidatureStates.add_item
-add('10', _("Active"),'active')
+add('10', pgettext("jobs","Active"),'active')
 add('20', _("Probation"),'probation')
-add('30', _("Inactive"),'inactive')
+add('25', _("Probation failed"),'failed')
+add('27', pgettext("jobs","Working"),'working')
+add('30', pgettext("jobs","Inactive"),'inactive')
     
 
 class Candidature(SectorFunction):

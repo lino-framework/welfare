@@ -23,7 +23,7 @@ Or we can retrieve budget no. 3 from the database:
 Budget #3 (u'Budget Nr. 3 f\xfcr Altenberg-Charlier')
 
 Note that the current language is German because this is the 
-default language on this demo site::
+default language on this demo site:
 
 >>> settings.SITE.languages[0]
 LanguageInfo(django_code='de', name='de', index=0, suffix='')
