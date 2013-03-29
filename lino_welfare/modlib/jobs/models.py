@@ -1226,7 +1226,7 @@ class JobsOverview(mixins.EmptyTable):
     
     parameters = dict(
       #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
-      date = models.DateField(blank=True,null=True),
+      date = models.DateField(blank=True,null=True,verbose_name=_("Date")),
       contract_type = models.ForeignKey(ContractType,blank=True,null=True),
       job_type = models.ForeignKey(JobType,blank=True,null=True),
       )
@@ -1308,21 +1308,119 @@ class JobsOverview(mixins.EmptyTable):
 
 from lino.utils.xmlgen.html import E
 
-class NewJobsOverview(Jobs):
+if False:
+  
+    class NewJobsOverview(Jobs):
+        """
+        """
+        required = dd.required(user_groups=['integ'])
+        label = _("New Contracts Situation") 
+        column_names = "job_desc working candidates probation"
+        
+        parameters = dict(
+          #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
+          date = models.DateField(blank=True,null=True,verbose_name=_("Date")),
+          contract_type = models.ForeignKey(ContractType,blank=True,null=True),
+          job_type = models.ForeignKey(JobType,blank=True,null=True),
+          )
+        params_panel_hidden = True
+        
+        
+        @dd.displayfield(_("Job"))
+        def job_desc(self,obj,ar):
+            chunks = [ar.obj2html(obj,unicode(obj.function))]
+            chunks.append(pgettext("(place)"," at "))
+            chunks.append(ar.obj2html(obj.provider))
+            chunks.append(' (%d)' % obj.capacity)
+            if obj.remark:
+                chunks.append(' ')
+                chunks.append(E.i(obj.remark))
+            return E.p(*chunks)
+            
+        @dd.displayfield(pgettext("jobs","Working"))
+        def working(self,obj,ar):
+            return obj._working
+            
+        @dd.displayfield(_("Candidates"))
+        def candidates(self,obj,ar):
+            return obj._candidates
+            
+        @dd.displayfield(_("Probation"))
+        def probation(self,obj,ar):
+            return obj._probation
+            
+        @classmethod
+        def get_data_rows(self,ar):
+            """
+            """
+            data_rows = self.get_request_queryset(ar)
+            if ar.param_values.job_type:
+                data_rows = data_rows.filter(type=ar.param_values.job_type)
+            
+            today = ar.param_values.date or datetime.date.today()
+            
+            for job in data_rows:
+                showit = False
+                working = []
+                qs = job.contract_set.order_by('applies_from')
+                if ar.param_values.contract_type:
+                    qs = qs.filter(type=ar.param_values.contract_type)
+                for ct in qs:
+                    if ct.applies_from:
+                        until = ct.date_ended or ct.applies_until
+                        if not until or (ct.applies_from <= today and until >= today):
+                            working.append(ct)
+                if len(working) > 0:
+                    job._working = E.ul(*[E.li(
+                        ar.obj2html(ct.person,ct.person.last_name.upper()),
+                        ' bis %s' % dd.dtos(ct.applies_until)) for ct in working])
+                    showit = True
+                else:
+                    job._working = ''
+        
+                candidates = []
+                qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.active)
+                qs = pcsw.only_coached_on(qs,today,'person')
+                for cand in qs:
+                    candidates.append(cand)
+                if candidates:
+                    #~ job._candidates = E.ul(*[E.li(unicode(i.person)) for i in candidates])
+                    job._candidates = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in candidates])
+                    showit = True
+                else:
+                    job._candidates = ''
+                        
+                probation = []
+                qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.probation)
+                qs = pcsw.only_coached_on(qs,today,'person')
+                for cand in qs:
+                    probation.append(cand)
+                if probation:
+                    job._probation = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in probation])
+                    showit = True
+                else:
+                    job._probation = ''
+                    
+                if showit: yield job
+                    
+
+
+
+class JobsOverviewByType(Jobs):
     """
     """
     required = dd.required(user_groups=['integ'])
-    label = _("New Contracts Situation") 
-    column_names = "job_desc working candidates probation"
-    
+    label = _("Contracts Situation") 
+    column_names = "job_desc:20 working:30 candidates:30 probation:30"
+    master_key = 'type'
+   
     parameters = dict(
-      #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
-      date = models.DateField(blank=True,null=True),
+      date = models.DateField(blank=True,null=True,verbose_name=_("Date")),
       contract_type = models.ForeignKey(ContractType,blank=True,null=True),
-      job_type = models.ForeignKey(JobType,blank=True,null=True),
+      #~ job_type = models.ForeignKey(JobType,blank=True,null=True),
       )
-    params_panel_hidden = True
     
+    params_panel_hidden = True
     
     @dd.displayfield(_("Job"))
     def job_desc(self,obj,ar):
@@ -1352,10 +1450,21 @@ class NewJobsOverview(Jobs):
         """
         """
         data_rows = self.get_request_queryset(ar)
-        if ar.param_values.job_type:
-            data_rows = data_rows.filter(type=ar.param_values.job_type)
         
         today = ar.param_values.date or datetime.date.today()
+        
+        def UL(items):
+            #~ return E.ul(*[E.li(i) for i in items])
+            newitems = []
+            first = True
+            for i in items:
+                if first: 
+                    first = False
+                else: 
+                    newitems.append(E.br())
+                newitems.append(i)
+            return E.p(*newitems)
+            
         
         for job in data_rows:
             showit = False
@@ -1369,9 +1478,11 @@ class NewJobsOverview(Jobs):
                     if not until or (ct.applies_from <= today and until >= today):
                         working.append(ct)
             if len(working) > 0:
-                job._working = E.ul(*[E.li(
-                    ar.obj2html(ct.person,ct.person.last_name.upper()),
-                    ' bis %s' % dd.dtos(ct.applies_until)) for ct in working])
+                job._working = UL([
+                    E.span(
+                        ar.obj2html(ct.person,ct.person.last_name.upper()),
+                        ' bis %s' % dd.dtos(ct.applies_until)) 
+                    for ct in working])
                 showit = True
             else:
                 job._working = ''
@@ -1383,7 +1494,9 @@ class NewJobsOverview(Jobs):
                 candidates.append(cand)
             if candidates:
                 #~ job._candidates = E.ul(*[E.li(unicode(i.person)) for i in candidates])
-                job._candidates = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in candidates])
+                job._candidates = UL([
+                    ar.obj2html(i.person,i.person.last_name.upper()) 
+                        for i in candidates])
                 showit = True
             else:
                 job._candidates = ''
@@ -1394,7 +1507,8 @@ class NewJobsOverview(Jobs):
             for cand in qs:
                 probation.append(cand)
             if probation:
-                job._probation = E.ul(*[E.li(ar.obj2html(i.person,i.person.last_name.upper())) for i in probation])
+                job._probation = UL([E.span(ar.obj2html(i.person,i.person.last_name.upper())) 
+                    for i in probation])
                 showit = True
             else:
                 job._probation = ''
@@ -1403,7 +1517,58 @@ class NewJobsOverview(Jobs):
                     
 
 
+
+
+class NewJobsOverview(mixins.EmptyTable):
+    """
+    """
+    required = dd.required(user_groups=['integ'])
+    label = _("Contracts Situation") 
+    #~ detail_layout = JobsOverviewDetail()
+    detail_layout = "body"
     
+    parameters = dict(
+      today = models.DateField(blank=True,null=True,verbose_name=_("Date")),
+      #~ contract_type = models.ForeignKey(ContractType,blank=True,null=True),
+      job_type = models.ForeignKey(JobType,blank=True,null=True),
+      )
+    params_panel_hidden = True
+    
+    @classmethod
+    def create_instance(self,ar,**kw):
+        kw.update(today = ar.param_values.today or datetime.date.today())
+        if ar.param_values.job_type:
+            kw.update(jobtypes = ar.param_values.job_type)
+        else:
+            kw.update(jobtypes = JobType.objects.all())
+        return super(NewJobsOverview,self).create_instance(ar,**kw)
+
+        
+    @dd.virtualfield(dd.HtmlBox())
+    def body(cls,self,ar):
+        #~ logger.info("20120221 3 body(%s)",req)
+        #~ logger.info("Waiting 5 seconds...")
+        #~ time.sleep(5)
+        #~ today = self.date or datetime.date.today()
+        #~ today = ar.param_values.today or datetime.date.today()
+        #~ today = self.today()
+        html = []
+        for jobtype in self.jobtypes:
+            html.append(E.h2(unicode(jobtype)))
+            #~ e = JobsOverviewByType.request(jobtype,param_values=dict(date=today)).table2xhtml()
+            sar = ar.spawn(JobsOverviewByType,
+                master_instance=jobtype,
+                param_values=dict(date=self.today))
+            html.append(sar.table2xhtml())
+        return E.div(*html)
+
+
+
+
+
+
+
+
 
 if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
   
@@ -1425,6 +1590,7 @@ def setup_main_menu(site,ui,profile,m):
     m.add_action(Jobs)
     m.add_action(Offers)
     m.add_action(NewJobsOverview)
+    #~ m.add_action(JobsOverview3)
     #~ m.add_action(ContractsSearch)
 
 #~ def setup_my_menu(site,ui,user,m): 

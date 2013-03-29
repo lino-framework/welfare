@@ -1729,7 +1729,7 @@ msgstr "Kandidatur-Zustände"
 #: lino_welfare/modlib/jobs/models.py:978
 msgctxt "jobs"
 msgid "Active"
-msgstr "Inaktiv"
+msgstr "Aktiv"
 
 #: lino_welfare/modlib/jobs/models.py:979
 #: lino_welfare/modlib/jobs/models.py:1292

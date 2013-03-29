@@ -659,6 +659,10 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         #~ print '20120918 account_choices', account_type
         return accounts.Account.objects.filter(type=account_type)
         
+    #~ @chooser(simple_values=True)
+    #~ def amount_choices(cls,account):
+        #~ return [decimal.Decimal("0"),decimal.Decimal("2.34"),decimal.Decimal("12.34")]
+        
     @chooser()
     def actor_choices(cls,budget):
         return Actor.objects.filter(budget=budget).order_by('seqno')
@@ -1212,6 +1216,9 @@ dd.add_user_group('debts',MODULE_LABEL)
 
 
 def customize_accounts():
+    """
+    Injects a list of fields to the accounts.Account model
+    """
     dd.inject_field(accounts.Account,
         'required_for_household',
         models.BooleanField(

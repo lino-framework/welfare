@@ -42,7 +42,9 @@ New features
 
 - Im Reiter "Zusammenfassung" gibt es jetzt eine weitere Tabelle "Schulden".
 
-
+- Zwei neue Zustände einer Kandidatur:
+  "Probezeit ohne Erfolg" und "Arbeitet" (beide gelten für die Übersicht wie "Inaktiv", 
+  aber enthalten Info über den Grund der Inaktivität).
   
   
 
