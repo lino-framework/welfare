@@ -339,7 +339,9 @@ In der Demo-Datenbank gibt es folgende Begleitungsdienste:
 
 .. py2rst:: 
 
-    print pcsw.CoachingTypes.to_rst()
+    settings.SITE.login('rolf').show(pcsw.CoachingTypes)
+    # print pcsw.CoachingTypes.request().to_rst()
+    
 
 
 Regeln

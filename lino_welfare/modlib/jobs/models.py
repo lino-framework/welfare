@@ -966,10 +966,9 @@ class Job(SectorFunction):
 class CandidatureStates(dd.ChoiceList):
     """
     
-    Possible values:
+    The possible states of a Candidature.
     
-    .. py2rst:: print jobs.CandidatureStates.to_rst()
-    
+   
     """
     verbose_name = _("Candidature state")
     verbose_name_plural = _("Candidature states")
@@ -1216,7 +1215,7 @@ if True: # settings.SITE.user_model:
 
 COLS = 8
 
-class JobsOverview(mixins.EmptyTable):
+class JobsOverview(dd.EmptyTable):
     """
     """
     required = dd.required(user_groups=['integ'])
@@ -1519,13 +1518,14 @@ class JobsOverviewByType(Jobs):
 
 
 
-class NewJobsOverview(mixins.EmptyTable):
+class NewJobsOverview(dd.EmptyTable):
     """
+    New version of :ref:`welfare.jobs.JobsOverview`.
     """
     required = dd.required(user_groups=['integ'])
     label = _("Contracts Situation") 
     #~ detail_layout = JobsOverviewDetail()
-    detail_layout = "body"
+    detail_layout = "preview"
     
     parameters = dict(
       today = models.DateField(blank=True,null=True,verbose_name=_("Date")),
@@ -1545,23 +1545,24 @@ class NewJobsOverview(mixins.EmptyTable):
 
         
     @dd.virtualfield(dd.HtmlBox())
-    def body(cls,self,ar):
-        #~ logger.info("20120221 3 body(%s)",req)
-        #~ logger.info("Waiting 5 seconds...")
-        #~ time.sleep(5)
-        #~ today = self.date or datetime.date.today()
-        #~ today = ar.param_values.today or datetime.date.today()
-        #~ today = self.today()
+    def preview(cls,self,ar):
         html = []
         for jobtype in self.jobtypes:
             html.append(E.h2(unicode(jobtype)))
-            #~ e = JobsOverviewByType.request(jobtype,param_values=dict(date=today)).table2xhtml()
             sar = ar.spawn(JobsOverviewByType,
                 master_instance=jobtype,
                 param_values=dict(date=self.today))
             html.append(sar.table2xhtml())
         return E.div(*html)
 
+    @classmethod
+    def to_rst(self,ar,column_names=None,**kwargs):
+        obj = self.create_instance(ar)
+        return """\
+        .. raw:: html
+        
+           %s
+        """ % E.tostring(obj.preview).replace('\n',' ')
 
 
 

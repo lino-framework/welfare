@@ -29,7 +29,7 @@ Begleiter die Person als für diese Stelle geeignet einstuft.
 (:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`) 
 
 
-.. _welfare.jobs.NewJobsOverview:
+.. _welfare.jobs.JobsOverview:
 
 Overview of current jobs
 ------------------------
