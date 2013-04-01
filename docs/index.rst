@@ -11,7 +11,7 @@ Welcome to the *Lino-Welfare* Technical Reference.
 
 This document tree is in English and 
 meant for system administrators and other developers.
-The `user manual <http://welfare-userman.lino-framework.org/>`__
+The `user manual <http://welfare-user.lino-framework.org/>`__
 is growing in German, French and Dutch 
 as a separate document tree.
 

@@ -820,7 +820,7 @@ def migrate_from_1_3_2(globals_dict):
     """
     - new field `isip.ExamPolicy.every_unit` 
     - new `dsbe.PersonGroup.active`
-  - - In :class:`lino.mixins.printable.CachedPrintable`,
+    - In :class:`lino.mixins.printable.CachedPrintable`,
       BooleanField `must_build` has been replaced by a DateTimeField `build_time`.
       
     """

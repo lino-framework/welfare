@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"PO-Revision-Date: 2013-03-31 18:21+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.0dev-r661\n"
+
+# 2e8329b971d843549c90947e72ecfa90
+#: ../jobs.rst:5
+msgid "Art60*7"
+msgstr ""
+
+# 0454759a20a444a49a6dea25876993d3
+#: ../jobs.rst:10
+msgid "Stelle"
+msgstr ""
+
+# b26fd2fe766a4bb69a3b40d962fe481d
+#: ../jobs.rst:12
+msgid ""
+"Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter, für den das "
+"ÖSHZ sich um die Besetzung kümmert."
+msgstr ""
+
+# 787ce00850394c66b85e312c03ead048
+#: ../jobs.rst:15
+msgid "(:class:`Job <lino_welfare.modlib.jobs.models.Job>`)"
+msgstr ""
+
+# 41881b90fb894d7f88b1c71760310f8c
+#: ../jobs.rst:21
+msgid "Kandidatur"
+msgstr ""
+
+# 380eef189c254a02b4a5bd97ea53fbbc
+#: ../jobs.rst:23
+msgid ""
+"Eine Kandidatur ist \"wenn ein :ref:`welfare.pcsw.Client` sich für eine "
+":ref:`welfare.jobs.Job` bewirbt\". Das beinhaltet u.a. auch die "
+"Information, dass der verantwortliche Begleiter die Person als für diese "
+"Stelle geeignet einstuft."
+msgstr ""
+
+# a22e6b9a2edd4cf1b75a05703cda5854
+#: ../jobs.rst:29
+msgid "(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`)"
+msgstr ""
+
+# edfcdb32e2f2487696a52b939c06929f
+#: ../jobs.rst:35
+msgid "Overview of current jobs"
+msgstr ""
+
+# c4159658a2b646b29723da7095d11bf1
+#: ../jobs.rst:37
+msgid "This list helps you to make decisions like:"
+msgstr ""
+
+# 66e21c93d9e64e63a4c1de9207b14203
+#: ../jobs.rst:39
+msgid ""
+"which jobs are soon going to be free, and which candidate(s) should we "
+"suggest?"
+msgstr ""
+
+# ee4baabaec6944eaba08af0243a6a48b
+#: ../jobs.rst:41
+msgid "bla bla"
+msgstr ""
+
+# ddf032f6021c4e6896758b77de5b47a2
+#: ../jobs.rst:43
+msgid "Example (using fictive demo data):"
+msgstr ""
+

@@ -1,0 +1,265 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-31 20:47+0200\n"
+"PO-Revision-Date: 2013-03-31 18:21+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.0dev-r661\n"
+
+# b064fd40e6184bacaa67248ca36a2eb1
+#: ../users.rst:5
+msgid "Users"
+msgstr ""
+
+# ee233b22861e474c9f5ef07d900357ca
+#: ../users.rst:11
+msgid "User"
+msgstr ""
+
+# b2d1277894b3455f91a7d772cab32897
+#: ../users.rst:13
+msgid ""
+"A User is somebody who can log into the application. The detail of a user"
+" has the following fields:"
+msgstr ""
+
+# d6dd831ea0c4408aa3fff2ee937b8dc0
+#: ../users.rst:19
+msgid "Profile"
+msgstr ""
+
+# 07737176dc714fad8f3bf5c2d612b5aa
+#: ../users.rst:21
+msgid ""
+"The :ref:`welfare.users.UserProfile` of this user. Each user must have a "
+"profile in order to be active. Users with an empty "
+":ref:`welfare.users.User.profile` field are considered inactive and "
+"cannot log in."
+msgstr ""
+
+# 4b8718a8b6ed4d75990ecaeb80f5a6b8
+#: ../users.rst:31
+msgid "Team"
+msgstr ""
+
+# e6658f46f2034748917dfc9a3208c80d
+#: ../users.rst:33
+msgid ""
+"The permissions do not depend on the Team, they depend on the "
+":ref:`welfare.users.UserProfile`. Belonging to a user group or not has no"
+" influence on access permissions"
+msgstr ""
+
+# 5f5e220a09b44c8b8d20db30802c4f4a
+#: ../users.rst:41
+msgid "Teams"
+msgstr ""
+
+# 871f254d9212471aa0ee47d14ea04f6d
+#: ../users.rst:44
+msgid "The table of available :ref:`welfare.users.Team` records on this site."
+msgstr ""
+
+# 26af96185822400aa3d5b77ff17a0aaf
+#: ../users.rst:46
+msgid "The demo site has the following teams:"
+msgstr ""
+
+# 2d31bbd99e0e4028932a9e948ec7b5de
+#: ../users.rst:56
+msgid "Membership"
+msgstr ""
+
+# 61a383de566641c6b7daca433a18a120
+#: ../users.rst:59
+msgid ""
+"A membership is when a given :ref:`welfare.users.User` belongs to a given"
+" :ref:`welfare.users.Team`."
+msgstr ""
+
+# e809ad84c7d043e681f94d5b79ab8bbb
+#: ../users.rst:67
+msgid "User Profile"
+msgstr ""
+
+# 6f5fdc72b2b542a9a68d0791dcecac8f
+#: ../users.rst:69
+msgid "A user profile is a combination of access rights and permission sets."
+msgstr ""
+
+# 05acc42591614f909da94fed35c820ae
+#: ../users.rst:71
+msgid "See also:"
+msgstr ""
+
+# 57955e4eb2d448ca83cb6964c2298fa2
+#: ../users.rst:73
+msgid "The :ref:`welfare.users.User.profile` field."
+msgstr ""
+
+# 341a5fbb3cdd42d6bde3056f1b101451
+#: ../users.rst:74
+msgid "The table of :ref:`welfare.users.UserProfiles`"
+msgstr ""
+
+# 2a723bf56f5d44478b1262442f0d5810
+#: ../users.rst:81
+msgid "User Profiles"
+msgstr ""
+
+# a6a578c8c7cc4bfb93259da96a1ff41e
+#: ../users.rst:83
+msgid "The list of user profiles available on this site."
+msgstr ""
+
+# 12f2492b3f2b49ac9e5a67fca3dbcc08
+#: ../users.rst:85
+msgid ""
+"In the demo database, alice and hubert share the same profile while "
+"melanie has a different profile."
+msgstr ""
+
+# d48e05d02e434a2b8ce561ceeed75b6b
+#~ msgid "ID"
+#~ msgstr ""
+
+# af8d6171f01a4b27a89e28cc6620be1e
+#~ msgid "Bezeichnung"
+#~ msgstr ""
+
+# c15d91043f95456987172640e992a331
+#~ msgid "Bezeichnung (fr)"
+#~ msgstr ""
+
+# 6377fe2f583347e1951c3dc0359ded9e
+#~ msgid "Bezeichnung (nl)"
+#~ msgstr ""
+
+# 9b974e2fe9e94c33a76015b8ec7e1412
+#~ msgid "1"
+#~ msgstr ""
+
+# 0d9ee104777a4877b19d1fb1772c138e
+#~ msgid "ASD (Allgemeiner Sozialdienst)"
+#~ msgstr ""
+
+# 7e5333ba8f654f06b468e6184a5b0d25
+#~ msgid "SSG (Service social général)"
+#~ msgstr ""
+
+# ed6f4cc59cf14feda19d109607c10ee1
+#~ msgid "ASD (Algemene Sociale Dienst)"
+#~ msgstr ""
+
+# 2124a0ac056643a2b6d03e471606ad40
+#~ msgid "2"
+#~ msgstr ""
+
+# 8157e631ff1042afbfec6ae5050ab452
+#~ msgid "DSBE (Dienst für Sozial-Berufliche Eingliederung)"
+#~ msgstr ""
+
+# 3ba04ff0d5ef46648a5b27ea9f9970aa
+#~ msgid "Service intégration"
+#~ msgstr ""
+
+# 6e9f2eb214594546bf14656a076878fc
+#~ msgid "3"
+#~ msgstr ""
+
+# 26a1cf3d195b418ca3c9ce57b97486db
+#~ msgid "Schuldnerberatung"
+#~ msgstr ""
+
+# 175f0bd89dcd4fb0ae51e3e1cbe50259
+#~ msgid "Médiation de dettes"
+#~ msgstr ""
+
+# 69b398f4059b4a248233894fb9faee63
+#~ msgid "Wert"
+#~ msgstr ""
+
+# ab384f77e0ad4f2aa36a33f88f0e2a28
+#~ msgid "name"
+#~ msgstr ""
+
+# cfee9b3021634a6b8b235b6f6a9467b6
+#~ msgid "Text"
+#~ msgstr ""
+
+# abe5b4b60b5e492990a2f6e5a9a7dc93
+#~ msgid "000"
+#~ msgstr ""
+
+# 6f4fd4a30578417885d0f2e7e145ec53
+#~ msgid "anonymous"
+#~ msgstr ""
+
+# 2ac1cfbc7c374009b5d79f79f67bd3a6
+#~ msgid "Anonymous"
+#~ msgstr ""
+
+# 0d02e63daa6241c8b27555ffe03fefb3
+#~ msgid "100"
+#~ msgstr ""
+
+# 6a004a08a4df4660a2301b527b698027
+#~ msgid "Begleiter im DSBE"
+#~ msgstr ""
+
+# 291af76284a440d986155d5fa60574a6
+#~ msgid "110"
+#~ msgstr ""
+
+# 1650f9739d4840b682fd968f8aebb2f8
+#~ msgid "Integrations-Assistent (Dienstleiter)"
+#~ msgstr ""
+
+# e8e3ba275a374698b0bac76f6cc77910
+#~ msgid "200"
+#~ msgstr ""
+
+# 99b1eaa52e3649cd92c51a0a2e36fdc3
+#~ msgid "Berater Neuanträge"
+#~ msgstr ""
+
+# 782f371c4a8144d1b55d27bf9b01665e
+#~ msgid "300"
+#~ msgstr ""
+
+# d70a4e40648d45aa8b870e7eb8abea64
+#~ msgid "Schuldenberater"
+#~ msgstr ""
+
+# ef9168556bbc461ab6dc14b6fb04c01b
+#~ msgid "500"
+#~ msgstr ""
+
+# 8590f88df9884cf7b8ecb3ee75b52d28
+#~ msgid "nur ZDSS"
+#~ msgstr ""
+
+# e89b654dac5e4af4ab263d3af9866518
+#~ msgid "900"
+#~ msgstr ""
+
+# 523fbd8b98874be0a2d068e1fecf1f3e
+#~ msgid "admin"
+#~ msgstr ""
+
+# 462a0561d5104934ad9bb389e1eff048
+#~ msgid "Administrator"
+#~ msgstr ""
+

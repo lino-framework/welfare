@@ -1,0 +1,9 @@
+<p align="center">
+{%- for lng in ('fr','nl','de') %} 
+{%- if lng == language %}
+  {{lng.upper()}}
+{%- else %}
+  <a href="{{pathto("../"+lng+"/"+pagename)}}">{{lng.upper()}}</a> 
+{%- endif %}
+{%- endfor %} 
+</p>

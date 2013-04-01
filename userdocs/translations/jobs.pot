@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ..\jobs.rst:5
+# 2e8329b971d843549c90947e72ecfa90
+msgid "Art60*7"
+msgstr ""
+
+#: ..\jobs.rst:10
+# 0454759a20a444a49a6dea25876993d3
+msgid "Stelle"
+msgstr ""
+
+#: ..\jobs.rst:12
+# b26fd2fe766a4bb69a3b40d962fe481d
+msgid "Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter, für den das ÖSHZ sich um die Besetzung kümmert."
+msgstr ""
+
+#: ..\jobs.rst:15
+# 787ce00850394c66b85e312c03ead048
+msgid "(:class:`Job <lino_welfare.modlib.jobs.models.Job>`)"
+msgstr ""
+
+#: ..\jobs.rst:21
+# 41881b90fb894d7f88b1c71760310f8c
+msgid "Kandidatur"
+msgstr ""
+
+#: ..\jobs.rst:23
+# 380eef189c254a02b4a5bd97ea53fbbc
+msgid "Eine Kandidatur ist \"wenn ein :ref:`welfare.pcsw.Client` sich für eine :ref:`welfare.jobs.Job` bewirbt\". Das beinhaltet u.a. auch die Information, dass der verantwortliche Begleiter die Person als für diese Stelle geeignet einstuft."
+msgstr ""
+
+#: ..\jobs.rst:29
+# a22e6b9a2edd4cf1b75a05703cda5854
+msgid "(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`)"
+msgstr ""
+
+#: ..\jobs.rst:35
+# edfcdb32e2f2487696a52b939c06929f
+msgid "Overview of current jobs"
+msgstr ""
+
+#: ..\jobs.rst:37
+# c4159658a2b646b29723da7095d11bf1
+msgid "This list helps you to make decisions like:"
+msgstr ""
+
+#: ..\jobs.rst:39
+# 66e21c93d9e64e63a4c1de9207b14203
+msgid "which jobs are soon going to be free, and which candidate(s) should we suggest?"
+msgstr ""
+
+#: ..\jobs.rst:41
+# ee4baabaec6944eaba08af0243a6a48b
+msgid "bla bla"
+msgstr ""
+
+#: ..\jobs.rst:43
+# ddf032f6021c4e6896758b77de5b47a2
+msgid "Example (using fictive demo data):"
+msgstr ""
+
