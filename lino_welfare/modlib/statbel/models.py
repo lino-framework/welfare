@@ -30,6 +30,7 @@ dd.inject_field('countries.City',
         max_length=5,
         verbose_name=_("INS code"),
         blank=True,
+        help_text=_("The official code for this place used by statbel.fgov.be")
     ))
         
 dd.inject_field('countries.Country',
@@ -38,5 +39,6 @@ dd.inject_field('countries.Country',
         max_length=3,
         verbose_name=_("INS code"),
         blank=True,
+        help_text=_("The official code for this country used by statbel.fgov.be")
     ))
         

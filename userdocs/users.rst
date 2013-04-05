@@ -1,31 +1,28 @@
 .. _welfare.users:
 
-=====
-Users
-=====
+========================
+Gestion des utilisateurs
+========================
 
 
-.. _welfare.users.User:
+Référence
+=========
 
-User
-====
+.. actor:: users.Users
+.. actor:: users.Teams
+.. actor:: users.Memberships
 
-A User is somebody who can log into the application.
-The detail of a user has the following fields:
 
 .. _welfare.users.User.profile:
 
-Profile
--------
+The profile of a user
+---------------------
 
-The :ref:`welfare.users.UserProfile` of this user.
 Each user must have a profile in order to be active. 
 Users with an empty :ref:`welfare.users.User.profile` 
 field are considered inactive and cannot log in.
 
 
-
-.. _welfare.users.Team:
 
 Team
 ====
@@ -34,8 +31,6 @@ The permissions do not depend on the Team,
 they depend on the :ref:`welfare.users.UserProfile`.
 Belonging to a user group or not has no influence on access permissions
 
-
-.. _welfare.users.Teams:
 
 Teams
 =============
@@ -48,9 +43,6 @@ The demo site has the following teams:
 .. py2rst:: settings.SITE.login('rolf').show(users.Teams)
 
 
-
-
-.. _welfare.users.Membership:
 
 Membership
 =============
@@ -68,14 +60,10 @@ User Profile
 
 A user profile is a combination of access rights and permission sets. 
 
-See also:
-
-- The :ref:`welfare.users.User.profile` field.
-- The table of :ref:`welfare.users.UserProfiles`
 
 
+.. actor:: lino.UserProfiles
 
-.. _welfare.users.UserProfiles:
 
 User Profiles
 =============
@@ -87,3 +75,11 @@ while melanie has a different profile.
 
 .. py2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
 
+
+
+
+Référence
+=========
+
+
+.. actor:: ui.ContentTypes

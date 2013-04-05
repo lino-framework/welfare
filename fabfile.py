@@ -3,6 +3,7 @@ setup_from_project('lino_welfare')
 
 env.django_databases.append('docs')
 #~ env.django_databases.append('userdocs')
+#~ env.tolerate_sphinx_warnings = True
 
 #~ env.django_doctests.append('tutorials.fixtures1.settings')
 

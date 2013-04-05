@@ -70,6 +70,8 @@ from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
 #~ from lino.core.dbutils import range_filter
 from lino.core import actions
+from lino.core.constants import _handle_attr_name
+
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
@@ -483,7 +485,7 @@ class Budgets(dd.Table):
     window_size=(50,'auto'))
     
     @dd.constant()
-    def spacer(self,ui):  return '<br/>'
+    def spacer(self):  return '<br/>'
 
 
 class MyBudgets(Budgets,mixins.ByUser):
@@ -809,7 +811,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
             
     @classmethod
     def get_handle_name(self,ar):
-        hname = ar.ui._handle_attr_name
+        hname = _handle_attr_name
         if ar.master_instance is not None:
             #~ hname = super(PrintEntriesByBudget,self).get_handle_name(ar)
             hname += str(len(ar.master_instance.get_actors()))

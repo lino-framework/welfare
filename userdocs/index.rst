@@ -1,4 +1,4 @@
-.. _welfare.userman:
+.. _welfare.userdocs:
 
 Manuel de l'utilisateur
 =======================
@@ -12,9 +12,16 @@ Il n'est pas terminé.
    :maxdepth: 1
 
    clients
+   newcomers
+   cbss
+   cv
+   courses
+   isip
    jobs
    debts
    accounts
    users
    cal
    countries
+   contacts
+   watch_tim

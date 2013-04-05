@@ -1242,7 +1242,7 @@ class IdentifyPersonRequests(CBSSRequests):
     insert_layout = IdentifyPersonRequestInsert()
     
     @dd.constant()
-    def spacer(self,ui):  return '<br/>'
+    def spacer(self):  return '<br/>'
     
 class MyIdentifyPersonRequests(mixins.ByUser,IdentifyPersonRequests):
     pass

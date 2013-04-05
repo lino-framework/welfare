@@ -16,6 +16,9 @@ import sys, os
 from djangosite.utils.sphinxconf import configure
 configure(__file__,globals(),'lino_welfare.demo.settings')
 
+
+extensions += ['lino.utils.actordoc']
+
 #~ Trigger loading of Djangos model cache in order to avoid side effects that 
 #~ would occur when this happens later while importing one of the models modules.
 from django.conf import settings

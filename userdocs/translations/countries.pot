@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"POT-Creation-Date: 2013-04-03 07:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,25 +19,5 @@ msgstr ""
 #: ..\countries.rst:5
 # 880dd2c125b24f6fa44b07767b03f6b9
 msgid "Countries"
-msgstr ""
-
-#: ..\countries.rst:11
-# b11081215f7242919d4a96bbccc2f648
-msgid "City"
-msgstr ""
-
-#: ..\countries.rst:13
-# 3d778f2b3fe64e5d9450a662ff9cfd80
-msgid "A better name would be \"geographical place\" because a City, in Lino, can also be a suburb, a town, a province, a lake... any geographic entity (except a :ref:`welfare.countries.Country` because these have their own table)."
-msgstr ""
-
-#: ..\countries.rst:22
-# efe24141bc864a18a9284e6a0622f21d
-msgid "Country"
-msgstr ""
-
-#: ..\countries.rst:24
-# acf243153f464b178e6c1ec5c13ffc58
-msgid "Many Lino applications have a table of countries."
 msgstr ""
 

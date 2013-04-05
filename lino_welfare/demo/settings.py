@@ -25,4 +25,4 @@ class Site(Site):
             return True
         return False
 
-SITE = Site(__file__,globals())
+SITE = Site(globals())

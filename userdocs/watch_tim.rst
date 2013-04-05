@@ -1,18 +1,20 @@
-.. _welfare.clients:
+.. _welfare.watch_tim:
 
-========
-Klienten
-========
+=========
+watch_tim
+=========
 
-.. contents:: Inhalt
+Diese Seite ist die offizielle Dokumentation der Synchronisierung von TIM nach Lino,
+einer Funktionalität, die ausschließlich im deutschsprachigen Raum Belgiens genutzt wird.
+
+
+.. contents:: 
    :local:
    :depth: 2
 
 
-.. _welfare.contacts.Partner:
-
-Partner
-=======
+Partner und watch_tim
+=====================
 
 Sowohl in TIM als auch in Lino gibt es eine Tabelle der **Partner**.
 Die Partnernummer ist die Gleiche in TIM wie in Lino.
@@ -32,30 +34,6 @@ TIM unterscheidet vier "Partnerarten":
 - A APH-Bewohner
 - V Verschiedene
 - I Inaktive Partner
-
-Lino hat folgende "Untertabellen der Tabelle Partner":
-
-.. graphviz:: 
-   
-   digraph foo {
-   
-    Partner -> Personen
-    Partner -> Organisationen
-    Partner -> Haushalte
-    Personen -> Klienten
-    Organisationen -> Stellenanbieter
-    Organisationen -> Kursanbieter
-  }
-
-
-..
-  :class:`contacts.Partner`
-  :class:`contacts.Company`
-  :class:`contacts.Person` 
-  :class:`pcsw.Client`
-  :class:`households.Household`
-  :class:`jobs.JobProvider`
-  :class:`courses.CourseProvider`
 
 Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
 
@@ -147,6 +125,9 @@ Anrede
 `PAR->Allo` geht nach :attr:`Person.title` oder :attr:`Company.prefix`.
 Außer wenn `PAR->Allo` es einen der Werte "Eheleute", 
 "Herr und Frau" enthält, dann wird es ein Haushalt.
+
+
+
 
 
 .. _welfare.pcsw.Client:
@@ -280,8 +261,6 @@ Im Reiter :guilabel:`Sonstiges` gibt es drei Ankreuzfelder
   Bearbeitungszustand "Ungültig".
 
 
-.. _welfare.pcsw.Coachings:
-
 Begleitungen
 ============
 
@@ -339,10 +318,9 @@ In der Demo-Datenbank gibt es folgende Begleitungsdienste:
 
 .. py2rst:: 
 
+    # print "\n\nFoo, bar, baz\n\n"
     settings.SITE.login('rolf').show(pcsw.CoachingTypes)
-    # print pcsw.CoachingTypes.request().to_rst()
     
-
 
 Regeln
 ======
@@ -364,15 +342,15 @@ Regeln
   Begleitung, die nicht geändert werden kann.
   
 
-.. _welfare.pcsw.ClientContacts:
-
 Klientenkontakte
 ================
 
 Die Felder PXS->IdMut (Krankenasse) und PXS->Apotheke (Apotheke) 
 werden nach Lino synchronisiert als *Klientenkontakte*.
 
-*Importierte* Klienten sollten in ihren Klientenkontakten 
+*Importierte* Klienten sollten in 
+ihren 
+:ref:`welfare.pcsw.ClientContacts`
 deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
 
 Ansonsten findet watch_tim, dass er nicht dafür 
@@ -437,12 +415,3 @@ die für die Synchronisierung von Belang sind::
         if userid == "WRITE": return None
         return userid.lower()
 
-
-
-
-Anhang
-==============
-
-- Workflow : Arbeitsablauf
-- Life cycle : Lebenzyklus
-- engl. "State" = Bearbeitungszustand

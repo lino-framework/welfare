@@ -39,11 +39,12 @@ class Site(Site,cbss.SiteMixin):
     
     demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
     
-    #~ source_dir = os.path.dirname(__file__)
     #~ title = label # __name__
     #~ domain = "pcsw.saffre-rumma.net"
     #~ help_url = "http://packages.python.org/lino-welfare"
     migration_module = 'lino_welfare.migrate'
+    
+    userdocs_prefix = 'welfare.'
     
     #~ project_model = 'contacts.Person'
     project_model = 'pcsw.Client'
@@ -84,9 +85,6 @@ class Site(Site,cbss.SiteMixin):
         #~ to be used in Belgian Public Centres for Social Welfare.
         #~ """ % (self.label,lino.__url__)
         #~ return s
-        
-    #~ def get_app_source_file(self):
-        #~ return __file__
         
     def get_main_action(self,user):
         return self.modules.lino.Home.default_action
@@ -311,7 +309,7 @@ class Site(Site,cbss.SiteMixin):
         #~ return urlpatterns
         
 
-SITE = Site(__file__,globals())
+SITE = Site(globals())
 
 #~ TIME_ZONE = 'Europe/Brussels'
 TIME_ZONE = None

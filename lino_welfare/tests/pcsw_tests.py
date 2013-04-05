@@ -447,6 +447,7 @@ def test10(self):
     modifies the duplicate,
     """
     from lino_welfare.modlib.debts.fixtures.std import objects
+    from north.dbutils import set_language
     for obj in objects():
         obj.save()
     self.assertEqual(debts.Budget.objects.count(),0)
@@ -459,6 +460,7 @@ def test10(self):
         e.full_clean()
         e.save()
     ses = settings.SITE.login("root")
+    set_language('de')
     for e in b1.entry_set.filter(account__ref="3010"):
         new = ses.run(e.duplicate)
         #~ e.duplicate()
@@ -470,7 +472,7 @@ def test10(self):
     #~ print s1
     self.assertEqual(s1,"""\
 ========================================================= ===============
- Description                                               Amount
+ Beschreibung                                              Betrag
 --------------------------------------------------------- ---------------
  Monatliche Einkünfte                                      42,00
  Jährliche Einkünfte (48,00 / 12)                          4,00

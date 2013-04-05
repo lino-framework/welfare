@@ -786,7 +786,7 @@ class StudiesByCity(Studies):
     
     
 class StudiesByPerson(HistoryByPerson):
-    "List of studies for a given person."
+    help_text  = _("List of studies for a given person.")
     model = Study
     #~ label = _("Studies & experiences")
     #~ button_label = _("Studies")
@@ -964,12 +964,7 @@ class Job(SectorFunction):
         #~ return qs
 
 class CandidatureStates(dd.ChoiceList):
-    """
-    
-    The possible states of a Candidature.
-    
-   
-    """
+    help_text = _("The possible states of a candidature.")
     verbose_name = _("Candidature state")
     verbose_name_plural = _("Candidature states")
     
@@ -984,7 +979,6 @@ add('30', pgettext("jobs","Inactive"),'inactive')
 class Candidature(SectorFunction):
     """
     A candidature is when a Client applies for a known :class:`Job`.
-    
     
     """
     class Meta:
@@ -1142,6 +1136,9 @@ class ExperiencesByOffer(SectorFunctionByOffer):
 
 
 class Jobs(dd.Table):
+    help_text = _("""
+    Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter. 
+    """)
     required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager

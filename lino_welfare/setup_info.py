@@ -69,6 +69,7 @@ Topic :: Software Development :: Libraries :: Application Frameworks""".splitlin
 
 SETUP_INFO.update(packages=[
   'lino_welfare',
+  'lino_welfare.demo',
   'lino_welfare.management',
   'lino_welfare.management.commands',
   'lino_welfare.tests',
