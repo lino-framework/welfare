@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"POT-Creation-Date: 2013-04-05 11:54+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -18,35 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0dev-r661\n"
 
-# 2e8329b971d843549c90947e72ecfa90
+# 3eb5ff557e03402fbaae7f8ca362e2d1
 #: ../jobs.rst:5
-msgid "Art60*7"
+msgid "Insertion socio-professionnelle"
 msgstr ""
 
-# 0454759a20a444a49a6dea25876993d3
-#: ../jobs.rst:10
-msgid "Stelle"
-msgstr ""
-
-# b26fd2fe766a4bb69a3b40d962fe481d
-#: ../jobs.rst:12
+# ecaf6352b5904780adaf67cfd24b973c
+#: ../jobs.rst:7
 msgid ""
-"Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter, für den das "
-"ÖSHZ sich um die Besetzung kümmert."
+"Ce module permet de gérer des projects de mise au travail selon les "
+"articles 60§7 et 61 de la loi organique des CPAS."
 msgstr ""
 
-# 787ce00850394c66b85e312c03ead048
-#: ../jobs.rst:15
-msgid "(:class:`Job <lino_welfare.modlib.jobs.models.Job>`)"
+# eda27e2b456141bcaf8c1da9128770c8
+#: ../jobs.rst:11
+msgid ""
+"Si pour des jeunes en-dessous des 25 ans on parle surtout "
+"d':ref:`welfare.isip` et de leur *enseignement*, pour les adultes nous "
+"parlons d'**insertion socio-professionnelle** et nous concentrons au "
+"**travail**."
 msgstr ""
 
-# 41881b90fb894d7f88b1c71760310f8c
+# 93b572eb82a8465ab17c175b3ab01cb9
+#: ../jobs.rst:19
+msgid "Aperçu"
+msgstr ""
+
+# 6769ecdde73741bdb89b4bc2f6552e1e
 #: ../jobs.rst:21
-msgid "Kandidatur"
+msgid ""
+"Le CPAS gère une liste d':ref:`welfare.jobs.Jobs` (de mise au travail). "
+"Ces endroits de mise au travail sont généralement des endroits de travail"
+" spécialisés à l'accqueil temporaire de personnes à intégrer. Exemple:"
+msgstr ""
+
+# d8f7340eb9364a6ab32e6ac1b4d0fa05
+#: ../jobs.rst:31
+msgid ""
+"Indépendamment de ces endroits de travail le CPAS peut gérer une liste "
+"d':ref:`welfare.jobs.Offers` du marché normal."
+msgstr ""
+
+# 52bf773700df450fb557d427b22c9aeb
+#: ../jobs.rst:34
+msgid ""
+"Une :ref:`Candidature <welfare.jobs.Candidatures>` représente le fait "
+"qu'un :ref:`Client <welfare.pcsw.Clients>` donné voudrait travailler à un"
+" :ref:`Endroit <welfare.jobs.Jobs>` donné. Ceci implique entre autres que"
+" l'agent d'insertion responsable l'estime potentiellement apte à assumer "
+"ce travail."
 msgstr ""
 
 # 380eef189c254a02b4a5bd97ea53fbbc
-#: ../jobs.rst:23
+#: ../jobs.rst:40
 msgid ""
 "Eine Kandidatur ist \"wenn ein :ref:`welfare.pcsw.Client` sich für eine "
 ":ref:`welfare.jobs.Job` bewirbt\". Das beinhaltet u.a. auch die "
@@ -54,35 +78,79 @@ msgid ""
 "Stelle geeignet einstuft."
 msgstr ""
 
-# a22e6b9a2edd4cf1b75a05703cda5854
-#: ../jobs.rst:29
-msgid "(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`)"
+# db3853e5e2ec41a5b124026765a997db
+#: ../jobs.rst:45
+msgid ""
+"Si un :ref:`Client <welfare.pcsw.Client>` introduit une :ref:`Candidature"
+" <welfare.jobs.Candidatures>`, l'agent d'insertion note que"
+msgstr ""
+
+# a1c9e75cc14b442c82bb6dcd5ebbafe6
+#: ../jobs.rst:49
+msgid "Une telle Candidature peut référer soit à un Endroit soit à une Offre."
+msgstr ""
+
+# 7c15155fdba4442297b0c72a06758663
+#: ../jobs.rst:51
+msgid "Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`."
+msgstr ""
+
+# 3cf90f30c7bd45d5a6fcb7e3982bad1e
+#: ../jobs.rst:54
+msgid "Référence"
 msgstr ""
 
 # edfcdb32e2f2487696a52b939c06929f
-#: ../jobs.rst:35
+#: ../jobs.rst:79
 msgid "Overview of current jobs"
 msgstr ""
 
 # c4159658a2b646b29723da7095d11bf1
-#: ../jobs.rst:37
+#: ../jobs.rst:81
 msgid "This list helps you to make decisions like:"
 msgstr ""
 
 # 66e21c93d9e64e63a4c1de9207b14203
-#: ../jobs.rst:39
+#: ../jobs.rst:83
 msgid ""
 "which jobs are soon going to be free, and which candidate(s) should we "
 "suggest?"
 msgstr ""
 
 # ee4baabaec6944eaba08af0243a6a48b
-#: ../jobs.rst:41
+#: ../jobs.rst:85
 msgid "bla bla"
 msgstr ""
 
 # ddf032f6021c4e6896758b77de5b47a2
-#: ../jobs.rst:43
+#: ../jobs.rst:87
 msgid "Example (using fictive demo data):"
 msgstr ""
+
+# 2e8329b971d843549c90947e72ecfa90
+#~ msgid "Art60*7"
+#~ msgstr ""
+
+# 0454759a20a444a49a6dea25876993d3
+#~ msgid "Stelle"
+#~ msgstr ""
+
+# b26fd2fe766a4bb69a3b40d962fe481d
+#~ msgid ""
+#~ "Eine Stelle ist ein Arbeitsplatz bei "
+#~ "einem Stellenabieter, für den das ÖSHZ"
+#~ " sich um die Besetzung kümmert."
+#~ msgstr ""
+
+# 787ce00850394c66b85e312c03ead048
+#~ msgid "(:class:`Job <lino_welfare.modlib.jobs.models.Job>`)"
+#~ msgstr ""
+
+# 41881b90fb894d7f88b1c71760310f8c
+#~ msgid "Kandidatur"
+#~ msgstr ""
+
+# a22e6b9a2edd4cf1b75a05703cda5854
+#~ msgid "(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`)"
+#~ msgstr ""
 

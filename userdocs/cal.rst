@@ -4,6 +4,11 @@
 Le module Calendrier
 ====================
 
+.. actors_overview:: 
+    cal.Events
+    cal.Tasks
+
+
 
 .. _welfare.cal.Panel:
 
@@ -30,3 +35,11 @@ Référence
 .. actor:: cal.Priorities
 .. actor:: cal.GuestRoles
 .. actor:: cal.Guests
+
+
+.. actor:: cal.EventStates
+
+.. py2rst:: 
+
+    settings.SITE.login('romain').show(cal.EventStates)
+

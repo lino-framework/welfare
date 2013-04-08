@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"POT-Creation-Date: 2013-04-05 11:54+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -24,26 +24,24 @@ msgid "Countries"
 msgstr ""
 
 # b11081215f7242919d4a96bbccc2f648
-#: ../countries.rst:11
-msgid "City"
-msgstr ""
+#~ msgid "City"
+#~ msgstr ""
 
 # 3d778f2b3fe64e5d9450a662ff9cfd80
-#: ../countries.rst:13
-msgid ""
-"A better name would be \"geographical place\" because a City, in Lino, "
-"can also be a suburb, a town, a province, a lake... any geographic entity"
-" (except a :ref:`welfare.countries.Country` because these have their own "
-"table)."
-msgstr ""
+#~ msgid ""
+#~ "A better name would be \"geographical"
+#~ " place\" because a City, in Lino, "
+#~ "can also be a suburb, a town, "
+#~ "a province, a lake... any geographic "
+#~ "entity (except a :ref:`welfare.countries.Country`"
+#~ " because these have their own table)."
+#~ msgstr ""
 
 # efe24141bc864a18a9284e6a0622f21d
-#: ../countries.rst:22
-msgid "Country"
-msgstr ""
+#~ msgid "Country"
+#~ msgstr ""
 
 # acf243153f464b178e6c1ec5c13ffc58
-#: ../countries.rst:24
-msgid "Many Lino applications have a table of countries."
-msgstr ""
+#~ msgid "Many Lino applications have a table of countries."
+#~ msgstr ""
 

@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"PO-Revision-Date: 2013-04-05 12:02+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.0dev-r661\n"
+
+# e6c73468e1b44287a49208c10ce2403a
+#: ../isip.rst:5
+msgid "Insertion sociale"
+msgstr ""
+
+# 1c3dda1741774ec986336abe27f36eea
+#: ../isip.rst:7
+msgid ""
+"Ce module gère le travail avec les Projects d'Insertion Sociale "
+"Personnalisés (PIIS)."
+msgstr ""
+
+# ac8c36ef40814308a9eb93ff184748fb
+#: ../isip.rst:10
+msgid ""
+"Un :ref:`PIIS <welfare.isip.Contracts>` est une convention entre le CPAS "
+"et un jeune client qui engendra un accompagnement individuel de la "
+"personne surtout au niveau enseignement."
+msgstr ""
+
+# 7f785f8bd86d47c6ac701c1313829610
+#: ../isip.rst:14
+msgid "Le module est techniquement similaire au module :ref:`welfare.jobs`."
+msgstr ""
+
+# a33848f89b6e488dbd9953b537fcaa2c
+#: ../isip.rst:19
+msgid "Référence"
+msgstr ""
+

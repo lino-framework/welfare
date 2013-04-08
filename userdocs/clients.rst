@@ -10,16 +10,14 @@ Ce module comprend les fonctionnalités autour des entités suivantes:
 
 .. actors_overview:: 
     contacts.Partners
-    pcsw.Clients 
+    pcsw.Clients
     pcsw.Coachings
-
 
 
 Référence
 =========
 
 .. actor:: contacts.Partners
-
 
 Toute personne physique ou morale est enregistrée 
 dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`.
@@ -48,3 +46,4 @@ Anhang
 - Workflow : Arbeitsablauf
 - Life cycle : Lebenzyklus
 - engl. "State" = Bearbeitungszustand
+

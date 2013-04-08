@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-01 07:15+0300\n"
+"POT-Creation-Date: 2013-04-05 11:54+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -29,19 +29,4 @@ msgid ""
 "Voici le nouveau manuel d'utilisateur trilingue français-néerlandais-"
 "allemand de Lino pour CPAS. Il n'est pas terminé."
 msgstr ""
-
-# e7f9b6dc9d894e689fbbae385cdd0adf
-#~ msgid "User manual"
-#~ msgstr ""
-
-# 434094fea02b4fe9bb8dc7527dead36c
-#~ msgid "This is experimental."
-#~ msgstr ""
-
-# 05118d176e8a456c87637607cddc838e
-#~ msgid ""
-#~ "This is the new implementation of "
-#~ "the German/French/Dutch `user manual <http"
-#~ "://welfare-userman.lino-framework.org/>`__."
-#~ msgstr ""
 

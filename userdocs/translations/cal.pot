@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-03 07:04+0300\n"
+"POT-Creation-Date: 2013-04-05 11:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ..\cal.rst:5
-# 27acfd8b34f342d589ffd4d39ed483c5
-msgid "Calendar module"
+# 20176d3437304c308de10571d89b3a86
+msgid "Le module Calendrier"
 msgstr ""
 
-#: ..\cal.rst:7
-# 751afffcb93141169a68530fcd36c0af
-msgid "If you have a `Calendar` item in your main menu, then you probably have Lino's calendar module."
-msgstr ""
-
-#: ..\cal.rst:13
-# 22951f66e9b34cbfaab817ecc969b592
-msgid "Calendar model"
-msgstr ""
-
-#: ..\cal.rst:15
-# cf0270db3e6c4f26bba66bc539d804d2
-msgid "A Calendar is a list of calendar events which have certain things in common. They are being displayed in the :ref:`welfare.cal.Panel` in a given colour."
-msgstr ""
-
-#: ..\cal.rst:22
+#: ..\cal.rst:11
 # 8e2011dd1c094feb89690d28c3867ec6
 msgid "Calendar Panel"
 msgstr ""
 
-#: ..\cal.rst:24
+#: ..\cal.rst:13
 # 62a5c2c58b0944da95e697bb3753988b
 msgid "The Calendar Panel displays your events in a classical \"calendar view\", with the possibility to switch between daily, weekly, monthly and to toggle the visibility of team events."
 msgstr ""
 
-#: ..\cal.rst:31
-# 878bf35eca0349fda2e782796af047ef
-msgid "Event"
-msgstr ""
-
-#: ..\cal.rst:33
-# cf1c38de10a5465e9e4e93502ed94695
-msgid "A calendar event is when something happens."
+#: ..\cal.rst:23
+# abb6bc0df44344f8838fadbe92fadb63
+msgid "Référence"
 msgstr ""
 

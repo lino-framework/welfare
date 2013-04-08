@@ -18,6 +18,8 @@ moved into a separate module because they are really very PCSW specific.
 
 """
 
+from __future__ import unicode_literals
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -2127,8 +2129,6 @@ class UsersWithClients(dd.VirtualTable):
 # PERSON GROUP
 #
 class PersonGroup(dd.Model):
-    """Integration Phase (previously "Person Group")
-    """
     name = models.CharField(_("Designation"),max_length=200)
     ref_name = models.CharField(_("Reference name"),max_length=20,blank=True)
     active = models.BooleanField(_("Considered active"),default=True)
@@ -2140,7 +2140,7 @@ class PersonGroup(dd.Model):
         return self.name
 
 class PersonGroups(dd.Table):
-    """List of Integration Phases"""
+    help_text = _("Liste des phases d'intégration possibles.")
     model = PersonGroup
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
@@ -2166,6 +2166,7 @@ class Activity(dd.Model):
         return unicode(self.name)
 
 class Activities(dd.Table):
+    help_text = _("""Liste des "activités" ou "codes profession".""")
     model = Activity
     #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager')
@@ -2182,8 +2183,8 @@ class Activities(dd.Table):
 #
 class ExclusionType(dd.Model):
     class Meta:
-        verbose_name = _("exclusion type")
-        verbose_name_plural = _('exclusion types')
+        verbose_name = _("Exclusion Type")
+        verbose_name_plural = _('Exclusion Types')
         
     name = models.CharField(max_length=200)
     
@@ -2191,6 +2192,8 @@ class ExclusionType(dd.Model):
         return unicode(self.name)
 
 class ExclusionTypes(dd.Table):
+    help_text = _("""Liste des raisons possibles d'arrêter temporairement 
+    le paiement d'une aide financière prévue.""")
     #~ required_user_groups = ['integ']
     required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
@@ -2222,6 +2225,8 @@ class Exclusion(dd.Model):
         return s
 
 class Exclusions(dd.Table):
+    help_text = _("Liste des exclusions.")
+  
     required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
     model = Exclusion
@@ -2244,6 +2249,7 @@ class AidType(dd.BabelNamed):
         verbose_name_plural = _('aid types')
 
 class AidTypes(dd.Table):
+    help_text = _("Liste des types d'aide financière.")
     model = AidType
     column_names = 'name *'
     #~ required_user_level = UserLevels.manager
@@ -2280,6 +2286,7 @@ class ClientContactType(dd.BabelNamed):
         verbose_name_plural = _("Client Contact types")
         
 class ClientContactTypes(dd.Table):
+    help_text = _("Liste des types de contacts client.")
     model = ClientContactType
 
 #~ class ClientContactType(Choice):
@@ -2341,6 +2348,7 @@ dd.update_field(ClientContact,'contact_person',verbose_name=_("Contact person"))
           
     
 class ClientContacts(dd.Table):
+    help_text = _("Liste des contacts clients.")
     model = ClientContact
     
 class ContactsByClient(ClientContacts):
@@ -2425,6 +2433,7 @@ class CoachingType(dd.BabelNamed):
         verbose_name_plural = _('Coaching types')
 
 class CoachingTypes(dd.Table):
+    help_text = _("Liste des types d'accompagnement.")
     model = CoachingType
     column_names = 'name *'
     #~ required_user_level = UserLevels.manager
@@ -2581,9 +2590,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
 #~ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
-    """
-    The table that shows all :class:`Coaching` instances.
-    """
+    help_text = _("Liste des accompagnements.")
     model = Coaching
     
     @classmethod
