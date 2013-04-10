@@ -13,8 +13,8 @@
 
 import sys, os
 
-from djangosite.utils.sphinxconf import configure
-configure(__file__,globals(),'lino_welfare.demo.settings')
+from atelier.sphinxconf import configure
+configure(globals(),'lino_welfare.demo.settings')
 
 
 #~ from unipath import Path
@@ -27,7 +27,7 @@ configure(__file__,globals(),'lino_welfare.demo.settings')
 #~ would occur when this happens later while importing one of the models modules.
 #~ """
 from django.conf import settings
-settings.SITE.startup()
+#~ settings.SITE.startup()
 settings.SITE.title = "Lino-Welfare Reference Manual"
 
 

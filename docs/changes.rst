@@ -15,6 +15,10 @@ The final truth about what's going on is only
 Version 1.6.5 (in development)
 ==============================
 
+- The `Merge` action on :ref:`welfare.pcsw.Client` and 
+  :ref:`welfare.contacts.Company` had disappeared. 
+  Fixed.
+  
 - The new method :meth:`lino.core.model.Model.subclasses_graph`
   generates a graphviz directive which shows this model and the 
   submodels.

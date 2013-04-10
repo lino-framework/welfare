@@ -495,13 +495,17 @@ def site_setup(site):
         
     #~ site.modules.courses.CourseProviders.set_detail_layout(CourseProviderDetail())
 
-@dd.receiver(dd.post_analyze)
+#~ logger.info("20130409 %s declare set_merge_actions()",__name__)
+#~ raise Exception("20130409 %s declare set_merge_actions()" % __name__)
+    
+@dd.receiver(dd.pre_analyze)
 def set_merge_actions(sender,**kw):
-    #~ logger.info("%s.set_merge_actions()",__name__)
+    #~ logger.info("20130409 %s.set_merge_actions()",__name__)
     modules = sender.modules
     for m in (modules.pcsw.Client,modules.contacts.Company):
         #~ print repr(m)
-        m.merge_row = dd.MergeAction(m)
+        m.define_action(merge_row=dd.MergeAction(m))
+        #~ m.merge_row = dd.MergeAction(m)
     
 #~ dd.signals.pre_startup.connect()
 

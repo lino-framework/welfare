@@ -26,3 +26,4 @@ class Site(Site):
         return False
 
 SITE = Site(globals())
+#~ print 20130409, __file__, LOGGING

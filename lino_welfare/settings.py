@@ -311,5 +311,9 @@ class Site(Site,cbss.SiteMixin):
 
 SITE = Site(globals())
 
+LOGGING['logger_names'] = 'djangosite north lino lino_welfare'
+#~ LOGGING.update(loggers='djangosite north lino lino_welfare')
+#~ print 20130409, __file__, LOGGING
+
 #~ TIME_ZONE = 'Europe/Brussels'
-TIME_ZONE = None
+#~ TIME_ZONE = None

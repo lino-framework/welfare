@@ -20,7 +20,7 @@ with the following fixtures:
   
 To run only this test suite::
 
-  python manage.py test pcsw.DemoTest
+  python manage.py test lino_welfare.DemoTest
   
 Functions named `test0*` do not modify any data.
 

@@ -27,6 +27,7 @@ SETUP_INFO = dict(name='lino-welfare',
       version='1.1.1', 
       install_requires=['Lino==1.6.4','suds','vobject'],
       #~ version=VERSION,
+      test_suite = 'tests',
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\
 Lino-Welfare is a modular customized application for Belgian 
