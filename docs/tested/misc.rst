@@ -7,44 +7,21 @@ Miscellaneous
   
 >>> from lino.runtime import *
 >>> ses = settings.SITE.login('rolf')
->>> ses.show(jobs.NewJobsOverview) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| Stelle                                                       | Arbeitet                     | Kandidaten      | Probezeit       |
-+==============================================================+==============================+=================+=================+
-| **Kellner** bei **BISA** (1)                                 | **RADERMACHER** bis ...      | **BASTIAENSEN** | **EMONTSPOOL**  |
-|                                                              |                              |                 |                 |
-|                                                              | **CHANTRAINE** bis ...       | **ÖSTGES**      |                 |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Kellner** bei **R-Cycle Sperrgutsortierzentrum** (1)       | **VAN VEEN** bis ...         | **JANSEN**      | **CHANTRAINE**  |
-|                                                              |                              |                 |                 |
-|                                                              | **DOBBELSTEIN** bis ...      | **BASTIAENSEN** | **RADERMECKER** |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Koch** bei **R-Cycle Sperrgutsortierzentrum** (1)          | **RADERMECKER** bis ...      | **RADERMACHER** | **JOHNEN**      |
-|                                                              |                              |                 |                 |
-|                                                              | **FAYMONVILLE** bis ...      |                 | **CHANTRAINE**  |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Koch** bei **Pro Aktiv V.o.G.** (1)                        | **DUBOIS** bis ...           | **DOBBELSTEIN** | **RADERMACHER** |
-|                                                              |                              |                 |                 |
-|                                                              | **HILGERS** bis ...          | **BRECHT**      |                 |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Küchenassistent** bei **Pro Aktiv V.o.G.** (1)             | **JEANÉMART** bis ...        | **LAMBERTZ**    | **EVERTZ**      |
-|                                                              |                              |                 |                 |
-|                                                              | **JOUSTEN** bis ...          | **DOBBELSTEIN** | **DUBOIS**      |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Küchenassistent** bei **BISA** (1)                         | **LAZARUS** bis ...          | **RADERMACHER** | **LAZARUS**     |
-|                                                              |                              |                 |                 |
-|                                                              |                              |                 | **EVERTZ**      |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Tellerwäscher** bei **BISA** (1)                           | **MEIER** bis ...            | **FAYMONVILLE** | **DI RUPO**     |
-|                                                              |                              |                 |                 |
-|                                                              |                              | **SAFFRE**      |                 |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
-| **Tellerwäscher** bei **R-Cycle Sperrgutsortierzentrum** (1) | **RADERMACHER** bis ...      | **MEIER**       | **GROTECLAES**  |
-|                                                              |                              |                 |                 |
-|                                                              |                              | **FAYMONVILLE** | **KASENNOVA**   |
-+--------------------------------------------------------------+------------------------------+-----------------+-----------------+
+>>> ses.set_language('de')
+>>> ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+================= ================================ ===========================
+ Name              Stellenanbieter                  Sektor
+----------------- -------------------------------- ---------------------------
+ Kellner           BISA                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum    Seefahrt
+ Koch              Pro Aktiv V.o.G.                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G.                  Medizin & Paramedizin
+ Küchenassistent   BISA                              Reinigung
+ Tellerwäscher     BISA                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum    Transport
+================= ================================ ===========================
 <BLANKLINE>
-
 
 >>> ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ==== =================================================== ============================== ===============================

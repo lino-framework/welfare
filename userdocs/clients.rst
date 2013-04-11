@@ -24,7 +24,7 @@ dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`.
 
 Lino différencie les types de Partenaires suivants:
 
-.. py2rst:: contacts.Partner.print_subclasses_graph()
+.. django2rst:: contacts.Partner.print_subclasses_graph()
 
 
 

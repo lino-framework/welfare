@@ -13,8 +13,8 @@
 
 import sys, os
 
-from djangosite.utils.sphinxconf import configure
-configure(__file__,globals(),'lino_welfare.demo.settings')
+from atelier.sphinxconf import configure
+configure(globals(),'lino_welfare.demo.settings')
 
 
 extensions += ['lino.utils.actordoc']

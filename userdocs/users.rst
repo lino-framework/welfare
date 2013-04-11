@@ -40,7 +40,7 @@ The table of available :ref:`welfare.users.Team` records on this site.
 
 The demo site has the following teams:
 
-.. py2rst:: settings.SITE.login('rolf').show(users.Teams)
+.. django2rst:: settings.SITE.login('rolf').show(users.Teams)
 
 
 
@@ -73,7 +73,7 @@ The list of user profiles available on this site.
 In the demo database, alice and hubert share the same profile 
 while melanie has a different profile.
 
-.. py2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
+.. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
 
 
 

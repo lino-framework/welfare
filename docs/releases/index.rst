@@ -3,7 +3,7 @@ Releases
 
 .. py2rst::
 
-  from djangosite.utils.sphinxconf import version2rst
+  from atelier.sphinxconf import version2rst
   import lino_welfare
   version2rst(self,lino_welfare)
 

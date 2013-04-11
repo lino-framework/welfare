@@ -161,14 +161,14 @@ Printing a Budget
  'success': True}
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'message': u'Dokument Budget Nr. 3 f\xfcr Altenberg-Charlier wurde generiert.',
- 'open_url': '/media/userdocs/appyodt/debts.Budget-3.odt',
+ 'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',
  'refresh': True,
  'success': True}
 
 
 Something in French:
 
->>> ses = settings.SITE.login('romain')
+>>> ses.set_language('fr')
 >>> ses.show(debts.DistByBudget.request(obj))
 =========================== ============= ============== ============ =======================
  Créancier                   Description   Dette          %            Remboursement mensuel
@@ -178,6 +178,20 @@ Something in French:
  **Total (2 lignes)**                      **2 700,00**   **100,00**   **120,00**
 =========================== ============= ============== ============ =======================
 <BLANKLINE>
+
+Or the same in English:
+
+>>> ses.set_language('en')
+>>> ses.show(debts.DistByBudget.request(obj))
+=========================== ============= ============== ============ ===========================
+ Creditor                    Description   Debt           %            Monthly payback suggested
+--------------------------- ------------- -------------- ------------ ---------------------------
+ Bernd Brechts Bücherladen   Kredite       1 200,00       44,44        53,33
+ Reinhards Baumschule        Schulden      1 500,00       55,56        66,67
+ **Total (2 rows)**                        **2 700,00**   **100,00**   **120,00**
+=========================== ============= ============== ============ ===========================
+<BLANKLINE>
+
 
 Note that the Description still shows German words because these are stored per Budget, 
 and Budget #3 is addressed to a German-speaking partner.
@@ -197,7 +211,7 @@ and I'm using the occasion to work on that.
 
 A Preview:
 
-.. py2rst:: 
+.. django2rst:: 
 
    from lino.utils.xmlgen.html import E
    print ".. raw:: html"

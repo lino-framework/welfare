@@ -39,7 +39,7 @@ Référence
 
 .. actor:: cal.EventStates
 
-.. py2rst:: 
+.. django2rst:: 
 
     settings.SITE.login('romain').show(cal.EventStates)
 

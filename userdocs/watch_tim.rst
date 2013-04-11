@@ -316,7 +316,7 @@ Jede Begleitung findet zwingend im Rahmen eines bestimmten
 Dienstes statt.
 In der Demo-Datenbank gibt es folgende Begleitungsdienste:
 
-.. py2rst:: 
+.. django2rst:: 
 
     # print "\n\nFoo, bar, baz\n\n"
     settings.SITE.login('rolf').show(pcsw.CoachingTypes)

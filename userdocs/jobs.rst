@@ -23,7 +23,7 @@ Ces endroits de mise au travail sont généralement des endroits de travail
 spécialisés à l'accqueil temporaire de personnes à intégrer.
 Exemple:
 
-.. py2rst:: 
+.. django2rst:: 
 
     settings.SITE.login('romain').show(jobs.Jobs.request(limit=4))
     
@@ -86,7 +86,7 @@ This list helps you to make decisions like:
 
 Example (using fictive demo data):
 
-.. py2rst:: 
+.. django2rst:: 
 
     settings.SITE.login('rolf').show(jobs.NewJobsOverview)
     

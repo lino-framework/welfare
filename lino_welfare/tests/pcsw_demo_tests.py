@@ -126,8 +126,14 @@ def test001(self):
     failures = 0
     for i,case in enumerate(cases):
         url = settings.SITE.build_admin_url(case.url_base,**case.kwargs)
-        
-        response = self.client.get(url) 
+        msg = 'Using remote authentication, but no user credentials found.'
+        try:
+            response = self.client.get(url) 
+            self.fail("Expected '%s'" % msg)
+        except Exception as e:
+            self.assertEqual(str(e),msg)
+            
+        response = self.client.get(url,REMOTE_USER='foo') 
         self.assertEqual(response.status_code,403,"Status code for anonymous on GET %s" % url)
         
         response = self.client.get(url,REMOTE_USER=case.username)
