@@ -42,7 +42,7 @@ has a :meth:`show <lino.core.requests.BaseRequest.show>` method.
 
 Here is the textual representation of the "Expenses" panel:
 
->>> settings.SITE.catch_layout_exceptions = False
+>>> # settings.SITE.catch_layout_exceptions = False
 >>> ses.show(debts.ExpensesByBudget.request(obj),
 ...   column_names="account description amount remark",
 ...   limit=10)
@@ -155,10 +155,7 @@ Printing a Budget
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> from pprint import pprint
->>> pprint(ses.run(obj.do_clear_cache))
-{'message': 'Budget Nr. 3 f\xc3\xbcr Altenberg-Charlier printable cache has been cleared.',
- 'refresh': True,
- 'success': True}
+>>> obj.clear_cache()
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'message': u'Dokument Budget Nr. 3 f\xfcr Altenberg-Charlier wurde generiert.',
  'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',

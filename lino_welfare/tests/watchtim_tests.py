@@ -16,7 +16,7 @@
 This module contains "watch_tim" tests. 
 You can run only these tests by issuing::
 
-  python manage.py test pcsw.WatchTimTest
+  $ python manage.py test lino_welfare.WatchTimTest
   
 """
 
@@ -143,148 +143,144 @@ Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
 
 class WatchTimTest(TestCase):
-    pass
-    #~ def setUp(self):
-        #~ settings.SITE.never_build_site_cache = True
-        #~ super(DemoTest,self).setUp()
             
   
-def test00(self):
-    User(username='watch_tim').save()
-    User(username='alicia').save()
-    User(username='roger').save()
-    households_Type(name="Eheleute",pk=1).save()
-    
-def test01(self):
-    """
-    AttributeError 'NoneType' object has no attribute 'coaching_type'
-    """
-    self.assertDoesNotExist(Client,id=23633)
-    process_line(POST_GEORGES)
-    georges = Client.objects.get(id=23633)
-    self.assertEqual(georges.first_name,"Georges")
-    georges.first_name = "Peter"
-    georges.save()
-    process_line(POST_GEORGES)
-    georges = Client.objects.get(id=23633)
-    self.assertEqual(georges.first_name,"Georges")
+    def test00(self):
+        User(username='watch_tim').save()
+        User(username='alicia').save()
+        User(username='roger').save()
+        households_Type(name="Eheleute",pk=1).save()
+        
+        #~ def test01(self):
+        """
+        AttributeError 'NoneType' object has no attribute 'coaching_type'
+        """
+        self.assertDoesNotExist(Client,id=23633)
+        process_line(POST_GEORGES)
+        georges = Client.objects.get(id=23633)
+        self.assertEqual(georges.first_name,"Georges")
+        georges.first_name = "Peter"
+        georges.save()
+        process_line(POST_GEORGES)
+        georges = Client.objects.get(id=23633)
+        self.assertEqual(georges.first_name,"Georges")
 
-def test02(self):
-    """
-    Company becomes Client
-    
-    ValidationError([u'A Partner cannot be parent for a Client']) (201302-22 12:42:07)
-    A Partner in TIM has both `PAR->NoTva` and `PAR->IdUsr` filled. 
-    It currently exists in Lino as a Company but not as a Client.
-    `watch_tim` then must create a Client after creating also the intermediate Person.
-    The Company child remains.
-    """
-    
-    Company(name="Müller Max Moritz",id=5088).save()
-    global PUT_MAX_MORITZ
-    process_line(PUT_MAX_MORITZ)
-    self.assertDoesNotExist(Company,id=5088)
-    #~ company = Company.objects.get(id=5088) # has not been deleted
-    person = Person.objects.get(id=5088) # has been created
-    client = Client.objects.get(id=5088) # has been created
-    coaching = Coaching.objects.get(client=client) # one coaching has been created
-    self.assertEqual(person.first_name,"Max Moritz")
-    self.assertEqual(client.first_name,"Max Moritz")
-    self.assertEqual(coaching.user.username,'alicia')
-    self.assertEqual(coaching.primary,True)
-    self.assertEqual(coaching.start_date,i2d(19910812))
-    
-    """
-    Client becomes Company
-    """
-    PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
-    process_line(PUT_MAX_MORITZ)
-    company = Company.objects.get(id=5088) 
-    self.assertDoesNotExist(Client,id=5088) # has been deleted
-    self.assertDoesNotExist(Coaching,client_id=5088)
-    
+        #~ def test02(self):
+        """
+        Company becomes Client
+        
+        ValidationError([u'A Partner cannot be parent for a Client']) (201302-22 12:42:07)
+        A Partner in TIM has both `PAR->NoTva` and `PAR->IdUsr` filled. 
+        It currently exists in Lino as a Company but not as a Client.
+        `watch_tim` then must create a Client after creating also the intermediate Person.
+        The Company child remains.
+        """
+        
+        Company(name="Müller Max Moritz",id=5088).save()
+        global PUT_MAX_MORITZ
+        process_line(PUT_MAX_MORITZ)
+        self.assertDoesNotExist(Company,id=5088)
+        #~ company = Company.objects.get(id=5088) # has not been deleted
+        person = Person.objects.get(id=5088) # has been created
+        client = Client.objects.get(id=5088) # has been created
+        coaching = Coaching.objects.get(client=client) # one coaching has been created
+        self.assertEqual(person.first_name,"Max Moritz")
+        self.assertEqual(client.first_name,"Max Moritz")
+        self.assertEqual(coaching.user.username,'alicia')
+        self.assertEqual(coaching.primary,True)
+        self.assertEqual(coaching.start_date,i2d(19910812))
+        
+        """
+        Client becomes Company
+        """
+        PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
+        process_line(PUT_MAX_MORITZ)
+        company = Company.objects.get(id=5088) 
+        self.assertDoesNotExist(Client,id=5088) # has been deleted
+        self.assertDoesNotExist(Coaching,client_id=5088)
+        
 
-def test03(self):
-    """
-    Test whether watch_tim raises Exception 
-    'Cannot create Client ... from PXS' when necessary.
-    """
-    self.assertDoesNotExist(Client,id=23635)
-    try:
-        process_line(POST_PXS)
-        self.fail("Expected an exception")
-    except Exception as e:
-        self.assertEqual(str(e),"Cannot create Client 0000023635 from PXS")
-    self.assertDoesNotExist(Client,id=23635)
+        #~ def test03(self):
+        """
+        Test whether watch_tim raises Exception 
+        'Cannot create Client ... from PXS' when necessary.
+        """
+        self.assertDoesNotExist(Client,id=23635)
+        try:
+            process_line(POST_PXS)
+            self.fail("Expected an exception")
+        except Exception as e:
+            self.assertEqual(str(e),"Cannot create Client 0000023635 from PXS")
+        self.assertDoesNotExist(Client,id=23635)
 
-def test04(self):
-    """
-    Household becomes Client
-    """
-    Household(name="Voldemort-Potter Harald",id=4260).save()
-    process_line(PUT_PAR_POTTER)
-    client = Client.objects.get(id=4260) # has been created
-    self.assertDoesNotExist(Household,id=4260)
-    coaching = Coaching.objects.get(client=client) # one coaching has been created
-    self.assertEqual(client.first_name,"Harald")
-    self.assertEqual(coaching.primary,True)
-    self.assertEqual(coaching.user.username,'alicia')
-    self.assertEqual(coaching.start_date,i2d(19850723))
+        #~ def test04(self):
+        """
+        Household becomes Client
+        """
+        Household(name="Voldemort-Potter Harald",id=4260).save()
+        process_line(PUT_PAR_POTTER)
+        client = Client.objects.get(id=4260) # has been created
+        self.assertDoesNotExist(Household,id=4260)
+        coaching = Coaching.objects.get(client=client) # one coaching has been created
+        self.assertEqual(client.first_name,"Harald")
+        self.assertEqual(coaching.primary,True)
+        self.assertEqual(coaching.user.username,'alicia')
+        self.assertEqual(coaching.start_date,i2d(19850723))
 
-def test05(self):
-    """
-    Person becomes Household 
-    """
-    Person(id=6283,first_name="Paul",last_name="Willekens-Delanuit").save()
-    process_line(PUT_PAR_6283)
-    household = Household.objects.get(id=6283) # has been created
-    self.assertDoesNotExist(Person,id=6283)
-      
-def test06(self):
-    """
-    ValidationError {'first_name': [u'This field cannot be blank.']}
-    """
-    ln = """{"method":"PUT","alias":"PAR","id":"0000001334","time":"20121029 09:00:00",
-    "user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
-    "NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
-    "FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
-    "DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
-    "IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
-    "DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
-    "NB2":"","IDDEV":"","MEMO":"Foo bar","COMPTE2":"","RUENUM":"","RUEBTE":"",
-    "DEBIT2":"   2242.31","CREDIT2":"",
-    "IMPDATE":{"__date__":{"year":2012,"month":10,"day":24}},
-    "ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
-    "MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
-    """
-    self.assertDoesNotExist(Partner,id=1334)
-    translation.deactivate_all()
-    try:
+        #~ def test05(self):
+        """
+        Person becomes Household 
+        """
+        Person(id=6283,first_name="Paul",last_name="Willekens-Delanuit").save()
+        process_line(PUT_PAR_6283)
+        household = Household.objects.get(id=6283) # has been created
+        self.assertDoesNotExist(Person,id=6283)
+          
+        #~ def test06(self):
+        """
+        ValidationError {'first_name': [u'This field cannot be blank.']}
+        """
+        ln = """{"method":"PUT","alias":"PAR","id":"0000001334","time":"20121029 09:00:00",
+        "user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
+        "NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
+        "FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
+        "DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
+        "IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
+        "NB2":"","IDDEV":"","MEMO":"Foo bar","COMPTE2":"","RUENUM":"","RUEBTE":"",
+        "DEBIT2":"   2242.31","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":2012,"month":10,"day":24}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
+        "MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
+        """
+        self.assertDoesNotExist(Partner,id=1334)
+        translation.deactivate_all()
+        try:
+            process_line(ln)
+            self.fail("Expected a ValidationError")
+        except ValidationError as e:
+            self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
+        self.assertDoesNotExist(Partner,id=1334)
+        ln = ln.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
         process_line(ln)
-        self.fail("Expected a ValidationError")
-    except ValidationError as e:
-        self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
-    self.assertDoesNotExist(Partner,id=1334)
-    ln = ln.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
-    process_line(ln)
-    company = Company.objects.get(id=1334) 
+        company = Company.objects.get(id=1334) 
 
-def test07(self):
-    """
-    2013-02-28 10:05:41 ValueError('Cannot assign "u\'\'": "City.country" must be a "Country" instance.',)
-    """
-    ln = """{"method":"PUT","alias":"PAR","id":"0000023649","time":"20130228 10:05:41","user":"MELANIEL",
-    "data":{"IDPAR":"0000023649","FIRME":"Reinders Denis","NAME2":"","RUE":"Sch<94>nefelderweg",
-    "CP":"4700","IDPRT":"S","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
-    "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D","IDBUD":"",
-    "PROF":"80","CODE1":"","CODE2":"","CODE3":"",
-    "DATCREA":{"__date__":{"year":2013,"month":2,"day":28}},
-    "ALLO":"Herr","NB1":"","NB2":"791228 123-35","IDDEV":"","MEMO":"","COMPTE2":"",
-    "RUENUM":" 123","RUEBTE":"a","DEBIT2":"","CREDIT2":"",
-    "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
-    "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
-    """
-    self.assertDoesNotExist(Client,id=23649)
-    process_line(ln)
-    obj = Client.objects.get(id=23649)
-    self.assertEqual(obj.first_name,"Denis")
+        #~ def test07(self):
+        """
+        2013-02-28 10:05:41 ValueError('Cannot assign "u\'\'": "City.country" must be a "Country" instance.',)
+        """
+        ln = """{"method":"PUT","alias":"PAR","id":"0000023649","time":"20130228 10:05:41","user":"MELANIEL",
+        "data":{"IDPAR":"0000023649","FIRME":"Reinders Denis","NAME2":"","RUE":"Sch<94>nefelderweg",
+        "CP":"4700","IDPRT":"S","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
+        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D","IDBUD":"",
+        "PROF":"80","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":2013,"month":2,"day":28}},
+        "ALLO":"Herr","NB1":"","NB2":"791228 123-35","IDDEV":"","MEMO":"","COMPTE2":"",
+        "RUENUM":" 123","RUEBTE":"a","DEBIT2":"","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+        "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
+        """
+        self.assertDoesNotExist(Client,id=23649)
+        process_line(ln)
+        obj = Client.objects.get(id=23649)
+        self.assertEqual(obj.first_name,"Denis")
