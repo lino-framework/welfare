@@ -15,6 +15,9 @@ The final truth about what's going on is only
 Version 1.6.5 (in development)
 ==============================
 
+- Could not print Tx25 documents
+  ("'Site' object has no attribute 'getlanguage_info'")
+
 - The `Merge` action on :ref:`welfare.pcsw.Client` and 
   :ref:`welfare.contacts.Company` had disappeared. 
   Fixed.

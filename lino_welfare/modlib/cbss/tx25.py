@@ -102,7 +102,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         help_text = "Whatever this means.")
         
     def get_print_language(self,pm):
-        if settings.SITE.getlanguage_info(self.language.value):
+        if settings.SITE.get_language_info(self.language.value):
         #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
             return self.language.value
         return settings.SITE.DEFAULT_LANGUAGE.django_code

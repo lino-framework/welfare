@@ -185,6 +185,26 @@ class DemoTest(RemoteAuthTestCase):
 
 
 
+        """
+        20130418 server traceback 
+        TypeError at /plain/pcsw/UsersWithClients
+        cannot serialize 90 (type int)
+        """
+        #~ from lino_welfare.modlib.pcsw.fixtures.std import objects
+        #~ for obj in objects():
+            #~ obj.save()
+      
+        url = settings.SITE.build_admin_url('plain/pcsw/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
+        response = self.client.get(url,REMOTE_USER='rolf')
+        self.assertEqual(response.status_code,200)
+        if not response.content.startswith('<!DOCTYPE html>\n<html language="en"><head>'):
+            self.fail("Failed: UsersWithClients responded %r",response.content)
+        #~ result = self.check_json_result(response,'',url)
+
+
+
+
+
 
     def unused_test001(self):
         """

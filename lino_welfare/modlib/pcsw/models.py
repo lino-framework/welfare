@@ -2024,6 +2024,8 @@ class ClientsTest(Clients):
         #~ return obj.error_message.replace('\n','<br/>')
         return obj.error_message
         
+
+
     
 #~ class OverviewClientsByUser(dd.VirtualTable):
 class UsersWithClients(dd.VirtualTable):
@@ -2038,36 +2040,11 @@ class UsersWithClients(dd.VirtualTable):
     
     slave_grid_format = 'html'    
     
-    @classmethod
-    def on_analyze(self,site):
+    #~ @classmethod
+    #~ def on_analyze(self,site):
         #~ if self.has_handle(site.ui):
         #~ raise Exception("20130302 on_analyze called after handle")
         
-        @dd.receiver(dd.connection_created,weak=False)
-        def on_connection_created(sender,**kw):
-            """
-            Builds columns dynamically from the :class:`PersonGroup` database table.
-            Called when kernel setup is done, 
-            before the UI handle is being instantiated.
-            """
-            self.column_names = 'user:10'
-            today = datetime.date.today()
-            try:
-                for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
-                    def w(pg):
-                        def func(self,obj,ar):
-                            return IntegClients.request(
-                                param_values=dict(group=pg,
-                                    coached_by=obj,coached_on=today))
-                        return func
-                    vf = dd.RequestField(w(pg),verbose_name=pg.name)
-                    self.add_virtual_field('G'+pg.ref_name,vf)
-                    self.column_names += ' ' + vf.name 
-            except DatabaseError as e:
-                pass # happens e.g. if database isn't yet initialized
-                
-            self.column_names += ' primary_clients active_clients row_total'
-            settings.SITE.resolve_virtual_fields()
     
 
     @classmethod
@@ -2123,6 +2100,41 @@ class UsersWithClients(dd.VirtualTable):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
         return IntegClients.request(param_values=dict(
             only_active=True,coached_by=obj,coached_on=datetime.date.today()))
+
+#~ @dd.receiver(dd.connection_created,weak=False)
+def on_connection_created(sender,**kw):
+    """
+    Builds columns dynamically from the :class:`PersonGroup` database table.
+    Called when kernel setup is done, 
+    before the UI handle is being instantiated.
+    
+    This must also be called by
+    """
+    self = UsersWithClients
+    self.column_names = 'user:10'
+    today = datetime.date.today()
+    try:
+        for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
+            def w(pg):
+                def func(self,obj,ar):
+                    return IntegClients.request(
+                        param_values=dict(group=pg,
+                            coached_by=obj,coached_on=today))
+                return func
+            vf = dd.RequestField(w(pg),verbose_name=pg.name)
+            self.add_virtual_field('G'+pg.ref_name,vf)
+            self.column_names += ' ' + vf.name 
+    except DatabaseError as e:
+        pass # happens e.g. if database isn't yet initialized
+        
+    self.column_names += ' primary_clients active_clients row_total'
+    settings.SITE.resolve_virtual_fields()
+
+from djangosite.utils.test import testcase_setup
+testcase_setup.connect(on_connection_created)
+dd.connection_created.connect(on_connection_created)
+models.signals.post_syncdb.connect(on_connection_created)
+        
 
 
 #

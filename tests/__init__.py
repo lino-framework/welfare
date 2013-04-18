@@ -36,15 +36,22 @@ class BaseTestCase(SubProcessTestCase):
         super(BaseTestCase,self).setUp()
     
     
+class DemoTests(BaseTestCase):
+    """
+    $ python setup.py test -s tests.DemoTests.test_admin
+    """
+    def test_admin(self): self.run_django_admin_test('lino_welfare.demo.settings')
+    
 class DocsTests(BaseTestCase):
     
     #~ env.docs_doctests.append('tested/misc.rst')
     #~ env.docs_doctests.append('tested/debts.rst')
 
     #~ def test_docs(self): self.run_django_manage_test('docs')
-    def test_docs(self): self.run_django_admin_test('lino_welfare.demo.settings')
     def test_misc(self): self.run_docs_doctests('tested/misc.rst')
     def test_debts(self): self.run_docs_doctests('tested/debts.rst')
+    def test_cbss(self): self.run_docs_doctests('tested/cbss.rst')
+    def test_pcsw(self): self.run_docs_doctests('tested/pcsw.rst')
     
     
 

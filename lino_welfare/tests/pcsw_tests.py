@@ -45,7 +45,8 @@ from lino.utils import i2d
 #~ from north import babel
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-from djangosite.utils.test import TestCase
+#~ from djangosite.utils.test import TestCase
+from djangosite.utils.test import RemoteAuthTestCase
 
 contacts_RoleType = dd.resolve_model('contacts.RoleType')
 contacts_Role = dd.resolve_model('contacts.Role')
@@ -71,11 +72,8 @@ from lino.modlib.users.models import User
 #~ from lino_welfare.modlib.pcsw.models import Person
 from lino_welfare.modlib.pcsw.models import Client
 
-class QuickTest(TestCase):
+class QuickTest(RemoteAuthTestCase):
     maxDiff = None
-    #~ def setUp(self):
-        #~ settings.SITE.never_build_site_cache = True
-        #~ super(DemoTest,self).setUp()
 
 
     def test00(self):
@@ -92,7 +90,7 @@ class QuickTest(TestCase):
         sc.signer2 = signer2
         sc.full_clean() ; sc.save()
         #~ print "20130321 test00 done"
-      
+        
         #~ def test01(self):
         """
         Tests error handling when printing a contract whose type's 
