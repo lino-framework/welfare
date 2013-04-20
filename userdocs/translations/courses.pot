@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,17 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\courses.rst:5
+#: ../courses.rst:5
 # 2d257dc8cd604062a749508b41b7711d
 msgid "Cours de langues"
 msgstr ""
 
-#: ..\courses.rst:7
+#: ../courses.rst:7
 # dbc5eb62395549b28401cd926d1809ed
 msgid "Ce module facilite la gestion des demandes de cours, principalement de langues:"
 msgstr ""
 
-#: ..\courses.rst:17
+#: ../courses.rst:14
+# 13d0199058474f10bd5fbbc358af47a7
+msgid "Les :ref:`welfare.courses.CourseProviders` (au pluriel) réfère à la table. L':ref:`welfare.courses.CourseProvider` (singulier) réfère au modèle."
+msgstr ""
+
+#: ../courses.rst:19
 # 8a16a04605f645df879f9aee7cbabc3b
 msgid "Référence"
 msgstr ""

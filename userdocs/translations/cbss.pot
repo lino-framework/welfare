@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,17 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\cbss.rst:5
+#: ../cbss.rst:5
 # 194891ef676045278ed7467f70deb079
 msgid "Banque-carrefour"
 msgstr ""
 
-#: ..\cbss.rst:7
+#: ../cbss.rst:7
 # b087c28ae2844e9f99b0c21930b45fd5
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
-#: ..\cbss.rst:17
+#: ../cbss.rst:17
 # 8442e66cafc04f3da2986cb7a57f0c29
 msgid "Référence"
 msgstr ""

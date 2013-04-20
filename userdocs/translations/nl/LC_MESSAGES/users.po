@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -108,45 +108,4 @@ msgid ""
 "In the demo database, alice and hubert share the same profile while "
 "melanie has a different profile."
 msgstr ""
-
-# b064fd40e6184bacaa67248ca36a2eb1
-#~ msgid "Users"
-#~ msgstr ""
-
-# ee233b22861e474c9f5ef07d900357ca
-#~ msgid "User"
-#~ msgstr ""
-
-# b2d1277894b3455f91a7d772cab32897
-#~ msgid ""
-#~ "A User is somebody who can log "
-#~ "into the application. The detail of "
-#~ "a user has the following fields:"
-#~ msgstr ""
-
-# d6dd831ea0c4408aa3fff2ee937b8dc0
-#~ msgid "Profile"
-#~ msgstr ""
-
-# 07737176dc714fad8f3bf5c2d612b5aa
-#~ msgid ""
-#~ "The :ref:`welfare.users.UserProfile` of this "
-#~ "user. Each user must have a "
-#~ "profile in order to be active. "
-#~ "Users with an empty "
-#~ ":ref:`welfare.users.User.profile` field are "
-#~ "considered inactive and cannot log in."
-#~ msgstr ""
-
-# 05acc42591614f909da94fed35c820ae
-#~ msgid "See also:"
-#~ msgstr ""
-
-# 57955e4eb2d448ca83cb6964c2298fa2
-#~ msgid "The :ref:`welfare.users.User.profile` field."
-#~ msgstr ""
-
-# 341a5fbb3cdd42d6bde3056f1b101451
-#~ msgid "The table of :ref:`welfare.users.UserProfiles`"
-#~ msgstr ""
 

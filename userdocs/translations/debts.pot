@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,57 +16,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\debts.rst:5
+#: ../debts.rst:5
 # 9ad692668e5a4cec964c45b4bc1b216c
 msgid "Médiation de dettes"
 msgstr ""
 
-#: ..\debts.rst:8
+#: ../debts.rst:8
 # 4d99bc8d8f0943229372a077835acc2f
 msgid "Scénarios"
 msgstr ""
 
-#: ..\debts.rst:10
+#: ../debts.rst:10
 # e4edf34e35cd4de6a16daf5f15385a56
 msgid "En tant que conseiller dettes je commence à remplir, avec le client, les données d'un budget. Le client n'a pas toutes les informations nécessaires avec lui. Comment puis-je lui imprimer une version spéciale du budget, destinée à être utilisée pour remplir manuellement sur papier les chiffres manquants pour les encoder la prochaine fois?"
 msgstr ""
 
-#: ..\debts.rst:17
+#: ../debts.rst:17
 # d9abe0c864274015974c4d295398ee9f
 msgid "Activer le champ :ref:`welfare.debts.Budget.print_empty_rows`"
 msgstr ""
 
-#: ..\debts.rst:18
+#: ../debts.rst:18
 # a89b8071737d4a27a14f9245e9605654
 msgid "Cliquer sur :ref:`lino.ui.detail.Save`"
 msgstr ""
 
-#: ..\debts.rst:26
+#: ../debts.rst:26
 # 03358e947fb344d69d6e5ab2ad32c8c0
 msgid "Mes Budgets"
 msgstr ""
 
-#: ..\debts.rst:33
+#: ../debts.rst:33
 # 3842b55b7b6545ba95be4727a5c347b2
 msgid "Budget"
 msgstr ""
 
-#: ..\debts.rst:39
+#: ../debts.rst:39
 # 8b22dedeaf6042e48cf72cc9d79bc28f
 msgid "Print empty rows"
 msgstr ""
 
-#: ..\debts.rst:44
+#: ../debts.rst:44
 # 61e29d78b47c4309876dccf06734aa78
 msgid "Ignore yearly incomes"
 msgstr ""
 
-#: ..\debts.rst:51
+#: ../debts.rst:51
 # 8474018c1aca490a81580a0297ef0973
 msgid "Budget Overview"
 msgstr ""
 
-#: ..\debts.rst:53
+#: ../debts.rst:53
 # b702ea35b5bf4154bb0ee576ebabac63
 msgid "A virtual table showing a list of summary numbers for this budget."
 msgstr ""

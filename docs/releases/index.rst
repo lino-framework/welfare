@@ -1,11 +1,7 @@
 Releases
 ========
 
-.. py2rst::
-
-  from atelier.sphinxconf import version2rst
-  import lino_welfare
-  version2rst(self,lino_welfare)
+Release notes are now in :doc:`/changes`.
 
 Older releases
 --------------

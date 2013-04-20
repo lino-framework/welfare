@@ -25,7 +25,7 @@ SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
       version='1.1.2', 
-      install_requires=['Lino==1.6.5','suds','vobject'],
+      install_requires=['lino==1.6.5','suds','vobject'],
       #~ version=VERSION,
       test_suite = 'tests',
       description=u"A Lino application for Belgian Public Welfare Centres",
@@ -107,3 +107,60 @@ SETUP_INFO.update(message_extractors = {
         #~ })
     ],
 })
+
+SETUP_INFO.update(package_data=dict())
+def add_package_data(package,*patterns):
+    l = SETUP_INFO['package_data'].setdefault(package,[])
+    l.extend(patterns)
+    return l
+
+#~ SETUP_INFO.update(package_data={
+    #~ 'lino_welfare.modlib.cbss': [
+        #~ 'WSDL/*.wsdl',
+        #~ 'XSD/*.xsd',
+        #~ 'XSD/SSDN/Common/*.xsd',
+        #~ 'XSD/SSDN/OCMW_CPAS/IdentifyPerson/*.xsd',
+        #~ 'XSD/SSDN/OCMW_CPAS/ManageAccess/*.xsd',
+        #~ 'XSD/SSDN/OCMW_CPAS/PerformInvestigation/*.xsd',
+        #~ 'XSD/SSDN/OCMW_CPAS/Loi65Wet65/*.xsd',
+        #~ 'XSD/SSDN/Person/*.xsd',
+        #~ 'XSD/SSDN/Service/*.xsd',
+    #~ ]
+    #~ })
+add_package_data('lino_welfare.modlib.cbss',
+    'WSDL/*.wsdl',
+    'XSD/*.xsd',
+    'XSD/SSDN/Common/*.xsd',
+    'XSD/SSDN/OCMW_CPAS/IdentifyPerson/*.xsd',
+    'XSD/SSDN/OCMW_CPAS/ManageAccess/*.xsd',
+    'XSD/SSDN/OCMW_CPAS/PerformInvestigation/*.xsd',
+    'XSD/SSDN/OCMW_CPAS/Loi65Wet65/*.xsd',
+    'XSD/SSDN/Person/*.xsd',
+    'XSD/SSDN/Service/*.xsd')
+
+add_package_data('lino_welfare.modlib.cbss','config/cbss/RetrieveTIGroupsRequest/*.odt')
+add_package_data('lino_welfare.modlib.cbss','config/cbss/IdentifyPersonRequest/*.odt')
+add_package_data('lino_welfare.modlib.debts','config/debts/Budget/*.odt')
+add_package_data('lino_welfare.modlib.courses','config/courses/Course/*.odt')
+add_package_data('lino_welfare.modlib.pcsw','config/pcsw/Client/*.odt')
+add_package_data('lino_welfare.modlib.jobs','config/jobs/ContractsSituation/*.odt')
+add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
+add_package_data('lino_welfare.modlib.jobs','config/jobs/NewJobsOverview/*.odt')
+#~ for n in (
+    #~ 'lino_welfare', 
+    #~ 'lino_welfare.modlib.courses',
+    #~ 'lino_welfare.modlib.newcomers',
+    #~ 'lino_welfare.modlib.debts',
+    #~ 'lino_welfare.modlib.jobs',
+    #~ 'lino_welfare.modlib.isip',
+    #~ 'lino_welfare.modlib.pcsw',
+    #~ 'lino_welfare.modlib.cbss'):
+    #~ l = SETUP_INFO['package_data'].setdefault(n,[])
+    #~ l.append('locale/de/LC_MESSAGES/*.mo')
+    #~ l.append('locale/fr/LC_MESSAGES/*.mo')
+    #~ l.append('locale/nl/LC_MESSAGES/*.mo')
+l = add_package_data('lino_welfare')
+for lng in 'fr de nl'.split():
+    l.append('locale/%s/LC_MESSAGES/*.mo' % lng)
+    
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -126,31 +126,4 @@ msgstr ""
 #: ../jobs.rst:87
 msgid "Example (using fictive demo data):"
 msgstr ""
-
-# 2e8329b971d843549c90947e72ecfa90
-#~ msgid "Art60*7"
-#~ msgstr ""
-
-# 0454759a20a444a49a6dea25876993d3
-#~ msgid "Stelle"
-#~ msgstr ""
-
-# b26fd2fe766a4bb69a3b40d962fe481d
-#~ msgid ""
-#~ "Eine Stelle ist ein Arbeitsplatz bei "
-#~ "einem Stellenabieter, für den das ÖSHZ"
-#~ " sich um die Besetzung kümmert."
-#~ msgstr ""
-
-# 787ce00850394c66b85e312c03ead048
-#~ msgid "(:class:`Job <lino_welfare.modlib.jobs.models.Job>`)"
-#~ msgstr ""
-
-# 41881b90fb894d7f88b1c71760310f8c
-#~ msgid "Kandidatur"
-#~ msgstr ""
-
-# a22e6b9a2edd4cf1b75a05703cda5854
-#~ msgid "(:class:`Candidature <lino_welfare.modlib.jobs.models.Candidature>`)"
-#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -24,12 +24,12 @@ msgid "Le module Calendrier"
 msgstr ""
 
 # 8e2011dd1c094feb89690d28c3867ec6
-#: ../cal.rst:11
+#: ../cal.rst:16
 msgid "Calendar Panel"
 msgstr ""
 
 # 62a5c2c58b0944da95e697bb3753988b
-#: ../cal.rst:13
+#: ../cal.rst:18
 msgid ""
 "The Calendar Panel displays your events in a classical \"calendar view\","
 " with the possibility to switch between daily, weekly, monthly and to "
@@ -37,7 +37,7 @@ msgid ""
 msgstr ""
 
 # abb6bc0df44344f8838fadbe92fadb63
-#: ../cal.rst:23
+#: ../cal.rst:28
 msgid "Référence"
 msgstr ""
 

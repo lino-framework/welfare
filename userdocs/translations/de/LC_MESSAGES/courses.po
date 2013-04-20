@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -30,8 +30,16 @@ msgid ""
 "langues:"
 msgstr ""
 
+# 13d0199058474f10bd5fbbc358af47a7
+#: ../courses.rst:14
+msgid ""
+"Les :ref:`welfare.courses.CourseProviders` (au pluriel) réfère à la "
+"table. L':ref:`welfare.courses.CourseProvider` (singulier) réfère au "
+"modèle."
+msgstr ""
+
 # 8a16a04605f645df879f9aee7cbabc3b
-#: ../courses.rst:17
+#: ../courses.rst:19
 msgid "Référence"
 msgstr ""
 

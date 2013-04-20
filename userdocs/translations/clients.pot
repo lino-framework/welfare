@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\clients.rst:5
+#: ../clients.rst:5
 # 1acc6814be3148fd98f7ee9606f01a6a
 msgid "Clients"
 msgstr ""
 
-#: ..\clients.rst:7
+#: ../clients.rst:7
 # ae38f15e9e5447f4b9d0d642567441cf
 msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
-#: ..\clients.rst:9
+#: ../clients.rst:9
 # 9873193472034ab3b19d5a23cb6192e6
 msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
 msgstr ""
 
-#: ..\clients.rst:19
+#: ../clients.rst:18
 # c085364000624c0f931f88e7f9bc2d82
 msgid "Référence"
 msgstr ""
 
-#: ..\clients.rst:24
+#: ../clients.rst:22
 # b5dcef8a98b046309db79872568b3219
 msgid "Toute personne physique ou morale est enregistrée dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`."
 msgstr ""
 
-#: ..\clients.rst:27
+#: ../clients.rst:25
 # cdc3d60e93ef4beba5b2b51d4b96df6d
 msgid "Lino différencie les types de Partenaires suivants:"
 msgstr ""
 
-#: ..\clients.rst:46
+#: ../clients.rst:44
 # 3acbab023921428ba77d66fa8a187e0e
 msgid "Anhang"
 msgstr ""
 
-#: ..\clients.rst:48
+#: ../clients.rst:46
 # 5269638430af4771b4fcf6c376b5b30f
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
-#: ..\clients.rst:49
+#: ../clients.rst:47
 # 3d627a2f4f944ccf91770242554535ce
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
-#: ..\clients.rst:50
+#: ../clients.rst:48
 # 71e98fc701c84a4f817c034ae30d8ff4
 msgid "engl. \"State\" = Bearbeitungszustand"
 msgstr ""

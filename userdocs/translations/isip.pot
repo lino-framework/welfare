@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-05 11:54+0300\n"
+"POT-Creation-Date: 2013-04-20 22:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\isip.rst:5
+#: ../isip.rst:5
 # e6c73468e1b44287a49208c10ce2403a
 msgid "Insertion sociale"
 msgstr ""
 
-#: ..\isip.rst:7
+#: ../isip.rst:7
 # 1c3dda1741774ec986336abe27f36eea
 msgid "Ce module gère le travail avec les Projects d'Insertion Sociale Personnalisés (PIIS)."
 msgstr ""
 
-#: ..\isip.rst:10
+#: ../isip.rst:10
 # ac8c36ef40814308a9eb93ff184748fb
 msgid "Un :ref:`PIIS <welfare.isip.Contracts>` est une convention entre le CPAS et un jeune client qui engendra un accompagnement individuel de la personne surtout au niveau enseignement."
 msgstr ""
 
-#: ..\isip.rst:14
+#: ../isip.rst:14
 # 7f785f8bd86d47c6ac701c1313829610
 msgid "Le module est techniquement similaire au module :ref:`welfare.jobs`."
 msgstr ""
 
-#: ..\isip.rst:19
+#: ../isip.rst:19
 # a33848f89b6e488dbd9953b537fcaa2c
 msgid "Référence"
 msgstr ""
