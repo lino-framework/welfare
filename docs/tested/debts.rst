@@ -163,7 +163,8 @@ Printing a Budget
  'success': True}
 
 
-Something in French:
+Something in French
+-------------------
 
 >>> ses.set_language('fr')
 >>> ses.show(debts.DistByBudget.request(obj))

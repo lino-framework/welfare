@@ -146,6 +146,7 @@ add_package_data('lino_welfare.modlib.pcsw','config/pcsw/Client/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/ContractsSituation/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/NewJobsOverview/*.odt')
+add_package_data('lino_welfare.demo','media/pictures/contacts.Person.jpg')
 #~ for n in (
     #~ 'lino_welfare', 
     #~ 'lino_welfare.modlib.courses',

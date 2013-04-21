@@ -21,12 +21,28 @@ General PCSW
 <BLANKLINE>
 
 
-Printing
------------------
+Printing UsersWithClients to pdf
+--------------------------------
+
+User problem report:
+
+  | pdf-Dokument aus Startseite erstellen:
+  | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
+
+The following lines reproduced this problem 
+(and passed when it was fixed):
 
 >>> ses.spawn(pcsw.UsersWithClients).appy_render('tmp.odt')
 >>> import os
 >>> os.remove('tmp.odt')
 
 
+
+Printing an eID card summary
+----------------------------
+
+>>> obj = pcsw.Client.objects.get(pk=123)
+>>> from pprint import pprint
+>>> pprint(ses.run(obj.print_eid_content)) #doctest: +NORMALIZE_WHITESPACE
+{'open_url': u'/media/userdocs/appyodt/pcsw.Client-123.odt', 'success': True}
 
