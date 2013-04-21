@@ -15,12 +15,25 @@ The final truth about what's going on is only
 Version 1.6.5 (in development)
 ==============================
 
-- Could not print Tx25 documents
-  ("'Site' object has no attribute 'getlanguage_info'")
+- fixed user reported problems
+
+  - pdf-Dokument aus Startseite (UsersWithClients) erstellen:
+    kommt leider nur ein leeres Dok-pdf bei raus
+
+  - excel-Dokument  aus Startseite erstellen:
+    kommt zwar ein Dok bei raus, aber leider nur mit Kode-Zahlen als 
+    Titel / nicht die eigentlichen Spalten-Titel, wie in der Übersicht
+    Startseite. etwas unpraktisch, da die Titel der Spalten 
+    neu eingetippt werden müssen.
+    
+  - Could not print Tx25 documents
+    ("'Site' object has no attribute 'getlanguage_info'")
 
 - The `Merge` action on :ref:`welfare.pcsw.Client` and 
   :ref:`welfare.contacts.Company` had disappeared. 
   Fixed.
+  
+  Also this action is no longer disabled for imported partners.
   
 - The new method :meth:`lino.core.model.Model.subclasses_graph`
   generates a graphviz directive which shows this model and the 

@@ -314,10 +314,10 @@ für neue Operationen nicht benutzt werden können.""")
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner,self).disable_delete(ar)
 
-    def get_row_permission(self,ar,state,ba):
-        if isinstance(ba.action,dd.MergeAction) and settings.SITE.is_imported_partner(self):
-            return False
-        return super(Partner,self).get_row_permission(ar,state,ba)
+    #~ def get_row_permission(self,ar,state,ba):
+        #~ if isinstance(ba.action,dd.MergeAction) and settings.SITE.is_imported_partner(self):
+            #~ return False
+        #~ return super(Partner,self).get_row_permission(ar,state,ba)
         
 class Person(Partner,contacts.Person,mixins.Born,Printable):
     """
