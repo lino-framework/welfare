@@ -4,6 +4,8 @@ Miscellaneous
 =============
 
 .. include:: /include/tested.rst
+
+Some tests:
   
 >>> from lino.runtime import *
 >>> ses = settings.SITE.login('rolf')
@@ -34,12 +36,47 @@ Miscellaneous
 <BLANKLINE>
 
 
->>> ses.show(pcsw.CoachingTypes) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(pcsw.CoachingTypes)
 =================================================== ============================== =============================== ====
- Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)               ID
+ Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)                ID
 --------------------------------------------------- ------------------------------ ------------------------------- ----
  ASD (Allgemeiner Sozialdienst)                      SSG (Service social général)   ASD (Algemene Sociale Dienst)   1
  DSBE (Dienst für Sozial-Berufliche Eingliederung)   Service intégration                                            2
  Schuldnerberatung                                   Médiation de dettes                                            3
 =================================================== ============================== =============================== ====
 <BLANKLINE>
+
+
+The following helped to discover a bug on :blogref:`20130421`. 
+Symptom was that the `coming_reminders`
+and
+`missed_reminders`
+virtual fields of :class:`lino.modlib.cal.models.Home` 
+showed also events of other users.
+For example, Rolf suddenly had 137 events:
+
+>>> events = ses.spawn(cal.MyEvents,master_instance=ses.get_user())
+>>> print events.master_instance
+Rolf Rompen
+>>> print events.get_total_count()
+137
+
+This should be 7, not 137.
+
+I first expected the
+:meth:`lino.core.requests.BaseRequest.spawn` method to ignore the 
+`master_instance` keyword, but could not reproduce any error.
+Then I discovered that it is because MyEvents no longer inherits 
+from ByUser and thus no longer automatically filters 
+from master_instance. If I filter it myself, I get a reasonable
+number of events:
+
+>>> events = ses.spawn(cal.MyEvents,user=ses.get_user())
+>>> print events.get_total_count()
+12
+
+Why MyEvents no longer inherits from ByUser? 
+This is expected behaviour, not a bug: it's because 
+in MyEvents the user should be able to switch to 
+other user's MyEvents view by activating the parameter panel 
+and selecting another iser.
