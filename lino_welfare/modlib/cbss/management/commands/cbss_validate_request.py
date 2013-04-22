@@ -36,7 +36,7 @@ Die kam durch ein leeres Feld `lino.SiteConfig.site_company.email`.
 Aber bevor ich das rausbekommen hatte, habe 
 ich mal schnell eine Aktion `validate` geschrieben.
 Aber die hing mir dann den Server auf, 
-weil sich :term:`lxml` dann mit :ref:`mod_wsgi` in die Haare kriegt.
+weil sich :term:`lxml` dann mit :term:`mod_wsgi` in die Haare kriegt.
 Also sorry: lokales Validieren wird wohl vom Web-Client aus nicht so 
 schnell möglich sein. 
 Ich könnte einen management command schreiben, 

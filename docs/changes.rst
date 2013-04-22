@@ -12,10 +12,10 @@ The final truth about what's going on is only
  
 
 
-Version 1.6.5 (in development)
-==============================
+Version 1.1.2 (released 2013-04-22)
+===================================
 
-- fixed user reported problems
+- fixed problems reported by users
 
   - pdf-Dokument aus Startseite (UsersWithClients) erstellen:
     kommt leider nur ein leeres Dok-pdf bei raus
@@ -28,6 +28,8 @@ Version 1.6.5 (in development)
     
   - Could not print Tx25 documents
     ("'Site' object has no attribute 'getlanguage_info'")
+    
+  - (and maybe some more...)
 
 - The `Merge` action on :ref:`welfare.pcsw.Client` and 
   :ref:`welfare.contacts.Company` had disappeared. 
@@ -43,10 +45,10 @@ Version 1.6.5 (in development)
   <http://welfare-user.lino-framework.org/fr/clients.html#partenaire>`_
   See :blogref:`20130401`.
 
-Version 1.6.4 (released 2013-03-29)
+Version 1.1.1 (released 2013-03-29)
 ===================================
 
-- Changes before 1.6.4 are not listed here.
+- Changes before 1.1.1 are not listed here.
   See the developers blog and/or the Mercurial log.
 
   

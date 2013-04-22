@@ -47,3 +47,6 @@ Anhang
 - Life cycle : Lebenzyklus
 - engl. "State" = Bearbeitungszustand
 
+
+
+
