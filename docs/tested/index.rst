@@ -16,6 +16,7 @@ using `manage.py run`.
    pcsw
    debts
    cbss
+   courses
    misc
 
 

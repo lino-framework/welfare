@@ -52,6 +52,7 @@ class DocsTests(BaseTestCase):
     def test_debts(self): self.run_docs_doctests('tested/debts.rst')
     def test_cbss(self): self.run_docs_doctests('tested/cbss.rst')
     def test_pcsw(self): self.run_docs_doctests('tested/pcsw.rst')
+    def test_courses(self): self.run_docs_doctests('tested/courses.rst')
     
     
 

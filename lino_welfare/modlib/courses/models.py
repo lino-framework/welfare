@@ -17,6 +17,7 @@ This module requires a model `courses.CourseProvider`
 to be defined by the application.
 """
 
+from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
@@ -424,8 +425,7 @@ class CourseRequest(dd.Model):
         verbose_name_plural = _('Course Requests')
         
     person = models.ForeignKey("pcsw.Client",
-        verbose_name=_("Person"),
-        help_text=u"Die Person, die die Anfrage macht.")
+        help_text="Le client qui désire suivre un cours.")
     
     offer = models.ForeignKey("courses.CourseOffer",blank=True,null=True)
     

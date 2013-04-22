@@ -134,7 +134,6 @@ def customize_siteconfig():
     Injects application-specific fields to :class:`SiteConfig <lino.models.SiteConfig>`.
     """
     
-    #~ from lino.ui.models import SiteConfig
     dd.inject_field('ui.SiteConfig',
         'job_office',
         models.ForeignKey('contacts.Company',

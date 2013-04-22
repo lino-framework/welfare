@@ -1255,6 +1255,11 @@ class Client(Person):
         if c is not None:
             return c.applies_until
 
+    @dd.displayfield(_("Coachings"))
+    def coachings(self,ar):
+        items = [unicode(obj.user) for obj in self.get_coachings(datetime.date.today())]
+        return ', '.join(items)
+
 
     def get_system_note_type(self,ar):
         return settings.SITE.site_config.system_note_type
@@ -1265,7 +1270,6 @@ class Client(Person):
             
 
     
-
 
 
 
@@ -2679,10 +2683,25 @@ class NotesByCompany(notes.Notes):
     order_by = ["-date"]
     
 
+if False:
+    
+    def customize_siteconfig():
+        """
+        Injects application-specific fields to :class:`SiteConfig <lino.ui.models.SiteConfig>`.
+        """
+        
+        dd.inject_field('ui.SiteConfig',
+            'coachingtype_social',
+            models.ForeignKey('pcsw.CoachingType',
+                blank=True,null=True,
+                help_text="""L'objet qui représente le service social général."""))
+        dd.inject_field('ui.SiteConfig',
+            'coachingtype_integ',
+            models.ForeignKey('pcsw.CoachingType',
+                blank=True,null=True,
+                help_text="""L'objet qui représente le service insertion."""))
 
-
-
-
+    customize_siteconfig()
 
 
 
