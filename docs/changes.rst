@@ -12,8 +12,9 @@ The final truth about what's going on is only
  
 
 
-Version 1.1.2 (released 2013-04-22)
-===================================
+Version 1.1.2 (released :blogref:`20130422`)
+============================================
+
 
 - fixed problems reported by users
 

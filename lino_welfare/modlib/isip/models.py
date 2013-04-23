@@ -367,7 +367,7 @@ class ContractBase(
     def full_clean(self,*args,**kw):
         r = self.active_period()
         if not isrange(*r):
-            raise ValidationError(u'Contract ends before it started.')
+            raise ValidationError(_('Contract ends before it started.'))
         
         if self.type_id and self.type.exam_policy_id:
             if not self.exam_policy_id:
@@ -380,6 +380,9 @@ class ContractBase(
                 raise ValidationError(msg)
         #~ print 20130320, get_field(self.__class__,'signer1').default
         super(ContractBase,self).full_clean(*args,**kw)
+        
+        if self.type_id is None:
+            raise ValidationError(dict(type=_("You must specify a contract type.")))
         
 
     def update_owned_instance(self,other):
