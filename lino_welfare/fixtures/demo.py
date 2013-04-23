@@ -713,6 +713,8 @@ def objects():
     PROVIDERS = Cycler(jobs.JobProvider.objects.all())
     SECTORS = Cycler(jobs.Sector.objects.all())
     FUNCTIONS = Cycler(jobs.Function.objects.all())
+    REMARKS = Cycler(_("A very hard job."),'',
+      _("No supervisor. Only for independent people."),'','','')
     
     for i in range(8):
         f = FUNCTIONS.pop()
@@ -720,6 +722,7 @@ def objects():
           type=JTYPES.pop(),
           contract_type=JOBS_CONTRACT_TYPES.pop(),
           name=unicode(f),
+          remark=REMARKS.pop(),
           sector=SECTORS.pop(),function=f)
     
     JOBS = Cycler(jobs.Job.objects.all())

@@ -8,6 +8,7 @@ Miscellaneous
 Some tests:
   
 >>> from lino.runtime import *
+>>> from pprint import pprint
 >>> ses = settings.SITE.login('rolf')
 >>> ses.set_language('de')
 >>> ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
@@ -24,6 +25,24 @@ Some tests:
  Tellerwäscher     R-Cycle Sperrgutsortierzentrum    Transport
 ================= ================================ ===========================
 <BLANKLINE>
+
+JobsOverview
+------------
+
+Printing the document :ref:`welfare.jobs.NewJobsOverview`
+caused a "NotImplementedError: <i> inside <text:p>" traceback 
+when one of the jobs had a remark. 
+
+>>> obj = ses.spawn(jobs.NewJobsOverview).create_instance()
+>>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
+{'open_url': u'/media/userdocs/appyodt/jobs.NewJobsOverview.odt',
+ 'success': True}
+ 
+Bug fixed :blogref:`20130423`.
+
+
+Teams
+-----
 
 >>> ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ==== =================================================== ============================== ===============================
