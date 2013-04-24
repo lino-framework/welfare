@@ -870,9 +870,10 @@ def process_line(ln):
         kw[str(k)] = v
     ctrl = controllers.get(kw['alias'],None)
     if ctrl is None:
-        raise Exception("%(alias)s : no such controller." % kw)
-        #~ logger.debug("Ignoring change %s for %(alias)s:%(id)s",kw['time'],kw['alias'],kw['id'])
-        #~ return
+        #~ raise Exception("%(alias)s : no such controller." % kw)
+        #~ logger.debug("Ignoring change %(time)s for %(alias)s:%(id)s",kw['time'],kw['alias'],kw['id'])
+        logger.info("Ignoring change %(time)s for %(alias)s:%(id)s",kw)
+        return
     #~ kw['data'] = ctrl.prepare_data(kw['data'])
     m = getattr(ctrl,kw['method'])
     m(**kw)

@@ -72,11 +72,13 @@ Référence
 
 
 
+.. actor:: jobs.JobsOverview
 
-.. _welfare.jobs.JobsOverview:
+Ceci est la vieille version du document, elle sera remplacée par
+:ref:`welfare.jobs.NewJobsOverview`
 
-Overview of current jobs
-------------------------
+.. actor:: jobs.NewJobsOverview
+
 
 This list helps you to make decisions like:
 

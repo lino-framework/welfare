@@ -14,6 +14,9 @@ Ce module facilite la gestion des demandes de cours, principalement de langues:
 Les :ref:`welfare.courses.CourseProviders` (au pluriel) réfère à la table.
 L':ref:`welfare.courses.CourseProvider` (singulier) réfère au modèle.
 
+Les :ref:`welfare.courses.CourseRequests` inactives...
+
+
 
 Référence
 =========

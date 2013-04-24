@@ -1255,8 +1255,8 @@ class Client(Person):
         if c is not None:
             return c.applies_until
 
-    @dd.displayfield(_("Coachings"))
-    def coachings(self,ar):
+    @dd.displayfield(_("Coaches"))
+    def coaches(self,ar):
         items = [unicode(obj.user) for obj in self.get_coachings(datetime.date.today())]
         return ', '.join(items)
 

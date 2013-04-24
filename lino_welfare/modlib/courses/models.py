@@ -348,7 +348,7 @@ class CourseOffersByContent(CourseOffers):
 
 
 class CourseRequestStates(dd.Workflow):
-    #~ label = _("State")
+    help_text = _("List of possible states of a Course Request")
     
     @classmethod
     def migrate(cls,old):
@@ -377,6 +377,7 @@ add('30', _("Passed"),"passed")   # bestanden
 add('40', _("Award"),"award")   # gut bestanden
 add('50', pgettext_lazy(u"courses",u"Failed"),"failed")   # nicht bestanden
 add('60', _("Aborted"),"aborted")   # abgebrochen
+add('70', _("Inactive"),"inactive") 
 
 
 class RegisterCandidate(dd.ChangeStateAction):
@@ -662,8 +663,8 @@ class PendingCourseRequests(CourseRequests):
         Called when kernel setup is done, 
         before the UI handle is being instantiated.
         """
-        self.column_names = 'date_submitted person age '
-        self.column_names += 'address person__gsm person__phone '
+        self.column_names = 'date_submitted state person age '
+        self.column_names += 'address person__gsm person__phone person__coaches '
         #~ self.column_names += 'address person__gsm person__phone person__coach1 person__coach2 '
         #~ self.column_names += 'person__address_column person__age ' 
         self.column_names += 'content urgent remark'
@@ -683,7 +684,7 @@ class PendingCourseRequests(CourseRequests):
                 return func
             vf = dd.VirtualField(models.IntegerField(label),w(sl))
             self.add_virtual_field('a'+str(sl[0]),vf)
-            self.column_names += ' ' + vf.name
+            self.column_names += ' ' + vf.name+':5'
                 
         self.column_names += ' ax'
     

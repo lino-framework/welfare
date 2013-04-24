@@ -29,7 +29,8 @@ Some tests:
 JobsOverview
 ------------
 
-Printing the document :ref:`welfare.jobs.NewJobsOverview`
+Printing the document 
+:ref:`welfare.jobs.NewJobsOverview`
 caused a "NotImplementedError: <i> inside <text:p>" traceback 
 when one of the jobs had a remark. 
 

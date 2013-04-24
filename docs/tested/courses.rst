@@ -93,9 +93,9 @@ New virtualfield `dsbe.Client.coachings` shows all active coachings
 of that client:
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
-...      column_names="person content address person__coachings")
+...      column_names="person content address person__coaches")
 ======================== ============= ===================== ==================================================
- Client                   Contenu       Address               Accompagnements
+ Client                   Contenu       Address               Accompagnants
 ------------------------ ------------- --------------------- --------------------------------------------------
  EIERSCHAL Emil (175)     Französisch   Allemagne             Hubert Huppertz
  RADERMECKER Rik (173)    Deutsch       Amsterdam, Pays-Bas   Alicia Allmanns
@@ -107,3 +107,4 @@ of that client:
 
 The last column `coachings` (Accompagnements) is also a new feature:
 it is a RemoteField ponting to a VirtualField. Very subtle!
+

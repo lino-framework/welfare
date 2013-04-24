@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-20 22:07+0300\n"
+"POT-Creation-Date: 2013-04-24 05:36+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -100,30 +100,36 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-# edfcdb32e2f2487696a52b939c06929f
-#: ../jobs.rst:79
-msgid "Overview of current jobs"
+# 414b2668e5e94189955e268ff2888a80
+#: ../jobs.rst:77
+msgid ""
+"Ceci est la vieille version du document, elle sera remplacée par "
+":ref:`welfare.jobs.NewJobsOverview`"
 msgstr ""
 
 # c4159658a2b646b29723da7095d11bf1
-#: ../jobs.rst:81
+#: ../jobs.rst:83
 msgid "This list helps you to make decisions like:"
 msgstr ""
 
 # 66e21c93d9e64e63a4c1de9207b14203
-#: ../jobs.rst:83
+#: ../jobs.rst:85
 msgid ""
 "which jobs are soon going to be free, and which candidate(s) should we "
 "suggest?"
 msgstr ""
 
 # ee4baabaec6944eaba08af0243a6a48b
-#: ../jobs.rst:85
+#: ../jobs.rst:87
 msgid "bla bla"
 msgstr ""
 
 # ddf032f6021c4e6896758b77de5b47a2
-#: ../jobs.rst:87
+#: ../jobs.rst:89
 msgid "Example (using fictive demo data):"
 msgstr ""
+
+# edfcdb32e2f2487696a52b939c06929f
+#~ msgid "Overview of current jobs"
+#~ msgstr ""
 

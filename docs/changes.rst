@@ -9,6 +9,16 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_
 (hosted on `Googlecode <http://code.google.com/p/lino>`__).
+
+
+Version 1.1.3 (in development)
+============================================
+
+- Ausdruck NewJobsOverview geht jetzt
+- Benutzermeldung wenn man VSE erstellen will und die Vertragsart 
+  anzugeben vergisst.
+- Statt einer Exception "PLZ no such controller" loggt er jetzt 
+  nur eine info() dass die Änderung ignoriert wird.
  
 
 

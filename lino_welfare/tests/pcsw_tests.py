@@ -58,6 +58,7 @@ pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 households = dd.resolve_app('households')
 debts = dd.resolve_app('debts')
+courses = dd.resolve_app('courses')
 
 #~ from lino.projects.pcsw.models import Person
 #~ from lino.modlib.cv.models import PersonProperty
@@ -129,7 +130,7 @@ class QuickTest(RemoteAuthTestCase):
             self.assertEqual(
               result['message'],
               """\
-Invalid template '' configured for ContractType u'Art.60\\xa77' (expected filename ending with '.pisa.html').""")
+Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename ending with '.pisa.html').""")
 
         
         #~ def test02(self):
@@ -496,5 +497,58 @@ Belgique""")
         #~ s2 = b2.BudgetSummary().to_rst()
         self.assertNotEqual(s1,s2)
             
+            
+        cc = courses.CourseContent(name="French")
+        cc.save()
+        courses.CourseRequest(person=self.max_mustermann,
+          date_submitted=settings.SITE.demo_date(),
+          content=cc).save()
         
+        fields = courses.PendingCourseRequests.get_handle().store.list_fields
+        #~ print fields
+        got = [f.name for f in fields]
+        #~ print got
+        expected = """
+        date_submitted state person age address person__gsm 
+        person__phone person__coaches content urgent remark 
+        a16 a25 a31 a41 a51 a61 ax 
+        id disabled_fields disabled_actions""".split()
+        self.assertEqual(got,expected)
+        
+        """
+        The person__coachings field is a virtual remote field
+        (which caused problems until 20130424).
+        """
+
+        got = '\n'.join([f.as_js(f.name) for f in fields])
+        expected = """\
+{ "type": "date", "name": "date_submitted", "dateFormat": "d.m.Y" }
+{ "name": "state" }, 'stateHidden'
+{ "name": "person" }, 'personHidden'
+{ "type": "int", "name": "age" }
+{ "name": "address" }
+{ "name": "person__gsm" }
+{ "name": "person__phone" }
+{ "name": "person__coaches" }
+{ "name": "content" }, 'contentHidden'
+{ "type": "boolean", "name": "urgent" }
+{ "name": "remark" }
+{ "type": "int", "name": "a16" }
+{ "type": "int", "name": "a25" }
+{ "type": "int", "name": "a31" }
+{ "type": "int", "name": "a41" }
+{ "type": "int", "name": "a51" }
+{ "type": "int", "name": "a61" }
+{ "type": "int", "name": "ax" }
+{ "type": "int", "name": "id" }
+{ "name": "disabled_fields" }
+{ "name": "disabled_actions" }"""
+        #~ print got
+        self.assertEqual(got,expected)
+        
+        response = self.client.get('/api/courses/PendingCourseRequests?fmt=json',REMOTE_USER='root')
+        result = self.check_json_result(response,'count rows success no_data_text title')
+        #~ print result['rows']
+        self.assertEqual(len(result['rows']),1)
+        self.assertEqual(result['rows'][0][8],'')
         
