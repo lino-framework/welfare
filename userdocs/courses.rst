@@ -24,6 +24,8 @@ Référence
 .. actor:: courses.CourseProviders
 .. actor:: courses.CourseContents
 .. actor:: courses.CourseOffers
+.. actor:: courses.Courses
+
 .. actor:: courses.CourseRequests
 .. actor:: courses.CourseRequestStates
-.. actor:: courses.Courses
+.. actor:: courses.PendingCourseRequests
