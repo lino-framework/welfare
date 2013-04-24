@@ -350,47 +350,49 @@ class CourseOffersByContent(CourseOffers):
 class CourseRequestStates(dd.Workflow):
     help_text = _("List of possible states of a Course Request")
     
-    @classmethod
-    def migrate(cls,old):
-        """
-        Used by :meth:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_4`.
-        """
-        cv = {
-          None: 'candidate',
-          1:'award',
-          2:'passed',
-          3:'failed',
-          4:'aborted'
-          }
-        return getattr(cls,cv[old])
+    #~ @classmethod
+    #~ def migrate(cls,old):
+        #~ """
+        #~ Used by :meth:`lino_welfare.modlib.pcsw.migrate.migrate_from_1_4_4`.
+        #~ """
+        #~ cv = {
+          #~ None: 'candidate',
+          #~ 1:'award',
+          #~ 2:'passed',
+          #~ 3:'failed',
+          #~ 4:'aborted'
+          #~ }
+        #~ return getattr(cls,cv[old])
+        #~ 
         
-    @classmethod
-    def allow_state_candidate(cls,self,user):
-        if self.course:
-            return True
-        return False
+    #~ @classmethod
+    #~ def allow_state_candidate(cls,self,user):
+        #~ if self.course:
+            #~ return True
+        #~ return False
     
 add = CourseRequestStates.add_item
-add('10', _("Candidate"),"candidate") # required=dict(states=['','registered']))   # Unregister
-add('20', _("Registered"),"registered") # required=dict(states=['candidate'])) # Register
+add('10', _("Candidate"),"candidate") 
+#~ add('10', _("Active"),"candidate") 
+add('20', _("Registered"),"registered") 
 add('30', _("Passed"),"passed")   # bestanden
 add('40', _("Award"),"award")   # gut bestanden
 add('50', pgettext_lazy(u"courses",u"Failed"),"failed")   # nicht bestanden
 add('60', _("Aborted"),"aborted")   # abgebrochen
-add('70', _("Inactive"),"inactive") 
+add('70', _("Inactive"),"inactive")
 
 
 class RegisterCandidate(dd.ChangeStateAction):
     label = _("Register")
-    required=dict(states=['candidate'])
-    help_text=_("Register this candidate for this course.")
+    required = dict(states=['candidate'])
+    help_text = _("Register this candidate for this course.")
 
     def run_from_ui(self,obj,ar,**kw):
         assert isinstance(obj,CourseRequest)
-        if ar.master_instance is not None:
+        if ar.actor.master is Course and ar.master_instance is not None:
             obj.course = ar.master_instance
         if not obj.course:
-            return ar.error.response(_("Cannot register to unknown course."))
+            return ar.error(_("Cannot register to unknown course."),alert=True)
         kw = super(RegisterCandidate,self).run_from_ui(obj,ar,**kw)
         kw.update(refresh_all=True)
         kw.update(message=_("%(person)s has been registered to %(course)s") % dict(
@@ -399,8 +401,8 @@ class RegisterCandidate(dd.ChangeStateAction):
     
 class UnRegisterCandidate(dd.ChangeStateAction):
     label = _("Unregister")
-    required=dict(states=['registered'])
-    help_text=_("Unregister this candidate from this course.")
+    required = dict(states=['registered'])
+    help_text = _("Unregister this candidate from this course.")
 
     def run_from_ui(self,obj,ar,**kw):
         assert isinstance(obj,CourseRequest)
@@ -508,9 +510,19 @@ class CourseRequest(dd.Model):
             if not self.date_ended:
                 self.date_ended = datetime.date.today()
       
+    def get_row_permission(self,ar,state,ba):
+        if not super(CourseRequest,self).get_row_permission(ar,state,ba):
+            #~ if ba.action.action_name == 'wf7':
+                #~ logger.info('20130424 courses.CourseRequest.get_row_permission() %r super said no',ba)
+            return False
+        if isinstance(ba.action,RegisterCandidate):
+            if ar.actor.master is not Course or ar.master_instance is None:
+                return False
+        return True
         
         
 class CourseRequests(dd.Table):
+    #~ debug_permissions = 20130424
     model = CourseRequest
     required=dict(user_groups=['integ'],user_level='manager')
     detail_layout = """
@@ -646,6 +658,8 @@ class CandidatesByCourse(RequestsByCourse):
         obj.course = None
         return obj
 
+CLIENTS_TABLE = pcsw.Clients
+
 class PendingCourseRequests(CourseRequests):
     """
     List of pending course requests.
@@ -654,6 +668,14 @@ class PendingCourseRequests(CourseRequests):
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)
+    parameters = dict(
+        request_state = CourseRequestStates.field(blank=True),
+        course_content = models.ForeignKey("courses.CourseContent",blank=True),
+        course_provider = models.ForeignKey('courses.CourseProvider',blank=True),
+        **CLIENTS_TABLE.parameters)
+    params_layout = CLIENTS_TABLE.params_layout + """\
+    request_state course_content course_provider
+    """
     
     
     @classmethod
@@ -663,7 +685,7 @@ class PendingCourseRequests(CourseRequests):
         Called when kernel setup is done, 
         before the UI handle is being instantiated.
         """
-        self.column_names = 'date_submitted state person age '
+        self.column_names = 'date_submitted workflow_buttons:30 person age '
         self.column_names += 'address person__gsm person__phone person__coaches '
         #~ self.column_names += 'address person__gsm person__phone person__coach1 person__coach2 '
         #~ self.column_names += 'person__address_column person__age ' 
@@ -691,12 +713,15 @@ class PendingCourseRequests(CourseRequests):
         
     @classmethod
     def get_data_rows(self,ar):
-        qs = super(PendingCourseRequests,self).get_request_queryset(ar)
+        #~ qs = super(PendingCourseRequests,self).get_request_queryset(ar)
+        qs = self.get_request_queryset(ar)
         for obj in qs:
             age = obj.person.get_age_years()
             if age is not None: age = age.days / 365
             obj._age_in_years = age
             yield obj
+            
+    editable = True
     
 
     @dd.virtualfield(models.IntegerField(_("Age")))
@@ -719,33 +744,34 @@ class PendingCourseRequests(CourseRequests):
         return 0
         #~ return obj._age_in_years is None
         
-    #~ @dd.virtualfield(models.IntegerField(_("16-24")))
-    #~ def a24(self,obj,request):
-        #~ if obj._age_in_years is None : return 0
-        #~ if obj._age_in_years <= 24 : return 1
-        #~ return 0
+    @classmethod
+    def get_request_queryset(self,ar):
+        #~ raise Exception(20130424)
+        qs = super(PendingCourseRequests,self).get_request_queryset(ar)
+        clients_qs = CLIENTS_TABLE.get_request_queryset(ar)
+        #~ print 20130424, clients_qs
+        qs = qs.filter(person__in=clients_qs)
+        if ar.param_values.request_state:
+            qs = qs.filter(state=ar.param_values.request_state)
+        if ar.param_values.course_content:
+            qs = qs.filter(content=ar.param_values.course_content)
+        if ar.param_values.course_provider:
+            qs = qs.filter(provider=ar.param_values.course_provider)
+        return qs
         
-    #~ @dd.virtualfield(models.IntegerField(_("25-30")))
-    #~ def a30(self,obj,request):
-        #~ if obj._age_in_years is None : return 0
-        #~ if obj._age_in_years <= 24: return 0
-        #~ if obj._age_in_years > 30: return 0
-        #~ return 1
-        
-    #~ @dd.virtualfield(models.IntegerField(_("31-40")))
-    #~ def a40(self,obj,request):
-        #~ if obj._age_in_years is None : return 0
-        #~ if obj._age_in_years <= 30: return 0
-        #~ if obj._age_in_years > 40: return 0
-        #~ return 1
-        
-    #~ @dd.virtualfield(models.IntegerField(_("41-50")))
-    #~ def a50(self,obj,request):
-        #~ if obj._age_in_years is None : return 0
-        #~ if obj._age_in_years <= 40: return 0
-        #~ if obj._age_in_years > 50: return 0
-        #~ return 1
-        
+    @classmethod
+    def get_title_tags(self,ar):
+        if ar.param_values.request_state:
+            yield unicode(ar.param_values.request_state)
+        if ar.param_values.course_content:
+            yield unicode(ar.param_values.course_content)
+        if ar.param_values.course_provider:
+            yield unicode(ar.param_values.course_provider)
+        for t in super(PendingCourseRequests,self).get_title_tags(ar):
+            yield t
+        for t in CLIENTS_TABLE.get_title_tags(ar):
+            yield t
+            
         
 MODULE_LABEL = _("Courses")
         
@@ -775,9 +801,13 @@ def setup_explorer_menu(site,ui,profile,m):
             
 def setup_workflows(site):
 
-    CourseRequestStates.registered.add_workflow(RegisterCandidate)
-    CourseRequestStates.candidate.add_workflow(UnRegisterCandidate)
-    CourseRequestStates.passed.add_workflow(states="registered")
-    CourseRequestStates.failed.add_workflow(states="registered")
-    CourseRequestStates.aborted.add_workflow(states="registered")
+    CourseRequestStates.registered.add_transition(RegisterCandidate)
+    CourseRequestStates.candidate.add_transition(UnRegisterCandidate)
+    CourseRequestStates.passed.add_transition(states="registered")
+    CourseRequestStates.failed.add_transition(states="registered")
+    CourseRequestStates.aborted.add_transition(states="registered")
+    
+    CourseRequestStates.inactive.add_transition(states="candidate")
+    CourseRequestStates.candidate.add_transition(states="inactive")
+        #~ debug_permissions = 20130424)
     

@@ -509,10 +509,10 @@ Belgique""")
         got = [f.name for f in fields]
         #~ print got
         expected = """
-        date_submitted state person age address person__gsm 
+        date_submitted workflow_buttons person age address person__gsm 
         person__phone person__coaches content urgent remark 
         a16 a25 a31 a41 a51 a61 ax 
-        id disabled_fields disabled_actions""".split()
+        id disabled_fields disabled_actions disable_editing""".split()
         self.assertEqual(got,expected)
         
         """
@@ -523,7 +523,7 @@ Belgique""")
         got = '\n'.join([f.as_js(f.name) for f in fields])
         expected = """\
 { "type": "date", "name": "date_submitted", "dateFormat": "d.m.Y" }
-{ "name": "state" }, 'stateHidden'
+{ "name": "workflow_buttons" }
 { "name": "person" }, 'personHidden'
 { "type": "int", "name": "age" }
 { "name": "address" }
@@ -542,13 +542,14 @@ Belgique""")
 { "type": "int", "name": "ax" }
 { "type": "int", "name": "id" }
 { "name": "disabled_fields" }
-{ "name": "disabled_actions" }"""
+{ "name": "disabled_actions" }
+{ "name": "disable_editing" }"""
         #~ print got
         self.assertEqual(got,expected)
         
         response = self.client.get('/api/courses/PendingCourseRequests?fmt=json',REMOTE_USER='root')
-        result = self.check_json_result(response,'count rows success no_data_text title')
+        result = self.check_json_result(response,'count rows success no_data_text title param_values')
         #~ print result['rows']
-        self.assertEqual(len(result['rows']),1)
+        self.assertEqual(len(result['rows']),2)
         self.assertEqual(result['rows'][0][8],'')
         

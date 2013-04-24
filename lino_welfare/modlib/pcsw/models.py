@@ -403,19 +403,13 @@ class ClientStates(dd.Workflow):
     
     verbose_name_plural = _("Client states")
     
-    @classmethod
-    def allow_state_newcomer(cls,obj,user):
-        if obj.client_state == ClientStates.coached:
-            if obj.coachings_by_client.count() > 0:
-                return False
-        return True
-        
     #~ @classmethod
-    #~ def allow_state_former(cls,obj,user):
+    #~ def allow_state_newcomer(cls,obj,user):
         #~ if obj.client_state == ClientStates.coached:
-            #~ if obj.coachings_by_client.filter(end_date__isnull=True).count():
+            #~ if obj.coachings_by_client.count() > 0:
                 #~ return False
         #~ return True
+        
         
     @classmethod
     def before_state_change(cls,obj,ar,kw,oldstate,newstate):
@@ -1691,13 +1685,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 ar.param_values.and_coached_by,
                 ar.param_values.coached_on,
                 False)
-            
-        #~ if ar.param_values.coached_on:
-            #~ qs = only_coached_on(qs,ar.param_values.coached_on)
-        #~ if ar.param_values.coached_by:
-            #~ qs = only_coached_by(qs,ar.param_values.coached_by)
-        #~ if ar.param_values.only_primary:
-            #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
             
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)

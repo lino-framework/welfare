@@ -525,12 +525,24 @@ customize_users()
 
 def setup_workflows(site):
 
-    #~ ClientStates.newcomer.add_workflow(states='refused coached invalid former',user_groups='newcomers')
-    pcsw.ClientStates.newcomer.add_workflow(states='refused coached former',user_groups='newcomers')
-    pcsw.ClientStates.refused.add_workflow(pcsw.RefuseClient)
-    #~ ClientStates.refused.add_workflow(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
-    #~ ClientStates.coached.add_workflow(_("Coached"),states='new',user_groups='newcomers')
-    pcsw.ClientStates.former.add_workflow(_("Former"),
+    #~ ClientStates.newcomer.add_transition(states='refused coached invalid former',user_groups='newcomers')
+    
+    def allow_state_newcomer(action,user,obj,state):
+        """
+        A Client with at least one Coaching cannot become newcomer.
+        """
+        #~ if obj.client_state == ClientStates.coached:
+        if obj.coachings_by_client.count() > 0:
+            return False
+        return True
+    
+    
+    pcsw.ClientStates.newcomer.add_transition(states='refused coached former',
+        user_groups='newcomers',allow=allow_state_newcomer)
+    pcsw.ClientStates.refused.add_transition(pcsw.RefuseClient)
+    #~ ClientStates.refused.add_transition(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
+    #~ ClientStates.coached.add_transition(_("Coached"),states='new',user_groups='newcomers')
+    pcsw.ClientStates.former.add_transition(_("Former"),
         #~ states='coached invalid',
         states='coached',
         user_groups='newcomers')

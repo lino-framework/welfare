@@ -95,12 +95,12 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
         add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
         add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
-        add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
         add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
         add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
         
         json_fields = 'count rows title success no_data_text param_values'
+        add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
         add_case('rolf','api/contacts/Persons',json_fields,71,**kw)
         add_case('rolf','api/pcsw/Clients',json_fields,59,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
