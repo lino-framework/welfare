@@ -108,3 +108,6 @@ of that client:
 The last column `coachings` (Accompagnements) is also a new feature:
 it is a RemoteField ponting to a VirtualField. Very subtle!
 
+New version numbers
+-------------------
+
