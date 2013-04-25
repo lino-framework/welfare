@@ -315,7 +315,6 @@ class Course(dd.Model,mixins.Printable):
         
 class Courses(dd.Table):
     required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
     model = Course
     order_by = ['start_date']
     detail_layout = """
@@ -725,6 +724,7 @@ def setup_main_menu(site,ui,profile,m):
         m = m.add_menu("courses",MODULE_LABEL)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)
+        #~ m.add_action(Courses)
         m.add_action(PendingCourseRequests)
             
   
