@@ -372,7 +372,8 @@ class CourseRequestStates(dd.Workflow):
         #~ return False
     
 add = CourseRequestStates.add_item
-add('10', _("Candidate"),"candidate") 
+add('10', _("Open"),"candidate") 
+#~ add('10', _("Candidate"),"candidate") 
 #~ add('10', _("Active"),"candidate") 
 add('20', _("Registered"),"registered") 
 add('30', _("Passed"),"passed")   # bestanden

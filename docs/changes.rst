@@ -14,9 +14,18 @@ The final truth about what's going on is only
 Version 1.1.3 (in development)
 ============================================
 
-- Ausdruck NewJobsOverview geht jetzt
+- :menuselection:`Kurse --> Offene Kursanfragen` hat jetzt ein Panel für 
+  Filterkriterien. 
+  :ref:`welfare.courses.PendingCourseRequests`.
+  Neuer Status "Inaktiv". Status "Kandidat" umbenannt nach "Offen".
+  Ich warte auf euer Feedback.
+  
+- Ausdruck :ref:`welfare.jobs.NewJobsOverview` geht jetzt
+  Diese Liste ist im Menü "DSBE" und nicht im Menü "Listings".
+  
 - Benutzermeldung wenn man VSE erstellen will und die Vertragsart 
   anzugeben vergisst.
+  
 - Statt einer Exception "PLZ no such controller" loggt er jetzt 
   nur eine info() dass die Änderung ignoriert wird.
  
