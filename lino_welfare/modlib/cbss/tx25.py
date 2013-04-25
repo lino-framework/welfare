@@ -1414,20 +1414,22 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
     def get_data_rows(self,ar):
         rti = ar.master_instance
         if rti is None: 
-            #~ print "20120606 ipr is None"
+            #~ print "20130425 rti is None"
             return
         #~ if not ipr.status in (RequestStates.ok,RequestStates.fictive):
         #~ if not rti.status in (RequestStates.ok,RequestStates.warnings):
             #~ return
         reply = rti.get_service_reply()
         if reply is None:
+            #~ print "20130425 reply is None"
             return
+        #~ print "20130425 ok"
         reply_has_result(reply)
         
         res = reply.rrn_it_implicit
         
         for name, node in res:
-            #~ print name, node.__class__
+            #~ print 20130425, name, node.__class__
             m = getattr(RowHandlers,node.__class__.__name__,None)
             if m is None:
                 raise Exception("No handler for %s (%s)" 

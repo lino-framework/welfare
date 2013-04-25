@@ -14,13 +14,16 @@ The final truth about what's going on is only
 Version 1.1.3 (in development)
 ============================================
 
-- :menuselection:`Kurse --> Offene Kursanfragen` hat jetzt ein Panel für 
-  Filterkriterien. 
-  :ref:`welfare.courses.PendingCourseRequests`.
-  Neuer Status "Inaktiv". Status "Kandidat" umbenannt nach "Offen".
-  Ich warte auf euer Feedback.
+- :ref:`welfare.courses.PendingCourseRequests`. 
+  (:menuselection:`Kurse --> Offene Kursanfragen`) 
+  hat jetzt zwei neue Kolonnen "Arbeitsablauf" und "Begleiter".
+  Ausserdem ein umfangreiches Panel für Filterkriterien. 
+  Kursanfragen haben einen neuen Zustand "Inaktiv". 
+  Zustand "Kandidat" umbenannt nach "Offen".
   
-- Ausdruck :ref:`welfare.jobs.NewJobsOverview` geht jetzt
+- Ausdruck :ref:`welfare.jobs.NewJobsOverview` 
+  (:menuselection:`DSBE --> Übersicht Art60*7`)
+  funktioniert jetzt.
   Diese Liste ist im Menü "DSBE" und nicht im Menü "Listings".
   
 - Benutzermeldung wenn man VSE erstellen will und die Vertragsart 
