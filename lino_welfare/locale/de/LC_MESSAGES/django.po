@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-25 11:54+0300\n"
-"PO-Revision-Date: 2013-04-25 11:55+0300\n"
+"POT-Creation-Date: 2013-04-25 11:58+0300\n"
+"PO-Revision-Date: 2013-04-25 11:59+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -951,6 +951,7 @@ msgid "List of possible states of a Course Request"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:375
+msgctxt "courses"
 msgid "Open"
 msgstr "Offen"
 
@@ -965,6 +966,11 @@ msgstr "Bestanden"
 #: lino_welfare/modlib/courses/models.py:380
 msgid "Award"
 msgstr "Gut bestanden"
+
+#: lino_welfare/modlib/courses/models.py:381
+msgctxt "courses"
+msgid "Failed"
+msgstr "Nicht bestanden"
 
 #: lino_welfare/modlib/courses/models.py:382
 msgid "Aborted"
@@ -2755,5 +2761,3 @@ msgstr ""
 msgid "The official code for this country used by statbel.fgov.be"
 msgstr ""
 
-#~ msgid "Candidate"
-#~ msgstr "Kandidat"

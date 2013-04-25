@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-25 11:54+0300\n"
+"POT-Creation-Date: 2013-04-25 11:58+0300\n"
 "PO-Revision-Date: 2013-03-23 17:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -929,6 +929,7 @@ msgid "List of possible states of a Course Request"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:375
+msgctxt "courses"
 msgid "Open"
 msgstr ""
 
@@ -942,6 +943,11 @@ msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:380
 msgid "Award"
+msgstr ""
+
+#: lino_welfare/modlib/courses/models.py:381
+msgctxt "courses"
+msgid "Failed"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:382
@@ -2736,6 +2742,6 @@ msgstr ""
 msgid "The official code for this country used by statbel.fgov.be"
 msgstr ""
 
-#~ msgid "Candidate"
+#~ msgid "Open"
 #~ msgstr ""
 

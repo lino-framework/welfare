@@ -33,7 +33,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy 
+from django.utils.translation import pgettext_lazy  as pgettext
 from django.utils.translation import string_concat
 from django.utils.encoding import force_unicode 
 from django.utils.functional import lazy
@@ -372,13 +372,13 @@ class CourseRequestStates(dd.Workflow):
         #~ return False
     
 add = CourseRequestStates.add_item
-add('10', _("Open"),"candidate") 
+add('10', pgettext("courses","Open"),"candidate") 
 #~ add('10', _("Candidate"),"candidate") 
 #~ add('10', _("Active"),"candidate") 
 add('20', _("Registered"),"registered") 
 add('30', _("Passed"),"passed")   # bestanden
 add('40', _("Award"),"award")   # gut bestanden
-add('50', pgettext_lazy(u"courses",u"Failed"),"failed")   # nicht bestanden
+add('50', pgettext("courses","Failed"),"failed")   # nicht bestanden
 add('60', _("Aborted"),"aborted")   # abgebrochen
 add('70', _("Inactive"),"inactive")
 
@@ -583,7 +583,7 @@ class ParticipantsByCourse(RequestsByCourse):
           #~ message=_("%(person)s passed %(course)s") 
             #~ % dict(person=self.person,course=self.course))
             
-    #~ @dd.action(pgettext_lazy(u"courses",u"Failed"),required=dict(states=['registered']))
+    #~ @dd.action(pgettext(u"courses",u"Failed"),required=dict(states=['registered']))
     #~ def failed(self,ar):
         #~ self.state = CourseRequestStates.failed
         #~ if not self.date_ended:
