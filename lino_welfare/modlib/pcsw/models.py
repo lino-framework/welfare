@@ -2341,11 +2341,13 @@ class ClientContact(contacts.ContactRelated):
     
     @dd.chooser()
     def company_choices(self,type):
-        if not type:  
-            return contacts.Companies.request().data_iterator
-        return contacts.Companies.request(client_contact_type=type).data_iterator
-        #~ type = ClientContactTypes.get_by_value(type)
-        #~ return type.companies_table.request().data_iterator
+        qs = contacts.Companies.request().data_iterator
+        if type is not None:  
+            qs = qs.filter(client_contact_type=type)
+        return qs
+        #~ if not type:  
+            #~ return contacts.Companies.request().data_iterator
+        #~ return contacts.Companies.request(client_contact_type=type).data_iterator
         
 dd.update_field(ClientContact,'contact_person',verbose_name=_("Contact person"))
           
