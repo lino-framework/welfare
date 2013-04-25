@@ -11,8 +11,10 @@ The final truth about what's going on is only
 (hosted on `Googlecode <http://code.google.com/p/lino>`__).
 
 
-Version 1.1.3 (in development)
+Version 1.1.3 (in development / testing)
 ============================================
+
+- Im "Resultat" einer Tx25 wurde nichts angezeigt. Behoben.
 
 - :ref:`welfare.courses.PendingCourseRequests`. 
   (:menuselection:`Kurse --> Offene Kursanfragen`) 
@@ -25,13 +27,15 @@ Version 1.1.3 (in development)
   (:menuselection:`DSBE --> Übersicht Art60*7`)
   funktioniert jetzt.
   Diese Liste ist im Menü "DSBE" und nicht im Menü "Listings".
+  Ich habe vor, das Menü "Listings" demnächst komplett 
+  rauszuschmeissen.
   
 - Benutzermeldung wenn man VSE erstellen will und die Vertragsart 
   anzugeben vergisst.
   
-- Statt einer Exception "PLZ no such controller" loggt er jetzt 
+- Wenn in TIM eine PLZ bearbeitet wurde, loggt watch_tim
+  jetzt statt einer Exception "PLZ no such controller"  
   nur eine info() dass die Änderung ignoriert wird.
- 
 
 
 Version 1.1.2 (released :blogref:`20130422`)

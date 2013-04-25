@@ -375,16 +375,16 @@ add = CourseRequestStates.add_item
 add('10', pgettext("courses","Open"),"candidate") 
 #~ add('10', _("Candidate"),"candidate") 
 #~ add('10', _("Active"),"candidate") 
-add('20', _("Registered"),"registered") 
-add('30', _("Passed"),"passed")   # bestanden
+add('20', pgettext("courses","Registered"),"registered") 
+add('30', pgettext("courses","Passed"),"passed")   # bestanden
 add('40', _("Award"),"award")   # gut bestanden
 add('50', pgettext("courses","Failed"),"failed")   # nicht bestanden
-add('60', _("Aborted"),"aborted")   # abgebrochen
+add('60', pgettext("courses","Aborted"),"aborted")   # abgebrochen
 add('70', _("Inactive"),"inactive")
 
 
 class RegisterCandidate(dd.ChangeStateAction):
-    label = _("Register")
+    label = pgettext("courses","Register")
     required = dict(states=['candidate'])
     help_text = _("Register this candidate for this course.")
 
@@ -401,7 +401,7 @@ class RegisterCandidate(dd.ChangeStateAction):
         return kw
     
 class UnRegisterCandidate(dd.ChangeStateAction):
-    label = _("Unregister")
+    label = pgettext("courses","Unregister")
     required = dict(states=['registered'])
     help_text = _("Unregister this candidate from this course.")
 
@@ -570,50 +570,7 @@ class ParticipantsByCourse(RequestsByCourse):
     List of participating candidates for the given :class:`Course`.
     """
     label = _("Participants")
-    column_names = 'person remark:20 date_ended state workflow_buttons:60'
-    #~ do_unregister = UnregisterCandidate()
-    
-    #~ @dd.action(_("Passed"),required=dict(states=['registered']))
-    #~ def passed(self,ar):
-        #~ self.state = CourseRequestStates.passed
-        #~ if not self.date_ended:
-            #~ self.date_ended = datetime.date.today()
-        #~ self.save()
-        #~ return ar.success_response(refresh=True,
-          #~ message=_("%(person)s passed %(course)s") 
-            #~ % dict(person=self.person,course=self.course))
-            
-    #~ @dd.action(pgettext(u"courses",u"Failed"),required=dict(states=['registered']))
-    #~ def failed(self,ar):
-        #~ self.state = CourseRequestStates.failed
-        #~ if not self.date_ended:
-            #~ self.date_ended = datetime.date.today()
-        #~ self.save()
-        #~ return ar.success_response(refresh=True,
-          #~ message=_("%(person)s failed in %(course)s") 
-            #~ % dict(person=self.person,course=self.course))
-            
-    #~ @dd.action(_("Aborted"),required=dict(states=['registered']))
-    #~ def aborted(self,ar):
-        #~ self.state = CourseRequestStates.aborted
-        #~ self.save()
-        #~ return ar.success_response(refresh=True,
-          #~ message=_("%(person)s aborted from %(course)s") 
-            #~ % dict(person=self.person,course=self.course))
-            
-    #~ @dd.action(_("Unregister"),required=dict(states=['registered']))
-    #~ def unregister(self,ar):
-        #~ """
-        #~ Unregister the given :class:`Candidate` for the given :class:`Course`.
-        #~ This action is available on a row of :class:`ParticipantsByCourse`.
-        #~ """
-        #~ course = self.course
-        #~ self.state = CourseRequestStates.candidate
-        #~ self.course = None
-        #~ self.save()
-        #~ return ar.success_response(refresh_all=True,
-          #~ message=_("%(person)s has been unregistered from %(course)s") 
-            #~ % dict(person=self.person,course=course))
+    column_names = 'person remark:20 date_ended workflow_buttons:60'
     
     
 
@@ -623,25 +580,8 @@ class CandidatesByCourse(RequestsByCourse):
     which are not registiered.
     """
     label = _("Candidates")
-    column_names = 'person remark:20 date_submitted state workflow_buttons:60 content'
+    column_names = 'person remark:20 date_submitted workflow_buttons:60 content'
     
-    
-    #~ @dd.action(_("Register"),required=dict(states=['candidate']))
-    #~ def register(self,ar):
-        #~ """
-        #~ Register the given :class:`Candidate` for the given :class:`Course`.
-        #~ This action is available on a row of :class:`CandidatesByCourse`.
-        #~ """
-        #~ if ar.master_instance is not None:
-            #~ self.course = ar.master_instance
-        #~ if not self.course:
-            #~ return ar.error.response(_("Cannot register to unknown course."))
-        #~ self.state = CourseRequestStates.registered
-        #~ self.save()
-        #~ return ar.success_response(refresh_all=True,
-            #~ message=_("%(person)s has been registered to %(course)s") % dict(
-                #~ person=self.person,course=self.course))
-        
     
     @classmethod
     def get_request_queryset(self,rr):

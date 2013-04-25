@@ -1311,7 +1311,7 @@ class JobsOverviewByType(Jobs):
     """
     required = dd.required(user_groups=['integ'])
     label = _("Contracts Situation") 
-    column_names = "job_desc:20 working:30 candidates:30 probation:30"
+    column_names = "job_desc:20 working:30 probation:30 candidates:30"
     master_key = 'type'
    
     parameters = dict(

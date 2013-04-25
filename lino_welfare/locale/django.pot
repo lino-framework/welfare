@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-04-25 11:58+0300\n"
+"POT-Creation-Date: 2013-04-25 16:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -324,7 +324,7 @@ msgid "Civil state"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1336
-#: lino_welfare/modlib/courses/models.py:732
+#: lino_welfare/modlib/courses/models.py:672
 #: lino_welfare/modlib/pcsw/models.py:1437
 msgid "Address"
 msgstr ""
@@ -334,12 +334,10 @@ msgid "Action"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1385
-#: lino_welfare/modlib/courses/models.py:387
 msgid "Register"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1386
-#: lino_welfare/modlib/courses/models.py:404
 msgid "Unregister"
 msgstr ""
 
@@ -891,7 +889,7 @@ msgid "Course"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:254
-#: lino_welfare/modlib/courses/models.py:777
+#: lino_welfare/modlib/courses/models.py:717
 msgid "Courses"
 msgstr ""
 
@@ -934,10 +932,12 @@ msgid "Open"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:378
+msgctxt "courses"
 msgid "Registered"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:379
+msgctxt "courses"
 msgid "Passed"
 msgstr ""
 
@@ -951,11 +951,17 @@ msgid "Failed"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:382
+msgctxt "courses"
 msgid "Aborted"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:383
 msgid "Inactive"
+msgstr ""
+
+#: lino_welfare/modlib/courses/models.py:387
+msgctxt "courses"
+msgid "Register"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:389
@@ -969,6 +975,11 @@ msgstr ""
 #: lino_welfare/modlib/courses/models.py:399
 #, python-format
 msgid "%(person)s has been registered to %(course)s"
+msgstr ""
+
+#: lino_welfare/modlib/courses/models.py:404
+msgctxt "courses"
+msgid "Unregister"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:406
@@ -1019,7 +1030,7 @@ msgstr ""
 msgid "Participants"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:625
+#: lino_welfare/modlib/courses/models.py:582
 #: lino_welfare/modlib/jobs/models.py:1130
 #: lino_welfare/modlib/jobs/models.py:1134
 #: lino_welfare/modlib/jobs/models.py:1285
@@ -1027,15 +1038,15 @@ msgstr ""
 msgid "Candidates"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:669
+#: lino_welfare/modlib/courses/models.py:609
 msgid "Pending Course Requests"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:728
+#: lino_welfare/modlib/courses/models.py:668
 msgid "Age"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:742
+#: lino_welfare/modlib/courses/models.py:682
 msgid "unknown age"
 msgstr ""
 
