@@ -98,6 +98,7 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
         add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
         add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
+        add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,44,mt=87,mk=16,**kw)
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
