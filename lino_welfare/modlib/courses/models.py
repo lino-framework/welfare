@@ -571,6 +571,7 @@ class ParticipantsByCourse(RequestsByCourse):
     """
     label = _("Participants")
     column_names = 'person remark:20 date_ended workflow_buttons:60'
+    auto_fit_column_widths = True
     
     
 
@@ -581,6 +582,7 @@ class CandidatesByCourse(RequestsByCourse):
     """
     label = _("Candidates")
     column_names = 'person remark:20 date_submitted workflow_buttons:60 content'
+    auto_fit_column_widths = True
     
     
     @classmethod
