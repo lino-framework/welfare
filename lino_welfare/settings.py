@@ -226,12 +226,11 @@ class Site(Site,cbss.SiteMixin):
             
             
             
-        if profile.level >= dd.UserLevels.manager: # is_staff:
+        #~ if profile.level >= dd.UserLevels.manager: # is_staff:
           
-            m = main.add_menu("explorer",_("Explorer"))
-            self.on_each_app('setup_explorer_menu',ui,profile,m)
-            
-            m.add_action(self.modules.properties.Properties)
+        m = main.add_menu("explorer",_("Explorer"))
+        self.on_each_app('setup_explorer_menu',ui,profile,m)
+        m.add_action(self.modules.properties.Properties)
 
         
         m = main.add_menu("site",_("Site"))

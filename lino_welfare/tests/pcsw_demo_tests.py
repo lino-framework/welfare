@@ -17,9 +17,10 @@ This module contains tests that are run on a demo database.
   
 To run only this test suite::
 
-  python manage.py test lino_welfare.DemoTest
+  $ cd ~/hgwork/welfare/lino_welfare/demo
+  $ python manage.py test lino_welfare.DemoTest
   
-Functions named `test0*` do not modify any data.
+Methods named `test0*` do not modify any data.
 
 """
 
@@ -36,6 +37,7 @@ from django.conf import settings
 from django.utils.encoding import force_unicode
 from django.utils import translation
 from django.core.exceptions import ValidationError
+from django.contrib.contenttypes.models import ContentType
 
 
 #~ from django.utils import unittest
@@ -44,7 +46,7 @@ from django.core.exceptions import ValidationError
 #from lino.modlib.contacts.models import Contact, Companies
 #from lino.modlib.countries.models import Country
 
-#~ from lino import dd
+from lino import dd
 #~ from lino.utils import i2d
 #~ from lino.utils.jsgen import py2js
 #~ from north import babel
@@ -55,6 +57,7 @@ from djangosite.utils.test import RemoteAuthTestCase
 
 
 #~ pcsw = dd.resolve_app('pcsw')
+cbss = dd.resolve_app('cbss')
 
 #~ Person = resolve_model('contacts.Person')
 #~ Property = resolve_model('properties.Property')
@@ -98,7 +101,8 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
         add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
         add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
-        add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,44,mt=87,mk=16,**kw)
+        mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
+        add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
@@ -121,9 +125,7 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
         add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
         add_case('rolf','choices/pcsw/ContactsByClient/company?type=1',json_fields,5,**kw)
-        if False:
-            # TODO
-            add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
+        add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
         
         failures = 0
         for i,case in enumerate(cases):

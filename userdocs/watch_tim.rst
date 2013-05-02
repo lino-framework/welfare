@@ -55,7 +55,7 @@ TIM kennt diese Nuance nicht.
 Veraltete Partner
 -----------------
 
-Das Attribut "veraltet" bedeutet: 
+Das Attribut "veraltet" bedeutet allgemein in Lino: 
 
 - die Daten dieses Partners werden nicht mehr gepflegt, 
 - alle Angaben verstehen sich als "so war es, bevor dieser Partner 
@@ -67,6 +67,11 @@ Um sie trotzdem zu sehen,
 muss das Ankreuzfeld `Auch veraltete Klienten`
 (bzw. `Auch veraltete Partner`)
 im Parameter-Panel der Liste angekreuzt werden.
+
+Bei importierten Partnern ist es schreibgeschützt und 
+ist eingeschaltet, wenn diese Person in TIM 
+entweder in **Partnerart "Inaktive"** steht oder 
+das **Partnerattribut W** eingeschaltet hat. 
 
 
 Partnerattribute
@@ -108,8 +113,6 @@ Mögliche Überraschungen
   Also nachprüfen, ob er in TIM das **Partnerattribut W** gesetzt hat. 
   Oder gar unter Partnerart "Inaktive" steht.
 
-
-
 - "Ich sehe in "meiner" Liste in Lino einen bestimmten aus TIM importierten 
   Klienten, den ich schon seit Langem nicht mehr begleite."
   --> Um einen aus TIM importierten Klienten 
@@ -128,47 +131,6 @@ Außer wenn `PAR->Allo` es einen der Werte "Eheleute",
 
 
 
-
-
-.. _welfare.pcsw.Client:
-
-Klient
-------
-
-Ein Klient ist eine Person, für die wir eine Serie von 
-zusätzlichen Daten erfassen.
-
-.. _welfare.pcsw.Clients:
-
-Klienten
-========
-
-Klienten gibt es in drei **Tabellenansichten**, 
-die sich lediglich durch Kolonnenreihenfolge 
-und Filterparameter unterscheiden:
-
-- "Alle Klienten" 
-  (Menü :menuselection:`Kontakte --> Klienten`) : 
-  allgemeine Liste, die jeder Benutzer sehen darf.
-
-- DSBE-Klienten
-  (Menü :menuselection:`DSBE --> Klienten`)
-  spezielle Liste für die Kollegen im DSBE.
-  Zeigt immer nur **begleitete** Kunden. 
-  Hier kann man keine neuen Klienten anlegen.
-  Die Reiter Kompetenzen, Verträge... finden sich nur hier.
-  
-- Neue Klienten
-  (Menü :menuselection:`Neuanträge --> Klienten`):
-  spezielle Liste für die Zuweisung von Neuanträgen.
-
-N.B. 
-Das Detail, das bei Doppelklick angezeigt wird, 
-ist bei allen drei Ansichten das Gleiche. 
-Das hängt vom :ref:`welfare.users.UserProfile` ab.
-
-
-
 Die INSS
 --------
 
@@ -183,7 +145,6 @@ Die INSS
 - Ein "Numéro bis" ist eine provisorische INSS, 
   die z.B. auch 680000 formatiert ist.
   So eine Bis-Nummer kann also dann auch irgendwann mal ändern.
-  
 
 
 Bearbeitungszustand

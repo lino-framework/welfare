@@ -42,7 +42,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
+from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.translation import string_concat
 from django.utils.encoding import force_unicode 
 from django.utils.functional import lazy
@@ -96,7 +96,7 @@ from lino.mixins.printable import decfmt
 class PeriodsField(models.DecimalField):
     """
     Used for `Entry.periods` and `Account.periods`
-    (which holds simply the default value for the former).
+    (the latter holds simply the default value for the former).
     It means: for how many months the entered amount counts.
     Default value is 1. For yearly amounts set it to 12.
     """
@@ -104,6 +104,9 @@ class PeriodsField(models.DecimalField):
         defaults = dict(
             blank=True,
             default=1,
+            help_text = _("""\
+For how many months the entered amount counts. 
+For example 1 means a monthly amount, 12 a yearly amount."""),
             #~ max_length=3,
             max_digits=3,
             decimal_places=0,
@@ -171,9 +174,12 @@ Vielleicht mit Fußnoten?"""))
     print_empty_rows = models.BooleanField(
         verbose_name=_("Print empty rows"),
         help_text=_("""Check this to print also empty rows for later completion."""))
-    ignore_yearly_incomes = models.BooleanField(
-        verbose_name=_("Ignore yearly incomes"),
-        help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.DebtsByBudget`."""))
+    #~ ignore_yearly_incomes = models.BooleanField(
+        #~ verbose_name=_("Ignore yearly incomes"),
+        #~ help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.DebtsByBudget`."""))
+    include_yearly_incomes = models.BooleanField(
+        verbose_name=_("Include yearly incomes"),
+        help_text=_("""Check this to include yearly incomes in the Debts Overview table of this Budget."""))
     intro = dd.RichTextField(_("Introduction"),format="html",blank=True)
     conclusion = dd.RichTextField(_("Conclusion"),format="html",blank=True)
     dist_amount = dd.PriceField(_("Distributable amount"),default=120,
@@ -219,6 +225,10 @@ The total monthly amount available for debts distribution."""))
         else:
             return None
         
+    def get_print_language(self,pm):
+        if self.partner:
+            return self.partner.language
+        return super(Budget,self).get_print_language(pm)
 
     @property
     def actor1(self):
@@ -444,7 +454,7 @@ class BudgetDetail(dd.FormLayout):
     summary_tab = dd.Panel("""
     summary1:30 summary2:40
     DistByBudget
-    """,label = pgettext_lazy(u"debts",u"Summary"))
+    """,label = pgettext(u"debts",u"Summary"))
     
     summary1 = """
     ResultByBudget
@@ -453,7 +463,7 @@ class BudgetDetail(dd.FormLayout):
     summary2 = """
     conclusion:30x5 
     dist_amount build_time
-    ignore_yearly_incomes print_empty_rows print_todos
+    include_yearly_incomes print_empty_rows print_todos
     """
     
     #~ ExpensesSummaryByBudget IncomesSummaryByBudget 
@@ -463,7 +473,7 @@ class BudgetDetail(dd.FormLayout):
         #~ h.general.label = _("General")
         #~ h.entries1.label = _("Expenses & Income")
         #~ h.entries2.label = _("Liabilities & Assets")
-        #~ h.summary_tab.label = pgettext_lazy(u"debts",u"Summary")
+        #~ h.summary_tab.label = pgettext(u"debts",u"Summary")
         #~ h.tmp_tab.label = _("Preview")
         
     
@@ -691,7 +701,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     def account_changed(self,ar):
         if self.account_id:
             self.periods = self.account.periods
-            self.description = dd.babelattr(self.account,'name')
+            self.description = dd.babelattr(self.account,'name',language=self.budget.partner.language)
 
     def full_clean(self,*args,**kw):
         if self.periods <= 0:
@@ -710,7 +720,8 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
                 #~ self.name = self.account.name
         self.account_type = self.account.type
         if not self.description:
-            self.description = unicode(self.account)
+            self.description = dd.babelattr(self.account,'name',language=self.budget.partner.language)
+            #~ self.description = unicode(self.account)
         #~ if self.periods is None:
             #~ self.periods = self.account.periods
         super(Entry,self).save(*args,**kw)
@@ -1038,7 +1049,7 @@ class ResultByBudget(SummaryTable):
         if budget is None: 
             return
         yield ["Monatliche Einkünfte", budget.sum('amount','I',periods=1)]
-        if not budget.ignore_yearly_incomes:
+        if budget.include_yearly_incomes:
             yi = budget.sum('amount','I',periods=12)
             if yi:
                 yield [
@@ -1180,8 +1191,9 @@ def site_setup(site):
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
 
-    site.modules.accounts.Accounts.column_names = "ref name default_amount required_for_household required_for_person group "
-    site.modules.accounts.AccountsByGroup.column_names = "ref name default_amount required_for_household required_for_person group "
+    cn = "ref name default_amount periods required_for_household required_for_person group "
+    site.modules.accounts.Accounts.column_names = cn
+    site.modules.accounts.AccountsByGroup.column_names = cn
 
 def setup_main_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)

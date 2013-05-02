@@ -335,7 +335,7 @@ Belgique""")
         
         expected = "Client(language='%s'," % settings.SITE.DEFAULT_LANGUAGE.django_code
         expected += "last_name='Test'"
-        expected += ",client_state=ClientStates.newcomer:10"
+        expected += ",client_state=<ClientStates.newcomer:10>"
         #~ expected += ",is_active=True"
         #~ expected += r",activity=Activity(name=u'Sozialhilfeempf\xe4nger'))"
         #~ expected += ",activity=1"
@@ -553,3 +553,37 @@ Belgique""")
         self.assertEqual(len(result['rows']),2)
         self.assertEqual(result['rows'][0][8],'')
         
+        """
+        Traceback reported 20130502
+        """
+        from lino.core import constants
+        accounts = settings.SITE.modules.accounts
+        
+        data = dict()
+        data[constants.URL_PARAM_ACTION_NAME] = 'post'
+        data.update(ref='1013')
+        response = self.client.post('/api/accounts/Accounts',data,REMOTE_USER='root')
+        result = self.check_json_result(response,'message alert success')
+        self.assertEqual(result['success'],False)
+        msg = "This field cannot be null"
+        if not msg in result['message']:
+            self.fail('Expected something containing "%s", got "%s".' % (msg,result['message']))
+            
+        data.update(name="TestAccount")
+        ac = accounts.Chart(name="TestChart")
+        ac.full_clean()
+        ac.save()
+        ag = accounts.Group(name="TestGroup",chart=ac,account_type=accounts.AccountTypes.expenses)
+        ag.full_clean()
+        ag.save()
+        data.update(groupHidden=ag.pk)
+        response = self.client.post('/api/accounts/Accounts',data,REMOTE_USER='root')
+        result = self.check_json_result(response,'message success rows data_record')
+        
+        msg = 'Account "(1013) TestAccount" has been created.'
+        if not msg in result['message']:
+            self.fail('Expected something containing "%s", got "%s".' % (msg,result['message']))
+        
+        self.assertEqual(result['success'],True)
+        obj = accounts.Account.objects.get(group=ag)
+        self.assertEqual(obj.name,"TestAccount")

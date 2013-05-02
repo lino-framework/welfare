@@ -314,6 +314,7 @@ class Course(dd.Model,mixins.Printable):
 
         
 class Courses(dd.Table):
+    #~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
     required_user_groups = ['integ']
     model = Course
     order_by = ['start_date']

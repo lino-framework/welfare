@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-25 16:23+0300\n"
+"POT-Creation-Date: 2013-05-02 22:20+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -131,7 +131,7 @@ msgstr ""
 
 # f4b292c98d384a729fb06bd40fe6432f
 #: ../watch_tim.rst:58
-msgid "Das Attribut \"veraltet\" bedeutet:"
+msgid "Das Attribut \"veraltet\" bedeutet allgemein in Lino:"
 msgstr ""
 
 # e3463b8b6ae64007a00047405ccb9c59
@@ -155,125 +155,129 @@ msgid ""
 "angekreuzt werden."
 msgstr ""
 
+# 3302a670b5634c459cce1786d7926778
+#: ../watch_tim.rst:71
+msgid ""
+"Bei importierten Partnern ist es schreibgeschützt und ist eingeschaltet, "
+"wenn diese Person in TIM entweder in **Partnerart \"Inaktive\"** steht "
+"oder das **Partnerattribut W** eingeschaltet hat."
+msgstr ""
+
 # 54e4b3afabcd4ac3b7c9f2b483529bf1
-#: ../watch_tim.rst:73
+#: ../watch_tim.rst:78
 msgid "Partnerattribute"
 msgstr ""
 
 # f351f320c6c94cd2a267b4956333832f
-#: ../watch_tim.rst:75
+#: ../watch_tim.rst:80
 msgid ""
 "Hier eine Liste der möglichen Partnerattribute in TIM, und was Lino "
 "daraus macht."
 msgstr ""
 
 # 50fbc2966ae9472a99e766ce15423b21
-#: ../watch_tim.rst:78
+#: ../watch_tim.rst:83
 msgid "Attrib"
 msgstr ""
 
 # 0558efd34a0943429e09db0501b4262f
-#: ../watch_tim.rst:78
+#: ../watch_tim.rst:83
 msgid "Bezeichnung in TIM"
 msgstr ""
 
 # 1eb64328103a49b9b14d82ab8dd91c07
-#: ../watch_tim.rst:78
+#: ../watch_tim.rst:83
 msgid "in Lino"
 msgstr ""
 
 # 8c61e32c4de74508b79ad0f092812887
-#: ../watch_tim.rst:80
+#: ../watch_tim.rst:85
 msgid "H"
 msgstr ""
 
 # 393e9dfd8e504315b8f1f95029986fd9
-#: ../watch_tim.rst:80
+#: ../watch_tim.rst:85
 msgid "Versteckt"
 msgstr ""
 
 # cb31f738cc0b4c728f997252b6a63ebc
-# f8e5df3ea971427093e73fe7db88cc79
-# 96addbca788d4f7f8b5c54cb706d0071
-# 98882c82d03e45d5be98b93a6bef1ace
-# 42747e6fecdf4c9d9caafb0c5c6c6b92
-#: ../watch_tim.rst:80 ../watch_tim.rst:82 ../watch_tim.rst:83
-#: ../watch_tim.rst:84 ../watch_tim.rst:85
+#: ../watch_tim.rst:85 ../watch_tim.rst:87 ../watch_tim.rst:88
+#: ../watch_tim.rst:89 ../watch_tim.rst:90
 msgid "wird ignoriert"
 msgstr ""
 
 # 3a14abd8fcc241c18ee5bf7c61f81cf7
-#: ../watch_tim.rst:81
+#: ../watch_tim.rst:86
 msgid "W"
 msgstr ""
 
 # fa4ff62fd8844782aedd3fb693825df0
-#: ../watch_tim.rst:81
+#: ../watch_tim.rst:86
 msgid "Warnung bei Auswahl"
 msgstr ""
 
 # 511bf27e5db9496498d2bf808a78333e
-#: ../watch_tim.rst:81
+#: ../watch_tim.rst:86
 msgid "`veraltet` im Reiter `Sonstiges`"
 msgstr ""
 
 # 4069a2823c83471fb95c3391cb826853
-#: ../watch_tim.rst:82
+#: ../watch_tim.rst:87
 msgid "R"
 msgstr ""
 
 # 7c5d85a68f5d4b1ba36ecf1f77527c23
-#: ../watch_tim.rst:82
+#: ../watch_tim.rst:87
 msgid "Schreibgeschützt"
 msgstr ""
 
 # dd672a1bb9254f81aff00e2bf9aeeb8a
-#: ../watch_tim.rst:83
+#: ../watch_tim.rst:88
 msgid "2"
 msgstr ""
 
 # b666a144119b4cb6950eb0e8d263b99b
-#: ../watch_tim.rst:83
+#: ../watch_tim.rst:88
 msgid "als Nebenpartner ignorieren"
 msgstr ""
 
 # e2230b40cadc42e893c7c4e727f3f4f9
-#: ../watch_tim.rst:84
+#: ../watch_tim.rst:89
 msgid "A"
 msgstr ""
 
 # 331fd9c80cbf4af5ac284e3e335b65ef
-#: ../watch_tim.rst:84
+#: ../watch_tim.rst:89
 msgid "Altfall (automatisch)"
 msgstr ""
 
 # f00a8ffb907a4967b96fa559e6b0d638
-#: ../watch_tim.rst:85
+#: ../watch_tim.rst:90
 msgid "E"
 msgstr ""
 
 # 7496531fd19a48f2a4259ea92391a5fd
-#: ../watch_tim.rst:85
+#: ../watch_tim.rst:90
 msgid "Eingeschlafener Debitor (automatisch)"
 msgstr ""
 
 # 8b1d79ab2b364901804f66465a1fc919
-#: ../watch_tim.rst:86
+#: ../watch_tim.rst:91
 msgid "N"
 msgstr ""
 
 # d37f6576f55f4f1393b8b7b6ea9aacd0
-#: ../watch_tim.rst:86
+#: ../watch_tim.rst:91
 msgid "Neuzugang"
 msgstr ""
 
 # b0cbd3327549444b9e0eeb0ab39c6ba9
-#: ../watch_tim.rst:86
+#: ../watch_tim.rst:91
 msgid "Klient im Bearbeitungszustand \"Neuantrag\""
 msgstr ""
 
 # b21dd094770549b5aaf27e16ade05b97
-#: ../watch_tim.rst:89
+#: ../watch_tim.rst:94
 msgid ""
 "**Partnerattribut W** bewirkt in Lino das Gleiche wie **Partnerart "
 "\"Inaktive\"**, nämlich dass dieser Partner das Feld `veraltet` "
@@ -281,7 +285,7 @@ msgid ""
 msgstr ""
 
 # 66f211afeb6f49efbc0398aa1704cbb9
-#: ../watch_tim.rst:93
+#: ../watch_tim.rst:98
 msgid ""
 "Das **Partnerattribut A** (Altfall) aus TIM ist eine rein buchhalterische"
 " Information (Partner hat seit dd.mm.yyyy keine buchhalterische Bewegung "
@@ -291,12 +295,12 @@ msgid ""
 msgstr ""
 
 # 5a32c831bd5a4acdb20adaf5de1bbde7
-#: ../watch_tim.rst:101
+#: ../watch_tim.rst:106
 msgid "Mögliche Überraschungen"
 msgstr ""
 
 # affe4f3c79bd4772818dfe422ce5c916
-#: ../watch_tim.rst:103
+#: ../watch_tim.rst:108
 msgid ""
 "Ein existierender Klient kann in Lino wie vom Erdboden verschwunden "
 "scheinen, weil er versehentlich als veraltet markiert wurde (siehe "
@@ -306,7 +310,7 @@ msgid ""
 msgstr ""
 
 # 3302a670b5634c459cce1786d7926778
-#: ../watch_tim.rst:113
+#: ../watch_tim.rst:116
 msgid ""
 "\"Ich sehe in \"meiner\" Liste in Lino einen bestimmten aus TIM "
 "importierten Klienten, den ich schon seit Langem nicht mehr begleite.\" "
@@ -317,79 +321,25 @@ msgid ""
 msgstr ""
 
 # 8ebaed4dfcd247e99c2903828b59fe79
-#: ../watch_tim.rst:123
+#: ../watch_tim.rst:126
 msgid "Anrede"
 msgstr ""
 
 # 7543f2e6ce8848e4b62ce813e3692d69
-#: ../watch_tim.rst:125
+#: ../watch_tim.rst:128
 msgid ""
 "`PAR->Allo` geht nach :attr:`Person.title` oder :attr:`Company.prefix`. "
 "Außer wenn `PAR->Allo` es einen der Werte \"Eheleute\", \"Herr und Frau\""
 " enthält, dann wird es ein Haushalt."
 msgstr ""
 
-# 50b3e730fa4d4f4db7c57317819b8721
-#: ../watch_tim.rst:136
-msgid "Klient"
-msgstr ""
-
-# 340a997530d64cd8a1662033fef7e592
-#: ../watch_tim.rst:138
-msgid ""
-"Ein Klient ist eine Person, für die wir eine Serie von zusätzlichen Daten"
-" erfassen."
-msgstr ""
-
-# 78f17a4da9b74ee891e73fcc282b1cc8
-#: ../watch_tim.rst:144
-msgid "Klienten"
-msgstr ""
-
-# 084ce0bafe5542d5aecf7b3b57ba153b
-#: ../watch_tim.rst:146
-msgid ""
-"Klienten gibt es in drei **Tabellenansichten**, die sich lediglich durch "
-"Kolonnenreihenfolge und Filterparameter unterscheiden:"
-msgstr ""
-
-# 90a6149d17c54f08803387464c50dd49
-#: ../watch_tim.rst:150
-msgid ""
-"\"Alle Klienten\" (Menü :menuselection:`Kontakte --> Klienten`) : "
-"allgemeine Liste, die jeder Benutzer sehen darf."
-msgstr ""
-
-# 229e7ff4a8384240bb7bd406a30bf1c6
-#: ../watch_tim.rst:154
-msgid ""
-"DSBE-Klienten (Menü :menuselection:`DSBE --> Klienten`) spezielle Liste "
-"für die Kollegen im DSBE. Zeigt immer nur **begleitete** Kunden. Hier "
-"kann man keine neuen Klienten anlegen. Die Reiter Kompetenzen, "
-"Verträge... finden sich nur hier."
-msgstr ""
-
-# 5a2b89c4e6644a22ad6e49796283157c
-#: ../watch_tim.rst:161
-msgid ""
-"Neue Klienten (Menü :menuselection:`Neuanträge --> Klienten`): spezielle "
-"Liste für die Zuweisung von Neuanträgen."
-msgstr ""
-
-# be352328003342db9243d02750a8c074
-#: ../watch_tim.rst:165
-msgid ""
-"N.B. Das Detail, das bei Doppelklick angezeigt wird, ist bei allen drei "
-"Ansichten das Gleiche. Das hängt vom :ref:`welfare.users.UserProfile` ab."
-msgstr ""
-
 # 97d05eb9ddff428ab70400dea28865a3
-#: ../watch_tim.rst:173
+#: ../watch_tim.rst:135
 msgid "Die INSS"
 msgstr ""
 
 # a2fd487afa6f487cbf9c462cfac09eeb
-#: ../watch_tim.rst:175
+#: ../watch_tim.rst:137
 msgid ""
 "Es kann Klienten ohne INSS geben. Die sind dann allerdings "
 "\"inoffiziell\" bzw. \"nicht integriert\" bzw. \"ohne Akte beim "
@@ -399,12 +349,12 @@ msgid ""
 msgstr ""
 
 # c2ce2a9486f244c288ce028c5e407854
-#: ../watch_tim.rst:181
+#: ../watch_tim.rst:143
 msgid "Lino lässt auch ungültige INSS zu."
 msgstr ""
 
 # aa738c25b20c4a2188395d655d10d10c
-#: ../watch_tim.rst:183
+#: ../watch_tim.rst:145
 msgid ""
 "Ein \"Numéro bis\" ist eine provisorische INSS, die z.B. auch 680000 "
 "formatiert ist. So eine Bis-Nummer kann also dann auch irgendwann mal "
@@ -412,17 +362,17 @@ msgid ""
 msgstr ""
 
 # 34716338db7e4501895e49aaa4bdeb87
-#: ../watch_tim.rst:190
+#: ../watch_tim.rst:151
 msgid "Bearbeitungszustand"
 msgstr ""
 
 # c62fc074a0694dd4aa8d058b1d877e80
-#: ../watch_tim.rst:192
+#: ../watch_tim.rst:153
 msgid "Der Bearbeitungszustand eines Klienten kann sein:"
 msgstr ""
 
 # c7882073998d4f3496679e0080ca8228
-#: ../watch_tim.rst:194
+#: ../watch_tim.rst:155
 msgid ""
 "**Neuantrag** : Die Person hat Antrag auf Begleitung gestellt. Antrag "
 "wird überprüft und der Klient muss einem Sachbearbeiter oder Sozi "
@@ -430,7 +380,7 @@ msgid ""
 msgstr ""
 
 # 71fcfc5ad6da41a3806a2c8425fcfd55
-#: ../watch_tim.rst:199
+#: ../watch_tim.rst:160
 msgid ""
 "Im Detail-Reiter :screen:`Neuanträge <pcsw.Client.detail.newcomers>` kann"
 " man einem Neuzugang einen **Begleiter zuweisen**, wodurch der Klient ins"
@@ -438,14 +388,14 @@ msgid ""
 msgstr ""
 
 # d969977b544a44b99577303bf0ab7f8f
-#: ../watch_tim.rst:204
+#: ../watch_tim.rst:165
 msgid ""
 "**Abgelehnt** : Die Prüfung des Antrags hat ergeben, dass diese Person "
 "kein Anrecht auf Begleitung durch unser ÖSHZ hat."
 msgstr ""
 
 # c97cf4d6963f4b7aaec54ce284c8923e
-#: ../watch_tim.rst:208
+#: ../watch_tim.rst:169
 msgid ""
 "**Begleitet** : Es gibt im ÖSHZ mindestens eine Person, die \"sich um die"
 " Person kümmert\". Damit ein Klient im Status \"Begleitet\" sein kann, "
@@ -453,7 +403,7 @@ msgid ""
 msgstr ""
 
 # f3fe320239da4dc692f6e3b911ad1736
-#: ../watch_tim.rst:213
+#: ../watch_tim.rst:174
 msgid ""
 "**Ehemalig** : War mal begleitet, aber jetzt nicht mehr. Es existieren "
 "Begleitungen, aber keine davon ist *aktiv*. Falls es ein importierter "
@@ -462,7 +412,7 @@ msgid ""
 msgstr ""
 
 # b2ac43bc9adb406e886e2c89c31087dc
-#: ../watch_tim.rst:239
+#: ../watch_tim.rst:200
 msgid ""
 "Bemerkung: Wie alle Partner haben auch Klienten (im Reiter \"Sonstiges\")"
 " ein Ankreuzfeld \"veraltet\", das unabhängig vom Bearbeitungszustand_ "
@@ -470,41 +420,41 @@ msgid ""
 msgstr ""
 
 # 800e4f22b1d645f291f5ac62f1a7017f
-#: ../watch_tim.rst:247
+#: ../watch_tim.rst:208
 msgid "Sonstiges"
 msgstr ""
 
 # fec51e6fd5084bcb9632bdd9667bf171
-#: ../watch_tim.rst:249
+#: ../watch_tim.rst:210
 msgid "Im Reiter :guilabel:`Sonstiges` gibt es drei Ankreuzfelder"
 msgstr ""
 
 # c9442913330f40e092ee9f0a7a74fc88
-#: ../watch_tim.rst:251
+#: ../watch_tim.rst:212
 msgid ""
 "Sozialhilfeempfänger (`is_cpas`) : Angekreuzt , wenn in TIM Partnerart S "
 "war."
 msgstr ""
 
 # 6fe5d23ba9e842878c8bafd8b596fcc4
-#: ../watch_tim.rst:252
+#: ../watch_tim.rst:213
 msgid "Altenheim (`is_senior`) : Angekreuzt , wenn in TIM Partnerart A war."
 msgstr ""
 
 # b1fcca485fb040bc96be628d0677e3ac
-#: ../watch_tim.rst:253
+#: ../watch_tim.rst:214
 msgid ""
 "veraltet (`is_obsolete`) : Angekreuzt , wenn in TIM Partneraattribut W "
 "gesetzt war."
 msgstr ""
 
 # a5e590425efa4c259c235921a195ecf2
-#: ../watch_tim.rst:265
+#: ../watch_tim.rst:226
 msgid "Begleitungen"
 msgstr ""
 
 # 02a046122bf945018e0992e106df174e
-#: ../watch_tim.rst:267
+#: ../watch_tim.rst:228
 msgid ""
 "Eine **Begleitung** ist, wenn sich ein bestimmter Mitarbeiter des ÖSHZ um"
 " einen bestimmten Klienten während einer bestimmten Periode \"kümmert\". "
@@ -513,7 +463,7 @@ msgid ""
 msgstr ""
 
 # af47265a673b4b1b844b914bfcfb7611
-#: ../watch_tim.rst:273
+#: ../watch_tim.rst:234
 msgid ""
 "Begleitungen werden entweder manuell erzeugt durch `Einfügen` in der "
 "Tabelle \"Begleitungen\", oder indirekt durch das **Zuweisen** eines "
@@ -521,7 +471,7 @@ msgid ""
 msgstr ""
 
 # b6f6abc4c8ac467b9ef5c38a6166ffc6
-#: ../watch_tim.rst:277
+#: ../watch_tim.rst:238
 msgid ""
 "Die Felder **von** und **bis** einer Begleitung definieren die "
 "**Begleitungsperiode**. Das Feld `von` einer Begleitung kann nicht leer "
@@ -532,7 +482,7 @@ msgid ""
 msgstr ""
 
 # 65cb076beb844af88ce34473d250650b
-#: ../watch_tim.rst:283
+#: ../watch_tim.rst:244
 msgid ""
 "Lino kann pro Klient mehrere Begleitungen haben, aber in TIM haben wir "
 "nur den \"hauptverantwortlichen Sozialarbeiter\" (`PAR->IdUsr`). Deshalb "
@@ -542,39 +492,39 @@ msgid ""
 msgstr ""
 
 # aaf28a2ca1534a9aa65f44ad21fe7dad
-#: ../watch_tim.rst:289
+#: ../watch_tim.rst:250
 msgid "Für die primäre Begleitung eines *importierten* Klienten gilt:"
 msgstr ""
 
 # d62036ba0b3e44b98a85cd03d855c7eb
-#: ../watch_tim.rst:291
+#: ../watch_tim.rst:252
 msgid ""
 "Die Felder `primär`, `bis` und `Benutzer` sind schreibgeschützt und wie "
 "folgt belegt:"
 msgstr ""
 
 # 9ee677f68e2346a9800d09718e6acc7c
-#: ../watch_tim.rst:293
+#: ../watch_tim.rst:254
 msgid "`primär` = angekreuzt"
 msgstr ""
 
 # 5b2eea33eeff461c97037e5d34c3ec87
-#: ../watch_tim.rst:294
+#: ../watch_tim.rst:255
 msgid "`bis` = leer"
 msgstr ""
 
 # fb6ef0f7651145c9bc75b3ed21a54cd0
-#: ../watch_tim.rst:295
+#: ../watch_tim.rst:256
 msgid "`Benutzer` : der in TIM angegebene Benutzer"
 msgstr ""
 
 # 6a01f81840e8498997b07375b54be060
-#: ../watch_tim.rst:297
+#: ../watch_tim.rst:258
 msgid "Diese Angaben können also nur über TIM verändert werden."
 msgstr ""
 
 # eaad9f213a0e45b18e16b4a3c06f7951
-#: ../watch_tim.rst:299
+#: ../watch_tim.rst:260
 msgid ""
 "Die Felder `von` und `Dienst` dagegen können manuell geändert werden, und"
 " `watch_tim` geht dann nicht mehr daran. Beim ersten Erstellen gibt "
@@ -582,17 +532,17 @@ msgid ""
 msgstr ""
 
 # b8387c497a0448dba5d449ef7a9dd046
-#: ../watch_tim.rst:303
+#: ../watch_tim.rst:264
 msgid "`Dienst` = Begleitdienst des Begleiters zu diesem Zeitpunkt"
 msgstr ""
 
 # fbd714bd09d842eeaf946940cb9fb034
-#: ../watch_tim.rst:304
+#: ../watch_tim.rst:265
 msgid "`von` = Erstelldatum des Partners in TIM"
 msgstr ""
 
 # 8da93ae86f7e416c9ab98e9dcca5b892
-#: ../watch_tim.rst:306
+#: ../watch_tim.rst:267
 msgid ""
 "Also man kann auf importierten Klienten in Lino zusätzliche Begleitungen "
 "erstellen, aber diese können nicht primär sein. An diese sekundären "
@@ -600,24 +550,24 @@ msgid ""
 msgstr ""
 
 # e37b2de7291f46848cb59e8ed3639625
-#: ../watch_tim.rst:313
+#: ../watch_tim.rst:274
 msgid "Begleitungsdienst"
 msgstr ""
 
 # f0cfa037552f481b974abe75ba54a3a0
-#: ../watch_tim.rst:315
+#: ../watch_tim.rst:276
 msgid ""
 "Jede Begleitung findet zwingend im Rahmen eines bestimmten Dienstes "
 "statt. In der Demo-Datenbank gibt es folgende Begleitungsdienste:"
 msgstr ""
 
 # 74eb90927cb342d7a549d2571e2e70d7
-#: ../watch_tim.rst:326
+#: ../watch_tim.rst:287
 msgid "Regeln"
 msgstr ""
 
 # 23ea48b589f041898fe2348e05804e6d
-#: ../watch_tim.rst:328
+#: ../watch_tim.rst:289
 msgid ""
 "Ein Neuantrag kann keine Begleitungen haben. (Ein Klient mit "
 "Begleitungen, selbst abgeschlossene, kann nicht wieder zum Neuantrag "
@@ -625,7 +575,7 @@ msgid ""
 msgstr ""
 
 # 9f5cd757f39044b3b18dc708d624bb14
-#: ../watch_tim.rst:333
+#: ../watch_tim.rst:294
 msgid ""
 "Wenn ein Klient ins Stadium Ehemalig wechselt, werden automatisch alle "
 "laufenden Begleitungen beendet. Ein Ehemaliger kann keine *laufenden* "
@@ -633,33 +583,33 @@ msgid ""
 msgstr ""
 
 # b2839a3c33f740e78d82917e5f33b736
-#: ../watch_tim.rst:337
+#: ../watch_tim.rst:298
 msgid ""
 "Nur Benutzer mit einem unleeren Feld `Begleitungsart (Dienst)` in den "
 "Benutzereinstellungen dürfen manuell Begleitungen erstellen."
 msgstr ""
 
 # 94b54eda9deb4cc39301e849f7b53e87
-#: ../watch_tim.rst:341
+#: ../watch_tim.rst:302
 msgid ""
 "Importierte Klienten haben eine importierte primäre Begleitung, die nicht"
 " geändert werden kann."
 msgstr ""
 
 # 75ab02e716be40b0a15bc40f807bf8be
-#: ../watch_tim.rst:346
+#: ../watch_tim.rst:307
 msgid "Klientenkontakte"
 msgstr ""
 
 # 5c6d6428ea8145e1aea2544955d83cb6
-#: ../watch_tim.rst:348
+#: ../watch_tim.rst:309
 msgid ""
 "Die Felder PXS->IdMut (Krankenasse) und PXS->Apotheke (Apotheke) werden "
 "nach Lino synchronisiert als *Klientenkontakte*."
 msgstr ""
 
 # 95809766bdc048c4879e836cfdbd1678
-#: ../watch_tim.rst:351
+#: ../watch_tim.rst:312
 msgid ""
 "*Importierte* Klienten sollten in ihren "
 ":ref:`welfare.pcsw.ClientContacts` deshalb maximal *eine* Krankenkasse "
@@ -667,28 +617,28 @@ msgid ""
 msgstr ""
 
 # 88179f6f1c3242949b35bea761710ac1
-#: ../watch_tim.rst:356
+#: ../watch_tim.rst:317
 msgid ""
 "Ansonsten findet watch_tim, dass er nicht dafür zuständig ist und "
 "synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)"
 msgstr ""
 
 # 210a3ef30b82496cb64239390c02389b
-#: ../watch_tim.rst:359
+#: ../watch_tim.rst:320
 msgid ""
 "Alle anderen Klientenkontaktarten sind egal, davon dürfen auch "
 "importierte Klienten so viele haben wie sie wollen."
 msgstr ""
 
 # 68df9dd6700141b38e4c3d902fc9074a
-#: ../watch_tim.rst:362
+#: ../watch_tim.rst:323
 msgid ""
 "Beim Synchronisieren sind folgende Fehlermeldungen denkbar (die falls sie"
 " auftreten per E-Mail an die Administratoren geschickt werden)::"
 msgstr ""
 
 # 3f0e40f4d04c49efbdfd6666553bc442
-#: ../watch_tim.rst:368
+#: ../watch_tim.rst:329
 msgid ""
 "Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind "
 "Krankenkassen), also dass man in TIM in der ADR.DBF die Nr 630 raussucht "
@@ -696,7 +646,7 @@ msgid ""
 msgstr ""
 
 # 439dbf2adb7547edafaf62c05df7e489
-#: ../watch_tim.rst:371
+#: ../watch_tim.rst:332
 msgid ""
 "Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal "
 "auf diese Apotheke zu gehen und irgendwas zu ändern, um manuell eine "
@@ -704,12 +654,12 @@ msgid ""
 msgstr ""
 
 # 4a68805c9eeb41ee915a8150d90e18b6
-#: ../watch_tim.rst:375
+#: ../watch_tim.rst:336
 msgid "Krankenkassen"
 msgstr ""
 
 # 506174f8c9fe4d9a8151c8b47df5c8b2
-#: ../watch_tim.rst:377
+#: ../watch_tim.rst:338
 msgid ""
 "Die Krankenkassen (Adressen aus `ADR` mit `ADR->Type == 'MUT'`) "
 "erscheinen in Lino als Organisation, wobei deren `id` beim ersten Import "
@@ -717,12 +667,12 @@ msgid ""
 msgstr ""
 
 # dc2558f486954e9fbdd6f21dcba079bf
-#: ../watch_tim.rst:382
+#: ../watch_tim.rst:343
 msgid "id = val(ADR->IdMut) + 199000"
 msgstr ""
 
 # 94e24a1196434d9aa9b676791cf8db32
-#: ../watch_tim.rst:384
+#: ../watch_tim.rst:345
 msgid ""
 "Krankenakssen werden nicht mehr automatisch synchronisiert. Also falls "
 "des eine in TIM erstellt wird, muss die entsprechende Organisation in "
@@ -730,12 +680,12 @@ msgid ""
 msgstr ""
 
 # 5412d2f455c8472eaf5d6c2d34418afb
-#: ../watch_tim.rst:393
+#: ../watch_tim.rst:354
 msgid "Technisches"
 msgstr ""
 
 # a51b025a34c64e119eebe602a2381de8
-#: ../watch_tim.rst:395
+#: ../watch_tim.rst:356
 msgid ""
 "In der :xfile:`settings.py` gibt es folgende Optionen, die für die "
 "Synchronisierung von Belang sind::"

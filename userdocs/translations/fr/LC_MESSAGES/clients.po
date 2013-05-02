@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-25 16:23+0300\n"
+"POT-Creation-Date: 2013-05-02 22:20+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -33,40 +33,84 @@ msgstr ""
 msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
 msgstr ""
 
-# c085364000624c0f931f88e7f9bc2d82
+# 86ea139c7f904851bca7572dd2826e40
 #: ../clients.rst:18
+msgid ""
+"Ein Klient ist eine Person, für die wir eine Serie von zusätzlichen Daten"
+" erfassen."
+msgstr ""
+
+# 0763c1ea77ce4f3d905733353930e4db
+#: ../clients.rst:21
+msgid ""
+"Für Klienten gibt es drei **Tabellenansichten**, die sich lediglich durch"
+" Kolonnenreihenfolge und Filterparameter unterscheiden:"
+msgstr ""
+
+# 15ae27668b5742ac8c1e864ee0c430fb
+#: ../clients.rst:25
+msgid ""
+"\"Alle Klienten\" (Menü :menuselection:`Kontakte --> Klienten`) : "
+"allgemeine Liste, die jeder Benutzer sehen darf."
+msgstr ""
+
+# ff8a44191bb947629c0c987c596e6389
+#: ../clients.rst:29
+msgid ""
+"DSBE-Klienten (Menü :menuselection:`DSBE --> Klienten`) spezielle Liste "
+"für die Kollegen im DSBE. Zeigt immer nur **begleitete** Kunden. Hier "
+"kann man keine neuen Klienten anlegen. Die Reiter Kompetenzen, "
+"Verträge... finden sich nur hier."
+msgstr ""
+
+# 067d6078f46d4bcda800330dac4a7ab2
+#: ../clients.rst:36
+msgid ""
+"Neue Klienten (Menü :menuselection:`Neuanträge --> Klienten`): spezielle "
+"Liste für die Zuweisung von Neuanträgen."
+msgstr ""
+
+# 55fd010b20f94a62b7b57f4b4049e644
+#: ../clients.rst:40
+msgid ""
+"N.B. Das Detail, das bei Doppelklick angezeigt wird, ist bei allen drei "
+"Ansichten das Gleiche. Das hängt vom :ref:`welfare.users.UserProfile` ab."
+msgstr ""
+
+# c085364000624c0f931f88e7f9bc2d82
+#: ../clients.rst:48
 msgid "Référence"
 msgstr ""
 
 # b5dcef8a98b046309db79872568b3219
-#: ../clients.rst:22
+#: ../clients.rst:52
 msgid ""
 "Toute personne physique ou morale est enregistrée dans Lino en tant que "
 ":ref:`Partenaire <welfare.contacts.Partner>`."
 msgstr ""
 
 # cdc3d60e93ef4beba5b2b51d4b96df6d
-#: ../clients.rst:25
+#: ../clients.rst:55
 msgid "Lino différencie les types de Partenaires suivants:"
 msgstr ""
 
 # 3acbab023921428ba77d66fa8a187e0e
-#: ../clients.rst:44
+#: ../clients.rst:74
 msgid "Anhang"
 msgstr ""
 
 # 5269638430af4771b4fcf6c376b5b30f
-#: ../clients.rst:46
+#: ../clients.rst:76
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
 # 3d627a2f4f944ccf91770242554535ce
-#: ../clients.rst:47
+#: ../clients.rst:77
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
 # 71e98fc701c84a4f817c034ae30d8ff4
-#: ../clients.rst:48
+#: ../clients.rst:78
 msgid "engl. \"State\" = Bearbeitungszustand"
 msgstr ""
 
