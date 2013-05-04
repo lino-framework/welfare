@@ -1930,9 +1930,7 @@ class ClientsByNationality(Clients):
   
 #~ class InvalidClients(Clients):
 class ClientsTest(Clients):
-    """
-    Table of Clients whose data seems unlogical or inconsistent.
-    """
+    help_text = _("Table of Clients whose data seems unlogical or inconsistent.")
     required = dict(user_level='manager')
     use_as_default_table = False
     #~ required_user_level = UserLevels.manager
@@ -1995,7 +1993,7 @@ class ClientsTest(Clients):
             if ar.param_values.overlapping_contracts:
                 messages += isip.OverlappingContractsTest(obj).check_all()
               
-            if ar.param_values.invalid_niss:
+            if ar.param_values.invalid_niss and obj.national_id is not None:
                 try:
                     ssin.ssin_validator(obj.national_id)
                 except ValidationError,e:

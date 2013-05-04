@@ -376,3 +376,13 @@ die für die Synchronisierung von Belang sind::
         if userid == "WRITE": return None
         return userid.lower()
 
+
+
+Cannot create Client 0000023756 from PXS
+----------------------------------------
+
+Die Meldung kommt, wenn in TIM in der PXS eines Partners etwas 
+verändert wurde, und dieser Partner in Lino nicht existiert 
+(was anormal ist, aber z.B. durch frühere Bugs oder Pannen kommen kann).
+Zu tun: manuell für diesen Partner in der PAR etwas verändern, um 
+eine Synchronisierung zu triggern.

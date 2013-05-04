@@ -4,10 +4,8 @@
 Accounts
 ========
 
-
-.. _welfare.accounts.Account:
-
-Account
-=======
-
+.. actor:: accounts.Charts
+.. actor:: accounts.Accounts
+.. actor:: accounts.Groups
+.. actor:: accounts.AccountTypes
 

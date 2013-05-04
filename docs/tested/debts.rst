@@ -71,6 +71,19 @@ Here are some more slave tables.
  Beschreibung                                              Betrag
 --------------------------------------------------------- --------------
  Monatliche Einkünfte                                      5 000,00
+ Monatliche Ausgaben                                       -565,00
+ Monatliche Reserve für jährliche Ausgaben (236,00 / 12)   -19,67
+ Raten der laufenden Kredite                               -45,00
+ **Restbetrag für Kredite und Zahlungsrückstände**         **4 370,33**
+========================================================= ==============
+<BLANKLINE>
+
+>>> obj.include_yearly_incomes = True
+>>> ses.show(debts.ResultByBudget.request(obj))
+========================================================= ==============
+ Beschreibung                                              Betrag
+--------------------------------------------------------- --------------
+ Monatliche Einkünfte                                      5 000,00
  Jährliche Einkünfte (2 400,00 / 12)                       200,00
  Monatliche Ausgaben                                       -565,00
  Monatliche Reserve für jährliche Ausgaben (236,00 / 12)   -19,67

@@ -631,9 +631,10 @@ class PAR(Controller):
         Controller.applydata(self,obj,data,**mapper)
         
     def get_object(self,kw):
-        id = kw['id']
-        if not id:
-            return None
+        pk = kw['id']
+        if not pk: return None
+        pk = int(pk)
+        if pk == 0: return None
         #~ possible_models = [Client, Person, Company, Household, Partner]
         #~ model = PAR_model(kw['data'])
         #~ delete_child
@@ -642,23 +643,23 @@ class PAR(Controller):
         #~ except model.DoesNotExist:
             #~ pass
         try:
-            return Client.objects.get(pk=id)
+            return Client.objects.get(pk=pk)
         except Client.DoesNotExist:
             pass
         try:
-            return Person.objects.get(pk=id)
+            return Person.objects.get(pk=pk)
         except Person.DoesNotExist:
             pass
         try:
-            return Company.objects.get(pk=id)
+            return Company.objects.get(pk=pk)
         except Company.DoesNotExist:
             pass
         try:
-            return Household.objects.get(pk=id)
+            return Household.objects.get(pk=pk)
         except Household.DoesNotExist:
             pass
         try:
-            return Partner.objects.get(pk=id)
+            return Partner.objects.get(pk=pk)
         except Partner.DoesNotExist:
             pass
         
@@ -679,10 +680,13 @@ class PAR(Controller):
         """
         obj = watcher.watched
         old_class = obj.__class__
-        partner = obj.partner_ptr
         assert old_class is not new_class
         newobj = None
         #~ print 20130222, old_class, new_class
+        if old_class is Partner:
+            partner = obj
+        else:
+            partner = obj.partner_ptr
         if old_class is Client:
             # convert Client to Person, then continue as if old_class had been Person
             dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
@@ -697,6 +701,7 @@ class PAR(Controller):
         
         if new_class is Client:
             # create the Person if necessary:
+            #~ partner = obj.partner_ptr
             try:
                 person = Person.objects.get(pk=partner.id)
             except Person.DoesNotExist:

@@ -57,10 +57,10 @@ Lino différencie les types de Partenaires suivants:
 .. django2rst:: contacts.Partner.print_subclasses_graph()
 
 
-
 .. actor:: pcsw.Clients
 .. actor:: pcsw.ClientContactTypes
 .. actor:: pcsw.ClientContacts
+.. actor:: pcsw.ClientsTest
 .. actor:: pcsw.CoachingTypes
 .. actor:: pcsw.Coachings
 .. actor:: pcsw.AidTypes

@@ -471,10 +471,9 @@ Belgique""")
  Beschreibung                                              Betrag
 --------------------------------------------------------- ---------------
  Monatliche Einkünfte                                      42,00
- Jährliche Einkünfte (48,00 / 12)                          4,00
  Monatliche Ausgaben                                       -986,00
  Monatliche Reserve für jährliche Ausgaben (836,00 / 12)   -69,67
- **Restbetrag für Kredite und Zahlungsrückstände**         **-1 009,67**
+ **Restbetrag für Kredite und Zahlungsrückstände**         **-1 013,67**
 ========================================================= ===============
 """)
         
