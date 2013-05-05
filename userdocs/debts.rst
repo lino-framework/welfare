@@ -19,18 +19,7 @@ Scénarios
 
 
 
-
-.. _welfare.debts.MyBudgets:
-
-Mes Budgets
-===========
-
-
-
-.. _welfare.debts.Budget:
-
-Budget
-======
+.. actor:: debts.Budgets
 
 
 .. _welfare.debts.Budget.print_empty_rows:
@@ -45,10 +34,6 @@ Ignore yearly incomes
 
 
 
-.. _welfare.debts.BudgetSummary:
-
-Budget Overview
-===============
-
-A virtual table showing a list of summary numbers for this budget.
+.. actor:: debts.MyBudgets
+.. actor:: debts.ResultByBudget
 

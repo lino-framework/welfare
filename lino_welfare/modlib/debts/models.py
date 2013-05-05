@@ -382,15 +382,6 @@ The total monthly amount available for debts distribution."""))
                     a.full_clean()
                     a.save()
             
-    #~ def BudgetSummary(self,ar=None):
-        #~ if ar is None:
-            #~ return BudgetSummary.request(master_instance=self,title=BudgetSummary.label)
-        #~ return ar.spawn(BudgetSummary,master_instance=self,
-            #~ title=BudgetSummary.label)
-        
-    #~ def DistByBudget(self,ar):
-        #~ return ar.spawn(DistByBudget,master_instance=self,
-            #~ title=DistByBudget.label)
         
         
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
@@ -866,6 +857,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
             self.partner = e.partner
             self.remarks = []
             self.account = e.account
+            self.monthly_rate = e.monthly_rate
             #~ self.todos = [''] * len(e.budget.get_actors())
             self.todo = ''
             self.amounts = [decimal.Decimal(0)] * len(e.budget.get_actors())
@@ -875,6 +867,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
         def matches(self,e):
             if e.partner != self.partner: return False
             if e.account != self.account: return False
+            if e.monthly_rate != self.monthly_rate: return False
             if e.periods != self.periods: return False
             if e.description != self.description: return False
             return True
@@ -964,6 +957,10 @@ class PrintEntriesByBudget(dd.VirtualTable):
     def amount4(self,obj,ar):
         return obj.amounts[4] / obj.periods
   
+    @dd.virtualfield(dd.PriceField(_("Monthly rate")))
+    def monthly_rate(self,obj,ar):
+        return obj.monthly_rate
+  
   
 class PrintExpensesByBudget(PrintEntriesByBudget):
     """Print version of :class:`ExpensesByBudget` table."""
@@ -976,10 +973,10 @@ class PrintIncomesByBudget(PrintEntriesByBudget):
     column_names = "description dynamic_amounts"
     
 class PrintLiabilitiesByBudget(PrintEntriesByBudget):
-    """Print version of :class:`LiabilitiesByBudget` table."""
+    help_text = _("""Print version of :ref:`welfare.debts.LiabilitiesByBudget`.""")
     _account_type = AccountTypes.liabilities
     #~ column_names = "partner description total monthly_rate todo"
-    column_names = "partner:20 description:20 dynamic_amounts"
+    column_names = "partner:20 description:20 monthly_rate dynamic_amounts"
     
 class PrintAssetsByBudget(PrintEntriesByBudget):
     """Print version of :class:`AssetsByBudget` table."""
@@ -1039,6 +1036,7 @@ class SummaryTable(dd.VirtualTable):
   
 #~ class BudgetSummary(SummaryTable):
 class ResultByBudget(SummaryTable):
+    help_text = _("""Shows the "Incomes & Expenses" for this budget.""")
     label = _("Incomes & Expenses")
     required=dict(user_groups = ['debts'])
     master = Budget
