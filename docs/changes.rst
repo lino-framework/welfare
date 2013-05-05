@@ -11,10 +11,11 @@ The final truth about what's going on is only
 (hosted on `Googlecode <http://code.google.com/p/lino>`__).
 
 
-Version 1.1.3 (in development / testing)
+Version 1.1.3 (released :blogref:`20130505`)
 ============================================
 
-- Im "Resultat" einer Tx25 wurde nichts angezeigt. Behoben.
+- Im "Resultat" einer Tx25 (:ref:`welfare.cbss.RetrieveTIGroupsRequest`  
+  wurde nichts angezeigt. Behoben.
 
 - :ref:`welfare.courses.PendingCourseRequests`. 
   (:menuselection:`Kurse --> Offene Kursanfragen`) 
@@ -30,12 +31,37 @@ Version 1.1.3 (in development / testing)
   Ich habe vor, das Menü "Listings" demnächst komplett 
   rauszuschmeissen.
   
-- Benutzermeldung wenn man VSE erstellen will und die Vertragsart 
-  anzugeben vergisst.
+- Verständlichere Benutzermeldung wenn man VSE erstellen will und 
+  die Vertragsart anzugeben vergisst.
+  
+- Adding a new account in :ref:`welfare.accounts.Accounts`
+  caused an internal server error `DoesNotExist`.
   
 - Wenn in TIM eine PLZ bearbeitet wurde, loggt watch_tim
   jetzt statt einer Exception "PLZ no such controller"  
   nur eine info() dass die Änderung ignoriert wird.
+  
+- In :ref:`welfare.debts.EntriesByBudget` kann man die Zeilen jetzt 
+  rauf und runterschieben. Experimentell. 
+  Ich warte auf erste Eindrücke.
+  Im Kontenplan lässt sich so ein Auf und Ab nur schwer rechtfertigen.
+  Eigentlich brauchen wir die Notion von Budget-Vorlagen: ein betimmtes 
+  Budget wird als Vorlag deklariert, und 
+
+- :menuselection:`Site --> About` didn't display
+  the application's version.
+  
+- `auto_fit_column_widths` was ignored when a table was being 
+  displayed as the main grid of a window.
+  
+- Beim Ausdruck eines :ref:`welfare.debts.Budget`: 
+  fehlte in der Tabelle "Guthaben, Schulden, Verpflichtungen" 
+  die Kolonne "Monatsrate".
+
+- :ref:`welfare.pcsw.ClientsTest` produced a traceback
+  `'NoneType' object has no attribute 'strip'` for Clients 
+  with national_id is None.
+  
 
 
 Version 1.1.2 (released :blogref:`20130422`)

@@ -18,6 +18,7 @@ Scénarios
   - Cliquer sur :ref:`lino.ui.detail.Save`
 
 
+.. actor:: debts.Actors
 
 .. actor:: debts.Budgets
 
@@ -36,4 +37,5 @@ Ignore yearly incomes
 
 .. actor:: debts.MyBudgets
 .. actor:: debts.ResultByBudget
+.. actor:: debts.EntriesByBudget
 
