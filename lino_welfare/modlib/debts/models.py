@@ -409,6 +409,7 @@ The total monthly amount available for debts distribution."""))
         #~ render(self.dist_by_budget(ar))
         render(ResultByBudget.request(self))
         render(DebtsByBudget.request(self))
+        render(BailiffDebtsByBudget.request(self))
         render(DistByBudget.request(self))
         return E.div(*chunks)
         
@@ -450,6 +451,7 @@ class BudgetDetail(dd.FormLayout):
     summary1 = """
     ResultByBudget
     DebtsByBudget
+    BailiffDebtsByBudget
     """
     summary2 = """
     conclusion:30x5 
@@ -652,6 +654,11 @@ Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhand
 Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     """)
     
+    bailiff = models.ForeignKey('contacts.Company',
+        verbose_name=_("Bailiff"),
+        related_name='bailiff_debts_set',
+        null=True,blank=True)
+    
     #~ duplicated_fields = """
     #~ account_type account partner actor distribute 
     #~ circa todo remark description periods monthly_rate
@@ -661,6 +668,16 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     def account_choices(cls,account_type):
         #~ print '20120918 account_choices', account_type
         return accounts.Account.objects.filter(type=account_type)
+        
+    @dd.chooser()
+    def bailiff_choices(self):
+        qs = contacts.Companies.request().data_iterator
+        bt = settings.SITE.site_config.debts_bailiff_type
+        if bt is not None:
+            qs = qs.filter(client_contact_type=bt)
+        return qs
+        
+        
         
     #~ @chooser(simple_values=True)
     #~ def amount_choices(cls,account):
@@ -783,7 +800,7 @@ class IncomesByBudget(EntriesByBudget,EntriesByType):
 class LiabilitiesByBudget(EntriesByBudget,EntriesByType):
     "Liabilities By Budget"
     _account_type = AccountTypes.liabilities
-    column_names = "account partner remark amount actor:10 distribute monthly_rate todo seqno"
+    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate todo seqno"
     
 class AssetsByBudget(EntriesByBudget,EntriesByType):
     _account_type = AccountTypes.assets
@@ -855,6 +872,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
             self.description = e.description
             self.periods = e.periods
             self.partner = e.partner
+            self.bailiff = e.bailiff
             self.remarks = []
             self.account = e.account
             self.monthly_rate = e.monthly_rate
@@ -866,6 +884,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
             
         def matches(self,e):
             if e.partner != self.partner: return False
+            if e.bailiff != self.bailiff: return False
             if e.account != self.account: return False
             if e.monthly_rate != self.monthly_rate: return False
             if e.periods != self.periods: return False
@@ -930,10 +949,13 @@ class PrintEntriesByBudget(dd.VirtualTable):
             #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
         #~ return obj.description
         
-    #~ @dd.displayfield(_("Partner"))
     @dd.virtualfield(models.ForeignKey('contacts.Partner'))
     def partner(self,obj,ar):
         return obj.partner
+        
+    @dd.virtualfield(models.ForeignKey('contacts.Company'))
+    def bailiff(self,obj,ar):
+        return obj.bailiff
         
     # TODO: generate them dynamically:
     
@@ -976,7 +998,7 @@ class PrintLiabilitiesByBudget(PrintEntriesByBudget):
     help_text = _("""Print version of :ref:`welfare.debts.LiabilitiesByBudget`.""")
     _account_type = AccountTypes.liabilities
     #~ column_names = "partner description total monthly_rate todo"
-    column_names = "partner:20 description:20 monthly_rate dynamic_amounts"
+    column_names = "partner:20 description:20 bailiff monthly_rate dynamic_amounts"
     
 class PrintAssetsByBudget(PrintEntriesByBudget):
     """Print version of :class:`AssetsByBudget` table."""
@@ -1036,7 +1058,7 @@ class SummaryTable(dd.VirtualTable):
   
 #~ class BudgetSummary(SummaryTable):
 class ResultByBudget(SummaryTable):
-    help_text = _("""Shows the "Incomes & Expenses" for this budget.""")
+    help_text = _("""Shows the Incomes & Expenses for this budget.""")
     label = _("Incomes & Expenses")
     required=dict(user_groups = ['debts'])
     master = Budget
@@ -1086,6 +1108,7 @@ class DebtsByBudget(SummaryTable):
     label = _("Debts")
     required=dict(user_groups = ['debts'])
     master = Budget
+    bailiff_isnull = True
     
     @classmethod
     def get_summary_numbers(self,ar):
@@ -1095,12 +1118,17 @@ class DebtsByBudget(SummaryTable):
         for grp in budget.account_groups('L'):
             for acc in grp.account_set.all():
                 yield [_("%s (distributable)") % dd.babelattr(acc,'name'), 
-                    budget.sum('amount',account=acc,distribute=True)]
+                    budget.sum('amount',account=acc,distribute=True,
+                    bailiff__isnull=self.bailiff_isnull)]
                 yield [dd.babelattr(acc,'name'), 
-                    budget.sum('amount',account=acc,distribute=False)]
+                    budget.sum('amount',account=acc,distribute=False,
+                        bailiff__isnull=self.bailiff_isnull)]
         #~ "Total Kredite / Schulden"
     
         
+class BailiffDebtsByBudget(DebtsByBudget):
+    label = _("Bailiff Debts")
+    bailiff_isnull = False
     
 #~ class DistByBudget(LiabilitiesByBudget):
 class DistByBudget(EntriesByBudget):
@@ -1164,7 +1192,7 @@ proportionally distributing the `Distributable amount` among the debtors.
     def description(self,obj,ar):
         desc = obj.description
         if obj.remark:
-            desc += ' (%s)' % obj.remarks
+            desc += ' (%s)' % obj.remark
         return desc
             #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
         #~ return obj.description
@@ -1252,3 +1280,12 @@ def customize_accounts():
 
 customize_accounts()
 
+
+dd.inject_field('ui.SiteConfig',
+    'debts_bailiff_type',
+    models.ForeignKey("pcsw.ClientContactType",
+        blank=True,null=True,
+        verbose_name=_("Bailiff"),
+        related_name='bailiff_type_sites',
+        help_text=_("Client contact type for Bailiff.")))
+    

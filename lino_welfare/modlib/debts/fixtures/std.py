@@ -341,11 +341,11 @@ def objects():
           fr="Emprunts",
           en="Debts"
           ))
-    yield account(ref="7030",**babel_values('name',
-          de="Gerichtsvollzieher",
-          fr="Huissier de justice",
-          en="Bailiff"
-          ))
+    #~ yield account(ref="7030",**babel_values('name',
+          #~ de="Gerichtsvollzieher",
+          #~ fr="Huissier de justice",
+          #~ en="Bailiff"
+          #~ ))
     yield account(ref="7040",**babel_values('name',
           de="Zahlungsrückstände",
           fr="Factures à payer",
