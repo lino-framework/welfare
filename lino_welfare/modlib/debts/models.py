@@ -953,7 +953,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
     def partner(self,obj,ar):
         return obj.partner
         
-    @dd.virtualfield(models.ForeignKey('contacts.Company'))
+    @dd.virtualfield(models.ForeignKey('contacts.Company',verbose_name=_("Bailiff")))
     def bailiff(self,obj,ar):
         return obj.bailiff
         

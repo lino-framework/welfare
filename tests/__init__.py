@@ -13,33 +13,22 @@ ROOTDIR = Path(__file__).parent.parent
 # load  SETUP_INFO:
 execfile(ROOTDIR.child('lino_welfare','setup_info.py'),globals())
 
-from atelier.test import SubProcessTestCase
-#~ from djangosite.utils.test import TestCase
-"""
-Note that we cannot import :mod:`djangosite.utils.test` here
-because that's designed for unit tests within a particular Django project 
-(run using `djange-admin test`).
-"""
-from djangosite.utils import testcase_setup
+from djangosite.utils.pythontest import TestCase
 
-
-
-class BaseTestCase(SubProcessTestCase):
-#~ class BaseTestCase(TestCase):
-    default_environ = dict(DJANGO_SETTINGS_MODULE="lino_welfare.demo.settings")
+#~ class BaseTestCase(SubProcessTestCase):
+class BaseTestCase(TestCase):
+    demo_settings_module = "lino_welfare.demo.settings"
+    #~ default_environ = dict(DJANGO_SETTINGS_MODULE="lino_welfare.demo.settings")
     project_root = ROOTDIR
-    
-    def setUp(self):
-        #~ settings.SITE.never_build_site_cache = self.never_build_site_cache
-        #~ settings.SITE.remote_user_header = 'REMOTE_USER'
-        testcase_setup.send(self)
-        super(BaseTestCase,self).setUp()
     
     
 class DemoTests(BaseTestCase):
     """
     $ python setup.py test -s tests.DemoTests.test_admin
     """
+    def test_admin(self): self.run_django_admin_test('lino_welfare.demo.settings')
+    
+class NewDemoTests(BaseTestCase):
     def test_admin(self): self.run_django_admin_test('lino_welfare.demo.settings')
     
 class DocsTests(BaseTestCase):

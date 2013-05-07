@@ -53,7 +53,7 @@ from lino import dd
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
 #~ from djangosite.utils.test import TestCase
-from djangosite.utils.test import RemoteAuthTestCase
+from djangosite.utils.djangotest import RemoteAuthTestCase
 
 
 #~ pcsw = dd.resolve_app('pcsw')
@@ -93,9 +93,9 @@ class DemoTest(RemoteAuthTestCase):
             
         json_fields = 'count rows title success no_data_text'
         kw = dict(fmt='json',limit=10,start=0)
-        add_case('rolf','api/contacts/Companies',json_fields,37,**kw)
+        add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
         add_case('rolf','api/households/Households',json_fields,4,**kw)
-        add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
+        add_case('rolf','api/contacts/Partners',json_fields,120,**kw)
         add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
         add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
@@ -110,10 +110,10 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/pcsw/Clients',json_fields,59,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
-        add_case('rolf','api/newcomers/NewClients',json_fields,25,**kw)
+        add_case('rolf','api/newcomers/NewClients',json_fields,24,**kw)
         add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=118,**kw)
         add_case('alicia','api/pcsw/IntegClients',json_fields,7,**kw)
-        add_case('hubert','api/pcsw/IntegClients',json_fields,22,**kw)
+        add_case('hubert','api/pcsw/IntegClients',json_fields,23,**kw)
         
         
         kw = dict(fmt='json',limit=20,start=0,su=6) # rolf working as alicia

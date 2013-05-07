@@ -2119,7 +2119,7 @@ def on_connection_created(sender,**kw):
     self.column_names += ' primary_clients active_clients row_total'
     settings.SITE.resolve_virtual_fields()
 
-from djangosite.utils.test import testcase_setup
+from djangosite.utils.djangotest import testcase_setup
 testcase_setup.connect(on_connection_created)
 dd.connection_created.connect(on_connection_created)
 models.signals.post_syncdb.connect(on_connection_created)

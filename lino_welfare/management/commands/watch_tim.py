@@ -675,7 +675,7 @@ class PAR(Controller):
     def swapclass(self,watcher,new_class,data):
         """
         Convert the watched object to a new_class instance and apply data accordingly.
-        Caution: Here be dragons! See also file `watchtim_tests.py`.
+        Caution: Here be dragons! See also :mod:`lino_welfare.tests.watchtim_tests`.
           
         """
         obj = watcher.watched

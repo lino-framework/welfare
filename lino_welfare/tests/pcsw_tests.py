@@ -45,8 +45,7 @@ from lino.utils import i2d
 #~ from north import babel
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')
-#~ from djangosite.utils.test import TestCase
-from djangosite.utils.test import RemoteAuthTestCase
+from djangosite.utils.djangotest import RemoteAuthTestCase
 
 contacts_RoleType = dd.resolve_model('contacts.RoleType')
 contacts_Role = dd.resolve_model('contacts.Role')

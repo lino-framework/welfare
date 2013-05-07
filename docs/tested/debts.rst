@@ -93,37 +93,37 @@ Here are some more slave tables.
 <BLANKLINE>
 
 >>> ses.show(debts.DebtsByBudget.request(obj))
-======================= ==============
- Beschreibung            Betrag
------------------------ --------------
- Kredite (verteilbar)    1 200,00
- Schulden (verteilbar)   1 500,00
- Gerichtsvollzieher      300,00
- Zahlungsrückstände      600,00
- **Schulden**            **3 600,00**
-======================= ==============
+================================= ==============
+ Beschreibung                      Betrag
+--------------------------------- --------------
+ Kredite (verteilbar)              1 500,00
+ Schulden                          300,00
+ Zahlungsrückstände (verteilbar)   1 200,00
+ Zahlungsrückstände                600,00
+ **Schulden**                      **3 600,00**
+================================= ==============
 <BLANKLINE>
 
 >>> ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-=========================== ==================== ============== ============== ============ ==============
- Partner                     Beschreibung         Gemeinsam      Herr           Frau         Total
---------------------------- -------------------- -------------- -------------- ------------ --------------
- Bernd Brechts Bücherladen   Kredite              1 200,00                                   1 200,00
- Reinhards Baumschule        Schulden                            1 500,00                    1 500,00
- Moulin Rouge                Gerichtsvollzieher                                 300,00       300,00
- Auto École Verte            Zahlungsrückstände   600,00                                     600,00
- **Total (4 Zeilen)**                             **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-=========================== ==================== ============== ============== ============ ==============
+=========================== ==================== ==================== ============ ============== ============== ============ ==============
+ Partner                     Beschreibung         Gerichtsvollzieher   Monatsrate   Gemeinsam      Herr           Frau         Total
+--------------------------- -------------------- -------------------- ------------ -------------- -------------- ------------ --------------
+ Bernd Brechts Bücherladen   Zahlungsrückstände                                     1 200,00                                   1 200,00
+ Reinhards Baumschule        Kredite                                                               1 500,00                    1 500,00
+ Moulin Rouge                Schulden                                  15,00                                      300,00       300,00
+ Auto École Verte            Zahlungsrückstände                        30,00        600,00                                     600,00
+ **Total (4 Zeilen)**                                                  **45,00**    **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+=========================== ==================== ==================== ============ ============== ============== ============ ==============
 <BLANKLINE>
 
 >>> ses.show(debts.DistByBudget.request(obj))
-=========================== ============== ============== ============ ====================================
- Kreditor                    Beschreibung   Schuld         %            Betrag der monatlichen Rückzahlung
---------------------------- -------------- -------------- ------------ ------------------------------------
- Bernd Brechts Bücherladen   Kredite        1 200,00       44,44        53,33
- Reinhards Baumschule        Schulden       1 500,00       55,56        66,67
- **Total (2 Zeilen)**                       **2 700,00**   **100,00**   **120,00**
-=========================== ============== ============== ============ ====================================
+=========================== ==================== ============== ============ ====================================
+ Kreditor                    Beschreibung         Schuld         %            Betrag der monatlichen Rückzahlung
+--------------------------- -------------------- -------------- ------------ ------------------------------------
+ Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
+ **Total (2 Zeilen)**                             **2 700,00**   **100,00**   **120,00**
+=========================== ==================== ============== ============ ====================================
 <BLANKLINE>
 
 The following table shows the new feature (:blogref:`20130325`) 
@@ -181,26 +181,26 @@ Something in French
 
 >>> ses.set_language('fr')
 >>> ses.show(debts.DistByBudget.request(obj))
-=========================== ============= ============== ============ =======================
- Créancier                   Description   Dette          %            Remboursement mensuel
---------------------------- ------------- -------------- ------------ -----------------------
- Bernd Brechts Bücherladen   Kredite       1 200,00       44,44        53,33
- Reinhards Baumschule        Schulden      1 500,00       55,56        66,67
- **Total (2 lignes)**                      **2 700,00**   **100,00**   **120,00**
-=========================== ============= ============== ============ =======================
+=========================== ==================== ============== ============ =======================
+ Créancier                   Description          Dette          %            Remboursement mensuel
+--------------------------- -------------------- -------------- ------------ -----------------------
+ Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
+ **Total (2 lignes)**                             **2 700,00**   **100,00**   **120,00**
+=========================== ==================== ============== ============ =======================
 <BLANKLINE>
 
 Or the same in English:
 
 >>> ses.set_language('en')
 >>> ses.show(debts.DistByBudget.request(obj))
-=========================== ============= ============== ============ ===========================
- Creditor                    Description   Debt           %            Monthly payback suggested
---------------------------- ------------- -------------- ------------ ---------------------------
- Bernd Brechts Bücherladen   Kredite       1 200,00       44,44        53,33
- Reinhards Baumschule        Schulden      1 500,00       55,56        66,67
- **Total (2 rows)**                        **2 700,00**   **100,00**   **120,00**
-=========================== ============= ============== ============ ===========================
+=========================== ==================== ============== ============ ===========================
+ Creditor                    Description          Debt           %            Monthly payback suggested
+--------------------------- -------------------- -------------- ------------ ---------------------------
+ Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
+ **Total (2 rows)**                               **2 700,00**   **100,00**   **120,00**
+=========================== ==================== ============== ============ ===========================
 <BLANKLINE>
 
 

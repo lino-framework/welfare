@@ -14,9 +14,9 @@ General PCSW
  Begleiter              Bilan   Formation   Recherche   Travail   Standby   Komplette Akten   Aktive Klienten   Total
 ---------------------- ------- ----------- ----------- --------- --------- ----------------- ----------------- --------
  Alicia Allmanns                            2           2         1         4                 4                 7
- Hubert Huppertz        3       2           4           3         3         9                 12                22
+ Hubert Huppertz        3       3           4           3         3         10                13                23
  Mélanie Mélard         4       4           3           2         4         13                13                22
- **Total (3 Zeilen)**   **7**   **6**       **9**       **7**     **8**     **26**            **29**            **51**
+ **Total (3 Zeilen)**   **7**   **7**       **9**       **7**     **8**     **27**            **30**            **52**
 ====================== ======= =========== =========== ========= ========= ================= ================= ========
 <BLANKLINE>
 

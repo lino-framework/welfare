@@ -79,7 +79,7 @@ able to render RemoteFields as rst.
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person__first_name content urgent address")
 ========= ============= ======================= =====================
- Prénom    Contenu       cause professionnelle   Address
+ Prénom    Contenu       cause professionnelle   Addresse
 --------- ------------- ----------------------- ---------------------
  Emil      Französisch   Non                     Allemagne
  Rik       Deutsch       Non                     Amsterdam, Pays-Bas
@@ -95,7 +95,7 @@ of that client:
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content address person__coaches")
 ======================== ============= ===================== ==================================================
- Client                   Contenu       Address               Accompagnants
+ Client                   Contenu       Addresse              Accompagnants
 ------------------------ ------------- --------------------- --------------------------------------------------
  EIERSCHAL Emil (175)     Französisch   Allemagne             Hubert Huppertz
  RADERMECKER Rik (173)    Deutsch       Amsterdam, Pays-Bas   Alicia Allmanns

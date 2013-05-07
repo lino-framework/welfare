@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-06 21:16+0300\n"
-"PO-Revision-Date: 2013-05-06 21:18+0300\n"
+"PO-Revision-Date: 2013-05-07 07:42+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1335,7 +1335,7 @@ msgstr "Perioden"
 #: lino_welfare/modlib/debts/models.py:651
 #: lino_welfare/modlib/debts/models.py:977
 msgid "Monthly rate"
-msgstr "Monatsrte"
+msgstr "Monatsrate"
 
 #: lino_welfare/modlib/debts/models.py:658
 #: lino_welfare/modlib/debts/models.py:1283
