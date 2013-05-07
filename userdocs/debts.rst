@@ -37,5 +37,6 @@ Ignore yearly incomes
 
 .. actor:: debts.MyBudgets
 .. actor:: debts.ResultByBudget
+.. actor:: debts.Entries
 .. actor:: debts.EntriesByBudget
 
