@@ -342,14 +342,14 @@ def site_setup(site):
     
     site.modules.ui.SiteConfigs.set_detail_layout("""
     site_company system_note_type default_build_method 
-    next_partner_id:20 job_office
+    next_partner_id:20 job_office debts_bailiff_type master_budget
     signer1 signer2
+    signer1_function signer2_function 
     constants
     # lino.ModelsBySite
     """,constants="""
     propgroup_skills propgroup_softskills propgroup_obstacles
     residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
-    signer1_function signer2_function 
     """)
     
     site.modules.properties.Properties.set_detail_layout("""

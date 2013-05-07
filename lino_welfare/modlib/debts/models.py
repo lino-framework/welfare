@@ -144,6 +144,23 @@ For example 1 means a monthly amount, 12 a yearly amount."""),
         #~ return super(DebtsUserTable,self).get_permission(action,user,obj)
         
 
+from django.db import transaction
+
+@transaction.commit_on_success
+def bulk_create_with_manual_ids(model,obj_list):
+    """
+    Originally copied from http://stackoverflow.com/a/13143062/407239
+    
+    """
+    last = model.objects.all().aggregate(models.Max('id'))['id__max']
+    if last is None:
+        id_start = 1
+    else:
+        id_start = last + 1
+    for i,obj in enumerate(obj_list): obj.id = id_start + i
+    #~ print 20130508, [dd.obj2str(o) for o in obj_list]
+    return model.objects.bulk_create(obj_list)
+    
 
 
 
@@ -317,17 +334,7 @@ The total monthly amount available for debts distribution."""))
             rv += amount
         return rv
       
-    #~ @dd.displayfield(_("Summary"))
-    #~ def summary(self,rr):
-        #~ return 'Not <b>yet</b> written.'
-      
-    #~ def full_clean(self,*args,**kw):
-        #~ super(Budget,self).full_clean(*args,**kw)
         
-    #~ def save(self,*args,**kw):
-        #~ super(Budget,self).save(*args,**kw)
-        
-    #~ def _changed(self,ar):
     def after_ui_save(self,ar,**kw):
         """
         Called from `extjs3.ext_ui.ExtUI.form2obj_and_save`
@@ -337,31 +344,48 @@ The total monthly amount available for debts distribution."""))
         return kw
         
     def fill_defaults(self,ar=None):
+        """
+        If the budget is empty, fill it with default entries 
+        by copying the master_budget.
+        """
         #~ if self.closed:
         if not self.partner or self.build_time:
             return
         if self.entry_set.all().count() > 0:
             return
         self.save()
-        flt = models.Q(required_for_household=True)
-        flt = flt | models.Q(required_for_person=True)
-        #~ required =  # .values_list('id',flat=True)
-        #~ missing = set(required)
-        seqno = 0
-        #~ for e in Entry.objects.filter(budget=self):
-            #~ missing.discard(e.account.pk)
-            #~ seqno = max(seqno,e.seqno)
-        for acc in accounts.Account.objects.filter(flt).order_by('ref'):
-            #~ if pk in missing:
-            seqno += 1
-            e = Entry(account=acc,budget=self,seqno=seqno)
-            e.account_changed(ar)
-            e.periods = e.account.periods
-            if e.account.default_amount:
-                e.amount = e.account.default_amount
-            e.full_clean()
-            e.save()
-            #~ print e
+        entries = []
+        master_budget = settings.SITE.site_config.master_budget
+        if master_budget is None:
+            flt = models.Q(required_for_household=True)
+            flt = flt | models.Q(required_for_person=True)
+            seqno = 0
+            for acc in accounts.Account.objects.filter(flt).order_by('ref'):
+                seqno += 1
+                e = Entry(account=acc,budget=self,seqno=seqno,account_type=acc.type)
+                e.account_changed(ar)
+                #~ e.periods = e.account.periods
+                if e.account.default_amount:
+                    e.amount = e.account.default_amount
+                entries.append(e)
+        else:
+            seqno = 0
+            for me in master_budget.entry_set.order_by('seqno').select_related():
+                seqno += 1
+                e = Entry(account=me.account,budget=self,
+                    account_type=me.account_type,
+                    seqno=me.seqno,periods=me.periods,
+                    amount=me.amount)
+                e.account_changed(ar)
+                entries.append(e)
+        if True:
+            bulk_create_with_manual_ids(Entry,entries)
+        else:
+            for e in entries:
+                e.full_clean()
+                e.save()
+            
+            
         if self.actor_set.all().count() == 0:
             household = self.partner.get_mti_child('household')
             if household:
@@ -597,6 +621,8 @@ class ActorsByPartner(Actors):
     label = _("Is actor in these budgets:")
     editable = False
     
+    
+
 
 
 class Entry(SequencedBudgetComponent):
@@ -718,6 +744,9 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
             raise ValidationError(
               #~ _("Cannot set both 'Distribute' and 'Monthly rate'"))
               _("Cannot set 'Distribute' when 'Monthly rate' is %r") % self.monthly_rate)
+        #~ self.account_type = self.account.type
+        #~ if not self.account_type:
+            #~ raise ValidationError(_("Budget entry #%d has no account_type") % obj2unicode(self))
         super(Entry,self).full_clean(*args,**kw)
       
     def save(self,*args,**kw):
@@ -747,7 +776,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         get duplicated *before* related Entries. 
         The order of `fklist` in `_lino_ddh` 
         """
-        if master is not None and self.actor and self.actor.budget != master: 
+        if master is not None and self.actor is not None and self.actor.budget != master: 
             self.actor = master.actor_set.get(seqno=self.actor.seqno)
         super(Entry,self).on_duplicate(ar,master)
             
@@ -1288,4 +1317,12 @@ dd.inject_field('ui.SiteConfig',
         verbose_name=_("Bailiff"),
         related_name='bailiff_type_sites',
         help_text=_("Client contact type for Bailiff.")))
+    
+dd.inject_field('ui.SiteConfig',
+    'master_budget',
+    models.ForeignKey("debts.Budget",
+        blank=True,null=True,
+        verbose_name=_("Master budget"),
+        related_name='master_budget_sites',
+        help_text=_("The budget whose content is to be copied into new budgets.")))
     

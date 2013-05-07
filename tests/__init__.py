@@ -37,11 +37,11 @@ class DocsTests(BaseTestCase):
     #~ env.docs_doctests.append('tested/debts.rst')
 
     #~ def test_docs(self): self.run_django_manage_test('docs')
-    def test_misc(self): self.run_docs_doctests('tested/misc.rst')
-    def test_debts(self): self.run_docs_doctests('tested/debts.rst')
-    def test_cbss(self): self.run_docs_doctests('tested/cbss.rst')
-    def test_pcsw(self): self.run_docs_doctests('tested/pcsw.rst')
-    def test_courses(self): self.run_docs_doctests('tested/courses.rst')
+    def test_misc(self): return self.run_docs_doctests('tested/misc.rst')
+    def test_debts(self): return self.run_docs_doctests('tested/debts.rst')
+    def test_cbss(self): return self.run_docs_doctests('tested/cbss.rst')
+    def test_pcsw(self): return self.run_docs_doctests('tested/pcsw.rst')
+    def test_courses(self): return self.run_docs_doctests('tested/courses.rst')
     
     
 

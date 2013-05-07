@@ -11,6 +11,34 @@ The final truth about what's going on is only
 (hosted on `Googlecode <http://code.google.com/p/lino>`__).
 
 
+Version 1.1.4 (coming)
+============================================
+
+- master_budget : Kopiervorlage für neue Budgets.
+  Die Standard-Perioden und Standard-Beträge im Kontenplan sind nocht 
+  sichtbar, werden aber ignoriert und kommen demnächst ganz raus
+  (muss ich die automatisiert übernehmen?)
+
+- :ref:`welfare.debts` : neue Kolonne :guilabel:`Gerichtsvollzieher` 
+  in in :ref:`welfare.debts.Entries` : Alle Schulden können potentiell 
+  irgendwann zum GV gehen, und dann wird diese Kolonne ausgefüllt 
+  (indem man dort den GV auswählt).
+
+- Beim Ausdruck unter der Tabelle "Guthaben, Schulden, Verpflichtungen" eine 
+  weitere Tabelle "Gerichtsvollzieher", in der nur GV-Schulden sind.
+
+- In Konfigurierung --> Site-Parameter gibt es ein neues Feld 
+  "Gerichtsvollzieher", in dem anzugeben ist, welche Klientenkontaktart
+  als "Gerichtsvollzieher" anzusehen ist. 
+  Wenn dieses Feld leer ist, werden in der Auswahlliste des GV einer 
+  Schuld alle Organisationen angezeigt.
+  
+- "Duplizieren ist total buggy" : zumindest in der momentanen 
+  Development-Version kriege ich keine Probleme reproduziert.
+  Ich höre auf mit aktiver Suche und warte mal auf euer Feedback 
+  nach dem nächsten Release.
+
+
 Version 1.1.3 (released :blogref:`20130505`)
 ============================================
 
