@@ -73,13 +73,15 @@ and
 `missed_reminders`
 virtual fields of :class:`lino.modlib.cal.models.Home` 
 showed also events of other users.
-For example, Rolf suddenly had 137 events:
+For example, Rolf suddenly had more than 100 events 
+(the exact count is 137 to 140 depending on the day of the month 
+where the demo database has been generated):
 
 >>> events = ses.spawn(cal.MyEvents,master_instance=ses.get_user())
 >>> print events.master_instance
 Rolf Rompen
->>> print events.get_total_count()
-137
+>>> events.get_total_count() > 1000
+True
 
 This should be 7, not 137.
 

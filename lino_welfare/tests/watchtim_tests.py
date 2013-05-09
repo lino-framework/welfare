@@ -69,7 +69,7 @@ PUT_MAX_MORITZ = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"2013
 "user":"MELANIE","data":{"IDPAR":"0000005088","FIRME":"Müller Max Moritz","NAME2":"",
 "RUE":"Werthplatz 12","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
 "COMPTE1":"001-1234567-89","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"",
-"DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"",
+"DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"","LANGUE":"D","IDBUD":"",
 "PROF":"80","CODE1":"RH","CODE2":"","CODE3":"",
 "DATCREA":{"__date__":{"year":1991,"month":8,"day":12}},
 "ALLO":"Herr","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
@@ -94,7 +94,7 @@ POST_PXS = """{"method":"POST","alias":"PXS","id":"0000023635","time":"20130222 
 PUT_PAR_POTTER = """{"method":"PUT","alias":"PAR","id":"0000004260","time":"20130225 11:44:16",
 "user":"WIL011","data":{"IDPAR":"0000004260","FIRME":"Voldemort-Potter Harald",
 "NAME2":"","RUE":"Schilsweg 26","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"","COMPTE1":"",
-"NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"",
+"NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"",
 "LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"ER","CODE2":"","CODE3":"",
 "DATCREA":{"__date__":{"year":1985,"month":7,"day":23}},"ALLO":"Eheleute","NB1":"","NB2":"",
 "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
@@ -141,14 +141,17 @@ Client = dd.resolve_model('pcsw.Client')
 Coaching = dd.resolve_model('pcsw.Coaching')
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
+pcsw = dd.resolve_app("pcsw")
 
 class WatchTimTest(TestCase):
-            
+    
+    maxDiff = None
   
     def test00(self):
         User(username='watch_tim').save()
         User(username='alicia').save()
         User(username='roger').save()
+        User(username='edgar').save()
         households_Type(name="Eheleute",pk=1).save()
         
         #~ def test01(self):
@@ -170,10 +173,10 @@ class WatchTimTest(TestCase):
         Company becomes Client
         
         ValidationError([u'A Partner cannot be parent for a Client']) (201302-22 12:42:07)
-        A Partner in TIM has both `PAR->NoTva` and `PAR->IdUsr` filled. 
+        A Partner in TIM has both `PAR->NoTva` nonempty and `PARATTR_N` set. 
         It currently exists in Lino as a Company but not as a Client.
         `watch_tim` then must create a Client after creating also the intermediate Person.
-        The Company child remains.
+        The Company child must be removed.
         """
         
         Company(name="Müller Max Moritz",id=5088).save()
@@ -193,9 +196,10 @@ class WatchTimTest(TestCase):
         """
         Client becomes Company
         """
-        PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
+        #~ PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
+        PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"ATTRIB":"N"','"ATTRIB":""')
         process_line(PUT_MAX_MORITZ)
-        company = Company.objects.get(id=5088) 
+        #~ company = Company.objects.get(id=5088) 
         self.assertDoesNotExist(Client,id=5088) # has been deleted
         self.assertDoesNotExist(Coaching,client_id=5088)
         
@@ -226,6 +230,17 @@ class WatchTimTest(TestCase):
         self.assertEqual(coaching.primary,True)
         self.assertEqual(coaching.user.username,'alicia')
         self.assertEqual(coaching.start_date,i2d(19850723))
+        s = changes_to_rst(client.partner_ptr)
+        #~ print s
+        self.assertEqual(s,"""\
+=========== ============== ============================= ====================================================================== ============= ===========
+ Benutzer    Änderungsart   Object                        Änderungen                                                             Object type   object id
+----------- -------------- ----------------------------- ---------------------------------------------------------------------- ------------- -----------
+ watch_tim   Erstellen      alicia / Voldemort-Potter H   Coaching(id=1,user=2,client=4260,start_date=1985-07-23,primary=True)   Begleitung    1
+ watch_tim   Add child      Harald VOLDEMORT-POTTER       pcsw.Client                                                            Person        4260
+ watch_tim   Add child      Voldemort-Potter Harald       contacts.Person                                                        Partner       4260
+=========== ============== ============================= ====================================================================== ============= ===========
+""")
 
         #~ def test05(self):
         """
@@ -284,3 +299,90 @@ class WatchTimTest(TestCase):
         process_line(ln)
         obj = Client.objects.get(id=23649)
         self.assertEqual(obj.first_name,"Denis")
+        s = changes_to_rst(obj.partner_ptr)
+        #~ cannot easily test due to `modified` timestamp
+        #~ print s
+        #~ self.assertEqual(s,"""\
+#~ =========== ============= ======================== ========================================================================================================================================================================================================================================================================================================================================================= ============= ===========
+ #~ User        Change Type   Object                   Changes                                                                                                                                                                                                                                                                                                                                                   Object type   object id
+#~ ----------- ------------- ------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------- -----------
+ #~ watch_tim   Create        REINDERS Denis (23649)   Client(id=23649,created=2013-02-28T00:00:00,modified=2013-05-08T10:57:34.755851,name='Reinders Denis',street='Sch<94>nefelderweg',street_no='123',street_box='a',language='de',activity=80,partner_ptr=23649,first_name='Denis',last_name='Reinders',person_ptr=23649,is_cpas=True,national_id='791228 123-35',client_state=<ClientStates.newcomer:10>)   Klient        23649
+#~ =========== ============= ======================== ========================================================================================================================================================================================================================================================================================================================================================= ============= ===========
+#~ """)
+        
+        """
+        20130508 Company becomes Client
+        201305-03 07:49:11 INFO watch_tim : PAR:0000000005 (Company #5 (u'Air Liquide Belgium')) : Company becomes Client
+        """
+        
+        Company(name="Air Liquide Belgium",id=5).save()
+        ln = """{"method":"PUT","alias":"PAR","id":"0000000005","time":"20130503 07:36:15",
+        "user":"","data":{"IDPAR":"0000000005","FIRME":"Air Liquide Belgium",
+        "NAME2":"","RUE":"Quai des Vennes","CP":"4020","IDPRT":"V","PAYS":"B",
+        "TEL":"04/349.89.89","FAX":"04/341.20.70","COMPTE1":"GKCCBEBB:BE57551373330235",
+        "NOTVA":"BE-0441.857.467","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"",
+        "ATTRIB":"A","IDMFC":"30","LANGUE":"F","IDBUD":"","PROF":"19",
+        "CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":1985,"month":3,"day":12}},"ALLO":"S.A.",
+        "NB1":"","NB2":"","IDDEV":"","MEMO":"\\n",
+        "COMPTE2":"BBRUBEBB:BE12310110444892","RUENUM":"   8","RUEBTE":"","DEBIT2":"",
+        "CREDIT2":"","IMPDATE":{"__date__": {"year":2009,"month":3,"day":10}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+        "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"EDGAR","DOMI1":""}}
+        """
+        process_line(ln)
+        self.assertDoesNotExist(Client,id=5)
+        obj = Company.objects.get(id=5)
+        self.assertEqual(obj.name,"Air Liquide Belgium")
+        s = changes_to_rst(obj.partner_ptr)
+        #~ print s
+        self.assertEqual(s,"""\
++-----------+----------------+---------------------+------------------------------------------------------+--------------+-----------+
+| Benutzer  | Änderungsart   | Object              | Änderungen                                           | Object type  | object id |
++===========+================+=====================+======================================================+==============+===========+
+| watch_tim | Aktualisierung | Air Liquide Belgium | - activity_id : None --> 19                          | Organisation | 5         |
+|           |                |                     | - city_id : None --> 3                               |              |           |
+|           |                |                     | - bank_account1 : '' --> 'GKCCBEBB:BE57551373330235' |              |           |
+|           |                |                     | - fax : '' --> '04/341.20.70'                        |              |           |
+|           |                |                     | - street_no : '' --> '8'                             |              |           |
+|           |                |                     | - vat_id : '' --> 'BE-0441.857.467'                  |              |           |
+|           |                |                     | - prefix : '' --> 'S.A.'                             |              |           |
+|           |                |                     | - street : '' --> 'Quai des Vennes'                  |              |           |
+|           |                |                     | - remarks : '' --> '\\n'                              |              |           |
+|           |                |                     | - language : 'de' --> 'fr'                           |              |           |
+|           |                |                     | - phone : '' --> '04/349.89.89'                      |              |           |
+|           |                |                     | - country_id : None --> 'B'                          |              |           |
+|           |                |                     | - bank_account2 : '' --> 'BBRUBEBB:BE12310110444892' |              |           |
+|           |                |                     | - zip_code : '' --> '4020'                           |              |           |
++-----------+----------------+---------------------+------------------------------------------------------+--------------+-----------+
+""")
+        
+
+
+        """
+        Person becomes Company
+        """
+        Person(id=9932,first_name="CPAS",last_name="Andenne").save()
+        ln = """{"method":"PUT","alias":"PAR","id":"0000009932","time":"20130503 07:38:16","user":"","data":{"IDPAR":"0000009932","FIRME":"Andenne, CPAS","NAME2":"","RUE":"Rue de l'Hopital","CP":"5300","IDPRT":"V","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"","LANGUE":"F","IDBUD":"","PROF":"65","CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1988,"month":12,"day":9}},"ALLO":"","NB1":"","NB2":"        0","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  22","RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
+        process_line(ln)
+        self.assertDoesNotExist(Client,id=9932)
+        self.assertDoesNotExist(Person,id=9932)
+        obj = Company.objects.get(id=9932)
+        self.assertEqual(obj.name,"Andenne, CPAS")
+        
+        s = changes_to_rst(obj.partner_ptr)
+        #~ print s
+        self.assertEqual(s,"""\
+=========== ============== =============== ================== ============= ===========
+ Benutzer    Änderungsart   Object          Änderungen         Object type   object id
+----------- -------------- --------------- ------------------ ------------- -----------
+ watch_tim   Add child      Andenne, CPAS   contacts.Company   Partner       9932
+ watch_tim   Remove child                   contacts.Person    Person        9932
+=========== ============== =============== ================== ============= ===========
+""")
+        
+
+
+def changes_to_rst(master):
+    A = settings.SITE.modules.changes.ChangesByMaster
+    return A.request(master).to_rst(column_names = 'user type object diff:30 object_type object_id')

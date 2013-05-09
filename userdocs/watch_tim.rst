@@ -4,8 +4,9 @@
 watch_tim
 =========
 
-Diese Seite ist die offizielle Dokumentation der Synchronisierung von TIM nach Lino,
-einer Funktionalität, die ausschließlich im deutschsprachigen Raum Belgiens genutzt wird.
+Diese Seite ist die offizielle Dokumentation der Synchronisierung 
+von TIM nach Lino, einer Funktionalität, die ausschließlich im 
+deutschsprachigen Raum Belgiens genutzt wird.
 
 
 .. contents:: 
@@ -38,41 +39,26 @@ TIM unterscheidet vier "Partnerarten":
 Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
 
 - Wenn mindestens eines der Felder
-  `PAR->NB2` (INSS), `PAR->NB1` (Gesdos-Nr) 
-  oder `PAR->IdUsr` (Sozialarbeiter) unleer ist, 
-  oder wenn Attribut N (Neuzugang) 
-  gesetzt ist, dann wird es ein **Klient**.
-- Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**.
-- Ansonsten, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
-  "Herr und Frau" enthält, dann wird es ein **Haushalt**.
-- Ansonsten wird es eine **Person**.
+  `PAR->NB2` (INSS) oder `PAR->NB1` (Gesdos-Nr) 
+  unleer ist, oder wenn *Partnerattribut N (Neuzugang)* 
+  gesetzt ist, dann wird es ein 
+  :ref:`Klient <welfare.pcsw.Client>`.
+  Ausnahme: Wenn `PAR->NB2` (INSS) nur eine  Null ("0")  enthält, 
+  dann gilt es als leer.
+- **Ansonsten**, wenn PAR->NoTva unleer ist, wird es eine 
+  :ref:`Organisation <welfare.contacts.Company>`.
+- **Ansonsten**, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
+  "Herr und Frau" enthält, dann wird es ein 
+  :ref:`Haushalt <welfare.households.Household>`
+- Ansonsten wird es eine :ref:`Person <welfare.contacts.Person>`.
 
-Ob eine Organisation auch Kursanbieter oder Stellenabieter ist, 
-wird lediglich in Lino 
+Ob eine :ref:`Organisation <welfare.contacts.Company>` auch 
+:ref:`Kursanbieter <welfare.courses.CourseProvider>` 
+und/oder 
+:ref:`Stellenabieter <welfare.jobs.JobProvider>` 
+ist, wird lediglich in Lino 
 (durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. 
-TIM kennt diese Nuance nicht.
-
-Veraltete Partner
------------------
-
-Das Attribut "veraltet" bedeutet allgemein in Lino: 
-
-- die Daten dieses Partners werden nicht mehr gepflegt, 
-- alle Angaben verstehen sich als "so war es, bevor dieser Partner 
-  aufhörte, uns zu interessieren".
-
-Veraltete Partner werden normalerweise in Listen ignoriert,
-als wären sie gelöscht.
-Um sie trotzdem zu sehen, 
-muss das Ankreuzfeld `Auch veraltete Klienten`
-(bzw. `Auch veraltete Partner`)
-im Parameter-Panel der Liste angekreuzt werden.
-
-Bei importierten Partnern ist es schreibgeschützt und 
-ist eingeschaltet, wenn diese Person in TIM 
-entweder in **Partnerart "Inaktive"** steht oder 
-das **Partnerattribut W** eingeschaltet hat. 
-
+TIM kennt diese Information nicht.
 
 Partnerattribute
 ----------------
@@ -105,8 +91,7 @@ sollte sie als ein eigenes schreibgeschütztes Ankreuzfeld da stehen.
 Mögliche Überraschungen
 -----------------------
 
-- Ein existierender Klient kann in Lino
-  wie vom Erdboden verschwunden scheinen, 
+- Ein existierender Klient kann in Lino verschwunden scheinen, 
   weil er versehentlich als veraltet
   markiert wurde
   (siehe `Veraltete Partner`_).
@@ -204,6 +189,20 @@ das unabhängig vom Bearbeitungszustand_ existiert.
 Siehe `Veraltete Partner`_.
 
 
+
+Veraltete Partner
+-----------------
+
+Bei importierten Partnern ist 
+das Ankreuzfeld 
+:ref:`"veraltet" <welfare.contacts.Partner.obsolete>`
+schreibgeschützt.
+Es ist eingeschaltet, wenn diese Person in TIM 
+entweder in **Partnerart "Inaktive"** steht oder 
+das **Partnerattribut W** eingeschaltet hat. 
+
+
+
 Sonstiges
 ---------
 
@@ -241,6 +240,10 @@ Ein leeres Feld `bis` einer Begleitung bedeutet, dass das Ende nicht bekannt ist
 Eine Begleitung ist (an einem gegebenen Datum `heute`) aktiv,
 wenn `von` **<=** `heute` und `bis` entweder leer oder **>=** `heute` ist.
 
+
+Primäre Begleitung
+------------------
+
 Lino kann pro Klient mehrere Begleitungen haben,
 aber in TIM haben wir nur den "hauptverantwortlichen Sozialarbeiter" (`PAR->IdUsr`). 
 Deshalb gibt es das Konzept der **primären** Begleitung.
@@ -271,20 +274,19 @@ An diese sekundären Begleitungen geht `watch_tim` nicht ran.
 .. _welfare.clients.CoachingType:
 
 Begleitungsdienst
-=================
+-----------------
 
 Jede Begleitung findet zwingend im Rahmen eines bestimmten 
-Dienstes statt.
+**Dienstes** statt.
 In der Demo-Datenbank gibt es folgende Begleitungsdienste:
 
 .. django2rst:: 
 
-    # print "\n\nFoo, bar, baz\n\n"
     settings.SITE.login('rolf').show(pcsw.CoachingTypes)
     
 
 Regeln
-======
+------
   
 - Ein Neuantrag kann keine Begleitungen haben. 
   (Ein Klient mit Begleitungen, selbst abgeschlossene, 

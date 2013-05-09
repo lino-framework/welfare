@@ -47,16 +47,6 @@ Das hängt vom :ref:`welfare.users.UserProfile` ab.
 Référence
 =========
 
-.. actor:: contacts.Partners
-
-Toute personne physique ou morale est enregistrée 
-dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`.
-
-Lino différencie les types de Partenaires suivants:
-
-.. django2rst:: contacts.Partner.print_subclasses_graph()
-
-
 .. actor:: pcsw.Clients
 .. actor:: pcsw.ClientContactTypes
 .. actor:: pcsw.ClientContacts

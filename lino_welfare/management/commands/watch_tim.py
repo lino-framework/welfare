@@ -293,15 +293,19 @@ def PAR_model(data):
     - Neuzugänge (Attribut N) sind ebenfalls immer Klienten
     
     """
-    if data.get('NB2',False): # SSIN
-        return Client
+    nb2 = data.get('NB2',False)
+    if nb2: # SSIN
+        if nb2.strip() == '0':
+            data['NB2'] = ''
+        else:
+            return Client
     if data.get('NB1',False): # gesdos-Nr
         return Client
     attribs = data.get('ATTRIB',False)
     if attribs and 'N' in attribs: # newcomer
         return Client
-    if data.get('IDUSR',False): # Sozi
-        return Client
+    #~ if data.get('IDUSR',False): # Sozi
+        #~ return Client
     if data.get('NOTVA',False):
         return Company
     if data.get('ALLO','') in (u"Eheleute",):
