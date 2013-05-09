@@ -18,6 +18,10 @@ Version 1.1.4 (coming)
   Die Standard-Perioden und Standard-Beträge im Kontenplan sind nocht 
   sichtbar, werden aber ignoriert und kommen demnächst ganz raus
   (muss ich die automatisiert übernehmen?)
+  
+- Es gibt einen neuen Menübefehl 
+  :menuselection:`Konfigurierung --> Schuldnerberatung --> Budget-Kopiervorlage`,
+  und der ist auch für Kerstin sichtbar.
 
 - :ref:`welfare.debts` : neue Kolonne :guilabel:`Gerichtsvollzieher` 
   in in :ref:`welfare.debts.Entries` : Alle Schulden können potentiell 

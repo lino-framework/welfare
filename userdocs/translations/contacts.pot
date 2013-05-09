@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-02 22:20+0300\n"
+"POT-Creation-Date: 2013-05-09 16:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,5 +19,40 @@ msgstr ""
 #: ../contacts.rst:5
 # 99a2d40acbd84ef384cdbce19a0c5066
 msgid "Contacts"
+msgstr ""
+
+#: ../contacts.rst:9
+# 639890d595e1411a931e62ba56f796cb
+msgid "Toute personne physique ou morale est enregistrée dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`."
+msgstr ""
+
+#: ../contacts.rst:12
+# cd8512246ec4440795d05ee76fd3d120
+msgid "Lino différencie les types de Partenaires suivants:"
+msgstr ""
+
+#: ../contacts.rst:19
+# 4a6a85a0114c4757840a43848d26753a
+msgid "Veraltete Partner"
+msgstr ""
+
+#: ../contacts.rst:21
+# 9431cdb7252f451fabc354f64e206729
+msgid "Das Attribut \"veraltet\" bedeutet :"
+msgstr ""
+
+#: ../contacts.rst:23
+# f1ef853df7de44ee8712364b18cd2be2
+msgid "die Daten dieses Partners werden nicht mehr gepflegt,"
+msgstr ""
+
+#: ../contacts.rst:24
+# 7e63556fc9f4405998e882325db4ac90
+msgid "alle Angaben verstehen sich als \"so war es, bevor dieser Partner aufhörte, uns zu interessieren\"."
+msgstr ""
+
+#: ../contacts.rst:27
+# 25efbd51a91a4ec5923c6b0b1ce86751
+msgid "Veraltete Partner werden normalerweise in Listen ignoriert, als wären sie gelöscht. Um sie trotzdem zu sehen, muss das Ankreuzfeld `Auch veraltete Klienten` (bzw. `Auch veraltete Partner`) im Parameter-Panel der Liste angekreuzt werden."
 msgstr ""
 

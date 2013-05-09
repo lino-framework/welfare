@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-02 22:20+0300\n"
+"POT-Creation-Date: 2013-05-09 16:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,32 +66,22 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-#: ../clients.rst:52
-# b5dcef8a98b046309db79872568b3219
-msgid "Toute personne physique ou morale est enregistrée dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`."
-msgstr ""
-
-#: ../clients.rst:55
-# cdc3d60e93ef4beba5b2b51d4b96df6d
-msgid "Lino différencie les types de Partenaires suivants:"
-msgstr ""
-
-#: ../clients.rst:74
+#: ../clients.rst:64
 # 3acbab023921428ba77d66fa8a187e0e
 msgid "Anhang"
 msgstr ""
 
-#: ../clients.rst:76
+#: ../clients.rst:66
 # 5269638430af4771b4fcf6c376b5b30f
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
-#: ../clients.rst:77
+#: ../clients.rst:67
 # 3d627a2f4f944ccf91770242554535ce
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
-#: ../clients.rst:78
+#: ../clients.rst:68
 # 71e98fc701c84a4f817c034ae30d8ff4
 msgid "engl. \"State\" = Bearbeitungszustand"
 msgstr ""

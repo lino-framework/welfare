@@ -149,19 +149,19 @@ class LanguageKnowledge(dd.Model):
     
 class LanguageKnowledges(dd.Table):
     model = LanguageKnowledge
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
 
 class LanguageKnowledgesByPerson(LanguageKnowledges):
     master_key = 'person'
     #~ label = _("Language knowledge")
     #~ button_label = _("Languages")
     column_names = "language native spoken written cef_level"
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     
 class KnowledgesByLanguage(LanguageKnowledges):
     master_key = 'language'
     column_names = "person native spoken written cef_level"
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
 
 # 
 # PROPERTIES
@@ -195,7 +195,7 @@ class PersonProperties(dd.Table):
     model = PersonProperty
     #~ hidden_columns = frozenset(['group'])
     hidden_columns = 'group id'
-    required = dict(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     
 class PropsByPerson(PersonProperties):
     """
@@ -204,7 +204,7 @@ class PropsByPerson(PersonProperties):
     """
     master_key = 'person'
     column_names = "property value remark *"
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ hidden_columns = 'id'
     auto_fit_column_widths = True
     

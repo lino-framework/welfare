@@ -1264,10 +1264,13 @@ def unused_setup_my_menu(site,ui,profile,m):
     m.add_action(MyBudgets)
   
 def setup_config_menu(site,ui,profile,m): 
-    pass
+    m  = m.add_menu("debts",MODULE_LABEL)
+    if site.site_config.master_budget:
+        fld = site.modules.ui.SiteConfig._meta.get_field('master_budget')
+        m.add_instance_action(site.site_config.master_budget,
+            label=unicode(fld.verbose_name))
     #~ if user.profile.debts_level < UserLevels.manager: 
         #~ return
-    #~ m  = m.add_menu("debts",MODULE_LABEL)
     #~ m.add_action(Accounts)
     #~ m.add_action(accounts.Groups)
     #~ m.add_action(DebtTypes)
