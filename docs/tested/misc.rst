@@ -80,7 +80,7 @@ where the demo database has been generated):
 >>> events = ses.spawn(cal.MyEvents,master_instance=ses.get_user())
 >>> print events.master_instance
 Rolf Rompen
->>> events.get_total_count() > 1000
+>>> events.get_total_count() > 100
 True
 
 This should be 7, not 137.

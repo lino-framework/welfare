@@ -107,6 +107,7 @@ class CivilState(dd.ChoiceList):
     Civil states, using Belgian codes.
     
     """
+    required = dd.required(user_level='admin')
     verbose_name = _("Civil state")
     verbose_name_plural = _("Civil states")
     
@@ -186,6 +187,7 @@ class BeIdCardTypes(dd.ChoiceList):
     | [2] `Enum be.fedict.commons.eid.consumer.DocumentType <http://code.google.com/p/eid-applet/source/browse/trunk/eid-applet-service/src/main/java/be/fedict/eid/applet/service/DocumentType.java>`_
     
     """
+    required = dd.required(user_level='admin')
     verbose_name = _("eID card type")
     verbose_name_plural = _("eID card types")
     
@@ -397,6 +399,7 @@ Auch Datensätze anzeigen, die als veraltet markiert sind."""))
       
     
 class ClientStates(dd.Workflow):
+    required = dd.required(user_level='admin')
     #~ label = _("Client state")
     
     #~ debug_permissions = True
@@ -2226,15 +2229,15 @@ class Exclusion(dd.Model):
         return s
 
 class Exclusions(dd.Table):
+    required = dd.required(user_level='admin')
     help_text = _("Liste des exclusions.")
   
-    required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
     model = Exclusion
     #~ label = _('Exclusions')
     
 class ExclusionsByPerson(Exclusions):
-    required = dict(user_groups='integ')
+    required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark'
@@ -2289,6 +2292,7 @@ class ClientContactType(dd.BabelNamed):
 class ClientContactTypes(dd.Table):
     help_text = _("Liste des types de contacts client.")
     model = ClientContactType
+    required = dd.required(user_level='manager')
 
 #~ class ClientContactType(Choice):
   
@@ -2351,10 +2355,12 @@ dd.update_field(ClientContact,'contact_person',verbose_name=_("Contact person"))
           
     
 class ClientContacts(dd.Table):
+    required = dd.required(user_level='admin')
     help_text = _("Liste des contacts clients.")
     model = ClientContact
     
 class ContactsByClient(ClientContacts):
+    required = dd.required()
     master_key = 'client'
     column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
@@ -2593,6 +2599,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
 #~ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
 
 class Coachings(dd.Table):
+    required = dd.required(user_level='admin')
     help_text = _("Liste des accompagnements.")
     model = Coaching
     
@@ -2633,6 +2640,7 @@ class CoachingsByClient(Coachings):
     """
     The :class:`Coachings` table in a :class:`Clients` detail.
     """
+    required = dd.required()
     #~ debug_permissions = 20121016
     master_key = 'client'
     order_by = ['start_date']
@@ -2641,6 +2649,7 @@ class CoachingsByClient(Coachings):
     auto_fit_column_widths = True
 
 class CoachingsByUser(Coachings):
+    required = dd.required()
     master_key = 'user'
     column_names = 'start_date end_date client type primary id'
 
@@ -2657,6 +2666,7 @@ class CoachingsByUser(Coachings):
 
 
 class NotesByPerson(notes.Notes):
+    required = dd.required()
     master_key = 'project'
     column_names = "date event_type type subject body user company *"
     order_by = ["-date"]
@@ -2665,6 +2675,7 @@ class NotesByPerson(notes.Notes):
     
   
 class NotesByCompany(notes.Notes):
+    required = dd.required()
     master_key = 'company'
     column_names = "date project event_type type subject body user *"
     order_by = ["-date"]

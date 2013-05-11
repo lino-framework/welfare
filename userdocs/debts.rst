@@ -15,7 +15,7 @@ Scénarios
   les chiffres manquants pour les encoder la prochaine fois?
   
   - Activer le champ :ref:`welfare.debts.Budget.print_empty_rows`
-  - Cliquer sur :ref:`lino.ui.detail.Save`
+  - Cliquer sur :ref:`welfare.ui.detail.Save`
 
 
 .. actor:: debts.Actors

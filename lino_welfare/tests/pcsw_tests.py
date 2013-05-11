@@ -16,7 +16,7 @@
 This module contains "quick" tests that are run on a demo database 
 without any fixture. You can run only these tests by issuing::
 
-  python manage.py test lino_welfare.QuickTest
+  python manage.py test lino_welfare.QuickTests
 
 """
 
@@ -72,7 +72,7 @@ from lino.modlib.users.models import User
 #~ from lino_welfare.modlib.pcsw.models import Person
 from lino_welfare.modlib.pcsw.models import Client
 
-class QuickTest(RemoteAuthTestCase):
+class QuickTests(RemoteAuthTestCase):
     maxDiff = None
 
 
@@ -81,6 +81,10 @@ class QuickTest(RemoteAuthTestCase):
         Initialization.
         """
         #~ print "20130321 test00 started"
+        User(username='100',language='de',profile='100').save()
+        User(username='110',language='de',profile='110').save()
+        User(username='200',language='de',profile='200').save()
+        User(username='300',language='de',profile='300').save()
         self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
         self.user_root.save()
         signer1 = Person(first_name="Ernst",last_name="Keutgen") ; signer1.save()
@@ -585,3 +589,145 @@ Belgique""")
         self.assertEqual(result['success'],True)
         obj = accounts.Account.objects.get(group=ag)
         self.assertEqual(obj.name,"TestAccount")
+        
+        def menu_test(username,expected,debug=False):
+            ses = settings.SITE.login(username) 
+            mnu = settings.SITE.get_site_menu(None,ses.get_user().profile)
+            s = mnu.as_rst(ses)
+            if debug:
+                print s
+            self.assertEqual(s.splitlines(),expected.splitlines())
+        
+        
+        menu_test('root',"""\
+- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+
+- Office :
+  
+  - Mein E-Mail-Ausgang
+  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
+  - Meine Notizen
+
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen
+
+- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
+
+- Neuanträge : Neue Klienten
+
+- Schuldnerberatung : Klienten, Meine Budgets
+
+- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten, Datenkontrolle Klienten, Verfügbare Begleiter
+
+- Konfigurierung :
+  
+  - Office : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
+  - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
+  - Kontakte : Länder, Orte, Sprachen, Organisationsarten, Funktionen
+  - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
+  - Kalender : Orte, Prioritäten, Gastrollen, Kalenderliste
+  - Haushalte : Rollen in Haushalt, Haushaltsarten
+  - Buchhaltung : Kontenpläne, Kontengruppen, Konten
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Klientenkontaktarten
+  - DSBE : VSE-Arten, Beendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Ausbildungsarten, Stundenpläne, Regimes
+  - Kurse : Kursinhalte
+  - Neuanträge : Vermittler, Fachbereiche
+  - ZDSS : Sektoren, Eigenschafts-Codes
+
+- Explorer :
+  
+  - Office : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Postsendungen
+  - System : Vollmachten, User Groups, Benutzer-Levels, Benutzerprofile, Änderungen
+  - Kontakte : Kontaktpersonen
+  - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
+  - Haushalte : Mitglieder
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
+  - CV : Sprachkenntnisse
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
+  - Kurse : Kurse, Kursanfragen
+  - Kompetenzen
+  - Schuldnerberatung : Budgets, Einträge
+  - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
+  - Ereignisse/Notizen
+  - Eigenschaften
+
+- Site : Info
+""") # root
+        
+        # integration agent
+        menu_test("100","""\
+- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+
+- Office :
+  
+  - Mein E-Mail-Ausgang
+  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
+  - Meine Notizen
+
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen
+
+- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
+
+- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten
+
+- Konfigurierung :
+  
+  - Office : Meine Einfügetexte
+  - Kontakte : Länder, Sprachen
+
+- Explorer :
+  
+  - DSBE : VSEs, Art.60§7-Konventionen
+
+- Site : Info
+""") # 100 integration agent
+
+        # debts consultant
+        menu_test('300',"""\
+- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+
+- Office :
+  
+  - Mein E-Mail-Ausgang
+  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
+  - Meine Notizen
+
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Schuldnerberatung : Klienten, Meine Budgets
+
+- Konfigurierung :
+  
+  - Office : Meine Einfügetexte
+  - Kontakte : Länder, Sprachen
+
+- Site : Info
+""") # 300 debts consultant
+
+        # newcomers
+        menu_test('200',"""\
+- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+
+- Office :
+  
+  - Mein E-Mail-Ausgang
+  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
+  - Meine Notizen
+
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Neuanträge : Neue Klienten
+
+- Listings : Benutzer und ihre Klienten, Verfügbare Begleiter
+
+- Konfigurierung :
+  
+  - Office : Meine Einfügetexte
+  - Kontakte : Länder, Sprachen
+
+- Site : Info
+""") # 200 newcomers
+

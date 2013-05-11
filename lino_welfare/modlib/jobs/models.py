@@ -707,7 +707,7 @@ class StudyType(dd.BabelNamed):
         verbose_name_plural = _("study types")
 
 class StudyTypes(dd.Table):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='integ',user_level='admin')
     #~ label = _('Study types')
     model = StudyType
     order_by = ["name"]
@@ -768,12 +768,13 @@ class Study(CountryCity):
 
 class Studies(dd.Table):
     "General list of Studies (all Persons)"
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='integ',user_level='manager')
     model = Study
     order_by = "country city type content".split()
 
         
 class StudiesByCountry(Studies):
+    required = dd.required(user_groups='integ')
     master_key = 'country'
     
 class StudiesByCity(Studies):
@@ -781,11 +782,13 @@ class StudiesByCity(Studies):
     Lists all Studies in a given City. 
     Used as slave grid in Cities detail.
     """
+    required = dd.required(user_groups='integ')
     master_key = 'city'
     column_names = 'school type person content started stopped success language  remarks *'
     
     
 class StudiesByPerson(HistoryByPerson):
+    required = dd.required(user_groups='integ')
     help_text  = _("List of studies for a given person.")
     model = Study
     #~ label = _("Studies & experiences")
@@ -815,10 +818,11 @@ class Experience(SectorFunction):
         return unicode(self.title)
   
 class Experiences(dd.Table):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='integ',user_level='manager')
     model = Experience
   
 class ExperiencesByFunction(Experiences):
+    required = dd.required(user_groups='integ')
     master_key = 'function'
     order_by = ["started"]
 

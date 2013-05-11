@@ -11,6 +11,7 @@ Il n'est pas terminé.
 .. toctree::
    :maxdepth: 1
 
+   general
    clients
    newcomers
    cbss

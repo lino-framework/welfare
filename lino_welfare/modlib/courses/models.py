@@ -119,7 +119,7 @@ class CourseProviders(contacts.Companies):
     """
     List of Companies that have `Company.is_courseprovider` activated.
     """
-    required_user_groups = ['integ']
+    required = dd.required(user_groups='integ')
     #~ required_user_level = UserLevel.manager
     #~ hide_details = [Contact]
     #~ use_as_default_table = False
@@ -187,6 +187,7 @@ class CourseContent(dd.Model):
         
   
 class CourseContents(dd.Table):
+    required = dd.required(user_level='manager',user_groups='integ')
     model = CourseContent
     order_by = ['name']
     detail_layout = """
@@ -315,7 +316,7 @@ class Course(dd.Model,mixins.Printable):
         
 class Courses(dd.Table):
     #~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
-    required_user_groups = ['integ']
+    required = dd.required(user_groups='integ',user_level='admin')
     model = Course
     order_by = ['start_date']
     detail_layout = """
@@ -326,11 +327,12 @@ class Courses(dd.Table):
     """
     
 class CoursesByOffer(Courses):
+    required = dd.required(user_groups='integ')
     master_key = 'offer'
     column_names = 'start_date * id'
 
 class CourseOffers(dd.Table):
-    required_user_groups = ['integ']
+    required = dd.required(user_groups='integ')
     #~ required_user_level = UserLevels.manager
     model = CourseOffer
     detail_layout = """
@@ -525,7 +527,7 @@ class CourseRequest(dd.Model):
 class CourseRequests(dd.Table):
     #~ debug_permissions = 20130424
     model = CourseRequest
-    required=dict(user_groups=['integ'],user_level='manager')
+    required = dd.required(user_groups='integ',user_level='manager')
     detail_layout = """
     date_submitted person content offer urgent 
     course state date_ended id:8 
@@ -539,7 +541,7 @@ class CourseRequestsByPerson(CourseRequests):
     Table of :class:`CourseRequest` instances of a 
     :class:`lino.modlib.pcsw.models.Client`.
     """
-    required=dict(user_groups=['integ'])
+    required = dd.required(user_groups='integ')
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'
@@ -547,14 +549,14 @@ class CourseRequestsByPerson(CourseRequests):
     
 
 class CourseRequestsByContent(CourseRequests):
-    required=dict(user_groups=['integ'])
+    required = dd.required(user_groups='integ')
     master_key = 'content'
         
 class RequestsByCourse(CourseRequests):
     """
     Table of :class:`CourseRequest` instances of a :class:`Course`.
     """
-    required=dict(user_groups=['integ'])
+    required = dd.required(user_groups='integ')
     master_key = 'course'
   
     @classmethod
@@ -607,7 +609,7 @@ class PendingCourseRequests(CourseRequests):
     """
     List of pending course requests.
     """
-    required = dict(user_groups=['integ'])
+    required = dd.required(user_groups='integ')
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)

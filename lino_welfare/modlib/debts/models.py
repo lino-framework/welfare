@@ -502,7 +502,7 @@ class Budgets(dd.Table):
     but is directly used by :menuselection:`Explorer --> Debts -->Budgets`.
     """
     model = Budget
-    required = dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts',user_level='manager')
     #~ required_user_groups = ['debts']
     detail_layout = BudgetDetail()
     insert_layout = dd.FormLayout("""
@@ -516,11 +516,12 @@ class Budgets(dd.Table):
 
 
 class MyBudgets(Budgets,mixins.ByUser):
-    pass
+    required = dd.required(user_groups='debts')
     
 class BudgetsByPartner(Budgets):
     master_key = 'partner'
     label = _("Is partner of these budgets:")
+    required = dd.required(user_groups='debts')
     
 
     
@@ -601,7 +602,8 @@ class Actor(ActorBase,SequencedBudgetComponent):
         
     
 class Actors(dd.Table):
-    required = dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts',user_level='manager')
+    
     #~ required_user_groups = ['debts']
     model = Actor
     column_names = "budget seqno partner header remark *"
@@ -610,6 +612,7 @@ class ActorsByBudget(Actors):
     """
     The table used to edit Actors in a Budget's detail.
     """
+    required = dd.required(user_groups='debts')
     master_key = 'budget'
     column_names = "seqno partner header remark *"
     auto_fit_column_widths = True
@@ -617,6 +620,7 @@ class ActorsByBudget(Actors):
     
     
 class ActorsByPartner(Actors):
+    required = dd.required(user_groups='debts')
     master_key = 'partner'
     label = _("Is actor in these budgets:")
     editable = False
@@ -782,7 +786,8 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
             
 class Entries(dd.Table):
     model = Entry
-    required = dict(user_groups = ['debts'],user_level='manager')
+    required = dd.required(user_groups='debts',user_level='admin')
+    
     #~ required_user_groups = ['debts']
     #~ required_user_level = UserLevels.manager
 
@@ -790,7 +795,7 @@ class Entries(dd.Table):
 class EntriesByType(Entries):
     _account_type = None
     #~ required_user_level = None
-    required=dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts')
   
     @classmethod
     def class_init(self):
@@ -814,7 +819,7 @@ class EntriesByBudget(Entries):
     column_names = "account description amount actor:10 periods:10 remark move_buttons seqno todo"
     hidden_columns = "seqno"
     auto_fit_column_widths = True
-    required = dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts')
     #~ required_user_level = None
     order_by = ['seqno']
 
@@ -1089,7 +1094,7 @@ class SummaryTable(dd.VirtualTable):
 class ResultByBudget(SummaryTable):
     help_text = _("""Shows the Incomes & Expenses for this budget.""")
     label = _("Incomes & Expenses")
-    required=dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts')
     master = Budget
     
     @classmethod
@@ -1135,7 +1140,7 @@ class ResultByBudget(SummaryTable):
         
 class DebtsByBudget(SummaryTable):
     label = _("Debts")
-    required=dict(user_groups = ['debts'])
+    required = dd.required(user_groups='debts')
     master = Budget
     bailiff_isnull = True
     

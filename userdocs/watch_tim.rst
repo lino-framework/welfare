@@ -19,7 +19,7 @@ Partner und watch_tim
 
 Sowohl in TIM als auch in Lino gibt es eine Tabelle der **Partner**.
 Die Partnernummer ist die Gleiche in TIM wie in Lino.
-Im Hintergrund läuft ständig ein Programm namens :term:`watch_tim`, 
+Im Hintergrund läuft ständig ein Programm namens `watch_tim`, 
 das alle Änderungen in TIM automatisch nach Lino synchronisiert.
 
 Partner mit einer Nummer zwischen 200000 und 299999 

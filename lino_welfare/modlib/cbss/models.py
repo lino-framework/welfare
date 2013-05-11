@@ -277,7 +277,7 @@ class Sectors(dd.Table):
     model = Sector
     #~ read_permission = perms.Required(user_groups = ['cbss'])
     #~ required_user_groups = ['cbss']
-    required = dict(user_groups='cbss')
+    required = dd.required(user_groups='cbss',user_level='admin')
     column_names = 'code subcode abbr name *'
     order_by = ['code','subcode']
     
@@ -305,7 +305,7 @@ class Purpose(dd.BabelNamed):
 
 class Purposes(dd.Table):
     model = Purpose
-    required = dict(user_groups='cbss')
+    required = dd.required(user_groups='cbss',user_level='admin')
     #~ required_user_groups = ['cbss']
     column_names = 'sector_code code name *'
     order_by = ['sector_code','code']
