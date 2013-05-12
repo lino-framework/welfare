@@ -685,3 +685,9 @@ def migrate_from_1_1_2(globals_dict):
         return debts_Budget(**kw)
     globals_dict.update(create_debts_budget=create_debts_budget)
     return '1.1.3'
+    
+def migrate_from_1_1_3(globals_dict): 
+    """
+    - New field ui.SiteConfig.debts_master_budget
+    """
+    return '1.1.4'

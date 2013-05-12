@@ -14,12 +14,24 @@ The final truth about what's going on is only
 Version 1.1.4 (coming)
 ============================================
 
-- master_budget : Kopiervorlage für neue Budgets.
-  Die Standard-Perioden und Standard-Beträge im Kontenplan sind nocht 
-  sichtbar, werden aber ignoriert und kommen demnächst ganz raus
-  (muss ich die automatisiert übernehmen?)
+- :ref:`welfare.jobs.NewJobsOverview` : 
+  Seitenwechsel zwischen die verschiedenen Kategorien 
+  (Majorés, Intern, usw.).
   
-- Es gibt einen neuen Menübefehl 
+  Genauer gesagt ist es jetzt so, dass Lino einen Seitenwechsel 
+  innerhalb der Tabellen unterdrückt. Falls zwei Kategorien auf 
+  eine Seite passen, kommt kein Seitenwechsel.
+
+- Neues Feld SiteConfig.debts_master_budget ("Budget-Kopiervorlage").
+
+  Die Standard-Perioden und Standard-Beträge im Kontenplan sind noch 
+  sichtbar, werden aber nur benutzt 
+  solange keine Kopiervorlage angegeben ist. 
+  In den Site-Parametern wird ein "leeres" Budget ausgewählt, 
+  das wir nach dem Upgrade eigens dazu anlegen.
+  Aber der näcshten Version kommen die Standard-Perioden und 
+  Standard-Beträge im Kontenplan ganz raus.
+  Der neue Menübefehl 
   :menuselection:`Konfigurierung --> Schuldnerberatung --> Budget-Kopiervorlage`,
   und der ist auch für Kerstin sichtbar.
 
@@ -31,16 +43,27 @@ Version 1.1.4 (coming)
 - Beim Ausdruck unter der Tabelle "Guthaben, Schulden, Verpflichtungen" eine 
   weitere Tabelle "Gerichtsvollzieher", in der nur GV-Schulden sind.
 
-- In Konfigurierung --> Site-Parameter gibt es ein neues Feld 
+- In :menuselection:`Konfigurierung --> Site-Parameter` gibt es ein neues Feld 
   "Gerichtsvollzieher", in dem anzugeben ist, welche Klientenkontaktart
   als "Gerichtsvollzieher" anzusehen ist. 
   Wenn dieses Feld leer ist, werden in der Auswahlliste des GV einer 
   Schuld alle Organisationen angezeigt.
   
 - "Duplizieren ist total buggy" : zumindest in der momentanen 
-  Development-Version kriege ich keine Probleme reproduziert.
+  Version kriege ich keine Probleme reproduziert.
   Ich höre auf mit aktiver Suche und warte mal auf euer Feedback 
   nach dem nächsten Release.
+  
+- Ein Bug, den niemand bemerkt hatte: Lino-Welfare protokollierte
+  keinerlei Änderungen mehr. Behoben.
+
+- Unerwünschte Neuzugänge.
+  Ein Lauf mit tim2lino und watch_tim hatte ca 200 "Neuzugänge" geschaffen, 
+  die eigentlich gar keine waren. Subtile Änderungen in 
+  :mod:`watchtim <lino_welfare.management.commands.watchtim>`
+  und der Dokumentation (:ref:`welfare.watch_tim`).
+
+  
 
 
 Version 1.1.3 (released :blogref:`20130505`)
