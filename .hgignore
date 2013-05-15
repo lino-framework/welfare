@@ -17,10 +17,9 @@ tmp
 */SciTE.session
 */test.db
 */default.db
-docs/media
+media
 docs/api
 
-lino_welfare/demo/media
 lino_welfare.egg-info
 .build
 htmlcov

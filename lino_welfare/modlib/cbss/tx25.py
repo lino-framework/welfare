@@ -38,6 +38,8 @@ See also:
 
 """
 
+from __future__ import unicode_literals
+
 import datetime
 import traceback
 from django.conf import settings
@@ -76,7 +78,7 @@ def reply_has_result(reply):
             msg += "\n- %s = %s" % (i.fieldName,i.fieldValue)
         raise Warning(msg)
   
-  
+
 class RequestLanguages(dd.ChoiceList):
     verbose_name = _("Language")
 add = RequestLanguages.add_item
@@ -506,6 +508,16 @@ def IT024(n):
     info = Info()
     info.add_deldate(n)
     return info
+    
+def IT028(n):
+    info = Info()
+    info.addfrom(n,'LegalFact','',code_label)
+    info.addfrom(n,'Graphic','')
+    info.addfrom(n,'ExpiryDate',_("expires "),DateType)
+    info.add_deldate(n)
+    return info
+
+    
 
 def IT208(n):
     info = Info()
@@ -1345,30 +1357,32 @@ class RowHandlers:
             yield datarow(group,n,n.Date,info)
             group = ''
         
-    @staticmethod
-    def PseudoNationalNumbers(node,name):
-        group = _("Pseudo National Numbers") # Pseudo-numéro national
-        for n in node.PseudoNationalNumber:
-            info = IT208(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def PseudoNationalNumbers(node,name):
+        #~ group = _("Pseudo National Numbers") # Pseudo-numéro national
+        #~ for n in node.PseudoNationalNumber:
+            #~ info = IT208(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def RetirementCertificates(node,name):
-        group = _("Retirement Certificates") # Certificats de pension
-        for n in node.RetirementCertificate:
-            info = IT073(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def RetirementCertificates(node,name):
+        #~ group = _("Retirement Certificates") # Certificats de pension
+        #~ for n in node.RetirementCertificate:
+            #~ info = IT073(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def SpecialRetirementCertificates(node,name):
-        group = _("Special Retirement Certificates") # Certificats de pension spéciale
-        for n in node.SpecialRetirementCertificate:
-            info = IT074(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def SpecialRetirementCertificates(node,name):
+        #~ group = _("Special Retirement Certificates") # Certificats de pension spéciale
+        #~ for n in node.SpecialRetirementCertificate:
+            #~ info = IT074(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
+    
+            
     @staticmethod
     def IT253(node,name):
         group = _("Creation Date")
@@ -1383,6 +1397,34 @@ class RowHandlers:
         info = Info()
         yield datarow(group,n,n.Date,info)
         
+
+HANDLERS = dict()
+
+def register_it_handler(name,label,subname,itname):
+    HANDLERS[name] = (label,subname,itname)
+    
+register_it_handler('TemporaryRegistrations',_("Inscriptions Temporaires"),'TemporaryRegistration','IT028')
+register_it_handler('SpecialRetirementCertificates',_("Special Retirement Certificates"),'SpecialRetirementCertificate','IT074')
+register_it_handler('RetirementCertificates',_("Retirement Certificates"),'RetirementCertificate','IT073')
+register_it_handler('PseudoNationalNumbers',_("Pseudo National Numbers"),'PseudoNationalNumber','IT208')
+
+def get_it_handler(itnode):
+    #~ m = getattr(RowHandlers,node.__class__.__name__,None)
+    #~ hname,node,nodename):
+    t = HANDLERS.get(itnode.__class__.__name__,None)
+    if t is None: return t
+    g,subname,itname = t
+    it = globals().get(itname)
+    def f(node,name):
+        group = g
+        for n in getattr(node,subname):
+            info = it(n)
+            yield datarow(group,n,n.Date,info)
+            group = ''
+    return f
+        
+
+
 
 class RetrieveTIGroupsResult(dd.VirtualTable):
     """
@@ -1432,10 +1474,11 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
             #~ print 20130425, name, node.__class__
             m = getattr(RowHandlers,node.__class__.__name__,None)
             if m is None:
-                raise Exception("No handler for %s (%s)" 
-                    % (name, node.__class__.__name__))
-            else:
-                for row in m(node,name): yield row
+                m = get_it_handler(node)
+                if m is None:
+                    raise Exception("No handler for %s (%s)" 
+                        % (name, node.__class__.__name__))
+            for row in m(node,name): yield row
             
         
         

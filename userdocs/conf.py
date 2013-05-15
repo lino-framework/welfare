@@ -18,6 +18,7 @@ configure(globals(),'lino_welfare.demo.settings')
 
 
 extensions += ['lino.utils.actordoc']
+extensions += ['lino.utils.screenshots']
 
 #~ Trigger loading of Djangos model cache in order to avoid side effects that 
 #~ would occur when this happens later while importing one of the models modules.

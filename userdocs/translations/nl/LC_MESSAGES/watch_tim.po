@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 16:12+0300\n"
+"POT-Creation-Date: 2013-05-14 14:07+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -41,8 +41,8 @@ msgstr ""
 msgid ""
 "Sowohl in TIM als auch in Lino gibt es eine Tabelle der **Partner**. Die "
 "Partnernummer ist die Gleiche in TIM wie in Lino. Im Hintergrund läuft "
-"ständig ein Programm namens :term:`watch_tim`, das alle Änderungen in TIM"
-" automatisch nach Lino synchronisiert."
+"ständig ein Programm namens `watch_tim`, das alle Änderungen in TIM "
+"automatisch nach Lino synchronisiert."
 msgstr ""
 
 # 17301d395e844bb9b032ca97bf0d0f99
@@ -692,94 +692,14 @@ msgid ""
 "triggern."
 msgstr ""
 
-# 32d74ac3d2a54165a32fbd4656ddf81d
+# f23cae70960d41bab804e8ed10b14e8a
 #~ msgid ""
-#~ "Wenn mindestens eines der Felder "
-#~ "`PAR->NB2` (INSS), `PAR->NB1` (Gesdos-Nr) "
-#~ "oder `PAR->IdUsr` (Sozialarbeiter) unleer ist,"
-#~ " oder wenn Attribut N (Neuzugang) "
-#~ "gesetzt ist, dann wird es ein "
-#~ "**Klient**."
-#~ msgstr ""
-
-# 1a50fcbf6000408ba5c87815eaeb5fe4
-#~ msgid "Ansonsten, wenn PAR->NoTva unleer ist, wird es eine **Organisation**."
-#~ msgstr ""
-
-# 72edb12fd22f45de8033e5b3184d269f
-#~ msgid ""
-#~ "Ansonsten, wenn `PAR->Allo` (Anrede) einen "
-#~ "der Werte \"Eheleute\", \"Herr und "
-#~ "Frau\" enthält, dann wird es ein "
-#~ "**Haushalt**."
-#~ msgstr ""
-
-# 5c8fa12af3c14bd5ac725b71148dde0a
-#~ msgid "Ansonsten wird es eine **Person**."
-#~ msgstr ""
-
-# bff1244a2c624631a95c68a420b09de9
-#~ msgid ""
-#~ "Ob eine Organisation auch Kursanbieter "
-#~ "oder Stellenabieter ist, wird lediglich "
-#~ "in Lino (durch Ankreuzen des "
-#~ "antsprechenden Feldes im Detail-Fenster) "
-#~ "entschieden. TIM kennt diese Nuance "
-#~ "nicht."
-#~ msgstr ""
-
-# f4b292c98d384a729fb06bd40fe6432f
-#~ msgid "Das Attribut \"veraltet\" bedeutet allgemein in Lino:"
-#~ msgstr ""
-
-# e3463b8b6ae64007a00047405ccb9c59
-#~ msgid "die Daten dieses Partners werden nicht mehr gepflegt,"
-#~ msgstr ""
-
-# 4f58da028bd54b28995a68bf31372f61
-#~ msgid ""
-#~ "alle Angaben verstehen sich als \"so "
-#~ "war es, bevor dieser Partner aufhörte,"
-#~ " uns zu interessieren\"."
-#~ msgstr ""
-
-# c53a02b0740043d7871180ead5e2dce6
-#~ msgid ""
-#~ "Veraltete Partner werden normalerweise in "
-#~ "Listen ignoriert, als wären sie "
-#~ "gelöscht. Um sie trotzdem zu sehen, "
-#~ "muss das Ankreuzfeld `Auch veraltete "
-#~ "Klienten` (bzw. `Auch veraltete Partner`) "
-#~ "im Parameter-Panel der Liste angekreuzt"
-#~ " werden."
-#~ msgstr ""
-
-# 3302a670b5634c459cce1786d7926778
-#~ msgid ""
-#~ "Bei importierten Partnern ist es "
-#~ "schreibgeschützt und ist eingeschaltet, wenn"
-#~ " diese Person in TIM entweder in "
-#~ "**Partnerart \"Inaktive\"** steht oder das "
-#~ "**Partnerattribut W** eingeschaltet hat."
-#~ msgstr ""
-
-# affe4f3c79bd4772818dfe422ce5c916
-#~ msgid ""
-#~ "Ein existierender Klient kann in Lino"
-#~ " wie vom Erdboden verschwunden scheinen,"
-#~ " weil er versehentlich als veraltet "
-#~ "markiert wurde (siehe `Veraltete Partner`_)."
-#~ " Also nachprüfen, ob er in TIM "
-#~ "das **Partnerattribut W** gesetzt hat. "
-#~ "Oder gar unter Partnerart \"Inaktive\" "
-#~ "steht."
-#~ msgstr ""
-
-# f0cfa037552f481b974abe75ba54a3a0
-#~ msgid ""
-#~ "Jede Begleitung findet zwingend im "
-#~ "Rahmen eines bestimmten Dienstes statt. "
-#~ "In der Demo-Datenbank gibt es "
-#~ "folgende Begleitungsdienste:"
+#~ "Sowohl in TIM als auch in Lino "
+#~ "gibt es eine Tabelle der **Partner**."
+#~ " Die Partnernummer ist die Gleiche in"
+#~ " TIM wie in Lino. Im Hintergrund "
+#~ "läuft ständig ein Programm namens "
+#~ ":term:`watch_tim`, das alle Änderungen in "
+#~ "TIM automatisch nach Lino synchronisiert."
 #~ msgstr ""
 

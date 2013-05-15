@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 16:12+0300\n"
+"POT-Creation-Date: 2013-05-14 14:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../debts.rst:18
 # a89b8071737d4a27a14f9245e9605654
-msgid "Cliquer sur :ref:`lino.ui.detail.Save`"
+msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
 #: ../debts.rst:29

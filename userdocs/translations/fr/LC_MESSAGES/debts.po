@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 16:12+0300\n"
+"POT-Creation-Date: 2013-05-14 14:07+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 
 # a89b8071737d4a27a14f9245e9605654
 #: ../debts.rst:18
-msgid "Cliquer sur :ref:`lino.ui.detail.Save`"
+msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
 # 8b22dedeaf6042e48cf72cc9d79bc28f
@@ -58,19 +58,7 @@ msgstr ""
 msgid "Ignore yearly incomes"
 msgstr ""
 
-# 03358e947fb344d69d6e5ab2ad32c8c0
-#~ msgid "Mes Budgets"
-#~ msgstr ""
-
-# 3842b55b7b6545ba95be4727a5c347b2
-#~ msgid "Budget"
-#~ msgstr ""
-
-# 8474018c1aca490a81580a0297ef0973
-#~ msgid "Budget Overview"
-#~ msgstr ""
-
-# b702ea35b5bf4154bb0ee576ebabac63
-#~ msgid "A virtual table showing a list of summary numbers for this budget."
+# a89b8071737d4a27a14f9245e9605654
+#~ msgid "Cliquer sur :ref:`lino.ui.detail.Save`"
 #~ msgstr ""
 

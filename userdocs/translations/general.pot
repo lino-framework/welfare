@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-14 14:07+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../general.rst:3
+# fc3ad094f265437e912e51ae79011c93
+msgid "Concepts généraux"
+msgstr ""
+
+#: ../general.rst:8
+# 50d614985e394c5eaae065dbf1c6f42b
+msgid "Vue tabulaire"
+msgstr ""
+
+#: ../general.rst:10
+# f8a164fae06c46ce9ebc2b09819e5c56
+msgid "Nous parlons de vue tabullaire quand une série d'enregistrements vous est présentée sous forme de grille. Les colonnes portent des libellés."
+msgstr ""
+
+#: ../general.rst:17
+# 95a15e3d1a4c4ae79ff8e632c2ff3950
+msgid "Vue détaillée"
+msgstr ""
+
+#: ../general.rst:19
+# e574356697d04503aafa3278a65b58ad
+msgid "Nous parlons de vue détaillée quand un seul enregistrement vous est présenté sous forme de formulaire."
+msgstr ""
+
+#: ../general.rst:26
+# 3ab935bdce1f48d7b1f175ef8879a850
+msgid "Enregisterer"
+msgstr ""
+
+#: ../general.rst:28
+# 88711eac140e40229bc58f4a4ef2d6ac
+msgid "Click this button to save your changes in the form."
+msgstr ""
+

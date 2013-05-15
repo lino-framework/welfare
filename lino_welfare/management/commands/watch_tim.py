@@ -38,6 +38,8 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 
 from django.db.utils import DatabaseError
+from django.db import IntegrityError
+
 # OperationalError
 from django.utils import simplejson
 #~ from django.contrib.auth import models as auth
@@ -60,6 +62,9 @@ from lino.utils import mti
 from lino.utils.daemoncommand import DaemonCommand
 
 from lino.utils.ssin import is_valid_ssin
+
+
+IGNORABLE_ERRORS = (ValidationError,IntegrityError)
 
 #~ from lino_welfare.modlib.pcsw import models as pcsw
 #~ from lino_welfare.modlib.pcsw.management.commands.initdb_tim import ADR_id
@@ -924,7 +929,7 @@ def watch(data_dir):
                 "Exception '%r' while processing changelog line:\n%s", 
                 e,ln)
             # for ValidationError we don't want a full traceback with mail to the admins.
-            if not isinstance(e,ValidationError):
+            if not isinstance(e,IGNORABLE_ERRORS):
                 dblogger.exception(e)
             #~ raise
     fd_watching.close()

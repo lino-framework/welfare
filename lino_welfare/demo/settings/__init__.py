@@ -6,13 +6,12 @@ from lino_welfare.settings import *
 class Site(Site):
   
     title = "Lino-Welfare"
-  
     #~ languages = ['en']
     languages = 'de fr nl'
     #~ languages = ['de','fr']
     #~ languages = ['fr','de']
     #~ languages = ['de']
-    use_jasmine = True
+    #~ use_jasmine = True
     use_davlink = False
     use_extensible = True
     use_eid_jslib = False
@@ -25,5 +24,5 @@ class Site(Site):
             return True
         return False
 
-SITE = Site(globals())
+SITE = Site(globals(),no_local=True)
 #~ print 20130409, __file__, LOGGING

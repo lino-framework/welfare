@@ -71,6 +71,8 @@ Topic :: Software Development :: Libraries :: Application Frameworks""".splitlin
 SETUP_INFO.update(packages=[
   'lino_welfare',
   'lino_welfare.demo',
+  'lino_welfare.demo.settings',
+  'lino_welfare.fixtures',
   'lino_welfare.management',
   'lino_welfare.management.commands',
   'lino_welfare.tests',
@@ -91,7 +93,6 @@ SETUP_INFO.update(packages=[
   'lino_welfare.modlib.newcomers.fixtures',
   'lino_welfare.modlib.pcsw',
   'lino_welfare.modlib.pcsw.fixtures',
-  'lino_welfare.fixtures',
   'lino_welfare.modlib.statbel',
   'lino_welfare.modlib.statbel.fixtures',
 ])

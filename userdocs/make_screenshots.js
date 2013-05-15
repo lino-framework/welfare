@@ -5,11 +5,9 @@ invoke using
   
 */
 
-LINO_ROOT = '../../../lino'
-
 //~ Load library functions
 //~ phantom.libraryPath = '../../lino/media/phantomjs'
-phantom.injectJs(LINO_ROOT + '/media/phantomjs/screenshooter.js');
+phantom.injectJs('/home/luc/hgwork/lino/lino/media/phantomjs/screenshooter.js');
 
 //~ Configuration options
 SERVER_ROOT = 'http://127.0.0.1:8000';
@@ -18,7 +16,7 @@ var system = require('system');
 //~ var LANGUAGE = system.env.OVERRIDE_USER_LANGUAGE;
 var LANGUAGE = system.args[1];
 
-OUTPUT_ROOT = '../../docs/' + LANGUAGE + '/gen/screenshots';
+OUTPUT_ROOT = '.build/' + LANGUAGE + '/gen/screenshots';
 
 var fs = require('fs');
 
