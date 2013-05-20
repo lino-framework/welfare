@@ -7,47 +7,48 @@ Changes in Lino-Welfare
 See the author's :ref:`Developer Blog <blog>`
 to get detailed news.
 The final truth about what's going on is only 
-`The Source Code <http://code.google.com/p/lino/source/list>`_
-(hosted on `Googlecode <http://code.google.com/p/lino>`__).
+`The Source Code <http://code.google.com/p/lino/source/list>`_.
 
 
-Version 1.1.4 (coming)
+Version 1.1.5 (released :blogref:`20130520`)
 ============================================
 
-- Statistik DSBE:
+Statistik DSBE:
 
-    2)  Neue Felder in der Tabelle "Vertragsbeendigungsgründe":
+2)  Neue Felder in der Tabelle "Vertragsbeendigungsgründe":
 
-        - Checkbox "Art.60-7"
-        - Checkbox "VSE"
-        - Checkbox "Erfolg" --> ob es sich um eine "erfolgreiche" Beendigung
-          im Sinne des Tätigkeitsberichts handelt.
-        - Checkbox "vorzeitig" --> ob Beendigungsdatum ausgefüllt sein muss
+    - Checkbox "Art.60-7"
+    - Checkbox "VSE"
+    - Checkbox "Erfolg" --> ob es sich um eine "erfolgreiche" Beendigung
+      im Sinne des Tätigkeitsberichts handelt.
+    - Checkbox "vorzeitig" --> ob Beendigungsdatum ausgefüllt sein muss
 
-    3)  Neues Feld "Ausbildungsart" eines VSE (isip.Contract.study_type). 
-        Pro VSE-Vertragsart eine
-        Checkbox "Ausbildungsart" (isip.ContractType.needs_study_type), 
-        die besagt, ob man dieses Feld ausfüllen muss oder nicht.
-        Die Liste der möglichen Ausbildungsarten ist die gleiche wie die, 
-        für den Lebenslauf im Reiter "Ausbildung" der Klienten.
-        (Falls nötig könnten wir auch eine eigene Tabelle dafür machen.)
-  
-    4)  Neues Feld "Beendigungsgrund" einer Begleitung.
-        Neue Tabelle "Begleitungsbeendigungsgründe" mit Einträgen wie z.B.
-        "Übergabe an Kollege", "Einstellung des Anrechts auf SH", "Umzug in
-        andere Gemeinde", "Hat selber Arbeit gefunden",... Ein Feld:
-        - Dienst (optional) --> wenn ausgefüllt, darf dieser Grund nur für
-        Begleitungen in diesem Dienst angegeben werden)
+3)  Neues Feld "Ausbildungsart" eines VSE (isip.Contract.study_type). 
+    Pro VSE-Vertragsart eine
+    Checkbox "Ausbildungsart" (isip.ContractType.needs_study_type), 
+    die besagt, ob man dieses Feld ausfüllen muss oder nicht.
+    Die Liste der möglichen Ausbildungsarten ist die gleiche wie die, 
+    für den Lebenslauf im Reiter "Ausbildung" der Klienten.
+    (Falls nötig könnten wir auch eine eigene Tabelle dafür machen.)
 
-    5)  Neue Tabelle "Dispenzen" ("Befreiungen von der Verfügbarkeit auf dem
-        Arbeitsmarkt") pro Klient : Datum von / Datum bis / Grund, sowie
-        Konfigurationstabelle der Dispenzgründe (z.B. "Gesundheitlich",
-        "Studium/Ausbildung", "Familiär", "Sonstige",....)
-  
+4)  Neues Feld "Beendigungsgrund" einer Begleitung.
+    Neue Tabelle "Begleitungsbeendigungsgründe" mit Einträgen wie z.B.
+    "Übergabe an Kollege", "Einstellung des Anrechts auf SH", "Umzug in
+    andere Gemeinde", "Hat selber Arbeit gefunden",... Ein Feld:
+    - Dienst (optional) --> wenn ausgefüllt, darf dieser Grund nur für
+    Begleitungen in diesem Dienst angegeben werden)
 
+5)  Neue Tabelle "Dispenzen" ("Befreiungen von der Verfügbarkeit auf dem
+    Arbeitsmarkt") pro Klient : Datum von / Datum bis / Grund, sowie
+    Konfigurationstabelle der Dispenzgründe (z.B. "Gesundheitlich",
+    "Studium/Ausbildung", "Familiär", "Sonstige",....)
 
-- bugfix 'City' object has no attribute '_change_watcher_spec'
-  :blogref:`20130520`
+Miscellaneous:
+
+-   bugfix 'City' object has no attribute '_change_watcher_spec'
+    :blogref:`20130520`
+    
+- Subtle changes in :ref:`welfare.watch_tim`.
 
 Version 1.1.4 (released :blogref:`20130512`)
 ============================================

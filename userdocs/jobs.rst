@@ -62,7 +62,6 @@ Référence
 .. actor:: jobs.Functions
 .. actor:: jobs.Schedules
 .. actor:: jobs.Offers
-.. actor:: jobs.StudyTypes
 .. actor:: jobs.Studies
 .. actor:: jobs.StudiesByPerson
 .. actor:: jobs.Experiences

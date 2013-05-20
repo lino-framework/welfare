@@ -18,6 +18,7 @@ Le module est techniquement similaire au module
 Référence
 =========
 
+.. actor:: isip.StudyTypes
 .. actor:: isip.ContractTypes
 .. actor:: isip.ExamPolicies
 .. actor:: isip.ContractEndings
