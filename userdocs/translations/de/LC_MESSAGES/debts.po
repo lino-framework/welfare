@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-14 14:07+0300\n"
+"POT-Creation-Date: 2013-05-17 01:29+0300\n"
 "PO-Revision-Date: 2013-04-01 09:18+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -57,8 +57,4 @@ msgstr ""
 #: ../debts.rst:34
 msgid "Ignore yearly incomes"
 msgstr ""
-
-# a89b8071737d4a27a14f9245e9605654
-#~ msgid "Cliquer sur :ref:`lino.ui.detail.Save`"
-#~ msgstr ""
 

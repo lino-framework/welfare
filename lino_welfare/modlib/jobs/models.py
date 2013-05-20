@@ -376,6 +376,11 @@ class Contract(isip.ContractBase):
     def company_choices(cls):
         return JobProvider.objects.all()
         
+    @dd.chooser()
+    def ending_choices(cls):
+        return isip.ContractEnding.objects.filter(use_in_jobs=True)
+        
+        
     #~ def get_company(self):
         #~ return self.provider
     #~ company = property(get_company)
@@ -697,21 +702,6 @@ class Offers(dd.Table):
     
     
     
-#
-# STUDY TYPE
-#
-class StudyType(dd.BabelNamed):
-    #~ text = models.TextField(_("Description"),blank=True,null=True)
-    class Meta:
-        verbose_name = _("study type")
-        verbose_name_plural = _("study types")
-
-class StudyTypes(dd.Table):
-    required = dd.required(user_groups='integ',user_level='admin')
-    #~ label = _('Study types')
-    model = StudyType
-    order_by = ["name"]
-
 
 class HistoryByPerson(dd.Table):
     required = dd.required(user_groups='integ')
@@ -739,7 +729,7 @@ class Study(CountryCity):
         verbose_name_plural = _("Studies & education")
     #~ person = models.ForeignKey(settings.SITE.person_model) #,verbose_name=_("Person"))
     person = models.ForeignKey('pcsw.Client') 
-    type = models.ForeignKey(StudyType,verbose_name=_("Study type"))
+    type = models.ForeignKey(isip.StudyType)
     content = models.CharField(max_length=200,
         blank=True, # null=True,
         verbose_name=_("Study content"))
@@ -1511,7 +1501,6 @@ def setup_config_menu(site,ui,profile,m):
     m.add_action(JobTypes)
     m.add_action(Sectors)
     m.add_action(Functions)
-    m.add_action(StudyTypes)
     m.add_action(Schedules)
     m.add_action(Regimes)
             

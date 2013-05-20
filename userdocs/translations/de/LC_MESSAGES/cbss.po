@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-14 14:07+0300\n"
+"POT-Creation-Date: 2013-05-17 01:29+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -28,8 +28,18 @@ msgstr ""
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
+# 79620e7468824717b6eceb00d9a04ec3
+#: ../cbss.rst:16
+msgid "TIs connus"
+msgstr ""
+
+# 5c9e9c1fe3c1443fa1d7ac8646537a1f
+#: ../cbss.rst:18
+msgid "Liste incomplète (conversion en cours) des TIs que Lino connait:"
+msgstr ""
+
 # 8442e66cafc04f3da2986cb7a57f0c29
-#: ../cbss.rst:17
+#: ../cbss.rst:33
 msgid "Référence"
 msgstr ""
 

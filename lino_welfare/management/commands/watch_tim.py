@@ -124,6 +124,7 @@ def isolang(x):
     if x == 'D' : return 'de'
     if x == 'F' : return 'fr'
     if x == 'N' : return 'nl'
+    return 'de' # silently tolerate invalid values
       
 def ADR_id(cIdAdr):
     assert len(cIdAdr) == 3
@@ -627,6 +628,7 @@ class PAR(Controller):
                             #~ pass
                         
         elif obj.__class__ is Company:
+            #~ obj.prefix = data.get('ALLO','')
             mapper.update(prefix='ALLO')
             mapper.update(vat_id='NOTVA')
             mapper.update(name='FIRME')
@@ -643,7 +645,7 @@ class PAR(Controller):
         pk = kw['id']
         if not pk: return None
         pk = int(pk)
-        if pk == 0: return None
+        if pk == 0: return None # mysql: "The database backend does not accept 0 as a value for AutoField."
         #~ possible_models = [Client, Person, Company, Household, Partner]
         #~ model = PAR_model(kw['data'])
         #~ delete_child

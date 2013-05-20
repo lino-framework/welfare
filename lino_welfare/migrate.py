@@ -691,3 +691,20 @@ def migrate_from_1_1_3(globals_dict):
     - New field ui.SiteConfig.debts_master_budget
     """
     return '1.1.4'
+
+def migrate_from_1_1_4(globals_dict): 
+    """
+    - jobs.StudyType --> isip.StudyType
+    """
+    
+    jobs_StudyType = resolve_model('isip.StudyType')
+    bv2kw = globals_dict.get('bv2kw')
+    def create_jobs_studytype(id, name):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        return jobs_StudyType(**kw)
+    globals_dict.update(create_jobs_studytype=create_jobs_studytype)
+
+    
+    return '1.1.5'

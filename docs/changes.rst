@@ -14,6 +14,51 @@ The final truth about what's going on is only
 Version 1.1.4 (coming)
 ============================================
 
+- Statistik DSBE:
+
+    2)  Tabelle "Vertragsbeendigungsgründe" : hier müssen weitere Felder rein:
+
+        - Checkbox "Art.60-7"
+        - Checkbox "VSE"
+        - Checkbox "Erfolg" --> ob es sich um eine "erfolgreiche" Beendigung
+          im Sinne des Tätigkeitsberichts handelt.
+        - Checkbox "vorzeitig" --> ob Beendigungsdatum ausgefüllt sein muss
+
+        Neue Regel : ein abgeschlossener Vertrag muss jetzt immer einen
+        Beendigungsgrund haben (nicht mehr wie bisher nur im Falle einer
+        vorzeitigen Beendigung)
+
+    3)  Neues Feld "Ausbildungsart" eines VSE (isip.Contract.study_type). 
+        Pro VSE-Vertragsart eine
+        Checkbox "Ausbildungsart", die besagt, ob man dieses Feld ausfüllen muss
+        oder nicht. isip.ContractType.needs_study_type.
+        Die bestehende Tabelle jobs.StudyType kommt von jobs nach isip.
+        
+        Hier schlage ich vor, dass das ein ForeignKey zur bestehenden Tabelle
+        "Ausbildungsarten" wird, die schon im Reiter "Ausbildung" der Klienten
+        benutzt wird. Es ist das gleiche Konzept, aber mit unterschiedlichem
+        Verwendungszweck. Falls nötig könnten wir später immer noch eine eigene
+        Tabelle dafür machen.
+  
+    4)  Neue Tabelle "Begleitungsbeendigungsgründe" mit Einträgen wie z.B.
+        "Übergabe an Kollege", "Einstellung des Anrechts auf SH", "Umzug in
+        andere Gemeinde", "Hat selber Arbeit gefunden",... Ein Feld:
+        - Dienst (optional) --> wenn ausgefüllt, darf dieser Grund nur für
+        Begleitungen in diesem Dienst angegeben werden)
+
+    5)  Neue Tabellen "Befreiungen von der Verfügbarkeit auf dem
+        Arbeitsmarkt" pro Klient : Datum von / Datum bis / Grund, sowie
+        Konfigurationstabelle der Dispensgründe (z.B. "Gesundheitlich",
+        "Studium/Ausbildung", "Familiär", "Sonstige",....)
+  
+
+
+- bugfix 'City' object has no attribute '_change_watcher_spec'
+  :blogref:`20130520`
+
+Version 1.1.4 (released :blogref:`20130512`)
+============================================
+
 - :ref:`welfare.jobs.NewJobsOverview` : 
   Seitenwechsel zwischen die verschiedenen Kategorien 
   (Majorés, Intern, usw.).

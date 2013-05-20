@@ -586,3 +586,23 @@ def setup_workflows(site):
         user_groups='newcomers')
     #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
+#~ dd.register_screenshot('index','');
+#~ dd.register_screenshot('cal.CalendarPanel','/api/cal/CalendarPanel',username='alicia');
+#~ register_screenshot('/api/cal/CalendarPanel?su=8&ul='+LANGUAGE,'cal.CalendarPanel-su.png');
+#~ //~ register_screenshot('/api/cal/PanelEvents/266?an=detail&ul='+LANGUAGE,'cal.Event.detail.png');
+#~ register_screenshot('/api/cal/PanelEvents/105?an=detail&ul='+LANGUAGE,'cal.Event.detail.png');
+#~ 
+#~ register_screenshot('/api/pcsw/Clients?ul='+LANGUAGE,'pcsw.Clients.grid.png');
+#~ register_screenshot('/api/pcsw/Clients/122?ul='+LANGUAGE,'pcsw.Client.detail.png');
+#~ register_screenshot('/api/pcsw/Clients/122?tab=1&ul='+LANGUAGE,'pcsw.Client.detail.1.png');
+#~ register_screenshot('/api/pcsw/Clients/122?tab=2&ul='+LANGUAGE,'pcsw.Client.detail.2.png');
+#~ 
+#~ register_screenshot('/api/debts/Budgets/2?ul='+LANGUAGE,'debts.Budget.detail.png');
+#~ register_screenshot('/api/debts/Budgets/2?tab=1&ul='+LANGUAGE,'debts.Budget.detail.1.png');
+#~ register_screenshot('/api/debts/Budgets/2?tab=2&ul='+LANGUAGE,'debts.Budget.detail.2.png');
+#~ register_screenshot('/api/debts/Budgets/2?tab=3&ul='+LANGUAGE,'debts.Budget.detail.3.png');
+#~ register_screenshot('/api/debts/Budgets/2?tab=4&ul='+LANGUAGE,'debts.Budget.detail.4.png');
+#~ register_screenshot('/api/jobs/JobsOverview?ul='+LANGUAGE,'jobs.JobsOverview.png');
+#~ 
+#~ 
+

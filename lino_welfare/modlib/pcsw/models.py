@@ -1476,20 +1476,26 @@ class ClientDetail(dd.FormLayout):
     income_misc  
     """
       
+    #~ suche = dd.Panel("""
+    #~ is_seeking unemployed_since work_permit_suspended_until
+    #~ # job_office_contact job_agents
+    #~ pcsw.ExclusionsByClient:50x3
+    #~ """,label = _("Job search"))
+    
     suche = dd.Panel("""
-    is_seeking unemployed_since work_permit_suspended_until
-    unavailable_until:15 unavailable_why:30
     # job_office_contact job_agents
-    pcsw.ExclusionsByPerson:50x5
-    """,label = _("Job search"))
+    pcsw.DispensesByClient:50x3
+    pcsw.ExclusionsByClient:50x3
+    """)
     
     
       
     papers = dd.Panel("""
+    is_seeking unemployed_since work_permit_suspended_until
     needs_residence_permit needs_work_permit 
     residence_permit work_permit driving_licence
     uploads.UploadsByController
-    """,label = _("Papers"))
+    """) # ,label = _("Papers"))
     
     status_tab = dd.Panel("""
     status:55 income:25
@@ -1531,6 +1537,7 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state refusal_reason
     is_cpas is_senior is_obsolete 
+    unavailable_until:15 unavailable_why:30
     remarks:30 remarks2:30 
     contacts.RolesByPerson:20 households.MembersByPerson:40
     # links.LinksToThis:30 links.LinksFromThis:30 
@@ -2217,7 +2224,7 @@ class Exclusion(dd.Model):
         verbose_name=_("Reason"),
         blank=True,null=True)
     excluded_from = models.DateField(blank=True,null=True,
-        verbose_name=_("from"))
+        verbose_name=_("Excluded from"))
     excluded_until = models.DateField(blank=True,null=True,
         verbose_name=_("until"))
     remark = models.CharField(max_length=200,blank=True,verbose_name=_("Remark"))
@@ -2236,7 +2243,7 @@ class Exclusions(dd.Table):
     model = Exclusion
     #~ label = _('Exclusions')
     
-class ExclusionsByPerson(Exclusions):
+class ExclusionsByClient(Exclusions):
     required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
@@ -2365,8 +2372,54 @@ class ContactsByClient(ClientContacts):
     column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
 
+
+
+
+class DispenseReason(dd.BabelNamed,dd.Sequenced):
+    class Meta:
+        verbose_name = _("Dispense reason")
+        verbose_name_plural = _('Dispense reasons')
+        
+    #~ name = models.CharField(_("designation"),max_length=200)
+    #~ 
+    #~ def __unicode__(self):
+        #~ return unicode(self.name)
+        
+class DispenseReasons(dd.Table):
+    help_text = _("A list of reasons for being dispensed")
+    required=dict(user_groups = ['integ'],user_level='manager')
+    model = DispenseReason
+    column_names = 'seqno name *'
+    order_by = ['seqno']
+
     
+class Dispense(dd.Model):
+    class Meta:
+        verbose_name = _("Dispense")
+        verbose_name_plural = _("Dispenses")
+    allow_cascaded_delete = ['client']
+    client = dd.ForeignKey(Client)
+    reason = dd.ForeignKey(DispenseReason)
+    remarks = models.TextField(_("Remarks"),blank=True) 
+    start_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("Dispensed from"))
+    end_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("until"))
     
+
+class Dispenses(dd.Table):
+    order_by = ['start_date']
+    help_text = _("Liste de dispenses")
+    required=dict(user_groups = ['integ'],user_level='manager')
+    model = Dispense
+
+class DispensesByClient(Dispenses):
+    master_key = 'client'
+    column_names = 'start_date end_date reason remarks *'
+    hidden_columns = 'id'
+    auto_fit_column_widths = True
 
 #~ class CoachingStates(dd.Workflow):
     #~ """Lifecycle of a :class:`Coaching`."""
@@ -2426,13 +2479,13 @@ class EndCoaching(dd.ChangeStateAction,dd.NotifyingAction):
     # help_text=_("User no longer coaches this client."),
     # states='active standby',user_groups='integ',owner=True,notify=True)
 
-"""
-CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
-CoachingStates.add_transition('suggested','active',_("Accept"),owner=True)
-CoachingStates.add_transition('active','standby',_("Standby"),owner=True)
-CoachingStates.add_transition('active','ended',_("End coaching"),owner=True)
-
-"""
+#~ """
+#~ CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
+#~ CoachingStates.add_transition('suggested','active',_("Accept"),owner=True)
+#~ CoachingStates.add_transition('active','standby',_("Standby"),owner=True)
+#~ CoachingStates.add_transition('active','ended',_("End coaching"),owner=True)
+#~ 
+#~ """
     
 
 
@@ -2464,6 +2517,29 @@ class CoachingTypes(dd.Table):
 #~ add = CoachingTypes.add_item
 #~ add('10', _("Primary coach"),'primary')
 #~ add('20', _("Secondary coach"),'secondary')
+
+
+class CoachingEnding(dd.BabelNamed,dd.Sequenced):
+    class Meta:
+        verbose_name = _("Reason of termination")
+        verbose_name_plural = _('Coaching termination reasons')
+        
+    #~ name = models.CharField(_("designation"),max_length=200)
+    type = dd.ForeignKey(CoachingType,
+        blank=True,null=True,
+        help_text=_("If not empty, allow this ending only on coachings of specified type."))
+    
+    #~ def __unicode__(self):
+        #~ return unicode(self.name)
+        
+class CoachingEndings(dd.Table):
+    help_text = _("A list of reasons expressing why a coaching was ended")
+    required=dict(user_groups = ['integ'],user_level='manager')
+    model = CoachingEnding
+    column_names = 'seqno name type *'
+    order_by = ['seqno']
+
+
 
 
 
@@ -2503,12 +2579,24 @@ during a given period.
     primary = models.BooleanField(_("Primary"),
         help_text=_("""There's at most one primary coach per client. 
 Enabling this field will automatically make the other coachings non-primary."""))
+
+    ending = models.ForeignKey(CoachingEnding,
+        related_name="%(app_label)s_%(class)s_set",
+        blank=True,null=True)
+
     
     @classmethod
     def on_analyze(cls,site):
         super(Coaching,cls).on_analyze(site)
         #~ cls.declare_imported_fields('''client user primary start_date end_date''')
         cls.declare_imported_fields('''client user primary end_date''')
+        
+    @dd.chooser()
+    def ending_choices(cls,type):
+        Q = models.Q
+        qs = CoachingEnding.objects.filter(
+            Q(type__isnull=True) | Q(type=type))
+        return qs.order_by("seqno")
         
     def disabled_fields(self,ar):
         if settings.SITE.is_imported_partner(self.client):
@@ -2540,6 +2628,8 @@ Enabling this field will automatically make the other coachings non-primary.""")
             self.type = ar.get_user().coaching_type
         if not self.start_date:
             self.start_date = datetime.date.today()
+        if self.ending and not self.end_date:
+            self.end_date = datetime.date.today()
             
     #~ def update_system_note(self,note):
         #~ note.project = self.client
@@ -2644,7 +2734,7 @@ class CoachingsByClient(Coachings):
     #~ debug_permissions = 20121016
     master_key = 'client'
     order_by = ['start_date']
-    column_names = 'start_date end_date user:12 primary type:12 id'
+    column_names = 'start_date end_date user:12 primary type:12 ending id'
     hidden_columns = 'id'
     auto_fit_column_widths = True
 
@@ -2716,6 +2806,8 @@ def setup_config_menu(site,ui,profile,m):
     m.add_action(Activities)
     m.add_action(ExclusionTypes)
     m.add_action(CoachingTypes)
+    m.add_action(CoachingEndings)
+    m.add_action(DispenseReasons)
     m.add_action(ClientContactTypes)
     
     

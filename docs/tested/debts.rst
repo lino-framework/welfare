@@ -20,7 +20,7 @@ Or we can retrieve budget no. 3 from the database:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Altenberg-Charlier')
+Budget #3 (u'Budget Nr. 3 f\xfcr Ausdemwald-Charlier')
 
 Note that the current language is German because this is the 
 default language on this demo site:
@@ -170,7 +170,7 @@ Printing a Budget
 >>> from pprint import pprint
 >>> obj.clear_cache()
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'message': u'Dokument Budget Nr. 3 f\xfcr Altenberg-Charlier wurde generiert.',
+{'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier wurde generiert.',
  'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',
  'refresh': True,
  'success': True}

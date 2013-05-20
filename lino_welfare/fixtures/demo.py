@@ -312,7 +312,7 @@ def objects():
     City = resolve_model('countries.City')
     #~ Job = resolve_model('jobs.Job')
     #~ City = settings.SITE.modules.countries.City
-    StudyType = resolve_model('jobs.StudyType')
+    StudyType = resolve_model('isip.StudyType')
     #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
   
@@ -407,26 +407,26 @@ def objects():
         c.save()
         return Client.objects.get(pk=p.pk)
     
-    luc = Person.objects.get(name__exact="Saffre Luc")
-    luc = person2client(luc,national_id = '680601 053-29')
-    luc.birth_place = 'Eupen'
-    luc.birth_date = '1968-06-01'
-    luc.birth_country = be
-    luc.full_clean()
-    luc.save()
-    
-    ly = person(first_name="Ly",last_name="Rumma",
-      city=vigala,country='EE',
-      gender=mixins.Genders.female)
-    yield ly
-    mari = person(first_name="Mari",last_name="Saffre",
-      city=vigala,country='EE',
-      gender=mixins.Genders.female)
-    yield mari
-    iiris = person(first_name="Iiris",last_name="Saffre",
-      city=vigala,country='EE',
-      gender=mixins.Genders.female)
-    yield iiris
+    #~ luc = Person.objects.get(name__exact="Saffre Luc")
+    #~ luc = person2client(luc,national_id = '680601 053-29')
+    #~ luc.birth_place = 'Eupen'
+    #~ luc.birth_date = '1968-06-01'
+    #~ luc.birth_country = be
+    #~ luc.full_clean()
+    #~ luc.save()
+    #~ 
+    #~ ly = person(first_name="Ly",last_name="Rumma",
+      #~ city=vigala,country='EE',
+      #~ gender=mixins.Genders.female)
+    #~ yield ly
+    #~ mari = person(first_name="Mari",last_name="Saffre",
+      #~ city=vigala,country='EE',
+      #~ gender=mixins.Genders.female)
+    #~ yield mari
+    #~ iiris = person(first_name="Iiris",last_name="Saffre",
+      #~ city=vigala,country='EE',
+      #~ gender=mixins.Genders.female)
+    #~ yield iiris
     
     gerd = person(first_name="Gerd",
       last_name="Xhonneux",city=kettenis,
@@ -434,7 +434,13 @@ def objects():
       country='BE',gender=mixins.Genders.male)
     yield gerd
     yield role(company=cpas,person=gerd,type=4)
-    #~ yield link(a=cpas,b=gerd,type=4)
+    
+    #~ luc = person(first_name="Luc",
+      #~ last_name="Saffre",city=kettenis,
+      #~ email='luc@example.com',
+      #~ country='EE',gender=mixins.Genders.male)
+    #~ yield luc
+    #~ yield role(company=rumma,person=luc,type=4)
     
     # see :blogentry:`20111007`
     tatjana = client(
@@ -662,6 +668,10 @@ def objects():
     study = Instantiator('jobs.Study').build
     
     gerd = CLIENTS.pop()
+    luc = CLIENTS.pop()
+    ly = CLIENTS.pop()
+    mari = CLIENTS.pop()
+    iiris = CLIENTS.pop()
         
     yield study(person=luc,type=schule,content=abi,
       started='19740901',stopped='19860630')

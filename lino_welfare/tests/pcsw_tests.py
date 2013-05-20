@@ -629,8 +629,8 @@ Belgique""")
   - Kalender : Orte, Prioritäten, Gastrollen, Kalenderliste
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Klientenkontaktarten
-  - DSBE : VSE-Arten, Beendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Ausbildungsarten, Stundenpläne, Regimes
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes

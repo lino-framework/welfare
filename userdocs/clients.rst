@@ -52,6 +52,7 @@ Référence
 .. actor:: pcsw.ClientContacts
 .. actor:: pcsw.ClientsTest
 .. actor:: pcsw.CoachingTypes
+.. actor:: pcsw.CoachingEndings
 .. actor:: pcsw.Coachings
 .. actor:: pcsw.AidTypes
 .. actor:: pcsw.PersonGroups

@@ -95,7 +95,7 @@ class DemoTest(RemoteAuthTestCase):
         kw = dict(fmt='json',limit=10,start=0)
         add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
         add_case('rolf','api/households/Households',json_fields,4,**kw)
-        add_case('rolf','api/contacts/Partners',json_fields,120,**kw)
+        add_case('rolf','api/contacts/Partners',json_fields,116,**kw)
         add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
         add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
@@ -106,14 +106,14 @@ class DemoTest(RemoteAuthTestCase):
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
-        add_case('rolf','api/contacts/Persons',json_fields,71,**kw)
-        add_case('rolf','api/pcsw/Clients',json_fields,59,**kw)
+        add_case('rolf','api/contacts/Persons',json_fields,67,**kw)
+        add_case('rolf','api/pcsw/Clients',json_fields,56,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
-        add_case('rolf','api/newcomers/NewClients',json_fields,24,**kw)
-        add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=118,**kw)
+        add_case('rolf','api/newcomers/NewClients',json_fields,23,**kw)
+        add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
         add_case('alicia','api/pcsw/IntegClients',json_fields,7,**kw)
-        add_case('hubert','api/pcsw/IntegClients',json_fields,23,**kw)
+        add_case('hubert','api/pcsw/IntegClients',json_fields,22,**kw)
         
         
         kw = dict(fmt='json',limit=20,start=0,su=6) # rolf working as alicia
@@ -182,14 +182,14 @@ class DemoTest(RemoteAuthTestCase):
         #~ print __file__, 20130414, repr(res)
         #~ msg = res['message'].decode('utf-8')
         msg = res['message']
-        self.assertEqual(msg,'Budget Nr. 3 für Altenberg-Charlier printable cache has been cleared.')
+        self.assertEqual(msg,'Budget Nr. 3 für Ausdemwald-Charlier printable cache has been cleared.')
         
         res = ses.run(obj.do_print)
         #~ print __file__, 20130414, repr(res)
         msg = res['message']
         #~ msg = res['message'].decode('utf-8')
         #~ self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
-        self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
+        self.assertEqual(msg,'Dokument Budget Nr. 3 für Ausdemwald-Charlier wurde generiert.')
         self.assertEqual(res['open_url'],'/media/userdocs/appyodt/debts.Budget-3.odt')
 
 

@@ -305,22 +305,34 @@ Regeln
   Begleitung, die nicht geändert werden kann.
   
 
-Klientenkontakte
-================
+Krankenkassen und Apotheken (Klientenkontakte)
+==============================================
 
-Die Felder PXS->IdMut (Krankenasse) und PXS->Apotheke (Apotheke) 
-werden nach Lino synchronisiert als *Klientenkontakte*.
+Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) 
+werden nach Lino synchronisiert als :ref:`Klientenkontakte <welfare.pcsw.ClientContact>`.
 
-*Importierte* Klienten sollten in 
-ihren 
-:ref:`welfare.pcsw.ClientContacts`
+*Importierte* Klienten sollten in ihren 
+:ref:`Klientenkontakten <welfare.pcsw.ClientContacts>`
 deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
-
-Ansonsten findet watch_tim, dass er nicht dafür 
-zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)
+Sonst findet `watch_tim`, dass er nicht dafür 
+zuständig ist und synchronisiert nichts 
+(schreibt lediglich eine Warnung in die `system.log`)
 
 Alle anderen Klientenkontaktarten sind egal, 
 davon dürfen auch importierte Klienten so viele haben wie sie wollen.
+
+Apotheken sind in TIM normale Partner, aber 
+Krankenkassen sind Adressen aus `ADR` mit `ADR->Type == 'MUT'`.
+Sie erscheinen in Lino als Organisation, 
+werden aber nicht mehr automatisch synchronisiert.
+Also falls des eine in TIM erstellt wird, muss die entsprechende 
+Organisation in Lino manuell erstellt werden.
+Dabei ist zu beachten, dass das `id` einer Krankenasse 
+beim ersten Import (`initdb_tim`) 
+wie folgt ermittelt wurde:
+
+  id = val(ADR->IdMut) + 199000
+
 
 Beim Synchronisieren sind folgende Fehlermeldungen denkbar 
 (die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::
@@ -329,27 +341,17 @@ Beim Synchronisieren sind folgende Fehlermeldungen denkbar
     ERROR Client #20475 (u"MUSTERMANN Max (20475)") : Pharmacy or Health Insurance 0000086256 doesn't exist
 
 Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also 
-dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt.
+dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 
+199630 anlegt.
 
 Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese 
-Apotheke zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen.
-
-Krankenkassen
--------------
-
-Die Krankenkassen (Adressen aus `ADR` mit `ADR->Type == 'MUT'`) 
-erscheinen in Lino als Organisation, 
-wobei deren `id` beim ersten Import (initdb_tim) 
-wie folgt ermittelt wurde:
-
-  id = val(ADR->IdMut) + 199000
-  
-Krankenakssen werden nicht mehr automatisch synchronisiert.
-Also falls des eine in TIM erstellt wird, muss die entsprechende 
-Organisation in Lino manuell erstellt werden.
-
-
-  
+Apotheke 86256 zu gehen und irgendwas zu ändern, 
+um manuell eine Synchronisierung auszulösen.
+Kann auch sein, dass es in TIM keinen Partner 86256 gibt 
+(TIM lässt es fälschlicherweise zu, Apotheken zu löschen die anderswo referenziert werden): 
+dann muss der Klient 20475 sein Feld PXS->Apotheke auf 
+leer gesetzt bekommen (oder auf eine andere existierende 
+Apotheke).
   
 
 Technisches
@@ -388,3 +390,6 @@ verändert wurde, und dieser Partner in Lino nicht existiert
 (was anormal ist, aber z.B. durch frühere Bugs oder Pannen kommen kann).
 Zu tun: manuell für diesen Partner in der PAR etwas verändern, um 
 eine Synchronisierung zu triggern.
+
+
+

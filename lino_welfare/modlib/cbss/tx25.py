@@ -950,6 +950,12 @@ def IT251(n):
     info.add_deldate(n)
     return info
     
+def IT192(n):
+    info = Info().addfrom(n,'Declaration','',DeclarationType)
+    info.addfrom(n,'Place',_('in '),PlaceType)
+    info.add_deldate(n)
+    return info
+    
     
 
 class RowHandlers:
@@ -1192,45 +1198,45 @@ class RowHandlers:
             yield datarow(group,n,n.Date,info)
             group = ''
         
-    @staticmethod
-    def WorkPermits(node,name):
-        group = _("Work Permits") # Permis de travail
-        for n in node.WorkPermit:
-            info = IT198(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def WorkPermits(node,name):
+        #~ group = _("Work Permits") # Permis de travail
+        #~ for n in node.WorkPermit:
+            #~ info = IT198(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def PublicSecurityNumbers(node,name):
-        group = _("Public Security Numbers") # No de securite publique
-        for n in node.PublicSecurityNumber:
-            info = IT200(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def PublicSecurityNumbers(node,name):
+        #~ group = _("Public Security Numbers") # No de securite publique
+        #~ for n in node.PublicSecurityNumber:
+            #~ info = IT200(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def SpecialInfos(node,name):
-        group = _("Special Infos") 
-        for n in node.SpecialInfo:
-            info = IT202(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def SpecialInfos(node,name):
+        #~ group = _("Special Infos") 
+        #~ for n in node.SpecialInfo:
+            #~ info = IT202(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def RefugeeTypes(node,name):
-        group = _("Refugee Types") # Type de Personne dans le registre d'attente
-        for n in node.RefugeeType:
-            info = IT205(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def RefugeeTypes(node,name):
+        #~ group = _("Refugee Types") # Type de Personne dans le registre d'attente
+        #~ for n in node.RefugeeType:
+            #~ info = IT205(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def StatusOfRefugee(node,name):
-        group = _("Status of refugee") # Statut de refugie
-        for n in node.StatusOfRefugee:
-            info = IT206(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def StatusOfRefugee(node,name):
+        #~ group = _("Status of refugee") # Statut de refugie
+        #~ for n in node.StatusOfRefugee:
+            #~ info = IT206(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
     @staticmethod
     def IdentityCards(node,name):
@@ -1275,87 +1281,85 @@ class RowHandlers:
             group = ''
             
       
-    @staticmethod
-    def Passports(node,name):
-        group = _("Passports")
-        for n in node.Passport:
-            info = IT199(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def Passports(node,name):
+        #~ group = _("Passports")
+        #~ for n in node.Passport:
+            #~ info = IT199(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def OrganizationsInCharge(node,name):
-        group = _("Organizations in charge")
-        for n in node.OrganizationInCharge:
-            info = IT207(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def OrganizationsInCharge(node,name):
+        #~ group = _("Organizations in charge")
+        #~ for n in node.OrganizationInCharge:
+            #~ info = IT207(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def RegistrationRegisters(node,name):
-        group = _("Registration registers")
-        for n in node.RegistrationRegister:
-            info = IT210(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def RegistrationRegisters(node,name):
+        #~ group = _("Registration registers")
+        #~ for n in node.RegistrationRegister:
+            #~ info = IT210(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def ChoosenResidences(node,name):
-        group = _("Choosen residences")
-        for n in node.ChoosenResidence:
-            info = IT212(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def ChoosenResidences(node,name):
+        #~ group = _("Choosen residences")
+        #~ for n in node.ChoosenResidence:
+            #~ info = IT212(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def OrganDonations(node,name):
-        group = _("Organ Donations")
-        for n in node.OrganDonation:
-            info = Info().addfrom(n,'Declaration','',DeclarationType)
-            info.addfrom(n,'Place',_('in '),PlaceType)
-            info.add_deldate(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def OrganDonations(node,name):
+        #~ group = _("Organ Donations")
+        #~ for n in node.OrganDonation:
+            #~ info = IT192(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def ResidenceUpdateDates(node,name):
-        group = _("Residence Update Dates") # Date mise à jour de la résidence principale
-        for n in node.ResidenceUpdateDate:
-            info = IT251(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def ResidenceUpdateDates(node,name):
+        #~ group = _("Residence Update Dates") # Date mise à jour de la résidence principale
+        #~ for n in node.ResidenceUpdateDate:
+            #~ info = IT251(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def DocumentTypes(node,name):
-        group = _("Document Types") # Type de document pour déterminer identité
-        for n in node.DocumentType:
-            info = IT211(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def DocumentTypes(node,name):
+        #~ group = _("Document Types") # Type de document pour déterminer identité
+        #~ for n in node.DocumentType:
+            #~ info = IT211(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def NameModifications(node,name):
-        group = _("Name Modifications") # Type de document pour déterminer identité
-        for n in node.NameModification:
-            info = IT013(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def NameModifications(node,name):
+        #~ group = _("Name Modifications") # Type de document pour déterminer identité
+        #~ for n in node.NameModification:
+            #~ info = IT013(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def CountriesOfOrigin(node,name):
-        group = _("Countries Of Origin") # Pays d'origine
-        for n in node.CountryOfOrigin:
-            info = IT006(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def CountriesOfOrigin(node,name):
+        #~ group = _("Countries Of Origin") # Pays d'origine
+        #~ for n in node.CountryOfOrigin:
+            #~ info = IT006(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
-    @staticmethod
-    def AddressDeclarationAbroad(node,name):
-        group = _("Address Declaration Abroad") 
-        for n in node.Address:
-            info = IT018(n)
-            yield datarow(group,n,n.Date,info)
-            group = ''
+    #~ @staticmethod
+    #~ def AddressDeclarationAbroad(node,name):
+        #~ group = _("Address Declaration Abroad")
+        #~ for n in node.Address:
+            #~ info = IT018(n)
+            #~ yield datarow(group,n,n.Date,info)
+            #~ group = ''
         
     #~ @staticmethod
     #~ def PseudoNationalNumbers(node,name):
@@ -1380,8 +1384,6 @@ class RowHandlers:
             #~ info = IT074(n)
             #~ yield datarow(group,n,n.Date,info)
             #~ group = ''
-        
-    
             
     @staticmethod
     def IT253(node,name):
@@ -1403,6 +1405,21 @@ HANDLERS = dict()
 def register_it_handler(name,label,subname,itname):
     HANDLERS[name] = (label,subname,itname)
     
+register_it_handler('WorkPermits',_("Work Permits"),'WorkPermit','IT198')
+register_it_handler('PublicSecurityNumbers',_("Public Security Numbers"),'PublicSecurityNumbers','IT200')
+register_it_handler('SpecialInfos',_("Special Infos"),'SpecialInfo','IT202')
+register_it_handler('RefugeeTypes',_("Refugee Types"),'RefugeeType','IT205')
+register_it_handler('StatusOfRefugee',_("Status of refugee"),'StatusOfRefugee','IT206')
+register_it_handler('Passports',_("Passports"),'Passport','IT199')
+register_it_handler('OrganizationsInCharge',_("Organizations in charge"),'OrganizationInCharge','IT207')
+register_it_handler('RegistrationRegisters',_("Registration registers"),'RegistrationRegister','IT210')
+register_it_handler('ChoosenResidences',_("Choosen residences"),'ChoosenResidence','IT212')
+register_it_handler('OrganDonations',_("Organ Donations"),'OrganDonation','IT192')
+register_it_handler('ResidenceUpdateDates',_("Residence Update Dates"),'ResidenceUpdateDate','IT251')
+register_it_handler('DocumentTypes',_("Document Types"),'DocumentType','IT211')
+register_it_handler('NameModifications',_("Name Modifications"),'NameModification','IT013')
+register_it_handler('CountriesOfOrigin',_("Countries Of Origin"),'CountryOfOrigin','IT006')
+register_it_handler('AddressDeclarationAbroad',_("Address Declaration Abroad"),'Address','IT018')
 register_it_handler('TemporaryRegistrations',_("Inscriptions Temporaires"),'TemporaryRegistration','IT028')
 register_it_handler('SpecialRetirementCertificates',_("Special Retirement Certificates"),'SpecialRetirementCertificate','IT074')
 register_it_handler('RetirementCertificates',_("Retirement Certificates"),'RetirementCertificate','IT073')

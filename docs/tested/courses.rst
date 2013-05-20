@@ -78,15 +78,15 @@ able to render RemoteFields as rst.
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person__first_name content urgent address")
-========= ============= ======================= =====================
- Prénom    Contenu       cause professionnelle   Addresse
---------- ------------- ----------------------- ---------------------
- Emil      Französisch   Non                     Allemagne
- Rik       Deutsch       Non                     Amsterdam, Pays-Bas
- Otto      Französisch   Non                     4730 Raeren
- Vincent   Deutsch       Non                     4730 Raeren
- Didier    Französisch   Non                     4730 Raeren
-========= ============= ======================= =====================
+=========== ============= ======================= ================================
+ Prénom      Contenu       cause professionnelle   Addresse
+----------- ------------- ----------------------- --------------------------------
+ Charlotte   Deutsch       Non                     Am Waisenbüschchen, 4700 Eupen
+ Alfons      Französisch   Non                     Am Bahndamm, 4700 Eupen
+ Tatjana     Deutsch       Non                     Kettenis
+ Denis       Französisch   Non                     France
+ Karl        Deutsch       Non                     Allemagne
+=========== ============= ======================= ================================
 <BLANKLINE>
 
 New virtualfield `dsbe.Client.coachings` shows all active coachings
@@ -94,16 +94,17 @@ of that client:
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content address person__coaches")
-======================== ============= ===================== ==================================================
- Client                   Contenu       Addresse              Accompagnants
------------------------- ------------- --------------------- --------------------------------------------------
- EIERSCHAL Emil (175)     Französisch   Allemagne             Hubert Huppertz
- RADERMECKER Rik (173)    Deutsch       Amsterdam, Pays-Bas   Alicia Allmanns
- ÖSTGES Otto (168)        Französisch   4730 Raeren           Mélanie Mélard
- VAN VEEN Vincent (166)   Deutsch       4730 Raeren           Hubert Huppertz, Mélanie Mélard, Caroline Carnol
- DI RUPO Didier (164)     Französisch   4730 Raeren           Hubert Huppertz, Alicia Allmanns
-======================== ============= ===================== ==================================================
+========================= ============= ================================ =================================================
+ Client                    Contenu       Addresse                         Accompagnants
+------------------------- ------------- -------------------------------- -------------------------------------------------
+ COLLARD Charlotte (117)   Deutsch       Am Waisenbüschchen, 4700 Eupen   Caroline Carnol
+ AUSDEMWALD Alfons (115)   Französisch   Am Bahndamm, 4700 Eupen          Mélanie Mélard
+ KASENNOVA Tatjana (208)   Deutsch       Kettenis                         Hubert Huppertz
+ DENON Denis (179)         Französisch   France                           Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
+ KELLER Karl (177)         Deutsch       Allemagne                        Mélanie Mélard, Hubert Huppertz
+========================= ============= ================================ =================================================
 <BLANKLINE>
+
 
 The last column `coachings` (Accompagnements) is also a new feature:
 it is a RemoteField ponting to a VirtualField. Very subtle!

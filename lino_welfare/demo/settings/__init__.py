@@ -24,5 +24,6 @@ class Site(Site):
             return True
         return False
 
-SITE = Site(globals(),no_local=True)
+#~ SITE = Site(globals(),no_local=True)
+SITE = Site(globals())
 #~ print 20130409, __file__, LOGGING

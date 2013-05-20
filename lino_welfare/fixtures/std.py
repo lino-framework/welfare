@@ -72,7 +72,7 @@ def objects():
     #~ yield projectType(u"EiEi")
     #~ yield projectType(u"Aufenthaltsgenehmigung")
     
-    studyType = Instantiator('jobs.StudyType').build
+    studyType = Instantiator('isip.StudyType').build
     #~ yield studyType(u"Schule")
     #~ yield studyType(u"Sonderschule")
     #~ yield studyType(u"Ausbildung")

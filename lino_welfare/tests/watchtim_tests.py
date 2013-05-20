@@ -153,6 +153,7 @@ class WatchTimTest(TestCase):
         User(username='roger').save()
         User(username='edgar').save()
         households_Type(name="Eheleute",pk=1).save()
+        settings.SITE.uppercase_last_name = True
         
         #~ def test01(self):
         """
@@ -380,7 +381,43 @@ class WatchTimTest(TestCase):
  watch_tim   Remove child                   contacts.Person    Person        9932
 =========== ============== =============== ================== ============= ===========
 """)
+
+
+        ln = """{"method":"PUT","alias":"PAR","id":"0000001267","time":"20130517 12:34:15",
+        "user":"","data":{"IDPAR":"0000001267","FIRME":"Velopa","NAME2":"",
+        "RUE":"Leuvenselaan","CP":"3300","IDPRT":"I","PAYS":"B","TEL":"",
+        "FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
+        "DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"F","IDBUD":"",
+        "PROF":"15","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":1992,"month":1,"day":2}},"ALLO":"S.A.",
+        "NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":" 172",
+        "RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":1996,"month":8,"day":30}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+        "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"",
+        "DOMI1":""}}"""
         
+        try:
+            process_line(ln)
+            self.fail("""Expected ValidationError: {'first_name': [u'Dieses Feld darf nicht leer sein.']}""")
+            # NOTVA is leer, also will watch_tim eine Person draus machen, 
+            # aber dazu bräuchte er auch einen Vornamen
+        except ValidationError as e:
+            pass
+        self.assertDoesNotExist(Partner,id=1267)
+        
+        ln = """{"method":"PUT","alias":"PAR","id":"0000000665","time":"20130517 12:33:58","user":"",
+        "data":{"IDPAR":"0000000665","FIRME":"Petra","NAME2":"","RUE":"Beskensstraat 34","CP":"3520",
+        "IDPRT":"I","PAYS":"B","TEL":"011/815911","FAX":"","COMPTE1":"","NOTVA":"BE-0426.896.703",
+        "COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30",
+        "LANGUE":"3",
+        "IDBUD":"","PROF":"12","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":1986,"month":8,"day":14}},"ALLO":"sprl","NB1":"","NB2":"",
+        "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"",
+        "EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
+        process_line(ln)
+        obj = Company.objects.get(id=665)
+        self.assertEqual(obj.name,"Petra")
 
 
 def changes_to_rst(master):

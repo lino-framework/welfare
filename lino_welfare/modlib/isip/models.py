@@ -105,6 +105,7 @@ class ContractType(mixins.PrintableType,dd.BabelNamed):
     exam_policy = models.ForeignKey("isip.ExamPolicy",
         related_name="%(app_label)s_%(class)s_set",
         blank=True,null=True)
+    needs_study_type = models.BooleanField(_("needs Study type"),default=False)
         
 
 class ContractTypes(dd.Table):
@@ -113,7 +114,7 @@ class ContractTypes(dd.Table):
     column_names = 'name ref build_method template *'
     detail_layout = """
     id name 
-    ref build_method template
+    ref build_method template exam_policy needs_study_type
     ContractsByType
     """
 
@@ -149,16 +150,16 @@ class ExamPolicies(dd.Table):
     jobs.ContractsByPolicy    
     """
 
-#
-# CONTRACT ENDINGS
-#
 class ContractEnding(dd.Model):
     class Meta:
         verbose_name = _("Reason of termination")
-        #~ verbose_name = _("Contract Ending")
-        verbose_name_plural = _('Reasons of termination')
+        verbose_name_plural = _('Contract termination reasons')
         
     name = models.CharField(_("designation"),max_length=200)
+    use_in_isip = models.BooleanField(_("ISIP"),default=True)
+    use_in_jobs = models.BooleanField(_("Jobs"),default=True)
+    is_success = models.BooleanField(_("Success"),default=False)
+    needs_date_ended = models.BooleanField(_("Require date ended"),default=False)
     
     def __unicode__(self):
         return unicode(self.name)
@@ -222,6 +223,19 @@ class Signers(dd.Model):
               rolesbyperson__company=sc.site_company,**kw)
       
   
+class StudyType(dd.BabelNamed):
+    #~ text = models.TextField(_("Description"),blank=True,null=True)
+    class Meta:
+        verbose_name = _("study type")
+        verbose_name_plural = _("study types")
+
+class StudyTypes(dd.Table):
+    required = dd.required(user_groups='integ',user_level='admin')
+    #~ label = _('Study types')
+    model = StudyType
+    order_by = ["name"]
+
+
 
 #~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
 class ContractBase(
@@ -330,6 +344,10 @@ class ContractBase(
     @dd.chooser()
     def contact_role_choices(cls):
         return contacts.RoleType.objects.filter(use_in_contracts=True)
+        
+    @dd.chooser()
+    def ending_choices(cls):
+        return ContractEnding.objects.filter(use_in_isip=True)
         
         
 
@@ -575,6 +593,7 @@ class Contract(ContractBase):
     hidden_columns = (ContractBase.hidden_columns 
         + " stages goals duties_asd duties_dsbe duties_company duties_person")
         
+    study_type = models.ForeignKey('isip.StudyType',blank=True,null=True)
       
         
     
@@ -606,9 +625,9 @@ class Contract(ContractBase):
 
 class ContractDetail(dd.FormLayout):
     general = dd.Panel("""
-    id:8 client:25 user:15 user_asd:15 language:8
-    type company contact_person contact_role
-    applies_from applies_until exam_policy
+    id:8 client:25 type user:15 user_asd:15
+    study_type  company contact_person contact_role
+    applies_from applies_until exam_policy language:8
     
     date_decided date_issued date_ended ending:20
     # signer1 signer2
@@ -720,6 +739,7 @@ def setup_config_menu(site,ui,profile,m):
     m.add_action(ContractTypes)
     m.add_action(ContractEndings)
     m.add_action(ExamPolicies)
+    m.add_action(StudyTypes)
   
 def setup_explorer_menu(site,ui,profile,m):
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
