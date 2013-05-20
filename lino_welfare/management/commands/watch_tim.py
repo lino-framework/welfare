@@ -705,7 +705,11 @@ class PAR(Controller):
             newobj = obj = obj.person_ptr
             old_class = Person
             
-        if new_class is not old_class and not issubclass(new_class,old_class):
+        if old_class is new_class:
+            return
+            
+        #~ if new_class is not old_class and not issubclass(new_class,old_class):
+        if  not issubclass(new_class,old_class):
             dd.pre_remove_child.send(sender=obj,request=REQUEST,child=old_class)
             mti.delete_child(obj,old_class)
             newobj = obj = partner

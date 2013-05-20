@@ -418,6 +418,23 @@ class WatchTimTest(TestCase):
         process_line(ln)
         obj = Company.objects.get(id=665)
         self.assertEqual(obj.name,"Petra")
+        
+        #~ INFO PAR:0000007826 (Client #7826 (u'MUSTERMANN Peter (7826)')) : Client becomes Person
+        #~ WARNING Exception 'ValidationError([u'A Person cannot be parent for a Person'])' while processing changelog line:
+        Client(id=7826,first_name="Peter",last_name="Mustermann").save()
+        ln = """{"method":"PUT","alias":"PAR","id":"0000007826","time":"20130517 12:35:51","user":"",
+        "data":{"IDPAR":"0000007826","FIRME":"Mustermann Peter","NAME2":"","RUE":"Burgundstraße","CP":
+        "4700","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"",
+        "COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"A",
+        "IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"82","CODE1":"",
+        "CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":2006,"month":1,"day":5}},
+        "ALLO":"Herrn","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
+        "RUENUM":"   9","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":2009,"month":9,"day":22}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
+        "IDUSR":"ELMAR","DOMI1":""}}"""
+        process_line(ln)
+        self.assertDoesNotExist(Client,id=7826)
 
 
 def changes_to_rst(master):
