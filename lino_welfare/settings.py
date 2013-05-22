@@ -86,12 +86,8 @@ class Site(Site,cbss.SiteMixin):
         #~ """ % (self.label,lino.__url__)
         #~ return s
         
-    def get_main_action(self,user):
+    def unused_get_main_action(self,user): 
         return self.modules.lino.Home.default_action
-        #~ a = self.modules.lino.Home.default_action
-        #~ if a is None:
-            #~ raise Exception("20121004 self.modules.lino.Home.get_url_action('default_action') returned None")
-        #~ return a
         
     #~ def get_application_info(self):
         #~ return (__name__,__version__,__url__)

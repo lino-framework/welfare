@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.5\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-22 09:33+0300\n"
+"POT-Creation-Date: 2013-05-22 16:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,127 +18,147 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0dev-r661\n"
 
-#: lino_welfare/models.py:127
+#: lino_welfare/models.py:128
 msgid "Notify me when a coach has been assigned"
 msgstr ""
 
-#: lino_welfare/models.py:141
+#: lino_welfare/models.py:142
 msgid "Local job office"
 msgstr ""
 
-#: lino_welfare/models.py:150
+#: lino_welfare/models.py:151
 msgid "Upload Type for residence permit"
 msgstr ""
 
-#: lino_welfare/models.py:158
+#: lino_welfare/models.py:159
 msgid "Upload Type for work permit"
 msgstr ""
 
-#: lino_welfare/models.py:165
+#: lino_welfare/models.py:166
 msgid "Upload Type for driving licence"
 msgstr ""
 
-#: lino_welfare/models.py:177
+#: lino_welfare/models.py:178
 msgid "usable in contracts"
 msgstr ""
 
-#: lino_welfare/models.py:179
+#: lino_welfare/models.py:180
 msgid ""
 "Whether Links of this type can be used as contact person of a job "
 "contract."
 msgstr ""
 
-#: lino_welfare/models.py:191
+#: lino_welfare/models.py:192
 msgid "Nationality texts (NL, FR, DE, EN)"
 msgstr ""
 
-#: lino_welfare/models.py:194
+#: lino_welfare/models.py:195
 msgid ""
 "Space separated list of case insensitive nationality designations in 4 "
 "languages."
 msgstr ""
 
-#: lino_welfare/models.py:454 lino_welfare/modlib/debts/models.py:452
+#: lino_welfare/models.py:455 lino_welfare/modlib/debts/models.py:452
 #: lino_welfare/modlib/isip/models.py:641
 #: lino_welfare/modlib/pcsw/models.py:1396
 msgid "General"
 msgstr ""
 
-#: lino_welfare/models.py:458
+#: lino_welfare/models.py:459
 msgid "More"
 msgstr ""
 
-#: lino_welfare/models.py:495 lino_welfare/modlib/pcsw/models.py:1517
-#: lino_welfare/modlib/pcsw/models.py:2557
+#: lino_welfare/models.py:496 lino_welfare/modlib/pcsw/models.py:1517
+#: lino_welfare/modlib/pcsw/models.py:2561
 msgid "Coaching"
 msgstr ""
 
-#: lino_welfare/models.py:583 lino_welfare/modlib/pcsw/models.py:455
+#: lino_welfare/models.py:584 lino_welfare/modlib/pcsw/models.py:455
 msgid "Former"
 msgstr ""
 
-#: lino_welfare/settings.py:110
+#: lino_welfare/models.py:653 lino_welfare/templates_jinja/admin_main.html:18
+msgid "You have"
+msgstr ""
+
+#: lino_welfare/settings.py:106
 msgid "Anonymous"
 msgstr ""
 
-#: lino_welfare/settings.py:112
+#: lino_welfare/settings.py:108
 msgid "Integration Agent"
 msgstr ""
 
-#: lino_welfare/settings.py:113
+#: lino_welfare/settings.py:109
 msgid "Integration Agent (Manager)"
 msgstr ""
 
-#: lino_welfare/settings.py:114
+#: lino_welfare/settings.py:110
 msgid "Newcomers consultant"
 msgstr ""
 
-#: lino_welfare/settings.py:115
+#: lino_welfare/settings.py:111
 msgid "Debts consultant"
 msgstr ""
 
-#: lino_welfare/settings.py:118
+#: lino_welfare/settings.py:114
 msgid "CBSS only"
 msgstr ""
 
-#: lino_welfare/settings.py:119
+#: lino_welfare/settings.py:115
 msgid "Administrator"
 msgstr ""
 
-#: lino_welfare/settings.py:157
+#: lino_welfare/settings.py:153
 msgid "Master"
 msgstr ""
 
-#: lino_welfare/settings.py:167
+#: lino_welfare/settings.py:163
 msgid "My menu"
 msgstr ""
 
-#: lino_welfare/settings.py:185
+#: lino_welfare/settings.py:181
 msgid "Partners (all)"
 msgstr ""
 
-#: lino_welfare/settings.py:187
+#: lino_welfare/settings.py:183
 msgid "Listings"
 msgstr ""
 
-#: lino_welfare/settings.py:191
+#: lino_welfare/settings.py:187
 msgid "Configure"
 msgstr ""
 
-#: lino_welfare/settings.py:198
+#: lino_welfare/settings.py:194
 msgid "Explorer"
 msgstr ""
 
-#: lino_welfare/settings.py:203
+#: lino_welfare/settings.py:199
 msgid "Site"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:745
+#: lino_welfare/fixtures/demo.py:746
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:746
+#: lino_welfare/fixtures/demo.py:747
 msgid "No supervisor. Only for independent people."
+msgstr ""
+
+#: lino_welfare/fixtures/std.py:276
+msgid "Normal"
+msgstr ""
+
+#: lino_welfare/fixtures/std.py:277
+msgid "Alcool"
+msgstr ""
+
+#: lino_welfare/fixtures/std.py:278
+msgid "Santé"
+msgstr ""
+
+#: lino_welfare/fixtures/std.py:279
+msgid "Force majeure"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:197
@@ -350,7 +370,7 @@ msgid "Query Register"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1399
-#: lino_welfare/modlib/pcsw/models.py:2579
+#: lino_welfare/modlib/pcsw/models.py:2583
 msgid "Primary"
 msgstr ""
 
@@ -2147,7 +2167,7 @@ msgid "Bank account 2"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:316
-#: lino_welfare/modlib/pcsw/models.py:2621
+#: lino_welfare/modlib/pcsw/models.py:2625
 msgid "Cannot delete companies and persons imported from TIM"
 msgstr ""
 
@@ -2335,7 +2355,7 @@ msgstr ""
 #: lino_welfare/modlib/pcsw/models.py:819
 #: lino_welfare/modlib/pcsw/models.py:2229
 #: lino_welfare/modlib/pcsw/models.py:2409
-#: lino_welfare/modlib/pcsw/models.py:2575
+#: lino_welfare/modlib/pcsw/models.py:2579
 msgid "until"
 msgstr ""
 
@@ -2812,42 +2832,42 @@ msgstr ""
 msgid "A list of reasons expressing why a coaching was ended"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2558
+#: lino_welfare/modlib/pcsw/models.py:2562
 msgid "Coachings"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2561
+#: lino_welfare/modlib/pcsw/models.py:2565
 msgid "Coach"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2572
+#: lino_welfare/modlib/pcsw/models.py:2576
 msgid "Coached from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2580
+#: lino_welfare/modlib/pcsw/models.py:2584
 msgid ""
 "There's at most one primary coach per client. \n"
 "Enabling this field will automatically make the other coachings non-"
 "primary."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2665
+#: lino_welfare/modlib/pcsw/models.py:2669
 msgid "Coaching period ends before it started."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2693
+#: lino_welfare/modlib/pcsw/models.py:2697
 msgid "Liste des accompagnements."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2796
+#: lino_welfare/modlib/pcsw/models.py:2803
 msgid "PCSW"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2825
+#: lino_welfare/modlib/pcsw/models.py:2832
 msgid "Integration"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:2826
+#: lino_welfare/modlib/pcsw/models.py:2833
 msgid "Art.60§7"
 msgstr ""
 
@@ -2882,5 +2902,28 @@ msgstr ""
 
 #: lino_welfare/modlib/statbel/models.py:42
 msgid "The official code for this country used by statbel.fgov.be"
+msgstr ""
+
+#: lino_welfare/templates_jinja/admin_main.html:3
+msgid ""
+"You will now probably want to use the <b>Log in</b> button in the upper "
+"right corner and log in."
+msgstr ""
+
+#: lino_welfare/templates_jinja/admin_main.html:6
+msgid "Quick links:"
+msgstr ""
+
+#: lino_welfare/templates_jinja/admin_main.html:12
+msgid "Welcome"
+msgstr ""
+
+#: lino_welfare/templates_jinja/admin_main.html:13
+#, python-format
+msgid "Hi, %(first_name)s!"
+msgstr ""
+
+#: lino_welfare/templates_jinja/admin_main.html:27
+msgid "Upcoming reminders"
 msgstr ""
 

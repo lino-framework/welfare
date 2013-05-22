@@ -1,0 +1,36 @@
+<div class="htmlText" style="margin:5px">
+{% if not request.user.profile.authenticated %}
+{{_("You will now probably want to use the <b>Log in</b> button in the upper right corner and log in.")}}
+{% else %}
+
+<p>{{_("Quick links:")}}
+{% for mi in settings.SITE.get_quicklinks(ar).items %}
+[{{E.tostring(ar.window_action_button(mi.bound_action))}}]
+{% endfor %}
+</p>
+
+<h2>{{_("Welcome")}}</h2>
+<p>{{_("Hi, %(first_name)s!") % dict(first_name=ar.get_user().first_name)}}
+{% set sep = joiner(',') %}
+{% for table,text in settings.SITE.get_todo_tables(ar) %}
+    {% set r = table.request(user=ar.get_user()) %}
+    {% if r.get_total_count() != 0 %}
+      {{ sep() or _("You have") }} {{ E.tostring(ar.href_to_request(r,text % r.get_total_count())) }} 
+    {% endif %}
+{% endfor %}
+</p>
+
+{% set T = settings.SITE.modules.pcsw.UsersWithClients %}
+<h2>{{T.label}}</h2>
+{{ar.show(T)}}
+
+<h2>{{_('Upcoming reminders')}}</h2>
+<table bgcolor="#eeeee" padding="2pt" width="100%"><tr><td>
+{{settings.SITE.reminders_as_html(ar,days_forward=30,
+            max_items=10,before='<ul><li>',
+            separator='</li><li>',
+            after="</li></ul>")}}
+</td></tr></table>            
+
+{% endif %}
+</div>

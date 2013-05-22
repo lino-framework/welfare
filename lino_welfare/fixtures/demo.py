@@ -402,7 +402,9 @@ def objects():
     
     
     def person2client(p,**kw):
-        c = mti.insert_child(p,Client,**kw)
+        c = mti.insert_child(p,Client)
+        for k,v in kw.items():
+            setattr(c,k,v)
         c.client_state = pcsw.ClientStates.coached
         c.save()
         return Client.objects.get(pk=p.pk)
@@ -604,6 +606,7 @@ def objects():
                 birth_date=birth_date)
             # youngest client is 16; 170 days between each client
             
+            
             count += 1
             if count % 2:
                 #~ client.is_active = True
@@ -624,8 +627,11 @@ def objects():
             else:
                 client.client_state=pcsw.ClientStates.former
                 
+            dblogger.info("20130523 a %s",client.birth_date)
             client.full_clean()
             client.save()
+            dblogger.info("20130523 b %s",client.birth_date)
+            #~ if not client.birth_date: raise Exception(20130523)
             
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
     CLIENTS = Cycler(Client.objects.filter(client_state=pcsw.ClientStates.coached))

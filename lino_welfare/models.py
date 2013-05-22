@@ -17,6 +17,7 @@ Contains PCSW-specific models and tables that have not yet been
 moved into a separate module because they are really very PCSW specific.
 
 """
+from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
@@ -63,6 +64,7 @@ from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.xmlgen import html as xghtml
+from lino.utils.xmlgen.html import E
 from lino.utils import IncompleteDate
 
 from lino.mixins.printable import DirectPrintAction, Printable
@@ -93,6 +95,7 @@ cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
+jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
 #~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
@@ -295,10 +298,13 @@ def customize_sqlite():
     
 
 
+#~ def setup_main_menu(site,ui,profile,m): 
 def setup_reports_menu(site,ui,profile,m):
     m.add_action(site.modules.jobs.JobsOverview)
     m.add_action(site.modules.pcsw.UsersWithClients)
     m.add_action(site.modules.pcsw.ClientsTest)
+    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
+    m.add_action(ActivityReport)
         
 
 
@@ -605,4 +611,145 @@ def setup_workflows(site):
 #~ register_screenshot('/api/jobs/JobsOverview?ul='+LANGUAGE,'jobs.JobsOverview.png');
 #~ 
 #~ 
+
+#~ """
+    #~ quick_links:80x1
+    #~ welcome
+    #~ pcsw.UsersWithClients:80x8
+    #~ coming_reminders:40x16 missed_reminders:40x16
+#~ """
+
+#~ from lino.ui.models import get_installed_todo_tables
+            
+
+def unused_dashboard(ar):
+    #~ raise Exception("20130522 dashboard()")
+    html = []
+    #~ from lino.core import requests
+    #~ ar = requests.BaseRequest(
+        #~ renderer=settings.SITE.ui.ext_renderer,
+        #~ request=request)
+        #~ user=request.subst_user or request.user
+    #~ quicklinks = settings.SITE.get_quicklinks(ar)
+    #~ if quicklinks.items:
+        #~ chunks = []
+        #~ for mi in quicklinks.items:
+            #~ chunks.append(' ')
+            #~ chunks.append(settings.SITE.ui.ext_renderer.window_action_button(
+              #~ ar,mi.bound_action))
+        #~ html.append(E.p('Quick Links:',*chunks))
+        
+    #~ MAXITEMS = 2
+    u = ar.get_user()
+    
+    if u.profile.authenticated:
+      
+        #~ intro = [_("Hi, "),u.first_name,'! ']
+        #~ html.append(E.p(*intro))
+        warnings = []
+        for table,text in settings.SITE.get_todo_tables(ar):
+            r = table.request(user=u)
+            if r.get_total_count() != 0:
+                
+                warnings.append(E.li(
+                    ar.href_to_request(r,text % r.get_total_count())))
+        
+        if len(warnings):
+            html.append(E.h3(_("You have")))
+            html.append(E.ul(*warnings))
+        #~ else:
+            #~ html.append(E.p(_("Congratulatons: you have no warnings.")))
+    #~ html.append(E.div(*story,class_="htmlText",style="margin:5px"))
+   
+    sar = ar.spawn(pcsw.UsersWithClients)
+    html.append(sar.table2xhtml())
+   
+        #~ return reminders_as_html(ar,days_forward=30,
+            #~ max_items=10,before='<ul><li>',separator='</li><li>',after="</li></ul>")
+    
+    
+    #~ for jobtype in self.jobtypes:
+        #~ html.append(E.h2(unicode(jobtype)))
+        #~ sar = ar.spawn(JobsOverviewByType,
+            #~ master_instance=jobtype,
+            #~ param_values=dict(date=self.today))
+        #~ html.append(sar.table2xhtml())
+        
+    return E.tostring(E.div(*html,class_="htmlText",style="margin:5px"))
+
+
+#~ settings.SITE.dashboard = dashboard
+
+
+class ActivityReport(dd.EmptyTable):
+    """
+    Welche (Wieviele) Verträge
+    
+    - waren aktiv am X
+    - wurden unterzeichnet / abgeschlossen / beendet
+      in der Periode vom X bis Y
+    - pro Kategorie (Sozialwirtschaft, Interne, Externe Öffentlich, Externe Privat,...)
+    - pro Beendigungsgrund
+    - pro Partnerorganisation
+    - pro Ausbildungsart
+    
+    """
+    required = dd.required(user_level='manager')
+    label = _("Activity Report") 
+    detail_layout = "t1 t2"
+    
+    parameters = dict(
+      start_date = models.DateField(verbose_name=_("Period from")),
+      end_date = models.DateField(verbose_name=_("until")),
+      include_jobs = models.BooleanField(verbose_name=pcsw.JOBS_MODULE_LABEL),
+      include_isip = models.BooleanField(verbose_name=_("ISIP")),
+      )
+      
+    params_layout = "start_date end_date include_jobs include_isip"
+    #~ params_panel_hidden = True
+    
+    #~ @classmethod
+    #~ def create_instance(self,ar,**kw):
+        #~ kw.update(today = ar.param_values.today or datetime.date.today())
+        #~ if ar.param_values.job_type:
+            #~ kw.update(jobtypes = ar.param_values.job_type)
+        #~ else:
+            #~ kw.update(jobtypes = jobs.JobType.objects.all())
+        #~ return super(ActivityReport,self).create_instance(ar,**kw)
+
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        D = datetime.date
+        kw.update(start_date = D(D.today().year,1,1))
+        kw.update(end_date = D(D.today().year,12,31))
+        return kw
+        
+    @dd.virtualfield(dd.HtmlBox(_("First tab")))
+    def t1(cls,self,ar):
+        html = []
+        dates = (ar.param_values.start_date,ar.param_values.end_date)
+        rows = []
+        cells = [''] + [dd.dtos(d) for d in dates]
+        rows.append(E.tr(*[E.td(c) for c in cells]))
+        def add(f,text):
+            cells = [text]
+            for d in dates:
+                sar = f(d)
+                cells.append(ar.href_to_request(sar,str(sar.get_total_count())))
+            rows.append(E.tr(*[E.td(c) for c in cells]))
+        def f(d): return pcsw.Clients.request(param_values=dict(coached_on=d))
+        add(f,_("Active clients"))
+        def f(d): return isip.Contracts.request(param_values=dict(show_active=True,today=d,show_past=False,show_coming=False))
+        add(f,_("Active ISIPs"))
+        def f(d): return jobs.Contracts.request(param_values=dict(show_active=True,today=d,show_past=False,show_coming=False))
+        add(f,_("Active Art60§7's"))
+        html.append(E.table(*rows))
+        return E.div(*html)
+
+    @dd.virtualfield(dd.HtmlBox(_("Second tab")))
+    def t2(cls,self,ar):
+        html = []
+        html.append(E.p("Foo"))
+        html.append(E.p("Bar"))
+        return E.div(*html)
 
