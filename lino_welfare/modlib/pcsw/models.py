@@ -2538,6 +2538,10 @@ class CoachingEndings(dd.Table):
     model = CoachingEnding
     column_names = 'seqno name type *'
     order_by = ['seqno']
+    detail_layout = """
+    id name seqno
+    CoachingsByEnding
+    """
 
 
 
@@ -2743,6 +2747,9 @@ class CoachingsByUser(Coachings):
     master_key = 'user'
     column_names = 'start_date end_date client type primary id'
 
+class CoachingsByEnding(Coachings):
+    master_key = 'ending'
+    
 #~ class MyCoachings(Coachings,mixins.ByUser):
     #~ column_names = 'start_date end_date client type primary id'
 
@@ -2823,6 +2830,7 @@ def setup_explorer_menu(site,ui,profile,m):
     
 
 INTEG_MODULE_LABEL = _("Integration")
+JOBS_MODULE_LABEL = _("Art.60§7")
 
 #~ def setup_my_menu(site,ui,profile,m): 
 def setup_main_menu(site,ui,profile,m): 

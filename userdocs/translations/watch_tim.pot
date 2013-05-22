@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-17 01:29+0300\n"
+"POT-Creation-Date: 2013-05-22 09:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -465,81 +465,66 @@ msgid "Importierte Klienten haben eine importierte primäre Begleitung, die nich
 msgstr ""
 
 #: ../watch_tim.rst:309
-# 75ab02e716be40b0a15bc40f807bf8be
-msgid "Klientenkontakte"
+# b863a0b57bac4a93ba944c9518d59b70
+msgid "Krankenkassen und Apotheken (Klientenkontakte)"
 msgstr ""
 
 #: ../watch_tim.rst:311
 # 5c6d6428ea8145e1aea2544955d83cb6
-msgid "Die Felder PXS->IdMut (Krankenasse) und PXS->Apotheke (Apotheke) werden nach Lino synchronisiert als *Klientenkontakte*."
+msgid "Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) werden nach Lino synchronisiert als :ref:`Klientenkontakte <welfare.pcsw.ClientContact>`."
 msgstr ""
 
 #: ../watch_tim.rst:314
-# 95809766bdc048c4879e836cfdbd1678
-msgid "*Importierte* Klienten sollten in ihren :ref:`welfare.pcsw.ClientContacts` deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben."
+# a2f144fbd2b14a809321027d11e1fcbe
+msgid "*Importierte* Klienten sollten in ihren :ref:`Klientenkontakten <welfare.pcsw.ClientContacts>` deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben. Sonst findet `watch_tim`, dass er nicht dafür zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die `system.log`)"
 msgstr ""
 
-#: ../watch_tim.rst:319
-# 88179f6f1c3242949b35bea761710ac1
-msgid "Ansonsten findet watch_tim, dass er nicht dafür zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die system.log)"
-msgstr ""
-
-#: ../watch_tim.rst:322
+#: ../watch_tim.rst:321
 # 210a3ef30b82496cb64239390c02389b
 msgid "Alle anderen Klientenkontaktarten sind egal, davon dürfen auch importierte Klienten so viele haben wie sie wollen."
 msgstr ""
 
-#: ../watch_tim.rst:325
-# 68df9dd6700141b38e4c3d902fc9074a
-msgid "Beim Synchronisieren sind folgende Fehlermeldungen denkbar (die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::"
-msgstr ""
-
-#: ../watch_tim.rst:331
-# 3f0e40f4d04c49efbdfd6666553bc442
-msgid "Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt."
+#: ../watch_tim.rst:324
+# abce6554bcd24c568986eaf7b979c355
+msgid "Apotheken sind in TIM normale Partner, aber Krankenkassen sind Adressen aus `ADR` mit `ADR->Type == 'MUT'`. Sie erscheinen in Lino als Organisation, werden aber nicht mehr automatisch synchronisiert. Also falls des eine in TIM erstellt wird, muss die entsprechende Organisation in Lino manuell erstellt werden. Dabei ist zu beachten, dass das `id` einer Krankenasse beim ersten Import (`initdb_tim`) wie folgt ermittelt wurde:"
 msgstr ""
 
 #: ../watch_tim.rst:334
-# 439dbf2adb7547edafaf62c05df7e489
-msgid "Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese Apotheke zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen."
-msgstr ""
-
-#: ../watch_tim.rst:338
-# 4a68805c9eeb41ee915a8150d90e18b6
-msgid "Krankenkassen"
-msgstr ""
-
-#: ../watch_tim.rst:340
-# 506174f8c9fe4d9a8151c8b47df5c8b2
-msgid "Die Krankenkassen (Adressen aus `ADR` mit `ADR->Type == 'MUT'`) erscheinen in Lino als Organisation, wobei deren `id` beim ersten Import (initdb_tim) wie folgt ermittelt wurde:"
-msgstr ""
-
-#: ../watch_tim.rst:345
 # dc2558f486954e9fbdd6f21dcba079bf
 msgid "id = val(ADR->IdMut) + 199000"
 msgstr ""
 
-#: ../watch_tim.rst:347
-# 94e24a1196434d9aa9b676791cf8db32
-msgid "Krankenakssen werden nicht mehr automatisch synchronisiert. Also falls des eine in TIM erstellt wird, muss die entsprechende Organisation in Lino manuell erstellt werden."
+#: ../watch_tim.rst:337
+# 68df9dd6700141b38e4c3d902fc9074a
+msgid "Beim Synchronisieren sind folgende Fehlermeldungen denkbar (die falls sie auftreten per E-Mail an die Administratoren geschickt werden)::"
 msgstr ""
 
-#: ../watch_tim.rst:356
+#: ../watch_tim.rst:343
+# 3f0e40f4d04c49efbdfd6666553bc442
+msgid "Die erste Meldung bedeutet, dass die Krankenkasse fehlt (Nr. 199xxx sind Krankenkassen), also dass man in TIM in der ADR.DBF die Nr 630 raussucht und diese manuell in Lino als Organisation 199630 anlegt."
+msgstr ""
+
+#: ../watch_tim.rst:347
+# 019be39ef9814aab8d2bcc22274287a5
+msgid "Die zweite Meldung ist eine fehlende Apotheke. Da reicht es, in TIM mal auf diese Apotheke 86256 zu gehen und irgendwas zu ändern, um manuell eine Synchronisierung auszulösen. Kann auch sein, dass es in TIM keinen Partner 86256 gibt (TIM lässt es fälschlicherweise zu, Apotheken zu löschen die anderswo referenziert werden): dann muss der Klient 20475 sein Feld PXS->Apotheke auf leer gesetzt bekommen (oder auf eine andere existierende Apotheke)."
+msgstr ""
+
+#: ../watch_tim.rst:358
 # 5412d2f455c8472eaf5d6c2d34418afb
 msgid "Technisches"
 msgstr ""
 
-#: ../watch_tim.rst:358
+#: ../watch_tim.rst:360
 # a51b025a34c64e119eebe602a2381de8
 msgid "In der :xfile:`settings.py` gibt es folgende Optionen, die für die Synchronisierung von Belang sind::"
 msgstr ""
 
-#: ../watch_tim.rst:384
+#: ../watch_tim.rst:386
 # 0f8c5480885e465bb34201fbad5d8aa6
 msgid "Cannot create Client 0000023756 from PXS"
 msgstr ""
 
-#: ../watch_tim.rst:386
+#: ../watch_tim.rst:388
 # 35a2bcd74f47480683206f11fb122877
 msgid "Die Meldung kommt, wenn in TIM in der PXS eines Partners etwas verändert wurde, und dieser Partner in Lino nicht existiert (was anormal ist, aber z.B. durch frühere Bugs oder Pannen kommen kann). Zu tun: manuell für diesen Partner in der PAR etwas verändern, um eine Synchronisierung zu triggern."
 msgstr ""

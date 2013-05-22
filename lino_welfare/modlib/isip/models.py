@@ -157,7 +157,7 @@ class ContractEnding(dd.Model):
         
     name = models.CharField(_("designation"),max_length=200)
     use_in_isip = models.BooleanField(_("ISIP"),default=True)
-    use_in_jobs = models.BooleanField(_("Jobs"),default=True)
+    use_in_jobs = models.BooleanField(pcsw.JOBS_MODULE_LABEL,default=True)
     is_success = models.BooleanField(_("Success"),default=False)
     needs_date_ended = models.BooleanField(_("Require date ended"),default=False)
     
@@ -169,6 +169,12 @@ class ContractEndings(dd.Table):
     model = ContractEnding
     column_names = 'name *'
     order_by = ['name']
+    detail_layout = """
+    name
+    use_in_isip use_in_jobs is_success needs_date_ended
+    isip.ContractsByEnding 
+    jobs.ContractsByEnding
+    """
 
 #~ FUNCTION_ID_SECRETARY = 3
 #~ FUNCTION_ID_PRESIDENT = 16
@@ -663,7 +669,6 @@ class Contracts(ContractBaseTable):
       type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
       **ContractBaseTable.parameters)
     
-
 class MyContracts(Contracts):
 #~ class MyContracts(Contracts,mixins.ByUser):
     #~ column_names = "applies_from client *"
@@ -694,12 +699,15 @@ class ContractsByPolicy(Contracts):
     master_key = 'exam_policy'
     #~ column_names = 'applies_from applies_until user type *'
 
-        
+       
 class ContractsByType(Contracts):
     master_key = 'type'
     column_names = "applies_from client user *"
     order_by = ["applies_from"]
 
+class ContractsByEnding(Contracts):
+    master_key = 'ending'
+    
 
 
 def customize_siteconfig():

@@ -1406,7 +1406,7 @@ def register_it_handler(name,label,subname,itname):
     HANDLERS[name] = (label,subname,itname)
     
 register_it_handler('WorkPermits',_("Work Permits"),'WorkPermit','IT198')
-register_it_handler('PublicSecurityNumbers',_("Public Security Numbers"),'PublicSecurityNumbers','IT200')
+register_it_handler('PublicSecurityNumbers',_("Public Security Numbers"),'PublicSecurityNumber','IT200')
 register_it_handler('SpecialInfos',_("Special Infos"),'SpecialInfo','IT202')
 register_it_handler('RefugeeTypes',_("Refugee Types"),'RefugeeType','IT205')
 register_it_handler('StatusOfRefugee',_("Status of refugee"),'StatusOfRefugee','IT206')

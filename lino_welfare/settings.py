@@ -110,7 +110,7 @@ class Site(Site,cbss.SiteMixin):
         add('000', _("Anonymous"),                  '_ _ _ _ _ _', 
             name='anonymous', readonly=True,authenticated=False)
         add('100', _("Integration Agent"),          'U U U U _ _')
-        add('110', _("Integration Agent (Senior)"), 'U M M U _ _')
+        add('110', _("Integration Agent (Manager)"),'U M M U _ _')
         add('200', _("Newcomers consultant"),       'U U _ U U _')
         add('300', _("Debts consultant"),           'U U _ _ _ U')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)

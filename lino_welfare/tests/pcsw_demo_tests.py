@@ -211,6 +211,14 @@ class DemoTest(RemoteAuthTestCase):
         #~ result = self.check_json_result(response,'',url)
 
 
+        """
+        All demo requests should have at least one row of result.
+        This test
+        """
+        ses = settings.SITE.login('rolf')
+        for obj in cbss.RetrieveTIGroupsRequest.objects.all():
+            msg = "%s has no result" % obj
+            self.assertNotEqual(obj.Result(ses).get_total_count(),0,msg)
 
 
 

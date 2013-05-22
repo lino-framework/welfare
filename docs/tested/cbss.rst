@@ -40,7 +40,7 @@ Printing a Tx25
 -----------------
 
 >>> from pprint import pprint
->>> pprint(ses.run(obj.print_action)) #doctest: +NORMALIZE_WHITESPACE
+>>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'open_url': u'/media/userdocs/appyodt/cbss.RetrieveTIGroupsRequest-1.odt',
  'success': True}
 

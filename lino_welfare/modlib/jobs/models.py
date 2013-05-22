@@ -324,8 +324,10 @@ class Contract(isip.ContractBase):
     
     
     class Meta:
-        verbose_name = _("Job Contract")
-        verbose_name_plural = _('Job Contracts')
+        #~ verbose_name = _("Job Contract")
+        #~ verbose_name_plural = _('Job Contracts')
+        verbose_name = _("Art.60§7 contract")
+        verbose_name_plural = _('Art.60§7 contracts')
         
     type = models.ForeignKey("jobs.ContractType",
         related_name="%(app_label)s_%(class)s_set_by_type",
@@ -498,7 +500,7 @@ class Contract(isip.ContractBase):
         """
         Here's how to override the default verbose_name of a field.
         """
-        Contract.user.verbose_name=_("responsible (DSBE)")
+        Contract.user.verbose_name=_("responsible (IS)")
         #~ resolve_field('jobs.Contract.user').verbose_name=_("responsible (DSBE)")
         #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
         cls.PRINTABLE_FIELDS = dd.fields_list(cls,
@@ -581,6 +583,10 @@ class ContractsByType(Contracts):
     master_key = 'type'
     column_names = "applies_from client job user *"
     order_by = ["applies_from"]
+    
+class ContractsByEnding(Contracts):
+    master_key = 'ending'
+    
 
 class ContractsByJob(Contracts):
     column_names = 'client applies_from applies_until user type *'
@@ -1474,7 +1480,8 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
         )
 
-MODULE_LABEL = _("Jobs")
+#~ MODULE_LABEL = _("Jobs")
+#~ MODULE_LABEL = _("Art.60§7")
 
 def setup_main_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.user:

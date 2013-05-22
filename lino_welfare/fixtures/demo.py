@@ -251,7 +251,7 @@ def objects():
     contractType = Instantiator(isip.ContractType,"ref",
       exam_policy=1,
       build_method='appypdf',template=u'vse.odt').build
-    yield contractType("vsea",**babel_values('name',
+    yield contractType("vsea",needs_study_type=True,**babel_values('name',
           de=u"VSE Ausbildung",
           fr=u"VSE Ausbildung",
           en=u"VSE Ausbildung",
@@ -266,7 +266,7 @@ def objects():
           fr=u"VSE Lehre",
           en=u"VSE Lehre",
           ))
-    yield contractType("vsed",**babel_values('name',
+    yield contractType("vsed",needs_study_type=True,**babel_values('name',
           de=u"VSE Vollzeitstudium",
           fr=u"VSE Vollzeitstudium",
           en=u"VSE Vollzeitstudium",
@@ -737,6 +737,7 @@ def objects():
     #~ CTYPES = Cycler(*[x for x in ContractType.objects.all()])
     #~ JTYPES = Cycler(*[x for x in JobType.objects.all()])
     JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
+    STUDY_TYPES = Cycler(isip.StudyType.objects.all())
     JTYPES = Cycler(jobs.JobType.objects.all())
     
     PROVIDERS = Cycler(jobs.JobProvider.objects.all())
@@ -922,6 +923,7 @@ def objects():
         
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
     AGENTS_SCATTERED = Cycler(alicia,hubert,melanie,caroline, hubert,melanie, hubert, melanie)
+    ENDINGS = Cycler(pcsw.CoachingEnding.objects.all())
     #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     for client in pcsw.Client.objects.all():
     #~ for i in range(30):
@@ -943,6 +945,7 @@ def objects():
                     kw.update(start_date=settings.SITE.demo_date(a))
                 if b is not None:
                     kw.update(end_date=settings.SITE.demo_date(b))
+                    kw.update(ending=ENDINGS.pop())
                 yield pcsw.Coaching(**kw)
                 
     for i,p in enumerate(pcsw.Partner.objects.all()):
@@ -950,21 +953,33 @@ def objects():
             p.is_obsolete = True
             p.save()
 
+    NORMAL_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=False))
+    PREMATURE_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
     #~ jobs_contract = Instantiator('jobs.Contract').build
     for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         af = coaching.start_date or settings.SITE.demo_date(-600+i*40)
         kw = dict(applies_from=af,client=coaching.client,user=coaching.user)
         if i % 2:
-            yield jobs.Contract(
+            ctr = jobs.Contract(
                 type=JOBS_CONTRACT_TYPES.pop(),
                 duration=JOBS_CONTRACT_DURATIONS.pop(),
                 job=JOBS.pop(),**kw)
         else:
             #~ af = settings.SITE.demo_date(-100+i*7)
-            yield isip.Contract(type=ISIP_CONTRACT_TYPES.pop(),
-                #~ applies_from=af,
+            ct = ISIP_CONTRACT_TYPES.pop()
+            if ct.needs_study_type:
+                kw.update(study_type=STUDY_TYPES.pop())
+            ctr = isip.Contract(type=ct,
                 applies_until=af+datetime.timedelta(days=ISIP_DURATIONS.pop()),**kw)
+        if af is not None and af > settings.SITE.demo_date(-14):
+            if i % 5:
+                ctr.ending = PREMATURE_CONTRACT_ENDINGS.pop()
+                ctr.date_ended = af+datetime.timedelta(days=14)
+            else:
+                if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
+                    ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
+        yield ctr
                 
 
 #~ print "20121010 pcsw.fixtures.demo has been imported"

@@ -10,7 +10,9 @@
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
 ## GNU General Public License for more details.
 ## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+
+from __future__ import unicode_literals
 
 
 from django.contrib.contenttypes.models import ContentType
@@ -29,6 +31,9 @@ Company = resolve_model('contacts.Company')
 ExclusionType = resolve_model('pcsw.ExclusionType')
 
 #~ from lino.modlib.properties import models as properties 
+
+ContractEnding = resolve_model('isip.ContractEnding')
+
 
 def objects():
   
@@ -266,6 +271,12 @@ def objects():
       fr=u"Autre aide sociale",
       en=u"Autre aide sociale",
       ))
+      
+      
+    yield ContractEnding(name=_("Normal"))
+    yield ContractEnding(name=_("Alcool"),needs_date_ended=True)
+    yield ContractEnding(name=_("Santé"),needs_date_ended=True)
+    yield ContractEnding(name=_("Force majeure"),needs_date_ended=True)
     
     I = Instantiator('ui.HelpText','content_type field help_text').build
     
