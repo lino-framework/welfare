@@ -1277,7 +1277,9 @@ class Client(Person):
 
     @dd.displayfield(_("Coaches"))
     def coaches(self,ar):
-        items = [unicode(obj.user) for obj in self.get_coachings(datetime.date.today())]
+        today = datetime.date.today()
+        period = (today,today)
+        items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
 
 
