@@ -1236,6 +1236,7 @@ class JobsOverview(dd.EmptyTable):
         #~ time.sleep(5)
         #~ today = self.date or datetime.date.today()
         today = ar.param_values.date or datetime.date.today()
+        period = (today,today)
         html = ''
         rows = []
           
@@ -1261,12 +1262,12 @@ class JobsOverview(dd.EmptyTable):
                             working.append(ct)
                             
                 qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.active)
-                qs = pcsw.only_coached_on(qs,today,'person')
+                qs = pcsw.only_coached_on(qs,period,'person')
                 for cand in qs:
                     candidates.append(cand)
                     
                 qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.probation)
-                qs = pcsw.only_coached_on(qs,today,'person')
+                qs = pcsw.only_coached_on(qs,period,'person')
                 for cand in qs:
                     probation.append(cand)
                     
@@ -1352,6 +1353,7 @@ class JobsOverviewByType(Jobs):
         data_rows = self.get_request_queryset(ar)
         
         today = ar.param_values.date or datetime.date.today()
+        period = (today,today)
         
         def UL(items):
             #~ return E.ul(*[E.li(i) for i in items])
@@ -1389,7 +1391,7 @@ class JobsOverviewByType(Jobs):
     
             candidates = []
             qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.active)
-            qs = pcsw.only_coached_on(qs,today,'person')
+            qs = pcsw.only_coached_on(qs,period,'person')
             for cand in qs:
                 candidates.append(cand)
             if candidates:
@@ -1403,7 +1405,7 @@ class JobsOverviewByType(Jobs):
                     
             probation = []
             qs = job.candidature_set.order_by('date_submitted').filter(state=CandidatureStates.probation)
-            qs = pcsw.only_coached_on(qs,today,'person')
+            qs = pcsw.only_coached_on(qs,period,'person')
             for cand in qs:
                 probation.append(cand)
             if probation:

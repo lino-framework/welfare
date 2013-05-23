@@ -241,6 +241,29 @@ add('17', _("Foreigner card F"),"foreigner_f")
 add('18', _("Foreigner card F+"),"foreigner_f_plus")
 
 
+class ClientEvents(dd.ChoiceList):
+    verbose_name = _("Client event")
+    verbose_name_plural = _("Client events")
+add = ClientEvents.add_item
+add('10', _("Coached"),'coached')
+add('20', _("Dispense"),'dispense')
+add('30', _("Exclusion"),'exclusion')
+add('40', _("Note"),'note')
+#~ add('20', _("Started"),'started')
+#~ add('30', _("Ended"),'ended')
+
+class CoachingEvents(dd.ChoiceList):
+    verbose_name = _("Coaching event")
+    verbose_name_plural = _("Coaching events")
+add = CoachingEvents.add_item
+add('10', _("Started"),'started')
+add('20', _("Active"),'active')
+add('30', _("Ended"),'ended')
+
+
+
+
+
 class ImportedFields(object):
     _imported_fields = set()
     
@@ -1609,13 +1632,15 @@ def only_coached_on(qs,today,join=None):
     return qs.filter(only_active_coachings_filter(today,n)).distinct()
 
 def only_active_coachings_filter(today,prefix=''):
+    assert len(today) == 2
     return Q(
         #~ Q(**{n+'__end_date__isnull':False}) | Q(**{n+'__start_date__isnull':False}),
-        Q(**{prefix+'end_date__isnull':True})  | Q(**{prefix+'end_date__gte':today}),
-        Q(**{prefix+'start_date__lte':today}))
+        Q(**{prefix+'end_date__isnull':True})  | Q(**{prefix+'end_date__gte':today[0]}),
+        Q(**{prefix+'start_date__lte':today[1]}))
         #~ Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':today}))
 
 def add_coachings_filter(qs,user,today,primary):
+    assert today is None or len(today) == 2
     if not (user or today or primary):
         return qs
     flt = Q()
@@ -1628,6 +1653,9 @@ def add_coachings_filter(qs,user,today,primary):
     return qs.filter(flt).distinct()
 
 
+def daterange_text(a,b):
+    return dd.dtos(a)+"-"+dd.dtos(b)
+    
 class Clients(Persons):
     #~ debug_permissions = True # '20120925'
     title = _("All Clients")
@@ -1661,10 +1689,14 @@ Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality = models.ForeignKey(countries.Country,blank=True,null=True,
             verbose_name=_("Nationality")),
-        coached_on = models.DateField(_("Coached on"),
-            blank=True,null=True,help_text=u"""\
-Nur Klienten, die zu diesem Datum effektiv begleitet waren 
-(d.h. die mindestens eine aktive Begleitung an diesem Datum haben)"""),
+            
+        start_date = models.DateField(_("Period from"),
+            blank=True,null=True,
+            help_text="""Date début de la période observée"""),
+        end_date = models.DateField(_("until"),
+            blank=True,null=True,
+            help_text="""Date fin de la période observée"""),
+        client_event = ClientEvents.field(blank=True,default=ClientEvents.coached),
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
@@ -1673,8 +1705,8 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         **Persons.parameters)
     params_layout = """
-    aged_from aged_to gender also_obsolete
-    client_state coached_by and_coached_by coached_on only_primary nationality
+    aged_from aged_to gender nationality also_obsolete 
+    client_state coached_by and_coached_by start_date end_date client_event only_primary 
     """
     
             
@@ -1686,15 +1718,39 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
             
+        ce = ar.param_values.client_event
+        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+            period = None
+        else:
+            period = (ar.param_values.start_date, ar.param_values.end_date)
+            
         qs = add_coachings_filter(qs,
             ar.param_values.coached_by,
-            ar.param_values.coached_on,
+            period,
             ar.param_values.only_primary)
         if ar.param_values.and_coached_by:
             qs = add_coachings_filter(qs,
                 ar.param_values.and_coached_by,
-                ar.param_values.coached_on,
+                period,
                 False)
+            
+        if period is not None and ce is not None:
+            if ce == ClientEvents.coached:
+                pass
+            elif ce == ClientEvents.dispense:
+                qs = qs.filter(
+                    dispense__end_date__gte=period[0],
+                    dispense__start_date__lte=period[1]).distinct()
+            elif ce == ClientEvents.exclusion:
+                qs = qs.filter(
+                    exclusion__excluded_until__gte=period[0],
+                    exclusion__excluded_from__lte=period[1]).distinct()
+            elif ce == ClientEvents.note:
+                qs = qs.filter(
+                    notes_note_set_by_project__date__gte=period[0],
+                    notes_note_set_by_project__date__lte=period[1]).distinct()
+            else:
+                raise Warning(repr(ce))
             
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
@@ -1703,9 +1759,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             qs = qs.filter(nationality__exact=ar.param_values.nationality)
         today = datetime.date.today()
         if ar.param_values.aged_from:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__gte=today-datetime.timedelta(days=search.aged_from*365))
-            #~ qs = qs.filter(q1|q2)
             min_date = today - datetime.timedelta(days=ar.param_values.aged_from*365)
             qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
             #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
@@ -1731,18 +1784,23 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
             
+        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+            period = None
+        else:
+            period = daterange_text(ar.param_values.start_date, ar.param_values.end_date)
+            
         if ar.param_values.coached_by:
             s = unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
             if ar.param_values.and_coached_by:
                 s += " %s %s" % (unicode(_('and')),ar.param_values.and_coached_by)
                 
-            if ar.param_values.coached_on:
+            if period:
                 yield s \
-                    + _(' on %(date)s') % dict(date=dd.dtos(ar.param_values.coached_on))
+                    + _(' on %(date)s') % dict(date=period)
             else:
                 yield s
-        elif ar.param_values.coached_on:
-            yield unicode(self.parameters['coached_on'].verbose_name) + ' ' + dd.dtos(ar.param_values.coached_on)
+        elif period:
+            yield _("Coached %s") % period
         
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))
@@ -1797,9 +1855,9 @@ class IntegClients(Clients):
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
-    client_state coached_by and_coached_by coached_on only_primary also_obsolete 
-    aged_from aged_to gender nationality
-    language wanted_property group only_active 
+    client_state coached_by and_coached_by start_date end_date client_event 
+    aged_from aged_to gender nationality also_obsolete 
+    language wanted_property group only_active only_primary 
     """
     
     #~ @classmethod
@@ -1958,8 +2016,8 @@ class ClientsTest(Clients):
       **Clients.parameters)
     params_layout = """
     aged_from aged_to gender also_obsolete
-    client_state coached_by and_coached_by coached_on only_primary nationality
-    invalid_niss overlapping_contracts 
+    client_state coached_by and_coached_by start_date end_date client_event 
+    invalid_niss overlapping_contracts only_primary nationality
     """
     
     #~ params_layout = """invalid_niss overlapping_contracts coached_by"""
@@ -2091,14 +2149,16 @@ class UsersWithClients(dd.VirtualTable):
     def primary_clients(self,obj,ar):
         #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
         #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
+        t = datetime.date.today()
         return IntegClients.request(param_values=dict(
-            only_primary=True,coached_by=obj,coached_on=datetime.date.today()))
+            only_primary=True,coached_by=obj,start_date=t,end_date=t))
         
     @dd.requestfield(_("Active clients"))
     def active_clients(self,obj,ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
+        t = datetime.date.today()
         return IntegClients.request(param_values=dict(
-            only_active=True,coached_by=obj,coached_on=datetime.date.today()))
+            only_active=True,coached_by=obj,start_date=t,end_date=t))
 
 #~ @dd.receiver(dd.connection_created,weak=False)
 def on_connection_created(sender,**kw):
@@ -2118,7 +2178,7 @@ def on_connection_created(sender,**kw):
                 def func(self,obj,ar):
                     return IntegClients.request(
                         param_values=dict(group=pg,
-                            coached_by=obj,coached_on=today))
+                            coached_by=obj,start_date=today,end_date=today))
                 return func
             vf = dd.RequestField(w(pg),verbose_name=pg.name)
             self.add_virtual_field('G'+pg.ref_name,vf)
@@ -2697,37 +2757,105 @@ class Coachings(dd.Table):
     help_text = _("Liste des accompagnements.")
     model = Coaching
     
+    parameters = dict(
+        coached_by = models.ForeignKey(users.User,
+            blank=True,null=True,
+            verbose_name=_("Coached by"),help_text="""Nur Begleitungen dieses Benutzers."""),
+        and_coached_by = models.ForeignKey(users.User,
+            blank=True,null=True,
+            verbose_name=_("and by"),help_text="""... und auch Begleitungen dieses Benutzers."""),
+        start_date = models.DateField(_("Period from"),
+            #~ blank=True,null=True,
+            help_text="""Date début de la période observée"""),
+        end_date = models.DateField(_("until"),
+            #~ blank=True,null=True,
+            help_text="""Date fin de la période observée"""),
+        coaching_event = CoachingEvents.field(blank=True,default=CoachingEvents.active),
+        primary_coachings = dd.YesNo.field(_("Primary coachings"),
+            blank=True,help_text="""Accompagnements primaires."""),
+        coaching_type = models.ForeignKey(CoachingType,
+            blank=True,null=True,
+            help_text="""Nur Begleitungen dieses Dienstes."""),
+        ending = models.ForeignKey(CoachingEnding,
+            blank=True,null=True,
+            help_text="""Nur Begleitungen mit diesem Beendigungsgrund."""),
+        )
+    params_layout = """
+    start_date end_date coaching_event coached_by and_coached_by 
+    primary_coachings coaching_type ending 
+    """
+    params_panel_hidden = True
+    
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(Coachings,self).param_defaults(ar,**kw)
+        D = datetime.date
+        kw.update(start_date = D.today())
+        kw.update(end_date = D.today())
+        return kw
+        
+        
+    @classmethod
+    def get_request_queryset(self,ar):
+        qs = super(Coachings,self).get_request_queryset(ar)
+        coaches = []
+        for u in (ar.param_values.coached_by,ar.param_values.and_coached_by):
+            if u is not None:
+                coaches.append(u)
+        if len(coaches):
+            qs = qs.filter(user__in=coaches)
+            
+        ce = ar.param_values.coaching_event
+        if ce is not None:
+            if ar.param_values.start_date is None or ar.param_values.end_date is None:
+                raise Warning(_("Invalid query parameters"))
+            if ce == CoachingEvents.started:
+                qs = qs.filter(start_date__gte=ar.param_values.start_date)
+                qs = qs.filter(start_date__lte=ar.param_values.end_date)
+            elif ce == CoachingEvents.ended:
+                qs = qs.filter(end_date__isnull=False)
+                qs = qs.filter(end_date__gte=ar.param_values.start_date)
+                qs = qs.filter(end_date__lte=ar.param_values.end_date)
+            elif ce == CoachingEvents.active:
+                qs = qs.filter(start_date__lte=ar.param_values.end_date)
+                qs = qs.filter(Q(end_date__isnull=True) | Q(end_date__gte=ar.param_values.start_date))
+                
+        if ar.param_values.primary_coachings == dd.YesNo.yes:
+            qs = qs.filter(primary=True)
+        elif ar.param_values.primary_coachings == dd.YesNo.no:
+            qs = qs.filter(primary=False)
+        if ar.param_values.coaching_type is not None:
+            qs = qs.filter(type=ar.param_values.coaching_type)
+        if ar.param_values.ending is not None:
+            qs = qs.filter(ending=ar.param_values.ending)
+        return qs
+        
+
+    @classmethod
+    def get_title_tags(self,ar):
+        for t in super(Coachings,self).get_title_tags(ar):
+            yield t
+            
+        if ar.param_values.coached_by:
+            s = unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+            if ar.param_values.and_coached_by:
+                s += " %s %s" % (unicode(_('and')),ar.param_values.and_coached_by)
+                
+            yield s
+        
+        if ar.param_values.primary_coachings:
+            yield unicode(self.parameters['primary_coachings'].verbose_name)
+            
+    
     @classmethod
     def get_create_permission(self,ar):
         #~ logger.info("20121011 Coachings.get_create_permission()")
         if not ar.get_user().coaching_type:
             return 
         return super(Coachings,self).get_create_permission(ar)
-        
-    #~ @classmethod
-    #~ def create_instance(self,ar,**kw):
-        #~ logger.info("20121011 Coachings.create_instance()")
-        #~ if not ar.get_user().coaching_type:
-            #~ return 
-        #~ return super(Coachings,self).create_instance(ar,**kw)
     
     
-    #~ debug_permissions = True
-    #~ parameters = dict(
-        #~ type=dd.ForeignKey(CoachingType,null=True,blank=True),
-        #~ group=dd.ForeignKey(PersonGroup,blank=True,null=True),
-        #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
-        #~ )
-    #~ params_layout = "type group today"
     
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ qs = super(Coachings,self).get_request_queryset(ar)
-        #~ if ar.param_values.group:
-            #~ qs = qs.filter(project__group=ar.param_values.group)
-        #~ if ar.param_values.type:
-            #~ qs = qs.filter(type=ar.param_values.type)
-        #~ return qs
 
     
 class CoachingsByClient(Coachings):

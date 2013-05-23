@@ -10,6 +10,17 @@ The final truth about what's going on is only
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
 
+Version 1.1.6 (coming)
+============================================
+
+Statistik DSBE:
+
+- Neues Listing "Tätigkeitsbericht"
+- Coachings hat jetzt ein Parameter-Panel.
+
+
+
+
 Version 1.1.5 (released :blogref:`20130520`)
 ============================================
 

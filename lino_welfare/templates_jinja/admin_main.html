@@ -22,10 +22,10 @@
 
 {% set T = settings.SITE.modules.pcsw.UsersWithClients %}
 <h2>{{T.label}}</h2>
-{{ar.show(T)}}
+{{E.tostring(ar.show(T))}}
 
 <h2>{{_('Upcoming reminders')}}</h2>
-<table bgcolor="#eeeee" padding="2pt" width="100%"><tr><td>
+<table bgcolor="#eeeeee" padding="2pt" width="100%"><tr><td>
 {{settings.SITE.reminders_as_html(ar,days_forward=30,
             max_items=10,before='<ul><li>',
             separator='</li><li>',

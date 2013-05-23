@@ -489,34 +489,52 @@ class ContractBaseTable(dd.Table):
       show_active = models.BooleanField(_("active contracts"),default=True),
       show_coming = models.BooleanField(_("coming contracts"),default=True),
       today = models.DateField(_("on"),blank=True,default=datetime.date.today),
+      ending_success = dd.YesNo.field(_("Successfully ended"),
+          blank=True,help_text="""Contrats terminés avec succès."""),
+      ending = models.ForeignKey(ContractEnding,
+          blank=True,null=True,
+          help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
+      
     )
     
-    params_layout = """user type show_past show_active show_coming today"""
+    params_layout = """
+    user type show_past show_active show_coming today 
+    ending_success ending
+    """
     params_panel_hidden = True
     
     @classmethod
-    def get_request_queryset(cls,rr):
-        #~ logger.info("20120608.get_request_queryset param_values = %r",rr.param_values)
-        qs = super(ContractBaseTable,cls).get_request_queryset(rr)
-        #~ user = rr.param_values.get('user',None)
-        if rr.param_values.user:
-            qs = qs.filter(user=rr.param_values.user)
-        if rr.param_values.type:
-            qs = qs.filter(type=rr.param_values.type)
-        today = rr.param_values.today or datetime.date.today()
-        #~ today = rr.param_values.get('today',None) or datetime.date.today()
-        #~ show_active = rr.param_values.get('show_active',True)
+    def get_request_queryset(cls,ar):
+        #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
+        qs = super(ContractBaseTable,cls).get_request_queryset(ar)
+        #~ user = ar.param_values.get('user',None)
+        if ar.param_values.user:
+            qs = qs.filter(user=ar.param_values.user)
+        if ar.param_values.type:
+            qs = qs.filter(type=ar.param_values.type)
+        today = ar.param_values.today or datetime.date.today()
+        #~ today = ar.param_values.get('today',None) or datetime.date.today()
+        #~ show_active = ar.param_values.get('show_active',True)
         if today:
-            if not rr.param_values.show_active:
+            if not ar.param_values.show_active:
                 flt = range_filter(today,'applies_from','applies_until')
                 #~ logger.info("20120114 flt = %r",flt)
                 qs = qs.exclude(flt)
-            #~ show_past = rr.param_values.get('show_past',True)
-            if not rr.param_values.show_past:
+            #~ show_past = ar.param_values.get('show_past',True)
+            if not ar.param_values.show_past:
                 qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
-            #~ show_coming = rr.param_values.get('show_coming',True)
-            if not rr.param_values.show_coming:
+            #~ show_coming = ar.param_values.get('show_coming',True)
+            if not ar.param_values.show_coming:
                 qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
+                
+        if ar.param_values.ending_success == dd.YesNo.yes:
+            qs = qs.filter(ending__isnull=False,ending__success=True)
+        elif ar.param_values.ending_success == dd.YesNo.no:
+            qs = qs.filter(ending__isnull=False,ending__success=False)
+            
+        if ar.param_values.ending is not None:
+            qs = qs.filter(ending=ar.param_values.ending)
+            
         return qs
     
     

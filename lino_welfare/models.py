@@ -681,6 +681,93 @@ def unused_dashboard(ar):
 #~ settings.SITE.dashboard = dashboard
 
 
+class CompareRequestsTable(dd.VirtualTable):
+    label = _("Evolution générale")
+    auto_fit_column_widths = True
+    column_names = "description old_value new_value"
+    slave_grid_format = 'html'
+    hide_sums = True
+    
+    @dd.displayfield(_("Description"))
+    def description(self,row,ar): return row[0]
+        
+    @dd.requestfield(_("Initial value"))
+    def old_value(self,row,ar): return row[1]
+
+    @dd.requestfield(_("Final value"))
+    def new_value(self,row,ar): return row[2]
+
+    @classmethod
+    def get_data_rows(self,ar):
+        rows = []
+        pv = ar.master_instance
+        if pv is None: return rows
+        dates = (pv.start_date,pv.end_date)
+        def add(f,text):
+            cells = [text]
+            for d in dates:
+                cells.append(f(d))
+            rows.append(cells)
+
+        def f(d): 
+            return pcsw.Clients.request(param_values=dict(start_date=d,end_date=d,
+                client_event=pcsw.ClientEvents.coached))
+        add(f,_("Coached clients"))
+        def f(d): return isip.Contracts.request(param_values=dict(
+            show_active=True,today=d,show_past=False,show_coming=False))
+        add(f,_("Active ISIPs"))
+        def f(d): return jobs.Contracts.request(param_values=dict(
+            show_active=True,today=d,show_past=False,show_coming=False))
+        add(f,_("Active Art60§7's"))
+        return rows
+
+class PeriodicNumbers(dd.VirtualTable):
+    label = _("Indicateurs d'activité")
+    auto_fit_column_widths = True
+    column_names = "description number"
+    slave_grid_format = 'html'
+    hide_sums = True
+    
+    @dd.displayfield(_("Description"))
+    def description(self,row,ar): return row[0]
+        
+    @dd.requestfield(_("Number"))
+    def number(self,row,ar): return row[1]
+
+    @classmethod
+    def get_data_rows(self,ar):
+        rows = []
+        mi = ar.master_instance
+        if mi is None: return rows
+        #~ dr = (mi.start_date,mi.end_date) # date range
+        def add(f,text):
+            rows.append([text,f()])
+
+        def f(): 
+            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            pv.update(coaching_event=pcsw.CoachingEvents.started)
+            return pcsw.Coachings.request(param_values=pv)
+        add(f,_("New coachings started"))
+        def f(): 
+            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            pv.update(coaching_event=pcsw.CoachingEvents.active)
+            return pcsw.Coachings.request(param_values=pv)
+        add(f,_("Active coachings"))
+        def f(): 
+            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            pv.update(coaching_event=pcsw.CoachingEvents.ended)
+            return pcsw.Coachings.request(param_values=pv)
+        add(f,_("Ended coachings"))
+        
+        def f(): 
+            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            pv.update(client_event=pcsw.ClientEvents.coached)
+            return pcsw.Clients.request(param_values=pv)
+        add(f,_("Coached clients"))
+        
+        return rows
+
+
 class ActivityReport(dd.EmptyTable):
     """
     Welche (Wieviele) Verträge
@@ -696,7 +783,7 @@ class ActivityReport(dd.EmptyTable):
     """
     required = dd.required(user_level='manager')
     label = _("Activity Report") 
-    detail_layout = "t1 t2"
+    detail_layout = "CompareRequestsTable PeriodicNumbers t2"
     
     parameters = dict(
       start_date = models.DateField(verbose_name=_("Period from")),
@@ -707,15 +794,6 @@ class ActivityReport(dd.EmptyTable):
       
     params_layout = "start_date end_date include_jobs include_isip"
     #~ params_panel_hidden = True
-    
-    #~ @classmethod
-    #~ def create_instance(self,ar,**kw):
-        #~ kw.update(today = ar.param_values.today or datetime.date.today())
-        #~ if ar.param_values.job_type:
-            #~ kw.update(jobtypes = ar.param_values.job_type)
-        #~ else:
-            #~ kw.update(jobtypes = jobs.JobType.objects.all())
-        #~ return super(ActivityReport,self).create_instance(ar,**kw)
 
     @classmethod
     def param_defaults(self,ar,**kw):
@@ -723,33 +801,13 @@ class ActivityReport(dd.EmptyTable):
         kw.update(start_date = D(D.today().year,1,1))
         kw.update(end_date = D(D.today().year,12,31))
         return kw
-        
-    @dd.virtualfield(dd.HtmlBox(_("First tab")))
-    def t1(cls,self,ar):
-        html = []
-        dates = (ar.param_values.start_date,ar.param_values.end_date)
-        rows = []
-        cells = [''] + [dd.dtos(d) for d in dates]
-        rows.append(E.tr(*[E.td(c) for c in cells]))
-        def add(f,text):
-            cells = [text]
-            for d in dates:
-                sar = f(d)
-                cells.append(ar.href_to_request(sar,str(sar.get_total_count())))
-            rows.append(E.tr(*[E.td(c) for c in cells]))
-        def f(d): return pcsw.Clients.request(param_values=dict(coached_on=d))
-        add(f,_("Active clients"))
-        def f(d): return isip.Contracts.request(param_values=dict(show_active=True,today=d,show_past=False,show_coming=False))
-        add(f,_("Active ISIPs"))
-        def f(d): return jobs.Contracts.request(param_values=dict(show_active=True,today=d,show_past=False,show_coming=False))
-        add(f,_("Active Art60§7's"))
-        html.append(E.table(*rows))
-        return E.div(*html)
 
     @dd.virtualfield(dd.HtmlBox(_("Second tab")))
     def t2(cls,self,ar):
         html = []
-        html.append(E.p("Foo"))
-        html.append(E.p("Bar"))
+        html.append(E.h3(pcsw.CoachingEndings.label))
+        html.append(ar.show(pcsw.CoachingEndings))
+        #~ html.append(E.p("Foo"))
+        #~ html.append(E.p("Bar"))
         return E.div(*html)
 
