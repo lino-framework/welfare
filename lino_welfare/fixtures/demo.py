@@ -627,10 +627,10 @@ def objects():
             else:
                 client.client_state=pcsw.ClientStates.former
                 
-            dblogger.info("20130523 a %s",client.birth_date)
+            #~ dblogger.info("20130523 a %s",client.birth_date)
             client.full_clean()
             client.save()
-            dblogger.info("20130523 b %s",client.birth_date)
+            #~ dblogger.info("20130523 b %s",client.birth_date)
             #~ if not client.birth_date: raise Exception(20130523)
             
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))

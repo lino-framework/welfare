@@ -1698,7 +1698,7 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         end_date = models.DateField(_("until"),
             blank=True,null=True,
             help_text="""Date fin de la période observée"""),
-        client_event = ClientEvents.field(blank=True,default=ClientEvents.coached),
+        observed_event = ClientEvents.field(blank=True,default=ClientEvents.coached),
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
@@ -1708,7 +1708,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         **Persons.parameters)
     params_layout = """
     aged_from aged_to gender nationality also_obsolete 
-    client_state coached_by and_coached_by start_date end_date client_event only_primary 
+    client_state coached_by and_coached_by start_date end_date observed_event only_primary 
     """
     
             
@@ -1720,7 +1720,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
             
-        ce = ar.param_values.client_event
+        ce = ar.param_values.observed_event
         if ar.param_values.start_date is None or ar.param_values.end_date is None:
             period = None
         else:
@@ -1857,7 +1857,7 @@ class IntegClients(Clients):
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
     #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
-    client_state coached_by and_coached_by start_date end_date client_event 
+    client_state coached_by and_coached_by start_date end_date observed_event 
     aged_from aged_to gender nationality also_obsolete 
     language wanted_property group only_active only_primary 
     """
@@ -2018,7 +2018,7 @@ class ClientsTest(Clients):
       **Clients.parameters)
     params_layout = """
     aged_from aged_to gender also_obsolete
-    client_state coached_by and_coached_by start_date end_date client_event 
+    client_state coached_by and_coached_by start_date end_date observed_event 
     invalid_niss overlapping_contracts only_primary nationality
     """
     
@@ -2251,9 +2251,55 @@ class Activities(dd.Table):
 #~ class ActivitiesByCompany(Activities):
     #~ master_key = 'activity'
     
-#
-# EXCLUSION TYPES (Sperrgründe)
-#
+
+class DispenseReason(dd.BabelNamed,dd.Sequenced):
+    class Meta:
+        verbose_name = _("Dispense reason")
+        verbose_name_plural = _('Dispense reasons')
+        
+    #~ name = models.CharField(_("designation"),max_length=200)
+    #~ 
+    #~ def __unicode__(self):
+        #~ return unicode(self.name)
+        
+class DispenseReasons(dd.Table):
+    help_text = _("A list of reasons for being dispensed")
+    required=dict(user_groups = ['integ'],user_level='manager')
+    model = DispenseReason
+    column_names = 'seqno name *'
+    order_by = ['seqno']
+
+    
+class Dispense(dd.Model):
+    class Meta:
+        verbose_name = _("Dispense")
+        verbose_name_plural = _("Dispenses")
+    allow_cascaded_delete = ['client']
+    client = dd.ForeignKey(Client)
+    reason = dd.ForeignKey(DispenseReason,verbose_name=_("Reason"))
+    remarks = models.TextField(_("Remark"),blank=True) 
+    start_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("Dispensed from"))
+    end_date = models.DateField(
+        blank=True,null=True,
+        verbose_name=_("until"))
+    
+
+class Dispenses(dd.Table):
+    order_by = ['start_date']
+    help_text = _("Liste de dispenses")
+    required=dict(user_groups = ['integ'],user_level='manager')
+    model = Dispense
+
+class DispensesByClient(Dispenses):
+    master_key = 'client'
+    column_names = 'start_date end_date reason remarks:10'
+    hidden_columns = 'id'
+    auto_fit_column_widths = True
+
+
+
 class ExclusionType(dd.Model):
     class Meta:
         verbose_name = _("Exclusion Type")
@@ -2273,9 +2319,7 @@ class ExclusionTypes(dd.Table):
     model = ExclusionType
     #~ label = _('Exclusion Types')
     
-#
-# EXCLUSIONS (Arbeitslosengeld-Sperrungen)
-#
+
 class Exclusion(dd.Model):
     class Meta:
         verbose_name = _("exclusion")
@@ -2289,7 +2333,7 @@ class Exclusion(dd.Model):
         verbose_name=_("Excluded from"))
     excluded_until = models.DateField(blank=True,null=True,
         verbose_name=_("until"))
-    remark = models.CharField(max_length=200,blank=True,verbose_name=_("Remark"))
+    remark = models.CharField(_("Remark"),max_length=200,blank=True)
     
     def __unicode__(self):
         s = unicode(self.type)
@@ -2309,7 +2353,8 @@ class ExclusionsByClient(Exclusions):
     required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
-    column_names = 'excluded_from excluded_until type remark'
+    column_names = 'excluded_from excluded_until type remark:10'
+    auto_fit_column_widths = True
 
 
 
@@ -2436,52 +2481,6 @@ class ContactsByClient(ClientContacts):
 
 
 
-
-class DispenseReason(dd.BabelNamed,dd.Sequenced):
-    class Meta:
-        verbose_name = _("Dispense reason")
-        verbose_name_plural = _('Dispense reasons')
-        
-    #~ name = models.CharField(_("designation"),max_length=200)
-    #~ 
-    #~ def __unicode__(self):
-        #~ return unicode(self.name)
-        
-class DispenseReasons(dd.Table):
-    help_text = _("A list of reasons for being dispensed")
-    required=dict(user_groups = ['integ'],user_level='manager')
-    model = DispenseReason
-    column_names = 'seqno name *'
-    order_by = ['seqno']
-
-    
-class Dispense(dd.Model):
-    class Meta:
-        verbose_name = _("Dispense")
-        verbose_name_plural = _("Dispenses")
-    allow_cascaded_delete = ['client']
-    client = dd.ForeignKey(Client)
-    reason = dd.ForeignKey(DispenseReason)
-    remarks = models.TextField(_("Remarks"),blank=True) 
-    start_date = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("Dispensed from"))
-    end_date = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("until"))
-    
-
-class Dispenses(dd.Table):
-    order_by = ['start_date']
-    help_text = _("Liste de dispenses")
-    required=dict(user_groups = ['integ'],user_level='manager')
-    model = Dispense
-
-class DispensesByClient(Dispenses):
-    master_key = 'client'
-    column_names = 'start_date end_date reason remarks *'
-    hidden_columns = 'id'
-    auto_fit_column_widths = True
 
 #~ class CoachingStates(dd.Workflow):
     #~ """Lifecycle of a :class:`Coaching`."""
@@ -2772,7 +2771,7 @@ class Coachings(dd.Table):
         end_date = models.DateField(_("until"),
             #~ blank=True,null=True,
             help_text="""Date fin de la période observée"""),
-        coaching_event = CoachingEvents.field(blank=True,default=CoachingEvents.active),
+        observed_event = CoachingEvents.field(blank=True,default=CoachingEvents.active),
         primary_coachings = dd.YesNo.field(_("Primary coachings"),
             blank=True,help_text="""Accompagnements primaires."""),
         coaching_type = models.ForeignKey(CoachingType,
@@ -2783,18 +2782,18 @@ class Coachings(dd.Table):
             help_text="""Nur Begleitungen mit diesem Beendigungsgrund."""),
         )
     params_layout = """
-    start_date end_date coaching_event coached_by and_coached_by 
+    start_date end_date observed_event coached_by and_coached_by 
     primary_coachings coaching_type ending 
     """
     params_panel_hidden = True
     
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(Coachings,self).param_defaults(ar,**kw)
-        D = datetime.date
-        kw.update(start_date = D.today())
-        kw.update(end_date = D.today())
-        return kw
+    #~ @classmethod
+    #~ def param_defaults(self,ar,**kw):
+        #~ kw = super(Coachings,self).param_defaults(ar,**kw)
+        #~ D = datetime.date
+        #~ kw.update(start_date = D.today())
+        #~ kw.update(end_date = D.today())
+        #~ return kw
         
         
     @classmethod
@@ -2807,10 +2806,12 @@ class Coachings(dd.Table):
         if len(coaches):
             qs = qs.filter(user__in=coaches)
             
-        ce = ar.param_values.coaching_event
-        if ce is not None:
-            if ar.param_values.start_date is None or ar.param_values.end_date is None:
-                raise Warning(_("Invalid query parameters"))
+        ce = ar.param_values.observed_event
+        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+            period = None
+        else:
+            period = (ar.param_values.start_date, ar.param_values.end_date)
+        if ce is not None and period is not None:
             if ce == CoachingEvents.started:
                 qs = qs.filter(start_date__gte=ar.param_values.start_date)
                 qs = qs.filter(start_date__lte=ar.param_values.end_date)

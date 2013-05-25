@@ -56,6 +56,7 @@ from lino import mixins
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config
 from lino.core import dbutils
+from lino.core.actors import Actor
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
 #~ from north import babel
@@ -97,6 +98,7 @@ users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
+courses = dd.resolve_app('courses')
 #~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
 
@@ -305,6 +307,7 @@ def setup_reports_menu(site,ui,profile,m):
     m.add_action(site.modules.pcsw.ClientsTest)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     m.add_action(ActivityReport)
+    m.add_action(ActivityReport1) # old version
         
 
 
@@ -702,23 +705,28 @@ class CompareRequestsTable(dd.VirtualTable):
         rows = []
         pv = ar.master_instance
         if pv is None: return rows
-        dates = (pv.start_date,pv.end_date)
-        def add(f,text):
-            cells = [text]
-            for d in dates:
-                cells.append(f(d))
+        def add(A,oe=None,**kw):
+        #~ def add(A,**kw):
+            if oe is None:
+                cells = [A.label]
+            else:
+                cells = ["%s (%s)" % (A.label,oe.text)]
+            #~ cells = ["%s %s" % (A.model._meta.verbose_name_plural,oe.text)]
+            for d in (pv.start_date,pv.end_date):
+                pva = dict(start_date=d,end_date=d,**kw)
+                if oe is not None:
+                    pva.update(observed_event=oe)
+                ar = A.request(param_values=pva)
+                cells.append(ar)
             rows.append(cells)
+            
+        add(pcsw.Clients,pcsw.ClientEvents.coached)
+        add(isip.Contracts,isip.ContractEvents.active)
+        #~ add(isip.Contracts,isip.ContractEvents.ended)
+        add(jobs.Contracts,isip.ContractEvents.active)
+        #~ add(jobs.Contracts,isip.ContractEvents.ended)
+        add(courses.PendingCourseRequests)
 
-        def f(d): 
-            return pcsw.Clients.request(param_values=dict(start_date=d,end_date=d,
-                client_event=pcsw.ClientEvents.coached))
-        add(f,_("Coached clients"))
-        def f(d): return isip.Contracts.request(param_values=dict(
-            show_active=True,today=d,show_past=False,show_coming=False))
-        add(f,_("Active ISIPs"))
-        def f(d): return jobs.Contracts.request(param_values=dict(
-            show_active=True,today=d,show_past=False,show_coming=False))
-        add(f,_("Active Art60§7's"))
         return rows
 
 class PeriodicNumbers(dd.VirtualTable):
@@ -739,36 +747,95 @@ class PeriodicNumbers(dd.VirtualTable):
         rows = []
         mi = ar.master_instance
         if mi is None: return rows
-        #~ dr = (mi.start_date,mi.end_date) # date range
-        def add(f,text):
-            rows.append([text,f()])
+        def add(A,oe):
+            cells = ["%s %s" % (A.model._meta.verbose_name_plural,oe.text)]
+            
+            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            pv.update(observed_event=oe)
+            ar = A.request(param_values=pv)
+            cells.append(ar)
+            rows.append(cells)
 
-        def f(): 
-            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-            pv.update(coaching_event=pcsw.CoachingEvents.started)
-            return pcsw.Coachings.request(param_values=pv)
-        add(f,_("New coachings started"))
-        def f(): 
-            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-            pv.update(coaching_event=pcsw.CoachingEvents.active)
-            return pcsw.Coachings.request(param_values=pv)
-        add(f,_("Active coachings"))
-        def f(): 
-            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-            pv.update(coaching_event=pcsw.CoachingEvents.ended)
-            return pcsw.Coachings.request(param_values=pv)
-        add(f,_("Ended coachings"))
+        add(pcsw.Coachings,pcsw.CoachingEvents.started)
+        add(pcsw.Coachings,pcsw.CoachingEvents.active)
+        add(pcsw.Coachings,pcsw.CoachingEvents.ended)
         
-        def f(): 
-            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-            pv.update(client_event=pcsw.ClientEvents.coached)
-            return pcsw.Clients.request(param_values=pv)
-        add(f,_("Coached clients"))
+        add(pcsw.Clients,pcsw.ClientEvents.coached)
+        
+        for A in (isip.Contracts,jobs.Contracts):
+            add(A,isip.ContractEvents.started)
+            add(A,isip.ContractEvents.active)
+            add(A,isip.ContractEvents.ended)
+            add(A,isip.ContractEvents.signed)
         
         return rows
 
+class VentilatingTable(dd.Table):
+    
+    ventilated_column_suffix = ':5'
+    
+    @dd.virtualfield(models.CharField(_("Description"),max_length=30))
+    def description(self,obj,ar):
+        return unicode(obj)
+                
+    @classmethod
+    def setup_columns(self):
+        self.column_names = 'description '
+        for i,vf in enumerate(self.get_ventilated_columns()):
+            self.add_virtual_field('vc'+str(i),vf)
+            self.column_names += ' ' + vf.name+self.ventilated_column_suffix
+            
+    
+    @classmethod
+    def get_ventilated_columns(self):
+        return []
+        
+        
+    
+class CoachingEndingsByUser(VentilatingTable,pcsw.CoachingEndings):
+    
+    label = _("Coaching endings by user")
+    
+    @classmethod
+    def get_ventilated_columns(self):
+        for u in settings.SITE.user_model.objects.exclude(profile=''):
+            label = unicode(u.username)
+            def w(user):
+                def func(self,obj,ar):
+                    mi = ar.master_instance
+                    if mi is None: return None
+                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                    pv.update(observed_event=pcsw.CoachingEvents.ended)
+                    pv.update(coached_by=user)
+                    pv.update(ending=obj)
+                    return pcsw.Coachings.request(param_values=pv)
+                return func
+            yield dd.RequestField(w(u),verbose_name=label)
+    
+   
+class CoachingEndingsByType(VentilatingTable,pcsw.CoachingEndings):
+    
+    label = _("Coaching endings by type")
+    
+    @classmethod
+    def get_ventilated_columns(self):
+        for ct in pcsw.CoachingType.objects.all():
+            label = unicode(ct)
+            def w(ct):
+                def func(self,obj,ar):
+                    mi = ar.master_instance
+                    if mi is None: return None
+                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                    pv.update(observed_event=pcsw.CoachingEvents.ended)
+                    pv.update(coaching_type=ct)
+                    pv.update(ending=obj)
+                    return pcsw.Coachings.request(param_values=pv)
+                return func
+            yield dd.RequestField(w(ct),verbose_name=label)
+    
+   
 
-class ActivityReport(dd.EmptyTable):
+class ActivityReport1(dd.EmptyTable):
     """
     Welche (Wieviele) Verträge
     
@@ -783,7 +850,6 @@ class ActivityReport(dd.EmptyTable):
     """
     required = dd.required(user_level='manager')
     label = _("Activity Report") 
-    detail_layout = "CompareRequestsTable PeriodicNumbers t2"
     
     parameters = dict(
       start_date = models.DateField(verbose_name=_("Period from")),
@@ -802,12 +868,54 @@ class ActivityReport(dd.EmptyTable):
         kw.update(end_date = D(D.today().year,12,31))
         return kw
 
+    detail_layout = "CompareRequestsTable PeriodicNumbers t2"
+    
     @dd.virtualfield(dd.HtmlBox(_("Second tab")))
     def t2(cls,self,ar):
         html = []
-        html.append(E.h3(pcsw.CoachingEndings.label))
-        html.append(ar.show(pcsw.CoachingEndings))
+        for A in (CoachingEndingsByUser,CoachingEndingsByType):
+            html.append(E.h3(A.label))
+            html.append(ar.show(A,master_instance=self))
         #~ html.append(E.p("Foo"))
         #~ html.append(E.p("Bar"))
         return E.div(*html)
 
+
+class ActivityReport(dd.Report):
+    
+    required = dd.required(user_level='manager')
+    label = _("Activity Report") 
+    
+    parameters = dict(
+      start_date = models.DateField(verbose_name=_("Period from")),
+      end_date = models.DateField(verbose_name=_("until")),
+      include_jobs = models.BooleanField(verbose_name=pcsw.JOBS_MODULE_LABEL),
+      include_isip = models.BooleanField(verbose_name=_("ISIP")),
+      )
+      
+    params_layout = "start_date end_date include_jobs include_isip"
+    #~ params_panel_hidden = True
+    
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        D = datetime.date
+        kw.update(start_date = D(D.today().year,1,1))
+        kw.update(end_date = D(D.today().year,12,31))
+        return kw
+    
+    @classmethod
+    def get_story(cls,self,ar):
+        yield E.h2(_("Introduction"))
+        yield E.p("Foo, bar and ",E.b("baz"))
+        yield E.h2(_("Indicateurs généraux"))
+        yield CompareRequestsTable
+        yield E.p('.')
+        yield PeriodicNumbers
+        yield E.h2(_("Causes d'arret des accompagnements"))
+        yield CoachingEndingsByUser
+        yield E.p('.')
+        yield CoachingEndingsByType
+        
+        yield E.h2(courses.PendingCourseRequests.label)
+        yield E.p("Voici une table complete:")
+        yield courses.PendingCourseRequests

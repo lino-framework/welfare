@@ -68,7 +68,6 @@ from lino.modlib.cal import models as cal
 #~ from lino.modlib.uploads.models import UploadsByPerson
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
-#~ from lino.core.dbutils import range_filter
 from lino.core import actions
 from lino.core.constants import _handle_attr_name
 

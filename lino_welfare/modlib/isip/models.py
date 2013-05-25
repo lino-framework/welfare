@@ -24,7 +24,7 @@ import cgi
 import datetime
 
 from django.db import models
-#~ from django.db.models import Q
+from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
@@ -34,7 +34,7 @@ from django.utils import translation
 
 
 from lino import dd
-from lino.utils import dblogger
+from lino.utils import dblogger as logger
 #~ from lino.utils import printable
 from lino import mixins
 #~ from lino.modlib.contacts import models as contacts
@@ -482,27 +482,55 @@ dd.update_field(ContractBase,'signer1', default=default_signer1)
 dd.update_field(ContractBase,'signer2', default=default_signer2)
 
 
+class ContractEvents(dd.ChoiceList):
+    verbose_name = _("Contract event")
+    verbose_name_plural = _("Contract events")
+add = ContractEvents.add_item
+add('10', _("Started"),'started')
+add('20', _("Active"),'active')
+add('30', _("Ended"),'ended')
+add('40', _("Signed"),'signed')
+
+
 class ContractBaseTable(dd.Table):
     parameters = dict(
-      user = dd.ForeignKey(settings.SITE.user_model,blank=True),
-      show_past = models.BooleanField(_("past contracts"),default=True),
-      show_active = models.BooleanField(_("active contracts"),default=True),
-      show_coming = models.BooleanField(_("coming contracts"),default=True),
-      today = models.DateField(_("on"),blank=True,default=datetime.date.today),
-      ending_success = dd.YesNo.field(_("Successfully ended"),
-          blank=True,help_text="""Contrats terminés avec succès."""),
-      ending = models.ForeignKey(ContractEnding,
-          blank=True,null=True,
-          help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
+        user = dd.ForeignKey(settings.SITE.user_model,blank=True),
+        #~ show_past = models.BooleanField(_("past contracts"),default=True),
+        #~ show_active = models.BooleanField(_("active contracts"),default=True),
+        #~ show_coming = models.BooleanField(_("coming contracts"),default=True),
+        #~ today = models.DateField(_("on"),blank=True,default=datetime.date.today),
+      
+        start_date = models.DateField(_("Period from"),
+            blank=True,null=True,
+            help_text="""Date début de la période observée"""),
+        end_date = models.DateField(_("until"),
+            blank=True,null=True,
+            help_text="""Date fin de la période observée"""),
+        observed_event = ContractEvents.field(blank=True,default=ContractEvents.active),
+      
+        ending_success = dd.YesNo.field(_("Successfully ended"),
+            blank=True,help_text="""Contrats terminés avec succès."""),
+        ending = models.ForeignKey(ContractEnding,
+            blank=True,null=True,
+            help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
       
     )
     
     params_layout = """
-    user type show_past show_active show_coming today 
+    user type start_date end_date observed_event
+    # user type show_past show_active show_coming today 
     ending_success ending
     """
     params_panel_hidden = True
     
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(ContractBaseTable,self).param_defaults(ar,**kw)
+        D = datetime.date
+        kw.update(start_date = D.today())
+        kw.update(end_date = D.today())
+        return kw
+        
     @classmethod
     def get_request_queryset(cls,ar):
         #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
@@ -512,20 +540,36 @@ class ContractBaseTable(dd.Table):
             qs = qs.filter(user=ar.param_values.user)
         if ar.param_values.type:
             qs = qs.filter(type=ar.param_values.type)
-        today = ar.param_values.today or datetime.date.today()
-        #~ today = ar.param_values.get('today',None) or datetime.date.today()
-        #~ show_active = ar.param_values.get('show_active',True)
-        if today:
-            if not ar.param_values.show_active:
-                flt = range_filter(today,'applies_from','applies_until')
-                #~ logger.info("20120114 flt = %r",flt)
-                qs = qs.exclude(flt)
-            #~ show_past = ar.param_values.get('show_past',True)
-            if not ar.param_values.show_past:
-                qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
-            #~ show_coming = ar.param_values.get('show_coming',True)
-            if not ar.param_values.show_coming:
-                qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
+            
+        ce = ar.param_values.observed_event
+        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+            period = None
+        else:
+            period = (ar.param_values.start_date, ar.param_values.end_date)
+        if ce and period is not None:
+            if ce == ContractEvents.ended:
+                #~ qs = qs.filter(Q(applies_until__lte=period[1]) | Q(date_ended__isnull=False,date_ended__lte=period[1]))
+                qs = qs.filter(dd.inrange_filter('applies_until',period)|dd.inrange_filter('date_ended',period))
+            elif ce == ContractEvents.started:
+                qs = qs.filter(dd.inrange_filter('applies_from',period))
+            elif ce == ContractEvents.signed:
+                qs = qs.filter(dd.inrange_filter('date_decided',period))
+            elif ce == ContractEvents.active:
+                flt = Q(applies_from__gte=period[0])
+                flt |= Q(date_ended__isnull=False,date_ended__lte=period[1])
+                flt |= Q(applies_until__isnull=False,applies_until__lte=period[1])
+                qs = qs.filter(flt)
+            else:
+                raise Exception(repr(ce))
+        #~ today = ar.param_values.today or datetime.date.today()
+        #~ if today:
+            #~ if not ar.param_values.show_active:
+                #~ flt = range_filter(today,'applies_from','applies_until')
+                #~ qs = qs.exclude(flt)
+            #~ if not ar.param_values.show_past:
+                #~ qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
+            #~ if not ar.param_values.show_coming:
+                #~ qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
                 
         if ar.param_values.ending_success == dd.YesNo.yes:
             qs = qs.filter(ending__isnull=False,ending__success=True)
@@ -534,7 +578,7 @@ class ContractBaseTable(dd.Table):
             
         if ar.param_values.ending is not None:
             qs = qs.filter(ending=ar.param_values.ending)
-            
+        #~ logger.info("20130524 %s",qs.query)
         return qs
     
     
