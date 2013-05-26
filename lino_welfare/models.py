@@ -837,6 +837,7 @@ class CoachingEndingsByType(VentilatingTable,pcsw.CoachingEndings):
 class ContractEndingsByType(VentilatingTable,isip.ContractEndings):
     
     label = _("Contract endings by type")
+    contracts_table = isip.Contracts
     
     @classmethod
     def get_ventilated_columns(self):
@@ -852,11 +853,12 @@ class ContractEndingsByType(VentilatingTable,isip.ContractEndings):
                     pv.update(observed_event=isip.ContractEvents.ended)
                     pv.update(type=ct)
                     pv.update(ending=obj)
-                    return jobs.Contracts.request(param_values=pv)
+                    return self.contracts_table.request(param_values=pv)
                 return func
             yield dd.RequestField(w(ct),verbose_name=label)
     
-   
+class JobsContractEndingsByType(ContractEndingsByType):
+    contracts_table = jobs.Contracts
 
 class ActivityReport1(dd.EmptyTable):
     """
@@ -938,8 +940,11 @@ class ActivityReport(dd.Report):
         yield CoachingEndingsByUser
         yield E.p('.')
         yield CoachingEndingsByType
-        yield E.p('.')
+        yield E.h2(_("Causes d'arret des projets"))
+        yield E.p(_('ISIPs'))
         yield ContractEndingsByType
+        yield E.p(pcsw.JOBS_MODULE_LABEL)
+        yield JobsContractEndingsByType
         
         yield E.h2(_("Snapshot"))
         yield E.p("Voici quelques tables complètes:")
