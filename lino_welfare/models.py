@@ -833,6 +833,29 @@ class CoachingEndingsByType(VentilatingTable,pcsw.CoachingEndings):
                 return func
             yield dd.RequestField(w(ct),verbose_name=label)
     
+
+class ContractEndingsByType(VentilatingTable,isip.ContractEndings):
+    
+    label = _("Contract endings by type")
+    
+    @classmethod
+    def get_ventilated_columns(self):
+        for ct in jobs.ContractType.objects.all():
+        #~ jobs.ContractTypes.get_handle()
+        #~ for ct in jobs.ContractTypes.request().get_data_iterator():
+            label = unicode(ct)
+            def w(ct):
+                def func(fld,obj,ar):
+                    mi = ar.master_instance
+                    if mi is None: return None
+                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                    pv.update(observed_event=isip.ContractEvents.ended)
+                    pv.update(type=ct)
+                    pv.update(ending=obj)
+                    return jobs.Contracts.request(param_values=pv)
+                return func
+            yield dd.RequestField(w(ct),verbose_name=label)
+    
    
 
 class ActivityReport1(dd.EmptyTable):
@@ -873,7 +896,7 @@ class ActivityReport1(dd.EmptyTable):
     @dd.virtualfield(dd.HtmlBox(_("Second tab")))
     def t2(cls,self,ar):
         html = []
-        for A in (CoachingEndingsByUser,CoachingEndingsByType):
+        for A in (CoachingEndingsByUser,CoachingEndingsByType,ContractEndingsByType):
             html.append(E.h3(A.label))
             html.append(ar.show(A,master_instance=self))
         #~ html.append(E.p("Foo"))
@@ -915,7 +938,11 @@ class ActivityReport(dd.Report):
         yield CoachingEndingsByUser
         yield E.p('.')
         yield CoachingEndingsByType
+        yield E.p('.')
+        yield ContractEndingsByType
         
-        yield E.h2(courses.PendingCourseRequests.label)
-        yield E.p("Voici une table complete:")
-        yield courses.PendingCourseRequests
+        yield E.h2(_("Snapshot"))
+        yield E.p("Voici quelques tables complètes:")
+        for A in (pcsw.UsersWithClients,):
+            yield E.h2(A.label)
+            yield A
