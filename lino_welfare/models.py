@@ -916,6 +916,7 @@ class CompaniesAndContracts(contacts.Companies,VentilatingTable):
     help_text = _("""Nombre de PIIS actifs par 
     organisation externe et type de contrat.""")
     contracts_table = isip.Contracts
+    contract_types = isip.ContractType
     hide_zero_rows = True
     
     @classmethod
@@ -930,7 +931,7 @@ class CompaniesAndContracts(contacts.Companies,VentilatingTable):
         
     @classmethod
     def get_ventilated_columns(self):
-        for ct in isip.ContractType.objects.all():
+        for ct in self.contract_types.objects.all():
             label = unicode(ct)
             def w(ct):
                 def func(fld,obj,ar):
@@ -950,6 +951,7 @@ class JobProvidersAndContracts(CompaniesAndContracts):
     help_text = _("""Nombre de projets Art 60§7 actifs par 
     employants et type de contrat.""")
     contracts_table = jobs.Contracts
+    contract_types = jobs.ContractType
     
     @classmethod
     def get_request_queryset(cls,ar):
