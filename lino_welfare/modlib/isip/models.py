@@ -487,8 +487,8 @@ dd.update_field(ContractBase,'signer2', default=default_signer2)
 
 
 class ContractEvents(dd.ChoiceList):
-    verbose_name = _("Contract event")
-    verbose_name_plural = _("Contract events")
+    verbose_name = _("Observed event")
+    verbose_name_plural = _("Observed events")
 add = ContractEvents.add_item
 add('10', _("Started"),'started')
 add('20', _("Active"),'active')
@@ -755,7 +755,7 @@ class Contracts(ContractBaseTable):
       
     params_layout = """
     user type start_date end_date observed_event
-    company study_type ending_success ending
+    company:20 study_type:15 ending_success:20 ending
     """
     
     @classmethod

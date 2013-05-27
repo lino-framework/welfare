@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-24 14:22+0300\n"
+"POT-Creation-Date: 2013-05-27 15:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,5 +49,10 @@ msgstr ""
 #: ../general.rst:28
 # 88711eac140e40229bc58f4a4ef2d6ac
 msgid "Click this button to save your changes in the form."
+msgstr ""
+
+#: ../general.rst:33
+# dd48fcc27ff24f149aca63611469d240
+msgid "Référence"
 msgstr ""
 

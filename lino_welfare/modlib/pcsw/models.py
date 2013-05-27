@@ -242,8 +242,8 @@ add('18', _("Foreigner card F+"),"foreigner_f_plus")
 
 
 class ClientEvents(dd.ChoiceList):
-    verbose_name = _("Client event")
-    verbose_name_plural = _("Client events")
+    verbose_name = _("Observed event")
+    verbose_name_plural = _("Observed events")
 add = ClientEvents.add_item
 add('10', _("Coached"),'coached')
 add('20', _("Dispense"),'dispense')
@@ -255,8 +255,8 @@ add('60', _("Modified"),'modified')
 #~ add('30', _("Ended"),'ended')
 
 class CoachingEvents(dd.ChoiceList):
-    verbose_name = _("Coaching event")
-    verbose_name_plural = _("Coaching events")
+    verbose_name = _("Observed event")
+    verbose_name_plural = _("Observed events")
 add = CoachingEvents.add_item
 add('10', _("Started"),'started')
 add('20', _("Active"),'active')

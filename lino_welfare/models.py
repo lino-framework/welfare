@@ -916,6 +916,7 @@ class CompaniesAndContracts(contacts.Companies,VentilatingTable):
     help_text = _("""Nombre de PIIS actifs par 
     organisation externe et type de contrat.""")
     contracts_table = isip.Contracts
+    hide_zero_rows = True
     
     @classmethod
     def get_request_queryset(cls,ar):
@@ -943,15 +944,17 @@ class CompaniesAndContracts(contacts.Companies,VentilatingTable):
                 return func
             yield dd.RequestField(w(ct),verbose_name=label)
     
-class JobsCompaniesAndContracts(CompaniesAndContracts):
-    label = _("Organisations externes et contrats Art 60§7")
+#~ class JobsCompaniesAndContracts(CompaniesAndContracts):
+class JobProvidersAndContracts(CompaniesAndContracts):
+    label = _("Employants et contrats Art 60§7")
     help_text = _("""Nombre de projets Art 60§7 actifs par 
-    organisation externe et type de contrat.""")
+    employants et type de contrat.""")
     contracts_table = jobs.Contracts
     
     @classmethod
     def get_request_queryset(cls,ar):
-        qs = super(CompaniesAndContracts,cls).get_request_queryset(ar)
+        #~ qs = super(CompaniesAndContracts,cls).get_request_queryset(ar)
+        qs = jobs.JobProvider.objects.all()
         qs = qs.annotate(count=models.Count('jobs_contract_set_by_company'))
         return qs.filter(count__gte=1)
     
@@ -1050,7 +1053,7 @@ class ActivityReport(dd.Report):
         #~ yield E.h2(_("Snapshot"))
         #~ yield E.p("Voici quelques tables complètes:")
         #~ for A in (pcsw.UsersWithClients,StudyTypesAndContracts,CompaniesAndContracts):
-        for A in (StudyTypesAndContracts,CompaniesAndContracts,JobsCompaniesAndContracts):
+        for A in (StudyTypesAndContracts,CompaniesAndContracts,JobProvidersAndContracts):
             yield E.h2(A.label)
             if A.help_text:
                 yield E.p(unicode(A.help_text))
