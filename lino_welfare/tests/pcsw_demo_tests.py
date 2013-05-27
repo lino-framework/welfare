@@ -128,6 +128,12 @@ class DemoTest(RemoteAuthTestCase):
         
         if False: # TODO
             add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
+            
+        #~ kw = dict(fmt='json',an='detail') 
+        #~ json_fields = 'count rows'
+        #~ http://127.0.0.1:8000/?_dc=1369640821168&an=detail&rp=ext-comp-1340&fmt=json
+        #~ add_case('rolf','api/debts/Budgets/3',json_fields,1,**kw)
+            
         
         failures = 0
         for i,case in enumerate(cases):

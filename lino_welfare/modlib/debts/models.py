@@ -419,7 +419,9 @@ The total monthly amount available for debts distribution."""))
                 return
             sar.setup_from(ar)
             chunks.append(E.h2(unicode(sar.get_title())))
-            chunks.append(ar.ui.table2xhtml(sar))
+            #~ chunks.append(ar.ui.table2xhtml(sar))
+            chunks.append(settings.SITE.ui.table2xhtml(sar))
+            #~ raise Exception("20130527")
             
         for grp in self.account_groups():
             render(self.entries_by_group(grp))

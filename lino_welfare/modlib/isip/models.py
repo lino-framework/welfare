@@ -240,6 +240,10 @@ class StudyTypes(dd.Table):
     #~ label = _('Study types')
     model = StudyType
     order_by = ["name"]
+    detail_layout = """
+    name id
+    ContractsByStudyType
+    """
 
 
 
@@ -513,23 +517,25 @@ class ContractBaseTable(dd.Table):
         ending = models.ForeignKey(ContractEnding,
             blank=True,null=True,
             help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
+        company = models.ForeignKey('contacts.Company',
+            blank=True,null=True,
+            help_text="""Nur Konventionen mit dieser Organisation als Drittpartner."""),
       
     )
     
     params_layout = """
     user type start_date end_date observed_event
-    # user type show_past show_active show_coming today 
     ending_success ending
     """
     params_panel_hidden = True
     
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(ContractBaseTable,self).param_defaults(ar,**kw)
-        D = datetime.date
-        kw.update(start_date = D.today())
-        kw.update(end_date = D.today())
-        return kw
+    #~ @classmethod
+    #~ def param_defaults(self,ar,**kw):
+        #~ kw = super(ContractBaseTable,self).param_defaults(ar,**kw)
+        #~ D = datetime.date
+        #~ kw.update(start_date = D.today())
+        #~ kw.update(end_date = D.today())
+        #~ return kw
         
     @classmethod
     def get_request_queryset(cls,ar):
@@ -540,6 +546,8 @@ class ContractBaseTable(dd.Table):
             qs = qs.filter(user=ar.param_values.user)
         if ar.param_values.type:
             qs = qs.filter(type=ar.param_values.type)
+        if ar.param_values.company:
+            qs = qs.filter(company=ar.param_values.company)
             
         ce = ar.param_values.observed_event
         if ar.param_values.start_date is None or ar.param_values.end_date is None:
@@ -555,10 +563,11 @@ class ContractBaseTable(dd.Table):
             elif ce == ContractEvents.signed:
                 qs = qs.filter(dd.inrange_filter('date_decided',period))
             elif ce == ContractEvents.active:
-                flt = Q(applies_from__gte=period[0])
-                flt |= Q(date_ended__isnull=False,date_ended__lte=period[1])
-                flt |= Q(applies_until__isnull=False,applies_until__lte=period[1])
+                f1 = Q(applies_until__isnull=True) | Q(applies_until__gte=period[0])
+                flt = f1 & (Q(date_ended__isnull=True) | Q(date_ended__gte=period[0]))
+                flt &= Q(applies_from__lte=period[1])
                 qs = qs.filter(flt)
+                #~ print 20130527, qs.query
             else:
                 raise Exception(repr(ce))
         #~ today = ar.param_values.today or datetime.date.today()
@@ -582,6 +591,17 @@ class ContractBaseTable(dd.Table):
         return qs
     
     
+    @classmethod
+    def get_title_tags(self,ar):
+        for t in super(ContractBaseTable,self).get_title_tags(ar):
+            yield t
+            
+        if ar.param_values.observed_event:
+            yield unicode(ar.param_values.observed_event)
+        if ar.param_values.company:
+            yield unicode(ar.param_values.company)
+            
+
 
 
 class OverlappingContractsTest:
@@ -727,9 +747,34 @@ class Contracts(ContractBaseTable):
     client
     type company
     """,window_size=(60,'auto'))    
+    
     parameters = dict(
-      type = models.ForeignKey(ContractType,blank=True,verbose_name=_("Only contracts of type")),
+      type = models.ForeignKey(ContractType,blank=True),
+      study_type = models.ForeignKey('isip.StudyType',blank=True),
       **ContractBaseTable.parameters)
+      
+    params_layout = """
+    user type start_date end_date observed_event
+    company study_type ending_success ending
+    """
+    
+    @classmethod
+    def get_request_queryset(cls,ar):
+        #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
+        qs = super(Contracts,cls).get_request_queryset(ar)
+        if ar.param_values.study_type:
+            qs = qs.filter(study_type=ar.param_values.study_type)
+        return qs
+            
+    @classmethod
+    def get_title_tags(self,ar):
+        for t in super(Contracts,self).get_title_tags(ar):
+            yield t
+            
+        if ar.param_values.study_type:
+            yield unicode(ar.param_values.study_type)
+            
+      
     
 class MyContracts(Contracts):
 #~ class MyContracts(Contracts,mixins.ByUser):
@@ -769,6 +814,9 @@ class ContractsByType(Contracts):
 
 class ContractsByEnding(Contracts):
     master_key = 'ending'
+    
+class ContractsByStudyType(Contracts):
+    master_key = 'study_type'
     
 
 

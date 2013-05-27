@@ -618,7 +618,7 @@ Belgique""")
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
-- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten, Datenkontrolle Klienten, Aktivitätsbericht, Aktivitätsbericht, Verfügbare Begleiter
+- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten, Datenkontrolle Klienten, Aktivitätsbericht, Verfügbare Begleiter
 
 - Konfigurierung :
   

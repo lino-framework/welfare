@@ -249,6 +249,8 @@ add('10', _("Coached"),'coached')
 add('20', _("Dispense"),'dispense')
 add('30', _("Exclusion"),'exclusion')
 add('40', _("Note"),'note')
+add('50', _("Created"),'created')
+add('60', _("Modified"),'modified')
 #~ add('20', _("Started"),'started')
 #~ add('30', _("Ended"),'ended')
 
@@ -1660,7 +1662,8 @@ def daterange_text(a,b):
     
 class Clients(Persons):
     #~ debug_permissions = True # '20120925'
-    title = _("All Clients")
+    #~ title = _("All Clients")
+    #~ title = _("Clients")
     model = Client # settings.SITE.person_model
     params_panel_hidden = True
     
@@ -1743,6 +1746,15 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 qs = qs.filter(
                     dispense__end_date__gte=period[0],
                     dispense__start_date__lte=period[1]).distinct()
+            elif ce == ClientEvents.created:
+                qs = qs.filter(
+                    created__gte=datetime.datetime.combine(period[0],datetime.time()),
+                    created__lte=datetime.datetime.combine(period[1],datetime.time()))
+                #~ print 20130527, qs.query
+            elif ce == ClientEvents.modified:
+                qs = qs.filter(
+                    modified__gte=datetime.datetime.combine(period[0],datetime.time()),
+                    modified__lte=datetime.datetime.combine(period[1],datetime.time()))
             elif ce == ClientEvents.exclusion:
                 qs = qs.filter(
                     exclusion__excluded_until__gte=period[0],
@@ -1783,6 +1795,9 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
               min=ar.param_values.aged_from or'...',
               max=ar.param_values.aged_to or '...'))
               
+        if ar.param_values.observed_event:
+            yield unicode(ar.param_values.observed_event)
+            
         if ar.param_values.client_state:
             yield unicode(ar.param_values.client_state)
             
@@ -2839,15 +2854,17 @@ class Coachings(dd.Table):
         for t in super(Coachings,self).get_title_tags(ar):
             yield t
             
+        if ar.param_values.observed_event:
+            yield unicode(ar.param_values.observed_event)
+            
         if ar.param_values.coached_by:
             s = unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
             if ar.param_values.and_coached_by:
                 s += " %s %s" % (unicode(_('and')),ar.param_values.and_coached_by)
-                
             yield s
         
         if ar.param_values.primary_coachings:
-            yield unicode(self.parameters['primary_coachings'].verbose_name)
+            yield unicode(self.parameters['primary_coachings'].verbose_name) + ' ' + unicode(ar.param_values.primary_coachings)
             
     
     @classmethod

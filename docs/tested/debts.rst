@@ -5,9 +5,12 @@ Debts mediation
 
 .. include:: /include/tested.rst
 
-The following statement imports a set of often-used global names::
+The following statements imports some often-used global names::
 
 >>> from lino.runtime import *
+>>> from pprint import pprint
+>>> from django.test import Client
+>>> import json
 
 We can now refer to every installed app via it's `app_label`.
 For example here is how we can verify here that the demo database 
@@ -167,7 +170,6 @@ Printing a Budget
 -----------------
 
 >>> obj = debts.Budget.objects.get(pk=3)
->>> from pprint import pprint
 >>> obj.clear_cache()
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier wurde generiert.',
@@ -208,6 +210,22 @@ Note that the Description still shows German words because these are stored per 
 and Budget #3 is addressed to a German-speaking partner.
 
 
+A web request
+-------------
+
+The following snippet reproduces a one-day bug 
+discovered 2013-05-27:
+
+>>> client = Client()
+>>> url = '/api/debts/Budgets/3?fmt=json&an=detail'
+>>> res = client.get(url,REMOTE_USER='rolf')
+>>> pprint(res.status_code)
+200
+>>> result = json.loads(res.content)
+>>> pprint(result.keys())
+[u'navinfo', u'data', u'disable_delete', u'id', u'title']
+
+
 Work in progress
 ----------------
 
@@ -229,3 +247,6 @@ A Preview:
    print ""
    e = debts.Budget.objects.get(pk=3).to_html()
    print "   " + E.tostring(e)
+
+
+

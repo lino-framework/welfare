@@ -56,6 +56,8 @@ from lino_welfare.modlib.isip import models as isip
 contacts = dd.resolve_app('contacts')
 users = dd.resolve_app('users')
 
+Company = dd.resolve_model('contacts.Company')
+
 #~ dblogger.info('Loading')
 
 
@@ -959,13 +961,14 @@ def objects():
             p.is_obsolete = True
             p.save()
 
+    COMPANIES = Cycler(Company.objects.all()[:5])
     NORMAL_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=False))
     PREMATURE_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312,480,624)
     #~ jobs_contract = Instantiator('jobs.Contract').build
     for i,coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         af = coaching.start_date or settings.SITE.demo_date(-600+i*40)
-        kw = dict(applies_from=af,client=coaching.client,user=coaching.user)
+        kw = dict(applies_from=af,client=coaching.client,user=coaching.user,company=COMPANIES.pop())
         if i % 2:
             ctr = jobs.Contract(
                 type=JOBS_CONTRACT_TYPES.pop(),

@@ -307,7 +307,7 @@ def setup_reports_menu(site,ui,profile,m):
     m.add_action(site.modules.pcsw.ClientsTest)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     m.add_action(ActivityReport)
-    m.add_action(ActivityReport1) # old version
+    #~ m.add_action(ActivityReport1) # old version
         
 
 
@@ -702,32 +702,41 @@ class CompareRequestsTable(dd.VirtualTable):
 
     @classmethod
     def get_data_rows(self,ar):
-        rows = []
+        #~ rows = []
         pv = ar.master_instance
-        if pv is None: return rows
-        def add(A,oe=None,**kw):
-        #~ def add(A,**kw):
-            if oe is None:
-                cells = [A.label]
-            else:
-                cells = ["%s (%s)" % (A.label,oe.text)]
-            #~ cells = ["%s %s" % (A.model._meta.verbose_name_plural,oe.text)]
+        if pv is None: return
+        #~ def add(A,oe=None,**kw):
+        def add(A,**kw):
+            pva = dict(**kw)
+            ar = A.request(param_values=pva)
+            cells = [ar.get_title()]
             for d in (pv.start_date,pv.end_date):
-                pva = dict(start_date=d,end_date=d,**kw)
-                if oe is not None:
-                    pva.update(observed_event=oe)
-                ar = A.request(param_values=pva)
+                ar = A.request(param_values=dict(pva,start_date=d,end_date=d))
+                #~ print 20130527, ar
                 cells.append(ar)
-            rows.append(cells)
+            return cells
             
-        add(pcsw.Clients,pcsw.ClientEvents.coached)
-        add(isip.Contracts,isip.ContractEvents.active)
-        #~ add(isip.Contracts,isip.ContractEvents.ended)
-        add(jobs.Contracts,isip.ContractEvents.active)
-        #~ add(jobs.Contracts,isip.ContractEvents.ended)
-        add(courses.PendingCourseRequests)
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.coached)
+        
+        yield add(isip.Contracts,observed_event=isip.ContractEvents.active)
+        #~ yield add(isip.Contracts,isip.ContractEvents.ended)
+        yield add(jobs.Contracts,observed_event=isip.ContractEvents.active)
+        #~ yield add(jobs.Contracts,isip.ContractEvents.ended)
+        yield add(courses.PendingCourseRequests)
+        
+        all_contracts = isip.Contracts.request(
+            param_values=dict(
+                start_date=pv.start_date,
+                end_date=pv.end_date)).get_data_iterator()
+        # DISTINCT on fields doesn't work in sqlite
+        study_types = set(all_contracts.values_list('study_type',flat=True))
+        #~ print 20130527, study_types
+        for st in study_types:
+            if st is not None:
+                yield add(isip.Contracts,
+                    observed_event=isip.ContractEvents.active,
+                    study_type=isip.StudyType.objects.get(pk=st))
 
-        return rows
 
 class PeriodicNumbers(dd.VirtualTable):
     label = _("Indicateurs d'activité")
@@ -744,31 +753,40 @@ class PeriodicNumbers(dd.VirtualTable):
 
     @classmethod
     def get_data_rows(self,ar):
-        rows = []
         mi = ar.master_instance
-        if mi is None: return rows
-        def add(A,oe):
-            cells = ["%s %s" % (A.model._meta.verbose_name_plural,oe.text)]
-            
-            pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-            pv.update(observed_event=oe)
-            ar = A.request(param_values=pv)
-            cells.append(ar)
-            rows.append(cells)
-
-        add(pcsw.Coachings,pcsw.CoachingEvents.started)
-        add(pcsw.Coachings,pcsw.CoachingEvents.active)
-        add(pcsw.Coachings,pcsw.CoachingEvents.ended)
+        if mi is None: return
         
-        add(pcsw.Clients,pcsw.ClientEvents.coached)
+        def add(A,**pva):
+            #~ pva = dict(**kw)
+            ar = A.request(param_values=pva)
+            cells = [ar.get_title()]
+            ar = A.request(param_values=dict(pva,start_date=mi.start_date,end_date=mi.end_date))
+            cells.append(ar)
+            return cells
+            
+        
+        #~ def add(A,oe):
+            #~ cells = ["%s %s" % (A.model._meta.verbose_name_plural,oe.text)]
+            #~ pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+            #~ pv.update(observed_event=oe)
+            #~ ar = A.request(param_values=pv)
+            #~ cells.append(ar)
+            #~ return cells
+
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.started)
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.active)
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.ended)
+        
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.coached)
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.created)
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.modified)
         
         for A in (isip.Contracts,jobs.Contracts):
-            add(A,isip.ContractEvents.started)
-            add(A,isip.ContractEvents.active)
-            add(A,isip.ContractEvents.ended)
-            add(A,isip.ContractEvents.signed)
+            yield add(A,observed_event=isip.ContractEvents.started)
+            yield add(A,observed_event=isip.ContractEvents.active)
+            yield add(A,observed_event=isip.ContractEvents.ended)
+            yield add(A,observed_event=isip.ContractEvents.signed)
         
-        return rows
 
 class VentilatingTable(dd.Table):
     
@@ -801,7 +819,7 @@ class CoachingEndingsByUser(VentilatingTable,pcsw.CoachingEndings):
         for u in settings.SITE.user_model.objects.exclude(profile=''):
             label = unicode(u.username)
             def w(user):
-                def func(self,obj,ar):
+                def func(fld,obj,ar):
                     mi = ar.master_instance
                     if mi is None: return None
                     pv = dict(start_date=mi.start_date,end_date=mi.end_date)
@@ -822,7 +840,7 @@ class CoachingEndingsByType(VentilatingTable,pcsw.CoachingEndings):
         for ct in pcsw.CoachingType.objects.all():
             label = unicode(ct)
             def w(ct):
-                def func(self,obj,ar):
+                def func(fld,obj,ar):
                     mi = ar.master_instance
                     if mi is None: return None
                     pv = dict(start_date=mi.start_date,end_date=mi.end_date)
@@ -842,8 +860,6 @@ class ContractEndingsByType(VentilatingTable,isip.ContractEndings):
     @classmethod
     def get_ventilated_columns(self):
         for ct in jobs.ContractType.objects.all():
-        #~ jobs.ContractTypes.get_handle()
-        #~ for ct in jobs.ContractTypes.request().get_data_iterator():
             label = unicode(ct)
             def w(ct):
                 def func(fld,obj,ar):
@@ -859,6 +875,86 @@ class ContractEndingsByType(VentilatingTable,isip.ContractEndings):
     
 class JobsContractEndingsByType(ContractEndingsByType):
     contracts_table = jobs.Contracts
+    
+class StudyTypesAndContracts(isip.StudyTypes,VentilatingTable):
+    label = _("Types de formation et contrats")
+    help_text = _("""Nombre de PIIS actifs par 
+    type de formation et type de contrat.""")
+    contracts_table = isip.Contracts
+    
+    @classmethod
+    def get_request_queryset(cls,ar):
+        #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
+        qs = super(StudyTypesAndContracts,cls).get_request_queryset(ar)
+        qs = qs.annotate(count=models.Count('contract'))
+        return qs.filter(count__gte=1)
+        #~ return qs
+        
+    @dd.virtualfield(dd.ForeignKey(isip.StudyType,_("Description")))
+    def description(self,obj,ar):
+        return obj
+        
+    @classmethod
+    def get_ventilated_columns(self):
+        for ct in isip.ContractType.objects.filter(needs_study_type=True):
+            label = unicode(ct)
+            def w(ct):
+                def func(fld,obj,ar):
+                    mi = ar.master_instance
+                    if mi is None: return None
+                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                    pv.update(observed_event=isip.ContractEvents.active)
+                    pv.update(type=ct)
+                    pv.update(study_type=obj)
+                    return self.contracts_table.request(param_values=pv)
+                return func
+            yield dd.RequestField(w(ct),verbose_name=label)
+    
+
+class CompaniesAndContracts(contacts.Companies,VentilatingTable):
+    label = _("Organisations externes et contrats")
+    help_text = _("""Nombre de PIIS actifs par 
+    organisation externe et type de contrat.""")
+    contracts_table = isip.Contracts
+    
+    @classmethod
+    def get_request_queryset(cls,ar):
+        qs = super(CompaniesAndContracts,cls).get_request_queryset(ar)
+        qs = qs.annotate(count=models.Count('isip_contract_set_by_company'))
+        return qs.filter(count__gte=1)
+        
+    @dd.virtualfield(dd.ForeignKey(isip.StudyType,_("Description")))
+    def description(self,obj,ar):
+        return obj
+        
+    @classmethod
+    def get_ventilated_columns(self):
+        for ct in isip.ContractType.objects.all():
+            label = unicode(ct)
+            def w(ct):
+                def func(fld,obj,ar):
+                    mi = ar.master_instance
+                    if mi is None: return None
+                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                    pv.update(observed_event=isip.ContractEvents.active)
+                    pv.update(type=ct)
+                    pv.update(company=obj)
+                    return self.contracts_table.request(param_values=pv)
+                return func
+            yield dd.RequestField(w(ct),verbose_name=label)
+    
+class JobsCompaniesAndContracts(CompaniesAndContracts):
+    label = _("Organisations externes et contrats Art 60§7")
+    help_text = _("""Nombre de projets Art 60§7 actifs par 
+    organisation externe et type de contrat.""")
+    contracts_table = jobs.Contracts
+    
+    @classmethod
+    def get_request_queryset(cls,ar):
+        qs = super(CompaniesAndContracts,cls).get_request_queryset(ar)
+        qs = qs.annotate(count=models.Count('jobs_contract_set_by_company'))
+        return qs.filter(count__gte=1)
+    
 
 class ActivityReport1(dd.EmptyTable):
     """
@@ -931,23 +1027,31 @@ class ActivityReport(dd.Report):
     @classmethod
     def get_story(cls,self,ar):
         yield E.h2(_("Introduction"))
-        yield E.p("Foo, bar and ",E.b("baz"))
+        yield E.p("Ceci est un ",E.b("rapport"),""", 
+            càd un document complet généré par Lino, contenant des 
+            sections, des tables et du texte libre.
+            Dans la version écran cliquer sur un chiffre pour voir d'où 
+            il vient.
+            """)
         yield E.h2(_("Indicateurs généraux"))
         yield CompareRequestsTable
         yield E.p('.')
         yield PeriodicNumbers
-        yield E.h2(_("Causes d'arret des accompagnements"))
+        yield E.h2(_("Causes d'arrêt des accompagnements"))
         yield CoachingEndingsByUser
         yield E.p('.')
         yield CoachingEndingsByType
-        yield E.h2(_("Causes d'arret des projets"))
-        yield E.p(_('ISIPs'))
-        yield ContractEndingsByType
-        yield E.p(pcsw.JOBS_MODULE_LABEL)
-        yield JobsContractEndingsByType
+        for A in (ContractEndingsByType,JobsContractEndingsByType):
+            yield E.h2(_("Causes d'arrêt des %s") % A.contracts_table.label)
+            yield A
+        #~ yield E.p(pcsw.JOBS_MODULE_LABEL)
+        #~ yield JobsContractEndingsByType
         
-        yield E.h2(_("Snapshot"))
-        yield E.p("Voici quelques tables complètes:")
-        for A in (pcsw.UsersWithClients,):
+        #~ yield E.h2(_("Snapshot"))
+        #~ yield E.p("Voici quelques tables complètes:")
+        #~ for A in (pcsw.UsersWithClients,StudyTypesAndContracts,CompaniesAndContracts):
+        for A in (StudyTypesAndContracts,CompaniesAndContracts,JobsCompaniesAndContracts):
             yield E.h2(A.label)
+            if A.help_text:
+                yield E.p(unicode(A.help_text))
             yield A
