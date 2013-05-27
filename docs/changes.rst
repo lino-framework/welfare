@@ -10,37 +10,50 @@ The final truth about what's going on is only
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
 
-Version 1.1.6 (coming)
+Version 1.1.6 (released :blogref:`20130527`)
 ============================================
 
 - Fixed: 
   Beim Ausdruckversuch einer Excelliste bei Klienten Suchfilter kommt
   Fehlermeldung... "Server Error (500)"
 
-- Neues Listing "Tätigkeitsbericht".
-  Inhaltlich ist das momentan ein Sammelsurium 
-  dessen, was ich von unserem Analysegespräch behalten habe.
-  Zu verstehen als Arbeitsgrundlage und Demonstration dessen, was
-  technisch möglich ist.
-
-- Erweiterungen in den Parameter-Panels für Klienten, VSEs 
-  und Art.60§7-Konventionen.
-  Neues Parameter-Panel für Begleitungen.
+- Erweiterungen in den Parameter-Panels für 
+  :ref:`Klienten <welfare.pcsw.Clients>`, 
+  :ref:`VSEs  <welfare.isip.Contracts>`
+  und 
+  :ref:`Art.60§7-Konventionen  <welfare.jobs.Contracts>`.
+  Neues Parameter-Panel für Tabelle
+  :ref:`Begleitungen <welfare.pcsw.Coachings>`, 
+  
   Theoretisch müssten alle besprochenen Datenbank-Abfragen 
-  manuell machbar sein.
-  Der Tätigkeitsbericht ist ja eigentlich nur eine automatische 
+  :blogref:`20130516` jetzt machbar sein.
+  Aber der Tätigkeitsbericht (sh. nächster Punkt) ist eine automatische 
   Hintereinanderreihung von solchen Abfragen.
 
-- Neuimplementierung der Startseite:
-  - Größe der einzelnen Bildschirmkomponenten ist jetzt korrekt.
+- Neues Listing :ref:`Tätigkeitsbericht <welfare.lino_welfare.ActivityReport>`. 
+  Inhaltlich basiert das auf unserem Analysegespräch,
+  ist aber zu verstehen als Arbeitsgrundlage 
+  und Demonstration der neuen technischen Möglichkeiten.
+  Die Benutzer sollten mir nun schrittweise mitteilen, 
+  welche Informationen zu viel sind und welche fehlen.
+  
+  Der Tätigkeitsbericht ist das erste Anwendungsbeispiel für die 
+  geniale neue Klasse :class:`lino.mixins.Report`. 
+  Ein Report ist eine in Python definierte Serie von Sektionen, 
+  freien Texten und Lino-Tabellen und kann sowohl am Bildschirm 
+  als auch als `.pdf` oder `.odt` gerendert werden.
+
+- Neuimplementierung der Startseite: die Größe der einzelnen 
+  Bildschirmkomponenten wird jetzt korrekt dargestellt. 
+  Nebenwirkungen:
+  
   - "Verpasste Erinnerungen" ist nicht mehr da
-    (da hat sowieso nie jemand nach geschaut).
-  - "Benutzer und ihre Klienten" kann man nicht mehr
-    direkt "im eigenem Fenster öffnen", sondern dazu muss man 
-    :menuselection:`Listings --> Benutzer und ihre Klienten` 
-    aufrufen.
-
-
+    (darauf hat m.E. sowieso niemand je geschaut).
+  - :ref:`Benutzer und ihre Klienten <welfare.pcsw.UsersWithClients>` 
+    kann man nicht mehr
+    direkt "im eigenem Fenster öffnen" (aber dafür gibt es ja
+    den Menübefehl
+    :menuselection:`Listings --> Benutzer und ihre Klienten`).
 
 
 

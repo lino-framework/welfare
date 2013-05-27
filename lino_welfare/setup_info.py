@@ -148,6 +148,8 @@ add_package_data('lino_welfare.modlib.jobs','config/jobs/ContractsSituation/*.od
 add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/NewJobsOverview/*.odt')
 add_package_data('lino_welfare.demo','media/pictures/contacts.Person.jpg')
+add_package_data('lino_welfare','config/lino_welfare/ActivityReport/*.odt')
+add_package_data('lino_welfare','templates_jinja/admin_main.html')
 #~ for n in (
     #~ 'lino_welfare', 
     #~ 'lino_welfare.modlib.courses',

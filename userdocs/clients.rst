@@ -56,6 +56,7 @@ Référence
 .. actor:: pcsw.Coachings
 .. actor:: pcsw.AidTypes
 .. actor:: pcsw.PersonGroups
+.. actor:: pcsw.UsersWithClients
 
 
 
