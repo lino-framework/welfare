@@ -44,7 +44,6 @@ from django.utils.functional import lazy
 #~ logger.debug(__file__+' : started')
 #~ from django.utils import translation
 
-#~ from django_sites.dbutils import range_filter
 
 #~ from lino import reports
 from lino import dd
@@ -1677,7 +1676,7 @@ class Clients(Persons):
     
     detail_layout = ClientDetail()
 
-    parameters = dict(
+    parameters = dd.ObservedPeriod(
         aged_from = models.IntegerField(_("Aged from"),
             blank=True,null=True,help_text=u"""\
 Nur Klienten, die mindestens so alt sind."""),
@@ -1695,12 +1694,12 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality = models.ForeignKey(countries.Country,blank=True,null=True,
             verbose_name=_("Nationality")),
             
-        start_date = models.DateField(_("Period from"),
-            blank=True,null=True,
-            help_text="""Date début de la période observée"""),
-        end_date = models.DateField(_("until"),
-            blank=True,null=True,
-            help_text="""Date fin de la période observée"""),
+        #~ start_date = models.DateField(_("Period from"),
+            #~ blank=True,null=True,
+            #~ help_text="""Date début de la période observée"""),
+        #~ end_date = models.DateField(_("until"),
+            #~ blank=True,null=True,
+            #~ help_text="""Date fin de la période observée"""),
         observed_event = ClientEvents.field(blank=True,default=ClientEvents.coached),
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
@@ -2773,19 +2772,17 @@ class Coachings(dd.Table):
     help_text = _("Liste des accompagnements.")
     model = Coaching
     
-    parameters = dict(
+    parameters = dd.ObservedPeriod(
         coached_by = models.ForeignKey(users.User,
             blank=True,null=True,
             verbose_name=_("Coached by"),help_text="""Nur Begleitungen dieses Benutzers."""),
         and_coached_by = models.ForeignKey(users.User,
             blank=True,null=True,
             verbose_name=_("and by"),help_text="""... und auch Begleitungen dieses Benutzers."""),
-        start_date = models.DateField(_("Period from"),
-            #~ blank=True,null=True,
-            help_text="""Date début de la période observée"""),
-        end_date = models.DateField(_("until"),
-            #~ blank=True,null=True,
-            help_text="""Date fin de la période observée"""),
+        #~ start_date = models.DateField(_("Period from"),
+            #~ help_text="""Date début de la période observée"""),
+        #~ end_date = models.DateField(_("until"),
+            #~ help_text="""Date fin de la période observée"""),
         observed_event = CoachingEvents.field(blank=True,default=CoachingEvents.active),
         primary_coachings = dd.YesNo.field(_("Primary coachings"),
             blank=True,help_text="""Accompagnements primaires."""),

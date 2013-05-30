@@ -495,21 +495,14 @@ add('20', _("Active"),'active')
 add('30', _("Ended"),'ended')
 add('40', _("Signed"),'signed')
 
-
 class ContractBaseTable(dd.Table):
-    parameters = dict(
+    parameters = dd.ObservedPeriod(
         user = dd.ForeignKey(settings.SITE.user_model,blank=True),
         #~ show_past = models.BooleanField(_("past contracts"),default=True),
         #~ show_active = models.BooleanField(_("active contracts"),default=True),
         #~ show_coming = models.BooleanField(_("coming contracts"),default=True),
         #~ today = models.DateField(_("on"),blank=True,default=datetime.date.today),
       
-        start_date = models.DateField(_("Period from"),
-            blank=True,null=True,
-            help_text="""Date début de la période observée"""),
-        end_date = models.DateField(_("until"),
-            blank=True,null=True,
-            help_text="""Date fin de la période observée"""),
         observed_event = ContractEvents.field(blank=True,default=ContractEvents.active),
       
         ending_success = dd.YesNo.field(_("Successfully ended"),
