@@ -145,7 +145,7 @@ class ExamPolicies(dd.Table):
     id name
     # summary start_date end_date
     # description
-    every every_unit calendar
+    max_occurences every every_unit calendar
     isip.ContractsByPolicy    
     jobs.ContractsByPolicy    
     """
@@ -589,8 +589,14 @@ class ContractBaseTable(dd.Table):
         for t in super(ContractBaseTable,self).get_title_tags(ar):
             yield t
             
-        if ar.param_values.observed_event:
-            yield unicode(ar.param_values.observed_event)
+        pv = ar.param_values
+        if pv.start_date is None or pv.end_date is None:
+            period = None
+        else:
+            oe = pv.observed_event
+            if oe is not None:
+                yield "%s %s-%s" % (unicode(oe.text),dd.dtos(pv.start_date), dd.dtos(pv.end_date))
+            
         if ar.param_values.company:
             yield unicode(ar.param_values.company)
             

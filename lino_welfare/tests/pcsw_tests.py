@@ -626,7 +626,7 @@ Belgique""")
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
   - Kontakte : Länder, Orte, Sprachen, Organisationsarten, Funktionen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
-  - Kalender : Orte, Prioritäten, Gastrollen, Kalenderliste
+  - Kalender : Räume, Prioritäten, Gastrollen, Kalenderliste
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten

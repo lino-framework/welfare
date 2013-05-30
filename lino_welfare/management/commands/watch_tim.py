@@ -575,7 +575,7 @@ class PAR(Controller):
                                 coaching.type = u.coaching_type
                                 if coaching.start_date is None:
                                     coaching.start_date = obj.created
-                                coaching.end_date = None
+                                coaching.end_date = None # 1990
                                 coaching.save()
                                 watcher.send_update(REQUEST)
                                 #~ watcher.log_diff(REQUEST)
