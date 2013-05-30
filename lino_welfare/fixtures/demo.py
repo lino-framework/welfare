@@ -177,6 +177,50 @@ def unused_coachings(p,type,coach1,coach2,coached_from,coached_until=None):
 
 
 def objects():
+    
+    calendar = Instantiator('cal.Calendar').build
+    #~ yield calendar(**babel_values('name',
+          #~ de=u"Klientengespräche intern",
+          #~ fr=u"Rencontres internes avec client",
+          #~ en=u"Internal meetings with client",
+          #~ ))
+    yield calendar(color=1,**babel_values('name',
+          de=u"Klientengespräche extern",
+          fr=u"Rencontres client externes",
+          en=u"External meetings with client",
+          ))
+    
+    yield calendar(color=4,**babel_values('name',
+          de=u"Versammlung intern",
+          fr=u"Réunions internes",
+          en=u"Internal meetings",
+          ))
+    
+    yield calendar(color=8,**babel_values('name',
+          de=u"Versammlung extern",
+          fr=u"Réunions externes",
+          en=u"External meetings",
+          ))
+          
+    yield calendar(color=12,
+        #~ invite_team_members=True,email_template='Team.eml.html',
+        email_template='Team.eml.html',
+        **babel_values('name',
+          de=u"Team-Besprechungen",
+          fr=u"Coordinations en équipe",
+          en=u"Team Meetings",
+          ))
+    #~ yield etype(**babel_values('name',
+          #~ de=u"Erstgespräch",
+          #~ fr=u"Première rencontre",
+          #~ en=u"First meeting",
+          #~ ))
+    #~ yield etype(**babel_values('name',
+          #~ de=u"Auswertungsgespräch",
+          #~ fr=u"Évaluation",
+          #~ en=u"Evaluation",
+          #~ ))
+    
   
     sector = Instantiator(jobs.Sector).build
     for ln in SECTORS_LIST.splitlines():
