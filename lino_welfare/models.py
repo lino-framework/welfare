@@ -457,7 +457,7 @@ def site_setup(site):
     site.modules.cal.Events.add_detail_panel("general","""
     calendar summary project 
     start end user assigned_to
-    place priority access_class transparent #rset 
+    room priority access_class transparent #rset 
     owner workflow_buttons
     description GuestsByEvent 
     """,_("General"))

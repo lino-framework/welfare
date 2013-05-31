@@ -602,7 +602,7 @@ Belgique""")
         menu_test('root',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Office :
+- Büro :
   
   - Mein E-Mail-Ausgang
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
@@ -622,7 +622,7 @@ Belgique""")
 
 - Konfigurierung :
   
-  - Office : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
+  - Büro : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
   - Kontakte : Länder, Orte, Sprachen, Organisationsarten, Funktionen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
@@ -637,7 +637,7 @@ Belgique""")
 
 - Explorer :
   
-  - Office : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Postsendungen
+  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Postsendungen
   - System : Vollmachten, User Groups, Benutzer-Levels, Benutzerprofile, Änderungen
   - Kontakte : Kontaktpersonen
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
@@ -659,7 +659,7 @@ Belgique""")
         menu_test("100","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Office :
+- Büro :
   
   - Mein E-Mail-Ausgang
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
@@ -675,7 +675,7 @@ Belgique""")
 
 - Konfigurierung :
   
-  - Office : Meine Einfügetexte
+  - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
 
 - Explorer :
@@ -689,7 +689,7 @@ Belgique""")
         menu_test('300',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Office :
+- Büro :
   
   - Mein E-Mail-Ausgang
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
@@ -701,7 +701,7 @@ Belgique""")
 
 - Konfigurierung :
   
-  - Office : Meine Einfügetexte
+  - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
 
 - Site : Info
@@ -711,7 +711,7 @@ Belgique""")
         menu_test('200',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Office :
+- Büro :
   
   - Mein E-Mail-Ausgang
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
@@ -725,7 +725,7 @@ Belgique""")
 
 - Konfigurierung :
   
-  - Office : Meine Einfügetexte
+  - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
 
 - Site : Info
