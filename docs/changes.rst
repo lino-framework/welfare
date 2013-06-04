@@ -13,17 +13,24 @@ The final truth about what's going on is only
 Version 1.1.7 (released :blogref:`20130604`)
 ============================================
 
-- DSBE --> Tätigkeitsbericht
+- Weiter mit dem :ref:`Tätigkeitsbericht <welfare.integ.ActivityReport>`.
 
 - Fixed: 
-  Beim Ausdruckversuch einer Excelliste bei Klienten Suchfilter kommt
-  Fehlermeldung... "Server Error (500)"
+  Server error 500 beim Versuch, eine Tabelle als csv-Datei 
+  (nach Excel) zu exportieren.
   
 - Fixed:
-  Server error 500 beim Versuch, eine Aufgabe als Erledigt zu markieren
+  Server error 500 beim Versuch, eine Aufgabe als erledigt zu markieren
   
-- removed fields Exampolicy.summary und description  
-
+- watch_tim : datum_bis einer primären Begleitung eines Ehemaligen darf
+  nicht leer sein. Wenn es das ist, setzt watch_tim es jetzt 
+  auf 01.01.1990 setzen. 
+  Also Erweitungung der Doku (:ref:`welfare.watch_tim`):
+  
+  - `bis` : entweder leer (wenn es eine aktive Begleitung ist) 
+    oder 01.01.1990 (wenn es ein Neuzugänge oder ehemaliger Klient ist)
+  
+  
 Version 1.1.6 (released :blogref:`20130527`)
 ============================================
 
@@ -40,7 +47,7 @@ Version 1.1.6 (released :blogref:`20130527`)
   Aber der Tätigkeitsbericht (sh. nächster Punkt) ist eine automatische 
   Hintereinanderreihung von solchen Abfragen.
 
-- Neues Listing :ref:`Tätigkeitsbericht <welfare.lino_welfare.ActivityReport>`. 
+- Neues Listing :ref:`Tätigkeitsbericht <welfare.integ.ActivityReport>`. 
   Inhaltlich basiert das auf unserem Analysegespräch,
   ist aber zu verstehen als Arbeitsgrundlage 
   und Demonstration der neuen technischen Möglichkeiten.
@@ -110,7 +117,7 @@ Miscellaneous:
 Version 1.1.4 (released :blogref:`20130512`)
 ============================================
 
-- :ref:`welfare.jobs.NewJobsOverview` : 
+- :ref:`welfare.jobs.JobsOverview` : 
   Seitenwechsel zwischen die verschiedenen Kategorien 
   (Majorés, Intern, usw.).
   
@@ -175,7 +182,7 @@ Version 1.1.3 (released :blogref:`20130505`)
   Kursanfragen haben einen neuen Zustand "Inaktiv". 
   Zustand "Kandidat" umbenannt nach "Offen".
   
-- Ausdruck :ref:`welfare.jobs.NewJobsOverview` 
+- Ausdruck :ref:`welfare.jobs.JobsOverview` 
   (:menuselection:`DSBE --> Übersicht Art60*7`)
   funktioniert jetzt.
   Diese Liste ist im Menü "DSBE" und nicht im Menü "Listings".

@@ -152,7 +152,10 @@ class CoachingEndingsByUser(dd.VentilatingTable,pcsw.CoachingEndings):
 
     @classmethod
     def get_ventilated_columns(self):
-        DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
+        try:
+            DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
+        except pcsw.CoachingType.DoesNotExist:
+            DSBE = None
         def w(user):
             def func(fld,obj,ar):
                 mi = ar.master_instance
