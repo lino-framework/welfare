@@ -520,7 +520,7 @@ class ContractBaseTable(dd.Table):
     
     params_layout = """
     user type start_date end_date observed_event
-    ending_success ending
+    company ending_success ending
     """
     params_panel_hidden = True
     

@@ -25,6 +25,7 @@ import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
+from django.db.models import Q
 
 from lino import dd
 from lino.utils.xmlgen.html import E
@@ -34,6 +35,7 @@ pcsw = dd.resolve_app('pcsw')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 courses = dd.resolve_app('courses')
+users = dd.resolve_app('users')
 
 
 class CompareRequestsTable(dd.VirtualTable):
@@ -142,29 +144,25 @@ class PeriodicNumbers(dd.VirtualTable):
 
     
 class CoachingEndingsByUser(dd.VentilatingTable,pcsw.CoachingEndings):
-    
     label = _("Coaching endings by user")
-    
     @classmethod
     def get_ventilated_columns(self):
-        for u in settings.SITE.user_model.objects.exclude(profile=''):
-            label = unicode(u.username)
-            def w(user):
-                def func(fld,obj,ar):
-                    mi = ar.master_instance
-                    if mi is None: return None
-                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-                    pv.update(observed_event=pcsw.CoachingEvents.ended)
+        def w(user):
+            def func(fld,obj,ar):
+                mi = ar.master_instance
+                if mi is None: return None
+                pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                pv.update(observed_event=pcsw.CoachingEvents.ended)
+                if user is not None:
                     pv.update(coached_by=user)
-                    pv.update(ending=obj)
-                    return pcsw.Coachings.request(param_values=pv)
-                return func
-            yield dd.RequestField(w(u),verbose_name=label)
+                pv.update(ending=obj)
+                return pcsw.Coachings.request(param_values=pv)
+            return func
+        #~ for u in settings.SITE.user_model.objects.exclude(profile=''):
+        for u in settings.SITE.user_model.objects.filter(coaching_type=isip.COACHINGTYPE_DSBE):
+            yield dd.RequestField(w(u),verbose_name=unicode(u.username))
+        yield dd.RequestField(w(None),verbose_name=_("Total"))
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ CoachingEndingsByUser.setup_columns()
-        
    
 class CoachingEndingsByType(dd.VentilatingTable,pcsw.CoachingEndings):
     
@@ -172,65 +170,81 @@ class CoachingEndingsByType(dd.VentilatingTable,pcsw.CoachingEndings):
     
     @classmethod
     def get_ventilated_columns(self):
-        for ct in pcsw.CoachingType.objects.all():
-            label = unicode(ct)
-            def w(ct):
-                def func(fld,obj,ar):
-                    mi = ar.master_instance
-                    if mi is None: return None
-                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-                    pv.update(observed_event=pcsw.CoachingEvents.ended)
+        def w(ct):
+            def func(fld,obj,ar):
+                mi = ar.master_instance
+                if mi is None: return None
+                pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                pv.update(observed_event=pcsw.CoachingEvents.ended)
+                if ct is not None:
                     pv.update(coaching_type=ct)
-                    pv.update(ending=obj)
-                    return pcsw.Coachings.request(param_values=pv)
-                return func
-            yield dd.RequestField(w(ct),verbose_name=label)
+                pv.update(ending=obj)
+                return pcsw.Coachings.request(param_values=pv)
+            return func
+        for ct in pcsw.CoachingType.objects.all():
+            yield dd.RequestField(w(ct),verbose_name=unicode(ct))
+        yield dd.RequestField(w(None),verbose_name=_("Total"))
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ CoachingEndingsByType.setup_columns()
-        #~ 
 
-class ContractEndingsByType(dd.VentilatingTable,isip.ContractEndings):
-    
-    label = _("Contract endings by type")
+class ContractsByType(dd.VentilatingTable):
     contracts_table = isip.Contracts
     contract_type_model = isip.ContractType
+    observed_event = isip.ContractEvents.ended
+    selector_key = NotImplementedError
+    hide_zero_rows = True
     
     @classmethod
-    def get_ventilated_columns(self):
-        for ct in self.contract_type_model.objects.all():
-            label = unicode(ct)
-            def w(ct):
-                def func(fld,obj,ar):
-                    mi = ar.master_instance
-                    if mi is None: return None
-                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-                    pv.update(observed_event=isip.ContractEvents.ended)
-                    pv.update(type=ct)
-                    pv.update(ending=obj)
-                    return self.contracts_table.request(param_values=pv)
-                return func
-            yield dd.RequestField(w(ct),verbose_name=label)
-            
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ ContractEndingsByType.setup_columns()
+    def get_observed_period(self,mi):
+        return dict(start_date=mi.start_date,end_date=mi.end_date)        
         
-            
+    @classmethod
+    def get_ventilated_columns(self):
+        def w(ct):
+            def func(fld,obj,ar):
+                mi = ar.master_instance
+                if mi is None: return None
+                pv = self.get_observed_period(mi)
+                pv.update(observed_event=self.observed_event)
+                if ct is not None:
+                    pv.update(type=ct)
+                pv[self.selector_key] = obj
+                return self.contracts_table.request(param_values=pv)
+            return func
+        for ct in self.contract_type_model.objects.all():
+            yield dd.RequestField(w(ct),verbose_name=unicode(ct))
+        yield dd.RequestField(w(None),verbose_name=_("Total"))
+
+class ContractEndingsByType(ContractsByType,isip.ContractEndings):
+    label = _("Contract endings by type")
+    selector_key = 'ending'
     
 class JobsContractEndingsByType(ContractEndingsByType):
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ JobsContractEndingsByType.setup_columns()
-        
+
+class ContractsPerUserAndContractType(ContractsByType,users.Users):
+    label = _("PIIS par agent et type")
+    #~ filter = Q(coaching_type=isip.COACHINGTYPE_DSBE)
+    contracts_table = isip.Contracts
+    observed_event = isip.ContractEvents.active
+    contract_type_model = isip.ContractType
+    selector_key = 'user'
+    
+    @classmethod
+    def get_observed_period(self,mi):
+        return dict(start_date=mi.end_date,end_date=mi.end_date)
+    
+class JobsContractsPerUserAndContractType(ContractsPerUserAndContractType):
+    label = _("Art60§7 par agent et type")
+    contracts_table = jobs.Contracts
+    contract_type_model = jobs.ContractType
+    
+    
     
     
 class StudyTypesAndContracts(isip.StudyTypes,dd.VentilatingTable):
-    label = _("Types de formation et contrats")
+    label = _("PIIS et types de formation")
     help_text = _("""Nombre de PIIS actifs par 
     type de formation et type de contrat.""")
     contracts_table = isip.Contracts
@@ -249,23 +263,21 @@ class StudyTypesAndContracts(isip.StudyTypes,dd.VentilatingTable):
         
     @classmethod
     def get_ventilated_columns(self):
-        for ct in isip.ContractType.objects.filter(needs_study_type=True):
-            label = unicode(ct)
-            def w(ct):
-                def func(fld,obj,ar):
-                    mi = ar.master_instance
-                    if mi is None: return None
-                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-                    pv.update(observed_event=isip.ContractEvents.active)
+        def w(ct):
+            def func(fld,obj,ar):
+                mi = ar.master_instance
+                if mi is None: return None
+                pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                pv.update(observed_event=isip.ContractEvents.active)
+                if ct is not None:
                     pv.update(type=ct)
-                    pv.update(study_type=obj)
-                    return self.contracts_table.request(param_values=pv)
-                return func
-            yield dd.RequestField(w(ct),verbose_name=label)
+                pv.update(study_type=obj)
+                return self.contracts_table.request(param_values=pv)
+            return func
+        for ct in isip.ContractType.objects.filter(needs_study_type=True):
+            yield dd.RequestField(w(ct),verbose_name=unicode(ct))
+        yield dd.RequestField(w(None),verbose_name=_("Total"))
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ StudyTypesAndContracts.setup_columns()
 
 class CompaniesAndContracts(contacts.Companies,dd.VentilatingTable):
     label = _("Organisations externes et contrats")
@@ -287,23 +299,22 @@ class CompaniesAndContracts(contacts.Companies,dd.VentilatingTable):
         
     @classmethod
     def get_ventilated_columns(self):
+        def w(ct):
+            def func(fld,obj,ar):
+                mi = ar.master_instance
+                if mi is None: return None
+                pv = dict(start_date=mi.start_date,end_date=mi.end_date)
+                pv.update(observed_event=isip.ContractEvents.active)
+                if ct is not None:
+                    pv.update(type=ct)
+                pv.update(company=obj)
+                return self.contracts_table.request(param_values=pv)
+            return func
         for ct in self.contract_types.objects.all():
             label = unicode(ct)
-            def w(ct):
-                def func(fld,obj,ar):
-                    mi = ar.master_instance
-                    if mi is None: return None
-                    pv = dict(start_date=mi.start_date,end_date=mi.end_date)
-                    pv.update(observed_event=isip.ContractEvents.active)
-                    pv.update(type=ct)
-                    pv.update(company=obj)
-                    return self.contracts_table.request(param_values=pv)
-                return func
             yield dd.RequestField(w(ct),verbose_name=label)
+        yield dd.RequestField(w(None),verbose_name=_("Total"))
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ CompaniesAndContracts.setup_columns()
 
 
 #~ class JobsCompaniesAndContracts(CompaniesAndContracts):
@@ -321,9 +332,6 @@ class JobProvidersAndContracts(CompaniesAndContracts):
         qs = qs.annotate(count=models.Count('jobs_contract_set_by_company'))
         return qs.filter(count__gte=1)
     
-#~ @dd.receiver(dd.database_ready)
-#~ def setup_columns(sender,**kw):
-    #~ JobProvidersAndContracts.setup_columns()
 
 class ActivityReport1(dd.EmptyTable):
     """
@@ -406,20 +414,24 @@ class ActivityReport(dd.Report):
         yield CompareRequestsTable
         yield E.p('.')
         yield PeriodicNumbers
+        
         yield E.h2(_("Causes d'arrêt des accompagnements"))
         yield CoachingEndingsByUser
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType
-        for A in (ContractEndingsByType,JobsContractEndingsByType):
-            yield E.h2(_("Causes d'arrêt des %s") % A.contracts_table.label)
-            yield A
-        #~ yield E.p(pcsw.JOBS_MODULE_LABEL)
-        #~ yield JobsContractEndingsByType
         
-        #~ yield E.h2(_("Snapshot"))
+        
+        yield E.h1(isip.Contract._meta.verbose_name_plural)
         #~ yield E.p("Voici quelques tables complètes:")
         #~ for A in (pcsw.UsersWithClients,StudyTypesAndContracts,CompaniesAndContracts):
-        for A in (StudyTypesAndContracts,CompaniesAndContracts,JobProvidersAndContracts):
+        for A in (ContractsPerUserAndContractType,CompaniesAndContracts,ContractEndingsByType,StudyTypesAndContracts):
+            yield E.h2(A.label)
+            if A.help_text:
+                yield E.p(unicode(A.help_text))
+            yield A
+
+        yield E.h1(jobs.Contract._meta.verbose_name_plural)
+        for A in (JobsContractsPerUserAndContractType,JobProvidersAndContracts,JobsContractEndingsByType):
             yield E.h2(A.label)
             if A.help_text:
                 yield E.p(unicode(A.help_text))

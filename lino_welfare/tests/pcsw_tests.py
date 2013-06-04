@@ -670,7 +670,7 @@ Belgique""")
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 
-- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten
+- Listings : Benutzer und ihre Klienten
 
 - Konfigurierung :
   
