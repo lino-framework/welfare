@@ -70,8 +70,7 @@ Topic :: Software Development :: Libraries :: Application Frameworks""".splitlin
 
 SETUP_INFO.update(packages=[
   'lino_welfare',
-  'lino_welfare.demo',
-  'lino_welfare.demo.settings',
+  'lino_welfare.settings',
   'lino_welfare.fixtures',
   'lino_welfare.management',
   'lino_welfare.management.commands',
@@ -86,6 +85,7 @@ SETUP_INFO.update(packages=[
   'lino_welfare.modlib.cv',
   'lino_welfare.modlib.debts',
   'lino_welfare.modlib.debts.fixtures',
+  'lino_welfare.modlib.integ',
   'lino_welfare.modlib.isip',
   'lino_welfare.modlib.jobs',
   'lino_welfare.modlib.jobs.fixtures',
@@ -145,9 +145,9 @@ add_package_data('lino_welfare.modlib.debts','config/debts/Budget/*.odt')
 add_package_data('lino_welfare.modlib.courses','config/courses/Course/*.odt')
 add_package_data('lino_welfare.modlib.pcsw','config/pcsw/Client/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/ContractsSituation/*.odt')
+add_package_data('lino_welfare.modlib.jobs','config/jobs/OldJobsOverview/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
-add_package_data('lino_welfare.modlib.jobs','config/jobs/NewJobsOverview/*.odt')
-add_package_data('lino_welfare.demo','media/pictures/contacts.Person.jpg')
+add_package_data('lino_welfare.settings','media/pictures/contacts.Person.jpg')
 add_package_data('lino_welfare','config/lino_welfare/ActivityReport/*.odt')
 add_package_data('lino_welfare','templates_jinja/admin_main.html')
 #~ for n in (

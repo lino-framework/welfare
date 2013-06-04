@@ -254,6 +254,7 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino_welfare.modlib.isip'
         yield 'lino_welfare.modlib.jobs'
         yield 'lino_welfare.modlib.courses'
+        yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.debts'
         yield 'lino_welfare.modlib.cbss'
@@ -271,7 +272,7 @@ class Site(Site,cbss.SiteMixin):
         #~ return urlpatterns
         
 
-SITE = Site(globals())
+#~ SITE = Site(globals())
 
 LOGGING['logger_names'] = 'djangosite north lino lino_welfare'
 #~ LOGGING.update(loggers='djangosite north lino lino_welfare')

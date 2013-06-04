@@ -63,6 +63,7 @@ from lino.utils.daemoncommand import DaemonCommand
 
 from lino.utils.ssin import is_valid_ssin
 
+LONG_TIME_AGO = datetime.date(1990,1,1)
 
 IGNORABLE_ERRORS = (ValidationError,IntegrityError)
 
@@ -566,37 +567,38 @@ class PAR(Controller):
                         
                     try:
                         coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                        #~ if coaching.user != u or coaching.start_date != obj.created or coaching.end_date is not None:
-                        if coaching.user == u:
-                            if coaching.end_date is not None \
-                                    or coaching.start_date is None\
-                                    or coaching.type != u.coaching_type:
-                                watcher = dd.ChangeWatcher(coaching)
-                                coaching.type = u.coaching_type
-                                if coaching.start_date is None:
-                                    coaching.start_date = obj.created
-                                coaching.end_date = None # 1990
-                                coaching.save()
-                                watcher.send_update(REQUEST)
-                                #~ watcher.log_diff(REQUEST)
-                        else:
+                        watcher = dd.ChangeWatcher(coaching)
+                        if u is None or u != coaching.user:
                             """
                             If the coach has changed, maintain the old coaching in history.
                             """
-                            watcher = dd.ChangeWatcher(coaching)
                             coaching.primary = False
                             coaching.end_date = datetime.date.today()
+                        else:
+                            if obj.client_state == pcsw.ClientStates.coached:
+                                coaching.end_date = None # 1990
+                            else:
+                                coaching.end_date = LONG_TIME_AGO
+                                
+                            coaching.type = u.coaching_type
+                            if coaching.start_date is None:
+                                coaching.start_date = obj.created
+                            
+                        if watcher.is_dirty():
                             coaching.save()
                             watcher.send_update(REQUEST)
                             
-                            if u is not None:
-                                coaching = pcsw.Coaching(
-                                    client=obj,primary=True,
-                                    user=u,
-                                    type=u.coaching_type,
-                                    start_date=datetime.date.today())
-                                coaching.save()
-                                dd.pre_ui_create.send(sender=coaching,request=REQUEST)
+                        if u is not None and coaching.user != u:
+                            """
+                            create a new coaching 
+                            """
+                            coaching = pcsw.Coaching(
+                                client=obj,primary=True,
+                                user=u,
+                                type=u.coaching_type,
+                                start_date=datetime.date.today())
+                            coaching.save()
+                            dd.pre_ui_create.send(sender=coaching,request=REQUEST)
 
                     except pcsw.Coaching.DoesNotExist,e:
                         try:

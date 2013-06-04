@@ -717,6 +717,7 @@ class PendingCourseRequests(CourseRequests):
         for t in CLIENTS_TABLE.get_title_tags(ar):
             yield t
             
+            
         
 MODULE_LABEL = _("Courses")
         

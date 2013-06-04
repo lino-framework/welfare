@@ -1212,7 +1212,7 @@ if True: # settings.SITE.user_model:
 
 COLS = 8
 
-class JobsOverview(dd.EmptyTable):
+class OldJobsOverview(dd.EmptyTable):
     """
     """
     required = dd.required(user_groups=['integ'])
@@ -1421,7 +1421,7 @@ class JobsOverviewByType(Jobs):
 
 
 
-class NewJobsOverview(dd.EmptyTable):
+class JobsOverview(dd.EmptyTable):
     """
     New version of :ref:`welfare.jobs.JobsOverview`.
     """
@@ -1444,7 +1444,7 @@ class NewJobsOverview(dd.EmptyTable):
             kw.update(jobtypes = ar.param_values.job_type)
         else:
             kw.update(jobtypes = JobType.objects.all())
-        return super(NewJobsOverview,self).create_instance(ar,**kw)
+        return super(JobsOverview,self).create_instance(ar,**kw)
 
         
     @dd.virtualfield(dd.HtmlBox())
@@ -1482,19 +1482,16 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
         )
 
-#~ MODULE_LABEL = _("Jobs")
-#~ MODULE_LABEL = _("Art.60§7")
 
 def setup_main_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.user:
         #~ return
     m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
-    #~ m = m.add_menu("jobs",MODULE_LABEL)
     m.add_action(MyContracts)
     m.add_action(JobProviders)
     m.add_action(Jobs)
     m.add_action(Offers)
-    m.add_action(NewJobsOverview)
+    m.add_action(JobsOverview)
     #~ m.add_action(JobsOverview3)
     #~ m.add_action(ContractsSearch)
 

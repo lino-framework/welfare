@@ -30,13 +30,13 @@ JobsOverview
 ------------
 
 Printing the document 
-:ref:`welfare.jobs.NewJobsOverview`
+:ref:`welfare.jobs.JobsOverview`
 caused a "NotImplementedError: <i> inside <text:p>" traceback 
 when one of the jobs had a remark. 
 
->>> obj = ses.spawn(jobs.NewJobsOverview).create_instance()
+>>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/userdocs/appyodt/jobs.NewJobsOverview.odt',
+{'open_url': u'/media/userdocs/appyodt/jobs.JobsOverview.odt',
  'success': True}
  
 Bug fixed :blogref:`20130423`.

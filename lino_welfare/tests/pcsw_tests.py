@@ -67,7 +67,6 @@ isip_Contract = dd.resolve_model("isip.Contract")
 isip_ContractType = dd.resolve_model("isip.ContractType")
 jobs_Contract = dd.resolve_model("jobs.Contract")
 from lino_welfare.modlib.jobs.models import Contracts, ContractType, JobProvider, Job
-from lino.mixins.printable import PrintAction
 from lino.modlib.users.models import User
 #~ from lino_welfare.modlib.pcsw.models import Person
 from lino_welfare.modlib.pcsw.models import Client
@@ -610,7 +609,7 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Aktivitätsbericht
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 
@@ -618,7 +617,7 @@ Belgique""")
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
-- Listings : Übersicht Art.60§7-Konventionen, Benutzer und ihre Klienten, Datenkontrolle Klienten, Aktivitätsbericht, Verfügbare Begleiter
+- Listings : Benutzer und ihre Klienten, Datenkontrolle Klienten, Verfügbare Begleiter
 
 - Konfigurierung :
   

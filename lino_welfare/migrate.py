@@ -711,3 +711,9 @@ def migrate_from_1_1_4(globals_dict):
 
 def migrate_from_1_1_5(globals_dict): 
     return '1.1.6'
+
+def migrate_from_1_1_6(globals_dict): 
+    """
+    renamed cal.Place -> cal.Room
+    """
+    return '1.1.7'

@@ -68,7 +68,8 @@ def rangefmt(r):
 
 cal = dd.resolve_app('cal')
 
-COACHINGTYPE_ASD = 1          
+COACHINGTYPE_ASD = 1
+COACHINGTYPE_DSBE = 2
 
 
 #~ class IntegTable(dd.Table):
@@ -133,7 +134,8 @@ class ExamPolicy(dd.BabelNamed,cal.RecurrenceSet):
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
         
-    hidden_columns = 'summary description start_date start_time end_date end_time'
+    #~ hidden_columns = 'summary description start_date start_time end_date end_time'
+    hidden_columns = 'start_date start_time end_date end_time'
     
         
 

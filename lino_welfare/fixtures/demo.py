@@ -598,7 +598,7 @@ def objects():
     #~ yield users.Membership(user=caroline,group=ug_asd)
     
     # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(id=1,**babel_values('name',
+    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babel_values('name',
         de="ASD (Allgemeiner Sozialdienst)",
         nl="ASD (Algemene Sociale Dienst)",
         fr="SSG (Service social général)",
@@ -606,10 +606,10 @@ def objects():
         )) 
     
     #~ caroline = users.User.objects.get(username="caroline")
-    caroline.coaching_type_id = 1
+    caroline.coaching_type_id = isip.COACHINGTYPE_ASD
     caroline.save()
     
-    DSBE = pcsw.CoachingType(id=2,**babel_values('name',
+    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babel_values('name',
         de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
         fr="Service intégration",
         en="Integration service",
@@ -629,8 +629,6 @@ def objects():
     
     for obj in pcsw.CoachingType.objects.all():
         yield users.Team(**babelkw('name',**field2kw(obj,'name')))
-    
-    
     
     
     #~ USERS = Cycler(root,melanie,hubert,alicia)

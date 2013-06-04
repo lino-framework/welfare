@@ -13,10 +13,15 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-This module contains "watch_tim" tests. 
+This module contains tests for the 
+:mod:`watch_tim <lino_welfare.management.commands.watch_tim>`
+command.
 You can run only these tests by issuing::
 
-  $ python manage.py test lino_welfare.WatchTimTest
+  $ python manage.py test lino_welfare.WatchTimTests
+  
+The module contains a single huge test case because we don't want 
+Django to recreate a virgin test database for each of them.
   
 """
 
@@ -117,22 +122,6 @@ PUT_PAR_6283 = """
 """
 
 
-"""
-// 2013-02-26 12:05:13 ValidationError({'national_id': [u'Client with this National ID already exists.']})
-{"method":"POST","alias":"PAR","id":"0000023624","time":"20130226 12:05:12","user":"MELANIEL",
-"data":{"IDPAR":"0000023624","FIRME":"Van Beneden Fon","NAME2":"","RUE":"Bergstrasse",
-"CP":"4700","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
-"IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"",
-"PROF":"80","CODE1":"","CODE2":"","CODE3":"",
-"DATCREA":{"__date__":{"year":2013,"month":2,"day":18}},"ALLO":"Frau",
-"NB1":"VAFO940702","NB2":"940702 234-24","IDDEV":"","MEMO":"","COMPTE2":"",
-"RUENUM":" 123","RUEBTE":"","DEBIT2":"","CREDIT2":"",
-"IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},
-"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
-"MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"WILMA","DOMI1":""}}
-"""
-
-
 User = dd.resolve_model('users.User')
 Partner = dd.resolve_model('contacts.Partner')
 Company = dd.resolve_model('contacts.Company')
@@ -143,14 +132,24 @@ Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
 pcsw = dd.resolve_app("pcsw")
 
-class WatchTimTest(TestCase):
+from lino_welfare.modlib.isip import models as isip
+
+class WatchTimTests(TestCase):
     
     maxDiff = None
   
     def test00(self):
+        
+        
+        ASD = pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,name="ASD")
+        ASD.save()
+        
+        DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,name="DSBE")
+        DSBE.save()
+        
         User(username='watch_tim').save()
-        User(username='alicia').save()
-        User(username='roger').save()
+        User(username='alicia',coaching_type=DSBE).save()
+        User(username='roger',coaching_type=ASD).save()
         User(username='edgar').save()
         households_Type(name="Eheleute",pk=1).save()
         settings.SITE.uppercase_last_name = True
@@ -179,7 +178,6 @@ class WatchTimTest(TestCase):
         `watch_tim` then must create a Client after creating also the intermediate Person.
         The Company child must be removed.
         """
-        
         Company(name="Müller Max Moritz",id=5088).save()
         global PUT_MAX_MORITZ
         process_line(PUT_MAX_MORITZ)
@@ -234,13 +232,13 @@ class WatchTimTest(TestCase):
         s = changes_to_rst(client.partner_ptr)
         #~ print s
         self.assertEqual(s,"""\
-=========== ============== ============================= ====================================================================== ============= ===========
- Benutzer    Änderungsart   Object                        Änderungen                                                             Object type   object id
------------ -------------- ----------------------------- ---------------------------------------------------------------------- ------------- -----------
- watch_tim   Erstellen      alicia / Voldemort-Potter H   Coaching(id=1,user=2,client=4260,start_date=1985-07-23,primary=True)   Begleitung    1
- watch_tim   Add child      Harald VOLDEMORT-POTTER       pcsw.Client                                                            Person        4260
- watch_tim   Add child      Voldemort-Potter Harald       contacts.Person                                                        Partner       4260
-=========== ============== ============================= ====================================================================== ============= ===========
+=========== ============== ============================= ============================================================================= ============= ===========
+ Benutzer    Änderungsart   Object                        Änderungen                                                                    Object type   object id
+----------- -------------- ----------------------------- ----------------------------------------------------------------------------- ------------- -----------
+ watch_tim   Erstellen      alicia / Voldemort-Potter H   Coaching(id=1,user=2,client=4260,start_date=1985-07-23,type=2,primary=True)   Begleitung    1
+ watch_tim   Add child      Harald VOLDEMORT-POTTER       pcsw.Client                                                                   Person        4260
+ watch_tim   Add child      Voldemort-Potter Harald       contacts.Person                                                               Partner       4260
+=========== ============== ============================= ============================================================================= ============= ===========
 """)
 
         #~ def test05(self):
@@ -399,7 +397,7 @@ class WatchTimTest(TestCase):
         try:
             process_line(ln)
             self.fail("""Expected ValidationError: {'first_name': [u'Dieses Feld darf nicht leer sein.']}""")
-            # NOTVA is leer, also will watch_tim eine Person draus machen, 
+            # NOTVA ist leer, also will watch_tim eine Person draus machen, 
             # aber dazu bräuchte er auch einen Vornamen
         except ValidationError as e:
             pass
@@ -432,11 +430,48 @@ class WatchTimTest(TestCase):
         "RUENUM":"   9","RUEBTE":"","DEBIT2":"","CREDIT2":"",
         "IMPDATE":{"__date__":{"year":2009,"month":9,"day":22}},
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
-        "IDUSR":"ELMAR","DOMI1":""}}"""
+        "IDUSR":"ALICIA","DOMI1":""}}"""
         process_line(ln)
         self.assertDoesNotExist(Client,id=7826)
+        
+        """
+        20130602 : datum_bis einer primären Begleitung eines Ehemaligen darf
+        nicht leer sein. Wenn es das ist, soll watch_tim es auf 01.01.1990
+        setzen. 
+        """
+        self.assertDoesNotExist(Coaching,client_id=7826)
+        ln = ln.replace('"NB2":""','"NB2":"940702 234-24"')
+        process_line(ln)
+        obj = Client.objects.get(id=7826)
+        self.assertEqual(obj.name,"Mustermann Peter")
+        s = coachings_to_rst(obj)
+        #~ print s
+        self.assertEqual(s,"""\
+====================== ===== =========== ======== ======== ================== =======
+ Begleitet seit         bis   Begleiter   Primär   Dienst   Beendigungsgrund   ID
+---------------------- ----- ----------- -------- -------- ------------------ -------
+ 05.01.06                     alicia      Ja       DSBE                        2
+ **Total (1 Zeilen)**                     **1**                                **0**
+====================== ===== =========== ======== ======== ================== =======
+""")
+        ln = ln.replace('"IDPRT":"S"','"IDPRT":"I"')
+        process_line(ln)
+        s = coachings_to_rst(obj)
+        #~ print s
+        self.assertEqual(s,"""\
+====================== ========== =========== ======== ======== ================== =======
+ Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund   ID
+---------------------- ---------- ----------- -------- -------- ------------------ -------
+ 05.01.06               01.01.90   alicia      Ja       DSBE                        2
+ **Total (1 Zeilen)**                          **1**                                **0**
+====================== ========== =========== ======== ======== ================== =======
+""")
 
 
 def changes_to_rst(master):
     A = settings.SITE.modules.changes.ChangesByMaster
     return A.request(master).to_rst(column_names = 'user type object diff:30 object_type object_id')
+
+def coachings_to_rst(master):
+    A = settings.SITE.modules.pcsw.CoachingsByClient
+    return A.request(master).to_rst()

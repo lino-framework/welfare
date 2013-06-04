@@ -966,13 +966,6 @@ class Client(Person):
         #~ return None
         
         
-    #~ def get_default_table(self,ar):
-        #~ if ar.get_user().profile.integ_level and self.client_state == ClientStates.coached:
-            #~ return IntegClients
-        #~ if ar.get_user().profile.newcomers_level: 
-            #~ return newcomers.NewClients
-        #~ return Clients # self._lino_default_table
-        
     
     
     @dd.chooser()
@@ -2176,8 +2169,8 @@ class UsersWithClients(dd.VirtualTable):
         return IntegClients.request(param_values=dict(
             only_active=True,coached_by=obj,start_date=t,end_date=t))
 
-#~ @dd.receiver(dd.connection_created,weak=False)
-def on_connection_created(sender,**kw):
+@dd.receiver(dd.database_connected)
+def on_connection_created(sender,**kw):  #~ def on_connection_created(sender=None,**kw):
     """
     Builds columns dynamically from the :class:`PersonGroup` database table.
     Called when kernel setup is done, 
@@ -2205,11 +2198,6 @@ def on_connection_created(sender,**kw):
     self.column_names += ' primary_clients active_clients row_total'
     settings.SITE.resolve_virtual_fields()
 
-from djangosite.utils.djangotest import testcase_setup
-testcase_setup.connect(on_connection_created)
-dd.connection_created.connect(on_connection_created)
-models.signals.post_syncdb.connect(on_connection_created)
-        
 
 
 #

@@ -87,14 +87,12 @@ die momentan in Lino nicht importiert wird.
 Falls sie mal in Lino sichtbar werden soll, 
 sollte sie als ein eigenes schreibgeschütztes Ankreuzfeld da stehen.
 
-
-Mögliche Überraschungen
------------------------
+Hier einige mögliche Überraschungseffekte
 
 - Ein existierender Klient kann in Lino verschwunden scheinen, 
-  weil er versehentlich als veraltet
-  markiert wurde
+  weil er versehentlich als veraltet  markiert wurde
   (siehe `Veraltete Partner`_).
+  (siehe `Partnerattribute`_).
   Also nachprüfen, ob er in TIM das **Partnerattribut W** gesetzt hat. 
   Oder gar unter Partnerart "Inaktive" steht.
 
@@ -255,8 +253,9 @@ Für die primäre Begleitung eines *importierten* Klienten gilt:
 - Die Felder `primär`, `bis` und `Benutzer` sind schreibgeschützt und wie folgt belegt:
 
   - `primär` = angekreuzt
-  - `bis` = leer
   - `Benutzer` : der in TIM angegebene Benutzer
+  - `bis` : entweder leer (wenn es eine aktive Begleitung ist) 
+    oder 01.01.1990 (wenn es ein Neuzugang oder ehemaliger Klient ist)
   
   Diese Angaben können also nur über TIM verändert werden.
 
