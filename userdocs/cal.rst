@@ -31,7 +31,7 @@ Référence
 .. actor:: cal.Events
 .. actor:: cal.Tasks
 .. actor:: cal.Subscriptions
-.. actor:: cal.Places
+.. actor:: cal.Rooms
 .. actor:: cal.Priorities
 .. actor:: cal.GuestRoles
 .. actor:: cal.Guests

@@ -716,4 +716,59 @@ def migrate_from_1_1_6(globals_dict):
     """
     renamed cal.Place -> cal.Room
     """
+    bv2kw = globals_dict['bv2kw']
+    new_content_type_id = globals_dict['new_content_type_id']
+    
+    cal_Place = resolve_model('cal.Room')
+    globals_dict.update(cal_Place=cal_Place)
+    
+    cal_Event = resolve_model('cal.Event')
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state, assigned_to_id):
+        kw = dict()
+        kw.update(id=id)
+        owner_type_id = new_content_type_id(owner_type_id)
+        kw.update(owner_type_id=owner_type_id)
+        kw.update(owner_id=owner_id)
+        kw.update(user_id=user_id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(project_id=project_id)
+        kw.update(build_time=build_time)
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        kw.update(summary=summary)
+        kw.update(description=description)
+        kw.update(uid=uid)
+        kw.update(calendar_id=calendar_id)
+        kw.update(access_class=access_class)
+        kw.update(sequence=sequence)
+        kw.update(auto_type=auto_type)
+        kw.update(transparent=transparent)
+        kw.update(room_id=place_id)
+        kw.update(priority_id=priority_id)
+        kw.update(state=state)
+        kw.update(assigned_to_id=assigned_to_id)
+        return cal_Event(**kw)
+    globals_dict.update(create_cal_event=create_cal_event)
+    
+    isip_ExamPolicy = resolve_model('isip.ExamPolicy')
+    def create_isip_exampolicy(id, name, start_date, start_time, end_date, end_time, summary, description, every, every_unit, calendar_id):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        #~ kw.update(summary=summary)
+        #~ kw.update(description=description)
+        kw.update(every=every)
+        kw.update(every_unit=every_unit)
+        kw.update(calendar_id=calendar_id)
+        return isip_ExamPolicy(**kw)
+    globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
+
+    
     return '1.1.7'

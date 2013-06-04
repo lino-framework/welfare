@@ -73,11 +73,6 @@ Référence
 
 .. actor:: jobs.JobsOverview
 
-Ceci est la vieille version du document, elle sera remplacée par
-:ref:`welfare.jobs.NewJobsOverview`
-
-.. actor:: jobs.NewJobsOverview
-
 
 This list helps you to make decisions like:
 
@@ -89,5 +84,5 @@ Example (using fictive demo data):
 
 .. django2rst:: 
 
-    settings.SITE.login('rolf').show(jobs.NewJobsOverview)
+    settings.SITE.login('rolf').show(jobs.JobsOverview)
     

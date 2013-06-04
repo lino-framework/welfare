@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-27 15:46+0300\n"
+"POT-Creation-Date: 2013-06-04 14:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,22 +66,22 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-#: ../clients.rst:65
+#: ../clients.rst:66
 # 3acbab023921428ba77d66fa8a187e0e
 msgid "Anhang"
 msgstr ""
 
-#: ../clients.rst:67
+#: ../clients.rst:68
 # 5269638430af4771b4fcf6c376b5b30f
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
-#: ../clients.rst:68
+#: ../clients.rst:69
 # 3d627a2f4f944ccf91770242554535ce
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
-#: ../clients.rst:69
+#: ../clients.rst:70
 # 71e98fc701c84a4f817c034ae30d8ff4
 msgid "engl. \"State\" = Bearbeitungszustand"
 msgstr ""

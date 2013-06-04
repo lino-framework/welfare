@@ -10,12 +10,22 @@ The final truth about what's going on is only
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
 
-Version 1.1.6 (released :blogref:`20130527`)
+Version 1.1.7 (released :blogref:`20130604`)
 ============================================
+
+- DSBE --> Tätigkeitsbericht
 
 - Fixed: 
   Beim Ausdruckversuch einer Excelliste bei Klienten Suchfilter kommt
   Fehlermeldung... "Server Error (500)"
+  
+- Fixed:
+  Server error 500 beim Versuch, eine Aufgabe als Erledigt zu markieren
+  
+- removed fields Exampolicy.summary und description  
+
+Version 1.1.6 (released :blogref:`20130527`)
+============================================
 
 - Erweiterungen in den Parameter-Panels für 
   :ref:`Klienten <welfare.pcsw.Clients>`, 

@@ -32,5 +32,5 @@ Click this button to save your changes in the form.
 Référence
 ---------
 
-.. actor:: lino_welfare.ActivityReport
+.. actor:: integ.ActivityReport
 
