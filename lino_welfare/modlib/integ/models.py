@@ -107,8 +107,11 @@ class PeriodicNumbers(dd.VirtualTable):
 
     @classmethod
     def get_data_rows(self,ar):
+
         mi = ar.master_instance
         if mi is None: return
+        
+        DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
         
         def add(A,**pva):
             #~ pva = dict(**kw)
@@ -127,9 +130,9 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ cells.append(ar)
             #~ return cells
 
-        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.started)
-        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.active)
-        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.ended)
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.started,coaching_type=DSBE)
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.active,coaching_type=DSBE)
+        yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.ended,coaching_type=DSBE)
         
         yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.coached)
         yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.created)
@@ -145,26 +148,31 @@ class PeriodicNumbers(dd.VirtualTable):
     
 class CoachingEndingsByUser(dd.VentilatingTable,pcsw.CoachingEndings):
     label = _("Coaching endings by user")
+    hide_zero_rows = True
+
     @classmethod
     def get_ventilated_columns(self):
+        DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
         def w(user):
             def func(fld,obj,ar):
                 mi = ar.master_instance
                 if mi is None: return None
                 pv = dict(start_date=mi.start_date,end_date=mi.end_date)
                 pv.update(observed_event=pcsw.CoachingEvents.ended)
+                pv.update(coaching_type=DSBE)
                 if user is not None:
                     pv.update(coached_by=user)
                 pv.update(ending=obj)
                 return pcsw.Coachings.request(param_values=pv)
             return func
         #~ for u in settings.SITE.user_model.objects.exclude(profile=''):
-        for u in settings.SITE.user_model.objects.filter(coaching_type=isip.COACHINGTYPE_DSBE):
+        #~ for u in settings.SITE.user_model.objects.filter(coaching_type__id=isip.COACHINGTYPE_DSBE):
+        for u in settings.SITE.user_model.objects.all():
             yield dd.RequestField(w(u),verbose_name=unicode(u.username))
         yield dd.RequestField(w(None),verbose_name=_("Total"))
     
    
-class CoachingEndingsByType(dd.VentilatingTable,pcsw.CoachingEndings):
+class CoachingEndingsByType(dd.VentilatingTable,pcsw.CoachingEndings): # not currently used
     
     label = _("Coaching endings by type")
     
@@ -332,51 +340,6 @@ class JobProvidersAndContracts(CompaniesAndContracts):
         qs = qs.annotate(count=models.Count('jobs_contract_set_by_company'))
         return qs.filter(count__gte=1)
     
-
-class ActivityReport1(dd.EmptyTable):
-    """
-    Welche (Wieviele) Verträge
-    
-    - waren aktiv am X
-    - wurden unterzeichnet / abgeschlossen / beendet
-      in der Periode vom X bis Y
-    - pro Kategorie (Sozialwirtschaft, Interne, Externe Öffentlich, Externe Privat,...)
-    - pro Beendigungsgrund
-    - pro Partnerorganisation
-    - pro Ausbildungsart
-    
-    """
-    required = dd.required(user_level='manager')
-    label = _("Activity Report") 
-    
-    parameters = dict(
-      start_date = models.DateField(verbose_name=_("Period from")),
-      end_date = models.DateField(verbose_name=_("until")),
-      include_jobs = models.BooleanField(verbose_name=pcsw.JOBS_MODULE_LABEL),
-      include_isip = models.BooleanField(verbose_name=_("ISIP")),
-      )
-      
-    params_layout = "start_date end_date include_jobs include_isip"
-    #~ params_panel_hidden = True
-
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        D = datetime.date
-        kw.update(start_date = D(D.today().year,1,1))
-        kw.update(end_date = D(D.today().year,12,31))
-        return kw
-
-    detail_layout = "CompareRequestsTable PeriodicNumbers t2"
-    
-    @dd.virtualfield(dd.HtmlBox(_("Second tab")))
-    def t2(cls,self,ar):
-        html = []
-        for A in (CoachingEndingsByUser,CoachingEndingsByType,ContractEndingsByType):
-            html.append(E.h3(A.label))
-            html.append(ar.show(A,master_instance=self))
-        #~ html.append(E.p("Foo"))
-        #~ html.append(E.p("Bar"))
-        return E.div(*html)
 
 
 class ActivityReport(dd.Report):
