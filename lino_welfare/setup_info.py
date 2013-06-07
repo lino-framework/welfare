@@ -30,7 +30,9 @@ SETUP_INFO = dict(name='lino-welfare',
       test_suite = 'tests',
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\
-Lino-Welfare is a modular customized application for Belgian 
+Lino-Welfare is a modular customized 
+`Lino <http://www.lino-framework.org>`_ 
+application for Belgian 
 *Public Centres for Social Welfare*. 
 It currently covers the following functions of a PCSW:
 

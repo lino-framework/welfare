@@ -147,7 +147,7 @@ class ExamPolicies(dd.Table):
     id name
     # summary start_date end_date
     # description
-    max_occurences every every_unit calendar
+    max_events every every_unit calendar
     isip.ContractsByPolicy    
     jobs.ContractsByPolicy    
     """
