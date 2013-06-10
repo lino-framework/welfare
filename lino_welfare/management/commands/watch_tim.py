@@ -894,7 +894,7 @@ def process_line(ln):
     if ctrl is None:
         #~ raise Exception("%(alias)s : no such controller." % kw)
         #~ logger.debug("Ignoring change %(time)s for %(alias)s:%(id)s",kw['time'],kw['alias'],kw['id'])
-        logger.info("Ignoring change %(time)s for %(alias)s:%(id)s",kw)
+        dblogger.info("Ignoring change %(time)s for %(alias)s:%(id)s",kw)
         return
     #~ kw['data'] = ctrl.prepare_data(kw['data'])
     m = getattr(ctrl,kw['method'])
@@ -952,14 +952,14 @@ def main(*args,**options):
         raise CommandError('Please specify the path to your TIM changelog directory')
     data_dir = args[0]
     #~ msg = "Started watch_tim %s on %s ..."
-    #~ logger.info(msg,data_dir)
+    #~ dblogger.info(msg,data_dir)
     #~ dblogger.info(msg,lino.__version__,data_dir)
     
     settings.SITE.startup() 
         
     #~ def goodbye():
         #~ msg = "Stopped watch_tim %s on %s ..."
-        #~ logger.info(msg,data_dir)
+        #~ dblogger.info(msg,data_dir)
         #~ dblogger.info(msg,lino.__version__,data_dir)
     #~ # signal.signal(signal.SIGTERM,on_SIGTERM)
     #~ atexit.register(goodbye)
@@ -987,7 +987,8 @@ class Command(DaemonCommand):
     #~ preserve_loggers = (logger,dblogger.logger)
     preserve_loggers = [dblogger.logger]
     
-    def handle_daemon(self, *args, **options):
+    #~ def handle_daemon(self, *args, **options):
+    def handle(self, *args, **options):
         main(*args,**options)
 
 

@@ -1269,12 +1269,20 @@ def unused_setup_my_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)
     m.add_action(MyBudgets)
   
-def setup_config_menu(site,ui,profile,m): 
+def setup_config_menu(site,ui,profile,m):
     m  = m.add_menu("debts",MODULE_LABEL)
-    if site.site_config.master_budget:
+    mb = site.site_config.master_budget
+    if mb is not None:
+        """
+        the following line is to specify user permissions: non-manager 
+        debts agents users should have this command.
+        """
+        #~ mb._detail_action = MyBudgets.get_url_action('detail_action')
+        # (TODO: find a more elegant solution)
+        
         fld = site.modules.ui.SiteConfig._meta.get_field('master_budget')
-        m.add_instance_action(site.site_config.master_budget,
-            label=unicode(fld.verbose_name))
+        m.add_instance_action(mb,label=unicode(fld.verbose_name),
+            action=MyBudgets.detail_action)
     #~ if user.profile.debts_level < UserLevels.manager: 
         #~ return
     #~ m.add_action(Accounts)
@@ -1285,7 +1293,7 @@ def setup_config_menu(site,ui,profile,m):
 def setup_explorer_menu(site,ui,profile,m):
     #~ if user.profile.debts_level < UserLevels.manager:
         #~ return
-    m  = m.add_menu("debts",MODULE_LABEL)
+    m = m.add_menu("debts",MODULE_LABEL)
     m.add_action(Budgets)
     m.add_action(Entries)
     #~ m.add_action(Debts)

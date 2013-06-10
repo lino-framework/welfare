@@ -478,6 +478,9 @@ Belgique""")
  **Restbetrag für Kredite und Zahlungsrückstände**         **-1 013,67**
 ========================================================= ===============
 """)
+        settings.SITE.site_config.master_budget = b1
+        settings.SITE.site_config.save()
+        
         
         #~ b2 = b1.duplicate()
         b2 = ses.run(b1.duplicate)
@@ -589,6 +592,7 @@ Belgique""")
         obj = accounts.Account.objects.get(group=ag)
         self.assertEqual(obj.name,"TestAccount")
         
+        
         def menu_test(username,expected,debug=False):
             ses = settings.SITE.login(username) 
             mnu = settings.SITE.get_site_menu(None,ses.get_user().profile)
@@ -632,6 +636,7 @@ Belgique""")
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
+  - Schuldnerberatung : Budget-Kopiervorlage
   - ZDSS : Sektoren, Eigenschafts-Codes
 
 - Explorer :
@@ -702,6 +707,7 @@ Belgique""")
   
   - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
+  - Schuldnerberatung : Budget-Kopiervorlage
 
 - Site : Info
 """) # 300 debts consultant
@@ -730,3 +736,10 @@ Belgique""")
 - Site : Info
 """) # 200 newcomers
 
+
+
+        #~ kw = dict(id=1,user=User.objects.get(username='300'))
+        #~ kw.update(partner=)
+        #~ mb = debts.Budget(**kw)
+        #~ mb.save()
+        #~ settings.SITE.site_config.master_budget = mb

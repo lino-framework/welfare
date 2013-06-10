@@ -102,4 +102,7 @@ def objects():
         new.remark = EXPENSE_REMARKS.pop()
         yield new
     
+    settings.SITE.site_config.master_budget = Budget.objects.get(id=1)
+    yield settings.SITE.site_config
+    
     

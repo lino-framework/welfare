@@ -187,8 +187,6 @@ class Site(Site,cbss.SiteMixin):
         cfg = main.add_menu("config",_("Configure"))
         self.on_each_app('setup_config_menu',ui,profile,cfg)
             
-            
-            
         #~ if profile.level >= dd.UserLevels.manager: # is_staff:
           
         m = main.add_menu("explorer",_("Explorer"))
