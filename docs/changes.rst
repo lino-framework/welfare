@@ -9,6 +9,13 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
+Version 1.1.8 (released :blogref:`20130610`)
+============================================
+
+- :menuselection:`Schuldnerberatung --> Budget-Vorlage` auch für Kerstin
+- `daemoncommand.py` and Django 1.5
+
+
 
 Version 1.1.7 (released :blogref:`20130604`)
 ============================================

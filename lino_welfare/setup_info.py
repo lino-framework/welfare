@@ -24,14 +24,14 @@
 SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
-      version='1.1.7', 
-      install_requires=['lino>=1.6.10','suds','vobject'],
+      version='1.1.8', 
+      install_requires=['lino>=1.6.11','suds','vobject'],
       #~ version=VERSION,
       test_suite = 'tests',
       description=u"A Lino application for Belgian Public Welfare Centres",
       long_description="""\
 Lino-Welfare is a modular customized 
-`Lino <http://www.lino-framework.org>`_ 
+`Lino <http://www.lino-framework.org>`__ 
 application for Belgian 
 *Public Centres for Social Welfare*. 
 It currently covers the following functions of a PCSW:
@@ -40,8 +40,8 @@ It currently covers the following functions of a PCSW:
 - Integration service
 - Debt mediation
 
-It started as a part of the `Lino <http://code.google.com/p/lino/>`_
-project and forked off in August 2012 
+It started as a part of the Lino project and 
+forked off in August 2012 
 to become an independent project,
 possibly to be maintained by an independant organization.""",
       author = 'Luc Saffre',
