@@ -300,24 +300,28 @@ def PAR_model(data):
     - Neuzugänge (Attribut N) sind ebenfalls immer Klienten
     
     """
-    nb2 = data.get('NB2',False)
-    if nb2: # SSIN
-        if nb2.strip() == '0':
-            data['NB2'] = ''
-        else:
+    has_first_name = len(data.get('FIRME','').split()) > 1
+    if has_first_name:
+        nb2 = data.get('NB2',False)
+        if nb2: # SSIN
+            if nb2.strip() == '0':
+                data['NB2'] = ''
+            else:
+                return Client
+        if data.get('NB1',False): # gesdos-Nr
             return Client
-    if data.get('NB1',False): # gesdos-Nr
-        return Client
-    attribs = data.get('ATTRIB',False)
-    if attribs and 'N' in attribs: # newcomer
-        return Client
-    #~ if data.get('IDUSR',False): # Sozi
-        #~ return Client
+        attribs = data.get('ATTRIB',False)
+        if attribs and 'N' in attribs: # newcomer
+            return Client
+        #~ if data.get('IDUSR',False): # Sozi
+            #~ return Client
     if data.get('NOTVA',False):
         return Company
     if data.get('ALLO','') in (u"Eheleute",):
         return Household
-    return Person
+    if has_first_name:
+        return Person
+    return Partner
     
 
     
@@ -640,6 +644,9 @@ class PAR(Controller):
             mapper.update(name='FIRME')
             if data.get('ALLO','') == "Eheleute":
                 obj.type = households_Type.objects.get(pk=1)
+        elif obj.__class__ is Partner:
+            mapper.update(name='FIRME')
+            mapper.update(prefix='ALLO')
             
         Controller.applydata(self,obj,data,**mapper)
         

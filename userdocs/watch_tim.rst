@@ -52,6 +52,17 @@ Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin komm
   :ref:`Haushalt <welfare.households.Household>`
 - Ansonsten wird es eine :ref:`Person <welfare.contacts.Person>`.
 
+Zusatzregel:
+
+- um Klient oder Person werden zu können, muss ein Partner außerdem
+  auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein 
+  Leerzeichen enthalten.
+  Hat er das nicht, wird er zum einfachen 
+  :ref:`Partner <welfare.contacts.Partner>`,
+  und eventuelle Information in `PAR->NB1` oder `PAR->NB2` 
+  werden ignoriert.
+  
+
 Ob eine :ref:`Organisation <welfare.contacts.Company>` auch 
 :ref:`Kursanbieter <welfare.courses.CourseProvider>` 
 und/oder 

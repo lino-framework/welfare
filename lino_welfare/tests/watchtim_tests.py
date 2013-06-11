@@ -269,12 +269,14 @@ class WatchTimTests(TestCase):
         """
         self.assertDoesNotExist(Partner,id=1334)
         translation.deactivate_all()
-        try:
-            process_line(ln)
-            self.fail("Expected a ValidationError")
-        except ValidationError as e:
-            self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
-        self.assertDoesNotExist(Partner,id=1334)
+        process_line(ln)
+        obj = Partner.objects.get(id=1334) 
+        self.assertDoesNotExist(Company,id=1334)
+        self.assertDoesNotExist(Person,id=1334)
+            #~ self.fail("Expected a ValidationError")
+        #~ except ValidationError as e:
+            #~ self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
+        #~ self.assertDoesNotExist(Partner,id=1334)
         ln = ln.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
         process_line(ln)
         company = Company.objects.get(id=1334) 
@@ -380,7 +382,10 @@ class WatchTimTests(TestCase):
 =========== ============== =============== ================== ============= ===========
 """)
 
-
+        """
+        A PAR without NoTVA becomes a Person, but if no first_name can 
+        be detected, then it is just a simple partner
+        """
         ln = """{"method":"PUT","alias":"PAR","id":"0000001267","time":"20130517 12:34:15",
         "user":"","data":{"IDPAR":"0000001267","FIRME":"Velopa","NAME2":"",
         "RUE":"Leuvenselaan","CP":"3300","IDPRT":"I","PAYS":"B","TEL":"",
@@ -393,15 +398,18 @@ class WatchTimTests(TestCase):
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"",
         "DOMI1":""}}"""
-        
-        try:
-            process_line(ln)
-            self.fail("""Expected ValidationError: {'first_name': [u'Dieses Feld darf nicht leer sein.']}""")
-            # NOTVA ist leer, also will watch_tim eine Person draus machen, 
-            # aber dazu bräuchte er auch einen Vornamen
-        except ValidationError as e:
-            pass
         self.assertDoesNotExist(Partner,id=1267)
+        process_line(ln)
+        obj = Partner.objects.get(id=1267)
+        self.assertEqual(obj.name,"Velopa")
+        #~ try:
+            #~ process_line(ln)
+            #~ self.fail("""Expected ValidationError: {'first_name': [u'Dieses Feld darf nicht leer sein.']}""")
+            #~ # NOTVA ist leer, also will watch_tim eine Person draus machen, 
+            #~ # aber dazu bräuchte er auch einen Vornamen
+        #~ except ValidationError as e:
+            #~ pass
+        #~ self.assertDoesNotExist(Partner,id=1267)
         
         ln = """{"method":"PUT","alias":"PAR","id":"0000000665","time":"20130517 12:33:58","user":"",
         "data":{"IDPAR":"0000000665","FIRME":"Petra","NAME2":"","RUE":"Beskensstraat 34","CP":"3520",
@@ -466,6 +474,53 @@ class WatchTimTests(TestCase):
  **Total (1 Zeilen)**                          **1**                                **0**
 ====================== ========== =========== ======== ======== ================== =======
 """)
+
+
+        """
+        A non-client partner with empty PAR->NoTva will become a Person, not a Company.
+        If the partner is in fact a company whose NoTva has just been forgotten, 
+        then watch_tim will raise a ValidationError:
+        """
+        ln = """{"method":"POST","alias":"PAR","id":"0000087683","time":"20130610 11:26:30",
+        "user":"ROGER","data":{"IDPAR":"0000087683","FIRME":"Bellavilla","NAME2":"","RUE":"",
+        "CP":"","IDPRT":"V","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
+        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"",
+        "PROF":"00","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":2013,"month":6,"day":10}},"ALLO":"","NB1":"",
+        "NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"",
+        "CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"",
+        "CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
+        "IDUSR":"","DOMI1":""}}"""
+        self.assertDoesNotExist(Partner,id=87683)
+        process_line(ln)
+        #~ try:
+            #~ self.fail("Expected ValidationError {'first_name': [u'Dieses Feld darf nicht leer sein.']}")
+        #~ except ValidationError as e:
+        obj = Partner.objects.get(id=87683)
+        for m in Company,Person, Client, Household:
+            self.assertDoesNotExist(m,id=87683)
+            
+        ln = """{"method":"PUT","alias":"PAR","id":"0000004124","time":"20130517 12:34:37",
+        "user":"","data":{"IDPAR":"0000004124","FIRME":"Theves-Carlsberg","NAME2":"",
+        "RUE":"Werthplatz 22","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
+        "COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"",
+        "CREDIT":"","ATTRIB":"W","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80",
+        "CODE1":"EP","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1985,
+        "month":4,"day":18}},"ALLO":"Eheleute","NB1":"THCA600115","NB2":"",
+        "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"",
+        "DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":0,
+        "month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+        "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
+        "IDUSR":"ROGER","DOMI1":""}}"""
+        self.assertDoesNotExist(Partner,id=4124)
+        process_line(ln)
+        obj = Company.objects.get(id=4124)
+        ln = ln.replace("BE-0999.999.999","")
+        process_line(ln)
+        self.assertDoesNotExist(Company,id=4124)
+        obj = Household.objects.get(id=4124)
+
+
 
 
 def changes_to_rst(master):

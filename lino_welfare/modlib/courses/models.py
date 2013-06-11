@@ -616,10 +616,11 @@ class PendingCourseRequests(CourseRequests):
     parameters = dict(
         request_state = CourseRequestStates.field(blank=True),
         course_content = models.ForeignKey("courses.CourseContent",blank=True),
+        course_offer = models.ForeignKey("courses.CourseOffer",blank=True),
         course_provider = models.ForeignKey('courses.CourseProvider',blank=True),
         **CLIENTS_TABLE.parameters)
     params_layout = CLIENTS_TABLE.params_layout + """\
-    request_state course_content course_provider
+    request_state course_content course_provider course_offer
     """
     
     
@@ -701,7 +702,9 @@ class PendingCourseRequests(CourseRequests):
         if ar.param_values.course_content:
             qs = qs.filter(content=ar.param_values.course_content)
         if ar.param_values.course_provider:
-            qs = qs.filter(provider=ar.param_values.course_provider)
+            qs = qs.filter(offer__provider=ar.param_values.course_provider)
+        if ar.param_values.course_offer:
+            qs = qs.filter(offer=ar.param_values.course_offer)
         return qs
         
     @classmethod
@@ -712,6 +715,8 @@ class PendingCourseRequests(CourseRequests):
             yield unicode(ar.param_values.course_content)
         if ar.param_values.course_provider:
             yield unicode(ar.param_values.course_provider)
+        if ar.param_values.course_offer:
+            yield unicode(ar.param_values.course_offer)
         for t in super(PendingCourseRequests,self).get_title_tags(ar):
             yield t
         for t in CLIENTS_TABLE.get_title_tags(ar):

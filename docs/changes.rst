@@ -13,7 +13,18 @@ Version 1.1.8 (released :blogref:`20130610`)
 ============================================
 
 - :menuselection:`Schuldnerberatung --> Budget-Vorlage` auch für Kerstin
+
 - `daemoncommand.py` and Django 1.5
+
+- PendingCourseRequests: 
+  Fixed a bug which caused a traceback 
+  "Cannot resolve keyword 'provider' into field."
+  when filtering on course provider in PendingCourseRequests.
+  Added a new filter parameter "Course offer".
+      
+- Auswahllisten auf ChoiceLists mit blank=True haben jetzt 
+  auch einen leeren Eintrag.
+
 
 
 
