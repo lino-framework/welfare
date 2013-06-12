@@ -2299,6 +2299,7 @@ class DispensesByClient(Dispenses):
     column_names = 'start_date end_date reason remarks:10'
     hidden_columns = 'id'
     auto_fit_column_widths = True
+    required=dict(user_groups='integ')
 
 
 

@@ -347,7 +347,8 @@ class JobProvidersAndContracts(CompaniesAndContracts):
 
 class ActivityReport(dd.Report):
     
-    required = dd.required(user_level='manager')
+    required = dict(user_groups='integ')
+    #~ required = dd.required(user_level='manager')
     label = _("Activity Report") 
     
     parameters = dict(

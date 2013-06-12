@@ -671,7 +671,7 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 

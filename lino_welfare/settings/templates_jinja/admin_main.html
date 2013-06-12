@@ -21,8 +21,10 @@
 </p>
 
 {% set T = settings.SITE.modules.pcsw.UsersWithClients %}
+{% if T.default_action.get_view_permission(ar.get_user().profile) %}
 <h2>{{T.label}}</h2>
 {{E.tostring(ar.show(T))}}
+{% endif %}
 
 <h2>{{_('Upcoming reminders')}}</h2>
 <table bgcolor="#eeeeee" padding="2pt" width="100%"><tr><td>
