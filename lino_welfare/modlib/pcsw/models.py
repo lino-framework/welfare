@@ -94,6 +94,7 @@ cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
+#~ jobs = dd.resolve_app('jobs')
 #~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
 notes = dd.resolve_app('notes')
@@ -245,7 +246,9 @@ class ClientEvents(dd.ChoiceList):
     verbose_name_plural = _("Observed events")
 add = ClientEvents.add_item
 add('10', _("Coached"),'coached')
-add('20', _("Dispense"),'dispense')
+add('20', _("ISIP"),'isip')
+add('21', _("Art.60§7 contract"),'jobs')
+add('22', _("Dispense"),'dispense')
 add('30', _("Exclusion"),'exclusion')
 add('40', _("Note"),'note')
 add('50', _("Created"),'created')
@@ -1734,6 +1737,17 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if period is not None and ce is not None:
             if ce == ClientEvents.coached:
                 pass
+            elif ce == ClientEvents.isip:
+                f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(isip_contract_set_by_client__applies_until__gte=period[0])
+                flt = f1 & (Q(isip_contract_set_by_client__date_ended__isnull=True) | Q(isip_contract_set_by_client__date_ended__gte=period[0]))
+                flt &= Q(isip_contract_set_by_client__applies_from__lte=period[1])
+                qs = qs.filter(flt).distinct()
+            elif ce == ClientEvents.jobs:
+                f1 = Q(jobs_contract_set_by_client__applies_until__isnull=True) | Q(jobs_contract_set_by_client__applies_until__gte=period[0])
+                flt = f1 & (Q(jobs_contract_set_by_client__date_ended__isnull=True) | Q(jobs_contract_set_by_client__date_ended__gte=period[0]))
+                flt &= Q(jobs_contract_set_by_client__applies_from__lte=period[1])
+                qs = qs.filter(flt).distinct()
+                
             elif ce == ClientEvents.dispense:
                 qs = qs.filter(
                     dispense__end_date__gte=period[0],

@@ -9,8 +9,13 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
-Version 1.1.8 (released :blogref:`20130610`)
+Version 1.1.8 (coming)
 ============================================
+
+- Filter-Panel in Klientenliste:
+  Zwei neue Beobachtungskriterien "VSE" und "Art-60§7-Konvention".
+  Antworten auf Fragen im Stil
+  "Nur Klienten anzeigen, die am 12.03.2012 einen VSE laufen hatten."
 
 - :menuselection:`Schuldnerberatung --> Budget-Vorlage` auch für Kerstin
 

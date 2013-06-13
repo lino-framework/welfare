@@ -695,6 +695,13 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     #~ circa todo remark description periods monthly_rate
     #~ """.split()
 
+    def get_siblings(self):
+        """Like super(), but adds account_type. 
+        E.g. the Up/Down methods should work only within a given account_type.
+        """
+        #~ return super(Entry,self).get_siblings().filter(account_type=self.account_type)
+        return self.__class__.objects.filter(budget=self.budget,account_type=self.account_type).order_by('seqno')
+        
     @chooser()
     def account_choices(cls,account_type):
         #~ print '20120918 account_choices', account_type
