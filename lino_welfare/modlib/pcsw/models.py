@@ -2107,7 +2107,6 @@ class ClientsTest(Clients):
 
 
     
-#~ class OverviewClientsByUser(dd.VirtualTable):
 class UsersWithClients(dd.VirtualTable):
     """
     A customized overview table.
@@ -2183,19 +2182,20 @@ class UsersWithClients(dd.VirtualTable):
         return IntegClients.request(param_values=dict(
             only_active=True,coached_by=obj,start_date=t,end_date=t))
 
-@dd.receiver(dd.database_connected)
-def on_connection_created(sender,**kw):  #~ def on_connection_created(sender=None,**kw):
+#~ @dd.receiver(dd.database_connected)
+#~ def on_database_connected(sender,**kw): 
+@dd.receiver(dd.database_ready)
+def on_database_ready(sender,**kw): 
     """
     Builds columns dynamically from the :class:`PersonGroup` database table.
-    Called when kernel setup is done, 
-    before the UI handle is being instantiated.
     
-    This must also be called by
+    This must also be called before each test case.
     """
     self = UsersWithClients
     self.column_names = 'user:10'
     today = datetime.date.today()
-    try:
+    #~ try:
+    if True:
         for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
             def w(pg):
                 def func(self,obj,ar):
@@ -2206,10 +2206,11 @@ def on_connection_created(sender,**kw):  #~ def on_connection_created(sender=Non
             vf = dd.RequestField(w(pg),verbose_name=pg.name)
             self.add_virtual_field('G'+pg.ref_name,vf)
             self.column_names += ' ' + vf.name 
-    except DatabaseError as e:
-        pass # happens e.g. if database isn't yet initialized
+    #~ except DatabaseError as e:
+        #~ pass # happens e.g. if database isn't yet initialized
         
     self.column_names += ' primary_clients active_clients row_total'
+    self.clear_handle()
     settings.SITE.resolve_virtual_fields()
 
 

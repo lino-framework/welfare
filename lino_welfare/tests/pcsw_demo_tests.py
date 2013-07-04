@@ -17,7 +17,7 @@ This module contains tests that are run on a demo database.
   
 To run only this test suite::
 
-  $ cd ~/hgwork/welfare/lino_welfare/demo
+  $ cd ~/hgwork/welfare
   $ python manage.py test lino_welfare.DemoTest
   
 Methods named `test0*` do not modify any data.

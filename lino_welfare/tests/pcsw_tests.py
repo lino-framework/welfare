@@ -689,6 +689,44 @@ Belgique""")
 - Site : Info
 """) # 100 integration agent
 
+        # integration agent (manager)
+        menu_test("110","""\
+- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+
+- Büro :
+  
+  - Mein E-Mail-Ausgang
+  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
+  - Meine Notizen
+
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
+
+- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
+
+- Listings : Benutzer und ihre Klienten
+
+- Konfigurierung :
+  
+  - Büro : Meine Einfügetexte
+  - Kontakte : Länder, Sprachen
+  - Kalender : Räume, Prioritäten, Kalenderliste
+  - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
+  - Kurse : Kursinhalte
+
+- Explorer :
+  
+  - Büro : E-Mail-Ausgänge, Anhänge
+  - Kalender : Aufgaben, Abonnements
+  - CV : Sprachkenntnisse
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
+  - Kurse : Kursanfragen
+
+- Site : Info
+""") # 110 integration agent (manager)
+
         # debts consultant
         menu_test('300',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)

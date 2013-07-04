@@ -184,8 +184,8 @@ class Site(Site,cbss.SiteMixin):
         self.on_each_app('setup_reports_menu',ui,profile,m)
         
         #~ if profile.level >= dd.UserLevels.manager: # is_staff:
-        cfg = main.add_menu("config",_("Configure"))
-        self.on_each_app('setup_config_menu',ui,profile,cfg)
+        m = main.add_menu("config",_("Configure"))
+        self.on_each_app('setup_config_menu',ui,profile,m)
             
         #~ if profile.level >= dd.UserLevels.manager: # is_staff:
           

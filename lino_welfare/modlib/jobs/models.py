@@ -290,6 +290,7 @@ class Function(dd.BabelNamed):
         #~ blank=True,null=True)
         
 class Functions(dd.Table):
+    #~ debug_permissions = 20130704
     required = dd.required(user_groups='integ',user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
@@ -1509,7 +1510,6 @@ def setup_config_menu(site,ui,profile,m):
     m.add_action(Functions)
     m.add_action(Schedules)
     m.add_action(Regimes)
-            
     
     
   
