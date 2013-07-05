@@ -2210,7 +2210,7 @@ def on_database_ready(sender,**kw):
         #~ pass # happens e.g. if database isn't yet initialized
         
     self.column_names += ' primary_clients active_clients row_total'
-    self.clear_handle()
+    self.clear_handle() # avoid side effects when running multiple test cases
     settings.SITE.resolve_virtual_fields()
 
 

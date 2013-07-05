@@ -777,6 +777,9 @@ def migrate_from_1_1_7(globals_dict):
     """
     - in isip.examPolicy renamed max_occurences to max_events
     """
+    bv2kw = globals_dict['bv2kw']
+    new_content_type_id = globals_dict['new_content_type_id']
+    
     isip_ExamPolicy = resolve_model('isip.ExamPolicy')
     def create_isip_exampolicy(id, name, start_date, start_time, end_date, end_time, every, every_unit, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_occurences, calendar_id):
         kw = dict()
