@@ -696,7 +696,8 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     #~ """.split()
 
     def get_siblings(self):
-        """Like super(), but adds account_type. 
+        """
+        Like super(), but adds account_type. 
         E.g. the Up/Down methods should work only within a given account_type.
         """
         #~ return super(Entry,self).get_siblings().filter(account_type=self.account_type)
@@ -824,8 +825,8 @@ class EntriesByBudget(Entries):
     Base class for the tables used to edit Entries by budget.
     """
     master_key = 'budget'
-    column_names = "account description amount actor:10 periods:10 remark move_buttons seqno todo"
-    hidden_columns = "seqno"
+    column_names = "account description amount actor:10 periods:10 remark move_buttons:8 seqno todo id"
+    hidden_columns = "seqno id"
     auto_fit_column_widths = True
     required = dd.required(user_groups='debts')
     #~ required_user_level = None
@@ -842,11 +843,11 @@ class IncomesByBudget(EntriesByBudget,EntriesByType):
 class LiabilitiesByBudget(EntriesByBudget,EntriesByType):
     "Liabilities By Budget"
     _account_type = AccountTypes.liabilities
-    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate todo seqno"
+    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate move_buttons:8 todo seqno id"
     
 class AssetsByBudget(EntriesByBudget,EntriesByType):
     _account_type = AccountTypes.assets
-    column_names = "account remark amount actor todo seqno"
+    column_names = "account remark amount actor move_buttons:8 todo seqno id"
 
 
 #~ class PrintEntriesByBudget(EntriesByBudget,EntriesByType):

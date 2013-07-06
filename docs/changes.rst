@@ -14,10 +14,14 @@ Version 1.1.8 (coming)
 
 - Filter-Panel in Klientenliste:
   Zwei neue Beobachtungskriterien "VSE" und "Art-60§7-Konvention".
-  Antworten auf Fragen im Stil
+  Ermöglicht Antworten auf Fragen im Stil
   "Nur Klienten anzeigen, die am 12.03.2012 einen VSE laufen hatten."
+  (Hubert 20130603 14:48)
 
 - :menuselection:`Schuldnerberatung --> Budget-Vorlage` auch für Kerstin
+
+-  Menübefehle :menuselection:`Konfigurierung --> DSBE --> Funktionen` 
+   und einige andere jetzt auch für Melanie sichtbar.
 
 - `daemoncommand.py` and Django 1.5
 
@@ -30,7 +34,20 @@ Version 1.1.8 (coming)
 - Auswahllisten auf ChoiceLists mit blank=True haben jetzt 
   auch einen leeren Eintrag.
 
-
+- Re-built a new self-signed `DavLink.jar` file included with Lino 
+  because the old one had expired. (:blogref:`20130704`)
+  
+- Wenn man als jemand anderer gearbeitet hatte und dann zurück als 
+  "ich selbst" schalten wollte,
+  dann kam manchmal ein JS-Fehler 
+  "Uncaught TypeError: Cannot read property 'main_item' of null".
+  (:blogref:`20130704`)
+  
+- Overridden `get_siblings` for `debts.Entry` so that up/down 
+  actions no longer fail when seqno's are spread accross 
+  different account_types.
+  (:blogref:`20130613`)
+  
 
 
 Version 1.1.7 (released :blogref:`20130604`)
