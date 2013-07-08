@@ -74,7 +74,10 @@ class DemoTest(RemoteAuthTestCase):
     fixtures = settings.SITE.demo_fixtures
     #~ fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
     #~ fixtures = 'std all_countries few_cities all_languages props demo'.split()
-    never_build_site_cache = True
+    #~ never_build_site_cache = True
+    
+    #~ avoid do_print failure due to build_absolute_uri() when use_davlink is True
+    override_djangosite_settings = dict(use_davlink=False)
     
     #~ def setUp(self):
         #~ settings.SITE.never_build_site_cache = True
@@ -180,6 +183,9 @@ class DemoTest(RemoteAuthTestCase):
         Printing a Budget
         The same as in tests/debts.rst, but a different implementation
         """
+        
+        #~ settings.SITE.override_defaults(use_davlink=False)
+            
         from lino.runtime import debts
         ses = settings.SITE.login('rolf')
         obj = debts.Budget.objects.get(pk=3)

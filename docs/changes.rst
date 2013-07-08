@@ -18,14 +18,13 @@ Version 1.1.8 (coming)
   "Nur Klienten anzeigen, die am 12.03.2012 einen VSE laufen hatten."
   (Hubert 20130603 14:48)
 
-- :menuselection:`Schuldnerberatung --> Budget-Vorlage` auch für Kerstin
+- Menübefehl :menuselection:`Schuldnerberatung --> Budget-Vorlage` 
+  jetzt auch für Kerstin sichtbar.
 
 -  Menübefehle :menuselection:`Konfigurierung --> DSBE --> Funktionen` 
-   und einige andere jetzt auch für Melanie sichtbar.
+   und einige andere jetzt auch für Melanie wieder sichtbar.
 
-- `daemoncommand.py` and Django 1.5
-
-- PendingCourseRequests: 
+- :ref:`welfare.courses.PendingCourseRequests`: 
   Fixed a bug which caused a traceback 
   "Cannot resolve keyword 'provider' into field."
   when filtering on course provider in PendingCourseRequests.
@@ -43,10 +42,23 @@ Version 1.1.8 (coming)
   "Uncaught TypeError: Cannot read property 'main_item' of null".
   (:blogref:`20130704`)
   
-- Overridden `get_siblings` for `debts.Entry` so that up/down 
+- Budget-Einträge eingeben:
+  Overridden `get_siblings` for `debts.Entry` so that up/down 
   actions no longer fail when seqno's are spread accross 
   different account_types.
   (:blogref:`20130613`)
+  
+  Außerdem (:blogref:`20130706`):
+
+    - die erste Zeile hatte unlogischerweise einen Up-Button
+      und die letzte einen Down-Button. Jetzt nicht mehr.
+    - Statt der Wörter "Up" und "Down" sieht man jetzt zwei grüne Pfeile.
+    - in "Verpflichtungen" und "Vermögen" fehlten die move_buttons
+
+- `daemoncommand.py` and Django 1.5
+
+  
+  
   
 
 

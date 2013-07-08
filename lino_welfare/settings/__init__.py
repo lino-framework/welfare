@@ -53,13 +53,21 @@ class Site(Site,cbss.SiteMixin):
     accounts_ref_length = 5
     
     #~ languages = ('de', 'fr', 'nl', 'en')
-    languages = "de fr nl en"
+    #~ languages = "de fr nl en"
+    
+    #~ languages = ['en']
+    languages = 'de fr nl'
+    #~ languages = ['de','fr']
+    #~ languages = ['fr','de']
+    #~ languages = ['de']
+    
     
     #~ index_view_action = "pcsw.Home"
     
     #~ remote_user_header = "REMOTE_USER"
     
-    use_eid_jslib = True
+    #~ use_eid_jslib = True
+    use_eid_jslib = False
     
     #~ admin_url = '/admin'
     

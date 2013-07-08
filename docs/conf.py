@@ -14,7 +14,7 @@
 import sys, os
 
 from atelier.sphinxconf import configure
-configure(globals(),'lino_welfare.settings.demo')
+configure(globals(),'lino_welfare.settings.test')
 
 
 #~ from unipath import Path
