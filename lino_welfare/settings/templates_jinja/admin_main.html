@@ -1,24 +1,6 @@
-<div class="htmlText" style="margin:5px">
-{% if not request.user.profile.authenticated %}
-{{_("You will now probably want to use the <b>Log in</b> button in the upper right corner and log in.")}}
-{% else %}
-
-<p>{{_("Quick links:")}}
-{% for mi in settings.SITE.get_quicklinks(ar).items %}
-[{{E.tostring(ar.window_action_button(mi.bound_action))}}]
-{% endfor %}
-</p>
-
-<h2>{{_("Welcome")}}</h2>
-<p>{{_("Hi, %(first_name)s!") % dict(first_name=ar.get_user().first_name)}}
-{% set sep = joiner(',') %}
-{% for table,text in settings.SITE.get_todo_tables(ar) %}
-    {% set r = table.request(user=ar.get_user()) %}
-    {% if r.get_total_count() != 0 %}
-      {{ sep() or _("You have") }} {{ E.tostring(ar.href_to_request(r,text % r.get_total_count())) }} 
-    {% endif %}
-{% endfor %}
-</p>
+{% extends "admin_main_base.html" %}
+{% block hello_user %}
+{{ super() }}
 
 {% set T = settings.SITE.modules.pcsw.UsersWithClients %}
 {% if T.default_action.get_view_permission(ar.get_user().profile) %}
@@ -33,6 +15,4 @@
             separator='</li><li>',
             after="</li></ul>")}}
 </td></tr></table>            
-
-{% endif %}
-</div>
+{% endblock %}
