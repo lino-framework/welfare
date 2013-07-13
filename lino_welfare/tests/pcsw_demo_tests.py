@@ -63,6 +63,116 @@ cbss = dd.resolve_app('cbss')
 #~ Property = resolve_model('properties.Property')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
+DEMO_OVERVIEW = """\
+28 applications: ui, sessions, about, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+101 models:
+======================================= ========= =======
+ Name                                    #fields   #rows
+--------------------------------------- --------- -------
+ accounts.Account                        14        49
+ accounts.Chart                          4         1
+ accounts.Group                          8         7
+ cal.Calendar                            17        5
+ cal.Event                               24        129
+ cal.Guest                               7         0
+ cal.GuestRole                           8         4
+ cal.Priority                            5         9
+ cal.Room                                4         0
+ cal.Subscription                        4         30
+ cal.Task                                20        15
+ cbss.IdentifyPersonRequest              20        5
+ cbss.ManageAccessRequest                23        1
+ cbss.Purpose                            6         106
+ cbss.RetrieveTIGroupsRequest            14        2
+ cbss.Sector                             9         209
+ changes.Change                          9         0
+ contacts.Company                        30        38
+ contacts.CompanyType                    7         11
+ contacts.Partner                        25        115
+ contacts.Person                         31        74
+ contacts.Role                           4         10
+ contacts.RoleType                       5         5
+ contenttypes.ConcreteModel              2         0
+ contenttypes.ContentType                4         101
+ contenttypes.FooWithBrokenAbsoluteUrl   3         0
+ contenttypes.FooWithUrl                 3         0
+ contenttypes.FooWithoutUrl              2         0
+ contenttypes.ProxyModel                 2         0
+ countries.City                          9         61
+ countries.Country                       7         8
+ countries.Language                      5         5
+ courses.Course                          5         3
+ courses.CourseContent                   2         2
+ courses.CourseOffer                     5         3
+ courses.CourseProvider                  31        2
+ courses.CourseRequest                   10        20
+ cv.LanguageKnowledge                    7         119
+ debts.Actor                             6         6
+ debts.Budget                            11        3
+ debts.Entry                             16        147
+ households.Household                    28        3
+ households.Member                       6         6
+ households.Role                         5         6
+ households.Type                         4         4
+ isip.Contract                           26        13
+ isip.ContractEnding                     6         4
+ isip.ContractType                       9         5
+ isip.ExamPolicy                         19        5
+ isip.StudyType                          4         8
+ jobs.Candidature                        8         44
+ jobs.Contract                           28        13
+ jobs.ContractType                       8         5
+ jobs.Experience                         10        0
+ jobs.Function                           6         4
+ jobs.Job                                10        8
+ jobs.JobProvider                        31        3
+ jobs.JobType                            4         5
+ jobs.Offer                              9         0
+ jobs.Regime                             4         3
+ jobs.Schedule                           4         3
+ jobs.Sector                             5         14
+ jobs.Study                              12        2
+ newcomers.Broker                        2         2
+ newcomers.Competence                    5         7
+ newcomers.Faculty                       5         5
+ notes.EventType                         8         9
+ notes.Note                              13        110
+ notes.NoteType                          10        15
+ outbox.Attachment                       4         0
+ outbox.Mail                             9         0
+ outbox.Recipient                        6         0
+ pcsw.Activity                           3         0
+ pcsw.AidType                            4         7
+ pcsw.Client                             73        61
+ pcsw.ClientContact                      7         0
+ pcsw.ClientContactType                  4         5
+ pcsw.Coaching                           8         77
+ pcsw.CoachingEnding                     6         4
+ pcsw.CoachingType                       4         3
+ pcsw.Dispense                           6         0
+ pcsw.DispenseReason                     5         4
+ pcsw.Exclusion                          6         0
+ pcsw.ExclusionType                      2         2
+ pcsw.PersonGroup                        4         5
+ postings.Posting                        8         0
+ properties.PersonProperty               6         310
+ properties.PropChoice                   6         2
+ properties.PropGroup                    4         3
+ properties.PropType                     8         3
+ properties.Property                     6         23
+ sessions.Session                        3         4
+ ui.HelpText                             4         5
+ ui.SiteConfig                           24        1
+ ui.TextFieldTemplate                    6         2
+ uploads.Upload                          11        0
+ uploads.UploadType                      2         5
+ users.Authority                         3         3
+ users.Membership                        3         0
+ users.Team                              4         3
+ users.User                              17        8
+======================================= ========= =======
+"""
+
 class PseudoRequest:
     def __init__(self,name):
         self.user = settings.SITE.user_model.objects.get(username=name)
@@ -70,6 +180,7 @@ class PseudoRequest:
 
 
 class DemoTest(RemoteAuthTestCase):
+    maxDiff = None
     #~ fixtures = [ 'std','demo' ]
     fixtures = settings.SITE.demo_fixtures
     #~ fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
@@ -85,6 +196,11 @@ class DemoTest(RemoteAuthTestCase):
 
         
     def test001(self):
+        
+        s = settings.SITE.get_db_overview_rst()
+        #~ print s
+        self.assertEqual(s,DEMO_OVERVIEW)
+        
         """
         Test the number of rows returned for certain queries
         """
