@@ -64,7 +64,7 @@ cbss = dd.resolve_app('cbss')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-28 applications: ui, sessions, about, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+29 applications: ui, sessions, about, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
 101 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
@@ -74,7 +74,7 @@ DEMO_OVERVIEW = """\
  accounts.Group                          8         7
  cal.Calendar                            17        5
  cal.Event                               24        129
- cal.Guest                               7         0
+ cal.Guest                               9         0
  cal.GuestRole                           8         4
  cal.Priority                            5         9
  cal.Room                                4         0
