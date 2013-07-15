@@ -581,6 +581,13 @@ def objects():
     alicia = users.User(username="alicia",partner=alicia,profile='100') 
     yield alicia
     
+    theresia = person(first_name=u"Theresia",last_name=u"Thelen",
+        email='theresia@example.com',
+        city=eupen,country='BE',gender=mixins.Genders.female,language='de')
+    yield theresia
+    theresia = users.User(username="theresia",partner=theresia,profile='210') 
+    yield theresia
+    
     yield Authority(user=alicia,authorized=hubert)
     yield Authority(user=alicia,authorized=melanie)
     yield Authority(user=hubert,authorized=melanie)

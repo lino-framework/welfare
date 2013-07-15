@@ -109,18 +109,19 @@ class Site(Site,cbss.SiteMixin):
         """
         from lino import dd
         from django.utils.translation import ugettext_lazy as _
-        dd.UserProfiles.reset('* office integ cbss newcomers debts')
+        dd.UserProfiles.reset('* office integ cbss newcomers debts reception')
         add = dd.UserProfiles.add_item
-        add('000', _("Anonymous"),                  '_ _ _ _ _ _', 
+        add('000', _("Anonymous"),                  '_ _ _ _ _ _ _', 
             name='anonymous', readonly=True,authenticated=False)
-        add('100', _("Integration Agent"),          'U U U U _ _')
-        add('110', _("Integration Agent (Manager)"),'U M M U _ _')
-        add('200', _("Newcomers consultant"),       'U U _ U U _')
-        add('300', _("Debts consultant"),           'U U _ _ _ U')
+        add('100', _("Integration Agent"),          'U U U U _ _ _')
+        add('110', _("Integration Agent (Manager)"),'U M M U _ _ _')
+        add('200', _("Newcomers consultant"),       'U U _ U U _ U')
+        add('210', _("Reception clerk"),            'U _ _ _ _ _ U')
+        add('300', _("Debts consultant"),           'U U _ _ _ U _')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)
         #~ add('400', _("Readonly User"),              'U U U U U U', readonly=True)
-        add('500', _("CBSS only"),                  'U _ _ U _ _')
-        add('900', _("Administrator"),              'A A A A A A',name='admin')
+        add('500', _("CBSS only"),                  'U _ _ U _ _ _')
+        add('900', _("Administrator"),              'A A A A A A A',name='admin')
         
         #~ for p in dd.UserProfiles.items():
             #~ print 20120715, repr(p)

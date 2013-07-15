@@ -613,6 +613,8 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
+- Empfang : Empfangsschalter, Wartende Besucher
+
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -671,6 +673,8 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
+- Empfang : Wartende Besucher
+
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -689,7 +693,7 @@ Belgique""")
 - Site : Info
 """) # 100 integration agent
 
-        # integration agent (manager)
+        # 110 integration agent (manager)
         menu_test("110","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
@@ -700,6 +704,8 @@ Belgique""")
   - Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -727,7 +733,7 @@ Belgique""")
 - Site : Info
 """) # 110 integration agent (manager)
 
-        # debts consultant
+        # 300 debts consultant
         menu_test('300',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
@@ -750,7 +756,7 @@ Belgique""")
 - Site : Info
 """) # 300 debts consultant
 
-        # newcomers
+        # 200 newcomers
         menu_test('200',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
@@ -761,6 +767,8 @@ Belgique""")
   - Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : Empfangsschalter, Wartende Besucher
 
 - Neuanträge : Neue Klienten
 
