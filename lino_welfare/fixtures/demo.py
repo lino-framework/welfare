@@ -1005,7 +1005,7 @@ def objects():
                     kw.update(ending=ENDINGS.pop())
                 yield pcsw.Coaching(**kw)
                 
-    for i,p in enumerate(pcsw.Partner.objects.all()):
+    for i,p in enumerate(contacts.Partner.objects.all()):
         if i % 10 == 0:
             p.is_obsolete = True
             p.save()

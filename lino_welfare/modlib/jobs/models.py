@@ -158,7 +158,7 @@ class Regimes(dd.Table):
 
 
 
-class JobProvider(pcsw.Company):
+class JobProvider(contacts.Company):
     """Stellenanbieter (BISA, BW, ...) 
     """
     class Meta:
@@ -168,10 +168,10 @@ class JobProvider(pcsw.Company):
     
     def disable_delete(self,ar):
         # skip the is_imported_partner test
-        return super(pcsw.Partner,self).disable_delete(ar)
+        return super(contacts.Partner,self).disable_delete(ar)
         
 
-class JobProviderDetail(pcsw.CompanyDetail):
+class JobProviderDetail(contacts.CompanyDetail):
     """
     This is the same as CompanyDetail, except that we
     
@@ -1477,7 +1477,7 @@ class JobsOverview(dd.EmptyTable):
 
 if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
   
-    dd.inject_field(pcsw.Company,
+    dd.inject_field(contacts.Company,
         'is_jobprovider',
         dd.EnableChild('jobs.JobProvider',verbose_name=_("is Job Provider")),
         """Whether this Company is also a Job Provider."""

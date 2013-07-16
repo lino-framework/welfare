@@ -89,6 +89,7 @@ from lino.core.dbutils import resolve_model, UnresolvedModel
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
 properties = dd.resolve_app('properties')
+contacts = dd.resolve_app('contacts')
 countries = dd.resolve_app('countries')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
@@ -268,163 +269,6 @@ add('30', _("Ended"),'ended')
 
 
 
-class ImportedFields(object):
-    _imported_fields = set()
-    
-    @classmethod
-    def declare_imported_fields(cls,names):
-        cls._imported_fields = cls._imported_fields | set(dd.fields_list(cls,names))
-        #~ logger.info('20120801 %s.declare_imported_fields() --> %s' % (
-            #~ cls,cls._imported_fields))
-        
-#~ class CpasPartner(dd.Model,mixins.DiffingMixin):
-#~ class Partner(contacts.Partner,mixins.DiffingMixin,mixins.CreatedModified):
-class Partner(contacts.Partner,mixins.CreatedModified,ImportedFields):
-    """
-    """
-    
-    class Meta(contacts.Partner.Meta):
-        app_label = 'contacts'
-  
-    #~ is_active = models.BooleanField(
-        #~ verbose_name=_("is active"),default=True,
-        #~ help_text = "Only active Persons may be used when creating new operations.")
-    
-    #~ newcomer = models.BooleanField(
-        #~ verbose_name=_("newcomer"),default=False)
-    #~ """Means that there's no responsible user for this partner yet. 
-    #~ New partners may not be used when creating new operations."""
-    
-    is_obsolete = models.BooleanField(
-        verbose_name=_("obsolete"),default=False,help_text=u"""\
-Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und 
-für neue Operationen nicht benutzt werden können.""")
-    
-    activity = models.ForeignKey("pcsw.Activity",
-        blank=True,null=True)
-    
-    bank_account1 = models.CharField(max_length=40,
-        blank=True,# null=True,
-        verbose_name=_("Bank account 1"))
-        
-    bank_account2 = models.CharField(max_length=40,
-        blank=True,# null=True,
-        verbose_name=_("Bank account 2"))
-        
-    hidden_columns = 'created modified activity bank_account1 bank_account2'
-    
-    @classmethod
-    def on_analyze(cls,site):
-        super(Partner,cls).on_analyze(site)
-        cls.declare_imported_fields('''
-          created modified
-          name remarks region zip_code city country 
-          street_prefix street street_no street_box 
-          addr2
-          language 
-          phone fax email url
-          bank_account1 bank_account2 activity 
-          is_obsolete 
-          ''')
-        if cls is contacts.Partner: # not e.g. on JobProvider who has no own site_setup()
-            cls.declare_imported_fields('''
-            is_person is_company
-            ''')
-        
-    def disabled_fields(self,ar):
-        #~ logger.info("20120731 CpasPartner.disabled_fields()")
-        #~ raise Exception("20120731 CpasPartner.disabled_fields()")
-        if settings.SITE.is_imported_partner(self):
-            return self._imported_fields
-        return set()
-        
-    def disable_delete(self,ar):
-        if ar is not None and settings.SITE.is_imported_partner(self):
-            return _("Cannot delete companies and persons imported from TIM")
-        return super(Partner,self).disable_delete(ar)
-
-    #~ def get_row_permission(self,ar,state,ba):
-        #~ if isinstance(ba.action,dd.MergeAction) and settings.SITE.is_imported_partner(self):
-            #~ return False
-        #~ return super(Partner,self).get_row_permission(ar,state,ba)
-        
-class Person(Partner,contacts.Person,mixins.Born,Printable):
-    """
-    Represents a physical person.
-    
-    """
-    
-    class Meta(contacts.PersonMixin.Meta):
-        app_label = 'contacts'
-        verbose_name = _("Person") # :doc:`/tickets/14`
-        verbose_name_plural = _("Persons") # :doc:`/tickets/14`
-        
-    is_client = mti.EnableChild('pcsw.Client',verbose_name=_("is Client"),
-        help_text=_("Whether this Person is a Client."))
-        
-        
-    def get_queryset(self):
-        return self.model.objects.select_related('country','city')
-        
-    def get_print_language(self,pm):
-        "Used by DirectPrintAction"
-        return self.language
-        
-    @classmethod
-    def on_analyze(cls,site):
-        super(Person,cls).on_analyze(site)
-        cls.declare_imported_fields(
-          '''name first_name last_name title birth_date gender is_client
-          ''')
-
-
-dd.update_field(Person,'first_name',blank=False)
-dd.update_field(Person,'last_name',blank=False)
-
-class PersonDetail(contacts.PersonDetail):
-    bottom_box = """
-    activity bank_account1 bank_account2 is_obsolete
-    is_client created modified
-    remarks contacts.RolesByPerson households.MembersByPerson
-    """
-  
-
-class Persons(contacts.Persons):
-    app_label = 'contacts'
-    detail_layout = PersonDetail()
-    
-    params_panel_hidden = True
-    parameters = dict(
-        gender = mixins.Genders.field(blank=True,help_text=u"""\
-Nur Personen, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
-        also_obsolete = models.BooleanField(
-            _("Also obsolete data"),
-            default=False,help_text=u"""\
-Auch Datensätze anzeigen, die als veraltet markiert sind."""))
-
-    params_layout = """
-    gender also_obsolete 
-    """
-
-    @classmethod
-    def get_request_queryset(self,ar):
-        qs = super(Persons,self).get_request_queryset(ar)
-        if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_obsolete=False)
-        if ar.param_values.gender:
-            qs = qs.filter(gender__exact=ar.param_values.gender)
-        return qs
-  
-    @classmethod
-    def get_title_tags(self,ar):
-        for t in super(Persons,self).get_title_tags(ar):
-            yield t
-        if ar.param_values.gender:
-            yield unicode(ar.param_values.gender)
-        if ar.param_values.also_obsolete:
-            yield unicode(self.parameters['also_obsolete'].verbose_name)
-      
-    
 class ClientStates(dd.Workflow):
     required = dd.required(user_level='admin')
     #~ label = _("Client state")
@@ -765,7 +609,7 @@ class FindByBeIdAction(BeIdReadCardAction):
         
 
 
-class Client(Person):
+class Client(contacts.Person):
     """
     A :class:`Client` is a specialized :class:`Person`.
     
@@ -1288,156 +1132,6 @@ class Client(Person):
             yield "%s <%s>" % (unicode(u),u.email)
             
 
-    
-
-
-
-
-
-class PartnerDetail(contacts.PartnerDetail):
-    #~ general = contacts.PartnerDetail.main
-    #~ main = "general debts.BudgetsByPartner"
-    bottom_box = """
-    remarks 
-    activity bank_account1 bank_account2 is_obsolete
-    is_person is_company #is_user is_household created modified 
-    """
-    #~ def setup_handle(self,h):
-        #~ h.general.label = _("General")
-    
-
-#~ class Partners(contacts.Partners):
-    #~ """
-    #~ Base class for Companies and Persons tables,
-    #~ *and* for households.Households.
-    #~ """
-    #~ detail_layout = PartnerDetail()
-
-#~ class AllPartners(contacts.AllPartners,Partners):
-    #~ app_label = 'contacts'
-
-
-
-class Household(Partner,households.Household):
-    """
-    for lino_welfare we want to inherit also from Partner
-    """
-    class Meta(households.Household.Meta):
-        app_label = 'households'
-        
-    #~ @classmethod
-    #~ def on_analyze(cls,site):
-        #~ super(Household,cls).on_analyze(site)
-        #~ cls.declare_imported_fields('type')
-          
-    def disable_delete(self,ar):
-        # skip the is_imported_partner test
-        return super(Partner,self).disable_delete(ar)
-        
-
-class Company(Partner,contacts.Company):
-  
-    
-    class Meta(contacts.Company.Meta):
-        abstract = False
-        app_label = 'contacts'
-        
-    #~ # to be maintaned with ClientContactTypes
-    #~ dd.inject_field(Company,'is_health_insurance',models.BooleanField(verbose_name=_("Health insurance"),default=False))
-    #~ dd.inject_field(Company,'is_pharmacy',models.BooleanField(verbose_name=_("Pharmacy"),default=False))
-    #~ dd.inject_field(Company,'is_attorney',models.BooleanField(verbose_name=_("Attorney"),default=False))
-    #~ dd.inject_field(Company,'is_job_office',models.BooleanField(verbose_name=_("Job office"),default=False))
-    
-    # to be maintaned with ClientContactTypes
-    #~ is_health_insurance = models.BooleanField(verbose_name=_("Health insurance"),default=False)
-    #~ is_pharmacy = models.BooleanField(verbose_name=_("Pharmacy"),default=False)
-    #~ is_attorney = models.BooleanField(verbose_name=_("Attorney"),default=False)
-    #~ is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
-        
-    client_contact_type = dd.ForeignKey('pcsw.ClientContactType',blank=True,null=True)
-        
-        
-    @classmethod
-    def on_analyze(cls,site):
-        #~ if cls.model is None:
-            #~ raise Exception("%r.model is None" % cls)
-        super(Company,cls).on_analyze(site)
-        cls.declare_imported_fields(
-            '''name 
-            vat_id prefix
-            phone fax email 
-            bank_account1 bank_account2 activity''')
-
-    # todo: remove hourly_rate after data migration. this is now in Job
-    #~ hourly_rate = dd.PriceField(_("hourly rate"),blank=True,null=True)
-    
-  
-    
-
-#~ class CompanyDetail(dd.FormLayout):
-class CompanyDetail(contacts.CompanyDetail):
-  
-    box3 = """
-    country region
-    city zip_code:10
-    street_prefix street:25 street_no street_box
-    addr2:40
-    """
-
-    box4 = """
-    email:40 
-    url
-    phone
-    gsm
-    """
-
-    address_box = "box3 box4"
-
-    #~ box5 = """
-    #~ remarks 
-    #~ is_courseprovider is_jobprovider is_health_insurance is_pharmacy is_attorney is_job_office
-    #~ """
-
-    box5 = """
-    remarks 
-    is_courseprovider is_jobprovider client_contact_type
-    """
-
-    bottom_box = "box5 contacts.RolesByCompany"
-
-    intro_box = """
-    prefix name id language 
-    vat_id:12 activity:20 type:20 #hourly_rate
-    bank_account1 bank_account2 is_obsolete
-    """
-
-    general = dd.Panel("""
-    intro_box
-    address_box
-    bottom_box
-    """,label = _("General"))
-    
-    notes = "pcsw.NotesByCompany"
-    
-    main = "general notes"
-
-    #~ def setup_handle(self,lh):
-      
-        #~ lh.general.label = _("General")
-        #~ lh.notes.label = _("Notes")
-
-
-#~ if settings.SITE.company_model is None:
-    #~ raise Exception("settings.SITE.company_model is None")
-
-#~ class Companies(Partners):
-    #~ model = settings.SITE.company_model
-    #~ detail_layout = CompanyDetail()
-        
-    #~ order_by = ["name"]
-    #~ app_label = 'contacts'
-    
-
 
 
 
@@ -1655,7 +1349,7 @@ def add_coachings_filter(qs,user,today,primary):
 def daterange_text(a,b):
     return dd.dtos(a)+"-"+dd.dtos(b)
     
-class Clients(Persons):
+class Clients(contacts.Persons):
     #~ debug_permissions = True # '20120925'
     #~ title = _("All Clients")
     #~ title = _("Clients")
@@ -1703,7 +1397,7 @@ Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
         client_state = ClientStates.field(blank=True,help_text=u"""\
 Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
-        **Persons.parameters)
+        **contacts.Persons.parameters)
     params_layout = """
     aged_from aged_to gender nationality also_obsolete 
     client_state coached_by and_coached_by start_date end_date observed_event only_primary 
@@ -2393,28 +2087,18 @@ class AidTypes(dd.Table):
 
 
 
-class OverlappingContracts(dd.Table):
-    required = dict(user_groups = 'integ')
-    model = Person
-    use_as_default_table = False
-    #~ base_queryset = only_coached_persons(Person.objects.all())
-    label = _("Overlapping Contracts")
-    #~ def a(self):
-        
-    
-    #~ def get_title(self,rr):
-        #~ return _("Primary clients of %s") % rr.master_instance
-        
-    @classmethod
-    def get_request_queryset(self,rr):
-        #~ rr.master_instance = rr.get_user()
-        qs = super(OverlappingContracts,self).get_request_queryset(rr)
-        #~ only_my_persons(qs,rr.get_user())
-        #~ qs = only_coached_persons(qs,datetime.date.today())
-        qs = only_coached_at(qs,datetime.date.today())
-        #~ qs = qs.filter()
-        #~ print 20111118, 'get_request_queryset', rr.user, qs.count()
-        return qs
+#~ class OverlappingContracts(dd.Table):
+    #~ required = dict(user_groups = 'integ')
+    #~ model = 'contacts.Person'
+    #~ use_as_default_table = False
+    #~ label = _("Overlapping Contracts")
+        #~ 
+        #~ 
+    #~ @classmethod
+    #~ def get_request_queryset(self,rr):
+        #~ qs = super(OverlappingContracts,self).get_request_queryset(rr)
+        #~ qs = only_coached_at(qs,datetime.date.today())
+        #~ return qs
 
 class ClientContactType(dd.BabelNamed):
     class Meta:
@@ -2628,7 +2312,7 @@ class CoachingEndings(dd.Table):
 
 #~ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
 #~ class Coaching(mixins.UserAuthored,ImportedFields):
-class Coaching(dd.Model,ImportedFields):
+class Coaching(dd.Model,dd.ImportedFields):
     """
 A Coaching (Begleitung, accompagnement) 
 is when a Client is being coached by a User (a social assistant) 
@@ -2926,27 +2610,6 @@ class NotesByCompany(notes.Notes):
     column_names = "date project event_type type subject body user *"
     order_by = ["-date"]
     
-
-if False:
-    
-    def customize_siteconfig():
-        """
-        Injects application-specific fields to :class:`SiteConfig <lino.ui.models.SiteConfig>`.
-        """
-        
-        dd.inject_field('ui.SiteConfig',
-            'coachingtype_social',
-            models.ForeignKey('pcsw.CoachingType',
-                blank=True,null=True,
-                help_text="""L'objet qui représente le service social général."""))
-        dd.inject_field('ui.SiteConfig',
-            'coachingtype_integ',
-            models.ForeignKey('pcsw.CoachingType',
-                blank=True,null=True,
-                help_text="""L'objet qui représente le service insertion."""))
-
-    customize_siteconfig()
-
 
 
 MODULE_LABEL = _("PCSW")

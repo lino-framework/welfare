@@ -199,7 +199,7 @@ def objects():
     
     from lino.modlib.cal.utils import DurationUnits
     #~ from lino.modlib.cal.models import EventType
-    from lino.modlib.cal.models import Calendar
+    #~ from lino.modlib.cal.models import Calendar
     
     #~ yield Calendar(**babel_values('name',
           #~ de=u"Erstgespräch",

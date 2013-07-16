@@ -57,6 +57,9 @@ from lino.utils.ranges import isrange, overlap, overlap2, encompass
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
 
+from lino_welfare.modlib.ui.models import Signers
+
+
 def rangefmt(r):
     return dd.dtos(r[0]) + '...' + dd.dtos(r[1])
     
@@ -182,54 +185,14 @@ class ContractEndings(dd.Table):
 #~ FUNCTION_ID_PRESIDENT = 16
 #~ FUNCTION_ID_PRESIDENT = 5
 
-def default_signer1(): 
+def default_signer1():
     return settings.SITE.site_config.signer1
     #~ return SecretaryPresident.secretary_choices()[0]
 
 def default_signer2(): 
     return settings.SITE.site_config.signer2
     #~ return SecretaryPresident.president_choices()[0]
-  
-class Signers(dd.Model):
-    """
-    Model mixin which adds two fields `signer1` and `signer2`,
-    the two in-house signers of contracts and official documents.
-    
-    Inherited by :class:`SiteConfig <lino.ui.models.SiteConfig>` 
-    and :class:`ContractBase`.
-    """
-    
-    class Meta:
-        abstract = True
-        
-    signer1 = models.ForeignKey("contacts.Person",
-      related_name="%(app_label)s_%(class)s_set_by_signer1",
-      #~ default=default_signer1,
-      verbose_name=_("Secretary"))
-      
-    signer2 = models.ForeignKey("contacts.Person",
-      related_name="%(app_label)s_%(class)s_set_by_signer2",
-      #~ default=default_signer2,
-      verbose_name=_("President"))
-      
-    @chooser()
-    def signer1_choices(cls):
-        sc = settings.SITE.site_config
-        kw = dict()
-        if sc.signer1_function:
-            kw.update(rolesbyperson__type=sc.signer1_function)
-        return settings.SITE.modules.contacts.Person.objects.filter(
-              rolesbyperson__company=sc.site_company,**kw)
-        
-    @chooser()
-    def signer2_choices(cls):
-        sc = settings.SITE.site_config
-        kw = dict()
-        if sc.signer2_function:
-            kw.update(rolesbyperson__type=sc.signer2_function)
-        return settings.SITE.modules.contacts.Person.objects.filter(
-              rolesbyperson__company=sc.site_company,**kw)
-      
+
   
 class StudyType(dd.BabelNamed):
     #~ text = models.TextField(_("Description"),blank=True,null=True)
@@ -821,24 +784,24 @@ class ContractsByStudyType(Contracts):
     
 
 
-def customize_siteconfig():
-    from lino.ui.models import SiteConfig
-    dd.inject_field(SiteConfig,
-        'signer1_function',
-        models.ForeignKey("contacts.RoleType",
-            blank=True,null=True,
-            verbose_name=_("First signer function"),
-            help_text=_("""Contact function to designate the secretary."""),
-            related_name="%(app_label)s_%(class)s_set_by_signer1"))
-    dd.inject_field(SiteConfig,
-        'signer2_function',
-        models.ForeignKey("contacts.RoleType",
-            blank=True,null=True,
-            verbose_name=_("Second signer function"),
-            help_text=_("Contact function to designate the president."),
-            related_name="%(app_label)s_%(class)s_set_by_signer2"))
-        
-customize_siteconfig()
+#~ def customize_siteconfig():
+    #~ from lino.ui.models import SiteConfig
+    #~ dd.inject_field(SiteConfig,
+        #~ 'signer1_function',
+        #~ models.ForeignKey("contacts.RoleType",
+            #~ blank=True,null=True,
+            #~ verbose_name=_("First signer function"),
+            #~ help_text=_("""Contact function to designate the secretary."""),
+            #~ related_name="%(app_label)s_%(class)s_set_by_signer1"))
+    #~ dd.inject_field(SiteConfig,
+        #~ 'signer2_function',
+        #~ models.ForeignKey("contacts.RoleType",
+            #~ blank=True,null=True,
+            #~ verbose_name=_("Second signer function"),
+            #~ help_text=_("Contact function to designate the president."),
+            #~ related_name="%(app_label)s_%(class)s_set_by_signer2"))
+        #~ 
+#~ customize_siteconfig()
 
 
 

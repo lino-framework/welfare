@@ -64,7 +64,7 @@ cbss = dd.resolve_app('cbss')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-29 applications: ui, sessions, about, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+29 applications: sessions, about, ui, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
 101 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
@@ -72,13 +72,13 @@ DEMO_OVERVIEW = """\
  accounts.Account                        14        49
  accounts.Chart                          4         1
  accounts.Group                          8         7
- cal.Calendar                            17        5
- cal.Event                               24        129
+ cal.Calendar                            18        5
+ cal.Event                               24        141
  cal.Guest                               9         0
  cal.GuestRole                           8         4
  cal.Priority                            5         9
  cal.Room                                4         0
- cal.Subscription                        4         30
+ cal.Subscription                        4         35
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
@@ -88,8 +88,8 @@ DEMO_OVERVIEW = """\
  changes.Change                          9         0
  contacts.Company                        30        38
  contacts.CompanyType                    7         11
- contacts.Partner                        25        115
- contacts.Person                         31        74
+ contacts.Partner                        25        116
+ contacts.Person                         31        75
  contacts.Role                           4         10
  contacts.RoleType                       5         5
  contenttypes.ConcreteModel              2         0
@@ -169,7 +169,7 @@ DEMO_OVERVIEW = """\
  users.Authority                         3         3
  users.Membership                        3         0
  users.Team                              4         3
- users.User                              17        8
+ users.User                              17        9
 ======================================= ========= =======
 """
 

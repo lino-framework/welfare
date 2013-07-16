@@ -76,22 +76,13 @@ from lino.core import actions
 from lino.modlib.contacts.utils import street2kw
 from lino.modlib.contacts import models as contacts
 
-#~ from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
-#~ from lino.modlib.uploads import models as uploads
-#~ from lino.modlib.cal import models as cal
-#~ from lino.modlib.users import models as users
-#~ from lino.modlib.countries.models import CountryCity
-#~ from lino.modlib.cal.models import DurationUnits, update_reminder
-#~ from lino.modlib.properties import models as properties
-#~ from lino_welfare.modlib.cv import models as cv
-#~ from lino.modlib.contacts.models import Contact
 from lino.core.dbutils import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
-cal = dd.resolve_app('cal')
+#~ cal = dd.resolve_app('cal')
 properties = dd.resolve_app('properties')
 countries = dd.resolve_app('countries')
+contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
@@ -102,22 +93,6 @@ courses = dd.resolve_app('courses')
 #~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
 
-
-ui = dd.resolve_app('ui')
-
-class SiteConfig(ui.SiteConfig,isip.Signers):
-    """
-    This adds the :class:`lino_welfare.modlib.isip.models.Signers` 
-    mixin to Lino's standard SiteConfig.
-    
-    This trick having ``"ui.SiteConfig"`` in :attr:`lino.Lino.override_modlib_models`.
-    
-    """
-    class Meta:
-        app_label = 'ui'
-
-dd.update_field(SiteConfig,'signer1', blank=True,null=True)
-dd.update_field(SiteConfig,'signer2', blank=True,null=True)
 
 
 def customize_users():
@@ -431,8 +406,8 @@ def site_setup(site):
     """,window_size=(60,'auto'))
 
 
-    site.modules.contacts.Partners.set_detail_layout(pcsw.PartnerDetail())
-    site.modules.contacts.Companies.set_detail_layout(pcsw.CompanyDetail())
+    site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
+    site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())
     #~ site.modules.contacts.Persons.set_detail_layout(PersonDetail())
     #~ for T in (site.modules.contacts.Partners,
             #~ site.modules.contacts.Persons,
@@ -441,28 +416,6 @@ def site_setup(site):
         #~ T.add_detail_tab('changes','lino.ChangesByMaster')
     site.modules.contacts.Partners.add_detail_tab('changes','changes.ChangesByMaster')
 
-    
-    site.modules.cal.Events.set_detail_layout("general more")
-    site.modules.cal.Events.add_detail_panel("general","""
-    calendar summary project 
-    start end user assigned_to
-    room priority access_class transparent #rset 
-    owner workflow_buttons
-    description GuestsByEvent 
-    """,_("General"))
-    site.modules.cal.Events.add_detail_panel("more","""
-    id created:20 modified:20  
-    outbox.MailsByController postings.PostingsByController
-    """,_("More"))
-    
-    site.modules.cal.Events.set_insert_layout("""
-    summary 
-    start end 
-    calendar project 
-    """,
-    start="start_date start_time",
-    end="end_date end_time",
-    window_size=(60,'auto'))
     
     #~ site.modules.users.Users.set_detail_layout(box2 = """
     #~ level
@@ -558,7 +511,6 @@ customize_users()
   
 
 
-
 def setup_workflows(site):
 
     #~ ClientStates.newcomer.add_transition(states='refused coached invalid former',user_groups='newcomers')
@@ -584,7 +536,6 @@ def setup_workflows(site):
         user_groups='newcomers')
     #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
-            
 
 
 #~ def setup_main_menu(site,ui,profile,m): 

@@ -28,7 +28,7 @@ def objects():
   
     #~ from lino.modlib.users.models import 
     from lino_welfare.modlib.newcomers.models import Broker, Faculty, Competence
-    from lino_welfare.modlib.pcsw.models import Person
+    from lino_welfare.modlib.contacts.models import Person
     from lino_welfare.modlib.pcsw import models as pcsw
     
     I = Instantiator(Broker).build

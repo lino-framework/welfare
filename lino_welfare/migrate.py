@@ -775,7 +775,8 @@ def migrate_from_1_1_6(globals_dict):
     
 def migrate_from_1_1_7(globals_dict): 
     """
-    - in isip.examPolicy renamed max_occurences to max_events
+    - in isip.examPolicy, renamed max_occurences to max_events
+    - Event states : "notified" becomes "draft", "absent" becomes "cancelled"
     """
     bv2kw = globals_dict['bv2kw']
     new_content_type_id = globals_dict['new_content_type_id']
@@ -802,5 +803,15 @@ def migrate_from_1_1_7(globals_dict):
         kw.update(calendar_id=calendar_id)
         return isip_ExamPolicy(**kw)
     globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
+    
+    from lino.modlib.cal.models import EventStates
+    old2new = {
+    '30': EventStates.draft,
+    '80': EventStates.cancelled,
+    }
+    
+    raise NotImplementedError("migrate event states")
+
+    
     
     return '1.1.8'

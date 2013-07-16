@@ -77,13 +77,13 @@ class Site(Site,cbss.SiteMixin):
         #~ 'households.Household'
         #~ ]
         
-    override_modlib_models = [
-        'contacts.Partner', 
-        'contacts.Person', 
-        'contacts.Company',
-        'households.Household',
-        'ui.SiteConfig'
-        ]
+    #~ override_modlib_models = [
+        #~ 'contacts.Partner', 
+        #~ 'contacts.Person', 
+        #~ 'contacts.Company',
+        #~ 'households.Household',
+        #~ 'ui.SiteConfig'
+        #~ ]
         
         
     #~ def get_application_description(self):
@@ -102,7 +102,10 @@ class Site(Site,cbss.SiteMixin):
         
         
     
-    #~ def setup_user_profiles(self):
+    #~ def setup_workflows(self):
+        #~ 
+        #~ from lino.modlib.cal.workflows import welfare
+        
     def setup_choicelists(self):
         """
         This defines default user profiles for :mod:`lino_welfare`.
@@ -232,6 +235,7 @@ class Site(Site,cbss.SiteMixin):
         for a in super(Site,self).get_installed_apps():
             yield a
             
+        yield 'lino_welfare.modlib.ui'
         yield 'django.contrib.contenttypes'
         yield 'lino.modlib.users'
         yield 'lino.modlib.changes'
@@ -241,17 +245,17 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino.modlib.countries'
         #~ 'lino.modlib.documents'
         yield 'lino.modlib.properties'
-        yield 'lino.modlib.contacts'
+        yield 'lino_welfare.modlib.contacts'
         #~ 'lino.modlib.projects'
         #~ 'lino.modlib.notes',
         #~ 'lino.modlib.links',
         yield 'lino.modlib.uploads'
         #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
-        yield 'lino.modlib.cal'
+        yield 'lino_welfare.modlib.cal'
         yield 'lino.modlib.reception'
         yield 'lino.modlib.postings'
-        yield 'lino.modlib.households'
+        yield 'lino_welfare.modlib.households'
         yield 'lino.modlib.accounts'
         
         yield 'lino_welfare'

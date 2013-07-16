@@ -65,6 +65,7 @@ from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.core.dbutils import obj2str
 
 pcsw = dd.resolve_app('pcsw')
+contacts = dd.resolve_app('contacts')
 
 #~ # not used here, but these modules are required in INSTALLED_APPS, 
 #~ # and other code may import them using 
@@ -78,7 +79,7 @@ pcsw = dd.resolve_app('pcsw')
     #~ User = dd.resolve_model(settings.SITE.user_model,strict=True)
 
 #~ Company = resolve_model('contacts.Company')
-class CourseProvider(pcsw.Company):
+class CourseProvider(contacts.Company):
     """
     A CourseProvider is a Company that offers Courses. 
     """
@@ -92,11 +93,11 @@ class CourseProvider(pcsw.Company):
     
     def disable_delete(self,ar):
         # skip the is_imported_partner test
-        return super(pcsw.Partner,self).disable_delete(ar)
+        return super(contacts.Partner,self).disable_delete(ar)
         
     
     
-dd.inject_field(pcsw.Company,
+dd.inject_field(contacts.Company,
     'is_courseprovider',
     mti.EnableChild(CourseProvider,verbose_name=_("is Course Provider")),
     """Whether this Company is also a Course Provider."""
@@ -104,7 +105,7 @@ dd.inject_field(pcsw.Company,
 
     
     
-class CourseProviderDetail(pcsw.CompanyDetail):
+class CourseProviderDetail(contacts.CompanyDetail):
     """
     This is the same as CompanyDetail, except that we remove MTI fields
     and add a tab :guilabel:`Courses`.
@@ -114,7 +115,7 @@ class CourseProviderDetail(pcsw.CompanyDetail):
 
   
 
-#~ class CourseProviders(pcsw.Companies):
+#~ class CourseProviders(contacts.Companies):
 class CourseProviders(contacts.Companies):
     """
     List of Companies that have `Company.is_courseprovider` activated.
