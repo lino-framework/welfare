@@ -58,7 +58,8 @@ from lino.modlib.cal import models as cal
 from lino.modlib.properties import models as properties
 from lino_welfare.modlib.jobs import models as jobs
 from lino_welfare.modlib.isip import models as isip
-from lino_welfare.modlib.pcsw.models import Company, Person, PersonGroup
+from lino_welfare.modlib.pcsw.models import PersonGroup
+from lino_welfare.modlib.contacts.models import Company, Person
 
 
 CboStatutJuridique = {

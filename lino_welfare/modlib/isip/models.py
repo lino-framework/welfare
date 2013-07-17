@@ -57,7 +57,7 @@ from lino.utils.ranges import isrange, overlap, overlap2, encompass
 from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
 
-from lino_welfare.modlib.ui.models import Signers
+from lino_welfare.modlib.system.models import Signers
 
 
 def rangefmt(r):
@@ -782,8 +782,6 @@ class ContractsByEnding(Contracts):
 class ContractsByStudyType(Contracts):
     master_key = 'study_type'
     
-
-
 #~ def customize_siteconfig():
     #~ from lino.ui.models import SiteConfig
     #~ dd.inject_field(SiteConfig,

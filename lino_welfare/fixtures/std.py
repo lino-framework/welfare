@@ -278,7 +278,7 @@ def objects():
     yield ContractEnding(name=_("Santé"),needs_date_ended=True)
     yield ContractEnding(name=_("Force majeure"),needs_date_ended=True)
     
-    I = Instantiator('ui.HelpText','content_type field help_text').build
+    I = Instantiator('system.HelpText','content_type field help_text').build
     
     Client = resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)

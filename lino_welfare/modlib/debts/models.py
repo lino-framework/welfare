@@ -1288,7 +1288,7 @@ def setup_config_menu(site,ui,profile,m):
         #~ mb._detail_action = MyBudgets.get_url_action('detail_action')
         # (TODO: find a more elegant solution)
         
-        fld = site.modules.ui.SiteConfig._meta.get_field('master_budget')
+        fld = site.modules.system.SiteConfig._meta.get_field('master_budget')
         m.add_instance_action(mb,label=unicode(fld.verbose_name),
             action=MyBudgets.detail_action)
     #~ if user.profile.debts_level < UserLevels.manager: 
@@ -1335,7 +1335,7 @@ def customize_accounts():
 customize_accounts()
 
 
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'debts_bailiff_type',
     models.ForeignKey("pcsw.ClientContactType",
         blank=True,null=True,
@@ -1343,7 +1343,7 @@ dd.inject_field('ui.SiteConfig',
         related_name='bailiff_type_sites',
         help_text=_("Client contact type for Bailiff.")))
     
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'master_budget',
     models.ForeignKey("debts.Budget",
         blank=True,null=True,

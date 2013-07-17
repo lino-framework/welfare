@@ -64,7 +64,7 @@ cbss = dd.resolve_app('cbss')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-29 applications: sessions, about, ui, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
 101 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
@@ -161,9 +161,9 @@ DEMO_OVERVIEW = """\
  properties.PropType                     8         3
  properties.Property                     6         23
  sessions.Session                        3         4
- ui.HelpText                             4         5
- ui.SiteConfig                           24        1
- ui.TextFieldTemplate                    6         2
+ system.HelpText                         4         5
+ system.SiteConfig                       24        1
+ system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5
  users.Authority                         3         3
@@ -199,7 +199,7 @@ class DemoTest(RemoteAuthTestCase):
         
         s = settings.SITE.get_db_overview_rst()
         #~ print s
-        self.assertEqual(s,DEMO_OVERVIEW)
+        self.assertEqual(DEMO_OVERVIEW,s)
         
         """
         Test the number of rows returned for certain queries
@@ -214,7 +214,7 @@ class DemoTest(RemoteAuthTestCase):
         kw = dict(fmt='json',limit=10,start=0)
         add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
         add_case('rolf','api/households/Households',json_fields,4,**kw)
-        add_case('rolf','api/contacts/Partners',json_fields,116,**kw)
+        add_case('rolf','api/contacts/Partners',json_fields,117,**kw)
         add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
         add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
@@ -225,7 +225,7 @@ class DemoTest(RemoteAuthTestCase):
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
-        add_case('rolf','api/contacts/Persons',json_fields,67,**kw)
+        add_case('rolf','api/contacts/Persons',json_fields,68,**kw)
         add_case('rolf','api/pcsw/Clients',json_fields,56,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)

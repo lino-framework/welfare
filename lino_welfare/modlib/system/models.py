@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino import dd
 
-from lino.ui.models import *
+from lino.modlib.system.models import *
 
 
 class Signers(dd.Model):
@@ -30,7 +30,7 @@ class Signers(dd.Model):
     Model mixin which adds two fields `signer1` and `signer2`,
     the two in-house signers of contracts and official documents.
     
-    Inherited by :class:`SiteConfig <lino.ui.models.SiteConfig>` 
+    Inherited by :class:`SiteConfig <lino.modlib.system.models.SiteConfig>` 
     and :class:`ContractBase`.
     """
     
@@ -72,8 +72,6 @@ class SiteConfig(SiteConfig,Signers):
     """
     This adds the :class:`lino_welfare.modlib.isip.models.Signers` 
     mixin to Lino's standard SiteConfig.
-    
-    This trick having ``"ui.SiteConfig"`` in :attr:`lino.Lino.override_modlib_models`.
     
     """
         

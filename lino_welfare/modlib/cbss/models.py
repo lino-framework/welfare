@@ -1632,9 +1632,7 @@ class MyManageAccessRequests(ManageAccessRequests,mixins.ByUser):
 
 from lino_welfare.modlib.cbss.tx25 import *
     
-from lino.ui.models import SiteConfig
-
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'sector',
     models.ForeignKey(Sector,
         blank=True,null=True,
@@ -1648,7 +1646,7 @@ for the non-editable field `sector`
 (which defines the choices of the `purpose` field).
 """))
     
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'cbss_org_unit',
     models.CharField(_("Requesting organisation"),
       max_length=50,
@@ -1661,7 +1659,7 @@ For PCSWs this is the enterprise number
 Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
 Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
 """))
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'ssdn_user_id',
     models.CharField(_("SSDN User Id"),
       max_length=50,
@@ -1669,14 +1667,14 @@ dd.inject_field('ui.SiteConfig',
       help_text="""\
 Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
 """))
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'ssdn_email',
     models.EmailField(_("SSDN email address"),
       blank=True,
       help_text="""\
 Used in SSDN requests as text of the `AuthorizedUser\Email` element.
 """))
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'cbss_http_username',
     models.CharField(_("HTTP username"),
       max_length=50,
@@ -1684,7 +1682,7 @@ dd.inject_field('ui.SiteConfig',
       help_text="""\
 Used in the http header of new-style requests.
 """))
-dd.inject_field('ui.SiteConfig',
+dd.inject_field('system.SiteConfig',
     'cbss_http_password',
     models.CharField(_("HTTP password"),
       max_length=50,
@@ -1821,7 +1819,7 @@ def site_setup(self):
     #~ self.modules.contacts.AllPersons.add_detail_tab('cbss',"cbssrequests",MODULE_LABEL,required_user_groups=['cbss'])
     #~ 
     
-    self.modules.ui.SiteConfigs.add_detail_tab('cbss',"""
+    self.modules.system.SiteConfigs.add_detail_tab('cbss',"""
     cbss_org_unit sector ssdn_user_id ssdn_email
     cbss_http_username cbss_http_password
     """,MODULE_LABEL,required=dict(user_groups='cbss'))

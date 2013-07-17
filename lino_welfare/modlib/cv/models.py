@@ -71,8 +71,6 @@ from lino.modlib.cal.models import update_reminder
 from lino.core.dbutils import resolve_model, UnresolvedModel
 
 
-#~ from lino.ui.models import SiteConfig
-
 
 class CefLevel(dd.ChoiceList):
     """
@@ -260,7 +258,7 @@ class ConfiguredPropsByPerson(PropsByPerson):
             def my_connection_created(sender,**kw):
                 adapt()
             
-            SiteConfig = site.modules.ui.SiteConfig
+            SiteConfig = site.modules.system.SiteConfig
             @dd.receiver(dd.post_save, sender=SiteConfig,weak=False)
             def my_post_save(sender, instance=None,**kwargs):
                 adapt()
@@ -291,7 +289,7 @@ def site_setup(site):
 def customize_siteconfig():
 
         
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'propgroup_skills',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,
@@ -299,7 +297,7 @@ def customize_siteconfig():
             related_name='skills_sites'),
         """The property group to be used as master 
         for the SkillsByPerson table.""")
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'propgroup_softskills',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,
@@ -309,7 +307,7 @@ def customize_siteconfig():
         """The property group to be used as master 
         for the SoftSkillsByPerson table."""
         )
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'propgroup_obstacles',
         models.ForeignKey('properties.PropGroup',
             blank=True,null=True,

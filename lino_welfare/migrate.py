@@ -810,7 +810,7 @@ def migrate_from_1_1_7(globals_dict):
     '80': EventStates.cancelled,
     }
     
-    raise NotImplementedError("migrate event states")
+    raise NotImplementedError("migrate event states, rename ui to system")
 
     
     

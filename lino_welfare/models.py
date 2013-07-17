@@ -114,7 +114,7 @@ def customize_siteconfig():
     Injects application-specific fields to :class:`SiteConfig <lino.models.SiteConfig>`.
     """
     
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'job_office',
         models.ForeignKey('contacts.Company',
             blank=True,null=True,
@@ -123,14 +123,14 @@ def customize_siteconfig():
             help_text="""The Company whose contact persons 
             will be choices for `Person.job_office_contact`."""))
         
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'residence_permit_upload_type',
         models.ForeignKey("uploads.UploadType",
             blank=True,null=True,
             verbose_name=_("Upload Type for residence permit"),
             related_name='residence_permit_sites'))
         
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'work_permit_upload_type',
         #~ UploadType.objects.get(pk=2)
         models.ForeignKey("uploads.UploadType",
@@ -138,7 +138,7 @@ def customize_siteconfig():
             verbose_name=_("Upload Type for work permit"),
             related_name='work_permit_sites'))
 
-    dd.inject_field('ui.SiteConfig',
+    dd.inject_field('system.SiteConfig',
         'driving_licence_upload_type',
         models.ForeignKey("uploads.UploadType",
             blank=True,null=True,
@@ -351,7 +351,7 @@ def site_setup(site):
     """)
     
     
-    site.modules.ui.SiteConfigs.set_detail_layout("""
+    site.modules.system.SiteConfigs.set_detail_layout("""
     site_company system_note_type default_build_method 
     next_partner_id:20 job_office debts_bailiff_type master_budget
     signer1 signer2

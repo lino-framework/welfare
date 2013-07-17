@@ -71,41 +71,6 @@ class Site(Site,cbss.SiteMixin):
     
     #~ admin_url = '/admin'
     
-    #~ mergeable_models = [
-        #~ 'pcsw.Client', 
-        #~ 'contacts.Company',
-        #~ 'households.Household'
-        #~ ]
-        
-    #~ override_modlib_models = [
-        #~ 'contacts.Partner', 
-        #~ 'contacts.Person', 
-        #~ 'contacts.Company',
-        #~ 'households.Household',
-        #~ 'ui.SiteConfig'
-        #~ ]
-        
-        
-    #~ def get_application_description(self):
-        #~ import lino
-        #~ s = """
-        #~ %s is a customizable <a href="%s">Lino</a> application 
-        #~ to be used in Belgian Public Centres for Social Welfare.
-        #~ """ % (self.label,lino.__url__)
-        #~ return s
-        
-    def unused_get_main_action(self,user): 
-        return self.modules.lino.Home.default_action
-        
-    #~ def get_application_info(self):
-        #~ return (__name__,__version__,__url__)
-        
-        
-    
-    #~ def setup_workflows(self):
-        #~ 
-        #~ from lino.modlib.cal.workflows import welfare
-        
     def setup_choicelists(self):
         """
         This defines default user profiles for :mod:`lino_welfare`.
@@ -235,7 +200,7 @@ class Site(Site,cbss.SiteMixin):
         for a in super(Site,self).get_installed_apps():
             yield a
             
-        yield 'lino_welfare.modlib.ui'
+        yield 'lino_welfare.modlib.system'
         yield 'django.contrib.contenttypes'
         yield 'lino.modlib.users'
         yield 'lino.modlib.changes'

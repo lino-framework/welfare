@@ -420,7 +420,7 @@ Belgique""")
         check_disabled(p,df,'id first_name last_name bank_account1')
         check_enabled(p,df,'gsm')
                     
-        h = pcsw.Household(name="Test Household")
+        h = households.Household(name="Test Household")
         h.save()
         df = households.Households.disabled_fields(h,None)
         #~ print df
