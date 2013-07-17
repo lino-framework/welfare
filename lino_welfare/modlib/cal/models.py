@@ -37,16 +37,41 @@ class Calendar(Calendar):
     invite_team_members = dd.ForeignKey('users.Team',blank=True,null=True)
     invite_client = models.BooleanField(_("Invite client"),default=False)
     
+dd.inject_field('system.SiteConfig','client_guestrole',
+    dd.ForeignKey('cal.GuestRole',
+        verbose_name=_("Guest role for clients"),
+        related_name='client_guestroles_set',
+        blank=True,null=True))    
+    
+dd.inject_field('system.SiteConfig','team_guestrole',
+    dd.ForeignKey('cal.GuestRole',
+        verbose_name=_("Guest role for team members"),
+        related_name='team_guestroles_set',
+        blank=True,null=True))    
+    
 class Event(Event):
     
     def suggest_guests(self):
+        #~ print "Foo"
         for g in super(Event,self).suggest_guests(): 
             yield g
         if self.calendar is None: 
             return
+        Guest = settings.SITE.modules.cal.Guest
+        if self.calendar.invite_team_members:
+            ug = self.calendar.invite_team_members
+            for obj in settings.SITE.modules.cal.Membership.objects.filter(group=ug).exclude(user=self.user):
+                if obj.user.partner:
+                    yield Guest(event=self,
+                        partner=obj.user.partner,
+                        role=settings.SITE.site_config.team_guestrole)
+        
+            
         if self.calendar.invite_client:
             if self.project is not None:
-                yield self.project
+                yield Guest(event=self,
+                    partner=self.project,
+                    role=settings.SITE.site_config.client_guestrole)
     
 
 @dd.receiver(dd.post_analyze)
@@ -77,7 +102,7 @@ def customize_cal(sender,**kw):
     description GuestsByEvent 
     """,_("General"))
     site.modules.cal.Events.add_detail_panel("more","""
-    id created:20 modified:20  
+    id created:20 modified:20 state
     outbox.MailsByController postings.PostingsByController
     """,_("More"))
     

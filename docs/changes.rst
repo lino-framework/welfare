@@ -12,6 +12,14 @@ The final truth about what's going on is only
 Version 1.1.8 (coming)
 ============================================
 
+- :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
+  `invite_client`, welches für 
+  Klientengespräche angekreuzt ist
+  (zumindest in der Demo-Datenbank. Produktionsdaten nach Release manuell 
+  anpassen).
+
+
+
 - Filter-Panel in Klientenliste:
   Zwei neue Beobachtungskriterien "VSE" und "Art-60§7-Konvention".
   Ermöglicht Antworten auf Fragen im Stil

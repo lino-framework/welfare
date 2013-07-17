@@ -74,7 +74,7 @@ DEMO_OVERVIEW = """\
  accounts.Group                          8         7
  cal.Calendar                            18        5
  cal.Event                               24        141
- cal.Guest                               9         0
+ cal.Guest                               9         5
  cal.GuestRole                           8         4
  cal.Priority                            5         9
  cal.Room                                4         0
@@ -162,7 +162,7 @@ DEMO_OVERVIEW = """\
  properties.Property                     6         23
  sessions.Session                        3         4
  system.HelpText                         4         5
- system.SiteConfig                       24        1
+ system.SiteConfig                       26        1
  system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5

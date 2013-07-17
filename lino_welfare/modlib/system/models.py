@@ -85,7 +85,8 @@ class SiteConfig(SiteConfig,Signers):
             verbose_name=_("Second signer function"),
             help_text=_("Contact function to designate the president."),
             related_name="%(app_label)s_%(class)s_set_by_signer2")
-        
+            
+       
 
 dd.update_field(SiteConfig,'signer1', blank=True,null=True)
 dd.update_field(SiteConfig,'signer2', blank=True,null=True)

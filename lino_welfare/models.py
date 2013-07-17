@@ -361,6 +361,7 @@ def site_setup(site):
     """,constants="""
     propgroup_skills propgroup_softskills propgroup_obstacles
     residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
+    client_guestrole team_guestrole
     """)
     
     site.modules.properties.Properties.set_detail_layout("""

@@ -209,7 +209,7 @@ def objects():
     #~ yield et
     
     calendar = Instantiator('cal.Calendar').build
-    et = calendar(color=20,**babel_values('name',
+    et = calendar(color=20,invite_client=True,**babel_values('name',
           de=u"Klientengespräche intern",
           fr=u"Rencontres internes avec client",
           en=u"Internal meetings with client",

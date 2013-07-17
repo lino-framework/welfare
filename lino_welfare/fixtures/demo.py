@@ -178,13 +178,46 @@ def unused_coachings(p,type,coach1,coach2,coached_from,coached_until=None):
 
 def objects():
     
+    guest_role = Instantiator('cal.GuestRole').build
+    obj = guest_role(email_template="Visitor.eml.html",**babel_values('name',
+          de="Besucher",
+          fr="Visiteur",
+          en="Visitor",
+          et="Külaline",
+          ))
+    yield obj
+    settings.SITE.site_config.update(client_guestrole=obj)
+    
+    obj = guest_role(**babel_values('name',
+          de="Kollege",
+          fr="Collègue",
+          en="Colleague",
+          et="Kolleeg",
+          ))
+    yield obj
+    settings.SITE.site_config.update(team_guestrole=obj)
+    
+    yield guest_role(**babel_values('name',
+          de=u"Vorsitzender",
+          fr=u"Président",
+          en=u"Presider",
+          et=u"Eesistuja",
+          ))
+    yield guest_role(**babel_values('name',
+          de=u"Protokollführer",
+          fr=u"Greffier",
+          en=u"Reporter",
+          et=u"Sekretär",
+          ))
+    
+    
     calendar = Instantiator('cal.Calendar').build
     #~ yield calendar(**babel_values('name',
           #~ de=u"Klientengespräche intern",
           #~ fr=u"Rencontres internes avec client",
           #~ en=u"Internal meetings with client",
           #~ ))
-    yield calendar(color=1,**babel_values('name',
+    yield calendar(color=1,invite_client=True,**babel_values('name',
           de=u"Klientengespräche extern",
           fr=u"Rencontres client externes",
           en=u"External meetings with client",
@@ -478,7 +511,7 @@ def objects():
     
     gerd = person(first_name="Gerd",
       last_name="Xhonneux",city=kettenis,
-      email='gerd@example.com',
+      email=settings.SITE.demo_email, # 'gerd@example.com'
       country='BE',gender=mixins.Genders.male)
     yield gerd
     yield role(company=cpas,person=gerd,type=4)
@@ -560,7 +593,7 @@ def objects():
     #~ yield User(username='gerd',partner=gerd,profile='900')
     
     melanie = person(first_name="Mélanie",last_name="Mélard",
-        email='melanie@example.com',
+        email=settings.SITE.demo_email, # 'melanie@example.com',
         city=eupen,country='BE',gender=mixins.Genders.female,
         language='fr')
     yield melanie
@@ -568,21 +601,21 @@ def objects():
     yield melanie
     
     hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
-        email='hubert@example.com',
+        email=settings.SITE.demo_email, # 'hubert@example.com',
         city=eupen,country='BE',gender=mixins.Genders.male)
     yield hubert
     hubert = users.User(username="hubert",partner=hubert,profile='100') 
     yield hubert
     
     alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
-        email='alicia@example.com',
+        email=settings.SITE.demo_email, # 'alicia@example.com',
         city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
     yield alicia
     alicia = users.User(username="alicia",partner=alicia,profile='100') 
     yield alicia
     
     theresia = person(first_name=u"Theresia",last_name=u"Thelen",
-        email='theresia@example.com',
+        email=settings.SITE.demo_email, # 'theresia@example.com',
         city=eupen,country='BE',gender=mixins.Genders.female,language='de')
     yield theresia
     theresia = users.User(username="theresia",partner=theresia,profile='210') 
