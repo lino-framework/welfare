@@ -25,4 +25,5 @@ Il n'est pas terminé.
    cal
    countries
    contacts
+   reception
    watch_tim
