@@ -34,6 +34,7 @@ Référence
 .. actor:: cal.Rooms
 .. actor:: cal.Priorities
 .. actor:: cal.GuestRoles
+.. actor:: cal.GuestsByPartner
 .. actor:: cal.Guests
 
 

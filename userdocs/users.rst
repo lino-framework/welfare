@@ -82,4 +82,4 @@ Référence
 =========
 
 
-.. actor:: ui.ContentTypes
+.. actor:: system.ContentTypes

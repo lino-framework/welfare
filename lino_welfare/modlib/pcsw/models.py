@@ -1246,7 +1246,7 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Correspondence"))
     
     calendar = dd.Panel("""
-    cal.EventsByProject
+    cal.EventsByProject cal.GuestsByPartner 
     cal.TasksByProject
     """,label = _("Calendar"))
     

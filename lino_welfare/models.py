@@ -335,12 +335,12 @@ def site_setup(site):
         #~ detail_layout = HouseholdDetail()
         
 
-    site.modules.lino.Home.set_detail_layout("""
-    quick_links:80x1
-    welcome
-    pcsw.UsersWithClients:80x8
-    coming_reminders:40x16 missed_reminders:40x16
-    """)
+    #~ site.modules.lino.Home.set_detail_layout("""
+    #~ quick_links:80x1
+    #~ welcome
+    #~ pcsw.UsersWithClients:80x8
+    #~ coming_reminders:40x16 missed_reminders:40x16
+    #~ """)
     
     site.modules.households.Households.set_detail_layout(box3="""
     country region

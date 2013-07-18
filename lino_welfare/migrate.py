@@ -594,7 +594,7 @@ def migrate_from_1_0_16(globals_dict):
     
 def migrate_from_1_0_17(globals_dict): 
     """
-    Replaced field `active` by `state` in :ref:`welfare.jobs.Candidature`.
+    Replaced field `active` by `state` in :ref:`welfare.jobs.Candidatures`.
     """
     jobs_Candidature = resolve_model("jobs.Candidature")
     CandidatureStates = settings.SITE.modules.jobs.CandidatureStates
