@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Manual package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-19 15:14+0300\n"
+"PO-Revision-Date: 2013-07-19 15:14+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.0dev-r661\n"
+
+# 5557cc7e583345df8c68f145f641b7f4
+#: ../reception.rst:4
+msgid "Reception"
+msgstr ""
+
+# d9aeaeafaae44665a943bb7ab53d8ed6
+#: ../reception.rst:6
+msgid ""
+"The reception module of Lino-Welfare is for managing a reception desk and"
+" a waiting queue. Visitors are \"checked in\" as they present themselves "
+"at a reception desk (Empfangsschalter), and \"checked out\" when they "
+"leave again. Social assistants then have a possibility to see how many "
+"and which clients are waiting for them."
+msgstr ""
+
+# 75d8978be638442fa808db82e7c17422
+#: ../reception.rst:14
+msgid ""
+"A **reception clerk** is the user at the reception desk who welcomes "
+"visitors. In the public demo database there is a user \"theresia\" with "
+"that profile. Theresia's first questions are usually \"What's your "
+"name?\" or \"Do you have an appointment with a social agent?\"."
+msgstr ""
+
+# 55f5601414be49138b625fffda7bc27a
+#: ../reception.rst:21
+msgid ""
+"Visitors must have a :ref:`welfare.pcsw.Client` account (technically a "
+":ref:`welfare.contacts.Partner` account would be enough, but other "
+"visitors like suppliers or board members aren't usually managed by the "
+"reception module)."
+msgstr ""
+
+# a8f03247a8fe4db9a1582e1cb11523a0
+#: ../reception.rst:26
+msgid ""
+"Lino must now automatically pop up a notification to read the client's "
+"eID card if this is necessary, e.g. because \"eID card has not yet been "
+"read!\" or \"Old eID card validity has expired!\""
+msgstr ""
+
+# b3722d65cf004d8d9c4afc296e1fc026
+#: ../reception.rst:33
+msgid ""
+"Most visitors come at the open consultation hours. and don't have an "
+"appointment with some user. In that case the reception clerk clicks "
+"\"Create Appointment\". Lino suggests the Client's primary coach as user "
+"of the appointment. Theresia may select another social worker. She also "
+"may specify a reason, a short one-line text."
+msgstr ""
+
+# 36c6d9e7f7004e70929a1765c1dc568f
+#: ../reception.rst:41
+msgid ""
+"In any case, when the clerk then clicks the Checkin button of that "
+"appointment."
+msgstr ""
+
+# b0b306b8527a41648b0bbbe70130896e
+#: ../reception.rst:44
+msgid ""
+"The reception clerk then finally says \"Please sit down and wait until "
+"the social agent comes.\""
+msgstr ""
+
+# 9505733f75ac4640853d672af2b30c2a
+#: ../reception.rst:52
+msgid "As a social worker you consult this table to see:"
+msgstr ""
+
+# 5277440d973f47168b719f9d8c002fbd
+#: ../reception.rst:54
+msgid "How many people are waiting for me?"
+msgstr ""
+
+# 9641eac880b34f8e9de9ad088b3cdda1
+#: ../reception.rst:55
+msgid "Who is waiting for me?"
+msgstr ""
+
+# 91363cb72d8f4cf0a70e2938555d4687
+#: ../reception.rst:57
+msgid ""
+"For example you may decide \"This guy gets quickly nervous, and it won't "
+"take much time, so i'll let him in before the others.\""
+msgstr ""
+

@@ -43,7 +43,6 @@ class DocsTests(BaseTestCase):
     def test_pcsw(self): return self.run_docs_doctests('tested/pcsw.rst')
     def test_courses(self): return self.run_docs_doctests('tested/courses.rst')
     
-    
 
 
 class PackagesTests(BaseTestCase):

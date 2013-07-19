@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-04 14:26+0300\n"
+"POT-Creation-Date: 2013-07-19 15:14+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -121,11 +121,4 @@ msgstr ""
 #: ../jobs.rst:83
 msgid "Example (using fictive demo data):"
 msgstr ""
-
-# 414b2668e5e94189955e268ff2888a80
-#~ msgid ""
-#~ "Ceci est la vieille version du "
-#~ "document, elle sera remplacée par "
-#~ ":ref:`welfare.jobs.NewJobsOverview`"
-#~ msgstr ""
 

@@ -73,7 +73,7 @@ DEMO_OVERVIEW = """\
  accounts.Chart                          4         1
  accounts.Group                          8         7
  cal.Calendar                            18        5
- cal.Event                               24        141
+ cal.Event                               24        144
  cal.Guest                               9         5
  cal.GuestRole                           8         4
  cal.Priority                            5         9

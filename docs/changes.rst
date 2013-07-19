@@ -12,13 +12,12 @@ The final truth about what's going on is only
 Version 1.1.8 (coming)
 ============================================
 
-- :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
+- Neues Modul "Empfang" und Änderungen im Kalendermodul. 
+  Z.B.: :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
   `invite_client`, welches für 
   Klientengespräche angekreuzt ist
   (zumindest in der Demo-Datenbank. Produktionsdaten nach Release manuell 
-  anpassen).
-
-
+  anpassen). 
 
 - Filter-Panel in Klientenliste:
   Zwei neue Beobachtungskriterien "VSE" und "Art-60§7-Konvention".
@@ -38,7 +37,7 @@ Version 1.1.8 (coming)
   when filtering on course provider in PendingCourseRequests.
   Added a new filter parameter "Course offer".
       
-- Auswahllisten auf ChoiceLists mit blank=True haben jetzt 
+- Auswahllisten auf ChoiceLists mit *blank=True* haben jetzt 
   auch einen leeren Eintrag.
 
 - Re-built a new self-signed `DavLink.jar` file included with Lino 
@@ -50,7 +49,13 @@ Version 1.1.8 (coming)
   "Uncaught TypeError: Cannot read property 'main_item' of null".
   (:blogref:`20130704`)
   
-- Budget-Einträge eingeben:
+- Export nach CSV funktionierte nicht 
+  in Tabellen, die mindestens ein DisplayField hatten
+  (:blogref:`20130719`).
+  
+- Ändern der Reihenfolge der Einträge eines Budgets:
+  hier waren diverse Bugs.
+  
   Overridden `get_siblings` for `debts.Entry` so that up/down 
   actions no longer fail when seqno's are spread accross 
   different account_types.
@@ -65,8 +70,6 @@ Version 1.1.8 (coming)
 
 - `daemoncommand.py` and Django 1.5
 
-  
-  
   
 
 

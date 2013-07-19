@@ -1347,6 +1347,10 @@ def add_coachings_filter(qs,user,today,primary):
 
 
 def daterange_text(a,b):
+    """
+    """
+    if a == b:
+        return dd.dtos(a)
     return dd.dtos(a)+"-"+dd.dtos(b)
     
 class Clients(contacts.Persons):
@@ -1517,7 +1521,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             else:
                 yield s
         elif period:
-            yield _("Coached %s") % period
+            yield _("Coached on %s") % period
         
         if ar.param_values.only_primary:
             #~ yield unicode(_("primary"))

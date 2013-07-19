@@ -2,6 +2,8 @@
 {% block hello_user %}
 {{ super() }}
 
+(It is now {{now}})
+
 {% set T = settings.SITE.modules.pcsw.UsersWithClients %}
 {% if T.default_action.get_view_permission(ar.get_user().profile) %}
 <h2>{{T.label}}</h2>
