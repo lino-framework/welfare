@@ -7,6 +7,8 @@ General PCSW
 
 .. 
   >>> from lino.runtime import *
+  >>> from django.test import Client
+  >>> import json
 
 >>> ses = settings.SITE.login('rolf')
 >>> ses.show(pcsw.UsersWithClients)
@@ -45,4 +47,6 @@ Printing an eID card summary
 >>> from pprint import pprint
 >>> pprint(ses.run(obj.print_eid_content)) #doctest: +NORMALIZE_WHITESPACE
 {'open_url': u'/media/userdocs/appyodt/pcsw.Client-123.odt', 'success': True}
+
+
 

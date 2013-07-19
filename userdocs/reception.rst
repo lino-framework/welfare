@@ -1,26 +1,33 @@
+.. _welfare.reception:
+
 Reception
 =========
 
-The optional reception module of Lino-Welfare 
-is for managing a reception desk and a waiting queue: 
-register visitors into a waiting queue 
-as they present themselves at a reception desk (Empfangsschalter),
-and unregister them when they leave again.
+The reception module of Lino-Welfare 
+is for managing a reception desk and a waiting queue.
+Visitors are "checked in" as they present themselves at a 
+reception desk (Empfangsschalter),
+and "checked out" when they leave again.
+Social assistants then have a possibility to see how many and which 
+clients are waiting for them.
 
-A **reception clerk** is the user at the reception desk who welcomes visitors.
-His first questions are usually 
-"What's your name?" or 
-"Do you have a scheduled meeting with somebody?".
+A **reception clerk** is the user at the reception desk who welcomes 
+visitors.
 In the public demo database there is a user "theresia" with that profile.
+Theresia's first questions are usually 
+"What's your name?" or 
+"Do you have an appointment with a social agent?".
   
 Visitors must have a :ref:`welfare.pcsw.Client` account
 (technically a :ref:`welfare.contacts.Partner` account would be 
 enough, but other visitors like suppliers or board members aren't 
-currently managed by the reception module).
+usually managed by the reception module).
 
-When appropriate, Lino must now automatically 
-pop up a notification to read the client's eID card.
+Lino must now automatically 
+pop up a notification to read the client's eID card
+if this is necessary, e.g. because
 "eID card has not yet been read!"
+or
 "Old eID card validity has expired!"
 
 Most visitors come at the open consultation hours.
