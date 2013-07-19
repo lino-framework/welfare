@@ -400,7 +400,8 @@ def objects():
     #~ yield country('SUHH',"Soviet Union")
     
     eupen = City.objects.get(name__exact='Eupen')
-    stvith = City.objects.get(zip_code__exact='4780')
+    #~ stvith = City.objects.get(zip_code__exact='4780')
+    stvith = City.objects.get(name__in=('Sankt Vith','Saint-Vith'))
     kettenis = City.objects.get(name__exact='Kettenis')
     vigala = City.objects.get(name__exact='Vigala')
     ee = countries.Country.objects.get(pk='EE')
