@@ -775,8 +775,9 @@ def migrate_from_1_1_6(globals_dict):
     
 def migrate_from_1_1_7(globals_dict): 
     """
-    - in isip.examPolicy, renamed max_occurences to max_events
-    - Event states : "notified" becomes "draft", "absent" becomes "cancelled"
+    - in isip.ExamPolicy, renamed field `max_occurences` to `max_events`
+    - cal.EventStates : "notified" becomes "draft", "absent" becomes "cancelled"
+    - renamed app "ui" to "system"
     """
     bv2kw = globals_dict['bv2kw']
     new_content_type_id = globals_dict['new_content_type_id']
@@ -806,12 +807,46 @@ def migrate_from_1_1_7(globals_dict):
     
     from lino.modlib.cal.models import EventStates
     old2new = {
-    '30': EventStates.draft,
-    '80': EventStates.cancelled,
+    '30': EventStates.draft.value,
+    '80': EventStates.cancelled.value,
     }
+    cal_Event = resolve_model("cal.Event")
     
-    raise NotImplementedError("migrate event states, rename ui to system")
-
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
+        
+        state = old2new.get(state,state)
+        
+        kw = dict()
+        kw.update(id=id)
+        owner_type_id = new_content_type_id(owner_type_id)
+        kw.update(owner_type_id=owner_type_id)
+        kw.update(owner_id=owner_id)
+        kw.update(user_id=user_id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(project_id=project_id)
+        kw.update(build_time=build_time)
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        kw.update(summary=summary)
+        kw.update(description=description)
+        kw.update(uid=uid)
+        kw.update(calendar_id=calendar_id)
+        kw.update(access_class=access_class)
+        kw.update(sequence=sequence)
+        kw.update(auto_type=auto_type)
+        kw.update(transparent=transparent)
+        kw.update(room_id=room_id)
+        kw.update(priority_id=priority_id)
+        kw.update(state=state)
+        kw.update(assigned_to_id=assigned_to_id)
+        return cal_Event(**kw)
+    globals_dict.update(create_cal_event=create_cal_event)
     
+    globals_dict.update(ui_SiteConfig=resolve_model('ui.SiteConfig'))
+    globals_dict.update(ui_TextFieldTemplate=resolve_model('ui.TextFieldTemplate'))
+    globals_dict.update(ui_HelpText=resolve_model('ui.HelpText'))
     
     return '1.1.8'
