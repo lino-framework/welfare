@@ -860,5 +860,24 @@ def migrate_from_1_1_7(globals_dict):
         return cal_Room(**kw)
     globals_dict.update(create_cal_room=create_cal_room)
     
+    pcsw_Coaching = resolve_model("pcsw.Coaching")
+    def create_pcsw_coaching(id, user_id, client_id, start_date, end_date, type_id, primary, ending_id):
+        if end_date is not None and start_date is not None:
+            if end_date < start_date:
+                end_date = start_date
+        kw = dict()
+        kw.update(id=id)
+        kw.update(user_id=user_id)
+        kw.update(client_id=client_id)
+        kw.update(start_date=start_date)
+        kw.update(end_date=end_date)
+        kw.update(type_id=type_id)
+        kw.update(primary=primary)
+        kw.update(ending_id=ending_id)
+        return pcsw_Coaching(**kw)
+    globals_dict.update(create_pcsw_coaching=create_pcsw_coaching)
+
+    
+    
     
     return '1.1.8'

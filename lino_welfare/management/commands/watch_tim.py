@@ -571,39 +571,6 @@ class PAR(Controller):
                         
                     try:
                         coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                        watcher = dd.ChangeWatcher(coaching)
-                        if u is None or u != coaching.user:
-                            """
-                            If the coach has changed, maintain the old coaching in history.
-                            """
-                            coaching.primary = False
-                            coaching.end_date = datetime.date.today()
-                        else:
-                            if obj.client_state == pcsw.ClientStates.coached:
-                                coaching.end_date = None # 1990
-                            else:
-                                coaching.end_date = LONG_TIME_AGO
-                                
-                            coaching.type = u.coaching_type
-                            if coaching.start_date is None:
-                                coaching.start_date = obj.created
-                            
-                        if watcher.is_dirty():
-                            coaching.save()
-                            watcher.send_update(REQUEST)
-                            
-                        if u is not None and coaching.user != u:
-                            """
-                            create a new coaching 
-                            """
-                            coaching = pcsw.Coaching(
-                                client=obj,primary=True,
-                                user=u,
-                                type=u.coaching_type,
-                                start_date=datetime.date.today())
-                            coaching.save()
-                            dd.pre_ui_create.send(sender=coaching,request=REQUEST)
-
                     except pcsw.Coaching.DoesNotExist,e:
                         try:
                             coaching = pcsw.Coaching.objects.get(client=obj,user=u,end_date__isnull=True)
@@ -622,16 +589,48 @@ class PAR(Controller):
                                 #~ changes.log_create(REQUEST,coaching)
                         except Exception,e:
                             raise Exception("More than one primary coaching for %r by %r" % (obj,u))
+                            
                     except Exception,e:
+                        
                         raise Exception("More than one primary coaching for %r : %s" % (obj,e))
+                        
+                    else:
+                        watcher = dd.ChangeWatcher(coaching)
+                        if u is None or u != coaching.user:
+                            """
+                            If the coach has changed, maintain the old coaching in history.
+                            """
+                            coaching.primary = False
+                            coaching.end_date = datetime.date.today()
+                        else:
+                            coaching.type = u.coaching_type
+                            if coaching.start_date is None:
+                                coaching.start_date = obj.created
+                                
+                            if obj.client_state == pcsw.ClientStates.coached:
+                                coaching.end_date = None # 1990
+                            else:
+                                #~ coaching.end_date = LONG_TIME_AGO
+                                coaching.end_date = coaching.start_date
+                                
+                            
+                        if watcher.is_dirty():
+                            coaching.full_clean()
+                            coaching.save()
+                            watcher.send_update(REQUEST)
+                            
+                        if u is not None and coaching.user != u:
+                            """
+                            create a new coaching 
+                            """
+                            coaching = pcsw.Coaching(
+                                client=obj,primary=True,
+                                user=u,
+                                type=u.coaching_type,
+                                start_date=datetime.date.today())
+                            coaching.save()
+                            dd.pre_ui_create.send(sender=coaching,request=REQUEST)
 
-                    #~ else:
-                        #~ try:
-                            #~ coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
-                            #~ dd.pre_ui_delete.send(sender=coaching,request=REQUEST)
-                            #~ coaching.delete()
-                        #~ except pcsw.Coaching.DoesNotExist,e:
-                            #~ pass
                         
         elif obj.__class__ is Company:
             #~ obj.prefix = data.get('ALLO','')
