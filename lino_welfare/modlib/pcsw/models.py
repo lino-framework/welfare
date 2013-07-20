@@ -1891,11 +1891,12 @@ def on_database_ready(sender,**kw):
     """
     self = UsersWithClients
     self.column_names = 'user:10'
-    today = datetime.date.today()
     #~ try:
     if True:
         for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
             def w(pg):
+                # we must evaluate `today` for each request, not only once when `database_ready`
+                today = datetime.date.today()
                 def func(self,obj,ar):
                     return IntegClients.request(
                         param_values=dict(group=pg,
