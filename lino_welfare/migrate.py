@@ -845,9 +845,9 @@ def migrate_from_1_1_7(globals_dict):
         return cal_Event(**kw)
     globals_dict.update(create_cal_event=create_cal_event)
     
-    globals_dict.update(ui_SiteConfig=resolve_model('ui.SiteConfig'))
-    globals_dict.update(ui_TextFieldTemplate=resolve_model('ui.TextFieldTemplate'))
-    globals_dict.update(ui_HelpText=resolve_model('ui.HelpText'))
+    globals_dict.update(ui_SiteConfig=resolve_model('system.SiteConfig'))
+    globals_dict.update(ui_TextFieldTemplate=resolve_model('system.TextFieldTemplate'))
+    globals_dict.update(ui_HelpText=resolve_model('system.HelpText'))
     
     cal_Room = resolve_model("cal.Room")
     def create_cal_room(id, name, company_id, contact_person_id, contact_role_id):
