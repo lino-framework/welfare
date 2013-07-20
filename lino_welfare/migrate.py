@@ -17,13 +17,12 @@ This is a real-world example of how the application developer
 can provide automatic data migrations for 
 :ref:`dpy`.
 
-This module is used when loading a python dump that was 
-created by a previous version.
-Lino writes the corresponding ``import`` statement 
-into every python dump because
-:mod:`lino_welfare.settings.Lino` has
-:attr:`lino.Lino.migration_module` 
-set to ``"lino_welfare.modlib.pcsw.migrate"``.
+This module is used because 
+:mod:`lino_welfare.settings.Site` has
+:attr:`migration_module <north.Site.migration_module>` 
+set to ``"lino_welfare.migrate"``.
+
+See :func:`north.dpy.install_migrations` 
 
 """
 
@@ -778,6 +777,7 @@ def migrate_from_1_1_7(globals_dict):
     - in isip.ExamPolicy, renamed field `max_occurences` to `max_events`
     - cal.EventStates : "notified" becomes "draft", "absent" becomes "cancelled"
     - renamed app "ui" to "system"
+    - in `cal.Room` removed fields `company` and `company_contact`
     """
     bv2kw = globals_dict['bv2kw']
     new_content_type_id = globals_dict['new_content_type_id']
@@ -848,5 +848,17 @@ def migrate_from_1_1_7(globals_dict):
     globals_dict.update(ui_SiteConfig=resolve_model('ui.SiteConfig'))
     globals_dict.update(ui_TextFieldTemplate=resolve_model('ui.TextFieldTemplate'))
     globals_dict.update(ui_HelpText=resolve_model('ui.HelpText'))
+    
+    cal_Room = resolve_model("cal.Room")
+    def create_cal_room(id, name, company_id, contact_person_id, contact_role_id):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        #~ kw.update(company_id=company_id)
+        #~ kw.update(contact_person_id=contact_person_id)
+        #~ kw.update(contact_role_id=contact_role_id)
+        return cal_Room(**kw)
+    globals_dict.update(create_cal_room=create_cal_room)
+    
     
     return '1.1.8'

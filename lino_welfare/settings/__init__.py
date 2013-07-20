@@ -28,7 +28,9 @@ from lino_welfare import SETUP_INFO
 
 #~ class Site(Site,cal.SiteMixin,cbss.SiteMixin):
 class Site(Site,cbss.SiteMixin):
-  
+    """
+    The base class for all Lino-Welfare sites.
+    """
     version = SETUP_INFO['version'] # lino_welfare.__version__
     url = SETUP_INFO['url'] # "http://code.google.com/p/lino-welfare/"
     #~ verbose_name = SETUP_INFO['name'] # "Lino Welfare"
