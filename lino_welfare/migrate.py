@@ -22,8 +22,6 @@ This module is used because
 :attr:`migration_module <north.Site.migration_module>` 
 set to ``"lino_welfare.migrate"``.
 
-See :func:`north.dpy.install_migrations` 
-
 """
 
 import logging
