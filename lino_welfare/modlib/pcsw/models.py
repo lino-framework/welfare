@@ -1590,7 +1590,8 @@ class IntegClients(Clients):
         kw = super(IntegClients,self).param_defaults(ar,**kw)
         kw.update(client_state=ClientStates.coached)
         kw.update(coached_by=ar.get_user())
-        #~ # print "20120918 MyClients.param_defaults", kw['coached_by']
+        #~ print "20130721 IntegClients.param_defaults", kw['coached_by']
+        #~ raise Exception(20130721)
         return kw
         
     @classmethod
