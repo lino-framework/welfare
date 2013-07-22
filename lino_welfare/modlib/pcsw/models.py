@@ -619,6 +619,7 @@ class Client(contacts.Person):
         verbose_name_plural = _("Clients") 
         
     workflow_state_field = 'client_state'
+    
         
     remarks2 = models.TextField(_("Remarks (Social Office)"),blank=True) # ,null=True)
     gesdos_id = models.CharField(max_length=40,blank=True,
@@ -1359,6 +1360,8 @@ class Clients(contacts.Persons):
     #~ title = _("Clients")
     model = Client # settings.SITE.person_model
     params_panel_hidden = True
+    
+    create_event = cal.CreateClientEvent()
     
     insert_layout = dd.FormLayout("""
     first_name last_name

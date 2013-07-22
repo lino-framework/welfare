@@ -115,3 +115,49 @@ def customize_cal(sender,**kw):
     end="end_date end_time",
     window_size=(60,'auto'))
     
+
+class CreateClientEvent(dd.RowAction):
+    label = _("Appointment")
+    show_in_workflow = True
+    parameters = dict(
+        date=models.DateField(_("Date"),blank=True,null=True),
+        user=dd.ForeignKey(settings.SITE.user_model),
+        summary=models.CharField(verbose_name=_("Summary"),blank=True))
+    params_layout = """
+    date user 
+    summary
+    """
+    required = dict(states='coached')
+    
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(CreateClientEvent,self).param_defaults(ar,**kw)
+        kw.update(user=ar.get_user())
+        kw.update(date=datetime.date.today)
+        return kw
+        
+    def get_notify_subject(self,ar,obj):
+        return _("Created appointment for %(user)s with %(partner)s") % dict(
+            event=obj,
+            user=obj.event.user,
+            partner=obj.partner)
+     
+    def run_from_ui(self,obj,ar,**kw):
+        ekw = dict(project=obj,user=ar.get_user()) 
+        ekw.update(state=EventStates.scheduled)
+        ekw.update(start_date=ar.action_param_values.date)
+        ekw.update(end_date=ar.action_param_values.date)
+        if ar.action_param_values.summary:
+            ekw.update(summary=ar.action_param_values.summary)
+        if ar.action_param_values.user != ar.get_user():
+            ekw.update(assigned_to=ar.action_param_values.user)
+        event = Event(**ekw)
+        event.full_clean()
+        event.save()
+        print 20130722, ekw, ar.action_param_values.user, ar.get_user()
+        #~ kw = super(CreateClientEvent,self).run_from_ui(obj,ar,**kw)
+        #~ kw.update(success=True)
+        kw.update(eval_js=ar.renderer.instance_handler(ar,event))
+        return kw
+
+

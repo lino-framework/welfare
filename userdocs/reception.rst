@@ -46,6 +46,7 @@ The reception clerk then finally says
 
 
 .. actor:: reception.ExpectedGuests
+
  
 .. actor:: reception.WaitingGuests
 
