@@ -40,19 +40,25 @@ class Calendar(Calendar):
 dd.inject_field('system.SiteConfig','client_guestrole',
     dd.ForeignKey('cal.GuestRole',
         verbose_name=_("Guest role for clients"),
-        related_name='client_guestroles_set',
+        related_name='client_guestroles',
+        blank=True,null=True))    
+    
+dd.inject_field('system.SiteConfig','client_calender',
+    dd.ForeignKey('cal.Calendar',
+        verbose_name=_("Default calendar for client events"),
+        related_name='client_calendars',
         blank=True,null=True))    
     
 dd.inject_field('system.SiteConfig','team_guestrole',
     dd.ForeignKey('cal.GuestRole',
         verbose_name=_("Guest role for team members"),
-        related_name='team_guestroles_set',
+        related_name='team_guestroles',
         blank=True,null=True))    
     
 class Event(Event):
     
     def suggest_guests(self):
-        #~ print "Foo"
+        #~ print "20130722 suggest_guests"
         for g in super(Event,self).suggest_guests(): 
             yield g
         if self.calendar is None: 
@@ -144,9 +150,11 @@ class CreateClientEvent(dd.RowAction):
      
     def run_from_ui(self,obj,ar,**kw):
         ekw = dict(project=obj,user=ar.get_user()) 
-        ekw.update(state=EventStates.scheduled)
+        ekw.update(state=EventStates.draft)
+        #~ ekw.update(state=EventStates.scheduled)
         ekw.update(start_date=ar.action_param_values.date)
         ekw.update(end_date=ar.action_param_values.date)
+        ekw.update(calendar=settings.SITE.site_config.client_calender)
         if ar.action_param_values.summary:
             ekw.update(summary=ar.action_param_values.summary)
         if ar.action_param_values.user != ar.get_user():
@@ -154,7 +162,7 @@ class CreateClientEvent(dd.RowAction):
         event = Event(**ekw)
         event.full_clean()
         event.save()
-        print 20130722, ekw, ar.action_param_values.user, ar.get_user()
+        #~ print 20130722, ekw, ar.action_param_values.user, ar.get_user()
         #~ kw = super(CreateClientEvent,self).run_from_ui(obj,ar,**kw)
         #~ kw.update(success=True)
         kw.update(eval_js=ar.renderer.instance_handler(ar,event))

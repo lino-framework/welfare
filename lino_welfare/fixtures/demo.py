@@ -44,6 +44,8 @@ from lino.utils import dblogger
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
+from lino.modlib.cal.utils import DurationUnits    
+
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
 #~ from lino.modlib.contacts.utils import Gender
@@ -212,11 +214,25 @@ def objects():
     
     
     calendar = Instantiator('cal.Calendar').build
-    #~ yield calendar(**babel_values('name',
-          #~ de=u"Klientengespräche intern",
-          #~ fr=u"Rencontres internes avec client",
-          #~ en=u"Internal meetings with client",
-          #~ ))
+    obj = calendar(color=20,invite_client=True,**babel_values('name',
+          de="Klientengespräche intern",
+          fr="Rencontres internes avec client",
+          en="Internal meetings with client",
+          ))
+    yield obj
+    settings.SITE.site_config.update(client_calender=obj)
+    
+    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
+    yield exam_policy(1,calendar=obj,start_time="9:00",**babel_values('name',en='every month',de=u'monatlich',fr=u"mensuel"))
+    yield exam_policy(2,calendar=obj,start_time="9:00",**babel_values('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
+    yield exam_policy(3,calendar=obj,start_time="9:00",**babel_values('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
+    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
+    yield exam_policy(2,calendar=obj,start_time="9:00",**babel_values('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
+    exam_policy = Instantiator('isip.ExamPolicy').build
+    yield exam_policy(**babel_values('name',en='other',de="andere",fr="autre"))
+        
+    
+        
     yield calendar(color=1,invite_client=True,**babel_values('name',
           de=u"Klientengespräche extern",
           fr=u"Rencontres client externes",

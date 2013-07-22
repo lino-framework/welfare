@@ -24,6 +24,8 @@ Version 1.1.8 (coming)
   Klientengespräche angekreuzt ist
   (zumindest in der Demo-Datenbank. Produktionsdaten nach Release manuell 
   anpassen). 
+  SiteConfig hat drei neue Felder:
+  client_calender client_guestrole und team_guestrole
 
 - Filter-Panel in Klientenliste:
   Zwei neue Beobachtungskriterien "VSE" und "Art-60§7-Konvention".

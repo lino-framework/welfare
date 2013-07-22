@@ -162,7 +162,7 @@ DEMO_OVERVIEW = """\
  properties.Property                     6         23
  sessions.Session                        3         4
  system.HelpText                         4         5
- system.SiteConfig                       26        1
+ system.SiteConfig                       27        1
  system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5

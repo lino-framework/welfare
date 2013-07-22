@@ -197,7 +197,7 @@ def objects():
     yield settings.SITE.site_config
     
     
-    from lino.modlib.cal.utils import DurationUnits
+    #~ from lino.modlib.cal.utils import DurationUnits
     #~ from lino.modlib.cal.models import EventType
     #~ from lino.modlib.cal.models import Calendar
     
@@ -209,12 +209,12 @@ def objects():
     #~ yield et
     
     calendar = Instantiator('cal.Calendar').build
-    et = calendar(color=20,invite_client=True,**babel_values('name',
-          de=u"Klientengespräche intern",
-          fr=u"Rencontres internes avec client",
-          en=u"Internal meetings with client",
+    et = calendar(color=25,invite_client=True,**babel_values('name',
+          de="Privat",
+          fr="Privé",
+          en="Private",
           ))
-    yield et
+    yield et 
     
 
     #~ et = Calendar(**babel_values('name',
@@ -223,16 +223,7 @@ def objects():
       #~ en=u"Evaluations",
       #~ ))
 
-    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
-    yield exam_policy(1,calendar=et,start_time="9:00",**babel_values('name',en='every month',de=u'monatlich',fr=u"mensuel"))
-    yield exam_policy(2,calendar=et,start_time="9:00",**babel_values('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
-    yield exam_policy(3,calendar=et,start_time="9:00",**babel_values('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
-    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
-    yield exam_policy(2,calendar=et,start_time="9:00",**babel_values('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
-    exam_policy = Instantiator('isip.ExamPolicy').build
-    yield exam_policy(**babel_values('name',en='other',de=u'andere',fr=u"autre"))
-        
-    #~ def create_dsbe_aidtype(id,name,name_fr):
+    #~ def create_dsbe_aidtype(id,name,name_fr): 
         #~ return AidType(id=id,name=name,name_fr=name_fr)        
     
     aidtype = Instantiator('pcsw.AidType').build
