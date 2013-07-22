@@ -72,13 +72,13 @@ DEMO_OVERVIEW = """\
  accounts.Account                        14        49
  accounts.Chart                          4         1
  accounts.Group                          8         7
- cal.Calendar                            18        5
+ cal.Calendar                            18        6
  cal.Event                               24        141
- cal.Guest                               9         5
+ cal.Guest                               9         14
  cal.GuestRole                           8         4
  cal.Priority                            5         9
  cal.Room                                4         0
- cal.Subscription                        4         35
+ cal.Subscription                        4         42
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
