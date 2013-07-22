@@ -513,11 +513,13 @@ class BeIdReadCardAction(actions.BeIdReadCardAction):
     label = _("Read eID card")
     sorry_msg = _("Sorry, I cannot handle that case: %s")
     required = dd.required(user_level='admin')
+    show_in_workflow = True
+
   
     def run_from_ui(self,row,ar,**kw):
         data = ar.request.POST
         attrs = card2client(data)
-        logger.info("20130103 BeIdReadCardAction.run_from_ui() : %s -> %s",data,attrs)
+        #~ logger.info("20130103 BeIdReadCardAction.run_from_ui() : %s -> %s",data,attrs)
         #~ print 20121117, attrs
         #~ ssin = data['nationalNumber']
         #~ ssin = attrs['national_id']
@@ -600,7 +602,8 @@ class FindByBeIdAction(BeIdReadCardAction):
     main menu command: read beid data and find that client.
     """
     single_row = False
-          
+    show_in_workflow = False
+    
     #~ label = _("Find by eID card")
     callable_from = tuple() # only explicitely callable
 

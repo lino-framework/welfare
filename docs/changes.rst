@@ -13,7 +13,13 @@ Version 1.1.8 (coming)
 ============================================
 
 - Neues Modul "Empfang" und Änderungen im Kalendermodul. 
-  Z.B.: :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
+
+  Neues Benutzerprofil "Empfangsschalter".
+  Neue Menübefehle :ref:`welfare.reception.ExpectedGuests`
+  und :ref:`welfare.reception.WaitingGuests`.
+
+  Konfigurierung: 
+  :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
   `invite_client`, welches für 
   Klientengespräche angekreuzt ist
   (zumindest in der Demo-Datenbank. Produktionsdaten nach Release manuell 

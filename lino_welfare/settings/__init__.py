@@ -153,7 +153,7 @@ class Site(Site,cbss.SiteMixin):
         m.clear()
         m.add_action(self.modules.contacts.Persons)
         m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
-        m.add_action(self.modules.pcsw.Clients,'find_by_beid')
+        #~ m.add_action(self.modules.pcsw.Clients,'find_by_beid')
         m.add_action(self.modules.contacts.Companies)
         m.add_action(self.modules.households.Households)
         m.add_separator('-')

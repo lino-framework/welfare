@@ -73,7 +73,7 @@ DEMO_OVERVIEW = """\
  accounts.Chart                          4         1
  accounts.Group                          8         7
  cal.Calendar                            18        5
- cal.Event                               24        144
+ cal.Event                               24        141
  cal.Guest                               9         5
  cal.GuestRole                           8         4
  cal.Priority                            5         9
@@ -98,7 +98,7 @@ DEMO_OVERVIEW = """\
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
  contenttypes.ProxyModel                 2         0
- countries.City                          9         61
+ countries.City                          9         62
  countries.Country                       7         8
  countries.Language                      5         5
  courses.Course                          5         3

@@ -127,13 +127,13 @@ class CreateClientEvent(dd.RowAction):
     date user 
     summary
     """
-    required = dict(states='coached')
+    #~ required = dict(states='coached')
     
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(CreateClientEvent,self).param_defaults(ar,**kw)
+    #~ @classmethod
+    def action_param_defaults(self,ar,obj,**kw):
+        kw = super(CreateClientEvent,self).action_param_defaults(ar,obj,**kw)
         kw.update(user=ar.get_user())
-        kw.update(date=datetime.date.today)
+        kw.update(date=datetime.date.today())
         return kw
         
     def get_notify_subject(self,ar,obj):

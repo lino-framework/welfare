@@ -611,9 +611,7 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
-
-- Empfang : Empfangsschalter, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Erwartete Besucher, Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -671,9 +669,7 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
-
-- Empfang : Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -703,9 +699,7 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
-
-- Empfang : Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -724,7 +718,7 @@ Belgique""")
 
 - Explorer :
   
-  - Büro : E-Mail-Ausgänge, Anhänge
+  - Büro : E-Mail-Ausgänge, Anhänge, Postsendungen
   - Kalender : Aufgaben, Abonnements
   - CV : Sprachkenntnisse
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
@@ -743,7 +737,7 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
@@ -766,9 +760,7 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
-
-- Empfang : Empfangsschalter, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Erwartete Besucher, Wartende Besucher
 
 - Neuanträge : Neue Klienten
 
