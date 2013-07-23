@@ -9,6 +9,18 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
+Version 1.1.9 (coming)
+============================================
+
+Bugs fixed:
+
+- Tätigkeitsberiicht, Übersicht Art-60§7-Konventionen und sonstige 
+  HtmlBoxen wurden nicht angezeigt.
+  
+- Übersicht Art-60§7-Konventionen : wenn man im Parameter-Panel 
+  eine Stellenart auswählte, kam Fehlermeldung 
+  "'JobType' object is not iterable"
+
 Version 1.1.8 (released :blogref:`20130723`)
 ============================================
 

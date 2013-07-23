@@ -1442,7 +1442,7 @@ class JobsOverview(dd.EmptyTable):
     def create_instance(self,ar,**kw):
         kw.update(today = ar.param_values.today or datetime.date.today())
         if ar.param_values.job_type:
-            kw.update(jobtypes = ar.param_values.job_type)
+            kw.update(jobtypes = [ar.param_values.job_type])
         else:
             kw.update(jobtypes = JobType.objects.all())
         return super(JobsOverview,self).create_instance(ar,**kw)
@@ -1450,6 +1450,7 @@ class JobsOverview(dd.EmptyTable):
         
     @dd.virtualfield(dd.HtmlBox())
     def preview(cls,self,ar):
+        #~ logger.info("20130723 preview %s",self.jobtypes)
         html = []
         for jobtype in self.jobtypes:
             html.append(E.h2(unicode(jobtype)))
@@ -1457,6 +1458,8 @@ class JobsOverview(dd.EmptyTable):
                 master_instance=jobtype,
                 param_values=dict(date=self.today))
             html.append(sar.table2xhtml())
+        #~ logger.info("20130723 preview %s",html)
+        #~ return E.div(*html,class_='htmlText')
         return E.div(*html)
 
     @classmethod
