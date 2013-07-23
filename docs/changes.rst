@@ -9,10 +9,10 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
-Version 1.1.8 (coming)
+Version 1.1.8 (released :blogref:`20130723`)
 ============================================
 
-- Neues Modul "Empfang" und Änderungen im Kalendermodul. 
+- Neues Modul :ref:`Empfang <welfare.reception>` und Änderungen im Kalendermodul. 
 
   Neues Benutzerprofil "Empfangsschalter".
   Neue Menübefehle :ref:`welfare.reception.ExpectedGuests`
