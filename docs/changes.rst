@@ -15,8 +15,8 @@ Version 1.1.8 (released :blogref:`20130723`)
 - Neues Modul :ref:`Empfang <welfare.reception>` und Änderungen im Kalendermodul. 
 
   Neues Benutzerprofil "Empfangsschalter".
-  Neue Menübefehle :ref:`welfare.reception.ExpectedGuests`
-  und :ref:`welfare.reception.WaitingGuests`.
+  Neue Befehle :ref:`welfare.reception.ExpectedGuests`
+  und :ref:`welfare.reception.WaitingGuests` im Menü "Kalender"
 
   Konfigurierung: 
   :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 

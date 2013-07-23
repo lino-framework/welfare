@@ -112,7 +112,7 @@ SETUP_INFO.update(message_extractors = {
         ('**/cache/**',          'ignore', None),
         ('**.py',                'python', None),
         ('**.js',                'javascript', None),
-        ('**/templates_jinja/**.html', 'jinja2', None),
+        ('**/config/**.html', 'jinja2', None),
         #~ ('**/templates/**.txt',  'genshi', {
             #~ 'template_class': 'genshi.template:TextTemplate'
         #~ })
@@ -154,12 +154,13 @@ add_package_data('lino_welfare.modlib.cbss','config/cbss/IdentifyPersonRequest/*
 add_package_data('lino_welfare.modlib.debts','config/debts/Budget/*.odt')
 add_package_data('lino_welfare.modlib.courses','config/courses/Course/*.odt')
 add_package_data('lino_welfare.modlib.pcsw','config/pcsw/Client/*.odt')
+add_package_data('lino_welfare.modlib.cal','config/cal/Guest/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/ContractsSituation/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/OldJobsOverview/*.odt')
 add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
 add_package_data('lino_welfare.settings','media/pictures/contacts.Person.jpg')
 add_package_data('lino_welfare','config/lino_welfare/ActivityReport/*.odt')
-add_package_data('lino_welfare','settings/templates_jinja/admin_main.html')
+add_package_data('lino_welfare','config/admin_main.html')
 #~ for n in (
     #~ 'lino_welfare', 
     #~ 'lino_welfare.modlib.courses',
