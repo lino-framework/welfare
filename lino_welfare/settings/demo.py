@@ -8,7 +8,7 @@ class Site(Site):
     title = "Lino-Welfare demo"
     #~ use_jasmine = True
     #~ use_davlink = False
-    use_extensible = True
+    #~ use_extensible = True
     #~ remote_user_header = None # 20121003
         
     def is_imported_partner(self,obj):
