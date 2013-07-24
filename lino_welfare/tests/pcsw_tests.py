@@ -83,6 +83,7 @@ class QuickTests(RemoteAuthTestCase):
         User(username='100',language='de',profile='100').save()
         User(username='110',language='de',profile='110').save()
         User(username='200',language='de',profile='200').save()
+        User(username='210',language='de',profile='210').save()
         User(username='300',language='de',profile='300').save()
         self.user_root = User(username='root',language='en',profile='900') # ,last_name="Superuser")
         self.user_root.save()
@@ -611,7 +612,9 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Erwartete Besucher, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -669,7 +672,9 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -699,7 +704,9 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -737,7 +744,9 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : Wartende Besucher
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
@@ -760,7 +769,9 @@ Belgique""")
   - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
   - Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen, -, Erwartete Besucher, Wartende Besucher
+- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+
+- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
 
 - Neuanträge : Neue Klienten
 
@@ -773,6 +784,13 @@ Belgique""")
 
 - Site : Info
 """) # 200 newcomers
+
+
+        # 210 reception
+        menu_test('210',"""\
+- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
+- Site : Info
+""") # 210 reception
 
 
 
