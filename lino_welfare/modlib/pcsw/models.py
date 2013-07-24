@@ -1289,18 +1289,13 @@ class ClientDetail(dd.FormLayout):
     jobs.ContractsByPerson
     """,label = _("Contracts"))
     
-    #~ def setup_handle(self,lh):
-        #~ lh.card_number.label = _("number")
-        #~ lh.card_valid_from.label = _("valid from")
-        #~ lh.card_valid_until.label = _("valid until")
-        #~ lh.card_issuer.label = _("issued by")
-        #~ lh.card_type.label = _("eID card type")
     def override_labels(self):
-        return dict(card_number = _("number"),
-        card_valid_from = _("valid from"),
-        card_valid_until = _("valid until"),
-        card_issuer = _("issued by"),
-        card_type = _("eID card type"))
+        return dict(
+            card_number = _("number"),
+            card_valid_from = _("valid from"),
+            card_valid_until = _("valid until"),
+            card_issuer = _("issued by"),
+            card_type = _("eID card type"))
     
 if not settings.SITE.use_eid_jslib:
     ClientDetail.eid_panel.replace('read_beid_card:12 ','')
@@ -1361,6 +1356,7 @@ class Clients(contacts.Persons):
     #~ debug_permissions = True # '20120925'
     #~ title = _("All Clients")
     #~ title = _("Clients")
+    required = dd.Required(user_groups='office')
     model = Client # settings.SITE.person_model
     params_panel_hidden = True
     

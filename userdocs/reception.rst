@@ -45,6 +45,9 @@ The reception clerk then finally says
 "Please sit down and wait until the social agent comes."
 
 
+.. actor:: reception.Clients
+
+
 .. actor:: reception.ExpectedGuests
 
  
