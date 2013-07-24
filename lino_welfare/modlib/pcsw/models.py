@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import base64
 import os
 import cgi
 import datetime
@@ -56,41 +55,28 @@ from lino import mixins
 #~ from lino.modlib.uploads.models import UploadsByPerson
 #~ from lino.models import get_site_config
 from lino.core import dbutils
-from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
 #~ from north import babel
-from lino.utils import join_words
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.xmlgen import html as xghtml
-from lino.utils import IncompleteDate
 
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
 from lino.core import actions
 #~ from lino.core import changes
 
-from lino.modlib.contacts.utils import street2kw
-from lino.modlib.contacts import models as contacts
+#~ from lino.modlib.contacts import models as contacts
 
-#~ from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
-#~ from lino.modlib.uploads import models as uploads
-#~ from lino.modlib.cal import models as cal
-#~ from lino.modlib.users import models as users
-#~ from lino.modlib.countries.models import CountryCity
-#~ from lino.modlib.cal.models import DurationUnits, update_reminder
-#~ from lino.modlib.properties import models as properties
-#~ from lino_welfare.modlib.cv import models as cv
-#~ from lino.modlib.contacts.models import Contact
 from lino.core.dbutils import resolve_model, UnresolvedModel
+
+from lino.modlib.reception.beid import BeIdCardTypes
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
 properties = dd.resolve_app('properties')
 contacts = dd.resolve_app('contacts')
-countries = dd.resolve_app('countries')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
@@ -149,10 +135,6 @@ add('50', _("Separated"),'separated') # Getrennt von Tisch und Bett /
 
 
 
-def card_number_to_picture_file(card_number):
-    #~ TODO: handle configurability of card_number_to_picture_file
-    return os.path.join(settings.MEDIA_ROOT,'beid',card_number+'.jpg')
-
 
 
 # http://en.wikipedia.org/wiki/European_driving_licence
@@ -168,78 +150,6 @@ add = ResidenceType.add_item
 add('1', _("Registry of citizens"))    # Bevölkerungsregister registre de la population
 add('2', _("Registry of foreigners"))  # Fremdenregister        Registre des étrangers      vreemdelingenregister 
 add('3', _("Waiting for registry"))    # Warteregister
-
-
-class BeIdCardTypes(dd.ChoiceList):
-    """
-    List of Belgian Identification Card Types.
-    
-    Didn't yet find any official reference document.
-    
-    The eID applet returns a field `documentType` which contains a numeric code.
-    For example 1 is for "Belgian citizen", 6 for "Kids card",...
-    
-    The eID viewer, when saving a card as xml file, doesn't save these values nowhere, 
-    it saves a string equivalent (1 becomes "belgian_citizen", 6 becomes "kids_card", 
-    17 becomes "foreigner_f", 16 becomes "foreigner_e_plus",...
-    
-    Sources:
-    | [1] https://securehomes.esat.kuleuven.be/~decockd/wiki/bin/view.cgi/EidForums/ForumEidCards0073
-    | [2] `Enum be.fedict.commons.eid.consumer.DocumentType <http://code.google.com/p/eid-applet/source/browse/trunk/eid-applet-service/src/main/java/be/fedict/eid/applet/service/DocumentType.java>`_
-    
-    """
-    required = dd.required(user_level='admin')
-    verbose_name = _("eID card type")
-    verbose_name_plural = _("eID card types")
-    
-add = BeIdCardTypes.add_item
-add('1',_("Belgian citizen"),"belgian_citizen") 
-# ,de=u"Belgischer Staatsbürger",fr=u"Citoyen belge"),
-add('6', _("Kids card (< 12 year)"),"kids_card") 
-#,de=u"Kind unter 12 Jahren"),
-
-"""
-from [1]: 
-Johan: A document type of 7 is used for bootstrap cards ? What is a bootstrap card (maybe some kind of test card?) 
-Danny: A bootstrap card was an eID card that was used in the early start of the eID card introduction to bootstrap 
-the computers at the administration. This type is no longer issued. 
-"""
-
-#~ add('8', _("Habilitation")) 
-#,fr=u"Habilitation",nl=u"Machtiging")
-"""
-from [1]: 
-Johan: A document type of 8 is used for a “habilitation/machtigings” card ? Is this for refugees or asylum seekers? 
-Danny: A habilitation/machtigings card was aimed at civil servants. This type is also no longer used. 
-"""
-
-add('11', _("Foreigner card A"),"foreigner_a")
-        #~ nl=u"Bewijs van inschrijving in het vreemdelingenregister - Tijdelijk verblijf",
-        #~ fr=u"Certificat d'inscription au registre des étrangers - Séjour temporaire",
-        #~ de=u"Ausländerkarte A Bescheinigung der Eintragung im Ausländerregister - Vorübergehender Aufenthalt",
-add('12', _("Foreigner card B"),"foreigner_b")
-        #~ nl=u"Bewijs van inschrijving in het vreemdelingenregister",
-        #~ fr=u"Certificat d'inscription au registre des étrangers",
-        #~ de=u"Ausländerkarte B (Bescheinigung der Eintragung im Ausländerregister)",
-add('13', _("Foreigner card C"),"foreigner_c")
-        #~ nl=u"Identiteitskaart voor vreemdeling",
-        #~ fr=u"Carte d'identité d'étranger",
-        #~ de=u"C (Personalausweis für Ausländer)",
-add('14', _("Foreigner card D"),"foreigner_d")
-        #~ nl=u"EG - langdurig ingezetene",
-        #~ fr=u"Résident de longue durée - CE",
-        #~ de=u"Daueraufenthalt - EG",
-add('15', _("Foreigner card E"),"foreigner_e")
-        #~ nl=u"Verklaring van inschrijving",
-        #~ fr=u"Attestation d’enregistrement",
-        #~ de=u"Anmeldebescheinigung",
-add('16', _("Foreigner card E+"),"foreigner_e_plus")
-        # Document ter staving van duurzaam verblijf van een EU onderdaan
-add('17', _("Foreigner card F"),"foreigner_f")
-        #~ nl=u"Verblijfskaart van een familielid van een burger van de Unie",
-        #~ fr=u"Carte de séjour de membre de la famille d’un citoyen de l’Union",
-        #~ de=u"Aufenthaltskarte für Familienangehörige eines Unionsbürgers",
-add('18', _("Foreigner card F+"),"foreigner_f_plus")
 
 
 class ClientEvents(dd.ChoiceList):
@@ -416,201 +326,6 @@ class Getter(object):
 #~ from lino.utils.instantiator import lookup_or_create
 
 
-def card2client(data):
-    kw = dict()
-    #~ def func(fldname,qname):
-        #~ kw[fldname] = data[qname]
-    kw.update(national_id=ssin.format_ssin(data['nationalNumber']))
-    kw.update(first_name=join_words(
-        data['firstName1'],
-        data['firstName2'],
-        data['firstName3']))
-    #~ func('first_name','firstName1')
-    kw.update(last_name=data['surname'])
-    
-    card_number = data['cardNumber']
-    
-    if data.has_key('picture'):
-        fn = card_number_to_picture_file(card_number)
-        if os.path.exists(fn):
-            logger.warning("Overwriting existing image file %s.",fn)
-        fp = file(fn,'wb')
-        fp.write(base64.b64decode(data['picture']))
-        fp.close()
-        #~ print 20121117, repr(data['picture'])
-        #~ kw.update(picture_data_encoded=data['picture'])
-    
-    #~ func('card_valid_from','validityBeginDate')
-    #~ func('card_valid_until','validityEndDate')
-    #~ func('birth_date','birthDate')
-    kw.update(birth_date=IncompleteDate(*settings.SITE.parse_date(data['birthDate'])))
-    kw.update(card_valid_from=datetime.date(*settings.SITE.parse_date(data['validityBeginDate'])))
-    kw.update(card_valid_until=datetime.date(*settings.SITE.parse_date(data['validityEndDate'])))
-    kw.update(card_number=card_number)
-    kw.update(card_issuer=data['issuingMunicipality'])
-    kw.update(noble_condition=data['nobleCondition'])
-    kw.update(street=data['street'])
-    kw.update(street_no=data['streetNumber'])
-    kw.update(street_box=data['boxNumber'])
-    if kw['street'] and not (kw['street_no'] or kw['street_box']):
-        kw = street2kw(kw['street'],**kw)
-    kw.update(zip_code=data['zipCode'])
-    kw.update(birth_place=data['birthLocation'])
-    pk = data['country'].upper()
-    
-    msg1 = "BeIdReadCardToClientAction %s" % kw.get('national_id')
-
-    #~ try:
-    country = countries.Country.objects.get(isocode=pk)
-    kw.update(country=country)
-    #~ except countries.Country.DoesNotExist,e:
-    #~ except Exception,e:
-        #~ logger.warning("%s : no country with code %r",msg1,pk)
-    #~ BE = countries.Country.objects.get(isocode='BE')
-    #~ fld = countries.City._meta.get_field()
-    kw.update(city=countries.City.lookup_or_create(
-        'name',data['municipality'],country=country))
-    def sex2gender(sex):
-        if sex == 'M' : return mixins.Genders.male
-        if sex in 'FVW' : return mixins.Genders.female
-        logger.warning("%s : invalid gender code %r",msg1,sex)
-    kw.update(gender=sex2gender(data['sex']))
-    
-    if False:
-        def nationality2country(nationality):
-            try:
-                return countries.Country.objects.get(
-                    nationalities__icontains=nationality)
-            except countries.Country.DoesNotExist,e:
-                logger.warning("%s : no country for nationality %r",
-                    msg1,nationality)
-            except MultipleObjectsReturned,e:
-                logger.warning(
-                    "%s : found more than one country for nationality %r",
-                    msg1,nationality)
-        kw.update(nationality=nationality2country(data['nationality']))
-    
-    def doctype2cardtype(dt):
-        #~ logger.info("20130103 documentType is %r",dt)
-        #~ if dt == 1: return BeIdCardTypes.get_by_value("1")
-        return BeIdCardTypes.get_by_value(str(dt))
-    kw.update(card_type=doctype2cardtype(data['documentType']))
-    
-    #~ unused = dict()
-    #~ unused.update(country=country)
-    #~ kw.update(sex=data['sex'])
-    #~ unused.update(documentType=data['documentType'])
-    #~ logger.info("Unused data: %r", unused)
-    return kw
-    
-    
-   
-class BeIdReadCardAction(actions.BeIdReadCardAction):
-    """
-    Read beid card and store the data in a Client instance.
-    The base version is a row action (called on a given client).
-    """
-    label = _("Read eID card")
-    sorry_msg = _("Sorry, I cannot handle that case: %s")
-    required = dd.required(user_level='admin')
-    show_in_workflow = True
-
-  
-    def run_from_ui(self,row,ar,**kw):
-        data = ar.request.POST
-        attrs = card2client(data)
-        #~ logger.info("20130103 BeIdReadCardAction.run_from_ui() : %s -> %s",data,attrs)
-        #~ print 20121117, attrs
-        #~ ssin = data['nationalNumber']
-        #~ ssin = attrs['national_id']
-        if row is None:
-            qs = Client.objects.filter(national_id=attrs['national_id'])
-            if qs.count() > 1:
-                return ar.error(self.sorry_msg % 
-                    _("There is more than one client with national id %(national_id)s in our database.")
-                    % attrs)
-            if qs.count() == 0:
-                fkw = dict(last_name__iexact=attrs['last_name'],first_name__iexact=attrs['first_name'])
-                """
-                if a client with same last_name and first_name 
-                exists, the user cannot (automatically) create a new client from eid card.
-                """
-                #~ fkw.update(national_id__isnull=True)
-                qs = Client.objects.filter(**fkw)
-                if qs.count() == 0:
-                    def yes():
-                        obj = Client(**attrs)
-                        obj.full_clean()
-                        obj.save()
-                        #~ changes.log_create(ar.request,obj)
-                        dd.pre_ui_create.send(obj,request=ar.request)
-                        return self.goto_client_response(ar,obj,
-                            _("New client %s has been created") % obj)
-                    return ar.confirm(yes,
-                        _("Create new client %(first_name)s %(last_name)s : Are you sure?") % attrs)
-                elif qs.count() > 1:
-                    return ar.error(self.sorry_msg % 
-                        _("There is more than one client named %(first_name)s %(last_name)s in our database.")
-                        % attrs,alert=_("Oops!"))
-                        
-            assert qs.count() == 1
-            row = qs[0]
-        return self.process_row(ar,row,attrs)
-  
-  
-    def process_row(self,ar,obj,attrs):
-        oldobj = obj
-        watcher = dd.ChangeWatcher(obj)
-        diffs = []
-        for fldname,new in attrs.items():
-            fld = get_field(Client,fldname)
-            old = getattr(obj,fldname)
-            if old != new:
-                diffs.append("%s : %s -> %s" % (unicode(fld.verbose_name),dd.obj2str(old),dd.obj2str(new)))
-                setattr(obj,fld.name,new)
-                
-        if len(diffs) == 0:
-            #~ return self.no_diffs_response(ar,obj)
-            return self.goto_client_response(ar,obj,_("Client %s is up-to-date") % unicode(obj))
-            
-        msg = unicode(_("Click OK to apply the following changes for %s") % obj)
-        msg += ' :<br/>'
-        msg += '\n<br/>'.join(diffs)
-        #~ print msg
-        def apply():
-            obj.full_clean()
-            obj.save()
-            watcher.send_update(ar.request)
-            #~ return self.saved_diffs_response(ar,obj)
-            return self.goto_client_response(ar,obj,_("%s has been saved.") % dd.obj2unicode(obj))
-        def no():
-            return self.goto_client_response(ar,oldobj)
-        cb = ar.callback(msg)
-        cb.add_choice('yes',apply,_("Yes"))
-        cb.add_choice('no',no,_("No"))
-        #~ cb.add_choice('cancel',no,_("Don't apply"))
-        return cb
-        
-    def goto_client_response(self,ar,obj,msg=None):
-        if msg:
-            return ar.success(msg,_("Success"),refresh=True)
-        return ar.success(msg)
-  
-            
-class FindByBeIdAction(BeIdReadCardAction):
-    """
-    main menu command: read beid data and find that client.
-    """
-    single_row = False
-    show_in_workflow = False
-    
-    #~ label = _("Find by eID card")
-    callable_from = tuple() # only explicitely callable
-
-    def goto_client_response(self,ar,obj,msg=None):
-        return ar.success(msg,eval_js=ar.instance_handler(obj))
-        
-
 
 class Client(contacts.Person):
     """
@@ -656,7 +371,7 @@ class Client(contacts.Person):
         blank=True,
         #~ null=True
         )
-    birth_country = models.ForeignKey("countries.Country",
+    birth_country = dd.ForeignKey("countries.Country",
         blank=True,null=True,
         verbose_name=_("Birth country"),related_name='by_birth_place')
     #~ civil_state = models.CharField(max_length=1,
@@ -677,7 +392,7 @@ class Client(contacts.Person):
     pharmacy = dd.ForeignKey('contacts.Company',blank=True,null=True,
         verbose_name=_("Pharmacy"),related_name='pharmacy_for')
     
-    nationality = dd.ForeignKey(countries.Country,
+    nationality = dd.ForeignKey('countries.Country',
         blank=True,null=True,
         related_name='by_nationality',
         verbose_name=_("Nationality"))
@@ -769,9 +484,6 @@ class Client(contacts.Person):
     
     
     print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
-    
-    read_beid = BeIdReadCardAction()
-    find_by_beid  = FindByBeIdAction()
     
     #~ def update_system_note(self,note):
         #~ note.project = self
@@ -1297,8 +1009,8 @@ class ClientDetail(dd.FormLayout):
             card_issuer = _("issued by"),
             card_type = _("eID card type"))
     
-if not settings.SITE.use_eid_jslib:
-    ClientDetail.eid_panel.replace('read_beid_card:12 ','')
+#~ if not settings.SITE.use_eid_jslib:
+    #~ ClientDetail.eid_panel.replace('read_beid_card:12 ','')
     
 if settings.SITE.is_installed('cbss'):
     ClientDetail.main += ' cbss' 
@@ -1387,7 +1099,7 @@ Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
             blank=True,null=True,
             verbose_name=_("and by"),help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
-        nationality = models.ForeignKey(countries.Country,blank=True,null=True,
+        nationality = dd.ForeignKey('countries.Country',blank=True,null=True,
             verbose_name=_("Nationality")),
             
         #~ start_date = models.DateField(_("Period from"),
@@ -1566,7 +1278,7 @@ class IntegClients(Clients):
         group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
             verbose_name=_("Integration phase")),
         #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
-        language = dd.ForeignKey(countries.Language,
+        language = dd.ForeignKey('countries.Language',
             verbose_name=_("Language knowledge"),
             blank=True,null=True),
         wanted_property = dd.ForeignKey(properties.Property,

@@ -4,7 +4,7 @@
 
 {% for T in (settings.SITE.modules.pcsw.UsersWithClients,settings.SITE.modules.reception.ExpectedGuests) %}
 {% if T.default_action.get_view_permission(ar.get_user().profile) %}
-<h2>{{T.label}}</h2>
+<h2>{{E.tostring(ar.window_action_button(T.default_action))}}</h2>
 {{E.tostring(ar.show(T))}}
 {% endif %}
 {% endfor %}

@@ -111,7 +111,7 @@ class Site(Site,cbss.SiteMixin):
         tb.add_action(self.modules.jobs.MyContracts)
         #~ tb.add_action(self.modules.pcsw.Home)
         
-        tb.add_action(self.modules.pcsw.Clients,'find_by_beid')
+        tb.add_action('reception.Clients','find_by_beid')
         
     def setup_menu(self,ui,profile,main):
         from django.utils.translation import ugettext_lazy as _
