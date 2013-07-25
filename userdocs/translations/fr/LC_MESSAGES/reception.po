@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 06:07+0300\n"
+"POT-Creation-Date: 2013-07-25 10:00+0300\n"
 "PO-Revision-Date: 2013-07-19 15:14+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -84,22 +84,22 @@ msgid ""
 msgstr ""
 
 # 9505733f75ac4640853d672af2b30c2a
-#: ../reception.rst:53
+#: ../reception.rst:56
 msgid "As a social worker you consult this table to see:"
 msgstr ""
 
 # 5277440d973f47168b719f9d8c002fbd
-#: ../reception.rst:55
+#: ../reception.rst:58
 msgid "How many people are waiting for me?"
 msgstr ""
 
 # 9641eac880b34f8e9de9ad088b3cdda1
-#: ../reception.rst:56
+#: ../reception.rst:59
 msgid "Who is waiting for me?"
 msgstr ""
 
 # 91363cb72d8f4cf0a70e2938555d4687
-#: ../reception.rst:58
+#: ../reception.rst:61
 msgid ""
 "For example you may decide \"This guy gets quickly nervous, and it won't "
 "take much time, so i'll let him in before the others.\""

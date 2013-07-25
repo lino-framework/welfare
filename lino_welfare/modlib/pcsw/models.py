@@ -43,35 +43,21 @@ from django.utils.functional import lazy
 #~ logger.debug(__file__+' : started')
 #~ from django.utils import translation
 
-
-#~ from lino import reports
 from lino import dd
-#~ from lino import layouts
-#~ from lino.core import perms
-#~ from lino.utils import printable
 from lino import mixins
-#~ from lino import fields
-#~ from lino.modlib.users.models import UserLevels
-#~ from lino.modlib.uploads.models import UploadsByPerson
-#~ from lino.models import get_site_config
 from lino.core import dbutils
 from lino.core.dbutils import resolve_field
-#~ from north import babel
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.xmlgen import html as xghtml
 
-from lino.mixins.printable import DirectPrintAction, Printable
-#~ from lino.mixins.reminder import ReminderEntry
+from lino.mixins.printable import Printable
 from lino.core import actions
-#~ from lino.core import changes
-
-#~ from lino.modlib.contacts import models as contacts
 
 from lino.core.dbutils import resolve_model, UnresolvedModel
 
-from lino.modlib.reception.beid import BeIdCardTypes
+from lino.mixins import beid
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
@@ -86,7 +72,6 @@ isip = dd.resolve_app('isip')
 #~ newcomers = dd.resolve_app('newcomers')
 notes = dd.resolve_app('notes')
 
-#~ from lino.utils.ssin import ssin_validator
 from lino.utils import ssin
 
 class CivilState(dd.ChoiceList):
@@ -323,11 +308,9 @@ class Getter(object):
         return self.query_dict.get(name)
 
 
-#~ from lino.utils.instantiator import lookup_or_create
 
 
-
-class Client(contacts.Person):
+class Client(contacts.Person,beid.BeIdCardHolder):
     """
     A :class:`Client` is a specialized :class:`Person`.
     
@@ -379,61 +362,11 @@ class Client(contacts.Person):
         #~ verbose_name=_("Civil state"),
         #~ choices=CIVIL_STATE_CHOICES) 
     civil_state = CivilState.field(blank=True) 
-    #~ national_id = models.CharField(max_length=200,
-    national_id = dd.NullCharField(max_length=200,
-        unique=True,
-        verbose_name=_("National ID")
-        #~ blank=True,verbose_name=_("National ID")
-        #~ ,validators=[ssin.ssin_validator] # 20121108
-        )
         
     health_insurance = dd.ForeignKey('contacts.Company',blank=True,null=True,
         verbose_name=_("Health insurance"),related_name='health_insurance_for')
     pharmacy = dd.ForeignKey('contacts.Company',blank=True,null=True,
         verbose_name=_("Pharmacy"),related_name='pharmacy_for')
-    
-    nationality = dd.ForeignKey('countries.Country',
-        blank=True,null=True,
-        related_name='by_nationality',
-        verbose_name=_("Nationality"))
-    #~ tim_nr = models.CharField(max_length=10,blank=True,null=True,unique=True,
-        #~ verbose_name=_("TIM ID"))
-    card_number = models.CharField(max_length=20,
-        blank=True,#null=True,
-        verbose_name=_("eID card number"))
-    card_valid_from = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("ID card valid from"))
-    card_valid_until = models.DateField(
-        blank=True,null=True,
-        verbose_name=_("until"))
-        
-    #~ card_type = models.CharField(max_length=20,
-        #~ blank=True,# null=True,
-        #~ verbose_name=_("eID card type"))
-    #~ "The type of the electronic ID card. Imported from TIM."
-    
-    card_type = BeIdCardTypes.field(blank=True)
-    
-    card_issuer = models.CharField(max_length=50,
-        blank=True,# null=True,
-        verbose_name=_("eID card issuer"))
-    "The administration who issued this ID card. Imported from TIM."
-    
-    #~ eid_panel = dd.FieldSet(_("eID card"),
-        #~ "card_number card_valid_from card_valid_until card_issuer card_type:20",
-        #~ card_number=_("number"),
-        #~ card_valid_from=_("valid from"),
-        #~ card_valid_until=_("until"),
-        #~ card_issuer=_("issued by"),
-        #~ card_type=_("eID card type"),
-        #~ )
-    
-    noble_condition = models.CharField(max_length=50,
-        blank=True,#null=True,
-        verbose_name=_("noble condition"))
-    "The eventual noble condition of this person. Imported from TIM."
-        
     
     #~ residence_type = models.SmallIntegerField(blank=True,null=True,
         #~ verbose_name=_("Residence type"),
@@ -482,8 +415,6 @@ class Client(contacts.Person):
     
     refusal_reason = RefusalReasons.field(blank=True)
     
-    
-    print_eid_content = DirectPrintAction(_("eID sheet"),'eid-content',icon_name='x-tbar-vcard')
     
     #~ def update_system_note(self,note):
         #~ note.project = self
@@ -2358,7 +2289,7 @@ def setup_explorer_menu(site,ui,profile,m):
     #~ m.add_action(PersonSearches)
     m.add_action(CivilState)
     m.add_action(ClientStates)
-    m.add_action(BeIdCardTypes)
+    m.add_action(beid.BeIdCardTypes)
     
 
 INTEG_MODULE_LABEL = _("Integration")
