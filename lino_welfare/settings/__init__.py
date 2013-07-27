@@ -58,7 +58,7 @@ class Site(Site,cbss.SiteMixin):
     #~ languages = "de fr nl en"
     
     #~ languages = ['en']
-    languages = 'de fr nl'
+    languages = 'en fr nl de'
     #~ languages = ['de','fr']
     #~ languages = ['fr','de']
     #~ languages = ['de']

@@ -1424,7 +1424,7 @@ class JobsOverviewByType(Jobs):
 
 class JobsOverview(dd.EmptyTable):
     """
-    New version of :ref:`welfare.jobs.JobsOverview`.
+    New version of `welfare.jobs.JobsOverview`.
     """
     required = dd.required(user_groups=['integ'])
     label = _("Contracts Situation") 

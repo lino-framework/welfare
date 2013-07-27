@@ -125,19 +125,6 @@ def add_package_data(package,*patterns):
     l.extend(patterns)
     return l
 
-#~ SETUP_INFO.update(package_data={
-    #~ 'lino_welfare.modlib.cbss': [
-        #~ 'WSDL/*.wsdl',
-        #~ 'XSD/*.xsd',
-        #~ 'XSD/SSDN/Common/*.xsd',
-        #~ 'XSD/SSDN/OCMW_CPAS/IdentifyPerson/*.xsd',
-        #~ 'XSD/SSDN/OCMW_CPAS/ManageAccess/*.xsd',
-        #~ 'XSD/SSDN/OCMW_CPAS/PerformInvestigation/*.xsd',
-        #~ 'XSD/SSDN/OCMW_CPAS/Loi65Wet65/*.xsd',
-        #~ 'XSD/SSDN/Person/*.xsd',
-        #~ 'XSD/SSDN/Service/*.xsd',
-    #~ ]
-    #~ })
 add_package_data('lino_welfare.modlib.cbss',
     'WSDL/*.wsdl',
     'XSD/*.xsd',
@@ -161,19 +148,6 @@ add_package_data('lino_welfare.modlib.jobs','config/jobs/JobsOverview/*.odt')
 add_package_data('lino_welfare.settings','media/pictures/contacts.Person.jpg')
 add_package_data('lino_welfare','config/lino_welfare/ActivityReport/*.odt')
 add_package_data('lino_welfare','config/admin_main.html')
-#~ for n in (
-    #~ 'lino_welfare', 
-    #~ 'lino_welfare.modlib.courses',
-    #~ 'lino_welfare.modlib.newcomers',
-    #~ 'lino_welfare.modlib.debts',
-    #~ 'lino_welfare.modlib.jobs',
-    #~ 'lino_welfare.modlib.isip',
-    #~ 'lino_welfare.modlib.pcsw',
-    #~ 'lino_welfare.modlib.cbss'):
-    #~ l = SETUP_INFO['package_data'].setdefault(n,[])
-    #~ l.append('locale/de/LC_MESSAGES/*.mo')
-    #~ l.append('locale/fr/LC_MESSAGES/*.mo')
-    #~ l.append('locale/nl/LC_MESSAGES/*.mo')
 l = add_package_data('lino_welfare')
 for lng in 'fr de nl'.split():
     l.append('locale/%s/LC_MESSAGES/*.mo' % lng)

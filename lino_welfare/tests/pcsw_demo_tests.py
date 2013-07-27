@@ -69,38 +69,38 @@ DEMO_OVERVIEW = """\
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
- accounts.Account                        14        49
- accounts.Chart                          4         1
- accounts.Group                          8         7
- cal.Calendar                            18        6
- cal.Event                               24        141
- cal.Guest                               9         14
- cal.GuestRole                           8         4
- cal.Priority                            5         9
- cal.Room                                4         0
- cal.Subscription                        4         42
+ accounts.Account                        15        49
+ accounts.Chart                          5         1
+ accounts.Group                          9         7
+ cal.Calendar                            19        6
+ cal.Event                               24        153
+ cal.Guest                               9         16
+ cal.GuestRole                           9         4
+ cal.Priority                            6         9
+ cal.Room                                5         0
+ cal.Subscription                        4         48
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
- cbss.Purpose                            6         106
+ cbss.Purpose                            7         106
  cbss.RetrieveTIGroupsRequest            14        2
- cbss.Sector                             9         209
+ cbss.Sector                             11        209
  changes.Change                          9         0
  contacts.Company                        30        38
- contacts.CompanyType                    7         11
+ contacts.CompanyType                    9         16
  contacts.Partner                        25        116
  contacts.Person                         31        75
  contacts.Role                           4         10
- contacts.RoleType                       5         5
+ contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
  contenttypes.ContentType                4         101
  contenttypes.FooWithBrokenAbsoluteUrl   3         0
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
  contenttypes.ProxyModel                 2         0
- countries.City                          9         62
- countries.Country                       7         8
- countries.Language                      5         5
+ countries.City                          10        62
+ countries.Country                       8         8
+ countries.Language                      6         5
  courses.Course                          5         3
  courses.CourseContent                   2         2
  courses.CourseOffer                     5         3
@@ -112,54 +112,54 @@ DEMO_OVERVIEW = """\
  debts.Entry                             16        147
  households.Household                    28        3
  households.Member                       6         6
- households.Role                         5         6
- households.Type                         4         4
+ households.Role                         6         6
+ households.Type                         5         4
  isip.Contract                           26        13
  isip.ContractEnding                     6         4
- isip.ContractType                       9         5
- isip.ExamPolicy                         19        5
- isip.StudyType                          4         8
+ isip.ContractType                       10        5
+ isip.ExamPolicy                         20        5
+ isip.StudyType                          5         8
  jobs.Candidature                        8         44
  jobs.Contract                           28        13
- jobs.ContractType                       8         5
+ jobs.ContractType                       9         5
  jobs.Experience                         10        0
- jobs.Function                           6         4
+ jobs.Function                           7         4
  jobs.Job                                10        8
  jobs.JobProvider                        31        3
  jobs.JobType                            4         5
  jobs.Offer                              9         0
- jobs.Regime                             4         3
- jobs.Schedule                           4         3
- jobs.Sector                             5         14
+ jobs.Regime                             5         3
+ jobs.Schedule                           5         3
+ jobs.Sector                             6         14
  jobs.Study                              12        2
  newcomers.Broker                        2         2
  newcomers.Competence                    5         7
- newcomers.Faculty                       5         5
- notes.EventType                         8         9
+ newcomers.Faculty                       6         5
+ notes.EventType                         10        9
  notes.Note                              13        110
- notes.NoteType                          10        15
+ notes.NoteType                          11        15
  outbox.Attachment                       4         0
  outbox.Mail                             9         0
  outbox.Recipient                        6         0
  pcsw.Activity                           3         0
- pcsw.AidType                            4         7
+ pcsw.AidType                            5         7
  pcsw.Client                             73        61
  pcsw.ClientContact                      7         0
- pcsw.ClientContactType                  4         5
+ pcsw.ClientContactType                  5         5
  pcsw.Coaching                           8         77
- pcsw.CoachingEnding                     6         4
- pcsw.CoachingType                       4         3
+ pcsw.CoachingEnding                     7         4
+ pcsw.CoachingType                       5         3
  pcsw.Dispense                           6         0
- pcsw.DispenseReason                     5         4
+ pcsw.DispenseReason                     6         4
  pcsw.Exclusion                          6         0
  pcsw.ExclusionType                      2         2
  pcsw.PersonGroup                        4         5
  postings.Posting                        8         0
  properties.PersonProperty               6         310
- properties.PropChoice                   6         2
- properties.PropGroup                    4         3
- properties.PropType                     8         3
- properties.Property                     6         23
+ properties.PropChoice                   7         2
+ properties.PropGroup                    5         3
+ properties.PropType                     9         3
+ properties.Property                     7         23
  sessions.Session                        3         4
  system.HelpText                         4         5
  system.SiteConfig                       27        1
@@ -168,8 +168,8 @@ DEMO_OVERVIEW = """\
  uploads.UploadType                      2         5
  users.Authority                         3         3
  users.Membership                        3         0
- users.Team                              4         3
- users.User                              17        9
+ users.Team                              5         3
+ users.User                              17        10
 ======================================= ========= =======
 """
 

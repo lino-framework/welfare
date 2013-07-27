@@ -8,25 +8,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-25 10:00+0300\n"
-"PO-Revision-Date: 2013-03-31 18:21+0100\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-07-27 07:25+0300\n"
+"PO-Revision-Date: 2013-07-27 07:29+0300\n"
+"Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0dev-r661\n"
+"Generated-By: Babel 1.0\n"
 
-# d2e8f7d04bd44ceea28313151fdf68b1
+# 33048598fb424f6d82c2a5d96104dbed
 #: ../index.rst:4
-msgid "Manuel de l'utilisateur"
-msgstr ""
+msgid "Lino-Welfare User Manual"
+msgstr "Manuel de l'utilisateur Lino pour CPAS"
 
-# b13a8f5ae3fb41148a375118e7237475
+# 3675481285c44bd281442fc671a942f7
 #: ../index.rst:6
-msgid ""
-"Voici le nouveau manuel d'utilisateur trilingue français-néerlandais-"
-"allemand de Lino pour CPAS. Il n'est pas terminé."
-msgstr ""
+msgid "This is work in progress."
+msgstr "Non terminé. Travaux en cours."
 

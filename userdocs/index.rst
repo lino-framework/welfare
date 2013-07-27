@@ -1,11 +1,9 @@
 .. _welfare.userdocs:
 
-Manuel de l'utilisateur
-=======================
+Lino-Welfare User Manual
+========================
 
-Voici le nouveau manuel d'utilisateur trilingue 
-français-néerlandais-allemand de Lino pour CPAS.
-Il n'est pas terminé.
+This is work in progress.
 
 
 .. toctree::

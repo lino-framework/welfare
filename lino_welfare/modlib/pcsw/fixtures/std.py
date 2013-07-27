@@ -35,12 +35,24 @@ def objects():
     #~ yield persongroup(u"Travail",ref_name='4bis')
     #~ yield persongroup(u"Standby",ref_name='9',active=False)
 
-    yield pcsw.CoachingEnding(**babelkw('name',de="Übergabe an Kollege",fr="Transfert vers collègue"))
-    yield pcsw.CoachingEnding(**babelkw('name',de="Einstellung des Anrechts auf SH",fr="Arret du droit à l'aide sociale"))
-    yield pcsw.CoachingEnding(**babelkw('name',de="Umzug in andere Gemeinde",fr="Déménagement vers autre commune"))
-    yield pcsw.CoachingEnding(**babelkw('name',de="Hat selber Arbeit gefunden",fr="A trouvé du travail"))
+    yield pcsw.CoachingEnding(**babelkw('name',
+        de="Übergabe an Kollege",
+        fr="Transfert vers collègue",
+        en="Transfer to colleague",))
+    yield pcsw.CoachingEnding(**babelkw('name',
+        de="Einstellung des Anrechts auf SH",
+        fr="Arret du droit à l'aide sociale",
+        en="End of right on social aid"))
+    yield pcsw.CoachingEnding(**babelkw('name',
+        de="Umzug in andere Gemeinde",
+        fr="Déménagement vers autre commune",
+        en="Moved to another town"))
+    yield pcsw.CoachingEnding(**babelkw('name',
+        de="Hat selber Arbeit gefunden",
+        fr="A trouvé du travail",
+        en="Found a job"))
     
-    yield pcsw.DispenseReason(**babelkw('name',de="Gesundheitlich",fr="Santé"))
-    yield pcsw.DispenseReason(**babelkw('name',de="Studium/Ausbildung",fr="Etude/Formation"))
-    yield pcsw.DispenseReason(**babelkw('name',de="Familiär",fr="Cause familiale"))
-    yield pcsw.DispenseReason(**babelkw('name',de="Sonstige",fr="Autre"))
+    yield pcsw.DispenseReason(**babelkw('name',de="Gesundheitlich",fr="Santé",en="Health"))
+    yield pcsw.DispenseReason(**babelkw('name',de="Studium/Ausbildung",fr="Etude/Formation",en="Studies"))
+    yield pcsw.DispenseReason(**babelkw('name',de="Familiär",fr="Cause familiale",en="Familiar"))
+    yield pcsw.DispenseReason(**babelkw('name',de="Sonstige",fr="Autre",en="Other"))
