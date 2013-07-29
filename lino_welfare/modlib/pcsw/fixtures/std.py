@@ -24,10 +24,10 @@ def objects():
     pcsw = dd.resolve_app('pcsw')
     
     #~ persongroup = Instantiator('pcsw.PersonGroup','name').build
-    yield pcsw.PersonGroup(ref_name='1',name=_("Bilan"))
-    yield pcsw.PersonGroup(ref_name='2',name=_("Formation"))
-    yield pcsw.PersonGroup(ref_name='4',name=_("Recherche"))
-    yield pcsw.PersonGroup(ref_name='4bis',name=_("Travail"))
+    yield pcsw.PersonGroup(ref_name='1',name=_("Evaluation")) # Auswertung / Bilan
+    yield pcsw.PersonGroup(ref_name='2',name=_("Formation")) # Formation / Ausbildung
+    yield pcsw.PersonGroup(ref_name='4',name=_("Search")) # Suche / Recherche
+    yield pcsw.PersonGroup(ref_name='4bis',name=_("Work")) # Arbeit / Travail
     yield pcsw.PersonGroup(ref_name='9',name=_("Standby"))
     #~ yield persongroup(u"Bilan",ref_name='1')
     #~ yield persongroup(u"Formation",ref_name='2')

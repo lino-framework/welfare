@@ -1,7 +1,7 @@
 .. _welfare.debts:
 
 ===================
-Médiation de dettes
+Debts mediation
 ===================
 
 Scénarios

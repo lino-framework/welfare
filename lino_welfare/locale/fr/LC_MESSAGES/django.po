@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-27 07:24+0300\n"
+"POT-Creation-Date: 2013-07-29 09:06+0300\n"
 "PO-Revision-Date: 2013-04-25 16:59+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -2881,8 +2881,9 @@ msgid "Art.60§7"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:27
-msgid "Bilan"
-msgstr ""
+#, fuzzy
+msgid "Evaluation"
+msgstr "Evaluation %d"
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:28
 #, fuzzy
@@ -2890,11 +2891,11 @@ msgid "Formation"
 msgstr "période d'essai"
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:29
-msgid "Recherche"
+msgid "Search"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:30
-msgid "Travail"
+msgid "Work"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:31
@@ -2941,64 +2942,73 @@ msgstr ""
 msgid "Contact function to designate the president."
 msgstr ""
 
-#: lino_welfare/settings/__init__.py:84
+#: lino_welfare/settings/__init__.py:83
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: lino_welfare/settings/__init__.py:86
+#: lino_welfare/settings/__init__.py:85
 msgid "Integration Agent"
 msgstr "Agent d'insertion"
 
-#: lino_welfare/settings/__init__.py:87
+#: lino_welfare/settings/__init__.py:86
 #, fuzzy
 msgid "Integration Agent (Manager)"
 msgstr "Agent d'insertion (chef de service)"
 
-#: lino_welfare/settings/__init__.py:88
+#: lino_welfare/settings/__init__.py:87
 msgid "Newcomers consultant"
 msgstr "Consultat nouveaux clients"
 
-#: lino_welfare/settings/__init__.py:89
+#: lino_welfare/settings/__init__.py:88
 msgid "Reception clerk"
 msgstr ""
 
-#: lino_welfare/settings/__init__.py:90
+#: lino_welfare/settings/__init__.py:89
 msgid "Debts consultant"
 msgstr "Consultate médiateur dettes"
 
-#: lino_welfare/settings/__init__.py:93
+#: lino_welfare/settings/__init__.py:92
 msgid "CBSS only"
 msgstr "BCSS seulement"
 
-#: lino_welfare/settings/__init__.py:94
+#: lino_welfare/settings/__init__.py:93
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: lino_welfare/settings/__init__.py:132
+#: lino_welfare/settings/__init__.py:131
 msgid "Master"
 msgstr "Signalétique"
 
-#: lino_welfare/settings/__init__.py:142
+#: lino_welfare/settings/__init__.py:141
 msgid "My menu"
 msgstr "Mon menu"
 
-#: lino_welfare/settings/__init__.py:160
+#: lino_welfare/settings/__init__.py:159
 msgid "Partners (all)"
 msgstr "Partenaires (tous)"
 
-#: lino_welfare/settings/__init__.py:162
+#: lino_welfare/settings/__init__.py:161
 msgid "Listings"
 msgstr ""
 
-#: lino_welfare/settings/__init__.py:166
+#: lino_welfare/settings/__init__.py:165
 msgid "Configure"
 msgstr "Configurer"
 
-#: lino_welfare/settings/__init__.py:171
+#: lino_welfare/settings/__init__.py:170
 msgid "Explorer"
 msgstr "Explorateur"
 
-#: lino_welfare/settings/__init__.py:176
+#: lino_welfare/settings/__init__.py:175
 msgid "Site"
 msgstr "Site"
+
+#~ msgid "Bilan"
+#~ msgstr ""
+
+#~ msgid "Recherche"
+#~ msgstr ""
+
+#~ msgid "Travail"
+#~ msgstr ""
 

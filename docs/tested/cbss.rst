@@ -8,6 +8,11 @@ CBSS connection
 .. 
   >>> from lino.runtime import *
 
+We switch explicitly to German for the following tests:
+
+>>> from north.dbutils import set_language
+>>> set_language('de')
+
 We retrieve Tx25 no. 1 from the database:
 
 >>> obj = cbss.RetrieveTIGroupsRequest.objects.get(pk=1)

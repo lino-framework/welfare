@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-27 07:25+0300\n"
-"PO-Revision-Date: 2013-03-31 18:21+0100\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-07-29 09:06+0300\n"
+"PO-Revision-Date: 2013-07-27 15:35+0300\n"
+"Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 9ad692668e5a4cec964c45b4bc1b216c
+# b5d28e3b964041558b78d0e595ec36ab
 #: ../debts.rst:5
-msgid "Médiation de dettes"
-msgstr ""
+msgid "Debts mediation"
+msgstr "Médiation de dettes"
 
 # 4d99bc8d8f0943229372a077835acc2f
 #: ../debts.rst:8

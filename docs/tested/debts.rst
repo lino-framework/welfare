@@ -28,8 +28,8 @@ Budget #3 (u'Budget Nr. 3 f\xfcr Ausdemwald-Charlier')
 Note that the current language is German because this is the 
 default language on this demo site:
 
->>> settings.SITE.languages[0]
-LanguageInfo(django_code='de', name='de', index=0, suffix='')
+>>> settings.SITE.get_default_language()
+'de'
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:

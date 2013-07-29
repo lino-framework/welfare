@@ -46,24 +46,24 @@ Teams
 -----
 
 >>> ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== =================================================== ============================== ===============================
- ID   Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)
----- --------------------------------------------------- ------------------------------ -------------------------------
- 1    ASD (Allgemeiner Sozialdienst)                      SSG (Service social général)   ASD (Algemene Sociale Dienst)
- 2    DSBE (Dienst für Sozial-Berufliche Eingliederung)   Service intégration
- 3    Schuldnerberatung                                   Médiation de dettes
-==== =================================================== ============================== ===============================
+==== ============================== ============================== ===================================================
+ ID   Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
+---- ------------------------------ ------------------------------ ---------------------------------------------------
+ 1    GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)
+ 2    Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)
+ 3    Debts mediation                Médiation de dettes            Schuldnerberatung
+==== ============================== ============================== ===================================================
 <BLANKLINE>
 
 
 >>> ses.show(pcsw.CoachingTypes)
-=================================================== ============================== =============================== ====
- Bezeichnung                                         Bezeichnung (fr)               Bezeichnung (nl)                ID
---------------------------------------------------- ------------------------------ ------------------------------- ----
- ASD (Allgemeiner Sozialdienst)                      SSG (Service social général)   ASD (Algemene Sociale Dienst)   1
- DSBE (Dienst für Sozial-Berufliche Eingliederung)   Service intégration                                            2
- Schuldnerberatung                                   Médiation de dettes                                            3
-=================================================== ============================== =============================== ====
+============================== ============================== =================================================== ====
+ Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    ID
+------------------------------ ------------------------------ --------------------------------------------------- ----
+ GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)                      1
+ Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)   2
+ Debts mediation                Médiation de dettes            Schuldnerberatung                                   3
+============================== ============================== =================================================== ====
 <BLANKLINE>
 
 

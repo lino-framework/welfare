@@ -51,13 +51,13 @@ from lino import dd
 #~ from lino.utils.jsgen import py2js
 #~ from north import babel
 #~ from lino.core.dbutils import resolve_model
-#Companies = resolve_model('contacts.Companies')
 #~ from djangosite.utils.test import TestCase
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
 
 #~ pcsw = dd.resolve_app('pcsw')
 cbss = dd.resolve_app('cbss')
+Event = dd.resolve_model('cal.Event')
 
 #~ Person = resolve_model('contacts.Person')
 #~ Property = resolve_model('properties.Property')
@@ -73,7 +73,7 @@ DEMO_OVERVIEW = """\
  accounts.Chart                          5         1
  accounts.Group                          9         7
  cal.Calendar                            19        6
- cal.Event                               24        153
+ cal.Event                               24        %s
  cal.Guest                               9         16
  cal.GuestRole                           9         4
  cal.Priority                            6         9
@@ -171,7 +171,10 @@ DEMO_OVERVIEW = """\
  users.Team                              5         3
  users.User                              17        10
 ======================================= ========= =======
-"""
+""" % Event.objects.all().count()
+
+# Note: the number of cal.Event records may vary depending on the creation date of the database
+# because of the automatic weekly evaluations of isip and jobs contracts .
 
 class PseudoRequest:
     def __init__(self,name):
@@ -234,8 +237,8 @@ class DemoTest(RemoteAuthTestCase):
         add_case('alicia','api/pcsw/IntegClients',json_fields,7,**kw)
         add_case('hubert','api/pcsw/IntegClients',json_fields,22,**kw)
         
-        
-        kw = dict(fmt='json',limit=20,start=0,su=6) # rolf working as alicia
+        alicia = settings.SITE.user_model.objects.get(username='alicia')
+        kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
         add_case('rolf','api/pcsw/IntegClients',json_fields,7,**kw)
         
         

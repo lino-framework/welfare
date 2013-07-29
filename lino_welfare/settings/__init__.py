@@ -54,16 +54,14 @@ class Site(Site,cbss.SiteMixin):
     
     accounts_ref_length = 5
     
-    #~ languages = ('de', 'fr', 'nl', 'en')
-    #~ languages = "de fr nl en"
+    languages = 'en fr de nl' # tested docs rely on this distribution
     
-    #~ languages = ['en']
-    languages = 'en fr nl de'
-    #~ languages = ['de','fr']
-    #~ languages = ['fr','de']
-    #~ languages = ['de']
-    
-    
+    def get_default_language(self):
+        """
+        Lino-Welfare was initially used and promoted in the German-speaking region.
+        """
+        return 'de' # self.languages[1].django_code
+        
     #~ index_view_action = "pcsw.Home"
     
     #~ remote_user_header = "REMOTE_USER"
@@ -79,7 +77,8 @@ class Site(Site,cbss.SiteMixin):
         """
         from lino import dd
         from django.utils.translation import ugettext_lazy as _
-        dd.UserProfiles.reset('* office integ cbss newcomers debts reception')
+        dd.UserProfiles.reset('* office integ cbss newcomers debts reception'
+           ,hide_languages='nl')
         add = dd.UserProfiles.add_item
         add('000', _("Anonymous"),                  '_ _ _ _ _ _ _', 
             name='anonymous', readonly=True,authenticated=False)

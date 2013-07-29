@@ -336,7 +336,7 @@ Belgique""")
         a.save()
         self.assertEqual(dd.obj2str(a,True),"Activity(id=1,name='Sozialhilfeempf\\xe4nger')")
         
-        expected = "Client(language='%s'," % settings.SITE.DEFAULT_LANGUAGE.django_code
+        expected = "Client(language='%s'," % settings.SITE.get_default_language()
         expected += "last_name='Test'"
         expected += ",client_state=<ClientStates.newcomer:10>"
         #~ expected += ",is_active=True"
