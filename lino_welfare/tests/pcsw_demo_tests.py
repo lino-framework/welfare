@@ -64,15 +64,15 @@ Event = dd.resolve_model('cal.Event')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-28 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
-101 models:
+29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+100 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
  accounts.Account                        15        49
  accounts.Chart                          5         1
  accounts.Group                          9         7
- cal.Calendar                            19        6
+ cal.Calendar                            23        6
  cal.Event                               24        %s
  cal.Guest                               9         16
  cal.GuestRole                           9         4
@@ -93,14 +93,13 @@ DEMO_OVERVIEW = """\
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
- contenttypes.ContentType                4         101
+ contenttypes.ContentType                4         100
  contenttypes.FooWithBrokenAbsoluteUrl   3         0
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
  contenttypes.ProxyModel                 2         0
  countries.City                          10        62
  countries.Country                       8         8
- languages.Language                      6         5
  courses.Course                          5         3
  courses.CourseContent                   2         2
  courses.CourseOffer                     5         3
@@ -114,6 +113,7 @@ DEMO_OVERVIEW = """\
  households.Member                       6         6
  households.Role                         6         6
  households.Type                         5         4
+ languages.Language                      6         5
  isip.Contract                           26        13
  isip.ContractEnding                     6         4
  isip.ContractType                       10        5
@@ -136,7 +136,7 @@ DEMO_OVERVIEW = """\
  newcomers.Competence                    5         7
  newcomers.Faculty                       6         5
  notes.EventType                         10        9
- notes.Note                              13        110
+ notes.Note                              15        110
  notes.NoteType                          11        15
  outbox.Attachment                       4         0
  outbox.Mail                             9         0
@@ -168,7 +168,7 @@ DEMO_OVERVIEW = """\
  users.Authority                         3         3
  users.Membership                        3         0
  users.Team                              5         3
- users.User                              17        10
+ users.User                              18        10
 ======================================= ========= =======
 """ % Event.objects.all().count()
 

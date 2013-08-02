@@ -397,7 +397,7 @@ class ContractBase(
     def update_cal_from(self):
         return self.applies_from
         
-    def update_cal_calendar(self,i):
+    def update_cal_calendar(self):
         #~ return self.exam_policy.event_type
         return self.exam_policy.calendar
         
