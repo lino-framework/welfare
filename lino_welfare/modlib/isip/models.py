@@ -398,8 +398,8 @@ class ContractBase(
         return self.applies_from
         
     def update_cal_calendar(self):
-        #~ return self.exam_policy.event_type
-        return self.exam_policy.calendar
+        if self.exam_policy is not None:
+            return self.exam_policy.calendar
         
     def update_cal_until(self):
         return self.date_ended or self.applies_until

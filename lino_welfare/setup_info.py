@@ -24,7 +24,7 @@
 SETUP_INFO = dict(name='lino-welfare',
       #~ distclass=MyDistribution,
       #~ dist_dir=os.path.join('docs','dist'),
-      version='1.1.8', 
+      version='1.1.9', 
       install_requires=['lino>=1.6.11','suds','vobject'],
       #~ version=VERSION,
       test_suite = 'tests',

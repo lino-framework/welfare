@@ -606,11 +606,7 @@ Belgique""")
         menu_test('root',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Büro :
-  
-  - Mein E-Mail-Ausgang
-  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
-  - Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
@@ -630,7 +626,7 @@ Belgique""")
   
   - Büro : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
-  - Kontakte : Länder, Orte, Sprachen, Organisationsarten, Funktionen
+  - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
   - Kalender : Räume, Prioritäten, Gastrollen, Kalenderliste
   - Haushalte : Rollen in Haushalt, Haushaltsarten
@@ -644,7 +640,7 @@ Belgique""")
 
 - Explorer :
   
-  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Postsendungen
+  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge
   - System : Vollmachten, User Groups, Benutzer-Levels, Benutzerprofile, Änderungen
   - Kontakte : Kontaktpersonen
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
@@ -666,11 +662,7 @@ Belgique""")
         menu_test("100","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Büro :
-  
-  - Mein E-Mail-Ausgang
-  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
-  - Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
@@ -698,11 +690,7 @@ Belgique""")
         menu_test("110","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Büro :
-  
-  - Mein E-Mail-Ausgang
-  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
-  - Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
@@ -725,7 +713,7 @@ Belgique""")
 
 - Explorer :
   
-  - Büro : E-Mail-Ausgänge, Anhänge, Postsendungen
+  - Büro : E-Mail-Ausgänge, Anhänge
   - Kalender : Aufgaben, Abonnements
   - CV : Sprachkenntnisse
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
@@ -738,11 +726,7 @@ Belgique""")
         menu_test('300',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Büro :
-  
-  - Mein E-Mail-Ausgang
-  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
-  - Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
@@ -763,11 +747,7 @@ Belgique""")
         menu_test('200',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
 
-- Büro :
-  
-  - Mein E-Mail-Ausgang
-  - Postsendungen : Meine Postsendungen, Bereit für Ausdruck, Gedruckte Postsendungen, Ausgegangene Postsendungen
-  - Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Notizen
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 

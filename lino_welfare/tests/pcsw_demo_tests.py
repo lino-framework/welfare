@@ -113,7 +113,6 @@ DEMO_OVERVIEW = """\
  households.Member                       6         6
  households.Role                         6         6
  households.Type                         5         4
- languages.Language                      6         5
  isip.Contract                           26        13
  isip.ContractEnding                     6         4
  isip.ContractType                       10        5
@@ -132,6 +131,7 @@ DEMO_OVERVIEW = """\
  jobs.Schedule                           5         3
  jobs.Sector                             6         14
  jobs.Study                              12        2
+ languages.Language                      6         5
  newcomers.Broker                        2         2
  newcomers.Competence                    5         7
  newcomers.Faculty                       6         5
