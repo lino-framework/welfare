@@ -184,14 +184,14 @@ def customize_notes():
     #~ from lino.modlib.notes.models import Note, Notes
     notes = dd.resolve_app('notes')
 
-    dd.inject_field(notes.Note,'company',
-        models.ForeignKey('contacts.Company',
-            blank=True,null=True,
-            help_text="""\
-    An optional third-party Organization that is related to this Note.
-    The note will then be visible in that company's history panel.
-    """
-        ))
+    #~ dd.inject_field(notes.Note,'company',
+        #~ models.ForeignKey('contacts.Company',
+            #~ blank=True,null=True,
+            #~ help_text="""\
+    #~ An optional third-party Organization that is related to this Note.
+    #~ The note will then be visible in that company's history panel.
+    #~ """
+        #~ ))
         
     def get_person(self):
         return self.project
@@ -450,16 +450,16 @@ def site_setup(site):
     site.modules.notes.Notes.set_detail_layout(
         left = """
         date:10 event_type:25 type:25
-        subject 
-        project company
-        id user:10 language:8 build_time
+        project subject 
+        company contact_person #contact_role
+        user:10 language:8 build_time id
         body
         """,
         
         right = """
         uploads.UploadsByController
         outbox.MailsByController
-        postings.PostingsByController
+        # postings.PostingsByController
         cal.TasksByController
         """,
         

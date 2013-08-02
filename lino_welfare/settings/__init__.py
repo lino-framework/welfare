@@ -220,8 +220,9 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino.modlib.outbox'
         yield 'lino_welfare.modlib.cal'
         yield 'lino.modlib.reception'
-        yield 'lino.modlib.postings'
+        #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.households'
+        yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
         
         yield 'lino_welfare'

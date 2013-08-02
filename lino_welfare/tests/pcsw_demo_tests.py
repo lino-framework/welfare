@@ -64,7 +64,7 @@ Event = dd.resolve_model('cal.Event')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, postings, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+28 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
 101 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
@@ -100,7 +100,7 @@ DEMO_OVERVIEW = """\
  contenttypes.ProxyModel                 2         0
  countries.City                          10        62
  countries.Country                       8         8
- countries.Language                      6         5
+ languages.Language                      6         5
  courses.Course                          5         3
  courses.CourseContent                   2         2
  courses.CourseOffer                     5         3
@@ -154,7 +154,6 @@ DEMO_OVERVIEW = """\
  pcsw.Exclusion                          6         0
  pcsw.ExclusionType                      2         2
  pcsw.PersonGroup                        4         5
- postings.Posting                        8         0
  properties.PersonProperty               6         310
  properties.PropChoice                   7         2
  properties.PropGroup                    5         3

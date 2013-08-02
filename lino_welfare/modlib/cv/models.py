@@ -122,7 +122,7 @@ class LanguageKnowledge(dd.Model):
     #~ person = models.ForeignKey("contacts.Person")
     #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
-    language = models.ForeignKey("countries.Language",verbose_name=_("Language"))
+    language = dd.ForeignKey("languages.Language")
     #~ language = models.ForeignKey("countries.Language")
     #~ language = fields.LanguageField()
     spoken = properties.HowWell.field(blank=True,verbose_name=_("spoken"))
@@ -279,7 +279,7 @@ class ObstaclesByPerson(ConfiguredPropsByPerson):
     
 
 def site_setup(site):
-    site.modules.countries.Languages.set_detail_layout("""
+    site.modules.languages.Languages.set_detail_layout("""
     id iso2 name
     cv.KnowledgesByLanguage
     """)

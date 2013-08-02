@@ -879,3 +879,17 @@ def migrate_from_1_1_7(globals_dict):
     
     
     return '1.1.8'
+
+def migrate_from_1_1_8(globals_dict): 
+    """
+    - Removed `postings` app
+    - countries.Language moved to languages.Language
+    """
+    
+    globals_dict.update(countries_Language=resolve_model('languages.Language'))
+        
+    def create_postings_posting(*args):
+        return None
+    globals_dict.update(create_postings_posting=create_postings_posting)
+    
+    return '1.1.9'

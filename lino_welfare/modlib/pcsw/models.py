@@ -889,7 +889,7 @@ class ClientDetail(dd.FormLayout):
     
     outbox = dd.Panel("""
     outbox.MailsByProject
-    postings.PostingsByProject
+    # postings.PostingsByProject
     """,label = _("Correspondence"))
     
     calendar = dd.Panel("""
@@ -1209,7 +1209,7 @@ class IntegClients(Clients):
         group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
             verbose_name=_("Integration phase")),
         #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
-        language = dd.ForeignKey('countries.Language',
+        language = dd.ForeignKey('languages.Language',
             verbose_name=_("Language knowledge"),
             blank=True,null=True),
         wanted_property = dd.ForeignKey(properties.Property,

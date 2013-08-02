@@ -749,8 +749,7 @@ class Study(CountryCity):
     #~ started = dd.MonthField(blank=True,null=True,verbose_name=_("started"))
     #~ stopped = dd.MonthField(blank=True,null=True,verbose_name=_("stopped"))
     success = models.BooleanField(verbose_name=_("Success"),default=False)
-    language = models.ForeignKey("countries.Language",
-        blank=True,null=True,verbose_name=_("Language"))
+    language = dd.ForeignKey("languages.Language",blank=True,null=True)
     #~ language = dd.LanguageField(blank=True,null=True,verbose_name=_("Language"))
     
     school = models.CharField(max_length=200,

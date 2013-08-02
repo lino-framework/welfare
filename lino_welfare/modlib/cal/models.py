@@ -109,7 +109,7 @@ def customize_cal(sender,**kw):
     """,_("General"))
     site.modules.cal.Events.add_detail_panel("more","""
     id created:20 modified:20 state
-    outbox.MailsByController postings.PostingsByController
+    outbox.MailsByController #postings.PostingsByController
     """,_("More"))
     
     site.modules.cal.Events.set_insert_layout("""
