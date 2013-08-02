@@ -8,6 +8,6 @@ Countries
 
 .. actor:: countries.Countries
 
-.. actor:: countries.Languages
+.. actor:: languages.Languages
 
 

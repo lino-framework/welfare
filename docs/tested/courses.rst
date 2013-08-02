@@ -83,7 +83,7 @@ able to render RemoteFields as rst.
 ----------- ------------- ----------------------- --------------------------------
  Charlotte   Deutsch       Non                     Am Waisenbüschchen, 4700 Eupen
  Alfons      Französisch   Non                     Am Bahndamm, 4700 Eupen
- Tatjana     Deutsch       Non                     Kettenis
+ Tatjana     Deutsch       Non                     4701 Kettenis
  Denis       Französisch   Non                     France
  Karl        Deutsch       Non                     Allemagne
 =========== ============= ======================= ================================
@@ -99,7 +99,7 @@ of that client:
 ------------------------- ------------- -------------------------------- -------------------------------------------------
  COLLARD Charlotte (117)   Deutsch       Am Waisenbüschchen, 4700 Eupen   Caroline Carnol
  AUSDEMWALD Alfons (115)   Französisch   Am Bahndamm, 4700 Eupen          Mélanie Mélard
- KASENNOVA Tatjana (208)   Deutsch       Kettenis                         Hubert Huppertz
+ KASENNOVA Tatjana (208)   Deutsch       4701 Kettenis                    Hubert Huppertz
  DENON Denis (179)         Französisch   France                           Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
  KELLER Karl (177)         Deutsch       Allemagne                        Mélanie Mélard, Hubert Huppertz
 ========================= ============= ================================ =================================================

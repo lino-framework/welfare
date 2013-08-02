@@ -371,7 +371,7 @@ def site_setup(site):
     """)
     
     site.modules.countries.Cities.set_detail_layout("""
-    name country inscode 
+    name country inscode zip_code
     parent type id
     CitiesByCity
     contacts.PartnersByCity jobs.StudiesByCity
