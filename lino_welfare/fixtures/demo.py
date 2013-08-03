@@ -633,7 +633,7 @@ def objects():
     
     theresia = person(first_name=u"Theresia",last_name=u"Thelen",
         email=settings.SITE.demo_email, # 'theresia@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female,language='de')
+        city=eupen,country='BE',gender=mixins.Genders.female)
     yield theresia
     theresia = users.User(username="theresia",partner=theresia,profile='210') 
     yield theresia
