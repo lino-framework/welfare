@@ -41,6 +41,8 @@ class Site(Site,cbss.SiteMixin):
     
     demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
     
+    #~ catch_layout_exceptions = False # 20130804
+    
     #~ title = label # __name__
     #~ domain = "pcsw.saffre-rumma.net"
     #~ help_url = "http://packages.python.org/lino-welfare"
@@ -136,13 +138,11 @@ class Site(Site,cbss.SiteMixin):
             #~ m.add_action(self.modules.pcsw.MyPersonSearches)
             
             
-        if profile.level and not profile.readonly:
+        #~ if profile.level and not profile.readonly:
           
-            m = main.add_menu("my",_("My menu"))
-            #~ m.add_action('projects.Projects')
-            #~ m.add_action(self.modules.notes.MyNotes)
+            #~ m = main.add_menu("my",_("My menu"))
             
-            self.on_each_app('setup_my_menu',ui,profile,m)
+            #~ self.on_each_app('setup_my_menu',ui,profile,m)
             #~ m.add_action(self.modules.lino.MyTextFieldTemplates)
 
         
@@ -237,7 +237,7 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.debts'
         yield 'lino_welfare.modlib.cbss'
-        yield 'lino.modlib.notes' # notes demo fixture creates notes for Clients 
+        yield 'lino_welfare.modlib.notes' # notes demo fixture creates notes for Clients 
       
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns

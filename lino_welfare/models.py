@@ -177,29 +177,6 @@ if False:
 
         
 
-def customize_notes():
-    """
-    Application-specific changes to :mod:`lino.modlib.notes`.
-    """
-    #~ from lino.modlib.notes.models import Note, Notes
-    notes = dd.resolve_app('notes')
-
-    #~ dd.inject_field(notes.Note,'company',
-        #~ models.ForeignKey('contacts.Company',
-            #~ blank=True,null=True,
-            #~ help_text="""\
-    #~ An optional third-party Organization that is related to this Note.
-    #~ The note will then be visible in that company's history panel.
-    #~ """
-        #~ ))
-        
-    def get_person(self):
-        return self.project
-    notes.Note.person = property(get_person)
-        
-      
-
-
 @dd.receiver(dd.auto_create)
 def on_auto_create(sender,**kw):
     #~ raise Warning("auto_create is not permitted here")
@@ -447,34 +424,6 @@ def site_setup(site):
     """,_("Coaching"),)
     
         
-    site.modules.notes.Notes.set_detail_layout(
-        left = """
-        date:10 event_type:25 type:25
-        project subject 
-        company contact_person #contact_role
-        user:10 language:8 build_time id
-        body
-        """,
-        
-        right = """
-        uploads.UploadsByController
-        outbox.MailsByController
-        # postings.PostingsByController
-        cal.TasksByController
-        """,
-        
-        main = """
-        left:60 right:30
-        """
-    )
-    
-    
-    site.modules.notes.Notes.set_insert_layout("""
-    event_type:25 type:25
-    subject 
-    project company
-    """,window_size=(50,'auto'))
-    
     #~ site.modules.outbox.Mails.set_detail_layout("""
     #~ subject project date 
     #~ user sent #build_time id owner
@@ -502,7 +451,7 @@ def set_merge_actions(sender,**kw):
 customize_siteconfig()
 #~ customize_countries()
 customize_contacts()        
-customize_notes()
+#~ customize_notes()
 customize_sqlite()
 customize_users()
 

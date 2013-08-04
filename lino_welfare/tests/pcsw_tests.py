@@ -640,7 +640,7 @@ Belgique""")
 
 - Explorer :
   
-  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge
+  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - System : Vollmachten, User Groups, Benutzer-Levels, Benutzerprofile, Änderungen
   - Kontakte : Kontaktpersonen
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
@@ -652,7 +652,6 @@ Belgique""")
   - Kompetenzen
   - Schuldnerberatung : Budgets, Einträge
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
-  - Ereignisse/Notizen
   - Eigenschaften
 
 - Site : Info

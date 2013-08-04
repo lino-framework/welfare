@@ -13,7 +13,7 @@
 ## along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-This module extends :mod:`lino.modlib.cal.models`
+The `models` module for :mod:`lino_welfare.modlib.notes`.
 """
 
 from __future__ import unicode_literals
