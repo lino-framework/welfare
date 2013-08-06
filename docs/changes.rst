@@ -12,6 +12,8 @@ The final truth about what's going on is only
 Version 1.1.9 (coming)
 ============================================
 
+Weitere Arbeiten im Modul :ref:`Empfang <welfare.reception>`.
+
 Bugs fixed:
 
 - Tätigkeitsberiicht, Übersicht Art-60§7-Konventionen und sonstige 
@@ -27,8 +29,11 @@ Version 1.1.8 (released :blogref:`20130723`)
 - Neues Modul :ref:`Empfang <welfare.reception>` und Änderungen im Kalendermodul. 
 
   Neues Benutzerprofil "Empfangsschalter".
-  Neue Befehle :ref:`welfare.reception.ExpectedGuests`
-  und :ref:`welfare.reception.WaitingGuests` im Menü "Kalender"
+  Neues Menü :menuselection`Empfang` mit den 
+  Befehlen 
+  :ref:`welfare.reception.Clients`
+  :ref:`welfare.reception.ExpectedGuests`
+  und :ref:`welfare.reception.WaitingGuests` 
 
   Konfigurierung: 
   :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 

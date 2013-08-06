@@ -13,13 +13,12 @@
 ## along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.modlib.cal`
+Lino-Welfare extension of :mod:`lino.modlib.reception`
 """
 
-from lino import ad
-    
-class App(ad.App):
+from lino.modlib.reception import App
 
-    extends = 'lino.modlib.cal'
-    extends_models = ['cal.Event','cal.Calendar']
-    
+class App(App):
+
+    extends = 'lino.modlib.reception'
+

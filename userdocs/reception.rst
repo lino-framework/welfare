@@ -62,4 +62,4 @@ For example you may decide "This guy gets quickly nervous, and it
 won't take much time, so i'll let him in before the others."
 
 
-.. actor:: reception.AppointmentsByClient
+.. actor:: reception.AppointmentsByGuest

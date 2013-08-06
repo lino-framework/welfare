@@ -13,7 +13,7 @@
 ## along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-This module extends :mod:`lino.modlib.cal.models`
+Defines models for :mod:`lino_welfare.modlib.cal`.
 """
 
 from __future__ import unicode_literals
@@ -36,18 +36,6 @@ class Calendar(Calendar):
         #~ _("Invite team members"),default=False)
     invite_team_members = dd.ForeignKey('users.Team',blank=True,null=True)
     invite_client = models.BooleanField(_("Invite client"),default=False)
-    
-dd.inject_field('system.SiteConfig','client_guestrole',
-    dd.ForeignKey('cal.GuestRole',
-        verbose_name=_("Guest role for clients"),
-        related_name='client_guestroles',
-        blank=True,null=True))    
-    
-dd.inject_field('system.SiteConfig','client_calender',
-    dd.ForeignKey('cal.Calendar',
-        verbose_name=_("Default calendar for client events"),
-        related_name='client_calendars',
-        blank=True,null=True))    
     
 dd.inject_field('system.SiteConfig','team_guestrole',
     dd.ForeignKey('cal.GuestRole',

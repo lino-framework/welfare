@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-29 09:06+0300\n"
-"PO-Revision-Date: 2013-07-29 09:07+0300\n"
+"POT-Creation-Date: 2013-08-06 06:51+0300\n"
+"PO-Revision-Date: 2013-08-06 06:56+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -53,13 +53,13 @@ msgstr ""
 msgid "Space separated list of case insensitive nationality designations in 4 languages."
 msgstr ""
 
-#: lino_welfare/models.py:447
+#: lino_welfare/models.py:424
 #: lino_welfare/modlib/pcsw/models.py:880
 #: lino_welfare/modlib/pcsw/models.py:1975
 msgid "Coaching"
 msgstr "Begleitung"
 
-#: lino_welfare/models.py:534
+#: lino_welfare/models.py:483
 #: lino_welfare/modlib/pcsw/models.py:221
 msgid "Former"
 msgstr "Ehemalig"
@@ -94,52 +94,41 @@ msgid "Force majeure"
 msgstr "Höhere Gewalt"
 
 #: lino_welfare/modlib/cal/models.py:38
-#, fuzzy
 msgid "Invite client"
-msgstr "Aktive Klienten"
+msgstr "Klient einladen"
 
 #: lino_welfare/modlib/cal/models.py:42
-#, fuzzy
-msgid "Guest role for clients"
-msgstr "Auch abgelehnte Klienten"
-
-#: lino_welfare/modlib/cal/models.py:48
-#, fuzzy
-msgid "Default calendar for client events"
-msgstr "Auch abgelehnte Klienten"
-
-#: lino_welfare/modlib/cal/models.py:54
 msgid "Guest role for team members"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:109
+#: lino_welfare/modlib/cal/models.py:97
 #: lino_welfare/modlib/contacts/models.py:280
 #: lino_welfare/modlib/debts/models.py:453
 #: lino_welfare/modlib/isip/models.py:687
 msgid "General"
 msgstr "Allgemein"
 
-#: lino_welfare/modlib/cal/models.py:113
+#: lino_welfare/modlib/cal/models.py:101
 msgid "More"
 msgstr "Mehr"
 
-#: lino_welfare/modlib/cal/models.py:126
+#: lino_welfare/modlib/cal/models.py:114
 msgid "Appointment"
 msgstr "Termin"
 
-#: lino_welfare/modlib/cal/models.py:130
+#: lino_welfare/modlib/cal/models.py:118
 #: lino_welfare/modlib/debts/models.py:177
-#: lino_welfare/modlib/jobs/models.py:1226
-#: lino_welfare/modlib/jobs/models.py:1320
-#: lino_welfare/modlib/jobs/models.py:1435
+#: lino_welfare/modlib/jobs/models.py:1225
+#: lino_welfare/modlib/jobs/models.py:1319
+#: lino_welfare/modlib/jobs/models.py:1434
 msgid "Date"
 msgstr "Datum"
 
-#: lino_welfare/modlib/cal/models.py:132
+#: lino_welfare/modlib/cal/models.py:120
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: lino_welfare/modlib/cal/models.py:147
+#: lino_welfare/modlib/cal/models.py:135
 #, python-format
 msgid "Created appointment for %(user)s with %(partner)s"
 msgstr ""
@@ -423,8 +412,6 @@ msgstr "ZDSS"
 
 #: lino_welfare/modlib/cbss/tx25.py:83
 #: lino_welfare/modlib/cbss/tx25.py:459
-#: lino_welfare/modlib/cv/models.py:125
-#: lino_welfare/modlib/jobs/models.py:753
 msgid "Language"
 msgstr "Sprache"
 
@@ -933,7 +920,7 @@ msgstr "Kursinhalte"
 #: lino_welfare/modlib/courses/models.py:209
 #: lino_welfare/modlib/courses/models.py:263
 #: lino_welfare/modlib/jobs/models.py:677
-#: lino_welfare/modlib/jobs/models.py:851
+#: lino_welfare/modlib/jobs/models.py:850
 msgid "Name"
 msgstr ""
 
@@ -981,8 +968,8 @@ msgstr "Beginndatum"
 #: lino_welfare/modlib/jobs/models.py:365
 #: lino_welfare/modlib/jobs/models.py:641
 #: lino_welfare/modlib/jobs/models.py:691
-#: lino_welfare/modlib/jobs/models.py:870
-#: lino_welfare/modlib/jobs/models.py:1011
+#: lino_welfare/modlib/jobs/models.py:869
+#: lino_welfare/modlib/jobs/models.py:1010
 #: lino_welfare/modlib/pcsw/models.py:256
 #: lino_welfare/modlib/pcsw/models.py:1642
 #: lino_welfare/modlib/pcsw/models.py:1699
@@ -1076,7 +1063,7 @@ msgid "Course content"
 msgstr "Kursinhalt"
 
 #: lino_welfare/modlib/courses/models.py:444
-#: lino_welfare/modlib/jobs/models.py:997
+#: lino_welfare/modlib/jobs/models.py:996
 msgid "date submitted"
 msgstr "Anfragedatum"
 
@@ -1106,10 +1093,10 @@ msgid "Participants"
 msgstr "Teilnehmer"
 
 #: lino_welfare/modlib/courses/models.py:586
-#: lino_welfare/modlib/jobs/models.py:1131
-#: lino_welfare/modlib/jobs/models.py:1135
-#: lino_welfare/modlib/jobs/models.py:1287
-#: lino_welfare/modlib/jobs/models.py:1342
+#: lino_welfare/modlib/jobs/models.py:1130
+#: lino_welfare/modlib/jobs/models.py:1134
+#: lino_welfare/modlib/jobs/models.py:1286
+#: lino_welfare/modlib/jobs/models.py:1341
 msgid "Candidates"
 msgstr "Kandidaten"
 
@@ -1703,9 +1690,8 @@ msgstr "Beobachtungskriterium"
 #: lino_welfare/modlib/isip/models.py:456
 #: lino_welfare/modlib/pcsw/models.py:142
 #: lino_welfare/modlib/pcsw/models.py:157
-#, fuzzy
 msgid "Observed events"
-msgstr "Vertrag endet"
+msgstr "Beobachtungskriterium"
 
 #: lino_welfare/modlib/isip/models.py:458
 #: lino_welfare/modlib/pcsw/models.py:159
@@ -1751,7 +1737,7 @@ msgstr "VSEs"
 
 #: lino_welfare/modlib/isip/models.py:630
 #: lino_welfare/modlib/jobs/models.py:335
-#: lino_welfare/modlib/jobs/models.py:861
+#: lino_welfare/modlib/jobs/models.py:860
 msgid "Contract Type"
 msgstr "Vertragsart"
 
@@ -1808,7 +1794,7 @@ msgid "Job Providers"
 msgstr "Stellenanbieter"
 
 #: lino_welfare/modlib/jobs/models.py:187
-#: lino_welfare/modlib/jobs/models.py:847
+#: lino_welfare/modlib/jobs/models.py:846
 msgid "Jobs"
 msgstr "Stellen"
 
@@ -1850,7 +1836,7 @@ msgid "duration (days)"
 msgstr "Dauer (Arbeitstage)"
 
 #: lino_welfare/modlib/jobs/models.py:353
-#: lino_welfare/modlib/jobs/models.py:863
+#: lino_welfare/modlib/jobs/models.py:862
 msgid "hourly rate"
 msgstr "Stundensatz"
 
@@ -1880,7 +1866,7 @@ msgid "Only contracts of type"
 msgstr "Vertragsart"
 
 #: lino_welfare/modlib/jobs/models.py:632
-#: lino_welfare/modlib/jobs/models.py:855
+#: lino_welfare/modlib/jobs/models.py:854
 msgid "Job Type"
 msgstr "Stellenart"
 
@@ -1922,136 +1908,136 @@ msgid "Study content"
 msgstr "Ausbildungsinhalt"
 
 #: lino_welfare/modlib/jobs/models.py:745
-#: lino_welfare/modlib/jobs/models.py:809
+#: lino_welfare/modlib/jobs/models.py:808
 msgid "started"
 msgstr "begonnen"
 
 #: lino_welfare/modlib/jobs/models.py:746
-#: lino_welfare/modlib/jobs/models.py:810
+#: lino_welfare/modlib/jobs/models.py:809
 msgid "stopped"
 msgstr "beendet"
 
-#: lino_welfare/modlib/jobs/models.py:758
+#: lino_welfare/modlib/jobs/models.py:757
 msgid "School"
 msgstr "Schule"
 
-#: lino_welfare/modlib/jobs/models.py:761
-#: lino_welfare/modlib/jobs/models.py:812
+#: lino_welfare/modlib/jobs/models.py:760
+#: lino_welfare/modlib/jobs/models.py:811
 #: lino_welfare/modlib/pcsw/models.py:1809
 msgid "Remarks"
 msgstr "Bemerkungen"
 
-#: lino_welfare/modlib/jobs/models.py:789
+#: lino_welfare/modlib/jobs/models.py:788
 msgid "List of studies for a given person."
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:797
+#: lino_welfare/modlib/jobs/models.py:796
 msgid "Job Experience"
 msgstr "Berufserfahrung"
 
-#: lino_welfare/modlib/jobs/models.py:798
+#: lino_welfare/modlib/jobs/models.py:797
 msgid "Job Experiences"
 msgstr "Berufserfahrungen"
 
-#: lino_welfare/modlib/jobs/models.py:802
+#: lino_welfare/modlib/jobs/models.py:801
 msgid "company"
 msgstr "Firma"
 
-#: lino_welfare/modlib/jobs/models.py:804
+#: lino_welfare/modlib/jobs/models.py:803
 msgid "job title"
 msgstr "Bezeichnung"
 
-#: lino_welfare/modlib/jobs/models.py:807
+#: lino_welfare/modlib/jobs/models.py:806
 msgid "Country"
 msgstr "Land"
 
-#: lino_welfare/modlib/jobs/models.py:846
-#: lino_welfare/modlib/jobs/models.py:1327
+#: lino_welfare/modlib/jobs/models.py:845
+#: lino_welfare/modlib/jobs/models.py:1326
 msgid "Job"
 msgstr "Stelle"
 
-#: lino_welfare/modlib/jobs/models.py:865
+#: lino_welfare/modlib/jobs/models.py:864
 msgid "capacity"
 msgstr "Kapazität"
 
-#: lino_welfare/modlib/jobs/models.py:968
+#: lino_welfare/modlib/jobs/models.py:967
 msgid "The possible states of a candidature."
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:969
+#: lino_welfare/modlib/jobs/models.py:968
 msgid "Candidature state"
 msgstr "Kandidatur-Zustand"
 
-#: lino_welfare/modlib/jobs/models.py:970
+#: lino_welfare/modlib/jobs/models.py:969
 msgid "Candidature states"
 msgstr "Kandidatur-Zustände"
 
-#: lino_welfare/modlib/jobs/models.py:973
+#: lino_welfare/modlib/jobs/models.py:972
 msgctxt "jobs"
 msgid "Active"
 msgstr "Aktiv"
 
-#: lino_welfare/modlib/jobs/models.py:974
-#: lino_welfare/modlib/jobs/models.py:1290
-#: lino_welfare/modlib/jobs/models.py:1346
+#: lino_welfare/modlib/jobs/models.py:973
+#: lino_welfare/modlib/jobs/models.py:1289
+#: lino_welfare/modlib/jobs/models.py:1345
 msgid "Probation"
 msgstr "Probezeit"
 
-#: lino_welfare/modlib/jobs/models.py:975
+#: lino_welfare/modlib/jobs/models.py:974
 msgid "Probation failed"
 msgstr "Probezeit ohne Erfolg"
 
-#: lino_welfare/modlib/jobs/models.py:976
-#: lino_welfare/modlib/jobs/models.py:1338
+#: lino_welfare/modlib/jobs/models.py:975
+#: lino_welfare/modlib/jobs/models.py:1337
 msgctxt "jobs"
 msgid "Working"
 msgstr "Arbeitet"
 
-#: lino_welfare/modlib/jobs/models.py:977
+#: lino_welfare/modlib/jobs/models.py:976
 msgctxt "jobs"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: lino_welfare/modlib/jobs/models.py:986
+#: lino_welfare/modlib/jobs/models.py:985
 msgid "Job Candidature"
 msgstr "Stellenanfrage"
 
-#: lino_welfare/modlib/jobs/models.py:987
+#: lino_welfare/modlib/jobs/models.py:986
 msgid "Job Candidatures"
 msgstr "Stellenanfragen"
 
-#: lino_welfare/modlib/jobs/models.py:998
+#: lino_welfare/modlib/jobs/models.py:997
 msgid "Date when the IA introduced this candidature."
 msgstr "Datum wann der SA die Kandidatur erfasst hat."
 
-#: lino_welfare/modlib/jobs/models.py:1017
+#: lino_welfare/modlib/jobs/models.py:1016
 #, python-format
 msgid "Candidature by %(person)s"
 msgstr "Kandidatur von %(person)s"
 
-#: lino_welfare/modlib/jobs/models.py:1140
+#: lino_welfare/modlib/jobs/models.py:1139
 msgid ""
 "\n"
 "    Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter. \n"
 "    "
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:1196
+#: lino_welfare/modlib/jobs/models.py:1195
 msgid "Job Contracts Search"
 msgstr "Suche Art.60§7-Konventionen"
 
-#: lino_welfare/modlib/jobs/models.py:1220
-#: lino_welfare/modlib/jobs/models.py:1315
-#: lino_welfare/modlib/jobs/models.py:1430
+#: lino_welfare/modlib/jobs/models.py:1219
+#: lino_welfare/modlib/jobs/models.py:1314
+#: lino_welfare/modlib/jobs/models.py:1429
 msgid "Contracts Situation"
 msgstr "Übersicht Art.60§7-Konventionen"
 
-#: lino_welfare/modlib/jobs/models.py:1330
+#: lino_welfare/modlib/jobs/models.py:1329
 msgctxt "(place)"
 msgid " at "
 msgstr " bei "
 
-#: lino_welfare/modlib/jobs/models.py:1485
+#: lino_welfare/modlib/jobs/models.py:1484
 msgid "is Job Provider"
 msgstr "Stellenanbieter"
 
@@ -2488,14 +2474,17 @@ msgid "Coaches"
 msgstr "Begleiter"
 
 #: lino_welfare/modlib/pcsw/models.py:810
+#: lino_welfare/modlib/reception/models.py:108
 msgid "Contact"
 msgstr "Kontakt"
 
 #: lino_welfare/modlib/pcsw/models.py:815
+#: lino_welfare/modlib/reception/models.py:113
 msgid "Birth"
 msgstr "Geburtsangaben"
 
 #: lino_welfare/modlib/pcsw/models.py:819
+#: lino_welfare/modlib/reception/models.py:117
 msgid "eID card"
 msgstr "eID-Karte"
 
@@ -2532,22 +2521,27 @@ msgid "Contracts"
 msgstr "Verträge"
 
 #: lino_welfare/modlib/pcsw/models.py:937
+#: lino_welfare/modlib/reception/models.py:126
 msgid "number"
 msgstr "Nummer"
 
 #: lino_welfare/modlib/pcsw/models.py:938
+#: lino_welfare/modlib/reception/models.py:127
 msgid "valid from"
 msgstr "Gültig von"
 
 #: lino_welfare/modlib/pcsw/models.py:939
+#: lino_welfare/modlib/reception/models.py:128
 msgid "valid until"
 msgstr "Gültig bis"
 
 #: lino_welfare/modlib/pcsw/models.py:940
+#: lino_welfare/modlib/reception/models.py:129
 msgid "issued by"
 msgstr "Ausgestellt durch"
 
 #: lino_welfare/modlib/pcsw/models.py:941
+#: lino_welfare/modlib/reception/models.py:130
 msgid "eID card type"
 msgstr "eID-Kartenart"
 
@@ -2588,9 +2582,9 @@ msgid " on %(date)s"
 msgstr " am %(date)s"
 
 #: lino_welfare/modlib/pcsw/models.py:1169
-#, fuzzy, python-format
+#, python-format
 msgid "Coached on %s"
-msgstr "Begleiter"
+msgstr "Begleitet am %s"
 
 #: lino_welfare/modlib/pcsw/models.py:1182
 msgid "DM Clients"
@@ -2877,6 +2871,14 @@ msgstr "Arbeit"
 msgid "Standby"
 msgstr "Standby"
 
+#: lino_welfare/modlib/reception/models.py:59
+msgid "Attestation"
+msgstr "Bescheinigung"
+
+#: lino_welfare/modlib/reception/models.py:65
+msgid "Subject"
+msgstr ""
+
 #: lino_welfare/modlib/statbel/models.py:31
 #: lino_welfare/modlib/statbel/models.py:40
 msgid "INS code"
@@ -2914,45 +2916,41 @@ msgstr "Funktion des zweiten Unterzeichners"
 msgid "Contact function to designate the president."
 msgstr "Kontaktfunktion \"Präsident\""
 
-#: lino_welfare/settings/__init__.py:83
+#: lino_welfare/settings/__init__.py:85
 msgid "Anonymous"
 msgstr "Anonym"
 
-#: lino_welfare/settings/__init__.py:85
+#: lino_welfare/settings/__init__.py:87
 msgid "Integration Agent"
 msgstr "Begleiter im DSBE"
 
-#: lino_welfare/settings/__init__.py:86
+#: lino_welfare/settings/__init__.py:88
 msgid "Integration Agent (Manager)"
 msgstr "Integrations-Assistent (Manager)"
 
-#: lino_welfare/settings/__init__.py:87
+#: lino_welfare/settings/__init__.py:89
 msgid "Newcomers consultant"
 msgstr "Berater Neuanträge"
 
-#: lino_welfare/settings/__init__.py:88
+#: lino_welfare/settings/__init__.py:90
 msgid "Reception clerk"
-msgstr ""
+msgstr "Empfangsschalter"
 
-#: lino_welfare/settings/__init__.py:89
+#: lino_welfare/settings/__init__.py:91
 msgid "Debts consultant"
 msgstr "Schuldenberater"
 
-#: lino_welfare/settings/__init__.py:92
+#: lino_welfare/settings/__init__.py:94
 msgid "CBSS only"
 msgstr "nur ZDSS"
 
-#: lino_welfare/settings/__init__.py:93
+#: lino_welfare/settings/__init__.py:95
 msgid "Administrator"
 msgstr "Verwalter"
 
-#: lino_welfare/settings/__init__.py:131
+#: lino_welfare/settings/__init__.py:133
 msgid "Master"
 msgstr "Stammdaten"
-
-#: lino_welfare/settings/__init__.py:141
-msgid "My menu"
-msgstr "Mein Menü"
 
 #: lino_welfare/settings/__init__.py:159
 msgid "Partners (all)"
@@ -2982,3 +2980,12 @@ msgstr "Site"
 
 #~ msgid "Travail"
 #~ msgstr "Arbeit"
+
+#~ msgid "Guest role for clients"
+#~ msgstr "Auch abgelehnte Klienten"
+
+#~ msgid "Default calendar for client events"
+#~ msgstr "Auch abgelehnte Klienten"
+
+#~ msgid "My menu"
+#~ msgstr "Mein Menü"
