@@ -205,15 +205,19 @@ class Clients(dd.Table):
         
     @dd.displayfield(_("Checkin"))
     def checkin_for(cls,obj,ar):
-        elems = ['(']
+        """
+        """
+        elems = []
         ba = cls.get_action_by_name('quick_event')
         for coaching in obj.coachings_by_client.all():
-            #~ u = coaching.user
-            #~ sar = ba.request(param_values=dict(user=u))
+            u = coaching.user
+            sar = ba.request(obj,action_param_values=dict(user=u))
+            #~ logger.info("20130809 %s",sar.action_param_values)
             #~ elems += [ar.action_button(ba,obj,unicode(u),param_values=dict(user=u)),' ']
-            #~ elems += [ar.href_to_request(sar,unicode(u)),' ']
-            elems += [unicode(u),' ']
-        elems += [')']
+            kw = dict()
+            kw.update(title=_("Create a quick event for this client with this coach."))
+            elems += [ar.href_to_request(sar,u.username,**kw),' ']
+            #~ elems += [unicode(u),' ']
         return E.div(*elems)
 
 

@@ -5,7 +5,9 @@
 {% for T in (settings.SITE.modules.integ.UsersWithClients,
     settings.SITE.modules.cal.MyEvents,
     settings.SITE.modules.cal.MyTasks,
-    settings.SITE.modules.reception.WaitingGuests) %}
+    settings.SITE.modules.reception.WaitingGuests,
+    settings.SITE.modules.reception.ReceivedGuests,
+    ) %}
 {% if T.default_action.get_view_permission(ar.get_user().profile) %}
 <h2>{{E.tostring(ar.window_action_button(T.default_action))}}</h2>
 {{E.tostring(ar.show(T,limit=5))}}
