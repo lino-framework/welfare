@@ -67,6 +67,8 @@ cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
+jobs = dd.resolve_app('jobs')
+#~ integ = dd.resolve_app('integ')
 #~ jobs = dd.resolve_app('jobs')
 #~ from lino_welfare.modlib.isip import models as isip
 #~ newcomers = dd.resolve_app('newcomers')
@@ -199,7 +201,7 @@ class ClientStates(dd.Workflow):
                         count=qs.count(),client=unicode(obj)))
                 #~ obj.set_change_summary()
                 #~ raise actions.Warning(_("You must first fill end_date of existing coachings!"))
-            #~ if issubclass(ar.actor,IntegClients):
+            #~ if issubclass(ar.actor,integ.Clients):
                 #~ ar.confirm(_("This will remove %s from this table.") % unicode(obj))
                 #~ kw.update(refresh_all=True)
                 
@@ -318,6 +320,7 @@ class Client(contacts.Person,beid.BeIdCardHolder):
     class Meta:
         verbose_name = _("Client") 
         verbose_name_plural = _("Clients") 
+        #~ ordering = ['last_name','first_name']
         
     workflow_state_field = 'client_state'
     
@@ -441,6 +444,7 @@ class Client(contacts.Person,beid.BeIdCardHolder):
         rv = super(Client,self).disabled_fields(ar)
         if not ar.get_user().profile.newcomers_level:
             rv = rv | set(['broker','faculty','refusal_reason'])
+        #~ logger.info("20130808 pcsw %s", rv)
         return rv
         
     def get_queryset(self):
@@ -1000,7 +1004,7 @@ class Clients(contacts.Persons):
     #~ title = _("All Clients")
     #~ title = _("Clients")
     required = dd.Required(user_groups='office')
-    model = Client # settings.SITE.person_model
+    model = Client 
     params_panel_hidden = True
     
     create_event = cal.CreateClientEvent()
@@ -1172,6 +1176,14 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             #~ yield unicode(_("primary"))
             yield unicode(self.parameters['only_primary'].verbose_name)
             
+    @classmethod
+    def apply_cell_format(self,ar,row,col,recno,td):
+        """
+        Enhance today by making background color a bit darker.
+        """
+        if row.client_state == ClientStates.newcomer:
+            td.attrib.update(bgcolor="green")
+    
     
 class DebtsClients(Clients):
     #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
@@ -1192,84 +1204,6 @@ class DebtsClients(Clients):
         return kw
         
     
-class IntegClients(Clients):
-    #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
-    #~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
-    help_text = u"""Wie Kontakte \u25b8 Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
-    #~ detail_layout = IntegClientDetail()
-    required = dict(user_groups = 'integ')
-    params_panel_hidden = True
-    title = _("Integration Clients")
-    order_by = "last_name first_name id".split()
-    allow_create = False # see blog/2012/0922
-    use_as_default_table = False
-    column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
-    
-    parameters = dict(
-        group = models.ForeignKey("pcsw.PersonGroup",blank=True,null=True,
-            verbose_name=_("Integration phase")),
-        #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
-        language = dd.ForeignKey('languages.Language',
-            verbose_name=_("Language knowledge"),
-            blank=True,null=True),
-        wanted_property = dd.ForeignKey(properties.Property,
-            verbose_name=_("Wanted skill"),
-            blank=True,null=True),
-        only_active = models.BooleanField(_("Only active clients"),default=False,
-          help_text=_("Show only clients in 'active' integration phases")),
-        **Clients.parameters)
-    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
-    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
-    params_layout = """
-    client_state coached_by and_coached_by start_date end_date observed_event 
-    aged_from aged_to gender nationality also_obsolete 
-    language wanted_property group only_active only_primary 
-    """
-    
-    #~ @classmethod
-    #~ def get_actor_label(self):
-        #~ return self.model._meta.verbose_name_plural
-    
-    @classmethod
-    def param_defaults(self,ar,**kw):
-        kw = super(IntegClients,self).param_defaults(ar,**kw)
-        kw.update(client_state=ClientStates.coached)
-        kw.update(coached_by=ar.get_user())
-        #~ print "20130721 IntegClients.param_defaults", kw['coached_by']
-        #~ raise Exception(20130721)
-        return kw
-        
-    @classmethod
-    def get_request_queryset(self,ar):
-        #~ ar.param_values.update(client_state = ClientStates.coached)
-        qs = super(IntegClients,self).get_request_queryset(ar)
-        if ar.param_values.language:
-            qs = qs.filter(
-                languageknowledge__language=ar.param_values.language).distinct()
-        if ar.param_values.wanted_property:
-            qs = qs.filter(
-                personproperty__property=ar.param_values.wanted_property).distinct()
-                
-        if ar.param_values.group:
-            qs = qs.filter(group=ar.param_values.group)
-        if ar.param_values.only_active:
-            qs = qs.filter(group__active=True)
-        #~ qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
-        #~ qs = qs.filter(client_state=ClientStates.coached)
-        #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
-        return qs
-        
-    @classmethod
-    def get_title_tags(self,ar):
-        for t in super(IntegClients,self).get_title_tags(ar):
-            yield t
-        if ar.param_values.only_active:
-            yield unicode(ar.actor.parameters['only_active'].verbose_name)
-        if ar.param_values.language:
-            yield unicode(ar.actor.parameters['language'].verbose_name) + ' '+unicode(ar.param_values.language)
-        if ar.param_values.group:
-            yield unicode(ar.param_values.group)
-            
 
 class ClientsByNationality(Clients):
     #~ app_label = 'contacts'
@@ -1279,7 +1213,7 @@ class ClientsByNationality(Clients):
 
 
 
-#~ class MyClients(IntegClients):
+#~ class MyClients(integ.Clients):
     #~ label = _("Integration Clients")
     #~ # label = _("My clients")
     #~ required = dict(user_groups = 'integ')
@@ -1448,117 +1382,7 @@ class ClientsTest(Clients):
         #~ return obj.error_message.replace('\n','<br/>')
         return obj.error_message
         
-
-
     
-class UsersWithClients(dd.VirtualTable):
-    """
-    A customized overview table.
-    """
-    #~ debug_permissions = True
-    required = dict(user_groups='integ newcomers')
-    #~ label = _("Overview Clients By User")
-    label = _("Users with their Clients")
-    #~ column_defaults = dict(width=8)
-    
-    slave_grid_format = 'html'    
-    
-    #~ @classmethod
-    #~ def on_analyze(self,site):
-        #~ if self.has_handle(site.ui):
-        #~ raise Exception("20130302 on_analyze called after handle")
-        
-    
-
-    @classmethod
-    def get_data_rows(self,ar):
-        """
-        We only want the users who actually have at least one client.
-        We store the corresponding request in the user object 
-        under the name `my_persons`.
-        
-        The list displays only integration agents, i.e. users with a nonempty `integ_level`.
-        With one subtility: system admins also have a nonempty `integ_level`, 
-        but normal users don't want to see them. 
-        So we add the rule that only system admins see other system admins.
-        
-        """
-        #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
-        u = ar.get_user()
-        if u is None or u.profile.level < dd.UserLevels.admin:
-            profiles = [p for p in dd.UserProfiles.items() 
-                if p.integ_level and p.level < dd.UserLevels.admin]
-        else:
-            profiles = [p for p in dd.UserProfiles.items() if p.integ_level ]
-            #~ qs = qs.exclude(profile__gte=UserLevels.admin)
-                  
-        qs = users.User.objects.filter(profile__in=profiles)
-        for user in qs.order_by('username'):
-            #~ r = MyClients.request(ar.ui,subst_user=user)
-            r = IntegClients.request(param_values=dict(coached_by=user))
-            if r.get_total_count():
-                user.my_persons = r
-                #~ user._detail_action = users.MySettings.default_action
-                yield user
-                
-    #~ @dd.virtualfield('pcsw.Client.coach1')
-    #~ @dd.virtualfield(dd.ForeignKey(settings.SITE.user_model,verbose_name=_("Coach")))
-    @dd.virtualfield('pcsw.Coaching.user')
-    def user(self,obj,ar):
-        return obj
-        
-    @dd.requestfield(_("Total"))
-    def row_total(self,obj,ar):
-        return obj.my_persons
-        
-    @dd.requestfield(_("Primary clients"))
-    def primary_clients(self,obj,ar):
-        #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
-        #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
-        t = datetime.date.today()
-        return IntegClients.request(param_values=dict(
-            only_primary=True,coached_by=obj,start_date=t,end_date=t))
-        
-    @dd.requestfield(_("Active clients"))
-    def active_clients(self,obj,ar):
-        #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        t = datetime.date.today()
-        return IntegClients.request(param_values=dict(
-            only_active=True,coached_by=obj,start_date=t,end_date=t))
-
-#~ @dd.receiver(dd.database_connected)
-#~ def on_database_connected(sender,**kw): 
-@dd.receiver(dd.database_ready)
-def on_database_ready(sender,**kw): 
-    """
-    Builds columns dynamically from the :class:`PersonGroup` database table.
-    
-    This must also be called before each test case.
-    """
-    self = UsersWithClients
-    self.column_names = 'user:10'
-    #~ try:
-    if True:
-        for pg in PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
-            def w(pg):
-                # we must evaluate `today` for each request, not only once when `database_ready`
-                today = datetime.date.today()
-                def func(self,obj,ar):
-                    return IntegClients.request(
-                        param_values=dict(group=pg,
-                            coached_by=obj,start_date=today,end_date=today))
-                return func
-            vf = dd.RequestField(w(pg),verbose_name=pg.name)
-            self.add_virtual_field('G'+pg.ref_name,vf)
-            self.column_names += ' ' + vf.name 
-    #~ except DatabaseError as e:
-        #~ pass # happens e.g. if database isn't yet initialized
-        
-    self.column_names += ' primary_clients active_clients row_total'
-    self.clear_handle() # avoid side effects when running multiple test cases
-    settings.SITE.resolve_virtual_fields()
-
-
 
 #
 # PERSON GROUP
@@ -2292,14 +2116,6 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(beid.BeIdCardTypes)
     
 
-INTEG_MODULE_LABEL = _("Integration")
-JOBS_MODULE_LABEL = _("Art.60§7")
+#~ INTEG_MODULE_LABEL = _("Integration")
+#~ JOBS_MODULE_LABEL = _("Art.60§7")
 
-#~ def setup_my_menu(site,ui,profile,m): 
-def setup_main_menu(site,ui,profile,m): 
-    m = m.add_menu("integ",INTEG_MODULE_LABEL)
-    m.add_action(IntegClients)
-    #~ m.add_action(MyPersonSearches)
-
-dd.add_user_group('integ',INTEG_MODULE_LABEL)
-#~ dd.add_user_group('coach',INTEG_MODULE_LABEL)

@@ -42,18 +42,33 @@ from lino.utils.xmlgen.html import E
 from lino.utils import ssin
 from lino.utils import join_words
 from lino.utils import join_elems
+from lino.core.actions import InstanceAction
 
 from lino import dd
 
 from lino.modlib.reception.models import *
 
-cal = dd.resolve_app('cal')
 
 from lino.modlib.cal.models import GuestStates
 
 from lino_welfare.modlib.reception import App
 from lino.mixins import beid
 
+cal = dd.resolve_app('cal')
+pcsw = dd.resolve_app('pcsw')
+
+#~ class CoachingsByClient(dd.Table):
+    #~ model = 'pcsw.Coaching'
+    #~ master_key = 'client'
+    #~ column_names = "user info" 
+    #~ auto_fit_column_widths = True
+    #~ use_as_default_table = False
+    #~ required = dd.Required(user_groups='reception')
+    #~ 
+    #~ @dd.virtualfield(dd.HtmlBox())
+    #~ def info(cls,obj,ar):
+        #~ sar = cal.CalendarPanel.request(subst_user=obj.user)
+        #~ return ar.href_to_request(sar,unicode(obj.user))
     
 class CreateNote(dd.RowAction): 
     label = _("Attestation")
@@ -92,16 +107,15 @@ class ClientDetail(dd.FormLayout):
     # lino.ChangesByMaster
     """,label = _("History"))
     
-    
-    
     general = dd.Panel("""
-    box1:40 AppointmentsByGuest:40 box2:30
+    client_info:30 box1:30 AppointmentsByGuest:40 box2:30
     box4 image:15
     """,label = _("General"))
     
     box1 = """
-    info
-    action_buttons
+    checkin_for
+    find_appointment 
+    workflow_buttons
     """
     
     #~ box1 = dd.Panel("""
@@ -142,17 +156,18 @@ def fld2html(fld,value) :
         return ("%s: " % f.verbose_name,E.b(value))
     return []
     
+#~ class Clients(pcsw.Clients): # we don't want filter defaults nor create_event action
 class Clients(dd.Table):
     model = 'pcsw.Client'
-    column_names = "name_column address_column national_id" 
+    column_names = "name_column address_column national_id workflow_buttons" 
     auto_fit_column_widths = True
     use_as_default_table = False
     required = dd.Required(user_groups='reception')
     detail_layout = ClientDetail()
-    editable = False
+    #~ editable = False
 
     read_beid = beid.BeIdReadCardAction()
-    find_by_beid = beid.FindByBeIdAction()
+    #~ find_by_beid = beid.FindByBeIdAction()
     
     quick_event = CreateGuestEvent()
     create_note = CreateNote()
@@ -162,9 +177,10 @@ class Clients(dd.Table):
         #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
         #~ fld2html()
         
-    @dd.virtualfield(dd.HtmlBox())
-    def info(cls,self,ar):
-        elems = [self.get_salutation(nominative=True),' ']
+    #~ @dd.virtualfield(dd.HtmlBox())
+    @dd.displayfield()
+    def client_info(cls,self,ar):
+        elems = [self.get_salutation(nominative=True),E.br()]
         elems += [self.first_name,' ',E.b(self.last_name),E.br()]
         #~ lines = list(self.address_person_lines()) + list(self.address_location_lines())
         #~ lines = 
@@ -179,6 +195,26 @@ class Clients(dd.Table):
                 #~ elems.append(ln)
         return E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")
     
+    @dd.displayfield(_("Find appointment"))
+    def find_appointment(cls,self,ar):
+        elems = []
+        for obj in self.coachings_by_client.all():
+            sar = cal.CalendarPanel.request(subst_user=obj.user,current_project=self.pk)
+            elems += [ar.href_to_request(sar,obj.user.username),' ']
+        return E.div(*elems)
+        
+    @dd.displayfield(_("Checkin"))
+    def checkin_for(cls,obj,ar):
+        elems = ['(']
+        ba = cls.get_action_by_name('quick_event')
+        for coaching in obj.coachings_by_client.all():
+            #~ u = coaching.user
+            #~ sar = ba.request(param_values=dict(user=u))
+            #~ elems += [ar.action_button(ba,obj,unicode(u),param_values=dict(user=u)),' ']
+            #~ elems += [ar.href_to_request(sar,unicode(u)),' ']
+            elems += [unicode(u),' ']
+        elems += [')']
+        return E.div(*elems)
 
 
 inherited_setup_main_menu = setup_main_menu
@@ -186,6 +222,6 @@ inherited_setup_main_menu = setup_main_menu
 def setup_main_menu(site,ui,profile,main):
     m  = main.add_menu("reception",_(App.verbose_name))
     #~ m.add_separator("-")
-    m.add_action('reception.Clients','find_by_beid')
+    #~ m.add_action('reception.Clients','find_by_beid')
     m.add_action('reception.Clients')
     inherited_setup_main_menu(site,ui,profile,main)

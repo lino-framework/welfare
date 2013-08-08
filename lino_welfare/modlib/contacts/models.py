@@ -77,11 +77,12 @@ für neue Operationen nicht benutzt werden können.""")
             ''')
         
     def disabled_fields(self,ar):
+        rv = super(Partner,self).disabled_fields(ar)
         #~ logger.info("20120731 CpasPartner.disabled_fields()")
         #~ raise Exception("20120731 CpasPartner.disabled_fields()")
         if settings.SITE.is_imported_partner(self):
-            return self._imported_fields
-        return set()
+            rv |= self._imported_fields
+        return rv
         
     def disable_delete(self,ar):
         if ar is not None and settings.SITE.is_imported_partner(self):
@@ -119,17 +120,19 @@ class PartnerDetail(PartnerDetail):
 
 
 
+from lino.modlib.families import models as families
 
-class Person(Partner,Person,mixins.Born,dd.Printable):
+class Person(Partner,Person,mixins.Born,dd.Printable,families.Child):
     """
     Represents a physical person.
     
     """
     
-    class Meta(PersonMixin.Meta):
+    class Meta(Person.Meta):
         #~ app_label = 'contacts'
         verbose_name = _("Person") # :doc:`/tickets/14`
         verbose_name_plural = _("Persons") # :doc:`/tickets/14`
+        #~ ordering = ['last_name','first_name']
         
     is_client = mti.EnableChild('pcsw.Client',verbose_name=_("is Client"),
         help_text=_("Whether this Person is a Client."))
@@ -156,7 +159,7 @@ dd.update_field(Person,'last_name',blank=False)
 class PersonDetail(PersonDetail):
     bottom_box = """
     activity bank_account1 bank_account2 is_obsolete
-    is_client created modified
+    is_client created modified father mother
     remarks contacts.RolesByPerson households.MembersByPerson
     """
   

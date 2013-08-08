@@ -417,14 +417,14 @@ The total monthly amount available for debts distribution."""))
             if sar.master_instance is None:
                 #~ raise Exception("20130327")
                 return
-            sar.setup_from(ar)
+            #~ sar.setup_from(ar)
             chunks.append(E.h2(unicode(sar.get_title())))
             #~ chunks.append(ar.ui.table2xhtml(sar))
             chunks.append(settings.SITE.ui.table2xhtml(sar))
             #~ raise Exception("20130527")
             
         for grp in self.account_groups():
-            render(self.entries_by_group(grp))
+            render(self.entries_by_group(grp,**ar.spawn_kw()))
         #~ render(self.BudgetSummary(ar))
         #~ render(self.ResultByBudget(ar))
         #~ render(self.DebtsByBudget(ar))

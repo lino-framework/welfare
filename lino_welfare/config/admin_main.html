@@ -2,18 +2,13 @@
 {% block hello_user %}
 {{ super() }}
 
-{% for T in (settings.SITE.modules.pcsw.UsersWithClients,settings.SITE.modules.reception.ExpectedGuests) %}
+{% for T in (settings.SITE.modules.integ.UsersWithClients,
+    settings.SITE.modules.cal.MyEvents,
+    settings.SITE.modules.cal.MyTasks,
+    settings.SITE.modules.reception.WaitingGuests) %}
 {% if T.default_action.get_view_permission(ar.get_user().profile) %}
 <h2>{{E.tostring(ar.window_action_button(T.default_action))}}</h2>
-{{E.tostring(ar.show(T))}}
+{{E.tostring(ar.show(T,limit=5))}}
 {% endif %}
 {% endfor %}
-
-<h2>{{_('Upcoming reminders')}}</h2>
-<table bgcolor="#eeeeee" padding="2pt" width="100%"><tr><td>
-{{settings.SITE.reminders_as_html(ar,days_forward=30,
-            max_items=10,before='<ul><li>',
-            separator='</li><li>',
-            after="</li></ul>")}}
-</td></tr></table>            
 {% endblock %}

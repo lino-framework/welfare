@@ -107,12 +107,12 @@ class Site(Site,cbss.SiteMixin):
         tb.add_action('pcsw.Clients','detail')
         self.on_each_app('setup_quicklinks',ar,tb)
         
-        tb.add_action(self.modules.pcsw.IntegClients)
+        tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
         #~ tb.add_action(self.modules.pcsw.Home)
         
-        tb.add_action('reception.Clients','find_by_beid')
+        #~ tb.add_action('reception.Clients','find_by_beid')
         
     def setup_menu(self,ui,profile,main):
         from django.utils.translation import ugettext_lazy as _
@@ -224,6 +224,7 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino_welfare.modlib.households'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
+        yield 'lino.modlib.families'
         
         yield 'lino_welfare'
         yield 'lino_welfare.modlib.statbel'

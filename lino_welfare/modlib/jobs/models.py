@@ -50,10 +50,6 @@ from lino.utils import dblogger
 #~ from lino.utils import printable
 from lino import mixins
 
-uploads = dd.resolve_app('uploads')
-notes = dd.resolve_app('notes')
-contacts = dd.resolve_app('contacts')
-
 #~ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
@@ -72,56 +68,13 @@ from lino.mixins.printable import DirectPrintAction
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
 
-# not used here, but these modules are required in INSTALLED_APPS, 
-# and other code may import them using 
-# ``from lino_welfare.modlib.pcsw.models import Property``
-
-from lino.modlib.properties.models import Property
-#~ from lino.modlib.notes.models import NoteType
-from lino.modlib.countries.models import Country, City
-
+uploads = dd.resolve_app('uploads')
+notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
 pcsw = dd.resolve_app('pcsw')
 
-
-#~ SCHEDULE_CHOICES = {
-    #~ 'de':[ 
-        #~ u"5-Tage-Woche",
-        #~ u"Montag, Mittwoch, Freitag",
-        #~ u"Individuell",
-        #~ ],
-    #~ 'fr':[ 
-        #~ u"5 jours/semaine",
-        #~ u"lundi,mercredi,vendredi",
-        #~ u"individuel",
-        #~ ],
-    #~ 'en':[
-        #~ u"5 days/week",
-        #~ u"Monday, Wednesday, Friday",
-        #~ u"Individual",
-        #~ ]
-#~ }
-
-#~ REGIME_CHOICES = {
-    #~ 'de':[ 
-        #~ u"20 Stunden/Woche",
-        #~ u"35 Stunden/Woche",
-        #~ u"38 Stunden/Woche",
-        #~ ],
-    #~ 'fr':[ 
-        #~ u"20 heures/semaine",
-        #~ u"35 heures/semaine",
-        #~ u"38 heures/semaine",
-        #~ ],
-    #~ 'en':[
-        #~ u"20 hours/week",
-        #~ u"35 hours/week",
-        #~ u"38 hours/week",
-        #~ u"38 hours/week",
-        #~ ]
-#~ }
-
+from lino_welfare.modlib.jobs import App
 
 class Schedule(dd.BabelNamed):
     """List of choices for `jobs.Contract.schedule` field."""
@@ -1485,11 +1438,14 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
         )
 
+from lino_welfare.modlib.integ import App
+
+INTEG_MODULE_LABEL = _(App.verbose_name)
 
 def setup_main_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.user:
         #~ return
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",INTEG_MODULE_LABEL)
     m.add_action(MyContracts)
     m.add_action(JobProviders)
     m.add_action(Jobs)
@@ -1504,7 +1460,7 @@ def setup_main_menu(site,ui,profile,m):
 def setup_config_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",INTEG_MODULE_LABEL)
     #~ m  = m.add_menu("jobs",MODULE_LABEL)
     m.add_action(ContractTypes)
     m.add_action(JobTypes)
@@ -1518,7 +1474,7 @@ def setup_config_menu(site,ui,profile,m):
 def setup_explorer_menu(site,ui,profile,m):
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",INTEG_MODULE_LABEL)
     #~ m  = m.add_menu("jobs",MODULE_LABEL)
     m.add_action(Contracts)
     m.add_action(Candidatures)

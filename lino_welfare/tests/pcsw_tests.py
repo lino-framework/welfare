@@ -610,7 +610,7 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
-- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
+- Empfang : Klienten, Wartende Besucher
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
@@ -750,7 +750,7 @@ Belgique""")
 
 - Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
 
-- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
+- Empfang : Klienten, Wartende Besucher
 
 - Neuanträge : Neue Klienten
 
@@ -767,7 +767,7 @@ Belgique""")
 
         # 210 reception
         menu_test('210',"""\
-- Empfang : eID-Karte einlesen, Klienten, Erwartete Besucher, Wartende Besucher
+- Empfang : Klienten, Wartende Besucher
 - Site : Info
 """) # 210 reception
 

@@ -233,12 +233,12 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
         add_case('rolf','api/newcomers/NewClients',json_fields,23,**kw)
         add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
-        add_case('alicia','api/pcsw/IntegClients',json_fields,7,**kw)
-        add_case('hubert','api/pcsw/IntegClients',json_fields,22,**kw)
+        add_case('alicia','api/integ/Clients',json_fields,7,**kw)
+        add_case('hubert','api/integ/Clients',json_fields,22,**kw)
         
         alicia = settings.SITE.user_model.objects.get(username='alicia')
         kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
-        add_case('rolf','api/pcsw/IntegClients',json_fields,7,**kw)
+        add_case('rolf','api/integ/Clients',json_fields,7,**kw)
         
         
         kw = dict() 

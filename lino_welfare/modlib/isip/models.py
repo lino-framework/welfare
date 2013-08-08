@@ -41,7 +41,8 @@ from lino import mixins
 #~ from lino.modlib.notes import models as notes
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
-pcsw = dd.resolve_app('pcsw')
+#~ pcsw = dd.resolve_app('pcsw')
+#~ integ = dd.resolve_app('integ')
 
 #~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
@@ -155,6 +156,9 @@ class ExamPolicies(dd.Table):
     jobs.ContractsByPolicy    
     """
 
+from lino_welfare.modlib.jobs import App
+JOBS_MODULE_NAME = App.verbose_name
+    
 class ContractEnding(dd.Model):
     class Meta:
         verbose_name = _("Reason of termination")
@@ -162,7 +166,7 @@ class ContractEnding(dd.Model):
         
     name = models.CharField(_("designation"),max_length=200)
     use_in_isip = models.BooleanField(_("ISIP"),default=True)
-    use_in_jobs = models.BooleanField(pcsw.JOBS_MODULE_LABEL,default=True)
+    use_in_jobs = models.BooleanField(JOBS_MODULE_NAME,default=True)
     is_success = models.BooleanField(_("Success"),default=False)
     needs_date_ended = models.BooleanField(_("Require date ended"),default=False)
     
@@ -802,26 +806,22 @@ class ContractsByStudyType(Contracts):
 #~ customize_siteconfig()
 
 
-
+from lino_welfare.modlib.integ import App
+MODULE_NAME = _(App.verbose_name)
 
 def setup_main_menu(site,ui,profile,m): 
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",MODULE_NAME)
     m.add_action(MyContracts)
     
-def setup_master_menu(site,ui,profile,m): pass
-
-def setup_my_menu(site,ui,profile,m): pass
-    #~ m.add_action(MyContracts)
-  
 def setup_config_menu(site,ui,profile,m): 
     #~ m  = m.add_menu("isip",_("ISIPs"))
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",MODULE_NAME)
     m.add_action(ContractTypes)
     m.add_action(ContractEndings)
     m.add_action(ExamPolicies)
     m.add_action(StudyTypes)
   
 def setup_explorer_menu(site,ui,profile,m):
-    m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
+    m  = m.add_menu("integ",MODULE_NAME)
     m.add_action(Contracts)
 

@@ -436,7 +436,7 @@ class AvailableCoaches(users.Users):
         
     #~ @dd.requestfield(_("Active clients"))
     #~ def active_clients(self,obj,ar):
-        #~ return pcsw.IntegClients.request(param_values=dict(coached_by=obj,only_active=True))
+        #~ return integ.Clients.request(param_values=dict(coached_by=obj,only_active=True))
         
     @dd.requestfield(_("New Clients"))
     def new_clients(self,obj,ar):

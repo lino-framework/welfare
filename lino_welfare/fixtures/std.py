@@ -208,13 +208,13 @@ def objects():
       #~ ))
     #~ yield et
     
-    calendar = Instantiator('cal.Calendar').build
-    et = calendar(color=25,invite_client=True,**babel_values('name',
-          de="Privat",
-          fr="Privé",
-          en="Private",
-          ))
-    yield et 
+    #~ calendar = Instantiator('cal.Calendar').build
+    #~ et = calendar(color=25,invite_client=True,**babel_values('name',
+          #~ de="Privat",
+          #~ fr="Privé",
+          #~ en="Private",
+          #~ ))
+    #~ yield et 
     
 
     #~ et = Calendar(**babel_values('name',

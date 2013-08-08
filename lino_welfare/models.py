@@ -491,7 +491,7 @@ def setup_workflows(site):
 #~ def setup_main_menu(site,ui,profile,m): 
 def setup_reports_menu(site,ui,profile,m):
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
-    m.add_action(site.modules.pcsw.UsersWithClients)
+    #~ m.add_action(site.modules.integ.UsersWithClients)
     m.add_action(site.modules.pcsw.ClientsTest)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     #~ m.add_action(ActivityReport1) # old version

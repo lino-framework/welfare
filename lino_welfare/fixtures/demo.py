@@ -214,6 +214,7 @@ def objects():
     
     
     calendar = Instantiator('cal.Calendar').build
+    
     obj = calendar(color=20,invite_client=True,**babel_values('name',
           de="Klientengespräche intern",
           fr="Rencontres internes avec client",
@@ -259,6 +260,15 @@ def objects():
           fr=u"Coordinations en équipe",
           en=u"Team Meetings",
           ))
+          
+    yield calendar(color=25,**babel_values('name',
+          de="Privat",
+          fr="Privé",
+          en="Private",
+          ))
+    
+    
+          
     #~ yield etype(**babel_values('name',
           #~ de=u"Erstgespräch",
           #~ fr=u"Première rencontre",
