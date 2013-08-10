@@ -661,7 +661,7 @@ dd.inject_field(pcsw.Client,
     """The Faculty this client has been attributed to.
     """)
 
-def site_setup(site):
+#~ def site_setup(site):
     #~ site.modules.users.Users.add_detail_tab('newcomers.CompetencesByUser')
     #~ site.modules.pcsw.Clients.add_detail_tab('newcomers',"""
     #~ broker:12 faculty:12  
@@ -674,21 +674,21 @@ def site_setup(site):
     #~ newcomers_left newcomers.AvailableCoachesByClient
     #~ """)
     
-    site.modules.pcsw.Clients.detail_layout.coaching.replace('workflow_buttons',"""
-    newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    """)
+    #~ site.modules.pcsw.Clients.detail_layout.coaching.replace('workflow_buttons',"""
+    #~ newcomers_left:20 newcomers.AvailableCoachesByClient:40
+    #~ """)
     
     #~ site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""
     #~ workflow_buttons
     #~ broker:12 
     #~ faculty:12  
     #~ """)
-    site.modules.pcsw.Clients.detail_layout.update(
-        newcomers_left=dd.Panel("""
-        workflow_buttons
-        broker:12 
-        faculty:12  
-        """,required=dict(user_groups='newcomers')))
+    #~ site.modules.pcsw.Clients.detail_layout.update(
+        #~ newcomers_left=dd.Panel("""
+        #~ workflow_buttons
+        #~ broker:12 
+        #~ faculty:12  
+        #~ """,required=dict(user_groups='newcomers')))
     
     #~ coaching = dd.Panel("""
     #~ pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40

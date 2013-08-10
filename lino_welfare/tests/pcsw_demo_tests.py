@@ -65,14 +65,14 @@ Event = dd.resolve_model('cal.Event')
 
 DEMO_OVERVIEW = """\
 29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
-100 models:
+101 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
  accounts.Account                        15        49
  accounts.Chart                          5         1
  accounts.Group                          9         7
- cal.Calendar                            23        6
+ cal.Calendar                            24        6
  cal.Event                               24        %s
  cal.Guest                               9         16
  cal.GuestRole                           9         4

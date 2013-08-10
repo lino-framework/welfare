@@ -50,7 +50,9 @@ from lino.core.dbutils import resolve_field
 from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.utils.ranges import isrange
-from lino.utils.xmlgen import html as xghtml
+
+from lino.utils.xmlgen.html import E
+
 
 from lino.mixins.printable import Printable
 from lino.core import actions
@@ -783,6 +785,14 @@ class Client(contacts.Person,beid.BeIdCardHolder):
             yield "%s <%s>" % (unicode(u),u.email)
             
 
+    @dd.displayfield(_("Find appointment"))
+    def find_appointment(self,ar):
+        elems = []
+        for obj in self.coachings_by_client.all():
+            sar = cal.CalendarPanel.request(subst_user=obj.user,current_project=self.pk)
+            elems += [ar.href_to_request(sar,obj.user.username),' ']
+        return E.div(*elems)
+        
 
 
 
@@ -792,7 +802,7 @@ class ClientDetail(dd.FormLayout):
     """
     #~ actor = 'contacts.Person'
     
-    main = "general status_tab coaching education languages competences jobs contracts history calendar outbox misc"
+    main = "general status_tab coaching education languages competences jobs contracts history calendar outbox.MailsByProject misc"
     
     general = dd.Panel("""
     box1 box2
@@ -879,9 +889,16 @@ class ClientDetail(dd.FormLayout):
     #~ """,label=_("Coaching"))
     
     coaching = dd.Panel("""
-    workflow_buttons
+    newcomers_left:20 newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
     """,label=_("Coaching"))
+    
+    newcomers_left=dd.Panel("""
+    workflow_buttons
+    broker:12 
+    faculty:12  
+    """,required=dict(user_groups='newcomers'))
+    
     
     #~ coaching_left = """
     #~ """
@@ -891,13 +908,14 @@ class ClientDetail(dd.FormLayout):
     # lino.ChangesByMaster
     """,label = _("History"))
     
-    outbox = dd.Panel("""
-    outbox.MailsByProject
-    # postings.PostingsByProject
-    """,label = _("Correspondence"))
+    #~ outbox = dd.Panel("""
+    #~ outbox.MailsByProject
+    #~ # postings.PostingsByProject
+    #~ """,label = _("Correspondence"))
     
     calendar = dd.Panel("""
-    cal.EventsByProject cal.GuestsByPartner 
+    find_appointment 
+    cal.EventsByProject 
     cal.TasksByProject
     """,label = _("Calendar"))
     
@@ -1007,7 +1025,7 @@ class Clients(contacts.Persons):
     model = Client 
     params_panel_hidden = True
     
-    create_event = cal.CreateClientEvent()
+    #~ create_event = cal.CreateClientEvent()
     
     insert_layout = dd.FormLayout("""
     first_name last_name
@@ -1915,7 +1933,7 @@ Enabling this field will automatically make the other coachings non-primary.""")
         #~ super(Coaching,self).save(*args,**kw)
         
     def summary_row(self,ar,**kw):
-        return xghtml.E.p(ar.href_to(self.client)," (%s)" % self.state.text)
+        return [ar.href_to(self.client)," (%s)" % self.state.text]
         
     def get_related_project(self,ar):
         return self.client

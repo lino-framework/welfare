@@ -24,7 +24,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from north.dbutils import babel_values, babelitem
+from north.dbutils import babelkw, babel_values, babelitem
 
 Person = resolve_model('contacts.Person')
 Company = resolve_model('contacts.Company')
@@ -37,22 +37,33 @@ ContractEnding = resolve_model('isip.ContractEnding')
 
 def objects():
   
-    noteType = Instantiator('notes.NoteType',"name",email_template='Default.eml.html').build
+    noteType = Instantiator('notes.NoteType',"name",email_template='Default.eml.html',is_attestation=False).build
     
-    yield noteType(u"Beschluss")
-    yield noteType(u"Konvention",remark=u"Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
-    #~ yield noteType(u"Externes Dokument",remark=u"Aufenthaltsgenehmigung, Arbeitsgenehmigung, Arbeitsvertrag,...")
-    yield noteType(u"Brief oder Einschreiben")
-    yield noteType(u"Notiz",remark=u"Kontaktversuch, Gesprächsbericht, Telefonnotiz")
-    yield noteType(u"Vorladung",remark=u"Einladung zu einem persönlichen Gespräch")
-    yield noteType(u"Übergabeblatt",remark=u"Übergabeblatt vom allgemeinen Sozialdienst") # (--> Datum Eintragung DSBE)
-    yield noteType(u"Neuantrag")
-    yield noteType(u"Antragsformular")
-    yield noteType((u"Auswertungsbogen allgemein"),build_method='rtf',template=u'Auswertungsbogen_allgemein.rtf')
-    yield noteType((u"Anwesenheitsbescheinigung"),build_method='rtf',template=u'Anwesenheitsbescheinigung.rtf')
-    yield noteType((u"Lebenslauf"),build_method='appyrtf',template=u'cv.odt')
-    yield noteType(u"Erstgespräch")
+    yield noteType("Beschluss")
+    yield noteType("Konvention",remark=u"Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
+    #~ yield noteType("Brief oder Einschreiben")
+    yield noteType("Notiz",remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
+    yield noteType("Vorladung",remark="Einladung zu einem persönlichen Gespräch")
+    yield noteType("Übergabeblatt",remark="Übergabeblatt vom allgemeinen Sozialdienst") # (--> Datum Eintragung DSBE)
+    yield noteType("Neuantrag")
+    yield noteType("Antragsformular")
+    yield noteType("Auswertungsbogen allgemein",build_method='rtf',template='Auswertungsbogen_allgemein.rtf')
+    yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
+    yield noteType("Lebenslauf",build_method='appyrtf',template='cv.odt')
+    yield noteType("Erstgespräch")
     
+    noteType = Instantiator('notes.NoteType',email_template='Default.eml.html').build
+    yield noteType(build_method='appypdf',template='aus.odt',**babelkw('name',
+        de="Bescheinigung Ausländerbeihilfe",
+        fr="Attestation allocation étrangers",
+        en="Certificate foreigner income"))
+        
+    yield noteType(build_method='appyrtf',template='brief.odt',**babelkw('name',
+        de="Brief oder Einschreiben",
+        fr="Lettre",
+        en="Letter"))
+        
+        
     eventType = Instantiator('notes.EventType',"name remark").build
     
     yield eventType(u"Aktennotiz",remark=u"Alle Notizen/Ereignisse, die keine andere Form haben")

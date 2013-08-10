@@ -270,13 +270,6 @@ class ContractBase(
     hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended signer1 signer2'
     
     
-    #~ def summary_row(self,ui,rr,**kw):
-    def summary_row(self,ar,**kw):
-        s = ar.href_to(self)
-        #~ s += " (" + ui.href_to(self.person) + ")"
-        #~ s += " (" + ui.href_to(self.person) + "/" + ui.href_to(self.provider) + ")"
-        return s
-        
             
     def __unicode__(self):
         #~ return u'%s # %s' % (self._meta.verbose_name,self.pk)

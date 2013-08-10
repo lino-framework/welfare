@@ -56,6 +56,9 @@ from lino.mixins import beid
 
 cal = dd.resolve_app('cal')
 pcsw = dd.resolve_app('pcsw')
+notes = dd.resolve_app('notes')
+
+dd.inject_field('notes.NoteType','is_attestation',models.BooleanField(_("attestation"),default=True))
 
 #~ class CoachingsByClient(dd.Table):
     #~ model = 'pcsw.Coaching'
@@ -113,7 +116,8 @@ class ClientDetail(dd.FormLayout):
     """,label = _("General"))
     
     box1 = """
-    checkin_for
+    create_visit_actions
+    create_note_actions
     find_appointment 
     workflow_buttons
     """
@@ -169,7 +173,7 @@ class Clients(dd.Table):
     read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
     
-    quick_event = CreateGuestEvent()
+    create_visit = CreateVisit()
     create_note = CreateNote()
     
     #~ @dd.virtualfield(dd.HtmlBox())
@@ -181,7 +185,8 @@ class Clients(dd.Table):
     @dd.displayfield()
     def client_info(cls,self,ar):
         elems = [self.get_salutation(nominative=True),E.br()]
-        elems += [self.first_name,' ',E.b(self.last_name),E.br()]
+        #~ elems += [self.first_name,' ',E.b(self.last_name),E.br()]
+        elems += [self.first_name,' ',ar.obj2html(self,self.last_name),E.br()]
         #~ lines = list(self.address_person_lines()) + list(self.address_location_lines())
         #~ lines = 
         #~ logger.info("20130805 %s", lines)
@@ -195,29 +200,38 @@ class Clients(dd.Table):
                 #~ elems.append(ln)
         return E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")
     
-    @dd.displayfield(_("Find appointment"))
-    def find_appointment(cls,self,ar):
+    @dd.displayfield(create_visit.label)
+    def create_visit_actions(cls,obj,ar):
         elems = []
-        for obj in self.coachings_by_client.all():
-            sar = cal.CalendarPanel.request(subst_user=obj.user,current_project=self.pk)
-            elems += [ar.href_to_request(sar,obj.user.username),' ']
-        return E.div(*elems)
-        
-    @dd.displayfield(_("Checkin"))
-    def checkin_for(cls,obj,ar):
-        """
-        """
-        elems = []
-        ba = cls.get_action_by_name('quick_event')
+        ba = cls.get_action_by_name('create_visit')
         for coaching in obj.coachings_by_client.all():
             u = coaching.user
             sar = ba.request(obj,action_param_values=dict(user=u))
             #~ logger.info("20130809 %s",sar.action_param_values)
-            #~ elems += [ar.action_button(ba,obj,unicode(u),param_values=dict(user=u)),' ']
             kw = dict()
-            kw.update(title=_("Create a quick event for this client with this coach."))
+            kw.update(title=_("Create a spot visit for this client with this coach."))
             elems += [ar.href_to_request(sar,u.username,**kw),' ']
-            #~ elems += [unicode(u),' ']
+        return E.div(*elems)
+
+    @dd.displayfield(_("Issue attestation"))
+    def create_note_actions(cls,obj,ar):
+        elems = []
+        #~ ba = cls.get_action_by_name('create_note')
+        sar = ar.spawn(notes.NotesByProject,master_instance=obj)
+        for nt in notes.NoteType.objects.filter(is_attestation=True):
+            btn = sar.insert_button(unicode(nt),dict(type=nt),
+                title=_("Create a %s for this client.") % nt,
+                icon_file=None)
+            if btn is not None:
+                #~ btn.attrib.update()
+                #~ btn.attrib.pop('icon_file',None)
+                #~ btn.attrib.pop('style',None)
+                elems += [btn,' ']
+            
+            #~ sar = notes.NotesByProject.insert_action.request(obj,known_values=dict(type=nt))
+            #~ kw = dict()
+            #~ kw.update(title=_("Create a %s for this client.") % nt)
+            #~ elems += [ar.href_to_request(sar,unicode(nt),**kw),' ']
         return E.div(*elems)
 
 

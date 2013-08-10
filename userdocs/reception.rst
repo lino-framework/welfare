@@ -7,8 +7,9 @@ The reception module of Lino-Welfare
 is for managing a reception desk and a waiting queue.
 Visitors are "checked in" as they present themselves at a 
 reception desk (Empfangsschalter),
-and "checked out" when they leave again.
-Social assistants then have a possibility to see how many and which 
+then they wait in a lounge until an agent "receives" them,
+and finally they are "checked out" when they leave again.
+Social agents have a possibility to see how many and which 
 clients are waiting for them.
 
 A **reception clerk** is the user at the reception desk who welcomes 
@@ -32,11 +33,19 @@ or
 
 Most visitors come at the open consultation hours.
 and don't have an appointment with some user.
+We call this a "visit".
 In that case the reception clerk 
-clicks "Create Appointment". 
-Lino suggests the Client's primary coach as user of the appointment.
-Theresia may select another social worker.
-She also may specify a reason, a short one-line text.
+clicks "Create Visit", confirms the selected agent and enters a
+"reason" (a short one-line text).
+This will automatically create both a 
+:ref:`welfare.cal.Event` in state ""
+and a :ref:`welfare.cal.Guest`
+with 
+
+A **visit** is an unplanned calendar event. 
+An **appointment** is a planned (scheduled) calendar event.
+
+
 
 In any case, when the clerk then clicks the Checkin button of 
 that appointment. 
