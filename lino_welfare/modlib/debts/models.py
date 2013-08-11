@@ -241,10 +241,10 @@ The total monthly amount available for debts distribution."""))
         else:
             return None
         
-    def get_print_language(self,pm):
+    def get_print_language(self):
         if self.partner:
             return self.partner.language
-        return super(Budget,self).get_print_language(pm)
+        return super(Budget,self).get_print_language()
 
     @property
     def actor1(self):

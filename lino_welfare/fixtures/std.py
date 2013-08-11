@@ -53,12 +53,15 @@ def objects():
     yield noteType("Erstgespräch")
     
     noteType = Instantiator('notes.NoteType',email_template='Default.eml.html').build
-    yield noteType(build_method='appypdf',template='aus.odt',**babelkw('name',
-        de="Bescheinigung Ausländerbeihilfe",
-        fr="Attestation allocation étrangers",
-        en="Certificate foreigner income"))
+    yield noteType(
+        build_method='appypdf',
+        body_template='aus.body.html',
+        template='Attestation.odt',**babelkw('name',
+            de="Bescheinigung Ausländerbeihilfe",
+            fr="Attestation allocation étrangers",
+            en="Foreigner income certificate"))
         
-    yield noteType(build_method='appyrtf',template='brief.odt',**babelkw('name',
+    yield noteType(build_method='appyrtf',template='Letter.odt',**babelkw('name',
         de="Brief oder Einschreiben",
         fr="Lettre",
         en="Letter"))

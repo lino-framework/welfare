@@ -103,7 +103,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest,SSIN):
         verbose_name=_("History"),default=True,
         help_text = "Whatever this means.")
         
-    def get_print_language(self,pm):
+    def get_print_language(self):
         if settings.SITE.get_language_info(self.language.value):
         #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
             return self.language.value

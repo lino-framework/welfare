@@ -1,24 +1,41 @@
-U. Zeichen / N. réf.: {{ar.get_user().initials}}/{{this.project.get_primary_coach().initials}}
-Ihr Zeichen / V. réf.:
+<p class="OurRef">
+{{tr(de="U. Zeichen",fr="Notre réf.")}}: {{ar.get_user().initials}}/{{this.project.get_primary_coach().initials}}/{{this.id}}
+</p>
 
-<h1>Bescheinigung</h1>
+<h1>{{_("Attestation")}}</h1>
+
+<p>{{tr(de="Hiermit bescheinigen wir, dass",fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{this.project.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{this.project.nationa_id}}
+<br>
+{{tr(de="wohnhaft zu",fr="domicilié"+this.project.mf("","e","(e)")+" à")}}
+{{', '.join(this.project.address_location_lines())}}
+</p>
+
+<p>
+{{tr(de="seit dem .... / .... / 20....",
+    fr="bénéficie depuis le .... / .... / 20....")}}
+</p>
+
+<p>
+{{tr(de="eine laut Gesetz vom 2. April 1965 eingeführte Sozialhilfe für Ausländer bezieht.",
+    fr="d’une aide sociale prévue par la loi du 2 avril 1965.")}}
+</p>
+
+<p>{{tr(de="Für das Öffentliche Sozialhilfezentrum,",fr="Pour le Centre Public d’Action Sociale,")}}</p>
+<p>{{tr(de="Der Sekretär,",fr="Le secrétaire,")}}</p>
+<p>{{tr(de="im Auftrag,",fr="par délégation,")}}</p>
+<p></p>
+<p></p>
+<p></p>
+<p>{{this.user}}</p>
 
 
-Hiermit bescheinigen wir, dass
-
-{{this.project}}
-[=trim1(PAR->Allo)+trim(PAR->Firme)]
-
-Nationalregisternummer [=padr(PAR->NB2,13)]
-
-wohnhaft zu [=trim1(ParStreet(),", ")+trim(ParCity())]
-
-seit dem .... / .... / 20....
-
-eine laut Gesetz vom 2. April 1965 eingeführte Sozialhilfe für Ausländer bezieht.
 
 
 
-Für das Öffentliche Sozialhilfezentrum,
-Der Sekretär,
-im Auftrag,
+

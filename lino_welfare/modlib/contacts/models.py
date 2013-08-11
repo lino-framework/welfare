@@ -141,7 +141,7 @@ class Person(Partner,Person,mixins.Born,dd.Printable,families.Child):
     def get_queryset(self):
         return self.model.objects.select_related('country','city')
         
-    def get_print_language(self,pm):
+    def get_print_language(self):
         "Used by DirectPrintAction"
         return self.language
         

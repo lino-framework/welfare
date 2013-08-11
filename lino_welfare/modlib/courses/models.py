@@ -236,7 +236,7 @@ class CourseOffer(dd.Model):
     #~ def setup_report(model,rpt):
         #~ rpt.add_action(DirectPrintAction('candidates',_("List of candidates"),'candidates'))
         
-    def get_print_language(self,pm):
+    def get_print_language(self):
         "Used by DirectPrintAction"
         return settings.SITE.DEFAULT_LANGUAGE.django_code
         
@@ -294,7 +294,7 @@ class Course(dd.Model,mixins.Printable):
         #~ rpt.add_action(DirectPrintAction('candidates',_("List of candidates"),'candidates'))
         #~ rpt.add_action(DirectPrintAction('participants',_("List of participants"),'participants'))
         
-    def get_print_language(self,pm):
+    def get_print_language(self):
         "Used by DirectPrintAction"
         return settings.SITE.DEFAULT_LANGUAGE.django_code
         
