@@ -309,7 +309,8 @@ def PAR_model(data):
             else:
                 return Client
         if data.get('NB1',False): # gesdos-Nr
-            return Client
+            if not data.get('NOTVA',False):
+                return Client
         attribs = data.get('ATTRIB',False)
         if attribs and 'N' in attribs: # newcomer
             return Client

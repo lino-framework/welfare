@@ -43,9 +43,14 @@ Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin komm
   unleer ist, oder wenn *Partnerattribut N (Neuzugang)* 
   gesetzt ist, dann wird es ein 
   :ref:`Klient <welfare.pcsw.Client>`.
-  Ausnahme: Wenn `PAR->NB2` (INSS) nur eine  Null ("0")  enthält, 
-  dann gilt es als leer.
-- **Ansonsten**, wenn PAR->NoTva unleer ist, wird es eine 
+  Wobei zu beachten ist, dass `PAR->NB2` (INSS) als leer gilt, wenn es
+  nur eine  Null ("0")  enthält.
+  Ausnahme: 
+  Wenn `PAR->NoTva` unleer ist und `PAR->NB2` (INSS) leer,
+  dann wird es *trotzdem kein* Klient 
+  (sondern eine Organisation, s.h. nächster Punkt).
+  
+- **Ansonsten**, wenn `PAR->NoTva` unleer ist, wird es eine 
   :ref:`Organisation <welfare.contacts.Company>`.
 - **Ansonsten**, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
   "Herr und Frau" enthält, dann wird es ein 

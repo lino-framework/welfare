@@ -1,0 +1,38 @@
+<p class="OurRef">
+{{tr(de="U. Zeichen",fr="Notre réf.")}}: {{ar.get_user().initials}}/{{this.project.get_primary_coach().initials}}/{{this.id}}
+</p>
+
+<h1>{{tr(de="Anwesenheitsbescheinigung",fr="Certificat de présence")}}</h1>
+
+<p>{{tr(de="Hiermit bescheinigen wir, dass",fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{this.project.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{this.project.national_id}}
+<br>
+{{tr(de="wohnhaft zu",fr="domicilié"+this.project.mf("","e","(e)")+" à")}}
+{{', '.join(this.project.address_location_lines())}}
+</p>
+
+<p>
+{{tr(de="am heutigen Tage in der Zeit von ....:.... Uhr bis ....:.... Uhr"
+    fr="s'est présenté aujourd'hui entre ....:.... h et ....:.... h")}}
+{{tr(de="im ÖSHZ zwecks Regelung administrativer Angelegenheiten vorstellig wurde.",
+    fr="au CPAS pour régler des affaires administratives.")}}
+</p>
+
+<p>{{tr(de="Für das Öffentliche Sozialhilfezentrum,",fr="Pour le Centre Public d’Action Sociale,")}}</p>
+<p>{{tr(de="Der Sekretär,",fr="Le secrétaire,")}}</p>
+<p>{{tr(de="im Auftrag,",fr="par délégation,")}}</p>
+<p></p>
+<p></p>
+<p></p>
+<p>{{this.user}}</p>
+
+
+
+
+
+

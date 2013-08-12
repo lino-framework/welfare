@@ -519,7 +519,30 @@ class WatchTimTests(TestCase):
         process_line(ln)
         self.assertDoesNotExist(Company,id=4124)
         obj = Household.objects.get(id=4124)
+        
+        
+        ln = """{"method":"PUT","alias":"PAR","id":"0000001315",
+        "time":"20130811 10:33:20","user":"PAC","data":{"IDPAR":"0000001315",
+        "FIRME":"C2D System House","NAME2":"",
+        "RUE":"Rue des Champs","CP":"4630","IDPRT":"V","PAYS":"B","TEL":"04/567.89.10",
+        "FAX":"04/365.31.10","COMPTE1":"JVBABE22:BE39645678910619",
+        "NOTVA":"BE-0123.456.789","COMPTE3":"","IDPGP":"",
+        "DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"F",
+        "IDBUD":"","PROF":"22","CODE1":"","CODE2":"","CODE3":"",
+        "DATCREA":{"__date__":{"year":1992,"month":7,"day":24}},"ALLO":"S.A.",
+        "NB1":"EUPO","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
+        "RUENUM":"   8","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":2012,"month":10,"day":25}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"info@c2d.be",
+        "MVIDATE":{"__date__":{"year":2012,"month":1,"day":25}},
+        "IDUSR":"","DOMI1":""}} """
 
+        self.assertDoesNotExist(Partner,id=1315)
+        process_line(ln)
+        obj = Partner.objects.get(id=1315)
+        obj = Company.objects.get(id=1315)
+        for m in Person, Client, Household:
+            self.assertDoesNotExist(m,id=1315)
 
 
 

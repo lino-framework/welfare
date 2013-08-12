@@ -48,18 +48,26 @@ def objects():
     yield noteType("Neuantrag")
     yield noteType("Antragsformular")
     yield noteType("Auswertungsbogen allgemein",build_method='rtf',template='Auswertungsbogen_allgemein.rtf')
-    yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
+    #~ yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
     yield noteType("Lebenslauf",build_method='appyrtf',template='cv.odt')
     yield noteType("Erstgespräch")
     
-    noteType = Instantiator('notes.NoteType',email_template='Default.eml.html').build
-    yield noteType(
+    noteType = Instantiator('notes.NoteType',
         build_method='appypdf',
+        is_attestation=True,
+        email_template='Default.eml.html').build
+    yield noteType(
         body_template='aus.body.html',
-        template='Attestation.odt',**babelkw('name',
+        template='Letter.odt',**babelkw('name',
             de="Bescheinigung Ausländerbeihilfe",
             fr="Attestation allocation étrangers",
             en="Foreigner income certificate"))
+    yield noteType(
+        body_template='anw.body.html',
+        template='Letter.odt',**babelkw('name',
+            de="Anwesenheitsbescheinigung",
+            fr="Attestation de présence",
+            en="Presence certificate"))
         
     yield noteType(build_method='appyrtf',template='Letter.odt',**babelkw('name',
         de="Brief oder Einschreiben",

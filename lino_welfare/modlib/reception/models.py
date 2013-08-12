@@ -58,7 +58,7 @@ cal = dd.resolve_app('cal')
 pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
 
-dd.inject_field('notes.NoteType','is_attestation',models.BooleanField(_("attestation"),default=True))
+dd.inject_field('notes.NoteType','is_attestation',models.BooleanField(_("attestation"),default=False))
 
 #~ class CoachingsByClient(dd.Table):
     #~ model = 'pcsw.Coaching'
@@ -103,7 +103,7 @@ class CreateNote(dd.RowAction):
     
 class ClientDetail(dd.FormLayout):
     
-    main = "general history"
+    main = "general history pcsw.ContactsByClient"
     
     history = dd.Panel("""
     pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
@@ -226,7 +226,7 @@ class Clients(dd.Table):
                 #~ btn.attrib.update()
                 #~ btn.attrib.pop('icon_file',None)
                 #~ btn.attrib.pop('style',None)
-                elems += [btn,' ']
+                elems += [btn,E.br()]
             
             #~ sar = notes.NotesByProject.insert_action.request(obj,known_values=dict(type=nt))
             #~ kw = dict()
