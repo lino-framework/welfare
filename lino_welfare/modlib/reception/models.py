@@ -89,16 +89,21 @@ class CreateNote(dd.RowAction):
     
     def run_from_ui(self,obj,ar,**kw):
         notes = dd.resolve_app('notes')
-        ekw = dict(project=obj,user=ar.get_user()) 
-        ekw.update(type=ar.action_param_values.note_type)
-        ekw.update(date=datetime.date.today())
-        if ar.action_param_values.subject:
-            ekw.update(subject=ar.action_param_values.subject)
-        note = notes.Note(**ekw)
-        note.save()
-        #~ kw.update(success=True)
-        #~ kw.update(refresh=True)
-        return ar.goto_instance(note,**kw)
+        def ok():
+            ekw = dict(project=obj,user=ar.get_user()) 
+            ekw.update(type=ar.action_param_values.note_type)
+            ekw.update(date=datetime.date.today())
+            if ar.action_param_values.subject:
+                ekw.update(subject=ar.action_param_values.subject)
+            note = notes.Note(**ekw)
+            note.save()
+            #~ kw.update(success=True)
+            #~ kw.update(refresh=True)
+            return ar.goto_instance(note,**kw)
+        if obj.has_valid_card_data():
+            return ok()
+        return ar.confirm(ok,_("Client has no valid eID data!",
+            _("Do you still want to issue an attestation?")))
 
     
 class ClientDetail(dd.FormLayout):
@@ -106,8 +111,7 @@ class ClientDetail(dd.FormLayout):
     main = "general history pcsw.ContactsByClient"
     
     history = dd.Panel("""
-    pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
-    # lino.ChangesByMaster
+    create_note_actions:30 pcsw.NotesByPerson:60
     """,label = _("History"))
     
     general = dd.Panel("""
@@ -117,8 +121,7 @@ class ClientDetail(dd.FormLayout):
     
     box1 = """
     create_visit_actions
-    create_note_actions
-    find_appointment 
+    find_appointment
     workflow_buttons
     """
     
@@ -174,7 +177,7 @@ class Clients(dd.Table):
     #~ find_by_beid = beid.FindByBeIdAction()
     
     create_visit = CreateVisit()
-    create_note = CreateNote()
+    #~ create_note = CreateNote()
     
     #~ @dd.virtualfield(dd.HtmlBox())
     #~ def eid_card(cls,self,ar):
@@ -213,26 +216,51 @@ class Clients(dd.Table):
             elems += [ar.href_to_request(sar,u.username,**kw),' ']
         return E.div(*elems)
 
-    @dd.displayfield(_("Issue attestation"))
+    @dd.virtualfield(dd.HtmlBox(_("Issue attestation")))
     def create_note_actions(cls,obj,ar):
         elems = []
-        #~ ba = cls.get_action_by_name('create_note')
+        if not obj.has_valid_card_data():
+            elems.append(E.b(_("Must read eID card!"),E.br()))
+            ba = cls.get_action_by_name('read_beid')
+            elems.append(E.br())
+            elems.append(ar.action_button(ba,obj))
+            elems.append(E.br())
         sar = ar.spawn(notes.NotesByProject,master_instance=obj)
         for nt in notes.NoteType.objects.filter(is_attestation=True):
             btn = sar.insert_button(unicode(nt),dict(type=nt),
                 title=_("Create a %s for this client.") % nt,
                 icon_file=None)
             if btn is not None:
-                #~ btn.attrib.update()
-                #~ btn.attrib.pop('icon_file',None)
-                #~ btn.attrib.pop('style',None)
                 elems += [btn,E.br()]
             
-            #~ sar = notes.NotesByProject.insert_action.request(obj,known_values=dict(type=nt))
-            #~ kw = dict()
-            #~ kw.update(title=_("Create a %s for this client.") % nt)
-            #~ elems += [ar.href_to_request(sar,unicode(nt),**kw),' ']
-        return E.div(*elems)
+        return E.div(*elems,style="background-color:red !important;height:auto !important")
+        #~ return E.div(*elems)
+        
+        
+        
+class WaitingGuests(WaitingGuests): 
+    """
+    Overrides the library `reception.WaitingGuests` to change one behaviour:    
+    when clicking in that table 
+    on the partner, Lino-Welfare should show the *Client's* and not 
+    the *Partner's*  detail.    
+    """
+    # labels are not automatically inherited. Must inherit manually
+    label = WaitingGuests.label 
+    
+    @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+    def partner(self,obj,ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+        
+    
+        
+#~ class ExpectedGuests(ExpectedGuests): 
+    #~ 
+    #~ @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+    #~ def partner(self,obj,ar):
+        #~ return obj.partner
+    
+        
 
 
 inherited_setup_main_menu = setup_main_menu
