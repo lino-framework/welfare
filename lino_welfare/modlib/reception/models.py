@@ -184,6 +184,13 @@ class Clients(dd.Table):
         #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
         #~ fld2html()
         
+    @classmethod
+    def get_row_class(cls,obj,ar):
+        if obj.client_state == pcsw.ClientStates.newcomer:
+            return 'green'
+        #~ if not obj.has_valid_card_data():
+            #~ return 'red'
+        
     #~ @dd.virtualfield(dd.HtmlBox())
     @dd.displayfield()
     def client_info(cls,self,ar):
