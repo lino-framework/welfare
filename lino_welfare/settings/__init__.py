@@ -86,7 +86,7 @@ class Site(Site,cbss.SiteMixin):
             name='anonymous', readonly=True,authenticated=False)
         add('100', _("Integration Agent"),          'U U U U _ _ _')
         add('110', _("Integration Agent (Manager)"),'U M M U _ _ _')
-        add('200', _("Newcomers consultant"),       'U U _ U U _ U')
+        add('200', _("Newcomers consultant"),       'U U _ U U _ _')
         add('210', _("Reception clerk"),            'U _ _ _ _ _ U')
         add('300', _("Debts consultant"),           'U U _ _ _ U _')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)
@@ -254,6 +254,13 @@ class Site(Site,cbss.SiteMixin):
             #~ )
         #~ return urlpatterns
         
+    def get_admin_main_items(self,ar):
+        yield self.modules.integ.UsersWithClients
+        yield self.modules.cal.MyEvents
+        yield self.modules.cal.MyTasks
+        yield self.modules.reception.WaitingGuests
+        yield self.modules.reception.MyWaitingGuests
+        yield self.modules.reception.ReceivedGuests
 
 #~ SITE = Site(globals())
 

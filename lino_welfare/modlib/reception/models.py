@@ -251,17 +251,49 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         return E.div(*elems,style="background-color:red !important;height:auto !important")
         #~ return E.div(*elems)
         
-        
-        
-class WaitingGuests(WaitingGuests): 
+
+if False: # doesn't work
+    
+    def partner2client(self,obj,ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+    WaitingGuests.virtual_fields['partner'].override_getter(partner2client)
+
+if False: # doesn't work
+    WaitingGuests.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
+    MyWaitingGuests.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
+
+if True: # works, but is very hackerish
+    
+    def func(obj,ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+    dd.inject_field('cal.Guest','client',dd.VirtualField(dd.ForeignKey('pcsw.Client'),func))
+    for T in WaitingGuests, MyWaitingGuests:
+        T.column_names = T.column_names.replace('partner','client')
+    
+    class WaitingGuests(WaitingGuests): 
+        label = WaitingGuests.label 
+    
+if False: # works, but is very stupid
+    
+  class WaitingGuests(WaitingGuests): 
     """
-    Overrides the library `reception.WaitingGuests` to change one behaviour:    
-    when clicking in that table 
+    Overrides library :mod:`WaitingGuests <lino.modlib.reception.WaitingGuests>` 
+    table to change one behaviour:  when clicking in that table 
     on the partner, Lino-Welfare should show the *Client's* and not 
     the *Partner's*  detail.    
     """
     # labels are not automatically inherited. Must inherit manually
     label = WaitingGuests.label 
+    
+    @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+    def partner(self,obj,ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+
+
+  #~ The same for MyWaitingGuests. See :blogref:`20130817`
+  class MyWaitingGuests(MyWaitingGuests): 
+    # labels are not automatically inherited. Must inherit manually
+    label = MyWaitingGuests.label 
     
     @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
     def partner(self,obj,ar):

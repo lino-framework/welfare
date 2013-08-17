@@ -74,7 +74,7 @@ class Event(Event):
         assert ar is not None
         #~ print 20130802, ar.renderer
         #~ raise foo
-        txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
+        txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time or datetime.datetime.now().time()))
         #~ return txt
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self,txt)
