@@ -163,15 +163,20 @@ def fld2html(fld,value) :
         return ("%s: " % f.verbose_name,E.b(value))
     return []
     
-#~ class Clients(pcsw.Clients): # we don't want filter defaults nor create_event action
-class Clients(dd.Table):
-    model = 'pcsw.Client'
+#~ class Clients(dd.Table):
+class Clients(pcsw.Clients): # see blog 2013/0817
+    #~ model = 'pcsw.Client'
     column_names = "name_column address_column national_id workflow_buttons" 
     auto_fit_column_widths = True
     use_as_default_table = False
     required = dd.Required(user_groups='reception')
     detail_layout = ClientDetail()
+    #~ insert_layout = pcsw.Clients.insert_layout.main # manually inherited
     #~ editable = False
+    #~ parameters = None # don't inherit filter parameters
+    #~ params_layout = None # don't inherit filter parameters
+    #~ params_panel_hidden = True
+    create_event = None # don't inherit this action
 
     read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
@@ -184,12 +189,15 @@ class Clients(dd.Table):
         #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
         #~ fld2html()
         
-    @classmethod
-    def get_row_class(cls,obj,ar):
-        if obj.client_state == pcsw.ClientStates.newcomer:
-            return 'green'
-        #~ if not obj.has_valid_card_data():
-            #~ return 'red'
+    #~ @classmethod
+    #~ def get_title_tags(self,ar):
+        #~ return []
+        #~ 
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ return super(pcsw.Clients,self).get_request_queryset(ar) # skip one parent
+        #~ return dd.Table.get_request_queryset(ar)
+        
         
     #~ @dd.virtualfield(dd.HtmlBox())
     @dd.displayfield()

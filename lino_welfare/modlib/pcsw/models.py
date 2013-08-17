@@ -1196,12 +1196,16 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             
     @classmethod
     def apply_cell_format(self,ar,row,col,recno,td):
-        """
-        Enhance today by making background color a bit darker.
-        """
         if row.client_state == ClientStates.newcomer:
             td.attrib.update(bgcolor="green")
     
+    @classmethod
+    def get_row_class(cls,obj,ar):
+        if obj.client_state == ClientStates.newcomer:
+            return 'green'
+        #~ if not obj.has_valid_card_data():
+            #~ return 'red'
+        
     
 class DebtsClients(Clients):
     #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
