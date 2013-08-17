@@ -224,7 +224,9 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino_welfare.modlib.households'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
-        yield 'lino.modlib.families'
+        
+        if False: # not yet ready
+            yield 'lino.modlib.families'
         
         yield 'lino_welfare'
         yield 'lino_welfare.modlib.statbel'

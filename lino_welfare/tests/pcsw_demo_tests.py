@@ -65,7 +65,7 @@ Event = dd.resolve_model('cal.Event')
 
 DEMO_OVERVIEW = """\
 29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
-101 models:
+100 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
@@ -89,7 +89,7 @@ DEMO_OVERVIEW = """\
  contacts.Company                        30        38
  contacts.CompanyType                    9         16
  contacts.Partner                        25        116
- contacts.Person                         31        75
+ contacts.Person                         33        75
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
@@ -137,7 +137,7 @@ DEMO_OVERVIEW = """\
  newcomers.Faculty                       6         5
  notes.EventType                         10        9
  notes.Note                              15        110
- notes.NoteType                          11        15
+ notes.NoteType                          13        16
  outbox.Attachment                       4         0
  outbox.Mail                             9         0
  outbox.Recipient                        6         0
