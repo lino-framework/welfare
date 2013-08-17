@@ -203,6 +203,7 @@ class Site(Site,cbss.SiteMixin):
             
         yield 'lino_welfare.modlib.system'
         yield 'django.contrib.contenttypes'
+        yield 'django.contrib.humanize' # translations for 
         yield 'lino.modlib.users'
         yield 'lino.modlib.changes'
         #~ yield 'lino.modlib.codechanges'

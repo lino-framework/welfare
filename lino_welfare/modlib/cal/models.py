@@ -19,6 +19,8 @@ Defines models for :mod:`lino_welfare.modlib.cal`.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.humanize.templatetags.humanize import naturaltime
+
 
 from lino import dd
 
@@ -67,6 +69,15 @@ class Event(Event):
                     partner=self.project,
                     role=settings.SITE.site_config.client_guestrole)
     
+    @dd.displayfield(_("When"))
+    def when_text(self,ar):
+        assert ar is not None
+        #~ print 20130802, ar.renderer
+        #~ raise foo
+        txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
+        #~ return txt
+        #~ logger.info("20130802a when_text %r",txt)
+        return ar.obj2html(self,txt)
 
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender,**kw):
