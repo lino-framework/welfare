@@ -59,6 +59,11 @@ pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
 
 dd.inject_field('notes.NoteType','is_attestation',models.BooleanField(_("attestation"),default=False))
+dd.inject_field('system.SiteConfig','attestation_note_nature',
+    dd.ForeignKey('notes.EventType',
+        verbose_name=_("Event type of attestations"),
+        null=True,blank=True,
+        related_name="attestation_siteconfig_set"))
 
 #~ class CoachingsByClient(dd.Table):
     #~ model = 'pcsw.Coaching'
@@ -111,7 +116,8 @@ class ClientDetail(dd.FormLayout):
     main = "general history pcsw.ContactsByClient"
     
     history = dd.Panel("""
-    create_note_actions:30 pcsw.NotesByPerson:60
+    # create_note_actions:30 pcsw.NotesByPerson:60
+    CreateNoteActionsByClient:30 pcsw.NotesByPerson:60
     """,label = _("History"))
     
     general = dd.Panel("""
@@ -248,10 +254,37 @@ class Clients(pcsw.Clients): # see blog 2013/0817
             if btn is not None:
                 elems += [btn,E.br()]
             
-        return E.div(*elems,style="background-color:red !important;height:auto !important")
-        #~ return E.div(*elems)
-        
+        #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
+        return E.div(*elems)
 
+class CreateNoteActionsByClient(dd.VirtualTable):
+    master = 'pcsw.Client'
+    column_names = 'button'
+    auto_fit_column_widths = True
+    
+    @classmethod
+    def get_data_rows(self,ar=None):
+        if ar.master_instance is None: return
+        sar = ar.spawn(notes.NotesByProject,master_instance=ar.master_instance)
+        for nt in notes.NoteType.objects.filter(is_attestation=True):
+            nt._button = sar.insert_button(unicode(nt),
+                dict(type=nt,event_type=settings.SITE.site_config.attestation_note_nature),
+                title=_("Create a %s for this client.") % nt,
+                icon_file=None)
+            if nt._button is not None:
+                yield nt
+
+    #~ @dd.displayfield(_("Description"))
+    #~ def description(self,obj,ar):
+        #~ return unicode(obj)
+        
+    @dd.displayfield(_("Button"))
+    def button(self,obj,ar):
+        return obj._button
+        
+        
+        
+        
 if False: # doesn't work
     
     def partner2client(self,obj,ar):

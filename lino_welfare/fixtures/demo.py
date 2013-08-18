@@ -35,8 +35,7 @@ from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
-from north.dbutils import babel_values
-from north.dbutils import babel_values as babelkw
+from north.dbutils import babelkw
 from north.dbutils import field2kw
 from lino.utils.restify import restify
 from lino.utils import dblogger
@@ -181,7 +180,7 @@ def unused_coachings(p,type,coach1,coach2,coached_from,coached_until=None):
 def objects():
     
     guest_role = Instantiator('cal.GuestRole').build
-    obj = guest_role(email_template="Visitor.eml.html",**babel_values('name',
+    obj = guest_role(email_template="Visitor.eml.html",**babelkw('name',
           de="Besucher",
           fr="Visiteur",
           en="Visitor",
@@ -190,7 +189,7 @@ def objects():
     yield obj
     settings.SITE.site_config.update(client_guestrole=obj)
     
-    obj = guest_role(**babel_values('name',
+    obj = guest_role(**babelkw('name',
           de="Kollege",
           fr="Collègue",
           en="Colleague",
@@ -199,13 +198,13 @@ def objects():
     yield obj
     settings.SITE.site_config.update(team_guestrole=obj)
     
-    yield guest_role(**babel_values('name',
+    yield guest_role(**babelkw('name',
           de=u"Vorsitzender",
           fr=u"Président",
           en=u"Presider",
           et=u"Eesistuja",
           ))
-    yield guest_role(**babel_values('name',
+    yield guest_role(**babelkw('name',
           de=u"Protokollführer",
           fr=u"Greffier",
           en=u"Reporter",
@@ -213,9 +212,19 @@ def objects():
           ))
     
     
+    note_nature = Instantiator('notes.EventType').build
+    obj = note_nature(**babelkw('name',
+          de="Bescheinigung",
+          fr="Attestation",
+          en="Attestation",
+          et="Tõend",
+          ))
+    yield obj
+    settings.SITE.site_config.update(attestation_note_nature=obj)
+    
     calendar = Instantiator('cal.Calendar').build
     
-    obj = calendar(color=20,invite_client=True,**babel_values('name',
+    obj = calendar(color=20,invite_client=True,**babelkw('name',
           de="Klientengespräche intern",
           fr="Rencontres internes avec client",
           en="Internal meetings with client",
@@ -224,29 +233,29 @@ def objects():
     settings.SITE.site_config.update(client_calender=obj)
     
     exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
-    yield exam_policy(1,calendar=obj,start_time="9:00",**babel_values('name',en='every month',de=u'monatlich',fr=u"mensuel"))
-    yield exam_policy(2,calendar=obj,start_time="9:00",**babel_values('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
-    yield exam_policy(3,calendar=obj,start_time="9:00",**babel_values('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
+    yield exam_policy(1,calendar=obj,start_time="9:00",**babelkw('name',en='every month',de=u'monatlich',fr=u"mensuel"))
+    yield exam_policy(2,calendar=obj,start_time="9:00",**babelkw('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
+    yield exam_policy(3,calendar=obj,start_time="9:00",**babelkw('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
     exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
-    yield exam_policy(2,calendar=obj,start_time="9:00",**babel_values('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
+    yield exam_policy(2,calendar=obj,start_time="9:00",**babelkw('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
     exam_policy = Instantiator('isip.ExamPolicy').build
-    yield exam_policy(**babel_values('name',en='other',de="andere",fr="autre"))
+    yield exam_policy(**babelkw('name',en='other',de="andere",fr="autre"))
         
     
         
-    yield calendar(color=1,invite_client=True,**babel_values('name',
+    yield calendar(color=1,invite_client=True,**babelkw('name',
           de=u"Klientengespräche extern",
           fr=u"Rencontres client externes",
           en=u"External meetings with client",
           ))
     
-    yield calendar(color=4,**babel_values('name',
+    yield calendar(color=4,**babelkw('name',
           de=u"Versammlung intern",
           fr=u"Réunions internes",
           en=u"Internal meetings",
           ))
     
-    yield calendar(color=8,**babel_values('name',
+    yield calendar(color=8,**babelkw('name',
           de=u"Versammlung extern",
           fr=u"Réunions externes",
           en=u"External meetings",
@@ -255,13 +264,13 @@ def objects():
     yield calendar(color=12,
         #~ invite_team_members=True,email_template='Team.eml.html',
         email_template='Team.eml.html',
-        **babel_values('name',
+        **babelkw('name',
           de=u"Team-Besprechungen",
           fr=u"Coordinations en équipe",
           en=u"Team Meetings",
           ))
           
-    yield calendar(color=25,**babel_values('name',
+    yield calendar(color=25,**babelkw('name',
           de="Privat",
           fr="Privé",
           en="Private",
@@ -269,12 +278,12 @@ def objects():
     
     
           
-    #~ yield etype(**babel_values('name',
+    #~ yield etype(**babelkw('name',
           #~ de=u"Erstgespräch",
           #~ fr=u"Première rencontre",
           #~ en=u"First meeting",
           #~ ))
-    #~ yield etype(**babel_values('name',
+    #~ yield etype(**babelkw('name',
           #~ de=u"Auswertungsgespräch",
           #~ fr=u"Évaluation",
           #~ en=u"Evaluation",
@@ -287,26 +296,26 @@ def objects():
             a = ln.split('|')
             if len(a) == 3:
                 kw = dict(en=a[0],fr=a[1],de=a[2])
-                yield sector(**babel_values('name',**kw))
+                yield sector(**babelkw('name',**kw))
                 
     horeca = jobs.Sector.objects.get(pk=5)
     function = Instantiator(jobs.Function,sector=horeca).build
-    yield function(**babel_values('name',
+    yield function(**babelkw('name',
           de=u"Kellner",
           fr=u'Serveur',
           en=u'Waiter',
           ))
-    yield function(**babel_values('name',
+    yield function(**babelkw('name',
           de=u"Koch",
           fr=u'Cuisinier',
           en=u'Cook',
           ))
-    yield function(**babel_values('name',
+    yield function(**babelkw('name',
           de=u"Küchenassistent",
           fr=u'Aide Cuisinier',
           en=u'Cook assistant',
           ))
-    yield function(**babel_values('name',
+    yield function(**babelkw('name',
           de=u"Tellerwäscher",
           fr=u'Plongeur',
           en=u'Dishwasher',
@@ -317,37 +326,37 @@ def objects():
         build_method='appypdf',
         template=u'art60-7.odt').build
     #~ yield contractType('art60-7a',
-      #~ **babel_values('name',
+      #~ **babelkw('name',
           #~ de=u"Konvention Art.60§7 Sozialökonomie",
           #~ fr=u'Convention art.60§7 économie sociale',
           #~ en=u'Convention art.60§7 social economy',
           #~ ))
     yield contractType('art60-7a',
-      **babel_values('name',
+      **babelkw('name',
           de=u"Sozialökonomie",
           fr=u'économie sociale',
           en=u'social economy',
           ))
     yield contractType('art60-7b',
-      **babel_values('name',
+      **babelkw('name',
           de=u"Sozialökonomie - majoré",
           fr=u'économie sociale - majoré',
           en=u'social economy - increased',
           ))
     yield contractType('art60-7c',
-      **babel_values('name',
+      **babelkw('name',
           de=u"mit Rückerstattung",
           fr=u'avec remboursement',
           en=u'social economy with refund',
           ))
     yield contractType('art60-7d',
-      **babel_values('name',
+      **babelkw('name',
           de=u"mit Rückerstattung Schule",
           fr=u'avec remboursement école',
           en=u'social economy school',
           ))
     yield contractType('art60-7e',
-      **babel_values('name',
+      **babelkw('name',
           de=u"Stadt Eupen",
           fr=u"ville d'Eupen",
           en=u'town',
@@ -356,27 +365,27 @@ def objects():
     contractType = Instantiator(isip.ContractType,"ref",
       exam_policy=1,
       build_method='appypdf',template=u'vse.odt').build
-    yield contractType("vsea",needs_study_type=True,**babel_values('name',
+    yield contractType("vsea",needs_study_type=True,**babelkw('name',
           de=u"VSE Ausbildung",
           fr=u"VSE Ausbildung",
           en=u"VSE Ausbildung",
           ))
-    yield contractType("vseb",**babel_values('name',
+    yield contractType("vseb",**babelkw('name',
           de=u"VSE Arbeitssuche",
           fr=u"VSE Arbeitssuche",
           en=u"VSE Arbeitssuche",
           ))
-    yield contractType("vsec",**babel_values('name',
+    yield contractType("vsec",**babelkw('name',
           de=u"VSE Lehre",
           fr=u"VSE Lehre",
           en=u"VSE Lehre",
           ))
-    yield contractType("vsed",needs_study_type=True,**babel_values('name',
+    yield contractType("vsed",needs_study_type=True,**babelkw('name',
           de=u"VSE Vollzeitstudium",
           fr=u"VSE Vollzeitstudium",
           en=u"VSE Vollzeitstudium",
           ))
-    yield contractType("vsee",**babel_values('name',
+    yield contractType("vsee",**babelkw('name',
           de=u"VSE Sprachkurs",
           fr=u"VSE Sprachkurs",
           en=u"VSE Sprachkurs",
@@ -490,7 +499,7 @@ def objects():
     yield company(name=u"Baguette Stéphanie",street=u'Gospertstraße',street_no=24,**kw)
     
     
-    cct = ClientContactType(**babel_values('name',
+    cct = ClientContactType(**babelkw('name',
           de="Gerichtsvollzieher",
           fr="Huissier de justice",
           en="Bailiff"
@@ -665,7 +674,7 @@ def objects():
     #~ yield users.Membership(user=caroline,group=ug_asd)
     
     # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babel_values('name',
+    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babelkw('name',
         de="ASD (Allgemeiner Sozialdienst)",
         nl="ASD (Algemene Sociale Dienst)",
         fr="SSG (Service social général)",
@@ -676,7 +685,7 @@ def objects():
     caroline.coaching_type_id = isip.COACHINGTYPE_ASD
     caroline.save()
     
-    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babel_values('name',
+    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babelkw('name',
         de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
         fr="Service intégration",
         en="Integration service",
@@ -685,7 +694,7 @@ def objects():
     #~ DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
     #~ yield pcsw.CoachingType(name="Schuldnerberatung")
-    yield pcsw.CoachingType(**babel_values('name',
+    yield pcsw.CoachingType(**babelkw('name',
         de="Schuldnerberatung",
         fr="Médiation de dettes",
         en="Debts mediation",
