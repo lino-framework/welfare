@@ -222,7 +222,23 @@ class Clients(pcsw.Clients): # see blog 2013/0817
                 #~ if len(elems): 
                     #~ elems.append(E.br())
                 #~ elems.append(ln)
-        return E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")
+                
+        elems = [E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")]
+                
+        if not self.has_valid_card_data():
+            #~ elems.append(E.br())
+            #~ elems.append(self.read_beid.as_button(ar.request))
+            #~ elems.append(E.br())
+            
+            #~ elems.append(E.b(,E.br()))
+            #~ read_beid
+            ba = cls.get_action_by_name('read_beid')
+            elems.append(E.br())
+            elems.append(ar.action_button(ba,self,_("Must read eID card!")))
+            elems.append(E.br())
+            elems = [E.div(*elems)]
+                
+        return elems
     
     @dd.displayfield(create_visit.label)
     def create_visit_actions(cls,obj,ar):

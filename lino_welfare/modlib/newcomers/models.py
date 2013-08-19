@@ -56,11 +56,11 @@ from lino.modlib.cal.utils import amonthago
 
 users = dd.resolve_app('users')
 contacts = dd.resolve_app('contacts')
-pcsw = dd.resolve_app('pcsw')
+pcsw = dd.resolve_app('pcsw',strict=True)
 outbox = dd.resolve_app('outbox')
 
-if not hasattr(pcsw,'Clients'):
-    print os.environ['DJANGO_SETTINGS_MODULE']
+#~ if not hasattr(pcsw,'Clients'):
+    #~ print os.environ['DJANGO_SETTINGS_MODULE']
 
 MODULE_LABEL = _("Newcomers")
 
@@ -258,10 +258,10 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
       also_refused = models.BooleanField(_("Also refused clients"),
           default=False),
       also_obsolete = models.BooleanField(
-          _("Also deprecated clients"),
+          _("Also obsolete records"),
           default=False),
       #~ new_since = models.DateField(_("New clients since"),blank=True),
-      new_since = models.DateField(_("Also newly coached clients since"),
+      new_since = models.DateField(_("New clients since"),
           #~ default=amonthago,
           blank=True,null=True,help_text=u"""\
 Auch Klienten, die erst seit Kurzem begleitet sind."""),
@@ -270,8 +270,14 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
           verbose_name=_("Coached by")),
       #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
       )
-    params_layout = 'also_refused also_obsolete new_since coached_by'
+    params_layout = 'new_since also_refused also_obsolete coached_by'
     
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(NewClients,self).param_defaults(ar,**kw)
+        kw.update(new_since=amonthago())
+        return kw
+            
     @classmethod
     def get_request_queryset(self,ar):
         # Note that we skip pcsw.Clients mro parent

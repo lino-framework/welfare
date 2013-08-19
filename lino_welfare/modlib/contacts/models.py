@@ -122,7 +122,7 @@ class PartnerDetail(PartnerDetail):
 
 from lino.modlib.families import models as families
 
-class Person(Partner,Person,mixins.Born,dd.Printable,families.Child):
+class Person(Partner,Person,mixins.Born,families.Child):
     """
     Represents a physical person.
     

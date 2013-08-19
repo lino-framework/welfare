@@ -23,6 +23,19 @@ Bugs fixed:
   eine Stellenart auswählte, kam Fehlermeldung 
   "'JobType' object is not iterable"
 
+Sonstige:
+
+- Neuanträge werden jetzt immer grün angezeigt, 
+  Ehemalige und Abgelehnte immer gelb.
+  Klienten, die als veraltet markiert sind, werden jetzt generell 
+  mit einem Sternchen hinter der Partnernummer angezeigt.
+  
+- :menuselection:`Neuanträge --> Klienten`: 
+   "Neue Klienten seit" war par défaut leer statt "vor einem Monat".
+   Reihenfolge und Bezeichnungen der Felder für Filterparameter optimiert. 
+    
+  
+
 Version 1.1.8 (released :blogref:`20130723`)
 ============================================
 

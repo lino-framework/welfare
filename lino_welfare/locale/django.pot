@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.9\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-18 02:46+0300\n"
+"POT-Creation-Date: 2013-08-19 04:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,15 +68,15 @@ msgid "Former"
 msgstr ""
 
 #: lino_welfare/config/notes/Note/aus.body.html:5
-#: lino_welfare/modlib/reception/models.py:77
+#: lino_welfare/modlib/reception/models.py:82
 msgid "Attestation"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:863
+#: lino_welfare/fixtures/demo.py:872
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:864
+#: lino_welfare/fixtures/demo.py:873
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:283
 #: lino_welfare/modlib/debts/models.py:457
 #: lino_welfare/modlib/isip/models.py:684
-#: lino_welfare/modlib/reception/models.py:120
+#: lino_welfare/modlib/reception/models.py:126
 msgid "General"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgid "Tx25 Requests"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/tx25.py:103 lino_welfare/modlib/pcsw/models.py:909
-#: lino_welfare/modlib/reception/models.py:115
+#: lino_welfare/modlib/reception/models.py:121
 msgid "History"
 msgstr ""
 
@@ -1509,7 +1509,7 @@ msgid "Users with their Clients"
 msgstr ""
 
 #: lino_welfare/modlib/integ/models.py:184
-#: lino_welfare/modlib/newcomers/models.py:432
+#: lino_welfare/modlib/newcomers/models.py:438
 msgid "Primary clients"
 msgstr ""
 
@@ -2114,7 +2114,7 @@ msgid "Competences"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:239
-#: lino_welfare/modlib/newcomers/models.py:441
+#: lino_welfare/modlib/newcomers/models.py:447
 msgid "New Clients"
 msgstr ""
 
@@ -2123,11 +2123,12 @@ msgid "Also refused clients"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:261
-msgid "Also deprecated clients"
+msgid "Also obsolete records"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:264
-msgid "Also newly coached clients since"
+#: lino_welfare/modlib/newcomers/models.py:346
+msgid "New clients since"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:270
@@ -2136,60 +2137,56 @@ msgstr ""
 msgid "Coached by"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:334
-#: lino_welfare/modlib/newcomers/models.py:555
+#: lino_welfare/modlib/newcomers/models.py:340
+#: lino_welfare/modlib/newcomers/models.py:561
 msgid "Available Coaches"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:338
+#: lino_welfare/modlib/newcomers/models.py:344
 msgid "Show suggested agents for"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:340
-msgid "New clients since"
-msgstr ""
-
-#: lino_welfare/modlib/newcomers/models.py:342
+#: lino_welfare/modlib/newcomers/models.py:348
 msgid "New clients are those whose coaching started after this date"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:362
+#: lino_welfare/modlib/newcomers/models.py:368
 msgid "Only for newcomers"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:368
+#: lino_welfare/modlib/newcomers/models.py:374
 msgid "Only for newcomers with given `faculty`."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:419
+#: lino_welfare/modlib/newcomers/models.py:425
 #, python-format
 msgid "No coaches available for %s."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:445
+#: lino_welfare/modlib/newcomers/models.py:451
 msgid "Current workload"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:454
-#: lino_welfare/modlib/newcomers/models.py:463
+#: lino_welfare/modlib/newcomers/models.py:460
+#: lino_welfare/modlib/newcomers/models.py:469
 msgid "Added workload"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:483
+#: lino_welfare/modlib/newcomers/models.py:489
 msgid "Assign"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:495
+#: lino_welfare/modlib/newcomers/models.py:501
 #, python-format
 msgid "%(client)s assigned to %(coach)s "
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:503
+#: lino_welfare/modlib/newcomers/models.py:509
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:640
+#: lino_welfare/modlib/newcomers/models.py:646
 msgid "Newcomers Quota"
 msgstr ""
 
@@ -2494,17 +2491,17 @@ msgid "Find appointment"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:824
-#: lino_welfare/modlib/reception/models.py:137
+#: lino_welfare/modlib/reception/models.py:143
 msgid "Contact"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:829
-#: lino_welfare/modlib/reception/models.py:142
+#: lino_welfare/modlib/reception/models.py:148
 msgid "Birth"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:833
-#: lino_welfare/modlib/reception/models.py:146
+#: lino_welfare/modlib/reception/models.py:152
 msgid "eID card"
 msgstr ""
 
@@ -2537,27 +2534,27 @@ msgid "Contracts"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:959
-#: lino_welfare/modlib/reception/models.py:155
+#: lino_welfare/modlib/reception/models.py:161
 msgid "number"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:960
-#: lino_welfare/modlib/reception/models.py:156
+#: lino_welfare/modlib/reception/models.py:162
 msgid "valid from"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:961
-#: lino_welfare/modlib/reception/models.py:157
+#: lino_welfare/modlib/reception/models.py:163
 msgid "valid until"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:962
-#: lino_welfare/modlib/reception/models.py:158
+#: lino_welfare/modlib/reception/models.py:164
 msgid "issued by"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:963
-#: lino_welfare/modlib/reception/models.py:159
+#: lino_welfare/modlib/reception/models.py:165
 msgid "eID card type"
 msgstr ""
 
@@ -2856,29 +2853,38 @@ msgstr ""
 msgid "attestation"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:83
+#: lino_welfare/modlib/reception/models.py:64
+msgid "Event type of attestations"
+msgstr ""
+
+#: lino_welfare/modlib/reception/models.py:88
 msgid "Subject"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:106
+#: lino_welfare/modlib/reception/models.py:111
 msgid "Client has no valid eID data!"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:230
+#: lino_welfare/modlib/reception/models.py:236
 msgid "Create a spot visit for this client with this coach."
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:234
+#: lino_welfare/modlib/reception/models.py:240
 msgid "Issue attestation"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:238
+#: lino_welfare/modlib/reception/models.py:244
 msgid "Must read eID card!"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:246
+#: lino_welfare/modlib/reception/models.py:252
+#: lino_welfare/modlib/reception/models.py:272
 #, python-format
 msgid "Create a %s for this client."
+msgstr ""
+
+#: lino_welfare/modlib/reception/models.py:281
+msgid "Button"
 msgstr ""
 
 #: lino_welfare/modlib/statbel/models.py:31

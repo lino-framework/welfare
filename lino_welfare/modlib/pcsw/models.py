@@ -145,7 +145,8 @@ class ClientEvents(dd.ChoiceList):
     verbose_name = _("Observed event")
     verbose_name_plural = _("Observed events")
 add = ClientEvents.add_item
-add('10', _("Coached"),'coached')
+#~ add('10', _("Coached"),'coached')
+add('10', _("Active"),'active')
 add('20', _("ISIP"),'isip')
 add('21', _("Art.60§7 contract"),'jobs')
 add('22', _("Dispense"),'dispense')
@@ -314,7 +315,7 @@ class Getter(object):
 
 
 
-class Client(contacts.Person,beid.BeIdCardHolder):
+class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
     """
     A :class:`Client` is a specialized :class:`Person`.
     
@@ -480,7 +481,9 @@ class Client(contacts.Person,beid.BeIdCardHolder):
         
     def __unicode__(self):
         #~ return u"%s (%s)" % (self.get_full_name(salutation=False),self.pk)
-        return u"%s %s (%s)" % (self.last_name.upper(),self.first_name,self.pk)
+        if self.is_obsolete:
+            return "%s %s (%s*)" % (self.last_name.upper(),self.first_name,self.pk)
+        return "%s %s (%s)" % (self.last_name.upper(),self.first_name,self.pk)
         
     def update_owned_instance(self,owned):
         owned.project = self
@@ -1017,6 +1020,9 @@ def daterange_text(a,b):
         return dd.dtos(a)
     return dd.dtos(a)+"-"+dd.dtos(b)
     
+    
+COACHED_STATES = [ClientStates.coached,ClientStates.newcomer]    
+    
 class Clients(contacts.Persons):
     #~ debug_permissions = True # '20120925'
     #~ title = _("All Clients")
@@ -1061,7 +1067,7 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         #~ end_date = models.DateField(_("until"),
             #~ blank=True,null=True,
             #~ help_text="""Date fin de la période observée"""),
-        observed_event = ClientEvents.field(blank=True,default=ClientEvents.coached),
+        observed_event = ClientEvents.field(blank=True,default=ClientEvents.active),
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
@@ -1099,8 +1105,14 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 period,
                 False)
             
-        if period is not None and ce is not None:
-            if ce == ClientEvents.coached:
+        if period is None:
+            if ce == ClientEvents.active:
+                if ar.param_values.client_state is None:
+                    qs = qs.filter(client_state__in=COACHED_STATES)
+        else:
+            if ce is None:
+                pass
+            elif ce == ClientEvents.active:
                 pass
             elif ce == ClientEvents.isip:
                 f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(isip_contract_set_by_client__applies_until__gte=period[0])
@@ -1200,9 +1212,11 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             td.attrib.update(bgcolor="green")
     
     @classmethod
-    def get_row_class(cls,obj,ar):
+    def get_row_classes(cls,obj,ar):
         if obj.client_state == ClientStates.newcomer:
-            return 'green'
+            yield 'green'
+        elif obj.client_state in (ClientStates.refused, ClientStates.former):
+            yield 'yellow'
         #~ if not obj.has_valid_card_data():
             #~ return 'red'
         

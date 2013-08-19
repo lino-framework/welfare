@@ -265,7 +265,7 @@ class CompareRequestsTable(dd.VirtualTable):
                 cells.append(ar)
             return cells
             
-        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.coached)
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.active)
         
         yield add(isip.Contracts,observed_event=isip.ContractEvents.active)
         #~ yield add(isip.Contracts,isip.ContractEvents.ended)
@@ -329,7 +329,7 @@ class PeriodicNumbers(dd.VirtualTable):
         yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.active,coaching_type=DSBE)
         yield add(pcsw.Coachings,observed_event=pcsw.CoachingEvents.ended,coaching_type=DSBE)
         
-        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.coached)
+        yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.active)
         yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.created)
         yield add(pcsw.Clients,observed_event=pcsw.ClientEvents.modified)
         
