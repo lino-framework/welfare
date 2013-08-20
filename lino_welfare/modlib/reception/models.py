@@ -36,7 +36,6 @@ from django.contrib.contenttypes import generic
 from django.db import IntegrityError
 from django.utils.encoding import force_unicode
 from django.core.exceptions import ValidationError
-from django.contrib.humanize.templatetags.humanize import naturaltime
 
 from lino.utils.xmlgen.html import E
 from lino.utils import ssin
@@ -65,18 +64,77 @@ dd.inject_field('system.SiteConfig','attestation_note_nature',
         null=True,blank=True,
         related_name="attestation_siteconfig_set"))
 
-#~ class CoachingsByClient(dd.Table):
-    #~ model = 'pcsw.Coaching'
-    #~ master_key = 'client'
-    #~ column_names = "user info" 
-    #~ auto_fit_column_widths = True
-    #~ use_as_default_table = False
-    #~ required = dd.Required(user_groups='reception')
-    #~ 
-    #~ @dd.virtualfield(dd.HtmlBox())
-    #~ def info(cls,obj,ar):
-        #~ sar = cal.CalendarPanel.request(subst_user=obj.user)
-        #~ return ar.href_to_request(sar,unicode(obj.user))
+        
+def create_visit(project,partner,user,summary):
+    ekw = dict(project=project) 
+    #~ ekw.update(state=cal.EventStates.draft)
+    #~ ekw.update(state=EventStates.scheduled)
+    today = datetime.date.today()
+    ekw.update(start_date=today)
+    ekw.update(end_date=today)
+    ekw.update(calendar=settings.SITE.site_config.client_calender)
+    ekw.update(state=EventStates.visit)
+    ekw.update(user=user)
+    if summary:
+        ekw.update(summary=summary)
+    event = cal.Event(**ekw)
+    event.save()
+    cal.Guest(
+        event=event,
+        partner=partner,
+        state=cal.GuestStates.visit,
+        role=settings.SITE.site_config.client_guestrole,
+        waiting_since=datetime.datetime.now()
+    ).save()
+    #~ event.full_clean()
+    #~ print 20130722, ekw, ar.action_param_values.user, ar.get_user()
+    return event
+
+    
+class CreateClientVisit(dd.RowAction): 
+    label = _("Create visit")
+    #~ show_in_workflow = True
+    #~ show_in_row_actions = True
+    parameters = dict(
+        #~ date=models.DateField(_("Date"),blank=True,null=True),
+        user=dd.ForeignKey(settings.SITE.user_model),
+        summary=models.CharField(verbose_name=_("Reason"),blank=True))
+    params_layout = """
+    user 
+    summary
+    """
+    def run_from_ui(self,obj,ar,**kw):
+        event = create_visit(obj,obj,
+            ar.action_param_values.user,
+            ar.action_param_values.summary)
+        #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
+        kw.update(success=True)
+        #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
+        kw.update(refresh=True)
+        return kw
+        
+class CreateCoachingVisit(CreateClientVisit): 
+    
+    help_text = _("Create a spot visit for this client with this coach.")
+    
+    def action_param_defaults(self,ar,obj,**kw):
+        kw = super(CreateCoachingVisit,self).action_param_defaults(ar,obj,**kw)
+        if obj is not None:
+            kw.update(user=obj.user)
+        return kw
+        
+    def run_from_ui(self,obj,ar,**kw):
+        event = create_visit(obj.client,obj.client,
+            ar.action_param_values.user,
+            ar.action_param_values.summary)
+        #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
+        kw.update(success=True)
+        #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
+        kw.update(refresh=True)
+        return kw
+        
+
+        
     
 class CreateNote(dd.RowAction): 
     label = _("Attestation")
@@ -109,171 +167,8 @@ class CreateNote(dd.RowAction):
             return ok()
         return ar.confirm(ok,_("Client has no valid eID data!",
             _("Do you still want to issue an attestation?")))
-
-    
-class ClientDetail(dd.FormLayout):
-    
-    main = "general history pcsw.ContactsByClient"
-    
-    history = dd.Panel("""
-    # create_note_actions:30 pcsw.NotesByPerson:60
-    CreateNoteActionsByClient:30 pcsw.NotesByPerson:60
-    """,label = _("History"))
-    
-    general = dd.Panel("""
-    client_info:30 box1:30 AppointmentsByGuest:40 box2:30
-    box4 image:15
-    """,label = _("General"))
-    
-    box1 = """
-    create_visit_actions
-    find_appointment
-    workflow_buttons
-    """
-    
-    #~ box1 = dd.Panel("""
-    #~ last_name first_name:15 title:10
-    #~ address_column
-    #~ """,label = _("Address"))
-    
-    box2 = dd.Panel("""
-    email
-    phone
-    gsm
-    """,label = _("Contact"))
-    
-    box3 = dd.Panel("""
-    gender:10 birth_date age:10 
-    birth_country birth_place nationality:15 national_id:15 
-    """,label = _("Birth"))
-    
-    eid_panel = dd.Panel("""
-    card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
-    """,label = _("eID card"))
-
-    box4 = """
-    box3
-    eid_panel
-    """
-    
-    def override_labels(self):
-        return dict(
-            card_number = _("number"),
-            card_valid_from = _("valid from"),
-            card_valid_until = _("valid until"),
-            card_issuer = _("issued by"),
-            card_type = _("eID card type"))
-    
-def fld2html(fld,value) :
-    if value:
-        return ("%s: " % f.verbose_name,E.b(value))
-    return []
-    
-#~ class Clients(dd.Table):
-class Clients(pcsw.Clients): # see blog 2013/0817
-    #~ model = 'pcsw.Client'
-    column_names = "name_column address_column national_id workflow_buttons" 
-    auto_fit_column_widths = True
-    use_as_default_table = False
-    required = dd.Required(user_groups='reception')
-    detail_layout = ClientDetail()
-    #~ insert_layout = pcsw.Clients.insert_layout.main # manually inherited
-    #~ editable = False
-    #~ parameters = None # don't inherit filter parameters
-    #~ params_layout = None # don't inherit filter parameters
-    #~ params_panel_hidden = True
-    create_event = None # don't inherit this action
-    print_eid_content = None
-
-    read_beid = beid.BeIdReadCardAction()
-    #~ find_by_beid = beid.FindByBeIdAction()
-    
-    create_visit = CreateVisit()
-    #~ create_note = CreateNote()
-    
-    #~ @dd.virtualfield(dd.HtmlBox())
-    #~ def eid_card(cls,self,ar):
-        #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
-        #~ fld2html()
-        
-    #~ @classmethod
-    #~ def get_title_tags(self,ar):
-        #~ return []
-        #~ 
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ return super(pcsw.Clients,self).get_request_queryset(ar) # skip one parent
-        #~ return dd.Table.get_request_queryset(ar)
-        
-        
-    #~ @dd.virtualfield(dd.HtmlBox())
-    @dd.displayfield()
-    def client_info(cls,self,ar):
-        elems = [self.get_salutation(nominative=True),E.br()]
-        #~ elems += [self.first_name,' ',E.b(self.last_name),E.br()]
-        elems += [self.first_name,' ',ar.obj2html(self,self.last_name),E.br()]
-        #~ lines = list(self.address_person_lines()) + list(self.address_location_lines())
-        #~ lines = 
-        #~ logger.info("20130805 %s", lines)
-        elems += join_elems(list(self.address_location_lines()),sep=E.br) 
-        #~ logger.info("20130805 %s", elems)
-        #~ elems = []
-        #~ for ln in lines:
-            #~ if ln:   
-                #~ if len(elems): 
-                    #~ elems.append(E.br())
-                #~ elems.append(ln)
-                
-        elems = [E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")]
-                
-        if not self.has_valid_card_data():
-            #~ elems.append(E.br())
-            #~ elems.append(self.read_beid.as_button(ar.request))
-            #~ elems.append(E.br())
             
-            #~ elems.append(E.b(,E.br()))
-            #~ read_beid
-            ba = cls.get_action_by_name('read_beid')
-            elems.append(E.br())
-            elems.append(ar.action_button(ba,self,_("Must read eID card!")))
-            elems.append(E.br())
-            elems = [E.div(*elems)]
-                
-        return elems
-    
-    @dd.displayfield(create_visit.label)
-    def create_visit_actions(cls,obj,ar):
-        elems = []
-        ba = cls.get_action_by_name('create_visit')
-        for coaching in obj.coachings_by_client.all():
-            u = coaching.user
-            sar = ba.request(obj,action_param_values=dict(user=u))
-            #~ logger.info("20130809 %s",sar.action_param_values)
-            kw = dict()
-            kw.update(title=_("Create a spot visit for this client with this coach."))
-            elems += [ar.href_to_request(sar,u.username,**kw),' ']
-        return E.div(*elems)
-
-    @dd.virtualfield(dd.HtmlBox(_("Issue attestation")))
-    def create_note_actions(cls,obj,ar):
-        elems = []
-        if not obj.has_valid_card_data():
-            elems.append(E.b(_("Must read eID card!"),E.br()))
-            ba = cls.get_action_by_name('read_beid')
-            elems.append(E.br())
-            elems.append(ar.action_button(ba,obj))
-            elems.append(E.br())
-        sar = ar.spawn(notes.NotesByProject,master_instance=obj)
-        for nt in notes.NoteType.objects.filter(is_attestation=True):
-            btn = sar.insert_button(unicode(nt),dict(type=nt),
-                title=_("Create a %s for this client.") % nt,
-                icon_file=None)
-            if btn is not None:
-                elems += [btn,E.br()]
             
-        #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
-        return E.div(*elems)
-
 class ButtonsTable(dd.VirtualTable):
     column_names = 'button'
     auto_fit_column_widths = True
@@ -285,7 +180,15 @@ class ButtonsTable(dd.VirtualTable):
 class CreateNoteActionsByClient(ButtonsTable):
     master = 'pcsw.Client'
     label = _("Issue attestation")
-    window_size = (20,20)
+    window_size = (60,20)
+    hide_top_toolbar = True
+    
+    @classmethod
+    def get_title(self,ar):
+        s = super(CreateNoteActionsByClient,self).get_title(ar)
+        if ar.master_instance is not None:
+            s += _(" for %s") % ar.master_instance
+        return s
         
     @classmethod
     def get_data_rows(self,ar=None):
@@ -315,6 +218,214 @@ class CreateNoteActionsByClient(ButtonsTable):
                 #~ yield btn
         
         
+            
+
+    
+class ClientDetail(dd.FormLayout):
+    
+    main = "general contact history"
+    
+    general = dd.Panel("""
+    client_info:30 image:15 box3c box3:20 box3b:20
+    AppointmentsByGuest:30 reception.CoachingsByClient:40
+    """,label = _("General"))
+    
+    history = dd.Panel("""
+    # create_note_actions:30 pcsw.NotesByPerson:60
+    CreateNoteActionsByClient:30 pcsw.NotesByPerson:60
+    """,label = _("History"))
+    
+    contact = dd.Panel("""
+    box2:20 
+    pcsw.ContactsByClient
+    """,label = _("Contact"))
+    
+    #~ box1 = """
+    #~ create_visit_actions
+    #~ find_appointment
+    #~ workflow_buttons
+    #~ """
+    
+    #~ box1 = dd.Panel("""
+    #~ last_name first_name:15 title:10
+    #~ address_column
+    #~ """,label = _("Address"))
+    
+    box2 = dd.Panel("""
+    email
+    phone
+    gsm
+    """)
+    
+    box3 = """
+    gender
+    birth_date 
+    age
+    """
+    box3b = """
+    birth_country 
+    birth_place 
+    nationality
+    """
+    box3c = """
+    national_id
+    gesdos_id
+    eid_info
+    """
+    
+    #~ eid_panel = dd.Panel("""
+    #~ card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
+    #~ """,label = _("eID card"))
+
+    
+    #~ def override_labels(self):
+        #~ return dict(
+            #~ card_number = _("number"),
+            #~ card_valid_from = _("valid from"),
+            #~ card_valid_until = _("valid until"),
+            #~ card_issuer = _("issued by"),
+            #~ card_type = _("eID card type"))
+    
+def fld2html(fld,value) :
+    if value:
+        return ("%s: " % f.verbose_name,E.b(value))
+    return []
+    
+#~ class Clients(dd.Table):
+class Clients(pcsw.Clients): # see blog 2013/0817
+    #~ model = 'pcsw.Client'
+    column_names = "name_column address_column national_id workflow_buttons" 
+    auto_fit_column_widths = True
+    use_as_default_table = False
+    required = dd.Required(user_groups='reception')
+    detail_layout = ClientDetail()
+    #~ insert_layout = pcsw.Clients.insert_layout.main # manually inherited
+    #~ editable = False
+    #~ parameters = None # don't inherit filter parameters
+    #~ params_layout = None # don't inherit filter parameters
+    #~ params_panel_hidden = True
+    create_event = None # don't inherit this action
+    print_eid_content = None
+
+    #~ read_beid = beid.BeIdReadCardAction()
+    #~ find_by_beid = beid.FindByBeIdAction()
+    
+    create_note_actions = dd.ShowSlaveTable(CreateNoteActionsByClient)
+
+    
+    create_visit = CreateClientVisit()
+    #~ create_note = CreateNote()
+    
+    #~ @dd.virtualfield(dd.HtmlBox())
+    #~ def eid_card(cls,self,ar):
+        #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
+        #~ fld2html()
+        
+    #~ @classmethod
+    #~ def get_title_tags(self,ar):
+        #~ return []
+        #~ 
+    #~ @classmethod
+    #~ def get_request_queryset(self,ar):
+        #~ return super(pcsw.Clients,self).get_request_queryset(ar) # skip one parent
+        #~ return dd.Table.get_request_queryset(ar)
+        
+        
+    @dd.displayfield()
+    def client_info(cls,self,ar):
+        elems = [self.get_salutation(nominative=True),E.br()]
+        #~ elems += [self.first_name,' ',E.b(self.last_name),E.br()]
+        elems += [self.first_name,' ',ar.obj2html(self,self.last_name),E.br()]
+        #~ lines = list(self.address_person_lines()) + list(self.address_location_lines())
+        #~ lines = 
+        #~ logger.info("20130805 %s", lines)
+        elems += join_elems(list(self.address_location_lines()),sep=E.br) 
+        #~ logger.info("20130805 %s", elems)
+        #~ elems = []
+        #~ for ln in lines:
+            #~ if ln:   
+                #~ if len(elems): 
+                    #~ elems.append(E.br())
+                #~ elems.append(ln)
+                
+        elems = [E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")]
+                
+        if not self.has_valid_card_data():
+            ba = cls.get_action_by_name('read_beid')
+            elems.append(E.br())
+            elems.append(ar.action_button(ba,self,_("Must read eID card!")))
+            elems.append(E.br())
+            elems = [E.div(*elems)]
+                
+        return elems
+    
+    @dd.displayfield(create_visit.label)
+    def create_visit_actions(cls,obj,ar):
+        elems = []
+        ba = cls.get_action_by_name('create_visit')
+        for coaching in obj.coachings_by_client.all():
+            u = coaching.user
+            sar = ba.request(obj,action_param_values=dict(user=u))
+            #~ logger.info("20130809 %s",sar.action_param_values)
+            kw = dict()
+            kw.update(title=_("Create a spot visit for this client with this coach."))
+            elems += [ar.href_to_request(sar,u.username,**kw),' ']
+        return E.div(*elems)
+
+    @dd.virtualfield(dd.HtmlBox(_("Issue attestation")))
+    def unused_create_note_actions(cls,obj,ar):
+        elems = []
+        if not obj.has_valid_card_data():
+            elems.append(E.b(_("Must read eID card!"),E.br()))
+            ba = cls.get_action_by_name('read_beid')
+            elems.append(E.br())
+            elems.append(ar.action_button(ba,obj))
+            elems.append(E.br())
+        sar = ar.spawn(notes.NotesByProject,master_instance=obj)
+        for nt in notes.NoteType.objects.filter(is_attestation=True):
+            btn = sar.insert_button(unicode(nt),dict(type=nt),
+                title=_("Create a %s for this client.") % nt,
+                icon_file=None)
+            if btn is not None:
+                elems += [btn,E.br()]
+            
+        #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
+        return E.div(*elems)
+
+pcsw.Coaching.define_action(create_visit = CreateCoachingVisit())
+
+class CoachingsByClient(pcsw.CoachingsByClient):
+    label = _("Coaches")
+    filter = models.Q(end_date__isnull=True)
+    column_names = "user primary type actions"
+    
+    #~ @classmethod
+    #~ def get_data_rows(self,ar=None):
+        #~ for obj in self.get_request_queryset(ar): 
+            #~ yield obj
+        #~ if ar.master_instance:
+            #~ yield pcsw.Coaching(client=ar.master_instance)
+    
+    @dd.displayfield(_("Actions"))
+    def actions(cls,obj,ar):
+        elems = []
+        elems += [ar.instance_action_button(obj.create_visit,_("Visit")),' ']
+        
+        #~ ba = cls.get_action_by_name('create_visit')
+        #~ u = obj.user
+        #~ sar = ba.request(obj) # ,action_param_values=dict(user=u))
+        #~ kw = dict()
+        #~ kw.update(title=)
+        #~ elems += [ar.href_to_request(sar,**kw),' ']
+        
+        sar = cal.CalendarPanel.request(
+            subst_user=obj.user,
+            current_project=obj.client.pk)
+        elems += [ar.href_to_request(sar,_("Appointment")),' ']
+        
+        return E.div(*elems)
+
+
         
 if False: # doesn't work
     

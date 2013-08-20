@@ -19,7 +19,7 @@ Defines models for :mod:`lino_welfare.modlib.cal`.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
 
 
 from lino import dd
@@ -65,8 +65,13 @@ class Event(Event):
             
         if self.calendar.invite_client:
             if self.project is not None:
+                if self.state == EventStates.visit:
+                    st = GuestStates.visit
+                else:
+                    st = GuestStates.accepted
                 yield Guest(event=self,
                     partner=self.project,
+                    state=st,
                     role=settings.SITE.site_config.client_guestrole)
     
     @dd.displayfield(_("When"))
@@ -74,7 +79,11 @@ class Event(Event):
         assert ar is not None
         #~ print 20130802, ar.renderer
         #~ raise foo
-        txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time or datetime.datetime.now().time()))
+        #~ txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time or datetime.datetime.now().time()))
+        if self.start_time is None:
+            txt = naturalday(self.start_date)
+        else:
+            txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
         #~ return txt
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self,txt)
