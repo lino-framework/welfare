@@ -183,6 +183,7 @@ class Clients(pcsw.Clients): # see blog 2013/0817
     #~ params_layout = None # don't inherit filter parameters
     #~ params_panel_hidden = True
     create_event = None # don't inherit this action
+    print_eid_content = None
 
     read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
@@ -273,31 +274,45 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
         return E.div(*elems)
 
-class CreateNoteActionsByClient(dd.VirtualTable):
-    master = 'pcsw.Client'
+class ButtonsTable(dd.VirtualTable):
     column_names = 'button'
     auto_fit_column_widths = True
     
+    @dd.displayfield(_("Button"))
+    def button(self,obj,ar):
+        return obj
+        
+class CreateNoteActionsByClient(ButtonsTable):
+    master = 'pcsw.Client'
+    label = _("Issue attestation")
+    window_size = (20,20)
+        
     @classmethod
     def get_data_rows(self,ar=None):
         if ar.master_instance is None: return
         sar = ar.spawn(notes.NotesByProject,master_instance=ar.master_instance)
         for nt in notes.NoteType.objects.filter(is_attestation=True):
-            nt._button = sar.insert_button(unicode(nt),
+            btn = sar.insert_button(unicode(nt),
                 dict(type=nt,event_type=settings.SITE.site_config.attestation_note_nature),
                 title=_("Create a %s for this client.") % nt,
                 icon_file=None)
-            if nt._button is not None:
-                yield nt
+            if btn is not None:
+                yield btn
 
-    #~ @dd.displayfield(_("Description"))
-    #~ def description(self,obj,ar):
-        #~ return unicode(obj)
-        
-    @dd.displayfield(_("Button"))
-    def button(self,obj,ar):
-        return obj._button
-        
+#~ class CreateCoachingActionsByClient(ActionsTable):
+    #~ master = 'pcsw.Client'
+        #~ 
+    #~ @classmethod
+    #~ def get_data_rows(self,ar=None):
+        #~ if ar.master_instance is None: return
+        #~ sar = ar.spawn(notes.CoachingsByClient,master_instance=ar.master_instance,filter=dict())
+        #~ for obj in sar:
+            #~ btn = sar.insert_button(unicode(nt),
+                #~ dict(type=nt,event_type=settings.SITE.site_config.attestation_note_nature),
+                #~ title=_("Create a %s for this client.") % nt,
+                #~ icon_file=None)
+            #~ if btn is not None:
+                #~ yield btn
         
         
         
