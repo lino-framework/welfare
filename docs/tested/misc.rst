@@ -74,16 +74,15 @@ and
 virtual fields of :class:`lino.modlib.cal.models.Home` 
 showed also events of other users.
 For example, Rolf suddenly had more than 100 events 
-(the exact count is 137 to 140 depending on the day of the month 
-where the demo database has been generated):
+(the exact count was 137 to 140 depending on the day of the month 
+where the demo database has been generated)
+instead of about 7:
 
 >>> events = ses.spawn(cal.MyEvents,master_instance=ses.get_user())
 >>> print events.master_instance
 Rolf Rompen
->>> events.get_total_count() > 100
+>>> events.get_total_count() < 100
 True
-
-This should be 7, not 137.
 
 I first expected the
 :meth:`lino.core.requests.BaseRequest.spawn` method to ignore the 
@@ -95,7 +94,7 @@ number of events:
 
 >>> events = ses.spawn(cal.MyEvents,user=ses.get_user())
 >>> print events.get_total_count()
-12
+10
 
 Why MyEvents no longer inherits from ByUser? 
 This is expected behaviour, not a bug: it's because 

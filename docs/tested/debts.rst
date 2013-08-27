@@ -214,7 +214,7 @@ A web request
 -------------
 
 The following snippet reproduces a one-day bug 
-discovered 2013-05-27:
+discovered :blogref:`20130527`:
 
 >>> client = Client()
 >>> url = '/api/debts/Budgets/3?fmt=json&an=detail'
@@ -224,6 +224,8 @@ discovered 2013-05-27:
 >>> result = json.loads(res.content)
 >>> pprint(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
+
+
 
 
 Work in progress

@@ -78,15 +78,15 @@ able to render RemoteFields as rst.
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person__first_name content urgent address")
-=========== ============= ======================= ================================
+=========== ============= ======================= ===============================
  Prénom      Contenu       cause professionnelle   Addresse
------------ ------------- ----------------------- --------------------------------
- Charlotte   Deutsch       Non                     Am Waisenbüschchen, 4700 Eupen
+----------- ------------- ----------------------- -------------------------------
+ Charlotte   Französisch   Non                     Auf dem Spitzberg, 4700 Eupen
+ Bernd       Deutsch       Non                     Allemagne
  Alfons      Französisch   Non                     Am Bahndamm, 4700 Eupen
- Tatjana     Deutsch       Non                     4701 Kettenis
- Denis       Französisch   Non                     France
- Karl        Deutsch       Non                     Allemagne
-=========== ============= ======================= ================================
+ Otto        Deutsch       Non                     4730 Raeren
+ Vincent     Französisch   Non                     4730 Raeren
+=========== ============= ======================= ===============================
 <BLANKLINE>
 
 New virtualfield `dsbe.Client.coachings` shows all active coachings
@@ -94,15 +94,15 @@ of that client:
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content address person__coaches")
-========================= ============= ================================ =================================================
- Client                    Contenu       Addresse                         Accompagnants
-------------------------- ------------- -------------------------------- -------------------------------------------------
- COLLARD Charlotte (117)   Deutsch       Am Waisenbüschchen, 4700 Eupen   Caroline Carnol
- AUSDEMWALD Alfons (115)   Französisch   Am Bahndamm, 4700 Eupen          Mélanie Mélard
- KASENNOVA Tatjana (208)   Deutsch       4701 Kettenis                    Hubert Huppertz
- DENON Denis (179)         Französisch   France                           Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
- KELLER Karl (177)         Deutsch       Allemagne                        Mélanie Mélard, Hubert Huppertz
-========================= ============= ================================ =================================================
+========================= ============= =============================== =================================================
+ Client                    Contenu       Addresse                        Accompagnants
+------------------------- ------------- ------------------------------- -------------------------------------------------
+ COLLARD Charlotte (117)   Französisch   Auf dem Spitzberg, 4700 Eupen   Hubert Huppertz
+ BRECHT Bernd (176)        Deutsch       Allemagne                       Caroline Carnol
+ AUSDEMWALD Alfons (115)   Französisch   Am Bahndamm, 4700 Eupen         Mélanie Mélard
+ ÖSTGES Otto (167)         Deutsch       4730 Raeren                     Hubert Huppertz
+ VAN VEEN Vincent (165)    Französisch   4730 Raeren                     Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
+========================= ============= =============================== =================================================
 <BLANKLINE>
 
 

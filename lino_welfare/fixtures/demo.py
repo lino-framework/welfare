@@ -33,6 +33,7 @@ from django.utils.translation import ugettext as _
 from lino import dd
 from lino import mixins
 from lino.utils import i2d, Cycler
+from lino.mixins.beid import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
 from north.dbutils import babelkw
@@ -48,14 +49,18 @@ from lino.modlib.cal.utils import DurationUnits
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth
 #~ from lino.modlib.contacts.utils import Gender
-from lino_welfare.modlib.jobs import models as jobs
-from lino.modlib.contacts import models as contacts
-from lino.modlib.countries import models as countries
-from lino_welfare.modlib.pcsw import models as pcsw
-from lino_welfare.modlib.isip import models as isip
+#~ from lino_welfare.modlib.jobs import models as jobs
+#~ from lino.modlib.contacts import models as contacts
+#~ from lino.modlib.countries import models as countries
+#~ from lino_welfare.modlib.pcsw import models as pcsw
+#~ from lino_welfare.modlib.isip import models as isip
 
+isip = dd.resolve_app('isip')
+jobs = dd.resolve_app('jobs')
+pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 users = dd.resolve_app('users')
+countries = dd.resolve_app('countries')
 
 Company = dd.resolve_model('contacts.Company')
 
@@ -798,6 +803,14 @@ def objects():
     ly = CLIENTS.pop()
     mari = CLIENTS.pop()
     iiris = CLIENTS.pop()
+    
+    luc.card_number = '591-4132881-07'
+    luc.card_valid_from = i2d(20110819)
+    luc.card_valid_until = i2d(20160819)
+    luc.card_issuer = "Eupen"
+    luc.card_type = BeIdCardTypes.belgian_citizen
+    luc.save()
+    
         
     yield study(person=luc,type=schule,content=abi,
       started='19740901',stopped='19860630')

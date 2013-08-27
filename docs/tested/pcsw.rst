@@ -6,22 +6,22 @@ General PCSW
 .. include:: /include/tested.rst
 
 .. 
+  >>> from __future__ import print_function
   >>> from lino.runtime import *
   >>> from django.test import Client
   >>> import json
 
 >>> ses = settings.SITE.login('rolf')
->>> ses.show(pcsw.UsersWithClients)
+>>> ses.show(integ.UsersWithClients)
 ====================== ============ ============ ======= ======== ========= ================= ================= ========
  Begleiter              Auswertung   Ausbildung   Suche   Arbeit   Standby   Komplette Akten   Aktive Klienten   Total
 ---------------------- ------------ ------------ ------- -------- --------- ----------------- ----------------- --------
- Alicia Allmanns                                  2       2        1         4                 5                 7
- Hubert Huppertz        3            2            4       3        3         9                 15                22
- Mélanie Mélard         4            4            3       2        3         12                16                21
- **Total (3 Zeilen)**   **7**        **6**        **9**   **7**    **7**     **25**            **36**            **50**
+ Alicia Allmanns                     1                    1        1         2                 3                 5
+ Hubert Huppertz        3            2            3       4        4         11                16                23
+ Mélanie Mélard         4            4            2       2        3         12                15                20
+ **Total (3 Zeilen)**   **7**        **7**        **5**   **7**    **8**     **25**            **34**            **48**
 ====================== ============ ============ ======= ======== ========= ================= ================= ========
 <BLANKLINE>
-
 
 Printing UsersWithClients to pdf
 --------------------------------
@@ -34,7 +34,7 @@ User problem report:
 The following lines reproduced this problem 
 (and passed when it was fixed):
 
->>> ses.spawn(pcsw.UsersWithClients).appy_render('tmp.odt')
+>>> ses.spawn(integ.UsersWithClients).appy_render('tmp.odt')
 >>> import os
 >>> os.remove('tmp.odt')
 
@@ -47,6 +47,22 @@ Printing an eID card summary
 >>> from pprint import pprint
 >>> pprint(ses.run(obj.print_eid_content)) #doctest: +NORMALIZE_WHITESPACE
 {'open_url': u'/media/userdocs/appyodt/pcsw.Client-123.odt', 'success': True}
+
+
+And here another case (fixed :blogref:`20130827`) 
+to test the new `eid_info` field:
+
+>>> from django.test import Client
+>>> client = Client()
+>>> url = '/api/reception/Clients/176?an=detail&fmt=json'
+>>> res = client.get(url,REMOTE_USER='rolf')
+>>> print(res.status_code)
+200
+>>> result = json.loads(res.content)
+>>> print(result.keys())
+[u'navinfo', u'data', u'disable_delete', u'id', u'title']
+>>> print(result['data']['eid_info'])
+<div>Card no. 591-4132881-07 (Belgischer Staatsb&#252;rger), G&#252;ltig von 19.08.11 bis 19.08.16, Ausgestellt durch Eupen</div>
 
 
 

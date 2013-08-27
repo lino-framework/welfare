@@ -58,6 +58,8 @@ class Site(Site,cbss.SiteMixin):
     
     languages = 'en fr de nl' # tested docs rely on this distribution
     
+    hidden_languages = 'nl'
+    
     def get_default_language(self):
         """
         Lino-Welfare was initially used and promoted in the German-speaking region.
@@ -79,8 +81,7 @@ class Site(Site,cbss.SiteMixin):
         """
         from lino import dd
         from django.utils.translation import ugettext_lazy as _
-        dd.UserProfiles.reset('* office integ cbss newcomers debts reception'
-           ,hide_languages='nl')
+        dd.UserProfiles.reset('* office integ cbss newcomers debts reception')
         add = dd.UserProfiles.add_item
         add('000', _("Anonymous"),                  '_ _ _ _ _ _ _', 
             name='anonymous', readonly=True,authenticated=False)
