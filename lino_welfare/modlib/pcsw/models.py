@@ -831,13 +831,14 @@ class ClientDetail(dd.FormLayout):
     birth_country birth_place nationality:15 national_id:15 
     """,label = _("Birth"))
     
-    eid_panel = dd.Panel("""
-    card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
-    """,label = _("eID card"))
+    #~ eid_panel = dd.Panel("""
+    #~ card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
+    #~ """,label = _("eID card"))
 
     box4 = """
     box3
-    eid_panel
+    # eid_panel
+    eid_info
     created modified
     """
 
@@ -957,13 +958,13 @@ class ClientDetail(dd.FormLayout):
     jobs.ContractsByPerson
     """,label = _("Contracts"))
     
-    def override_labels(self):
-        return dict(
-            card_number = _("number"),
-            card_valid_from = _("valid from"),
-            card_valid_until = _("valid until"),
-            card_issuer = _("issued by"),
-            card_type = _("eID card type"))
+    #~ def override_labels(self):
+        #~ return dict(
+            #~ card_number = _("number"),
+            #~ card_valid_from = _("valid from"),
+            #~ card_valid_until = _("valid until"),
+            #~ card_issuer = _("issued by"),
+            #~ card_type = _("eID card type"))
     
 #~ if not settings.SITE.use_eid_jslib:
     #~ ClientDetail.eid_panel.replace('read_beid_card:12 ','')

@@ -270,7 +270,7 @@ class ClientDetail(dd.FormLayout):
     box3c = """
     national_id
     gesdos_id
-    eid_info
+    # eid_info
     """
     
     #~ eid_panel = dd.Panel("""
@@ -349,13 +349,17 @@ class Clients(pcsw.Clients): # see blog 2013/0817
                 #~ elems.append(ln)
                 
         elems = [E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")]
+        
+        elems.append(E.br())
+        elems.append(self.eid_info())
+        elems = [E.div(*elems)]
                 
-        if not self.has_valid_card_data():
-            ba = cls.get_action_by_name('read_beid')
-            elems.append(E.br())
-            elems.append(ar.action_button(ba,self,_("Must read eID card!")))
-            elems.append(E.br())
-            elems = [E.div(*elems)]
+        #~ if not self.has_valid_card_data():
+            #~ ba = cls.get_action_by_name('read_beid')
+            #~ elems.append(E.br())
+            #~ elems.append(ar.action_button(ba,self,_("Must read eID card!")))
+            #~ elems.append(E.br())
+            #~ elems = [E.div(*elems)]
                 
         return elems
     

@@ -88,6 +88,9 @@ class Event(Event):
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self,txt)
 
+class MyEvents(MyEvents):
+    exclude = dict(state=EventStates.visit)
+        
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender,**kw):
     site = sender
