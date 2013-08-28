@@ -799,22 +799,20 @@ class ContractsByStudyType(Contracts):
 #~ customize_siteconfig()
 
 
-from lino_welfare.modlib.integ import App
-MODULE_NAME = _(App.verbose_name)
+#~ from lino_welfare.modlib.integ import App
 
-def setup_main_menu(site,ui,profile,m): 
-    m  = m.add_menu("integ",MODULE_NAME)
-    m.add_action(MyContracts)
+#~ def setup_main_menu(site,ui,profile,m): 
+    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m.add_action(MyContracts)
     
-def setup_config_menu(site,ui,profile,m): 
-    #~ m  = m.add_menu("isip",_("ISIPs"))
-    m  = m.add_menu("integ",MODULE_NAME)
-    m.add_action(ContractTypes)
-    m.add_action(ContractEndings)
-    m.add_action(ExamPolicies)
-    m.add_action(StudyTypes)
-  
-def setup_explorer_menu(site,ui,profile,m):
-    m  = m.add_menu("integ",MODULE_NAME)
-    m.add_action(Contracts)
-
+#~ def setup_config_menu(site,ui,profile,m): 
+    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m.add_action(ContractTypes)
+    #~ m.add_action(ContractEndings)
+    #~ m.add_action(ExamPolicies)
+    #~ m.add_action(StudyTypes)
+  #~ 
+#~ def setup_explorer_menu(site,ui,profile,m):
+    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m.add_action(Contracts)
+#~ 

@@ -64,7 +64,7 @@ Event = dd.resolve_model('cal.Event')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 DEMO_OVERVIEW = """\
-29 applications: sessions, about, system, contenttypes, users, changes, countries, properties, contacts, uploads, outbox, cal, reception, households, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, courses, integ, newcomers, debts, cbss, notes, djangosite.
+30 applications: sessions, about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
 100 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
@@ -74,11 +74,11 @@ DEMO_OVERVIEW = """\
  accounts.Group                          9         7
  cal.Calendar                            24        6
  cal.Event                               24        %s
- cal.Guest                               9         16
+ cal.Guest                               10        4
  cal.GuestRole                           9         4
  cal.Priority                            6         9
  cal.Room                                5         0
- cal.Subscription                        4         48
+ cal.Subscription                        4         42
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
@@ -89,7 +89,7 @@ DEMO_OVERVIEW = """\
  contacts.Company                        30        38
  contacts.CompanyType                    9         16
  contacts.Partner                        25        116
- contacts.Person                         33        75
+ contacts.Person                         31        75
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
@@ -135,7 +135,7 @@ DEMO_OVERVIEW = """\
  newcomers.Broker                        2         2
  newcomers.Competence                    5         7
  newcomers.Faculty                       6         5
- notes.EventType                         10        9
+ notes.EventType                         10        10
  notes.Note                              15        110
  notes.NoteType                          13        16
  outbox.Attachment                       4         0
@@ -161,14 +161,14 @@ DEMO_OVERVIEW = """\
  properties.Property                     7         23
  sessions.Session                        3         4
  system.HelpText                         4         5
- system.SiteConfig                       27        1
+ system.SiteConfig                       28        1
  system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5
  users.Authority                         3         3
  users.Membership                        3         0
  users.Team                              5         3
- users.User                              18        10
+ users.User                              18        9
 ======================================= ========= =======
 """ % Event.objects.all().count()
 
@@ -226,19 +226,19 @@ class DemoTest(RemoteAuthTestCase):
         add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
         
         json_fields = 'count rows title success no_data_text param_values'
-        add_case('rolf','api/courses/PendingCourseRequests',json_fields,20,**kw)
+        add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
         add_case('rolf','api/contacts/Persons',json_fields,68,**kw)
         add_case('rolf','api/pcsw/Clients',json_fields,56,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
-        add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
-        add_case('rolf','api/newcomers/NewClients',json_fields,23,**kw)
+        add_case('rolf','api/cal/MyEvents',json_fields,11,**kw)
+        add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
         add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
-        add_case('alicia','api/integ/Clients',json_fields,7,**kw)
-        add_case('hubert','api/integ/Clients',json_fields,22,**kw)
+        add_case('alicia','api/integ/Clients',json_fields,5,**kw)
+        add_case('hubert','api/integ/Clients',json_fields,23,**kw)
         
         alicia = settings.SITE.user_model.objects.get(username='alicia')
         kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
-        add_case('rolf','api/integ/Clients',json_fields,7,**kw)
+        add_case('rolf','api/integ/Clients',json_fields,5,**kw)
         
         
         kw = dict() 
@@ -312,14 +312,14 @@ class DemoTest(RemoteAuthTestCase):
         #~ print __file__, 20130414, repr(res)
         #~ msg = res['message'].decode('utf-8')
         msg = res['message']
-        self.assertEqual(msg,'Budget Nr. 3 für Ausdemwald-Charlier printable cache has been cleared.')
+        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier printable cache has been cleared.')
         
         res = ses.run(obj.do_print)
         #~ print __file__, 20130414, repr(res)
         msg = res['message']
         #~ msg = res['message'].decode('utf-8')
         #~ self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
-        self.assertEqual(msg,'Dokument Budget Nr. 3 für Ausdemwald-Charlier wurde generiert.')
+        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier printable has been built.')
         self.assertEqual(res['open_url'],'/media/userdocs/appyodt/debts.Budget-3.odt')
 
 
@@ -333,7 +333,7 @@ class DemoTest(RemoteAuthTestCase):
         #~ for obj in objects():
             #~ obj.save()
       
-        url = settings.SITE.build_admin_url('plain/pcsw/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
+        url = settings.SITE.build_admin_url('plain/integ/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
         response = self.client.get(url,REMOTE_USER='rolf')
         self.assertEqual(response.status_code,200)
         if not response.content.startswith('<!DOCTYPE html>\n<html language="en"><head>'):

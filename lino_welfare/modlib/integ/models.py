@@ -549,7 +549,7 @@ class ActivityReport(dd.Report):
     parameters = dict(
       start_date = models.DateField(verbose_name=_("Period from")),
       end_date = models.DateField(verbose_name=_("until")),
-      include_jobs = models.BooleanField(verbose_name=_(jobs.App.verbose_name)),
+      include_jobs = models.BooleanField(verbose_name=jobs.App.verbose_name),
       include_isip = models.BooleanField(verbose_name=_("ISIP")),
       )
       
@@ -606,19 +606,53 @@ class ActivityReport(dd.Report):
 
 
 from lino_welfare.modlib.integ import App
-MODULE_LABEL = _(App.verbose_name)
+#~ MODULE_LABEL = App.verbose_name
 
 def setup_reports_menu(site,ui,profile,m):
-    m = m.add_menu("integ",MODULE_LABEL)
+    m = m.add_menu("integ",App.verbose_name)
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
     m.add_action(site.modules.integ.UsersWithClients)
+    
+    m.add_action(jobs.JobsOverview)
+    m.add_action(ActivityReport)
 
 #~ def setup_my_menu(site,ui,profile,m): 
 def setup_main_menu(site,ui,profile,m): 
-    m = m.add_menu("integ",MODULE_LABEL)
+    m = m.add_menu("integ",App.verbose_name)
     m.add_action(Clients)
+    m.add_action(isip.MyContracts)
     #~ m.add_action(MyPersonSearches)
-    m.add_action(ActivityReport)
+    
+    m.add_action(jobs.MyContracts)
+    m.add_action(jobs.JobProviders)
+    m.add_action(jobs.Jobs)
+    m.add_action(jobs.Offers)
+    
+    
+    
+def setup_config_menu(site,ui,profile,m): 
+    m  = m.add_menu("integ",App.verbose_name)
+    m.add_action(isip.ContractTypes)
+    m.add_action(isip.ContractEndings)
+    m.add_action(isip.ExamPolicies)
+    m.add_action(isip.StudyTypes)
+    
+    m.add_action(jobs.ContractTypes)
+    m.add_action(jobs.JobTypes)
+    m.add_action(jobs.Sectors)
+    m.add_action(jobs.Functions)
+    m.add_action(jobs.Schedules)
+    m.add_action(jobs.Regimes)
+    
+  
+def setup_explorer_menu(site,ui,profile,m):
+    m  = m.add_menu("integ",App.verbose_name)
+    m.add_action(isip.Contracts)
+    m.add_action(jobs.Contracts)
+    m.add_action(jobs.Candidatures)
+    m.add_action(jobs.Studies)
 
-dd.add_user_group('integ',MODULE_LABEL)
+    
+
+dd.add_user_group('integ',App.verbose_name)
 #~ dd.add_user_group('coach',INTEG_MODULE_LABEL)

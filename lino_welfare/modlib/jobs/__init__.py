@@ -12,9 +12,12 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+
 from lino import ad
 
-def _(s) : return s # fake gettext method
+#~ def _(s) : return s # fake gettext method
+from django.utils.translation import ugettext_lazy as _
 
 class App(ad.App):
     verbose_name = _("Art.60§7")

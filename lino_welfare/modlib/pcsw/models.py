@@ -2151,6 +2151,15 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(ClientStates)
     m.add_action(beid.BeIdCardTypes)
     
+#~ def setup_main_menu(site,ui,profile,m): 
+def setup_reports_menu(site,ui,profile,m):
+    m  = m.add_menu("pcsw",MODULE_LABEL)
+    #~ m.add_action(site.modules.jobs.OldJobsOverview)
+    #~ m.add_action(site.modules.integ.UsersWithClients)
+    m.add_action(ClientsTest)
+    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
+    #~ m.add_action(ActivityReport1) # old version
+        
 
 #~ INTEG_MODULE_LABEL = _("Integration")
 #~ JOBS_MODULE_LABEL = _("Art.60§7")

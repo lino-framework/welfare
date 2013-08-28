@@ -19,10 +19,12 @@ The `models` module for :mod:`lino_welfare.modlib.notes`.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import string_concat
 
 from lino import dd
 
 from lino.modlib.contacts.models import *
+from lino_welfare.modlib.contacts import App
 
 class Partner(Partner,mixins.CreatedModified,dd.ImportedFields):
     """
@@ -120,9 +122,10 @@ class PartnerDetail(PartnerDetail):
 
 
 
-from lino.modlib.families import models as families
+#~ from lino.modlib.families import models as families
 
-class Person(Partner,Person,mixins.Born,families.Child):
+#~ class Person(Partner,Person,mixins.Born,families.Child):
+class Person(Partner,Person,mixins.Born):
     """
     Represents a physical person.
     
@@ -159,7 +162,7 @@ dd.update_field(Person,'last_name',blank=False)
 class PersonDetail(PersonDetail):
     bottom_box = """
     activity bank_account1 bank_account2 is_obsolete
-    is_client created modified father mother
+    is_client created modified #father #mother
     remarks contacts.RolesByPerson households.MembersByPerson
     """
   
@@ -303,4 +306,16 @@ class CompanyDetail(CompanyDetail):
     #~ app_label = 'contacts'
     
 
+inherited_setup_main_menu = setup_main_menu
 
+def setup_main_menu(self,ui,profile,main):
+    m  = main.add_menu("contacts",App.verbose_name)
+    #~ m.clear()
+    m.add_action(Persons)
+    m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
+    #~ m.add_action(self.modules.pcsw.Clients,'find_by_beid')
+    m.add_action(self.modules.contacts.Companies)
+    #~ m.add_action(self.modules.households.Households)
+    m.add_separator('-')
+    m.add_action(self.modules.contacts.Partners,label=_("Partners (all)"))
+        

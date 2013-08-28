@@ -13,6 +13,10 @@ The following statements imports some often-used global names::
 >>> from django.test import Client
 >>> import json
 
+We switch to German because the first PCSW with Lino was the one in Eupen:
+
+>>> translation.activate('de')
+
 We can now refer to every installed app via it's `app_label`.
 For example here is how we can verify here that the demo database 
 has three Budgets:
@@ -25,12 +29,6 @@ Or we can retrieve budget no. 3 from the database:
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
 Budget #3 (u'Budget Nr. 3 f\xfcr Ausdemwald-Charlier')
-
-Note that the current language is German because this is the 
-default language on this demo site:
-
->>> settings.SITE.get_default_language()
-'de'
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:

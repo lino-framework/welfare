@@ -1438,11 +1438,11 @@ if True: # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
         )
 
-from lino_welfare.modlib.integ import App
+#~ from lino_welfare.modlib.integ import App
 
-INTEG_MODULE_LABEL = _(App.verbose_name)
+#~ INTEG_MODULE_LABEL = _(App.verbose_name)
 
-def setup_main_menu(site,ui,profile,m): 
+def unused_setup_main_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.user:
         #~ return
     m  = m.add_menu("integ",INTEG_MODULE_LABEL)
@@ -1457,7 +1457,7 @@ def setup_main_menu(site,ui,profile,m):
 #~ def setup_my_menu(site,ui,user,m): 
     #~ m.add_action(MyContracts)
   
-def setup_config_menu(site,ui,profile,m): 
+def unused_setup_config_menu(site,ui,profile,m): 
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
     m  = m.add_menu("integ",INTEG_MODULE_LABEL)
@@ -1471,7 +1471,7 @@ def setup_config_menu(site,ui,profile,m):
     
     
   
-def setup_explorer_menu(site,ui,profile,m):
+def unused_setup_explorer_menu(site,ui,profile,m):
     #~ if user.profile.integ_level < UserLevels.manager:
         #~ return
     m  = m.add_menu("integ",INTEG_MODULE_LABEL)

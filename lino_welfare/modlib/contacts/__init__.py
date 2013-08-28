@@ -16,9 +16,9 @@
 Lino-Welfare extension of :mod:`lino.modlib.contacts`
 """
 
-from lino import ad
-    
-class App(ad.App):
+from lino.modlib.contacts import App
+
+class App(App):
 
     extends = 'lino.modlib.contacts'
     extends_models = ['contacts.Partner','contacts.Person','contacts.Company']

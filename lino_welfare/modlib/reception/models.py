@@ -488,7 +488,7 @@ if False: # works, but is very stupid
 inherited_setup_main_menu = setup_main_menu
 
 def setup_main_menu(site,ui,profile,main):
-    m  = main.add_menu("reception",_(App.verbose_name))
+    m  = main.add_menu("reception",App.verbose_name)
     #~ m.add_separator("-")
     #~ m.add_action('reception.Clients','find_by_beid')
     m.add_action('reception.Clients')

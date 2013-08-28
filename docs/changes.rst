@@ -14,6 +14,19 @@ Version 1.1.9 (coming)
 
 Weitere Arbeiten im Modul :ref:`Empfang <welfare.reception>`.
 
+Änderungen im Menü : 
+Die Menübefehle 
+:menuselection:`DSBE --> Übersicht Art.60§7-Konventionen`
+und
+:menuselection:`DSBE --> Tätigkeitsbericht`
+befinden sich jetzt unter 
+:menuselection:`Listings --> DSBE`.
+Siehe auch den neuen Abschnitt 
+:ref:`welfare.admin_main`
+im Benutzerhandbuch.
+
+
+
 Bugs fixed:
 
 - Tätigkeitsberiicht, Übersicht Art-60§7-Konventionen und sonstige 

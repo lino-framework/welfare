@@ -1826,8 +1826,8 @@ def site_setup(self):
     
     
     
-def setup_main_menu(site,ui,profile,m): pass
-def setup_master_menu(site,ui,profile,m): pass
+#~ def setup_main_menu(site,ui,profile,m): pass
+#~ def setup_master_menu(site,ui,profile,m): pass
   
 #~ def setup_my_menu(site,ui,user,m): 
     #~ if user.profile.cbss_level < UserLevels.user: 

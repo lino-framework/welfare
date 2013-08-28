@@ -175,7 +175,7 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         self.jobs_contract_1.applies_from=i2d(20130201)
         #~ self.jobs_contract_1.applies_until=i2d(20130228)
         #~ babel.set_language(None)
-        translation.deactivate_all()
+        #~ translation.deactivate_all()
         try:
             self.jobs_contract_1.full_clean()
             self.fail("Expected a ValidationError")
@@ -466,13 +466,13 @@ Belgique""")
             for e in b1.entry_set.filter(account__ref="3010"):
                 new = ses.run(e.duplicate)
                 #~ e.duplicate()
-        b1.full_clean()
-        b1.save()
-        self.assertEqual(b1.entry_set.count(),45)
-        self.assertEqual(debts.Budget.objects.count(),1)
-        s1 = debts.ResultByBudget.request(b1).to_rst()
-        #~ print s1
-        self.assertEqual(s1,"""\
+            b1.full_clean()
+            b1.save()
+            self.assertEqual(b1.entry_set.count(),45)
+            self.assertEqual(debts.Budget.objects.count(),1)
+            s1 = debts.ResultByBudget.request(b1).to_rst()
+            #~ print s1
+            self.assertEqual(s1,"""\
 ========================================================= ===============
  Beschreibung                                              Betrag
 --------------------------------------------------------- ---------------
@@ -482,28 +482,28 @@ Belgique""")
  **Restbetrag für Kredite und Zahlungsrückstände**         **-1 013,67**
 ========================================================= ===============
 """)
-        settings.SITE.site_config.master_budget = b1
-        settings.SITE.site_config.save()
+            settings.SITE.site_config.master_budget = b1
+            settings.SITE.site_config.save()
         
         
-        #~ b2 = b1.duplicate()
-        b2 = ses.run(b1.duplicate)
-        self.assertEqual(debts.Budget.objects.count(),2)
-        #~ b2 = debts.Budget.objects.get(pk=res.get('goto_record_id'))
-        #~ s2 = b2.BudgetSummary().to_rst()
-        s2 = debts.ResultByBudget.request(b2).to_rst()
-        self.assertEqual(s1,s2)
-        for e in b2.entry_set.all():
-            if e.amount:
-                e.amount = e.amount + 2
-                e.full_clean()
-                e.save()
-            
-        s1 = debts.ResultByBudget.request(b1).to_rst()
-        s2 = debts.ResultByBudget.request(b2).to_rst()
-        #~ s1 = b1.BudgetSummary().to_rst()
-        #~ s2 = b2.BudgetSummary().to_rst()
-        self.assertNotEqual(s1,s2)
+            #~ b2 = b1.duplicate()
+            b2 = ses.run(b1.duplicate)
+            self.assertEqual(debts.Budget.objects.count(),2)
+            #~ b2 = debts.Budget.objects.get(pk=res.get('goto_record_id'))
+            #~ s2 = b2.BudgetSummary().to_rst()
+            s2 = debts.ResultByBudget.request(b2).to_rst()
+            self.assertEqual(s1,s2)
+            for e in b2.entry_set.all():
+                if e.amount:
+                    e.amount = e.amount + 2
+                    e.full_clean()
+                    e.save()
+                
+            s1 = debts.ResultByBudget.request(b1).to_rst()
+            s2 = debts.ResultByBudget.request(b2).to_rst()
+            #~ s1 = b1.BudgetSummary().to_rst()
+            #~ s2 = b2.BudgetSummary().to_rst()
+            self.assertNotEqual(s1,s2)
             
             
         cc = courses.CourseContent(name="French")
@@ -599,31 +599,35 @@ Belgique""")
         
         def menu_test(username,expected,debug=False):
             ses = settings.SITE.login(username) 
-            mnu = settings.SITE.get_site_menu(None,ses.get_user().profile)
-            s = mnu.as_rst(ses)
-            if debug:
-                print s
-            self.assertEqual(s.splitlines(),expected.splitlines())
+            with translation.override('de'):
+                mnu = settings.SITE.get_site_menu(None,ses.get_user().profile)
+                s = mnu.as_rst(ses)
+                if debug:
+                    print s
+                self.assertEqual(s.splitlines(),expected.splitlines())
         
         
         menu_test('root',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
 - Büro : Mein E-Mail-Ausgang, Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Klienten, Wartende Besucher
+- Empfang : Klienten, Wartende Besucher, Empfangene Besucher
 
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 
-- Neuanträge : Neue Klienten
+- Neuanträge : Neue Klienten, Verfügbare Begleiter
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
-- Listings : Benutzer und ihre Klienten, Datenkontrolle Klienten, Verfügbare Begleiter
+- Listings :
+  
+  - ÖSHZ : Datenkontrolle Klienten
+  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Konfigurierung :
   
@@ -644,10 +648,11 @@ Belgique""")
 - Explorer :
   
   - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
-  - System : Vollmachten, User Groups, Benutzer-Levels, Benutzerprofile, Änderungen
+  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
   - Kontakte : Kontaktpersonen
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
   - Haushalte : Mitglieder
+  - Empfang : Gäste
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
   - CV : Sprachkenntnisse
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
@@ -662,19 +667,21 @@ Belgique""")
         
         # integration agent
         menu_test("100","""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
 - Büro : Mein E-Mail-Ausgang, Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
 - Empfang : Wartende Besucher
 
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 
-- Listings : Benutzer und ihre Klienten
+- Listings :
+  
+  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Konfigurierung :
   
@@ -690,19 +697,21 @@ Belgique""")
 
         # 110 integration agent (manager)
         menu_test("110","""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
 - Büro : Mein E-Mail-Ausgang, Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
 - Empfang : Wartende Besucher
 
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 
-- Listings : Benutzer und ihre Klienten
+- Listings :
+  
+  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 
 - Konfigurierung :
   
@@ -726,11 +735,11 @@ Belgique""")
 
         # 300 debts consultant
         menu_test('300',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
 - Büro : Mein E-Mail-Ausgang, Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
 - Empfang : Wartende Besucher
 
@@ -747,17 +756,19 @@ Belgique""")
 
         # 200 newcomers
         menu_test('200',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, Haushalte, -, Partner (alle)
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
 - Büro : Mein E-Mail-Ausgang, Meine Notizen
 
-- Kalender : Kalender, Termine, -, Meine Aufgaben, To-Do-Liste, -, Meine Anwesenheiten, Meine erhaltenen Einladungen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Klienten, Wartende Besucher
+- Empfang : Wartende Besucher
 
-- Neuanträge : Neue Klienten
+- Neuanträge : Neue Klienten, Verfügbare Begleiter
 
-- Listings : Benutzer und ihre Klienten, Verfügbare Begleiter
+- Listings :
+  
+  - DSBE : Benutzer und ihre Klienten
 
 - Konfigurierung :
   
@@ -770,14 +781,8 @@ Belgique""")
 
         # 210 reception
         menu_test('210',"""\
-- Empfang : Klienten, Wartende Besucher
+- Empfang : Klienten, Empfangene Besucher
 - Site : Info
 """) # 210 reception
 
 
-
-        #~ kw = dict(id=1,user=User.objects.get(username='300'))
-        #~ kw.update(partner=)
-        #~ mb = debts.Budget(**kw)
-        #~ mb.save()
-        #~ settings.SITE.site_config.master_budget = mb

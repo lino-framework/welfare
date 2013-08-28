@@ -134,30 +134,19 @@ class Site(Site,cbss.SiteMixin):
         m = main.add_menu("master",_("Master"))
         self.on_each_app('setup_master_menu',ui,profile,m)
         
-        #~ if user.profile.integ_level:
-            #~ m = main.get_item("contacts")
-            #~ m.add_action(self.modules.pcsw.MyPersonSearches)
-            
-            
-        #~ if profile.level and not profile.readonly:
-          
-            #~ m = main.add_menu("my",_("My menu"))
-            
-            #~ self.on_each_app('setup_my_menu',ui,profile,m)
-            #~ m.add_action(self.modules.lino.MyTextFieldTemplates)
-
-        
         self.on_each_app('setup_main_menu',ui,profile,main)
         
-        m = main.get_item("contacts")
-        m.clear()
-        m.add_action(self.modules.contacts.Persons)
-        m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
-        #~ m.add_action(self.modules.pcsw.Clients,'find_by_beid')
-        m.add_action(self.modules.contacts.Companies)
-        m.add_action(self.modules.households.Households)
-        m.add_separator('-')
-        m.add_action(self.modules.contacts.Partners,label=_("Partners (all)"))
+        if False:
+        
+            m = main.get_item("contacts")
+            m.clear()
+            m.add_action(self.modules.contacts.Persons)
+            m.add_action(self.modules.pcsw.Clients,label=string_concat(u' \u25b6 ',self.modules.pcsw.Clients.label))
+            #~ m.add_action(self.modules.pcsw.Clients,'find_by_beid')
+            m.add_action(self.modules.contacts.Companies)
+            m.add_action(self.modules.households.Households)
+            m.add_separator('-')
+            m.add_action(self.modules.contacts.Partners,label=_("Partners (all)"))
         
         m = main.add_menu("reports",_("Listings"))
         self.on_each_app('setup_reports_menu',ui,profile,m)
@@ -172,7 +161,6 @@ class Site(Site,cbss.SiteMixin):
         self.on_each_app('setup_explorer_menu',ui,profile,m)
         m.add_action(self.modules.properties.Properties)
 
-        
         m = main.add_menu("site",_("Site"))
         #~ self.modules.lino.setup_site_menu(self,ui,user,m)
         self.on_each_app('setup_site_menu',ui,profile,m)
@@ -221,9 +209,9 @@ class Site(Site,cbss.SiteMixin):
         #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
         yield 'lino_welfare.modlib.cal'
-        yield 'lino_welfare.modlib.reception'
         #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.households'
+        yield 'lino_welfare.modlib.reception'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
         
@@ -237,8 +225,8 @@ class Site(Site,cbss.SiteMixin):
         yield 'lino_welfare.modlib.cv'
         yield 'lino_welfare.modlib.isip'
         yield 'lino_welfare.modlib.jobs'
-        yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.integ'
+        yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.debts'
         yield 'lino_welfare.modlib.cbss'

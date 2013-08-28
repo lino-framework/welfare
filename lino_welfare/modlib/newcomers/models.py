@@ -326,9 +326,7 @@ class ClientsByFaculty(pcsw.Clients):
     
         
 class AvailableCoaches(users.Users):
-    """
-    A list of the Users that are susceptible to become responsible for a Newcomer.
-    """
+    help_text = _("List of users available for new coachings")
     use_as_default_table = False
     required = dict(user_groups='newcomers')
     auto_fit_column_widths = True
@@ -713,12 +711,13 @@ def setup_main_menu(site,ui,profile,m):
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     #~ m.add_action(Newcomers)
     m.add_action(NewClients)
+    m.add_action(AvailableCoaches)
             
   
-def setup_master_menu(site,ui,profile,m): pass
+#~ def setup_master_menu(site,ui,profile,m): pass
   
-def setup_my_menu(site,ui,profile,m): 
-    pass
+#~ def setup_my_menu(site,ui,profile,m): 
+    #~ pass
     
 def setup_config_menu(site,ui,profile,m): 
     #~ if user.profile.newcomers_level < UserLevels.manager:
@@ -732,8 +731,9 @@ def setup_explorer_menu(site,ui,profile,m):
         #~ return
     m.add_action(Competences)
 
-def setup_reports_menu(site,ui,profile,m):
-    m.add_action(AvailableCoaches)
+#~ def setup_reports_menu(site,ui,profile,m):
+    #~ m  = m.add_menu("newcomers",MODULE_LABEL)
+    #~ m.add_action(AvailableCoaches)
   
 dd.add_user_group('newcomers',MODULE_LABEL)
 

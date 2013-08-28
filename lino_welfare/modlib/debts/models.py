@@ -1275,7 +1275,7 @@ def setup_main_menu(site,ui,profile,m):
     m.add_action(MyBudgets)
   
   
-def setup_master_menu(site,ui,profile,m): pass
+#~ def setup_master_menu(site,ui,profile,m): pass
 
 def unused_setup_my_menu(site,ui,profile,m): 
     m  = m.add_menu("debts",MODULE_LABEL)

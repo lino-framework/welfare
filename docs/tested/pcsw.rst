@@ -12,7 +12,7 @@ General PCSW
   >>> import json
 
 >>> ses = settings.SITE.login('rolf')
->>> ses.show(integ.UsersWithClients)
+>>> ses.show(integ.UsersWithClients,language='de')
 ====================== ============ ============ ======= ======== ========= ================= ================= ========
  Begleiter              Auswertung   Ausbildung   Suche   Arbeit   Standby   Komplette Akten   Aktive Klienten   Total
 ---------------------- ------------ ------------ ------- -------- --------- ----------------- ----------------- --------

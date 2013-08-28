@@ -9,7 +9,12 @@ CBSS connection
   >>> from lino.runtime import *
   >>> from django.utils import translation
 
+The examples in this document are in German:
+
+>>> translation.activate('de')
+
 We retrieve Tx25 no. 1 from the database:
+
 
 >>> obj = cbss.RetrieveTIGroupsRequest.objects.get(pk=1)
 >>> obj

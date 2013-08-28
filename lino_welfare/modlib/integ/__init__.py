@@ -14,7 +14,8 @@
 
 from lino import ad
 
-def _(s) : return s # fake gettext method
+#~ def _(s) : return s # fake gettext method
+from django.utils.translation import ugettext_lazy as _
 
 class App(ad.App):
     verbose_name = _("Integration")
