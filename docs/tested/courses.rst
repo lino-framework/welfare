@@ -6,10 +6,10 @@ Courses
 .. include:: /include/tested.rst
 
 .. 
+  >>> from django.utils import translation
   >>> from lino.runtime import *
 
 >>> ses = settings.SITE.login('rolf')
->>> ses.set_language('fr')
 
 catch_layout_exceptions
 -----------------------
@@ -76,8 +76,9 @@ KeyError: u"Unknown element u'person.first_name' referred in layout <ListLayout 
 And then the following example failed because Lino simply wasn't yet 
 able to render RemoteFields as rst.
 
->>> ses.show(courses.PendingCourseRequests,limit=5,
-...      column_names="person__first_name content urgent address")
+>>> with translation.override('fr'):
+...    ses.show(courses.PendingCourseRequests,limit=5,
+...       column_names="person__first_name content urgent address")
 =========== ============= ======================= ===============================
  Prénom      Contenu       cause professionnelle   Addresse
 ----------- ------------- ----------------------- -------------------------------
@@ -92,7 +93,8 @@ able to render RemoteFields as rst.
 New virtualfield `dsbe.Client.coachings` shows all active coachings
 of that client:
 
->>> ses.show(courses.PendingCourseRequests,limit=5,
+>>> with translation.override('fr'):
+...    ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content address person__coaches")
 ========================= ============= =============================== =================================================
  Client                    Contenu       Addresse                        Accompagnants

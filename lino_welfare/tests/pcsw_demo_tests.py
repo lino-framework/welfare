@@ -526,25 +526,29 @@ class DemoTest(RemoteAuthTestCase):
         
         p = Property.objects.get(id=2) # "Obedient"
         pp = PersonProperty.objects.filter(property=p)[0]
+        
         #~ if 'en' in babel.AVAILABLE_LANGUAGES:
-        if settings.SITE.get_language_info('en'):
-            dd.set_language('en')
+        with translation.override('en'):
+        #~ if settings.SITE.get_language_info('en'):
+            #~ dd.set_language('en')
             self.assertEquals(unicode(p), u"Obedient")
             self.assertEquals(unicode(pp), u"not at all")
 
         #~ if 'de' in babel.AVAILABLE_LANGUAGES:
-        if settings.SITE.get_language_info('de'):
-            dd.set_language('de')
+        with translation.override('de'):
+        #~ if settings.SITE.get_language_info('de'):
+            #~ dd.set_language('de')
             self.assertEquals(unicode(p), u"Gehorsam")
             self.assertEquals(unicode(pp), u"gar nicht")
         
         #~ if 'fr' in babel.AVAILABLE_LANGUAGES:
-        if settings.SITE.get_language_info('fr'):
-            dd.set_language('fr')
+        with translation.override('fr'):
+        #~ if settings.SITE.get_language_info('fr'):
+            #~ dd.set_language('fr')
             self.assertEquals(unicode(p), u"Obéissant")
             self.assertEquals(unicode(pp), u"pas du tout")
         
-        dd.set_language(None) # switch back to default language for subsequent tests
+        #~ dd.set_language(None) # switch back to default language for subsequent tests
         
 
     def unused_test009(self):
@@ -597,10 +601,10 @@ class DemoTest(RemoteAuthTestCase):
         """
         from lino_welfare.modlib.jobs.models import Contract
         obj = Contract.objects.get(pk=5)
-        translation.activate('de')
-        self.assertEqual(obj.contact.person.get_full_name(),"Herrn Hans ALTENBERG")
+        with translation.override('de'):
+            self.assertEqual(obj.contact.person.get_full_name(),"Herrn Hans ALTENBERG")
         #~ dd.set_language(None)
-        translation.deactivate()
+        #~ translation.deactivate()
         
         
     def unused_test012(self):

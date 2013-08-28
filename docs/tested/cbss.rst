@@ -7,11 +7,7 @@ CBSS connection
 
 .. 
   >>> from lino.runtime import *
-
-We switch explicitly to German for the following tests:
-
->>> from north.dbutils import set_language
->>> set_language('de')
+  >>> from django.utils import translation
 
 We retrieve Tx25 no. 1 from the database:
 
@@ -28,7 +24,8 @@ using the :meth:`login <lino.ui.Site.login>` method:
 Here is the textual representation of the "Result" panel 
 (only the first lines, this is just a test after all):
 
->>> ses.show(cbss.RetrieveTIGroupsResult.request(obj,limit=5))
+>>> with translation.override('de'):
+...    ses.show(cbss.RetrieveTIGroupsResult.request(obj,limit=5))
 ====================== ===== ========== ==================================================
  Gruppe                 TI    Seit       Information
 ---------------------- ----- ---------- --------------------------------------------------

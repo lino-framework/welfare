@@ -8,10 +8,11 @@ Miscellaneous
 Some tests:
   
 >>> from lino.runtime import *
+>>> from django.utils import translation
 >>> from pprint import pprint
 >>> ses = settings.SITE.login('rolf')
->>> ses.set_language('de')
->>> ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> with translation.override('de'):
+...     ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ================= ================================ ===========================
  Name              Stellenanbieter                  Sektor
 ----------------- -------------------------------- ---------------------------
@@ -45,7 +46,8 @@ Bug fixed :blogref:`20130423`.
 Teams
 -----
 
->>> ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> with translation.override('de'):
+...    ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ==== ============================== ============================== ===================================================
  ID   Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
 ---- ------------------------------ ------------------------------ ---------------------------------------------------
@@ -56,7 +58,8 @@ Teams
 <BLANKLINE>
 
 
->>> ses.show(pcsw.CoachingTypes)
+>>> with translation.override('de'):
+...    ses.show(pcsw.CoachingTypes)
 ============================== ============================== =================================================== ====
  Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    ID
 ------------------------------ ------------------------------ --------------------------------------------------- ----

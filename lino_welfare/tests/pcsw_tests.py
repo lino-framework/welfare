@@ -213,26 +213,27 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         """
         Test whether examination calendar events are being generated,
         """
-        dd.set_language('en')
-        msg = u'Date range overlaps with ISIP #1'
-        self.jobs_contract_1.applies_from = i2d(20120325)
-        self.jobs_contract_1.applies_until = i2d(20130325)
-        try:
-            self.jobs_contract_1.full_clean()
-            self.fail("Expected ValidationError %r" % msg)
-        except ValidationError as e:
-            self.assertEqual(e.messages[0],msg)
+        with translation.override('en'):
+        #~ dd.set_language('en')
+            msg = u'Date range overlaps with ISIP #1'
+            self.jobs_contract_1.applies_from = i2d(20120325)
+            self.jobs_contract_1.applies_until = i2d(20130325)
+            try:
+                self.jobs_contract_1.full_clean()
+                self.fail("Expected ValidationError %r" % msg)
+            except ValidationError as e:
+                self.assertEqual(e.messages[0],msg)
             
-        msg = 'Contract ends before it started.'
-        self.jobs_contract_1.applies_from = i2d(20130325)
-        self.jobs_contract_1.applies_until = i2d(20130131)
-        try:
-            self.jobs_contract_1.full_clean()
-            self.fail("Expected ValidationError %s" % msg)
-        except ValidationError as e:
-            self.assertEqual(e.messages[0],msg)
-        
-        self.jobs_contract_1.save()
+            msg = 'Contract ends before it started.'
+            self.jobs_contract_1.applies_from = i2d(20130325)
+            self.jobs_contract_1.applies_until = i2d(20130131)
+            try:
+                self.jobs_contract_1.full_clean()
+                self.fail("Expected ValidationError %s" % msg)
+            except ValidationError as e:
+                self.assertEqual(e.messages[0],msg)
+            
+            self.jobs_contract_1.save()
       
         
         #~ def test03(self):
@@ -303,8 +304,9 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         p.save()
         
         #~ if 'fr' in settings.SITE.AVAILABLE_LANGUAGES:
-        if settings.SITE.get_language_info('fr'):
-            dd.set_language('fr')
+        with translation.override('fr'):
+        #~ if settings.SITE.get_language_info('fr'):
+            #~ dd.set_language('fr')
             #~ self.assertEqual(p.get_titled_name,"Mr Jean Louis DUPONT")
             self.assertEqual(p.full_name,"M. Jean Louis DUPONT")
             self.assertEqual('\n'.join(p.address_lines()),u"""\
@@ -314,7 +316,7 @@ Bruxelles
 Belgique""")
         
         
-        dd.set_language(None)
+        #~ dd.set_language(None)
             
             
         #~ def test05(self):
@@ -446,7 +448,7 @@ Belgique""")
         modifies the duplicate,
         """
         from lino_welfare.modlib.debts.fixtures.std import objects
-        from north.dbutils import set_language
+        #~ from north.dbutils import set_language
         for obj in objects():
             obj.save()
         self.assertEqual(debts.Budget.objects.count(),0)
@@ -459,10 +461,11 @@ Belgique""")
             e.full_clean()
             e.save()
         ses = settings.SITE.login("root")
-        set_language('de')
-        for e in b1.entry_set.filter(account__ref="3010"):
-            new = ses.run(e.duplicate)
-            #~ e.duplicate()
+        with translation.override('de'):
+        #~ set_language('de')
+            for e in b1.entry_set.filter(account__ref="3010"):
+                new = ses.run(e.duplicate)
+                #~ e.duplicate()
         b1.full_clean()
         b1.save()
         self.assertEqual(b1.entry_set.count(),45)

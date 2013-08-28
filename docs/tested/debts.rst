@@ -7,6 +7,7 @@ Debts mediation
 
 The following statements imports some often-used global names::
 
+>>> from django.utils import translation
 >>> from lino.runtime import *
 >>> from pprint import pprint
 >>> from django.test import Client
@@ -181,8 +182,8 @@ Printing a Budget
 Something in French
 -------------------
 
->>> ses.set_language('fr')
->>> ses.show(debts.DistByBudget.request(obj))
+>>> with translation.override('fr'):
+...    ses.show(debts.DistByBudget.request(obj))
 =========================== ==================== ============== ============ =======================
  Créancier                   Description          Dette          %            Remboursement mensuel
 --------------------------- -------------------- -------------- ------------ -----------------------
@@ -194,8 +195,8 @@ Something in French
 
 Or the same in English:
 
->>> ses.set_language('en')
->>> ses.show(debts.DistByBudget.request(obj))
+>>> with translation.override('en'):
+...     ses.show(debts.DistByBudget.request(obj))
 =========================== ==================== ============== ============ ===========================
  Creditor                    Description          Debt           %            Monthly payback suggested
 --------------------------- -------------------- -------------- ------------ ---------------------------
