@@ -97,7 +97,7 @@ number of events:
 
 >>> events = ses.spawn(cal.MyEvents,user=ses.get_user())
 >>> print events.get_total_count()
-10
+12
 
 Why MyEvents no longer inherits from ByUser? 
 This is expected behaviour, not a bug: it's because 

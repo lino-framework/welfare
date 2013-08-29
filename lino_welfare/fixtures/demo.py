@@ -184,6 +184,146 @@ def unused_coachings(p,type,coach1,coach2,coached_from,coached_until=None):
 
 def objects():
     
+    ClientContactType = resolve_model('pcsw.ClientContactType')
+  
+    Person = resolve_model('contacts.Person')
+    Company = resolve_model('contacts.Company')
+    #~ Contact = resolve_model('contacts.Contact')
+    Role = resolve_model('contacts.Role')
+    RoleType = resolve_model('contacts.RoleType')
+    #~ Link = resolve_model('links.Link')
+    #~ Contract = resolve_model('jobs.Contract')
+    #~ JobProvider = resolve_model('jobs.JobProvider')
+    #~ Function = resolve_model('jobs.Function')
+    #~ Sector = resolve_model('jobs.Sector')
+    Authority = resolve_model('users.Authority')
+    #~ Country = resolve_model('countries.Country')
+    Client = resolve_model('pcsw.Client')
+    
+    person = Instantiator(Person).build
+    client = Instantiator(Client).build
+    company = Instantiator(Company).build
+    #~ contact = Instantiator(Contact).build
+    role = Instantiator(Role).build
+    #~ link = Instantiator(Link).build
+    #~ exam_policy = Instantiator('isip.ExamPolicy').build
+
+    City = resolve_model('countries.City')
+    #~ Job = resolve_model('jobs.Job')
+    #~ City = settings.SITE.modules.countries.City
+    StudyType = resolve_model('isip.StudyType')
+    #~ Country = resolve_model('countries.Country')
+    Property = resolve_model('properties.Property')
+    
+    
+    eupen = City.objects.get(name__exact='Eupen')
+    #~ stvith = City.objects.get(zip_code__exact='4780')
+    stvith = City.objects.get(name__in=('Sankt Vith','Saint-Vith'))
+    kettenis = City.objects.get(name__exact='Kettenis')
+    vigala = City.objects.get(name__exact='Vigala')
+    ee = countries.Country.objects.get(pk='EE')
+    be = belgium = countries.Country.objects.get(isocode__exact='BE')
+    andreas = Person.objects.get(name__exact="Arens Andreas")
+    annette = Person.objects.get(name__exact="Arens Annette")
+    hans = Person.objects.get(name__exact="Altenberg Hans")
+    ulrike = Person.objects.get(name__exact="Charlier Ulrike")
+    erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
+    
+    
+    
+    
+    #~ ug_dsbe = users.Group(name="DSBE")
+    #~ yield ug_dsbe 
+    #~ ug_courses = users.Group(name="Courses")
+    #~ yield ug_courses
+    #~ ug_asd = users.Group(name="ASD")
+    #~ yield ug_asd 
+    #~ ug_sek = users.Group(name="Sekretariat")
+    #~ yield ug_sek 
+    #~ ug_staff = users.Group(name="Staff")
+    #~ yield ug_staff 
+    
+    #~ yield User(username='gerd',partner=gerd,profile='900')
+    
+    melanie = person(first_name="Mélanie",last_name="Mélard",
+        email=settings.SITE.demo_email, # 'melanie@example.com',
+        city=eupen,country='BE',gender=mixins.Genders.female,
+        language='fr')
+    yield melanie
+    melanie = users.User(username="melanie",partner=melanie,profile='110') 
+    yield melanie
+    
+    hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
+        email=settings.SITE.demo_email, # 'hubert@example.com',
+        city=eupen,country='BE',gender=mixins.Genders.male)
+    yield hubert
+    hubert = users.User(username="hubert",partner=hubert,profile='100') 
+    yield hubert
+    
+    alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
+        email=settings.SITE.demo_email, # 'alicia@example.com',
+        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
+    yield alicia
+    alicia = users.User(username="alicia",partner=alicia,profile='100') 
+    yield alicia
+    
+    theresia = person(first_name=u"Theresia",last_name=u"Thelen",
+        email=settings.SITE.demo_email, # 'theresia@example.com',
+        city=eupen,country='BE',gender=mixins.Genders.female)
+    yield theresia
+    theresia = users.User(username="theresia",partner=theresia,profile='210') 
+    yield theresia
+    
+    yield Authority(user=alicia,authorized=hubert)
+    yield Authority(user=alicia,authorized=melanie)
+    yield Authority(user=hubert,authorized=melanie)
+    
+    #~ yield users.Membership(user=alicia,group=ug_dsbe)
+    #~ yield users.Membership(user=hubert,group=ug_dsbe)
+    #~ yield users.Membership(user=melanie,group=ug_dsbe)
+    #~ yield users.Membership(user=melanie,group=ug_courses)
+    #~ yield users.Membership(user=melanie,group=ug_sek)
+    
+    caroline = users.User(username="caroline",
+        first_name="Caroline",last_name="Carnol",
+        profile='200') # UserProfiles.caroline)
+    yield caroline
+    #~ yield users.Membership(user=caroline,group=ug_asd)
+    
+    # id must be 1 (see isip.ContactBase.person_changed
+    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babelkw('name',
+        de="ASD (Allgemeiner Sozialdienst)",
+        nl="ASD (Algemene Sociale Dienst)",
+        fr="SSG (Service social général)",
+        en="GSS (General Social Service)",
+        )) 
+    
+    #~ caroline = users.User.objects.get(username="caroline")
+    caroline.coaching_type_id = isip.COACHINGTYPE_ASD
+    caroline.save()
+    
+    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babelkw('name',
+        de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
+        fr="Service intégration",
+        en="Integration service",
+        )) 
+    
+    #~ DSBE = pcsw.CoachingType(name="DSBE")
+    yield DSBE
+    #~ yield pcsw.CoachingType(name="Schuldnerberatung")
+    yield pcsw.CoachingType(**babelkw('name',
+        de="Schuldnerberatung",
+        fr="Médiation de dettes",
+        en="Debts mediation",
+        )) 
+    
+    alicia.coaching_type= DSBE
+    alicia.save()
+    
+    for obj in pcsw.CoachingType.objects.all():
+        yield users.Team(**babelkw('name',**field2kw(obj,'name')))
+    
+    
     guest_role = Instantiator('cal.GuestRole').build
     obj = guest_role(email_template="Visitor.eml.html",**babelkw('name',
           de="Besucher",
@@ -227,31 +367,31 @@ def objects():
     yield obj
     settings.SITE.site_config.update(attestation_note_nature=obj)
     
-    calendar = Instantiator('cal.Calendar').build
     
-    obj = calendar(color=20,invite_client=True,**babelkw('name',
+        
+    calendar = Instantiator('cal.Calendar').build
+    client_calendar = calendar(color=20,invite_client=True,**babelkw('name',
           de="Klientengespräche intern",
           fr="Rencontres internes avec client",
           en="Internal meetings with client",
           ))
+    yield client_calendar
+    settings.SITE.site_config.update(client_calendar=client_calendar)
+    
+    obj = calendar(color=20,invite_client=True,is_appointment=False,**babelkw('name',
+          de="Visiten (ohne Termin)",
+          fr="Visites (sans rendez-vous)",
+          en="Prompt events",
+          et="Külaline",
+          ))
     yield obj
-    settings.SITE.site_config.update(client_calender=obj)
-    
-    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
-    yield exam_policy(1,calendar=obj,start_time="9:00",**babelkw('name',en='every month',de=u'monatlich',fr=u"mensuel"))
-    yield exam_policy(2,calendar=obj,start_time="9:00",**babelkw('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
-    yield exam_policy(3,calendar=obj,start_time="9:00",**babelkw('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
-    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
-    yield exam_policy(2,calendar=obj,start_time="9:00",**babelkw('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
-    exam_policy = Instantiator('isip.ExamPolicy').build
-    yield exam_policy(**babelkw('name',en='other',de="andere",fr="autre"))
-        
+    settings.SITE.site_config.update(prompt_calendar=obj)
     
         
-    yield calendar(color=1,invite_client=True,**babelkw('name',
-          de=u"Klientengespräche extern",
-          fr=u"Rencontres client externes",
-          en=u"External meetings with client",
+    yield calendar(color=1,invite_client=False,**babelkw('name',
+          de="Klientengespräche extern",
+          fr="Rencontres client externes",
+          en="External meetings with client",
           ))
     
     yield calendar(color=4,**babelkw('name',
@@ -266,20 +406,38 @@ def objects():
           en=u"External meetings",
           ))
           
-    yield calendar(color=12,
-        #~ invite_team_members=True,email_template='Team.eml.html',
-        email_template='Team.eml.html',
-        **babelkw('name',
-          de=u"Team-Besprechungen",
-          fr=u"Coordinations en équipe",
-          en=u"Team Meetings",
-          ))
+    for obj in users.Team.objects.all():
+        yield calendar(color=12,
+            invite_team_members=obj,
+            email_template='Team.eml.html',
+            **babelkw('name',**field2kw(obj,'name')))
+          
+    #~ yield calendar(color=12,
+        #~ email_template='Team.eml.html',
+        #~ **babelkw('name',
+          #~ de=u"Team-Besprechungen",
+          #~ fr=u"Coordinations en équipe",
+          #~ en=u"Team Meetings",
+          #~ ))
           
     yield calendar(color=25,**babelkw('name',
           de="Privat",
           fr="Privé",
           en="Private",
           ))
+          
+          
+    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
+    yield exam_policy(1,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every month',de=u'monatlich',fr=u"mensuel"))
+    yield exam_policy(2,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
+    yield exam_policy(3,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
+    
+    exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
+    yield exam_policy(2,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
+    
+    exam_policy = Instantiator('isip.ExamPolicy').build
+    yield exam_policy(**babelkw('name',en='other',de="andere",fr="autre"))
+          
     
     
           
@@ -400,57 +558,14 @@ def objects():
     #~ yield contractType(u"VSE Work & Job")
     
   
-    ClientContactType = resolve_model('pcsw.ClientContactType')
   
-    Person = resolve_model('contacts.Person')
-    Company = resolve_model('contacts.Company')
-    #~ Contact = resolve_model('contacts.Contact')
-    Role = resolve_model('contacts.Role')
-    RoleType = resolve_model('contacts.RoleType')
-    #~ Link = resolve_model('links.Link')
-    #~ Contract = resolve_model('jobs.Contract')
-    #~ JobProvider = resolve_model('jobs.JobProvider')
-    #~ Function = resolve_model('jobs.Function')
-    #~ Sector = resolve_model('jobs.Sector')
-    Authority = resolve_model('users.Authority')
-    #~ Country = resolve_model('countries.Country')
-    Client = resolve_model('pcsw.Client')
-    
     rt = RoleType.objects.get(pk=4) # It manager
     rt.use_in_contracts = False
     rt.save()
 
-    person = Instantiator(Person).build
-    client = Instantiator(Client).build
-    company = Instantiator(Company).build
-    #~ contact = Instantiator(Contact).build
-    role = Instantiator(Role).build
-    #~ link = Instantiator(Link).build
-    #~ exam_policy = Instantiator('isip.ExamPolicy').build
-
-    City = resolve_model('countries.City')
-    #~ Job = resolve_model('jobs.Job')
-    #~ City = settings.SITE.modules.countries.City
-    StudyType = resolve_model('isip.StudyType')
-    #~ Country = resolve_model('countries.Country')
-    Property = resolve_model('properties.Property')
-  
     
     #~ country = Instantiator('countries.Country',"isocode name").build
     #~ yield country('SUHH',"Soviet Union")
-    
-    eupen = City.objects.get(name__exact='Eupen')
-    #~ stvith = City.objects.get(zip_code__exact='4780')
-    stvith = City.objects.get(name__in=('Sankt Vith','Saint-Vith'))
-    kettenis = City.objects.get(name__exact='Kettenis')
-    vigala = City.objects.get(name__exact='Vigala')
-    ee = countries.Country.objects.get(pk='EE')
-    be = belgium = countries.Country.objects.get(isocode__exact='BE')
-    andreas = Person.objects.get(name__exact="Arens Andreas")
-    annette = Person.objects.get(name__exact="Arens Annette")
-    hans = Person.objects.get(name__exact="Altenberg Hans")
-    ulrike = Person.objects.get(name__exact="Charlier Ulrike")
-    erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
     
     #~ cpas = company(name=u"ÖSHZ Eupen",city=eupen,country=belgium)
     cpas = company(name=u"ÖSHZ Kettenis",city=kettenis,country=belgium)
@@ -619,98 +734,6 @@ def objects():
         #~ raise Exception("Expected ValidationError")
       
     DIRECTORS = (annette,hans,andreas,bernard)
-    
-    #~ ug_dsbe = users.Group(name="DSBE")
-    #~ yield ug_dsbe 
-    #~ ug_courses = users.Group(name="Courses")
-    #~ yield ug_courses
-    #~ ug_asd = users.Group(name="ASD")
-    #~ yield ug_asd 
-    #~ ug_sek = users.Group(name="Sekretariat")
-    #~ yield ug_sek 
-    #~ ug_staff = users.Group(name="Staff")
-    #~ yield ug_staff 
-    
-    #~ yield User(username='gerd',partner=gerd,profile='900')
-    
-    melanie = person(first_name="Mélanie",last_name="Mélard",
-        email=settings.SITE.demo_email, # 'melanie@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female,
-        language='fr')
-    yield melanie
-    melanie = users.User(username="melanie",partner=melanie,profile='110') 
-    yield melanie
-    
-    hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
-        email=settings.SITE.demo_email, # 'hubert@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.male)
-    yield hubert
-    hubert = users.User(username="hubert",partner=hubert,profile='100') 
-    yield hubert
-    
-    alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
-        email=settings.SITE.demo_email, # 'alicia@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
-    yield alicia
-    alicia = users.User(username="alicia",partner=alicia,profile='100') 
-    yield alicia
-    
-    theresia = person(first_name=u"Theresia",last_name=u"Thelen",
-        email=settings.SITE.demo_email, # 'theresia@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female)
-    yield theresia
-    theresia = users.User(username="theresia",partner=theresia,profile='210') 
-    yield theresia
-    
-    yield Authority(user=alicia,authorized=hubert)
-    yield Authority(user=alicia,authorized=melanie)
-    yield Authority(user=hubert,authorized=melanie)
-    
-    #~ yield users.Membership(user=alicia,group=ug_dsbe)
-    #~ yield users.Membership(user=hubert,group=ug_dsbe)
-    #~ yield users.Membership(user=melanie,group=ug_dsbe)
-    #~ yield users.Membership(user=melanie,group=ug_courses)
-    #~ yield users.Membership(user=melanie,group=ug_sek)
-    
-    caroline = users.User(username="caroline",
-        first_name="Caroline",last_name="Carnol",
-        profile='200') # UserProfiles.caroline)
-    yield caroline
-    #~ yield users.Membership(user=caroline,group=ug_asd)
-    
-    # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babelkw('name',
-        de="ASD (Allgemeiner Sozialdienst)",
-        nl="ASD (Algemene Sociale Dienst)",
-        fr="SSG (Service social général)",
-        en="GSS (General Social Service)",
-        )) 
-    
-    #~ caroline = users.User.objects.get(username="caroline")
-    caroline.coaching_type_id = isip.COACHINGTYPE_ASD
-    caroline.save()
-    
-    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babelkw('name',
-        de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
-        fr="Service intégration",
-        en="Integration service",
-        )) 
-    
-    #~ DSBE = pcsw.CoachingType(name="DSBE")
-    yield DSBE
-    #~ yield pcsw.CoachingType(name="Schuldnerberatung")
-    yield pcsw.CoachingType(**babelkw('name',
-        de="Schuldnerberatung",
-        fr="Médiation de dettes",
-        en="Debts mediation",
-        )) 
-    
-    alicia.coaching_type= DSBE
-    alicia.save()
-    
-    for obj in pcsw.CoachingType.objects.all():
-        yield users.Team(**babelkw('name',**field2kw(obj,'name')))
-    
     
     #~ USERS = Cycler(root,melanie,hubert,alicia)
     AGENTS = Cycler(melanie,hubert,alicia)

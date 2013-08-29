@@ -72,13 +72,13 @@ DEMO_OVERVIEW = """\
  accounts.Account                        15        49
  accounts.Chart                          5         1
  accounts.Group                          9         7
- cal.Calendar                            24        6
+ cal.Calendar                            25        9
  cal.Event                               24        %s
- cal.Guest                               10        4
+ cal.Guest                               10        2
  cal.GuestRole                           9         4
  cal.Priority                            6         9
  cal.Room                                5         0
- cal.Subscription                        4         42
+ cal.Subscription                        4         63
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
@@ -161,7 +161,7 @@ DEMO_OVERVIEW = """\
  properties.Property                     7         23
  sessions.Session                        3         4
  system.HelpText                         4         5
- system.SiteConfig                       28        1
+ system.SiteConfig                       29        1
  system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5
@@ -227,10 +227,10 @@ class DemoTest(RemoteAuthTestCase):
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
-        add_case('rolf','api/contacts/Persons',json_fields,68,**kw)
+        add_case('rolf','api/contacts/Persons',json_fields,69,**kw)
         add_case('rolf','api/pcsw/Clients',json_fields,56,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
-        add_case('rolf','api/cal/MyEvents',json_fields,11,**kw)
+        add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
         add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
         add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
         add_case('alicia','api/integ/Clients',json_fields,5,**kw)

@@ -19,6 +19,7 @@ Defines models for :mod:`lino_welfare.modlib.cal`.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
 
 
@@ -29,7 +30,11 @@ from lino import dd
 #~ PARENT_APP = 'lino.modlib.cal'
 from lino.modlib.cal.models import *
 
-from lino.modlib.cal.workflows import welfare
+#~ add = EventEvents.add_item
+#~ add('30', _("Visit"),'visit')
+
+
+from lino.modlib.cal.workflows import take, feedback
 
 
 class Calendar(Calendar):
@@ -38,6 +43,18 @@ class Calendar(Calendar):
         #~ _("Invite team members"),default=False)
     invite_team_members = dd.ForeignKey('users.Team',blank=True,null=True)
     invite_client = models.BooleanField(_("Invite client"),default=False)
+
+dd.inject_field('system.SiteConfig','client_calendar',
+    dd.ForeignKey('cal.Calendar',
+        verbose_name=_("Default calendar for client events"),
+        related_name='client_calendars',
+        blank=True,null=True))    
+
+dd.inject_field('system.SiteConfig','client_guestrole',
+    dd.ForeignKey('cal.GuestRole',
+        verbose_name=_("Default guest role of client in events."),
+        related_name='client_guestroles',
+        blank=True,null=True))    
     
 dd.inject_field('system.SiteConfig','team_guestrole',
     dd.ForeignKey('cal.GuestRole',
@@ -56,7 +73,7 @@ class Event(Event):
         Guest = settings.SITE.modules.cal.Guest
         if self.calendar.invite_team_members:
             ug = self.calendar.invite_team_members
-            for obj in settings.SITE.modules.cal.Membership.objects.filter(group=ug).exclude(user=self.user):
+            for obj in settings.SITE.modules.users.Membership.objects.filter(team=ug).exclude(user=self.user):
                 if obj.user.partner:
                     yield Guest(event=self,
                         partner=obj.user.partner,
@@ -65,10 +82,11 @@ class Event(Event):
             
         if self.calendar.invite_client:
             if self.project is not None:
-                if self.state == EventStates.visit:
-                    st = GuestStates.visit
-                else:
-                    st = GuestStates.accepted
+                #~ if self.state == EventStates.visit:
+                    #~ st = GuestStates.present
+                #~ else:
+                    #~ st = GuestStates.accepted
+                st = GuestStates.accepted
                 yield Guest(event=self,
                     partner=self.project,
                     state=st,
@@ -80,16 +98,20 @@ class Event(Event):
         #~ print 20130802, ar.renderer
         #~ raise foo
         #~ txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time or datetime.datetime.now().time()))
-        if self.start_time is None:
-            txt = naturalday(self.start_date)
-        else:
-            txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
+        txt = naturalday(self.start_date)
+        if self.start_time is not None:
+            txt = "%s %s %s" % (txt,ugettext("at"),self.start_time.strftime(settings.SITE.time_format_strftime))
+            
+        #~ if self.start_time is None:
+            #~ txt = naturalday(self.start_date)
+        #~ else:
+            #~ txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
         #~ return txt
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self,txt)
 
-class MyEvents(MyEvents):
-    exclude = dict(state=EventStates.visit)
+#~ class MyEvents(MyEvents):
+    #~ exclude = dict(state=EventStates.visit)
         
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender,**kw):
@@ -98,8 +120,9 @@ def customize_cal(sender,**kw):
     site.modules.cal.Calendars.set_detail_layout("""
     type name id 
     # description
+    invite_team_members event_label
     url_template username password
-    readonly invite_team_members invite_client color start_date
+     readonly is_appointment invite_client color start_date
     build_method template email_template attach_to_email
     EventsByCalendar SubscriptionsByCalendar
     """)
@@ -107,7 +130,7 @@ def customize_cal(sender,**kw):
     site.modules.cal.Calendars.set_insert_layout("""
     name 
     type invite_team_members color 
-    invite_client 
+    invite_client
     """,window_size=(60,'auto'))
     
     site.modules.cal.Events.set_detail_layout("general more")
@@ -165,10 +188,10 @@ if False:
     def run_from_ui(self,obj,ar,**kw):
         ekw = dict(project=obj,user=ar.get_user()) 
         ekw.update(state=EventStates.draft)
-        #~ ekw.update(state=EventStates.scheduled)
+        #~ ekw.update(state=EventStates.published)
         ekw.update(start_date=ar.action_param_values.date)
         ekw.update(end_date=ar.action_param_values.date)
-        ekw.update(calendar=settings.SITE.site_config.client_calender)
+        ekw.update(calendar=settings.SITE.site_config.client_calendar)
         if ar.action_param_values.summary:
             ekw.update(summary=ar.action_param_values.summary)
         if ar.action_param_values.user != ar.get_user():

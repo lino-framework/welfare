@@ -266,22 +266,7 @@ class RefuseClient(dd.ChangeStateAction):
     remark
     """,window_size=(50,15))
     
-    #~ def action_param_defaults(self,ar,obj,**kw):
-        #~ kw = super(AssignEvent,self).action_param_defaults(ar,obj,**kw)
-        #~ kw.update(
-            #~ remark=unicode(_("I made up this event for you. %s")) 
-                #~ % ar.get_user())
-        #~ return kw
     
-    
-    def unused_run_from_ui(self,obj,ar,**kw):
-        obj.refusal_reason = ar.action_param_values.reason
-        kw = super(RefuseClient,self).run_from_ui(obj,ar,**kw)
-        #~ obj.save()
-        #~ kw.update(refresh=True)
-        return kw
-    
-        
     def run_from_ui(self,obj,ar,**kw):
         assert isinstance(obj,Client)
         obj.refusal_reason = ar.action_param_values.reason

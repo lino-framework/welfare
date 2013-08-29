@@ -54,7 +54,7 @@ to test the new `eid_info` field:
 
 >>> from django.test import Client
 >>> client = Client()
->>> url = '/api/reception/Clients/176?an=detail&fmt=json'
+>>> url = '/api/pcsw/Clients/176?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
@@ -62,7 +62,7 @@ to test the new `eid_info` field:
 >>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 >>> print(result['data']['eid_info'])
-<div>Card no. 591-4132881-07 (Belgischer Staatsb&#252;rger), G&#252;ltig von 19.08.11 bis 19.08.16, Ausgestellt durch Eupen</div>
+<div>Karte Nr. 591-4132881-07 (Belgischer Staatsb&#252;rger), g&#252;ltig von 19.08.11 bis 19.08.16, ausgestellt durch Eupen</div>
 
 
 

@@ -19,17 +19,14 @@ Theresia's first questions are usually
 "What's your name?" or 
 "Do you have an appointment with a social agent?".
   
-Visitors must have a :ref:`welfare.pcsw.Client` account
-(technically a :ref:`welfare.contacts.Partner` account would be 
+Visitors must have a :ref:`welfare.pcsw.Client` account.
+Technically a :ref:`welfare.contacts.Partner` account would be 
 enough, but other visitors like suppliers or board members aren't 
-usually managed by the reception module).
+managed by the reception module.
 
-Lino must now automatically 
-pop up a notification to read the client's eID card
-if this is necessary, e.g. because
-"eID card has not yet been read!"
-or
-"Old eID card validity has expired!"
+Lino notifies the user to read the client's eID card
+if this is necessary, e.g. because "eID card has not yet been read!"
+or "Old eID card validity has expired!"
 
 Most visitors come at the open consultation hours.
 and don't have an appointment with some user.
@@ -38,7 +35,7 @@ In that case the reception clerk
 clicks "Create Visit", confirms the selected agent and enters a
 "reason" (a short one-line text).
 This will automatically create both a 
-:ref:`welfare.cal.Event` in state ""
+:ref:`welfare.cal.Event` in state "visit"
 and a :ref:`welfare.cal.Guest`
 with 
 

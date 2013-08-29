@@ -65,31 +65,6 @@ dd.inject_field('system.SiteConfig','attestation_note_nature',
         related_name="attestation_siteconfig_set"))
 
         
-def create_visit(project,partner,user,summary):
-    ekw = dict(project=project) 
-    #~ ekw.update(state=cal.EventStates.draft)
-    #~ ekw.update(state=EventStates.scheduled)
-    today = datetime.date.today()
-    ekw.update(start_date=today)
-    ekw.update(end_date=today)
-    ekw.update(calendar=settings.SITE.site_config.client_calender)
-    ekw.update(state=EventStates.visit)
-    ekw.update(user=user)
-    if summary:
-        ekw.update(summary=summary)
-    event = cal.Event(**ekw)
-    event.save()
-    cal.Guest(
-        event=event,
-        partner=partner,
-        state=cal.GuestStates.visit,
-        role=settings.SITE.site_config.client_guestrole,
-        waiting_since=datetime.datetime.now()
-    ).save()
-    #~ event.full_clean()
-    #~ print 20130722, ekw, ar.action_param_values.user, ar.get_user()
-    return event
-
     
 class CreateClientVisit(dd.RowAction): 
     label = _("Create visit")
@@ -104,9 +79,10 @@ class CreateClientVisit(dd.RowAction):
     summary
     """
     def run_from_ui(self,obj,ar,**kw):
-        event = create_visit(obj,obj,
+        event = create_prompt_event(obj,obj,
             ar.action_param_values.user,
-            ar.action_param_values.summary)
+            ar.action_param_values.summary,
+            settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
         kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
@@ -115,7 +91,7 @@ class CreateClientVisit(dd.RowAction):
         
 class CreateCoachingVisit(CreateClientVisit): 
     
-    help_text = _("Create a spot visit for this client with this coach.")
+    help_text = _("Create a prompt event for this client with this coach.")
     
     def action_param_defaults(self,ar,obj,**kw):
         kw = super(CreateCoachingVisit,self).action_param_defaults(ar,obj,**kw)
@@ -124,9 +100,10 @@ class CreateCoachingVisit(CreateClientVisit):
         return kw
         
     def run_from_ui(self,obj,ar,**kw):
-        event = create_visit(obj.client,obj.client,
+        event = create_prompt_event(obj.client,obj.client,
             ar.action_param_values.user,
-            ar.action_param_values.summary)
+            ar.action_param_values.summary,
+            settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
         kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
@@ -364,7 +341,7 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         return elems
     
     @dd.displayfield(create_visit.label)
-    def create_visit_actions(cls,obj,ar):
+    def unused_create_visit_actions(cls,obj,ar):
         elems = []
         ba = cls.get_action_by_name('create_visit')
         for coaching in obj.coachings_by_client.all():
@@ -396,7 +373,7 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
         return E.div(*elems)
 
-pcsw.Coaching.define_action(create_visit = CreateCoachingVisit())
+pcsw.Coaching.define_action(create_visit=CreateCoachingVisit())
 
 class CoachingsByClient(pcsw.CoachingsByClient):
     label = _("Coaches")
@@ -486,8 +463,6 @@ if False: # works, but is very stupid
     #~ def partner(self,obj,ar):
         #~ return obj.partner
     
-        
-
 
 inherited_setup_main_menu = setup_main_menu
 
