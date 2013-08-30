@@ -66,7 +66,7 @@ dd.inject_field('system.SiteConfig','attestation_note_nature',
 
         
     
-class CreateClientVisit(dd.RowAction): 
+class CreateClientVisit(dd.Action): 
     label = _("Create visit")
     #~ show_in_workflow = True
     #~ show_in_row_actions = True
@@ -113,7 +113,7 @@ class CreateCoachingVisit(CreateClientVisit):
 
         
     
-class CreateNote(dd.RowAction): 
+class CreateNote(dd.Action): 
     label = _("Attestation")
     #~ show_in_workflow = True
     show_in_row_actions = True

@@ -218,7 +218,7 @@ add('50',_("Errors"),'errors') # there's a ticket, but no usable result. cannot 
     
 
 
-class unused_ExecuteRequest(dd.RowAction):
+class unused_ExecuteRequest(dd.Action):
     """
     This defines the "Execute" button on a 
     :class:`CBSSRequest` or

@@ -158,7 +158,7 @@ def customize_cal(sender,**kw):
 
 if False:
     
-  class CreateClientEvent(dd.RowAction):
+  class CreateClientEvent(dd.Action):
     label = _("Appointment")
     #~ show_in_workflow = True
     show_in_row_actions = True
