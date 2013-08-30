@@ -13,7 +13,7 @@
 ## along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Defines models for :mod:`lino_welfare.modlib.cal`.
+The :xfile:`models.py` module for the :mod:`lino_welfare.modlib.cal` app.
 """
 
 from __future__ import unicode_literals

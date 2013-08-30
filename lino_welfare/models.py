@@ -13,6 +13,8 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
+The :xfile:`models.py` module for the :mod:`lino_welfare` app.
+
 Contains PCSW-specific models and tables that have not yet been 
 moved into a separate module because they are really very PCSW specific.
 
