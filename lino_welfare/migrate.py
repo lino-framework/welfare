@@ -932,6 +932,7 @@ def migrate_from_1_1_8(globals_dict):
         kw.update(state=state)
         kw.update(assigned_to_id=assigned_to_id)
         return cal_Event(**kw)
+    globals_dict.update(create_cal_event=create_cal_event)
     
     
     return '1.1.9'
