@@ -78,7 +78,8 @@ class CreateClientVisit(dd.Action):
     user 
     summary
     """
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         event = create_prompt_event(obj,obj,
             ar.action_param_values.user,
             ar.action_param_values.summary,
@@ -99,7 +100,8 @@ class CreateCoachingVisit(CreateClientVisit):
             kw.update(user=obj.user)
         return kw
         
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         event = create_prompt_event(obj.client,obj.client,
             ar.action_param_values.user,
             ar.action_param_values.summary,
@@ -127,7 +129,8 @@ class CreateNote(dd.Action):
     """
     #~ required = dict(states='coached')
     
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         notes = dd.resolve_app('notes')
         def ok():
             ekw = dict(project=obj,user=ar.get_user()) 

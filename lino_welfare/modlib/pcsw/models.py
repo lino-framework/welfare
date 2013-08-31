@@ -267,7 +267,8 @@ class RefuseClient(dd.ChangeStateAction):
     """,window_size=(50,15))
     
     
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         assert isinstance(obj,Client)
         obj.refusal_reason = ar.action_param_values.reason
         subject = _("%(client)s has been refused.") % dict(client=obj)
@@ -276,7 +277,7 @@ class RefuseClient(dd.ChangeStateAction):
             body += '\n' + ar.action_param_values.remark
         kw.update(message=subject)
         kw.update(alert=_("Success"))
-        kw = super(RefuseClient,self).run_from_ui(obj,ar,**kw)
+        kw = super(RefuseClient,self).run_from_ui(ar,**kw)
         #~ self.add_system_note(ar,obj)
         silent = False
         ar.add_system_note(

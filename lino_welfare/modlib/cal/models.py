@@ -185,7 +185,8 @@ if False:
             user=obj.event.user,
             partner=obj.partner)
      
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         ekw = dict(project=obj,user=ar.get_user()) 
         ekw.update(state=EventStates.draft)
         #~ ekw.update(state=EventStates.published)

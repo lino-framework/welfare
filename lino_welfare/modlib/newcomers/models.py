@@ -517,10 +517,11 @@ nicht mehr angezeigt."""
         return super(AssignCoach,self).get_action_permission(ar,obj,state)
         #~ return super(AssignCoach,self).get_row_permission(ar,state,ba)
         
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
         """
         Assign a coach to a newcomer.
         """
+        obj = ar.selected_rows[0]
         client = ar.master_instance
         watcher = dd.ChangeWatcher(client)
         #~ if not ssin.is_valid_ssin(client.national_id):

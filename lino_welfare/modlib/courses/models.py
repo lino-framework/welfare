@@ -391,13 +391,14 @@ class RegisterCandidate(dd.ChangeStateAction):
     required = dict(states=['candidate'])
     help_text = _("Register this candidate for this course.")
 
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         assert isinstance(obj,CourseRequest)
         if ar.actor.master is Course and ar.master_instance is not None:
             obj.course = ar.master_instance
         if not obj.course:
             return ar.error(_("Cannot register to unknown course."),alert=True)
-        kw = super(RegisterCandidate,self).run_from_ui(obj,ar,**kw)
+        kw = super(RegisterCandidate,self).run_from_ui(ar,**kw)
         kw.update(refresh_all=True)
         kw.update(message=_("%(person)s has been registered to %(course)s") % dict(
                 person=obj.person,course=obj.course))
@@ -408,11 +409,12 @@ class UnRegisterCandidate(dd.ChangeStateAction):
     required = dict(states=['registered'])
     help_text = _("Unregister this candidate from this course.")
 
-    def run_from_ui(self,obj,ar,**kw):
+    def run_from_ui(self,ar,**kw):
+        obj = ar.selected_rows[0]
         assert isinstance(obj,CourseRequest)
         course = obj.course
         obj.course = None
-        kw = super(UnRegisterCandidate,self).run_from_ui(obj,ar,**kw)
+        kw = super(UnRegisterCandidate,self).run_from_ui(ar,**kw)
         kw.update(refresh_all=True)
         kw.update(message=_("%(person)s has been unregistered from %(course)s") 
             % dict(person=obj.person,course=course))
