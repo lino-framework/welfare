@@ -884,6 +884,8 @@ def migrate_from_1_1_8(globals_dict):
     """
     - Removed `postings` app
     - countries.Language moved to languages.Language
+    - Event.state 60 (rescheduled) becomes cancelled
+    - Event.state 30 (visit) becomes took_place
     """
     
     globals_dict.update(countries_Language=resolve_model('languages.Language'))
@@ -891,5 +893,45 @@ def migrate_from_1_1_8(globals_dict):
     def create_postings_posting(*args):
         return None
     globals_dict.update(create_postings_posting=create_postings_posting)
+    
+    
+    from lino.modlib.cal.models import EventStates
+    old2new = {
+    '60': EventStates.cancelled.value,
+    '30': EventStates.took_place.value,
+    }
+    cal_Event = resolve_model("cal.Event")
+    
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
+        
+        state = old2new.get(state,state)
+        kw = dict()
+        kw.update(id=id)
+        owner_type_id = new_content_type_id(owner_type_id)
+        kw.update(owner_type_id=owner_type_id)
+        kw.update(owner_id=owner_id)
+        kw.update(user_id=user_id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(project_id=project_id)
+        kw.update(build_time=build_time)
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        kw.update(summary=summary)
+        kw.update(description=description)
+        kw.update(uid=uid)
+        kw.update(calendar_id=calendar_id)
+        kw.update(access_class=access_class)
+        kw.update(sequence=sequence)
+        kw.update(auto_type=auto_type)
+        kw.update(transparent=transparent)
+        kw.update(room_id=room_id)
+        kw.update(priority_id=priority_id)
+        kw.update(state=state)
+        kw.update(assigned_to_id=assigned_to_id)
+        return cal_Event(**kw)
+    
     
     return '1.1.9'

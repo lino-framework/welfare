@@ -47,16 +47,15 @@ Das hängt vom :ref:`welfare.users.UserProfile` ab.
 Référence
 =========
 
-.. actor:: pcsw.Clients
-.. actor:: pcsw.ClientContactTypes
-.. actor:: pcsw.ClientContacts
-.. actor:: pcsw.ClientsTest
-.. actor:: pcsw.CoachingTypes
-.. actor:: pcsw.CoachingEndings
-.. actor:: pcsw.Coachings
-.. actor:: pcsw.AidTypes
-.. actor:: pcsw.PersonGroups
-.. actor:: pcsw.UsersWithClients
+.. actor:: pcsw.Client
+.. actor:: pcsw.ClientContactType
+.. actor:: pcsw.ClientContact
+.. actor:: pcsw.CoachingType
+.. actor:: pcsw.CoachingEnding
+.. actor:: pcsw.Coaching
+.. actor:: pcsw.AidType
+.. actor:: pcsw.PersonGroup
+.. actor:: pcsw.UsersWithClient
 
 
 
