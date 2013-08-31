@@ -901,6 +901,7 @@ def migrate_from_1_1_8(globals_dict):
     '30': EventStates.took_place.value,
     }
     cal_Event = resolve_model("cal.Event")
+    new_content_type_id = globals_dict.get('new_content_type_id')
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
         
