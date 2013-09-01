@@ -886,12 +886,17 @@ def migrate_from_1_1_8(globals_dict):
     - countries.Language moved to languages.Language
     - Event.state 60 (rescheduled) becomes cancelled
     - Event.state 30 (visit) becomes took_place
-    - :ref:`welfare.system.SiteConfig`: `client_calendar`
+    - In :ref:`welfare.system.SiteConfig` renamed `client_calender` to `client_calendar`
     """
     
     globals_dict.update(countries_Language=resolve_model('languages.Language'))
-    globals_dict.update(system_SiteConfig=resolve_model('system.SiteConfig'))
-        
+    
+    orig_system_SiteConfig = resolve_model('system.SiteConfig')
+    def system_SiteConfig(**kwargs):
+        kwargs.update(client_calendar_id = kwargs.pop('client_calender_id'))
+        return orig_system_SiteConfig(**kwargs)
+    globals_dict.update(system_SiteConfig=system_SiteConfig)
+    
     def create_postings_posting(*args):
         return None
     globals_dict.update(create_postings_posting=create_postings_posting)
@@ -906,8 +911,7 @@ def migrate_from_1_1_8(globals_dict):
     new_content_type_id = globals_dict.get('new_content_type_id')
     
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
-        
-        state = old2new.get(state,state)
+        state = old2new.get(state,state) # changed
         kw = dict()
         kw.update(id=id)
         owner_type_id = new_content_type_id(owner_type_id)
