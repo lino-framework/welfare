@@ -1,46 +1,53 @@
 .. _welfare.cal:
 
-====================
-Le module Calendrier
-====================
+========
+Calendar
+========
 
-.. actors_overview:: 
-    cal.Events
-    cal.Tasks
+Important models are 
+:ddref:`cal.Event`
+and
+:ddref:`cal.Guest`
+and
+:ddref:`cal.Task`...
+
+.. contents:: 
+   :local:
+   :depth: 2
 
 
-
-.. _welfare.cal.Panel:
-
-Calendar Panel
---------------
-
-The Calendar Panel displays your events in a classical "calendar view", 
-with the possibility to switch between daily, weekly, monthly and to 
-toggle the visibility of team events.
-
+.. actor:: cal.CalendarPanel
 
 
 
+.. actor:: cal.Event
+
+    Possible values for the state of an :ddref: `cal.Event`:
+
+    .. django2rst:: 
+
+        settings.SITE.login('robin').show(cal.EventStates)
 
 
-Référence
-=========
+.. actor:: cal.Guest
 
-.. actor:: cal.Calendars
-.. actor:: cal.Events
-.. actor:: cal.Tasks
-.. actor:: cal.Subscriptions
-.. actor:: cal.Rooms
-.. actor:: cal.Priorities
-.. actor:: cal.GuestRoles
-.. actor:: cal.GuestsByPartner
-.. actor:: cal.Guests
+    Possible values for the state of a :ddref: `cal.Guest`:
 
+    .. django2rst:: 
 
-.. actor:: cal.EventStates
+        settings.SITE.login('robin').show(cal.GuestStates)
 
-.. django2rst:: 
+.. actor:: cal.Task
 
-    settings.SITE.login('romain').show(cal.EventStates)
+    Possible values for the state of a :ddref: `cal.Task`:
+
+    .. django2rst:: 
+
+        settings.SITE.login('robin').show(cal.TaskStates)
+
+.. actor:: cal.Calendar
+.. actor:: cal.Subscription
+.. actor:: cal.Room
+.. actor:: cal.Priority
+.. actor:: cal.GuestRole
 

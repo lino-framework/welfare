@@ -34,14 +34,12 @@ We call this a "visit".
 In that case the reception clerk 
 clicks "Create Visit", confirms the selected agent and enters a
 "reason" (a short one-line text).
-This will automatically create both a 
-:ref:`welfare.cal.Event` in state "visit"
-and a :ref:`welfare.cal.Guest`
-with 
+This will automatically create two records: an 
+:ddref:`cal.Event` and a :ddref:`cal.Guest`.
+
 
 A **visit** is an unplanned calendar event. 
 An **appointment** is a planned (scheduled) calendar event.
-
 
 
 In any case, when the clerk then clicks the Checkin button of 
