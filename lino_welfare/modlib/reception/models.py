@@ -331,7 +331,7 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         elems = [E.div(*elems,style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle")]
         
         elems.append(E.br())
-        elems.append(self.eid_info())
+        elems.append(self.eid_info(ar))
         elems = [E.div(*elems)]
                 
         #~ if not self.has_valid_card_data():

@@ -5,11 +5,13 @@ General PCSW
 
 .. include:: /include/tested.rst
 
-.. 
-  >>> from __future__ import print_function
-  >>> from lino.runtime import *
-  >>> from django.test import Client
-  >>> import json
+Some administrative stuff:
+
+>>> from __future__ import print_function
+>>> from lino.runtime import *
+>>> from django.test import Client
+>>> import json
+>>> client = Client()
 
 >>> ses = settings.SITE.login('rolf')
 >>> ses.show(integ.UsersWithClients,language='de')
@@ -52,8 +54,6 @@ Printing an eID card summary
 And here another case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
 
->>> from django.test import Client
->>> client = Client()
 >>> url = '/api/pcsw/Clients/176?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')
 >>> print(res.status_code)
@@ -63,6 +63,19 @@ to test the new `eid_info` field:
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 >>> print(result['data']['eid_info'])
 <div>Karte Nr. 591-4132881-07 (Belgischer Staatsb&#252;rger), g&#252;ltig von 19.08.11 bis 19.08.16, ausgestellt durch Eupen</div>
+
+
+>>> url = '/api/reception/Clients/176?an=detail&fmt=json'
+>>> res = client.get(url,REMOTE_USER='rolf')
+>>> result = json.loads(res.content)
+>>> "Karte Nr. 591-4132881-07" in result['data']['client_info'][0]
+True
+
+>>> url = '/api/reception/Clients/115?an=detail&fmt=json'
+>>> res = client.get(url,REMOTE_USER='rolf')
+>>> result = json.loads(res.content)
+>>> "Muss eID-Karte einlesen" in result['data']['client_info'][0]
+True
 
 
 
