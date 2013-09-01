@@ -886,9 +886,11 @@ def migrate_from_1_1_8(globals_dict):
     - countries.Language moved to languages.Language
     - Event.state 60 (rescheduled) becomes cancelled
     - Event.state 30 (visit) becomes took_place
+    - :ref:`welfare.system.SiteConfig`: `client_calendar`
     """
     
     globals_dict.update(countries_Language=resolve_model('languages.Language'))
+    globals_dict.update(system_SiteConfig=resolve_model('system.SiteConfig'))
         
     def create_postings_posting(*args):
         return None
