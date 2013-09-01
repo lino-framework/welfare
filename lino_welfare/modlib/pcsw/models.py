@@ -1054,7 +1054,7 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         #~ end_date = models.DateField(_("until"),
             #~ blank=True,null=True,
             #~ help_text="""Date fin de la période observée"""),
-        observed_event = ClientEvents.field(blank=True,default=ClientEvents.active),
+        observed_event = ClientEvents.field(blank=True),
         only_primary = models.BooleanField(
             _("Only primary clients"),default=False,help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
@@ -1156,6 +1156,12 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         return qs
         
 
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(Clients,self).param_defaults(ar,**kw)
+        kw.update(observed_event=ClientEvents.active)
+        return kw
+        
     @classmethod
     def get_title_tags(self,ar):
         for t in super(Clients,self).get_title_tags(ar):
