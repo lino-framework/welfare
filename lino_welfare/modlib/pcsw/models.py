@@ -19,6 +19,7 @@ moved into a separate module because they are really very PCSW specific.
 """
 
 from __future__ import unicode_literals
+from __future__ import print_function
 
 import logging
 logger = logging.getLogger(__name__)
@@ -1071,12 +1072,15 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
       
     @classmethod
     def get_request_queryset(self,ar):
+        #~ if ar.param_values.client_state == '':
+            #~ raise Exception(20130901)
         #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
         qs = super(Clients,self).get_request_queryset(ar)
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
             
         ce = ar.param_values.observed_event
+        #~ print(20130901,ar.param_values)
         if ar.param_values.start_date is None or ar.param_values.end_date is None:
             period = None
         else:
@@ -1153,6 +1157,9 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             max_date = today - datetime.timedelta(days=ar.param_values.aged_to*365)
             qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
             #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
+            
+        #~ print(20130901,qs.query)
+        
         return qs
         
 
