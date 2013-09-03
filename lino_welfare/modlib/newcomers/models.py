@@ -274,7 +274,9 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
     
     @classmethod
     def param_defaults(self,ar,**kw):
-        kw = super(NewClients,self).param_defaults(ar,**kw)
+        # Note that we skip pcsw.Clients mro parent
+        #~ kw = super(NewClients,self).param_defaults(ar,**kw)
+        kw = super(contacts.Persons,self).param_defaults(ar,**kw)
         kw.update(new_since=amonthago())
         return kw
             

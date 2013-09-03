@@ -53,36 +53,36 @@ Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`.
 Référence
 =========
 
-.. actor:: jobs.Jobs
-.. actor:: jobs.JobProviders
-.. actor:: jobs.Contracts
-.. actor:: jobs.Candidatures
-.. actor:: jobs.Regimes
-.. actor:: jobs.Sectors
-.. actor:: jobs.Functions
-.. actor:: jobs.Schedules
-.. actor:: jobs.Offers
-.. actor:: jobs.Studies
-.. actor:: jobs.StudiesByPerson
-.. actor:: jobs.Experiences
-.. actor:: jobs.ExperiencesByPerson
-.. actor:: jobs.JobTypes
-.. actor:: jobs.ContractTypes
+.. actor:: jobs.Job
+.. actor:: jobs.JobProvider
+.. actor:: jobs.Contract
+.. actor:: jobs.Candidature
+.. actor:: jobs.Regime
+.. actor:: jobs.Sector
+.. actor:: jobs.Function
+.. actor:: jobs.Schedule
+.. actor:: jobs.Offer
+.. actor:: jobs.Study
+.. actor:: jobs.Experience
+.. actor:: jobs.JobType
+.. actor:: jobs.ContractType
 
 
 
 .. actor:: jobs.JobsOverview
 
+    This list helps you to make decisions like:
 
-This list helps you to make decisions like:
+    - which jobs are soon going to be free, and which candidate(s) should we
+      suggest?
+    - bla bla
 
-- which jobs are soon going to be free, and which candidate(s) should we
-  suggest?
-- bla bla
+    Example (using fictive demo data):
 
-Example (using fictive demo data):
+    .. django2rst:: 
 
-.. django2rst:: 
+        settings.SITE.login('rolf').show(jobs.JobsOverview)
+        
 
-    settings.SITE.login('rolf').show(jobs.JobsOverview)
-    
+.. actor:: jobs.StudiesByPerson
+.. actor:: jobs.ExperiencesByPerson

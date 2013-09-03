@@ -6,15 +6,15 @@ Clients
 
 (N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)
 
-Ce module comprend les fonctionnalités autour des entités suivantes:
+This section is about the 
+:ddref:`pcsw.Client`
+model, and the 
+:ddref:`pcsw.Coaching`
+and
+:ddref:`pcsw.ClientContact`
+models.
 
-.. actors_overview:: 
-    contacts.Partners
-    pcsw.Clients
-    pcsw.Coachings
-    
-    
-    
+   
 Ein Klient ist eine Person, für die wir eine Serie von 
 zusätzlichen Daten erfassen.
 
@@ -48,11 +48,12 @@ Référence
 =========
 
 .. actor:: pcsw.Client
-.. actor:: pcsw.ClientContactType
+.. actor:: pcsw.Coaching
 .. actor:: pcsw.ClientContact
+
+.. actor:: pcsw.ClientContactType
 .. actor:: pcsw.CoachingType
 .. actor:: pcsw.CoachingEnding
-.. actor:: pcsw.Coaching
 .. actor:: pcsw.AidType
 .. actor:: pcsw.PersonGroup
 

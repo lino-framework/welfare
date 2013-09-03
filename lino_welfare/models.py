@@ -329,19 +329,6 @@ def site_setup(site):
     activity bank_account1:12 bank_account2:12
     """)
     
-    if False:
-        site.modules.system.SiteConfigs.set_detail_layout("""
-        site_company system_note_type default_build_method 
-        next_partner_id:20 job_office debts_bailiff_type master_budget
-        signer1 signer2
-        signer1_function signer2_function 
-        constants
-        # lino.ModelsBySite
-        """,constants="""
-        propgroup_skills propgroup_softskills propgroup_obstacles
-        residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
-        client_calendar prompt_calendar client_guestrole team_guestrole attestation_note_nature
-        """)
     site.modules.system.SiteConfigs.set_detail_layout(
         "general constants",
         general=dd.Panel("""

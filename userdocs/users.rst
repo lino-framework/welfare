@@ -1,85 +1,48 @@
 .. _welfare.users:
 
-========================
-Gestion des utilisateurs
-========================
+=====
+Users
+=====
+
+.. actor:: users.User
 
 
-Référence
-=========
+.. actor:: users.Team
 
-.. actor:: users.Users
-.. actor:: users.Teams
-.. actor:: users.Memberships
+    A :ddref:`users.Team` is a group of users that work together more tightly than 
+    others. The demo site has the following teams:
 
+    .. django2rst:: settings.SITE.login('rolf').show(users.Teams)
 
-.. _welfare.users.User.profile:
-
-The profile of a user
----------------------
-
-Each user must have a profile in order to be active. 
-Users with an empty :ref:`welfare.users.User.profile` 
-field are considered inactive and cannot log in.
+    The permissions do not depend on the Team, 
+    they depend on the :ddref:`profile <lino.UserProfiles>`.
+    Belonging to a :ddref:`users.Team` or not has no influence on access permissions
 
 
 
-Team
-====
+.. actor:: users.Membership
 
-The permissions do not depend on the Team, 
-they depend on the :ref:`welfare.users.UserProfile`.
-Belonging to a user group or not has no influence on access permissions
-
-
-Teams
-=============
-
-
-The table of available :ref:`welfare.users.Team` records on this site.
-
-The demo site has the following teams:
-
-.. django2rst:: settings.SITE.login('rolf').show(users.Teams)
+    A membership is when a given :ddref:`users.User` 
+    belongs to a given :ddref:`users.Team`.
 
 
 
-Membership
-=============
 
-
-A membership is when a given :ref:`welfare.users.User` 
-belongs to a given :ref:`welfare.users.Team`.
-
-
-
-.. _welfare.users.UserProfile:
-
-User Profile
-=============
-
-A user profile is a combination of access rights and permission sets. 
 
 
 
 .. actor:: lino.UserProfiles
 
+    The list of user profiles available on this site. 
+    Each user profile is a combination of access rights and permission sets. 
 
-User Profiles
-=============
+    In the demo database, alice and hubert share the same profile 
+    while melanie has a different profile.
 
-The list of user profiles available on this site. 
+    .. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
 
-In the demo database, alice and hubert share the same profile 
-while melanie has a different profile.
-
-.. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
-
-
-
-
-Référence
-=========
 
 
 .. actor:: system.ContentTypes
+
+.. actor:: system.SiteConfig
