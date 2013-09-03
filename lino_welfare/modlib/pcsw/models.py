@@ -292,12 +292,12 @@ class RefuseClient(dd.ChangeStateAction):
             
     
 
-class Getter(object):
-    def __init__(self,query_dict):
-        self.query_dict = query_dict
-        
-    def __getattr__(self,name):
-        return self.query_dict.get(name)
+#~ class Getter(object):
+    #~ def __init__(self,query_dict):
+        #~ self.query_dict = query_dict
+        #~ 
+    #~ def __getattr__(self,name):
+        #~ return self.query_dict.get(name)
 
 
 
@@ -2173,4 +2173,36 @@ def setup_reports_menu(site,ui,profile,m):
 
 #~ INTEG_MODULE_LABEL = _("Integration")
 #~ JOBS_MODULE_LABEL = _("Art.60§7")
+
+
+
+
+def setup_workflows(site):
+
+    #~ ClientStates.newcomer.add_transition(states='refused coached invalid former',user_groups='newcomers')
+    if False: # removed 20130904
+        
+        def allow_state_newcomer(action,user,obj,state):
+            """
+            A Client with at least one Coaching cannot become newcomer.
+            """
+            #~ if obj.client_state == ClientStates.coached:
+            if obj.coachings_by_client.count() > 0:
+                return False
+            return True
+        
+        
+        ClientStates.newcomer.add_transition(states='refused coached former',
+            user_groups='newcomers',allow=allow_state_newcomer)
+        
+    ClientStates.refused.add_transition(RefuseClient)
+    #~ ClientStates.refused.add_transition(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
+    #~ ClientStates.coached.add_transition(_("Coached"),states='new',user_groups='newcomers')
+    ClientStates.former.add_transition(_("Former"),
+        #~ states='coached invalid',
+        states='coached',
+        user_groups='newcomers')
+    #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+
+
 
