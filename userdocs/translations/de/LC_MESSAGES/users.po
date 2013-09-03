@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-28 05:16+0300\n"
+"POT-Creation-Date: 2013-09-03 18:49+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -18,94 +18,109 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 4b44c908789c47ae940a6fc26994d6d7
+# f5133c78d32846288de5459a396da683
 #: ../users.rst:5
-msgid "Gestion des utilisateurs"
+msgid "Users"
 msgstr ""
+
+# bd890f44de21411aa12addcffd209ccc
+#: None:2
+msgid "User (model in app \"users\")"
+msgstr ""
+
+# 595f684f523e4e59b94dc71c52448a07
+#: None:2
+msgid "Team (model in app \"users\")"
+msgstr ""
+
+# ad5d80e37847488fbe5daf865c35d8e6
+#: None:2
+msgid "Membership (model in app \"users\")"
+msgstr ""
+
+# 24aa7bb54c584b8993cdc2bbef80c70a
+#: None:2
+msgid "site config (model in app \"system\")"
+msgstr ""
+
+# 4b44c908789c47ae940a6fc26994d6d7
+#~ msgid "Gestion des utilisateurs"
+#~ msgstr ""
 
 # 86d434456ed74a3f9bbe2416a3ade164
 # 4108f94f3bc74baa89f9bca93ff02924
-#: ../users.rst:9 ../users.rst:82
-msgid "Référence"
-msgstr ""
+#~ msgid "Référence"
+#~ msgstr ""
 
 # 6a1c18644d0e4cce99c2e93d85411012
-#: ../users.rst:19
-msgid "The profile of a user"
-msgstr ""
+#~ msgid "The profile of a user"
+#~ msgstr ""
 
 # 621bea9049df49b2b502fc6ef0d97a96
-#: ../users.rst:21
-msgid ""
-"Each user must have a profile in order to be active. Users with an empty "
-":ref:`welfare.users.User.profile` field are considered inactive and "
-"cannot log in."
-msgstr ""
+#~ msgid ""
+#~ "Each user must have a profile in"
+#~ " order to be active. Users with "
+#~ "an empty :ref:`welfare.users.User.profile` field "
+#~ "are considered inactive and cannot log"
+#~ " in."
+#~ msgstr ""
 
 # bdb80cd1dff44c62b3c8a12f3d487a3e
-#: ../users.rst:28
-msgid "Team"
-msgstr ""
+#~ msgid "Team"
+#~ msgstr ""
 
 # e6efe25f7fff47a09d8d45eb3eaf3199
-#: ../users.rst:30
-msgid ""
-"The permissions do not depend on the Team, they depend on the "
-":ref:`welfare.users.UserProfile`. Belonging to a user group or not has no"
-" influence on access permissions"
-msgstr ""
+#~ msgid ""
+#~ "The permissions do not depend on "
+#~ "the Team, they depend on the "
+#~ ":ref:`welfare.users.UserProfile`. Belonging to a "
+#~ "user group or not has no influence"
+#~ " on access permissions"
+#~ msgstr ""
 
 # d742aa1d590145a1b06cbfe8bd497b5e
-#: ../users.rst:36
-msgid "Teams"
-msgstr ""
+#~ msgid "Teams"
+#~ msgstr ""
 
 # 886a34994a6b48d6ae054b2c276b3346
-#: ../users.rst:39
-msgid "The table of available :ref:`welfare.users.Team` records on this site."
-msgstr ""
+#~ msgid "The table of available :ref:`welfare.users.Team` records on this site."
+#~ msgstr ""
 
 # c7f349d7b0f14701904ca31e6148213c
-#: ../users.rst:41
-msgid "The demo site has the following teams:"
-msgstr ""
+#~ msgid "The demo site has the following teams:"
+#~ msgstr ""
 
 # 58c9943e97384c0dae2472e78b2a526b
-#: ../users.rst:48
-msgid "Membership"
-msgstr ""
+#~ msgid "Membership"
+#~ msgstr ""
 
 # 605c4fac53044e84ae096698c2d6cbd3
-#: ../users.rst:51
-msgid ""
-"A membership is when a given :ref:`welfare.users.User` belongs to a given"
-" :ref:`welfare.users.Team`."
-msgstr ""
+#~ msgid ""
+#~ "A membership is when a given "
+#~ ":ref:`welfare.users.User` belongs to a given"
+#~ " :ref:`welfare.users.Team`."
+#~ msgstr ""
 
 # 92bb0dc2c1d441ddaa7cb19c05a3ce11
-#: ../users.rst:59
-msgid "User Profile"
-msgstr ""
+#~ msgid "User Profile"
+#~ msgstr ""
 
 # 1485889b3726416485c7ce5c079e9dc9
-#: ../users.rst:61
-msgid "A user profile is a combination of access rights and permission sets."
-msgstr ""
+#~ msgid "A user profile is a combination of access rights and permission sets."
+#~ msgstr ""
 
 # 3fa940a2d0954d73ac9a05d845d50a1a
-#: ../users.rst:69
-msgid "User Profiles"
-msgstr ""
+#~ msgid "User Profiles"
+#~ msgstr ""
 
 # 2a15c337def3494d82c2224d946ab2f9
-#: ../users.rst:71
-msgid "The list of user profiles available on this site."
-msgstr ""
+#~ msgid "The list of user profiles available on this site."
+#~ msgstr ""
 
 # d87ec55fa77f483c93cd6cca9ef1e6f6
-#: ../users.rst:73
-msgid ""
-"In the demo database, alice and hubert share the same profile while "
-"melanie has a different profile."
-msgstr ""
+#~ msgid ""
+#~ "In the demo database, alice and "
+#~ "hubert share the same profile while "
+#~ "melanie has a different profile."
+#~ msgstr ""
 

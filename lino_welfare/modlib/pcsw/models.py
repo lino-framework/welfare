@@ -979,21 +979,23 @@ def only_coached_on(qs,today,join=None):
         n = join + '__' + n
     return qs.filter(only_active_coachings_filter(today,n)).distinct()
 
-def only_active_coachings_filter(today,prefix=''):
-    assert len(today) == 2
+def only_active_coachings_filter(period,prefix=''):
+    """
+    """
+    assert len(period) == 2
     return Q(
         #~ Q(**{n+'__end_date__isnull':False}) | Q(**{n+'__start_date__isnull':False}),
-        Q(**{prefix+'end_date__isnull':True})  | Q(**{prefix+'end_date__gte':today[0]}),
-        Q(**{prefix+'start_date__lte':today[1]}))
-        #~ Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':today}))
+        Q(**{prefix+'end_date__isnull':True})  | Q(**{prefix+'end_date__gte':period[0]}),
+        Q(**{prefix+'start_date__lte':period[1]}))
+        #~ Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':period}))
 
-def add_coachings_filter(qs,user,today,primary):
-    assert today is None or len(today) == 2
-    if not (user or today or primary):
+def add_coachings_filter(qs,user,period,primary):
+    assert period is None or len(period) == 2
+    if not (user or period or primary):
         return qs
     flt = Q()
-    if today:
-        flt &= only_active_coachings_filter(today,'coachings_by_client__')
+    if period:
+        flt &= only_active_coachings_filter(period,'coachings_by_client__')
     if user:
         flt &= Q(coachings_by_client__user=user)
     if primary:
@@ -1009,7 +1011,7 @@ def daterange_text(a,b):
     return dd.dtos(a)+"-"+dd.dtos(b)
     
     
-COACHED_STATES = [ClientStates.coached,ClientStates.newcomer]    
+ACTIVE_STATES = [ClientStates.coached,ClientStates.newcomer]    
     
 class Clients(contacts.Persons):
     #~ debug_permissions = True # '20120925'
@@ -1079,12 +1081,17 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ if ar.param_values.new_since:
             #~ qs = only_new_since(qs,ar.param_values.new_since)
             
-        ce = ar.param_values.observed_event
         #~ print(20130901,ar.param_values)
+        
+        """
+        For coached_by and and_coached_by, a blank period 
+        """
+        
         if ar.param_values.start_date is None or ar.param_values.end_date is None:
             period = None
         else:
             period = (ar.param_values.start_date, ar.param_values.end_date)
+            
             
         qs = add_coachings_filter(qs,
             ar.param_values.coached_by,
@@ -1096,49 +1103,52 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 period,
                 False)
             
-        if period is None:
-            if ce == ClientEvents.active:
-                if ar.param_values.client_state is None:
-                    qs = qs.filter(client_state__in=COACHED_STATES)
+        period = [ar.param_values.start_date, ar.param_values.end_date]
+        if period[0] is None:
+            period[0] = period[1] or datetime.date.today()
+        if period[1] is None:
+            period[1] = period[0]
+        
+        ce = ar.param_values.observed_event
+        if ce is None:
+            pass
+        elif ce == ClientEvents.active:
+            if ar.param_values.client_state is None:
+                qs = qs.filter(client_state__in=ACTIVE_STATES)
+        elif ce == ClientEvents.isip:
+            f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(isip_contract_set_by_client__applies_until__gte=period[0])
+            flt = f1 & (Q(isip_contract_set_by_client__date_ended__isnull=True) | Q(isip_contract_set_by_client__date_ended__gte=period[0]))
+            flt &= Q(isip_contract_set_by_client__applies_from__lte=period[1])
+            qs = qs.filter(flt).distinct()
+        elif ce == ClientEvents.jobs:
+            f1 = Q(jobs_contract_set_by_client__applies_until__isnull=True) | Q(jobs_contract_set_by_client__applies_until__gte=period[0])
+            flt = f1 & (Q(jobs_contract_set_by_client__date_ended__isnull=True) | Q(jobs_contract_set_by_client__date_ended__gte=period[0]))
+            flt &= Q(jobs_contract_set_by_client__applies_from__lte=period[1])
+            qs = qs.filter(flt).distinct()
+            
+        elif ce == ClientEvents.dispense:
+            qs = qs.filter(
+                dispense__end_date__gte=period[0],
+                dispense__start_date__lte=period[1]).distinct()
+        elif ce == ClientEvents.created:
+            qs = qs.filter(
+                created__gte=datetime.datetime.combine(period[0],datetime.time()),
+                created__lte=datetime.datetime.combine(period[1],datetime.time()))
+            #~ print 20130527, qs.query
+        elif ce == ClientEvents.modified:
+            qs = qs.filter(
+                modified__gte=datetime.datetime.combine(period[0],datetime.time()),
+                modified__lte=datetime.datetime.combine(period[1],datetime.time()))
+        elif ce == ClientEvents.exclusion:
+            qs = qs.filter(
+                exclusion__excluded_until__gte=period[0],
+                exclusion__excluded_from__lte=period[1]).distinct()
+        elif ce == ClientEvents.note:
+            qs = qs.filter(
+                notes_note_set_by_project__date__gte=period[0],
+                notes_note_set_by_project__date__lte=period[1]).distinct()
         else:
-            if ce is None:
-                pass
-            elif ce == ClientEvents.active:
-                pass
-            elif ce == ClientEvents.isip:
-                f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(isip_contract_set_by_client__applies_until__gte=period[0])
-                flt = f1 & (Q(isip_contract_set_by_client__date_ended__isnull=True) | Q(isip_contract_set_by_client__date_ended__gte=period[0]))
-                flt &= Q(isip_contract_set_by_client__applies_from__lte=period[1])
-                qs = qs.filter(flt).distinct()
-            elif ce == ClientEvents.jobs:
-                f1 = Q(jobs_contract_set_by_client__applies_until__isnull=True) | Q(jobs_contract_set_by_client__applies_until__gte=period[0])
-                flt = f1 & (Q(jobs_contract_set_by_client__date_ended__isnull=True) | Q(jobs_contract_set_by_client__date_ended__gte=period[0]))
-                flt &= Q(jobs_contract_set_by_client__applies_from__lte=period[1])
-                qs = qs.filter(flt).distinct()
-                
-            elif ce == ClientEvents.dispense:
-                qs = qs.filter(
-                    dispense__end_date__gte=period[0],
-                    dispense__start_date__lte=period[1]).distinct()
-            elif ce == ClientEvents.created:
-                qs = qs.filter(
-                    created__gte=datetime.datetime.combine(period[0],datetime.time()),
-                    created__lte=datetime.datetime.combine(period[1],datetime.time()))
-                #~ print 20130527, qs.query
-            elif ce == ClientEvents.modified:
-                qs = qs.filter(
-                    modified__gte=datetime.datetime.combine(period[0],datetime.time()),
-                    modified__lte=datetime.datetime.combine(period[1],datetime.time()))
-            elif ce == ClientEvents.exclusion:
-                qs = qs.filter(
-                    exclusion__excluded_until__gte=period[0],
-                    exclusion__excluded_from__lte=period[1]).distinct()
-            elif ce == ClientEvents.note:
-                qs = qs.filter(
-                    notes_note_set_by_project__date__gte=period[0],
-                    notes_note_set_by_project__date__lte=period[1]).distinct()
-            else:
-                raise Warning(repr(ce))
+            raise Warning(repr(ce))
             
         if ar.param_values.client_state:
             qs = qs.filter(client_state=ar.param_values.client_state)
@@ -1166,7 +1176,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
     @classmethod
     def param_defaults(self,ar,**kw):
         kw = super(Clients,self).param_defaults(ar,**kw)
-        kw.update(observed_event=ClientEvents.active)
+        kw.update(client_state=ClientStates.coached)
         return kw
         
     @classmethod

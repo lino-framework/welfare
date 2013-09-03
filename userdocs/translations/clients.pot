@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-28 05:16+0300\n"
+"POT-Creation-Date: 2013-09-03 18:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
 #: ../clients.rst:9
-# 9873193472034ab3b19d5a23cb6192e6
-msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
+# 2df09a8a71fe4626bffc7bc7e2e14156
+msgid "This section is about the :ddref:`pcsw.Client` model, and the :ddref:`pcsw.Coaching` and :ddref:`pcsw.ClientContact` models."
 msgstr ""
 
 #: ../clients.rst:18
@@ -66,23 +66,63 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-#: ../clients.rst:66
+#: ../clients.rst:65
 # 3acbab023921428ba77d66fa8a187e0e
 msgid "Anhang"
 msgstr ""
 
-#: ../clients.rst:68
+#: ../clients.rst:67
 # 5269638430af4771b4fcf6c376b5b30f
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
-#: ../clients.rst:69
+#: ../clients.rst:68
 # 3d627a2f4f944ccf91770242554535ce
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
-#: ../clients.rst:70
+#: ../clients.rst:69
 # 71e98fc701c84a4f817c034ae30d8ff4
 msgid "engl. \"State\" = Bearbeitungszustand"
+msgstr ""
+
+#: None:2
+# 29e7f627c6944c7e888636ffb1d73c73
+msgid "Client (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 3b0094853ba44fc29fcef8c9ff0418fd
+msgid "Coaching (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 9ebbefe5cb16477daa649356102853fd
+msgid "Client Contact (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# be797f890d4e4b3ab3265785396e86e2
+msgid "Client Contact type (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 4c3159c6097f4dcfa120af1c4f584bc5
+msgid "Coaching type (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 6e699e3631084ec2989bf12ef694edd7
+msgid "Reason of termination (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 1d04b4b6cf6e4a1b993be1d4ecbaea02
+msgid "aid type (model in app \"pcsw\")"
+msgstr ""
+
+#: None:2
+# 50138cd4bd3844e995679678e6b5f074
+msgid "Integration Phase (model in app \"pcsw\")"
 msgstr ""
 

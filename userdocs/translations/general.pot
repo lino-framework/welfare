@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-28 05:16+0300\n"
+"POT-Creation-Date: 2013-09-03 18:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,36 +22,86 @@ msgid "Concepts généraux"
 msgstr ""
 
 #: ../general.rst:8
+# 7abb2a8aad24412e8a793a6223f7578a
+msgid "Das Hauptmenü"
+msgstr ""
+
+#: ../general.rst:10
+# 867b38d2fcb14033ab55ce61cd061c24
+msgid "Zur Struktur des Menüs:"
+msgstr ""
+
+#: ../general.rst:12
+# 197d8fbaedb54d55a432e99ffb5808a0
+msgid "Alle Benutzer haben eigentlich das gleiche Menü, aber die einzelnen Untermenüs \"wachsen\" oder \"schrumpfen\" je nach den Zugriffsrechten"
+msgstr ""
+
+#: ../general.rst:16
+# 93df7f4473d14cdfab8eebc7140a8c3c
+msgid "Wir unterscheiden **drei Arten von Menü-Titeln**:"
+msgstr ""
+
+#: ../general.rst:18
+# 0cadc30042474824ac56f3d61b7e63d7
+msgid "Pro \"funktionaler Gruppe\" jeweils ein Titel mit den \"täglichen\" Befehlen: (:menuselection:`Kontakte`, :menuselection:`Büro`, :menuselection:`DSBE`, :menuselection:`Kurse` usw.)"
+msgstr ""
+
+#: ../general.rst:25
+# dd0b002f5ecf435ba12763cfeca4f0a9
+msgid "Drei besondere Titel \":menuselection:`Listings`\" \":menuselection:`Konfigurierung`\" und \":menuselection:`Explorer`\" enthalten weniger häufige Funktionen und sind *jeweils wieder pro funktionaler Gruppe unterteilt*:"
+msgstr ""
+
+#: ../general.rst:33
+# c3554b27e06643d6b9b14aeb4411c7f9
+msgid ":menuselection:`Listings` könnte auch :menuselection:`Auswertungen` genannt werden."
+msgstr ""
+
+#: ../general.rst:36
+# ba4adaad2e8f4495bbb6a040a7b96570
+msgid ":menuselection:`Konfigurierung` enthält Befehle zur Konfigurierung des Gesamtsystems."
+msgstr ""
+
+#: ../general.rst:39
+# 9a829b8eb48f4761abb14514e2dc7cab
+msgid ":menuselection:`Explorer` zeigt Gesamtansichten gewisser Tabellen, die theoretisch nicht nötig sind."
+msgstr ""
+
+#: ../general.rst:42
+# 0be4202b3b594a3e89636ce598546dea
+msgid "Sowie die drei speziellen Titel :menuselection:`Site`, :menuselection:`Startseite` und das :menuselection:`Benutzermenü`."
+msgstr ""
+
+#: ../general.rst:50
 # 50d614985e394c5eaae065dbf1c6f42b
 msgid "Vue tabulaire"
 msgstr ""
 
-#: ../general.rst:10
+#: ../general.rst:52
 # f8a164fae06c46ce9ebc2b09819e5c56
 msgid "Nous parlons de vue tabullaire quand une série d'enregistrements vous est présentée sous forme de grille. Les colonnes portent des libellés."
 msgstr ""
 
-#: ../general.rst:17
+#: ../general.rst:59
 # 95a15e3d1a4c4ae79ff8e632c2ff3950
 msgid "Vue détaillée"
 msgstr ""
 
-#: ../general.rst:19
+#: ../general.rst:61
 # e574356697d04503aafa3278a65b58ad
 msgid "Nous parlons de vue détaillée quand un seul enregistrement vous est présenté sous forme de formulaire."
 msgstr ""
 
-#: ../general.rst:26
+#: ../general.rst:68
 # 3ab935bdce1f48d7b1f175ef8879a850
 msgid "Enregisterer"
 msgstr ""
 
-#: ../general.rst:28
+#: ../general.rst:70
 # 88711eac140e40229bc58f4a4ef2d6ac
 msgid "Click this button to save your changes in the form."
 msgstr ""
 
-#: ../general.rst:33
+#: ../general.rst:75
 # dd48fcc27ff24f149aca63611469d240
 msgid "Référence"
 msgstr ""

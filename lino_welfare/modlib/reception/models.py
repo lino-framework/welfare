@@ -291,24 +291,16 @@ class Clients(pcsw.Clients): # see blog 2013/0817
     #~ find_by_beid = beid.FindByBeIdAction()
     
     create_note_actions = dd.ShowSlaveTable(CreateNoteActionsByClient)
-
     
     create_visit = CreateClientVisit()
     #~ create_note = CreateNote()
     
-    #~ @dd.virtualfield(dd.HtmlBox())
-    #~ def eid_card(cls,self,ar):
-        #~ for fldname in 'card_number card_valid_from card_valid_until card_issuer card_type'
-        #~ fld2html()
-        
-    #~ @classmethod
-    #~ def get_title_tags(self,ar):
-        #~ return []
-        #~ 
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ return super(pcsw.Clients,self).get_request_queryset(ar) # skip one parent
-        #~ return dd.Table.get_request_queryset(ar)
+    @classmethod
+    def param_defaults(self,ar,**kw):
+        kw = super(Clients,self).param_defaults(ar,**kw)
+        kw.update(client_state=None)
+        kw.update(observed_event=pcsw.ClientEvents.active)
+        return kw
         
         
     @dd.displayfield()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-28 05:16+0300\n"
+"POT-Creation-Date: 2013-09-03 18:49+0300\n"
 "PO-Revision-Date: 2013-03-31 22:49+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -28,9 +28,11 @@ msgstr "Klienten"
 msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
-# 9873193472034ab3b19d5a23cb6192e6
+# 2df09a8a71fe4626bffc7bc7e2e14156
 #: ../clients.rst:9
-msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
+msgid ""
+"This section is about the :ddref:`pcsw.Client` model, and the "
+":ddref:`pcsw.Coaching` and :ddref:`pcsw.ClientContact` models."
 msgstr ""
 
 # 86ea139c7f904851bca7572dd2826e40
@@ -83,22 +85,66 @@ msgid "Référence"
 msgstr ""
 
 # 3acbab023921428ba77d66fa8a187e0e
-#: ../clients.rst:66
+#: ../clients.rst:65
 msgid "Anhang"
 msgstr ""
 
 # 5269638430af4771b4fcf6c376b5b30f
-#: ../clients.rst:68
+#: ../clients.rst:67
 msgid "Workflow : Arbeitsablauf"
 msgstr ""
 
 # 3d627a2f4f944ccf91770242554535ce
-#: ../clients.rst:69
+#: ../clients.rst:68
 msgid "Life cycle : Lebenzyklus"
 msgstr ""
 
 # 71e98fc701c84a4f817c034ae30d8ff4
-#: ../clients.rst:70
+#: ../clients.rst:69
 msgid "engl. \"State\" = Bearbeitungszustand"
 msgstr ""
+
+# 29e7f627c6944c7e888636ffb1d73c73
+#: None:2
+msgid "Client (model in app \"pcsw\")"
+msgstr ""
+
+# 3b0094853ba44fc29fcef8c9ff0418fd
+#: None:2
+msgid "Coaching (model in app \"pcsw\")"
+msgstr ""
+
+# 9ebbefe5cb16477daa649356102853fd
+#: None:2
+msgid "Client Contact (model in app \"pcsw\")"
+msgstr ""
+
+# be797f890d4e4b3ab3265785396e86e2
+#: None:2
+msgid "Client Contact type (model in app \"pcsw\")"
+msgstr ""
+
+# 4c3159c6097f4dcfa120af1c4f584bc5
+#: None:2
+msgid "Coaching type (model in app \"pcsw\")"
+msgstr ""
+
+# 6e699e3631084ec2989bf12ef694edd7
+#: None:2
+msgid "Reason of termination (model in app \"pcsw\")"
+msgstr ""
+
+# 1d04b4b6cf6e4a1b993be1d4ecbaea02
+#: None:2
+msgid "aid type (model in app \"pcsw\")"
+msgstr ""
+
+# 50138cd4bd3844e995679678e6b5f074
+#: None:2
+msgid "Integration Phase (model in app \"pcsw\")"
+msgstr ""
+
+# 9873193472034ab3b19d5a23cb6192e6
+#~ msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
+#~ msgstr ""
 
