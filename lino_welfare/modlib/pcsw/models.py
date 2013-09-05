@@ -914,6 +914,7 @@ class ClientDetail(dd.FormLayout):
     activity client_state refusal_reason
     is_cpas is_senior is_obsolete 
     unavailable_until:15 unavailable_why:30
+    noble_condition card_valid_from card_valid_until card_issuer card_number card_type
     remarks:30 remarks2:30 
     contacts.RolesByPerson:20 households.MembersByPerson:40
     # links.LinksToThis:30 links.LinksFromThis:30 

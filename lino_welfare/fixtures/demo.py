@@ -827,12 +827,20 @@ def objects():
     mari = CLIENTS.pop()
     iiris = CLIENTS.pop()
     
-    luc.card_number = '591-4132881-07'
+    luc.card_number = '591413288107'
     luc.card_valid_from = i2d(20110819)
     luc.card_valid_until = i2d(20160819)
     luc.card_issuer = "Eupen"
     luc.card_type = BeIdCardTypes.belgian_citizen
     luc.save()
+    
+    gerd.card_number = '12345678901'
+    gerd.card_valid_from = i2d(20120819)
+    gerd.card_valid_until = i2d(20130818)
+    gerd.card_issuer = "Eupen"
+    gerd.card_type = BeIdCardTypes.foreigner_c
+    gerd.save()
+    
     
         
     yield study(person=luc,type=schule,content=abi,
