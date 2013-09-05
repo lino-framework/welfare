@@ -911,10 +911,9 @@ class ClientDetail(dd.FormLayout):
     """,label = _("Calendar"))
     
     misc = dd.Panel("""
-    activity client_state refusal_reason
+    activity client_state refusal_reason unavailable_until:15 unavailable_why:30
     is_cpas is_senior is_obsolete 
-    unavailable_until:15 unavailable_why:30
-    noble_condition card_valid_from card_valid_until card_issuer card_number card_type
+    card_valid_from:15 card_valid_until:15 card_issuer card_number card_type
     remarks:30 remarks2:30 
     contacts.RolesByPerson:20 households.MembersByPerson:40
     # links.LinksToThis:30 links.LinksFromThis:30 
