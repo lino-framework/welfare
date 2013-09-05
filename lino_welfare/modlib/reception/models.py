@@ -206,7 +206,7 @@ class ClientDetail(dd.FormLayout):
     main = "general contact history"
     
     general = dd.Panel("""
-    client_info:30 image:15 box3c box3:20 box3b:20
+    client_info:30 image:15 box3:20 box3c
     AppointmentsByGuest:30 reception.CoachingsByClient:40
     """,label = _("General"))
     
@@ -216,7 +216,7 @@ class ClientDetail(dd.FormLayout):
     """,label = _("History"))
     
     contact = dd.Panel("""
-    box2:20 
+    contact1 box2:20 
     pcsw.ContactsByClient
     """,label = _("Contact"))
     
@@ -231,25 +231,29 @@ class ClientDetail(dd.FormLayout):
     #~ address_column
     #~ """,label = _("Address"))
     
-    box2 = dd.Panel("""
+    contact1 = """
+    country city zip_code
+    street street_no street_box
+    addr2
+    """
+    
+    box2 = """
     email
     phone
     gsm
-    """)
+    """
     
     box3 = """
-    gender
     birth_date 
     age
-    """
-    box3b = """
+    gender
     birth_country 
     birth_place 
-    nationality
     """
     box3c = """
     national_id
     gesdos_id
+    nationality
     # eid_info
     """
     

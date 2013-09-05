@@ -834,7 +834,7 @@ def objects():
     luc.card_type = BeIdCardTypes.belgian_citizen
     luc.save()
     
-    gerd.card_number = '12345678901'
+    gerd.card_number = '123456789012'
     gerd.card_valid_from = i2d(20120819)
     gerd.card_valid_until = i2d(20130818)
     gerd.card_issuer = "Eupen"

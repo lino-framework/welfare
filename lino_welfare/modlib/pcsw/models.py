@@ -913,7 +913,7 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state refusal_reason unavailable_until:15 unavailable_why:30
     is_cpas is_senior is_obsolete 
-    card_valid_from:15 card_valid_until:15 card_issuer card_number card_type
+    # card_valid_from:15 card_valid_until:15 card_issuer card_number card_type
     remarks:30 remarks2:30 
     contacts.RolesByPerson:20 households.MembersByPerson:40
     # links.LinksToThis:30 links.LinksFromThis:30 
@@ -1258,6 +1258,9 @@ class ClientsByNationality(Clients):
     column_names = "city street street_no street_box addr2 name country language *"
 
 
+class AllClients(Clients):
+    column_names = '*'
+    required = dd.Required(user_level='admin')
 
 #~ class MyClients(integ.Clients):
     #~ label = _("Integration Clients")
@@ -2156,6 +2159,7 @@ def setup_explorer_menu(site,ui,profile,m):
     m.add_action(Coachings)
     m.add_action(ClientContacts)
     m.add_action(Exclusions)
+    m.add_action(AllClients)
     #~ m.add_action(PersonSearches)
     m.add_action(CivilState)
     m.add_action(ClientStates)
