@@ -1234,7 +1234,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 class DebtsClients(Clients):
     #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     #~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
-    help_text = u"""Wie Kontakte \u25b8 Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
+    help_text = u"""Wie Kontakte --> Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
     required = dict(user_groups = 'debts')
     params_panel_hidden = True
     title = _("DM Clients")

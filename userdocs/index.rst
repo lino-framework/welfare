@@ -3,12 +3,14 @@
 Lino-Welfare User Manual
 ========================
 
-This is work in progress.
+Also available as `.pdf file <./lino-userdocs.pdf>`_.
 
 
 .. toctree::
    :maxdepth: 1
 
+   features
+   screenshots/index
    general
    clients
    newcomers

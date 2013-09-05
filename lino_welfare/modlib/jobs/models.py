@@ -639,9 +639,10 @@ class Offer(SectorFunction):
     start_date = models.DateField(_("start date"),
         blank=True,null=True)
     
-    remark = models.TextField(
+    remark = dd.RichTextField(
         blank=True,
-        verbose_name=_("Remark"))
+        verbose_name=_("Remark"),
+        format='plain')
         
     def __unicode__(self):
         if self.name:
@@ -750,6 +751,8 @@ class Experience(SectorFunction):
     class Meta:
         verbose_name = _("Job Experience")
         verbose_name_plural = _("Job Experiences")
+        get_latest_by =  'started'
+
     #~ person = models.ForeignKey(settings.SITE.person_model,verbose_name=_("Person"))
     person = models.ForeignKey('pcsw.Client')
     #~ company = models.ForeignKey("contacts.Company",verbose_name=_("Company"))
@@ -941,6 +944,7 @@ class Candidature(SectorFunction):
     class Meta:
         verbose_name = _("Job Candidature")
         verbose_name_plural = _('Job Candidatures')
+        get_latest_by =  'date_submitted'
         
     #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
@@ -1056,7 +1060,8 @@ class SectorFunctionByOffer(dd.Table):
         if offer is None:
             return []
         kw = {}
-        qs = self.model.objects.order_by('date_submitted')
+        #~ qs = self.model.objects.order_by('date_submitted')
+        qs = self.model.objects.order_by(self.model._meta.get_latest_by)
         
         if offer.function:
             qs = qs.filter(function=offer.function)
@@ -1088,7 +1093,7 @@ class CandidaturesByOffer(SectorFunctionByOffer):
     
 class ExperiencesByOffer(SectorFunctionByOffer):
     model = Experience
-    label = _("Candidates")
+    label = _("Experiences")
     
 
 

@@ -5,7 +5,7 @@ Debts mediation
 
 .. include:: /include/tested.rst
 
-The following statements imports some often-used global names::
+The following statements import some often-used global names::
 
 >>> from django.utils import translation
 >>> from lino.runtime import *
@@ -34,13 +34,6 @@ So far this was standard Django API. To use Lino's extended API we
 first need to "log in" as user `rolf`:
 
 >>> ses = settings.SITE.login('rolf')
-
-The :meth:`login <lino.ui.Site.login>` method doesn't require any 
-password because when somebody has command-line access we trust 
-that she has already authenticated. But it has e.g. the effect of 
-switching to that user's language (German here). It returns a 
-:class:`BaseRequest <lino.core.requests.BaseRequest>` object which 
-has a :meth:`show <lino.core.requests.BaseRequest.show>` method.
 
 Here is the textual representation of the "Expenses" panel:
 

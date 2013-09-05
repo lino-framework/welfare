@@ -1,0 +1,12 @@
+/home/luc/hgwork/welfare/docs/tested/jobs.rst:: WARNING: document isn't included in any toctree
+/home/luc/hgwork/welfare/lino_welfare/migrate.py:docstring of lino_welfare.migrate.migrate_from_1_1_2:1: WARNING: undefined label: welfare.debts.budget (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:151: WARNING: undefined label: welfare.pcsw.clients (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:151: WARNING: undefined label: welfare.jobs.contracts (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:151: WARNING: undefined label: welfare.pcsw.coachings (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:183: WARNING: undefined label: welfare.pcsw.userswithclients (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:289: WARNING: undefined label: welfare.cbss.retrievetigroupsrequest (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:329: WARNING: undefined label: welfare.debts.budget (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:333: WARNING: undefined label: welfare.pcsw.clientstest (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/changes.rst:359: WARNING: undefined label: welfare.contacts.company (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/releases/1.1.0.rst:7: WARNING: undefined label: welfare.jobs.candidatures (if the link has no caption the label must precede a section header)
+/home/luc/hgwork/welfare/docs/releases/1.1.1.rst:17: WARNING: undefined label: welfare.users.teams (if the link has no caption the label must precede a section header)

@@ -6,4 +6,5 @@
   or by writing a script and run it using `manage.py run`.
   It must be of course a Lino-Welfare application, 
   installed as explained in :ref:`welfare.install`.
+  Read also the general documentation about :ref:`tested_docs`.
   

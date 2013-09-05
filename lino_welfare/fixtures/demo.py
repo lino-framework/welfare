@@ -924,9 +924,67 @@ def objects():
           name=unicode(f),
           remark=REMARKS.pop(),
           sector=SECTORS.pop(),function=f)
+          
+          
+    # reset SECTORS and FUNCTIONS
+    SECTORS = Cycler(jobs.Sector.objects.all()) 
+    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    
+    obj = jobs.Offer(
+        name="Übersetzer DE-FR (m/w)",
+        remark = """\
+Wir sind auf der Suche nach einem Deutsch-Französich Übersetzer 
+(M/F) um einen Selbständigenr zu Geschäftsessen und kommerziellen 
+Termine zu begleiten. Sie übernehmen die Übersetzung von Gespräche 
+während kommerziellen Kontakte mit deutschen Kunden.
+Es ist spontane und pünktliche Aufträge, den ganzen Tag, in 
+Eupen und/oder Deutschland. 
+Regelmäßigkeit: 1-2 Mal pro Monat, je nach Bedarf. 
+Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
+        provider=PROVIDERS.pop(),
+        selection_from=settings.SITE.demo_date(-120),
+        selection_until=settings.SITE.demo_date(-20),
+        start_date=settings.SITE.demo_date(10),
+        sector=SECTORS.pop(),
+        function=FUNCTIONS.pop())
+    yield obj
+
+    CSTATES = Cycler(jobs.CandidatureStates.objects())
+    
+    # reset SECTORS and FUNCTIONS
+    SECTORS = Cycler(jobs.Sector.objects.all()) 
+    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    
+    for i in range(20):
+        yield jobs.Candidature(
+          person=CLIENTS.pop(),
+          state=CSTATES.pop(),
+          date_submitted=settings.SITE.demo_date(-20+i*2),
+          sector=SECTORS.pop(),
+          function=FUNCTIONS.pop(),
+          )
+    
+    COUNTRIES = Cycler(countries.Country.objects.all())
+    COMPANIES = Cycler(Company.objects.all())
+    
+    # reset SECTORS and FUNCTIONS
+    SECTORS = Cycler(jobs.Sector.objects.all()) 
+    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    
+    for i in range(20):
+        yield jobs.Experience(
+          person=CLIENTS.pop(),
+          company=COMPANIES.pop(),
+          country=COUNTRIES.pop(),
+          started=settings.SITE.demo_date(-1200+i*2),
+          stopped=settings.SITE.demo_date(-1200+i*2),
+          sector=SECTORS.pop(),
+          function=FUNCTIONS.pop(),
+          )
+    
+          
     
     JOBS = Cycler(jobs.Job.objects.all())
-    CSTATES = Cycler(jobs.CandidatureStates.objects())
         
     for i in range(40):
         yield jobs.Candidature(job=JOBS.pop(),
@@ -1048,8 +1106,6 @@ def objects():
         standby = persongroup(u"Standby",ref_name='9',active=False)
         yield standby
     
-    COUNTRIES = Cycler(countries.Country.objects.all())
-    
     for i,p in enumerate(Client.objects.all()):
         if i % 2:
             country = belgium
@@ -1122,7 +1178,7 @@ def objects():
         if i % 10 == 0:
             p.is_obsolete = True
             p.save()
-
+            
     COMPANIES = Cycler(Company.objects.all()[:5])
     NORMAL_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=False))
     PREMATURE_CONTRACT_ENDINGS = Cycler(isip.ContractEnding.objects.filter(needs_date_ended=True))

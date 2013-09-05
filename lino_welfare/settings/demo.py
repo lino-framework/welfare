@@ -10,6 +10,8 @@ class Site(Site):
     #~ use_davlink = False
     #~ use_extensible = True
     #~ remote_user_header = None # 20121003
+    
+    is_demo_site = False # temporarily
         
     def is_imported_partner(self,obj):
         if obj.id is not None and (obj.id > 110 and obj.id < 121):

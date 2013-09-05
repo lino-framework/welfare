@@ -206,20 +206,21 @@ htmlhelp_basename = 'welfare'
 # ------------------------
 
 # The paper size ('letter' or 'a4').
-#latex_paper_size = 'letter'
+latex_paper_size = 'a4'
 
 # The font size ('10pt', '11pt' or '12pt').
-#latex_font_size = '10pt'
+latex_font_size = '10pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'lino.tex', ur'lino', ur'Luc Saffre', 'manual'),
+  ('index', 'lino-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre', 'manual', True),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+#~ latex_logo = None
+latex_logo = '.static/lino-logo-2.png'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.

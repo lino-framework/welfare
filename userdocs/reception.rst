@@ -5,10 +5,12 @@ Reception
 
 The reception module of Lino-Welfare 
 is for managing a reception desk and a waiting queue.
+
 Visitors are "checked in" as they present themselves at a 
-reception desk (Empfangsschalter),
+reception desk,
 then they wait in a lounge until an agent "receives" them,
-and finally they are "checked out" when they leave again.
+and finally they are "checked out" when they leave the building.
+
 Social agents have a possibility to see how many and which 
 clients are waiting for them.
 

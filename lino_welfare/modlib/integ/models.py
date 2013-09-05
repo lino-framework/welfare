@@ -44,7 +44,7 @@ properties = dd.resolve_app('properties')
 class Clients(pcsw.Clients):
     #~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     #~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
-    help_text = u"""Wie Kontakte \u25b8 Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
+    help_text = u"""Wie Kontakte --> Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
     required = dict(user_groups = 'integ')
     params_panel_hidden = True
