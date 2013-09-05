@@ -67,6 +67,9 @@ dd.inject_field('system.SiteConfig','attestation_note_nature',
         
     
 class CreateClientVisit(dd.Action): 
+    sort_index = 91
+    icon_name = 'x-tbar-hourglass'
+    icon_file = 'hourglass.png'
     label = _("Create visit")
     #~ show_in_workflow = True
     #~ show_in_row_actions = True
@@ -152,16 +155,19 @@ class CreateNote(dd.Action):
 class ButtonsTable(dd.VirtualTable):
     column_names = 'button'
     auto_fit_column_widths = True
+    window_size = (60,20)
+    hide_top_toolbar = True
     
     @dd.displayfield(_("Button"))
     def button(self,obj,ar):
         return obj
         
 class CreateNoteActionsByClient(ButtonsTable):
+    sort_index = 94
     master = 'pcsw.Client'
     label = _("Issue attestation")
-    window_size = (60,20)
-    hide_top_toolbar = True
+    icon_name = 'x-tbar-script'
+    icon_file = 'script.png'
     
     @classmethod
     def get_title(self,ar):
@@ -182,22 +188,36 @@ class CreateNoteActionsByClient(ButtonsTable):
             if btn is not None:
                 yield btn
 
-#~ class CreateCoachingActionsByClient(ActionsTable):
-    #~ master = 'pcsw.Client'
-        #~ 
-    #~ @classmethod
-    #~ def get_data_rows(self,ar=None):
-        #~ if ar.master_instance is None: return
-        #~ sar = ar.spawn(notes.CoachingsByClient,master_instance=ar.master_instance,filter=dict())
-        #~ for obj in sar:
-            #~ btn = sar.insert_button(unicode(nt),
-                #~ dict(type=nt,event_type=settings.SITE.site_config.attestation_note_nature),
-                #~ title=_("Create a %s for this client.") % nt,
-                #~ icon_file=None)
-            #~ if btn is not None:
-                #~ yield btn
         
+class CreateEventActionsByClient(ButtonsTable):
+    sort_index = 93
+    master = 'pcsw.Client'
+    label = _("Find date with...")
+    icon_name = 'x-tbar-calendar'
+    icon_file = 'calendar.png'
+    
+    @classmethod
+    def get_title(self,ar):
+        s = super(CreateEventActionsByClient,self).get_title(ar)
+        if ar.master_instance is not None:
+            s += _(" for %s") % ar.master_instance
+        return s
         
+    @classmethod
+    def get_data_rows(self,ar=None):
+        if ar.master_instance is None: return
+        for user in settings.SITE.user_model.objects.exclude(profile__isnull=True):
+            #~ sar = cal.CalendarPanel.request(
+                #~ renderer=settings.SITE.ui.ext_renderer,
+                #~ subst_user=user,
+                #~ current_project=ar.master_instance.pk)
+            
+            sar = ar.spawn(cal.CalendarPanel.default_action,
+                current_project=ar.master_instance.pk,subst_user=user)
+            btn = sar.as_button(unicode(user))
+            
+            if btn is not None:
+                yield btn
             
 
     
@@ -295,6 +315,7 @@ class Clients(pcsw.Clients): # see blog 2013/0817
     #~ find_by_beid = beid.FindByBeIdAction()
     
     create_note_actions = dd.ShowSlaveTable(CreateNoteActionsByClient)
+    create_event_actions = dd.ShowSlaveTable(CreateEventActionsByClient)
     
     create_visit = CreateClientVisit()
     #~ create_note = CreateNote()
@@ -339,38 +360,6 @@ class Clients(pcsw.Clients): # see blog 2013/0817
                 
         return elems
     
-    @dd.displayfield(create_visit.label)
-    def unused_create_visit_actions(cls,obj,ar):
-        elems = []
-        ba = cls.get_action_by_name('create_visit')
-        for coaching in obj.coachings_by_client.all():
-            u = coaching.user
-            sar = ba.request(obj,action_param_values=dict(user=u))
-            #~ logger.info("20130809 %s",sar.action_param_values)
-            kw = dict()
-            kw.update(title=_("Create a spot visit for this client with this coach."))
-            elems += [ar.href_to_request(sar,u.username,**kw),' ']
-        return E.div(*elems)
-
-    @dd.virtualfield(dd.HtmlBox(_("Issue attestation")))
-    def unused_create_note_actions(cls,obj,ar):
-        elems = []
-        if not obj.has_valid_card_data():
-            elems.append(E.b(_("Must read eID card!"),E.br()))
-            ba = cls.get_action_by_name('read_beid')
-            elems.append(E.br())
-            elems.append(ar.action_button(ba,obj))
-            elems.append(E.br())
-        sar = ar.spawn(notes.NotesByProject,master_instance=obj)
-        for nt in notes.NoteType.objects.filter(is_attestation=True):
-            btn = sar.insert_button(unicode(nt),dict(type=nt),
-                title=_("Create a %s for this client.") % nt,
-                icon_file=None)
-            if btn is not None:
-                elems += [btn,E.br()]
-            
-        #~ return E.div(*elems,style="background-color:red !important;height:auto !important")
-        return E.div(*elems)
 
 pcsw.Coaching.define_action(create_visit=CreateCoachingVisit())
 
@@ -389,7 +378,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
     @dd.displayfield(_("Actions"))
     def actions(cls,obj,ar):
         elems = []
-        elems += [ar.instance_action_button(obj.create_visit,_("Visit")),' ']
+        elems += [ar.instance_action_button(obj.create_visit,_("Visit"),icon_file=CreateClientVisit.icon_file),' ']
         
         #~ ba = cls.get_action_by_name('create_visit')
         #~ u = obj.user
@@ -398,10 +387,16 @@ class CoachingsByClient(pcsw.CoachingsByClient):
         #~ kw.update(title=)
         #~ elems += [ar.href_to_request(sar,**kw),' ']
         
-        sar = cal.CalendarPanel.request(
-            subst_user=obj.user,
-            current_project=obj.client.pk)
-        elems += [ar.href_to_request(sar,_("Appointment")),' ']
+        if obj.user.profile is not None:
+            sar = cal.CalendarPanel.request(
+                subst_user=obj.user,
+                current_project=obj.client.pk)
+            elems += [ar.href_to_request(sar,_("Find date"),
+                title=_("Find date"),
+                icon_file=CreateEventActionsByClient.icon_file),' ']
+            #~ icon_name = 'x-tbar-calendar'
+            #~ icon_file = 'calendar.png'
+
         
         return E.div(*elems)
 

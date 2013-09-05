@@ -205,16 +205,23 @@ htmlhelp_basename = 'welfare'
 # Options for LaTeX output
 # ------------------------
 
-# The paper size ('letter' or 'a4').
-latex_paper_size = 'a4'
+latex_elements = dict(
+    paper_size='a4',pointsize='10pt',
+    fontpkg='\\usepackage{kpfonts}',
+    tableofcontents='',
+    #~ maketitle='',
+    )
+#~ work: libertine bera bookman
+#~ http://tex.stackexchange.com/questions/59403/what-font-packages-are-installed-in-tex-live
 
-# The font size ('10pt', '11pt' or '12pt').
-latex_font_size = '10pt'
+
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'lino-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre', 'manual', True),
+  #~ ('index', 'lino-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre', 'manual', True),
+  ('features', 'features.tex', "", "", 'howto', False),
+  ('screenshots/index', 'screenshots.tex', "", "", 'howto', False),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

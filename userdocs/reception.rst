@@ -53,6 +53,15 @@ The reception clerk then finally says
 
 .. actor:: reception.Clients
 
+      The button "Find date with..." is needed when you want to 
+      find and create a date for that client with an agent who is 
+      *not* coaching this client.
+
+.. actor:: reception.CoachingsByClient
+
+      This is the table of Coachings in the detail of 
+      :ddref:`reception.Clients`.
+
 
 .. actor:: reception.ExpectedGuests
 

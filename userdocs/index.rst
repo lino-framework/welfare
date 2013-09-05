@@ -3,7 +3,10 @@
 Lino-Welfare User Manual
 ========================
 
-Also available as `.pdf file <./lino-userdocs.pdf>`_.
+Available as `.pdf` file:
+`Complete user guide <./lino-userdocs.pdf>`_
+`Features <./features.pdf>`_
+`Screenshots <./screenshots.pdf>`_
 
 
 .. toctree::
