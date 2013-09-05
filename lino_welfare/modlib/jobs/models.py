@@ -1090,10 +1090,12 @@ class SectorFunctionByOffer(dd.Table):
 class CandidaturesByOffer(SectorFunctionByOffer):
     model = Candidature
     label = _("Candidates")
+    column_names = "date_submitted  person job state"
     
 class ExperiencesByOffer(SectorFunctionByOffer):
     model = Experience
     label = _("Experiences")
+    column_names = "started stopped person company country"
     
 
 

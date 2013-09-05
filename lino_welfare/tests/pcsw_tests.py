@@ -653,7 +653,7 @@ Belgique""")
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
   - Haushalte : Mitglieder
   - Empfang : Gäste
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
   - CV : Sprachkenntnisse
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
   - Kurse : Kurse, Kursanfragen

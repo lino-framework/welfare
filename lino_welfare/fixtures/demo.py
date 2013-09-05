@@ -903,9 +903,7 @@ def objects():
     
     # jobs (Art.60-7)
     
-    #~ from lino_welfare.modlib.jobs.models import Job
-    #~ CTYPES = Cycler(*[x for x in ContractType.objects.all()])
-    #~ JTYPES = Cycler(*[x for x in JobType.objects.all()])
+    CSTATES = Cycler(jobs.CandidatureStates.objects())
     JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
     STUDY_TYPES = Cycler(isip.StudyType.objects.all())
     JTYPES = Cycler(jobs.JobType.objects.all())
@@ -924,6 +922,16 @@ def objects():
           name=unicode(f),
           remark=REMARKS.pop(),
           sector=SECTORS.pop(),function=f)
+          
+          
+    
+    JOBS = Cycler(jobs.Job.objects.all())
+        
+    for i in range(40):
+        yield jobs.Candidature(job=JOBS.pop(),
+          person=CLIENTS.pop(),
+          state=CSTATES.pop(),
+          date_submitted=settings.SITE.demo_date(-40+i))
           
           
     # reset SECTORS and FUNCTIONS
@@ -949,13 +957,11 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         function=FUNCTIONS.pop())
     yield obj
 
-    CSTATES = Cycler(jobs.CandidatureStates.objects())
-    
     # reset SECTORS and FUNCTIONS
     SECTORS = Cycler(jobs.Sector.objects.all()) 
     FUNCTIONS = Cycler(jobs.Function.objects.all())
     
-    for i in range(20):
+    for i in range(30):
         yield jobs.Candidature(
           person=CLIENTS.pop(),
           state=CSTATES.pop(),
@@ -971,7 +977,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     SECTORS = Cycler(jobs.Sector.objects.all()) 
     FUNCTIONS = Cycler(jobs.Function.objects.all())
     
-    for i in range(20):
+    for i in range(30):
         yield jobs.Experience(
           person=CLIENTS.pop(),
           company=COMPANIES.pop(),
@@ -983,14 +989,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
           )
     
           
-    
-    JOBS = Cycler(jobs.Job.objects.all())
-        
-    for i in range(40):
-        yield jobs.Candidature(job=JOBS.pop(),
-          person=CLIENTS.pop(),
-          state=CSTATES.pop(),
-          date_submitted=settings.SITE.demo_date(-40+i))
+          
     
 
     

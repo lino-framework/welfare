@@ -62,14 +62,8 @@ to test the new `eid_info` field:
 >>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 >>> print(result['data']['eid_info'])
-<div>Karte Nr. 591-4132881-07 (Belgischer Staatsb&#252;rger), g&#252;ltig von 19.08.11 bis 19.08.16, ausgestellt durch Eupen</div>
+<div class="lino-info">Karte Nr. 591413288107 (Belgischer Staatsb&#252;rger), ausgestellt durch Eupen, g&#252;ltig von 19.08.11 bis 19.08.16</div>
 
-
->>> url = '/api/reception/Clients/176?an=detail&fmt=json'
->>> res = client.get(url,REMOTE_USER='rolf')
->>> result = json.loads(res.content)
->>> "Karte Nr. 591-4132881-07" in result['data']['client_info'][0]
-True
 
 >>> url = '/api/reception/Clients/115?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')

@@ -118,15 +118,15 @@ DEMO_OVERVIEW = """\
  isip.ContractType                       10        5
  isip.ExamPolicy                         20        5
  isip.StudyType                          5         8
- jobs.Candidature                        8         44
+ jobs.Candidature                        8         74
  jobs.Contract                           28        13
  jobs.ContractType                       9         5
- jobs.Experience                         10        0
+ jobs.Experience                         10        30
  jobs.Function                           7         4
  jobs.Job                                10        8
  jobs.JobProvider                        31        3
  jobs.JobType                            4         5
- jobs.Offer                              9         0
+ jobs.Offer                              9         1
  jobs.Regime                             5         3
  jobs.Schedule                           5         3
  jobs.Sector                             6         14
@@ -228,7 +228,7 @@ class DemoTest(RemoteAuthTestCase):
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
         add_case('rolf','api/contacts/Persons',json_fields,69,**kw)
-        add_case('rolf','api/pcsw/Clients',json_fields,50,**kw)
+        add_case('rolf','api/pcsw/Clients',json_fields,29,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
         add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
