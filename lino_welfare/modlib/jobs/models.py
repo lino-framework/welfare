@@ -695,8 +695,10 @@ class Study(CountryCity):
         verbose_name=_("Study content"))
     #~ content = models.ForeignKey(StudyContent,blank=True,null=True,verbose_name=_("Study content"))
   
-    started = dd.MonthField(_("started"),blank=True,null=True)
-    stopped = dd.MonthField(_("stopped"),blank=True,null=True)
+    started = models.DateField(_("started"),blank=True,null=True)
+    stopped = models.DateField(_("stopped"),blank=True,null=True)
+    #~ started = dd.MonthField(_("started"),blank=True,null=True)
+    #~ stopped = dd.MonthField(_("stopped"),blank=True,null=True)
     #~ started = models.DateField(blank=True,null=True,verbose_name=_("started"))
     #~ stopped = models.DateField(blank=True,null=True,verbose_name=_("stopped"))
     #~ started = dd.MonthField(blank=True,null=True,verbose_name=_("started"))
@@ -758,8 +760,10 @@ class Experience(SectorFunction):
         blank=True,null=True,
         verbose_name=_("Country"))
   
-    started = dd.MonthField(_("started"),blank=True,null=True)
-    stopped = dd.MonthField(_("stopped"),blank=True,null=True)
+    #~ started = dd.MonthField(_("started"),blank=True,null=True)
+    #~ stopped = dd.MonthField(_("stopped"),blank=True,null=True)
+    started = models.DateField(_("started"),blank=True,null=True)
+    stopped = models.DateField(_("stopped"),blank=True,null=True)
     
     remarks = models.TextField(blank=True,null=True,verbose_name=_("Remarks"))
     
