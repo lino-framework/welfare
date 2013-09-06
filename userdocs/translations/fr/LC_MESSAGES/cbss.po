@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 194891ef676045278ed7467f70deb079
+# c4b14ddb021847a79b1f8c3c1a1588b7
 #: ../cbss.rst:5
 msgid "Banque-carrefour"
 msgstr ""
 
-# b087c28ae2844e9f99b0c21930b45fd5
+# f362bedcc6be4fa4baa237b680859ffc
 #: ../cbss.rst:7
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
-# 79620e7468824717b6eceb00d9a04ec3
+# 58384578f38b4dd3badb5471214dd415
 #: ../cbss.rst:16
 msgid "TIs connus"
 msgstr ""
 
-# 5c9e9c1fe3c1443fa1d7ac8646537a1f
+# c1b1210f8be94dcdac271b3cccffc082
 #: ../cbss.rst:18
 msgid "Liste incomplète (conversion en cours) des TIs que Lino connait:"
 msgstr ""
 
-# 8442e66cafc04f3da2986cb7a57f0c29
+# e56fd7c91f9b4e278db822a19fde0ac6
 #: ../cbss.rst:33
 msgid "Référence"
 msgstr ""

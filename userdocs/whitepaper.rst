@@ -1,14 +1,16 @@
-.. _welfare.features:
+.. _welfare.whitepaper:
 
 ==============================
-Technical specification
+Lino Welfare white paper
 ==============================
+
+"Lino" is a framework (a library for building applications)
+and "Lino Welfare" (Lino for PCSWs) is one of the main applications
+developed using Lino by the framework's author.
+
 
 Charactéristiques du framework
 ------------------------------
-
-Lino est un **framework** (càd une librarie de construction d’applications), 
-et « Lino pour CPAS » est une **application** développée avec Lino.
 
 - Lino utilise les technologies Python, Django et ExtJS pour délivrer 
   des Rich Internet Applications (RIA) au look « desktop ».
@@ -25,7 +27,8 @@ et « Lino pour CPAS » est une **application** développée avec Lino.
   (2) désignations des codes et (3) destinataire d’un document
 - Génération automatique de documents de type PDF, MS-Word, OpenOffice et autres se basant sur des templates (modèles, gabarits)
 - WebDAV automatique intégré afin de pouvoir éditer des documents générés et stockés sur le serveur sans que l’utilisateur doive intervenir.
-- Export des données vers des tableurs
+- Export des données vers des tableurs 
+  en Hypertext Markup Language (HTML) et Portable Document Format (PDF)
 - Filtres et fonctions de recherche intuitifs et avancés
 - Authentication annuaire LDAP
 - Customisation facile
@@ -37,7 +40,9 @@ Fonctionnalités générales secrétariat
 - Gestion des contacts des personnes et organisations
 - Calendrier
 - Messagerie électronique
-- Gestion des envois (courriers, mails, SMS, ...) 
+- Gestion des envois (courriers, mails, SMS, ...)
+- Les utilisateurs peuvent donner procuration à leurs collègue de 
+  travailler et effectuer certaines actions en leur nom.
 
 Fonctionnalités spécifiques aux CPAS 
 -------------------------------------
@@ -97,19 +102,23 @@ Médiation de dettes
 Interface d’encodage des données (dépenses, revenus, obligations, répartition au marc-lefranc)
 et création automatique d’un budget mensuel individuel ou par ménage.
 
-Module récecption
------------------
 
-- The reception module of Lino-Welfare 
-  is for managing a reception desk and a waiting queue.
+Reception desk
+--------------
 
-- Visitors are "checked in" as they present themselves at a 
-  reception desk,
-  then they wait in a lounge until an agent "receives" them,
-  and finally they are "checked out" when they leave the building.
+- Visitors are checked in at a reception desk and
+  attributed to the responsible social agent.
+  Then they wait in a lounge until the agent receives them.
+  After the consultation the agent checks them out.
+- The social agents can consult from their desktop at any time the live 
+  list of waiting visitors.
+- The reception clerk verifies the client's contact data
+  and can read the client's eID card into the database.
+- The reception clerk can consult the calendar of a given social agent 
+  to make an appointment for a client,
+- The reception clerk can quickly print attestations from a 
+  configurable set of templates.
   
-- Quickly print attestations from a configurable 
-  set of templates.
 
 Connexion BCSS (nouvelle technologie SOAP/XML)
 ----------------------------------------------

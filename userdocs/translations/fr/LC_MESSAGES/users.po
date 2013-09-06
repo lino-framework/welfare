@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# f5133c78d32846288de5459a396da683
+# 3c8abbf302e34106b5d2dbd296f659a5
 #: ../users.rst:5
 msgid "Users"
 msgstr ""
 
-# bd890f44de21411aa12addcffd209ccc
+# cf1f74bb21974d4d8023ece0fc3557cf
 #: None:2
 msgid "User (model in app \"users\")"
 msgstr ""
 
-# 595f684f523e4e59b94dc71c52448a07
+# 5ac320b1696c49c09a48a4fc19aea296
 #: None:2
 msgid "Team (model in app \"users\")"
 msgstr ""
 
-# ad5d80e37847488fbe5daf865c35d8e6
+# 609cd0885aa849118f122ebde4d245df
 #: None:2
 msgid "Membership (model in app \"users\")"
 msgstr ""
 
-# 24aa7bb54c584b8993cdc2bbef80c70a
+# 96b7ee3a56d84ffd8f706330f3175fb7
 #: None:2
 msgid "site config (model in app \"system\")"
 msgstr ""
@@ -56,26 +56,12 @@ msgstr ""
 #~ msgid "The profile of a user"
 #~ msgstr ""
 
-# 621bea9049df49b2b502fc6ef0d97a96
+# d87ec55fa77f483c93cd6cca9ef1e6f6
 #~ msgid ""
-#~ "Each user must have a profile in"
-#~ " order to be active. Users with "
-#~ "an empty :ref:`welfare.users.User.profile` field "
-#~ "are considered inactive and cannot log"
-#~ " in."
 #~ msgstr ""
 
 # bdb80cd1dff44c62b3c8a12f3d487a3e
 #~ msgid "Team"
-#~ msgstr ""
-
-# e6efe25f7fff47a09d8d45eb3eaf3199
-#~ msgid ""
-#~ "The permissions do not depend on "
-#~ "the Team, they depend on the "
-#~ ":ref:`welfare.users.UserProfile`. Belonging to a "
-#~ "user group or not has no influence"
-#~ " on access permissions"
 #~ msgstr ""
 
 # d742aa1d590145a1b06cbfe8bd497b5e
@@ -94,13 +80,6 @@ msgstr ""
 #~ msgid "Membership"
 #~ msgstr ""
 
-# 605c4fac53044e84ae096698c2d6cbd3
-#~ msgid ""
-#~ "A membership is when a given "
-#~ ":ref:`welfare.users.User` belongs to a given"
-#~ " :ref:`welfare.users.Team`."
-#~ msgstr ""
-
 # 92bb0dc2c1d441ddaa7cb19c05a3ce11
 #~ msgid "User Profile"
 #~ msgstr ""
@@ -115,12 +94,5 @@ msgstr ""
 
 # 2a15c337def3494d82c2224d946ab2f9
 #~ msgid "The list of user profiles available on this site."
-#~ msgstr ""
-
-# d87ec55fa77f483c93cd6cca9ef1e6f6
-#~ msgid ""
-#~ "In the demo database, alice and "
-#~ "hubert share the same profile while "
-#~ "melanie has a different profile."
 #~ msgstr ""
 

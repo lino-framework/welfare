@@ -13,7 +13,7 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Default settings of a Lino/Welfare site.
+Default settings of a :ref:`welfare` site.
 
 """
 import os
@@ -77,7 +77,7 @@ class Site(Site,cbss.SiteMixin):
     
     def setup_choicelists(self):
         """
-        This defines default user profiles for :mod:`lino_welfare`.
+        This defines default user profiles for :ref:`welfare`.
         """
         from lino import dd
         from django.utils.translation import ugettext_lazy as _
@@ -90,9 +90,10 @@ class Site(Site,cbss.SiteMixin):
         add('200', _("Newcomers consultant"),       'U U _ U U _ _')
         add('210', _("Reception clerk"),            'U _ _ _ _ _ U')
         add('300', _("Debts consultant"),           'U U _ _ _ U _')
+        add('400', _("Social agent"),               'U _ _ U _ _ _')
         #~ add('400', _("Readonly Manager"),           'M M M M M M', readonly=True)
         #~ add('400', _("Readonly User"),              'U U U U U U', readonly=True)
-        add('500', _("CBSS only"),                  'U _ _ U _ _ _')
+        #~ add('500', _("CBSS only"),                  'U _ _ U _ _ _')
         add('900', _("Administrator"),              'A A A A A A A',name='admin')
         
         #~ for p in dd.UserProfiles.items():
@@ -247,9 +248,9 @@ class Site(Site,cbss.SiteMixin):
         yield self.modules.integ.UsersWithClients
         yield self.modules.cal.MyEvents
         yield self.modules.cal.MyTasks
-        yield self.modules.reception.WaitingGuests
-        yield self.modules.reception.MyWaitingGuests
-        yield self.modules.reception.ReceivedGuests
+        yield self.modules.reception.WaitingVisitors
+        yield self.modules.reception.MyWaitingVisitors
+        #~ yield self.modules.reception.ReceivedVisitors
 
 #~ SITE = Site(globals())
 

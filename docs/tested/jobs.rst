@@ -32,11 +32,11 @@ Job Offers
 
 
 >>> # settings.SITE.catch_layout_exceptions = False
->>> jobs.Offers.show()
+>>> jobs.Offers.show() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ==== ========================== ========== ======================== ================== ================ ============== =============
  ID   Sektor                     Funktion   Name                     Stellenanbieter    Beginn Auswahl   Ende Auswahl   Beginndatum
 ---- -------------------------- ---------- ------------------------ ------------------ ---------------- -------------- -------------
- 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   08.05.13         16.08.13       15.09.13
+ 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   ...              ...            ...     
 ==== ========================== ========== ======================== ================== ================ ============== =============
 <BLANKLINE>
 
@@ -51,12 +51,12 @@ This table shows the Experiences which satisfy a given Job offer.
 Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
->>> ses.show(jobs.ExperiencesByOffer.request(obj))
+>>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ========== ========== ========================= ================= =============
  begonnen   beendet    Klient                    Firma             Land
 ---------- ---------- ------------------------- ----------------- -------------
- 24.05.10   24.05.10   JACOBS Jacqueline (136)   Rumma & Ko OÜ     Estland
- 19.07.10   19.07.10   FAYMONVILLE Luc (129)     Bosten-Bocken A   Niederlande
+ ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ     Estland
+ ...        ...        FAYMONVILLE Luc (129)     Bosten-Bocken A   Niederlande
 ========== ========== ========================= ================= =============
 <BLANKLINE>
 
@@ -71,12 +71,12 @@ This table shows the Candidatures which satisfy a given Job offer.
 Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
->>> ses.show(jobs.CandidaturesByOffer.request(obj))
+>>> ses.show(jobs.CandidaturesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ============== ========================== ======== ====================
  Anfragedatum   Klient                     Stelle   Kandidatur-Zustand
 -------------- -------------------------- -------- --------------------
- 16.08.13       JEANÉMART Jérôme (180*)             Aktiv
- 11.10.13       GROTECLAES Gregory (131)            Arbeitet
+ ...            JEANÉMART Jérôme (180*)             Aktiv
+ ...            GROTECLAES Gregory (131)            Arbeitet
 ============== ========================== ======== ====================
 <BLANKLINE>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: 2013-07-27 15:35+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# b5d28e3b964041558b78d0e595ec36ab
+# d957aa2b7277476bbb24104a18eed7c9
 #: ../debts.rst:5
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
-# 4d99bc8d8f0943229372a077835acc2f
+# f5413881afcc42ea9e30a4ab6249322b
 #: ../debts.rst:8
 msgid "Scénarios"
 msgstr ""
 
-# e4edf34e35cd4de6a16daf5f15385a56
+# 182cd194705c4d618b8fca8ea8d5c8d2
 #: ../debts.rst:10
 msgid ""
 "En tant que conseiller dettes je commence à remplir, avec le client, les "
@@ -38,22 +38,22 @@ msgid ""
 "les chiffres manquants pour les encoder la prochaine fois?"
 msgstr ""
 
-# d9abe0c864274015974c4d295398ee9f
+# 4cbbb91c82bd4393b5b7dd1d29c3f396
 #: ../debts.rst:17
 msgid "Activer le champ :ref:`welfare.debts.Budget.print_empty_rows`"
 msgstr ""
 
-# a89b8071737d4a27a14f9245e9605654
+# 1f5a6982a14f4a5280061ad51efe519c
 #: ../debts.rst:18
 msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
-# 8b22dedeaf6042e48cf72cc9d79bc28f
+# 8cf2a03713e543c3bd58a8cd54dc720a
 #: ../debts.rst:29
 msgid "Print empty rows"
 msgstr ""
 
-# 61e29d78b47c4309876dccf06734aa78
+# 012e5555a4bf454780fe357f3c414ae5
 #: ../debts.rst:34
 msgid "Ignore yearly incomes"
 msgstr ""

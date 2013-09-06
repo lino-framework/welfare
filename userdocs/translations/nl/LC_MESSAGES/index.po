@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -18,21 +18,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 33048598fb424f6d82c2a5d96104dbed
+# c5f0d2e5c6324b94a538ff1e5151f832
 #: ../index.rst:4
-msgid "Lino-Welfare User Manual"
+msgid "Lino-Welfare User Guide"
 msgstr ""
 
-# 3675481285c44bd281442fc671a942f7
+# 8377d9e655bc4caebf5f33ccc9385eb4
 #: ../index.rst:6
-msgid "This is work in progress."
+msgid ""
+"Available as `.pdf` file: `User Guide <./lino-userdocs.pdf>`_, "
+"`Whitepaper <./lino-welfare-whitepaper.pdf>`_ and `Screenshots <./lino-"
+"welfare-screenshots.pdf>`_"
+msgstr ""
+
+# 4515efa6555247c1afbf5f372c3b8424
+#: ../index.rst:12
+msgid "Product description"
+msgstr ""
+
+# 0c1cd2077a5c42f989ad5721c4278f1c
+#: ../index.rst:20
+msgid "User guide"
 msgstr ""
 
 # d2e8f7d04bd44ceea28313151fdf68b1
 #~ msgid "Manuel de l'utilisateur"
 #~ msgstr ""
 
-# b13a8f5ae3fb41148a375118e7237475
+# e5012f8835c74f87b114c42e975d475b
 #~ msgid ""
+#~ msgstr ""
+
+# 3675481285c44bd281442fc671a942f7
+#~ msgid "This is work in progress."
+#~ msgstr ""
+
+# 33048598fb424f6d82c2a5d96104dbed
+#~ msgid "Lino-Welfare User Manual"
+#~ msgstr ""
+
+# e5012f8835c74f87b114c42e975d475b
+#~ msgid ""
+#~ "Available as `.pdf` file: `Complete user"
+#~ " guide <./lino-userdocs-todo.pdf>`_ "
+#~ "`Features <./features.pdf>`_ `Screenshots "
+#~ "<./screenshots.pdf>`_"
 #~ msgstr ""
 

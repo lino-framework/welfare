@@ -61,6 +61,8 @@ pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 users = dd.resolve_app('users')
 countries = dd.resolve_app('countries')
+reception = dd.resolve_app('reception')
+cal = dd.resolve_app('cal')
 
 Company = dd.resolve_model('contacts.Company')
 
@@ -255,14 +257,14 @@ def objects():
     
     hubert = person(first_name=u"Hubert",last_name=u"Huppertz",
         email=settings.SITE.demo_email, # 'hubert@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.male)
+        city=kettenis,country='BE',gender=mixins.Genders.male)
     yield hubert
     hubert = users.User(username="hubert",partner=hubert,profile='100') 
     yield hubert
     
     alicia = person(first_name=u"Alicia",last_name=u"Allmanns",
         email=settings.SITE.demo_email, # 'alicia@example.com',
-        city=eupen,country='BE',gender=mixins.Genders.female,language='fr')
+        city=kettenis,country='BE',gender=mixins.Genders.female,language='fr')
     yield alicia
     alicia = users.User(username="alicia",partner=alicia,profile='100') 
     yield alicia
@@ -290,6 +292,14 @@ def objects():
     yield caroline
     #~ yield users.Membership(user=caroline,group=ug_asd)
     
+    obj = person(first_name="Judith",last_name="Jousten",
+        email=settings.SITE.demo_email, 
+        city=eupen,country='BE',gender=mixins.Genders.female)
+    yield obj
+    judith = users.User(username="judith",partner=obj,profile='400') 
+    yield judith
+    
+    
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,**babelkw('name',
         de="ASD (Allgemeiner Sozialdienst)",
@@ -298,9 +308,10 @@ def objects():
         en="GSS (General Social Service)",
         )) 
     
-    #~ caroline = users.User.objects.get(username="caroline")
     caroline.coaching_type_id = isip.COACHINGTYPE_ASD
     caroline.save()
+    judith.coaching_type_id = isip.COACHINGTYPE_ASD
+    judith.save()
     
     DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,**babelkw('name',
         de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
@@ -736,7 +747,7 @@ def objects():
     DIRECTORS = (annette,hans,andreas,bernard)
     
     #~ USERS = Cycler(root,melanie,hubert,alicia)
-    AGENTS = Cycler(melanie,hubert,alicia)
+    AGENTS = Cycler(melanie,hubert,alicia,judith)
     COACHINGTYPES = Cycler(pcsw.CoachingType.objects.all())
     
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
@@ -1206,6 +1217,31 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
                     ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
         yield ctr
+        
+    """
+    The reception desk opens at 8am. 20 visitors have checked in, half of which 
+    """
                 
+    RECEPTION_CLIENTS = Cycler(reception.Clients.request(user=theresia))
+    REASONS = Cycler(_("Urgent problem"),'',_("Complain"),_("Information"))
+    today = settings.SITE.demo_date()
+    now = datetime.datetime(today.year,today.month,today.day,8,0)
+    for i in range(1,20):
+        obj = RECEPTION_CLIENTS.pop()
+        now += datetime.timedelta(minutes=3*i,seconds=3*i)
+        obj = reception.create_prompt_event(obj,obj,
+            AGENTS.pop(),
+            REASONS.pop(),
+            settings.SITE.site_config.client_guestrole,
+            now)
+        yield obj
+        
+    qs = cal.Guest.objects.filter(role=settings.SITE.site_config.client_guestrole)
+    for i,obj in enumerate(qs):
+        if i % 2 == 0:
+            obj.waiting_until = obj.waiting_since + datetime.timedelta(minutes=2*i,seconds=2*i)
+            if i % 4 == 0:
+                obj.present_until = obj.waiting_until + datetime.timedelta(minutes=2*i,seconds=3*i)
+        yield obj
 
 #~ print "20121010 pcsw.fixtures.demo has been imported"

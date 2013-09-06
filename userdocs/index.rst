@@ -1,19 +1,27 @@
 .. _welfare.userdocs:
 
-Lino-Welfare User Manual
+Lino-Welfare User Guide
 ========================
 
 Available as `.pdf` file:
-`Complete user guide <./lino-userdocs.pdf>`_
-`Features <./features.pdf>`_
-`Screenshots <./screenshots.pdf>`_
+`User Guide <./lino-userdocs.pdf>`_,
+`Whitepaper <./lino-welfare-whitepaper.pdf>`_
+and
+`Screenshots <./lino-welfare-screenshots.pdf>`_
 
+Product description
 
 .. toctree::
    :maxdepth: 1
 
-   features
+   whitepaper
    screenshots/index
+
+User guide
+
+.. toctree::
+   :maxdepth: 1
+
    general
    clients
    newcomers

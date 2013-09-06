@@ -74,11 +74,11 @@ DEMO_OVERVIEW = """\
  accounts.Group                          9         7
  cal.Calendar                            25        9
  cal.Event                               24        %s
- cal.Guest                               10        2
+ cal.Guest                               10        21
  cal.GuestRole                           9         4
  cal.Priority                            6         9
  cal.Room                                5         0
- cal.Subscription                        4         63
+ cal.Subscription                        4         72
  cal.Task                                20        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
@@ -88,8 +88,8 @@ DEMO_OVERVIEW = """\
  changes.Change                          9         0
  contacts.Company                        30        38
  contacts.CompanyType                    9         16
- contacts.Partner                        25        116
- contacts.Person                         31        75
+ contacts.Partner                        25        117
+ contacts.Person                         31        76
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
@@ -168,7 +168,7 @@ DEMO_OVERVIEW = """\
  users.Authority                         3         3
  users.Membership                        3         0
  users.Team                              5         3
- users.User                              18        9
+ users.User                              18        10
 ======================================= ========= =======
 """ % Event.objects.all().count()
 
@@ -216,7 +216,7 @@ class DemoTest(RemoteAuthTestCase):
         kw = dict(fmt='json',limit=10,start=0)
         add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
         add_case('rolf','api/households/Households',json_fields,4,**kw)
-        add_case('rolf','api/contacts/Partners',json_fields,117,**kw)
+        add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
         add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
         add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
         add_case('rolf','api/countries/Countries',json_fields,9,**kw)
@@ -227,7 +227,7 @@ class DemoTest(RemoteAuthTestCase):
         
         json_fields = 'count rows title success no_data_text param_values'
         add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
-        add_case('rolf','api/contacts/Persons',json_fields,69,**kw)
+        add_case('rolf','api/contacts/Persons',json_fields,70,**kw)
         add_case('rolf','api/pcsw/Clients',json_fields,29,**kw)
         add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
         add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)

@@ -20,11 +20,18 @@ In the public demo database there is a user "theresia" with that profile.
 Theresia's first questions are usually 
 "What's your name?" or 
 "Do you have an appointment with a social agent?".
-  
-Visitors must have a :ref:`welfare.pcsw.Client` account.
-Technically a :ref:`welfare.contacts.Partner` account would be 
-enough, but other visitors like suppliers or board members aren't 
-managed by the reception module.
+
+ 
+
+Vocabulary note: 
+Visitors are instances of the :ddref:`cal.Guest` model
+when they are being managed by the reception module,
+i.e. when they have been at least checked in.
+
+Visitors must be registered as a :ddref:`pcsw.Client`.
+Technically a :ddref:`contacts.Partner` account would be 
+enough, but other "visitors" like suppliers or board members aren't 
+managed by the reception module of :ref:`welfare`.
 
 Lino notifies the user to read the client's eID card
 if this is necessary, e.g. because "eID card has not yet been read!"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../cv.rst:5
-# 1b4947fdd8364f6ab69aa74171882857
+# 9271bd1db7e94c009fbf040c1487a891
 msgid "Curriculum vitae"
 msgstr ""
 
 #: ../cv.rst:9
-# 9f951436b3104241927aa1f33b799722
+# 5f086ce2af184816976784c2706276f8
 msgid "Référence"
 msgstr ""
 

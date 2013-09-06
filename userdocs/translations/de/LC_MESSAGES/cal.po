@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: 2013-04-01 09:17+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -18,55 +18,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# c0c39238724944ad9b0ba67d99c7a785
+# 1b2170e24ba7482cbda59ddbfaf8de16
 #: ../cal.rst:5
 #, fuzzy
 msgid "Calendar"
 msgstr "Kalender-Panel"
 
-# 85efe3f727bb43d9ace70ddb4e97cb55
+# 84925b02e6e74255b9f99aa41769bbdb
 #: ../cal.rst:7
 msgid ""
 "Important models are :ddref:`cal.Event` and :ddref:`cal.Guest` and "
 ":ddref:`cal.Task`..."
 msgstr ""
 
-# b837b3f0ed004a5bb815544fe33d4065
+# 6d3183964cb44773b09ff64a79f9badc
 #: None:2
 msgid "Event (model in app \"cal\")"
 msgstr ""
 
-# 00531f4bcc6a41d580fcff12d3bd29f8
+# f55f0e67896a41ff8c272b1915ea9bbc
 #: None:2
 msgid "Guest (model in app \"cal\")"
 msgstr ""
 
-# d3e6db5df65e4402be85863fccca7ce1
+# e440eb202ddd4bf194b1c08b4b8574dd
 #: None:2
 msgid "Task (model in app \"cal\")"
 msgstr ""
 
-# d6e9660f2f5b4875bc292133d48b5489
+# 7f511eb317d841ef8ab9555758a1d506
 #: None:2
 msgid "Calendar (model in app \"cal\")"
 msgstr ""
 
-# ac46f1641f0c43c289215eb80c0a1928
+# 14c12361024047a6a4be13a83d7ed492
 #: None:2
 msgid "Subscription (model in app \"cal\")"
 msgstr ""
 
-# 5df24c86c08e43fdb582c08a7064c981
+# 732d4203d3c04c59a196ac57560aff00
 #: None:2
 msgid "Room (model in app \"cal\")"
 msgstr ""
 
-# e5026a931d8647d49c585772d67df48f
+# 0a1320516add4c1e83e0362f30881a1c
 #: None:2
 msgid "Priority (model in app \"cal\")"
 msgstr ""
 
-# 4cc4fd5bf05045ab8e2f21375573d72a
+# ed7bc5d3d16145668d9bf400476dd475
 #: None:2
 msgid "Guest Role (model in app \"cal\")"
 msgstr ""
@@ -77,11 +77,6 @@ msgstr ""
 
 # 62a5c2c58b0944da95e697bb3753988b
 #~ msgid ""
-#~ "The Calendar Panel displays your events"
-#~ " in a classical \"calendar view\", "
-#~ "with the possibility to switch between"
-#~ " daily, weekly, monthly and to toggle"
-#~ " the visibility of team events."
 #~ msgstr ""
 
 # abb6bc0df44344f8838fadbe92fadb63

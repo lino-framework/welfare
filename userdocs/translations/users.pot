@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../users.rst:5
-# f5133c78d32846288de5459a396da683
+# 3c8abbf302e34106b5d2dbd296f659a5
 msgid "Users"
 msgstr ""
 
 #: None:2
-# bd890f44de21411aa12addcffd209ccc
+# cf1f74bb21974d4d8023ece0fc3557cf
 msgid "User (model in app \"users\")"
 msgstr ""
 
 #: None:2
-# 595f684f523e4e59b94dc71c52448a07
+# 5ac320b1696c49c09a48a4fc19aea296
 msgid "Team (model in app \"users\")"
 msgstr ""
 
 #: None:2
-# ad5d80e37847488fbe5daf865c35d8e6
+# 609cd0885aa849118f122ebde4d245df
 msgid "Membership (model in app \"users\")"
 msgstr ""
 
 #: None:2
-# 24aa7bb54c584b8993cdc2bbef80c70a
+# 96b7ee3a56d84ffd8f706330f3175fb7
 msgid "site config (model in app \"system\")"
 msgstr ""
 

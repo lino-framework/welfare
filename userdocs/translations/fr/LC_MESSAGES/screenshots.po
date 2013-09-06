@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-06 10:17+0300\n"
-"PO-Revision-Date: 2013-04-05 12:02+0100\n"
+"PO-Revision-Date: 2013-09-06 07:21+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -18,13 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 9271bd1db7e94c009fbf040c1487a891
-#: ../cv.rst:5
-msgid "Curriculum vitae"
+# 604f641430734b5389912ab00e2ccac1
+#: ../screenshots/index.rst:4
+msgid "Screenshots"
 msgstr ""
 
-# 5f086ce2af184816976784c2706276f8
-#: ../cv.rst:9
-msgid "Référence"
+# a655d30126374ba980408ce405c55ee6
+#: ../screenshots/index.rst:9
+msgid "Welcome screen for Mélanie (a French speaking user)"
+msgstr ""
+
+# 5cfeb30c23de46b6b98bd1f499c92481
+#: ../screenshots/index.rst:17
+msgid "The detail window of the :ref:`welfare.reception` module"
 msgstr ""
 

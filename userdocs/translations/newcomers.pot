@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 18:49+0300\n"
+"POT-Creation-Date: 2013-09-06 10:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../newcomers.rst:5
-# 3f8e4692f48443bfaeb17978ec343a51
+# 9c5fae121fbf4d6a9746a3f0b6b1832c
 msgid "Nouveaux clients"
 msgstr ""
 
 #: ../newcomers.rst:7
-# fe834bf43b9c4ababc8e3da8aaa506e2
+# b6c27d0ab9ce43e68d66ab4530669c3f
 msgid "Ce module facilite la gestion des nouvelles demandes de client."
 msgstr ""
 
 #: ../newcomers.rst:12
-# 3d936bbe93cd40928ed49ba4fd9442b3
+# c60cb897851a478b83d25105c18b9b99
 msgid "Référence"
 msgstr ""
 

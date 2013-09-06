@@ -16,8 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../countries.rst:5
-# a98949af1e9e4fad900266473b7dc42e
-msgid "Countries"
+#: ../screenshots/index.rst:4
+# 604f641430734b5389912ab00e2ccac1
+msgid "Screenshots"
+msgstr ""
+
+#: ../screenshots/index.rst:9
+# a655d30126374ba980408ce405c55ee6
+msgid "Welcome screen for Mélanie (a French speaking user)"
+msgstr ""
+
+#: ../screenshots/index.rst:17
+# 5cfeb30c23de46b6b98bd1f499c92481
+msgid "The detail window of the :ref:`welfare.reception` module"
 msgstr ""
 

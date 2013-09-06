@@ -227,7 +227,7 @@ class ClientDetail(dd.FormLayout):
     
     general = dd.Panel("""
     client_info:30 image:15 box3:20 box3c
-    AppointmentsByGuest:30 reception.CoachingsByClient:40
+    AppointmentsByPartner:30 reception.CoachingsByClient:40
     """,label = _("General"))
     
     history = dd.Panel("""
@@ -406,44 +406,44 @@ if False: # doesn't work
     
     def partner2client(self,obj,ar):
         return pcsw.Client.objects.get(pk=obj.partner.pk)
-    WaitingGuests.virtual_fields['partner'].override_getter(partner2client)
+    WaitingVisitors.virtual_fields['partner'].override_getter(partner2client)
 
 if False: # doesn't work
-    WaitingGuests.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
-    MyWaitingGuests.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
+    WaitingVisitors.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
+    MyWaitingVisitors.partner = dd.VirtualField(dd.ForeignKey('pcsw.Client'),partner2client)
 
-if True: # works, but is very hackerish
+if True: # works, though is very hackerish
     
     def func(obj,ar):
         return pcsw.Client.objects.get(pk=obj.partner.pk)
     dd.inject_field('cal.Guest','client',dd.VirtualField(dd.ForeignKey('pcsw.Client'),func))
-    for T in WaitingGuests, MyWaitingGuests:
+    for T in WaitingVisitors, MyWaitingVisitors:
         T.column_names = T.column_names.replace('partner','client')
     
-    class WaitingGuests(WaitingGuests): 
-        label = WaitingGuests.label 
+    class WaitingVisitors(WaitingVisitors): 
+        label = WaitingVisitors.label 
     
 if False: # works, but is very stupid
     
-  class WaitingGuests(WaitingGuests): 
+  class WaitingVisitors(WaitingVisitors): 
     """
-    Overrides library :mod:`WaitingGuests <lino.modlib.reception.WaitingGuests>` 
+    Overrides library :mod:`WaitingVisitors <lino.modlib.reception.WaitingVisitors>` 
     table to change one behaviour:  when clicking in that table 
     on the partner, Lino-Welfare should show the *Client's* and not 
     the *Partner's*  detail.    
     """
     # labels are not automatically inherited. Must inherit manually
-    label = WaitingGuests.label 
+    label = WaitingVisitors.label 
     
     @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
     def partner(self,obj,ar):
         return pcsw.Client.objects.get(pk=obj.partner.pk)
 
 
-  #~ The same for MyWaitingGuests. See :blogref:`20130817`
-  class MyWaitingGuests(MyWaitingGuests): 
+  #~ The same for MyWaitingVisitors. See :blogref:`20130817`
+  class MyWaitingVisitors(MyWaitingVisitors): 
     # labels are not automatically inherited. Must inherit manually
-    label = MyWaitingGuests.label 
+    label = MyWaitingVisitors.label 
     
     @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
     def partner(self,obj,ar):

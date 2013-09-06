@@ -220,8 +220,8 @@ latex_elements = dict(
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
   #~ ('index', 'lino-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre', 'manual', True),
-  ('features', 'features.tex', "", "", 'howto', False),
-  ('screenshots/index', 'screenshots.tex', "", "", 'howto', False),
+  ('whitepaper', 'lino-welfare-whitepaper.tex', "Lino-Welfare whitepaper", "", 'howto', False),
+  ('screenshots/index', 'lino-welfare-screenshots.tex', "Lino-Welfare screenshots", "", 'howto', False),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
