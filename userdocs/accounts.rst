@@ -4,8 +4,9 @@
 Accounts
 ========
 
-.. actor:: accounts.Charts
-.. actor:: accounts.Accounts
-.. actor:: accounts.Groups
+.. actor:: accounts.Chart
+.. actor:: accounts.Account
+.. actor:: accounts.Group
+
 .. actor:: accounts.AccountTypes
 

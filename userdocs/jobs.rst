@@ -18,7 +18,7 @@ et nous concentrons au **travail**.
 Aperçu
 ======
 
-Le CPAS gère une liste d':ref:`welfare.jobs.Jobs` (de mise au travail).
+Le CPAS gère une liste d':ddref:`jobs.Jobs` (de mise au travail).
 Ces endroits de mise au travail sont généralement des endroits de travail 
 spécialisés à l'accqueil temporaire de personnes à intégrer.
 Exemple:
@@ -29,26 +29,26 @@ Exemple:
     
 
 Indépendamment de ces endroits de travail le CPAS peut gérer une 
-liste d':ref:`welfare.jobs.Offers` du marché normal.
+liste d':ddref:`jobs.Offers` du marché normal.
 
-Une :ref:`Candidature <welfare.jobs.Candidatures>` 
-représente le fait qu'un :ref:`Client <welfare.pcsw.Clients>` donné
-voudrait travailler à un :ref:`Endroit <welfare.jobs.Jobs>` donné.
+Une :ddref:`jobs.Candidature` 
+représente le fait qu'un :ddref:`pcsw.Client` donné
+voudrait travailler à un :ddref:`jobs.Job` donné.
 Ceci implique entre autres que l'agent d'insertion responsable
 l'estime potentiellement apte à assumer ce travail.
 
-Eine Kandidatur ist "wenn ein :ref:`welfare.pcsw.Client` sich für 
-eine :ref:`welfare.jobs.Job` bewirbt".
+Eine Kandidatur ist "wenn ein :ddref:`pcsw.Client` sich für 
+eine :ddref:`jobs.Job` bewirbt".
 Das beinhaltet u.a. auch die Information, dass der verantwortliche 
 Begleiter die Person als für diese Stelle geeignet einstuft.
 
-Si un :ref:`Client <welfare.pcsw.Client>` introduit une
-:ref:`Candidature <welfare.jobs.Candidatures>`, 
+Si un :ddref:`pcsw.Client` introduit une
+:ddref:`jobs.Candidature`, 
 l'agent d'insertion note que 
 
 Une telle Candidature peut référer soit à un Endroit soit à une Offre.
 
-Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`.
+Et puis on fera un :ddref:`jobs.Contract`.
 
 Référence
 =========
@@ -85,4 +85,5 @@ Référence
         
 
 .. actor:: jobs.StudiesByPerson
+
 .. actor:: jobs.ExperiencesByPerson

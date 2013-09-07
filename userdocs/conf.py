@@ -219,7 +219,7 @@ latex_elements = dict(
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  #~ ('index', 'lino-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre', 'manual', True),
+  ('index', 'lino-welfare-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre \and Gerd Xhonneux', 'manual', True),
   ('whitepaper', 'lino-welfare-whitepaper.tex', "Lino-Welfare whitepaper", "", 'howto', False),
   ('screenshots/index', 'lino-welfare-screenshots.tex', "Lino-Welfare screenshots", "", 'howto', False),
 ]

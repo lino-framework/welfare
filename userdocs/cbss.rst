@@ -32,9 +32,9 @@ Liste incomplète (conversion en cours) des TIs que Lino connait:
 Référence
 =========
 
-.. actor:: cbss.Sectors
-.. actor:: cbss.Purposes
-.. actor:: cbss.IdentifyPersonRequests
-.. actor:: cbss.ManageAccessRequests
-.. actor:: cbss.RetrieveTIGroupsRequests
+.. actor:: cbss.Sector
+.. actor:: cbss.Purpose
+.. actor:: cbss.IdentifyPersonRequest
+.. actor:: cbss.ManageAccessRequest
+.. actor:: cbss.RetrieveTIGroupsRequest
 

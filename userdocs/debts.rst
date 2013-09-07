@@ -18,9 +18,9 @@ Scénarios
   - Cliquer sur :ref:`welfare.ui.detail.Save`
 
 
-.. actor:: debts.Actors
+.. actor:: debts.Actor
 
-.. actor:: debts.Budgets
+.. actor:: debts.Budget
 
 
 .. _welfare.debts.Budget.print_empty_rows:
@@ -37,6 +37,6 @@ Ignore yearly incomes
 
 .. actor:: debts.MyBudgets
 .. actor:: debts.ResultByBudget
-.. actor:: debts.Entries
+.. actor:: debts.Entry
 .. actor:: debts.EntriesByBudget
 

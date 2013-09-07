@@ -1,10 +1,10 @@
 .. _welfare.userdocs:
 
-Lino-Welfare User Guide
-========================
+Lino-Welfare User Documentation
+===============================
 
 Available as `.pdf` file:
-`User Guide <./lino-userdocs.pdf>`_,
+`User Guide <./lino-welfare.userdocs.pdf>`_,
 `Whitepaper <./lino-welfare-whitepaper.pdf>`_
 and
 `Screenshots <./lino-welfare-screenshots.pdf>`_
@@ -23,6 +23,12 @@ User guide
    :maxdepth: 1
 
    general
+   
+   users
+   countries
+   contacts
+   cal
+   
    clients
    newcomers
    cbss
@@ -32,9 +38,7 @@ User guide
    jobs
    debts
    accounts
-   users
-   cal
-   countries
-   contacts
    reception
+   
+   system
    watch_tim

@@ -4,47 +4,48 @@
 Contacts
 =========
 
-.. actor:: contacts.Partners
 
-Toute personne physique ou morale est enregistrée 
-dans Lino en tant que :ref:`Partenaire <welfare.contacts.Partner>`.
+.. actor:: contacts.Partner
 
-Lino différencie les types de Partenaires suivants:
+    Toute personne physique ou morale est enregistrée 
+    dans Lino en tant que :ddref:`contacts.Partner`.
 
-.. django2rst:: contacts.Partner.print_subclasses_graph()
+    Lino différencie les types de Partenaires suivants:
 
-.. _welfare.contacts.Partner.obsolete:
-
-Veraltete Partner
------------------
-
-Das Attribut "veraltet" bedeutet : 
-
-- die Daten dieses Partners werden nicht mehr gepflegt, 
-- alle Angaben verstehen sich als "so war es, bevor dieser Partner 
-  aufhörte, uns zu interessieren".
-
-Veraltete Partner werden normalerweise in Listen ignoriert,
-als wären sie gelöscht.
-Um sie trotzdem zu sehen, 
-muss das Ankreuzfeld `Auch veraltete Klienten`
-(bzw. `Auch veraltete Partner`)
-im Parameter-Panel der Liste angekreuzt werden.
+    .. django2rst:: contacts.Partner.print_subclasses_graph()
 
 
+.. actor:: contacts.Partner.is_obsolete
 
-.. actor:: contacts.Persons
+    Das Attribut "veraltet" bedeutet : 
 
-.. actor:: contacts.Companies
+    - die Daten dieses Partners werden nicht mehr gepflegt, 
+    - alle Angaben verstehen sich als "so war es, bevor dieser Partner 
+      aufhörte, uns zu interessieren".
 
-.. actor:: contacts.Roles
+    Veraltete Partner werden normalerweise in Listen ignoriert,
+    als wären sie gelöscht.
+    Um sie trotzdem zu sehen, 
+    muss das Ankreuzfeld `Auch veraltete Klienten`
+    (bzw. `Auch veraltete Partner`)
+    im Parameter-Panel der Liste angekreuzt werden.
 
-.. actor:: contacts.RoleTypes
-
-.. actor:: contacts.CompanyTypes
-
-.. actor:: pcsw.Activities
 
 
-.. actor:: households.Households
-.. actor:: households.Types
+.. actor:: contacts.Person
+
+.. actor:: contacts.Company
+
+.. actor:: contacts.Role
+
+.. actor:: contacts.RoleType
+
+.. actor:: contacts.CompanyType
+
+.. actor:: pcsw.Activity
+
+
+.. actor:: households.Household
+
+.. actor:: households.Type
+

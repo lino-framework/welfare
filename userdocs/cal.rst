@@ -28,6 +28,9 @@ and
 
         settings.SITE.login('robin').show(cal.EventStates)
 
+.. actor:: cal.Events
+
+    The table of all calendar events.
 
 .. actor:: cal.Guest
 

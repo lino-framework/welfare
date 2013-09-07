@@ -28,9 +28,6 @@ Users
 
 
 
-
-
-
 .. actor:: lino.UserProfiles
 
     The list of user profiles available on this site. 
@@ -42,7 +39,3 @@ Users
     .. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
 
 
-
-.. actor:: system.ContentTypes
-
-.. actor:: system.SiteConfig

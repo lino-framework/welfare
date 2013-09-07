@@ -40,7 +40,8 @@ und Filterparameter unterscheiden:
 N.B. 
 Das Detail, das bei Doppelklick angezeigt wird, 
 ist bei allen drei Ansichten das Gleiche. 
-Das hängt vom :ref:`welfare.users.UserProfile` ab.
+Das hängt vom Bentuzerprofile ab
+(sh. :ddref:`lino.UserProfiles`).
 
 
 

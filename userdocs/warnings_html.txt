@@ -1,0 +1,1 @@
+/home/luc/hgwork/welfare/userdocs/reception.rst:33: WARNING: undefined label: welfare.contacts.partner (if the link has no caption the label must precede a section header)

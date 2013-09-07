@@ -42,7 +42,7 @@ Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin komm
   `PAR->NB2` (INSS) oder `PAR->NB1` (Gesdos-Nr) 
   unleer ist, oder wenn *Partnerattribut N (Neuzugang)* 
   gesetzt ist, dann wird es ein 
-  :ref:`Klient <welfare.pcsw.Client>`.
+  :ddref:`Klient <pcsw.Client>`.
   Wobei zu beachten ist, dass `PAR->NB2` (INSS) als leer gilt, wenn es
   nur eine  Null ("0")  enthält.
   Ausnahme: 
@@ -51,11 +51,11 @@ Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin komm
   (sondern eine Organisation, s.h. nächster Punkt).
   
 - **Ansonsten**, wenn `PAR->NoTva` unleer ist, wird es eine 
-  :ref:`Organisation <welfare.contacts.Company>`.
+  :ddref:`Organisation <contacts.Company>`.
 - **Ansonsten**, wenn `PAR->Allo` (Anrede) einen der Werte "Eheleute", 
   "Herr und Frau" enthält, dann wird es ein 
-  :ref:`Haushalt <welfare.households.Household>`
-- Ansonsten wird es eine :ref:`Person <welfare.contacts.Person>`.
+  :ddref:`Haushalt <households.Household>`
+- Ansonsten wird es eine :ddref:`Person <contacts.Person>`.
 
 Zusatzregel:
 
@@ -63,15 +63,15 @@ Zusatzregel:
   auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein 
   Leerzeichen enthalten.
   Hat er das nicht, wird er zum einfachen 
-  :ref:`Partner <welfare.contacts.Partner>`,
+  :ddref:`Partner <contacts.Partner>`,
   und eventuelle Information in `PAR->NB1` oder `PAR->NB2` 
   werden ignoriert.
   
 
-Ob eine :ref:`Organisation <welfare.contacts.Company>` auch 
-:ref:`Kursanbieter <welfare.courses.CourseProvider>` 
+Ob eine :ddref:`Organisation <contacts.Company>` auch 
+:ddref:`Kursanbieter <courses.CourseProvider>` 
 und/oder 
-:ref:`Stellenabieter <welfare.jobs.JobProvider>` 
+:ddref:`Stellenabieter <jobs.JobProvider>` 
 ist, wird lediglich in Lino 
 (durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. 
 TIM kennt diese Information nicht.
@@ -209,7 +209,7 @@ Veraltete Partner
 
 Bei importierten Partnern ist 
 das Ankreuzfeld 
-:ref:`"veraltet" <welfare.contacts.Partner.obsolete>`
+:ddref:`veraltet <contacts.Partner.is_obsolete>`
 schreibgeschützt.
 Es ist eingeschaltet, wenn diese Person in TIM 
 entweder in **Partnerart "Inaktive"** steht oder 
@@ -324,10 +324,10 @@ Krankenkassen und Apotheken (Klientenkontakte)
 ==============================================
 
 Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) 
-werden nach Lino synchronisiert als :ref:`Klientenkontakte <welfare.pcsw.ClientContact>`.
+werden nach Lino synchronisiert als :ddref:`Klientenkontakte <pcsw.ClientContact>`.
 
 *Importierte* Klienten sollten in ihren 
-:ref:`Klientenkontakten <welfare.pcsw.ClientContacts>`
+:ddref:`Klientenkontakten <pcsw.ClientContact>`
 deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
 Sonst findet `watch_tim`, dass er nicht dafür 
 zuständig ist und synchronisiert nichts 
