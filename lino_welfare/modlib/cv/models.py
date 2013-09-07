@@ -231,10 +231,24 @@ class ConfiguredPropsByPerson(PropsByPerson):
     
     typo_check = False # to avoid warning "ConfiguredPropsByPerson 
                        # defines new attribute(s) propgroup_config_name"
+                       
+    @classmethod
+    def get_known_values(self):
+        pg = getattr(settings.SITE.site_config,self.propgroup_config_name)
+        return dict(group=pg)
+        
+    @classmethod
+    def get_actor_label(self):
+        if self.propgroup_config_name is None:
+            return self.__name__
+        pg = getattr(settings.SITE.site_config,self.propgroup_config_name)
+        if pg is None:
+            return _("(SiteConfig %s is empty)" % self.propgroup_config_name)
+        return babelattr(pg,'name')
+        
 
     @classmethod
-    def on_analyze(self,site):
-    #~ def after_site_setup(self,site):
+    def unused_on_analyze(self,site):
         """
         This is being called once for each subclass.
         """

@@ -610,7 +610,7 @@ Belgique""")
         menu_test('root',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
-- Büro : Mein E-Mail-Ausgang, Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
@@ -669,7 +669,7 @@ Belgique""")
         menu_test("100","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
-- Büro : Mein E-Mail-Ausgang, Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
@@ -699,7 +699,7 @@ Belgique""")
         menu_test("110","""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
-- Büro : Mein E-Mail-Ausgang, Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
@@ -737,7 +737,7 @@ Belgique""")
         menu_test('300',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
-- Büro : Mein E-Mail-Ausgang, Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
@@ -758,7 +758,7 @@ Belgique""")
         menu_test('200',"""\
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 
-- Büro : Mein E-Mail-Ausgang, Meine Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 

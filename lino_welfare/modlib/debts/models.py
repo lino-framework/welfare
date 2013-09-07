@@ -811,10 +811,20 @@ class EntriesByType(Entries):
     required = dd.required(user_groups='debts')
   
     @classmethod
-    def class_init(self):
+    def get_known_values(self): # 20130906
+        return dict(account_type=self._account_type)
+        
+    @classmethod
+    def get_actor_label(self): # 20130906
+        if self._account_type is not None:
+            return self._account_type.text
+        return self._label or self.__name__
+        
+    @classmethod
+    def unused_class_init(self):
         super(EntriesByType,self).class_init()
         if self._account_type is not None:
-            self.label = self._account_type.text
+            #~ self.label = self._account_type.text 20130906
             #~ print 20120411, unicode(self.label)
             self.known_values = dict(account_type=self._account_type)
             
@@ -870,10 +880,16 @@ class PrintEntriesByBudget(dd.VirtualTable):
     _account_type = None
     
     @classmethod
-    def class_init(self):
-        super(PrintEntriesByBudget,self).class_init()
+    def get_actor_label(self): # 20130906
         if self._account_type is not None:
-            self.label = self._account_type.text
+            return self._account_type.text
+        return self._label or self.__name__
+        
+    #~ @classmethod
+    #~ def class_init(self):
+        #~ super(PrintEntriesByBudget,self).class_init()
+        #~ if self._account_type is not None:
+            #~ self.label = self._account_type.text
             
     @classmethod
     def get_handle_name(self,ar):
