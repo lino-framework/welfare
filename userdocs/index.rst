@@ -4,7 +4,7 @@ Lino-Welfare User Documentation
 ===============================
 
 Available as `.pdf` file:
-`User Guide <./lino-welfare.userdocs.pdf>`_,
+`User Guide <./lino-welfare-userguide.pdf>`_,
 `Whitepaper <./lino-welfare-whitepaper.pdf>`_
 and
 `Screenshots <./lino-welfare-screenshots.pdf>`_

@@ -16,7 +16,6 @@ import sys, os
 from atelier.sphinxconf import configure
 configure(globals(),'lino_welfare.settings.demo')
 
-
 extensions += ['lino.utils.actordoc']
 extensions += ['lino.utils.screenshots']
 
@@ -24,7 +23,7 @@ extensions += ['lino.utils.screenshots']
 #~ would occur when this happens later while importing one of the models modules.
 from django.conf import settings
 #~ settings.SITE.startup()
-settings.SITE.title = "Lino-Welfare User Manual"
+settings.SITE.title = "Lino-Welfare User Documentation"
 
 
 # If your extensions are in another directory, add it here. If the directory
@@ -219,7 +218,7 @@ latex_elements = dict(
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'lino-welfare-userdocs.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre \and Gerd Xhonneux', 'manual', True),
+  ('index', 'lino-welfare-userguide.tex', ur'Benutzerhandbuch Lino für ÖSHZ', ur'Luc Saffre \and Gerd Xhonneux', 'manual', True),
   ('whitepaper', 'lino-welfare-whitepaper.tex', "Lino-Welfare whitepaper", "", 'howto', False),
   ('screenshots/index', 'lino-welfare-screenshots.tex', "Lino-Welfare screenshots", "", 'howto', False),
 ]
@@ -253,13 +252,12 @@ latex_logo = '.static/lino-logo-2.png'
 extlinks = {
   'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),
   'checkin': ('http://code.google.com/p/lino-welfare/source/detail?r=%s', 'Checkin '),
-  'srcref': ('http://code.google.com/p/lino-welfare/source/browse%s', ''),
+  #~ 'srcref': ('http://code.google.com/p/lino-welfare/source/browse%s', ''),
   'extjs': ('http://www.sencha.com/deploy/dev/docs/?class=%s', ''),
   'extux': ('http://extjs-ux.org/ext-docs/?class=%s', ''),
   'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
   'lino': ('http://www.lino-framework.org%s.html', ''),
 }
-
 
 #~ nitpicky = True # use -n in Makefile instead
 
@@ -270,3 +268,5 @@ html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
 #~ todo_include_todos = True
 
 
+for n in """python django""".split():
+    intersphinx_mapping[n] = ('http://%s.readthedocs.org/en/latest/' % n, None)

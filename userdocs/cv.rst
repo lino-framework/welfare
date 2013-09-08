@@ -4,13 +4,25 @@
 Curriculum vitae
 =================
 
+.. contents:: 
+   :local:
+   :depth: 2
 
-Référence
-=========
+
 
 .. actor:: cv.CefLevel
-.. actor:: cv.LanguageKnowledges
-.. actor:: cv.PersonProperties
-.. actor:: properties.Properties
-.. actor:: properties.PropTypes
-.. actor:: properties.PropGroups
+
+    List of possible choices for the 
+    :ddref:`cv.LanguageKnowledge.cef_level` field
+    of a :ddref:`cv.LanguageKnowledge`.
+    
+    .. django2rst::
+        
+        settings.SITE.login('robin').show(cv.CefLevel)
+
+.. actor:: cv.LanguageKnowledge
+.. actor:: properties.PersonProperty
+.. actor:: properties.Property
+.. actor:: properties.PropType
+.. actor:: properties.PropGroup
+

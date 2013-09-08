@@ -55,14 +55,14 @@ Version 1.1.8 (released :blogref:`20130723`)
 - Neues Modul :ref:`Empfang <welfare.reception>` und Änderungen im Kalendermodul. 
 
   Neues Benutzerprofil "Empfangsschalter".
-  Neues Menü :menuselection`Empfang` mit den 
+  Neues Menü :menuselection:`Empfang` mit den 
   Befehlen 
-  :ref:`welfare.reception.Clients`
-  :ref:`welfare.reception.ExpectedGuests`
-  und :ref:`welfare.reception.WaitingGuests` 
+  :ddref:`reception.Clients`
+  :ddref:`reception.ExpectedGuests`
+  und :ddref:`reception.WaitingVisitors` 
 
   Konfigurierung: 
-  :ref:`welfare.cal.Calendar` hat jetzt ein neues Feld 
+  :ddref:`cal.Calendar` hat jetzt ein neues Feld 
   `invite_client`, welches für 
   Klientengespräche angekreuzt ist
   (zumindest in der Demo-Datenbank. Produktionsdaten nach Release manuell 
@@ -82,7 +82,7 @@ Version 1.1.8 (released :blogref:`20130723`)
 -  Menübefehle :menuselection:`Konfigurierung --> DSBE --> Funktionen` 
    und einige andere jetzt auch für Melanie wieder sichtbar.
 
-- :ref:`welfare.courses.PendingCourseRequests`: 
+- :ddref:`courses.PendingCourseRequests`: 
   Fixed a bug which caused a traceback 
   "Cannot resolve keyword 'provider' into field."
   when filtering on course provider in PendingCourseRequests.
@@ -127,7 +127,7 @@ Version 1.1.8 (released :blogref:`20130723`)
 Version 1.1.7 (released :blogref:`20130604`)
 ============================================
 
-- Weiter mit dem :ref:`Tätigkeitsbericht <welfare.integ.ActivityReport>`.
+- Weiter mit dem :ddref:`Tätigkeitsbericht <integ.ActivityReport>`.
 
 - Fixed: 
   Server error 500 beim Versuch, eine Tabelle als csv-Datei 
@@ -149,19 +149,19 @@ Version 1.1.6 (released :blogref:`20130527`)
 ============================================
 
 - Erweiterungen in den Parameter-Panels für 
-  :ref:`Klienten <welfare.pcsw.Clients>`, 
-  :ref:`VSEs  <welfare.isip.Contracts>`
+  :ddref:`Klienten <pcsw.Client>`, 
+  :ddref:`VSEs  <isip.Contract>`
   und 
-  :ref:`Art.60§7-Konventionen  <welfare.jobs.Contracts>`.
+  :ddref:`Art.60§7-Konventionen  <jobs.Contract>`.
   Neues Parameter-Panel für Tabelle
-  :ref:`Begleitungen <welfare.pcsw.Coachings>`, 
+  :ddref:`Begleitungen <pcsw.Coaching>`, 
   
   Theoretisch müssten alle besprochenen Datenbank-Abfragen 
   :blogref:`20130516` jetzt machbar sein.
   Aber der Tätigkeitsbericht (sh. nächster Punkt) ist eine automatische 
   Hintereinanderreihung von solchen Abfragen.
 
-- Neues Listing :ref:`Tätigkeitsbericht <welfare.integ.ActivityReport>`. 
+- Neues Listing :ddref:`Tätigkeitsbericht <integ.ActivityReport>`. 
   Inhaltlich basiert das auf unserem Analysegespräch,
   ist aber zu verstehen als Arbeitsgrundlage 
   und Demonstration der neuen technischen Möglichkeiten.
@@ -180,7 +180,7 @@ Version 1.1.6 (released :blogref:`20130527`)
   
   - "Verpasste Erinnerungen" ist nicht mehr da
     (darauf hat m.E. sowieso niemand je geschaut).
-  - :ref:`Benutzer und ihre Klienten <welfare.pcsw.UsersWithClients>` 
+  - :ddref:`Benutzer und ihre Klienten <integ.UsersWithClients>` 
     kann man nicht mehr
     direkt "im eigenem Fenster öffnen" (aber dafür gibt es ja
     den Menübefehl
@@ -231,7 +231,7 @@ Miscellaneous:
 Version 1.1.4 (released :blogref:`20130512`)
 ============================================
 
-- :ref:`welfare.jobs.JobsOverview` : 
+- :ddref:`jobs.JobsOverview` : 
   Seitenwechsel zwischen die verschiedenen Kategorien 
   (Majorés, Intern, usw.).
   
@@ -253,7 +253,7 @@ Version 1.1.4 (released :blogref:`20130512`)
   und der ist auch für Kerstin sichtbar.
 
 - :ref:`welfare.debts` : neue Kolonne :guilabel:`Gerichtsvollzieher` 
-  in in :ref:`welfare.debts.Entries` : Alle Schulden können potentiell 
+  in :ddref:`debts.Entry` : Alle Schulden können potentiell 
   irgendwann zum GV gehen, und dann wird diese Kolonne ausgefüllt 
   (indem man dort den GV auswählt).
 
@@ -286,17 +286,17 @@ Version 1.1.4 (released :blogref:`20130512`)
 Version 1.1.3 (released :blogref:`20130505`)
 ============================================
 
-- Im "Resultat" einer Tx25 (:ref:`welfare.cbss.RetrieveTIGroupsRequest`  
+- Im "Resultat" einer Tx25 (:ddref:`cbss.RetrieveTIGroupsRequest`  
   wurde nichts angezeigt. Behoben.
 
-- :ref:`welfare.courses.PendingCourseRequests`. 
+- :ddref:`courses.PendingCourseRequests`. 
   (:menuselection:`Kurse --> Offene Kursanfragen`) 
   hat jetzt zwei neue Kolonnen "Arbeitsablauf" und "Begleiter".
   Ausserdem ein umfangreiches Panel für Filterkriterien. 
   Kursanfragen haben einen neuen Zustand "Inaktiv". 
   Zustand "Kandidat" umbenannt nach "Offen".
   
-- Ausdruck :ref:`welfare.jobs.JobsOverview` 
+- Ausdruck :ddref:`jobs.JobsOverview` 
   (:menuselection:`DSBE --> Übersicht Art60*7`)
   funktioniert jetzt.
   Diese Liste ist im Menü "DSBE" und nicht im Menü "Listings".
@@ -306,14 +306,14 @@ Version 1.1.3 (released :blogref:`20130505`)
 - Verständlichere Benutzermeldung wenn man VSE erstellen will und 
   die Vertragsart anzugeben vergisst.
   
-- Adding a new account in :ref:`welfare.accounts.Accounts`
+- Adding a new account in :ddref:`accounts.Accounts`
   caused an internal server error `DoesNotExist`.
   
 - Wenn in TIM eine PLZ bearbeitet wurde, loggt watch_tim
   jetzt statt einer Exception "PLZ no such controller"  
   nur eine info() dass die Änderung ignoriert wird.
   
-- In :ref:`welfare.debts.EntriesByBudget` kann man die Zeilen jetzt 
+- In :ddref:`debts.EntriesByBudget` kann man die Zeilen jetzt 
   rauf und runterschieben. Experimentell. 
   Ich warte auf erste Eindrücke.
   Im Kontenplan lässt sich so ein Auf und Ab nur schwer rechtfertigen.
@@ -326,11 +326,11 @@ Version 1.1.3 (released :blogref:`20130505`)
 - `auto_fit_column_widths` was ignored when a table was being 
   displayed as the main grid of a window.
   
-- Beim Ausdruck eines :ref:`welfare.debts.Budget`: 
+- Beim Ausdruck eines :ddref:`debts.Budget`: 
   fehlte in der Tabelle "Guthaben, Schulden, Verpflichtungen" 
   die Kolonne "Monatsrate".
 
-- :ref:`welfare.pcsw.ClientsTest` produced a traceback
+- :ddref:`pcsw.ClientsTest` produced a traceback
   `'NoneType' object has no attribute 'strip'` for Clients 
   with national_id is None.
   
@@ -356,8 +356,8 @@ Version 1.1.2 (released :blogref:`20130422`)
     
   - (and maybe some more...)
 
-- The `Merge` action on :ref:`welfare.pcsw.Client` and 
-  :ref:`welfare.contacts.Company` had disappeared. 
+- The `Merge` action on :ddref:`pcsw.Client` and 
+  :ddref:`contacts.Company` had disappeared. 
   Fixed.
   
   Also this action is no longer disabled for imported partners.

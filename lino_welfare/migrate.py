@@ -941,5 +941,6 @@ def migrate_from_1_1_8(globals_dict):
         return cal_Event(**kw)
     globals_dict.update(create_cal_event=create_cal_event)
     
+    #~ globals_dict.update(isip_StudyType = resolve_model("integ.StudyType"))
     
     return '1.1.9'

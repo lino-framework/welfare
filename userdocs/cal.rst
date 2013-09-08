@@ -4,12 +4,6 @@
 Calendar
 ========
 
-Important models are 
-:ddref:`cal.Event`
-and
-:ddref:`cal.Guest`
-and
-:ddref:`cal.Task`...
 
 .. contents:: 
    :local:
@@ -42,7 +36,10 @@ and
 
 .. actor:: cal.Task
 
-    Possible values for the state of a :ddref: `cal.Task`:
+.. actor:: cal.Task.state
+
+    The state of a :ddref: `cal.Task`.
+    Possible values are:
 
     .. django2rst:: 
 

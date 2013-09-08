@@ -4,7 +4,7 @@ Version 1.1.0
 Kandidaturen auf Probe
 ----------------------
 
-Eine :ref:`Kandidatur <welfare.jobs.Candidatures>`
+Eine :ddref:`Kandidatur <jobs.Candidature>`
 hatte bisher lediglich ein Ankreuzfeld "Aktiv". 
 Das wurde ersetzt durch ein Auswahlfeld "Zustand" mit den möglichen 
 Werten "Aktiv", "Probezeit", "Inaktiv".
@@ -16,7 +16,7 @@ Nicht zu verwechseln: eine *aktive* Kandidatur bedeutet,
 dass der Klient *keinen* aktiven Art-60*7 hat.
 
 In der Übersicht Art-60*7 
-(:class:`JobsOverview <lino_welfare.modlib.jobs.models.JobsOverview>`)
+(:ddref:`jobs.JobsOverview`)
 wird dieser Status der Kandidaturen jetzt berücksichtigt:
 Als "Kandidaten" stehen jetzt nur noch Kandidaturen 
 im Zustand "Aktiv" (bisher standen dort alle Kandidaturen).
