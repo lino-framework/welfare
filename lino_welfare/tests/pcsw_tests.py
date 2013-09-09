@@ -358,8 +358,7 @@ Belgique""")
         
         """
         from django.db import models
-        from lino.core.fields import get_data_elem
-        de = get_data_elem(pcsw.Client,'id')
+        de = pcsw.Client.get_data_elem('id')
         #~ print de.__class__
         self.assertEqual(de.__class__,models.AutoField)
         self.assertEqual(de.primary_key,True)

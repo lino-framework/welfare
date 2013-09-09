@@ -1239,9 +1239,12 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     qs = cal.Guest.objects.filter(role=settings.SITE.site_config.client_guestrole)
     for i,obj in enumerate(qs):
         if i % 2 == 0:
-            obj.waiting_until = obj.waiting_since + datetime.timedelta(minutes=2*i,seconds=2*i)
+            obj.busy_since = obj.waiting_since + datetime.timedelta(minutes=2*i,seconds=2*i)
+            obj.state = cal.GuestStates.busy
             if i % 4 == 0:
-                obj.present_until = obj.waiting_until + datetime.timedelta(minutes=2*i,seconds=3*i)
+                obj.gone_since = obj.busy_since + datetime.timedelta(minutes=2*i,seconds=3*i)
+                obj.state = cal.GuestStates.gone
+                
         yield obj
 
 #~ print "20121010 pcsw.fixtures.demo has been imported"

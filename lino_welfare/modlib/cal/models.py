@@ -36,6 +36,7 @@ from lino.modlib.cal.models import *
 
 from lino.modlib.cal.workflows import take, feedback
 
+EventStates.published.text = _("Notified")
 
 class Calendar(Calendar):
     
@@ -133,6 +134,12 @@ def customize_cal(sender,**kw):
     invite_client
     """,window_size=(60,'auto'))
     
+    site.modules.cal.Guests.set_detail_layout("""
+    event partner role
+    state remark workflow_buttons
+    waiting_since busy_since gone_since
+    outbox.MailsByController
+    """)
     site.modules.cal.Events.set_detail_layout("general more")
     site.modules.cal.Events.add_detail_panel("general","""
     calendar summary project 
