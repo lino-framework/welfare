@@ -13,7 +13,6 @@ Calendar
 .. actor:: cal.CalendarPanel
 
 
-
 .. actor:: cal.Event
 
     Possible values for the state of an :ddref: `cal.Event`:

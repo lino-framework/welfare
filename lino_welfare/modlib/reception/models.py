@@ -13,7 +13,7 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Defines models for :mod:`lino_welfare.modlib.reception`.
+The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
 """
 
 import logging
@@ -401,6 +401,12 @@ class CoachingsByClient(pcsw.CoachingsByClient):
         return E.div(*elems)
 
 
+"""
+Override library :mod:`WaitingVisitors <lino.modlib.reception.WaitingVisitors>` 
+table to change one behaviour:  when clicking in that table 
+on the partner, Lino-Welfare should show the *Client's* and not 
+the *Partner's*  detail.    
+"""
         
 if False: # doesn't work
     
@@ -419,19 +425,14 @@ if True: # works, though is very hackerish
     dd.inject_field('cal.Guest','client',dd.VirtualField(dd.ForeignKey('pcsw.Client'),func))
     for T in WaitingVisitors, MyWaitingVisitors:
         T.column_names = T.column_names.replace('partner','client')
+        T.detail_layout = T.detail_layout.replace('partner','client')
     
-    class WaitingVisitors(WaitingVisitors): 
-        label = WaitingVisitors.label 
+    #~ class WaitingVisitors(WaitingVisitors): 
+        #~ label = WaitingVisitors.label
     
 if False: # works, but is very stupid
     
   class WaitingVisitors(WaitingVisitors): 
-    """
-    Overrides library :mod:`WaitingVisitors <lino.modlib.reception.WaitingVisitors>` 
-    table to change one behaviour:  when clicking in that table 
-    on the partner, Lino-Welfare should show the *Client's* and not 
-    the *Partner's*  detail.    
-    """
     # labels are not automatically inherited. Must inherit manually
     label = WaitingVisitors.label 
     
@@ -449,14 +450,6 @@ if False: # works, but is very stupid
     def partner(self,obj,ar):
         return pcsw.Client.objects.get(pk=obj.partner.pk)
         
-    
-        
-#~ class ExpectedGuests(ExpectedGuests): 
-    #~ 
-    #~ @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
-    #~ def partner(self,obj,ar):
-        #~ return obj.partner
-    
 
 inherited_setup_main_menu = setup_main_menu
 

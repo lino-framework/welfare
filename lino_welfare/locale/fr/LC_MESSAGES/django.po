@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-10 05:31+0300\n"
 "PO-Revision-Date: 2013-04-25 16:59+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -57,9 +57,9 @@ msgid ""
 "languages."
 msgstr ""
 
-#: lino_welfare/models.py:339 lino_welfare/modlib/cal/models.py:143
+#: lino_welfare/models.py:339 lino_welfare/modlib/cal/models.py:150
 #: lino_welfare/modlib/contacts/models.py:286
-#: lino_welfare/modlib/debts/models.py:457
+#: lino_welfare/modlib/debts/models.py:450
 #: lino_welfare/modlib/isip/models.py:684
 #: lino_welfare/modlib/reception/models.py:231
 msgid "General"
@@ -81,13 +81,27 @@ msgstr "Accompagnement"
 msgid "Attestation"
 msgstr "Cessation"
 
-#: lino_welfare/fixtures/demo.py:914
+#: lino_welfare/fixtures/demo.py:925
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:915
+#: lino_welfare/fixtures/demo.py:926
 msgid "No supervisor. Only for independent people."
 msgstr ""
+
+#: lino_welfare/fixtures/demo.py:1226
+msgid "Urgent problem"
+msgstr ""
+
+#: lino_welfare/fixtures/demo.py:1226
+#, fuzzy
+msgid "Complain"
+msgstr "Société"
+
+#: lino_welfare/fixtures/demo.py:1226
+#, fuzzy
+msgid "Information"
+msgstr "période d'essai"
 
 #: lino_welfare/fixtures/std.py:289
 #, fuzzy
@@ -107,54 +121,59 @@ msgstr ""
 msgid "Force majeure"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:45
+#: lino_welfare/modlib/cal/models.py:39
+#, fuzzy
+msgid "Notified"
+msgstr "non rempli"
+
+#: lino_welfare/modlib/cal/models.py:46
 #, fuzzy
 msgid "Invite client"
 msgstr "Clients actifs"
 
-#: lino_welfare/modlib/cal/models.py:49
+#: lino_welfare/modlib/cal/models.py:50
 msgid "Default calendar for client events"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:55
+#: lino_welfare/modlib/cal/models.py:56
 msgid "Default guest role of client in events."
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:61
+#: lino_welfare/modlib/cal/models.py:62
 msgid "Guest role for team members"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:95
+#: lino_welfare/modlib/cal/models.py:96
 msgid "When"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:103
+#: lino_welfare/modlib/cal/models.py:104
 #, fuzzy
 msgid "at"
 msgstr " chez "
 
-#: lino_welfare/modlib/cal/models.py:147
+#: lino_welfare/modlib/cal/models.py:154
 msgid "More"
 msgstr "Plus"
 
-#: lino_welfare/modlib/cal/models.py:162
+#: lino_welfare/modlib/cal/models.py:169
 msgid "Appointment"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:166
-#: lino_welfare/modlib/debts/models.py:177
+#: lino_welfare/modlib/cal/models.py:173
+#: lino_welfare/modlib/debts/models.py:170
 #: lino_welfare/modlib/jobs/models.py:1189
 #: lino_welfare/modlib/jobs/models.py:1283
 #: lino_welfare/modlib/jobs/models.py:1398
 msgid "Date"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:168
+#: lino_welfare/modlib/cal/models.py:175
 #, fuzzy
 msgid "Summary"
 msgstr "Sommaire BCSS"
 
-#: lino_welfare/modlib/cal/models.py:183
+#: lino_welfare/modlib/cal/models.py:190
 #, python-format
 msgid "Created appointment for %(user)s with %(partner)s"
 msgstr ""
@@ -906,7 +925,7 @@ msgid "Also obsolete data"
 msgstr "aussi clients obsolètes"
 
 #: lino_welfare/modlib/contacts/models.py:320
-#: lino_welfare/settings/__init__.py:149
+#: lino_welfare/settings/__init__.py:150
 msgid "Partners (all)"
 msgstr "Partenaires (tous)"
 
@@ -947,11 +966,11 @@ msgid "Course Offers"
 msgstr "Offres de cours"
 
 #: lino_welfare/modlib/courses/models.py:226
-#: lino_welfare/modlib/debts/models.py:672
-#: lino_welfare/modlib/debts/models.py:733
-#: lino_welfare/modlib/debts/models.py:988
-#: lino_welfare/modlib/debts/models.py:1083
-#: lino_welfare/modlib/debts/models.py:1238
+#: lino_welfare/modlib/debts/models.py:665
+#: lino_welfare/modlib/debts/models.py:726
+#: lino_welfare/modlib/debts/models.py:997
+#: lino_welfare/modlib/debts/models.py:1092
+#: lino_welfare/modlib/debts/models.py:1247
 #: lino_welfare/modlib/integ/models.py:243
 #: lino_welfare/modlib/integ/models.py:297
 #: lino_welfare/modlib/integ/models.py:466
@@ -974,8 +993,8 @@ msgstr "Date de début"
 
 #: lino_welfare/modlib/courses/models.py:271
 #: lino_welfare/modlib/courses/models.py:481
-#: lino_welfare/modlib/cv/models.py:189 lino_welfare/modlib/debts/models.py:589
-#: lino_welfare/modlib/debts/models.py:668
+#: lino_welfare/modlib/cv/models.py:192 lino_welfare/modlib/debts/models.py:582
+#: lino_welfare/modlib/debts/models.py:661
 #: lino_welfare/modlib/jobs/models.py:216
 #: lino_welfare/modlib/jobs/models.py:238
 #: lino_welfare/modlib/jobs/models.py:318
@@ -1128,114 +1147,114 @@ msgstr ""
 msgid "unknown age"
 msgstr "age inconnu"
 
-#: lino_welfare/modlib/cv/models.py:84
+#: lino_welfare/modlib/cv/models.py:87
 msgid "CEF level"
 msgstr "Niveau CEF"
 
-#: lino_welfare/modlib/cv/models.py:85
+#: lino_welfare/modlib/cv/models.py:88
 #, fuzzy
 msgid "CEF levels"
 msgstr "Niveau CEF"
 
-#: lino_welfare/modlib/cv/models.py:95 lino_welfare/modlib/cv/models.py:96
-#: lino_welfare/modlib/cv/models.py:97
+#: lino_welfare/modlib/cv/models.py:98 lino_welfare/modlib/cv/models.py:99
+#: lino_welfare/modlib/cv/models.py:100
 #, fuzzy
 msgid "basic language skills"
 msgstr "Langue maternelle"
 
-#: lino_welfare/modlib/cv/models.py:98 lino_welfare/modlib/cv/models.py:99
-#: lino_welfare/modlib/cv/models.py:100
+#: lino_welfare/modlib/cv/models.py:101 lino_welfare/modlib/cv/models.py:102
+#: lino_welfare/modlib/cv/models.py:103
 msgid "independent use of language"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:101 lino_welfare/modlib/cv/models.py:102
-#: lino_welfare/modlib/cv/models.py:103
+#: lino_welfare/modlib/cv/models.py:104 lino_welfare/modlib/cv/models.py:105
+#: lino_welfare/modlib/cv/models.py:106
 msgid "proficient use of language"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:117
+#: lino_welfare/modlib/cv/models.py:120
 msgid "language knowledge"
 msgstr "Connaissance de langue"
 
-#: lino_welfare/modlib/cv/models.py:118
+#: lino_welfare/modlib/cv/models.py:121
 msgid "language knowledges"
 msgstr "Connaissances de langue"
 
-#: lino_welfare/modlib/cv/models.py:128
+#: lino_welfare/modlib/cv/models.py:131
 msgid "spoken"
 msgstr "oral"
 
-#: lino_welfare/modlib/cv/models.py:129
+#: lino_welfare/modlib/cv/models.py:132
 msgid "written"
 msgstr "écrit"
 
-#: lino_welfare/modlib/cv/models.py:130
+#: lino_welfare/modlib/cv/models.py:133
 msgid "native language"
 msgstr "Langue maternelle"
 
-#: lino_welfare/modlib/cv/models.py:139
+#: lino_welfare/modlib/cv/models.py:142
 #, python-format
 msgid "%s (s/w)"
 msgstr "%s (parlé/écrit)"
 
-#: lino_welfare/modlib/cv/models.py:141
+#: lino_welfare/modlib/cv/models.py:144
 #, python-format
 msgid "%s (s)"
 msgstr "%s (écrit)"
 
-#: lino_welfare/modlib/cv/models.py:143
+#: lino_welfare/modlib/cv/models.py:146
 #, python-format
 msgid "%s (w)"
 msgstr "%s (parlé)"
 
-#: lino_welfare/modlib/cv/models.py:181
+#: lino_welfare/modlib/cv/models.py:184
 msgid "Property"
 msgstr "Propriété"
 
-#: lino_welfare/modlib/cv/models.py:182
+#: lino_welfare/modlib/cv/models.py:185
 msgid "Properties"
 msgstr "Propriétés"
 
-#: lino_welfare/modlib/cv/models.py:250
+#: lino_welfare/modlib/cv/models.py:249 lino_welfare/modlib/cv/models.py:267
 #, fuzzy, python-format
 msgid "(SiteConfig %s is empty)"
 msgstr "(les paramètres de site %s sont vides)"
 
-#: lino_welfare/modlib/cv/models.py:296
+#: lino_welfare/modlib/cv/models.py:313
 msgid "Skills Property Group"
 msgstr "Groupe de propriétés 'Skills'"
 
-#: lino_welfare/modlib/cv/models.py:304
+#: lino_welfare/modlib/cv/models.py:321
 msgid "Soft Skills Property Group"
 msgstr "Groupe de propriétés 'Soft Skills'"
 
-#: lino_welfare/modlib/cv/models.py:314
+#: lino_welfare/modlib/cv/models.py:331
 msgid "Obstacles Property Group"
 msgstr "Groupe de propriétés 'Obstacles'"
 
-#: lino_welfare/modlib/cv/models.py:325
+#: lino_welfare/modlib/cv/models.py:342
 msgid "CV"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:106
+#: lino_welfare/modlib/debts/models.py:99
 msgid ""
 "For how many months the entered amount counts. \n"
 "For example 1 means a monthly amount, 12 a yearly amount."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:172
+#: lino_welfare/modlib/debts/models.py:165
 msgid "Budget"
 msgstr "Budget"
 
-#: lino_welfare/modlib/debts/models.py:173
+#: lino_welfare/modlib/debts/models.py:166
 msgid "Budgets"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:182
+#: lino_welfare/modlib/debts/models.py:175
 msgid "Print to-do list"
 msgstr "imprimer liste to-do"
 
-#: lino_welfare/modlib/debts/models.py:183
+#: lino_welfare/modlib/debts/models.py:176
 msgid ""
 "Einträge im Feld \"To-do\" werden nur ausgedruckt, \n"
 "wenn die Option \"To-dos drucken\" des Budgets angekreuzt ist. \n"
@@ -1245,168 +1264,168 @@ msgid ""
 "Vielleicht mit Fußnoten?"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:191
+#: lino_welfare/modlib/debts/models.py:184
 msgid "Print empty rows"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:192
+#: lino_welfare/modlib/debts/models.py:185
 msgid "Check this to print also empty rows for later completion."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:197
+#: lino_welfare/modlib/debts/models.py:190
 #, fuzzy
 msgid "Include yearly incomes"
 msgstr "autres revenus"
 
-#: lino_welfare/modlib/debts/models.py:198
+#: lino_welfare/modlib/debts/models.py:191
 msgid ""
 "Check this to include yearly incomes in the Debts Overview table of this "
 "Budget."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:199
+#: lino_welfare/modlib/debts/models.py:192
 #: lino_welfare/modlib/integ/models.py:568
 msgid "Introduction"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:200
+#: lino_welfare/modlib/debts/models.py:193
 #: lino_welfare/modlib/jobs/template_messages.py:7
 msgid "Conclusion"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:201
+#: lino_welfare/modlib/debts/models.py:194
 #, fuzzy
 msgid "Distributable amount"
 msgstr "Montant à répartir"
 
-#: lino_welfare/modlib/debts/models.py:202
+#: lino_welfare/modlib/debts/models.py:195
 msgid "The total monthly amount available for debts distribution."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:213
+#: lino_welfare/modlib/debts/models.py:206
 msgid "New"
 msgstr "Nouveau"
 
-#: lino_welfare/modlib/debts/models.py:215
+#: lino_welfare/modlib/debts/models.py:208
 #, python-format
 msgid "Budget %(pk)d for %(partner)s"
 msgstr "Budget %(pk)d pour %(partner)s"
 
-#: lino_welfare/modlib/debts/models.py:224
+#: lino_welfare/modlib/debts/models.py:217
 msgid "Common"
 msgstr "Commun"
 
-#: lino_welfare/modlib/debts/models.py:226
-#: lino_welfare/modlib/debts/models.py:654
-#: lino_welfare/modlib/debts/models.py:1009
-#: lino_welfare/modlib/debts/models.py:1013
-#: lino_welfare/modlib/debts/models.py:1017
-#: lino_welfare/modlib/debts/models.py:1021
-#: lino_welfare/modlib/debts/models.py:1025
-#: lino_welfare/modlib/debts/models.py:1087
+#: lino_welfare/modlib/debts/models.py:219
+#: lino_welfare/modlib/debts/models.py:647
+#: lino_welfare/modlib/debts/models.py:1018
+#: lino_welfare/modlib/debts/models.py:1022
+#: lino_welfare/modlib/debts/models.py:1026
+#: lino_welfare/modlib/debts/models.py:1030
+#: lino_welfare/modlib/debts/models.py:1034
+#: lino_welfare/modlib/debts/models.py:1096
 msgid "Amount"
 msgstr "Montant"
 
-#: lino_welfare/modlib/debts/models.py:397
+#: lino_welfare/modlib/debts/models.py:390
 msgid "Mr."
 msgstr "Monsieur"
 
-#: lino_welfare/modlib/debts/models.py:400
+#: lino_welfare/modlib/debts/models.py:393
 msgid "Mrs."
 msgstr "Madame"
 
-#: lino_welfare/modlib/debts/models.py:410
+#: lino_welfare/modlib/debts/models.py:403
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: lino_welfare/modlib/debts/models.py:462
+#: lino_welfare/modlib/debts/models.py:455
 msgid "Expenses & Income"
 msgstr "Revenus & Dépenses"
 
-#: lino_welfare/modlib/debts/models.py:467
+#: lino_welfare/modlib/debts/models.py:460
 msgid "Liabilities & Assets"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:478
+#: lino_welfare/modlib/debts/models.py:471
 #, fuzzy
 msgctxt "debts"
 msgid "Summary"
 msgstr "Sommaire BCSS"
 
-#: lino_welfare/modlib/debts/models.py:528
+#: lino_welfare/modlib/debts/models.py:521
 msgid "Is partner of these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:577
+#: lino_welfare/modlib/debts/models.py:570
 msgid "Budget Actor"
 msgstr "Acteur"
 
-#: lino_welfare/modlib/debts/models.py:578
+#: lino_welfare/modlib/debts/models.py:571
 msgid "Budget Actors"
 msgstr "Acteurs"
 
-#: lino_welfare/modlib/debts/models.py:588
+#: lino_welfare/modlib/debts/models.py:581
 msgid "Header"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:605
+#: lino_welfare/modlib/debts/models.py:598
 msgid "Actor"
 msgstr "Acteur"
 
-#: lino_welfare/modlib/debts/models.py:624
+#: lino_welfare/modlib/debts/models.py:617
 msgid "To be filled if there is more than one person involved."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:630
+#: lino_welfare/modlib/debts/models.py:623
 msgid "Is actor in these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:641
+#: lino_welfare/modlib/debts/models.py:634
 msgid "Budget Entry"
 msgstr "Entrée"
 
-#: lino_welfare/modlib/debts/models.py:642
+#: lino_welfare/modlib/debts/models.py:635
 msgid "Budget Entries"
 msgstr "Entrées"
 
-#: lino_welfare/modlib/debts/models.py:661
+#: lino_welfare/modlib/debts/models.py:654
 msgid "Circa"
 msgstr "ca."
 
-#: lino_welfare/modlib/debts/models.py:663
+#: lino_welfare/modlib/debts/models.py:656
 msgid "Distribute"
 msgstr "distribuer"
 
-#: lino_welfare/modlib/debts/models.py:667
+#: lino_welfare/modlib/debts/models.py:660
 msgid "To Do"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:681
-#: lino_welfare/modlib/debts/models.py:1332
+#: lino_welfare/modlib/debts/models.py:674
+#: lino_welfare/modlib/debts/models.py:1341
 msgid "Periods"
 msgstr "Périodes"
 
-#: lino_welfare/modlib/debts/models.py:686
-#: lino_welfare/modlib/debts/models.py:1029
+#: lino_welfare/modlib/debts/models.py:679
+#: lino_welfare/modlib/debts/models.py:1038
 msgid "Monthly rate"
 msgstr "Montant mensuel"
 
-#: lino_welfare/modlib/debts/models.py:693
-#: lino_welfare/modlib/debts/models.py:1003
-#: lino_welfare/modlib/debts/models.py:1346
+#: lino_welfare/modlib/debts/models.py:686
+#: lino_welfare/modlib/debts/models.py:1012
+#: lino_welfare/modlib/debts/models.py:1355
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:759
+#: lino_welfare/modlib/debts/models.py:752
 msgid "Periods must be > 0"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:763
+#: lino_welfare/modlib/debts/models.py:756
 #, python-format
 msgid "Cannot set 'Distribute' when 'Monthly rate' is %r"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:984
+#: lino_welfare/modlib/debts/models.py:993
 #: lino_welfare/modlib/integ/models.py:180
 #: lino_welfare/modlib/integ/models.py:370
 #: lino_welfare/modlib/integ/models.py:392
@@ -1416,36 +1435,36 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1045
+#: lino_welfare/modlib/debts/models.py:1054
 msgid "Print version of :ref:`welfare.debts.LiabilitiesByBudget`."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1108
+#: lino_welfare/modlib/debts/models.py:1117
 msgid "Shows the Incomes & Expenses for this budget."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1109
+#: lino_welfare/modlib/debts/models.py:1118
 msgid "Incomes & Expenses"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1155
+#: lino_welfare/modlib/debts/models.py:1164
 msgid "Debts"
 msgstr "Dettes"
 
-#: lino_welfare/modlib/debts/models.py:1167
+#: lino_welfare/modlib/debts/models.py:1176
 #, fuzzy, python-format
 msgid "%s (distributable)"
 msgstr "distribuer"
 
-#: lino_welfare/modlib/debts/models.py:1177
+#: lino_welfare/modlib/debts/models.py:1186
 msgid "Bailiff Debts"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1189
+#: lino_welfare/modlib/debts/models.py:1198
 msgid "Debts distribution"
 msgstr "Répartition au marc-le-franc"
 
-#: lino_welfare/modlib/debts/models.py:1192
+#: lino_welfare/modlib/debts/models.py:1201
 msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
@@ -1454,49 +1473,49 @@ msgid ""
 "\n"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1223
+#: lino_welfare/modlib/debts/models.py:1232
 msgid "%"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1227
+#: lino_welfare/modlib/debts/models.py:1236
 msgid "Monthly payback suggested"
 msgstr "Remboursement mensuel"
 
-#: lino_welfare/modlib/debts/models.py:1234
+#: lino_welfare/modlib/debts/models.py:1243
 msgid "Creditor"
 msgstr "Créancier"
 
-#: lino_welfare/modlib/debts/models.py:1235
+#: lino_welfare/modlib/debts/models.py:1244
 msgid "Debt"
 msgstr "Dette"
 
-#: lino_welfare/modlib/debts/models.py:1248
+#: lino_welfare/modlib/debts/models.py:1257
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
-#: lino_welfare/modlib/debts/models.py:1323
+#: lino_welfare/modlib/debts/models.py:1332
 msgid "Required for Households"
 msgstr "obligatoire pour ménages"
 
-#: lino_welfare/modlib/debts/models.py:1328
+#: lino_welfare/modlib/debts/models.py:1337
 msgid "Required for Persons"
 msgstr "obligatoire pour personnes"
 
-#: lino_welfare/modlib/debts/models.py:1336
+#: lino_welfare/modlib/debts/models.py:1345
 #, fuzzy
 msgid "Default amount"
 msgstr "Montant à répartir"
 
-#: lino_welfare/modlib/debts/models.py:1348
+#: lino_welfare/modlib/debts/models.py:1357
 #, fuzzy
 msgid "Client contact type for Bailiff."
 msgstr "Type de contact client"
 
-#: lino_welfare/modlib/debts/models.py:1354
+#: lino_welfare/modlib/debts/models.py:1363
 msgid "Master budget"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1356
+#: lino_welfare/modlib/debts/models.py:1365
 msgid "The budget whose content is to be copied into new budgets."
 msgstr ""
 
@@ -3039,31 +3058,32 @@ msgstr ""
 msgid "Debts consultant"
 msgstr "Consultate médiateur dettes"
 
-#: lino_welfare/settings/__init__.py:95
-msgid "CBSS only"
-msgstr "BCSS seulement"
+#: lino_welfare/settings/__init__.py:93
+#, fuzzy
+msgid "Social agent"
+msgstr "Agences de travail"
 
-#: lino_welfare/settings/__init__.py:96
+#: lino_welfare/settings/__init__.py:97
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: lino_welfare/settings/__init__.py:134
+#: lino_welfare/settings/__init__.py:135
 msgid "Master"
 msgstr "Signalétique"
 
-#: lino_welfare/settings/__init__.py:151
+#: lino_welfare/settings/__init__.py:152
 msgid "Listings"
 msgstr ""
 
-#: lino_welfare/settings/__init__.py:155
+#: lino_welfare/settings/__init__.py:156
 msgid "Configure"
 msgstr "Configurer"
 
-#: lino_welfare/settings/__init__.py:160
+#: lino_welfare/settings/__init__.py:161
 msgid "Explorer"
 msgstr "Explorateur"
 
-#: lino_welfare/settings/__init__.py:164
+#: lino_welfare/settings/__init__.py:165
 msgid "Site"
 msgstr "Site"
 
@@ -3120,4 +3140,7 @@ msgstr "Site"
 
 #~ msgid "Must read eID card!"
 #~ msgstr ""
+
+#~ msgid "CBSS only"
+#~ msgstr "BCSS seulement"
 

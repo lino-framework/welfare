@@ -613,7 +613,7 @@ Belgique""")
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Klienten, Wartende Besucher, Empfangene Besucher
+- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
@@ -651,7 +651,6 @@ Belgique""")
   - Kontakte : Kontaktpersonen
   - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
   - Haushalte : Mitglieder
-  - Empfang : Gäste
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
   - CV : Sprachkenntnisse
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
@@ -672,7 +671,7 @@ Belgique""")
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Wartende Besucher
+- Empfang : Meine Warteschlange
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
@@ -702,7 +701,7 @@ Belgique""")
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Wartende Besucher
+- Empfang : Meine Warteschlange
 
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 
@@ -740,7 +739,7 @@ Belgique""")
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Wartende Besucher
+- Empfang : Meine Warteschlange
 
 - Schuldnerberatung : Klienten, Meine Budgets
 
@@ -761,7 +760,7 @@ Belgique""")
 
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 
-- Empfang : Wartende Besucher
+- Empfang : Meine Warteschlange
 
 - Neuanträge : Neue Klienten, Verfügbare Begleiter
 
@@ -780,7 +779,7 @@ Belgique""")
 
         # 210 reception
         menu_test('210',"""\
-- Empfang : Klienten, Empfangene Besucher
+- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 """) # 210 reception
 

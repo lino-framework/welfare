@@ -13,14 +13,7 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-This package contains the **Debt Mediation** module 
-(Schuldnerberatung, Médiation de dettes).
-
-It enables social consultants to create :class:`Budgets`.
-A :class:`Budget` collects financial 
-information like monthly income, monthly expenses and debts 
-of a household or a person, then print out a document which serves 
-as base for the consultation and discussion with debtors.
+The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
 
 """
 

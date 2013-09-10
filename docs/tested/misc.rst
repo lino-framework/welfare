@@ -7,6 +7,7 @@ Miscellaneous
 
 Some tests:
   
+>>> from __future__ import print_function
 >>> from lino.runtime import *
 >>> from django.utils import translation
 >>> from pprint import pprint
@@ -69,38 +70,3 @@ Teams
 ============================== ============================== =================================================== ====
 <BLANKLINE>
 
-
-The following helped to discover a bug on :blogref:`20130421`. 
-Symptom was that the `coming_reminders`
-and
-`missed_reminders`
-virtual fields of :class:`lino.modlib.cal.models.Home` 
-showed also events of other users.
-For example, Rolf suddenly had more than 100 events 
-(the exact count was 137 to 140 depending on the day of the month 
-where the demo database has been generated)
-instead of about 7:
-
->>> events = ses.spawn(cal.MyEvents,master_instance=ses.get_user())
->>> print events.master_instance
-Rolf Rompen
->>> events.get_total_count() < 100
-True
-
-I first expected the
-:meth:`lino.core.requests.BaseRequest.spawn` method to ignore the 
-`master_instance` keyword, but could not reproduce any error.
-Then I discovered that it is because MyEvents no longer inherits 
-from ByUser and thus no longer automatically filters 
-from master_instance. If I filter it myself, I get a reasonable
-number of events:
-
->>> events = ses.spawn(cal.MyEvents,user=ses.get_user())
->>> print events.get_total_count()
-12
-
-Why MyEvents no longer inherits from ByUser? 
-This is expected behaviour, not a bug: it's because 
-in MyEvents the user should be able to switch to 
-other user's MyEvents view by activating the parameter panel 
-and selecting another iser.

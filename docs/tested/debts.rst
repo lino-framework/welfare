@@ -218,6 +218,23 @@ discovered :blogref:`20130527`:
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 
 
+Editability of tables 
+---------------------
+
+The following is to check whether the editable attribute inherited 
+correctly.
+
+>>> debts.Budgets.editable
+True
+>>> debts.EntriesByBudget.editable
+True
+>>> debts.DistByBudget.editable
+False
+>>> debts.LiabilitiesByBudget.editable
+True
+>>> debts.PrintLiabilitiesByBudget.editable
+False
+
 
 
 Work in progress

@@ -4,6 +4,15 @@
 Debts mediation
 ===================
 
+Debt Mediation (Schuldnerberatung, Médiation de dettes)
+
+This app enables social consultants to create "Budgets".
+A :ddref:`debts.Budget` collects financial 
+information like monthly income, monthly expenses and debts 
+of a household or a person, then print out a document which serves 
+as base for the consultation and discussion with debtors.
+
+
 Scénarios
 =========
 
