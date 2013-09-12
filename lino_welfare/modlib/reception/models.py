@@ -68,8 +68,8 @@ dd.inject_field('system.SiteConfig','attestation_note_nature',
     
 class CreateClientVisit(dd.Action): 
     sort_index = 91
-    icon_name = 'x-tbar-hourglass'
-    icon_file = 'hourglass.png'
+    icon_name = 'hourglass'
+    #~ icon_file = 'hourglass.png'
     label = _("Create visit")
     #~ show_in_workflow = True
     #~ show_in_row_actions = True
@@ -166,8 +166,8 @@ class CreateNoteActionsByClient(ButtonsTable):
     sort_index = 94
     master = 'pcsw.Client'
     label = _("Issue attestation")
-    icon_name = 'x-tbar-script'
-    icon_file = 'script.png'
+    icon_name = 'script'
+    #~ icon_file = 'script.png'
     
     @classmethod
     def get_title(self,ar):
@@ -184,7 +184,7 @@ class CreateNoteActionsByClient(ButtonsTable):
             btn = sar.insert_button(unicode(nt),
                 dict(type=nt,event_type=settings.SITE.site_config.attestation_note_nature),
                 title=_("Create a %s for this client.") % nt,
-                icon_file=None)
+                icon_name=None)
             if btn is not None:
                 yield btn
 
@@ -193,8 +193,8 @@ class CreateEventActionsByClient(ButtonsTable):
     sort_index = 93
     master = 'pcsw.Client'
     label = _("Find date with...")
-    icon_name = 'x-tbar-calendar'
-    icon_file = 'calendar.png'
+    icon_name = 'calendar'
+    #~ icon_file = 'calendar.png'
     
     @classmethod
     def get_title(self,ar):
@@ -378,7 +378,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
     @dd.displayfield(_("Actions"))
     def actions(cls,obj,ar):
         elems = []
-        elems += [ar.instance_action_button(obj.create_visit,_("Visit"),icon_file=CreateClientVisit.icon_file),' ']
+        elems += [ar.instance_action_button(obj.create_visit,_("Visit"),icon_name=CreateClientVisit.icon_name),' ']
         
         #~ ba = cls.get_action_by_name('create_visit')
         #~ u = obj.user
@@ -393,7 +393,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
                 current_project=obj.client.pk)
             elems += [ar.href_to_request(sar,_("Find date"),
                 title=_("Find date"),
-                icon_file=CreateEventActionsByClient.icon_file),' ']
+                icon_name=CreateEventActionsByClient.icon_name),' ']
             #~ icon_name = 'x-tbar-calendar'
             #~ icon_file = 'calendar.png'
 

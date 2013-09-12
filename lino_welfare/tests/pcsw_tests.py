@@ -649,7 +649,7 @@ Belgique""")
   - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
   - Kontakte : Kontaktpersonen
-  - Kalender : Aufgaben, Gäste, Abonnements, Zustände, Zustände, Zustände
+  - Kalender : Aufgaben, Gäste, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Haushalte : Mitglieder
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
   - CV : Sprachkenntnisse

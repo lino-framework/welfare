@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,22 +22,22 @@ msgid "Users"
 msgstr ""
 
 #: None:2
-# cf1f74bb21974d4d8023ece0fc3557cf
+# 6423e3615b094091aed10cb195303a68
 msgid "User (model in app \"users\")"
 msgstr ""
 
 #: None:2
-# 5ac320b1696c49c09a48a4fc19aea296
+# f76f24d68d054ac29a0ff245f03a16b0
+msgid "User Profile (field in \"<class 'lino.modlib.users.models.User'>\")"
+msgstr ""
+
+#: None:2
+# 4be21758abac4c25ac401f7c269daaa3
 msgid "Team (model in app \"users\")"
 msgstr ""
 
 #: None:2
-# 609cd0885aa849118f122ebde4d245df
+# 6bf5ec42b3ea4cf0bfdc0c29a4eea855
 msgid "Membership (model in app \"users\")"
-msgstr ""
-
-#: None:2
-# 96b7ee3a56d84ffd8f706330f3175fb7
-msgid "site config (model in app \"system\")"
 msgstr ""
 

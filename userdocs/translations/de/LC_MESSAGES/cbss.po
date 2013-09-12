@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -28,18 +28,40 @@ msgstr ""
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
-# 58384578f38b4dd3badb5471214dd415
-#: ../cbss.rst:16
-msgid "TIs connus"
+# 3fa20c62b9d24a45a15e7ed2b022e87a
+#: None:2
+msgid "IdentifyPerson Request (model in app \"cbss\")"
 msgstr ""
+
+# d308362124b343ab851e5f57ebe77df0
+#: None:2
+msgid "ManageAccess Request (model in app \"cbss\")"
+msgstr ""
+
+# 38f73ba3364d449d827f084b26e407b7
+#: None:2
+msgid "Tx25 Request (model in app \"cbss\")"
+msgstr ""
+
+# c915a466908649dbb03c292b42f93d30
+#: None:2
+msgid "Sector (model in app \"cbss\")"
+msgstr ""
+
+# 93b6c221eb5149db9f44971d6eb3271d
+#: None:2
+msgid "Purpose (model in app \"cbss\")"
+msgstr ""
+
+# 58384578f38b4dd3badb5471214dd415
+#~ msgid "TIs connus"
+#~ msgstr ""
 
 # c1b1210f8be94dcdac271b3cccffc082
-#: ../cbss.rst:18
-msgid "Liste incomplète (conversion en cours) des TIs que Lino connait:"
-msgstr ""
+#~ msgid "Liste incomplète (conversion en cours) des TIs que Lino connait:"
+#~ msgstr ""
 
 # e56fd7c91f9b4e278db822a19fde0ac6
-#: ../cbss.rst:33
-msgid "Référence"
-msgstr ""
+#~ msgid "Référence"
+#~ msgstr ""
 

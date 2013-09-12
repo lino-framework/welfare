@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,46 +23,75 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
-# b948b31643284726964f8f441eb72617
-#: ../contacts.rst:9
+# 844c37ad74654dee85782da1454abdf3
+#: None:2
+msgid "Partner (model in app \"contacts\")"
+msgstr ""
+
+# 741dc7b9c7bd41a09ac36ce0357fa7ad
+#: None:2
 msgid ""
-"Toute personne physique ou morale est enregistrée dans Lino en tant que "
-":ref:`Partenaire <welfare.contacts.Partner>`."
+"obsolete (field in \"<class "
+"'lino_welfare.modlib.contacts.models.Partner'>\")"
 msgstr ""
 
-# af2537ea263f49238433b84932e3c976
-#: ../contacts.rst:12
-msgid "Lino différencie les types de Partenaires suivants:"
+# 720dd550372b4593ad069a5d899509ed
+#: None:2
+msgid "Person (model in app \"contacts\")"
 msgstr ""
 
-# bfece9b123a84846aacc206eb4dd229e
-#: ../contacts.rst:19
-msgid "Veraltete Partner"
+# d855a729b5bd4b12a61fa80e3f74aacb
+#: None:2
+msgid "Company (model in app \"contacts\")"
 msgstr ""
 
-# e5b1287392e2408480a067c1615a9779
-#: ../contacts.rst:21
-msgid "Das Attribut \"veraltet\" bedeutet :"
+# 65d62afcd1184c5bad8e637cf733b244
+#: None:2
+msgid "Contact Person (model in app \"contacts\")"
 msgstr ""
 
-# b398bda1693e47f78505eb56caf46ae1
-#: ../contacts.rst:23
-msgid "die Daten dieses Partners werden nicht mehr gepflegt,"
+# e31ff2cc2ae649e3a970eec585eeb114
+#: None:2
+msgid "Function (model in app \"contacts\")"
 msgstr ""
 
-# 46bf977e8b8249d48c371ff80785c37e
-#: ../contacts.rst:24
-msgid ""
-"alle Angaben verstehen sich als \"so war es, bevor dieser Partner "
-"aufhörte, uns zu interessieren\"."
+# b21c86ac372e453e8f87a66421b71764
+#: None:2
+msgid "company type (model in app \"contacts\")"
+msgstr ""
+
+# 6c0525ecb2b24e869ff53281d13f60d0
+#: None:2
+msgid "activity (model in app \"pcsw\")"
+msgstr ""
+
+# 1942b7e6dc054881b7aac5db85109db1
+#: None:2
+msgid "Household (model in app \"households\")"
+msgstr ""
+
+# f2106ee9b9074a58a686507e2f9228c0
+#: None:2
+msgid "Household Type (model in app \"households\")"
 msgstr ""
 
 # 2ea4729f1f5d4ca3a6fc232b2160b201
-#: ../contacts.rst:27
-msgid ""
-"Veraltete Partner werden normalerweise in Listen ignoriert, als wären sie"
-" gelöscht. Um sie trotzdem zu sehen, muss das Ankreuzfeld `Auch veraltete"
-" Klienten` (bzw. `Auch veraltete Partner`) im Parameter-Panel der Liste "
-"angekreuzt werden."
-msgstr ""
+#~ msgid ""
+#~ msgstr ""
+
+# af2537ea263f49238433b84932e3c976
+#~ msgid "Lino différencie les types de Partenaires suivants:"
+#~ msgstr ""
+
+# bfece9b123a84846aacc206eb4dd229e
+#~ msgid "Veraltete Partner"
+#~ msgstr ""
+
+# e5b1287392e2408480a067c1615a9779
+#~ msgid "Das Attribut \"veraltet\" bedeutet :"
+#~ msgstr ""
+
+# b398bda1693e47f78505eb56caf46ae1
+#~ msgid "die Daten dieses Partners werden nicht mehr gepflegt,"
+#~ msgstr ""
 

@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../.templates/layout.html:6
-# 356480ee268147de9abc9ee803a3bc12
+# 247dc21d974249e589fdf8a9a5e3f8c8
 msgid "&copy; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
 msgstr ""
 
 #: ../.templates/layout.html:8
-# 23cc66aace1a47bd9a41c788b828c331
+# 6300b7a6b9914a04a112d74b4d1ee123
 msgid "&copy; Copyright %(copyright)s."
 msgstr ""
 
 #: ../.templates/layout.html:12
-# 07e8f1b20e474e2695c778085f46aecf
+# 021c94ede0794534a3d28dc083dece93
 msgid "Last updated on %(last_updated)s."
 msgstr ""
 
 #: ../.templates/layout.html:15
-# 0a7e2d9f8e4a4f588bb41c69861d9a95
+# a678e52cd5ba4cb5a55d21cee2a4c621
 msgid "Created using <a href=\"http://sphinx.pocoo.org/\">Sphinx</a> %(sphinx_version)s."
 msgstr ""
 
 #: ../.templates/layout.html:18
-# cf01734bf93a4fc2b640d005786f8903
+# b6f308ce6dc44e3691b407860521fe7a
 msgid "Show Source"
 msgstr ""
 

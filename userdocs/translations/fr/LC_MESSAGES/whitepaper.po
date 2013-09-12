@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-09-06 10:20+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -25,8 +25,14 @@ msgstr "Lino Welfare -- Fiche technique"
 
 # ce10347485a5421ea502dd0d650f9bb9
 #: ../whitepaper.rst:7
-msgid "\"Lino\" is a framework (a library for building applications) and \"Lino Welfare\" (Lino for PCSWs) is one of the main applications developed using Lino by the framework's author."
-msgstr "Lino est un framework (bibliothèque de construction d’applications), et « Lino Welfare » (Lino pour CPAS) est une des applications principales développées également par l’auteur du framework."
+msgid ""
+"\"Lino\" is a framework (a library for building applications) and \"Lino "
+"Welfare\" (Lino for PCSWs) is one of the main applications developed "
+"using Lino by the framework's author."
+msgstr ""
+"Lino est un framework (bibliothèque de construction d’applications), et "
+"« Lino Welfare » (Lino pour CPAS) est une des applications principales "
+"développées également par l’auteur du framework."
 
 # 68836125a36448da966c34527583e763
 #: ../whitepaper.rst:13
@@ -35,42 +41,60 @@ msgstr ""
 
 # f6e336242f0e47f4a2dc1c43c3a983a4
 #: ../whitepaper.rst:15
-msgid "Lino utilise les technologies Python, Django et ExtJS pour délivrer des Rich Internet Applications (RIA) au look « desktop »."
+msgid ""
+"Lino utilise les technologies Python, Django et ExtJS pour délivrer des "
+"Rich Internet Applications (RIA) au look « desktop »."
 msgstr ""
 
 # 4490fee0500c49649723e869527416ae
 #: ../whitepaper.rst:17
-msgid "Une application Lino fonctionne indépendamment du système d’exploitation et de l’endroit géographique"
+msgid ""
+"Une application Lino fonctionne indépendamment du système d’exploitation "
+"et de l’endroit géographique"
 msgstr ""
 
 # 4793def3e8c64285b92abd85714a339c
 #: ../whitepaper.rst:19
-msgid "Lino tourne sur n’importe quel serveur qui offre Apache/mod_wsgi (ou un autre serveur web compatible WSGI) et une des bases de données MySQL, PostgreSQL, SQLite, Oracle. En pratique nous recommendons Debian ou Ubuntu."
+msgid ""
+"Lino tourne sur n’importe quel serveur qui offre Apache/mod_wsgi (ou un "
+"autre serveur web compatible WSGI) et une des bases de données MySQL, "
+"PostgreSQL, SQLite, Oracle. En pratique nous recommendons Debian ou "
+"Ubuntu."
 msgstr ""
 
 # 9d280861760e4b7d9bb4e5b5d7435fa4
 #: ../whitepaper.rst:23
-msgid "Plusieures instances par serveur possible (par exemple pour différentes applications/services et/ou environnement de test)"
+msgid ""
+"Plusieures instances par serveur possible (par exemple pour différentes "
+"applications/services et/ou environnement de test)"
 msgstr ""
 
 # dfb4b3a0fd4c495faae9d2bf83ab2056
 #: ../whitepaper.rst:25
-msgid "Multilingue à trois niveaux : (1) interface utilisateur (2) désignations des codes et (3) destinataire d’un document"
+msgid ""
+"Multilingue à trois niveaux : (1) interface utilisateur (2) désignations "
+"des codes et (3) destinataire d’un document"
 msgstr ""
 
 # e37f3076b41f40c2aec93fedcf04df86
 #: ../whitepaper.rst:28
-msgid "Génération automatique de documents de type PDF, MS-Word, OpenOffice et autres se basant sur des templates (modèles, gabarits)"
+msgid ""
+"Génération automatique de documents de type PDF, MS-Word, OpenOffice et "
+"autres se basant sur des templates (modèles, gabarits)"
 msgstr ""
 
 # d775633eb45a4b128bac7e1419532919
 #: ../whitepaper.rst:29
-msgid "WebDAV automatique intégré afin de pouvoir éditer des documents générés et stockés sur le serveur sans que l’utilisateur doive intervenir."
+msgid ""
+"WebDAV automatique intégré afin de pouvoir éditer des documents générés "
+"et stockés sur le serveur sans que l’utilisateur doive intervenir."
 msgstr ""
 
 # fcf76c3cf39446f2870a7bcef27eabdc
 #: ../whitepaper.rst:30
-msgid "Export des données vers des tableurs en Hypertext Markup Language (HTML) et Portable Document Format (PDF)"
+msgid ""
+"Export des données vers des tableurs en Hypertext Markup Language (HTML) "
+"et Portable Document Format (PDF)"
 msgstr ""
 
 # 95d294a46ffb47f8a8e060ba177ef386
@@ -120,7 +144,9 @@ msgstr ""
 
 # aadf83d1353f424d840ed453e2831e71
 #: ../whitepaper.rst:44
-msgid "Les utilisateurs peuvent donner procuration à leurs collègue de travailler et effectuer certaines actions en leur nom."
+msgid ""
+"Les utilisateurs peuvent donner procuration à leurs collègue de "
+"travailler et effectuer certaines actions en leur nom."
 msgstr ""
 
 # 01f51c44f52c4499b8a404238b6429e0
@@ -130,12 +156,17 @@ msgstr ""
 
 # ef4b9907af814aa2b2b53cc43b8facd6
 #: ../whitepaper.rst:50
-msgid "Les données signalétiques spécifiques aux CPAS (Clients, Ménages,...) sont intégrées de manière transparente dans la gestion générale des contacts."
+msgid ""
+"Les données signalétiques spécifiques aux CPAS (Clients, Ménages,...) "
+"sont intégrées de manière transparente dans la gestion générale des "
+"contacts."
 msgstr ""
 
 # d93947ab098a43a5b333ced12a9abc15
 #: ../whitepaper.rst:53
-msgid "Un même client peut être accompagné par plusieurs agents dans des services différents."
+msgid ""
+"Un même client peut être accompagné par plusieurs agents dans des "
+"services différents."
 msgstr ""
 
 # 7b3f678b9bf34a42b5adabbfb259f4b1
@@ -150,12 +181,17 @@ msgstr ""
 
 # 926300bbd1894bba9ef8b6ca772442d5
 #: ../whitepaper.rst:61
-msgid "Gestion des documents scannés (permis de conduire, de résidence, de travail,...). Rappel optionnel si la date de fin de validité approche."
+msgid ""
+"Gestion des documents scannés (permis de conduire, de résidence, de "
+"travail,...). Rappel optionnel si la date de fin de validité approche."
 msgstr ""
 
 # 023ac60df2f649e68cb304dc9f125d43
 #: ../whitepaper.rst:64
-msgid "Les travailleurs sociaux notent chaque événement. Traçabilité par exemple des appels téléphoniques, des contacts internes et externe avec clients, collègues ou partenaires, courriers, ..."
+msgid ""
+"Les travailleurs sociaux notent chaque événement. Traçabilité par exemple"
+" des appels téléphoniques, des contacts internes et externe avec clients,"
+" collègues ou partenaires, courriers, ..."
 msgstr ""
 
 # f1adc583ca40498080998be36fba5cb2
@@ -165,17 +201,26 @@ msgstr ""
 
 # 5b84071477b648c7abeac00af7a91f59
 #: ../whitepaper.rst:71
-msgid "Gestion des données relatives au CV (formations, expériences professionnelles, connaissances des langues, compétences, ...) Possibilité de recherche avancée sur base de ces critères."
+msgid ""
+"Gestion des données relatives au CV (formations, expériences "
+"professionnelles, connaissances des langues, compétences, ...) "
+"Possibilité de recherche avancée sur base de ces critères."
 msgstr ""
 
 # b60e9f9aaf714a5f9fe922f9298f110d
 #: ../whitepaper.rst:75
-msgid "Gestion des PIIS (VSE): saisie, création automatique et impression du contrat papier, consultation, analyse statistique, rappels automatique des évaluations intermédiaires à prévoir"
+msgid ""
+"Gestion des PIIS (VSE): saisie, création automatique et impression du "
+"contrat papier, consultation, analyse statistique, rappels automatique "
+"des évaluations intermédiaires à prévoir"
 msgstr ""
 
 # 2c283882bede4aa2b6d3a865a87dd509
 #: ../whitepaper.rst:79
-msgid "Gestion des projets de mise au travail (Art. 60§7): saisie, création automatique et impression de la convention papier, consultation, analyse statistique, rappels automatique des évaluations intermédiaires à prévoir"
+msgid ""
+"Gestion des projets de mise au travail (Art. 60§7): saisie, création "
+"automatique et impression de la convention papier, consultation, analyse "
+"statistique, rappels automatique des évaluations intermédiaires à prévoir"
 msgstr ""
 
 # e3e80e5211d64069b731fe934b8e2353
@@ -225,7 +270,9 @@ msgstr ""
 
 # 3039f43929394b1ba657b613e2f086c2
 #: ../whitepaper.rst:97
-msgid "Proposition automatique des travailleurs sociaux compétents selon les spécificités de la demande et attribution selon la disponibilité"
+msgid ""
+"Proposition automatique des travailleurs sociaux compétents selon les "
+"spécificités de la demande et attribution selon la disponibilité"
 msgstr ""
 
 # a45a188d8698413b9eafb7a50904bc45
@@ -235,7 +282,10 @@ msgstr ""
 
 # d72909bdaeda4975a69d155ce6728aec
 #: ../whitepaper.rst:102
-msgid "Interface d’encodage des données (dépenses, revenus, obligations, répartition au marc-lefranc) et création automatique d’un budget mensuel individuel ou par ménage."
+msgid ""
+"Interface d’encodage des données (dépenses, revenus, obligations, "
+"répartition au marc-lefranc) et création automatique d’un budget mensuel "
+"individuel ou par ménage."
 msgstr ""
 
 # 152e4d12dc674638a30284280fb1fb7c
@@ -245,28 +295,50 @@ msgstr "Guichet de réception"
 
 # 3bf8b683f66f4da19a7353d2be70349c
 #: ../whitepaper.rst:109
-msgid "Visitors are checked in at a reception desk and attributed to the responsible social agent. Then they wait in a lounge until the agent receives them. After the consultation the agent checks them out."
-msgstr "Les visiteurs sont enregistrés à un guichet de réception et attribués à l'agent chargé du dossier. Ensuite ils attendent que l'agent vienne les recevoir. Après l'entrevue l'agent signale leur départ."
+msgid ""
+"Visitors are checked in at a reception desk and attributed to the "
+"responsible social agent. Then they wait in a lounge until the agent "
+"receives them. After the consultation the agent checks them out."
+msgstr ""
+"Les visiteurs sont enregistrés à un guichet de réception et attribués à "
+"l'agent chargé du dossier. Ensuite ils attendent que l'agent vienne les "
+"recevoir. Après l'entrevue l'agent signale leur départ."
 
 # a0a159a038114b4881b7318d9bb018bc
 #: ../whitepaper.rst:113
-msgid "The social agents can consult from their desktop at any time the live list of waiting visitors."
-msgstr "Les agents sociaux peuvent consulter depuis leur bureau la liste des personnes qui attendent."
+msgid ""
+"The social agents can consult from their desktop at any time the live "
+"list of waiting visitors."
+msgstr ""
+"Les agents sociaux peuvent consulter depuis leur bureau la liste des "
+"personnes qui attendent."
 
 # 2af286d068474d9b8e85c0f6468a80b5
 #: ../whitepaper.rst:115
-msgid "The reception clerk verifies the client's contact data and can read the client's eID card into the database."
-msgstr "L'agent de réception vérifie les données de contact et demande la carte d'identité pour l'introduire dans la base de donnée."
+msgid ""
+"The reception clerk verifies the client's contact data and can read the "
+"client's eID card into the database."
+msgstr ""
+"L'agent de réception vérifie les données de contact et demande la carte "
+"d'identité pour l'introduire dans la base de donnée."
 
 # 979482305c2c4d1b9c7fa231f68327d3
 #: ../whitepaper.rst:117
-msgid "The reception clerk can consult the calendar of a given social agent to make an appointment for a client,"
-msgstr "L'agent de réception peut consulter le calendrier d'un agent donné pour fixer un rendez-vous."
+msgid ""
+"The reception clerk can consult the calendar of a given social agent to "
+"make an appointment for a client,"
+msgstr ""
+"L'agent de réception peut consulter le calendrier d'un agent donné pour "
+"fixer un rendez-vous."
 
 # 2f2d4a35453c4a86ac45ccaaf2b7eb48
 #: ../whitepaper.rst:119
-msgid "The reception clerk can quickly print attestations from a configurable set of templates."
-msgstr "L'agent de réception peut imprimer rapidement certaines attestations basés sur des modèles configurables."
+msgid ""
+"The reception clerk can quickly print attestations from a configurable "
+"set of templates."
+msgstr ""
+"L'agent de réception peut imprimer rapidement certaines attestations "
+"basés sur des modèles configurables."
 
 # 7865d23c03c248f589fb0a04ca649c24
 #: ../whitepaper.rst:124

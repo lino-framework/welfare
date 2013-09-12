@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -18,33 +18,78 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.0\n"
 
-# 8441e1c5167f41d485308ce7f5470adf
-#: ../isip.rst:5
-msgid "Insertion sociale"
-msgstr ""
-
-# de5bdf118129454998ab04797cb64ef8
-#: ../isip.rst:7
-msgid ""
-"Ce module gère le travail avec les Projects d'Insertion Sociale "
-"Personnalisés (PIIS)."
-msgstr ""
-
-# dc3db3f19ddb4aef8668ca6910d086f8
-#: ../isip.rst:10
-msgid ""
-"Un :ref:`PIIS <welfare.isip.Contracts>` est une convention entre le CPAS "
-"et un jeune client qui engendra un accompagnement individuel de la "
-"personne surtout au niveau enseignement."
+# c4aa78e2d8dd4048adbef9988d3b1c4b
+# 1ff9118b518a4b6ab03b448e0f5704d6
+#: ../isip.rst:5 ../isip.rst:11
+msgid "ISIP"
 msgstr ""
 
 # c6b8c5d3de534a729c8b49fb6e4e4dd9
-#: ../isip.rst:14
-msgid "Le module est techniquement similaire au module :ref:`welfare.jobs`."
+#: ../isip.rst:7
+msgid ""
+"Ce module gère le travail avec les :term:`PIIS`. Il est techniquement "
+"similaire au module :ref:`welfare.jobs`."
 msgstr ""
 
-# 0f39a2a1fac945d3ac300886323d3ce5
-#: ../isip.rst:19
-msgid "Référence"
+# e4773d0b114b45ddbe301cb79249d10a
+#: ../isip.rst:13
+msgid ""
+"A convention or contract between the PCSW and a young client that leads "
+"to an individual coaching of the person, mostly concerning her scholar "
+"education."
 msgstr ""
+
+# 0e08426127014454981d1bb0452be4c6
+#: ../isip.rst:16
+msgid "PIIS"
+msgstr ""
+
+# dc3db3f19ddb4aef8668ca6910d086f8
+#: ../isip.rst:18
+msgid ""
+"Project d'Insertion Sociale Personnalisé. Une convention entre le CPAS et"
+" un jeune client qui engendra un accompagnement individuel de la personne"
+" surtout au niveau enseignement."
+msgstr ""
+
+# d5bc27e695444ac9adf07217b8044c09
+#: None:2
+msgid "ISIP (model in app \"isip\")"
+msgstr ""
+
+# 5bfa62592d9e48c788ff996820c5ecc2
+#: None:2
+msgid "study type (model in app \"isip\")"
+msgstr ""
+
+# d09fe1c3fa07457f9edf1053fae926c2
+#: None:2
+msgid "ISIP Type (model in app \"isip\")"
+msgstr ""
+
+# edca86eb74d446958510c096a9379902
+#: None:2
+msgid "Examination Policy (model in app \"isip\")"
+msgstr ""
+
+# 0d8a8dccf73e4cca9d67615dce29134d
+#: None:2
+msgid "Reason of termination (model in app \"isip\")"
+msgstr ""
+
+# 8441e1c5167f41d485308ce7f5470adf
+#~ msgid "Insertion sociale"
+#~ msgstr ""
+
+# dc3db3f19ddb4aef8668ca6910d086f8
+#~ msgid ""
+#~ msgstr ""
+
+# c6b8c5d3de534a729c8b49fb6e4e4dd9
+#~ msgid "Le module est techniquement similaire au module :ref:`welfare.jobs`."
+#~ msgstr ""
+
+# 0f39a2a1fac945d3ac300886323d3ce5
+#~ msgid "Référence"
+#~ msgstr ""
 

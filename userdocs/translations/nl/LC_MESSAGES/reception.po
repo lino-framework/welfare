@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-07-19 15:14+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -26,15 +26,15 @@ msgstr ""
 # 0f29967445c34e01b9db5ccd1a3b6957
 #: ../reception.rst:6
 msgid ""
-"The reception module of Lino-Welfare is for managing a reception desk and"
+"The reception module of Lino Welfare is for managing a reception desk and"
 " a waiting queue."
 msgstr ""
 
 # 83562c899aa74f70a1c089bf22dfeef5
 #: ../reception.rst:9
 msgid ""
-"Visitors are \"checked in\" as they present themselves at a reception "
-"desk, then they wait in a lounge until an agent \"receives\" them, and "
+"Visitors are \"checked in\" as they present themselves at the reception "
+"desk, then they wait in a lounge until an agent receives them, and "
 "finally they are \"checked out\" when they leave the building."
 msgstr ""
 
@@ -42,29 +42,37 @@ msgstr ""
 #: ../reception.rst:14
 msgid ""
 "Social agents have a possibility to see how many and which clients are "
-"waiting for them."
+"waiting for them. (:ddref:`reception.MyWaitingVisitors`)"
 msgstr ""
 
 # 5430f54cf3974070bb6dba29e64fa350
-#: ../reception.rst:17
+#: ../reception.rst:18
 msgid ""
 "A **reception clerk** is the user at the reception desk who welcomes "
-"visitors. In the public demo database there is a user \"theresia\" with "
-"that profile. Theresia's first questions are usually \"What's your "
-"name?\" or \"Do you have an appointment with a social agent?\"."
+"visitors. The reception clerk asks questions like \"What's your name?\" "
+"or \"Do you have an appointment with a social agent?\". See "
+":ddref:`lino.UserProfiles`."
+msgstr ""
+
+# d4f7f40b000747faacc2d80493630248
+#: ../reception.rst:27
+msgid ""
+"Vocabulary note: Visitors are instances of the :ddref:`cal.Guest` model "
+"when they are being managed by the reception module, i.e. when they have "
+"been at least checked in."
 msgstr ""
 
 # f174e5de64f3484192d1e31bd336fe24
-#: ../reception.rst:24
+#: ../reception.rst:32
 msgid ""
-"Visitors must have a :ref:`welfare.pcsw.Client` account. Technically a "
-":ref:`welfare.contacts.Partner` account would be enough, but other "
-"visitors like suppliers or board members aren't managed by the reception "
-"module."
+"Visitors must be registered as a :ddref:`pcsw.Client`. Technically a "
+":ddref:`contacts.Partner` account would be enough, but other \"visitors\""
+" like suppliers or board members aren't managed by the reception module "
+"of Lino Welfare."
 msgstr ""
 
 # 957da6c5a5a04e0db02e13cef16b8af3
-#: ../reception.rst:29
+#: ../reception.rst:37
 msgid ""
 "Lino notifies the user to read the client's eID card if this is "
 "necessary, e.g. because \"eID card has not yet been read!\" or \"Old eID "
@@ -72,59 +80,41 @@ msgid ""
 msgstr ""
 
 # 804cc3fdb04e4ed6b0a44492c70b6d95
-#: ../reception.rst:33
+#: ../reception.rst:41
 msgid ""
 "Most visitors come at the open consultation hours. and don't have an "
-"appointment with some user. We call this a \"visit\". In that case the "
-"reception clerk clicks \"Create Visit\", confirms the selected agent and "
-"enters a \"reason\" (a short one-line text). This will automatically "
-"create two records: an :ddref:`cal.Event` and a :ddref:`cal.Guest`."
+"appointment with some user. We call this a \"visit\" or \"prompt event\"."
+" In that case the reception clerk clicks \"Create Visit\", confirms the "
+"selected agent and enters a \"reason\" (a short one-line text). This will"
+" automatically create two records: an :ddref:`cal.Event` and a "
+":ddref:`cal.Guest`."
 msgstr ""
 
 # 57b9e5306fad49e8b09df4000c9c40d3
-#: ../reception.rst:43
+#: ../reception.rst:51
 msgid ""
-"A **visit** is an unplanned calendar event. An **appointment** is a "
-"planned (scheduled) calendar event."
+"A **visit** or **prompt event** is an unplanned :ddref:`cal.Event`. An "
+"**appointment** is a planned (scheduled) :ddref:`cal.Event`."
 msgstr ""
 
 # 4cbb5d57acfe4852987ef186fee5b96b
-#: ../reception.rst:47
-msgid ""
-"In any case, when the clerk then clicks the Checkin button of that "
-"appointment."
-msgstr ""
-
-# 349815d0ba0f4172879e139e333dbc85
-#: ../reception.rst:50
-msgid ""
-"The reception clerk then finally says \"Please sit down and wait until "
-"the social agent comes.\""
-msgstr ""
-
-# de42be45b8c84d9aa7df99e1e0e3487d
-#: ../reception.rst:71
-msgid "As a social worker you consult this table to see:"
-msgstr ""
-
-# 8e72fb8ff3f64f1ea48e09b6b8dcd9a0
-#: ../reception.rst:73
-msgid "How many people are waiting for me?"
-msgstr ""
-
-# 4311c93cc61e4be28a34a149e1367ae6
-#: ../reception.rst:74
-msgid "Who is waiting for me?"
+#: ../reception.rst:54
+msgid "In any case, when the clerk then the Checkin button of that appointment."
 msgstr ""
 
 # 98f788c2d2e94e43950e38e39297873e
-#: ../reception.rst:76
-msgid ""
-"For example you may decide \"This guy gets quickly nervous, and it won't "
-"take much time, so i'll let him in before the others.\""
-msgstr ""
-
-# d9aeaeafaae44665a943bb7ab53d8ed6
 #~ msgid ""
+#~ msgstr ""
+
+# de42be45b8c84d9aa7df99e1e0e3487d
+#~ msgid "As a social worker you consult this table to see:"
+#~ msgstr ""
+
+# 8e72fb8ff3f64f1ea48e09b6b8dcd9a0
+#~ msgid "How many people are waiting for me?"
+#~ msgstr ""
+
+# 4311c93cc61e4be28a34a149e1367ae6
+#~ msgid "Who is waiting for me?"
 #~ msgstr ""
 

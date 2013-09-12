@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,25 @@ msgstr ""
 msgid "Curriculum vitae"
 msgstr ""
 
-#: ../cv.rst:9
-# 5f086ce2af184816976784c2706276f8
-msgid "Référence"
+#: None:2
+# 8d7851a12a2a4d16bc1d094481f8441a
+msgid "language knowledge (model in app \"cv\")"
+msgstr ""
+
+#: None:2
+#: None:2
+# 0ea650fc434e441c89013d8b04180096
+# f1191edd39434f6eacc07134086a8ce6
+msgid "Property (model in app \"properties\")"
+msgstr ""
+
+#: None:2
+# 86108e6e532b4830944a565bdf988558
+msgid "Property Type (model in app \"properties\")"
+msgstr ""
+
+#: None:2
+# e4e68b0030e8400cb61e1e207b261f0f
+msgid "Property Group (model in app \"properties\")"
 msgstr ""
 

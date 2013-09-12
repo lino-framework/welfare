@@ -223,8 +223,7 @@ class Company(Partner,Company):
     #~ is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
         
     client_contact_type = dd.ForeignKey('pcsw.ClientContactType',blank=True,null=True)
-        
-        
+
     @classmethod
     def on_analyze(cls,site):
         #~ if cls.model is None:

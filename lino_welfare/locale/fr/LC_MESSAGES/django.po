@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 05:31+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-04-25 16:59+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -58,7 +58,7 @@ msgid ""
 msgstr ""
 
 #: lino_welfare/models.py:339 lino_welfare/modlib/cal/models.py:150
-#: lino_welfare/modlib/contacts/models.py:286
+#: lino_welfare/modlib/contacts/models.py:285
 #: lino_welfare/modlib/debts/models.py:450
 #: lino_welfare/modlib/isip/models.py:684
 #: lino_welfare/modlib/reception/models.py:231
@@ -924,7 +924,7 @@ msgstr ""
 msgid "Also obsolete data"
 msgstr "aussi clients obsolètes"
 
-#: lino_welfare/modlib/contacts/models.py:320
+#: lino_welfare/modlib/contacts/models.py:319
 #: lino_welfare/settings/__init__.py:150
 msgid "Partners (all)"
 msgstr "Partenaires (tous)"
@@ -2278,6 +2278,14 @@ msgstr ""
 #: lino_welfare/modlib/newcomers/models.py:647
 msgid "Newcomers Quota"
 msgstr "Quota nouvelles demandes"
+
+#: lino_welfare/modlib/notes/models.py:29
+msgid "Event/Note"
+msgstr ""
+
+#: lino_welfare/modlib/notes/models.py:30
+msgid "Events/Notes"
+msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:89
 msgid "Civil states"

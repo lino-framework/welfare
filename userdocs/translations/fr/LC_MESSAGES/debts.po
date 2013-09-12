@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-07-27 15:35+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -23,13 +23,28 @@ msgstr ""
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
+# 646dbe542d284957be538f1d41da5e11
+#: ../debts.rst:7
+msgid "Debt Mediation (Schuldnerberatung, Médiation de dettes)"
+msgstr ""
+
+# a9ef61463deb4a158907490b38b8a6f8
+#: ../debts.rst:9
+msgid ""
+"This app enables social consultants to create \"Budgets\". A "
+":ddref:`debts.Budget` collects financial information like monthly income,"
+" monthly expenses and debts of a household or a person, then print out a "
+"document which serves as base for the consultation and discussion with "
+"debtors."
+msgstr ""
+
 # f5413881afcc42ea9e30a4ab6249322b
-#: ../debts.rst:8
+#: ../debts.rst:17
 msgid "Scénarios"
 msgstr ""
 
 # 182cd194705c4d618b8fca8ea8d5c8d2
-#: ../debts.rst:10
+#: ../debts.rst:19
 msgid ""
 "En tant que conseiller dettes je commence à remplir, avec le client, les "
 "données d'un budget. Le client n'a pas toutes les informations "
@@ -39,22 +54,37 @@ msgid ""
 msgstr ""
 
 # 4cbbb91c82bd4393b5b7dd1d29c3f396
-#: ../debts.rst:17
+#: ../debts.rst:26
 msgid "Activer le champ :ref:`welfare.debts.Budget.print_empty_rows`"
 msgstr ""
 
 # 1f5a6982a14f4a5280061ad51efe519c
-#: ../debts.rst:18
+#: ../debts.rst:27
 msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
 # 8cf2a03713e543c3bd58a8cd54dc720a
-#: ../debts.rst:29
+#: ../debts.rst:38
 msgid "Print empty rows"
 msgstr ""
 
 # 012e5555a4bf454780fe357f3c414ae5
-#: ../debts.rst:34
+#: ../debts.rst:43
 msgid "Ignore yearly incomes"
+msgstr ""
+
+# 64aea385b1a743949c01ee639ebb4f66
+#: None:2
+msgid "Budget Actor (model in app \"debts\")"
+msgstr ""
+
+# f5e330d6cf24446f9998cce18567632a
+#: None:2
+msgid "Budget (model in app \"debts\")"
+msgstr ""
+
+# 7e6ce36faeba4ed9b373a0cbc6b2b34f
+#: None:2
+msgid "Budget Entry (model in app \"debts\")"
 msgstr ""
 

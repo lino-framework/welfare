@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -28,123 +28,71 @@ msgstr ""
 msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
-# 3cc6773481e646328db7f58561d436f4
-#: ../clients.rst:9
-msgid ""
-"This section is about the :ddref:`pcsw.Client` model, and the "
-":ddref:`pcsw.Coaching` and :ddref:`pcsw.ClientContact` models."
-msgstr ""
-
-# 968d1520aa2f4402a0a0ba7c196f2bf2
-#: ../clients.rst:18
-msgid ""
-"Ein Klient ist eine Person, für die wir eine Serie von zusätzlichen Daten"
-" erfassen."
-msgstr ""
-
-# 1895005ff2784134a4c95dfa70ee51eb
-#: ../clients.rst:21
-msgid ""
-"Für Klienten gibt es drei **Tabellenansichten**, die sich lediglich durch"
-" Kolonnenreihenfolge und Filterparameter unterscheiden:"
-msgstr ""
-
-# 23313f54e7e44a36937c2aa8b0033f4d
-#: ../clients.rst:25
-msgid ""
-"\"Alle Klienten\" (Menü :menuselection:`Kontakte --> Klienten`) : "
-"allgemeine Liste, die jeder Benutzer sehen darf."
-msgstr ""
-
-# 96179242398e45569af4880a1634a54d
-#: ../clients.rst:29
-msgid ""
-"DSBE-Klienten (Menü :menuselection:`DSBE --> Klienten`) spezielle Liste "
-"für die Kollegen im DSBE. Zeigt immer nur **begleitete** Kunden. Hier "
-"kann man keine neuen Klienten anlegen. Die Reiter Kompetenzen, "
-"Verträge... finden sich nur hier."
-msgstr ""
-
-# 749f3fd8766c46beb1ab16aec28eb2d7
-#: ../clients.rst:36
-msgid ""
-"Neue Klienten (Menü :menuselection:`Neuanträge --> Klienten`): spezielle "
-"Liste für die Zuweisung von Neuanträgen."
-msgstr ""
-
-# 20e2dffee2eb4f3b9c5236a096b52bf4
-#: ../clients.rst:40
-msgid ""
-"N.B. Das Detail, das bei Doppelklick angezeigt wird, ist bei allen drei "
-"Ansichten das Gleiche. Das hängt vom :ref:`welfare.users.UserProfile` ab."
-msgstr ""
-
-# f32f410764da4bf4b5dc8e0582ccf65e
-#: ../clients.rst:48
-msgid "Référence"
-msgstr ""
-
-# 485e0df2cd9b498c9c8670765b6d6c92
-#: ../clients.rst:65
-msgid "Anhang"
-msgstr ""
-
-# 1169263568ec4fceb0cea718bddb5a31
-#: ../clients.rst:67
-msgid "Workflow : Arbeitsablauf"
-msgstr ""
-
-# dd65c086578a421aa4931cb30bd2d3e8
-#: ../clients.rst:68
-msgid "Life cycle : Lebenzyklus"
-msgstr ""
-
-# 6570caeb6b5d49e2bd39bdcc38c14048
-#: ../clients.rst:69
-msgid "engl. \"State\" = Bearbeitungszustand"
-msgstr ""
-
-# 6a31e4ef723b490a92ff6665d5ef14c1
+# 262cc1da08a44ce090391d7caa5be20d
 #: None:2
 msgid "Client (model in app \"pcsw\")"
 msgstr ""
 
-# 0f05b63e4b4a4793b46af197970e1ef6
+# b5fa8fc732a846619003e56b40fea750
 #: None:2
 msgid "Coaching (model in app \"pcsw\")"
 msgstr ""
 
-# 57be59a43d684ccd80adccdb40afbe0b
+# 23fb9154e4094b78901f7622a93351f7
 #: None:2
 msgid "Client Contact (model in app \"pcsw\")"
 msgstr ""
 
-# d093e0e4a8304fb4a1f464afd656afa0
+# 23bd4d28fe44497094e49640f99dbceb
 #: None:2
 msgid "Client Contact type (model in app \"pcsw\")"
 msgstr ""
 
-# 1bf9584f9e6d49a294a4f42e58da72d0
+# 1f59fd7009ac470c9d369f910dede243
 #: None:2
 msgid "Coaching type (model in app \"pcsw\")"
 msgstr ""
 
-# fbd062f90d0c41389ecee3ed2a7534b9
+# 2edb08f412c549658504e4d406342d5a
 #: None:2
 msgid "Reason of termination (model in app \"pcsw\")"
 msgstr ""
 
-# d97b8944bcb0467fbfe5dd9fd72831f6
+# e83c6b54cff345c49a0558f20dad54e3
 #: None:2
 msgid "aid type (model in app \"pcsw\")"
 msgstr ""
 
-# b2cb4543afd3489cb86390a65b6bf260
+# b46ff5efc56c46cd9de7209e91993420
 #: None:2
 msgid "Integration Phase (model in app \"pcsw\")"
 msgstr ""
 
 # 9873193472034ab3b19d5a23cb6192e6
 #~ msgid "Ce module comprend les fonctionnalités autour des entités suivantes:"
+#~ msgstr ""
+
+# 20e2dffee2eb4f3b9c5236a096b52bf4
+#~ msgid ""
+#~ msgstr ""
+
+# f32f410764da4bf4b5dc8e0582ccf65e
+#~ msgid "Référence"
+#~ msgstr ""
+
+# 485e0df2cd9b498c9c8670765b6d6c92
+#~ msgid "Anhang"
+#~ msgstr ""
+
+# 1169263568ec4fceb0cea718bddb5a31
+#~ msgid "Workflow : Arbeitsablauf"
+#~ msgstr ""
+
+# dd65c086578a421aa4931cb30bd2d3e8
+#~ msgid "Life cycle : Lebenzyklus"
+#~ msgstr ""
+
+# 6570caeb6b5d49e2bd39bdcc38c14048
+#~ msgid "engl. \"State\" = Bearbeitungszustand"
 #~ msgstr ""
 

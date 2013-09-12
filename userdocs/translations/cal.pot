@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,48 +21,48 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: ../cal.rst:7
-# 84925b02e6e74255b9f99aa41769bbdb
-msgid "Important models are :ddref:`cal.Event` and :ddref:`cal.Guest` and :ddref:`cal.Task`..."
-msgstr ""
-
 #: None:2
-# 6d3183964cb44773b09ff64a79f9badc
+# ae887bae2143402aa8e33daf837f5b86
 msgid "Event (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# f55f0e67896a41ff8c272b1915ea9bbc
+# 56a4b32df2c04ea08bd3fcfc16df4c52
 msgid "Guest (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# e440eb202ddd4bf194b1c08b4b8574dd
+# bd9923a98f2e4f48a78efea473b77025
 msgid "Task (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 7f511eb317d841ef8ab9555758a1d506
+# 0a6abecfee0f441cb6bc778cde22f8fd
+msgid "State (field in \"<class 'lino.modlib.cal.models.Task'>\")"
+msgstr ""
+
+#: None:2
+# 28b1f2b5cc6549b880b3bda545d44fa3
 msgid "Calendar (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 14c12361024047a6a4be13a83d7ed492
+# 56fe4e8525634b0a9821e3ff067d10eb
 msgid "Subscription (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 732d4203d3c04c59a196ac57560aff00
+# 371a1f9a27ad42a2bae2a35e469c4e63
 msgid "Room (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 0a1320516add4c1e83e0362f30881a1c
+# ed83aadd71be4326976d87a22fe077d3
 msgid "Priority (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# ed7bc5d3d16145668d9bf400476dd475
+# 0027024fb94e4f17ae02a294c139d373
 msgid "Guest Role (model in app \"cal\")"
 msgstr ""
 

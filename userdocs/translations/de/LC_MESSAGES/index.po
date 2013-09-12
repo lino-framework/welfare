@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-07-27 07:28+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -21,13 +21,13 @@ msgstr ""
 # c5f0d2e5c6324b94a538ff1e5151f832
 #: ../index.rst:4
 #, fuzzy
-msgid "Lino-Welfare User Guide"
+msgid "Lino-Welfare User Documentation"
 msgstr "Benutzerhandbuch Lino für ÖSHZ"
 
 # 8377d9e655bc4caebf5f33ccc9385eb4
 #: ../index.rst:6
 msgid ""
-"Available as `.pdf` file: `User Guide <./lino-userdocs.pdf>`_, "
+"Available as `.pdf` file: `User Guide <./lino-welfare-userguide.pdf>`_, "
 "`Whitepaper <./lino-welfare-whitepaper.pdf>`_ and `Screenshots <./lino-"
 "welfare-screenshots.pdf>`_"
 msgstr ""
@@ -46,15 +46,7 @@ msgstr ""
 #~ msgid "This is work in progress."
 #~ msgstr "Noch nicht fertig."
 
-# e5012f8835c74f87b114c42e975d475b
+# 8377d9e655bc4caebf5f33ccc9385eb4
 #~ msgid ""
-#~ msgstr ""
-
-# e5012f8835c74f87b114c42e975d475b
-#~ msgid ""
-#~ "Available as `.pdf` file: `Complete user"
-#~ " guide <./lino-userdocs-todo.pdf>`_ "
-#~ "`Features <./features.pdf>`_ `Screenshots "
-#~ "<./screenshots.pdf>`_"
 #~ msgstr ""
 

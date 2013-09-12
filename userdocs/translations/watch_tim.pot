@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,22 +78,22 @@ msgstr ""
 
 #: ../watch_tim.rst:41
 # 49c5d3ae95be4ce49b5416cca2f10e04
-msgid "Wenn mindestens eines der Felder `PAR->NB2` (INSS) oder `PAR->NB1` (Gesdos-Nr) unleer ist, oder wenn *Partnerattribut N (Neuzugang)* gesetzt ist, dann wird es ein :ref:`Klient <welfare.pcsw.Client>`. Wobei zu beachten ist, dass `PAR->NB2` (INSS) als leer gilt, wenn es nur eine  Null (\"0\")  enthält. Ausnahme: Wenn `PAR->NoTva` unleer ist und `PAR->NB2` (INSS) leer, dann wird es *trotzdem kein* Klient (sondern eine Organisation, s.h. nächster Punkt)."
+msgid "Wenn mindestens eines der Felder `PAR->NB2` (INSS) oder `PAR->NB1` (Gesdos-Nr) unleer ist, oder wenn *Partnerattribut N (Neuzugang)* gesetzt ist, dann wird es ein :ddref:`Klient <pcsw.Client>`. Wobei zu beachten ist, dass `PAR->NB2` (INSS) als leer gilt, wenn es nur eine  Null (\"0\")  enthält. Ausnahme: Wenn `PAR->NoTva` unleer ist und `PAR->NB2` (INSS) leer, dann wird es *trotzdem kein* Klient (sondern eine Organisation, s.h. nächster Punkt)."
 msgstr ""
 
 #: ../watch_tim.rst:53
 # eb7ddd9528c24961934f3f949a5ed610
-msgid "**Ansonsten**, wenn `PAR->NoTva` unleer ist, wird es eine :ref:`Organisation <welfare.contacts.Company>`."
+msgid "**Ansonsten**, wenn `PAR->NoTva` unleer ist, wird es eine :ddref:`Organisation <contacts.Company>`."
 msgstr ""
 
 #: ../watch_tim.rst:55
 # 15884a9248844553a4c8fcd0f29ceec5
-msgid "**Ansonsten**, wenn `PAR->Allo` (Anrede) einen der Werte \"Eheleute\", \"Herr und Frau\" enthält, dann wird es ein :ref:`Haushalt <welfare.households.Household>`"
+msgid "**Ansonsten**, wenn `PAR->Allo` (Anrede) einen der Werte \"Eheleute\", \"Herr und Frau\" enthält, dann wird es ein :ddref:`Haushalt <households.Household>`"
 msgstr ""
 
 #: ../watch_tim.rst:58
 # 4701593474bd4ff5abd5e5e458c708de
-msgid "Ansonsten wird es eine :ref:`Person <welfare.contacts.Person>`."
+msgid "Ansonsten wird es eine :ddref:`Person <contacts.Person>`."
 msgstr ""
 
 #: ../watch_tim.rst:60
@@ -103,12 +103,12 @@ msgstr ""
 
 #: ../watch_tim.rst:62
 # eab229ad5b1e41568dc3c8ee414961ac
-msgid "um Klient oder Person werden zu können, muss ein Partner außerdem auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein Leerzeichen enthalten. Hat er das nicht, wird er zum einfachen :ref:`Partner <welfare.contacts.Partner>`, und eventuelle Information in `PAR->NB1` oder `PAR->NB2` werden ignoriert."
+msgid "um Klient oder Person werden zu können, muss ein Partner außerdem auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein Leerzeichen enthalten. Hat er das nicht, wird er zum einfachen :ddref:`Partner <contacts.Partner>`, und eventuelle Information in `PAR->NB1` oder `PAR->NB2` werden ignoriert."
 msgstr ""
 
 #: ../watch_tim.rst:71
 # 5998e242ef86481ab0f2b16ac7715826
-msgid "Ob eine :ref:`Organisation <welfare.contacts.Company>` auch :ref:`Kursanbieter <welfare.courses.CourseProvider>` und/oder :ref:`Stellenabieter <welfare.jobs.JobProvider>` ist, wird lediglich in Lino (durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. TIM kennt diese Information nicht."
+msgid "Ob eine :ddref:`Organisation <contacts.Company>` auch :ddref:`Kursanbieter <courses.CourseProvider>` und/oder :ddref:`Stellenabieter <jobs.JobProvider>` ist, wird lediglich in Lino (durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. TIM kennt diese Information nicht."
 msgstr ""
 
 #: ../watch_tim.rst:80
@@ -331,7 +331,7 @@ msgstr ""
 
 #: ../watch_tim.rst:210
 # 215db059992c40458d8e1cfadf5f447b
-msgid "Bei importierten Partnern ist das Ankreuzfeld :ref:`\"veraltet\" <welfare.contacts.Partner.obsolete>` schreibgeschützt. Es ist eingeschaltet, wenn diese Person in TIM entweder in **Partnerart \"Inaktive\"** steht oder das **Partnerattribut W** eingeschaltet hat."
+msgid "Bei importierten Partnern ist das Ankreuzfeld :ddref:`veraltet <contacts.Partner.is_obsolete>` schreibgeschützt. Es ist eingeschaltet, wenn diese Person in TIM entweder in **Partnerart \"Inaktive\"** steht oder das **Partnerattribut W** eingeschaltet hat."
 msgstr ""
 
 #: ../watch_tim.rst:221
@@ -481,12 +481,12 @@ msgstr ""
 
 #: ../watch_tim.rst:326
 # 84732e713de8444da2fac2680567b84b
-msgid "Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) werden nach Lino synchronisiert als :ref:`Klientenkontakte <welfare.pcsw.ClientContact>`."
+msgid "Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) werden nach Lino synchronisiert als :ddref:`Klientenkontakte <pcsw.ClientContact>`."
 msgstr ""
 
 #: ../watch_tim.rst:329
 # 0ccf110a277a456babf1faf15bc577d7
-msgid "*Importierte* Klienten sollten in ihren :ref:`Klientenkontakten <welfare.pcsw.ClientContacts>` deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben. Sonst findet `watch_tim`, dass er nicht dafür zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die `system.log`)"
+msgid "*Importierte* Klienten sollten in ihren :ddref:`Klientenkontakten <pcsw.ClientContact>` deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben. Sonst findet `watch_tim`, dass er nicht dafür zuständig ist und synchronisiert nichts (schreibt lediglich eine Warnung in die `system.log`)"
 msgstr ""
 
 #: ../watch_tim.rst:336

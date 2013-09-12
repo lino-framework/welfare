@@ -389,7 +389,7 @@ def objects():
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
     
-    obj = calendar(color=20,invite_client=True,is_appointment=False,**babelkw('name',
+    obj = calendar(color=20,invite_client=False,is_appointment=False,**babelkw('name',
           de="Visiten (ohne Termin)",
           fr="Visites (sans rendez-vous)",
           en="Prompt events",
@@ -1236,7 +1236,8 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             now)
         yield obj
         
-    qs = cal.Guest.objects.filter(role=settings.SITE.site_config.client_guestrole)
+    #~ qs = cal.Guest.objects.filter(role=settings.SITE.site_config.client_guestrole)
+    qs = cal.Guest.objects.filter(waiting_since__isnull=False)
     for i,obj in enumerate(qs):
         if i % 2 == 0:
             obj.busy_since = obj.waiting_since + datetime.timedelta(minutes=2*i,seconds=2*i)

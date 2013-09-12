@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,8 +23,28 @@ msgstr ""
 msgid "Curriculum vitae"
 msgstr ""
 
-# 5f086ce2af184816976784c2706276f8
-#: ../cv.rst:9
-msgid "Référence"
+# 8d7851a12a2a4d16bc1d094481f8441a
+#: None:2
+msgid "language knowledge (model in app \"cv\")"
 msgstr ""
+
+# 0ea650fc434e441c89013d8b04180096
+# f1191edd39434f6eacc07134086a8ce6
+#: None:2
+msgid "Property (model in app \"properties\")"
+msgstr ""
+
+# 86108e6e532b4830944a565bdf988558
+#: None:2
+msgid "Property Type (model in app \"properties\")"
+msgstr ""
+
+# e4e68b0030e8400cb61e1e207b261f0f
+#: None:2
+msgid "Property Group (model in app \"properties\")"
+msgstr ""
+
+# 5f086ce2af184816976784c2706276f8
+#~ msgid "Référence"
+#~ msgstr ""
 

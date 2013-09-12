@@ -74,7 +74,7 @@ DEMO_OVERVIEW = """\
  accounts.Group                          9         7
  cal.Calendar                            25        9
  cal.Event                               24        %s
- cal.Guest                               10        21
+ cal.Guest                               10        23
  cal.GuestRole                           9         4
  cal.Priority                            6         9
  cal.Room                                5         0

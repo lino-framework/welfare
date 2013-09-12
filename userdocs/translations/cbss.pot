@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,18 +26,28 @@ msgstr ""
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
-#: ../cbss.rst:16
-# 58384578f38b4dd3badb5471214dd415
-msgid "TIs connus"
+#: None:2
+# 3fa20c62b9d24a45a15e7ed2b022e87a
+msgid "IdentifyPerson Request (model in app \"cbss\")"
 msgstr ""
 
-#: ../cbss.rst:18
-# c1b1210f8be94dcdac271b3cccffc082
-msgid "Liste incomplète (conversion en cours) des TIs que Lino connait:"
+#: None:2
+# d308362124b343ab851e5f57ebe77df0
+msgid "ManageAccess Request (model in app \"cbss\")"
 msgstr ""
 
-#: ../cbss.rst:33
-# e56fd7c91f9b4e278db822a19fde0ac6
-msgid "Référence"
+#: None:2
+# 38f73ba3364d449d827f084b26e407b7
+msgid "Tx25 Request (model in app \"cbss\")"
+msgstr ""
+
+#: None:2
+# c915a466908649dbb03c292b42f93d30
+msgid "Sector (model in app \"cbss\")"
+msgstr ""
+
+#: None:2
+# 93b6c221eb5149db9f44971d6eb3271d
+msgid "Purpose (model in app \"cbss\")"
 msgstr ""
 

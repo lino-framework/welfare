@@ -25,6 +25,9 @@ from lino import dd
 from lino.modlib.notes.models import *
 
 class Note(Note):
+    class Meta:
+        verbose_name = _("Event/Note") 
+        verbose_name_plural = _("Events/Notes")
 
     def get_person(self):
         return self.project

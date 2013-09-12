@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -47,42 +47,41 @@ msgstr ""
 # 8caece4ecf1d43708accc828420035d1
 #: ../jobs.rst:21
 msgid ""
-"Le CPAS gère une liste d':ref:`welfare.jobs.Jobs` (de mise au travail). "
-"Ces endroits de mise au travail sont généralement des endroits de travail"
-" spécialisés à l'accqueil temporaire de personnes à intégrer. Exemple:"
+"Le CPAS gère une liste d':ddref:`jobs.Jobs` (de mise au travail). Ces "
+"endroits de mise au travail sont généralement des endroits de travail "
+"spécialisés à l'accqueil temporaire de personnes à intégrer. Exemple:"
 msgstr ""
 
 # bd3216333a4a48d2a16321264e61b729
 #: ../jobs.rst:31
 msgid ""
 "Indépendamment de ces endroits de travail le CPAS peut gérer une liste "
-"d':ref:`welfare.jobs.Offers` du marché normal."
+"d':ddref:`jobs.Offers` du marché normal."
 msgstr ""
 
 # 4f756cb842564d21845b2bd921a69498
 #: ../jobs.rst:34
 msgid ""
-"Une :ref:`Candidature <welfare.jobs.Candidatures>` représente le fait "
-"qu'un :ref:`Client <welfare.pcsw.Clients>` donné voudrait travailler à un"
-" :ref:`Endroit <welfare.jobs.Jobs>` donné. Ceci implique entre autres que"
-" l'agent d'insertion responsable l'estime potentiellement apte à assumer "
-"ce travail."
+"Une :ddref:`jobs.Candidature` représente le fait qu'un "
+":ddref:`pcsw.Client` donné voudrait travailler à un :ddref:`jobs.Job` "
+"donné. Ceci implique entre autres que l'agent d'insertion responsable "
+"l'estime potentiellement apte à assumer ce travail."
 msgstr ""
 
 # 9ebfc824cfb04dcd8a486cc7f5029070
 #: ../jobs.rst:40
 msgid ""
-"Eine Kandidatur ist \"wenn ein :ref:`welfare.pcsw.Client` sich für eine "
-":ref:`welfare.jobs.Job` bewirbt\". Das beinhaltet u.a. auch die "
-"Information, dass der verantwortliche Begleiter die Person als für diese "
-"Stelle geeignet einstuft."
+"Eine Kandidatur ist \"wenn ein :ddref:`pcsw.Client` sich für eine "
+":ddref:`jobs.Job` bewirbt\". Das beinhaltet u.a. auch die Information, "
+"dass der verantwortliche Begleiter die Person als für diese Stelle "
+"geeignet einstuft."
 msgstr ""
 
 # da433ba9a9e14398a24ce5999edce9d8
 #: ../jobs.rst:45
 msgid ""
-"Si un :ref:`Client <welfare.pcsw.Client>` introduit une :ref:`Candidature"
-" <welfare.jobs.Candidatures>`, l'agent d'insertion note que"
+"Si un :ddref:`pcsw.Client` introduit une :ddref:`jobs.Candidature`, "
+"l'agent d'insertion note que"
 msgstr ""
 
 # ad0d866869584a0397a4e0c98dd89ea4
@@ -92,7 +91,7 @@ msgstr ""
 
 # a5dbc058f895494bb4b86491eea4a152
 #: ../jobs.rst:51
-msgid "Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`."
+msgid "Et puis on fera un :ddref:`jobs.Contract`."
 msgstr ""
 
 # 87098bbb935e43459482bfe4e355c549
@@ -100,67 +99,67 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-# 82472cdaabb549e5b3d0529e35fe4dfb
+# d10d02fd258240289ae42a398b894e53
 #: None:2
 msgid "Job (model in app \"jobs\")"
 msgstr ""
 
-# bd8d30c3befd469aa5ac1b0dcb492ba1
+# a4e48c01d98941589130363ba3a8d353
 #: None:2
 msgid "Job Provider (model in app \"jobs\")"
 msgstr ""
 
-# 685243a37a6a48eeadf0d638dd0ec776
+# edf8bd34906a4eb4a6cb36ea03b1f09b
 #: None:2
 msgid "Art.60§7 contract (model in app \"jobs\")"
 msgstr ""
 
-# 86405a37cfaf43099986c5fadda2b72f
+# 56f99df95dee4468a3233c6047da226d
 #: None:2
 msgid "Job Candidature (model in app \"jobs\")"
 msgstr ""
 
-# c1cef63aa3674e13ac2bdd5f98913dc4
+# 153c099a240e490e9dc9c6c5bde30c67
 #: None:2
 msgid "Work Regime (model in app \"jobs\")"
 msgstr ""
 
-# b0bc0668511e40ff9142a1373f2c89ec
+# 598acd881c6e45d385288225f289c6e1
 #: None:2
 msgid "Job Sector (model in app \"jobs\")"
 msgstr ""
 
-# 369fddbb7bca4af6ba280fd89d9590bc
+# a969615a5a754a9fba862cab0639afbd
 #: None:2
 msgid "Job Function (model in app \"jobs\")"
 msgstr ""
 
-# 41eac393877443f792822595547b235a
+# 884bdcee366d4ec6bc6852db5ed5c918
 #: None:2
 msgid "Work Schedule (model in app \"jobs\")"
 msgstr ""
 
-# 84052786ed5f40d9bbeb85d683670ac4
+# 35d3c75010b14d1e96df96f793429762
 #: None:2
 msgid "Job Offer (model in app \"jobs\")"
 msgstr ""
 
-# ca777ee793eb43479ec93401f8354b41
+# cf4359a935d2451aa1d45346c4a411ca
 #: None:2
 msgid "study or education (model in app \"jobs\")"
 msgstr ""
 
-# 38f8257c20d444c5a9130141b5f26dc9
+# 92ea0f25603e4fc7a02e767f0e1bfab6
 #: None:2
 msgid "Job Experience (model in app \"jobs\")"
 msgstr ""
 
-# ce2cc6829768492eac540862f2171fbd
+# ff13e2d8acda4f449154d130bdd42710
 #: None:2
 msgid "Job Type (model in app \"jobs\")"
 msgstr ""
 
-# eb68b5ed9134471faae4681be609a34e
+# b51a44fcbaac44c4b1ed29fce8021610
 #: None:2
 msgid "Job Contract Type (model in app \"jobs\")"
 msgstr ""
@@ -169,7 +168,7 @@ msgstr ""
 #~ msgid "This list helps you to make decisions like:"
 #~ msgstr ""
 
-# 66e21c93d9e64e63a4c1de9207b14203
+# da433ba9a9e14398a24ce5999edce9d8
 #~ msgid ""
 #~ msgstr ""
 
@@ -179,5 +178,9 @@ msgstr ""
 
 # ddf032f6021c4e6896758b77de5b47a2
 #~ msgid "Example (using fictive demo data):"
+#~ msgstr ""
+
+# a5dbc058f895494bb4b86491eea4a152
+#~ msgid "Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`."
 #~ msgstr ""
 

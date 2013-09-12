@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2012-2013, Luc Saffre
-# This file is distributed under the same license as the Lino-Welfare User Manual package.
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-Welfare User Manual 1.1\n"
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:17+0300\n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,5 +19,20 @@ msgstr ""
 #: ../accounts.rst:5
 # aeec3870f2224140a7ed99e7f3f96f02
 msgid "Accounts"
+msgstr ""
+
+#: None:2
+# 3ab09b4c7a724795b278d33712bd3494
+msgid "Account Chart (model in app \"accounts\")"
+msgstr ""
+
+#: None:2
+# 8ec3210f828d4f2f9ce225c5d4f267d5
+msgid "Account (model in app \"accounts\")"
+msgstr ""
+
+#: None:2
+# 533a1f9ea7ae428f8aa3e442e5515d81
+msgid "Account Group (model in app \"accounts\")"
 msgstr ""
 
