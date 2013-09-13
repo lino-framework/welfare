@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Documentation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"PO-Revision-Date: 2013-09-10 21:17+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: nl <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.0\n"
+
+# 5fd7977e59ba4d5ca03fff5d1e5ca1cd
+#: ../system.rst:5
+msgid "System"
+msgstr ""
+
+# dfd02e6505eb4656a9bf926784f3d55e
+#: None:2
+msgid "content type (model in app \"contenttypes\")"
+msgstr ""
+
+# eac20c91d63244ccb022f9db00de7518
+#: None:2
+msgid "site config (model in app \"system\")"
+msgstr ""
+
+# 79a646b2e72b468793b8bd23777bbbd5
+#: None:2
+msgid "Event Type (model in app \"notes\")"
+msgstr ""
+
+# 86e28a0d5964412aba1e2d079006728e
+#: None:2
+msgid "Note Type (model in app \"notes\")"
+msgstr ""
+
+# 7f50da91fc6b49998c9f46bcbdfa046d
+#: None:2
+msgid "Event/Note (model in app \"notes\")"
+msgstr ""
+
+# 9d8d1fe21cc54c3fa8b02ab2d568df26
+#: None:2
+msgid "Upload (model in app \"uploads\")"
+msgstr ""
+
+# eaa627f7af3e41a9b988a4c551d843f1
+#: None:2
+msgid "Upload Type (model in app \"uploads\")"
+msgstr ""
+

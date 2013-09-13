@@ -36,9 +36,14 @@ User problem report:
 The following lines reproduced this problem 
 (and passed when it was fixed):
 
->>> ses.spawn(integ.UsersWithClients).appy_render('tmp.odt')
->>> import os
->>> os.remove('tmp.odt')
+>>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
+>>> res = client.get(url,REMOTE_USER='rolf')
+>>> print(res.status_code)
+200
+>>> result = json.loads(res.content)
+>>> print(result)
+{u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
+
 
 
 
