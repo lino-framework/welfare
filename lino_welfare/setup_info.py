@@ -141,6 +141,8 @@ add_package_data('lino_welfare.modlib.cbss',
 
 add_package_data('lino_welfare.modlib.cbss','config/cbss/RetrieveTIGroupsRequest/*.odt')
 add_package_data('lino_welfare.modlib.cbss','config/cbss/IdentifyPersonRequest/*.odt')
+add_package_data('lino_welfare.modlib.cbss','fixtures/*.csv')
+add_package_data('lino_welfare.modlib.cbss','fixtures/*.xml')
 add_package_data('lino_welfare.modlib.debts','config/debts/Budget/*.odt')
 add_package_data('lino_welfare.modlib.courses','config/courses/Course/*.odt')
 add_package_data('lino_welfare.modlib.pcsw','config/pcsw/Client/*.odt')

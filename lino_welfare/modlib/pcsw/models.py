@@ -693,6 +693,29 @@ class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
     def get_active_contract(self):
         """
         Return the one and only "active contract" of this client.
+        A contract is active if 
+        `applies_from` is <= `today` and 
+        `(date_ended or applies_until)` >= `today`.
+        
+        Returns `None` if there is either no contract or more than one 
+        active contract.
+        """
+        
+        today = datetime.date.today()
+        q1 = Q(applies_from__lte=today)
+        q2 = Q(applies_until__gte=today)
+        q3 = Q(date_ended__isnull=True) | Q(date_ended__gte=today)
+        flt = Q(q1,q2,q3)
+        qs1 = self.isip_contract_set_by_client.filter(flt)
+        qs2 = self.jobs_contract_set_by_client.filter(flt)
+        if qs1.count() + qs2.count() == 1:
+            if qs1.count() == 1: return qs1[0]
+            if qs2.count() == 1: return qs2[0]
+        return None
+        
+    def unused_get_active_contract(self): # version before 20130920
+        """
+        Return the one and only "active contract" of this client.
         
         If there is exactly one contract (past, active or future), 
         return this one. Otherwise:

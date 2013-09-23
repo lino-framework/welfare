@@ -170,7 +170,9 @@ DEMO_OVERVIEW = """\
  users.Team                              5         3
  users.User                              18        10
 ======================================= ========= =======
-""" % Event.objects.all().count()
+""" 
+
+
 
 # Note: the number of cal.Event records may vary depending on the creation date of the database
 # because of the automatic weekly evaluations of isip and jobs contracts .
@@ -199,6 +201,8 @@ class DemoTest(RemoteAuthTestCase):
         
     def test001(self):
         
+        global DEMO_OVERVIEW
+        DEMO_OVERVIEW = DEMO_OVERVIEW % Event.objects.all().count()
         s = settings.SITE.get_db_overview_rst()
         #~ print s
         self.assertEqual(DEMO_OVERVIEW,s)

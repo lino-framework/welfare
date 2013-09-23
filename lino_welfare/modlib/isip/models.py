@@ -13,9 +13,9 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-ISIP (Individualized Social Integration 
-Projects, fr. "PIIS", german "VSE")
-are contracts between a PCSW and a Client.
+The :xfile:`models.py` module for the 
+:mod:`lino_welfare.modlib.isip` app
+(eee :ddref:`isip`)
 
 """
 
@@ -60,6 +60,7 @@ from lino.mixins.printable import DirectPrintAction
 
 from lino_welfare.modlib.system.models import Signers
 
+from lino_welfare.modlib.isip import App
 
 def rangefmt(r):
     return dd.dtos(r[0]) + '...' + dd.dtos(r[1])
@@ -156,8 +157,9 @@ class ExamPolicies(dd.Table):
     jobs.ContractsByPolicy    
     """
 
-from lino_welfare.modlib.jobs import App
-JOBS_MODULE_NAME = App.verbose_name
+
+from lino_welfare.modlib.jobs import App as JobsApp
+JOBS_MODULE_NAME = JobsApp.verbose_name
     
 class ContractEnding(dd.Model):
     class Meta:
@@ -165,7 +167,7 @@ class ContractEnding(dd.Model):
         verbose_name_plural = _('Contract termination reasons')
         
     name = models.CharField(_("designation"),max_length=200)
-    use_in_isip = models.BooleanField(_("ISIP"),default=True)
+    use_in_isip = models.BooleanField(App.verbose_name,default=True)
     use_in_jobs = models.BooleanField(JOBS_MODULE_NAME,default=True)
     is_success = models.BooleanField(_("Success"),default=False)
     needs_date_ended = models.BooleanField(_("Require date ended"),default=False)
@@ -225,9 +227,9 @@ class ContractBase(
     cal.EventGenerator):
     """
     Abstract base class for 
-    :class:`lino_welfare.modlib.jobs.models.Contract`
+    :ddref:`jobs.Contract`
     and
-    :class:`lino_welfare.modlib.isip.models.Contract`
+    :ddref:`isip.Contract`.
     """
     
     manager_level_field = 'integ_level'

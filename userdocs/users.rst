@@ -46,8 +46,10 @@ Users
     (one for each functional group), 
     leading to an individual combination of permissions.
     
-    The demo database has defined the following user profiles:
+    The demo database has defined the following user profiles 
+    (we show only some userlevels):
 
-    .. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles)
+    .. django2rst:: settings.SITE.login('rolf').show(lino.UserProfiles,
+          column_names='value name text level integ_level debts_level')
 
 

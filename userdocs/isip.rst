@@ -4,6 +4,10 @@
 ISIP
 ====
 
+ISIP (Individualized Social Integration 
+Projects, fr. "PIIS", german "VSE")
+are contracts between a PCSW and a Client.
+
 Ce module gère le travail avec les :term:`PIIS`.
 Il est techniquement similaire au module :ref:`welfare.jobs`.
 
