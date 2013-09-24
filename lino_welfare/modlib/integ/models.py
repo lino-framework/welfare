@@ -84,7 +84,7 @@ class Clients(pcsw.Clients):
         kw = super(Clients,self).param_defaults(ar,**kw)
         kw.update(client_state=pcsw.ClientStates.coached)
         kw.update(coached_by=ar.get_user())
-        #~ print "20130721 integ.Clients.param_defaults", kw['coached_by']
+        #~ logger.info("20130923 integ.Clients.param_defaults %s", kw['coached_by'])
         #~ raise Exception(20130721)
         return kw
         
