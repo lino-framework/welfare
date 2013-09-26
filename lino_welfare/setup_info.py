@@ -106,8 +106,6 @@ SETUP_INFO.update(packages=[
   'lino_welfare.modlib.pcsw',
   'lino_welfare.modlib.pcsw.fixtures',
   'lino_welfare.modlib.reception',
-  'lino_welfare.modlib.statbel',
-  'lino_welfare.modlib.statbel.fixtures',
 ])
 
 SETUP_INFO.update(message_extractors = {

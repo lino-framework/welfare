@@ -13,9 +13,13 @@
 ## along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
+.. management_command:: watch_tim
+
 Starts a daemon that 
 watches the specified directory for a file :xfile:`changelog.json` 
 to appear.
+
+
 """
 
 import os
@@ -62,6 +66,8 @@ from lino.utils import mti
 from lino.utils.daemoncommand import DaemonCommand
 
 from lino.utils.ssin import is_valid_ssin
+from lino.mixins.beid import BeIdCardTypes
+
 
 LONG_TIME_AGO = datetime.date(1990,1,1)
 
@@ -201,13 +207,13 @@ def pxs2client(row,person):
     par2client(row,person)    
         
     if row.has_key('CARDTYPE'):
-        #~ row.card_type = pcsw.BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
+        #~ row.card_type = BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
         #~ from lino.apps.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
-            #~ person.card_type = pcsw.BeIdCardTypes.blank_item
+            #~ person.card_type = BeIdCardTypes.blank_item
             person.card_type = ''
         else:
-            person.card_type = pcsw.BeIdCardTypes.get_by_value(str(row['CARDTYPE']))
+            person.card_type = BeIdCardTypes.get_by_value(str(row['CARDTYPE']))
             
     if row['IDMUT']:
         checkcc(person,ADR_id(row['IDMUT']),CCTYPE_HEALTH_INSURANCE)

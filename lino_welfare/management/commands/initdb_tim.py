@@ -14,6 +14,8 @@
 
 """
 
+.. management_command:: initdb_tim
+
 Performs a database reset and initial import of your TIM data. 
 Mandatory argument is the path to your TIM data directory.
 
@@ -48,6 +50,8 @@ import lino
 
 from lino.utils import confirm, iif
 from lino.core.dbutils import app_labels
+from lino.mixins.beid import BeIdCardTypes
+
 
 Activity = resolve_model('pcsw.Activity')
 Country = resolve_model('countries.Country')
@@ -184,12 +188,12 @@ def pxs2person(row,person):
     par2person(row,person)    
         
     if row.has_key('CARDTYPE'):
-        #~ row.card_type = pcsw.BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
+        #~ row.card_type = BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
         from lino_welfare.modlib.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
-            person.card_type = pcsw.BeIdCardTypes.blank_item
+            person.card_type = BeIdCardTypes.blank_item
         else:
-            person.card_type = pcsw.BeIdCardTypes.get_by_value(str(row['CARDTYPE']))
+            person.card_type = BeIdCardTypes.get_by_value(str(row['CARDTYPE']))
     if row['IDMUT']:
         try:
             person.health_insurance = Company.objects.get(pk=ADR_id(row['IDMUT']))

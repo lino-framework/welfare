@@ -220,7 +220,7 @@ class Site(Site,cbss.SiteMixin):
             yield 'lino.modlib.families'
         
         yield 'lino_welfare'
-        yield 'lino_welfare.modlib.statbel'
+        yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         yield 'lino_welfare.modlib.pcsw' # pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.cv'

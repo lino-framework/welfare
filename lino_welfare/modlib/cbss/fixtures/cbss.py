@@ -17,7 +17,7 @@ Loads all cbss specific default data.
 """
 
 from lino_welfare.modlib.cbss.fixtures import sectors, purposes
-from lino_welfare.modlib.statbel.fixtures import inscodes
+from lino.modlib.statbel.fixtures import inscodes
 
 def objects():
     yield sectors.objects()

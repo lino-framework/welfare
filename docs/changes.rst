@@ -9,8 +9,14 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
-Version 1.1.9 (coming)
+Version 1.1.9 (released :blogref:`20130924`)
 ============================================
+
+Changed :meth:`Client.get_active_contract 
+<lino_welfare.modlib.pcsw.models.Client.get_active_contract>`
+as requested by the users: "Don't look into the past or future, 
+only today matters".
+
 
 Weitere Arbeiten im Modul :ref:`Empfang <welfare.reception>`.
 
@@ -46,7 +52,14 @@ Sonstige:
 - :menuselection:`Neuanträge --> Klienten`: 
    "Neue Klienten seit" war par défaut leer statt "vor einem Monat".
    Reihenfolge und Bezeichnungen der Felder für Filterparameter optimiert. 
-    
+   
+- Ausdruck nach PDF : hier kann man jetzt zwischen Hoch- und Querformat 
+  wählen. Und in Partnerlisten gibt es eine dritte Auswählmöglichkeit 
+  "Etiketten".
+
+- Neuer Management-Befehl dump2py sollte ab jetzt für Backups verwendet 
+  werden statt dumpdata.
+
   
 
 Version 1.1.8 (released :blogref:`20130723`)
