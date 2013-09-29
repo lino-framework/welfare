@@ -98,7 +98,7 @@ DEMO_OVERVIEW = """\
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
  contenttypes.ProxyModel                 2         0
- countries.City                          10        62
+ countries.City                          10        72
  countries.Country                       8         8
  courses.Course                          5         3
  courses.CourseContent                   2         2

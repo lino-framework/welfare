@@ -361,7 +361,8 @@ class Clients(pcsw.Clients): # see blog 2013/0817
         return elems
     
 
-pcsw.Coaching.define_action(create_visit=CreateCoachingVisit())
+#~ pcsw.Coaching.define_action(create_visit=CreateCoachingVisit())
+dd.inject_action('pcsw.Coaching',create_visit=CreateCoachingVisit())
 
 class CoachingsByClient(pcsw.CoachingsByClient):
     label = _("Coaches")
