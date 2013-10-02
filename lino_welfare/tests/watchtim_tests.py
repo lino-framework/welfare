@@ -546,8 +546,41 @@ class WatchTimTests(TestCase):
             self.assertDoesNotExist(m,id=1315)
             
             
-        """{"method":"PUT","alias":"PAR","id":"0000001588","time":"20131001 10:38:08","user":"PAC","data":{"IDPAR":"0000001588","FIRME":"Zentrum f.Aus- u. Weiterbildung des","NAME2":"Mittelstandes","RUE":"Limburgerweg","CP":"4700","IDPRT":"V","PAYS":"B","TEL":"087/59.39.89","FAX":"087/55.27.95","COMPTE1":"BBRUBEBB:BE16340143185374","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"62","CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1994,"month":11,"day":16}},"ALLO":"G.o.E.","NB1":"","NB2":"","IDDEV":"","MEMO":"\n","COMPTE2":"BKCPBEB1CPB:BE39129056571619","RUENUM":"   2","RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":2011,"month":10,"day":17}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"zawm@zawm.be",
+        """{"method":"PUT","alias":"PAR","id":"0000001588","time":"20131001 10:38:08",
+        "user":"PAC","data":{"IDPAR":"0000001588","FIRME":"Zentrum f.Aus- u. Weiterbildung des",
+        "NAME2":"Mittelstandes","RUE":"Limburgerweg","CP":"4700","IDPRT":"V","PAYS":"B",
+        "TEL":"087/59.39.89","FAX":"087/55.27.95","COMPTE1":"BBRUBEBB:BE16340143185374",
+        "NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"",
+        "ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"62","CODE1":"",
+        "CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1994,"month":11,"day":16}},
+        "ALLO":"G.o.E.","NB1":"","NB2":"","IDDEV":"","MEMO":"\n",
+        "COMPTE2":"BKCPBEB1CPB:BE39129056571619","RUENUM":"   2","RUEBTE":"","DEBIT2":"",
+        "CREDIT2":"","IMPDATE":{"__date__":{"year":2011,"month":10,"day":17}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"zawm@zawm.be",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
+        
+        """{"method":"PUT","alias":"PAR","id":"0000022307","time":"20131002 14:40:27","user":"GERD",
+        "data":{"IDPAR":"0000022307","FIRME":"Lerho Renée","NAME2":"","RUE":"Lütticher Strasse 321 /A",
+        "CP":"4721","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
+        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"91",
+        "CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":2010,"month":9,"day":1}},"ALLO":"","NB1":"",
+        "NB2":"941128 176-65","IDDEV":"","MEMO":"","COMPTE2":"",
+        "RUENUM":" 000","RUEBTE":"","DEBIT2":"","CREDIT2":"",
+        "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},
+        "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
+        "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"ALICIA","DOMI1":""}}"""
+        
+        """{"method":"PUT","alias":"PXS","id":"0000022307","time":"20131002 14:41:26","user":"GERD",
+        "data":{"IDPAR":"0000022307","NAME":"Lerho Renée",
+        "GEBDAT":{"__date__":{"year":1994,"month":11,"day":28}},"APOTHEKE":"","HILFE":"",
+        "ANTEIL":"","IDMUT":"137","VOLLMACHT":{"__date__":{"year":0,"month":0,"day":0}},
+        "LAUFZEIT":{"__date__":{"year":0,"month":0,"day":0}},"DRINGEND":"","MONATLICH":"",
+        "SOZIAL":"","MIETE":"","MAF":"","REFERENZ":"","MEMO":"","SEXE":"W","GENERIKA":"",
+        "IDPRT":"S","CARDNUMBER":"591438120107","VALID1":{"__date__":{"year":2011,
+        "month":9,"day":21}},"VALID2":{"__date__":{"year":2016,"month":9,"day":21}},
+        "CARDTYPE":1,"NATIONALIT":"B","BIRTHPLACE":"Eupen","NOBLECOND":"",
+        "CARDISSUER":"Eupen"}}
+        """
 
 
 
