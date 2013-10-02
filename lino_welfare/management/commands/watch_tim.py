@@ -251,7 +251,7 @@ def country2kw(row,kw):
             try:
                 activity = int(activity)
             except ValueError:
-                dblogger.debug("Ignored invalid value PROF = %r",activity)
+                dblogger.info("Ignored invalid value PROF = %r",activity)
             else:
                 if activity:
                     try:
@@ -350,8 +350,8 @@ def json2py(dct):
             #~ kw[k] = data[n]
 
 
-CONTACT_FIELDS = '''id name street street_no street_box addr2 
-country city zip_code region language email url phone gsm remarks'''.split()
+#~ CONTACT_FIELDS = '''id name street street_no street_box addr1 addr2 
+#~ country city zip_code region language email url phone gsm remarks'''.split()
 
 REQUEST = dd.PseudoRequest("watch_tim")
 
@@ -408,7 +408,7 @@ class Controller:
         dd.pre_ui_delete.send(sender=obj,request=REQUEST)
         #~ changes.log_delete(REQUEST,obj)
         obj.delete()
-        dblogger.debug("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],dd.obj2str(obj))
+        dblogger.info("%s:%s (%s) : DELETE ok",kw['alias'],kw['id'],dd.obj2str(obj))
         
     #~ def prepare_data(self,data):
         #~ return data
@@ -428,7 +428,7 @@ class Controller:
                 return
             #~ watcher = changes.Watcher(obj,True)
             self.applydata(obj,kw['data'])
-            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
+            dblogger.info("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
             dd.pre_ui_create.send(sender=obj,request=REQUEST)
             #~ changes.log_create(REQUEST,obj)
@@ -436,7 +436,7 @@ class Controller:
             watcher = dd.ChangeWatcher(obj)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
             self.applydata(obj,kw['data'])
-            dblogger.debug("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
+            dblogger.info("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
             watcher.send_update(REQUEST)
             #~ watcher.log_diff(REQUEST)
@@ -457,12 +457,12 @@ class Controller:
         if self.PUT_special(watcher,**kw):
             return 
         self.applydata(obj,kw['data'])
-        dblogger.debug("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
+        dblogger.info("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
         self.validate_and_save(obj)
         watcher.send_update(REQUEST)
         #~ watcher.log_diff(REQUEST)
         #~ obj.save()
-        #~ dblogger.debug("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
+        #~ dblogger.info("%s:%s : PUT %s",kw['alias'],kw['id'],kw['data'])
         
     def PUT_special(self,watcher,**kw):
         pass
@@ -531,6 +531,8 @@ class PAR(Controller):
             if data.has_key('FIRME'):
                 for k,v in name2kw(data['FIRME']).items():
                     setattr(obj,k,v)
+            if data.has_key('NAME2'):
+                setattr(obj,'addr1',data['NAME2'])
             if obj.__class__ is Client:
                 par2client(data,obj)
                 mapper.update(gesdos_id='NB1')

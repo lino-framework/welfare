@@ -245,8 +245,8 @@ class Company(Partner,Company):
 class CompanyDetail(CompanyDetail):
   
     box3 = """
-    country region
-    city zip_code:10
+    country region city zip_code:10
+    addr1:40
     street_prefix street:25 street_no street_box
     addr2:40
     """

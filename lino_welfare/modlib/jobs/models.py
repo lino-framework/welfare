@@ -1346,7 +1346,8 @@ class JobsOverviewByType(Jobs):
             if len(working) > 0:
                 job._working = UL([
                     E.span(
-                        ar.obj2html(ct.person,ct.person.last_name.upper()),
+                        #~ ar.obj2html(ct.person,ct.person.last_name.upper()),
+                        ar.obj2html(ct.person),
                         ' bis %s' % dd.dtos(ct.applies_until)) 
                     for ct in working])
                 showit = True
@@ -1359,9 +1360,9 @@ class JobsOverviewByType(Jobs):
             for cand in qs:
                 candidates.append(cand)
             if candidates:
-                #~ job._candidates = E.ul(*[E.li(unicode(i.person)) for i in candidates])
                 job._candidates = UL([
-                    ar.obj2html(i.person,i.person.last_name.upper()) 
+                    #~ ar.obj2html(i.person,i.person.last_name.upper()) 
+                    ar.obj2html(i.person) 
                         for i in candidates])
                 showit = True
             else:
@@ -1373,7 +1374,9 @@ class JobsOverviewByType(Jobs):
             for cand in qs:
                 probation.append(cand)
             if probation:
-                job._probation = UL([E.span(ar.obj2html(i.person,i.person.last_name.upper())) 
+                job._probation = UL([
+                    #~ E.span(ar.obj2html(i.person,i.person.last_name.upper())) 
+                    E.span(ar.obj2html(i.person)) 
                     for i in probation])
                 showit = True
             else:

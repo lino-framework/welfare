@@ -128,6 +128,7 @@ Anrede
 Außer wenn `PAR->Allo` es einen der Werte "Eheleute", 
 "Herr und Frau" enthält, dann wird es ein Haushalt.
 
+`PAR->Name2` wird ins Feld "Adresszeile vor Straße" importiert.
 
 
 Die INSS
