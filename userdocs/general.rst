@@ -4,6 +4,8 @@ Concepts généraux
 
 .. _welfare.admin_main:
 
+
+
 Das Hauptmenü
 =============
 
@@ -71,8 +73,27 @@ Click this button to save your changes in the form.
 
 
 
-Référence
----------
 
-.. actor:: integ.ActivityReport
+
+
+Fehlermeldungen und wie damit umgehen
+=====================================
+
+INTERNAL SERVER ERROR
+---------------------
+
+Wenn ihr ein Fenster "INTERNAL SERVER ERROR" kriegt, dann 
+
+- Keine Panik. 
+  Der Fehler liegt nicht bei dir, sondern beim Programmierer.
+
+- Wenn du möchtest, dass der Fehler schnell behoben wird, dann melde
+  dich bei deinem Systemverwalter und versuche, mit ihm den Fehler 
+  zu reproduzieren, damit er ihn mir melden kann.
+
+- Die Fehlermeldung selber kriegen Systemverwalter und Programmierer 
+  auch automatisch per Email zugeschickt. Mit etwas Glück beheben sie den 
+  Fehler ganz alleine oder melden sich gar bei dir mit Rückfragen. 
+  (Aber das ist nicht sicher.
+  Wenn du sicher sein willst, dann melde dich selber.)
 

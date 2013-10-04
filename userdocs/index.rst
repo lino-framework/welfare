@@ -34,6 +34,7 @@ User guide
    cbss
    cv
    courses
+   integ
    isip
    jobs
    debts

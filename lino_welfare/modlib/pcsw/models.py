@@ -1403,15 +1403,13 @@ class ClientsTest(Clients):
     
     
     @classmethod
-    def todo_get_row_by_pk(self,pk):
+    def get_row_by_pk(self,ar,pk):
         """
         This would be to avoid "AttributeError 'Client' object has no attribute 'error_message'"
         after a PUT from GridView.
-        One detail is missing: We should change the API to include `ar`.
-        But that's not so easy because we have for example 
-        lino.ui.extjs3.views.Templates.get
+        Not tested.
         """
-        obj = super(ClientsTest,self).get_row_by_pk(pk)
+        obj = super(ClientsTest,self).get_row_by_pk(ar,pk)
         if obj is None: 
             return obj
         return list(self.get_data_rows(ar,[obj]))[0]

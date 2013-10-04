@@ -29,7 +29,6 @@ Il est techniquement similaire au module :ref:`welfare.jobs`.
    :depth: 2
 
 
-
 .. actor:: isip.Contract
 
     The contract defining this :term:`ISIP`.
@@ -49,3 +48,5 @@ Il est techniquement similaire au module :ref:`welfare.jobs`.
 .. actor:: isip.ContractType
 .. actor:: isip.ExamPolicy
 .. actor:: isip.ContractEnding
+
+
