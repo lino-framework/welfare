@@ -250,6 +250,9 @@ add('20',_("PCSW is not competent"))
 add('30',_("Client did not return"))
         
 class RefuseClient(dd.ChangeStateAction):
+    """
+    This is not a docstring
+    """
     label = _("Refuse")
     #~ required = dict(states='newcomer invalid',user_groups='newcomers')
     required = dict(states='newcomer',user_groups='newcomers')
