@@ -9,6 +9,21 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
+Version 1.1.10 (released :blogref:`20131007`)
+=============================================
+
+Just some bugfixes:
+
+- Man geht bei den Neuzugängen auf Partner 23995 und versucht ihn
+  abzulehnen ... Paf kommt der Internal Server Error!
+- Expected a list of 12 values, but got [u'01.09.2013', u'false', u'false', u'']  
+
+- :ddref:`jobs.JobsOverview` zeigt Kandidaten jetzt mit 
+  "NAME Vorname (Nummer)" statt nur NAME.
+
+- das Feld PAR->Name2 aus TIM wurde von watch_tim bisher einfach ignoriert.
+  Kommt jetzt in das neue Feld "Adresszeile vor Straße".  
+
 Version 1.1.9 (released :blogref:`20130924`)
 ============================================
 
