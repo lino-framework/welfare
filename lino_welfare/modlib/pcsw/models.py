@@ -1914,11 +1914,12 @@ Enabling this field will automatically make the other coachings non-primary.""")
         return qs.order_by("seqno")
         
     def disabled_fields(self,ar):
+        rv = super(Coaching,self).disabled_fields(ar)
         if settings.SITE.is_imported_partner(self.client):
             if self.primary:
                 return self._imported_fields
-            return ['primary']
-        return []
+            return set(['primary'])
+        return rv
         
     def on_create(self,ar):
         """
