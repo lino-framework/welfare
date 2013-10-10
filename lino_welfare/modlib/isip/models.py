@@ -141,6 +141,9 @@ class ExamPolicy(dd.BabelNamed,cal.RecurrenceSet):
         
     #~ hidden_columns = 'summary description start_date start_time end_date end_time'
     hidden_columns = 'start_date start_time end_date end_time'
+    calendar = dd.ForeignKey('cal.Calendar',null=True,blank=True,
+        help_text=_("""\
+The calendar to which events will be generated."""))
     
         
 
