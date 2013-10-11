@@ -141,9 +141,8 @@ class ExamPolicy(dd.BabelNamed,cal.RecurrenceSet):
         
     #~ hidden_columns = 'summary description start_date start_time end_date end_time'
     hidden_columns = 'start_date start_time end_date end_time'
-    calendar = dd.ForeignKey('cal.Calendar',null=True,blank=True,
-        help_text=_("""\
-The calendar to which events will be generated."""))
+    event_type = dd.ForeignKey('cal.EventType',null=True,blank=True,
+        help_text=_("""Generated events will receive this type."""))
     
         
 
@@ -155,7 +154,7 @@ class ExamPolicies(dd.Table):
     id name
     # summary start_date end_date
     # description
-    max_events every every_unit calendar
+    max_events every every_unit event_type
     isip.ContractsByPolicy    
     jobs.ContractsByPolicy    
     """
@@ -401,12 +400,12 @@ class ContractBase(
         
     def update_cal_calendar(self):
         if self.exam_policy is not None:
-            return self.exam_policy.calendar
+            return self.exam_policy.event_type
         
     def update_cal_until(self):
         return self.date_ended or self.applies_until
         
-    def update_cal_subject(self,i):
+    def update_cal_summary(self,i): # TODO: replace this by update_cal_calendar().event_label
         return _("Evaluation %d") % i
         
     def update_reminders(self):

@@ -380,8 +380,8 @@ def objects():
     
     
         
-    calendar = Instantiator('cal.Calendar').build
-    client_calendar = calendar(color=20,invite_client=True,**babelkw('name',
+    calendar = Instantiator('cal.EventType').build
+    client_calendar = calendar(invite_client=True,**babelkw('name',
           de="Klientengespräche intern",
           fr="Rencontres internes avec client",
           en="Internal meetings with client",
@@ -389,7 +389,7 @@ def objects():
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
     
-    obj = calendar(color=20,invite_client=False,is_appointment=False,**babelkw('name',
+    obj = calendar(invite_client=False,is_appointment=False,**babelkw('name',
           de="Visiten (ohne Termin)",
           fr="Visites (sans rendez-vous)",
           en="Prompt events",
@@ -399,31 +399,31 @@ def objects():
     settings.SITE.site_config.update(prompt_calendar=obj)
     
         
-    yield calendar(color=1,invite_client=False,**babelkw('name',
+    yield calendar(invite_client=False,**babelkw('name',
           de="Klientengespräche extern",
           fr="Rencontres client externes",
           en="External meetings with client",
           ))
     
-    yield calendar(color=4,**babelkw('name',
+    yield calendar(**babelkw('name',
           de=u"Versammlung intern",
           fr=u"Réunions internes",
           en=u"Internal meetings",
           ))
     
-    yield calendar(color=8,**babelkw('name',
+    yield calendar(**babelkw('name',
           de=u"Versammlung extern",
           fr=u"Réunions externes",
           en=u"External meetings",
           ))
           
     for obj in users.Team.objects.all():
-        yield calendar(color=12,
+        yield calendar(
             invite_team_members=obj,
             email_template='Team.eml.html',
             **babelkw('name',**field2kw(obj,'name')))
           
-    #~ yield calendar(color=12,
+    #~ yield calendar(
         #~ email_template='Team.eml.html',
         #~ **babelkw('name',
           #~ de=u"Team-Besprechungen",
@@ -431,7 +431,7 @@ def objects():
           #~ en=u"Team Meetings",
           #~ ))
           
-    yield calendar(color=25,**babelkw('name',
+    yield calendar(**babelkw('name',
           de="Privat",
           fr="Privé",
           en="Private",
@@ -439,12 +439,12 @@ def objects():
           
           
     exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.months).build
-    yield exam_policy(1,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every month',de=u'monatlich',fr=u"mensuel"))
-    yield exam_policy(2,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
-    yield exam_policy(3,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
+    yield exam_policy(1,event_type=client_calendar,start_time="9:00",**babelkw('name',en='every month',de=u'monatlich',fr=u"mensuel"))
+    yield exam_policy(2,event_type=client_calendar,start_time="9:00",**babelkw('name',en='every 2 months',de=u'zweimonatlich',fr=u"bimensuel"))
+    yield exam_policy(3,event_type=client_calendar,start_time="9:00",**babelkw('name',en='every 3 months',de=u'alle 3 Monate',fr=u"tous les 3 mois"))
     
     exam_policy = Instantiator('isip.ExamPolicy','every',every_unit=DurationUnits.weeks).build
-    yield exam_policy(2,calendar=client_calendar,start_time="9:00",**babelkw('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
+    yield exam_policy(2,event_type=client_calendar,start_time="9:00",**babelkw('name',en='every 2 weeks',de=u'zweiwöchentlich',fr=u"hebdomadaire"))
     
     exam_policy = Instantiator('isip.ExamPolicy').build
     yield exam_policy(**babelkw('name',en='other',de="andere",fr="autre"))

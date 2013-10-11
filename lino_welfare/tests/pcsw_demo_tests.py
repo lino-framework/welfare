@@ -65,21 +65,23 @@ Event = dd.resolve_model('cal.Event')
 
 DEMO_OVERVIEW = """\
 30 applications: sessions, about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
-100 models:
+102 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
  accounts.Account                        15        49
  accounts.Chart                          5         1
  accounts.Group                          9         7
- cal.Calendar                            25        9
- cal.Event                               24        %s
+ cal.Event                               23        %s
+ cal.EventType                           19        10
  cal.Guest                               10        23
  cal.GuestRole                           9         4
  cal.Priority                            6         9
+ cal.RecurrentEvent                      19        9
+ cal.RemoteCalendar                      7         0
  cal.Room                                5         0
- cal.Subscription                        4         72
- cal.Task                                20        15
+ cal.Subscription                        9         80
+ cal.Task                                18        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
  cbss.Purpose                            7         106
@@ -93,7 +95,7 @@ DEMO_OVERVIEW = """\
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
- contenttypes.ContentType                4         100
+ contenttypes.ContentType                4         102
  contenttypes.FooWithBrokenAbsoluteUrl   3         0
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
@@ -161,7 +163,7 @@ DEMO_OVERVIEW = """\
  properties.Property                     7         23
  sessions.Session                        3         4
  system.HelpText                         4         5
- system.SiteConfig                       29        1
+ system.SiteConfig                       33        1
  system.TextFieldTemplate                6         2
  uploads.Upload                          11        0
  uploads.UploadType                      2         5

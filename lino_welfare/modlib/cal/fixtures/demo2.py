@@ -7,6 +7,6 @@ def objects():
     CLIENTS = Cycler(Client.objects.all())
     for obj in lino_objects():
         if obj.__class__.__name__ == 'Event':
-            if obj.calendar.invite_client:
+            if obj.event_type.invite_client:
                 obj.project = CLIENTS.pop()
         yield obj

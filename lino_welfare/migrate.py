@@ -944,3 +944,13 @@ def migrate_from_1_1_8(globals_dict):
     #~ globals_dict.update(isip_StudyType = resolve_model("integ.StudyType"))
     
     return '1.1.9'
+    
+def migrate_from_1_1_1(globals_dict): 
+    """
+    - cal.Calendar -> cal.EventType
+    - Rename field `calendar` to `event_type` in 
+      users.User, cal.Subscription, cal.Event
+    - SiteConfig default_calendar to default_event_type
+    """    
+    raise NotImplementedError()
+    return '1.1.11'

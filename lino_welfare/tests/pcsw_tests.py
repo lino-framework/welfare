@@ -634,7 +634,7 @@ Belgique""")
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
   - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
-  - Kalender : Räume, Prioritäten, Gastrollen, Kalenderliste
+  - Kalender : Meine Abonnements, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
@@ -715,7 +715,7 @@ Belgique""")
   
   - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
-  - Kalender : Räume, Prioritäten, Kalenderliste
+  - Kalender : Meine Abonnements, Räume, Prioritäten, Periodische Termine, Ereignisarten
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
   - Kurse : Kursinhalte
