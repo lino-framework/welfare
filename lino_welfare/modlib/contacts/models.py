@@ -96,6 +96,10 @@ für neue Operationen nicht benutzt werden können.""")
             #~ return False
         #~ return super(Partner,self).get_row_permission(ar,state,ba)
         
+    def __unicode__(self):
+        if self.is_obsolete:
+            return "%s (%s*)" % (self.get_full_name(),self.pk)
+        return "%s (%s)" % (self.get_full_name(),self.pk)
 
 class PartnerDetail(PartnerDetail):
     #~ general = contacts.PartnerDetail.main

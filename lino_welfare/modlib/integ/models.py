@@ -401,7 +401,7 @@ class ContractsByType(dd.VentilatingTable):
     
     @classmethod
     def get_observed_period(self,mi):
-        return dict(start_date=mi.start_date,end_date=mi.end_date)        
+        return dict(start_date=mi.start_date,end_date=mi.end_date)
         
     @classmethod
     def get_ventilated_columns(self):
