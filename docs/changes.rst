@@ -9,6 +9,14 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
+Version 1.1.11 (coming)
+=============================================
+
+- Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete 
+  Partner), die bisher hinter dem Namen eines Klienten stant, steht jetzt generell 
+  hinter dem Namen von *allen* Partnern (also auch Haushalte, 
+  Organisationen, Personen,...)
+
 Version 1.1.10 (released :blogref:`20131007`)
 =============================================
 

@@ -45,6 +45,12 @@ class EventType(EventType):
     invite_team_members = dd.ForeignKey('users.Team',blank=True,null=True)
     invite_client = models.BooleanField(_("Invite client"),default=False)
 
+dd.inject_field('users.User','calendar',
+    dd.ForeignKey('cal.Calendar',
+        verbose_name=_("Calendar where your events are published."),
+        related_name='user_calendars',
+        blank=True,null=True))    
+
 dd.inject_field('system.SiteConfig','client_calendar',
     dd.ForeignKey('cal.EventType',
         verbose_name=_("Default calendar for client events"),
@@ -65,6 +71,10 @@ dd.inject_field('system.SiteConfig','team_guestrole',
     
 class Event(Event):
     
+    def get_calendar(self):
+        if self.user is not None:
+            return self.user.calendar
+            
     def suggest_guests(self):
         #~ print "20130722 suggest_guests"
         for g in super(Event,self).suggest_guests(): 

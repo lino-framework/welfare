@@ -33,11 +33,11 @@ Job Offers
 
 >>> # settings.SITE.catch_layout_exceptions = False
 >>> jobs.Offers.show() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========================== ========== ======================== ================== ================ ============== =============
- ID   Sektor                     Funktion   Name                     Stellenanbieter    Beginn Auswahl   Ende Auswahl   Beginndatum
----- -------------------------- ---------- ------------------------ ------------------ ---------------- -------------- -------------
- 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   ...              ...            ...     
-==== ========================== ========== ======================== ================== ================ ============== =============
+==== ========================== ========== ======================== ======================== ================ ============== =============
+ ID   Sektor                     Funktion   Name                     Stellenanbieter          Beginn Auswahl   Ende Auswahl   Beginndatum
+---- -------------------------- ---------- ------------------------ ------------------------ ---------------- -------------- -------------
+ 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G. (193)   ...              ...            ...     
+==== ========================== ========== ======================== ======================== ================ ============== =============
 <BLANKLINE>
 
 
@@ -52,12 +52,12 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========== ========== ========================= ================= =============
- begonnen   beendet    Klient                    Firma             Land
----------- ---------- ------------------------- ----------------- -------------
- ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ     Estland
- ...        ...        FAYMONVILLE Luc (129)     Bosten-Bocken A   Niederlande
-========== ========== ========================= ================= =============
+========== ========== ========================= ======================= =============
+ begonnen   beendet    Klient                    Firma                   Land
+---------- ---------- ------------------------- ----------------------- -------------
+ ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)     Estland
+ ...        ...        FAYMONVILLE Luc (129)     Bosten-Bocken A (205)   Niederlande
+========== ========== ========================= ======================= =============
 <BLANKLINE>
 
 

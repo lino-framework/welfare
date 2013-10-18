@@ -65,13 +65,14 @@ Event = dd.resolve_model('cal.Event')
 
 DEMO_OVERVIEW = """\
 30 applications: sessions, about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
-102 models:
+103 models:
 ======================================= ========= =======
  Name                                    #fields   #rows
 --------------------------------------- --------- -------
  accounts.Account                        15        49
  accounts.Chart                          5         1
  accounts.Group                          9         7
+ cal.Calendar                            7         9
  cal.Event                               23        %s
  cal.EventType                           19        10
  cal.Guest                               10        23
@@ -80,7 +81,7 @@ DEMO_OVERVIEW = """\
  cal.RecurrentEvent                      19        9
  cal.RemoteCalendar                      7         0
  cal.Room                                5         0
- cal.Subscription                        9         80
+ cal.Subscription                        4         72
  cal.Task                                18        15
  cbss.IdentifyPersonRequest              20        5
  cbss.ManageAccessRequest                23        1
@@ -95,7 +96,7 @@ DEMO_OVERVIEW = """\
  contacts.Role                           4         10
  contacts.RoleType                       6         5
  contenttypes.ConcreteModel              2         0
- contenttypes.ContentType                4         102
+ contenttypes.ContentType                4         103
  contenttypes.FooWithBrokenAbsoluteUrl   3         0
  contenttypes.FooWithUrl                 3         0
  contenttypes.FooWithoutUrl              2         0
@@ -170,7 +171,7 @@ DEMO_OVERVIEW = """\
  users.Authority                         3         3
  users.Membership                        3         0
  users.Team                              5         3
- users.User                              18        10
+ users.User                              19        10
 ======================================= ========= =======
 """ 
 
@@ -318,14 +319,14 @@ class DemoTest(RemoteAuthTestCase):
         #~ print __file__, 20130414, repr(res)
         #~ msg = res['message'].decode('utf-8')
         msg = res['message']
-        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier printable cache has been cleared.')
+        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier (183) printable cache has been cleared.')
         
         res = ses.run(obj.do_print)
         #~ print __file__, 20130414, repr(res)
         msg = res['message']
         #~ msg = res['message'].decode('utf-8')
         #~ self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
-        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier printable has been built.')
+        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier (183) printable has been built.')
         self.assertEqual(res['open_url'],'/media/userdocs/appyodt/debts.Budget-3.odt')
 
 

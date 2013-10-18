@@ -14,18 +14,18 @@ Some tests:
 >>> ses = settings.SITE.login('rolf')
 >>> with translation.override('de'):
 ...     ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================= ================================ ===========================
- Name              Stellenanbieter                  Sektor
------------------ -------------------------------- ---------------------------
- Kellner           BISA                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum    Horeca
- Koch              R-Cycle Sperrgutsortierzentrum    Seefahrt
- Koch              Pro Aktiv V.o.G.                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G.                  Medizin & Paramedizin
- Küchenassistent   BISA                              Reinigung
- Tellerwäscher     BISA                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum    Transport
-================= ================================ ===========================
+================= ====================================== ===========================
+ Name              Stellenanbieter                        Sektor
+----------------- -------------------------------------- ---------------------------
+ Kellner           BISA (190*)                             Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (191)    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum (191)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (193)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (193)                  Medizin & Paramedizin
+ Küchenassistent   BISA (190*)                             Reinigung
+ Tellerwäscher     BISA (190*)                             Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (191)    Transport
+================= ====================================== ===========================
 <BLANKLINE>
 
 JobsOverview

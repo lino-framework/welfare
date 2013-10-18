@@ -28,7 +28,7 @@ Or we can retrieve budget no. 3 from the database:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Ausdemwald-Charlier')
+Budget #3 (u'Budget Nr. 3 f\xfcr Ausdemwald-Charlier (183)')
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:
@@ -100,25 +100,25 @@ Here are some more slave tables.
 <BLANKLINE>
 
 >>> ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-=========================== ==================== ==================== ============ ============== ============== ============ ==============
- Partner                     Beschreibung         Gerichtsvollzieher   Monatsrate   Gemeinsam      Herr           Frau         Total
---------------------------- -------------------- -------------------- ------------ -------------- -------------- ------------ --------------
- Bernd Brechts Bücherladen   Zahlungsrückstände                                     1 200,00                                   1 200,00
- Reinhards Baumschule        Kredite                                                               1 500,00                    1 500,00
- Moulin Rouge                Schulden                                  15,00                                      300,00       300,00
- Auto École Verte            Zahlungsrückstände                        30,00        600,00                                     600,00
- **Total (4 Zeilen)**                                                  **45,00**    **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-=========================== ==================== ==================== ============ ============== ============== ============ ==============
+================================= ==================== ==================== ============ ============== ============== ============ ==============
+ Partner                           Beschreibung         Gerichtsvollzieher   Monatsrate   Gemeinsam      Herr           Frau         Total
+--------------------------------- -------------------- -------------------- ------------ -------------- -------------- ------------ --------------
+ Bernd Brechts Bücherladen (108)   Zahlungsrückstände                                     1 200,00                                   1 200,00
+ Reinhards Baumschule (109)        Kredite                                                               1 500,00                    1 500,00
+ Moulin Rouge (110*)               Schulden                                  15,00                                      300,00       300,00
+ Auto École Verte (111)            Zahlungsrückstände                        30,00        600,00                                     600,00
+ **Total (4 Zeilen)**                                                        **45,00**    **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+================================= ==================== ==================== ============ ============== ============== ============ ==============
 <BLANKLINE>
 
 >>> ses.show(debts.DistByBudget.request(obj))
-=========================== ==================== ============== ============ ====================================
- Kreditor                    Beschreibung         Schuld         %            Betrag der monatlichen Rückzahlung
---------------------------- -------------------- -------------- ------------ ------------------------------------
- Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
- **Total (2 Zeilen)**                             **2 700,00**   **100,00**   **120,00**
-=========================== ==================== ============== ============ ====================================
+================================= ==================== ============== ============ ====================================
+ Kreditor                          Beschreibung         Schuld         %            Betrag der monatlichen Rückzahlung
+--------------------------------- -------------------- -------------- ------------ ------------------------------------
+ Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
+ **Total (2 Zeilen)**                                   **2 700,00**   **100,00**   **120,00**
+================================= ==================== ============== ============ ====================================
 <BLANKLINE>
 
 The following table shows the new feature (:blogref:`20130325`) 
@@ -164,7 +164,7 @@ Printing a Budget
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
 >>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier wurde generiert.',
+{'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier (183) wurde generiert.',
  'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',
  'refresh': True,
  'success': True}
@@ -175,28 +175,27 @@ Something in French
 
 >>> with translation.override('fr'):
 ...    ses.show(debts.DistByBudget.request(obj))
-=========================== ==================== ============== ============ =======================
- Créancier                   Description          Dette          %            Remboursement mensuel
---------------------------- -------------------- -------------- ------------ -----------------------
- Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
- **Total (2 lignes)**                             **2 700,00**   **100,00**   **120,00**
-=========================== ==================== ============== ============ =======================
+================================= ==================== ============== ============ =======================
+ Créancier                         Description          Dette          %            Remboursement mensuel
+--------------------------------- -------------------- -------------- ------------ -----------------------
+ Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
+ **Total (2 lignes)**                                   **2 700,00**   **100,00**   **120,00**
+================================= ==================== ============== ============ =======================
 <BLANKLINE>
 
 Or the same in English:
 
 >>> with translation.override('en'):
 ...     ses.show(debts.DistByBudget.request(obj))
-=========================== ==================== ============== ============ ===========================
- Creditor                    Description          Debt           %            Monthly payback suggested
---------------------------- -------------------- -------------- ------------ ---------------------------
- Bernd Brechts Bücherladen   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule        Kredite              1 500,00       55,56        66,67
- **Total (2 rows)**                               **2 700,00**   **100,00**   **120,00**
-=========================== ==================== ============== ============ ===========================
+================================= ==================== ============== ============ ===========================
+ Creditor                          Description          Debt           %            Monthly payback suggested
+--------------------------------- -------------------- -------------- ------------ ---------------------------
+ Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
+ **Total (2 rows)**                                     **2 700,00**   **100,00**   **120,00**
+================================= ==================== ============== ============ ===========================
 <BLANKLINE>
-
 
 Note that the Description still shows German words because these are stored per Budget, 
 and Budget #3 is addressed to a German-speaking partner.

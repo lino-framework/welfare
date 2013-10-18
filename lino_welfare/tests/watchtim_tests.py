@@ -232,13 +232,13 @@ class WatchTimTests(TestCase):
         s = changes_to_rst(client.partner_ptr)
         #~ print s
         self.assertEqual(s,"""\
-=========== ============= ============================= ============================================================================= ============= ===========
- User        Change Type   Object                        Changes                                                                       Object type   object id
------------ ------------- ----------------------------- ----------------------------------------------------------------------------- ------------- -----------
- watch_tim   Create        alicia / Voldemort-Potter H   Coaching(id=1,user=2,client=4260,start_date=1985-07-23,type=2,primary=True)   Coaching      1
- watch_tim   Add child     Harald VOLDEMORT-POTTER       pcsw.Client                                                                   Person        4260
- watch_tim   Add child     Voldemort-Potter Harald       contacts.Person                                                               Partner       4260
-=========== ============= ============================= ============================================================================= ============= ===========
+=========== ============= ================================ ============================================================================= ============= ===========
+ User        Change Type   Object                           Changes                                                                       Object type   object id
+----------- ------------- -------------------------------- ----------------------------------------------------------------------------- ------------- -----------
+ watch_tim   Create        alicia / Voldemort-Potter H      Coaching(id=1,user=2,client=4260,start_date=1985-07-23,type=2,primary=True)   Coaching      1
+ watch_tim   Add child     Harald VOLDEMORT-POTTER (4260)   pcsw.Client                                                                   Person        4260
+ watch_tim   Add child     Voldemort-Potter Harald (4260)   contacts.Person                                                               Partner       4260
+=========== ============= ================================ ============================================================================= ============= ===========
 """)
 
         #~ def test05(self):
@@ -338,24 +338,24 @@ class WatchTimTests(TestCase):
         s = changes_to_rst(obj.partner_ptr)
         #~ print s
         self.assertEqual(s,"""\
-+-----------+-------------+---------------------+------------------------------------------------------+-------------+-----------+
-| User      | Change Type | Object              | Changes                                              | Object type | object id |
-+===========+=============+=====================+======================================================+=============+===========+
-| watch_tim | Update      | Air Liquide Belgium | - activity_id : None --> 19                          | Company     | 5         |
-|           |             |                     | - city_id : None --> 3                               |             |           |
-|           |             |                     | - bank_account1 : '' --> 'GKCCBEBB:BE57551373330235' |             |           |
-|           |             |                     | - fax : '' --> '04/341.20.70'                        |             |           |
-|           |             |                     | - street_no : '' --> '8'                             |             |           |
-|           |             |                     | - vat_id : '' --> 'BE-0441.857.467'                  |             |           |
-|           |             |                     | - prefix : '' --> 'S.A.'                             |             |           |
-|           |             |                     | - street : '' --> 'Quai des Vennes'                  |             |           |
-|           |             |                     | - remarks : '' --> '\\n'                              |             |           |
-|           |             |                     | - language : 'de' --> 'fr'                           |             |           |
-|           |             |                     | - phone : '' --> '04/349.89.89'                      |             |           |
-|           |             |                     | - country_id : None --> 'B'                          |             |           |
-|           |             |                     | - bank_account2 : '' --> 'BBRUBEBB:BE12310110444892' |             |           |
-|           |             |                     | - zip_code : '' --> '4020'                           |             |           |
-+-----------+-------------+---------------------+------------------------------------------------------+-------------+-----------+
++-----------+-------------+------------------------------+------------------------------------------------------+-------------+-----------+
+| User      | Change Type | Object                       | Changes                                              | Object type | object id |
++===========+=============+==============================+======================================================+=============+===========+
+| watch_tim | Update      | S.A. Air Liquide Belgium (5) | - activity_id : None --> 19                          | Company     | 5         |
+|           |             |                              | - city_id : None --> 3                               |             |           |
+|           |             |                              | - bank_account1 : '' --> 'GKCCBEBB:BE57551373330235' |             |           |
+|           |             |                              | - fax : '' --> '04/341.20.70'                        |             |           |
+|           |             |                              | - street_no : '' --> '8'                             |             |           |
+|           |             |                              | - vat_id : '' --> 'BE-0441.857.467'                  |             |           |
+|           |             |                              | - prefix : '' --> 'S.A.'                             |             |           |
+|           |             |                              | - street : '' --> 'Quai des Vennes'                  |             |           |
+|           |             |                              | - remarks : '' --> '\\n'                              |             |           |
+|           |             |                              | - language : 'de' --> 'fr'                           |             |           |
+|           |             |                              | - phone : '' --> '04/349.89.89'                      |             |           |
+|           |             |                              | - country_id : None --> 'B'                          |             |           |
+|           |             |                              | - bank_account2 : '' --> 'BBRUBEBB:BE12310110444892' |             |           |
+|           |             |                              | - zip_code : '' --> '4020'                           |             |           |
++-----------+-------------+------------------------------+------------------------------------------------------+-------------+-----------+
 """)
         
 
@@ -374,12 +374,12 @@ class WatchTimTests(TestCase):
         s = changes_to_rst(obj.partner_ptr)
         #~ print s
         self.assertEqual(s,"""\
-=========== ============== =============== ================== ============= ===========
- User        Change Type    Object          Changes            Object type   object id
------------ -------------- --------------- ------------------ ------------- -----------
- watch_tim   Add child      Andenne, CPAS   contacts.Company   Partner       9932
- watch_tim   Remove child                   contacts.Person    Person        9932
-=========== ============== =============== ================== ============= ===========
+=========== ============== ====================== ================== ============= ===========
+ User        Change Type    Object                 Changes            Object type   object id
+----------- -------------- ---------------------- ------------------ ------------- -----------
+ watch_tim   Add child      Andenne, CPAS (9932)   contacts.Company   Partner       9932
+ watch_tim   Remove child                          contacts.Person    Person        9932
+=========== ============== ====================== ================== ============= ===========
 """)
 
         """

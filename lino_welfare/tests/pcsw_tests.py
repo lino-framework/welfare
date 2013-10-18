@@ -202,7 +202,7 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         qs = self.jobs_contract_1.contact_person_choices_queryset(self.job_provider)
         self.assertEqual(qs.count(),1)
         #~ self.assertEqual(unicode(qs[0]).upper(),"HANS DAMPF") # some configurations uppercase last_name
-        self.assertEqual(unicode(qs[0]),"Hans DAMPF") 
+        self.assertEqual(unicode(qs[0]),"Hans DAMPF (104)") 
         self.assertEqual(self.jobs_contract_1.contact_person,None)
         self.jobs_contract_1.full_clean()
         self.assertEqual(self.jobs_contract_1.contact_person,self.hans)
