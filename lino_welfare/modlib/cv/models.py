@@ -150,19 +150,19 @@ class LanguageKnowledge(dd.Model):
     
 class LanguageKnowledges(dd.Table):
     model = LanguageKnowledge
-    required = dd.required(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='courses',user_level='manager')
 
 class LanguageKnowledgesByPerson(LanguageKnowledges):
     master_key = 'person'
     #~ label = _("Language knowledge")
     #~ button_label = _("Languages")
     column_names = "language native spoken written cef_level"
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     
 class KnowledgesByLanguage(LanguageKnowledges):
     master_key = 'language'
     column_names = "person native spoken written cef_level"
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
 
 # 
 # PROPERTIES

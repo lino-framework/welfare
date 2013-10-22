@@ -1,18 +1,21 @@
 # -*- coding: UTF-8 -*-
 ## Copyright 2008-2013 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
+## This file is part of the Lino-Welfare project.
+## Lino-Welfare is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
 ## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
+## Lino-Welfare is distributed in the hope that it will be useful, 
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
 ## GNU General Public License for more details.
 ## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+## along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
+
+The :xfile:`models` module for the :mod:`lino_welfare.modlib.courses` app.
+
 This module requires a model `courses.CourseProvider` 
 to be defined by the application.
 """
@@ -50,7 +53,7 @@ from lino import dd
 from lino import mixins
 #~ from lino import actions
 #~ from lino import fields
-from lino.modlib.contacts import models as contacts
+#~ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
 #~ from lino.modlib.uploads import models as uploads
@@ -67,18 +70,9 @@ from lino.mixins.printable import DirectPrintAction, Printable
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 
-#~ # not used here, but these modules are required in INSTALLED_APPS, 
-#~ # and other code may import them using 
-#~ # ``from lino.apps.pcsw.models import Property``
 
-#~ from lino.modlib.properties.models import Property
-#~ # from lino.modlib.notes.models import NoteType
-#~ from lino.modlib.countries.models import Country, City
+from lino_welfare.modlib.courses import App
 
-#~ if settings.SITE.user_model:
-    #~ User = dd.resolve_model(settings.SITE.user_model,strict=True)
-
-#~ Company = resolve_model('contacts.Company')
 class CourseProvider(contacts.Company):
     """
     A CourseProvider is a Company that offers Courses. 
@@ -120,7 +114,7 @@ class CourseProviders(contacts.Companies):
     """
     List of Companies that have `Company.is_courseprovider` activated.
     """
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     #~ required_user_level = UserLevel.manager
     #~ hide_details = [Contact]
     #~ use_as_default_table = False
@@ -160,7 +154,7 @@ class CourseProviders(contacts.Companies):
         #~ return unicode(self.name)
         
 #~ class CourseEndings(dd.Table):
-    #~ required_user_groups = ['integ']
+    #~ required_user_groups = ['courses']
     #~ required_user_level = UserLevels.manager
     #~ model = CourseEnding
     #~ column_names = 'name *'
@@ -188,7 +182,7 @@ class CourseContent(dd.Model):
         
   
 class CourseContents(dd.Table):
-    required = dd.required(user_level='manager',user_groups='integ')
+    required = dd.required(user_level='manager',user_groups='courses')
     model = CourseContent
     order_by = ['name']
     detail_layout = """
@@ -317,7 +311,7 @@ class Course(dd.Model,mixins.Printable):
         
 class Courses(dd.Table):
     #~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
-    required = dd.required(user_groups='integ',user_level='admin')
+    required = dd.required(user_groups='courses',user_level='admin')
     model = Course
     order_by = ['start_date']
     detail_layout = """
@@ -328,12 +322,12 @@ class Courses(dd.Table):
     """
     
 class CoursesByOffer(Courses):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     master_key = 'offer'
     column_names = 'start_date * id'
 
 class CourseOffers(dd.Table):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     #~ required_user_level = UserLevels.manager
     model = CourseOffer
     detail_layout = """
@@ -530,7 +524,7 @@ class CourseRequest(dd.Model):
 class CourseRequests(dd.Table):
     #~ debug_permissions = 20130424
     model = CourseRequest
-    required = dd.required(user_groups='integ',user_level='manager')
+    required = dd.required(user_groups='courses',user_level='manager')
     detail_layout = """
     date_submitted person content offer urgent 
     course state date_ended id:8 
@@ -544,7 +538,7 @@ class CourseRequestsByPerson(CourseRequests):
     Table of :class:`CourseRequest` instances of a 
     :class:`lino.modlib.pcsw.models.Client`.
     """
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'
@@ -552,14 +546,14 @@ class CourseRequestsByPerson(CourseRequests):
     
 
 class CourseRequestsByContent(CourseRequests):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     master_key = 'content'
         
 class RequestsByCourse(CourseRequests):
     """
     Table of :class:`CourseRequest` instances of a :class:`Course`.
     """
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     master_key = 'course'
   
     @classmethod
@@ -612,7 +606,7 @@ class PendingCourseRequests(CourseRequests):
     """
     List of pending course requests.
     """
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='courses')
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)
@@ -727,13 +721,13 @@ class PendingCourseRequests(CourseRequests):
             
             
         
-MODULE_LABEL = _("Courses")
+#~ MODULE_LABEL = _("Courses")
         
 def site_setup(self): pass
     
 def setup_main_menu(site,ui,profile,m):
     if profile.integ_level:
-        m = m.add_menu("courses",MODULE_LABEL)
+        m = m.add_menu("courses",App.verbose_name)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)
         #~ m.add_action(Courses)
@@ -743,13 +737,13 @@ def setup_main_menu(site,ui,profile,m):
 #~ def setup_master_menu(site,ui,profile,m): pass
 #~ def setup_my_menu(site,ui,profile,m): pass
 def setup_config_menu(site,ui,profile,m):
-    m = m.add_menu("courses",MODULE_LABEL)
+    m = m.add_menu("courses",App.verbose_name)
     m.add_action(CourseContents)
     #~ m.add_action(CourseEndings)
             
   
 def setup_explorer_menu(site,ui,profile,m):
-    m = m.add_menu("courses",MODULE_LABEL)
+    m = m.add_menu("courses",App.verbose_name)
     m.add_action(Courses)
     m.add_action(CourseRequests)
             
@@ -766,3 +760,4 @@ def setup_workflows(site):
     CourseRequestStates.candidate.add_transition(states="inactive")
         #~ debug_permissions = 20130424)
     
+dd.add_user_group('courses',App.verbose_name)

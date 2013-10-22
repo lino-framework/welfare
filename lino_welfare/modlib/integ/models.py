@@ -1,18 +1,19 @@
 # -*- coding: UTF-8 -*-
 ## Copyright 2013 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
+## This file is part of the Lino-Welfare project.
+## Lino-Welfare is free software; you can redistribute it and/or modify 
 ## it under the terms of the GNU General Public License as published by
 ## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
+## Lino-Welfare is distributed in the hope that it will be useful, 
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
 ## GNU General Public License for more details.
 ## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+## along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
+The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
 
 """
 from __future__ import unicode_literals
@@ -29,6 +30,8 @@ from django.db.models import Q
 
 from lino import dd
 from lino.utils.xmlgen.html import E
+
+from lino_welfare.modlib.integ import App
 
 contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
@@ -605,8 +608,6 @@ class ActivityReport(dd.Report):
     #~ m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
 
 
-from lino_welfare.modlib.integ import App
-#~ MODULE_LABEL = App.verbose_name
 
 def setup_reports_menu(site,ui,profile,m):
     m = m.add_menu("integ",App.verbose_name)
