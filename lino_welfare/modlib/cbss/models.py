@@ -248,7 +248,7 @@ class unused_ExecuteRequest(dd.Action):
             #~ kw.update(message=_("Got valid response, but it contains warnings."))
             kw.update(alert=True)
         kw.update(refresh=True)
-        return ar.ui.success(**kw)
+        ar.success(**kw)
 
 
 

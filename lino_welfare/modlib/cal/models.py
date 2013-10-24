@@ -221,6 +221,6 @@ if False:
         #~ kw = super(CreateClientEvent,self).run_from_ui(obj,ar,**kw)
         #~ kw.update(success=True)
         kw.update(eval_js=ar.renderer.instance_handler(ar,event))
-        return kw
+        ar.success(**kw)
 
 

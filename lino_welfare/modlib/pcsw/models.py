@@ -195,19 +195,15 @@ class ClientStates(dd.Workflow):
         if newstate.name == 'former':
             qs = obj.coachings_by_client.filter(end_date__isnull=True)
             if qs.count():
-                def ok():
+                def ok(ar):
                     for co in qs:
                         #~ co.state = CoachingStates.ended
                         co.end_date = datetime.date.today()
                         co.save()
+                    ar.success(refresh=True)
                 return ar.confirm(ok,
                     _("This will end %(count)d coachings of %(client)s.") % dict(
                         count=qs.count(),client=unicode(obj)))
-                #~ obj.set_change_summary()
-                #~ raise actions.Warning(_("You must first fill end_date of existing coachings!"))
-            #~ if issubclass(ar.actor,integ.Clients):
-                #~ ar.confirm(_("This will remove %s from this table.") % unicode(obj))
-                #~ kw.update(refresh_all=True)
                 
 add = ClientStates.add_item
 add('10', _("Newcomer"),'newcomer',help_text=u"""\
@@ -281,7 +277,7 @@ class RefuseClient(dd.ChangeStateAction):
             body += '\n' + ar.action_param_values.remark
         kw.update(message=subject)
         kw.update(alert=_("Success"))
-        kw = super(RefuseClient,self).run_from_ui(ar,**kw)
+        super(RefuseClient,self).run_from_ui(ar)
         #~ self.add_system_note(ar,obj)
         silent = False
         ar.add_system_note(
@@ -289,7 +285,7 @@ class RefuseClient(dd.ChangeStateAction):
             subject,
             body,
             silent)
-        return kw
+        ar.success(**kw)
 
         
             
@@ -515,9 +511,14 @@ class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
         super(Client,self).full_clean(*args,**kw)
         
       
-    def save(self,*args,**kw):
-        super(Client,self).save(*args,**kw)
-        self.update_reminders()
+    #~ def save(self,*args,**kw):
+        #~ super(Client,self).save(*args,**kw)
+        #~ self.update_reminders()
+        
+    def after_ui_save(self,ar,**kw):
+        kw = super(Client,self).after_ui_save(ar,**kw)
+        self.update_reminders(ar)
+        return kw
         
     def get_primary_coach(self):
         """
@@ -531,7 +532,7 @@ class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
     
     primary_coach = property(get_primary_coach)
         
-    def update_reminders(self):
+    def update_reminders(self,ar):
         """
         Creates or updates automatic tasks controlled directly by this Person.
         """

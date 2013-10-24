@@ -396,7 +396,7 @@ class RegisterCandidate(dd.ChangeStateAction):
         kw.update(refresh_all=True)
         kw.update(message=_("%(person)s has been registered to %(course)s") % dict(
                 person=obj.person,course=obj.course))
-        return kw
+        ar.success(**kw)
     
 class UnRegisterCandidate(dd.ChangeStateAction):
     label = pgettext("courses","Unregister")
@@ -412,7 +412,8 @@ class UnRegisterCandidate(dd.ChangeStateAction):
         kw.update(refresh_all=True)
         kw.update(message=_("%(person)s has been unregistered from %(course)s") 
             % dict(person=obj.person,course=course))
-        return kw
+        #~ return kw
+        ar.success(**kw)
         
         
     

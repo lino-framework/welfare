@@ -539,6 +539,7 @@ nicht mehr angezeigt."""
             #~ state=pcsw.CoachingStates.active)
         #~ if not obj.profile:
             #~ coaching.state = pcsw.CoachingStates.active
+        coaching.full_clean()
         coaching.save()
         dd.pre_ui_create.send(coaching,request=ar.request)
         #~ changes.log_create(ar.request,coaching)
@@ -551,9 +552,7 @@ nicht mehr angezeigt."""
         
         #~ msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
         #~ return ar.success(refresh_all=True,message=msg,alert=True,**kw)
-        return ar.success(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
-        #~ kw.update(refresh_all=True)
-        #~ return kw
+        ar.success(ar.action_param_values.notify_body,alert=True,refresh_all=True,**kw)
     
 
 class AvailableCoachesByClient(AvailableCoaches):

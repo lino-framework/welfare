@@ -88,10 +88,10 @@ class CreateClientVisit(dd.Action):
             ar.action_param_values.summary,
             settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
-        kw.update(success=True)
+        #~ kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
-        kw.update(refresh=True)
-        return kw
+        ar.success(refresh=True)
+        
         
 class CreateCoachingVisit(CreateClientVisit): 
     
@@ -110,10 +110,10 @@ class CreateCoachingVisit(CreateClientVisit):
             ar.action_param_values.summary,
             settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
-        kw.update(success=True)
+        #~ kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
-        kw.update(refresh=True)
-        return kw
+        ar.success(refresh=True)
+        #~ return kw
         
 
         
@@ -135,7 +135,7 @@ class CreateNote(dd.Action):
     def run_from_ui(self,ar,**kw):
         obj = ar.selected_rows[0]
         notes = dd.resolve_app('notes')
-        def ok():
+        def ok(ar):
             ekw = dict(project=obj,user=ar.get_user()) 
             ekw.update(type=ar.action_param_values.note_type)
             ekw.update(date=datetime.date.today())
@@ -145,10 +145,12 @@ class CreateNote(dd.Action):
             note.save()
             #~ kw.update(success=True)
             #~ kw.update(refresh=True)
-            return ar.goto_instance(note,**kw)
+            ar.goto_instance(note)
+            
         if obj.has_valid_card_data():
-            return ok()
-        return ar.confirm(ok,_("Client has no valid eID data!",
+            ok(ar)
+            return
+        ar.confirm(ok,_("Client has no valid eID data!",
             _("Do you still want to issue an attestation?")))
             
             

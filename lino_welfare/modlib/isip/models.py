@@ -389,13 +389,13 @@ class ContractBase(
         
     def after_update_owned_instance(self,other):
         if other.is_user_modified():
-            self.update_reminders()
+            self.update_reminders(ar)
         
         
     def update_cal_rset(self):
         return self.exam_policy
         
-    def update_cal_from(self):
+    def update_cal_from(self,ar):
         return self.applies_from
         
     def update_cal_calendar(self):
@@ -408,8 +408,8 @@ class ContractBase(
     def update_cal_summary(self,i): # TODO: replace this by update_cal_calendar().event_label
         return _("Evaluation %d") % i
         
-    def update_reminders(self):
-        super(ContractBase,self).update_reminders()
+    def update_reminders(self,ar):
+        super(ContractBase,self).update_reminders(ar)
         au = self.update_cal_until()
         if au:
             au = cal.DurationUnits.months.add_duration(au,-1)
