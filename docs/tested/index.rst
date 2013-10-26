@@ -13,12 +13,16 @@ using `manage.py run`.
 .. toctree::
    :maxdepth: 1
   
+   general
    pcsw
    debts
    jobs
    cbss
    courses
    misc
+
+
+
 
 
 

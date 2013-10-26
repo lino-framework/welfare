@@ -463,7 +463,8 @@ Belgique""")
         with translation.override('de'):
         #~ set_language('de')
             for e in b1.entry_set.filter(account__ref="3010"):
-                new = ses.run(e.duplicate)
+                new = e.duplicate.run_from_code(ses)
+                #~ new = ses.run(e.duplicate)
                 #~ e.duplicate()
             b1.full_clean()
             b1.save()
@@ -486,7 +487,8 @@ Belgique""")
         
         
             #~ b2 = b1.duplicate()
-            b2 = ses.run(b1.duplicate)
+            #~ b2 = ses.run(b1.duplicate)
+            b2 = b1.duplicate.run_from_code(ses)
             self.assertEqual(debts.Budget.objects.count(),2)
             #~ b2 = debts.Budget.objects.get(pk=res.get('goto_record_id'))
             #~ s2 = b2.BudgetSummary().to_rst()
@@ -596,191 +598,3 @@ Belgique""")
         self.assertEqual(obj.name,"TestAccount")
         
         
-        def menu_test(username,expected,debug=False):
-            ses = settings.SITE.login(username) 
-            with translation.override('de'):
-                mnu = settings.SITE.get_site_menu(None,ses.get_user().profile)
-                s = mnu.as_rst(ses)
-                if debug:
-                    print s
-                self.assertEqual(s.splitlines(),expected.splitlines())
-        
-        
-        menu_test('root',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-
-- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-
-- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
-
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-
-- Neuanträge : Neue Klienten, Verfügbare Begleiter
-
-- Schuldnerberatung : Klienten, Meine Budgets
-
-- Listings :
-  
-  - ÖSHZ : Datenkontrolle Klienten
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-
-- Konfigurierung :
-  
-  - Büro : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
-  - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
-  - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
-  - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen
-  - Kalender : Meine Abonnements, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten
-  - Haushalte : Rollen in Haushalt, Haushaltsarten
-  - Buchhaltung : Kontenpläne, Kontengruppen, Konten
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
-  - Kurse : Kursinhalte
-  - Neuanträge : Vermittler, Fachbereiche
-  - Schuldnerberatung : Budget-Kopiervorlage
-  - ZDSS : Sektoren, Eigenschafts-Codes
-
-- Explorer :
-  
-  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
-  - Kontakte : Kontaktpersonen
-  - Kalender : Aufgaben, Gäste, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - Haushalte : Mitglieder
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
-  - CV : Sprachkenntnisse
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
-  - Kurse : Kurse, Kursanfragen
-  - Kompetenzen
-  - Schuldnerberatung : Budgets, Einträge
-  - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
-  - Eigenschaften
-
-- Site : Info
-""") # root
-        
-        # integration agent
-        menu_test("100","""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-
-- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-
-- Empfang : Meine Warteschlange
-
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
-
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-
-- Listings :
-  
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-
-- Konfigurierung :
-  
-  - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
-
-- Explorer :
-  
-  - DSBE : VSEs, Art.60§7-Konventionen
-
-- Site : Info
-""") # 100 integration agent
-
-        # 110 integration agent (manager)
-        menu_test("110","""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-
-- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-
-- Empfang : Meine Warteschlange
-
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
-
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-
-- Listings :
-  
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-
-- Konfigurierung :
-  
-  - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
-  - Kalender : Meine Abonnements, Räume, Prioritäten, Periodische Termine, Ereignisarten
-  - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
-  - Kurse : Kursinhalte
-
-- Explorer :
-  
-  - Büro : E-Mail-Ausgänge, Anhänge
-  - Kalender : Aufgaben, Abonnements
-  - CV : Sprachkenntnisse
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
-  - Kurse : Kursanfragen
-
-- Site : Info
-""") # 110 integration agent (manager)
-
-        # 300 debts consultant
-        menu_test('300',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-
-- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-
-- Empfang : Meine Warteschlange
-
-- Schuldnerberatung : Klienten, Meine Budgets
-
-- Konfigurierung :
-  
-  - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
-  - Schuldnerberatung : Budget-Kopiervorlage
-
-- Site : Info
-""") # 300 debts consultant
-
-        # 200 newcomers
-        menu_test('200',"""\
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-
-- Büro : Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-
-- Empfang : Meine Warteschlange
-
-- Neuanträge : Neue Klienten, Verfügbare Begleiter
-
-- Listings :
-  
-  - DSBE : Benutzer und ihre Klienten
-
-- Konfigurierung :
-  
-  - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
-
-- Site : Info
-""") # 200 newcomers
-
-
-        # 210 reception
-        menu_test('210',"""\
-- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
-- Site : Info
-""") # 210 reception
-
-

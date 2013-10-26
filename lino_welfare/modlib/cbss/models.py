@@ -454,18 +454,18 @@ The raw XML response received.
     def __unicode__(self):
         return u"%s #%s" % (self._meta.verbose_name,self.pk)
         
-    def after_ui_save(self,ar,**kw):
+    def after_ui_save(self,ar):
         self.execute_request(ar)
         if self.status == RequestStates.failed:
-            kw.update(message=self.debug_messages)
-            kw.update(alert=True)
+            ar.response.update(message=self.debug_messages)
+            ar.response.update(alert=True)
         elif self.status == RequestStates.warnings:
-            kw.update(message=self.info_messages)
+            ar.response.update(message=self.info_messages)
             #~ kw.update(message=_("Got valid response, but it contains warnings."))
-            kw.update(alert=True)
+            ar.response.update(alert=True)
         #~ kw.update(refresh=True)
         #~ return ar.success(**kw)
-        return kw
+        #~ return kw
 
         
 

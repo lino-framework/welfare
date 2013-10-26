@@ -11,6 +11,7 @@ Some tests:
 >>> from lino.runtime import *
 >>> from django.utils import translation
 >>> from pprint import pprint
+
 >>> ses = settings.SITE.login('rolf')
 >>> with translation.override('de'):
 ...     ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
@@ -37,7 +38,8 @@ caused a "NotImplementedError: <i> inside <text:p>" traceback
 when one of the jobs had a remark. 
 
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
->>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
+>>> print(ses.run(obj.do_print)) 
+... #doctest: +NORMALIZE_WHITESPACE
 {'open_url': u'/media/userdocs/appyodt/jobs.JobsOverview.odt',
  'success': True}
  

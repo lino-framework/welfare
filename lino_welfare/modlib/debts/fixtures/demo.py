@@ -98,7 +98,7 @@ def objects():
             
     ses = settings.SITE.login("kerstin")
     for e in Entry.objects.filter(account__ref='3030'):
-        new = ses.run(e.duplicate)
+        new = e.duplicate.run_from_code(ses)
         new.remark = EXPENSE_REMARKS.pop()
         yield new
     

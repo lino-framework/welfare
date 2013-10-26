@@ -383,8 +383,8 @@ class Contract(isip.ContractBase):
             return df 
         return df + self.PRINTABLE_FIELDS
         
-    def after_ui_save(self,ar,**kw):
-        kw = super(Contract,self).after_ui_save(ar,**kw)
+    def after_ui_save(self,ar):
+        super(Contract,self).after_ui_save(ar)
         if self.job_id is not None:
             if self.applies_until is not None and self.applies_until > datetime.date.today():
                 n = 0
@@ -395,10 +395,10 @@ class Contract(isip.ContractBase):
                     candi.save()
                     n += 1
                 if n:
-                    kw.update(message=kw['message']+' '
+                    ar.response.update(message=kw['message']+' '
                       +unicode(_("(%d candidatures have been marked inactive)")) % n)
-                    kw.update(alert=_("Success"))
-        return kw
+                    ar.response.update(alert=_("Success"))
+        #~ return kw
 
 
     def full_clean(self,*args,**kw):

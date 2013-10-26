@@ -186,25 +186,6 @@ class ClientStates(dd.Workflow):
         #~ return True
         
         
-    @classmethod
-    def before_state_change(cls,obj,ar,kw,oldstate,newstate):
-      
-        #~ if newstate.name == 'refused':
-            #~ pass
-            
-        if newstate.name == 'former':
-            qs = obj.coachings_by_client.filter(end_date__isnull=True)
-            if qs.count():
-                def ok(ar):
-                    for co in qs:
-                        #~ co.state = CoachingStates.ended
-                        co.end_date = datetime.date.today()
-                        co.save()
-                    ar.success(refresh=True)
-                return ar.confirm(ok,
-                    _("This will end %(count)d coachings of %(client)s.") % dict(
-                        count=qs.count(),client=unicode(obj)))
-                
 add = ClientStates.add_item
 add('10', _("Newcomer"),'newcomer',help_text=u"""\
 Klient hat Antrag auf Hilfe eingereicht, 
@@ -471,6 +452,21 @@ class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
             return "%s %s (%s*)" % (self.last_name.upper(),self.first_name,self.pk)
         return "%s %s (%s)" % (self.last_name.upper(),self.first_name,self.pk)
         
+    def before_state_change(obj,ar,oldstate,newstate):
+      
+        if newstate.name == 'former':
+            qs = obj.coachings_by_client.filter(end_date__isnull=True)
+            if qs.count():
+                def ok(ar):
+                    for co in qs:
+                        #~ co.state = CoachingStates.ended
+                        co.end_date = datetime.date.today()
+                        co.save()
+                    ar.success(refresh=True)
+                return ar.confirm(ok,
+                    _("This will end %(count)d coachings of %(client)s.") % dict(
+                        count=qs.count(),client=unicode(obj)))
+                
     def update_owned_instance(self,owned):
         owned.project = self
         super(Client,self).update_owned_instance(owned)
@@ -515,10 +511,10 @@ class Client(contacts.Person,dd.BasePrintable,beid.BeIdCardHolder):
         #~ super(Client,self).save(*args,**kw)
         #~ self.update_reminders()
         
-    def after_ui_save(self,ar,**kw):
-        kw = super(Client,self).after_ui_save(ar,**kw)
+    def after_ui_save(self,ar):
+        super(Client,self).after_ui_save(ar)
         self.update_reminders(ar)
-        return kw
+        #~ return kw
         
     def get_primary_coach(self):
         """
@@ -1956,15 +1952,15 @@ Enabling this field will automatically make the other coachings non-primary.""")
         #~ return self.user.username+' / '+self.client.first_name+' '+self.client.last_name[0]
         return self.user.username+' / '+self.client.last_name+' '+self.client.first_name[0]
             
-    def after_ui_save(self,ar,**kw):
-        kw = super(Coaching,self).after_ui_save(ar,**kw)
+    def after_ui_save(self,ar):
+        super(Coaching,self).after_ui_save(ar)
         if self.primary:
             for c in self.client.coachings_by_client.exclude(id=self.id):
                 if c.primary:
                     c.primary = False
                     c.save()
-                    kw.update(refresh_all=True)
-        return kw
+                    ar.response.update(refresh_all=True)
+        #~ return kw
         
     #~ def get_row_permission(self,user,state,ba):
         #~ """

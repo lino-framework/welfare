@@ -12,6 +12,8 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
+- Kurse / Sprachen jetzt auch für Benutzer vom ASD
+
 - Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete 
   Partner), die bisher hinter dem Namen eines Klienten stant, steht jetzt generell 
   hinter dem Namen von *allen* Partnern (also auch Haushalte, 
