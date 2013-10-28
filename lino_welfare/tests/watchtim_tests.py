@@ -131,6 +131,7 @@ Coaching = dd.resolve_model('pcsw.Coaching')
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
 pcsw = dd.resolve_app("pcsw")
+isip = dd.resolve_app("isip")
 
 from lino_welfare.modlib.isip import models as isip
 
@@ -139,7 +140,6 @@ class WatchTimTests(TestCase):
     maxDiff = None
   
     def test00(self):
-        
         
         ASD = pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,name="ASD")
         ASD.save()

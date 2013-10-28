@@ -10,7 +10,6 @@ Some tests:
 >>> from __future__ import print_function
 >>> from lino.runtime import *
 >>> from django.utils import translation
->>> from pprint import pprint
 
 >>> ses = settings.SITE.login('rolf')
 >>> with translation.override('de'):

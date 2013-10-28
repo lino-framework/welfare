@@ -55,6 +55,8 @@ from lino import dd
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
 
+
+
 #~ pcsw = dd.resolve_app('pcsw')
 cbss = dd.resolve_app('cbss')
 Event = dd.resolve_model('cal.Event')
@@ -208,10 +210,15 @@ if False:
             run_db_overview_test(self)
 
 
+
+
 class PseudoRequest:
     def __init__(self,name):
         self.user = settings.SITE.user_model.objects.get(username=name)
         self.subst_user = None
+
+
+
 
 
 class DemoTest(RemoteAuthTestCase):
@@ -237,95 +244,49 @@ class DemoTest(RemoteAuthTestCase):
         """
         Test the number of rows returned for certain queries
         """
-        cases = []
-        Query = collections.namedtuple('Query',
-          ['username','url_base','json_fields','expected_rows','kwargs'])
-        def add_case(username,url_base,json_fields,expected_rows,**kwargs):
-            cases.append(Query(username,url_base,json_fields,expected_rows,kwargs))
-            
-        json_fields = 'count rows title success no_data_text'
-        kw = dict(fmt='json',limit=10,start=0)
-        add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
-        add_case('rolf','api/households/Households',json_fields,4,**kw)
-        add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
-        add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
-        add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
-        add_case('rolf','api/countries/Countries',json_fields,9,**kw)
-        add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
-        add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
-        mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
-        add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
+        #~ ut = self.make_url_tester()
         
-        json_fields = 'count rows title success no_data_text param_values'
-        add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
-        add_case('rolf','api/contacts/Persons',json_fields,70,**kw)
-        add_case('rolf','api/pcsw/Clients',json_fields,29,**kw)
-        add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
-        add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
-        add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
-        add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
-        add_case('alicia','api/integ/Clients',json_fields,5,**kw)
-        add_case('hubert','api/integ/Clients',json_fields,23,**kw)
-        
-        alicia = settings.SITE.user_model.objects.get(username='alicia')
-        kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
-        add_case('rolf','api/integ/Clients',json_fields,5,**kw)
-        
-        
-        kw = dict() 
-        json_fields = 'count rows'
-        add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
-        add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
-        add_case('rolf','choices/pcsw/ContactsByClient/company?type=1',json_fields,5,**kw)
-        
-        if False: # TODO
-            add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
-            
-        #~ kw = dict(fmt='json',an='detail') 
+        #~ json_fields = 'count rows title success no_data_text'
+        #~ kw = dict(fmt='json',limit=10,start=0)
+        #~ ut.add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
+        #~ ut.add_case('rolf','api/households/Households',json_fields,4,**kw)
+        #~ ut.add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
+        #~ ut.add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
+        #~ ut.add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
+        #~ ut.add_case('rolf','api/countries/Countries',json_fields,9,**kw)
+        #~ ut.add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
+        #~ ut.add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
+        #~ mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
+        #~ ut.add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
+        #~ 
+        #~ json_fields = 'count rows title success no_data_text param_values'
+        #~ ut.add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
+        #~ ut.add_case('rolf','api/contacts/Persons',json_fields,70,**kw)
+        #~ ut.add_case('rolf','api/pcsw/Clients',json_fields,29,**kw)
+        #~ ut.add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
+        #~ ut.add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
+        #~ ut.add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
+        #~ ut.add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
+        #~ ut.add_case('alicia','api/integ/Clients',json_fields,5,**kw)
+        #~ ut.add_case('hubert','api/integ/Clients',json_fields,23,**kw)
+        #~ 
+        #~ alicia = settings.SITE.user_model.objects.get(username='alicia')
+        #~ kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
+        #~ ut.add_case('rolf','api/integ/Clients',json_fields,5,**kw)
+        #~ 
+        #~ 
+        #~ kw = dict() 
         #~ json_fields = 'count rows'
-        #~ http://127.0.0.1:8000/?_dc=1369640821168&an=detail&rp=ext-comp-1340&fmt=json
-        #~ add_case('rolf','api/debts/Budgets/3',json_fields,1,**kw)
-            
-        
-        failures = 0
-        for i,case in enumerate(cases):
-            url = settings.SITE.build_admin_url(case.url_base,**case.kwargs)
-            msg = 'Using remote authentication, but no user credentials found.'
-            try:
-                response = self.client.get(url) 
-                self.fail("Expected '%s'" % msg)
-            except Exception as e:
-                self.assertEqual(str(e),msg)
-                
-            response = self.client.get(url,REMOTE_USER='foo') 
-            self.assertEqual(response.status_code,403,"Status code for anonymous on GET %s" % url)
-            
-            response = self.client.get(url,REMOTE_USER=case.username)
-            #~ if response.status_code != 200:
-                #~ msg = "%s returned status_code %s" % (url,response.status_code)
-                #~ print "[%d] %s" % (i, msg)
-                #~ failures += 1
-                #~ continue
-            try:
-                result = self.check_json_result(response,case.json_fields,url)
-                
-                num = case.expected_rows
-                if not isinstance(num,tuple):
-                    num = [num]
-                if result['count'] not in num:
-                    msg = "%s got %s rows instead of %s" % (url,result['count'],num)
-                    print "[%d] %s" % (i, msg)
-                    failures += 1
-                
-            #~ except self.failureException as e:
-            except Exception as e:
-                print "[%d] %s:\n%s" % (i, url,e)
-                failures += 1
-                
-        if failures:
-            msg = "%d URL failures" % failures
-            self.fail(msg)
-
+        #~ ut.add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
+        #~ ut.add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
+        #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1',json_fields,5,**kw)
+        #~ 
+        #~ if False: # TODO
+            #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
+            #~ 
+        #~ ut.run_tests()
+        #~ 
+        #~ 
 
         #~ def test002(self):
         """

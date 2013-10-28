@@ -34,10 +34,10 @@ Test whether :meth:`get_db_overview_rst
  cal.Guest                      10        23
  cal.GuestRole                  9         4
  cal.Priority                   6         9
- cal.RecurrentEvent             19        9
+ cal.RecurrentEvent             22        9
  cal.RemoteCalendar             7         0
  cal.Room                       5         0
- cal.Subscription               4         80
+ cal.Subscription               4         100
  cal.Task                       18        0
  cbss.IdentifyPersonRequest     20        5
  cbss.ManageAccessRequest       23        1
@@ -151,7 +151,7 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
   - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Kalender : Kalenderliste, Meine Abonnements, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
@@ -218,7 +218,7 @@ Mélanie is the manager of the Integration service.
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - Kontakte : Länder, Sprachen
-  - Kalender : Kalenderliste, Meine Abonnements, Räume, Prioritäten, Periodische Termine, Ereignisarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Ereignisarten, Externe Kalender
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
   - Kurse : Kursinhalte
