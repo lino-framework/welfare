@@ -358,6 +358,17 @@ REQUEST = dd.PseudoRequest("watch_tim")
 class Controller:
     "Deserves more documentation."
     allow_put2post = True
+    
+    def set_timestamp(self,timespec):
+        d,t = timespec.split()
+        self.today = dateparser.parse(d).date()
+        if not isinstance(self.today,datetime.date):
+            raise Exception("%r was parsed to %r" % (timespec,self.today))
+        #~ self.today = parsedate(s)
+        #~ return datetime.date(*settings.SITE.parse_date(s))
+        
+        
+        
     def applydata(self,obj,data,**mapper):
         """
         Stores values from `data` into `obj` using mapper.
@@ -427,6 +438,7 @@ class Controller:
                     kw['alias'],kw['id'],obj,kw['data'])
                 return
             #~ watcher = changes.Watcher(obj,True)
+            self.set_timestamp(kw['time'])
             self.applydata(obj,kw['data'])
             dblogger.info("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
@@ -435,6 +447,7 @@ class Controller:
         else:
             watcher = dd.ChangeWatcher(obj)
             dblogger.info("%s:%s : POST becomes PUT",kw['alias'],kw['id'])
+            self.set_timestamp(kw['time'])
             self.applydata(obj,kw['data'])
             dblogger.info("%s:%s (%s) : POST %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
             self.validate_and_save(obj)
@@ -456,6 +469,7 @@ class Controller:
         watcher = dd.ChangeWatcher(obj)
         if self.PUT_special(watcher,**kw):
             return 
+        self.set_timestamp(kw['time'])
         self.applydata(obj,kw['data'])
         dblogger.info("%s:%s (%s) : PUT %s",kw['alias'],kw['id'],dd.obj2str(obj),kw['data'])
         self.validate_and_save(obj)
@@ -597,10 +611,9 @@ class PAR(Controller):
                                 dd.pre_ui_create.send(sender=coaching,request=REQUEST)
                                 #~ changes.log_create(REQUEST,coaching)
                         except Exception,e:
-                            raise Exception("More than one primary coaching for %r by %r" % (obj,u))
+                            raise Exception("More than one active coaching for %r by %r" % (obj,u))
                             
                     except Exception,e:
-                        
                         raise Exception("More than one primary coaching for %r : %s" % (obj,e))
                         
                     else:
@@ -610,7 +623,8 @@ class PAR(Controller):
                             If the coach has changed, maintain the old coaching in history.
                             """
                             coaching.primary = False
-                            coaching.end_date = datetime.date.today()
+                            #~ coaching.end_date = datetime.date.today()
+                            coaching.end_date = self.today
                         else:
                             coaching.type = u.coaching_type
                             if coaching.start_date is None:
@@ -636,7 +650,8 @@ class PAR(Controller):
                                 client=obj,primary=True,
                                 user=u,
                                 type=u.coaching_type,
-                                start_date=datetime.date.today())
+                                #~ start_date=datetime.date.today())
+                                start_date=self.today)
                             coaching.save()
                             dd.pre_ui_create.send(sender=coaching,request=REQUEST)
 

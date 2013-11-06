@@ -444,7 +444,7 @@ class WatchTimTests(TestCase):
         
         """
         20130602 : datum_bis einer primären Begleitung eines Ehemaligen darf
-        nicht leer sein. Wenn es das ist, soll watch_tim es auf 01.01.1990
+        nicht leer sein. Wenn es das ist, soll watch_tim es auf PAR->DatCrea
         setzen. 
         """
         with translation.override('de'):
@@ -463,6 +463,10 @@ class WatchTimTests(TestCase):
  **Total (1 Zeilen)**                     **1**
 ====================== ===== =========== ======== ======== ==================
 """)
+
+            """
+            Kunde wurde in TIM nach Inaktive versetzt:
+            """
             ln = ln.replace('"IDPRT":"S"','"IDPRT":"I"')
             process_line(ln)
             s = coachings_to_rst(obj)
@@ -473,6 +477,54 @@ class WatchTimTests(TestCase):
 ---------------------- ---------- ----------- -------- -------- ------------------
  05.01.06               05.01.06   alicia      Ja       DSBE
  **Total (1 Zeilen)**                          **1**
+====================== ========== =========== ======== ======== ==================
+""")
+
+
+            """
+            20131029 
+            Begleitung wird in Lino manuell als nicht primär markiert.
+            Dann wird Kunde in TIM (1) zurück nach S versetzt und (2) 
+            von ALICIA zu ROGER.
+            """
+            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
+            coaching.primary = False
+            coaching.save()
+            s = coachings_to_rst(obj)
+            #~ print s
+            self.assertEqual(s,"""\
+================ ========== =========== ======== ======== ==================
+ Begleitet seit   bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06         05.01.06   alicia      Nein     DSBE
+================ ========== =========== ======== ======== ==================
+""")
+            
+            ln = ln.replace('"IDPRT":"I"','"IDPRT":"S"')
+            process_line(ln)
+            s = coachings_to_rst(obj)
+            #~ print s
+            self.assertEqual(s,"""\
+====================== ========== =========== ======== ======== ==================
+ Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06               05.01.06   alicia      Nein     DSBE
+ 05.01.06                          alicia      Ja       DSBE
+ **Total (2 Zeilen)**                          **1**
+====================== ========== =========== ======== ======== ==================
+""")
+            ln = ln.replace('"IDUSR":"ALICIA"','"IDUSR":"ROGER"')
+            process_line(ln)
+            s = coachings_to_rst(obj)
+            #~ print s
+            self.assertEqual(s,"""\
+====================== ========== =========== ======== ======== ==================
+ Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06               05.01.06   alicia      Nein     DSBE
+ 05.01.06               17.05.13   alicia      Nein     DSBE
+ 17.05.13                          roger       Ja       ASD
+ **Total (3 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
 """)
 
