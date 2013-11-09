@@ -72,6 +72,7 @@ class Site(Site,cbss.SiteMixin):
     
     #~ use_eid_jslib = True
     use_eid_jslib = False
+    use_eidreader = True
     
     #~ admin_url = '/admin'
     
