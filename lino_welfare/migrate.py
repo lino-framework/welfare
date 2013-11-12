@@ -1001,7 +1001,7 @@ def migrate_from_1_1_10(globals_dict):
         kw.update(language=language)
         kw.update(partner_id=partner_id)
         kw.update(access_class=access_class)
-        kw.update(calendar_id=calendar_id)
+        #~ kw.update(calendar_id=calendar_id)
         kw.update(coaching_type_id=coaching_type_id)
         kw.update(coaching_supervisor=coaching_supervisor)
         kw.update(newcomer_quota=newcomer_quota)
