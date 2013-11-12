@@ -39,7 +39,8 @@ class Site(Site,cbss.SiteMixin):
     #~ author = 'Luc Saffre'
     #~ author_email = 'luc.saffre@gmail.com'
     
-    demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
+    #~ demo_fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2 demo_events'.split()
+    demo_fixtures = 'std few_languages props demo cbss democfg cbss_demo demo2 demo_events'.split()
     
     #~ catch_layout_exceptions = False # 20130804
     

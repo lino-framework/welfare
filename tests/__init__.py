@@ -29,7 +29,8 @@ class DemoTests(BaseTestCase):
     """
     $ python setup.py test -s tests.DemoTests.test_admin
     """
-    def test_admin(self): self.run_django_admin_test("lino_welfare.settings.test")
+    #~ def test_admin(self): self.run_django_admin_test("lino_welfare.settings.test")
+    def test_admin(self): self.run_django_manage_test()
     
 #~ class NewDemoTests(BaseTestCase):
     #~ def test_admin(self): self.run_django_admin_test(self.demo_settings_module)
