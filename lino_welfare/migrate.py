@@ -976,7 +976,7 @@ def migrate_from_1_1_10(globals_dict):
         kw.update(readonly=readonly)
         kw.update(is_appointment=is_appointment)
         kw.update(start_date=start_date)
-        kw.update(color=color)
+        #~ kw.update(color=color)
         if event_label is not None: kw.update(bv2kw('event_label',event_label))
         kw.update(invite_team_members_id=invite_team_members_id)
         kw.update(invite_client=invite_client)
