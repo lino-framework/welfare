@@ -945,12 +945,143 @@ def migrate_from_1_1_8(globals_dict):
     
     return '1.1.9'
     
-def migrate_from_1_1_1(globals_dict): 
+def migrate_from_1_1_10(globals_dict): 
     """
-    - cal.Calendar -> cal.EventType
+    - Renamed `cal.Calendar` to `cal.EventType`.
+      For each "Calendar" of the old version we create an "EventType".
+      After migration we will manually create one "Calendar" 
+      (new version's meaning) for each user.
     - Rename field `calendar` to `event_type` in 
-      users.User, cal.Subscription, cal.Event
-    - SiteConfig default_calendar to default_event_type
+      users.User, cal.Subscription and cal.Event
+    - Renamed SiteConfig default_calendar to default_event_type
     """    
-    raise NotImplementedError()
+    
+    cal_EventType = resolve_model("cal.EventType")
+    def create_cal_calendar(id, name, seqno, build_method, template, attach_to_email, email_template, type, description, url_template, username, password, readonly, is_appointment, start_date, color, event_label, invite_team_members_id, invite_client):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(seqno=seqno)
+        kw.update(build_method=build_method)
+        kw.update(template=template)
+        kw.update(attach_to_email=attach_to_email)
+        kw.update(email_template=email_template)
+        kw.update(type=type)
+        kw.update(description=description)
+        kw.update(url_template=url_template)
+        kw.update(username=username)
+        kw.update(password=password)
+        kw.update(readonly=readonly)
+        kw.update(is_appointment=is_appointment)
+        kw.update(start_date=start_date)
+        kw.update(color=color)
+        if event_label is not None: kw.update(bv2kw('event_label',event_label))
+        kw.update(invite_team_members_id=invite_team_members_id)
+        kw.update(invite_client=invite_client)
+        return cal_EventType(**kw)
+    globals_dict.update(create_cal_calendar=create_cal_calendar)
+    
+    
+    users_User = resolve_model("users.User")
+    def create_users_user(id, created, modified, username, password, profile, initials, first_name, last_name, email, remarks, language, partner_id, access_class, calendar_id, coaching_type_id, coaching_supervisor, newcomer_quota):
+        kw = dict()
+        kw.update(id=id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(username=username)
+        kw.update(password=password)
+        kw.update(profile=profile)
+        kw.update(initials=initials)
+        kw.update(first_name=first_name)
+        kw.update(last_name=last_name)
+        kw.update(email=email)
+        kw.update(remarks=remarks)
+        kw.update(language=language)
+        kw.update(partner_id=partner_id)
+        kw.update(access_class=access_class)
+        kw.update(calendar_id=calendar_id)
+        kw.update(coaching_type_id=coaching_type_id)
+        kw.update(coaching_supervisor=coaching_supervisor)
+        kw.update(newcomer_quota=newcomer_quota)
+        return users_User(**kw)
+    globals_dict.update(create_users_user=create_users_user)
+        
+    cal_Subscription = resolve_model("cal.Subscription")
+    def create_cal_subscription(id, user_id, calendar_id, is_hidden):
+        kw = dict()
+        kw.update(id=id)
+        kw.update(user_id=user_id)
+        kw.update(event_type_id=calendar_id)
+        kw.update(is_hidden=is_hidden)
+        return cal_Subscription(**kw)
+    globals_dict.update(create_cal_subscription=create_cal_subscription)
+
+    
+    cal_Event = resolve_model("cal.Event")
+    def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
+        kw = dict()
+        kw.update(id=id)
+        owner_type_id = new_content_type_id(owner_type_id)
+        kw.update(owner_type_id=owner_type_id)
+        kw.update(owner_id=owner_id)
+        kw.update(user_id=user_id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(project_id=project_id)
+        kw.update(build_time=build_time)
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        kw.update(summary=summary)
+        kw.update(description=description)
+        kw.update(uid=uid)
+        kw.update(event_type_id=calendar_id)
+        #~ kw.update(calendar_id=calendar_id)
+        kw.update(access_class=access_class)
+        kw.update(sequence=sequence)
+        kw.update(auto_type=auto_type)
+        kw.update(transparent=transparent)
+        kw.update(room_id=room_id)
+        kw.update(priority_id=priority_id)
+        kw.update(state=state)
+        kw.update(assigned_to_id=assigned_to_id)
+        return cal_Event(**kw)
+    globals_dict.update(create_cal_event=create_cal_event)
+    
+    #~ system_SiteConfig = resolve_model("system.SiteConfig")
+    #~ def create_system_siteconfig(id, default_build_method, signer1_id, signer2_id, signer1_function_id, signer2_function_id, next_partner_id, site_company_id, client_calendar_id, client_guestrole_id, team_guestrole_id, prompt_calendar_id, system_note_type_id, propgroup_skills_id, propgroup_softskills_id, propgroup_obstacles_id, attestation_note_nature_id, job_office_id, residence_permit_upload_type_id, work_permit_upload_type_id, driving_licence_upload_type_id, debts_bailiff_type_id, master_budget_id, sector_id, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password):
+        #~ kw = dict()
+        #~ kw.update(id=id)
+        #~ kw.update(default_build_method=default_build_method)
+        #~ kw.update(signer1_id=signer1_id)
+        #~ kw.update(signer2_id=signer2_id)
+        #~ kw.update(signer1_function_id=signer1_function_id)
+        #~ kw.update(signer2_function_id=signer2_function_id)
+        #~ kw.update(next_partner_id=next_partner_id)
+        #~ kw.update(site_company_id=site_company_id)
+        #~ kw.update(client_calendar_id=client_calendar_id)
+        #~ kw.update(client_guestrole_id=client_guestrole_id)
+        #~ kw.update(team_guestrole_id=team_guestrole_id)
+        #~ kw.update(prompt_calendar_id=prompt_calendar_id)
+        #~ kw.update(system_note_type_id=system_note_type_id)
+        #~ kw.update(propgroup_skills_id=propgroup_skills_id)
+        #~ kw.update(propgroup_softskills_id=propgroup_softskills_id)
+        #~ kw.update(propgroup_obstacles_id=propgroup_obstacles_id)
+        #~ kw.update(attestation_note_nature_id=attestation_note_nature_id)
+        #~ kw.update(job_office_id=job_office_id)
+        #~ kw.update(residence_permit_upload_type_id=residence_permit_upload_type_id)
+        #~ kw.update(work_permit_upload_type_id=work_permit_upload_type_id)
+        #~ kw.update(driving_licence_upload_type_id=driving_licence_upload_type_id)
+        #~ kw.update(debts_bailiff_type_id=debts_bailiff_type_id)
+        #~ kw.update(master_budget_id=master_budget_id)
+        #~ kw.update(sector_id=sector_id)
+        #~ kw.update(cbss_org_unit=cbss_org_unit)
+        #~ kw.update(ssdn_user_id=ssdn_user_id)
+        #~ kw.update(ssdn_email=ssdn_email)
+        #~ kw.update(cbss_http_username=cbss_http_username)
+        #~ kw.update(cbss_http_password=cbss_http_password)
+        #~ return system_SiteConfig(**kw)
+    #~ globals_dict.update(create_system_siteconfig=create_system_siteconfig)
+    
     return '1.1.11'
