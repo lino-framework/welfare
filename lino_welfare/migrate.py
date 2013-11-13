@@ -957,6 +957,7 @@ def migrate_from_1_1_10(globals_dict):
     """    
     
     bv2kw = globals_dict['bv2kw']
+    new_content_type_id = globals_dict['new_content_type_id']
     
     cal_EventType = resolve_model("cal.EventType")
     def create_cal_calendar(id, name, seqno, build_method, template, attach_to_email, email_template, type, description, url_template, username, password, readonly, is_appointment, start_date, color, event_label, invite_team_members_id, invite_client):
