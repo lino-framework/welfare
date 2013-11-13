@@ -1009,16 +1009,16 @@ def migrate_from_1_1_10(globals_dict):
         return users_User(**kw)
     globals_dict.update(create_users_user=create_users_user)
         
-    cal_Subscription = resolve_model("cal.Subscription")
-    def create_cal_subscription(id, user_id, calendar_id, is_hidden):
-        kw = dict()
-        kw.update(id=id)
-        kw.update(user_id=user_id)
-        kw.update(event_type_id=calendar_id)
-        kw.update(is_hidden=is_hidden)
-        return cal_Subscription(**kw)
-    globals_dict.update(create_cal_subscription=create_cal_subscription)
-
+    #~ cal_Subscription = resolve_model("cal.Subscription")
+    #~ def create_cal_subscription(id, user_id, calendar_id, is_hidden):
+        #~ kw = dict()
+        #~ kw.update(id=id)
+        #~ kw.update(user_id=user_id)
+        #~ kw.update(event_type_id=calendar_id)
+        #~ kw.update(is_hidden=is_hidden)
+        #~ return cal_Subscription(**kw)
+    #~ globals_dict.update(create_cal_subscription=create_cal_subscription)
+#~ 
     
     cal_Event = resolve_model("cal.Event")
     def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, transparent, room_id, priority_id, state, assigned_to_id):
