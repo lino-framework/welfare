@@ -952,7 +952,9 @@ def migrate_from_1_1_10(globals_dict):
       After migration we will manually create one "Calendar" 
       (new version's meaning) for each user.
     - Rename field `calendar` to `event_type` in 
-      users.User, cal.Subscription and cal.Event
+      users.User, cal.Subscription and `cal.Event`.
+      Removed it in cal.Task.
+    - Removed field `uid` in cal.Event and cal.Task
     - Renamed SiteConfig default_calendar to default_event_type
     """    
     
@@ -1051,6 +1053,34 @@ def migrate_from_1_1_10(globals_dict):
         kw.update(assigned_to_id=assigned_to_id)
         return cal_Event(**kw)
     globals_dict.update(create_cal_event=create_cal_event)
+    
+    cal_Task = resolve_model("cal.Task")
+    def create_cal_task(id, owner_type_id, owner_id, user_id, created, modified, project_id, start_date, start_time, summary, description, uid, calendar_id, access_class, sequence, auto_type, due_date, due_time, percent, state):
+        kw = dict()
+        kw.update(id=id)
+        owner_type_id = new_content_type_id(owner_type_id)
+        kw.update(owner_type_id=owner_type_id)
+        kw.update(owner_id=owner_id)
+        kw.update(user_id=user_id)
+        kw.update(created=created)
+        kw.update(modified=modified)
+        kw.update(project_id=project_id)
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(summary=summary)
+        kw.update(description=description)
+        #~ kw.update(uid=uid)
+        #~ kw.update(calendar_id=calendar_id)
+        kw.update(access_class=access_class)
+        kw.update(sequence=sequence)
+        kw.update(auto_type=auto_type)
+        kw.update(due_date=due_date)
+        kw.update(due_time=due_time)
+        kw.update(percent=percent)
+        kw.update(state=state)
+        return cal_Task(**kw)
+    globals_dict.update(create_cal_task=create_cal_task)
+    
     
     isip_ExamPolicy = resolve_model("isip.ExamPolicy")
     def create_isip_exampolicy(id, name, start_date, start_time, end_date, end_time, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, calendar_id):
