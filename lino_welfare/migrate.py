@@ -1051,6 +1051,31 @@ def migrate_from_1_1_10(globals_dict):
         return cal_Event(**kw)
     globals_dict.update(create_cal_event=create_cal_event)
     
+    isip_ExamPolicy = resolve_model("isip.ExamPolicy")
+    def create_isip_exampolicy(id, name, start_date, start_time, end_date, end_time, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, calendar_id):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(start_date=start_date)
+        kw.update(start_time=start_time)
+        kw.update(end_date=end_date)
+        kw.update(end_time=end_time)
+        kw.update(every_unit=every_unit)
+        kw.update(every=every)
+        kw.update(monday=monday)
+        kw.update(tuesday=tuesday)
+        kw.update(wednesday=wednesday)
+        kw.update(thursday=thursday)
+        kw.update(friday=friday)
+        kw.update(saturday=saturday)
+        kw.update(sunday=sunday)
+        kw.update(max_events=max_events)
+        kw.update(event_type_id=calendar_id)
+        #~ kw.update(calendar_id=calendar_id)
+        return isip_ExamPolicy(**kw)
+    globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
+
+    
     #~ system_SiteConfig = resolve_model("system.SiteConfig")
     #~ def create_system_siteconfig(id, default_build_method, signer1_id, signer2_id, signer1_function_id, signer2_function_id, next_partner_id, site_company_id, client_calendar_id, client_guestrole_id, team_guestrole_id, prompt_calendar_id, system_note_type_id, propgroup_skills_id, propgroup_softskills_id, propgroup_obstacles_id, attestation_note_nature_id, job_office_id, residence_permit_upload_type_id, work_permit_upload_type_id, driving_licence_upload_type_id, debts_bailiff_type_id, master_budget_id, sector_id, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password):
         #~ kw = dict()
