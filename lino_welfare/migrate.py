@@ -1038,7 +1038,7 @@ def migrate_from_1_1_10(globals_dict):
         kw.update(end_time=end_time)
         kw.update(summary=summary)
         kw.update(description=description)
-        kw.update(uid=uid)
+        #~ kw.update(uid=uid)
         kw.update(event_type_id=calendar_id)
         #~ kw.update(calendar_id=calendar_id)
         kw.update(access_class=access_class)
