@@ -248,10 +248,12 @@ class Site(Site,cbss.SiteMixin):
         yield self.modules.reception.WaitingVisitors
         yield self.modules.reception.MyWaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
+        
+    auto_configure_logger_names = 'djangosite north lino lino_welfare'
 
 #~ SITE = Site(globals())
 
-LOGGING['logger_names'] = 'djangosite north lino lino_welfare'
+#~ LOGGING['logger_names'] = 'djangosite north lino lino_welfare'
 #~ LOGGING.update(loggers='djangosite north lino lino_welfare')
 #~ print 20130409, __file__, LOGGING
 
