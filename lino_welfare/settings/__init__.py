@@ -72,8 +72,13 @@ class Site(Site,cbss.SiteMixin):
     #~ remote_user_header = "REMOTE_USER"
     
     #~ use_eid_jslib = True
-    use_eid_jslib = False
-    use_eidreader = True
+    #~ use_eid_jslib = False
+    #~ use_eidreader = True
+    
+    def get_installed_plugins(self):
+        for p in super(Site,self).get_installed_plugins():
+            yield p
+        yield 'lino.mixins.beid.BeIdReaderPlugin'
     
     #~ admin_url = '/admin'
     

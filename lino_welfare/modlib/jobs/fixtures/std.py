@@ -14,7 +14,7 @@
 
 
 from lino.utils.instantiator import Instantiator, i2d
-from north.dbutils import babel_values, babelitem
+from lino.dd import babel_values
 
 def objects():
   

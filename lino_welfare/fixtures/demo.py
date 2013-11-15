@@ -37,7 +37,7 @@ from lino.mixins.beid import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
 from north.dbutils import babelkw
-from north.dbutils import field2kw
+from lino.dd import field2kw
 from lino.utils.restify import restify
 from lino.utils import dblogger
 #~ from lino.models import update_site_config

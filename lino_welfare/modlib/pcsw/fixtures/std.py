@@ -17,7 +17,8 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.instantiator import Instantiator, i2d
-from north.dbutils import babelkw, babelitem
+from lino.dd import babelkw
+
 
 def objects():
     from lino import dd

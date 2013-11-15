@@ -17,22 +17,23 @@ from __future__ import unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
 from lino.utils.instantiator import Instantiator, i2d
-from lino.core.dbutils import resolve_model
 from django.utils.translation import ugettext_lazy as _
 
 
 from django.db import models
 from django.conf import settings
 
-from north.dbutils import babelkw, babel_values, babelitem
+from north.dbutils import babelkw, babel_values
 
-Person = resolve_model('contacts.Person')
-Company = resolve_model('contacts.Company')
-ExclusionType = resolve_model('pcsw.ExclusionType')
+from lino import dd
+
+Person = dd.resolve_model('contacts.Person')
+Company = dd.resolve_model('contacts.Company')
+ExclusionType = dd.resolve_model('pcsw.ExclusionType')
 
 #~ from lino.modlib.properties import models as properties 
 
-ContractEnding = resolve_model('isip.ContractEnding')
+ContractEnding = dd.resolve_model('isip.ContractEnding')
 
 
 def objects():
@@ -201,17 +202,17 @@ def objects():
     #~ from lino.models import update_site_config
     
     uploadType = Instantiator('uploads.UploadType',"name").build
-    yield uploadType(babelitem(de=u"Personalausweis",fr=u"Carte d'identité",en="ID card"))
-    p = uploadType(babelitem(de=u"Aufenthaltserlaubnis",fr=u"Permis de séjour",en="Residence permit"))
+    yield uploadType(dd.babelitem(de=u"Personalausweis",fr=u"Carte d'identité",en="ID card"))
+    p = uploadType(dd.babelitem(de=u"Aufenthaltserlaubnis",fr=u"Permis de séjour",en="Residence permit"))
     yield p
     #~ settings.SITE.update_site_config(residence_permit_upload_type=p)
     settings.SITE.site_config.residence_permit_upload_type = p
-    p = uploadType(babelitem(de=u"Arbeitserlaubnis",fr=u"Permis de travail",en="Work permit"))
+    p = uploadType(dd.babelitem(de=u"Arbeitserlaubnis",fr=u"Permis de travail",en="Work permit"))
     yield p
     #~ settings.SITE.update_site_config(work_permit_upload_type = p)
     settings.SITE.site_config.work_permit_upload_type = p
-    yield uploadType(babelitem(de=u"Vertrag",fr=u"Contrat",en="Contract"))
-    p = uploadType(babelitem(de=u"Führerschein",fr=u"Permis de conduire",en="Diving licence"))
+    yield uploadType(dd.babelitem(de=u"Vertrag",fr=u"Contrat",en="Contract"))
+    p = uploadType(dd.babelitem(de=u"Führerschein",fr=u"Permis de conduire",en="Diving licence"))
     yield p
     #~ settings.SITE.update_site_config(driving_licence_upload_type = p)
     settings.SITE.site_config.driving_licence_upload_type = p
@@ -293,7 +294,7 @@ def objects():
     
     I = Instantiator('system.HelpText','content_type field help_text').build
     
-    Client = resolve_model('pcsw.Client')
+    Client = dd.resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)
     yield I(t,'in_belgium_since',u"""\
 Since when this person in Belgium lives.
@@ -311,7 +312,7 @@ The eventual noble condition of this person. Imported from TIM.
 #~ </ul>    
 #~ """)
     
-    Partner = resolve_model('contacts.Partner')
+    Partner = dd.resolve_model('contacts.Partner')
     t = ContentType.objects.get_for_model(Partner)
     yield I(t,'language',u"""\
     Die Sprache, in der Dokumente ausgestellt werden sollen.
