@@ -1,16 +1,16 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2012 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-## GNU General Public License for more details.
-## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2012 Luc Saffre
+# This file is part of the Lino project.
+# Lino is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Lino is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
 Fills the cbss.Purposes table with the official values defined in 
@@ -133,6 +133,7 @@ PURPOSES = u"""
 17 40 Bénéficiaire de l’allocation de chauffage | Begunstigde verwarmingstoelage | Heizkostenbeihilfe
 """
 
+
 def objects():
     Sector = resolve_model('cbss.Sector')
     #~ for ln in SECTORS.splitlines():
@@ -144,14 +145,14 @@ def objects():
             #~ if not labels[2]:
                 #~ labels[2] = labels[0]
             #~ yield Sector(code=int(a[0]),**babel_values('name',fr=labels[0],nl=labels[1],de=labels[2]))
-            
+
     Purpose = resolve_model('cbss.Purpose')
     for ln in PURPOSES.splitlines():
         if ln:
-            a = ln.split(None,2)
+            a = ln.split(None, 2)
             #~ assert a[0] in ('*', '17')
             sc = a[0]
-            if sc == '*': 
+            if sc == '*':
                 sc = None
             else:
                 #~ sector = Sector.objects.get(code=int(sc))
@@ -160,6 +161,5 @@ def objects():
             if len(labels) == 2:
                 labels.append(labels[0])
             elif len(labels) != 3:
-                raise Exception("Line %r : labels is %r" %(ln,labels))
-            yield Purpose(sector_code=sc,code=int(a[1]),**babel_values('name',en=labels[0],fr=labels[0],nl=labels[1],de=labels[2]))
-            
+                raise Exception("Line %r : labels is %r" % (ln, labels))
+            yield Purpose(sector_code=sc, code=int(a[1]), **babel_values('name', en=labels[0], fr=labels[0], nl=labels[1], de=labels[2]))

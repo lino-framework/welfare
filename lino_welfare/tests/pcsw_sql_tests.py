@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-## Copyright 2012 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-## GNU General Public License for more details.
-## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2012 Luc Saffre
+# This file is part of the Lino project.
+# Lino is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Lino is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
 This module runs a series of tests on whether Lino issues the correct SQL requests.
@@ -45,7 +45,7 @@ import pprint
 
 import datetime
 
-NOW = datetime.datetime.now() 
+NOW = datetime.datetime.now()
 
 from django.conf import settings
 from django.test.utils import override_settings
@@ -64,23 +64,21 @@ from lino.dd import UserProfiles
     #~ return user(*args)
 
 
-
 from djangosite.utils.djangotest import TestCase, reset_queries
 
-#~ @override_settings(DEBUG=True) 
+#~ @override_settings(DEBUG=True)
 #~ class SqlTest(TestCase):
-    #~ defining_module = __name__  # [Note1]
-    
+    # ~ defining_module = __name__  # [Note1]
+
+
 class SqlTest(TestCase):
-    
-  
-  
-    @override_settings(DEBUG=True) 
+
+    @override_settings(DEBUG=True)
     def test01(self):
         """
         Test the number of SQL queries for certain requests.
         """
-        
+
         """
         The first web request will trigger Lino site startup.
         During site startup Lino does some database requests.
@@ -93,27 +91,27 @@ class SqlTest(TestCase):
         """
         settings.SITE.startup()
         reset_queries()
-        
+
         #~ 'SELECT "lino_helptext"."id", [...] FROM "lino_helptext" WHERE "lino_helptext"."help_text" IS NOT NULL',
         #~ 'SELECT "lino_siteconfig"."id", [...] WHERE "lino_siteconfig"."id" = 1',
         #~ 'SELECT "lino_siteconfig"."id", [...] WHERE "lino_siteconfig"."id" = 1',
         #~ 'SELECT "lino_siteconfig"."id", [...] WHERE "lino_siteconfig"."id" = 1',
         #~ 'SELECT "pcsw_persongroup"."id", [...] WHERE "pcsw_persongroup"."ref_name" IS NOT NULL ORDER BY "pcsw_persongroup"."ref_name" ASC',
-        
-        
+
         from lino.modlib.users.models import User
-        
+
         #~ user = create_user('user','user@example.com','John','Jones',False,False)
         #~ user.save()
-        #~ root = create_user('root','root@example.com','Dick','Dickens',True,True)    
-        user = Instantiator(settings.SITE.user_model,'username email first_name last_name profile').build
-        root = user('root','root@example.com','Dick','Dickens','900')    
-        
+        #~ root = create_user('root','root@example.com','Dick','Dickens',True,True)
+        user = Instantiator(settings.SITE.user_model,
+                            'username email first_name last_name profile').build
+        root = user('root', 'root@example.com', 'Dick', 'Dickens', '900')
+
         root.save()
-        
+
         self.check_sql_queries(
-          'INSERT INTO "users_user" [...]'
-          #~ 'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."profile" = 900'
+            'INSERT INTO "users_user" [...]'
+            #~ 'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."profile" = 900'
         )
         #~ self.check_sql_queries(
           #~ 'SELECT (1) AS "a" FROM "lino_siteconfig" [...]',
@@ -124,21 +122,20 @@ class SqlTest(TestCase):
           #~ 'INSERT INTO "users_user" [...]'
         #~ )
 
-       
         url = '/api/contacts/Companies?fmt=json&limit=30&start=0'
-        response = self.client.get(url,REMOTE_USER='root')
-        
+        response = self.client.get(url, REMOTE_USER='root')
+
         self.check_sql_queries(
-          'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."username" = root',
-          'SELECT "contacts_partner"."id", [...] ORDER BY "contacts_partner"."name" ASC LIMIT 30',
-          'SELECT COUNT(*) FROM "contacts_company"',
+            'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."username" = root',
+            'SELECT "contacts_partner"."id", [...] ORDER BY "contacts_partner"."name" ASC LIMIT 30',
+            'SELECT COUNT(*) FROM "contacts_company"',
         )
-        
+
         url = '/api/contacts/Companies?fmt=json&limit=30&start=0'
-        response = self.client.get(url,REMOTE_USER='root')
-        
+        response = self.client.get(url, REMOTE_USER='root')
+
         self.check_sql_queries(
-          'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."username" = root',
-          'SELECT "contacts_partner"."id", [...] ORDER BY "contacts_partner"."name" ASC LIMIT 30',
-          'SELECT COUNT(*) FROM "contacts_company"',
+            'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."username" = root',
+            'SELECT "contacts_partner"."id", [...] ORDER BY "contacts_partner"."name" ASC LIMIT 30',
+            'SELECT COUNT(*) FROM "contacts_company"',
         )

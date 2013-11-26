@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-## Copyright 2011-2013 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-## GNU General Public License for more details.
-## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2011-2013 Luc Saffre
+# This file is part of the Lino project.
+# Lino is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Lino is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
 This module contains tests that are run on a demo database.
@@ -55,8 +55,6 @@ from lino import dd
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
 
-
-
 #~ pcsw = dd.resolve_app('pcsw')
 cbss = dd.resolve_app('cbss')
 Event = dd.resolve_model('cal.Event')
@@ -66,7 +64,7 @@ Event = dd.resolve_model('cal.Event')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
 if False:
-    
+
     DEMO_OVERVIEW = """\
     30 applications: sessions, about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
     98 models:
@@ -172,53 +170,47 @@ if False:
      users.Team                     5         0
      users.User                     19        0
     ============================== ========= =======
-    """ 
+    """
 
     def run_db_overview_test(self):
         """
-        The idea was to run this on both the (stored) demo database and 
+        The idea was to run this on both the (stored) demo database and
         the (temporary) test database.
-        But when run in a temporary test database, 
+        But when run in a temporary test database,
         we also have some additional models created by contenttypes tests::
-        
+
             contenttypes.ConcreteModel              2         0
             contenttypes.FooWithBrokenAbsoluteUrl   3         0
             contenttypes.FooWithUrl                 3         0
             contenttypes.FooWithoutUrl              2         0
             contenttypes.ProxyModel                 2         0
 
-        
-        
+
+
         """
 
         # The number of cal.Event records may vary depending on the creation date of the database
-        # because of the automatic weekly evaluations of isip and jobs contracts .
-        
+        # because of the automatic weekly evaluations of isip and jobs
+        # contracts .
+
         global DEMO_OVERVIEW
         DEMO_OVERVIEW = DEMO_OVERVIEW % Event.objects.all().count()
         s = settings.SITE.get_db_overview_rst()
         print s
-        self.assertEqual(DEMO_OVERVIEW,s)
-
-
-
+        self.assertEqual(DEMO_OVERVIEW, s)
 
     class DbTest(RemoteAuthTestCase):
         maxDiff = None
-        
+
         def test_db(self):
             run_db_overview_test(self)
 
 
-
-
 class PseudoRequest:
-    def __init__(self,name):
+
+    def __init__(self, name):
         self.user = settings.SITE.user_model.objects.get(username=name)
         self.subst_user = None
-
-
-
 
 
 class DemoTest(RemoteAuthTestCase):
@@ -228,24 +220,21 @@ class DemoTest(RemoteAuthTestCase):
     #~ fixtures = 'std few_countries few_cities few_languages props cbss democfg demo demo2'.split()
     #~ fixtures = 'std all_countries few_cities all_languages props demo'.split()
     #~ never_build_site_cache = True
-    
+
     #~ avoid do_print failure due to build_absolute_uri() when use_davlink is True
     override_djangosite_settings = dict(use_davlink=False)
-    
+
     #~ def setUp(self):
         #~ settings.SITE.never_build_site_cache = True
         #~ super(DemoTest,self).setUp()
 
-        
     def test001(self):
-        
         #~ run_db_overview_test(self)
-        
         """
         Test the number of rows returned for certain queries
         """
         #~ ut = self.make_url_tester()
-        
+
         #~ json_fields = 'count rows title success no_data_text'
         #~ kw = dict(fmt='json',limit=10,start=0)
         #~ ut.add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
@@ -258,7 +247,7 @@ class DemoTest(RemoteAuthTestCase):
         #~ ut.add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
         #~ mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
         #~ ut.add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
-        #~ 
+        #~
         #~ json_fields = 'count rows title success no_data_text param_values'
         #~ ut.add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
         #~ ut.add_case('rolf','api/contacts/Persons',json_fields,70,**kw)
@@ -269,52 +258,53 @@ class DemoTest(RemoteAuthTestCase):
         #~ ut.add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
         #~ ut.add_case('alicia','api/integ/Clients',json_fields,5,**kw)
         #~ ut.add_case('hubert','api/integ/Clients',json_fields,23,**kw)
-        #~ 
+        #~
         #~ alicia = settings.SITE.user_model.objects.get(username='alicia')
-        #~ kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
+        # ~ kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
         #~ ut.add_case('rolf','api/integ/Clients',json_fields,5,**kw)
-        #~ 
-        #~ 
-        #~ kw = dict() 
+        #~
+        #~
+        #~ kw = dict()
         #~ json_fields = 'count rows'
         #~ ut.add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
         #~ ut.add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
         #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1',json_fields,5,**kw)
-        #~ 
-        #~ if False: # TODO
+        #~
+        # ~ if False: # TODO
             #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
-            #~ 
+            #~
         #~ ut.run_tests()
-        #~ 
-        #~ 
+        #~
+        #~
 
         #~ def test002(self):
         """
         Printing a Budget
         The same as in tests/debts.rst, but a different implementation
         """
-        
+
         #~ settings.SITE.override_defaults(use_davlink=False)
-            
+
         from lino.runtime import debts
         ses = settings.SITE.login('rolf')
         obj = debts.Budget.objects.get(pk=3)
-        
+
         res = ses.run(obj.do_clear_cache)
         #~ print __file__, 20130414, repr(res)
         #~ msg = res['message'].decode('utf-8')
         msg = res['message']
-        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier (183) printable cache has been cleared.')
-        
+        self.assertEqual(
+            msg, 'Budget 3 for Ausdemwald-Charlier (183) printable cache has been cleared.')
+
         res = ses.run(obj.do_print)
         #~ print __file__, 20130414, repr(res)
         msg = res['message']
         #~ msg = res['message'].decode('utf-8')
         #~ self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
-        self.assertEqual(msg,'Budget 3 for Ausdemwald-Charlier (183) printable has been built.')
-        self.assertEqual(res['open_url'],'/media/userdocs/appyodt/debts.Budget-3.odt')
-
-
+        self.assertEqual(
+            msg, 'Budget 3 for Ausdemwald-Charlier (183) printable has been built.')
+        self.assertEqual(res['open_url'],
+                         '/media/userdocs/appyodt/debts.Budget-3.odt')
 
         """
         20130418 server traceback 
@@ -324,14 +314,15 @@ class DemoTest(RemoteAuthTestCase):
         #~ from lino_welfare.modlib.pcsw.fixtures.std import objects
         #~ for obj in objects():
             #~ obj.save()
-      
-        url = settings.SITE.build_admin_url('plain/integ/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
-        response = self.client.get(url,REMOTE_USER='rolf')
-        self.assertEqual(response.status_code,200)
-        if not response.content.startswith('<!DOCTYPE html>\n<html language="en"><head>'):
-            self.fail("Failed: UsersWithClients responded %r",response.content)
-        #~ result = self.check_json_result(response,'',url)
 
+        url = settings.SITE.build_admin_url(
+            'plain/integ/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
+        response = self.client.get(url, REMOTE_USER='rolf')
+        self.assertEqual(response.status_code, 200)
+        if not response.content.startswith('<!DOCTYPE html>\n<html language="en"><head>'):
+            self.fail("Failed: UsersWithClients responded %r",
+                      response.content)
+        #~ result = self.check_json_result(response,'',url)
 
         """
         All demo requests should have at least one row of result.
@@ -340,10 +331,7 @@ class DemoTest(RemoteAuthTestCase):
         ses = settings.SITE.login('rolf')
         for obj in cbss.RetrieveTIGroupsRequest.objects.all():
             msg = "%s has no result" % obj
-            self.assertNotEqual(obj.Result(ses).get_total_count(),0,msg)
-
-
-
+            self.assertNotEqual(obj.Result(ses).get_total_count(), 0, msg)
 
     def unused_test001(self):
         """
@@ -354,15 +342,14 @@ class DemoTest(RemoteAuthTestCase):
         Person = dd.resolve_model('contacts.Person')
         #~ from lino.projects.pcsw.models import Person
         self.assertEquals(Person.objects.count(), 78)
-        
+
         p = Person.objects.get(pk=118)
         #~ self.assertEquals(unicode(p), "ARENS Annette (118)")
         #~ self.assertEquals(unicode(p), "AUSDEMWALD Alfons (118)")
         #~ self.assertEquals(unicode(p), "COLLARD Charlotte (118)")
         self.assertEquals(unicode(p), "Herrn Laurent BASTIAENSEN")
         #~ self.assertEquals(unicode(p), "BASTIAENSEN Laurent (118)")
-        
-            
+
     def unused_test002(self):
         """
         Tests whether SoftSkillsByPerson works and whether it returns language-specific labels.
@@ -373,95 +360,97 @@ class DemoTest(RemoteAuthTestCase):
         #~ from lino.modlib.users.models import User
         #~ u = User.objects.get(username='rolf')
         #~ lang = u.language
-        #~ u.language = '' # HTTP_ACCEPT_LANGUAGE works only when User.language empty
+        # ~ u.language = '' # HTTP_ACCEPT_LANGUAGE works only when User.language empty
         #~ u.save()
-        
-        settings.SITE.ui # trigger ui instance
-        
+
+        settings.SITE.ui  # trigger ui instance
+
         obj = pcsw.Client.objects.get(pk=128)
         ar = cv.SoftSkillsByPerson.request(master_instance=obj)
-        
+
         pk = 128
-        mt = 44 
-        url = '/api/cv/SoftSkillsByPerson?mt=%d&mk=%d&fmt=json' % (mt,pk)
-        
+        mt = 44
+        url = '/api/cv/SoftSkillsByPerson?mt=%d&mk=%d&fmt=json' % (mt, pk)
+
         #~ if 'en' in babel.AVAILABLE_LANGUAGES:
         if settings.SITE.get_language_info('en'):
-            response = self.client.get(url,REMOTE_USER='robin',HTTP_ACCEPT_LANGUAGE='en')
+            response = self.client.get(
+                url, REMOTE_USER='robin', HTTP_ACCEPT_LANGUAGE='en')
             #~ result = self.check_json_result(response,'count rows gc_choices disabled_actions title')
-            result = self.check_json_result(response,'count rows title success no_data_text')
-            self.assertEqual(result['title'],"Soft skills of EVERS Eberhart (%d)" % pk)
-            self.assertEqual(len(result['rows']),2)
+            result = self.check_json_result(
+                response, 'count rows title success no_data_text')
+            self.assertEqual(result['title'],
+                             "Soft skills of EVERS Eberhart (%d)" % pk)
+            self.assertEqual(len(result['rows']), 2)
             row = result['rows'][0]
-            self.assertEqual(row[0],"Obedient")
+            self.assertEqual(row[0], "Obedient")
             #~ self.assertEqual(row[1],7)
-            self.assertEqual(row[2],"moderate")
-            self.assertEqual(row[3],"2")
-            
+            self.assertEqual(row[2], "moderate")
+            self.assertEqual(row[3], "2")
+
         #~ if 'de' in babel.AVAILABLE_LANGUAGES:
         if settings.SITE.get_language_info('de'):
-            response = self.client.get(url,REMOTE_USER='rolf',HTTP_ACCEPT_LANGUAGE='de')
-            result = self.check_json_result(response,'count rows title success no_data_text')
-            self.assertEqual(result['title'],"Eigenschaften von EVERS Eberhart (%d)" % pk)
-            self.assertEqual(len(result['rows']),2)
+            response = self.client.get(
+                url, REMOTE_USER='rolf', HTTP_ACCEPT_LANGUAGE='de')
+            result = self.check_json_result(
+                response, 'count rows title success no_data_text')
+            self.assertEqual(result['title'],
+                             "Eigenschaften von EVERS Eberhart (%d)" % pk)
+            self.assertEqual(len(result['rows']), 2)
             row = result['rows'][0]
-            self.assertEqual(row[0],"Gehorsam")
+            self.assertEqual(row[0], "Gehorsam")
             #~ self.assertEqual(row[1],7)
-            self.assertEqual(row[2],"mittelmäßig")
-            self.assertEqual(row[3],"2")
-            
-        #~ 20111111 babel.set_language(None) # switch back to default language for subsequent tests
-        
+            self.assertEqual(row[2], "mittelmäßig")
+            self.assertEqual(row[3], "2")
+
+        # ~ 20111111 babel.set_language(None) # switch back to default language for subsequent tests
+
         u.language = lang
         u.save()
-        
-        
+
         #~ tf('http://127.0.0.1:8000/api/properties/SoftSkillsByPerson?_dc=1298881440121&fmt=json&mt=22&mk=15',
             #~ """
-            #~ { 
-            #~ count: 3, 
-            #~ rows: [ 
-              #~ [ "Gehorsam", 7, "mittelm\u00e4\u00dfig", "2", null, 53, "Sozialkompetenzen", 2 ], 
-              #~ [ "F\u00fchrungsf\u00e4higkeit", 8, "mittelm\u00e4\u00dfig", "2", null, 54, "Sozialkompetenzen", 2 ], 
-              #~ [ null, null, null, null, null, null, "Sozialkompetenzen", 2 ] 
-            #~ ], 
-            #~ gc_choices: [  ], 
-            #~ title: "~Eigenschaften pro Person Arens Annette (15)" 
+            #~ {
+            #~ count: 3,
+            #~ rows: [
+              #~ [ "Gehorsam", 7, "mittelm\u00e4\u00dfig", "2", null, 53, "Sozialkompetenzen", 2 ],
+              #~ [ "F\u00fchrungsf\u00e4higkeit", 8, "mittelm\u00e4\u00dfig", "2", null, 54, "Sozialkompetenzen", 2 ],
+              #~ [ null, null, null, null, null, null, "Sozialkompetenzen", 2 ]
+            #~ ],
+            #~ gc_choices: [  ],
+            #~ title: "~Eigenschaften pro Person Arens Annette (15)"
             #~ }
             #~ """)
-        
-
-
     def unused_test003(self):
         """
         Test whether the AJAX call issued for Detail of Annette Arens is correct.
         """
         cases = [
-        #  [ id,         name, recno, first, prev, next, last ]
-           [ 119, "Charlier",     8,   199,  201,  118, 166  ],
-           [ 167, "Ärgerlich",   56,   199,  164,  166, 166  ],
-           [ 166, "Östges",      57,   199,  167, None, 166  ],
+            #  [ id,         name, recno, first, prev, next, last ]
+            [119, "Charlier",     8,   199,  201,  118, 166],
+            [167, "Ärgerlich",   56,   199,  164,  166, 166],
+            [166, "Östges",      57,   199,  167, None, 166],
         ]
-        # 
+        #
         for case in cases:
             url = '/api/contacts/Persons/%s?fmt=json' % case[0]
-            response = self.client.get(url,REMOTE_USER='root')
-            result = self.check_json_result(response,'navinfo disable_delete data id title')
+            response = self.client.get(url, REMOTE_USER='root')
+            result = self.check_json_result(
+                response, 'navinfo disable_delete data id title')
             # disabled because they depend on local database sorting configuration
             # re-enabled because demo fixtures no longer contain cyrillic chars
-            self.assertEqual(result['data']['last_name'],case[1])
-            self.assertEqual(result['navinfo']['recno'],case[2])
-            self.assertEqual(result['navinfo']['first'],case[3]) 
-            self.assertEqual(result['navinfo']['prev'],case[4]) 
-            self.assertEqual(result['navinfo']['next'],case[5])
-            self.assertEqual(result['navinfo']['last'],case[6])
-                
-                
+            self.assertEqual(result['data']['last_name'], case[1])
+            self.assertEqual(result['navinfo']['recno'], case[2])
+            self.assertEqual(result['navinfo']['first'], case[3])
+            self.assertEqual(result['navinfo']['prev'], case[4])
+            self.assertEqual(result['navinfo']['next'], case[5])
+            self.assertEqual(result['navinfo']['last'], case[6])
+
     def unused_test004(self):
         """
         Test whether date fields are correctly parsed.
         """
-        for value in ('01.03.2011','15.03.2011'):
+        for value in ('01.03.2011', '15.03.2011'):
             url = '/api/jobs/Contracts/1'
             #~ data =  'applies_from='+value+'&applies_until=17.05.2009&company=R-Cycle%20'
             #~ 'Sperrgutsortierzentrum&companyHidden=83&contact=Arens%20Andreas%20(1'
@@ -472,37 +461,41 @@ class DemoTest(RemoteAuthTestCase):
             #~ 'dden=16&reminder_date=11.11.2010&reminder_text=demo%20reminder&type=Kon'
             #~ 'vention%20Art.60%C2%A77%20Sozial%C3%B6konomie&typeHidden=1&user=root&us'
             #~ 'erHidden=4&user_asd=Benutzer%20ausw%C3%A4hlen...&user_asdHidden='
-            data =  'applies_from='+value
-            
-            response = self.request_PUT(url,data,REMOTE_USER='root')
-            result = self.check_json_result(response,'message success data_record')
-            self.assertEqual(result['success'],True)
-            self.assertEqual(result['data_record']['data']['applies_from'],value)
-            
+            data = 'applies_from=' + value
+
+            response = self.request_PUT(url, data, REMOTE_USER='root')
+            result = self.check_json_result(
+                response, 'message success data_record')
+            self.assertEqual(result['success'], True)
+            self.assertEqual(result['data_record']
+                             ['data']['applies_from'], value)
+
             url = "/api/jobs/Contracts/1?fmt=json"
-            response = self.client.get(url,REMOTE_USER='root')
+            response = self.client.get(url, REMOTE_USER='root')
             #~ print 20110723, response
-            result = self.check_json_result(response,'navinfo disable_delete data id title')
-            self.assertEqual(result['data']['applies_from'],value)
+            result = self.check_json_result(
+                response, 'navinfo disable_delete data id title')
+            self.assertEqual(result['data']['applies_from'], value)
 
     def unused_test005(self):
         """
         Simplification of test04, used to write Lino ticket #27.
         """
-        url ='/api/countries/Countries/BE'
+        url = '/api/countries/Countries/BE'
         value = 'Belgienx'
         data = 'name=%s&nameHidden=Belgienx&fmt=json' % value
-        response = self.request_PUT(url,data,REMOTE_USER='root')
+        response = self.request_PUT(url, data, REMOTE_USER='root')
         #~ response = self.client.put(url,data,content_type='application/x-www-form-urlencoded')
-        result = self.check_json_result(response,'message success data_record')
-        self.assertEqual(result['success'],True)
-        self.assertEqual(result['data_record']['data']['name'],value)
-        
-        url ='/api/countries/Countries/BE?fmt=json'
-        response = self.client.get(url,REMOTE_USER='root')
-        result = self.check_json_result(response,'navinfo disable_delete data id title')
-        self.assertEqual(result['data']['name'],value)
+        result = self.check_json_result(
+            response, 'message success data_record')
+        self.assertEqual(result['success'], True)
+        self.assertEqual(result['data_record']['data']['name'], value)
 
+        url = '/api/countries/Countries/BE?fmt=json'
+        response = self.client.get(url, REMOTE_USER='root')
+        result = self.check_json_result(
+            response, 'navinfo disable_delete data id title')
+        self.assertEqual(result['data']['name'], value)
 
     def unused_test006(self):
         """
@@ -515,10 +508,10 @@ class DemoTest(RemoteAuthTestCase):
         PersonProperty = settings.SITE.modules.properties.PersonProperty
         annette = Person.objects.get(pk=118)
         self.assertEquals(unicode(annette), "ARENS Annette (118)")
-        
-        p = Property.objects.get(id=2) # "Obedient"
+
+        p = Property.objects.get(id=2)  # "Obedient"
         pp = PersonProperty.objects.filter(property=p)[0]
-        
+
         #~ if 'en' in babel.AVAILABLE_LANGUAGES:
         with translation.override('en'):
         #~ if settings.SITE.get_language_info('en'):
@@ -532,16 +525,15 @@ class DemoTest(RemoteAuthTestCase):
             #~ dd.set_language('de')
             self.assertEquals(unicode(p), u"Gehorsam")
             self.assertEquals(unicode(pp), u"gar nicht")
-        
+
         #~ if 'fr' in babel.AVAILABLE_LANGUAGES:
         with translation.override('fr'):
         #~ if settings.SITE.get_language_info('fr'):
             #~ dd.set_language('fr')
             self.assertEquals(unicode(p), u"Obéissant")
             self.assertEquals(unicode(pp), u"pas du tout")
-        
-        #~ dd.set_language(None) # switch back to default language for subsequent tests
-        
+
+        # ~ dd.set_language(None) # switch back to default language for subsequent tests
 
     def unused_test009(self):
         """
@@ -550,11 +542,11 @@ class DemoTest(RemoteAuthTestCase):
         """
         #~ dd.set_language('en')
         url = '/choices/jobs/StudiesByPerson/city?start=0&limit=30&country=&query='
-        response = self.client.get(url,REMOTE_USER='root')
-        result = self.check_json_result(response,'count rows')
+        response = self.client.get(url, REMOTE_USER='root')
+        result = self.check_json_result(response, 'count rows')
         #~ self.assertEqual(result['title'],u"Choices for city")
-        self.assertEqual(len(result['rows']),30)
-        #~ dd.set_language(None) # switch back to default language for subsequent tests
+        self.assertEqual(len(result['rows']), 30)
+        # ~ dd.set_language(None) # switch back to default language for subsequent tests
 
     def unused_test010(self):
         """
@@ -566,39 +558,39 @@ class DemoTest(RemoteAuthTestCase):
         from django.db.utils import IntegrityError
         be = Country.objects.get(pk='BE')
         try:
-            City(name="Eupen",country=be,zip_code='4700').save()
+            City(name="Eupen", country=be, zip_code='4700').save()
         except IntegrityError:
             if settings.SITE.allow_duplicate_cities:
-                self.fail("Got IntegrityError though allow_duplicate_cities should be allowed.")
+                self.fail(
+                    "Got IntegrityError though allow_duplicate_cities should be allowed.")
         else:
             if not settings.SITE.allow_duplicate_cities:
                 self.fail("Expected IntegrityError")
-            
-        
+
         try:
-            be.city_set.create(name="Eupen",zip_code='4700')
+            be.city_set.create(name="Eupen", zip_code='4700')
         except IntegrityError:
             if settings.SITE.allow_duplicate_cities:
-                self.fail("Got IntegrityError though allow_duplicate_cities should be allowed.")
+                self.fail(
+                    "Got IntegrityError though allow_duplicate_cities should be allowed.")
         else:
             if not settings.SITE.allow_duplicate_cities:
                 self.fail("Expected IntegrityError")
-            
-        
+
     def unused_test011(self):
         """
-        Tests whether the user problem 
-        described in :blogref:`20111206` 
+        Tests whether the user problem
+        described in :blogref:`20111206`
         is solved.
         """
         from lino_welfare.modlib.jobs.models import Contract
         obj = Contract.objects.get(pk=5)
         with translation.override('de'):
-            self.assertEqual(obj.contact.person.get_full_name(),"Herrn Hans ALTENBERG")
+            self.assertEqual(obj.contact.person.get_full_name(),
+                             "Herrn Hans ALTENBERG")
         #~ dd.set_language(None)
         #~ translation.deactivate()
-        
-        
+
     def unused_test012(self):
         """
         Test whether the contact person of a jobs contract is correctly filled in
@@ -609,15 +601,15 @@ class DemoTest(RemoteAuthTestCase):
         from lino.modlib.users.models import User
         u = User.objects.get(username='root')
         #~ qs = Person.objects.order_by('last_name','first_name')
-        p = Person.objects.get(pk=177) # Emil Eierschal
+        p = Person.objects.get(pk=177)  # Emil Eierschal
         #~ e = Employer.objects.get(pk=185)
-        j = Job.objects.get(pk=1) # bisa
-        c = Contract(person=p,user=u,job=j,applies_from=p.coached_from,duration=312)
+        j = Job.objects.get(pk=1)  # bisa
+        c = Contract(person=p, user=u, job=j,
+                     applies_from=p.coached_from, duration=312)
         c.full_clean()
         c.save()
-        self.assertEqual(c.contact.person.pk,118)
+        self.assertEqual(c.contact.person.pk, 118)
         #~ self.assertEqual(c.applies_until,p.coached_from+datetime.timedelta(days=))
-        
 
     def unused_test014(self):
         """
@@ -628,21 +620,21 @@ class DemoTest(RemoteAuthTestCase):
         /choices/contacts/Person/city?start=0&limit=10&country=BE&query=
         /choices/jobs/Contract/duration
         """.splitlines():
-          url = url.strip()
-          if url and not url.startswith("#"):
-              response = self.client.get(url,REMOTE_USER='root')
-              result = self.check_json_result(response,'count rows')
-              #~ self.assertEqual(result['title'],u"Choices for city")
-              self.assertEqual(len(result['rows']),min(result['count'],10))
+            url = url.strip()
+            if url and not url.startswith("#"):
+                response = self.client.get(url, REMOTE_USER='root')
+                result = self.check_json_result(response, 'count rows')
+                #~ self.assertEqual(result['title'],u"Choices for city")
+                self.assertEqual(len(result['rows']), min(result['count'], 10))
 
     def unused_test015(self):
         """
         Temporary bug on :blogref:`20111223`.
         """
         url = '/api/contacts/Persons/-99999?fmt=json&an=insert'
-        response = self.client.get(url,REMOTE_USER='root')
-        result = self.check_json_result(response,'data phantom title')
-        self.assertEqual(result['phantom'],True)
+        response = self.client.get(url, REMOTE_USER='root')
+        result = self.check_json_result(response, 'data phantom title')
+        self.assertEqual(result['phantom'], True)
 
     def unused_test015b(self):
         """
@@ -650,16 +642,15 @@ class DemoTest(RemoteAuthTestCase):
         20120218 : "properties.PropsByGroup has no action u'detail'"
         """
         cases = [
-          ('/api/properties/PropsByGroup/%s?mt=11&mk=1&an=detail&fmt=json',8),
-          ('/api/contacts/AllPartners/%s?an=detail&fmt=json',117),
+            ('/api/properties/PropsByGroup/%s?mt=11&mk=1&an=detail&fmt=json', 8),
+            ('/api/contacts/AllPartners/%s?an=detail&fmt=json', 117),
         ]
         for case in cases:
             url = case[0] % case[1]
-            response = self.client.get(url,REMOTE_USER='root')
+            response = self.client.get(url, REMOTE_USER='root')
             result = self.check_json_result(response,
-              'navinfo disable_delete data title disabled_actions id')
-            self.assertEqual(result['id'],case[1])
-
+                                            'navinfo disable_delete data title disabled_actions id')
+            self.assertEqual(result['id'], case[1])
 
     def unused_test016(self):
         """
@@ -667,23 +658,23 @@ class DemoTest(RemoteAuthTestCase):
         See :blogref:`20111223`.
         """
         cases = [
-          ['root', 19],
-          ['alicia', 17],
+            ['root', 19],
+            ['alicia', 17],
         ]
         for case in cases:
             url = '/api/pcsw/MyPersons?fmt=json&limit=30&start=0&su=%s' % case[0]
-            response = self.client.get(url,REMOTE_USER='root')
-            result = self.check_json_result(response,'count rows gc_choices disabled_actions title')
-            self.assertEqual(result['count'],case[1])
-            
-            
+            response = self.client.get(url, REMOTE_USER='root')
+            result = self.check_json_result(
+                response, 'count rows gc_choices disabled_actions title')
+            self.assertEqual(result['count'], case[1])
+
     def unused_test017(self):
         # moved to docs/tested
         Budget = resolve_model('debts.Budget')
         bud = Budget.objects.get(pk=3)
         s = bud.BudgetSummary().to_rst()
         #~ print s
-        self.assertEquivalent(s,"""
+        self.assertEquivalent(s, """
         ========================================================= ==============
          Beschreibung                                              Betrag
         --------------------------------------------------------- --------------
@@ -695,12 +686,11 @@ class DemoTest(RemoteAuthTestCase):
          **Finanzielle Situation**                                 **4 585,33**
         ========================================================= ==============
         """)
-        
-            
+
     def unused_test101(self):
         """
-        First we try to uncheck the is_jobprovider checkbox on 
-        the Company view of a JobProvider. 
+        First we try to uncheck the is_jobprovider checkbox on
+        the Company view of a JobProvider.
         This should fail since the JP has Jobs and Contracts.
         """
         Company = resolve_model('contacts.Company')
@@ -709,17 +699,19 @@ class DemoTest(RemoteAuthTestCase):
         Contract = resolve_model('jobs.Contract')
         bisaProvider = JobProvider.objects.get(name='BISA')
         bisaCompany = Company.objects.get(name='BISA')
-        
+
         # it should work even on an imported partner
         save_iip = settings.SITE.is_imported_partner
-        def f(obj): return True
+
+        def f(obj):
+            return True
         settings.SITE.is_imported_partner = f
-        
+
         JOBS = Job.objects.filter(provider=bisaProvider)
-        self.assertEqual(JOBS.count(),3)
+        self.assertEqual(JOBS.count(), 3)
         rr = PseudoRequest('rolf')
         try:
-            Company.is_jobprovider.set_value_in_object(rr,bisaCompany,False)
+            Company.is_jobprovider.set_value_in_object(rr, bisaCompany, False)
             self.fail("Expected ValidationError")
         except ValidationError, e:
             # cannot delete because there are 3 Jobs referring to BISA
@@ -728,17 +720,15 @@ class DemoTest(RemoteAuthTestCase):
             for cont in Contract.objects.filter(job=job):
                 cont.delete()
             job.delete()
-        Company.is_jobprovider.set_value_in_object(rr,bisaCompany,False)
-        
-        bisaCompany = Company.objects.get(name='BISA') # still exists
-        
+        Company.is_jobprovider.set_value_in_object(rr, bisaCompany, False)
+
+        bisaCompany = Company.objects.get(name='BISA')  # still exists
+
         try:
             bisaProvider = JobProvider.objects.get(name='BISA')
             self.fail("Expected JobProvider.DoesNotExist")
-        except JobProvider.DoesNotExist,e:
+        except JobProvider.DoesNotExist, e:
             pass
-        
+
         # restore is_imported_partner method
         settings.SITE.is_imported_partner = save_iip
-        
-

@@ -1,16 +1,16 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2013 Luc Saffre
-## This file is part of the Lino project.
-## Lino is free software; you can redistribute it and/or modify 
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-## Lino is distributed in the hope that it will be useful, 
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-## GNU General Public License for more details.
-## You should have received a copy of the GNU General Public License
-## along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2013 Luc Saffre
+# This file is part of the Lino project.
+# Lino is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Lino is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
 This module contains tests for the 
@@ -135,38 +135,39 @@ isip = dd.resolve_app("isip")
 
 from lino_welfare.modlib.isip import models as isip
 
+
 class WatchTimTests(TestCase):
-    
+
     maxDiff = None
-  
+
     def test00(self):
-        
-        ASD = pcsw.CoachingType(id=isip.COACHINGTYPE_ASD,name="ASD")
+
+        ASD = pcsw.CoachingType(id=isip.COACHINGTYPE_ASD, name="ASD")
         ASD.save()
-        
-        DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE,name="DSBE")
+
+        DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE, name="DSBE")
         DSBE.save()
-        
+
         User(username='watch_tim').save()
-        User(username='alicia',coaching_type=DSBE).save()
-        User(username='roger',coaching_type=ASD).save()
+        User(username='alicia', coaching_type=DSBE).save()
+        User(username='roger', coaching_type=ASD).save()
         User(username='edgar').save()
-        households_Type(name="Eheleute",pk=1).save()
+        households_Type(name="Eheleute", pk=1).save()
         settings.SITE.uppercase_last_name = True
-        
+
         #~ def test01(self):
         """
         AttributeError 'NoneType' object has no attribute 'coaching_type'
         """
-        self.assertDoesNotExist(Client,id=23633)
+        self.assertDoesNotExist(Client, id=23633)
         process_line(POST_GEORGES)
         georges = Client.objects.get(id=23633)
-        self.assertEqual(georges.first_name,"Georges")
+        self.assertEqual(georges.first_name, "Georges")
         georges.first_name = "Peter"
         georges.save()
         process_line(POST_GEORGES)
         georges = Client.objects.get(id=23633)
-        self.assertEqual(georges.first_name,"Georges")
+        self.assertEqual(georges.first_name, "Georges")
 
         #~ def test02(self):
         """
@@ -178,60 +179,62 @@ class WatchTimTests(TestCase):
         `watch_tim` then must create a Client after creating also the intermediate Person.
         The Company child must be removed.
         """
-        Company(name="Müller Max Moritz",id=5088).save()
+        Company(name="Müller Max Moritz", id=5088).save()
         global PUT_MAX_MORITZ
         process_line(PUT_MAX_MORITZ)
-        self.assertDoesNotExist(Company,id=5088)
-        #~ company = Company.objects.get(id=5088) # has not been deleted
-        person = Person.objects.get(id=5088) # has been created
-        client = Client.objects.get(id=5088) # has been created
-        coaching = Coaching.objects.get(client=client) # one coaching has been created
-        self.assertEqual(person.first_name,"Max Moritz")
-        self.assertEqual(client.first_name,"Max Moritz")
-        self.assertEqual(coaching.user.username,'alicia')
-        self.assertEqual(coaching.primary,True)
-        self.assertEqual(coaching.start_date,i2d(19910812))
-        
+        self.assertDoesNotExist(Company, id=5088)
+        # ~ company = Company.objects.get(id=5088) # has not been deleted
+        person = Person.objects.get(id=5088)  # has been created
+        client = Client.objects.get(id=5088)  # has been created
+        # one coaching has been created
+        coaching = Coaching.objects.get(client=client)
+        self.assertEqual(person.first_name, "Max Moritz")
+        self.assertEqual(client.first_name, "Max Moritz")
+        self.assertEqual(coaching.user.username, 'alicia')
+        self.assertEqual(coaching.primary, True)
+        self.assertEqual(coaching.start_date, i2d(19910812))
+
         """
         Client becomes Company
         """
         #~ PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"IDUSR":"ALICIA"','"IDUSR":""')
-        PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"ATTRIB":"N"','"ATTRIB":""')
+        PUT_MAX_MORITZ = PUT_MAX_MORITZ.replace('"ATTRIB":"N"', '"ATTRIB":""')
         process_line(PUT_MAX_MORITZ)
-        #~ company = Company.objects.get(id=5088) 
-        self.assertDoesNotExist(Client,id=5088) # has been deleted
-        self.assertDoesNotExist(Coaching,client_id=5088)
-        
+        #~ company = Company.objects.get(id=5088)
+        self.assertDoesNotExist(Client, id=5088)  # has been deleted
+        self.assertDoesNotExist(Coaching, client_id=5088)
 
         #~ def test03(self):
         """
         Test whether watch_tim raises Exception 
         'Cannot create Client ... from PXS' when necessary.
         """
-        self.assertDoesNotExist(Client,id=23635)
+        self.assertDoesNotExist(Client, id=23635)
         try:
             process_line(POST_PXS)
             self.fail("Expected an exception")
         except Exception as e:
-            self.assertEqual(str(e),"Cannot create Client 0000023635 from PXS")
-        self.assertDoesNotExist(Client,id=23635)
+            self.assertEqual(
+                str(e), "Cannot create Client 0000023635 from PXS")
+        self.assertDoesNotExist(Client, id=23635)
 
         #~ def test04(self):
         """
         Household becomes Client
         """
-        Household(name="Voldemort-Potter Harald",id=4260).save()
+        Household(name="Voldemort-Potter Harald", id=4260).save()
         process_line(PUT_PAR_POTTER)
-        client = Client.objects.get(id=4260) # has been created
-        self.assertDoesNotExist(Household,id=4260)
-        coaching = Coaching.objects.get(client=client) # one coaching has been created
-        self.assertEqual(client.first_name,"Harald")
-        self.assertEqual(coaching.primary,True)
-        self.assertEqual(coaching.user.username,'alicia')
-        self.assertEqual(coaching.start_date,i2d(19850723))
+        client = Client.objects.get(id=4260)  # has been created
+        self.assertDoesNotExist(Household, id=4260)
+        # one coaching has been created
+        coaching = Coaching.objects.get(client=client)
+        self.assertEqual(client.first_name, "Harald")
+        self.assertEqual(coaching.primary, True)
+        self.assertEqual(coaching.user.username, 'alicia')
+        self.assertEqual(coaching.start_date, i2d(19850723))
         s = changes_to_rst(client.partner_ptr)
         #~ print s
-        self.assertEqual(s,"""\
+        self.assertEqual(s, """\
 =========== ============= ================================ ============================================================================= ============= ===========
  User        Change Type   Object                           Changes                                                                       Object type   object id
 ----------- ------------- -------------------------------- ----------------------------------------------------------------------------- ------------- -----------
@@ -245,11 +248,12 @@ class WatchTimTests(TestCase):
         """
         Person becomes Household 
         """
-        Person(id=6283,first_name="Paul",last_name="Willekens-Delanuit").save()
+        Person(id=6283, first_name="Paul",
+               last_name="Willekens-Delanuit").save()
         process_line(PUT_PAR_6283)
-        household = Household.objects.get(id=6283) # has been created
-        self.assertDoesNotExist(Person,id=6283)
-          
+        household = Household.objects.get(id=6283)  # has been created
+        self.assertDoesNotExist(Person, id=6283)
+
         #~ def test06(self):
         """
         ValidationError {'first_name': [u'This field cannot be blank.']}
@@ -267,19 +271,19 @@ class WatchTimTests(TestCase):
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"info@example.com",
         "MVIDATE":{"__date__":{"year":2012,"month":9,"day":9}},"IDUSR":"","DOMI1":""}}
         """
-        self.assertDoesNotExist(Partner,id=1334)
+        self.assertDoesNotExist(Partner, id=1334)
         translation.deactivate_all()
         process_line(ln)
-        obj = Partner.objects.get(id=1334) 
-        self.assertDoesNotExist(Company,id=1334)
-        self.assertDoesNotExist(Person,id=1334)
+        obj = Partner.objects.get(id=1334)
+        self.assertDoesNotExist(Company, id=1334)
+        self.assertDoesNotExist(Person, id=1334)
             #~ self.fail("Expected a ValidationError")
         #~ except ValidationError as e:
             #~ self.assertEqual(str(e),"{'first_name': [u'This field cannot be blank.']}")
         #~ self.assertDoesNotExist(Partner,id=1334)
-        ln = ln.replace('"NOTVA":""','"NOTVA":"BE-0999.999.999"')
+        ln = ln.replace('"NOTVA":""', '"NOTVA":"BE-0999.999.999"')
         process_line(ln)
-        company = Company.objects.get(id=1334) 
+        company = Company.objects.get(id=1334)
 
         #~ def test07(self):
         """
@@ -296,27 +300,27 @@ class WatchTimTests(TestCase):
         "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}
         """
-        self.assertDoesNotExist(Client,id=23649)
+        self.assertDoesNotExist(Client, id=23649)
         process_line(ln)
         obj = Client.objects.get(id=23649)
-        self.assertEqual(obj.first_name,"Denis")
+        self.assertEqual(obj.first_name, "Denis")
         s = changes_to_rst(obj.partner_ptr)
         #~ cannot easily test due to `modified` timestamp
         #~ print s
         #~ self.assertEqual(s,"""\
-#~ =========== ============= ======================== ========================================================================================================================================================================================================================================================================================================================================================= ============= ===========
+#~ =========== ============= ======================== ====================
  #~ User        Change Type   Object                   Changes                                                                                                                                                                                                                                                                                                                                                   Object type   object id
-#~ ----------- ------------- ------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------- -----------
+#~ ----------- ------------- ------------------------ --------------------
  #~ watch_tim   Create        REINDERS Denis (23649)   Client(id=23649,created=2013-02-28T00:00:00,modified=2013-05-08T10:57:34.755851,name='Reinders Denis',street='Sch<94>nefelderweg',street_no='123',street_box='a',language='de',activity=80,partner_ptr=23649,first_name='Denis',last_name='Reinders',person_ptr=23649,is_cpas=True,national_id='791228 123-35',client_state=<ClientStates.newcomer:10>)   Klient        23649
-#~ =========== ============= ======================== ========================================================================================================================================================================================================================================================================================================================================================= ============= ===========
+#~ =========== ============= ======================== ====================
 #~ """)
-        
+
         """
         20130508 Company becomes Client
         201305-03 07:49:11 INFO watch_tim : PAR:0000000005 (Company #5 (u'Air Liquide Belgium')) : Company becomes Client
         """
-        
-        Company(name="Air Liquide Belgium",id=5).save()
+
+        Company(name="Air Liquide Belgium", id=5).save()
         ln = """{"method":"PUT","alias":"PAR","id":"0000000005","time":"20130503 07:36:15",
         "user":"","data":{"IDPAR":"0000000005","FIRME":"Air Liquide Belgium",
         "NAME2":"","RUE":"Quai des Vennes","CP":"4020","IDPRT":"V","PAYS":"B",
@@ -332,12 +336,12 @@ class WatchTimTests(TestCase):
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"EDGAR","DOMI1":""}}
         """
         process_line(ln)
-        self.assertDoesNotExist(Client,id=5)
+        self.assertDoesNotExist(Client, id=5)
         obj = Company.objects.get(id=5)
-        self.assertEqual(obj.name,"Air Liquide Belgium")
+        self.assertEqual(obj.name, "Air Liquide Belgium")
         s = changes_to_rst(obj.partner_ptr)
         #~ print s
-        self.assertEqual(s,"""\
+        self.assertEqual(s, """\
 +-----------+-------------+------------------------------+------------------------------------------------------+-------------+-----------+
 | User      | Change Type | Object                       | Changes                                              | Object type | object id |
 +===========+=============+==============================+======================================================+=============+===========+
@@ -357,23 +361,21 @@ class WatchTimTests(TestCase):
 |           |             |                              | - zip_code : '' --> '4020'                           |             |           |
 +-----------+-------------+------------------------------+------------------------------------------------------+-------------+-----------+
 """)
-        
-
 
         """
         Person becomes Company
         """
-        Person(id=9932,first_name="CPAS",last_name="Andenne").save()
+        Person(id=9932, first_name="CPAS", last_name="Andenne").save()
         ln = """{"method":"PUT","alias":"PAR","id":"0000009932","time":"20130503 07:38:16","user":"","data":{"IDPAR":"0000009932","FIRME":"Andenne, CPAS","NAME2":"","RUE":"Rue de l'Hopital","CP":"5300","IDPRT":"V","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"","LANGUE":"F","IDBUD":"","PROF":"65","CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1988,"month":12,"day":9}},"ALLO":"","NB1":"","NB2":"        0","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  22","RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
         process_line(ln)
-        self.assertDoesNotExist(Client,id=9932)
-        self.assertDoesNotExist(Person,id=9932)
+        self.assertDoesNotExist(Client, id=9932)
+        self.assertDoesNotExist(Person, id=9932)
         obj = Company.objects.get(id=9932)
-        self.assertEqual(obj.name,"Andenne, CPAS")
-        
+        self.assertEqual(obj.name, "Andenne, CPAS")
+
         s = changes_to_rst(obj.partner_ptr)
         #~ print s
-        self.assertEqual(s,"""\
+        self.assertEqual(s, """\
 =========== ============== ====================== ================== ============= ===========
  User        Change Type    Object                 Changes            Object type   object id
 ----------- -------------- ---------------------- ------------------ ------------- -----------
@@ -398,19 +400,19 @@ class WatchTimTests(TestCase):
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"",
         "DOMI1":""}}"""
-        self.assertDoesNotExist(Partner,id=1267)
+        self.assertDoesNotExist(Partner, id=1267)
         process_line(ln)
         obj = Partner.objects.get(id=1267)
-        self.assertEqual(obj.name,"Velopa")
+        self.assertEqual(obj.name, "Velopa")
         #~ try:
             #~ process_line(ln)
             #~ self.fail("""Expected ValidationError: {'first_name': [u'Dieses Feld darf nicht leer sein.']}""")
-            #~ # NOTVA ist leer, also will watch_tim eine Person draus machen, 
-            #~ # aber dazu bräuchte er auch einen Vornamen
+            # ~ # NOTVA ist leer, also will watch_tim eine Person draus machen,
+            # ~ # aber dazu bräuchte er auch einen Vornamen
         #~ except ValidationError as e:
             #~ pass
         #~ self.assertDoesNotExist(Partner,id=1267)
-        
+
         ln = """{"method":"PUT","alias":"PAR","id":"0000000665","time":"20130517 12:33:58","user":"",
         "data":{"IDPAR":"0000000665","FIRME":"Petra","NAME2":"","RUE":"Beskensstraat 34","CP":"3520",
         "IDPRT":"I","PAYS":"B","TEL":"011/815911","FAX":"","COMPTE1":"","NOTVA":"BE-0426.896.703",
@@ -423,11 +425,11 @@ class WatchTimTests(TestCase):
         "EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
         process_line(ln)
         obj = Company.objects.get(id=665)
-        self.assertEqual(obj.name,"Petra")
-        
-        #~ INFO PAR:0000007826 (Client #7826 (u'MUSTERMANN Peter (7826)')) : Client becomes Person
+        self.assertEqual(obj.name, "Petra")
+
+        # ~ INFO PAR:0000007826 (Client #7826 (u'MUSTERMANN Peter (7826)')) : Client becomes Person
         #~ WARNING Exception 'ValidationError([u'A Person cannot be parent for a Person'])' while processing changelog line:
-        Client(id=7826,first_name="Peter",last_name="Mustermann").save()
+        Client(id=7826, first_name="Peter", last_name="Mustermann").save()
         ln = """{"method":"PUT","alias":"PAR","id":"0000007826","time":"20130517 12:35:51","user":"",
         "data":{"IDPAR":"0000007826","FIRME":"Mustermann Peter","NAME2":"","RUE":"Burgundstraße","CP":
         "4700","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"",
@@ -440,22 +442,22 @@ class WatchTimTests(TestCase):
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
         "IDUSR":"ALICIA","DOMI1":""}}"""
         process_line(ln)
-        self.assertDoesNotExist(Client,id=7826)
-        
+        self.assertDoesNotExist(Client, id=7826)
+
         """
         20130602 : datum_bis einer primären Begleitung eines Ehemaligen darf
         nicht leer sein. Wenn es das ist, soll watch_tim es auf PAR->DatCrea
         setzen. 
         """
         with translation.override('de'):
-            self.assertDoesNotExist(Coaching,client_id=7826)
-            ln = ln.replace('"NB2":""','"NB2":"940702 234-24"')
+            self.assertDoesNotExist(Coaching, client_id=7826)
+            ln = ln.replace('"NB2":""', '"NB2":"940702 234-24"')
             process_line(ln)
             obj = Client.objects.get(id=7826)
-            self.assertEqual(obj.name,"Mustermann Peter")
+            self.assertEqual(obj.name, "Mustermann Peter")
             s = coachings_to_rst(obj)
             #~ print s
-            self.assertEqual(s,"""\
+            self.assertEqual(s, """\
 ====================== ===== =========== ======== ======== ==================
  Begleitet seit         bis   Begleiter   Primär   Dienst   Beendigungsgrund
 ---------------------- ----- ----------- -------- -------- ------------------
@@ -467,11 +469,11 @@ class WatchTimTests(TestCase):
             """
             Kunde wurde in TIM nach Inaktive versetzt:
             """
-            ln = ln.replace('"IDPRT":"S"','"IDPRT":"I"')
+            ln = ln.replace('"IDPRT":"S"', '"IDPRT":"I"')
             process_line(ln)
             s = coachings_to_rst(obj)
             #~ print s
-            self.assertEqual(s,"""\
+            self.assertEqual(s, """\
 ====================== ========== =========== ======== ======== ==================
  Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
 ---------------------- ---------- ----------- -------- -------- ------------------
@@ -480,31 +482,30 @@ class WatchTimTests(TestCase):
 ====================== ========== =========== ======== ======== ==================
 """)
 
-
             """
             20131029 
             Begleitung wird in Lino manuell als nicht primär markiert.
             Dann wird Kunde in TIM (1) zurück nach S versetzt und (2) 
             von ALICIA zu ROGER.
             """
-            coaching = pcsw.Coaching.objects.get(client=obj,primary=True)
+            coaching = pcsw.Coaching.objects.get(client=obj, primary=True)
             coaching.primary = False
             coaching.save()
             s = coachings_to_rst(obj)
             #~ print s
-            self.assertEqual(s,"""\
+            self.assertEqual(s, """\
 ================ ========== =========== ======== ======== ==================
  Begleitet seit   bis        Begleiter   Primär   Dienst   Beendigungsgrund
 ---------------- ---------- ----------- -------- -------- ------------------
  05.01.06         05.01.06   alicia      Nein     DSBE
 ================ ========== =========== ======== ======== ==================
 """)
-            
-            ln = ln.replace('"IDPRT":"I"','"IDPRT":"S"')
+
+            ln = ln.replace('"IDPRT":"I"', '"IDPRT":"S"')
             process_line(ln)
             s = coachings_to_rst(obj)
             #~ print s
-            self.assertEqual(s,"""\
+            self.assertEqual(s, """\
 ====================== ========== =========== ======== ======== ==================
  Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
 ---------------------- ---------- ----------- -------- -------- ------------------
@@ -513,11 +514,11 @@ class WatchTimTests(TestCase):
  **Total (2 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
 """)
-            ln = ln.replace('"IDUSR":"ALICIA"','"IDUSR":"ROGER"')
+            ln = ln.replace('"IDUSR":"ALICIA"', '"IDUSR":"ROGER"')
             process_line(ln)
             s = coachings_to_rst(obj)
             #~ print s
-            self.assertEqual(s,"""\
+            self.assertEqual(s, """\
 ====================== ========== =========== ======== ======== ==================
  Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
 ---------------------- ---------- ----------- -------- -------- ------------------
@@ -527,7 +528,6 @@ class WatchTimTests(TestCase):
  **Total (3 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
 """)
-
 
         """
         A non-client partner with empty PAR->NoTva will become a Person, not a Company.
@@ -544,15 +544,15 @@ class WatchTimTests(TestCase):
         "CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"",
         "CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
         "IDUSR":"","DOMI1":""}}"""
-        self.assertDoesNotExist(Partner,id=87683)
+        self.assertDoesNotExist(Partner, id=87683)
         process_line(ln)
         #~ try:
             #~ self.fail("Expected ValidationError {'first_name': [u'Dieses Feld darf nicht leer sein.']}")
         #~ except ValidationError as e:
         obj = Partner.objects.get(id=87683)
-        for m in Company,Person, Client, Household:
-            self.assertDoesNotExist(m,id=87683)
-            
+        for m in Company, Person, Client, Household:
+            self.assertDoesNotExist(m, id=87683)
+
         ln = """{"method":"PUT","alias":"PAR","id":"0000004124","time":"20130517 12:34:37",
         "user":"","data":{"IDPAR":"0000004124","FIRME":"Theves-Carlsberg","NAME2":"",
         "RUE":"Werthplatz 22","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
@@ -565,15 +565,14 @@ class WatchTimTests(TestCase):
         "month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},
         "IDUSR":"ROGER","DOMI1":""}}"""
-        self.assertDoesNotExist(Partner,id=4124)
+        self.assertDoesNotExist(Partner, id=4124)
         process_line(ln)
         obj = Company.objects.get(id=4124)
-        ln = ln.replace("BE-0999.999.999","")
+        ln = ln.replace("BE-0999.999.999", "")
         process_line(ln)
-        self.assertDoesNotExist(Company,id=4124)
+        self.assertDoesNotExist(Company, id=4124)
         obj = Household.objects.get(id=4124)
-        
-        
+
         ln = """{"method":"PUT","alias":"PAR","id":"0000001315",
         "time":"20130811 10:33:20","user":"PAC","data":{"IDPAR":"0000001315",
         "FIRME":"C2D System House","NAME2":"",
@@ -590,14 +589,13 @@ class WatchTimTests(TestCase):
         "MVIDATE":{"__date__":{"year":2012,"month":1,"day":25}},
         "IDUSR":"","DOMI1":""}} """
 
-        self.assertDoesNotExist(Partner,id=1315)
+        self.assertDoesNotExist(Partner, id=1315)
         process_line(ln)
         obj = Partner.objects.get(id=1315)
         obj = Company.objects.get(id=1315)
         for m in Person, Client, Household:
-            self.assertDoesNotExist(m,id=1315)
-            
-            
+            self.assertDoesNotExist(m, id=1315)
+
         """{"method":"PUT","alias":"PAR","id":"0000001588","time":"20131001 10:38:08",
         "user":"PAC","data":{"IDPAR":"0000001588","FIRME":"Zentrum f.Aus- u. Weiterbildung des",
         "NAME2":"Mittelstandes","RUE":"Limburgerweg","CP":"4700","IDPRT":"V","PAYS":"B",
@@ -610,7 +608,7 @@ class WatchTimTests(TestCase):
         "CREDIT2":"","IMPDATE":{"__date__":{"year":2011,"month":10,"day":17}},
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"zawm@zawm.be",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
-        
+
         """{"method":"PUT","alias":"PAR","id":"0000022307","time":"20131002 14:40:27","user":"GERD",
         "data":{"IDPAR":"0000022307","FIRME":"Lerho Renée","NAME2":"","RUE":"Lütticher Strasse 321 /A",
         "CP":"4721","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
@@ -621,7 +619,7 @@ class WatchTimTests(TestCase):
         "IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},
         "ATTRIB2":"","CPTSYSI":"","EMAIL":"",
         "MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"ALICIA","DOMI1":""}}"""
-        
+
         """{"method":"PUT","alias":"PXS","id":"0000022307","time":"20131002 14:41:26","user":"GERD",
         "data":{"IDPAR":"0000022307","NAME":"Lerho Renée",
         "GEBDAT":{"__date__":{"year":1994,"month":11,"day":28}},"APOTHEKE":"","HILFE":"",
@@ -635,11 +633,10 @@ class WatchTimTests(TestCase):
         """
 
 
-
-
 def changes_to_rst(master):
     A = settings.SITE.modules.changes.ChangesByMaster
-    return A.request(master).to_rst(column_names = 'user type object diff:30 object_type object_id')
+    return A.request(master).to_rst(column_names='user type object diff:30 object_type object_id')
+
 
 def coachings_to_rst(master):
     A = settings.SITE.modules.pcsw.CoachingsByClient
