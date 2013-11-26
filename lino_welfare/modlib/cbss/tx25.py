@@ -628,20 +628,25 @@ def IT020(n):
 
 
 def IT110(n):
-    #~ info = code_label(n.FiliationType)
-    #~ info.addfrom(n.Parent1,'Name','',NameType)
-    #~ info.addfrom(n.Parent1,'NationalNumber',' (',NationalNumberType,')')
-    #~ info.chunks.append(_('and '))
-    #~ info.addfrom(n.Parent2,'Name','',NameType)
-    #~ info.addfrom(n.Parent2,'NationalNumber',' (',NationalNumberType,')')
     info = Info()
     info.addfrom(n, 'FiliationType', '', FiliationType)
-    #~ info.chunks.append()
     info.addfrom(n, 'Parent1', _('of '), ParentType)
     info.addfrom(n, 'Parent2', _('and '), ParentType)
     info.addfrom(n, 'ActNumber', _("Act no. "))
     info.addfrom(n, 'Place', _("in "), PlaceType)
     info.addfrom(n, 'Graphic', " ")
+    info.add_deldate(n)
+    return info
+
+
+def IT113(n):  # Guardian : Personne qui représente ou assiste
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    info.addfrom(n, 'Status', _("Status"), code_label)
+    info.addfrom(n, 'Justification', _("Justification"), code_label)
+    info.addfrom(n, 'Place', _("in "), PlaceType)
+    info.addfrom(n, 'Graphic', " ")
+    info.addfrom(n, 'Country', " ", CountryType)
     info.add_deldate(n)
     return info
 
@@ -1523,7 +1528,8 @@ register_it_handler('ChoosenResidences',
 register_it_handler('OrganDonations', _("Organ Donations"),
                     'OrganDonation', 'IT192')
 register_it_handler('ResidenceUpdateDates',
-                    _("Residence Update Dates"), 'ResidenceUpdateDate', 'IT251')
+                    _("Residence Update Dates"), 'ResidenceUpdateDate',
+                    'IT251')
 register_it_handler('DocumentTypes', _("Document Types"),
                     'DocumentType', 'IT211')
 register_it_handler('NameModifications',
@@ -1533,13 +1539,20 @@ register_it_handler('CountriesOfOrigin',
 register_it_handler('AddressDeclarationAbroad',
                     _("Address Declaration Abroad"), 'Address', 'IT018')
 register_it_handler('TemporaryRegistrations',
-                    _("Inscriptions Temporaires"), 'TemporaryRegistration', 'IT028')
-register_it_handler('SpecialRetirementCertificates', _(
-    "Special Retirement Certificates"), 'SpecialRetirementCertificate', 'IT074')
+                    _("Inscriptions Temporaires"),
+                    'TemporaryRegistration', 'IT028')
+register_it_handler('SpecialRetirementCertificates',
+                    _("Special Retirement Certificates"),
+                    'SpecialRetirementCertificate', 
+                    'IT074')
 register_it_handler('RetirementCertificates',
-                    _("Retirement Certificates"), 'RetirementCertificate', 'IT073')
+                    _("Retirement Certificates"), 'RetirementCertificate',
+                    'IT073')
+register_it_handler('Guardians',
+                    _("Guardians"), 'Guardian', 'IT113')
 register_it_handler('PseudoNationalNumbers',
-                    _("Pseudo National Numbers"), 'PseudoNationalNumber', 'IT208')
+                    _("Pseudo National Numbers"), 'PseudoNationalNumber',
+                    'IT208')
 
 
 def get_it_handler(itnode):
