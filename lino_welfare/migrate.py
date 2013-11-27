@@ -13,14 +13,11 @@
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-This is a real-world example of how the application developer 
-can provide automatic data migrations for 
-:ref:`dpy`.
+This is a real-world example of how the application developer
+can provide automatic data migrations for :ref:`dpy`.
 
-This module is used because 
-:mod:`lino_welfare.settings.Site` has
-:attr:`migration_module <north.Site.migration_module>` 
-set to ``"lino_welfare.migrate"``.
+This module is used because a :ref:`welfare`
+Site has :setting:`migration_module` set to ``"lino_welfare.migrate"``.
 
 """
 
@@ -1030,6 +1027,7 @@ def migrate_from_1_1_10(globals_dict):
       Removed it in cal.Task.
     - Removed field `uid` in cal.Event and cal.Task
     - Renamed SiteConfig default_calendar to default_event_type
+    - Removed field `help_text` in `accounts.Group` and `accounts.Account`
     """
 
     bv2kw = globals_dict['bv2kw']
@@ -1186,6 +1184,7 @@ def migrate_from_1_1_10(globals_dict):
         return isip_ExamPolicy(**kw)
     globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
 
+
     #~ system_SiteConfig = resolve_model("system.SiteConfig")
     #~ def create_system_siteconfig(id, default_build_method, signer1_id, signer2_id, signer1_function_id, signer2_function_id, next_partner_id, site_company_id, client_calendar_id, client_guestrole_id, team_guestrole_id, prompt_calendar_id, system_note_type_id, propgroup_skills_id, propgroup_softskills_id, propgroup_obstacles_id, attestation_note_nature_id, job_office_id, residence_permit_upload_type_id, work_permit_upload_type_id, driving_licence_upload_type_id, debts_bailiff_type_id, master_budget_id, sector_id, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password):
         #~ kw = dict()
@@ -1220,4 +1219,44 @@ def migrate_from_1_1_10(globals_dict):
         #~ kw.update(cbss_http_password=cbss_http_password)
         #~ return system_SiteConfig(**kw)
     #~ globals_dict.update(create_system_siteconfig=create_system_siteconfig)
+
+
+    accounts_Account = resolve_model("accounts.Account")
+    accounts_Group = resolve_model("accounts.Group")
+
+    def create_accounts_group(id, name, chart_id, ref, account_type, help_text):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(chart_id=chart_id)
+        kw.update(ref=ref)
+        kw.update(account_type=account_type)
+        # kw.update(help_text=help_text)
+        assert not help_text
+        return accounts_Group(**kw)
+
+    def create_accounts_account(id, name, seqno, chart_id, group_id, ref, type, help_text, required_for_household, required_for_person, periods, default_amount):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name',name))
+        kw.update(seqno=seqno)
+        kw.update(chart_id=chart_id)
+        kw.update(group_id=group_id)
+        kw.update(ref=ref)
+        kw.update(type=type)
+        # kw.update(help_text=help_text)
+        assert not help_text
+        kw.update(required_for_household=required_for_household)
+        kw.update(required_for_person=required_for_person)
+        if periods is not None:
+            periods = Decimal(periods)
+        kw.update(periods=periods)
+        if default_amount is not None:
+            default_amount = Decimal(default_amount)
+        kw.update(default_amount=default_amount)
+        return accounts_Account(**kw)
+
+    globals_dict.update(create_accounts_group=create_accounts_group)
+    globals_dict.update(create_accounts_account=create_accounts_account)
+
     return '1.1.11'
