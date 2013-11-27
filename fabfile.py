@@ -12,3 +12,4 @@ setup_from_project('lino_welfare','lino_welfare.settings.demo')
 #~ env.django_databases.append('userdocs')
 #~ env.tolerate_sphinx_warnings = True
 
+env.use_mercurial = False
