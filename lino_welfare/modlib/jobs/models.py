@@ -1371,14 +1371,18 @@ class JobsOverviewByType(Jobs):
             for ct in qs:
                 if ct.applies_from:
                     until = ct.date_ended or ct.applies_until
-                    if not until or (ct.applies_from <= today and until >= today):
+                    if not until or (
+                            ct.applies_from <= today and until >= today):
                         working.append(ct)
             if len(working) > 0:
                 job._working = UL([
                     E.span(
                         #~ ar.obj2html(ct.person,ct.person.last_name.upper()),
                         ar.obj2html(ct.person),
-                        ' bis %s' % dd.dtos(ct.applies_until))
+                        # pgettext("(place)", " at ")
+                        # + unicode(ct.company.name),
+                        ' bis %s' % dd.dtos(ct.applies_until)
+                    )
                     for ct in working])
                 showit = True
             else:

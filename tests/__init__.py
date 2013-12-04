@@ -42,6 +42,7 @@ class QuickTests(BaseTestCase):
 
     #~ def test_docs(self): self.run_django_manage_test('docs')
     def test_general(self): return self.run_docs_doctests('tested/general.rst')
+    def test_newcomers(self): return self.run_docs_doctests('tested/newcomers.rst')
     def test_misc(self): return self.run_docs_doctests('tested/misc.rst')
     def test_debts(self): return self.run_docs_doctests('tested/debts.rst')
     def test_cbss(self): return self.run_docs_doctests('tested/cbss.rst')

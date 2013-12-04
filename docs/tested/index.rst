@@ -19,6 +19,7 @@ using `manage.py run`.
    jobs
    cbss
    courses
+   newcomers
    misc
 
 

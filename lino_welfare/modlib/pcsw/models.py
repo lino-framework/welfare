@@ -36,6 +36,7 @@ from django.core.exceptions import ValidationError
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.translation import string_concat
 from django.utils.encoding import force_unicode
 from django.utils.functional import lazy
@@ -711,68 +712,6 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
                 return qs2[0]
         return None
 
-    def unused_get_active_contract(self):  # version before 20130920
-        """
-        Return the one and only "active contract" of this client.
-        
-        If there is exactly one contract (past, active or future), 
-        return this one. Otherwise:
-        
-        - If there's exactly one that ends in the future, 
-          return this one.
-        
-        There might be no active contract today, 
-        but one contract in the future *or* one contract in the past.
-        
-        Or there may be several contracts,
-        and only one of them ends in the future.
-        
-        Otherwise return `None`, meaning that Lino fails 
-        to decide which contact must be 
-        considerd "active".
-        
-        """
-
-        def the_one_and_only(qs1, qs2):
-            if qs1.count() + qs2.count() == 1:
-                if qs1.count() == 1:
-                    return qs1[0]
-                if qs2.count() == 1:
-                    return qs2[0]
-
-        # past and future
-        qs1 = self.isip_contract_set_by_client.all()
-        qs2 = self.jobs_contract_set_by_client.all()
-        if qs1.count() + qs2.count() == 0:
-            return None
-        c = the_one_and_only(qs1, qs2)
-        if c is not None:
-            return c
-
-        # only present and future contracts
-        today = datetime.date.today()
-        #~ q1 = Q(applies_from__isnull=True) | Q(applies_from__lte=today)
-        #~ q2 = Q(applies_until__isnull=True) | Q(applies_until__gte=today)
-        q2 = Q(applies_until__gte=today)
-        q3 = Q(date_ended__isnull=True) | Q(date_ended__gte=today)
-        #~ flt = Q(q1,q2,q3)
-        flt = Q(q2, q3)
-        qs1 = self.isip_contract_set_by_client.filter(flt)
-        qs2 = self.jobs_contract_set_by_client.filter(flt)
-        if qs1.count() + qs2.count() > 0:
-            return the_one_and_only(qs1, qs2)
-        # there is no "present and future" contract, but more than exactly one,
-        # so they are all past: return the most recent contract.
-        qs1 = self.isip_contract_set_by_client.order_by('-applies_from')
-        qs2 = self.jobs_contract_set_by_client.order_by('-applies_from')
-        if qs1.count() == 0:
-            return qs2[0]
-        if qs2.count() == 0:
-            return qs1[0]
-        if qs2[0].applies_from > qs1[0].applies_from:
-            return qs2[0]
-        return qs1[0]
-
     @dd.virtualfield(models.DateField(_("Contract starts")))
     def applies_from(obj, ar):
         c = obj.get_active_contract()
@@ -784,6 +723,19 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         c = obj.get_active_contract()
         if c is not None:
             return c.applies_until
+
+    @dd.displayfield(_("Active contract"))
+    def active_contract(obj, ar):
+        c = obj.get_active_contract()
+        if c is not None:
+            txt = unicode(daterange_text(c.applies_from, c.applies_until))
+            if isinstance(c, jobs.Contract):
+                if c.company is not None:
+                    # txt += unicode(pgettext("(place)", " at "))
+                    # txt += '\n'
+                    # txt += unicode(c.company)
+                    txt = (txt, E.br(), c.company.name)
+            return ar.obj2html(c, txt)
 
     @dd.displayfield(_("Coaches"))
     def coaches(self, ar):

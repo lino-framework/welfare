@@ -49,4 +49,5 @@ Calendar
 .. actor:: cal.Room
 .. actor:: cal.Priority
 .. actor:: cal.GuestRole
+.. actor:: cal.EventType
 

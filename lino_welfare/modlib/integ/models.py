@@ -44,9 +44,10 @@ properties = dd.resolve_app('properties')
 
 #~ class IntegClients(pcsw.Clients):
 class Clients(pcsw.Clients):
-    # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
-    # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
-    help_text = u"""Wie Kontakte --> Klienten, aber mit DSBE-spezifischen Kolonnen und Filterparametern."""
+    # Black right-pointing triangle : U+25B6   &#9654;
+    # Black right-pointing pointer : U+25BA    &#9658;
+    help_text = """Wie Kontakte --> Klienten, aber mit \
+    DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
     required = dict(user_groups='integ')
     params_panel_hidden = True
@@ -54,12 +55,14 @@ class Clients(pcsw.Clients):
     order_by = "last_name first_name id".split()
     allow_create = False  # see blog/2012/0922
     use_as_default_table = False
-    column_names = "name_column:20 applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
+    column_names = "name_column:20 active_contract:16 \
+    #applies_from #applies_until \
+    national_id:10 gsm:10 address_column age:10 email phone:10 \
+    id bank_account1 aid_type language:10"
 
     parameters = dict(
         group=models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                                 verbose_name=_("Integration phase")),
-        #~ new_since = models.DateField(_("Coached since"),blank=True,default=amonthago),
         language=dd.ForeignKey('languages.Language',
                                verbose_name=_("Language knowledge"),
                                blank=True, null=True),
@@ -71,25 +74,17 @@ class Clients(pcsw.Clients):
             help_text=_(
                 "Show only clients in 'active' integration phases")),
         **pcsw.Clients.parameters)
-    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete client_state new_since'
-    #~ params_layout = 'coached_on coached_by group only_active only_primary also_obsolete new_since'
     params_layout = """
-    client_state coached_by and_coached_by start_date end_date observed_event 
-    aged_from aged_to gender nationality also_obsolete 
-    language wanted_property group only_active only_primary 
+    client_state coached_by and_coached_by start_date end_date observed_event
+    aged_from aged_to gender nationality also_obsolete
+    language wanted_property group only_active only_primary
     """
-
-    #~ @classmethod
-    #~ def get_actor_label(self):
-        #~ return self.model._meta.verbose_name_plural
 
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(Clients, self).param_defaults(ar, **kw)
         kw.update(client_state=pcsw.ClientStates.coached)
         kw.update(coached_by=ar.get_user())
-        #~ logger.info("20130923 integ.Clients.param_defaults %s", kw['coached_by'])
-        #~ raise Exception(20130721)
         return kw
 
     @classmethod
@@ -97,19 +92,16 @@ class Clients(pcsw.Clients):
         #~ ar.param_values.update(client_state = ClientStates.coached)
         qs = super(Clients, self).get_request_queryset(ar)
         if ar.param_values.language:
-            qs = qs.filter(
-                languageknowledge__language=ar.param_values.language).distinct()
+            qs = qs.filter(languageknowledge__language=
+                           ar.param_values.language).distinct()
         if ar.param_values.wanted_property:
-            qs = qs.filter(
-                personproperty__property=ar.param_values.wanted_property).distinct()
+            qs = qs.filter(personproperty__property=
+                           ar.param_values.wanted_property).distinct()
 
         if ar.param_values.group:
             qs = qs.filter(group=ar.param_values.group)
         if ar.param_values.only_active:
             qs = qs.filter(group__active=True)
-        #~ qs = qs.filter(client_state__in=(ClientStates.coached,ClientStates.official))
-        #~ qs = qs.filter(client_state=ClientStates.coached)
-        #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
     @classmethod
@@ -119,7 +111,9 @@ class Clients(pcsw.Clients):
         if ar.param_values.only_active:
             yield unicode(ar.actor.parameters['only_active'].verbose_name)
         if ar.param_values.language:
-            yield unicode(ar.actor.parameters['language'].verbose_name) + ' ' + unicode(ar.param_values.language)
+            yield unicode(
+                ar.actor.parameters['language'].verbose_name) + \
+                ' ' + unicode(ar.param_values.language)
         if ar.param_values.group:
             yield unicode(ar.param_values.group)
 
@@ -173,8 +167,6 @@ class UsersWithClients(dd.VirtualTable):
                 #~ user._detail_action = users.MySettings.default_action
                 yield user
 
-    #~ @dd.virtualfield('pcsw.Client.coach1')
-    #~ @dd.virtualfield(dd.ForeignKey(settings.SITE.user_model,verbose_name=_("Coach")))
     @dd.virtualfield('pcsw.Coaching.user')
     def user(self, obj, ar):
         return obj
@@ -185,8 +177,6 @@ class UsersWithClients(dd.VirtualTable):
 
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
-        #~ return MyPrimaryClients.request(ar.ui,subst_user=obj)
-        #~ return MyClients.request(ar.ui,subst_user=obj,param_values=dict(only_primary=True))
         t = datetime.date.today()
         return Clients.request(param_values=dict(
             only_primary=True, coached_by=obj, start_date=t, end_date=t))
