@@ -4,15 +4,7 @@
 Contacts
 =========
 
-
-.. actor:: contacts.Partner
-
-    Toute personne physique ou morale est enregistrée 
-    dans Lino en tant que :ddref:`contacts.Partner`.
-
-    Lino différencie les types de Partenaires suivants:
-
-    .. django2rst:: contacts.Partner.print_subclasses_graph()
+.. include:: /include/contacts.rst
 
 
 .. actor:: contacts.Partner.is_obsolete
@@ -32,18 +24,8 @@ Contacts
 
 
 
-.. actor:: contacts.Person
-
-.. actor:: contacts.Company
-
-.. actor:: contacts.Role
-
-.. actor:: contacts.RoleType
-
-.. actor:: contacts.CompanyType
 
 .. actor:: pcsw.Activity
-
 
 .. actor:: households.Household
 

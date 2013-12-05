@@ -4,9 +4,7 @@
 System
 ======
 
-.. actor:: contenttypes.ContentType
-
-.. actor:: system.SiteConfig
+.. include:: /include/system.rst
 
 .. actor:: notes.EventType
 .. actor:: notes.NoteType

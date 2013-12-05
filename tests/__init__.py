@@ -18,30 +18,24 @@ execfile(ROOTDIR.child('lino_welfare','project_info.py'),globals())
 
 from djangosite.utils.pythontest import TestCase
 
-#~ class BaseTestCase(SubProcessTestCase):
+
 class BaseTestCase(TestCase):
-    #~ demo_settings_module = "lino_welfare.settings.test"
-    #~ default_environ = dict(DJANGO_SETTINGS_MODULE="lino_welfare.demo.settings")
     project_root = ROOTDIR
-    
-    
+
+
 class DemoTests(BaseTestCase):
     """
     $ python setup.py test -s tests.DemoTests.test_admin
     """
-    #~ def test_admin(self): self.run_django_admin_test("lino_welfare.settings.test")
-    def test_admin(self): self.run_django_manage_test()
-    
-#~ class NewDemoTests(BaseTestCase):
-    #~ def test_admin(self): self.run_django_admin_test(self.demo_settings_module)
-    
-class QuickTests(BaseTestCase):
-    
-    #~ env.docs_doctests.append('tested/misc.rst')
-    #~ env.docs_doctests.append('tested/debts.rst')
+    def test_admin(self):
+        self.run_django_manage_test()
 
-    #~ def test_docs(self): self.run_django_manage_test('docs')
-    def test_general(self): return self.run_docs_doctests('tested/general.rst')
+    
+class DocsTests(BaseTestCase):
+    
+    def test_general(self):
+        return self.run_docs_doctests('tested/general.rst')
+
     def test_newcomers(self): return self.run_docs_doctests('tested/newcomers.rst')
     def test_misc(self): return self.run_docs_doctests('tested/misc.rst')
     def test_debts(self): return self.run_docs_doctests('tested/debts.rst')
@@ -52,6 +46,3 @@ class QuickTests(BaseTestCase):
 
     def test_packages(self): self.run_packages_test(SETUP_INFO['packages'])
 
-#~ class RemoteAuthTests(BaseTestCase):
-    #~ demo_settings_module = "lino_welfare.settings.test"
-    #~ def test_new_demo(self): return self.run_unittest('tests.welfare_demo_tests')

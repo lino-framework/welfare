@@ -21,10 +21,10 @@ The following snippet reproduces this bug:
 >>> # url = 'http://welfare-demo.lino-framework.org/api/newcomers/NewClients?fmt=csv'
 >>> url = '/api/newcomers/NewClients?fmt=csv'
 >>> res = client.get(url,REMOTE_USER='rolf')
->>> pprint(res.status_code)
+>>> print(res.status_code)
 200
->>> pprint(res.content[:24])
-'name_column,client_state'
+>>> print(res.content[:24])
+name_column,client_state
 
 
 

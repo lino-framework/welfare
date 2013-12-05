@@ -14,9 +14,8 @@ syntax: glob
 *.doctrees
 dist
 tmp
-*/SciTE.session
-*/test.db
-*/default.db
+SciTE.session
+default.db
 media
 docs/api
 

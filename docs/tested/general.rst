@@ -25,9 +25,9 @@ Test whether :meth:`get_db_overview_rst
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
- accounts.Account               15        49
+ accounts.Account               14        49
  accounts.Chart                 5         1
- accounts.Group                 9         7
+ accounts.Group                 8         7
  cal.Calendar                   7         10
  cal.Event                      23        ...
  cal.EventType                  21        10
@@ -52,7 +52,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Role                  4         10
  contacts.RoleType              6         5
  contenttypes.ContentType       4         98
- countries.City                 10        73
+ countries.City                 10        75
  countries.Country              8         8
  courses.Course                 5         3
  courses.CourseContent          2         2
