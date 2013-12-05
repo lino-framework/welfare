@@ -12,23 +12,42 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
+"""
+.. setting:: cbss.cbss_live_tests
 
-class SiteMixin(object):
+Whether unit tests should try to really connect to the cbss.
+Some test cases of the test suite would fail with a timeout if run 
+from behind an IP address that is not registered at the :term:`CBSS`.
+These tests are skipped by default. To activate them,
+set `cbss_live_tests` to `True` in your :xfile:`settings.py`.
+    
+.. setting:: cbss.cbss_environment
+
+Either `None` or one of 'test', 'acpt' or 'prod'.
+See :mod:`lino_welfare.modlib.cbss.models`.
+Leaving this to `None` means that the cbss app
+is "inactive" even if installed.
+
+"""
+
+from lino import ad
+from django.utils.translation import ugettext_lazy as _
+
+
+class App(ad.App):
+    verbose_name = _("CBSS")
 
     cbss_live_tests = False
-    """
-    Whether unit tests should try to really connect to the cbss.
-    Some test cases of the test suite would fail with a timeout if run 
-    from behind an IP address that is not registered at the :term:`CBSS`.
-    These tests are skipped by default. To activate them, 
-    set `cbss_live_tests` to `True` in your :xfile:`settings.py`.
-    
-    """
 
     #~ cbss_environment = None
     cbss_environment = 'test'
-    """
-    Either `None` or one of 'test', 'acpt' or 'prod'.
-    See :mod:`lino_welfare.modlib.cbss.models`.
-    Leaving this to `None` means that the cbss module is "inactive" even if installed.
-    """
+
+    def __init__(self, site):
+        super(App, self).__init__(site)
+        for k in 'cbss_environment cbss_live_tests'.split():
+            if hasattr(site, k):
+                v = getattr(site, k)
+                raise Exception("""%s has an attribute '%s'!.
+You probably want to replace this by:
+SITE.plugins.cbss.configure(%s=%r)
+""" % (site, k, k, v))

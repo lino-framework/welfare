@@ -57,7 +57,7 @@ TIMEOUT_RESPONSE = '<urlopen error [Errno 10060] A connection attempt '\
 TIMEOUT_MESSAGE = """\
 We got a timeout. 
 That's normal when this test is run behind an IP address that is not registered.
-Set your :attr:`lino.Lino.cbss_live_tests` setting to False to skip this test.
+Set your :setting:`cbss.cbss_live_tests` setting to False to skip this test.
 """
 
 
@@ -91,7 +91,7 @@ class QuickTest(TestCase):
         # save site settings
         #~ saved_cbss_environment = settings.SITE.cbss_environment
         #~ saved_cbss_user_params = settings.SITE.cbss_user_params
-        saved_cbss_live_tests = settings.SITE.cbss_live_tests
+        saved_cbss_live_tests = settings.SITE.plugins.cbss.cbss_live_tests
 
         """
         set fictive user params and run some offline tests
@@ -217,19 +217,19 @@ class QuickTest(TestCase):
 
         #~ settings.SITE.cbss_user_params = saved_cbss_user_params
         #~ settings.SITE.cbss_environment = saved_cbss_environment
-        settings.SITE.cbss_live_tests = saved_cbss_live_tests
+        settings.SITE.plugins.cbss.cbss_live_tests = saved_cbss_live_tests
 
         """
         Skip live tests unless we are in test environment.
         Otherwise we would have to build /media/chache/wsdl files
         """
-        if settings.SITE.cbss_environment != 'test':
+        if settings.SITE.plugins.cbss.cbss_environment != 'test':
             return
 
         """
         Skip live tests if `cbss_live_tests` is False
         """
-        if not settings.SITE.cbss_live_tests:
+        if not settings.SITE.plugins.cbss.cbss_live_tests:
             return
 
         resp = req.execute_request()
@@ -321,7 +321,7 @@ Not actually sending because environment is empty. Request would be:
         Skip live tests unless we are in test environment.
         Otherwise we would have to build /media/chache/wsdl files
         """
-        if settings.SITE.cbss_environment != 'test':
+        if settings.SITE.plugins.cbss.cbss_environment != 'test':
             return
 
         #~ """
@@ -334,7 +334,7 @@ Not actually sending because environment is empty. Request would be:
         run the first request for real
         """
         reply = req.execute_request()
-        if settings.SITE.cbss_live_tests:
+        if settings.SITE.plugins.cbss.cbss_live_tests:
             if req.response_xml == TIMEOUT_RESPONSE:
                 self.fail(TIMEOUT_MESSAGE)
             #~ print 20120523, reply
@@ -356,7 +356,7 @@ description : A validation error occurred.
             national_id='70100853190',
             language='fr', history=False)
         reply = req.execute_request()
-        if settings.SITE.cbss_live_tests:
+        if settings.SITE.plugins.cbss.cbss_live_tests:
             expected = """\
 CBSS error MSG00012:
 value : NO_RESULT
@@ -386,7 +386,7 @@ description : The given SSIN is not integrated correctly.
             # this fails to fail if the suite is being run a second time
             req = cbss.ManageAccessRequest(**kw)
             reply = req.execute_request()
-            if settings.SITE.cbss_live_tests:
+            if settings.SITE.plugins.cbss.cbss_live_tests:
                 expected = """\
 CBSS error 10000:
 Severity : ERROR
@@ -402,7 +402,7 @@ AuthorCodeList : CBSS"""
         kw.update(birth_date=IncompleteDate(1968, 6, 1))
         req = cbss.ManageAccessRequest(**kw)
         reply = req.execute_request()
-        if False and settings.SITE.cbss_live_tests:
+        if False and settings.SITE.plugins.cbss.cbss_live_tests:
             expected = """\
 <ns3:ManageAccessReply xmlns:ns3="http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess">
    <ns3:OriginalRequest>
@@ -433,7 +433,7 @@ AuthorCodeList : CBSS"""
             national_id='68060105329',
             language='fr', history=False)
         reply = req.execute_request()
-        if settings.SITE.cbss_live_tests:
+        if settings.SITE.plugins.cbss.cbss_live_tests:
             expected = """\
 todo"""
             #~ print reply

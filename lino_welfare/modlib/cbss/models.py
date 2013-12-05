@@ -393,12 +393,6 @@ The raw XML response received.
     #~ print_action = mixins.DirectPrintAction(required=dict(states=['ok','warnings']))
     do_print = mixins.DirectPrintAction()
 
-    #~ def save(self,*args,**kw):
-        #~ if not self.environment:
-            #~ self.environment = settings.SITE.cbss_environment or ''
-        #~ super(CBSSRequest,self).save(*args,**kw)
-    #~ def disable_editing(self,ar):
-        #~ if self.ticket: return True
     def on_duplicate(self, ar, master):
         """
         When duplicating a CBSS request, we want re-execute it. 
@@ -487,7 +481,7 @@ The raw XML response received.
         if now is None:
             now = datetime.datetime.now()
         if environment is None:
-            environment = settings.SITE.cbss_environment or ''
+            environment = settings.SITE.plugins.cbss.cbss_environment or ''
 
         self.environment = environment
         self.sent = now
@@ -495,7 +489,7 @@ The raw XML response received.
         self.debug_messages = ''
         self.info_messages = ''
 
-        if not settings.SITE.cbss_live_tests:
+        if not settings.SITE.plugins.cbss.cbss_live_tests:
             if simulate_response is None and environment:
                 self.validate_request()
                 self.status = RequestStates.validated
@@ -688,7 +682,7 @@ class SSDNRequest(CBSSRequest):
             xmlString = unicode(wrapped_srvreq)
             self.request_xml = xmlString
             #~ logger.info("20120521 Gonna sendXML(<xmlString>):\n%s",xmlString)
-            if not settings.SITE.cbss_live_tests:
+            if not settings.SITE.plugins.cbss.cbss_live_tests:
                 #~ raise Warning("NOT sending because `cbss_live_tests` is False:\n" + unicode(xmlString))
                 raise Warning(
                     "NOT sending because `cbss_live_tests` is False:\n" + xmlString)
@@ -1753,7 +1747,7 @@ def setup_site_cache(self, force):
     import logging
     logger = logging.getLogger(__name__)
 
-    environment = settings.SITE.cbss_environment
+    environment = settings.SITE.plugins.cbss.cbss_environment
     if not environment:
         return  # silently return
 
