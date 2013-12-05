@@ -79,11 +79,6 @@ class Site(Site, cbss.SiteMixin):
     #~ use_eid_jslib = False
     #~ use_eidreader = True
 
-    def get_installed_plugins(self):
-        for p in super(Site, self).get_installed_plugins():
-            yield p
-        yield 'lino.mixins.beid.BeIdReaderPlugin'
-
     #~ admin_url = '/admin'
 
     def setup_choicelists(self):
@@ -241,6 +236,7 @@ class Site(Site, cbss.SiteMixin):
         yield 'lino_welfare.modlib.cbss'
         # notes demo fixture creates notes for Clients
         yield 'lino_welfare.modlib.notes'
+        yield 'lino.apps.beid'
 
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns
