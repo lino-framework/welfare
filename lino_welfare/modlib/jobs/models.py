@@ -66,7 +66,7 @@ from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
 
 from lino.modlib.countries.models import CountryCity
-from lino.modlib.cal.utils import DurationUnits
+from lino.apps.cal.utils import DurationUnits
 
 uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')

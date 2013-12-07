@@ -47,7 +47,7 @@ from django.conf import settings
 #~ from lino import choices_method, simple_choices_method
 #~ from lino.modlib.contacts import models as contacts
 #~ from lino.modlib.users import models as users
-from lino.modlib.cal.utils import amonthago
+from lino.apps.cal.utils import amonthago
 
 
 #~ from lino_welfare.models import Person

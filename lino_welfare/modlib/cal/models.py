@@ -25,16 +25,13 @@ from django.contrib.humanize.templatetags.humanize import naturaltime, naturalda
 
 from lino import dd
 
-#~ dd.extends_app('lino.modlib.cal',globals())
-
-#~ PARENT_APP = 'lino.modlib.cal'
-from lino.modlib.cal.models import *
+from lino.apps.cal.models import *
 
 #~ add = EventEvents.add_item
 #~ add('30', _("Visit"),'visit')
 
 
-from lino.modlib.cal.workflows import take, feedback
+from lino.apps.cal.workflows import take, feedback
 
 EventStates.published.text = _("Notified")
 

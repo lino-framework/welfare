@@ -48,8 +48,6 @@ from lino import dd
 from lino.modlib.reception.models import *
 
 
-from lino.modlib.cal.models import GuestStates
-
 from lino_welfare.modlib.reception import App
 from lino.mixins import beid
 

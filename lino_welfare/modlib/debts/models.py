@@ -52,7 +52,7 @@ from lino.modlib.contacts import models as contacts
 from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
-from lino.modlib.cal import models as cal
+from lino.apps.cal import models as cal
 #~ from lino.modlib.users import models as users
 #~ from lino.utils.choicelists import HowWell, Gender
 #~ from lino.core.perms import UserLevels

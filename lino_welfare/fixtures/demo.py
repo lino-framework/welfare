@@ -44,7 +44,7 @@ from lino.utils import dblogger
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
-from lino.modlib.cal.utils import DurationUnits
+from lino.apps.cal.utils import DurationUnits
 
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth

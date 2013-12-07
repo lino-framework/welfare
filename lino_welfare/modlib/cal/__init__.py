@@ -13,7 +13,7 @@
 # along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.modlib.cal`
+Lino-Welfare extension of :mod:`lino.apps.cal`
 """
 
 from lino import ad
@@ -21,5 +21,5 @@ from lino import ad
 
 class App(ad.App):
 
-    extends = 'lino.modlib.cal'
+    extends = 'lino.apps.cal'
     extends_models = ['cal.Event', 'cal.EventType']

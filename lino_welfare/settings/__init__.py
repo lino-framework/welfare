@@ -16,14 +16,14 @@
 Default settings of a :ref:`welfare` site.
 
 """
-import os
+# import os
 
 from lino.projects.std.settings import *
-#~ from lino_welfare import __version__, __url__, __name__
-#~ from lino_welfare.version import *
-import lino_welfare
-from lino_welfare.modlib import cbss
-from lino.modlib import cal
+# from lino_welfare import __version__, __url__, __name__
+# from lino_welfare.version import *
+# import lino_welfare
+# from lino_welfare.modlib import cbss
+# from lino.modlib import cal
 from lino_welfare import SETUP_INFO
 
 
@@ -209,6 +209,7 @@ class Site(Site):
         #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
         yield 'lino_welfare.modlib.cal'
+        yield 'lino.apps.extensible'
         #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.households'
         yield 'lino_welfare.modlib.reception'

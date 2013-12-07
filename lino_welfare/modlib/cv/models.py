@@ -69,7 +69,7 @@ from lino.mixins.printable import DirectPrintAction, Printable
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.properties import models as properties
-from lino.modlib.cal.models import update_reminder
+from lino.apps.cal.models import update_reminder
 #~ from lino.modlib.contacts.models import Contact
 from lino.core.dbutils import resolve_model, UnresolvedModel
 
