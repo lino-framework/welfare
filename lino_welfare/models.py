@@ -98,22 +98,29 @@ courses = dd.resolve_app('courses')
 
 def customize_users():
 
-    dd.inject_field(settings.SITE.user_model,
-                    'coaching_type',
-                    dd.ForeignKey('pcsw.CoachingType',
-                                  blank=True, null=True,
-            help_text="""The default CoachingType used when creating Coachings."""))
-    dd.inject_field(settings.SITE.user_model,
-                    'coaching_supervisor',
-                    models.BooleanField(
-                        _("Notify me when a coach has been assigned"),
-            help_text=u"""\
-Wenn ein Neuantrag einem Begleiter zugewiesen wurde, wird außer dem Begleiter auch dieser Benutzer benachrichtigt."""))
+    dd.inject_field(
+        settings.SITE.user_model,
+        'coaching_type',
+        dd.ForeignKey(
+            'pcsw.CoachingType',
+            blank=True, null=True,
+            help_text="""The default CoachingType used when \
+            creating Coachings."""))
+    dd.inject_field(
+        settings.SITE.user_model,
+        'coaching_supervisor',
+        models.BooleanField(
+            _("Notify me when a coach has been assigned"),
+            default=False,
+            help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
+            wurde, wird außer dem Begleiter auch dieser Benutzer \
+            benachrichtigt."""))
 
 
 def customize_siteconfig():
     """
-    Injects application-specific fields to :class:`SiteConfig <lino.models.SiteConfig>`.
+    Injects application-specific fields to
+    :class:`SiteConfig <lino.models.SiteConfig>`.
     """
 
     dd.inject_field('system.SiteConfig',

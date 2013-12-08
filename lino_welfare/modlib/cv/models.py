@@ -127,7 +127,7 @@ class LanguageKnowledge(dd.Model):
     #~ language = fields.LanguageField()
     spoken = properties.HowWell.field(blank=True, verbose_name=_("spoken"))
     written = properties.HowWell.field(blank=True, verbose_name=_("written"))
-    native = models.BooleanField(verbose_name=_("native language"))
+    native = models.BooleanField(_("native language"),default=False)
     cef_level = CefLevel.field(blank=True)  # ,null=True)
 
     def __unicode__(self):

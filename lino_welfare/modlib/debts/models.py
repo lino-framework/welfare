@@ -171,12 +171,13 @@ class Budget(mixins.AutoUser, mixins.CachedPrintable, mixins.Duplicable):
 
     #~ allow_cascaded_delete = True
 
-    date = models.DateField(_("Date"), blank=True, default=datetime.date.today)
-    #~ partner = models.ForeignKey('contacts.Partner',blank=True,null=True)
+    date = models.DateField(
+        _("Date"), blank=True,
+        default=datetime.date.today)
     partner = models.ForeignKey('contacts.Partner')
-    #~ closed = models.BooleanField(verbose_name=_("Closed"))
     print_todos = models.BooleanField(
-        verbose_name=_("Print to-do list"),
+        _("Print to-do list"),
+        default=False,
         help_text=_("""\
 Einträge im Feld "To-do" werden nur ausgedruckt, 
 wenn die Option "To-dos drucken" des Budgets angekreuzt ist. 
@@ -185,13 +186,15 @@ Diese Option wird aber momentan noch ignoriert
 weil wir noch überlegen müssen, *wie* sie ausgedruckt werden sollen. 
 Vielleicht mit Fußnoten?"""))
     print_empty_rows = models.BooleanField(
-        verbose_name=_("Print empty rows"),
+        _("Print empty rows"),
+        default=False,
         help_text=_("""Check this to print also empty rows for later completion."""))
     #~ ignore_yearly_incomes = models.BooleanField(
         #~ verbose_name=_("Ignore yearly incomes"),
         #~ help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.DebtsByBudget`."""))
     include_yearly_incomes = models.BooleanField(
-        verbose_name=_("Include yearly incomes"),
+        _("Include yearly incomes"),
+        default=False,
         help_text=_("""Check this to include yearly incomes in the Debts Overview table of this Budget."""))
     intro = dd.RichTextField(_("Introduction"), format="html", blank=True)
     conclusion = dd.RichTextField(_("Conclusion"), format="html", blank=True)
@@ -375,7 +378,7 @@ The total monthly amount available for debts distribution."""))
                           amount=me.amount)
                 e.account_changed(ar)
                 entries.append(e)
-        if True:
+        if False:  # fails in Django 1.6
             bulk_create_with_manual_ids(Entry, entries)
         else:
             for e in entries:
@@ -657,9 +660,11 @@ class Entry(SequencedBudgetComponent):
 Hier optional einen Akteur angeben, wenn der Eintrag 
 sich nicht auf den Gesamthaushalt bezieht.""")
     #~ amount = dd.PriceField(_("Amount"),default=0)
-    circa = models.BooleanField(verbose_name=_("Circa"))
+    circa = models.BooleanField(_("Circa"),
+        default=False)
     distribute = models.BooleanField(
-        verbose_name=_("Distribute"),
+        _("Distribute"),
+        default=False,
         help_text=u"""\
 Ob diese Schuld in die Schuldenverteilung aufgeommen wird oder nicht."""
     )

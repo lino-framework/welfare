@@ -65,6 +65,7 @@ from lino.mixins import beid
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
+extensible = dd.resolve_app('extensible')
 properties = dd.resolve_app('properties')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
@@ -292,52 +293,36 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
 
     workflow_state_field = 'client_state'
 
-    # ,null=True)
     remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
     gesdos_id = models.CharField(max_length=40, blank=True,
                                  # null=True,
                                  verbose_name=_("Gesdos ID"))
 
-    is_cpas = models.BooleanField(verbose_name=_("receives social help"))
-    is_senior = models.BooleanField(verbose_name=_("is senior"))
-    #~ is_minor = models.BooleanField(verbose_name=_("is minor"))
+    is_cpas = models.BooleanField(_("receives social help"), default=False)
+    is_senior = models.BooleanField(_("is senior"), default=False)
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
-    #~ is_dsbe = models.BooleanField(verbose_name=_("is coached"),default=False)
-    #~ "Indicates whether this Person is coached."
-
-    #~ coached_from = models.DateField(
-        #~ blank=True,null=True,
-        #~ verbose_name=_("Coached from"))
-    #~ coached_until = models.DateField(
-        #~ blank=True,null=True,
-        #~ verbose_name=_("until"))
-
-    #~ coach1 = dd.ForeignKey(settings.SITE.user_model,
-        #~ blank=True,null=True,
-        #~ verbose_name=_("Coach 1"),related_name='coached1')
-    #~ coach2 = dd.ForeignKey(settings.SITE.user_model,
-        #~ blank=True,null=True,
-        #~ verbose_name=_("Coach 2"),related_name='coached2')
 
     birth_place = models.CharField(_("Birth place"),
                                    max_length=200,
                                    blank=True,
                                    #~ null=True
                                    )
-    birth_country = dd.ForeignKey("countries.Country",
-                                  blank=True, null=True,
-                                  verbose_name=_("Birth country"), related_name='by_birth_place')
-    #~ civil_state = models.CharField(max_length=1,
-        # ~ blank=True,# null=True,
-        #~ verbose_name=_("Civil state"),
-        #~ choices=CIVIL_STATE_CHOICES)
+    birth_country = dd.ForeignKey(
+        "countries.Country",
+        blank=True, null=True,
+        verbose_name=_("Birth country"), related_name='by_birth_place')
+
     civil_state = CivilState.field(blank=True)
 
-    health_insurance = dd.ForeignKey('contacts.Company', blank=True, null=True,
-                                     verbose_name=_("Health insurance"), related_name='health_insurance_for')
-    pharmacy = dd.ForeignKey('contacts.Company', blank=True, null=True,
-                             verbose_name=_("Pharmacy"), related_name='pharmacy_for')
+    health_insurance = dd.ForeignKey(
+        'contacts.Company', blank=True, null=True,
+        verbose_name=_("Health insurance"),
+        related_name='health_insurance_for')
+    pharmacy = dd.ForeignKey(
+        'contacts.Company', blank=True, null=True,
+        verbose_name=_("Pharmacy"), 
+        related_name='pharmacy_for')
 
     #~ residence_type = models.SmallIntegerField(blank=True,null=True,
         #~ verbose_name=_("Residence type"),
@@ -352,9 +337,9 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         _("Seeking work since"), blank=True, null=True)
     #~ work_permit_exempt = models.BooleanField(verbose_name=_("Work permit exemption"))
     needs_residence_permit = models.BooleanField(
-        verbose_name=_("Needs residence permit"))
+        _("Needs residence permit"), default=False)
     needs_work_permit = models.BooleanField(
-        verbose_name=_("Needs work permit"))
+        _("Needs work permit"), default=False)
     #~ work_permit_valid_until = models.DateField(blank=True,null=True,verbose_name=_("Work permit valid until"))
     work_permit_suspended_until = models.DateField(
         blank=True, null=True, verbose_name=_("suspended until"))
@@ -362,17 +347,17 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         #~ verbose_name=_("aid type"))
 
     # Arbeitslosengeld
-    income_ag = models.BooleanField(verbose_name=_("unemployment benefit"))
+    income_ag = models.BooleanField(_("unemployment benefit"), default=False)
     # Wartegeld
-    income_wg = models.BooleanField(verbose_name=_("waiting pay"))
+    income_wg = models.BooleanField(_("waiting pay"), default=False)
     # Krankengeld
-    income_kg = models.BooleanField(verbose_name=_("sickness benefit"))
+    income_kg = models.BooleanField(_("sickness benefit"), default=False)
     income_rente = models.BooleanField(
-        verbose_name=_("retirement pension"))  # Rente
+        _("retirement pension"), default=False)  # Rente
     # Andere Einkommen
-    income_misc = models.BooleanField(verbose_name=_("other incomes"))
+    income_misc = models.BooleanField(_("other incomes"), default=False)
 
-    is_seeking = models.BooleanField(_("is seeking work"))
+    is_seeking = models.BooleanField(_("is seeking work"), default=False)
     unavailable_until = models.DateField(
         blank=True, null=True, verbose_name=_("Unavailable until"))
     unavailable_why = models.CharField(max_length=100,
@@ -755,7 +740,7 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
     def find_appointment(self, ar):
         elems = []
         for obj in self.coachings_by_client.all():
-            sar = cal.CalendarPanel.request(
+            sar = extensible.CalendarPanel.request(
                 subst_user=obj.user, current_project=self.pk)
             elems += [ar.href_to_request(sar, obj.user.username), ' ']
         return E.div(*elems)
@@ -873,8 +858,8 @@ class ClientDetail(dd.FormLayout):
     #~ """,label = _("Correspondence"))
 
     calendar = dd.Panel("""
-    find_appointment 
-    cal.EventsByProject 
+    find_appointment
+    cal.EventsByProject
     cal.TasksByProject
     """, label=_("Calendar"))
 
@@ -1422,7 +1407,7 @@ class Activity(dd.Model):
         verbose_name = _("activity")
         verbose_name_plural = _("activities")
     name = models.CharField(max_length=80)
-    lst104 = models.BooleanField(_("Appears in Listing 104"))
+    lst104 = models.BooleanField(_("Appears in Listing 104"), default=False)
 
     def __unicode__(self):
         return unicode(self.name)
@@ -1824,9 +1809,12 @@ during a given period.
     #~ state = CoachingStates.field(default=CoachingStates.active)
     #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType, blank=True, null=True)
-    primary = models.BooleanField(_("Primary"),
-        help_text=_("""There's at most one primary coach per client. 
-Enabling this field will automatically make the other coachings non-primary."""))
+    primary = models.BooleanField(
+        _("Primary"),
+        default=False,
+        help_text=_("""There's at most one primary coach per client. \
+        Enabling this field will automatically make the other \
+        coachings non-primary."""))
 
     ending = models.ForeignKey(CoachingEnding,
                                related_name="%(app_label)s_%(class)s_set",

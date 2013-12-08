@@ -16,10 +16,10 @@
 Lino-Welfare extension of :mod:`lino.apps.cal`
 """
 
-from lino import ad
+from lino.apps.cal import App
 
 
-class App(ad.App):
-
+class App(App):
+    
     extends = 'lino.apps.cal'
     extends_models = ['cal.Event', 'cal.EventType']

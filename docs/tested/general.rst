@@ -20,7 +20,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-29 applications: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
+30 applications: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, extensible, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
 97 models:
 ============================== ========= =======
  Name                           #fields   #rows
