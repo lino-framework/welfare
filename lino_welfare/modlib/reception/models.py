@@ -51,9 +51,9 @@ from lino.modlib.reception.models import *
 from lino_welfare.modlib.reception import App
 from lino.mixins import beid
 
-cal = dd.resolve_app('cal')
 pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
+extensible = dd.resolve_app('extensible')
 
 dd.inject_field('notes.NoteType', 'is_attestation',
                 models.BooleanField(_("attestation"), default=False))
@@ -219,8 +219,10 @@ class CreateEventActionsByClient(ButtonsTable):
                 #~ subst_user=user,
                 #~ current_project=ar.master_instance.pk)
 
-            sar = ar.spawn(cal.CalendarPanel.default_action,
-                           current_project=ar.master_instance.pk, subst_user=user)
+            sar = ar.spawn(
+                extensible.CalendarPanel.default_action,
+                current_project=ar.master_instance.pk,
+                subst_user=user)
             btn = sar.as_button(unicode(user))
 
             if btn is not None:
@@ -400,7 +402,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
         #~ elems += [ar.href_to_request(sar,**kw),' ']
 
         if obj.user.profile is not None:
-            sar = cal.CalendarPanel.request(
+            sar = extensible.CalendarPanel.request(
                 subst_user=obj.user,
                 current_project=obj.client.pk)
             elems += [ar.href_to_request(sar, _("Find date"),
