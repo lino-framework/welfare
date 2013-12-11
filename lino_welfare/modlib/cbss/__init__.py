@@ -42,12 +42,12 @@ class App(ad.App):
     #~ cbss_environment = None
     cbss_environment = 'test'
 
-    def __init__(self, site):
-        super(App, self).__init__(site)
+    def __init__(self, *args):
+        super(App, self).__init__(*args)
         for k in 'cbss_environment cbss_live_tests'.split():
-            if hasattr(site, k):
-                v = getattr(site, k)
+            if hasattr(self.site, k):
+                v = getattr(self.site, k)
                 raise Exception("""%s has an attribute '%s'!.
 You probably want to replace this by:
 SITE.plugins.cbss.configure(%s=%r)
-""" % (site, k, k, v))
+""" % (self.site, k, k, v))
