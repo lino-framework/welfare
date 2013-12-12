@@ -214,11 +214,6 @@ class CreateEventActionsByClient(ButtonsTable):
         if ar.master_instance is None:
             return
         for user in settings.SITE.user_model.objects.exclude(profile__isnull=True):
-            #~ sar = cal.CalendarPanel.request(
-                #~ renderer=settings.SITE.ui.ext_renderer,
-                #~ subst_user=user,
-                #~ current_project=ar.master_instance.pk)
-
             sar = ar.spawn(
                 extensible.CalendarPanel.default_action,
                 current_project=ar.master_instance.pk,

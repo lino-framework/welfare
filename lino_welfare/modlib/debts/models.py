@@ -417,8 +417,6 @@ The total monthly amount available for debts distribution."""))
                 #~ raise Exception("20130327")
                 return
             sar.setup_from(ar)
-            #~ sar.renderer = settings.SITE.ui.ext_renderer
-            #~ sar.setup_from(ar)
             chunks.append(E.h2(unicode(sar.get_title())))
             #~ chunks.append(ar.ui.table2xhtml(sar))
             chunks.append(sar.table2xhtml())
