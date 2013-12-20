@@ -673,14 +673,13 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
     #~ driving_licence.return_type = dd.DisplayField(_("driving licence"))
 
     def get_active_contract(self):
-        """
-        Return the one and only "active contract" of this client.
-        A contract is active if 
-        `applies_from` is <= `today` and 
+        """Return the one and only "active contract" of this client.  A
+        contract is active if `applies_from` is <= `today` and
         `(date_ended or applies_until)` >= `today`.
-        
-        Returns `None` if there is either no contract or more than one 
+
+        Returns `None` if there is either no contract or more than one
         active contract.
+
         """
 
         today = datetime.date.today()
@@ -708,6 +707,13 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         c = obj.get_active_contract()
         if c is not None:
             return c.applies_until
+
+    @dd.virtualfield(models.ForeignKey('contacts.Company',
+                                       _("Working at ")))
+    def contract_company(obj, ar):
+        c = obj.get_active_contract()
+        if isinstance(c, jobs.Contract):
+            return c.company
 
     @dd.displayfield(_("Active contract"))
     def active_contract(obj, ar):

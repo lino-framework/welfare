@@ -57,8 +57,8 @@
 		<wsdl:port binding="tns:RetrieveTIGroupsServiceHTTPBinding" name="RetrieveTIGroupsService">
 		<!-- soap:address location -->
 			<!--dvlp : bcssksz-services-test.smals.be -->
-			<!--acpt:bcssksz-services-acc.smals.be -->
-			<!-- prod:bcssksz-services-prod.smals.be-->
+			<!--acpt: bcssksz-services-acc.smals.be -->
+			<!-- prod: bcssksz-services-prod.smals.be-->
 			<soap:address location="https://bcssksz-services-%(cbss_environment)s.smals.be:443/SOA4520/RetrieveTIGroupsService/retrieveTI"/>
 		</wsdl:port>
 	</wsdl:service>

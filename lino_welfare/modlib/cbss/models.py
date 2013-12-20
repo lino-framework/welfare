@@ -469,7 +469,8 @@ The raw XML response received.
         #~ return ar.success(**kw)
         #~ return kw
 
-    def execute_request(self, ar=None, now=None, simulate_response=None, environment=None):
+    def execute_request(self, ar=None, now=None,
+                        simulate_response=None, environment=None):
         """
         This is the general method for all SSDN services,
         executed when a user runs :class:`ExecuteRequest`.
@@ -504,13 +505,13 @@ The raw XML response received.
             #~ if not settings.SITE.cbss_live_tests:
                 #~ self.validate_request()
             retval = self.execute_request_(now, simulate_response)
-        except (IOError, Warning), e:
+        except (IOError, Warning) as e:
             if self.ticket:
                 self.status = RequestStates.errors
             else:
                 self.status = RequestStates.failed
             self.logmsg_debug(unicode(e))
-        except Exception, e:
+        except Exception as e:
             if self.ticket:
                 self.status = RequestStates.errors
             else:
@@ -572,7 +573,7 @@ class CBSSRequestDetail(dd.FormLayout):
     """, label=_("Request"))
 
     technical = dd.Panel("""
-    response_xml 
+    response_xml
     info_messages
     debug_messages
     """, label=_("Technical"), required=dict(user_groups='cbss', user_level='admin'))
@@ -817,7 +818,7 @@ class SSDNRequest(CBSSRequest):
 class NewStyleRequest(CBSSRequest):
 
     """
-    Abstract Base Class for Models that represent 
+    Abstract Base Class for Models that represent
     "new style" requests to the :term:`CBSS` (and responses).
     """
 

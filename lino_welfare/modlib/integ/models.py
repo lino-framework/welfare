@@ -55,8 +55,8 @@ class Clients(pcsw.Clients):
     order_by = "last_name first_name id".split()
     allow_create = False  # see blog/2012/0922
     use_as_default_table = False
-    column_names = "name_column:20 active_contract:16 \
-    #applies_from #applies_until \
+    column_names = "name_column:20 #active_contract:16 \
+    applies_from applies_until contract_company:16 \
     national_id:10 gsm:10 address_column age:10 email phone:10 \
     id bank_account1 aid_type language:10"
 
