@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../isip.rst:5
-#: ../isip.rst:11
-# c4aa78e2d8dd4048adbef9988d3b1c4b
-# 1ff9118b518a4b6ab03b448e0f5704d6
+#: ../isip.rst:15
+# 65e331b4c5fd451a90b46e6a278e70ea
+# 98980da8ed924a7fa8516958aa19c457
 msgid "ISIP"
 msgstr ""
 
 #: ../isip.rst:7
-# c6b8c5d3de534a729c8b49fb6e4e4dd9
+# 8e8220ce2f36428aa8df7092d3ff1f7d
+msgid "ISIP (Individualized Social Integration Projects, fr. \"PIIS\", german \"VSE\") are contracts between a PCSW and a Client."
+msgstr ""
+
+#: ../isip.rst:11
+# be00ee21758e4af39e96933040a0fb11
 msgid "Ce module gère le travail avec les :term:`PIIS`. Il est techniquement similaire au module :ref:`welfare.jobs`."
 msgstr ""
 
-#: ../isip.rst:13
-# e4773d0b114b45ddbe301cb79249d10a
+#: ../isip.rst:17
+# 02d0363fd6a641138060fe85a9d772f1
 msgid "A convention or contract between the PCSW and a young client that leads to an individual coaching of the person, mostly concerning her scholar education."
 msgstr ""
 
-#: ../isip.rst:16
-# 0e08426127014454981d1bb0452be4c6
+#: ../isip.rst:20
+# 4927f21922594316864bd8f4bbefaf64
 msgid "PIIS"
 msgstr ""
 
-#: ../isip.rst:18
-# dc3db3f19ddb4aef8668ca6910d086f8
+#: ../isip.rst:22
+# 7535be0ff1924b8ead6126a121ce0943
 msgid "Project d'Insertion Sociale Personnalisé. Une convention entre le CPAS et un jeune client qui engendra un accompagnement individuel de la personne surtout au niveau enseignement."
 msgstr ""
 
 #: None:2
-# d5bc27e695444ac9adf07217b8044c09
+# 5f59e89b09714f719f288ab60460e6e9
 msgid "ISIP (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 5bfa62592d9e48c788ff996820c5ecc2
+# 43390baa760e4b10ad4c60d83dc6262c
 msgid "study type (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# d09fe1c3fa07457f9edf1053fae926c2
+# 83ac59163b5c4310b0d90e7a960e735e
 msgid "ISIP Type (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# edca86eb74d446958510c096a9379902
+# 20d5a474e9344ca9854ed0f097943996
 msgid "Examination Policy (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 0d8a8dccf73e4cca9d67615dce29134d
+# 288a5f825e8243f28a514b3702136ca1
 msgid "Reason of termination (model in app \"isip\")"
 msgstr ""
 

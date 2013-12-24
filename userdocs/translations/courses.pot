@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../courses.rst:5
-# d6c51ffccde544bc91ba73c8b813cf89
+# f54079c6b5bc4de08c584b193d02ed3d
 msgid "Cours de langues"
 msgstr ""
 
 #: ../courses.rst:7
-# a85d2b8a93d94d70b73356c848a83ca6
+# cd22b61ee8414859a56a5af5c72d7e3e
 msgid "Ce module facilite la gestion des demandes de cours, principalement de langues."
 msgstr ""
 
 #: ../courses.rst:9
-# 1bd276df54d54d919a525bcc02c82cf9
+# 3b2c35845ef94d45bf71a37a2a538934
 msgid "Les :ddref:`courses.CourseProviders` (au pluriel) réfère à la table. L':ddref:`courses.CourseProvider` (singulier) réfère au modèle."
 msgstr ""
 
 #: ../courses.rst:12
-# 2de4c6bcef964777a99f2cc47df54032
+# 654ec8ddf7394b028a8ab39ee193821a
 msgid "Les :ddref:`courses.CourseRequests` inactives..."
 msgstr ""
 
 #: ../courses.rst:17
-# 7996e680d7434e089a627002d05242eb
+# 8bc9e1ad7cfb4c58ae19f59475ebedb8
 msgid "Référence"
 msgstr ""
 
 #: None:2
-# 449c3f0d0c384753be915e026ca20fee
+# 7443db0338ad47c79ff4d239e3664a9a
 msgid "Course provider (model in app \"courses\")"
 msgstr ""
 
 #: None:2
-# 4180fa42b50f45e283a6a27eb4be0c18
+# b8ed1a7c7cac475c8f269800ddf6bad7
 msgid "Course Content (model in app \"courses\")"
 msgstr ""
 
 #: None:2
-# 7a14928547414bcf876ccaa8ff62369e
+# f03325c6313640e2bc5c5f924819e53b
 msgid "Course Offer (model in app \"courses\")"
 msgstr ""
 
 #: None:2
-# 2ab2bf35ff6b429ba3327ddfdb3cd516
+# d348eddb2e05498b89a6257efbc0f8e8
 msgid "Course (model in app \"courses\")"
 msgstr ""
 
 #: None:2
-# 38ed1ec34d37446e92bce3735e739962
+# a6ce07c3ba94479390eaf80a295bf38b
 msgid "Course Requests (model in app \"courses\")"
 msgstr ""
 

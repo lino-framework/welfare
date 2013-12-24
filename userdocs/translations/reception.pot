@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,57 +17,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../reception.rst:4
-# ac23e0b17b18402298f19148e225d409
+# ba1f56d76a9841709d56d945e2047b56
 msgid "Reception"
 msgstr ""
 
 #: ../reception.rst:6
-# 0f29967445c34e01b9db5ccd1a3b6957
+# 1f89dda31f4b45349daaa83d6156e290
 msgid "The reception module of Lino Welfare is for managing a reception desk and a waiting queue."
 msgstr ""
 
 #: ../reception.rst:9
-# 83562c899aa74f70a1c089bf22dfeef5
+# 66a1fa7eec2a48b0ae03e1719078553a
 msgid "Visitors are \"checked in\" as they present themselves at the reception desk, then they wait in a lounge until an agent receives them, and finally they are \"checked out\" when they leave the building."
 msgstr ""
 
 #: ../reception.rst:14
-# ace2538bc0104225b5c8e0a810d9020a
+# 2cff69429bd8492a883cdb265a1b0586
 msgid "Social agents have a possibility to see how many and which clients are waiting for them. (:ddref:`reception.MyWaitingVisitors`)"
 msgstr ""
 
 #: ../reception.rst:18
-# 5430f54cf3974070bb6dba29e64fa350
+# fa37d573b5ad40289a08521971d243cb
 msgid "A **reception clerk** is the user at the reception desk who welcomes visitors. The reception clerk asks questions like \"What's your name?\" or \"Do you have an appointment with a social agent?\". See :ddref:`lino.UserProfiles`."
 msgstr ""
 
 #: ../reception.rst:27
-# d4f7f40b000747faacc2d80493630248
+# 200d44bdaab44ffd8f8a4b0c0d4c320a
 msgid "Vocabulary note: Visitors are instances of the :ddref:`cal.Guest` model when they are being managed by the reception module, i.e. when they have been at least checked in."
 msgstr ""
 
 #: ../reception.rst:32
-# f174e5de64f3484192d1e31bd336fe24
+# b80bb06ecb81442c9c78c4feda5c09eb
 msgid "Visitors must be registered as a :ddref:`pcsw.Client`. Technically a :ddref:`contacts.Partner` account would be enough, but other \"visitors\" like suppliers or board members aren't managed by the reception module of Lino Welfare."
 msgstr ""
 
 #: ../reception.rst:37
-# 957da6c5a5a04e0db02e13cef16b8af3
+# 8a3e997929cc4e70b06b7dee16aee686
 msgid "Lino notifies the user to read the client's eID card if this is necessary, e.g. because \"eID card has not yet been read!\" or \"Old eID card validity has expired!\""
 msgstr ""
 
 #: ../reception.rst:41
-# 804cc3fdb04e4ed6b0a44492c70b6d95
+# c8536fc60cb14e3aa87191ac7e991a64
 msgid "Most visitors come at the open consultation hours. and don't have an appointment with some user. We call this a \"visit\" or \"prompt event\". In that case the reception clerk clicks \"Create Visit\", confirms the selected agent and enters a \"reason\" (a short one-line text). This will automatically create two records: an :ddref:`cal.Event` and a :ddref:`cal.Guest`."
 msgstr ""
 
 #: ../reception.rst:51
-# 57b9e5306fad49e8b09df4000c9c40d3
+# dc414b73a5a8403c864b1ff4c834b307
 msgid "A **visit** or **prompt event** is an unplanned :ddref:`cal.Event`. An **appointment** is a planned (scheduled) :ddref:`cal.Event`."
 msgstr ""
 
 #: ../reception.rst:54
-# 4cbb5d57acfe4852987ef186fee5b96b
+# 73459c853eb541ee805c981b75435375
 msgid "In any case, when the clerk then the Checkin button of that appointment."
 msgstr ""
 

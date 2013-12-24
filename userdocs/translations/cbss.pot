@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,37 +17,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../cbss.rst:5
-# c4b14ddb021847a79b1f8c3c1a1588b7
+# d574dddecd0747a79003c739a1303b79
 msgid "Banque-carrefour"
 msgstr ""
 
 #: ../cbss.rst:7
-# f362bedcc6be4fa4baa237b680859ffc
+# 0fd64ceb64a146fd9180e906a4d4be22
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
 #: None:2
-# 3fa20c62b9d24a45a15e7ed2b022e87a
+# a5c31b6d658d4df3b49fe6b2695c14e1
 msgid "IdentifyPerson Request (model in app \"cbss\")"
 msgstr ""
 
 #: None:2
-# d308362124b343ab851e5f57ebe77df0
+# ddfbe7ac089e4492ab18691ec5a1415e
 msgid "ManageAccess Request (model in app \"cbss\")"
 msgstr ""
 
 #: None:2
-# 38f73ba3364d449d827f084b26e407b7
+# 55c2ae2e8a8147acba5231ac1ddbac96
 msgid "Tx25 Request (model in app \"cbss\")"
 msgstr ""
 
 #: None:2
-# c915a466908649dbb03c292b42f93d30
+# e4dbce9176114e7ca19a4a7f97f8cc6e
 msgid "Sector (model in app \"cbss\")"
 msgstr ""
 
 #: None:2
-# 93b6c221eb5149db9f44971d6eb3271d
+# e33b015b588547f98b3b64327f163e12
 msgid "Purpose (model in app \"cbss\")"
 msgstr ""
 

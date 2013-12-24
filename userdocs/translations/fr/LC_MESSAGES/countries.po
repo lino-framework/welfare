@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -16,24 +16,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0\n"
+"Generated-By: Babel 1.3\n"
 
-# a98949af1e9e4fad900266473b7dc42e
+# f1407d6fde5340c6907d7d9a70f00dd5
 #: ../countries.rst:5
 msgid "Countries"
 msgstr ""
 
-# 72e6dd0e29284c62addfd4af010d93ea
+# 1e2aa206e5e244bc82ef971514d26d47
 #: None:2
 msgid "Place (model in app \"countries\")"
 msgstr ""
 
-# 1696bcff965d4753ae183611b9f9e742
+# f5ae7cc3577d46279abb3d8f0e2e8026
 #: None:2
 msgid "Country (model in app \"countries\")"
 msgstr ""
 
-# 8af2d7442f3146a3b4d6957e237bd3f8
+# d515f3a3c22646ae854792ac5e0df310
 #: None:2
 msgid "Language (model in app \"languages\")"
 msgstr ""

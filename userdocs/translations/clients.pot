@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../clients.rst:5
-# 991e23f414d845be885aa5e7cc8527d0
+# c06e5c2f499841a4abff1e0f50f5b4c3
 msgid "Clients"
 msgstr ""
 
 #: ../clients.rst:7
-# c6476bd900744acca6e6ebbe237e2843
+# 81acca8195a94015ba7bba5ed0ab98b8
 msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
 #: None:2
-# 262cc1da08a44ce090391d7caa5be20d
+# 8f52c3c907834a40b10e30dd3e306fab
 msgid "Client (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# b5fa8fc732a846619003e56b40fea750
+# eced418464d545819a1a6941e5f657c4
 msgid "Coaching (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# 23fb9154e4094b78901f7622a93351f7
+# 208c7dfc78634e21ab0af2e44a20c42b
 msgid "Client Contact (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# 23bd4d28fe44497094e49640f99dbceb
+# e2a043975d294c5b9d356befeb34917c
 msgid "Client Contact type (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# 1f59fd7009ac470c9d369f910dede243
+# 2ef3fd7f9587479fa97150309f1ddde1
 msgid "Coaching type (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# 2edb08f412c549658504e4d406342d5a
+# 462fe0adc1af4d4eb840d9c781e7e019
 msgid "Reason of termination (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# e83c6b54cff345c49a0558f20dad54e3
+# b6a10f02da1747c5b521a3258c7380d2
 msgid "aid type (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# b46ff5efc56c46cd9de7209e91993420
+# 81ae10df57964b63b1e721100e82c0f3
 msgid "Integration Phase (model in app \"pcsw\")"
 msgstr ""
 

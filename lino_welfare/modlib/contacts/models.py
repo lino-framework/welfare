@@ -27,6 +27,7 @@ from lino.modlib.contacts.models import *
 from lino_welfare.modlib.contacts import App
 
 
+
 class Partner(Partner, mixins.CreatedModified, dd.ImportedFields):
 
     """
@@ -127,7 +128,6 @@ class PartnerDetail(PartnerDetail):
 #~ class AllPartners(contacts.AllPartners,Partners):
     #~ app_label = 'contacts'
 
-
 #~ from lino.modlib.families import models as families
 #~ class Person(Partner,Person,mixins.Born,families.Child):
 class Person(Partner, Person, mixins.Born):
@@ -211,19 +211,10 @@ Auch Datensätze anzeigen, die als veraltet markiert sind."""))
 
 class Company(Partner, Company):
 
-    #~ class Meta(contacts.Company.Meta):
-        #~ abstract = False
-        #~ app_label = 'contacts'
-    # ~ # to be maintaned with ClientContactTypes
-    #~ dd.inject_field(Company,'is_health_insurance',models.BooleanField(verbose_name=_("Health insurance"),default=False))
-    #~ dd.inject_field(Company,'is_pharmacy',models.BooleanField(verbose_name=_("Pharmacy"),default=False))
-    #~ dd.inject_field(Company,'is_attorney',models.BooleanField(verbose_name=_("Attorney"),default=False))
-    #~ dd.inject_field(Company,'is_job_office',models.BooleanField(verbose_name=_("Job office"),default=False))
-    # to be maintaned with ClientContactTypes
-    #~ is_health_insurance = models.BooleanField(verbose_name=_("Health insurance"),default=False)
-    #~ is_pharmacy = models.BooleanField(verbose_name=_("Pharmacy"),default=False)
-    #~ is_attorney = models.BooleanField(verbose_name=_("Attorney"),default=False)
-    #~ is_job_office = models.BooleanField(verbose_name=_("Job office"),default=False)
+    class Meta:
+        verbose_name = _("Organisation")
+        verbose_name_plural = _("Organisations")
+
     client_contact_type = dd.ForeignKey(
         'pcsw.ClientContactType', blank=True, null=True)
 
@@ -238,11 +229,7 @@ class Company(Partner, Company):
             phone fax email 
             bank_account1 bank_account2 activity''')
 
-    # todo: remove hourly_rate after data migration. this is now in Job
-    #~ hourly_rate = dd.PriceField(_("hourly rate"),blank=True,null=True)
 
-
-#~ class CompanyDetail(dd.FormLayout):
 class CompanyDetail(CompanyDetail):
 
     box3 = """

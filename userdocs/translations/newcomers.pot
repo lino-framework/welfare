@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../newcomers.rst:5
-# 9c5fae121fbf4d6a9746a3f0b6b1832c
+# e740ae95d0a54a45b366efddd012e6e6
 msgid "Nouveaux clients"
 msgstr ""
 
 #: ../newcomers.rst:7
-# b6c27d0ab9ce43e68d66ab4530669c3f
+# 2791a9d0fe764398a15ea0088f42853d
 msgid "Ce module facilite la gestion des nouvelles demandes de client."
 msgstr ""
 
 #: None:2
-# 982ee7b8abb749969ee835ed4a5063f1
+# 4a656a90e9c3444b8ed5167f7ce4a481
 msgid "Broker (model in app \"newcomers\")"
 msgstr ""
 
 #: None:2
-# 8d84cc3fb60f442a9561e5ce5a578933
+# 2016055f4c054442b3f057ebfe7c90d9
 msgid "Competence (model in app \"newcomers\")"
 msgstr ""
 
 #: None:2
-# 9446aa4a9d04472cb7eacb57ddbd0496
+# 320eac7ae1c24f8cb8626815a1dd3c25
 msgid "Faculty (model in app \"newcomers\")"
 msgstr ""
 

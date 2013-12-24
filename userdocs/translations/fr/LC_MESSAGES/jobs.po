@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -16,21 +16,21 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0\n"
+"Generated-By: Babel 1.3\n"
 
-# 33bc3bd498564698bab4f92dfdd27513
+# 5220c7b85e8648d6b9a1510719e30ad1
 #: ../jobs.rst:5
 msgid "Insertion socio-professionnelle"
 msgstr ""
 
-# 7d9c4524d3a341f1a6a578eb62c33b0a
+# 49374d6ec68540eaaff9a61d72e0ad27
 #: ../jobs.rst:7
 msgid ""
 "Ce module permet de gérer des projects de mise au travail selon les "
 "articles 60§7 et 61 de la loi organique des CPAS."
 msgstr ""
 
-# a47013d602444cad9853265c8935d2a5
+# a8c2c62d708240708d53d1d80681186c
 #: ../jobs.rst:11
 msgid ""
 "Si pour des jeunes en-dessous des 25 ans on parle surtout "
@@ -39,12 +39,12 @@ msgid ""
 "**travail**."
 msgstr ""
 
-# 366527abd1e04aabb4cf926a345791ec
+# aa46df561d4442aba3e41ce256bd8886
 #: ../jobs.rst:19
 msgid "Aperçu"
 msgstr ""
 
-# 8caece4ecf1d43708accc828420035d1
+# c6419697c5aa4a299110044f7d28d856
 #: ../jobs.rst:21
 msgid ""
 "Le CPAS gère une liste d':ddref:`jobs.Jobs` (de mise au travail). Ces "
@@ -52,14 +52,14 @@ msgid ""
 "spécialisés à l'accqueil temporaire de personnes à intégrer. Exemple:"
 msgstr ""
 
-# bd3216333a4a48d2a16321264e61b729
+# f072e1b020fa4bd4b84b197e8208b6b5
 #: ../jobs.rst:31
 msgid ""
 "Indépendamment de ces endroits de travail le CPAS peut gérer une liste "
 "d':ddref:`jobs.Offers` du marché normal."
 msgstr ""
 
-# 4f756cb842564d21845b2bd921a69498
+# ce232bc13024449a80feb20f138c29a0
 #: ../jobs.rst:34
 msgid ""
 "Une :ddref:`jobs.Candidature` représente le fait qu'un "
@@ -68,7 +68,7 @@ msgid ""
 "l'estime potentiellement apte à assumer ce travail."
 msgstr ""
 
-# 9ebfc824cfb04dcd8a486cc7f5029070
+# e1e2f6750a17471681a79a3848fb1884
 #: ../jobs.rst:40
 msgid ""
 "Eine Kandidatur ist \"wenn ein :ddref:`pcsw.Client` sich für eine "
@@ -77,89 +77,89 @@ msgid ""
 "geeignet einstuft."
 msgstr ""
 
-# da433ba9a9e14398a24ce5999edce9d8
+# 9c9f0873f64947feb815243b639618f6
 #: ../jobs.rst:45
 msgid ""
 "Si un :ddref:`pcsw.Client` introduit une :ddref:`jobs.Candidature`, "
 "l'agent d'insertion note que"
 msgstr ""
 
-# ad0d866869584a0397a4e0c98dd89ea4
+# 034f943a27944f798086a2c8c4e0a94b
 #: ../jobs.rst:49
 msgid "Une telle Candidature peut référer soit à un Endroit soit à une Offre."
 msgstr ""
 
-# a5dbc058f895494bb4b86491eea4a152
+# 627565bd059d4f6ab31bf102b114d9b1
 #: ../jobs.rst:51
 msgid "Et puis on fera un :ddref:`jobs.Contract`."
 msgstr ""
 
-# 87098bbb935e43459482bfe4e355c549
+# bdef7290d93d46b6a1b310720b004b8d
 #: ../jobs.rst:54
 msgid "Référence"
 msgstr ""
 
-# d10d02fd258240289ae42a398b894e53
+# 916c635655bb41989c0480177b8dc71b
 #: None:2
 msgid "Job (model in app \"jobs\")"
 msgstr ""
 
-# a4e48c01d98941589130363ba3a8d353
+# f8c21d7ba8464aed84767a9e2d8844bb
 #: None:2
 msgid "Job Provider (model in app \"jobs\")"
 msgstr ""
 
-# edf8bd34906a4eb4a6cb36ea03b1f09b
+# 671ca0c500a147e39e84dfcd63212b3d
 #: None:2
 msgid "Art.60§7 contract (model in app \"jobs\")"
 msgstr ""
 
-# 56f99df95dee4468a3233c6047da226d
+# 8d124a5c657c499f9335b3cf5bf7bb40
 #: None:2
 msgid "Job Candidature (model in app \"jobs\")"
 msgstr ""
 
-# 153c099a240e490e9dc9c6c5bde30c67
+# d00ef8917f8a439393a72b1bda0dc4db
 #: None:2
 msgid "Work Regime (model in app \"jobs\")"
 msgstr ""
 
-# 598acd881c6e45d385288225f289c6e1
+# bf8b3db9f2c146eeac35edfebf80154e
 #: None:2
 msgid "Job Sector (model in app \"jobs\")"
 msgstr ""
 
-# a969615a5a754a9fba862cab0639afbd
+# b23a788d5bd24685a62dc0358182002e
 #: None:2
 msgid "Job Function (model in app \"jobs\")"
 msgstr ""
 
-# 884bdcee366d4ec6bc6852db5ed5c918
+# 594f04c4bb9c498dbd6f078def25d955
 #: None:2
 msgid "Work Schedule (model in app \"jobs\")"
 msgstr ""
 
-# 35d3c75010b14d1e96df96f793429762
+# 5cd87d7221ff49ec8ed4c57337a1f0c2
 #: None:2
 msgid "Job Offer (model in app \"jobs\")"
 msgstr ""
 
-# cf4359a935d2451aa1d45346c4a411ca
+# 274b08d59348403da14c7f89d12a5b74
 #: None:2
 msgid "study or education (model in app \"jobs\")"
 msgstr ""
 
-# 92ea0f25603e4fc7a02e767f0e1bfab6
+# 1d7eb6e5fcf547c8a03e776a2bcbd3e5
 #: None:2
 msgid "Job Experience (model in app \"jobs\")"
 msgstr ""
 
-# ff13e2d8acda4f449154d130bdd42710
+# 29f6fd3e6f7648a5a63012b9951c2da8
 #: None:2
 msgid "Job Type (model in app \"jobs\")"
 msgstr ""
 
-# b51a44fcbaac44c4b1ed29fce8021610
+# 5ce877a5cda44a3db26de977104d5e51
 #: None:2
 msgid "Job Contract Type (model in app \"jobs\")"
 msgstr ""

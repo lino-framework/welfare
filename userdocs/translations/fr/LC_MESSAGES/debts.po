@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: 2013-07-27 15:35+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0\n"
+"Generated-By: Babel 1.3\n"
 
-# d957aa2b7277476bbb24104a18eed7c9
+# d48a5fb046a34f2898a58be87f89fc5e
 #: ../debts.rst:5
 msgid "Debts mediation"
 msgstr "Médiation de dettes"
 
-# 646dbe542d284957be538f1d41da5e11
+# b4f20b79ff584cb6a2c0a62e6921412e
 #: ../debts.rst:7
 msgid "Debt Mediation (Schuldnerberatung, Médiation de dettes)"
 msgstr ""
 
-# a9ef61463deb4a158907490b38b8a6f8
+# 8ddf74d99e9e43f19f5888df630baa89
 #: ../debts.rst:9
 msgid ""
 "This app enables social consultants to create \"Budgets\". A "
@@ -38,12 +38,12 @@ msgid ""
 "debtors."
 msgstr ""
 
-# f5413881afcc42ea9e30a4ab6249322b
+# 760d0a80d9a54d49a664c6873f377f01
 #: ../debts.rst:17
 msgid "Scénarios"
 msgstr ""
 
-# 182cd194705c4d618b8fca8ea8d5c8d2
+# 688e420925d245988ff27a61103495a9
 #: ../debts.rst:19
 msgid ""
 "En tant que conseiller dettes je commence à remplir, avec le client, les "
@@ -53,37 +53,37 @@ msgid ""
 "les chiffres manquants pour les encoder la prochaine fois?"
 msgstr ""
 
-# 4cbbb91c82bd4393b5b7dd1d29c3f396
+# 92a2242d66d849aead212faf4f9d636a
 #: ../debts.rst:26
 msgid "Activer le champ :ref:`welfare.debts.Budget.print_empty_rows`"
 msgstr ""
 
-# 1f5a6982a14f4a5280061ad51efe519c
+# a3fdb87065e040d78430704a3d9799cb
 #: ../debts.rst:27
 msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
-# 8cf2a03713e543c3bd58a8cd54dc720a
+# 2ef3f60e7aaa4fc6bd7a56ed81b179b0
 #: ../debts.rst:38
 msgid "Print empty rows"
 msgstr ""
 
-# 012e5555a4bf454780fe357f3c414ae5
+# 99e5230b697a4b098a737d3c86a46c06
 #: ../debts.rst:43
 msgid "Ignore yearly incomes"
 msgstr ""
 
-# 64aea385b1a743949c01ee639ebb4f66
+# 27de57f25bc2431b93a94b6439a03cf6
 #: None:2
 msgid "Budget Actor (model in app \"debts\")"
 msgstr ""
 
-# f5e330d6cf24446f9998cce18567632a
+# 282e118f034a452d8f17209184964be0
 #: None:2
 msgid "Budget (model in app \"debts\")"
 msgstr ""
 
-# 7e6ce36faeba4ed9b373a0cbc6b2b34f
+# 7717149f75c748cf90cfae1b5a38e8a0
 #: None:2
 msgid "Budget Entry (model in app \"debts\")"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../cal.rst:5
-# 1b2170e24ba7482cbda59ddbfaf8de16
+# 1c27a3ef1be840f396f624889ca1004c
 msgid "Calendar"
 msgstr ""
 
+#: ../include/cal.rst:4
+# 5c28a6722c5d4bd78ce7cfb7ac95cce8
+msgid "Important models are :ddref:`cal.Event` and :ddref:`cal.Guest` and :ddref:`cal.Task`..."
+msgstr ""
+
 #: None:2
-# ae887bae2143402aa8e33daf837f5b86
+# 175d6869006e49ef82775a746640ce97
 msgid "Event (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 56a4b32df2c04ea08bd3fcfc16df4c52
+# ff78fe4113864b20814dc163aab28998
 msgid "Guest (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# bd9923a98f2e4f48a78efea473b77025
+# 1deb08a136a94eef97c0c5abf90d0bb7
 msgid "Task (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 0a6abecfee0f441cb6bc778cde22f8fd
-msgid "State (field in \"<class 'lino.modlib.cal.models.Task'>\")"
+# 47e9999d69b34843848eac1956ee0f2e
+msgid "State (field in \"<class 'lino.apps.cal.models_task.Task'>\")"
 msgstr ""
 
 #: None:2
-# 28b1f2b5cc6549b880b3bda545d44fa3
+# e81f3cdf7906403e9d7c8d446864c175
 msgid "Calendar (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 56fe4e8525634b0a9821e3ff067d10eb
+# b30a8e6dae734ffcab565946c8ea7914
 msgid "Subscription (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 371a1f9a27ad42a2bae2a35e469c4e63
+# 98ff16502dc645d38ad8a21d292adeb9
 msgid "Room (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# ed83aadd71be4326976d87a22fe077d3
+# f443b216d6de465493a65595fd6f796f
 msgid "Priority (model in app \"cal\")"
 msgstr ""
 
 #: None:2
-# 0027024fb94e4f17ae02a294c139d373
+# 93fbe662024f4e1cbb1e382172672ce1
 msgid "Guest Role (model in app \"cal\")"
+msgstr ""
+
+#: None:2
+# a22a8981cfbf4204beafab64eefdf3cb
+msgid "Event Type (model in app \"cal\")"
 msgstr ""
 

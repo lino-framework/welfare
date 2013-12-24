@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,57 +17,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../contacts.rst:5
-# fed003804c2742a58e04f4d25592fd17
+# fb333855309f4476a75d8274c910cea1
 msgid "Contacts"
 msgstr ""
 
 #: None:2
-# 844c37ad74654dee85782da1454abdf3
+# ced764f0dae8445a9c8964bb354723ae
 msgid "Partner (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# 741dc7b9c7bd41a09ac36ce0357fa7ad
-msgid "obsolete (field in \"<class 'lino_welfare.modlib.contacts.models.Partner'>\")"
-msgstr ""
-
-#: None:2
-# 720dd550372b4593ad069a5d899509ed
+# 20f7db0c166f452e96cf1083c28d3d24
 msgid "Person (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# d855a729b5bd4b12a61fa80e3f74aacb
-msgid "Company (model in app \"contacts\")"
+# fec33e9baeda4db7a2f4daf1139dbc85
+msgid "Organisation (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# 65d62afcd1184c5bad8e637cf733b244
+# da1dafb022554781a0215f89595ca4c8
 msgid "Contact Person (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# e31ff2cc2ae649e3a970eec585eeb114
+# 970fd1f0ee6f4aca9864da5d9f5ea1cf
 msgid "Function (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# b21c86ac372e453e8f87a66421b71764
-msgid "company type (model in app \"contacts\")"
+# 1356c48bb9ae4f47bf3265753b734dee
+msgid "Group Type (model in app \"contacts\")"
 msgstr ""
 
 #: None:2
-# 6c0525ecb2b24e869ff53281d13f60d0
+# 33502c1bc6104956b3e67368028140f4
+msgid "obsolete (field in \"<class 'lino_welfare.modlib.contacts.models.Partner'>\")"
+msgstr ""
+
+#: None:2
+# d1b84275261848f3b001cbd36ffb3b7f
 msgid "activity (model in app \"pcsw\")"
 msgstr ""
 
 #: None:2
-# 1942b7e6dc054881b7aac5db85109db1
+# 182db69c399e41a09d99f73f39927fc3
 msgid "Household (model in app \"households\")"
 msgstr ""
 
 #: None:2
-# f2106ee9b9074a58a686507e2f9228c0
+# 2fb1909e64f44b66ae3fd733cf42ff7e
 msgid "Household Type (model in app \"households\")"
 msgstr ""
 

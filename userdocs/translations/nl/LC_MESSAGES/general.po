@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: 2013-05-14 14:07+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -16,45 +16,45 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0\n"
+"Generated-By: Babel 1.3\n"
 
-# ad57f29682d446e5b1d487e1a0a4c373
+# 850178ebb71544668270eb5e587d6e99
 #: ../general.rst:3
 msgid "Concepts généraux"
 msgstr ""
 
-# 0c044fcc6d494cbaa7cf7cce2d0d0cd4
-#: ../general.rst:8
+# a361c850ae4a4220b6238b2324159b41
+#: ../general.rst:10
 msgid "Das Hauptmenü"
 msgstr ""
 
-# 274a1fc63d7c4386a6ef7b178c055e1d
-#: ../general.rst:10
+# 9c4c3cfd7d41421f838ddf278e0c325f
+#: ../general.rst:12
 msgid "Zur Struktur des Menüs:"
 msgstr ""
 
-# 0abc823a57e54b5fa8940c361c9b32dc
-#: ../general.rst:12
+# b8612229f071440ead95265d0aad1dbb
+#: ../general.rst:14
 msgid ""
 "Alle Benutzer haben eigentlich das gleiche Menü, aber die einzelnen "
 "Untermenüs \"wachsen\" oder \"schrumpfen\" je nach den Zugriffsrechten"
 msgstr ""
 
-# ae3d8732a33d49158ed772b2d6e88979
-#: ../general.rst:16
+# 69f9175549fa41feac0fbbee0db24b43
+#: ../general.rst:18
 msgid "Wir unterscheiden **drei Arten von Menü-Titeln**:"
 msgstr ""
 
-# 1206112da8834873aacb8696332ffe3f
-#: ../general.rst:18
+# cfd36ec2dee14fae863e1672e4c4afc6
+#: ../general.rst:20
 msgid ""
 "Pro \"funktionaler Gruppe\" jeweils ein Titel mit den \"täglichen\" "
 "Befehlen: (:menuselection:`Kontakte`, :menuselection:`Büro`, "
 ":menuselection:`DSBE`, :menuselection:`Kurse` usw.)"
 msgstr ""
 
-# a7a216c72d564939b4b9bd26487e5c5b
-#: ../general.rst:25
+# f36831cccc8c4633bf94ffba905f9429
+#: ../general.rst:27
 msgid ""
 "Drei besondere Titel \":menuselection:`Listings`\" "
 "\":menuselection:`Konfigurierung`\" und \":menuselection:`Explorer`\" "
@@ -62,70 +62,106 @@ msgid ""
 "funktionaler Gruppe unterteilt*:"
 msgstr ""
 
-# a1e7dc2e058a4d90ac98860f00f37371
-#: ../general.rst:33
+# cdeb45ec051449dcb87bcc610581ab8c
+#: ../general.rst:35
 msgid ""
 ":menuselection:`Listings` könnte auch :menuselection:`Auswertungen` "
 "genannt werden."
 msgstr ""
 
-# e89925a6a9eb4da5b830d78596e2f5fd
-#: ../general.rst:36
+# 7692afacefa54fb78de74a12b8afaa89
+#: ../general.rst:38
 msgid ""
 ":menuselection:`Konfigurierung` enthält Befehle zur Konfigurierung des "
 "Gesamtsystems."
 msgstr ""
 
-# 7e7b34944f0c4f18a783e29c0cc99254
-#: ../general.rst:39
+# d31abdfec7d0405e868ae6f70c7cdf07
+#: ../general.rst:41
 msgid ""
 ":menuselection:`Explorer` zeigt Gesamtansichten gewisser Tabellen, die "
 "theoretisch nicht nötig sind."
 msgstr ""
 
-# 1a77904c0aac4546b535f4a627c404a6
-#: ../general.rst:42
+# ed9ed69e20024efba4d748eb8429e09a
+#: ../general.rst:44
 msgid ""
 "Sowie die drei speziellen Titel :menuselection:`Site`, "
 ":menuselection:`Startseite` und das :menuselection:`Benutzermenü`."
 msgstr ""
 
-# 6aef3dfff98f4c30bc3a75dbc1f6ee34
-#: ../general.rst:50
+# 70d1f0ac73ee4e01839fab899ee5be1b
+#: ../general.rst:52
 msgid "Vue tabulaire"
 msgstr ""
 
-# 98737e5cb16449689b7bc0099888494e
-#: ../general.rst:52
+# 2698fcbadc934be68528a433400651ad
+#: ../general.rst:54
 msgid ""
 "Nous parlons de vue tabullaire quand une série d'enregistrements vous est"
 " présentée sous forme de grille. Les colonnes portent des libellés."
 msgstr ""
 
-# ff96d1932dff45a69b44100310586e9b
-#: ../general.rst:59
+# 7bb7d3dbf9bc4560876200c717bd552c
+#: ../general.rst:61
 msgid "Vue détaillée"
 msgstr ""
 
-# e38e2de08a2f45c6bdff0afb11a5e1ea
-#: ../general.rst:61
+# 30a59905de71421b8d1f4ea810b41dcc
+#: ../general.rst:63
 msgid ""
 "Nous parlons de vue détaillée quand un seul enregistrement vous est "
 "présenté sous forme de formulaire."
 msgstr ""
 
-# c271d27ccfab41b6aa2b062279c7a80b
-#: ../general.rst:68
+# c6eb1f30136e42f4a43cb753c3d7cbf0
+#: ../general.rst:70
 msgid "Enregisterer"
 msgstr ""
 
-# db24e033e98a4ec98591a5fc4d3938e3
-#: ../general.rst:70
+# 5a63efca08814708a6ddf238ad2482d6
+#: ../general.rst:72
 msgid "Click this button to save your changes in the form."
 msgstr ""
 
-# 89e58095a0cf44eabdd21b3912b16fbe
-#: ../general.rst:75
-msgid "Référence"
+# 4a9794a31bca41528e4c7bdb7ab75cf1
+#: ../general.rst:80
+msgid "Fehlermeldungen und wie damit umgehen"
 msgstr ""
+
+# 58ff14646ab74a4084a42542f0ea75b0
+#: ../general.rst:83
+msgid "INTERNAL SERVER ERROR"
+msgstr ""
+
+# 718786fd4132413a8997939f368a0c0d
+#: ../general.rst:85
+msgid "Wenn ihr ein Fenster \"INTERNAL SERVER ERROR\" kriegt, dann"
+msgstr ""
+
+# 1872b228d60d41f5af9adc9c2aa14611
+#: ../general.rst:87
+msgid "Keine Panik. Der Fehler liegt nicht bei dir, sondern beim Programmierer."
+msgstr ""
+
+# 0e6b00175b1d4545ad919a8f5376fce2
+#: ../general.rst:90
+msgid ""
+"Wenn du möchtest, dass der Fehler schnell behoben wird, dann melde dich "
+"bei deinem Systemverwalter und versuche, mit ihm den Fehler zu "
+"reproduzieren, damit er ihn mir melden kann."
+msgstr ""
+
+# f5210a68157c43d98e5d2508101522ce
+#: ../general.rst:94
+msgid ""
+"Die Fehlermeldung selber kriegen Systemverwalter und Programmierer auch "
+"automatisch per Email zugeschickt. Mit etwas Glück beheben sie den Fehler"
+" ganz alleine oder melden sich gar bei dir mit Rückfragen. (Aber das ist "
+"nicht sicher. Wenn du sicher sein willst, dann melde dich selber.)"
+msgstr ""
+
+# 89e58095a0cf44eabdd21b3912b16fbe
+#~ msgid "Référence"
+#~ msgstr ""
 

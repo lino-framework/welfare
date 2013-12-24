@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 21:25+0300\n"
+"POT-Creation-Date: 2013-12-24 05:39+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -16,29 +16,34 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 1.0\n"
+"Generated-By: Babel 1.3\n"
 
-# 3c8abbf302e34106b5d2dbd296f659a5
+# df1d3a68ac304088a8b47719770fa961
 #: ../users.rst:5
 msgid "Users"
 msgstr ""
 
-# 6423e3615b094091aed10cb195303a68
+# 2a362191beea4a8590d63a6495e02830
 #: None:2
 msgid "User (model in app \"users\")"
 msgstr ""
 
-# f76f24d68d054ac29a0ff245f03a16b0
+# ca8d304e757f469d8f122a5919722b96
 #: None:2
 msgid "User Profile (field in \"<class 'lino.modlib.users.models.User'>\")"
 msgstr ""
 
-# 4be21758abac4c25ac401f7c269daaa3
+# 4a67d9a660f24c9481db6f10419cd66d
+#: None:2
+msgid "Authority (model in app \"users\")"
+msgstr ""
+
+# 4f9d0c727eac459caf7d5620daeaaa18
 #: None:2
 msgid "Team (model in app \"users\")"
 msgstr ""
 
-# 6bf5ec42b3ea4cf0bfdc0c29a4eea855
+# 6170d45ba4d34b54b5a71a7d347f7983
 #: None:2
 msgid "Membership (model in app \"users\")"
 msgstr ""

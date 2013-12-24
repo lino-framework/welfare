@@ -149,7 +149,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Konfigurierung :
   - Büro : Meine Einfügetexte, Upload-Arten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
-  - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
+  - Kontakte : Länder, Orte, Gruppenarten, Funktionen, Sprachen
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Haushalte : Rollen in Haushalt, Haushaltsarten
