@@ -52,8 +52,8 @@ Test whether :meth:`get_db_overview_rst
  contacts.Role                  4         10
  contacts.RoleType              6         5
  contenttypes.ContentType       4         98
- countries.City                 10        75
  countries.Country              8         8
+ countries.Place                10        75
  courses.Course                 5         3
  courses.CourseContent          2         2
  courses.CourseOffer            5         3

@@ -287,7 +287,7 @@ class WatchTimTests(TestCase):
 
         #~ def test07(self):
         """
-        2013-02-28 10:05:41 ValueError('Cannot assign "u\'\'": "City.country" must be a "Country" instance.',)
+        2013-02-28 10:05:41 ValueError('Cannot assign "u\'\'": "Place.country" must be a "Country" instance.',)
         """
         ln = """{"method":"PUT","alias":"PAR","id":"0000023649","time":"20130228 10:05:41","user":"MELANIEL",
         "data":{"IDPAR":"0000023649","FIRME":"Reinders Denis","NAME2":"","RUE":"Sch<94>nefelderweg",

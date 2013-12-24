@@ -199,18 +199,18 @@ def objects():
     #~ link = Instantiator(Link).build
     #~ exam_policy = Instantiator('isip.ExamPolicy').build
 
-    City = resolve_model('countries.City')
+    Place = resolve_model('countries.Place')
     #~ Job = resolve_model('jobs.Job')
-    #~ City = settings.SITE.modules.countries.City
+    #~ Place = settings.SITE.modules.countries.Place
     StudyType = resolve_model('isip.StudyType')
     #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
 
-    eupen = City.objects.get(name__exact='Eupen')
-    #~ stvith = City.objects.get(zip_code__exact='4780')
-    stvith = City.objects.get(name__in=('Sankt Vith', 'Saint-Vith'))
-    kettenis = City.objects.get(name__exact='Kettenis')
-    vigala = City.objects.get(name__exact='Vigala')
+    eupen = Place.objects.get(name__exact='Eupen')
+    #~ stvith = Place.objects.get(zip_code__exact='4780')
+    stvith = Place.objects.get(name__in=('Sankt Vith', 'Saint-Vith'))
+    kettenis = Place.objects.get(name__exact='Kettenis')
+    vigala = Place.objects.get(name__exact='Vigala')
     ee = countries.Country.objects.get(pk='EE')
     be = belgium = countries.Country.objects.get(isocode__exact='BE')
     andreas = Person.objects.get(name__exact="Arens Andreas")

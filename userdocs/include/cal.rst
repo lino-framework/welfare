@@ -13,7 +13,7 @@ and
    :depth: 2
 
 
-.. actor:: cal.CalendarPanel
+.. actor:: extensible.CalendarPanel
 
 
 .. actor:: cal.Event

@@ -50,10 +50,10 @@ from lino.core.dbutils import resolve_model, full_model_name
 from lino.utils.mdbtools import Loader
 from lino.core.dbutils import is_valid_url, is_valid_email
 
-from lino.modlib.countries.models import City, Country
+from lino.modlib.countries.models import Place, Country
 from lino.modlib.notes.models import Note
 from lino.modlib.users.models import User
-from lino.modlib.cal import models as cal
+from lino.apps.cal import models as cal
 #~ from lino.modlib.cal.utils import EventStatus
 from lino.modlib.properties import models as properties
 from lino_welfare.modlib.jobs import models as jobs
@@ -368,13 +368,13 @@ class LinoMdbLoader(Loader):
     mdb_file = settings.SITE.legacy_data_path
 
 
-class CityLoader(LinoMdbLoader):
+class PlaceLoader(LinoMdbLoader):
 
     """
-    Converts rows from CboCommuneCodePostal to City instances.
+    Converts rows from CboCommuneCodePostal to Place instances.
     """
     table_name = 'CboCommuneCodePostal'
-    model = City
+    model = Place
     headers = u"""
     IDCommuneCodePostal Commune CodePostal
     """.split()
@@ -864,7 +864,7 @@ def objects():
     for i in (5, 8, 9, 10, 14):
         yield User(id=i, username="user%d" % i, is_active=False)
     yield UsersISPLoader()
-    yield CityLoader()
+    yield PlaceLoader()
     yield PersonLoader()
     for name in (u"1er Convocation", u"Suivi", u"Rdv Manqué",
                  u"Mise en demeure", u"Report", u"Attestation RIS",

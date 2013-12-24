@@ -351,22 +351,22 @@ def site_setup(site):
     cv.PersonPropsByProp
     """)
 
-    site.modules.countries.Cities.set_detail_layout("""
+    site.modules.countries.Places.set_detail_layout("""
     name country inscode zip_code
     parent type id
-    CitiesByCity
-    contacts.PartnersByCity jobs.StudiesByCity
+    PlacesByPlace
+    contacts.PartnersByCity jobs.StudiesByPlace
     """)
 
-    #~ site.modules.countries.Cities.detail_layout.update(main="""
+    #~ site.modules.countries.Places.detail_layout.update(main="""
     #~ name country
-    #~ contacts.PartnersByCity jobs.StudiesByCity
+    #~ contacts.PartnersByCity jobs.StudiesByPlace
     #~ """)
 
     site.modules.countries.Countries.set_detail_layout("""
     isocode name short_code inscode
     # nationalities
-    countries.CitiesByCountry jobs.StudiesByCountry
+    countries.PlacesByCountry jobs.StudiesByCountry
     """)
 
     site.modules.uploads.Uploads.set_detail_layout("""

@@ -299,10 +299,10 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         #~ Company = dd.resolve_model('contacts.Company')
         #~ Person = dd.resolve_model('contacts.Person')
         Country = dd.resolve_model('countries.Country')
-        City = dd.resolve_model('countries.City')
+        Place = dd.resolve_model('countries.Place')
         be = Country(isocode="BE", name="Belgique")
         be.save()
-        bxl = City(name="Bruxelles", country=be)
+        bxl = Place(name="Bruxelles", country=be)
         bxl.save()
         p = Person(
             first_name="Jean Louis", last_name="Dupont",

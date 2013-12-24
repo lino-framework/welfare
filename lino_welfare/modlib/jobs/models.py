@@ -744,11 +744,11 @@ class StudiesByCountry(Studies):
     master_key = 'country'
 
 
-class StudiesByCity(Studies):
+class StudiesByPlace(Studies):
 
     """
-    Lists all Studies in a given City. 
-    Used as slave grid in Cities detail.
+    Lists all Studies in a given Place.
+    Used as slave grid in Places detail.
     """
     required = dd.required(user_groups='integ')
     master_key = 'city'

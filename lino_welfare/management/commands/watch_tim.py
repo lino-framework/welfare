@@ -85,9 +85,9 @@ users = dd.resolve_app('users')
 #~ countries = dd.resolve_app('countries')
 
 #~ Country = countries.Country
-#~ City = countries.City
+#~ Place = countries.Place
 Country = dd.resolve_model('countries.Country')
-City = dd.resolve_model('countries.City')
+Place = dd.resolve_model('countries.Place')
 #~ Person = contacts.Person
 #~ Person = pcsw.Person
 #~ Company = contacts.Company
@@ -285,17 +285,17 @@ def country2kw(row, kw):
         if zip_code:
             kw.update(zip_code=zip_code)
             try:
-                city = City.objects.get(
+                city = Place.objects.get(
                     country=country,
                     zip_code__exact=zip_code,
                 )
                 kw.update(city=city)
-            except City.DoesNotExist, e:
-                city = City(zip_code=zip_code, name=zip_code, country=country)
+            except Place.DoesNotExist, e:
+                city = Place(zip_code=zip_code, name=zip_code, country=country)
                 city.save()
                 kw.update(city=city)
                 #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-            except City.MultipleObjectsReturned, e:
+            except Place.MultipleObjectsReturned, e:
                 dblogger.warning("%s-%s : %s", row['PAYS'], row['CP'], e)
 
     email = row['EMAIL']
@@ -861,10 +861,10 @@ class PXS(Controller):
         #~ self.PUT(**kw)
 
 
-# ~ class PLZ(PAR): # 20121003 why was this? caused AttributeError 'City' object has no attribute 'street'
+# ~ class PLZ(PAR): # 20121003 why was this? caused AttributeError 'Place' object has no attribute 'street'
 class PLZ(Controller):
 
-    model = City
+    model = Place
 
     def get_object(self, kw):
         id = kw['id']

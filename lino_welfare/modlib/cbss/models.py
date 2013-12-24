@@ -1719,26 +1719,6 @@ dd.inject_field(pcsw.Client,
 
 MODULE_LABEL = _("CBSS")
 
-#~ settings.SITE.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
-#~ settings.SITE.add_user_group('cbss',MODULE_LABEL)
-#~ settings.SITE.add_user_field('cbss_level',UserLevels.field(MODULE_LABEL))
-
-#~ dd.inject_field('countries.City',
-    #~ 'inscode',
-    #~ models.CharField(
-        #~ max_length=5,
-        #~ verbose_name=_("INS code"),
-        #~ blank=True,
-    #~ ))
-
-#~ dd.inject_field('countries.Country',
-    #~ 'inscode',
-    #~ models.CharField(
-        #~ max_length=3,
-        #~ verbose_name=_("INS code"),
-        #~ blank=True,
-    #~ ))
-
 
 def setup_site_cache(self, force):
     """

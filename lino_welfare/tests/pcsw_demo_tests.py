@@ -98,7 +98,7 @@ if False:
      contacts.Role                  4         0
      contacts.RoleType              6         0
      contenttypes.ContentType       4         98
-     countries.City                 10        0
+     countries.Place                 10        0
      countries.Country              8         0
      courses.Course                 5         0
      courses.CourseContent          2         0
@@ -550,15 +550,15 @@ class DemoTest(RemoteAuthTestCase):
 
     def unused_test010(self):
         """
-        Test the unique_together validation of City
+        Test the unique_together validation of Place
         See :blogref:`20110610` and :blogref:`20110611`.
         See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
         """
-        from lino.modlib.countries.models import City, Country
+        from lino.modlib.countries.models import Place, Country
         from django.db.utils import IntegrityError
         be = Country.objects.get(pk='BE')
         try:
-            City(name="Eupen", country=be, zip_code='4700').save()
+            Place(name="Eupen", country=be, zip_code='4700').save()
         except IntegrityError:
             if settings.SITE.allow_duplicate_cities:
                 self.fail(
@@ -568,7 +568,7 @@ class DemoTest(RemoteAuthTestCase):
                 self.fail("Expected IntegrityError")
 
         try:
-            be.city_set.create(name="Eupen", zip_code='4700')
+            be.place_set.create(name="Eupen", zip_code='4700')
         except IntegrityError:
             if settings.SITE.allow_duplicate_cities:
                 self.fail(

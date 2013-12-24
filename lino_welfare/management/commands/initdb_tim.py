@@ -55,7 +55,7 @@ from lino.mixins.beid import BeIdCardTypes
 
 Activity = resolve_model('pcsw.Activity')
 Country = resolve_model('countries.Country')
-City = resolve_model('countries.City')
+Place = resolve_model('countries.Place')
 Person = resolve_model('contacts.Person')
 Company = resolve_model('contacts.Company')
 
@@ -164,17 +164,17 @@ def country2kw(row, kw):
     if zip_code:
         kw.update(zip_code=zip_code)
         try:
-            city = City.objects.get(
+            city = Place.objects.get(
                 country=country,
                 zip_code__exact=zip_code,
             )
             kw.update(city=city)
-        except City.DoesNotExist, e:
-            city = City(zip_code=zip_code, name=zip_code, country=country)
+        except Place.DoesNotExist, e:
+            city = Place(zip_code=zip_code, name=zip_code, country=country)
             city.save()
             kw.update(city=city)
             #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-        except City.MultipleObjectsReturned, e:
+        except Place.MultipleObjectsReturned, e:
             dblogger.warning("%s-%s : %s", row['PAYS'], row['CP'], e)
 
 
@@ -322,7 +322,7 @@ def load_tim_data(dbpath):
     load_dbf(dbpath, 'PRF', load)
 
     # Countries already exist after initial_data, but their short_code is
-    # needed as lookup field for Cities.
+    # needed as lookup field for Places.
     def load(row):
         if not row['ISOCODE']:
             return
@@ -348,7 +348,7 @@ def load_tim_data(dbpath):
             name=row['NOM'] or row['CP'],
             country=country,
         )
-        return City(**kw)
+        return Place(**kw)
     load_dbf(dbpath, 'PLZ', load)
 
     def load(row):

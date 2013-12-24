@@ -1028,6 +1028,7 @@ def migrate_from_1_1_10(globals_dict):
     - Removed field `uid` in cal.Event and cal.Task
     - Renamed SiteConfig default_calendar to default_event_type
     - Removed field `help_text` in `accounts.Group` and `accounts.Account`
+    - Renamed `countries.City` to `countries.Place`
     """
 
     bv2kw = globals_dict['bv2kw']
@@ -1184,7 +1185,6 @@ def migrate_from_1_1_10(globals_dict):
         return isip_ExamPolicy(**kw)
     globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
 
-
     #~ system_SiteConfig = resolve_model("system.SiteConfig")
     #~ def create_system_siteconfig(id, default_build_method, signer1_id, signer2_id, signer1_function_id, signer2_function_id, next_partner_id, site_company_id, client_calendar_id, client_guestrole_id, team_guestrole_id, prompt_calendar_id, system_note_type_id, propgroup_skills_id, propgroup_softskills_id, propgroup_obstacles_id, attestation_note_nature_id, job_office_id, residence_permit_upload_type_id, work_permit_upload_type_id, driving_licence_upload_type_id, debts_bailiff_type_id, master_budget_id, sector_id, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password):
         #~ kw = dict()
@@ -1219,7 +1219,6 @@ def migrate_from_1_1_10(globals_dict):
         #~ kw.update(cbss_http_password=cbss_http_password)
         #~ return system_SiteConfig(**kw)
     #~ globals_dict.update(create_system_siteconfig=create_system_siteconfig)
-
 
     accounts_Account = resolve_model("accounts.Account")
     accounts_Group = resolve_model("accounts.Group")
