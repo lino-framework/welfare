@@ -34,7 +34,7 @@ from lino import ad
 from django.utils.translation import ugettext_lazy as _
 
 
-class App(ad.App):
+class Plugin(ad.Plugin):
     verbose_name = _("CBSS")
 
     cbss_live_tests = False
@@ -43,7 +43,7 @@ class App(ad.App):
     cbss_environment = 'test'
 
     def __init__(self, *args):
-        super(App, self).__init__(*args)
+        super(Plugin, self).__init__(*args)
         for k in 'cbss_environment cbss_live_tests'.split():
             if hasattr(self.site, k):
                 v = getattr(self.site, k)

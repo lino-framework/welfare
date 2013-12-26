@@ -48,7 +48,7 @@ from lino import dd
 from lino.modlib.reception.models import *
 
 
-from lino_welfare.modlib.reception import App
+from lino_welfare.modlib.reception import Plugin
 from lino.mixins import beid
 
 pcsw = dd.resolve_app('pcsw')
@@ -465,7 +465,7 @@ inherited_setup_main_menu = setup_main_menu
 
 
 def setup_main_menu(site, ui, profile, main):
-    m = main.add_menu("reception", App.verbose_name)
+    m = main.add_menu("reception", Plugin.verbose_name)
     #~ m.add_separator("-")
     #~ m.add_action('reception.Clients','find_by_beid')
     m.add_action('reception.Clients')

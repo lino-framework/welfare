@@ -24,7 +24,7 @@ from django.utils.translation import string_concat
 from lino import dd
 
 from lino.modlib.contacts.models import *
-from lino_welfare.modlib.contacts import App
+from lino_welfare.modlib.contacts import Plugin
 
 
 
@@ -297,7 +297,7 @@ inherited_setup_main_menu = setup_main_menu
 
 
 def setup_main_menu(self, ui, profile, main):
-    m = main.add_menu("contacts", App.verbose_name)
+    m = main.add_menu("contacts", Plugin.verbose_name)
     #~ m.clear()
     m.add_action(Persons)
     m.add_action(self.modules.pcsw.Clients,

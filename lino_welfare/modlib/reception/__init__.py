@@ -16,9 +16,9 @@
 Lino-Welfare extension of :mod:`lino.modlib.reception`
 """
 
-from lino.modlib.reception import App
+from lino.modlib.reception import Plugin
 
 
-class App(App):
+class Plugin(Plugin):
 
     extends = 'lino.modlib.reception'

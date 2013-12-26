@@ -60,7 +60,7 @@ from lino.mixins.printable import DirectPrintAction
 
 from lino_welfare.modlib.system.models import Signers
 
-from lino_welfare.modlib.isip import App
+from lino_welfare.modlib.isip import Plugin
 
 
 def rangefmt(r):
@@ -158,8 +158,8 @@ class ExamPolicies(dd.Table):
     """
 
 
-from lino_welfare.modlib.jobs import App as JobsApp
-JOBS_MODULE_NAME = JobsApp.verbose_name
+from lino_welfare.modlib.jobs import Plugin as JobsPlugin
+JOBS_MODULE_NAME = JobsPlugin.verbose_name
 
 
 class ContractEnding(dd.Model):
@@ -169,7 +169,7 @@ class ContractEnding(dd.Model):
         verbose_name_plural = _('Contract termination reasons')
 
     name = models.CharField(_("designation"), max_length=200)
-    use_in_isip = models.BooleanField(App.verbose_name, default=True)
+    use_in_isip = models.BooleanField(Plugin.verbose_name, default=True)
     use_in_jobs = models.BooleanField(JOBS_MODULE_NAME, default=True)
     is_success = models.BooleanField(_("Success"), default=False)
     needs_date_ended = models.BooleanField(
@@ -803,20 +803,20 @@ class ContractsByStudyType(Contracts):
 #~ customize_siteconfig()
 
 
-#~ from lino_welfare.modlib.integ import App
+#~ from lino_welfare.modlib.integ import Plugin
 
 #~ def setup_main_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m  = m.add_menu("integ",Plugin.verbose_name)
     #~ m.add_action(MyContracts)
 
 #~ def setup_config_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m  = m.add_menu("integ",Plugin.verbose_name)
     #~ m.add_action(ContractTypes)
     #~ m.add_action(ContractEndings)
     #~ m.add_action(ExamPolicies)
     #~ m.add_action(StudyTypes)
   #~
 #~ def setup_explorer_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",App.verbose_name)
+    #~ m  = m.add_menu("integ",Plugin.verbose_name)
     #~ m.add_action(Contracts)
 #~

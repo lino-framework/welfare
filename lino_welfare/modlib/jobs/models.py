@@ -74,7 +74,7 @@ contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
 pcsw = dd.resolve_app('pcsw')
 
-from lino_welfare.modlib.jobs import App
+from lino_welfare.modlib.jobs import Plugin
 
 
 class Schedule(dd.BabelNamed):
@@ -1482,9 +1482,9 @@ if True:  # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
                     )
 
-#~ from lino_welfare.modlib.integ import App
+#~ from lino_welfare.modlib.integ import Plugin
 
-#~ INTEG_MODULE_LABEL = _(App.verbose_name)
+#~ INTEG_MODULE_LABEL = _(Plugin.verbose_name)
 
 
 def unused_setup_main_menu(site, ui, profile, m):

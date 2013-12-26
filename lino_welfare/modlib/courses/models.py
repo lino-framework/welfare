@@ -71,7 +71,7 @@ pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 
 
-from lino_welfare.modlib.courses import App
+from lino_welfare.modlib.courses import Plugin
 
 
 class CourseProvider(contacts.Company):
@@ -738,7 +738,7 @@ def site_setup(self):
 
 def setup_main_menu(site, ui, profile, m):
     if profile.integ_level:
-        m = m.add_menu("courses", App.verbose_name)
+        m = m.add_menu("courses", Plugin.verbose_name)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)
         #~ m.add_action(Courses)
@@ -748,13 +748,13 @@ def setup_main_menu(site, ui, profile, m):
 #~ def setup_master_menu(site,ui,profile,m): pass
 #~ def setup_my_menu(site,ui,profile,m): pass
 def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("courses", App.verbose_name)
+    m = m.add_menu("courses", Plugin.verbose_name)
     m.add_action(CourseContents)
     #~ m.add_action(CourseEndings)
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("courses", App.verbose_name)
+    m = m.add_menu("courses", Plugin.verbose_name)
     m.add_action(Courses)
     m.add_action(CourseRequests)
 
@@ -771,4 +771,4 @@ def setup_workflows(site):
     CourseRequestStates.candidate.add_transition(states="inactive")
         #~ debug_permissions = 20130424)
 
-dd.add_user_group('courses', App.verbose_name)
+dd.add_user_group('courses', Plugin.verbose_name)

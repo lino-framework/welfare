@@ -31,7 +31,7 @@ from django.db.models import Q
 from lino import dd
 from lino.utils.xmlgen.html import E
 
-from lino_welfare.modlib.integ import App
+from lino_welfare.modlib.integ import Plugin
 
 contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
@@ -554,7 +554,7 @@ class ActivityReport(dd.Report):
     parameters = dict(
         start_date=models.DateField(verbose_name=_("Period from")),
         end_date=models.DateField(verbose_name=_("until")),
-        include_jobs=models.BooleanField(verbose_name=jobs.App.verbose_name),
+        include_jobs=models.BooleanField(verbose_name=jobs.Plugin.verbose_name),
         include_isip=models.BooleanField(verbose_name=_("ISIP")),
     )
 
@@ -607,7 +607,7 @@ class ActivityReport(dd.Report):
 #~ def setup_main_menu(site,ui,profile,m):
     #~ m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
 def setup_reports_menu(site, ui, profile, m):
-    m = m.add_menu("integ", App.verbose_name)
+    m = m.add_menu("integ", Plugin.verbose_name)
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
     m.add_action(site.modules.integ.UsersWithClients)
 
@@ -618,7 +618,7 @@ def setup_reports_menu(site, ui, profile, m):
 
 
 def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu("integ", App.verbose_name)
+    m = m.add_menu("integ", Plugin.verbose_name)
     m.add_action(Clients)
     m.add_action(isip.MyContracts)
     #~ m.add_action(MyPersonSearches)
@@ -630,7 +630,7 @@ def setup_main_menu(site, ui, profile, m):
 
 
 def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("integ", App.verbose_name)
+    m = m.add_menu("integ", Plugin.verbose_name)
     m.add_action(isip.ContractTypes)
     m.add_action(isip.ContractEndings)
     m.add_action(isip.ExamPolicies)
@@ -645,12 +645,12 @@ def setup_config_menu(site, ui, profile, m):
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("integ", App.verbose_name)
+    m = m.add_menu("integ", Plugin.verbose_name)
     m.add_action(isip.Contracts)
     m.add_action(jobs.Contracts)
     m.add_action(jobs.Candidatures)
     m.add_action(jobs.Studies)
 
 
-dd.add_user_group('integ', App.verbose_name)
+dd.add_user_group('integ', Plugin.verbose_name)
 #~ dd.add_user_group('coach',INTEG_MODULE_LABEL)

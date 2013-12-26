@@ -1,4 +1,3 @@
-# -*- coding: UTF-8 -*-
 # Copyright 2013 Luc Saffre
 # This file is part of the Lino-Faggio project.
 # Lino-Faggio is free software; you can redistribute it and/or modify
@@ -16,10 +15,10 @@
 Lino-Welfare extension of :mod:`lino.modlib.contacts`
 """
 
-from lino.modlib.contacts import App
+from lino.modlib.contacts import Plugin
 
 
-class App(App):
+class Plugin(Plugin):
 
     extends = 'lino.modlib.contacts'
     extends_models = ['contacts.Partner',

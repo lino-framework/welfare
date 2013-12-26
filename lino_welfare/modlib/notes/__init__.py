@@ -19,7 +19,7 @@ Lino-Welfare extension of :mod:`lino.modlib.notes`
 from lino import ad
 
 
-class App(ad.App):
+class Plugin(ad.Plugin):
 
     extends = 'lino.modlib.notes'
     extends_models = ['notes.Note']
