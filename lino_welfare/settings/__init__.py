@@ -56,7 +56,7 @@ class Site(Site):
     project_model = 'pcsw.Client'
     user_model = 'users.User'
 
-    accounts_ref_length = 5
+    # accounts_ref_length = 5
 
     languages = 'en fr de nl'  # tested docs rely on this distribution
 
@@ -77,6 +77,9 @@ class Site(Site):
     #~ use_eidreader = True
 
     #~ admin_url = '/admin'
+
+    def setup_plugins(self):
+        self.plugins.accounts.configure(ref_length=5)
 
     def setup_choicelists(self):
         """
@@ -187,8 +190,7 @@ class Site(Site):
                 #~ yield obj
 
     def get_installed_apps(self):
-        for a in super(Site, self).get_installed_apps():
-            yield a
+        yield super(Site, self).get_installed_apps()
 
         yield 'lino_welfare.modlib.system'
         yield 'django.contrib.contenttypes'
