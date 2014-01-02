@@ -1258,4 +1258,7 @@ def migrate_from_1_1_10(globals_dict):
     globals_dict.update(create_accounts_group=create_accounts_group)
     globals_dict.update(create_accounts_account=create_accounts_account)
 
+    countries_Place = resolve_model("countries.Place")
+    globals_dict.update(countries_City=countries_Place)
+
     return '1.1.11'
