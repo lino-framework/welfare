@@ -1,4 +1,4 @@
-# Copyright 2012-2013 Luc Saffre
+# Copyright 2012-2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -11,10 +11,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-from lino import ad
+from lino.modlib.households import Plugin
 
 
-class Plugin(ad.Plugin):
+class Plugin(Plugin):
 
-    extends = 'lino.modlib.households'
     extends_models = ['households.Household']

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Faggio project.
 # Lino-Faggio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
 Lino-Welfare extension of :mod:`lino.modlib.reception`
 """
 
+# must import it so that Lino knows from where to inherit
 from lino.modlib.reception import Plugin
 
+# class Plugin(Plugin):
+#     pass
 
-class Plugin(Plugin):
-
-    extends = 'lino.modlib.reception'

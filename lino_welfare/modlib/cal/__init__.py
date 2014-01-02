@@ -1,4 +1,4 @@
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Faggio project.
 # Lino-Faggio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,5 +20,4 @@ from lino.apps.cal import Plugin
 
 class Plugin(Plugin):
     
-    extends = 'lino.apps.cal'
     extends_models = ['cal.Event', 'cal.EventType']
