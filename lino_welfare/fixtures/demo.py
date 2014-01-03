@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ from lino.utils import dblogger
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
-from lino.apps.cal.utils import DurationUnits
+from lino.modlib.cal.utils import DurationUnits
 
 #~ from django.contrib.auth import models as auth
 #~ from lino.modlib.users import models as auth

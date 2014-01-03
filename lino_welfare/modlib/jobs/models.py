@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ from lino.mixins.printable import DirectPrintAction
 #~ from lino.mixins.reminder import ReminderEntry
 
 from lino.modlib.countries.models import CountryCity
-from lino.apps.cal.utils import DurationUnits
+from lino.modlib.cal.utils import DurationUnits
 
 uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')

@@ -12,10 +12,10 @@
 # along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.apps.cal`
+Lino-Welfare extension of :mod:`lino.modlib.cal`
 """
 
-from lino.apps.cal import Plugin
+from lino.modlib.cal import Plugin
 
 
 class Plugin(Plugin):

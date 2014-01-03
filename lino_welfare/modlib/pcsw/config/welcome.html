@@ -2,7 +2,7 @@
 #if $user is not None
 <p>User <b>$user.get_full_name() ($user)</b> on $site.title</p>
 
-#from lino.apps.pcsw.models import persons_by_user
+#from lino.modlib.pcsw.models import persons_by_user
 $persons_by_user($ui,$user)
 
 #from lino.modlib.cal.models import tasks_summary

@@ -49,14 +49,6 @@ from lino.utils import i2d
 #Companies = resolve_model('contacts.Companies')
 from djangosite.utils.djangotest import TestCase
 
-#~ Person = dd.resolve_model('contacts.Person')
-#~ Property = dd.resolve_model('properties.Property')
-#~ PersonProperty = dd.resolve_model('properties.PersonProperty')
-
-#~ from lino.apps.pcsw.models import Person
-#~ from lino.modlib.cv.models import PersonProperty
-#~ from lino.modlib.properties.models import Property
-
 from lino_welfare.management.commands.watch_tim import process_line
 
 

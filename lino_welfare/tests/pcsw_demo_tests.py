@@ -355,7 +355,7 @@ class DemoTest(RemoteAuthTestCase):
         Tests whether SoftSkillsByPerson works and whether it returns language-specific labels.
         Bug discovered :blogref:`20110228`.
         See also :blogref:`20110531`.
-        See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_demo_tests.py`.
+
         """
         #~ from lino.modlib.users.models import User
         #~ u = User.objects.get(username='rolf')

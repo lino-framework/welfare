@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Faggio project.
 # Lino-Faggio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,13 +25,13 @@ from django.contrib.humanize.templatetags.humanize import naturaltime, naturalda
 
 from lino import dd
 
-from lino.apps.cal.models import *
+from lino.modlib.cal.models import *
 
 #~ add = EventEvents.add_item
 #~ add('30', _("Visit"),'visit')
 
 
-from lino.apps.cal.workflows import take, feedback
+from lino.modlib.cal.workflows import take, feedback
 
 EventStates.published.text = _("Notified")
 

@@ -105,7 +105,6 @@ class QuickTests(RemoteAuthTestCase):
         Tests error handling when printing a contract whose type's 
         name contains non-ASCII char.
         Created :blogref:`20110615`.
-        See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_tests.py`.
         """
 
         #~ print "20130321 test01 started"

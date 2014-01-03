@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2012 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ from lino.core.dbutils import is_valid_url, is_valid_email
 from lino.modlib.countries.models import Place, Country
 from lino.modlib.notes.models import Note
 from lino.modlib.users.models import User
-from lino.apps.cal import models as cal
+from lino.modlib.cal import models as cal
 #~ from lino.modlib.cal.utils import EventStatus
 from lino.modlib.properties import models as properties
 from lino_welfare.modlib.jobs import models as jobs

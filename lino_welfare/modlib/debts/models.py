@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2013 Luc Saffre
+# Copyright 2012-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ from lino.modlib.contacts import models as contacts
 from lino.modlib.notes import models as notes
 #~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
-from lino.apps.cal import models as cal
+from lino.modlib.cal import models as cal
 #~ from lino.modlib.users import models as users
 #~ from lino.utils.choicelists import HowWell, Gender
 #~ from lino.core.perms import UserLevels

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2013 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -1338,7 +1338,7 @@ class IdentifyPersonResult(dd.VirtualTable):
     #~ @dd.virtualfield(models.ForeignKey(settings.SITE.person_model))
     #~ @dd.displayfield(_("Person"))
     #~ def person(self,obj,ar):
-        #~ from lino.apps.pcsw.models import Person
+        #~ from lino.modlib.pcsw.models import Person
         #~ niss = obj.childAtPath('/Basic/SocialSecurityUser').text
         #~ if niss:
             #~ try:

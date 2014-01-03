@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2013 Luc Saffre
+# Copyright 2009-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -210,7 +210,7 @@ class Site(Site):
         yield 'lino.modlib.uploads'
         #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
-        yield 'lino.apps.extensible'
+        yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
         #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.households'
@@ -236,7 +236,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.cbss'
         # notes demo fixture creates notes for Clients
         yield 'lino_welfare.modlib.notes'
-        yield 'lino.apps.beid'
+        yield 'lino.modlib.beid'
 
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns

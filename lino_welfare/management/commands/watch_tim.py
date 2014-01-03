@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2010-2013 Luc Saffre
+# Copyright 2010-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -217,8 +217,6 @@ def pxs2client(row, person):
     par2client(row, person)
 
     if row.has_key('CARDTYPE'):
-        #~ row.card_type = BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
-        #~ from lino.apps.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
             #~ person.card_type = BeIdCardTypes.blank_item
             person.card_type = ''

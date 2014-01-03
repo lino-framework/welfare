@@ -19,8 +19,6 @@ You can run only these tests by issuing::
 
   python manage.py test pcsw.SqlTest
 
-See the source code at :srcref:`/lino/apps/pcsw/tests/pcsw_sql_tests.py`.
-
 "Regardless of the value of the DEBUG setting in your configuration file, 
 all Django tests run with DEBUG=False. This is to ensure that the observed 
 output of your code matches what will be seen in a production setting."  
