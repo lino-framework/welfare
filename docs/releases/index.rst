@@ -18,7 +18,6 @@ Older releases
 
 .. py2rst::
 
-  #~ from lino.utils import i2d, rstgen
   from lino.utils import i2d
   from north import dbutils
 
@@ -40,7 +39,7 @@ Older releases
           dbutils.set_language(language)
           
       #~ t = rstgen.SimpleTable('version released lino_version changeset'.split())
-      #~ print t.to_rst([r[:4] for r in RELEASES])
+      #~ print(t.to_rst([r[:4] for r in RELEASES]))
       for version,date,lino_version,changeset in RELEASES:
           version = ":doc:`/releases/%s`" % version
           s = "- %s released %s" % (version,dbutils.dtosl(date))
@@ -49,18 +48,18 @@ Older releases
               s += " <http://lino-framework.org/releases/" + lino_version + ".html>`_"
           if changeset:
               s += ", :checkin:`%s`" % changeset
-          print s
+          print(s)
           
-      print """
+      print("""
       
   .. toctree::
      :maxdepth: 1
      :hidden:
 
-     coming"""
+     coming""")
      
       for version,date,lino_version,changeset in RELEASES:
-          print "   " + version
+          print("   " + version)
 
   # as_index_rst('de')
   

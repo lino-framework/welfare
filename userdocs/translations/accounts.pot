@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 05:39+0200\n"
+"POT-Creation-Date: 2014-01-07 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,17 +22,17 @@ msgid "Accounts"
 msgstr ""
 
 #: None:2
-# 49ac84132127494cbf7af415461c3727
+# 9eb89c0925f14aea9926ce9d8b8fa2bc
 msgid "Account Chart (model in app \"accounts\")"
 msgstr ""
 
 #: None:2
-# f8ba8b490ad94f49ae3a02c23645a9af
+# 77499bc3932a44018b3f6ede280f4e38
 msgid "Account (model in app \"accounts\")"
 msgstr ""
 
 #: None:2
-# f9aec4a1788545da80905c75877da859
+# 6dd106979b154ad98701f778386f6d2d
 msgid "Account Group (model in app \"accounts\")"
 msgstr ""
 

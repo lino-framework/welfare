@@ -7,3 +7,5 @@ Integration
 .. actor:: integ.ActivityReport
 
 
+.. actor:: integ.UsersWithClients
+

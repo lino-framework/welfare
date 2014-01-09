@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 05:39+0200\n"
+"POT-Creation-Date: 2014-01-07 22:27+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 # b4f20b79ff584cb6a2c0a62e6921412e
 #: ../debts.rst:7
-msgid "Debt Mediation (Schuldnerberatung, Médiation de dettes)"
+msgid "Debts Mediation (Schuldnerberatung, Médiation de dettes)"
 msgstr ""
 
 # 8ddf74d99e9e43f19f5888df630baa89
@@ -73,22 +73,46 @@ msgstr ""
 msgid "Ignore yearly incomes"
 msgstr ""
 
-# 27de57f25bc2431b93a94b6439a03cf6
+# c22f96f94f624c36a506c5a1a7b0da3f
+# a632e1f68b68486cbcf3f2a1201e63cc
+#: ../debts.rst:55 ../debts.rst:63
+msgid "Slave table in the \"Summary\" tab of a :ddref:`debts.Budget` detail."
+msgstr ""
+
+# e16fdea0b5af43fe8f3b2d9a3ac608e5
+#: ../debts.rst:57
+msgid ""
+"Shows the \"simple\" debts in this budget (those who have not yet been "
+"transferred to a debt collection agency)."
+msgstr ""
+
+# ebe1822d7b99425f9d346310647b722b
+#: ../debts.rst:65
+msgid ""
+"Shows the debts in this budget which have been transferred to a debt "
+"collection agency."
+msgstr ""
+
+# b629a33d752b42afa37ca7478b77cb34
 #: None:2
 msgid "Budget Actor (model in app \"debts\")"
 msgstr ""
 
-# 282e118f034a452d8f17209184964be0
+# a72a58eeac1e45aeab0ce57af74510c2
 #: None:2
 msgid "Budget (model in app \"debts\")"
 msgstr ""
 
-# 7717149f75c748cf90cfae1b5a38e8a0
+# 7bdb2d7594524b42a3ebb6700d811a5a
 #: None:2
 msgid "Budget Entry (model in app \"debts\")"
 msgstr ""
 
 # 9ad692668e5a4cec964c45b4bc1b216c
 #~ msgid "Médiation de dettes"
+#~ msgstr ""
+
+# b4f20b79ff584cb6a2c0a62e6921412e
+#~ msgid "Debt Mediation (Schuldnerberatung, Médiation de dettes)"
 #~ msgstr ""
 

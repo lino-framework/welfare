@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 05:39+0200\n"
+"POT-Creation-Date: 2014-01-07 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,27 +49,27 @@ msgid "Project d'Insertion Sociale Personnalisé. Une convention entre le CPAS e
 msgstr ""
 
 #: None:2
-# 5f59e89b09714f719f288ab60460e6e9
+# 199fe71f04c5459bafd6a3a8d1f0b956
 msgid "ISIP (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 43390baa760e4b10ad4c60d83dc6262c
+# 36452791afb14cbfb9d7bf5c77010d77
 msgid "study type (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 83ac59163b5c4310b0d90e7a960e735e
+# eefebb00c8ea47ca8630abb9e1fb8b2e
 msgid "ISIP Type (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 20d5a474e9344ca9854ed0f097943996
+# e65b7184546a4ca69faa077af6f95a16
 msgid "Examination Policy (model in app \"isip\")"
 msgstr ""
 
 #: None:2
-# 288a5f825e8243f28a514b3702136ca1
+# 0d0b60fcceed42afa34725fcd2317f64
 msgid "Reason of termination (model in app \"isip\")"
 msgstr ""
 

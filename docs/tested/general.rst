@@ -99,7 +99,7 @@ Test whether :meth:`get_db_overview_rst
  pcsw.AidType                   5         7
  pcsw.Client                    73        61
  pcsw.ClientContact             7         0
- pcsw.ClientContactType         5         5
+ pcsw.ClientContactType         6         5
  pcsw.Coaching                  8         77
  pcsw.CoachingEnding            7         4
  pcsw.CoachingType              5         3

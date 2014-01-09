@@ -253,6 +253,7 @@ extlinks = {
   'srcref': ('http://code.google.com/p/lino-welfare/source/browse%s', ''),
   'extjs': ('http://www.sencha.com/deploy/dev/docs/?class=%s', ''),
   'extux': ('http://extjs-ux.org/ext-docs/?class=%s', ''),
+  'welfareticket': ('http://welfare.lino-framework.org/tickets/%s.html', ''),
   'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
   'lino': ('http://www.lino-framework.org%s.html', ''),
 }

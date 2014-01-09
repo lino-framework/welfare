@@ -7,7 +7,7 @@ A Lino application for Belgian Public Welfare Centres
 Description
 -----------
 
-Lino-Welfare is a modular customized
+Lino Welfare is a modular customized
 `Lino <http://www.lino-framework.org>`__
 application for Belgian
 *Public Centres for Social Welfare*.

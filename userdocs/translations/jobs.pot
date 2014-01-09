@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 05:39+0200\n"
+"POT-Creation-Date: 2014-01-07 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,67 +77,67 @@ msgid "Référence"
 msgstr ""
 
 #: None:2
-# 916c635655bb41989c0480177b8dc71b
+# 580d302ce62148a59a23db6c822870f2
 msgid "Job (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# f8c21d7ba8464aed84767a9e2d8844bb
+# a0a2184a76ba484d8b31f92e99909e94
 msgid "Job Provider (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 671ca0c500a147e39e84dfcd63212b3d
+# f7cbfc5e6c2b4f7e88cbc33fdb87878a
 msgid "Art.60§7 contract (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 8d124a5c657c499f9335b3cf5bf7bb40
+# 27d9f01e03b2428889a72eb6caa14569
 msgid "Job Candidature (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# d00ef8917f8a439393a72b1bda0dc4db
+# 05c7308b94a740208d64a869155a6b7a
 msgid "Work Regime (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# bf8b3db9f2c146eeac35edfebf80154e
+# 4e162b2e3359430d877cdcef3aa59104
 msgid "Job Sector (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# b23a788d5bd24685a62dc0358182002e
+# 8c004ae9727e478bb671065e1c56d5e6
 msgid "Job Function (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 594f04c4bb9c498dbd6f078def25d955
+# a39a9c2dc2d6467a937688c1a9e6fdc3
 msgid "Work Schedule (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 5cd87d7221ff49ec8ed4c57337a1f0c2
+# 2529ab05ff05488e8309d38f0412f9ce
 msgid "Job Offer (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 274b08d59348403da14c7f89d12a5b74
+# ce2163ebba924f4dbd6ae13a2b8f36be
 msgid "study or education (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 1d7eb6e5fcf547c8a03e776a2bcbd3e5
+# 137f2ceb395f4f8eabee8485cf37ce9c
 msgid "Job Experience (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 29f6fd3e6f7648a5a63012b9951c2da8
+# 8c29f7b73a044dda8cbc3c7ae074c2d1
 msgid "Job Type (model in app \"jobs\")"
 msgstr ""
 
 #: None:2
-# 5ce877a5cda44a3db26de977104d5e51
+# 045c5fadd6574c56b2fc445be350c103
 msgid "Job Contract Type (model in app \"jobs\")"
 msgstr ""
 

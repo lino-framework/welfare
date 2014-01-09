@@ -26,7 +26,7 @@ Ce module supporte pour l'instant la gestion des requêtes suivantes:
         rows = []
         for k,v in HANDLERS.items():
             rows.append([k, unicode(v[0]),v[2]])
-        print rstgen.table(['Name',"Text","IT"],rows)
+        print(rstgen.table(['Name',"Text","IT"],rows))
         
 .. actor:: cbss.Sector
 .. actor:: cbss.Purpose

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 05:39+0200\n"
+"POT-Creation-Date: 2014-01-07 22:27+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -28,17 +28,17 @@ msgstr ""
 msgid "Ce module facilite la gestion des nouvelles demandes de client."
 msgstr ""
 
-# 4a656a90e9c3444b8ed5167f7ce4a481
+# eb0056b5ecec450883358ca267c10936
 #: None:2
 msgid "Broker (model in app \"newcomers\")"
 msgstr ""
 
-# 2016055f4c054442b3f057ebfe7c90d9
+# 0d1ad53994894e7f9342c4db563d88ca
 #: None:2
 msgid "Competence (model in app \"newcomers\")"
 msgstr ""
 
-# 320eac7ae1c24f8cb8626815a1dd3c25
+# 75ddecae57ef49bb841e47cbff259217
 #: None:2
 msgid "Faculty (model in app \"newcomers\")"
 msgstr ""

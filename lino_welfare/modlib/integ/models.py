@@ -125,22 +125,17 @@ class UsersWithClients(dd.VirtualTable):
     """
     #~ debug_permissions = True
     required = dict(user_groups='integ newcomers')
-    #~ label = _("Overview Clients By User")
     label = _("Users with their Clients")
     #~ column_defaults = dict(width=8)
 
     slave_grid_format = 'html'
 
-    #~ @classmethod
-    #~ def on_analyze(self,site):
-        #~ if self.has_handle(site.ui):
-        #~ raise Exception("20130302 on_analyze called after handle")
 
     @classmethod
     def get_data_rows(self, ar):
         """
         We only want the users who actually have at least one client.
-        We store the corresponding request in the user object 
+        We store the corresponding request in the user object
         under the name `my_persons`.
         
         The list displays only integration agents, i.e. users with a nonempty `integ_level`.

@@ -692,10 +692,13 @@ Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhand
 Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     """)
 
-    bailiff = models.ForeignKey('contacts.Company',
-                                verbose_name=_("Bailiff"),
-                                related_name='bailiff_debts_set',
-                                null=True, blank=True)
+    bailiff = models.ForeignKey(
+        'contacts.Company',
+        verbose_name=_("Debt collection agency"),
+        help_text=_("Leave empty for simple debts, otherwise select \
+        here the responsible bailiff or collection agency"),
+        related_name='bailiff_debts_set',
+        null=True, blank=True)
 
     #~ duplicated_fields = """
     #~ account_type account partner actor distribute
@@ -718,9 +721,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     @dd.chooser()
     def bailiff_choices(self):
         qs = contacts.Companies.request().data_iterator
-        bt = settings.SITE.site_config.debts_bailiff_type
-        if bt is not None:
-            qs = qs.filter(client_contact_type=bt)
+        qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 
     #~ @chooser(simple_values=True)
@@ -1210,8 +1211,6 @@ class BailiffDebtsByBudget(DebtsByBudget):
     label = _("Bailiff Debts")
     bailiff_isnull = False
 
-#~ class DistByBudget(LiabilitiesByBudget):
-
 
 class DistByBudget(EntriesByBudget):
 
@@ -1280,7 +1279,8 @@ proportionally distributing the `Distributable amount` among the debtors.
         #~ return obj.description
 
 
-MODULE_LABEL = _("Debts mediation")
+MODULE_LABEL = dd.apps.debts.verbose_name
+# _("Debts mediation")
 
 #~ settings.SITE.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))
 #~ settings.SITE.add_user_group('debts',MODULE_LABEL)
@@ -1378,18 +1378,29 @@ def customize_accounts():
 customize_accounts()
 
 
-dd.inject_field('system.SiteConfig',
-                'debts_bailiff_type',
-                models.ForeignKey("pcsw.ClientContactType",
-                                  blank=True, null=True,
-                                  verbose_name=_("Bailiff"),
-                                  related_name='bailiff_type_sites',
-                                  help_text=_("Client contact type for Bailiff.")))
+dd.inject_field(
+    'pcsw.ClientContactType',
+    'is_bailiff',
+    models.BooleanField(
+        _("Debt collection agency"), default=False)
+)
 
-dd.inject_field('system.SiteConfig',
-                'master_budget',
-                models.ForeignKey("debts.Budget",
-                                  blank=True, null=True,
-                                  verbose_name=_("Master budget"),
-                                  related_name='master_budget_sites',
-                                  help_text=_("The budget whose content is to be copied into new budgets.")))
+# dd.inject_field(
+#     'system.SiteConfig',
+#     'debts_bailiff_type',
+#     models.ForeignKey("pcsw.ClientContactType",
+#                       blank=True, null=True,
+#                       verbose_name=_("Bailiff"),
+#                       related_name='bailiff_type_sites',
+#                       help_text=_("Client contact type for Bailiff.")))
+
+dd.inject_field(
+    'system.SiteConfig',
+    'master_budget',
+    models.ForeignKey(
+        "debts.Budget",
+        blank=True, null=True,
+        verbose_name=_("Master budget"),
+        related_name='master_budget_sites',
+        help_text=_("The budget whose content is to be \
+        copied into new budgets.")))

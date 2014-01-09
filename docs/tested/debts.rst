@@ -163,7 +163,7 @@ Printing a Budget
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
->>> pprint(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
+>>> print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier (183) wurde generiert.',
  'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',
  'refresh': True,
@@ -210,10 +210,10 @@ discovered :blogref:`20130527`:
 >>> client = Client()
 >>> url = '/api/debts/Budgets/3?fmt=json&an=detail'
 >>> res = client.get(url,REMOTE_USER='rolf')
->>> pprint(res.status_code)
+>>> print(res.status_code)
 200
 >>> result = json.loads(res.content)
->>> pprint(result.keys())
+>>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 
 
@@ -253,10 +253,10 @@ A Preview:
 .. django2rst:: 
 
    from lino.utils.xmlgen.html import E
-   print ".. raw:: html"
-   print ""
+   print(".. raw:: html")
+   print("")
    e = debts.Budget.objects.get(pk=3).to_html()
-   print "   " + E.tostring(e)
+   print("   " + E.tostring(e))
 
 
 
