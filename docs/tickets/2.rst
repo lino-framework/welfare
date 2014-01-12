@@ -1,9 +1,0 @@
-:state: discussion
-:created: 2014-01-07
-:reporter: hubert
-
-Verträge will ich, nicht Klienten
-=================================
-
-Content moved to http://lino-framework.org/tickets/81.html
-

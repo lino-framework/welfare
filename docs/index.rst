@@ -27,6 +27,5 @@ Content
    tested/index
    API <api/lino_welfare>
    todo
-   tickets/index
    changes
    
