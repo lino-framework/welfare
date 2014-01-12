@@ -5,6 +5,8 @@
 Inkasso-Schulden
 ================
 
+Moved to http://lino-framework.org/tickets/80.html
+
 .. currentlanguage:: de
 
 Betrifft :ddref:`debts`.

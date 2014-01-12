@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Welfare project.
 # Lino-Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -11,6 +11,11 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
+
+"""The :mod:`lino_welfare.modlib.integ` app groups things specific to
+the :ref:`welfare.integ`.
+
+"""
 
 from lino import ad
 
