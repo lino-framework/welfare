@@ -79,7 +79,11 @@ class Site(Site):
     #~ admin_url = '/admin'
 
     def setup_plugins(self):
+        """
+        Change the default value of :setting:`accounts.ref_length` to 5.
+        """
         self.plugins.accounts.configure(ref_length=5)
+        super(Site, self).setup_plugins()
 
     def setup_choicelists(self):
         """
