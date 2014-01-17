@@ -164,10 +164,10 @@ Printing a Budget
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
 >>> print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier (183) wurde generiert.',
- 'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt',
- 'refresh': True,
- 'success': True}
+{'refresh': True, 
+'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt', 
+'message': u'Dokument Budget Nr. 3 f\xfcr Ausdemwald-Charlier (183) wurde generiert.', 
+'success': True}
 
 
 Something in French

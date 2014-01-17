@@ -114,7 +114,7 @@ Test whether :meth:`get_db_overview_rst
  properties.PropType            9         3
  properties.Property            7         23
  system.HelpText                4         5
- system.SiteConfig              33        1
+ system.SiteConfig              32        1
  system.TextFieldTemplate       6         2
  uploads.Upload                 11        0
  uploads.UploadType             2         5

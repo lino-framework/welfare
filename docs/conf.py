@@ -14,7 +14,7 @@
 import sys, os
 
 from atelier.sphinxconf import configure
-configure(globals(),'lino_welfare.settings.test')
+configure(globals(), 'lino_welfare.settings.test')
 
 extensions += ['lino.utils.actordoc']
 
