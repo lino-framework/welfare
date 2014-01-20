@@ -1,15 +1,16 @@
 .. _welfare.userdocs:
 
+===============================
 Lino-Welfare User Documentation
 ===============================
 
-Available as `.pdf` file:
-`User Guide <./lino-welfare-userguide.pdf>`_,
-`Whitepaper <./lino-welfare-whitepaper.pdf>`_
-and
-`Screenshots <./lino-welfare-screenshots.pdf>`_
+Parts of this documentation tree are available as `.pdf` file: `User
+Guide <./lino-welfare-userguide.pdf>`_, `Whitepaper
+<./lino-welfare-whitepaper.pdf>`_ and `Screenshots
+<./lino-welfare-screenshots.pdf>`_
 
 Product description
+===================
 
 .. toctree::
    :maxdepth: 1
@@ -17,13 +18,25 @@ Product description
    whitepaper
    screenshots/index
 
-User guide
+User's guide
+============
+
+Topic guides
+------------
 
 .. toctree::
    :maxdepth: 1
 
+   tour
    general
+   watch_tim
+
+Modules
+-------
    
+.. toctree::
+   :maxdepth: 1
+
    users
    countries
    contacts
@@ -42,4 +55,4 @@ User guide
    reception
    
    system
-   watch_tim
+

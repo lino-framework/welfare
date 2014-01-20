@@ -56,5 +56,6 @@
 
     Note that we show here only the "general" or "system" userlevel.
     Open :menuselection:`Explorer --> System --> User Profiles`
-    to see all application-specific userlevels.
+    in your Lino to see all application-specific userlevels.
+
 

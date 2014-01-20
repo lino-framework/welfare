@@ -263,11 +263,12 @@ extlinks = {
 #~ nitpicky = True # use -n in Makefile instead
 
 # http://sphinx.pocoo.org/theming.html
-#~ html_theme = "default"
-html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
+# html_theme = "default"
+# html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
+html_theme = "nature"
 
 #~ todo_include_todos = True
 
 
-for n in """python django""".split():
-    intersphinx_mapping[n] = ('http://%s.readthedocs.org/en/latest/' % n, None)
+# for n in """python django""".split():
+#     intersphinx_mapping[n] = ('http://%s.readthedocs.org/en/latest/' % n, None)
