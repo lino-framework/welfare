@@ -31,3 +31,4 @@ A visitor enters.
     welcome screen (if necessary, click on the |open| icon).
 
   - Click on "Checkin"
+

@@ -240,6 +240,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.cbss'
         # notes demo fixture creates notes for Clients
         yield 'lino_welfare.modlib.notes'
+        yield 'lino.modlib.attestations'
         yield 'lino.modlib.beid'
 
     #~ def get_urls(self):

@@ -44,7 +44,7 @@ class NoteDetail(NoteDetail):
 
     left = """
     date:10 event_type:25 type:25
-    project subject 
+    project subject
     company contact_person #contact_role
     user:10 language:8 build_time id
     body

@@ -14,14 +14,19 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
-- :welfareticket:`1`
-
 - Kurse / Sprachen jetzt auch für Benutzer vom ASD
 
 - Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete
   Partner), die bisher hinter dem Namen eines Klienten stand, steht
   jetzt generell hinter dem Namen von *allen* Partnern (also auch
   Haushalte, Organisationen, Personen,...)
+
+- Manuell nach Migration:
+
+  - Einen Kalender pro User anlegen und dem User zuweisen.
+  - SiteConfig --> Constants : Neue Felder ausfüllen
+  
+
 
 Version 1.1.10 (released :blogref:`20131007`)
 =============================================

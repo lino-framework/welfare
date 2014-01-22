@@ -609,13 +609,14 @@ def objects():
                                       ))
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
-    #~ kw = dict(is_attorney=True,country=belgium,city=eupen)
-    yield company(name="Demarteau Bernadette", street='Aachener Straße', street_no=25, **kw)
+    yield company(name="Demarteau Bernadette",
+                  street='Aachener Straße', street_no=25, **kw)
     kw.update(city=stvith)
-    yield company(name="Schmitz Marc", street='Rodter Straße', street_no=43, street_box="B", **kw)
+    yield company(name="Schmitz Marc", street='Rodter Straße',
+                  street_no=43, street_box="B", **kw)
 
-    settings.SITE.site_config.debts_bailiff_type = cct
-    yield settings.SITE.site_config
+    # settings.SITE.site_config.debts_bailiff_type = cct
+    # yield settings.SITE.site_config
 
     def person2client(p, **kw):
         c = mti.insert_child(p, Client)

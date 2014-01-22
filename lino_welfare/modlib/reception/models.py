@@ -184,13 +184,14 @@ class CreateNoteActionsByClient(ButtonsTable):
             return
         sar = ar.spawn(notes.NotesByProject,
                        master_instance=ar.master_instance)
+        etn = settings.SITE.site_config.attestation_note_nature
         for nt in notes.NoteType.objects.filter(is_attestation=True):
-            btn = sar.insert_button(unicode(nt),
-                                    dict(type=nt,
-                                         event_type=settings.SITE.site_config.attestation_note_nature),
-                                    title=_(
-                                        "Create a %s for this client.") % nt,
-                                    icon_name=None)
+            btn = sar.insert_button(
+                unicode(nt),
+                dict(type=nt, event_type=etn),
+                title=_(
+                    "Create a %s for this client.") % nt,
+                icon_name=None)
             if btn is not None:
                 yield btn
 
@@ -213,7 +214,8 @@ class CreateEventActionsByClient(ButtonsTable):
     def get_data_rows(self, ar=None):
         if ar.master_instance is None:
             return
-        for user in settings.SITE.user_model.objects.exclude(profile__isnull=True):
+        for user in settings.SITE.user_model.objects.exclude(
+                profile__isnull=True):
             sar = ar.spawn(
                 extensible.CalendarPanel.default_action,
                 current_project=ar.master_instance.pk,
@@ -434,12 +436,9 @@ if True:  # works, though is very hackerish
         return pcsw.Client.objects.get(pk=obj.partner.pk)
     dd.inject_field('cal.Guest', 'client',
                     dd.VirtualField(dd.ForeignKey('pcsw.Client'), func))
-    for T in WaitingVisitors, MyWaitingVisitors:
+    for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
         T.column_names = T.column_names.replace('partner', 'client')
         T.detail_layout = T.detail_layout.replace('partner', 'client')
-
-    #~ class WaitingVisitors(WaitingVisitors):
-        #~ label = WaitingVisitors.label
 
 if False:  # works, but is very stupid
 

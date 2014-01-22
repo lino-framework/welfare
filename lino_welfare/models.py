@@ -333,7 +333,7 @@ def site_setup(site):
         "general constants",
         general=dd.Panel("""
         site_company next_partner_id:10 
-        job_office debts_bailiff_type master_budget
+        job_office #debts_bailiff_type master_budget
         signer1 signer2
         signer1_function signer2_function 
         """, label=_("General")), constants=dd.Panel("""
