@@ -192,9 +192,9 @@ system = dd.resolve_app('system')
 MODULE_LABEL = dd.apps.aids.verbose_name
 
 
-def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu("aids", MODULE_LABEL)
-    m.add_action('aids.MyAids')
+# def setup_main_menu(site, ui, profile, m):
+#     m = m.add_menu("aids", MODULE_LABEL)
+#     m.add_action('aids.Aids')
 
 
 def setup_config_menu(site, ui, profile, m):
