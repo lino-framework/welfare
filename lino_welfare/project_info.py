@@ -74,6 +74,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.management.commands',
     'lino_welfare.tests',
     'lino_welfare.modlib',
+    'lino_welfare.modlib.aids',
+    'lino_welfare.modlib.aids.fixtures',
     'lino_welfare.modlib.cbss',
     'lino_welfare.modlib.cbss.fixtures',
     'lino_welfare.modlib.cbss.management',

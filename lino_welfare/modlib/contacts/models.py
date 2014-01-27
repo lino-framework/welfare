@@ -1,19 +1,19 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
-# This file is part of the Lino-Faggio project.
-# Lino-Faggio is free software; you can redistribute it and/or modify
+# Copyright 2013-2014 Luc Saffre
+# This file is part of the Lino Welfare project.
+# Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# Lino-Faggio is distributed in the hope that it will be useful,
+# Lino Welfare is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
-# along with Lino-Faggio; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
-The `models` module for :mod:`lino_welfare.modlib.notes`.
+The `models` module for :mod:`lino_welfare.modlib.contacts`.
 """
 
 from __future__ import unicode_literals
@@ -27,23 +27,16 @@ from lino.modlib.contacts.models import *
 from lino_welfare.modlib.contacts import Plugin
 
 
-
 class Partner(Partner, mixins.CreatedModified, dd.ImportedFields):
 
     """
+    :ref:`welfare` defines a `vat_id` field on Partner but doesn't
+    need :mod:`lino.modlib.vat`
+
     """
 
     #~ class Meta(contacts.Partner.Meta):
         #~ app_label = 'contacts'
-
-    #~ is_active = models.BooleanField(
-        #~ verbose_name=_("is active"),default=True,
-        #~ help_text = "Only active Persons may be used when creating new operations.")
-
-    #~ newcomer = models.BooleanField(
-        #~ verbose_name=_("newcomer"),default=False)
-    #~ """Means that there's no responsible user for this partner yet.
-    #~ New partners may not be used when creating new operations."""
 
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
@@ -217,6 +210,8 @@ class Company(Partner, Company):
 
     client_contact_type = dd.ForeignKey(
         'pcsw.ClientContactType', blank=True, null=True)
+
+    vat_id = models.CharField(_("VAT id"), max_length=200, blank=True)
 
     @classmethod
     def on_analyze(cls, site):
