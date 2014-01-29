@@ -39,7 +39,7 @@ def objects():
     DECIDERS = Cycler(Decider.objects.all())
     CATS = Cycler(Category.objects.all())
 
-    for i in range(100):
+    for i in range(12):
         kw = dict(decider=DECIDERS.pop(),
                   category=CATS.pop(),
                   decided_date=settings.SITE.demo_date(days=i),

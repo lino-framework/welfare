@@ -349,15 +349,15 @@ def objects():
                                et=u"Sekretär",
                                ))
 
-    note_nature = Instantiator('notes.EventType').build
-    obj = note_nature(**babelkw('name',
-                                de="Bescheinigung",
-                                fr="Attestation",
-                                en="Attestation",
-                                et="Tõend",
-                                ))
-    yield obj
-    settings.SITE.site_config.update(attestation_note_nature=obj)
+    # note_nature = Instantiator('notes.EventType').build
+    # obj = note_nature(**babelkw('name',
+    #                             de="Bescheinigung",
+    #                             fr="Attestation",
+    #                             en="Attestation",
+    #                             et="Tõend",
+    #                             ))
+    # yield obj
+    # settings.SITE.site_config.update(attestation_note_nature=obj)
 
     calendar = Instantiator('cal.EventType').build
     client_calendar = calendar(invite_client=True, **babelkw('name',

@@ -342,7 +342,7 @@ def site_setup(site):
         residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
         client_calendar prompt_calendar 
         client_guestrole team_guestrole 
-        attestation_note_nature
+        # attestation_note_nature
         """, label=_("Constants")))
 
     site.modules.properties.Properties.set_detail_layout("""
@@ -383,56 +383,27 @@ def site_setup(site):
     site.modules.uploads.Uploads.set_insert_layout("""
     file user
     type valid_until
-    description 
+    description
     # owner
     """, window_size=(60, 'auto'))
 
     site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
     site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())
-    #~ site.modules.contacts.Persons.set_detail_layout(PersonDetail())
-    #~ for T in (site.modules.contacts.Partners,
-            #~ site.modules.contacts.Persons,
-            #~ site.modules.contacts.Companies,
-            #~ site.modules.pcsw.Clients):
-        #~ T.add_detail_tab('changes','lino.ChangesByMaster')
     site.modules.contacts.Partners.add_detail_tab(
         'changes', 'changes.ChangesByMaster')
 
-    #~ site.modules.users.Users.set_detail_layout(box2 = """
-    #~ level
-    #~ integ_level
-    #~ cbss_level
-    #~ newcomers_level newcomer_quota
-    #~ debts_level
-    #~ """)
-    #~ site.modules.users.Users.set_detail_layout("""
-    #~ box1:50 MembershipsByUser:25
-    #~ remarks AuthoritiesGiven
-    #~ """,
-    site.modules.users.Users.set_detail_layout(
-    coaching_a="""
-    newcomer_quota 
-    coaching_type 
-    coaching_supervisor
-    newcomers.CompetencesByUser
-    """)
-    #~ box2="""
-    #~ newcomer_quota
-    #~ """)
+    # site.modules.users.Users.set_detail_layout(
+    #     coaching_a="""
+    #     newcomer_quota
+    #     coaching_type
+    #     coaching_supervisor
+    #     newcomers.CompetencesByUser
+    #     """)
 
-    site.modules.users.Users.add_detail_tab('coaching', """
-    coaching_a:20 pcsw.CoachingsByUser:40
-    """, _("Coaching"),)
+    # site.modules.users.Users.add_detail_tab('coaching', """
+    # coaching_a:20 pcsw.CoachingsByUser:40
+    # """, _("Coaching"),)
 
-
-    #~ site.modules.outbox.Mails.set_detail_layout("""
-    #~ subject project date
-    # ~ user sent #build_time id owner
-    #~ RecipientsByMail:50x5 AttachmentsByMail:20x5 uploads.UploadsByOwner:20x5
-    #~ body:90x10
-    #~ """)
-
-    #~ site.modules.courses.CourseProviders.set_detail_layout(CourseProviderDetail())
 
 #~ logger.info("20130409 %s declare set_merge_actions()",__name__)
 #~ raise Exception("20130409 %s declare set_merge_actions()" % __name__)

@@ -21,10 +21,39 @@ Version 1.1.11 (coming)
   jetzt generell hinter dem Namen von *allen* Partnern (also auch
   Haushalte, Organisationen, Personen,...)
 
+- Der Reiter "Status" wurde aufgeteilt in "Arbeit" und "Hilfen".
+  Letzterer zeigt jetzt nicht mehr *ein* Feld "Sozialhilfeart"
+  (aid_type), sondern eine Liste aller im Laufe der Zeit bewilligten
+  Hilfen.
+
+- Bescheinigungen: 
+
+  - Eine Bescheinigung ist ein druckbares Dokument, das eine bestimmte
+    Information bescheinigt.
+
+    Zum Beispiel eine Anwesenheitsbescheinigung wird erstellt, indem
+    man im Kalender auf eine Anwesenheit geht und dort "Bescheinigung
+    ausstellen" klickt. Die Zeit der Anwesenheit wird nicht mehr
+    manuell erfasst, weil Lino sie ja schon kennt.
+
+    Oder eine Einkommensbescheinigung kann nur erstellt werden, wenn
+    ein entsprechender Eintrag in der Liste der Hilfen des Klienten
+    erstellt wurde. Dieser Eintrag enthält auch alle Informationen der
+    Bescheinigung, die in TIM jedesmal manuell ins Dokument
+    eingetragen wurden.
+
+  - Lebensläufe sind jetzt keine Ereignis/Notiz mehr, sondern
+    ebenfalls Bescheinigungen. Bei der Migration wurden bestehende
+    Lebenläufe konvertiert.
+
+
+
 - Manuell nach Migration:
 
   - Einen Kalender pro User anlegen und dem User zuweisen.
   - SiteConfig --> Constants : Neue Felder ausfüllen
+  - Notizart "Lebenslauf" löschen. Prüfen, ob alle Lebensläufe zu
+    Bescheinigungen konvertiert wurden.
   
 
 

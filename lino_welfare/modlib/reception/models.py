@@ -1,16 +1,16 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
-# This file is part of the Lino project.
-# Lino is free software; you can redistribute it and/or modify
+# Copyright 2013-2014 Luc Saffre
+# This file is part of the Lino Welfare project.
+# Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# Lino is distributed in the hope that it will be useful,
+# Lino Welfare is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
-# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
 The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
@@ -47,21 +47,20 @@ from lino import dd
 
 from lino.modlib.reception.models import *
 
-
 from lino_welfare.modlib.reception import Plugin
-from lino.mixins import beid
 
 pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
+attestations = dd.resolve_app('attestations')
 extensible = dd.resolve_app('extensible')
 
-dd.inject_field('notes.NoteType', 'is_attestation',
-                models.BooleanField(_("attestation"), default=False))
-dd.inject_field('system.SiteConfig', 'attestation_note_nature',
-                dd.ForeignKey('notes.EventType',
-                              verbose_name=_("Event type of attestations"),
-                              null=True, blank=True,
-                              related_name="attestation_siteconfig_set"))
+# dd.inject_field('notes.NoteType', 'is_attestation',
+#                 models.BooleanField(_("attestation"), default=False))
+# dd.inject_field('system.SiteConfig', 'attestation_note_nature',
+#                 dd.ForeignKey('notes.EventType',
+#                               verbose_name=_("Event type of attestations"),
+#                               null=True, blank=True,
+#                               related_name="attestation_siteconfig_set"))
 
 
 class CreateClientVisit(dd.Action):
@@ -182,15 +181,16 @@ class CreateNoteActionsByClient(ButtonsTable):
     def get_data_rows(self, ar=None):
         if ar.master_instance is None:
             return
-        sar = ar.spawn(notes.NotesByProject,
+        sar = ar.spawn(attestations.AttestationsByProject,
                        master_instance=ar.master_instance)
-        etn = settings.SITE.site_config.attestation_note_nature
-        for nt in notes.NoteType.objects.filter(is_attestation=True):
+        # etn = settings.SITE.site_config.attestation_note_nature
+        # for nt in notes.NoteType.objects.filter(is_attestation=True):
+        for at in attestations.AttestationType.objects.all():
             btn = sar.insert_button(
-                unicode(nt),
-                dict(type=nt, event_type=etn),
+                unicode(at),
+                dict(type=at),
                 title=_(
-                    "Create a %s for this client.") % nt,
+                    "Create a %s for this client.") % at,
                 icon_name=None)
             if btn is not None:
                 yield btn

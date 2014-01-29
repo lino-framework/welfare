@@ -1,20 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2008-2014 Luc Saffre
-# This file is part of the Lino project.
-# Lino is free software; you can redistribute it and/or modify
+# This file is part of the Lino Welfare project.
+# Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# Lino is distributed in the hope that it will be useful,
+# Lino Welfare is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
-# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-Contains PCSW-specific models and tables that have not yet been 
-moved into a separate module because they are really very PCSW specific.
+"""Contains PCSW-specific models and tables that have not yet been
+moved into a separate module because they are really very PCSW
+specific.
 
 """
 
@@ -759,11 +759,12 @@ class ClientDetail(dd.FormLayout):
     """
     #~ actor = 'contacts.Person'
 
-    main = "general status_tab coaching education languages competences jobs contracts history calendar outbox.MailsByProject misc"
+    main = "general aids_tab work_tab coaching education languages \
+    competences jobs contracts history calendar outbox.MailsByProject misc"
 
     general = dd.Panel("""
     box1 box2
-    box4 image:15 #overview     
+    box4 image:15 #overview
     """, label=_("Person"))
 
     box1 = dd.Panel("""
@@ -796,19 +797,6 @@ class ClientDetail(dd.FormLayout):
     created modified
     """
 
-    status = """
-    in_belgium_since:15 residence_type gesdos_id 
-    bank_account1:12 bank_account2:12 
-    job_agents group:16
-    """
-
-    income = """
-    aid_type   
-    income_ag  income_wg    
-    income_kg   income_rente  
-    income_misc  
-    """
-
     #~ suche = dd.Panel("""
     #~ is_seeking unemployed_since work_permit_suspended_until
     # ~ # job_office_contact job_agents
@@ -828,18 +816,28 @@ class ClientDetail(dd.FormLayout):
     uploads.UploadsByController
     """)  # ,label = _("Papers"))
 
-    status_tab = dd.Panel("""
-    status:55 income:25
+    work_tab = dd.Panel("""
     suche:40  papers:40
-    """, label=_("Status"))
+    """, label=_("Work"))
 
-    #~ coaching = dd.Panel("""
-    #~ group:16 client_state
-    # ~ # coach1:12 coach2:12 coached_from:12 coached_until:12
-    # ~ # health_insurance pharmacy job_office_contact
-    #~ job_agents
-    #~ ContactsByClient:40 CoachingsByClient:40
-    #~ """,label=_("Coaching"))
+    aids_tab = dd.Panel("""
+    status:55 income:25
+    aids.AidsByProject
+    """, label=_("Aids"))
+
+    status = """
+    in_belgium_since:15 residence_type gesdos_id 
+    bank_account1:12 bank_account2:12 
+    job_agents group:16
+    """
+
+    income = """
+    # aid_type
+    income_ag  income_wg    
+    income_kg   income_rente  
+    income_misc  
+    """
+
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
@@ -847,8 +845,8 @@ class ClientDetail(dd.FormLayout):
 
     newcomers_left = dd.Panel("""
     workflow_buttons
-    broker:12 
-    faculty:12  
+    broker:12
+    faculty:12
     """, required=dict(user_groups='newcomers'))
 
     #~ coaching_left = """

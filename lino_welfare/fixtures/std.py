@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,13 +38,17 @@ ContractEnding = dd.resolve_model('isip.ContractEnding')
 
 def objects():
 
-    noteType = Instantiator('notes.NoteType', "name",
-                            email_template='Default.eml.html', is_attestation=False).build
+    noteType = Instantiator(
+        'notes.NoteType', "name",
+        email_template='Default.eml.html').build
 
     yield noteType("Beschluss")
-    yield noteType("Konvention", remark=u"Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
-    #~ yield noteType("Brief oder Einschreiben")
-    yield noteType("Notiz", remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
+    yield noteType(
+        "Konvention", 
+        remark="Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
+    yield noteType(
+        "Notiz", 
+        remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
     yield noteType("Vorladung", remark="Einladung zu einem persönlichen Gespräch")
     # (--> Datum Eintragung DSBE)
     yield noteType("Übergabeblatt", remark="Übergabeblatt vom allgemeinen Sozialdienst")
@@ -52,43 +56,52 @@ def objects():
     yield noteType("Antragsformular")
     yield noteType("Auswertungsbogen allgemein", build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
     #~ yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
-    yield noteType("Lebenslauf", build_method='appyrtf', template='cv.odt')
     yield noteType("Erstgespräch")
 
-    noteType = Instantiator('notes.NoteType',
-                            build_method='appypdf',
-                            is_attestation=True,
-                            email_template='Default.eml.html').build
     yield noteType(
-        body_template='aus.body.html',
-        template='Letter.odt', **babelkw('name',
-                                         de="Bescheinigung Ausländerbeihilfe",
-                                         fr="Attestation allocation étrangers",
-                                         en="Foreigner income certificate"))
-    yield noteType(
-        body_template='anw.body.html',
-        template='Letter.odt', **babelkw('name',
-                                         de="Anwesenheitsbescheinigung",
-                                         fr="Attestation de présence",
-                                         en="Presence certificate"))
+        build_method='appyrtf', template='Letter.odt',
+        **babelkw('name',
+                  de="Brief oder Einschreiben",
+                  fr="Lettre",
+                  en="Letter"))
 
-    yield noteType(
-        build_method='appyrtf', template='Letter.odt', **babelkw('name',
-                                                                 de="Brief oder Einschreiben",
-                                                                 fr="Lettre",
-                                                                 en="Letter"))
+    attType = Instantiator('attestations.AttestationType',
+                           build_method='appypdf',
+                           email_template='Default.eml.html').build
+    yield attType(
+        body_template='aus.body.html',
+        template='Default.odt',
+        **babelkw('name',
+                  de="Bescheinigung Ausländerbeihilfe",
+                  fr="Attestation allocation étrangers",
+                  en="Foreigner income certificate"))
+    yield attType(
+        body_template='anw.body.html',
+        template='Default.odt',
+        **babelkw('name',
+                  de="Anwesenheitsbescheinigung",
+                  fr="Attestation de présence",
+                  en="Presence certificate"))
+
+    yield attType(
+        build_method='appyrtf',
+        template='cv.odt',
+        **babelkw('name',
+                  de="Lebenslauf",
+                  fr="Curriculum vitae",
+                  en="Curriculum vitae"))
 
     eventType = Instantiator('notes.EventType', "name remark").build
 
-    yield eventType(u"Aktennotiz", remark=u"Alle Notizen/Ereignisse, die keine andere Form haben")
-    yield eventType(u"Brief", remark=u"Brief an Kunde, Personen, Organisationen")
-    yield eventType(u"E-Mail", u"E-Mail an Kunde, Personen, Organisationen")
-    yield eventType(u"Einschreiben", u"Brief, der per Einschreiben an Kunde oder an externe Personen / Dienst verschickt wird	")
-    yield eventType(u"Gespräch EXTERN", u"Persönliches Gespräch außerhalb des ÖSHZ, wie z.B. Vorstellungsgespräch im Betrieb, Auswertungsgespräch, gemeinsamer Termin im Arbeitsamt, im Integrationsprojekt, .")
-    yield eventType(u"Gespräch INTERN", u"Persönliches Gespräch im ÖSHZ")
-    yield eventType(u"Hausbesuch", u"Hausbesuch beim Kunden")
-    yield eventType(u"Kontakt ÖSHZ intern", u"Kontakte mit Kollegen oder Diensten im ÖSHZ, z.B. Fallbesprechung mit Allgemeinem Sozialdienst, Energieberatung, Schuldnerberatung, Sekretariat, ...")
-    yield eventType(u"Telefonat", u"Telefonischer Kontakt mit dem Kunden, anderen Personen, Diensten oder Organisationen ....")
+    yield eventType("Aktennotiz", remark="Alle Notizen/Ereignisse, die keine andere Form haben")
+    yield eventType("Brief", remark="Brief an Kunde, Personen, Organisationen")
+    yield eventType("E-Mail", "E-Mail an Kunde, Personen, Organisationen")
+    yield eventType("Einschreiben", "Brief, der per Einschreiben an Kunde oder an externe Personen / Dienst verschickt wird	")
+    yield eventType("Gespräch EXTERN", "Persönliches Gespräch außerhalb des ÖSHZ, wie z.B. Vorstellungsgespräch im Betrieb, Auswertungsgespräch, gemeinsamer Termin im Arbeitsamt, im Integrationsprojekt, .")
+    yield eventType("Gespräch INTERN", "Persönliches Gespräch im ÖSHZ")
+    yield eventType("Hausbesuch", "Hausbesuch beim Kunden")
+    yield eventType("Kontakt ÖSHZ intern", "Kontakte mit Kollegen oder Diensten im ÖSHZ, z.B. Fallbesprechung mit Allgemeinem Sozialdienst, Energieberatung, Schuldnerberatung, Sekretariat, ...")
+    yield eventType("Telefonat", "Telefonischer Kontakt mit dem Kunden, anderen Personen, Diensten oder Organisationen ....")
 
     #~ projectType = Instantiator('projects.ProjectType',"name").build
     #~ yield projectType(u"VSE Ausbildung")

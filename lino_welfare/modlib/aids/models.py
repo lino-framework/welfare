@@ -135,6 +135,8 @@ class Aid(dd.ProjectRelated, attestations.Attestable):
     type = models.ForeignKey('aids.AidType')
     category = models.ForeignKey('aids.Category', blank=True, null=True)
 
+    amount = dd.PriceField(_("Amount"), blank=True, null=True)
+
     def __unicode__(self):
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
@@ -145,8 +147,8 @@ class Aid(dd.ProjectRelated, attestations.Attestable):
 class AidDetail(dd.FormLayout):
     main = """
     id project type:25 category
-    gremium date:10 applies_from applies_until
-    attestations.AttestationsByController
+    decider decided_date:10 applies_from applies_until
+    outbox.MailsByController
     """
 
 
@@ -155,12 +157,8 @@ class Aids(dd.Table):
 
     model = 'aids.Aid'
     detail_layout = AidDetail()
-    #~ column_names = "id date user type event_type subject * body_html"
-    column_names = "id date user event_type type project subject * body"
-    #~ hide_columns = "body"
-    #~ hidden_columns = frozenset(['body'])
+    column_names = "id decided_date type project"
     order_by = ["id"]
-    #~ label = _("Aids")
 
 
 class AidsByX(Aids):

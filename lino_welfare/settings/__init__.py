@@ -72,10 +72,6 @@ class Site(Site):
 
     #~ remote_user_header = "REMOTE_USER"
 
-    #~ use_eid_jslib = True
-    #~ use_eid_jslib = False
-    #~ use_eidreader = True
-
     #~ admin_url = '/admin'
 
     def setup_plugins(self):
@@ -199,7 +195,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.system'
         yield 'django.contrib.contenttypes'
         yield 'django.contrib.humanize'  # translations for
-        yield 'lino.modlib.users'
+        yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
         #~ yield 'lino.modlib.codechanges'
         #~ yield 'lino.modlib.pages'

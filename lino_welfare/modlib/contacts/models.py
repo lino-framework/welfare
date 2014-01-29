@@ -288,7 +288,7 @@ class CompanyDetail(CompanyDetail):
     #~ app_label = 'contacts'
 
 
-inherited_setup_main_menu = setup_main_menu
+# inherited_setup_main_menu = setup_main_menu
 
 
 def setup_main_menu(self, ui, profile, main):

@@ -1029,6 +1029,7 @@ def migrate_from_1_1_10(globals_dict):
     - Renamed SiteConfig default_calendar to default_event_type
     - Removed field `help_text` in `accounts.Group` and `accounts.Account`
     - Renamed `countries.City` to `countries.Place`
+    - Convert existing CVs from `notes.Note` to `attestations.Attestation`
     """
 
     bv2kw = globals_dict['bv2kw']
@@ -1184,41 +1185,6 @@ def migrate_from_1_1_10(globals_dict):
         #~ kw.update(calendar_id=calendar_id)
         return isip_ExamPolicy(**kw)
     globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
-
-    #~ system_SiteConfig = resolve_model("system.SiteConfig")
-    #~ def create_system_siteconfig(id, default_build_method, signer1_id, signer2_id, signer1_function_id, signer2_function_id, next_partner_id, site_company_id, client_calendar_id, client_guestrole_id, team_guestrole_id, prompt_calendar_id, system_note_type_id, propgroup_skills_id, propgroup_softskills_id, propgroup_obstacles_id, attestation_note_nature_id, job_office_id, residence_permit_upload_type_id, work_permit_upload_type_id, driving_licence_upload_type_id, debts_bailiff_type_id, master_budget_id, sector_id, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password):
-        #~ kw = dict()
-        #~ kw.update(id=id)
-        #~ kw.update(default_build_method=default_build_method)
-        #~ kw.update(signer1_id=signer1_id)
-        #~ kw.update(signer2_id=signer2_id)
-        #~ kw.update(signer1_function_id=signer1_function_id)
-        #~ kw.update(signer2_function_id=signer2_function_id)
-        #~ kw.update(next_partner_id=next_partner_id)
-        #~ kw.update(site_company_id=site_company_id)
-        #~ kw.update(client_calendar_id=client_calendar_id)
-        #~ kw.update(client_guestrole_id=client_guestrole_id)
-        #~ kw.update(team_guestrole_id=team_guestrole_id)
-        #~ kw.update(prompt_calendar_id=prompt_calendar_id)
-        #~ kw.update(system_note_type_id=system_note_type_id)
-        #~ kw.update(propgroup_skills_id=propgroup_skills_id)
-        #~ kw.update(propgroup_softskills_id=propgroup_softskills_id)
-        #~ kw.update(propgroup_obstacles_id=propgroup_obstacles_id)
-        #~ kw.update(attestation_note_nature_id=attestation_note_nature_id)
-        #~ kw.update(job_office_id=job_office_id)
-        #~ kw.update(residence_permit_upload_type_id=residence_permit_upload_type_id)
-        #~ kw.update(work_permit_upload_type_id=work_permit_upload_type_id)
-        #~ kw.update(driving_licence_upload_type_id=driving_licence_upload_type_id)
-        #~ kw.update(debts_bailiff_type_id=debts_bailiff_type_id)
-        #~ kw.update(master_budget_id=master_budget_id)
-        #~ kw.update(sector_id=sector_id)
-        #~ kw.update(cbss_org_unit=cbss_org_unit)
-        #~ kw.update(ssdn_user_id=ssdn_user_id)
-        #~ kw.update(ssdn_email=ssdn_email)
-        #~ kw.update(cbss_http_username=cbss_http_username)
-        #~ kw.update(cbss_http_password=cbss_http_password)
-        #~ return system_SiteConfig(**kw)
-    #~ globals_dict.update(create_system_siteconfig=create_system_siteconfig)
 
     accounts_Account = resolve_model("accounts.Account")
     accounts_Group = resolve_model("accounts.Group")
