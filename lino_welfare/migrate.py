@@ -1030,6 +1030,7 @@ def migrate_from_1_1_10(globals_dict):
     - Removed field `help_text` in `accounts.Group` and `accounts.Account`
     - Renamed `countries.City` to `countries.Place`
     - Convert existing CVs from `notes.Note` to `attestations.Attestation`
+    - Removed field SiteConfig attestation_note_nature_id and debts_bailiff_type_id
     """
 
     bv2kw = globals_dict['bv2kw']
@@ -1226,5 +1227,67 @@ def migrate_from_1_1_10(globals_dict):
 
     countries_Place = resolve_model("countries.Place")
     globals_dict.update(countries_City=countries_Place)
+
+    notes_NoteType = resolve_model("notes.NoteType")
+
+    def create_notes_notetype(id, name, build_method, template, attach_to_email, email_template, important, remark, body_template, is_attestation):
+        kw = dict()
+        kw.update(id=id)
+        if name is not None: kw.update(bv2kw('name', name))
+        kw.update(build_method=build_method)
+        kw.update(template=template)
+        kw.update(attach_to_email=attach_to_email)
+        kw.update(email_template=email_template)
+        kw.update(important=important)
+        kw.update(remark=remark)
+        kw.update(body_template=body_template)
+        # kw.update(is_attestation=is_attestation)
+        return notes_NoteType(**kw)
+    globals_dict.update(create_notes_notetype=create_notes_notetype)
+
+    system_SiteConfig = resolve_model('system.SiteConfig')
+
+    def f(**kwargs):
+        del kwargs['attestation_note_nature_id']
+        del kwargs['debts_bailiff_type_id']
+
+        return system_SiteConfig(**kwargs)
+    globals_dict.update(system_SiteConfig=f)
+
+
+
+    def after_load():
+
+        Note = resolve_model("notes.Note")
+        NoteType = resolve_model("notes.NoteType")
+        Attestation = resolve_model("attestations.Attestation")
+        AttestationType = resolve_model("attestations.AttestationType")
+    
+        cvnt = NoteType.objects.get(template='cv.odt')
+        cvat = AttestationType.objects.get(template='cv.odt')
+    
+        for note in Note.objects.filter(type=cvnt):
+            kw = dict()
+            owner_type_id = new_content_type_id(note.owner_type_id)
+            kw.update(owner_type_id=owner_type_id)
+            kw.update(owner_id=note.owner_id)
+            kw.update(user_id=note.user_id)
+            kw.update(project_id=note.project_id)
+            kw.update(build_time=note.build_time)
+            kw.update(company_id=note.company_id)
+            kw.update(contact_person_id=note.contact_person_id)
+            kw.update(contact_role_id=note.contact_role_id)
+            # kw.update(date=date)
+            kw.update(type=cvat)
+            # assert note.event_type_id == 
+            # assert not note.subject
+            # kw.update(body=body)
+            kw.update(language=note.language)
+            Attestation(**kw).save()
+            note.delete()
+
+    globals_dict.update(after_load=after_load)
+
+
 
     return '1.1.11'
