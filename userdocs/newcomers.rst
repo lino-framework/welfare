@@ -1,10 +1,10 @@
 .. _welfare.newcomers:
 
 =================
-Nouveaux clients
+New clients
 =================
 
-Ce module facilite la gestion des nouvelles demandes de client.
+This module provides functionality to handle new client applications.
 
 
 .. actor:: newcomers.NewClients

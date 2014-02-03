@@ -43,6 +43,7 @@ Modules
    cal
    
    clients
+   aids
    newcomers
    cbss
    cv

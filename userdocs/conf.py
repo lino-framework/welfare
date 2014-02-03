@@ -250,22 +250,19 @@ latex_logo = '.static/lino-logo-2.png'
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
 
 
-extlinks = {
-  'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),
-  'checkin': ('http://code.google.com/p/lino-welfare/source/detail?r=%s', 'Checkin '),
-  #~ 'srcref': ('http://code.google.com/p/lino-welfare/source/browse%s', ''),
-  'extjs': ('http://www.sencha.com/deploy/dev/docs/?class=%s', ''),
-  'extux': ('http://extjs-ux.org/ext-docs/?class=%s', ''),
-  'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
-  'lino': ('http://www.lino-framework.org%s.html', ''),
-}
+# extlinks = {
+#   'extjs': ('http://www.sencha.com/deploy/dev/docs/?class=%s', ''),
+#   'extux': ('http://extjs-ux.org/ext-docs/?class=%s', ''),
+#   'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
+#   'lino': ('http://www.lino-framework.org%s.html', ''),
+# }
 
 #~ nitpicky = True # use -n in Makefile instead
 
 # http://sphinx.pocoo.org/theming.html
-# html_theme = "default"
+html_theme = "default"
 # html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
-html_theme = "nature"
+# html_theme = "nature"
 
 #~ todo_include_todos = True
 
