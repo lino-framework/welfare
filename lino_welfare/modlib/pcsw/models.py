@@ -30,36 +30,17 @@ import datetime
 
 from django.db import models
 from django.db.models import Q
-from django.db.utils import DatabaseError
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.core.exceptions import MultipleObjectsReturned
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.translation import string_concat
 from django.utils.encoding import force_unicode
-from django.utils.functional import lazy
 
-#~ import lino
-#~ logger.debug(__file__+' : started')
-#~ from django.utils import translation
 
 from lino import dd
-from lino import mixins
 from lino.core import dbutils
-from lino.core.dbutils import resolve_field
-from lino.utils.choosers import chooser
-from lino.utils import mti
-from lino.utils.ranges import isrange
 
 from lino.utils.xmlgen.html import E
 
-
-from lino.mixins.printable import Printable
-from lino.core import actions
-
-from lino.core.dbutils import resolve_model, UnresolvedModel
 
 from lino.mixins import beid
 
@@ -73,10 +54,6 @@ uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
-#~ integ = dd.resolve_app('integ')
-#~ jobs = dd.resolve_app('jobs')
-#~ from lino_welfare.modlib.isip import models as isip
-#~ newcomers = dd.resolve_app('newcomers')
 notes = dd.resolve_app('notes')
 
 from lino.utils import ssin
@@ -453,26 +430,6 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         owned.project = self
         super(Client, self).update_owned_instance(owned)
 
-    #~ def full_clean(self,*args,**kw):
-        #~ if not isrange(self.coached_from,self.coached_until):
-            #~ raise ValidationError(u'Coaching period ends before it started.')
-        #~ super(Client,self).full_clean(*args,**kw)
-
-    #~ def clean(self):
-        #~ if self.job_office_contact:
-            #~ if self.job_office_contact.b == self:
-                #~ raise ValidationError(_("Circular reference"))
-        #~ super(Person,self).clean()
-
-    #~ def card_type_text(self,request):
-        #~ if self.card_type:
-            #~ s = babeldict_getitem(BEID_CARD_TYPES,self.card_type)
-            #~ if s:
-                #~ return s
-            #~ return _("Unknown card type %r") % self.card_type
-        # ~ return _("Not specified") # self.card_type
-    #~ card_type_text.return_type = dd.DisplayField(_("eID card type"))
-
     def full_clean(self, *args, **kw):
         if self.job_office_contact:
             if self.job_office_contact.person_id == self.id:
@@ -816,7 +773,7 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     status:55 income:25
-    aids.AidsByProject pcsw.AddressesByClient
+    aids.AidsByProject
     """, label=_("Aids"))
 
     status = """
@@ -1602,7 +1559,6 @@ class ClientContactTypes(dd.Table):
 #~ add('90', _("Other"),           'other',           Companies)
 
 
-#~ class ClientContact(mixins.ProjectRelated,contacts.CompanyContact):
 class ClientContact(contacts.ContactRelated):
 
     """
@@ -1672,23 +1628,38 @@ class ClientAddress(contacts.AddressLocation):
     def after_ui_save(self, ar):
         super(ClientAddress, self).after_ui_save(ar)
         if self.primary:
-            for c in self.client.addresses_by_client.exclude(id=self.id):
-                if c.primary:
-                    c.primary = False
-                    c.save()
-                    ar.response.update(refresh_all=True)
+            for o in self.client.addresses_by_client.exclude(id=self.id):
+                if o.primary:
+                    o.primary = False
+                    o.save()
+            for k in ADDRESS_FIELDS:
+                setattr(self.client, k, getattr(self, k))
+            self.client.save()
+            ar.response.update(refresh_all=True)
+
+ADDRESS_FIELDS = dd.fields_list(
+    ClientAddress,
+    'street street_no street_box addr1 addr2 zip_code city region country')
 
 
 class ClientAddresses(dd.Table):
     model = 'pcsw.ClientAddress'
     required = dd.required(user_level='admin')
+    detail_layout = dd.FormLayout("""
+    type country region
+    city zip_code
+    addr1
+    street street_no street_box
+    addr2
+    """, window_size=(60, 'auto'))
 
 
 class AddressesByClient(ClientAddresses):
     required = dd.required()
     master_key = 'client'
-    column_names = 'type address_column'
+    column_names = 'type:10 address_column:30 primary:5'
     label = _("Addresses")
+    auto_fit_column_widths = True
 
 
 class NotesByPerson(notes.Notes):
@@ -1711,11 +1682,6 @@ MODULE_LABEL = _("PCSW")
 
 def setup_config_menu(site, ui, profile, m):
     m = m.add_menu("pcsw", MODULE_LABEL)
-    #~ config_pcsw     = cfg.add_menu("pcsw",_("SIS"))
-    #~ config_pcsw.add_action(self.modules.pcsw.PersonGroups)
-    #~ config_pcsw.add_action(self.modules.pcsw.Activities)
-    #~ config_pcsw.add_action(self.modules.pcsw.ExclusionTypes)
-    #~ config_pcsw.add_action(self.modules.pcsw.AidTypes)
     m.add_action(PersonGroups)
     m.add_action(Activities)
     m.add_action(ExclusionTypes)
@@ -1736,8 +1702,6 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action(ClientStates)
     m.add_action(beid.BeIdCardTypes)
 
-#~ def setup_main_menu(site,ui,profile,m):
-
 
 def setup_reports_menu(site, ui, profile, m):
     m = m.add_menu("pcsw", MODULE_LABEL)
@@ -1746,10 +1710,6 @@ def setup_reports_menu(site, ui, profile, m):
     m.add_action(ClientsTest)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     # ~ m.add_action(ActivityReport1) # old version
-
-
-#~ INTEG_MODULE_LABEL = _("Integration")
-#~ JOBS_MODULE_LABEL = _("Art.60§7")
 
 
 def setup_workflows(site):

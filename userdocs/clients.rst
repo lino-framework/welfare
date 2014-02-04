@@ -40,15 +40,24 @@ Clients
     ist bei allen drei Ansichten das Gleiche. 
     Was im Detail alles angezeigt wird, 
     hängt jedoch vom :ddref:`users.User.profile` ab.
-    
 
-.. actor:: pcsw.Coaching
+    Eine vierte Tabellenansicht ist :menuselection:`Empfang -->
+    Klienten`: das ist eine spezielle Liste für den Empfangsschalter,
+    die ihr eigenes Detail-Layout hat.
+
 
 .. actor:: pcsw.ClientContact
-
 .. actor:: pcsw.ClientContactType
+
+.. actor:: pcsw.ClientAddress
+.. actor:: pcsw.ClientAddressTypes
+
+
+.. actor:: pcsw.Coaching
 .. actor:: pcsw.CoachingType
 .. actor:: pcsw.CoachingEnding
+
+
 .. actor:: pcsw.AidType
 .. actor:: pcsw.PersonGroup
 

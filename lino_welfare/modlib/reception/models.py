@@ -19,29 +19,14 @@ The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import sys
-import cgi
 import datetime
-import base64
-
 
 from django.db import models
-from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
-from django.db import IntegrityError
-from django.utils.encoding import force_unicode
-from django.core.exceptions import ValidationError
 
 from lino.utils.xmlgen.html import E
-from lino.utils import ssin
-from lino.utils import join_words
 from lino.utils import join_elems
-from lino.core.actions import InstanceAction
 
 from lino import dd
 
@@ -75,7 +60,7 @@ class CreateClientVisit(dd.Action):
         user=dd.ForeignKey(settings.SITE.user_model),
         summary=models.CharField(verbose_name=_("Reason"), blank=True))
     params_layout = """
-    user 
+    user
     summary
     """
 
@@ -241,7 +226,8 @@ class ClientDetail(dd.FormLayout):
     """, label=_("History"))
 
     contact = dd.Panel("""
-    contact1 box2:20 
+    pcsw.AddressesByClient box2:20
+    # contact1 box2:20
     pcsw.ContactsByClient
     """, label=_("Contact"))
 
@@ -256,11 +242,11 @@ class ClientDetail(dd.FormLayout):
     #~ address_column
     #~ """,label = _("Address"))
 
-    contact1 = """
-    country city zip_code
-    street street_no street_box
-    addr2
-    """
+    # contact1 = """
+    # country city zip_code
+    # street street_no street_box
+    # addr2
+    # """
 
     box2 = """
     email
