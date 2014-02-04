@@ -76,9 +76,14 @@ class Site(Site):
 
     def setup_plugins(self):
         """
-        Change the default value of :setting:`accounts.ref_length` to 5.
+        Change the default value of certain plugin settings.
+
+        - :setting:`accounts.ref_length` = 5
+        - :setting:`humanlink.human_model` = 'pcsw.Client'
+        
         """
         self.plugins.accounts.configure(ref_length=5)
+        self.plugins.humanlinks.configure(human_model='pcsw.Client')
         super(Site, self).setup_plugins()
 
     def setup_choicelists(self):
@@ -239,6 +244,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.aids'
         yield 'lino.modlib.attestations'
         yield 'lino.modlib.beid'
+        yield 'lino.modlib.humanlinks'
 
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns

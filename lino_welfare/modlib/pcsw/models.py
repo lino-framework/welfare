@@ -40,7 +40,7 @@ from lino import dd
 from lino.core import dbutils
 
 from lino.utils.xmlgen.html import E
-
+from lino.utils import join_elems
 
 from lino.mixins import beid
 
@@ -57,6 +57,11 @@ jobs = dd.resolve_app('jobs')
 notes = dd.resolve_app('notes')
 
 from lino.utils import ssin
+
+
+from .coaching import *
+from .client_address import *
+# from .client_link import *
 
 
 class CivilState(dd.ChoiceList):
@@ -141,8 +146,6 @@ add('60', _("Modified"), 'modified')
 #~ add('20', _("Started"),'started')
 #~ add('30', _("Ended"),'ended')
 
-
-from .coaching import *
 
 
 class ClientStates(dd.Workflow):
@@ -245,17 +248,10 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
-#~ class Getter(object):
-    #~ def __init__(self,query_dict):
-        #~ self.query_dict = query_dict
-        #~
-    #~ def __getattr__(self,name):
-        #~ return self.query_dict.get(name)
 class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
 
-    """
-    A :class:`Client` is a specialized :class:`Person`.
-    
+    """A :class:`Client` is a specialized :class:`Person`.
+
     """
     class Meta:
         verbose_name = _("Client")
@@ -353,23 +349,23 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
 
     refusal_reason = RefusalReasons.field(blank=True)
 
-    #~ def update_system_note(self,note):
-        #~ note.project = self
     @classmethod
     def on_analyze(cls, site):
         super(Client, cls).on_analyze(site)
         cls.declare_imported_fields(
-          '''remarks2
-          zip_code city country street street_no street_box 
-          birth_place language 
-          phone fax email 
-          card_type card_number card_valid_from card_valid_until
-          noble_condition card_issuer
-          national_id health_insurance pharmacy 
-          is_cpas is_senior 
-          gesdos_id 
-          nationality
-          ''')  # coach1
+            '''remarks2
+            zip_code city country street street_no street_box
+            birth_place language
+            phone fax email
+            card_type card_number card_valid_from card_valid_until
+            noble_condition card_issuer
+            national_id health_insurance pharmacy
+            is_cpas is_senior
+            gesdos_id
+            nationality
+            ''')  # coach1
+
+    mails_by_project = dd.ShowSlaveTable('outbox.MailsByProject')
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
@@ -389,11 +385,6 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
             qs = self.coachings_by_client.filter(
                 only_active_coachings_filter(today))
         return qs
-        #~ if qs.count() == 1:
-            #~ return qs[0]
-        #~ elif qs.count() != 0:
-            #~ logger.error("get_primary_coach() found more than 1 primary coachings for %s",self)
-        #~ return None
 
     @dd.chooser()
     def job_office_contact_choices(cls):
@@ -408,8 +399,28 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
     def __unicode__(self):
         #~ return u"%s (%s)" % (self.get_full_name(salutation=False),self.pk)
         if self.is_obsolete:
-            return "%s %s (%s*)" % (self.last_name.upper(), self.first_name, self.pk)
-        return "%s %s (%s)" % (self.last_name.upper(), self.first_name, self.pk)
+            return "%s %s (%s*)" % (
+                self.last_name.upper(), self.first_name, self.pk)
+        return "%s %s (%s)" % (
+            self.last_name.upper(), self.first_name, self.pk)
+
+    @dd.displayfield()
+    def client_info(self, ar):
+        elems = [self.get_salutation(nominative=True), E.br()]
+        elems += [self.first_name, ' ',
+                  E.b(self.last_name),
+                  # ar.obj2html(self, self.last_name),
+                  E.br()]
+        elems += join_elems(list(self.address_location_lines()), sep=E.br)
+        elems = [
+            E.div(*elems,
+                  style="font-size:18px;font-weigth:bold;"
+                  "vertical-align:bottom;text-align:middle")]
+
+        elems.append(E.br())
+        elems.append(self.eid_info(ar))
+        elems = [E.div(*elems)]
+        return elems
 
     def before_state_change(obj, ar, oldstate, newstate):
 
@@ -422,9 +433,10 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
                         co.end_date = datetime.date.today()
                         co.save()
                     ar.success(refresh=True)
-                return ar.confirm(ok,
-                                  _("This will end %(count)d coachings of %(client)s.") % dict(
-                                      count=qs.count(), client=unicode(obj)))
+                return ar.confirm(
+                    ok,
+                    _("This will end %(count)d coachings of %(client)s.")
+                    % dict(count=qs.count(), client=unicode(obj)))
 
     def update_owned_instance(self, owned):
         owned.project = self
@@ -444,18 +456,15 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
                 ssin.ssin_validator(self.national_id)
         super(Client, self).full_clean(*args, **kw)
 
-    #~ def save(self,*args,**kw):
-        #~ super(Client,self).save(*args,**kw)
-        #~ self.update_reminders()
     def after_ui_save(self, ar):
         super(Client, self).after_ui_save(ar)
         self.update_reminders(ar)
         #~ return kw
 
     def get_primary_coach(self):
-        """
-        Return the one and only primary coach 
-        (or `None` if there's less or more than one).
+        """Return the one and only primary coach (or `None` if there's less
+        or more than one).
+
         """
         qs = self.coachings_by_client.filter(primary=True).distinct()
         if qs.count == 1:
@@ -694,7 +703,7 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
             yield "%s <%s>" % (unicode(u), u.email)
 
     @dd.displayfield(_("Find appointment"))
-    def find_appointment(self, ar):
+    def find_appointment(self, ar):  # not used
         elems = []
         for obj in self.coachings_by_client.all():
             sar = extensible.CalendarPanel.request(
@@ -710,43 +719,35 @@ class ClientDetail(dd.FormLayout):
     """
     #~ actor = 'contacts.Person'
 
-    main = "general aids_tab work_tab coaching education languages \
-    competences jobs contracts history calendar outbox.MailsByProject misc"
+    main = "general contact coaching aids_tab work_tab education languages \
+    competences jobs contracts history calendar misc"
 
     general = dd.Panel("""
-    box1 box2
-    box4 image:15 #overview
+    client_info:30 general2:40 contact2:20 image:15
+    reception.AppointmentsByPartner reception.CoachingsByClient
     """, label=_("Person"))
 
-    box1 = dd.Panel("""
+    general2 = """
     last_name first_name:15 title:10
-    country city zip_code:10
-    street_prefix street:25 street_no street_box
-    addr2:40
-    """, label=_("Address"))
-
-    box2 = dd.Panel("""
-    id:12 language
-    email
-    phone fax
-    gsm
-    """, label=_("Contact"))
-
-    box3 = dd.Panel("""
-    gender:10 birth_date age:10 civil_state:15 noble_condition 
-    birth_country birth_place nationality:15 national_id:15 
-    """, label=_("Birth"))
-
-    #~ eid_panel = dd.Panel("""
-    #~ card_number:12 card_valid_from:12 card_valid_until:12 card_issuer:10 card_type:12
-    #~ """,label = _("eID card"))
-
-    box4 = """
-    box3
-    # eid_panel
-    eid_info
-    created modified
+    gender:10 civil_state:15 id
+    birth_date age:10 national_id:15
+    birth_country birth_place
+    nationality:15
     """
+
+    contact2 = """
+    language
+    email
+    phone
+    fax
+    gsm
+    """
+
+    contact = dd.Panel("""
+    pcsw.AddressesByClient \
+    humanlinks.ParentsByHuman humanlinks.ChildrenByHuman
+    pcsw.ContactsByClient
+    """, label=_("Contact"))
 
     #~ suche = dd.Panel("""
     #~ is_seeking unemployed_since work_permit_suspended_until
@@ -777,33 +778,36 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Aids"))
 
     status = """
-    in_belgium_since:15 residence_type gesdos_id 
-    bank_account1:12 bank_account2:12 
+    in_belgium_since:15 residence_type gesdos_id
+    bank_account1:12 bank_account2:12
     job_agents group:16
     """
 
     income = """
     # aid_type
-    income_ag  income_wg    
-    income_kg   income_rente  
-    income_misc  
+    income_ag  income_wg
+    income_kg   income_rente
+    income_misc
     """
 
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
+    pcsw.CoachingsByClient:40
     """, label=_("Coaching"))
 
     newcomers_left = dd.Panel("""
     workflow_buttons
     broker:12
     faculty:12
+    refusal_reason
     """, required=dict(user_groups='newcomers'))
 
     #~ coaching_left = """
     #~ """
     history = dd.Panel("""
-    pcsw.NotesByPerson #:60 #pcsw.LinksByPerson:20
+    reception.CreateNoteActionsByClient:20 \
+    attestations.AttestationsByProject:30 \
+    pcsw.NotesByPerson:30
     # lino.ChangesByMaster
     """, label=_("History"))
 
@@ -813,18 +817,18 @@ class ClientDetail(dd.FormLayout):
     #~ """,label = _("Correspondence"))
 
     calendar = dd.Panel("""
-    find_appointment
+    # find_appointment
     cal.EventsByProject
     cal.TasksByProject
     """, label=_("Calendar"))
 
     misc = dd.Panel("""
-    activity client_state refusal_reason unavailable_until:15 unavailable_why:30
-    is_cpas is_senior is_obsolete 
-    # card_valid_from:15 card_valid_until:15 card_issuer card_number card_type
-    remarks:30 remarks2:30 
+    activity client_state noble_condition \
+    unavailable_until:15 unavailable_why:30
+    is_cpas is_senior is_obsolete
+    created modified
+    remarks:30 remarks2:30
     contacts.RolesByPerson:20 households.MembersByPerson:40
-    # links.LinksToThis:30 links.LinksFromThis:30 
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     education = dd.Panel("""
@@ -1598,68 +1602,6 @@ class ContactsByClient(ClientContacts):
     master_key = 'client'
     column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
-
-
-class ClientAddressTypes(dd.ChoiceList):
-    verbose_name_plural = _("Address type")
-add = ClientAddressTypes.add_item
-add('01', _("Official address"), 'official')  # IT020
-add('02', _("Unverified address"), 'unverified')  # IT042
-add('03', _("Declared address"), 'declared')  # IT214
-add('10', _("Real address"), 'real')  # IT214
-
-
-class ClientAddress(contacts.AddressLocation):
-
-    class Meta:
-        verbose_name = _("Client Address")
-        verbose_name_plural = _("Client Addresses")
-
-    type = ClientAddressTypes.field()
-    client = dd.ForeignKey(Client, related_name='addresses_by_client')
-
-    primary = models.BooleanField(
-        _("Primary"),
-        default=False,
-        help_text=_("""There's at most one primary address per client. \
-        Enabling this field will automatically make the other \
-        addresses non-primary."""))
-
-    def after_ui_save(self, ar):
-        super(ClientAddress, self).after_ui_save(ar)
-        if self.primary:
-            for o in self.client.addresses_by_client.exclude(id=self.id):
-                if o.primary:
-                    o.primary = False
-                    o.save()
-            for k in ADDRESS_FIELDS:
-                setattr(self.client, k, getattr(self, k))
-            self.client.save()
-            ar.response.update(refresh_all=True)
-
-ADDRESS_FIELDS = dd.fields_list(
-    ClientAddress,
-    'street street_no street_box addr1 addr2 zip_code city region country')
-
-
-class ClientAddresses(dd.Table):
-    model = 'pcsw.ClientAddress'
-    required = dd.required(user_level='admin')
-    detail_layout = dd.FormLayout("""
-    type country region
-    city zip_code
-    addr1
-    street street_no street_box
-    addr2
-    """, window_size=(60, 'auto'))
-
-
-class AddressesByClient(ClientAddresses):
-    required = dd.required()
-    master_key = 'client'
-    column_names = 'type:10 address_column:30 primary:5'
-    label = _("Addresses")
-    auto_fit_column_widths = True
 
 
 class NotesByPerson(notes.Notes):

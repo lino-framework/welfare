@@ -1,24 +1,22 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2010-2014 Luc Saffre
-# This file is part of the Lino project.
-# Lino is free software; you can redistribute it and/or modify
+# This file is part of the Lino Welfare project.
+# Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# Lino is distributed in the hope that it will be useful,
+# Lino Welfare is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
-# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-.. management_command:: watch_tim
+""".. management_command:: watch_tim
 
-Starts a daemon that 
-watches the specified directory for a file :xfile:`changelog.json` 
-to appear.
-
+Starts a daemon that watches the specified directory for a file
+:xfile:`changelog.json` to appear.  This is to synchronize changes
+made in TIM to the Lino database.
 
 """
 
@@ -146,11 +144,11 @@ def isolang(x):
 
 
 def ADR_id(cIdAdr):
-    assert len(cIdAdr) == 3
-    #~ assert [cIdAdr:-3] == '000'
+    if len(cIdAdr) != 3:
+        return None
     try:
         return 199000 + int(cIdAdr)
-    except ValueError, e:
+    except ValueError:
         return None
 
 
