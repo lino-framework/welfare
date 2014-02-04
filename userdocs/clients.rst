@@ -69,9 +69,21 @@ Clients
     
     .. django2rst::
         
-        settings.SITE.login('robin').show(cv.CefLevel)
+        settings.SITE.login('robin').show(pcsw.CivilState)
 
 
+.. actor:: humanlinks.LinkTypes
+
+    List of possible choices for the `Type` field
+    of a :ddref:`humanlinks.Link`.
+    
+    .. django2rst::
+        
+        settings.SITE.login('robin').show(humanlinks.LinkTypes)
+
+
+.. actor:: humanlinks.ParentsByHuman
+.. actor:: humanlinks.ChildrenByHuman
 
 
 
