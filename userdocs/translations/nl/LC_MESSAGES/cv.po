@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,28 +23,70 @@ msgstr ""
 msgid "Curriculum vitae"
 msgstr ""
 
-# a988b1cb210a40509109f193caeb1d30
-#: None:2
-msgid "language knowledge (model in app \"cv\")"
+# eac2dfeb18f84d90a33685182db90d3b
+#: ../cv.rst:0
+msgid "CEF levels (view)"
 msgstr ""
 
-# 09397718ddec45ae9f482a1148e638b1
-# a5f9e914d21d4a3b8c2d71bdd1817c6b
-#: None:2
-msgid "Property (model in app \"properties\")"
+# dc403b22dbef4088aedf98a2f5a388b8
+#: ../cv.rst:0
+msgid "language knowledge (model)"
 msgstr ""
 
-# 33e99fe91d11492e9f82d742f14a75e6
-#: None:2
-msgid "Property Type (model in app \"properties\")"
+# 62619cd071644c40ad995b28d6748ea5
+#: ../cv.rst:0
+msgid "Property (model)"
 msgstr ""
 
-# ac03063d144e4dac8722565b5f23a157
+# b6313e80a41d45bfa4945f18bc57d5cb
+#: ../cv.rst:0
+msgid "Property Type (model)"
+msgstr ""
+
+# fe42fc4bd9c043b7b7f18ca4f8c5ffda
+#: ../cv.rst:0
+msgid "Property Group (model)"
+msgstr ""
+
+# 78abf738c4734c95b756249bf1e985e0
 #: None:2
-msgid "Property Group (model in app \"properties\")"
+msgid "language knowledge (model in cv)"
+msgstr ""
+
+# 7dfe6b52e3ed4152bb123771a920632b
+# e0bbdd301dae4b8f923c2b8a4e8680ae
+#: None:2
+msgid "Property (model in properties)"
+msgstr ""
+
+# 5d2826529d824fe6a94be54a4c5ec00d
+#: None:2
+msgid "Property Type (model in properties)"
+msgstr ""
+
+# 5acac605d0704f29b9e1a180f35362b0
+#: None:2
+msgid "Property Group (model in properties)"
 msgstr ""
 
 # 5f086ce2af184816976784c2706276f8
 #~ msgid "Référence"
+#~ msgstr ""
+
+# a988b1cb210a40509109f193caeb1d30
+#~ msgid "language knowledge (model in app \"cv\")"
+#~ msgstr ""
+
+# 09397718ddec45ae9f482a1148e638b1
+# a5f9e914d21d4a3b8c2d71bdd1817c6b
+#~ msgid "Property (model in app \"properties\")"
+#~ msgstr ""
+
+# 33e99fe91d11492e9f82d742f14a75e6
+#~ msgid "Property Type (model in app \"properties\")"
+#~ msgstr ""
+
+# ac03063d144e4dac8722565b5f23a157
+#~ msgid "Property Group (model in app \"properties\")"
 #~ msgstr ""
 

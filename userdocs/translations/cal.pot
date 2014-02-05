@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,53 +26,113 @@ msgstr ""
 msgid "Important models are :ddref:`cal.Event` and :ddref:`cal.Guest` and :ddref:`cal.Task`..."
 msgstr ""
 
-#: None:2
-# 506d7a3eeebf496ca1aba50874d71ee0
-msgid "Event (model in app \"cal\")"
+#: ../cal.rst:0
+# b469cea7224d4110891cd54f2a459ac4
+msgid "Calendar (view)"
+msgstr ""
+
+#: ../cal.rst:0
+# 268848d56c844b2a831ec3a5a70073c7
+msgid "Event (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# 6f16e13d2e834bbfbd2634bfdd7b203b
+msgid "Events (view)"
+msgstr ""
+
+#: ../cal.rst:0
+# cef4c01d471a43ae8d727cb3160dee97
+msgid "Guest (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# 22c1f8720bc84fe089b16f5a552d51c9
+msgid "Task (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# e0c3502fac2b4f838ea1b95079d5a618
+msgid "State (field)"
+msgstr ""
+
+#: ../cal.rst:0
+# 12bcb69f4f0e49faadaecca8b779ab00
+msgid "Calendar (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# f686ef355f6a4a11ae40e68cdd399382
+msgid "Subscription (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# c792cc279510435285f304fa8338636c
+msgid "Room (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# 157eecbd263344e9a80d3aae737bedc8
+msgid "Priority (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# d79e1027c3004204b64ec86103d0f835
+msgid "Guest Role (model)"
+msgstr ""
+
+#: ../cal.rst:0
+# a53667f319bf4c8485cd5e64763fdd43
+msgid "Event Type (model)"
 msgstr ""
 
 #: None:2
-# 85e117a6727a4559b6137ca0c8e4f678
-msgid "Guest (model in app \"cal\")"
+# 90c481d19e67431d999fae4220ecba4f
+msgid "Event (model in cal)"
 msgstr ""
 
 #: None:2
-# 4c7991f3e4c44d659129e3951013e182
-msgid "Task (model in app \"cal\")"
+# 31663109e11c4335a6c84232bf8ceee3
+msgid "Guest (model in cal)"
 msgstr ""
 
 #: None:2
-# 6244d13ed3704d6794654a08f66e399f
-msgid "State (field in \"<class 'lino.modlib.cal.models_task.Task'>\")"
+# 6575093ac2c140c2981028cfab11e7b4
+msgid "Task (model in cal)"
 msgstr ""
 
 #: None:2
-# e7c9dbe85c1b434aabc537a9c2e7e45e
-msgid "Calendar (model in app \"cal\")"
+# dde789f9f3e845d7a2b48ea4047a2b04
+msgid "State (field in :ref:`Task <welfare.cal.task>`)"
 msgstr ""
 
 #: None:2
-# 0757a55104eb41ee9f2493b15226a75c
-msgid "Subscription (model in app \"cal\")"
+# fd3cb919660e4f57bb2494351dcab781
+msgid "Calendar (model in cal)"
 msgstr ""
 
 #: None:2
-# 6a8f4d2634244d8290a6e19f97bf2278
-msgid "Room (model in app \"cal\")"
+# 5afa083205624c1ab2de9ed5d1434ba8
+msgid "Subscription (model in cal)"
 msgstr ""
 
 #: None:2
-# 1ecc0f3b9eb64596b581ed5da1b7749a
-msgid "Priority (model in app \"cal\")"
+# 5654743eff294eee998000ad2c69b48e
+msgid "Room (model in cal)"
 msgstr ""
 
 #: None:2
-# b28094d45d0241fbbc5031487652e155
-msgid "Guest Role (model in app \"cal\")"
+# 05fed2431454416e8afd26604de47fa8
+msgid "Priority (model in cal)"
 msgstr ""
 
 #: None:2
-# 1f3593ed349e44da9e47815e90945b84
-msgid "Event Type (model in app \"cal\")"
+# 31a823ba167a4240badc647d2f204398
+msgid "Guest Role (model in cal)"
+msgstr ""
+
+#: None:2
+# 7ac6077ab3204b379181752c57c118e7
+msgid "Event Type (model in cal)"
 msgstr ""
 

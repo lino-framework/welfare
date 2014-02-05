@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-12-24 05:39+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -18,8 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-# df137995017448d0b47d04889d424cf1
+# 0682650683fc42719b9044120c037e75
 #: ../integ.rst:5
-msgid "Integration"
+msgid "Integration service"
 msgstr ""
+
+# 4e16f63cfd874e369411af51d8a69fba
+#: ../integ.rst:7
+msgid ""
+"This is an umbrella module covering :ref:`welfare.isip`, "
+":ref:`welfare.jobs` and :ref:`welfare.cv`."
+msgstr ""
+
+# b1c855fecc1c457a86848d4d20bb8333
+#: ../integ.rst:0
+msgid "Clients (view)"
+msgstr ""
+
+# 340f1524d39c4d5e9c3599d0c28c5782
+#: ../integ.rst:0
+msgid "Users with their Clients (view)"
+msgstr ""
+
+# 4c1216308a574f93b1c233e55aaf8025
+#: ../integ.rst:0
+msgid "Activity Report (view)"
+msgstr ""
+
+# df137995017448d0b47d04889d424cf1
+#~ msgid "Integration"
+#~ msgstr ""
 

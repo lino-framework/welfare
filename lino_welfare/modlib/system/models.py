@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Faggio project.
 # Lino-Faggio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,26 +27,28 @@ from lino.modlib.system.models import *
 
 class Signers(dd.Model):
 
-    """
-    Model mixin which adds two fields `signer1` and `signer2`,
+    """Model mixin which adds two fields `signer1` and `signer2`,
     the two in-house signers of contracts and official documents.
     
-    Inherited by :class:`SiteConfig <lino.modlib.system.models.SiteConfig>` 
-    and :class:`ContractBase`.
+    Inherited by :class:`SiteConfig
+    <lino.modlib.system.models.SiteConfig>` and :class:`ContractBase`.
+
     """
 
     class Meta:
         abstract = True
 
-    signer1 = models.ForeignKey("contacts.Person",
-                                related_name="%(app_label)s_%(class)s_set_by_signer1",
-                                #~ default=default_signer1,
-                                verbose_name=_("Secretary"))
+    signer1 = models.ForeignKey(
+        "contacts.Person",
+        related_name="%(app_label)s_%(class)s_set_by_signer1",
+        #~ default=default_signer1,
+        verbose_name=_("Secretary"))
 
-    signer2 = models.ForeignKey("contacts.Person",
-                                related_name="%(app_label)s_%(class)s_set_by_signer2",
-                                #~ default=default_signer2,
-                                verbose_name=_("President"))
+    signer2 = models.ForeignKey(
+        "contacts.Person",
+        related_name="%(app_label)s_%(class)s_set_by_signer2",
+        #~ default=default_signer2,
+        verbose_name=_("President"))
 
     @chooser()
     def signer1_choices(cls):
@@ -75,17 +77,19 @@ class SiteConfig(SiteConfig, Signers):
     
     """
 
-    signer1_function = dd.ForeignKey("contacts.RoleType",
-                                     blank=True, null=True,
-                                     verbose_name=_("First signer function"),
-            help_text=_("""Contact function to designate the secretary."""),
+    signer1_function = dd.ForeignKey(
+        "contacts.RoleType",
+        blank=True, null=True,
+        verbose_name=_("First signer function"),
+        help_text=_("""Contact function to designate the secretary."""),
         related_name="%(app_label)s_%(class)s_set_by_signer1")
-    signer2_function = dd.ForeignKey("contacts.RoleType",
-                                     blank=True, null=True,
-                                     verbose_name=_("Second signer function"),
-                                     help_text=_(
-                                         "Contact function to designate the president."),
-                                     related_name="%(app_label)s_%(class)s_set_by_signer2")
+    signer2_function = dd.ForeignKey(
+        "contacts.RoleType",
+        blank=True, null=True,
+        verbose_name=_("Second signer function"),
+        help_text=_(
+            "Contact function to designate the president."),
+        related_name="%(app_label)s_%(class)s_set_by_signer2")
 
 
 dd.update_field(SiteConfig, 'signer1', blank=True, null=True)

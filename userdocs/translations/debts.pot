@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,16 @@ msgstr ""
 msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
+#: ../debts.rst:0
+# 4bd2e221f0ad4fb0b5f3719ef731a8ed
+msgid "Budget Actor (model)"
+msgstr ""
+
+#: ../debts.rst:0
+# 089f22cd01d946d3997aaed6882be2a2
+msgid "Budget (model)"
+msgstr ""
+
 #: ../debts.rst:38
 # 2ef3f60e7aaa4fc6bd7a56ed81b179b0
 msgid "Print empty rows"
@@ -59,6 +69,31 @@ msgstr ""
 #: ../debts.rst:43
 # 99e5230b697a4b098a737d3c86a46c06
 msgid "Ignore yearly incomes"
+msgstr ""
+
+#: ../debts.rst:0
+# 7554938223f74003867bff6745f4c19b
+msgid "My Budgets (view)"
+msgstr ""
+
+#: ../debts.rst:0
+# 1c075f13489a459aa360a3e23bb7eccc
+msgid "Incomes & Expenses (view)"
+msgstr ""
+
+#: ../debts.rst:0
+# b28594a6b1bf48a2b6fecf228bff57cd
+msgid "Budget Entry (model)"
+msgstr ""
+
+#: ../debts.rst:0
+# e0872617871e4c1aae19aa296832ff4d
+msgid "Budget Entries (view)"
+msgstr ""
+
+#: ../debts.rst:0
+# e0872617871e4c1aae19aa296832ff4d
+msgid "Debts (view)"
 msgstr ""
 
 #: ../debts.rst:55
@@ -73,23 +108,28 @@ msgstr ""
 msgid "Shows the \"simple\" debts in this budget (those who have not yet been transferred to a debt collection agency)."
 msgstr ""
 
+#: ../debts.rst:0
+# e0872617871e4c1aae19aa296832ff4d
+msgid "Bailiff Debts (view)"
+msgstr ""
+
 #: ../debts.rst:65
 # ebe1822d7b99425f9d346310647b722b
 msgid "Shows the debts in this budget which have been transferred to a debt collection agency."
 msgstr ""
 
 #: None:2
-# b629a33d752b42afa37ca7478b77cb34
-msgid "Budget Actor (model in app \"debts\")"
+# e67743579bce4c259c21199d5a4dbdb7
+msgid "Budget Actor (model in debts)"
 msgstr ""
 
 #: None:2
-# a72a58eeac1e45aeab0ce57af74510c2
-msgid "Budget (model in app \"debts\")"
+# abcc82413f824ce48e50b492e97b6c03
+msgid "Budget (model in debts)"
 msgstr ""
 
 #: None:2
-# 7bdb2d7594524b42a3ebb6700d811a5a
-msgid "Budget Entry (model in app \"debts\")"
+# 782d3996c18f4dfbbb941c03a9d402be
+msgid "Budget Entry (model in debts)"
 msgstr ""
 

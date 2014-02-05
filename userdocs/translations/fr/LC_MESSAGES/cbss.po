@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -28,29 +28,54 @@ msgstr ""
 msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
 msgstr ""
 
-# 0f540e32b82f4d01965d58becf092827
-#: None:2
-msgid "IdentifyPerson Request (model in app \"cbss\")"
+# 8353f2fd9c6944d3bef4256f628458ae
+#: ../cbss.rst:0
+msgid "IdentifyPerson Request (model)"
 msgstr ""
 
-# ad94cdb91e054ba8bf05b73ccf0c6b0b
-#: None:2
-msgid "ManageAccess Request (model in app \"cbss\")"
+# 5af96377b6b54dda94518c3462963cc1
+#: ../cbss.rst:0
+msgid "ManageAccess Request (model)"
 msgstr ""
 
-# 541a5ac500f64b59ad5ba4d9438e6ea9
-#: None:2
-msgid "Tx25 Request (model in app \"cbss\")"
+# 1d9e7977a0b2472a94cca797189e7080
+#: ../cbss.rst:0
+msgid "Tx25 Request (model)"
 msgstr ""
 
-# b7deec3d65a74d8b999df66d9f2db13b
-#: None:2
-msgid "Sector (model in app \"cbss\")"
+# 7716565e5d2a4140ba0a35b59857922e
+#: ../cbss.rst:0
+msgid "Sector (model)"
 msgstr ""
 
-# 024872da64ca45e7813a27a6fa2afa2f
+# 7d3df1f181f24e0b927652a6aee39bc0
+#: ../cbss.rst:0
+msgid "Purpose (model)"
+msgstr ""
+
+# 5943cb11532340d58e9febca8b9f3ae7
 #: None:2
-msgid "Purpose (model in app \"cbss\")"
+msgid "IdentifyPerson Request (model in cbss)"
+msgstr ""
+
+# e954e35c2a6d4b6a8e4ffbfc765a5d44
+#: None:2
+msgid "ManageAccess Request (model in cbss)"
+msgstr ""
+
+# 9e90e58124d244f5bc5a585212a6cba2
+#: None:2
+msgid "Tx25 Request (model in cbss)"
+msgstr ""
+
+# 0000dd7ce3ce43e38f3ec02f750cde5f
+#: None:2
+msgid "Sector (model in cbss)"
+msgstr ""
+
+# e1a6b9bb6dd0431ea9b9f87b2c9153bd
+#: None:2
+msgid "Purpose (model in cbss)"
 msgstr ""
 
 # 58384578f38b4dd3badb5471214dd415
@@ -63,5 +88,25 @@ msgstr ""
 
 # e56fd7c91f9b4e278db822a19fde0ac6
 #~ msgid "Référence"
+#~ msgstr ""
+
+# 0f540e32b82f4d01965d58becf092827
+#~ msgid "IdentifyPerson Request (model in app \"cbss\")"
+#~ msgstr ""
+
+# ad94cdb91e054ba8bf05b73ccf0c6b0b
+#~ msgid "ManageAccess Request (model in app \"cbss\")"
+#~ msgstr ""
+
+# 541a5ac500f64b59ad5ba4d9438e6ea9
+#~ msgid "Tx25 Request (model in app \"cbss\")"
+#~ msgstr ""
+
+# b7deec3d65a74d8b999df66d9f2db13b
+#~ msgid "Sector (model in app \"cbss\")"
+#~ msgstr ""
+
+# 024872da64ca45e7813a27a6fa2afa2f
+#~ msgid "Purpose (model in app \"cbss\")"
 #~ msgstr ""
 

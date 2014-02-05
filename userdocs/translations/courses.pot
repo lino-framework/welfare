@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,28 +41,63 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-#: None:2
-# 510d917cbfd94228a23769a1d6d5cc4a
-msgid "Course provider (model in app \"courses\")"
+#: ../courses.rst:0
+# b910d54e5a564fe99710c81ec3ed41df
+msgid "Course provider (model)"
+msgstr ""
+
+#: ../courses.rst:0
+# 6a68d090c5554bb1b7b9e61fa4fd8f08
+msgid "Course Content (model)"
+msgstr ""
+
+#: ../courses.rst:0
+# 98af98bc74e841ce946eb85ec9acc785
+msgid "Course Offer (model)"
+msgstr ""
+
+#: ../courses.rst:0
+# d0ac4832413447159d87c36e0bb1ac48
+msgid "Course (model)"
+msgstr ""
+
+#: ../courses.rst:0
+# 2ebc35d703ef4fd2a8ab7e1e7ae43bae
+msgid "Course Requests (model)"
+msgstr ""
+
+#: ../courses.rst:0
+# 03c0f17b65db4323af86c98e217b881e
+msgid "States (view)"
+msgstr ""
+
+#: ../courses.rst:0
+# 7397aaf00c2747d9aaab546291b89fc6
+msgid "Pending Course Requests (view)"
 msgstr ""
 
 #: None:2
-# e4e2cc4751174a68806b2903038ccd06
-msgid "Course Content (model in app \"courses\")"
+# 8b922f3c49354ac9a343213d8a87ed1b
+msgid "Course provider (model in courses)"
 msgstr ""
 
 #: None:2
-# 3d976e724163474ba93543b17d5a8463
-msgid "Course Offer (model in app \"courses\")"
+# cf2e1494436446c48a5e7db51675236e
+msgid "Course Content (model in courses)"
 msgstr ""
 
 #: None:2
-# 8e1cbf2abc32400986d8f859f1ce1c5c
-msgid "Course (model in app \"courses\")"
+# 0705da6b166840b8b29ec99bfccc67bb
+msgid "Course Offer (model in courses)"
 msgstr ""
 
 #: None:2
-# e68f8df932244b15a73999872b942e85
-msgid "Course Requests (model in app \"courses\")"
+# f2211e853fa84570bfc1e7401ceeb11c
+msgid "Course (model in courses)"
+msgstr ""
+
+#: None:2
+# f615a55db85f40b49cc069feef70c495
+msgid "Course Requests (model in courses)"
 msgstr ""
 

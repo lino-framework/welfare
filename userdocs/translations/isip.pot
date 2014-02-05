@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,28 +48,53 @@ msgstr ""
 msgid "Project d'Insertion Sociale Personnalisé. Une convention entre le CPAS et un jeune client qui engendra un accompagnement individuel de la personne surtout au niveau enseignement."
 msgstr ""
 
-#: None:2
-# 199fe71f04c5459bafd6a3a8d1f0b956
-msgid "ISIP (model in app \"isip\")"
+#: ../isip.rst:0
+# bedbdaa3d16642f48f9995f8415aaf3d
+msgid "ISIP (model)"
+msgstr ""
+
+#: ../isip.rst:0
+# 6d10b266b77b4be0a4e9b31bc7ce5926
+msgid "study type (model)"
+msgstr ""
+
+#: ../isip.rst:0
+# 65867a7427ba48d0b768988ecf6349ed
+msgid "ISIP Type (model)"
+msgstr ""
+
+#: ../isip.rst:0
+# 43960b06951341379fb045f968bf91fb
+msgid "Examination Policy (model)"
+msgstr ""
+
+#: ../isip.rst:0
+# 4f2c3dc81e57455f9f46256acfe35c4b
+msgid "Reason of termination (model)"
 msgstr ""
 
 #: None:2
-# 36452791afb14cbfb9d7bf5c77010d77
-msgid "study type (model in app \"isip\")"
+# 084810810e3b41adb0e15e7647e75206
+msgid "ISIP (model in isip)"
 msgstr ""
 
 #: None:2
-# eefebb00c8ea47ca8630abb9e1fb8b2e
-msgid "ISIP Type (model in app \"isip\")"
+# 3894d9d8a94d4455ab0e6c2b4b27dc6a
+msgid "study type (model in isip)"
 msgstr ""
 
 #: None:2
-# e65b7184546a4ca69faa077af6f95a16
-msgid "Examination Policy (model in app \"isip\")"
+# cc41355f5a9b41dc852c3d5cae6df27a
+msgid "ISIP Type (model in isip)"
 msgstr ""
 
 #: None:2
-# 0d0b60fcceed42afa34725fcd2317f64
-msgid "Reason of termination (model in app \"isip\")"
+# 243fa143d7f8455d9fc8a344cdcfc662
+msgid "Examination Policy (model in isip)"
+msgstr ""
+
+#: None:2
+# 093347348bec4da894869c6c24eed7d5
+msgid "Reason of termination (model in isip)"
 msgstr ""
 

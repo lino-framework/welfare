@@ -69,7 +69,7 @@ class Deciders(dd.Table):
     order_by = ["name"]
 
     insert_layout = """
-    id name
+    name
     """
 
     detail_layout = """
@@ -156,6 +156,12 @@ class Aids(dd.Table):
     required = dd.required(user_groups='office', user_level='admin')
 
     model = 'aids.Aid'
+
+    insert_layout = """
+    project decider
+    category type
+    """
+
     detail_layout = AidDetail()
     column_names = "id decided_date type project"
     order_by = ["id"]

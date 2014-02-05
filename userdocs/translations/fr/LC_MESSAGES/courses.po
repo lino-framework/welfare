@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -47,29 +47,64 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-# 510d917cbfd94228a23769a1d6d5cc4a
-#: None:2
-msgid "Course provider (model in app \"courses\")"
+# b910d54e5a564fe99710c81ec3ed41df
+#: ../courses.rst:0
+msgid "Course provider (model)"
 msgstr ""
 
-# e4e2cc4751174a68806b2903038ccd06
-#: None:2
-msgid "Course Content (model in app \"courses\")"
+# 6a68d090c5554bb1b7b9e61fa4fd8f08
+#: ../courses.rst:0
+msgid "Course Content (model)"
 msgstr ""
 
-# 3d976e724163474ba93543b17d5a8463
-#: None:2
-msgid "Course Offer (model in app \"courses\")"
+# 98af98bc74e841ce946eb85ec9acc785
+#: ../courses.rst:0
+msgid "Course Offer (model)"
 msgstr ""
 
-# 8e1cbf2abc32400986d8f859f1ce1c5c
-#: None:2
-msgid "Course (model in app \"courses\")"
+# d0ac4832413447159d87c36e0bb1ac48
+#: ../courses.rst:0
+msgid "Course (model)"
 msgstr ""
 
-# e68f8df932244b15a73999872b942e85
+# 2ebc35d703ef4fd2a8ab7e1e7ae43bae
+#: ../courses.rst:0
+msgid "Course Requests (model)"
+msgstr ""
+
+# 03c0f17b65db4323af86c98e217b881e
+#: ../courses.rst:0
+msgid "States (view)"
+msgstr ""
+
+# 7397aaf00c2747d9aaab546291b89fc6
+#: ../courses.rst:0
+msgid "Pending Course Requests (view)"
+msgstr ""
+
+# 8b922f3c49354ac9a343213d8a87ed1b
 #: None:2
-msgid "Course Requests (model in app \"courses\")"
+msgid "Course provider (model in courses)"
+msgstr ""
+
+# cf2e1494436446c48a5e7db51675236e
+#: None:2
+msgid "Course Content (model in courses)"
+msgstr ""
+
+# 0705da6b166840b8b29ec99bfccc67bb
+#: None:2
+msgid "Course Offer (model in courses)"
+msgstr ""
+
+# f2211e853fa84570bfc1e7401ceeb11c
+#: None:2
+msgid "Course (model in courses)"
+msgstr ""
+
+# f615a55db85f40b49cc069feef70c495
+#: None:2
+msgid "Course Requests (model in courses)"
 msgstr ""
 
 # 1bd276df54d54d919a525bcc02c82cf9
@@ -78,5 +113,25 @@ msgstr ""
 
 # 2de4c6bcef964777a99f2cc47df54032
 #~ msgid "Les :ref:`welfare.courses.CourseRequests` inactives..."
+#~ msgstr ""
+
+# 510d917cbfd94228a23769a1d6d5cc4a
+#~ msgid "Course provider (model in app \"courses\")"
+#~ msgstr ""
+
+# e4e2cc4751174a68806b2903038ccd06
+#~ msgid "Course Content (model in app \"courses\")"
+#~ msgstr ""
+
+# 3d976e724163474ba93543b17d5a8463
+#~ msgid "Course Offer (model in app \"courses\")"
+#~ msgstr ""
+
+# 8e1cbf2abc32400986d8f859f1ce1c5c
+#~ msgid "Course (model in app \"courses\")"
+#~ msgstr ""
+
+# e68f8df932244b15a73999872b942e85
+#~ msgid "Course Requests (model in app \"courses\")"
 #~ msgstr ""
 

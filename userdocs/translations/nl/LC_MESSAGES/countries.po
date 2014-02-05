@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,18 +23,45 @@ msgstr ""
 msgid "Countries"
 msgstr ""
 
-# dd8ea23405c14f839392319b004c5041
-#: None:2
-msgid "Place (model in app \"countries\")"
+# d4fca794345a46309376d36eb759ed38
+#: ../countries.rst:0
+msgid "Place (model)"
 msgstr ""
+
+# 4f223243f1834ecd9462ec11d924959b
+#: ../countries.rst:0
+msgid "Country (model)"
+msgstr ""
+
+# ded71c66cfa649fca55262a906ce3fd5
+#: ../countries.rst:0
+msgid "Language (model)"
+msgstr ""
+
+# b8f08606a9344f27b242f7be820d7574
+#: None:2
+msgid "Place (model in countries)"
+msgstr ""
+
+# ca4ea787e9e54f45b90d3184402b4b88
+#: None:2
+msgid "Country (model in countries)"
+msgstr ""
+
+# 479911751dc04581b8178eb6b738f06e
+#: None:2
+msgid "Language (model in languages)"
+msgstr ""
+
+# dd8ea23405c14f839392319b004c5041
+#~ msgid "Place (model in app \"countries\")"
+#~ msgstr ""
 
 # 86cdac4e30e14a4691e9f21907f2308f
-#: None:2
-msgid "Country (model in app \"countries\")"
-msgstr ""
+#~ msgid "Country (model in app \"countries\")"
+#~ msgstr ""
 
 # f0d45b437be94936acecfe618972bb9e
-#: None:2
-msgid "Language (model in app \"languages\")"
-msgstr ""
+#~ msgid "Language (model in app \"languages\")"
+#~ msgstr ""
 

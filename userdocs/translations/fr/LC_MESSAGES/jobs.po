@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -99,69 +99,149 @@ msgstr ""
 msgid "Référence"
 msgstr ""
 
-# 580d302ce62148a59a23db6c822870f2
-#: None:2
-msgid "Job (model in app \"jobs\")"
+# 8698647fcba04f32b43f56e4ba9c007f
+#: ../jobs.rst:0
+msgid "Job (model)"
 msgstr ""
 
-# a0a2184a76ba484d8b31f92e99909e94
-#: None:2
-msgid "Job Provider (model in app \"jobs\")"
+# a0c7285bb34943dfba90f17d0c14f379
+#: ../jobs.rst:0
+msgid "Job Provider (model)"
 msgstr ""
 
-# f7cbfc5e6c2b4f7e88cbc33fdb87878a
-#: None:2
-msgid "Art.60§7 contract (model in app \"jobs\")"
+# bfc917068827432f80a78ea5e2a3c730
+#: ../jobs.rst:0
+msgid "Art.60§7 contract (model)"
 msgstr ""
 
-# 27d9f01e03b2428889a72eb6caa14569
-#: None:2
-msgid "Job Candidature (model in app \"jobs\")"
+# 6a991ddd434c4fab9cd74a3b2f11aa1a
+#: ../jobs.rst:0
+msgid "Job Candidature (model)"
 msgstr ""
 
-# 05c7308b94a740208d64a869155a6b7a
-#: None:2
-msgid "Work Regime (model in app \"jobs\")"
+# ec35ae1333d6447c9301542a8436d3ce
+#: ../jobs.rst:0
+msgid "Work Regime (model)"
 msgstr ""
 
-# 4e162b2e3359430d877cdcef3aa59104
-#: None:2
-msgid "Job Sector (model in app \"jobs\")"
+# 8f06666059f54943abbb716cdc3940d7
+#: ../jobs.rst:0
+msgid "Job Sector (model)"
 msgstr ""
 
-# 8c004ae9727e478bb671065e1c56d5e6
-#: None:2
-msgid "Job Function (model in app \"jobs\")"
+# 73b78f1f31474e97bde2b5e8d94a5a34
+#: ../jobs.rst:0
+msgid "Job Function (model)"
 msgstr ""
 
-# a39a9c2dc2d6467a937688c1a9e6fdc3
-#: None:2
-msgid "Work Schedule (model in app \"jobs\")"
+# e200b4f8534a44d6b66e496fd4d00139
+#: ../jobs.rst:0
+msgid "Work Schedule (model)"
 msgstr ""
 
-# 2529ab05ff05488e8309d38f0412f9ce
-#: None:2
-msgid "Job Offer (model in app \"jobs\")"
+# d744bd6af8bd41e4b5d8dd41d7a0a2ba
+#: ../jobs.rst:0
+msgid "Job Offer (model)"
 msgstr ""
 
-# ce2163ebba924f4dbd6ae13a2b8f36be
-#: None:2
-msgid "study or education (model in app \"jobs\")"
+# 7477d14e203e4853a46fa14c070635fe
+#: ../jobs.rst:0
+msgid "study or education (model)"
 msgstr ""
 
-# 137f2ceb395f4f8eabee8485cf37ce9c
-#: None:2
-msgid "Job Experience (model in app \"jobs\")"
+# 0dc7a67481ac4ffd9b324c87f9e346f8
+#: ../jobs.rst:0
+msgid "Job Experience (model)"
 msgstr ""
 
-# 8c29f7b73a044dda8cbc3c7ae074c2d1
-#: None:2
-msgid "Job Type (model in app \"jobs\")"
+# a3da9c7611a84a4eb72e3ad935cc8061
+#: ../jobs.rst:0
+msgid "Job Type (model)"
 msgstr ""
 
-# 045c5fadd6574c56b2fc445be350c103
+# 96cde9e4bff640c28a5de76089c63116
+#: ../jobs.rst:0
+msgid "Job Contract Type (model)"
+msgstr ""
+
+# 86627586bb5c4060b7959856cf488a38
+#: ../jobs.rst:0
+msgid "Contracts Situation (view)"
+msgstr ""
+
+# cceddc76ea624f8196ad3cf8a45ec187
+#: ../jobs.rst:0
+msgid "Studies & education (view)"
+msgstr ""
+
+# 16482ae1a83c4bbc8774a20bac5e4f8f
+#: ../jobs.rst:0
+msgid "Job Experiences (view)"
+msgstr ""
+
+# 2ea958129a94431e970815b9e15708a0
 #: None:2
-msgid "Job Contract Type (model in app \"jobs\")"
+msgid "Job (model in jobs)"
+msgstr ""
+
+# 6dddf35bcc5143dbb5211ff8b42be76c
+#: None:2
+msgid "Job Provider (model in jobs)"
+msgstr ""
+
+# 72d9c84db2bf4e5da967e931706be361
+#: None:2
+msgid "Art.60§7 contract (model in jobs)"
+msgstr ""
+
+# 15a68b807c68447ab7157f164de652a0
+#: None:2
+msgid "Job Candidature (model in jobs)"
+msgstr ""
+
+# 0e5a9b4c93744193bb33e5346d739292
+#: None:2
+msgid "Work Regime (model in jobs)"
+msgstr ""
+
+# 03e848d711be4e5db87783858fdc65d3
+#: None:2
+msgid "Job Sector (model in jobs)"
+msgstr ""
+
+# 979c93cf104b40f0821f7c9333ae8339
+#: None:2
+msgid "Job Function (model in jobs)"
+msgstr ""
+
+# 6dab13ef38c94d0e8e6aa3f180a643e9
+#: None:2
+msgid "Work Schedule (model in jobs)"
+msgstr ""
+
+# 72f899cd7495413ab3c0ef4f8830f14c
+#: None:2
+msgid "Job Offer (model in jobs)"
+msgstr ""
+
+# 71ad669125b647359d51bc12a1851364
+#: None:2
+msgid "study or education (model in jobs)"
+msgstr ""
+
+# e2ab9d26cc874462a7fc4e83b4cda1ba
+#: None:2
+msgid "Job Experience (model in jobs)"
+msgstr ""
+
+# 76d38136f3704747a9a1d2b895457dd5
+#: None:2
+msgid "Job Type (model in jobs)"
+msgstr ""
+
+# e3834621a2eb4634a2158c5726f3f285
+#: None:2
+msgid "Job Contract Type (model in jobs)"
 msgstr ""
 
 # c4159658a2b646b29723da7095d11bf1
@@ -182,5 +262,57 @@ msgstr ""
 
 # a5dbc058f895494bb4b86491eea4a152
 #~ msgid "Et puis on fera un :ref:`Contract <welfare.jobs.Contracts>`."
+#~ msgstr ""
+
+# 580d302ce62148a59a23db6c822870f2
+#~ msgid "Job (model in app \"jobs\")"
+#~ msgstr ""
+
+# a0a2184a76ba484d8b31f92e99909e94
+#~ msgid "Job Provider (model in app \"jobs\")"
+#~ msgstr ""
+
+# f7cbfc5e6c2b4f7e88cbc33fdb87878a
+#~ msgid "Art.60§7 contract (model in app \"jobs\")"
+#~ msgstr ""
+
+# 27d9f01e03b2428889a72eb6caa14569
+#~ msgid "Job Candidature (model in app \"jobs\")"
+#~ msgstr ""
+
+# 05c7308b94a740208d64a869155a6b7a
+#~ msgid "Work Regime (model in app \"jobs\")"
+#~ msgstr ""
+
+# 4e162b2e3359430d877cdcef3aa59104
+#~ msgid "Job Sector (model in app \"jobs\")"
+#~ msgstr ""
+
+# 8c004ae9727e478bb671065e1c56d5e6
+#~ msgid "Job Function (model in app \"jobs\")"
+#~ msgstr ""
+
+# a39a9c2dc2d6467a937688c1a9e6fdc3
+#~ msgid "Work Schedule (model in app \"jobs\")"
+#~ msgstr ""
+
+# 2529ab05ff05488e8309d38f0412f9ce
+#~ msgid "Job Offer (model in app \"jobs\")"
+#~ msgstr ""
+
+# ce2163ebba924f4dbd6ae13a2b8f36be
+#~ msgid "study or education (model in app \"jobs\")"
+#~ msgstr ""
+
+# 137f2ceb395f4f8eabee8485cf37ce9c
+#~ msgid "Job Experience (model in app \"jobs\")"
+#~ msgstr ""
+
+# 8c29f7b73a044dda8cbc3c7ae074c2d1
+#~ msgid "Job Type (model in app \"jobs\")"
+#~ msgstr ""
+
+# 045c5fadd6574c56b2fc445be350c103
+#~ msgid "Job Contract Type (model in app \"jobs\")"
 #~ msgstr ""
 

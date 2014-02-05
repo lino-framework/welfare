@@ -14,6 +14,14 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
+- Angesichts vieler Erweiterungen in der Struktur war es nötig, das
+  ClientDetail neu zu strukturieren. Ich hoffe, dass ihr euch schnell
+  damit anfreundet.
+
+- Mehrere Adressen pro Klient
+
+- "Human links" (Eltern und Kinder)
+
 - Kurse / Sprachen jetzt auch für Benutzer vom ASD
 
 - Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete

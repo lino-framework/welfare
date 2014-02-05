@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-03-31 21:24+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -23,18 +23,50 @@ msgstr ""
 msgid "Accounts"
 msgstr "Comptes"
 
-# 9eb89c0925f14aea9926ce9d8b8fa2bc
-#: None:2
-msgid "Account Chart (model in app \"accounts\")"
+# 4fa887680d3840ee986fb8316154fe75
+#: ../accounts.rst:0
+msgid "Account Chart (model)"
 msgstr ""
+
+# 3535e2a9bbcf443db35eafee1e3f29aa
+#: ../accounts.rst:0
+msgid "Account (model)"
+msgstr ""
+
+# b83f0b37e24b4d7dade974485ec576f7
+#: ../accounts.rst:0
+msgid "Account Group (model)"
+msgstr ""
+
+# 59feaa822662498e9c2ccfebabecfc3b
+#: ../accounts.rst:0
+msgid "AccountTypes (view)"
+msgstr ""
+
+# bee7681bbc2d45bf8bfdb458e691f981
+#: None:2
+msgid "Account Chart (model in accounts)"
+msgstr ""
+
+# ff78cec6e30840a59bb9c8aeca97084b
+#: None:2
+msgid "Account (model in accounts)"
+msgstr ""
+
+# 3306bfca960a4909b2fab4db49b1be71
+#: None:2
+msgid "Account Group (model in accounts)"
+msgstr ""
+
+# 9eb89c0925f14aea9926ce9d8b8fa2bc
+#~ msgid "Account Chart (model in app \"accounts\")"
+#~ msgstr ""
 
 # 77499bc3932a44018b3f6ede280f4e38
-#: None:2
-msgid "Account (model in app \"accounts\")"
-msgstr ""
+#~ msgid "Account (model in app \"accounts\")"
+#~ msgstr ""
 
 # 6dd106979b154ad98701f778386f6d2d
-#: None:2
-msgid "Account Group (model in app \"accounts\")"
-msgstr ""
+#~ msgid "Account Group (model in app \"accounts\")"
+#~ msgstr ""
 

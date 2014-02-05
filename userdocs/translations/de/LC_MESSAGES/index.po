@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-07-27 07:28+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -19,27 +19,37 @@ msgstr ""
 "Generated-By: Babel 1.3\n"
 
 # 3c0f7ec2ffa84a75a9c62d1992e25f9a
-#: ../index.rst:4
+#: ../index.rst:5
 #, fuzzy
 msgid "Lino-Welfare User Documentation"
 msgstr "Benutzerhandbuch Lino für ÖSHZ"
 
 # 425f0878497e40aa8051cc4749c36e87
-#: ../index.rst:6
+#: ../index.rst:7
 msgid ""
-"Available as `.pdf` file: `User Guide <./lino-welfare-userguide.pdf>`_, "
-"`Whitepaper <./lino-welfare-whitepaper.pdf>`_ and `Screenshots <./lino-"
-"welfare-screenshots.pdf>`_"
+"Parts of this documentation tree are available as `.pdf` file: `User "
+"Guide <./lino-welfare-userguide.pdf>`_, `Whitepaper <./lino-welfare-"
+"whitepaper.pdf>`_ and `Screenshots <./lino-welfare-screenshots.pdf>`_"
 msgstr ""
 
 # 561a65c29d894845bfa2baeaa0f96741
-#: ../index.rst:12
+#: ../index.rst:13
 msgid "Product description"
 msgstr ""
 
 # 38ab30ccb6d94f67a7adea22de4c9df5
-#: ../index.rst:20
-msgid "User guide"
+#: ../index.rst:22
+msgid "User's guide"
+msgstr ""
+
+# 38ab30ccb6d94f67a7adea22de4c9df5
+#: ../index.rst:25
+msgid "Topic guides"
+msgstr ""
+
+# 639d5bf4abc6486e902531b318afa947
+#: ../index.rst:35
+msgid "Modules"
 msgstr ""
 
 # 3675481285c44bd281442fc671a942f7
@@ -48,5 +58,17 @@ msgstr ""
 
 # 8377d9e655bc4caebf5f33ccc9385eb4
 #~ msgid ""
+#~ msgstr ""
+
+# 425f0878497e40aa8051cc4749c36e87
+#~ msgid ""
+#~ "Available as `.pdf` file: `User Guide"
+#~ " <./lino-welfare-userguide.pdf>`_, `Whitepaper"
+#~ " <./lino-welfare-whitepaper.pdf>`_ and "
+#~ "`Screenshots <./lino-welfare-screenshots.pdf>`_"
+#~ msgstr ""
+
+# 38ab30ccb6d94f67a7adea22de4c9df5
+#~ msgid "User guide"
 #~ msgstr ""
 

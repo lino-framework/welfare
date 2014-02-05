@@ -8,16 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2014-01-07 22:33+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"X-Generator: Poedit 1.5.4\n"
 
 # d48a5fb046a34f2898a58be87f89fc5e
 #: ../debts.rst:5
@@ -32,10 +31,11 @@ msgstr ""
 # 8ddf74d99e9e43f19f5888df630baa89
 #: ../debts.rst:9
 msgid ""
-"This app enables social consultants to create \"Budgets\". A :ddref:`debts."
-"Budget` collects financial information like monthly income, monthly expenses "
-"and debts of a household or a person, then print out a document which serves "
-"as base for the consultation and discussion with debtors."
+"This app enables social consultants to create \"Budgets\". A "
+":ddref:`debts.Budget` collects financial information like monthly income,"
+" monthly expenses and debts of a household or a person, then print out a "
+"document which serves as base for the consultation and discussion with "
+"debtors."
 msgstr ""
 
 # 760d0a80d9a54d49a664c6873f377f01
@@ -47,10 +47,10 @@ msgstr ""
 #: ../debts.rst:19
 msgid ""
 "En tant que conseiller dettes je commence à remplir, avec le client, les "
-"données d'un budget. Le client n'a pas toutes les informations nécessaires "
-"avec lui. Comment puis-je lui imprimer une version spéciale du budget, "
-"destinée à être utilisée pour remplir manuellement sur papier les chiffres "
-"manquants pour les encoder la prochaine fois?"
+"données d'un budget. Le client n'a pas toutes les informations "
+"nécessaires avec lui. Comment puis-je lui imprimer une version spéciale "
+"du budget, destinée à être utilisée pour remplir manuellement sur papier "
+"les chiffres manquants pour les encoder la prochaine fois?"
 msgstr ""
 
 # 92a2242d66d849aead212faf4f9d636a
@@ -63,6 +63,16 @@ msgstr ""
 msgid "Cliquer sur :ref:`welfare.ui.detail.Save`"
 msgstr ""
 
+# 4bd2e221f0ad4fb0b5f3719ef731a8ed
+#: ../debts.rst:0
+msgid "Budget Actor (model)"
+msgstr ""
+
+# 089f22cd01d946d3997aaed6882be2a2
+#: ../debts.rst:0
+msgid "Budget (model)"
+msgstr ""
+
 # 2ef3f60e7aaa4fc6bd7a56ed81b179b0
 #: ../debts.rst:38
 msgid "Print empty rows"
@@ -71,6 +81,31 @@ msgstr ""
 # 99e5230b697a4b098a737d3c86a46c06
 #: ../debts.rst:43
 msgid "Ignore yearly incomes"
+msgstr ""
+
+# 7554938223f74003867bff6745f4c19b
+#: ../debts.rst:0
+msgid "My Budgets (view)"
+msgstr ""
+
+# 1c075f13489a459aa360a3e23bb7eccc
+#: ../debts.rst:0
+msgid "Incomes & Expenses (view)"
+msgstr ""
+
+# b28594a6b1bf48a2b6fecf228bff57cd
+#: ../debts.rst:0
+msgid "Budget Entry (model)"
+msgstr ""
+
+# e0872617871e4c1aae19aa296832ff4d
+#: ../debts.rst:0
+msgid "Budget Entries (view)"
+msgstr ""
+
+# e0872617871e4c1aae19aa296832ff4d
+#: ../debts.rst:0
+msgid "Debts (view)"
 msgstr ""
 
 # c22f96f94f624c36a506c5a1a7b0da3f
@@ -86,6 +121,11 @@ msgid ""
 "transferred to a debt collection agency)."
 msgstr ""
 
+# e0872617871e4c1aae19aa296832ff4d
+#: ../debts.rst:0
+msgid "Bailiff Debts (view)"
+msgstr ""
+
 # ebe1822d7b99425f9d346310647b722b
 #: ../debts.rst:65
 msgid ""
@@ -93,17 +133,30 @@ msgid ""
 "collection agency."
 msgstr ""
 
-# b629a33d752b42afa37ca7478b77cb34
+# e67743579bce4c259c21199d5a4dbdb7
 #: None:2
-msgid "Budget Actor (model in app \"debts\")"
+msgid "Budget Actor (model in debts)"
 msgstr ""
+
+# abcc82413f824ce48e50b492e97b6c03
+#: None:2
+msgid "Budget (model in debts)"
+msgstr ""
+
+# 782d3996c18f4dfbbb941c03a9d402be
+#: None:2
+msgid "Budget Entry (model in debts)"
+msgstr ""
+
+# b629a33d752b42afa37ca7478b77cb34
+#~ msgid "Budget Actor (model in app \"debts\")"
+#~ msgstr ""
 
 # a72a58eeac1e45aeab0ce57af74510c2
-#: None:2
-msgid "Budget (model in app \"debts\")"
-msgstr ""
+#~ msgid "Budget (model in app \"debts\")"
+#~ msgstr ""
 
 # 7bdb2d7594524b42a3ebb6700d811a5a
-#: None:2
-msgid "Budget Entry (model in app \"debts\")"
-msgstr ""
+#~ msgid "Budget Entry (model in app \"debts\")"
+#~ msgstr ""
+

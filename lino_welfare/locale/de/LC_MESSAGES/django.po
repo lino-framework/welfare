@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-04 14:07+0200\n"
-"PO-Revision-Date: 2014-02-04 14:10+0300\n"
+"PO-Revision-Date: 2014-02-04 18:13+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2378,15 +2378,15 @@ msgstr "Adressenart"
 
 #: lino_welfare/modlib/pcsw/client_address.py:32
 msgid "Official address"
-msgstr ""
+msgstr "Offizielle Addresse"
 
 #: lino_welfare/modlib/pcsw/client_address.py:33
 msgid "Unverified address"
-msgstr ""
+msgstr "Zu prüfende Adresse"
 
 #: lino_welfare/modlib/pcsw/client_address.py:34
 msgid "Declared address"
-msgstr ""
+msgstr "Deklarierte Adresse"
 
 #: lino_welfare/modlib/pcsw/client_address.py:35
 msgid "Real address"

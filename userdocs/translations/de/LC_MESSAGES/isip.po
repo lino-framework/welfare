@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -59,29 +59,54 @@ msgid ""
 " surtout au niveau enseignement."
 msgstr ""
 
-# 199fe71f04c5459bafd6a3a8d1f0b956
-#: None:2
-msgid "ISIP (model in app \"isip\")"
+# bedbdaa3d16642f48f9995f8415aaf3d
+#: ../isip.rst:0
+msgid "ISIP (model)"
 msgstr ""
 
-# 36452791afb14cbfb9d7bf5c77010d77
-#: None:2
-msgid "study type (model in app \"isip\")"
+# 6d10b266b77b4be0a4e9b31bc7ce5926
+#: ../isip.rst:0
+msgid "study type (model)"
 msgstr ""
 
-# eefebb00c8ea47ca8630abb9e1fb8b2e
-#: None:2
-msgid "ISIP Type (model in app \"isip\")"
+# 65867a7427ba48d0b768988ecf6349ed
+#: ../isip.rst:0
+msgid "ISIP Type (model)"
 msgstr ""
 
-# e65b7184546a4ca69faa077af6f95a16
-#: None:2
-msgid "Examination Policy (model in app \"isip\")"
+# 43960b06951341379fb045f968bf91fb
+#: ../isip.rst:0
+msgid "Examination Policy (model)"
 msgstr ""
 
-# 0d0b60fcceed42afa34725fcd2317f64
+# 4f2c3dc81e57455f9f46256acfe35c4b
+#: ../isip.rst:0
+msgid "Reason of termination (model)"
+msgstr ""
+
+# 084810810e3b41adb0e15e7647e75206
 #: None:2
-msgid "Reason of termination (model in app \"isip\")"
+msgid "ISIP (model in isip)"
+msgstr ""
+
+# 3894d9d8a94d4455ab0e6c2b4b27dc6a
+#: None:2
+msgid "study type (model in isip)"
+msgstr ""
+
+# cc41355f5a9b41dc852c3d5cae6df27a
+#: None:2
+msgid "ISIP Type (model in isip)"
+msgstr ""
+
+# 243fa143d7f8455d9fc8a344cdcfc662
+#: None:2
+msgid "Examination Policy (model in isip)"
+msgstr ""
+
+# 093347348bec4da894869c6c24eed7d5
+#: None:2
+msgid "Reason of termination (model in isip)"
 msgstr ""
 
 # 8441e1c5167f41d485308ce7f5470adf
@@ -98,5 +123,25 @@ msgstr ""
 
 # 0f39a2a1fac945d3ac300886323d3ce5
 #~ msgid "Référence"
+#~ msgstr ""
+
+# 199fe71f04c5459bafd6a3a8d1f0b956
+#~ msgid "ISIP (model in app \"isip\")"
+#~ msgstr ""
+
+# 36452791afb14cbfb9d7bf5c77010d77
+#~ msgid "study type (model in app \"isip\")"
+#~ msgstr ""
+
+# eefebb00c8ea47ca8630abb9e1fb8b2e
+#~ msgid "ISIP Type (model in app \"isip\")"
+#~ msgstr ""
+
+# e65b7184546a4ca69faa077af6f95a16
+#~ msgid "Examination Policy (model in app \"isip\")"
+#~ msgstr ""
+
+# 0d0b60fcceed42afa34725fcd2317f64
+#~ msgid "Reason of termination (model in app \"isip\")"
 #~ msgstr ""
 

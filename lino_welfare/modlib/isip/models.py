@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,10 +19,6 @@ The :xfile:`models.py` module for the
 
 """
 
-import os
-import cgi
-import datetime
-
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
@@ -34,29 +30,11 @@ from django.utils import translation
 
 
 from lino import dd
-from lino.utils import dblogger as logger
-#~ from lino.utils import printable
 from lino import mixins
-#~ from lino.modlib.contacts import models as contacts
-#~ from lino.modlib.notes import models as notes
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
-#~ pcsw = dd.resolve_app('pcsw')
-#~ integ = dd.resolve_app('integ')
 
-#~ from lino.modlib.links import models as links
-from lino.modlib.uploads import models as uploads
-#~ from lino.utils.choicelists import HowWell
-# ~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
-#~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.dbutils import get_field
-from lino.core.dbutils import resolve_field
-from lino.utils.htmlgen import UL
-from lino.utils.choosers import chooser
-from lino.utils import mti
-from lino.utils.ranges import isrange, overlap, overlap2, encompass
-from lino.mixins.printable import DirectPrintAction
-#~ from lino.mixins.reminder import ReminderEntry
+from lino.utils.ranges import isrange, overlap2, encompass
 
 from lino_welfare.modlib.system.models import Signers
 
@@ -67,21 +45,10 @@ def rangefmt(r):
     return dd.dtos(r[0]) + '...' + dd.dtos(r[1])
 
 
-#~ from lino.modlib.cal.models import update_auto_task
-#~ from lino.modlib.cal import models as cal
 cal = dd.resolve_app('cal')
 
 COACHINGTYPE_ASD = 1
 COACHINGTYPE_DSBE = 2
-
-
-#~ class IntegTable(dd.Table):
-
-    #~ @classmethod
-    #~ def get_permission(self,action,user,obj):
-        #~ if not user.integ_level:
-            #~ return False
-        #~ return super(IntegTable,self).get_permission(action,user,obj)
 
 
 #
@@ -138,9 +105,9 @@ class ExamPolicy(dd.BabelNamed, cal.RecurrenceSet):
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
 
-    #~ hidden_columns = 'summary description start_date start_time end_date end_time'
     hidden_columns = 'start_date start_time end_date end_time'
-    event_type = dd.ForeignKey('cal.EventType', null=True, blank=True,
+    event_type = dd.ForeignKey(
+        'cal.EventType', null=True, blank=True,
         help_text=_("""Generated events will receive this type."""))
 
 
@@ -153,13 +120,12 @@ class ExamPolicies(dd.Table):
     # summary start_date end_date
     # description
     max_events every every_unit event_type
-    isip.ContractsByPolicy    
-    jobs.ContractsByPolicy    
+    isip.ContractsByPolicy
+    jobs.ContractsByPolicy
     """
 
 
-from lino_welfare.modlib.jobs import Plugin as JobsPlugin
-JOBS_MODULE_NAME = JobsPlugin.verbose_name
+JOBS_MODULE_NAME = dd.apps.jobs.verbose_name
 
 
 class ContractEnding(dd.Model):
@@ -187,23 +153,9 @@ class ContractEndings(dd.Table):
     detail_layout = """
     name
     use_in_isip use_in_jobs is_success needs_date_ended
-    isip.ContractsByEnding 
+    isip.ContractsByEnding
     jobs.ContractsByEnding
     """
-
-#~ FUNCTION_ID_SECRETARY = 3
-#~ FUNCTION_ID_PRESIDENT = 16
-#~ FUNCTION_ID_PRESIDENT = 5
-
-
-def default_signer1():
-    return settings.SITE.site_config.signer1
-    #~ return SecretaryPresident.secretary_choices()[0]
-
-
-def default_signer2():
-    return settings.SITE.site_config.signer2
-    #~ return SecretaryPresident.president_choices()[0]
 
 
 class StudyType(dd.BabelNamed):
@@ -224,20 +176,23 @@ class StudyTypes(dd.Table):
     ContractsByStudyType
     """
 
+def default_signer1():
+    return settings.SITE.site_config.signer1
 
-#~ class ContractBase(contacts.CompanyContact,mixins.DiffingMixin,mixins.TypedPrintable,cal.EventGenerator):
+
+def default_signer2():
+    return settings.SITE.site_config.signer2
+
+
 class ContractBase(
-    #~ contacts.CompanyContact,
-    Signers,
-    contacts.ContactRelated,
-    mixins.TypedPrintable,
+        Signers,
+        contacts.ContactRelated,
+        mixins.TypedPrintable,
         cal.EventGenerator):
 
-    """
-    Abstract base class for 
-    :ddref:`jobs.Contract`
-    and
+    """Abstract base class for :ddref:`jobs.Contract` and
     :ddref:`isip.Contract`.
+
     """
 
     manager_level_field = 'integ_level'
@@ -247,13 +202,9 @@ class ContractBase(
     class Meta:
         abstract = True
 
-    #~ eventgenerator = models.OneToOneField(cal.EventGenerator,
-        #~ related_name="%(app_label)s_%(class)s_ptr",
-        #~ parent_link=True)
-
-    #~ person = models.ForeignKey(settings.SITE.person_model,
-    client = models.ForeignKey('pcsw.Client',
-                               related_name="%(app_label)s_%(class)s_set_by_client")
+    client = models.ForeignKey(
+        'pcsw.Client',
+        related_name="%(app_label)s_%(class)s_set_by_client")
 
     language = dd.LanguageField()
 
@@ -264,23 +215,27 @@ class ContractBase(
     date_issued = models.DateField(
         blank=True, null=True, verbose_name=_("date issued"))
 
-    user_asd = models.ForeignKey("users.User",
-                                 verbose_name=_("responsible (ASD)"),
-                                 related_name="%(app_label)s_%(class)s_set_by_user_asd",
-                                 #~ related_name='contracts_asd',
-                                 blank=True, null=True)
+    user_asd = models.ForeignKey(
+        "users.User",
+        verbose_name=_("responsible (ASD)"),
+        related_name="%(app_label)s_%(class)s_set_by_user_asd",
+        #~ related_name='contracts_asd',
+        blank=True, null=True)
 
-    exam_policy = models.ForeignKey("isip.ExamPolicy",
-                                    related_name="%(app_label)s_%(class)s_set",
-                                    blank=True, null=True)
+    exam_policy = models.ForeignKey(
+        "isip.ExamPolicy",
+        related_name="%(app_label)s_%(class)s_set",
+        blank=True, null=True)
 
-    ending = models.ForeignKey("isip.ContractEnding",
-                               related_name="%(app_label)s_%(class)s_set",
-                               blank=True, null=True)
+    ending = models.ForeignKey(
+        "isip.ContractEnding",
+        related_name="%(app_label)s_%(class)s_set",
+        blank=True, null=True)
     date_ended = models.DateField(
         blank=True, null=True, verbose_name=_("date ended"))
 
-    hidden_columns = 'date_decided date_issued exam_policy user_asd ending date_ended signer1 signer2'
+    hidden_columns = 'date_decided date_issued \
+    exam_policy user_asd ending date_ended signer1 signer2'
 
     def __unicode__(self):
         # ~ return u'%s # %s' % (self._meta.verbose_name,self.pk)
@@ -288,12 +243,6 @@ class ContractBase(
             #~ self.person.get_full_name(salutation=False))
         return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
                                 self.client.get_full_name(salutation=False))
-
-    #~ def __unicode__(self):
-        # ~ msg = _("Contract # %s")
-        # ~ # msg = _("Contract # %(pk)d (%(person)s/%(company)s)")
-        # ~ # return msg % dict(pk=self.pk, person=self.person, company=self.company)
-        #~ return msg % self.pk
 
     def get_recipient(self):
         contact = self.get_contact()
@@ -311,11 +260,6 @@ class ContractBase(
         return self.client
     person = property(get_person)
 
-    #~ @classmethod
-    #~ def contact_choices_queryset(cls,company):
-        #~ return contacts.Role.objects.filter(
-            #~ type__use_in_contracts=True,
-            #~ company=company)
     @classmethod
     def contact_person_choices_queryset(cls, company):
         return settings.SITE.modules.contacts.Person.objects.filter(
@@ -330,19 +274,13 @@ class ContractBase(
     def ending_choices(cls):
         return ContractEnding.objects.filter(use_in_isip=True)
 
-    #~ def dsbe_person(self): removed 20120921 because no longer used
-        #~ """Used in document templates."""
-        #~ if self.person_id is not None:
-            #~ if self.person.coach2_id is not None:
-                #~ return self.person.coach2_id
-            #~ return self.person.coach1 or self.user
     def client_changed(self, request):
-        """
-        If the contract's author is the client's primary coach, 
-        then set user_asd to None,
-        otherwise set user_asd to the primary coach.
+
+        """If the contract's author is the client's primary coach, then set
+        user_asd to None, otherwise set user_asd to the primary coach.
         We suppose that only integration agents write contracts.
         """
+
         if self.client_id is not None:
             #~ pc = self.person.get_primary_coach()
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
@@ -351,7 +289,6 @@ class ContractBase(
             if qs.count() == 1:
                 user_asd = qs[0].user
                 if user_asd is None or user_asd == self.user:
-                #~ if self.person.coach1_id is None or self.person.coach1_id == self.user_id:
                     self.user_asd = None
                 else:
                     self.user_asd = user_asd
@@ -372,9 +309,7 @@ class ContractBase(
         if self.client_id is not None:
             msg = OverlappingContractsTest(self.client).check(self)
             if msg:
-                #~ print 20130225, translation._trans, translation.get_language()
                 raise ValidationError(msg)
-        #~ print 20130320, get_field(self.__class__,'signer1').default
         super(ContractBase, self).full_clean(*args, **kw)
 
         if self.type_id is None:
@@ -382,16 +317,9 @@ class ContractBase(
                 dict(type=_("You must specify a contract type.")))
 
     def update_owned_instance(self, other):
-        #~ mixins.Reminder.update_owned_task(self,task)
-        #~ contacts.PartnerDocument.update_owned_task(self,task)
-        #~ task.company = self.company
         if isinstance(other, mixins.ProjectRelated):
             other.project = self.client
         super(ContractBase, self).update_owned_instance(other)
-
-    def after_update_owned_instance(self, other):
-        if other.is_user_modified():
-            self.update_reminders(ar)
 
     def update_cal_rset(self):
         return self.exam_policy
@@ -421,16 +349,7 @@ class ContractBase(
             au,
             _("Contract ends in a month"),
             self)
-          #~ alarm_value=1,alarm_unit=DurationUnit.months)
 
-    #~ def overlaps_with(self,b):
-        #~ if b == self:
-            #~ return False
-        #~ a1 = self.applies_from
-        #~ a2 = self.date_ended or self.applies_until
-        #~ b1 = b.applies_from
-        #~ b2 = b.date_ended or b.applies_until
-        #~ return overlap(a1,a2,b1,b2)
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
         #~ r = (self.applies_from, self.date_ended or self.applies_until)
@@ -438,15 +357,6 @@ class ContractBase(
         #~ return None
 
 
-    #~ def data_control(self):
-        #~ msgs = []
-        #~ for model in models_by_abc(ContractBase):
-            #~ for con in model.objects.filter(person=self.person):
-                #~ if self.overlaps_with(con):
-                    #~ msgs.append(_("Dates overlap with %s") % con)
-        #~ return msgs
-
-#~ dd.update_field(ContractBase,'contact_person',verbose_name=_("represented by"))
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)
 

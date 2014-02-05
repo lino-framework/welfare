@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-09-10 21:17+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -23,38 +23,101 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-# acd1061fc8b84675b134b2f1213d2d54
-#: None:2
-msgid "content type (model in app \"contenttypes\")"
+# 1379fffdb72847bb8efd48aa7a1e1149
+#: ../system.rst:0
+msgid "content type (model)"
 msgstr ""
+
+# 1379fffdb72847bb8efd48aa7a1e1149
+#: ../system.rst:0
+msgid "Site configuration (model)"
+msgstr ""
+
+# d024b7a9b02a4dc992a0e288713f552c
+#: ../system.rst:0
+msgid "Event Type (model)"
+msgstr ""
+
+# 0b834efdf75b482ea7d9d51980e46085
+#: ../system.rst:0
+msgid "Note Type (model)"
+msgstr ""
+
+# 22be2f121e714b939bcd9906c7eda4f7
+#: ../system.rst:0
+msgid "Event/Note (model)"
+msgstr ""
+
+# 8de6a48e5d7143fea43530d0403754ff
+#: ../system.rst:0
+msgid "Upload (model)"
+msgstr ""
+
+# b037463e998d4113b12ad3a8bd9a1a98
+#: ../system.rst:0
+msgid "Upload Type (model)"
+msgstr ""
+
+# 01966749925a4660a81c60e3bd2917b5
+#: None:2
+msgid "content type (model in contenttypes)"
+msgstr ""
+
+# 7ef0f0adf8d94384bc12f0cc4b61ff57
+#: None:2
+msgid "Site configuration (model in system)"
+msgstr ""
+
+# f77842855b4c43df8efc53c5ada2bd72
+#: None:2
+msgid "Event Type (model in notes)"
+msgstr ""
+
+# 5c9af23f823748ecb574340893297f4e
+#: None:2
+msgid "Note Type (model in notes)"
+msgstr ""
+
+# b5f26fc2e17f4b67bd33162eb5b57ec3
+#: None:2
+msgid "Event/Note (model in notes)"
+msgstr ""
+
+# f1d8c18844b34a9d846f004a7740a6d8
+#: None:2
+msgid "Upload (model in uploads)"
+msgstr ""
+
+# 66c5249916da43e0934503bdf2a8b14e
+#: None:2
+msgid "Upload Type (model in uploads)"
+msgstr ""
+
+# acd1061fc8b84675b134b2f1213d2d54
+#~ msgid "content type (model in app \"contenttypes\")"
+#~ msgstr ""
 
 # ad529d46a88d4747844c3bd65651c195
-#: None:2
-msgid "site config (model in app \"system\")"
-msgstr ""
+#~ msgid "site config (model in app \"system\")"
+#~ msgstr ""
 
 # b43d7410fead47719beb671201532f1e
-#: None:2
-msgid "Event Type (model in app \"notes\")"
-msgstr ""
+#~ msgid "Event Type (model in app \"notes\")"
+#~ msgstr ""
 
 # 923b94a6bf9c493fb41b92a421b26340
-#: None:2
-msgid "Note Type (model in app \"notes\")"
-msgstr ""
+#~ msgid "Note Type (model in app \"notes\")"
+#~ msgstr ""
 
 # d5253789f6cd48fbb6b85a0bbfb109ab
-#: None:2
-msgid "Event/Note (model in app \"notes\")"
-msgstr ""
+#~ msgid "Event/Note (model in app \"notes\")"
+#~ msgstr ""
 
 # 44e4a926cfde4cd0a15f17c942b62693
-#: None:2
-msgid "Upload (model in app \"uploads\")"
-msgstr ""
+#~ msgid "Upload (model in app \"uploads\")"
+#~ msgstr ""
 
 # 0a2d1aa8a52c4e7db57d804369dea98e
-#: None:2
-msgid "Upload Type (model in app \"uploads\")"
-msgstr ""
+#~ msgid "Upload Type (model in app \"uploads\")"
+#~ msgstr ""
 

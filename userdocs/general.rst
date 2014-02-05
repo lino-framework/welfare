@@ -13,7 +13,7 @@ Zur Struktur des Menüs:
 
 - Alle Benutzer haben eigentlich das gleiche Menü,
   aber die einzelnen Untermenüs "wachsen" oder "schrumpfen" je nach den 
-  Zugriffsrechten
+  Zugriffsrechten.
   
 - Wir unterscheiden **drei Arten von Menü-Titeln**:
 

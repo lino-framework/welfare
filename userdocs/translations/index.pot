@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../index.rst:4
+#: ../index.rst:5
 # 3c0f7ec2ffa84a75a9c62d1992e25f9a
 msgid "Lino-Welfare User Documentation"
 msgstr ""
 
-#: ../index.rst:6
+#: ../index.rst:7
 # 425f0878497e40aa8051cc4749c36e87
-msgid "Available as `.pdf` file: `User Guide <./lino-welfare-userguide.pdf>`_, `Whitepaper <./lino-welfare-whitepaper.pdf>`_ and `Screenshots <./lino-welfare-screenshots.pdf>`_"
+msgid "Parts of this documentation tree are available as `.pdf` file: `User Guide <./lino-welfare-userguide.pdf>`_, `Whitepaper <./lino-welfare-whitepaper.pdf>`_ and `Screenshots <./lino-welfare-screenshots.pdf>`_"
 msgstr ""
 
-#: ../index.rst:12
+#: ../index.rst:13
 # 561a65c29d894845bfa2baeaa0f96741
 msgid "Product description"
 msgstr ""
 
-#: ../index.rst:20
+#: ../index.rst:22
 # 38ab30ccb6d94f67a7adea22de4c9df5
-msgid "User guide"
+msgid "User's guide"
+msgstr ""
+
+#: ../index.rst:25
+# 38ab30ccb6d94f67a7adea22de4c9df5
+msgid "Topic guides"
+msgstr ""
+
+#: ../index.rst:35
+# 639d5bf4abc6486e902531b318afa947
+msgid "Modules"
 msgstr ""
 

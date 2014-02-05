@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -20,30 +20,70 @@ msgstr ""
 
 # e740ae95d0a54a45b366efddd012e6e6
 #: ../newcomers.rst:5
-msgid "Nouveaux clients"
+msgid "New clients"
 msgstr ""
 
-# 2791a9d0fe764398a15ea0088f42853d
+# b8f4f233ce954259bd3dee923ba5a273
 #: ../newcomers.rst:7
-msgid "Ce module facilite la gestion des nouvelles demandes de client."
+msgid "This module provides functionality to handle new client applications."
 msgstr ""
 
-# eb0056b5ecec450883358ca267c10936
-#: None:2
-msgid "Broker (model in app \"newcomers\")"
+# 3bb90efc455e45c2890a79a5290c802c
+#: ../newcomers.rst:0
+msgid "New Clients (view)"
 msgstr ""
 
-# 0d1ad53994894e7f9342c4db563d88ca
-#: None:2
-msgid "Competence (model in app \"newcomers\")"
+# 6252745939084c2799f86c332ebedd1b
+#: ../newcomers.rst:0
+msgid "Broker (model)"
 msgstr ""
 
-# 75ddecae57ef49bb841e47cbff259217
+# 5f4185c2eaef439db064fe2dededd25b
+#: ../newcomers.rst:0
+msgid "Competence (model)"
+msgstr ""
+
+# 4f0eda007b0f44749a36899cc6f4dd17
+#: ../newcomers.rst:0
+msgid "Faculty (model)"
+msgstr ""
+
+# 5378c004ea834b42bd773bf4676692c8
 #: None:2
-msgid "Faculty (model in app \"newcomers\")"
+msgid "Broker (model in newcomers)"
+msgstr ""
+
+# 210fd996ff834c91a2b84b0a46dd8585
+#: None:2
+msgid "Competence (model in newcomers)"
+msgstr ""
+
+# c2da7b9ec7b741a1868af1df6cb77488
+#: None:2
+msgid "Faculty (model in newcomers)"
 msgstr ""
 
 # c60cb897851a478b83d25105c18b9b99
 #~ msgid "Référence"
+#~ msgstr ""
+
+# e740ae95d0a54a45b366efddd012e6e6
+#~ msgid "Nouveaux clients"
+#~ msgstr ""
+
+# 2791a9d0fe764398a15ea0088f42853d
+#~ msgid "Ce module facilite la gestion des nouvelles demandes de client."
+#~ msgstr ""
+
+# eb0056b5ecec450883358ca267c10936
+#~ msgid "Broker (model in app \"newcomers\")"
+#~ msgstr ""
+
+# 0d1ad53994894e7f9342c4db563d88ca
+#~ msgid "Competence (model in app \"newcomers\")"
+#~ msgstr ""
+
+# 75ddecae57ef49bb841e47cbff259217
+#~ msgid "Faculty (model in app \"newcomers\")"
 #~ msgstr ""
 

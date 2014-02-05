@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,29 +23,64 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-# 4cfe334c30bc4cfe9fc1d8cd32bbfb0f
-#: None:2
-msgid "User (model in app \"users\")"
+# ea62d65e9a9840db9f67bea85bc5a579
+#: ../users.rst:0
+msgid "User (model)"
 msgstr ""
 
-# 94a8a2199b124003a29b1d094519dc83
-#: None:2
-msgid "User Profile (field in \"<class 'lino.modlib.users.models.User'>\")"
+# 5e061887b9de45afa3bba7d1e7aee6e3
+#: ../users.rst:0
+msgid "User Profile (field)"
 msgstr ""
 
-# 52ded922f9864e028391fe62597e5673
-#: None:2
-msgid "Authority (model in app \"users\")"
+# 40c072cd178649599d8c0fb431dae0ce
+#: ../users.rst:0
+msgid "Authority (model)"
 msgstr ""
 
-# 70139e2a36c24bd49025876f784302cd
-#: None:2
-msgid "Team (model in app \"users\")"
+# 098f126933d94d189c9891808ff8b5c7
+#: ../users.rst:0
+msgid "Team (model)"
 msgstr ""
 
-# ae0250d5a75844999f2dd2321ea4a7f5
+# 5222e0f7012b4a74968b2198666958e1
+#: ../users.rst:0
+msgid "Teams (view)"
+msgstr ""
+
+# 0321db9fad164c6cbc4455d3a005ef94
+#: ../users.rst:0
+msgid "Membership (model)"
+msgstr ""
+
+# 7cf8cf3e9a054e069dbdb50e8eaeccff
+#: ../users.rst:0
+msgid "User Profiles (view)"
+msgstr ""
+
+# dac6100b3e4c44b18b0b710ac5713d9f
 #: None:2
-msgid "Membership (model in app \"users\")"
+msgid "User (model in users)"
+msgstr ""
+
+# 4f5bf15d17324d6ca8c32f2d3a95161e
+#: None:2
+msgid "User Profile (field in :ref:`User <welfare.users.user>`)"
+msgstr ""
+
+# 3eb8c538f1bf43a5af9d609e7c654edc
+#: None:2
+msgid "Authority (model in users)"
+msgstr ""
+
+# 12c31047baf34df6a5dd2617c2b86d7f
+#: None:2
+msgid "Team (model in users)"
+msgstr ""
+
+# 6460ca246b8940d390b545be3171aaf2
+#: None:2
+msgid "Membership (model in users)"
 msgstr ""
 
 # 4b44c908789c47ae940a6fc26994d6d7
@@ -103,5 +138,25 @@ msgstr ""
 
 # 96b7ee3a56d84ffd8f706330f3175fb7
 #~ msgid "site config (model in app \"system\")"
+#~ msgstr ""
+
+# 4cfe334c30bc4cfe9fc1d8cd32bbfb0f
+#~ msgid "User (model in app \"users\")"
+#~ msgstr ""
+
+# 94a8a2199b124003a29b1d094519dc83
+#~ msgid "User Profile (field in \"<class 'lino.modlib.users.models.User'>\")"
+#~ msgstr ""
+
+# 52ded922f9864e028391fe62597e5673
+#~ msgid "Authority (model in app \"users\")"
+#~ msgstr ""
+
+# 70139e2a36c24bd49025876f784302cd
+#~ msgid "Team (model in app \"users\")"
+#~ msgstr ""
+
+# ae0250d5a75844999f2dd2321ea4a7f5
+#~ msgid "Membership (model in app \"users\")"
 #~ msgstr ""
 

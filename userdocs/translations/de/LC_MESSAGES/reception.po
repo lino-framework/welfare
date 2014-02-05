@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: 2013-07-19 15:14+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -100,6 +100,36 @@ msgstr ""
 # 73459c853eb541ee805c981b75435375
 #: ../reception.rst:54
 msgid "In any case, when the clerk then the Checkin button of that appointment."
+msgstr ""
+
+# 1e031198517348ada2a096088c05194d
+#: ../reception.rst:0
+msgid "Clients (view)"
+msgstr ""
+
+# e82a09c26ef940cbabb26ab28bf09815
+#: ../reception.rst:0
+msgid "Create appointment with (view)"
+msgstr ""
+
+# 6e055077bf6e44b6a5d859bea054aeb0
+#: ../reception.rst:0
+msgid "Expected Guests (view)"
+msgstr ""
+
+# bfa6a0c15d9b40178c0c732c9d6c979b
+#: ../reception.rst:0
+msgid "Waiting visitors (view)"
+msgstr ""
+
+# 88806c7fd9ed4c6ba0f66ec8397f609f
+#: ../reception.rst:0
+msgid "Visitors waiting for me (view)"
+msgstr ""
+
+# e82a09c26ef940cbabb26ab28bf09815
+#: ../reception.rst:0
+msgid "Appointments (view)"
 msgstr ""
 
 # 98f788c2d2e94e43950e38e39297873e

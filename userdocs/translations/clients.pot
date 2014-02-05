@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 22:27+0200\n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,43 +26,118 @@ msgstr ""
 msgid "(N.B.: Benutzer in Eupen siehe auch :ref:`welfare.watch_tim`)"
 msgstr ""
 
-#: None:2
-# b778a4498ef74bfbac212d2cf41b5678
-msgid "Client (model in app \"pcsw\")"
+#: ../clients.rst:0
+# fb867b0002cc43a79809203fb1519d6c
+msgid "Client (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# a270781cb6974b9091976317325cc624
+msgid "Client Contact (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# 7b68e8267e6a41e389306696b1dd343c
+msgid "Client Contact type (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# a270781cb6974b9091976317325cc624
+msgid "Client Address (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# 90a728200e954dd484039c0ffdaf1aa7
+msgid "Address type (view)"
+msgstr ""
+
+#: ../clients.rst:0
+# 888f7647c44a4757863a9ef68b059d42
+msgid "Coaching (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# 32dc25ed9f954ec5a7b109754cb7a05c
+msgid "Coaching type (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# 07f6a7080f9446da8e416afba7dce03f
+msgid "Reason of termination (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# b8bbec9820f74cd09f0682a514cbe214
+msgid "aid type (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# fde275ee41064baca33d89a1d649b0be
+msgid "Integration Phase (model)"
+msgstr ""
+
+#: ../clients.rst:0
+# 2d351b1efeab4e31969328759c019764
+msgid "Civil states (view)"
+msgstr ""
+
+#: ../clients.rst:0
+# 6c6b8198ee6d4e4f814aa342d54e589e
+msgid "Link type (view)"
+msgstr ""
+
+#: ../clients.rst:0
+# 66a65885513f43a8bf8fe96ae680d0d8
+msgid "Parents (view)"
+msgstr ""
+
+#: ../clients.rst:0
+# d644b2e92d8e4286b86a1e233d08410a
+msgid "Children (view)"
 msgstr ""
 
 #: None:2
-# 1bfdd0a8459c422998fb2fe436b8261a
-msgid "Coaching (model in app \"pcsw\")"
+# 04b5f0383eca4314b124ed114c867fdb
+msgid "Client (model in pcsw)"
 msgstr ""
 
 #: None:2
-# b783871af4fc49ddabb01234258e2b9d
-msgid "Client Contact (model in app \"pcsw\")"
+# 154dfc33bfd04f749fd604fe75555723
+msgid "Client Contact (model in pcsw)"
 msgstr ""
 
 #: None:2
-# 9975d96595e94c4f92523ebb930a5cc8
-msgid "Client Contact type (model in app \"pcsw\")"
+# 15257fe5e8a24252a0d1789beb67a232
+msgid "Client Contact type (model in pcsw)"
 msgstr ""
 
 #: None:2
-# 30ee7b96c1de46d8850aeac3c91c2a92
-msgid "Coaching type (model in app \"pcsw\")"
+# ba7cac377cd145e3800da7e384cbafcb
+msgid "Client Address (model in pcsw)"
 msgstr ""
 
 #: None:2
-# df6d20c579e74c7080a0587d22e2c817
-msgid "Reason of termination (model in app \"pcsw\")"
+# b5407a6e9b254ff1bf0f9c8fc273d4df
+msgid "Coaching (model in pcsw)"
 msgstr ""
 
 #: None:2
-# f3490b24807a44ee8202e01dcbe51317
-msgid "aid type (model in app \"pcsw\")"
+# cab6d6e522114fba8afa9ee736af6e27
+msgid "Coaching type (model in pcsw)"
 msgstr ""
 
 #: None:2
-# ee85753e61514c4ba0fe054c2c1b7b08
-msgid "Integration Phase (model in app \"pcsw\")"
+# de7ff7e131764d3abd60839392c1c5c9
+msgid "Reason of termination (model in pcsw)"
+msgstr ""
+
+#: None:2
+# 2b235e43868742bcbfb74b7f7f0ead74
+msgid "aid type (model in pcsw)"
+msgstr ""
+
+#: None:2
+# dde1b8fbf0f54b0991a259d50d382152
+msgid "Integration Phase (model in pcsw)"
 msgstr ""
 
