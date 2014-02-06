@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../tour.rst:4
+# 14cb2c56221443999c345523d11064d9
+msgid "Tour of Lino Welfare"
+msgstr ""
+
+#: ../tour.rst:10
+# 16b9b84b348c41589da8254e75206858
+msgid "Imagine you are the reception clerk. A visitor enters."
+msgstr ""
+
+#: ../tour.rst:13
+# cc413627a5d84650913a09b34adc1a78
+msgid "Visitor: My name is xxx and I'd like to get social help."
+msgstr ""
+
+#: ../tour.rst:15
+# 620638c9d74b43498bf201176a51ce43
+msgid "Clerk: Can I have your id card please?"
+msgstr ""
+
+#: ../tour.rst:16
+# 830415e348db420da25384992cd909f1
+msgid "Search manually by name. Create manually a client record."
+msgstr ""
+
+#: ../tour.rst:17
+# 6ba34619983641bc82fda537df24914a
+msgid "Read the id card.  If the person has a client record in our database, then Lino opens the the detail of this record. Otherwise it asks whether to create the client."
+msgstr ""
+
+#: ../tour.rst:22
+# c1e9ef5dbb4d490f97a7b12b8447ea16
+msgid "Visitor: \"My name is xxx, I have an appointment with Roger.\" (You know that Roger is one of the social agents.)"
+msgstr ""
+
+#: ../tour.rst:25
+# dc1de62355ea43fb984a037af79ab9c1
+msgid "Open the :ddref:`reception.Clients` table (:menuselection:`Reception --> Clients`) and find the client."
+msgstr ""
+
+#: ../tour.rst:28
+# f8782633b973434e9b546b498e5cf418
+msgid "Select the :ddref:`reception.Clients.create_visit` action."
+msgstr ""
+
+#: ../tour.rst:30
+# e9c4234c02f244809d6a42edd65041bc
+msgid "Consult the :ddref:`reception.WaitingVisitors` table in your welcome screen (if necessary, click on the |open| icon)."
+msgstr ""
+
+#: ../tour.rst:33
+# 364f75e1c55948d6b309be85cba827b9
+msgid "Click on \"Checkin\""
+msgstr ""
+

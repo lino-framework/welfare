@@ -27,6 +27,8 @@ from lino import dd
 
 from lino.modlib.cal.models import *
 
+attestations = dd.resolve_app('attestations')
+
 #~ add = EventEvents.add_item
 #~ add('30', _("Visit"),'visit')
 
@@ -83,7 +85,7 @@ class Event(Event):
             yield g
         if self.event_type is None:
             return
-        Guest = settings.SITE.modules.cal.Guest
+        Guest = dd.modules.cal.Guest
         if self.event_type.invite_team_members:
             ug = self.event_type.invite_team_members
             for obj in settings.SITE.modules.users.Membership.objects.filter(team=ug).exclude(user=self.user):
@@ -127,6 +129,14 @@ class Event(Event):
     #~ exclude = dict(state=EventStates.visit)
 
 
+class Guest(Guest, attestations.Attestable):
+
+    def create_attestation(self, ar, **kw):
+        kw.update(project=self.event.project)
+        return super(Guest, self).create_attestation(ar, **kw)
+
+
+
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender, **kw):
     site = sender
@@ -142,12 +152,12 @@ def customize_cal(sender, **kw):
     """)
 
     site.modules.cal.EventTypes.set_insert_layout("""
-    name 
-    invite_team_members 
+    name
+    invite_team_members
     invite_client
     """, window_size=(60, 'auto'))
 
-    site.modules.cal.Guests.set_detail_layout("""
+    dd.modules.cal.Guests.set_detail_layout("""
     event partner role
     state remark workflow_buttons
     waiting_since busy_since gone_since
@@ -155,11 +165,11 @@ def customize_cal(sender, **kw):
     """)
     site.modules.cal.Events.set_detail_layout("general more")
     site.modules.cal.Events.add_detail_panel("general", """
-    event_type summary project 
+    event_type summary project
     start end user assigned_to
-    room priority access_class transparent #rset 
+    room priority access_class transparent #rset
     owner workflow_buttons
-    description GuestsByEvent 
+    description GuestsByEvent
     """, _("General"))
     site.modules.cal.Events.add_detail_panel("more", """
     id created:20 modified:20 state

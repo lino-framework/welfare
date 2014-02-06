@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User Documentation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-04 14:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../aids.rst:5
+# e46927fe9d134737a1521e7052981cc2
+msgid "Aids"
+msgstr ""
+
+#: ../aids.rst:7
+# 42affbabc8aa469aa24714dc6cb0edcb
+msgid "The Aids module adds functionaliti'y to manage the different types of help projects (aids) allocated to individuals."
+msgstr ""
+
+#: ../aids.rst:0
+# 3833cc1304ef48b38cc3ac0781c79861
+msgid "Aid (model)"
+msgstr ""
+
+#: ../aids.rst:0
+# 207974bbe53f4546bf38eb13929d4334
+msgid "Category (model)"
+msgstr ""
+
+#: ../aids.rst:0
+# 525ca1cbb1b14e38bc753e8592fde717
+msgid "Decider (model)"
+msgstr ""
+
+#: ../aids.rst:0
+# 4ff282f70c3044d0a2a984272235f56c
+msgid "Aid Type (model)"
+msgstr ""
+
+#: None:2
+# 0a5700ecf5764e22862e80afad588a4c
+msgid "Aid (model in aids)"
+msgstr ""
+
+#: None:2
+# 3893777022b94a6581bcf50c38c5890d
+msgid "Category (model in aids)"
+msgstr ""
+
+#: None:2
+# b7017aaceea24f87b36200ad7d5ff0e5
+msgid "Decider (model in aids)"
+msgstr ""
+
+#: None:2
+# 1f0714b9ff0049c89da4b818ae6acf2d
+msgid "Aid Type (model in aids)"
+msgstr ""
+
