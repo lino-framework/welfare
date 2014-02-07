@@ -243,8 +243,10 @@ class Site(Site):
         yield 'lino_welfare.modlib.notes'
         yield 'lino_welfare.modlib.aids'
         yield 'lino.modlib.attestations'
-        yield 'lino.modlib.beid'
         yield 'lino.modlib.humanlinks'
+
+        yield 'lino.modlib.beid'
+        yield 'lino.modlib.davlink'
 
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns
