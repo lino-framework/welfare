@@ -223,10 +223,14 @@ class Site(Site):
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
 
+        yield 'lino.modlib.attestations'
+        yield 'lino.modlib.humanlinks'
+
         if False:  # not yet ready
             yield 'lino.modlib.families'
 
         yield 'lino_welfare'
+
         yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # pcsw.demo creates clients needed by cbss.demo
@@ -242,11 +246,12 @@ class Site(Site):
         # notes demo fixture creates notes for Clients
         yield 'lino_welfare.modlib.notes'
         yield 'lino_welfare.modlib.aids'
-        yield 'lino.modlib.attestations'
-        yield 'lino.modlib.humanlinks'
 
-        yield 'lino.modlib.beid'
-        yield 'lino.modlib.davlink'
+        if self.use_java:
+
+            yield 'lino.modlib.beid'
+            yield 'lino.modlib.davlink'
+
 
     #~ def get_urls(self):
         #~ from django.conf.urls.defaults import patterns

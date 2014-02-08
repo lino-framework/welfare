@@ -16,11 +16,8 @@ from __future__ import unicode_literals
 
 
 from django.contrib.contenttypes.models import ContentType
-from lino.utils.instantiator import Instantiator, i2d
+from lino.utils.instantiator import Instantiator
 from django.utils.translation import ugettext_lazy as _
-
-
-from django.db import models
 from django.conf import settings
 
 from north.dbutils import babelkw, babel_values
@@ -69,15 +66,26 @@ def objects():
                            build_method='appypdf',
                            email_template='Default.eml.html').build
     yield attType(
-        body_template='aus.body.html',
+        body_template='default.body.html',
         template='Default.odt',
+        **babelkw('name',
+                  de="Bescheinigung",
+                  fr="Attestation",
+                  en="Attestation"))
+    yield attType(
+        body_template='default.body.html',
+        template='Default.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('aids.Aid')),
         **babelkw('name',
                   de="Bescheinigung Ausländerbeihilfe",
                   fr="Attestation allocation étrangers",
                   en="Foreigner income certificate"))
     yield attType(
-        body_template='anw.body.html',
+        body_template='default.body.html',
         template='Default.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('cal.Guest')),
         **babelkw('name',
                   de="Anwesenheitsbescheinigung",
                   fr="Attestation de présence",
