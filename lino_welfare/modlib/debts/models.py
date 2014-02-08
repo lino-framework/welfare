@@ -22,64 +22,33 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import cgi
 import datetime
 import decimal
 
 
 from django.db import models
-from django.db.models import Q
-from django.db.utils import DatabaseError
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.translation import string_concat
 from django.utils.encoding import force_unicode
-from django.utils.functional import lazy
 
 
-#~ from lino import reports
 from lino import dd
-#~ from lino import layouts
 from lino.utils.xmlgen.html import E
 from lino import mixins
-#~ from lino import actions
-#~ from lino import fields
 from lino.modlib.contacts import models as contacts
 from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
 from lino.modlib.uploads import models as uploads
 from lino.modlib.cal import models as cal
-#~ from lino.modlib.users import models as users
-#~ from lino.utils.choicelists import HowWell, Gender
-#~ from lino.core.perms import UserLevels
-#~ from lino.utils.choicelists import ChoiceList
-# ~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
-#~ from lino.modlib.uploads.models import UploadsByPerson
-from lino.core.dbutils import get_field
-from lino.core.dbutils import resolve_field
-from lino.core import actions
 from lino.core.constants import _handle_attr_name
 
 from lino.utils.choosers import chooser
-from lino.utils import mti
-from lino.mixins.printable import DirectPrintAction, Printable
-#~ from lino.mixins.reminder import ReminderEntry
-#~ from lino.core.dbutils import obj2str
 
-from lino.modlib.countries.models import CountryCity
-from lino.modlib.properties import models as properties
-#~ from lino.modlib.households import models as households
 from lino.modlib.accounts.utils import AccountTypes
-#~ from lino.modlib.contacts.models import Contact
-#~ from lino.core.dbutils import resolve_model, UnresolvedModel
 
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')
-properties = dd.resolve_app('properties')
 pcsw = dd.resolve_app('pcsw')
 
 
@@ -159,7 +128,7 @@ def bulk_create_with_manual_ids(model, obj_list):
     return model.objects.bulk_create(obj_list)
 
 
-class Budget(mixins.AutoUser, mixins.CachedPrintable, mixins.Duplicable):
+class Budget(dd.UserAuthored, dd.CachedPrintable, dd.Duplicable):
 
     """
     Deserves more documentation.
@@ -407,9 +376,6 @@ The total monthly amount available for debts distribution."""))
 
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
     def preview(self, ar):
-        #~ raise Exception(20130325)
-        #~ if ar is None:
-            #~ ar = Budgets.request(username="rolf")
         chunks = []
 
         def render(sar):
