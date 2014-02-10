@@ -1,10 +1,10 @@
 .. _welfare:
 
 ============
-Lino-Welfare
+Lino Welfare
 ============
 
-Welcome to the *Lino-Welfare* project homepage.
+Welcome to the *Lino Welfare* project homepage.
 
 .. py2rst::
 

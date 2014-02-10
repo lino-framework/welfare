@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-04 14:07+0200\n"
-"PO-Revision-Date: 2014-02-04 18:13+0300\n"
+"PO-Revision-Date: 2014-02-10 09:00+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -3089,9 +3089,8 @@ msgid "Find date with..."
 msgstr "Termin finden mit..."
 
 #: lino_welfare/modlib/reception/models.py:257
-#, fuzzy
 msgid "Create appointment with"
-msgstr "Termin finden"
+msgstr "Termin machen mit"
 
 #: lino_welfare/modlib/reception/models.py:268
 #, fuzzy

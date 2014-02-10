@@ -40,16 +40,11 @@ It started as a part of the Lino project and
 forked off in August 2012 
 to become an independent project,
 possibly to be maintained by an independant organization.""",
-                  author='Luc Saffre',
-                  author_email='luc.saffre@gmail.com',
-                  #~ description=settings.LINO.description,
-                  #~ author=settings.LINO.author,
-                  #~ author_email=settings.LINO.author_email,
-                  #~ url="http://code.google.com/p/lino-welfare/",
-                  url="http://welfare.lino-framework.org",
-                  #~ url=settings.LINO.url,
-                  license='GPL',
-      classifiers="""\
+    author='Luc Saffre',
+    author_email='luc.saffre@gmail.com',
+    url="http://welfare.lino-framework.org",
+    license='GPL',
+    classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
 Development Status :: 4 - Beta

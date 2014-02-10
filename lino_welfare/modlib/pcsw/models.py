@@ -55,9 +55,9 @@ users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 notes = dd.resolve_app('notes')
+attestations = dd.resolve_app('attestations')
 
 from lino.utils import ssin
-
 
 from .coaching import *
 from .client_address import *
@@ -248,7 +248,10 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
-class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
+class Client(contacts.Person, 
+             dd.BasePrintable, 
+             beid.BeIdCardHolder,
+             attestations.Attestable):
 
     """A :class:`Client` is a specialized :class:`Person`.
 
@@ -378,6 +381,11 @@ class Client(contacts.Person, dd.BasePrintable, beid.BeIdCardHolder):
         return self.model.objects.select_related(
             #~ 'country','city','coach1','coach2','nationality')
             'country', 'city', 'nationality')
+
+    def create_attestation(self, ar, **kw):
+        # Set project field when creating an attestation from Client.
+        kw.update(project=self)
+        return super(Client, self).create_attestation(ar, **kw)
 
     def get_coachings(self, today=None, **flt):
         qs = self.coachings_by_client.filter(**flt)
@@ -805,9 +813,8 @@ class ClientDetail(dd.FormLayout):
     #~ coaching_left = """
     #~ """
     history = dd.Panel("""
-    reception.CreateNoteActionsByClient:20 \
-    attestations.AttestationsByProject:30 \
-    pcsw.NotesByPerson:30
+    # reception.CreateNoteActionsByClient:20
+    attestations.AttestationsByProject:30 pcsw.NotesByPerson:30
     # lino.ChangesByMaster
     """, label=_("History"))
 

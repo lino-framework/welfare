@@ -14,9 +14,12 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
-- Angesichts vieler Erweiterungen in der Struktur war es nötig, das
-  ClientDetail neu zu strukturieren. Ich hoffe, dass ihr euch schnell
-  damit anfreundet.
+- Angesichts vieler Erweiterungen in der Struktur war es nötig, die
+  Detail-Ansicht der Kunden neu zu strukturieren. Ich hoffe, dass ihr
+  euch schnell damit anfreundet.
+
+  Die Liste :menuselection:`Empfang --> Klienten` hatte bisher ein
+  eigenes Detail-Layout. Jetzt nicht mehr.
 
 - Mehrere Adressen pro Klient
 

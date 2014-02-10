@@ -50,7 +50,7 @@ class Signers(dd.Model):
         #~ default=default_signer2,
         verbose_name=_("President"))
 
-    @chooser()
+    @dd.chooser()
     def signer1_choices(cls):
         sc = settings.SITE.site_config
         kw = dict()
@@ -59,7 +59,7 @@ class Signers(dd.Model):
         return settings.SITE.modules.contacts.Person.objects.filter(
             rolesbyperson__company=sc.site_company, **kw)
 
-    @chooser()
+    @dd.chooser()
     def signer2_choices(cls):
         sc = settings.SITE.site_config
         kw = dict()

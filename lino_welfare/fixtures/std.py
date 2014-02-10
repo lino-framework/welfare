@@ -75,6 +75,7 @@ def objects():
     yield attType(
         body_template='default.body.html',
         template='Default.odt',
+        primary=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('aids.Aid')),
         **babelkw('name',
@@ -84,6 +85,8 @@ def objects():
     yield attType(
         body_template='default.body.html',
         template='Default.odt',
+        primary=True,
+        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('cal.Guest')),
         **babelkw('name',
@@ -94,10 +97,22 @@ def objects():
     yield attType(
         build_method='appyrtf',
         template='cv.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('pcsw.Client')),
         **babelkw('name',
                   de="Lebenslauf",
                   fr="Curriculum vitae",
                   en="Curriculum vitae"))
+
+    yield attType(
+        build_method='appypdf',
+        template='eid-content.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('pcsw.Client')),
+        **babelkw('name',
+                  de="eID-Inhalt",
+                  fr="Contenu carte eID",
+                  en="eID sheet"))
 
     eventType = Instantiator('notes.EventType', "name remark").build
 

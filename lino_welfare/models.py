@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,61 +24,12 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import base64
-import os
-import cgi
-import datetime
-
 from django.db import models
-from django.db.models import Q
-from django.db.utils import DatabaseError
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.core.exceptions import MultipleObjectsReturned
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import string_concat
-from django.utils.encoding import force_unicode
-from django.utils.functional import lazy
 
-#~ import lino
-#~ logger.debug(__file__+' : started')
-#~ from django.utils import translation
-
-#~ from django_sites.dbutils import range_filter
-
-#~ from lino import reports
 from lino import dd
-#~ from lino import layouts
-#~ from lino.core import perms
-#~ from lino.utils import printable
-from lino import mixins
-#~ from lino import fields
-#~ from lino.modlib.users.models import UserLevels
-#~ from lino.modlib.uploads.models import UploadsByPerson
-#~ from lino.models import get_site_config
-from lino.core import dbutils
-from lino.core.actors import Actor
-from lino.core.dbutils import get_field
-from lino.core.dbutils import resolve_field
-#~ from north import babel
-from lino.utils import join_words
-from lino.utils.choosers import chooser
-from lino.utils import mti
-from lino.utils.ranges import isrange
-from lino.utils.xmlgen import html as xghtml
-from lino.utils.xmlgen.html import E
-from lino.utils import IncompleteDate
-
-from lino.mixins.printable import DirectPrintAction, Printable
-#~ from lino.mixins.reminder import ReminderEntry
-from lino.core import actions
-#~ from lino.core import changes
-
-from lino.modlib.contacts.utils import street2kw
 from lino.modlib.contacts import models as contacts
-
-from lino.core.dbutils import resolve_model, UnresolvedModel
 
 households = dd.resolve_app('households')
 #~ cal = dd.resolve_app('cal')
