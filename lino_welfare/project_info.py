@@ -92,6 +92,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.notes.fixtures',
     'lino_welfare.modlib.system',
     'lino_welfare.modlib.system.fixtures',
+    'lino_welfare.modlib.users',
     'lino_welfare.modlib.jobs',
     'lino_welfare.modlib.jobs.fixtures',
     'lino_welfare.modlib.newcomers',
