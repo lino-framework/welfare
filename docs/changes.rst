@@ -14,6 +14,13 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
+To do:
+
+- Bestehende Lebensläufe aus `media/webdav/userdocs/appyrtf`
+  konvertieren?
+
+Änderungen:
+
 - Das Benutzerprofil "ASD" war bisher nicht brauchbar (hatte fast
   keine Zugriffsrechte).
 
@@ -62,11 +69,9 @@ Version 1.1.11 (coming)
 
 - Manuell nach Migration:
 
-  - Einen Kalender pro User anlegen und dem User zuweisen.
   - SiteConfig --> Constants : Neue Felder ausfüllen
-  - Notizart "Lebenslauf" löschen. Prüfen, ob alle Lebensläufe zu
-    Bescheinigungen konvertiert wurden.
-  - 
+  - Notizart "Lebenslauf" löschen. 
+
   
 
 Version 1.1.10 (released :blogref:`20131007`)

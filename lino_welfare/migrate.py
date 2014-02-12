@@ -32,8 +32,14 @@ from lino.core.dbutils import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
 from lino import dd
+from lino.mixins.printable import get_build_method
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
+
+
+def target_name(obj):
+    bm = get_build_method(obj)
+    return bm.get_target(None, obj).name
 
 
 def migrate_from_1_4_10(globals_dict):
@@ -1018,11 +1024,12 @@ def migrate_from_1_1_8(globals_dict):
 
 def migrate_from_1_1_10(globals_dict):
     """
+
     - Renamed `cal.Calendar` to `cal.EventType`.
       For each "Calendar" of the old version we create an "EventType".
-      After migration we will manually create one "Calendar" 
+      After migration we will manually create one "Calendar"
       (new version's meaning) for each user.
-    - Rename field `calendar` to `event_type` in 
+    - Rename field `calendar` to `event_type` in
       users.User, cal.Subscription and `cal.Event`.
       Removed it in cal.Task.
     - Removed field `uid` in cal.Event and cal.Task
@@ -1030,7 +1037,13 @@ def migrate_from_1_1_10(globals_dict):
     - Removed field `help_text` in `accounts.Group` and `accounts.Account`
     - Renamed `countries.City` to `countries.Place`
     - Convert existing CVs from `notes.Note` to `attestations.Attestation`
-    - Removed field SiteConfig attestation_note_nature_id and debts_bailiff_type_id
+
+    - Removed field SiteConfig attestation_note_nature_id and
+      debts_bailiff_type_id
+
+    - after_load: create default attestation types, create one
+      calendar per user, convert existing cv notes to attestations
+
     """
 
     bv2kw = globals_dict['bv2kw']
@@ -1292,7 +1305,14 @@ def migrate_from_1_1_10(globals_dict):
             # assert not note.subject
             # kw.update(body=body)
             kw.update(language=note.language)
-            Attestation(**kw).save()
+            att = Attestation(**kw)
+            att.save()
+
+            if note.build_time:
+                logger.info("todo: mv %s %s",
+                            target_name(note),
+                            target_name(att))
+
             note.delete()
 
     globals_dict.update(after_load=after_load)
