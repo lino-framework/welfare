@@ -33,34 +33,7 @@ ExclusionType = dd.resolve_model('pcsw.ExclusionType')
 ContractEnding = dd.resolve_model('isip.ContractEnding')
 
 
-def objects():
-
-    noteType = Instantiator(
-        'notes.NoteType', "name",
-        email_template='Default.eml.html').build
-
-    yield noteType("Beschluss")
-    yield noteType(
-        "Konvention", 
-        remark="Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
-    yield noteType(
-        "Notiz", 
-        remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
-    yield noteType("Vorladung", remark="Einladung zu einem persönlichen Gespräch")
-    # (--> Datum Eintragung DSBE)
-    yield noteType("Übergabeblatt", remark="Übergabeblatt vom allgemeinen Sozialdienst")
-    yield noteType("Neuantrag")
-    yield noteType("Antragsformular")
-    yield noteType("Auswertungsbogen allgemein", build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
-    #~ yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
-    yield noteType("Erstgespräch")
-
-    yield noteType(
-        build_method='appyrtf', template='Letter.odt',
-        **babelkw('name',
-                  de="Brief oder Einschreiben",
-                  fr="Lettre",
-                  en="Letter"))
+def attestation_types():  # also used for migration to 1.1.11
 
     attType = Instantiator('attestations.AttestationType',
                            build_method='appypdf',
@@ -114,6 +87,38 @@ def objects():
                   fr="Contenu carte eID",
                   en="eID sheet"))
 
+
+def objects():
+
+    noteType = Instantiator(
+        'notes.NoteType', "name",
+        email_template='Default.eml.html').build
+
+    yield noteType("Beschluss")
+    yield noteType(
+        "Konvention", 
+        remark="Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
+    yield noteType(
+        "Notiz", 
+        remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
+    yield noteType("Vorladung", remark="Einladung zu einem persönlichen Gespräch")
+    # (--> Datum Eintragung DSBE)
+    yield noteType("Übergabeblatt", remark="Übergabeblatt vom allgemeinen Sozialdienst")
+    yield noteType("Neuantrag")
+    yield noteType("Antragsformular")
+    yield noteType("Auswertungsbogen allgemein", build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
+    #~ yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
+    yield noteType("Erstgespräch")
+
+    yield noteType(
+        build_method='appyrtf', template='Letter.odt',
+        **babelkw('name',
+                  de="Brief oder Einschreiben",
+                  fr="Lettre",
+                  en="Letter"))
+
+    yield attestation_types()
+        
     eventType = Instantiator('notes.EventType', "name remark").build
 
     yield eventType("Aktennotiz", remark="Alle Notizen/Ereignisse, die keine andere Form haben")

@@ -354,32 +354,33 @@ class Coachings(dd.Table):
     model = Coaching
 
     parameters = dd.ObservedPeriod(
-        coached_by=models.ForeignKey(users.User,
-                                     blank=True, null=True,
-                                     verbose_name=_(
-                "Coached by"), help_text="""Nur Begleitungen dieses Benutzers."""),
-        and_coached_by=models.ForeignKey(users.User,
-                                         blank=True, null=True,
-                                         verbose_name=_(
-                "and by"), help_text="""... und auch Begleitungen dieses Benutzers."""),
-        #~ start_date = models.DateField(_("Period from"),
-            #~ help_text="""Date début de la période observée"""),
-        #~ end_date = models.DateField(_("until"),
-            #~ help_text="""Date fin de la période observée"""),
+        coached_by=models.ForeignKey(
+            users.User,
+            blank=True, null=True,
+            verbose_name=_("Coached by"),
+            help_text="""Nur Begleitungen dieses Benutzers."""),
+        and_coached_by=models.ForeignKey(
+            users.User,
+            blank=True, null=True,
+            verbose_name=_("and by"),
+            help_text="""... und auch Begleitungen dieses Benutzers."""),
         observed_event=CoachingEvents.field(
             blank=True, default=CoachingEvents.active),
-        primary_coachings=dd.YesNo.field(_("Primary coachings"),
+        primary_coachings=dd.YesNo.field(
+            _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),
-        coaching_type=models.ForeignKey(CoachingType,
-                                        blank=True, null=True,
+        coaching_type=models.ForeignKey(
+            CoachingType,
+            blank=True, null=True,
             help_text="""Nur Begleitungen dieses Dienstes."""),
-        ending=models.ForeignKey(CoachingEnding,
-                                 blank=True, null=True,
+        ending=models.ForeignKey(
+            CoachingEnding,
+            blank=True, null=True,
             help_text="""Nur Begleitungen mit diesem Beendigungsgrund."""),
     )
     params_layout = """
-    start_date end_date observed_event coached_by and_coached_by 
-    primary_coachings coaching_type ending 
+    start_date end_date observed_event coached_by and_coached_by
+    primary_coachings coaching_type ending
     """
     params_panel_hidden = True
 

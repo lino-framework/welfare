@@ -188,14 +188,6 @@ Es existiert keine *aktive* Begleitung.
 #~ Klient ist laut TIM weder Ehemalig noch Neuantrag, hat aber keine gültige NISS.""")
 
 
-#~ class RefuseClient(dd.NotifyingAction,dd.ChangeStateAction):
-    #~ label = _("Refuse")
-    #~ required = dict(states='newcomer invalid',user_groups='newcomers')
-    # ~ # help_text = _("Write a refusal note and remove the new client request.")
-
-    #~ def get_notify_subject(self,ar,obj,**kw):
-        #~ return _("%(client)s has been refused.") % dict(client=obj)
-
 class RefusalReasons(dd.ChoiceList):
     pass
 
@@ -211,7 +203,6 @@ class RefuseClient(dd.ChangeStateAction):
     This is not a docstring
     """
     label = _("Refuse")
-    #~ required = dict(states='newcomer invalid',user_groups='newcomers')
     required = dict(states='newcomer', user_groups='newcomers')
 
     #~ icon_file = 'flag_blue.png'
@@ -839,20 +830,23 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     education = dd.Panel("""
-    jobs.StudiesByPerson 
+    jobs.StudiesByPerson
     jobs.ExperiencesByPerson:40
     """, label=_("Education"))
 
     languages = dd.Panel("""
-    cv.LanguageKnowledgesByPerson 
-    courses.CourseRequestsByPerson  
+    cv.LanguageKnowledgesByPerson
+    courses.CourseRequestsByPerson
     # skills obstacles
     """, label=_("Languages"))
 
-    competences = dd.Panel("""
-    cv.SkillsByPerson cv.SoftSkillsByPerson  skills
-    cv.ObstaclesByPerson obstacles 
-    """, label=_("Competences"), required=dict(user_groups='integ'))
+    competences = dd.Panel(
+        """
+        cv.SkillsByPerson cv.SoftSkillsByPerson skills
+        cv.ObstaclesByPerson obstacles
+        """,
+        label=_("Competences"),
+        required=dict(user_groups='integ'))
 
     jobs = dd.Panel("""
     jobs.CandidaturesByPerson
@@ -1357,8 +1351,6 @@ class PersonGroup(dd.Model):
 class PersonGroups(dd.Table):
     help_text = _("Liste des phases d'intégration possibles.")
     model = PersonGroup
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager', user_groups='integ')
 
     order_by = ["ref_name"]
@@ -1407,7 +1399,7 @@ class DispenseReason(dd.BabelNamed, dd.Sequenced):
 
 class DispenseReasons(dd.Table):
     help_text = _("A list of reasons for being dispensed")
-    required = dict(user_groups=['integ'], user_level='manager')
+    required = dict(user_groups='coaching', user_level='manager')
     model = DispenseReason
     column_names = 'seqno name *'
     order_by = ['seqno']
@@ -1433,7 +1425,7 @@ class Dispense(dd.Model):
 class Dispenses(dd.Table):
     order_by = ['start_date']
     help_text = _("Liste de dispenses")
-    required = dict(user_groups=['integ'], user_level='manager')
+    required = dict(user_groups='coaching', user_level='manager')
     model = Dispense
 
 
@@ -1442,7 +1434,7 @@ class DispensesByClient(Dispenses):
     column_names = 'start_date end_date reason remarks:10'
     hidden_columns = 'id'
     auto_fit_column_widths = True
-    required = dict(user_groups='integ')
+    required = dict(user_groups='coaching')
 
 
 class ExclusionType(dd.Model):
@@ -1460,7 +1452,6 @@ class ExclusionType(dd.Model):
 class ExclusionTypes(dd.Table):
     help_text = _("""Liste des raisons possibles d'arrêter temporairement 
     le paiement d'une aide financière prévue.""")
-    #~ required_user_groups = ['integ']
     required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
     model = ExclusionType
@@ -1502,7 +1493,7 @@ class Exclusions(dd.Table):
 
 
 class ExclusionsByClient(Exclusions):
-    required = dd.required(user_groups='integ')
+    required = dd.required(user_groups='coaching')
     #~ required_user_level = None
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark:10'
@@ -1675,14 +1666,21 @@ def setup_workflows(site):
                 return False
             return True
 
-        ClientStates.newcomer.add_transition(states='refused coached former',
-                                             user_groups='newcomers', allow=allow_state_newcomer)
+        ClientStates.newcomer.add_transition(
+            states='refused coached former',
+            user_groups='newcomers', allow=allow_state_newcomer)
 
     ClientStates.refused.add_transition(RefuseClient)
     #~ ClientStates.refused.add_transition(_("Refuse"),states='newcomer invalid',user_groups='newcomers',notify=True)
     #~ ClientStates.coached.add_transition(_("Coached"),states='new',user_groups='newcomers')
-    ClientStates.former.add_transition(_("Former"),
-                                       #~ states='coached invalid',
-                                       states='coached',
-                                       user_groups='newcomers')
+    ClientStates.former.add_transition(
+        _("Former"),
+        #~ states='coached invalid',
+        states='coached',
+        user_groups='newcomers')
     #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+
+
+dd.add_user_group('coaching', _("Coaching"))
+
+

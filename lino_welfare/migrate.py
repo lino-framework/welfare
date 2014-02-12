@@ -1254,7 +1254,22 @@ def migrate_from_1_1_10(globals_dict):
         return system_SiteConfig(**kwargs)
     globals_dict.update(system_SiteConfig=f)
 
+    cal_Calendar = resolve_model('cal.Calendar')
+    users_User = resolve_model("users.User")
+    objects1 = globals_dict['objects']
 
+    def objects():
+        yield objects1()
+        from lino_welfare.fixtures.std import attestation_types
+        yield attestation_types()
+
+        for u in users_User.objects.exclude(profile=''):
+            cal = cal_Calendar(name=u.username)
+            yield cal
+            u.calendar = cal
+            yield u
+
+    globals_dict.update(objects=objects)
 
     def after_load():
 
@@ -1262,10 +1277,10 @@ def migrate_from_1_1_10(globals_dict):
         NoteType = resolve_model("notes.NoteType")
         Attestation = resolve_model("attestations.Attestation")
         AttestationType = resolve_model("attestations.AttestationType")
-    
+
         cvnt = NoteType.objects.get(template='cv.odt')
         cvat = AttestationType.objects.get(template='cv.odt')
-    
+
         for note in Note.objects.filter(type=cvnt):
             kw = dict()
             owner_type_id = new_content_type_id(note.owner_type_id)

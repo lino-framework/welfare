@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2013 Luc Saffre
+# Copyright 2008-2014 Luc Saffre
 # This file is part of the Lino-Welfare project.
 # Lino-Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -737,7 +737,7 @@ def site_setup(self):
 
 
 def setup_main_menu(site, ui, profile, m):
-    if profile.integ_level:
+    if profile.courses_level:
         m = m.add_menu("courses", Plugin.verbose_name)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)

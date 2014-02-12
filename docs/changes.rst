@@ -14,6 +14,9 @@ The final truth about what's going on is only
 Version 1.1.11 (coming)
 =============================================
 
+- Das Benutzerprofil "ASD" war bisher nicht brauchbar (hatte fast
+  keine Zugriffsrechte).
+
 - Angesichts vieler Erweiterungen in der Struktur war es nötig, die
   Detail-Ansicht der Kunden neu zu strukturieren. Ich hoffe, dass ihr
   euch schnell damit anfreundet.
@@ -57,16 +60,14 @@ Version 1.1.11 (coming)
     ebenfalls Bescheinigungen. Bei der Migration wurden bestehende
     Lebenläufe konvertiert.
 
-
-
 - Manuell nach Migration:
 
   - Einen Kalender pro User anlegen und dem User zuweisen.
   - SiteConfig --> Constants : Neue Felder ausfüllen
   - Notizart "Lebenslauf" löschen. Prüfen, ob alle Lebensläufe zu
     Bescheinigungen konvertiert wurden.
+  - 
   
-
 
 Version 1.1.10 (released :blogref:`20131007`)
 =============================================

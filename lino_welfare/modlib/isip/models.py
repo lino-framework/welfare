@@ -81,7 +81,7 @@ class ContractType(mixins.PrintableType, dd.BabelNamed):
 
 
 class ContractTypes(dd.Table):
-    required = dict(user_groups=['integ'], user_level='manager')
+    required = dict(user_groups='integ', user_level='manager')
     model = ContractType
     column_names = 'name ref build_method template *'
     detail_layout = """
@@ -112,7 +112,7 @@ class ExamPolicy(dd.BabelNamed, cal.RecurrenceSet):
 
 
 class ExamPolicies(dd.Table):
-    required = dict(user_groups=['integ'], user_level='manager')
+    required = dict(user_groups='integ', user_level='manager')
     model = ExamPolicy
     column_names = 'name *'
     detail_layout = """
@@ -146,7 +146,7 @@ class ContractEnding(dd.Model):
 
 
 class ContractEndings(dd.Table):
-    required = dict(user_groups=['integ'], user_level='manager')
+    required = dict(user_groups='integ', user_level='manager')
     model = ContractEnding
     column_names = 'name *'
     order_by = ['name']
@@ -175,6 +175,7 @@ class StudyTypes(dd.Table):
     name id
     ContractsByStudyType
     """
+
 
 def default_signer1():
     return settings.SITE.site_config.signer1

@@ -283,21 +283,23 @@ def site_setup(site):
     site.modules.system.SiteConfigs.set_detail_layout(
         "general constants",
         general=dd.Panel("""
-        site_company next_partner_id:10 
+        site_company next_partner_id:10
         job_office #debts_bailiff_type master_budget
         signer1 signer2
-        signer1_function signer2_function 
+        signer1_function signer2_function
         """, label=_("General")), constants=dd.Panel("""
-        system_note_type default_build_method 
+        system_note_type default_build_method
         propgroup_skills propgroup_softskills propgroup_obstacles
-        residence_permit_upload_type work_permit_upload_type driving_licence_upload_type
-        client_calendar prompt_calendar 
-        client_guestrole team_guestrole 
+        residence_permit_upload_type \
+          work_permit_upload_type \
+          driving_licence_upload_type
+        client_calendar prompt_calendar
+        client_guestrole team_guestrole
         # attestation_note_nature
         """, label=_("Constants")))
 
     site.modules.properties.Properties.set_detail_layout("""
-    id group type 
+    id group type
     name
     cv.PersonPropsByProp
     """)

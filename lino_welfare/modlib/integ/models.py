@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino-Welfare project.
 # Lino-Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@ import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
-from django.db.models import Q
 
 from lino import dd
 from lino.utils.xmlgen.html import E
@@ -42,14 +41,13 @@ users = dd.resolve_app('users')
 properties = dd.resolve_app('properties')
 
 
-#~ class IntegClients(pcsw.Clients):
 class Clients(pcsw.Clients):
     # Black right-pointing triangle : U+25B6   &#9654;
     # Black right-pointing pointer : U+25BA    &#9658;
     help_text = """Wie Kontakte --> Klienten, aber mit \
     DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
-    required = dict(user_groups='integ')
+    required = dict(user_groups='coaching')
     params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
@@ -124,25 +122,24 @@ class UsersWithClients(dd.VirtualTable):
     A customized overview table.
     """
     #~ debug_permissions = True
-    required = dict(user_groups='integ newcomers')
+    required = dict(user_groups='coaching newcomers')
     label = _("Users with their Clients")
     #~ column_defaults = dict(width=8)
 
     slave_grid_format = 'html'
 
-
     @classmethod
     def get_data_rows(self, ar):
-        """
-        We only want the users who actually have at least one client.
+        """We only want the users who actually have at least one client.
         We store the corresponding request in the user object
         under the name `my_persons`.
-        
-        The list displays only integration agents, i.e. users with a nonempty `integ_level`.
-        With one subtility: system admins also have a nonempty `integ_level`, 
-        but normal users don't want to see them. 
-        So we add the rule that only system admins see other system admins.
-        
+
+        The list displays only integration agents, i.e. users with a
+        nonempty `integ_level`.  With one subtility: system admins
+        also have a nonempty `integ_level`, but normal users don't
+        want to see them.  So we add the rule that only system admins
+        see other system admins.
+
         """
         #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
         u = ar.get_user()
@@ -155,11 +152,9 @@ class UsersWithClients(dd.VirtualTable):
 
         qs = users.User.objects.filter(profile__in=profiles)
         for user in qs.order_by('username'):
-            #~ r = MyClients.request(ar.ui,subst_user=user)
             r = Clients.request(param_values=dict(coached_by=user))
             if r.get_total_count():
                 user.my_persons = r
-                #~ user._detail_action = users.MySettings.default_action
                 yield user
 
     @dd.virtualfield('pcsw.Coaching.user')
@@ -542,7 +537,7 @@ class JobProvidersAndContracts(CompaniesAndContracts):
 
 class ActivityReport(dd.Report):
 
-    required = dict(user_groups='integ')
+    required = dict(user_groups='coaching')
     #~ required = dd.required(user_level='manager')
     label = _("Activity Report")
 
@@ -648,4 +643,3 @@ def setup_explorer_menu(site, ui, profile, m):
 
 
 dd.add_user_group('integ', Plugin.verbose_name)
-#~ dd.add_user_group('coach',INTEG_MODULE_LABEL)

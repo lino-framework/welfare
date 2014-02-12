@@ -93,18 +93,21 @@ class Site(Site):
         from lino import dd
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset(
-            '* office integ courses cbss newcomers debts reception')
+            '* office coaching integ courses cbss newcomers debts reception')
         add = dd.UserProfiles.add_item
-        add('000', _("Anonymous"),                  '_ _ _ _ _ _ _ _',
-            name='anonymous', readonly=True, authenticated=False)
-        add('100', _("Integration Agent"),          'U U U U U _ _ _')
-        add('110', _("Integration Agent (Manager)"), 'U M M M U _ _ _')
-        add('200', _("Newcomers consultant"),       'U U _ _ U U _ _')
-        add('210', _("Reception clerk"),            'U _ _ _ _ _ _ U')
-        add('300', _("Debts consultant"),           'U U _ _ _ _ U _')
-        add('400', _("Social agent"),               'U _ _ U U _ _ _')
-        add('900', _("Administrator"),
-            'A A A A A A A A', name='admin')
+        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _',
+            name='anonymous',
+            readonly=True,
+            authenticated=False)
+        add('100', _("Integration Agent"),           'U U U U U U _ _ _')
+        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ _')
+        add('200', _("Newcomers consultant"),        'U U U _ _ U U _ _')
+        add('210', _("Reception clerk"),             'U _ _ _ _ _ _ _ U')
+        add('300', _("Debts consultant"),            'U U U _ _ _ _ U _')
+        add('400', _("Social agent"),                'U U _ _ U U _ _ _')
+        add('410', _("Social agent (Manager)"),      'U M _ _ M U _ _ _')
+        add('900', _("Administrator"),               'A A A A A A A A A',
+            name='admin')
 
     def setup_quicklinks(self, ar, tb):
         #~ tb.add_action(self.modules.contacts.Persons().detail)
