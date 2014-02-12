@@ -1256,28 +1256,22 @@ def migrate_from_1_1_10(globals_dict):
 
     cal_Calendar = resolve_model('cal.Calendar')
     users_User = resolve_model("users.User")
-    objects1 = globals_dict['objects']
+    Note = resolve_model("notes.Note")
+    NoteType = resolve_model("notes.NoteType")
+    Attestation = resolve_model("attestations.Attestation")
+    AttestationType = resolve_model("attestations.AttestationType")
 
-    def objects():
-        yield objects1()
+    def after_load(loader):
+        logger.info("after_load()")
         from lino_welfare.fixtures.std import attestation_types
-        yield attestation_types()
+        loader.save(attestation_types())
 
         for u in users_User.objects.exclude(profile=''):
             cal = cal_Calendar(name=u.username)
-            yield cal
+            loader.save(cal)
             u.calendar = cal
-            yield u
-
-    globals_dict.update(objects=objects)
-
-    def after_load():
-
-        Note = resolve_model("notes.Note")
-        NoteType = resolve_model("notes.NoteType")
-        Attestation = resolve_model("attestations.Attestation")
-        AttestationType = resolve_model("attestations.AttestationType")
-
+            loader.save(u)
+    
         cvnt = NoteType.objects.get(template='cv.odt')
         cvat = AttestationType.objects.get(template='cv.odt')
 
@@ -1303,6 +1297,6 @@ def migrate_from_1_1_10(globals_dict):
 
     globals_dict.update(after_load=after_load)
 
-
-
     return '1.1.11'
+
+
