@@ -29,10 +29,13 @@ import datetime
 from decimal import Decimal
 from django.conf import settings
 from lino.core.dbutils import resolve_model
-from lino.utils import mti
 from lino.utils import dblogger
 from lino import dd
+from lino.modlib.countries.models import PlaceTypes as CityTypes
+from lino.utils.mti import create_child
+
 from lino.mixins.printable import get_build_method
+from lino_welfare.fixtures.std import attestation_types
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
@@ -87,10 +90,6 @@ def migrate_from_1_4_10(globals_dict):
     postings = dd.resolve_app('postings')
 
     NOW = datetime.datetime(2012, 9, 6, 0, 0)
-
-    from lino.modlib.countries.models import CityTypes
-    from lino.utils.mti import create_child
-    #~ from lino_welfare.modlib.pcsw import models as pcsw
 
     def find_contact(contact_id):
         try:
@@ -1275,8 +1274,12 @@ def migrate_from_1_1_10(globals_dict):
     AttestationType = resolve_model("attestations.AttestationType")
 
     def after_load(loader):
-        logger.info("after_load()")
-        from lino_welfare.fixtures.std import attestation_types
+        logger.info("after_load() started")
+        fname = os.path.join(
+            settings.SITE.project_dir, 'migrate_from_1_1_10.py')
+        fd = file(fname, 'w')
+        fd.write("#!/usr/bin/env python\n")
+        fd.write("import os\n")
         loader.save(attestation_types())
 
         for u in users_User.objects.exclude(profile=''):
@@ -1309,11 +1312,13 @@ def migrate_from_1_1_10(globals_dict):
             att.save()
 
             if note.build_time:
-                logger.info("todo: mv %s %s",
-                            target_name(note),
-                            target_name(att))
+                fd.write("os.rename(%r, %r)\n" % (
+                    target_name(note), target_name(att)))
 
             note.delete()
+
+        fd.close()
+        logger.info("Wrote after_migrate script %s")
 
     globals_dict.update(after_load=after_load)
 

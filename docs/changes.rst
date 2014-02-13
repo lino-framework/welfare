@@ -19,6 +19,9 @@ To do:
 - Bestehende Lebensläufe aus `media/webdav/userdocs/appyrtf`
   konvertieren?
 
+- Im Klientendetail in Bescheinigungen per Doppelklick eine
+  Bescheinigung ertellen: dann muss owner gesetzt werden.
+
 Änderungen:
 
 - Das Benutzerprofil "ASD" war bisher nicht brauchbar (hatte fast
@@ -36,6 +39,11 @@ To do:
 - "Human links" (Eltern und Kinder)
 
 - Kurse / Sprachen jetzt auch für Benutzer vom ASD
+
+- Schuldnerberatung : In der Kolonne :guilabel:`Gerichtsvollzieher`
+  eines Budgets (:ddref:`debts.Entry`) können jetzt nicht mehr nur ein
+  Gerichtsvollzieher, sondern auch ein Inkassounternehmen zugewiesen
+  werden.
 
 - Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete
   Partner), die bisher hinter dem Namen eines Klienten stand, steht
@@ -70,7 +78,17 @@ To do:
 - Manuell nach Migration:
 
   - SiteConfig --> Constants : Neue Felder ausfüllen
+
+  - Prüfen, ob manuell bearbeitete Lebenläufe übernommen wurden.
+
   - Notizart "Lebenslauf" löschen. 
+
+  - Neue Klientenkontaktart "Inkassounternehmen" erstellen.  Diese und
+    auch "Gerichtsvollzieher" kriegen die neue Checkbox "Beitreiber"
+    angekreuzt.
+
+  - Alle bestehenden Inkassounternehmen als solche markieren
+
 
   
 
