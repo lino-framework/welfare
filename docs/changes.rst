@@ -77,6 +77,8 @@ To do:
 
 - Manuell nach Migration:
 
+  - `migrate_from_1_1_10.py` ausführen
+
   - SiteConfig --> Constants : Neue Felder ausfüllen
 
   - Prüfen, ob manuell bearbeitete Lebenläufe übernommen wurden.
