@@ -25,6 +25,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+import os
 import datetime
 from decimal import Decimal
 from django.conf import settings
@@ -1278,8 +1279,14 @@ def migrate_from_1_1_10(globals_dict):
         fname = os.path.join(
             settings.SITE.project_dir, 'migrate_from_1_1_10.py')
         fd = file(fname, 'w')
-        fd.write("#!/usr/bin/env python\n")
-        fd.write("import os\n")
+        fd.write("""#!/usr/bin/env python
+import os
+import shutil
+
+def doit(a, b):
+    shutil.copyfile(src, dst)
+    # os.rename(a, b)
+""")
         loader.save(attestation_types())
 
         for u in users_User.objects.exclude(profile=''):
@@ -1312,7 +1319,7 @@ def migrate_from_1_1_10(globals_dict):
             att.save()
 
             if note.build_time:
-                fd.write("os.rename(%r, %r)\n" % (
+                fd.write("doit(%r, %r)\n" % (
                     target_name(note), target_name(att)))
 
             note.delete()
