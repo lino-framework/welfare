@@ -35,14 +35,13 @@ from lino import dd
 from lino.modlib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
 
-from lino.mixins.printable import get_build_method
 from lino_welfare.fixtures.std import attestation_types
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
 
 def target_name(obj):
-    bm = get_build_method(obj)
+    bm = obj.get_build_method()
     return bm.get_target(None, obj).name
 
 
