@@ -1286,6 +1286,7 @@ import shutil
 def doit(a, b):
     shutil.copyfile(src, dst)
     # os.rename(a, b)
+    # os.remove(a)
 """)
         loader.save(attestation_types())
 
