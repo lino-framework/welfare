@@ -42,7 +42,7 @@ from lino.core import dbutils
 from lino.utils.xmlgen.html import E
 from lino.utils import join_elems
 
-from lino.mixins import beid
+from lino.modlib.beid import mixins as beid
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
@@ -239,8 +239,8 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
-class Client(contacts.Person, 
-             dd.BasePrintable, 
+class Client(contacts.Person,
+             dd.BasePrintable,
              beid.BeIdCardHolder,
              attestations.Attestable):
 
@@ -982,9 +982,12 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         **contacts.Persons.parameters)
     params_layout = """
-    aged_from aged_to gender nationality also_obsolete 
-    client_state coached_by and_coached_by start_date end_date observed_event only_primary 
+    aged_from aged_to gender nationality also_obsolete
+    client_state coached_by and_coached_by start_date end_date \
+    observed_event only_primary
     """
+
+    find_by_beid = beid.BaseBeIdReadCardAction()
 
     @classmethod
     def get_request_queryset(self, ar):

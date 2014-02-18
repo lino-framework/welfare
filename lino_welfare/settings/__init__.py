@@ -120,9 +120,8 @@ class Site(Site):
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
-        #~ tb.add_action(self.modules.pcsw.Home)
 
-        #~ tb.add_action('reception.Clients','find_by_beid')
+        tb.add_action('pcsw.Clients', 'find_by_beid')
 
     def setup_menu(self, ui, profile, main):
         from django.utils.translation import ugettext_lazy as _

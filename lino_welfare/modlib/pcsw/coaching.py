@@ -18,44 +18,16 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import cgi
 import datetime
 
 from django.db import models
 from django.db.models import Q
-from django.db.utils import DatabaseError
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.core.exceptions import MultipleObjectsReturned
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.translation import string_concat
-from django.utils.encoding import force_unicode
-from django.utils.functional import lazy
-
-#~ import lino
-#~ logger.debug(__file__+' : started')
-#~ from django.utils import translation
 
 from lino import dd
-from lino import mixins
-from lino.core import dbutils
-from lino.core.dbutils import resolve_field
-from lino.utils.choosers import chooser
-from lino.utils import mti
 from lino.utils.ranges import isrange
-
-from lino.utils.xmlgen.html import E
-
-
-from lino.mixins.printable import Printable
-from lino.core import actions
-
-from lino.core.dbutils import resolve_model, UnresolvedModel
-
-from lino.mixins import beid
 
 households = dd.resolve_app('households')
 cal = dd.resolve_app('cal')
@@ -67,13 +39,8 @@ uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
-#~ integ = dd.resolve_app('integ')
-#~ jobs = dd.resolve_app('jobs')
-#~ from lino_welfare.modlib.isip import models as isip
-#~ newcomers = dd.resolve_app('newcomers')
 notes = dd.resolve_app('notes')
 
-from lino.utils import ssin
 
 class CoachingEvents(dd.ChoiceList):
     verbose_name = _("Observed event")
