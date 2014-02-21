@@ -33,7 +33,7 @@ from django.utils.translation import ugettext as _
 from lino import dd
 from lino import mixins
 from lino.utils import i2d, Cycler
-from lino.mixins.beid import BeIdCardTypes
+from lino.modlib.beid.mixins import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
 from north.dbutils import babelkw
