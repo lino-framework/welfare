@@ -18,15 +18,10 @@ Adds PCSW-specific demo data.
 
 from __future__ import unicode_literals
 
-import decimal
-#~ from dateutil.relativedelta import relativedelta
-#~ ONE_DAY = relativedelta(days=1)
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
-from django.db import models
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
 
@@ -38,22 +33,10 @@ from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
 from north.dbutils import babelkw
 from lino.dd import field2kw
-from lino.utils.restify import restify
-from lino.utils import dblogger
-#~ from lino.models import update_site_config
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
 from lino.modlib.cal.utils import DurationUnits
-
-#~ from django.contrib.auth import models as auth
-#~ from lino.modlib.users import models as auth
-#~ from lino.modlib.contacts.utils import Gender
-#~ from lino_welfare.modlib.jobs import models as jobs
-#~ from lino.modlib.contacts import models as contacts
-#~ from lino.modlib.countries import models as countries
-#~ from lino_welfare.modlib.pcsw import models as pcsw
-#~ from lino_welfare.modlib.isip import models as isip
 
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
