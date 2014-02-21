@@ -12,6 +12,21 @@ Some tests:
 >>> from django.utils import translation
 >>> from pprint import pprint
 
+
+See :blogref:`20130508`:
+
+>>> for model in (debts.Entry,):
+...     for o in model.objects.all():
+...         o.full_clean()
+
+See :blogref:`20140208`:
+
+>>> from lino.utils.config import find_config_file
+>>> ffn = find_config_file('Default.odt','attestations/Attestation')
+>>> ffn.endswith('lino_welfare/config/attestations/Attestation/Default.odt')
+
+
+
 The test database
 -----------------
 
