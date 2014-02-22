@@ -529,14 +529,14 @@ class SequencedBudgetComponent(mixins.Sequenced):
 
     def get_siblings(self):
         "Overrides :meth:`lino.mixins.Sequenced.get_siblings`"
-        return self.__class__.objects.filter(budget=self.budget).order_by('seqno')
+        return self.__class__.objects.filter(
+            budget=self.budget).order_by('seqno')
 
     def get_row_permission(self, user, state, ba):
         if not self.budget.get_row_permission(user, state, ba):
             return False
-        return super(SequencedBudgetComponent, self).get_row_permission(user, state, ba)
-
-#~ class Actor(ActorBase,mixins.Sequenced):
+        return super(
+            SequencedBudgetComponent, self).get_row_permission(user, state, ba)
 
 
 class Actor(ActorBase, SequencedBudgetComponent):

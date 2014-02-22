@@ -536,10 +536,10 @@ class Client(contacts.Person,
     #~ def read_beid_card(self,ar):
         #~ return '[<a href="javascript:Lino.read_beid_card(%r)">%s</a>]' % (
           #~ str(ar.requesting_panel),unicode(_("Read eID card")))
+
     @dd.virtualfield(dd.HtmlBox())
     def image(self, ar):
         url = self.get_image_url(ar)
-        #~ s = '<img src="%s" width="100%%" onclick="window.open(\'%s\')"/>' % (url,url)
         s = '<img src="%s" width="100%%"/>' % url
         s = '<a href="%s" target="_blank">%s</a>' % (url, s)
         return s
