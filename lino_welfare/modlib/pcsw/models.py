@@ -543,10 +543,10 @@ class Client(contacts.Person,
         s = '<img src="%s" width="100%%"/>' % url
         s = '<a href="%s" target="_blank">%s</a>' % (url, s)
         return s
-        #~ return '<img src="%s" width="120px"/>' % self.get_image_url()
-    #~ image.return_type = dd.HtmlBox()
 
     def get_image_parts(self):
+        im = ProductImage.objects.get(product=self, default_image=True)
+        im.file
         if self.card_number:
             return ("beid", self.card_number + ".jpg")
         return ("pictures", "contacts.Person.jpg")
@@ -609,9 +609,6 @@ class Client(contacts.Person,
                      master_instance=self,
                      known_values=kv)
         return ar.renderer.quick_upload_buttons(r)
-        #~ rrr = uploads.UploadsByPerson().request(rr.ui,master_instance=self,known_values=kv)
-        #~ return rr.ui.quick_upload_buttons(rrr)
-    #~ residence_permit.return_type = dd.DisplayField(_("Residence permit"))
 
     @dd.displayfield(_("Work permit"))
     def work_permit(self, ar):
