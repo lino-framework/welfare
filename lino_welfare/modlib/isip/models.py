@@ -125,7 +125,7 @@ class ExamPolicies(dd.Table):
     """
 
 
-JOBS_MODULE_NAME = dd.apps.jobs.verbose_name
+JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 
 
 class ContractEnding(dd.Model):

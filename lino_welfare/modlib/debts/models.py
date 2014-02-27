@@ -1245,7 +1245,7 @@ proportionally distributing the `Distributable amount` among the debtors.
         #~ return obj.description
 
 
-MODULE_LABEL = dd.apps.debts.verbose_name
+MODULE_LABEL = settings.SITE.plugins.debts.verbose_name
 # _("Debts mediation")
 
 #~ settings.SITE.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))

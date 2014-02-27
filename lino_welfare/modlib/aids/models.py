@@ -193,7 +193,7 @@ class AidsByCategory(AidsByX):
 
 system = dd.resolve_app('system')
 
-MODULE_LABEL = dd.apps.aids.verbose_name
+MODULE_LABEL = settings.SITE.plugins.aids.verbose_name
 
 
 # def setup_main_menu(site, ui, profile, m):
