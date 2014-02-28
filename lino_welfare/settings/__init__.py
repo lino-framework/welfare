@@ -224,6 +224,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.reception'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
+        yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.attestations'
         yield 'lino.modlib.humanlinks'

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,13 +12,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
+"""
+The :xfile:`models.py` module for the :mod:`lino_welfare.modlib.cal` app.
+"""
+
 from __future__ import unicode_literals
 
-from lino import ad
-
-# ~ def _(s) : return s # fake gettext method
 from django.utils.translation import ugettext_lazy as _
 
+from lino.modlib.sepa.models import *
 
-class Plugin(ad.Plugin):
-    verbose_name = _("Art.60§7")
+class Account(Account):
+
+    managed = models.BooleanField(_("Managed"), default=False)
+

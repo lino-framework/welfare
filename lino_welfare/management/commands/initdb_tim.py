@@ -50,7 +50,7 @@ import lino
 
 from lino.utils import confirm, iif
 from lino.core.dbutils import app_labels
-from lino.mixins.beid import BeIdCardTypes
+from lino.modlib.beid.mixins import BeIdCardTypes
 
 
 Activity = resolve_model('pcsw.Activity')

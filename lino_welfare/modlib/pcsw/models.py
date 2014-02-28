@@ -545,8 +545,6 @@ class Client(contacts.Person,
         return s
 
     def get_image_parts(self):
-        im = ProductImage.objects.get(product=self, default_image=True)
-        im.file
         if self.card_number:
             return ("beid", self.card_number + ".jpg")
         return ("pictures", "contacts.Person.jpg")
@@ -770,12 +768,12 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     status:55 income:25
-    aids.AidsByProject
+    aids.AidsByProject:30 sepa.AccountsByPartner:20
     """, label=_("Aids"))
 
     status = """
     in_belgium_since:15 residence_type gesdos_id
-    bank_account1:12 bank_account2:12
+    # bank_account1:12 bank_account2:12
     job_agents group:16
     """
 

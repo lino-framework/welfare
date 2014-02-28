@@ -169,8 +169,9 @@ class Aids(dd.Table):
 
 class AidsByX(Aids):
     required = dd.required(user_groups='office')
-    column_names = "decided_date type category *"
+    column_names = "decided_date type category amount *"
     order_by = ["-decided_date"]
+    auto_fit_column_widths = True
 
 
 class AidsByType(AidsByX):

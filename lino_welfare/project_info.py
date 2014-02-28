@@ -21,7 +21,7 @@ SETUP_INFO = dict(
     #~ distclass=MyDistribution,
     #~ dist_dir=os.path.join('docs','dist'),
     version='1.1.11',  # not yet released
-    install_requires=['lino', 'suds', 'vobject'],
+    install_requires=['lino', 'suds', 'vobject', 'django-iban'],
     #~ version=VERSION,
     test_suite='tests',
     description=u"A Lino application for Belgian Public Welfare Centres",
@@ -100,6 +100,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.pcsw',
     'lino_welfare.modlib.pcsw.fixtures',
     'lino_welfare.modlib.reception',
+    'lino_welfare.modlib.sepa',
 ])
 
 SETUP_INFO.update(message_extractors={
