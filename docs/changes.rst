@@ -24,25 +24,49 @@ To do:
 
 Änderungen:
 
+- Der Quick-Link **eID-Karte einlesen** auf der Startseite ist wieder
+  da. Der ist gedacht für wenn man einen Klienten vor sich hat, von
+  dem man glaubt, dass er noch nicht in Lino drin ist und folglich neu
+  angelegt werden muss. Zuerst Karte einlegen, dann auf den Link
+  klicken. Lino schaut nach, ob dieser Klient schon existiert und
+  springt dann entweder auf den existierenden Datensatz, oder fragt
+  "Neuen Klienten anlegen?".
+  
+
+- **Bankkonten** : statt einer festen Anzahl von vordefinierten
+  Feldern in TIM (Konto 1, Konto 2, System I, ...) hat Lino jetzt eine
+  Tabelle von Konten pro Partner.
+
+  Es gibt eine Liste von Kontenarten (Giro, Spar, Termin, Sonstige),
+  deren Sinn und Zweck mir noch nicht ganz klar ist.
+
+  Pro Konto kann man ankreuzen, ob es "vom ÖSHZ verwaltet" ist oder
+  nicht.
+
 - Das Benutzerprofil "ASD" war bisher nicht brauchbar (hatte fast
   keine Zugriffsrechte).
+  Kurse / Sprachen jetzt auch für Benutzer vom ASD.
+
 
 - Angesichts vieler Erweiterungen in der Struktur war es nötig, die
-  Detail-Ansicht der Kunden neu zu strukturieren. Ich hoffe, dass ihr
-  euch schnell damit anfreundet.
+  **Detail-Ansicht der Kunden** neu zu strukturieren. Ich hoffe, dass
+  ihr euch schnell damit anfreundet.
+
+  Der Reiter "Status" wurde aufgeteilt in "Arbeit" und "Hilfen".
+  Letzterer zeigt jetzt nicht mehr *ein* Feld "Sozialhilfeart"
+  (aid_type), sondern eine Liste aller im Laufe der Zeit bewilligten
+  Hilfen.
 
   Die Liste :menuselection:`Empfang --> Klienten` hatte bisher ein
   eigenes Detail-Layout. Jetzt nicht mehr.
 
-- Mehrere Adressen pro Klient
+- Man kann jetzt **mehrere Adressen** pro Klient erfassen.
 
 - "Human links" (Eltern und Kinder)
 
-- Kurse / Sprachen jetzt auch für Benutzer vom ASD
-
 - Schuldnerberatung : In der Kolonne :guilabel:`Gerichtsvollzieher`
   eines Budgets (:ddref:`debts.Entry`) können jetzt nicht mehr nur ein
-  Gerichtsvollzieher, sondern auch ein Inkassounternehmen zugewiesen
+  Gerichtsvollzieher, sondern auch ein **Inkassounternehmen** zugewiesen
   werden.
 
 - Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete
@@ -50,12 +74,7 @@ To do:
   jetzt generell hinter dem Namen von *allen* Partnern (also auch
   Haushalte, Organisationen, Personen,...)
 
-- Der Reiter "Status" wurde aufgeteilt in "Arbeit" und "Hilfen".
-  Letzterer zeigt jetzt nicht mehr *ein* Feld "Sozialhilfeart"
-  (aid_type), sondern eine Liste aller im Laufe der Zeit bewilligten
-  Hilfen.
-
-- Bescheinigungen: 
+- Bescheinigungen ("Ausdrucke"): 
 
   - Eine Bescheinigung ist ein druckbares Dokument, das eine bestimmte
     Information bescheinigt.

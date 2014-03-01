@@ -982,8 +982,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
     observed_event only_primary
     """
 
-    find_by_beid = beid.BaseBeIdReadCardAction()
-
     @classmethod
     def get_request_queryset(self, ar):
         #~ if ar.param_values.client_state == '':
