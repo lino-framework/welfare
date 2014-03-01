@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2013 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -561,6 +561,20 @@ def IT024(n):
     return info
 
 
+def TypeOfAbsenceType(n):
+    return Info(E.b(n.Code))
+
+
+def IT026(n):  # TemporaryAbsences
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    info.addfrom(n, 'TypeOfAbsence', "", TypeOfAbsenceType)
+    info.addfrom(n, 'Graphic1', " ")
+    info.addfrom(n, 'Graphic2', " ")
+    info.add_deldate(n)
+    return info
+
+
 def IT028(n):
     info = Info()
     info.addfrom(n, 'LegalFact', '', code_label)
@@ -700,7 +714,6 @@ def DeliveryType194(n):
     #~ info.add_codelabel(n)
     #~ info += code_label(n)
     return info
-
 
 def CategoryType(n):
     return code_label(n)
@@ -1553,7 +1566,8 @@ register_it_handler('Guardians',
 register_it_handler('PseudoNationalNumbers',
                     _("Pseudo National Numbers"), 'PseudoNationalNumber',
                     'IT208')
-
+register_it_handler('TemporaryAbsences',
+                    _("Temporary absences"), 'TemporaryAbsence', 'IT026')
 
 def get_it_handler(itnode):
     #~ m = getattr(RowHandlers,node.__class__.__name__,None)

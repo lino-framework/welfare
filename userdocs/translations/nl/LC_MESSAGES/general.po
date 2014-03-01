@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-04 14:07+0200\n"
+"POT-Creation-Date: 2014-03-01 11:42+0200\n"
 "PO-Revision-Date: 2013-05-14 14:07+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: ../general.rst:14
 msgid ""
 "Alle Benutzer haben eigentlich das gleiche Menü, aber die einzelnen "
-"Untermenüs \"wachsen\" oder \"schrumpfen\" je nach den Zugriffsrechten"
+"Untermenüs \"wachsen\" oder \"schrumpfen\" je nach den Zugriffsrechten."
 msgstr ""
 
 # 69f9175549fa41feac0fbbee0db24b43
@@ -163,5 +163,13 @@ msgstr ""
 
 # 89e58095a0cf44eabdd21b3912b16fbe
 #~ msgid "Référence"
+#~ msgstr ""
+
+# b8612229f071440ead95265d0aad1dbb
+#~ msgid ""
+#~ "Alle Benutzer haben eigentlich das "
+#~ "gleiche Menü, aber die einzelnen "
+#~ "Untermenüs \"wachsen\" oder \"schrumpfen\" je"
+#~ " nach den Zugriffsrechten"
 #~ msgstr ""
 

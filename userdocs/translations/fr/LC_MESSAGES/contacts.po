@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-04 14:07+0200\n"
+"POT-Creation-Date: 2014-03-01 11:42+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Household Type (model in households)"
 msgstr ""
 
-# 2ea4729f1f5d4ca3a6fc232b2160b201
+# 6301ed01d1104ce38865622af126a16c
 #~ msgid ""
 #~ msgstr ""
 
@@ -173,12 +173,6 @@ msgstr ""
 
 # f167be931d5f48ba95c0df01aa55c213
 #~ msgid "Group Type (model in app \"contacts\")"
-#~ msgstr ""
-
-# 6301ed01d1104ce38865622af126a16c
-#~ msgid ""
-#~ "obsolete (field in \"<class "
-#~ "'lino_welfare.modlib.contacts.models.Partner'>\")"
 #~ msgstr ""
 
 # 666a50e331d0452d98b15f0c918a65e7

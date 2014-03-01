@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-04 14:07+0200\n"
+"POT-Creation-Date: 2014-03-01 11:42+0200\n"
 "PO-Revision-Date: 2013-07-27 07:29+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -56,16 +56,8 @@ msgstr ""
 #~ msgid "This is work in progress."
 #~ msgstr "Non terminé. Travaux en cours."
 
-# 8377d9e655bc4caebf5f33ccc9385eb4
-#~ msgid ""
-#~ msgstr ""
-
 # 425f0878497e40aa8051cc4749c36e87
 #~ msgid ""
-#~ "Available as `.pdf` file: `User Guide"
-#~ " <./lino-welfare-userguide.pdf>`_, `Whitepaper"
-#~ " <./lino-welfare-whitepaper.pdf>`_ and "
-#~ "`Screenshots <./lino-welfare-screenshots.pdf>`_"
 #~ msgstr ""
 
 # 38ab30ccb6d94f67a7adea22de4c9df5
