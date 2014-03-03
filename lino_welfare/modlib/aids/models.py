@@ -192,10 +192,7 @@ class AidsByCategory(AidsByX):
     master_key = 'category'
 
 
-system = dd.resolve_app('system')
-
-MODULE_LABEL = settings.SITE.plugins.aids.verbose_name
-
+# pcsw = dd.resolve_app('pcsw')
 
 # def setup_main_menu(site, ui, profile, m):
 #     m = m.add_menu("aids", MODULE_LABEL)
@@ -203,12 +200,14 @@ MODULE_LABEL = settings.SITE.plugins.aids.verbose_name
 
 
 def setup_config_menu(site, ui, profile, m):
+    MODULE_LABEL = dd.apps.pcsw.verbose_name
     #~ m  = m.add_menu("aids",_("~Aids"))
-    m = m.add_menu("aids", MODULE_LABEL)
+    m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.AidTypes')
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("aids", MODULE_LABEL)
+    MODULE_LABEL = dd.apps.pcsw.verbose_name
+    m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.Aids')
 

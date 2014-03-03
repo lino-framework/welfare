@@ -47,7 +47,7 @@ class Clients(pcsw.Clients):
     help_text = """Wie Kontakte --> Klienten, aber mit \
     DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
-    required = dict(user_groups='coaching')
+    required = dict(user_groups='integ')
     params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
@@ -537,7 +537,7 @@ class JobProvidersAndContracts(CompaniesAndContracts):
 
 class ActivityReport(dd.Report):
 
-    required = dict(user_groups='coaching')
+    required = dict(user_groups='integ')
     #~ required = dd.required(user_level='manager')
     label = _("Activity Report")
 

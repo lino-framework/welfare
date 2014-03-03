@@ -267,7 +267,7 @@ class CompanyDetail(CompanyDetail):
     bottom_box
     """, label=_("General"))
 
-    notes = "pcsw.NotesByCompany"
+    notes = "notes.NotesByCompany"
 
     main = "general notes"
 

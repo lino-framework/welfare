@@ -27,7 +27,6 @@ Django to recreate a virgin test database for each of them.
 
 from __future__ import unicode_literals
 
-
 import logging
 logger = logging.getLogger(__name__)
 
@@ -36,12 +35,6 @@ logger = logging.getLogger(__name__)
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import translation
-
-#from lino.igen import models
-#from lino.modlib.contacts.models import Contact, Companies
-#from lino.modlib.countries.models import Country
-#~ from lino.modlib.contacts.models import Companies
-
 
 from lino import dd
 from lino.utils import i2d

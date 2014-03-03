@@ -63,11 +63,9 @@ Topic :: Software Development :: Libraries :: Application Frameworks""".splitlin
 
 SETUP_INFO.update(packages=[
     'lino_welfare',
-    'lino_welfare.settings',
     'lino_welfare.fixtures',
     'lino_welfare.management',
     'lino_welfare.management.commands',
-    'lino_welfare.tests',
     'lino_welfare.modlib',
     'lino_welfare.modlib.aids',
     'lino_welfare.modlib.aids.fixtures',
@@ -93,6 +91,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.system',
     'lino_welfare.modlib.system.fixtures',
     'lino_welfare.modlib.users',
+    'lino_welfare.modlib.users.fixtures',
     'lino_welfare.modlib.jobs',
     'lino_welfare.modlib.jobs.fixtures',
     'lino_welfare.modlib.newcomers',
@@ -101,6 +100,9 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.pcsw.fixtures',
     'lino_welfare.modlib.reception',
     'lino_welfare.modlib.sepa',
+    'lino_welfare.settings',
+    'lino_welfare.settings.fr',
+    'lino_welfare.tests',
 ])
 
 SETUP_INFO.update(message_extractors={

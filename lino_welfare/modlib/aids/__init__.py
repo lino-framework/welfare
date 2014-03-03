@@ -1,4 +1,4 @@
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
 
 
 """
-Adds a multipurpose model "Note"
+See :ref:`welfare.aids`
 """
 
 from lino import ad
@@ -22,5 +22,4 @@ from django.utils.translation import ugettext_lazy as _
 
 class Plugin(ad.Plugin):
 
-    verbose_name = _("Notes")
-
+    verbose_name = _("Aids")

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2011-2013 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,8 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-This module contains "quick" tests that are run on a demo database 
+"""This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
   python manage.py test lino_welfare.QuickTests
@@ -27,24 +26,13 @@ logger = logging.getLogger(__name__)
 
 import decimal
 
-#~ from django.utils import unittest
-#~ from django.test.client import Client
 from django.conf import settings
-
-#from lino.igen import models
-#from lino.modlib.contacts.models import Contact, Companies
-#from lino.modlib.countries.models import Country
-#~ from lino.modlib.contacts.models import Companies
-
 from django.utils import translation
 from django.utils.encoding import force_unicode
 from django.core.exceptions import ValidationError
 
 from lino import dd
 from lino.utils import i2d
-#~ from north import babel
-#~ from lino.core.dbutils import resolve_model
-#Companies = resolve_model('contacts.Companies')
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
 contacts_RoleType = dd.resolve_model('contacts.RoleType')
@@ -59,16 +47,11 @@ households = dd.resolve_app('households')
 debts = dd.resolve_app('debts')
 courses = dd.resolve_app('courses')
 
-#~ from lino.projects.pcsw.models import Person
-#~ from lino.modlib.cv.models import PersonProperty
-#~ from lino.modlib.properties.models import Property
-
 isip_Contract = dd.resolve_model("isip.Contract")
 isip_ContractType = dd.resolve_model("isip.ContractType")
 jobs_Contract = dd.resolve_model("jobs.Contract")
 from lino_welfare.modlib.jobs.models import Contracts, ContractType, JobProvider, Job
 from lino.modlib.users.models import User
-#~ from lino_welfare.modlib.pcsw.models import Person
 from lino_welfare.modlib.pcsw.models import Client
 
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class NoteDetail(NoteDetail):
     """
 
     left = """
-    date:10 event_type:25 type:25
+    date:10 time event_type:25 type:25
     project subject
     company contact_person #contact_role
     user:10 language:8 build_time id
@@ -61,6 +61,18 @@ class NoteDetail(NoteDetail):
 Notes.detail_layout = NoteDetail()
 Notes.insert_layout = """
 event_type:25 type:25
-subject 
-project company
+subject
+project #company
 """
+
+
+class NotesByProject(NotesByProject):
+    required = dd.required()
+    column_names = "date time event_type type subject body user company *"
+
+
+class NotesByCompany(NotesByCompany):
+    required = dd.required()
+    column_names = "date time project event_type type subject body user *"
+
+

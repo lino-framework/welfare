@@ -16,6 +16,9 @@
 Transaction 25
 --------------
 
+
+See used documentation at :ddref:`cbss.RetrieveTIGroupsRequest`.
+
 This implements the "transaction 25", called also 
 "Interrogation sur certains types d’informations légales" 
 (in `Codes d'interrogations

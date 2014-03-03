@@ -4,12 +4,11 @@
 Banque-carrefour
 =================
 
-Ce module supporte pour l'instant la gestion des requêtes suivantes:
+Ce module supporte la gestion des requêtes suivantes:
 
 .. contents:: 
    :local:
    :depth: 2
-
     
 
 .. actor:: cbss.IdentifyPersonRequest
@@ -17,7 +16,8 @@ Ce module supporte pour l'instant la gestion des requêtes suivantes:
 
 .. actor:: cbss.RetrieveTIGroupsRequest
 
-    Liste incomplète (conversion en cours) des TIs que Lino connait:
+    Incomplete list (conversion in progress) of the "information
+    types" handled by Lino:
 
     .. django2rst::
 
@@ -26,6 +26,8 @@ Ce module supporte pour l'instant la gestion des requêtes suivantes:
         rows = []
         for k,v in HANDLERS.items():
             rows.append([k, unicode(v[0]),v[2]])
+        def c(a,b): return cmp(a[0], b[0])
+        rows = sorted(rows)
         print(rstgen.table(['Name',"Text","IT"],rows))
         
 .. actor:: cbss.Sector

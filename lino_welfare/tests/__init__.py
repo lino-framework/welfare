@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2011-2013 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,7 +12,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-from pcsw_demo_tests import *  # disabled because not currently maintained
-from pcsw_tests import *
+from .pcsw_demo_tests import *  # disabled because not currently maintained
+from .pcsw_tests import *
 # ~ from pcsw_sql_tests import * # disabled because not currently maintained
-from watchtim_tests import *
+from .watchtim_tests import *
+from .beid_tests import *

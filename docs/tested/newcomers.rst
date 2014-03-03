@@ -54,9 +54,9 @@ caused a "NotImplementedError: <i> inside <text:p>" traceback
 when one of the jobs had a remark. 
 
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
->>> print(ses.run(obj.do_print)) 
+>>> ses.run(obj.do_print)
 ... #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/userdocs/appyodt/jobs.JobsOverview.odt',
+{'open_url': u'/media/webdav/userdocs/appyodt/jobs.JobsOverview.odt',
  'success': True}
  
 Bug fixed :blogref:`20130423`.

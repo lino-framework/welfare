@@ -37,26 +37,20 @@ The following lines reproduced this problem
 (and passed when it was fixed):
 
 >>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
->>> res = client.get(url,REMOTE_USER='rolf')
->>> print(res.status_code)
+>>> res = client.get(url,REMOTE_USER='rolf')  #doctest: +SKIP
+>>> print(res.status_code)  #doctest: +SKIP
 200
->>> result = json.loads(res.content)
->>> print(result)
+>>> result = json.loads(res.content)  #doctest: +SKIP
+>>> print(result)  #doctest: +SKIP
 {u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
 
 
 
 
-Printing an eID card summary
-----------------------------
+eID card summary
+----------------
 
->>> obj = pcsw.Client.objects.get(pk=123)
->>> from pprint import pprint
->>> pprint(ses.run(obj.print_eid_content)) #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/userdocs/appyodt/pcsw.Client-123.odt', 'success': True}
-
-
-And here another case (fixed :blogref:`20130827`) 
+Here a test case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
 
 >>> url = '/api/pcsw/Clients/176?an=detail&fmt=json'
@@ -66,9 +60,8 @@ to test the new `eid_info` field:
 >>> result = json.loads(res.content)
 >>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
->>> print(result['data']['eid_info'])
-<div class="lino-info">Karte Nr. 591413288107 (Belgischer Staatsb&#252;rger), ausgestellt durch Eupen, g&#252;ltig von 19.08.11 bis 19.08.16</div>
-
+>>> print(result['data']['client_info'][0])
+<div><div style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle">Herr<br />Bernd <b>Brecht</b><br />Deutschland</div><br /><div class="lino-info">Karte Nr. 591413288107 (Belgischer Staatsb&#252;rger), ausgestellt durch Eupen, g&#252;ltig von 19.08.11 bis 19.08.16</div></div>
 
 >>> url = '/api/reception/Clients/115?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')

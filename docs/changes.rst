@@ -24,6 +24,8 @@ To do:
 
 Änderungen:
 
+- Ereignisse/Notizen haben jetzt ein neues Feld "Uhrzeit".
+
 - Der Quick-Link **eID-Karte einlesen** auf der Startseite ist wieder
   da. Der ist gedacht für wenn man einen Klienten vor sich hat, von
   dem man glaubt, dass er noch nicht in Lino drin ist und folglich neu

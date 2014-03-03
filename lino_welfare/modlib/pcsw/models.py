@@ -800,7 +800,7 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    attestations.AttestationsByProject:30 pcsw.NotesByPerson:30
+    attestations.AttestationsByProject:30 notes.NotesByProject:30
     # lino.ChangesByMaster
     """, label=_("History"))
 
@@ -1596,21 +1596,6 @@ class ContactsByClient(ClientContacts):
     master_key = 'client'
     column_names = 'type company contact_person contact_role remark *'
     label = _("Contacts")
-
-
-class NotesByPerson(notes.Notes):
-    required = dd.required()
-    master_key = 'project'
-    column_names = "date event_type type subject body user company *"
-    order_by = ["-date"]
-    #~ debug_permissions = 20120920
-
-
-class NotesByCompany(notes.Notes):
-    required = dd.required()
-    master_key = 'company'
-    column_names = "date project event_type type subject body user *"
-    order_by = ["-date"]
 
 
 MODULE_LABEL = _("PCSW")

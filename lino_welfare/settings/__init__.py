@@ -103,9 +103,9 @@ class Site(Site):
         add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ _')
         add('200', _("Newcomers consultant"),        'U U U _ _ U U _ _')
         add('210', _("Reception clerk"),             'U _ _ _ _ _ _ _ U')
-        add('300', _("Debts consultant"),            'U U U _ _ _ _ U _')
-        add('400', _("Social agent"),                'U U _ _ U U _ _ _')
-        add('410', _("Social agent (Manager)"),      'U M _ _ M U _ _ _')
+        add('300', _("Debts consultant"),            'U U _ _ _ _ _ U _')
+        add('400', _("Social agent"),                'U U U _ U U _ _ _')
+        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ _')
         add('900', _("Administrator"),               'A A A A A A A A A',
             name='admin')
 
