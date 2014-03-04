@@ -15,7 +15,7 @@
 """This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
-  python manage.py test lino_welfare.tests.beid_tests
+  python manage.py test lino_welfare.tests.test_beid
 
 """
 
@@ -80,4 +80,3 @@ class BeIdTests(RemoteAuthTestCase):
         # rv = obj.read_beid.run_from_code(ses)
         self.assertEqual(res, 42)
 
-__all__ = ['BeIdTests']

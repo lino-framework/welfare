@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ This module contains tests for the
 command.
 You can run only these tests by issuing::
 
-  $ python manage.py test lino_welfare.WatchTimTests
+  $ python manage.py test lino_welfare.tests.test_watchtim
   
 The module contains a single huge test case because we don't want 
 Django to recreate a virgin test database for each of them.
@@ -121,7 +121,7 @@ isip = dd.resolve_app("isip")
 from lino_welfare.modlib.isip import models as isip
 
 
-class WatchTimTests(TestCase):
+class TestCase(TestCase):
 
     maxDiff = None
 

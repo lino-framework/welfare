@@ -63,149 +63,6 @@ Event = dd.resolve_model('cal.Event')
 #~ Property = resolve_model('properties.Property')
 #~ PersonProperty = resolve_model('properties.PersonProperty')
 
-if False:
-
-    DEMO_OVERVIEW = """\
-    30 applications: sessions, about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
-    98 models:
-    ============================== ========= =======
-     Name                           #fields   #rows
-    ------------------------------ --------- -------
-     accounts.Account               15        0
-     accounts.Chart                 5         0
-     accounts.Group                 9         0
-     cal.Calendar                   7         0
-     cal.Event                      23        %d
-     cal.EventType                  21        0
-     cal.Guest                      10        0
-     cal.GuestRole                  9         0
-     cal.Priority                   6         0
-     cal.RecurrentEvent             19        0
-     cal.RemoteCalendar             7         0
-     cal.Room                       5         0
-     cal.Subscription               4         0
-     cal.Task                       18        0
-     cbss.IdentifyPersonRequest     20        0
-     cbss.ManageAccessRequest       23        0
-     cbss.Purpose                   7         0
-     cbss.RetrieveTIGroupsRequest   14        0
-     cbss.Sector                    11        0
-     changes.Change                 9         0
-     contacts.Company               30        0
-     contacts.CompanyType           9         0
-     contacts.Partner               25        0
-     contacts.Person                31        0
-     contacts.Role                  4         0
-     contacts.RoleType              6         0
-     contenttypes.ContentType       4         98
-     countries.Place                 10        0
-     countries.Country              8         0
-     courses.Course                 5         0
-     courses.CourseContent          2         0
-     courses.CourseOffer            5         0
-     courses.CourseProvider         31        0
-     courses.CourseRequest          10        0
-     cv.LanguageKnowledge           7         0
-     debts.Actor                    6         0
-     debts.Budget                   11        0
-     debts.Entry                    16        0
-     households.Household           28        0
-     households.Member              6         0
-     households.Role                6         0
-     households.Type                5         0
-     isip.Contract                  26        0
-     isip.ContractEnding            6         0
-     isip.ContractType              10        0
-     isip.ExamPolicy                20        0
-     isip.StudyType                 5         0
-     jobs.Candidature               8         0
-     jobs.Contract                  28        0
-     jobs.ContractType              9         0
-     jobs.Experience                10        0
-     jobs.Function                  7         0
-     jobs.Job                       10        0
-     jobs.JobProvider               31        0
-     jobs.JobType                   4         0
-     jobs.Offer                     9         0
-     jobs.Regime                    5         0
-     jobs.Schedule                  5         0
-     jobs.Sector                    6         0
-     jobs.Study                     12        0
-     languages.Language             6         0
-     newcomers.Broker               2         0
-     newcomers.Competence           5         0
-     newcomers.Faculty              6         0
-     notes.EventType                10        0
-     notes.Note                     15        0
-     notes.NoteType                 13        0
-     outbox.Attachment              4         0
-     outbox.Mail                    9         0
-     outbox.Recipient               6         0
-     pcsw.Activity                  3         0
-     pcsw.AidType                   5         0
-     pcsw.Client                    73        0
-     pcsw.ClientContact             7         0
-     pcsw.ClientContactType         5         0
-     pcsw.Coaching                  8         0
-     pcsw.CoachingEnding            7         0
-     pcsw.CoachingType              5         0
-     pcsw.Dispense                  6         0
-     pcsw.DispenseReason            6         0
-     pcsw.Exclusion                 6         0
-     pcsw.ExclusionType             2         0
-     pcsw.PersonGroup               4         0
-     properties.PersonProperty      6         0
-     properties.PropChoice          7         0
-     properties.PropGroup           5         0
-     properties.PropType            9         0
-     properties.Property            7         0
-     sessions.Session               3         0
-     system.HelpText                4         0
-     system.SiteConfig              33        0
-     system.TextFieldTemplate       6         0
-     uploads.Upload                 11        0
-     uploads.UploadType             2         0
-     users.Authority                3         0
-     users.Membership               3         0
-     users.Team                     5         0
-     users.User                     19        0
-    ============================== ========= =======
-    """
-
-    def run_db_overview_test(self):
-        """
-        The idea was to run this on both the (stored) demo database and
-        the (temporary) test database.
-        But when run in a temporary test database,
-        we also have some additional models created by contenttypes tests::
-
-            contenttypes.ConcreteModel              2         0
-            contenttypes.FooWithBrokenAbsoluteUrl   3         0
-            contenttypes.FooWithUrl                 3         0
-            contenttypes.FooWithoutUrl              2         0
-            contenttypes.ProxyModel                 2         0
-
-
-
-        """
-
-        # The number of cal.Event records may vary depending on the creation date of the database
-        # because of the automatic weekly evaluations of isip and jobs
-        # contracts .
-
-        global DEMO_OVERVIEW
-        DEMO_OVERVIEW = DEMO_OVERVIEW % Event.objects.all().count()
-        s = settings.SITE.get_db_overview_rst()
-        print s
-        self.assertEqual(DEMO_OVERVIEW, s)
-
-    class DbTest(RemoteAuthTestCase):
-        maxDiff = None
-
-        def test_db(self):
-            run_db_overview_test(self)
-
-
 class PseudoRequest:
 
     def __init__(self, name):
@@ -222,60 +79,13 @@ class DemoTest(RemoteAuthTestCase):
     #~ never_build_site_cache = True
 
     #~ avoid do_print failure due to build_absolute_uri() when use_davlink is True
-    override_djangosite_settings = dict(use_davlink=False)
-
-    #~ def setUp(self):
-        #~ settings.SITE.never_build_site_cache = True
-        #~ super(DemoTest,self).setUp()
+    # override_djangosite_settings = dict(use_davlink=False)
 
     def test001(self):
         #~ run_db_overview_test(self)
         """
         Test the number of rows returned for certain queries
         """
-        #~ ut = self.make_url_tester()
-
-        #~ json_fields = 'count rows title success no_data_text'
-        #~ kw = dict(fmt='json',limit=10,start=0)
-        #~ ut.add_case('rolf','api/contacts/Companies',json_fields,39,**kw)
-        #~ ut.add_case('rolf','api/households/Households',json_fields,4,**kw)
-        #~ ut.add_case('rolf','api/contacts/Partners',json_fields,118,**kw)
-        #~ ut.add_case('rolf','api/courses/CourseProviders',json_fields,3,**kw)
-        #~ ut.add_case('rolf','api/courses/CourseOffers',json_fields,4,**kw)
-        #~ ut.add_case('rolf','api/countries/Countries',json_fields,9,**kw)
-        #~ ut.add_case('rolf','api/jobs/JobProviders',json_fields,4,**kw)
-        #~ ut.add_case('rolf','api/jobs/Jobs',json_fields,9,**kw)
-        #~ mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
-        #~ ut.add_case('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
-        #~
-        #~ json_fields = 'count rows title success no_data_text param_values'
-        #~ ut.add_case('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)
-        #~ ut.add_case('rolf','api/contacts/Persons',json_fields,70,**kw)
-        #~ ut.add_case('rolf','api/pcsw/Clients',json_fields,29,**kw)
-        #~ ut.add_case('rolf','api/pcsw/DebtsClients',json_fields,0,**kw)
-        #~ ut.add_case('rolf','api/cal/MyEvents',json_fields,13,**kw)
-        #~ ut.add_case('rolf','api/newcomers/NewClients',json_fields,28,**kw)
-        #~ ut.add_case('rolf','api/newcomers/AvailableCoachesByClient',json_fields,2,mt=50,mk=119,**kw)
-        #~ ut.add_case('alicia','api/integ/Clients',json_fields,5,**kw)
-        #~ ut.add_case('hubert','api/integ/Clients',json_fields,23,**kw)
-        #~
-        #~ alicia = settings.SITE.user_model.objects.get(username='alicia')
-        # ~ kw = dict(fmt='json',limit=20,start=0,su=alicia.pk) # rolf working as alicia
-        #~ ut.add_case('rolf','api/integ/Clients',json_fields,5,**kw)
-        #~
-        #~
-        #~ kw = dict()
-        #~ json_fields = 'count rows'
-        #~ ut.add_case('rolf','choices/cv/SkillsByPerson/property',json_fields,6,**kw)
-        #~ ut.add_case('rolf','choices/cv/ObstaclesByPerson/property',json_fields,15,**kw)
-        #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1',json_fields,5,**kw)
-        #~
-        # ~ if False: # TODO
-            #~ ut.add_case('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
-            #~
-        #~ ut.run_tests()
-        #~
-        #~
 
         #~ def test002(self):
         """
@@ -283,50 +93,8 @@ class DemoTest(RemoteAuthTestCase):
         The same as in tests/debts.rst, but a different implementation
         """
 
-        #~ settings.SITE.override_defaults(use_davlink=False)
-
-        from lino.runtime import debts
-        ses = settings.SITE.login('rolf')
-        obj = debts.Budget.objects.get(pk=3)
-
-        res = ses.run(obj.do_clear_cache)
-        #~ print __file__, 20130414, repr(res)
-        #~ msg = res['message'].decode('utf-8')
-        msg = res['message']
-        self.assertEqual(
-            msg, 'Budget 3 for Ausdemwald-Charlier (183) printable cache has been cleared.')
-
-        res = ses.run(obj.do_print)
-        #~ print __file__, 20130414, repr(res)
-        msg = res['message']
-        #~ msg = res['message'].decode('utf-8')
-        #~ self.assertEqual(msg,'Dokument Budget Nr. 3 für Altenberg-Charlier wurde generiert.')
-        self.assertEqual(
-            msg, 'Budget 3 for Ausdemwald-Charlier (183) printable has been built.')
-        self.assertEqual(res['open_url'],
-                         '/media/userdocs/appyodt/debts.Budget-3.odt')
-
-        """
-        20130418 server traceback 
-        TypeError at /plain/pcsw/UsersWithClients
-        cannot serialize 90 (type int)
-        """
-        #~ from lino_welfare.modlib.pcsw.fixtures.std import objects
-        #~ for obj in objects():
-            #~ obj.save()
-
-        url = settings.SITE.build_admin_url(
-            'plain/integ/UsersWithClients?cw=90&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&cw=45&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ch=&ci=user&ci=G1&ci=G2&ci=G4&ci=G4bis&ci=G9&ci=primary_clients&ci=active_clients&ci=row_total&name=0')
-        response = self.client.get(url, REMOTE_USER='rolf')
-        self.assertEqual(response.status_code, 200)
-        if not response.content.startswith('<!DOCTYPE html>\n<html language="en"><head>'):
-            self.fail("Failed: UsersWithClients responded %r",
-                      response.content)
-        #~ result = self.check_json_result(response,'',url)
-
         """
         All demo requests should have at least one row of result.
-        This test
         """
         ses = settings.SITE.login('rolf')
         for obj in cbss.RetrieveTIGroupsRequest.objects.all():

@@ -25,6 +25,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import decimal
+from unittest import skip
 
 from django.conf import settings
 from django.utils import translation
@@ -35,33 +36,34 @@ from lino import dd
 from lino.utils import i2d
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
-contacts_RoleType = dd.resolve_model('contacts.RoleType')
-contacts_Role = dd.resolve_model('contacts.Role')
-Person = dd.resolve_model('contacts.Person')
-Property = dd.resolve_model('properties.Property')
-PersonProperty = dd.resolve_model('properties.PersonProperty')
-cv = dd.resolve_app('cv')
-pcsw = dd.resolve_app('pcsw')
-contacts = dd.resolve_app('contacts')
-households = dd.resolve_app('households')
-debts = dd.resolve_app('debts')
-courses = dd.resolve_app('courses')
-
-isip_Contract = dd.resolve_model("isip.Contract")
-isip_ContractType = dd.resolve_model("isip.ContractType")
-jobs_Contract = dd.resolve_model("jobs.Contract")
-from lino_welfare.modlib.jobs.models import Contracts, ContractType, JobProvider, Job
-from lino.modlib.users.models import User
-from lino_welfare.modlib.pcsw.models import Client
-
 
 class QuickTests(RemoteAuthTestCase):
     maxDiff = None
 
-    def test00(self):
-        """
-        Initialization.
-        """
+    @skip("Currently not maintained")
+    def test_me(self):
+
+        Person = dd.resolve_model('contacts.Person')
+        contacts_RoleType = dd.resolve_model('contacts.RoleType')
+        contacts_Role = dd.resolve_model('contacts.Role')
+        Property = dd.resolve_model('properties.Property')
+        PersonProperty = dd.resolve_model('properties.PersonProperty')
+        cv = dd.resolve_app('cv')
+        pcsw = dd.resolve_app('pcsw')
+        contacts = dd.resolve_app('contacts')
+        households = dd.resolve_app('households')
+        debts = dd.resolve_app('debts')
+        courses = dd.resolve_app('courses')
+
+        Client = dd.resolve_model("pcsw.Client")
+        isip_Contract = dd.resolve_model("isip.Contract")
+        isip_ContractType = dd.resolve_model("isip.ContractType")
+        jobs_Contract = dd.resolve_model("jobs.Contract")
+        from lino_welfare.modlib.jobs.models import ContractType, JobProvider, Job
+        # from lino.modlib.users.models import User
+        User = settings.SITE.user_model
+
+
         #~ print "20130321 test00 started"
         User(username='100', language='de', profile='100').save()
         User(username='110', language='de', profile='110').save()
@@ -242,17 +244,6 @@ Invalid template '' configured for ContractType 'Art.60\xa77' (expected filename
         self.assertEqual(result['data']['template'], 'Default.odt')
         self.assertEqual(result['data'].has_key('templateHidden'), False)
 
-        response = self.client.get(
-            '/api/notes/NoteTypes/1?fmt=detail', REMOTE_USER='root')
-        #~ print '\n'.join(response.content.splitlines()[:1])
-
-        c = response.content
-
-        #~ print c
-
-        self.assertTrue(c.endswith('''\
-<div id="body"></div>
-</body></html>'''))
 
         if False:
             """
@@ -364,11 +355,6 @@ Belgique""")
         Bug 20120127 : VirtualFields had sneaked into wildcard columns.
         """
         wcde = [de.name for de in contacts.Companies.wildcard_data_elems()]
-        #~ expected = '''\
-    #~ id country city name addr1 street_prefix street street_no street_box
-    #~ addr2 zip_code region language email url phone gsm fax remarks
-    #~ partner_ptr prefix vat_id type is_active newcomer is_deprecated activity
-    #~ bank_account1 bank_account2 hourly_rate'''.split()
         expected = '''\
         id created modified country city region zip_code name addr1 street_prefix 
         street street_no street_box addr2 language email url phone gsm fax

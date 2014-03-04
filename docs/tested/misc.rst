@@ -10,6 +10,36 @@ Some tests:
 >>> from __future__ import print_function
 >>> from lino.runtime import *
 >>> from django.utils import translation
+>>> from django.test import Client
+>>> import json
+
+
+
+A web request
+-------------
+
+
+>>> client = Client()
+>>> url = '/api/notes/NoteTypes/1?fmt=detail'
+>>> res = client.get(url, REMOTE_USER='rolf')
+>>> print(res.status_code)
+200
+
+We test whether a normal HTML response arrived:
+>>> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<!DOCTYPE html
+...
+Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
+...
+<BLANKLINE>
+</body>
+</html>
+
+
+
+Some database content
+---------------------
+
 
 >>> ses = settings.SITE.login('rolf')
 >>> with translation.override('de'):

@@ -21,15 +21,10 @@ made in TIM to the Lino database.
 """
 
 import os
-import sys
 import codecs
 import time
 import datetime
-#~ import signal
-#~ import atexit
-
-#~ import logging
-#~ logger = logging.getLogger(__name__)
+import json
 
 from dateutil import parser as dateparser
 
@@ -42,15 +37,7 @@ from django.conf import settings
 from django.db.utils import DatabaseError
 from django.db import IntegrityError
 
-# OperationalError
-from django.utils import simplejson
-#~ from django.contrib.auth import models as auth
-#~ from lino.modlib.users import models as users
-from django.utils.encoding import force_unicode
-
 from djangosite.dbutils import is_valid_email
-
-import lino
 
 from lino import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
@@ -951,7 +938,7 @@ controllers = dict(
 
 
 def process_line(ln):
-    d = simplejson.loads(ln, object_hook=json2py)
+    d = json.loads(ln, object_hook=json2py)
     kw = {}
     for k, v in d.items():
         kw[str(k)] = v

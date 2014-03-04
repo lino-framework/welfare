@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-# Copyright 2012 Luc Saffre
-# This file is part of the Lino project.
-# Lino is free software; you can redistribute it and/or modify
+# Copyright 2012-2014 Luc Saffre
+# This file is part of the Lino Welfare project.
+# Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# Lino is distributed in the hope that it will be useful,
+# Lino Welfare is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
-# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-This module runs a series of tests on whether Lino issues the correct SQL requests.
+"""This module runs a series of tests on whether Lino issues the correct SQL requests.
 
 You can run only these tests by issuing::
 
-  python manage.py test pcsw.SqlTest
+  python manage.py test lino_welfare.tests.test_sql
 
-"Regardless of the value of the DEBUG setting in your configuration file, 
-all Django tests run with DEBUG=False. This is to ensure that the observed 
-output of your code matches what will be seen in a production setting."  
+"Regardless of the value of the DEBUG setting in your configuration
+file, all Django tests run with DEBUG=False. This is to ensure that
+the observed output of your code matches what will be seen in a
+production setting."
 (https://docs.djangoproject.com/en/dev/topics/testing)
 
 Fortunately Django gives a possibility to override this:
@@ -33,15 +33,13 @@ we need to also set :attr:`djangosite.utils.djangotest.TestCase.defining_module`
 
 [Note2]
 class decorators don't work with older Python versions, so we remov
-  
-  
+
 """
 import logging
 logger = logging.getLogger(__name__)
 
-import pprint
-
 import datetime
+from unittest import skip
 
 NOW = datetime.datetime.now()
 
@@ -71,6 +69,7 @@ from djangosite.utils.djangotest import TestCase, reset_queries
 
 class SqlTest(TestCase):
 
+    @skip("Currently not maintained")
     @override_settings(DEBUG=True)
     def test01(self):
         """
