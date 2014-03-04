@@ -20,6 +20,7 @@ without any fixture. You can run only these tests by issuing::
 """
 
 from __future__ import unicode_literals
+from __future__ import print_function
 
 import logging
 logger = logging.getLogger(__name__)
@@ -28,12 +29,12 @@ import os
 
 from lino import dd
 from lino.runtime import *
+from lino.core import constants
 from djangosite.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 
-# from ..mixins import holder_model
-
-Holder = pcsw.Client  #  holder_model()
+from lino.modlib.beid.mixins import holder_model
+Holder = holder_model()
 
 
 def readfile(name):
@@ -49,14 +50,16 @@ class WebRequest:
     def __init__(self, user, data):
         self.POST = self.REQUEST = MultiValueDict(data)
         self.user = user
-    
+
 
 class BeIdTests(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
         self.assertEqual(1+1, 2)
-        u = users.User(username='root', profile=dd.UserProfiles.admin)
+        u = users.User(username='root',
+                       profile=dd.UserProfiles.admin,
+                       language="en")
         u.save()
         be = countries.Country(name="Belgium", isocode="BE")
         be.save()
@@ -67,16 +70,39 @@ class BeIdTests(RemoteAuthTestCase):
         obj = Holder(**kw)
         obj.full_clean()
         obj.save()
-        data = readfile('beid_tests_1.txt')
+
         url = '/api/pcsw/Clients'
-        res = self.client.post(
-            url,
+        pd = dict()
+        pd.update(card_data=readfile('beid_tests_1.txt'))
+        pd[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
+        response = self.client.post(
+            url, pd,
             REMOTE_USER='root',
-            HTTP_ACCEPT_LANGUAGE='en',
-            an='read_beid', card_data=data)
-        
-        # request = WebRequest(u, dict(card_data=[data]))
-        # ses = settings.SITE.login('test', request=request)
-        # rv = obj.read_beid.run_from_code(ses)
-        self.assertEqual(res, 42)
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, "")
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = """\
+Click OK to apply the following changes for JÉFFIN Jean Jacques (100) :\
+<br/>Place : None -> Place #1 (u\'Tallinn\')
+<br/>Gender : None -> <Genders.male:M>
+<br/>until : None -> 2016-08-19
+<br/>National ID : None -> \'680601 053-29\'
+<br/>eID card issuer : \'\' -> \'Tallinn\'
+<br/>ID card valid from : None -> 2011-08-19
+<br/>eID card type : None -> <BeIdCardTypes.belgian_citizen:1>
+<br/>Street : \'\' -> \'Estland\'
+<br/>Birth place : \'\' -> \'Mons\'
+<br/>Country : None -> Country #BE (u\'Belgium\')
+<br/>Birth date : \'\' -> 1968-06-01
+<br/>eID card number : \'123456789\' -> \'592345678901\'
+<br/>Zip code : \'\' -> \'1418\'"""
+        # print(result['message'])
+        self.assertEqual(result['message'], expected)
+
+
+
+
 

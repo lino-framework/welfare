@@ -43,6 +43,7 @@ Modules
    cal
    
    clients
+   beid
    aids
    newcomers
    cbss

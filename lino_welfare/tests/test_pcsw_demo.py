@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2011-2013 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,38 +30,16 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-from pprint import pprint
-import collections
-
 from django.conf import settings
-from django.utils.encoding import force_unicode
 from django.utils import translation
 from django.core.exceptions import ValidationError
-from django.contrib.contenttypes.models import ContentType
-
-
-#~ from django.utils import unittest
-#~ from django.test.client import Client
-#from lino.igen import models
-#from lino.modlib.contacts.models import Contact, Companies
-#from lino.modlib.countries.models import Country
 
 from lino import dd
-#~ from lino.utils import i2d
-#~ from lino.utils.jsgen import py2js
-#~ from north import babel
-#~ from lino.core.dbutils import resolve_model
-#~ from djangosite.utils.test import TestCase
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
-
-#~ pcsw = dd.resolve_app('pcsw')
 cbss = dd.resolve_app('cbss')
 Event = dd.resolve_model('cal.Event')
 
-#~ Person = resolve_model('contacts.Person')
-#~ Property = resolve_model('properties.Property')
-#~ PersonProperty = resolve_model('properties.PersonProperty')
 
 class PseudoRequest:
 

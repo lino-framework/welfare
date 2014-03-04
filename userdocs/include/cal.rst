@@ -47,8 +47,13 @@ and
         settings.SITE.login().show(cal.TaskStates)
 
 .. actor:: cal.Calendar
+
 .. actor:: cal.Subscription
+
 .. actor:: cal.Room
+
 .. actor:: cal.Priority
+
 .. actor:: cal.GuestRole
+
 .. actor:: cal.EventType
