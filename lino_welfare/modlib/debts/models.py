@@ -55,6 +55,27 @@ pcsw = dd.resolve_app('pcsw')
 from lino.mixins.printable import decfmt
 
 
+class Clients(pcsw.Clients):
+    # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
+    # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
+    help_text = u"""Wie Kontakte --> Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
+    required = dict(user_groups='debts')
+    params_panel_hidden = True
+    title = _("DM Clients")
+    order_by = "last_name first_name id".split()
+    allow_create = False  # see blog/2012/0922
+    use_as_default_table = False
+    column_names = "name_column:20 national_id:10 gsm:10 address_column email phone:10 id "
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(Clients, self).param_defaults(ar, **kw)
+        kw.update(coached_by=ar.get_user())
+        return kw
+
+
+
+
 class PeriodsField(models.DecimalField):
 
     """
@@ -1274,8 +1295,8 @@ def site_setup(site):
 def setup_main_menu(site, ui, profile, m):
     m = m.add_menu("debts", MODULE_LABEL)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
-    m.add_action(pcsw.DebtsClients)
-    m.add_action(MyBudgets)
+    m.add_action('debts.Clients')
+    m.add_action('debts.MyBudgets')
 
 
 #~ def setup_master_menu(site,ui,profile,m): pass

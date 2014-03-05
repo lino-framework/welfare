@@ -1717,7 +1717,8 @@ dd.inject_field(pcsw.Client,
                 dd.VirtualField(dd.HtmlBox(_("CBSS summary")), cbss_summary))
 
 
-MODULE_LABEL = _("CBSS")
+MODULE_LABEL = dd.apps.cbss.verbose_name
+# verbose_name = _("CBSS")
 
 
 def setup_site_cache(self, force):
@@ -1792,10 +1793,10 @@ def site_setup(self):
     #~ self.modules.contacts.AllPersons.add_detail_tab('cbss',"cbssrequests",MODULE_LABEL,required_user_groups=['cbss'])
     #~
 
-    self.modules.system.SiteConfigs.add_detail_tab('cbss', """
-    cbss_org_unit sector ssdn_user_id ssdn_email
-    cbss_http_username cbss_http_password
-    """, MODULE_LABEL, required=dict(user_groups='cbss'))
+    # self.modules.system.SiteConfigs.add_detail_tab('cbss', """
+    # cbss_org_unit sector ssdn_user_id ssdn_email
+    # cbss_http_username cbss_http_password
+    # """, MODULE_LABEL, required=dict(user_groups='cbss'))
 
 
 #~ def setup_main_menu(site,ui,profile,m): pass

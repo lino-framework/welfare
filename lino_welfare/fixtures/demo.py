@@ -939,47 +939,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             function=FUNCTIONS.pop(),
         )
 
-    #~ from lino.sites.pcsw.models import Course, CourseContent, CourseRequest
-    courseprovider = Instantiator('courses.CourseProvider').build
-    #~ oikos = company(name=u"Oikos",city=eupen,country='BE',
-      #~ is_courseprovider=True)
-    oikos = courseprovider(name=u"Oikos", city=eupen, country='BE')
-    yield oikos
-
-    #~ kap = company(name=u"KAP",city=eupen,country='BE',
-      #~ is_courseprovider=True)
-    kap = courseprovider(name=u"KAP", city=eupen, country='BE')
-    yield kap
-
-    CourseContent = resolve_model('courses.CourseContent')
-    yield CourseContent(id=1, name=u"Deutsch")
-    yield CourseContent(id=2, name=u"Französisch")
-
-    COURSECONTENTS = Cycler(CourseContent.objects.all())
-
-    creq = Instantiator('courses.CourseRequest').build
-    for i in range(20):
-        yield creq(
-            person=CLIENTS.pop(), content=COURSECONTENTS.pop(),
-            date_submitted=settings.SITE.demo_date(-i * 2))
-    #~ yield creq(person=ulrike,content=1,date_submitted=settings.SITE.demo_date(-30))
-    #~ yield creq(person=tatjana,content=1,date_submitted=settings.SITE.demo_date(-30))
-    #~ yield creq(person=erna,content=2,date_submitted=settings.SITE.demo_date(-30))
-
-    offer = Instantiator('courses.CourseOffer').build
-    course = Instantiator('courses.Course').build
-    yield offer(provider=oikos, title=u"Deutsch für Anfänger", content=1)
-    #~ yield course(offer=1,start_date=i2d(20110110))
-    yield course(offer=1, start_date=settings.SITE.demo_date(+30))
-
-    yield offer(provider=kap, title=u"Deutsch für Anfänger", content=1)
-    #~ yield course(offer=2,start_date=i2d(20110117))
-    yield course(offer=2, start_date=settings.SITE.demo_date(+16))
-
-    yield offer(provider=kap, title=u"Français pour débutants", content=2)
-    #~ yield course(offer=3,start_date=i2d(20110124))
-    yield course(offer=3, start_date=settings.SITE.demo_date(+16))
-
     #~ baker = Properties.objects.get(pk=1)
     #~ baker.save()
     #~ yield baker

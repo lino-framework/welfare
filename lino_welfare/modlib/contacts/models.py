@@ -235,7 +235,7 @@ class CompanyDetail(CompanyDetail):
     """
 
     box4 = """
-    email:40 
+    email:40
     url
     phone
     gsm
@@ -243,15 +243,10 @@ class CompanyDetail(CompanyDetail):
 
     address_box = "box3 box4"
 
-    #~ box5 = """
-    #~ remarks
-    #~ is_courseprovider is_jobprovider is_health_insurance is_pharmacy is_attorney is_job_office
-    #~ """
-
-    box5 = """
-    remarks 
+    box5 = dd.Panel("""
+    remarks
     is_courseprovider is_jobprovider client_contact_type
-    """
+    """)
 
     bottom_box = "box5 contacts.RolesByCompany"
 
@@ -271,24 +266,13 @@ class CompanyDetail(CompanyDetail):
 
     main = "general notes"
 
-    #~ def setup_handle(self,lh):
-
-        #~ lh.general.label = _("General")
-        #~ lh.notes.label = _("Notes")
-
-
-#~ if settings.SITE.company_model is None:
-    #~ raise Exception("settings.SITE.company_model is None")
-
-#~ class Companies(Partners):
-    #~ model = settings.SITE.company_model
-    #~ detail_layout = CompanyDetail()
-
-    #~ order_by = ["name"]
-    #~ app_label = 'contacts'
+# TODO: find a more elegant way to do this.
+if not dd.is_installed('courses'):
+    CompanyDetail.box5.replace('is_courseprovider', '')
 
 
-# inherited_setup_main_menu = setup_main_menu
+class Companies(Companies):
+    detail_layout = CompanyDetail()
 
 
 def setup_main_menu(self, ui, profile, main):

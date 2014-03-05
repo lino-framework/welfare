@@ -72,7 +72,7 @@ class Signers(dd.Model):
 class SiteConfig(SiteConfig, Signers):
 
     """
-    This adds the :class:`lino_welfare.modlib.isip.models.Signers` 
+    This adds the :class:`lino_welfare.modlib.isip.models.Signers`
     mixin to Lino's standard SiteConfig.
     
     """
@@ -94,3 +94,46 @@ class SiteConfig(SiteConfig, Signers):
 
 dd.update_field(SiteConfig, 'signer1', blank=True, null=True)
 dd.update_field(SiteConfig, 'signer2', blank=True, null=True)
+
+
+class SiteConfigDetail(dd.FormLayout):
+
+    main = "general constants cbss"
+
+    general = dd.Panel(
+        """
+        site_company next_partner_id:10
+        job_office master_budget
+        signer1 signer2
+        signer1_function signer2_function
+        """, label=_("General"))
+
+    constants = dd.Panel(
+        """
+        system_note_type default_build_method
+        propgroup_skills propgroup_softskills propgroup_obstacles
+        residence_permit_upload_type \
+        work_permit_upload_type \
+        driving_licence_upload_type
+        client_calendar prompt_calendar
+        client_guestrole team_guestrole
+        """, label=_("Constants"))
+
+    cbss = dd.Panel(
+        """
+        cbss_org_unit sector ssdn_user_id ssdn_email
+        cbss_http_username cbss_http_password
+        """,
+        label=dd.apps.cbss.verbose_name,
+        required=dict(user_groups='cbss'))
+
+
+# When a Lino Welfare Site decides to add "debts" to hidden_apps
+# then we must remove the master_budget field.
+# TODO: find a more elegant way to do this.
+if not dd.is_installed('debts'):
+    SiteConfigDetail.general.replace('master_budget', '')
+
+
+class SiteConfigs(SiteConfigs):
+    detail_layout = SiteConfigDetail()
