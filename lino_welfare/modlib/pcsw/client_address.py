@@ -11,6 +11,11 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
+"""
+Part of :mod:`lino_welfare.modlib.pcsw`.
+Defines the :class:`ClientAddress` class,
+the :class:`ClientAddressTypes` choicelist.
+"""
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -41,7 +46,7 @@ class ClientAddress(contacts.AddressLocation):
         verbose_name = _("Client Address")
         verbose_name_plural = _("Client Addresses")
 
-    type = ClientAddressTypes.field()
+    type = ClientAddressTypes.field(default=ClientAddressTypes.official)
     client = dd.ForeignKey('pcsw.Client', related_name='addresses_by_client')
 
     primary = models.BooleanField(
