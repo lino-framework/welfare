@@ -120,6 +120,7 @@ class ExamPolicies(dd.Table):
     # summary start_date end_date
     # description
     max_events every every_unit event_type
+    monday tuesday wednesday thursday friday saturday sunday
     isip.ContractsByPolicy
     jobs.ContractsByPolicy
     """
@@ -326,7 +327,14 @@ class ContractBase(
         return self.exam_policy
 
     def update_cal_from(self, ar):
-        return self.applies_from
+        date = self.applies_from
+        if not date:
+            return None
+        rset = self.update_cal_rset()
+        # date = rset.find_start_date(date)
+        # if date is None:
+        #     return None
+        return rset.get_next_suggested_date(ar, date)
 
     def update_cal_calendar(self):
         if self.exam_policy is not None:

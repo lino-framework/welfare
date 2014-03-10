@@ -56,6 +56,8 @@ class Site(Site):
     project_model = 'pcsw.Client'
     user_model = 'users.User'
 
+    verbose_client_info_message = True
+
     # accounts_ref_length = 5
 
     languages = 'en fr de nl'  # tested docs rely on this distribution

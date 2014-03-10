@@ -398,8 +398,8 @@ class Contract(isip.ContractBase):
                     candi.save()
                     n += 1
                 if n:
-                    ar.response.update(message=kw['message'] + ' '
-                                       + unicode(_("(%d candidatures have been marked inactive)")) % n)
+                    ar.info(unicode(
+                        _("(%d candidatures have been marked inactive)")) % n)
                     ar.response.update(alert=_("Success"))
         #~ return kw
 
@@ -568,11 +568,9 @@ class ContractsBySchedule(Contracts):
     master_key = 'schedule'
     column_names = 'job applies_from applies_until user type *'
 
-#~ class MyContracts(Contracts,mixins.ByUser):
-
 
 class MyContracts(Contracts):
-    column_names = "applies_from client job *"
+    column_names = "applies_from client job type company applies_until date_ended ending *"
     #~ label = _("My contracts")
     #~ order_by = "reminder_date"
     #~ column_names = "reminder_date client company *"

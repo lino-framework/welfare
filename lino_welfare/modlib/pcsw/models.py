@@ -140,7 +140,8 @@ add('10', _("Active"), 'active')
 add('20', _("ISIP"), 'isip')
 add('21', _("Art.60§7 contract"), 'jobs')
 add('22', _("Dispense"), 'dispense')
-add('30', _("Exclusion"), 'exclusion')
+add('30', _("Penalty"), 'penalty')
+add('31', _("Exclusion"), 'exclusion')
 add('40', _("Note"), 'note')
 add('50', _("Created"), 'created')
 add('60', _("Modified"), 'modified')
@@ -1079,7 +1080,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 modified__gte=datetime.datetime.combine(
                     period[0], datetime.time()),
                 modified__lte=datetime.datetime.combine(period[1], datetime.time()))
-        elif ce == ClientEvents.exclusion:
+        elif ce == ClientEvents.penalty:
             qs = qs.filter(
                 exclusion__excluded_until__gte=period[0],
                 exclusion__excluded_from__lte=period[1]).distinct()
@@ -1463,8 +1464,8 @@ class ExclusionTypes(dd.Table):
 class Exclusion(dd.Model):
 
     class Meta:
-        verbose_name = _("exclusion")
-        verbose_name_plural = _('exclusions')
+        verbose_name = _("Penalty")
+        verbose_name_plural = _('Penalties')
 
     person = models.ForeignKey('pcsw.Client')
     type = models.ForeignKey("pcsw.ExclusionType",
