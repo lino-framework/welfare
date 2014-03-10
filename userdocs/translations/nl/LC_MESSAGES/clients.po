@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: 2013-03-31 21:35+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -83,9 +83,9 @@ msgstr ""
 msgid "Civil states (view)"
 msgstr ""
 
-# 6c6b8198ee6d4e4f814aa342d54e589e
+# 90a728200e954dd484039c0ffdaf1aa7
 #: ../clients.rst:0
-msgid "Link type (view)"
+msgid "Parency types (view)"
 msgstr ""
 
 # 66a65885513f43a8bf8fe96ae680d0d8
@@ -98,47 +98,47 @@ msgstr ""
 msgid "Children (view)"
 msgstr ""
 
-# 04b5f0383eca4314b124ed114c867fdb
+# e1732fbf8c684a9498fb9b0bcd344191
 #: None:2
 msgid "Client (model in pcsw)"
 msgstr ""
 
-# 154dfc33bfd04f749fd604fe75555723
+# 3006ffbd6401475daaa74f455327d0e1
 #: None:2
 msgid "Client Contact (model in pcsw)"
 msgstr ""
 
-# 15257fe5e8a24252a0d1789beb67a232
+# 5db467b9758641cd931f355f74a635ec
 #: None:2
 msgid "Client Contact type (model in pcsw)"
 msgstr ""
 
-# ba7cac377cd145e3800da7e384cbafcb
+# a545d9992d4144f5a4193ee15de20cbb
 #: None:2
 msgid "Client Address (model in pcsw)"
 msgstr ""
 
-# b5407a6e9b254ff1bf0f9c8fc273d4df
+# deb5aa6d32e240e5aafb05583ceb93eb
 #: None:2
 msgid "Coaching (model in pcsw)"
 msgstr ""
 
-# cab6d6e522114fba8afa9ee736af6e27
+# 8df5c5fc8b43463b9caf79fb07d50f52
 #: None:2
 msgid "Coaching type (model in pcsw)"
 msgstr ""
 
-# de7ff7e131764d3abd60839392c1c5c9
+# 47a025292a974d8796b55006e2833d97
 #: None:2
 msgid "Reason of termination (model in pcsw)"
 msgstr ""
 
-# 2b235e43868742bcbfb74b7f7f0ead74
+# 303814c3ebbe4ce3ab1d30ce665afed1
 #: None:2
 msgid "aid type (model in pcsw)"
 msgstr ""
 
-# dde1b8fbf0f54b0991a259d50d382152
+# 739e1821058b46f38d1bbbb3667745c5
 #: None:2
 msgid "Integration Phase (model in pcsw)"
 msgstr ""
@@ -201,5 +201,9 @@ msgstr ""
 
 # ee85753e61514c4ba0fe054c2c1b7b08
 #~ msgid "Integration Phase (model in app \"pcsw\")"
+#~ msgstr ""
+
+# 6c6b8198ee6d4e4f814aa342d54e589e
+#~ msgid "Link type (view)"
 #~ msgstr ""
 

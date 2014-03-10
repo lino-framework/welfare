@@ -259,7 +259,9 @@ class CompareRequestsTable(dd.VirtualTable):
         #~ yield add(isip.Contracts,isip.ContractEvents.ended)
         yield add(jobs.Contracts, observed_event=isip.ContractEvents.active)
         #~ yield add(jobs.Contracts,isip.ContractEvents.ended)
-        yield add(courses.PendingCourseRequests)
+
+        if courses:
+            yield add(courses.PendingCourseRequests)
 
         all_contracts = isip.Contracts.request(
             param_values=dict(
@@ -315,9 +317,15 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ ar = A.request(param_values=pv)
             #~ cells.append(ar)
             #~ return cells
-        yield add(pcsw.Coachings, observed_event=pcsw.CoachingEvents.started, coaching_type=DSBE)
-        yield add(pcsw.Coachings, observed_event=pcsw.CoachingEvents.active, coaching_type=DSBE)
-        yield add(pcsw.Coachings, observed_event=pcsw.CoachingEvents.ended, coaching_type=DSBE)
+        yield add(
+            pcsw.Coachings,
+            observed_event=pcsw.CoachingEvents.started, coaching_type=DSBE)
+        yield add(
+            pcsw.Coachings,
+            observed_event=pcsw.CoachingEvents.active, coaching_type=DSBE)
+        yield add(
+            pcsw.Coachings,
+            observed_event=pcsw.CoachingEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.created)

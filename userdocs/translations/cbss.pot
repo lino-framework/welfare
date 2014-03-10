@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../cbss.rst:7
 # 0fd64ceb64a146fd9180e906a4d4be22
-msgid "Ce module supporte pour l'instant la gestion des requêtes suivantes:"
+msgid "Ce module supporte la gestion des requêtes suivantes:"
 msgstr ""
 
 #: ../cbss.rst:0
@@ -52,27 +52,27 @@ msgid "Purpose (model)"
 msgstr ""
 
 #: None:2
-# 5943cb11532340d58e9febca8b9f3ae7
+# e8ee14f3b83443c2a44d504e0819f5c1
 msgid "IdentifyPerson Request (model in cbss)"
 msgstr ""
 
 #: None:2
-# e954e35c2a6d4b6a8e4ffbfc765a5d44
+# c5bac2e5079a4df6bf7ebec8167a9989
 msgid "ManageAccess Request (model in cbss)"
 msgstr ""
 
 #: None:2
-# 9e90e58124d244f5bc5a585212a6cba2
+# 05572a9a095f46bb8cc3f1a7f2b9d402
 msgid "Tx25 Request (model in cbss)"
 msgstr ""
 
 #: None:2
-# 0000dd7ce3ce43e38f3ec02f750cde5f
+# f2dfed40c6a34dbf80cd01d86b1535c1
 msgid "Sector (model in cbss)"
 msgstr ""
 
 #: None:2
-# e1a6b9bb6dd0431ea9b9f87b2c9153bd
+# 71a9b059a4cb48bb84efbef1c737b451
 msgid "Purpose (model in cbss)"
 msgstr ""
 

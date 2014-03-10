@@ -72,11 +72,11 @@ class BeIdTests(RemoteAuthTestCase):
         obj.save()
 
         url = '/api/pcsw/Clients'
-        pd = dict()
-        pd.update(card_data=readfile('beid_tests_1.txt'))
-        pd[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
+        post_data = dict()
+        post_data.update(card_data=readfile('beid_tests_1.txt'))
+        post_data[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
         response = self.client.post(
-            url, pd,
+            url, post_data,
             REMOTE_USER='root',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, "")
@@ -102,7 +102,23 @@ Click OK to apply the following changes for JÉFFIN Jean Jacques (100) :\
         # print(result['message'])
         self.assertEqual(result['message'], expected)
 
-
-
+        cb = result['xcallback']
+        self.assertEqual(cb['title'], "Confirmation")
+        self.assertEqual(cb['buttons'], {'yes': 'Yes', 'no': 'No'})
+        url = '/callbacks/%d/yes' % cb['id']
+        response = self.client.get(
+            url,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        result = self.check_json_result(
+            response,
+            'eval_js alert success message')
+        self.assertEqual(result['success'], True)
+        self.assertEqual(
+            result['message'],
+            'Client "JÉFFIN Jean Jacques (100)" has been saved.')
+        obj = pcsw.Client.objects.get(id=100)
+        addr = pcsw.ClientAddress.objects.get(client=obj)
+        self.assertEqual(addr.city, True)
 
 

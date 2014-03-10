@@ -570,20 +570,21 @@ class Contract(ContractBase):
         #~ resolve_field('dsbe.Contract.user').verbose_name=_("responsible (DSBE)")
         Contract.user.verbose_name = _("responsible (DSBE)")
         #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
-        cls.PRINTABLE_FIELDS = dd.fields_list(cls,
-                                              'client company contact_person contact_role type '
-                                              'applies_from applies_until '
-                                              'language '
-                                              'stages goals duties_dsbe duties_company '
-                                              'duties_asd duties_person '
-                                              'user user_asd exam_policy '
-                                              'date_decided date_issued ')
+        cls.PRINTABLE_FIELDS = dd.fields_list(
+            cls,
+            'client company contact_person contact_role type '
+            'applies_from applies_until '
+            'language '
+            'stages goals duties_dsbe duties_company '
+            'duties_asd duties_person '
+            'user user_asd exam_policy '
+            'date_decided date_issued ')
         super(Contract, cls).on_analyze(lino)
 
     def disabled_fields(self, ar):
         #~ if self.must_build:
         if not self.build_time:
-            return []
+            return set()
         #~ return df + settings.SITE.CONTRACT_PRINTABLE_FIELDS
         return self.PRINTABLE_FIELDS
 

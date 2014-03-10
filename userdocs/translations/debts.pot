@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgstr ""
 #: ../debts.rst:55
 #: ../debts.rst:63
 # c22f96f94f624c36a506c5a1a7b0da3f
-# a632e1f68b68486cbcf3f2a1201e63cc
+# c22f96f94f624c36a506c5a1a7b0da3f
 msgid "Slave table in the \"Summary\" tab of a :ddref:`debts.Budget` detail."
 msgstr ""
 
@@ -119,17 +119,17 @@ msgid "Shows the debts in this budget which have been transferred to a debt coll
 msgstr ""
 
 #: None:2
-# e67743579bce4c259c21199d5a4dbdb7
+# ccc7f184ef8e4630be79a7522fcb91b3
 msgid "Budget Actor (model in debts)"
 msgstr ""
 
 #: None:2
-# abcc82413f824ce48e50b492e97b6c03
+# 76dd083604c942d6842313454335841f
 msgid "Budget (model in debts)"
 msgstr ""
 
 #: None:2
-# 782d3996c18f4dfbbb941c03a9d402be
+# f2712e24f8ec4c4284c7dd87dd7b76a0
 msgid "Budget Entry (model in debts)"
 msgstr ""
 

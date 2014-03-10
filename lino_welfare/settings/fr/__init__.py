@@ -9,6 +9,7 @@ class Site(Site):
     title = "Lino pour CPAS"
     languages = 'fr nl'
     hidden_languages = None
+    uppercase_last_name = True
 
     demo_fixtures = """std few_languages props all_countries
     be demo cbss mini demo2 local """.split()

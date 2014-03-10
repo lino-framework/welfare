@@ -37,7 +37,7 @@ add = ClientAddressTypes.add_item
 add('01', _("Official address"), 'official')  # IT020
 add('02', _("Unverified address"), 'unverified')  # IT042
 add('03', _("Declared address"), 'declared')  # IT214
-add('10', _("Real address"), 'real')  # IT214
+add('10', _("Address on eID card"), 'eid')  # read from eid card
 
 
 class ClientAddress(contacts.AddressLocation):
@@ -46,8 +46,10 @@ class ClientAddress(contacts.AddressLocation):
         verbose_name = _("Client Address")
         verbose_name_plural = _("Client Addresses")
 
-    type = ClientAddressTypes.field(default=ClientAddressTypes.official)
+    address_type = ClientAddressTypes.field(
+        blank=True, null=True, editable=False)
     client = dd.ForeignKey('pcsw.Client', related_name='addresses_by_client')
+    remark = dd.CharField(_("Remark"), max_length=50, blank=True)
 
     primary = models.BooleanField(
         _("Primary"),
@@ -55,6 +57,8 @@ class ClientAddress(contacts.AddressLocation):
         help_text=_("""There's at most one primary address per client. \
         Enabling this field will automatically make the other \
         addresses non-primary."""))
+
+    allow_cascaded_delete = ['client']
 
     def after_ui_save(self, ar):
         super(ClientAddress, self).after_ui_save(ar)
@@ -77,8 +81,8 @@ class ClientAddresses(dd.Table):
     model = 'pcsw.ClientAddress'
     required = dd.required(user_level='admin')
     detail_layout = dd.FormLayout("""
-    type country region
-    city zip_code
+    address_type remark
+    country city zip_code
     addr1
     street street_no street_box
     addr2
@@ -88,7 +92,7 @@ class ClientAddresses(dd.Table):
 class AddressesByClient(ClientAddresses):
     required = dd.required()
     master_key = 'client'
-    column_names = 'type:10 address_column:30 primary:5'
+    column_names = 'address_type:10 remark:10 address_column:30 primary:5'
     label = _("Addresses")
     auto_fit_column_widths = True
 
@@ -97,4 +101,4 @@ __all__ = [
     'ClientAddressTypes',
     'ClientAddress',
     'ClientAddresses',
-    'AddressesByClient']
+    'AddressesByClient', 'ADDRESS_FIELDS']

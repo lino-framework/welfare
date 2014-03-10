@@ -458,5 +458,6 @@ class CoachingsByEnding(Coachings):
 __all__ = [ 
     "CoachingType", "CoachingTypes", "CoachingEnding",
     "CoachingEndings", "Coaching", "Coachings", "CoachingsByClient",
-    "CoachingsByUser", "CoachingsByEnding"
+    "CoachingsByUser", "CoachingsByEnding",
+    "CoachingEvents"
 ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: 2014-01-07 22:33+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -109,7 +109,6 @@ msgid "Debts (view)"
 msgstr ""
 
 # c22f96f94f624c36a506c5a1a7b0da3f
-# a632e1f68b68486cbcf3f2a1201e63cc
 #: ../debts.rst:55 ../debts.rst:63
 msgid "Slave table in the \"Summary\" tab of a :ddref:`debts.Budget` detail."
 msgstr ""
@@ -133,17 +132,17 @@ msgid ""
 "collection agency."
 msgstr ""
 
-# e67743579bce4c259c21199d5a4dbdb7
+# ccc7f184ef8e4630be79a7522fcb91b3
 #: None:2
 msgid "Budget Actor (model in debts)"
 msgstr ""
 
-# abcc82413f824ce48e50b492e97b6c03
+# 76dd083604c942d6842313454335841f
 #: None:2
 msgid "Budget (model in debts)"
 msgstr ""
 
-# 782d3996c18f4dfbbb941c03a9d402be
+# f2712e24f8ec4c4284c7dd87dd7b76a0
 #: None:2
 msgid "Budget Entry (model in debts)"
 msgstr ""

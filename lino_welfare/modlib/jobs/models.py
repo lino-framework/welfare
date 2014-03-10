@@ -374,12 +374,13 @@ class Contract(isip.ContractBase):
         ]
 
     def disabled_fields(self, ar):
-        df = []
+        "As super, but add also job provider's company and type"
+        df = set()
         if self.job_id is not None:
             if self.job.provider:
-                df.append('company')
+                df.add('company')
             if self.job.contract_type:
-                df.append('type')
+                df.add('type')
         if not self.build_time:
             return df
         return df + self.PRINTABLE_FIELDS

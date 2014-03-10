@@ -100,15 +100,11 @@ für neue Operationen nicht benutzt werden können.""")
 
 
 class PartnerDetail(PartnerDetail):
-    #~ general = contacts.PartnerDetail.main
-    #~ main = "general debts.BudgetsByPartner"
     bottom_box = """
-    remarks 
+    remarks
     activity bank_account1 bank_account2 is_obsolete
-    is_person is_company #is_user is_household created modified 
+    is_person is_company is_household created modified
     """
-    #~ def setup_handle(self,h):
-        #~ h.general.label = _("General")
 
 
 #~ class Partners(contacts.Partners):

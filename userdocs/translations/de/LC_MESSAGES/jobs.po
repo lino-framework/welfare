@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -179,67 +179,67 @@ msgstr ""
 msgid "Job Experiences (view)"
 msgstr ""
 
-# 2ea958129a94431e970815b9e15708a0
+# 65a09f64792a45cfa0b221812e67a73e
 #: None:2
 msgid "Job (model in jobs)"
 msgstr ""
 
-# 6dddf35bcc5143dbb5211ff8b42be76c
+# 814b211629314ae3995ac6802aacc385
 #: None:2
 msgid "Job Provider (model in jobs)"
 msgstr ""
 
-# 72d9c84db2bf4e5da967e931706be361
+# c217433b73a74e1fb14be554a33ba640
 #: None:2
 msgid "Art.60§7 contract (model in jobs)"
 msgstr ""
 
-# 15a68b807c68447ab7157f164de652a0
+# 47b3756acc7c4b6c83259febe4f097dd
 #: None:2
 msgid "Job Candidature (model in jobs)"
 msgstr ""
 
-# 0e5a9b4c93744193bb33e5346d739292
+# 48da663e7d254e279a644c22a13cdacd
 #: None:2
 msgid "Work Regime (model in jobs)"
 msgstr ""
 
-# 03e848d711be4e5db87783858fdc65d3
+# 052d31c81582439f8dd166670a48f017
 #: None:2
 msgid "Job Sector (model in jobs)"
 msgstr ""
 
-# 979c93cf104b40f0821f7c9333ae8339
+# 1278489224f447568b14989b8dffded6
 #: None:2
 msgid "Job Function (model in jobs)"
 msgstr ""
 
-# 6dab13ef38c94d0e8e6aa3f180a643e9
+# fcfcad0360f740b195a9ae1083198569
 #: None:2
 msgid "Work Schedule (model in jobs)"
 msgstr ""
 
-# 72f899cd7495413ab3c0ef4f8830f14c
+# bdf6d8744b9449b288b894c8ef15c8d5
 #: None:2
 msgid "Job Offer (model in jobs)"
 msgstr ""
 
-# 71ad669125b647359d51bc12a1851364
+# 26b354b6e5604289990d5503a325698f
 #: None:2
 msgid "study or education (model in jobs)"
 msgstr ""
 
-# e2ab9d26cc874462a7fc4e83b4cda1ba
+# cb74caed5d1a4e21b42d8f97f9e4f8ad
 #: None:2
 msgid "Job Experience (model in jobs)"
 msgstr ""
 
-# 76d38136f3704747a9a1d2b895457dd5
+# 952b95195d2a4bc4a54574940c34a6d1
 #: None:2
 msgid "Job Type (model in jobs)"
 msgstr ""
 
-# e3834621a2eb4634a2158c5726f3f285
+# 5e7d36a8528f427184ad975ad0a7b338
 #: None:2
 msgid "Job Contract Type (model in jobs)"
 msgstr ""

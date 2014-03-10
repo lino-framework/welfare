@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 11:42+0200\n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
 "PO-Revision-Date: 2013-09-10 21:17+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -58,37 +58,37 @@ msgstr ""
 msgid "Upload Type (model)"
 msgstr ""
 
-# 01966749925a4660a81c60e3bd2917b5
+# ba919c47114549f0a02083ed035e1f64
 #: None:2
 msgid "content type (model in contenttypes)"
 msgstr ""
 
-# 7ef0f0adf8d94384bc12f0cc4b61ff57
+# 8324b4d5ee4248a08cb3ab67d3463a4f
 #: None:2
 msgid "Site configuration (model in system)"
 msgstr ""
 
-# f77842855b4c43df8efc53c5ada2bd72
+# 255bfd6df7bc44aa8ca72592fdb64020
 #: None:2
 msgid "Event Type (model in notes)"
 msgstr ""
 
-# 5c9af23f823748ecb574340893297f4e
+# 23d5fdb9d8b44276a2579918290a979e
 #: None:2
 msgid "Note Type (model in notes)"
 msgstr ""
 
-# b5f26fc2e17f4b67bd33162eb5b57ec3
+# a1fbf959492043478043fc87f0c40c43
 #: None:2
 msgid "Event/Note (model in notes)"
 msgstr ""
 
-# f1d8c18844b34a9d846f004a7740a6d8
+# f4b81192337b406890412cbcd8252ccb
 #: None:2
 msgid "Upload (model in uploads)"
 msgstr ""
 
-# 66c5249916da43e0934503bdf2a8b14e
+# 9dae1a9e16444bcd88f180fdf3a00551
 #: None:2
 msgid "Upload Type (model in uploads)"
 msgstr ""

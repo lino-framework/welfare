@@ -99,12 +99,10 @@ class Brokers(dd.Table):
 
 class Faculty(dd.BabelNamed):
 
-    """
-    A Faculty (Fachbereich) is a conceptual (not organizational)
-    department of this PCSW. 
-    Each Newcomer will be assigned to one and only one Faculty, 
-    based on his/her needs.
-    
+    """A Faculty (Fachbereich) is a conceptual (not organizational)
+    department of this PCSW.  Each Newcomer will be assigned to one
+    and only one Faculty, based on his/her needs.
+
     """
     class Meta:
         verbose_name = _("Faculty")
@@ -130,12 +128,16 @@ class Faculties(dd.Table):
     CompetencesByFaculty
     ClientsByFaculty
     """
-
-
-class Competence(mixins.AutoUser, mixins.Sequenced):
-
+    insert_layout = """
+    name
+    weight
     """
-    Deserves more documentation.
+
+
+class Competence(dd.UserAuthored, mixins.Sequenced):
+    """
+    A competence is when a given user is declared to be competent
+    in a given faculty.
     """
     class Meta:
         #~ abstract = True
@@ -157,6 +159,8 @@ Wieviel Aufwand mir persönlich ein Neuantrag in diesem Fachbereich verursacht
 
     def __unicode__(self):
         return u'%s #%s' % (self._meta.verbose_name, self.pk)
+
+dd.update_field(Competence, 'user', verbose_name=_("User"))
 
 
 class Competences(dd.Table):

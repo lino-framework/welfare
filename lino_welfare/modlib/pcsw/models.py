@@ -38,6 +38,7 @@ from django.utils.encoding import force_unicode
 
 from lino import dd
 from lino.core import dbutils
+from lino.core.dbutils import get_field
 
 from lino.utils.xmlgen.html import E
 from lino.utils import join_elems
@@ -532,11 +533,6 @@ class Client(contacts.Person,
                            _("coaching ends"), tab=1):
             yield o
 
-    #~ @dd.displayfield(_("Actions"))
-    #~ def read_beid_card(self,ar):
-        #~ return '[<a href="javascript:Lino.read_beid_card(%r)">%s</a>]' % (
-          #~ str(ar.requesting_panel),unicode(_("Read eID card")))
-
     @dd.virtualfield(dd.HtmlBox())
     def image(self, ar):
         url = self.get_image_url(ar)
@@ -704,6 +700,36 @@ class Client(contacts.Person,
                 subst_user=obj.user, current_project=self.pk)
             elems += [ar.href_to_request(sar, obj.user.username), ' ']
         return E.div(*elems)
+
+    def get_beid_diffs(self, attrs):
+        """Overrides :meth:`lino.modlib.mixins.BeIdCardHolder.get_beid_diffs`.
+
+        """
+        diffs = []
+        objects = [self]
+        try:
+            addr = ClientAddress.objects.get(
+                client=self,
+                address_type=ClientAddressTypes.eid)
+        except ClientAddress.DoesNotExist:
+            addr = ClientAddress(
+                client=self,
+                address_type=ClientAddressTypes.eid)
+        objects.append(addr)
+        for fldname, new in attrs.items():
+            if fldname in ADDRESS_FIELDS:
+                obj = addr
+            else:
+                obj = self
+            fld = get_field(obj, fldname)
+            old = getattr(obj, fldname)
+            if old != new:
+                diffs.append(
+                    "%s : %s -> %s" % (
+                        unicode(fld.verbose_name), dd.obj2str(old),
+                        dd.obj2str(new)))
+                setattr(obj, fld.name, new)
+        return objects, diffs
 
 
 class ClientDetail(dd.FormLayout):

@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012-2013, Luc Saffre
+# This file is distributed under the same license as the Lino-Welfare User
+# Documentation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-10 10:45+0100\n"
+"PO-Revision-Date: 2014-03-10 10:45+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+# 81a8bd0ca8ff48eabc556f4e6215dfea
+#: ../beid.rst:5
+msgid "Read eID cards"
+msgstr ""
+
+# 5d7b4f3157614e57b0385a9970ba0d4b
+#: ../beid.rst:7
+msgid ""
+"There are two situations where you can read an eID card: (1) as a quick "
+"link on the welcome screen, or (2) as an action on an existing Client."
+msgstr ""
+
+# 75dc16095e054be9858d2274f3d97b2e
+#: ../beid.rst:11
+msgid ""
+"**The first method** is used when you don't know whether the card holder "
+"is already in the database."
+msgstr ""
+
+# d6058d9bc2294c1dae182ffabc4b7d4c
+#: ../beid.rst:14
+msgid ""
+"You call this method by clicking on the quick link labelled "
+":ddref:`pcsw.Client.read_beid`."
+msgstr ""
+
+# 8f0f5fcfa527429dafe7826627b6f014
+#: ../beid.rst:17
+msgid ""
+"Lino reads the data on the card, does some database lookups and then "
+"decides what to do:"
+msgstr ""
+
+# 2c03c4bc4ab440b0ae43db8bb9554962
+#: ../beid.rst:20
+msgid "create a new client"
+msgstr ""
+
+# b41e64b49ac7404b9d054d6e262bdce8
+#: ../beid.rst:21
+msgid "update an existing client"
+msgstr ""
+
+# 3c619b714050448684297e7849872e6d
+#: ../beid.rst:23
+msgid "For both actions it will ask your confirmation first."
+msgstr ""
+
+# eb7f9f76ebc243d09e3ef970b432ded9
+#: ../beid.rst:25
+msgid ""
+"Comparison is based on the :ddref:`pcsw.Client.national_id`.  If you know"
+" that the national id of a client has changed, then you must first "
+"manually update this field. Otherwise Lino will create a new client "
+"record."
+msgstr ""
+
+# 1dcb10c69a664fbdb666f270e35c5d90
+#: ../beid.rst:30
+msgid "It is possible that Lino refuses to create a new client:"
+msgstr ""
+
+# d2a55ea567914ec484f3d711af74b01e
+#: ../beid.rst:32
+msgid ""
+"When a client exists with the same name (first and last) and am *empty* "
+":ddref:`pcsw.Client.national_id`."
+msgstr ""
+
+# 19942ba9f1fc4b40ae6e03220de52f8a
+#: ../beid.rst:36
+msgid ""
+"**The second method** is when you know the client and have selected their"
+" data record in Lino."
+msgstr ""
+
+# e2160ea23ccc459daa5665adbe17ccde
+#: ../beid.rst:39
+msgid ""
+"You call this method either by clicking on the `Must read eID card!`_ "
+"text, or by clicking by your own choice on the "
+":ddref:`pcsw.Client.read_beid` action in the toolbar or the context menu."
+msgstr ""
+
+# 12e77087f7b849059f69518c500b0e5f
+#: ../beid.rst:44
+msgid ""
+"Lino reads the data on the card, compares it with the current record, and"
+" suggests to update your record in case there are differences."
+msgstr ""
+
+# 2f03b9da5515459aaf2021ba0c14e9a9
+#: ../beid.rst:49
+msgid "Must read eID card!"
+msgstr ""
+
+# 1c2eccc2b07145988366b0e7ae434ab6
+#: ../beid.rst:51
+msgid ""
+"This text appears in the info box of a clients detail view when (1) no "
+"eID card has ever been read or (2) the card has been read but validity "
+"has expired."
+msgstr ""
+

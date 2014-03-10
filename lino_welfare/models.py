@@ -272,13 +272,6 @@ def site_setup(site):
     #~ pcsw.UsersWithClients:80x8
     #~ coming_reminders:40x16 missed_reminders:40x16
     #~ """)
-    site.modules.households.Households.set_detail_layout(box3="""
-    country region city zip_code:10
-    addr1:40
-    street_prefix street:25 street_no street_box
-    addr2:40
-    activity bank_account1:12 bank_account2:12
-    """)
 
     # site.modules.system.SiteConfigs.set_detail_layout(
     #     "general constants",
