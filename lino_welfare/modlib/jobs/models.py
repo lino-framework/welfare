@@ -192,9 +192,10 @@ class ContractType(mixins.PrintableType, dd.BabelNamed):
         verbose_name_plural = _('Job Contract Types')
 
     ref = models.CharField(_("Reference"), max_length=20, blank=True)
-    exam_policy = models.ForeignKey("isip.ExamPolicy",
-                                    related_name="%(app_label)s_%(class)s_set",
-                                    blank=True, null=True)
+    exam_policy = dd.ForeignKey(
+        "isip.ExamPolicy",
+        related_name="%(app_label)s_%(class)s_set",
+        blank=True, null=True)
 
 
 class ContractTypes(dd.Table):
@@ -852,15 +853,16 @@ class Job(SectorFunction):
 
     def __unicode__(self):
         if self.provider:
-            return u'%s bei %s' % (self.name, self.provider.name)
+            return _('%(job)s at %(provider)s') % dict(
+                job=self.name, provider=self.provider.name)
         return self.name
 
     def disabled_fields(self, ar):
         #~ if self.contract_set.count():
         #~ if self.contract_set.filter(must_build=False).count():
         if self.contract_set.filter(build_time__isnull=False).count():
-            return ['contract_type', 'provider']
-        return []
+            return set(('contract_type', 'provider'))
+        return set()
 
 
     #~ @dd.chooser()

@@ -340,7 +340,7 @@ class ContractBase(
         return _("Evaluation %d") % i
 
     def update_reminders(self, ar):
-        super(ContractBase, self).update_reminders(ar)
+        rv = super(ContractBase, self).update_reminders(ar)
         au = self.update_cal_until()
         if au:
             au = cal.DurationUnits.months.add_duration(au, -1)
@@ -350,6 +350,7 @@ class ContractBase(
             au,
             _("Contract ends in a month"),
             self)
+        return rv
 
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
