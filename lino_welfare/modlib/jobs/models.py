@@ -383,7 +383,7 @@ class Contract(isip.ContractBase):
                 df.add('type')
         if not self.build_time:
             return df
-        return df + self.PRINTABLE_FIELDS
+        return df | self.PRINTABLE_FIELDS
 
     def after_ui_save(self, ar):
         super(Contract, self).after_ui_save(ar)
