@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-10 11:51+0100\n"
-"PO-Revision-Date: 2014-03-10 14:10+0100\n"
+"PO-Revision-Date: 2014-03-11 14:34+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -1847,12 +1847,12 @@ msgid "Require date ended"
 msgstr "Date de fin"
 
 #: lino_welfare/modlib/isip/models.py:165
-msgid "study type"
+msgid "Study Type"
 msgstr "Type d'étude"
 
 #: lino_welfare/modlib/isip/models.py:166
-msgid "study types"
-msgstr "Type d'études"
+msgid "Study Types"
+msgstr "Types d'étude"
 
 #: lino_welfare/modlib/isip/models.py:212
 msgid "applies from"

@@ -159,12 +159,46 @@ class ContractEndings(dd.Table):
     """
 
 
-class StudyType(dd.BabelNamed):
-    #~ text = models.TextField(_("Description"),blank=True,null=True)
+# class EducationLevels(dd.ChoiceList):
+#     verbose_name = _("Study Level")
+# add = EducationLevels.add_item
+# add('10', _("Primary"), 'primary')
+# add('20', _("Secondary"), 'secondary')
+# add('21', _("Secondary 1"), 'secondary1')
+# add('22', _("Secondary 2"), 'secondary2')
+# add('23', _("Secondary 2"), 'secondary3')
+# add('30', _("Bachelor"), 'bachelor')
+# add('30', _("Master"), 'master')
+
+
+class EducationLevel(dd.BabelNamed, dd.Sequenced):
 
     class Meta:
-        verbose_name = _("study type")
-        verbose_name_plural = _("study types")
+        verbose_name = _("Education Level")
+        verbose_name_plural = _("Education Levels")
+
+
+class EducationLevels(dd.Table):
+    required = dict(user_groups='integ', user_level='manager')
+    model = EducationLevel
+    column_names = 'name *'
+    order_by = ['name']
+    # detail_layout = """
+    # name
+    # isip.StudyTypesByLevel
+    # """
+
+
+class StudyType(dd.BabelNamed):
+
+    class Meta:
+        verbose_name = _("Study Type")
+        verbose_name_plural = _("Study Types")
+
+    # level = EducationLevels.field(blank=True)
+    education_level = dd.ForeignKey(
+        EducationLevel,
+        null=True, blank=True)
 
 
 class StudyTypes(dd.Table):
@@ -173,9 +207,18 @@ class StudyTypes(dd.Table):
     model = StudyType
     order_by = ["name"]
     detail_layout = """
-    name id
+    name education_level id
     ContractsByStudyType
     """
+
+    insert_layout = """
+    name
+    education_level
+    """
+
+
+class StudyTypesByLevel(StudyTypes):
+    master_key = 'education_level'
 
 
 def default_signer1():

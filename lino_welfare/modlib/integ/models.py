@@ -633,6 +633,7 @@ def setup_config_menu(site, ui, profile, m):
     m.add_action(isip.ContractEndings)
     m.add_action(isip.ExamPolicies)
     m.add_action(isip.StudyTypes)
+    m.add_action(isip.EducationLevels)
 
     m.add_action(jobs.ContractTypes)
     m.add_action(jobs.JobTypes)

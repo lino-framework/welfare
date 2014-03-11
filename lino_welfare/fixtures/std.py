@@ -143,15 +143,29 @@ def objects():
     #~ yield projectType(u"EiEi")
     #~ yield projectType(u"Aufenthaltsgenehmigung")
 
+    eduLevel = Instantiator('isip.EducationLevel').build
+    yield eduLevel(**babel_values('name',
+                                  de="Primär",
+                                  fr="Primaire",
+                                  en="Primary"))
+    yield eduLevel(**babel_values('name',
+                                  de="Sekundär",
+                                  fr="Secondaire",
+                                  en="Secondary"))
+    yield eduLevel(**babel_values('name',
+                                  de="Hochschule",
+                                  fr="Supérieur",
+                                  en="Higher"))
+    yield eduLevel(**babel_values('name',
+                                  de="Bachelor",
+                                  fr="Bachelor",
+                                  en="Bachelor"))
+    yield eduLevel(**babel_values('name',
+                                  de="Master",
+                                  fr="Master",
+                                  en="Master"))
+
     studyType = Instantiator('isip.StudyType').build
-    #~ yield studyType(u"Schule")
-    #~ yield studyType(u"Sonderschule")
-    #~ yield studyType(u"Ausbildung")
-    #~ yield studyType(u"Lehre")
-    #~ yield studyType(u"Hochschule")
-    #~ yield studyType(u"Universität")
-    #~ yield studyType(u"Teilzeitunterricht")
-    #~ yield studyType(u"Fernkurs")
     yield studyType(**babel_values('name',
                                    de=u"Schule",
                                    fr=u"École",

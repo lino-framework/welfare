@@ -111,7 +111,7 @@ class Faculty(dd.BabelNamed):
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         default=MAX_WEIGHT,
-          help_text=u"""\
+        help_text=u"""\
 Wieviel Aufwand ein Neuantrag in diesem Fachbereich allgemein verursacht
 (0 = gar kein Aufwand, %d = maximaler Aufwand).""" % MAX_WEIGHT)
 
