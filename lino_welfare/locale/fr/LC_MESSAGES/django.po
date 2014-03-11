@@ -2016,7 +2016,7 @@ msgstr "Employants"
 #: lino_welfare/modlib/jobs/models.py:146
 #: lino_welfare/modlib/jobs/models.py:828
 msgid "Jobs"
-msgstr "Emplois"
+msgstr "Postes de travail"
 
 #: lino_welfare/modlib/jobs/models.py:191
 msgid "Job Contract Type"
@@ -2090,11 +2090,11 @@ msgstr "Uniquement contrats de type"
 #: lino_welfare/modlib/jobs/models.py:596
 #: lino_welfare/modlib/jobs/models.py:836
 msgid "Job Type"
-msgstr "Type d'emploi"
+msgstr "Type de poste"
 
 #: lino_welfare/modlib/jobs/models.py:597
 msgid "Job Types"
-msgstr "Types d'emplois"
+msgstr "Type de poste"
 
 #: lino_welfare/modlib/jobs/models.py:601
 #: lino_welfare/modlib/pcsw/models.py:1340
@@ -2176,7 +2176,7 @@ msgstr "Pays"
 #: lino_welfare/modlib/jobs/models.py:827
 #: lino_welfare/modlib/jobs/models.py:1323
 msgid "Job"
-msgstr "Emploi"
+msgstr "Poste de travail"
 
 #: lino_welfare/modlib/jobs/models.py:846
 msgid "capacity"
@@ -2887,7 +2887,7 @@ msgstr "Langues"
 
 #: lino_welfare/modlib/pcsw/models.py:873
 msgid "Job Requests"
-msgstr "Demandes d'emploi"
+msgstr "Candidatures"
 
 #: lino_welfare/modlib/pcsw/models.py:878
 msgid "Contracts"

@@ -46,28 +46,28 @@ für neue Operationen nicht benutzt werden können.""")
     activity = models.ForeignKey("pcsw.Activity",
                                  blank=True, null=True)
 
-    bank_account1 = models.CharField(max_length=40,
-                                     blank=True,  # null=True,
-                                     verbose_name=_("Bank account 1"))
+    # bank_account1 = models.CharField(max_length=40,
+    #                                  blank=True,  # null=True,
+    #                                  verbose_name=_("Bank account 1"))
 
-    bank_account2 = models.CharField(max_length=40,
-                                     blank=True,  # null=True,
-                                     verbose_name=_("Bank account 2"))
+    # bank_account2 = models.CharField(max_length=40,
+    #                                  blank=True,  # null=True,
+    #                                  verbose_name=_("Bank account 2"))
 
-    hidden_columns = 'created modified activity bank_account1 bank_account2'
+    hidden_columns = 'created modified activity'
+    # bank_account1 bank_account2'
 
     @classmethod
     def on_analyze(cls, site):
         super(Partner, cls).on_analyze(site)
         cls.declare_imported_fields('''
           created modified
-          name remarks region zip_code city country 
-          street_prefix street street_no street_box 
+          name remarks region zip_code city country
+          street_prefix street street_no street_box
           addr2
-          language 
+          language
           phone fax email url
-          bank_account1 bank_account2 activity 
-          is_obsolete 
+          activity is_obsolete
           ''')
         # not e.g. on JobProvider who has no own site_setup()
         if cls is Partner:
@@ -102,7 +102,7 @@ für neue Operationen nicht benutzt werden können.""")
 class PartnerDetail(PartnerDetail):
     bottom_box = """
     remarks
-    activity bank_account1 bank_account2 is_obsolete
+    activity is_obsolete
     is_person is_company is_household created modified
     """
 
@@ -156,7 +156,7 @@ dd.update_field(Person, 'last_name', blank=False)
 
 class PersonDetail(PersonDetail):
     bottom_box = """
-    activity bank_account1 bank_account2 is_obsolete
+    activity is_obsolete
     is_client created modified #father #mother
     remarks contacts.RolesByPerson households.MembersByPerson
     """
@@ -215,10 +215,7 @@ class Company(Partner, Company):
             #~ raise Exception("%r.model is None" % cls)
         super(Company, cls).on_analyze(site)
         cls.declare_imported_fields(
-            '''name 
-            vat_id prefix
-            phone fax email 
-            bank_account1 bank_account2 activity''')
+            '''name vat_id prefix phone fax email activity''')
 
 
 class CompanyDetail(CompanyDetail):
@@ -226,7 +223,7 @@ class CompanyDetail(CompanyDetail):
     box3 = """
     country region city zip_code:10
     addr1:40
-    street_prefix street:25 street_no street_box
+    street:25 street_no street_box
     addr2:40
     """
 
@@ -247,9 +244,9 @@ class CompanyDetail(CompanyDetail):
     bottom_box = "box5 contacts.RolesByCompany"
 
     intro_box = """
-    prefix name id language 
-    vat_id:12 activity:20 type:20 #hourly_rate
-    bank_account1 bank_account2 is_obsolete
+    prefix name id language
+    vat_id:12 activity:20 type:20
+    is_obsolete
     """
 
     general = dd.Panel("""

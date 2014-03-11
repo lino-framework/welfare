@@ -56,7 +56,7 @@ class Clients(pcsw.Clients):
     column_names = "name_column:20 #active_contract:16 \
     applies_from applies_until contract_company:16 \
     national_id:10 gsm:10 address_column age:10 email phone:10 \
-    id bank_account1 aid_type language:10"
+    id aid_type language:10"
 
     parameters = dict(
         group=models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,

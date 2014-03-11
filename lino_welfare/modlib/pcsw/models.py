@@ -800,7 +800,6 @@ class ClientDetail(dd.FormLayout):
 
     status = """
     in_belgium_since:15 residence_type gesdos_id
-    # bank_account1:12 bank_account2:12
     job_agents group:16
     """
 
@@ -871,12 +870,12 @@ class ClientDetail(dd.FormLayout):
 
     jobs = dd.Panel("""
     jobs.CandidaturesByPerson
-    """, label=_("Job Requests"))
+    jobs.ContractsByPerson
+    """, label=_("Jobs"))
 
     contracts = dd.Panel("""
     isip.ContractsByPerson
-    jobs.ContractsByPerson
-    """, label=_("Contracts"))
+    """, label=_("ISIP"))
 
     #~ def override_labels(self):
         #~ return dict(
@@ -966,7 +965,7 @@ class Clients(contacts.Persons):
     gender language
     """, window_size=(60, 'auto'))
 
-    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10"
+    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id aid_type language:10"
 
     detail_layout = ClientDetail()
 
@@ -1201,56 +1200,6 @@ class AllClients(Clients):
         #~ return kw
 
 
-#~ class UnusedMyClients(Clients):
-    #~ u"""
-    #~ Show only Clients attended
-    #~ by the requesting user (or another user,
-    #~ specified via :attr:`lino.ui.requests.URL_PARAMS_SUBST_USER`),
-    #~ either as primary or as secondary attendant.
-    #~ Damit jemand als begleitet gilt, muss mindestens eines der
-    #~ beiden Daten coached_from und coached_until ausgefüllt sein.
-    #~ """
-    #~ required = dict(user_groups = ['integ'])
-    #~ use_as_default_table = False
-    #~ label = _("My clients")
-    #~ column_names = "name_column:20 client_state applies_from applies_until national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type coach1 language:10"
-    #~ @classmethod
-    #~ def get_title(self,rr):
-        #~ return _("Clients of %s") % rr.get_user()
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ qs = super(MyClients,self).get_request_queryset(ar)
-        #~ u = ar.get_user()
-        #~ qs = only_coached_by(qs,u)
-        #~ return qs
-#~ class MyClientsByGroup(MyClients):
-    #~ master_key = 'group'
-    #~ @classmethod
-    #~ def get_title(self,rr):
-        #~ return _("%(phase)s clients of %(user)s") % dict(
-          #~ phase=rr.master_instance, user=rr.get_user())
-# ~ class MyPrimaryClients(MyClients): # "Komplette Akten"
-    #~ label = _("Primary clients by coach")
-    #~ @classmethod
-    #~ def get_title(self,rr):
-        #~ return _("Primary clients of %s") % rr.master_instance
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ qs = super(MyPrimaryClients,self).get_request_queryset(ar)
-        #~ qs = qs.filter(coachings_by_client__primary=True).distinct()
-        #~ return qs
-#~ class MyActiveClients(MyClients):
-    #~ @classmethod
-    #~ def get_title(self,rr):
-        #~ return _("Active clients of %s") % rr.get_user()
-    #~ @classmethod
-    #~ def get_request_queryset(self,rr):
-        #~ qs = super(MyActiveClients,self).get_request_queryset(rr)
-        #~ qs = qs.filter(group__active=True)
-        #~ return qs
-# ~ if True: # dd.is_installed('pcsw'):
-#~ from lino.core.dbutils import models_by_abc
-#~ class InvalidClients(Clients):
 class ClientsTest(Clients):
     help_text = _(
         "Table of Clients whose data seems unlogical or inconsistent.")

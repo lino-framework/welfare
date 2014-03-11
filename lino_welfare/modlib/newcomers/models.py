@@ -250,7 +250,7 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
 
     #~ detail_layout = NewClientDetail()
 
-    column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id bank_account1 aid_type language:10 *"
+    column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id aid_type language:10 *"
 
     #~ @classmethod
     #~ def param_defaults(self,ar,**kw):
