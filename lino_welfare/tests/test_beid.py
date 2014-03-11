@@ -66,7 +66,7 @@ class BeIdTests(RemoteAuthTestCase):
         kw = dict()
         kw.update(card_number="123456789")
         kw.update(first_name="Jean Jacques")
-        kw.update(last_name="Jéffin")
+        kw.update(last_name="Jeffin")
         obj = Holder(**kw)
         obj.full_clean()
         obj.save()
@@ -85,7 +85,7 @@ class BeIdTests(RemoteAuthTestCase):
             'xcallback success message')
         self.assertEqual(result['success'], True)
         expected = """\
-Click OK to apply the following changes for JÉFFIN Jean Jacques (100) :\
+Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
 <br/>Place : None -> Place #1 (u\'Tallinn\')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
@@ -116,7 +116,7 @@ Click OK to apply the following changes for JÉFFIN Jean Jacques (100) :\
         self.assertEqual(result['success'], True)
         self.assertEqual(
             result['message'],
-            'Client "JÉFFIN Jean Jacques (100)" has been saved.')
+            'Client "JEFFIN Jean Jacques (100)" has been saved.')
         obj = pcsw.Client.objects.get(id=100)
         addr = pcsw.ClientAddress.objects.get(client=obj)
         self.assertEqual(addr.city, True)

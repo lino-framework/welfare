@@ -416,12 +416,11 @@ class Coachings(dd.Table):
         if ar.param_values.primary_coachings:
             yield unicode(self.parameters['primary_coachings'].verbose_name) + ' ' + unicode(ar.param_values.primary_coachings)
 
-    @classmethod
-    def get_create_permission(self, ar):
-        #~ logger.info("20121011 Coachings.get_create_permission()")
-        if not ar.get_user().coaching_type:
-            return
-        return super(Coachings, self).get_create_permission(ar)
+    # @classmethod
+    # def get_create_permission(self, ar):
+    #     if not ar.get_user().coaching_type:
+    #         return
+    #     return super(Coachings, self).get_create_permission(ar)
 
 
 class CoachingsByClient(Coachings):

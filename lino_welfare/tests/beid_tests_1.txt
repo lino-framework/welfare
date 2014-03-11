@@ -1,5 +1,5 @@
 reader: BE
-name: Jéffin
+name: Jeffin
 firstName: Jean
 middleName: Jacques
 nationality: Belge

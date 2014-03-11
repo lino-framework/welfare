@@ -49,7 +49,7 @@ class ClientAddress(contacts.AddressLocation):
     type = ClientAddressTypes.field(
         blank=True, null=True, editable=False)
     client = dd.ForeignKey('pcsw.Client', related_name='addresses_by_client')
-    remark = dd.CharField(_("Remark"), max_length=50, blank=True)
+    # remark = dd.CharField(_("Remark"), max_length=50, blank=True)
 
     primary = models.BooleanField(
         _("Primary"),
