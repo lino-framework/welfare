@@ -46,10 +46,10 @@ class ClientAddress(contacts.AddressLocation):
         verbose_name = _("Client Address")
         verbose_name_plural = _("Client Addresses")
 
-    type = ClientAddressTypes.field(
+    address_type = ClientAddressTypes.field(
         blank=True, null=True, editable=False)
     client = dd.ForeignKey('pcsw.Client', related_name='addresses_by_client')
-    # remark = dd.CharField(_("Remark"), max_length=50, blank=True)
+    remark = dd.CharField(_("Remark"), max_length=50, blank=True)
 
     primary = models.BooleanField(
         _("Primary"),
@@ -81,7 +81,7 @@ class ClientAddresses(dd.Table):
     model = 'pcsw.ClientAddress'
     required = dd.required(user_level='admin')
     detail_layout = dd.FormLayout("""
-    type remark
+    address_type remark
     country city zip_code
     addr1
     street street_no street_box
@@ -92,7 +92,7 @@ class ClientAddresses(dd.Table):
 class AddressesByClient(ClientAddresses):
     required = dd.required()
     master_key = 'client'
-    column_names = 'type:10 remark:10 address_column:30 primary:5'
+    column_names = 'address_type:10 remark:10 address_column:30 primary:5'
     label = _("Addresses")
     auto_fit_column_widths = True
 
