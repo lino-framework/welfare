@@ -118,7 +118,7 @@ class GDLoader(CsvLoader):
         try:
             current = Client.objects.get(gesdos_id=obj.gesdos_id)
             # dd.logger.info("Existing %s", obj)
-            for k in 'birth_date'.split():
+            for k in 'birth_date first_name last_name nationality'.split():
                 setattr(current, k, getattr(obj, k))
             obj = current
         except Client.DoesNotExist:
