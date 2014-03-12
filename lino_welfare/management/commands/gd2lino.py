@@ -37,17 +37,10 @@ from lino.utils.instantiator import Instantiator
 #~ from lino.modlib.users.models import UserProfiles
 
 from lino import dd
-
+from lino.utils import camelize
 
 from lino.core.dbutils import app_labels
 from lino.modlib.beid.mixins import BeIdCardTypes
-
-
-def camelize(s):
-    def f(k):
-        return k[0].upper() + k[1:].lower()
-    return ' '.join([f(k) for k in s.split()])
-
 
 
 
