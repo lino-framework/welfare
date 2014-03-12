@@ -43,6 +43,14 @@ from lino.core.dbutils import app_labels
 from lino.modlib.beid.mixins import BeIdCardTypes
 
 
+def camelize(s):
+    def f(k):
+        return k[0].upper() + k[1:].lower()
+    return ' '.join([f(k) for k in s.split()])
+
+
+
+
 class CsvLoader(object):
     field_sep = '\t'
     fields = None
@@ -94,6 +102,8 @@ class GDLoader(CsvLoader):
 
         aaaamm = kw.pop('aaaamm')
         kw['created'] = datetime.date(int(aaaamm[:4]), int(aaaamm[-2:]), 1)
+        kw['first_name'] = camelize(kw['first_name'])
+        kw['last_name'] = camelize(kw['last_name'])
 
         Country = dd.modules.countries.Country
         Client = dd.modules.pcsw.Client
@@ -124,8 +134,7 @@ class GDLoader(CsvLoader):
 
         obj.full_clean()
         obj.save()
-
-        dd.logger.debug("%s has been imported.", obj)
+        dd.logger.info("%s has been imported.", dd.obj2str(obj))
 
 
 class Command(BaseCommand):
