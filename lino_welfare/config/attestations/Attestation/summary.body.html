@@ -1,0 +1,30 @@
+{% set client=this.owner %}
+<p class="OurRef">
+{{tr(de="U. Zeichen", fr="Notre réf.")}}: {{ar.get_user().initials}}/{{client.get_primary_coach().initials}}/{{this.id}}
+</p>
+
+<h1>{{tr(de="Übersicht",fr="Résumé")}}</h1>
+
+<p class="EnhancedPar">
+{{client.get_full_name(nominative=True)}}
+<br>
+{{tr(de="INSS", fr="NISS")}}
+{{client.national_id}}
+<br>
+{{tr(de="wohnhaft zu", fr="domicilié" + client.mf("", "e", "(e)") + " à")}}
+{{', '.join(client.address_location_lines())}}
+</p>
+
+<p>
+{% for T in (lino.pcsw.CoachingsByClient, 
+   lino.pcsw.AddressesByClient) %}
+{{ar.show(T, client, header_level=2)}}
+{% endfor %}
+
+
+
+
+
+
+
+

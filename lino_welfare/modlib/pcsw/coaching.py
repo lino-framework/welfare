@@ -416,11 +416,16 @@ class Coachings(dd.Table):
         if ar.param_values.primary_coachings:
             yield unicode(self.parameters['primary_coachings'].verbose_name) + ' ' + unicode(ar.param_values.primary_coachings)
 
-    # @classmethod
-    # def get_create_permission(self, ar):
-    #     if not ar.get_user().coaching_type:
-    #         return
-    #     return super(Coachings, self).get_create_permission(ar)
+    @classmethod
+    def get_create_permission(self, ar):
+        """Reception clerks can see coachings, but cannot modify them nor add
+        new ones.
+
+        """
+        # if not ar.get_user().coaching_type:
+        if not ar.get_user().profile.coaching_level:
+            return False
+        return super(Coachings, self).get_create_permission(ar)
 
 
 class CoachingsByClient(Coachings):
