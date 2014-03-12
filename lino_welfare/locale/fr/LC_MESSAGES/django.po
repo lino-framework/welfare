@@ -5,17 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  lino.apps.dsbe\n"
+"Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 02:37+0100\n"
-"PO-Revision-Date: 2014-03-12 02:37+0100\n"
+"PO-Revision-Date: 2014-03-12 15:04+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: lino_welfare/models.py:64
 msgid "Notify me when a coach has been assigned"
@@ -43,8 +44,7 @@ msgstr "utilisable dans contrats"
 
 #: lino_welfare/models.py:121
 msgid ""
-"Whether Links of this type can be used as contact person of a job "
-"contract."
+"Whether Links of this type can be used as contact person of a job contract."
 msgstr ""
 
 #: lino_welfare/models.py:133
@@ -140,7 +140,8 @@ msgstr "Types d'aide sociale"
 #: lino_welfare/modlib/aids/models.py:89
 #: lino_welfare/modlib/courses/models.py:259
 #: lino_welfare/modlib/courses/models.py:473
-#: lino_welfare/modlib/cv/models.py:154 lino_welfare/modlib/debts/models.py:580
+#: lino_welfare/modlib/cv/models.py:154
+#: lino_welfare/modlib/debts/models.py:580
 #: lino_welfare/modlib/debts/models.py:658
 #: lino_welfare/modlib/jobs/models.py:223
 #: lino_welfare/modlib/jobs/models.py:248
@@ -269,7 +270,8 @@ msgid "Appointment"
 msgstr "Rendez-vous"
 
 #: lino_welfare/modlib/cal/models.py:196 lino_welfare/modlib/cbss/tx25.py:573
-#: lino_welfare/modlib/cbss/tx25.py:661 lino_welfare/modlib/debts/models.py:165
+#: lino_welfare/modlib/cbss/tx25.py:661
+#: lino_welfare/modlib/debts/models.py:165
 #: lino_welfare/modlib/jobs/models.py:1219
 #: lino_welfare/modlib/jobs/models.py:1315
 #: lino_welfare/modlib/jobs/models.py:1438
@@ -450,7 +452,8 @@ msgid "Using phonetic search"
 msgstr "Recherche phonétique"
 
 #: lino_welfare/modlib/cbss/models.py:1185
-#: lino_welfare/modlib/cbss/models.py:1573 lino_welfare/modlib/cbss/tx25.py:208
+#: lino_welfare/modlib/cbss/models.py:1573
+#: lino_welfare/modlib/cbss/tx25.py:208
 msgid "Parameters"
 msgstr "Paramètres"
 
@@ -1527,8 +1530,8 @@ msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:685
 msgid ""
-"Leave empty for simple debts, otherwise select         here the "
-"responsible bailiff or collection agency"
+"Leave empty for simple debts, otherwise select         here the responsible "
+"bailiff or collection agency"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:747
@@ -1588,8 +1591,7 @@ msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
 "checked, \n"
-"proportionally distributing the `Distributable amount` among the debtors."
-"\n"
+"proportionally distributing the `Distributable amount` among the debtors.\n"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:1244
@@ -2411,11 +2413,11 @@ msgstr "Quota nouvelles demandes"
 
 #: lino_welfare/modlib/notes/models.py:31
 msgid "Event/Note"
-msgstr ""
+msgstr "Observation"
 
 #: lino_welfare/modlib/notes/models.py:32
 msgid "Events/Notes"
-msgstr ""
+msgstr "Observations"
 
 #: lino_welfare/modlib/pcsw/__init__.py:26
 #: lino_welfare/modlib/pcsw/models.py:1557
@@ -2452,8 +2454,8 @@ msgstr "Adresses bénéficiaires"
 
 #: lino_welfare/modlib/pcsw/client_address.py:57
 msgid ""
-"There's at most one primary address per client.         Enabling this "
-"field will automatically make the other         addresses non-primary."
+"There's at most one primary address per client.         Enabling this field "
+"will automatically make the other         addresses non-primary."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/client_address.py:96
@@ -2518,8 +2520,8 @@ msgstr "Accompagné depuis"
 
 #: lino_welfare/modlib/pcsw/coaching.py:207
 msgid ""
-"There's at most one primary coach per client.         Enabling this field"
-" will automatically make the other         coachings non-primary."
+"There's at most one primary coach per client.         Enabling this field "
+"will automatically make the other         coachings non-primary."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/coaching.py:291
@@ -3321,4 +3323,3 @@ msgstr "Site"
 
 #~ msgid "exclusions"
 #~ msgstr "exclusions"
-
