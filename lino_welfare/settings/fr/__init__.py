@@ -36,7 +36,7 @@ class Site(Site):
         add('100', _("Integration Agent"),           'U U U U U _ _')
         add('110', _("Integration Agent (Manager)"), 'U M M M U _ _')
         add('200', _("Newcomers consultant"),        'U U U _ U U _')
-        add('210', _("Reception clerk"),             'U _ _ _ _ _ U')
+        add('210', _("Reception clerk"),             'U U _ _ _ _ U')
         add('400', _("Social agent"),                'U U U _ U _ _')
         add('410', _("Social agent (Manager)"),      'U M M _ U _ _')
         add('900', _("Administrator"),               'A A A A A A A',
