@@ -34,7 +34,6 @@ class Site(Site):
         # self.plugins.courses.configure(teacher_model='users.User')
         super(Site, self).setup_plugins()
 
-
     def get_default_language(self):
         return 'fr'
 

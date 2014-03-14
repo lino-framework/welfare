@@ -243,7 +243,7 @@ class RefuseClient(dd.ChangeStateAction):
 
 
 class Client(contacts.Person,
-             dd.BasePrintable,
+             # dd.BasePrintable,
              beid.BeIdCardHolder,
              attestations.Attestable):
 
@@ -378,7 +378,7 @@ class Client(contacts.Person,
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
 
-    def get_queryset(self):
+    def get_queryset(self, ar):
         return self.model.objects.select_related(
             #~ 'country','city','coach1','coach2','nationality')
             'country', 'city', 'nationality')
@@ -845,7 +845,8 @@ class ClientDetail(dd.FormLayout):
 
     calendar = dd.Panel("""
     # find_appointment
-    cal.EventsByProject
+    # cal.EventsByProject
+    cal.EventsByClient
     cal.TasksByProject
     """, label=_("Calendar"))
 

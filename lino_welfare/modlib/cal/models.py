@@ -22,6 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
 
+from django.db.models import Q
 
 from lino import dd
 
@@ -130,6 +131,31 @@ class Event(Event):
 
 #~ class MyEvents(MyEvents):
     #~ exclude = dict(state=EventStates.visit)
+
+
+class EventsByClient(Events):
+    """Events where project is this OR one participant is this.
+    """
+    required = dd.required(user_groups='office')
+    # master_key = 'project'
+    master = 'cal.Event'
+    auto_fit_column_widths = True
+    column_names = 'linked_date user summary workflow_buttons'
+    # column_names = 'when_text user summary workflow_buttons'
+
+    @classmethod
+    def get_queryset(self, ar):
+        mi = ar.master_instance
+        if mi is None:
+            return None
+        flt = Q(project=mi) | Q(guest__partner=mi)
+        qs = self.model.objects.filter(flt).distinct()
+        # logger.info("20140314 %s", qs.query)
+        return qs
+
+    @classmethod
+    def get_filter_kw(self, master_instance, **kw):
+        return kw  # tricky
 
 
 class Guest(Guest, attestations.Attestable):

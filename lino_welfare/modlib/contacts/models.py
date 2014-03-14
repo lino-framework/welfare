@@ -135,7 +135,7 @@ class Person(Partner, Person, mixins.Born):
     is_client = mti.EnableChild('pcsw.Client', verbose_name=_("is Client"),
                                 help_text=_("Whether this Person is a Client."))
 
-    def get_queryset(self):
+    def get_queryset(self, ar):
         return self.model.objects.select_related('country', 'city')
 
     def get_print_language(self):
