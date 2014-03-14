@@ -239,6 +239,7 @@ class Site(Site):
         yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # pcsw.demo creates clients needed by cbss.demo
+        yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.cv'
         yield 'lino_welfare.modlib.isip'

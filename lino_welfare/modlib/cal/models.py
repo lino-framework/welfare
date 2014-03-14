@@ -72,21 +72,28 @@ dd.inject_field('system.SiteConfig', 'team_guestrole',
                               related_name='team_guestroles',
                               blank=True, null=True))
 
-
 class Event(Event):
+
+    # course = models.ForeignKey(
+    #     "courses.Course", blank=True, null=True,
+    #     help_text=_("Fill in only if this event is a session of a course."))
 
     def get_calendar(self):
         if self.user is not None:
             return self.user.calendar
 
     def suggest_guests(self):
-        #~ print "20130722 suggest_guests"
+        "Will be called only when there are no Guests yet"
+        print "20140314 suggest_guests"
         for g in super(Event, self).suggest_guests():
             yield g
         if self.event_type is None:
             return
+
         Guest = dd.modules.cal.Guest
-        if self.event_type.invite_team_members:
+
+        if False:
+          if self.event_type.invite_team_members:
             ug = self.event_type.invite_team_members
             for obj in settings.SITE.modules.users.Membership.objects.filter(team=ug).exclude(user=self.user):
                 if obj.user.partner:
@@ -96,10 +103,6 @@ class Event(Event):
 
         if self.event_type.invite_client:
             if self.project is not None:
-                #~ if self.state == EventStates.visit:
-                    #~ st = GuestStates.present
-                #~ else:
-                    #~ st = GuestStates.accepted
                 st = GuestStates.accepted
                 yield Guest(event=self,
                             partner=self.project,

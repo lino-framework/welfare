@@ -260,7 +260,10 @@ class CompanyDetail(CompanyDetail):
     main = "general notes"
 
 # TODO: find a more elegant way to do this.
-if not dd.is_installed('courses'):
+# if not dd.is_installed('courses'):
+#     CompanyDetail.box5.replace('is_courseprovider', '')
+
+if not dd.modules.resolve('contacts.Company.is_courseprovider'):
     CompanyDetail.box5.replace('is_courseprovider', '')
 
 

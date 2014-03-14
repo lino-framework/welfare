@@ -110,50 +110,16 @@ class CourseProviderDetail(contacts.CompanyDetail):
     main = "general notes CourseOffersByProvider"
 
 
-#~ class CourseProviders(contacts.Companies):
 class CourseProviders(contacts.Companies):
 
     """
     List of Companies that have `Company.is_courseprovider` activated.
     """
     required = dd.required(user_groups='courses')
-    #~ required_user_level = UserLevel.manager
-    #~ hide_details = [Contact]
-    #~ use_as_default_table = False
-    #~ app_label = 'courses'
-    #~ label = _("Course providers")
     model = CourseProvider
     detail_layout = CourseProviderDetail()
-    #~ known_values = dict(is_courseprovider=True)
-    #~ filter = dict(is_courseprovider__exact=True)
-
-    #~ def create_instance(self,req,**kw):
-        #~ instance = super(CourseProviders,self).create_instance(req,**kw)
-        #~ instance.is_courseprovider = True
-        #~ return instance
 
 
-#
-# COURSE ENDINGS
-#
-#~ class CourseEnding(dd.Model):
-    #~ u"""
-    #~ Eine Kursbeendigung ist eine *Art und Weise, wie eine Kursanfrage beendet wurde*.
-    #~ Später können wir dann Statistiken machen, wieviele Anfragen auf welche Art und
-    #~ Weise beendet wurden.
-    #~ """
-    #~ class Meta:
-        #~ verbose_name = _("Course Ending")
-        #~ verbose_name_plural = _('Course Endings')
-    #~ name = models.CharField(_("designation"),max_length=200)
-    #~ def __unicode__(self):
-        #~ return unicode(self.name)
-#~ class CourseEndings(dd.Table):
-    #~ required_user_groups = ['courses']
-    #~ required_user_level = UserLevels.manager
-    #~ model = CourseEnding
-    #~ column_names = 'name *'
-    #~ order_by = ['name']
 class CourseContent(dd.Model):
 
     u"""
@@ -200,12 +166,16 @@ class CourseOffer(dd.Model):
     Der Titel des Kurses. Maximal 200 Zeichen.
     """
 
-    content = models.ForeignKey("courses.CourseContent")
+    guest_role = dd.ForeignKey(
+        "cal.GuestRole", blank=True, null=True,
+        help_text=_("Default guest role for particpants of events."))
+
+    content = dd.ForeignKey("courses.CourseContent")
     """
     Der Inhalt des Kurses (ein :class:`CourseContent`)
     """
 
-    provider = models.ForeignKey('courses.CourseProvider')
+    provider = dd.ForeignKey('courses.CourseProvider')
     #~ provider = models.ForeignKey(CourseProvider,
         #~ verbose_name=_("Course provider"))
     #~ """
@@ -217,17 +187,29 @@ class CourseOffer(dd.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.title, self.provider)
 
-    #~ @chooser()
-    #~ def provider_choices(cls):
-        #~ return CourseProviders.request().data_iterator
 
-    #~ @classmethod
-    #~ def setup_report(model,rpt):
-        #~ rpt.add_action(DirectPrintAction('candidates',_("List of candidates"),'candidates'))
+class CourseOffers(dd.Table):
+    required = dd.required(user_groups='courses')
+    model = CourseOffer
 
-    def get_print_language(self):
-        "Used by DirectPrintAction"
-        return settings.SITE.DEFAULT_LANGUAGE.django_code
+    insert_layout = """
+    provider
+    content
+    title
+    """
+    detail_layout = """
+    id:8 title content provider guest_role
+    description
+    CoursesByOffer
+    """
+
+
+class CourseOffersByProvider(CourseOffers):
+    master_key = 'provider'
+
+
+class CourseOffersByContent(CourseOffers):
+    master_key = 'content'
 
 
 class Course(dd.Model, mixins.Printable):
@@ -246,23 +228,22 @@ class Course(dd.Model, mixins.Printable):
 
     offer = models.ForeignKey("courses.CourseOffer")
 
-    title = models.CharField(max_length=200,
-                             blank=True,
-                             verbose_name=_("Name"))
+    title = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name=_("Name"))
 
     start_date = models.DateField(_("start date"))
 
-    #~ content = models.ForeignKey("courses.CourseContent",verbose_name=_("Course content"))
-
-    remark = models.CharField(max_length=200,
-                              blank=True,  # null=True,
-                              verbose_name=_("Remark"))
+    remark = models.CharField(
+        max_length=200,
+        blank=True,  # null=True,
+        verbose_name=_("Remark"))
     u"""
     Bemerkung über diesen konkreten Kurs. Maximal 200 Zeichen.
     """
 
     def __unicode__(self):
-        #~ s = u"%s %s (%s)" % (self._meta.verbose_name,self.pk,babel.dtos(self.start_date))
         s = dtos(self.start_date)
         if self.title:
             s += " " + self.title
@@ -276,15 +257,6 @@ class Course(dd.Model, mixins.Printable):
     print_participants = DirectPrintAction(
         label=_("List of participants"),
         tplname='participants')
-
-    #~ @classmethod
-    #~ def setup_report(model,rpt):
-        #~ rpt.add_action(DirectPrintAction('candidates',_("List of candidates"),'candidates'))
-        #~ rpt.add_action(DirectPrintAction('participants',_("List of participants"),'participants'))
-
-    def get_print_language(self):
-        "Used by DirectPrintAction"
-        return settings.SITE.DEFAULT_LANGUAGE.django_code
 
     def participants(self):
         u"""
@@ -307,37 +279,25 @@ class Courses(dd.Table):
     required = dd.required(user_groups='courses', user_level='admin')
     model = Course
     order_by = ['start_date']
+
+    insert_layout = """
+    start_date offer
+    title
+    """
+
     detail_layout = """
-    id:8 start_date offer title 
+    id:8 start_date offer title
     remark
     courses.ParticipantsByCourse
     courses.CandidatesByCourse
     """
 
 
+
 class CoursesByOffer(Courses):
     required = dd.required(user_groups='courses')
     master_key = 'offer'
     column_names = 'start_date * id'
-
-
-class CourseOffers(dd.Table):
-    required = dd.required(user_groups='courses')
-    #~ required_user_level = UserLevels.manager
-    model = CourseOffer
-    detail_layout = """
-    id:8 title content provider
-    description
-    CoursesByOffer
-    """
-
-
-class CourseOffersByProvider(CourseOffers):
-    master_key = 'provider'
-
-
-class CourseOffersByContent(CourseOffers):
-    master_key = 'content'
 
 
 class CourseRequestStates(dd.Workflow):
@@ -455,12 +415,11 @@ class CourseRequest(dd.Model):
 
     state = CourseRequestStates.field(default=CourseRequestStates.candidate)
 
-    course = models.ForeignKey("courses.Course", blank=True, null=True,
-                               verbose_name=_("Course found"))
-    u"""
-    Der Kurs, durch den diese Anfrage befriedigt wurde.
-    So lange dieses Feld leer ist, gilt die Anfrage als offen.
-    """
+    course = models.ForeignKey(
+        "courses.Course", blank=True, null=True,
+        help_text=_("The course which satisfies this request. "
+                    "Leave blank on open requests."),
+        verbose_name=_("Course found"))
 
     #~ """
     #~ The person's feedback about how satisfied she was.
@@ -731,7 +690,6 @@ class PendingCourseRequests(CourseRequests):
             yield t
 
 
-#~ MODULE_LABEL = _("Courses")
 def site_setup(self):
     pass
 
@@ -741,7 +699,7 @@ def setup_main_menu(site, ui, profile, m):
         m = m.add_menu("courses", Plugin.verbose_name)
         m.add_action(CourseProviders)
         m.add_action(CourseOffers)
-        #~ m.add_action(Courses)
+        # m.add_action('courses.ActiveCourses')
         m.add_action(PendingCourseRequests)
 
 
