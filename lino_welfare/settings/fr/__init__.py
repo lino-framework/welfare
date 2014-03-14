@@ -14,7 +14,8 @@ class Site(Site):
     demo_fixtures = """std few_languages props all_countries
     be demo cbss mini demo2 local """.split()
 
-    hidden_apps = 'debts courses'
+    # hidden_apps = 'debts courses'
+    hidden_apps = 'debts'
 
     def get_default_language(self):
         return 'fr'
