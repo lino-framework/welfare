@@ -699,30 +699,22 @@ class Study(CountryCity):
     class Meta:
         verbose_name = _("study or education")
         verbose_name_plural = _("Studies & education")
-    # ~ person = models.ForeignKey(settings.SITE.person_model) #,verbose_name=_("Person"))
     person = models.ForeignKey('pcsw.Client')
     type = models.ForeignKey(isip.StudyType)
-    content = models.CharField(max_length=200,
-                               blank=True,  # null=True,
-                               verbose_name=_("Study content"))
-    #~ content = models.ForeignKey(StudyContent,blank=True,null=True,verbose_name=_("Study content"))
+    content = models.CharField(
+        max_length=200,
+        blank=True,  # null=True,
+        verbose_name=_("Study content"))
 
     started = models.DateField(_("started"), blank=True, null=True)
     stopped = models.DateField(_("stopped"), blank=True, null=True)
-    #~ started = dd.MonthField(_("started"),blank=True,null=True)
-    #~ stopped = dd.MonthField(_("stopped"),blank=True,null=True)
-    #~ started = models.DateField(blank=True,null=True,verbose_name=_("started"))
-    #~ stopped = models.DateField(blank=True,null=True,verbose_name=_("stopped"))
-    #~ started = dd.MonthField(blank=True,null=True,verbose_name=_("started"))
-    #~ stopped = dd.MonthField(blank=True,null=True,verbose_name=_("stopped"))
     success = models.BooleanField(verbose_name=_("Success"), default=False)
     language = dd.ForeignKey("languages.Language", blank=True, null=True)
-    #~ language = dd.LanguageField(blank=True,null=True,verbose_name=_("Language"))
 
-    school = models.CharField(max_length=200,
-                              blank=True,  # null=True,
-                              verbose_name=_("School"))
-    #~ school = models.ForeignKey("contacts.Company",blank=True,null=True,verbose_name=_("School"))
+    school = models.CharField(
+        max_length=200,
+        blank=True,  # null=True,
+        verbose_name=_("School"))
 
     remarks = models.TextField(
         blank=True, null=True, verbose_name=_("Remarks"))

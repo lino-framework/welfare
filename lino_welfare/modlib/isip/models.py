@@ -592,25 +592,33 @@ class Contract(ContractBase):
         verbose_name = _("ISIP")
         verbose_name_plural = _("ISIPs")
 
-    type = models.ForeignKey("isip.ContractType",
-                             related_name="%(app_label)s_%(class)s_set_by_type",
-                             verbose_name=_("Contract Type"), blank=True)
+    type = models.ForeignKey(
+        "isip.ContractType",
+        related_name="%(app_label)s_%(class)s_set_by_type",
+        verbose_name=_("Contract Type"), blank=True)
 
-    stages = dd.RichTextField(_("stages"),
-                              blank=True, null=True, format='html')
-    goals = dd.RichTextField(_("goals"),
-                             blank=True, null=True, format='html')
-    duties_asd = dd.RichTextField(_("duties ASD"),
-                                  blank=True, null=True, format='html')
-    duties_dsbe = dd.RichTextField(_("duties DSBE"),
-                                   blank=True, null=True, format='html')
-    duties_company = dd.RichTextField(_("duties company"),
-                                      blank=True, null=True, format='html')
-    duties_person = dd.RichTextField(_("duties person"),
-                                     blank=True, null=True, format='html')
+    stages = dd.RichTextField(
+        _("stages"),
+        blank=True, null=True, format='html')
+    goals = dd.RichTextField(
+        _("goals"),
+        blank=True, null=True, format='html')
+    duties_asd = dd.RichTextField(
+        _("duties ASD"),
+        blank=True, null=True, format='html')
+    duties_dsbe = dd.RichTextField(
+        _("duties DSBE"),
+        blank=True, null=True, format='html')
+    duties_company = dd.RichTextField(
+        _("duties company"),
+        blank=True, null=True, format='html')
+    duties_person = dd.RichTextField(
+        _("duties person"),
+        blank=True, null=True, format='html')
 
-    hidden_columns = (ContractBase.hidden_columns
-                      + " stages goals duties_asd duties_dsbe duties_company duties_person")
+    hidden_columns = (
+        ContractBase.hidden_columns
+        + " stages goals duties_asd duties_dsbe duties_company duties_person")
 
     study_type = models.ForeignKey('isip.StudyType', blank=True, null=True)
 
