@@ -1,7 +1,8 @@
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
-from lino_welfare.settings import *
+from ..base import *
+
 
 class Site(Site):
 
@@ -13,17 +14,11 @@ class Site(Site):
     demo_fixtures = """std few_languages props all_countries
     be demo cbss mini demo2 local """.split()
 
-    # hidden_apps = 'debts courses'
-    hidden_apps = 'debts'
-
-    def get_installed_apps(self):
-        for a in super(Site, self).get_installed_apps():
-            if a == 'lino_welfare.modlib.courses':
-                yield 'lino.modlib.courses'
-            elif a == 'lino_welfare.modlib.pcsw':
-                yield 'lino_welfare.settings.fr.pcsw'
-            else:
-                yield a
+    def get_apps_modifiers(self, **kw):
+        kw.update(debts=None)
+        kw.update(courses='lino.modlib.courses')
+        kw.update(pcsw='lino_welfare.settings.chatelet.pcsw')
+        return kw
 
     def setup_plugins(self):
         """
@@ -34,13 +29,13 @@ class Site(Site):
         # self.plugins.courses.configure(teacher_model='users.User')
         super(Site, self).setup_plugins()
 
-    def get_default_language(self):
-        return 'fr'
+    # def get_default_language(self):
+    #     return 'fr'
 
     def setup_choicelists(self):
         """
         This defines default user profiles for
-        :mod:`lino_welfare.settings.fr`.
+        :mod:`lino_welfare.settings.chatelet`.
         """
 
         # must import it to activate workflows:

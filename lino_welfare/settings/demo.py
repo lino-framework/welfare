@@ -1,7 +1,7 @@
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
-from lino_welfare.settings import *
+from .base import *
 
 
 class Site(Site):
