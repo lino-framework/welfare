@@ -1332,3 +1332,9 @@ def doit(a, b):
     return '1.1.11'
 
 
+def migrate_from_1_1_11(globals_dict):
+    
+    courses_CourseContent = resolve_model('courses.Topic')
+    globals_dict.update(courses_CourseContent=courses_CourseContent)
+
+    return '1.1.12'
