@@ -1333,7 +1333,14 @@ def doit(a, b):
 
 
 def migrate_from_1_1_11(globals_dict):
-    "Migration for chatelet"
+    """Migration for chatelet
+
+    - course providers are companies
+    - pupils are clients
+    - courses.Line replaces courses.CourseOffer
+    - courses.Topic replaces courses.CourseContent
+
+    """
     # contacts_Company = resolve_model('contacts.Company')
     def create_courses_courseprovider(company_ptr_id):
         # return contacts_Company.objects.get(id=company_ptr_id)
@@ -1345,6 +1352,10 @@ def migrate_from_1_1_11(globals_dict):
     
     courses_CourseContent = resolve_model('courses.Topic')
     globals_dict.update(courses_CourseContent=courses_CourseContent)
+
+    courses_CourseOffer = resolve_model('courses.Line')
+    globals_dict.update(courses_CourseOffer=courses_CourseOffer)
+
     globals_dict.update(courses_Teacher=resolve_model('contacts.Person'))
     globals_dict.update(courses_Pupil=resolve_model('pcsw.Client'))
 
