@@ -1347,6 +1347,7 @@ def migrate_from_1_1_11(globals_dict):
     globals_dict.update(create_courses_course=noop)
     globals_dict.update(create_courses_courserequest=noop)
     globals_dict.update(create_humanlinks_link=noop)
+    globals_dict.update(create_uploads_upload=noop)
 
     courses_CourseOffer = resolve_model('courses.Line')
     def create_courses_courseoffer(id, title, content_id, provider_id, description):
