@@ -1333,11 +1333,18 @@ def doit(a, b):
 
 
 def migrate_from_1_1_11(globals_dict):
+    "Migration for chatelet"
+    # contacts_Company = resolve_model('contacts.Company')
+    def create_courses_courseprovider(company_ptr_id):
+        # return contacts_Company.objects.get(id=company_ptr_id)
+        return None
+    globals_dict.update(
+        create_courses_courseprovider=create_courses_courseprovider)
+    # globals_dict.update(
+    #     courses_CourseProvider=resolve_model('contacts.Company'))
     
     courses_CourseContent = resolve_model('courses.Topic')
     globals_dict.update(courses_CourseContent=courses_CourseContent)
-    globals_dict.update(
-        courses_CourseProvider=resolve_model('contacts.Company'))
     globals_dict.update(courses_Teacher=resolve_model('contacts.Person'))
     globals_dict.update(courses_Pupil=resolve_model('pcsw.Client'))
 
