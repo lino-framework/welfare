@@ -34,6 +34,10 @@ class Site(Site):
     def get_default_language(self):
         return 'de'
 
+    def get_apps_modifiers(self, **kw):
+        kw = super(Site, self).get_apps_modifiers(**kw)
+        kw.update(badges=None)  # remove the badges app
+        return kw
 
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'

@@ -863,9 +863,10 @@ class ClientDetail(dd.FormLayout):
     # health = dd.Panel("""
     # """, label=_("Health"))
 
+    # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
     jobs.StudiesByPerson
-    jobs.TrainingsByPerson
+    # jobs.TrainingsByPerson
     jobs.ExperiencesByPerson:40
     """, label=_("Career"))
 
@@ -874,13 +875,10 @@ class ClientDetail(dd.FormLayout):
     courses.CourseRequestsByPerson
     """, label=_("Languages"))
 
-    competences = dd.Panel(
-        """
-        cv.SkillsByPerson cv.SoftSkillsByPerson skills
-        cv.ObstaclesByPerson obstacles
-        """,
-        label=_("Competences"),
-        required=dict(user_groups='integ'))
+    competences = dd.Panel("""
+    cv.SkillsByPerson cv.SoftSkillsByPerson skills
+    cv.ObstaclesByPerson obstacles badges.AwardsByHolder
+    """, label=_("Competences"), required=dict(user_groups='integ'))
 
     jobs = dd.Panel("""
     jobs.CandidaturesByPerson

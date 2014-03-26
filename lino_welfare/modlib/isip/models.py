@@ -171,7 +171,6 @@ class ContractEndings(dd.Table):
 # add('30', _("Master"), 'master')
 
 
-
 class StudyRegimes(dd.ChoiceList):
     verbose_name = _("Study Regime")
 add = StudyRegimes.add_item

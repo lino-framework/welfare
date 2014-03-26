@@ -31,5 +31,28 @@ class ClientDetail(ClientDetail):
     courses.EnrolmentsByPupil
     """, label=_("Languages"))
 
+    career = dd.Panel("""
+    jobs.StudiesByPerson
+    jobs.TrainingsByPerson
+    jobs.ExperiencesByPerson:40
+    """, label=_("Career"))
+
+    competences = dd.Panel(
+        "good_panel bad_panel",
+        label=_("Competences"),
+        required=dict(user_groups='integ'))
+    good_panel = """
+    cv.SkillsByPerson cv.SoftSkillsByPerson
+    badges.AwardsByHolder skills
+    """
+
+    bad_panel = """
+    cv.ObstaclesByPerson
+    obstacles
+    """
+
+
+
+
 
 Clients.detail_layout = ClientDetail()

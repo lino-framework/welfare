@@ -15,7 +15,10 @@ class Site(Site):
     be demo cbss mini demo2 local """.split()
 
     def get_apps_modifiers(self, **kw):
-        kw.update(debts=None)
+        kw = super(Site, self).get_apps_modifiers(**kw)
+        kw.update(debts=None)  # remove whole app
+        kw.update(sepa=None)  # remove whole app
+        # alternative implementations
         kw.update(courses='lino.modlib.courses')
         kw.update(pcsw='lino_welfare.settings.chatelet.pcsw')
         return kw
