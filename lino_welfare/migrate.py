@@ -1347,14 +1347,20 @@ def migrate_from_1_1_11(globals_dict):
         return None
     globals_dict.update(
         create_courses_courseprovider=create_courses_courseprovider)
-    # globals_dict.update(
-    #     courses_CourseProvider=resolve_model('contacts.Company'))
-    
-    courses_CourseContent = resolve_model('courses.Topic')
-    globals_dict.update(courses_CourseContent=courses_CourseContent)
 
     courses_CourseOffer = resolve_model('courses.Line')
-    globals_dict.update(courses_CourseOffer=courses_CourseOffer)
+    def create_courses_courseoffer(id, title, content_id, provider_id, description):
+        kw = dict()
+        kw.update(id=id)
+        kw.update(name=title)
+        kw.update(topic_id=content_id)
+        # kw.update(provider_id=provider_id)
+        kw.update(description=description)
+        return courses_CourseOffer(**kw)
+    globals_dict.update(create_courses_courseoffer=create_courses_courseoffer)
+
+    courses_CourseContent = resolve_model('courses.Topic')
+    globals_dict.update(courses_CourseContent=courses_CourseContent)
 
     globals_dict.update(courses_Teacher=resolve_model('contacts.Person'))
     globals_dict.update(courses_Pupil=resolve_model('pcsw.Client'))
