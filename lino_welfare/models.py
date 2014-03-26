@@ -37,7 +37,7 @@ properties = dd.resolve_app('properties')
 countries = dd.resolve_app('countries')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
-uploads = dd.resolve_app('uploads')
+# uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
@@ -315,23 +315,23 @@ def site_setup(site):
     countries.PlacesByCountry jobs.StudiesByCountry
     """)
 
-    site.modules.uploads.Uploads.set_detail_layout("""
-    file user
-    type description valid_until
-    # person company
-    # reminder_date reminder_text delay_value delay_type reminder_done
-    modified created owner
-    cal.TasksByController
-    # show_date show_time 
-    # show_date time timestamp
-    """)
+    # site.modules.uploads.Uploads.set_detail_layout("""
+    # file user
+    # type description valid_until
+    # # person company
+    # # reminder_date reminder_text delay_value delay_type reminder_done
+    # modified created owner
+    # cal.TasksByController
+    # # show_date show_time 
+    # # show_date time timestamp
+    # """)
 
-    site.modules.uploads.Uploads.set_insert_layout("""
-    file user
-    type valid_until
-    description
-    # owner
-    """, window_size=(60, 'auto'))
+    # site.modules.uploads.Uploads.set_insert_layout("""
+    # file user
+    # type valid_until
+    # description
+    # # owner
+    # """, window_size=(60, 'auto'))
 
     site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
     site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())

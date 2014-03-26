@@ -171,6 +171,14 @@ class ContractEndings(dd.Table):
 # add('30', _("Master"), 'master')
 
 
+
+class StudyRegimes(dd.ChoiceList):
+    verbose_name = _("Study Regime")
+add = StudyRegimes.add_item
+add('S', _("Studies"), 'studies')
+add('T', _("Trainings"), 'trainings')
+
+
 class EducationLevel(dd.BabelNamed, dd.Sequenced):
 
     class Meta:
@@ -195,6 +203,7 @@ class StudyType(dd.BabelNamed):
         verbose_name = _("Study Type")
         verbose_name_plural = _("Study Types")
 
+    study_regime = StudyRegimes.field(default=StudyRegimes.studies)
     # level = EducationLevels.field(blank=True)
     education_level = dd.ForeignKey(
         EducationLevel,
@@ -207,8 +216,9 @@ class StudyTypes(dd.Table):
     model = StudyType
     order_by = ["name"]
     detail_layout = """
-    name education_level id
+    name study_regime education_level id
     ContractsByStudyType
+    jobs.StudiesByType
     """
 
     insert_layout = """

@@ -1,4 +1,4 @@
-from lino_welfare.settings.fr import *
+from ..chatelet import *
 
 SITE = Site(globals())
 

@@ -176,7 +176,7 @@ class Site(Site):
         #~ 'lino.modlib.projects'
         #~ 'lino.modlib.notes',
         #~ 'lino.modlib.links',
-        yield 'lino.modlib.uploads'
+        yield 'lino_welfare.modlib.uploads'
         #~ 'lino.modlib.thirds'
         yield 'lino.modlib.outbox'
         yield 'lino.modlib.extensible'

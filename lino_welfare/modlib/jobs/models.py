@@ -47,23 +47,14 @@ from lino import dd
 #~ from lino import layouts
 #~ from lino.core import perms
 from lino.utils import dblogger
-#~ from lino.utils import printable
 from lino import mixins
 
-#~ from lino.modlib.contacts import models as contacts
-#~ from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
-#~ from lino.modlib.uploads import models as uploads
-# ~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
-#~ from lino.modlib.uploads.models import UploadsByPerson
+from lino.utils.xmlgen.html import E
+
 from lino.core.dbutils import get_field
 from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
-#~ from north import babel
-#~ from lino.utils.choicelists import UserLevel
-#~ from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction
-#~ from lino.mixins.reminder import ReminderEntry
 
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
@@ -73,8 +64,9 @@ notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
 pcsw = dd.resolve_app('pcsw')
+cv = dd.resolve_app('cv')
 
-from lino_welfare.modlib.jobs import Plugin
+# from lino_welfare.modlib.jobs import Plugin
 
 
 class Schedule(dd.BabelNamed):
@@ -170,7 +162,7 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 # CONTRACT TYPES
 #
-class ContractType(mixins.PrintableType, dd.BabelNamed):
+class ContractType(dd.PrintableType, dd.BabelNamed):
 
     """
     This is the homologue of 
@@ -584,7 +576,7 @@ class MyContracts(Contracts):
         return kw
 
 
-class JobType(mixins.Sequenced):
+class JobType(dd.Sequenced):
 
     """
     The list of Job Types is used for statistical analysis, 
@@ -673,41 +665,18 @@ class Offers(dd.Table):
     ExperiencesByOffer CandidaturesByOffer
     """
 
-
-class HistoryByPerson(dd.Table):
-    required = dd.required(user_groups='integ')
-    master_key = 'person'
-    order_by = ["started"]
-
-    @classmethod
-    def create_instance(self, req, **kw):
-        obj = super(HistoryByPerson, self).create_instance(req, **kw)
-        if obj.person is not None:
-            previous_exps = self.model.objects.filter(
-                person=obj.person).order_by('started')
-            if previous_exps.count() > 0:
-                exp = previous_exps[previous_exps.count() - 1]
-                if exp.stopped:
-                    obj.started = exp.stopped
-                else:
-                    obj.started = exp.started
-        return obj
-
-
-class Study(CountryCity):
+class Study(cv.PersonHistoryEntry, CountryCity):
 
     class Meta:
         verbose_name = _("study or education")
         verbose_name_plural = _("Studies & education")
-    person = models.ForeignKey('pcsw.Client')
-    type = models.ForeignKey(isip.StudyType)
+    study_regime = isip.StudyRegimes.field(default=isip.StudyRegimes.studies)
+    type = models.ForeignKey('isip.StudyType')
     content = models.CharField(
         max_length=200,
         blank=True,  # null=True,
         verbose_name=_("Study content"))
 
-    started = models.DateField(_("started"), blank=True, null=True)
-    stopped = models.DateField(_("stopped"), blank=True, null=True)
     success = models.BooleanField(verbose_name=_("Success"), default=False)
     language = dd.ForeignKey("languages.Language", blank=True, null=True)
 
@@ -722,12 +691,17 @@ class Study(CountryCity):
     def __unicode__(self):
         return unicode(self.type)
 
+    @dd.chooser()
+    def type_choices(self, study_regime):
+        M = dd.resolve_model('isip.StudyType')
+        return M.objects.filter(study_regime=study_regime)
+
 
 class Studies(dd.Table):
 
     "General list of Studies (all Persons)"
     required = dd.required(user_groups='integ', user_level='manager')
-    model = Study
+    model = 'jobs.Study'
     order_by = "country city type content".split()
 
 
@@ -744,28 +718,49 @@ class StudiesByPlace(Studies):
     """
     required = dd.required(user_groups='integ')
     master_key = 'city'
-    column_names = 'school type person content started stopped success language  remarks *'
+    column_names = 'school type person content started stopped '
+    'success language  remarks *'
 
 
-class StudiesByPerson(HistoryByPerson):
+class StudiesByType(Studies):
+
     required = dd.required(user_groups='integ')
-    help_text = _("List of studies for a given person.")
-    model = Study
-    #~ label = _("Studies & experiences")
-    #~ button_label = _("Studies")
-    column_names = 'type content started stopped country city success language school remarks *'
+    master_key = 'type'
+    column_names = 'school person content started stopped \
+    success language  remarks *'
 
 
-class Experience(SectorFunction):
+class StudiesByPerson(cv.HistoryByPerson, Studies):
+    "List of studies for a given client."
+    _study_regime = isip.StudyRegimes.studies
+    required = dd.required(user_groups='integ')
+    column_names = 'type content started stopped country '
+    'city success language school remarks *'
+    # _study_regime = None
+
+    @classmethod
+    def get_known_values(self):
+        return dict(study_regime=self._study_regime)
+
+    @classmethod
+    def get_actor_label(self):
+        if self._study_regime is not None:
+            return self._study_regime.text
+        return self._label or self.__name__
+
+
+class TrainingsByPerson(StudiesByPerson):
+    "Just like :class:`StudiesByPerson`, but with different study_regime"
+    _study_regime = isip.StudyRegimes.trainings
+
+
+class Experience(cv.PersonHistoryEntry, SectorFunction):
 
     class Meta:
         verbose_name = _("Job Experience")
         verbose_name_plural = _("Job Experiences")
         get_latest_by = 'started'
 
-    #~ person = models.ForeignKey(settings.SITE.person_model,verbose_name=_("Person"))
-    person = models.ForeignKey('pcsw.Client')
-    #~ company = models.ForeignKey("contacts.Company",verbose_name=_("Company"))
     company = models.CharField(max_length=200, verbose_name=_("company"))
     #~ type = models.ForeignKey(JobType,verbose_name=_("job type"))
     title = models.CharField(
@@ -773,11 +768,6 @@ class Experience(SectorFunction):
     country = models.ForeignKey("countries.Country",
                                 blank=True, null=True,
                                 verbose_name=_("Country"))
-
-    #~ started = dd.MonthField(_("started"),blank=True,null=True)
-    #~ stopped = dd.MonthField(_("stopped"),blank=True,null=True)
-    started = models.DateField(_("started"), blank=True, null=True)
-    stopped = models.DateField(_("stopped"), blank=True, null=True)
 
     remarks = models.TextField(
         blank=True, null=True, verbose_name=_("Remarks"))
@@ -797,11 +787,10 @@ class ExperiencesByFunction(Experiences):
     order_by = ["started"]
 
 
-class ExperiencesByPerson(Experiences, HistoryByPerson):
+class ExperiencesByPerson(cv.HistoryByPerson, Experiences):
 
     "List of job experiences for a known person"
     required = dd.required(user_groups='integ')
-    #~ model = Experience
     column_names = "company started stopped title sector function country remarks"
 
 
@@ -1291,7 +1280,6 @@ class OldJobsOverview(dd.EmptyTable):
         #~ assert type(html) == type('')
         return html
 
-from lino.utils.xmlgen.html import E
 
 
 class JobsOverviewByType(Jobs):
@@ -1475,45 +1463,3 @@ if True:  # dd.is_installed('contacts') and dd.is_installed('jobs'):
         """Whether this Company is also a Job Provider."""
                     )
 
-#~ from lino_welfare.modlib.integ import Plugin
-
-#~ INTEG_MODULE_LABEL = _(Plugin.verbose_name)
-
-
-def unused_setup_main_menu(site, ui, profile, m):
-    #~ if user.profile.integ_level < UserLevels.user:
-        #~ return
-    m = m.add_menu("integ", INTEG_MODULE_LABEL)
-    m.add_action(MyContracts)
-    m.add_action(JobProviders)
-    m.add_action(Jobs)
-    m.add_action(Offers)
-    m.add_action(JobsOverview)
-    #~ m.add_action(JobsOverview3)
-    #~ m.add_action(ContractsSearch)
-
-#~ def setup_my_menu(site,ui,user,m):
-    #~ m.add_action(MyContracts)
-
-
-def unused_setup_config_menu(site, ui, profile, m):
-    #~ if user.profile.integ_level < UserLevels.manager:
-        #~ return
-    m = m.add_menu("integ", INTEG_MODULE_LABEL)
-    #~ m  = m.add_menu("jobs",MODULE_LABEL)
-    m.add_action(ContractTypes)
-    m.add_action(JobTypes)
-    m.add_action(Sectors)
-    m.add_action(Functions)
-    m.add_action(Schedules)
-    m.add_action(Regimes)
-
-
-def unused_setup_explorer_menu(site, ui, profile, m):
-    #~ if user.profile.integ_level < UserLevels.manager:
-        #~ return
-    m = m.add_menu("integ", INTEG_MODULE_LABEL)
-    #~ m  = m.add_menu("jobs",MODULE_LABEL)
-    m.add_action(Contracts)
-    m.add_action(Candidatures)
-    m.add_action(Studies)

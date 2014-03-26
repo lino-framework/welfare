@@ -748,7 +748,7 @@ class ClientDetail(dd.FormLayout):
     """
     #~ actor = 'contacts.Person'
 
-    main = "general contact coaching aids_tab work_tab education languages \
+    main = "general contact coaching aids_tab work_tab career languages \
     competences jobs contracts history calendar misc"
 
     general = dd.Panel("""
@@ -774,7 +774,7 @@ class ClientDetail(dd.FormLayout):
 
     contact = dd.Panel("""
     pcsw.AddressesByClient \
-    humanlinks.ParentsByHuman humanlinks.ChildrenByHuman
+    #humanlinks.ParentsByHuman humanlinks.ChildrenByHuman
     pcsw.ContactsByClient
     """, label=_("Contact"))
 
@@ -792,14 +792,15 @@ class ClientDetail(dd.FormLayout):
 
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
-    needs_residence_permit needs_work_permit 
+    needs_residence_permit needs_work_permit
     residence_permit work_permit driving_licence
-    uploads.UploadsByController
+    # uploads.UploadsByController
+    uploads.UploadsByClient
     """)  # ,label = _("Papers"))
 
     work_tab = dd.Panel("""
     suche:40  papers:40
-    """, label=_("Work"))
+    """, label=_("Job search"))
 
     aids_tab = dd.Panel("""
     status:55 income:25
@@ -859,10 +860,14 @@ class ClientDetail(dd.FormLayout):
     contacts.RolesByPerson:20 households.MembersByPerson:40
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
-    education = dd.Panel("""
+    # health = dd.Panel("""
+    # """, label=_("Health"))
+
+    career = dd.Panel("""
     jobs.StudiesByPerson
+    jobs.TrainingsByPerson
     jobs.ExperiencesByPerson:40
-    """, label=_("Education"))
+    """, label=_("Career"))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson

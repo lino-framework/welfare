@@ -33,6 +33,40 @@ from north.dbutils import babelattr
 
 from lino.modlib.properties import models as properties
 
+config = dd.apps.cv
+
+
+class PersonHistoryEntry(dd.Model):
+    "Base class for jobs.Study, jobs.Experience"
+    class Meta:
+        abstract = True
+
+    person = models.ForeignKey(config.person_model)
+    started = models.DateField(_("started"), blank=True, null=True)
+    stopped = models.DateField(_("stopped"), blank=True, null=True)
+
+
+class HistoryByPerson(dd.Table):
+    """Abstract base class for :class:`StudiesByPerson` and
+    :class:`ExperiencesByPerson`
+
+    """
+    master_key = 'person'
+    order_by = ["started"]
+
+    @classmethod
+    def create_instance(self, req, **kw):
+        obj = super(HistoryByPerson, self).create_instance(req, **kw)
+        if obj.person is not None:
+            previous_exps = self.model.objects.filter(
+                person=obj.person).order_by('started')
+            if previous_exps.count() > 0:
+                exp = previous_exps[previous_exps.count() - 1]
+                if exp.stopped:
+                    obj.started = exp.stopped
+                else:
+                    obj.started = exp.started
+        return obj
 
 
 class CefLevel(dd.ChoiceList):
@@ -309,5 +343,5 @@ customize_siteconfig()
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("cv", _("CV"))
+    m = m.add_menu("cv", config.verbose_name)
     m.add_action(LanguageKnowledges)
