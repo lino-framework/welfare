@@ -1341,12 +1341,10 @@ def migrate_from_1_1_11(globals_dict):
     - courses.Topic replaces courses.CourseContent
 
     """
-    # contacts_Company = resolve_model('contacts.Company')
-    def create_courses_courseprovider(company_ptr_id):
-        # return contacts_Company.objects.get(id=company_ptr_id)
+    def noop(*args):
         return None
-    globals_dict.update(
-        create_courses_courseprovider=create_courses_courseprovider)
+    globals_dict.update(create_courses_courseprovider=noop)
+    globals_dict.update(create_courses_course=noop)
 
     courses_CourseOffer = resolve_model('courses.Line')
     def create_courses_courseoffer(id, title, content_id, provider_id, description):
