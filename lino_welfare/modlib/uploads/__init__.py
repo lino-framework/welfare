@@ -20,4 +20,4 @@ from lino.modlib.uploads import Plugin
 
 class Plugin(Plugin):
 
-    extends_models = ['uploads.Upload']
+    extends_models = ['uploads.UploadType', 'uploads.Upload']

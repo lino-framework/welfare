@@ -27,9 +27,36 @@ from lino import dd
 from lino.modlib.uploads.models import *
 
 cal = dd.resolve_app('cal')
+contacts = dd.resolve_app('contacts')
 
 
-class Upload(Upload):
+class UploadType(UploadType):
+    warn_expiry_unit = cal.Recurrencies.field(
+        _("Expiry warning (unit)"),
+        default=cal.Recurrencies.monthly,
+        blank=True)  # iCal:DURATION
+    warn_expiry_value = models.IntegerField(
+        _("Expiry warning (value)"),
+        default=2)
+
+
+class UploadTypes(UploadTypes):
+
+    detail_layout = """
+    name id
+    warn_expiry_value warn_expiry_unit
+    # company contact_person contact_role
+    UploadsByType
+    """
+
+    insert_layout = """
+    name
+    warn_expiry_value warn_expiry_unit
+    # company contact_person contact_role
+    """
+
+
+class Upload(Upload, contacts.ContactRelated):
 
     client = dd.ForeignKey(
         'pcsw.Client',
@@ -43,6 +70,14 @@ class Upload(Upload):
         blank=True, null=True,
         verbose_name=_("Valid until"))
 
+    remark = models.TextField(_("Remark"), blank=True)
+
+    # def on_create(self, ar):
+    #     super(Upload, self).on_create(ar)
+    #     if self.type:
+    #         for k in ('company', 'contact_person', 'contact_role'):
+    #             setattr(self, k, getattr(self.type, k))
+
     def save(self, *args, **kw):
         super(Upload, self).save(*args, **kw)
         if isinstance(self.owner, dd.modules.pcsw.Client):
@@ -53,11 +88,15 @@ class Upload(Upload):
         """Overrides :meth:`lino.core.model.Model.update_reminders`.
 
         """
+        ut = self.type
+        if not ut.warn_expiry_unit:
+            return
         cal.update_reminder(
             1, self, self.user,
             self.valid_until,
-            _("%s expires") % self.type,
-            2, cal.DurationUnits.months)
+            _("%s expires") % unicode(ut),
+            ut.warn_expiry_value,
+            ut.warn_expiry_unit)
 
     # def update_owned_instance(self, controllable):
     #     super(Upload, self).update_owned_instance(controllable)
@@ -68,10 +107,11 @@ class Upload(Upload):
 class UploadDetail(dd.FormLayout):
 
     main = """
-    user client
+    user client id
     type description valid_from valid_until
+    company contact_person contact_role
     file owner
-    cal.TasksByController
+    remark cal.TasksByController
     """
 
 
