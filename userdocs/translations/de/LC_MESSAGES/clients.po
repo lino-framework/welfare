@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-03-31 22:49+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -93,52 +93,52 @@ msgstr ""
 msgid "Parents (view)"
 msgstr ""
 
-# d644b2e92d8e4286b86a1e233d08410a
+# 90a728200e954dd484039c0ffdaf1aa7
 #: ../clients.rst:0
-msgid "Children (view)"
+msgid "Dependent persons (view)"
 msgstr ""
 
-# e1732fbf8c684a9498fb9b0bcd344191
+# c257380e22b44bc19b01442854110246
 #: None:2
 msgid "Client (model in pcsw)"
 msgstr ""
 
-# 3006ffbd6401475daaa74f455327d0e1
+# a41c286f4f014fb8911a8aeb9e23305e
 #: None:2
 msgid "Client Contact (model in pcsw)"
 msgstr ""
 
-# 5db467b9758641cd931f355f74a635ec
+# 913c918797d44e63a1d994b67b9c1313
 #: None:2
 msgid "Client Contact type (model in pcsw)"
 msgstr ""
 
-# a545d9992d4144f5a4193ee15de20cbb
+# 0dbea724bec14e9a9c42e2845c74958b
 #: None:2
 msgid "Client Address (model in pcsw)"
 msgstr ""
 
-# deb5aa6d32e240e5aafb05583ceb93eb
+# 176a4e3084f249a9b6863919e38ba38d
 #: None:2
 msgid "Coaching (model in pcsw)"
 msgstr ""
 
-# 8df5c5fc8b43463b9caf79fb07d50f52
+# b58a33377ff44f2ab934b47ddcbe3572
 #: None:2
 msgid "Coaching type (model in pcsw)"
 msgstr ""
 
-# 47a025292a974d8796b55006e2833d97
+# d8fa94a5eeba4ffba44d0e9406bece02
 #: None:2
 msgid "Reason of termination (model in pcsw)"
 msgstr ""
 
-# 303814c3ebbe4ce3ab1d30ce665afed1
+# 8837825c504543aa80d2c85d850a0ad1
 #: None:2
 msgid "aid type (model in pcsw)"
 msgstr ""
 
-# 739e1821058b46f38d1bbbb3667745c5
+# c3e93dbf79d74ce28eb2df4efc98f4c3
 #: None:2
 msgid "Integration Phase (model in pcsw)"
 msgstr ""
@@ -205,5 +205,9 @@ msgstr ""
 
 # 6c6b8198ee6d4e4f814aa342d54e589e
 #~ msgid "Link type (view)"
+#~ msgstr ""
+
+# d644b2e92d8e4286b86a1e233d08410a
+#~ msgid "Children (view)"
 #~ msgstr ""
 

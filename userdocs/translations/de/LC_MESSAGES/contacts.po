@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -73,52 +73,52 @@ msgstr ""
 msgid "Household Type (model)"
 msgstr ""
 
-# c313faac621e4b4897da21a504bdcd64
+# cf7929b6029c45afb4634f1adcddc6b7
 #: None:2
 msgid "Partner (model in contacts)"
 msgstr ""
 
-# b0939d5768e64241a7a098dd60cef85f
+# ba46984dbbf645c9878e1aed33f95bc6
 #: None:2
 msgid "Person (model in contacts)"
 msgstr ""
 
-# a552f8b3af11495f9c9758a9b6f5d4f0
+# ae992ca54ac44c4a905c88ca43a2ec91
 #: None:2
 msgid "Organisation (model in contacts)"
 msgstr ""
 
-# 92bec4de263449879e48913315143e10
+# bb378f7a25824234b11437a9875bc1ed
 #: None:2
 msgid "Contact Person (model in contacts)"
 msgstr ""
 
-# d13bd582ecbe4cc78810bbdfc937b5d4
+# cb035ca0654a4881ac4e11f1d3739e66
 #: None:2
 msgid "Function (model in contacts)"
 msgstr ""
 
-# 5f9fdc52bbe34d90b890200249b23447
+# 337f18c58aa446508d09caf7feae55e2
 #: None:2
 msgid "Organization Type (model in contacts)"
 msgstr ""
 
-# 70a8f66d45bb47b0b79e46e132105016
+# 25bf32d85f634ff69631e44230942cc0
 #: None:2
 msgid "obsolete (field in :ref:`Partner <welfare.contacts.partner>`)"
 msgstr ""
 
-# be9c97a24c904f9a8dba906c93f28ee4
+# 850bf212aa4644b0a83c06613f182099
 #: None:2
 msgid "activity (model in pcsw)"
 msgstr ""
 
-# 2e7f90bca1ec41e794f34d70706917b6
+# bc28510701c04f01937daf527e90523f
 #: None:2
 msgid "Household (model in households)"
 msgstr ""
 
-# d456b2be590c4653a515ee40e3e038db
+# f5da941ba0fa492ca3b0642e13f34d1f
 #: None:2
 msgid "Household Type (model in households)"
 msgstr ""

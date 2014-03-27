@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -82,27 +82,27 @@ msgstr ""
 msgid "Pending Course Requests (view)"
 msgstr ""
 
-# 30083df2f6c0469ab369d0ac008a696d
+# bdda8774b9674cd2998d30e4a21d25d2
 #: None:2
 msgid "Course provider (model in courses)"
 msgstr ""
 
-# 483a1f33b6634ceab6049bbe07c687bb
+# f8ae7900968e4c1581c52cf7fd5418d5
 #: None:2
 msgid "Course Content (model in courses)"
 msgstr ""
 
-# a05037f642ad4074a499a37c4df7a7e2
+# 594220d947b24f94947103931ac92484
 #: None:2
 msgid "Course Offer (model in courses)"
 msgstr ""
 
-# 1a5e1a623cc0468cb2064c337c0a4d89
+# 5fd7f99920fb4cbd84740a9b8dee31c5
 #: None:2
 msgid "Course (model in courses)"
 msgstr ""
 
-# f4e347b1fb5a4560aadf80be7a91ff3f
+# 3f56cf8980b444da9805b177dcf208e8
 #: None:2
 msgid "Course Requests (model in courses)"
 msgstr ""

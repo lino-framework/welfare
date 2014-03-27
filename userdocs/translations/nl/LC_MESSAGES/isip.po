@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr ""
 
 # 6d10b266b77b4be0a4e9b31bc7ce5926
 #: ../isip.rst:0
-msgid "study type (model)"
+msgid "Study Type (model)"
 msgstr ""
 
 # 65867a7427ba48d0b768988ecf6349ed
@@ -84,27 +84,27 @@ msgstr ""
 msgid "Reason of termination (model)"
 msgstr ""
 
-# 85a6c7acffd24dde918c9844a8461699
+# 59a4c2dd564c42b5b01b3327332bf510
 #: None:2
 msgid "ISIP (model in isip)"
 msgstr ""
 
-# 92bf125ee8514a169842906aa7212320
+# 304a93d840594a3db085087d8c8d3331
 #: None:2
-msgid "study type (model in isip)"
+msgid "Study Type (model in isip)"
 msgstr ""
 
-# d2b3885c6d8b4a2dac87b5836ebc676b
+# d589076ba1a24257b8a8b85399845720
 #: None:2
 msgid "ISIP Type (model in isip)"
 msgstr ""
 
-# 2d414995246f4778a116d0baf7016cc6
+# 721ff32ee6a44564b1aeace854f60d06
 #: None:2
 msgid "Examination Policy (model in isip)"
 msgstr ""
 
-# 634aab9a7d5d44a294592f6bef6cae8b
+# 26ca3dfef4d44c78bd379711b4c3dcd8
 #: None:2
 msgid "Reason of termination (model in isip)"
 msgstr ""
@@ -143,5 +143,13 @@ msgstr ""
 
 # 0d0b60fcceed42afa34725fcd2317f64
 #~ msgid "Reason of termination (model in app \"isip\")"
+#~ msgstr ""
+
+# 6d10b266b77b4be0a4e9b31bc7ce5926
+#~ msgid "study type (model)"
+#~ msgstr ""
+
+# 92bf125ee8514a169842906aa7212320
+#~ msgid "study type (model in isip)"
 #~ msgstr ""
 

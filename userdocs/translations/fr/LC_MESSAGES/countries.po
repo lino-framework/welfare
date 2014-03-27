@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -38,17 +38,17 @@ msgstr ""
 msgid "Language (model)"
 msgstr ""
 
-# 6eb26c9d3d424424bc9ccebddc45619e
+# 1ae6168012dc49c280577ba034df9cf5
 #: None:2
 msgid "Place (model in countries)"
 msgstr ""
 
-# dcc325b1ece2462784b0c7eae13b1a24
+# 8d71aeaec6a743e388f11bc100fac81e
 #: None:2
 msgid "Country (model in countries)"
 msgstr ""
 
-# 3ed1035836194969a40951a88ddd852e
+# e5746e82421240ef840488d98333608d
 #: None:2
 msgid "Language (model in languages)"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -171,7 +171,7 @@ msgstr ""
 
 # cceddc76ea624f8196ad3cf8a45ec187
 #: ../jobs.rst:0
-msgid "Studies & education (view)"
+msgid "Studies (view)"
 msgstr ""
 
 # 16482ae1a83c4bbc8774a20bac5e4f8f
@@ -179,67 +179,67 @@ msgstr ""
 msgid "Job Experiences (view)"
 msgstr ""
 
-# 65a09f64792a45cfa0b221812e67a73e
+# b006dda7250c4fb1889baafcd2546e32
 #: None:2
 msgid "Job (model in jobs)"
 msgstr ""
 
-# 814b211629314ae3995ac6802aacc385
+# 27fe5e121c4d444fba13ab0d53d13c75
 #: None:2
 msgid "Job Provider (model in jobs)"
 msgstr ""
 
-# c217433b73a74e1fb14be554a33ba640
+# 09d983b64dc64206a768d286a3d88578
 #: None:2
 msgid "Art.60§7 contract (model in jobs)"
 msgstr ""
 
-# 47b3756acc7c4b6c83259febe4f097dd
+# 666ed15fe45e41ea9b24870cb06b0335
 #: None:2
 msgid "Job Candidature (model in jobs)"
 msgstr ""
 
-# 48da663e7d254e279a644c22a13cdacd
+# edbc48ff21234cb0adecd91b7f1c4b5d
 #: None:2
 msgid "Work Regime (model in jobs)"
 msgstr ""
 
-# 052d31c81582439f8dd166670a48f017
+# d803b950ffb0448b9890f3fc87f2638a
 #: None:2
 msgid "Job Sector (model in jobs)"
 msgstr ""
 
-# 1278489224f447568b14989b8dffded6
+# 5d2b4aac46784f55a5d924d56a6d6d26
 #: None:2
 msgid "Job Function (model in jobs)"
 msgstr ""
 
-# fcfcad0360f740b195a9ae1083198569
+# 3de06ed32634493593dd9a1b01e0325e
 #: None:2
 msgid "Work Schedule (model in jobs)"
 msgstr ""
 
-# bdf6d8744b9449b288b894c8ef15c8d5
+# f7da95bd38734b0fadffe363a2d738d5
 #: None:2
 msgid "Job Offer (model in jobs)"
 msgstr ""
 
-# 26b354b6e5604289990d5503a325698f
+# b01cc251507048af94032bd6b3ee1b83
 #: None:2
 msgid "study or education (model in jobs)"
 msgstr ""
 
-# cb74caed5d1a4e21b42d8f97f9e4f8ad
+# 6399746928bc4838868f681b1cc3e49f
 #: None:2
 msgid "Job Experience (model in jobs)"
 msgstr ""
 
-# 952b95195d2a4bc4a54574940c34a6d1
+# a85dcdfa1e2247c7a17e1155068014c8
 #: None:2
 msgid "Job Type (model in jobs)"
 msgstr ""
 
-# 5e7d36a8528f427184ad975ad0a7b338
+# 58e4ab4a84034abf9fba6f05661a90aa
 #: None:2
 msgid "Job Contract Type (model in jobs)"
 msgstr ""
@@ -314,5 +314,9 @@ msgstr ""
 
 # 045c5fadd6574c56b2fc445be350c103
 #~ msgid "Job Contract Type (model in app \"jobs\")"
+#~ msgstr ""
+
+# cceddc76ea624f8196ad3cf8a45ec187
+#~ msgid "Studies & education (view)"
 #~ msgstr ""
 

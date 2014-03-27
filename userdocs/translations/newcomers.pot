@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,17 +47,17 @@ msgid "Faculty (model)"
 msgstr ""
 
 #: None:2
-# 90edbb76e7d440f580c736694559d372
+# d522412086dd4f899d0124cf569fcb1a
 msgid "Broker (model in newcomers)"
 msgstr ""
 
 #: None:2
-# 6801763970da4bba959923cea56300c8
+# 0c77ff7b260d40658f06da3e0969aada
 msgid "Competence (model in newcomers)"
 msgstr ""
 
 #: None:2
-# 726f64549fab404e9e891d0f2c90c3f4
+# 39ea168e7df5417dbc783825bccfccd5
 msgid "Faculty (model in newcomers)"
 msgstr ""
 

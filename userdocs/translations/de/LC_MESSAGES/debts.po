@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 02:37+0100\n"
+"POT-Creation-Date: 2014-03-27 13:56+0200\n"
 "PO-Revision-Date: 2014-01-07 22:33+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -132,17 +132,17 @@ msgid ""
 "collection agency."
 msgstr ""
 
-# ccc7f184ef8e4630be79a7522fcb91b3
+# 67040fff23434594bff3348f995f12aa
 #: None:2
 msgid "Budget Actor (model in debts)"
 msgstr ""
 
-# 76dd083604c942d6842313454335841f
+# 7151da52173f4a9283c07c78c880f950
 #: None:2
 msgid "Budget (model in debts)"
 msgstr ""
 
-# f2712e24f8ec4c4284c7dd87dd7b76a0
+# e3129075ab714b8597e258f6cd6b5d67
 #: None:2
 msgid "Budget Entry (model in debts)"
 msgstr ""
