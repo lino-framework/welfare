@@ -46,7 +46,7 @@ class UploadTypes(UploadTypes):
     name id
     warn_expiry_value warn_expiry_unit
     # company contact_person contact_role
-    UploadsByType
+    uploads.UploadsByType
     """
 
     insert_layout = """
@@ -104,6 +104,13 @@ class Upload(Upload, contacts.ContactRelated):
     #         self.client = controllable
 
 
+dd.update_field(
+    Upload, 'company', verbose_name=_("Issued by (Organization)"))
+dd.update_field(
+    Upload, 'contact_person',
+    verbose_name=_("Issued by (Person)"))
+
+
 class UploadDetail(dd.FormLayout):
 
     main = """
@@ -127,5 +134,6 @@ def site_setup(site):
 class UploadsByClient(Uploads):
     required = dd.required()
     master_key = 'client'
-    column_names = "file type description user * "
+    column_names = "type valid_until description * "
+    auto_fit_column_widths = True
 
