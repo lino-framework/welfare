@@ -43,7 +43,7 @@ class Site(Site):
     # ~ title = label # __name__
     #~ domain = "pcsw.saffre-rumma.net"
     #~ help_url = "http://packages.python.org/lino-welfare"
-    migration_module = 'lino_welfare.migrate'
+    migration_class = 'lino_welfare.migrate.Migrate'
 
     userdocs_prefix = 'welfare.'
     auto_configure_logger_names = 'djangosite north lino lino_welfare'

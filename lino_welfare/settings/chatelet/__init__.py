@@ -14,6 +14,8 @@ class Site(Site):
     demo_fixtures = """std few_languages props all_countries
     be demo cbss mini demo2 local """.split()
 
+    migration_class = 'lino_welfare.settings.chatelet.migrate.Migrator'
+
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
         kw.update(debts=None)  # remove whole app
@@ -61,7 +63,6 @@ class Site(Site):
         add('410', _("Social agent (Manager)"),      'U M M _ M U _ _')
         add('900', _("Administrator"),               'A A A A A A A A',
             name='admin')
-
 
 
 # the following line should not be active in a checked-in version
