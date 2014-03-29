@@ -51,6 +51,7 @@ cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
 properties = dd.resolve_app('properties')
 contacts = dd.resolve_app('contacts')
+dedupe = dd.resolve_app('dedupe')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
@@ -1632,3 +1633,10 @@ def setup_workflows(site):
 
 dd.add_user_group('coaching', _("Coaching"))
 
+
+# class SimilarPersons(dedupe.SimilarPersons):
+    
+#     @classmethod
+#     def get_target_model(self, obj):
+#         return contacts.Person
+    
