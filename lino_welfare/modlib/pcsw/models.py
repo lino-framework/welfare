@@ -821,7 +821,7 @@ class ClientDetail(dd.FormLayout):
 
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.CoachingsByClient:40
+    pcsw.CoachingsByClient:50 dedupe.SimilarPersons:10
     """, label=_("Coaching"))
 
     newcomers_left = dd.Panel("""

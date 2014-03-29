@@ -191,6 +191,7 @@ class Site(Site):
 
         yield 'lino.modlib.attestations'
         yield 'lino.modlib.humanlinks'
+        yield 'lino.modlib.dedupe'
 
         if False:  # not yet ready
             yield 'lino.modlib.families'
