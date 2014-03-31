@@ -23,15 +23,28 @@ from lino import dd
 
 def objects():
 
-    aidType = Instantiator('aids.AidType', "name").build
+    AidRegimes = dd.modules.aids.AidRegimes
+
+    aidType = Instantiator(
+        'aids.AidType', "name",
+        aid_regime=AidRegimes.financial).build
     yield aidType(_("Eingliederungseinkommen"))
     yield aidType(_("Ausländerbeihilfe"))
-    yield aidType(_("Heizkosten"))
     yield aidType(_("Feste Beihilfe"))
     yield aidType(_("Erstattung"))
     yield aidType(_("Übernahmeschein"))
     yield aidType(_("DMH-Übernahmeschein"))
+
+    aidType = Instantiator(
+        'aids.AidType', "name",
+        aid_regime=AidRegimes.medical).build
+    yield aidType(_("Allgemeine medizinische Kosten"))
+
+    aidType = Instantiator(
+        'aids.AidType', "name",
+        aid_regime=AidRegimes.other).build
     yield aidType(_("Möbellager"))
+    yield aidType(_("Heizkosten"))
 
     Decider = Instantiator('aids.Decider', "name").build
     yield Decider("Sozialhilferat (SHR)")

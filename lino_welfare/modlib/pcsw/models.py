@@ -749,7 +749,8 @@ class ClientDetail(dd.FormLayout):
     """
     #~ actor = 'contacts.Person'
 
-    main = "general contact coaching aids_tab work_tab career languages \
+    main = "general contact coaching aids_tab health_tab \
+    work_tab career languages \
     competences jobs contracts history calendar misc"
 
     general = dd.Panel("""
@@ -805,7 +806,7 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     status:55 income:25
-    aids.AidsByProject:30 sepa.AccountsByPartner:20
+    aids.FinancialAidsByClient:30 sepa.AccountsByPartner:20
     """, label=_("Aids"))
 
     status = """
@@ -861,8 +862,9 @@ class ClientDetail(dd.FormLayout):
     contacts.RolesByPerson:20 households.MembersByPerson:40
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
-    # health = dd.Panel("""
-    # """, label=_("Health"))
+    health_tab = dd.Panel("""
+    aids.MedicalAidsByClient
+    """, label=_("Health"))
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""

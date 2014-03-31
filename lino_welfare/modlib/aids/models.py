@@ -30,6 +30,15 @@ from django.conf import settings
 
 
 attestations = dd.resolve_app('attestations')
+contacts = dd.resolve_app('contacts')
+
+
+class AidRegimes(dd.ChoiceList):
+    verbose_name = _("Aid Regime")
+add = AidRegimes.add_item
+add('10', _("Financial aids"), 'financial')
+add('20', _("Medical aids"), 'medical')
+add('30', _("Other aids"), 'other')
 
 
 class Category(dd.BabelNamed):
@@ -87,6 +96,7 @@ class AidType(dd.BabelNamed, dd.PrintableType):
         verbose_name_plural = _("Aid Types")
 
     remark = models.TextField(verbose_name=_("Remark"), blank=True)
+    aid_regime = AidRegimes.field(default=AidRegimes.financial)
 
 
 class AidTypes(dd.Table):
@@ -105,16 +115,47 @@ class AidTypes(dd.Table):
     """
 
     detail_layout = """
-    id name
+    id name aid_regime
     build_method template
     aids.AidsByType
     """
 
 
-class Aid(dd.ProjectRelated, attestations.Attestable):
+class HelperRole(dd.BabelNamed):
 
-    """
-    Deserves more documentation.
+    class Meta:
+        verbose_name = _("Helper Role")
+        verbose_name_plural = _("Helper Roles")
+
+
+class HelperRoles(dd.Table):
+    model = 'aids.HelperRole'
+
+
+class Helper(contacts.ContactRelated):
+
+    class Meta:
+        verbose_name = _("Helper")
+        verbose_name_plural = _("Helpers")
+
+    aid = models.ForeignKey('aids.Aid')
+    role = models.ForeignKey('aids.HelperRole')
+    contact_type = models.ForeignKey('pcsw.ClientContactType')
+
+
+class Helpers(dd.Table):
+    model = 'aids.Helper'
+
+
+class HelpersByAid(Helpers):
+    master_key = 'aid'
+    column_names = 'role company contact_person'
+
+
+class Aid(attestations.Attestable):
+    """An Aid is when the decision has been made that a given Client
+    benefits of given type of aid during a given period.
+
     """
 
     class Meta:
@@ -122,6 +163,9 @@ class Aid(dd.ProjectRelated, attestations.Attestable):
         verbose_name = _("Aid")
         verbose_name_plural = _("Aids")
 
+    client = models.ForeignKey('pcsw.Client')
+    aid_regime = AidRegimes.field(default=AidRegimes.financial)
+    aid_type = models.ForeignKey('aids.AidType')
     decided_date = models.DateField(
         verbose_name=_('Decided'), default=datetime.date.today)
     decider = models.ForeignKey(Decider, blank=True, null=True)
@@ -132,7 +176,6 @@ class Aid(dd.ProjectRelated, attestations.Attestable):
         verbose_name=_('Applies until'),
         default=datetime.date.today)
 
-    type = models.ForeignKey('aids.AidType')
     category = models.ForeignKey('aids.Category', blank=True, null=True)
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
@@ -141,14 +184,23 @@ class Aid(dd.ProjectRelated, attestations.Attestable):
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def get_mailable_type(self):
-        return self.type
+        return self.aid_type
+
+    @dd.chooser()
+    def aid_type_choices(self, aid_regime):
+        M = dd.resolve_model('aids.AidType')
+        logger.info("20140331 %s", aid_regime)
+        if aid_regime is None:
+            return M.objects.all()
+        return M.objects.filter(aid_regime=aid_regime)
 
 
 class AidDetail(dd.FormLayout):
     main = """
-    id project type:25 category
+    id client aid_regime aid_type:25 category
     decider decided_date:10 applies_from applies_until
-    outbox.MailsByController
+    aids.HelpersByAid
+    # outbox.MailsByController
     """
 
 
@@ -158,30 +210,48 @@ class Aids(dd.Table):
     model = 'aids.Aid'
 
     insert_layout = """
-    project decider
-    category type
+    client decider
+    category aid_type
     """
 
     detail_layout = AidDetail()
-    column_names = "id decided_date type project"
+    column_names = "id decided_date aid_type client"
     order_by = ["id"]
 
 
 class AidsByX(Aids):
     required = dd.required(user_groups='office')
-    column_names = "decided_date type category amount *"
+    column_names = "decided_date aid_type category amount *"
     order_by = ["-decided_date"]
     auto_fit_column_widths = True
 
 
-class AidsByType(AidsByX):
-    master_key = 'type'
+class AidsByClient(AidsByX):
+    master_key = 'client'
+    _aid_regime = None
+
+    insert_layout = """
+    aid_type
+    category
+    """
+
+    @classmethod
+    def get_known_values(self):
+        return dict(aid_regime=self._aid_regime)
+
+    @classmethod
+    def get_actor_label(self):
+        if self._aid_regime is not None:
+            return self._aid_regime.text
+        return self._label or self.__name__
 
 
-if settings.SITE.project_model is not None:
+class MedicalAidsByClient(AidsByClient):
+    _aid_regime = AidRegimes.medical
 
-    class AidsByProject(AidsByX):
-        master_key = 'project'
+
+class FinancialAidsByClient(AidsByClient):
+    _aid_regime = AidRegimes.financial
 
 
 class AidsByDecider(AidsByX):
@@ -190,6 +260,10 @@ class AidsByDecider(AidsByX):
 
 class AidsByCategory(AidsByX):
     master_key = 'category'
+
+
+class AidsByType(AidsByX):
+    master_key = 'aid_type'
 
 
 # pcsw = dd.resolve_app('pcsw')
@@ -204,10 +278,11 @@ def setup_config_menu(site, ui, profile, m):
     #~ m  = m.add_menu("aids",_("~Aids"))
     m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.AidTypes')
+    m.add_action('aids.HelperRoles')
 
 
 def setup_explorer_menu(site, ui, profile, m):
     MODULE_LABEL = dd.apps.pcsw.verbose_name
     m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.Aids')
-
+    m.add_action('aids.Helpers')

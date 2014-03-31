@@ -665,6 +665,7 @@ class Offers(dd.Table):
     ExperiencesByOffer CandidaturesByOffer
     """
 
+
 class Study(cv.PersonHistoryEntry, CountryCity):
 
     class Meta:

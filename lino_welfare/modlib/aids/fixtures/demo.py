@@ -16,10 +16,9 @@
 """
 
 from django.conf import settings
-from django.utils.translation import ugettext as _
-from lino.utils.instantiator import Instantiator
 from lino.dd import resolve_model
 from lino.utils import Cycler
+from lino import dd
 
 
 def objects():
@@ -27,23 +26,25 @@ def objects():
     Decider = resolve_model('aids.Decider')
     Category = resolve_model('aids.Category')
     AidType = resolve_model('aids.AidType')
+    ClientStates = dd.modules.pcsw.ClientStates
 
-    if settings.SITE.project_model is not None:
-        Project = resolve_model(settings.SITE.project_model)
-        qs = Project.objects.all()
-        if qs.count() > 10:
-            qs = qs[:10]
-        PROJECTS = Cycler(qs)
-    
+    Project = resolve_model('pcsw.Client')
+    qs = Project.objects.filter(client_state=ClientStates.coached)
+    if qs.count() > 10:
+        qs = qs[:10]
+    PROJECTS = Cycler(qs)
+
     NTYPES = Cycler(AidType.objects.all())
     DECIDERS = Cycler(Decider.objects.all())
     CATS = Cycler(Category.objects.all())
 
     for i in range(12):
+        atype = NTYPES.pop()
         kw = dict(decider=DECIDERS.pop(),
                   category=CATS.pop(),
                   decided_date=settings.SITE.demo_date(days=i),
-                  type=NTYPES.pop())
+                  aid_regime=atype.aid_regime,
+                  aid_type=atype)
         if settings.SITE.project_model is not None:
-            kw.update(project=PROJECTS.pop())
+            kw.update(client=PROJECTS.pop())
         yield Aid(**kw)
