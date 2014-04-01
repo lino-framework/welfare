@@ -227,13 +227,14 @@ class AidsByX(Aids):
 
 
 class AidsByClient(AidsByX):
+    """
+    Common base for MedicalAidsByClient and FinancialAidsByClient.
+    We must define insert_layout for each subclass although they are
+    the same. See :blogref:`20140331`.
+    """
+    
     master_key = 'client'
     _aid_regime = None
-
-    insert_layout = """
-    aid_type
-    category
-    """
 
     @classmethod
     def get_known_values(self):
@@ -249,9 +250,19 @@ class AidsByClient(AidsByX):
 class MedicalAidsByClient(AidsByClient):
     _aid_regime = AidRegimes.medical
 
+    insert_layout = """
+    aid_type
+    category
+    """
+
 
 class FinancialAidsByClient(AidsByClient):
     _aid_regime = AidRegimes.financial
+
+    insert_layout = """
+    aid_type
+    category
+    """
 
 
 class AidsByDecider(AidsByX):
