@@ -1742,7 +1742,7 @@ def setup_site_cache(self, force):
     def make_wsdl(template, parts):
         fn = os.path.join(settings.MEDIA_ROOT, *parts)
         if not force and os.path.exists(fn):
-            if os.stat(fn).st_mtime > self.ui.mtime:
+            if os.stat(fn).st_mtime > self.kernel.code_mtime:
                 logger.info(
                     "NOT generating %s because it is newer than the code.", fn)
                 return
