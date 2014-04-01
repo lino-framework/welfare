@@ -633,12 +633,7 @@ class Contract(ContractBase):
 
     @classmethod
     def on_analyze(cls, lino):
-        """
-        Here's how to override the default verbose_name of a field.
-        """
-        #~ resolve_field('dsbe.Contract.user').verbose_name=_("responsible (DSBE)")
-        Contract.user.verbose_name = _("responsible (DSBE)")
-        #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
+        # Contract.user.verbose_name = _("responsible (DSBE)")
         cls.PRINTABLE_FIELDS = dd.fields_list(
             cls,
             'client company contact_person contact_role type '
@@ -656,6 +651,11 @@ class Contract(ContractBase):
             return set()
         #~ return df + settings.SITE.CONTRACT_PRINTABLE_FIELDS
         return self.PRINTABLE_FIELDS
+
+
+dd.update_field(
+    Contract, 'user',
+    verbose_name=_("Integration agent"))  # was "responsible (DSBE)"
 
 
 class ContractDetail(dd.FormLayout):

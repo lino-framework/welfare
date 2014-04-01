@@ -5,18 +5,30 @@
 {{ super() }}
 
 <p>
-{{tr(en="receives since ",
-    de="seit dem .... / .... / 20....",
-    fr="bénéficie depuis le .... / .... / 20....")}}
-{{fds(this.owner.applies_from)}}
-{{fds(this.owner.applies_until)}}
-</p>
+{{tr(en="receives a",
+     de="eine",
+     fr="bénéficie d'une")}}
+{{this.owner.aid_type.get_long_name()}}
+({{tr(en="Category:",
+     de="Kategorie:",
+     fr="Catégorie:")}}
+{{this.owner.category}})
+{{tr(en="",
+     de="bezieht",
+     fr="")}}
 
-<p>
-{{tr(
-en="a financial aid.",
-de="eine laut Gesetz vom 2. April 1965 eingeführte Sozialhilfe für Ausländer bezieht.",
-    fr="d’une aide sociale prévue par la loi du 2 avril 1965.")}}
+{% if this.owner.applies_from %}
+{{tr(en="since",
+     de="seit dem",
+     fr="depuis le")}}
+{{fds(this.owner.applies_from)}}
+{% endif %}
+{% if this.owner.applies_until %}
+{{tr(en="until",
+     de="bis zum",
+     fr="jusqu'au")}}
+{{fds(this.owner.applies_until)}}
+{% endif %}
 </p>
 
 {% endblock %}

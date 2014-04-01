@@ -38,25 +38,26 @@ def attestation_types():  # also used for migration to 1.1.11
     attType = Instantiator('attestations.AttestationType',
                            build_method='appypdf',
                            email_template='Default.eml.html').build
+    # yield attType(
+    #     body_template='aids_Aid.body.html',
+    #     template='Default.odt',
+    #     **babelkw('name',
+    #               de="Bescheinigung",
+    #               fr="Attestation",
+    #               en="Attestation"))
     yield attType(
-        body_template='default.body.html',
-        template='Default.odt',
-        **babelkw('name',
-                  de="Bescheinigung",
-                  fr="Attestation",
-                  en="Attestation"))
-    yield attType(
-        body_template='default.body.html',
+        body_template='aids_Aid.body.html',
         template='Default.odt',
         primary=True,
+        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('aids.Aid')),
         **babelkw('name',
-                  de="Bescheinigung Ausländerbeihilfe",
-                  fr="Attestation allocation étrangers",
-                  en="Foreigner income certificate"))
+                  de="Hilfebescheinigung",
+                  fr="Attestation d'aide",
+                  en="Aid certificate"))
     yield attType(
-        body_template='default.body.html',
+        body_template='cal_Guest.body.html',
         template='Default.odt',
         primary=True,
         skip_dialog=True,
@@ -296,11 +297,12 @@ def objects():
     #~ def create_dsbe_aidtype(id,name,name_fr):
         #~ return AidType(id=id,name=name,name_fr=name_fr)
     aidtype = Instantiator('pcsw.AidType').build
-    yield aidtype(**babel_values('name',
-                                 de=u'Eingliederungseinkommen Kat 1 (Zusammenlebend)',
-                                 fr=u"Revenu d'intégration cat. 1 (couple)",
-                                 en=u"Revenu d'intégration cat. 1 (couple)",
-                                 ))
+    yield aidtype(**babel_values(
+        'name',
+        de=u'Eingliederungseinkommen Kat 1 (Zusammenlebend)',
+        fr=u"Revenu d'intégration cat. 1 (couple)",
+        en=u"Revenu d'intégration cat. 1 (couple)",
+    ))
     yield aidtype(**babel_values('name',
                                  de=u'Eingliederungseinkommen Kat 2 (Alleinlebend)',
                                  fr=u"Revenu d'intégration cat. 2 (célibataire)",

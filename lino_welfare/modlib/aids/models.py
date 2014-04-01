@@ -95,8 +95,17 @@ class AidType(dd.BabelNamed, dd.PrintableType):
         verbose_name = _("Aid Type")
         verbose_name_plural = _("Aid Types")
 
-    remark = models.TextField(verbose_name=_("Remark"), blank=True)
     aid_regime = AidRegimes.field(default=AidRegimes.financial)
+
+    long_name = dd.BabelCharField(
+        _("Long name"),
+        max_length=200,
+        blank=True,
+        help_text=_("Replaces the short description in certain places."))
+
+    def get_long_name(self):
+        return settings.SITE.babelattr(
+            self, 'long_name') or unicode(self)
 
 
 class AidTypes(dd.Table):
@@ -111,11 +120,12 @@ class AidTypes(dd.Table):
 
     insert_layout = """
     name
-    build_method
+    long_name
     """
 
     detail_layout = """
-    id name aid_regime
+    id aid_regime name
+    long_name
     build_method template
     aids.AidsByType
     """

@@ -26,14 +26,35 @@ def objects():
     AidRegimes = dd.modules.aids.AidRegimes
 
     aidType = Instantiator(
-        'aids.AidType', "name",
-        aid_regime=AidRegimes.financial).build
-    yield aidType(_("Eingliederungseinkommen"))
-    yield aidType(_("Ausländerbeihilfe"))
-    yield aidType(_("Feste Beihilfe"))
-    yield aidType(_("Erstattung"))
-    yield aidType(_("Übernahmeschein"))
-    yield aidType(_("DMH-Übernahmeschein"))
+        'aids.AidType', aid_regime=AidRegimes.financial).build
+    yield aidType(
+        **dd.babelkw(
+            'name',
+            de="Eingliederungseinkommen",
+            en="Eingliederungseinkommen",
+            fr="Revenu d'intégration"))
+    kw = dd.babelkw(
+        'name',
+        de="Ausländerbeihilfe",
+        en="Ausländerbeihilfe",
+        fr="Aide sociale pour étrangers")
+    kw.update(
+        dd.babelkw(
+            'long_name',
+            de="laut Gesetz vom 2. April 1965 eingeführte \
+            Sozialhilfe für Ausländer",
+            fr="aide sociale pour étrangers \
+            prévue par la loi du 2 avril 1965"))
+    yield aidType(**kw)
+    yield aidType(
+        **dd.babelkw(
+            'name',
+            de="Feste Beihilfe",
+            en="Feste Beihilfe",
+            fr="Revenu fixe"))
+    # yield aidType(_("Erstattung"))
+    # yield aidType(_("Übernahmeschein"))
+    # yield aidType(_("DMH-Übernahmeschein"))
 
     aidType = Instantiator(
         'aids.AidType', "name",
