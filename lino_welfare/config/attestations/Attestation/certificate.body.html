@@ -1,0 +1,21 @@
+{% extends "attestations/Attestation/base.body.html" %}
+
+
+{% block body %}
+
+<p>{{tr(en="We hereby certify that",
+        de="Hiermit bescheinigen wir, dass",
+        fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{this.project.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{this.project.national_id}}
+<br>
+{{tr(de="wohnhaft zu",fr="domicilié"+this.project.mf("","e","(e)")+" à")}}
+{{', '.join(this.project.address_location_lines())}}
+</p>
+
+{% endblock %}
+

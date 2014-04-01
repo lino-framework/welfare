@@ -29,7 +29,7 @@ from lino import dd
 from django.conf import settings
 
 
-attestations = dd.resolve_app('attestations')
+# attestations = dd.resolve_app('attestations')
 contacts = dd.resolve_app('contacts')
 
 
@@ -152,7 +152,7 @@ class HelpersByAid(Helpers):
     column_names = 'role company contact_person'
 
 
-class Aid(attestations.Attestable):
+class Aid(dd.Model):
     """An Aid is when the decision has been made that a given Client
     benefits of given type of aid during a given period.
 
@@ -193,6 +193,11 @@ class Aid(attestations.Attestable):
         if aid_regime is None:
             return M.objects.all()
         return M.objects.filter(aid_regime=aid_regime)
+
+    def get_attestation_options(self, ar, **kw):
+        # Set project field when creating an attestation from Client.
+        kw.update(project=self.client)
+        return super(Aid, self).get_attestation_options(ar, **kw)
 
 
 class AidDetail(dd.FormLayout):

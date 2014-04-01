@@ -28,7 +28,7 @@ from lino import dd
 
 from lino.modlib.cal.models import *
 
-attestations = dd.resolve_app('attestations')
+# attestations = dd.resolve_app('attestations')
 
 #~ add = EventEvents.add_item
 #~ add('30', _("Visit"),'visit')
@@ -158,11 +158,11 @@ class EventsByClient(Events):
         return kw  # tricky
 
 
-class Guest(Guest, attestations.Attestable):
+class Guest(Guest):
 
-    def create_attestation(self, ar, **kw):
+    def get_attestation_options(self, ar, **kw):
         kw.update(project=self.event.project)
-        return super(Guest, self).create_attestation(ar, **kw)
+        return super(Guest, self).get_attestation_options(ar, **kw)
 
 
 
