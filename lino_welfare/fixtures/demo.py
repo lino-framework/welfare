@@ -343,28 +343,35 @@ def objects():
     # settings.SITE.site_config.update(attestation_note_nature=obj)
 
     calendar = Instantiator('cal.EventType').build
-    client_calendar = calendar(invite_client=True, **babelkw('name',
-                                                             de="Klientengespräche intern",
-                                                             fr="Rencontres internes avec client",
-                                                             en="Internal meetings with client",
-                                                             ))
+    client_calendar = calendar(
+        invite_client=True,
+        **babelkw(
+            'name',
+            de="Klientengespräche intern",
+            fr="Rencontres internes avec client",
+            en="Internal meetings with client",
+        ))
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
 
-    obj = calendar(invite_client=False, is_appointment=False, **babelkw('name',
-                                                                        de="Visiten (ohne Termin)",
-                                                                        fr="Visites (sans rendez-vous)",
-                                                                        en="Prompt events",
-                                                                        et="Külaline",
-                                                                        ))
+    obj = calendar(
+        invite_client=False, is_appointment=False, **babelkw(
+            'name',
+            de="Visiten (ohne Termin)",
+            fr="Visites (sans rendez-vous)",
+            en="Prompt events",
+            et="Külaline",
+        ))
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)
 
-    yield calendar(invite_client=False, **babelkw('name',
-                                                  de="Klientengespräche extern",
-                                                  fr="Rencontres client externes",
-                                                  en="External meetings with client",
-                                                  ))
+    yield calendar(
+        invite_client=False, **babelkw(
+            'name',
+            de="Klientengespräche extern",
+            fr="Rencontres client externes",
+            en="External meetings with client",
+        ))
 
     yield calendar(**babelkw('name',
                              de=u"Versammlung intern",
@@ -400,13 +407,24 @@ def objects():
 
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every', every_unit=DurationUnits.months).build
-    yield exam_policy(1, event_type=client_calendar, start_time="9:00", **babelkw('name', en='every month', de=u'monatlich', fr=u"mensuel"))
-    yield exam_policy(2, event_type=client_calendar, start_time="9:00", **babelkw('name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
-    yield exam_policy(3, event_type=client_calendar, start_time="9:00", **babelkw('name', en='every 3 months', de=u'alle 3 Monate', fr=u"tous les 3 mois"))
+    yield exam_policy(
+        1, event_type=client_calendar, start_time="9:00", **babelkw(
+            'name', en='every month', de=u'monatlich', fr=u"mensuel"))
+    yield exam_policy(
+        2, event_type=client_calendar, start_time="9:00", **babelkw(
+            'name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
+    yield exam_policy(
+        3, event_type=client_calendar, start_time="9:00", **babelkw(
+            'name', en='every 3 months', de=u'alle 3 Monate',
+            fr=u"tous les 3 mois"))
 
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every', every_unit=DurationUnits.weeks).build
-    yield exam_policy(2, event_type=client_calendar, start_time="9:00", **babelkw('name', en='every 2 weeks', de=u'zweiwöchentlich', fr=u"hebdomadaire"))
+    yield exam_policy(
+        2, 
+        event_type=client_calendar, start_time="9:00", **babelkw(
+            'name', en='every 2 weeks', de=u'zweiwöchentlich',
+            fr=u"hebdomadaire"))
 
     exam_policy = Instantiator('isip.ExamPolicy').build
     yield exam_policy(**babelkw('name', en='other', de="andere", fr="autre"))

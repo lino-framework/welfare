@@ -53,12 +53,13 @@ dd.inject_field('users.User', 'calendar',
                               related_name='user_calendars',
                               blank=True, null=True))
 
-dd.inject_field('system.SiteConfig', 'client_calendar',
-                dd.ForeignKey('cal.EventType',
-                              verbose_name=_(
-                                  "Default calendar for client events"),
-                              related_name='client_calendars',
-                              blank=True, null=True))
+dd.inject_field(
+    'system.SiteConfig', 'client_calendar',
+    dd.ForeignKey(
+        'cal.EventType',
+        verbose_name=_("Default type for client events"),
+        related_name='client_calendars',
+        blank=True, null=True))
 
 dd.inject_field('system.SiteConfig', 'client_guestrole',
                 dd.ForeignKey('cal.GuestRole',
@@ -73,6 +74,7 @@ dd.inject_field('system.SiteConfig', 'team_guestrole',
                               related_name='team_guestroles',
                               blank=True, null=True))
 
+
 class Event(Event):
 
     # course = models.ForeignKey(
@@ -82,6 +84,11 @@ class Event(Event):
     def get_calendar(self):
         if self.user is not None:
             return self.user.calendar
+
+    def full_clean(self):
+        if not self.event_type:
+            self.event_type = settings.SITE.site_config.client_calendar
+        super(Event, self).full_clean()
 
     def suggest_guests(self):
         "Will be called only when there are no Guests yet"

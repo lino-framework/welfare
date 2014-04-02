@@ -115,7 +115,8 @@ class SiteConfigDetail(dd.FormLayout):
         residence_permit_upload_type \
         work_permit_upload_type \
         driving_licence_upload_type
-        client_calendar prompt_calendar
+        # client_calendar
+        default_event_type prompt_calendar
         client_guestrole team_guestrole
         """, label=_("Constants"))
 
