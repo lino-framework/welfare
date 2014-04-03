@@ -43,15 +43,16 @@ class EventType(EventType):
 
     #~ invite_team_members = models.BooleanField(
         #~ _("Invite team members"),default=False)
-    invite_team_members = dd.ForeignKey('users.Team', blank=True, null=True)
+    # invite_team_members = dd.ForeignKey('users.Team', blank=True, null=True)
     invite_client = models.BooleanField(_("Invite client"), default=False)
 
-dd.inject_field('users.User', 'calendar',
-                dd.ForeignKey('cal.Calendar',
-                              verbose_name=_(
-                                  "Calendar where your events are published."),
-                              related_name='user_calendars',
-                              blank=True, null=True))
+dd.inject_field(
+    'users.User', 'calendar',
+    dd.ForeignKey(
+        'cal.Calendar',
+        verbose_name=_("Calendar where your events are published."),
+        related_name='user_calendars',
+        blank=True, null=True))
 
 dd.inject_field(
     'system.SiteConfig', 'client_calendar',
@@ -178,9 +179,10 @@ def customize_cal(sender, **kw):
     site = sender
 
     site.modules.cal.EventTypes.set_detail_layout("""
-    name id 
+    name id
     # description
-    invite_team_members event_label
+    # invite_team_members
+    event_label
     # url_template username password
     #readonly is_appointment invite_client start_date
     build_method template email_template attach_to_email
@@ -189,7 +191,7 @@ def customize_cal(sender, **kw):
 
     site.modules.cal.EventTypes.set_insert_layout("""
     name
-    invite_team_members
+    # invite_team_members
     invite_client
     """, window_size=(60, 'auto'))
 

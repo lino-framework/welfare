@@ -19,6 +19,10 @@ The `models` module for :mod:`lino_welfare.modlib.users`.
 
 from __future__ import unicode_literals
 
+import logging
+logger = logging.getLogger(__name__)
+
+
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
@@ -29,12 +33,64 @@ from lino.modlib.users.models import *
 cal = dd.resolve_app('cal')
 
 
+def check_subscription(user, calendar):
+    try:
+        cal.Subscription.objects.get(user=user, calendar=calendar)
+    except cal.Subscription.DoesNotExist:
+        sub = cal.Subscription(user=user, calendar=calendar)
+        sub.full_clean()
+        sub.save()
+
+
+class User(User):
+
+    def save(self, *args, **kwargs):
+        """For a user with a office_level, create a default calendar.  If
+        that user also has a coaching_level, create a default set of
+        subscription.
+
+        """
+        super(User, self). save(*args, **kwargs)
+
+        if not self.profile:
+            return
+
+        if not self.profile.office_level:
+            return
+
+        if not self.calendar:
+            i = cal.Calendar.objects.all().count()
+            i = i % len(cal.Calendar.COLOR_CHOICES)
+            obj = cal.Calendar(
+                name=unicode(self),
+                color=cal.Calendar.COLOR_CHOICES[i])
+            obj.full_clean()
+            obj.save()
+            self.calendar = obj
+            super(User, self). save(*args, **kwargs)
+
+        check_subscription(self, self.calendar)
+
+        if not self.profile.coaching_level:
+            return
+
+        coaching_profiles = set()
+        for p in dd.UserProfiles.items():
+            if p.coaching_level:
+                coaching_profiles.add(p)
+        for u in User.objects.filter(
+                profile__in=coaching_profiles).exclude(id=self.id):
+            check_subscription(self, u.calendar)
+            check_subscription(u, self.calendar)
+        # logger.info("20140403 wrote subscriptions for %s", self)
+
+
 class UserDetail(UserDetail, cal.UserDetailMixin):
 
     main = "general cal coaching"
 
     general = dd.Panel("""
-    box1:40 MembershipsByUser:20
+    box1 #MembershipsByUser:20
     remarks:40 AuthoritiesGiven:20
     """, label=_("General"))
 

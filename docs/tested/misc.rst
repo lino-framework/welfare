@@ -12,6 +12,7 @@ Some tests:
 >>> from django.utils import translation
 >>> from django.test import Client
 >>> import json
+>>> from lino import dd
 
 
 
@@ -43,20 +44,21 @@ Some database content
 
 >>> ses = settings.SITE.login('rolf')
 >>> with translation.override('de'):
-...     ses.show(jobs.Jobs,column_names="name provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+...     ses.show(jobs.Jobs,column_names="function provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ================= ====================================== ===========================
- Name              Stellenanbieter                        Sektor
+ Funktion          Stellenanbieter                        Sektor
 ----------------- -------------------------------------- ---------------------------
- Kellner           BISA (190*)                             Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (191)    Horeca
  Koch              R-Cycle Sperrgutsortierzentrum (191)    Seefahrt
  Koch              Pro Aktiv V.o.G. (193)                  Unterricht
  Küchenassistent   Pro Aktiv V.o.G. (193)                  Medizin & Paramedizin
  Küchenassistent   BISA (190*)                             Reinigung
  Tellerwäscher     BISA (190*)                             Bauwesen & Gebäudepflege
  Tellerwäscher     R-Cycle Sperrgutsortierzentrum (191)    Transport
+ Kellner           BISA (190*)                             Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (191)    Horeca
 ================= ====================================== ===========================
 <BLANKLINE>
+
 
 JobsOverview
 ------------
@@ -75,29 +77,49 @@ when one of the jobs had a remark.
 Bug fixed :blogref:`20130423`.
 
 
-Teams
------
+.. _welfare.tested.cal:
+
+Calendars and Subscriptions
+---------------------------
+
+A Calendar is a set of events that can be shown or hidden in the Calendar Panel.
+
+In Lino Welfare, we have one Calendar per User.
+
+Or to be more precise: the Calendar of an event is automatically
+defined by the :ddref:`cal.Event.user` field.
+
+For example, demo user `rolf` is automatically subscribed to the following calendars:
 
 >>> with translation.override('de'):
-...    ses.show(users.Teams) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ============================== ============================== ===================================================
- ID   Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
----- ------------------------------ ------------------------------ ---------------------------------------------------
- 1    GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)
- 2    Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)
- 3    Debts mediation                Médiation de dettes            Schuldnerberatung
-==== ============================== ============================== ===================================================
+...    ses.show(cal.SubscriptionsByUser, ses.get_user()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+==== ================= ===========
+ ID   Kalender          versteckt
+---- ----------------- -----------
+ 5    Rolf Rompen       Nein
+ 6    Romain Raffault   Nein
+ 8    Robin Rood        Nein
+ 14   Mélanie Mélard    Nein
+ 23   Hubert Huppertz   Nein
+ 34   Alicia Allmanns   Nein
+ 47   Caroline Carnol   Nein
+ 62   Judith Jousten    Nein
+ 79   Kerstin Kerres    Nein
+==== ================= ===========
 <BLANKLINE>
 
+This rule is application-specific. All users with one of the following
+profiles can see each other's calendars:
 
->>> with translation.override('de'):
-...    ses.show(pcsw.CoachingTypes)
-============================== ============================== ===================================================
- Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
------------------------------- ------------------------------ ---------------------------------------------------
- GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)
- Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)
- Debts mediation                Médiation de dettes            Schuldnerberatung
-============================== ============================== ===================================================
+>>> from lino.utils import rstgen
+>>> print(rstgen.ul([unicode(p) for p in dd.UserProfiles.items() if p.coaching_level]))
+- Begleiter im DSBE
+- Integrations-Assistent (Manager)
+- Berater Neuanträge
+- Schuldenberater
+- Sozi
+- Social agent (Manager)
+- Verwalter
 <BLANKLINE>
+
 

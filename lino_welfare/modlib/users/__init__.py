@@ -17,3 +17,8 @@ Lino-Welfare extension of :mod:`lino.modlib.users`
 
 from lino.modlib.users import Plugin
 
+
+class Plugin(Plugin):
+    
+    extends_models = ['users.User']
+

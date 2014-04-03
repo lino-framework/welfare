@@ -71,3 +71,17 @@ True
 
 
 
+Coaching types
+--------------
+
+>>> with translation.override('de'):
+...    ses.show(pcsw.CoachingTypes)
+============================== ============================== ===================================================
+ Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
+------------------------------ ------------------------------ ---------------------------------------------------
+ GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)
+ Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)
+ Debts mediation                Médiation de dettes            Schuldnerberatung
+============================== ============================== ===================================================
+<BLANKLINE>
+

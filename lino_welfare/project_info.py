@@ -101,7 +101,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.reception',
     'lino_welfare.modlib.sepa',
     'lino_welfare.settings',
-    'lino_welfare.settings.fr',
+    'lino_welfare.settings.chatelet',
+    'lino_welfare.settings.eupen',
     'lino_welfare.tests',
 ])
 

@@ -228,9 +228,11 @@ def objects():
     hubert = users.User(username="hubert", partner=hubert, profile='100')
     yield hubert
 
-    alicia = person(first_name=u"Alicia", last_name=u"Allmanns",
-                    email=settings.SITE.demo_email,  # 'alicia@example.com',
-                    city=kettenis, country='BE', gender=mixins.Genders.female, language='fr')
+    alicia = person(
+        first_name=u"Alicia", last_name=u"Allmanns",
+        email=settings.SITE.demo_email,  # 'alicia@example.com',
+        city=kettenis, country='BE',
+        gender=mixins.Genders.female, language='fr')
     yield alicia
     alicia = users.User(username="alicia", partner=alicia, profile='100')
     yield alicia
@@ -267,23 +269,27 @@ def objects():
     yield judith
 
     # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(id=isip.COACHINGTYPE_ASD, **babelkw('name',
-                                                                de="ASD (Allgemeiner Sozialdienst)",
-                                                                nl="ASD (Algemene Sociale Dienst)",
-                                                                fr="SSG (Service social général)",
-                                                                en="GSS (General Social Service)",
-                                                                ))
+    yield pcsw.CoachingType(
+        id=isip.COACHINGTYPE_ASD, **babelkw(
+            'name',
+            de="ASD (Allgemeiner Sozialdienst)",
+            nl="ASD (Algemene Sociale Dienst)",
+            fr="SSG (Service social général)",
+            en="GSS (General Social Service)",
+        ))
 
     caroline.coaching_type_id = isip.COACHINGTYPE_ASD
     caroline.save()
     judith.coaching_type_id = isip.COACHINGTYPE_ASD
     judith.save()
 
-    DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE, **babelkw('name',
-                                                                  de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
-                                                                  fr="Service intégration",
-                                                                  en="Integration service",
-                                                                  ))
+    DSBE = pcsw.CoachingType(
+        id=isip.COACHINGTYPE_DSBE, **babelkw(
+            'name',
+            de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
+            fr="Service intégration",
+            en="Integration service",
+        ))
 
     #~ DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
@@ -297,16 +303,18 @@ def objects():
     alicia.coaching_type = DSBE
     alicia.save()
 
-    for obj in pcsw.CoachingType.objects.all():
-        yield users.Team(**babelkw('name', **field2kw(obj, 'name')))
+    # for obj in pcsw.CoachingType.objects.all():
+    #     yield users.Team(**babelkw('name', **field2kw(obj, 'name')))
 
     guest_role = Instantiator('cal.GuestRole').build
-    obj = guest_role(email_template="Visitor.eml.html", **babelkw('name',
-                                                                  de="Besucher",
-                                                                  fr="Visiteur",
-                                                                  en="Visitor",
-                                                                  et="Külaline",
-                                                                  ))
+    obj = guest_role(
+        email_template="Visitor.eml.html", **babelkw(
+            'name',
+            de="Besucher",
+            fr="Visiteur",
+            en="Visitor",
+            et="Külaline",
+        ))
     yield obj
     settings.SITE.site_config.update(client_guestrole=obj)
 
@@ -385,11 +393,11 @@ def objects():
                              en=u"External meetings",
                              ))
 
-    for obj in users.Team.objects.all():
-        yield calendar(
-            invite_team_members=obj,
-            email_template='Team.eml.html',
-            **babelkw('name', **field2kw(obj, 'name')))
+    # for obj in users.Team.objects.all():
+    #     yield calendar(
+    #         invite_team_members=obj,
+    #         email_template='Team.eml.html',
+    #         **babelkw('name', **field2kw(obj, 'name')))
 
     #~ yield calendar(
         #~ email_template='Team.eml.html',
@@ -1164,15 +1172,14 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
 
         yield obj
 
-    Calendar = dd.resolve_model('cal.Calendar')
-    #~ from lino.modlib.cal.models_calendar import COLOR_CHOICES
+    # Calendar = dd.resolve_model('cal.Calendar')
 
-    COLORS = Cycler(Calendar.COLOR_CHOICES)
+    # COLORS = Cycler(Calendar.COLOR_CHOICES)
 
-    for u in settings.SITE.user_model.objects.exclude(profile=None):
-        obj = Calendar(name=u.username, color=COLORS.pop())
-        yield obj
-        u.calendar = obj
-        u.save()
+    # for u in settings.SITE.user_model.objects.exclude(profile=None):
+    #     obj = Calendar(name=u.username, color=COLORS.pop())
+    #     yield obj
+    #     u.calendar = obj
+    #     u.save()
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")
