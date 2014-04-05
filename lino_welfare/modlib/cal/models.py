@@ -83,8 +83,18 @@ class Event(Event):
     #     help_text=_("Fill in only if this event is a session of a course."))
 
     def get_calendar(self):
+        if self.assigned_to is not None:
+            return self.assigned_to.calendar
         if self.user is not None:
             return self.user.calendar
+
+    @dd.chooser()
+    def assigned_to_choices(self):
+        settings.SITE.user_model.objects.filter(calendar__isnull=False)
+
+    @dd.chooser()
+    def user_choices(self):
+        settings.SITE.user_model.objects.filter(calendar__isnull=False)
 
     def full_clean(self):
         if not self.event_type:

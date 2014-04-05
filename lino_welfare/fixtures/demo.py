@@ -1172,14 +1172,13 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
 
         yield obj
 
-    # Calendar = dd.resolve_model('cal.Calendar')
+    Calendar = dd.resolve_model('cal.Calendar')
+    COLORS = Cycler(Calendar.COLOR_CHOICES)
 
-    # COLORS = Cycler(Calendar.COLOR_CHOICES)
-
-    # for u in settings.SITE.user_model.objects.exclude(profile=None):
-    #     obj = Calendar(name=u.username, color=COLORS.pop())
-    #     yield obj
-    #     u.calendar = obj
-    #     u.save()
+    for u in settings.SITE.user_model.objects.exclude(profile=None):
+        obj = Calendar(name=u.username, color=COLORS.pop())
+        yield obj
+        u.calendar = obj
+        u.save()
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

@@ -82,44 +82,59 @@ Bug fixed :blogref:`20130423`.
 Calendars and Subscriptions
 ---------------------------
 
-A Calendar is a set of events that can be shown or hidden in the Calendar Panel.
+A Calendar is a set of events that can be shown or hidden in the
+Calendar Panel.
 
-In Lino Welfare, we have one Calendar per User.
+In Lino Welfare, we have one Calendar per User.  Or to be more
+precise: 
 
-Or to be more precise: the Calendar of an event is automatically
-defined by the :ddref:`cal.Event.user` field.
+- The :ddref:`users.User` model has a :ddref:`users.User.calendar`
+  field.
 
-For example, demo user `rolf` is automatically subscribed to the following calendars:
+- The calendar of an :ddref:`cal.Event` is indirectly defined by the
+  Event's :ddref:`cal.Event.user` field.
+
+Two users can share a common calendar.  This is possible when two
+colleagues really work together when receiving visitors.
+
+A Subscription is when a given user decides that she wants to see the
+calendar of another user.
+
+Every user is, by default, subscribed to her own calendar.
+
+The demo database then 
+
+For example, demo user `rolf` is automatically subscribed to the
+following calendars:
 
 >>> with translation.override('de'):
 ...    ses.show(cal.SubscriptionsByUser, ses.get_user()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ================= ===========
- ID   Kalender          versteckt
----- ----------------- -----------
- 5    Rolf Rompen       Nein
- 6    Romain Raffault   Nein
- 8    Robin Rood        Nein
- 14   Mélanie Mélard    Nein
- 23   Hubert Huppertz   Nein
- 34   Alicia Allmanns   Nein
- 47   Caroline Carnol   Nein
- 62   Judith Jousten    Nein
- 79   Kerstin Kerres    Nein
-==== ================= ===========
+==== ========== ===========
+ ID   Kalender   versteckt
+---- ---------- -----------
+ 7    alicia     Nein
+ 15   caroline   Nein
+ 23   hubert     Nein
+ 31   judith     Nein
+ 39   melanie    Nein
+ 47   romain     Nein
+ 49   rolf       Nein
+ 64   robin      Nein
+==== ========== ===========
 <BLANKLINE>
 
-This rule is application-specific. All users with one of the following
-profiles can see each other's calendars:
 
->>> from lino.utils import rstgen
->>> print(rstgen.ul([unicode(p) for p in dd.UserProfiles.items() if p.coaching_level]))
-- Begleiter im DSBE
-- Integrations-Assistent (Manager)
-- Berater Neuanträge
-- Schuldenberater
-- Sozi
-- Social agent (Manager)
-- Verwalter
-<BLANKLINE>
+Each user who has view access to the calendar
+Only UserProfile with a non-empty `office_level` can see the calendar.
+All users with one of the following profiles can see each other's calendars:
+
+>>> print('\n'.join([unicode(p) for p in dd.UserProfiles.items() if p.coaching_level]))
+Begleiter im DSBE
+Integrations-Assistent (Manager)
+Berater Neuanträge
+Schuldenberater
+Sozi
+Social agent (Manager)
+Verwalter
 
 

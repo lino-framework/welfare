@@ -34,6 +34,8 @@ cal = dd.resolve_app('cal')
 
 
 def check_subscription(user, calendar):
+    if calendar is None:
+        return
     try:
         cal.Subscription.objects.get(user=user, calendar=calendar)
     except cal.Subscription.DoesNotExist:
@@ -59,15 +61,18 @@ class User(User):
             return
 
         if not self.calendar:
-            i = cal.Calendar.objects.all().count()
-            i = i % len(cal.Calendar.COLOR_CHOICES)
-            obj = cal.Calendar(
-                name=unicode(self),
-                color=cal.Calendar.COLOR_CHOICES[i])
-            obj.full_clean()
-            obj.save()
-            self.calendar = obj
-            super(User, self). save(*args, **kwargs)
+            return
+
+        # if not self.calendar:
+        #     i = cal.Calendar.objects.all().count()
+        #     i = i % len(cal.Calendar.COLOR_CHOICES)
+        #     obj = cal.Calendar(
+        #         name=unicode(self),
+        #         color=cal.Calendar.COLOR_CHOICES[i])
+        #     obj.full_clean()
+        #     obj.save()
+        #     self.calendar = obj
+        #     super(User, self). save(*args, **kwargs)
 
         check_subscription(self, self.calendar)
 
