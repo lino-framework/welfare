@@ -1338,6 +1338,8 @@ class Migrator(Migrator):
         """Default migration. 
         Overridden by :mod:`lino_welfare.settings.chatelet`.
 
+        - aids.AidType: removed field "remark"
+
         """
     
         humanlinks_Link = resolve_model("humanlinks.Link")
@@ -1376,6 +1378,19 @@ class Migrator(Migrator):
             return uploads_Upload(**kw)
         globals_dict.update(create_uploads_upload=create_uploads_upload)
     
+        aids_AidType = resolve_model('aids.AidsType')
+
+        def create_aids_aidtype(id, name, build_method, template, remark):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(build_method=build_method)
+            kw.update(template=template)
+            # kw.update(remark=remark)
+            return aids_AidType(**kw)
+        globals_dict.update(create_aids_aidtype=create_aids_aidtype)
+
+
         return '1.1.12'
 
 

@@ -22,14 +22,15 @@ from lino_welfare.migrate import *
 class Migrator(Migrator):
 
     def migrate_from_1_1_11(self, globals_dict):
-        """Special migration for chatelet 1.1.12.  Was used on 20140325.
+        """Special migration for chatelet 1.1.12.  
+        Was used on 20140325 and on 20140407.
 
         - course providers are companies
         - pupils are clients
         - courses.Line replaces courses.CourseOffer
         - courses.Topic replaces courses.CourseContent
 
-           """
+        """
     
         super(Migrator, self).migrate_from_1_1_11(globals_dict)
     
