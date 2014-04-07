@@ -1,0 +1,22 @@
+{% extends "attestations/Attestation/base.body.html" %}
+
+{% set client = this.project %}
+
+{% block body %}
+
+<p>{{tr(en="Todo list for",
+        de="Aktionsplan für",
+        fr="Plan d'action pour")}}
+{{client.get_full_name(nominative=True)}}
+{{tr(en="living at", de="wohnhaft zu", 
+fr="domicilié"+this.project.mf("","e","(e)")+" à")}}
+{{', '.join(client.address_location_lines())}}, 
+GSM: {{client.gsm}}
+</p>
+
+{{ ar.show('cal.TasksByClient', client) }}
+
+{% endblock %}
+
+{% block signature %}
+{% endblock %}

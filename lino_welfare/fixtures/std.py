@@ -88,6 +88,16 @@ def attestation_types():  # also used for migration to 1.1.11
                   fr="Contenu carte eID",
                   en="eID sheet"))
 
+    yield attType(
+        build_method='appypdf',
+        template='Default.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('pcsw.Client')),
+        **babelkw('name',
+                  de="Aktionsplan",
+                  fr="Plan d'action",
+                  en="to-do list"))
+
 
 def objects():
 

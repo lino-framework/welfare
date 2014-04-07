@@ -176,12 +176,21 @@ class EventsByClient(Events):
         return kw  # tricky
 
 
+class TasksByClient(Tasks):
+    required = dd.required(user_groups='coaching')
+    master_key = 'project'
+    column_names = 'start_date due_date summary description notes'
+
+    @dd.displayfield(_("Notes"))
+    def notes(self, obj, ar):
+        return '.' * 20
+
+
 class Guest(Guest):
 
     def get_attestation_options(self, ar, **kw):
         kw.update(project=self.event.project)
         return super(Guest, self).get_attestation_options(ar, **kw)
-
 
 
 @dd.receiver(dd.post_analyze)
