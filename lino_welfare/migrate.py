@@ -1335,10 +1335,13 @@ class Migrator(Migrator):
         return '1.1.11'
 
     def migrate_from_1_1_11(self, globals_dict):
-        """Default migration. 
+        """Default migration.
         Overridden by :mod:`lino_welfare.settings.chatelet`.
 
         - aids.AidType: removed field "remark"
+        - aids.Aid: renamed fields
+          "project" to "client"
+          "type" to "aid_type"
 
         """
     
@@ -1395,7 +1398,7 @@ class Migrator(Migrator):
         def create_aids_aid(id, project_id, decided_date, decider_id, applies_from, applies_until, type_id, category_id, amount):
             kw = dict()
             kw.update(id=id)
-            kw.update(project_id=project_id)
+            kw.update(client_id=project_id)
             kw.update(decided_date=decided_date)
             kw.update(decider_id=decider_id)
             kw.update(applies_from=applies_from)
