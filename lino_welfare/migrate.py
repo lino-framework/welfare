@@ -1379,6 +1379,7 @@ class Migrator(Migrator):
         globals_dict.update(create_uploads_upload=create_uploads_upload)
     
         aids_AidType = resolve_model('aids.AidsType')
+        bv2kw = globals_dict.get('bv2kw')
 
         def create_aids_aidtype(id, name, build_method, template, remark):
             kw = dict()
