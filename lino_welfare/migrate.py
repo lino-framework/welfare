@@ -1342,6 +1342,7 @@ class Migrator(Migrator):
         - aids.Aid: renamed fields
           "project" to "client"
           "type" to "aid_type"
+        - attestations.Attestation.type : renamed to attestation_type
 
         """
     
@@ -1430,6 +1431,27 @@ class Migrator(Migrator):
             kw.update(invite_client=invite_client)
             return cal_EventType(**kw)
         globals_dict.update(create_cal_eventtype=create_cal_eventtype)
+
+        attestations_Attestation = resolve_model('attestations.Attestation')
+        def create_attestations_attestation(id, owner_type_id, owner_id, user_id, project_id, build_time, build_method, company_id, contact_person_id, contact_role_id, type_id, language):
+            kw = dict()
+            kw.update(id=id)
+            owner_type_id = new_content_type_id(owner_type_id)
+            kw.update(owner_type_id=owner_type_id)
+            kw.update(owner_id=owner_id)
+            kw.update(user_id=user_id)
+            kw.update(project_id=project_id)
+            kw.update(build_time=build_time)
+            kw.update(build_method=build_method)
+            kw.update(company_id=company_id)
+            kw.update(contact_person_id=contact_person_id)
+            kw.update(contact_role_id=contact_role_id)
+            kw.update(attestation_type_id=type_id)
+            kw.update(language=language)
+            return attestations_Attestation(**kw)
+        globals_dict.update(
+            create_attestations_attestation=create_attestations_attestation)
+
 
 
         return '1.1.12'
