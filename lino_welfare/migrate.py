@@ -1410,6 +1410,27 @@ class Migrator(Migrator):
             return aids_Aid(**kw)
         globals_dict.update(create_aids_aid=create_aids_aid)
 
+        cal_EventType = resolve_model('cal.EventType')
+        def create_cal_eventtype(id, name, seqno, build_method, template, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, invite_team_members_id, invite_client):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(seqno=seqno)
+            kw.update(build_method=build_method)
+            kw.update(template=template)
+            kw.update(attach_to_email=attach_to_email)
+            kw.update(email_template=email_template)
+            kw.update(description=description)
+            kw.update(is_appointment=is_appointment)
+            kw.update(all_rooms=all_rooms)
+            kw.update(locks_user=locks_user)
+            kw.update(start_date=start_date)
+            if event_label is not None: kw.update(bv2kw('event_label',event_label))
+            # kw.update(invite_team_members_id=invite_team_members_id)
+            kw.update(invite_client=invite_client)
+            return cal_EventType(**kw)
+        globals_dict.update(create_cal_eventtype=create_cal_eventtype)
+
 
         return '1.1.12'
 
