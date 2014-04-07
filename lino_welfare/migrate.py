@@ -1452,7 +1452,19 @@ class Migrator(Migrator):
         globals_dict.update(
             create_attestations_attestation=create_attestations_attestation)
 
-
+        system_TextFieldTemplate = resolve_model('system.TextFieldTemplate')
+        
+        def create_system_textfieldtemplate(id, user_id, name, description, team_id, text):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(user_id=user_id)
+            kw.update(name=name)
+            kw.update(description=description)
+            # kw.update(team_id=team_id)
+            kw.update(text=text)
+            return system_TextFieldTemplate(**kw)
+        globals_dict.update(
+            create_system_textfieldtemplate=create_system_textfieldtemplate)
 
         return '1.1.12'
 
