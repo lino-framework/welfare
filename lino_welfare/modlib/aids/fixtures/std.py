@@ -37,7 +37,7 @@ def objects():
         'name',
         de="Ausländerbeihilfe",
         en="Ausländerbeihilfe",
-        fr="Aide sociale pour étrangers")
+        fr="Aide aux immigrants")
     kw.update(
         dd.babelkw(
             'long_name',
@@ -59,18 +59,43 @@ def objects():
     aidType = Instantiator(
         'aids.AidType', "name",
         aid_regime=AidRegimes.medical).build
-    yield aidType(_("Allgemeine medizinische Kosten"))
+    yield aidType(
+        **dd.babelkw(
+            'name',
+            de="Allgemeine medizinische Kosten",
+            en="General Medical Costs",
+            fr="Remboursement de frais médicaux"))
 
-    aidType = Instantiator(
-        'aids.AidType', "name",
-        aid_regime=AidRegimes.other).build
+    # aidType = Instantiator(
+    #     'aids.AidType', "name",
+    #     aid_regime=AidRegimes.other).build
     yield aidType(_("Möbellager"))
     yield aidType(_("Heizkosten"))
 
-    Decider = Instantiator('aids.Decider', "name").build
-    yield Decider("Sozialhilferat (SHR)")
-    yield Decider("Ständiges Präsidium (SP)")
-    yield Decider("Sozialhilfeausschuss (SAS)")
+    aidRole = Instantiator(
+        'aids.HelperRole', "name",
+        aid_regime=AidRegimes.medical).build
+    yield aidRole(
+        **dd.babelkw(
+            'name',
+            de="Hausarzt",
+            en="General physician",
+            et="Perearst",
+            fr="Médecin général"))
+    yield aidRole(
+        **dd.babelkw(
+            'name',
+            de="Facharzt",
+            en="Special physician",
+            et="Eriala arst",
+            fr="Médecin spécialisé"))
+    yield aidRole(
+        **dd.babelkw(
+            'name',
+            de="Apotheke",
+            en="Pharmacy",
+            et="Apteek",
+            fr="Pharmacie"))
 
     Category = dd.resolve_model('aids.Category')
     yield Category(**babel_values(
@@ -88,3 +113,9 @@ def objects():
         en="Person with family at charge",
         de="Person mit Familienlasten",
         fr="Personne qui cohabite avec une famille à sa charge"))
+
+    Decider = Instantiator('aids.Decider', "name").build
+    yield Decider("Sozialhilferat (SHR)")
+    yield Decider("Ständiges Präsidium (SP)")
+    yield Decider("Sozialhilfeausschuss (SAS)")
+

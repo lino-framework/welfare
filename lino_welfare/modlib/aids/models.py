@@ -115,8 +115,8 @@ class AidTypes(dd.Table):
     """
     model = 'aids.AidType'
     required = dd.required(user_level='admin', user_groups='office')
-    column_names = 'name build_method template *'
-    order_by = ["name"]
+    column_names = 'aid_regime name build_method template *'
+    order_by = ["aid_regime", "name"]
 
     insert_layout = """
     name
@@ -137,6 +137,8 @@ class HelperRole(dd.BabelNamed):
         verbose_name = _("Helper Role")
         verbose_name_plural = _("Helper Roles")
 
+    aid_regime = AidRegimes.field(default=AidRegimes.medical)
+
 
 class HelperRoles(dd.Table):
     model = 'aids.HelperRole'
@@ -151,6 +153,13 @@ class Helper(contacts.ContactRelated):
     aid = models.ForeignKey('aids.Aid')
     role = models.ForeignKey('aids.HelperRole')
     contact_type = models.ForeignKey('pcsw.ClientContactType')
+
+    @dd.chooser()
+    def role_choices(self, aid):
+        M = dd.resolve_model('aids.HelperRole')
+        if aid is None:
+            return M.objects.all()
+        return M.objects.filter(aid_regime=aid.aid_regime)
 
 
 class Helpers(dd.Table):
@@ -199,7 +208,7 @@ class Aid(dd.Model):
     @dd.chooser()
     def aid_type_choices(self, aid_regime):
         M = dd.resolve_model('aids.AidType')
-        logger.info("20140331 %s", aid_regime)
+        # logger.info("20140331 %s", aid_regime)
         if aid_regime is None:
             return M.objects.all()
         return M.objects.filter(aid_regime=aid_regime)
