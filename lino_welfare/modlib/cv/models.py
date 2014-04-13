@@ -170,7 +170,7 @@ class PersonProperty(properties.PropertyOccurence):
     The occurence of a given 
     :mod:`Property <lino.modlib.properties.models.Property>` 
     on a given 
-    :class:`Client <lino_welfare.modlib.newcomers.models.Client>`.
+    :class:`Client <lino_welfare.modlib.pcsw.models.Client>`.
     """
 
     allow_cascaded_delete = ['person']
@@ -190,16 +190,15 @@ class PersonProperty(properties.PropertyOccurence):
 
 class PersonProperties(dd.Table):
     model = PersonProperty
-    #~ hidden_columns = frozenset(['group'])
     hidden_columns = 'group id'
     required = dd.required(user_groups='integ', user_level='manager')
 
 
 class PropsByPerson(PersonProperties):
 
-    """
-    Shows the :class:`PersonProperty` instances of a 
-    :class:`Client <lino_welfare.modlib.newcomers.models.Client>`.
+    """Shows the :class:`PersonProperty` instances of a :class:`Client
+    <lino_welfare.modlib.pcsw.models.Client>`.
+
     """
     master_key = 'person'
     column_names = "property value remark *"
@@ -223,11 +222,9 @@ class PersonPropsByProp(PersonProperties):
 
 class ConfiguredPropsByPerson(PropsByPerson):
 
-    """
-    Base class for 
-    :class`SkillsByPerson`, 
-    :class`SoftSkillsByPerson` and
-    :class`ObstaclesByPerson`.
+    """Base class for :class`SkillsByPerson`, :class`SoftSkillsByPerson`
+    and :class`ObstaclesByPerson`.
+
     """
 
     propgroup_config_name = None
@@ -249,38 +246,6 @@ class ConfiguredPropsByPerson(PropsByPerson):
             return _("(SiteConfig %s is empty)" % self.propgroup_config_name)
         return babelattr(pg, 'name')
 
-    @classmethod
-    def unused_on_analyze(self, site):
-        """
-        This is being called once for each subclass.
-        """
-        #~ print "20130220 after_site_setup %s" % self
-        super(ConfiguredPropsByPerson, self).on_analyze(site)
-        if self.propgroup_config_name:
-            def adapt():
-                try:
-                    sc = site.site_config
-                    pg = getattr(sc, self.propgroup_config_name)
-                    self.known_values = dict(group=pg)
-                    if pg is None:
-                        self.label = _("(SiteConfig %s is empty)" %
-                                       self.propgroup_config_name)
-                    else:
-                        self.label = lazy(babelattr, unicode)(pg, 'name')
-                    #~ print ("20130228 adapted %s to site config %r",self.propgroup_config_name,pg)
-                except DatabaseError as e:
-                    pass  # database not initialized
-
-            @dd.receiver(dd.connection_created, weak=False)
-            def my_connection_created(sender, **kw):
-                adapt()
-
-            SiteConfig = site.modules.system.SiteConfig
-
-            @dd.receiver(dd.post_save, sender=SiteConfig, weak=False)
-            def my_post_save(sender, instance=None, **kwargs):
-                adapt()
-
 
 class SkillsByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_skills'
@@ -292,10 +257,6 @@ class SoftSkillsByPerson(ConfiguredPropsByPerson):
 
 class ObstaclesByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_obstacles'
-
-#~ @dd.receiver(dd.connection_created)
-#~ def my_callback(sender,**kw):
-    #~ raise Exception("20130302 connection_created")
 
 
 def site_setup(site):

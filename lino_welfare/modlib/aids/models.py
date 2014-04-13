@@ -87,9 +87,10 @@ class Deciders(dd.Table):
     """
 
 
-class AidType(dd.BabelNamed, dd.PrintableType):
+#class AidType(dd.BabelNamed, dd.PrintableType):
+class AidType(dd.BabelNamed):
 
-    templates_group = 'aids/Aid'
+    # templates_group = 'aids/Aid'
 
     class Meta:
         verbose_name = _("Aid Type")
@@ -126,7 +127,7 @@ class AidTypes(dd.Table):
     detail_layout = """
     id aid_regime name
     long_name
-    build_method template
+    # build_method template
     aids.AidsByType
     """
 
@@ -144,7 +145,8 @@ class HelperRoles(dd.Table):
     model = 'aids.HelperRole'
 
 
-class Helper(contacts.ContactRelated):
+# class Helper(contacts.ContactRelated):
+class Helper(dd.Model):
 
     class Meta:
         verbose_name = _("Helper")
@@ -152,7 +154,9 @@ class Helper(contacts.ContactRelated):
 
     aid = models.ForeignKey('aids.Aid')
     role = models.ForeignKey('aids.HelperRole')
-    contact_type = models.ForeignKey('pcsw.ClientContactType')
+    # contact_type = models.ForeignKey('pcsw.ClientContactType')
+    name = models.CharField(_("Name"), max_length=50)
+    remark = models.CharField(_("Remark"), max_length=200)
 
     @dd.chooser()
     def role_choices(self, aid):
@@ -168,7 +172,9 @@ class Helpers(dd.Table):
 
 class HelpersByAid(Helpers):
     master_key = 'aid'
-    column_names = 'role company contact_person'
+    # column_names = 'role company contact_person'
+    column_names = 'role name remark'
+    auto_fit_column_widths = True
 
 
 class Aid(dd.Model):
