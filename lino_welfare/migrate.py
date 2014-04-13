@@ -1497,10 +1497,13 @@ class Migrator(Migrator):
             kw.update(is_obsolete=is_obsolete)
             kw.update(activity_id=activity_id)
             for x in (bank_account1, bank_account2):
+                x = x.strip()
                 if x:
-                    bic, iban = x.split(':')
-                    yield sepa.Account(
-                        partner_id=id, iban=iban, bic=bic)
+                    a = x.split(':')
+                    if len(a) == 2:
+                        bic, iban = a
+                        yield sepa.Account(
+                            partner_id=id, iban=iban, bic=bic)
             if False:
                 kw.update(bank_account1=bank_account1)
                 kw.update(bank_account2=bank_account2)
