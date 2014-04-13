@@ -116,7 +116,8 @@ class AidTypes(dd.Table):
     """
     model = 'aids.AidType'
     required = dd.required(user_level='admin', user_groups='office')
-    column_names = 'aid_regime name build_method template *'
+    # column_names = 'aid_regime name build_method template *'
+    column_names = 'aid_regime name *'
     order_by = ["aid_regime", "name"]
 
     insert_layout = """
