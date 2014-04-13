@@ -317,8 +317,9 @@ class Migrator(Migrator):
                     if v:
                         lost[n] = v
                 if lost:
-                    dblogger.warning("Lost data for Person %s without NISS: %s",
-                                     partner_ptr_id, lost)
+                    dblogger.warning(
+                        "Lost data for Person %s without NISS: %s",
+                        partner_ptr_id, lost)
                     p = contacts_Person.objects.get(pk=partner_ptr_id)
                     if p.remarks:
                         p.remarks += '\n'
@@ -1074,7 +1075,7 @@ class Migrator(Migrator):
             #~ kw.update(color=color)
             if event_label is not None:
                 kw.update(bv2kw('event_label', event_label))
-            kw.update(invite_team_members_id=invite_team_members_id)
+            # kw.update(invite_team_members_id=invite_team_members_id)
             kw.update(invite_client=invite_client)
             return cal_EventType(**kw)
         globals_dict.update(create_cal_calendar=create_cal_calendar)
@@ -1509,6 +1510,8 @@ class Migrator(Migrator):
                         bic, iban = a
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
+                    else:
+                        logger.warning("Lost invalid BIC:IBAN %r for partner %s", x, id)
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
