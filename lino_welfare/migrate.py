@@ -1467,6 +1467,7 @@ class Migrator(Migrator):
             create_system_textfieldtemplate=create_system_textfieldtemplate)
 
         contacts_Partner = resolve_model('contacts.Partner')
+        sepa = dd.resolve_app('sepa')
 
         def create_contacts_partner(id, created, modified, country_id, city_id, region_id, zip_code, name, addr1, street_prefix, 
             street, street_no, street_box, addr2, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, 
@@ -1495,13 +1496,22 @@ class Migrator(Migrator):
             kw.update(remarks=remarks)
             kw.update(is_obsolete=is_obsolete)
             kw.update(activity_id=activity_id)
-            if False:  # TODO: create sepa.Account
+            for x in (bank_account1, bank_account2):
+                if x:
+                    bic, iban = x.split(':')
+                    yield sepa.Account(
+                        partner_id=id, iban=iban, bic=bic)
+            if False:
                 kw.update(bank_account1=bank_account1)
                 kw.update(bank_account2=bank_account2)
-            return contacts_Partner(**kw)
+            yield contacts_Partner(**kw)
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
+
+        def noop(*args):
+            return None
+        globals_dict.update(create_users_team=noop)
 
         return '1.1.12'
 
