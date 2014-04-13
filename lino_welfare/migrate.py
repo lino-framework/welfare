@@ -1496,6 +1496,11 @@ class Migrator(Migrator):
             kw.update(remarks=remarks)
             kw.update(is_obsolete=is_obsolete)
             kw.update(activity_id=activity_id)
+            if False:
+                kw.update(bank_account1=bank_account1)
+                kw.update(bank_account2=bank_account2)
+            yield contacts_Partner(**kw)
+        
             for x in (bank_account1, bank_account2):
                 x = x.strip()
                 if x:
@@ -1504,10 +1509,6 @@ class Migrator(Migrator):
                         bic, iban = a
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
-            if False:
-                kw.update(bank_account1=bank_account1)
-                kw.update(bank_account2=bank_account2)
-            yield contacts_Partner(**kw)
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
