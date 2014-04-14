@@ -46,7 +46,7 @@ def attestation_types():  # also used for migration to 1.1.11
     #               fr="Attestation",
     #               en="Attestation"))
     yield attType(
-        body_template='aids_Aid.body.html',
+        body_template='aid_certificate.body.html',
         template='Default.odt',
         primary=True,
         skip_dialog=True,
@@ -57,7 +57,7 @@ def attestation_types():  # also used for migration to 1.1.11
                   fr="Attestation d'aide",
                   en="Aid certificate"))
     yield attType(
-        body_template='cal_Guest.body.html',
+        body_template='presence_certificate.body.html',
         template='Default.odt',
         primary=True,
         skip_dialog=True,
