@@ -156,8 +156,8 @@ class Helper(dd.Model):
     aid = models.ForeignKey('aids.Aid')
     role = models.ForeignKey('aids.HelperRole')
     # contact_type = models.ForeignKey('pcsw.ClientContactType')
-    name = models.CharField(_("Name"), max_length=50)
-    remark = models.CharField(_("Remark"), max_length=200)
+    name = models.CharField(_("Name"), max_length=50, blank=True)
+    remark = models.CharField(_("Remark"), max_length=200, blank=True)
 
     @dd.chooser()
     def role_choices(self, aid):
