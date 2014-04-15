@@ -1340,14 +1340,15 @@ class Migrator(Migrator):
         return '1.1.11'
 
     def migrate_from_1_1_11(self, globals_dict):
-        """Default migration.
-        Overridden by :mod:`lino_welfare.settings.chatelet`.
-
+        """
         - aids.AidType: removed field "remark"
         - aids.Aid: renamed fields
           "project" to "client"
           "type" to "aid_type"
         - attestations.Attestation.type : renamed to attestation_type
+
+        Note: this method is overridden by
+        :mod:`lino_welfare.settings.chatelet`.
 
         """
     
@@ -1515,6 +1516,7 @@ class Migrator(Migrator):
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
                     else:
+                        logger.info("20140415 get IBAN/BIC for %s", x)
                         try:
                             iban, bic = belgian_nban_to_iban_bic(x)
                             yield sepa.Account(
