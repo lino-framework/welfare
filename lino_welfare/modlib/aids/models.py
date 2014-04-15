@@ -321,6 +321,7 @@ def setup_config_menu(site, ui, profile, m):
     m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.AidTypes')
     m.add_action('aids.HelperRoles')
+    m.add_action('aids.Categories')
 
 
 def setup_explorer_menu(site, ui, profile, m):

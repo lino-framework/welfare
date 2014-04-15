@@ -268,41 +268,44 @@ def site_setup(site):
 
 def customize_siteconfig():
 
-    dd.inject_field('system.SiteConfig',
-                    'propgroup_skills',
-                    models.ForeignKey('properties.PropGroup',
-                                      blank=True, null=True,
-                                      verbose_name=_("Skills Property Group"),
-                                      related_name='skills_sites'),
-        """The property group to be used as master 
-        for the SkillsByPerson table.""")
-    dd.inject_field('system.SiteConfig',
-                    'propgroup_softskills',
-                    models.ForeignKey('properties.PropGroup',
-                                      blank=True, null=True,
-                                      verbose_name=_(
-                                          "Soft Skills Property Group"),
-                                      related_name='softskills_sites',
-                                      ),
-        """The property group to be used as master 
-        for the SoftSkillsByPerson table."""
-                    )
-    dd.inject_field('system.SiteConfig',
-                    'propgroup_obstacles',
-                    models.ForeignKey('properties.PropGroup',
-                                      blank=True, null=True,
-                                      verbose_name=_(
-                                          "Obstacles Property Group"),
-                                      related_name='obstacles_sites',
-                                      ),
-        """The property group to be used as master 
-        for the ObstaclesByPerson table."""
-                    )
+    dd.inject_field(
+        'system.SiteConfig',
+        'propgroup_skills',
+        models.ForeignKey(
+            'properties.PropGroup',
+            blank=True, null=True,
+            verbose_name=_("Skills Property Group"),
+            related_name='skills_sites',
+            help_text=_(
+                "The property group to be used as master "
+                "for the SkillsByPerson table.")))
+    dd.inject_field(
+        'system.SiteConfig',
+        'propgroup_softskills',
+        models.ForeignKey(
+            'properties.PropGroup',
+            blank=True, null=True,
+            verbose_name=_("Soft Skills Property Group"),
+            related_name='softskills_sites',
+            help_text=_(
+                "The property group to be used as master "
+                "for the SoftSkillsByPerson table.")))
+    dd.inject_field(
+        'system.SiteConfig',
+        'propgroup_obstacles',
+        models.ForeignKey(
+            'properties.PropGroup',
+            blank=True, null=True,
+            verbose_name=_("Obstacles Property Group"),
+            related_name='obstacles_sites',
+            help_text=_(
+                "The property group to be used as master "
+                "for the ObstaclesByPerson table.")))
 
 
 customize_siteconfig()
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("cv", config.verbose_name)
+    m = m.add_menu("cv", dd.apps.integ.verbose_name)
     m.add_action(LanguageKnowledges)
