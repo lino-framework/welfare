@@ -1515,9 +1515,12 @@ class Migrator(Migrator):
                         bic, iban = a
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
+                    elif True:
+                        logger.warning(
+                            "Ignored NBAN %r for partner %s", x, id)
                     else:
-                        logger.info("20140415 get IBAN/BIC for %s", x)
                         try:
+                            logger.info("20140415 get IBAN/BIC for %s", x)
                             iban, bic = belgian_nban_to_iban_bic(x)
                             yield sepa.Account(
                                 partner_id=id, iban=iban, bic=bic)
