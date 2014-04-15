@@ -39,6 +39,7 @@ from lino.utils.mti import create_child
 from lino.modlib.sepa.utils import belgian_nban_to_iban_bic
 
 from lino_welfare.fixtures.std import attestation_types
+from lino_welfare.modlib.aids.fixtures.std import objects as aids_objects
                     
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
@@ -1295,6 +1296,7 @@ class Migrator(Migrator):
         # os.remove(a)
     """)
             loader.save(attestation_types())
+            loader.save(aids_objects())
 
             for u in users_User.objects.exclude(profile=''):
                 cal = cal_Calendar(name=u.username)
@@ -1317,7 +1319,7 @@ class Migrator(Migrator):
                 kw.update(contact_person_id=note.contact_person_id)
                 kw.update(contact_role_id=note.contact_role_id)
                 # kw.update(date=date)
-                kw.update(type=cvat)
+                kw.update(attestation_type=cvat)
                 # assert note.event_type_id == 
                 # assert not note.subject
                 # kw.update(body=body)
@@ -1515,12 +1517,12 @@ class Migrator(Migrator):
                         bic, iban = a
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
-                    elif True:
+                    elif False:
                         logger.warning(
                             "Ignored NBAN %r for partner %s", x, id)
                     else:
                         try:
-                            logger.info("20140415 get IBAN/BIC for %s", x)
+                            logger.info("20140415 Compute IBAN/BIC for %s", x)
                             iban, bic = belgian_nban_to_iban_bic(x)
                             yield sepa.Account(
                                 partner_id=id, iban=iban, bic=bic)
