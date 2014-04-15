@@ -36,8 +36,10 @@ from lino.utils import dblogger
 from lino import dd
 from lino.modlib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
+from lino.modlib.sepa.utils import belgian_nban_to_iban_bic
 
 from lino_welfare.fixtures.std import attestation_types
+                    
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
@@ -710,13 +712,14 @@ class Migrator(Migrator):
         pcsw_CoachingType = resolve_model('pcsw.CoachingType')
         users_Team = resolve_model("users.Team")
 
-        def after_load():
+        def after_load(loader):
             for o in pcsw_CoachingType.objects.all():
                 kw = dict()
                 for n in 'id name name_fr'.split():
                     kw[n] = getattr(o, n)
                 users_Team(**kw).save()
-        globals_dict.update(after_load=after_load)
+        # globals_dict.update(after_load=after_load)
+        self.after_load(after_load)
         return '1.1.1'
 
 
@@ -1331,7 +1334,8 @@ class Migrator(Migrator):
             fd.close()
             logger.info("Wrote after_migrate script %s")
 
-        globals_dict.update(after_load=after_load)
+        # globals_dict.update(after_load=after_load)
+        self.after_load(after_load)
 
         return '1.1.11'
 
@@ -1511,7 +1515,14 @@ class Migrator(Migrator):
                         yield sepa.Account(
                             partner_id=id, iban=iban, bic=bic)
                     else:
-                        logger.warning("Lost invalid BIC:IBAN %r for partner %s", x, id)
+                        try:
+                            iban, bic = belgian_nban_to_iban_bic(x)
+                            yield sepa.Account(
+                                partner_id=id, iban=iban, bic=bic)
+                        except Exception as e:
+                            logger.warning(
+                                "Lost BIC:IBAN %r for partner %s : %s",
+                                x, id, e)
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
