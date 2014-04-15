@@ -307,5 +307,6 @@ customize_siteconfig()
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("cv", dd.apps.integ.verbose_name)
+    menu = dd.apps.integ
+    m = m.add_menu(menu.app_label, menu.verbose_name)
     m.add_action(LanguageKnowledges)

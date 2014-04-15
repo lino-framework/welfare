@@ -186,7 +186,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.reception'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
-        yield 'lino.modlib.badges'
+        yield 'lino_welfare.modlib.badges'
         yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.attestations'
