@@ -47,6 +47,8 @@ SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
 def target_name(obj):
     bm = obj.get_build_method()
+    if bm is None:
+        return None
     return bm.get_target(None, obj).name
 
 
@@ -1291,9 +1293,10 @@ class Migrator(Migrator):
     import shutil
 
     def doit(a, b):
-        shutil.copyfile(src, dst)
-        # os.rename(a, b)
-        # os.remove(a)
+        if a and b:
+            shutil.copyfile(src, dst)
+            # os.rename(a, b)
+            # os.remove(a)
     """)
             loader.save(attestation_types())
             loader.save(aids_objects())
