@@ -392,7 +392,7 @@ class Contract(isip.ContractBase):
                 if n:
                     ar.info(unicode(
                         _("(%d candidatures have been marked inactive)")) % n)
-                    ar.response.update(alert=_("Success"))
+                    ar.set_response(alert=_("Success"))
         #~ return kw
 
     def full_clean(self, *args, **kw):

@@ -274,7 +274,7 @@ during a given period.
                 if c.primary:
                     c.primary = False
                     c.save()
-                    ar.response.update(refresh_all=True)
+                    ar.set_response(refresh_all=True)
         #~ return kw
 
     #~ def get_row_permission(self,user,state,ba):

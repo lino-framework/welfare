@@ -70,7 +70,7 @@ class ClientAddress(contacts.AddressLocation):
             for k in ADDRESS_FIELDS:
                 setattr(self.client, k, getattr(self, k))
             self.client.save()
-            ar.response.update(refresh_all=True)
+            ar.set_response(refresh_all=True)
 
 ADDRESS_FIELDS = dd.fields_list(
     ClientAddress,
