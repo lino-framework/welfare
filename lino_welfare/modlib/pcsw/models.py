@@ -243,6 +243,22 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
+from lino.core.actions import SubmitInsert
+
+
+class SubmitInsertClient(SubmitInsert):
+    def run_from_ui(self, ar, **kw):
+        obj = ar.create_instance_from_request()
+
+        def ok(ar2):
+            self.save_new_instance(ar2, obj)
+
+        if obj.first_name == 'Foo':
+            ar.confirm(ok, _("Is that true? Your name is 'Foo'?"))
+        else:
+            ok(ar)
+
+
 class Client(contacts.Person,
              # dd.BasePrintable,
              beid.BeIdCardHolder):
@@ -336,15 +352,18 @@ class Client(contacts.Person,
 
     #~ job_office_contact = models.ForeignKey("contacts.Contact",
     #~ job_office_contact = models.ForeignKey("links.Link",
-    job_office_contact = models.ForeignKey("contacts.Role",
-                                           blank=True, null=True,
-                                           verbose_name=_(
-                                               "Contact person at local job office"),
-                                           related_name='persons_job_office')
+    job_office_contact = models.ForeignKey(
+        "contacts.Role",
+        blank=True, null=True,
+        verbose_name=_(
+            "Contact person at local job office"),
+        related_name='persons_job_office')
 
     client_state = ClientStates.field(default=ClientStates.newcomer)
 
     refusal_reason = RefusalReasons.field(blank=True)
+
+    submit_insert = SubmitInsertClient()
 
     @classmethod
     def on_analyze(cls, site):

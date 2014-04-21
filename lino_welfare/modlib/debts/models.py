@@ -326,11 +326,9 @@ The total monthly amount available for debts distribution."""))
 
     def after_ui_save(self, ar):
         """
-        Called from `extjs3.ext_ui.ExtUI.form2obj_and_save`
-        after successful save()
+        Called after successful save()
         """
         self.fill_defaults(ar)
-        #~ return kw
 
     def fill_defaults(self, ar=None):
         """
