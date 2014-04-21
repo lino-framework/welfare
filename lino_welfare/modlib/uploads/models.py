@@ -89,7 +89,7 @@ class Upload(Upload, contacts.ContactRelated):
 
         """
         ut = self.type
-        if not ut.warn_expiry_unit:
+        if not ut or not ut.warn_expiry_unit:
             return
         cal.update_reminder(
             1, self, self.user,
