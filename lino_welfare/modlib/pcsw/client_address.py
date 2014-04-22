@@ -89,12 +89,17 @@ ADDRESS_FIELDS = dd.fields_list(
 class ClientAddresses(dd.Table):
     model = 'pcsw.ClientAddress'
     required = dd.required(user_level='admin')
-    detail_layout = dd.FormLayout("""
+    insert_layout = """
+    country city zip_code
+    street street_no street_box
     address_type remark
+    """
+    detail_layout = dd.FormLayout("""
     country city zip_code
     addr1
     street street_no street_box
     addr2
+    address_type remark
     """, window_size=(60, 'auto'))
 
 
@@ -104,6 +109,7 @@ class AddressesByClient(ClientAddresses):
     column_names = 'address_type:10 remark:10 address_column:30 primary:5'
     label = _("Addresses")
     auto_fit_column_widths = True
+    stay_in_grid = True
 
 
 __all__ = [
