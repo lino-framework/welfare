@@ -1,5 +1,10 @@
 .. _welfare.tested.pcsw:
 
+..
+  This document is part of the test suite.
+  To test only this document, run::
+    $ python setup.py test -s tests.DocsTests.test_pcsw
+
 General PCSW
 ============
 
@@ -10,40 +15,105 @@ Some administrative stuff:
 >>> from __future__ import print_function
 >>> from lino.runtime import *
 >>> from django.test import Client
+>>> from django.utils import translation
 >>> import json
 >>> client = Client()
 
->>> ses = settings.SITE.login('rolf')
+>>> ses = settings.SITE.login('robin')
 
 
 Similar Persons
 ---------------
 
+The test database contains some examples of accidental duplicate data
+entry.
+
+One fictive person exists 3 times:
+
+- Dorothée Dobbelstein-Demeulenaere
+- Dorothée Demeulenaere
+- Dorothée Dobbelstein
+
+Here we try to create a fourth one:
+
 >>> obj = pcsw.Client(first_name=u"Dorothée", last_name="Dobbelstein")
+>>> dedupe.SimilarPersons.get_words(obj)
+set([u'Dobbelstein', u'Doroth\xe9e'])
 >>> ses.show(dedupe.SimilarPersons, obj)
 ================================================= ==========
  Other                                             Workflow
 ------------------------------------------------- ----------
- **Mrs Dorothée Demeulenaere (121)**
  **Mrs Dorothée Dobbelstein (123)**
  **Mrs Dorothée Dobbelstein-Demeulenaere (122)**
 ================================================= ==========
 <BLANKLINE>
 
+Note that *Mrs Dorothée Demeulenaere (121)* is missing. Our algorithm
+detects only two of the existing three duplicates.
+
+
+For the following tests we write a utility function:
+
+>>> def check(first_name, last_name):
+...     obj = pcsw.Client(first_name=first_name, last_name=last_name)
+...     qs = ses.spawn(dedupe.SimilarPersons, master_instance=obj)
+...     return [unicode(r) for r in qs.data_iterator]
+
+This function returns the names of the persons that Lino would detect
+as duplicates, depending on the given first_name and last_name.
+
+>>> check("Bernard", "Bodard")
+[u'Bernard Bodard (169)']
+
+Without our utility function our test would be less readable:
+
+>>> obj = pcsw.Client(first_name="Bernard", last_name="Bodard")
+>>> ses.show(dedupe.SimilarPersons, obj)
+========================== ==========
+ Other                      Workflow
+-------------------------- ----------
+ **Bernard Bodard (169)**
+========================== ==========
+<BLANKLINE>
+
+Some users tend to mix up first and last name. Lino would detect that:
+
+>>> check("Bodard", "Bernard")
+[u'Bernard Bodard (169)']
+
+>>> check("Erna", "Odar")
+[u'Bernard Bodard (169)']
+
+The following duplicates aren't yet detected though they obviously
+should. We are still experimenting...
+
+>>> check("Bernard-Marie", "Bodard")
+[]
+
+>>> check("Marie", "Bernard-Bodard")
+[]
+
+The following duplicate is not detected because Lino doesn't yet use
+phonetic algorithms:
+
+>>> check("Bernhard", "Bodard")
+[]
 
 UsersWithClients
 ----------------
 
->>> ses.show(integ.UsersWithClients, language='de')
-====================== ============ ============ ======= ======== ========= ================= ================= ========
- Begleiter              Auswertung   Ausbildung   Suche   Arbeit   Standby   Komplette Akten   Aktive Klienten   Total
----------------------- ------------ ------------ ------- -------- --------- ----------------- ----------------- --------
- Alicia Allmanns                     1                    1        1         2                 3                 5
- Hubert Huppertz        3            2            3       4        4         11                16                23
- Mélanie Mélard         4            4            2       2        3         12                15                20
- **Total (3 Zeilen)**   **7**        **7**        **5**   **7**    **8**     **25**            **34**            **48**
-====================== ============ ============ ======= ======== ========= ================= ================= ========
+>>> ses.show(integ.UsersWithClients)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+ Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
+-------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
+ Alicia Allmanns                   1                    1       1         2                 3                5
+ Hubert Huppertz      3            2           3        4       4         11                16               23
+ Mélanie Mélard       4            4           2        2       3         12                15               20
+ **Total (3 rows)**   **7**        **7**       **5**    **7**   **8**     **25**            **34**           **48**
+==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
+
 
 Printing UsersWithClients to pdf
 --------------------------------
@@ -94,6 +164,7 @@ Coaching types
 
 >>> with translation.override('de'):
 ...    ses.show(pcsw.CoachingTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ============================== ============================== ===================================================
  Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
 ------------------------------ ------------------------------ ---------------------------------------------------

@@ -64,7 +64,8 @@ class BeIdTests(RemoteAuthTestCase):
         be = countries.Country(name="Belgium", isocode="BE")
         be.save()
         kw = dict()
-        kw.update(card_number="123456789")
+        # kw.update(card_number="123456789")
+        # kw.update(national_id="680601 053-29")
         kw.update(first_name="Jean Jacques")
         kw.update(last_name="Jeffin")
         obj = Holder(**kw)
@@ -75,21 +76,40 @@ class BeIdTests(RemoteAuthTestCase):
         post_data = dict()
         post_data.update(card_data=readfile('beid_tests_1.txt'))
         post_data[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
+
+        # First attempt
         response = self.client.post(
             url, post_data,
             REMOTE_USER='root',
             HTTP_ACCEPT_LANGUAGE='en')
-        # self.assertEqual(response.content, "")
+        result = self.check_json_result(
+            response,
+            'alert success message')
+        self.assertEqual(result['success'], False)
+        expected = ("Sorry, I cannot handle that case: Cannot create "
+                    "new client because there is already a person named "
+                    "Jean Jacques Jeffin in our database.")
+        self.assertEqual(result['message'], expected)
+
+        # Second attempt
+        obj.national_id = "680601 053-29"
+        # obj.first_name = "Jean-Claude"
+        obj.full_clean()
+        obj.save()
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
         result = self.check_json_result(
             response,
             'xcallback success message')
         self.assertEqual(result['success'], True)
         expected = """\
 Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
-<br/>Place : None -> Place #1 (u\'Tallinn\')
+<br/>City : None -> Place #1 (u\'Tallinn\')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
-<br/>National ID : None -> \'680601 053-29\'
 <br/>eID card issuer : \'\' -> \'Tallinn\'
 <br/>ID card valid from : None -> 2011-08-19
 <br/>eID card type : None -> <BeIdCardTypes.belgian_citizen:1>
@@ -97,7 +117,7 @@ Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
 <br/>Birth place : \'\' -> \'Mons\'
 <br/>Country : None -> Country #BE (u\'Belgium\')
 <br/>Birth date : \'\' -> 1968-06-01
-<br/>eID card number : \'123456789\' -> \'592345678901\'
+<br/>eID card number : \'\' -> \'592345678901\'
 <br/>Zip code : \'\' -> \'1418\'"""
         # print(result['message'])
         self.assertEqual(result['message'], expected)
@@ -119,6 +139,23 @@ Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
             'Client "JEFFIN Jean Jacques (100)" has been saved.')
         obj = pcsw.Client.objects.get(id=100)
         addr = pcsw.ClientAddress.objects.get(client=obj)
-        self.assertEqual(addr.city, True)
+        self.assertEqual(addr.city.name, "Tallinn")
 
+        # No similar person exists. Create new client from eid
 
+        obj.first_name = "Jean-Claude"
+        obj.national_id = ""
+        obj.full_clean()
+        obj.save()
+        url = '/api/pcsw/Clients'
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = "Create new client Jean Jacques Jeffin : Are you sure?"
+        self.assertEqual(result['message'], expected)

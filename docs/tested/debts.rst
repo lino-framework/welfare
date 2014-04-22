@@ -41,6 +41,7 @@ Here is the textual representation of the "Expenses" panel:
 >>> ses.show(debts.ExpensesByBudget.request(obj),
 ...   column_names="account description amount remark",
 ...   limit=10)
+... #doctest: +NORMALIZE_WHITESPACE
 ====================================== =============================== ============ ===========
  Konto                                  Beschreibung                    Betrag       Bemerkung
 -------------------------------------- ------------------------------- ------------ -----------
