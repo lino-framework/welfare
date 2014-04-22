@@ -14,7 +14,27 @@ Some administrative stuff:
 >>> client = Client()
 
 >>> ses = settings.SITE.login('rolf')
->>> ses.show(integ.UsersWithClients,language='de')
+
+
+Similar Persons
+---------------
+
+>>> obj = pcsw.Client(first_name=u"Dorothée", last_name="Dobbelstein")
+>>> ses.show(dedupe.SimilarPersons, obj)
+================================================= ==========
+ Other                                             Workflow
+------------------------------------------------- ----------
+ **Mrs Dorothée Demeulenaere (121)**
+ **Mrs Dorothée Dobbelstein (123)**
+ **Mrs Dorothée Dobbelstein-Demeulenaere (122)**
+================================================= ==========
+<BLANKLINE>
+
+
+UsersWithClients
+----------------
+
+>>> ses.show(integ.UsersWithClients, language='de')
 ====================== ============ ============ ======= ======== ========= ================= ================= ========
  Begleiter              Auswertung   Ausbildung   Suche   Arbeit   Standby   Komplette Akten   Aktive Klienten   Total
 ---------------------- ------------ ------------ ------- -------- --------- ----------------- ----------------- --------
@@ -46,7 +66,6 @@ The following lines reproduced this problem
 
 
 
-
 eID card summary
 ----------------
 
@@ -68,7 +87,6 @@ to test the new `eid_info` field:
 >>> result = json.loads(res.content)
 >>> "Muss eID-Karte einlesen" in result['data']['client_info'][0]
 True
-
 
 
 Coaching types

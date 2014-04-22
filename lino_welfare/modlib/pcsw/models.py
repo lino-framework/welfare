@@ -253,8 +253,17 @@ class SubmitInsertClient(SubmitInsert):
         def ok(ar2):
             self.save_new_instance(ar2, obj)
 
-        if obj.first_name == 'Foo':
-            ar.confirm(ok, _("Is that true? Your name is 'Foo'?"))
+        qs = dedupe.SimilarPersons.find_similar_instances(obj)
+        if qs.count() > 0:
+            msg = _(
+                "There are %d clients with similar name:") % qs.count()
+            for other in qs[:4]:
+                msg += '<br/>' + unicode(other)
+            msg += '<br/>' + _("Are you sure you want to create a new "
+                               "client named %s?") % obj.get_full_name()
+            ar.confirm(ok, msg)
+        # elif obj.first_name == 'Foo':
+        #     ar.confirm(ok, _("Is that true? Your name is 'Foo'?"))
         else:
             ok(ar)
 

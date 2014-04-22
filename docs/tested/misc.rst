@@ -15,10 +15,10 @@ Some tests:
 >>> from lino import dd
 
 
+.. _welfare.tested.notes:
 
-A web request
--------------
-
+Notes
+=======
 
 >>> client = Client()
 >>> url = '/api/notes/NoteTypes/1?fmt=detail'
