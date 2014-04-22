@@ -1181,4 +1181,8 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         u.calendar = obj
         u.save()
 
+    # create a primary ClientAddress for each Client.
+    for obj in settings.SITE.modules.pcsw.Client.objects.all():
+        obj.get_primary_address()
+
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

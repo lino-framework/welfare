@@ -253,6 +253,12 @@ class SubmitInsertClient(SubmitInsert):
         def ok(ar2):
             self.save_new_instance(ar2, obj)
 
+        s = unicode(ar.bound_action)
+        logger.info("20140422 %s", s)
+        ar.confirm(ok, E.p(s))
+
+        return
+
         qs = dedupe.SimilarPersons.find_similar_instances(obj)
         if qs.count() > 0:
             msg = _(
@@ -726,7 +732,8 @@ class Client(contacts.Person,
         return settings.SITE.site_config.system_note_type
 
     def get_system_note_recipients(self, ar, silent):
-        for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
+        for u in settings.SITE.user_model.objects.filter(
+                coaching_supervisor=True):
             yield "%s <%s>" % (unicode(u), u.email)
 
     @dd.displayfield(_("Find appointment"))
@@ -744,14 +751,11 @@ class Client(contacts.Person,
         """
         diffs = []
         objects = [self]
+        kw = dict(client=self, address_type=AddressTypes.eid)
         try:
-            addr = ClientAddress.objects.get(
-                client=self,
-                address_type=ClientAddressTypes.eid)
+            addr = ClientAddress.objects.get(**kw)
         except ClientAddress.DoesNotExist:
-            addr = ClientAddress(
-                client=self,
-                address_type=ClientAddressTypes.eid)
+            addr = ClientAddress(**kw)
         objects.append(addr)
         for fldname, new in attrs.items():
             if fldname in ADDRESS_FIELDS:
@@ -767,6 +771,19 @@ class Client(contacts.Person,
                         dd.obj2str(new)))
                 setattr(obj, fld.name, new)
         return objects, diffs
+
+    def get_primary_address(self):
+        kw = dict(client=self, primary=True)
+        try:
+            return ClientAddress.objects.get(**kw)
+        except ClientAddress.DoesNotExist:
+            kw.update(address_type=AddressTypes.official)
+            for fldname in ADDRESS_FIELDS:
+                kw[fldname] = getattr(self, fldname)
+            addr = ClientAddress(**kw)
+            addr.full_clean()
+            addr.save()
+            return addr
 
 
 class ClientDetail(dd.FormLayout):

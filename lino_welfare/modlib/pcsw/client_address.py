@@ -14,7 +14,8 @@
 """
 Part of :mod:`lino_welfare.modlib.pcsw`.
 Defines the :class:`ClientAddress` class,
-the :class:`ClientAddressTypes` choicelist.
+the :class:`DataSources` choicelist.
+the :class:`AddressTypes` choicelist.
 """
 
 from __future__ import unicode_literals
@@ -31,13 +32,20 @@ from lino import dd
 contacts = dd.resolve_app('contacts')
 
 
-class ClientAddressTypes(dd.ChoiceList):
+class AddressTypes(dd.ChoiceList):
     verbose_name_plural = _("Address type")
-add = ClientAddressTypes.add_item
+add = AddressTypes.add_item
 add('01', _("Official address"), 'official')  # IT020
 add('02', _("Unverified address"), 'unverified')  # IT042
 add('03', _("Declared address"), 'declared')  # IT214
-add('10', _("Address on eID card"), 'eid')  # read from eid card
+add('04', _("Reference address"), 'reference')
+
+
+class DataSources(dd.ChoiceList):
+    verbose_name_plural = _("data sources")
+add = DataSources.add_item
+add('01', _("Manually entered"), 'manually')
+add('02', _("Read from eID"), 'eid')
 
 
 class ClientAddress(contacts.AddressLocation):
@@ -46,8 +54,9 @@ class ClientAddress(contacts.AddressLocation):
         verbose_name = _("Client Address")
         verbose_name_plural = _("Client Addresses")
 
-    address_type = ClientAddressTypes.field(
-        blank=True, null=True, editable=False)
+    data_source = DataSources.field(
+        editable=False, default=DataSources.manually)
+    address_type = AddressTypes.field(blank=True, null=True)
     client = dd.ForeignKey('pcsw.Client', related_name='addresses_by_client')
     remark = dd.CharField(_("Remark"), max_length=50, blank=True)
 
@@ -98,7 +107,8 @@ class AddressesByClient(ClientAddresses):
 
 
 __all__ = [
-    'ClientAddressTypes',
+    'AddressTypes',
+    'DataSources',
     'ClientAddress',
     'ClientAddresses',
     'AddressesByClient', 'ADDRESS_FIELDS']
