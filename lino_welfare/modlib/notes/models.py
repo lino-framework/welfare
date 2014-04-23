@@ -68,11 +68,11 @@ project #company
 
 class NotesByProject(NotesByProject):
     required = dd.required()
-    column_names = "date time event_type type subject body user company *"
+    column_names = "date time event_type type subject user company *"
 
 
 class NotesByCompany(NotesByCompany):
     required = dd.required()
-    column_names = "date time project event_type type subject body user *"
+    column_names = "date time project event_type type subject user *"
 
 

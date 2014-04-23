@@ -1544,8 +1544,9 @@ def doit(a, b):
         globals_dict.update(create_users_team=noop)
 
         def after_load(loader):
+            "set_primary_address for all Clients"
             for o in settings.modules.pcsw.Client.objects.all():
-                o.set_primary_address()
+                o.get_primary_address()
         self.after_load(after_load)
 
         return '1.1.12'
