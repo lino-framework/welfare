@@ -447,19 +447,8 @@ class Client(contacts.Person,
         return "%s %s (%s)" % (
             self.last_name.upper(), self.first_name, self.pk)
 
-    @dd.displayfield()
-    def client_info(self, ar):
-        elems = [self.get_salutation(nominative=True), E.br()]
-        elems += [self.first_name, ' ',
-                  E.b(self.last_name),
-                  # ar.obj2html(self, self.last_name),
-                  E.br()]
-        elems += join_elems(list(self.address_location_lines()), sep=E.br)
-        elems = [
-            E.div(*elems,
-                  style="font-size:18px;font-weigth:bold;"
-                  "vertical-align:bottom;text-align:middle")]
-
+    def get_overview_elems(self, ar):
+        elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
         elems = [E.div(*elems)]
@@ -788,17 +777,12 @@ class Client(contacts.Person,
 
 class ClientDetail(dd.FormLayout):
 
-    """
-    The layout of the detail window of a Client.
-    """
-    #~ actor = 'contacts.Person'
-
     main = "general contact coaching aids_tab health_tab \
     work_tab career languages \
     competences jobs contracts history calendar misc"
 
     general = dd.Panel("""
-    client_info:30 general2:40 contact2:20 image:15
+    overview:30 general2:40 contact2:20 image:15
     reception.AppointmentsByPartner reception.CoachingsByClient
     """, label=_("Person"))
 

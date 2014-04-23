@@ -222,7 +222,6 @@ def register_change_watchers(sender, **kw):
 
     from lino.modlib.changes.models import watch_changes as wc
 
-    #~ self.modules.pcsw.Client.watch_changes('first_name last_name national_id client_state')
     wc(self.modules.contacts.Partner)
     wc(self.modules.contacts.Person, master_key='partner_ptr')
     wc(self.modules.contacts.Company, master_key='partner_ptr')
@@ -246,50 +245,12 @@ def register_change_watchers(sender, **kw):
 
 
 def site_setup(site):
+    """This is the place where we can override or define
+    application-specific things.  This includes especially those
+    detail layouts which depend on the *combination* of installed
+    modules.
+
     """
-    This is the place where we can override or 
-    define application-specific things.
-    This includes especially those detail layouts 
-    which depend on the *combination* of installed modules.
-    """
-
-    #~ class HouseholdDetail(households.HouseholdDetail):
-        #~ box3 = """
-        #~ country region
-        #~ city zip_code:10
-        #~ street_prefix street:25 street_no street_box
-        #~ addr2:40
-        #~ activity bank_account1:12 bank_account2:12
-        #~ """
-
-    #~ class Households(households.Households):
-        #~ model = 'households.Household'
-        #~ detail_layout = HouseholdDetail()
-
-    #~ site.modules.lino.Home.set_detail_layout("""
-    #~ quick_links:80x1
-    #~ welcome
-    #~ pcsw.UsersWithClients:80x8
-    #~ coming_reminders:40x16 missed_reminders:40x16
-    #~ """)
-
-    # site.modules.system.SiteConfigs.set_detail_layout(
-    #     "general constants",
-    #     general=dd.Panel("""
-    #     site_company next_partner_id:10
-    #     job_office master_budget
-    #     signer1 signer2
-    #     signer1_function signer2_function
-    #     """, label=_("General")), constants=dd.Panel("""
-    #     system_note_type default_build_method
-    #     propgroup_skills propgroup_softskills propgroup_obstacles
-    #     residence_permit_upload_type \
-    #       work_permit_upload_type \
-    #       driving_licence_upload_type
-    #     client_calendar prompt_calendar
-    #     client_guestrole team_guestrole
-    #     # attestation_note_nature
-    #     """, label=_("Constants")))
 
     site.modules.properties.Properties.set_detail_layout("""
     id group type
@@ -304,51 +265,16 @@ def site_setup(site):
     contacts.PartnersByCity jobs.StudiesByPlace
     """)
 
-    #~ site.modules.countries.Places.detail_layout.update(main="""
-    #~ name country
-    #~ contacts.PartnersByCity jobs.StudiesByPlace
-    #~ """)
-
     site.modules.countries.Countries.set_detail_layout("""
     isocode name short_code inscode
     # nationalities
     countries.PlacesByCountry jobs.StudiesByCountry
     """)
 
-    # site.modules.uploads.Uploads.set_detail_layout("""
-    # file user
-    # type description valid_until
-    # # person company
-    # # reminder_date reminder_text delay_value delay_type reminder_done
-    # modified created owner
-    # cal.TasksByController
-    # # show_date show_time 
-    # # show_date time timestamp
-    # """)
-
-    # site.modules.uploads.Uploads.set_insert_layout("""
-    # file user
-    # type valid_until
-    # description
-    # # owner
-    # """, window_size=(60, 'auto'))
-
-    site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
-    site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())
-    site.modules.contacts.Partners.add_detail_tab(
-        'changes', 'changes.ChangesByMaster')
-
-    # site.modules.users.Users.set_detail_layout(
-    #     coaching_a="""
-    #     newcomer_quota
-    #     coaching_type
-    #     coaching_supervisor
-    #     newcomers.CompetencesByUser
-    #     """)
-
-    # site.modules.users.Users.add_detail_tab('coaching', """
-    # coaching_a:20 pcsw.CoachingsByUser:40
-    # """, _("Coaching"),)
+    # site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
+    # site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())
+    # site.modules.contacts.Partners.add_detail_tab(
+    #     'changes', 'changes.ChangesByMaster')
 
 
 #~ logger.info("20130409 %s declare set_merge_actions()",__name__)

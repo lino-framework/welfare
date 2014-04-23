@@ -88,11 +88,6 @@ für neue Operationen nicht benutzt werden können.""")
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner, self).disable_delete(ar)
 
-    #~ def get_row_permission(self,ar,state,ba):
-        #~ if isinstance(ba.action,dd.MergeAction) and settings.SITE.is_imported_partner(self):
-            #~ return False
-        #~ return super(Partner,self).get_row_permission(ar,state,ba)
-
     def __unicode__(self):
         if self.is_obsolete:
             return "%s (%s*)" % (self.get_full_name(), self.pk)
@@ -100,25 +95,45 @@ für neue Operationen nicht benutzt werden können.""")
 
 
 class PartnerDetail(PartnerDetail):
-    bottom_box = """
-    remarks
-    activity is_obsolete
-    is_person is_company is_household created modified
+
+    main = "general contact misc "
+
+    general = dd.Panel("""
+    overview:20 general2:20 general3:40
+    reception.AppointmentsByPartner
+    """, label=_("General"))
+
+    general2 = """
+    id language
+    activity
+    url
     """
 
+    general3 = """
+    email:40
+    phone
+    gsm
+    fax
+    """
 
-#~ class Partners(contacts.Partners):
-    #~ """
-    #~ Base class for Companies and Persons tables,
-    #~ *and* for households.Households.
-    #~ """
-    #~ detail_layout = PartnerDetail()
+    contact = dd.Panel("""
+    address_box
+    remarks:30 sepa.AccountsByPartner
+    """, label=_("Contact"))
 
-#~ class AllPartners(contacts.AllPartners,Partners):
-    #~ app_label = 'contacts'
+    address_box = """
+    country region city zip_code:10
+    addr1
+    street_prefix street:25 street_no street_box
+    addr2
+    """
 
-#~ from lino.modlib.families import models as families
-#~ class Person(Partner,Person,mixins.Born,families.Child):
+    misc = dd.Panel("""
+    is_obsolete is_person is_company is_household created modified
+    changes.ChangesByMaster
+    """, label=_("Miscellaneous"))
+
+
 class Person(Partner, Person, mixins.Born):
 
     """
@@ -156,28 +171,63 @@ dd.update_field(Person, 'last_name', blank=False)
 
 
 class PersonDetail(PersonDetail):
-    bottom_box = """
-    activity is_obsolete
-    is_client created modified #father #mother
-    remarks contacts.RolesByPerson households.MembersByPerson
+
+    main = "general contact misc"
+
+    general = dd.Panel("""
+    overview:20 general2:40 general3:40
+    contacts.RolesByPerson:20 households.MembersByPerson:40
+    """, label=_("General"))
+
+    general2 = """
+    last_name:20 first_name:15
+    title
+    gender:10 birth_date age:10
+    id language
     """
+
+    general3 = """
+    email:40
+    phone
+    gsm
+    fax
+    """
+
+    contact = dd.Panel("""
+    address_box
+    remarks:30 sepa.AccountsByPartner
+    """, label=_("Contact"))
+
+    address_box = """
+    country region city zip_code:10
+    addr1
+    street_prefix street:25 street_no street_box
+    addr2
+    """
+
+    misc = dd.Panel("""
+    activity url
+    is_obsolete is_client
+    created modified
+    reception.AppointmentsByPartner
+    """, label=_("Miscellaneous"))
 
 
 class Persons(Persons):
-    #~ app_label = 'contacts'
+
     detail_layout = PersonDetail()
 
     params_panel_hidden = True
     parameters = dict(
-        gender=mixins.Genders.field(blank=True, help_text=u"""\
-Nur Personen, deren Feld "Geschlecht" ausgefüllt ist und dem angegebenen Wert entspricht."""),
+        gender=mixins.Genders.field(
+            blank=True, help_text=_(
+                "Show only persons with the given gender.")),
         also_obsolete=models.BooleanField(
             _("Also obsolete data"),
-            default=False, help_text=u"""\
-Auch Datensätze anzeigen, die als veraltet markiert sind."""))
+            default=False, help_text=_("Show also obsolete records.")))
 
     params_layout = """
-    gender also_obsolete 
+    gender also_obsolete
     """
 
     @classmethod
@@ -221,65 +271,73 @@ class Company(Partner, Company):
 
 class CompanyDetail(CompanyDetail):
 
-    box3 = """
-    country region city zip_code:10
-    addr1:40
-    street:25 street_no street_box
-    addr2:40
-    """
-
-    box4 = """
-    email:40
-    url
-    phone
-    gsm
-    """
-
-    address_box = "box3 box4"
-
-    box5 = dd.Panel("""
-    remarks
-    is_courseprovider is_jobprovider client_contact_type
-    """)
-
-    bottom_box = "box5 contacts.RolesByCompany"
-
-    intro_box = """
-    prefix name id language
-    vat_id:12 activity:20 type:20
-    is_obsolete
-    """
+    main = "general contact notes misc"
 
     general = dd.Panel("""
-    intro_box
-    address_box
-    bottom_box
+    overview:20 general2:40 general3:40
+    contacts.RolesByCompany
     """, label=_("General"))
+
+    general2 = """
+    prefix:20 name:40
+    type vat_id
+    client_contact_type
+    url
+    """
+
+    general3 = """
+    email:40
+    phone
+    gsm
+    fax
+    """
+
+    contact = dd.Panel("""
+    address_box
+    remarks:30 sepa.AccountsByPartner
+    """, label=_("Contact"))
+
+    address_box = """
+    country region city zip_code:10
+    addr1
+    street_prefix street:25 street_no street_box
+    addr2
+    """
 
     notes = "notes.NotesByCompany"
 
-    main = "general notes"
-
-# TODO: find a more elegant way to do this.
-# if not dd.is_installed('courses'):
-#     CompanyDetail.box5.replace('is_courseprovider', '')
-
-if not dd.modules.resolve('contacts.Company.is_courseprovider'):
-    CompanyDetail.box5.replace('is_courseprovider', '')
+    misc = dd.Panel("""
+    id language activity
+    is_courseprovider is_jobprovider is_obsolete
+    created modified
+    reception.AppointmentsByPartner
+    """, label=_("Miscellaneous"))
 
 
 class Companies(Companies):
     detail_layout = CompanyDetail()
 
 
+@dd.receiver(dd.post_analyze)
+def my_details(sender, **kw):
+    contacts = sender.modules.contacts
+
+    # if not dd.is_installed('courses'):
+    #     CompanyDetail.box5.replace('is_courseprovider', '')
+    if not dd.modules.resolve('contacts.Company.is_courseprovider'):
+        CompanyDetail.misc.replace('is_courseprovider', '')
+    # TODO: find a more elegant way to do the above
+
+    contacts.Partners.set_detail_layout(contacts.PartnerDetail())
+    contacts.Companies.set_detail_layout(contacts.CompanyDetail())
+
+
 def setup_main_menu(self, ui, profile, main):
     m = main.add_menu("contacts", Plugin.verbose_name)
-    #~ m.clear()
-    m.add_action(Persons)
-    m.add_action(self.modules.pcsw.Clients,
-                 label=string_concat(u' \u25b6 ', self.modules.pcsw.Clients.label))
-    #~ m.add_action(self.modules.pcsw.Clients,'find_by_beid')
-    m.add_action(self.modules.contacts.Companies)
-    #~ m.add_action(self.modules.households.Households)
+    m.add_action('contacts.Persons')
+    m.add_action(
+        'pcsw.Clients',
+        label=string_concat(u' \u25b6 ', self.modules.pcsw.Clients.label))
+    m.add_action('contacts.Companies')
     m.add_separator('-')
-    m.add_action(self.modules.contacts.Partners, label=_("Partners (all)"))
+    m.add_action('contacts.Partners', label=_("Partners (all)"))
