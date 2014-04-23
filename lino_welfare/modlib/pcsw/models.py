@@ -609,7 +609,7 @@ class Client(contacts.Person,
         return self.personproperty_set.get(property__id=prop_id)
         #~ return PersonProperty.objects.get(property_id=prop_id,person=self)
 
-    def overview(self, request):
+    def unused_overview(self, request):
         def qsfmt(qs):
             s = qs.model._meta.verbose_name_plural + ': '
             if qs.count():
@@ -626,7 +626,7 @@ class Client(contacts.Person,
         #~ from django.utils.translation import string_concat
         #~ lines.append('</div>')
         return '<br/>'.join(lines)
-    overview.return_type = dd.HtmlBox(_("Overview"))
+    unused_overview.return_type = dd.HtmlBox(_("Overview"))
 
     @dd.displayfield(_("Residence permit"))
     def residence_permit(self, ar):
