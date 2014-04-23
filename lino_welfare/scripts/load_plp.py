@@ -31,6 +31,10 @@ from lino.utils import dblogger
 # 02R|Nichte/Neffe   |02 |Neffe        |Nichte        ||
 # 03 |Stiefelternteil|03R|Stiefvater   |Stiefmutter   ||
 # 03R|Stiefkind      |03 |Stiefsohn    |Stieftochter  ||
+# 04 |Gro<E1>elternteil |04R|Gro<E1>vater    |Gro<E1>mutter    ||
+# 04R|Enkel          |04 |Enkel        |Enkelin       ||
+# 10 |Partner        |10 |Partner   |Partnerin        ||
+# 11 |Freund         |11 |Freund    |Freundin         ||
 
 
 from lino.modlib.humanlinks.models import LinkTypes, Link
@@ -40,14 +44,20 @@ from lino.runtime import pcsw
 
 
 def tim2lino(plptype):
+    if plptype.endswith('R'):
+        return 
     if plptype == '01':
         return LinkTypes.natural
     if plptype == '03':
         return LinkTypes.adoptive
+    if plptype == '10':
+        return LinkTypes.partner
+    if plptype == '11':
+        return LinkTypes.friend
     if plptype == '02':
         return LinkTypes.other
-    if plptype in ('01R', '02R', '03R'):
-        return
+    if plptype == '04':
+        return LinkTypes.grandparent
     raise Exception("Invalid link type %r" % plptype)
 
 
