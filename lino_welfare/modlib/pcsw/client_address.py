@@ -33,7 +33,9 @@ contacts = dd.resolve_app('contacts')
 
 
 class AddressTypes(dd.ChoiceList):
-    verbose_name_plural = _("Address type")
+    verbose_name = _("Address type")
+    verbose_name_plural = _("Address types")
+
 add = AddressTypes.add_item
 add('01', _("Official address"), 'official')  # IT020
 add('02', _("Unverified address"), 'unverified')  # IT042
@@ -42,7 +44,9 @@ add('04', _("Reference address"), 'reference')
 
 
 class DataSources(dd.ChoiceList):
-    verbose_name_plural = _("data sources")
+    verbose_name = _("Data source")
+    verbose_name_plural = _("Data sources")
+
 add = DataSources.add_item
 add('01', _("Manually entered"), 'manually')
 add('02', _("Read from eID"), 'eid')
