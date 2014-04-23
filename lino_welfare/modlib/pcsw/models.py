@@ -341,7 +341,7 @@ class Client(contacts.Person,
     aid_type = models.ForeignKey("pcsw.AidType", blank=True, null=True)
         #~ verbose_name=_("aid type"))
 
-    # declared_name = models.BooleanField(_("Declared name"), default=False)
+    declared_name = models.BooleanField(_("Declared name"), default=False)
 
     # Arbeitslosengeld
     income_ag = models.BooleanField(_("unemployment benefit"), default=False)
@@ -793,7 +793,7 @@ class ClientDetail(dd.FormLayout):
     gender:10 civil_state:15 id
     birth_date age:10 national_id:15
     birth_country birth_place
-    nationality:15 #declared_name
+    nationality:15 declared_name
     """
 
     contact2 = """

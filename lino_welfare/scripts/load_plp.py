@@ -71,14 +71,14 @@ def main():
         if not t:
             continue
         try:
-            p = pcsw.Client.objects.get(pk=int(dbfrow.idpar1))
+            c = pcsw.Client.objects.get(pk=int(dbfrow.idpar1))
         except pcsw.Client.DoesNotExist:
-            dblogger.info("No client %s", dbfrow.idpar1)
+            dblogger.warning("No client %s", dbfrow.idpar1)
             continue
         try:
-            c = pcsw.Client.objects.get(pk=int(dbfrow.idpar2))
+            p = pcsw.Client.objects.get(pk=int(dbfrow.idpar2))
         except pcsw.Client.DoesNotExist:
-            dblogger.info("No client %s", dbfrow.idpar2)
+            dblogger.warning("No client %s", dbfrow.idpar2)
             continue
 
         obj = Link(parent=p, child=c, type=t)
