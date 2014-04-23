@@ -67,13 +67,23 @@ def main():
     dblogger.info("Loading %d records from %s...", len(f), fn)
     f.open()
     for dbfrow in f:
-        p = pcsw.Client.objects.get(pk=int(dbfrow.idpar1))
-        c = pcsw.Client.objects.get(pk=int(dbfrow.idpar2))
         t = tim2lino(dbfrow.type)
-        if t:
-            obj = Link(parent=p, child=c, type=t)
-            obj.full_clean()
-            print obj.child
+        if not t:
+            continue
+        try:
+            p = pcsw.Client.objects.get(pk=int(dbfrow.idpar1))
+        except pcsw.Client.DoesNotExist:
+            dblogger.info("No client %s", dbfrow.idpar1)
+            continue
+        try:
+            c = pcsw.Client.objects.get(pk=int(dbfrow.idpar2))
+        except pcsw.Client.DoesNotExist:
+            dblogger.info("No client %s", dbfrow.idpar2)
+            continue
+
+        obj = Link(parent=p, child=c, type=t)
+        obj.full_clean()
+        dblogger.info("%s is %s of %s", obj.parent, obj.type, obj.child)
 
     f.close()
 
