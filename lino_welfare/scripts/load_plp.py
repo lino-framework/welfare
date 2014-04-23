@@ -83,6 +83,7 @@ def main():
 
         obj = Link(parent=p, child=c, type=t)
         obj.full_clean()
+        obj.save()
         dblogger.info("%s is %s of %s", obj.parent, obj.type, obj.child)
 
     f.close()
