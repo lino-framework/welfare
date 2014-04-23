@@ -36,7 +36,7 @@ from lino.utils import dblogger
 from lino import dd
 from lino.modlib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
-from lino.modlib.sepa.utils import belgian_nban_to_iban_bic
+from lino.modlib.iban.utils import belgian_nban_to_iban_bic
 
 from lino_welfare.fixtures.std import attestation_types
 from lino_welfare.modlib.aids.fixtures.std import objects as aids_objects
@@ -1289,15 +1289,15 @@ class Migrator(Migrator):
                 settings.SITE.project_dir, 'migrate_from_1_1_10.py')
             fd = file(fname, 'w')
             fd.write("""#!/usr/bin/env python
-    import os
-    import shutil
+import os
+import shutil
 
-    def doit(a, b):
-        if a and b:
-            shutil.copyfile(src, dst)
-            # os.rename(a, b)
-            # os.remove(a)
-    """)
+def doit(a, b):
+    if a and b:
+        shutil.copyfile(src, dst)
+        # os.rename(a, b)
+        # os.remove(a)
+""")
             loader.save(attestation_types())
             loader.save(aids_objects())
 
@@ -1510,29 +1510,31 @@ class Migrator(Migrator):
             if False:
                 kw.update(bank_account1=bank_account1)
                 kw.update(bank_account2=bank_account2)
-            yield contacts_Partner(**kw)
-        
+
+            accs = []
+            primary = True
             for x in (bank_account1, bank_account2):
                 x = x.strip()
                 if x:
                     a = x.split(':')
                     if len(a) == 2:
                         bic, iban = a
-                        yield sepa.Account(
-                            partner_id=id, iban=iban, bic=bic)
-                    elif False:
-                        logger.warning(
-                            "Ignored NBAN %r for partner %s", x, id)
                     else:
                         try:
                             logger.info("20140415 Compute IBAN/BIC for %s", x)
                             iban, bic = belgian_nban_to_iban_bic(x)
-                            yield sepa.Account(
-                                partner_id=id, iban=iban, bic=bic)
-                        except Exception as e:
-                            logger.warning(
-                                "Lost BIC:IBAN %r for partner %s : %s",
-                                x, id, e)
+                        except Exception:
+                            iban = x
+                            bic = ''
+                    accs.append(sepa.Account(
+                        partner_id=id, primary=primary,
+                        iban=iban, bic=bic))
+                    if primary:
+                        kw.update(iban=iban, bic=bic)
+                        primary = False
+
+            yield contacts_Partner(**kw)
+            yield accs
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
@@ -1540,6 +1542,11 @@ class Migrator(Migrator):
         def noop(*args):
             return None
         globals_dict.update(create_users_team=noop)
+
+        def after_load(loader):
+            for o in settings.modules.pcsw.Client.objects.all():
+                o.set_primary_address()
+        self.after_load(after_load)
 
         return '1.1.12'
 

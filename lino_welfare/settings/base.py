@@ -187,6 +187,7 @@ class Site(Site):
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
         yield 'lino_welfare.modlib.badges'
+        yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.attestations'

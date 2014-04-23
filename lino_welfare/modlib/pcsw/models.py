@@ -850,7 +850,7 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     status:55 income:25
-    aids.FinancialAidsByClient:30 sepa.AccountsByPartner:20
+    aids.FinancialAidsByClient:30 sepa.AccountsByClient:20
     """, label=_("Aids"))
 
     status = """
@@ -1613,11 +1613,13 @@ class ContactsByClient(ClientContacts):
     label = _("Contacts")
 
 
-MODULE_LABEL = _("PCSW")
+config = dd.apps.pcsw
+
+# MODULE_LABEL = _("PCSW")
 
 
 def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("pcsw", MODULE_LABEL)
+    m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action(PersonGroups)
     m.add_action(Activities)
     m.add_action(ExclusionTypes)
@@ -1628,7 +1630,7 @@ def setup_config_menu(site, ui, profile, m):
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("pcsw", MODULE_LABEL)
+    m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action(Coachings)
     m.add_action(ClientContacts)
     m.add_action(Exclusions)
@@ -1638,9 +1640,12 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action(ClientStates)
     m.add_action(beid.BeIdCardTypes)
 
+    m.add_action('pcsw.AddressTypes')
+    m.add_action('pcsw.ClientAddresses')
+
 
 def setup_reports_menu(site, ui, profile, m):
-    m = m.add_menu("pcsw", MODULE_LABEL)
+    m = m.add_menu(config.app_label, config.verbose_name)
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
     #~ m.add_action(site.modules.integ.UsersWithClients)
     m.add_action(ClientsTest)

@@ -63,23 +63,27 @@ class ClientAddress(contacts.AddressLocation):
     primary = models.BooleanField(
         _("Primary"),
         default=False,
-        help_text=_("""There's at most one primary address per client. \
-        Enabling this field will automatically make the other \
-        addresses non-primary."""))
+        help_text=_(
+            "Enabling this field will automatically disable any "
+            "previous primary addresses and update "
+            "the client's address fields."))
 
     allow_cascaded_delete = ['client']
 
     def after_ui_save(self, ar):
         super(ClientAddress, self).after_ui_save(ar)
         if self.primary:
-            for o in self.client.addresses_by_client.exclude(id=self.id):
+            mi = self.client
+            for o in mi.addresses_by_client.exclude(id=self.id):
                 if o.primary:
                     o.primary = False
                     o.save()
+                    ar.set_response(refresh_all=True)
+            watcher = dd.ChangeWatcher(mi)
             for k in ADDRESS_FIELDS:
-                setattr(self.client, k, getattr(self, k))
-            self.client.save()
-            ar.set_response(refresh_all=True)
+                setattr(mi, k, getattr(self, k))
+            mi.save()
+            watcher.send_update(ar.request)
 
 ADDRESS_FIELDS = dd.fields_list(
     ClientAddress,
@@ -89,6 +93,9 @@ ADDRESS_FIELDS = dd.fields_list(
 class ClientAddresses(dd.Table):
     model = 'pcsw.ClientAddress'
     required = dd.required(user_level='admin')
+    column_names = (
+        "client address_type:10 remark:10 "
+        "address_column:30 primary data_source *")
     insert_layout = """
     country city zip_code
     street street_no street_box
@@ -100,6 +107,7 @@ class ClientAddresses(dd.Table):
     street street_no street_box
     addr2
     address_type remark
+    data_source client
     """, window_size=(60, 'auto'))
 
 

@@ -132,8 +132,9 @@ class Person(Partner, Person, mixins.Born):
         verbose_name_plural = _("Persons")  # :doc:`/tickets/14`
         #~ ordering = ['last_name','first_name']
 
-    is_client = mti.EnableChild('pcsw.Client', verbose_name=_("is Client"),
-                                help_text=_("Whether this Person is a Client."))
+    is_client = mti.EnableChild(
+        'pcsw.Client', verbose_name=_("is Client"),
+        help_text=_("Whether this Person is a Client."))
 
     def get_queryset(self, ar):
         return self.model.objects.select_related('country', 'city')
