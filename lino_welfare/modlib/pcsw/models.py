@@ -709,7 +709,8 @@ class Client(contacts.Person,
         """
         diffs = []
         objects = [self]
-        kw = dict(client=self, address_type=AddressTypes.eid)
+        # kw = dict(client=self, address_type=AddressTypes.eid)
+        kw = dict(client=self, data_source=DataSources.eid)
         try:
             addr = ClientAddress.objects.get(**kw)
         except ClientAddress.DoesNotExist:
