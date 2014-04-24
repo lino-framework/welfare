@@ -243,37 +243,6 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
-from lino.core.actions import SubmitInsert
-
-
-class SubmitInsertClient(SubmitInsert):
-    def run_from_ui(self, ar, **kw):
-        obj = ar.create_instance_from_request()
-
-        def ok(ar2):
-            self.save_new_instance(ar2, obj)
-
-        s = unicode(ar.bound_action)
-        logger.info("20140422 %s", s)
-        ar.confirm(ok, E.p(s))
-
-        return
-
-        qs = dedupe.SimilarPersons.find_similar_instances(obj)
-        if qs.count() > 0:
-            msg = _(
-                "There are %d clients with similar name:") % qs.count()
-            for other in qs[:4]:
-                msg += '<br/>' + unicode(other)
-            msg += '<br/>' + _("Are you sure you want to create a new "
-                               "client named %s?") % obj.get_full_name()
-            ar.confirm(ok, msg)
-        # elif obj.first_name == 'Foo':
-        #     ar.confirm(ok, _("Is that true? Your name is 'Foo'?"))
-        else:
-            ok(ar)
-
-
 class Client(contacts.Person,
              # dd.BasePrintable,
              beid.BeIdCardHolder):
@@ -379,8 +348,6 @@ class Client(contacts.Person,
     client_state = ClientStates.field(default=ClientStates.newcomer)
 
     refusal_reason = RefusalReasons.field(blank=True)
-
-    submit_insert = SubmitInsertClient()
 
     @classmethod
     def on_analyze(cls, site):
