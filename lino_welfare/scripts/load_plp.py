@@ -146,7 +146,10 @@ def plp2member(plptype, p, c):
         elif members.count() == 1:
             hh = members[0].household
         else:
-            raise Exception("Found more than 1 household for parent %r" % p)
+            msg = "Found more than 1 household for parent %r" % p
+            # raise Exception(msg)
+            dblogger.warning(msg)
+            return
         obj = households.Member(household=hh, role=role, person=c.person)
     else:
         members = households.Member.objects.filter(
@@ -170,8 +173,7 @@ def plp2member(plptype, p, c):
         obj = households.Member(household=hh, role=role, person=p.person)
 
     obj.save()
-    dblogger.info(
-        "Created %s as %s in household", obj.person, obj.role)
+    dblogger.info("Created %s as %s", obj.person, obj.role)
         
 
 def get_or_warn(idpar):
