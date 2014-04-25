@@ -73,27 +73,31 @@ from lino_welfare.modlib.households.models import Role, Member, Household
 from lino.runtime import pcsw, households
 
 
-def tim2lino(plptype):
-    if plptype.endswith('R'):
-        return
-    if plptype == '01':
-        return LinkTypes.natural
-    if plptype == '03':
-        return LinkTypes.adoptive
-    if plptype == '10':
-        return LinkTypes.partner
-    if plptype == '11':
-        return LinkTypes.friend
-    if plptype == '02':
-        return LinkTypes.other
-    if plptype == '04':
-        return LinkTypes.grandparent
-    raise Exception("Invalid link type %r" % plptype)
+# def tim2lino(plptype):
+#     if plptype.endswith('R'):
+#         return
+#     if plptype == '01':
+#         return LinkTypes.natural
+#     if plptype == '03':
+#         return LinkTypes.adoptive
+#     if plptype == '10':
+#         return LinkTypes.partner
+#     if plptype == '11':
+#         return LinkTypes.friend
+#     if plptype == '02':
+#         return LinkTypes.other
+#     if plptype == '04':
+#         return LinkTypes.grandparent
+#     raise Exception("Invalid link type %r" % plptype)
 
 
-R_PARENT = households.Role.objects.get(id=3)
+R_CHEF = households.Role.objects.get(id=1)
+R_MARRIED = households.Role.objects.get(id=2)
+R_PARTNER = households.Role.objects.get(id=3)
 R_CHILD = households.Role.objects.get(id=5)
 
+R_ADOPTED = households.Role.objects.get(id=6)
+R_COHABITANT = households.Role.objects.get(id=4)
 try:
     R_RELATIVE = households.Role.objects.get(id=7)  # grandparent
 except households.Role.DoesNotExist:
@@ -115,33 +119,36 @@ T_FAMILY = households.Type.objects.get(id=2)
 T_HOUSEHOLD = households.Type.objects.get(id=3)
 T_COMMUNITY = households.Type.objects.get(id=4)
 
+
 def plp2member(plptype, p, c):
     if plptype.endswith('R'):
         return
     if plptype == '01':
         role = R_CHILD
-    elif plptype == '03':
-        role = households.Role.objects.get(id=6)
-    elif plptype == '10':
-        role = households.Role.objects.get(id=2)
-    elif plptype == '11':
-        role = households.Role.objects.get(id=3)
     elif plptype == '02':
-        role = households.Role.objects.get(id=4)
+        role = R_COHABITANT
+    elif plptype == '03':
+        role = R_ADOPTED
     elif plptype == '04':
-        role = households.Role.objects.get(id=7)
+        role = R_RELATIVE
+    elif plptype == '10':
+        role = R_MARRIED
+    elif plptype == '11':
+        role = R_PARTNER
     else:
         raise Exception("Invalid link type %r" % plptype)
-    if role.name_giving:
+    
+    if not role.name_giving:  # i.e. CHILD, ADOPTED, RELATIVE
+        # find household of parent
         members = households.Member.objects.filter(
             person=p.person, role__name_giving=True)
         if members.count() == 0:
             hh = households.Household(type=T_FAMILY)
             hh.full_clean()
             hh.save()
-            dblogger.info("Created household %s from parent %s", hh, p)
+            dblogger.debug("Created household %s from parent %s", hh, p)
             obj = households.Member(
-                household=hh, role=R_PARENT, person=p.person)
+                household=hh, role=R_CHEF, person=p.person)
             obj.save()
         elif members.count() == 1:
             hh = members[0].household
@@ -158,7 +165,7 @@ def plp2member(plptype, p, c):
             hh = households.Household(type=T_FAMILY)
             hh.full_clean()
             hh.save()
-            dblogger.info("Created household %s from child %s", hh, c)
+            dblogger.warning("Created household %s from child %s", hh, c)
             obj = households.Member(
                 household=hh, role=R_CHILD, person=c.person)
             obj.save()

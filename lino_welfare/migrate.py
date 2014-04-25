@@ -1521,7 +1521,8 @@ def doit(a, b):
                         bic, iban = a
                     else:
                         try:
-                            logger.info("20140415 Compute IBAN/BIC for %s", x)
+                            # logger.info(
+                            #   "20140415 Compute IBAN/BIC for %s", x)
                             iban, bic = belgian_nban_to_iban_bic(x)
                         except Exception:
                             iban = x
