@@ -177,6 +177,7 @@ def get_or_warn(idpar):
     except pcsw.Client.DoesNotExist:
         dblogger.warning("No client %s", idpar)
 
+
 def main():
     fn = sys.argv[1]
     f = dbfreader.DBFFile(fn, codepage="cp850")
@@ -187,8 +188,8 @@ def main():
         # if not t:
         #     continue
 
-        c = get_or_warn(dbfrow.idpar1)
-        p = get_or_warn(dbfrow.idpar2)
+        p = get_or_warn(dbfrow.idpar1)
+        c = get_or_warn(dbfrow.idpar2)
         if not c or not p:
             continue
 
