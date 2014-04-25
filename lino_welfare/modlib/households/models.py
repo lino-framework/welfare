@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-20114 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,27 +18,13 @@ This module extends :mod:`lino.modlib.households.models`
 
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
-
-from lino import dd
-
 from lino.modlib.households.models import *
 
 from lino_welfare.modlib.contacts.models import Partner
+# we want to inherit also from lino_welfare's Partner
 
 
 class Household(Household):
-
-    """
-    for lino_welfare we want to inherit also from lino_welfare's Partner
-    """
-    #~ class Meta(households.Household.Meta):
-        #~ app_label = 'households'
-
-    #~ @classmethod
-    #~ def on_analyze(cls,site):
-        #~ super(Household,cls).on_analyze(site)
-        #~ cls.declare_imported_fields('type')
 
     def disable_delete(self, ar):
         # skip the is_imported_partner test

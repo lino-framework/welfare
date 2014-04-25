@@ -14,15 +14,9 @@
 
 """
 
-temporary script used to import humanlinks from TIM
+Temporary script used to import PLP.DBF from TIM.
 
-
-"""
-
-import sys
-
-from lino.utils import dbfreader
-from lino.utils import dblogger
+PLP ("Person Link to Person")
 
 # PLPTYPES.DBC:
 # 01 |Vater/Mutter   |01R|Vater        |Mutter        ||
@@ -31,21 +25,57 @@ from lino.utils import dblogger
 # 02R|Nichte/Neffe   |02 |Neffe        |Nichte        ||
 # 03 |Stiefelternteil|03R|Stiefvater   |Stiefmutter   ||
 # 03R|Stiefkind      |03 |Stiefsohn    |Stieftochter  ||
-# 04 |Gro<E1>elternteil |04R|Gro<E1>vater    |Gro<E1>mutter    ||
+# 04 |Großelternteil |04R|Großvater    |Großmutter    ||
 # 04R|Enkel          |04 |Enkel        |Enkelin       ||
-# 10 |Partner        |10 |Partner   |Partnerin        ||
-# 11 |Freund         |11 |Freund    |Freundin         ||
+# 10 |Partner        |10 |Partner      |Partnerin     ||
+# 11 |Freund         |11 |Freund       |Freundin      ||
 
+$ python manage.py show --username rolf households.Roles
+
+======= =================== ================== =============
+ ID      Designation         Designation (fr)   name-giving
+------- ------------------- ------------------ -------------
+ 1       Haushaltsvorstand   Chef de ménage     Yes
+ 2       Ehepartner          Conjoint           Yes
+ 3       Partner             Partenaire         Yes
+ 4       Mitbewohner         Cohabitant         No
+ 5       Kind                Enfant             No
+ 6       Adoptivkind         Enfant adopté      No
+ 7       Verwandter          Membre de famille  No
+ **0**                                          **3**
+======= =================== ================== =============
+
+$ python manage.py show --username rolf households.Types
+
+==== ========================= =====================
+ ID   Designation               Designation (fr)    
+---- ------------------------- ---------------------
+ 1    Ehepaar                   Couple marié
+ 2    Familie                   Famille
+ 3    Faktischer Haushalt       Ménage de fait
+ 4    Legale Wohngemeinschaft   Cohabitation légale
+==== ========================= =====================
+
+
+
+"""
+
+import sys
+
+from lino import dd
+
+from lino.utils import dbfreader
+from lino.utils import dblogger
 
 from lino.modlib.humanlinks.models import LinkTypes, Link
+from lino_welfare.modlib.households.models import Role, Member, Household
 
-# from django.conf import settings
-from lino.runtime import pcsw
+from lino.runtime import pcsw, households
 
 
 def tim2lino(plptype):
     if plptype.endswith('R'):
-        return 
+        return
     if plptype == '01':
         return LinkTypes.natural
     if plptype == '03':
@@ -61,30 +91,113 @@ def tim2lino(plptype):
     raise Exception("Invalid link type %r" % plptype)
 
 
+R_PARENT = households.Role.objects.get(id=3)
+R_CHILD = households.Role.objects.get(id=5)
+
+try:
+    R_RELATIVE = households.Role.objects.get(id=7)  # grandparent
+except households.Role.DoesNotExist:
+    kw = dd.babel_values('name',
+                         de=u"Verwandter",
+                         fr=u"Membre de famille",
+                         en=u"Relative")
+    R_RELATIVE = Role(**kw)
+    R_RELATIVE.save()
+
+
+HOUSEHOLDS_MAP = {}
+
+parent_roles = households.Role.objects.filter(name_giving=True)
+child_roles = households.Role.objects.filter(name_giving=False)
+
+T_COUPLE = households.Type.objects.get(id=1)
+T_FAMILY = households.Type.objects.get(id=2)
+T_HOUSEHOLD = households.Type.objects.get(id=3)
+T_COMMUNITY = households.Type.objects.get(id=4)
+
+def plp2member(plptype, p, c):
+    if plptype.endswith('R'):
+        return
+    if plptype == '01':
+        role = R_CHILD
+    elif plptype == '03':
+        role = households.Role.objects.get(id=6)
+    elif plptype == '10':
+        role = households.Role.objects.get(id=2)
+    elif plptype == '11':
+        role = households.Role.objects.get(id=3)
+    elif plptype == '02':
+        role = households.Role.objects.get(id=4)
+    elif plptype == '04':
+        role = households.Role.objects.get(id=7)
+    else:
+        raise Exception("Invalid link type %r" % plptype)
+    if role.name_giving:
+        members = households.Member.objects.filter(
+            person=p.person, role__name_giving=True)
+        if members.count() == 0:
+            hh = households.Household(type=T_FAMILY)
+            hh.full_clean()
+            hh.save()
+            dblogger.info("Created household %s from parent %s", hh, p)
+            obj = households.Member(
+                household=hh, role=R_PARENT, person=p.person)
+            obj.save()
+        elif members.count() == 1:
+            hh = members[0].household
+        else:
+            raise Exception("Found more than 1 household for parent %r" % p)
+        obj = households.Member(household=hh, role=role, person=c.person)
+    else:
+        members = households.Member.objects.filter(
+            person=c.person, role__name_giving=False)
+        if members.count() == 0:
+            hh = households.Household(type=T_FAMILY)
+            hh.full_clean()
+            hh.save()
+            dblogger.info("Created household %s from child %s", hh, c)
+            obj = households.Member(
+                household=hh, role=R_CHILD, person=c.person)
+            obj.save()
+        elif members.count() == 1:
+            hh = members[0].household
+        else:
+            raise Exception("Found more than 1 household for child %r" % c)
+        
+        obj = households.Member(household=hh, role=role, person=p.person)
+
+    obj.save()
+    dblogger.info(
+        "Created %s as %s in %s", obj.person, obj.role, obj.household)
+        
+
+def get_or_warn(idpar):
+    try:
+        return pcsw.Client.objects.get(pk=int(idpar))
+    except pcsw.Client.DoesNotExist:
+        dblogger.warning("No client %s", idpar)
+
 def main():
     fn = sys.argv[1]
     f = dbfreader.DBFFile(fn, codepage="cp850")
     dblogger.info("Loading %d records from %s...", len(f), fn)
     f.open()
     for dbfrow in f:
-        t = tim2lino(dbfrow.type)
-        if not t:
-            continue
-        try:
-            c = pcsw.Client.objects.get(pk=int(dbfrow.idpar1))
-        except pcsw.Client.DoesNotExist:
-            dblogger.warning("No client %s", dbfrow.idpar1)
-            continue
-        try:
-            p = pcsw.Client.objects.get(pk=int(dbfrow.idpar2))
-        except pcsw.Client.DoesNotExist:
-            dblogger.warning("No client %s", dbfrow.idpar2)
+        # t = tim2lino(dbfrow.type)
+        # if not t:
+        #     continue
+
+        c = get_or_warn(dbfrow.idpar1)
+        p = get_or_warn(dbfrow.idpar2)
+        if not c or not p:
             continue
 
-        obj = Link(parent=p, child=c, type=t)
-        obj.full_clean()
-        obj.save()
-        dblogger.info("%s is %s of %s", obj.parent, obj.type, obj.child)
+        plp2member(dbfrow.type, p, c)
+
+        # obj = Link(parent=p, child=c, type=t)
+        # obj.full_clean()
+        # obj.save()
+        # dblogger.info("%s is %s of %s", obj.parent, obj.type, obj.child)
 
     f.close()
 
