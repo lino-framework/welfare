@@ -50,10 +50,7 @@ extensible = dd.resolve_app('extensible')
 class CreateClientVisit(dd.Action):
     sort_index = 91
     icon_name = 'hourglass'
-    #~ icon_file = 'hourglass.png'
     label = _("Create visit")
-    #~ show_in_workflow = True
-    #~ show_in_row_actions = True
     parameters = dict(
         #~ date=models.DateField(_("Date"),blank=True,null=True),
         user=dd.ForeignKey(settings.SITE.user_model),
@@ -101,8 +98,8 @@ class CreateCoachingVisit(CreateClientVisit):
 
 class CreateNote(dd.Action):
     label = _("Attestation")
-    #~ show_in_workflow = True
-    show_in_row_actions = True
+    show_in_bbar = False
+    custom_handler = True
     parameters = dict(
         #~ date=models.DateField(_("Date"),blank=True,null=True),
         note_type=dd.ForeignKey('notes.NoteType'),

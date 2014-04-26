@@ -774,8 +774,8 @@ class ClientDetail(dd.FormLayout):
 
     contact = dd.Panel("""
     pcsw.AddressesByClient \
-    #humanlinks.ParentsByHuman humanlinks.ChildrenByHuman
-    pcsw.ContactsByClient
+    households.SiblingsByPerson  #humanlinks.ChildrenByHuman
+    pcsw.ContactsByClient households_panel #households.MembersByPerson
     """, label=_("Contact"))
 
     #~ suche = dd.Panel("""
@@ -857,7 +857,7 @@ class ClientDetail(dd.FormLayout):
     is_cpas is_senior is_obsolete
     created modified
     remarks:30 remarks2:30
-    contacts.RolesByPerson:20 households.MembersByPerson:40
+    contacts.RolesByPerson
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     health_tab = dd.Panel("""

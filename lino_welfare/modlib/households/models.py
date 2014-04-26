@@ -24,6 +24,16 @@ from lino_welfare.modlib.contacts.models import Partner
 # we want to inherit also from lino_welfare's Partner
 
 
+class Member(Member, dd.Human, dd.Born):
+    def full_clean(self):
+        """Copy data fields from child"""
+        super(Member, self).full_clean()
+        obj = self.person
+        if obj is not None:
+            for k in ('first_name', 'last_name', 'gender', 'birth_date'):
+                setattr(self, k, getattr(obj, k))
+
+
 class Household(Household):
 
     def disable_delete(self, ar):

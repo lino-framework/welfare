@@ -16,4 +16,4 @@ from lino.modlib.households import Plugin
 
 class Plugin(Plugin):
 
-    extends_models = ['households.Household']
+    extends_models = ['households.Household', 'households.Member']

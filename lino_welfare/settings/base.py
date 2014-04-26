@@ -78,11 +78,11 @@ class Site(Site):
         Change the default value of certain plugin settings.
 
         - :setting:`accounts.ref_length` = 5
-        - :setting:`humanlink.human_model` = 'pcsw.Client'
+        - (no longer) :setting:`humanlinks.human_model` = 'pcsw.Client'
         
         """
         self.plugins.accounts.configure(ref_length=5)
-        self.plugins.humanlinks.configure(human_model='pcsw.Client')
+        # self.plugins.humanlinks.configure(human_model='pcsw.Client')
         super(Site, self).setup_plugins()
 
     def setup_choicelists(self):
@@ -191,7 +191,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.attestations'
-        yield 'lino.modlib.humanlinks'
+        # yield 'lino.modlib.humanlinks'
         yield 'lino.modlib.dedupe'
 
         if False:  # not yet ready
