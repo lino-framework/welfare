@@ -773,9 +773,8 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    pcsw.AddressesByClient households.SiblingsByPerson \
-    #humanlinks.ChildrenByHuman
-    pcsw.ContactsByClient households.MembersByPerson #households_panel
+    pcsw.AddressesByClient pcsw.ContactsByClient
+    households.MembersByPerson households.SiblingsByPerson
     """, label=_("Contact"))
 
     #~ suche = dd.Panel("""
@@ -1542,6 +1541,12 @@ class ClientContact(contacts.ContactRelated):
     type = dd.ForeignKey(ClientContactType, blank=True, null=True)
     remark = models.TextField(_("Remarks"), blank=True)  # ,null=True)
 
+    def full_clean(self, *args, **kw):
+        if not self.remark and not self.type \
+           and not self.company and not self.contact_person:
+            raise ValidationError(_("Must fill at least one field."))
+        super(ClientContact, self).full_clean(*args, **kw)
+
     @dd.chooser()
     def company_choices(self, type):
         qs = contacts.Companies.request().data_iterator
@@ -1563,8 +1568,9 @@ class ClientContacts(dd.Table):
 class ContactsByClient(ClientContacts):
     required = dd.required()
     master_key = 'client'
-    column_names = 'type company contact_person contact_role remark *'
+    column_names = 'type company contact_person remark *'
     label = _("Contacts")
+    auto_fit_column_widths = True
 
 
 config = dd.apps.pcsw

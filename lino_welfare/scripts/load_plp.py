@@ -195,7 +195,7 @@ def plp2member(plptype, p, c):
     obj.full_clean()
     obj.save()
     dblogger.info("Created %s as %s", obj.person, obj.role)
-        
+
 
 def get_or_warn(idpar):
     try:

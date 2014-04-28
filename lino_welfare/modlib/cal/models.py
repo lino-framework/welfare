@@ -172,7 +172,7 @@ class EventsByClient(Events):
         return qs
 
     @classmethod
-    def get_filter_kw(self, master_instance, **kw):
+    def get_filter_kw(self, ar, **kw):
         return kw  # tricky
 
 

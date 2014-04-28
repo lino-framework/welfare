@@ -20,20 +20,47 @@ from __future__ import unicode_literals
 
 from lino.modlib.households.models import *
 
+from django.utils.translation import ugettext_lazy as _
+
 from lino_welfare.modlib.contacts.models import Partner
 # we want to inherit also from lino_welfare's Partner
 
-person_fields = ('first_name', 'last_name', 'gender', 'birth_date')
+
+class MemberDependencies(dd.ChoiceList):
+    """The list of allowed choices for the `charge` of a household member.
+    """
+    verbose_name = _("Dependency")
+    verbose_name_plural = _("Household Member Dependencies")
+
+add = MemberDependencies.add_item
+add('01', _("At full charge"), 'full')
+add('02', _("Not at charge"), 'none')
+add('03', _("At shared charge"), 'shared')
 
 
 class Member(Member, dd.Human, dd.Born):
+
+    dependency = MemberDependencies.field(default=MemberDependencies.none)
+
     def full_clean(self):
         """Copy data fields from child"""
-        obj = self.person
-        if obj is not None:
+        if self.person_id:
             for k in person_fields:
-                setattr(self, k, getattr(obj, k))
+                setattr(self, k, getattr(self.person, k))
         super(Member, self).full_clean()
+
+    def disabled_fields(self, ar):
+        rv = super(Member, self).disabled_fields(ar)
+        if self.person_id:
+            rv = rv | person_fields
+        #~ logger.info("20130808 pcsw %s", rv)
+        return rv
+
+dd.update_field(Member, 'person', null=True, blank=True)
+
+# person_fields = ('first_name', 'last_name', 'gender', 'birth_date')
+person_fields = dd.fields_list(
+    Member, 'first_name last_name gender birth_date')
 
 
 class Household(Household):
@@ -44,7 +71,8 @@ class Household(Household):
 
 
 class SiblingsByPerson(SiblingsByPerson):
-    column_names = 'birth_date first_name last_name gender role person *'
+    column_names = "age role dependency person \
+    first_name last_name birth_date gender *"
     order_by = ['birth_date']
     
 
