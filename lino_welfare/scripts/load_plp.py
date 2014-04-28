@@ -150,7 +150,7 @@ def plp2member(plptype, p, c):
     if role in child_roles:
         # find household of parent
         members = households.Member.objects.filter(
-            person=p.person, role__name_giving=True)
+            person=p.person).exclude(role__in=child_roles)
         if members.count() == 0:
             hh = households.Household(type=T_FAMILY)
             hh.full_clean()
@@ -169,7 +169,7 @@ def plp2member(plptype, p, c):
         obj = households.Member(household=hh, role=role, person=c.person)
     else:
         members = households.Member.objects.filter(
-            person=c.person, role__name_giving=False)
+            person=c.person, role__in=child_roles)
         if members.count() == 0:
             hh = households.Household(type=T_FAMILY)
             hh.full_clean()
