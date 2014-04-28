@@ -1480,6 +1480,7 @@ def doit(a, b):
         contacts_Partner = resolve_model('contacts.Partner')
         sepa = dd.resolve_app('sepa')
 
+
         def create_contacts_partner(id, created, modified, country_id, city_id, region_id, zip_code, name, addr1, street_prefix, 
             street, street_no, street_box, addr2, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, 
             bank_account1, bank_account2):
@@ -1539,6 +1540,20 @@ def doit(a, b):
 
         globals_dict.update(
             create_contacts_partner=create_contacts_partner)
+
+        households_Member = resolve_model('households.Member')
+
+        def create_households_member(id, role_id, household_id, person_id, start_date, end_date):
+            kw = dict()
+            kw.update(id=id)
+            # kw.update(role=role_id)
+            kw.update(household_id=household_id)
+            kw.update(person_id=person_id)
+            kw.update(start_date=start_date)
+            kw.update(end_date=end_date)
+            return households_Member(**kw)
+        globals_dict.update(
+            create_households_member=create_households_member)
 
         def noop(*args):
             return None
