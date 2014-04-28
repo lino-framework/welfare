@@ -197,7 +197,7 @@ class PersonDetail(PersonDetail):
     """
 
     contact = dd.Panel("""
-    address_box
+    #address_box addresses.AddressesByPartner
     remarks:30 sepa.AccountsByPartner
     """, label=_("Contact"))
 
@@ -296,7 +296,7 @@ class CompanyDetail(CompanyDetail):
     """
 
     contact = dd.Panel("""
-    address_box
+    #address_box addresses.AddressesByPartner
     remarks:30 sepa.AccountsByPartner
     """, label=_("Contact"))
 

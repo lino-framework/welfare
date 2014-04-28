@@ -38,6 +38,13 @@ add('02', _("Not at charge"), 'none')
 add('03', _("At shared charge"), 'shared')
 
 
+class Household(Household):
+   
+    def disable_delete(self, ar):
+        # skip the is_imported_partner test
+        return super(Partner, self).disable_delete(ar)
+
+
 class Member(Member, dd.Human, dd.Born):
 
     dependency = MemberDependencies.field(default=MemberDependencies.none)
@@ -63,11 +70,46 @@ person_fields = dd.fields_list(
     Member, 'first_name last_name gender birth_date')
 
 
-class Household(Household):
+class unused_HouseholdDetail(HouseholdDetail):
 
-    def disable_delete(self, ar):
-        # skip the is_imported_partner test
-        return super(Partner, self).disable_delete(ar)
+    box3 = """
+    phone
+    gsm
+    email
+    url
+    """
+
+    box4 = """
+    # activity
+    sepa.AccountsByPartner
+    """
+
+
+class HouseholdDetail(dd.FormLayout):
+
+    main = """
+    type name language:10 id
+    box3 box4
+    bottom_box
+    """
+
+    box3 = """
+    phone
+    gsm
+    email
+    url
+    """
+
+    box4 = """
+    # activity
+    sepa.AccountsByPartner
+    """
+
+    bottom_box = "remarks households.MembersByHousehold"
+
+
+class Households(Households):
+    detail_layout = HouseholdDetail()
 
 
 class SiblingsByPerson(SiblingsByPerson):
@@ -76,12 +118,3 @@ class SiblingsByPerson(SiblingsByPerson):
     order_by = ['birth_date']
     
 
-def site_setup(site):
-    site.modules.households.Households.set_detail_layout(box3="""
-    country region city zip_code:10
-    addr1:40
-    street:25 street_no street_box
-    addr2:40
-    activity
-    sepa.AccountsByPartner
-    """)

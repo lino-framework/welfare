@@ -761,7 +761,7 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    addresses.AddressesByPartner pcsw.ContactsByClient
+    addresses.AddressesByPartner:30 pcsw.ContactsByClient:40
     households.MembersByPerson households.SiblingsByPerson
     """, label=_("Contact"))
 
