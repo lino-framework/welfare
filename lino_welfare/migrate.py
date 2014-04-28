@@ -1357,18 +1357,18 @@ def doit(a, b):
 
         """
     
-        humanlinks_Link = resolve_model("humanlinks.Link")
+        # humanlinks_Link = resolve_model("humanlinks.Link")
     
-        def create_humanlinks_link(id, seqno, type,
-                                   parent_id, child_id):
-            kw = dict()
-            kw.update(id=id)
-            # kw.update(seqno=seqno)
-            kw.update(type=type)
-            kw.update(parent_id=parent_id)
-            kw.update(child_id=child_id)
-            return humanlinks_Link(**kw)
-        globals_dict.update(create_humanlinks_link=create_humanlinks_link)
+        # def create_humanlinks_link(id, seqno, type,
+        #                            parent_id, child_id):
+        #     kw = dict()
+        #     kw.update(id=id)
+        #     # kw.update(seqno=seqno)
+        #     kw.update(type=type)
+        #     kw.update(parent_id=parent_id)
+        #     kw.update(child_id=child_id)
+        #     return humanlinks_Link(**kw)
+        # globals_dict.update(create_humanlinks_link=create_humanlinks_link)
     
         new_content_type_id = globals_dict.get('new_content_type_id')
         uploads_Upload = resolve_model("uploads.Upload")
@@ -1545,6 +1545,7 @@ def doit(a, b):
         globals_dict.update(create_users_team=noop)
 
         globals_dict.update(create_households_member=noop)
+        globals_dict.update(create_humanlinks_link=noop)
 
         def after_load(loader):
             "set_primary_address for all Clients"

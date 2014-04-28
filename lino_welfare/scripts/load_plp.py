@@ -67,8 +67,8 @@ from lino import dd
 from lino.utils import dbfreader
 from lino.utils import dblogger
 
-from lino.modlib.humanlinks.models import LinkTypes, Link
-from lino_welfare.modlib.households.models import Role, Member, Household
+# from lino.modlib.humanlinks.models import LinkTypes, Link
+from lino_welfare.modlib.households.models import Member, Household
 
 from lino.runtime import pcsw, households
 
