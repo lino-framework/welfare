@@ -23,15 +23,17 @@ from lino.modlib.households.models import *
 from lino_welfare.modlib.contacts.models import Partner
 # we want to inherit also from lino_welfare's Partner
 
+person_fields = ('first_name', 'last_name', 'gender', 'birth_date')
+
 
 class Member(Member, dd.Human, dd.Born):
     def full_clean(self):
         """Copy data fields from child"""
-        super(Member, self).full_clean()
         obj = self.person
         if obj is not None:
-            for k in ('first_name', 'last_name', 'gender', 'birth_date'):
+            for k in person_fields:
                 setattr(self, k, getattr(obj, k))
+        super(Member, self).full_clean()
 
 
 class Household(Household):

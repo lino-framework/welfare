@@ -30,7 +30,7 @@ PLP ("Person Link to Person")
 # 10 |Partner        |10 |Partner      |Partnerin     ||
 # 11 |Freund         |11 |Freund       |Freundin      ||
 
-$ python manage.py show --username rolf households.Roles
+$ python manage.py show --username rolf households.MemberRoles
 
 ======= =================== ================== =============
  ID      Designation         Designation (fr)   name-giving
@@ -68,7 +68,8 @@ from lino.utils import dbfreader
 from lino.utils import dblogger
 
 # from lino.modlib.humanlinks.models import LinkTypes, Link
-from lino_welfare.modlib.households.models import Member, Household
+from lino_welfare.modlib.households.models import (
+    Member, MemberRoles, Household)
 
 from lino.runtime import pcsw, households
 
@@ -107,13 +108,13 @@ from lino.runtime import pcsw, households
 #     R_RELATIVE = Role(**kw)
 #     R_RELATIVE.save()
 
-R_CHEF = households.MemberRoles.head
-R_MARRIED = households.MemberRoles.spouse
-R_PARTNER = households.MemberRoles.partner
-R_CHILD = households.MemberRoles.partner
-R_ADOPTED = households.MemberRoles.adopted
-R_COHABITANT = households.MemberRoles.cohabitant
-R_RELATIVE = households.MemberRoles.relative
+R_CHEF = MemberRoles.head
+R_MARRIED = MemberRoles.spouse
+R_PARTNER = MemberRoles.partner
+R_CHILD = MemberRoles.child
+R_ADOPTED = MemberRoles.adopted
+R_COHABITANT = MemberRoles.cohabitant
+R_RELATIVE = MemberRoles.relative
 
 HOUSEHOLDS_MAP = {}
 
@@ -148,15 +149,15 @@ def plp2member(plptype, p, c):
         raise Exception("Invalid link type %r" % plptype)
     
     if role in child_roles:
-        # find household of parent
-        members = households.Member.objects.filter(
+        # We must add to the household of *parent*.
+        members = Member.objects.filter(
             person=p.person).exclude(role__in=child_roles)
         if members.count() == 0:
-            hh = households.Household(type=T_FAMILY, name="*")
+            hh = Household(type=T_FAMILY, name=p.person.last_name)
             hh.full_clean()
             hh.save()
             dblogger.debug("Created household %s from parent %s", hh, p)
-            obj = households.Member(
+            obj = Member(
                 household=hh, role=R_CHEF, person=p.person)
             obj.save()
         elif members.count() == 1:
@@ -166,16 +167,17 @@ def plp2member(plptype, p, c):
             # raise Exception(msg)
             dblogger.warning(msg)
             return
-        obj = households.Member(household=hh, role=role, person=c.person)
+        obj = Member(household=hh, role=role, person=c.person)
     else:
-        members = households.Member.objects.filter(
+        # We must add to the household of *child*.
+        members = Member.objects.filter(
             person=c.person, role__in=child_roles)
         if members.count() == 0:
-            hh = households.Household(type=T_FAMILY, name="*")
+            hh = Household(type=T_FAMILY, name=p.person.last_name)
             hh.full_clean()
             hh.save()
             dblogger.warning("Created household %s from child %s", hh, c)
-            obj = households.Member(
+            obj = Member(
                 household=hh, role=R_CHILD, person=c.person)
             obj.save()
         elif members.count() == 1:
@@ -186,7 +188,7 @@ def plp2member(plptype, p, c):
             dblogger.warning(msg)
             return
         
-        obj = households.Member(household=hh, role=role, person=p.person)
+        obj = Member(household=hh, role=role, person=p.person)
 
     obj.save()
     dblogger.info("Created %s as %s", obj.person, obj.role)
