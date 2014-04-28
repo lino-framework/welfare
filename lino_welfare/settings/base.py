@@ -173,6 +173,7 @@ class Site(Site):
         yield 'lino.modlib.countries'
         yield 'lino.modlib.properties'
         yield 'lino_welfare.modlib.contacts'
+        yield 'lino.modlib.addresses'
         #~ 'lino.modlib.projects'
         #~ 'lino.modlib.notes',
         #~ 'lino.modlib.links',

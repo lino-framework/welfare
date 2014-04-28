@@ -1564,8 +1564,8 @@ def doit(a, b):
         globals_dict.update(create_humanlinks_link=noop)
 
         def after_load(loader):
-            "set_primary_address for all Clients"
-            for o in settings.modules.pcsw.Client.objects.all():
+            "create primary address for all Partners"
+            for o in settings.modules.contacts.Partner.objects.all():
                 o.get_primary_address()
         self.after_load(after_load)
 

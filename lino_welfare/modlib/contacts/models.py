@@ -24,10 +24,13 @@ from django.utils.translation import string_concat
 from lino import dd
 
 from lino.modlib.contacts.models import *
-from lino_welfare.modlib.contacts import Plugin
+
+addresses = dd.resolve_app('addresses')
 
 
-class Partner(Partner, mixins.CreatedModified, dd.ImportedFields):
+class Partner(
+        Partner, addresses.AddressOwner,
+        mixins.CreatedModified, dd.ImportedFields):
 
     """
     :ref:`welfare` defines a `vat_id` field on Partner but doesn't
@@ -332,8 +335,11 @@ def my_details(sender, **kw):
     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
 
+config = dd.apps.contacts
+
+
 def setup_main_menu(self, ui, profile, main):
-    m = main.add_menu("contacts", Plugin.verbose_name)
+    m = main.add_menu(config.app_label, config.verbose_name)
     m.add_action('contacts.Persons')
     m.add_action(
         'pcsw.Clients',

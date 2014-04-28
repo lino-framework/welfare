@@ -63,7 +63,7 @@ notes = dd.resolve_app('notes')
 from lino.utils import ssin
 
 from .coaching import *
-from .client_address import *
+# from .client_address import *
 # from .client_link import *
 
 
@@ -707,14 +707,15 @@ class Client(contacts.Person,
         """Overrides :meth:`lino.modlib.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
+        Address = dd.modules.addresses.Address
+        ADDRESS_FIELDS = dd.modules.addresses.ADDRESS_FIELDS
         diffs = []
         objects = [self]
-        # kw = dict(client=self, address_type=AddressTypes.eid)
-        kw = dict(client=self, data_source=DataSources.eid)
+        kw = dict(partner=self, data_source=DataSources.eid)
         try:
-            addr = ClientAddress.objects.get(**kw)
-        except ClientAddress.DoesNotExist:
-            addr = ClientAddress(**kw)
+            addr = Address.objects.get(**kw)
+        except Address.DoesNotExist:
+            addr = Address(**kw)
         objects.append(addr)
         for fldname, new in attrs.items():
             if fldname in ADDRESS_FIELDS:
@@ -730,19 +731,6 @@ class Client(contacts.Person,
                         dd.obj2str(new)))
                 setattr(obj, fld.name, new)
         return objects, diffs
-
-    def get_primary_address(self):
-        kw = dict(client=self, primary=True)
-        try:
-            return ClientAddress.objects.get(**kw)
-        except ClientAddress.DoesNotExist:
-            kw.update(address_type=AddressTypes.official)
-            for fldname in ADDRESS_FIELDS:
-                kw[fldname] = getattr(self, fldname)
-            addr = ClientAddress(**kw)
-            addr.full_clean()
-            addr.save()
-            return addr
 
 
 class ClientDetail(dd.FormLayout):
@@ -773,7 +761,7 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    pcsw.AddressesByClient pcsw.ContactsByClient
+    addresses.AddressesByPartner pcsw.ContactsByClient
     households.MembersByPerson households.SiblingsByPerson
     """, label=_("Contact"))
 
@@ -977,7 +965,8 @@ class Clients(contacts.Persons):
     gender language
     """, window_size=(60, 'auto'))
 
-    column_names = "name_column:20 client_state national_id:10 gsm:10 address_column age:10 email phone:10 id aid_type language:10"
+    column_names = "name_column:20 client_state national_id:10 \
+    gsm:10 address_column age:10 email phone:10 id aid_type language:10"
 
     detail_layout = ClientDetail()
 
@@ -1599,9 +1588,6 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action(CivilState)
     m.add_action(ClientStates)
     m.add_action(beid.BeIdCardTypes)
-
-    m.add_action('pcsw.AddressTypes')
-    m.add_action('pcsw.ClientAddresses')
 
 
 def setup_reports_menu(site, ui, profile, m):
