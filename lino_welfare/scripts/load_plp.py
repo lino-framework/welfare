@@ -91,28 +91,37 @@ from lino.runtime import pcsw, households
 #     raise Exception("Invalid link type %r" % plptype)
 
 
-R_CHEF = households.Role.objects.get(id=1)
-R_MARRIED = households.Role.objects.get(id=2)
-R_PARTNER = households.Role.objects.get(id=3)
-R_CHILD = households.Role.objects.get(id=5)
+# R_CHEF = households.Role.objects.get(id=1)
+# R_MARRIED = households.Role.objects.get(id=2)
+# R_PARTNER = households.Role.objects.get(id=3)
+# R_CHILD = households.Role.objects.get(id=5)
+# R_ADOPTED = households.Role.objects.get(id=6)
+# R_COHABITANT = households.Role.objects.get(id=4)
+# try:
+#     R_RELATIVE = households.Role.objects.get(id=7)  # grandparent
+# except households.Role.DoesNotExist:
+#     kw = dd.babel_values('name',
+#                          de=u"Verwandter",
+#                          fr=u"Membre de famille",
+#                          en=u"Relative")
+#     R_RELATIVE = Role(**kw)
+#     R_RELATIVE.save()
 
-R_ADOPTED = households.Role.objects.get(id=6)
-R_COHABITANT = households.Role.objects.get(id=4)
-try:
-    R_RELATIVE = households.Role.objects.get(id=7)  # grandparent
-except households.Role.DoesNotExist:
-    kw = dd.babel_values('name',
-                         de=u"Verwandter",
-                         fr=u"Membre de famille",
-                         en=u"Relative")
-    R_RELATIVE = Role(**kw)
-    R_RELATIVE.save()
-
+R_CHEF = households.MemberRoles.head
+R_MARRIED = households.MemberRoles.spouse
+R_PARTNER = households.MemberRoles.partner
+R_CHILD = households.MemberRoles.partner
+R_ADOPTED = households.MemberRoles.adopted
+R_COHABITANT = households.MemberRoles.cohabitant
+R_RELATIVE = households.MemberRoles.relative
 
 HOUSEHOLDS_MAP = {}
 
-parent_roles = households.Role.objects.filter(name_giving=True)
-child_roles = households.Role.objects.filter(name_giving=False)
+# parent_roles = households.Role.objects.filter(name_giving=True)
+# child_roles = households.Role.objects.filter(name_giving=False)
+
+# if not role.name_giving:  # i.e. CHILD, ADOPTED, RELATIVE
+child_roles = (R_CHILD, R_ADOPTED, R_RELATIVE)
 
 T_COUPLE = households.Type.objects.get(id=1)
 T_FAMILY = households.Type.objects.get(id=2)
@@ -138,7 +147,7 @@ def plp2member(plptype, p, c):
     else:
         raise Exception("Invalid link type %r" % plptype)
     
-    if not role.name_giving:  # i.e. CHILD, ADOPTED, RELATIVE
+    if role in child_roles:
         # find household of parent
         members = households.Member.objects.filter(
             person=p.person, role__name_giving=True)

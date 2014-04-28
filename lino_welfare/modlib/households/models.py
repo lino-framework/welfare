@@ -41,6 +41,11 @@ class Household(Household):
         return super(Partner, self).disable_delete(ar)
 
 
+class SiblingsByPerson(SiblingsByPerson):
+    column_names = 'birth_date first_name last_name gender role person *'
+    order_by = ['birth_date']
+    
+
 def site_setup(site):
     site.modules.households.Households.set_detail_layout(box3="""
     country region city zip_code:10

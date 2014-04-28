@@ -1544,6 +1544,8 @@ def doit(a, b):
             return None
         globals_dict.update(create_users_team=noop)
 
+        globals_dict.update(create_households_member=noop)
+
         def after_load(loader):
             "set_primary_address for all Clients"
             for o in settings.modules.pcsw.Client.objects.all():
