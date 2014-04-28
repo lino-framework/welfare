@@ -1565,7 +1565,7 @@ def doit(a, b):
 
         def after_load(loader):
             "create primary address for all Partners"
-            for o in settings.modules.contacts.Partner.objects.all():
+            for o in settings.SITE.modules.contacts.Partner.objects.all():
                 o.get_primary_address()
         self.after_load(after_load)
 
