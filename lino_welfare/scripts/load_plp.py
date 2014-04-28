@@ -159,6 +159,7 @@ def plp2member(plptype, p, c):
             dblogger.debug("Created household %s from parent %s", hh, p)
             obj = Member(
                 household=hh, role=R_CHEF, person=p.person)
+            obj.full_clean()
             obj.save()
         elif members.count() == 1:
             hh = members[0].household
@@ -179,6 +180,7 @@ def plp2member(plptype, p, c):
             dblogger.warning("Created household %s from child %s", hh, c)
             obj = Member(
                 household=hh, role=R_CHILD, person=c.person)
+            obj.full_clean()
             obj.save()
         elif members.count() == 1:
             hh = members[0].household
@@ -190,6 +192,7 @@ def plp2member(plptype, p, c):
         
         obj = Member(household=hh, role=role, person=p.person)
 
+    obj.full_clean()
     obj.save()
     dblogger.info("Created %s as %s", obj.person, obj.role)
         
