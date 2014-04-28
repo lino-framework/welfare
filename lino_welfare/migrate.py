@@ -1544,7 +1544,8 @@ def doit(a, b):
             return None
         globals_dict.update(create_users_team=noop)
 
-        globals_dict.update(create_households_member=noop)
+        # globals_dict.update(create_households_member=noop)
+        globals_dict.update(create_households_role=noop)
         globals_dict.update(create_humanlinks_link=noop)
 
         def after_load(loader):
