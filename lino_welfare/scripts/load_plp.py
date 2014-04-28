@@ -152,7 +152,7 @@ def plp2member(plptype, p, c):
         members = households.Member.objects.filter(
             person=p.person).exclude(role__in=child_roles)
         if members.count() == 0:
-            hh = households.Household(type=T_FAMILY)
+            hh = households.Household(type=T_FAMILY, name="*")
             hh.full_clean()
             hh.save()
             dblogger.debug("Created household %s from parent %s", hh, p)
@@ -171,7 +171,7 @@ def plp2member(plptype, p, c):
         members = households.Member.objects.filter(
             person=c.person, role__in=child_roles)
         if members.count() == 0:
-            hh = households.Household(type=T_FAMILY)
+            hh = households.Household(type=T_FAMILY, name="*")
             hh.full_clean()
             hh.save()
             dblogger.warning("Created household %s from child %s", hh, c)
