@@ -16,6 +16,7 @@ using `manage.py run`.
    general
    pcsw
    debts
+   integ
    jobs
    cbss
    courses

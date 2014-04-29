@@ -131,9 +131,16 @@ def site_setup(site):
     """)
 
 
-class UploadsByClient(Uploads):
-    required = dd.required()
+class UploadsByClient(UploadsByController):
+    # required = dd.required()
     master_key = 'client'
     column_names = "type valid_until description * "
-    auto_fit_column_widths = True
+    # auto_fit_column_widths = True
+
+    insert_layout = """
+    file
+    type valid_until
+    description
+    """
+
 

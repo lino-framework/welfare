@@ -299,12 +299,10 @@ class Client(contacts.Person,
                                         blank=True, null=True)
     unemployed_since = models.DateField(
         _("Seeking work since"), blank=True, null=True)
-    #~ work_permit_exempt = models.BooleanField(verbose_name=_("Work permit exemption"))
     needs_residence_permit = models.BooleanField(
         _("Needs residence permit"), default=False)
     needs_work_permit = models.BooleanField(
         _("Needs work permit"), default=False)
-    #~ work_permit_valid_until = models.DateField(blank=True,null=True,verbose_name=_("Work permit valid until"))
     work_permit_suspended_until = models.DateField(
         blank=True, null=True, verbose_name=_("suspended until"))
     aid_type = models.ForeignKey("pcsw.AidType", blank=True, null=True)
@@ -780,7 +778,7 @@ class ClientDetail(dd.FormLayout):
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
-    residence_permit work_permit driving_licence
+    # residence_permit work_permit driving_licence
     # uploads.UploadsByController
     uploads.UploadsByClient
     """)  # ,label = _("Papers"))

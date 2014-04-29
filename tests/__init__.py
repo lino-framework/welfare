@@ -53,6 +53,9 @@ class SimpleTests(BaseTestCase):
 
 class DocsTests(BaseTestCase):
     
+    def test_integ(self):
+        return self.run_docs_doctests('tested/integ.rst')
+
     def test_general(self):
         return self.run_docs_doctests('tested/general.rst')
 
