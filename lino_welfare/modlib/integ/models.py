@@ -72,6 +72,7 @@ class Clients(pcsw.Clients):
             help_text=_(
                 "Show only clients in 'active' integration phases")),
         **pcsw.Clients.parameters)
+
     params_layout = """
     client_state coached_by and_coached_by start_date end_date observed_event
     aged_from aged_to gender nationality also_obsolete
