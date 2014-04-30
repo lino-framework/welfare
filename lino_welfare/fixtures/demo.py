@@ -41,6 +41,7 @@ from lino.modlib.cal.utils import DurationUnits
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
+uploads = dd.resolve_app('uploads')
 contacts = dd.resolve_app('contacts')
 users = dd.resolve_app('users')
 countries = dd.resolve_app('countries')
@@ -1158,7 +1159,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                                             now)
         yield obj
 
-    #~ qs = cal.Guest.objects.filter(role=settings.SITE.site_config.client_guestrole)
     qs = cal.Guest.objects.filter(waiting_since__isnull=False)
     for i, obj in enumerate(qs):
         if i % 2 == 0:
@@ -1184,5 +1184,15 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     # create a primary ClientAddress for each Client.
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
         obj.get_primary_address()
+
+    CLIENTS = Cycler(pcsw.Clients.request(user=hubert))
+    UPLOAD_TYPES = Cycler(uploads.UploadType.objects.all())
+    for i in range(3):
+        obj = CLIENTS.pop()
+        for j in range(2):
+            yield uploads.Upload(
+                client=obj,
+                user=hubert,
+                type=UPLOAD_TYPES.pop())
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

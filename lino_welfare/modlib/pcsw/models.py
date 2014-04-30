@@ -706,7 +706,6 @@ class Client(contacts.Person,
 
         """
         Address = dd.modules.addresses.Address
-        ADDRESS_FIELDS = dd.modules.addresses.ADDRESS_FIELDS
         diffs = []
         objects = [self]
         kw = dict(partner=self, data_source=DataSources.eid)
@@ -716,7 +715,7 @@ class Client(contacts.Person,
             addr = Address(**kw)
         objects.append(addr)
         for fldname, new in attrs.items():
-            if fldname in ADDRESS_FIELDS:
+            if fldname in Address.ADDRESS_FIELDS:
                 obj = addr
             else:
                 obj = self

@@ -31,6 +31,8 @@ contacts = dd.resolve_app('contacts')
 
 
 class UploadType(UploadType):
+    """Extends the library model by adding warn_expiry info.
+    """
     warn_expiry_unit = cal.Recurrencies.field(
         _("Expiry warning (unit)"),
         default=cal.Recurrencies.monthly,
@@ -57,7 +59,12 @@ class UploadTypes(UploadTypes):
 
 
 class Upload(Upload, contacts.ContactRelated):
+    """Extends the library model by adding:
 
+- ContactRelated
+- client
+- valid_from and valid_until
+    """
     client = dd.ForeignKey(
         'pcsw.Client',
         null=True, blank=True)
@@ -112,6 +119,7 @@ dd.update_field(
 
 
 class UploadDetail(dd.FormLayout):
+    "The Detail layout for Upload"
 
     main = """
     user client id
@@ -121,17 +129,20 @@ class UploadDetail(dd.FormLayout):
     remark cal.TasksByController
     """
 
+# Uploads.detail_layout = UploadDetail()
+# Uploads.insert_layout = """
+# type file
+# valid_from valid_until
+# description
+# """
 
-def site_setup(site):
-    site.modules.uploads.Uploads.set_detail_layout(UploadDetail())
-    site.modules.uploads.Uploads.set_insert_layout("""
-    type file
-    valid_from valid_until
-    description
-    """)
+
+class Uploads(Uploads):
+    column_names = 'user client type file valid_from valid_until description *'
 
 
 class UploadsByClient(UploadsByController):
+    "Uploads by Client"
     # required = dd.required()
     master_key = 'client'
     column_names = "type valid_until description * "
@@ -142,5 +153,14 @@ class UploadsByClient(UploadsByController):
     type valid_until
     description
     """
+
+
+def site_setup(site):
+    site.modules.uploads.Uploads.set_detail_layout(UploadDetail())
+    site.modules.uploads.Uploads.set_insert_layout("""
+    type file
+    valid_from valid_until
+    description
+    """)
 
 
