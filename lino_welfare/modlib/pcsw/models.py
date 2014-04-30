@@ -779,7 +779,7 @@ class ClientDetail(dd.FormLayout):
     needs_residence_permit needs_work_permit
     # residence_permit work_permit driving_licence
     # uploads.UploadsByController
-    uploads.UploadsByClient
+    uploads.CareerUploadsByClient
     """)  # ,label = _("Papers"))
 
     work_tab = dd.Panel("""
@@ -845,7 +845,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     health_tab = dd.Panel("""
-    aids.MedicalAidsByClient
+    aids.MedicalAidsByClient uploads.MedicalUploadsByClient
     """, label=_("Health"))
 
     # the career tab will be overwritten by settings.chatelet

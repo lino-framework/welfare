@@ -262,21 +262,27 @@ def objects():
 
     #~ from lino.models import update_site_config
 
-    uploadType = Instantiator('uploads.UploadType', "name").build
-    yield uploadType(dd.babelitem(de=u"Personalausweis", fr=u"Carte d'identité", en="ID card"))
-    p = uploadType(dd.babelitem(de=u"Aufenthaltserlaubnis",
-                   fr=u"Permis de séjour", en="Residence permit"))
+    uploadType = Instantiator('uploads.UploadType').build
+    yield uploadType(**dd.babelkw(
+        'name',
+        de=u"Personalausweis", fr=u"Carte d'identité", en="ID card"))
+    p = uploadType(**dd.babelkw(
+        'name', de=u"Aufenthaltserlaubnis",
+        fr=u"Permis de séjour", en="Residence permit"))
     yield p
     #~ settings.SITE.update_site_config(residence_permit_upload_type=p)
     settings.SITE.site_config.residence_permit_upload_type = p
-    p = uploadType(dd.babelitem(de=u"Arbeitserlaubnis",
-                   fr=u"Permis de travail", en="Work permit"))
+    p = uploadType(**dd.babelkw(
+        'name', de=u"Arbeitserlaubnis",
+        fr=u"Permis de travail", en="Work permit"))
     yield p
     #~ settings.SITE.update_site_config(work_permit_upload_type = p)
     settings.SITE.site_config.work_permit_upload_type = p
-    yield uploadType(dd.babelitem(de=u"Vertrag", fr=u"Contrat", en="Contract"))
-    p = uploadType(dd.babelitem(de=u"Führerschein",
-                   fr=u"Permis de conduire", en="Diving licence"))
+    yield uploadType(**dd.babelkw(
+        'name', de=u"Vertrag", fr=u"Contrat", en="Contract"))
+    p = uploadType(**dd.babelkw(
+        'name', de=u"Führerschein",
+        fr=u"Permis de conduire", en="Diving licence"))
     yield p
     #~ settings.SITE.update_site_config(driving_licence_upload_type = p)
     settings.SITE.site_config.driving_licence_upload_type = p

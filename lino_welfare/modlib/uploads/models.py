@@ -45,13 +45,15 @@ class UploadType(UploadType):
 class UploadTypes(UploadTypes):
 
     detail_layout = """
-    name id
+    id upload_area
+    name
     warn_expiry_value warn_expiry_unit
     # company contact_person contact_role
     uploads.UploadsByType
     """
 
     insert_layout = """
+    upload_area
     name
     warn_expiry_value warn_expiry_unit
     # company contact_person contact_role
@@ -153,6 +155,18 @@ class UploadsByClient(UploadsByController):
     type valid_until
     description
     """
+
+
+class MedicalUploadsByClient(UploadsByClient):
+    _upload_area = UploadAreas.medical
+
+
+class CareerUploadsByClient(UploadsByClient):
+    _upload_area = UploadAreas.cv
+
+
+class OtherUploadsByClient(UploadsByClient):
+    _upload_area = UploadAreas.other
 
 
 def site_setup(site):
