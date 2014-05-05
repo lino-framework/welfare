@@ -29,6 +29,9 @@ class Site(Site):
     """
     version = SETUP_INFO['version']  # lino_welfare.__version__
     url = SETUP_INFO['url']  # "http://code.google.com/p/lino-welfare/"
+
+    use_java = False  # temporarily
+
     # ~ verbose_name = SETUP_INFO['name'] # "Lino Welfare"
     verbose_name = "Lino Welfare"
     #~ description = "a Lino application for Belgian Public Welfare Centres."
@@ -120,7 +123,8 @@ class Site(Site):
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
 
-        tb.add_action('pcsw.Clients', 'find_by_beid')
+        if self.use_java:
+            tb.add_action('pcsw.Clients', 'find_by_beid')
 
     def setup_menu(self, ui, profile, main):
         from django.utils.translation import ugettext_lazy as _
