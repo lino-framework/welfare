@@ -858,18 +858,32 @@ class AssetsByBudget(EntriesByBudget, EntriesByType):
     column_names = "account remark amount actor move_buttons:8 todo seqno id"
 
 
-#~ class PrintEntriesByBudget(EntriesByBudget,EntriesByType):
 class PrintEntriesByBudget(dd.VirtualTable):
-
-    """
-    Base class for the printable tables of entries by budget
-    (:class:`PrintExpensesByBudget`,
-    :class:`PrintIncomesByBudget`,
-    :class:`PrintLiabilitiesByBudget` and
-    :class:`PrintAssetsByBudget`).
+    """Base class for the printable tables of entries by budget
+(:class:`PrintExpensesByBudget`, :class:`PrintIncomesByBudget`,
+:class:`PrintLiabilitiesByBudget` and :class:`PrintAssetsByBudget`).
     
-    This is historically the first table that uses Lino's 
-    per-request dynamic columns feature.
+This is historically the first table that uses Lino's per-request
+dynamic columns feature.
+
+This feature means that a single table can have different "column
+sets".  You must define a `get_handle_name` method which returns a
+"handle name" for each request.  In you case if you want a column set
+per user) you would add the user name to the default name::
+
+    from lino.core.constants import _handle_attr_name
+
+    class MyTable(...):
+
+        @classmethod
+        def get_handle_name(self, ar):
+            hname = _handle_attr_name
+            hname += ar.get_user().username
+            return hname
+    
+TODO: more explnations....
+
+
     """
     slave_grid_format = 'html'
     _account_type = None
