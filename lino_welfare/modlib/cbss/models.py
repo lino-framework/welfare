@@ -1226,7 +1226,7 @@ class IdentifyPersonRequests(CBSSRequests):
     required = dict(user_groups='cbss')
     #~ required_user_groups = ['cbss']
     model = IdentifyPersonRequest
-    active_fields = ['person']
+    active_fields = 'person'
     detail_layout = IdentifyPersonRequestDetail()
     insert_layout = IdentifyPersonRequestInsert()
 
@@ -1610,7 +1610,7 @@ class ManageAccessRequests(CBSSRequests):
     insert_layout = ManageAccessRequestInsert()
     required = dict(user_groups='cbss')
     #~ required_user_groups = ['cbss']
-    active_fields = ['person']
+    active_fields = 'person'
 
 
 class ManageAccessRequestsByPerson(ManageAccessRequests):

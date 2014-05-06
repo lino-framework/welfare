@@ -493,7 +493,7 @@ class Contracts(isip.ContractBaseTable):
     model = Contract
     column_names = 'id job applies_from applies_until user type *'
     order_by = ['id']
-    active_fields = 'job company contact_person contact_role'.split()
+    active_fields = 'job company contact_person contact_role'
     detail_layout = ContractDetail()
     insert_layout = dd.FormLayout("""
     client

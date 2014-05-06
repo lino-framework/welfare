@@ -490,7 +490,7 @@ class CourseRequests(dd.Table):
     remark  uploads.UploadsByController 
     """
     order_by = ['date_submitted']
-    active_fields = ['offer']
+    active_fields = 'offer'
 
 
 class CourseRequestsByPerson(CourseRequests):

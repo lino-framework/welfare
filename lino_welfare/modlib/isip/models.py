@@ -687,8 +687,7 @@ class Contracts(ContractBaseTable):
     model = Contract
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
-    #~ active_fields = ('company','contact')
-    active_fields = ['company']
+    active_fields = 'company'
     detail_layout = ContractDetail()
     insert_layout = dd.FormLayout("""
     client
