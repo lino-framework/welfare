@@ -262,6 +262,7 @@ def objects():
 
     #~ from lino.models import update_site_config
 
+    UploadAreas = dd.modules.uploads.UploadAreas
     uploadType = Instantiator('uploads.UploadType').build
     yield uploadType(**dd.babelkw(
         'name',
@@ -270,22 +271,33 @@ def objects():
         'name', de=u"Aufenthaltserlaubnis",
         fr=u"Permis de séjour", en="Residence permit"))
     yield p
-    #~ settings.SITE.update_site_config(residence_permit_upload_type=p)
-    settings.SITE.site_config.residence_permit_upload_type = p
+    # settings.SITE.site_config.residence_permit_upload_type = p
     p = uploadType(**dd.babelkw(
         'name', de=u"Arbeitserlaubnis",
         fr=u"Permis de travail", en="Work permit"))
     yield p
-    #~ settings.SITE.update_site_config(work_permit_upload_type = p)
-    settings.SITE.site_config.work_permit_upload_type = p
+    # settings.SITE.site_config.work_permit_upload_type = p
     yield uploadType(**dd.babelkw(
         'name', de=u"Vertrag", fr=u"Contrat", en="Contract"))
     p = uploadType(**dd.babelkw(
         'name', de=u"Führerschein",
         fr=u"Permis de conduire", en="Diving licence"))
     yield p
-    #~ settings.SITE.update_site_config(driving_licence_upload_type = p)
-    settings.SITE.site_config.driving_licence_upload_type = p
+    # settings.SITE.site_config.driving_licence_upload_type = p
+    uploadType = Instantiator(
+        'uploads.UploadType', upload_area=UploadAreas.medical).build
+    yield uploadType(
+        **dd.babelkw(
+            'name',
+            de="Ärztliche Bescheinigung",
+            fr="Certificat médical",
+            en="Medical certificate"))
+    yield uploadType(
+        **dd.babelkw(
+            'name',
+            de="Behindertenausweis",
+            fr="Certificat de handicap",
+            en="Handicap certificate"))
 
     yield settings.SITE.site_config
 
