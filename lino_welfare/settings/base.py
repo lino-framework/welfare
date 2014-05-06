@@ -226,6 +226,8 @@ class Site(Site):
             yield 'lino.modlib.beid'
             yield 'lino.modlib.davlink'
 
+        yield 'lino.modlib.appypod'
+
     def get_admin_main_items(self, ar):
         yield self.modules.integ.UsersWithClients
         yield self.modules.cal.MyEvents
