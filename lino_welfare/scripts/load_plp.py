@@ -17,6 +17,9 @@
 Temporary script used to import PLP.DBF from TIM.
 
 PLP ("Person Link to Person")
+IdPar1
+IdPar2
+PlpType
 
 # PLPTYPES.DBC:
 # 01 |Vater/Mutter   |01R|Vater        |Mutter        ||
@@ -32,31 +35,28 @@ PLP ("Person Link to Person")
 
 $ python manage.py show --username rolf households.MemberRoles
 
-======= =================== ================== =============
- ID      Designation         Designation (fr)   name-giving
-------- ------------------- ------------------ -------------
- 1       Haushaltsvorstand   Chef de ménage     Yes
- 2       Ehepartner          Conjoint           Yes
- 3       Partner             Partenaire         Yes
- 4       Mitbewohner         Cohabitant         No
- 5       Kind                Enfant             No
- 6       Adoptivkind         Enfant adopté      No
- 7       Verwandter          Membre de famille  No
- **0**                                          **3**
-======= =================== ================== =============
+======= ============ ===================
+ value   name         text
+------- ------------ -------------------
+ 01      head         Head of household
+ 02      spouse       Spouse
+ 03      partner      Partner
+ 04      cohabitant   Cohabitant
+ 05      child        Child
+ 07      adopted      Adopted child
+ 06      relative     Relative
+======= ============ ===================
 
 $ python manage.py show --username rolf households.Types
 
-==== ========================= =====================
- ID   Designation               Designation (fr)    
----- ------------------------- ---------------------
- 1    Ehepaar                   Couple marié
- 2    Familie                   Famille
- 3    Faktischer Haushalt       Ménage de fait
- 4    Legale Wohngemeinschaft   Cohabitation légale
-==== ========================= =====================
-
-
+==== ==================== ===================== =========================
+ ID   Designation          Designation (fr)      Designation (de)
+---- -------------------- --------------------- -------------------------
+ 1    Married couple       Couple marié          Ehepaar
+ 2    Family               Famille               Familie
+ 3    Factual household    Ménage de fait        Faktischer Haushalt
+ 4    Legal cohabitation   Cohabitation légale   Legale Wohngemeinschaft
+==== ==================== ===================== =========================
 
 """
 
@@ -67,7 +67,6 @@ from lino import dd
 from lino.utils import dbfreader
 from lino.utils import dblogger
 
-# from lino.modlib.humanlinks.models import LinkTypes, Link
 from lino_welfare.modlib.households.models import (
     Member, MemberRoles, Household)
 
@@ -130,7 +129,7 @@ T_HOUSEHOLD = households.Type.objects.get(id=3)
 T_COMMUNITY = households.Type.objects.get(id=4)
 
 
-def plp2member(plptype, p, c):
+def plp2lino(plptype, p, c):
     if plptype.endswith('R'):
         return
     if plptype == '01':
@@ -210,21 +209,13 @@ def main():
     dblogger.info("Loading %d records from %s...", len(f), fn)
     f.open()
     for dbfrow in f:
-        # t = tim2lino(dbfrow.type)
-        # if not t:
-        #     continue
 
         c = get_or_warn(dbfrow.idpar1)
         p = get_or_warn(dbfrow.idpar2)
         if not c or not p:
             continue
 
-        plp2member(dbfrow.type, p, c)
-
-        # obj = Link(parent=p, child=c, type=t)
-        # obj.full_clean()
-        # obj.save()
-        # dblogger.info("%s is %s of %s", obj.parent, obj.type, obj.child)
+        plp2lino(dbfrow.type, p, c)
 
     f.close()
 

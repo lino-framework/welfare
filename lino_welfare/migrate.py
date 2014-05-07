@@ -1339,7 +1339,6 @@ def doit(a, b):
             fd.close()
             logger.info("Wrote after_migrate script %s")
 
-        # globals_dict.update(after_load=after_load)
         self.after_load(after_load)
 
         return '1.1.11'
