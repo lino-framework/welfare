@@ -737,7 +737,7 @@ class ClientDetail(dd.FormLayout):
     competences jobs contracts history calendar misc"
 
     general = dd.Panel("""
-    overview:30 general2:40 contact2:20 image:15
+    overview:30 general2:40 general3:20 image:15
     reception.AppointmentsByPartner reception.CoachingsByClient
     """, label=_("Person"))
 
@@ -749,7 +749,7 @@ class ClientDetail(dd.FormLayout):
     nationality:15 declared_name
     """
 
-    contact2 = """
+    general3 = """
     language
     email
     phone
@@ -757,11 +757,13 @@ class ClientDetail(dd.FormLayout):
     gsm
     """
 
-    contact = dd.Panel("""
+    contact = dd.Panel(
+        "contact_left:50 humanlinks.LinksByHuman:20",
+        label=_("Contact"))
+    contact_left = """
     addresses.AddressesByPartner:30 pcsw.ContactsByClient:40
-    households.MembersByPerson households.SiblingsByPerson \
-    humanlinks.LinksByHuman
-    """, label=_("Contact"))
+    households.MembersByPerson households.SiblingsByPerson
+    """
 
     #~ suche = dd.Panel("""
     #~ is_seeking unemployed_since work_permit_suspended_until
