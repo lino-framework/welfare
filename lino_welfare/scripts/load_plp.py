@@ -210,10 +210,11 @@ def main():
         p = get_or_warn(dbfrow.idpar2)
         if not c or not p:
             continue
-
-        obj = Link(parent=p, child=c, type=tim2lino(dbfrow.type))
-        obj.full_clean()
-        obj.save()
+        t = tim2lino(dbfrow.type)
+        if t is not None:
+            obj = Link(parent=p, child=c, type=t)
+            obj.full_clean()
+            obj.save()
 
         # plp2lino(dbfrow.type, p, c)
 
