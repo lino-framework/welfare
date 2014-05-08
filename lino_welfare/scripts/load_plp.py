@@ -12,9 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino ; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-
-Temporary script used to import PLP.DBF from TIM.
+"""Temporary script used to import PLP.DBF from TIM.
 
 PLP ("Person Link to Person")
 IdPar1
@@ -58,6 +56,22 @@ $ python manage.py show --username rolf households.Types
  4    Legal cohabitation   Cohabitation légale   Legale Wohngemeinschaft
 ==== ==================== ===================== =========================
 
+
+Example sequence: A and B are married. A has a child B from previous
+marriage, B has a child D from previous marriage, and they have two
+common children E and F. From PLP.DBF we'll get (in a random sort
+order):
+
+A C child
+B D child
+A E child
+A F child
+B E child
+B E child
+A B spouse
+
+
+
 """
 
 import sys
@@ -72,23 +86,26 @@ from lino_welfare.modlib.households.models import (
 
 from lino.runtime import pcsw, households
 
+LinkTypes = dd.modules.humanlinks.LinkTypes
+Link = dd.modules.humanlinks.Link
 
-# def tim2lino(plptype):
-#     if plptype.endswith('R'):
-#         return
-#     if plptype == '01':
-#         return LinkTypes.natural
-#     if plptype == '03':
-#         return LinkTypes.adoptive
-#     if plptype == '10':
-#         return LinkTypes.partner
-#     if plptype == '11':
-#         return LinkTypes.friend
-#     if plptype == '02':
-#         return LinkTypes.other
-#     if plptype == '04':
-#         return LinkTypes.grandparent
-#     raise Exception("Invalid link type %r" % plptype)
+
+def tim2lino(plptype):
+    if plptype.endswith('R'):
+        return
+    if plptype == '01':
+        return LinkTypes.parent
+    if plptype == '03':
+        return LinkTypes.adoptive
+    if plptype == '10':
+        return LinkTypes.spouse
+    if plptype == '11':
+        return LinkTypes.partner
+    if plptype == '02':
+        return LinkTypes.other
+    if plptype == '04':
+        return LinkTypes.grandparent
+    raise Exception("Invalid link type %r" % plptype)
 
 
 # R_CHEF = households.Role.objects.get(id=1)
@@ -121,7 +138,7 @@ HOUSEHOLDS_MAP = {}
 # child_roles = households.Role.objects.filter(name_giving=False)
 
 # if not role.name_giving:  # i.e. CHILD, ADOPTED, RELATIVE
-child_roles = (R_CHILD, R_ADOPTED, R_RELATIVE)
+child_roles = (R_CHILD, R_ADOPTED)  # , R_RELATIVE)
 
 T_COUPLE = households.Type.objects.get(id=1)
 T_FAMILY = households.Type.objects.get(id=2)
@@ -147,50 +164,29 @@ def plp2lino(plptype, p, c):
     else:
         raise Exception("Invalid link type %r" % plptype)
     
-    if role in child_roles:
-        # We must add to the household of *parent*.
-        members = Member.objects.filter(
-            person=p.person).exclude(role__in=child_roles)
-        if members.count() == 0:
-            hh = Household(type=T_FAMILY, name=p.person.last_name)
-            hh.full_clean()
-            hh.save()
-            dblogger.debug("Created household %s from parent %s", hh, p)
-            obj = Member(
-                household=hh, role=R_CHEF, person=p.person)
-            obj.full_clean()
-            obj.save()
-        elif members.count() == 1:
-            hh = members[0].household
-        else:
-            msg = "Found more than 1 household for parent %r" % p
-            # raise Exception(msg)
-            dblogger.warning(msg)
-            return
-        obj = Member(household=hh, role=role, person=c.person)
+    # Is there a household where the parent of this relation is no a
+    # child?
+    members = Member.objects.filter(
+        person=p.person).exclude(role__in=child_roles)
+    if members.count() == 0:
+        hh = Household(type=T_FAMILY, name=p.person.last_name)
+        hh.full_clean()
+        hh.save()
+        dblogger.debug(
+            "Created household %s from PLP `%s is %s of %s`",
+            hh, p, role, c)
+        obj = Member(household=hh, role=R_CHEF, person=p.person)
+        obj.full_clean()
+        obj.save()
+    elif members.count() == 1:
+        hh = members[0].household
     else:
-        # We must add to the household of *child*.
-        members = Member.objects.filter(
-            person=c.person, role__in=child_roles)
-        if members.count() == 0:
-            hh = Household(type=T_FAMILY, name=p.person.last_name)
-            hh.full_clean()
-            hh.save()
-            dblogger.warning("Created household %s from child %s", hh, c)
-            obj = Member(
-                household=hh, role=R_CHILD, person=c.person)
-            obj.full_clean()
-            obj.save()
-        elif members.count() == 1:
-            hh = members[0].household
-        else:
-            msg = "Found more than 1 household for child %r" % c
-            # raise Exception(msg)
-            dblogger.warning(msg)
-            return
+        msg = "Found more than 1 household for parent %r" % p
+        # raise Exception(msg)
+        dblogger.warning(msg)
+        return
         
-        obj = Member(household=hh, role=role, person=p.person)
-
+    obj = Member(household=hh, role=role, person=c.person)
     obj.full_clean()
     obj.save()
     dblogger.info("Created %s as %s", obj.person, obj.role)
@@ -215,7 +211,11 @@ def main():
         if not c or not p:
             continue
 
-        plp2lino(dbfrow.type, p, c)
+        obj = Link(parent=p, child=c, type=tim2lino(dbfrow.type))
+        obj.full_clean()
+        obj.save()
+
+        # plp2lino(dbfrow.type, p, c)
 
     f.close()
 

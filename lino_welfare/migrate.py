@@ -1284,7 +1284,7 @@ class Migrator(Migrator):
         AttestationType = resolve_model("attestations.AttestationType")
 
         def after_load(loader):
-            logger.info("after_load() started")
+            "Write migrate_from_1_1_10.py script."
             fname = os.path.join(
                 settings.SITE.project_dir, 'migrate_from_1_1_10.py')
             fd = file(fname, 'w')
@@ -1337,7 +1337,7 @@ def doit(a, b):
                 note.delete()
 
             fd.close()
-            logger.info("Wrote after_migrate script %s")
+            logger.info("Wrote after_migrate script %s", fname)
 
         self.after_load(after_load)
 
@@ -1561,6 +1561,7 @@ def doit(a, b):
         # globals_dict.update(create_households_member=noop)
         globals_dict.update(create_households_role=noop)
         globals_dict.update(create_humanlinks_link=noop)
+        globals_dict.update(create_cal_subscription=noop)
 
         def after_load(loader):
             "create primary address for all Partners"

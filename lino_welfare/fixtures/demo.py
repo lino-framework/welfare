@@ -734,43 +734,27 @@ def objects():
     count = 0
     #~ for person in Person.objects.filter(gender__isnull=False):
     for person in Person.objects.exclude(gender=''):
-        if users.User.objects.filter(partner=person).count() == 0:
-            if contacts.Role.objects.filter(person=person).count() == 0:
-            #~ if not person in DIRECTORS:
-                # '810601 211-83'
-                birth_date = settings.SITE.demo_date(-170 * count - 16 * 365)
-                national_id = generate_ssin(birth_date, person.gender)
+        if not person.birth_date:  # not those from humanlinks
+            if users.User.objects.filter(partner=person).count() == 0:
+                if contacts.Role.objects.filter(person=person).count() == 0:
+                    birth_date = settings.SITE.demo_date(-170 * count - 16 * 365)
+                    national_id = generate_ssin(birth_date, person.gender)
 
-                client = person2client(person,
-                                       national_id=national_id,
-                                       birth_date=birth_date)
-                # youngest client is 16; 170 days between each client
+                    client = person2client(person,
+                                           national_id=national_id,
+                                           birth_date=birth_date)
+                    # youngest client is 16; 170 days between each client
 
-                count += 1
-                if count % 2:
-                #~ client.is_active = True
-                    client.client_state = pcsw.ClientStates.coached
-                    #~ args = [client,COACHINGTYPES.pop(),AGENTS.pop()]
-                    #~ if count % 2:
-                        #~ args.append(None)
-                    #~ else:
-                        #~ args.append(AGENTS.pop())
-                    #~ args.append(settings.SITE.demo_date(-7 * count))
-                    #~ if count % 6:
-                        #~ args.append(settings.SITE.demo_date(-7 * count))
-                    #~ yield coachings(*args)
+                    count += 1
+                    if count % 2:
+                        client.client_state = pcsw.ClientStates.coached
+                    elif count % 5:
+                        client.client_state = pcsw.ClientStates.newcomer
+                    else:
+                        client.client_state = pcsw.ClientStates.former
 
-                elif count % 5:
-                    #~ client.newcomer = True
-                    client.client_state = pcsw.ClientStates.newcomer
-                else:
-                    client.client_state = pcsw.ClientStates.former
-
-                #~ dblogger.info("20130523 a %s",client.birth_date)
-                client.full_clean()
-                client.save()
-                #~ dblogger.info("20130523 b %s",client.birth_date)
-                #~ if not client.birth_date: raise Exception(20130523)
+                    client.full_clean()
+                    client.save()
 
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
     CLIENTS = Cycler(

@@ -196,7 +196,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.attestations'
-        # yield 'lino.modlib.humanlinks'
+        yield 'lino.modlib.humanlinks'
         yield 'lino.modlib.dedupe'
 
         if False:  # not yet ready

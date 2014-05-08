@@ -759,7 +759,8 @@ class ClientDetail(dd.FormLayout):
 
     contact = dd.Panel("""
     addresses.AddressesByPartner:30 pcsw.ContactsByClient:40
-    households.MembersByPerson households.SiblingsByPerson
+    households.MembersByPerson households.SiblingsByPerson \
+    humanlinks.LinksByHuman
     """, label=_("Contact"))
 
     #~ suche = dd.Panel("""

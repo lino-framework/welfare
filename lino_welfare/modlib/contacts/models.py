@@ -179,7 +179,8 @@ class PersonDetail(PersonDetail):
 
     general = dd.Panel("""
     overview:20 general2:40 general3:40
-    contacts.RolesByPerson:20 households.MembersByPerson:40
+    contacts.RolesByPerson:20 households.MembersByPerson:40 \
+    humanlinks.LinksByHuman
     """, label=_("General"))
 
     general2 = """
