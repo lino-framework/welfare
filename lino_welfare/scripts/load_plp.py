@@ -19,17 +19,18 @@ IdPar1
 IdPar2
 PlpType
 
-# PLPTYPES.DBC:
-# 01 |Vater/Mutter   |01R|Vater        |Mutter        ||
-# 01R|Kind           |01 |Sohn         |Tochter       ||
-# 02 |Onkel/Tante    |02R|Onkel        |Tante         ||
-# 02R|Nichte/Neffe   |02 |Neffe        |Nichte        ||
-# 03 |Stiefelternteil|03R|Stiefvater   |Stiefmutter   ||
-# 03R|Stiefkind      |03 |Stiefsohn    |Stieftochter  ||
-# 04 |Großelternteil |04R|Großvater    |Großmutter    ||
-# 04R|Enkel          |04 |Enkel        |Enkelin       ||
-# 10 |Partner        |10 |Partner      |Partnerin     ||
-# 11 |Freund         |11 |Freund       |Freundin      ||
+Content of `PLPTYPES.DBC`::
+
+    01 |Vater/Mutter   |01R|Vater        |Mutter        ||
+    01R|Kind           |01 |Sohn         |Tochter       ||
+    02 |Onkel/Tante    |02R|Onkel        |Tante         ||
+    02R|Nichte/Neffe   |02 |Neffe        |Nichte        ||
+    03 |Stiefelternteil|03R|Stiefvater   |Stiefmutter   ||
+    03R|Stiefkind      |03 |Stiefsohn    |Stieftochter  ||
+    04 |Großelternteil |04R|Großvater    |Großmutter    ||
+    04R|Enkel          |04 |Enkel        |Enkelin       ||
+    10 |Partner        |10 |Partner      |Partnerin     ||
+    11 |Freund         |11 |Freund       |Freundin      ||
 
 $ python manage.py show --username rolf households.MemberRoles
 
