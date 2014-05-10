@@ -206,7 +206,8 @@ def main():
     dblogger.info("Loading %d records from %s...", len(f), fn)
     f.open()
     for dbfrow in f:
-
+        if dbfrow.deleted():
+            continue
         c = get_or_warn(dbfrow.idpar1)
         p = get_or_warn(dbfrow.idpar2)
         if not c or not p:
