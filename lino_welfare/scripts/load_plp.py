@@ -85,7 +85,7 @@ from lino.utils import dblogger
 from lino_welfare.modlib.households.models import (
     Member, MemberRoles, Household)
 
-from lino.runtime import pcsw, households
+from lino.runtime import households, contacts
 
 LinkTypes = dd.modules.humanlinks.LinkTypes
 Link = dd.modules.humanlinks.Link
@@ -195,8 +195,8 @@ def plp2lino(plptype, p, c):
 
 def get_or_warn(idpar):
     try:
-        return pcsw.Client.objects.get(pk=int(idpar))
-    except pcsw.Client.DoesNotExist:
+        return contacts.Partner.objects.get(pk=int(idpar))
+    except contacts.Partner.DoesNotExist:
         dblogger.warning("No client %s", idpar)
 
 
