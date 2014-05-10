@@ -195,8 +195,8 @@ def plp2lino(plptype, p, c):
 
 def get_or_warn(idpar):
     try:
-        return contacts.Partner.objects.get(pk=int(idpar))
-    except contacts.Partner.DoesNotExist:
+        return contacts.Person.objects.get(pk=int(idpar))
+    except contacts.Person.DoesNotExist:
         dblogger.warning("No client %s", idpar)
 
 
