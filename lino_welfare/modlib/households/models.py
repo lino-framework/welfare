@@ -39,7 +39,7 @@ add('03', _("At shared charge"), 'shared')
 
 
 class Household(Household):
-   
+
     def disable_delete(self, ar):
         # skip the is_imported_partner test
         return super(Partner, self).disable_delete(ar)
@@ -70,25 +70,10 @@ person_fields = dd.fields_list(
     Member, 'first_name last_name gender birth_date')
 
 
-class unused_HouseholdDetail(HouseholdDetail):
-
-    box3 = """
-    phone
-    gsm
-    email
-    url
-    """
-
-    box4 = """
-    # activity
-    sepa.AccountsByPartner
-    """
-
-
 class HouseholdDetail(dd.FormLayout):
 
     main = """
-    type name language:10 id
+    type name id
     box3 box4
     bottom_box
     """
@@ -96,8 +81,9 @@ class HouseholdDetail(dd.FormLayout):
     box3 = """
     phone
     gsm
-    email
-    url
+    language
+    # email
+    # url
     """
 
     box4 = """
@@ -116,5 +102,64 @@ class SiblingsByPerson(SiblingsByPerson):
     column_names = "age role dependency person \
     first_name last_name birth_date gender *"
     order_by = ['birth_date']
-    
+
+
+parent_roles = (MemberRoles.head, MemberRoles.spouse,
+                MemberRoles.partner, MemberRoles.cohabitant)
+
+child_roles = (MemberRoles.child, MemberRoles.adopted)
+
+
+import datetime
+ADULT_AGE = datetime.timedelta(days=18*365)
+
+
+class PopulateChildren(dd.Action):
+    # show_in_bbar = False
+    custom_handler = True
+    label = _("Populate")
+    icon_name = 'lightning'
+
+    def run_from_ui(self, ar, **kw):
+        n = 0
+        for hh in ar.selected_rows:
+            known_children = set()
+            for mbr in hh.member_set.filter(role__in=child_roles):
+                if mbr.person:
+                    known_children[mbr.person.id] = mbr
+                    
+            new_children = dict()
+            for parent in hh.member_set.filter(role__in=parent_roles):
+                for childlnk in parent.person.children.all():
+                    child = childlnk.child
+                    if not child.id in known_children:
+                        if child.get_age_years() <= ADULT_AGE:
+                            childmbr = new_children.get(child.id, None)
+                            if childmbr is None:
+                                childmbr = Member(
+                                    household=hh,
+                                    person=child,
+                                    dependency=MemberDependencies.shared,
+                                    role=MemberRoles.child)
+                                n += 1
+                            if parent.role == MemberRoles.head:
+                                childmbr.dependency = MemberDependencies.full
+                            childmbr.full_clean()
+                            childmbr.save()
+            
+        ar.success(
+            _("Added %d children.") % n, refresh_all=True)
+
+
+# class CreateHousehold(CreateHousehold):
+#     def run_from_ui(self, ar, **kw):
+#         Member = dd.modules.households.Member
+#         super(CreateHousehold, self).run_from_ui(ar, **kw)
+#         def add_children(p):
+#             for child in Link(parent=p, type=LinkTypes.child)
+        
+
+dd.inject_action(
+    'households.Household',
+    populate_children=PopulateChildren())
 

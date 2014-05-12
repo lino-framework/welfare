@@ -151,8 +151,8 @@ class UploadsByClient(UploadsByController):
     # auto_fit_column_widths = True
 
     insert_layout = """
-    file
     type valid_until
+    file
     description
     """
 
