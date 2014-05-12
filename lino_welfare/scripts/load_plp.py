@@ -211,9 +211,15 @@ def main():
         c = get_or_warn(dbfrow.idpar1)
         p = get_or_warn(dbfrow.idpar2)
         if not c or not p:
-            continue
+            continue  # invalid idpar
         t = tim2lino(dbfrow.type)
         if t is not None:
+            # 10 and 11 are symmetric: don't duplicate them. if the
+            # opposite record exists, ignore the other one.
+            if dbfrow.type in ('10', '11'):
+                qs = Link.objects.filter(parent=c, child=p, type=t)
+                if qs.count() > 0:
+                    continue
             obj = Link(parent=p, child=c, type=t)
             obj.full_clean()
             obj.save()
