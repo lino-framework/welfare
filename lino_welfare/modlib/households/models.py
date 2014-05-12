@@ -44,6 +44,10 @@ class Household(Household):
         # skip the is_imported_partner test
         return super(Partner, self).disable_delete(ar)
 
+    def after_ui_create(self, ar):
+        super(Household, self).after_ui_create(ar)
+        self.populate_children.run_from_code(ar)
+
 
 class Member(Member, dd.Human, dd.Born):
 
@@ -107,7 +111,8 @@ class SiblingsByPerson(SiblingsByPerson):
 parent_roles = (MemberRoles.head, MemberRoles.spouse,
                 MemberRoles.partner, MemberRoles.cohabitant)
 
-child_roles = (MemberRoles.child, MemberRoles.adopted)
+child_roles = (MemberRoles.child, MemberRoles.adopted,
+               MemberRoles.child_of_head, MemberRoles.child_of_partner)
 
 
 import datetime
@@ -126,7 +131,7 @@ class PopulateChildren(dd.Action):
             known_children = set()
             for mbr in hh.member_set.filter(role__in=child_roles):
                 if mbr.person:
-                    known_children[mbr.person.id] = mbr
+                    known_children.add(mbr.person.id)
                     
             new_children = dict()
             for parent in hh.member_set.filter(role__in=parent_roles):
@@ -136,14 +141,21 @@ class PopulateChildren(dd.Action):
                         if child.get_age_years() <= ADULT_AGE:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
+                                if parent.role == MemberRoles.head:
+                                    cr = MemberRoles.child_of_head
+                                else:
+                                    cr = MemberRoles.child_of_partner
                                 childmbr = Member(
                                     household=hh,
                                     person=child,
-                                    dependency=MemberDependencies.shared,
-                                    role=MemberRoles.child)
+                                    dependency=MemberDependencies.full,
+                                    role=cr)
+                                new_children[child.id] = childmbr
                                 n += 1
-                            if parent.role == MemberRoles.head:
-                                childmbr.dependency = MemberDependencies.full
+                            else:
+                                childmbr.role = MemberRoles.child
+                            # if parent.role == MemberRoles.head:
+                            #     childmbr.dependency = MemberDependencies.full
                             childmbr.full_clean()
                             childmbr.save()
             

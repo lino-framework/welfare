@@ -734,7 +734,7 @@ class ClientDetail(dd.FormLayout):
 
     main = "general contact coaching aids_tab health_tab \
     work_tab career languages \
-    competences jobs contracts history calendar misc"
+    competences contracts history calendar misc"
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
@@ -762,7 +762,7 @@ class ClientDetail(dd.FormLayout):
         label=_("Contact"))
     contact_left = """
     addresses.AddressesByPartner:30 pcsw.ContactsByClient:40
-    households.MembersByPerson households.SiblingsByPerson
+    households.MembersByPerson:20 households.SiblingsByPerson:50
     """
 
     #~ suche = dd.Panel("""
@@ -868,22 +868,12 @@ class ClientDetail(dd.FormLayout):
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
     """, label=_("Competences"), required=dict(user_groups='integ'))
 
-    jobs = dd.Panel("""
-    jobs.CandidaturesByPerson
-    jobs.ContractsByPerson
-    """, label=_("Jobs"))
-
     contracts = dd.Panel("""
     isip.ContractsByPerson
-    """, label=_("ISIP"))
+    jobs.CandidaturesByPerson
+    jobs.ContractsByPerson
+    """, label=_("Contracts"))
 
-    #~ def override_labels(self):
-        #~ return dict(
-            #~ card_number = _("number"),
-            #~ card_valid_from = _("valid from"),
-            #~ card_valid_until = _("valid until"),
-            #~ card_issuer = _("issued by"),
-            #~ card_type = _("eID card type"))
 
 #~ if not settings.SITE.use_eid_jslib:
     #~ ClientDetail.eid_panel.replace('read_beid_card:12 ','')

@@ -695,7 +695,7 @@ class Study(cv.PersonHistoryEntry, CountryCity):
     @dd.chooser()
     def type_choices(self, study_regime):
         M = dd.resolve_model('isip.StudyType')
-        return M.objects.filter(study_regime=study_regime)
+        return M.objects.filter(study_regime=study_regime).order_by('name')
 
 
 class Studies(dd.Table):
@@ -719,8 +719,8 @@ class StudiesByPlace(Studies):
     """
     required = dd.required(user_groups='integ')
     master_key = 'city'
-    column_names = 'school type person content started stopped '
-    'success language  remarks *'
+    column_names = 'school type person content started stopped \
+    success language remarks *'
 
 
 class StudiesByType(Studies):
@@ -728,15 +728,15 @@ class StudiesByType(Studies):
     required = dd.required(user_groups='integ')
     master_key = 'type'
     column_names = 'school person content started stopped \
-    success language  remarks *'
+    success language remarks *'
 
 
 class StudiesByPerson(cv.HistoryByPerson, Studies):
     "List of studies for a given client."
     _study_regime = isip.StudyRegimes.studies
     required = dd.required(user_groups='integ')
-    column_names = 'type content started stopped country '
-    'city success language school remarks *'
+    column_names = 'type content started stopped country \
+    city success language school remarks *'
     # _study_regime = None
 
     @classmethod
