@@ -88,9 +88,9 @@ class Upload(Upload, contacts.ContactRelated):
     #             setattr(self, k, getattr(self.type, k))
 
     def save(self, *args, **kw):
-        super(Upload, self).save(*args, **kw)
         if isinstance(self.owner, dd.modules.pcsw.Client):
             self.client = self.owner
+        super(Upload, self).save(*args, **kw)
         self.update_reminders()
 
     def update_reminders(self):
