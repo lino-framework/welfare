@@ -34,6 +34,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
 from lino import dd
@@ -733,25 +734,38 @@ class Client(contacts.Person,
 
     @dd.virtualfield(dd.HtmlBox(_("CBSS")))
     def cbss_relations(self, ar):
+        cbss = dd.resolve_app('cbss')
         elems = []
         sar = ar.spawn(
-            'cbss.RetrieveTIGroupsRequestsByPerson',
-            master_instance=self)
+            cbss.RetrieveTIGroupsRequestsByPerson,
+            master_instance=self,
+            filter=models.Q(status__in=cbss.OK_STATES))
+        btn = sar.insert_button()
         n = sar.get_total_count()
-        if n == 0:
-            elems.append(sar.insert_button())
-        else:
+        if n > 0:
             items = []
             SHOWN_TYPES = ('110', '120', '140', '141')
             obj = sar.data_iterator[n - 1]
-            sar = obj.Result(ar)
-            for row in sar:
+            res = obj.Result(ar)
+            for row in res:
                 if row.type in SHOWN_TYPES:
-                    items.append(E.li(row.info))
+                    chunks = []
+                    if row.counter == 1:
+                        chunks += [
+                            'IT%s (' % row.type,
+                            E.b(row.group),
+                            ') ']
+                    chunks += [str(row.since), ' ', row.info]
+                    items.append(E.li(*chunks))
             if len(items) > 0:
                 elems.append(E.ul(*items))
                     
-            elems.append(ar.obj2html(obj))
+            text = "%s %s" % (obj._meta.verbose_name, naturaltime(obj.sent))
+            elems.append(ar.obj2html(obj, text))
+        if btn is not None:
+            elems += [' ', btn]
+        if None in elems:
+            raise Exception("20140513 None in %r" % elems)
         return E.div(*elems)
 
 

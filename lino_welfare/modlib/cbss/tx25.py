@@ -23,7 +23,7 @@ certains types d’informations légales" (in `Codes d'interrogations
 <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
 
 All common information types are being handled. See
-:class:`RowHandlers`
+:class:`RowFactory`
 
 See also:
 
@@ -245,15 +245,17 @@ class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, mixins.ByUser):
 
 
 def rn2date(rd):
-    return IncompleteDate(int(rd.Century + rd.Year), int(rd.Month), int(rd.Day))
+    return IncompleteDate(
+        int(rd.Century + rd.Year),
+        int(rd.Month),
+        int(rd.Day))
 
 
 def deldate(n):
     if hasattr(n, 'DelDate'):
-        return [' (' + unicode(_('until ')) + dd.dtos(rn2date(n.DelDate)) + ')']
-    #~ return [' (' + unicode(_('until today')) + ')']
+        return [' (' + unicode(_('until ')) +
+                dd.dtos(rn2date(n.DelDate)) + ')']
     return []
-    #~ return []
 
 
 #~ def simpleattr(n,name):
@@ -318,20 +320,6 @@ def code_label(n):
         return Info(E.b(n.Label), ' (', n.Code, ')')
     return Info(E.b(n.Code))
 
-
-def datarow(group, node, since, info):
-    if group and node.__class__.__name__.startswith('IT'):
-        itnum = node.__class__.__name__[2:]
-    else:
-        itnum = ''
-    if hasattr(node, 'Type'):
-        group += " " + node.Type
-    #~ if hasattr(node,'Status'):
-        #~ group += " " + unicode(node.Status)
-    if hasattr(node, 'Structure'):
-        group += " " + node.Structure
-    return AttrDict(group=group,
-                    type=itnum, since=rn2date(since), info=E.p(*info.chunks))
 
 #~ CodeLabel = code_label
 #~ def CodeLabel(n):
@@ -1095,297 +1083,6 @@ def IT192(n):
     return info
 
 
-class RowHandlers:
-
-    """
-    The result of a Tx25 consist of data rows, each of which has a given type.
-    Consult the source code of this class to see how it works.
-    
-    TODO: present here a complete list of the supported TIs (generated from source code).
-    
-    """
-
-    @staticmethod
-    def IT000(n, name):
-        group = _("National Number")
-        #~ group = name
-        n = n.NationalNumber
-        info = Info(
-            E.b(n.NationalNumber),
-            ' (' + unicode(cbss2gender(n.Sex)) + ')')
-        yield datarow(group, n, n.Date, info)
-
-    @staticmethod
-    def IT019(n, name):
-        group = _("Address Change Declaration")
-        #~ print 20120829, n
-        info = Info()
-
-        def AddressType(n):
-            info = Info()
-            info.addfrom(n, 'Graphic', '')
-            return info
-
-        info.addfrom(n, 'Address', '', AddressType)
-        info.add_deldate(n)
-        yield datarow(group, n, n.Date, info)
-
-    @staticmethod
-    def FileOwner(fo, name):
-        group = _("Residences")
-        for n in fo.Residences:
-            info = Residence(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def AscertainedLegalMainAddresses(fo, name):
-        # Détermination de résidence
-        group = _("Ascertained Legal Main Addresses")
-        #~ raise Exception(str(fo))
-        #~ raise Exception(repr([n for n in fo]))
-        for n in fo.AscertainedLegalMainAddress:
-            info = IT003(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def Pseudonyms(fo, name):
-        group = _("Pseudonyms")  # Pseudonymes
-        for n in fo.Pseudonym:
-            info = IT011(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def Aliases(fo, name):
-        group = _("Aliases")
-        for n in fo.Alias:
-            info = IT213(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def AddressChangeIntention(fo, name):
-        group = _("Address Change Intention")  # Intention de changer l'adresse
-        for n in fo.Address:
-            info = IT005(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def AddressReferences(fo, name):
-        group = _("Address References")  # Adresse de référence
-        for n in fo.AddressReference:
-            info = IT024(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def Names(node, name):
-        group = _("Names")
-        #~ group = name
-        for n in node.Name:
-            info = Info().addfrom(n, 'Name', '', NameType)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def LegalMainAddresses(node, name):
-        group = _("Legal Main Addresses")
-        for n in node.LegalMainAddress:
-            yield datarow(group, n, n.Date, IT020(n))
-            group = ''
-            #~ info = Info()
-            #~ info.chunks.append(E.b(n.Address.ZipCode))
-            #~ info.chunks.append(', ')
-            #~ info.chunks.append(n.Address.Street.Label)
-            #~ info.chunks.append(' ')
-            #~ info.chunks.append(n.Address.HouseNumber)
-            #~ yield datarow(group,n,n.Date,info)
-            #~ group = ''
-
-    @staticmethod
-    def ResidenceAbroad(node, name):
-        def ResidenceAbroadAddressType(n):
-            info = Info('Address')
-            info.addfrom(n, 'PosteDiplomatique', None, DiplomaticPostType)
-            info.addfrom(n, 'Territory', ' ', TerritoryType)
-            info.addfrom(n, 'Address', ' ', AddressType)
-            return info
-        group = _("Residence Abroad")
-        for n in node.ResidenceAbroad:
-            info = Info()
-            info.addfrom(n, 'Address', '', ResidenceAbroadAddressType)
-
-            #~ info += code_label(n.Address.PosteDiplomatique)
-            #~ info.append(', ')
-            #~ info += code_label(n.Address.Territory)
-            #~ info.append(', ')
-            info.add_deldate(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def Nationalities(node, name):
-        group = _("Nationalities")
-        for n in node.Nationality:
-            info = code_label(n.Nationality)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def Occupations(node, name):
-        group = _("Occupations")
-        for n in node.Occupation:
-            info = code_label(n.Occupation)
-            info.addfrom(n, 'SocialCategory', ' (SC ', code_label, ')')
-            #~ info.append(' (SC ')
-            #~ info += code_label(n.SocialCategory)
-            #~ info.append(')')
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def IT100(n, name):
-        group = _("Birth Place")
-        #~ n = res.BirthPlace
-        #~ info = code_label(n.Place1)
-        #~ info.append(' (' + n.ActNumber + ')')
-        info = Info()
-        info.addfrom(n, 'Place1', _('in '), PlaceType)
-        info.addfrom(n, 'Place2', _('in '), GraphicPlaceType)
-        info.addfrom(n, 'ActNumber', _("Act no. "))
-        info.addfrom(n, 'SuppletoryRegister')
-        yield datarow(group, n, n.Date, info)
-
-    @staticmethod
-    def IT101(n, name):
-        group = _("Declared Birth Date")  # Date de naissance déclarée
-        info = Info()
-        info.addfrom(n, 'DeclaredBirthDate', '', DateType)
-        info.addfrom(n, 'Certificate', '', CertificateType)
-        info.add_deldate(n)
-        yield datarow(group, n, n.Date, info)
-
-    @staticmethod
-    def Filiations(node, name):
-        group = _("Filiations")
-        for n in node.Filiation:
-            info = IT110(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def CivilStates(node, name):
-        group = _("Civil States")  # IT120
-        for n in node.CivilState:
-            info = code_label(n.CivilState)
-            if hasattr(n, 'Spouse'):
-                #~ info.append(' with ')
-                #~ info += name2info(n.Spouse.Name)
-                info.addfrom(n.Spouse, 'Name', _('with '), NameType)
-                info.chunks.append(' (')
-                info.chunks.append(n.Spouse.NationalNumber.NationalNumber)
-                info.chunks.append(')')
-            info.addfrom(n, 'Lieu', _('in '), LieuType)
-            #~ info += LieuType(n.Lieu)
-            info.addfrom(n, 'ActNumber', _("Act no. "))
-            #~ info.addfrom(n,'ActNumber')
-            info.addfrom(n, 'SuppletoryRegister')
-            info.add_deldate(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def FamilyMembers(node, name):
-        group = _("Family Members")
-        for n in node.FamilyMember:
-            info = IT140(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def HeadOfFamily(node, name):
-        group = _("Head Of Family")
-        for n in node.HeadOfFamily:
-            info = IT141(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def DrivingLicensesOldModel(node, name):
-        group = _("Driving Licenses Old Model")
-        for n in node.DrivingLicense:
-            info = IT194(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def DrivingLicenses(node, name):
-        group = _("Driving Licenses")
-        for n in node.DrivingLicense:
-            info = IT191(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def IdentityCards(node, name):
-        group = _("Identity Cards")
-        for n in node.IdentityCard:
-            info = code_label(n.TypeOfCard)
-            info.chunks.append(' ')
-            info.chunks.append(_('no. '))
-            info.chunks.append(E.b(n.CardNumber))
-            info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
-            #~ info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
-            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType)
-            #~ info.chunks.append(', delivered in ')
-            #~ info += code_label(n.Delivery.Place)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def LegalCohabitations(node, name):
-        def CessationType(n):
-            info = Info()
-            info.addfrom(n, 'Reason', _("Reason"), ReasonType)
-            info.addfrom(n, 'Place', _('in '), PlaceType)
-            info.addfrom(n, 'Notification', _('in '), NotificationType)
-            return info
-
-        def DeclarationType(n):
-            info = Info()
-            info.addfrom(n, 'RegistrationDate', '', DateType)
-            info.addfrom(n, 'Partner', _('with '), PartnerType)
-            info.addfrom(n, 'Place', _('in '), PlaceType)
-            info.addfrom(n, 'Notary', _('in '), NotaryType)
-            return info
-
-        group = _("Legal cohabitations")
-        for n in node.LegalCohabitation:
-            info = Info()
-            info.addfrom(n, 'Declaration', _("Declaration"), DeclarationType)
-            info.addfrom(n, 'Cessation', _("Cessation"), CessationType)
-            info.add_deldate(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-
-    @staticmethod
-    def IT253(node, name):
-        group = _("Creation Date")
-        n = node  # res.CreationDate
-        info = Info()
-        yield datarow(group, n, n.Date, info)
-
-    @staticmethod
-    def IT254(node, name):
-        group = _("Last Update")
-        n = node  # res.LastUpdateDate
-        info = Info()
-        yield datarow(group, n, n.Date, info)
-
-
 HANDLERS = dict()
 
 
@@ -1441,22 +1138,275 @@ register_it_handler('TemporaryAbsences',
                     _("Temporary absences"), 'TemporaryAbsence', 'IT026')
 
 
-def get_it_handler(itnode):
-    #~ m = getattr(RowHandlers,node.__class__.__name__,None)
-    #~ hname,node,nodename):
-    t = HANDLERS.get(itnode.__class__.__name__, None)
-    if t is None:
-        return t
-    g, subname, itname = t
-    it = globals().get(itname)
+class RowFactory(object):
 
-    def f(node, name):
-        group = g
-        for n in getattr(node, subname):
-            info = it(n)
-            yield datarow(group, n, n.Date, info)
-            group = ''
-    return f
+    """The result of a Tx25 consist of data rows, each of which has a
+    given type.  Consult the source code of this class to see how it
+    works.
+    
+    TODO: present here a complete list of the supported TIs (generated
+    from source code).
+
+    """
+
+    def start_group(self, group):
+        self.current_group = group
+        self.counter = 0
+
+    def datarow(self, node, since, info):
+        group = self.current_group
+        self.counter += 1
+        if node.__class__.__name__.startswith('IT'):
+            itnum = node.__class__.__name__[2:]
+        else:
+            itnum = ''
+        if hasattr(node, 'Type'):
+            group += " " + node.Type
+        #~ if hasattr(node,'Status'):
+            #~ group += " " + unicode(node.Status)
+        if hasattr(node, 'Structure'):
+            group += " " + node.Structure
+        return AttrDict(group=group,
+                        counter=self.counter,
+                        type=itnum,
+                        since=rn2date(since),
+                        info=E.p(*info.chunks))
+
+    def get_it_handler(self, itnode):
+        t = HANDLERS.get(itnode.__class__.__name__, None)
+        if t is None:
+            return t
+        g, subname, itname = t
+        it = globals().get(itname)
+
+        def f(node, name):
+            self.start_group(g)
+            for n in getattr(node, subname):
+                info = it(n)
+                yield self.datarow(n, n.Date, info)
+        return f
+    
+    def IT000(self, n, name):
+        self.start_group(_("National Number"))
+        n = n.NationalNumber
+        info = Info(
+            E.b(n.NationalNumber),
+            ' (' + unicode(cbss2gender(n.Sex)) + ')')
+        yield self.datarow(n, n.Date, info)
+
+    def IT019(self, n, name):
+        self.start_group(_("Address Change Declaration"))
+        info = Info()
+
+        def AddressType(n):
+            info = Info()
+            info.addfrom(n, 'Graphic', '')
+            return info
+
+        info.addfrom(n, 'Address', '', AddressType)
+        info.add_deldate(n)
+        yield self.datarow(n, n.Date, info)
+
+    def FileOwner(self, fo, name):
+        self.start_group(_("Residences"))
+        for n in fo.Residences:
+            info = Residence(n)
+            yield self.datarow(n, n.Date, info)
+
+    def AscertainedLegalMainAddresses(self, fo, name):
+        # Détermination de résidence
+        self.start_group(_("Ascertained Legal Main Addresses"))
+        #~ raise Exception(str(fo))
+        #~ raise Exception(repr([n for n in fo]))
+        for n in fo.AscertainedLegalMainAddress:
+            info = IT003(n)
+            yield self.datarow(n, n.Date, info)
+
+    def Pseudonyms(self, fo, name):
+        self.start_group(_("Pseudonyms"))  # Pseudonymes
+        for n in fo.Pseudonym:
+            info = IT011(n)
+            yield self.datarow(n, n.Date, info)
+
+    def Aliases(self, fo, name):
+        self.start_group(_("Aliases"))
+        for n in fo.Alias:
+            info = IT213(n)
+            yield self.datarow(n, n.Date, info)
+
+    def AddressChangeIntention(self, fo, name):
+        self.start_group(
+            _("Address Change Intention"))  # Intention de changer l'adresse
+        for n in fo.Address:
+            info = IT005(n)
+            yield self.datarow(n, n.Date, info)
+
+    def AddressReferences(self, fo, name):
+        self.start_group(_("Address References"))  # Adresse de référence
+        for n in fo.AddressReference:
+            info = IT024(n)
+            yield self.datarow(n, n.Date, info)
+
+    def Names(self, node, name):
+        self.start_group(_("Names"))
+        #~ group = name
+        for n in node.Name:
+            info = Info().addfrom(n, 'Name', '', NameType)
+            yield self.datarow(n, n.Date, info)
+
+    def LegalMainAddresses(self, node, name):
+        self.start_group(_("Legal Main Addresses"))
+        for n in node.LegalMainAddress:
+            yield self.datarow(n, n.Date, IT020(n))
+
+    def ResidenceAbroad(self, node, name):
+        def ResidenceAbroadAddressType(n):
+            info = Info('Address')
+            info.addfrom(n, 'PosteDiplomatique', None, DiplomaticPostType)
+            info.addfrom(n, 'Territory', ' ', TerritoryType)
+            info.addfrom(n, 'Address', ' ', AddressType)
+            return info
+        self.start_group(_("Residence Abroad"))
+        for n in node.ResidenceAbroad:
+            info = Info()
+            info.addfrom(n, 'Address', '', ResidenceAbroadAddressType)
+
+            #~ info += code_label(n.Address.PosteDiplomatique)
+            #~ info.append(', ')
+            #~ info += code_label(n.Address.Territory)
+            #~ info.append(', ')
+            info.add_deldate(n)
+            yield self.datarow(n, n.Date, info)
+
+    def Nationalities(self, node, name):
+        self.start_group(_("Nationalities"))
+        for n in node.Nationality:
+            info = code_label(n.Nationality)
+            yield self.datarow(n, n.Date, info)
+
+    def Occupations(self, node, name):
+        self.start_group(_("Occupations"))
+        for n in node.Occupation:
+            info = code_label(n.Occupation)
+            info.addfrom(n, 'SocialCategory', ' (SC ', code_label, ')')
+            yield self.datarow(n, n.Date, info)
+
+    def IT100(self, n, name):
+        self.start_group(_("Birth Place"))
+        info = Info()
+        info.addfrom(n, 'Place1', _('in '), PlaceType)
+        info.addfrom(n, 'Place2', _('in '), GraphicPlaceType)
+        info.addfrom(n, 'ActNumber', _("Act no. "))
+        info.addfrom(n, 'SuppletoryRegister')
+        yield self.datarow(n, n.Date, info)
+
+    def IT101(self, n, name):
+        self.start_group(
+            _("Declared Birth Date"))  # Date de naissance déclarée
+        info = Info()
+        info.addfrom(n, 'DeclaredBirthDate', '', DateType)
+        info.addfrom(n, 'Certificate', '', CertificateType)
+        info.add_deldate(n)
+        yield self.datarow(n, n.Date, info)
+
+    def Filiations(self, node, name):
+        self.start_group(_("Filiations"))
+        for n in node.Filiation:
+            info = IT110(n)
+            yield self.datarow(n, n.Date, info)
+
+    def CivilStates(self, node, name):
+        self.start_group(_("Civil States"))  # IT120
+        for n in node.CivilState:
+            info = code_label(n.CivilState)
+            if hasattr(n, 'Spouse'):
+                #~ info.append(' with ')
+                #~ info += name2info(n.Spouse.Name)
+                info.addfrom(n.Spouse, 'Name', _('with '), NameType)
+                info.chunks.append(' (')
+                info.chunks.append(n.Spouse.NationalNumber.NationalNumber)
+                info.chunks.append(')')
+            info.addfrom(n, 'Lieu', _('in '), LieuType)
+            #~ info += LieuType(n.Lieu)
+            info.addfrom(n, 'ActNumber', _("Act no. "))
+            #~ info.addfrom(n,'ActNumber')
+            info.addfrom(n, 'SuppletoryRegister')
+            info.add_deldate(n)
+            yield self.datarow(n, n.Date, info)
+
+    def FamilyMembers(self, node, name):
+        self.start_group(_("Family Members"))
+        for n in node.FamilyMember:
+            info = IT140(n)
+            yield self.datarow(n, n.Date, info)
+
+    def HeadOfFamily(self, node, name):
+        self.start_group(_("Head Of Family"))
+        for n in node.HeadOfFamily:
+            info = IT141(n)
+            yield self.datarow(n, n.Date, info)
+
+    def DrivingLicensesOldModel(self, node, name):
+        self.start_group(_("Driving Licenses Old Model"))
+        for n in node.DrivingLicense:
+            info = IT194(n)
+            yield self.datarow(n, n.Date, info)
+
+    def DrivingLicenses(self, node, name):
+        self.start_group(_("Driving Licenses"))
+        for n in node.DrivingLicense:
+            info = IT191(n)
+            yield self.datarow(n, n.Date, info)
+
+    def IdentityCards(self, node, name):
+        self.start_group(_("Identity Cards"))
+        for n in node.IdentityCard:
+            info = code_label(n.TypeOfCard)
+            info.chunks.append(' ')
+            info.chunks.append(_('no. '))
+            info.chunks.append(E.b(n.CardNumber))
+            info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
+            #~ info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
+            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType)
+            #~ info.chunks.append(', delivered in ')
+            #~ info += code_label(n.Delivery.Place)
+            yield self.datarow(n, n.Date, info)
+
+    def LegalCohabitations(self, node, name):
+        def CessationType(n):
+            info = Info()
+            info.addfrom(n, 'Reason', _("Reason"), ReasonType)
+            info.addfrom(n, 'Place', _('in '), PlaceType)
+            info.addfrom(n, 'Notification', _('in '), NotificationType)
+            return info
+
+        def DeclarationType(n):
+            info = Info()
+            info.addfrom(n, 'RegistrationDate', '', DateType)
+            info.addfrom(n, 'Partner', _('with '), PartnerType)
+            info.addfrom(n, 'Place', _('in '), PlaceType)
+            info.addfrom(n, 'Notary', _('in '), NotaryType)
+            return info
+
+        self.start_group(_("Legal cohabitations"))
+        for n in node.LegalCohabitation:
+            info = Info()
+            info.addfrom(n, 'Declaration', _("Declaration"), DeclarationType)
+            info.addfrom(n, 'Cessation', _("Cessation"), CessationType)
+            info.add_deldate(n)
+            yield self.datarow(n, n.Date, info)
+
+    def IT253(self, node, name):
+        self.start_group(_("Creation Date"))
+        n = node  # res.CreationDate
+        info = Info()
+        yield self.datarow(n, n.Date, info)
+
+    def IT254(self, node, name):
+        self.start_group(_("Last Update"))
+        n = node  # res.LastUpdateDate
+        info = Info()
+        yield self.datarow(n, n.Date, info)
 
 
 class RetrieveTIGroupsResult(dd.VirtualTable):
@@ -1472,11 +1422,15 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
 
     @dd.displayfield(_("Group"))
     def group(self, obj, ar):
-        return obj.group
+        if obj.counter == 1:
+            return obj.group
+        return ''
 
     @dd.displayfield(_("TI"))
     def type(self, obj, ar):
-        return obj.type
+        if obj.counter == 1:
+            return obj.type
+        return ''
 
     @dd.virtualfield(models.DateField(_("Since")))
     def since(self, obj, ar):
@@ -1504,11 +1458,12 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
 
         res = reply.rrn_it_implicit
 
+        rf = RowFactory()
         for name, node in res:
             #~ print 20130425, name, node.__class__
-            m = getattr(RowHandlers, node.__class__.__name__, None)
+            m = getattr(rf, node.__class__.__name__, None)
             if m is None:
-                m = get_it_handler(node)
+                m = rf.get_it_handler(node)
                 if m is None:
                     raise Exception("No handler for %s (%s)"
                                     % (name, node.__class__.__name__))

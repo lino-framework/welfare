@@ -223,6 +223,8 @@ add('50', _("Errors"), 'errors')
 #~ add('a',_("Acceptance"),'acpt')
 #~ add('p',_("Production"),'prod')
 
+OK_STATES = (RequestStates.ok, RequestStates.warnings)
+
 
 class unused_ExecuteRequest(dd.Action):
 
