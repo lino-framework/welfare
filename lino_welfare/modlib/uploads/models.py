@@ -90,6 +90,8 @@ class Upload(Upload, contacts.ContactRelated):
     def save(self, *args, **kw):
         if isinstance(self.owner, dd.modules.pcsw.Client):
             self.client = self.owner
+        elif isinstance(self.owner, dd.ProjectRelated):
+            self.client = self.owner.project
         super(Upload, self).save(*args, **kw)
         self.update_reminders()
 
