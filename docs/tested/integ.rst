@@ -5,7 +5,11 @@ Integration Service
 
 .. include:: /include/tested.rst
 
-Some tests:
+How to test only this document::
+  
+  $ python setup.py test -s tests.DocsTests.test_integ
+
+Some initialization for the tests in this document:
   
 >>> from __future__ import print_function
 >>> from lino.runtime import *
@@ -33,10 +37,11 @@ We test the MembersByPerson panel. It contains a summary:
 
 >>> print(d['data']['MembersByPerson'])
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<div>KELLER Karl (177) ist<ul><li>Oberhaupt in <a href="javascript:Lino.households.Households.detail.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 184 })">Legale Wohngemeinschaft Keller-&#213;unapuu</a></li></ul><br /><a href="javascript:Lino.contacts.Persons.create_household.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 177, &quot;field_values&quot;: { &quot;head&quot;: &quot;KELLER Karl (177)&quot;, &quot;headHidden&quot;: 177, &quot;typeHidden&quot;: null, &quot;partner&quot;: null, &quot;partnerHidden&quot;: null, &quot;type&quot;: null }, &quot;param_values&quot;: { &quot;observed_event&quot;: null, &quot;and_coached_by&quot;: null, &quot;end_date&quot;: null, &quot;genderHidden&quot;: null, &quot;also_obsolete&quot;: false, &quot;gender&quot;: null, &quot;nationalityHidden&quot;: null, &quot;aged_from&quot;: null, &quot;only_primary&quot;: false, &quot;client_stateHidden&quot;: &quot;30&quot;, &quot;and_coached_byHidden&quot;: null, &quot;coached_by&quot;: null, &quot;coached_byHidden&quot;: null, &quot;observed_eventHidden&quot;: null, &quot;nationality&quot;: null, &quot;client_state&quot;: &quot;Begleitet&quot;, &quot;start_date&quot;: null, &quot;aged_to&quot;: null }, &quot;base_params&quot;: {  } })">Haushalt erstellen</a></div>
+<div>KELLER Karl (177) ist<ul><li>Vorstand in <a href="javascript:Lino.households.Households.detail.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 184 })">Legale Wohngemeinschaft Keller-&#213;unapuu</a></li></ul><br /><a href="javascript:Lino.contacts.Persons.create_household.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 177, &quot;field_values&quot;: { &quot;head&quot;: &quot;KELLER Karl (177)&quot;, &quot;headHidden&quot;: 177, &quot;typeHidden&quot;: null, &quot;partner&quot;: null, &quot;partnerHidden&quot;: null, &quot;type&quot;: null }, &quot;param_values&quot;: { &quot;observed_event&quot;: null, &quot;and_coached_by&quot;: null, &quot;end_date&quot;: null, &quot;genderHidden&quot;: null, &quot;also_obsolete&quot;: false, &quot;gender&quot;: null, &quot;nationalityHidden&quot;: null, &quot;aged_from&quot;: null, &quot;only_primary&quot;: false, &quot;client_stateHidden&quot;: &quot;30&quot;, &quot;and_coached_byHidden&quot;: null, &quot;coached_by&quot;: null, &quot;coached_byHidden&quot;: null, &quot;observed_eventHidden&quot;: null, &quot;nationality&quot;: null, &quot;client_state&quot;: &quot;Begleitet&quot;, &quot;start_date&quot;: null, &quot;aged_to&quot;: null }, &quot;base_params&quot;: {  } })">Haushalt erstellen</a></div>
 
-Since this is not very human-readable, we are going to parse it using
-BeautifulSoup:
+Since this is not very human-readable, we are going to analyze it with
+`BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
+
 
 >>> from bs4 import BeautifulSoup
 >>> soup = BeautifulSoup(d['data']['MembersByPerson'])
@@ -73,4 +78,30 @@ javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
 "base_params": { } 
 })
 
+Let's automatize this trick:
 
+>>> def check(pk, fieldname):
+...     url = '/api/integ/Clients/%d?fmt=json&an=detail' % pk
+...     res = client.get(url, REMOTE_USER='rolf')
+...     assert res.status_code == 200
+...     d = json.loads(res.content)
+...     return d['data'][fieldname]
+
+>>> soup = BeautifulSoup(check(177, 'MembersByPerson'))
+>>> links = soup.find_all('a')
+>>> len(links)
+2
+
+>>> soup = BeautifulSoup(check(195, 'LinksByHuman'))
+>>> links = soup.find_all('a')
+>>> len(links)
+15
+
+>>> print(links[1].get('href'))
+... #doctest: +NORMALIZE_WHITESPACE
+javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 203 })
+
+
+>>> print(soup.get_text())
+... #doctest: +NORMALIZE_WHITESPACE
+Herr Paul Frisch istVater von Herr Dennis Frisch (12 Jahre)Vater von Frau Clara Frisch (14 Jahre)Vater von Herr Philippe Frisch (16 Jahre)Vater von Herr Peter Frisch (26 Jahre)Ehemann von Frau Petra Zweith (45 Jahre)Sohn von Frau Gaby Frogemuth (79 Jahre)Sohn von Herr Hubert Frisch (80 Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn Verwandter/Verwandter Sonstige/Sonstige

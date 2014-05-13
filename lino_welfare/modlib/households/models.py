@@ -108,13 +108,6 @@ class SiblingsByPerson(SiblingsByPerson):
     order_by = ['birth_date']
 
 
-parent_roles = (MemberRoles.head, MemberRoles.spouse,
-                MemberRoles.partner, MemberRoles.cohabitant)
-
-child_roles = (MemberRoles.child, MemberRoles.adopted,
-               MemberRoles.child_of_head, MemberRoles.child_of_partner)
-
-
 import datetime
 ADULT_AGE = datetime.timedelta(days=18*365)
 
@@ -141,10 +134,11 @@ class PopulateChildren(dd.Action):
                         if child.get_age_years() <= ADULT_AGE:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
-                                if parent.role == MemberRoles.head:
-                                    cr = MemberRoles.child_of_head
-                                else:
-                                    cr = MemberRoles.child_of_partner
+                                cr = MemberRoles.child
+                                # if parent.role == MemberRoles.head:
+                                #     cr = MemberRoles.child_of_head
+                                # else:
+                                #     cr = MemberRoles.child_of_partner
                                 childmbr = Member(
                                     household=hh,
                                     person=child,

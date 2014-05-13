@@ -65,7 +65,7 @@ as duplicates, depending on the given first_name and last_name.
 >>> check("Bernard", "Bodard")
 [u'Bernard Bodard (169)']
 
-Without our utility function our test would be less readable:
+Without our utility function the above test would be less readable:
 
 >>> obj = pcsw.Client(first_name="Bernard", last_name="Bodard")
 >>> ses.show(dedupe.SimilarPersons, obj)
@@ -84,7 +84,7 @@ Some users tend to mix up first and last name. Lino would detect that:
 >>> check("Erna", "Odar")
 [u'Bernard Bodard (169)']
 
-The following duplicates aren't yet detected though they obviously
+The following duplicates are **not yet** detected though they obviously
 should. We are still experimenting...
 
 >>> check("Bernard-Marie", "Bodard")

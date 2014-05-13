@@ -418,6 +418,8 @@ class Client(contacts.Person,
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
+        sar = ar.spawn('addresses.AddressesByPartner', master_instance=self)
+        elems.append(sar.as_button(_("Manage addresses")))
         elems = [E.div(*elems)]
         return elems
 
@@ -729,6 +731,29 @@ class Client(contacts.Person,
                 setattr(obj, fld.name, new)
         return objects, diffs
 
+    @dd.virtualfield(dd.HtmlBox(_("CBSS")))
+    def cbss_relations(self, ar):
+        elems = []
+        sar = ar.spawn(
+            'cbss.RetrieveTIGroupsRequestsByPerson',
+            master_instance=self)
+        n = sar.get_total_count()
+        if n == 0:
+            elems.append(sar.insert_button())
+        else:
+            items = []
+            SHOWN_TYPES = ('110', '120', '140', '141')
+            obj = sar.data_iterator[n - 1]
+            sar = obj.Result(ar)
+            for row in sar:
+                if row.type in SHOWN_TYPES:
+                    items.append(E.li(row.info))
+            if len(items) > 0:
+                elems.append(E.ul(*items))
+                    
+            elems.append(ar.obj2html(obj))
+        return E.div(*elems)
+
 
 class ClientDetail(dd.FormLayout):
 
@@ -757,13 +782,15 @@ class ClientDetail(dd.FormLayout):
     gsm
     """
 
-    contact = dd.Panel(
-        "contact_left:50 humanlinks.LinksByHuman:20",
-        label=_("Contact"))
-    contact_left = """
-    addresses.AddressesByPartner:30 pcsw.ContactsByClient:40
+    contact = dd.Panel("""
+    dedupe.SimilarPersons:10 humanlinks.LinksByHuman:30 cbss_relations:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
-    """
+    """, label=_("Human Links"))
+
+    coaching = dd.Panel("""
+    newcomers_left:20 newcomers.AvailableCoachesByClient:40
+    pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
+    """, label=_("Coaching"))
 
     #~ suche = dd.Panel("""
     #~ is_seeking unemployed_since work_permit_suspended_until
@@ -805,11 +832,6 @@ class ClientDetail(dd.FormLayout):
     income_kg   income_rente
     income_misc
     """
-
-    coaching = dd.Panel("""
-    newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.CoachingsByClient:50 dedupe.SimilarPersons:10
-    """, label=_("Coaching"))
 
     newcomers_left = dd.Panel("""
     workflow_buttons

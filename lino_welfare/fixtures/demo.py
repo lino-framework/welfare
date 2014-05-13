@@ -780,7 +780,7 @@ def objects():
     Erstgespräch
     Versammlung beim AG
     Zwischenbericht
-    Krisensitzung 
+    Krisensitzung
     """.splitlines())
 
     for i in range(10):
@@ -1178,5 +1178,9 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 client=obj,
                 user=hubert,
                 type=UPLOAD_TYPES.pop())
+
+    paul = contacts.Person.objects.get(
+        first_name="Paul", last_name="Frisch")
+    mti.insert_child(paul, pcsw.Client)
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")
