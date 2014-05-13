@@ -156,6 +156,12 @@ class UploadsByClient(UploadsByController):
     description
     """
 
+    @classmethod
+    def create_instance(self, ar, **kw):
+        obj = super(UploadsByClient, self).create_instance(ar, **kw)
+        obj.owner = obj.client
+        return obj
+
 
 class MedicalUploadsByClient(UploadsByClient):
     _upload_area = UploadAreas.medical
