@@ -419,8 +419,6 @@ class Client(contacts.Person,
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
-        sar = ar.spawn('addresses.AddressesByPartner', master_instance=self)
-        elems.append(sar.as_button(_("Manage addresses")))
         elems = [E.div(*elems)]
         return elems
 
