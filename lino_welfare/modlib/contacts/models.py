@@ -29,7 +29,8 @@ addresses = dd.resolve_app('addresses')
 
 
 class Partner(
-        Partner, addresses.AddressOwner,
+        addresses.AddressOwner,
+        Partner,
         mixins.CreatedModified, dd.ImportedFields):
 
     """
@@ -137,7 +138,7 @@ class PartnerDetail(PartnerDetail):
     """, label=_("Miscellaneous"))
 
 
-class Person(Partner, Person, mixins.Born):
+class Person(Partner, Person):
 
     """
     Represents a physical person.
