@@ -146,7 +146,6 @@ class Person(Partner, Person):
     """
 
     class Meta(Person.Meta):
-        #~ app_label = 'contacts'
         verbose_name = _("Person")  # :doc:`/tickets/14`
         verbose_name_plural = _("Persons")  # :doc:`/tickets/14`
         #~ ordering = ['last_name','first_name']
@@ -166,8 +165,8 @@ class Person(Partner, Person):
     def on_analyze(cls, site):
         super(Person, cls).on_analyze(site)
         cls.declare_imported_fields(
-          '''name first_name last_name title birth_date gender is_client
-          ''')
+            '''name first_name middle_name last_name title
+            birth_date gender is_client''')
 
 
 dd.update_field(Person, 'first_name', blank=False)
@@ -185,8 +184,8 @@ class PersonDetail(PersonDetail):
     """, label=_("General"))
 
     general2 = """
-    last_name:20 first_name:15
-    title
+    title first_name:15 middle_name:15
+    last_name
     gender:10 birth_date age:10
     id language
     """

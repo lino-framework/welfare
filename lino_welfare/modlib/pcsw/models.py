@@ -152,27 +152,14 @@ add('60', _("Modified"), 'modified')
 #~ add('30', _("Ended"),'ended')
 
 
-
 class ClientStates(dd.Workflow):
     required = dd.required(user_level='admin')
-    #~ label = _("Client state")
-
-    #~ debug_permissions = True
-
     verbose_name_plural = _("Client states")
-
-    #~ @classmethod
-    #~ def allow_state_newcomer(cls,obj,user):
-        #~ if obj.client_state == ClientStates.coached:
-            #~ if obj.coachings_by_client.count() > 0:
-                #~ return False
-        #~ return True
-
 
 add = ClientStates.add_item
 add('10', _("Newcomer"), 'newcomer', help_text=u"""\
-Klient hat Antrag auf Hilfe eingereicht, 
-der jedoch noch nicht genehmigt wurde 
+Klient hat Antrag auf Hilfe eingereicht,
+der jedoch noch nicht genehmigt wurde
 oder es wurde noch kein Sachbearbeiter oder Sozi zur Begleitung zugewiesen.
 (TIM: Attribut "N" (Neuantrag) gesetzt)""")  # "N" in PAR->Attrib
     #~ required=dict(states=['refused','coached'],user_groups='newcomers'))
@@ -185,7 +172,7 @@ Es gibt mindestens eine Person im ÖSHZ, die sich um die Person kümmert.
 (TIM: IdPrt == "S" und Attribut N (Neuantrag) nicht gesetzt)""")
 
 add('50', _("Former"), 'former', help_text=u"""\
-War mal begleitet, ist es aber jetzt nicht mehr. 
+War mal begleitet, ist es aber jetzt nicht mehr.
 Es existiert keine *aktive* Begleitung.
 (TIM: Attribut `W (Warnung bei Auswahl)` oder Partnerart `I (Inaktive)`)""")
 
@@ -259,9 +246,7 @@ class Client(contacts.Person,
     workflow_state_field = 'client_state'
 
     remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
-    gesdos_id = models.CharField(max_length=40, blank=True,
-                                 # null=True,
-                                 verbose_name=_("Gesdos ID"))
+    gesdos_id = models.CharField(_("Gesdos ID"), max_length=40, blank=True)
 
     is_cpas = models.BooleanField(_("receives social help"), default=False)
     is_senior = models.BooleanField(_("is senior"), default=False)
@@ -779,10 +764,9 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Person"))
 
     general2 = """
-    last_name first_name:15 title:10
-    gender:10 civil_state:15 id
+    first_name middle_name last_name
+    gender:10 title:10 id
     birth_date age:10 national_id:15
-    birth_country birth_place
     nationality:15 declared_name
     """
 
@@ -834,6 +818,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Aids"))
 
     status = """
+    civil_state birth_country birth_place
     in_belgium_since:15 residence_type gesdos_id
     job_agents group:16
     """
