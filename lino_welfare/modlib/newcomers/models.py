@@ -490,12 +490,15 @@ Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
 
 
 class AssignCoach(dd.NotifyingAction):
+
+    "Assign a coach to a newcomer."
+
     label = _("Assign")
     show_in_workflow = True
     help_text = u"""\
-Diesen Benutzer als Begleiter für diesen Klienten eintragen 
+Diesen Benutzer als Begleiter für diesen Klienten eintragen
 und den Zustand des Klienten auf "Begleitet" setzen.
-Anschließend wird der Klient in der Liste "Neue Klienten" 
+Anschließend wird der Klient in der Liste "Neue Klienten"
 nicht mehr angezeigt."""
 
     def get_notify_subject(self, ar, obj, **kw):
@@ -508,41 +511,19 @@ nicht mehr angezeigt."""
     def get_notify_body(self, ar, obj, **kw):
         client = ar.master_instance
         if client:
-            #~ return _("%(coach)s has been assigned as %(faculty)s coach for client %(client)s.") % dict(
-                #~ client=client,coach=obj,faculty=client.faculty)
-            return _("%(client)s is now coached by %(coach)s for %(faculty)s.") % dict(
+            tpl = _("%(client)s is now coached by %(coach)s for %(faculty)s.")
+            return tpl % dict(
                 client=client, coach=obj, faculty=client.faculty)
 
-    def unused_get_action_permission(self, ar, obj, state):
-        #~ logger.info("20121020 get_action_permission %s",ar.master_instance)
-        if not ssin.is_valid_ssin(ar.master_instance.national_id):
-            #~ logger.info("20121016 %s has invalid SSIN ",ar.master_instance)
-            return False
-            #~ _("Cannot assign client %(client)s with invalid SSIN %(ssin)s.")
-                #~ % dict(client=client,ssin=client.national_id))
-        return super(AssignCoach, self).get_action_permission(ar, obj, state)
-        #~ return super(AssignCoach,self).get_row_permission(ar,state,ba)
-
     def run_from_ui(self, ar, **kw):
-        """
-        Assign a coach to a newcomer.
-        """
         obj = ar.selected_rows[0]
         client = ar.master_instance
         watcher = dd.ChangeWatcher(client)
-        #~ if not ssin.is_valid_ssin(client.national_id):
-            #~ return ar.error_response(alert=True,
-                #~ message=_("Cannot assign client %(client)s with invalid SSIN %(ssin)s.")
-                #~ % dict(client=client,ssin=client.national_id))
 
-        #~ ar.confirm(msg,_("Are you sure?"))
-
-        coaching = pcsw.Coaching(client=client, user=obj,
-                                 start_date=datetime.date.today(),
-                                 type=obj.coaching_type)
-            #~ state=pcsw.CoachingStates.active)
-        #~ if not obj.profile:
-            #~ coaching.state = pcsw.CoachingStates.active
+        coaching = pcsw.Coaching(
+            client=client, user=obj,
+            start_date=datetime.date.today(),
+            type=obj.coaching_type)
         coaching.full_clean()
         coaching.save()
         dd.pre_ui_create.send(coaching, request=ar.request)
@@ -554,8 +535,6 @@ nicht mehr angezeigt."""
 
         self.add_system_note(ar, coaching)
 
-        #~ msg = _("Client %(client)s has been assigned to %(coach)s") % dict(client=client,coach=obj)
-        #~ return ar.success(refresh_all=True,message=msg,alert=True,**kw)
         ar.success(ar.action_param_values.notify_body,
                    alert=True, refresh_all=True, **kw)
 
@@ -576,73 +555,11 @@ class AvailableCoachesByClient(AvailableCoaches):
         ar.param_values.for_client = ar.master_instance
         return super(AvailableCoachesByClient, self).get_data_rows(ar)
 
-    #~ @dd.action(label=_("Assign"))
-    #~ def assign_coach(obj,ar,**kw):
-        #~ """
-        #~ Assign a coach to a newcomer.
-        #~ """
-        #~ client = ar.master_instance
-        #~ if not ssin.is_valid_ssin(client.national_id):
-            #~ return ar.error_response(alert=True,
-                #~ message=_("Cannot assign client %(client)s with invalid SSIN %(ssin)s.")
-                #~ % dict(client=client,ssin=client.national_id))
-        #~ msg = _("Assign client %(client)s for coaching by %(user)s.") % dict(client=client,user=obj)
-        #~ ar.confirm(msg,_("Are you sure?"))
 
-
-        #~ coaching = pcsw.Coaching(client=client,user=obj,
-            #~ start_date=datetime.date.today(),
-            #~ type=obj.coaching_type,
-            #~ state=pcsw.CoachingStates.suggested)
-        #~ if not obj.profile:
-            #~ coaching.state = pcsw.CoachingStates.active
-        #~ coaching.save()
-        #~ client.client_state = pcsw.ClientStates.coached
-        #~ client.full_clean()
-        #~ client.save()
-        #~ msg = _("Client %(client)s has been assigned to %(user)s") % dict(client=client,user=obj)
-
-        #~ recipients = []
-        #~ recipients.append(
-            #~ dict(name=unicode(obj),address=obj.email,type=outbox.RecipientType.to))
-        #~ for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
-            #~ recipients.append(
-                #~ dict(name=unicode(u),address=u.email,type=outbox.RecipientType.to))
-
-        #~ if len(recipients):
-            #~ m = outbox.Mail(user=ar.get_user(),
-                #~ subject=_('Newcomer has been assigned'),
-                #~ body = """Hallo Kollege,\n%s""" % msg,
-                #~ project=client,
-                #~ owner=coaching)
-            #~ m.full_clean()
-            #~ m.save()
-            # ~ # for t,p in [(outbox.RecipientType.to,obj.partner)]:
-            #~ for rec in recipients:
-                #~ r = outbox.Recipient(mail=m,**rec)
-                #~ r.full_clean()
-                #~ r.save()
-            #~ m.send_mail.run_from_ui(m,ar)
-            #~ interactive = (ar.get_user().profile.office_level > dd.UserLevels.user)
-            #~ if interactive:
-                #~ js = ar.renderer.instance_handler(ar,m)
-                #~ kw.update(eval_js=js)
-        #~ return ar.success(refresh_all=True,message=msg,alert=True,**kw)
-
-
-#~ def customize_pcsw():
-    #~ pcsw.ClientDetail.main.replace('general status_tab','general newcomers status_tab')
-    #~ pcsw.ClientDetail.newcomers = dd.Panel("""
-    #~ broker:12 faculty:12
-    #~ workflow_buttons
-    #~ newcomers.AvailableCoachesByClient
-    #~ """,label=MODULE_LABEL,required=dict(user_groups='newcomers'))
-#~ settings.SITE.add_user_field('newcomers_level',UserLevels.field(MODULE_LABEL))
-#~ settings.SITE.add_user_group('newcomers',MODULE_LABEL)
 settings.SITE.add_user_field('newcomer_quota', models.IntegerField(
     _("Newcomers Quota"),
     default=0,
-          help_text=u"""\
+    help_text=u"""\
 Wieviel Arbeitszeit dieser Benutzer für Neuanträge zur Verfügung steht
 (100 = ganztags, 50 = halbtags, 0 = gar nicht).
 Wenn zwei Benutzer die gleiche Belastungspunktzahl haben, 
@@ -651,55 +568,21 @@ gilt er als doppelt so belastet wie sein Kollege.
 """))
 
 
-dd.inject_field(pcsw.Client,
-                'broker',
-                models.ForeignKey(Broker,
-                                  blank=True, null=True),
-    """The Broker who sent this Newcomer.
-    """)
-dd.inject_field(pcsw.Client,
-                'faculty',
-                models.ForeignKey(Faculty,
-                                  blank=True, null=True),
-    """The Faculty this client has been attributed to.
-    """)
+dd.inject_field(
+    pcsw.Client,
+    'broker',
+    models.ForeignKey(
+        Broker,
+        blank=True, null=True,
+        help_text=_("The Broker who sent this Newcomer.")))
 
-#~ def site_setup(site):
-    #~ site.modules.users.Users.add_detail_tab('newcomers.CompetencesByUser')
-    #~ site.modules.pcsw.Clients.add_detail_tab('newcomers',"""
-    #~ broker:12 faculty:12
-    #~ workflow_buttons
-    #~ newcomers.AvailableCoachesByClient
-    #~ """,MODULE_LABEL,required=dict(user_groups='newcomers'))
-
-    #~ site.modules.pcsw.Clients.detail_layout.coaching.replace('coaching_left',"""
-    #~ coaching_left
-    #~ newcomers_left newcomers.AvailableCoachesByClient
-    #~ """)
-
-    #~ site.modules.pcsw.Clients.detail_layout.coaching.replace('workflow_buttons',"""
-    #~ newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    #~ """)
-
-    #~ site.modules.pcsw.Clients.detail_layout.update(newcomers_left="""
-    #~ workflow_buttons
-    #~ broker:12
-    #~ faculty:12
-    #~ """)
-    #~ site.modules.pcsw.Clients.detail_layout.update(
-        #~ newcomers_left=dd.Panel("""
-        #~ workflow_buttons
-        #~ broker:12
-        #~ faculty:12
-        #~ """,required=dict(user_groups='newcomers')))
-
-    #~ coaching = dd.Panel("""
-    #~ pcsw.ContactsByClient:40 pcsw.CoachingsByClient:40
-    #~ """,label=_("Coaching"))
-
-    #~ coaching_left = """
-    #~ group:16 job_agents
-    #~ """
+dd.inject_field(
+    pcsw.Client,
+    'faculty',
+    models.ForeignKey(
+        Faculty,
+        blank=True, null=True,
+        help_text=_("The Faculty this client has been attributed to.")))
 
 
 def setup_main_menu(site, ui, profile, m):
@@ -712,11 +595,6 @@ def setup_main_menu(site, ui, profile, m):
     m.add_action(AvailableCoaches)
 
 
-#~ def setup_master_menu(site,ui,profile,m): pass
-
-#~ def setup_my_menu(site,ui,profile,m):
-    #~ pass
-
 def setup_config_menu(site, ui, profile, m):
     #~ if user.profile.newcomers_level < UserLevels.manager:
         #~ return
@@ -726,14 +604,6 @@ def setup_config_menu(site, ui, profile, m):
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    #~ if user.profile.newcomers_level < UserLevels.manager:
-        #~ return
     m.add_action(Competences)
 
-#~ def setup_reports_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("newcomers",MODULE_LABEL)
-    #~ m.add_action(AvailableCoaches)
-
 dd.add_user_group('newcomers', MODULE_LABEL)
-
-#~ customize_pcsw()

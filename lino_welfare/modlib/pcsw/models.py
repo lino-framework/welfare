@@ -764,8 +764,9 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Person"))
 
     general2 = """
-    first_name middle_name last_name
-    gender:10 title:10 id
+    gender:10 title:20 id
+    first_name middle_name
+    last_name
     birth_date age:10 national_id:15
     nationality:15 declared_name
     """
