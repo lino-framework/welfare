@@ -35,7 +35,7 @@ ContractEnding = dd.resolve_model('isip.ContractEnding')
 
 def attestation_types():  # also used for migration to 1.1.11
 
-    attType = Instantiator('attestations.AttestationType',
+    attType = Instantiator('attestations.ExcerptType',
                            build_method='appypdf',
                            email_template='Default.eml.html').build
     # yield attType(

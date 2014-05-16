@@ -59,13 +59,10 @@ users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 notes = dd.resolve_app('notes')
-# attestations = dd.resolve_app('attestations')
 
 from lino.utils import ssin
 
 from .coaching import *
-# from .client_address import *
-# from .client_link import *
 
 
 class CivilState(dd.ChoiceList):
@@ -370,10 +367,10 @@ class Client(contacts.Person,
             #~ 'country','city','coach1','coach2','nationality')
             'country', 'city', 'nationality')
 
-    def get_attestation_options(self, ar, **kw):
-        # Set project field when creating an attestation from Client.
+    def get_excerpt_options(self, ar, **kw):
+        # Set project field when creating an excerpt from Client.
         kw.update(project=self)
-        return super(Client, self).get_attestation_options(ar, **kw)
+        return super(Client, self).get_excerpt_options(ar, **kw)
 
     def get_coachings(self, today=None, **flt):
         qs = self.coachings_by_client.filter(**flt)
@@ -404,6 +401,9 @@ class Client(contacts.Person,
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
+        elems += [
+            E.br(), ar.instance_action_button(self.create_excerpt)]
+
         elems = [E.div(*elems)]
         return elems
 
@@ -842,7 +842,7 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    attestations.AttestationsByProject:30 notes.NotesByProject:30
+    attestations.ExcerptsByProject:30 notes.NotesByProject:30
     # lino.ChangesByMaster
     """, label=_("History"))
 

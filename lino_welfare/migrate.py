@@ -1280,8 +1280,8 @@ class Migrator(Migrator):
         users_User = resolve_model("users.User")
         Note = resolve_model("notes.Note")
         NoteType = resolve_model("notes.NoteType")
-        Attestation = resolve_model("attestations.Attestation")
-        AttestationType = resolve_model("attestations.AttestationType")
+        Attestation = resolve_model("attestations.Excerpt")
+        AttestationType = resolve_model("attestations.ExcerptType")
 
         def after_load(loader):
             "Write migrate_from_1_1_10.py script."
@@ -1319,10 +1319,11 @@ def doit(a, b):
                 kw.update(project_id=note.project_id)
                 kw.update(build_time=note.build_time)
                 kw.update(company_id=note.company_id)
+                kw.update(build_method=note.build_method)
                 kw.update(contact_person_id=note.contact_person_id)
                 kw.update(contact_role_id=note.contact_role_id)
                 # kw.update(date=date)
-                kw.update(attestation_type=cvat)
+                kw.update(excerpt_type=cvat)
                 # assert note.event_type_id == 
                 # assert not note.subject
                 # kw.update(body=body)
@@ -1442,7 +1443,7 @@ def doit(a, b):
             return cal_EventType(**kw)
         globals_dict.update(create_cal_eventtype=create_cal_eventtype)
 
-        attestations_Attestation = resolve_model('attestations.Attestation')
+        attestations_Attestation = resolve_model('attestations.Excerpt')
         def create_attestations_attestation(id, owner_type_id, owner_id, user_id, project_id, build_time, build_method, company_id, contact_person_id, contact_role_id, type_id, language):
             kw = dict()
             kw.update(id=id)
@@ -1456,7 +1457,7 @@ def doit(a, b):
             kw.update(company_id=company_id)
             kw.update(contact_person_id=contact_person_id)
             kw.update(contact_role_id=contact_role_id)
-            kw.update(attestation_type_id=type_id)
+            kw.update(excerpt_type_id=type_id)
             kw.update(language=language)
             return attestations_Attestation(**kw)
         globals_dict.update(

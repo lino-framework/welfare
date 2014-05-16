@@ -188,9 +188,9 @@ class TasksByClient(Tasks):
 
 class Guest(Guest):
 
-    def get_attestation_options(self, ar, **kw):
+    def get_excerpt_options(self, ar, **kw):
         kw.update(project=self.event.project)
-        return super(Guest, self).get_attestation_options(ar, **kw)
+        return super(Guest, self).get_excerpt_options(ar, **kw)
 
 
 @dd.receiver(dd.post_analyze)

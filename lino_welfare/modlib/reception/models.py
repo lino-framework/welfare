@@ -130,7 +130,7 @@ class CreateNote(dd.Action):
             ok(ar)
             return
         ar.confirm(ok, _("Client has no valid eID data!",
-                         _("Do you still want to issue an attestation?")))
+                         _("Do you still want to issue an excerpt?")))
 
 
 class ButtonsTable(dd.VirtualTable):
@@ -162,11 +162,11 @@ class CreateNoteActionsByClient(ButtonsTable):
     def get_data_rows(self, ar=None):
         if ar.master_instance is None:
             return
-        sar = ar.spawn(attestations.AttestationsByProject,
+        sar = ar.spawn(attestations.ExcerptsByProject,
                        master_instance=ar.master_instance)
         # etn = settings.SITE.site_config.attestation_note_nature
         # for nt in notes.NoteType.objects.filter(is_attestation=True):
-        for at in attestations.AttestationType.objects.all():
+        for at in attestations.ExcerptType.objects.all():
             btn = sar.insert_button(
                 unicode(at),
                 dict(type=at),

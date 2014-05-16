@@ -29,7 +29,6 @@ from lino import dd
 from django.conf import settings
 
 
-# attestations = dd.resolve_app('attestations')
 contacts = dd.resolve_app('contacts')
 
 
@@ -220,10 +219,10 @@ class Aid(dd.Model):
             return M.objects.all()
         return M.objects.filter(aid_regime=aid_regime)
 
-    def get_attestation_options(self, ar, **kw):
-        # Set project field when creating an attestation from Client.
+    def get_excerpt_options(self, ar, **kw):
+        # Set project field when creating an excerpt from Client.
         kw.update(project=self.client)
-        return super(Aid, self).get_attestation_options(ar, **kw)
+        return super(Aid, self).get_excerpt_options(ar, **kw)
 
 
 class AidDetail(dd.FormLayout):
