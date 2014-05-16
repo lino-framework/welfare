@@ -692,6 +692,7 @@ class Client(contacts.Person,
 
         """
         Address = dd.modules.addresses.Address
+        DataSources = dd.modules.addresses.DataSources
         diffs = []
         objects = [self]
         kw = dict(partner=self, data_source=DataSources.eid)

@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 import os
 
 from lino import dd
-from lino.runtime import *
+from lino.runtime import countries, addresses, pcsw, users
 from lino.core import constants
 from djangosite.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
@@ -66,7 +66,8 @@ class BeIdTests(RemoteAuthTestCase):
         kw = dict()
         # kw.update(card_number="123456789")
         # kw.update(national_id="680601 053-29")
-        kw.update(first_name="Jean Jacques")
+        kw.update(first_name="Jean")
+        kw.update(middle_name="Jacques")
         kw.update(last_name="Jeffin")
         obj = Holder(**kw)
         obj.full_clean()
@@ -106,7 +107,7 @@ class BeIdTests(RemoteAuthTestCase):
             'xcallback success message')
         self.assertEqual(result['success'], True)
         expected = """\
-Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
+Click OK to apply the following changes for JEFFIN Jean (100) :\
 <br/>City : None -> Place #1 (u\'Tallinn\')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
@@ -136,9 +137,9 @@ Click OK to apply the following changes for JEFFIN Jean Jacques (100) :\
         self.assertEqual(result['success'], True)
         self.assertEqual(
             result['message'],
-            'Client "JEFFIN Jean Jacques (100)" has been saved.')
+            'Client "JEFFIN Jean (100)" has been saved.')
         obj = pcsw.Client.objects.get(id=100)
-        addr = pcsw.ClientAddress.objects.get(client=obj)
+        addr = addresses.Address.objects.get(partner=obj)
         self.assertEqual(addr.city.name, "Tallinn")
 
         # No similar person exists. Create new client from eid

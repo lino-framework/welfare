@@ -1,2 +1,2 @@
-django-admin.py initdb_demo --noinput --traceback --settings=lino_welfare.settings.memory
+django-admin.py initdb_demo --noinput --traceback --settings=lino_welfare.settings.demo.memory
 

@@ -109,6 +109,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.settings.chatelet',
     'lino_welfare.settings.chatelet.pcsw',
     'lino_welfare.settings.eupen',
+    'lino_welfare.scripts',
     'lino_welfare.tests',
 ])
 

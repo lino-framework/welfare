@@ -58,10 +58,11 @@ when one of the jobs had a remark.
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> ses.run(obj.do_print)
 ... #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/userdocs/appyodt/jobs.JobsOverview.odt',
+{'open_url': u'/media/webdav/userdocs/appyodt/jobs.JobsOverview.odt',
  'success': True}
- 
-Bug fixed :blogref:`20130423`.
+
+This bug was fixed :blogref:`20130423`.
+Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.
 
 
 >>> with translation.override('de'):

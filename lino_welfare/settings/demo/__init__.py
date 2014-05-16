@@ -1,7 +1,7 @@
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
-from .base import *
+from ..base import *
 
 
 class Site(Site):

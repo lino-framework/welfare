@@ -114,7 +114,7 @@ Here are some more slave tables.
 >>> with translation.override('en'):
 ...     ses.show(debts.PrintLiabilitiesByBudget.request(obj))
 ================================= ================= ========= ============== ============== ============== ============ ==============
- partner                           Description       Bailiff   Monthly rate   Common         Mr.            Mrs.         Total
+ Partner                           Description       Bailiff   Monthly rate   Common         Mr.            Mrs.         Total
 --------------------------------- ----------------- --------- -------------- -------------- -------------- ------------ --------------
  Bernd Brechts Bücherladen (108)   Invoices to pay                            1 200,00                                   1 200,00
  Reinhards Baumschule (109)        Loans                                                     1 500,00                    1 500,00
@@ -180,10 +180,11 @@ Printing a Budget
 >>> with translation.override('en'):
 ...     print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
 {'success': True, 
-'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt', 
+'open_url': u'/media/webdav/userdocs/appyodt/debts.Budget-3.odt', 
 'message': u'Budget 3 for Dubois-\xc4rgerlich (183) printable has been built.', 
 'refresh': True}
 
+Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.
 
 Something in French
 -------------------

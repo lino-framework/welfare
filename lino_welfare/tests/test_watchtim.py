@@ -218,7 +218,7 @@ class TestCase(TestCase):
         self.assertEqual(coaching.user.username, 'alicia')
         self.assertEqual(coaching.start_date, i2d(19850723))
         s = changes_to_rst(client.partner_ptr)
-        #~ print s
+        print s
         self.assertEqual(s, """\
 =========== ============= ================================ ============================================================================= ============= ===========
  User        Change Type   Object                           Changes                                                                       Object type   object id
@@ -337,7 +337,7 @@ class TestCase(TestCase):
 |           |             |                              | - vat_id : '' --> 'BE-0441.857.467' |              |           |
 |           |             |                              | - prefix : '' --> 'S.A.'            |              |           |
 |           |             |                              | - street : '' --> 'Quai des Vennes' |              |           |
-|           |             |                              | - remarks : '' --> '\n'             |              |           |
+|           |             |                              | - remarks : '' --> '\\n'             |              |           |
 |           |             |                              | - language : 'en' --> 'fr'          |              |           |
 |           |             |                              | - phone : '' --> '04/349.89.89'     |              |           |
 |           |             |                              | - country_id : None --> 'B'         |              |           |

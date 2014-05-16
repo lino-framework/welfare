@@ -29,18 +29,16 @@ addresses = dd.resolve_app('addresses')
 
 
 class Partner(
-        addresses.AddressOwner,
         Partner,
-        mixins.CreatedModified, dd.ImportedFields):
+        addresses.AddressOwner,
+        mixins.CreatedModified,
+        dd.ImportedFields):
 
     """
     :ref:`welfare` defines a `vat_id` field on Partner but doesn't
     need :mod:`lino.modlib.vat`
 
     """
-
-    #~ class Meta(contacts.Partner.Meta):
-        #~ app_label = 'contacts'
 
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
@@ -60,6 +58,15 @@ für neue Operationen nicht benutzt werden können.""")
 
     hidden_columns = 'created modified activity'
     # bank_account1 bank_account2'
+
+    def get_overview_elems(self, ar):
+        # In the base classes, Partner must come first because
+        # otherwise Django won't inherit `meta.verbose_name`. OTOH we
+        # want to get the `get_overview_elems` from AddressOwner, not
+        # from Partner (i.e. AddressLocation).
+        elems = super(Partner, self).get_overview_elems(ar)
+        elems += addresses.AddressOwner.get_overview_elems(self, ar)
+        return elems
 
     @classmethod
     def on_analyze(cls, site):
