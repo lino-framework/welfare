@@ -28,8 +28,6 @@ from lino import dd
 
 from lino.modlib.cal.models import *
 
-# attestations = dd.resolve_app('attestations')
-
 #~ add = EventEvents.add_item
 #~ add('30', _("Visit"),'visit')
 

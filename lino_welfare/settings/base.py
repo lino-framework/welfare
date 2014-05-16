@@ -30,7 +30,7 @@ class Site(Site):
     version = SETUP_INFO['version']  # lino_welfare.__version__
     url = SETUP_INFO['url']  # "http://code.google.com/p/lino-welfare/"
 
-    use_java = False  # temporarily
+    # use_java = False  # temporarily
 
     # ~ verbose_name = SETUP_INFO['name'] # "Lino Welfare"
     verbose_name = "Lino Welfare"
@@ -195,7 +195,7 @@ class Site(Site):
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
-        yield 'lino.modlib.attestations'
+        yield 'lino.modlib.excerpts'
         yield 'lino.modlib.humanlinks'
         yield 'lino.modlib.dedupe'
 

@@ -38,7 +38,7 @@ from lino.modlib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
 from lino.modlib.iban.utils import belgian_nban_to_iban_bic
 
-from lino_welfare.fixtures.std import attestation_types
+from lino_welfare.fixtures.std import excerpt_types
 from lino_welfare.modlib.aids.fixtures.std import objects as aids_objects
                     
 
@@ -1045,13 +1045,13 @@ class Migrator(Migrator):
         - Renamed SiteConfig default_calendar to default_event_type
         - Removed field `help_text` in `accounts.Group` and `accounts.Account`
         - Renamed `countries.City` to `countries.Place`
-        - Convert existing CVs from `notes.Note` to `attestations.Attestation`
+        - Convert existing CVs from `notes.Note` to `excerpts.Excerpt`
 
         - Removed field SiteConfig attestation_note_nature_id and
           debts_bailiff_type_id
 
-        - after_load: create default attestation types, create one
-          calendar per user, convert existing cv notes to attestations
+        - after_load: create default excerpt types, create one
+          calendar per user, convert existing cv notes to excerpts
 
         """
 
@@ -1280,8 +1280,8 @@ class Migrator(Migrator):
         users_User = resolve_model("users.User")
         Note = resolve_model("notes.Note")
         NoteType = resolve_model("notes.NoteType")
-        Attestation = resolve_model("attestations.Excerpt")
-        AttestationType = resolve_model("attestations.ExcerptType")
+        Excerpt = resolve_model("excerpts.Excerpt")
+        ExcerptType = resolve_model("excerpts.ExcerptType")
 
         def after_load(loader):
             "Write migrate_from_1_1_10.py script."
@@ -1298,7 +1298,7 @@ def doit(a, b):
         # os.rename(a, b)
         # os.remove(a)
 """)
-            loader.save(attestation_types())
+            loader.save(excerpt_types())
             loader.save(aids_objects())
 
             for u in users_User.objects.exclude(profile=''):
@@ -1308,7 +1308,7 @@ def doit(a, b):
                 loader.save(u)
 
             cvnt = NoteType.objects.get(template='cv.odt')
-            cvat = AttestationType.objects.get(template='cv.odt')
+            cvat = ExcerptType.objects.get(template='cv.odt')
 
             for note in Note.objects.filter(type=cvnt):
                 kw = dict()
@@ -1328,7 +1328,7 @@ def doit(a, b):
                 # assert not note.subject
                 # kw.update(body=body)
                 kw.update(language=note.language)
-                att = Attestation(**kw)
+                att = Excerpt(**kw)
                 att.save()
 
                 if note.build_time:
@@ -1350,7 +1350,7 @@ def doit(a, b):
         - aids.Aid: renamed fields
           "project" to "client"
           "type" to "aid_type"
-        - attestations.Attestation.type : renamed to attestation_type
+        - excerpts.Excerpt.type : renamed to excerpt_type
 
         Note: this method is overridden by
         :mod:`lino_welfare.settings.chatelet`.
@@ -1443,7 +1443,7 @@ def doit(a, b):
             return cal_EventType(**kw)
         globals_dict.update(create_cal_eventtype=create_cal_eventtype)
 
-        attestations_Attestation = resolve_model('attestations.Excerpt')
+        excerpts_Excerpt = resolve_model('excerpts.Excerpt')
         def create_attestations_attestation(id, owner_type_id, owner_id, user_id, project_id, build_time, build_method, company_id, contact_person_id, contact_role_id, type_id, language):
             kw = dict()
             kw.update(id=id)
@@ -1459,7 +1459,7 @@ def doit(a, b):
             kw.update(contact_role_id=contact_role_id)
             kw.update(excerpt_type_id=type_id)
             kw.update(language=language)
-            return attestations_Attestation(**kw)
+            return excerpts_Excerpt(**kw)
         globals_dict.update(
             create_attestations_attestation=create_attestations_attestation)
 

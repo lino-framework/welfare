@@ -1179,8 +1179,12 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 user=hubert,
                 type=UPLOAD_TYPES.pop())
 
-    paul = contacts.Person.objects.get(
-        first_name="Paul", last_name="Frisch")
-    mti.insert_child(paul, pcsw.Client)
+    def person2client(f,l):
+       obj = contacts.Person.objects.get(first_name=f, last_name=l)
+       mti.insert_child(obj, pcsw.Client)
+
+    person2client("Paul", "Frisch")
+    person2client("Bruno", "Braun")
+
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

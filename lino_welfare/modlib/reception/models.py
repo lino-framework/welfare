@@ -35,7 +35,7 @@ from lino_welfare.modlib.reception import Plugin
 
 pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
-attestations = dd.resolve_app('attestations')
+excerpts = dd.resolve_app('excerpts')
 extensible = dd.resolve_app('extensible')
 
 # dd.inject_field('notes.NoteType', 'is_attestation',
@@ -144,39 +144,6 @@ class ButtonsTable(dd.VirtualTable):
         return obj
 
 
-class CreateNoteActionsByClient(ButtonsTable):
-    sort_index = 94
-    master = 'pcsw.Client'
-    label = _("Issue attestation")
-    icon_name = 'script'
-    #~ icon_file = 'script.png'
-
-    @classmethod
-    def get_title(self, ar):
-        s = super(CreateNoteActionsByClient, self).get_title(ar)
-        if ar.master_instance is not None:
-            s += _(" for %s") % ar.master_instance
-        return s
-
-    @classmethod
-    def get_data_rows(self, ar=None):
-        if ar.master_instance is None:
-            return
-        sar = ar.spawn(attestations.ExcerptsByProject,
-                       master_instance=ar.master_instance)
-        # etn = settings.SITE.site_config.attestation_note_nature
-        # for nt in notes.NoteType.objects.filter(is_attestation=True):
-        for at in attestations.ExcerptType.objects.all():
-            btn = sar.insert_button(
-                unicode(at),
-                dict(type=at),
-                title=_(
-                    "Create a %s for this client.") % at,
-                icon_name=None)
-            if btn is not None:
-                yield btn
-
-
 class CreateEventActionsByClient(ButtonsTable):
     sort_index = 93
     master = 'pcsw.Client'
@@ -233,7 +200,6 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     #~ read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
 
-    create_note_actions = dd.ShowSlaveTable(CreateNoteActionsByClient)
     create_event_actions = dd.ShowSlaveTable(CreateEventActionsByClient)
 
     create_visit = CreateClientVisit()

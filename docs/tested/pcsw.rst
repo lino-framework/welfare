@@ -10,17 +10,18 @@ General PCSW
 
 .. include:: /include/tested.rst
 
-Some administrative stuff:
+..
+    >>> from __future__ import print_function
+    >>> from bs4 import BeautifulSoup
+    >>> from lino.runtime import *
+    >>> from django.test import Client
+    >>> from django.utils import translation
+    >>> import json
+    >>> client = Client()
 
->>> from __future__ import print_function
->>> from lino.runtime import *
->>> from django.test import Client
->>> from django.utils import translation
->>> import json
->>> client = Client()
 
 >>> ses = settings.SITE.login('robin')
-
+>>> translation.activate('en')
 
 Similar Persons
 ---------------
@@ -149,14 +150,30 @@ to test the new `eid_info` field:
 >>> result = json.loads(res.content)
 >>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
->>> print(result['data']['client_info'][0])
-<div><div style="font-size:18px;font-weigth:bold;vertical-align:bottom;text-align:middle">Herr<br />Bernd <b>Brecht</b><br />Deutschland</div><br /><div class="lino-info">Karte Nr. 591413288107 (Belgischer Staatsb&#252;rger), ausgestellt durch Eupen, g&#252;ltig von 19.08.11 bis 19.08.16</div></div>
+
+>>> soup = BeautifulSoup(result['data']['overview'][0])
+>>> print(soup.get_text("\n"))
+Herr
+Bernd 
+Brecht
+Deutschland
+Adressen verwalten
+Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gültig von 19.08.11 bis 19.08.16
 
 >>> url = '/api/reception/Clients/115?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')
 >>> result = json.loads(res.content)
->>> "Muss eID-Karte einlesen" in result['data']['client_info'][0]
-True
+>>> soup = BeautifulSoup(result['data']['overview'][0])
+>>> print(soup.get_text("\n"))
+Herr
+Alfons 
+Ausdemwald
+Am Bahndamm
+4700 Eupen
+Adressen verwalten
+Karte Nr. 123456789012 (C (Personalausweis für Ausländer)), ausgestellt durch Eupen
+, gültig von 19.08.12 bis 18.08.13
+Muss eID-Karte einlesen!
 
 
 Coaching types

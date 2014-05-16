@@ -5,6 +5,9 @@ CBSS connection
 
 .. include:: /include/tested.rst
 
+.. to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_cbss
+
 .. 
   >>> from lino.runtime import *
   >>> from django.utils import translation
@@ -46,9 +49,8 @@ Here is the textual representation of the "Result" panel
 Printing a Tx25
 -----------------
 
->>> from pprint import pprint
 >>> print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/webdav/userdocs/appyodt/cbss.RetrieveTIGroupsRequest-1.odt',
+{'open_url': u'/media/userdocs/appyodt/cbss.RetrieveTIGroupsRequest-1.odt',
  'success': True}
 
 

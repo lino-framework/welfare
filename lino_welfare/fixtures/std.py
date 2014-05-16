@@ -33,9 +33,9 @@ ExclusionType = dd.resolve_model('pcsw.ExclusionType')
 ContractEnding = dd.resolve_model('isip.ContractEnding')
 
 
-def attestation_types():  # also used for migration to 1.1.11
+def excerpt_types():  # also used for migration to 1.1.11
 
-    attType = Instantiator('attestations.ExcerptType',
+    attType = Instantiator('excerpts.ExcerptType',
                            build_method='appypdf',
                            email_template='Default.eml.html').build
     # yield attType(
@@ -128,7 +128,7 @@ def objects():
                   fr="Lettre",
                   en="Letter"))
 
-    yield attestation_types()
+    yield excerpt_types()
         
     eventType = Instantiator('notes.EventType', "name remark").build
 

@@ -5,6 +5,9 @@ Courses
 
 .. include:: /include/tested.rst
 
+.. to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_cbss
+
 .. 
   >>> from django.utils import translation
   >>> from lino.runtime import *
@@ -66,7 +69,7 @@ Yes it was a nice feature to silently ignore non installed app_labels
 but mistakenly specifying "person.first_name" instead of "person__first_name"
 did not raise an error. Now it does:
 
->>> ses.show(courses.PendingCourseRequests,limit=5,
+>>> ses.show(courses.PendingCourseRequests, limit=5,
 ...      column_names="person.first_name content urgent address")
 Traceback (most recent call last):
   ...
@@ -77,37 +80,35 @@ And then the following example failed because Lino simply wasn't yet
 able to render RemoteFields as rst.
 
 >>> with translation.override('fr'):
-...    ses.show(courses.PendingCourseRequests,limit=5,
+...    ses.show(courses.PendingCourseRequests, limit=5,
 ...       column_names="person__first_name content urgent address")
-========= ============= ======================= =========================
- Prénom    Contenu       cause professionnelle   Addresse
---------- ------------- ----------------------- -------------------------
- Alfons    Französisch   Non                     Am Bahndamm, 4700 Eupen
- Otto      Deutsch       Non                     4730 Raeren
- Vincent   Französisch   Non                     4730 Raeren
- David     Deutsch       Non                     4730 Raeren
- Rik       Französisch   Non                     Amsterdam, Pays-Bas
-========= ============= ======================= =========================
+============ ============= ======================= ===========================
+ Prénom       Contenu       cause professionnelle   Addresse
+------------ ------------- ----------------------- ---------------------------
+ Line         Französisch   Non                     Heidberg, 4700 Eupen
+ Guido        Deutsch       Non                     Haasstraße, 4700 Eupen
+ Karl         Französisch   Non                     Allemagne
+ Josef        Französisch   Non                     Gülcherstraße, 4700 Eupen
+ Jacqueline   Französisch   Non                     Fränzel, 4700 Eupen
+============ ============= ======================= ===========================
 <BLANKLINE>
 
-
-The virtualfield `dsbe.Client.coachings` shows all active coachings
-of that client:
+The virtual field `dsbe.Client.coachings` shows all active coachings
+of a client:
 
 >>> with translation.override('fr'):
 ...    ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content person__coaches")
 ========================= ============= =================================================
- Client                    Contenu       Accompagnants
+ Bénéficiaire              Contenu       Accompagnants
 ------------------------- ------------- -------------------------------------------------
- AUSDEMWALD Alfons (115)   Französisch   Mélanie Mélard
- ÖSTGES Otto (167)         Deutsch       Hubert Huppertz
- VAN VEEN Vincent (165)    Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
- DA VINCI David (164)      Deutsch       Mélanie Mélard, Hubert Huppertz
- RADERMECKER Rik (172)     Französisch   Hubert Huppertz
+ LAZARUS Line (143)        Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
+ LAMBERTZ Guido (141)      Deutsch       Mélanie Mélard, Hubert Huppertz
+ KELLER Karl (177)         Französisch   Hubert Huppertz
+ JONAS Josef (138)         Französisch   Mélanie Mélard
+ JACOBS Jacqueline (136)   Französisch   Mélanie Mélard, Mélanie Mélard
 ========================= ============= =================================================
 <BLANKLINE>
-
 
 The last column `coachings` (Accompagnements) is also a new feature:
 it is a RemoteField ponting to a VirtualField. Very subtle!

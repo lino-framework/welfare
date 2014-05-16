@@ -5,13 +5,15 @@ Debts mediation
 
 .. include:: /include/tested.rst
 
-The following statements import some often-used global names::
+.. to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_cbss
 
->>> from django.utils import translation
->>> from lino.runtime import *
->>> from pprint import pprint
->>> from django.test import Client
->>> import json
+..
+    >>> from django.utils import translation
+    >>> from lino import dd
+    >>> from lino.runtime import *
+    >>> from django.test import Client
+    >>> import json
 
 We switch to German because the first PCSW with Lino was the one in Eupen:
 
@@ -22,7 +24,7 @@ For example here is how we can verify here that the demo database
 has three Budgets:
 
 >>> debts.Budget.objects.count()
-3
+5
 
 Or we can retrieve budget no. 3 from the database:
 
@@ -33,32 +35,41 @@ Budget #3 (u'Budget Nr. 3 f\xfcr Dubois-\xc4rgerlich (183)')
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:
 
->>> ses = settings.SITE.login('rolf')
+>>> ses = dd.login('rolf')
 
 Here is the textual representation of the "Expenses" panel:
 
->>> # settings.SITE.catch_layout_exceptions = False
 >>> ses.show(debts.ExpensesByBudget.request(obj),
 ...   column_names="account description amount remark",
 ...   limit=10)
 ... #doctest: +NORMALIZE_WHITESPACE
-====================================== =============================== ============ ===========
- Konto                                  Beschreibung                    Betrag       Bemerkung
--------------------------------------- ------------------------------- ------------ -----------
- (3010) Miete                           Miete                           41,00
- (3011) Wasser                          Wasser                          47,00
- (3012) Strom                           Strom
- (3020) Festnetz-Telefon und Internet   Festnetz-Telefon und Internet   5,00
- (3021) Handy                           Handy                           10,00
- (3030) Fahrtkosten                     Fahrtkosten                     15,00        Seminar
- (3030) Fahrtkosten                     Fahrtkosten                     15,00        Kino
- (3031) TEC Busabonnement               TEC Busabonnement               20,00
- (3032) Benzin                          Benzin                          26,00
- (3033) Unterhalt Auto                  Unterhalt Auto                  31,00
- **Total (35 Zeilen)**                                                  **210,00**
-====================================== =============================== ============ ===========
+====================================== ====================== ============ ===========
+ Konto                                  Beschreibung           Betrag       Bemerkung
+-------------------------------------- ---------------------- ------------ -----------
+ (3010) Miete                           Rent                   41,00
+ (3011) Wasser                          Water                  47,00
+ (3012) Strom                           Electricity
+ (3020) Festnetz-Telefon und Internet   Telephone & Internet   5,00
+ (3021) Handy                           Cell phone             10,00
+ (3030) Fahrtkosten                     Transport costs        15,00        Shopping
+ (3030) Fahrtkosten                     Transport costs        15,00        Cinema
+ (3031) TEC Busabonnement               Public transport       20,00
+ (3032) Benzin                          Fuel                   26,00
+ (3033) Unterhalt Auto                  Car maintenance        31,00
+ **Total (35 Zeilen)**                                         **210,00**
+====================================== ====================== ============ ===========
 <BLANKLINE>
 
+Note that the above table contains a mixture of German and English
+texts. This is because our **current language** is German while the
+**partner** speaks English:
+
+>>> print(obj.partner.language)
+en
+
+Description and Remark have been entererd for this particular Budget
+instance and are therefore in the partner's language. Everything else
+depends on the current user language.
 
 Here are some more slave tables.
 
@@ -100,26 +111,28 @@ Here are some more slave tables.
 ================================= ==============
 <BLANKLINE>
 
->>> ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-================================= ==================== ==================== ============ ============== ============== ============ ==============
- Partner                           Beschreibung         Gerichtsvollzieher   Monatsrate   Gemeinsam      Herr           Frau         Total
---------------------------------- -------------------- -------------------- ------------ -------------- -------------- ------------ --------------
- Bernd Brechts Bücherladen (108)   Zahlungsrückstände                                     1 200,00                                   1 200,00
- Reinhards Baumschule (109)        Kredite                                                               1 500,00                    1 500,00
- Moulin Rouge (110*)               Schulden                                  15,00                                      300,00       300,00
- Auto École Verte (111)            Zahlungsrückstände                        30,00        600,00                                     600,00
- **Total (4 Zeilen)**                                                        **45,00**    **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-================================= ==================== ==================== ============ ============== ============== ============ ==============
+>>> with translation.override('en'):
+...     ses.show(debts.PrintLiabilitiesByBudget.request(obj))
+================================= ================= ========= ============== ============== ============== ============ ==============
+ partner                           Description       Bailiff   Monthly rate   Common         Mr.            Mrs.         Total
+--------------------------------- ----------------- --------- -------------- -------------- -------------- ------------ --------------
+ Bernd Brechts Bücherladen (108)   Invoices to pay                            1 200,00                                   1 200,00
+ Reinhards Baumschule (109)        Loans                                                     1 500,00                    1 500,00
+ Moulin Rouge (110*)               Debts                       15,00                                        300,00       300,00
+ Auto École Verte (111)            Invoices to pay             30,00          600,00                                     600,00
+ **Total (4 rows)**                                            **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+================================= ================= ========= ============== ============== ============== ============ ==============
 <BLANKLINE>
 
->>> ses.show(debts.DistByBudget.request(obj))
-================================= ==================== ============== ============ ====================================
- Kreditor                          Beschreibung         Schuld         %            Betrag der monatlichen Rückzahlung
---------------------------------- -------------------- -------------- ------------ ------------------------------------
- Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
- **Total (2 Zeilen)**                                   **2 700,00**   **100,00**   **120,00**
-================================= ==================== ============== ============ ====================================
+>>> with translation.override('en'):
+...     ses.show(debts.DistByBudget.request(obj))
+================================= ================= ============== ============ ===========================
+ Creditor                          Description       Debt           %            Monthly payback suggested
+--------------------------------- ----------------- -------------- ------------ ---------------------------
+ Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
+================================= ================= ============== ============ ===========================
 <BLANKLINE>
 
 The following table shows the new feature (:blogref:`20130325`) 
@@ -129,34 +142,34 @@ and if several entries were grouped into a same printable
 row (e.g. "Fahrtkosten") separated by commas.
 
 >>> groups = list(obj.account_groups())
->>> ses.show(obj.entries_by_group(groups[2]))
-=================================== ============ ====== ====== ============
- Beschreibung                        Gemeinsam    Herr   Frau   Total
------------------------------------ ------------ ------ ------ ------------
- Miete                               41,00                      41,00
- Wasser                              47,00                      47,00
- Festnetz-Telefon und Internet       5,00                       5,00
- Handy                               10,00                      10,00
- Fahrtkosten (Seminar, Kino)         30,00                      30,00
- TEC Busabonnement                   20,00                      20,00
- Benzin                              26,00                      26,00
- Unterhalt Auto                      31,00                      31,00
- Schulkosten                         36,00                      36,00
- Tagesmutter & Kleinkindbetreuung    41,00                      41,00
- Gesundheit                          47,00                      47,00
- Ernährung                           5,00                       5,00
- Hygiene                             10,00                      10,00
- Krankenkassenbeiträge               15,00                      15,00
- Gewerkschaftsbeiträge               20,00                      20,00
- Unterhaltszahlungen                 26,00                      26,00
- Pensionssparen                      31,00                      31,00
- Tabak                               36,00                      36,00
- Freizeit & Unterhaltung (Seminar)   41,00                      41,00
- Haustiere                           47,00                      47,00
- **Total (20 Zeilen)**               **565,00**                 **565,00**
-=================================== ============ ====== ====== ============
+>>> with translation.override('en'):
+...     ses.show(obj.entries_by_group(groups[2]))
+==================================== ============ ===== ====== ============
+ Description                          Common       Mr.   Mrs.   Total
+------------------------------------ ------------ ----- ------ ------------
+ Rent                                 41,00                     41,00
+ Water                                47,00                     47,00
+ Telephone & Internet                 5,00                      5,00
+ Cell phone                           10,00                     10,00
+ Transport costs (Shopping, Cinema)   30,00                     30,00
+ Public transport                     20,00                     20,00
+ Fuel                                 26,00                     26,00
+ Car maintenance                      31,00                     31,00
+ School                               36,00                     36,00
+ Babysitting                          41,00                     41,00
+ Health                               47,00                     47,00
+ Food                                 5,00                      5,00
+ Hygiene                              10,00                     10,00
+ Health insurance                     15,00                     15,00
+ Labour fees                          20,00                     20,00
+ Unterhaltszahlungen                  26,00                     26,00
+ Retirement savings                   31,00                     31,00
+ Tobacco                              36,00                     36,00
+ Spare time (Seminar)                 41,00                     41,00
+ Pets                                 47,00                     47,00
+ **Total (20 rows)**                  **565,00**                **565,00**
+==================================== ============ ===== ====== ============
 <BLANKLINE>
-
 
 
 Printing a Budget
@@ -164,11 +177,12 @@ Printing a Budget
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
->>> print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'refresh': True, 
-'open_url': u'/media/webdav/userdocs/appyodt/debts.Budget-3.odt', 
-'message': u'Dokument Budget Nr. 3 f\xfcr Dubois-\xc4rgerlich (183) wurde generiert.', 
-'success': True}
+>>> with translation.override('en'):
+...     print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
+{'success': True, 
+'open_url': u'/media/userdocs/appyodt/debts.Budget-3.odt', 
+'message': u'Budget 3 for Dubois-\xc4rgerlich (183) printable has been built.', 
+'refresh': True}
 
 
 Something in French
@@ -176,26 +190,26 @@ Something in French
 
 >>> with translation.override('fr'):
 ...    ses.show(debts.DistByBudget.request(obj))
-================================= ==================== ============== ============ =======================
- Créancier                         Description          Dette          %            Remboursement mensuel
---------------------------------- -------------------- -------------- ------------ -----------------------
- Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
- **Total (2 lignes)**                                   **2 700,00**   **100,00**   **120,00**
-================================= ==================== ============== ============ =======================
+================================= ================= ============== ============ =======================
+ Créancier                         Description       Dette          %            Remboursement mensuel
+--------------------------------- ----------------- -------------- ------------ -----------------------
+ Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ **Total (2 lignes)**                                **2 700,00**   **100,00**   **120,00**
+================================= ================= ============== ============ =======================
 <BLANKLINE>
 
 Or the same in English:
 
 >>> with translation.override('en'):
 ...     ses.show(debts.DistByBudget.request(obj))
-================================= ==================== ============== ============ ===========================
- Creditor                          Description          Debt           %            Monthly payback suggested
---------------------------------- -------------------- -------------- ------------ ---------------------------
- Bernd Brechts Bücherladen (108)   Zahlungsrückstände   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Kredite              1 500,00       55,56        66,67
- **Total (2 rows)**                                     **2 700,00**   **100,00**   **120,00**
-================================= ==================== ============== ============ ===========================
+================================= ================= ============== ============ ===========================
+ Creditor                          Description       Debt           %            Monthly payback suggested
+--------------------------------- ----------------- -------------- ------------ ---------------------------
+ Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
+ Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
+================================= ================= ============== ============ ===========================
 <BLANKLINE>
 
 Note that the Description still shows German words because these are stored per Budget, 

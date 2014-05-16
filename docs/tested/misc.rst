@@ -5,14 +5,18 @@ Miscellaneous
 
 .. include:: /include/tested.rst
 
-Some tests:
-  
->>> from __future__ import print_function
->>> from lino.runtime import *
->>> from django.utils import translation
->>> from django.test import Client
->>> import json
->>> from lino import dd
+..
+  This document is part of the test suite.
+  To test only this document, run::
+    $ python setup.py test -s tests.DocsTests.test_misc
+
+..  
+    >>> from __future__ import print_function
+    >>> from lino.runtime import *
+    >>> from django.utils import translation
+    >>> from django.test import Client
+    >>> import json
+    >>> from lino import dd
 
 
 .. _welfare.tested.notes:
@@ -48,14 +52,14 @@ Some database content
 ================= ====================================== ===========================
  Funktion          Stellenanbieter                        Sektor
 ----------------- -------------------------------------- ---------------------------
- Koch              R-Cycle Sperrgutsortierzentrum (191)    Seefahrt
- Koch              Pro Aktiv V.o.G. (193)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (193)                  Medizin & Paramedizin
- Küchenassistent   BISA (190*)                             Reinigung
- Tellerwäscher     BISA (190*)                             Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (191)    Transport
- Kellner           BISA (190*)                             Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (191)    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum (225)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (227)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (227)                  Medizin & Paramedizin
+ Küchenassistent   BISA (224)                              Reinigung
+ Tellerwäscher     BISA (224)                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (225)    Transport
+ Kellner           BISA (224)                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (225)    Horeca
 ================= ====================================== ===========================
 <BLANKLINE>
 
@@ -71,7 +75,7 @@ when one of the jobs had a remark.
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> print(ses.run(obj.do_print)) 
 ... #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/webdav/userdocs/appyodt/jobs.JobsOverview.odt',
+{'open_url': u'/media/userdocs/appyodt/jobs.JobsOverview.odt',
  'success': True}
  
 Bug fixed :blogref:`20130423`.

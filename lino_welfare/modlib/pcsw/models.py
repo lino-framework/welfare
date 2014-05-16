@@ -47,7 +47,7 @@ from lino.utils import join_elems
 from lino.modlib.beid import mixins as beid
 
 households = dd.resolve_app('households')
-reception = dd.resolve_app('reception')
+# reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
 properties = dd.resolve_app('properties')
@@ -348,12 +348,12 @@ class Client(contacts.Person,
 
     mails_by_project = dd.ShowSlaveTable('outbox.MailsByProject')
 
-    def get_detail_action(self, ar):
-        p = ar.get_user().profile
-        for T in (Clients, reception.Clients):
-            a = T.detail_action
-            if a.get_view_permission(p):
-                return a
+    # def get_detail_action(self, ar):
+    #     p = ar.get_user().profile
+    #     for T in (Clients, reception.Clients):
+    #         a = T.detail_action
+    #         if a.get_view_permission(p):
+    #             return a
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
@@ -842,7 +842,7 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    attestations.ExcerptsByProject:30 notes.NotesByProject:30
+    excerpts.ExcerptsByProject:30 notes.NotesByProject:30
     # lino.ChangesByMaster
     """, label=_("History"))
 

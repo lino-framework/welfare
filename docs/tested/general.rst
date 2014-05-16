@@ -5,12 +5,15 @@ General
 
 .. include:: /include/tested.rst
 
-Some tests:
-  
->>> from __future__ import print_function
->>> from lino.runtime import *
->>> from django.utils import translation
->>> from pprint import pprint
+.. How to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_general
+
+
+..  
+    >>> from __future__ import print_function
+    >>> from lino.runtime import *
+    >>> from django.utils import translation
+    >>> from pprint import pprint
 
 
 See :blogref:`20130508`:
@@ -19,12 +22,12 @@ See :blogref:`20130508`:
 ...     for o in model.objects.all():
 ...         o.full_clean()
 
-Check whether Lino returns the right default template for attestations 
+Check whether Lino returns the right default template for excerpts 
 (see :blogref:`20140208`):
 
 >>> from lino.utils.config import find_config_file
->>> ffn = find_config_file('Default.odt','attestations/Attestation')
->>> ffn.endswith('lino_welfare/config/attestations/Attestation/Default.odt')
+>>> ffn = find_config_file('Default.odt','excerpts/Excerpt')
+>>> ffn.endswith('lino_welfare/config/excerpts/Excerpt/Default.odt')
 True
 
 
@@ -153,7 +156,7 @@ Rolf is the local system administrator, he has a complete menu:
 >>> ses = settings.SITE.login('rolf') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
@@ -202,7 +205,7 @@ Hubert is an Integration agent.
 >>> ses = settings.SITE.login('hubert') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
@@ -225,7 +228,7 @@ Mélanie is the manager of the Integration service.
 >>> ses = settings.SITE.login('melanie') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
@@ -255,7 +258,7 @@ Kerstin is a debts consultant.
 >>> ses = settings.SITE.login('kerstin') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
@@ -272,7 +275,7 @@ Caroline is a newcomers consultant.
 >>> ses = settings.SITE.login('caroline') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
@@ -290,7 +293,7 @@ Theresia is a reception clerk.
 >>> ses = settings.SITE.login('theresia') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 

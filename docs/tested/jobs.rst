@@ -5,18 +5,20 @@ Jobs
 
 .. include:: /include/tested.rst
 
-The following statements import some often-used global names::
+.. to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_jobs
 
->>> # -*- coding: UTF-8 -*-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.settings.test'
->>> from django.utils import translation
->>> from lino.runtime import *
->>> from django.test import Client
->>> import json
+..
+    >>> # -*- coding: UTF-8 -*-
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.settings.test'
+    >>> from django.utils import translation
+    >>> from lino.runtime import *
+    >>> from django.test import Client
+    >>> import json
 
-We switch to German because the first PCSW with Lino was the one in Eupen:
+We log in as Rolf:
 
 >>> ses = settings.SITE.login('rolf')
 
@@ -52,12 +54,12 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========== ========== ========================= ======================= =============
- begonnen   beendet    Klient                    Firma                   Land
----------- ---------- ------------------------- ----------------------- -------------
- ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)     Estland
- ...        ...        FAYMONVILLE Luc (129)     Bosten-Bocken A (205)   Niederlande
-========== ========== ========================= ======================= =============
+========== ========== ========================= ================================================ =============
+ begonnen   beendet    Klient                    Firma                                            Land
+---------- ---------- ------------------------- ------------------------------------------------ -------------
+ ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)                              Estland
+ ...        ...        FAYMONVILLE Luc (129)     Mutualité Chrétienne de Verviers - Eupen (232)   Niederlande
+========== ========== ========================= ================================================ =============
 <BLANKLINE>
 
 
