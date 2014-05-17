@@ -1,12 +1,12 @@
 """
-The settings.py used for building both `/docs` and `/userdocs`
+The settings used for building both `/docs` and `/userdocs`
 """
-from ..base import *
+from lino_welfare.projects.base import *
 
 
 class Site(Site):
 
-    title = "Lino-Welfare demo"
+    title = "Lino Welfare"
     #~ use_jasmine = True
     #~ use_davlink = False
     #~ use_extensible = True
@@ -19,7 +19,7 @@ class Site(Site):
             return True
         return False
 
-SITE = Site(globals())
+# SITE = Site(globals())
 
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'

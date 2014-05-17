@@ -14,7 +14,7 @@
 import sys, os
 
 from atelier.sphinxconf import configure
-configure(globals(), 'lino_welfare.settings.test')
+configure(globals(), 'lino_welfare.projects/docs/settings.test')
 
 extensions += ['lino.utils.actordoc']
 
@@ -30,7 +30,7 @@ extensions += ['lino.utils.actordoc']
 #~ """
 from django.conf import settings
 #~ settings.SITE.startup()
-settings.SITE.title = "Lino-Welfare Reference Manual"
+settings.SITE.title = "Lino Welfare Reference Manual"
 
 
 # If your extensions are in another directory, add it here. If the directory

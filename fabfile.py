@@ -1,7 +1,7 @@
 from atelier.fablib import *
-setup_from_project('lino_welfare', 'lino_welfare.settings.demo')
+setup_from_project('lino_welfare', 'lino_welfare.projects.docs.settings.demo')
 
-env.demo_databases.append('lino_welfare.settings.eupen.demo')
-env.demo_databases.append('lino_welfare.settings.chatelet.demo')
+env.demo_databases.append('lino_welfare.projects.eupen.settings.demo')
+env.demo_databases.append('lino_welfare.projects.chatelet.settings.demo')
 
 env.use_mercurial = False
