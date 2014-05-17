@@ -16,9 +16,15 @@
 To run only this test::
  
   $ go welfare
-  $ python setup.py test -s tests.welfare_demo_tests
+  $ python setup.py test -s tests.test_welfare_demo
 
 """
+
+import sys
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = \
+    'lino_welfare.projects.docs.settings.demo'
+
 from lino.utils.test import DemoTestCase
 from django.contrib.contenttypes.models import ContentType
 from lino.runtime import *
@@ -43,7 +49,8 @@ class MyTestCase(DemoTestCase):
         self.demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
         
         mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
-        self.demo_get('rolf','api/cbss/RetrieveTIGroupsResult',json_fields,18,mt=mt,mk=1,**kw)
+        self.demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult',
+                      json_fields, 18, mt=mt, mk=1, **kw)
         
         json_fields = 'count rows title success no_data_text param_values'
         self.demo_get('rolf','api/courses/PendingCourseRequests',json_fields,18,**kw)

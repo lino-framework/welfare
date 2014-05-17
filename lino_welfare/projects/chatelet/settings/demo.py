@@ -1,4 +1,4 @@
-from ..chatelet import *
+from ..settings import *
 
 SITE = Site(globals())
 

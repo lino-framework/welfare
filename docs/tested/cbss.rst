@@ -49,8 +49,9 @@ Here is the textual representation of the "Result" panel
 Printing a Tx25
 -----------------
 
->>> print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
-{'open_url': u'/media/userdocs/appyodt/cbss.RetrieveTIGroupsRequest-1.odt',
+>>> print(ses.run(obj.do_print))
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPISIS
+{'open_url': u'.../cbss.RetrieveTIGroupsRequest-1.odt',
  'success': True}
 
 

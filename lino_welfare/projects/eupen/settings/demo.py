@@ -1,4 +1,4 @@
-from ..eupen import *
+from ..settings import *
 
 SITE = Site(globals())
 

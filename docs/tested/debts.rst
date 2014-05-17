@@ -178,9 +178,10 @@ Printing a Budget
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
 >>> with translation.override('en'):
-...     print(ses.run(obj.do_print)) #doctest: +NORMALIZE_WHITESPACE
+...     print(ses.run(obj.do_print)) 
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPISIS
 {'success': True, 
-'open_url': u'/media/webdav/userdocs/appyodt/debts.Budget-3.odt', 
+'open_url': u'../debts.Budget-3.odt', 
 'message': u'Budget 3 for Dubois-\xc4rgerlich (183) printable has been built.', 
 'refresh': True}
 

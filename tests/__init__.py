@@ -37,12 +37,18 @@ class BaseTestCase(TestCase):
     project_root = ROOTDIR
 
 
-class DemoTests(BaseTestCase):
+class DjangoTests(BaseTestCase):
     """
-    $ python setup.py test -s tests.DemoTests.test_admin
+    $ python setup.py test -s tests.DjangoTests.test_docs
     """
-    def test_admin(self):
-        self.run_django_manage_test()
+    def test_docs(self):
+        self.run_django_manage_test('lino_welfare/projects/docs')
+    
+    # def test_eupen(self):
+    #     self.run_django_manage_test('lino_welfare/projects/eupen')
+
+    # def test_chatelet(self):
+    #     self.run_django_manage_test('lino_welfare/projects/chatelet')
 
     
 class SimpleTests(BaseTestCase):

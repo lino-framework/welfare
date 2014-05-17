@@ -1,7 +1,7 @@
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
-from ..base import *
+from lino_welfare.projects.base import *
 
 
 class Site(Site):
@@ -22,7 +22,7 @@ class Site(Site):
         kw.update(sepa=None)  # remove whole app
         # alternative implementations
         kw.update(courses='lino.modlib.courses')
-        kw.update(pcsw='lino_welfare.settings.chatelet.pcsw')
+        kw.update(pcsw='lino_welfare.projects.chatelet.pcsw')
         return kw
 
     def setup_plugins(self):
