@@ -1,10 +1,11 @@
-{% extends "attestations/Attestation/certificate.body.html" %}
+{% extends "excerpts/Excerpt/certificate.body.html" %}
 
 {% block body %}
 
 {{ super() }}
 
 <p>
+{% set client = this.owner %}
 {% set times = (this.owner.waiting_since, this.owner.gone_since) %}
 {{tr(en="was present today between %s and %s o'clock",
     de="am heutigen Tage in der Zeit von %s Uhr bis %s Uhr",

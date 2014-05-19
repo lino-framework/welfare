@@ -154,7 +154,8 @@ class EventsByClient(Events):
     """
     required = dd.required(user_groups='office')
     # master_key = 'project'
-    master = 'cal.Event'
+    # master = 'cal.Event'
+    master = 'pcsw.Client'
     auto_fit_column_widths = True
     column_names = 'linked_date user summary workflow_buttons'
     # column_names = 'when_text user summary workflow_buttons'

@@ -33,6 +33,7 @@ from lino import dd
 from lino import mixins
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
+excerpts = dd.resolve_app('excerpts')
 
 from lino.utils.ranges import isrange, overlap2, encompass
 
@@ -54,7 +55,7 @@ COACHINGTYPE_DSBE = 2
 #
 # CONTRACT TYPES
 #
-class ContractType(mixins.PrintableType, dd.BabelNamed):
+class ContractType(dd.BabelNamed):
 
     """
     The contract type determines the print template to be used. 
@@ -73,9 +74,10 @@ class ContractType(mixins.PrintableType, dd.BabelNamed):
         verbose_name_plural = _('ISIP Types')
 
     ref = models.CharField(_("Reference"), max_length=20, blank=True)
-    exam_policy = models.ForeignKey("isip.ExamPolicy",
-                                    related_name="%(app_label)s_%(class)s_set",
-                                    blank=True, null=True)
+    exam_policy = models.ForeignKey(
+        "isip.ExamPolicy",
+        related_name="%(app_label)s_%(class)s_set",
+        blank=True, null=True)
     needs_study_type = models.BooleanField(
         _("needs Study type"), default=False)
 
@@ -83,10 +85,10 @@ class ContractType(mixins.PrintableType, dd.BabelNamed):
 class ContractTypes(dd.Table):
     required = dict(user_groups='integ', user_level='manager')
     model = ContractType
-    column_names = 'name ref build_method template *'
+    column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
-    id name 
-    ref build_method template exam_policy needs_study_type
+    id name
+    ref exam_policy needs_study_type
     ContractsByType
     """
 
@@ -241,7 +243,8 @@ def default_signer2():
 class ContractBase(
         Signers,
         contacts.ContactRelated,
-        mixins.TypedPrintable,
+        excerpts.Certifiable,
+        # mixins.TypedPrintable,
         cal.EventGenerator):
 
     """Abstract base class for :ddref:`jobs.Contract` and
@@ -632,25 +635,14 @@ class Contract(ContractBase):
     study_type = models.ForeignKey('isip.StudyType', blank=True, null=True)
 
     @classmethod
-    def on_analyze(cls, lino):
-        # Contract.user.verbose_name = _("responsible (DSBE)")
-        cls.PRINTABLE_FIELDS = dd.fields_list(
-            cls,
-            'client company contact_person contact_role type '
-            'applies_from applies_until '
-            'language '
-            'stages goals duties_dsbe duties_company '
-            'duties_asd duties_person '
-            'user user_asd exam_policy '
-            'date_decided date_issued ')
-        super(Contract, cls).on_analyze(lino)
-
-    def disabled_fields(self, ar):
-        #~ if self.must_build:
-        if not self.build_time:
-            return set()
-        #~ return df + settings.SITE.CONTRACT_PRINTABLE_FIELDS
-        return self.PRINTABLE_FIELDS
+    def get_certifiable_fields(cls):
+        return """client company contact_person contact_role type
+        applies_from applies_until
+        language
+        stages goals duties_dsbe duties_company
+        duties_asd duties_person
+        user user_asd exam_policy
+        date_decided date_issued"""
 
 
 dd.update_field(
@@ -664,7 +656,7 @@ class ContractDetail(dd.FormLayout):
     study_type  company contact_person contact_role
     applies_from applies_until exam_policy language:8
     
-    date_decided date_issued date_ended ending:20
+    date_decided date_issued certificate date_ended ending:20
     # signer1 signer2
     cal.TasksByController cal.EventsByController
     """, label=_("General"))
@@ -747,12 +739,11 @@ class ContractsByPerson(Contracts):
 
 class ContractsByPolicy(Contracts):
     master_key = 'exam_policy'
-    #~ column_names = 'applies_from applies_until user type *'
 
 
 class ContractsByType(Contracts):
     master_key = 'type'
-    column_names = "applies_from client user *"
+    column_names = "applies_from client user id applies_until *"
     order_by = ["applies_from"]
 
 

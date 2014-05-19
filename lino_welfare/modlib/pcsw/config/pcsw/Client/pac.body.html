@@ -1,0 +1,21 @@
+{% extends "excerpts/Excerpt/base.body.html" %}
+
+{% block body %}
+
+{{ super() }}
+
+<p>
+{% set client = this.owner %}
+
+{{ar.show("cal.TasksByProject", client)}}
+
+{% for task in client.cal_task_set_by_project.all() %}
+{{task}}
+{% endfor %}
+
+{% endblock %}
+
+{% block signature %}
+{{tr(de="Ihr Ansprechpartner:",fr="Votre personne de contact:")}}: 
+<p>{{this.user}}</p>
+{% endblock %}

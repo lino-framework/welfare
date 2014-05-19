@@ -38,13 +38,6 @@ def excerpt_types():  # also used for migration to 1.1.11
     attType = Instantiator('excerpts.ExcerptType',
                            build_method='appypdf',
                            email_template='Default.eml.html').build
-    # yield attType(
-    #     body_template='aids_Aid.body.html',
-    #     template='Default.odt',
-    #     **babelkw('name',
-    #               de="Bescheinigung",
-    #               fr="Attestation",
-    #               en="Attestation"))
     yield attType(
         body_template='aid_certificate.body.html',
         template='Default.odt',
@@ -89,6 +82,7 @@ def excerpt_types():  # also used for migration to 1.1.11
                   en="eID sheet"))
 
     yield attType(
+        body_template='pac.body.html',
         build_method='appypdf',
         template='Default.odt',
         content_type=ContentType.objects.get_for_model(
@@ -97,6 +91,26 @@ def excerpt_types():  # also used for migration to 1.1.11
                   de="Aktionsplan",
                   fr="Plan d'action",
                   en="to-do list"))
+
+    yield attType(
+        build_method='appypdf',
+        template='art60-7.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('jobs.Contract')),
+        **babelkw('name',
+                  de="Art.60§7-Konvention",
+                  fr="Convention art. 60§7",
+                  en="Art. 60§7 convention"))
+
+    yield attType(
+        build_method='appypdf',
+        template='vse.odt',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('isip.Contract')),
+        **babelkw('name',
+                  de="VSE",
+                  fr="Convention PIIS",
+                  en="ISIP"))
 
 
 def objects():
@@ -263,26 +277,26 @@ def objects():
     #~ from lino.models import update_site_config
 
     UploadAreas = dd.modules.uploads.UploadAreas
-    uploadType = Instantiator('uploads.UploadType').build
+    uploadType = Instantiator(
+        'uploads.UploadType',
+        upload_area=UploadAreas.cv, max_number=1, wanted=True).build
     yield uploadType(**dd.babelkw(
         'name',
         de=u"Personalausweis", fr=u"Carte d'identité", en="ID card"))
-    p = uploadType(**dd.babelkw(
+    yield uploadType(**dd.babelkw(
         'name', de=u"Aufenthaltserlaubnis",
         fr=u"Permis de séjour", en="Residence permit"))
-    yield p
-    # settings.SITE.site_config.residence_permit_upload_type = p
-    p = uploadType(**dd.babelkw(
+    yield uploadType(**dd.babelkw(
         'name', de=u"Arbeitserlaubnis",
         fr=u"Permis de travail", en="Work permit"))
-    yield p
-    # settings.SITE.site_config.work_permit_upload_type = p
     yield uploadType(**dd.babelkw(
-        'name', de=u"Vertrag", fr=u"Contrat", en="Contract"))
-    p = uploadType(**dd.babelkw(
         'name', de=u"Führerschein",
         fr=u"Permis de conduire", en="Diving licence"))
-    yield p
+    uploadType = Instantiator(
+        'uploads.UploadType',
+        upload_area=UploadAreas.cv).build
+    yield uploadType(**dd.babelkw(
+        'name', de=u"Vertrag", fr=u"Contrat", en="Contract"))
     # settings.SITE.site_config.driving_licence_upload_type = p
     uploadType = Instantiator(
         'uploads.UploadType', upload_area=UploadAreas.medical).build

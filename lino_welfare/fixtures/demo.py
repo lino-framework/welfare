@@ -480,15 +480,7 @@ def objects():
                              ))
 
     contractType = Instantiator(jobs.ContractType, "ref",
-                                exam_policy=3,
-                                build_method='appypdf',
-                                template=u'art60-7.odt').build
-    #~ yield contractType('art60-7a',
-      #~ **babelkw('name',
-          #~ de=u"Konvention Art.60§7 Sozialökonomie",
-          #~ fr=u'Convention art.60§7 économie sociale',
-          #~ en=u'Convention art.60§7 social economy',
-          #~ ))
+                                exam_policy=3).build
     yield contractType('art60-7a',
                        **babelkw('name',
                                  de=u"Sozialökonomie",
@@ -521,13 +513,13 @@ def objects():
                                  ))
 
     contractType = Instantiator(isip.ContractType, "ref",
-                                exam_policy=1,
-                                build_method='appypdf', template=u'vse.odt').build
-    yield contractType("vsea", needs_study_type=True, **babelkw('name',
-                                                                de=u"VSE Ausbildung",
-                                                                fr=u"VSE Ausbildung",
-                                                                en=u"VSE Ausbildung",
-                                                                ))
+                                exam_policy=1).build
+    yield contractType("vsea", needs_study_type=True, **babelkw(
+        'name',
+        de=u"VSE Ausbildung",
+        fr=u"VSE Ausbildung",
+        en=u"VSE Ausbildung",
+    ))
     yield contractType("vseb", **babelkw('name',
                                          de=u"VSE Arbeitssuche",
                                          fr=u"VSE Arbeitssuche",
@@ -1175,11 +1167,13 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         obj = CLIENTS.pop()
         for j in range(2):
             yield uploads.Upload(
-                client=obj,
+                project=obj,
+                owner=obj,
                 user=hubert,
+                valid_until=settings.SITE.demo_date(360+i*10),
                 type=UPLOAD_TYPES.pop())
 
-    def person2client(f,l):
+    def person2client(f, l):
        obj = contacts.Person.objects.get(first_name=f, last_name=l)
        mti.insert_child(obj, pcsw.Client)
 

@@ -19,6 +19,8 @@ The `models` module for :mod:`lino_welfare.modlib.uploads`.
 
 from __future__ import unicode_literals
 
+import datetime
+
 from django.utils.translation import ugettext_lazy as _
 # from django.utils.translation import string_concat
 
@@ -28,6 +30,11 @@ from lino.modlib.uploads.models import *
 
 cal = dd.resolve_app('cal')
 contacts = dd.resolve_app('contacts')
+
+
+add = UploadAreas.add_item
+add('10', _("Career related uploads"), 'cv')
+add('20', _("Medical uploads"), 'medical')
 
 
 class UploadType(UploadType):
@@ -41,13 +48,16 @@ class UploadType(UploadType):
         _("Expiry warning (value)"),
         default=2)
 
+dd.update_field(
+    'uploads.UploadType', 'upload_area', default=UploadAreas.cv)
+
 
 class UploadTypes(UploadTypes):
 
     detail_layout = """
     id upload_area
     name
-    warn_expiry_value warn_expiry_unit
+    warn_expiry_value warn_expiry_unit wanted max_number
     # company contact_person contact_role
     uploads.UploadsByType
     """
@@ -60,17 +70,13 @@ class UploadTypes(UploadTypes):
     """
 
 
-class Upload(Upload, contacts.ContactRelated):
+class Upload(Upload, dd.ProjectRelated, contacts.ContactRelated):
     """Extends the library model by adding:
 
 - ContactRelated
-- client
-- valid_from and valid_until
+- ProjectRelated
+- `valid_from` and `valid_until`
     """
-    client = dd.ForeignKey(
-        'pcsw.Client',
-        null=True, blank=True)
-
     valid_from = models.DateField(
         blank=True, null=True,
         verbose_name=_("Valid from"))
@@ -81,22 +87,12 @@ class Upload(Upload, contacts.ContactRelated):
 
     remark = models.TextField(_("Remark"), blank=True)
 
-    # def on_create(self, ar):
-    #     super(Upload, self).on_create(ar)
-    #     if self.type:
-    #         for k in ('company', 'contact_person', 'contact_role'):
-    #             setattr(self, k, getattr(self.type, k))
-
     def save(self, *args, **kw):
-        if isinstance(self.owner, dd.modules.pcsw.Client):
-            self.client = self.owner
-        elif isinstance(self.owner, dd.ProjectRelated):
-            self.client = self.owner.project
         super(Upload, self).save(*args, **kw)
         self.update_reminders()
 
     def update_reminders(self):
-        """Overrides :meth:`lino.core.model.Model.update_reminders`.
+        """Overrides :meth:`dd.Model.update_reminders`.
 
         """
         ut = self.type
@@ -111,7 +107,7 @@ class Upload(Upload, contacts.ContactRelated):
 
     # def update_owned_instance(self, controllable):
     #     super(Upload, self).update_owned_instance(controllable)
-    #     if isinstance(controllable, pcsw.Client):
+    #     if isinstance(controllable, dd.modules.pcsw.Client):
     #         self.client = controllable
 
 
@@ -120,13 +116,15 @@ dd.update_field(
 dd.update_field(
     Upload, 'contact_person',
     verbose_name=_("Issued by (Person)"))
+dd.update_field(
+    Upload, 'upload_area', default=UploadAreas.cv)
 
 
 class UploadDetail(dd.FormLayout):
     "The Detail layout for Upload"
 
     main = """
-    user client id
+    user project id
     type description valid_from valid_until
     company contact_person contact_role
     file owner
@@ -142,15 +140,17 @@ class UploadDetail(dd.FormLayout):
 
 
 class Uploads(Uploads):
-    column_names = 'user client type file valid_from valid_until description *'
+    column_names = 'user project type file valid_from valid_until ' \
+                   'description *'
 
 
-class UploadsByClient(UploadsByController):
+class UploadsByClient(AreaUploads):
     "Uploads by Client"
-    # required = dd.required()
-    master_key = 'client'
-    column_names = "type valid_until description * "
+    master = 'pcsw.Client'
+    master_key = 'project'
+    column_names = "type valid_until description user file *"
     # auto_fit_column_widths = True
+    # debug_sql = "20140519"
 
     insert_layout = """
     type valid_until
@@ -161,8 +161,15 @@ class UploadsByClient(UploadsByController):
     @classmethod
     def create_instance(self, ar, **kw):
         obj = super(UploadsByClient, self).create_instance(ar, **kw)
-        obj.owner = obj.client
+        obj.owner = obj.project
         return obj
+
+    @classmethod
+    def format_row_in_slave_summary(self, ar, obj):
+        if obj.valid_until and obj.valid_until < datetime.date.today():
+            return None
+        return super(UploadsByClient, self).format_row_in_slave_summary(
+            ar, obj)
 
 
 class MedicalUploadsByClient(UploadsByClient):
@@ -171,10 +178,6 @@ class MedicalUploadsByClient(UploadsByClient):
 
 class CareerUploadsByClient(UploadsByClient):
     _upload_area = UploadAreas.cv
-
-
-class OtherUploadsByClient(UploadsByClient):
-    _upload_area = UploadAreas.other
 
 
 def site_setup(site):

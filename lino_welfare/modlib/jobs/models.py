@@ -195,10 +195,9 @@ class ContractTypes(dd.Table):
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     model = ContractType
-    column_names = 'name ref build_method template *'
+    column_names = 'name ref *'
     detail_layout = """
-    id name 
-    ref build_method template
+    id name ref
     ContractsByType
     """
 
@@ -368,15 +367,13 @@ class Contract(isip.ContractBase):
 
     def disabled_fields(self, ar):
         "As super, but add also job provider's company and type"
-        df = set()
+        df = super(Contract, self).disabled_fields(ar)
         if self.job_id is not None:
             if self.job.provider:
                 df.add('company')
             if self.job.contract_type:
                 df.add('type')
-        if not self.build_time:
-            return df
-        return df | self.PRINTABLE_FIELDS
+        return df
 
     def after_ui_save(self, ar):
         super(Contract, self).after_ui_save(ar)
@@ -445,21 +442,17 @@ class Contract(isip.ContractBase):
         super(Contract, self).full_clean(*args, **kw)
 
     @classmethod
-    def on_analyze(cls, lino):
-        """
-        Here's how to override the default verbose_name of a field.
-        """
-        Contract.user.verbose_name = _("responsible (IS)")
-        #~ resolve_field('jobs.Contract.user').verbose_name=_("responsible (DSBE)")
-        #~ lino.CONTRACT_PRINTABLE_FIELDS = dd.fields_list(cls,
-        cls.PRINTABLE_FIELDS = dd.fields_list(cls,
-                                              'client job company contact_person contact_role type '
-                                              'applies_from applies_until duration '
-                                              'language schedule regime hourly_rate refund_rate '
-                                              'reference_person responsibilities '
-                                              'user user_asd exam_policy '
-                                              'date_decided date_issued ')
-        super(Contract, cls).on_analyze(lino)
+    def get_certifiable_fields(cls):
+        return (
+            'client job company contact_person contact_role type '
+            'applies_from applies_until duration '
+            'language schedule regime hourly_rate refund_rate '
+            'reference_person responsibilities '
+            'user user_asd exam_policy '
+            'date_decided date_issued ')
+
+
+dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 
 
 class ContractDetail(dd.FormLayout):
@@ -468,15 +461,15 @@ class ContractDetail(dd.FormLayout):
     job type company contact_person contact_role
     applies_from duration applies_until exam_policy
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
-    reference_person build_time
+    reference_person certificate
     date_decided date_issued date_ended ending:20
     # signer1 signer2
-    responsibilities 
+    responsibilities
     """
 
     right = """
-    cal.EventsByController 
-    cal.TasksByController 
+    cal.EventsByController
+    cal.TasksByController
     """
 
     main = """
@@ -516,7 +509,7 @@ class ContractsByPerson(Contracts):
     column_names = 'job applies_from applies_until user type *'
     hidden_columns = """
     language contact_person contact_role 
-    build_time regime schedule hourly_rate
+    certificate regime schedule hourly_rate
     date_decided date_issued user_asd exam_policy ending date_ended 
     duration reference_person responsibilities remark
     """
@@ -837,9 +830,8 @@ class Job(SectorFunction):
                 job=self.name, provider=self.provider.name)
         return self.name
 
-    def disabled_fields(self, ar):
-        #~ if self.contract_set.count():
-        #~ if self.contract_set.filter(must_build=False).count():
+    def unused_disabled_fields(self, ar):
+        # disabled 20140519. must convert this to Certifiable
         if self.contract_set.filter(build_time__isnull=False).count():
             return set(('contract_type', 'provider'))
         return set()
