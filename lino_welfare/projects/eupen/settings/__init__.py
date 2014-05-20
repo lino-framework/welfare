@@ -19,7 +19,7 @@ The settings.py used for building both `/docs` and `/userdocs`
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from ..base import *
+from lino_welfare.projects.base import *
 
 class Site(Site):
 
