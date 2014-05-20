@@ -1066,8 +1066,8 @@ class Migrator(Migrator):
             if name is not None:
                 kw.update(bv2kw('name', name))
             kw.update(seqno=seqno)
-            kw.update(build_method=build_method)
-            kw.update(template=template)
+            #kw.update(build_method=build_method)
+            #kw.update(template=template)
             kw.update(attach_to_email=attach_to_email)
             kw.update(email_template=email_template)
             #~ kw.update(type=type)
