@@ -1584,6 +1584,34 @@ def doit(a, b):
         globals_dict.update(
             create_cal_guestrole=create_cal_guestrole)
 
+        isip_ContractType = resolve_model('isip.ContractType')
+        def create_isip_contracttype(id, name, build_method, template, ref, exam_policy_id, needs_study_type):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(build_method=build_method)
+            # kw.update(template=template)
+            kw.update(ref=ref)
+            kw.update(exam_policy_id=exam_policy_id)
+            kw.update(needs_study_type=needs_study_type)
+            return isip_ContractType(**kw)
+        globals_dict.update(
+            create_isip_contracttype=create_isip_contracttype)
+
+        jobs_ContractType = resolve_model('jobs.ContractType')
+        def create_jobs_contracttype(id, name, build_method, template, ref, exam_policy_id):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(build_method=build_method)
+            # kw.update(template=template)
+            kw.update(ref=ref)
+            kw.update(exam_policy_id=exam_policy_id)
+            return jobs_ContractType(**kw)
+        globals_dict.update(
+            create_jobs_contracttype=create_jobs_contracttype)
+
+
         return '1.1.12'
 
 
