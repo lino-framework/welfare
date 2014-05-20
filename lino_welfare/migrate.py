@@ -1262,7 +1262,7 @@ class Migrator(Migrator):
             kw.update(email_template=email_template)
             kw.update(important=important)
             kw.update(remark=remark)
-            kw.update(body_template=body_template)
+            # kw.update(body_template=body_template)
             # kw.update(is_attestation=is_attestation)
             return notes_NoteType(**kw)
         globals_dict.update(create_notes_notetype=create_notes_notetype)
