@@ -86,7 +86,6 @@ class Deciders(dd.Table):
     """
 
 
-#class AidType(dd.BabelNamed, dd.PrintableType):
 class AidType(dd.BabelNamed):
 
     # templates_group = 'aids/Aid'
@@ -127,7 +126,6 @@ class AidTypes(dd.Table):
     detail_layout = """
     id aid_regime name
     long_name
-    # build_method template
     aids.AidsByType
     """
 

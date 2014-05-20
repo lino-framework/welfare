@@ -1400,8 +1400,8 @@ def doit(a, b):
             kw = dict()
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name',name))
-            kw.update(build_method=build_method)
-            kw.update(template=template)
+            # kw.update(build_method=build_method)
+            # kw.update(template=template)
             # kw.update(remark=remark)
             return aids_AidType(**kw)
         globals_dict.update(create_aids_aidtype=create_aids_aidtype)
@@ -1428,8 +1428,8 @@ def doit(a, b):
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name',name))
             kw.update(seqno=seqno)
-            kw.update(build_method=build_method)
-            kw.update(template=template)
+            # kw.update(build_method=build_method)
+            # kw.update(template=template)
             kw.update(attach_to_email=attach_to_email)
             kw.update(email_template=email_template)
             kw.update(description=description)
@@ -1610,6 +1610,26 @@ def doit(a, b):
             return jobs_ContractType(**kw)
         globals_dict.update(
             create_jobs_contracttype=create_jobs_contracttype)
+
+        debts_Budget = resolve_model('debts.Budget')
+        def create_debts_budget(id, user_id, build_time, date, partner_id, print_todos, print_empty_rows, include_yearly_incomes, intro, conclusion, dist_amount):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(user_id=user_id)
+            # kw.update(build_time=build_time)
+            kw.update(date=date)
+            kw.update(partner_id=partner_id)
+            kw.update(print_todos=print_todos)
+            kw.update(print_empty_rows=print_empty_rows)
+            kw.update(include_yearly_incomes=include_yearly_incomes)
+            kw.update(intro=intro)
+            kw.update(conclusion=conclusion)
+            if dist_amount is not None: dist_amount = Decimal(dist_amount)
+            kw.update(dist_amount=dist_amount)
+            return debts_Budget(**kw)
+        globals_dict.update(
+            create_debts_budget=create_debts_budget)
+
 
 
         return '1.1.12'
