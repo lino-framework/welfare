@@ -1632,7 +1632,10 @@ def doit(a, b):
 
         isip_Contract = resolve_model('isip.Contract')
         jobs_Contract = resolve_model('jobs.Contract')
-        def create_isip_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, client_id, language, applies_from, applies_unti$
+        def create_isip_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, client_id, language, applies_from, 
+                applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, 
+                duties_company, duties_person, study_type_id):
+ 
             kw = dict()
             kw.update(id=id)
             kw.update(user_id=user_id)
@@ -1662,7 +1665,9 @@ def doit(a, b):
             kw.update(study_type_id=study_type_id)
             return isip_Contract(**kw)
 
-        def create_jobs_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, client_id, language, applies_from, applies_unti$
+        def create_jobs_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, 
+                contact_role_id, client_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, 
+                date_ended, type_id, job_id, duration, regime_id, schedule_id, hourly_rate, refund_rate, reference_person, responsibilities, remark):
             kw = dict()
             kw.update(id=id)
             kw.update(user_id=user_id)
