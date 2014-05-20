@@ -203,7 +203,7 @@ def customize_cal(sender, **kw):
     event_label
     # url_template username password
     #readonly is_appointment invite_client start_date
-    build_method template email_template attach_to_email
+    # build_method template email_template attach_to_email
     EventsByType
     """)
 

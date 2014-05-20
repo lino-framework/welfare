@@ -72,7 +72,6 @@ def excerpt_types():  # also used for migration to 1.1.11
                   en="Curriculum vitae"))
 
     yield attType(
-        build_method='appypdf',
         template='eid-content.odt',
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
@@ -83,7 +82,6 @@ def excerpt_types():  # also used for migration to 1.1.11
 
     yield attType(
         body_template='pac.body.html',
-        build_method='appypdf',
         template='Default.odt',
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
@@ -93,8 +91,9 @@ def excerpt_types():  # also used for migration to 1.1.11
                   en="to-do list"))
 
     yield attType(
-        build_method='appypdf',
         template='art60-7.odt',
+        primary=True,
+        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('jobs.Contract')),
         **babelkw('name',
@@ -103,14 +102,26 @@ def excerpt_types():  # also used for migration to 1.1.11
                   en="Art. 60§7 convention"))
 
     yield attType(
-        build_method='appypdf',
         template='vse.odt',
+        primary=True,
+        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('isip.Contract')),
         **babelkw('name',
                   de="VSE",
                   fr="Convention PIIS",
                   en="ISIP"))
+
+    yield attType(
+        template='Default.odt',
+        primary=True,
+        skip_dialog=True,
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('debts.Budget')),
+        **babelkw('name',
+                  de="Budget",
+                  fr="Budget",
+                  en="Budget"))
 
 
 def objects():

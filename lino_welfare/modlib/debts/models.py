@@ -50,6 +50,7 @@ from lino.modlib.accounts.utils import AccountTypes
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')
 pcsw = dd.resolve_app('pcsw')
+excerpts = dd.resolve_app('excerpts')
 
 
 from lino.mixins.printable import decfmt
@@ -149,8 +150,7 @@ def bulk_create_with_manual_ids(model, obj_list):
     return model.objects.bulk_create(obj_list)
 
 
-class Budget(dd.UserAuthored, dd.CachedPrintable, dd.Duplicable):
-
+class Budget(dd.UserAuthored, excerpts.Certifiable, dd.Duplicable):
     """
     Deserves more documentation.
     """
@@ -158,8 +158,6 @@ class Budget(dd.UserAuthored, dd.CachedPrintable, dd.Duplicable):
     class Meta:
         verbose_name = _("Budget")
         verbose_name_plural = _("Budgets")
-
-    #~ allow_cascaded_delete = True
 
     date = models.DateField(
         _("Date"), blank=True,
@@ -336,7 +334,7 @@ The total monthly amount available for debts distribution."""))
         by copying the master_budget.
         """
         #~ if self.closed:
-        if not self.partner or self.build_time:
+        if not self.partner or self.get_certificate():
             return
         if self.entry_set.all().count() > 0:
             return
@@ -426,22 +424,20 @@ The total monthly amount available for debts distribution."""))
 
 
 class BudgetDetail(dd.FormLayout):
-
     """
     Defines the Detail form of a :class:`Budget`.
-    
     
     """
     main = "general entries1 entries2 summary_tab preview"
     general = dd.Panel("""
-    date partner id user 
+    date partner id user
     intro
     ActorsByBudget
     """, label=_("General"))
 
     entries1 = dd.Panel("""
-    ExpensesByBudget 
-    IncomesByBudget 
+    ExpensesByBudget
+    IncomesByBudget
     """, label=_("Expenses & Income"))
 
     entries2 = dd.Panel("""
@@ -450,8 +446,8 @@ class BudgetDetail(dd.FormLayout):
     """, label=_("Liabilities & Assets"))
 
     tmp_tab = """
-    PrintExpensesByBudget 
-    PrintIncomesByBudget 
+    PrintExpensesByBudget
+    PrintIncomesByBudget
     """
 
     summary_tab = dd.Panel("""
@@ -465,8 +461,8 @@ class BudgetDetail(dd.FormLayout):
     BailiffDebtsByBudget
     """
     summary2 = """
-    conclusion:30x5 
-    dist_amount build_time
+    conclusion:30x5
+    dist_amount certificate
     include_yearly_incomes print_empty_rows print_todos
     """
 

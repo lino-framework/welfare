@@ -1,11 +1,11 @@
 {% block our_ref %}
 <p class="OurRef">
-{{tr(de="U. Zeichen",fr="Notre réf.")}}: {{ar.get_user().initials}}/{{this.project.get_primary_coach().initials}}/{{this.id}}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}//{{this.id}}
 </p>
 {% endblock %}
 
 {% block title %}
-<h1>{{this.attestation_type}}</h1>
+<h1>{{this.excerpt_type}}</h1>
 {% endblock %}
 
 {% block body %}
