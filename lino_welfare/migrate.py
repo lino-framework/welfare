@@ -1570,6 +1570,20 @@ def doit(a, b):
                 o.get_primary_address()
         self.after_load(after_load)
 
+        cal_GuestRole = resolve_model('cal.GuestRole')
+
+        def create_cal_guestrole(id, name, build_method, template, attach_to_email, email_template):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(build_method=build_method)
+            # kw.update(template=template)
+            kw.update(attach_to_email=attach_to_email)
+            kw.update(email_template=email_template)
+            return cal_GuestRole(**kw)
+        globals_dict.update(
+            create_cal_guestrole=create_cal_guestrole)
+
         return '1.1.12'
 
 
