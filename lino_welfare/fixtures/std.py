@@ -93,7 +93,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     yield attType(
         template='art60-7.odt',
         primary=True,
-        skip_dialog=True,
+        certifying=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('jobs.Contract')),
         **babelkw('name',
@@ -104,7 +104,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     yield attType(
         template='vse.odt',
         primary=True,
-        skip_dialog=True,
+        certifying=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('isip.Contract')),
         **babelkw('name',
@@ -115,7 +115,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     yield attType(
         template='Default.odt',
         primary=True,
-        skip_dialog=True,
+        certifying=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('debts.Budget')),
         **babelkw('name',

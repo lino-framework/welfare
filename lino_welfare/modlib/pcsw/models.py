@@ -346,7 +346,10 @@ class Client(contacts.Person,
             nationality
             ''')  # coach1
 
-    mails_by_project = dd.ShowSlaveTable('outbox.MailsByProject')
+    mails_by_project = dd.ShowSlaveTable(
+        'outbox.MailsByProject',
+        sort_index=100,
+        icon_name="transmit")
 
     # def get_detail_action(self, ar):
     #     p = ar.get_user().profile
@@ -401,8 +404,8 @@ class Client(contacts.Person,
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
-        elems += [
-            E.br(), ar.instance_action_button(self.create_excerpt)]
+        # elems += [
+        #     E.br(), ar.instance_action_button(self.create_excerpt)]
 
         elems = [E.div(*elems)]
         return elems
@@ -765,7 +768,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Person"))
 
     general2 = """
-    gender:10 title:20 id
+    gender:10 title:20 id:10
     first_name middle_name
     last_name
     birth_date age:10 national_id:15
