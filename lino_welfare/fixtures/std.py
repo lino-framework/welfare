@@ -42,7 +42,6 @@ def excerpt_types():  # also used for migration to 1.1.11
         body_template='aid_certificate.body.html',
         template='Default.odt',
         primary=True,
-        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('aids.Aid')),
         **babelkw('name',
@@ -53,7 +52,6 @@ def excerpt_types():  # also used for migration to 1.1.11
         body_template='presence_certificate.body.html',
         template='Default.odt',
         primary=True,
-        skip_dialog=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('cal.Guest')),
         **babelkw('name',
@@ -73,6 +71,7 @@ def excerpt_types():  # also used for migration to 1.1.11
 
     yield attType(
         template='eid-content.odt',
+        primary=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
         **babelkw('name',
@@ -94,6 +93,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         template='art60-7.odt',
         primary=True,
         certifying=True,
+        backward_compat=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('jobs.Contract')),
         **babelkw('name',
@@ -105,6 +105,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         template='vse.odt',
         primary=True,
         certifying=True,
+        backward_compat=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('isip.Contract')),
         **babelkw('name',
@@ -112,16 +113,18 @@ def excerpt_types():  # also used for migration to 1.1.11
                   fr="Convention PIIS",
                   en="ISIP"))
 
-    yield attType(
-        template='Default.odt',
-        primary=True,
-        certifying=True,
-        content_type=ContentType.objects.get_for_model(
-            dd.resolve_model('debts.Budget')),
-        **babelkw('name',
-                  de="Budget",
-                  fr="Budget",
-                  en="Budget"))
+    if dd.is_installed('debts'):
+        yield attType(
+            template='Default.odt',
+            primary=True,
+            certifying=True,
+            backward_compat=True,
+            content_type=ContentType.objects.get_for_model(
+                dd.resolve_model('debts.Budget')),
+            **babelkw('name',
+                      de="Budget",
+                      fr="Budget",
+                      en="Budget"))
 
 
 def objects():
@@ -423,3 +426,5 @@ The eventual noble condition of this person. Imported from TIM.
     yield I(t, 'language', u"""\
     Die Sprache, in der Dokumente ausgestellt werden sollen.
 """)
+
+

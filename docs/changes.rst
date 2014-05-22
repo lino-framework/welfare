@@ -1,7 +1,7 @@
 .. _welfare.changes: 
 
 ========================
-Changes in Lino-Welfare
+Changes in Lino Welfare
 ========================
 
 See the author's :ref:`Developer Blog <blog>`
@@ -9,113 +9,18 @@ to get detailed news.
 The final truth about what's going on is only 
 `The Source Code <http://code.google.com/p/lino/source/list>`_.
 
-.. _welfare_1_1_12:
-
 Version 1.1.12 (coming)
 =============================================
 
-Änderungen:
-
-- Ereignisse/Notizen haben jetzt ein neues Feld "Uhrzeit".
-
-- Der Quick-Link **eID-Karte einlesen** auf der Startseite ist wieder
-  da. Der ist gedacht für wenn man einen Klienten vor sich hat, von
-  dem man glaubt, dass er noch nicht in Lino drin ist und folglich neu
-  angelegt werden muss. Zuerst Karte einlegen, dann auf den Link
-  klicken. Lino schaut nach, ob dieser Klient schon existiert und
-  springt dann entweder auf den existierenden Datensatz, oder fragt
-  "Neuen Klienten anlegen?".
-  
-- **Dublettenkontrolle** : wenn ein (angeblich) neuer Kunde kommt,
-  soll man idealerweise einfach die eid-Karte lesen. Im Normalfall
-  haben wir die NR-Nummer, also gibt es keinen Zweifel.  Im
-  Zweifelsfall legt Lino einen Klienten (im Status "Neuantrag") an.
-  Bevor man einen Neuantrag zuweist, kann man jetzt die neue Tabelle
-  "Ähnliche Personen" (SimilarPersons) konsultieren, um eventuelle
-  Dubletten zu erkennen.
-
-  Wenn der Klient keine eId-Karte hat: in Lino suchen, ob es einen
-  ähnlichen und nicht gefunden werden kann, darf er ruhig zunächst mal
-  angelegt werden.
-
-
-- **Bankkonten** : statt einer festen Anzahl von vordefinierten
-  Feldern in TIM (Konto 1, Konto 2, System I, ...) hat Lino jetzt eine
-  Tabelle von Konten pro Partner.
-
-  Es gibt eine Liste von Kontenarten (Giro, Spar, Termin, Sonstige).
-
-  Pro Konto kann man ankreuzen, ob es "vom ÖSHZ verwaltet" ist oder
-  nicht.
-
-  Kontonummern im *alten nationalen* Format kann man in Lino *nicht*
-  mehr eingeben. Aber in den meisten Fällen (von belgischen Konten)
-  reicht es, wenn man die IBAN eingibt. Lino füllt dann die BIC
-  automatisch aus.
-
-- Das Benutzerprofil "ASD" war bisher nicht brauchbar (hatte fast
-  keine Zugriffsrechte).
-  Kurse / Sprachen jetzt auch für Benutzer vom ASD.
-
-
-- Angesichts vieler Erweiterungen in der Struktur war es nötig, die
-  **Detail-Ansicht der Kunden** neu zu strukturieren. Ich hoffe, dass
-  ihr euch schnell damit anfreundet.
-
-  Der Reiter "Status" wurde aufgeteilt in "Arbeit" und "Hilfen".
-  Letzterer zeigt jetzt nicht mehr *ein* Feld "Sozialhilfeart"
-  (aid_type), sondern eine Liste aller im Laufe der Zeit bewilligten
-  Hilfen.
-
-  Die Liste :menuselection:`Empfang --> Klienten` hatte bisher ein
-  eigenes Detail-Layout. Jetzt nicht mehr.
-
-- Man kann jetzt **mehrere Adressen** pro Klient erfassen. Pro Adresse
-  wird erfasst:
-
-  - Adressart (Referenzadresse, Reelle, Offizieller Wohnsitz, Sonstige)
-  - Button "zur Hauptadresse machen". Wenn man diesen Button ankreuzt,
-    wird er automatisch bei der eventuellen vorigigen Hauptadresse
-    abgeschaltet, und die Adressfelder der Partnerstammdaten werden
-    aktualisiert.
-
-  Die vom Personalausweis eingelesene Adresse steht als "Offizielle"
-  Adresse in dieser Liste und kann nicht bearbeitet werden (aber
-  braucht nicht unbedingt die Primäradresse zu sein).
-
-- Schuldnerberatung : In der Kolonne :guilabel:`Gerichtsvollzieher`
-  eines Budgets (:ddref:`debts.Entry`) können jetzt nicht mehr nur ein
-  Gerichtsvollzieher, sondern auch ein **Inkassounternehmen** zugewiesen
-  werden.
-
-- Die Partnernummer in Klammern (und ggf. ein ``*`` für veraltete
-  Partner), die bisher hinter dem Namen eines Klienten stand, steht
-  jetzt generell hinter dem Namen von *allen* Partnern (also auch
-  Haushalte, Organisationen, Personen,...)
-
-- Bescheinigungen (heißen jetzt "Ausdrucke" oder "Auszüge"):
-
-  - Eine Bescheinigung ist ein druckbares Dokument, das eine bestimmte
-    Information bescheinigt.
-
-    Zum Beispiel eine Anwesenheitsbescheinigung wird erstellt, indem
-    man im Kalender auf eine Anwesenheit geht und dort "Bescheinigung
-    ausstellen" klickt. Die Zeit der Anwesenheit wird nicht mehr
-    manuell erfasst, weil Lino sie ja schon kennt.
-
-    Oder eine Einkommensbescheinigung kann nur erstellt werden, wenn
-    ein entsprechender Eintrag in der Liste der *Hilfen* des Klienten
-    erstellt wird. Dieser Eintrag enthält auch alle Informationen der
-    Bescheinigung, die in TIM jedesmal manuell ins Dokument
-    eingetragen wurden.
-
-  - Lebensläufe und "Inhalt-eID" sind jetzt keine Ereignis/Notiz mehr,
-    sondern ebenfalls Bescheinigungen. Bei der Migration wurden
-    bestehende Lebenläufe konvertiert.
+- User documentation in German see :doc:`releases/1.1.12`
 
 - Manuell nach Migration:
 
   - `migrate_from_1_1_10.py` ausführen
+
+  - ExamPolicies: Wochentage ankreuzen.
+
+  - Drei UploadTypes (Führerschein, als "wanted" markieren.
 
   - SiteConfig --> Constants : Neue Felder ausfüllen
 
@@ -128,7 +33,6 @@ Version 1.1.12 (coming)
     angekreuzt.
 
   - Alle bestehenden Inkassounternehmen als solche markieren
-
 
 .. _welfare_1_1_11:
 

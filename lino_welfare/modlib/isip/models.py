@@ -656,7 +656,7 @@ class ContractDetail(dd.FormLayout):
     study_type  company contact_person contact_role
     applies_from applies_until exam_policy language:8
     
-    date_decided date_issued certificate date_ended ending:20
+    date_decided date_issued printed date_ended ending:20
     # signer1 signer2
     cal.TasksByController cal.EventsByController
     """, label=_("General"))

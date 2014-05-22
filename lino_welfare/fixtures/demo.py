@@ -37,6 +37,7 @@ from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
 from lino.modlib.cal.utils import DurationUnits
+from lino.modlib.cal.utils import WORKDAYS
 
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
@@ -414,8 +415,12 @@ def objects():
                              en="Private",
                              ))
 
+    kw = dict()
+    for wd in WORKDAYS:
+        kw[wd.name] = True
     exam_policy = Instantiator(
-        'isip.ExamPolicy', 'every', every_unit=DurationUnits.months).build
+        'isip.ExamPolicy', 'every',
+        every_unit=DurationUnits.months, **kw).build
     yield exam_policy(
         1, event_type=client_calendar, start_time="9:00", **babelkw(
             'name', en='every month', de=u'monatlich', fr=u"mensuel"))
@@ -428,9 +433,10 @@ def objects():
             fr=u"tous les 3 mois"))
 
     exam_policy = Instantiator(
-        'isip.ExamPolicy', 'every', every_unit=DurationUnits.weeks).build
+        'isip.ExamPolicy', 'every',
+        every_unit=DurationUnits.weeks, **kw).build
     yield exam_policy(
-        2, 
+        2,
         event_type=client_calendar, start_time="9:00", **babelkw(
             'name', en='every 2 weeks', de=u'zweiwöchentlich',
             fr=u"hebdomadaire"))
@@ -438,16 +444,7 @@ def objects():
     exam_policy = Instantiator('isip.ExamPolicy').build
     yield exam_policy(**babelkw('name', en='other', de="andere", fr="autre"))
 
-    #~ yield etype(**babelkw('name',
-          #~ de=u"Erstgespräch",
-          #~ fr=u"Première rencontre",
-          #~ en=u"First meeting",
-          #~ ))
-    #~ yield etype(**babelkw('name',
-          #~ de=u"Auswertungsgespräch",
-          #~ fr=u"Évaluation",
-          #~ en=u"Evaluation",
-          #~ ))
+
     sector = Instantiator(jobs.Sector).build
     for ln in SECTORS_LIST.splitlines():
         if ln:

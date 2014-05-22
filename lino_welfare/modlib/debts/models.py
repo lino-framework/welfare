@@ -334,7 +334,7 @@ The total monthly amount available for debts distribution."""))
         by copying the master_budget.
         """
         #~ if self.closed:
-        if not self.partner or self.get_certificate():
+        if not self.partner or self.printed is not None:
             return
         if self.entry_set.all().count() > 0:
             return
@@ -462,7 +462,7 @@ class BudgetDetail(dd.FormLayout):
     """
     summary2 = """
     conclusion:30x5
-    dist_amount certificate
+    dist_amount printed
     include_yearly_incomes print_empty_rows print_todos
     """
 

@@ -33,7 +33,7 @@ contacts = dd.resolve_app('contacts')
 
 
 add = UploadAreas.add_item
-add('10', _("Career related uploads"), 'cv')
+add('10', _("Job search uploads"), 'cv')
 add('20', _("Medical uploads"), 'medical')
 
 

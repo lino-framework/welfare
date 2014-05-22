@@ -37,6 +37,7 @@ from lino import dd
 from lino.modlib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
 from lino.modlib.iban.utils import belgian_nban_to_iban_bic
+from lino.modlib.cal.utils import WORKDAYS
 
 from lino_welfare.fixtures.std import excerpt_types
 from lino_welfare.modlib.aids.fixtures.std import objects as aids_objects
@@ -1196,13 +1197,15 @@ class Migrator(Migrator):
             kw.update(end_time=end_time)
             kw.update(every_unit=every_unit)
             kw.update(every=every)
-            kw.update(monday=monday)
-            kw.update(tuesday=tuesday)
-            kw.update(wednesday=wednesday)
-            kw.update(thursday=thursday)
-            kw.update(friday=friday)
-            kw.update(saturday=saturday)
-            kw.update(sunday=sunday)
+            # kw.update(monday=monday)
+            # kw.update(tuesday=tuesday)
+            # kw.update(wednesday=wednesday)
+            # kw.update(thursday=thursday)
+            # kw.update(friday=friday)
+            for wd in WORKDAYS:
+                kw[wd.name] = True
+            # kw.update(saturday=saturday)
+            # kw.update(sunday=sunday)
             kw.update(max_events=max_events)
             kw.update(event_type_id=calendar_id)
             #~ kw.update(calendar_id=calendar_id)
@@ -1630,6 +1633,11 @@ def doit(a, b):
         globals_dict.update(
             create_debts_budget=create_debts_budget)
 
+        Excerpt = resolve_model("excerpts.Excerpt")
+        ExcerptType = resolve_model("excerpts.ExcerptType")
+        isip_et = ExcerptType.objects.get(template='vse.odt')
+        jobs_et = ExcerptType.objects.get(template='art60-7.odt')
+
         isip_Contract = resolve_model('isip.Contract')
         jobs_Contract = resolve_model('jobs.Contract')
         def create_isip_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, client_id, language, applies_from, 
@@ -1663,7 +1671,15 @@ def doit(a, b):
             kw.update(duties_company=duties_company)
             kw.update(duties_person=duties_person)
             kw.update(study_type_id=study_type_id)
-            return isip_Contract(**kw)
+            e = Excerpt(
+                build_time=build_time,
+                user_id=user_id,
+                owner_type=new_content_type_id(isip_Contract),
+                owner_id=id,
+                excerpt_type=isip_et)
+            yield e
+            kw.update(printed_by=e)
+            yield isip_Contract(**kw)
 
         def create_jobs_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, 
                 contact_role_id, client_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, 
@@ -1698,15 +1714,20 @@ def doit(a, b):
             kw.update(reference_person=reference_person)
             kw.update(responsibilities=responsibilities)
             kw.update(remark=remark)
-            return jobs_Contract(**kw)
+            e = Excerpt(
+                build_time=build_time,
+                user_id=user_id,
+                owner_type=new_content_type_id(jobs_Contract),
+                owner_id=id,
+                excerpt_type=jobs_et)
+            yield e
+            kw.update(printed_by=e)
+            yield jobs_Contract(**kw)
 
         globals_dict.update(
             create_isip_contract=create_isip_contract)
         globals_dict.update(
             create_jobs_contract=create_jobs_contract)
-
-
-
 
         return '1.1.12'
 

@@ -461,7 +461,7 @@ class ContractDetail(dd.FormLayout):
     job type company contact_person contact_role
     applies_from duration applies_until exam_policy
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
-    reference_person certificate
+    reference_person printed
     date_decided date_issued date_ended ending:20
     # signer1 signer2
     responsibilities
@@ -508,9 +508,9 @@ class ContractsByPerson(Contracts):
     auto_fit_column_widths = True
     column_names = 'job applies_from applies_until user type *'
     hidden_columns = """
-    language contact_person contact_role 
-    certificate regime schedule hourly_rate
-    date_decided date_issued user_asd exam_policy ending date_ended 
+    language contact_person contact_role
+    printed regime schedule hourly_rate
+    date_decided date_issued user_asd exam_policy ending date_ended
     duration reference_person responsibilities remark
     """
 

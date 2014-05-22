@@ -846,7 +846,7 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    excerpts.ExcerptsByProject:30 notes.NotesByProject:30
+    excerpts.ExcerptsByProject:20 notes.NotesByProject:40
     # lino.ChangesByMaster
     """, label=_("History"))
 
