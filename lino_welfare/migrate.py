@@ -1286,12 +1286,19 @@ class Migrator(Migrator):
         Excerpt = resolve_model("excerpts.Excerpt")
         ExcerptType = resolve_model("excerpts.ExcerptType")
 
+        def before_load(loader):
+            loader.save(excerpt_types())
+            loader.save(aids_objects())
+
+        self.before_load(before_load)
+
         def after_load(loader):
             "Write migrate_from_1_1_10.py script."
             fname = os.path.join(
                 settings.SITE.project_dir, 'migrate_from_1_1_10.py')
             fd = file(fname, 'w')
-            fd.write("""#!/usr/bin/env python
+            fd.write("""\
+#!/usr/bin/env python
 import os
 import shutil
 
@@ -1301,9 +1308,6 @@ def doit(a, b):
         # os.rename(a, b)
         # os.remove(a)
 """)
-            loader.save(excerpt_types())
-            loader.save(aids_objects())
-
             for u in users_User.objects.exclude(profile=''):
                 cal = cal_Calendar(name=u.username)
                 loader.save(cal)
