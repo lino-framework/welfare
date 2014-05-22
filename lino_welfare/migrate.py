@@ -1287,6 +1287,7 @@ class Migrator(Migrator):
         ExcerptType = resolve_model("excerpts.ExcerptType")
 
         def before_load(loader):
+            "Load std fixtures from excerpts and aids."
             loader.save(excerpt_types())
             loader.save(aids_objects())
 
@@ -1641,7 +1642,9 @@ def doit(a, b):
         ExcerptType = resolve_model("excerpts.ExcerptType")
 
         isip_Contract = resolve_model('isip.Contract')
-        jobs_Contract = resolve_model('jobs.Contract')
+        isip_et = ExcerptType.objects.get(template='vse.odt')
+        isip_ot = ContentType.objects.get_for_model(isip_Contract)
+
         def create_isip_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, client_id, language, applies_from, 
                 applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, 
                 duties_company, duties_person, study_type_id):
@@ -1673,16 +1676,22 @@ def doit(a, b):
             kw.update(duties_company=duties_company)
             kw.update(duties_person=duties_person)
             kw.update(study_type_id=study_type_id)
-            isip_et = ExcerptType.objects.get(template='vse.odt')
             e = Excerpt(
                 build_time=build_time,
                 user_id=user_id,
-                owner_type=new_content_type_id(isip_Contract),
+                owner_type=isip_ot,
                 owner_id=id,
                 excerpt_type=isip_et)
             yield e
             kw.update(printed_by=e)
             yield isip_Contract(**kw)
+
+        globals_dict.update(
+            create_isip_contract=create_isip_contract)
+
+        jobs_Contract = resolve_model('jobs.Contract')
+        jobs_et = ExcerptType.objects.get(template='art60-7.odt')
+        jobs_ot = ContentType.objects.get_for_model(jobs_Contract)
 
         def create_jobs_contract(id, user_id, build_time, signer1_id, signer2_id, company_id, contact_person_id, 
                 contact_role_id, client_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, 
@@ -1717,19 +1726,16 @@ def doit(a, b):
             kw.update(reference_person=reference_person)
             kw.update(responsibilities=responsibilities)
             kw.update(remark=remark)
-            jobs_et = ExcerptType.objects.get(template='art60-7.odt')
             e = Excerpt(
                 build_time=build_time,
                 user_id=user_id,
-                owner_type=new_content_type_id(jobs_Contract),
+                owner_type=jobs_ot,
                 owner_id=id,
                 excerpt_type=jobs_et)
             yield e
             kw.update(printed_by=e)
             yield jobs_Contract(**kw)
 
-        globals_dict.update(
-            create_isip_contract=create_isip_contract)
         globals_dict.update(
             create_jobs_contract=create_jobs_contract)
 
