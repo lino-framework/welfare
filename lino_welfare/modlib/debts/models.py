@@ -246,15 +246,6 @@ The total monthly amount available for debts distribution."""))
     def actor3(self):
         return self.get_actor(2)
 
-    #~ @property
-    #~ def actor2(self):
-        #~ qs = self.actor_set.all()
-        #~ if qs.count() > 1:
-            #~ return qs[1]
-    #~ def get_budget_pks(self):
-        #~ if not hasattr(self,'_budget_pks'):
-            #~ self._budget_pks = tuple([self.pk] + [a.sub_budget.pk for a in self.actors.filter(sub_budget__isnull=False)])
-        #~ return self._budget_pks
     def account_groups(self, types=None, **kw):
         """
         Yield all AccountGroups which have at least one Entry in this Budget.
@@ -284,16 +275,6 @@ The total monthly amount available for debts distribution."""))
         #~ print 20120606, sar
         return ar
 
-    #~ def msum(self,fldname,types=None,**kw):
-        # ~ # kw.update(account__yearly=False)
-        #~ kw.update(periods=1)
-        #~ return self.sum(fldname,types,**kw)
-
-    #~ def ysum(self,fldname,types=None,**kw):
-        # ~ # kw.update(account__yearly=True)
-        #~ kw.update(periods=12)
-        #~ return self.sum(fldname,types,**kw)
-
     def sum(self, fldname, types=None, exclude=None, *args, **kw):
         """
         Compute and return the sum of `fldname` (either ``amount`` or `monthly_rate`
@@ -302,10 +283,7 @@ The total monthly amount available for debts distribution."""))
         if types is not None:
             kw.update(account_type__in=[AccountTypes.items_dict[t]
                       for t in types])
-        #~ d = Entry.objects.filter(budget=self,**kw).aggregate(models.Sum(*fldnames))
-        sa = [models.Sum(n) for n in fldnames]
         rv = decimal.Decimal(0)
-        #~ for e in Entry.objects.filter(budget=self,**kw).annotate(*sa):
         kw.update(budget=self)
         qs = Entry.objects.filter(*args, **kw)
         if exclude is not None:
@@ -316,7 +294,6 @@ The total monthly amount available for debts distribution."""))
                 a = getattr(e, n + '__sum', None)
                 if a is not None:
                     amount += a
-            #~ if e.periods is not None:
             if e.periods != 1:
                 amount = amount / decimal.Decimal(e.periods)
             rv += amount
@@ -330,11 +307,11 @@ The total monthly amount available for debts distribution."""))
 
     def fill_defaults(self, ar=None):
         """
-        If the budget is empty, fill it with default entries 
+        If the budget is empty, fill it with default entries
         by copying the master_budget.
         """
         #~ if self.closed:
-        if not self.partner or self.printed is not None:
+        if not self.partner or self.printed_by is not None:
             return
         if self.entry_set.all().count() > 0:
             return

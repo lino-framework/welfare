@@ -26,8 +26,8 @@ Check whether Lino returns the right default template for excerpts
 (see :blogref:`20140208`):
 
 >>> from lino.utils.config import find_config_file
->>> ffn = find_config_file('Default.odt','excerpts/Excerpt')
->>> ffn.endswith('lino_welfare/config/excerpts/Excerpt/Default.odt')
+>>> ffn = find_config_file('Default.odt','excerpts')
+>>> ffn.endswith('lino_welfare/config/excerpts/Default.odt')
 True
 
 

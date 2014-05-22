@@ -102,7 +102,7 @@ javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 203 })
 
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Paul istVater von Dennis (12 Jahre)Vater von Clara (14 Jahre)Vater von Philippe (16 Jahre)Vater von Peter (26 Jahre)Ehemann von Petra ZWEITH (45 Jahre)Sohn von Gaby FROGEMUTH (79 Jahre)Sohn von Hubert (80 Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn Ehemann Verwandter Other 
+Paul istVater von Dennis (12 Jahre)Vater von Clara (14 Jahre)Vater von Philippe (16 Jahre)Vater von Peter (26 Jahre)Ehemann von Petra ZWEITH (45 Jahre)Sohn von Gaby FROGEMUTH (79 Jahre)Sohn von Hubert (80 Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn Ehemann Verwandter Sonstiger
 
 
 
@@ -155,11 +155,11 @@ Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4
 
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Lebenslauf", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads Lebenslauf von BRECHT Bernd (176)" }, "base_params": { "mt": 58, "mk": 176, "type_id": 1 } })
+javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Arbeitssuche", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads Arbeitssuche von BRECHT Bernd (176)" }, "base_params": { "mt": 58, "mk": 176, "type_id": 1 } })
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 2, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Lebenslauf", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Aufenthaltserlaubnis", "id": null }, "title": "Uploads Lebenslauf von BRECHT Bernd (176)" }, "base_params": { "mt": 58, "mk": 176, "type_id": 2 } })
+javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 2, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Arbeitssuche", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Aufenthaltserlaubnis", "id": null }, "title": "Uploads Arbeitssuche von BRECHT Bernd (176)" }, "base_params": { "mt": 58, "mk": 176, "type_id": 2 } })
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS

@@ -178,11 +178,11 @@ Printing a Budget
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj.clear_cache()
 >>> with translation.override('en'):
-...     print(ses.run(obj.do_print)) 
+...     print(ses.run(obj.create_excerpt)) 
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 {'success': True, 
 'open_url': u'.../debts.Budget-3.odt', 
-'message': u'Budget 3 for Dubois-\xc4rgerlich (183) printable has been built.', 
+'message': u'debts.Budget-3.odt has been built.', 
 'refresh': True}
 
 Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.

@@ -36,7 +36,7 @@ ContractEnding = dd.resolve_model('isip.ContractEnding')
 def excerpt_types():  # also used for migration to 1.1.11
 
     attType = Instantiator('excerpts.ExcerptType',
-                           build_method='appypdf',
+                           # build_method='appypdf',
                            email_template='Default.eml.html').build
     yield attType(
         body_template='aid_certificate.body.html',
@@ -135,10 +135,10 @@ def objects():
 
     yield noteType("Beschluss")
     yield noteType(
-        "Konvention", 
+        "Konvention",
         remark="Einmaliges Dokument in Verbindung mit Arbeitsvertrag")
     yield noteType(
-        "Notiz", 
+        "Notiz",
         remark="Kontaktversuch, Gesprächsbericht, Telefonnotiz")
     yield noteType("Vorladung", remark="Einladung zu einem persönlichen Gespräch")
     # (--> Datum Eintragung DSBE)

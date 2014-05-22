@@ -1677,14 +1677,15 @@ def doit(a, b):
             kw.update(duties_company=duties_company)
             kw.update(duties_person=duties_person)
             kw.update(study_type_id=study_type_id)
-            e = Excerpt(
-                build_time=build_time,
-                user_id=user_id,
-                owner_type=isip_ot,
-                owner_id=id,
-                excerpt_type=isip_et)
-            yield e
-            kw.update(printed_by=e)
+            if build_time:
+                e = Excerpt(
+                    build_time=build_time,
+                    user_id=user_id,
+                    owner_type=isip_ot,
+                    owner_id=id,
+                    excerpt_type=isip_et)
+                yield e
+                kw.update(printed_by=e)
             yield isip_Contract(**kw)
 
         globals_dict.update(
@@ -1727,14 +1728,15 @@ def doit(a, b):
             kw.update(reference_person=reference_person)
             kw.update(responsibilities=responsibilities)
             kw.update(remark=remark)
-            e = Excerpt(
-                build_time=build_time,
-                user_id=user_id,
-                owner_type=jobs_ot,
-                owner_id=id,
-                excerpt_type=jobs_et)
-            yield e
-            kw.update(printed_by=e)
+            if build_time:
+                e = Excerpt(
+                    build_time=build_time,
+                    user_id=user_id,
+                    owner_type=jobs_ot,
+                    owner_id=id,
+                    excerpt_type=jobs_et)
+                yield e
+                kw.update(printed_by=e)
             yield jobs_Contract(**kw)
 
         globals_dict.update(
