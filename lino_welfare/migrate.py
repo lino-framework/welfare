@@ -1640,6 +1640,7 @@ def doit(a, b):
 
         Excerpt = resolve_model("excerpts.Excerpt")
         ExcerptType = resolve_model("excerpts.ExcerptType")
+        ContentType = resolve_model("contenttypes.ContentType")
 
         isip_Contract = resolve_model('isip.Contract')
         isip_et = ExcerptType.objects.get(template='vse.odt')
