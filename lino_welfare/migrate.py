@@ -1635,8 +1635,6 @@ def doit(a, b):
 
         Excerpt = resolve_model("excerpts.Excerpt")
         ExcerptType = resolve_model("excerpts.ExcerptType")
-        isip_et = ExcerptType.objects.get(template='vse.odt')
-        jobs_et = ExcerptType.objects.get(template='art60-7.odt')
 
         isip_Contract = resolve_model('isip.Contract')
         jobs_Contract = resolve_model('jobs.Contract')
@@ -1671,6 +1669,7 @@ def doit(a, b):
             kw.update(duties_company=duties_company)
             kw.update(duties_person=duties_person)
             kw.update(study_type_id=study_type_id)
+            isip_et = ExcerptType.objects.get(template='vse.odt')
             e = Excerpt(
                 build_time=build_time,
                 user_id=user_id,
@@ -1714,6 +1713,7 @@ def doit(a, b):
             kw.update(reference_person=reference_person)
             kw.update(responsibilities=responsibilities)
             kw.update(remark=remark)
+            jobs_et = ExcerptType.objects.get(template='art60-7.odt')
             e = Excerpt(
                 build_time=build_time,
                 user_id=user_id,
