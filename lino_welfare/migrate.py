@@ -1320,9 +1320,10 @@ def doit(a, b):
 
             for note in Note.objects.filter(type=cvnt):
                 kw = dict()
-                owner_type_id = new_content_type_id(note.owner_type_id)
-                kw.update(owner_type_id=owner_type_id)
-                kw.update(owner_id=note.owner_id)
+                # owner_type_id = new_content_type_id(note.owner_type_id)
+                kw.update(owner=note.owner)
+                # kw.update(owner_type_id=note.owner_type_id)
+                # kw.update(owner_id=note.owner_id)
                 kw.update(user_id=note.user_id)
                 kw.update(project_id=note.project_id)
                 kw.update(build_time=note.build_time)
@@ -1337,6 +1338,7 @@ def doit(a, b):
                 # kw.update(body=body)
                 kw.update(language=note.language)
                 att = Excerpt(**kw)
+                att.full_clean()
                 att.save()
 
                 if note.build_time:
