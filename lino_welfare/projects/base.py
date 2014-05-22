@@ -16,7 +16,7 @@
 Default settings of a :ref:`welfare` site.
 
 """
-# import os
+import datetime
 
 from lino.projects.std.settings import *
 from lino_welfare import SETUP_INFO
@@ -29,6 +29,10 @@ class Site(Site):
     """
     version = SETUP_INFO['version']  # lino_welfare.__version__
     url = SETUP_INFO['url']  # "http://code.google.com/p/lino-welfare/"
+
+    the_demo_date = datetime.date(2014, 05, 22)
+    # test cases which rely on this date:
+    # docs/tested/jobs.rst
 
     # use_java = False  # temporarily
 

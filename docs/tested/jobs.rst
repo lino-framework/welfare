@@ -12,7 +12,7 @@ Jobs
     >>> # -*- coding: UTF-8 -*-
     >>> from __future__ import print_function
     >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.settings.test'
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.projects.docs.settings.test'
     >>> from django.utils import translation
     >>> from lino.runtime import *
     >>> from django.test import Client
@@ -73,7 +73,8 @@ This table shows the Candidatures which satisfy a given Job offer.
 Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
->>> ses.show(jobs.CandidaturesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(jobs.CandidaturesByOffer.request(obj))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ============== ========================== ======== ====================
  Anfragedatum   Klient                     Stelle   Kandidatur-Zustand
 -------------- -------------------------- -------- --------------------
@@ -83,3 +84,17 @@ Example:
 <BLANKLINE>
 
 
+>>> obj = jobs.Contract.objects.get(pk=12)
+>>> ses.show(cal.EventsByController.request(obj))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+========================== ================== ===========================================
+ Wann                       Kurzbeschreibung   Arbeitsablauf
+-------------------------- ------------------ -------------------------------------------
+ 2014 Juni 13 (Fr.) 09:00   Evaluation 2       **Vorgeschlagen** → [Notified] [Annehmen]
+ 2014 Sep. 13 (Sa.) 09:00   Evaluation 3       **Vorgeschlagen** → [Notified] [Annehmen]
+ 2014 Dez. 13 (Sa.) 09:00   Evaluation 4       **Vorgeschlagen** → [Notified] [Annehmen]
+ 2015 Mär. 13 (Fr.) 09:00   Evaluation 5       **Vorgeschlagen** → [Notified] [Annehmen]
+ 2015 Juni 13 (Sa.) 09:00   Evaluation 6       **Vorgeschlagen** → [Notified] [Annehmen]
+ 2015 Sep. 13 (So.) 09:00   Evaluation 7       **Vorgeschlagen** → [Notified] [Annehmen]
+========================== ================== ===========================================
+<BLANKLINE>
