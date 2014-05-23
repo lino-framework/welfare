@@ -48,6 +48,7 @@ extensible = dd.resolve_app('extensible')
 
 
 class CreateClientVisit(dd.Action):
+    show_in_bbar = True
     sort_index = 91
     icon_name = 'hourglass'
     label = _("Create visit")
@@ -62,10 +63,10 @@ class CreateClientVisit(dd.Action):
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
-        event = create_prompt_event(obj, obj,
-                                    ar.action_param_values.user,
-                                    ar.action_param_values.summary,
-                                    settings.SITE.site_config.client_guestrole)
+        create_prompt_event(obj, obj,
+                            ar.action_param_values.user,
+                            ar.action_param_values.summary,
+                            settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
         #~ kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))

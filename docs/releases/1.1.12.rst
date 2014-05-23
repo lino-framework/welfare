@@ -92,6 +92,14 @@ nicht mehr unbedingt etwas miteinander zu tun.
   erst auf "Haushalt erstellen" klicken, denn Lino füllt einen neuen
   Haushalt automatisch aufrund der Beziehungen aus.
 
+
+Um eine Beziehung zu erstellen, klicke auf den betreffenden Link
+"Beziehung erstellen als (...)" im Panel Beziehungen.
+
+- Tipp: Um Beziehungen zu Leuten zu erfassen, die kein Klient sind. Im
+  Dialogfenster die entsprechende Combobox leer lassen und auf die
+  Lupe neben dem Eingabefeld klicken.
+
 Im Panel "ZDSS" des Reiters "Beziehungen" sieht man einen Auszug der
 letzten (mit Lino gemachten) Tx25. Das ist gedacht um zu vergleichen,
 ob die Situation mit der offiziellen Version übereinstimmt.
