@@ -1285,6 +1285,8 @@ class Migrator(Migrator):
         NoteType = resolve_model("notes.NoteType")
         Excerpt = resolve_model("excerpts.Excerpt")
         ExcerptType = resolve_model("excerpts.ExcerptType")
+        ContentType = resolve_model("contenttypes.ContentType")
+        pcsw_Client = resolve_model("pcsw.Client")
 
         def before_load(loader):
             "Load std fixtures from excerpts and aids."
@@ -1318,11 +1320,13 @@ def doit(a, b):
             cvnt = NoteType.objects.get(template='cv.odt')
             cvat = ExcerptType.objects.get(template='cv.odt')
 
+            ct = ContentType.get_for_model(pcsw_Client)
             for note in Note.objects.filter(type=cvnt):
                 kw = dict()
                 # owner_type_id = new_content_type_id(note.owner_type_id)
-                kw.update(owner=note.owner)
-                # kw.update(owner_type_id=note.owner_type_id)
+                if note.project_id is not None:
+                    kw.update(owner_id=note.project_id)
+                    kw.update(owner_type=ct)
                 # kw.update(owner_id=note.owner_id)
                 kw.update(user_id=note.user_id)
                 kw.update(project_id=note.project_id)
