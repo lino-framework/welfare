@@ -349,10 +349,14 @@ class ContractBase(
                     self.user_asd = None
                 else:
                     self.user_asd = user_asd
-
+                
     def on_create(self, ar):
         super(ContractBase, self).on_create(ar)
         self.client_changed(ar)
+
+    def after_ui_save(self, ar):
+        super(ContractBase, self).after_ui_save(ar)
+        self.update_reminders(ar)
 
     def full_clean(self, *args, **kw):
         r = self.active_period()

@@ -85,6 +85,16 @@ Example:
 
 
 >>> obj = jobs.Contract.objects.get(pk=12)
+>>> obj.active_period()
+(datetime.date(2013, 12, 13), datetime.date(2015, 12, 12))
+>>> obj.update_cal_rset()
+ExamPolicy #3 (u'alle 3 Monate')
+>>> settings.SITE.verbose_client_info_message = True
+>>> wanted = obj.get_wanted_auto_events(ses)
+>>> [i.start_date.strftime('%Y-%m-%d') for i in wanted.values()]
+['2014-06-15', '2014-09-15', '2014-12-15', '2015-03-15', '2015-06-15', '2015-09-15']
+>>> print(ses.response['info_message'])
+Reached upper date limit 2015-12-12
 >>> ses.show(cal.EventsByController.request(obj))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ========================== ================== ===========================================

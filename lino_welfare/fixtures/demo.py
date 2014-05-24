@@ -1103,8 +1103,10 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             ct = ISIP_CONTRACT_TYPES.pop()
             if ct.needs_study_type:
                 kw.update(study_type=STUDY_TYPES.pop())
-            ctr = isip.Contract(type=ct,
-                                applies_until=af + datetime.timedelta(days=ISIP_DURATIONS.pop()), **kw)
+            ctr = isip.Contract(
+                type=ct,
+                applies_until=af + datetime.timedelta(
+                    days=ISIP_DURATIONS.pop()), **kw)
         if af is not None and af > settings.SITE.demo_date(-14):
             if i % 5:
                 ctr.ending = PREMATURE_CONTRACT_ENDINGS.pop()
@@ -1113,6 +1115,9 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
                     ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
         yield ctr
+        from lino.core.requests import BaseRequest
+        ar = BaseRequest(user=coaching.user)
+        ctr.update_reminders(ar)
 
     """
     The reception desk opens at 8am. 20 visitors have checked in, half of which 
