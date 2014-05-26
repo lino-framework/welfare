@@ -1115,8 +1115,9 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
                     ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
         yield ctr
-        from lino.core.requests import BaseRequest
-        ar = BaseRequest(user=coaching.user)
+        ar = dd.login()
+        # from lino.core.requests import BaseRequest
+        # ar = BaseRequest(user=coaching.user, renderer=...)
         ctr.update_reminders(ar)
 
     """

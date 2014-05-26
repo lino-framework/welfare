@@ -92,10 +92,10 @@ ExamPolicy #3 (u'alle 3 Monate')
 >>> settings.SITE.verbose_client_info_message = True
 >>> wanted = obj.get_wanted_auto_events(ses)
 >>> [i.start_date.strftime('%Y-%m-%d') for i in wanted.values()]
-['2014-06-15', '2014-09-15', '2014-12-15', '2015-03-15', '2015-06-15', '2015-09-15']
+['2014-06-16', '2014-09-16', '2014-12-16', '2015-03-16', '2015-06-16', '2015-09-16']
 >>> print(ses.response['info_message'])
 Reached upper date limit 2015-12-12
->>> ses.show(cal.EventsByController.request(obj))
+>>> ses.show(cal.EventsByController.request(obj), column_names="when_text description")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ========================== ================== ===========================================
  Wann                       Kurzbeschreibung   Arbeitsablauf

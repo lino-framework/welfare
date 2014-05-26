@@ -402,8 +402,11 @@ class ContractBase(
     def update_cal_until(self):
         return self.date_ended or self.applies_until
 
-    # TODO: replace this by update_cal_calendar().event_label
     def update_cal_summary(self, i):
+        ep = self.exam_policy
+        if ep is not None and ep.event_type is not None:
+            if ep.event_type.event_label:
+                return ep.event_type.event_label + " " + str(i)
         return _("Evaluation %d") % i
 
     def update_reminders(self, ar):
