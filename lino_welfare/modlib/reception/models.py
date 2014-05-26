@@ -34,17 +34,7 @@ from lino.modlib.reception.models import *
 from lino_welfare.modlib.reception import Plugin
 
 pcsw = dd.resolve_app('pcsw')
-# notes = dd.resolve_app('notes')
-# excerpts = dd.resolve_app('excerpts')
 extensible = dd.resolve_app('extensible')
-
-# dd.inject_field('notes.NoteType', 'is_attestation',
-#                 models.BooleanField(_("attestation"), default=False))
-# dd.inject_field('system.SiteConfig', 'attestation_note_nature',
-#                 dd.ForeignKey('notes.EventType',
-#                               verbose_name=_("Event type of attestations"),
-#                               null=True, blank=True,
-#                               related_name="attestation_siteconfig_set"))
 
 
 class CreateClientVisit(dd.Action):

@@ -13,7 +13,7 @@
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-The :xfile:`models.py` module for the 
+The :xfile:`models.py` module for the
 :mod:`lino_welfare.modlib.isip` app
 (eee :ddref:`isip`)
 
@@ -33,7 +33,9 @@ from lino import dd
 from lino import mixins
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
-excerpts = dd.resolve_app('excerpts')
+# excerpts = dd.resolve_app('excerpts')
+
+from lino.modlib.excerpts.mixins import Certifiable
 
 from lino.utils.ranges import isrange, overlap2, encompass
 
@@ -243,7 +245,7 @@ def default_signer2():
 class ContractBase(
         Signers,
         contacts.ContactRelated,
-        excerpts.Certifiable,
+        Certifiable,
         # mixins.TypedPrintable,
         cal.EventGenerator):
 
