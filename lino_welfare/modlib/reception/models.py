@@ -35,7 +35,7 @@ from lino_welfare.modlib.reception import Plugin
 
 pcsw = dd.resolve_app('pcsw')
 notes = dd.resolve_app('notes')
-excerpts = dd.resolve_app('excerpts')
+# excerpts = dd.resolve_app('excerpts')
 extensible = dd.resolve_app('extensible')
 
 # dd.inject_field('notes.NoteType', 'is_attestation',
