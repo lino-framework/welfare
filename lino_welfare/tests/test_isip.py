@@ -62,7 +62,7 @@ class QuickTest(RemoteAuthTestCase):
         here = create(cal.EventType, name="Consultation here")
 
         sc = settings.SITE.site_config
-        sc.farest_future = i2d(20161231)
+        settings.SITE.ignore_dates_after = i2d(20161231)
         sc.signer1 = create(contacts.Person,
                             first_name="A",
                             last_name="Secretary")

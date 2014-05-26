@@ -12,6 +12,9 @@ General PCSW
 
 ..
     >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.docs.settings.test'
     >>> from bs4 import BeautifulSoup
     >>> from lino.runtime import *
     >>> from django.test import Client
@@ -182,12 +185,13 @@ Coaching types
 >>> with translation.override('de'):
 ...    ses.show(pcsw.CoachingTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================== ============================== ===================================================
- Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)
------------------------------- ------------------------------ ---------------------------------------------------
- GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)
- Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)
- Debts mediation                Médiation de dettes            Schuldnerberatung
-============================== ============================== ===================================================
+============================== ============================== =================================================== ======= =======
+ Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    DSBE    GSS
+------------------------------ ------------------------------ --------------------------------------------------- ------- -------
+ GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)                      Nein    Ja
+ Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)   Ja      Nein
+ Debts mediation                Médiation de dettes            Schuldnerberatung                                   Nein    Nein
+ **Total (3 Zeilen)**                                                                                              **1**   **1**
+============================== ============================== =================================================== ======= =======
 <BLANKLINE>
 

@@ -78,11 +78,11 @@ class DocsTests(BaseTestCase):
         return self.run_docs_doctests('tested/cbss.rst')
 
     def test_pcsw(self):
-        return self.run_docs_doctests('tested/pcsw.rst')
+        return self.run_simple_doctests('docs/tested/pcsw.rst')
 
     def test_courses(self):
         return self.run_docs_doctests('tested/courses.rst')
 
     def test_jobs(self):
-        return self.run_docs_doctests('tested/jobs.rst')
+        return self.run_simple_doctests('docs/tested/jobs.rst')
 

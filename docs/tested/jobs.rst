@@ -9,12 +9,13 @@ Jobs
   $ python setup.py test -s tests.DocsTests.test_jobs
 
 ..
-    >>> # -*- coding: UTF-8 -*-
     >>> from __future__ import print_function
     >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'lino_welfare.projects.docs.settings.test'
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.docs.settings.test'
     >>> from django.utils import translation
     >>> from lino.runtime import *
+    >>> from lino.utils.instantiator import i2d
     >>> from django.test import Client
     >>> import json
 
@@ -84,27 +85,51 @@ Example:
 <BLANKLINE>
 
 
+>>> translation.activate('en')
 >>> obj = jobs.Contract.objects.get(pk=12)
+>>> print(unicode(obj.client))
+VAN VEEN Vincent (165)
 >>> obj.active_period()
 (datetime.date(2013, 12, 13), datetime.date(2015, 12, 12))
 >>> obj.update_cal_rset()
-ExamPolicy #3 (u'alle 3 Monate')
+ExamPolicy #3 (u'every 3 months')
+>>> print(unicode(obj.update_cal_rset().event_type))
+Internal meetings with client
+>>> print(obj.update_cal_rset().event_type.max_conflicting)
+4
 >>> settings.SITE.verbose_client_info_message = True
 >>> wanted = obj.get_wanted_auto_events(ses)
 >>> [i.start_date.strftime('%Y-%m-%d') for i in wanted.values()]
-['2014-06-16', '2014-09-16', '2014-12-16', '2015-03-16', '2015-06-16', '2015-09-16']
+['2014-06-13', '2014-09-15', '2014-12-15', '2015-03-16', '2015-06-16', '2015-09-16']
 >>> print(ses.response['info_message'])
 Reached upper date limit 2015-12-12
->>> ses.show(cal.EventsByController.request(obj), column_names="when_text description")
+>>> ses.show(cal.EventsByController.request(obj),
+... column_names="linked_date summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========================== ================== ===========================================
- Wann                       Kurzbeschreibung   Arbeitsablauf
--------------------------- ------------------ -------------------------------------------
- 2014 Juni 13 (Fr.) 09:00   Evaluation 2       **Vorgeschlagen** → [Notified] [Annehmen]
- 2014 Sep. 13 (Sa.) 09:00   Evaluation 3       **Vorgeschlagen** → [Notified] [Annehmen]
- 2014 Dez. 13 (Sa.) 09:00   Evaluation 4       **Vorgeschlagen** → [Notified] [Annehmen]
- 2015 Mär. 13 (Fr.) 09:00   Evaluation 5       **Vorgeschlagen** → [Notified] [Annehmen]
- 2015 Juni 13 (Sa.) 09:00   Evaluation 6       **Vorgeschlagen** → [Notified] [Annehmen]
- 2015 Sep. 13 (So.) 09:00   Evaluation 7       **Vorgeschlagen** → [Notified] [Annehmen]
-========================== ================== ===========================================
+========================= ===============
+ When                      Summary
+------------------------- ---------------
+ 2014 Jun 13 (Fri) 09:00   Appointment 2
+ 2014 Sep 15 (Mon) 09:00   Appointment 3
+ 2014 Dec 15 (Mon) 09:00   Appointment 4
+ 2015 Mar 16 (Mon) 09:00   Appointment 5
+ 2015 Jun 16 (Tue) 09:00   Appointment 6
+ 2015 Sep 16 (Wed) 09:00   Appointment 7
+========================= ===============
+<BLANKLINE>
+
+Hubert has two appointments on 20140613:
+
+>>> d = i2d(20140613)
+>>> pv = dict(start_date=d, end_date=d)
+>>> ses.show(cal.EventsByDay.request(param_values=pv),
+...     column_names="user summary project")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+================== =============== ==========================
+ Responsible user   Summary         Client
+------------------ --------------- --------------------------
+ Hubert Huppertz    Appointment 2   LAZARUS Line (143)
+ Mélanie Mélard     Appointment 2   RADERMACHER Edgard (156)
+ Hubert Huppertz    Appointment 2   VAN VEEN Vincent (165)
+================== =============== ==========================
 <BLANKLINE>

@@ -369,6 +369,9 @@ def objects():
                       de="Termin",
                       fr="Rendez-vous",
                       en="Appointment"))
+    # Lino Welfare does not use time slots when generating evaluation meetings.
+    # Here we define a limit of 4 client meetings per day per user.
+    kw.update(max_conflicting=4)
     client_calendar = calendar(invite_client=True, **kw)
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
