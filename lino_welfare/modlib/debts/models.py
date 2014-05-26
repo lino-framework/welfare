@@ -46,14 +46,12 @@ from lino.core.constants import _handle_attr_name
 from lino.utils.choosers import chooser
 
 from lino.modlib.accounts.utils import AccountTypes
+from lino.modlib.excerpts.mixins import Certifiable
+from lino.mixins.printable import decfmt
 
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')
 pcsw = dd.resolve_app('pcsw')
-excerpts = dd.resolve_app('excerpts')
-
-
-from lino.mixins.printable import decfmt
 
 
 class Clients(pcsw.Clients):
@@ -150,7 +148,7 @@ def bulk_create_with_manual_ids(model, obj_list):
     return model.objects.bulk_create(obj_list)
 
 
-class Budget(dd.UserAuthored, excerpts.Certifiable, dd.Duplicable):
+class Budget(dd.UserAuthored, Certifiable, dd.Duplicable):
     """
     Deserves more documentation.
     """
