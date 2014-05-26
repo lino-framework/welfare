@@ -34,7 +34,7 @@ from lino.modlib.reception.models import *
 from lino_welfare.modlib.reception import Plugin
 
 pcsw = dd.resolve_app('pcsw')
-notes = dd.resolve_app('notes')
+# notes = dd.resolve_app('notes')
 # excerpts = dd.resolve_app('excerpts')
 extensible = dd.resolve_app('extensible')
 
