@@ -758,7 +758,7 @@ class Client(contacts.Person,
 
 class ClientDetail(dd.FormLayout):
 
-    main = "general contact coaching aids_tab health_tab \
+    main = "general contact coaching aids_tab \
     work_tab career languages \
     competences contracts history calendar misc"
 
@@ -769,10 +769,10 @@ class ClientDetail(dd.FormLayout):
 
     general2 = """
     gender:10 title:20 id:10
-    first_name middle_name
-    last_name
+    first_name middle_name last_name
     birth_date age:10 national_id:15
     nationality:15 declared_name
+    civil_state birth_country birth_place
     """
 
     general3 = """
@@ -820,10 +820,10 @@ class ClientDetail(dd.FormLayout):
     aids_tab = dd.Panel("""
     status:55 income:25
     aids.FinancialAidsByClient:30 sepa.AccountsByClient:20
+    aids.MedicalAidsByClient:30 uploads.MedicalUploadsByClient:20
     """, label=_("Aids"))
 
     status = """
-    civil_state birth_country birth_place
     in_belgium_since:15 residence_type gesdos_id
     job_agents group:16
     """
@@ -870,10 +870,6 @@ class ClientDetail(dd.FormLayout):
     remarks:30 remarks2:30
     contacts.RolesByPerson
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
-
-    health_tab = dd.Panel("""
-    aids.MedicalAidsByClient uploads.MedicalUploadsByClient
-    """, label=_("Health"))
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
