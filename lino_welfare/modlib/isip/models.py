@@ -333,7 +333,7 @@ class ContractBase(
     def ending_choices(cls):
         return ContractEnding.objects.filter(use_in_isip=True)
 
-    def client_changed(self, request):
+    def client_changed(self, ar):
 
         """If the contract's author is the client's primary coach, then set
         user_asd to None, otherwise set user_asd to the primary coach.
@@ -344,7 +344,8 @@ class ContractBase(
             #~ pc = self.person.get_primary_coach()
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
             qs = self.client.get_coachings(
-                self.applies_from, type__id=COACHINGTYPE_ASD)
+                # self.applies_from, type__id=COACHINGTYPE_ASD)
+                self.applies_from, type__does_gss=True)
             if qs.count() == 1:
                 user_asd = qs[0].user
                 if user_asd is None or user_asd == self.user:

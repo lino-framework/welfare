@@ -272,7 +272,10 @@ def objects():
 
     # id must be 1 (see isip.ContactBase.person_changed
     yield pcsw.CoachingType(
-        id=isip.COACHINGTYPE_ASD, **babelkw(
+        id=isip.COACHINGTYPE_ASD,
+        does_integ=False,
+        does_gss=True,
+        **babelkw(
             'name',
             de="ASD (Allgemeiner Sozialdienst)",
             nl="ASD (Algemene Sociale Dienst)",
@@ -286,21 +289,26 @@ def objects():
     judith.save()
 
     DSBE = pcsw.CoachingType(
-        id=isip.COACHINGTYPE_DSBE, **babelkw(
+        does_gss=False,
+        does_integ=True,
+        id=isip.COACHINGTYPE_DSBE,
+        **babelkw(
             'name',
             de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
             fr="Service intégration",
             en="Integration service",
         ))
 
-    #~ DSBE = pcsw.CoachingType(name="DSBE")
     yield DSBE
-    #~ yield pcsw.CoachingType(name="Schuldnerberatung")
-    yield pcsw.CoachingType(**babelkw('name',
-                                      de="Schuldnerberatung",
-                                      fr="Médiation de dettes",
-                                      en="Debts mediation",
-                                      ))
+    yield pcsw.CoachingType(
+        does_gss=False,
+        does_integ=False,
+        **babelkw(
+            'name',
+            de="Schuldnerberatung",
+            fr="Médiation de dettes",
+            en="Debts mediation",
+        ))
 
     alicia.coaching_type = DSBE
     alicia.save()
@@ -353,14 +361,15 @@ def objects():
     # settings.SITE.site_config.update(attestation_note_nature=obj)
 
     calendar = Instantiator('cal.EventType').build
-    client_calendar = calendar(
-        invite_client=True,
-        **babelkw(
-            'name',
-            de="Klientengespräche intern",
-            fr="Rencontres internes avec client",
-            en="Internal meetings with client",
-        ))
+    kw = babelkw('name',
+                 de="Klientengespräche intern",
+                 fr="Rencontres internes avec client",
+                 en="Internal meetings with client")
+    kw.update(babelkw('event_label',
+                      de="Termin",
+                      fr="Rendez-vous",
+                      en="Appointment"))
+    client_calendar = calendar(invite_client=True, **kw)
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
 

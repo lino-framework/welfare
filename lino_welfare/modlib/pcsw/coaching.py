@@ -29,18 +29,6 @@ from django.utils.translation import ugettext_lazy as _
 from lino import dd
 from lino.utils.ranges import isrange
 
-households = dd.resolve_app('households')
-cal = dd.resolve_app('cal')
-extensible = dd.resolve_app('extensible')
-properties = dd.resolve_app('properties')
-contacts = dd.resolve_app('contacts')
-cv = dd.resolve_app('cv')
-uploads = dd.resolve_app('uploads')
-users = dd.resolve_app('users')
-isip = dd.resolve_app('isip')
-jobs = dd.resolve_app('jobs')
-notes = dd.resolve_app('notes')
-
 
 class CoachingEvents(dd.ChoiceList):
     verbose_name = _("Observed event")
@@ -51,22 +39,6 @@ add('20', _("Active"), 'active')
 add('30', _("Ended"), 'ended')
 
 
-#~ class CoachingStates(dd.Workflow):
-    #~ """Lifecycle of a :class:`Coaching`."""
-    #~ @classmethod
-    #~ def before_state_change(cls,obj,ar,kw,oldstate,newstate):
-        #~ if newstate.name == 'ended':
-            #~ obj.end_date = datetime.date.today()
-        #~ elif newstate.name in ('active','standby'):
-            #~ obj.end_date = None
-#~ add = CoachingStates.add_item
-# ~ # add('10', _("New"),'new')
-# ~ # add('10', _("Suggested"),'suggested')
-# ~ # add('20', _("Refused"),'refused')
-# ~ # add('30', _("Confirmed"),'confirmed')
-#~ add('30', _("Active"),'active')
-#~ add('40', _("Standby"),'standby')
-#~ add('50', _("Ended"),'ended')
 class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")
@@ -76,48 +48,29 @@ class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
         return _("%(client)s no longer coached by %(coach)s") % dict(
             client=obj.client, coach=obj.user)
 
-    #~ def action_param_defaults(self,ar,obj,**kw):
-        #~ kw = super(EndCoaching,self).action_param_defaults(ar,obj,**kw)
-        #~ if obj is not None:
-            #~ kw.update(notify_subject=
-                #~ _("%(client)s no longer coached by %(coach)s")
-                #~ % dict(client=obj.client,coach=obj.user))
-        #~ return kw
 
-    #~ def update_system_note_kw(self,ar,kw,obj):
-        #~ if obj is not None:
-            #~ return kw.update(project=obj.client)
+INTEG_LABEL = dd.apps.integ.verbose_name
+GSS_LABEL = _("GSS")  # General Social Service
 
 
-# CoachingStates.suggested.set_required(owner=False)
-# CoachingStates.refused.add_workflow(_("refuse"),states='suggested standby',owner=True)
-# CoachingStates.active.add_workflow(_("accept"),states='suggested',owner=True)
-#~ CoachingStates.active.add_workflow(_("Reactivate"),
-    #~ states='standby ended',owner=True,
-    #~ help_text=_("Client has become active again after having been ended or standby."))
-#~ CoachingStates.standby.add_workflow(states='active',owner=True)
-#~ CoachingStates.ended.add_workflow(EndCoaching)
-# CoachingStates.ended.add_workflow(_("End coaching"),
-    # help_text=_("User no longer coaches this client."),
-    # states='active standby',user_groups='integ',owner=True,notify=True)
-#~ """
-#~ CoachingStates.add_transition('suggested','refused',_("Refuse"),owner=True)
-#~ CoachingStates.add_transition('suggested','active',_("Accept"),owner=True)
-#~ CoachingStates.add_transition('active','standby',_("Standby"),owner=True)
-#~ CoachingStates.add_transition('active','ended',_("End coaching"),owner=True)
-#~
-#~ """
 class CoachingType(dd.BabelNamed):
 
     class Meta:
         verbose_name = _("Coaching type")
         verbose_name_plural = _('Coaching types')
 
+    does_integ = models.BooleanField(
+        INTEG_LABEL, default=True,
+        help_text=_("Whether this coaching type does %s.") % INTEG_LABEL)
+
+    does_gss = models.BooleanField(
+        GSS_LABEL, default=True,
+        help_text=_("Whether this coaching type does %s.") % GSS_LABEL)
+
 
 class CoachingTypes(dd.Table):
-    help_text = _("Liste des types d'accompagnement.")
     model = CoachingType
-    column_names = 'name *'
+    column_names = 'name does_integ does_gss *'
     #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager')
 
@@ -132,12 +85,6 @@ class CoachingTypes(dd.Table):
 # ~ _("Human resources"),'human') # Häusliche Hilfe
 # ~ _("Human resources"),'human') # Energiedienst
 
-#~ class CoachingTypes(ChoiceList):
-    #~ label = _("Coaching type")
-#~ add = CoachingTypes.add_item
-#~ add('10', _("Primary coach"),'primary')
-#~ add('20', _("Secondary coach"),'secondary')
-
 
 class CoachingEnding(dd.BabelNamed, dd.Sequenced):
 
@@ -146,12 +93,11 @@ class CoachingEnding(dd.BabelNamed, dd.Sequenced):
         verbose_name_plural = _('Coaching termination reasons')
 
     #~ name = models.CharField(_("designation"),max_length=200)
-    type = dd.ForeignKey(CoachingType,
-                         blank=True, null=True,
-                         help_text=_("If not empty, allow this ending only on coachings of specified type."))
-
-    #~ def __unicode__(self):
-        #~ return unicode(self.name)
+    type = dd.ForeignKey(
+        CoachingType,
+        blank=True, null=True,
+        help_text=_("If not empty, allow this ending only on "
+                    "coachings of specified type."))
 
 
 class CoachingEndings(dd.Table):
@@ -166,8 +112,6 @@ class CoachingEndings(dd.Table):
     """
 
 
-#~ class Coaching(mixins.UserAuthored,mixins.ProjectRelated):
-#~ class Coaching(mixins.UserAuthored,ImportedFields):
 class Coaching(dd.Model, dd.ImportedFields):
 
     """
@@ -181,11 +125,11 @@ during a given period.
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
 
-    user = models.ForeignKey(settings.SITE.user_model,
-                             verbose_name=_("Coach"),
-                             related_name="%(app_label)s_%(class)s_set_by_user",
-                             #~ blank=True,null=True
-                             )
+    user = models.ForeignKey(
+        settings.SITE.user_model,
+        verbose_name=_("Coach"),
+        related_name="%(app_label)s_%(class)s_set_by_user",
+    )
 
     allow_cascaded_delete = ['client']
     workflow_state_field = 'state'
@@ -220,7 +164,6 @@ during a given period.
 
     @dd.chooser()
     def ending_choices(cls, type):
-        Q = models.Q
         qs = CoachingEnding.objects.filter(
             Q(type__isnull=True) | Q(type=type))
         return qs.order_by("seqno")
@@ -322,12 +265,12 @@ class Coachings(dd.Table):
 
     parameters = dd.ObservedPeriod(
         coached_by=models.ForeignKey(
-            users.User,
+            'users.User',
             blank=True, null=True,
             verbose_name=_("Coached by"),
             help_text="""Nur Begleitungen dieses Benutzers."""),
         and_coached_by=models.ForeignKey(
-            users.User,
+            'users.User',
             blank=True, null=True,
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),

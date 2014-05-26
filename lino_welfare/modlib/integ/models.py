@@ -363,8 +363,6 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 pv.update(ending=obj)
                 return pcsw.Coachings.request(param_values=pv)
             return func
-        #~ for u in settings.SITE.user_model.objects.exclude(profile=''):
-        #~ for u in settings.SITE.user_model.objects.filter(coaching_type__id=isip.COACHINGTYPE_DSBE):
         for u in settings.SITE.user_model.objects.all():
             yield dd.RequestField(w(u), verbose_name=unicode(u.username))
         yield dd.RequestField(w(None), verbose_name=_("Total"))

@@ -28,6 +28,8 @@ from north.dpy import Migrator
 from lino.core.dbutils import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
+from lino.modlib.countries.models import PlaceTypes as CityTypes
+from lino.utils.mti import create_child
 
 
 def install(globals_dict):

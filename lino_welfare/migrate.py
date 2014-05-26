@@ -32,10 +32,7 @@ from decimal import Decimal
 from django.conf import settings
 from north.dpy import Migrator
 from lino.core.dbutils import resolve_model
-from lino.utils import dblogger
 from lino import dd
-from lino.modlib.countries.models import PlaceTypes as CityTypes
-from lino.utils.mti import create_child
 from lino.modlib.iban.utils import belgian_nban_to_iban_bic
 from lino.modlib.cal.utils import WORKDAYS
 
@@ -71,7 +68,7 @@ class Migrator(Migrator):
           calendar per user, convert existing cv notes to excerpts
 
         """
-
+ 
         bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict['new_content_type_id']
 
@@ -410,6 +407,7 @@ def doit(a, b):
         #     return humanlinks_Link(**kw)
         # globals_dict.update(create_humanlinks_link=create_humanlinks_link)
     
+        bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict.get('new_content_type_id')
         uploads_Upload = resolve_model("uploads.Upload")
     
@@ -773,6 +771,21 @@ def doit(a, b):
 
         globals_dict.update(
             create_jobs_contract=create_jobs_contract)
+
+        pcsw_CoachingType = resolve_model('pcsw.CoachingType')
+        isip = dd.resolve_app('isip')
+        
+        def create_pcsw_coachingtype(id, name):
+            kw = dict()
+            kw.update(id=id)
+            if id != isip.COACHINGTYPE_ASD:
+                kw.update(does_gss=False)
+            if id != isip.COACHINGTYPE_DSBE:
+                kw.update(does_integ=False)
+            if name is not None: kw.update(bv2kw('name', name))
+            return pcsw_CoachingType(**kw)
+        globals_dict.update(
+            create_pcsw_coachingtype=create_pcsw_coachingtype)
 
         return '1.1.12'
 
