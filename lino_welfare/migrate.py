@@ -567,12 +567,14 @@ def doit(a, b):
                         except Exception:
                             iban = x
                             bic = ''
-                    accs.append(sepa.Account(
-                        partner_id=id, primary=primary,
-                        iban=iban, bic=bic))
-                    if primary:
-                        kw.update(iban=iban, bic=bic)
-                        primary = False
+                    # some fields contain just ":", ignore these.
+                    if iban:
+                        accs.append(sepa.Account(
+                            partner_id=id, primary=primary,
+                            iban=iban, bic=bic))
+                        if primary:
+                            kw.update(iban=iban, bic=bic)
+                            primary = False
 
             yield contacts_Partner(**kw)
             yield accs
