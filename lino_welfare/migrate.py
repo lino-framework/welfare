@@ -288,7 +288,7 @@ class Migrator(Migrator):
         def f(**kwargs):
             del kwargs['attestation_note_nature_id']
             del kwargs['debts_bailiff_type_id']
-            del kwargs['farest_future']
+            kwargs.pop('farest_future', None)
 
             return system_SiteConfig(**kwargs)
         globals_dict.update(system_SiteConfig=f)
