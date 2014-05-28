@@ -20,7 +20,7 @@ SETUP_INFO = dict(
     name='lino-welfare',
     #~ distclass=MyDistribution,
     #~ dist_dir=os.path.join('docs','dist'),
-    version='1.1.12',  # not yet released
+    version='1.1.13',
     install_requires=['lino', 'suds', 'vobject', 'django-iban'],
     #~ version=VERSION,
     test_suite='tests',
@@ -36,10 +36,9 @@ It currently covers the following functions of a PCSW:
 - Integration service
 - Debt mediation
 
-It started as a part of the Lino project and 
-forked off in August 2012 
-to become an independent project,
-possibly to be maintained by an independant organization.""",
+It started as a part of the Lino project and forked off in August 2012
+to become an independent project, possibly to be maintained by an
+independant organization.""",
     author='Luc Saffre',
     author_email='luc.saffre@gmail.com',
     url="http://welfare.lino-framework.org",

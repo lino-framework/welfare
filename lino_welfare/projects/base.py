@@ -36,32 +36,22 @@ class Site(Site):
 
     # use_java = False  # temporarily
 
-    # ~ verbose_name = SETUP_INFO['name'] # "Lino Welfare"
     verbose_name = "Lino Welfare"
-    #~ description = "a Lino application for Belgian Public Welfare Centres."
-    #~ author = 'Luc Saffre'
-    #~ author_email = 'luc.saffre@gmail.com'
 
     demo_fixtures = """std few_languages props demo cbss
     democfg cbss_demo demo2 demo_events""".split()
 
     # ~ catch_layout_exceptions = False # 20130804
 
-    # ~ title = label # __name__
-    #~ domain = "pcsw.saffre-rumma.net"
-    #~ help_url = "http://packages.python.org/lino-welfare"
     migration_class = 'lino_welfare.migrate.Migrator'
 
     userdocs_prefix = 'welfare.'
     auto_configure_logger_names = 'djangosite north lino lino_welfare'
 
-    #~ project_model = 'contacts.Person'
     project_model = 'pcsw.Client'
     user_model = 'users.User'
 
     # verbose_client_info_message = True
-
-    # accounts_ref_length = 5
 
     languages = 'en fr de nl'  # tested docs rely on this distribution
     hidden_languages = 'nl'
@@ -231,6 +221,7 @@ class Site(Site):
             yield 'lino.modlib.davlink'
 
         yield 'lino.modlib.appypod'
+        yield 'lino.modlib.export_excel'
 
     def get_admin_main_items(self, ar):
         yield self.modules.integ.UsersWithClients
@@ -239,5 +230,7 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         yield self.modules.reception.MyWaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
+
+
 
 
