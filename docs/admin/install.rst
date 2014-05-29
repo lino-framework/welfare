@@ -1,6 +1,6 @@
 .. _welfare.install:
 
-Installing Lino-Welfare
+Installing Lino Welfare
 =======================
 
 Development server
@@ -10,19 +10,58 @@ If you need only a development server,
 just install Lino (the framework) as documented 
 in :ref:`lino.dev.install`, then:
 
-- Go to your `hgwork` directory and 
-  download also a copy of the Lino-Welfare repository::
+- Go to your `repositories` directory and 
+  download also a copy of the Lino Welfare repository::
 
-    cd ~/hgwork
-    hg clone https://code.google.com/p/lino-welfare/ welfare
-    
-- Use pip to install this as editable package::
+    $ cd ~/repositories
+    $ git clone https://github.com/lsaffre/lino-welfare.git welfare
+
+- Use pip to install `welfare` as editable package::
 
     pip install -e welfare
 
-- In your project's `settings.py`, make sure that you inherit from 
-  the right `settings` module::
+- Lino Welfare needs two Java applets :ref:`davlink` and
+  :ref:`eidreader` which are also available from GitHub. Simply clone
+  them::
+
+    $ git clone https://github.com/lsaffre/davlink.git
+    $ git clone https://github.com/lsaffre/eidreader.git
+
+- Install two Python packages needed by Lino welfare
+
+    pip install -e xlwt
+
+- Create your project directory and a :xfile:`settings.py` file:
+
+    $ mkdir ~/mysite
+    $ cd ~/mysite
+    $ nano settings.py
+
+  Paste the following content into your :xfile:`settings.py` file:
     
-    from lino_welfare.settings import *
+  .. includeliteral:: settings.py
 
+- Create a :xfile:`media` directory::
 
+    $ mkdir media
+
+- In your :xfile:`media` directory, create symbolic links to your
+  local copies of :ref:`davlink` and :ref:`eidreader`::
+
+    $ cd ~/mysite/media
+    $ ln -s ~/repositories/davlink/examples davlink
+    $ ln -s ~/repositories/eidreader/examples eidreader
+
+- Create a :xfile:`manage.py` file in your project directory::
+
+    $ cd ~/mysite
+    $ nano settings.py
+
+  Paste the following content into your :xfile:`manage.py` file:
+    
+  .. includeliteral:: manage.py
+
+- Initialize the database and run the development server::
+
+    $ python manage.py initdb_demo
+    $ python manage.py runserver
