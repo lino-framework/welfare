@@ -117,7 +117,7 @@ class Site(Site):
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
 
-        if self.use_java:
+        if self.is_installed('beid'):
             tb.add_action('pcsw.Clients', 'find_by_beid')
 
     def setup_menu(self, ui, profile, main):

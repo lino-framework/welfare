@@ -7,10 +7,6 @@ from lino_welfare.projects.base import *
 class Site(Site):
 
     title = "Lino Welfare"
-    #~ use_jasmine = True
-    #~ use_davlink = False
-    #~ use_extensible = True
-    # ~ remote_user_header = None # 20121003
 
     def is_imported_partner(self, obj):
         if obj.id is not None and (obj.id > 110 and obj.id < 121):
@@ -19,7 +15,3 @@ class Site(Site):
             return True
         return False
 
-# SITE = Site(globals())
-
-# the following line should not be active in a checked-in version
-#~ DATABASES['default']['NAME'] = ':memory:'
