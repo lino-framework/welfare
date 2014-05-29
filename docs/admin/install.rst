@@ -35,7 +35,7 @@ in :ref:`lino.dev.install`, then:
 
   Paste the following content into your :xfile:`settings.py` file:
     
-  .. includeliteral:: settings.py
+  .. literalinclude:: settings.py
 
 - Create a :xfile:`media` directory and create symbolic links to your
   local copies of :ref:`davlink` and :ref:`eidreader`::
@@ -53,7 +53,7 @@ in :ref:`lino.dev.install`, then:
 
   Paste the following content into your :xfile:`manage.py` file:
     
-  .. includeliteral:: manage.py
+  .. literalinclude:: manage.py
 
 - Initialize the database and run the development server::
 
