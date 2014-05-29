@@ -27,10 +27,6 @@ in :ref:`lino.dev.install`, then:
     $ git clone https://github.com/lsaffre/davlink.git
     $ git clone https://github.com/lsaffre/eidreader.git
 
-- Install two Python packages needed by Lino welfare
-
-    pip install -e xlwt
-
 - Create your project directory and a :xfile:`settings.py` file:
 
     $ mkdir ~/mysite
@@ -41,16 +37,14 @@ in :ref:`lino.dev.install`, then:
     
   .. includeliteral:: settings.py
 
-- Create a :xfile:`media` directory::
-
-    $ mkdir media
-
-- In your :xfile:`media` directory, create symbolic links to your
+- Create a :xfile:`media` directory and create symbolic links to your
   local copies of :ref:`davlink` and :ref:`eidreader`::
 
-    $ cd ~/mysite/media
-    $ ln -s ~/repositories/davlink/examples davlink
-    $ ln -s ~/repositories/eidreader/examples eidreader
+
+    $ cd ~/mysite
+    $ mkdir media
+    $ ln -s ~/repositories/davlink/examples media/davlink
+    $ ln -s ~/repositories/eidreader/examples media/eidreader
 
 - Create a :xfile:`manage.py` file in your project directory::
 
