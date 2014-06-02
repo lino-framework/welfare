@@ -30,6 +30,7 @@ from dateutil import parser as dateparser
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ValidationError
+from django.db import connection
 
 
 from django.conf import settings
@@ -997,6 +998,7 @@ def watch(data_dir):
     fd_watching.close()
     fd_failed.close()
     os.remove(watching)
+    connection.close()
     dblogger.info("%d changes have been processed.", i)
     #~ log.close()
 
