@@ -19,28 +19,6 @@
 .. actor:: users.Authority
 
 
-.. actor:: users.Team
-
-    A :ddref:`users.Team` is a group of users that work together. 
-    
-    Belonging to a :ddref:`users.Team` or not has no influence on 
-    access permissions.
-    These depend on your :ddref:`user profile <lino.UserProfiles>`.
-    
-.. actor:: users.Teams
-
-    For illustration, the demo site has the following teams:
-
-    .. django2rst:: settings.SITE.login().show(users.Teams)
-
-
-
-.. actor:: users.Membership
-
-    A membership is when a given :ddref:`users.User` 
-    belongs to a given :ddref:`users.Team`.
-
-
 .. actor:: lino.UserProfiles
 
     The list of user profiles available on this site. 
