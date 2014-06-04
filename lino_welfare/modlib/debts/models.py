@@ -13,7 +13,7 @@
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
+The :xfile:`models.py` for :mod:`lino_welfare.modlib.debts`.
 
 """
 
@@ -149,8 +149,7 @@ def bulk_create_with_manual_ids(model, obj_list):
 
 
 class Budget(dd.UserAuthored, Certifiable, dd.Duplicable):
-    """
-    Deserves more documentation.
+    """See :class:`ml.debts.Budget`.
     """
 
     class Meta:
@@ -200,6 +199,13 @@ The total monthly amount available for debts distribution."""))
         return force_unicode(
             _("Budget %(pk)d for %(partner)s")
             % dict(pk=self.pk, partner=self.partner))
+
+    @classmethod
+    def get_certifiable_fields(cls):
+        return """date partner user intro
+        dist_amount include_yearly_incomes
+        print_empty_rows print_todos"""
+
 
     def get_actors(self):
         attname = "_cached_actors"
