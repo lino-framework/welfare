@@ -998,7 +998,6 @@ def watch(data_dir):
     fd_watching.close()
     fd_failed.close()
     os.remove(watching)
-    connection.close()
     dblogger.info("%d changes have been processed.", i)
     #~ log.close()
 
@@ -1027,6 +1026,7 @@ def main(*args, **options):
             watch(data_dir)
         except Exception, e:
             dblogger.exception(e)
+        connection.close()
         time.sleep(1)
 
 
