@@ -790,7 +790,16 @@ def doit(a, b):
         globals_dict.update(
             create_pcsw_coachingtype=create_pcsw_coachingtype)
 
-        globals_dict.update(pcsw_ClientAddress=resolve_model("addresses.Address"))
+        globals_dict.update(
+            pcsw_ClientAddress=resolve_model("addresses.Address"))
+
+        system_SiteConfig = resolve_model('system.SiteConfig')
+
+        def f(**kwargs):
+            kwargs.pop('farest_future', None)
+
+            return system_SiteConfig(**kwargs)
+        globals_dict.update(system_SiteConfig=f)
 
         
         return '1.1.12'
