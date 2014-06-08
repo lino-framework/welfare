@@ -790,6 +790,9 @@ def doit(a, b):
         globals_dict.update(
             create_pcsw_coachingtype=create_pcsw_coachingtype)
 
+        globals_dict.update(pcsw_ClientAddress=resolve_model("addresses.Address"))
+
+        
         return '1.1.12'
 
 
