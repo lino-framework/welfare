@@ -266,23 +266,6 @@ class Migrator(Migrator):
         countries_Place = resolve_model("countries.Place")
         globals_dict.update(countries_City=countries_Place)
 
-        notes_NoteType = resolve_model("notes.NoteType")
-
-        def create_notes_notetype(id, name, build_method, template, attach_to_email, email_template, important, remark, body_template):
-            kw = dict()
-            kw.update(id=id)
-            if name is not None: kw.update(bv2kw('name', name))
-            kw.update(build_method=build_method)
-            kw.update(template=template)
-            kw.update(attach_to_email=attach_to_email)
-            kw.update(email_template=email_template)
-            kw.update(important=important)
-            kw.update(remark=remark)
-            # kw.update(body_template=body_template)
-            # kw.update(is_attestation=is_attestation)
-            return notes_NoteType(**kw)
-        globals_dict.update(create_notes_notetype=create_notes_notetype)
-
         system_SiteConfig = resolve_model('system.SiteConfig')
 
         def f(**kwargs):
@@ -434,6 +417,23 @@ def doit(a, b):
     
         aids_AidType = resolve_model('aids.AidType')
         bv2kw = globals_dict.get('bv2kw')
+
+        notes_NoteType = resolve_model("notes.NoteType")
+
+        def create_notes_notetype(id, name, build_method, template, attach_to_email, email_template, important, remark, body_template):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name', name))
+            kw.update(build_method=build_method)
+            kw.update(template=template)
+            kw.update(attach_to_email=attach_to_email)
+            kw.update(email_template=email_template)
+            kw.update(important=important)
+            kw.update(remark=remark)
+            # kw.update(body_template=body_template)
+            # kw.update(is_attestation=is_attestation)
+            return notes_NoteType(**kw)
+        globals_dict.update(create_notes_notetype=create_notes_notetype)
 
         def create_aids_aidtype(id, name, foo, build_method, template, remark):
             kw = dict()
