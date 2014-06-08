@@ -462,7 +462,7 @@ def doit(a, b):
         globals_dict.update(create_aids_aid=create_aids_aid)
 
         cal_EventType = resolve_model('cal.EventType')
-        def create_cal_eventtype(id, name, seqno, build_method, template, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, invite_team_members_id, invite_client):
+        def create_cal_eventtype(id, name, seqno, build_method, template, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, invite_client):
             kw = dict()
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name',name))
