@@ -505,7 +505,7 @@ def doit(a, b):
 
         system_TextFieldTemplate = resolve_model('system.TextFieldTemplate')
         
-        def create_system_textfieldtemplate(id, user_id, name, description, team_id, text):
+        def create_system_textfieldtemplate(id, user_id, name, description, text):
             kw = dict()
             kw.update(id=id)
             kw.update(user_id=user_id)
