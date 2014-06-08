@@ -268,7 +268,7 @@ class Migrator(Migrator):
 
         notes_NoteType = resolve_model("notes.NoteType")
 
-        def create_notes_notetype(id, name, build_method, template, attach_to_email, email_template, important, remark, body_template, is_attestation):
+        def create_notes_notetype(id, name, build_method, template, attach_to_email, email_template, important, remark, body_template):
             kw = dict()
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name', name))
