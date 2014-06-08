@@ -435,7 +435,7 @@ def doit(a, b):
         aids_AidType = resolve_model('aids.AidType')
         bv2kw = globals_dict.get('bv2kw')
 
-        def create_aids_aidtype(id, name, build_method, template, remark):
+        def create_aids_aidtype(id, name, foo, build_method, template, remark):
             kw = dict()
             kw.update(id=id)
             if name is not None: kw.update(bv2kw('name',name))
