@@ -446,16 +446,17 @@ def doit(a, b):
         globals_dict.update(create_aids_aidtype=create_aids_aidtype)
 
         aids_Aid = resolve_model('aids.Aid')
-        def create_aids_aid(id, project_id, decided_date, decider_id, applies_from, applies_until, type_id, category_id, amount):
+        def create_aids_aid(id, client_id, aid_regime, aid_type_id, decided_date, decider_id, applies_from, applies_until, category_id, amount):
             kw = dict()
             kw.update(id=id)
-            kw.update(client_id=project_id)
+            kw.update(client_id=client_id)
             kw.update(decided_date=decided_date)
             kw.update(decider_id=decider_id)
             kw.update(applies_from=applies_from)
             kw.update(applies_until=applies_until)
-            kw.update(aid_type_id=type_id)
+            kw.update(aid_type_id=aid_type_id)
             kw.update(category_id=category_id)
+            kw.update(aid_regime=aid_regime)
             if amount is not None: amount = Decimal(amount)
             kw.update(amount=amount)
             return aids_Aid(**kw)
