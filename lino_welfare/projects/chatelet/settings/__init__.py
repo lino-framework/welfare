@@ -14,7 +14,7 @@ class Site(Site):
     demo_fixtures = """std few_languages props all_countries
     be demo cbss mini demo2 local """.split()
 
-    migration_class = 'lino_welfare.settings.chatelet.migrate.Migrator'
+    migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
