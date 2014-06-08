@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-22 22:35+0300\n"
+"POT-Creation-Date: 2014-06-08 21:08+0300\n"
 "PO-Revision-Date: 2013-03-23 17:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -59,27 +59,27 @@ msgid ""
 msgstr ""
 
 #: lino_welfare/config/excerpts/Excerpt/aus.body.html:5
-#: lino_welfare/modlib/reception/models.py:100
+#: lino_welfare/modlib/reception/models.py:91
 msgid "Attestation"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:868
+#: lino_welfare/fixtures/demo.py:880
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:869
+#: lino_welfare/fixtures/demo.py:881
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1122
+#: lino_welfare/fixtures/demo.py:1140
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1122
+#: lino_welfare/fixtures/demo.py:1140
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1122
+#: lino_welfare/fixtures/demo.py:1140
 msgid "Information"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:25
 #: lino_welfare/modlib/aids/models.py:187
-#: lino_welfare/modlib/pcsw/models.py:823
+#: lino_welfare/modlib/pcsw/models.py:824
 msgid "Aids"
 msgstr ""
 
@@ -182,8 +182,8 @@ msgstr ""
 #: lino_welfare/modlib/badges/models.py:61
 #: lino_welfare/modlib/courses/models.py:241
 #: lino_welfare/modlib/courses/models.py:432
-#: lino_welfare/modlib/cv/models.py:188 lino_welfare/modlib/debts/models.py:551
-#: lino_welfare/modlib/debts/models.py:629
+#: lino_welfare/modlib/cv/models.py:188 lino_welfare/modlib/debts/models.py:555
+#: lino_welfare/modlib/debts/models.py:633
 #: lino_welfare/modlib/jobs/models.py:214
 #: lino_welfare/modlib/jobs/models.py:239
 #: lino_welfare/modlib/jobs/models.py:322
@@ -192,8 +192,8 @@ msgstr ""
 #: lino_welfare/modlib/jobs/models.py:825
 #: lino_welfare/modlib/jobs/models.py:968
 #: lino_welfare/modlib/pcsw/models.py:202
-#: lino_welfare/modlib/pcsw/models.py:1383
-#: lino_welfare/modlib/pcsw/models.py:1442
+#: lino_welfare/modlib/pcsw/models.py:1379
+#: lino_welfare/modlib/pcsw/models.py:1438
 #: lino_welfare/modlib/uploads/models.py:88
 msgid "Remark"
 msgstr ""
@@ -215,14 +215,14 @@ msgid "Applies until"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:204
-#: lino_welfare/modlib/debts/models.py:214
-#: lino_welfare/modlib/debts/models.py:612
-#: lino_welfare/modlib/debts/models.py:1014
+#: lino_welfare/modlib/debts/models.py:218
+#: lino_welfare/modlib/debts/models.py:616
 #: lino_welfare/modlib/debts/models.py:1018
 #: lino_welfare/modlib/debts/models.py:1022
 #: lino_welfare/modlib/debts/models.py:1026
 #: lino_welfare/modlib/debts/models.py:1030
-#: lino_welfare/modlib/debts/models.py:1094
+#: lino_welfare/modlib/debts/models.py:1034
+#: lino_welfare/modlib/debts/models.py:1098
 msgid "Amount"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 
 #: lino_welfare/modlib/badges/models.py:56
 #: lino_welfare/modlib/cal/models.py:251 lino_welfare/modlib/cbss/tx25.py:557
-#: lino_welfare/modlib/cbss/tx25.py:645 lino_welfare/modlib/debts/models.py:163
+#: lino_welfare/modlib/cbss/tx25.py:645 lino_welfare/modlib/debts/models.py:160
 #: lino_welfare/modlib/jobs/models.py:1193
 #: lino_welfare/modlib/jobs/models.py:1288
 #: lino_welfare/modlib/jobs/models.py:1411
@@ -315,8 +315,8 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:115
 #: lino_welfare/modlib/contacts/models.py:191
 #: lino_welfare/modlib/contacts/models.py:290
-#: lino_welfare/modlib/debts/models.py:413
-#: lino_welfare/modlib/isip/models.py:662
+#: lino_welfare/modlib/debts/models.py:417
+#: lino_welfare/modlib/isip/models.py:672
 #: lino_welfare/modlib/system/models.py:109
 #: lino_welfare/modlib/users/models.py:100
 msgid "General"
@@ -341,7 +341,7 @@ msgstr ""
 
 #: lino_welfare/modlib/cbss/__init__.py:38
 #: lino_welfare/modlib/pcsw/models.py:722
-#: lino_welfare/modlib/pcsw/models.py:910
+#: lino_welfare/modlib/pcsw/models.py:906
 msgid "CBSS"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgid "Query Register"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1392
-#: lino_welfare/modlib/pcsw/coaching.py:205
+#: lino_welfare/modlib/pcsw/coaching.py:149
 msgid "Primary"
 msgstr ""
 
@@ -568,7 +568,7 @@ msgid "ManageAccess Requests"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1456
-#: lino_welfare/modlib/integ/models.py:554
+#: lino_welfare/modlib/integ/models.py:552
 msgid "Period from"
 msgstr ""
 
@@ -782,7 +782,7 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/tx25.py:959 lino_welfare/modlib/isip/models.py:76
+#: lino_welfare/modlib/cbss/tx25.py:959 lino_welfare/modlib/isip/models.py:78
 #: lino_welfare/modlib/jobs/models.py:186
 msgid "Reference"
 msgstr ""
@@ -1012,9 +1012,9 @@ msgid "Identity Cards"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/tx25.py:1378
-#: lino_welfare/modlib/pcsw/models.py:1382
-#: lino_welfare/modlib/pcsw/models.py:1436
-#: lino_welfare/modlib/reception/models.py:57
+#: lino_welfare/modlib/pcsw/models.py:1378
+#: lino_welfare/modlib/pcsw/models.py:1432
+#: lino_welfare/modlib/reception/models.py:48
 msgid "Reason"
 msgstr ""
 
@@ -1059,7 +1059,7 @@ msgid "obsolete"
 msgstr ""
 
 #: lino_welfare/modlib/contacts/models.py:99
-#: lino_welfare/modlib/pcsw/coaching.py:249
+#: lino_welfare/modlib/pcsw/coaching.py:192
 msgid "Cannot delete companies and persons imported from TIM"
 msgstr ""
 
@@ -1159,14 +1159,14 @@ msgid "Default guest role for particpants of events."
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:185
-#: lino_welfare/modlib/debts/models.py:633
-#: lino_welfare/modlib/debts/models.py:692
-#: lino_welfare/modlib/debts/models.py:993
-#: lino_welfare/modlib/debts/models.py:1090
-#: lino_welfare/modlib/debts/models.py:1244
+#: lino_welfare/modlib/debts/models.py:637
+#: lino_welfare/modlib/debts/models.py:696
+#: lino_welfare/modlib/debts/models.py:997
+#: lino_welfare/modlib/debts/models.py:1094
+#: lino_welfare/modlib/debts/models.py:1248
 #: lino_welfare/modlib/integ/models.py:226
 #: lino_welfare/modlib/integ/models.py:288
-#: lino_welfare/modlib/integ/models.py:470
+#: lino_welfare/modlib/integ/models.py:468
 msgid "Description"
 msgstr ""
 
@@ -1291,7 +1291,7 @@ msgid "Course found"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:438
-#: lino_welfare/modlib/isip/models.py:292
+#: lino_welfare/modlib/isip/models.py:294
 msgid "date ended"
 msgstr ""
 
@@ -1318,7 +1318,7 @@ msgstr ""
 msgid "unknown age"
 msgstr ""
 
-#: lino_welfare/modlib/cv/__init__.py:14 lino_welfare/modlib/pcsw/models.py:883
+#: lino_welfare/modlib/cv/__init__.py:14 lino_welfare/modlib/pcsw/models.py:879
 #: lino_welfare/projects/chatelet/pcsw/models.py:38
 msgid "Career"
 msgstr ""
@@ -1430,29 +1430,29 @@ msgstr ""
 msgid "Debts mediation"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:65
+#: lino_welfare/modlib/debts/models.py:63
 msgid "DM Clients"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:93
+#: lino_welfare/modlib/debts/models.py:91
 msgid ""
 "For how many months the entered amount counts. \n"
 "For example 1 means a monthly amount, 12 a yearly amount."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:159
+#: lino_welfare/modlib/debts/models.py:156
 msgid "Budget"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:160
+#: lino_welfare/modlib/debts/models.py:157
 msgid "Budgets"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:167
+#: lino_welfare/modlib/debts/models.py:164
 msgid "Print to-do list"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:169
+#: lino_welfare/modlib/debts/models.py:166
 msgid ""
 "Einträge im Feld \"To-do\" werden nur ausgedruckt, \n"
 "wenn die Option \"To-dos drucken\" des Budgets angekreuzt ist. \n"
@@ -1462,202 +1462,202 @@ msgid ""
 "Vielleicht mit Fußnoten?"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:177
+#: lino_welfare/modlib/debts/models.py:174
 msgid "Print empty rows"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:179
+#: lino_welfare/modlib/debts/models.py:176
 msgid "Check this to print also empty rows for later completion."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:184
+#: lino_welfare/modlib/debts/models.py:181
 msgid "Include yearly incomes"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:186
+#: lino_welfare/modlib/debts/models.py:183
 msgid ""
 "Check this to include yearly incomes in the Debts Overview table of this "
 "Budget."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:187
-#: lino_welfare/modlib/integ/models.py:573
+#: lino_welfare/modlib/debts/models.py:184
+#: lino_welfare/modlib/integ/models.py:571
 msgid "Introduction"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:188
+#: lino_welfare/modlib/debts/models.py:185
 #: lino_welfare/modlib/jobs/template_messages.py:7
 msgid "Conclusion"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:189
+#: lino_welfare/modlib/debts/models.py:186
 msgid "Distributable amount"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:190
+#: lino_welfare/modlib/debts/models.py:187
 msgid "The total monthly amount available for debts distribution."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:201
+#: lino_welfare/modlib/debts/models.py:198
 msgid "New"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:203
+#: lino_welfare/modlib/debts/models.py:200
 #, python-format
 msgid "Budget %(pk)d for %(partner)s"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:212
+#: lino_welfare/modlib/debts/models.py:216
 msgid "Common"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:360
+#: lino_welfare/modlib/debts/models.py:364
 msgid "Mr."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:363
+#: lino_welfare/modlib/debts/models.py:367
 msgid "Mrs."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:371
+#: lino_welfare/modlib/debts/models.py:375
 msgid "Preview"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:418
+#: lino_welfare/modlib/debts/models.py:422
 msgid "Expenses & Income"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:423
+#: lino_welfare/modlib/debts/models.py:427
 msgid "Liabilities & Assets"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:433
+#: lino_welfare/modlib/debts/models.py:437
 msgctxt "debts"
 msgid "Summary"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:485
+#: lino_welfare/modlib/debts/models.py:489
 msgid "Is partner of these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:539
+#: lino_welfare/modlib/debts/models.py:543
 msgid "Budget Actor"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:540
+#: lino_welfare/modlib/debts/models.py:544
 msgid "Budget Actors"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:550
+#: lino_welfare/modlib/debts/models.py:554
 msgid "Header"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:563
+#: lino_welfare/modlib/debts/models.py:567
 msgid "Actor"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:584
+#: lino_welfare/modlib/debts/models.py:588
 msgid "To be filled if there is more than one person involved."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:590
+#: lino_welfare/modlib/debts/models.py:594
 msgid "Is actor in these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:599
+#: lino_welfare/modlib/debts/models.py:603
 msgid "Budget Entry"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:600
+#: lino_welfare/modlib/debts/models.py:604
 msgid "Budget Entries"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:619
+#: lino_welfare/modlib/debts/models.py:623
 msgid "Circa"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:622
+#: lino_welfare/modlib/debts/models.py:626
 msgid "Distribute"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:628
+#: lino_welfare/modlib/debts/models.py:632
 msgid "To Do"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:642
-#: lino_welfare/modlib/debts/models.py:1343
+#: lino_welfare/modlib/debts/models.py:646
+#: lino_welfare/modlib/debts/models.py:1347
 msgid "Periods"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:647
-#: lino_welfare/modlib/debts/models.py:1034
+#: lino_welfare/modlib/debts/models.py:651
+#: lino_welfare/modlib/debts/models.py:1038
 msgid "Monthly rate"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:655
-#: lino_welfare/modlib/debts/models.py:1357
+#: lino_welfare/modlib/debts/models.py:659
+#: lino_welfare/modlib/debts/models.py:1361
 msgid "Debt collection agency"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:656
+#: lino_welfare/modlib/debts/models.py:660
 msgid ""
 "Leave empty for simple debts, otherwise select         here the "
 "responsible bailiff or collection agency"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:718
+#: lino_welfare/modlib/debts/models.py:722
 msgid "Periods must be > 0"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:722
+#: lino_welfare/modlib/debts/models.py:726
 #, python-format
 msgid "Cannot set 'Distribute' when 'Monthly rate' is %r"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:989
+#: lino_welfare/modlib/debts/models.py:993
 #: lino_welfare/modlib/integ/models.py:165
-#: lino_welfare/modlib/integ/models.py:370
-#: lino_welfare/modlib/integ/models.py:394
-#: lino_welfare/modlib/integ/models.py:424
-#: lino_welfare/modlib/integ/models.py:490
-#: lino_welfare/modlib/integ/models.py:528
+#: lino_welfare/modlib/integ/models.py:368
+#: lino_welfare/modlib/integ/models.py:392
+#: lino_welfare/modlib/integ/models.py:422
+#: lino_welfare/modlib/integ/models.py:488
+#: lino_welfare/modlib/integ/models.py:526
 msgid "Total"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1008
+#: lino_welfare/modlib/debts/models.py:1012
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1054
+#: lino_welfare/modlib/debts/models.py:1058
 msgid "Print version of :ref:`welfare.debts.LiabilitiesByBudget`."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1114
+#: lino_welfare/modlib/debts/models.py:1118
 msgid "Shows the Incomes & Expenses for this budget."
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1115
+#: lino_welfare/modlib/debts/models.py:1119
 msgid "Incomes & Expenses"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1161
+#: lino_welfare/modlib/debts/models.py:1165
 msgid "Debts"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1173
+#: lino_welfare/modlib/debts/models.py:1177
 #, python-format
 msgid "%s (distributable)"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1183
+#: lino_welfare/modlib/debts/models.py:1187
 msgid "Bailiff Debts"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1196
+#: lino_welfare/modlib/debts/models.py:1200
 msgid "Debts distribution"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1199
+#: lino_welfare/modlib/debts/models.py:1203
 msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
@@ -1666,39 +1666,39 @@ msgid ""
 "\n"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1229
+#: lino_welfare/modlib/debts/models.py:1233
 msgid "%"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1233
+#: lino_welfare/modlib/debts/models.py:1237
 msgid "Monthly payback suggested"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1240
+#: lino_welfare/modlib/debts/models.py:1244
 msgid "Creditor"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1241
+#: lino_welfare/modlib/debts/models.py:1245
 msgid "Debt"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1334
+#: lino_welfare/modlib/debts/models.py:1338
 msgid "Required for Households"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1339
+#: lino_welfare/modlib/debts/models.py:1343
 msgid "Required for Persons"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1347
+#: lino_welfare/modlib/debts/models.py:1351
 msgid "Default amount"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1375
+#: lino_welfare/modlib/debts/models.py:1379
 msgid "Master budget"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:1377
+#: lino_welfare/modlib/debts/models.py:1381
 msgid "The budget whose content is to be         copied into new budgets."
 msgstr ""
 
@@ -1809,278 +1809,278 @@ msgstr ""
 msgid "Coaching endings by user"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:376
+#: lino_welfare/modlib/integ/models.py:374
 msgid "Coaching endings by type"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:428
+#: lino_welfare/modlib/integ/models.py:426
 msgid "Contract endings by type"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:438
+#: lino_welfare/modlib/integ/models.py:436
 msgid "PIIS par agent et type"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:451
+#: lino_welfare/modlib/integ/models.py:449
 msgid "Art60§7 par agent et type"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:457
+#: lino_welfare/modlib/integ/models.py:455
 msgid "PIIS et types de formation"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:458
+#: lino_welfare/modlib/integ/models.py:456
 msgid ""
 "Nombre de PIIS actifs par \n"
 "    type de formation et type de contrat."
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:494
+#: lino_welfare/modlib/integ/models.py:492
 msgid "Organisations externes et contrats"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:495
+#: lino_welfare/modlib/integ/models.py:493
 msgid ""
 "Nombre de PIIS actifs par \n"
 "    organisation externe et type de contrat."
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:533
+#: lino_welfare/modlib/integ/models.py:531
 msgid "Employants et contrats Art 60§7"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:534
+#: lino_welfare/modlib/integ/models.py:532
 msgid ""
 "Nombre de projets Art 60§7 actifs par \n"
 "    employants et type de contrat."
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:551
+#: lino_welfare/modlib/integ/models.py:549
 msgid "Activity Report"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:555
-#: lino_welfare/modlib/pcsw/coaching.py:200
-#: lino_welfare/modlib/pcsw/models.py:1389
-#: lino_welfare/modlib/pcsw/models.py:1441
+#: lino_welfare/modlib/integ/models.py:553
+#: lino_welfare/modlib/pcsw/coaching.py:144
+#: lino_welfare/modlib/pcsw/models.py:1385
+#: lino_welfare/modlib/pcsw/models.py:1437
 msgid "until"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:558
+#: lino_welfare/modlib/integ/models.py:556
 #: lino_welfare/modlib/isip/__init__.py:27
-#: lino_welfare/modlib/isip/models.py:604
-#: lino_welfare/modlib/isip/models.py:668
+#: lino_welfare/modlib/isip/models.py:614
+#: lino_welfare/modlib/isip/models.py:678
 #: lino_welfare/modlib/pcsw/models.py:140
 msgid "ISIP"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:580
+#: lino_welfare/modlib/integ/models.py:578
 msgid "Indicateurs généraux"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:585
+#: lino_welfare/modlib/integ/models.py:583
 msgid "Causes d'arrêt des accompagnements"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:73
+#: lino_welfare/modlib/isip/models.py:75
 msgid "ISIP Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:74
+#: lino_welfare/modlib/isip/models.py:76
 msgid "ISIP Types"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:82
+#: lino_welfare/modlib/isip/models.py:84
 msgid "needs Study type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:107
+#: lino_welfare/modlib/isip/models.py:109
 msgid "Examination Policy"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:108
+#: lino_welfare/modlib/isip/models.py:110
 msgid "Examination Policies"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:113
+#: lino_welfare/modlib/isip/models.py:115
 msgid "Generated events will receive this type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:137
-#: lino_welfare/modlib/pcsw/coaching.py:145
+#: lino_welfare/modlib/isip/models.py:139
+#: lino_welfare/modlib/pcsw/coaching.py:92
 msgid "Reason of termination"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:138
+#: lino_welfare/modlib/isip/models.py:140
 msgid "Contract termination reasons"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:140
+#: lino_welfare/modlib/isip/models.py:142
 msgid "designation"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:143
+#: lino_welfare/modlib/isip/models.py:145
 #: lino_welfare/modlib/jobs/models.py:392
 #: lino_welfare/modlib/jobs/models.py:674
 #: lino_welfare/modlib/pcsw/models.py:219
 msgid "Success"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:145
+#: lino_welfare/modlib/isip/models.py:147
 msgid "Require date ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:177
+#: lino_welfare/modlib/isip/models.py:179
 msgid "Study Regime"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:179
+#: lino_welfare/modlib/isip/models.py:181
 msgid "Studies"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:180
+#: lino_welfare/modlib/isip/models.py:182
 msgid "Trainings"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:186
+#: lino_welfare/modlib/isip/models.py:188
 msgid "Education Level"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:187
+#: lino_welfare/modlib/isip/models.py:189
 msgid "Education Levels"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:204
+#: lino_welfare/modlib/isip/models.py:206
 msgid "Study Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:205
+#: lino_welfare/modlib/isip/models.py:207
 msgid "Study Types"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:268
+#: lino_welfare/modlib/isip/models.py:270
 msgid "applies from"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:269
+#: lino_welfare/modlib/isip/models.py:271
 msgid "applies until"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:271
+#: lino_welfare/modlib/isip/models.py:273
 msgid "date decided"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:273
+#: lino_welfare/modlib/isip/models.py:275
 msgid "date issued"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:277
+#: lino_welfare/modlib/isip/models.py:279
 msgid "responsible (ASD)"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:360
+#: lino_welfare/modlib/isip/models.py:367
 msgid "Contract ends before it started."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:374
+#: lino_welfare/modlib/isip/models.py:381
 msgid "You must specify a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:403
+#: lino_welfare/modlib/isip/models.py:413
 #, python-format
 msgid "Evaluation %d"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:414
+#: lino_welfare/modlib/isip/models.py:424
 msgid "Contract ends in a month"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:430
-#: lino_welfare/modlib/pcsw/coaching.py:46
+#: lino_welfare/modlib/isip/models.py:440
+#: lino_welfare/modlib/pcsw/coaching.py:34
 #: lino_welfare/modlib/pcsw/models.py:135
 msgid "Observed event"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:431
-#: lino_welfare/modlib/pcsw/coaching.py:47
+#: lino_welfare/modlib/isip/models.py:441
+#: lino_welfare/modlib/pcsw/coaching.py:35
 #: lino_welfare/modlib/pcsw/models.py:136
 msgid "Observed events"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:433
-#: lino_welfare/modlib/pcsw/coaching.py:49
+#: lino_welfare/modlib/isip/models.py:443
+#: lino_welfare/modlib/pcsw/coaching.py:37
 msgid "Started"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:434
-#: lino_welfare/modlib/pcsw/coaching.py:50
+#: lino_welfare/modlib/isip/models.py:444
+#: lino_welfare/modlib/pcsw/coaching.py:38
 #: lino_welfare/modlib/pcsw/models.py:139
 msgid "Active"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:435
-#: lino_welfare/modlib/pcsw/coaching.py:51
+#: lino_welfare/modlib/isip/models.py:445
+#: lino_welfare/modlib/pcsw/coaching.py:39
 msgid "Ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:436
+#: lino_welfare/modlib/isip/models.py:446
 msgid "Signed"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:450
+#: lino_welfare/modlib/isip/models.py:460
 msgid "Successfully ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:575
+#: lino_welfare/modlib/isip/models.py:585
 #, python-format
 msgid "Date range %(p1)s lies outside of coached period %(p2)s."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:579
+#: lino_welfare/modlib/isip/models.py:589
 #, python-format
 msgid "Date range overlaps with %(ctype)s #%(id)s"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:591
+#: lino_welfare/modlib/isip/models.py:601
 #, python-format
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:605
+#: lino_welfare/modlib/isip/models.py:615
 msgid "ISIPs"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:610
+#: lino_welfare/modlib/isip/models.py:620
 #: lino_welfare/modlib/jobs/models.py:293
 #: lino_welfare/modlib/jobs/models.py:816
 msgid "Contract Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:613
+#: lino_welfare/modlib/isip/models.py:623
 msgid "stages"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:616
+#: lino_welfare/modlib/isip/models.py:626
 msgid "goals"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:619
+#: lino_welfare/modlib/isip/models.py:629
 msgid "duties ASD"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:622
+#: lino_welfare/modlib/isip/models.py:632
 msgid "duties DSBE"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:625
+#: lino_welfare/modlib/isip/models.py:635
 msgid "duties company"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:628
+#: lino_welfare/modlib/isip/models.py:638
 msgid "duties person"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:650
+#: lino_welfare/modlib/isip/models.py:660
 msgid "Integration agent"
 msgstr ""
 
@@ -2194,7 +2194,7 @@ msgid "Job Types"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:585
-#: lino_welfare/modlib/pcsw/models.py:1305
+#: lino_welfare/modlib/pcsw/models.py:1301
 msgid "Designation"
 msgstr ""
 
@@ -2232,7 +2232,7 @@ msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:683
 #: lino_welfare/modlib/jobs/models.py:767
-#: lino_welfare/modlib/pcsw/models.py:1545
+#: lino_welfare/modlib/pcsw/models.py:1541
 msgid "Remarks"
 msgstr ""
 
@@ -2397,7 +2397,7 @@ msgid "Competence"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:145
-#: lino_welfare/modlib/pcsw/models.py:893
+#: lino_welfare/modlib/pcsw/models.py:889
 #: lino_welfare/projects/chatelet/pcsw/models.py:42
 msgid "Competences"
 msgstr ""
@@ -2425,8 +2425,8 @@ msgid "New clients since"
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:274
-#: lino_welfare/modlib/pcsw/coaching.py:327
-#: lino_welfare/modlib/pcsw/models.py:996
+#: lino_welfare/modlib/pcsw/coaching.py:270
+#: lino_welfare/modlib/pcsw/models.py:992
 msgid "Coached by"
 msgstr ""
 
@@ -2507,87 +2507,93 @@ msgstr ""
 msgid "PCSW"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:71
+#: lino_welfare/modlib/pcsw/coaching.py:43
 msgid "End coaching"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:72
+#: lino_welfare/modlib/pcsw/coaching.py:44
 msgid "User no longer coaches this client."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:76
+#: lino_welfare/modlib/pcsw/coaching.py:48
 #, python-format
 msgid "%(client)s no longer coached by %(coach)s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:113
+#: lino_welfare/modlib/pcsw/coaching.py:53
+msgid "GSS"
+msgstr ""
+
+#: lino_welfare/modlib/pcsw/coaching.py:59
 msgid "Coaching type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:114
+#: lino_welfare/modlib/pcsw/coaching.py:60
 msgid "Coaching types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:118
-msgid "Liste des types d'accompagnement."
+#: lino_welfare/modlib/pcsw/coaching.py:64
+#: lino_welfare/modlib/pcsw/coaching.py:68
+#, python-format
+msgid "Whether this coaching type does %s."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:146
+#: lino_welfare/modlib/pcsw/coaching.py:93
 msgid "Coaching termination reasons"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:151
+#: lino_welfare/modlib/pcsw/coaching.py:99
 msgid "If not empty, allow this ending only on coachings of specified type."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:158
+#: lino_welfare/modlib/pcsw/coaching.py:104
 msgid "A list of reasons expressing why a coaching was ended"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:181
+#: lino_welfare/modlib/pcsw/coaching.py:125
 #: lino_welfare/modlib/pcsw/models.py:794
-#: lino_welfare/modlib/pcsw/models.py:1645
+#: lino_welfare/modlib/pcsw/models.py:1641
 #: lino_welfare/modlib/users/models.py:111
 msgid "Coaching"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:182
+#: lino_welfare/modlib/pcsw/coaching.py:126
 msgid "Coachings"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:185
+#: lino_welfare/modlib/pcsw/coaching.py:130
 msgid "Coach"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:197
+#: lino_welfare/modlib/pcsw/coaching.py:141
 msgid "Coached from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:207
+#: lino_welfare/modlib/pcsw/coaching.py:151
 msgid ""
 "There's at most one primary coach per client.         Enabling this field"
 " will automatically make the other         coachings non-primary."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:291
+#: lino_welfare/modlib/pcsw/coaching.py:234
 msgid "Coaching period ends before it started."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:320
+#: lino_welfare/modlib/pcsw/coaching.py:263
 msgid "Liste des accompagnements."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:332
-#: lino_welfare/modlib/pcsw/models.py:1000
+#: lino_welfare/modlib/pcsw/coaching.py:275
+#: lino_welfare/modlib/pcsw/models.py:996
 msgid "and by"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:337
+#: lino_welfare/modlib/pcsw/coaching.py:280
 msgid "Primary coachings"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/coaching.py:412
-#: lino_welfare/modlib/pcsw/models.py:1163
+#: lino_welfare/modlib/pcsw/coaching.py:355
+#: lino_welfare/modlib/pcsw/models.py:1159
 msgid "and"
 msgstr ""
 
@@ -2652,12 +2658,12 @@ msgid "Waiting for registry"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:142
-#: lino_welfare/modlib/pcsw/models.py:1378
+#: lino_welfare/modlib/pcsw/models.py:1374
 msgid "Dispense"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:143
-#: lino_welfare/modlib/pcsw/models.py:1431
+#: lino_welfare/modlib/pcsw/models.py:1427
 msgid "Penalty"
 msgstr ""
 
@@ -2694,7 +2700,7 @@ msgid "Coached"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:171
-#: lino_welfare/modlib/pcsw/models.py:1638
+#: lino_welfare/modlib/pcsw/models.py:1634
 msgid "Former"
 msgstr ""
 
@@ -2924,201 +2930,197 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:876
-msgid "Health"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/models.py:888
+#: lino_welfare/modlib/pcsw/models.py:884
 #: lino_welfare/projects/chatelet/pcsw/models.py:32
 msgid "Languages"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:899
+#: lino_welfare/modlib/pcsw/models.py:895
 msgid "Contracts"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:988
+#: lino_welfare/modlib/pcsw/models.py:984
 msgid "Aged from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:991
+#: lino_welfare/modlib/pcsw/models.py:987
 msgid "Aged to"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1003
+#: lino_welfare/modlib/pcsw/models.py:999
 msgid "Nationality"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1013
+#: lino_welfare/modlib/pcsw/models.py:1009
 msgid "Only primary clients"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1143
+#: lino_welfare/modlib/pcsw/models.py:1139
 #, python-format
 msgid "Aged %(min)s to %(max)s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1168
+#: lino_welfare/modlib/pcsw/models.py:1164
 #, python-format
 msgid " on %(date)s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1172
+#: lino_welfare/modlib/pcsw/models.py:1168
 #, python-format
 msgid "Coached on %s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1219
+#: lino_welfare/modlib/pcsw/models.py:1215
 msgid "Table of Clients whose data seems unlogical or inconsistent."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1224
+#: lino_welfare/modlib/pcsw/models.py:1220
 msgid "Data Test Clients"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1232
+#: lino_welfare/modlib/pcsw/models.py:1228
 msgid "Check NISS validity"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1234
+#: lino_welfare/modlib/pcsw/models.py:1230
 msgid "Check for overlapping contracts"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1295
+#: lino_welfare/modlib/pcsw/models.py:1291
 msgid "Error message"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1306
+#: lino_welfare/modlib/pcsw/models.py:1302
 msgid "Reference name"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1307
+#: lino_welfare/modlib/pcsw/models.py:1303
 msgid "Considered active"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1311
+#: lino_welfare/modlib/pcsw/models.py:1307
 msgid "Integration Phase"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1312
+#: lino_welfare/modlib/pcsw/models.py:1308
 msgid "Integration Phases"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1319
+#: lino_welfare/modlib/pcsw/models.py:1315
 msgid "Liste des phases d'intégration possibles."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1332
+#: lino_welfare/modlib/pcsw/models.py:1328
 msgid "activity"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1333
+#: lino_welfare/modlib/pcsw/models.py:1329
 msgid "activities"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1335
+#: lino_welfare/modlib/pcsw/models.py:1331
 msgid "Appears in Listing 104"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1342
+#: lino_welfare/modlib/pcsw/models.py:1338
 msgid "Liste des \"activités\" ou \"codes profession\"."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1358
+#: lino_welfare/modlib/pcsw/models.py:1354
 msgid "Dispense reason"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1359
+#: lino_welfare/modlib/pcsw/models.py:1355
 msgid "Dispense reasons"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1368
+#: lino_welfare/modlib/pcsw/models.py:1364
 msgid "A list of reasons for being dispensed"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1379
+#: lino_welfare/modlib/pcsw/models.py:1375
 msgid "Dispenses"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1386
+#: lino_welfare/modlib/pcsw/models.py:1382
 msgid "Dispensed from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1394
+#: lino_welfare/modlib/pcsw/models.py:1390
 msgid "Liste de dispenses"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1410
+#: lino_welfare/modlib/pcsw/models.py:1406
 msgid "Exclusion Type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1411
+#: lino_welfare/modlib/pcsw/models.py:1407
 msgid "Exclusion Types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1420
+#: lino_welfare/modlib/pcsw/models.py:1416
 msgid ""
 "Liste des raisons possibles d'arrêter temporairement \n"
 "    le paiement d'une aide financière prévue."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1432
+#: lino_welfare/modlib/pcsw/models.py:1428
 msgid "Penalties"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1439
+#: lino_welfare/modlib/pcsw/models.py:1435
 msgid "Excluded from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1455
+#: lino_welfare/modlib/pcsw/models.py:1451
 msgid "Liste des exclusions."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1476
+#: lino_welfare/modlib/pcsw/models.py:1472
 msgid "aid type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1477
+#: lino_welfare/modlib/pcsw/models.py:1473
 msgid "aid types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1481
+#: lino_welfare/modlib/pcsw/models.py:1477
 msgid "Liste des types d'aide financière."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1491
+#: lino_welfare/modlib/pcsw/models.py:1487
 msgid "Client Contact type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1492
+#: lino_welfare/modlib/pcsw/models.py:1488
 msgid "Client Contact types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1496
+#: lino_welfare/modlib/pcsw/models.py:1492
 msgid "Liste des types de contacts client."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1540
+#: lino_welfare/modlib/pcsw/models.py:1536
 msgid "Client Contact"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1541
+#: lino_welfare/modlib/pcsw/models.py:1537
 msgid "Client Contacts"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1550
+#: lino_welfare/modlib/pcsw/models.py:1546
 msgid "Must fill at least one field."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1562
+#: lino_welfare/modlib/pcsw/models.py:1558
 msgid "Contact person"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1567
+#: lino_welfare/modlib/pcsw/models.py:1563
 msgid "Liste des contacts clients."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1575
+#: lino_welfare/modlib/pcsw/models.py:1571
 msgid "Contacts"
 msgstr ""
 
@@ -3142,49 +3144,49 @@ msgstr ""
 msgid "Standby"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:53
+#: lino_welfare/modlib/reception/models.py:44
 msgid "Create visit"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:77
+#: lino_welfare/modlib/reception/models.py:68
 msgid "Create a prompt event for this client with this coach."
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:106
+#: lino_welfare/modlib/reception/models.py:97
 msgid "Subject"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:133
+#: lino_welfare/modlib/reception/models.py:124
 msgid "Client has no valid eID data!"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:142
+#: lino_welfare/modlib/reception/models.py:133
 msgid "Button"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:150
+#: lino_welfare/modlib/reception/models.py:141
 msgid "Find date with..."
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:158
+#: lino_welfare/modlib/reception/models.py:149
 #, python-format
 msgid " for %s"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:220
+#: lino_welfare/modlib/reception/models.py:211
 msgid "Create appointment with"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:231
+#: lino_welfare/modlib/reception/models.py:222
 msgid "Actions"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:236
+#: lino_welfare/modlib/reception/models.py:227
 msgid "Visit"
 msgstr ""
 
-#: lino_welfare/modlib/reception/models.py:250
-#: lino_welfare/modlib/reception/models.py:251
+#: lino_welfare/modlib/reception/models.py:241
+#: lino_welfare/modlib/reception/models.py:242
 msgid "Find date"
 msgstr ""
 
@@ -3285,67 +3287,67 @@ msgstr ""
 msgid "Issued by (Person)"
 msgstr ""
 
-#: lino_welfare/projects/base.py:100
+#: lino_welfare/projects/base.py:94
 #: lino_welfare/projects/chatelet/settings/__init__.py:54
 msgid "Anonymous"
 msgstr ""
 
-#: lino_welfare/projects/base.py:104
+#: lino_welfare/projects/base.py:98
 #: lino_welfare/projects/chatelet/settings/__init__.py:58
 msgid "Integration Agent"
 msgstr ""
 
-#: lino_welfare/projects/base.py:105
+#: lino_welfare/projects/base.py:99
 #: lino_welfare/projects/chatelet/settings/__init__.py:59
 msgid "Integration Agent (Manager)"
 msgstr ""
 
-#: lino_welfare/projects/base.py:106
+#: lino_welfare/projects/base.py:100
 #: lino_welfare/projects/chatelet/settings/__init__.py:60
 msgid "Newcomers consultant"
 msgstr ""
 
-#: lino_welfare/projects/base.py:107
+#: lino_welfare/projects/base.py:101
 #: lino_welfare/projects/chatelet/settings/__init__.py:61
 msgid "Reception clerk"
 msgstr ""
 
-#: lino_welfare/projects/base.py:108
+#: lino_welfare/projects/base.py:102
 msgid "Debts consultant"
 msgstr ""
 
-#: lino_welfare/projects/base.py:109
+#: lino_welfare/projects/base.py:103
 #: lino_welfare/projects/chatelet/settings/__init__.py:62
 msgid "Social agent"
 msgstr ""
 
-#: lino_welfare/projects/base.py:110
+#: lino_welfare/projects/base.py:104
 #: lino_welfare/projects/chatelet/settings/__init__.py:63
 msgid "Social agent (Manager)"
 msgstr ""
 
-#: lino_welfare/projects/base.py:111
+#: lino_welfare/projects/base.py:105
 #: lino_welfare/projects/chatelet/settings/__init__.py:64
 msgid "Administrator"
 msgstr ""
 
-#: lino_welfare/projects/base.py:145
+#: lino_welfare/projects/base.py:139
 msgid "Master"
 msgstr ""
 
-#: lino_welfare/projects/base.py:150
+#: lino_welfare/projects/base.py:144
 msgid "Listings"
 msgstr ""
 
-#: lino_welfare/projects/base.py:154
+#: lino_welfare/projects/base.py:148
 msgid "Configure"
 msgstr ""
 
-#: lino_welfare/projects/base.py:159
+#: lino_welfare/projects/base.py:153
 msgid "Explorer"
 msgstr ""
 
-#: lino_welfare/projects/base.py:163
+#: lino_welfare/projects/base.py:157
 msgid "Site"
 msgstr ""
 
@@ -3551,5 +3553,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Career related uploads"
+#~ msgstr ""
+
+#~ msgid "Liste des types d'accompagnement."
+#~ msgstr ""
+
+#~ msgid "Health"
 #~ msgstr ""
 
