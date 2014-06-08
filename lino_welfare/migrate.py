@@ -520,9 +520,8 @@ def doit(a, b):
         sepa = dd.resolve_app('sepa')
 
 
-        def create_contacts_partner(id, created, modified, country_id, city_id, region_id, zip_code, name, addr1, street_prefix, 
-            street, street_no, street_box, addr2, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, 
-            bank_account1, bank_account2):
+        def create_contacts_partner(id, created, modified, country_id, city_id, region_id, zip_code, addr1, street_prefix, 
+            street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id):
             kw = dict()
             kw.update(id=id)
             kw.update(created=created)
@@ -550,10 +549,10 @@ def doit(a, b):
             if False:
                 kw.update(bank_account1=bank_account1)
                 kw.update(bank_account2=bank_account2)
-
             accs = []
-            primary = True
-            for x in (bank_account1, bank_account2):
+            if dd.is_installed('sepa'):
+              primary = True
+              for x in (bank_account1, bank_account2):
                 x = x.strip()
                 if x:
                     a = x.split(':')
