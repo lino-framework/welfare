@@ -1,3 +1,4 @@
 from setuptools import setup
 execfile('lino_welfare/project_info.py')
-setup(**SETUP_INFO)
+if __name__ == '__main__':
+    setup(**SETUP_INFO)
