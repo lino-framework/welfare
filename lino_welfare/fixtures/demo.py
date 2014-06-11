@@ -77,8 +77,8 @@ COACHING_STORIES[pcsw.ClientStates.former] = Cycler(
 COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
     # start end primary
     [   # hintereinander betreut durch drei verschiedene Benutzer
-        (-800, -440, True),
-        (-440, -210, True),
+        (-800, -440, False),
+        (-440, -210, False),
         (-210, None, True),
     ], [
         (-220, None, True),
@@ -93,8 +93,6 @@ COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
         (-160, None, False),
         (-50, None, False),
     ])
-
-#~ COACHING_STORIES = Cycler(coaching_stories())
 
 
 #~ auth = models.get_app('auth')
