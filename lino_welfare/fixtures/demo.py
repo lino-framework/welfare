@@ -39,6 +39,8 @@ from lino.utils.ssin import generate_ssin
 from lino.modlib.cal.utils import DurationUnits
 from lino.modlib.cal.utils import WORKDAYS
 
+from lino_welfare.modlib.isip.models import OverlappingContractsTest
+
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
@@ -64,34 +66,37 @@ Company = dd.resolve_model('contacts.Company')
 
 
 #~ def coaching_stories(state):
+CT_GSS = 1
+CT_INTEG = 2
+CT_OTHER = 3
 COACHING_STORIES = dict()
 COACHING_STORIES[pcsw.ClientStates.former] = Cycler(
     [
-        (-1000, -500, True)
+        (-1000, -500, True, CT_GSS)
     ], [
-        (None, -60, True)
+        (None, -60, True, CT_INTEG)
     ], [
-        (-900, -430, False),
-        (-430, -200, True),
+        (-900, -430, False, CT_GSS),
+        (-430, -200, True, CT_GSS),
     ])
 COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
     # start end primary
     [   # hintereinander betreut durch drei verschiedene Benutzer
-        (-800, -440, False),
-        (-440, -210, False),
-        (-210, None, True),
+        (-800, -440, False, CT_INTEG),
+        (-440, -210, False, CT_INTEG),
+        (-210, None, True, CT_INTEG),
     ], [
-        (-220, None, True),
+        (-220, None, True, CT_INTEG),
     ], [
-        (-10,  None, True),
+        (-10,  None, True, CT_INTEG),
     ], [
-        (-810, None, True),
-        (-440, -230, False),
-        (-230, None, False),
+        (-810, None, True, CT_GSS),
+        (-440, -230, False, CT_OTHER),
+        (-230, None, False, CT_INTEG),
     ], [
-        (-210, None, True),
-        (-160, None, False),
-        (-50, None, False),
+        (-210, None, True, CT_GSS),
+        (-160, None, False, CT_INTEG),
+        (-50, None, False, CT_OTHER),
     ])
 
 
@@ -269,7 +274,7 @@ def objects():
     yield judith
 
     # id must be 1 (see isip.ContactBase.person_changed
-    yield pcsw.CoachingType(
+    ASD = pcsw.CoachingType(
         id=isip.COACHINGTYPE_ASD,
         does_integ=False,
         does_gss=True,
@@ -280,6 +285,7 @@ def objects():
             fr="SSG (Service social général)",
             en="GSS (General Social Service)",
         ))
+    yield ASD
 
     caroline.coaching_type_id = isip.COACHINGTYPE_ASD
     caroline.save()
@@ -727,7 +733,8 @@ def objects():
 
     #~ USERS = Cycler(root,melanie,hubert,alicia)
     AGENTS = Cycler(melanie, hubert, alicia, judith)
-    COACHINGTYPES = Cycler(pcsw.CoachingType.objects.all())
+    COACHINGTYPES = Cycler(pcsw.CoachingType.objects.filter(
+        does_gss=False, does_integ=False))
 
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
     count = 0
@@ -863,7 +870,7 @@ def objects():
     #~ yield proaktivjob
 
     # isip (VSE)
-    ISIP_DURATIONS = Cycler(30, 312, 480)
+    ISIP_DURATIONS = Cycler(312, 480, 312, 480, 30)
     ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
 
     # jobs (Art.60-7)
@@ -875,8 +882,10 @@ def objects():
     PROVIDERS = Cycler(jobs.JobProvider.objects.all())
     SECTORS = Cycler(jobs.Sector.objects.all())
     FUNCTIONS = Cycler(jobs.Function.objects.all())
-    REMARKS = Cycler(_("A very hard job."), '',
-                     _("No supervisor. Only for independent people."), '', '', '')
+    REMARKS = Cycler(
+        _("A very hard job."),
+        '',
+        _("No supervisor. Only for independent people."), '', '', '')
 
     for i in range(8):
         f = FUNCTIONS.pop()
@@ -1065,8 +1074,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     ENDINGS = Cycler(pcsw.CoachingEnding.objects.all())
     #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     for client in pcsw.Client.objects.all():
-    #~ for i in range(30):
-        #~ client = CLIENTS.pop()
         story = COACHING_STORIES.get(client.client_state)
         if story:
             if not client.group:
@@ -1075,10 +1082,17 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 # ~ for i in range(5-client.group.id): PERSONGROUPS.pop() #
                 client.save()
             periods = story.pop()
-            for a, b, primary in periods:
+            type = COACHINGTYPES.pop()
+            for a, b, primary, ct in periods:
+                if ct == CT_OTHER:
+                    type = COACHINGTYPES.pop()
+                elif ct == CT_GSS:
+                    type = ASD
+                elif ct == CT_INTEG:
+                    type = DSBE
                 kw = dict(client=client,
-                          type=COACHINGTYPES.pop(),
                           user=AGENTS_SCATTERED.pop(),
+                          type=type,
                           primary=primary)
                 if a is not None:
                     kw.update(start_date=settings.SITE.demo_date(a))
@@ -1098,9 +1112,10 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     PREMATURE_CONTRACT_ENDINGS = Cycler(
         isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
-    #~ jobs_contract = Instantiator('jobs.Contract').build
+
     for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
-        af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
+        # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
+        af = settings.SITE.demo_date(-600 + i * 40)
         kw = dict(applies_from=af, client=coaching.client,
                   user=coaching.user, company=COMPANIES.pop())
         if i % 2:
@@ -1124,15 +1139,15 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             else:
                 if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
                     ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
-        yield ctr
-        ar = dd.login()
-        # from lino.core.requests import BaseRequest
-        # ar = BaseRequest(user=coaching.user, renderer=...)
-        ctr.update_reminders(ar)
 
-    """
-    The reception desk opens at 8am. 20 visitors have checked in, half of which 
-    """
+        msg = OverlappingContractsTest(ctr.client).check(ctr)
+        if msg is None:
+            yield ctr
+            ar = dd.login()
+            ctr.update_reminders(ar)
+
+    # The reception desk opens at 8am. 20 visitors have checked in,
+    # half of which
 
     RECEPTION_CLIENTS = Cycler(reception.Clients.request(user=theresia))
     REASONS = Cycler(_("Urgent problem"), '', _("Complain"), _("Information"))

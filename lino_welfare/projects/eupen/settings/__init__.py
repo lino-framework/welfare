@@ -29,7 +29,7 @@ class Site(Site):
     uppercase_last_name = True
 
     demo_fixtures = """std few_languages props all_countries
-    be demo cbss mini demo2 local """.split()
+    demo cbss mini demo2 local """.split()
 
     def get_default_language(self):
         return 'de'
