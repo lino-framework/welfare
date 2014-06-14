@@ -385,6 +385,17 @@ class ContractBase(
             other.project = self.client
         super(ContractBase, self).update_owned_instance(other)
 
+    def setup_auto_event(self, evt):
+        # Suggested evaluation events should be for the currently
+        # responsible coach, not for the contract's author. This is
+        # relevant if coach changes while contract is active.  See
+        # :doc:`/tickets/104`
+        d = evt.start_date
+        coachings = evt.owner.client.get_coachings(
+            (d, d), type__does_integ=True)
+        if coachings.count() > 0:
+            evt.user = coachings[0].user
+
     def update_cal_rset(self):
         return self.exam_policy
 

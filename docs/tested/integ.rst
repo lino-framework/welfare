@@ -10,12 +10,75 @@ Integration Service
 
 ..  
     >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.docs.settings.test'
     >>> from lino.runtime import *
     >>> from django.utils import translation
     >>> from django.test import Client
     >>> import json
     >>> from lino import dd
 
+>>> print(settings.SETTINGS_MODULE)
+lino_welfare.projects.docs.settings.test
+
+Coach changes while contract active
+-----------------------------------
+
+The following verifies that :linoticket:`104` is solved.
+Every contract potentially generates a series of calendar events for
+evaluation meetings (according to the
+:attr:`ml.isip.ContractBase.exam_policy` field).
+
+Let's pick up ISIP contract #1, written by Alicia for client Alfons
+
+>>> obj = isip.Contract.objects.get(pk=1)
+>>> print(obj)
+ISIP#1 (Alfons Ausdemwald)
+>>> print(obj.user.first_name)
+Alicia
+
+This contract was active in the following period:
+
+>>> print(obj.applies_from)
+2012-09-29
+>>> print(obj.applies_until)
+2013-08-07
+
+This contract is an example of a special condition which in reality
+arise quite often: the coach changes while the contract is still
+active. In our example, Alicia handed this client over to Hubert on
+March 8th, 2013:
+
+>>> dd.show(pcsw.CoachingsByClient, obj.client)
+==================== ========== ================= ========= ===================== ============================
+ Coached from         until      Coach             Primary   Coaching type         Reason of termination
+-------------------- ---------- ----------------- --------- --------------------- ----------------------------
+ 3/13/12              3/8/13     Alicia Allmanns   No        Integration service   Transfer to colleague
+ 3/8/13               10/24/13   Hubert Huppertz   No        Integration service   End of right on social aid
+ 10/24/13                        Mélanie Mélard    Yes       Integration service
+ **Total (3 rows)**                                **1**
+==================== ========== ================= ========= ===================== ============================
+<BLANKLINE>
+
+Lino nicely attributes the automatic evaluation events to the coach in
+charge, depending on their date:
+
+>>> ar = cal.EventsByController.request(master_instance=obj)
+>>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
+>>> print(", ".join(events))
+... #doctest: +NORMALIZE_WHITESPACE
+2012-10-29 (Alicia), 2012-11-29 (Alicia), 2012-12-31 (Alicia),
+2013-01-31 (Alicia), 2013-02-28 (Alicia), 2013-03-28 (Hubert),
+2013-04-29 (Hubert), 2013-05-29 (Hubert), 2013-07-01 (Hubert),
+2013-08-01 (Hubert)
+
+The first 5 appointments are with Alicia, the next 5 with Hubert.
+That's what we wanted.
+
+
+Expects a list of 12 values but got 16
+--------------------------------------
 
 The following code caused an Exception "ParameterStore of LayoutHandle
 for ParamsLayout on pcsw.Clients expects a list of 12 values but got
@@ -90,19 +153,29 @@ Let's automatize this trick:
 >>> len(links)
 2
 
->>> soup = BeautifulSoup(check('integ/Clients/195', 'LinksByHuman'))
+Mr. Paul Frisch is a fictive client for which the demo database
+contains fictive family links. His client id is 196.
+
+>>> print(pcsw.Client.objects.get(id=196))
+FRISCH Paul (196)
+
+>>> soup = BeautifulSoup(check('integ/Clients/196', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
 14
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 203 })
+javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 204 })
 
 
 >>> print(soup.get_text())
-... #doctest: +NORMALIZE_WHITESPACE
-Paul istVater von Dennis (12 Jahre)Vater von Clara (14 Jahre)Vater von Philippe (16 Jahre)Vater von Peter (26 Jahre)Ehemann von Petra ZWEITH (45 Jahre)Sohn von Gaby FROGEMUTH (79 Jahre)Sohn von Hubert (80 Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn Ehemann Verwandter Sonstiger
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
+Paul istVater von Dennis (12 Jahre)Vater von Clara (14 Jahre)Vater von
+Philippe (16 Jahre)Vater von Peter (27 Jahre)Ehemann von Petra ZWEITH
+(45 Jahre)Sohn von Gaby FROGEMUTH (79 Jahre)Sohn von Hubert (80
+Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn
+Ehemann Verwandter Sonstiger
 
 
 

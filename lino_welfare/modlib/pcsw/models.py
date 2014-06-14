@@ -375,11 +375,11 @@ class Client(contacts.Person,
         kw.update(project=self)
         return super(Client, self).get_excerpt_options(ar, **kw)
 
-    def get_coachings(self, today=None, **flt):
+    def get_coachings(self, period=None, **flt):
         qs = self.coachings_by_client.filter(**flt)
-        if today is not None:
+        if period is not None:
             qs = self.coachings_by_client.filter(
-                only_active_coachings_filter(today))
+                only_active_coachings_filter(period))
         return qs
 
     @dd.chooser()
@@ -927,11 +927,9 @@ def only_active_coachings_filter(period, prefix=''):
     """
     assert len(period) == 2
     return Q(
-        #~ Q(**{n+'__end_date__isnull':False}) | Q(**{n+'__start_date__isnull':False}),
         Q(**{prefix + 'end_date__isnull': True}
           ) | Q(**{prefix + 'end_date__gte': period[0]}),
         Q(**{prefix + 'start_date__lte': period[1]}))
-        #~ Q(**{prefix+'start_date__isnull':True}) | Q(**{prefix+'start_date__lte':period}))
 
 
 def add_coachings_filter(qs, user, period, primary):

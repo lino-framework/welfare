@@ -1072,7 +1072,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     AGENTS_SCATTERED = Cycler(
         alicia, hubert, melanie, caroline, hubert, melanie, hubert, melanie)
     ENDINGS = Cycler(pcsw.CoachingEnding.objects.all())
-    #~ for client in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.newcomer):
     for client in pcsw.Client.objects.all():
         story = COACHING_STORIES.get(client.client_state)
         if story:
@@ -1113,11 +1112,15 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
 
-    for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
+    qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
+    for i, client in enumerate(qs):
+    # for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
         af = settings.SITE.demo_date(-600 + i * 40)
-        kw = dict(applies_from=af, client=coaching.client,
-                  user=coaching.user, company=COMPANIES.pop())
+        kw = dict(applies_from=af, client=client,
+                  company=COMPANIES.pop())
+        coaching = client.get_coachings(None, type=DSBE)[0]
+        kw.update(user=coaching.user)
         if i % 2:
             ctr = jobs.Contract(
                 type=JOBS_CONTRACT_TYPES.pop(),
@@ -1140,11 +1143,11 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
                     ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
 
-        msg = OverlappingContractsTest(ctr.client).check(ctr)
-        if msg is None:
-            yield ctr
-            ar = dd.login()
-            ctr.update_reminders(ar)
+        # msg = OverlappingContractsTest(ctr.client).check(ctr)
+        # if msg is None:
+        yield ctr
+        ar = dd.login()
+        ctr.update_reminders(ar)
 
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which

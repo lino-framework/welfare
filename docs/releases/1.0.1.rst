@@ -3,7 +3,6 @@ Version 1.0.1
 
 (Prerelease. Noch nicht offiziell released.)
 
-:checkin:`8efa2a28b667`
 
 
 Neue Features

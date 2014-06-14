@@ -2,7 +2,6 @@ Version 1.0.8
 =============
 
 Released 2013-01-14.
-:checkin:`8ce8c8ad63f0`.
 Requires :lino:`Lino 1.5.4 </releases/1.5.4>`
 
 Neuerungen
