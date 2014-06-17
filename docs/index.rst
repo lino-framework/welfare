@@ -22,6 +22,7 @@ Content
 .. toctree::
    :maxdepth: 1
 
+   ref/index
    admin/index
    releases/index
    tested/index

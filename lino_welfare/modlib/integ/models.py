@@ -30,7 +30,7 @@ from django.conf import settings
 from lino import dd
 from lino.utils.xmlgen.html import E
 
-from lino_welfare.modlib.integ import Plugin
+plugin = dd.apps.integ
 
 contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
@@ -39,6 +39,7 @@ jobs = dd.resolve_app('jobs')
 courses = dd.resolve_app('courses')
 users = dd.resolve_app('users')
 properties = dd.resolve_app('properties')
+
 
 
 class Clients(pcsw.Clients):
@@ -261,7 +262,9 @@ class CompareRequestsTable(dd.VirtualTable):
         yield add(jobs.Contracts, observed_event=isip.ContractEvents.active)
         #~ yield add(jobs.Contracts,isip.ContractEvents.ended)
 
-        if courses:
+        if hasattr(courses, 'PendingCourseRequests'):
+            # chatelet uses `lino.modlib.courses` which doesn't have
+            # this table.
             yield add(courses.PendingCourseRequests)
 
         all_contracts = isip.Contracts.request(
@@ -605,7 +608,7 @@ class ActivityReport(dd.Report):
 #~ def setup_main_menu(site,ui,profile,m):
     #~ m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
 def setup_reports_menu(site, ui, profile, m):
-    m = m.add_menu("integ", Plugin.verbose_name)
+    m = m.add_menu(plugin.app_label, plugin.verbose_name)
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
     m.add_action(site.modules.integ.UsersWithClients)
 
@@ -616,7 +619,7 @@ def setup_reports_menu(site, ui, profile, m):
 
 
 def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu("integ", Plugin.verbose_name)
+    m = m.add_menu(plugin.app_label, plugin.verbose_name)
     m.add_action(Clients)
     m.add_action(isip.MyContracts)
     #~ m.add_action(MyPersonSearches)
@@ -628,7 +631,7 @@ def setup_main_menu(site, ui, profile, m):
 
 
 def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("integ", Plugin.verbose_name)
+    m = m.add_menu(plugin.app_label, plugin.verbose_name)
     m.add_action(isip.ContractTypes)
     m.add_action(isip.ContractEndings)
     m.add_action(isip.ExamPolicies)
@@ -644,11 +647,11 @@ def setup_config_menu(site, ui, profile, m):
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu("integ", Plugin.verbose_name)
+    m = m.add_menu(plugin.app_label, plugin.verbose_name)
     m.add_action(isip.Contracts)
     m.add_action(jobs.Contracts)
     m.add_action(jobs.Candidatures)
     m.add_action(jobs.Studies)
 
 
-dd.add_user_group('integ', Plugin.verbose_name)
+dd.add_user_group(plugin.app_label, plugin.verbose_name)

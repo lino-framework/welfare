@@ -226,9 +226,8 @@ class Aid(dd.Model):
 class AidDetail(dd.FormLayout):
     main = """
     id client aid_regime aid_type:25 category
-    decider decided_date:10 applies_from applies_until
+    decider decided_date:10 applies_from applies_until amount
     aids.HelpersByAid
-    # outbox.MailsByController
     """
 
 
@@ -279,8 +278,8 @@ class MedicalAidsByClient(AidsByClient):
     _aid_regime = AidRegimes.medical
 
     insert_layout = """
-    aid_type
-    category
+    aid_type category
+    applies_from applies_until
     """
 
 
@@ -289,8 +288,17 @@ class FinancialAidsByClient(AidsByClient):
 
     insert_layout = """
     aid_type
-    category
+    category amount
+    decider decided_date
+    applies_from applies_until
     """
+
+    detail_layout = dd.FormLayout("""
+    id client aid_regime
+    aid_type:25 category
+    decider decided_date:10
+    applies_from applies_until amount
+    """, window_size=(50, 'auto'))
 
 
 class AidsByDecider(AidsByX):
