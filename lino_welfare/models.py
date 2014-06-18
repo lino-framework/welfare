@@ -47,27 +47,6 @@ courses = dd.resolve_app('courses')
 #~ newcomers = dd.resolve_app('newcomers')
 
 
-def customize_users():
-
-    dd.inject_field(
-        settings.SITE.user_model,
-        'coaching_type',
-        dd.ForeignKey(
-            'pcsw.CoachingType',
-            blank=True, null=True,
-            help_text="""The default CoachingType used when \
-            creating Coachings."""))
-    dd.inject_field(
-        settings.SITE.user_model,
-        'coaching_supervisor',
-        models.BooleanField(
-            _("Notify me when a coach has been assigned"),
-            default=False,
-            help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
-            wurde, wird außer dem Begleiter auch dieser Benutzer \
-            benachrichtigt."""))
-
-
 def customize_siteconfig():
     """
     Injects application-specific fields to
@@ -113,28 +92,15 @@ def customize_contacts():
     """
     Injects application-specific fields to :mod:`contacts <lino.modlib.contacts>`.
     """
-    dd.inject_field(contacts.RoleType,
-                    'use_in_contracts',
-                    models.BooleanField(
-                        verbose_name=_("usable in contracts"),
-                        default=True,
-                        help_text=_("Whether Links of this type can be used as contact person of a job contract.")))
-
-
-if False:
-
-    def customize_countries():
-        """
-        Injects application-specific fields to :mod:`countries <lino.modlib.countries>`.
-        """
-        dd.inject_field(countries.Country,
-                        'nationalities',
-                        models.CharField(
-                            verbose_name=_(
-                                "Nationality texts (NL, FR, DE, EN)"),
-                            max_length=200,
-                            blank=True,
-                            help_text=_("Space separated list of case insensitive nationality designations in 4 languages.")))
+    dd.inject_field(
+        contacts.RoleType,
+        'use_in_contracts',
+        models.BooleanField(
+            verbose_name=_("usable in contracts"),
+            default=True,
+            help_text=_(
+                "Whether Links of this type can be used "
+                "as contact person of a job contract.")))
 
 
 @dd.receiver(dd.auto_create)
@@ -297,8 +263,4 @@ customize_siteconfig()
 customize_contacts()
 #~ customize_notes()
 customize_sqlite()
-customize_users()
 
-#~ customize_user_groups()
-#~ customize_user_profiles()
-#~ setup_user_profiles()

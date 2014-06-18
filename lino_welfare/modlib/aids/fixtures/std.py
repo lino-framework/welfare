@@ -114,8 +114,11 @@ def objects():
         de="Person mit Familienlasten",
         fr="Personne qui cohabite avec une famille à sa charge"))
 
-    Decider = Instantiator('aids.Decider', "name").build
-    yield Decider("Sozialhilferat (SHR)")
-    yield Decider("Ständiges Präsidium (SP)")
-    yield Decider("Sozialhilfeausschuss (SAS)")
+    Decider = dd.resolve_model('boards.Board')
+    yield Decider(**dd.str2kw(
+        'name', _("Social Board (SB)")))  # "Sozialhilferat (SHR)"
+    yield Decider(**dd.str2kw(
+        'name', _("Social Commission (SC)")))  # Sozialhilfeausschuss (SAS)
+    yield Decider(**dd.str2kw(
+        'name', _("Permanent Board (PB)")))  # Ständiges Präsidium (SP)
 

@@ -323,13 +323,13 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ return cells
         yield add(
             pcsw.Coachings,
-            observed_event=pcsw.CoachingEvents.started, coaching_type=DSBE)
+            observed_event=dd.PeriodEvents.started, coaching_type=DSBE)
         yield add(
             pcsw.Coachings,
-            observed_event=pcsw.CoachingEvents.active, coaching_type=DSBE)
+            observed_event=dd.PeriodEvents.active, coaching_type=DSBE)
         yield add(
             pcsw.Coachings,
-            observed_event=pcsw.CoachingEvents.ended, coaching_type=DSBE)
+            observed_event=dd.PeriodEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.created)
@@ -359,7 +359,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 if mi is None:
                     return None
                 pv = dict(start_date=mi.start_date, end_date=mi.end_date)
-                pv.update(observed_event=pcsw.CoachingEvents.ended)
+                pv.update(observed_event=dd.PeriodEvents.ended)
                 pv.update(coaching_type=DSBE)
                 if user is not None:
                     pv.update(coached_by=user)
@@ -384,7 +384,7 @@ class CoachingEndingsByType(dd.VentilatingTable, pcsw.CoachingEndings):
                 if mi is None:
                     return None
                 pv = dict(start_date=mi.start_date, end_date=mi.end_date)
-                pv.update(observed_event=pcsw.CoachingEvents.ended)
+                pv.update(observed_event=dd.PeriodEvents.ended)
                 if ct is not None:
                     pv.update(coaching_type=ct)
                 pv.update(ending=obj)

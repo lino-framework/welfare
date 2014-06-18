@@ -192,6 +192,7 @@ class Site(Site):
         yield 'lino.modlib.excerpts'
         yield 'lino.modlib.humanlinks'
         yield 'lino.modlib.dedupe'
+        yield 'lino.modlib.boards'
 
         if False:  # not yet ready
             yield 'lino.modlib.families'

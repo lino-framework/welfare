@@ -30,6 +30,8 @@ from django.conf import settings
 
 
 contacts = dd.resolve_app('contacts')
+boards = dd.resolve_app('boards')
+
 
 
 class AidRegimes(dd.ChoiceList):
@@ -60,29 +62,6 @@ class Categories(dd.Table):
     detail_layout = """
     id name
     aids.AidsByCategory
-    """
-
-
-class Decider(dd.BabelNamed):
-
-    class Meta:
-        verbose_name = _("Decider")
-        verbose_name_plural = _("Deciders")
-
-
-class Deciders(dd.Table):
-    model = 'aids.Decider'
-    required = dd.required(user_level='admin', user_groups='office')
-    column_names = 'name *'
-    order_by = ["name"]
-
-    insert_layout = """
-    name
-    """
-
-    detail_layout = """
-    id name
-    aids.AidsByDecider
     """
 
 
@@ -175,7 +154,7 @@ class HelpersByAid(Helpers):
     auto_fit_column_widths = True
 
 
-class Aid(dd.Model):
+class Aid(boards.BoardDecision, dd.DatePeriod):
     """An Aid is when the decision has been made that a given Client
     benefits of given type of aid during a given period.
 
@@ -189,15 +168,6 @@ class Aid(dd.Model):
     client = models.ForeignKey('pcsw.Client')
     aid_regime = AidRegimes.field(default=AidRegimes.financial)
     aid_type = models.ForeignKey('aids.AidType')
-    decided_date = models.DateField(
-        verbose_name=_('Decided'), default=datetime.date.today)
-    decider = models.ForeignKey(Decider, blank=True, null=True)
-    applies_from = models.DateField(
-        verbose_name=_('Applies from'),
-        default=datetime.date.today)
-    applies_until = models.DateField(
-        verbose_name=_('Applies until'),
-        default=datetime.date.today)
 
     category = models.ForeignKey('aids.Category', blank=True, null=True)
 
@@ -222,11 +192,14 @@ class Aid(dd.Model):
         kw.update(project=self.client)
         return super(Aid, self).get_excerpt_options(ar, **kw)
 
+# dd.update_field(Aid, 'start_date', verbose_name=_('Applies from'))
+# dd.update_field(Aid, 'end_date', verbose_name=_('Applies until'))
+
 
 class AidDetail(dd.FormLayout):
     main = """
     id client aid_regime aid_type:25 category
-    decider decided_date:10 applies_from applies_until amount
+    board decided_date:10 start_date end_date amount
     aids.HelpersByAid
     """
 
@@ -237,7 +210,7 @@ class Aids(dd.Table):
     model = 'aids.Aid'
 
     insert_layout = """
-    client decider
+    client board
     category aid_type
     """
 
@@ -279,7 +252,7 @@ class MedicalAidsByClient(AidsByClient):
 
     insert_layout = """
     aid_type category
-    applies_from applies_until
+    start_date end_date
     """
 
 
@@ -289,20 +262,16 @@ class FinancialAidsByClient(AidsByClient):
     insert_layout = """
     aid_type
     category amount
-    decider decided_date
-    applies_from applies_until
+    board decided_date
+    start_date end_date
     """
 
     detail_layout = dd.FormLayout("""
     id client aid_regime
     aid_type:25 category
-    decider decided_date:10
-    applies_from applies_until amount
+    board decided_date:10
+    start_date end_date amount
     """, window_size=(50, 'auto'))
-
-
-class AidsByDecider(AidsByX):
-    master_key = 'decider'
 
 
 class AidsByCategory(AidsByX):
@@ -322,7 +291,6 @@ class AidsByType(AidsByX):
 
 def setup_config_menu(site, ui, profile, m):
     MODULE_LABEL = dd.apps.pcsw.verbose_name
-    #~ m  = m.add_menu("aids",_("~Aids"))
     m = m.add_menu("pcsw", MODULE_LABEL)
     m.add_action('aids.AidTypes')
     m.add_action('aids.HelperRoles')

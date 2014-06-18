@@ -23,7 +23,7 @@ from lino import dd
 
 def objects():
     Aid = resolve_model('aids.Aid')
-    Decider = resolve_model('aids.Decider')
+    Decider = resolve_model('boards.Board')
     Category = resolve_model('aids.Category')
     AidType = resolve_model('aids.AidType')
     ClientStates = dd.modules.pcsw.ClientStates
@@ -40,7 +40,7 @@ def objects():
 
     for i in range(12):
         atype = NTYPES.pop()
-        kw = dict(decider=DECIDERS.pop(),
+        kw = dict(board=DECIDERS.pop(),
                   category=CATS.pop(),
                   decided_date=settings.SITE.demo_date(days=i),
                   aid_regime=atype.aid_regime,

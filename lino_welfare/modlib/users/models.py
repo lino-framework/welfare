@@ -46,10 +46,23 @@ def check_subscription(user, calendar):
 
 class User(User):
 
+    coaching_type = dd.ForeignKey(
+        'pcsw.CoachingType',
+        blank=True, null=True,
+        help_text=_(
+            "The default CoachingType used when "
+            "creating Coachings."))
+    coaching_supervisor = models.BooleanField(
+        _("Notify me when a coach has been assigned"),
+        default=False,
+        help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
+        wurde, wird außer dem Begleiter auch dieser Benutzer \
+        benachrichtigt.""")
+
     def save(self, *args, **kwargs):
         """For a user with a office_level, create a default calendar.  If
         that user also has a coaching_level, create a default set of
-        subscription.
+        subscriptions.
 
         """
         super(User, self). save(*args, **kwargs)
@@ -63,18 +76,9 @@ class User(User):
         if not self.calendar:
             return
 
-        # if not self.calendar:
-        #     i = cal.Calendar.objects.all().count()
-        #     i = i % len(cal.Calendar.COLOR_CHOICES)
-        #     obj = cal.Calendar(
-        #         name=unicode(self),
-        #         color=cal.Calendar.COLOR_CHOICES[i])
-        #     obj.full_clean()
-        #     obj.save()
-        #     self.calendar = obj
-        #     super(User, self). save(*args, **kwargs)
-
         check_subscription(self, self.calendar)
+
+    def check_all_subscriptions(self):
 
         if not self.profile.coaching_level:
             return

@@ -23,20 +23,9 @@ import datetime
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from lino import dd
-from lino.utils.ranges import isrange
-
-
-class CoachingEvents(dd.ChoiceList):
-    verbose_name = _("Observed event")
-    verbose_name_plural = _("Observed events")
-add = CoachingEvents.add_item
-add('10', _("Started"), 'started')
-add('20', _("Active"), 'active')
-add('30', _("Ended"), 'ended')
 
 
 class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
@@ -112,7 +101,7 @@ class CoachingEndings(dd.Table):
     """
 
 
-class Coaching(dd.Model, dd.ImportedFields):
+class Coaching(dd.DatePeriod, dd.ImportedFields):
 
     """
 A Coaching (Begleitung, accompagnement) 
@@ -136,12 +125,6 @@ during a given period.
 
     client = models.ForeignKey('pcsw.Client',
                                related_name="coachings_by_client")
-    start_date = models.DateField(
-        blank=True, null=True,
-        verbose_name=_("Coached from"))
-    end_date = models.DateField(
-        blank=True, null=True,
-        verbose_name=_("until"))
     #~ state = CoachingStates.field(default=CoachingStates.active)
     #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType, blank=True, null=True)
@@ -230,8 +213,6 @@ during a given period.
         #~ return super(Coaching,self).get_row_permission(user,state,ba)
 
     def full_clean(self, *args, **kw):
-        if not isrange(self.start_date, self.end_date):
-            raise ValidationError(_("Coaching period ends before it started."))
         if not self.start_date and not self.end_date:
             self.start_date = datetime.date.today()
         if not self.type and self.user:
@@ -252,10 +233,15 @@ during a given period.
 
     def get_system_note_recipients(self, ar, silent):
         yield "%s <%s>" % (unicode(self.user), self.user.email)
-        for u in settings.SITE.user_model.objects.filter(coaching_supervisor=True):
+        for u in settings.SITE.user_model.objects.filter(
+                coaching_supervisor=True):
             yield "%s <%s>" % (unicode(u), u.email)
 
-#~ dd.update_field(Coaching,'user',verbose_name=_("Coach"))
+
+dd.update_field(Coaching, 'start_date', verbose_name=_("Coached from"))
+dd.update_field(Coaching, 'end_date', verbose_name=_("until"))
+
+
 
 
 class Coachings(dd.Table):
@@ -274,8 +260,8 @@ class Coachings(dd.Table):
             blank=True, null=True,
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
-        observed_event=CoachingEvents.field(
-            blank=True, default=CoachingEvents.active),
+        observed_event=dd.PeriodEvents.field(
+            blank=True, default=dd.PeriodEvents.active),
         primary_coachings=dd.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),
@@ -313,22 +299,8 @@ class Coachings(dd.Table):
             qs = qs.filter(user__in=coaches)
 
         ce = ar.param_values.observed_event
-        if ar.param_values.start_date is None or ar.param_values.end_date is None:
-            period = None
-        else:
-            period = (ar.param_values.start_date, ar.param_values.end_date)
-        if ce is not None and period is not None:
-            if ce == CoachingEvents.started:
-                qs = qs.filter(start_date__gte=ar.param_values.start_date)
-                qs = qs.filter(start_date__lte=ar.param_values.end_date)
-            elif ce == CoachingEvents.ended:
-                qs = qs.filter(end_date__isnull=False)
-                qs = qs.filter(end_date__gte=ar.param_values.start_date)
-                qs = qs.filter(end_date__lte=ar.param_values.end_date)
-            elif ce == CoachingEvents.active:
-                qs = qs.filter(start_date__lte=ar.param_values.end_date)
-                qs = qs.filter(Q(end_date__isnull=True) |
-                               Q(end_date__gte=ar.param_values.start_date))
+        if ce is not None:
+            qs = ce.add_filter(qs, ar.param_values)
 
         if ar.param_values.primary_coachings == dd.YesNo.yes:
             qs = qs.filter(primary=True)
@@ -402,9 +374,8 @@ class CoachingsByEnding(Coachings):
     #~ known_values = dict(state=CoachingStates.suggested)
 
 
-__all__ = [ 
+__all__ = [
     "CoachingType", "CoachingTypes", "CoachingEnding",
     "CoachingEndings", "Coaching", "Coachings", "CoachingsByClient",
-    "CoachingsByUser", "CoachingsByEnding",
-    "CoachingEvents"
+    "CoachingsByUser", "CoachingsByEnding"
 ]

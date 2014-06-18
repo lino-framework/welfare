@@ -129,8 +129,8 @@ class SiteConfigDetail(dd.FormLayout):
         required=dict(user_groups='cbss'))
 
 
-# When a Lino Welfare Site decides to add "debts" to hidden_apps
-# then we must remove the master_budget field.
+# When a Welfare Site decides to hide the "debts" app (as chatelet does)
+# then we must remove the `master_budget` field.
 # TODO: find a more elegant way to do this.
 if not dd.is_installed('debts'):
     SiteConfigDetail.general.replace('master_budget', '')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-08 21:08+0300\n"
+"POT-Creation-Date: 2014-06-18 11:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,12 +43,12 @@ msgstr ""
 
 #: ../clients.rst:0
 # a270781cb6974b9091976317325cc624
-msgid "Client Address (model)"
+msgid "Address (model)"
 msgstr ""
 
 #: ../clients.rst:0
 # 90a728200e954dd484039c0ffdaf1aa7
-msgid "Address type (view)"
+msgid "Address types (view)"
 msgstr ""
 
 #: ../clients.rst:0
@@ -81,63 +81,48 @@ msgstr ""
 msgid "Civil states (view)"
 msgstr ""
 
-#: ../clients.rst:0
-# 90a728200e954dd484039c0ffdaf1aa7
-msgid "Parency types (view)"
-msgstr ""
-
-#: ../clients.rst:0
-# 66a65885513f43a8bf8fe96ae680d0d8
-msgid "Parents (view)"
-msgstr ""
-
-#: ../clients.rst:0
-# 90a728200e954dd484039c0ffdaf1aa7
-msgid "Dependent persons (view)"
-msgstr ""
-
 #: None:2
-# c257380e22b44bc19b01442854110246
+# 8eb9dd876a2742e98e1821d8eee329dc
 msgid "Client (model in pcsw)"
 msgstr ""
 
 #: None:2
-# a41c286f4f014fb8911a8aeb9e23305e
+# b064b40d8e1b4a4eabcb05c6e42670c2
 msgid "Client Contact (model in pcsw)"
 msgstr ""
 
 #: None:2
-# 913c918797d44e63a1d994b67b9c1313
+# a2d6072358f6479e8b31f17f96d37bb6
 msgid "Client Contact type (model in pcsw)"
 msgstr ""
 
 #: None:2
-# 0dbea724bec14e9a9c42e2845c74958b
-msgid "Client Address (model in pcsw)"
+# b5b486811a68408292898c78dbc89870
+msgid "Address (model in addresses)"
 msgstr ""
 
 #: None:2
-# 176a4e3084f249a9b6863919e38ba38d
+# 564c9621bdd1430184254d858b9ab5f1
 msgid "Coaching (model in pcsw)"
 msgstr ""
 
 #: None:2
-# b58a33377ff44f2ab934b47ddcbe3572
+# 6179e8f75c3d4ac9a36ffec37c80de73
 msgid "Coaching type (model in pcsw)"
 msgstr ""
 
 #: None:2
-# d8fa94a5eeba4ffba44d0e9406bece02
+# 63f9455fb779481c8f22d1b066b8511a
 msgid "Reason of termination (model in pcsw)"
 msgstr ""
 
 #: None:2
-# 8837825c504543aa80d2c85d850a0ad1
+# 48290da440664d5ca7e622a87381c8ad
 msgid "aid type (model in pcsw)"
 msgstr ""
 
 #: None:2
-# c3e93dbf79d74ce28eb2df4efc98f4c3
+# 4b536b0c3f0a47bf9eef2dea9315de9f
 msgid "Integration Phase (model in pcsw)"
 msgstr ""
 

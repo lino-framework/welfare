@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-08 21:08+0300\n"
+"POT-Creation-Date: 2014-06-18 11:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,32 +37,22 @@ msgid "Category (model)"
 msgstr ""
 
 #: ../aids.rst:0
-# 525ca1cbb1b14e38bc753e8592fde717
-msgid "Decider (model)"
-msgstr ""
-
-#: ../aids.rst:0
 # 4ff282f70c3044d0a2a984272235f56c
 msgid "Aid Type (model)"
 msgstr ""
 
 #: None:2
-# 73357749a19c41c791a2cfdf39890979
+# 5435c288e91242968e9a3c6c66705b80
 msgid "Aid (model in aids)"
 msgstr ""
 
 #: None:2
-# acbeaf4ba7d048c2a82c86550f517620
+# 83c386a6a49141dfb51b87efcb0c3eb6
 msgid "Category (model in aids)"
 msgstr ""
 
 #: None:2
-# ef6420d21aaf455bb1ceaa845f9cda53
-msgid "Decider (model in aids)"
-msgstr ""
-
-#: None:2
-# b69435b5e157435288854d107d78fb59
+# f8573bab9fb84926a80cfa2ad8273b6d
 msgid "Aid Type (model in aids)"
 msgstr ""
 

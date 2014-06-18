@@ -8,4 +8,5 @@ Lino Welfare class reference
    :maxdepth: 2
 
    aids
+   debts
    integ

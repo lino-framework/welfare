@@ -14,7 +14,6 @@ help projects (aids) allocated to individuals.
 
 .. actor:: aids.Aid
 .. actor:: aids.Category
-.. actor:: aids.Decider
 .. actor:: aids.AidType
 
 
