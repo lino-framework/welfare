@@ -678,7 +678,7 @@ class Client(contacts.Person,
 
     def get_system_note_recipients(self, ar, silent):
         for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True):
+                coaching_supervisor=True, email__isnull=False):
             yield "%s <%s>" % (unicode(u), u.email)
 
     @dd.displayfield(_("Find appointment"))

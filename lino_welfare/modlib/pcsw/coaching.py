@@ -232,16 +232,15 @@ during a given period.
         return settings.SITE.site_config.system_note_type
 
     def get_system_note_recipients(self, ar, silent):
-        yield "%s <%s>" % (unicode(self.user), self.user.email)
+        if self.user.email:
+            yield "%s <%s>" % (unicode(self.user), self.user.email)
         for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True):
+                coaching_supervisor=True, email__isnull=False):
             yield "%s <%s>" % (unicode(u), u.email)
 
 
 dd.update_field(Coaching, 'start_date', verbose_name=_("Coached from"))
 dd.update_field(Coaching, 'end_date', verbose_name=_("until"))
-
-
 
 
 class Coachings(dd.Table):

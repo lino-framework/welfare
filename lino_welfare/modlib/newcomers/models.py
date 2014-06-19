@@ -495,11 +495,14 @@ class AssignCoach(dd.NotifyingAction):
 
     label = _("Assign")
     show_in_workflow = True
-    help_text = u"""\
-Diesen Benutzer als Begleiter für diesen Klienten eintragen
-und den Zustand des Klienten auf "Begleitet" setzen.
-Anschließend wird der Klient in der Liste "Neue Klienten"
-nicht mehr angezeigt."""
+    help_text = _("Assign this agent as coach for this client. "
+                  "This will set the client's state to `Coached` "
+                  "and send a notification to the new coach.")
+#     help_text = u"""\
+# Diesen Benutzer als Begleiter für diesen Klienten eintragen
+# und den Zustand des Klienten auf "Begleitet" setzen.
+# Anschließend wird der Klient in der Liste "Neue Klienten"
+# nicht mehr angezeigt."""
 
     def get_notify_subject(self, ar, obj, **kw):
         #~ return _('New client for %s') % obj
