@@ -81,6 +81,8 @@ class AidType(dd.BabelNamed):
         blank=True,
         help_text=_("Replaces the short description in certain places."))
 
+    board = models.ForeignKey('boards.Board', blank=True, null=True)
+
     def get_long_name(self):
         return settings.SITE.babelattr(
             self, 'long_name') or unicode(self)
@@ -93,17 +95,16 @@ class AidTypes(dd.Table):
     """
     model = 'aids.AidType'
     required = dd.required(user_level='admin', user_groups='office')
-    # column_names = 'aid_regime name build_method template *'
-    column_names = 'aid_regime name *'
+    column_names = 'aid_regime name board *'
     order_by = ["aid_regime", "name"]
 
     insert_layout = """
-    name
+    name board
     long_name
     """
 
     detail_layout = """
-    id aid_regime name
+    id aid_regime name board
     long_name
     aids.AidsByType
     """
@@ -179,6 +180,11 @@ class Aid(boards.BoardDecision, dd.DatePeriod):
     def get_mailable_type(self):
         return self.aid_type
 
+    def full_clean(self):
+        if not self.board and self.aid_type:
+            self.board = self.aid_type.board
+        super(Aid, self).full_clean()
+
     @dd.chooser()
     def aid_type_choices(self, aid_regime):
         M = dd.resolve_model('aids.AidType')
@@ -210,7 +216,7 @@ class Aids(dd.Table):
     model = 'aids.Aid'
 
     insert_layout = """
-    client board
+    client
     category aid_type
     """
 
@@ -262,7 +268,6 @@ class FinancialAidsByClient(AidsByClient):
     insert_layout = """
     aid_type
     category amount
-    board decided_date
     start_date end_date
     """
 

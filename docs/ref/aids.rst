@@ -18,9 +18,20 @@ Models
 
 .. class:: AidType
 
+  .. attribute:: board
+
+  Pointer to the default :class:`ml.boards.Board` for aid projects of
+  this type.
+
 .. class:: Category
 
 .. class:: Aid
+
+  .. attribute:: board
+
+  Pointer to the :class:`ml.boards.Board` which decided to allocate
+  this aid project.
+
 
 .. class:: Helper
 
