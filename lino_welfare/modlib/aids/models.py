@@ -104,7 +104,8 @@ class AidTypes(dd.Table):
     """
 
     detail_layout = """
-    id aid_regime name board
+    id aid_regime board
+    name
     long_name
     aids.AidsByType
     """
@@ -285,6 +286,7 @@ class AidsByCategory(AidsByX):
 
 class AidsByType(AidsByX):
     master_key = 'aid_type'
+    column_names = "decided_date client start_date end_date category amount *"
 
 
 # pcsw = dd.resolve_app('pcsw')

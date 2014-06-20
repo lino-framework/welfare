@@ -377,8 +377,8 @@ class ContractBase(
         super(ContractBase, self).full_clean(*args, **kw)
 
         if self.type_id is None:
-            raise ValidationError(
-                dict(type=_("You must specify a contract type.")))
+            raise ValidationError(dict(
+                type=[_("You must specify a contract type.")]))
 
     def update_owned_instance(self, other):
         if isinstance(other, mixins.ProjectRelated):
