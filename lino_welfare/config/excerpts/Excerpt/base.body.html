@@ -1,6 +1,6 @@
 {% block our_ref %}
 <p class="OurRef">
-{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}//{{this.id}}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}/{{this.id}}/{{this.project.id}}/{{this.project.primary_coach.initials}}
 </p>
 {% endblock %}
 
