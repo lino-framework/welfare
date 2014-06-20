@@ -397,8 +397,8 @@ def objects():
     # ))
 
     yield ContractEnding(name=_("Normal"))
-    yield ContractEnding(name=_("Alcool"), needs_date_ended=True)
-    yield ContractEnding(name=_("Santé"), needs_date_ended=True)
+    yield ContractEnding(name=_("Alcohol"), needs_date_ended=True)
+    yield ContractEnding(name=_("Health"), needs_date_ended=True)
     yield ContractEnding(name=_("Force majeure"), needs_date_ended=True)
 
     I = Instantiator('system.HelpText', 'content_type field help_text').build

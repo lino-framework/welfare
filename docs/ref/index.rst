@@ -10,3 +10,4 @@ Lino Welfare class reference
    aids
    debts
    integ
+   isip

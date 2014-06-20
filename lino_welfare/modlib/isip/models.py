@@ -59,13 +59,6 @@ COACHINGTYPE_DSBE = 2
 #
 class ContractType(dd.BabelNamed):
 
-    """
-    The contract type determines the print template to be used. 
-    Print templates may use the `ref` field to conditionally 
-    hide or show certain parts.
-    `exam_policy` is the default ExamPolicy for new Contracts.
-    """
-
     #~ _lino_preferred_width = 20
     preferred_foreignkey_width = 20
 
@@ -99,12 +92,7 @@ class ContractTypes(dd.Table):
 # EXAMINATION POLICIES
 #
 class ExamPolicy(dd.BabelNamed, cal.RecurrenceSet):
-#~ class ExamPolicy(dd.BabelNamed,mixins.ProjectRelated,cal.RecurrenceSet):
 
-    """
-    Examination policy. 
-    This also decides about automatic tasks to be created.
-    """
     class Meta:
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
@@ -153,7 +141,7 @@ class ContractEnding(dd.Model):
 class ContractEndings(dd.Table):
     required = dict(user_groups='integ', user_level='manager')
     model = ContractEnding
-    column_names = 'name *'
+    column_names = 'name use_in_isip use_in_jobs is_success needs_date_ended *'
     order_by = ['name']
     detail_layout = """
     name

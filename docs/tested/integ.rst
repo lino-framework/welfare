@@ -28,7 +28,7 @@ Coach changes while contract active
 The following verifies that :linoticket:`104` is solved.
 Every contract potentially generates a series of calendar events for
 evaluation meetings (according to the
-:attr:`ml.isip.ContractBase.exam_policy` field).
+:attr:`welfare.isip.ContractBase.exam_policy` field).
 
 Let's pick up ISIP contract #1, written by Alicia for client Alfons
 
@@ -175,15 +175,13 @@ javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 204 })
 
 These are the family relationships of Paul Frisch:
 
->>> print(soup.get_text())
+>>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-Paul istVater von Dennis (12 Jahre)Vater von Clara (14 Jahre)Vater von
-Philippe (16 Jahre)Vater von Peter (26 Jahre)Ehemann von Petra ZWEITH
-(45 Jahre)Sohn von Gaby FROGEMUTH (79 Jahre)Sohn von Hubert (80
-Jahre)Beziehung erstellen als Vater/Sohn Adoptivvater/Adoptivsohn
-Ehemann Verwandter Sonstiger
-
-
+Paul ist Vater von Dennis (12 Jahre) Vater von Clara (14 Jahre) Vater
+von Philippe (16 Jahre) Vater von Peter (26 Jahre) Ehemann von Petra
+ZWEITH (45 Jahre) Sohn von Gaby FROGEMUTH (79 Jahre) Sohn von Hubert
+(80 Jahre) Beziehung erstellen als Vater / Sohn Adoptivvater /
+Adoptivsohn Ehemann Verwandter Sonstiger
 
 >>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=116'
 >>> res = client.get(url, REMOTE_USER='rolf')

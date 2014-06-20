@@ -654,7 +654,7 @@ class Offers(dd.Table):
     detail_layout = """
     name provider sector function
     selection_from selection_until start_date
-    remark 
+    remark
     ExperiencesByOffer CandidaturesByOffer
     """
 
