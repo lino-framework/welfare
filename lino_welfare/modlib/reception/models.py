@@ -108,7 +108,7 @@ class CreateNote(dd.Action):
         def ok(ar):
             ekw = dict(project=obj, user=ar.get_user())
             ekw.update(type=ar.action_param_values.note_type)
-            ekw.update(date=datetime.date.today())
+            ekw.update(date=settings.SITE.today())
             if ar.action_param_values.subject:
                 ekw.update(subject=ar.action_param_values.subject)
             note = notes.Note(**ekw)

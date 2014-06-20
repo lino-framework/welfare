@@ -634,7 +634,6 @@ class PAR(Controller):
                             If the coach has changed, maintain the old coaching in history.
                             """
                             coaching.primary = False
-                            #~ coaching.end_date = datetime.date.today()
                             coaching.end_date = self.today
                         else:
                             coaching.type = u.coaching_type
@@ -660,7 +659,6 @@ class PAR(Controller):
                                 client=obj, primary=True,
                                 user=u,
                                 type=u.coaching_type,
-                                #~ start_date=datetime.date.today())
                                 start_date=self.today)
                             coaching.save()
                             dd.pre_ui_create.send(

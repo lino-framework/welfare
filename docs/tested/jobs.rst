@@ -55,12 +55,12 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========== ========== ========================= ================================================ =============
- begonnen   beendet    Klient                    Firma                                            Land
----------- ---------- ------------------------- ------------------------------------------------ -------------
- ...        ...        JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)                              Estland
- ...        ...        FAYMONVILLE Luc (129)     Mutualité Chrétienne de Verviers - Eupen (232)   Niederlande
-========== ========== ========================= ================================================ =============
+========== ========== ========================= ===================================================== =============
+ begonnen   beendet    Klient                    Firma                                                 Land
+---------- ---------- ------------------------- ----------------------------------------------------- -------------
+ 07.02.11   07.02.11   JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)                                   Estland
+ 04.04.11   04.04.11   FAYMONVILLE Luc (129)     Alliance Nationale des Mutualités Chrétiennes (232)   Niederlande
+========== ========== ========================= ===================================================== =============
 <BLANKLINE>
 
 
@@ -86,9 +86,9 @@ Example:
 
 
 >>> translation.activate('en')
->>> obj = jobs.Contract.objects.get(pk=12)
+>>> obj = jobs.Contract.objects.get(pk=6)
 >>> print(unicode(obj.client))
-VAN VEEN Vincent (165)
+FAYMONVILLE Luc (129)
 >>> obj.active_period()
 (datetime.date(2013, 12, 13), datetime.date(2015, 12, 12))
 >>> obj.update_cal_rset()
@@ -100,15 +100,19 @@ Internal meetings with client
 >>> settings.SITE.verbose_client_info_message = True
 >>> wanted = obj.get_wanted_auto_events(ses)
 >>> [i.start_date.strftime('%Y-%m-%d') for i in wanted.values()]
-['2014-06-13', '2014-09-15', '2014-12-15', '2015-03-16', '2015-06-16', '2015-09-16']
+['2014-03-13', '2014-06-13', '2014-09-15', '2014-12-15', '2015-03-16', '2015-06-16', '2015-09-16']
 >>> print(ses.response['info_message'])
+Generating events between 2014-03-13 and 2015-12-12.
 Reached upper date limit 2015-12-12
+
+
 >>> ses.show(cal.EventsByController.request(obj),
 ... column_names="linked_date summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ========================= ===============
  When                      Summary
 ------------------------- ---------------
+ 2014 Mar 13 (Thu) 09:00   Appointment 1
  2014 Jun 13 (Fri) 09:00   Appointment 2
  2014 Sep 15 (Mon) 09:00   Appointment 3
  2014 Dec 15 (Mon) 09:00   Appointment 4
@@ -118,18 +122,27 @@ Reached upper date limit 2015-12-12
 ========================= ===============
 <BLANKLINE>
 
-Hubert has two appointments on 20140613:
+Mélanie has two appointments on 2014-09-15:
 
->>> d = i2d(20140613)
+>>> d = i2d(20140915)
 >>> pv = dict(start_date=d, end_date=d)
 >>> ses.show(cal.EventsByDay.request(param_values=pv),
 ...     column_names="user summary project")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================== =============== ==========================
+================== =============== =========================
  Responsible user   Summary         Client
------------------- --------------- --------------------------
- Hubert Huppertz    Appointment 2   LAZARUS Line (143)
- Mélanie Mélard     Appointment 2   RADERMACHER Edgard (156)
- Hubert Huppertz    Appointment 2   VAN VEEN Vincent (165)
-================== =============== ==========================
+------------------ --------------- -------------------------
+ Mélanie Mélard     Appointment 3   FAYMONVILLE Luc (129)
+ Mélanie Mélard     Appointment 5   JACOBS Jacqueline (136)
+================== =============== =========================
 <BLANKLINE>
+
+This is because the EventType of these automatically generated
+evaluation appointments is configured to allow for up to 4
+conflicting events:
+
+>>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
+>>> e.event_type
+EventType #2 (u'Internal meetings with client')
+>>> e.event_type.max_conflicting
+4

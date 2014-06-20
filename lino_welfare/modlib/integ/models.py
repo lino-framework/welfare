@@ -169,14 +169,14 @@ class UsersWithClients(dd.VirtualTable):
 
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
-        t = datetime.date.today()
+        t = settings.SITE.today()
         return Clients.request(param_values=dict(
             only_primary=True, coached_by=obj, start_date=t, end_date=t))
 
     @dd.requestfield(_("Active clients"))
     def active_clients(self, obj, ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        t = datetime.date.today()
+        t = settings.SITE.today()
         return Clients.request(param_values=dict(
             only_active=True, coached_by=obj, start_date=t, end_date=t))
 
@@ -199,7 +199,7 @@ def on_database_ready(sender, **kw):
             def w(pg):
                 # we must evaluate `today` for each request, not only once when
                 # `database_ready`
-                today = datetime.date.today()
+                today = settings.SITE.today()
 
                 def func(self, obj, ar):
                     return Clients.request(

@@ -53,7 +53,7 @@ class Award(dd.Model):
         verbose_name=_("Holder"))
     badge = dd.ForeignKey('badges.Badge')
     date = models.DateField(
-        _("Date"), default=datetime.date.today)
+        _("Date"), default=dd.today)
     result = models.CharField(
         _("Result"),
         blank=True, max_length=200)

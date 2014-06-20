@@ -11,9 +11,9 @@ General
 
 ..  
     >>> from __future__ import print_function
+    >>> from lino import dd
     >>> from lino.runtime import *
     >>> from django.utils import translation
-    >>> from pprint import pprint
 
 
 See :blogref:`20130508`:
@@ -25,8 +25,7 @@ See :blogref:`20130508`:
 Check whether Lino returns the right default template for excerpts 
 (see :blogref:`20140208`):
 
->>> from lino.utils.config import find_config_file
->>> ffn = find_config_file('Default.odt','excerpts')
+>>> ffn = settings.SITE.find_config_file('Default.odt', 'excerpts')
 >>> ffn.endswith('lino_welfare/config/excerpts/Default.odt')
 True
 
@@ -41,61 +40,74 @@ Test whether :meth:`get_db_overview_rst
 (currently not tested because times are changing)
 
 >>> print(settings.SITE.get_db_overview_rst()) 
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
-30 applications: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, uploads, outbox, extensible, cal, households, reception, languages, accounts, lino_welfare, statbel, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, djangosite.
-97 models:
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+42 apps: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, appypod, export_excel, djangosite.
+109 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
  accounts.Account               14        49
  accounts.Chart                 5         1
  accounts.Group                 8         7
+ addresses.Address              16        114
+ aids.Aid                       10        12
+ aids.AidType                   11        6
+ aids.Category                  5         3
+ aids.Helper                    5         0
+ aids.HelperRole                6         3
+ badges.Award                   6         0
+ badges.Badge                   5         0
+ boards.Board                   7         3
+ boards.Member                  4         0
  cal.Calendar                   7         10
- cal.Event                      23        ...
- cal.EventType                  21        10
- cal.Guest                      10        23
- cal.GuestRole                  9         4
+ cal.Event                      24        314
+ cal.EventType                  19        7
+ cal.Guest                      9         19
+ cal.GuestRole                  7         4
  cal.Priority                   6         9
  cal.RecurrentEvent             22        9
  cal.RemoteCalendar             7         0
  cal.Room                       5         0
- cal.Subscription               4         100
- cal.Task                       18        0
+ cal.Subscription               4         8
+ cal.Task                       18        34
  cbss.IdentifyPersonRequest     20        5
  cbss.ManageAccessRequest       23        1
  cbss.Purpose                   7         106
  cbss.RetrieveTIGroupsRequest   14        2
  cbss.Sector                    11        209
  changes.Change                 9         0
- contacts.Company               30        38
+ contacts.Company               30        46
  contacts.CompanyType           9         16
- contacts.Partner               25        117
- contacts.Person                31        76
+ contacts.Partner               25        152
+ contacts.Person                32        101
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         98
+ contenttypes.ContentType       4         110
  countries.Country              8         8
- countries.Place                10        75
+ countries.Place                10        76
  courses.Course                 5         3
  courses.CourseContent          2         2
- courses.CourseOffer            5         3
+ courses.CourseOffer            6         3
  courses.CourseProvider         31        2
  courses.CourseRequest          10        20
  cv.LanguageKnowledge           7         119
- debts.Actor                    6         6
- debts.Budget                   11        3
- debts.Entry                    16        147
- households.Household           28        3
- households.Member              6         6
- households.Role                6         6
+ debts.Actor                    6         10
+ debts.Budget                   11        5
+ debts.Entry                    16        245
+ excerpts.Excerpt               12        1
+ excerpts.ExcerptType           15        11
+ households.Household           28        5
+ households.Member              12        10
  households.Type                5         4
- isip.Contract                  26        13
+ humanlinks.Link                4         36
+ isip.Contract                  26        17
  isip.ContractEnding            6         4
- isip.ContractType              10        5
+ isip.ContractType              8         5
+ isip.EducationLevel            6         5
  isip.ExamPolicy                20        5
- isip.StudyType                 5         8
+ isip.StudyType                 7         8
  jobs.Candidature               8         74
- jobs.Contract                  28        13
+ jobs.Contract                  28        16
  jobs.ContractType              9         5
  jobs.Experience                10        30
  jobs.Function                  7         4
@@ -106,25 +118,25 @@ Test whether :meth:`get_db_overview_rst
  jobs.Regime                    5         3
  jobs.Schedule                  5         3
  jobs.Sector                    6         14
- jobs.Study                     12        2
+ jobs.Study                     14        2
  languages.Language             6         5
  newcomers.Broker               2         2
  newcomers.Competence           5         7
  newcomers.Faculty              6         5
- notes.EventType                10        10
- notes.Note                     15        110
- notes.NoteType                 13        16
+ notes.EventType                10        9
+ notes.Note                     17        110
+ notes.NoteType                 11        13
  outbox.Attachment              4         0
  outbox.Mail                    9         0
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
- pcsw.AidType                   5         7
- pcsw.Client                    73        61
+ pcsw.AidType                   5         0
+ pcsw.Client                    75        63
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         6         5
  pcsw.Coaching                  8         77
  pcsw.CoachingEnding            7         4
- pcsw.CoachingType              5         3
+ pcsw.CoachingType              7         3
  pcsw.Dispense                  6         0
  pcsw.DispenseReason            6         4
  pcsw.Exclusion                 6         0
@@ -135,17 +147,15 @@ Test whether :meth:`get_db_overview_rst
  properties.PropGroup           5         3
  properties.PropType            9         3
  properties.Property            7         23
+ sepa.Account                   8         13
  system.HelpText                4         5
- system.SiteConfig              32        1
- system.TextFieldTemplate       6         2
- uploads.Upload                 11        0
- uploads.UploadType             2         5
+ system.SiteConfig              30        1
+ system.TextFieldTemplate       5         2
+ uploads.Upload                 16        6
+ uploads.UploadType             10        7
  users.Authority                3         3
- users.Membership               3         0
- users.Team                     5         3
  users.User                     19        10
 ============================== ========= =======
-<BLANKLINE>
 
 
 User profiles

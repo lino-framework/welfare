@@ -418,7 +418,7 @@ class Client(contacts.Person,
                 def ok(ar):
                     for co in qs:
                         #~ co.state = CoachingStates.ended
-                        co.end_date = datetime.date.today()
+                        co.end_date = dd.today()
                         co.save()
                     ar.success(refresh=True)
                 return ar.confirm(
@@ -620,7 +620,7 @@ class Client(contacts.Person,
 
         """
 
-        today = datetime.date.today()
+        today = settings.SITE.today()
         q1 = Q(applies_from__lte=today)
         q2 = Q(applies_until__gte=today)
         q3 = Q(date_ended__isnull=True) | Q(date_ended__gte=today)
@@ -668,7 +668,7 @@ class Client(contacts.Person,
 
     @dd.displayfield(_("Coaches"))
     def coaches(self, ar):
-        today = datetime.date.today()
+        today = settings.SITE.today()
         period = (today, today)
         items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
@@ -1048,7 +1048,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         period = [ar.param_values.start_date, ar.param_values.end_date]
         if period[0] is None:
-            period[0] = period[1] or datetime.date.today()
+            period[0] = period[1] or settings.SITE.today()
         if period[1] is None:
             period[1] = period[0]
 
@@ -1104,7 +1104,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         if ar.param_values.nationality:
             qs = qs.filter(nationality__exact=ar.param_values.nationality)
-        today = datetime.date.today()
+        today = settings.SITE.today()
         if ar.param_values.aged_from:
             min_date = today - \
                 datetime.timedelta(days=ar.param_values.aged_from * 365)
@@ -1214,34 +1214,20 @@ class ClientsTest(Clients):
         "Table of Clients whose data seems unlogical or inconsistent.")
     required = dict(user_level='manager')
     use_as_default_table = False
-    #~ required_user_level = UserLevels.manager
     label = _("Data Test Clients")
     parameters = dict(
-        #~ user = dd.ForeignKey(settings.SITE.user_model,blank=True,verbose_name=_("Coached by")),
-        #~ only_coached_on = models.DateField(_("Only coached on"),blank=True,default=datetime.date.today),
-        #~ today = models.DateField(_("only active on"),blank=True,default=datetime.date.today),
-        #~ coached_by = models.ForeignKey(users.User,blank=True,null=True,
-        #~ verbose_name=_("Coached by")),
         invalid_niss=models.BooleanField(
             _("Check NISS validity"), default=True),
         overlapping_contracts=models.BooleanField(
             _("Check for overlapping contracts"), default=True),
-        #~ coached_period = models.BooleanField(_("Check coaching period"),default=True),
-        #~ only_my_persons = models.BooleanField(_("Only my persons"),default=True),
         **Clients.parameters)
     params_layout = """
     aged_from aged_to gender also_obsolete
-    client_state coached_by and_coached_by start_date end_date observed_event 
+    client_state coached_by and_coached_by start_date end_date observed_event
     invalid_niss overlapping_contracts only_primary nationality
     """
 
-    #~ params_layout = """invalid_niss overlapping_contracts coached_by"""
-    #~ params_panel_hidden = False
     column_names = "name_column error_message national_id id"
-
-    #~ @classmethod
-    #~ def get_request_queryset(self,ar):
-        #~ return super(Clients,self).get_request_queryset(ar)
 
     @classmethod
     def get_row_by_pk(self, ar, pk):

@@ -197,13 +197,10 @@ def customize_cal(sender, **kw):
     site = sender
 
     site.modules.cal.EventTypes.set_detail_layout("""
-    name id
-    # description
-    # invite_team_members
+    name
     event_label
-    # url_template username password
-    #readonly is_appointment invite_client start_date
-    # build_method template email_template attach_to_email
+    max_conflicting all_rooms locks_user
+    id invite_client is_appointment email_template attach_to_email
     EventsByType
     """)
 
@@ -262,7 +259,7 @@ if False:
             kw = super(CreateClientEvent,
                        self).action_param_defaults(ar, obj, **kw)
             kw.update(user=ar.get_user())
-            kw.update(date=datetime.date.today())
+            kw.update(date=settings.SITE.today())
             return kw
 
         def get_notify_subject(self, ar, obj):

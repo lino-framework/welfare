@@ -400,11 +400,7 @@ class AvailableCoaches(users.Users):
                         user=user, faculty=client.faculty)
                     if r.count() == 0:
                         continue
-                #~ total_weight += faculty_weight(user,client.faculty)
-            #~ else:
-                #~ total_weight += faculty_weight(user,None)
-            #~ else:
-                #~ logger.info("20120928 AvailableCoaches.get_data_rows : no for_client")
+
             user.new_clients = NewClients.request(param_values=dict(
                 coached_by=user,
                 new_since=ar.param_values.since))
@@ -482,13 +478,6 @@ Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
         return obj._score
 
 
-    #~ @classmethod
-    #~ def compute_workload(cls,ar,obj):
-        #~ delta = datetime.date.today() - ar.param_values.since
-        #~ quota = obj.newcomer_quota * delta.days / decimal.Decimal('7.0')
-        #~ return decimal.Decimal(obj.new_clients.get_total_count() - quota)
-
-
 class AssignCoach(dd.NotifyingAction):
 
     "Assign a coach to a newcomer."
@@ -525,7 +514,7 @@ class AssignCoach(dd.NotifyingAction):
 
         coaching = pcsw.Coaching(
             client=client, user=obj,
-            start_date=datetime.date.today(),
+            start_date=settings.SITE.today(),
             type=obj.coaching_type)
         coaching.full_clean()
         coaching.save()

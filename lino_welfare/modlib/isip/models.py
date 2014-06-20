@@ -460,21 +460,21 @@ add('40', _("Signed"), 'signed')
 class ContractBaseTable(dd.Table):
     parameters = dd.ObservedPeriod(
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
-        #~ show_past = models.BooleanField(_("past contracts"),default=True),
-        #~ show_active = models.BooleanField(_("active contracts"),default=True),
-        #~ show_coming = models.BooleanField(_("coming contracts"),default=True),
-        #~ today = models.DateField(_("on"),blank=True,default=datetime.date.today),
 
         observed_event=ContractEvents.field(
             blank=True, default=ContractEvents.active),
 
-        ending_success=dd.YesNo.field(_("Successfully ended"),
-            blank=True, help_text="""Contrats terminés avec succès."""),
-        ending=models.ForeignKey(ContractEnding,
-                                 blank=True, null=True,
+        ending_success=dd.YesNo.field(
+            _("Successfully ended"),
+            blank=True,
+            help_text="""Contrats terminés avec succès."""),
+        ending=models.ForeignKey(
+            ContractEnding,
+            blank=True, null=True,
             help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
-        company=models.ForeignKey('contacts.Company',
-                                  blank=True, null=True,
+        company=models.ForeignKey(
+            'contacts.Company',
+            blank=True, null=True,
             help_text="""Nur Konventionen mit dieser Organisation als Drittpartner."""),
 
     )

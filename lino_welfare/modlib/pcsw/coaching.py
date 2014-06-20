@@ -181,9 +181,9 @@ during a given period.
         if not self.type:
             self.type = ar.get_user().coaching_type
         if not self.start_date:
-            self.start_date = datetime.date.today()
+            self.start_date = settings.SITE.today()
         if self.ending and not self.end_date:
-            self.end_date = datetime.date.today()
+            self.end_date = settings.SITE.today()
 
     #~ def update_system_note(self,note):
         #~ note.project = self.client
@@ -214,7 +214,7 @@ during a given period.
 
     def full_clean(self, *args, **kw):
         if not self.start_date and not self.end_date:
-            self.start_date = datetime.date.today()
+            self.start_date = settings.SITE.today()
         if not self.type and self.user:
             self.type = self.user.coaching_type
         super(Coaching, self).full_clean(*args, **kw)

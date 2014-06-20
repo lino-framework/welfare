@@ -52,14 +52,14 @@ Some database content
 ================= ====================================== ===========================
  Funktion          Stellenanbieter                        Sektor
 ----------------- -------------------------------------- ---------------------------
- Koch              R-Cycle Sperrgutsortierzentrum (225)    Seefahrt
- Koch              Pro Aktiv V.o.G. (227)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (227)                  Medizin & Paramedizin
- Küchenassistent   BISA (224)                              Reinigung
- Tellerwäscher     BISA (224)                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (225)    Transport
- Kellner           BISA (224)                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (225)    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum (226)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (228)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (228)                  Medizin & Paramedizin
+ Küchenassistent   BISA (225)                              Reinigung
+ Tellerwäscher     BISA (225)                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (226)    Transport
+ Kellner           BISA (225)                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (226)    Horeca
 ================= ====================================== ===========================
 <BLANKLINE>
 
@@ -105,9 +105,6 @@ A Subscription is when a given user decides that she wants to see the
 calendar of another user.
 
 Every user is, by default, subscribed to her own calendar.
-
-The demo database then 
-
 For example, demo user `rolf` is automatically subscribed to the
 following calendars:
 
@@ -116,19 +113,11 @@ following calendars:
 ==== ========== ===========
  ID   Kalender   versteckt
 ---- ---------- -----------
- 7    alicia     Nein
- 15   caroline   Nein
- 23   hubert     Nein
- 31   judith     Nein
- 39   melanie    Nein
- 47   romain     Nein
- 49   rolf       Nein
- 64   robin      Nein
+ 7    rolf       Nein
 ==== ========== ===========
 <BLANKLINE>
 
-
-Each user who has view access to the calendar
+Each user who has view access to the calendar.
 Only UserProfile with a non-empty `office_level` can see the calendar.
 All users with one of the following profiles can see each other's calendars:
 

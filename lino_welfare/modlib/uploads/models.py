@@ -166,7 +166,7 @@ class UploadsByClient(AreaUploads):
 
     @classmethod
     def format_row_in_slave_summary(self, ar, obj):
-        if obj.valid_until and obj.valid_until < datetime.date.today():
+        if obj.valid_until and obj.valid_until < settings.SITE.today():
             return None
         return super(UploadsByClient, self).format_row_in_slave_summary(
             ar, obj)

@@ -378,7 +378,7 @@ class Contract(isip.ContractBase):
     def after_ui_save(self, ar):
         super(Contract, self).after_ui_save(ar)
         if self.job_id is not None:
-            if self.applies_until is not None and self.applies_until > datetime.date.today():
+            if self.applies_until is not None and self.applies_until > settings.SITE.today():
                 n = 0
                 #~ for candi in self.client.candidature_set.filter(active=True):
                 for candi in self.client.candidature_set.filter(state=CandidatureStates.active):
@@ -988,7 +988,7 @@ class Candidature(SectorFunction):
         #~ super(Candidature,self).clean(*args,**kw)
 
     def on_create(self, ar):
-        self.date_submitted = datetime.date.today()
+        self.date_submitted = settings.SITE.today()
         super(Candidature, self).on_create(ar)
 
 
@@ -1189,7 +1189,7 @@ class OldJobsOverview(dd.EmptyTable):
     detail_layout = "body"
 
     parameters = dict(
-        #~ date = models.DateField(default=datetime.date.today,blank=True,null=True),
+        #~ date = models.DateField(default=settings.SITE.today,blank=True,null=True),
         date=models.DateField(blank=True, null=True, verbose_name=_("Date")),
         contract_type=models.ForeignKey(ContractType, blank=True, null=True),
         job_type=models.ForeignKey(JobType, blank=True, null=True),
@@ -1202,8 +1202,8 @@ class OldJobsOverview(dd.EmptyTable):
         #~ logger.info("20120221 3 body(%s)",req)
         #~ logger.info("Waiting 5 seconds...")
         #~ time.sleep(5)
-        #~ today = self.date or datetime.date.today()
-        today = ar.param_values.date or datetime.date.today()
+        #~ today = self.date or settings.SITE.today()
+        today = ar.param_values.date or settings.SITE.today()
         period = (today, today)
         html = ''
         rows = []
@@ -1321,7 +1321,7 @@ class JobsOverviewByType(Jobs):
         """
         data_rows = self.get_request_queryset(ar)
 
-        today = ar.param_values.date or datetime.date.today()
+        today = ar.param_values.date or settings.SITE.today()
         period = (today, today)
 
         def UL(items):
@@ -1416,7 +1416,7 @@ class JobsOverview(dd.EmptyTable):
 
     @classmethod
     def create_instance(self, ar, **kw):
-        kw.update(today=ar.param_values.today or datetime.date.today())
+        kw.update(today=ar.param_values.today or settings.SITE.today())
         if ar.param_values.job_type:
             kw.update(jobtypes=[ar.param_values.job_type])
         else:

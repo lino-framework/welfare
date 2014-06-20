@@ -6,7 +6,7 @@ Courses
 .. include:: /include/tested.rst
 
 .. to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_cbss
+  $ python setup.py test -s tests.DocsTests.test_courses
 
 .. 
   >>> from django.utils import translation
@@ -83,7 +83,7 @@ able to render RemoteFields as rst.
 ...    ses.show(courses.PendingCourseRequests, limit=5,
 ...       column_names="person__first_name content urgent address")
 ============ ============= ======================= ===========================
- Prénom       Contenu       cause professionnelle   Addresse
+ Prénom       Contenu       cause professionnelle   Adresse
 ------------ ------------- ----------------------- ---------------------------
  Line         Französisch   Non                     Heidberg, 4700 Eupen
  Guido        Deutsch       Non                     Haasstraße, 4700 Eupen

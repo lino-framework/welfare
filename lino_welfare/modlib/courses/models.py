@@ -375,9 +375,9 @@ class UnRegisterCandidate(dd.ChangeStateAction):
 
 class CourseRequest(dd.Model):
 
-    """
-    A Course Request is created when a certain Person expresses her 
+    """A Course Request is created when a certain Person expresses her
     wish to participate in a Course with a certain CourseContent.
+
     """
     workflow_state_field = 'state'
 
@@ -449,7 +449,7 @@ class CourseRequest(dd.Model):
     #~ """
 
     def on_create(self, ar):
-        self.date_submitted = datetime.date.today()
+        self.date_submitted = settings.SITE.today()
         super(CourseRequest, self).on_create(ar)
 
     def save(self, *args, **kw):
@@ -466,7 +466,7 @@ class CourseRequest(dd.Model):
     def before_state_change(self, ar, old, new):
         if new.name in ('passed', 'award', 'failed', 'aborted'):
             if not self.date_ended:
-                self.date_ended = datetime.date.today()
+                self.date_ended = settings.SITE.today()
         super(CourseRequest, self).before_state_change(ar, old, new)
 
     def get_row_permission(self, ar, state, ba):
@@ -628,7 +628,7 @@ class PendingCourseRequests(CourseRequests):
         #~ qs = super(PendingCourseRequests,self).get_request_queryset(ar)
         qs = self.get_request_queryset(ar)
         for obj in qs:
-            age = obj.person.get_age_years()
+            age = obj.person.get_age()
             if age is not None:
                 age = age.days / 365
             obj._age_in_years = age
