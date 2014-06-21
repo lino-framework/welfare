@@ -620,38 +620,39 @@ def setup_reports_menu(site, ui, profile, m):
 
 def setup_main_menu(site, ui, profile, m):
     m = m.add_menu(plugin.app_label, plugin.verbose_name)
-    m.add_action(Clients)
-    m.add_action(isip.MyContracts)
-    #~ m.add_action(MyPersonSearches)
+    m.add_action('integ.Clients')
+    m.add_action('isip.MyContracts')
 
-    m.add_action(jobs.MyContracts)
-    m.add_action(jobs.JobProviders)
-    m.add_action(jobs.Jobs)
-    m.add_action(jobs.Offers)
+    m.add_action('jobs.MyContracts')
+    m.add_action('jobs.JobProviders')
+    m.add_action('jobs.Jobs')
+    m.add_action('jobs.Offers')
 
 
 def setup_config_menu(site, ui, profile, m):
     m = m.add_menu(plugin.app_label, plugin.verbose_name)
-    m.add_action(isip.ContractTypes)
-    m.add_action(isip.ContractEndings)
-    m.add_action(isip.ExamPolicies)
-    m.add_action(isip.StudyTypes)
-    m.add_action(isip.EducationLevels)
+    m.add_action('isip.ContractTypes')
+    m.add_action('isip.ContractEndings')
+    m.add_action('isip.ExamPolicies')
+    m.add_action('isip.StudyTypes')
+    m.add_action('isip.EducationLevels')
 
-    m.add_action(jobs.ContractTypes)
-    m.add_action(jobs.JobTypes)
-    m.add_action(jobs.Sectors)
-    m.add_action(jobs.Functions)
-    m.add_action(jobs.Schedules)
-    m.add_action(jobs.Regimes)
+    m.add_action('jobs.ContractTypes')
+    m.add_action('jobs.JobTypes')
+    m.add_action('jobs.Sectors')
+    m.add_action('jobs.Functions')
+    m.add_action('jobs.Schedules')
+    m.add_action('jobs.Regimes')
 
 
 def setup_explorer_menu(site, ui, profile, m):
     m = m.add_menu(plugin.app_label, plugin.verbose_name)
-    m.add_action(isip.Contracts)
-    m.add_action(jobs.Contracts)
-    m.add_action(jobs.Candidatures)
-    m.add_action(jobs.Studies)
+    m.add_action('isip.Contracts')
+    m.add_action('jobs.Contracts')
+    m.add_action('jobs.Candidatures')
+    m.add_action('jobs.Studies')
+    m.add_action('isip.ContractPartners')
+
 
 
 dd.add_user_group(plugin.app_label, plugin.verbose_name)

@@ -553,9 +553,6 @@ def objects():
                                          fr=u"VSE Sprachkurs",
                                          en=u"VSE Sprachkurs",
                                          ))
-    #~ yield contractType(u"VSE Integration")
-    #~ yield contractType(u"VSE Cardijn")
-    #~ yield contractType(u"VSE Work & Job")
 
     rt = RoleType.objects.get(pk=4)  # It manager
     rt.use_in_contracts = False
@@ -861,14 +858,6 @@ def objects():
     proaktiv = mti.insert_child(proaktiv, jobs.JobProvider)
     yield proaktiv
 
-    #~ job = Instantiator('jobs.Job','provider type contract_type name').build
-    #~ bisajob = job(bisa,art607,1,"bisa")
-    #~ yield bisajob
-    #~ rcyclejob = job(rcycle,art607,2,"rcycle")
-    #~ yield rcyclejob
-    #~ proaktivjob = job(proaktiv,art607,2,"proaktiv",sector=horeca,function=1)
-    #~ yield proaktivjob
-
     # isip (VSE)
     ISIP_DURATIONS = Cycler(312, 480, 312, 480, 30)
     ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
@@ -1117,8 +1106,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     # for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
         # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
         af = settings.SITE.demo_date(-600 + i * 40)
-        kw = dict(applies_from=af, client=client,
-                  company=COMPANIES.pop())
+        kw = dict(applies_from=af, client=client)
         coaching = client.get_coachings(None, type=DSBE)[0]
         kw.update(user=coaching.user)
         if i % 2:

@@ -31,11 +31,12 @@ ExclusionType = dd.resolve_model('pcsw.ExclusionType')
 #~ from lino.modlib.properties import models as properties
 
 ContractEnding = dd.resolve_model('isip.ContractEnding')
+ExcerptType = dd.resolve_model('excerpts.ExcerptType')
 
 
 def excerpt_types():  # also used for migration to 1.1.11
 
-    attType = Instantiator('excerpts.ExcerptType',
+    attType = Instantiator(ExcerptType,
                            # build_method='appypdf',
                            email_template='Default.eml.html').build
     yield attType(
@@ -89,42 +90,15 @@ def excerpt_types():  # also used for migration to 1.1.11
                   fr="Plan d'action",
                   en="to-do list"))
 
-    yield attType(
-        template='art60-7.odt',
-        primary=True,
-        certifying=True,
-        backward_compat=True,
-        content_type=ContentType.objects.get_for_model(
-            dd.resolve_model('jobs.Contract')),
-        **babelkw('name',
-                  de="Art.60§7-Konvention",
-                  fr="Convention art. 60§7",
-                  en="Art. 60§7 convention"))
+    ExcerptType.update_for_model(
+        'jobs.Contract', certifying=True, backward_compat=True)
 
-    yield attType(
-        template='vse.odt',
-        primary=True,
-        certifying=True,
-        backward_compat=True,
-        content_type=ContentType.objects.get_for_model(
-            dd.resolve_model('isip.Contract')),
-        **babelkw('name',
-                  de="VSE",
-                  fr="Convention PIIS",
-                  en="ISIP"))
+    ExcerptType.update_for_model(
+        'isip.Contract', certifying=True, backward_compat=True)
 
     if dd.is_installed('debts'):
-        yield attType(
-            template='Default.odt',
-            primary=True,
-            certifying=True,
-            backward_compat=True,
-            content_type=ContentType.objects.get_for_model(
-                dd.resolve_model('debts.Budget')),
-            **babelkw('name',
-                      de="Budget",
-                      fr="Budget",
-                      en="Budget"))
+        ExcerptType.update_for_model(
+            'debts.Budget', certifying=True, backward_compat=True)
 
 
 def objects():

@@ -263,72 +263,44 @@ class Functions(dd.Table):
 class FunctionsBySector(Functions):
     master_key = 'sector'
 
-#
-# JOB CONTRACTS
-#
 
-
-class Contract(isip.ContractBase):
+class Contract(isip.ContractBase, isip.ContractPartnerBase):
 
     """
     A Contract
-    
-    [NOTE1] If applies_from and duration are set, then the default value 
+
+    [NOTE1] If applies_from and duration are set, then the default value
     for applies_until is computed 26 workdays per month:
-    
-    - duration `312` -> 12 months 
-    - duration `468` -> 18 months 
-    - duration `624` -> 24 months 
-    
+
+    - duration `312` -> 12 months
+    - duration `468` -> 18 months
+    - duration `624` -> 24 months
+
     """
 
     class Meta:
-        #~ verbose_name = _("Job Contract")
-        #~ verbose_name_plural = _('Job Contracts')
         verbose_name = _("Art.60§7 contract")
         verbose_name_plural = _('Art.60§7 contracts')
 
-    type = models.ForeignKey("jobs.ContractType",
-                             related_name="%(app_label)s_%(class)s_set_by_type",
-                             verbose_name=_("Contract Type"), blank=True)
+    type = models.ForeignKey(
+        "jobs.ContractType",
+        related_name="%(app_label)s_%(class)s_set_by_type",
+        blank=True)
 
-    #~ provider = models.ForeignKey(JobProvider,
-        #~ related_name="%(app_label)s_%(class)s_set_by_provider",
-        #~ blank=True,null=True)
     job = models.ForeignKey("jobs.Job")
-    #~ job = models.ForeignKey("jobs.Job",
-        #~ verbose_name=_("Job"),
-        #~ blank=True,null=True)
-
     duration = models.IntegerField(_("duration (days)"),
                                    blank=True, null=True, default=None)
-
-    #~ regime = models.CharField(_("regime"),max_length=200,blank=True)
-    #~ schedule = models.CharField(_("schedule"),max_length=200,blank=True)
     regime = models.ForeignKey(Regime, blank=True, null=True)
     schedule = models.ForeignKey(Schedule, blank=True, null=True)
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
     refund_rate = models.CharField(_("refund rate"), max_length=200,
                                    blank=True)
-
     reference_person = models.CharField(_("reference person"), max_length=200,
                                         blank=True)
-
     responsibilities = dd.RichTextField(_("responsibilities"),
                                         blank=True, null=True, format='html')
+    remark = models.TextField(_("Remark"), blank=True)
 
-    remark = models.TextField(
-        blank=True,
-        verbose_name=_("Remark"))
-
-    #~ aid_nature = models.CharField(_("aid nature"),max_length=100,blank=True)
-    #~ aid_rate = models.CharField(_("aid rate"),max_length=100,blank=True)
-    #~ @chooser()
-    #~ def contact_choices(cls,provider):
-        #~ if provider is not None:
-            #~ return contacts.Role.objects.filter(
-                #~ type__use_in_contracts=True,company=provider)
-        #~ return []
     @dd.chooser()
     def company_choices(cls):
         return JobProvider.objects.all()
@@ -337,24 +309,9 @@ class Contract(isip.ContractBase):
     def ending_choices(cls):
         return isip.ContractEnding.objects.filter(use_in_jobs=True)
 
-    #~ def get_company(self):
-        #~ return self.provider
-    #~ company = property(get_company)
-    #~ """for backwards compatibility. Document templates use a field `company`.
-    #~ """
-    #~ def get_recipient(self):
-        #~ if self.contact:
-            #~ return self.contact
-        #~ if self.provider:
-            #~ return self.provider
-        #~ return self.person
-    #~ recipient = property(get_recipient)
-    #~ def prepare_printable(self):
-        #~ self.company = self.company
     @dd.chooser(simple_values=True)
     def duration_choices(cls):
         return [312, 468, 624]
-        #~ return [ 0, 25, 50, 100 ]
 
     @dd.chooser(simple_values=True)
     def refund_rate_choices(cls):
@@ -378,11 +335,10 @@ class Contract(isip.ContractBase):
     def after_ui_save(self, ar):
         super(Contract, self).after_ui_save(ar)
         if self.job_id is not None:
-            if self.applies_until is not None and self.applies_until > settings.SITE.today():
+            if self.applies_until and self.applies_until > settings.SITE.today():
                 n = 0
-                #~ for candi in self.client.candidature_set.filter(active=True):
-                for candi in self.client.candidature_set.filter(state=CandidatureStates.active):
-                    #~ candi.active = False
+                for candi in self.client.candidature_set.filter(
+                        state=CandidatureStates.active):
                     candi.state = CandidatureStates.inactive
                     candi.save()
                     n += 1
@@ -390,13 +346,9 @@ class Contract(isip.ContractBase):
                     ar.info(unicode(
                         _("(%d candidatures have been marked inactive)")) % n)
                     ar.set_response(alert=_("Success"))
-        #~ return kw
 
     def full_clean(self, *args, **kw):
         if self.client_id is not None:
-            #~ if not self.user_asd:
-                #~ if self.person.user != self.user:
-                    #~ self.user_asd = self.person.user
             if self.applies_from:
                 if self.client.birth_date:
                     def duration(refdate):
@@ -421,11 +373,9 @@ class Contract(isip.ContractBase):
 
                 if self.duration and not self.applies_until:
                     # [NOTE1]
-                    #~ self.applies_until = self.applies_from + datetime.timedelta(days=self.duration)
                     self.applies_until = DurationUnits.months.add_duration(
                         self.applies_from, self.duration / 26) - ONE_DAY
 
-        #~ if self.job_id is not None:
         if self.job_id is not None:
             if self.job.provider is not None:
                 self.company = self.job.provider
@@ -433,11 +383,6 @@ class Contract(isip.ContractBase):
                 self.type = self.job.contract_type
             if self.hourly_rate is None:
                 self.hourly_rate = self.job.hourly_rate
-
-        #~ if self.company is not None:
-            #~ if self.contact is not None:
-                #~ if self.contact.company.pk != self.company.company_ptr.pk:
-                    #~ self.contact = None
 
         super(Contract, self).full_clean(*args, **kw)
 
@@ -477,7 +422,6 @@ class ContractDetail(dd.FormLayout):
     """
 
 
-#~ class Contracts(dd.Table):
 class Contracts(isip.ContractBaseTable):
     #~ debug_permissions = "20130222"
     required = dd.required(user_groups='integ')
@@ -495,9 +439,22 @@ class Contracts(isip.ContractBaseTable):
 
     parameters = dict(
         type=models.ForeignKey(
-            ContractType, blank=True, verbose_name=_(
-                "Only contracts of type")),
+            'jobs.ContractType', blank=True,
+            verbose_name=_("Only contracts of type")),
         **isip.ContractBaseTable.parameters)
+
+    params_layout = """
+    user type start_date end_date observed_event
+    company ending_success ending
+    """
+
+    @classmethod
+    def get_request_queryset(cls, ar):
+        qs = super(Contracts, cls).get_request_queryset(ar)
+        pv = ar.param_values
+        if pv.company:
+            qs = qs.filter(company=pv.company)
+        return qs
 
 
 class ContractsByPerson(Contracts):

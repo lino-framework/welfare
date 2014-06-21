@@ -230,12 +230,54 @@ def default_signer2():
     return settings.SITE.site_config.signer2
 
 
-class ContractBase(
-        Signers,
-        contacts.ContactRelated,
-        Certifiable,
-        # mixins.TypedPrintable,
-        cal.EventGenerator):
+class ContractPartnerBase(contacts.ContactRelated):
+    class Meta:
+        abstract = True
+
+    def get_recipient(self):
+        contact = self.get_contact()
+        if contact is not None:
+            return contact
+        if self.company:
+            return self.company
+        return self.client
+    recipient = property(get_recipient)
+
+    @classmethod
+    def contact_person_choices_queryset(cls, company):
+        return settings.SITE.modules.contacts.Person.objects.filter(
+            rolesbyperson__company=company,
+            rolesbyperson__type__use_in_contracts=True)
+
+    @dd.chooser()
+    def contact_role_choices(cls):
+        return contacts.RoleType.objects.filter(use_in_contracts=True)
+
+
+class ContractPartner(ContractPartnerBase):
+
+    class Meta:
+        verbose_name = _("Contract partner")
+        verbose_name_plural = _("Contract partners")
+
+    contract = dd.ForeignKey('isip.Contract')
+
+    duties_company = dd.RichTextField(
+        _("duties company"),
+        blank=True, null=True, format='html')
+
+
+class ContractPartners(dd.Table):
+    model = 'isip.ContractPartner'
+    columns = 'contract company contact_person contact_role'
+
+
+class PartnersByContract(ContractPartners):
+    master_key = 'contract'
+    columns = 'company contact_person contact_role duties_company'
+
+
+class ContractBase(Signers, Certifiable, cal.EventGenerator):
 
     """Abstract base class for :ddref:`jobs.Contract` and
     :ddref:`isip.Contract`.
@@ -291,31 +333,10 @@ class ContractBase(
         return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
                                 self.client.get_full_name(salutation=False))
 
-    def get_recipient(self):
-        contact = self.get_contact()
-        #~ if self.contact_person:
-        if contact is not None:
-            #~ contacts = self.get_contact_set()
-            return contact
-        if self.company:
-            return self.company
-        return self.client
-    recipient = property(get_recipient)
-
     # backwards compat for document templates
     def get_person(self):
         return self.client
     person = property(get_person)
-
-    @classmethod
-    def contact_person_choices_queryset(cls, company):
-        return settings.SITE.modules.contacts.Person.objects.filter(
-            rolesbyperson__company=company,
-            rolesbyperson__type__use_in_contracts=True)
-
-    @dd.chooser()
-    def contact_role_choices(cls):
-        return contacts.RoleType.objects.filter(use_in_contracts=True)
 
     @dd.chooser()
     def ending_choices(cls):
@@ -392,9 +413,6 @@ class ContractBase(
         if not date:
             return None
         rset = self.update_cal_rset()
-        # date = rset.find_start_date(date)
-        # if date is None:
-        #     return None
         return rset.get_next_suggested_date(ar, date)
 
     def update_cal_calendar(self):
@@ -426,9 +444,6 @@ class ContractBase(
 
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
-        #~ r = (self.applies_from, self.date_ended or self.applies_until)
-        #~ if isrange(r): return r
-        #~ return None
 
 
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
@@ -463,8 +478,7 @@ class ContractBaseTable(dd.Table):
         company=models.ForeignKey(
             'contacts.Company',
             blank=True, null=True,
-            help_text="""Nur Konventionen mit dieser Organisation als Drittpartner."""),
-
+            help_text=_("Only contracts with this company as partner."))
     )
 
     params_layout = """
@@ -473,34 +487,23 @@ class ContractBaseTable(dd.Table):
     """
     params_panel_hidden = True
 
-    #~ @classmethod
-    #~ def param_defaults(self,ar,**kw):
-        #~ kw = super(ContractBaseTable,self).param_defaults(ar,**kw)
-        #~ D = datetime.date
-        #~ kw.update(start_date = D.today())
-        #~ kw.update(end_date = D.today())
-        #~ return kw
-
     @classmethod
     def get_request_queryset(cls, ar):
-        #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
         qs = super(ContractBaseTable, cls).get_request_queryset(ar)
-        #~ user = ar.param_values.get('user',None)
-        if ar.param_values.user:
-            qs = qs.filter(user=ar.param_values.user)
-        if ar.param_values.type:
-            qs = qs.filter(type=ar.param_values.type)
-        if ar.param_values.company:
-            qs = qs.filter(company=ar.param_values.company)
+        pv = ar.param_values
+        #~ logger.info("20120608.get_request_queryset param_values = %r", pv)
+        if pv.user:
+            qs = qs.filter(user=pv.user)
+        if pv.type:
+            qs = qs.filter(type=pv.type)
 
-        ce = ar.param_values.observed_event
-        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+        ce = pv.observed_event
+        if pv.start_date is None or pv.end_date is None:
             period = None
         else:
-            period = (ar.param_values.start_date, ar.param_values.end_date)
+            period = (pv.start_date, pv.end_date)
         if ce and period is not None:
             if ce == ContractEvents.ended:
-                #~ qs = qs.filter(Q(applies_until__lte=period[1]) | Q(date_ended__isnull=False,date_ended__lte=period[1]))
                 qs = qs.filter(dd.inrange_filter('applies_until', period)
                                | dd.inrange_filter('date_ended', period))
             elif ce == ContractEvents.started:
@@ -514,26 +517,16 @@ class ContractBaseTable(dd.Table):
                             Q(date_ended__gte=period[0]))
                 flt &= Q(applies_from__lte=period[1])
                 qs = qs.filter(flt)
-                #~ print 20130527, qs.query
             else:
                 raise Exception(repr(ce))
-        #~ today = ar.param_values.today or datetime.date.today()
-        #~ if today:
-            #~ if not ar.param_values.show_active:
-                #~ flt = range_filter(today,'applies_from','applies_until')
-                #~ qs = qs.exclude(flt)
-            #~ if not ar.param_values.show_past:
-                #~ qs = qs.exclude(applies_until__isnull=False,applies_until__lt=today)
-            #~ if not ar.param_values.show_coming:
-                #~ qs = qs.exclude(applies_from__isnull=False,applies_from__gt=today)
 
-        if ar.param_values.ending_success == dd.YesNo.yes:
+        if pv.ending_success == dd.YesNo.yes:
             qs = qs.filter(ending__isnull=False, ending__success=True)
-        elif ar.param_values.ending_success == dd.YesNo.no:
+        elif pv.ending_success == dd.YesNo.no:
             qs = qs.filter(ending__isnull=False, ending__success=False)
 
-        if ar.param_values.ending is not None:
-            qs = qs.filter(ending=ar.param_values.ending)
+        if pv.ending is not None:
+            qs = qs.filter(ending=pv.ending)
         #~ logger.info("20130524 %s",qs.query)
         return qs
 
@@ -544,18 +537,19 @@ class ContractBaseTable(dd.Table):
 
         pv = ar.param_values
         if pv.start_date is None or pv.end_date is None:
-            period = None
+            pass
         else:
             oe = pv.observed_event
             if oe is not None:
-                yield "%s %s-%s" % (unicode(oe.text), dd.dtos(pv.start_date), dd.dtos(pv.end_date))
+                yield "%s %s-%s" % (unicode(oe.text),
+                                    dd.dtos(pv.start_date),
+                                    dd.dtos(pv.end_date))
 
-        if ar.param_values.company:
-            yield unicode(ar.param_values.company)
+        if pv.company:
+            yield unicode(pv.company)
 
 
 class OverlappingContractsTest:
-
     """
     Volatile object used to test for overlapping contracts.
     """
@@ -581,7 +575,8 @@ class OverlappingContractsTest:
         if False:
             cp = (self.client.coached_from, self.client.coached_until)
             if not encompass(cp, ap):
-                return _("Date range %(p1)s lies outside of coached period %(p2)s.") \
+                return _("Date range %(p1)s lies outside of coached "
+                         "period %(p2)s.") \
                     % dict(p2=rangefmt(cp), p1=rangefmt(ap))
         for (p2, con2) in self.actives:
             if con1 != con2 and overlap2(ap, p2):
@@ -605,10 +600,6 @@ class OverlappingContractsTest:
 
 
 class Contract(ContractBase):
-
-    """
-    ISIP = Individual Social Integration Project (VSE)
-    """
     class Meta:
         verbose_name = _("ISIP")
         verbose_name_plural = _("ISIPs")
@@ -630,25 +621,22 @@ class Contract(ContractBase):
     duties_dsbe = dd.RichTextField(
         _("duties DSBE"),
         blank=True, null=True, format='html')
-    duties_company = dd.RichTextField(
-        _("duties company"),
-        blank=True, null=True, format='html')
     duties_person = dd.RichTextField(
         _("duties person"),
         blank=True, null=True, format='html')
 
     hidden_columns = (
         ContractBase.hidden_columns
-        + " stages goals duties_asd duties_dsbe duties_company duties_person")
+        + " stages goals duties_asd duties_dsbe duties_person")
 
     study_type = models.ForeignKey('isip.StudyType', blank=True, null=True)
 
     @classmethod
     def get_certifiable_fields(cls):
-        return """client company contact_person contact_role type
+        return """client type
         applies_from applies_until
         language
-        stages goals duties_dsbe duties_company
+        stages goals duties_dsbe 
         duties_asd duties_person
         user user_asd exam_policy
         date_decided date_issued"""
@@ -662,18 +650,15 @@ dd.update_field(
 class ContractDetail(dd.FormLayout):
     general = dd.Panel("""
     id:8 client:25 type user:15 user_asd:15
-    study_type  company contact_person contact_role
-    applies_from applies_until exam_policy language:8
-    
+    study_type applies_from applies_until exam_policy language:8
     date_decided date_issued printed date_ended ending:20
-    # signer1 signer2
+    PartnersByContract
     cal.TasksByController cal.EventsByController
     """, label=_("General"))
 
     isip = dd.Panel("""
-    stages        goals
-    duties_asd    duties_dsbe
-    duties_company duties_person
+    stages  goals
+    duties_asd  duties_dsbe  duties_person
     """, label=_("ISIP"))
 
     main = "general isip"
@@ -688,11 +673,10 @@ class Contracts(ContractBaseTable):
     model = Contract
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
-    active_fields = 'company'
     detail_layout = ContractDetail()
     insert_layout = dd.FormLayout("""
     client
-    type company
+    type
     """, window_size=(60, 'auto'))
 
     parameters = dict(
@@ -709,8 +693,11 @@ class Contracts(ContractBaseTable):
     def get_request_queryset(cls, ar):
         #~ logger.info("20120608.get_request_queryset param_values = %r",ar.param_values)
         qs = super(Contracts, cls).get_request_queryset(ar)
-        if ar.param_values.study_type:
-            qs = qs.filter(study_type=ar.param_values.study_type)
+        pv = ar.param_values
+        if pv.company:
+            qs = qs.filter(contractpartner__company=pv.company)
+        if pv.study_type:
+            qs = qs.filter(study_type=pv.study_type)
         return qs
 
     @classmethod
@@ -723,16 +710,6 @@ class Contracts(ContractBaseTable):
 
 
 class MyContracts(Contracts):
-#~ class MyContracts(Contracts,mixins.ByUser):
-    #~ column_names = "applies_from client *"
-    #~ label = _("My ISIP contracts")
-    #~ label = _("My PIIS contracts")
-    #~ order_by = "reminder_date"
-    #~ column_names = "reminder_date client company *"
-    #~ order_by = ["applies_from"]
-    #~ filter = dict(reminder_date__isnull=False)
-
-    #~ debug_permissions = 20121127
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -763,40 +740,3 @@ class ContractsByEnding(Contracts):
 class ContractsByStudyType(Contracts):
     master_key = 'study_type'
 
-#~ def customize_siteconfig():
-    #~ from lino.ui.models import SiteConfig
-    #~ dd.inject_field(SiteConfig,
-        #~ 'signer1_function',
-        #~ models.ForeignKey("contacts.RoleType",
-            #~ blank=True,null=True,
-            #~ verbose_name=_("First signer function"),
-            #~ help_text=_("""Contact function to designate the secretary."""),
-            #~ related_name="%(app_label)s_%(class)s_set_by_signer1"))
-    #~ dd.inject_field(SiteConfig,
-        #~ 'signer2_function',
-        #~ models.ForeignKey("contacts.RoleType",
-            #~ blank=True,null=True,
-            #~ verbose_name=_("Second signer function"),
-            #~ help_text=_("Contact function to designate the president."),
-            #~ related_name="%(app_label)s_%(class)s_set_by_signer2"))
-        #~
-#~ customize_siteconfig()
-
-
-#~ from lino_welfare.modlib.integ import Plugin
-
-#~ def setup_main_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",Plugin.verbose_name)
-    #~ m.add_action(MyContracts)
-
-#~ def setup_config_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",Plugin.verbose_name)
-    #~ m.add_action(ContractTypes)
-    #~ m.add_action(ContractEndings)
-    #~ m.add_action(ExamPolicies)
-    #~ m.add_action(StudyTypes)
-  #~
-#~ def setup_explorer_menu(site,ui,profile,m):
-    #~ m  = m.add_menu("integ",Plugin.verbose_name)
-    #~ m.add_action(Contracts)
-#~
