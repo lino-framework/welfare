@@ -834,3 +834,50 @@ def doit(a, b):
         return '1.1.13'
 
 
+    def migrate_from_1_1_13(self, globals_dict):
+        """- Move company, contact_person and contact_role from isip.Contract
+        to isip.ContractPartner
+
+        """
+        isip_Contract = resolve_model("isip.Contract")
+        isip_contractpartner = resolve_model("isip.ContractPartner")
+
+        def create_isip_contract(id, user_id, signer1_id, signer2_id, company_id, contact_person_id, contact_role_id, printed_by_id, client_id, language, applies_from, applies_until, date_decided, date_issued, user_asd_id, exam_policy_id, ending_id, date_ended, type_id, stages, goals, duties_asd, duties_dsbe, duties_company, duties_person, study_type_id):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(user_id=user_id)
+            kw.update(signer1_id=signer1_id)
+            kw.update(signer2_id=signer2_id)
+            kw.update(printed_by_id=printed_by_id)
+            kw.update(client_id=client_id)
+            kw.update(language=language)
+            kw.update(applies_from=applies_from)
+            kw.update(applies_until=applies_until)
+            kw.update(date_decided=date_decided)
+            kw.update(date_issued=date_issued)
+            kw.update(user_asd_id=user_asd_id)
+            kw.update(exam_policy_id=exam_policy_id)
+            kw.update(ending_id=ending_id)
+            kw.update(date_ended=date_ended)
+            kw.update(type_id=type_id)
+            kw.update(stages=stages)
+            kw.update(goals=goals)
+            kw.update(duties_asd=duties_asd)
+            kw.update(duties_dsbe=duties_dsbe)
+            kw.update(duties_person=duties_person)
+            kw.update(study_type_id=study_type_id)
+            yield isip_Contract(**kw)
+        
+            if company_id:
+                pkw = dict()
+                pkw.update(contact_id=id)
+                pkw.update(company_id=company_id)
+                pkw.update(contact_person_id=contact_person_id)
+                pkw.update(contact_role_id=contact_role_id)
+                pkw.update(duties_company=duties_company)
+                yield isip_contractpartner(**pkw)
+
+        globals_dict.update(create_isip_contract=create_isip_contract)
+
+
+        return '1.1.14'

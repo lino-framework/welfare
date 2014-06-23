@@ -270,6 +270,10 @@ class ContractPartner(ContractPartnerBase):
 class ContractPartners(dd.Table):
     model = 'isip.ContractPartner'
     columns = 'contract company contact_person contact_role'
+    detail_layout = """
+    company contact_person contact_role
+    duties_company
+    """
 
 
 class PartnersByContract(ContractPartners):

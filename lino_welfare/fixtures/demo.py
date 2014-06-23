@@ -543,11 +543,13 @@ def objects():
                                          fr=u"VSE Lehre",
                                          en=u"VSE Lehre",
                                          ))
-    yield contractType("vsed", needs_study_type=True, **babelkw('name',
-                                                                de=u"VSE Vollzeitstudium",
-                                                                fr=u"VSE Vollzeitstudium",
-                                                                en=u"VSE Vollzeitstudium",
-                                                                ))
+    yield contractType("vsed",
+                       needs_study_type=True,
+                       **babelkw('name',
+                                 de=u"VSE Vollzeitstudium",
+                                 fr=u"VSE Vollzeitstudium",
+                                 en=u"VSE Vollzeitstudium",
+                             ))
     yield contractType("vsee", **babelkw('name',
                                          de=u"VSE Sprachkurs",
                                          fr=u"VSE Sprachkurs",
@@ -904,9 +906,9 @@ Wir sind auf der Suche nach einem Deutsch-Französich Übersetzer
 (M/F) um einen Selbständigenr zu Geschäftsessen und kommerziellen 
 Termine zu begleiten. Sie übernehmen die Übersetzung von Gespräche 
 während kommerziellen Kontakte mit deutschen Kunden.
-Es ist spontane und pünktliche Aufträge, den ganzen Tag, in 
-Eupen und/oder Deutschland. 
-Regelmäßigkeit: 1-2 Mal pro Monat, je nach Bedarf. 
+Es ist spontane und pünktliche Aufträge, den ganzen Tag, in
+Eupen und/oder Deutschland.
+Regelmäßigkeit: 1-2 Mal pro Monat, je nach Bedarf.
 Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         provider=PROVIDERS.pop(),
         selection_from=settings.SITE.demo_date(-120),
@@ -1136,6 +1138,13 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         yield ctr
         ar = dd.login()
         ctr.update_reminders(ar)
+        if isinstance(ctr, isip.Contract):
+            if i % 3:
+                yield isip.ContractPartner(
+                    contract=ctr, company=COMPANIES.pop())
+                if i % 4:
+                    yield isip.ContractPartner(
+                        contract=ctr, company=COMPANIES.pop())
 
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which
