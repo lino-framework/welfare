@@ -870,7 +870,7 @@ def doit(a, b):
         
             if company_id:
                 pkw = dict()
-                pkw.update(contact_id=id)
+                pkw.update(contract_id=id)
                 pkw.update(company_id=company_id)
                 pkw.update(contact_person_id=contact_person_id)
                 pkw.update(contact_role_id=contact_role_id)
