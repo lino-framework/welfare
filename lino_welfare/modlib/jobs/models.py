@@ -109,7 +109,7 @@ class Regimes(dd.Table):
 
 class JobProvider(contacts.Company):
 
-    """Stellenanbieter (BISA, BW, ...) 
+    """Stellenanbieter (BISA, BW, ...)
     """
     class Meta:
         app_label = 'jobs'
@@ -529,7 +529,7 @@ class MyContracts(Contracts):
 class JobType(dd.Sequenced):
 
     """
-    The list of Job Types is used for statistical analysis, 
+    The list of Job Types is used for statistical analysis,
     e.g. in :class:``
     """
 

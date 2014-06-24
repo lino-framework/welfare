@@ -8,16 +8,8 @@ The :mod:`lino_welfare.modlib.isip` package provides data definitions
 for managing ISIPs (Individual Social Integration Projects)
 
 
-Models
+Mixins
 ======
-
-.. class:: Contract
-
-  Inherits from :class:`ContractBase`.
-
-  .. attribute:: study_type
-
-    Pointer to the :class:`StudyType`
 
 .. class:: ContractBase
 
@@ -38,6 +30,46 @@ Models
   .. attribute:: applies_from
   .. attribute:: applies_until
   .. attribute:: date_issued
+
+
+Models
+======
+
+.. class:: Contract
+
+  Inherits from :class:`ContractBase`.
+
+  .. attribute:: study_type
+
+    Pointer to the :class:`StudyType`
+
+.. class:: ContractPartner
+
+  Every contract can optionally be associated to one or several
+  external partners. These are organisations
+
+  .. attribute:: company
+
+      Pointer to the :class:`contacts.Company`
+
+  .. attribute:: contact_person
+
+      Pointer to the :class:`contacts.Person` who represents this company.
+
+  .. attribute:: contact_role
+
+      Pointer to the role (:class:`contacts.RoleType`) of
+      :attr:`contact_person` within :attr:`company`.
+
+  .. attribute:: duties_company
+
+      Text fragment inserted into the printable document.
+
+.. class:: ContractPartners
+
+.. class:: PartnersByContract
+
+
 
 .. class:: ContractType
 

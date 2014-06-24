@@ -879,5 +879,4 @@ def doit(a, b):
 
         globals_dict.update(create_isip_contract=create_isip_contract)
 
-
         return '1.1.14'

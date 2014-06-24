@@ -11,3 +11,4 @@ Lino Welfare class reference
    debts
    integ
    isip
+   jobs

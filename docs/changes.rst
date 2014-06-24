@@ -4,13 +4,23 @@
 Changes in Lino Welfare
 ========================
 
-See the author's :ref:`Developer Blog <blog>`
-to get detailed news.
-The final truth about what's going on is only 
-`The Source Code <http://code.google.com/p/lino/source/list>`_.
+See the author's :ref:`Developer Blog <blog>` to get detailed news.
+The final truth about what's going on is only the source code.
 
-Version 1.1.12 (coming)
-=============================================
+Version 1.1.14 (2014-06-24)
+===========================
+
+- A :class:`welfare.isip.Contract` can now have more than one external
+  partner. New table :class:`welfare.isip.PartnersByContract`
+
+Version 1.1.13 (2014-06-20)
+===========================
+
+- Configuring :mod:`ml.excerpts` is getting user-friendly.
+
+
+Version 1.1.12 (2014-05-27)
+===========================
 
 - User documentation in German see :doc:`releases/1.1.12`
 
