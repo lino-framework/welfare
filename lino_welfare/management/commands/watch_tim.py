@@ -283,8 +283,11 @@ def country2kw(row, kw):
                 dblogger.warning("%s-%s : %s", row['PAYS'], row['CP'], e)
 
     email = row['EMAIL']
-    if email and is_valid_email(email):
-        kw.update(email=email)
+    if email:
+        if is_valid_email(email):
+            kw.update(email=email)
+        else:
+            dblogger.warning("Ignoring invalid email address %s", email)
     store(kw,
           phone=row['TEL'],
           fax=row['FAX'],

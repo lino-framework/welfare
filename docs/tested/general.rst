@@ -42,7 +42,7 @@ Test whether :meth:`get_db_overview_rst
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 42 apps: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, appypod, export_excel, djangosite.
-109 models:
+110 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
@@ -82,7 +82,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Person                32        101
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         110
+ contenttypes.ContentType       4         111
  countries.Country              8         8
  countries.Place                10        76
  courses.Course                 5         3
@@ -95,13 +95,14 @@ Test whether :meth:`get_db_overview_rst
  debts.Budget                   11        5
  debts.Entry                    16        245
  excerpts.Excerpt               12        1
- excerpts.ExcerptType           15        11
+ excerpts.ExcerptType           15        8
  households.Household           28        5
  households.Member              12        10
  households.Type                5         4
  humanlinks.Link                4         36
- isip.Contract                  26        17
+ isip.Contract                  22        17
  isip.ContractEnding            6         4
+ isip.ContractPartner           6         16
  isip.ContractType              8         5
  isip.EducationLevel            6         5
  isip.ExamPolicy                20        5

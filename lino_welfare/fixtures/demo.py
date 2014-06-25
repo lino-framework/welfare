@@ -23,7 +23,7 @@ ONE_DAY = datetime.timedelta(days=1)
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
-
+from django.utils import translation
 
 from lino import dd
 from lino import mixins
@@ -1207,6 +1207,8 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
 
     person2client("Paul", "Frisch")
     person2client("Bruno", "Braun")
+
+
 
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")
