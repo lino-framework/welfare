@@ -146,3 +146,21 @@ conflicting events:
 EventType #2 (u'Internal meetings with client')
 >>> e.event_type.max_conflicting
 4
+
+JobsOverview
+------------
+
+Printing the document 
+:ref:`welfare.jobs.JobsOverview`
+caused a "NotImplementedError: <i> inside <text:p>" traceback 
+when one of the jobs had a remark. 
+
+>>> obj = ses.spawn(jobs.JobsOverview).create_instance()
+>>> ses.run(obj.do_print)
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+{'open_url': u'/.../jobs.JobsOverview.pdf',
+ 'success': True}
+
+This bug was fixed :blogref:`20130423`.
+Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.
+

@@ -172,21 +172,6 @@ row (e.g. "Fahrtkosten") separated by commas.
 <BLANKLINE>
 
 
-Printing a Budget
------------------
-
->>> obj = debts.Budget.objects.get(pk=3)
->>> obj.clear_cache()
->>> with translation.override('en'):
-...     print(ses.run(obj.create_excerpt)) 
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'success': True, 
-'open_url': u'.../debts.Budget-3.odt', 
-'message': u'debts.Budget-3.odt has been built.', 
-'refresh': True}
-
-Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.
-
 Something in French
 -------------------
 

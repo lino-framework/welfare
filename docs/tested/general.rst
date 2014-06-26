@@ -94,7 +94,7 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         10
  debts.Budget                   11        5
  debts.Entry                    16        245
- excerpts.Excerpt               12        1
+ excerpts.Excerpt               12        8
  excerpts.ExcerptType           15        8
  households.Household           28        5
  households.Member              12        10
