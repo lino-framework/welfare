@@ -13,53 +13,20 @@
 
 import sys, os
 
+extlinks = {}
+extensions = []
+
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.docs.settings.test')
 
 extensions += ['lino.utils.actordoc']
 
 
-#~ from unipath import Path
-#~ DOCSDIR = Path(__file__).parent.absolute()
-#~ sys.path.append(DOCSDIR)
-
-#~ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-#~ """
-#~ Trigger loading of Djangos model cache in order to avoid side effects that 
-#~ would occur when this happens later while importing one of the models modules.
-#~ """
 from django.conf import settings
-#~ settings.SITE.startup()
 settings.SITE.title = "Lino Welfare Reference Manual"
 
 
-# If your extensions are in another directory, add it here. If the directory
-# is relative to the documentation root, use os.path.abspath to make it
-# absolute, like shown here.
-#sys.path.append(os.path.abspath('.'))
-
-# General configuration
-# ---------------------
-
-# Add any Sphinx extension module names here, as strings. They can be extensions
-# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-#~ extensions = [
-  #~ 'sphinx.ext.autodoc',
-  #~ 'sphinx.ext.autosummary',
-  # 'sphinx.ext.inheritance_diagram',
-  # 'sphinx.ext.todo',
-  #~ 'sphinx.ext.extlinks',
-  #~ 'sphinx.ext.graphviz',
-  #~ 'sphinx.ext.intersphinx',
-  #~ 'sphinx.ext.doctest',
-#~ ]
-
-#~ extensions.append('sphinxcontrib.autorun')
-
-
 primary_domain = 'py'
-
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
@@ -76,7 +43,7 @@ master_doc = 'index'
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = settings.SITE.title
-copyright = u'2012-2013, Luc Saffre'
+copyright = u'2012-2014, Luc Saffre'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -169,7 +136,7 @@ html_last_updated_fmt = '%b %d, %Y'
 # Custom sidebar templates, maps document names to template names.
 # http://sphinx.pocoo.org/latest/config.html#confval-html_sidebars
 html_sidebars = {
-   '**': ['globaltoc.html', 'searchbox.html', 'links.html'],
+    '**': ['globaltoc.html', 'searchbox.html', 'links.html'],
 }
 
 
@@ -259,12 +226,15 @@ latex_documents = [
 extlinks.update(
     lino=('http://www.lino-framework.org%s.html', ''))
 
+import lino_welfare
+extlinks.update(srcref=(lino_welfare.srcref_url, ''))
+
 
 #~ nitpicky = True # use -n in Makefile instead
 
 # http://sphinx.pocoo.org/theming.html
 #~ html_theme = "default"
-html_theme_options = dict(collapsiblesidebar=True,externalrefs=True)
+html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
 
 #~ todo_include_todos = True
 

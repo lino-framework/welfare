@@ -530,12 +530,14 @@ class Client(contacts.Person,
 
     def get_image_parts(self):
         if self.card_number:
-            return ("beid", self.card_number + ".jpg")
-        return ("pictures", "contacts.Person.jpg")
+            parts = ("beid", self.card_number + ".jpg")
+            fn = os.path.join(settings.MEDIA_ROOT, *parts)
+            if os.path.exists(fn):
+                return parts
+        # return ("pictures", "contacts.Person.jpg")
+        return ("lino", "contacts.Person.jpg")
 
     def get_image_url(self, ar):
-        #~ return settings.MEDIA_URL + "/".join(self.get_image_parts())
-        #~ return ar.ui.media_url(*self.get_image_parts())
         return settings.SITE.build_media_url(*self.get_image_parts())
 
     def get_image_path(self):

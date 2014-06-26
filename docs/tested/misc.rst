@@ -31,6 +31,7 @@ Notes
 200
 
 We test whether a normal HTML response arrived:
+
 >>> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 <!DOCTYPE html
 ...
@@ -75,7 +76,7 @@ when one of the jobs had a remark.
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> print(ses.run(obj.do_print)) 
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'open_url': u'...jobs.JobsOverview.odt',
+{'open_url': u'...jobs.JobsOverview.pdf',
  'success': True}
  
 Bug fixed :blogref:`20130423`.
@@ -130,4 +131,73 @@ Sozi
 Social agent (Manager)
 Verwalter
 
+
+Rendering some more excerpts
+----------------------------
+
+The demo fixtures also generated some excerpts:
+
+>>> with translation.override('en'):
+...     ses.show(excerpts.Excerpts, column_names="id excerpt_type owner")
+==== ====================== ========================================
+ ID   Excerpt Type           Controlled by
+---- ---------------------- ----------------------------------------
+ 1    Budget                 **Budget 1 for Jeanémart-Lahm (181)**
+ 2    Art.60§7 contract      **Art.60§7 contract#1 (Bernd Brecht)**
+ 3    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
+ 4    Aid certificate        **Aid #1**
+ 5    Presence certificate   **Guest #1 (22.05.2014)**
+ 6    Curriculum vitae       **AUSDEMWALD Alfons (115)**
+ 7    eID sheet              **AUSDEMWALD Alfons (115)**
+ 8    to-do list             **AUSDEMWALD Alfons (115)**
+==== ====================== ========================================
+<BLANKLINE>
+
+>>> import shutil
+>>> obj = excerpts.Excerpt.objects.get(pk=3)
+>>> rv = ses.run(obj.do_print)
+>>> print(rv['open_url'])  #doctest: +NORMALIZE_WHITESPACE
+/media/cache/appypdf/isip.Contract-1.pdf
+>>> print(rv['success'])
+True
+
+The above `.pdf` file has been generated to a temporary cache
+directory of the developer's computer when this document had its last
+test run. The following lines the copied the file to the docs tree
+which is published together with the source code and thus publicly
+visible:
+
+>>> tmppath = settings.SITE.project_dir + rv['open_url']
+>>> shutil.copyfile(tmppath, 'isip.Contract-1.pdf')
+
+Link to this copy of the resulting file:
+:srcref:`/docs/tested/isip.Contract-1.pdf`
+
+Now the same in more generic. We write a formatter function and then
+call it on every excerpt. See the source code of this page if you want
+to see how we generated the following list:
+
+.. django2rst::
+
+    import os
+    import shutil
+    from atelier import rstgen
+    ses = dd.login()
+    def asli(obj):
+        rv = ses.run(obj.do_print)
+        tmppath = settings.SITE.project_dir + rv['open_url']
+        head, tail = os.path.split(tmppath)
+        tail = 'tested/' + tail
+        try:
+            shutil.copyfile(tmppath, tail)
+        except IOError:
+            pass
+        kw = dict(tail=tail)
+        # kw.update(text="**%s** (%s)" % (obj.owner, obj.excerpt_type))
+        kw.update(type=obj.excerpt_type)
+        kw.update(owner=obj.owner)
+        return "%(type)s :srcref:`%(owner)s </docs/tested/%(tail)s>`" % kw
+    
+    print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
+   
 
