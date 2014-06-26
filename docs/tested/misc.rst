@@ -196,7 +196,7 @@ to see how we generated the following list:
         # kw.update(text="**%s** (%s)" % (obj.owner, obj.excerpt_type))
         kw.update(type=obj.excerpt_type)
         kw.update(owner=obj.owner)
-        return "%(type)s :srcref:`%(owner)s </docs/tested/%(tail)s>`" % kw
+        return "%(type)s :srcref:`%(owner)s <docs/%(tail)s>`" % kw
     
     print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
    
