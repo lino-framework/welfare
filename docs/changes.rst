@@ -14,13 +14,13 @@ Version 1.1.14 (release 2014-06-24)
   partner. New table :class:`welfare.isip.PartnersByContract`
 
 Version 1.1.13 released (2014-06-20)
-===================================
+====================================
 
 - Configuring :mod:`ml.excerpts` is getting user-friendly.
 
 
 Version 1.1.12 (released 2014-05-27)
-===================================
+====================================
 
 - User documentation in German see :doc:`releases/1.1.12`
 
