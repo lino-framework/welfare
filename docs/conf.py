@@ -236,7 +236,7 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
 #~ from djangosite.utils.sphinxconf import setup
 
-if True:
+if False:
 
     # http://sphinx.pocoo.org/theming.html
     #~ html_theme = "default"
