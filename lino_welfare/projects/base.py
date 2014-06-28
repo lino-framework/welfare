@@ -222,10 +222,10 @@ class Site(Site):
 
     def get_admin_main_items(self, ar):
         yield self.modules.integ.UsersWithClients
-        yield self.modules.reception.WaitingVisitors
-        # yield self.modules.reception.MyWaitingVisitors
+        yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
         yield self.modules.cal.MyTasks
+        yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
 
 

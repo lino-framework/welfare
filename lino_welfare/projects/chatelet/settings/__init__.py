@@ -1,3 +1,17 @@
+# -*- coding: UTF-8 -*-
+# Copyright 2008-2014 Luc Saffre
+# This file is part of the Lino project.
+# Lino is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Lino is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
@@ -63,6 +77,21 @@ class Site(Site):
         add('410', _("Social agent (Manager)"),      'U M M _ M U _ _')
         add('900', _("Administrator"),               'A A A A A A A A',
             name='admin')
+
+    def get_admin_main_items(self, ar):
+
+        # Mathieu: je remarque que le module "Visiteurs qui
+        # m'attendent" ne fonctionne plus. Hors, c'est surtout ce
+        # système qui est intéressant pour les travailleurs sociaux
+        # qui attendent leurs rdv ou qui tiennent des permanences.
+
+        yield self.modules.reception.MyWaitingVisitors
+        yield self.modules.cal.MyEvents
+        yield self.modules.cal.MyTasks
+        
+        yield self.modules.reception.WaitingVisitors
+        yield self.modules.integ.UsersWithClients
+        #~ yield self.modules.reception.ReceivedVisitors
 
 
 # the following line should not be active in a checked-in version

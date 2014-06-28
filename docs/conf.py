@@ -104,7 +104,7 @@ html_style = 'default.css'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = u"OpenTIM Developer's Reference"
+html_title = "Lino Welfare"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -232,19 +232,24 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
 #~ nitpicky = True # use -n in Makefile instead
 
-# http://sphinx.pocoo.org/theming.html
-#~ html_theme = "default"
-html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
-
 #~ todo_include_todos = True
 
-
-
-#~ HGWORK = DOCSDIR.ancestor(2)
-#~ intersphinx_mapping = dict()
-#~ for n in ('site','north','lino','welfare'):
-    #~ p = Path(HGWORK,n,'docs','.build','objects.inv')
-    #~ if p.exists():
-        #~ intersphinx_mapping[n] = ('http://%s.lino-framework.org' % n,p)
-
 #~ from djangosite.utils.sphinxconf import setup
+
+if True:
+
+    # http://sphinx.pocoo.org/theming.html
+    #~ html_theme = "default"
+    html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
+
+else:
+    # http://sphinx-better-theme.readthedocs.org/en/latest/installation.html
+    from better import better_theme_path
+    html_theme_path = [better_theme_path]
+    html_theme = 'better'
+    html_theme_options = dict()
+    html_theme_options.update(sidebarwidth='100rem')
+    html_short_title = "Home"
+    # html_theme_options.update(cssfiles=['.static/style.css'])
+    html_logo = None
+    html_favicon = None
