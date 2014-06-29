@@ -20,6 +20,7 @@ from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.docs.settings.test')
 
 extensions += ['lino.utils.actordoc']
+extensions += ['atelier.sphinxconf.centeredlogo']
 
 
 from django.conf import settings
@@ -231,8 +232,6 @@ extlinks.update(
 # extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
 
-def setup(app):
-    app.add_stylesheet('centeredlogo.css')
 
 #~ nitpicky = True # use -n in Makefile instead
 
@@ -261,4 +260,3 @@ else:
     # html_favicon = None
 
 
-print extlinks
