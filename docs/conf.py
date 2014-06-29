@@ -19,8 +19,8 @@ extensions = []
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.docs.settings.test')
 
-extensions += ['lino.utils.actordoc']
-extensions += ['atelier.sphinxconf.centeredlogo']
+extensions += ['lino.sphinxcontrib.actordoc']
+extensions += ['lino.sphinxcontrib.logo']
 
 
 from django.conf import settings
@@ -114,7 +114,7 @@ html_title = "Lino Welfare"
 # of the sidebar.
 #~ html_logo = 'logo.jpg'
 # html_logo = 'lino-logo-2.png'
-html_logo = '.static/logo.png'
+# html_logo = '.static/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -225,8 +225,8 @@ latex_documents = [
 #   'lino': ('http://www.lino-framework.org%s.html', ''),
 # }
 
-extlinks.update(
-    lino=('http://www.lino-framework.org%s.html', ''))
+# extlinks.update(
+#     lino=('http://www.lino-framework.org%s.html', ''))
 
 # import lino_welfare
 # extlinks.update(srcref=(lino_welfare.srcref_url, ''))

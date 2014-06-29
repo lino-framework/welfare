@@ -2,7 +2,7 @@ Version 1.0.8
 =============
 
 Released 2013-01-14.
-Requires :lino:`Lino 1.5.4 </releases/1.5.4>`
+Requires `Lino version 1.5.4`
 
 Neuerungen
 ----------
