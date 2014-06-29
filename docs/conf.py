@@ -112,7 +112,8 @@ html_title = "Lino Welfare"
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #~ html_logo = 'logo.jpg'
-html_logo = 'lino-logo-2.png'
+# html_logo = 'lino-logo-2.png'
+html_logo = '.static/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -122,7 +123,7 @@ html_logo = 'lino-logo-2.png'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['.static']
+# html_static_path = ['.static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -226,17 +227,18 @@ latex_documents = [
 extlinks.update(
     lino=('http://www.lino-framework.org%s.html', ''))
 
-import lino_welfare
-extlinks.update(srcref=(lino_welfare.srcref_url, ''))
+# import lino_welfare
+# extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
+
+def setup(app):
+    app.add_stylesheet('centeredlogo.css')
 
 #~ nitpicky = True # use -n in Makefile instead
 
 #~ todo_include_todos = True
 
-#~ from djangosite.utils.sphinxconf import setup
-
-if False:
+if True:
 
     # http://sphinx.pocoo.org/theming.html
     #~ html_theme = "default"
@@ -246,10 +248,17 @@ else:
     # http://sphinx-better-theme.readthedocs.org/en/latest/installation.html
     from better import better_theme_path
     html_theme_path = [better_theme_path]
+    # html_static_path.append(better_theme_path + '/better')
+    # html_static_path.insert(0, better_theme_path + '/better')
+    # print 20140629, html_static_path
+
     html_theme = 'better'
     html_theme_options = dict()
     html_theme_options.update(sidebarwidth='100rem')
     html_short_title = "Home"
-    # html_theme_options.update(cssfiles=['.static/style.css'])
-    html_logo = None
-    html_favicon = None
+    # html_theme_options.update(cssfiles=['_static/style.css'])
+    # html_logo = None
+    # html_favicon = None
+
+
+print extlinks
