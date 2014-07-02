@@ -51,7 +51,7 @@ Printing a Tx25
 
 >>> print(ses.run(obj.do_print))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'open_url': u'.../cbss.RetrieveTIGroupsRequest-1.pdf',
+{'open_url': u'.../cbss.RetrieveTIGroupsRequest-1.odt',
  'success': True}
 
 

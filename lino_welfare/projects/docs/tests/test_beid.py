@@ -108,18 +108,18 @@ class BeIdTests(RemoteAuthTestCase):
         self.assertEqual(result['success'], True)
         expected = """\
 Click OK to apply the following changes for JEFFIN Jean (100) :\
-<br/>City : None -> Place #1 (u\'Tallinn\')
+<br/>City : None -> Place #1 (u'Tallinn')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
-<br/>eID card issuer : \'\' -> \'Tallinn\'
+<br/>Street : '' -> 'Estland'
 <br/>ID card valid from : None -> 2011-08-19
 <br/>eID card type : None -> <BeIdCardTypes.belgian_citizen:1>
-<br/>Street : \'\' -> \'Estland\'
-<br/>Birth place : \'\' -> \'Mons\'
-<br/>Country : None -> Country #BE (u\'Belgium\')
-<br/>Birth date : \'\' -> 1968-06-01
-<br/>eID card number : \'\' -> \'592345678901\'
-<br/>Zip code : \'\' -> \'1418\'"""
+<br/>eID card issuer : '' -> 'Tallinn'
+<br/>Birth place : '' -> 'Mons'
+<br/>Country : None -> Country #BE (u'Belgium')
+<br/>Birth date : '' -> 1968-06-01
+<br/>eID card number : '' -> '592345678901'
+<br/>Zip code : '' -> '1418'"""
         # print(result['message'])
         self.assertEqual(result['message'], expected)
 
@@ -133,7 +133,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
             HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(
             response,
-            'eval_js alert success message')
+            'detail_handler_name data_record alert success message')
         self.assertEqual(result['success'], True)
         self.assertEqual(
             result['message'],
@@ -159,4 +159,20 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
             'xcallback success message')
         self.assertEqual(result['success'], True)
         expected = "Create new client Jean Jacques Jeffin : Are you sure?"
+        self.assertEqual(result['message'], expected)
+
+        # next card. a foreigner card with incomplete birth date
+
+        post_data.update(card_data=readfile('beid_tests_2.txt'))
+        url = '/api/pcsw/Clients'
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = "Create new client Marc Petitjean : Are you sure?"
         self.assertEqual(result['message'], expected)

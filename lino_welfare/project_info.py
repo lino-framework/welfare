@@ -113,7 +113,6 @@ SETUP_INFO.update(packages=[
     'lino_welfare.projects.eupen',
     'lino_welfare.projects.eupen.settings',
     'lino_welfare.scripts',
-    'lino_welfare.tests',
 ])
 
 SETUP_INFO.update(message_extractors={

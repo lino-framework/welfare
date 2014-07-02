@@ -65,23 +65,6 @@ Some database content
 <BLANKLINE>
 
 
-JobsOverview
-------------
-
-Printing the document 
-:ref:`welfare.jobs.JobsOverview`
-caused a "NotImplementedError: <i> inside <text:p>" traceback 
-when one of the jobs had a remark. 
-
->>> obj = ses.spawn(jobs.JobsOverview).create_instance()
->>> print(ses.run(obj.do_print)) 
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'open_url': u'...jobs.JobsOverview.pdf',
- 'success': True}
- 
-Bug fixed :blogref:`20130423`.
-
-
 .. _welfare.tested.cal:
 
 Calendars and Subscriptions

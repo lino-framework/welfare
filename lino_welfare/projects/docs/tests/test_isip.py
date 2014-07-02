@@ -106,7 +106,7 @@ class QuickTest(RemoteAuthTestCase):
 
         obj = create(isip.Contract, **kw)
 
-        self.assertEqual(unicode(obj), "ISIP#1 (Max Mustermann)")
+        self.assertEqual(unicode(obj), "ISIP#1 (Max MUSTERMANN)")
 
         settings.SITE.verbose_client_info_message = True
 
@@ -118,23 +118,24 @@ class QuickTest(RemoteAuthTestCase):
         self.assertEqual(res['success'], True)
 
         expected = """\
-Update Events for ISIP#1 (Max Mustermann)...
+Update Events for ISIP#1 (Max MUSTERMANN)...
+Generating events between 2014-07-01 and 2015-03-31.
 Reached upper date limit 2015-03-31
-3 event(s) have been updated."""
+3 row(s) have been updated."""
         # print(expected)
         self.assertEqual(res['info_message'], expected)
 
         ar = ses.spawn(cal.EventsByController, master_instance=obj)
-        s = ar.to_rst(column_names="when_text state")
+        s = ar.to_rst(column_names="start_date state")
         # print(s)
         self.assertEqual(s, """\
-================== ===========
- When               State
------------------- -----------
- **July 1, 2014**   Suggested
- **Oct. 1, 2014**   Suggested
- **Jan. 1, 2015**   Suggested
-================== ===========
+============ ===========
+ Start date   State
+------------ -----------
+ 7/1/14       Suggested
+ 10/1/14      Suggested
+ 1/1/15       Suggested
+============ ===========
 """)
 
 

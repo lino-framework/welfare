@@ -218,12 +218,12 @@ class TestCase(TestCase):
         self.assertEqual(coaching.user.username, 'alicia')
         self.assertEqual(coaching.start_date, i2d(19850723))
         s = changes_to_rst(client.partner_ptr)
-        print s
+        # print s
         self.assertEqual(s, """\
 =========== ============= ================================ ============================================================================= ============= ===========
  User        Change Type   Object                           Changes                                                                       Object type   object id
 ----------- ------------- -------------------------------- ----------------------------------------------------------------------------- ------------- -----------
- watch_tim   Create        alicia / Voldemort-Potter H      Coaching(id=1,user=2,client=4260,start_date=1985-07-23,type=2,primary=True)   Coaching      1
+ watch_tim   Create        alicia / Voldemort-Potter H      Coaching(id=1,start_date=1985-07-23,user=2,client=4260,type=2,primary=True)   Coaching      1
  watch_tim   Add child     Harald VOLDEMORT-POTTER (4260)   pcsw.Client                                                                   Person        4260
  watch_tim   Add child     Voldemort-Potter Harald (4260)   contacts.Person                                                               Partner       4260
 =========== ============= ================================ ============================================================================= ============= ===========

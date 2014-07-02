@@ -158,7 +158,7 @@ when one of the jobs had a remark.
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> ses.run(obj.do_print)
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'open_url': u'/.../jobs.JobsOverview.pdf',
+{'open_url': u'/.../jobs.JobsOverview.odt',
  'success': True}
 
 This bug was fixed :blogref:`20130423`.

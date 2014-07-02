@@ -24,9 +24,11 @@ from unipath import Path
 
 ROOTDIR = Path(__file__).parent.parent
 
+
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
+SETUP_INFO = {}  # just to satisfy flymake
 # load  SETUP_INFO:
 execfile(ROOTDIR.child('lino_welfare', 'project_info.py'), globals())
 
@@ -39,10 +41,13 @@ class BaseTestCase(TestCase):
 
 class DjangoTests(BaseTestCase):
     """
-    $ python setup.py test -s tests.DjangoTests.test_docs
+    $ python setup.py test -s tests.DjangoTests
     """
     def test_docs(self):
-        self.run_django_manage_test('lino_welfare/projects/docs')
+        # self.run_django_manage_test('lino_welfare/projects/docs')
+        cwd = ROOTDIR.child(
+            'lino_welfare', 'projects', 'docs', 'tests').absolute()
+        self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
     
     # def test_eupen(self):
     #     self.run_django_manage_test('lino_welfare/projects/eupen')
