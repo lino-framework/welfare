@@ -28,21 +28,20 @@ import json
 
 from dateutil import parser as dateparser
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import CommandError
 from django.core.exceptions import ValidationError
 from django.db import connection
 
 
 from django.conf import settings
 
-from django.db.utils import DatabaseError
 from django.db import IntegrityError
 
 from djangosite.dbutils import is_valid_email
 
 from lino import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
-from lino.utils import join_words, unicode_string
+from lino.utils import join_words
 
 from lino.utils import dblogger
 from lino.utils import mti
