@@ -229,14 +229,15 @@ def customize_cal(sender, **kw):
     outbox.MailsByController #postings.PostingsByController
     """, _("More"))
 
-    site.modules.cal.Events.set_insert_layout("""
-    summary 
-    start end 
-    event_type project 
-    """,
-                                              start="start_date start_time",
-                                              end="end_date end_time",
-                                              window_size=(60, 'auto'))
+    site.modules.cal.Events.set_insert_layout(
+        """
+        summary
+        start end
+        event_type project
+        """,
+        start="start_date start_time",
+        end="end_date end_time",
+        window_size=(60, 'auto'))
 
 
 if False:
