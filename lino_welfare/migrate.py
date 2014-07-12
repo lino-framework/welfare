@@ -880,3 +880,26 @@ def doit(a, b):
         globals_dict.update(create_isip_contract=create_isip_contract)
 
         return '1.1.14'
+
+    def migrate_from_1_1_14(self, globals_dict):
+        """
+        aids.Aid: removed fields `board` and `date_decided`
+        """
+        aids_Aid = resolve_model("aids.Aid")
+        def create_aids_aid(id, start_date, end_date, decided_date, board_id, client_id, aid_regime, aid_type_id, category_id, amount):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(start_date=start_date)
+            kw.update(end_date=end_date)
+            # kw.update(decided_date=decided_date)
+            # kw.update(board_id=board_id)
+            kw.update(client_id=client_id)
+            kw.update(aid_regime=aid_regime)
+            kw.update(aid_type_id=aid_type_id)
+            kw.update(category_id=category_id)
+            if amount is not None: amount = Decimal(amount)
+            kw.update(amount=amount)
+            return aids_Aid(**kw)
+        globals_dict.update(create_aids_aid=create_aids_aid)
+
+        return '1.1.15'

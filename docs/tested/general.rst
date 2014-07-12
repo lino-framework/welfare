@@ -41,7 +41,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-42 apps: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, appypod, export_excel, djangosite.
+43 apps: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
 110 models:
 ============================== ========= =======
  Name                           #fields   #rows
@@ -50,7 +50,7 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        114
- aids.Aid                       10        12
+ aids.Aid                       9         12
  aids.AidType                   11        6
  aids.Category                  5         3
  aids.Helper                    5         0
@@ -157,7 +157,7 @@ Test whether :meth:`get_db_overview_rst
  users.Authority                3         3
  users.User                     19        10
 ============================== ========= =======
-
+<BLANKLINE>
 
 User profiles
 -------------

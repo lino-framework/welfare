@@ -20,11 +20,10 @@ SETUP_INFO = dict(
     name='lino-welfare',
     #~ distclass=MyDistribution,
     #~ dist_dir=os.path.join('docs','dist'),
-    version='1.1.14',
+    version='1.1.15',
     install_requires=['lino', 'suds', 'vobject', 'django-iban', 'xlwt'],
-    #~ version=VERSION,
     test_suite='tests',
-    description=u"A Lino application for Belgian Public Welfare Centres",
+    description=u"A Lino application for Belgian Centres for Public Welfare",
     long_description="""\
 Lino Welfare is a modular customized
 `Lino <http://www.lino-framework.org>`__
@@ -35,6 +34,8 @@ It currently covers the following functions of a PCSW:
 - General client management
 - Integration service
 - Debt mediation
+- Calendar management
+- Issuing attestations
 
 It started as a part of the Lino project and forked off in August 2012
 to become an independent project, possibly to be maintained by an

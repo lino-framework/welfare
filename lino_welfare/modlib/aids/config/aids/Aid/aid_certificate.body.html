@@ -4,31 +4,54 @@
 
 {{ super() }}
 
-<p>
-{{tr(en="receives a",
-     de="eine",
-     fr="bénéficie d'une")}}
-{{this.owner.aid_type.get_long_name()}}
-({{tr(en="Category:",
-     de="Kategorie:",
-     fr="Catégorie:")}}
-{{this.owner.category}})
-{{tr(en="",
-     de="bezieht",
-     fr="")}}
-
-{% if this.owner.applies_from %}
+{%- set aid = this.owner -%}
+{%- set past = aid.end_date and aid.end_date <= settings.SITE.today() -%}
+{%- macro when() -%}
+{% if aid.start_date %}
 {{tr(en="since",
      de="seit dem",
      fr="depuis le")}}
-{{fds(this.owner.applies_from)}}
+<b>{{fdl(aid.start_date)}}</b>
 {% endif %}
-{% if this.owner.applies_until %}
-{{tr(en="until",
+{%- if aid.start_date and aid.end_date -%}
+{{tr(en="and", de="und", fr="et")}}
+{%- endif -%}
+{% if aid.end_date %}
+<b>{{tr(en="until",
      de="bis zum",
      fr="jusqu'au")}}
-{{fds(this.owner.applies_until)}}
+{{fdl(aid.end_date)}}</b>
 {% endif %}
+{%- endmacro -%}
+
+{%- macro what() -%}
+{{tr(en="a", de="eine", fr="d'une")}}
+<b>{{aid.aid_type.get_long_name()}}</b>
+({{tr(en="Category:",
+     de="Kategorie:",
+     fr="Catégorie:")}}
+{{aid.category}})
+{% if aid.amount %}
+{{ tr(en="with amount of",de="in Höhe von", fr="d'un montant de") }}
+<b>{{ aid.amount }} €/{{ tr(en="month", de="Monat", fr="mois") }}</b>
+{% endif %}
+
+{%- endmacro -%}
+<p>
+{{tr(en=iif(past, "received", "receives"),
+     de="",
+     fr=iif(past, "a bénéficié", "bénéficie"))}}
+{% if language == "de" %}
+{{ when() }}{{ what() }}
+{% else %}
+{{ what() }}{{ when() }}
+{% endif %}
+{{tr(en=".",
+     de=iif(past, "bezog.", "bezieht."),
+     fr=".")}}
 </p>
+{% if aid.remark %}
+<p>{{ aid.remark }}</p>
+{% endif %}
 
 {% endblock %}

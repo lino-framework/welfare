@@ -129,7 +129,7 @@ The demo fixtures also generated some excerpts:
  1    Budget                 **Budget 1 for Jeanémart-Lahm (181)**
  2    Art.60§7 contract      **Art.60§7 contract#1 (Bernd Brecht)**
  3    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
- 4    Aid certificate        **Aid #1**
+ 4    Aid certificate        **Aid confirmation #1**
  5    Presence certificate   **Guest #1 (22.05.2014)**
  6    Curriculum vitae       **AUSDEMWALD Alfons (115)**
  7    eID sheet              **AUSDEMWALD Alfons (115)**

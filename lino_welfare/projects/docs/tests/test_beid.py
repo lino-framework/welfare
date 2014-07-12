@@ -75,7 +75,8 @@ class BeIdTests(RemoteAuthTestCase):
 
         url = '/api/pcsw/Clients'
         post_data = dict()
-        post_data.update(card_data=readfile('beid_tests_1.txt'))
+        post_data.update(
+            card_data=readfile('beid_tests_1.txt'))
         post_data[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
 
         # First attempt

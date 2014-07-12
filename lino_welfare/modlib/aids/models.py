@@ -156,16 +156,17 @@ class HelpersByAid(Helpers):
     auto_fit_column_widths = True
 
 
-class Aid(boards.BoardDecision, dd.DatePeriod):
-    """An Aid is when the decision has been made that a given Client
-    benefits of given type of aid during a given period.
+# class Aid(boards.BoardDecision, dd.DatePeriod):
+class Aid(dd.DatePeriod):
+    """An Aid confirmation is when a social agent confirms that
+    a given Client benefits of a given aid during a given period.
 
     """
 
     class Meta:
-        abstract = settings.SITE.is_abstract_model('aids.Aid')
-        verbose_name = _("Aid")
-        verbose_name_plural = _("Aids")
+        abstract = dd.is_abstract_model('aids.Aid')
+        verbose_name = _("Aid confirmation")
+        verbose_name_plural = _("Aid confirmations")
 
     client = models.ForeignKey('pcsw.Client')
     aid_regime = AidRegimes.field(default=AidRegimes.financial)
@@ -175,16 +176,15 @@ class Aid(boards.BoardDecision, dd.DatePeriod):
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
+    remark = dd.RichTextField(
+        _("Remark"),
+        blank=True, null=True, format='html')
+
     def __unicode__(self):
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def get_mailable_type(self):
         return self.aid_type
-
-    def full_clean(self):
-        if not self.board and self.aid_type:
-            self.board = self.aid_type.board
-        super(Aid, self).full_clean()
 
     @dd.chooser()
     def aid_type_choices(self, aid_regime):
@@ -199,14 +199,15 @@ class Aid(boards.BoardDecision, dd.DatePeriod):
         kw.update(project=self.client)
         return super(Aid, self).get_excerpt_options(ar, **kw)
 
-# dd.update_field(Aid, 'start_date', verbose_name=_('Applies from'))
-# dd.update_field(Aid, 'end_date', verbose_name=_('Applies until'))
+dd.update_field(Aid, 'start_date', verbose_name=_('Period from'))
+dd.update_field(Aid, 'end_date', verbose_name=_('until'))
 
 
 class AidDetail(dd.FormLayout):
     main = """
-    id client aid_regime aid_type:25 category
-    board decided_date:10 start_date end_date amount
+    id client start_date end_date amount
+    aid_regime aid_type:25 category
+    remark
     aids.HelpersByAid
     """
 
@@ -222,14 +223,14 @@ class Aids(dd.Table):
     """
 
     detail_layout = AidDetail()
-    column_names = "id decided_date aid_type client"
+    column_names = "id aid_type client start_date end_date"
     order_by = ["id"]
 
 
 class AidsByX(Aids):
     required = dd.required(user_groups='office')
-    column_names = "decided_date aid_type category amount *"
-    order_by = ["-decided_date"]
+    column_names = "start_date aid_type category amount *"
+    order_by = ["-start_date"]
     auto_fit_column_widths = True
 
 
@@ -273,11 +274,10 @@ class FinancialAidsByClient(AidsByClient):
     """
 
     detail_layout = dd.FormLayout("""
-    id client aid_regime
-    aid_type:25 category
-    board decided_date:10
+    id aid_type:25 category
     start_date end_date amount
-    """, window_size=(50, 'auto'))
+    remark
+    """, window_size=(60, 20))
 
 
 class AidsByCategory(AidsByX):
@@ -286,7 +286,7 @@ class AidsByCategory(AidsByX):
 
 class AidsByType(AidsByX):
     master_key = 'aid_type'
-    column_names = "decided_date client start_date end_date category amount *"
+    column_names = "client start_date end_date category amount *"
 
 
 # pcsw = dd.resolve_app('pcsw')
