@@ -502,7 +502,8 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
     @classmethod
     def get_request_queryset(cls, ar):
         qs = super(CompaniesAndContracts, cls).get_request_queryset(ar)
-        qs = qs.annotate(count=models.Count('isip_contract_set_by_company'))
+        qs = qs.annotate(count=models.Count(
+            'isip_contractpartner_set_by_company'))
         return qs.filter(count__gte=1)
 
     @dd.virtualfield(dd.ForeignKey('contacts.Company'))
@@ -529,7 +530,6 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
 
-#~ class JobsCompaniesAndContracts(CompaniesAndContracts):
 class JobProvidersAndContracts(CompaniesAndContracts):
     label = _("Employants et contrats Art 60§7")
     help_text = _("""Nombre de projets Art 60§7 actifs par 
@@ -590,8 +590,8 @@ class ActivityReport(dd.Report):
 
         yield E.h1(isip.Contract._meta.verbose_name_plural)
         #~ yield E.p("Voici quelques tables complètes:")
-        #~ for A in (pcsw.UsersWithClients,StudyTypesAndContracts,CompaniesAndContracts):
-        for A in (ContractsPerUserAndContractType, CompaniesAndContracts, ContractEndingsByType, StudyTypesAndContracts):
+        for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
+                  ContractEndingsByType, StudyTypesAndContracts):
             yield E.h2(A.label)
             if A.help_text:
                 yield E.p(unicode(A.help_text))
