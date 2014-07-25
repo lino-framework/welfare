@@ -903,3 +903,10 @@ def doit(a, b):
         globals_dict.update(create_aids_aid=create_aids_aid)
 
         return '1.1.15'
+
+    def migrate_from_1_1_15(self, globals_dict):
+        
+        aids_Confirmation = resolve_model("aids.Confirmation")
+        globals_dict.update(aids_Aid=aids_Confirmation)
+
+        return '1.1.16'
