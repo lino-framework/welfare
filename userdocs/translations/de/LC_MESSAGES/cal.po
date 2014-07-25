@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: 2013-04-01 09:17+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -92,52 +92,52 @@ msgstr ""
 msgid "Event Type (model)"
 msgstr ""
 
-# 7f6eee21ff95498cac3c61d3e066d47f
+# 43311391c28140ed80be185514103e88
 #: None:2
 msgid "Event (model in cal)"
 msgstr ""
 
-# 46e14b5a986d471bbca14c939041f4cf
+# bd20f63214734614acfc364d84bfe37c
 #: None:2
 msgid "Guest (model in cal)"
 msgstr ""
 
-# 36d91c6307d948208cc53a59f74f1a8f
+# d0fba201a2704954a753c49fcedbda71
 #: None:2
 msgid "Task (model in cal)"
 msgstr ""
 
-# 16ff0f00d80e40758c3f34b73163d6d7
+# 5975ef0cb2cc46a9a28a78142849325d
 #: None:2
 msgid "State (field in :ref:`Task <welfare.cal.task>`)"
 msgstr ""
 
-# 09b2e69915ab4893b41382360e17990c
+# b6cf78e92c0b475bb94b98f52d2f79c2
 #: None:2
 msgid "Calendar (model in cal)"
 msgstr ""
 
-# e0ae636e0adc408183346b64528f9def
+# a68884c6b42042c7970186e2b6932bac
 #: None:2
 msgid "Subscription (model in cal)"
 msgstr ""
 
-# 30ec0ec39ac440898096e2a50556d1be
+# 1e5757860de2450086a1500537e600fe
 #: None:2
 msgid "Room (model in cal)"
 msgstr ""
 
-# c02c6383b1344ae381f96165379607c1
+# 53548fef7b9f4bfdb8e9fba62b9b555d
 #: None:2
 msgid "Priority (model in cal)"
 msgstr ""
 
-# dc4ff632e787492ca631b4cf4942f20e
+# a925935548924baea048668612f0da95
 #: None:2
 msgid "Guest Role (model in cal)"
 msgstr ""
 
-# 2dbc9f4b4a65455894e340e9b54abf08
+# d4782dcd44ad49ca8705fbde428cea26
 #: None:2
 msgid "Event Type (model in cal)"
 msgstr ""

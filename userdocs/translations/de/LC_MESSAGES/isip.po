@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: de <LL@li.org>\n"
@@ -84,27 +84,27 @@ msgstr ""
 msgid "Reason of termination (model)"
 msgstr ""
 
-# c7882921c328443eb6c912d95ee599a2
+# ccf3b92955ce48c1aefde236b44cf493
 #: None:2
 msgid "ISIP (model in isip)"
 msgstr ""
 
-# 4db4f122486f465393f6ef489f724cd2
+# 7721ce99ec4d48d8b9246e06309e448e
 #: None:2
 msgid "Study Type (model in isip)"
 msgstr ""
 
-# eb5309e7c4c14f018cc0b4be19aae3d7
+# 1f87771f87d24f86ab3461c37261309c
 #: None:2
 msgid "ISIP Type (model in isip)"
 msgstr ""
 
-# 490fb4cb6b7f48238521a691065d5ca0
+# d708d7cc84e9496daaec09022ce60b99
 #: None:2
 msgid "Examination Policy (model in isip)"
 msgstr ""
 
-# a2e3f916efc4496ca8d4d41c1e1c7b86
+# 8ab9e28865d54cd48eda9d1975859a69
 #: None:2
 msgid "Reason of termination (model in isip)"
 msgstr ""

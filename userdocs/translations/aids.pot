@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,12 +23,12 @@ msgstr ""
 
 #: ../aids.rst:7
 # 42affbabc8aa469aa24714dc6cb0edcb
-msgid "The Aids module adds functionaliti'y to manage the different types of help projects (aids) allocated to individuals."
+msgid "The Aids module adds functionality to manage the different types of help projects (aids) allocated to individuals."
 msgstr ""
 
 #: ../aids.rst:0
-# 3833cc1304ef48b38cc3ac0781c79861
-msgid "Aid (model)"
+# 727d0b210d88421490db951845c1a8be
+msgid "Aid confirmation (model)"
 msgstr ""
 
 #: ../aids.rst:0
@@ -42,17 +42,17 @@ msgid "Aid Type (model)"
 msgstr ""
 
 #: None:2
-# 5435c288e91242968e9a3c6c66705b80
-msgid "Aid (model in aids)"
+# da421687549a4db196d6466c499fa975
+msgid "Aid confirmation (model in aids)"
 msgstr ""
 
 #: None:2
-# 83c386a6a49141dfb51b87efcb0c3eb6
+# ee5187f18f294c9a8225eae332d68acc
 msgid "Category (model in aids)"
 msgstr ""
 
 #: None:2
-# f8573bab9fb84926a80cfa2ad8273b6d
+# 5937a7864b654a0a8f5c4fb3bcbce092
 msgid "Aid Type (model in aids)"
 msgstr ""
 

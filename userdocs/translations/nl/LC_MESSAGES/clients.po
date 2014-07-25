@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: 2013-03-31 21:35+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -83,47 +83,47 @@ msgstr ""
 msgid "Civil states (view)"
 msgstr ""
 
-# 8eb9dd876a2742e98e1821d8eee329dc
+# 882078c1ea1f4fdca962147744be2cc2
 #: None:2
 msgid "Client (model in pcsw)"
 msgstr ""
 
-# b064b40d8e1b4a4eabcb05c6e42670c2
+# 69968046edb648999361f58015a9dbf3
 #: None:2
 msgid "Client Contact (model in pcsw)"
 msgstr ""
 
-# a2d6072358f6479e8b31f17f96d37bb6
+# 1589848d79dd4f2791f61240edceec9e
 #: None:2
 msgid "Client Contact type (model in pcsw)"
 msgstr ""
 
-# b5b486811a68408292898c78dbc89870
+# 9a4e2c4a557c4bf2be8a85b50811e7b0
 #: None:2
 msgid "Address (model in addresses)"
 msgstr ""
 
-# 564c9621bdd1430184254d858b9ab5f1
+# 767cfa86dfd94968ab7b0607765d1edc
 #: None:2
 msgid "Coaching (model in pcsw)"
 msgstr ""
 
-# 6179e8f75c3d4ac9a36ffec37c80de73
+# 0c2d4dcc485f4471b169d5f5aefe055b
 #: None:2
 msgid "Coaching type (model in pcsw)"
 msgstr ""
 
-# 63f9455fb779481c8f22d1b066b8511a
+# 2c6379bb4e024087aaa9908c4249a4d5
 #: None:2
 msgid "Reason of termination (model in pcsw)"
 msgstr ""
 
-# 48290da440664d5ca7e622a87381c8ad
+# 4af5fc95806a41f388fad998bd0e1057
 #: None:2
 msgid "aid type (model in pcsw)"
 msgstr ""
 
-# 4b536b0c3f0a47bf9eef2dea9315de9f
+# 454d24fbb9784aebbe14c6849129a8a3
 #: None:2
 msgid "Integration Phase (model in pcsw)"
 msgstr ""

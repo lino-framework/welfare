@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: 2013-03-31 21:24+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -43,17 +43,17 @@ msgstr ""
 msgid "AccountTypes (view)"
 msgstr ""
 
-# e57314d572d34fa387489cf755d4daae
+# fc438ff532f54173964ba5da4fc9a2a8
 #: None:2
 msgid "Account Chart (model in accounts)"
 msgstr ""
 
-# 08df4129d5754bc6afd9ba21699fdf54
+# 5728016d01d841cd813c3bff6a8fd9a5
 #: None:2
 msgid "Account (model in accounts)"
 msgstr ""
 
-# 2594f003f42d419bb053d4c4cbf0e69e
+# 336fe251b7e94ad9b2b5e3e2e948dd7a
 #: None:2
 msgid "Account Group (model in accounts)"
 msgstr ""

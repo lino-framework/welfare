@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 11:12+0300\n"
+"POT-Creation-Date: 2014-07-25 22:38+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -48,23 +48,23 @@ msgstr ""
 msgid "Property Group (model)"
 msgstr ""
 
-# 867893742e2f43fdbc9bd1fcc745d712
+# beb891bba51947d8a00b39477d01b3cc
 #: None:2
 msgid "language knowledge (model in cv)"
 msgstr ""
 
-# 3feb97adc6c348609409a40238cf1d85
-# 670e2f8087cd4a9da11d46b90e2495d2
+# 661f6ec1db434308a35e6d29c88d3d65
+# 80bbb795d88341f2b0b2b11c8595771b
 #: None:2
 msgid "Property (model in properties)"
 msgstr ""
 
-# 8896276ea1fb4fb78bfa54f1d1a9c3ac
+# f5ba434f37744f999b50710459d7f6a1
 #: None:2
 msgid "Property Type (model in properties)"
 msgstr ""
 
-# 423aa79cfe3d4c71a49fcf82074bcac5
+# f41acbaeff2648ddae8ab2d6f3afdf15
 #: None:2
 msgid "Property Group (model in properties)"
 msgstr ""
