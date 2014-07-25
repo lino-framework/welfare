@@ -906,7 +906,24 @@ def doit(a, b):
 
     def migrate_from_1_1_15(self, globals_dict):
         """aids.Aid renamed to aids.Confirmation."""
-        aids_Confirmation = resolve_model("aids.Confirmation")
-        globals_dict.update(aids_Aid=aids_Confirmation)
+
+        aids_Aid = resolve_model("aids.Confirmation")
+        globals_dict.update(aids_Aid=aids_Aid)
+
+        def create_aids_aid(id, start_date, end_date, client_id, aid_regime, aid_type_id, category_id, amount, remark):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(start_date=start_date)
+            kw.update(end_date=end_date)
+            kw.update(client_id=client_id)
+            # kw.update(aid_regime=aid_regime)
+            kw.update(aid_type_id=aid_type_id)
+            kw.update(category_id=category_id)
+            if amount is not None: amount = Decimal(amount)
+            kw.update(amount=amount)
+            kw.update(remark=remark)
+            return aids_Aid(**kw)
+
+        globals_dict.update(create_aids_aid=create_aids_aid)
 
         return '1.1.16'

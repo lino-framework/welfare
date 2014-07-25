@@ -4,7 +4,7 @@
 Aids
 ====
 
-The Aids module adds functionaliti'y to manage the different types of 
+The Aids module adds functionality to manage the different types of
 help projects (aids) allocated to individuals.
 
 .. contents:: 
@@ -12,7 +12,7 @@ help projects (aids) allocated to individuals.
    :depth: 2
 
 
-.. actor:: aids.Aid
+.. actor:: aids.Confirmation
 .. actor:: aids.Category
 .. actor:: aids.AidType
 

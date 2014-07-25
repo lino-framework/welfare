@@ -16,7 +16,7 @@ import sys, os
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.docs.settings.test')
 
-extensions += ['lino.utils.actordoc']
+extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.utils.screenshots']
 
 #~ Trigger loading of Djangos model cache in order to avoid side effects that 
