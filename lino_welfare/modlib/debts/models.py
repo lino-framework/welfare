@@ -682,7 +682,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
 
     @dd.chooser()
     def bailiff_choices(self):
-        qs = contacts.Companies.request().data_iterator
+        qs = dd.modules.contacts.Companies.request().data_iterator
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 

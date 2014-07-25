@@ -44,7 +44,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         template='Default.odt',
         primary=True,
         content_type=ContentType.objects.get_for_model(
-            dd.resolve_model('aids.Aid')),
+            dd.resolve_model('aids.Confirmation')),
         **babelkw('name',
                   de="Hilfebescheinigung",
                   fr="Attestation d'aide",

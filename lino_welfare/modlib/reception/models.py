@@ -301,8 +301,7 @@ inherited_setup_main_menu = setup_main_menu
 
 
 def setup_main_menu(site, ui, profile, main):
-    m = main.add_menu("reception", Plugin.verbose_name)
-    #~ m.add_separator("-")
-    #~ m.add_action('reception.Clients','find_by_beid')
+    app = dd.apps.reception
+    m = main.add_menu(app.app_name, app.verbose_name)
     m.add_action('reception.Clients')
     inherited_setup_main_menu(site, ui, profile, main)

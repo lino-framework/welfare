@@ -455,8 +455,9 @@ class Client(contacts.Person,
 
         """
         qs = self.coachings_by_client.filter(primary=True).distinct()
-        if qs.count == 1:
+        if qs.count() == 1:
             return qs[0].user
+        logger.info("20140725 qs is %s", qs)
         return None
 
     primary_coach = property(get_primary_coach)
@@ -821,8 +822,7 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     status:55 income:25
-    aids.FinancialAidsByClient:30 sepa.AccountsByClient:20
-    aids.MedicalAidsByClient:30 uploads.MedicalUploadsByClient:20
+    sepa.AccountsByClient uploads.MedicalUploadsByClient
     """, label=_("Aids"))
 
     status = """
@@ -848,7 +848,8 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    excerpts.ExcerptsByProject:20 notes.NotesByProject:40
+    notes.NotesByProject
+    excerpts.ExcerptsByProject aids.ConfirmationsByClient
     # lino.ChangesByMaster
     """, label=_("History"))
 
@@ -1479,6 +1480,12 @@ class ClientContactTypes(dd.Table):
     model = ClientContactType
     required = dd.required(user_level='manager')
 
+    detail_layout = """
+    id name
+    # pcsw.ClientContactsByType
+    contacts.CompaniesByClientContactType
+    """
+
 #~ class ClientContactType(Choice):
 
     #~ def __init__(self,choicelist,value,text,name,companies_table,**kw):
@@ -1557,6 +1564,13 @@ class ContactsByClient(ClientContacts):
     label = _("Contacts")
     auto_fit_column_widths = True
 
+
+class ClientContactsByType(ClientContacts):
+    required = dd.required()
+    master_key = 'type'
+    column_names = 'company contact_person client remark *'
+    label = _("Contacts")
+    auto_fit_column_widths = True
 
 config = dd.apps.pcsw
 

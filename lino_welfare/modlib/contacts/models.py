@@ -329,6 +329,12 @@ class Companies(Companies):
     detail_layout = CompanyDetail()
 
 
+class CompaniesByClientContactType(Companies):
+    master_key = 'client_contact_type'
+    column_names = "name address_column phone gsm email *"
+    auto_fit_column_widths = True
+
+
 @dd.receiver(dd.post_analyze)
 def my_details(sender, **kw):
     contacts = sender.modules.contacts

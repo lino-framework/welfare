@@ -22,7 +22,7 @@ from lino import dd
 
 
 def objects():
-    Aid = resolve_model('aids.Aid')
+    Aid = resolve_model('aids.Confirmation')
     Category = resolve_model('aids.Category')
     AidType = resolve_model('aids.AidType')
     ClientStates = dd.modules.pcsw.ClientStates
@@ -40,7 +40,6 @@ def objects():
         atype = NTYPES.pop()
         kw = dict(category=CATS.pop(),
                   start_date=settings.SITE.demo_date(days=i),
-                  aid_regime=atype.aid_regime,
                   aid_type=atype)
         if settings.SITE.project_model is not None:
             kw.update(client=PROJECTS.pop())
