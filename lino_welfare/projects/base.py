@@ -112,6 +112,7 @@ class Site(Site):
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
+        tb.add_action(self.modules.cal.EventsByDay)
 
         if self.is_installed('beid'):
             tb.add_action('pcsw.Clients', 'find_by_beid')
