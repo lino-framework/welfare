@@ -289,3 +289,5 @@ if False:
             #~ kw.update(success=True)
             kw.update(eval_js=ar.renderer.instance_handler(ar, event))
             ar.success(**kw)
+
+EventsByDay.column_names = 'start_time project user assigned_to workflow_buttons *'

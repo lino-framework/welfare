@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-25 22:38+0300\n"
+"POT-Creation-Date: 2014-07-30 15:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../.templates/layout.html:6
-# 49f69b6b92db466bab063fadd3bce9fd
+# 9354688343b245648508c6853ad93b37
 msgid "&copy; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
 msgstr ""
 
 #: ../.templates/layout.html:8
-# f210bfa20a1e4417bcf4afcdd728c91a
+# 38e650ed2ee54eb5a68695a43bef165e
 msgid "&copy; Copyright %(copyright)s."
 msgstr ""
 
 #: ../.templates/layout.html:12
-# b9472ec067964adc943b938ebe54a013
+# ab374e08ebf849fead86b6fd263612cd
 msgid "Last updated on %(last_updated)s."
 msgstr ""
 
 #: ../.templates/layout.html:15
-# 6e7b1a773ff2428fbf85e5b41c748d4a
+# 0751983b97fc44d29da2670f1e3649c4
 msgid "Created using <a href=\"http://sphinx.pocoo.org/\">Sphinx</a> %(sphinx_version)s."
 msgstr ""
 
 #: ../.templates/layout.html:18
-# a601633f07e241978d7bb49d5b359833
+# f53f29b0e1de4fec9e9ae42349e6108b
 msgid "Show Source"
 msgstr ""
 

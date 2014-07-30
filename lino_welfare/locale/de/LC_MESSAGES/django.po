@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-25 22:38+0300\n"
-"PO-Revision-Date: 2014-07-25 22:54+0300\n"
+"POT-Creation-Date: 2014-07-30 15:01+0300\n"
+"PO-Revision-Date: 2014-07-30 15:03+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -136,9 +136,8 @@ msgid "Replaces the short description in certain places."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:111
-#, fuzzy
-msgid "Confirmation states"
-msgstr "Erstelldatum"
+msgid "Income Confirmation states"
+msgstr "Einkommensbescheinigungszustände"
 
 #: lino_welfare/modlib/aids/models.py:114
 msgid "Requested"
@@ -158,8 +157,8 @@ msgid "Sign"
 msgstr "Unterschreiben"
 
 #: lino_welfare/modlib/aids/models.py:125
-msgid "You confirm that this confirmation is correct."
-msgstr "Sie bestätigen, dass die Angaben in dieser Bestätigung korrekt sind."
+msgid "You confirm that this income confirmation is correct."
+msgstr "Sie bestätigen die Richtigkeit dieser Einkommensbescheinigung."
 
 #: lino_welfare/modlib/aids/models.py:141
 msgid "(Custom text specified as remark)"
@@ -178,12 +177,12 @@ msgid "Reopen"
 msgstr "Neu starten"
 
 #: lino_welfare/modlib/aids/models.py:170
-msgid "Aid confirmation"
-msgstr "Hilfebestätigung"
+msgid "Income confirmation"
+msgstr "Einkommensbescheinigung"
 
 #: lino_welfare/modlib/aids/models.py:171
-msgid "Aid confirmations"
-msgstr "Hilfebestätigungen"
+msgid "Income confirmations"
+msgstr "Einkommensbescheinigungen"
 
 #: lino_welfare/modlib/aids/models.py:180
 #: lino_welfare/modlib/aids/models.py:304

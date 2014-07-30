@@ -108,7 +108,7 @@ class AidTypes(dd.Table):
 
 class ConfirmationStates(dd.Workflow):
     required = dd.required(user_level='admin')
-    verbose_name_plural = _("Confirmation states")
+    verbose_name_plural = _("Income Confirmation states")
 
 add = ConfirmationStates.add_item
 add('01', _("Requested"), 'requested')
@@ -122,7 +122,7 @@ class SignConfirmation(dd.Action):
 
     # icon_name = 'flag_green'
     required = dd.required(states="requested")
-    help_text = _("You confirm that this confirmation is correct.")
+    help_text = _("You confirm that this income confirmation is correct.")
 
     def get_action_permission(self, ar, obj, state):
         if obj.signer is not None and obj.signer != ar.get_user():
@@ -160,15 +160,15 @@ def setup_aids_workflows(sender=None, **kw):
 
 # class Aid(boards.BoardDecision, dd.DatePeriod):
 class Confirmation(dd.UserAuthored, dd.DatePeriod):
-    """An Aid confirmation is when a social agent confirms that
+    """An Income Confirmation is when a social agent confirms that
     a given Client benefits of a given aid during a given period.
 
     """
 
     class Meta:
         abstract = dd.is_abstract_model('aids.Confirmation')
-        verbose_name = _("Aid confirmation")
-        verbose_name_plural = _("Aid confirmations")
+        verbose_name = _("Income confirmation")
+        verbose_name_plural = _("Income confirmations")
 
     allow_cascaded_delete = ['client']
     workflow_state_field = 'state'

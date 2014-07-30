@@ -41,7 +41,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-43 apps: about, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
+44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
 110 models:
 ============================== ========= =======
  Name                           #fields   #rows
@@ -50,9 +50,9 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        114
- aids.Aid                       9         12
  aids.AidType                   11        6
  aids.Category                  5         3
+ aids.Confirmation              11        12
  aids.Helper                    5         0
  aids.HelperRole                6         3
  badges.Award                   6         0
@@ -167,11 +167,11 @@ Rolf is the local system administrator, he has a complete menu:
 >>> ses = settings.SITE.login('rolf') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
+- Büro : Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Neuanträge : Neue Klienten, Verfügbare Begleiter
@@ -305,6 +305,6 @@ Theresia is a reception clerk.
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
-- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 
