@@ -22,9 +22,9 @@ from lino import dd
 
 
 def objects():
-    Aid = resolve_model('aids.Confirmation')
+    Aid = resolve_model('aids.IncomeConfirmation')
+    NTYPES = Cycler(Aid.get_aid_types())
     Category = resolve_model('aids.Category')
-    AidType = resolve_model('aids.AidType')
     ClientStates = dd.modules.pcsw.ClientStates
 
     Project = resolve_model('pcsw.Client')
@@ -33,14 +33,15 @@ def objects():
         qs = qs[:10]
     PROJECTS = Cycler(qs)
 
-    NTYPES = Cycler(AidType.objects.all())
     CATS = Cycler(Category.objects.all())
 
     for i in range(12):
+        client = PROJECTS.pop()
+        author = settings.SITE.user_model.objects.get(username='theresia')
         atype = NTYPES.pop()
         kw = dict(category=CATS.pop(),
                   start_date=settings.SITE.demo_date(days=i),
+                  user=author,
                   aid_type=atype)
-        if settings.SITE.project_model is not None:
-            kw.update(client=PROJECTS.pop())
+        kw.update(client=client)
         yield Aid(**kw)

@@ -50,11 +50,11 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        114
- aids.AidType                   11        6
+ aids.AidType                   12        7
  aids.Category                  5         3
- aids.Confirmation              11        12
- aids.Helper                    5         0
- aids.HelperRole                6         3
+ aids.Confirmation              12        12
+ aids.IncomeConfirmation        15        12
+ aids.RefundConfirmation        14        0
  badges.Award                   6         0
  badges.Badge                   5         0
  boards.Board                   7         3

@@ -88,6 +88,14 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'choices/pcsw/ContactsByClient/company?type=1',
             json_fields, 5, **kw)
+
+        self.demo_get(
+            'rolf', 'choices/aids/IncomeConfirmations/aid_type',
+            json_fields, 3, **kw)
+        
+        self.demo_get(
+            'rolf', 'choices/aids/RefundConfirmations/aid_type',
+            json_fields, 4, **kw)
         
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)

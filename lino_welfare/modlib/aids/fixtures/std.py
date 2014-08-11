@@ -24,9 +24,14 @@ from lino import dd
 def objects():
 
     AidRegimes = dd.modules.aids.AidRegimes
+    IncomeConfirmation = dd.modules.aids.IncomeConfirmation
+    RefundConfirmation = dd.modules.aids.RefundConfirmation
+    ConfirmationTypes = dd.modules.aids.ConfirmationTypes
 
     aidType = Instantiator(
-        'aids.AidType', aid_regime=AidRegimes.financial).build
+        'aids.AidType',
+        confirmation_type=ConfirmationTypes.get_for_model(IncomeConfirmation),
+        aid_regime=AidRegimes.financial).build
     yield aidType(
         **dd.babelkw(
             'name',
@@ -58,6 +63,7 @@ def objects():
 
     aidType = Instantiator(
         'aids.AidType', "name",
+        confirmation_type=ConfirmationTypes.get_for_model(RefundConfirmation),
         aid_regime=AidRegimes.medical).build
     yield aidType(
         **dd.babelkw(
@@ -71,31 +77,33 @@ def objects():
     #     aid_regime=AidRegimes.other).build
     yield aidType(_("Möbellager"))
     yield aidType(_("Heizkosten"))
+    yield aidType(_("Lebensmittelbank"))
 
-    aidRole = Instantiator(
-        'aids.HelperRole', "name",
-        aid_regime=AidRegimes.medical).build
-    yield aidRole(
-        **dd.babelkw(
-            'name',
-            de="Hausarzt",
-            en="General physician",
-            et="Perearst",
-            fr="Médecin général"))
-    yield aidRole(
-        **dd.babelkw(
-            'name',
-            de="Facharzt",
-            en="Special physician",
-            et="Eriala arst",
-            fr="Médecin spécialisé"))
-    yield aidRole(
-        **dd.babelkw(
-            'name',
-            de="Apotheke",
-            en="Pharmacy",
-            et="Apteek",
-            fr="Pharmacie"))
+    if False:
+        aidRole = Instantiator(
+            'aids.HelperRole', "name",
+            aid_regime=AidRegimes.medical).build
+        yield aidRole(
+            **dd.babelkw(
+                'name',
+                de="Hausarzt",
+                en="General physician",
+                et="Perearst",
+                fr="Médecin général"))
+        yield aidRole(
+            **dd.babelkw(
+                'name',
+                de="Facharzt",
+                en="Special physician",
+                et="Eriala arst",
+                fr="Médecin spécialisé"))
+        yield aidRole(
+            **dd.babelkw(
+                'name',
+                de="Apotheke",
+                en="Pharmacy",
+                et="Apteek",
+                fr="Pharmacie"))
 
     Category = dd.resolve_model('aids.Category')
     yield Category(**babel_values(

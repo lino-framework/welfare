@@ -34,6 +34,37 @@ contacts = dd.resolve_app('contacts')
 boards = dd.resolve_app('boards')
 
 
+class ConfirmationType(dd.Choice):
+
+    def __init__(self, model, table_class):
+        self.table_class = table_class
+        model = dd.resolve_model(model)
+        self.model = model
+        value = dd.full_model_name(model)
+        text = model._meta.verbose_name + ' (%s)' % dd.full_model_name(model)
+        name = None
+        super(ConfirmationType, self).__init__(value, text, name)
+
+    def get_aidtypes(self):
+        return AidType.objects.filter(confirmation_type=self)
+
+
+class ConfirmationTypes(dd.ChoiceList):
+    item_class = ConfirmationType
+    max_length = 100
+    verbose_name = _("Aid confirmation types")
+
+    @classmethod
+    def get_for_model(self, model):
+        for o in self.objects():
+            if o.model is model:
+                return o
+
+    @classmethod
+    def add_item(cls, model, table_class):
+        return cls.add_item_instance(ConfirmationType(model, table_class))
+
+
 class AidRegimes(dd.ChoiceList):
     verbose_name = _("Aid Regime")
 add = AidRegimes.add_item
@@ -61,7 +92,7 @@ class Categories(dd.Table):
 
     detail_layout = """
     id name
-    aids.ConfirmationsByCategory
+    aids.IncomeConfirmationsByCategory
     """
 
 
@@ -74,6 +105,8 @@ class AidType(dd.BabelNamed):
         verbose_name_plural = _("Aid Types")
 
     aid_regime = AidRegimes.field(default=AidRegimes.financial)
+
+    confirmation_type = ConfirmationTypes.field()
 
     long_name = dd.BabelCharField(
         _("Long name"),
@@ -108,7 +141,7 @@ class AidTypes(dd.Table):
 
 class ConfirmationStates(dd.Workflow):
     required = dd.required(user_level='admin')
-    verbose_name_plural = _("Income Confirmation states")
+    verbose_name_plural = _("Aid confirmation states")
 
 add = ConfirmationStates.add_item
 add('01', _("Requested"), 'requested')
@@ -122,7 +155,7 @@ class SignConfirmation(dd.Action):
 
     # icon_name = 'flag_green'
     required = dd.required(states="requested")
-    help_text = _("You confirm that this income confirmation is correct.")
+    help_text = _("You confirm that this aid confirmation is correct.")
 
     def get_action_permission(self, ar, obj, state):
         if obj.signer is not None and obj.signer != ar.get_user():
@@ -158,17 +191,15 @@ def setup_aids_workflows(sender=None, **kw):
         _("Reopen"), states='signed cancelled')
 
 
-# class Aid(boards.BoardDecision, dd.DatePeriod):
-class Confirmation(dd.UserAuthored, dd.DatePeriod):
-    """An Income Confirmation is when a social agent confirms that
-    a given Client benefits of a given aid during a given period.
+##
+## Confirmation
+##
 
-    """
-
+class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
     class Meta:
         abstract = dd.is_abstract_model('aids.Confirmation')
-        verbose_name = _("Income confirmation")
-        verbose_name_plural = _("Income confirmations")
+        verbose_name = _("Aid confirmation")
+        verbose_name_plural = _("Aid confirmations")
 
     allow_cascaded_delete = ['client']
     workflow_state_field = 'state'
@@ -185,9 +216,6 @@ class Confirmation(dd.UserAuthored, dd.DatePeriod):
     state = ConfirmationStates.field(default=ConfirmationStates.requested)
 
     aid_type = models.ForeignKey('aids.AidType', blank=True, null=True)
-    category = models.ForeignKey('aids.Category', blank=True, null=True)
-
-    amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
     remark = dd.RichTextField(
         _("Remark"),
@@ -200,21 +228,158 @@ class Confirmation(dd.UserAuthored, dd.DatePeriod):
         return self.aid_type
 
     def save(self, *args, **kwargs):
-        logger.info("20140724 %s", self.client)
+        # logger.info("20140724 %s", self.client)
         if self.signer is None:
             self.signer = self.client.get_primary_coach()
         super(Confirmation, self).save(*args, **kwargs)
 
     @dd.chooser()
-    def aid_type_choices(self):
-        M = dd.resolve_model('aids.AidType')
-        # logger.info("20140331 %s", aid_regime)
-        return M.objects.filter(aid_regime=AidRegimes.financial)
+    def aid_type_choices(cls):
+        return cls.get_aid_types()
+
+    @classmethod
+    def get_aid_types(cls):
+        ct = ConfirmationTypes.get_by_value(dd.full_model_name(cls))
+        logger.info("20140811 get_aid_types %s", cls)
+        return dd.modules.aids.AidType.objects.filter(confirmation_type=ct)
 
     def get_excerpt_options(self, ar, **kw):
         # Set project field when creating an excerpt from Client.
         kw.update(project=self.client)
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
+
+    def get_mti_child(self):
+        M = self.aid_type.confirmation_type.model
+        try:
+            return M.objects.get(id=self.id)
+        except M.DoesNotExist:
+            logger.warning(
+                "No mti child %s in %s", self.id, M.objects.all().query)
+
+    @dd.displayfield(_("Information"))
+    def info(self, ar):
+        mc = self.get_mti_child()
+        if mc is None:
+            return ''
+        return ar.obj2html(mc)
+
+
+dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
+dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
+dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
+
+
+class Confirmations(dd.Table):
+    model = 'aids.Confirmation'
+    required = dd.required(user_groups='office', user_level='admin')
+
+    order_by = ["-id"]
+
+    detail_layout = dd.FormLayout("""
+    id client user
+    aid_type:25 start_date end_date
+    board decision_date signer workflow_buttons
+    info
+    remark
+    """, window_size=(70, 24))
+
+    parameters = dict(
+        user=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Requested by"),
+            blank=True, null=True,
+            help_text=_("Only rows requested by this user.")),
+        signer=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Signer"),
+            blank=True, null=True,
+            help_text=_("Only rows signed (or to be signed) by this user.")),
+        state=ConfirmationStates.field(
+            blank=True,
+            help_text=_("Only rows having this state.")))
+
+    params_layout = "user signer state"
+
+    @classmethod
+    def get_request_queryset(self, ar):
+        qs = super(Confirmations, self).get_request_queryset(ar)
+        pv = ar.param_values
+        if pv.signer:
+            qs = qs.filter(signer=pv.signer)
+        if pv.user:
+            qs = qs.filter(user=pv.user)
+        if pv.state:
+            qs = qs.filter(state=pv.state)
+        return qs
+
+    @classmethod
+    def get_title_tags(self, ar):
+        for t in super(Confirmations, self).get_title_tags(ar):
+            yield t
+        pv = ar.param_values
+
+        for k in ('signer', 'user'):
+            v = pv[k]
+            if v:
+                yield unicode(self.parameters[k].verbose_name) \
+                    + ' ' + unicode(v)
+
+
+class ConfirmationsByX(Confirmations):
+    required = dd.required(user_groups='office')
+    order_by = ["-created"]
+    auto_fit_column_widths = True
+
+
+class ConfirmationsByClient(ConfirmationsByX):
+
+    master_key = 'client'
+    column_names = "info created_natural signer workflow_buttons *"
+
+    insert_layout = dd.FormLayout("""
+    aid_type
+    start_date end_date
+    remark
+    """, window_size=(50, 14))
+    stay_in_grid = True
+
+
+class ConfirmationsByType(ConfirmationsByX):
+    master_key = 'aid_type'
+    column_names = "client start_date end_date *"
+
+
+class ConfirmationsToSign(Confirmations):
+    label = _("Aid confirmations to sign")
+    column_names = "user aid_type client start_date end_date \
+    workflow_buttons"
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(ConfirmationsToSign, self).param_defaults(ar, **kw)
+        kw.update(signer=ar.get_user())
+        kw.update(state=ConfirmationStates.requested)
+        return kw
+
+
+##
+## IncomeConfirmation
+##
+
+class IncomeConfirmation(Confirmation):
+    """This is when a social agent confirms that a client benefits of a
+    given income during a given period.
+
+    """
+
+    class Meta:
+        abstract = dd.is_abstract_model('aids.IncomeConfirmation')
+        verbose_name = _("Income confirmation")
+        verbose_name_plural = _("Income confirmations")
+
+    category = models.ForeignKey('aids.Category', blank=True, null=True)
+
+    amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
     # @dd.displayfield(_("Confirmation text"))
     # @dd.virtualfield(dd.HtmlBox(_("Confirmation text")))
@@ -269,169 +434,70 @@ class Confirmation(dd.UserAuthored, dd.DatePeriod):
             return ''
         return s
 
-        
-dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
-dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
-dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
 
-
-class Confirmations(dd.Table):
-    required = dd.required(user_groups='office', user_level='admin')
-
-    model = 'aids.Confirmation'
+class IncomeConfirmations(Confirmations):
+    model = 'aids.IncomeConfirmation'
 
     detail_layout = dd.FormLayout("""
     id client user
     aid_type:25 start_date end_date
     category amount
     confirmation_text
-    signer workflow_buttons
+    board decision_date signer workflow_buttons
     remark
     """, window_size=(70, 24))
 
     column_names = "id client user signer aid_type category \
     start_date end_date *"
-    order_by = ["-id"]
-
-    parameters = dict(
-        user=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Requested by"),
-            blank=True, null=True,
-            help_text=_("Only rows requested by this user.")),
-        signer=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Signer"),
-            blank=True, null=True,
-            help_text=_("Only rows signed (or to be signed) by this user.")),
-        state=ConfirmationStates.field(
-            blank=True,
-            help_text=_("Only rows having this state.")))
-
-    params_layout = "user signer state"
-
-    @classmethod
-    def get_request_queryset(self, ar):
-        qs = super(Confirmations, self).get_request_queryset(ar)
-        pv = ar.param_values
-        if pv.signer:
-            qs = qs.filter(signer=pv.signer)
-        if pv.user:
-            qs = qs.filter(user=pv.user)
-        if pv.state:
-            qs = qs.filter(state=pv.state)
-        return qs
-
-    @classmethod
-    def get_title_tags(self, ar):
-        for t in super(Confirmations, self).get_title_tags(ar):
-            yield t
-        pv = ar.param_values
-
-        for k in ('signer', 'user'):
-            v = pv[k]
-            if v:
-                yield unicode(self.parameters[k].verbose_name) \
-                    + ' ' + unicode(v)
 
 
-
-
-class ConfirmationsByX(Confirmations):
-    required = dd.required(user_groups='office')
-    column_names = "start_date end_date aid_type category amount workflow_buttons *"
-    order_by = ["-start_date"]
-    auto_fit_column_widths = True
-
-
-class ConfirmationsByClient(ConfirmationsByX):
-
-    master_key = 'client'
-
-    insert_layout = dd.FormLayout("""
-    aid_type
-    start_date end_date
-    remark
-    """, window_size=(50, 14))
-    column_names = "aid_type start_date end_date signer workflow_buttons *"
-    stay_in_grid = True
-
-
-class ConfirmationsByCategory(ConfirmationsByX):
+class IncomeConfirmationsByCategory(IncomeConfirmations):
     master_key = 'category'
 
-
-class ConfirmationsByType(ConfirmationsByX):
-    master_key = 'aid_type'
-    column_names = "client start_date end_date category amount *"
-
-
-class ConfirmationsToSign(Confirmations):
-    label = _("Aid confirmations to sign")
-    column_names = "user aid_type client start_date end_date amount \
-    workflow_buttons"
-
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(ConfirmationsToSign, self).param_defaults(ar, **kw)
-        kw.update(signer=ar.get_user())
-        kw.update(state=ConfirmationStates.requested)
-        return kw
+ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmations)
 
 ##
 ##
 ##
-##
-##
 
 
-class HelperRole(dd.BabelNamed):
+class RefundConfirmation(Confirmation):
+    """This is when a social agent confirms that a client benefits of a
+    refund aid (Kostenrückerstattung) during a given period.
+
+    """
 
     class Meta:
-        verbose_name = _("Helper Role")
-        verbose_name_plural = _("Helper Roles")
+        abstract = dd.is_abstract_model('aids.RefundConfirmation')
+        verbose_name = _("Refund confirmation")
+        verbose_name_plural = _("Refund confirmations")
 
-    aid_regime = AidRegimes.field(default=AidRegimes.medical)
-
-
-class HelperRoles(dd.Table):
-    model = 'aids.HelperRole'
-
-
-# class Helper(contacts.ContactRelated):
-class Helper(dd.Model):
-
-    class Meta:
-        verbose_name = _("Helper")
-        verbose_name_plural = _("Helpers")
-
-    aid = models.ForeignKey('aids.Confirmation')
-    role = models.ForeignKey('aids.HelperRole')
-    # contact_type = models.ForeignKey('pcsw.ClientContactType')
-    name = models.CharField(_("Name"), max_length=50, blank=True)
-    remark = models.CharField(_("Remark"), max_length=200, blank=True)
+    client_contact = dd.ForeignKey('pcsw.ClientContact')
 
     @dd.chooser()
-    def role_choices(self, aid):
-        M = dd.resolve_model('aids.HelperRole')
-        if aid is None:
-            return M.objects.all()
-        return M.objects.filter(aid_regime=aid.aid_regime)
+    def client_contact_choices(cls, client):
+        M = dd.modules.pcsw.ClientContact
+        return M.objects.filter(client=client)
 
 
-class Helpers(dd.Table):
-    model = 'aids.Helper'
+class RefundConfirmations(Confirmations):
+    model = 'aids.RefundConfirmation'
+
+    detail_layout = dd.FormLayout("""
+    id client user
+    aid_type:25 start_date end_date
+    client_contact
+    board decision_date signer workflow_buttons
+    remark
+    """, window_size=(70, 24))
+
+    column_names = "id client user signer aid_type  \
+    start_date end_date *"
 
 
-class HelpersByAid(Helpers):
-    master_key = 'aid'
-    # column_names = 'role company contact_person'
-    column_names = 'role name remark'
-    auto_fit_column_widths = True
+ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmations)
 
 
-##
-##
 ##
 ##
 ##
@@ -455,5 +521,7 @@ def setup_explorer_menu(site, ui, profile, m):
     m = m.add_menu(app.app_name, app.verbose_name)
     m.add_action('aids.Confirmations')
     m.add_action('aids.AidRegimes')
-    m.add_action('aids.Helpers')
-    m.add_action('aids.HelperRoles')
+    m.add_action('aids.IncomeConfirmations')
+    m.add_action('aids.RefundConfirmations')
+    # m.add_action('aids.Helpers')
+    # m.add_action('aids.HelperRoles')
