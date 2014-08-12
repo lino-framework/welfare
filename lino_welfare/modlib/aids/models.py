@@ -411,6 +411,45 @@ class ConfirmationsToSign(Confirmations):
         kw.update(state=ConfirmationStates.requested)
         return kw
 
+##
+## SimpleConfirmation
+##
+
+
+class SimpleConfirmation(Confirmation):
+    """This is when a social agent confirms that a client benefits of some
+simple aid during a given period.
+
+    """
+
+    class Meta:
+        abstract = dd.is_abstract_model('aids.SimpleConfirmation')
+        verbose_name = _("Simple confirmation")
+        verbose_name_plural = _("Simple confirmations")
+
+
+class SimpleConfirmations(Confirmations):
+    model = 'aids.SimpleConfirmation'
+
+    detail_layout = dd.FormLayout("""
+    id client user
+    aid_type:25 start_date end_date
+    confirmation_text
+    board decision_date signer workflow_buttons
+    remark
+    """, window_size=(70, 24))
+
+    insert_layout = dd.FormLayout("""
+    client
+    aid_type:25 start_date end_date
+    remark
+    """, window_size=(50, 14))
+
+    column_names = "id client user signer aid_type  \
+    start_date end_date *"
+
+
+ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmations)
 
 ##
 ## IncomeConfirmation
@@ -512,42 +551,6 @@ class RefundConfirmations(Confirmations):
 
 
 ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmations)
-
-
-class SimpleConfirmation(Confirmation):
-    """This is when a social agent confirms that a client benefits of some
-simple aid during a given period.
-
-    """
-
-    class Meta:
-        abstract = dd.is_abstract_model('aids.SimpleConfirmation')
-        verbose_name = _("Simple confirmation")
-        verbose_name_plural = _("Simple confirmations")
-
-
-class SimpleConfirmations(Confirmations):
-    model = 'aids.SimpleConfirmation'
-
-    detail_layout = dd.FormLayout("""
-    id client user
-    aid_type:25 start_date end_date
-    confirmation_text
-    board decision_date signer workflow_buttons
-    remark
-    """, window_size=(70, 24))
-
-    insert_layout = dd.FormLayout("""
-    client
-    aid_type:25 start_date end_date
-    remark
-    """, window_size=(50, 14))
-
-    column_names = "id client user signer aid_type  \
-    start_date end_date *"
-
-
-ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmations)
 
 
 class RefundPartner(pcsw.ClientContactBase):
