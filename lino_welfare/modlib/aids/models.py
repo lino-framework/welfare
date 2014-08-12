@@ -401,8 +401,7 @@ class ConfirmationsByType(ConfirmationsByX):
 
 class ConfirmationsToSign(Confirmations):
     label = _("Aid confirmations to sign")
-    column_names = "user aid_type client start_date end_date \
-    workflow_buttons"
+    column_names = "info client created_natural signer workflow_buttons *"
 
     @classmethod
     def param_defaults(self, ar, **kw):

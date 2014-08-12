@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.16\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-08-12 05:07+0300\n"
+"POT-Creation-Date: 2014-08-12 06:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Other aids"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:80 lino_welfare/modlib/aids/models.py:417
+#: lino_welfare/modlib/aids/models.py:80 lino_welfare/modlib/aids/models.py:475
 msgid "Category"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgid "Aid confirmations"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:212
-#: lino_welfare/modlib/aids/models.py:309
+#: lino_welfare/modlib/aids/models.py:349
 msgid "Signer"
 msgstr ""
 
@@ -236,13 +236,39 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:276
+#: lino_welfare/modlib/aids/models.py:282
+msgctxt "date range"
+msgid "since"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:287
+#: lino_welfare/modlib/pcsw/coaching.py:326
+#: lino_welfare/modlib/pcsw/models.py:1172
+msgid "and"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:290
+msgctxt "date range"
+msgid "until"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:306
+#, python-format
+msgid "received %(what)s %(when)s."
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:308
+#, python-format
+msgid "receives %(what)s %(when)s."
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:316
 #: lino_welfare/modlib/cbss/models.py:1456
 #: lino_welfare/modlib/integ/models.py:555
 msgid "Period from"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:277
+#: lino_welfare/modlib/aids/models.py:317
 #: lino_welfare/modlib/integ/models.py:556
 #: lino_welfare/modlib/pcsw/coaching.py:243
 #: lino_welfare/modlib/pcsw/models.py:1384
@@ -250,36 +276,44 @@ msgstr ""
 msgid "until"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:278
-#: lino_welfare/modlib/aids/models.py:304
+#: lino_welfare/modlib/aids/models.py:318
+#: lino_welfare/modlib/aids/models.py:344
 msgid "Requested by"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:306
+#: lino_welfare/modlib/aids/models.py:346
 msgid "Only rows requested by this user."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:311
+#: lino_welfare/modlib/aids/models.py:351
 msgid "Only rows signed (or to be signed) by this user."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:314
+#: lino_welfare/modlib/aids/models.py:354
 msgid "Only rows having this state."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:363
+#: lino_welfare/modlib/aids/models.py:403
 msgid "Aid confirmations to sign"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:387
+#: lino_welfare/modlib/aids/models.py:426
+msgid "Simple confirmation"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:427
+msgid "Simple confirmations"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:465
 msgid "Income confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:388
+#: lino_welfare/modlib/aids/models.py:466
 msgid "Income confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:392
+#: lino_welfare/modlib/aids/models.py:470
 #: lino_welfare/modlib/debts/models.py:218
 #: lino_welfare/modlib/debts/models.py:616
 #: lino_welfare/modlib/debts/models.py:1018
@@ -291,77 +325,51 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:401
-msgctxt "date range"
-msgid "since"
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:406
-#: lino_welfare/modlib/pcsw/coaching.py:326
-#: lino_welfare/modlib/pcsw/models.py:1172
-msgid "and"
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:409
-msgctxt "date range"
-msgid "until"
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:420
+#: lino_welfare/modlib/aids/models.py:478
 msgid "with amount of"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:423
+#: lino_welfare/modlib/aids/models.py:481
 msgid "month"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:438
-#, python-format
-msgid "received %(what)s %(when)s."
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:440
-#, python-format
-msgid "receives %(what)s %(when)s."
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:487
+#: lino_welfare/modlib/aids/models.py:526
 msgid "Refund confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:488
+#: lino_welfare/modlib/aids/models.py:527
 msgid "Refund confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:526
+#: lino_welfare/modlib/aids/models.py:558
 msgid "Refund partner"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:527
+#: lino_welfare/modlib/aids/models.py:559
 msgid "Refund partners"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:78
+#: lino_welfare/modlib/aids/fixtures/std.py:87
 msgid "Möbellager"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:79
+#: lino_welfare/modlib/aids/fixtures/std.py:88
 msgid "Heizkosten"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:80
+#: lino_welfare/modlib/aids/fixtures/std.py:89
 msgid "Lebensmittelbank"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:127
+#: lino_welfare/modlib/aids/fixtures/std.py:136
 msgid "Social Board (SB)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:129
+#: lino_welfare/modlib/aids/fixtures/std.py:138
 msgid "Social Commission (SC)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:131
+#: lino_welfare/modlib/aids/fixtures/std.py:140
 msgid "Permanent Board (PB)"
 msgstr ""
 
