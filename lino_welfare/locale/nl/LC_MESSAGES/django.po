@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 06:42+0300\n"
+"POT-Creation-Date: 2014-08-12 12:23+0300\n"
 "PO-Revision-Date: 2013-03-23 17:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1170 lino_welfare/modlib/aids/models.py:261
+#: lino_welfare/fixtures/demo.py:1170 lino_welfare/modlib/aids/models.py:264
 msgid "Information"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Other aids"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:80 lino_welfare/modlib/aids/models.py:475
+#: lino_welfare/modlib/aids/models.py:80 lino_welfare/modlib/aids/models.py:489
 msgid "Category"
 msgstr ""
 
@@ -180,43 +180,44 @@ msgid "Cancelled"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:154
+msgctxt "aids"
 msgid "Sign"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:159
+#: lino_welfare/modlib/aids/models.py:160
 msgid "You confirm that this aid confirmation is correct."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:175
+#: lino_welfare/modlib/aids/models.py:176
 msgid "(Custom text specified as remark)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:178
+#: lino_welfare/modlib/aids/models.py:179
 msgid "Are you sure?"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:189
+#: lino_welfare/modlib/aids/models.py:190
 msgid "Cancel"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:192
+#: lino_welfare/modlib/aids/models.py:193
 msgid "Reopen"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:202
+#: lino_welfare/modlib/aids/models.py:203
 msgid "Aid confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:203
+#: lino_welfare/modlib/aids/models.py:204
 msgid "Aid confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:212
-#: lino_welfare/modlib/aids/models.py:349
+#: lino_welfare/modlib/aids/models.py:213
+msgctxt "aids"
 msgid "Signer"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:222
+#: lino_welfare/modlib/aids/models.py:223
 #: lino_welfare/modlib/badges/models.py:61
 #: lino_welfare/modlib/courses/models.py:241
 #: lino_welfare/modlib/courses/models.py:432
@@ -236,39 +237,39 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:282
+#: lino_welfare/modlib/aids/models.py:285
 msgctxt "date range"
 msgid "since"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:287
+#: lino_welfare/modlib/aids/models.py:290
 #: lino_welfare/modlib/pcsw/coaching.py:326
 #: lino_welfare/modlib/pcsw/models.py:1172
 msgid "and"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:290
+#: lino_welfare/modlib/aids/models.py:293
 msgctxt "date range"
 msgid "until"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:306
+#: lino_welfare/modlib/aids/models.py:309
 #, python-format
 msgid "received %(what)s %(when)s."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:308
+#: lino_welfare/modlib/aids/models.py:311
 #, python-format
 msgid "receives %(what)s %(when)s."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:316
+#: lino_welfare/modlib/aids/models.py:319
 #: lino_welfare/modlib/cbss/models.py:1456
 #: lino_welfare/modlib/integ/models.py:555
 msgid "Period from"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:317
+#: lino_welfare/modlib/aids/models.py:320
 #: lino_welfare/modlib/integ/models.py:556
 #: lino_welfare/modlib/pcsw/coaching.py:243
 #: lino_welfare/modlib/pcsw/models.py:1384
@@ -276,44 +277,52 @@ msgstr ""
 msgid "until"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:318
-#: lino_welfare/modlib/aids/models.py:344
+#: lino_welfare/modlib/aids/models.py:321
+#: lino_welfare/modlib/aids/models.py:347
 msgid "Requested by"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:346
+#: lino_welfare/modlib/aids/models.py:349
 msgid "Only rows requested by this user."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:351
-msgid "Only rows signed (or to be signed) by this user."
+#: lino_welfare/modlib/aids/models.py:352
+msgid "Signer"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:354
+msgid "Only rows signed (or to be signed) by this user."
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:358
+msgid "Only confirmations about this aid type."
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:361
 msgid "Only rows having this state."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:403
+#: lino_welfare/modlib/aids/models.py:416
 msgid "Aid confirmations to sign"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:426
+#: lino_welfare/modlib/aids/models.py:439
 msgid "Simple confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:427
+#: lino_welfare/modlib/aids/models.py:440
 msgid "Simple confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:465
+#: lino_welfare/modlib/aids/models.py:479
 msgid "Income confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:466
+#: lino_welfare/modlib/aids/models.py:480
 msgid "Income confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:470
+#: lino_welfare/modlib/aids/models.py:484
 #: lino_welfare/modlib/debts/models.py:218
 #: lino_welfare/modlib/debts/models.py:616
 #: lino_welfare/modlib/debts/models.py:1018
@@ -325,27 +334,27 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:478
+#: lino_welfare/modlib/aids/models.py:492
 msgid "with amount of"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:481
+#: lino_welfare/modlib/aids/models.py:495
 msgid "month"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:526
+#: lino_welfare/modlib/aids/models.py:540
 msgid "Refund confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:527
+#: lino_welfare/modlib/aids/models.py:541
 msgid "Refund confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:558
+#: lino_welfare/modlib/aids/models.py:572
 msgid "Refund partner"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:559
+#: lino_welfare/modlib/aids/models.py:573
 msgid "Refund partners"
 msgstr ""
 
@@ -3757,5 +3766,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Helpers"
+#~ msgstr ""
+
+#~ msgid "Sign"
 #~ msgstr ""
 

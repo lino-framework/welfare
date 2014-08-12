@@ -151,8 +151,9 @@ add('03', _("Cancelled"), 'cancelled')
 
 
 class SignConfirmation(dd.Action):
-    label = _("Sign")
+    label = pgettext("aids", "Sign")
     show_in_workflow = True
+    show_in_bbar = False
 
     # icon_name = 'flag_green'
     required = dd.required(states="requested")
@@ -209,7 +210,7 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
 
     signer = models.ForeignKey(
         settings.SITE.user_model,
-        verbose_name=_("Signer"),
+        verbose_name=pgettext("aids", "Signer"),
         blank=True, null=True,
         related_name="%(app_label)s_%(class)s_set_by_signer",
     )
@@ -223,6 +224,8 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
         blank=True, null=True, format='html')
 
     def __unicode__(self):
+        if self.aid_type_id is not None:
+            return '%s #%s' % (unicode(self.aid_type), self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def get_mailable_type(self):
@@ -349,6 +352,10 @@ class Confirmations(dd.Table):
             verbose_name=_("Signer"),
             blank=True, null=True,
             help_text=_("Only rows signed (or to be signed) by this user.")),
+        aid_type=dd.ForeignKey(
+            'aids.AidType',
+            blank=True, null=True,
+            help_text=_("Only confirmations about this aid type.")),
         state=ConfirmationStates.field(
             blank=True,
             help_text=_("Only rows having this state.")))
@@ -361,6 +368,8 @@ class Confirmations(dd.Table):
         pv = ar.param_values
         if pv.signer:
             qs = qs.filter(signer=pv.signer)
+        if pv.aid_type:
+            qs = qs.filter(aid_type=pv.aid_type)
         if pv.user:
             qs = qs.filter(user=pv.user)
         if pv.state:
@@ -373,7 +382,7 @@ class Confirmations(dd.Table):
             yield t
         pv = ar.param_values
 
-        for k in ('signer', 'user'):
+        for k in ('signer', 'user', 'aid_type'):
             v = pv[k]
             if v:
                 yield unicode(self.parameters[k].verbose_name) \
@@ -389,9 +398,13 @@ class ConfirmationsByX(Confirmations):
 class ConfirmationsByClient(ConfirmationsByX):
 
     master_key = 'client'
-    column_names = "info created_natural signer workflow_buttons *"
-    # stay_in_grid = True
+    column_names = "info start_date end_date created_natural " \
+                   "signer workflow_buttons *"
     allow_create = False
+    stay_in_grid = True
+    # stay_in_grid is not useless here (even though allow_create is
+    # False) because otherwise the actions invoked
+    # bycreate_confirmation_buttons would open a detail window.
 
 
 class ConfirmationsByType(ConfirmationsByX):
@@ -435,8 +448,8 @@ class SimpleConfirmations(Confirmations):
     aid_type:25 start_date end_date
     confirmation_text
     board decision_date signer workflow_buttons
-    remark
-    """, window_size=(70, 24))
+    remark:60 excerpts.ExcerptsByOwner:20
+    """)  # , window_size=(70, 24))
 
     insert_layout = dd.FormLayout("""
     client
@@ -449,6 +462,7 @@ class SimpleConfirmations(Confirmations):
 
 
 ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmations)
+
 
 ##
 ## IncomeConfirmation
@@ -491,8 +505,8 @@ class IncomeConfirmations(Confirmations):
     category amount
     confirmation_text
     board decision_date signer workflow_buttons
-    remark
-    """, window_size=(70, 24))
+    remark:60 excerpts.ExcerptsByOwner:20
+    """)  # , window_size=(70, 24))
 
     insert_layout = dd.FormLayout("""
     client
@@ -536,8 +550,8 @@ class RefundConfirmations(Confirmations):
     #client_contact PartnersByConfirmation
     confirmation_text
     board decision_date signer workflow_buttons
-    remark
-    """, window_size=(70, 24))
+    remark:60 excerpts.ExcerptsByOwner:20
+    """)  # , window_size=(70, 24))
 
     insert_layout = dd.FormLayout("""
     client
@@ -569,9 +583,33 @@ class PartnersByConfirmation(RefundPartners):
     master_key = 'confirmation'
     column_names = 'type company contact_person *'
 
+
 ##
 ##
 ##
+
+class SubmitInsertAndPrint(dd.SubmitInsert):
+    """A customized
+    variant of the standard :class:`SubmitInsert <dd.SubmitInsert>`
+    which prints the row after successful creation.
+
+    """
+
+    def run_from_ui(self, ar, **kw):
+        elem = ar.create_instance_from_request()
+        self.save_new_instance(ar, elem)
+        ar.set_response(close_window=True)
+        if True:  # if elem.aid_type.print_automatically
+            elem.do_print.run_from_ui(ar, **kw)
+
+
+
+"""
+Overrides the :attr:`submit_insert <dd.Model.submit_insert>`
+action of :class:`welfare.aids.Confirmation` with 
+"""
+dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
+
 
 
 def setup_main_menu(site, ui, profile, m):
