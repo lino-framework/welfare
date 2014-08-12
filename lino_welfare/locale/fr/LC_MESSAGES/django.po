@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 12:23+0300\n"
+"POT-Creation-Date: 2014-08-12 13:00+0300\n"
 "PO-Revision-Date: 2014-08-12 05:27+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -193,8 +193,9 @@ msgstr "Signer"
 msgid "You confirm that this aid confirmation is correct."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:176
-msgid "(Custom text specified as remark)"
+#: lino_welfare/modlib/aids/models.py:177
+#, python-format
+msgid "You confirm that %(client)s %(text)s"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:179
@@ -3687,4 +3688,7 @@ msgstr "Site"
 
 #~ msgid "Applies until"
 #~ msgstr "Fin prévue"
+
+#~ msgid "(Custom text specified as remark)"
+#~ msgstr ""
 

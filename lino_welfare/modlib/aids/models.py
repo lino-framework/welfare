@@ -173,9 +173,9 @@ class SignConfirmation(dd.Action):
             obj.state = ConfirmationStates.signed
             obj.save()
             ar.set_response(refresh=True)
-        msg = obj.confirmation_text(ar) or _(
-            "(Custom text specified as remark)")
-        msg = "%s %s" % (obj.client, msg)
+        msg = obj.confirmation_text(ar) + obj.remark
+        msg = _("You confirm that %(client)s %(text)s") % dict(
+            client=obj.client, text=msg)
         ar.confirm(ok, msg, _("Are you sure?"))
 
 

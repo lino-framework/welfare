@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.16\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-08-12 12:23+0300\n"
+"POT-Creation-Date: 2014-08-12 13:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,8 +188,9 @@ msgstr ""
 msgid "You confirm that this aid confirmation is correct."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:176
-msgid "(Custom text specified as remark)"
+#: lino_welfare/modlib/aids/models.py:177
+#, python-format
+msgid "You confirm that %(client)s %(text)s"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:179

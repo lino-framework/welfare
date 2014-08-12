@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 12:23+0300\n"
-"PO-Revision-Date: 2014-08-12 12:25+0300\n"
+"POT-Creation-Date: 2014-08-12 13:00+0300\n"
+"PO-Revision-Date: 2014-08-12 13:01+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -191,9 +191,10 @@ msgstr "Bestätigen"
 msgid "You confirm that this aid confirmation is correct."
 msgstr "Sie bestätigen die Richtigkeit dieser Hilfebestätigung."
 
-#: lino_welfare/modlib/aids/models.py:176
-msgid "(Custom text specified as remark)"
-msgstr "(Eigener Text im Feld \"Bemerkung\")"
+#: lino_welfare/modlib/aids/models.py:177
+#, python-format
+msgid "You confirm that %(client)s %(text)s"
+msgstr "Sie bestätigen, dass %(client)s %(text)s"
 
 #: lino_welfare/modlib/aids/models.py:179
 msgid "Are you sure?"
@@ -3698,3 +3699,6 @@ msgstr "Site"
 
 #~ msgid "Sign"
 #~ msgstr "Unterschreiben"
+
+#~ msgid "(Custom text specified as remark)"
+#~ msgstr "(Eigener Text im Feld \"Bemerkung\")"

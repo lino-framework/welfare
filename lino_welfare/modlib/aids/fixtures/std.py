@@ -86,7 +86,21 @@ def objects():
         aid_regime=AidRegimes.other).build
     yield aidType(_("Möbellager"))
     yield aidType(_("Heizkosten"))
-    yield aidType(_("Lebensmittelbank"))
+
+    kw = dd.babelkw(
+        'name',
+        de="Lebensmittelbank",
+        en="Food bank",
+        fr="Banque alimentaire")
+    kw.update(
+        dd.babelkw(
+            'long_name',
+            de="aus Gründen der sozial-finanziellen Lage Anrecht auf "
+            "eine Sozialhilfe in Naturalien durch Nutzung der "
+            "Lebensmittelbank",
+            fr="le droit d'utiliser la banque alimentaire"))
+
+    yield aidType(**kw)
 
     if False:
         aidRole = Instantiator(
