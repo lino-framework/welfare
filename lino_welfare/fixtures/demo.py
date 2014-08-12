@@ -588,7 +588,8 @@ def objects():
     yield company(name=u"Behindertenstätten Eupen", city=eupen, country=belgium)
     yield company(name=u"Beschützende Werkstätte Eupen", city=eupen, country=belgium)
 
-    cct = ClientContactType(name=u"Krankenkasse")
+    kw = dd.str2kw('name', _("Health insurance"))
+    cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium)
     #~ kw = dict(is_health_insurance=True,country=belgium)
@@ -598,7 +599,8 @@ def objects():
     yield company(name=u"Mutualia - Mutualité Neutre", **kw)
     yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
 
-    cct = ClientContactType(name=u"Apotheke")
+    kw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
+    cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium)
     #~ kw = dict(is_pharmacy=True,country=belgium,city=eupen)
@@ -607,7 +609,8 @@ def objects():
     yield company(name=u"Pharmacies Populaires de Verviers", street=u'Aachener Straße', street_no=258, **kw)
     yield company(name=u"Bosten-Bocken A", street=u'Haasstraße', street_no=6, **kw)
 
-    cct = ClientContactType(name="Rechtsanwalt")
+    kw = dd.str2kw('name', _("Advocate"))
+    cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     #~ kw = dict(is_attorney=True,country=belgium,city=eupen)
@@ -616,11 +619,13 @@ def objects():
     yield company(name=u"Bourseaux Alexandre", street=u'Aachener Straße', street_no=21, **kw)
     yield company(name=u"Baguette Stéphanie", street=u'Gospertstraße', street_no=24, **kw)
 
-    cct = ClientContactType(**babelkw('name',
-                                      de="Gerichtsvollzieher",
-                                      fr="Huissier de justice",
-                                      en="Bailiff"
-                                      ))
+    kw = dd.str2kw('name', _("Bailiff"))
+    cct = ClientContactType(**kw)
+    # cct = ClientContactType(**babelkw('name',
+    #                                   de="Gerichtsvollzieher",
+    #                                   fr="Huissier de justice",
+    #                                   en="Bailiff"
+    #                                   ))
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield company(name="Demarteau Bernadette",
@@ -704,18 +709,30 @@ def objects():
 
     bernard = Person.objects.get(name__exact="Bodard Bernard")
 
-    cct = ClientContactType(name="Arbeitsvermittler")
+    kw = dd.str2kw('name', _("Employment office"))  # Arbeitsvermittler
+    cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     adg = company(name=u"Arbeitsamt der D.G.", **kw)
     adg.save()
     yield adg
-    #~ settings.SITE.update_site_config(job_office=adg)
     settings.SITE.site_config.job_office = adg
     yield settings.SITE.site_config
     adg_dir = role(company=adg, person=bernard, type=1)
-    #~ adg_dir = link(a=adg,b=bernard,type=1)
     yield adg_dir
+
+    kw = dd.str2kw('name', _("Physician"))  # Arzt
+    cct = ClientContactType(**kw)
+    yield cct
+    kw = dict(client_contact_type=cct, country=belgium, city=eupen)
+    yield person(first_name="Waltraud", last_name="Waldmann", **kw)
+    yield person(first_name="Walter", last_name="Waldmann", **kw)
+
+    kw = dd.str2kw('name', _("Family doctor"))  # Hausarzt
+    cct = ClientContactType(**kw)
+    yield cct
+    kw = dict(client_contact_type=cct, country=belgium, city=eupen)
+    yield person(first_name="Werner", last_name="Wehnicht", **kw)
 
     #~ from django.core.exceptions import ValidationError
     # ~ # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`

@@ -48,16 +48,10 @@ für neue Operationen nicht benutzt werden können.""")
     activity = models.ForeignKey("pcsw.Activity",
                                  blank=True, null=True)
 
-    # bank_account1 = models.CharField(max_length=40,
-    #                                  blank=True,  # null=True,
-    #                                  verbose_name=_("Bank account 1"))
-
-    # bank_account2 = models.CharField(max_length=40,
-    #                                  blank=True,  # null=True,
-    #                                  verbose_name=_("Bank account 2"))
-
     hidden_columns = 'created modified activity'
-    # bank_account1 bank_account2'
+
+    client_contact_type = dd.ForeignKey(
+        'pcsw.ClientContactType', blank=True, null=True)
 
     def get_overview_elems(self, ar):
         # In the base classes, Partner must come first because
@@ -117,6 +111,7 @@ class PartnerDetail(PartnerDetail):
     general2 = """
     id language
     activity
+    client_contact_type
     url
     """
 
@@ -265,9 +260,6 @@ class Company(Partner, Company):
     class Meta:
         verbose_name = _("Organisation")
         verbose_name_plural = _("Organisations")
-
-    client_contact_type = dd.ForeignKey(
-        'pcsw.ClientContactType', blank=True, null=True)
 
     vat_id = models.CharField(_("VAT id"), max_length=200, blank=True)
 

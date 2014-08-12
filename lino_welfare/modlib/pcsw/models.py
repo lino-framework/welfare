@@ -758,6 +758,16 @@ class Client(contacts.Person,
             raise Exception("20140513 None in %r" % elems)
         return E.div(*elems)
 
+    @dd.virtualfield(dd.HtmlBox(""))
+    def create_confirmation_buttons(self, ar):
+        elems = [_("Create a confirmation:")]
+        kv = dict(client=self)
+        for ct in dd.modules.aids.ConfirmationTypes.items():
+            sar = ar.spawn(ct.table_class, known_values=kv)
+            elems += [E.br(), sar.insert_button(
+                unicode(ct.model._meta.verbose_name), icon_name=None)]
+        return E.div(*elems)
+
 
 class ClientDetail(dd.FormLayout):
 
@@ -823,6 +833,8 @@ class ClientDetail(dd.FormLayout):
     aids_tab = dd.Panel("""
     status:55 income:25
     sepa.AccountsByClient uploads.MedicalUploadsByClient
+    aids.ConfirmationsByClient:60 create_confirmation_buttons:20
+
     """, label=_("Aids"))
 
     status = """
@@ -848,8 +860,8 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    notes.NotesByProject
-    excerpts.ExcerptsByProject aids.ConfirmationsByClient
+    notes.NotesByProject 
+    excerpts.ExcerptsByProject 
     # lino.ChangesByMaster
     """, label=_("History"))
 
@@ -1486,41 +1498,34 @@ class ClientContactTypes(dd.Table):
     contacts.CompaniesByClientContactType
     """
 
-#~ class ClientContactType(Choice):
 
-    #~ def __init__(self,choicelist,value,text,name,companies_table,**kw):
-        #~ self.companies_table = companies_table
-        #~ super(ClientContactType,self).__init__(choicelist,value,text,name,**kw)
+class ClientContactBase(contacts.ContactRelated):
+    # also used by lino_welfare.modlib.aids.models.RefundPartner
+    class Meta:
+        abstract = True
+    type = dd.ForeignKey(ClientContactType, blank=True, null=True)
 
-#~ class ClientContactTypes(ChoiceList):
-    #~ label = _("Client Contact type")
-    #~ item_class = ClientContactType
+    @dd.chooser()
+    def company_choices(self, type):
+        qs = contacts.Companies.request().data_iterator
+        if type is not None:
+            qs = qs.filter(client_contact_type=type)
+        return qs
 
-#~ class HealthInsurances(Companies):
-    #~ label = _("Health insurances")
-    #~ known_values = dict(is_health_insurance=True)
-#~ class Pharmacies(Companies):
-    #~ label = _("Pharmacies")
-    #~ known_values = dict(is_pharmacy=True)
-#~ class Attorneys(Companies):
-    #~ label = _("Attorneys")
-    #~ known_values = dict(is_attorney=True)
-#~ class JobOffices(Companies):
-    #~ label = _("Job offices")
-    #~ known_values = dict(is_job_office=True)
+    @dd.chooser()
+    def contact_person_choices(self, type):
+        qs = contacts.Persons.request().data_iterator
+        if type is not None:
+            qs = qs.filter(client_contact_type=type)
+        return qs
 
-#~ add = ClientContactTypes.add_item
-#~ add('10', _("Health insurance"),'health_insurance',HealthInsurances)
-#~ add('20', _("Pharmacy"),        'pharmacy',        Pharmacies)
-#~ add('30', _("Attorney"),        'attorney',        Attorneys)
-#~ add('40', _("Job office"),      'job_office',      JobOffices)
-#~ add('90', _("Other"),           'other',           Companies)
+    def __unicode__(self):
+        return unicode(self.contact_person or self.company or self.type)
 
 
-class ClientContact(contacts.ContactRelated):
-
+class ClientContact(ClientContactBase):
     """
-    project : the Client
+    client : the Client
     company : the Company
     contact_person : the Contact person in the Company
     contact_role : the role of the contact person in the Company
@@ -1529,8 +1534,7 @@ class ClientContact(contacts.ContactRelated):
         verbose_name = _("Client Contact")
         verbose_name_plural = _("Client Contacts")
     #~ type = ClientContactTypes.field(blank=True)
-    client = dd.ForeignKey(Client)
-    type = dd.ForeignKey(ClientContactType, blank=True, null=True)
+    client = dd.ForeignKey('pcsw.Client')
     remark = models.TextField(_("Remarks"), blank=True)  # ,null=True)
 
     def full_clean(self, *args, **kw):
@@ -1538,13 +1542,6 @@ class ClientContact(contacts.ContactRelated):
            and not self.company and not self.contact_person:
             raise ValidationError(_("Must fill at least one field."))
         super(ClientContact, self).full_clean(*args, **kw)
-
-    @dd.chooser()
-    def company_choices(self, type):
-        qs = contacts.Companies.request().data_iterator
-        if type is not None:
-            qs = qs.filter(client_contact_type=type)
-        return qs
 
 
 dd.update_field(ClientContact, 'contact_person',

@@ -32,6 +32,7 @@ from django.conf import settings
 
 contacts = dd.resolve_app('contacts')
 boards = dd.resolve_app('boards')
+pcsw = dd.resolve_app('pcsw')
 
 
 class ConfirmationType(dd.Choice):
@@ -215,7 +216,7 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
 
     state = ConfirmationStates.field(default=ConfirmationStates.requested)
 
-    aid_type = models.ForeignKey('aids.AidType', blank=True, null=True)
+    aid_type = models.ForeignKey('aids.AidType')
 
     remark = dd.RichTextField(
         _("Remark"),
@@ -240,7 +241,7 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
     @classmethod
     def get_aid_types(cls):
         ct = ConfirmationTypes.get_by_value(dd.full_model_name(cls))
-        logger.info("20140811 get_aid_types %s", cls)
+        # logger.info("20140811 get_aid_types %s", cls)
         return dd.modules.aids.AidType.objects.filter(confirmation_type=ct)
 
     def get_excerpt_options(self, ar, **kw):
@@ -249,19 +250,27 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
 
     def get_mti_child(self):
-        M = self.aid_type.confirmation_type.model
-        try:
-            return M.objects.get(id=self.id)
-        except M.DoesNotExist:
-            logger.warning(
-                "No mti child %s in %s", self.id, M.objects.all().query)
+        if self.aid_type_id is not None:
+            M = self.aid_type.confirmation_type.model
+            try:
+                return M.objects.get(id=self.id)
+            except M.DoesNotExist:
+                logger.warning(
+                    "No mti child %s in %s", self.id, M.objects.all().query)
 
     @dd.displayfield(_("Information"))
     def info(self, ar):
         mc = self.get_mti_child()
         if mc is None:
-            return ''
+            return ar.obj2html(self)
         return ar.obj2html(mc)
+
+    @dd.virtualfield(dd.HtmlBox(""))
+    def confirmation_text(self, ar):
+        mc = self.get_mti_child()
+        if mc is None:
+            return unicode(self)
+        return mc.confirmation_text(ar)
 
 
 dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
@@ -275,13 +284,19 @@ class Confirmations(dd.Table):
 
     order_by = ["-id"]
 
-    detail_layout = dd.FormLayout("""
-    id client user
-    aid_type:25 start_date end_date
-    board decision_date signer workflow_buttons
-    info
-    remark
-    """, window_size=(70, 24))
+    # detail_layout = dd.FormLayout("""
+    # id client user
+    # aid_type:25 start_date end_date
+    # board decision_date signer workflow_buttons
+    # info
+    # remark
+    # """, window_size=(70, 24))
+
+    # insert_layout = dd.FormLayout("""
+    # aid_type
+    # start_date end_date
+    # remark
+    # """, window_size=(50, 14))
 
     parameters = dict(
         user=dd.ForeignKey(
@@ -335,13 +350,8 @@ class ConfirmationsByClient(ConfirmationsByX):
 
     master_key = 'client'
     column_names = "info created_natural signer workflow_buttons *"
-
-    insert_layout = dd.FormLayout("""
-    aid_type
-    start_date end_date
-    remark
-    """, window_size=(50, 14))
-    stay_in_grid = True
+    # stay_in_grid = True
+    allow_create = False
 
 
 class ConfirmationsByType(ConfirmationsByX):
@@ -381,8 +391,6 @@ class IncomeConfirmation(Confirmation):
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
-    # @dd.displayfield(_("Confirmation text"))
-    # @dd.virtualfield(dd.HtmlBox(_("Confirmation text")))
     @dd.virtualfield(dd.HtmlBox(""))
     def confirmation_text(self, ar):
 
@@ -403,7 +411,7 @@ class IncomeConfirmation(Confirmation):
                 yield E.b(dd.fdl(self.end_date))
 
         def what():
-            if self.aid_type:
+            if self.aid_type_id:
                 yield E.b(self.aid_type.get_long_name())
                 if self.category:
                     yield " (%s: %s)" % (_("Category"), self.category)
@@ -447,6 +455,13 @@ class IncomeConfirmations(Confirmations):
     remark
     """, window_size=(70, 24))
 
+    insert_layout = dd.FormLayout("""
+    client
+    aid_type:25 start_date end_date
+    category amount
+    remark
+    """, window_size=(50, 14))
+
     column_names = "id client user signer aid_type category \
     start_date end_date *"
 
@@ -472,7 +487,7 @@ class RefundConfirmation(Confirmation):
         verbose_name = _("Refund confirmation")
         verbose_name_plural = _("Refund confirmations")
 
-    client_contact = dd.ForeignKey('pcsw.ClientContact')
+    # client_contact = dd.ForeignKey('pcsw.ClientContact')
 
     @dd.chooser()
     def client_contact_choices(cls, client):
@@ -486,10 +501,17 @@ class RefundConfirmations(Confirmations):
     detail_layout = dd.FormLayout("""
     id client user
     aid_type:25 start_date end_date
-    client_contact
+    #client_contact PartnersByConfirmation
     board decision_date signer workflow_buttons
     remark
     """, window_size=(70, 24))
+
+    insert_layout = dd.FormLayout("""
+    client
+    aid_type:25 start_date end_date
+    #client_contact PartnersByConfirmation
+    remark
+    """, window_size=(50, 14))
 
     column_names = "id client user signer aid_type  \
     start_date end_date *"
@@ -497,6 +519,23 @@ class RefundConfirmations(Confirmations):
 
 ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmations)
 
+
+class RefundPartner(pcsw.ClientContactBase):
+
+    class Meta:
+        verbose_name = _("Refund partner")
+        verbose_name_plural = _("Refund partners")
+
+    confirmation = dd.ForeignKey('aids.RefundConfirmation')
+
+
+class RefundPartners(dd.Table):
+    model = "aids.RefundPartner"
+
+
+class PartnersByConfirmation(RefundPartners):
+    master_key = 'confirmation'
+    column_names = 'type company contact_person *'
 
 ##
 ##
@@ -523,5 +562,6 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action('aids.AidRegimes')
     m.add_action('aids.IncomeConfirmations')
     m.add_action('aids.RefundConfirmations')
+    m.add_action('aids.RefundPartners')
     # m.add_action('aids.Helpers')
     # m.add_action('aids.HelperRoles')
