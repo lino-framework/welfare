@@ -26,6 +26,7 @@ def objects():
     AidRegimes = dd.modules.aids.AidRegimes
     IncomeConfirmation = dd.modules.aids.IncomeConfirmation
     RefundConfirmation = dd.modules.aids.RefundConfirmation
+    SimpleConfirmation = dd.modules.aids.SimpleConfirmation
     ConfirmationTypes = dd.modules.aids.ConfirmationTypes
 
     aidType = Instantiator(
@@ -79,9 +80,10 @@ def objects():
             en="General Medical Costs",
             fr="Remboursement de frais médicaux"))
 
-    # aidType = Instantiator(
-    #     'aids.AidType', "name",
-    #     aid_regime=AidRegimes.other).build
+    aidType = Instantiator(
+        'aids.AidType', "name",
+        confirmation_type=ConfirmationTypes.get_for_model(SimpleConfirmation),
+        aid_regime=AidRegimes.other).build
     yield aidType(_("Möbellager"))
     yield aidType(_("Heizkosten"))
     yield aidType(_("Lebensmittelbank"))

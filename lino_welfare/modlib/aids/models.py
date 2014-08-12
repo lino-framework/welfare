@@ -270,8 +270,48 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
         mc = self.get_mti_child()
         if mc is None:
             return unicode(self)
-        return mc.confirmation_text(ar)
+        return mc.my_confirmation_text(ar)
 
+    @dd.virtualfield(dd.HtmlBox(""))
+    def my_confirmation_text(self, ar):
+
+        aid = self
+
+        def when():
+            if aid.start_date:
+                yield pgettext("date range", "since")
+                yield " "
+                yield E.b(dd.fdl(aid.start_date))
+            if aid.start_date and aid.end_date:
+                yield " "
+                yield _("and")
+            if aid.end_date:
+                yield " "
+                yield pgettext("date range", "until")
+                yield " "
+                yield E.b(dd.fdl(self.end_date))
+
+        def e2text(v):
+            if isinstance(v, types.GeneratorType):
+                return "".join([e2text(x) for x in v])
+            if E.iselement(v):
+                return E.tostring(v)
+            return unicode(v)
+            
+        kw = dict()
+        kw.update(what=e2text(self.confirmation_text_what(ar)))
+        kw.update(when=e2text(when()))
+        if kw['when'] or kw['what']:
+            if self.end_date and self.end_date <= settings.SITE.today():
+                s = _("received %(what)s %(when)s.") % kw
+            else:
+                s = _("receives %(what)s %(when)s.") % kw
+        else:
+            return ''
+        return s
+
+    def confirmation_text_what(self, ar):
+        yield E.b(self.aid_type.get_long_name())
 
 dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
 dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
@@ -391,56 +431,17 @@ class IncomeConfirmation(Confirmation):
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
-    @dd.virtualfield(dd.HtmlBox(""))
-    def confirmation_text(self, ar):
-
-        aid = self
-        
-        def when():
-            if aid.start_date:
-                yield pgettext("date range", "since")
-                yield " "
-                yield E.b(dd.fdl(aid.start_date))
-            if aid.start_date and aid.end_date:
-                yield " "
-                yield _("and")
-            if aid.end_date:
-                yield " "
-                yield pgettext("date range", "until")
-                yield " "
-                yield E.b(dd.fdl(self.end_date))
-
-        def what():
-            if self.aid_type_id:
-                yield E.b(self.aid_type.get_long_name())
-                if self.category:
-                    yield " (%s: %s)" % (_("Category"), self.category)
-                if self.amount:
-                    yield " "
-                    yield _("with amount of")
-                    # "in Höhe von", "d'un montant de"
-                    s = " %s €" % self.amount
-                    s += "/%s" % _("month")
-                    yield E.b(s)
-
-        def e2text(v):
-            if isinstance(v, types.GeneratorType):
-                return "".join([e2text(x) for x in v])
-            if E.iselement(v):
-                return E.tostring(v)
-            return unicode(v)
-            
-        kw = dict()
-        kw.update(what=e2text(what()))
-        kw.update(when=e2text(when()))
-        if kw['when'] or kw['what']:
-            if self.end_date and self.end_date <= settings.SITE.today():
-                s = _("received %(what)s %(when)s.") % kw
-            else:
-                s = _("receives %(what)s %(when)s.") % kw
-        else:
-            return ''
-        return s
+    def confirmation_text_what(self, ar):
+        yield E.b(self.aid_type.get_long_name())
+        if self.category:
+            yield " (%s: %s)" % (_("Category"), self.category)
+        if self.amount:
+            yield " "
+            yield _("with amount of")
+            # "in Höhe von", "d'un montant de"
+            s = " %s €" % self.amount
+            s += "/%s" % _("month")
+            yield E.b(s)
 
 
 class IncomeConfirmations(Confirmations):
@@ -487,13 +488,6 @@ class RefundConfirmation(Confirmation):
         verbose_name = _("Refund confirmation")
         verbose_name_plural = _("Refund confirmations")
 
-    # client_contact = dd.ForeignKey('pcsw.ClientContact')
-
-    @dd.chooser()
-    def client_contact_choices(cls, client):
-        M = dd.modules.pcsw.ClientContact
-        return M.objects.filter(client=client)
-
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
@@ -502,6 +496,7 @@ class RefundConfirmations(Confirmations):
     id client user
     aid_type:25 start_date end_date
     #client_contact PartnersByConfirmation
+    confirmation_text
     board decision_date signer workflow_buttons
     remark
     """, window_size=(70, 24))
@@ -509,7 +504,6 @@ class RefundConfirmations(Confirmations):
     insert_layout = dd.FormLayout("""
     client
     aid_type:25 start_date end_date
-    #client_contact PartnersByConfirmation
     remark
     """, window_size=(50, 14))
 
@@ -518,6 +512,42 @@ class RefundConfirmations(Confirmations):
 
 
 ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmations)
+
+
+class SimpleConfirmation(Confirmation):
+    """This is when a social agent confirms that a client benefits of some
+simple aid during a given period.
+
+    """
+
+    class Meta:
+        abstract = dd.is_abstract_model('aids.SimpleConfirmation')
+        verbose_name = _("Simple confirmation")
+        verbose_name_plural = _("Simple confirmations")
+
+
+class SimpleConfirmations(Confirmations):
+    model = 'aids.SimpleConfirmation'
+
+    detail_layout = dd.FormLayout("""
+    id client user
+    aid_type:25 start_date end_date
+    confirmation_text
+    board decision_date signer workflow_buttons
+    remark
+    """, window_size=(70, 24))
+
+    insert_layout = dd.FormLayout("""
+    client
+    aid_type:25 start_date end_date
+    remark
+    """, window_size=(50, 14))
+
+    column_names = "id client user signer aid_type  \
+    start_date end_date *"
+
+
+ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmations)
 
 
 class RefundPartner(pcsw.ClientContactBase):
