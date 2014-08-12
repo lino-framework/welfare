@@ -592,6 +592,7 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action('aids.AidRegimes')
     m.add_action('aids.IncomeConfirmations')
     m.add_action('aids.RefundConfirmations')
+    m.add_action('aids.SimpleConfirmations')
     m.add_action('aids.RefundPartners')
     # m.add_action('aids.Helpers')
     # m.add_action('aids.HelperRoles')
