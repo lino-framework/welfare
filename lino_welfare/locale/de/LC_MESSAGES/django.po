@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-13 08:26+0300\n"
-"PO-Revision-Date: 2014-08-13 08:30+0300\n"
+"PO-Revision-Date: 2014-08-13 08:52+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -373,11 +373,11 @@ msgstr "Kinderarzt"
 
 #: lino_welfare/modlib/aids/models.py:573
 msgid "Refund confirmation"
-msgstr "Kostenrückerstattung"
+msgstr "Kostenübernahme"
 
 #: lino_welfare/modlib/aids/models.py:574
 msgid "Refund confirmations"
-msgstr "Kostenrückerstattungen"
+msgstr "Kostenübernahmen"
 
 #: lino_welfare/modlib/aids/models.py:576
 msgid "urgent"
