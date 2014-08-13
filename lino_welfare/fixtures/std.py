@@ -42,7 +42,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     yield attType(
         body_template='aid_certificate.body.html',
         template='Default.odt',
-        primary=True,
+        primary=True, print_directly=False,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('aids.Confirmation')),
         **babelkw('name',

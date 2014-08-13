@@ -59,26 +59,50 @@ def objects():
             fr="une aide sociale pour étrangers "
             "prévue par la loi du 2 avril 1965"))
     yield aidType(**kw)
+
     yield aidType(
         **dd.babelkw(
             'name',
             de="Feste Beihilfe",
             en="Feste Beihilfe",
             fr="Revenu fixe"))
-    # yield aidType(_("Erstattung"))
-    # yield aidType(_("Übernahmeschein"))
-    # yield aidType(_("DMH-Übernahmeschein"))
+
+    aidType = Instantiator(
+        'aids.AidType', "name",
+        confirmation_type=ConfirmationTypes.get_for_model(SimpleConfirmation),
+        aid_regime=AidRegimes.medical).build
+    kw = dd.babelkw(
+        'name',
+        de="Erstattung",
+        en="Erstattung",
+        fr="Remboursement")
+    kw.update()
+    yield aidType(**kw)
+    kw = dd.babelkw(
+        'name',
+        de="Übernahmeschein",
+        en="Übernahmeschein",
+        fr="Übernahmeschein")
+    yield aidType(**kw)
 
     aidType = Instantiator(
         'aids.AidType', "name",
         confirmation_type=ConfirmationTypes.get_for_model(RefundConfirmation),
         aid_regime=AidRegimes.medical).build
-    yield aidType(
-        **dd.babelkw(
-            'name',
-            de="Allgemeine medizinische Kosten",
-            en="General Medical Costs",
-            fr="Remboursement de frais médicaux"))
+    kw = dd.babelkw(
+        'name',
+        de="Arzt- u/o Medikamentenkosten",
+        en="Medical Costs",
+        fr="Remboursement de frais médicaux")
+    kw.update(short_name="AMK")
+    yield aidType(**kw)
+    kw = dd.babelkw(
+        'name',
+        de="DMH-Übernahmeschein",
+        en="DMH-Übernahmeschein",
+        fr="DMH-Übernahmeschein")
+    kw.update(short_name="AMK(DMH)")
+    yield aidType(**kw)
 
     aidType = Instantiator(
         'aids.AidType', "name",

@@ -760,13 +760,7 @@ class Client(contacts.Person,
 
     @dd.virtualfield(dd.HtmlBox(""))
     def create_confirmation_buttons(self, ar):
-        elems = [_("Create a confirmation:")]
-        kv = dict(client=self)
-        for ct in dd.modules.aids.ConfirmationTypes.items():
-            sar = ar.spawn(ct.table_class, known_values=kv)
-            elems += [E.br(), sar.insert_button(
-                unicode(ct.model._meta.verbose_name), icon_name=None)]
-        return E.div(*elems)
+        return dd.modules.aids.ConfirmationsByClient.create_buttons(self, ar)
 
 
 class ClientDetail(dd.FormLayout):

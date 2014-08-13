@@ -115,7 +115,14 @@ class AidType(dd.BabelNamed):
         blank=True,
         help_text=_("Replaces the short description in certain places."))
 
+    short_name = models.CharField(max_length=50, blank=True)
+
     board = models.ForeignKey('boards.Board', blank=True, null=True)
+
+    print_directly = models.BooleanField(_("Print directly"), default=True)
+
+    signed_by_primary_coach = models.BooleanField(
+        _("Signed by primary coach"), default=True)
 
     def get_long_name(self):
         return dd.babelattr(self, 'long_name') or unicode(self)
@@ -124,7 +131,7 @@ class AidType(dd.BabelNamed):
 class AidTypes(dd.Table):
     model = 'aids.AidType'
     required = dd.required(user_level='admin', user_groups='office')
-    column_names = 'aid_regime name board *'
+    column_names = 'aid_regime name board short_name *'
     order_by = ["aid_regime", "name"]
 
     insert_layout = """
@@ -136,6 +143,7 @@ class AidTypes(dd.Table):
     id aid_regime board
     name
     long_name
+    print_directly signed_by_primary_coach
     aids.ConfirmationsByType
     """
 
@@ -231,12 +239,12 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
     def get_mailable_type(self):
         return self.aid_type
 
-    def save(self, *args, **kwargs):
-        # logger.info("20140724 %s", self.client)
-        if self.signer is None:
+    def on_create(self, ar):
+        if self.client_id and self.aid_type_id \
+           and self.aid_type.signed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
-        super(Confirmation, self).save(*args, **kwargs)
-
+        super(Confirmation, self).on_create(ar)
+        
     @dd.chooser()
     def aid_type_choices(cls):
         return cls.get_aid_types()
@@ -253,7 +261,7 @@ class Confirmation(boards.BoardDecision, dd.DatePeriod, dd.Created):
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
 
     def get_mti_child(self):
-        if self.aid_type_id is not None:
+        if self.aid_type_id is not None and self.id is not None:
             M = self.aid_type.confirmation_type.model
             try:
                 return M.objects.get(id=self.id)
@@ -402,9 +410,26 @@ class ConfirmationsByClient(ConfirmationsByX):
                    "signer workflow_buttons *"
     allow_create = False
     stay_in_grid = True
-    # stay_in_grid is not useless here (even though allow_create is
-    # False) because otherwise the actions invoked
+    # stay_in_grid is not useless here --even though allow_create is
+    # False-- because otherwise the actions invoked
     # bycreate_confirmation_buttons would open a detail window.
+
+    @classmethod
+    def create_buttons(self, client, ar):
+        # called from pcsw.Client.create_confirmation_buttons
+        elems = [_("Create an aid confirmation:")]
+        items = []
+        kv = dict(client=client)
+        for ct in ConfirmationTypes.items():
+            li = [E.b(unicode(ct.model._meta.verbose_name)), ' : ']
+            for at in AidType.objects.filter(confirmation_type=ct):
+                kv.update(aid_type=at)
+                sar = ar.spawn(ct.table_class, known_values=kv)
+                li += [sar.insert_button(
+                    at.short_name or unicode(at), icon_name=None), ', ']
+            items.append(E.li(*li))
+        elems.append(E.ul(*items))
+        return E.div(*elems)
 
 
 class ConfirmationsByType(ConfirmationsByX):
@@ -513,7 +538,7 @@ class IncomeConfirmations(Confirmations):
     aid_type:25 start_date end_date
     category amount
     remark
-    """, window_size=(50, 14))
+    """, window_size=(50, 20))
 
     column_names = "id client user signer aid_type category \
     start_date end_date *"
@@ -529,6 +554,14 @@ ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmations)
 ##
 
 
+class DoctorTypes(dd.ChoiceList):
+    verbose_name = _("Doctor type")
+add = DoctorTypes.add_item
+add('10', _("Family doctor"), 'family')
+add('20', _("Dentist"), 'dentist')
+add('30', _("Pediatrician"), 'pediatrician')
+
+
 class RefundConfirmation(Confirmation):
     """This is when a social agent confirms that a client benefits of a
     refund aid (Kostenrückerstattung) during a given period.
@@ -540,6 +573,18 @@ class RefundConfirmation(Confirmation):
         verbose_name = _("Refund confirmation")
         verbose_name_plural = _("Refund confirmations")
 
+    urgent = models.BooleanField(_("urgent"), default=False)
+    doctor_type = DoctorTypes.field(default=DoctorTypes.family)
+    doctor = dd.ForeignKey('contacts.Person',
+                           verbose_name=_("Doctor"), blank=True)
+
+    def confirmation_text_what(self, ar):
+        yield E.b(self.aid_type.get_long_name())
+        yield _("Recipes issued by")
+        yield unicode(self.doctor_type)
+        yield " "
+        yield E.b(unicode(self.doctor))
+
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
@@ -547,7 +592,7 @@ class RefundConfirmations(Confirmations):
     detail_layout = dd.FormLayout("""
     id client user
     aid_type:25 start_date end_date
-    #client_contact PartnersByConfirmation
+    doctor_type doctor urgent
     confirmation_text
     board decision_date signer workflow_buttons
     remark:60 excerpts.ExcerptsByOwner:20
@@ -556,8 +601,10 @@ class RefundConfirmations(Confirmations):
     insert_layout = dd.FormLayout("""
     client
     aid_type:25 start_date end_date
+    doctor_type doctor urgent
+    board decision_date signer
     remark
-    """, window_size=(50, 14))
+    """, window_size=(70, 20))
 
     column_names = "id client user signer aid_type  \
     start_date end_date *"
@@ -599,17 +646,14 @@ class SubmitInsertAndPrint(dd.SubmitInsert):
         elem = ar.create_instance_from_request()
         self.save_new_instance(ar, elem)
         ar.set_response(close_window=True)
-        if True:  # if elem.aid_type.print_automatically
+        if elem.aid_type.print_directly:
             elem.do_print.run_from_ui(ar, **kw)
-
-
 
 """
 Overrides the :attr:`submit_insert <dd.Model.submit_insert>`
-action of :class:`welfare.aids.Confirmation` with 
+action of :class:`welfare.aids.Confirmation` with
 """
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
-
 
 
 def setup_main_menu(site, ui, profile, m):
