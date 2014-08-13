@@ -1,0 +1,45 @@
+{% extends "excerpts/Excerpt/base.body.html" %}
+
+{%- set aid = this.owner -%}
+
+{% block body %}
+<p>{{tr(en="We hereby certify that",
+        de="Wir bescheinigen hiermit die Kostenübernahme zu Gunsten von",
+        fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{this.project.get_full_name()}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{this.project.national_id}}
+<br>
+{{tr(de="wohnhaft zu",fr="domicilié"+this.project.mf("","e","(e)")+" à")}}
+{{', '.join(this.project.address_location_lines())}}
+</p>
+
+{% if aid.urgent %}
+<p><b>im Rahmen der dringenden medizinischen Hilfe.
+Bitte in jedem Fall die SIS-Karte prüfen und mit der Krankenkasse
+abrechnen.
+<br/>Bitte die beigefügte Bescheinigung ausgefüllt an das ÖSHZ zurück
+senden!</b>
+</p>
+{% endif %}
+
+<ol>
+<li>für <b>Arzthonorare</b> in Höhe der LIKIV-Tarife für die Visite beim
+{{aid.doctor_type}} Dr. {{aid.doctor}}
+</li>
+
+<li>und <b>Arzneikosten</b> für die durch 
+Dr. {{aid.doctor}}
+   verschriebenen und die Apotheke <b>[=trim(ParField(PXS->Apotheke,{||PAR->Firme}))]</b>
+   ausgehändigten Medikamente.
+
+</ol>
+
+<p>{{ aid.confirmation_text() }}</p>
+{% if aid.remark %}
+<p>{{ aid.remark }}</p>
+{% endif %}
+{% endblock %}
