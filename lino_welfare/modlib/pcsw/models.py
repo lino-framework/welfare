@@ -1490,6 +1490,8 @@ class ClientContactTypes(dd.Table):
 
     column_names = 'id name can_refund'
 
+    stay_in_grid = True
+
 
 class ClientContactBase(contacts.ContactRelated):
     # also used by lino_welfare.modlib.aids.models.RefundPartner

@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 import types
 
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
@@ -29,13 +30,13 @@ from lino import dd
 from lino.utils.xmlgen.html import E
 from django.conf import settings
 
+from lino.modlib.contacts.utils import parse_name
+from lino.modlib.excerpts.mixins import Certifiable
 
 contacts = dd.resolve_app('contacts')
 boards = dd.resolve_app('boards')
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.require_app_models('contacts')
-
-from lino.modlib.excerpts.mixins import Certifiable
 
 
 class ConfirmationType(dd.Choice):
@@ -725,6 +726,24 @@ class RefundConfirmation(Confirmation):
     def partner_choices(cls, partner_type):
         return dd.modules.contacts.Partner.objects.filter(
             client_contact_type=partner_type)
+
+    def create_partner_choice(self, text):
+        """
+        Called when an unknown partner name was given.
+        Try to auto-create it.
+        """
+        Person = dd.modules.contacts.Person
+        kw = parse_name(text)
+        if len(kw) != 2:
+            raise ValidationError(
+                "Cannot find first and last names in %r to \
+                auto-create partner", text)
+        kw.update(client_contact_type=self.partner_type)
+        kw.update(title=_("Dr."))
+        p = Person(**kw)
+        p.full_clean()
+        p.save()
+        return p
 
     @dd.chooser()
     def partner_type_choices(cls):
