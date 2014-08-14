@@ -268,6 +268,13 @@ class Grantings(dd.Table):
     aids.ConfirmationsByGranting
     """
 
+    insert_layout = """
+    client
+    board decision_date
+    aid_type
+    start_date end_date
+    """
+
     parameters = dict(
         board=dd.ForeignKey(
             'boards.Board',
@@ -313,7 +320,7 @@ class GrantingsByClient(GrantingsByX):
     master_key = 'client'
     column_names = "description_column start_date end_date " \
                    "board custom_actions *"
-    allow_create = False
+    # allow_create = False
     stay_in_grid = True
     # stay_in_grid is not useless here --even though allow_create is
     # False-- because otherwise the actions invoked
