@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-14 14:47+0300\n"
-"PO-Revision-Date: 2014-08-14 14:50+0300\n"
+"PO-Revision-Date: 2014-08-14 22:36+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -376,7 +376,7 @@ msgstr "Beschreibung"
 
 #: lino_welfare/modlib/aids/models.py:640
 msgid "Simple confirmation"
-msgstr "Einfache Bbscheinigung"
+msgstr "Einfache Bescheinigung"
 
 #: lino_welfare/modlib/aids/models.py:641
 msgid "Simple confirmations"
