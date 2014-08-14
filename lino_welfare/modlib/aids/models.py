@@ -731,11 +731,12 @@ class RefundConfirmation(Confirmation):
     def confirmation_what(self, ar):
         if self.granting:
             yield E.b(self.granting.aid_type.get_long_name())
-        yield ". "
-        yield _("Recipes issued by")
-        yield unicode(self.partner_type)
-        yield " "
-        yield E.b(unicode(self.partner))
+            yield ". "
+        if self.partner_type_id:
+            yield _("Recipes issued by")
+            yield unicode(self.partner_type)
+            yield " "
+            yield E.b(unicode(self.partner))
 
 
 class RefundConfirmations(Confirmations):
