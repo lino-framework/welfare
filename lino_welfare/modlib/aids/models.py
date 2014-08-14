@@ -569,16 +569,16 @@ class Confirmations(dd.Table):
                     + ' ' + unicode(v)
 
 
-class ConfirmationsToSign(Confirmations):
-    label = _("Aid confirmations to sign")
-    column_names = "client granting signer workflow_buttons *"
+# class ConfirmationsToSign(Confirmations):
+#     label = _("Aid confirmations to sign")
+#     column_names = "client granting signer workflow_buttons *"
 
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(ConfirmationsToSign, self).param_defaults(ar, **kw)
-        kw.update(signer=ar.get_user())
-        kw.update(state=ConfirmationStates.requested)
-        return kw
+#     @classmethod
+#     def param_defaults(self, ar, **kw):
+#         kw = super(ConfirmationsToSign, self).param_defaults(ar, **kw)
+#         kw.update(signer=ar.get_user())
+#         kw.update(state=ConfirmationStates.requested)
+#         return kw
 
 
 class ConfirmationsByGranting(dd.VirtualTable):
@@ -874,10 +874,10 @@ action of :class:`welfare.aids.Confirmation` with
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
 
 
-def setup_main_menu(site, ui, profile, m):
-    app = dd.apps.reception
-    m = m.add_menu(app.app_name, app.verbose_name)
-    m.add_action('aids.ConfirmationsToSign')
+# def setup_main_menu(site, ui, profile, m):
+#     app = dd.apps.reception
+#     m = m.add_menu(app.app_name, app.verbose_name)
+#     m.add_action('aids.ConfirmationsToSign')
 
 
 def setup_config_menu(site, ui, profile, m):
