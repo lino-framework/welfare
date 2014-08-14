@@ -139,15 +139,16 @@ class AidTypes(dd.Table):
     order_by = ["aid_regime", "name"]
 
     insert_layout = """
-    name board
+    name
     long_name
+    confirmation_type
     """
 
     detail_layout = """
-    id short_name aid_regime board
+    id short_name aid_regime confirmation_type
     name
     long_name
-    print_directly confirmed_by_primary_coach
+    print_directly confirmed_by_primary_coach board
     aids.GrantingsByType
     """
 
