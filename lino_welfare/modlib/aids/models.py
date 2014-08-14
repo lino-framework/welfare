@@ -724,14 +724,18 @@ class RefundConfirmation(Confirmation):
 
     @dd.chooser()
     def partner_choices(cls, partner_type):
-        return dd.modules.contacts.Partner.objects.filter(
-            client_contact_type=partner_type)
+        fkw = dict()
+        if partner_type:
+            fkw.update(client_contact_type=partner_type)
+        return dd.modules.contacts.Person.objects.filter(**fkw)
 
     def create_partner_choice(self, text):
         """
         Called when an unknown partner name was given.
         Try to auto-create it.
         """
+        if not self.partner_type:
+            raise ValidationError("Cannot auto-create without partner type")
         Person = dd.modules.contacts.Person
         kw = parse_name(text)
         if len(kw) != 2:
