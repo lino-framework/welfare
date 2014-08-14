@@ -194,11 +194,6 @@ class SignConfirmation(dd.Action):
 @dd.receiver(dd.pre_analyze)
 def setup_aids_workflows(sender=None, **kw):
 
-    site = sender
-
-    # ConfirmationStates.cancelled.add_transition(
-    #     _("Cancel"), states='requested')
-
     ConfirmationStates.requested.add_transition(
         _("Revoke"), states='confirmed')
 
@@ -229,6 +224,8 @@ class Granting(boards.BoardDecision, dd.DatePeriod):
 
     @dd.displayfield(_("Actions"))
     def custom_actions(self, ar, **kw):
+        if self.aid_type_id is None:
+            return ''
         kv = dict(client=self.client)
         kv.update(granting=self)
         at = self.aid_type
@@ -270,8 +267,8 @@ class Grantings(dd.Table):
 
     insert_layout = """
     client
-    board decision_date
     aid_type
+    board decision_date
     start_date end_date
     """
 
@@ -283,9 +280,14 @@ class Grantings(dd.Table):
         aid_type=dd.ForeignKey(
             'aids.AidType',
             blank=True, null=True,
-            help_text=_("Only confirmations about this aid type.")))
+            help_text=_("Only confirmations about this aid type.")),
+        user=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Author"),
+            blank=True, null=True,
+            help_text=_("Only rows created by this user.")))
 
-    params_layout = "board aid_type"
+    params_layout = "board aid_type user"
 
     @classmethod
     def get_request_queryset(self, ar):
@@ -294,7 +296,9 @@ class Grantings(dd.Table):
         if pv.aid_type:
             qs = qs.filter(aid_type=pv.aid_type)
         if pv.board:
-            qs = qs.filter(user=pv.board)
+            qs = qs.filter(board=pv.board)
+        if pv.user:
+            qs = qs.filter(user=pv.user)
         return qs
 
     @classmethod
@@ -303,7 +307,7 @@ class Grantings(dd.Table):
             yield t
         pv = ar.param_values
 
-        for k in ('board', 'aid_type'):
+        for k in ('board', 'aid_type', 'user'):
             v = pv[k]
             if v:
                 yield unicode(self.parameters[k].verbose_name) \
@@ -475,7 +479,13 @@ class Confirmations(dd.Table):
             settings.SITE.user_model,
             verbose_name=_("Signer"),
             blank=True, null=True,
-            help_text=_("Only rows confirmed (or to be confirmed) by this user.")),
+            help_text=_("Only rows confirmed (or to be confirmed) "
+                        "by this user.")),
+        user=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Author"),
+            blank=True, null=True,
+            help_text=_("Only rows created by this user.")),
         aid_type=dd.ForeignKey(
             'aids.AidType',
             blank=True, null=True,
@@ -484,7 +494,7 @@ class Confirmations(dd.Table):
             blank=True,
             help_text=_("Only rows having this state.")))
 
-    params_layout = "board signer aid_type state"
+    params_layout = "board signer user aid_type state"
 
     @classmethod
     def get_request_queryset(self, ar):
