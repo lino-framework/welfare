@@ -548,7 +548,6 @@ class ConfirmationsByGranting(dd.VirtualTable):
     @classmethod
     def get_data_rows(self, ar):
         mi = ar.master_instance
-        logger.info("20140813 ConfirmationsByGranting %s", mi)
         if mi is None:
             return []
         ct = mi.aid_type.confirmation_type
@@ -720,7 +719,8 @@ class RefundConfirmation(Confirmation):
         'pcsw.ClientContactType', verbose_name=_("Doctor type"))
     # doctor_type = DoctorTypes.field(default=DoctorTypes.family)
     partner = dd.ForeignKey(
-        'contacts.Person', verbose_name=_("Doctor"), blank=True)
+        'contacts.Person', verbose_name=_("Doctor"),
+        blank=True, null=True)
 
     @dd.chooser()
     def partner_choices(cls, partner_type):
@@ -761,8 +761,9 @@ class RefundConfirmation(Confirmation):
         if self.partner_type_id:
             yield _("Recipes issued by")
             yield unicode(self.partner_type)
+        if self.partner:
             yield " "
-            yield E.b(unicode(self.partner))
+            yield E.b(self.partner.get_full_name())
 
 
 class RefundConfirmations(Confirmations):
