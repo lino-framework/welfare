@@ -725,9 +725,11 @@ class RefundConfirmation(Confirmation):
     def partner_choices(cls, partner_type):
         return dd.modules.contacts.Partner.objects.filter(
             client_contact_type=partner_type)
-    # def on_create(self, ar):
-    #     self.doctor = self.client.
-    #     super(RefundConfirmation, self).on_create(ar)
+
+    @dd.chooser()
+    def partner_type_choices(cls):
+        return dd.modules.pcsw.ClientContactType.objects.filter(
+            can_refund=True)
 
     def confirmation_what(self, ar):
         if self.granting:
