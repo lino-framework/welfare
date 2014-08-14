@@ -1,0 +1,10 @@
+{% extends "excerpts/Excerpt/certificate.body.html" %}
+
+{% block body %}
+{{ super() }}
+{%- set aid = this.owner -%}
+<p>{{ aid.confirmation_text() }}</p>
+{% if aid.remark %}
+<p>{{ aid.remark }}</p>
+{% endif %}
+{% endblock %}

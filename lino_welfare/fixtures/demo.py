@@ -722,17 +722,33 @@ def objects():
     yield adg_dir
 
     kw = dd.str2kw('name', _("Physician"))  # Arzt
+    kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield person(first_name="Waltraud", last_name="Waldmann", **kw)
-    yield person(first_name="Walter", last_name="Waldmann", **kw)
 
     kw = dd.str2kw('name', _("Family doctor"))  # Hausarzt
+    kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield person(first_name="Werner", last_name="Wehnicht", **kw)
+
+    kw = dd.str2kw('name', _("Dentist"), can_refund=True)
+    cct = ClientContactType(**kw)
+    yield cct
+    kw = dict(client_contact_type=cct, country=belgium,
+              city=eupen, title="Dr.")
+    yield person(first_name="Carmen", last_name="Castou", **kw)
+    yield person(first_name="Walter", last_name="Waldmann", **kw)
+
+    kw = dd.str2kw('name', _("Pediatrician"), can_refund=True)
+    cct = ClientContactType(**kw)
+    yield cct
+    kw = dict(client_contact_type=cct, country=belgium,
+              city=eupen, title="Dr.")
+    yield person(first_name="Killian", last_name="Kimmel", **kw)
 
     #~ from django.core.exceptions import ValidationError
     # ~ # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`

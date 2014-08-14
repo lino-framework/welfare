@@ -22,26 +22,57 @@ from lino import dd
 
 
 def objects():
-    Aid = resolve_model('aids.IncomeConfirmation')
-    NTYPES = Cycler(Aid.get_aid_types())
-    Category = resolve_model('aids.Category')
+    Granting = dd.modules.aids.Granting
+    AidType = dd.modules.aids.AidType
+    Person = dd.modules.contacts.Person
     ClientStates = dd.modules.pcsw.ClientStates
+    ClientContactType = dd.modules.pcsw.ClientContactType
+    Board = dd.modules.boards.Board
 
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
-    if qs.count() > 10:
-        qs = qs[:10]
+    # if qs.count() > 10:
+    #     qs = qs[:10]
     PROJECTS = Cycler(qs)
 
-    CATS = Cycler(Category.objects.all())
+    l = []
+    qs = ClientContactType.objects.filter(can_refund=True)
+    for cct in qs:
+        qs2 = Person.objects.filter(client_contact_type=cct)
+        if qs2.count():
+            i = (cct, Cycler(qs2))
+            l.append(i)
+    PARTNERS = Cycler(l)
 
-    for i in range(12):
-        client = PROJECTS.pop()
-        author = settings.SITE.user_model.objects.get(username='theresia')
-        atype = NTYPES.pop()
-        kw = dict(category=CATS.pop(),
-                  start_date=settings.SITE.demo_date(days=i),
-                  user=author,
-                  aid_type=atype)
-        kw.update(client=client)
-        yield Aid(**kw)
+    BOARDS = Cycler(Board.objects.all())
+
+    for i, at in enumerate(AidType.objects.all()):
+        kw = dict(start_date=dd.demo_date(days=i),
+                  board=BOARDS.pop(),
+                  decision_date=dd.demo_date(days=i-1),
+                  aid_type=at)
+        kw.update(client=PROJECTS.pop())
+        yield Granting(**kw)
+
+    # ConfirmationTypes = dd.modules.aids.ConfirmationTypes
+    RefundConfirmation = dd.modules.aids.RefundConfirmation
+    # for i in range(5):
+    #     for ct in ConfirmationTypes.items():
+    #         for at in AidType.objects.filter(confirmation_type=ct):
+    #             for g in Granting.objects.filter(aid_type=at):
+    #                 kw = dict(granting=g, client=g.client)
+    #                 if ct.model == RefundConfirmation:
+    #                     type, cycler = PARTNERS.pop()
+    #                     kw.update(partner_type=type)
+    #                     kw.update(partner=cycler.pop())
+    #                 yield ct.model(**kw)
+
+    for i in range(2):
+        for g in Granting.objects.all():
+            ct = g.aid_type.confirmation_type
+            kw = dict(granting=g, client=g.client)
+            if ct.model == RefundConfirmation:
+                type, cycler = PARTNERS.pop()
+                kw.update(partner_type=type)
+                kw.update(partner=cycler.pop())
+            yield ct.model(**kw)

@@ -758,10 +758,6 @@ class Client(contacts.Person,
             raise Exception("20140513 None in %r" % elems)
         return E.div(*elems)
 
-    @dd.virtualfield(dd.HtmlBox(""))
-    def create_confirmation_buttons(self, ar):
-        return dd.modules.aids.ConfirmationsByClient.create_buttons(self, ar)
-
 
 class ClientDetail(dd.FormLayout):
 
@@ -827,7 +823,7 @@ class ClientDetail(dd.FormLayout):
     aids_tab = dd.Panel("""
     status:55 income:25
     sepa.AccountsByClient uploads.MedicalUploadsByClient
-    aids.ConfirmationsByClient:60 create_confirmation_buttons:20
+    aids.GrantingsByClient
 
     """, label=_("Aids"))
 
@@ -1486,11 +1482,13 @@ class ClientContactTypes(dd.Table):
     model = ClientContactType
     required = dd.required(user_level='manager')
 
+    # TODO: can_refund is injected in aids
     detail_layout = """
     id name
-    # pcsw.ClientContactsByType
-    contacts.CompaniesByClientContactType
+    contacts.PartnersByClientContactType
     """
+
+    column_names = 'id name can_refund'
 
 
 class ClientContactBase(contacts.ContactRelated):

@@ -20,7 +20,9 @@ def objects():
 
     for et in dd.modules.excerpts.ExcerptType.objects.all():
         model = et.content_type.model_class()
-        ses = dd.login('melanie')  # user=AGENTS.pop())
-        ses.selected_rows = [model.objects.all()[0]]
-        yield et.get_or_create_excerpt(ses)
+        qs = model.objects.all()
+        if qs.count() > 0:
+            ses = dd.login('melanie')  # user=AGENTS.pop())
+            ses.selected_rows = [qs[0]]
+            yield et.get_or_create_excerpt(ses)
 

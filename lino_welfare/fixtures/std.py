@@ -39,16 +39,17 @@ def excerpt_types():  # also used for migration to 1.1.11
     attType = Instantiator(ExcerptType,
                            # build_method='appypdf',
                            email_template='Default.eml.html').build
-    yield attType(
-        body_template='aid_certificate.body.html',
-        template='Default.odt',
-        primary=True, print_directly=False,
-        content_type=ContentType.objects.get_for_model(
-            dd.resolve_model('aids.Confirmation')),
-        **babelkw('name',
-                  de="Hilfebescheinigung",
-                  fr="Attestation d'aide",
-                  en="Aid certificate"))
+    ConfirmationTypes = dd.modules.aids.ConfirmationTypes
+    for ct in ConfirmationTypes.items():
+        kw = dict(
+            body_template='aid_certificate.body.html',
+            template='Default.odt',
+            primary=True,
+            # print_directly=False,
+            content_type=ContentType.objects.get_for_model(ct.model))
+        kw.update(dd.str2kw('name', ct.model._meta.verbose_name))
+        ExcerptType.update_for_model(ct.model, **kw)
+        # yield attType(**kw)
     yield attType(
         body_template='presence_certificate.body.html',
         template='Default.odt',

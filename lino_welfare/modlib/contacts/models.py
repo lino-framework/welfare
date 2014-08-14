@@ -212,7 +212,7 @@ class PersonDetail(PersonDetail):
     """
 
     misc = dd.Panel("""
-    activity url
+    activity url client_contact_type
     is_obsolete is_client
     created modified
     reception.AppointmentsByPartner
@@ -321,7 +321,7 @@ class Companies(Companies):
     detail_layout = CompanyDetail()
 
 
-class CompaniesByClientContactType(Companies):
+class PartnersByClientContactType(Partners):
     master_key = 'client_contact_type'
     column_names = "name address_column phone gsm email *"
     auto_fit_column_widths = True

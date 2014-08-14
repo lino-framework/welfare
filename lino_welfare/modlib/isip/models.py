@@ -342,6 +342,9 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
         return self.client
     person = property(get_person)
 
+    def get_print_language(self):
+        return self.language
+
     @dd.chooser()
     def ending_choices(cls):
         return ContractEnding.objects.filter(use_in_isip=True)

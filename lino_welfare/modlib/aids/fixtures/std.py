@@ -38,6 +38,7 @@ def objects():
         de="Eingliederungseinkommen",
         en="Eingliederungseinkommen",
         fr="Revenu d'intégration")
+    kw.update(short_name="EiEi")
     kw.update(
         dd.babelkw(
             'long_name',
@@ -76,7 +77,6 @@ def objects():
         de="Erstattung",
         en="Erstattung",
         fr="Remboursement")
-    kw.update()
     yield aidType(**kw)
     kw = dd.babelkw(
         'name',
