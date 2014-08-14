@@ -73,6 +73,6 @@ def objects():
             kw = dict(granting=g, client=g.client)
             if ct.model == RefundConfirmation:
                 type, cycler = PARTNERS.pop()
-                kw.update(partner_type=type)
-                kw.update(partner=cycler.pop())
+                kw.update(doctor_type=type)
+                kw.update(doctor=cycler.pop())
             yield ct.model(**kw)

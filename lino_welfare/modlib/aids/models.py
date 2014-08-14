@@ -102,7 +102,7 @@ class Categories(dd.Table):
     """
 
 
-class AidType(dd.BabelNamed):
+class AidType(contacts.ContactRelated, dd.BabelNamed):
 
     # templates_group = 'aids/Aid'
 
@@ -112,7 +112,7 @@ class AidType(dd.BabelNamed):
 
     aid_regime = AidRegimes.field(default=AidRegimes.financial)
 
-    confirmation_type = ConfirmationTypes.field()
+    confirmation_type = ConfirmationTypes.field(blank=True)
 
     long_name = dd.BabelCharField(
         _("Long name"),
@@ -128,6 +128,9 @@ class AidType(dd.BabelNamed):
 
     confirmed_by_primary_coach = models.BooleanField(
         _("Confirmed by primary coach"), default=True)
+
+    pharmacy_type = dd.ForeignKey(
+        'pcsw.ClientContactType', blank=True, null=True)
 
     def get_long_name(self):
         return dd.babelattr(self, 'long_name') or unicode(self)
@@ -150,6 +153,7 @@ class AidTypes(dd.Table):
     name
     long_name
     print_directly confirmed_by_primary_coach board
+    company contact_person contact_role pharmacy_type
     aids.GrantingsByType
     """
 
@@ -159,7 +163,7 @@ class ConfirmationStates(dd.Workflow):
     verbose_name_plural = _("Aid confirmation states")
 
 add = ConfirmationStates.add_item
-add('01', _("Requested"), 'requested')
+add('01', _("Unconfirmed"), 'requested')
 add('02', _("Confirmed"), 'confirmed')
 # add('03', _("Cancelled"), 'cancelled')
 
@@ -200,11 +204,45 @@ def setup_aids_workflows(sender=None, **kw):
         _("Revoke"), states='confirmed')
 
 
+class Confirmable(dd.Model):
+              
+    class Meta:
+        abstract = True
+
+    signer = models.ForeignKey(
+        settings.SITE.user_model,
+        verbose_name=pgettext("aids", "Signer"),
+        blank=True, null=True,
+        related_name="%(app_label)s_%(class)s_set_by_signer",
+    )
+
+    state = ConfirmationStates.field(default=ConfirmationStates.requested)
+    workflow_state_field = 'state'
+
+    sign = SignConfirmation()
+
+    def disabled_fields(self, ar):
+        if self.state is ConfirmationStates.requested:
+            return set()
+        return self.CONFIRMED_FIELDS
+
+    @classmethod
+    def on_analyze(cls, site):
+        cls.CONFIRMED_FIELDS = dd.fields_list(
+            cls,
+            cls.get_confirmable_fields())
+        super(Confirmable, cls).on_analyze(site)
+
+    @classmethod
+    def get_confirmable_fields(cls):
+        return ''
+
+
 ##
 ## Granting
 ##
 
-class Granting(boards.BoardDecision, dd.DatePeriod):
+class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
 
     class Meta:
         abstract = dd.is_abstract_model('aids.Granting')
@@ -215,6 +253,12 @@ class Granting(boards.BoardDecision, dd.DatePeriod):
 
     aid_type = models.ForeignKey('aids.AidType')
 
+    def on_create(self, ar):
+        if self.client_id and self.aid_type_id \
+           and self.aid_type.confirmed_by_primary_coach:
+            self.signer = self.client.get_primary_coach()
+        super(Granting, self).on_create(ar)
+        
     def __unicode__(self):
         if self.aid_type_id is not None:
             t1 = self.aid_type.short_name or unicode(self.aid_type)
@@ -224,6 +268,10 @@ class Granting(boards.BoardDecision, dd.DatePeriod):
             #     t1, dd.fds(self.start_date))
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
+    @classmethod
+    def get_confirmable_fields(cls):
+        return 'client signer aid_type board decision_date start_date end_date'
+
     @dd.displayfield(_("Actions"))
     def custom_actions(self, ar, **kw):
         if self.aid_type_id is None:
@@ -232,6 +280,8 @@ class Granting(boards.BoardDecision, dd.DatePeriod):
         kv.update(granting=self)
         at = self.aid_type
         ct = at.confirmation_type
+        if not ct:
+            return ''
         sar = ar.spawn(ct.table_class, known_values=kv)
         txt = _("Create %s") % ct.model._meta.verbose_name
         btn = sar.insert_button(txt, icon_name=None)
@@ -262,14 +312,15 @@ class Grantings(dd.Table):
     order_by = ['-start_date']
 
     detail_layout = """
-    id client board decision_date
+    id client signer workflow_buttons
+    board decision_date
     aid_type start_date end_date custom_actions
     aids.ConfirmationsByGranting
     """
 
     insert_layout = """
     client
-    aid_type
+    aid_type signer
     board decision_date
     start_date end_date
     """
@@ -355,12 +406,13 @@ class GrantingsByType(GrantingsByX):
     column_names = "description_column client start_date end_date *"
 
 
+
 ##
 ## Confirmation
 ##
 
 class Confirmation(
-        dd.UserAuthored, contacts.ContactRelated,
+        Confirmable, dd.UserAuthored, contacts.ContactRelated,
         dd.DatePeriod, dd.Created, Certifiable):
               
     class Meta:
@@ -377,29 +429,25 @@ class Confirmation(
         _("Remark"),
         blank=True, format='html')
 
-    signer = models.ForeignKey(
-        settings.SITE.user_model,
-        verbose_name=pgettext("aids", "Signer"),
-        blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_set_by_signer",
-    )
-
-    state = ConfirmationStates.field(default=ConfirmationStates.requested)
-    workflow_state_field = 'state'
-
-    sign = SignConfirmation()
-
     def __unicode__(self):
         # if self.granting is not None:
         #     return '%s #%s' % (unicode(self.granting.aid_type), self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def on_create(self, ar):
-        if self.client_id and self.granting_id \
-           and self.granting.aid_type.confirmed_by_primary_coach:
-            self.signer = self.client.get_primary_coach()
+        if self.granting_id:
+            self.signer = self.granting.signer
+            if self.granting.aid_type_id:
+                at = self.granting.aid_type
+                self.company = at.company
+                self.contact_person = at.contact_person
+                self.contact_role = at.contact_role
         super(Confirmation, self).on_create(ar)
         
+    @classmethod
+    def get_confirmable_fields(cls):
+        return 'client signer granting remark start_date end_date'
+
     # def get_mailable_type(self):
     #     return self.granting.aid_type
 
@@ -410,10 +458,6 @@ class Confirmation(
         # Set project field when creating an excerpt from Client.
         kw.update(project=self.client)
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
-
-    @dd.displayfield(_("Information"))
-    def info(self, ar):
-        return ar.obj2html(self)
 
     @dd.virtualfield(dd.HtmlBox(""))
     def confirmation_text(self, ar):
@@ -551,6 +595,8 @@ class ConfirmationsByGranting(dd.VirtualTable):
         if mi is None:
             return []
         ct = mi.aid_type.confirmation_type
+        if not ct:
+            return []
         return ct.model.objects.filter(granting=mi).order_by()
 
     @dd.virtualfield('aids.SimpleConfirmation.start_date')
@@ -607,8 +653,8 @@ class SimpleConfirmations(Confirmations):
     """)  # , window_size=(70, 24))
 
     insert_layout = dd.FormLayout("""
-    client
-    granting start_date end_date
+    client granting:25
+    signer start_date end_date
     company contact_person language
     remark
     """, window_size=(50, 16))
@@ -714,35 +760,44 @@ class RefundConfirmation(Confirmation):
         verbose_name = _("Refund confirmation")
         verbose_name_plural = _("Refund confirmations")
 
-    urgent = models.BooleanField(_("urgent"), default=False)
-    partner_type = dd.ForeignKey(
+    doctor_type = dd.ForeignKey(
         'pcsw.ClientContactType', verbose_name=_("Doctor type"))
-    # doctor_type = DoctorTypes.field(default=DoctorTypes.family)
-    partner = dd.ForeignKey(
+    doctor = dd.ForeignKey(
         'contacts.Person', verbose_name=_("Doctor"),
+        blank=True, null=True)
+    pharmacy = dd.ForeignKey(
+        'contacts.Company', verbose_name=_("Pharmacy"),
         blank=True, null=True)
 
     @dd.chooser()
-    def partner_choices(cls, partner_type):
+    def doctor_choices(cls, doctor_type):
         fkw = dict()
-        if partner_type:
-            fkw.update(client_contact_type=partner_type)
+        if doctor_type:
+            fkw.update(client_contact_type=doctor_type)
         return dd.modules.contacts.Person.objects.filter(**fkw)
 
-    def create_partner_choice(self, text):
+    @dd.chooser()
+    def pharmacy_choices(cls, granting):
+        fkw = dict()
+        pt = granting.aid_type.pharmacy_type
+        if pt:
+            fkw.update(client_contact_type=pt)
+        return dd.modules.contacts.Company.objects.filter(**fkw)
+
+    def create_doctor_choice(self, text):
         """
-        Called when an unknown partner name was given.
+        Called when an unknown doctor name was given.
         Try to auto-create it.
         """
-        if not self.partner_type:
-            raise ValidationError("Cannot auto-create without partner type")
+        if not self.doctor_type:
+            raise ValidationError("Cannot auto-create without doctor type")
         Person = dd.modules.contacts.Person
         kw = parse_name(text)
         if len(kw) != 2:
             raise ValidationError(
                 "Cannot find first and last names in %r to \
-                auto-create partner", text)
-        kw.update(client_contact_type=self.partner_type)
+                auto-create doctor", text)
+        kw.update(client_contact_type=self.doctor_type)
         kw.update(title=_("Dr."))
         p = Person(**kw)
         p.full_clean()
@@ -750,7 +805,7 @@ class RefundConfirmation(Confirmation):
         return p
 
     @dd.chooser()
-    def partner_type_choices(cls):
+    def doctor_type_choices(cls):
         return dd.modules.pcsw.ClientContactType.objects.filter(
             can_refund=True)
 
@@ -758,12 +813,15 @@ class RefundConfirmation(Confirmation):
         if self.granting:
             yield E.b(self.granting.aid_type.get_long_name())
             yield ". "
-        if self.partner_type_id:
+        if self.doctor and self.doctor_type_id:
             yield _("Recipes issued by")
-            yield unicode(self.partner_type)
-        if self.partner:
+            yield unicode(self.doctor_type)
             yield " "
-            yield E.b(self.partner.get_full_name())
+            yield E.b(self.doctor.get_full_name())
+        if self.pharmacy:
+            yield _("Drugs delivered by")
+            yield " "
+            yield E.b(self.pharmacy.get_full_name())
 
 
 class RefundConfirmations(Confirmations):
@@ -772,16 +830,16 @@ class RefundConfirmations(Confirmations):
     detail_layout = dd.FormLayout("""
     id client signer workflow_buttons
     granting:25 start_date end_date
-    partner_type partner urgent
+    doctor_type doctor pharmacy
     confirmation_text
     company contact_person language printed
     remark
     """)  # , window_size=(70, 24))
 
     insert_layout = dd.FormLayout("""
-    client
-    granting:25 start_date end_date
-    partner_type partner urgent
+    client granting:25
+    signer start_date end_date
+    doctor_type doctor pharmacy
     company contact_person language printed
     remark
     """, window_size=(70, 20))
