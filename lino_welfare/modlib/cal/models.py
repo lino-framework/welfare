@@ -88,11 +88,11 @@ class Event(Event):
 
     @dd.chooser()
     def assigned_to_choices(self):
-        settings.SITE.user_model.objects.filter(calendar__isnull=False)
+        return settings.SITE.user_model.objects.filter(calendar__isnull=False)
 
     @dd.chooser()
     def user_choices(self):
-        settings.SITE.user_model.objects.filter(calendar__isnull=False)
+        return settings.SITE.user_model.objects.filter(calendar__isnull=False)
 
     def full_clean(self):
         if not self.event_type:
