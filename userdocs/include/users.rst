@@ -29,8 +29,8 @@
     
     The demo database has defined the following user profiles:
 
-    .. django2rst:: settings.SITE.login().show(lino.UserProfiles,
-          column_names='value name text level')
+    .. django2rst:: dd.show(lino.UserProfiles,
+                            column_names='value name text level')
 
     Note that we show here only the "general" or "system" userlevel.
     Open :menuselection:`Explorer --> System --> User Profiles`

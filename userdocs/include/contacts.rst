@@ -1,5 +1,5 @@
 ..
-  default userdocs for contacts module, used also by patrols,...
+  default userdocs for contacts module, used also by faggio, patrols,...
 
 .. contents:: 
    :local:
@@ -12,7 +12,7 @@
     keep contact data (address, phone numbers, ...).
 
     Every :ddref:`contacts.Partner`
-    can *also* be a
+    can also be a
     :ddref:`contacts.Person`
     or a 
     :ddref:`contacts.Company`
@@ -35,12 +35,8 @@
 
 .. actor:: contacts.Role
 
-    A Role is when a given 
-    :ddref:`contacts.Person`
-    plays a given 
-    :ddref:`contacts.RoleType`
-    in a given 
-    :ddref:`contacts.Company`.
+    A Role is when a given :ddref:`contacts.Person` plays a given
+    :ddref:`contacts.RoleType` in a given :ddref:`contacts.Company`.
 
 .. actor:: contacts.RoleType
 
@@ -51,12 +47,12 @@
     The default database comes with the following list of 
     :ddref:`contacts.RoleTypes`:
     
-    .. django2rst:: settings.SITE.login().show(contacts.RoleTypes)
+    .. django2rst:: dd.show(contacts.RoleTypes)
     
 .. actor:: contacts.CompanyType
 
     The default database comes with the following list of 
     organization types:
     
-    .. django2rst:: settings.SITE.login().show(contacts.CompanyTypes)
+    .. django2rst:: dd.show(contacts.CompanyTypes)
 
