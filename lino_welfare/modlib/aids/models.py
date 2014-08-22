@@ -191,7 +191,7 @@ class SignConfirmation(dd.Action):
             obj.state = ConfirmationStates.confirmed
             obj.save()
             ar.set_response(refresh=True)
-        msg = obj.confirmation_text(ar) + obj.remark
+        msg = obj.confirmation_text(ar)
         msg = _("You confirm that %(client)s %(text)s") % dict(
             client=obj.client, text=msg)
         ar.confirm(ok, msg, _("Are you sure?"))
@@ -237,6 +237,9 @@ class Confirmable(dd.Model):
     def get_confirmable_fields(cls):
         return ''
 
+    @dd.virtualfield(dd.HtmlBox(""))
+    def confirmation_text(self, ar):
+        return unicode(self)
 
 ##
 ## Granting
@@ -404,7 +407,6 @@ class GrantingsByClient(GrantingsByX):
 class GrantingsByType(GrantingsByX):
     master_key = 'aid_type'
     column_names = "description_column client start_date end_date *"
-
 
 
 ##
