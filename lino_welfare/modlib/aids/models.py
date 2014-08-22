@@ -239,8 +239,44 @@ class Confirmable(dd.Model):
 
     @dd.virtualfield(dd.HtmlBox(""))
     def confirmation_text(self, ar):
-        return unicode(self)
 
+        aid = self
+
+        def when():
+            if aid.start_date:
+                yield pgettext("date range", "since")
+                yield " "
+                yield E.b(dd.fdl(aid.start_date))
+            if aid.start_date and aid.end_date:
+                yield " "
+                yield _("and")
+            if aid.end_date:
+                yield " "
+                yield pgettext("date range", "until")
+                yield " "
+                yield E.b(dd.fdl(self.end_date))
+
+        def e2text(v):
+            if isinstance(v, types.GeneratorType):
+                return "".join([e2text(x) for x in v])
+            if E.iselement(v):
+                return E.tostring(v)
+            return unicode(v)
+            
+        kw = dict()
+        kw.update(what=e2text(self.confirmation_what(ar)))
+        kw.update(when=e2text(when()))
+        if kw['when'] or kw['what']:
+            if self.end_date and self.end_date <= settings.SITE.today():
+                s = _("received %(what)s %(when)s.") % kw
+            else:
+                s = _("receives %(what)s %(when)s.") % kw
+        else:
+            return ''
+        return s
+
+    def confirmation_what(self, ar):
+        yield E.b(self.aid_type.get_long_name())
 ##
 ## Granting
 ##
@@ -460,44 +496,6 @@ class Confirmation(
         # Set project field when creating an excerpt from Client.
         kw.update(project=self.client)
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
-
-    @dd.virtualfield(dd.HtmlBox(""))
-    def confirmation_text(self, ar):
-
-        aid = self
-
-        def when():
-            if aid.start_date:
-                yield pgettext("date range", "since")
-                yield " "
-                yield E.b(dd.fdl(aid.start_date))
-            if aid.start_date and aid.end_date:
-                yield " "
-                yield _("and")
-            if aid.end_date:
-                yield " "
-                yield pgettext("date range", "until")
-                yield " "
-                yield E.b(dd.fdl(self.end_date))
-
-        def e2text(v):
-            if isinstance(v, types.GeneratorType):
-                return "".join([e2text(x) for x in v])
-            if E.iselement(v):
-                return E.tostring(v)
-            return unicode(v)
-            
-        kw = dict()
-        kw.update(what=e2text(self.confirmation_what(ar)))
-        kw.update(when=e2text(when()))
-        if kw['when'] or kw['what']:
-            if self.end_date and self.end_date <= settings.SITE.today():
-                s = _("received %(what)s %(when)s.") % kw
-            else:
-                s = _("receives %(what)s %(when)s.") % kw
-        else:
-            return ''
-        return s
 
     def confirmation_what(self, ar):
         if self.granting:
