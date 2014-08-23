@@ -36,6 +36,15 @@ from lino_welfare.modlib.reception import Plugin
 pcsw = dd.resolve_app('pcsw')
 extensible = dd.resolve_app('extensible')
 
+# Make EventsByDay available also for reception agents who are not in
+# office group.
+cal = dd.resolve_app('cal')
+cal.EventsByDay.required.update(user_groups='office reception')
+
+MyWaitingVisitors.required.update(user_groups='coaching')
+MyBusyVisitors.required.update(user_groups='coaching')
+MyGoneVisitors.required.update(user_groups='coaching')
+
 
 class CreateClientVisit(dd.Action):
     show_in_bbar = True
