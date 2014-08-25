@@ -37,6 +37,7 @@ class Site(Site):
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
         kw.update(badges=None)  # remove the badges app
+        kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         return kw
 
 # the following line should not be active in a checked-in version

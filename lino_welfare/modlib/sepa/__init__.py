@@ -20,4 +20,4 @@ from lino.modlib.sepa import Plugin
 
 class Plugin(Plugin):
     
-    extends_models = ['sepa.Account']
+    extends_models = ['Account']

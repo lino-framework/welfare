@@ -219,7 +219,7 @@ dd.inject_action('pcsw.Coaching', create_visit=CreateCoachingVisit())
 class CoachingsByClient(pcsw.CoachingsByClient):
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
-    column_names = "user primary type actions"
+    column_names = "user type actions"
 
     #~ @classmethod
     #~ def get_data_rows(self,ar=None):

@@ -36,7 +36,7 @@ class Site(Site):
         kw.update(sepa=None)  # remove whole app
         # alternative implementations
         kw.update(courses='lino.modlib.courses')
-        kw.update(pcsw='lino_welfare.projects.chatelet.pcsw')
+        kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')
         return kw
 
     def setup_plugins(self):

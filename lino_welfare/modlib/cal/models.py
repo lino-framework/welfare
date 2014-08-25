@@ -19,6 +19,7 @@ The :xfile:`models.py` module for the :mod:`lino_welfare.modlib.cal` app.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext
 from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
 
@@ -135,13 +136,9 @@ class Event(Event):
         txt = naturalday(self.start_date)
         if self.start_time is not None:
             txt = "%s %s %s" % (
-                txt, ugettext("at"), self.start_time.strftime(settings.SITE.time_format_strftime))
+                txt, pgettext_lazy("(time)", "at"),
+                self.start_time.strftime(settings.SITE.time_format_strftime))
 
-        #~ if self.start_time is None:
-            #~ txt = naturalday(self.start_date)
-        #~ else:
-            #~ txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time))
-        #~ return txt
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self, txt)
 

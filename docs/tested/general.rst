@@ -42,19 +42,20 @@ Test whether :meth:`get_db_overview_rst
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
-110 models:
+111 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
  accounts.Account               14        49
  accounts.Chart                 5         1
  accounts.Group                 8         7
- addresses.Address              16        114
- aids.AidType                   12        7
+ addresses.Address              16        119
+ aids.AidType                   19        10
  aids.Category                  5         3
- aids.Confirmation              12        12
- aids.IncomeConfirmation        15        12
- aids.RefundConfirmation        14        0
+ aids.Granting                  10        10
+ aids.IncomeConfirmation        17        6
+ aids.RefundConfirmation        18        4
+ aids.SimpleConfirmation        15        10
  badges.Award                   6         0
  badges.Badge                   5         0
  boards.Board                   7         3
@@ -78,11 +79,11 @@ Test whether :meth:`get_db_overview_rst
  changes.Change                 9         0
  contacts.Company               30        46
  contacts.CompanyType           9         16
- contacts.Partner               25        152
- contacts.Person                32        101
+ contacts.Partner               26        157
+ contacts.Person                33        106
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         111
+ contenttypes.ContentType       4         112
  countries.Country              8         8
  countries.Place                10        76
  courses.Course                 5         3
@@ -94,9 +95,9 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         10
  debts.Budget                   11        5
  debts.Entry                    16        245
- excerpts.Excerpt               12        8
- excerpts.ExcerptType           15        8
- households.Household           28        5
+ excerpts.Excerpt               8         10
+ excerpts.ExcerptType           16        10
+ households.Household           29        5
  households.Member              12        10
  households.Type                5         4
  humanlinks.Link                4         36
@@ -132,9 +133,9 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    75        63
+ pcsw.Client                    76        63
  pcsw.ClientContact             7         0
- pcsw.ClientContactType         6         5
+ pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         77
  pcsw.CoachingEnding            7         4
  pcsw.CoachingType              7         3
@@ -180,13 +181,15 @@ Rolf is the local system administrator, he has a complete menu:
   - ÖSHZ : Datenkontrolle Klienten
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Büro : Meine Einfügetexte, Upload-Arten, Ausdruckarten, Notizarten, Ereignisarten
-  - System : Site-Parameter, Benutzer, Teams, Inhaltstypen, Hilfetexte
-  - Kontakte : Länder, Orte, Organisationsarten, Funktionen, Sprachen
+  - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
+  - System : Site-Parameter, Benutzer, Inhaltstypen, Hilfetexte
+  - Orte : Länder, Orte, 
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
+  - Kontakte : Organisationsarten, Funktionen, Sprachen
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
+  - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
   - Kurse : Kursinhalte

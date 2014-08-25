@@ -16,4 +16,4 @@ from lino.modlib.system import Plugin
 
 class Plugin(Plugin):
 
-    extends_models = ['system.SiteConfig']
+    extends_models = ['SiteConfig']

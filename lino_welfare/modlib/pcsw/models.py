@@ -238,15 +238,11 @@ class Client(contacts.Person,
     class Meta:
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
+        abstract = dd.is_abstract_model(__name__, 'Client')
         #~ ordering = ['last_name','first_name']
 
     workflow_state_field = 'client_state'
 
-    remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
-    gesdos_id = models.CharField(_("Gesdos ID"), max_length=40, blank=True)
-
-    is_cpas = models.BooleanField(_("receives social help"), default=False)
-    is_senior = models.BooleanField(_("is senior"), default=False)
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
 
@@ -261,15 +257,6 @@ class Client(contacts.Person,
         verbose_name=_("Birth country"), related_name='by_birth_place')
 
     civil_state = CivilState.field(blank=True)
-
-    health_insurance = dd.ForeignKey(
-        'contacts.Company', blank=True, null=True,
-        verbose_name=_("Health insurance"),
-        related_name='health_insurance_for')
-    pharmacy = dd.ForeignKey(
-        'contacts.Company', blank=True, null=True,
-        verbose_name=_("Pharmacy"), 
-        related_name='pharmacy_for')
 
     #~ residence_type = models.SmallIntegerField(blank=True,null=True,
         #~ verbose_name=_("Residence type"),
@@ -293,17 +280,6 @@ class Client(contacts.Person,
 
     declared_name = models.BooleanField(_("Declared name"), default=False)
 
-    # Arbeitslosengeld
-    income_ag = models.BooleanField(_("unemployment benefit"), default=False)
-    # Wartegeld
-    income_wg = models.BooleanField(_("waiting pay"), default=False)
-    # Krankengeld
-    income_kg = models.BooleanField(_("sickness benefit"), default=False)
-    income_rente = models.BooleanField(
-        _("retirement pension"), default=False)  # Rente
-    # Andere Einkommen
-    income_misc = models.BooleanField(_("other incomes"), default=False)
-
     is_seeking = models.BooleanField(_("is seeking work"), default=False)
     unavailable_until = models.DateField(
         blank=True, null=True, verbose_name=_("Unavailable until"))
@@ -313,12 +289,7 @@ class Client(contacts.Person,
 
     obstacles = models.TextField(_("Obstacles"), blank=True, null=True)
     skills = models.TextField(_("Other skills"), blank=True, null=True)
-    job_agents = models.CharField(max_length=100,
-                                  blank=True,  # null=True,
-                                  verbose_name=_("Job agents"))
 
-    #~ job_office_contact = models.ForeignKey("contacts.Contact",
-    #~ job_office_contact = models.ForeignKey("links.Link",
     job_office_contact = models.ForeignKey(
         "contacts.Role",
         blank=True, null=True,
@@ -334,16 +305,12 @@ class Client(contacts.Person,
     def on_analyze(cls, site):
         super(Client, cls).on_analyze(site)
         cls.declare_imported_fields(
-            '''remarks2
-            zip_code city country street street_no street_box
+            '''zip_code city country street street_no street_box
             birth_place language
             phone fax email
             card_type card_number card_valid_from card_valid_until
             noble_condition card_issuer
-            national_id health_insurance pharmacy
-            is_cpas is_senior
-            gesdos_id
-            nationality
+            national_id nationality
             ''')  # coach1
 
     mails_by_project = dd.ShowSlaveTable(
@@ -367,7 +334,6 @@ class Client(contacts.Person,
 
     def get_queryset(self, ar):
         return self.model.objects.select_related(
-            #~ 'country','city','coach1','coach2','nationality')
             'country', 'city', 'nationality')
 
     def get_excerpt_options(self, ar, **kw):
@@ -771,7 +737,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Person"))
 
     general2 = """
-    gender:10 title:20 id:10
+    gender:10 id:10
     first_name middle_name last_name
     birth_date age:10 national_id:15
     nationality:15 declared_name
@@ -821,23 +787,11 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Job search"))
 
     aids_tab = dd.Panel("""
-    status:55 income:25
+    in_belgium_since:15 residence_type
+    group:16
     sepa.AccountsByClient uploads.MedicalUploadsByClient
     aids.GrantingsByClient
-
     """, label=_("Aids"))
-
-    status = """
-    in_belgium_since:15 residence_type gesdos_id
-    job_agents group:16
-    """
-
-    income = """
-    # aid_type
-    income_ag  income_wg
-    income_kg   income_rente
-    income_misc
-    """
 
     newcomers_left = dd.Panel("""
     workflow_buttons
@@ -850,8 +804,8 @@ class ClientDetail(dd.FormLayout):
     #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
-    notes.NotesByProject 
-    excerpts.ExcerptsByProject 
+    notes.NotesByProject
+    excerpts.ExcerptsByProject
     # lino.ChangesByMaster
     """, label=_("History"))
 
@@ -870,10 +824,9 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30
-    is_cpas is_senior is_obsolete
+    is_obsolete
     created modified
-    remarks:30 remarks2:30
-    contacts.RolesByPerson
+    remarks:30 contacts.RolesByPerson
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     # the career tab will be overwritten by settings.chatelet
@@ -898,17 +851,6 @@ class ClientDetail(dd.FormLayout):
     jobs.CandidaturesByPerson
     jobs.ContractsByPerson
     """, label=_("Contracts"))
-
-
-#~ if not settings.SITE.use_eid_jslib:
-    #~ ClientDetail.eid_panel.replace('read_beid_card:12 ','')
-
-if settings.SITE.is_installed('cbss'):
-    ClientDetail.main += ' cbss'
-    ClientDetail.cbss = dd.Panel("""
-cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
-cbss_summary
-""", label=_("CBSS"), required=dict(user_groups='cbss'))
 
 
 def only_coached_by(qs, user):
@@ -967,7 +909,7 @@ class Clients(contacts.Persons):
     #~ title = _("All Clients")
     #~ title = _("Clients")
     required = dd.Required(user_groups='coaching')
-    model = Client
+    model = 'pcsw.Client'
     params_panel_hidden = True
 
     #~ create_event = cal.CreateClientEvent()
@@ -990,11 +932,11 @@ Nur Klienten, die mindestens so alt sind."""),
         aged_to=models.IntegerField(_("Aged to"),
             blank=True, null=True, help_text=u"""\
 Nur Klienten, die höchstens so alt sind."""),
-        coached_by=models.ForeignKey(users.User,
+        coached_by=models.ForeignKey('users.User',
                                      blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
-        and_coached_by=models.ForeignKey(users.User,
+        and_coached_by=models.ForeignKey('users.User',
                                          blank=True, null=True,
             verbose_name=_("and by"), help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
@@ -1302,7 +1244,7 @@ class PersonGroup(dd.Model):
 
 class PersonGroups(dd.Table):
     help_text = _("Liste des phases d'intégration possibles.")
-    model = PersonGroup
+    model = 'pcsw.PersonGroup'
     required = dict(user_level='manager', user_groups='integ')
 
     order_by = ["ref_name"]
@@ -1325,7 +1267,7 @@ class Activity(dd.Model):
 
 class Activities(dd.Table):
     help_text = _("""Liste des "activités" ou "codes profession".""")
-    model = Activity
+    model = 'pcsw.Activity'
     #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager')
     #~ label = _('Activities')
@@ -1352,7 +1294,7 @@ class DispenseReason(dd.BabelNamed, dd.Sequenced):
 class DispenseReasons(dd.Table):
     help_text = _("A list of reasons for being dispensed")
     required = dict(user_groups='coaching', user_level='manager')
-    model = DispenseReason
+    model = 'pcsw.DispenseReason'
     column_names = 'seqno name *'
     order_by = ['seqno']
 
@@ -1363,8 +1305,8 @@ class Dispense(dd.Model):
         verbose_name = _("Dispense")
         verbose_name_plural = _("Dispenses")
     allow_cascaded_delete = ['client']
-    client = dd.ForeignKey(Client)
-    reason = dd.ForeignKey(DispenseReason, verbose_name=_("Reason"))
+    client = dd.ForeignKey('pcsw.Client')
+    reason = dd.ForeignKey('pcsw.DispenseReason', verbose_name=_("Reason"))
     remarks = models.TextField(_("Remark"), blank=True)
     start_date = models.DateField(
         blank=True, null=True,
@@ -1378,7 +1320,7 @@ class Dispenses(dd.Table):
     order_by = ['start_date']
     help_text = _("Liste de dispenses")
     required = dict(user_groups='coaching', user_level='manager')
-    model = Dispense
+    model = 'pcsw.Dispense'
 
 
 class DispensesByClient(Dispenses):
@@ -1406,7 +1348,7 @@ class ExclusionTypes(dd.Table):
     le paiement d'une aide financière prévue.""")
     required = dict(user_level='manager')
     #~ required_user_level = UserLevels.manager
-    model = ExclusionType
+    model = 'pcsw.ExclusionType'
     #~ label = _('Exclusion Types')
 
 
@@ -1440,7 +1382,7 @@ class Exclusions(dd.Table):
     help_text = _("Liste des exclusions.")
 
     #~ required_user_level = UserLevels.manager
-    model = Exclusion
+    model = 'pcsw.Exclusion'
     #~ label = _('Exclusions')
 
 
@@ -1464,7 +1406,7 @@ class AidType(dd.BabelNamed):
 
 class AidTypes(dd.Table):
     help_text = _("Liste des types d'aide financière.")
-    model = AidType
+    model = 'pcsw.AidType'
     column_names = 'name *'
     #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager')
@@ -1479,7 +1421,7 @@ class ClientContactType(dd.BabelNamed):
 
 class ClientContactTypes(dd.Table):
     help_text = _("Liste des types de contacts client.")
-    model = ClientContactType
+    model = 'pcsw.ClientContactType'
     required = dd.required(user_level='manager')
 
     # TODO: can_refund is injected in aids
@@ -1497,7 +1439,7 @@ class ClientContactBase(contacts.ContactRelated):
     # also used by lino_welfare.modlib.aids.models.RefundPartner
     class Meta:
         abstract = True
-    type = dd.ForeignKey(ClientContactType, blank=True, null=True)
+    type = dd.ForeignKey('pcsw.ClientContactType', blank=True, null=True)
 
     @dd.chooser()
     def company_choices(self, type):
@@ -1545,7 +1487,7 @@ dd.update_field(ClientContact, 'contact_person',
 class ClientContacts(dd.Table):
     required = dd.required(user_level='admin')
     help_text = _("Liste des contacts clients.")
-    model = ClientContact
+    model = 'pcsw.ClientContact'
 
 
 class ContactsByClient(ClientContacts):

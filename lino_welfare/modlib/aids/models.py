@@ -284,7 +284,7 @@ class Confirmable(dd.Model):
 class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
 
     class Meta:
-        abstract = dd.is_abstract_model('aids.Granting')
+        abstract = dd.is_abstract_model(__name__, 'Granting')
         verbose_name = _("Aid granting")
         verbose_name_plural = _("Aid grantings")
 
@@ -636,7 +636,7 @@ simple aid during a given period.
     """
 
     class Meta:
-        abstract = dd.is_abstract_model('aids.SimpleConfirmation')
+        abstract = dd.is_abstract_model(__name__, 'SimpleConfirmation')
         verbose_name = _("Simple confirmation")
         verbose_name_plural = _("Simple confirmations")
 
@@ -676,7 +676,7 @@ class IncomeConfirmation(Confirmation):
     """
 
     class Meta:
-        abstract = dd.is_abstract_model('aids.IncomeConfirmation')
+        abstract = dd.is_abstract_model(__name__, 'IncomeConfirmation')
         verbose_name = _("Income confirmation")
         verbose_name_plural = _("Income confirmations")
 
@@ -756,7 +756,7 @@ class RefundConfirmation(Confirmation):
     """
 
     class Meta:
-        abstract = dd.is_abstract_model('aids.RefundConfirmation')
+        abstract = dd.is_abstract_model(__name__, 'RefundConfirmation')
         verbose_name = _("Refund confirmation")
         verbose_name_plural = _("Refund confirmations")
 

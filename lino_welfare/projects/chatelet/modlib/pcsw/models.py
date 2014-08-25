@@ -52,7 +52,4 @@ class ClientDetail(ClientDetail):
     """
 
 
-
-
-
 Clients.detail_layout = ClientDetail()

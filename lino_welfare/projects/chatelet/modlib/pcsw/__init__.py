@@ -16,3 +16,6 @@ Lino-Welfare extension of :mod:`lino_welfare.modlib.pcsw`
 """
 
 from lino_welfare.modlib.pcsw import Plugin
+
+# class Plugin(Plugin):
+#     extends_models = ['Client']

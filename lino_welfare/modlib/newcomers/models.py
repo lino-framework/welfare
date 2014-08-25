@@ -144,7 +144,7 @@ class Competence(dd.UserAuthored, mixins.Sequenced):
         verbose_name = _("Competence")
         verbose_name_plural = _("Competences")
 
-    faculty = models.ForeignKey(Faculty)
+    faculty = models.ForeignKey('newcomers.Faculty')
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         blank=True,
@@ -269,7 +269,7 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
                                    #~ default=amonthago,
           blank=True, null=True, help_text=u"""\
 Auch Klienten, die erst seit Kurzem begleitet sind."""),
-        coached_by=models.ForeignKey(users.User,
+        coached_by=models.ForeignKey('users.User',
                                      blank=True, null=True,
                                      verbose_name=_("Coached by")),
         #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
@@ -561,18 +561,18 @@ gilt er als doppelt so belastet wie sein Kollege.
 
 
 dd.inject_field(
-    pcsw.Client,
+    'pcsw.Client',
     'broker',
-    models.ForeignKey(
-        Broker,
+    dd.ForeignKey(
+        'newcomers.Broker',
         blank=True, null=True,
         help_text=_("The Broker who sent this Newcomer.")))
 
 dd.inject_field(
-    pcsw.Client,
+    'pcsw.Client',
     'faculty',
-    models.ForeignKey(
-        Faculty,
+    dd.ForeignKey(
+        'newcomers.Faculty',
         blank=True, null=True,
         help_text=_("The Faculty this client has been attributed to.")))
 

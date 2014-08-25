@@ -29,8 +29,10 @@ def objects():
 
     #~ from lino.modlib.users.models import
     from lino_welfare.modlib.newcomers.models import Broker, Faculty, Competence
-    from lino_welfare.modlib.contacts.models import Person
-    from lino_welfare.modlib.pcsw import models as pcsw
+    # from lino_welfare.modlib.contacts.models import Person
+    # from lino_welfare.modlib.pcsw import models as pcsw
+    pcsw = dd.resolve_app('pcsw')
+    Person = dd.resolve_model('contacts.Person')
 
     I = Instantiator(Broker).build
     #~ yield I(**babel_values('name',

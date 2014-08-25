@@ -1,4 +1,4 @@
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,12 +12,11 @@
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.modlib.contacts`
+Lino-Welfare extension of :mod:`lino_welfare.modlib.pcsw`
 """
 
-from lino.modlib.contacts import Plugin
+from lino_welfare.modlib.pcsw import Plugin
 
 
 class Plugin(Plugin):
-
-    extends_models = ['Partner', 'Person', 'Company']
+    extends_models = ['Client']

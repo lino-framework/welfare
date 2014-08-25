@@ -21,4 +21,4 @@ from lino.modlib.notes import Plugin
 
 class Plugin(Plugin):
 
-    extends_models = ['notes.Note']
+    extends_models = ['Note']

@@ -109,17 +109,17 @@ Reached upper date limit 2015-12-12
 >>> ses.show(cal.EventsByController.request(obj),
 ... column_names="linked_date summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========================= ===============
- When                      Summary
-------------------------- ---------------
- 2014 Mar 13 (Thu) 09:00   Appointment 1
- 2014 Jun 13 (Fri) 09:00   Appointment 2
- 2014 Sep 15 (Mon) 09:00   Appointment 3
- 2014 Dec 15 (Mon) 09:00   Appointment 4
- 2015 Mar 16 (Mon) 09:00   Appointment 5
- 2015 Jun 16 (Tue) 09:00   Appointment 6
- 2015 Sep 16 (Wed) 09:00   Appointment 7
-========================= ===============
+====================== ===============
+ When                   Summary
+---------------------- ---------------
+ Thu 3/13/14 (09:00)    Appointment 1
+ Fri 6/13/14 (09:00)    Appointment 2
+ Mon 9/15/14 (09:00)    Appointment 3
+ Mon 12/15/14 (09:00)   Appointment 4
+ Mon 3/16/15 (09:00)    Appointment 5
+ Tue 6/16/15 (09:00)    Appointment 6
+ Wed 9/16/15 (09:00)    Appointment 7
+====================== ===============
 <BLANKLINE>
 
 Mélanie has two appointments on 2014-09-15:
