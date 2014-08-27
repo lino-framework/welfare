@@ -120,9 +120,13 @@ class LanguageKnowledge(dd.Model):
     language = dd.ForeignKey("languages.Language")
     #~ language = models.ForeignKey("countries.Language")
     #~ language = fields.LanguageField()
-    spoken = properties.HowWell.field(blank=True, verbose_name=_("spoken"))
-    written = properties.HowWell.field(blank=True, verbose_name=_("written"))
-    native = models.BooleanField(_("native language"),default=False)
+    spoken = properties.HowWell.field(_("Spoken"), blank=True)
+    written = properties.HowWell.field(_("Written"), blank=True)
+    spoken_passively = properties.HowWell.field(_("Spoken (passively)"),
+                                                blank=True)
+    written_passively = properties.HowWell.field(_("Written (passively)"),
+                                                 blank=True)
+    native = models.BooleanField(_("native language"), default=False)
     cef_level = CefLevel.field(blank=True)  # ,null=True)
 
     def __unicode__(self):

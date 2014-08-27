@@ -265,8 +265,10 @@ class Client(contacts.Person,
         #~ )
     residence_type = ResidenceType.field(blank=True)
 
-    in_belgium_since = models.DateField(_("Lives in Belgium since"),
-                                        blank=True, null=True)
+    in_belgium_since = models.DateField(
+        _("Lives in Belgium since"), blank=True, null=True)
+    residence_until = models.DateField(
+        _("Residence until"), blank=True, null=True)
     unemployed_since = models.DateField(
         _("Seeking work since"), blank=True, null=True)
     needs_residence_permit = models.BooleanField(
@@ -423,7 +425,7 @@ class Client(contacts.Person,
         qs = self.coachings_by_client.filter(primary=True).distinct()
         if qs.count() == 1:
             return qs[0].user
-        logger.info("20140725 qs is %s", qs)
+        # logger.info("20140725 qs is %s", qs)
         return None
 
     primary_coach = property(get_primary_coach)

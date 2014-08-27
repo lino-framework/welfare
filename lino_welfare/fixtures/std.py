@@ -268,7 +268,7 @@ def objects():
     UploadAreas = dd.modules.uploads.UploadAreas
     uploadType = Instantiator(
         'uploads.UploadType',
-        upload_area=UploadAreas.cv, max_number=1, wanted=True).build
+        upload_area=UploadAreas.job_search, max_number=1, wanted=True).build
     yield uploadType(**dd.babelkw(
         'name',
         de=u"Personalausweis", fr=u"Carte d'identité", en="ID card"))
@@ -283,9 +283,8 @@ def objects():
         fr=u"Permis de conduire", en="Diving licence"))
     uploadType = Instantiator(
         'uploads.UploadType',
-        upload_area=UploadAreas.cv).build
-    yield uploadType(**dd.babelkw(
-        'name', de=u"Vertrag", fr=u"Contrat", en="Contract"))
+        upload_area=UploadAreas.job_search).build
+    yield uploadType(**dd.str2kw('name', _("Contract")))
     # settings.SITE.site_config.driving_licence_upload_type = p
     uploadType = Instantiator(
         'uploads.UploadType', upload_area=UploadAreas.medical).build
@@ -301,6 +300,11 @@ def objects():
             de="Behindertenausweis",
             fr="Certificat de handicap",
             en="Handicap certificate"))
+
+    uploadType = Instantiator(
+        'uploads.UploadType',
+        upload_area=UploadAreas.career).build
+    yield uploadType(wanted=True, **dd.str2kw('name', _("Diploma")))
 
     yield settings.SITE.site_config
 
