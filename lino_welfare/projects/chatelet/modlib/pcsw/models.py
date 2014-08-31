@@ -27,7 +27,7 @@ from lino_welfare.modlib.pcsw.models import *
 
 class ClientDetail(dd.FormLayout):
 
-    main = "general contact coaching aids_tab \
+    main = "general parties family aids_tab \
     work_tab career languages \
     competences contracts history calendar misc"
 
@@ -52,12 +52,12 @@ class ClientDetail(dd.FormLayout):
     gsm
     """
 
-    contact = dd.Panel("""
+    family = dd.Panel("""
     humanlinks.LinksByHuman:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
     """, label=_("Family situation"))
 
-    coaching = dd.Panel("""
+    parties = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
     """, label=_("Intervening parties"))
@@ -125,7 +125,8 @@ class ClientDetail(dd.FormLayout):
     cv.LanguageKnowledgesByPerson
     """, label=_("Languages"))
 
-    career = dd.Panel("career1 uploads.CareerUploadsByClient", label=_("Career"))
+    career = dd.Panel("career1 uploads.CareerUploadsByClient",
+                      label=_("Career"))
     career1 = """
     jobs.StudiesByPerson
     jobs.TrainingsByPerson

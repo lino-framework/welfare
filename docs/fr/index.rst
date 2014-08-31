@@ -15,4 +15,5 @@ Contenu
 
    glossaire
    fiche_technique
+   jobs
    

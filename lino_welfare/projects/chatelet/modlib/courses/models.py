@@ -26,7 +26,7 @@ from lino.modlib.courses.models import *
 
 CourseAreas.clear()
 add = CourseAreas.add_item
-add('S', _("Workshops"), 'default')  # internal name "default" required
+add('S', _("Integration workshops"), 'integ')
 add('B', _("Basic skills"), 'basic')
 add('J', _("Job search modules"), 'job')
 
@@ -38,8 +38,9 @@ class Course(Course):
         abstract = dd.is_abstract_model(__name__, 'Course')
 
 
-EnrolmentsByPupil.column_names = 'request_date course remark \
-workflow_buttons *'
+class EnrolmentsByPupil(EnrolmentsByPupil):
+    _course_area = CourseAreas.integ
+    column_names = 'request_date course remark workflow_buttons *'
 
 
 class BasicEnrolmentsByPupil(EnrolmentsByPupil):

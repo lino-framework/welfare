@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -23,91 +23,7 @@ msgstr ""
 msgid "Cours de langues"
 msgstr ""
 
-# cd22b61ee8414859a56a5af5c72d7e3e
-#: ../courses.rst:7
-msgid ""
-"Ce module facilite la gestion des demandes de cours, principalement de "
-"langues."
-msgstr ""
-
 # 3b2c35845ef94d45bf71a37a2a538934
-#: ../courses.rst:9
-msgid ""
-"Les :ddref:`courses.CourseProviders` (au pluriel) réfère à la table. "
-"L':ddref:`courses.CourseProvider` (singulier) réfère au modèle."
-msgstr ""
-
-# 654ec8ddf7394b028a8ab39ee193821a
-#: ../courses.rst:12
-msgid "Les :ddref:`courses.CourseRequests` inactives..."
-msgstr ""
-
-# 8bc9e1ad7cfb4c58ae19f59475ebedb8
-#: ../courses.rst:17
-msgid "Référence"
-msgstr ""
-
-# b910d54e5a564fe99710c81ec3ed41df
-#: ../courses.rst:0
-msgid "Course provider (model)"
-msgstr ""
-
-# 6a68d090c5554bb1b7b9e61fa4fd8f08
-#: ../courses.rst:0
-msgid "Course Content (model)"
-msgstr ""
-
-# 98af98bc74e841ce946eb85ec9acc785
-#: ../courses.rst:0
-msgid "Course Offer (model)"
-msgstr ""
-
-# d0ac4832413447159d87c36e0bb1ac48
-#: ../courses.rst:0
-msgid "Course (model)"
-msgstr ""
-
-# 2ebc35d703ef4fd2a8ab7e1e7ae43bae
-#: ../courses.rst:0
-msgid "Course Requests (model)"
-msgstr ""
-
-# 03c0f17b65db4323af86c98e217b881e
-#: ../courses.rst:0
-msgid "States (view)"
-msgstr ""
-
-# 7397aaf00c2747d9aaab546291b89fc6
-#: ../courses.rst:0
-msgid "Pending Course Requests (view)"
-msgstr ""
-
-# a96565c6b5d448cfa4978a14a51be7d4
-#: None:2
-msgid "Course provider (model in courses)"
-msgstr ""
-
-# f982a5a331e7404ba697a41ebfd67046
-#: None:2
-msgid "Course Content (model in courses)"
-msgstr ""
-
-# bca6d70f51db4451842707b8d05ee9e0
-#: None:2
-msgid "Course Offer (model in courses)"
-msgstr ""
-
-# 12f00b6658524ed7920b16cbfe5ed5e4
-#: None:2
-msgid "Course (model in courses)"
-msgstr ""
-
-# fddfe350e86740338e5bc063edd315d0
-#: None:2
-msgid "Course Requests (model in courses)"
-msgstr ""
-
-# 1bd276df54d54d919a525bcc02c82cf9
 #~ msgid ""
 #~ msgstr ""
 
@@ -133,5 +49,61 @@ msgstr ""
 
 # e68f8df932244b15a73999872b942e85
 #~ msgid "Course Requests (model in app \"courses\")"
+#~ msgstr ""
+
+# 654ec8ddf7394b028a8ab39ee193821a
+#~ msgid "Les :ddref:`courses.CourseRequests` inactives..."
+#~ msgstr ""
+
+# 8bc9e1ad7cfb4c58ae19f59475ebedb8
+#~ msgid "Référence"
+#~ msgstr ""
+
+# b910d54e5a564fe99710c81ec3ed41df
+#~ msgid "Course provider (model)"
+#~ msgstr ""
+
+# 6a68d090c5554bb1b7b9e61fa4fd8f08
+#~ msgid "Course Content (model)"
+#~ msgstr ""
+
+# 98af98bc74e841ce946eb85ec9acc785
+#~ msgid "Course Offer (model)"
+#~ msgstr ""
+
+# d0ac4832413447159d87c36e0bb1ac48
+#~ msgid "Course (model)"
+#~ msgstr ""
+
+# 2ebc35d703ef4fd2a8ab7e1e7ae43bae
+#~ msgid "Course Requests (model)"
+#~ msgstr ""
+
+# 03c0f17b65db4323af86c98e217b881e
+#~ msgid "States (view)"
+#~ msgstr ""
+
+# 7397aaf00c2747d9aaab546291b89fc6
+#~ msgid "Pending Course Requests (view)"
+#~ msgstr ""
+
+# a96565c6b5d448cfa4978a14a51be7d4
+#~ msgid "Course provider (model in courses)"
+#~ msgstr ""
+
+# f982a5a331e7404ba697a41ebfd67046
+#~ msgid "Course Content (model in courses)"
+#~ msgstr ""
+
+# bca6d70f51db4451842707b8d05ee9e0
+#~ msgid "Course Offer (model in courses)"
+#~ msgstr ""
+
+# 12f00b6658524ed7920b16cbfe5ed5e4
+#~ msgid "Course (model in courses)"
+#~ msgstr ""
+
+# fddfe350e86740338e5bc063edd315d0
+#~ msgid "Course Requests (model in courses)"
 #~ msgstr ""
 

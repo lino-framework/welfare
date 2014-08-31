@@ -29,4 +29,5 @@ Content
    todo
    changes
    fr/index
+   de/index
    

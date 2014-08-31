@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,85 +19,5 @@ msgstr ""
 #: ../courses.rst:5
 # f54079c6b5bc4de08c584b193d02ed3d
 msgid "Cours de langues"
-msgstr ""
-
-#: ../courses.rst:7
-# cd22b61ee8414859a56a5af5c72d7e3e
-msgid "Ce module facilite la gestion des demandes de cours, principalement de langues."
-msgstr ""
-
-#: ../courses.rst:9
-# 3b2c35845ef94d45bf71a37a2a538934
-msgid "Les :ddref:`courses.CourseProviders` (au pluriel) réfère à la table. L':ddref:`courses.CourseProvider` (singulier) réfère au modèle."
-msgstr ""
-
-#: ../courses.rst:12
-# 654ec8ddf7394b028a8ab39ee193821a
-msgid "Les :ddref:`courses.CourseRequests` inactives..."
-msgstr ""
-
-#: ../courses.rst:17
-# 8bc9e1ad7cfb4c58ae19f59475ebedb8
-msgid "Référence"
-msgstr ""
-
-#: ../courses.rst:0
-# b910d54e5a564fe99710c81ec3ed41df
-msgid "Course provider (model)"
-msgstr ""
-
-#: ../courses.rst:0
-# 6a68d090c5554bb1b7b9e61fa4fd8f08
-msgid "Course Content (model)"
-msgstr ""
-
-#: ../courses.rst:0
-# 98af98bc74e841ce946eb85ec9acc785
-msgid "Course Offer (model)"
-msgstr ""
-
-#: ../courses.rst:0
-# d0ac4832413447159d87c36e0bb1ac48
-msgid "Course (model)"
-msgstr ""
-
-#: ../courses.rst:0
-# 2ebc35d703ef4fd2a8ab7e1e7ae43bae
-msgid "Course Requests (model)"
-msgstr ""
-
-#: ../courses.rst:0
-# 03c0f17b65db4323af86c98e217b881e
-msgid "States (view)"
-msgstr ""
-
-#: ../courses.rst:0
-# 7397aaf00c2747d9aaab546291b89fc6
-msgid "Pending Course Requests (view)"
-msgstr ""
-
-#: None:2
-# a96565c6b5d448cfa4978a14a51be7d4
-msgid "Course provider (model in courses)"
-msgstr ""
-
-#: None:2
-# f982a5a331e7404ba697a41ebfd67046
-msgid "Course Content (model in courses)"
-msgstr ""
-
-#: None:2
-# bca6d70f51db4451842707b8d05ee9e0
-msgid "Course Offer (model in courses)"
-msgstr ""
-
-#: None:2
-# 12f00b6658524ed7920b16cbfe5ed5e4
-msgid "Course (model in courses)"
-msgstr ""
-
-#: None:2
-# fddfe350e86740338e5bc063edd315d0
-msgid "Course Requests (model in courses)"
 msgstr ""
 

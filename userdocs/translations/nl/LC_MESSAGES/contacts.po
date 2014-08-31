@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -21,106 +21,6 @@ msgstr ""
 # fb333855309f4476a75d8274c910cea1
 #: ../contacts.rst:5
 msgid "Contacts"
-msgstr ""
-
-# de051603116c48f7921cee84833cf83d
-#: ../contacts.rst:0
-msgid "Partner (model)"
-msgstr ""
-
-# 0e60873eed964fbba2053333ab627bd2
-#: ../contacts.rst:0
-msgid "Person (model)"
-msgstr ""
-
-# cf5a3590b7474a2484ed9ed01773b8b1
-#: ../contacts.rst:0
-msgid "Organisation (model)"
-msgstr ""
-
-# b3df495cc4fd49dbac6e462e34e718aa
-#: ../contacts.rst:0
-msgid "Contact Person (model)"
-msgstr ""
-
-# 8b7ebfce55064da3a5d542ce618193bf
-#: ../contacts.rst:0
-msgid "Function (model)"
-msgstr ""
-
-# cf5a3590b7474a2484ed9ed01773b8b1
-#: ../contacts.rst:0
-msgid "Organization Type (model)"
-msgstr ""
-
-# 407b15d2715946a8844c6e1eabcd4e3e
-#: ../contacts.rst:0
-msgid "obsolete (field)"
-msgstr ""
-
-# 7f81f16015ab428e9731882eab2a499d
-#: ../contacts.rst:0
-msgid "activity (model)"
-msgstr ""
-
-# 60f102b4a8ce4b76935831fb8eab215e
-#: ../contacts.rst:0
-msgid "Household (model)"
-msgstr ""
-
-# 74385f507e55493c82edcf7cc4443fe8
-#: ../contacts.rst:0
-msgid "Household Type (model)"
-msgstr ""
-
-# c494c5748c004181871c6c2ae4f57159
-#: None:2
-msgid "Partner (model in contacts)"
-msgstr ""
-
-# f2de402f49b04de9985dda7bf6f07ab0
-#: None:2
-msgid "Person (model in contacts)"
-msgstr ""
-
-# 38bfb6b5d5184f0c8489138c7a27f81f
-#: None:2
-msgid "Organisation (model in contacts)"
-msgstr ""
-
-# 49c83955c749493580d7dad448ca9020
-#: None:2
-msgid "Contact Person (model in contacts)"
-msgstr ""
-
-# 4fb99653c2094ef0b7a2242447c2dd39
-#: None:2
-msgid "Function (model in contacts)"
-msgstr ""
-
-# b8b5696733c94bcc947078c264f0ca93
-#: None:2
-msgid "Organization Type (model in contacts)"
-msgstr ""
-
-# 9e3bc83a911f4ba288e5240a8b525634
-#: None:2
-msgid "obsolete (field in :ref:`Partner <welfare.contacts.partner>`)"
-msgstr ""
-
-# d1f38b6fcb224ae7a61cff98fbec02d1
-#: None:2
-msgid "activity (model in pcsw)"
-msgstr ""
-
-# 7c089658c04743e2be46baee9c006976
-#: None:2
-msgid "Household (model in households)"
-msgstr ""
-
-# 5b230734e1eb4f959f841b6fad1b574b
-#: None:2
-msgid "Household Type (model in households)"
 msgstr ""
 
 # 6301ed01d1104ce38865622af126a16c
@@ -185,5 +85,85 @@ msgstr ""
 
 # 6f7749bbb7d8473c9f0d4c3224b02186
 #~ msgid "Household Type (model in app \"households\")"
+#~ msgstr ""
+
+# de051603116c48f7921cee84833cf83d
+#~ msgid "Partner (model)"
+#~ msgstr ""
+
+# 0e60873eed964fbba2053333ab627bd2
+#~ msgid "Person (model)"
+#~ msgstr ""
+
+# cf5a3590b7474a2484ed9ed01773b8b1
+#~ msgid "Organisation (model)"
+#~ msgstr ""
+
+# b3df495cc4fd49dbac6e462e34e718aa
+#~ msgid "Contact Person (model)"
+#~ msgstr ""
+
+# 8b7ebfce55064da3a5d542ce618193bf
+#~ msgid "Function (model)"
+#~ msgstr ""
+
+# cf5a3590b7474a2484ed9ed01773b8b1
+#~ msgid "Organization Type (model)"
+#~ msgstr ""
+
+# 407b15d2715946a8844c6e1eabcd4e3e
+#~ msgid "obsolete (field)"
+#~ msgstr ""
+
+# 7f81f16015ab428e9731882eab2a499d
+#~ msgid "activity (model)"
+#~ msgstr ""
+
+# 60f102b4a8ce4b76935831fb8eab215e
+#~ msgid "Household (model)"
+#~ msgstr ""
+
+# 74385f507e55493c82edcf7cc4443fe8
+#~ msgid "Household Type (model)"
+#~ msgstr ""
+
+# c494c5748c004181871c6c2ae4f57159
+#~ msgid "Partner (model in contacts)"
+#~ msgstr ""
+
+# f2de402f49b04de9985dda7bf6f07ab0
+#~ msgid "Person (model in contacts)"
+#~ msgstr ""
+
+# 38bfb6b5d5184f0c8489138c7a27f81f
+#~ msgid "Organisation (model in contacts)"
+#~ msgstr ""
+
+# 49c83955c749493580d7dad448ca9020
+#~ msgid "Contact Person (model in contacts)"
+#~ msgstr ""
+
+# 4fb99653c2094ef0b7a2242447c2dd39
+#~ msgid "Function (model in contacts)"
+#~ msgstr ""
+
+# b8b5696733c94bcc947078c264f0ca93
+#~ msgid "Organization Type (model in contacts)"
+#~ msgstr ""
+
+# 9e3bc83a911f4ba288e5240a8b525634
+#~ msgid "obsolete (field in :ref:`Partner <welfare.contacts.partner>`)"
+#~ msgstr ""
+
+# d1f38b6fcb224ae7a61cff98fbec02d1
+#~ msgid "activity (model in pcsw)"
+#~ msgstr ""
+
+# 7c089658c04743e2be46baee9c006976
+#~ msgid "Household (model in households)"
+#~ msgstr ""
+
+# 5b230734e1eb4f959f841b6fad1b574b
+#~ msgid "Household Type (model in households)"
 #~ msgstr ""
 

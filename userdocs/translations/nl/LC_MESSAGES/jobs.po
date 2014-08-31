@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -18,237 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-# 5220c7b85e8648d6b9a1510719e30ad1
-#: ../jobs.rst:5
-msgid "Insertion socio-professionnelle"
-msgstr ""
-
-# 49374d6ec68540eaaff9a61d72e0ad27
-#: ../jobs.rst:7
-msgid ""
-"Ce module permet de gérer des projects de mise au travail selon les "
-"articles 60§7 et 61 de la loi organique des CPAS."
-msgstr ""
-
-# a8c2c62d708240708d53d1d80681186c
-#: ../jobs.rst:11
-msgid ""
-"Si pour des jeunes en-dessous des 25 ans on parle surtout "
-"d':ref:`welfare.isip` et de leur *enseignement*, pour les adultes nous "
-"parlons d'**insertion socio-professionnelle** et nous concentrons au "
-"**travail**."
-msgstr ""
-
-# aa46df561d4442aba3e41ce256bd8886
-#: ../jobs.rst:19
-msgid "Aperçu"
-msgstr ""
-
-# c6419697c5aa4a299110044f7d28d856
-#: ../jobs.rst:21
-msgid ""
-"Le CPAS gère une liste d':ddref:`jobs.Jobs` (de mise au travail). Ces "
-"endroits de mise au travail sont généralement des endroits de travail "
-"spécialisés à l'accqueil temporaire de personnes à intégrer. Exemple:"
-msgstr ""
-
-# f072e1b020fa4bd4b84b197e8208b6b5
-#: ../jobs.rst:31
-msgid ""
-"Indépendamment de ces endroits de travail le CPAS peut gérer une liste "
-"d':ddref:`jobs.Offers` du marché normal."
-msgstr ""
-
-# ce232bc13024449a80feb20f138c29a0
-#: ../jobs.rst:34
-msgid ""
-"Une :ddref:`jobs.Candidature` représente le fait qu'un "
-":ddref:`pcsw.Client` donné voudrait travailler à un :ddref:`jobs.Job` "
-"donné. Ceci implique entre autres que l'agent d'insertion responsable "
-"l'estime potentiellement apte à assumer ce travail."
-msgstr ""
-
-# e1e2f6750a17471681a79a3848fb1884
-#: ../jobs.rst:40
-msgid ""
-"Eine Kandidatur ist \"wenn ein :ddref:`pcsw.Client` sich für eine "
-":ddref:`jobs.Job` bewirbt\". Das beinhaltet u.a. auch die Information, "
-"dass der verantwortliche Begleiter die Person als für diese Stelle "
-"geeignet einstuft."
-msgstr ""
-
-# 9c9f0873f64947feb815243b639618f6
-#: ../jobs.rst:45
-msgid ""
-"Si un :ddref:`pcsw.Client` introduit une :ddref:`jobs.Candidature`, "
-"l'agent d'insertion note que"
-msgstr ""
-
-# 034f943a27944f798086a2c8c4e0a94b
-#: ../jobs.rst:49
-msgid "Une telle Candidature peut référer soit à un Endroit soit à une Offre."
-msgstr ""
-
-# 627565bd059d4f6ab31bf102b114d9b1
-#: ../jobs.rst:51
-msgid "Et puis on fera un :ddref:`jobs.Contract`."
-msgstr ""
-
-# bdef7290d93d46b6a1b310720b004b8d
-#: ../jobs.rst:54
-msgid "Référence"
-msgstr ""
-
-# 8698647fcba04f32b43f56e4ba9c007f
-#: ../jobs.rst:0
-msgid "Job (model)"
-msgstr ""
-
-# a0c7285bb34943dfba90f17d0c14f379
-#: ../jobs.rst:0
-msgid "Job Provider (model)"
-msgstr ""
-
-# bfc917068827432f80a78ea5e2a3c730
-#: ../jobs.rst:0
-msgid "Art.60§7 contract (model)"
-msgstr ""
-
-# 6a991ddd434c4fab9cd74a3b2f11aa1a
-#: ../jobs.rst:0
-msgid "Job Candidature (model)"
-msgstr ""
-
-# ec35ae1333d6447c9301542a8436d3ce
-#: ../jobs.rst:0
-msgid "Work Regime (model)"
-msgstr ""
-
-# 8f06666059f54943abbb716cdc3940d7
-#: ../jobs.rst:0
-msgid "Job Sector (model)"
-msgstr ""
-
-# 73b78f1f31474e97bde2b5e8d94a5a34
-#: ../jobs.rst:0
-msgid "Job Function (model)"
-msgstr ""
-
-# e200b4f8534a44d6b66e496fd4d00139
-#: ../jobs.rst:0
-msgid "Work Schedule (model)"
-msgstr ""
-
-# d744bd6af8bd41e4b5d8dd41d7a0a2ba
-#: ../jobs.rst:0
-msgid "Job Offer (model)"
-msgstr ""
-
-# 7477d14e203e4853a46fa14c070635fe
-#: ../jobs.rst:0
-msgid "study or education (model)"
-msgstr ""
-
-# 0dc7a67481ac4ffd9b324c87f9e346f8
-#: ../jobs.rst:0
-msgid "Job Experience (model)"
-msgstr ""
-
-# a3da9c7611a84a4eb72e3ad935cc8061
-#: ../jobs.rst:0
-msgid "Job Type (model)"
-msgstr ""
-
-# 96cde9e4bff640c28a5de76089c63116
-#: ../jobs.rst:0
-msgid "Job Contract Type (model)"
-msgstr ""
-
-# 86627586bb5c4060b7959856cf488a38
-#: ../jobs.rst:0
-msgid "Contracts Situation (view)"
-msgstr ""
-
-# cceddc76ea624f8196ad3cf8a45ec187
-#: ../jobs.rst:0
-msgid "Studies (view)"
-msgstr ""
-
-# 16482ae1a83c4bbc8774a20bac5e4f8f
-#: ../jobs.rst:0
-msgid "Job Experiences (view)"
-msgstr ""
-
-# d80eff2ec76440a6a7bf97a711b226b8
-#: None:2
-msgid "Job (model in jobs)"
-msgstr ""
-
-# f5fb28baeb5a4ff387618388344a9fe1
-#: None:2
-msgid "Job Provider (model in jobs)"
-msgstr ""
-
-# e0adb21bb5ac42c6b4946dbb9402f2d2
-#: None:2
-msgid "Art.60§7 contract (model in jobs)"
-msgstr ""
-
-# 46c6ad3a2ef64c5f8a59ed6edee46377
-#: None:2
-msgid "Job Candidature (model in jobs)"
-msgstr ""
-
-# 5e244359dd974e3a9ffbb7548823f384
-#: None:2
-msgid "Work Regime (model in jobs)"
-msgstr ""
-
-# 9297866790f1415c990721fc5b7916c9
-#: None:2
-msgid "Job Sector (model in jobs)"
-msgstr ""
-
-# d119660bc54d4528891bb2ced01a72ed
-#: None:2
-msgid "Job Function (model in jobs)"
-msgstr ""
-
-# d7301e7125ad4164aabaf52fec0210d9
-#: None:2
-msgid "Work Schedule (model in jobs)"
-msgstr ""
-
-# c13897f575f14fd884086cbd01e1688e
-#: None:2
-msgid "Job Offer (model in jobs)"
-msgstr ""
-
-# cdb895d6c04b4675b711ee4c0dc84054
-#: None:2
-msgid "study or education (model in jobs)"
-msgstr ""
-
-# d593c86fa5b8463abe776b7e65fb0085
-#: None:2
-msgid "Job Experience (model in jobs)"
-msgstr ""
-
-# 9da9600b30e84d91b1e1389f0a7f9354
-#: None:2
-msgid "Job Type (model in jobs)"
-msgstr ""
-
-# 0ab5b650d68d437690c6b2b49ddfc737
-#: None:2
-msgid "Job Contract Type (model in jobs)"
-msgstr ""
-
 # c4159658a2b646b29723da7095d11bf1
 #~ msgid "This list helps you to make decisions like:"
 #~ msgstr ""
 
-# da433ba9a9e14398a24ce5999edce9d8
+# 9c9f0873f64947feb815243b639618f6
 #~ msgid ""
 #~ msgstr ""
 
@@ -318,5 +92,141 @@ msgstr ""
 
 # cceddc76ea624f8196ad3cf8a45ec187
 #~ msgid "Studies & education (view)"
+#~ msgstr ""
+
+# 5220c7b85e8648d6b9a1510719e30ad1
+#~ msgid "Insertion socio-professionnelle"
+#~ msgstr ""
+
+# aa46df561d4442aba3e41ce256bd8886
+#~ msgid "Aperçu"
+#~ msgstr ""
+
+# 034f943a27944f798086a2c8c4e0a94b
+#~ msgid "Une telle Candidature peut référer soit à un Endroit soit à une Offre."
+#~ msgstr ""
+
+# 627565bd059d4f6ab31bf102b114d9b1
+#~ msgid "Et puis on fera un :ddref:`jobs.Contract`."
+#~ msgstr ""
+
+# bdef7290d93d46b6a1b310720b004b8d
+#~ msgid "Référence"
+#~ msgstr ""
+
+# 8698647fcba04f32b43f56e4ba9c007f
+#~ msgid "Job (model)"
+#~ msgstr ""
+
+# a0c7285bb34943dfba90f17d0c14f379
+#~ msgid "Job Provider (model)"
+#~ msgstr ""
+
+# bfc917068827432f80a78ea5e2a3c730
+#~ msgid "Art.60§7 contract (model)"
+#~ msgstr ""
+
+# 6a991ddd434c4fab9cd74a3b2f11aa1a
+#~ msgid "Job Candidature (model)"
+#~ msgstr ""
+
+# ec35ae1333d6447c9301542a8436d3ce
+#~ msgid "Work Regime (model)"
+#~ msgstr ""
+
+# 8f06666059f54943abbb716cdc3940d7
+#~ msgid "Job Sector (model)"
+#~ msgstr ""
+
+# 73b78f1f31474e97bde2b5e8d94a5a34
+#~ msgid "Job Function (model)"
+#~ msgstr ""
+
+# e200b4f8534a44d6b66e496fd4d00139
+#~ msgid "Work Schedule (model)"
+#~ msgstr ""
+
+# d744bd6af8bd41e4b5d8dd41d7a0a2ba
+#~ msgid "Job Offer (model)"
+#~ msgstr ""
+
+# 7477d14e203e4853a46fa14c070635fe
+#~ msgid "study or education (model)"
+#~ msgstr ""
+
+# 0dc7a67481ac4ffd9b324c87f9e346f8
+#~ msgid "Job Experience (model)"
+#~ msgstr ""
+
+# a3da9c7611a84a4eb72e3ad935cc8061
+#~ msgid "Job Type (model)"
+#~ msgstr ""
+
+# 96cde9e4bff640c28a5de76089c63116
+#~ msgid "Job Contract Type (model)"
+#~ msgstr ""
+
+# 86627586bb5c4060b7959856cf488a38
+#~ msgid "Contracts Situation (view)"
+#~ msgstr ""
+
+# cceddc76ea624f8196ad3cf8a45ec187
+#~ msgid "Studies (view)"
+#~ msgstr ""
+
+# 16482ae1a83c4bbc8774a20bac5e4f8f
+#~ msgid "Job Experiences (view)"
+#~ msgstr ""
+
+# d80eff2ec76440a6a7bf97a711b226b8
+#~ msgid "Job (model in jobs)"
+#~ msgstr ""
+
+# f5fb28baeb5a4ff387618388344a9fe1
+#~ msgid "Job Provider (model in jobs)"
+#~ msgstr ""
+
+# e0adb21bb5ac42c6b4946dbb9402f2d2
+#~ msgid "Art.60§7 contract (model in jobs)"
+#~ msgstr ""
+
+# 46c6ad3a2ef64c5f8a59ed6edee46377
+#~ msgid "Job Candidature (model in jobs)"
+#~ msgstr ""
+
+# 5e244359dd974e3a9ffbb7548823f384
+#~ msgid "Work Regime (model in jobs)"
+#~ msgstr ""
+
+# 9297866790f1415c990721fc5b7916c9
+#~ msgid "Job Sector (model in jobs)"
+#~ msgstr ""
+
+# d119660bc54d4528891bb2ced01a72ed
+#~ msgid "Job Function (model in jobs)"
+#~ msgstr ""
+
+# d7301e7125ad4164aabaf52fec0210d9
+#~ msgid "Work Schedule (model in jobs)"
+#~ msgstr ""
+
+# c13897f575f14fd884086cbd01e1688e
+#~ msgid "Job Offer (model in jobs)"
+#~ msgstr ""
+
+# cdb895d6c04b4675b711ee4c0dc84054
+#~ msgid "study or education (model in jobs)"
+#~ msgstr ""
+
+# d593c86fa5b8463abe776b7e65fb0085
+#~ msgid "Job Experience (model in jobs)"
+#~ msgstr ""
+
+# 9da9600b30e84d91b1e1389f0a7f9354
+#~ msgid "Job Type (model in jobs)"
+#~ msgstr ""
+
+# 0ab5b650d68d437690c6b2b49ddfc737
+#~ msgid "Job Contract Type (model in jobs)"
 #~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -21,52 +21,6 @@ msgstr ""
 # 8f56a971438447ad9033f9a9337d8f82
 #: ../cv.rst:5
 msgid "Curriculum vitae"
-msgstr ""
-
-# eac2dfeb18f84d90a33685182db90d3b
-#: ../cv.rst:0
-msgid "CEF levels (view)"
-msgstr ""
-
-# dc403b22dbef4088aedf98a2f5a388b8
-#: ../cv.rst:0
-msgid "language knowledge (model)"
-msgstr ""
-
-# 62619cd071644c40ad995b28d6748ea5
-#: ../cv.rst:0
-msgid "Property (model)"
-msgstr ""
-
-# b6313e80a41d45bfa4945f18bc57d5cb
-#: ../cv.rst:0
-msgid "Property Type (model)"
-msgstr ""
-
-# fe42fc4bd9c043b7b7f18ca4f8c5ffda
-#: ../cv.rst:0
-msgid "Property Group (model)"
-msgstr ""
-
-# beb891bba51947d8a00b39477d01b3cc
-#: None:2
-msgid "language knowledge (model in cv)"
-msgstr ""
-
-# 661f6ec1db434308a35e6d29c88d3d65
-# 80bbb795d88341f2b0b2b11c8595771b
-#: None:2
-msgid "Property (model in properties)"
-msgstr ""
-
-# f5ba434f37744f999b50710459d7f6a1
-#: None:2
-msgid "Property Type (model in properties)"
-msgstr ""
-
-# f41acbaeff2648ddae8ab2d6f3afdf15
-#: None:2
-msgid "Property Group (model in properties)"
 msgstr ""
 
 # 5f086ce2af184816976784c2706276f8
@@ -88,5 +42,42 @@ msgstr ""
 
 # ac03063d144e4dac8722565b5f23a157
 #~ msgid "Property Group (model in app \"properties\")"
+#~ msgstr ""
+
+# eac2dfeb18f84d90a33685182db90d3b
+#~ msgid "CEF levels (view)"
+#~ msgstr ""
+
+# dc403b22dbef4088aedf98a2f5a388b8
+#~ msgid "language knowledge (model)"
+#~ msgstr ""
+
+# 62619cd071644c40ad995b28d6748ea5
+#~ msgid "Property (model)"
+#~ msgstr ""
+
+# b6313e80a41d45bfa4945f18bc57d5cb
+#~ msgid "Property Type (model)"
+#~ msgstr ""
+
+# fe42fc4bd9c043b7b7f18ca4f8c5ffda
+#~ msgid "Property Group (model)"
+#~ msgstr ""
+
+# beb891bba51947d8a00b39477d01b3cc
+#~ msgid "language knowledge (model in cv)"
+#~ msgstr ""
+
+# 661f6ec1db434308a35e6d29c88d3d65
+# 80bbb795d88341f2b0b2b11c8595771b
+#~ msgid "Property (model in properties)"
+#~ msgstr ""
+
+# f5ba434f37744f999b50710459d7f6a1
+#~ msgid "Property Type (model in properties)"
+#~ msgstr ""
+
+# f41acbaeff2648ddae8ab2d6f3afdf15
+#~ msgid "Property Group (model in properties)"
 #~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: 2013-03-31 18:21+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -43,17 +43,17 @@ msgstr ""
 msgid "User Profiles (view)"
 msgstr ""
 
-# 2c141464dfd84a21ae2863632304876f
+# ba51215296234f0e86734b745b9979d7
 #: None:2
 msgid "User (model in users)"
 msgstr ""
 
-# 5335435ac9034744958f1d52710b92e2
+# 313828039b8e4ffc9c9eaa6e761ae8b6
 #: None:2
 msgid "User Profile (field in :ref:`User <welfare.users.user>`)"
 msgstr ""
 
-# 4c8291a0268647c7930a651eadc56c6e
+# 73fde67ba33040e3a8a1b5fd0402b6da
 #: None:2
 msgid "Authority (model in users)"
 msgstr ""

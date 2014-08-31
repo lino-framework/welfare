@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Documentation 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-14 14:47+0300\n"
+"POT-Creation-Date: 2014-09-01 01:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,54 +19,5 @@ msgstr ""
 #: ../cv.rst:5
 # 8f56a971438447ad9033f9a9337d8f82
 msgid "Curriculum vitae"
-msgstr ""
-
-#: ../cv.rst:0
-# eac2dfeb18f84d90a33685182db90d3b
-msgid "CEF levels (view)"
-msgstr ""
-
-#: ../cv.rst:0
-# dc403b22dbef4088aedf98a2f5a388b8
-msgid "language knowledge (model)"
-msgstr ""
-
-#: ../cv.rst:0
-#: ../cv.rst:0
-# 62619cd071644c40ad995b28d6748ea5
-# 62619cd071644c40ad995b28d6748ea5
-msgid "Property (model)"
-msgstr ""
-
-#: ../cv.rst:0
-# b6313e80a41d45bfa4945f18bc57d5cb
-msgid "Property Type (model)"
-msgstr ""
-
-#: ../cv.rst:0
-# fe42fc4bd9c043b7b7f18ca4f8c5ffda
-msgid "Property Group (model)"
-msgstr ""
-
-#: None:2
-# beb891bba51947d8a00b39477d01b3cc
-msgid "language knowledge (model in cv)"
-msgstr ""
-
-#: None:2
-#: None:2
-# 661f6ec1db434308a35e6d29c88d3d65
-# 80bbb795d88341f2b0b2b11c8595771b
-msgid "Property (model in properties)"
-msgstr ""
-
-#: None:2
-# f5ba434f37744f999b50710459d7f6a1
-msgid "Property Type (model in properties)"
-msgstr ""
-
-#: None:2
-# f41acbaeff2648ddae8ab2d6f3afdf15
-msgid "Property Group (model in properties)"
 msgstr ""
 
