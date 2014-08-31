@@ -727,7 +727,7 @@ class IncomeConfirmationsByCategory(IncomeConfirmations):
 ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmations)
 
 ##
-##
+## REFUND CONFIRMATIONS
 ##
 
 

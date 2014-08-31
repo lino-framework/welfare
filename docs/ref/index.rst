@@ -7,6 +7,7 @@ Lino Welfare class reference
 .. toctree::
    :maxdepth: 2
 
+   pcsw
    aids
    debts
    integ

@@ -34,19 +34,20 @@ class Site(Site):
         kw = super(Site, self).get_apps_modifiers(**kw)
         kw.update(debts=None)  # remove whole app
         kw.update(sepa=None)  # remove whole app
+        kw.update(iban=None)  # remove whole app
         # alternative implementations
-        kw.update(courses='lino.modlib.courses')
+        kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')
         return kw
 
-    def setup_plugins(self):
-        """
-        Change the default value of certain plugin settings.
+    # def setup_plugins(self):
+    #     """
+    #     Change the default value of certain plugin settings.
 
-        """
-        self.plugins.courses.configure(pupil_model='pcsw.Client')
-        # self.plugins.courses.configure(teacher_model='users.User')
-        super(Site, self).setup_plugins()
+    #     """
+    #     self.plugins.courses.configure(pupil_model='pcsw.Client')
+    #     # self.plugins.courses.configure(teacher_model='users.User')
+    #     super(Site, self).setup_plugins()
 
     # def get_default_language(self):
     #     return 'fr'
@@ -78,7 +79,7 @@ class Site(Site):
         add('900', _("Administrator"),               'A A A A A A A A',
             name='admin')
 
-    def get_admin_main_items(self, ar):
+    def get_admin_main_items(self):
 
         # Mathieu: je remarque que le module "Visiteurs qui
         # m'attendent" ne fonctionne plus. Hors, c'est surtout ce

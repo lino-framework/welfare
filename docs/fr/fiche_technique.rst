@@ -1,12 +1,13 @@
 .. _welfare.whitepaper:
 
 ==============================
-Lino Welfare white paper
+Fiche technique Lino pour CPAS
 ==============================
 
-"Lino" is a framework (a library for building applications)
-and "Lino Welfare" (Lino for PCSWs) is one of the main applications
-developed using Lino by the framework's author.
+"Lino" est un framework (une bibliotheque de modules pour créer des
+applications), "Lino pour CPAS" (anglais "Lino Welfare") est la
+première application qui a été faite avec Lino. Il existe d'autres
+applications Lino qui n'ont rien à voir avec les CPAS.
 
 
 Charactéristiques du framework
@@ -47,10 +48,12 @@ Fonctionnalités générales secrétariat
 Fonctionnalités spécifiques aux CPAS 
 -------------------------------------
 
-- Les données signalétiques spécifiques aux CPAS (Clients, Ménages,...) 
-  sont intégrées de manière transparente dans la gestion générale des contacts.
+- Les données signalétiques spécifiques aux CPAS (Clients,
+  Ménages,...)  sont intégrées de manière transparente dans la gestion
+  générale des contacts.
   
-- Un même client peut être accompagné par plusieurs agents dans des services différents.
+- Un même client peut être accompagné par plusieurs agents dans des
+  services différents.
 
 - Lecture de la carte d'identité électronique (eID)
   
@@ -58,25 +61,29 @@ Fonctionnalités spécifiques aux CPAS
 Historique client
 -----------------
 
-- Gestion des documents scannés (permis de conduire, de résidence, de travail,...).
-  Rappel optionnel si la date de fin de validité approche.
+- Gestion des documents scannés (permis de conduire, de résidence, de
+  travail,...).  Rappel optionnel si la date de fin de validité
+  approche.
   
-- Les travailleurs sociaux notent chaque événement. 
-  Traçabilité par exemple des appels téléphoniques, des contacts internes et externe avec clients, 
-  collègues ou partenaires, courriers, ...
+- Les travailleurs sociaux notent chaque événement.  Traçabilité par
+  exemple des appels téléphoniques, des contacts internes et externe
+  avec clients, collègues ou partenaires, courriers, ...
   
 Service d’insertion socio-professionnelle
 -----------------------------------------
 
-- Gestion des données relatives au CV (formations, expériences professionnelles, 
-  connaissances des langues, compétences, ...)  
+- Gestion des données relatives au CV (formations, expériences
+  professionnelles, connaissances des langues, compétences, ...)
   Possibilité de recherche avancée sur base de ces critères.
   
-- Gestion des PIIS (VSE): saisie, création automatique et impression du contrat papier, 
-  consultation, analyse statistique, rappels automatique des évaluations intermédiaires 
-  à prévoir
+- Gestion des PIIS (VSE): saisie, création automatique et impression
+  du contrat papier, consultation, analyse statistique, rappels
+  automatique des évaluations intermédiaires à prévoir
   
-- Gestion des projets de mise au travail (Art. 60§7): saisie, création automatique et impression de la convention papier, consultation, analyse statistique, rappels automatique des évaluations intermédiaires à prévoir
+- Gestion des projets de mise au travail (Art. 60§7): saisie, création
+  automatique et impression de la convention papier, consultation,
+  analyse statistique, rappels automatique des évaluations
+  intermédiaires à prévoir
 
 - Gestion des partenaires Art60§7
 
@@ -94,13 +101,15 @@ Gestion des nouvelles demandes/clients
 --------------------------------------
 
 - Gestion des spécialités attribuées aux travailleurs sociaux.
-- Proposition automatique des travailleurs sociaux compétents selon les spécificités de la demande et attribution selon la disponibilité
+- Proposition automatique des travailleurs sociaux compétents selon
+  les spécificités de la demande et attribution selon la disponibilité
 
 Médiation de dettes
 -------------------
 
-Interface d’encodage des données (dépenses, revenus, obligations, répartition au marc-lefranc)
-et création automatique d’un budget mensuel individuel ou par ménage.
+Interface d’encodage des données (dépenses, revenus, obligations,
+répartition au marc-le-franc) et création automatique d’un budget
+mensuel individuel ou par ménage.
 
 
 Reception desk

@@ -221,7 +221,7 @@ class Site(Site):
         yield 'lino.modlib.appypod'
         yield 'lino.modlib.export_excel'
 
-    def get_admin_main_items(self, ar):
+    def get_admin_main_items(self):
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
