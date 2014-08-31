@@ -322,7 +322,8 @@ def objects():
 
     guest_role = Instantiator('cal.GuestRole').build
     obj = guest_role(
-        email_template="Visitor.eml.html", **babelkw(
+        # email_template="Visitor.eml.html",
+        **babelkw(
             'name',
             de="Besucher",
             fr="Visiteur",
