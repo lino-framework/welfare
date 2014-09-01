@@ -25,11 +25,31 @@ from lino import dd
 from lino_welfare.modlib.pcsw.models import *
 
 
+class Client(Client):
+    sis_motif = models.TextField(_("Motif de l'orientation"), blank=True)
+    sis_attentes = models.TextField(_("Attentes de la personne"), blank=True)
+    sis_moteurs = models.TextField(_("Moteurs"), blank=True)
+    sis_objectifs = models.TextField(_("Objectifs"), blank=True)
+    oi_demarches = models.TextField(_("Démarches à réaliser"), blank=True)
+    
+
 class ClientDetail(dd.FormLayout):
 
     main = "general parties family aids_tab \
     work_tab career languages \
-    competences contracts history calendar misc"
+    competences contracts sis_tab oi_tab history calendar misc"
+
+    sis_tab = dd.Panel("""
+    courses.IntegEnrolmentsByPupil
+    sis_motif sis_attentes
+    sis_moteurs sis_objectifs
+    """, label=_("SIS"))
+
+    oi_tab = dd.Panel("""
+    courses.BasicEnrolmentsByPupil
+    courses.JobEnrolmentsByPupil
+    oi_demarches
+    """, label=_("Orientation interne"))
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15

@@ -13,3 +13,4 @@ Lino Welfare class reference
    integ
    isip
    jobs
+   cv

@@ -287,4 +287,48 @@ if False:
             kw.update(eval_js=ar.renderer.instance_handler(ar, event))
             ar.success(**kw)
 
-EventsByDay.column_names = 'start_time project user assigned_to workflow_buttons *'
+EventsByDay.column_names = 'start_time project user \
+assigned_to workflow_buttons *'
+
+EventsByController.column_names = 'when_text summary user \
+assigned_to workflow_buttons *'
+
+
+class Task(Task):
+
+    class Meta:
+        verbose_name = _("Task")
+        verbose_name_plural = _("Tasks")
+        abstract = dd.is_abstract_model(__name__, 'Task')
+
+    delegated = models.BooleanField(
+        _("Delegated to client"), default=False)
+
+Tasks.detail_layout = """
+    start_date due_date id workflow_buttons
+    summary
+    project user delegated
+    owner created:20 modified:20
+    description #notes.NotesByTask
+    """
+
+
+
+class TasksByController(TasksByController):
+    column_names = 'start_date due_date summary user delegated workflow_buttons id'
+    insert_layout = """
+    summary
+    start_date due_date
+    user delegated
+    """
+
+
+
+# add = TaskStates.add_item
+# add('40', _("Client"), 'client')
+
+# @dd.receiver(dd.pre_analyze)
+# def setup_task_workflows(sender=None, **kw):
+
+#     TaskStates.client.add_transition(_("Delegated to client"), 
+#                                      states='done started cancelled')

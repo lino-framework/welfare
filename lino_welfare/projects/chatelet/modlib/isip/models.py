@@ -22,33 +22,36 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino import dd
 
-from lino.modlib.courses.models import *
-
-CourseAreas.clear()
-add = CourseAreas.add_item
-add('S', _("Integration workshops"), 'integ')
-add('B', _("Basic skills"), 'basic')
-add('J', _("Job search modules"), 'job')
+from lino_welfare.modlib.isip.models import *
 
 
-class Course(Course):
-    class Meta:
-        verbose_name = _("Workshop")
-        verbose_name_plural = _('Workshops')
-        abstract = dd.is_abstract_model(__name__, 'Course')
+class ContractDetail(dd.FormLayout):
+    general = dd.Panel("""
+    id:8 client:25 type user:15 user_asd:15
+    study_type applies_from applies_until exam_policy language:8
+    date_decided date_issued printed date_ended ending:20
+    stages  goals
+    """, label=_("General"))
+
+    partners = dd.Panel("""
+    PartnersByContract
+    """, label=_("Partners"))
+
+    evaluations = dd.Panel("""
+    cal.EventsByController
+    """, label=_("Evaluations"))
+
+    duties = dd.Panel("""
+    duties_asd  duties_dsbe  duties_person
+    cal.TasksByController
+    """, label=_("Duties"))
+
+    main = "general duties evaluations #partners"
+
+    #~ def setup_handle(self,dh):
+        #~ dh.general.label = _("General")
+        #~ dh.isip.label = _("ISIP")
 
 
-class EnrolmentsByPupil(EnrolmentsByPupil):
-    column_names = 'request_date course remark workflow_buttons *'
+Contracts.detail_layout = ContractDetail()
 
-
-class IntegEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.integ
-
-
-class BasicEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.basic
-
-
-class JobEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.job
