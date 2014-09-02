@@ -35,15 +35,9 @@ class Client(Client):
 
 class ClientDetail(dd.FormLayout):
 
-    main = "general parties family aids_tab \
-    career job_search \
-    competences contracts sis_tab oi_tab projects_tab history calendar misc"
-
-    sis_tab = dd.Panel("""
-    courses.IntegEnrolmentsByPupil
-    sis_motif sis_attentes
-    sis_moteurs sis_objectifs
-    """, label=_("SIS"))
+    main = "general parties family \
+    career competences sis_tab oi_tab projects_tab \
+    job_search contracts history calendar misc"
 
     oi_tab = dd.Panel("""
     courses.BasicEnrolmentsByPupil
@@ -57,19 +51,19 @@ class ClientDetail(dd.FormLayout):
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
+    national_id:15 civil_state birth_country birth_place declared_name
+    in_belgium_since:15 residence_type residence_until group:16
     reception.AppointmentsByPartner reception.CoachingsByClient courses.EnrolmentsByPupil
     """, label=_("Person"))
 
     general2 = """
     gender:10 id:10 nationality:15
-    last_name declared_name
+    last_name
     first_name middle_name
-    birth_date age:10 national_id:15
-    civil_state birth_country birth_place
+    birth_date age:10 language
     """
 
     general3 = """
-    language
     email
     phone
     fax
@@ -102,11 +96,10 @@ class ClientDetail(dd.FormLayout):
     suche:40  papers:40
     """, label=_("Job search"))
 
-    aids_tab = dd.Panel("""
-    in_belgium_since:15 residence_type residence_until group:16
-    sepa.AccountsByClient
-    aids.GrantingsByClient
-    """, label=_("Aids"))
+    # aids_tab = dd.Panel("""
+    # sepa.AccountsByClient
+    # aids.GrantingsByClient
+    # """, label=_("Aids"))
 
     newcomers_left = dd.Panel("""
     workflow_buttons
@@ -140,10 +133,15 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     contracts = dd.Panel("""
-    isip.ContractsByPerson
     jobs.CandidaturesByPerson
     jobs.ContractsByPerson
-    """, label=_("Contracts"))
+    """, label=dd.plugins.jobs.verbose_name)
+
+    sis_tab = dd.Panel("""
+    courses.IntegEnrolmentsByPupil isip.ContractsByPerson
+    sis_motif sis_attentes
+    sis_moteurs sis_objectifs
+    """, label=_("SIS"))
 
     career = dd.Panel("""
     jobs.StudiesByPerson
