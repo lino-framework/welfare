@@ -12,14 +12,9 @@
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
-The Chatelet extension of :mod:`lino.modlib.courses`
+Chatelet extension of :mod:`lino_welfare.modlib.cv`
 """
 
-from lino.modlib.courses import Plugin
-from django.utils.translation import ugettext_lazy as _
+from lino_welfare.modlib.cv import Plugin
 
 
-class Plugin(Plugin):
-    extends_models = ['Course', 'Line']
-    verbose_name = _("Workshops")
-    pupil_model = 'pcsw.Client'

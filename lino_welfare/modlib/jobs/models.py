@@ -13,7 +13,7 @@
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Mises au travail (Conventions Article 60 §7)
+Mises au travail (Conventions Article 60 §7 ou Art 61).
 
 """
 from __future__ import unicode_literals
@@ -164,15 +164,13 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 class ContractType(dd.PrintableType, dd.BabelNamed):
 
-    """
-    This is the homologue of 
-    :class:`lino_welfare.modlib.isip.models.ContractType` (see there 
-    for general documentation).
+    """This is the homologue of :class:`welfare.isip.ContractType` (see
+    there for general documentation).
     
     They are separated tables because ISIP contracts are in practice
     very different from JOBS contracts, and also their types should 
     not be mixed.
-    
+
     """
 
     preferred_foreignkey_width = 20
@@ -182,6 +180,7 @@ class ContractType(dd.PrintableType, dd.BabelNamed):
     class Meta:
         verbose_name = _("Job Contract Type")
         verbose_name_plural = _('Job Contract Types')
+        ordering = ['name']
 
     ref = models.CharField(_("Reference"), max_length=20, blank=True)
     exam_policy = dd.ForeignKey(
@@ -279,8 +278,8 @@ class Contract(isip.ContractBase, isip.ContractPartnerBase):
     """
 
     class Meta:
-        verbose_name = _("Art.60§7 contract")
-        verbose_name_plural = _('Art.60§7 contracts')
+        verbose_name = _("Job contract")
+        verbose_name_plural = _('Job contracts')
 
     type = models.ForeignKey(
         "jobs.ContractType",
@@ -1115,7 +1114,7 @@ if True:  # settings.SITE.user_model:
     class ContractsSearch(Contracts):
 
         """
-        Shows the job contracts owned by this user.
+        Shows the Job contracts owned by this user.
         """
         label = _("Job Contracts Search")
         group_by = ['client__group']

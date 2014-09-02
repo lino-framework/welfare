@@ -30,15 +30,23 @@ class Site(Site):
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
 
+    def get_installed_apps(self):
+        for a in super(Site, self). get_installed_apps():
+            yield a
+        yield 'lino_welfare.modlib.projects'
+
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
-        kw.update(debts=None)  # remove whole app
-        kw.update(sepa=None)  # remove whole app
-        kw.update(iban=None)  # remove whole app
-        # alternative implementations
+        # remove whole apps:
+        kw.update(debts=None)
+        kw.update(sepa=None)
+        kw.update(iban=None)
+        kw.update(badges=None)
+        # alternative implementations:
         kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')
         kw.update(isip='lino_welfare.projects.chatelet.modlib.isip')
+        kw.update(cv='lino_welfare.projects.chatelet.modlib.cv')
         return kw
 
     # def setup_plugins(self):

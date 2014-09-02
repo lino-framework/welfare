@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Copyright 2014 Luc Saffre
 # This file is part of the Lino Welfare project.
 # Lino Welfare is free software; you can redistribute it and/or modify
@@ -11,15 +12,18 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-"""
-The Chatelet extension of :mod:`lino.modlib.courses`
-"""
+from __future__ import unicode_literals
+from __future__ import print_function
 
-from lino.modlib.courses import Plugin
+import logging
+logger = logging.getLogger(__name__)
+
 from django.utils.translation import ugettext_lazy as _
 
+from lino import dd
 
-class Plugin(Plugin):
-    extends_models = ['Course', 'Line']
-    verbose_name = _("Workshops")
-    pupil_model = 'pcsw.Client'
+from lino_welfare.modlib.cv.models import *
+
+LanguageKnowledgesByPerson.column_names = "language native spoken \
+written spoken_passively written_passively cef_level"
+

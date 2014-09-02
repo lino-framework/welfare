@@ -36,8 +36,8 @@ class Client(Client):
 class ClientDetail(dd.FormLayout):
 
     main = "general parties family aids_tab \
-    work_tab career languages \
-    competences contracts sis_tab oi_tab history calendar misc"
+    work_tab career \
+    competences contracts sis_tab oi_tab projects_tab history calendar misc"
 
     sis_tab = dd.Panel("""
     courses.IntegEnrolmentsByPupil
@@ -50,6 +50,10 @@ class ClientDetail(dd.FormLayout):
     courses.JobEnrolmentsByPupil
     oi_demarches
     """, label=_("Orientation interne"))
+
+    projects_tab = dd.Panel("""
+    projects.ProjectsByClient
+    """, label=dd.plugins.projects.verbose_name)
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
@@ -141,10 +145,6 @@ class ClientDetail(dd.FormLayout):
     jobs.ContractsByPerson
     """, label=_("Contracts"))
 
-    languages = dd.Panel("""
-    cv.LanguageKnowledgesByPerson
-    """, label=_("Languages"))
-
     career = dd.Panel("career1 uploads.CareerUploadsByClient",
                       label=_("Career"))
     career1 = """
@@ -160,7 +160,7 @@ class ClientDetail(dd.FormLayout):
 
     good_panel = """
     cv.SkillsByPerson cv.SoftSkillsByPerson
-    badges.AwardsByHolder skills
+    cv.LanguageKnowledgesByPerson skills
     """
 
     bad_panel = """
@@ -170,11 +170,5 @@ class ClientDetail(dd.FormLayout):
 
 Clients.detail_layout = ClientDetail()
 
-cv = dd.resolve_app('cv')
-cv.LanguageKnowledgesByPerson.column_names = "language native spoken \
-written spoken_passively written_passively cef_level"
-
-courses = dd.resolve_app('courses')
-courses.EnrolmentsByPupil.column_names = 'request_date course remark \
-workflow_buttons *'
-
+households = dd.resolve_app('households')
+households.SiblingsByPerson.slave_grid_format = 'grid'

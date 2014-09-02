@@ -37,9 +37,15 @@ class Course(Course):
         verbose_name_plural = _('Workshops')
         abstract = dd.is_abstract_model(__name__, 'Course')
 
+class Line(Line):
+    class Meta:
+        verbose_name = _("Workshop line")
+        verbose_name_plural = _('Workshop lines')
+        abstract = dd.is_abstract_model(__name__, 'Line')
 
-class EnrolmentsByPupil(EnrolmentsByPupil):
-    column_names = 'request_date course remark workflow_buttons *'
+
+EnrolmentsByPupil.column_names = 'request_date course remark \
+workflow_buttons *'
 
 
 class IntegEnrolmentsByPupil(EnrolmentsByPupil):
@@ -52,3 +58,5 @@ class BasicEnrolmentsByPupil(EnrolmentsByPupil):
 
 class JobEnrolmentsByPupil(EnrolmentsByPupil):
     _course_area = CourseAreas.job
+
+

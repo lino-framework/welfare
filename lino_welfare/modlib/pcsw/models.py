@@ -258,11 +258,6 @@ class Client(contacts.Person,
 
     civil_state = CivilState.field(blank=True)
 
-    #~ residence_type = models.SmallIntegerField(blank=True,null=True,
-        #~ verbose_name=_("Residence type"),
-        #~ choices=RESIDENCE_TYPE_CHOICES,
-        #~ max_length=1,
-        #~ )
     residence_type = ResidenceType.field(blank=True)
 
     in_belgium_since = models.DateField(
@@ -789,7 +784,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Job search"))
 
     aids_tab = dd.Panel("""
-    in_belgium_since:15 residence_type
+    in_belgium_since:15 residence_type residence_until
     group:16
     sepa.AccountsByClient uploads.MedicalUploadsByClient
     aids.GrantingsByClient

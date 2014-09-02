@@ -25,12 +25,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from lino import dd
+from lino.modlib.excerpts.mixins import Certifiable
 
 
 class ProjectType(dd.BabelNamed):
     class Meta:
-        verbose_name = _("Project type")
-        verbose_name_plural = _("Project types")
+        verbose_name = _("Client project type")
+        verbose_name_plural = _("Client project types")
 
 
 class ProjectTypes(dd.Table):
@@ -38,7 +39,7 @@ class ProjectTypes(dd.Table):
     required = dd.required(user_level='admin')
 
 
-class Project(dd.DatePeriod):
+class Project(dd.DatePeriod, Certifiable):
 
     class Meta:
         verbose_name = _("Client Project")
@@ -56,18 +57,34 @@ class Projects(dd.Table):
     model = 'projects.Project'
     required = dd.required(user_level='admin')
 
+    detail_layout = """
+    id client project_type start_date end_date
+    origin target
+    remark result
+    """
+
+    insert_layout = """
+    client project_type
+    start_date end_date
+    """
+
 
 class ProjectsByClient(Projects):
     required = dd.required()
     master_key = 'client'
-    column_names = 'date project_type result remark'
+    column_names = 'start_date project_type result remark'
     auto_fit_column_widths = True
+
+    insert_layout = """
+    project_type
+    start_date end_date
+    """
 
 
 class ProjectsByType(Projects):
     required = dd.required()
     master_key = 'project_type'
-    column_names = 'date client result remark'
+    column_names = 'start_date client result remark'
     auto_fit_column_widths = True
 
 

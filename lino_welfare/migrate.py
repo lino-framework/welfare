@@ -927,3 +927,10 @@ def doit(a, b):
         globals_dict.update(create_aids_aid=create_aids_aid)
 
         return '1.1.16'
+
+    def migrate_from_1_1_16(self, globals_dict):
+        """
+        - lino.modlib.courses.CourseStates : state 40 (Ended) no longer exists
+        - excerpts.Excerpt: remove fields language, company, contact_person and contact_role
+        """
+        return '1.1.17'

@@ -11,23 +11,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
-"""This module is internally named after the notion of
-`Scout badges <http://en.wikipedia.org/wiki/Scout_badge>`.
-
-It defines two models "Badge" and "Award".  Badges represent the
-different achievement levels that can be awarded.  An Award is when a
-given "holder" has the right to wear a given Badge.  The date of an
-Award is the day when the holder passed a test or something equivalent.
-
-**Settings**
-
-.. setting:: badges.holder_model
-
-A string referring to the model which represents the badge holder in
-your application.  Default value is ``'contacts.Person'``.
-
-"""
-
 from lino import ad
 
 from django.utils.translation import ugettext_lazy as _
@@ -35,10 +18,4 @@ from django.utils.translation import ugettext_lazy as _
 
 class Plugin(ad.Plugin):
 
-    """A singleton instance of will be publically available as
-    ``dd.apps.badges.``"""
-
-    verbose_name = _("Badges")
-
-    ## settings
-    holder_model = 'contacts.Person'
+    verbose_name = _("Client projects")
