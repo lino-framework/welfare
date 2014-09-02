@@ -32,10 +32,10 @@ cal = dd.resolve_app('cal')
 contacts = dd.resolve_app('contacts')
 
 
-add = UploadAreas.add_item
-add('10', _("Job search uploads"), 'job_search')
-add('20', _("Medical uploads"), 'medical')
-add('30', _("Career uploads"), 'career')
+# add = UploadAreas.add_item
+# add('10', _("Job search uploads"), 'job_search')
+# add('20', _("Medical uploads"), 'medical')
+# add('30', _("Career uploads"), 'career')
 
 
 class UploadType(UploadType):
@@ -49,8 +49,8 @@ class UploadType(UploadType):
         _("Expiry warning (value)"),
         default=2)
 
-dd.update_field(
-    'uploads.UploadType', 'upload_area', default=UploadAreas.job_search)
+# dd.update_field(
+#     'uploads.UploadType', 'upload_area', default=UploadAreas.job_search)
 
 
 class UploadTypes(UploadTypes):
@@ -117,8 +117,8 @@ dd.update_field(
 dd.update_field(
     Upload, 'contact_person',
     verbose_name=_("Issued by (Person)"))
-dd.update_field(
-    Upload, 'upload_area', default=UploadAreas.job_search)
+# dd.update_field(
+#     Upload, 'upload_area', default=UploadAreas.job_search)
 
 
 class UploadDetail(dd.FormLayout):
@@ -173,16 +173,16 @@ class UploadsByClient(AreaUploads):
             ar, obj)
 
 
-class JobSearchUploadsByClient(UploadsByClient):
-    _upload_area = UploadAreas.job_search
+# class JobSearchUploadsByClient(UploadsByClient):
+#     _upload_area = UploadAreas.job_search
 
 
-class MedicalUploadsByClient(UploadsByClient):
-    _upload_area = UploadAreas.medical
+# class MedicalUploadsByClient(UploadsByClient):
+#     _upload_area = UploadAreas.medical
 
 
-class CareerUploadsByClient(UploadsByClient):
-    _upload_area = UploadAreas.career
+# class CareerUploadsByClient(UploadsByClient):
+#     _upload_area = UploadAreas.career
 
 
 def site_setup(site):

@@ -643,6 +643,7 @@ def setup_config_menu(site, ui, profile, m):
     m.add_action('jobs.Functions')
     m.add_action('jobs.Schedules')
     m.add_action('jobs.Regimes')
+    m.add_action('jobs.Statuses')
 
 
 def setup_explorer_menu(site, ui, profile, m):
@@ -652,7 +653,6 @@ def setup_explorer_menu(site, ui, profile, m):
     m.add_action('jobs.Candidatures')
     m.add_action('jobs.Studies')
     m.add_action('isip.ContractPartners')
-
 
 
 dd.add_user_group(plugin.app_label, plugin.verbose_name)

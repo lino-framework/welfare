@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011,2013 Luc Saffre
+# Copyright 2011,2013-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,8 +13,12 @@
 # along with Lino; if not, see <http://www.gnu.org/licenses/>.
 
 
+from django.utils.translation import ugettext_lazy as _
+
 from lino.utils.instantiator import Instantiator, i2d
 from lino.dd import babel_values
+
+from lino import dd
 
 
 def objects():
@@ -33,4 +37,17 @@ def objects():
     yield schedule(**babel_values('name',
                                   de=u"Individuell",               fr=u"individuel",              en=u"Individual"))
     yield schedule(**babel_values('name',
-                                  de=u"Montag, Mittwoch, Freitag", fr=u"lundi,mercredi,vendredi", en=u"Monday, Wednesday, Friday"))
+                                  de=u"Montag, Mittwoch, Freitag",
+                                  fr=u"lundi,mercredi,vendredi",
+                                  en=u"Monday, Wednesday, Friday"))
+
+    status = Instantiator('jobs.Status').build
+    yield status(**dd.str2kw('name', _("Worker")))
+    yield status(**dd.str2kw('name', _("Employee")))
+    yield status(**dd.str2kw('name', _("Freelancer")))
+    yield status(**dd.str2kw('name', _("Voluntary")))
+    yield status(**dd.str2kw('name', _("Student")))
+    yield status(**dd.str2kw('name', _("Laboratory")))  # fr=Stage,
+                                                        # de=Praktikum
+    yield status(**dd.str2kw('name', _("Interim")))
+

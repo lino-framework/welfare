@@ -107,6 +107,25 @@ class Regimes(dd.Table):
     """
 
 
+class Status(dd.BabelNamed):
+
+    class Meta:
+        verbose_name = _("Status ")
+        verbose_name_plural = _('Statuses')
+
+
+class Statuses(dd.Table):
+    required = dd.required(user_groups='integ', user_level='manager')
+    model = 'jobs.Status'
+    order_by = ['name']
+
+    detail_layout = """
+    id name
+    ExperiencesByStatus
+    """
+
+
+
 class JobProvider(contacts.Company):
 
     """Stellenanbieter (BISA, BW, ...)
@@ -289,8 +308,8 @@ class Contract(isip.ContractBase, isip.ContractPartnerBase):
     job = models.ForeignKey("jobs.Job")
     duration = models.IntegerField(_("duration (days)"),
                                    blank=True, null=True, default=None)
-    regime = models.ForeignKey(Regime, blank=True, null=True)
-    schedule = models.ForeignKey(Schedule, blank=True, null=True)
+    regime = dd.ForeignKey('jobs.Regime', blank=True, null=True)
+    schedule = dd.ForeignKey(Schedule, blank=True, null=True)
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
     refund_rate = models.CharField(_("refund rate"), max_length=200,
                                    blank=True)
@@ -496,10 +515,8 @@ class ContractsByJob(Contracts):
 
 
 class ContractsByRegime(Contracts):
-
     """
     Shows Job Contracts for a given Regime.
-    Used as slave grid in Regimes detail.
     """
     master_key = 'regime'
     column_names = 'job applies_from applies_until user type *'
@@ -630,10 +647,7 @@ class Study(cv.PersonHistoryEntry, CountryCity):
     success = models.BooleanField(verbose_name=_("Success"), default=False)
     language = dd.ForeignKey("languages.Language", blank=True, null=True)
 
-    school = models.CharField(
-        max_length=200,
-        blank=True,  # null=True,
-        verbose_name=_("School"))
+    school = models.CharField(_("Establishment"), max_length=200, blank=True)
 
     remarks = models.TextField(
         blank=True, null=True, verbose_name=_("Remarks"))
@@ -699,9 +713,9 @@ class StudiesByPerson(cv.HistoryByPerson, Studies):
         return self._label or self.__name__
 
 
-class TrainingsByPerson(StudiesByPerson):
-    "Just like :class:`StudiesByPerson`, but with different study_regime"
-    _study_regime = isip.StudyRegimes.trainings
+# class TrainingsByPerson(StudiesByPerson):
+#     "Just like :class:`StudiesByPerson`, but with different study_regime"
+#     _study_regime = isip.StudyRegimes.trainings
 
 
 class Experience(cv.PersonHistoryEntry, SectorFunction):
@@ -715,12 +729,12 @@ class Experience(cv.PersonHistoryEntry, SectorFunction):
     #~ type = models.ForeignKey(JobType,verbose_name=_("job type"))
     title = models.CharField(
         max_length=200, verbose_name=_("job title"), blank=True)
-    country = models.ForeignKey("countries.Country",
-                                blank=True, null=True,
-                                verbose_name=_("Country"))
+    country = dd.ForeignKey("countries.Country", blank=True, null=True)
+    status = dd.ForeignKey(Status, blank=True, null=True)
+    is_training = models.BooleanField(_("Training"), default=False)
+    regime = dd.ForeignKey('jobs.Regime', blank=True, null=True)
 
-    remarks = models.TextField(
-        blank=True, null=True, verbose_name=_("Remarks"))
+    remarks = models.TextField(_("Remarks"), blank=True, null=True)
 
     def __unicode__(self):
         return unicode(self.title)
@@ -728,7 +742,7 @@ class Experience(cv.PersonHistoryEntry, SectorFunction):
 
 class Experiences(dd.Table):
     required = dd.required(user_groups='integ', user_level='manager')
-    model = Experience
+    model = 'jobs.Experience'
 
 
 class ExperiencesByFunction(Experiences):
@@ -738,10 +752,17 @@ class ExperiencesByFunction(Experiences):
 
 
 class ExperiencesByPerson(cv.HistoryByPerson, Experiences):
-
     "List of job experiences for a known person"
     required = dd.required(user_groups='integ')
-    column_names = "company started stopped title sector function country remarks"
+    auto_fit_column_widths = True
+    column_names = "company started stopped title status is_training \
+    country remarks sector function"
+
+
+class ExperiencesByStatus(Experiences):
+    master_key = 'status'
+    column_names = "company started stopped title sector \
+    function country remarks"
 
 
 class Job(SectorFunction):

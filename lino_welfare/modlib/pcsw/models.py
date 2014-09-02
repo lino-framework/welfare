@@ -776,7 +776,7 @@ class ClientDetail(dd.FormLayout):
     needs_residence_permit needs_work_permit
     # residence_permit work_permit driving_licence
     # uploads.UploadsByController
-    uploads.CareerUploadsByClient
+    uploads.UploadsByClient
     """)  # ,label = _("Papers"))
 
     work_tab = dd.Panel("""
@@ -786,7 +786,7 @@ class ClientDetail(dd.FormLayout):
     aids_tab = dd.Panel("""
     in_belgium_since:15 residence_type residence_until
     group:16
-    sepa.AccountsByClient uploads.MedicalUploadsByClient
+    sepa.AccountsByClient
     aids.GrantingsByClient
     """, label=_("Aids"))
 

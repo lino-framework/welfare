@@ -36,7 +36,7 @@ class Client(Client):
 class ClientDetail(dd.FormLayout):
 
     main = "general parties family aids_tab \
-    work_tab career \
+    career job_search \
     competences contracts sis_tab oi_tab projects_tab history calendar misc"
 
     sis_tab = dd.Panel("""
@@ -95,16 +95,16 @@ class ClientDetail(dd.FormLayout):
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
-    uploads.JobSearchUploadsByClient
+    uploads.UploadsByClient
     """)
 
-    work_tab = dd.Panel("""
+    job_search = dd.Panel("""
     suche:40  papers:40
     """, label=_("Job search"))
 
     aids_tab = dd.Panel("""
     in_belgium_since:15 residence_type residence_until group:16
-    sepa.AccountsByClient uploads.MedicalUploadsByClient
+    sepa.AccountsByClient
     aids.GrantingsByClient
     """, label=_("Aids"))
 
@@ -145,13 +145,11 @@ class ClientDetail(dd.FormLayout):
     jobs.ContractsByPerson
     """, label=_("Contracts"))
 
-    career = dd.Panel("career1 uploads.CareerUploadsByClient",
-                      label=_("Career"))
-    career1 = """
+    career = dd.Panel("""
     jobs.StudiesByPerson
-    jobs.TrainingsByPerson
-    jobs.ExperiencesByPerson:40
-    """
+    # jobs.TrainingsByPerson
+    jobs.ExperiencesByPerson
+    """, label=_("Career"))
 
     competences = dd.Panel(
         "good_panel bad_panel",
@@ -172,3 +170,10 @@ Clients.detail_layout = ClientDetail()
 
 households = dd.resolve_app('households')
 households.SiblingsByPerson.slave_grid_format = 'grid'
+
+jobs = dd.resolve_app('jobs')
+jobs.ExperiencesByPerson.column_names = "company started stopped \
+function regime status is_training country remarks *"
+
+jobs.StudiesByPerson.column_names = "type content started stopped \
+school country success language remarks *"

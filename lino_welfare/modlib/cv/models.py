@@ -42,8 +42,8 @@ class PersonHistoryEntry(dd.Model):
         abstract = True
 
     person = models.ForeignKey(config.person_model)
-    started = models.DateField(_("started"), blank=True, null=True)
-    stopped = models.DateField(_("stopped"), blank=True, null=True)
+    started = models.DateField(_("Beginning"), blank=True, null=True)
+    stopped = models.DateField(_("End"), blank=True, null=True)
 
 
 class HistoryByPerson(dd.Table):
