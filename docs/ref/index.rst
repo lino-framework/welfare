@@ -14,3 +14,4 @@ Lino Welfare class reference
    isip
    jobs
    cv
+   reception
