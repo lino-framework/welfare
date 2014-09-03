@@ -195,7 +195,8 @@ def on_database_ready(sender, **kw):
     self.column_names = 'user:10'
     #~ try:
     if True:
-        for pg in pcsw.PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
+        # for pg in pcsw.PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
+        for pg in pcsw.PersonGroup.objects.exclude(ref_name='').order_by('ref_name'):
             def w(pg):
                 # we must evaluate `today` for each request, not only once when
                 # `database_ready`
