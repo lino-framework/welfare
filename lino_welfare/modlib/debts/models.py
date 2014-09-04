@@ -422,7 +422,7 @@ class BudgetDetail(dd.FormLayout):
     """, label=_("Expenses & Income"))
 
     entries2 = dd.Panel("""
-    LiabilitiesByBudget 
+    LiabilitiesByBudget
     AssetsByBudget
     """, label=_("Liabilities & Assets"))
 

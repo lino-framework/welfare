@@ -69,7 +69,10 @@ class ContractType(dd.BabelNamed):
         verbose_name_plural = _('ISIP Types')
 
     ref = models.CharField(_("Reference"), max_length=20, blank=True)
-    exam_policy = models.ForeignKey(
+    full_name = models.CharField(
+        _("Full name"), blank=True, max_length=200)
+
+    exam_policy = dd.ForeignKey(
         "isip.ExamPolicy",
         related_name="%(app_label)s_%(class)s_set",
         blank=True, null=True)
@@ -82,8 +85,9 @@ class ContractTypes(dd.Table):
     model = ContractType
     column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
-    id name
-    ref exam_policy needs_study_type
+    id ref exam_policy needs_study_type
+    name
+    full_name
     ContractsByType
     """
 

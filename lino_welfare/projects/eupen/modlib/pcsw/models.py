@@ -215,5 +215,9 @@ cbss_summary
 """, label=_("CBSS"), required=dict(user_groups='cbss'))
 
 
-
 Clients.detail_layout = ClientDetail()
+
+ClientContactTypes.detail_layout = """
+id name can_refund is_bailiff
+contacts.PartnersByClientContactType
+"""

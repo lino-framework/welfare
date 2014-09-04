@@ -1421,13 +1421,13 @@ class ClientContactTypes(dd.Table):
     model = 'pcsw.ClientContactType'
     required = dd.required(user_level='manager')
 
-    # TODO: can_refund is injected in aids
+    # TODO: `can_refund` is injected in aids, `is_bailiff` in debts
     detail_layout = """
     id name
     contacts.PartnersByClientContactType
     """
 
-    column_names = 'id name can_refund'
+    column_names = 'id name can_refund *'
 
     stay_in_grid = True
 

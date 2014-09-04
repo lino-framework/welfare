@@ -739,8 +739,6 @@ dd.inject_field(
         help_text=_("")
     ))
 
-pcsw.ClientContactTypes.detail_layout = pcsw.ClientContactTypes.detail_layout.replace('id name', 'id name can_refund')
-
 # class DoctorTypes(dd.ChoiceList):
 #     verbose_name = _("Doctor type")
 # add = DoctorTypes.add_item
