@@ -46,7 +46,7 @@ class ContractDetail(dd.FormLayout):
     cal.TasksByController
     """, label=_("Duties"))
 
-    main = "general duties evaluations #partners"
+    main = "general duties evaluations partners"
 
     #~ def setup_handle(self,dh):
         #~ dh.general.label = _("General")
