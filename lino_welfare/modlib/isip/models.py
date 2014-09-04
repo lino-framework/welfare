@@ -364,8 +364,8 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
             #~ pc = self.person.get_primary_coach()
             #~ qs = self.person.get_coachings(self.applies_from,active=True)
             qs = self.client.get_coachings(
-                # self.applies_from, type__id=COACHINGTYPE_ASD)
-                self.applies_from, type__does_gss=True)
+                (self.applies_from, self.applies_until),
+                type__does_gss=True)
             if qs.count() == 1:
                 user_asd = qs[0].user
                 if user_asd is None or user_asd == self.user:
