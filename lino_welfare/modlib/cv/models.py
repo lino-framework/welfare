@@ -156,6 +156,7 @@ class LanguageKnowledgesByPerson(LanguageKnowledges):
     #~ button_label = _("Languages")
     column_names = "language native spoken written cef_level"
     required = dd.required(user_groups='coaching')
+    auto_fit_column_widths = True
 
 
 class KnowledgesByLanguage(LanguageKnowledges):

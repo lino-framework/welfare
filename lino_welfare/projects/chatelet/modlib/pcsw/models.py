@@ -36,7 +36,7 @@ class Client(Client):
 class ClientDetail(dd.FormLayout):
 
     main = "general parties family \
-    career competences sis_tab oi_tab projects_tab \
+    career competences aids_tab sis_tab oi_tab #projects_tab \
     job_search contracts history calendar misc"
 
     oi_tab = dd.Panel("""
@@ -44,10 +44,6 @@ class ClientDetail(dd.FormLayout):
     courses.JobEnrolmentsByPupil
     oi_demarches
     """, label=_("Orientation interne"))
-
-    projects_tab = dd.Panel("""
-    projects.ProjectsByClient
-    """, label=dd.plugins.projects.verbose_name)
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
@@ -96,10 +92,15 @@ class ClientDetail(dd.FormLayout):
     suche:40  papers:40
     """, label=_("Job search"))
 
-    # aids_tab = dd.Panel("""
-    # sepa.AccountsByClient
-    # aids.GrantingsByClient
-    # """, label=_("Aids"))
+    # projects_tab = dd.Panel("""
+    # projects.ProjectsByClient
+    # """, label=dd.plugins.projects.verbose_name)
+
+    aids_tab = dd.Panel("""
+    sepa.AccountsByClient
+    projects.ProjectsByClient
+    aids.GrantingsByClient
+    """, label=_("Aids"))
 
     newcomers_left = dd.Panel("""
     workflow_buttons

@@ -751,3 +751,25 @@ class ContractsByEnding(Contracts):
 class ContractsByStudyType(Contracts):
     master_key = 'study_type'
 
+
+class DelegatedTasksByContract(dd.Table):
+    model = "cal.Task"
+    master_key = "owner"
+    column_names = "summary due_date"
+    filter = models.Q(delegated=True)
+
+    @classmethod
+    def override_column_headers(self, ar, **kwargs):
+        kwargs.update(summary=unicode(_("Proceedings")))
+        return kwargs
+
+
+class EventsByContract(dd.Table):
+    model = "cal.Event"
+    master_key = "owner"
+    column_names = "summary start_date"
+
+    @classmethod
+    def override_column_headers(self, ar, **kwargs):
+        kwargs.update(start_date=_("Date"))
+        return kwargs

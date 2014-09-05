@@ -33,9 +33,9 @@ class ContractDetail(dd.FormLayout):
     stages  goals
     """, label=_("General"))
 
-    partners = dd.Panel("""
-    PartnersByContract
-    """, label=_("Partners"))
+    # partners = dd.Panel("""
+    # PartnersByContract
+    # """, label=_("Contract partners"))
 
     evaluations = dd.Panel("""
     cal.EventsByController
@@ -46,7 +46,7 @@ class ContractDetail(dd.FormLayout):
     cal.TasksByController
     """, label=_("Duties"))
 
-    main = "general duties evaluations partners"
+    main = "general duties evaluations PartnersByContract"
 
     #~ def setup_handle(self,dh):
         #~ dh.general.label = _("General")
@@ -56,23 +56,3 @@ class ContractDetail(dd.FormLayout):
 Contracts.detail_layout = ContractDetail()
 
 
-class DelegatedTasksByContract(dd.Table):
-    model = "cal.Task"
-    master_key = "owner"
-    column_names = "summary due_date"
-
-    @classmethod
-    def override_column_headers(self, ar, **kwargs):
-        kwargs.update(summary=unicode(_("Proceedings")))
-        return kwargs
-
-
-class EventsByContract(dd.Table):
-    model = "cal.Event"
-    master_key = "owner"
-    column_names = "summary start_date"
-
-    @classmethod
-    def override_column_headers(self, ar, **kwargs):
-        kwargs.update(start_date=_("Date"))
-        return kwargs

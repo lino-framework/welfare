@@ -37,6 +37,7 @@ class Course(Course):
         verbose_name_plural = _('Workshops')
         abstract = dd.is_abstract_model(__name__, 'Course')
 
+
 class Line(Line):
     class Meta:
         verbose_name = _("Workshop line")

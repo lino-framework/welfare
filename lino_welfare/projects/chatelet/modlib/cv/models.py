@@ -25,5 +25,5 @@ from lino import dd
 from lino_welfare.modlib.cv.models import *
 
 LanguageKnowledgesByPerson.column_names = "language native spoken \
-written spoken_passively written_passively cef_level"
+written spoken_passively written_passively *"
 

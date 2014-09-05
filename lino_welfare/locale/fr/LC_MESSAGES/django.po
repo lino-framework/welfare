@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-04 19:10+0300\n"
-"PO-Revision-Date: 2014-09-04 19:12+0300\n"
+"PO-Revision-Date: 2014-09-05 05:58+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -141,7 +141,7 @@ msgstr ""
 #: lino_welfare/modlib/pcsw/models.py:791
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
 msgid "Aids"
-msgstr "Aide sociale"
+msgstr "Aides"
 
 #: lino_welfare/modlib/aids/models.py:60
 msgid "Aid confirmation type"
@@ -197,9 +197,8 @@ msgid "Print directly"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:130
-#, fuzzy
 msgid "Confirmed by primary coach"
-msgstr "Dossiers complets"
+msgstr "Confirmé par le titulaire"
 
 #: lino_welfare/modlib/aids/models.py:163
 #, fuzzy
@@ -2268,14 +2267,12 @@ msgid "Study Types"
 msgstr "Types d'étude"
 
 #: lino_welfare/modlib/isip/models.py:264
-#, fuzzy
 msgid "Contract partner"
-msgstr "Contrat débute"
+msgstr "Service utilisateur"
 
 #: lino_welfare/modlib/isip/models.py:265
-#, fuzzy
 msgid "Contract partners"
-msgstr "Contrat débute"
+msgstr "Services utilisateurs"
 
 #: lino_welfare/modlib/isip/models.py:270
 msgid "duties company"
@@ -2389,11 +2386,11 @@ msgstr "buts"
 
 #: lino_welfare/modlib/isip/models.py:630
 msgid "duties ASD"
-msgstr "devoirs SSG"
+msgstr "Obligations du service social"
 
 #: lino_welfare/modlib/isip/models.py:633
 msgid "duties DSBE"
-msgstr "devois ISP"
+msgstr "Obligations du service d'insertion"
 
 #: lino_welfare/modlib/isip/models.py:636
 msgid "duties person"
@@ -3148,7 +3145,7 @@ msgstr "Freins"
 
 #: lino_welfare/modlib/pcsw/models.py:288
 msgid "Other skills"
-msgstr "Autres talents"
+msgstr "Autres atouts"
 
 #: lino_welfare/modlib/pcsw/models.py:293
 msgid "Contact person at local job office"
@@ -3278,7 +3275,7 @@ msgstr "Nationalité"
 
 #: lino_welfare/modlib/pcsw/models.py:951
 msgid "Only primary clients"
-msgstr "Dossiers primaires seulement"
+msgstr "Dossiers titulaires seulement"
 
 #: lino_welfare/modlib/pcsw/models.py:1081
 #, python-format
@@ -3291,9 +3288,9 @@ msgid " on %(date)s"
 msgstr " le %(date)s"
 
 #: lino_welfare/modlib/pcsw/models.py:1110
-#, fuzzy, python-format
+#, python-format
 msgid "Coached on %s"
-msgstr "Accompagnants"
+msgstr "Accompagné le %s"
 
 #: lino_welfare/modlib/pcsw/models.py:1157
 msgid "Table of Clients whose data seems unlogical or inconsistent."
