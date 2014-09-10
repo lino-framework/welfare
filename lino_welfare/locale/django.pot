@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.16\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-09-04 19:10+0300\n"
+"POT-Creation-Date: 2014-09-10 07:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,6 +133,7 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:25
 #: lino_welfare/modlib/pcsw/models.py:791
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:103
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
 msgid "Aids"
 msgstr ""
@@ -313,7 +314,7 @@ msgstr ""
 #: lino_welfare/modlib/badges/models.py:61
 #: lino_welfare/modlib/courses/models.py:241
 #: lino_welfare/modlib/courses/models.py:432
-#: lino_welfare/modlib/cv/models.py:192 lino_welfare/modlib/debts/models.py:555
+#: lino_welfare/modlib/cv/models.py:193 lino_welfare/modlib/debts/models.py:555
 #: lino_welfare/modlib/debts/models.py:633
 #: lino_welfare/modlib/jobs/models.py:232
 #: lino_welfare/modlib/jobs/models.py:257
@@ -493,10 +494,10 @@ msgstr ""
 #: lino_welfare/modlib/badges/models.py:56
 #: lino_welfare/modlib/cal/models.py:246 lino_welfare/modlib/cbss/tx25.py:557
 #: lino_welfare/modlib/cbss/tx25.py:645 lino_welfare/modlib/debts/models.py:160
+#: lino_welfare/modlib/isip/models.py:774
 #: lino_welfare/modlib/jobs/models.py:1170
 #: lino_welfare/modlib/jobs/models.py:1265
 #: lino_welfare/modlib/jobs/models.py:1388
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:77
 msgid "Date"
 msgstr ""
 
@@ -877,7 +878,7 @@ msgid "Tx25 Requests"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/tx25.py:105 lino_welfare/modlib/pcsw/models.py:807
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:118
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:119
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:164
 msgid "History"
 msgstr ""
@@ -1317,14 +1318,14 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:219
 #: lino_welfare/modlib/contacts/models.py:317
 #: lino_welfare/modlib/pcsw/models.py:827
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:133
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:134
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:185
 msgid "Miscellaneous"
 msgstr ""
 
 #: lino_welfare/modlib/contacts/models.py:151
 #: lino_welfare/modlib/pcsw/models.py:734
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:57
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:53
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:79
 msgid "Person"
 msgstr ""
@@ -1563,7 +1564,7 @@ msgid "unknown age"
 msgstr ""
 
 #: lino_welfare/modlib/cv/__init__.py:14 lino_welfare/modlib/pcsw/models.py:834
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:150
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:151
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:192
 msgid "Career"
 msgstr ""
@@ -1642,40 +1643,40 @@ msgstr ""
 msgid "%s (w)"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:184
+#: lino_welfare/modlib/cv/models.py:185
 msgid "Property"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:185
+#: lino_welfare/modlib/cv/models.py:186
 msgid "Properties"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:250
+#: lino_welfare/modlib/cv/models.py:251
 #, python-format
 msgid "(SiteConfig %s is empty)"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:281
+#: lino_welfare/modlib/cv/models.py:282
 msgid "Skills Property Group"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:283
+#: lino_welfare/modlib/cv/models.py:284
 msgid "The property group to be used as master for the SkillsByPerson table."
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:292
+#: lino_welfare/modlib/cv/models.py:293
 msgid "Soft Skills Property Group"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:294
+#: lino_welfare/modlib/cv/models.py:295
 msgid "The property group to be used as master for the SoftSkillsByPerson table."
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:303
+#: lino_welfare/modlib/cv/models.py:304
 msgid "Obstacles Property Group"
 msgstr ""
 
-#: lino_welfare/modlib/cv/models.py:305
+#: lino_welfare/modlib/cv/models.py:306
 msgid "The property group to be used as master for the ObstaclesByPerson table."
 msgstr ""
 
@@ -2264,6 +2265,7 @@ msgid "Observed events"
 msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:468
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:34
 msgid "Started"
 msgstr ""
 
@@ -2334,6 +2336,10 @@ msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:658
 msgid "Integration agent"
+msgstr ""
+
+#: lino_welfare/modlib/isip/models.py:763
+msgid "Proceedings"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/__init__.py:24
@@ -2685,7 +2691,7 @@ msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:145
 #: lino_welfare/modlib/pcsw/models.py:844
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:154
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:155
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:202
 msgid "Competences"
 msgstr ""
@@ -3170,13 +3176,13 @@ msgid "Human Links"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:784
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:97
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:93
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:129
 msgid "Job search"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:819
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:125
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:126
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:176
 msgid "Calendar"
 msgstr ""
@@ -3629,7 +3635,7 @@ msgid "Site"
 msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/courses/__init__.py:24
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:37
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:50
 msgid "Workshops"
 msgstr ""
 
@@ -3645,15 +3651,19 @@ msgstr ""
 msgid "Job search modules"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:36
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:35
+msgid "Finished"
+msgstr ""
+
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:49
 msgid "Workshop"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:42
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:56
 msgid "Workshop line"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:43
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:57
 msgid "Workshop lines"
 msgstr ""
 
@@ -3677,20 +3687,12 @@ msgstr ""
 msgid "Get active!"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:38
-msgid "Partners"
-msgstr ""
-
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:42
 msgid "Evaluations"
 msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:47
 msgid "Duties"
-msgstr ""
-
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:66
-msgid "Proceedings"
 msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/pcsw/models.py:29
@@ -3717,15 +3719,15 @@ msgstr ""
 msgid "Orientation interne"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:76
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:72
 msgid "Family situation"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:81
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:77
 msgid "Intervening parties"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:144
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:145
 msgid "SIS"
 msgstr ""
 

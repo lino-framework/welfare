@@ -30,6 +30,19 @@ add('S', _("Integration workshops"), 'integ')
 add('B', _("Basic skills"), 'basic')
 add('J', _("Job search modules"), 'job')
 
+add = EnrolmentStates.add_item
+add('40', _("Started"), 'started')
+add('50', _("Finished"), 'finished', uses_a_place=False)
+
+
+@dd.receiver(dd.pre_analyze)
+def my_enrolment_workflows(sender=None, **kw):
+
+    EnrolmentStates.started.add_transition(
+        states="confirmed requested")
+    EnrolmentStates.finished.add_transition(
+        states="started")
+
 
 class Course(Course):
     class Meta:
@@ -45,8 +58,7 @@ class Line(Line):
         abstract = dd.is_abstract_model(__name__, 'Line')
 
 
-EnrolmentsByPupil.column_names = 'request_date course remark \
-workflow_buttons *'
+EnrolmentsByPupil.column_names = 'request_date course workflow_buttons *'
 
 
 class IntegEnrolmentsByPupil(EnrolmentsByPupil):
