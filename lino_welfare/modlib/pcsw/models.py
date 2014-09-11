@@ -923,29 +923,23 @@ class Clients(contacts.Persons):
     detail_layout = ClientDetail()
 
     parameters = dd.ObservedPeriod(
-        aged_from=models.IntegerField(_("Aged from"),
-            blank=True, null=True, help_text=u"""\
+        aged_from=models.IntegerField(
+            _("Aged from"), blank=True, null=True, help_text=u"""\
 Nur Klienten, die mindestens so alt sind."""),
-        aged_to=models.IntegerField(_("Aged to"),
-            blank=True, null=True, help_text=u"""\
+        aged_to=models.IntegerField(
+            _("Aged to"), blank=True, null=True, help_text=u"""\
 Nur Klienten, die höchstens so alt sind."""),
-        coached_by=models.ForeignKey('users.User',
-                                     blank=True, null=True,
+        coached_by=models.ForeignKey(
+            'users.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
-        and_coached_by=models.ForeignKey('users.User',
-                                         blank=True, null=True,
+        and_coached_by=models.ForeignKey(
+            'users.User', blank=True, null=True,
             verbose_name=_("and by"), help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
-        nationality=dd.ForeignKey('countries.Country', blank=True, null=True,
-                                  verbose_name=_("Nationality")),
-
-        #~ start_date = models.DateField(_("Period from"),
-        #~ blank=True,null=True,
-            #~ help_text="""Date début de la période observée"""),
-        #~ end_date = models.DateField(_("until"),
-        #~ blank=True,null=True,
-            #~ help_text="""Date fin de la période observée"""),
+        nationality=dd.ForeignKey(
+            'countries.Country', blank=True, null=True,
+            verbose_name=_("Nationality")),
         observed_event=ClientEvents.field(blank=True),
         only_primary=models.BooleanField(
             _("Only primary clients"), default=False, help_text=u"""\

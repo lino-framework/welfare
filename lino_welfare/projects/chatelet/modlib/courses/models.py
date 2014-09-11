@@ -31,7 +31,7 @@ add('B', _("Basic skills"), 'basic')
 add('J', _("Job search modules"), 'job')
 
 add = EnrolmentStates.add_item
-add('40', _("Started"), 'started')
+add('40', _("Started"), 'started', uses_a_place=True)
 add('50', _("Finished"), 'finished', uses_a_place=False)
 
 
