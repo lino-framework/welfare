@@ -30,4 +30,5 @@ Content
    changes
    fr/index
    de/index
+   api/lino_welfare
    

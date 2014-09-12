@@ -965,14 +965,18 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         #~ print(20130901,ar.param_values)
 
-        """
-        For coached_by and and_coached_by, a blank period 
-        """
+        # 20140912 don't remember why blank period was interpreted in
+        # a special way for coached_by and and_coached_by...
+        # if ar.param_values.start_date is None or ar.param_values.end_date is None:
+        #     period = None
+        # else:
+        #     period = (ar.param_values.start_date, ar.param_values.end_date)
 
-        if ar.param_values.start_date is None or ar.param_values.end_date is None:
-            period = None
-        else:
-            period = (ar.param_values.start_date, ar.param_values.end_date)
+        period = [ar.param_values.start_date, ar.param_values.end_date]
+        if period[0] is None:
+            period[0] = period[1] or dd.today()
+        if period[1] is None:
+            period[1] = period[0]
 
         qs = add_coachings_filter(qs,
                                   ar.param_values.coached_by,
@@ -983,12 +987,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                                       ar.param_values.and_coached_by,
                                       period,
                                       False)
-
-        period = [ar.param_values.start_date, ar.param_values.end_date]
-        if period[0] is None:
-            period[0] = period[1] or settings.SITE.today()
-        if period[1] is None:
-            period[1] = period[0]
 
         ce = ar.param_values.observed_event
         if ce is None:

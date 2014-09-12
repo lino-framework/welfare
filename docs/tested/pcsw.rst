@@ -16,6 +16,8 @@ General PCSW
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.docs.settings.test'
     >>> from bs4 import BeautifulSoup
+    >>> from lino import dd
+    >>> from lino.utils import i2d
     >>> from lino.runtime import *
     >>> from django.test import Client
     >>> from django.utils import translation
@@ -23,7 +25,7 @@ General PCSW
     >>> client = Client()
 
 
->>> ses = settings.SITE.login('robin')
+>>> ses = dd.login('robin')
 >>> translation.activate('en')
 
 Similar Persons
@@ -111,13 +113,12 @@ UsersWithClients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns                   1                    1       1         2                 3                5
- Hubert Huppertz      3            2           3        4       4         11                16               23
- Mélanie Mélard       4            4           2        2       3         12                15               20
- **Total (3 rows)**   **7**        **7**       **5**    **7**   **8**     **25**            **34**           **48**
+ Alicia Allmanns                   1                    1       1         2                 3                3
+ Hubert Huppertz      3            2           3        4       4         11                16               16
+ Mélanie Mélard       4            4           2        2       3         12                15               15
+ **Total (3 rows)**   **7**        **7**       **5**    **7**   **8**     **25**            **34**           **34**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
-
 
 Printing UsersWithClients to pdf
 --------------------------------
@@ -195,3 +196,130 @@ Coaching types
 ============================== ============================== =================================================== ======= =======
 <BLANKLINE>
 
+
+.. _welfare.clients.parameters:
+
+Filtering clients
+-----------------
+
+The demo database contains at least on client 
+- whose client_state is "Coached"
+- who has several coachings
+- at least one of these coachings has been ended
+
+For example, let log in as Mélanie and look at client Robin DUBOIS:
+
+>>> ses = dd.login('melanie')
+>>> pk = 178
+>>> obj = pcsw.Client.objects.get(pk=pk)
+>>> print(obj)
+DUBOIS Robin (178)
+
+Robin is coached:
+
+>>> obj.client_state
+<ClientStates.coached:30>
+
+Here are Robin's coachings. Note that Mélanie stopped to coach Robin
+on 24.10.2013:
+
+>>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+====================== ========== ================= ========
+ Begleitet seit         bis        Begleiter         Primär 
+---------------------- ---------- ----------------- --------
+ 13.03.12               08.03.13   Hubert Huppertz   Nein   
+ 08.03.13               24.10.13   Mélanie Mélard    Nein   
+ 24.10.13                          Hubert Huppertz   Ja     
+ **Total (3 Zeilen)**                                **1**
+====================== ========== ================= ========
+<BLANKLINE>
+
+Another client is Dorothée Dobbelstein who is coached by three
+different agents at the same time:
+
+>>> obj = pcsw.Client.objects.get(pk=123)
+>>> obj
+Client #123 (u'DOBBELSTEIN Doroth\xe9e (123)')
+>>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+====================== ===== ================= ========
+ Begleitet seit         bis   Begleiter         Primär
+---------------------- ----- ----------------- --------
+ 24.10.13                     Alicia Allmanns   Ja
+ 13.12.13                     Hubert Huppertz   Nein
+ 02.04.14                     Mélanie Mélard    Nein
+ **Total (3 Zeilen)**                           **1**
+====================== ===== ================= ========
+<BLANKLINE>
+
+A third client is David DA VINCI:
+
+>>> obj = pcsw.Client.objects.get(pk=164)
+>>> print(obj)
+DA VINCI David (164)
+>>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+====================== ========== ================= ========
+ Begleitet seit         bis        Begleiter         Primär
+---------------------- ---------- ----------------- --------
+ 03.03.12                          Mélanie Mélard    Ja
+ 08.03.13               04.10.13   Caroline Carnol   Nein
+ 04.10.13                          Hubert Huppertz   Nein
+ **Total (3 Zeilen)**                                **1**
+====================== ========== ================= ========
+<BLANKLINE>
+
+
+When Mélanie opens her :menuselection:`Integration --> Clients` list,
+then she sees the following clients (Dorothée is there, but Robin
+isn't):
+
+>>> ses.show(integ.Clients, column_names="name_column")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+============================
+ Name
+----------------------------
+ AUSDEMWALD Alfons (115)
+ DENON Denis (179)
+ DOBBELSTEIN Dorothée (123)
+ EMONTS Daniel (127)
+ EVERS Eberhart (126)
+ FAYMONVILLE Luc (129)
+ JACOBS Jacqueline (136)
+ JONAS Josef (138)
+ LAMBERTZ Guido (141)
+ LAZARUS Line (143)
+ RADERMACHER Alfons (152)
+ RADERMACHER Edgard (156)
+ RADERMACHER Guido (158)
+ DA VINCI David (164)
+ VAN VEEN Vincent (165)
+============================
+<BLANKLINE>
+
+Here is a list of Mélanies clients on 2013-04-01.  We get it by
+manually filling that date into the
+:attr:`welfare.pcsw.Clients.end_date` parameter field.  Note that
+
+- Dorothée is not included since Mélanie started coaching her only
+  2014-04-02
+- David is included since Mélanie started coaching him already
+  2012-03-03
+
+>>> pv = dict(end_date=i2d(20130401))
+>>> ses.show(integ.Clients, column_names="name_column", param_values=pv)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+=============================
+ Name
+-----------------------------
+ DENON Denis (179)
+ DUBOIS Robin (178)
+ ENGELS Edgar (128)
+ JACOBS Jacqueline (136)
+ LAMBERTZ Guido (141)
+ MALMENDIER Marc (145)
+ RADERMACHER Christian (154)
+ DA VINCI David (164)
+=============================
+<BLANKLINE>
