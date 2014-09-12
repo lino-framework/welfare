@@ -6,7 +6,7 @@ Debts mediation
 .. include:: /include/tested.rst
 
 .. to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_cbss
+  $ python setup.py test -s tests.DocsTests.test_debts
 
 ..
     >>> from django.utils import translation
@@ -24,7 +24,7 @@ For example here is how we can verify here that the demo database
 has three Budgets:
 
 >>> debts.Budget.objects.count()
-5
+6
 
 Or we can retrieve budget no. 3 from the database:
 
@@ -51,7 +51,7 @@ Here is the textual representation of the "Expenses" panel:
  (3012) Strom                           Electricity
  (3020) Festnetz-Telefon und Internet   Telephone & Internet   5,00
  (3021) Handy                           Cell phone             10,00
- (3030) Fahrtkosten                     Transport costs        15,00        Shopping
+ (3030) Fahrtkosten                     Transport costs        15,00        Seminar
  (3030) Fahrtkosten                     Transport costs        15,00        Cinema
  (3031) TEC Busabonnement               Public transport       20,00
  (3032) Benzin                          Fuel                   26,00
@@ -144,31 +144,31 @@ row (e.g. "Fahrtkosten") separated by commas.
 >>> groups = list(obj.account_groups())
 >>> with translation.override('en'):
 ...     ses.show(obj.entries_by_group(groups[2]))
-==================================== ============ ===== ====== ============
- Description                          Common       Mr.   Mrs.   Total
------------------------------------- ------------ ----- ------ ------------
- Rent                                 41,00                     41,00
- Water                                47,00                     47,00
- Telephone & Internet                 5,00                      5,00
- Cell phone                           10,00                     10,00
- Transport costs (Shopping, Cinema)   30,00                     30,00
- Public transport                     20,00                     20,00
- Fuel                                 26,00                     26,00
- Car maintenance                      31,00                     31,00
- School                               36,00                     36,00
- Babysitting                          41,00                     41,00
- Health                               47,00                     47,00
- Food                                 5,00                      5,00
- Hygiene                              10,00                     10,00
- Health insurance                     15,00                     15,00
- Labour fees                          20,00                     20,00
- Unterhaltszahlungen                  26,00                     26,00
- Retirement savings                   31,00                     31,00
- Tobacco                              36,00                     36,00
- Spare time (Seminar)                 41,00                     41,00
- Pets                                 47,00                     47,00
- **Total (20 rows)**                  **565,00**                **565,00**
-==================================== ============ ===== ====== ============
+=================================== ============ ===== ====== ============
+ Description                         Common       Mr.   Mrs.   Total
+----------------------------------- ------------ ----- ------ ------------
+ Rent                                41,00                     41,00
+ Water                               47,00                     47,00
+ Telephone & Internet                5,00                      5,00
+ Cell phone                          10,00                     10,00
+ Transport costs (Seminar, Cinema)   30,00                     30,00
+ Public transport                    20,00                     20,00
+ Fuel                                26,00                     26,00
+ Car maintenance                     31,00                     31,00
+ School                              36,00                     36,00
+ Babysitting                         41,00                     41,00
+ Health                              47,00                     47,00
+ Food                                5,00                      5,00
+ Hygiene                             10,00                     10,00
+ Health insurance                    15,00                     15,00
+ Labour fees                         20,00                     20,00
+ Unterhaltszahlungen                 26,00                     26,00
+ Retirement savings                  31,00                     31,00
+ Tobacco                             36,00                     36,00
+ Spare time (Seminar)                41,00                     41,00
+ Pets                                47,00                     47,00
+ **Total (20 rows)**                 **565,00**                **565,00**
+=================================== ============ ===== ====== ============
 <BLANKLINE>
 
 

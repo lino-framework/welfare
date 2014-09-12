@@ -53,14 +53,14 @@ Some database content
 ================= ====================================== ===========================
  Funktion          Stellenanbieter                        Sektor
 ----------------- -------------------------------------- ---------------------------
- Koch              R-Cycle Sperrgutsortierzentrum (226)    Seefahrt
- Koch              Pro Aktiv V.o.G. (228)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (228)                  Medizin & Paramedizin
- Küchenassistent   BISA (225)                              Reinigung
- Tellerwäscher     BISA (225)                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (226)    Transport
- Kellner           BISA (225)                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (226)    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum (227)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (229)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (229)                  Medizin & Paramedizin
+ Küchenassistent   BISA (226)                              Reinigung
+ Tellerwäscher     BISA (226)                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (227)    Transport
+ Kellner           BISA (226)                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (227)    Horeca
 ================= ====================================== ===========================
 <BLANKLINE>
 
@@ -123,24 +123,24 @@ The demo fixtures also generated some excerpts:
 
 >>> with translation.override('en'):
 ...     ses.show(excerpts.Excerpts, column_names="id excerpt_type owner")
-==== ====================== ========================================
+==== ====================== =======================================
  ID   Excerpt Type           Controlled by
----- ---------------------- ----------------------------------------
+---- ---------------------- ---------------------------------------
  1    Simple confirmation    **Simple confirmation #1**
  2    Income confirmation    **Income confirmation #1**
  3    Refund confirmation    **Refund confirmation #1**
  4    Budget                 **Budget 1 for Jeanémart-Lahm (181)**
- 5    Art.60§7 contract      **Art.60§7 contract#1 (Bernd Brecht)**
+ 5    Job contract           **Job contract#1 (Bernd Brecht)**
  6    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
  7    Presence certificate   **Guest #1 (22.05.2014)**
  8    Curriculum vitae       **AUSDEMWALD Alfons (115)**
  9    eID sheet              **AUSDEMWALD Alfons (115)**
  10   to-do list             **AUSDEMWALD Alfons (115)**
-==== ====================== ========================================
+==== ====================== =======================================
 <BLANKLINE>
 
 >>> import shutil
->>> obj = excerpts.Excerpt.objects.get(pk=3)
+>>> obj = excerpts.Excerpt.objects.get(pk=6)
 >>> rv = ses.run(obj.do_print)
 >>> print(rv['open_url'])  #doctest: +NORMALIZE_WHITESPACE
 /media/cache/appypdf/isip.Contract-1.pdf

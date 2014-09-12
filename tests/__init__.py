@@ -21,22 +21,16 @@ Examples how to run these tests::
   $ python setup.py test -s tests.DocsTests.test_docs
 """
 from unipath import Path
-
-ROOTDIR = Path(__file__).parent.parent
-
-
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
-SETUP_INFO = {}  # just to satisfy flymake
-# load  SETUP_INFO:
-execfile(ROOTDIR.child('lino_welfare', 'project_info.py'), globals())
-
 from djangosite.utils.pythontest import TestCase
+
+import lino_welfare
 
 
 class BaseTestCase(TestCase):
-    project_root = ROOTDIR
+    project_root = Path(__file__).parent.parent
 
 
 class DjangoTests(BaseTestCase):
@@ -45,7 +39,7 @@ class DjangoTests(BaseTestCase):
     """
     def test_docs(self):
         # self.run_django_manage_test('lino_welfare/projects/docs')
-        cwd = ROOTDIR.child(
+        cwd = self.project_root.child(
             'lino_welfare', 'projects', 'docs', 'tests').absolute()
         self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
     
@@ -59,7 +53,7 @@ class DjangoTests(BaseTestCase):
 class SimpleTests(BaseTestCase):
 
     def test_packages(self):
-        self.run_packages_test(SETUP_INFO['packages'])
+        self.run_packages_test(lino_welfare.SETUP_INFO['packages'])
 
 
 class DocsTests(BaseTestCase):

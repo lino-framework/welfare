@@ -42,7 +42,7 @@ Test whether :meth:`get_db_overview_rst
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
-111 models:
+112 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
@@ -64,13 +64,13 @@ Test whether :meth:`get_db_overview_rst
  cal.Event                      24        314
  cal.EventType                  19        7
  cal.Guest                      9         19
- cal.GuestRole                  7         4
+ cal.GuestRole                  5         4
  cal.Priority                   6         9
  cal.RecurrentEvent             22        9
  cal.RemoteCalendar             7         0
  cal.Room                       5         0
- cal.Subscription               4         8
- cal.Task                       18        34
+ cal.Subscription               4         9
+ cal.Task                       19        34
  cbss.IdentifyPersonRequest     20        5
  cbss.ManageAccessRequest       23        1
  cbss.Purpose                   7         106
@@ -79,11 +79,11 @@ Test whether :meth:`get_db_overview_rst
  changes.Change                 9         0
  contacts.Company               30        46
  contacts.CompanyType           9         16
- contacts.Partner               26        157
+ contacts.Partner               26        158
  contacts.Person                33        106
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         112
+ contenttypes.ContentType       4         113
  countries.Country              8         8
  countries.Place                10        76
  courses.Course                 5         3
@@ -91,27 +91,27 @@ Test whether :meth:`get_db_overview_rst
  courses.CourseOffer            6         3
  courses.CourseProvider         31        2
  courses.CourseRequest          10        20
- cv.LanguageKnowledge           7         119
- debts.Actor                    6         10
- debts.Budget                   11        5
- debts.Entry                    16        245
+ cv.LanguageKnowledge           9         119
+ debts.Actor                    6         12
+ debts.Budget                   11        6
+ debts.Entry                    16        294
  excerpts.Excerpt               8         10
  excerpts.ExcerptType           16        10
- households.Household           29        5
- households.Member              12        10
+ households.Household           29        6
+ households.Member              12        12
  households.Type                5         4
  humanlinks.Link                4         36
  isip.Contract                  22        17
  isip.ContractEnding            6         4
  isip.ContractPartner           6         16
- isip.ContractType              8         5
+ isip.ContractType              9         5
  isip.EducationLevel            6         5
  isip.ExamPolicy                20        5
  isip.StudyType                 7         8
  jobs.Candidature               8         74
  jobs.Contract                  28        16
  jobs.ContractType              9         5
- jobs.Experience                10        30
+ jobs.Experience                13        30
  jobs.Function                  7         4
  jobs.Job                       10        8
  jobs.JobProvider               31        3
@@ -120,6 +120,7 @@ Test whether :meth:`get_db_overview_rst
  jobs.Regime                    5         3
  jobs.Schedule                  5         3
  jobs.Sector                    6         14
+ jobs.Status                    5         7
  jobs.Study                     14        2
  languages.Language             6         5
  newcomers.Broker               2         2
@@ -133,7 +134,7 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    76        63
+ pcsw.Client                    65        63
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         77
@@ -154,7 +155,7 @@ Test whether :meth:`get_db_overview_rst
  system.SiteConfig              30        1
  system.TextFieldTemplate       5         2
  uploads.Upload                 16        6
- uploads.UploadType             10        7
+ uploads.UploadType             10        8
  users.Authority                3         3
  users.User                     19        10
 ============================== ========= =======
@@ -209,6 +210,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kompetenzen
   - Schuldnerberatung : Budgets, Einträge
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
+  - Empfang : Confirmations, AidRegimes, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Eigenschaften
 - Site : Info
 <BLANKLINE>
