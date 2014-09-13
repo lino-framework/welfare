@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2013 Luc Saffre
+# Copyright 2009-2014 Luc Saffre
 # This file is part of the Lino project.
 # Lino is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,37 +18,20 @@ Garbles person names in the database so that it may be used for a demo.
 
 """
 
-import os
-import sys
-#~ import datetime
 from optparse import make_option
 
-#~ from dateutil import parser as dateparser
-
 from django.conf import settings
-#~ from django.core.management import call_command
-#~ from django.db import IntegrityError
-#~ from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
 
-#~ from lino import lino_site
-#~ from lino.utils import dbfreader
 from lino.utils import dblogger
 from lino.utils import Cycler, join_words
-#~ from lino import diag
-
-#~ from lino.modlib.contacts.utils import name2kw, street2kw
-#~ from lino.utils import join_words
 
 from lino import mixins
 from lino import dd
-#~ from lino.core.dbutils import is_valid_email
-#~ import lino
+
 
 from lino.utils import confirm
 
-#~ print 'Loading demo names...'
-#~ from lino.modlib.contacts.fixtures import demo_fr as demo
 from lino.utils import demonames as demo
 
 
@@ -85,8 +68,6 @@ NATIONALITIES = Cycler('BE', 'MA', 'BE', 'RU', 'BE', 'CD')
 
 #~ print 'Done'
 
-
-#~ REQUEST = dblogger.PseudoRequest('garble')
 
 class Command(BaseCommand):
     args = '(no arguments)'
