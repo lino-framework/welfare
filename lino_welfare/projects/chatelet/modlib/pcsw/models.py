@@ -67,8 +67,8 @@ class ClientDetail(dd.FormLayout):
     """
 
     family = dd.Panel("""
-    humanlinks.LinksByHuman:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
+    humanlinks.LinksByHuman:30
     """, label=_("Family situation"))
 
     parties = dd.Panel("""
@@ -169,6 +169,9 @@ Clients.detail_layout = ClientDetail()
 
 households = dd.resolve_app('households')
 households.SiblingsByPerson.slave_grid_format = 'grid'
+
+# humanlinks = dd.resolve_app('humanlinks')
+# humanlinks.LinksByHuman.slave_grid_format = 'grid'
 
 jobs = dd.resolve_app('jobs')
 jobs.ExperiencesByPerson.column_names = "company started stopped \

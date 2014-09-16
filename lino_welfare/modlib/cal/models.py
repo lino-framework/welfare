@@ -287,8 +287,8 @@ if False:
             kw.update(eval_js=ar.renderer.instance_handler(ar, event))
             ar.success(**kw)
 
-EventsByDay.column_names = 'start_time project user \
-assigned_to workflow_buttons *'
+EventsByDay.column_names = 'start_time project summary user \
+assigned_to room workflow_buttons *'
 
 EventsByController.column_names = 'when_text summary user \
 assigned_to workflow_buttons *'

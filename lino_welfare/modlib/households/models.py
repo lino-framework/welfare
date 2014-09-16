@@ -77,8 +77,8 @@ person_fields = dd.fields_list(
 class HouseholdDetail(dd.FormLayout):
 
     main = """
-    type name id
-    box3 box4
+    type prefix name id
+    overview box3 box4
     bottom_box
     """
 
@@ -103,7 +103,7 @@ class Households(Households):
 
 
 class SiblingsByPerson(SiblingsByPerson):
-    column_names = "age role dependency person \
+    column_names = "age:10 role dependency person \
     first_name last_name birth_date gender *"
     order_by = ['birth_date']
 
