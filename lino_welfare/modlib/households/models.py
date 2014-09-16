@@ -18,6 +18,8 @@ This module extends :mod:`lino.modlib.households.models`
 
 from __future__ import unicode_literals
 
+import datetime
+
 from lino.modlib.households.models import *
 
 from django.utils.translation import ugettext_lazy as _
@@ -46,7 +48,7 @@ class Household(Household):
 
     def after_ui_create(self, ar):
         super(Household, self).after_ui_create(ar)
-        self.populate_children.run_from_code(ar)
+        self.populate_members.run_from_code(ar)
 
 
 class Member(Member, dd.Human, dd.Born):
@@ -59,6 +61,8 @@ class Member(Member, dd.Human, dd.Born):
             for k in person_fields:
                 setattr(self, k, getattr(self.person, k))
         super(Member, self).full_clean()
+        # TODO: create humanlink if necessary. PopulateMembers
+        # hl = humanlinks.Link.objects.get(child=self.person)
 
     def disabled_fields(self, ar):
         rv = super(Member, self).disabled_fields(ar)
@@ -69,17 +73,19 @@ class Member(Member, dd.Human, dd.Born):
 
 dd.update_field(Member, 'person', null=True, blank=True)
 
-# person_fields = ('first_name', 'last_name', 'gender', 'birth_date')
 person_fields = dd.fields_list(
     Member, 'first_name last_name gender birth_date')
 
 
 class HouseholdDetail(dd.FormLayout):
 
+    # window_size = (90, 20)
+
     main = """
     type prefix name id
-    overview box3 box4
-    bottom_box
+    # overview box3 box4
+    # bottom_box
+    households.MembersByHousehold
     """
 
     box3 = """
@@ -107,12 +113,35 @@ class SiblingsByPerson(SiblingsByPerson):
     first_name last_name birth_date gender *"
     order_by = ['birth_date']
 
+MembersByHousehold.column_names = SiblingsByPerson.column_names
+MembersByHousehold.order_by = SiblingsByPerson.order_by
+MembersByHousehold.auto_fit_column_widths = True
 
-import datetime
+
 ADULT_AGE = datetime.timedelta(days=18*365)
 
 
-class PopulateChildren(dd.Action):
+class PopulateHumanLinks(dd.Action):
+    # show_in_bbar = False
+    custom_handler = True
+    label = _("Populate")
+    icon_name = 'lightning'
+
+    def run_from_ui(self, ar, **kw):
+        Link = dd.modules.humanlinks.Link
+        n = 0
+        for person in ar.selected_rows:
+            # populate_humanlinks(ar, person)
+            for cm in Member.objects.filter(role__in=child_roles):
+                for pm in Member.objects.filter(household=cm.household,
+                                                role__in=parent_roles):
+                    if Link.check_autocreate(pm.person, cm.person):
+                        n += 1
+        ar.success(
+            _("Added %d children.") % n, refresh_all=True)
+            
+
+class PopulateMembers(dd.Action):
     # show_in_bbar = False
     custom_handler = True
     label = _("Populate")
@@ -125,7 +154,7 @@ class PopulateChildren(dd.Action):
             for mbr in hh.member_set.filter(role__in=child_roles):
                 if mbr.person:
                     known_children.add(mbr.person.id)
-                    
+
             new_children = dict()
             for parent in hh.member_set.filter(role__in=parent_roles):
                 for childlnk in parent.person.children.all():
@@ -167,5 +196,9 @@ class PopulateChildren(dd.Action):
 
 dd.inject_action(
     'households.Household',
-    populate_children=PopulateChildren())
+    populate_members=PopulateMembers())
+
+dd.inject_action(
+    'contacts.Person',
+    populate_humanlinks=PopulateHumanLinks())
 
