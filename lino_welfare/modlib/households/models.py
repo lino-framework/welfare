@@ -60,9 +60,37 @@ class Member(Member, dd.Human, dd.Born):
         if self.person_id:
             for k in person_fields:
                 setattr(self, k, getattr(self.person, k))
+        else:
+            # create Client if appropriate
+            has_all_fields = True
+            kw = dict()
+            for k in person_fields:
+                if getattr(self, k):
+                    kw[k] = getattr(self, k)
+                else:
+                    has_all_fields = False
+            if has_all_fields:
+                M = dd.modules.pcsw.Client
+                try:
+                    obj = M.objects.get(**kw)
+                except M.DoesNotExist:
+                    obj = M(**kw)
+                    obj.full_clean()
+                    obj.save()
+                self.person = obj
+    
         super(Member, self).full_clean()
-        # TODO: create humanlink if necessary. PopulateMembers
-        # hl = humanlinks.Link.objects.get(child=self.person)
+
+        if self.person_id and self.role and self.household_id:
+            Link = dd.modules.humanlinks.Link
+            if self.role in child_roles:
+                for pm in Member.objects.filter(
+                        household=self.household, role__in=parent_roles):
+                    Link.check_autocreate(pm.person, self.person)
+            elif self.role in parent_roles:
+                for cm in Member.objects.filter(
+                        household=self.household, role__in=child_roles):
+                    Link.check_autocreate(self.person, cm.person)
 
     def disabled_fields(self, ar):
         rv = super(Member, self).disabled_fields(ar)
@@ -121,26 +149,6 @@ MembersByHousehold.auto_fit_column_widths = True
 ADULT_AGE = datetime.timedelta(days=18*365)
 
 
-class PopulateHumanLinks(dd.Action):
-    # show_in_bbar = False
-    custom_handler = True
-    label = _("Populate")
-    icon_name = 'lightning'
-
-    def run_from_ui(self, ar, **kw):
-        Link = dd.modules.humanlinks.Link
-        n = 0
-        for person in ar.selected_rows:
-            # populate_humanlinks(ar, person)
-            for cm in Member.objects.filter(role__in=child_roles):
-                for pm in Member.objects.filter(household=cm.household,
-                                                role__in=parent_roles):
-                    if Link.check_autocreate(pm.person, cm.person):
-                        n += 1
-        ar.success(
-            _("Added %d children.") % n, refresh_all=True)
-            
-
 class PopulateMembers(dd.Action):
     # show_in_bbar = False
     custom_handler = True
@@ -197,8 +205,4 @@ class PopulateMembers(dd.Action):
 dd.inject_action(
     'households.Household',
     populate_members=PopulateMembers())
-
-dd.inject_action(
-    'contacts.Person',
-    populate_humanlinks=PopulateHumanLinks())
 
