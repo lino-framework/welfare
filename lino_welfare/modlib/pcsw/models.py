@@ -513,7 +513,7 @@ class Client(contacts.Person,
         for pk in prop_ids:
             try:
                 yield self.personproperty_set.get(property__id=pk)
-            except cv.PersonProperty.DoesNotExist, e:
+            except cv.PersonProperty.DoesNotExist:
                 pass
 
     def unused_get_property(self, prop_id):
