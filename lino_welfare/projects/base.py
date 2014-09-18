@@ -149,7 +149,6 @@ class Site(Site):
 
         m = main.add_menu("explorer", _("Explorer"))
         self.on_each_app('setup_explorer_menu', ui, profile, m)
-        m.add_action(self.modules.properties.Properties)
 
         m = main.add_menu("site", _("Site"))
         #~ self.modules.lino.setup_site_menu(self,ui,user,m)

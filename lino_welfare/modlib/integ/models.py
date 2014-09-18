@@ -38,7 +38,7 @@ isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 courses = dd.resolve_app('courses')
 users = dd.resolve_app('users')
-properties = dd.resolve_app('properties')
+# properties = dd.resolve_app('properties')
 
 
 
@@ -65,7 +65,7 @@ class Clients(pcsw.Clients):
         language=dd.ForeignKey('languages.Language',
                                verbose_name=_("Language knowledge"),
                                blank=True, null=True),
-        wanted_property=dd.ForeignKey(properties.Property,
+        wanted_property=dd.ForeignKey('properties.Property',
                                       verbose_name=_("Wanted skill"),
                                       blank=True, null=True),
         only_active=models.BooleanField(

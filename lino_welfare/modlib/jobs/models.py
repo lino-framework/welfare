@@ -21,43 +21,24 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import time
 import cgi
 import datetime
+ONE_DAY = datetime.timedelta(days=1)
 
 from django.db import models
-#~ from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode
 
-#~ import lino
-#~ logger.debug(__file__+' : started')
-#~ from django.utils import translation
-
-
-ONE_DAY = datetime.timedelta(days=1)
-
-
 from lino import dd
-#~ from lino import layouts
-#~ from lino.core import perms
-from lino.utils import dblogger
-from lino import mixins
-
 from lino.utils.xmlgen.html import E
-
-from lino.core.dbutils import get_field
-from lino.core.dbutils import resolve_field
 from lino.utils.htmlgen import UL
-from lino.mixins.printable import DirectPrintAction
-
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
+
+from .mixins import SectorFunction
 
 uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')
@@ -65,8 +46,6 @@ contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
 pcsw = dd.resolve_app('pcsw')
 cv = dd.resolve_app('cv')
-
-# from lino_welfare.modlib.jobs import Plugin
 
 
 class Schedule(dd.BabelNamed):
@@ -123,7 +102,6 @@ class Statuses(dd.Table):
     id name
     ExperiencesByStatus
     """
-
 
 
 class JobProvider(contacts.Company):
@@ -565,27 +543,6 @@ class JobType(dd.Sequenced):
         return unicode(self.name)
 
 
-class SectorFunction(dd.Model):
-
-    """
-    Abstract base for models that refer to a 
-    :class:`Sector` and a :class:`Function`.
-    """
-    class Meta:
-        abstract = True
-
-    sector = models.ForeignKey("jobs.Sector",
-                               blank=True, null=True)
-    function = models.ForeignKey("jobs.Function",
-                                 blank=True, null=True)
-
-    @dd.chooser()
-    def function_choices(cls, sector):
-        if sector is not None:
-            return sector.function_set.all()
-        return Function.objects.all()
-
-
 class Offer(SectorFunction):
 
     "A Job Offer"
@@ -632,7 +589,40 @@ class Offers(dd.Table):
     """
 
 
-class Study(cv.PersonHistoryEntry, CountryCity):
+class PersonHistoryEntry(dd.Model):
+    "Base class for jobs.Study, jobs.Experience"
+    class Meta:
+        abstract = True
+
+    person = models.ForeignKey('pcsw.Client')
+    started = models.DateField(_("Beginning"), blank=True, null=True)
+    stopped = models.DateField(_("End"), blank=True, null=True)
+
+
+class HistoryByPerson(dd.Table):
+    """Abstract base class for :class:`StudiesByPerson` and
+    :class:`ExperiencesByPerson`
+
+    """
+    master_key = 'person'
+    order_by = ["started"]
+
+    @classmethod
+    def create_instance(self, req, **kw):
+        obj = super(HistoryByPerson, self).create_instance(req, **kw)
+        if obj.person is not None:
+            previous_exps = self.model.objects.filter(
+                person=obj.person).order_by('started')
+            if previous_exps.count() > 0:
+                exp = previous_exps[previous_exps.count() - 1]
+                if exp.stopped:
+                    obj.started = exp.stopped
+                else:
+                    obj.started = exp.started
+        return obj
+
+
+class Study(PersonHistoryEntry, CountryCity):
 
     class Meta:
         verbose_name = _("study or education")
@@ -694,7 +684,7 @@ class StudiesByType(Studies):
     success language remarks *'
 
 
-class StudiesByPerson(cv.HistoryByPerson, Studies):
+class StudiesByPerson(HistoryByPerson, Studies):
     "List of studies for a given client."
     _study_regime = isip.StudyRegimes.studies
     required = dd.required(user_groups='integ')
@@ -718,7 +708,7 @@ class StudiesByPerson(cv.HistoryByPerson, Studies):
 #     _study_regime = isip.StudyRegimes.trainings
 
 
-class Experience(cv.PersonHistoryEntry, SectorFunction):
+class Experience(PersonHistoryEntry, SectorFunction):
 
     class Meta:
         verbose_name = _("Job Experience")
@@ -751,7 +741,7 @@ class ExperiencesByFunction(Experiences):
     order_by = ["started"]
 
 
-class ExperiencesByPerson(cv.HistoryByPerson, Experiences):
+class ExperiencesByPerson(HistoryByPerson, Experiences):
     "List of job experiences for a known person"
     required = dd.required(user_groups='integ')
     auto_fit_column_widths = True

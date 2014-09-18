@@ -42,6 +42,7 @@ class Site(Site):
         kw.update(sepa=None)
         kw.update(iban=None)
         kw.update(badges=None)
+        kw.update(properties=None)
         # alternative implementations:
         kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')

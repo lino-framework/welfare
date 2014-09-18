@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-10 07:29+0300\n"
-"PO-Revision-Date: 2014-09-10 07:30+0300\n"
+"PO-Revision-Date: 2014-09-18 15:03+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -1658,19 +1658,19 @@ msgstr "Connaissances de langue"
 
 #: lino_welfare/modlib/cv/models.py:123
 msgid "Spoken"
-msgstr "Parlé"
+msgstr "Expression orale"
 
 #: lino_welfare/modlib/cv/models.py:124
 msgid "Written"
-msgstr "Écrit"
+msgstr "Expression écrite"
 
 #: lino_welfare/modlib/cv/models.py:125
 msgid "Spoken (passively)"
-msgstr "Parlé (passif)"
+msgstr "Compréhension orale"
 
 #: lino_welfare/modlib/cv/models.py:127
 msgid "Written (passively)"
-msgstr "Écrit  (passif)"
+msgstr "Compréhension écrite"
 
 #: lino_welfare/modlib/cv/models.py:129
 msgid "native language"

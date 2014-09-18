@@ -218,12 +218,6 @@ def site_setup(site):
 
     """
 
-    site.modules.properties.Properties.set_detail_layout("""
-    id group type
-    name
-    cv.PersonPropsByProp
-    """)
-
     site.modules.countries.Places.set_detail_layout("""
     name country inscode zip_code
     parent type id

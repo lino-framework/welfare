@@ -1,16 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2008-2014 Luc Saffre
-# This file is part of the Lino project.
-# Lino is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino; if not, see <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 """
 The :xfile:`models.py` file for :mod:`lino_welfare.modlib.cv`.
 """
@@ -26,47 +16,16 @@ from django.utils.functional import lazy
 
 from lino import dd
 cal = dd.resolve_app('cal')
-uploads = dd.resolve_app('uploads')
-notes = dd.resolve_app('notes')
-contacts = dd.resolve_app('contacts')
+# uploads = dd.resolve_app('uploads')
+# notes = dd.resolve_app('notes')
+# contacts = dd.resolve_app('contacts')
 from north.dbutils import babelattr
 
 from lino.modlib.properties import models as properties
 
+from lino.core.choicelists import HowWell
+
 config = dd.apps.cv
-
-
-class PersonHistoryEntry(dd.Model):
-    "Base class for jobs.Study, jobs.Experience"
-    class Meta:
-        abstract = True
-
-    person = models.ForeignKey(config.person_model)
-    started = models.DateField(_("Beginning"), blank=True, null=True)
-    stopped = models.DateField(_("End"), blank=True, null=True)
-
-
-class HistoryByPerson(dd.Table):
-    """Abstract base class for :class:`StudiesByPerson` and
-    :class:`ExperiencesByPerson`
-
-    """
-    master_key = 'person'
-    order_by = ["started"]
-
-    @classmethod
-    def create_instance(self, req, **kw):
-        obj = super(HistoryByPerson, self).create_instance(req, **kw)
-        if obj.person is not None:
-            previous_exps = self.model.objects.filter(
-                person=obj.person).order_by('started')
-            if previous_exps.count() > 0:
-                exp = previous_exps[previous_exps.count() - 1]
-                if exp.stopped:
-                    obj.started = exp.stopped
-                else:
-                    obj.started = exp.started
-        return obj
 
 
 class CefLevel(dd.ChoiceList):
@@ -114,18 +73,14 @@ class LanguageKnowledge(dd.Model):
 
     allow_cascaded_delete = ['person']
 
-    #~ person = models.ForeignKey("contacts.Person")
-    #~ person = models.ForeignKey(settings.SITE.person_model)
-    person = models.ForeignKey('pcsw.Client')
+    person = models.ForeignKey(config.person_model)
     language = dd.ForeignKey("languages.Language")
-    #~ language = models.ForeignKey("countries.Language")
-    #~ language = fields.LanguageField()
-    spoken = properties.HowWell.field(_("Spoken"), blank=True)
-    written = properties.HowWell.field(_("Written"), blank=True)
-    spoken_passively = properties.HowWell.field(_("Spoken (passively)"),
-                                                blank=True)
-    written_passively = properties.HowWell.field(_("Written (passively)"),
-                                                 blank=True)
+    spoken = HowWell.field(_("Spoken"), blank=True)
+    written = HowWell.field(_("Written"), blank=True)
+    spoken_passively = HowWell.field(_("Spoken (passively)"),
+                                     blank=True)
+    written_passively = HowWell.field(_("Written (passively)"),
+                                      blank=True)
     native = models.BooleanField(_("native language"), default=False)
     cef_level = CefLevel.field(blank=True)  # ,null=True)
 
@@ -187,7 +142,7 @@ class PersonProperty(properties.PropertyOccurence):
 
     #~ person = models.ForeignKey("contacts.Person")
     #~ person = models.ForeignKey(settings.SITE.person_model)
-    person = models.ForeignKey('pcsw.Client')
+    person = models.ForeignKey(config.person_model)
     remark = models.CharField(max_length=200,
                               blank=True,  # null=True,
                               verbose_name=_("Remark"))
@@ -264,12 +219,6 @@ class ObstaclesByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_obstacles'
 
 
-def site_setup(site):
-    site.modules.languages.Languages.set_detail_layout("""
-    id iso2 name
-    cv.KnowledgesByLanguage
-    """)
-
 
 def customize_siteconfig():
 
@@ -315,3 +264,18 @@ def setup_explorer_menu(site, ui, profile, m):
     menu = dd.apps.integ
     m = m.add_menu(menu.app_label, menu.verbose_name)
     m.add_action(LanguageKnowledges)
+
+
+@dd.receiver(dd.post_analyze)
+def set_detail_layouts(sender=None, **kwargs):
+    dd.modules.properties.Properties.set_detail_layout("""
+    id group type
+    name
+    cv.PersonPropsByProp
+    """)
+
+    dd.modules.languages.Languages.set_detail_layout("""
+    id iso2 name
+    cv.KnowledgesByLanguage
+    """)
+
