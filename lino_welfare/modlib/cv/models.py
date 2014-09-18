@@ -9,7 +9,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 from django.db import models
-from django.db.utils import DatabaseError
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import lazy
@@ -22,8 +21,6 @@ cal = dd.resolve_app('cal')
 from north.dbutils import babelattr
 
 from lino.modlib.properties import models as properties
-
-from lino.core.choicelists import HowWell
 
 config = dd.apps.cv
 
@@ -75,12 +72,12 @@ class LanguageKnowledge(dd.Model):
 
     person = models.ForeignKey(config.person_model)
     language = dd.ForeignKey("languages.Language")
-    spoken = HowWell.field(_("Spoken"), blank=True)
-    written = HowWell.field(_("Written"), blank=True)
-    spoken_passively = HowWell.field(_("Spoken (passively)"),
-                                     blank=True)
-    written_passively = HowWell.field(_("Written (passively)"),
-                                      blank=True)
+    spoken = properties.HowWell.field(_("Spoken"), blank=True)
+    written = properties.HowWell.field(_("Written"), blank=True)
+    spoken_passively = properties.HowWell.field(_("Spoken (passively)"),
+                                                blank=True)
+    written_passively = properties.HowWell.field(_("Written (passively)"),
+                                                 blank=True)
     native = models.BooleanField(_("native language"), default=False)
     cef_level = CefLevel.field(blank=True)  # ,null=True)
 
