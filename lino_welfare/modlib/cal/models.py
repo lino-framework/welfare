@@ -142,6 +142,8 @@ class Event(Event):
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self, txt)
 
+dd.update_field(Event, 'user', verbose_name=_("Agent"))
+
 #~ class MyEvents(MyEvents):
     #~ exclude = dict(state=EventStates.visit)
 
