@@ -1,16 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2002-2014 Luc Saffre
-# This file is part of the Lino Welfare project.
-# Lino Welfare is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino  Welfareis distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 #~ Note that this module may not have a docstring because any
 #~ global variable defined here will override the global
@@ -43,7 +33,7 @@ independant organization.""",
     author='Luc Saffre',
     author_email='luc.saffre@gmail.com',
     url="http://welfare.lino-framework.org",
-    license='GPL',
+    license='BSD License',
     classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
@@ -52,7 +42,7 @@ Environment :: Web Environment
 Framework :: Django
 Intended Audience :: Developers
 Intended Audience :: System Administrators
-License :: OSI Approved :: GNU General Public License (GPL)
+License :: OSI Approved :: BSD License
 Natural Language :: French
 Natural Language :: German
 Operating System :: OS Independent
