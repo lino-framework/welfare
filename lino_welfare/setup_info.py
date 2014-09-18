@@ -43,13 +43,15 @@ Framework :: Django
 Intended Audience :: Developers
 Intended Audience :: System Administrators
 License :: OSI Approved :: BSD License
+Natural Language :: English
 Natural Language :: French
 Natural Language :: German
 Operating System :: OS Independent
 Topic :: Database :: Front-Ends
 Topic :: Home Automation
 Topic :: Office/Business
-Topic :: Software Development :: Libraries :: Application Frameworks""".splitlines())
+Topic :: Sociology :: Genealogy
+Topic :: Education""".splitlines())
 
 SETUP_INFO.update(packages=[
     'lino_welfare',
