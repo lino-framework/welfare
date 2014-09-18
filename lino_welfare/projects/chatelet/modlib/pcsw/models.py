@@ -106,7 +106,7 @@ class ClientDetail(dd.FormLayout):
     workflow_buttons
     broker:12
     faculty:12
-    refusal_reason
+    # refusal_reason
     """, required=dict(user_groups='newcomers'))
 
     #~ coaching_left = """
@@ -179,3 +179,6 @@ function regime status is_training country remarks *"
 
 jobs.StudiesByPerson.column_names = "type content started stopped \
 school country success language remarks *"
+
+ContactsByClient.column_names = 'company contact_person remark'
+dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))

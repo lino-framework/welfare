@@ -168,7 +168,8 @@ class PopulateMembers(dd.Action):
                 for childlnk in parent.person.children.all():
                     child = childlnk.child
                     if not child.id in known_children:
-                        if child.get_age() <= ADULT_AGE:
+                        age = child.get_age()
+                        if age is not None and age <= ADULT_AGE:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
                                 cr = MemberRoles.child
