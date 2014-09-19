@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-Welfare User Manual 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 07:29+0300\n"
+"POT-Creation-Date: 2014-09-19 04:42+0300\n"
 "PO-Revision-Date: 2013-04-05 12:02+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-# 16280279340741988a9b83ebee6e9c5b
+# fac176141983438bb7f0fc9214ec7a52
 #: ../.templates/layout.html:6
 #, python-format
 msgid "&copy; <a href=\"%(path)s\">Copyright</a> %(copyright)s."
 msgstr ""
 
-# 3c081bf0fb1e43eb993ca547c797b2af
+# 42a0ff0c019d453faab1352d3591c9cf
 #: ../.templates/layout.html:8
 #, python-format
 msgid "&copy; Copyright %(copyright)s."
 msgstr ""
 
-# 65b70b072b7040a98dd3b4183ff71994
+# ee0ac1b87bd04b5ea303fd1f4d914c4b
 #: ../.templates/layout.html:12
 #, python-format
 msgid "Last updated on %(last_updated)s."
 msgstr ""
 
-# bb8fd4c915704fd49685f2cf274da373
+# 7711935baa2e43a4b65b7dec283ca05a
 #: ../.templates/layout.html:15
 #, python-format
 msgid ""
@@ -44,7 +44,7 @@ msgid ""
 "%(sphinx_version)s."
 msgstr ""
 
-# 870e3e226c114203aeb010b27131dbec
+# 0e0027c3a6944c67ad0dea7a6721dcf8
 #: ../.templates/layout.html:18
 msgid "Show Source"
 msgstr ""

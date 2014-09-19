@@ -14,16 +14,12 @@ class SectorFunction(dd.Model):
     class Meta:
         abstract = True
 
-    sector = dd.ForeignKey("jobs.Sector",
-                           blank=True, null=True)
-    function = dd.ForeignKey("jobs.Function",
-                             blank=True, null=True)
+    sector = dd.ForeignKey("jobs.Sector", blank=True, null=True)
+    function = dd.ForeignKey("jobs.Function", blank=True, null=True)
 
     @dd.chooser()
     def function_choices(cls, sector):
-        Function = dd.modules.jobs.Function
-        if sector is not None:
-            return sector.function_set.all()
-        return Function.objects.all()
-
+        if sector is None:
+            return dd.modules.jobs.Function.objects.all()
+        return sector.function_set.all()
 

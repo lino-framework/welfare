@@ -12,6 +12,7 @@ import datetime
 
 from lino.modlib.households.models import *
 
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino_welfare.modlib.contacts.models import Partner
@@ -50,7 +51,7 @@ class Member(Member, dd.Human, dd.Born):
         if self.person_id:
             for k in person_fields:
                 setattr(self, k, getattr(self.person, k))
-        else:
+        elif not settings.SITE.loading_from_dump:
             # create Client if appropriate
             has_all_fields = True
             kw = dict()
@@ -71,16 +72,17 @@ class Member(Member, dd.Human, dd.Born):
     
         super(Member, self).full_clean()
 
-        if self.person_id and self.role and self.household_id:
-            Link = dd.modules.humanlinks.Link
-            if self.role in child_roles:
-                for pm in Member.objects.filter(
-                        household=self.household, role__in=parent_roles):
-                    Link.check_autocreate(pm.person, self.person)
-            elif self.role in parent_roles:
-                for cm in Member.objects.filter(
-                        household=self.household, role__in=child_roles):
-                    Link.check_autocreate(self.person, cm.person)
+        if not settings.SITE.loading_from_dump:
+            if self.person_id and self.role and self.household_id:
+                Link = dd.modules.humanlinks.Link
+                if self.role in child_roles:
+                    for pm in Member.objects.filter(
+                            household=self.household, role__in=parent_roles):
+                        Link.check_autocreate(pm.person, self.person)
+                elif self.role in parent_roles:
+                    for cm in Member.objects.filter(
+                            household=self.household, role__in=child_roles):
+                        Link.check_autocreate(self.person, cm.person)
 
     def disabled_fields(self, ar):
         rv = super(Member, self).disabled_fields(ar)

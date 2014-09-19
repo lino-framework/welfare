@@ -16,7 +16,7 @@ from lino.modlib.courses.models import *
 
 CourseAreas.clear()
 add = CourseAreas.add_item
-add('S', _("Integration workshops"), 'integ')
+add('S', _("Integration workshops"), 'integ')  # no longer used
 add('B', _("Basic skills"), 'basic')
 add('J', _("Job search modules"), 'job')
 

@@ -191,28 +191,28 @@ class SkillsByPerson(PropsByPerson, Skills):
 ##
 
 
-class SoftskillType(dd.BabelNamed):
+class SoftSkillType(dd.BabelNamed):
     class Meta:
         verbose_name = _("Soft skill type")
         verbose_name_plural = _("Soft skill types")
 
 
-class SoftskillTypes(dd.Table):
-    model = 'cv.SoftskillType'
+class SoftSkillTypes(dd.Table):
+    model = 'cv.SoftSkillType'
 
     
-class Softskill(PersonProperty):
+class SoftSkill(PersonProperty):
     class Meta:
         verbose_name = _("Soft skill")
         verbose_name_plural = _("Soft skills")
-    type = dd.ForeignKey('cv.SoftskillType')
+    type = dd.ForeignKey('cv.SoftSkillType', verbose_name=_("Type"))
 
 
-class Softskills(dd.Table):
-    model = 'cv.Softskill'
+class SoftSkills(dd.Table):
+    model = 'cv.SoftSkill'
 
 
-class SoftskillsByPerson(PropsByPerson, Softskills):
+class SoftSkillsByPerson(PropsByPerson, SoftSkills):
     column_names = 'type remark'
 
 ##
@@ -233,8 +233,8 @@ class ObstacleTypes(dd.Table):
 class Obstacle(PersonProperty):
     class Meta:
         verbose_name = _("Obstacle")
-        verbose_name_plural = _("Obstacle")
-    type = dd.ForeignKey('cv.ObstacleType')
+        verbose_name_plural = _("Obstacles")
+    type = dd.ForeignKey('cv.ObstacleType', verbose_name=_("Type"))
     user = dd.ForeignKey(
         'users.User',
         related_name='obstacles_detected',
@@ -257,7 +257,7 @@ dd.inject_field('system.SiteConfig', 'propgroup_obstacles', dd.DummyField())
 
 def setup_config_menu(site, ui, profile, m):
     m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action(SoftskillTypes)
+    m.add_action(SoftSkillTypes)
     m.add_action(ObstacleTypes)
 
 
@@ -265,5 +265,5 @@ def setup_explorer_menu(site, ui, profile, m):
     m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action(LanguageKnowledges)
     m.add_action(Skills)
-    m.add_action(Softskills)
+    m.add_action(SoftSkills)
     m.add_action(Obstacles)

@@ -13,6 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
@@ -66,7 +67,8 @@ class User(User):
         if not self.calendar:
             return
 
-        check_subscription(self, self.calendar)
+        if not settings.SITE.loading_from_dump:
+            check_subscription(self, self.calendar)
 
     def check_all_subscriptions(self):
 

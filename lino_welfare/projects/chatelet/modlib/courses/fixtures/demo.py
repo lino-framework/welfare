@@ -23,15 +23,15 @@ def objects():
         kw.update(dd.str2kw('name', name))
         return Line(**kw)
 
-    obj = line(CourseAreas.integ, _("Kitchen"))
+    obj = line(CourseAreas.basic, _("Kitchen"))
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.integ, _("Creativity"))
+    obj = line(CourseAreas.basic, _("Creativity"))
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.integ, _("Our first baby"))
+    obj = line(CourseAreas.basic, _("Our first baby"))
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 

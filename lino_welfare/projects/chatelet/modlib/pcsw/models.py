@@ -26,7 +26,8 @@ class Client(Client):
 class ClientDetail(dd.FormLayout):
 
     main = "general parties family \
-    career competences aids_tab sis_tab oi_tab #projects_tab \
+    career competences aids_tab sis_tab isip.ContractsByPerson \
+    oi_tab #projects_tab \
     job_search contracts history calendar misc"
 
     oi_tab = dd.Panel("""
@@ -129,7 +130,7 @@ class ClientDetail(dd.FormLayout):
     """, label=dd.plugins.jobs.verbose_name)
 
     sis_tab = dd.Panel("""
-    courses.IntegEnrolmentsByPupil isip.ContractsByPerson
+    #courses.IntegEnrolmentsByPupil #isip.ContractsByPerson
     sis_motif sis_attentes
     sis_moteurs sis_objectifs
     """, label=_("SIS"))
@@ -146,7 +147,7 @@ class ClientDetail(dd.FormLayout):
         required=dict(user_groups='integ'))
 
     good_panel = """
-    cv.SkillsByPerson cv.SoftskillsByPerson
+    cv.SkillsByPerson cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
     """
 
