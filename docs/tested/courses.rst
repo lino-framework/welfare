@@ -39,20 +39,20 @@ For example:
 ...      column_names="personX content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element u'personX' referred in layout <ListLayout on courses.PendingCourseRequests>."
+KeyError: u"Unknown element 'personX' (None) referred in layout <ListLayout on courses.PendingCourseRequests>."
 
 >>> ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person__foo content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element u'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' referred in layout <ListLayout on courses.PendingCourseRequests>."
+KeyError: u"Unknown element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' (None) referred in layout <ListLayout on courses.PendingCourseRequests>."
 
 
 >>> ses.show(courses.PendingCourseRequests,
 ...      column_names="person content urgent address person__foo")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element u'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' referred in layout <ListLayout on courses.PendingCourseRequests>."
+KeyError: u"Unknown element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' (None) referred in layout <ListLayout on courses.PendingCourseRequests>."
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> ses.show(courses.PendingCourseRequests,
@@ -73,7 +73,7 @@ did not raise an error. Now it does:
 ...      column_names="person.first_name content urgent address")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element u'person.first_name' referred in layout <ListLayout on courses.PendingCourseRequests>."
+KeyError: u"Unknown element 'person.first_name' (None) referred in layout <ListLayout on courses.PendingCourseRequests>."
 
 
 And then the following example failed because Lino simply wasn't yet 

@@ -56,10 +56,10 @@ Example:
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ========== ========== ========================= ===================================================== =============
- begonnen   beendet    Klient                    Firma                                                 Land
+ Anfang     Ende       Klient                    Firma                                                 Land
 ---------- ---------- ------------------------- ----------------------------------------------------- -------------
  07.02.11   07.02.11   JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)                                   Estland
- 04.04.11   04.04.11   FAYMONVILLE Luc (129)     Alliance Nationale des Mutualités Chrétiennes (232)   Niederlande
+ 04.04.11   04.04.11   FAYMONVILLE Luc (129)     Alliance Nationale des Mutualités Chrétiennes (202)   Niederlande
 ========== ========== ========================= ===================================================== =============
 <BLANKLINE>
 

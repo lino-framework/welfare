@@ -41,7 +41,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, households, reception, languages, accounts, badges, iban, sepa, excerpts, humanlinks, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, debts, cbss, notes, aids, beid, appypod, export_excel, djangosite.
+44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, beid, appypod, export_excel, djangosite.
 112 models:
 ============================== ========= =======
  Name                           #fields   #rows
@@ -98,8 +98,8 @@ Test whether :meth:`get_db_overview_rst
  excerpts.Excerpt               8         10
  excerpts.ExcerptType           16        10
  households.Household           29        6
- households.Member              12        12
- households.Type                5         4
+ households.Member              13        12
+ households.Type                5         6
  humanlinks.Link                4         36
  isip.Contract                  22        17
  isip.ContractEnding            6         4
@@ -134,7 +134,7 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    65        63
+ pcsw.Client                    65        86
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         77
@@ -166,7 +166,7 @@ User profiles
 
 Rolf is the local system administrator, he has a complete menu:
 
->>> ses = settings.SITE.login('rolf') 
+>>> ses = dd.login('rolf') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -184,9 +184,9 @@ Rolf is the local system administrator, he has a complete menu:
 - Konfigurierung :
   - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Inhaltstypen, Hilfetexte
-  - Orte : Länder, Orte, 
+  - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Kontakte : Organisationsarten, Funktionen, Sprachen
+  - Kontakte : Organisationsarten, Funktionen, Sprachen, Gremien, Haushaltsarten
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten

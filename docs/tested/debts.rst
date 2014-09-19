@@ -30,7 +30,7 @@ Or we can retrieve budget no. 3 from the database:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Dubois-\xc4rgerlich (183)')
+Budget #3 (u'Budget Nr. 3 f\xfcr Dubois-Vandenmeulenbos (229)')
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:
