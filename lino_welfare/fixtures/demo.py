@@ -1204,12 +1204,12 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 valid_until=settings.SITE.demo_date(360+i*10),
                 type=UPLOAD_TYPES.pop())
 
-    def person2client(f, l):
-       obj = contacts.Person.objects.get(first_name=f, last_name=l)
-       mti.insert_child(obj, pcsw.Client)
+    # def person2client(f, l):
+    #    obj = contacts.Person.objects.get(first_name=f, last_name=l)
+    #    mti.insert_child(obj, pcsw.Client)
 
-    person2client("Paul", "Frisch")
-    person2client("Bruno", "Braun")
+    # person2client("Paul", "Frisch")
+    # person2client("Bruno", "Braun")
 
 
 

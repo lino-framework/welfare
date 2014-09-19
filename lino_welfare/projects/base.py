@@ -65,7 +65,8 @@ class Site(Site):
         
         """
         self.plugins.accounts.configure(ref_length=5)
-        # self.plugins.humanlinks.configure(human_model='pcsw.Client')
+        self.plugins.humanlinks.configure(person_model='pcsw.Client')
+        self.plugins.households.configure(person_model='pcsw.Client')
         super(Site, self).setup_plugins()
 
     def setup_choicelists(self):
@@ -167,7 +168,6 @@ class Site(Site):
         yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
         #~ yield 'lino.modlib.postings'
-        yield 'lino_welfare.modlib.households'
         yield 'lino_welfare.modlib.reception'
         yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
@@ -176,7 +176,6 @@ class Site(Site):
         yield 'lino_welfare.modlib.sepa'
 
         yield 'lino.modlib.excerpts'
-        yield 'lino.modlib.humanlinks'
         yield 'lino.modlib.dedupe'
         yield 'lino.modlib.boards'
 
@@ -187,7 +186,7 @@ class Site(Site):
 
         yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
-        # pcsw.demo creates clients needed by cbss.demo
+        # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.cv'
@@ -196,8 +195,10 @@ class Site(Site):
         yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.newcomers'
-        yield 'lino_welfare.modlib.debts'
-        yield 'lino_welfare.modlib.cbss'
+        yield 'lino_welfare.modlib.cbss'  # must come after pcsw
+        yield 'lino_welfare.modlib.households'  # must come after pcsw
+        yield 'lino.modlib.humanlinks'  # must come after households
+        yield 'lino_welfare.modlib.debts'  # must come after households
         # The `notes` demo fixture creates Notes for Clients.
         yield 'lino_welfare.modlib.notes'
         yield 'lino_welfare.modlib.aids'
