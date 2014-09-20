@@ -17,7 +17,7 @@ Integration Service
     >>> from django.utils import translation
     >>> from django.test import Client
     >>> import json
-    >>> from lino import dd
+    >>> from bs4 import BeautifulSoup
 
 >>> print(settings.SETTINGS_MODULE)
 lino_welfare.projects.docs.settings.test
@@ -50,7 +50,7 @@ arise quite often: the coach changes while the contract is still
 active. In our example, Alicia handed this client over to Hubert on
 March 8th, 2013:
 
->>> dd.show(pcsw.CoachingsByClient, obj.client)
+>>> rt.show(pcsw.CoachingsByClient, obj.client)
 ==================== ========== ================= ========= ===================== ============================
  Coached from         until      Coach             Primary   Coaching type         Reason of termination
 -------------------- ---------- ----------------- --------- --------------------- ----------------------------
@@ -97,37 +97,46 @@ This returns a huge JSON structure:
 We test the MembersByPerson panel. It contains a summary:
 
 >>> print(d['data']['MembersByPerson'])
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +SKIP
 <div>KELLER Karl (177) ist<ul><li>Vorstand in <a href="javascript:Lino.households.Households.detail.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 184 })">Legale Wohngemeinschaft Keller-&#213;unapuu</a></li></ul><br /><a href="javascript:Lino.contacts.Persons.create_household.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 177, &quot;field_values&quot;: { &quot;head&quot;: &quot;KELLER Karl (177)&quot;, &quot;headHidden&quot;: 177, &quot;typeHidden&quot;: null, &quot;partner&quot;: null, &quot;partnerHidden&quot;: null, &quot;type&quot;: null }, &quot;param_values&quot;: { &quot;observed_event&quot;: null, &quot;and_coached_by&quot;: null, &quot;end_date&quot;: null, &quot;genderHidden&quot;: null, &quot;also_obsolete&quot;: false, &quot;gender&quot;: null, &quot;nationalityHidden&quot;: null, &quot;aged_from&quot;: null, &quot;only_primary&quot;: false, &quot;client_stateHidden&quot;: &quot;30&quot;, &quot;and_coached_byHidden&quot;: null, &quot;coached_by&quot;: null, &quot;coached_byHidden&quot;: null, &quot;observed_eventHidden&quot;: null, &quot;nationality&quot;: null, &quot;client_state&quot;: &quot;Begleitet&quot;, &quot;start_date&quot;: null, &quot;aged_to&quot;: null }, &quot;base_params&quot;: {  } })">Haushalt erstellen</a></div>
 
 Since this is not very human-readable, we are going to analyze it with
 `BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
 
 
->>> from bs4 import BeautifulSoup
 >>> soup = BeautifulSoup(d['data']['MembersByPerson'])
 >>> links = soup.find_all('a')
 
-It contains two links:
+It contains eight links:
 
 >>> len(links)
-2
->>> print(links[0].get('href'))
-javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 184 })
+8
+
+The first link is the disabled checkbox for the :attr:`primary
+<ml.households.Member.primary>` field:
+
 >>> print(links[0].string)
-Legale Wohngemeinschaft Keller-Õunapuu
-
->>> print(links[1].string)
-Haushalt erstellen
-
->>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
-"record_id": 177, 
+☐
+
+
+>>> print(links[0].get('href'))
+javascript:Lino.households.Members.set_primary("ext-comp-1351",7)
+>>> print(links[1].get('href'))
+javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 230 })
+>>> print(links[1].string)
+Karl & Õie Keller-Õunapuu
+
+>>> print(links[2].string)
+Ehepartner
+
+>>> print(links[2].get('href'))
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+javascript:Lino.pcsw.Clients.create_household.run("ext-comp-1351",{
 "field_values": { 
   "head": "KELLER Karl (177)",
-  "headHidden": 177, "typeHidden": null, "partner": null,
-  "partnerHidden": null, "type": null }, 
+  "headHidden": 177, "typeHidden": 1, "partner": null,
+  "partnerHidden": null, "type": "Ehepartner" }, 
 "param_values": {
   "observed_event": null, "and_coached_by": null, "end_date": null,
   "genderHidden": null, "also_obsolete": false, "gender": null,
@@ -151,7 +160,7 @@ Let's automatize this trick:
 >>> soup = BeautifulSoup(check('integ/Clients/177', 'MembersByPerson'))
 >>> links = soup.find_all('a')
 >>> len(links)
-2
+8
 
 .. _paulfrisch:
 
@@ -161,17 +170,17 @@ Paul Frisch
 Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links. His client id is 196.
 
->>> print(pcsw.Client.objects.get(id=196))
-FRISCH Paul (196)
+>>> print(pcsw.Client.objects.get(first_name="Paul", last_name="Frisch"))
+FRISCH Paul (235)
 
->>> soup = BeautifulSoup(check('integ/Clients/196', 'LinksByHuman'))
+>>> soup = BeautifulSoup(check('integ/Clients/235', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
 14
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 204 })
+javascript:Lino.pcsw.Clients.detail.run(null,{ "record_id": 243 })
 
 These are the family relationships of Paul Frisch:
 
@@ -221,22 +230,21 @@ calls :meth:`rt.ActionRequest.action_button`. Which is where we had a
 bug on :blogref:`20150515`.
 
 
->>> soup = BeautifulSoup(check('pcsw/Clients/176', 'CareerUploadsByClient'))
+>>> soup = BeautifulSoup(check('pcsw/Clients/176', 'UploadsByClient'))
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4
+Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diploma:
 
 >>> links = soup.find_all('a')
 >>> len(links)
-4
+5
+
+>>> rt.modules.uploads.UploadsByClient._upload_area
+<UploadAreas.general:90>
 
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Arbeitssuche", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads Arbeitssuche von BRECHT Bernd (176)" }, "base_params": { "mt": ..., "mk": 176, "type_id": 1 } })
-
->>> print(links[1].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.CareerUploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 2, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads Arbeitssuche", "disable_editing": false, "upload_areaHidden": "10", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Aufenthaltserlaubnis", "id": null }, "title": "Uploads Arbeitssuche von BRECHT Bernd (176)" }, "base_params": { "mt": ..., "mk": 176, "type_id": 2 } })
+javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (176)" }, "base_params": { "mt": ..., "mk": 176, "type_id": 1 } })
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS

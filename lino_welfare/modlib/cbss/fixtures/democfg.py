@@ -7,7 +7,7 @@ Fills CBSS demo settings to SiteConfig
 """
 
 from django.conf import settings
-from lino import dd
+from lino import dd, rt
 
 
 def objects():

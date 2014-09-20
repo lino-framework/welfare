@@ -18,7 +18,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd
+from lino import dd, rt
 from lino.modlib.contacts import models as contacts
 
 households = dd.resolve_app('households')

@@ -17,7 +17,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
-from lino import dd
+from lino import dd, rt
 
 from lino.modlib.users.models import *
 

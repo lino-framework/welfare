@@ -12,7 +12,7 @@ from lino.core.dbutils import resolve_model
 from north.dbutils import babel_values
 #~ from lino.core.perms import UserProfiles
 
-from lino import dd
+from lino import dd, rt
 
 
 def objects():

@@ -3,14 +3,14 @@
 # License: BSD (see file COPYING for details)
 
 
-from lino import dd
+from lino import dd, rt
 from lino.utils import Cycler
 
 
 def objects():
-    Client = dd.modules.pcsw.Client
-    Property = dd.modules.properties.Property
-    PP = dd.modules.properties.PersonProperty
+    Client = rt.modules.pcsw.Client
+    Property = rt.modules.properties.Property
+    PP = rt.modules.properties.PersonProperty
 
     PERSONS = Cycler(Client.objects.all())
     for prop in Property.objects.order_by('id'):

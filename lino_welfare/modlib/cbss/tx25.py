@@ -37,7 +37,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
 from lino import mixins
-from lino import dd
+from lino import dd, rt
 from lino.utils import assert_pure
 from lino.utils import AttrDict, IncompleteDate
 

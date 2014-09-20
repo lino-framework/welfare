@@ -14,7 +14,7 @@ import datetime
 from django.utils.translation import ugettext_lazy as _
 # from django.utils.translation import string_concat
 
-from lino import dd
+from lino import dd, rt
 
 from lino.modlib.uploads.models import *
 
@@ -98,7 +98,7 @@ class Upload(Upload, dd.ProjectRelated, contacts.ContactRelated):
 
     # def update_owned_instance(self, controllable):
     #     super(Upload, self).update_owned_instance(controllable)
-    #     if isinstance(controllable, dd.modules.pcsw.Client):
+    #     if isinstance(controllable, rt.modules.pcsw.Client):
     #         self.client = controllable
 
 

@@ -27,7 +27,7 @@ from django.utils.encoding import force_unicode
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
-from lino import dd
+from lino import dd, rt
 from lino.core import dbutils
 from lino.core.dbutils import get_field
 
@@ -650,8 +650,8 @@ class Client(contacts.Person,
         """Overrides :meth:`lino.modlib.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
-        Address = dd.modules.addresses.Address
-        DataSources = dd.modules.addresses.DataSources
+        Address = rt.modules.addresses.Address
+        DataSources = rt.modules.addresses.DataSources
         diffs = []
         objects = [self]
         kw = dict(partner=self, data_source=DataSources.eid)
@@ -1509,7 +1509,8 @@ def setup_explorer_menu(site, ui, profile, m):
     #~ m.add_action(PersonSearches)
     m.add_action(CivilState)
     m.add_action(ClientStates)
-    m.add_action(beid.BeIdCardTypes)
+    if dd.is_installed('beid'):
+        m.add_action('beid.BeIdCardTypes')
 
 
 def setup_reports_menu(site, ui, profile, m):

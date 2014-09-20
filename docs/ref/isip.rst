@@ -96,7 +96,7 @@ Models
 
     .. django2rst::
 
-        dd.show('isip.ExamPolicies')
+        rt.show('isip.ExamPolicies')
 
 
 .. class:: ContractEnding
@@ -108,7 +108,7 @@ Models
 
     .. django2rst::
 
-        dd.show('isip.ContractEndings')
+        rt.show('isip.ContractEndings')
 
 
 .. class:: EducationLevel
@@ -118,7 +118,7 @@ Models
 
     .. django2rst::
 
-        dd.show('isip.EducationLevels')
+        rt.show('isip.EducationLevels')
 
 
 
@@ -142,7 +142,7 @@ Models
 
     .. django2rst::
 
-        dd.show('isip.StudyTypes')
+        rt.show('isip.StudyTypes')
 
 
 
@@ -155,7 +155,7 @@ Choicelists
 
     .. django2rst::
 
-        dd.show('isip.StudyRegimes')
+        rt.show('isip.StudyRegimes')
 
 
 .. class:: ContractEvents
@@ -164,5 +164,5 @@ Choicelists
 
     .. django2rst::
 
-        dd.show('isip.ContractEvents')
+        rt.show('isip.ContractEvents')
 

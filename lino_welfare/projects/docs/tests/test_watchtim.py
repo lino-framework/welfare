@@ -26,7 +26,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import translation
 
-from lino import dd
+from lino import dd, rt
 from lino.utils import i2d
 #~ from lino.core.dbutils import resolve_model
 #Companies = resolve_model('contacts.Companies')

@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
-from lino import dd
+from lino import dd, rt
 
 from lino.utils import i2d
 from lino.utils.instantiator import Instantiator

@@ -18,7 +18,7 @@ Choicelists
 
   .. django2rst::
 
-     dd.show(pcsw.ClientStates)
+     rt.show(pcsw.ClientStates)
 
   Any person who asks to meet with an agent for consultation will be
   registered into the database.  At the beginning the client is a

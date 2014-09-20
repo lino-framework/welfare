@@ -11,7 +11,6 @@ General
 
 ..  
     >>> from __future__ import print_function
-    >>> from lino import dd
     >>> from lino.runtime import *
     >>> from django.utils import translation
 
@@ -166,7 +165,7 @@ User profiles
 
 Rolf is the local system administrator, he has a complete menu:
 
->>> ses = dd.login('rolf') 
+>>> ses = rt.login('rolf') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -188,42 +187,42 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Sprachen, Gremien, Haushaltsarten
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
-  - Haushalte : Rollen in Haushalt, Haushaltsarten
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Akademische Grade, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes, Statuses
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
-  - Schuldnerberatung : Budget-Kopiervorlage
   - ZDSS : Sektoren, Eigenschafts-Codes
+  - Schuldnerberatung : Budget-Kopiervorlage
+  - Empfang : Hilfearten, Kategorien
 - Explorer :
-  - Büro : Einfügetexte, Uploads, E-Mail-Ausgänge, Anhänge, Ausdrucke, Ereignisse/Notizen
+  - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
-  - Kontakte : Kontaktpersonen, Verwandschaften, Verwandschaftsarten
+  - Eigenschaften : Eigenschaften
+  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Kalender : Aufgaben, Gäste, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - Haushalte : Mitglieder
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfen
-  - CV : Sprachkenntnisse
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
+  - Badges : Badge Awards
+  - SEPA : Konten
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
+  - DSBE : Sprachkenntnisse, VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien, Vertragspartner
   - Kurse : Kurse, Kursanfragen
   - Kompetenzen
-  - Schuldnerberatung : Budgets, Einträge
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
+  - Schuldnerberatung : Budgets, Einträge
   - Empfang : Confirmations, AidRegimes, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Eigenschaften
 - Site : Info
 <BLANKLINE>
 
 
 Hubert is an Integration agent.
 
->>> ses = settings.SITE.login('hubert') 
+>>> ses = rt.login('hubert') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
@@ -241,12 +240,12 @@ Hubert is an Integration agent.
 
 Mélanie is the manager of the Integration service.
 
->>> ses = settings.SITE.login('melanie') 
+>>> ses = rt.login('melanie') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
@@ -271,12 +270,12 @@ Mélanie is the manager of the Integration service.
 
 Kerstin is a debts consultant.
 
->>> ses = settings.SITE.login('kerstin') 
+>>> ses = rt.login('kerstin') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
 - Schuldnerberatung : Klienten, Meine Budgets
@@ -288,12 +287,12 @@ Kerstin is a debts consultant.
 
 Caroline is a newcomers consultant.
 
->>> ses = settings.SITE.login('caroline') 
+>>> ses = rt.login('caroline') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Ausdrucke, Meine Ereignisse/Notizen
+- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
 - Neuanträge : Neue Klienten, Verfügbare Begleiter
@@ -306,7 +305,7 @@ Caroline is a newcomers consultant.
 
 Theresia is a reception clerk.
 
->>> ses = settings.SITE.login('theresia') 
+>>> ses = rt.login('theresia') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP

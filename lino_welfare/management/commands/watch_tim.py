@@ -29,7 +29,7 @@ from django.db import IntegrityError
 
 from djangosite.dbutils import is_valid_email
 
-from lino import dd
+from lino import dd, rt
 from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
 

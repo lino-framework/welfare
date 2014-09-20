@@ -10,7 +10,6 @@ Debts mediation
 
 ..
     >>> from django.utils import translation
-    >>> from lino import dd
     >>> from lino.runtime import *
     >>> from django.test import Client
     >>> import json
@@ -35,7 +34,7 @@ Budget #3 (u'Budget Nr. 3 f\xfcr Dubois-Vandenmeulenbos (229)')
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:
 
->>> ses = dd.login('rolf')
+>>> ses = rt.login('rolf')
 
 Here is the textual representation of the "Expenses" panel:
 

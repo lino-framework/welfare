@@ -13,7 +13,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import lazy
 
-from lino import dd
+from lino import dd, rt
 cal = dd.resolve_app('cal')
 # uploads = dd.resolve_app('uploads')
 # notes = dd.resolve_app('notes')
@@ -265,13 +265,13 @@ def setup_explorer_menu(site, ui, profile, m):
 
 @dd.receiver(dd.post_analyze)
 def set_detail_layouts(sender=None, **kwargs):
-    dd.modules.properties.Properties.set_detail_layout("""
+    rt.modules.properties.Properties.set_detail_layout("""
     id group type
     name
     cv.PersonPropsByProp
     """)
 
-    dd.modules.languages.Languages.set_detail_layout("""
+    rt.modules.languages.Languages.set_detail_layout("""
     id iso2 name
     cv.KnowledgesByLanguage
     """)

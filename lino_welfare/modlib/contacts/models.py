@@ -11,7 +11,7 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
-from lino import dd
+from lino import dd, rt
 
 from lino.modlib.contacts.models import *
 
@@ -323,7 +323,7 @@ def my_details(sender, **kw):
 
     # if not dd.is_installed('courses'):
     #     CompanyDetail.box5.replace('is_courseprovider', '')
-    if not dd.modules.resolve('contacts.Company.is_courseprovider'):
+    if not rt.modules.resolve('contacts.Company.is_courseprovider'):
         CompanyDetail.misc.replace('is_courseprovider', '')
     # TODO: find a more elegant way to do the above
 

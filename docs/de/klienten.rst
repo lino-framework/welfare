@@ -38,5 +38,5 @@ die ihr eigenes Detail-Layout hat.
 
 .. django2rst::
 
-    dd.show(pcsw.CivilState)
+    rt.show(pcsw.CivilState)
 

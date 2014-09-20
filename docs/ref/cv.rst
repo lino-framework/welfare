@@ -33,5 +33,5 @@ Choicelists
     
     .. django2rst::
         
-        dd.show(cv.CefLevel)
+        rt.show(cv.CefLevel)
 

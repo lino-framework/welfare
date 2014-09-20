@@ -13,7 +13,7 @@
 # along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 from lino.modlib.cal.fixtures.demo2 import objects as lino_objects
-from lino import dd
+from lino import dd, rt
 from lino.utils import Cycler
 
 

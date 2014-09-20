@@ -77,7 +77,7 @@ A B spouse
 
 import sys
 
-from lino import dd
+from lino import dd, rt
 
 from lino.utils import dbfreader
 from lino.utils import dblogger
@@ -87,8 +87,8 @@ from lino_welfare.modlib.households.models import (
 
 from lino.runtime import households, contacts
 
-LinkTypes = dd.modules.humanlinks.LinkTypes
-Link = dd.modules.humanlinks.Link
+LinkTypes = rt.modules.humanlinks.LinkTypes
+Link = rt.modules.humanlinks.Link
 
 
 def tim2lino(plptype):

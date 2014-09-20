@@ -24,7 +24,7 @@ from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode
 
 
-from lino import dd
+from lino import dd, rt
 from lino.utils.xmlgen.html import E
 from lino import mixins
 from lino.modlib.contacts import models as contacts
@@ -672,7 +672,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
 
     @dd.chooser()
     def bailiff_choices(self):
-        qs = dd.modules.contacts.Companies.request().data_iterator
+        qs = rt.modules.contacts.Companies.request().data_iterator
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 

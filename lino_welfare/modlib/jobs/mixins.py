@@ -2,7 +2,8 @@
 # Copyright 2013-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-from lino import dd
+from lino import dd, rt
+from lino import rt
 
 
 class SectorFunction(dd.Model):
@@ -20,6 +21,6 @@ class SectorFunction(dd.Model):
     @dd.chooser()
     def function_choices(cls, sector):
         if sector is None:
-            return dd.modules.jobs.Function.objects.all()
+            return rt.modules.jobs.Function.objects.all()
         return sector.function_set.all()
 

@@ -23,7 +23,7 @@ Exemple:
 
 .. django2rst:: 
 
-    dd.show(jobs.Jobs.request(limit=4))
+    rt.show(jobs.Jobs.request(limit=4))
     
 
 Indépendamment de ces endroits de travail le CPAS peut gérer une liste

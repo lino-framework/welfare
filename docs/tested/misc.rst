@@ -16,7 +16,6 @@ Miscellaneous
     >>> from django.utils import translation
     >>> from django.test import Client
     >>> import json
-    >>> from lino import dd
 
 
 .. _welfare.tested.notes:
@@ -47,23 +46,7 @@ Some database content
 ---------------------
 
 
->>> ses = settings.SITE.login('rolf')
->>> with translation.override('de'):
-...     ses.show(jobs.Jobs,column_names="function provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================= ====================================== ===========================
- Funktion          Stellenanbieter                        Sektor
------------------ -------------------------------------- ---------------------------
- Koch              R-Cycle Sperrgutsortierzentrum (227)    Seefahrt
- Koch              Pro Aktiv V.o.G. (229)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (229)                  Medizin & Paramedizin
- Küchenassistent   BISA (226)                              Reinigung
- Tellerwäscher     BISA (226)                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (227)    Transport
- Kellner           BISA (226)                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (227)    Horeca
-================= ====================================== ===========================
-<BLANKLINE>
-
+>>> ses = rt.login('rolf')
 
 .. _welfare.tested.cal:
 
@@ -123,20 +106,20 @@ The demo fixtures also generated some excerpts:
 
 >>> with translation.override('en'):
 ...     ses.show(excerpts.Excerpts, column_names="id excerpt_type owner")
-==== ====================== =======================================
+==== ====================== ============================================
  ID   Excerpt Type           Controlled by
----- ---------------------- ---------------------------------------
+---- ---------------------- --------------------------------------------
  1    Simple confirmation    **Simple confirmation #1**
  2    Income confirmation    **Income confirmation #1**
  3    Refund confirmation    **Refund confirmation #1**
- 4    Budget                 **Budget 1 for Jeanémart-Lahm (181)**
+ 4    Budget                 **Budget 1 for Jeanémart-Kasennova (227)**
  5    Job contract           **Job contract#1 (Bernd Brecht)**
  6    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
  7    Presence certificate   **Guest #1 (22.05.2014)**
- 8    Curriculum vitae       **AUSDEMWALD Alfons (115)**
- 9    eID sheet              **AUSDEMWALD Alfons (115)**
- 10   to-do list             **AUSDEMWALD Alfons (115)**
-==== ====================== =======================================
+ 8    Curriculum vitae       **ADAM Albert (246)**
+ 9    eID sheet              **ADAM Albert (246)**
+ 10   to-do list             **ADAM Albert (246)**
+==== ====================== ============================================
 <BLANKLINE>
 
 >>> import shutil
@@ -168,7 +151,7 @@ to see how we generated the following list:
     import os
     import shutil
     from atelier import rstgen
-    ses = dd.login()
+    ses = rt.login()
     def asli(obj):
         rv = ses.run(obj.do_print)
         tmppath = settings.SITE.project_dir + rv['open_url']

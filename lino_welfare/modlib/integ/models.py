@@ -27,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from lino import dd
+from lino import dd, rt
 from lino.utils.xmlgen.html import E
 
 plugin = dd.apps.integ

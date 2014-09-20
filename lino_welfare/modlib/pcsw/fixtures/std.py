@@ -11,7 +11,7 @@ from lino.dd import babelkw
 
 
 def objects():
-    from lino import dd
+    from lino import dd, rt
     pcsw = dd.resolve_app('pcsw')
 
     #~ persongroup = Instantiator('pcsw.PersonGroup','name').build

@@ -18,16 +18,16 @@
 from django.conf import settings
 from lino.dd import resolve_model
 from lino.utils import Cycler
-from lino import dd
+from lino import dd, rt
 
 
 def objects():
-    Granting = dd.modules.aids.Granting
-    AidType = dd.modules.aids.AidType
-    Person = dd.modules.contacts.Person
-    ClientStates = dd.modules.pcsw.ClientStates
-    ClientContactType = dd.modules.pcsw.ClientContactType
-    Board = dd.modules.boards.Board
+    Granting = rt.modules.aids.Granting
+    AidType = rt.modules.aids.AidType
+    Person = rt.modules.contacts.Person
+    ClientStates = rt.modules.pcsw.ClientStates
+    ClientContactType = rt.modules.pcsw.ClientContactType
+    Board = rt.modules.boards.Board
 
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
@@ -54,8 +54,8 @@ def objects():
         kw.update(client=PROJECTS.pop())
         yield Granting(**kw)
 
-    # ConfirmationTypes = dd.modules.aids.ConfirmationTypes
-    RefundConfirmation = dd.modules.aids.RefundConfirmation
+    # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
+    RefundConfirmation = rt.modules.aids.RefundConfirmation
     # for i in range(5):
     #     for ct in ConfirmationTypes.items():
     #         for at in AidType.objects.filter(confirmation_type=ct):

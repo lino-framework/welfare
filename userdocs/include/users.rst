@@ -29,7 +29,7 @@
     
     The demo database has defined the following user profiles:
 
-    .. django2rst:: dd.show(lino.UserProfiles,
+    .. django2rst:: rt.show(lino.UserProfiles,
                             column_names='value name text level')
 
     Note that we show here only the "general" or "system" userlevel.

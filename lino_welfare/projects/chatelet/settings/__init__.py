@@ -61,7 +61,7 @@ class Site(Site):
         # must import it to activate workflows:
         from lino.modlib.courses import workflows
 
-        from lino import dd
+        from lino import dd, rt
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset(
             '* office coaching integ courses cbss newcomers reception')

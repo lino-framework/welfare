@@ -21,11 +21,31 @@ Jobs
 
 We log in as Rolf:
 
->>> ses = settings.SITE.login('rolf')
+>>> ses = rt.login('rolf')
 
-We switch to German because the first PCSW with Lino was the one in Eupen:
+We switch to German because the first :ref:`welfare` user was in Eupen:
 
 >>> translation.activate('de')
+
+Jobs
+----
+
+>>> with translation.override('de'):
+...     ses.show(jobs.Jobs,column_names="function provider sector") #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+================= ====================================== ===========================
+ Funktion          Stellenanbieter                        Sektor
+----------------- -------------------------------------- ---------------------------
+ Koch              R-Cycle Sperrgutsortierzentrum (196)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (198)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (198)                  Medizin & Paramedizin
+ Küchenassistent   BISA (195)                              Reinigung
+ Tellerwäscher     BISA (195)                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (196)    Transport
+ Kellner           BISA (195)                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (196)    Horeca
+================= ====================================== ===========================
+<BLANKLINE>
+
 
 
 .. _welfare.jobs.Offers:
@@ -129,12 +149,12 @@ Mélanie has two appointments on 2014-09-15:
 >>> ses.show(cal.EventsByDay.request(param_values=pv),
 ...     column_names="user summary project")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================== =============== =========================
- Responsible user   Summary         Client
------------------- --------------- -------------------------
- Mélanie Mélard     Appointment 3   FAYMONVILLE Luc (129)
- Mélanie Mélard     Appointment 5   JACOBS Jacqueline (136)
-================== =============== =========================
+================ =============== =========================
+ Agent            Summary         Client
+---------------- --------------- -------------------------
+ Mélanie Mélard   Appointment 3   FAYMONVILLE Luc (129)
+ Mélanie Mélard   Appointment 5   JACOBS Jacqueline (136)
+================ =============== =========================
 <BLANKLINE>
 
 This is because the EventType of these automatically generated

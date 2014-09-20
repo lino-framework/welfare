@@ -18,16 +18,16 @@ from django.utils.translation import ugettext_lazy as _
 
 from north.dbutils import babel_values
 from lino.utils.instantiator import Instantiator
-from lino import dd
+from lino import dd, rt
 
 
 def objects():
 
-    AidRegimes = dd.modules.aids.AidRegimes
-    IncomeConfirmation = dd.modules.aids.IncomeConfirmation
-    RefundConfirmation = dd.modules.aids.RefundConfirmation
-    SimpleConfirmation = dd.modules.aids.SimpleConfirmation
-    ConfirmationTypes = dd.modules.aids.ConfirmationTypes
+    AidRegimes = rt.modules.aids.AidRegimes
+    IncomeConfirmation = rt.modules.aids.IncomeConfirmation
+    RefundConfirmation = rt.modules.aids.RefundConfirmation
+    SimpleConfirmation = rt.modules.aids.SimpleConfirmation
+    ConfirmationTypes = rt.modules.aids.ConfirmationTypes
 
     aidType = Instantiator(
         'aids.AidType',

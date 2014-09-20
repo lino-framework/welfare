@@ -61,7 +61,7 @@ class Member(Member, dd.Human, dd.Born):
                 else:
                     has_all_fields = False
             if has_all_fields:
-                M = dd.modules.pcsw.Client
+                M = rt.modules.pcsw.Client
                 try:
                     obj = M.objects.get(**kw)
                 except M.DoesNotExist:
@@ -74,7 +74,7 @@ class Member(Member, dd.Human, dd.Born):
 
         if not settings.SITE.loading_from_dump:
             if self.person_id and self.role and self.household_id:
-                Link = dd.modules.humanlinks.Link
+                Link = rt.modules.humanlinks.Link
                 if self.role in child_roles:
                     for pm in Member.objects.filter(
                             household=self.household, role__in=parent_roles):
@@ -189,7 +189,7 @@ class PopulateMembers(dd.Action):
 
 # class CreateHousehold(CreateHousehold):
 #     def run_from_ui(self, ar, **kw):
-#         Member = dd.modules.households.Member
+#         Member = rt.modules.households.Member
 #         super(CreateHousehold, self).run_from_ui(ar, **kw)
 #         def add_children(p):
 #             for child in Link(parent=p, type=LinkTypes.child)

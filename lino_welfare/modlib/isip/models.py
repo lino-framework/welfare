@@ -19,7 +19,7 @@ from django.utils import translation
 #~ from django.utils.encoding import force_unicode
 
 
-from lino import dd
+from lino import dd, rt
 from lino import mixins
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')

@@ -37,7 +37,7 @@ den man in so einem Fall von einer Shell aus aufrufen könnte.
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
-from lino import dd
+from lino import dd, rt
 
 
 class Command(BaseCommand):

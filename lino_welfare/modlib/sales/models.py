@@ -10,7 +10,7 @@ on a ``sales`` app.
 from __future__ import unicode_literals
 from __future__ import print_function
 
-from lino import dd
+from lino import dd, rt
 
 
 class CreateInvoice(dd.Dummy):

@@ -15,7 +15,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from django.utils import translation
 
-from lino import dd
+from lino import dd, rt
 from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.modlib.beid.mixins import BeIdCardTypes
@@ -1139,7 +1139,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         # msg = OverlappingContractsTest(ctr.client).check(ctr)
         # if msg is None:
         yield ctr
-        ar = dd.login()
+        ar = rt.login()
         ctr.update_reminders(ar)
         if isinstance(ctr, isip.Contract):
             if i % 3:

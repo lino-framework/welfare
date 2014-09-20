@@ -73,7 +73,7 @@ class Site(Site):
         """
         This defines default user profiles for :ref:`welfare`.
         """
-        from lino import dd
+        from lino import dd, rt
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset(
             '* office coaching integ courses cbss newcomers debts reception')
@@ -112,7 +112,7 @@ class Site(Site):
         from django.utils.translation import ugettext_lazy as _
         from django.utils.translation import string_concat
         from django.db import models
-        from lino import dd
+        from lino import dd, rt
         contacts = dd.resolve_app("contacts")
 
         #~ m = main.add_menu("contacts",_("Contacts"))

@@ -15,7 +15,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime, naturalda
 
 from django.db.models import Q
 
-from lino import dd
+from lino import dd, rt
 
 from lino.modlib.cal.models import *
 
@@ -98,7 +98,7 @@ class Event(Event):
         if self.event_type is None:
             return
 
-        Guest = dd.modules.cal.Guest
+        Guest = rt.modules.cal.Guest
 
         if False:
           if self.event_type.invite_team_members:
@@ -199,7 +199,7 @@ def customize_cal(sender, **kw):
     invite_client
     """, window_size=(60, 'auto'))
 
-    dd.modules.cal.Guests.set_detail_layout("""
+    rt.modules.cal.Guests.set_detail_layout("""
     event partner role
     state remark workflow_buttons
     waiting_since busy_since gone_since

@@ -26,7 +26,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
-from lino import dd
+from lino import dd, rt
 from lino.utils.xmlgen.html import E
 from django.conf import settings
 
@@ -335,7 +335,7 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
     # def get_aid_types(cls):
     #     ct = ConfirmationTypes.get_by_value(dd.full_model_name(cls))
     #     # logger.info("20140811 get_aid_types %s", cls)
-    #     return dd.modules.aids.AidType.objects.filter(confirmation_type=ct)
+    #     return rt.modules.aids.AidType.objects.filter(confirmation_type=ct)
 
 dd.update_field(Granting, 'start_date',
                 verbose_name=_('Applies from'),
@@ -772,7 +772,7 @@ class RefundConfirmation(Confirmation):
         fkw = dict()
         if doctor_type:
             fkw.update(client_contact_type=doctor_type)
-        return dd.modules.contacts.Person.objects.filter(**fkw)
+        return rt.modules.contacts.Person.objects.filter(**fkw)
 
     @dd.chooser()
     def pharmacy_choices(cls, granting):
@@ -780,7 +780,7 @@ class RefundConfirmation(Confirmation):
         pt = granting.aid_type.pharmacy_type
         if pt:
             fkw.update(client_contact_type=pt)
-        return dd.modules.contacts.Company.objects.filter(**fkw)
+        return rt.modules.contacts.Company.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
         """
@@ -789,7 +789,7 @@ class RefundConfirmation(Confirmation):
         """
         if not self.doctor_type:
             raise ValidationError("Cannot auto-create without doctor type")
-        Person = dd.modules.contacts.Person
+        Person = rt.modules.contacts.Person
         kw = parse_name(text)
         if len(kw) != 2:
             raise ValidationError(
@@ -804,7 +804,7 @@ class RefundConfirmation(Confirmation):
 
     @dd.chooser()
     def doctor_type_choices(cls):
-        return dd.modules.pcsw.ClientContactType.objects.filter(
+        return rt.modules.pcsw.ClientContactType.objects.filter(
             can_refund=True)
 
     def confirmation_what(self, ar):

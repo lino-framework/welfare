@@ -16,7 +16,6 @@ General PCSW
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.docs.settings.test'
     >>> from bs4 import BeautifulSoup
-    >>> from lino import dd
     >>> from lino.utils import i2d
     >>> from lino.runtime import *
     >>> from django.test import Client
@@ -25,7 +24,7 @@ General PCSW
     >>> client = Client()
 
 
->>> ses = dd.login('robin')
+>>> ses = rt.login('robin')
 >>> translation.activate('en')
 
 Similar Persons
@@ -209,7 +208,7 @@ The demo database contains at least on client
 
 For example, let log in as Mélanie and look at client Robin DUBOIS:
 
->>> ses = dd.login('melanie')
+>>> ses = rt.login('melanie')
 >>> pk = 178
 >>> obj = pcsw.Client.objects.get(pk=pk)
 >>> print(obj)

@@ -12,7 +12,7 @@ from django.conf import settings
 
 from north.dbutils import babelkw, babel_values
 
-from lino import dd
+from lino import dd, rt
 
 Person = dd.resolve_model('contacts.Person')
 Company = dd.resolve_model('contacts.Company')
@@ -29,7 +29,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     attType = Instantiator(ExcerptType,
                            # build_method='appypdf',
                            email_template='Default.eml.html').build
-    ConfirmationTypes = dd.modules.aids.ConfirmationTypes
+    ConfirmationTypes = rt.modules.aids.ConfirmationTypes
     for ct in ConfirmationTypes.items():
         kw = dict(
             body_template='aid_certificate.body.html',
@@ -255,7 +255,7 @@ def objects():
 
     #~ from lino.models import update_site_config
 
-    UploadAreas = dd.modules.uploads.UploadAreas
+    UploadAreas = rt.modules.uploads.UploadAreas
     uploadType = Instantiator(
         'uploads.UploadType',
         # upload_area=UploadAreas.job_search, 

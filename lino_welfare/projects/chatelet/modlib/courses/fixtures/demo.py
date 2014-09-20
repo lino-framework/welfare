@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd
+from lino import dd, rt
 
 
 def objects():
-    CourseAreas = dd.modules.courses.CourseAreas
-    Line = dd.modules.courses.Line
-    Course = dd.modules.courses.Course
+    CourseAreas = rt.modules.courses.CourseAreas
+    Line = rt.modules.courses.Line
+    Course = rt.modules.courses.Course
 
     def line(course_area, name, **kw):
         kw.update(course_area=course_area)

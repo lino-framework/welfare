@@ -51,7 +51,7 @@ Models
 
     .. django2rst:: 
 
-        dd.show('jobs.JobTypes')
+        rt.show('jobs.JobTypes')
         
 .. class:: ContractType
 
@@ -63,7 +63,7 @@ Models
 
     .. django2rst:: 
 
-        dd.show('jobs.ContractTypes')
+        rt.show('jobs.ContractTypes')
 
 
 Tables
@@ -81,6 +81,6 @@ Tables
     .. django2rst:: 
 
        jt = jobs.JobType.objects.get(id=1)
-       dd.show('jobs.JobsOverview', param_values=dict(job_type=jt))
+       rt.show('jobs.JobsOverview', param_values=dict(job_type=jt))
         
 
