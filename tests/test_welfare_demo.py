@@ -33,7 +33,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/households/Households', json_fields, 7, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Partners', json_fields, 153, **kw)
+            'rolf', 'api/contacts/Partners', json_fields, 159, **kw)
         self.demo_get(
             'rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
         self.demo_get(
@@ -51,22 +51,22 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Persons', json_fields, 92, **kw)
+            'rolf', 'api/contacts/Persons', json_fields, 98, **kw)
         self.demo_get('rolf', 'api/pcsw/Clients', json_fields, 29, **kw)
         self.demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
         self.demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
         self.demo_get(
-            'rolf', 'api/newcomers/NewClients', json_fields, 30, **kw)
+            'rolf', 'api/newcomers/NewClients', json_fields, 53, **kw)
         self.demo_get(
             'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
             2, mt=50, mk=119, **kw)
-        self.demo_get('alicia', 'api/integ/Clients', json_fields, 5, **kw)
-        self.demo_get('hubert', 'api/integ/Clients', json_fields, 23, **kw)
+        self.demo_get('alicia', 'api/integ/Clients', json_fields, 3, **kw)
+        self.demo_get('hubert', 'api/integ/Clients', json_fields, 16, **kw)
         
         alicia = settings.SITE.user_model.objects.get(username='alicia')
         # rolf working as alicia:
         kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
-        self.demo_get('rolf', 'api/integ/Clients', json_fields, 5, **kw)
+        self.demo_get('rolf', 'api/integ/Clients', json_fields, 3, **kw)
         
         kw = dict()
         json_fields = 'count rows'
@@ -81,11 +81,11 @@ class MyTestCase(DemoTestCase):
 
         self.demo_get(
             'rolf', 'choices/aids/IncomeConfirmations/aid_type',
-            json_fields, 3, **kw)
+            json_fields, 10, **kw)
         
         self.demo_get(
             'rolf', 'choices/aids/RefundConfirmations/aid_type',
-            json_fields, 4, **kw)
+            json_fields, 10, **kw)
         
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)

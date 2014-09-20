@@ -547,9 +547,9 @@ def objects():
                                          en=u"VSE Sprachkurs",
                                          ))
 
-    rt = RoleType.objects.get(pk=4)  # It manager
-    rt.use_in_contracts = False
-    rt.save()
+    t = RoleType.objects.get(pk=4)  # It manager
+    t.use_in_contracts = False
+    t.save()
 
     #~ country = Instantiator('countries.Country',"isocode name").build
     #~ yield country('SUHH',"Soviet Union")
