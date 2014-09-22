@@ -360,7 +360,7 @@ class Client(contacts.Person,
         # elems += [
         #     E.br(), ar.instance_action_button(self.create_excerpt)]
 
-        elems = [E.div(*elems)]
+        # elems = [E.div(*elems)]
         return elems
 
     def before_state_change(obj, ar, oldstate, newstate):

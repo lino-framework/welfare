@@ -154,8 +154,13 @@ to test the new `eid_info` field:
 >>> print(result.keys())
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 
->>> soup = BeautifulSoup(result['data']['overview'][0])
+>>> soup = BeautifulSoup(result['data']['overview'])
 >>> print(soup.get_text("\n"))
+Ansicht als
+Partner
+, 
+Person
+, Klient
 Herr
 Bernd 
 Brecht
@@ -166,8 +171,13 @@ Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gül
 >>> url = '/api/reception/Clients/115?an=detail&fmt=json'
 >>> res = client.get(url,REMOTE_USER='rolf')
 >>> result = json.loads(res.content)
->>> soup = BeautifulSoup(result['data']['overview'][0])
+>>> soup = BeautifulSoup(result['data']['overview'])
 >>> print(soup.get_text("\n"))
+Ansicht als
+Partner
+, 
+Person
+, Klient
 Herr
 Alfons 
 Ausdemwald

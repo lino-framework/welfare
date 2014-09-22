@@ -48,8 +48,7 @@ für neue Operationen nicht benutzt werden können.""")
         # otherwise Django won't inherit `meta.verbose_name`. OTOH we
         # want to get the `get_overview_elems` from AddressOwner, not
         # from Partner (i.e. AddressLocation).
-        elems = dd.Polymorphic.get_overview_elems(self, ar)
-        elems += super(Partner, self).get_overview_elems(ar)
+        elems = super(Partner, self).get_overview_elems(ar)
         elems += addresses.AddressOwner.get_overview_elems(self, ar)
         return elems
 
