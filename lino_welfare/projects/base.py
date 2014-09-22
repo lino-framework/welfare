@@ -203,10 +203,8 @@ class Site(Site):
         yield 'lino_welfare.modlib.notes'
         yield 'lino_welfare.modlib.aids'
 
-        if self.use_java:
-
-            yield 'lino.modlib.beid'
-            yield 'lino.modlib.davlink'
+        yield 'lino.modlib.beid'
+        yield 'lino.modlib.davlink'
 
         yield 'lino.modlib.appypod'
         yield 'lino.modlib.export_excel'
