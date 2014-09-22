@@ -48,7 +48,8 @@ für neue Operationen nicht benutzt werden können.""")
         # otherwise Django won't inherit `meta.verbose_name`. OTOH we
         # want to get the `get_overview_elems` from AddressOwner, not
         # from Partner (i.e. AddressLocation).
-        elems = super(Partner, self).get_overview_elems(ar)
+        elems = dd.Polymorphic.get_overview_elems(self, ar)
+        elems += super(Partner, self).get_overview_elems(ar)
         elems += addresses.AddressOwner.get_overview_elems(self, ar)
         return elems
 
@@ -94,7 +95,7 @@ class PartnerDetail(PartnerDetail):
     main = "general contact misc "
 
     general = dd.Panel("""
-    overview:20 general2:20 general3:40
+    overview:30 general2:45 general3:20
     reception.AppointmentsByPartner
     """, label=_("General"))
 
@@ -170,9 +171,8 @@ class PersonDetail(PersonDetail):
     main = "general contact misc"
 
     general = dd.Panel("""
-    overview:20 general2:40 general3:40
-    contacts.RolesByPerson:20 households.MembersByPerson:40 \
-    humanlinks.LinksByHuman
+    overview:30 general2:45 general3:30
+    contacts.RolesByPerson:20  \
     """, label=_("General"))
 
     general2 = """
@@ -267,7 +267,7 @@ class CompanyDetail(CompanyDetail):
     main = "general contact notes misc"
 
     general = dd.Panel("""
-    overview:20 general2:40 general3:40
+    overview:30 general2:45 general3:30
     contacts.RolesByCompany
     """, label=_("General"))
 

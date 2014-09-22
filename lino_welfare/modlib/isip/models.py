@@ -562,7 +562,7 @@ class OverlappingContractsTest:
         #~ from lino_welfare.modlib.isip.models import ContractBase
         self.client = client
         self.actives = []
-        for model in dd.models_by_base(ContractBase):
+        for model in rt.models_by_base(ContractBase):
             for con1 in model.objects.filter(client=client):
                 ap = con1.active_period()
                 if ap[0] is None and ap[1] is None:

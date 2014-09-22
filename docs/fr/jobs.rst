@@ -2,24 +2,20 @@
 Insertion socio-professionnelle
 ===============================
 
-Ce module permet de gérer des projects 
-de mise au travail selon les articles 60§7 et 61 de 
-la loi organique des CPAS.
+Ce module permet de gérer des projects de mise au travail selon les
+articles 60§7 et 61 de la loi organique des CPAS.
 
-Si pour des jeunes en-dessous des 25 ans on 
-parle surtout d':ref:`welfare.isip` 
-et de leur *enseignement*, 
-pour les adultes nous 
-parlons d'**insertion socio-professionnelle**
-et nous concentrons au **travail**.
+Si pour des jeunes en-dessous des 25 ans on parle surtout
+d'**insertion sociale** et de leur *enseignement*, pour les adultes
+nous parlons d'**insertion socio-professionnelle** et nous concentrons
+au **travail**.
 
 Aperçu
 ======
 
-Le CPAS gère une liste d':ddref:`jobs.Jobs` (de mise au travail).
-Ces endroits de mise au travail sont généralement des endroits de travail 
-spécialisés à l'accqueil temporaire de personnes à intégrer.
-Exemple:
+Le CPAS gère une liste d'**endroits de mise au travail**.  Ces
+endroits de mise au travail sont généralement des endroits de travail
+spécialisés à l'accqueil temporaire de personnes à intégrer.  Exemple:
 
 .. django2rst:: 
 

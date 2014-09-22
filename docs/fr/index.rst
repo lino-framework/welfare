@@ -13,7 +13,7 @@ Contenu
 .. toctree::
    :maxdepth: 1
 
-   glossaire
    fiche_technique
+   glossaire
    jobs
    

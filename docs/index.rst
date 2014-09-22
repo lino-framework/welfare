@@ -22,13 +22,13 @@ Content
 .. toctree::
    :maxdepth: 1
 
-   ref/index
+   fr/index
+   de/index
    admin/index
+   ref/index
    releases/index
    tested/index
    todo
    changes
-   fr/index
-   de/index
    api/lino_welfare
    

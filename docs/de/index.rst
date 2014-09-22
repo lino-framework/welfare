@@ -7,13 +7,14 @@ Lino für ÖSHZ
 Deutschsprachige Dokumentation.
 
 
-Contenu
-========
+Inhalt
+======
 
 .. toctree::
    :maxdepth: 1
 
    klienten
    partner
+   general
 
    

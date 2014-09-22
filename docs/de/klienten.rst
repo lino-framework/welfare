@@ -36,7 +36,8 @@ die ihr eigenes Detail-Layout hat.
 
 (Test: Liste der Zivilstände:)
 
-.. django2rst::
+.. django2rst:: 
 
-    rt.show(pcsw.CivilState)
+   with dd.translation.override('de'):
+      rt.show(pcsw.CivilState)
 

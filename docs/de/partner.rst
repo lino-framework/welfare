@@ -1,6 +1,24 @@
+.. _welfare.de.partner:
+
 =======
 Partner
 =======
+
+Ein **Partner** ist eine `natürliche
+<http://de.wikipedia.org/wiki/Nat%C3%BCrliche_Person>`_ oder
+`juristische <http://de.wikipedia.org/wiki/Juristische_Person>`_
+Person (*personne physique ou morale*), für die wir in Lino mindestens
+den Namen speichern. Ein Partner kann also alles Mögliche sein: ein
+Klient, ein Lieferant, eine öffentliche Dienststelle, eine
+Kontaktperson in einer Firma, ...
+
+Lino unterscheidet folgende **Arten von Partnern**:
+
+.. django2rst:: 
+
+   with dd.translation.override('de'):
+       contacts.Partner.print_subclasses_graph()
+
 
 
 Veraltete Partner
@@ -18,8 +36,5 @@ Veraltete Partner werden normalerweise in Listen ignoriert, als wären
 sie gelöscht.  Um sie trotzdem zu sehen, muss das Ankreuzfeld `Auch
 veraltete Klienten` (bzw. `Auch veraltete Partner`) im Parameter-Panel
 der Liste angekreuzt werden.
-
-
-
 
 
