@@ -1,5 +1,5 @@
 """
-The settings used for building both `/docs` and `/userdocs`
+The settings used for building docs.
 """
 import datetime
 from lino_welfare.projects.base import *

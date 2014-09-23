@@ -73,23 +73,24 @@ class Site(Site):
         """
         This defines default user profiles for :ref:`welfare`.
         """
-        from lino import dd, rt
+        from lino import dd
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset(
-            '* office coaching integ courses cbss newcomers debts reception')
+            '* office coaching integ courses cbss newcomers debts '
+            'reception beid')
         add = dd.UserProfiles.add_item
-        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _',
+        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _ _',
             name='anonymous',
             readonly=True,
             authenticated=False)
-        add('100', _("Integration Agent"),           'U U U U U U _ _ _')
-        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ _')
-        add('200', _("Newcomers consultant"),        'U U U _ _ U U _ _')
-        add('210', _("Reception clerk"),             'U U _ _ _ _ _ _ U')
-        add('300', _("Debts consultant"),            'U U U _ _ _ _ U _')
-        add('400', _("Social agent"),                'U U U _ U U _ _ _')
-        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ _')
-        add('900', _("Administrator"),               'A A A A A A A A A',
+        add('100', _("Integration Agent"),           'U U U U U U _ _ _ U')
+        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ _ U')
+        add('200', _("Newcomers consultant"),        'U U U _ _ U U _ _ U')
+        add('210', _("Reception clerk"),             'U U _ _ _ _ _ _ U U')
+        add('300', _("Debts consultant"),            'U U U _ _ _ _ U _ U')
+        add('400', _("Social agent"),                'U U U _ U U _ _ _ U')
+        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ _ U')
+        add('900', _("Administrator"),               'A A A A A A A A A U',
             name='admin')
 
     def setup_quicklinks(self, ar, tb):
@@ -104,9 +105,6 @@ class Site(Site):
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
         tb.add_action(self.modules.cal.EventsByDay)
-
-        if self.is_installed('beid'):
-            tb.add_action('pcsw.Clients', 'find_by_beid')
 
     def setup_menu(self, ui, profile, main):
         from django.utils.translation import ugettext_lazy as _

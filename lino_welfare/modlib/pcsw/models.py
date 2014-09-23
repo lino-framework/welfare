@@ -32,9 +32,6 @@ from lino.core import dbutils
 from lino.core.dbutils import get_field
 
 from lino.utils.xmlgen.html import E
-from lino.utils import join_elems
-
-from lino.modlib.beid import mixins as beid
 
 households = dd.resolve_app('households')
 # reception = dd.resolve_app('reception')
@@ -49,6 +46,7 @@ users = dd.resolve_app('users')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 notes = dd.resolve_app('notes')
+beid = dd.resolve_app('beid')
 
 from lino.utils import ssin
 
@@ -647,7 +645,7 @@ class Client(contacts.Person,
         return E.div(*elems)
 
     def get_beid_diffs(self, attrs):
-        """Overrides :meth:`lino.modlib.mixins.BeIdCardHolder.get_beid_diffs`.
+        """Overrides :meth:`dd.beid.BeIdCardHolder.get_beid_diffs`.
 
         """
         Address = rt.modules.addresses.Address
@@ -1509,8 +1507,7 @@ def setup_explorer_menu(site, ui, profile, m):
     #~ m.add_action(PersonSearches)
     m.add_action(CivilState)
     m.add_action(ClientStates)
-    if dd.is_installed('beid'):
-        m.add_action('beid.BeIdCardTypes')
+    m.add_action('beid.BeIdCardTypes')
 
 
 def setup_reports_menu(site, ui, profile, m):
@@ -1520,6 +1517,10 @@ def setup_reports_menu(site, ui, profile, m):
     m.add_action(ClientsTest)
     #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     # ~ m.add_action(ActivityReport1) # old version
+
+
+def setup_quicklinks(self, ar, tb):
+    tb.add_action('pcsw.Clients', 'find_by_beid')
 
 
 def setup_workflows(site):
