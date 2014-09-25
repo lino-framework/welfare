@@ -11,7 +11,7 @@ from lino_welfare.projects.base import *
 class Site(Site):
 
     title = "Lino pour CPAS"
-    languages = 'fr nl'
+    languages = 'fr nl en'
     hidden_languages = None
     uppercase_last_name = True
 

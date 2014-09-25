@@ -24,17 +24,6 @@ from lino.modlib.users.models import *
 cal = dd.resolve_app('cal')
 
 
-def check_subscription(user, calendar):
-    if calendar is None:
-        return
-    try:
-        cal.Subscription.objects.get(user=user, calendar=calendar)
-    except cal.Subscription.DoesNotExist:
-        sub = cal.Subscription(user=user, calendar=calendar)
-        sub.full_clean()
-        sub.save()
-
-
 class User(User):
 
     coaching_type = dd.ForeignKey(
@@ -68,7 +57,7 @@ class User(User):
             return
 
         if not settings.SITE.loading_from_dump:
-            check_subscription(self, self.calendar)
+            cal.check_subscription(self, self.calendar)
 
     def check_all_subscriptions(self):
 
@@ -81,8 +70,8 @@ class User(User):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
                 profile__in=coaching_profiles).exclude(id=self.id):
-            check_subscription(self, u.calendar)
-            check_subscription(u, self.calendar)
+            cal.check_subscription(self, u.calendar)
+            cal.check_subscription(u, self.calendar)
         # logger.info("20140403 wrote subscriptions for %s", self)
 
 
