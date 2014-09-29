@@ -40,7 +40,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-44 apps: about, bootstrap3, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, beid, appypod, export_excel, djangosite.
+46 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, beid, davlink, appypod, export_excel, djangosite.
 112 models:
 ============================== ========= =======
  Name                           #fields   #rows
@@ -64,7 +64,7 @@ Test whether :meth:`get_db_overview_rst
  cal.EventType                  19        7
  cal.Guest                      9         19
  cal.GuestRole                  5         4
- cal.Priority                   6         9
+ cal.Priority                   6         4
  cal.RecurrentEvent             22        9
  cal.RemoteCalendar             7         0
  cal.Room                       5         0
@@ -84,7 +84,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.RoleType              6         5
  contenttypes.ContentType       4         113
  countries.Country              8         8
- countries.Place                10        76
+ countries.Place                10        78
  courses.Course                 5         3
  courses.CourseContent          2         2
  courses.CourseOffer            6         3

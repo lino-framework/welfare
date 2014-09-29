@@ -156,6 +156,7 @@ to test the new `eid_info` field:
 
 >>> soup = BeautifulSoup(result['data']['overview'])
 >>> print(soup.get_text("\n"))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Ansicht als
 Partner
 , 
@@ -173,6 +174,7 @@ Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gül
 >>> result = json.loads(res.content)
 >>> soup = BeautifulSoup(result['data']['overview'])
 >>> print(soup.get_text("\n"))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Ansicht als
 Partner
 , 
