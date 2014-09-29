@@ -71,6 +71,7 @@ class ClientDetail(dd.FormLayout):
     # job_office_contact job_agents
     pcsw.DispensesByClient:50x3
     pcsw.ExclusionsByClient:50x3
+    polls.ResponsesByPartner
     """)
 
     papers = dd.Panel("""
