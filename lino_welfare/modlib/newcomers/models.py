@@ -5,52 +5,27 @@
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import sys
-import cgi
-import datetime
 import decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
-from django.db import IntegrityError
-from django.utils.encoding import force_unicode
 
 
-from lino import dd, rt
-#~ from lino.core import changes
-#~ from lino.utils.babel import default_language
+from lino import dd
 from lino.dd import dtos
-#~ from lino import reports
-#~ from lino import layouts
-#~ from lino.core.perms import UserProfiles, UserLevels
-from lino.utils.restify import restify
-#~ from lino.utils import printable
 
 from lino.utils.choosers import chooser
-#~ from north import babel
-from lino.utils import ssin
-from lino.utils import workdays
+# from lino.utils import ssin
 from lino import mixins
 from django.conf import settings
-#~ from lino import choices_method, simple_choices_method
-#~ from lino.modlib.contacts import models as contacts
-#~ from lino.modlib.users import models as users
 from lino.modlib.cal.utils import amonthago
 
-
-#~ from lino_welfare.models import Person
-#~ from lino_welfare.modlib.pcsw import models as welfare
-#~ from lino_welfare.modlib.pcsw import models as pcsw
 
 users = dd.resolve_app('users')
 contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw', strict=True)
 outbox = dd.resolve_app('outbox')
-
-#~ if not hasattr(pcsw,'Clients'):
-    #~ print os.environ['DJANGO_SETTINGS_MODULE']
 
 MODULE_LABEL = _("Newcomers")
 
@@ -470,14 +445,11 @@ Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
 
 class AssignCoach(dd.NotifyingAction):
 
-    "Assign a coach to a newcomer."
-
     label = _("Assign")
     show_in_workflow = True
     help_text = _("Assign this agent as coach for this client. "
                   "This will set the client's state to `Coached` "
                   "and send a notification to the new coach.")
-#     help_text = u"""\
 # Diesen Benutzer als Begleiter für diesen Klienten eintragen
 # und den Zustand des Klienten auf "Begleitet" setzen.
 # Anschließend wird der Klient in der Liste "Neue Klienten"

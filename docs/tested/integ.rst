@@ -121,7 +121,7 @@ The first link is the disabled checkbox for the :attr:`primary
 
 
 >>> print(links[0].get('href'))
-javascript:Lino.households.Members.set_primary("ext-comp-1351",7)
+javascript:Lino.households.Members.set_primary("ext-comp-1351",7,{  })
 >>> print(links[1].get('href'))
 javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 230 })
 >>> print(links[1].string)
