@@ -23,6 +23,8 @@ Models
   Pointer to the default :class:`ml.boards.Board` for aid projects of
   this type.
 
+  .. attribute:: excerpt_type
+
 .. class:: Category
 
 .. class:: Aid

@@ -31,12 +31,23 @@ from lino.utils.xmlgen.html import E
 from django.conf import settings
 
 from lino.modlib.contacts.utils import parse_name
+from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
+from lino.modlib.addresses.mixins import AddressTypes
 
-contacts = dd.resolve_app('contacts')
+# contacts = dd.resolve_app('contacts')
 boards = dd.resolve_app('boards')
-pcsw = dd.resolve_app('pcsw')
-contacts = dd.require_app_models('contacts')
+# pcsw = dd.resolve_app('pcsw')
+# contacts = dd.require_app_models('contacts')
+# addresses = dd.require_app_models('addresses')
+
+
+def e2text(v):
+    if isinstance(v, types.GeneratorType):
+        return "".join([e2text(x) for x in v])
+    if E.iselement(v):
+        return E.tostring(v)
+    return unicode(v)
 
 
 class ConfirmationType(dd.Choice):
@@ -102,7 +113,7 @@ class Categories(dd.Table):
     """
 
 
-class AidType(contacts.ContactRelated, dd.BabelNamed):
+class AidType(ContactRelated, dd.BabelNamed):
 
     # templates_group = 'aids/Aid'
 
@@ -114,7 +125,7 @@ class AidType(contacts.ContactRelated, dd.BabelNamed):
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
-    long_name = dd.BabelCharField(
+    long_name = dd.BabelTextField(
         _("Long name"),
         max_length=200,
         blank=True,
@@ -132,6 +143,8 @@ class AidType(contacts.ContactRelated, dd.BabelNamed):
     pharmacy_type = dd.ForeignKey(
         'pcsw.ClientContactType', blank=True, null=True)
 
+    address_type = AddressTypes.field(blank=True, null=True)
+
     def get_long_name(self):
         return dd.babelattr(self, 'long_name') or unicode(self)
 
@@ -144,7 +157,7 @@ class AidTypes(dd.Table):
 
     insert_layout = """
     name
-    long_name
+    # long_name
     confirmation_type
     """
 
@@ -191,9 +204,9 @@ class SignConfirmation(dd.Action):
             obj.state = ConfirmationStates.confirmed
             obj.save()
             ar.set_response(refresh=True)
-        msg = obj.confirmation_text(ar)
+        text = obj.confirmation_text(ar)
         msg = _("You confirm that %(client)s %(text)s") % dict(
-            client=obj.client, text=msg)
+            client=obj.client, text=text)
         ar.confirm(ok, msg, _("Are you sure?"))
 
 
@@ -239,47 +252,38 @@ class Confirmable(dd.Model):
 
     @dd.virtualfield(dd.HtmlBox(""))
     def confirmation_text(self, ar):
-
-        aid = self
-
-        def when():
-            if aid.start_date:
-                yield pgettext("date range", "since")
-                yield " "
-                yield E.b(dd.fdl(aid.start_date))
-            if aid.start_date and aid.end_date:
-                yield " "
-                yield _("and")
-            if aid.end_date:
-                yield " "
-                yield pgettext("date range", "until")
-                yield " "
-                yield E.b(dd.fdl(self.end_date))
-
-        def e2text(v):
-            if isinstance(v, types.GeneratorType):
-                return "".join([e2text(x) for x in v])
-            if E.iselement(v):
-                return E.tostring(v)
-            return unicode(v)
-            
         kw = dict()
-        kw.update(what=e2text(self.confirmation_what(ar)))
-        kw.update(when=e2text(when()))
-        if kw['when'] or kw['what']:
-            if self.end_date and self.end_date <= settings.SITE.today():
-                s = _("received %(what)s %(when)s.") % kw
-            else:
-                s = _("receives %(what)s %(when)s.") % kw
-        else:
-            return ''
-        return s
+        kw.update(obj=self)
+        # kw.update(what=e2text(self.confirmation_what(ar)))
+        kw.update(when=e2text(self.confirmation_when(ar)))
+        kw.update(past=(self.end_date and self.end_date <= dd.today()))
+        s = self.aid_type.get_long_name()
+        if s:
+            template = settings.SITE.jinja_env.from_string(s)
+            return ar.render_jinja(template, **kw)
+        return unicode(self)
 
-    def confirmation_what(self, ar):
-        yield E.b(self.aid_type.get_long_name())
+    def confirmation_when(self, ar):
+        if self.start_date:
+            yield pgettext("date range", "from")
+            yield " "
+            yield E.b(dd.fdl(self.start_date))
+        # if self.start_date and self.end_date:
+        #     yield " "
+        #     yield _("and")
+        if self.end_date:
+            yield " "
+            yield pgettext("date range", "until")
+            yield " "
+            yield E.b(dd.fdl(self.end_date))
+
+    # def confirmation_what(self, ar):
+    #     yield E.b(self.aid_type.get_long_name())
+
 ##
 ## Granting
 ##
+
 
 class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
 
@@ -292,11 +296,12 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
 
     aid_type = models.ForeignKey('aids.AidType')
 
-    def on_create(self, ar):
+    def after_ui_create(self, ar):
+        super(Granting, self).after_ui_create(ar)
+        dd.logger.info("20141001 %s %s", self.client_id, self.aid_type_id)
         if self.client_id and self.aid_type_id \
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
-        super(Granting, self).on_create(ar)
         
     def __unicode__(self):
         if self.aid_type_id is not None:
@@ -351,7 +356,7 @@ class Grantings(dd.Table):
     order_by = ['-start_date']
 
     detail_layout = """
-    id client signer workflow_buttons
+    id client user signer workflow_buttons
     board decision_date
     aid_type start_date end_date custom_actions
     aids.ConfirmationsByGranting
@@ -377,9 +382,18 @@ class Grantings(dd.Table):
             settings.SITE.user_model,
             verbose_name=_("Author"),
             blank=True, null=True,
-            help_text=_("Only rows created by this user.")))
+            help_text=_("Only rows created by this user.")),
+        signer=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Signer"),
+            blank=True, null=True,
+            help_text=_("Only rows confirmed (or to be confirmed) "
+                        "by this user.")),
+        state=ConfirmationStates.field(
+            blank=True,
+            help_text=_("Only rows having this state.")))
 
-    params_layout = "board aid_type user"
+    params_layout = "board aid_type user signer state"
 
     @classmethod
     def get_request_queryset(self, ar):
@@ -391,6 +405,10 @@ class Grantings(dd.Table):
             qs = qs.filter(board=pv.board)
         if pv.user:
             qs = qs.filter(user=pv.user)
+        if pv.signer:
+            qs = qs.filter(signer=pv.signer)
+        if pv.state:
+            qs = qs.filter(state=pv.state)
         return qs
 
     @classmethod
@@ -399,11 +417,23 @@ class Grantings(dd.Table):
             yield t
         pv = ar.param_values
 
-        for k in ('board', 'aid_type', 'user'):
+        for k in ('board', 'aid_type', 'user', 'signer', 'state'):
             v = pv[k]
             if v:
                 yield unicode(self.parameters[k].verbose_name) \
                     + ' ' + unicode(v)
+
+
+class MyPendingGrantings(Grantings):
+    column_names = "client aid_type start_date end_date user workflow_buttons"
+    label = _("Grantings to confirm")
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyPendingGrantings, self).param_defaults(ar, **kw)
+        kw.update(signer=ar.get_user())
+        kw.update(state=ConfirmationStates.requested)
+        return kw
 
 
 class GrantingsByX(Grantings):
@@ -415,29 +445,19 @@ class GrantingsByClient(GrantingsByX):
 
     master_key = 'client'
     column_names = "description_column start_date end_date " \
+                   "signer workflow_buttons " \
                    "board custom_actions *"
     # allow_create = False
-    stay_in_grid = True
+    # stay_in_grid = True
     # stay_in_grid is not useless here --even though allow_create is
     # False-- because otherwise the actions invoked
-    # bycreate_confirmation_buttons would open a detail window.
+    # by create_confirmation_buttons would open a detail window.
 
-    # @classmethod
-    # def create_buttons(self, client, ar):
-    #     # called from pcsw.Client.create_confirmation_buttons
-    #     elems = [_("Create an aid confirmation:")]
-    #     items = []
-    #     kv = dict(client=client)
-    #     for ct in ConfirmationTypes.items():
-    #         li = [E.b(unicode(ct.model._meta.verbose_name)), ' : ']
-    #         for at in AidType.objects.filter(confirmation_type=ct):
-    #             kv.update(aid_type=at)
-    #             sar = ar.spawn(ct.table_class, known_values=kv)
-    #             li += [sar.insert_button(
-    #                 at.short_name or unicode(at), icon_name=None), ', ']
-    #         items.append(E.li(*li))
-    #     elems.append(E.ul(*items))
-    #     return E.div(*elems)
+    insert_layout = """
+    aid_type
+    board decision_date
+    start_date end_date
+    """
 
 
 class GrantingsByType(GrantingsByX):
@@ -450,7 +470,7 @@ class GrantingsByType(GrantingsByX):
 ##
 
 class Confirmation(
-        Confirmable, dd.UserAuthored, contacts.ContactRelated,
+        Confirmable, dd.UserAuthored, ContactRelated,
         dd.DatePeriod, dd.Created, Certifiable):
               
     class Meta:
@@ -497,9 +517,9 @@ class Confirmation(
         kw.update(project=self.client)
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
 
-    def confirmation_what(self, ar):
-        if self.granting:
-            yield E.b(self.granting.aid_type.get_long_name())
+    # def confirmation_what(self, ar):
+    #     if self.granting:
+    #         yield E.b(self.granting.aid_type.get_long_name())
 
 
 dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
@@ -521,12 +541,6 @@ class Confirmations(dd.Table):
             'boards.Board',
             blank=True, null=True,
             help_text=_("Only rows decided by this board.")),
-        signer=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Signer"),
-            blank=True, null=True,
-            help_text=_("Only rows confirmed (or to be confirmed) "
-                        "by this user.")),
         user=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=_("Author"),
@@ -536,6 +550,12 @@ class Confirmations(dd.Table):
             'aids.AidType',
             blank=True, null=True,
             help_text=_("Only confirmations about this aid type.")),
+        signer=dd.ForeignKey(
+            settings.SITE.user_model,
+            verbose_name=_("Signer"),
+            blank=True, null=True,
+            help_text=_("Only rows confirmed (or to be confirmed) "
+                        "by this user.")),
         state=ConfirmationStates.field(
             blank=True,
             help_text=_("Only rows having this state.")))
@@ -546,12 +566,12 @@ class Confirmations(dd.Table):
     def get_request_queryset(self, ar):
         qs = super(Confirmations, self).get_request_queryset(ar)
         pv = ar.param_values
-        if pv.signer:
-            qs = qs.filter(signer=pv.signer)
         if pv.aid_type:
             qs = qs.filter(granting__aid_type=pv.aid_type)
         if pv.board:
             qs = qs.filter(granting__board=pv.board)
+        if pv.signer:
+            qs = qs.filter(signer=pv.signer)
         if pv.state:
             qs = qs.filter(state=pv.state)
         return qs
@@ -645,7 +665,7 @@ class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
 
     detail_layout = dd.FormLayout("""
-    id client signer workflow_buttons
+    id client user signer workflow_buttons
     granting start_date end_date
     confirmation_text
     company contact_person language printed
@@ -654,10 +674,10 @@ class SimpleConfirmations(Confirmations):
 
     insert_layout = dd.FormLayout("""
     client granting:25
-    signer start_date end_date
+    start_date end_date
     company contact_person language
     remark
-    """, window_size=(50, 16))
+    """, window_size=(50, 16), hidden_elements='client granting')
 
     column_names = "id client granting start_date end_date *"
 
@@ -702,7 +722,7 @@ class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
 
     detail_layout = dd.FormLayout("""
-    client signer workflow_buttons printed
+    client user signer workflow_buttons printed
     company contact_person language
     granting:25 start_date end_date
     category amount id
@@ -732,7 +752,7 @@ ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmations)
 
 
 dd.inject_field(
-    pcsw.ClientContactType,
+    'pcsw.ClientContactType',
     'can_refund',
     models.BooleanField(
         _("Can refund"), default=False,
@@ -826,7 +846,7 @@ class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
 
     detail_layout = dd.FormLayout("""
-    id client signer workflow_buttons
+    id client user signer workflow_buttons
     granting:25 start_date end_date
     doctor_type doctor pharmacy
     confirmation_text
@@ -888,6 +908,7 @@ def setup_config_menu(site, ui, profile, m):
 def setup_explorer_menu(site, ui, profile, m):
     app = dd.apps.reception
     m = m.add_menu(app.app_name, app.verbose_name)
+    m.add_action('aids.Grantings')
     m.add_action('aids.Confirmations')
     m.add_action('aids.AidRegimes')
     m.add_action('aids.IncomeConfirmations')

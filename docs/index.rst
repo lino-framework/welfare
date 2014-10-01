@@ -23,7 +23,6 @@ Content
    :maxdepth: 1
 
    fr/index
-   de/index
    admin/index
    ref/index
    releases/index

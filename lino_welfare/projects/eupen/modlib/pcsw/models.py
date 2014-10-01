@@ -122,16 +122,14 @@ class ClientDetail(dd.FormLayout):
     status:55 income:25
     sepa.AccountsByClient
     aids.GrantingsByClient
-
     """, label=_("Aids"))
 
     status = """
     in_belgium_since:15 residence_type gesdos_id
-    job_agents group:16
+    job_agents group:16 aid_type
     """
 
     income = """
-    # aid_type
     income_ag  income_wg
     income_kg   income_rente
     income_misc

@@ -30,5 +30,15 @@ class Site(Site):
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         return kw
 
+    def get_admin_main_items(self):
+        yield self.modules.integ.UsersWithClients
+        yield self.modules.aids.MyPendingGrantings
+        yield self.modules.reception.MyWaitingVisitors
+        yield self.modules.cal.MyEvents
+        yield self.modules.cal.MyTasks
+        yield self.modules.reception.WaitingVisitors
+        #~ yield self.modules.reception.ReceivedVisitors
+
+
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'

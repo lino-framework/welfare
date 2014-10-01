@@ -1,6 +1,6 @@
-=====================
+===========
 Allgemeines
-=====================
+===========
 
 .. _welfare.de.admin_main:
 
@@ -48,10 +48,10 @@ Zur Struktur des Menüs:
 Fehlermeldungen und wie damit umgehen
 =====================================
 
-INTERNAL SERVER ERROR
+Internal Server Error
 ---------------------
 
-Wenn ihr ein Fenster "INTERNAL SERVER ERROR" kriegt, dann 
+Wenn du ein Fenster "INTERNAL SERVER ERROR" kriegst, dann
 
 - Keine Panik. 
   Der Fehler liegt nicht bei dir, sondern beim Programmierer.

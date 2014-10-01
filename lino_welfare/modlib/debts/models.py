@@ -37,7 +37,6 @@ from lino.utils.choosers import chooser
 
 from lino.modlib.accounts.utils import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
-from lino.mixins.printable import decfmt
 
 accounts = dd.resolve_app('accounts')
 households = dd.resolve_app('households')
@@ -1121,7 +1120,7 @@ class ResultByBudget(SummaryTable):
             if yi:
                 yield [
                     ("Jährliche Einkünfte (%s / 12)"
-                     % decfmt(yi * 12, places=2)),
+                     % dd.decfmt(yi * 12, places=2)),
                     yi]
 
         a = budget.sum('amount', 'I', exclude=dict(periods__in=(1, 12)))
@@ -1135,7 +1134,7 @@ class ResultByBudget(SummaryTable):
         if ye:
             yield [
                 ("Monatliche Reserve für jährliche Ausgaben (%s / 12)"
-                 % decfmt(ye * 12, places=2)),
+                 % dd.decfmt(ye * 12, places=2)),
                 -ye]
 
         #~ ye = budget.sum('amount','E',models.Q(periods__ne=1) & models.Q(periods__ne=12))

@@ -42,11 +42,12 @@ def objects():
     kw.update(
         dd.babelkw(
             'long_name',
-            de="das durch Gesetz vom 26. Mai 2002 eingeführte "
-            "Eingliederungseinkommen",
-            fr="le revenu d'intégration "
-            "prévue par la loi du 26 mai 2002"))
+            de="""das durch Gesetz vom 26. Mai 2002 eingeführte
+            Eingliederungseinkommen {{iif(past, "bezogen hat", "bezieht")}}""",
+            fr="""{{iif(past, "a bénéficié", "bénéficie")}}
+            du revenu d'intégration prévue par la loi du 26 mai 2002"""))
     yield aidType(**kw)
+
     kw = dd.babelkw(
         'name',
         de="Ausländerbeihilfe",
@@ -55,18 +56,30 @@ def objects():
     kw.update(
         dd.babelkw(
             'long_name',
-            de="eine laut Gesetz vom 2. April 1965 eingeführte "
-            "Sozialhilfe für Ausländer",
-            fr="une aide sociale pour étrangers "
-            "prévue par la loi du 2 avril 1965"))
+            de="""eine laut Gesetz vom 2. April 1965 eingeführte
+            Sozialhilfe für Ausländer
+            (Kategorie: {{obj.category or "undefiniert"}})
+            {{iif(past, "bezogen hat", "bezieht")}}""",
+            fr="""{{iif(past, "a bénéficié", "bénéficie")}}
+            d'une aide sociale pour étrangers
+            prévue par la loi du 2 avril 1965
+            (Catégorie: {{obj.category or 'non spécifiée'}}).
+            """))
     yield aidType(**kw)
 
-    yield aidType(
-        **dd.babelkw(
-            'name',
-            de="Feste Beihilfe",
-            en="Feste Beihilfe",
-            fr="Revenu fixe"))
+    kw = dd.babelkw(
+        'name',
+        de="Feste Beihilfe",
+        en="Feste Beihilfe",
+        fr="Revenu fixe")
+    kw.update(
+        dd.babelkw(
+            'long_name',
+            de="""eine feste Beihilfe
+            {{iif(past, "bezogen hat", "bezieht")}}""",
+            fr="""{{iif(past, "a bénéficié", "bénéficie")}}
+            d'une aide fixe"""))
+    yield aidType(**kw)
 
     aidType = Instantiator(
         'aids.AidType', "name",
