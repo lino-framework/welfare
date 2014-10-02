@@ -15,9 +15,9 @@
 """
 """
 
-from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from lino.dd import resolve_model
-from lino.utils import Cycler
+from lino.utils import Cycler, ONE_DAY
 from lino import dd, rt
 
 
@@ -46,33 +46,41 @@ def objects():
 
     BOARDS = Cycler(Board.objects.all())
 
+    fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
+    pharmacy_type = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
+    PHARMACIES = Cycler(rt.modules.contacts.Company.objects.filter(
+        client_contact_type=pharmacy_type))
+
     for i, at in enumerate(AidType.objects.all()):
         kw = dict(start_date=dd.demo_date(days=i),
                   board=BOARDS.pop(),
                   decision_date=dd.demo_date(days=i-1),
                   aid_type=at)
         kw.update(client=PROJECTS.pop())
-        yield Granting(**kw)
+        g = Granting(**kw)
+        g.after_ui_create(None)
+        yield g
 
     # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
     RefundConfirmation = rt.modules.aids.RefundConfirmation
-    # for i in range(5):
-    #     for ct in ConfirmationTypes.items():
-    #         for at in AidType.objects.filter(confirmation_type=ct):
-    #             for g in Granting.objects.filter(aid_type=at):
-    #                 kw = dict(granting=g, client=g.client)
-    #                 if ct.model == RefundConfirmation:
-    #                     type, cycler = PARTNERS.pop()
-    #                     kw.update(partner_type=type)
-    #                     kw.update(partner=cycler.pop())
-    #                 yield ct.model(**kw)
+    IncomeConfirmation = rt.modules.aids.IncomeConfirmation
+
+    AMOUNTS = Cycler(123, 234, 345, 456, 678)
+    CATEGORIES = Cycler(rt.modules.aids.Category.objects.all())
 
     for i in range(2):
-        for g in Granting.objects.all():
+        for g in Granting.objects.filter(aid_type__isnull=False):
             ct = g.aid_type.confirmation_type
             kw = dict(granting=g, client=g.client)
+            kw.update(start_date=g.start_date + ONE_DAY)
+            kw.update(end_date=g.start_date + ONE_DAY + ONE_DAY)
+            if ct.model == IncomeConfirmation:
+                kw.update(category=CATEGORIES.pop())
+                kw.update(amount=AMOUNTS.pop())
             if ct.model == RefundConfirmation:
                 type, cycler = PARTNERS.pop()
                 kw.update(doctor_type=type)
                 kw.update(doctor=cycler.pop())
+                if g.aid_type.pharmacy_type == pharmacy_type:
+                    kw.update(pharmacy=PHARMACIES.pop())
             yield ct.model(**kw)

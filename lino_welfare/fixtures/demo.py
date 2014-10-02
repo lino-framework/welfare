@@ -12,7 +12,7 @@ import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 
 from lino import dd, rt
@@ -590,11 +590,9 @@ def objects():
     yield company(name=u"Mutualia - Mutualité Neutre", **kw)
     yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
 
-    kw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
-    cct = ClientContactType(**kw)
-    yield cct
+    fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
+    cct = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
     kw = dict(client_contact_type=cct, country=belgium)
-    #~ kw = dict(is_pharmacy=True,country=belgium,city=eupen)
     yield company(name=u"Apotheke Reul", street=u'Klosterstraße', street_no=20, **kw)
     yield company(name=u"Apotheke Schunck", street=u'Bergstraße', street_no=59, **kw)
     yield company(name=u"Pharmacies Populaires de Verviers", street=u'Aachener Straße', street_no=258, **kw)
@@ -1166,16 +1164,21 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                                             now)
         yield obj
 
+    # TODO: the following possibly causes more than one busy guest per
+    # agent.
     qs = cal.Guest.objects.filter(waiting_since__isnull=False)
+    busy_agents = set()
     for i, obj in enumerate(qs):
-        if i % 2 == 0:
-            obj.busy_since = obj.waiting_since + \
-                datetime.timedelta(minutes=2 * i, seconds=2 * i)
+        busy_since = obj.waiting_since + \
+            datetime.timedelta(minutes=2 * i, seconds=2 * i)
+        if i % 3 == 0:
+            obj.gone_since = busy_since + \
+                datetime.timedelta(minutes=2 * i, seconds=3 * i)
+            obj.state = cal.GuestStates.gone
+        elif not obj.event.user in busy_agents:
+            obj.busy_since = busy_since
             obj.state = cal.GuestStates.busy
-            if i % 4 == 0:
-                obj.gone_since = obj.busy_since + \
-                    datetime.timedelta(minutes=2 * i, seconds=3 * i)
-                obj.state = cal.GuestStates.gone
+            busy_agents.add(obj.event.user)
 
         yield obj
 

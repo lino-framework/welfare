@@ -94,6 +94,11 @@ def excerpt_types():  # also used for migration to 1.1.11
 
 def objects():
 
+    ClientContactType = rt.modules.pcsw.ClientContactType
+    kw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
+    cct = ClientContactType(**kw)
+    yield cct
+
     noteType = Instantiator(
         'notes.NoteType', "name",
         email_template='Default.eml.html').build

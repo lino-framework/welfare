@@ -32,7 +32,6 @@ class Site(Site):
 
     def get_admin_main_items(self):
         yield self.modules.integ.UsersWithClients
-        yield self.modules.aids.MyPendingGrantings
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
         yield self.modules.cal.MyTasks

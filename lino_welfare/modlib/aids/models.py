@@ -82,12 +82,12 @@ class ConfirmationTypes(dd.ChoiceList):
         return cls.add_item_instance(ConfirmationType(model, table_class))
 
 
-class AidRegimes(dd.ChoiceList):
-    verbose_name = _("Aid Regime")
-add = AidRegimes.add_item
-add('10', _("Financial aids"), 'financial')
-add('20', _("Medical aids"), 'medical')
-add('30', _("Other aids"), 'other')
+# class AidRegimes(dd.ChoiceList):
+#     verbose_name = _("Aid Regime")
+# add = AidRegimes.add_item
+# add('10', _("Financial aids"), 'financial')
+# add('20', _("Medical aids"), 'medical')
+# add('30', _("Other aids"), 'other')
 
 
 class Category(dd.BabelNamed):
@@ -121,7 +121,7 @@ class AidType(ContactRelated, dd.BabelNamed):
         verbose_name = _("Aid Type")
         verbose_name_plural = _("Aid Types")
 
-    aid_regime = AidRegimes.field(default=AidRegimes.financial)
+    # aid_regime = AidRegimes.field(default=AidRegimes.financial)
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
@@ -145,15 +145,15 @@ class AidType(ContactRelated, dd.BabelNamed):
 
     address_type = AddressTypes.field(blank=True, null=True)
 
-    def get_long_name(self):
-        return dd.babelattr(self, 'long_name') or unicode(self)
+    def get_confirmation_template(self):
+        return dd.babelattr(self, 'long_name')
 
 
 class AidTypes(dd.Table):
     model = 'aids.AidType'
     required = dd.required(user_level='admin', user_groups='office')
-    column_names = 'aid_regime name board short_name *'
-    order_by = ["aid_regime", "name"]
+    column_names = 'name board short_name *'
+    order_by = ["name"]
 
     insert_layout = """
     name
@@ -162,7 +162,7 @@ class AidTypes(dd.Table):
     """
 
     detail_layout = """
-    id short_name aid_regime confirmation_type
+    id short_name confirmation_type
     name
     long_name
     print_directly confirmed_by_primary_coach board
@@ -218,7 +218,7 @@ def setup_aids_workflows(sender=None, **kw):
 
 
 class Confirmable(dd.Model):
-              
+    # base class for Granting and for Confirmation
     class Meta:
         abstract = True
 
@@ -252,33 +252,39 @@ class Confirmable(dd.Model):
 
     @dd.virtualfield(dd.HtmlBox(""))
     def confirmation_text(self, ar):
-        kw = dict()
-        kw.update(obj=self)
+        kw = rt.get_printable_context(ar, obj=self)
         # kw.update(what=e2text(self.confirmation_what(ar)))
         kw.update(when=e2text(self.confirmation_when(ar)))
         kw.update(past=(self.end_date and self.end_date <= dd.today()))
-        s = self.aid_type.get_long_name()
-        if s:
-            template = settings.SITE.jinja_env.from_string(s)
-            return ar.render_jinja(template, **kw)
-        return unicode(self)
+        at = self.get_aid_type()
+        if at:
+            s = at.get_confirmation_template()
+            if s:
+                template = settings.SITE.jinja_env.from_string(s)
+                return ar.render_jinja(template, **kw)
+        kw.update(what=unicode(at))
+        return _("receives %(what)s %(when)s.") % kw
 
     def confirmation_when(self, ar):
-        if self.start_date:
+        if self.start_date and self.end_date:
+            yield " "
+            if self.start_date == self.end_date:
+                s = e2text(E.b(dd.fdl(self.start_date)))
+                yield pgettext("date", "on %s") % s
+            else:
+                kw = dict()
+                kw.update(a=e2text(E.b(dd.fdl(self.start_date))))
+                kw.update(b=e2text(E.b(dd.fdl(self.end_date))))
+                yield pgettext("date range", "between %(a)s and %(b)s") % kw
+        elif self.start_date:
             yield pgettext("date range", "from")
             yield " "
             yield E.b(dd.fdl(self.start_date))
-        # if self.start_date and self.end_date:
-        #     yield " "
-        #     yield _("and")
-        if self.end_date:
+        elif self.end_date:
             yield " "
             yield pgettext("date range", "until")
             yield " "
             yield E.b(dd.fdl(self.end_date))
-
-    # def confirmation_what(self, ar):
-    #     yield E.b(self.aid_type.get_long_name())
 
 ##
 ## Granting
@@ -298,7 +304,7 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
 
     def after_ui_create(self, ar):
         super(Granting, self).after_ui_create(ar)
-        dd.logger.info("20141001 %s %s", self.client_id, self.aid_type_id)
+        # dd.logger.info("20141001 %s %s", self.client_id, self.aid_type_id)
         if self.client_id and self.aid_type_id \
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
@@ -311,6 +317,9 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
             # return _('%s since %s') % (
             #     t1, dd.fds(self.start_date))
         return '%s #%s' % (self._meta.verbose_name, self.pk)
+
+    def get_aid_type(self):
+        return self.aid_type
 
     @classmethod
     def get_confirmable_fields(cls):
@@ -330,6 +339,11 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
         txt = _("Create %s") % ct.model._meta.verbose_name
         btn = sar.insert_button(txt, icon_name=None)
         return E.div(btn)
+
+    # def get_long_name(self):
+    #     if self.aid_type_id:
+    #         return self.aid_type.get_long_name()
+    #     return ''
 
 
     # @dd.chooser()
@@ -425,8 +439,22 @@ class Grantings(dd.Table):
 
 
 class MyPendingGrantings(Grantings):
-    column_names = "client aid_type start_date end_date user workflow_buttons"
+    required = dd.required(user_groups='coaching')
+    column_names = "client aid_type start_date " \
+                   "end_date user workflow_buttons *"
     label = _("Grantings to confirm")
+
+    @classmethod
+    def get_welcome_messages(cls, ar):
+        sar = ar.spawn(cls)
+        num = sar.get_total_count()
+        if num > 0:
+            chunks = [unicode(_("You have %s items in ")) % num]
+            # e = E.a(str(num), " ", unicode(cls.label),
+            #         href=sar.get_request_url())
+            chunks.append(ar.href_to_request(sar, unicode(cls.label)))
+            chunks.append('.')
+            yield E.span(*chunks)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -517,9 +545,15 @@ class Confirmation(
         kw.update(project=self.client)
         return super(Confirmation, self).get_excerpt_options(ar, **kw)
 
-    # def confirmation_what(self, ar):
-    #     if self.granting:
-    #         yield E.b(self.granting.aid_type.get_long_name())
+    def get_aid_type(self):
+        if self.granting_id and self.granting.aid_type_id:
+            return self.granting.aid_type
+        return None
+
+    # def get_long_name(self):
+    #     if self.granting_id and self.granting.aid_type_id:
+    #         return self.granting.aid_type.get_long_name()
+    #     return ''
 
 
 dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
@@ -704,18 +738,18 @@ class IncomeConfirmation(Confirmation):
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
-    def confirmation_what(self, ar):
-        if self.granting:
-            yield E.b(self.granting.aid_type.get_long_name())
-        if self.category:
-            yield " (%s: %s)" % (_("Category"), self.category)
-        if self.amount:
-            yield " "
-            yield _("with amount of")
-            # "in Höhe von", "d'un montant de"
-            s = " %s €" % self.amount
-            s += "/%s" % _("month")
-            yield E.b(s)
+    # def confirmation_what(self, ar):
+    #     if self.granting:
+    #         yield E.b(self.granting.aid_type.get_long_name())
+    #     if self.category:
+    #         yield " (%s: %s)" % (_("Category"), self.category)
+    #     if self.amount:
+    #         yield " "
+    #         yield _("with amount of")
+    #         # "in Höhe von", "d'un montant de"
+    #         s = " %s €" % self.amount
+    #         s += "/%s" % _("month")
+    #         yield E.b(s)
 
 
 class IncomeConfirmations(Confirmations):
@@ -827,19 +861,19 @@ class RefundConfirmation(Confirmation):
         return rt.modules.pcsw.ClientContactType.objects.filter(
             can_refund=True)
 
-    def confirmation_what(self, ar):
-        if self.granting:
-            yield E.b(self.granting.aid_type.get_long_name())
-            yield ". "
-        if self.doctor and self.doctor_type_id:
-            yield _("Recipes issued by")
-            yield unicode(self.doctor_type)
-            yield " "
-            yield E.b(self.doctor.get_full_name())
-        if self.pharmacy:
-            yield _("Drugs delivered by")
-            yield " "
-            yield E.b(self.pharmacy.get_full_name())
+    # def confirmation_what(self, ar):
+    #     if self.granting:
+    #         yield E.b(self.granting.aid_type.get_long_name())
+    #         yield ". "
+    #     if self.doctor and self.doctor_type_id:
+    #         yield _("Recipes issued by")
+    #         yield unicode(self.doctor_type)
+    #         yield " "
+    #         yield E.b(self.doctor.get_full_name())
+    #     if self.pharmacy:
+    #         yield _("Drugs delivered by")
+    #         yield " "
+    #         yield E.b(self.pharmacy.get_full_name())
 
 
 class RefundConfirmations(Confirmations):
@@ -892,25 +926,24 @@ action of :class:`welfare.aids.Confirmation` with
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
 
 
-# def setup_main_menu(site, ui, profile, m):
-#     app = dd.apps.reception
-#     m = m.add_menu(app.app_name, app.verbose_name)
-#     m.add_action('aids.ConfirmationsToSign')
+menu_host = dd.plugins.pcsw
+
+
+def setup_main_menu(site, ui, profile, m):
+    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
+    m.add_action('aids.MyPendingGrantings')
 
 
 def setup_config_menu(site, ui, profile, m):
-    app = dd.apps.reception
-    m = m.add_menu(app.app_name, app.verbose_name)
+    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
     m.add_action('aids.AidTypes')
     m.add_action('aids.Categories')
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    app = dd.apps.reception
-    m = m.add_menu(app.app_name, app.verbose_name)
+    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
     m.add_action('aids.Grantings')
-    m.add_action('aids.Confirmations')
-    m.add_action('aids.AidRegimes')
+    # m.add_action('aids.AidRegimes')
     m.add_action('aids.IncomeConfirmations')
     m.add_action('aids.RefundConfirmations')
     m.add_action('aids.SimpleConfirmations')

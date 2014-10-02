@@ -25,6 +25,18 @@ Models
 
   .. attribute:: excerpt_type
 
+.. class:: Confirmable
+
+.. class:: Granting(Confirmable)
+
+.. class:: Confirmation(Confirmable)
+
+.. class:: SimpleConfirmation
+
+.. class:: IncomeConfirmation
+
+.. class:: RefundConfirmation
+
 .. class:: Category
 
 .. class:: Aid

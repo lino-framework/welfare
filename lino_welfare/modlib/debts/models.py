@@ -12,9 +12,7 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import datetime
 import decimal
-
 
 from django.db import models
 from django.conf import settings
@@ -23,23 +21,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode
 
-
 from lino import dd, rt
 from lino.utils.xmlgen.html import E
 from lino import mixins
-from lino.modlib.contacts import models as contacts
-from lino.modlib.notes import models as notes
-from lino.modlib.uploads import models as uploads
-from lino.modlib.cal import models as cal
 from lino.core.constants import _handle_attr_name
-
-from lino.utils.choosers import chooser
 
 from lino.modlib.accounts.utils import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
 
-accounts = dd.resolve_app('accounts')
-households = dd.resolve_app('households')
 pcsw = dd.resolve_app('pcsw')
 
 
@@ -249,7 +238,9 @@ The total monthly amount available for debts distribution."""))
         #~ for t in types:
         #~ types = [AccountTypes.items_dict[t] for t in types]
         #~ types = [t for t in types]
-        for g in accounts.Group.objects.filter(**kw).order_by('ref'):
+        Group = rt.modules.accounts.Group
+        for g in Group.objects.filter(
+                **kw).order_by('ref'):
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
 
@@ -315,7 +306,8 @@ The total monthly amount available for debts distribution."""))
             flt = models.Q(required_for_household=True)
             flt = flt | models.Q(required_for_person=True)
             seqno = 0
-            for acc in accounts.Account.objects.filter(flt).order_by('ref'):
+            Account = rt.modules.accounts.Account
+            for acc in Account.objects.filter(flt).order_by('ref'):
                 seqno += 1
                 e = Entry(account=acc, budget=self,
                           seqno=seqno, account_type=acc.type)
@@ -598,7 +590,7 @@ class Entry(SequencedBudgetComponent):
 
     #~ group = models.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
-    account = models.ForeignKey(accounts.Account)
+    account = models.ForeignKey('accounts.Account')
     partner = models.ForeignKey('contacts.Partner', blank=True, null=True)
     #~ name = models.CharField(_("Remark"),max_length=200,blank=True)
     #~ amount = dd.PriceField(_("Amount"),default=0)
@@ -664,10 +656,10 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         #~ return super(Entry,self).get_siblings().filter(account_type=self.account_type)
         return self.__class__.objects.filter(budget=self.budget, account_type=self.account_type).order_by('seqno')
 
-    @chooser()
+    @dd.chooser()
     def account_choices(cls, account_type):
         #~ print '20120918 account_choices', account_type
-        return accounts.Account.objects.filter(type=account_type)
+        return rt.modules.accounts.Account.objects.filter(type=account_type)
 
     @dd.chooser()
     def bailiff_choices(self):
@@ -675,10 +667,10 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 
-    #~ @chooser(simple_values=True)
+    #~ @dd.chooser(simple_values=True)
     #~ def amount_choices(cls,account):
         #~ return [decimal.Decimal("0"),decimal.Decimal("2.34"),decimal.Decimal("12.34")]
-    @chooser()
+    @dd.chooser()
     def actor_choices(cls, budget):
         return Actor.objects.filter(budget=budget).order_by('seqno')
 
@@ -782,7 +774,7 @@ class EntriesByType(Entries):
             #~ print 20120411, unicode(self.label)
             self.known_values = dict(account_type=self._account_type)
 
-    #~ @chooser()
+    #~ @dd.chooser()
     #~ def account_choices(cls):
         #~ print '20120918 account_choices', account_type
         #~ return accounts.Account.objects.filter(type=cls._account_type)
@@ -1321,21 +1313,21 @@ def customize_accounts():
     """
     Injects a list of fields to the accounts.Account model
     """
-    dd.inject_field(accounts.Account,
+    dd.inject_field('accounts.Account',
                     'required_for_household',
                     models.BooleanField(
                         _("Required for Households"), default=False)
                     )
-    dd.inject_field(accounts.Account,
+    dd.inject_field('accounts.Account',
                     'required_for_person',
                     models.BooleanField(
                         _("Required for Persons"), default=False)
                     )
-    dd.inject_field(accounts.Account,
+    dd.inject_field('accounts.Account',
                     'periods',
                     PeriodsField(_("Periods"))
                     )
-    dd.inject_field(accounts.Account,
+    dd.inject_field('accounts.Account',
                     'default_amount',
                     dd.PriceField(_("Default amount"), blank=True, null=True)
                     )

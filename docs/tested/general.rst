@@ -173,6 +173,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Büro : Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- ÖSHZ : Meine Begleitungen, Zu unterschreibende Hilfebestätigungen
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Neuanträge : Neue Klienten, Verfügbare Begleiter
@@ -189,13 +190,12 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Akademische Grade, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes, Statuses
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
-  - Empfang : Hilfearten, Kategorien
 - Explorer :
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
@@ -204,13 +204,12 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Gäste, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Badges : Badge Awards
   - SEPA : Konten
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : Sprachkenntnisse, VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien, Vertragspartner
   - Kurse : Kurse, Kursanfragen
   - Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
-  - Empfang : Confirmations, AidRegimes, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
 - Site : Info
 <BLANKLINE>
 

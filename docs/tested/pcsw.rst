@@ -1,12 +1,13 @@
 .. _welfare.tested.pcsw:
 
+============
+General PCSW
+============
+
 ..
   This document is part of the test suite.
   To test only this document, run::
     $ python setup.py test -s tests.DocsTests.test_pcsw
-
-General PCSW
-============
 
 .. include:: /include/tested.rst
 
@@ -17,6 +18,7 @@ General PCSW
     ...    'lino_welfare.projects.docs.settings.test'
     >>> from bs4 import BeautifulSoup
     >>> from lino.utils import i2d
+    >>> from lino.utils.xmlgen.html import E
     >>> from lino.runtime import *
     >>> from django.test import Client
     >>> from django.utils import translation
@@ -334,3 +336,4 @@ manually filling that date into the
  DA VINCI David (164)
 =============================
 <BLANKLINE>
+

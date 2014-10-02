@@ -355,16 +355,26 @@ class CoachingsByUser(Coachings):
 class CoachingsByEnding(Coachings):
     master_key = 'ending'
 
-#~ class MyCoachings(Coachings,mixins.ByUser):
-    #~ column_names = 'start_date end_date client type primary id'
+
+class MyCoachings(CoachingsByUser, dd.ByUser):
+    column_names = 'client start_date end_date type primary id'
+    order_by = ['client__name']
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(CoachingsByUser, self).param_defaults(ar, **kw)
+        kw.update(start_date=dd.today())
+        kw.update(end_date=dd.today())
+        return kw
+
 
 #~ class MySuggestedCoachings(MyCoachings):
     #~ label = _("Suggested coachings")
     #~ known_values = dict(state=CoachingStates.suggested)
 
 
-__all__ = [
-    "CoachingType", "CoachingTypes", "CoachingEnding",
-    "CoachingEndings", "Coaching", "Coachings", "CoachingsByClient",
-    "CoachingsByUser", "CoachingsByEnding"
-]
+# __all__ = [
+#     "CoachingType", "CoachingTypes", "CoachingEnding",
+#     "CoachingEndings", "Coaching", "Coachings", "CoachingsByClient",
+#     "CoachingsByUser", "CoachingsByEnding"
+# ]

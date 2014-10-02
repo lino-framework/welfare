@@ -1482,9 +1482,12 @@ class ClientContactsByType(ClientContacts):
     label = _("Contacts")
     auto_fit_column_widths = True
 
-config = dd.apps.pcsw
+config = dd.plugins.pcsw
 
-# MODULE_LABEL = _("PCSW")
+
+def setup_main_menu(site, ui, profile, m):
+    m = m.add_menu(config.app_label, config.verbose_name)
+    m.add_action('pcsw.MyCoachings')
 
 
 def setup_config_menu(site, ui, profile, m):

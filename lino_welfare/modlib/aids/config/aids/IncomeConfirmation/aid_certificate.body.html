@@ -3,7 +3,7 @@
 {% block body %}
 {{ super() }}
 {%- set aid = this.owner -%}
-<p>{{ aid.confirmation_text() }}</p>
+<p>{{ aid.confirmation_text(ar) }}</p>
 {% if aid.remark %}
 <p>{{ aid.remark }}</p>
 {% endif %}
