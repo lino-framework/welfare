@@ -38,31 +38,8 @@ def objects():
         en="Eingliederungseinkommen",
         fr="Revenu d'intégration")
     kw.update(short_name="EiEi")
-    kw.update(
-        dd.babelkw(
-            'long_name',
-            de="""\
-{{when}} das durch Gesetz vom 26. Mai 2002 eingeführte
-<b>Eingliederungseinkommen</b>
-{%- if obj.amount %}
-in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
-{% endif -%}
-{%- if obj.category %}
-(Kategorie: <b>{{obj.category}}</b>)
-{% endif -%}
-{{iif(past, "bezogen hat", "bezieht")}}.
-""",
-            fr="""\
-{{iif(past, "a bénéficié", "bénéficie")}}
-{{when}} du <b>revenu d'intégration</b> prévu par la loi
-du 26 mai 2002
-{%- if obj.amount %}
-d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
-{% endif -%}
-{%- if obj.category %}
-(Catégorie: <b>{{obj.category}}</b>)
-{% endif -%}.
-"""))
+    kw.update(body_template='integ_income.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     kw = dd.babelkw(
@@ -70,29 +47,8 @@ d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
         de="Ausländerbeihilfe",
         en="Ausländerbeihilfe",
         fr="Aide aux immigrants")
-    kw.update(dd.babelkw('long_name',
-                         de="""\
-{{when}} eine laut Gesetz vom 2. April 1965 eingeführte
-<b>Sozialhilfe für Ausländer</b>
-{%- if obj.amount %}
-in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
-{% endif -%}
-{%- if obj.category %}
-(Kategorie: <b>{{obj.category}}</b>)
-{% endif -%}
-{{iif(past, "bezogen hat", "bezieht")}}
-""",
-                         fr="""\
-{{iif(past, "a bénéficié", "bénéficie")}}
-{{when}} d'une <b>aide sociale pour étrangers</b>
-prévue par la loi du 2 avril 1965
-{%- if obj.amount %}
-d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
-{% endif -%}
-{%- if obj.category %}
-(Catégorie: <b>{{obj.category}}</b>)
-{% endif -%}.
-"""))
+    kw.update(body_template='foreigner_income.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     kw = dd.babelkw(
@@ -100,15 +56,8 @@ d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
         de="Feste Beihilfe",
         en="Feste Beihilfe",
         fr="Revenu fixe")
-    kw.update(
-        dd.babelkw(
-            'long_name',
-            de="""\
-{{when}} eine feste Beihilfe
-{{iif(past, "bezogen hat", "bezieht")}}.""",
-            fr="""\
-{{iif(past, "a bénéficié", "bénéficie")}}
-{{when}} d'une aide fixe."""))
+    kw.update(body_template='fixed_income.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     aidType = Instantiator(
@@ -120,18 +69,23 @@ d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
         de="Erstattung",
         en="Erstattung",
         fr="Remboursement")
+    kw.update(body_template='certificate.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
     kw = dd.babelkw(
         'name',
         de="Übernahmeschein",
         en="Übernahmeschein",
         fr="Übernahmeschein")
+    kw.update(body_template='certificate.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     aidType = Instantiator(
         'aids.AidType', "name",
         confirmation_type=ConfirmationTypes.get_for_model(
             RefundConfirmation)).build
+
     kw = dd.babelkw(
         'name',
         de="Übernahme von Arzt- und/oder Medikamentenkosten",
@@ -141,52 +95,41 @@ d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     cct_pharmacy = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
     kw.update(pharmacy_type=cct_pharmacy)
-    kw.update(dd.babelkw('long_name',
-                         de="""\
-für den Zeitraum {{when}} Anrecht auf
-Übernahme folgender <b>Arzt- und/oder Medikamentenkosten</b>
-durch das ÖSHZ {{iif(past, "hat", "hatte")}}:
-<ul>
-{%- if obj.doctor -%}
-<li><b>Arzthonorare</b> in Höhe der LIKIV-Tarife für die Visite
-{%- if obj.doctor_type_id %}
-beim {{obj.doctor_type}} {% else %} bei
-{% endif -%}
-<b>{{obj.doctor.get_full_name()}}</b>.
-</li>
-{%- endif -%}
-{%- if obj.pharmacy -%}
-<li><b>Arzneikosten</b> für die durch
-{%- if obj.doctor %}
-<b>{{obj.doctor.get_full_name()}}</b> verschriebenen und
-{% endif -%}
-<b>{{obj.pharmacy.get_full_name()}}</b> ausgehändigten Medikamente.
-</li>
-{%- endif -%}
-</ul>
-
-Falls weitere Behandlungen notwendig sind, benötigen wir unbedingt
-einen Kostenvoranschlag. Danke.
-
-""",
-                         fr="""\
-"""))
-
+    kw.update(body_template='certificate.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
+
     kw = dd.babelkw(
         'name',
         de="DMH-Übernahmeschein",
         en="DMH-Übernahmeschein",
         fr="DMH-Übernahmeschein")
     kw.update(short_name="AMK(DMH)")
+    kw.update(body_template='certificate.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     aidType = Instantiator(
         'aids.AidType', "name",
         confirmation_type=ConfirmationTypes.get_for_model(
             SimpleConfirmation)).build
-    yield aidType(_("Möbellager"))
-    yield aidType(_("Heizkosten"))
+    kw = dd.babelkw(
+        'name',
+        de="Möbellager",
+        en="Furniture",
+        fr="Mobilier")
+    kw.update(body_template='furniture.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
+
+    yield aidType(**kw)
+    kw = dd.babelkw(
+        'name',
+        de="Heizkosten",
+        en="Heating costs",
+        fr="Frais de chauffage")
+    kw.update(body_template='heating_refund.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
+    yield aidType(**kw)
 
     croix_rouge = rt.modules.contacts.Company(
         name="Belgisches Rotes Kreuz")
@@ -199,19 +142,8 @@ einen Kostenvoranschlag. Danke.
         fr="Banque alimentaire")
     kw.update(confirmed_by_primary_coach=False)
     kw.update(company=croix_rouge)
-    kw.update(
-        dd.babelkw(
-            'long_name',
-            de="""\
-{{when}} aus Gründen der sozial-finanziellen Lage Anrecht auf
-eine Sozialhilfe in Naturalien durch Nutzung der
-<b>Lebensmittelbank</b> {{iif(past, "hat", "hatte")}}.
-""",
-            fr="""\
-{{iif(past, "a bénéficié", "bénéficie")}}
-{{when}} du droit d'utiliser la <b>banque alimentaire</b>.
-"""))
-
+    kw.update(body_template='food_bank.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
     Category = dd.resolve_model('aids.Category')

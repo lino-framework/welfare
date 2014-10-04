@@ -17,7 +17,7 @@ extlinks = {}
 extensions = []
 
 from atelier.sphinxconf import configure
-configure(globals(), 'lino_welfare.projects.docs.settings.test')
+configure(globals(), 'lino_welfare.projects.docs.settings.doctests')
 
 extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.sphinxcontrib.logo']

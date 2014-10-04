@@ -126,11 +126,12 @@ class AidType(ContactRelated, dd.BabelNamed):
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
-    long_name = dd.BabelTextField(
-        _("Long name"),
+    excerpt_title = dd.BabelCharField(
+        _("Excerpt title"),
         max_length=200,
         blank=True,
-        help_text=_("Replaces the short description in certain places."))
+        help_text=_(
+            "The title to be used when printing confirmation excerpts."))
 
     short_name = models.CharField(max_length=50, blank=True)
 
@@ -144,10 +145,24 @@ class AidType(ContactRelated, dd.BabelNamed):
     pharmacy_type = dd.ForeignKey(
         'pcsw.ClientContactType', blank=True, null=True)
 
-    address_type = AddressTypes.field(blank=True, null=True)
+    address_type = AddressTypes.field(
+        blank=True, null=True,
+        help_text=_("Which client address to print on confirmations. "
+                    "If this is empty, Lino will use the primary address."))
 
-    def get_confirmation_template(self):
-        return dd.babelattr(self, 'long_name')
+    body_template = models.CharField(
+        max_length=200,
+        verbose_name=_("Body template"),
+        blank=True, help_text="The body template to use instead of the "
+        "default body template as defined for the excerpt type.")
+
+    def get_excerpt_title(self):
+        return dd.babelattr(self, 'excerpt_title') or unicode(self)
+
+    @dd.chooser(simple_values=True)
+    def body_template_choices(cls, confirmation_type):
+        tplgroup = confirmation_type.model.get_template_group()
+        return settings.SITE.list_templates('.body.html', tplgroup)
 
 
 class AidTypes(dd.Table):
@@ -158,15 +173,14 @@ class AidTypes(dd.Table):
 
     insert_layout = """
     name
-    # long_name
     confirmation_type
     """
 
     detail_layout = """
     id short_name confirmation_type
     name
-    long_name
-    print_directly confirmed_by_primary_coach board
+    excerpt_title
+    print_directly confirmed_by_primary_coach board body_template
     company contact_person contact_role pharmacy_type
     aids.GrantingsByType
     """
@@ -205,9 +219,9 @@ class SignConfirmation(dd.Action):
             obj.state = ConfirmationStates.confirmed
             obj.save()
             ar.set_response(refresh=True)
-        text = obj.confirmation_text(ar)
-        msg = _("You confirm that %(client)s %(text)s") % dict(
-            client=obj.client, text=text)
+        d = dict(text=obj.confirmation_text())
+        d.update(client=e2text(obj.client.get_full_name(nominative=True)))
+        msg = _("You confirm that %(client)s %(text)s") % d
         ar.confirm(ok, msg, _("Are you sure?"))
 
 
@@ -251,22 +265,35 @@ class Confirmable(dd.Model):
     def get_confirmable_fields(cls):
         return ''
 
-    @dd.virtualfield(dd.HtmlBox(""))
-    def confirmation_text(self, ar):
-        kw = rt.get_printable_context(ar, obj=self)
-        # kw.update(what=e2text(self.confirmation_what(ar)))
-        kw.update(when=e2text(self.confirmation_when(ar)))
-        kw.update(past=(self.end_date and self.end_date <= dd.today()))
+    def is_past(self):
+        return (self.end_date and self.end_date <= dd.today())
+
+    # def get_printable_context(self, ar, **kw):
+    #     kw = super(Confirmable, self).get_printable_context(ar, **kw)
+    #     kw.update(past=(self.end_date and self.end_date <= dd.today()))
+    #     return kw
+
+    def confirmation_text(self):
+        kw = dict()
+        kw.update(when=e2text(self.confirmation_when()))
         at = self.get_aid_type()
         if at:
-            s = at.get_confirmation_template()
-            if s:
-                template = settings.SITE.jinja_env.from_string(s)
-                return ar.render_jinja(template, **kw)
-        kw.update(what=unicode(at))
+            kw.update(what=unicode(at))
+        else:
+            kw.update(what=unicode(self))
         return _("receives %(what)s %(when)s.") % kw
 
-    def confirmation_when(self, ar):
+    def confirmation_address(self):
+        at = self.get_aid_type()
+        if at and at.address_type:
+            addr = self.client.get_address_by_type(at)
+        else:
+            addr = self.client.get_primary_address()
+
+        lines = list(addr.address_location_lines())
+        return addr.address_type.living_text + ' ' + ', '.join(lines)
+
+    def confirmation_when(self):
         if self.start_date and self.end_date:
             yield " "
             if self.start_date == self.end_date:
@@ -287,10 +314,10 @@ class Confirmable(dd.Model):
             yield " "
             yield E.b(dd.fdl(self.end_date))
 
-    def get_confirmation_title(self):
+    def get_excerpt_title(self):
         at = self.get_aid_type()
         if at:
-            return unicode(at)
+            return at.get_excerpt_title()
         return unicode(self)
 
 ##
@@ -561,15 +588,22 @@ class Confirmation(
             return self.granting.aid_type
         return None
 
-    # def get_long_name(self):
-    #     if self.granting_id and self.granting.aid_type_id:
-    #         return self.granting.aid_type.get_long_name()
-    #     return ''
+    @classmethod
+    def get_template_group(cls):
+        # Used by excerpts and printable.  The individual confirmation
+        # models use a common tree of templates.
+        return 'aids/Confirmation'
+
+    def get_body_template(self):
+        # used by excerpts
+        at = self.get_aid_type()
+        if at is not None:
+            return at.body_template
 
 
 dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
 dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
-dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
+# dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
 dd.update_field(Confirmation, 'company',
                 verbose_name=_("Recipient (Organization)"))
 dd.update_field(Confirmation, 'contact_person',
@@ -713,7 +747,7 @@ class SimpleConfirmations(Confirmations):
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
     granting start_date end_date
-    confirmation_text
+    # confirmation_text
     company contact_person language printed
     remark
     """)  # , window_size=(70, 24))
@@ -775,7 +809,6 @@ class IncomeConfirmations(Confirmations):
     company contact_person language
     granting:25 start_date end_date
     category amount id
-    confirmation_text
     remark
     """)  # , window_size=(70, 24))
 
@@ -907,7 +940,6 @@ class RefundConfirmations(Confirmations):
     id client user signer workflow_buttons
     granting:25 start_date end_date
     doctor_type doctor pharmacy
-    confirmation_text
     company contact_person language printed
     remark
     """)  # , window_size=(70, 24))

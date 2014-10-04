@@ -13,6 +13,15 @@ Choicelists
 
 .. class:: AidRegimes
 
+  (Currently not used)
+
+.. class:: ConfirmationTypes
+
+.. django2rst::
+
+  rt.show(aids.ConfirmationTypes)
+
+
 Models
 ======
 
@@ -25,7 +34,15 @@ Models
 
   .. attribute:: excerpt_type
 
+  .. attribute:: confirmation_type
+
+  Pointer to :class:`ConfirmationTypes`.
+
 .. class:: Confirmable
+
+  .. attribute:: signer
+
+  The agent who has signed or is expected to sign this item.
 
 .. class:: Granting(Confirmable)
 

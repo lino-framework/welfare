@@ -1,13 +1,6 @@
-{% extends "excerpts/Excerpt/base.body.html" %}
+{% extends "excerpts/base.body.html" %}
 
 {% set client = this.owner %}
-
-{% block our_ref %}
-<p class="OurRef">
-{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}/{{client.get_primary_coach().initials}}/{{this.id}}
-</p>
-{% endblock %}
-
 
 {% block body %}
 

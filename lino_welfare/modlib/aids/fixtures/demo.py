@@ -65,13 +65,17 @@ def objects():
     RefundConfirmation = rt.modules.aids.RefundConfirmation
     IncomeConfirmation = rt.modules.aids.IncomeConfirmation
 
+    COACHES = Cycler(rt.modules.users.User.objects.filter(
+        coaching_type__isnull=False))
+
     AMOUNTS = Cycler(123, 234, 345, 456, 678)
     CATEGORIES = Cycler(rt.modules.aids.Category.objects.all())
 
-    for i in range(2):
-        for g in Granting.objects.filter(aid_type__isnull=False):
+    for g in Granting.objects.filter(aid_type__isnull=False):
+        for i in range(2):
             ct = g.aid_type.confirmation_type
             kw = dict(granting=g, client=g.client)
+            kw.update(user=COACHES.pop())
             kw.update(start_date=g.start_date + ONE_DAY)
             kw.update(end_date=g.start_date + ONE_DAY + ONE_DAY)
             if ct.model == IncomeConfirmation:
@@ -84,3 +88,15 @@ def objects():
                 if g.aid_type.pharmacy_type == pharmacy_type:
                     kw.update(pharmacy=PHARMACIES.pop())
             yield ct.model(**kw)
+
+    ses = rt.login('theresia')
+
+    ExcerptType = rt.modules.excerpts.ExcerptType
+    for at in rt.modules.aids.AidType.objects.exclude(confirmation_type=''):
+        M = at.confirmation_type.model
+        et = ExcerptType.get_for_model(M)
+        qs = M.objects.filter(granting__aid_type=at)
+        for obj in qs:
+            ses.selected_rows = [obj]
+            yield et.get_or_create_excerpt(ses)
+            

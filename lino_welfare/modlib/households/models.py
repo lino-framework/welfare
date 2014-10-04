@@ -199,3 +199,36 @@ dd.inject_action(
     'households.Household',
     populate_members=PopulateMembers())
 
+
+def get_household_summary(person, today=None, adult_age=18):
+    """
+    Note that members without `birth_date` are considered as children.
+    """
+    ar = SiblingsByPerson.request(master_instance=person)
+    if ar.get_total_count() == 0:
+        return ar.no_data_text
+    if today is None:
+        today = dd.today()
+    adults = children = 0
+    for m in ar:
+        # if m.dependency == MemberDependencies.none:
+        #     adults += 1
+        # else:
+        #     children += 1
+        if m.birth_date and m.birth_date.get_age(today) >= adult_age:
+            adults += 1
+        else:
+            children += 1
+    l = []
+    if adults:
+        l.append(
+            ungettext("%(count)d adult", "%(count)d adults") % dict(
+                count=adults))
+    if children:
+        l.append(
+            ungettext("%(count)d child", "%(count)d children") % dict(
+                count=children))
+    return _(" and ").join(l)
+
+
+

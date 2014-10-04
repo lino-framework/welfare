@@ -1,4 +1,8 @@
-{% extends "excerpts/Excerpt/certificate.body.html" %}
+{% extends "excerpts/base.body.html" %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{obj.user.initials}}/{{this.user.initials}}/{{obj.partner.id}}/{{this.id}}
+{% endblock %}
 
 {% block body %}
 

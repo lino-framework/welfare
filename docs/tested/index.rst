@@ -21,7 +21,6 @@ using `manage.py run`.
    cbss
    courses
    newcomers
-   aids
    misc
 
 
