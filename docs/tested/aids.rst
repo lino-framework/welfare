@@ -39,8 +39,8 @@ Die Demo-Datenbank ist datiert auf den 22. Mai 2014:
 Beschlüsse und Bestätigungen
 ============================
 
-Hilfebestätigungen (:class:`welfare.aids.Confirmation`) sind
-"Konkretisierungen" oder "Präzisierungen" eines Hilfebeschlusses
+Hilfe\ *bestätigungen* (:class:`welfare.aids.Confirmation`) sind
+"Konkretisierungen" oder "Präzisierungen" eines Hilfe\ *beschlusses*
 (:class:`welfare.aids.Granting`). Der Beschluss ist sozusagen die
 Erlaubnis oder Grundlage, Bestätigungen für eine bestimmte Hilfeart
 auszuhändigen.  Beschlüsse sind *langfristig* und *allgemein*,
@@ -48,7 +48,7 @@ Bestätigungen sind *befristet* und *konkret*.
 
 Zum Beispiel steht der monatliche Betrag eines
 *Eingliederungseinkommens* nicht im *Beschluss*, sondern nur in der
-*Bestätigung*, weil es sich im Laufe der Zeit ändern kann.
+*Bestätigung*, weil der sich im Laufe der Zeit ändern kann.
 
 Oder wenn jemand Anrecht auf *Übernahme von Arzt- und
 Medikamentenkosten* hat, ist das ein *Beschluss*. Um daraus eine

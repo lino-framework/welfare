@@ -1,11 +1,12 @@
+{# `this` is the Excerpt, `obj` is a Confirmation #}
 {% block our_ref %}
 <p class="OurRef">
-{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}/{{this.id}} / {{this.project.primary_coach.initials}}/{{this.project.id}}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{obj.user.initials}}/{{obj.signer.initials}}/{{obj.client.id}}/{{this.id}}
 </p>
 {% endblock %}
 
 {% block title %}
-<h1>{{this.excerpt_type}}</h1>
+<h1>{{obj.get_confirmation_title()}}</h1>
 {% endblock %}
 
 {% block body %}

@@ -106,20 +106,20 @@ The demo fixtures also generated some excerpts:
 
 >>> with translation.override('en'):
 ...     ses.show(excerpts.Excerpts, column_names="id excerpt_type owner")
-==== ====================== ============================================
+==== ====================== ===========================================
  ID   Excerpt Type           Controlled by
----- ---------------------- --------------------------------------------
+---- ---------------------- -------------------------------------------
  1    Simple confirmation    **Simple confirmation #1**
  2    Income confirmation    **Income confirmation #1**
  3    Refund confirmation    **Refund confirmation #1**
- 4    Budget                 **Budget 1 for Jeanémart-Kasennova (227)**
+ 4    Budget                 **Budget 1 for Xhonneux-Kasennova (227)**
  5    Job contract           **Job contract#1 (Bernd Brecht)**
  6    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
  7    Presence certificate   **Guest #1 (22.05.2014)**
- 8    Curriculum vitae       **ADAM Albert (246)**
- 9    eID sheet              **ADAM Albert (246)**
- 10   to-do list             **ADAM Albert (246)**
-==== ====================== ============================================
+ 8    Curriculum vitae       **AUSDEMWALD Alfons (115)**
+ 9    eID sheet              **AUSDEMWALD Alfons (115)**
+ 10   to-do list             **AUSDEMWALD Alfons (115)**
+==== ====================== ===========================================
 <BLANKLINE>
 
 >>> import shutil

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-03 00:01+0300\n"
+"POT-Creation-Date: 2014-10-03 13:18+0300\n"
 "PO-Revision-Date: 2014-09-19 05:28+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -54,7 +54,7 @@ msgid "Health insurance"
 msgstr "Caisse d'assurance maladie"
 
 #: lino_welfare/fixtures/demo.py:593 lino_welfare/fixtures/std.py:98
-#: lino_welfare/modlib/aids/models.py:824
+#: lino_welfare/modlib/aids/models.py:826
 #: lino_welfare/modlib/aids/fixtures/demo.py:49
 #: lino_welfare/modlib/aids/fixtures/std.py:141
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:31
@@ -154,6 +154,24 @@ msgstr "Type de confirmation d'aide"
 msgid "Aid confirmation types"
 msgstr "Types de confirmation d'aide"
 
+#: lino_welfare/modlib/aids/models.py:86
+#, fuzzy
+msgid "Aid Regime"
+msgstr "Régime d'études"
+
+#: lino_welfare/modlib/aids/models.py:88
+msgid "Financial aids"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:89
+msgid "Medical aids"
+msgstr ""
+
+#: lino_welfare/modlib/aids/models.py:90
+#, fuzzy
+msgid "Other aids"
+msgstr "autres revenus"
+
 #: lino_welfare/modlib/aids/models.py:96
 msgid "Category"
 msgstr "Catégorie"
@@ -170,117 +188,117 @@ msgstr "Type d'aide sociale"
 msgid "Aid Types"
 msgstr "Types d'aide sociale"
 
-#: lino_welfare/modlib/aids/models.py:129
+#: lino_welfare/modlib/aids/models.py:130
 msgid "Long name"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:132
+#: lino_welfare/modlib/aids/models.py:133
 msgid "Replaces the short description in certain places."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:138
+#: lino_welfare/modlib/aids/models.py:139
 msgid "Print directly"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:141
+#: lino_welfare/modlib/aids/models.py:142
 msgid "Confirmed by primary coach"
 msgstr "Confirmé par le titulaire"
 
-#: lino_welfare/modlib/aids/models.py:176
+#: lino_welfare/modlib/aids/models.py:177
 #, fuzzy
 msgid "Aid confirmation states"
 msgstr "Première inscription"
 
-#: lino_welfare/modlib/aids/models.py:179
+#: lino_welfare/modlib/aids/models.py:180
 msgid "Unconfirmed"
 msgstr "À confirmer"
 
-#: lino_welfare/modlib/aids/models.py:180
+#: lino_welfare/modlib/aids/models.py:181
 msgid "Confirmed"
 msgstr "Confirmé"
 
-#: lino_welfare/modlib/aids/models.py:185
+#: lino_welfare/modlib/aids/models.py:186
 msgctxt "aids"
 msgid "Sign"
 msgstr "Signer"
 
-#: lino_welfare/modlib/aids/models.py:191
+#: lino_welfare/modlib/aids/models.py:192
 msgid "You confirm that this aid confirmation is correct."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:208
+#: lino_welfare/modlib/aids/models.py:209
 #, python-format
 msgid "You confirm that %(client)s %(text)s"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:210
+#: lino_welfare/modlib/aids/models.py:211
 msgid "Are you sure?"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:217
+#: lino_welfare/modlib/aids/models.py:218
 #, fuzzy
 msgid "Revoke"
 msgstr "Intermédiaire "
 
-#: lino_welfare/modlib/aids/models.py:227
+#: lino_welfare/modlib/aids/models.py:228
 #, fuzzy
 msgctxt "aids"
 msgid "Signer"
 msgstr "Signataire"
 
-#: lino_welfare/modlib/aids/models.py:266
+#: lino_welfare/modlib/aids/models.py:267
 #, python-format
 msgid "receives %(what)s %(when)s."
 msgstr "béneficie %(what)s %(when)s."
 
-#: lino_welfare/modlib/aids/models.py:273
+#: lino_welfare/modlib/aids/models.py:274
 #, fuzzy, python-format
 msgctxt "date"
 msgid "on %s"
 msgstr "pour %s"
 
-#: lino_welfare/modlib/aids/models.py:278
+#: lino_welfare/modlib/aids/models.py:279
 #, python-format
 msgctxt "date range"
 msgid "between %(a)s and %(b)s"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:280
+#: lino_welfare/modlib/aids/models.py:281
 #, fuzzy
 msgctxt "date range"
 msgid "from"
 msgstr "Age: de"
 
-#: lino_welfare/modlib/aids/models.py:285
+#: lino_welfare/modlib/aids/models.py:286
 msgctxt "date range"
 msgid "until"
 msgstr "jusque"
 
-#: lino_welfare/modlib/aids/models.py:301
+#: lino_welfare/modlib/aids/models.py:299
 msgid "Aid granting"
 msgstr "Octroi d'aide"
 
-#: lino_welfare/modlib/aids/models.py:302
+#: lino_welfare/modlib/aids/models.py:300
 msgid "Aid grantings"
 msgstr "Octrois d'aide"
 
-#: lino_welfare/modlib/aids/models.py:331
+#: lino_welfare/modlib/aids/models.py:329
 #: lino_welfare/modlib/reception/models.py:221
 #, fuzzy
 msgid "Actions"
 msgstr "Occupations"
 
-#: lino_welfare/modlib/aids/models.py:342
-#, fuzzy, python-format
-msgid "Create %s"
-msgstr "séparé"
+#: lino_welfare/modlib/aids/models.py:340
+#, fuzzy
+msgid "Create confirmation"
+msgstr "Certificat de revenu"
 
-#: lino_welfare/modlib/aids/models.py:363
+#: lino_welfare/modlib/aids/models.py:361
 #, fuzzy
 msgid "Applies from"
 msgstr "Début de contrat"
 
-#: lino_welfare/modlib/aids/models.py:366
+#: lino_welfare/modlib/aids/models.py:364
 #: lino_welfare/modlib/aids/models.py:563
 #: lino_welfare/modlib/integ/models.py:557
 #: lino_welfare/modlib/pcsw/coaching.py:233
@@ -289,46 +307,46 @@ msgstr "Début de contrat"
 msgid "until"
 msgstr "jusque"
 
-#: lino_welfare/modlib/aids/models.py:393
+#: lino_welfare/modlib/aids/models.py:392
 #: lino_welfare/modlib/aids/models.py:580
 msgid "Only rows decided by this board."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:397
+#: lino_welfare/modlib/aids/models.py:396
 #: lino_welfare/modlib/aids/models.py:589
 msgid "Only confirmations about this aid type."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:400
+#: lino_welfare/modlib/aids/models.py:399
 #: lino_welfare/modlib/aids/models.py:583
 msgid "Author"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:402
+#: lino_welfare/modlib/aids/models.py:401
 #: lino_welfare/modlib/aids/models.py:585
 msgid "Only rows created by this user."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:405
+#: lino_welfare/modlib/aids/models.py:404
 #: lino_welfare/modlib/aids/models.py:592
 msgid "Signer"
 msgstr "Signataire"
 
-#: lino_welfare/modlib/aids/models.py:407
+#: lino_welfare/modlib/aids/models.py:406
 #: lino_welfare/modlib/aids/models.py:594
 msgid "Only rows confirmed (or to be confirmed) by this user."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:411
+#: lino_welfare/modlib/aids/models.py:410
 #: lino_welfare/modlib/aids/models.py:598
 msgid "Only rows having this state."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:448
+#: lino_welfare/modlib/aids/models.py:447
 msgid "Grantings to confirm"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:455
+#: lino_welfare/modlib/aids/models.py:454
 #, python-format
 msgid "You have %s items in "
 msgstr ""
@@ -408,15 +426,15 @@ msgstr "Confirmation d'aide"
 msgid "Simple confirmations"
 msgstr "Confirmations d'aide"
 
-#: lino_welfare/modlib/aids/models.py:737
+#: lino_welfare/modlib/aids/models.py:738
 msgid "Income confirmation"
 msgstr "Certificat de revenu"
 
-#: lino_welfare/modlib/aids/models.py:738
+#: lino_welfare/modlib/aids/models.py:739
 msgid "Income confirmations"
 msgstr "Certificats de revenu"
 
-#: lino_welfare/modlib/aids/models.py:742
+#: lino_welfare/modlib/aids/models.py:743
 #: lino_welfare/modlib/debts/models.py:196
 #: lino_welfare/modlib/debts/models.py:597
 #: lino_welfare/modlib/debts/models.py:999
@@ -428,53 +446,53 @@ msgstr "Certificats de revenu"
 msgid "Amount"
 msgstr "Montant"
 
-#: lino_welfare/modlib/aids/models.py:795
+#: lino_welfare/modlib/aids/models.py:797
 #, fuzzy
 msgid "Can refund"
 msgstr "Fin de l'accompagnement"
 
-#: lino_welfare/modlib/aids/models.py:815
+#: lino_welfare/modlib/aids/models.py:817
 #, fuzzy
 msgid "Refund confirmation"
 msgstr "Certificat de revenu"
 
-#: lino_welfare/modlib/aids/models.py:816
+#: lino_welfare/modlib/aids/models.py:818
 #, fuzzy
 msgid "Refund confirmations"
 msgstr "Certificats de revenu"
 
-#: lino_welfare/modlib/aids/models.py:819
+#: lino_welfare/modlib/aids/models.py:821
 #, fuzzy
 msgid "Doctor type"
 msgstr "Type d'aide sociale"
 
-#: lino_welfare/modlib/aids/models.py:821
+#: lino_welfare/modlib/aids/models.py:823
 #, fuzzy
 msgid "Doctor"
 msgstr "Acteur"
 
-#: lino_welfare/modlib/aids/models.py:856
+#: lino_welfare/modlib/aids/models.py:858
 #, fuzzy
 msgid "Dr."
 msgstr "Monsieur"
 
-#: lino_welfare/modlib/aids/fixtures/std.py:190
+#: lino_welfare/modlib/aids/fixtures/std.py:188
 msgid "Möbellager"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:191
+#: lino_welfare/modlib/aids/fixtures/std.py:189
 msgid "Heizkosten"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:255
+#: lino_welfare/modlib/aids/fixtures/std.py:231
 msgid "Social Board (SB)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:257
+#: lino_welfare/modlib/aids/fixtures/std.py:233
 msgid "Social Commission (SC)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/fixtures/std.py:259
+#: lino_welfare/modlib/aids/fixtures/std.py:235
 msgid "Permanent Board (PB)"
 msgstr ""
 
@@ -564,7 +582,7 @@ msgstr ""
 #: lino_welfare/modlib/cal/models.py:215
 #: lino_welfare/modlib/contacts/models.py:99
 #: lino_welfare/modlib/contacts/models.py:175
-#: lino_welfare/modlib/contacts/models.py:271
+#: lino_welfare/modlib/contacts/models.py:272
 #: lino_welfare/modlib/debts/models.py:398
 #: lino_welfare/modlib/isip/models.py:658
 #: lino_welfare/modlib/system/models.py:99
@@ -1330,14 +1348,14 @@ msgid "Cannot delete companies and persons imported from TIM"
 msgstr "On ne peut effacer les sociétés et les personnes importées de TIM"
 
 #: lino_welfare/modlib/contacts/models.py:118
-#: lino_welfare/modlib/contacts/models.py:194
-#: lino_welfare/modlib/contacts/models.py:290
+#: lino_welfare/modlib/contacts/models.py:195
+#: lino_welfare/modlib/contacts/models.py:291
 msgid "Contact"
 msgstr "Contact"
 
 #: lino_welfare/modlib/contacts/models.py:130
-#: lino_welfare/modlib/contacts/models.py:208
-#: lino_welfare/modlib/contacts/models.py:306
+#: lino_welfare/modlib/contacts/models.py:209
+#: lino_welfare/modlib/contacts/models.py:307
 #: lino_welfare/modlib/pcsw/models.py:815
 #: lino_welfare/projects/chatelet/modlib/pcsw/models.py:126
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:173
@@ -1363,35 +1381,35 @@ msgstr "est un bénéficiare"
 msgid "Whether this Person is a Client."
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:218
+#: lino_welfare/modlib/contacts/models.py:219
 msgid "Show only persons with the given gender."
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:221
+#: lino_welfare/modlib/contacts/models.py:222
 msgid "Also obsolete data"
 msgstr "aussi clients obsolètes"
 
-#: lino_welfare/modlib/contacts/models.py:222
+#: lino_welfare/modlib/contacts/models.py:223
 #, fuzzy
 msgid "Show also obsolete records."
 msgstr "aussi données obsolètes"
 
-#: lino_welfare/modlib/contacts/models.py:250
+#: lino_welfare/modlib/contacts/models.py:251
 #, fuzzy
 msgid "Organisation"
 msgstr "Organisation"
 
-#: lino_welfare/modlib/contacts/models.py:251
+#: lino_welfare/modlib/contacts/models.py:252
 #, fuzzy
 msgid "Organisations"
 msgstr "Organisation"
 
-#: lino_welfare/modlib/contacts/models.py:253
+#: lino_welfare/modlib/contacts/models.py:254
 #, fuzzy
 msgid "VAT id"
 msgstr " chez "
 
-#: lino_welfare/modlib/contacts/models.py:344
+#: lino_welfare/modlib/contacts/models.py:345
 msgid "Partners (all)"
 msgstr "Partenaires (tous)"
 
@@ -4175,4 +4193,7 @@ msgstr "Agences de travail"
 
 #~ msgid "Drugs delivered by"
 #~ msgstr "délivré à "
+
+#~ msgid "Create %s"
+#~ msgstr "séparé"
 

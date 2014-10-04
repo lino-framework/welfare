@@ -56,7 +56,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
         self.demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
         self.demo_get(
-            'rolf', 'api/newcomers/NewClients', json_fields, 53, **kw)
+            'rolf', 'api/newcomers/NewClients', json_fields, 28, **kw)
         self.demo_get(
             'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
             2, mt=50, mk=119, **kw)
@@ -77,7 +77,7 @@ class MyTestCase(DemoTestCase):
             15, **kw)
         self.demo_get(
             'rolf', 'choices/pcsw/ContactsByClient/company?type=1',
-            json_fields, 5, **kw)
+            json_fields, 4, **kw)
 
         self.demo_get(
             'rolf', 'choices/aids/IncomeConfirmations/aid_type',

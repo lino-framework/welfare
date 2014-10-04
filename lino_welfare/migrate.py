@@ -919,8 +919,60 @@ def doit(a, b):
         return '1.1.16'
 
     def migrate_from_1_1_16(self, globals_dict):
+        """\
+- lino.modlib.courses.CourseStates : state 40 (Ended) no longer exists
+- excerpts.Excerpt: remove fields language, company, contact_person
+  and contact_role
+- cal.GuestRole is no longer a PrintableType
+- Removed the different UploadAreas (medical, jobs...)
         """
-        - lino.modlib.courses.CourseStates : state 40 (Ended) no longer exists
-        - excerpts.Excerpt: remove fields language, company, contact_person and contact_role
-        """
+        bv2kw = globals_dict['bv2kw']
+        new_content_type_id = globals_dict['new_content_type_id']
+        cal_GuestRole = resolve_model("cal.GuestRole")
+        uploads_UploadType = resolve_model("uploads.UploadType")
+        uploads_Upload = resolve_model("uploads.Upload")
+
+        def create_cal_guestrole(id, name, attach_to_email, email_template):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(attach_to_email=attach_to_email)
+            # kw.update(email_template=email_template)
+            return cal_GuestRole(**kw)
+        globals_dict.update(create_cal_guestrole=create_cal_guestrole)
+
+        def create_uploads_uploadtype(id, name, upload_area, max_number, wanted, warn_expiry_unit, warn_expiry_value):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(upload_area=upload_area)
+            kw.update(max_number=max_number)
+            kw.update(wanted=wanted)
+            kw.update(warn_expiry_unit=warn_expiry_unit)
+            kw.update(warn_expiry_value=warn_expiry_value)
+            return uploads_UploadType(**kw)
+        globals_dict.update(create_uploads_uploadtype=create_uploads_uploadtype)
+
+        def create_uploads_upload(id, owner_type_id, owner_id, user_id, project_id, file, mimetype, company_id, contact_person_id, contact_role_id, upload_area, type_id, description, valid_from, valid_until, remark):
+            kw = dict()
+            kw.update(id=id)
+            owner_type_id = new_content_type_id(owner_type_id)
+            kw.update(owner_type_id=owner_type_id)
+            kw.update(owner_id=owner_id)
+            kw.update(user_id=user_id)
+            kw.update(project_id=project_id)
+            kw.update(file=file)
+            kw.update(mimetype=mimetype)
+            kw.update(company_id=company_id)
+            kw.update(contact_person_id=contact_person_id)
+            kw.update(contact_role_id=contact_role_id)
+            # kw.update(upload_area=upload_area)
+            kw.update(type_id=type_id)
+            kw.update(description=description)
+            kw.update(valid_from=valid_from)
+            kw.update(valid_until=valid_until)
+            kw.update(remark=remark)
+            return uploads_Upload(**kw)
+        globals_dict.update(create_uploads_upload=create_uploads_upload)
+
         return '1.1.17'

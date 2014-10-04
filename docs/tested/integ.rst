@@ -84,6 +84,9 @@ The following code caused an Exception "ParameterStore of LayoutHandle
 for ParamsLayout on pcsw.Clients expects a list of 12 values but got
 16" on :blogref:`20140429`.
 
+>>> print(pcsw.Client.objects.get(last_name="Keller", first_name="Karl"))
+KELLER Karl (177)
+
 >>> client = Client()
 >>> url = '/api/integ/Clients/177?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
 >>> res = client.get(url, REMOTE_USER='rolf')
@@ -105,12 +108,16 @@ Since this is not very human-readable, we are going to analyze it with
 
 
 >>> soup = BeautifulSoup(d['data']['MembersByPerson'])
+
+>>> print(soup.get_text(' ', strip=True))
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
+
 >>> links = soup.find_all('a')
 
 It contains eight links:
 
 >>> len(links)
-8
+6
 
 The first link is the disabled checkbox for the :attr:`primary
 <ml.households.Member.primary>` field:

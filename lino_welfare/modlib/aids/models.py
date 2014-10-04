@@ -82,12 +82,12 @@ class ConfirmationTypes(dd.ChoiceList):
         return cls.add_item_instance(ConfirmationType(model, table_class))
 
 
-# class AidRegimes(dd.ChoiceList):
-#     verbose_name = _("Aid Regime")
-# add = AidRegimes.add_item
-# add('10', _("Financial aids"), 'financial')
-# add('20', _("Medical aids"), 'medical')
-# add('30', _("Other aids"), 'other')
+class AidRegimes(dd.ChoiceList):
+    verbose_name = _("Aid Regime")
+add = AidRegimes.add_item
+add('10', _("Financial aids"), 'financial')
+add('20', _("Medical aids"), 'medical')
+add('30', _("Other aids"), 'other')
 
 
 class Category(dd.BabelNamed):
@@ -121,7 +121,8 @@ class AidType(ContactRelated, dd.BabelNamed):
         verbose_name = _("Aid Type")
         verbose_name_plural = _("Aid Types")
 
-    # aid_regime = AidRegimes.field(default=AidRegimes.financial)
+    # not used:
+    aid_regime = AidRegimes.field(default=AidRegimes.financial)
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
@@ -286,6 +287,12 @@ class Confirmable(dd.Model):
             yield " "
             yield E.b(dd.fdl(self.end_date))
 
+    def get_confirmation_title(self):
+        at = self.get_aid_type()
+        if at:
+            return unicode(at)
+        return unicode(self)
+
 ##
 ## Granting
 ##
@@ -329,14 +336,15 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
     def custom_actions(self, ar, **kw):
         if self.aid_type_id is None:
             return ''
-        kv = dict(client=self.client)
-        kv.update(granting=self)
+        # kv = dict(client=self.client)
+        # kv.update(granting=self)
         at = self.aid_type
         ct = at.confirmation_type
         if not ct:
             return ''
-        sar = ar.spawn(ct.table_class, known_values=kv)
-        txt = _("Create %s") % ct.model._meta.verbose_name
+        # sar = ar.spawn(ct.table_class, known_values=kv)
+        sar = ar.spawn(ct.table_class, master_instance=self)
+        txt = _("Create confirmation")
         btn = sar.insert_button(txt, icon_name=None)
         return E.div(btn)
 
@@ -367,6 +375,7 @@ dd.update_field(Granting, 'end_date', verbose_name=_('until'))
 class Grantings(dd.Table):
     model = 'aids.Granting'
     required = dd.required(user_groups='office', user_level='admin')
+    use_as_default_table = False
     order_by = ['-start_date']
 
     detail_layout = """
@@ -465,7 +474,8 @@ class MyPendingGrantings(Grantings):
 
 
 class GrantingsByX(Grantings):
-    required = dd.required(user_groups='office')
+    required = dd.required(user_groups='office coaching')
+    use_as_default_table = True
     auto_fit_column_widths = True
 
 
@@ -523,6 +533,7 @@ class Confirmation(
     def on_create(self, ar):
         if self.granting_id:
             self.signer = self.granting.signer
+            self.client = self.granting.client
             if self.granting.aid_type_id:
                 at = self.granting.aid_type
                 self.company = at.company
@@ -697,6 +708,7 @@ simple aid during a given period.
 
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
+    required = dd.required(user_groups='office')
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -706,17 +718,19 @@ class SimpleConfirmations(Confirmations):
     remark
     """)  # , window_size=(70, 24))
 
+class SimpleConfirmationsByGranting(SimpleConfirmations):
+    master_key = 'granting'
     insert_layout = dd.FormLayout("""
-    client granting:25
     start_date end_date
     company contact_person language
     remark
-    """, window_size=(50, 16), hidden_elements='client granting')
+    # client granting:25
+    """, window_size=(50, 16))
 
     column_names = "id client granting start_date end_date *"
 
 
-ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmations)
+ConfirmationTypes.add_item(SimpleConfirmation, SimpleConfirmationsByGranting)
 
 
 ##
@@ -754,6 +768,7 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
+    required = dd.required(user_groups='office')
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
@@ -764,13 +779,16 @@ class IncomeConfirmations(Confirmations):
     remark
     """)  # , window_size=(70, 24))
 
+
+class IncomeConfirmationsByGranting(IncomeConfirmations):
+    master_key = 'granting'
     insert_layout = dd.FormLayout("""
     client granting:25
-    signer start_date end_date
+    start_date end_date
     category amount
     company contact_person language
     remark
-    """, window_size=(70, 20))
+    """, window_size=(70, 20), hidden_elements='client granting')
 
     column_names = "id client granting category amount start_date end_date *"
 
@@ -778,7 +796,7 @@ class IncomeConfirmations(Confirmations):
 class IncomeConfirmationsByCategory(IncomeConfirmations):
     master_key = 'category'
 
-ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmations)
+ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmationsByGranting)
 
 ##
 ## REFUND CONFIRMATIONS
@@ -820,6 +838,11 @@ class RefundConfirmation(Confirmation):
     pharmacy = dd.ForeignKey(
         'contacts.Company', verbose_name=_("Pharmacy"),
         blank=True, null=True)
+
+    def on_create(self, ar):
+        super(RefundConfirmation, self).on_create(ar)
+        if self.client_id:
+            logger.info("20141003 %s", self.client)
 
     @dd.chooser()
     def doctor_choices(cls, doctor_type):
@@ -878,6 +901,7 @@ class RefundConfirmation(Confirmation):
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
+    required = dd.required(user_groups='office')
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -888,9 +912,12 @@ class RefundConfirmations(Confirmations):
     remark
     """)  # , window_size=(70, 24))
 
+
+class RefundConfirmationsByGranting(RefundConfirmations):
+    master_key = 'granting'
     insert_layout = dd.FormLayout("""
-    client granting:25
-    signer start_date end_date
+    # client granting:25
+    start_date end_date
     doctor_type doctor pharmacy
     company contact_person language printed
     remark
@@ -899,7 +926,7 @@ class RefundConfirmations(Confirmations):
     column_names = "id client granting start_date end_date *"
 
 
-ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmations)
+ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmationsByGranting)
 
 
 ##

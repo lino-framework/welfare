@@ -65,8 +65,8 @@ class Site(Site):
         
         """
         self.plugins.accounts.configure(ref_length=5)
-        self.plugins.humanlinks.configure(person_model='pcsw.Client')
-        self.plugins.households.configure(person_model='pcsw.Client')
+        # self.plugins.humanlinks.configure(person_model='pcsw.Client')
+        # self.plugins.households.configure(person_model='pcsw.Client')
         super(Site, self).setup_plugins()
 
     def setup_choicelists(self):

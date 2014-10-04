@@ -35,6 +35,18 @@ Mixins
 Models
 ======
 
+.. class:: ContractType
+
+  .. attribute:: full_name
+
+    An optional full title of the contract as printed on the document.
+    Example:
+
+      Projet relatif à une formation professionnelle ou une formation par
+      le travail
+
+
+
 .. class:: Contract
 
   Inherits from :class:`ContractBase`.

@@ -4,11 +4,11 @@
 Changes in Lino Welfare
 ========================
 
-See the author's :ref:`Developer Blog <blog>` to get detailed news.
+See the author's :ref:`developer blog <blog>` to get detailed news.
 The final truth about what's going on is only the source code.
 
-Version 1.1.14 (release 2014-06-24)
-===================================
+Version 1.1.14 (released 2014-06-24)
+====================================
 
 - A :class:`welfare.isip.Contract` can now have more than one external
   partner. New table :class:`welfare.isip.PartnersByContract`

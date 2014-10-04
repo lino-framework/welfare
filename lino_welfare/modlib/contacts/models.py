@@ -189,7 +189,8 @@ class PersonDetail(PersonDetail):
     """
 
     contact = dd.Panel("""
-    #address_box addresses.AddressesByPartner
+    households.MembersByPerson:20 households.SiblingsByPerson:60
+    humanlinks.LinksByHuman
     remarks:30 sepa.AccountsByPartner
     """, label=_("Contact"))
 

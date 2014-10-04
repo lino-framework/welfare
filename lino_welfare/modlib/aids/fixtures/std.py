@@ -188,23 +188,28 @@ einen Kostenvoranschlag. Danke.
     yield aidType(_("Möbellager"))
     yield aidType(_("Heizkosten"))
 
+    croix_rouge = rt.modules.contacts.Company(
+        name="Belgisches Rotes Kreuz")
+    yield croix_rouge
+
     kw = dd.babelkw(
         'name',
         de="Lebensmittelbank",
         en="Food bank",
         fr="Banque alimentaire")
     kw.update(confirmed_by_primary_coach=False)
+    kw.update(company=croix_rouge)
     kw.update(
         dd.babelkw(
             'long_name',
             de="""\
 {{when}} aus Gründen der sozial-finanziellen Lage Anrecht auf
 eine Sozialhilfe in Naturalien durch Nutzung der
-Lebensmittelbank {{iif(past, "hat", "hatte")}}.
+<b>Lebensmittelbank</b> {{iif(past, "hat", "hatte")}}.
 """,
             fr="""\
 {{iif(past, "a bénéficié", "bénéficie")}}
-{{when}} du droit d'utiliser la banque alimentaire.
+{{when}} du droit d'utiliser la <b>banque alimentaire</b>.
 """))
 
     yield aidType(**kw)
