@@ -1,0 +1,36 @@
+{% extends "aids/Confirmation/certificate.body.html" %}
+
+{% block what %}
+<p>
+{% if language == 'de' %}
+für den Zeitraum {{when}} Anrecht auf
+Übernahme folgender <b>Arzt- und/oder Medikamentenkosten</b>
+durch das ÖSHZ {{iif(obj.is_past(), "hatte", "hat")}}:
+<ul>
+{%- if obj.doctor -%}
+<li><b>Arzthonorare</b> in Höhe der LIKIV-Tarife für die Visite
+{%- if obj.doctor_type_id %}
+beim {{obj.doctor_type}} {% else %} bei
+{% endif -%}
+<b>{{obj.doctor.get_full_name()}}</b>.
+</li>
+{%- endif -%}
+{%- if obj.pharmacy -%}
+<li><b>Arzneikosten</b> für die durch
+{%- if obj.doctor %}
+<b>{{obj.doctor.get_full_name()}}</b> verschriebenen und
+{% endif -%}
+<b>{{obj.pharmacy.get_full_name()}}</b> ausgehändigten Medikamente.
+</li>
+{%- endif -%}
+</ul>
+
+Falls weitere Behandlungen notwendig sind, benötigen wir unbedingt
+einen Kostenvoranschlag. Danke.
+
+{% else %}
+{{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
+{{when}} du ... remboursement de frais médicaux.
+{% endif %}
+</p>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "aids/Confirmation/certificate.body.html" %}
+
+{% block what -%}
+
+<p>
+{% if language == 'de' %}
+{{when}} aus Gründen der sozial-finanziellen Lage Anrecht auf
+eine Sozialhilfe in Naturalien durch Nutzung der
+<b>Lebensmittelbank</b> {{iif(obj.is_past(), "hatte", "hat")}}.
+{% else %}
+{{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
+{{when}} du droit d'utiliser la <b>banque alimentaire</b>.
+{% endif %}
+</p>
+
+<p>
+Haushaltszusammensetzung: 
+<b>{{ rt.modules.households.get_household_summary(obj.client) }}</b>.  
+</p>
+
+{%- endblock %}

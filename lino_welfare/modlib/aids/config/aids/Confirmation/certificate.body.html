@@ -1,0 +1,39 @@
+{% extends "excerpts/base.body.html" %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{obj.user.initials}}/{{obj.signer.initials}}/{{obj.client.id}}/{{this.id}}
+{% endblock %}
+
+{% block title %}
+<h1>{{obj.get_excerpt_title()}}</h1>
+{% endblock %}
+
+{% block body %}
+
+<p>{{tr(en="We hereby certify that",
+        de="Hiermit bescheinigen wir, dass",
+        fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{obj.client.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{obj.client.national_id}}
+<br>
+{{obj.confirmation_address()}}
+{#
+{{tr(de="wohnhaft zu",fr="domicilié"+obj.client.mf("","e","(e)")+" à")}}
+{{', '.join(obj.client.address_location_lines())}}
+#}
+</p>
+
+{% block what %}
+<p>{{ obj.confirmation_text() }}</p>
+{% endblock %}
+
+{% if obj.remark %}
+<p>{{ obj.remark }}</p>
+{% endif %}
+
+{% endblock %}
+

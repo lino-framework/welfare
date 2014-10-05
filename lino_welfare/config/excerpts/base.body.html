@@ -1,0 +1,24 @@
+{# `this` is the Excerpt, `obj` is the `owner` (e.g. a Confirmation, a
+Guest, a Client, ... #}
+<p class="OurRef">
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}: {{this.user.initials}}/{{this.project.id}}/{{this.id}}
+{% endblock %}
+</p>
+
+{% block title %}
+<h1>{{this}}</h1>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block signature %}
+<p>{{tr(en="The PCSW", de="Für das Öffentliche Sozialhilfezentrum,",fr="Pour le Centre Public d’Action Sociale,")}}</p>
+<p>{{tr(en="The secretary", de="Der Sekretär,",fr="Le secrétaire,")}}</p>
+<p>{{tr(en="delegation", de="im Auftrag,",fr="par délégation,")}}</p>
+<p></p>
+<p></p>
+<p></p>
+<p>{{this.user}}</p>
+{% endblock %}

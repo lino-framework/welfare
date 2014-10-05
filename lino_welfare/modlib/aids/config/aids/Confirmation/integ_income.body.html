@@ -1,0 +1,31 @@
+{% extends "aids/Confirmation/certificate.body.html" %}
+
+{% block what %}
+<p>
+{%- if language == 'de' -%}
+
+{{when}} 
+das durch Gesetz vom 26. Mai 2002 eingeführte <b>Eingliederungseinkommen</b>
+{%- if obj.amount %}
+in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
+{% endif -%}
+{%- if obj.category %}
+(Kategorie: <b>{{obj.category}}</b>)
+{% endif -%}
+{{iif(obj.is_past(), "bezogen hat", "bezieht")}}.
+
+{%- else -%}
+
+{{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
+{{when}}
+du <b>revenu d'intégration</b> prévu par la loi du 26 mai 2002
+{%- if obj.amount %}
+d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
+{% endif -%}
+{%- if obj.category %}
+(Catégorie: <b>{{obj.category}}</b>)
+{% endif -%}.
+
+{%- endif -%}
+</p>
+{% endblock %}
