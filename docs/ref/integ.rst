@@ -11,6 +11,12 @@ provides data definitions used by the Integration Service.
 Tables and Layouts
 ==================
 
+.. class:: UsersWithClients
+
+  .. django2rst::
+
+    rt.show(integ.UsersWithClients)
+
 .. class:: ActivityReport
 
   Gives an overview about the work of the Integration Service during a
