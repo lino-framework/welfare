@@ -9,19 +9,15 @@ The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
 import logging
 logger = logging.getLogger(__name__)
 
-import datetime
-
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.xmlgen.html import E
 
-from lino import dd, rt
+from lino import dd
 
 from lino.modlib.reception.models import *
-
-from lino_welfare.modlib.reception import Plugin
 
 pcsw = dd.resolve_app('pcsw')
 extensible = dd.resolve_app('extensible')
@@ -248,8 +244,8 @@ class CoachingsByClient(pcsw.CoachingsByClient):
 
 """
 Override library :mod:`WaitingVisitors
-<lino.modlib.reception.WaitingVisitors>` table to change one
-behaviour: when clicking in that table on the partner, Lino-Welfare
+<ml.reception.WaitingVisitors>` table to change one
+behaviour: when clicking in that table on the partner, :ref:`welfare`
 should show the *Client's* and not the *Partner's* detail.
 
 """
