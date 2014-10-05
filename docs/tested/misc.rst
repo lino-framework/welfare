@@ -173,17 +173,21 @@ to see how we generated the following list:
         rv = ses.run(obj.do_print)
         tmppath = settings.SITE.project_dir + rv['open_url']
         head, tail = os.path.split(tmppath)
-        tail = 'tested/' + tail
+        # tail = 'tested/' + tail
+        tail = 'dl/excerpts/' + tail
         try:
             shutil.copyfile(tmppath, tail)
         except IOError:
             pass
+        # kw = dict(tail=os.path.splitext(tail)[0])
         kw = dict(tail=tail)
         # kw.update(text="**%s** (%s)" % (obj.owner, obj.excerpt_type))
         kw.update(type=obj.excerpt_type)
         kw.update(owner=obj.owner)
-        return "%(type)s :welfare_srcref:`%(owner)s <docs/%(tail)s?raw=true>`" % kw
+        # return "%(type)s :welfare_srcref:`%(owner)s <docs/%(tail)s?raw=true>`" % kw
+        return "%(type)s `%(owner)s <../%(tail)s>`__" % kw
     
     print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
    
+
 
