@@ -159,35 +159,9 @@ visible:
 Link to this copy of the resulting file:
 :welfare_srcref:`/docs/tested/isip.Contract-1.pdf`
 
-Now the same in more generic. We write a formatter function and then
-call it on every excerpt. See the source code of this page if you want
-to see how we generated the following list:
+.. 
 
-.. django2rst::
-
-    import os
-    import shutil
-    from atelier import rstgen
-    ses = rt.login()
-    def asli(obj):
-        rv = ses.run(obj.do_print)
-        tmppath = settings.SITE.project_dir + rv['open_url']
-        head, tail = os.path.split(tmppath)
-        # tail = 'tested/' + tail
-        tail = 'dl/excerpts/' + tail
-        try:
-            shutil.copyfile(tmppath, tail)
-        except IOError:
-            pass
-        # kw = dict(tail=os.path.splitext(tail)[0])
-        kw = dict(tail=tail)
-        # kw.update(text="**%s** (%s)" % (obj.owner, obj.excerpt_type))
-        kw.update(type=obj.excerpt_type)
-        kw.update(owner=obj.owner)
-        # return "%(type)s :welfare_srcref:`%(owner)s <docs/%(tail)s?raw=true>`" % kw
-        return "%(type)s `%(owner)s <../%(tail)s>`__" % kw
-    
-    print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
-   
-
+    Now the same in more generic. We write a formatter function and then
+    call it on every excerpt. See the source code of this page if you want
+    to see how we generated the following list:
 
