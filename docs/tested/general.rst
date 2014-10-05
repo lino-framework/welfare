@@ -49,7 +49,7 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        119
- aids.AidType                   19        10
+ aids.AidType                   21        10
  aids.Category                  5         3
  aids.Granting                  10        10
  aids.IncomeConfirmation        17        6
@@ -76,9 +76,9 @@ Test whether :meth:`get_db_overview_rst
  cbss.RetrieveTIGroupsRequest   14        2
  cbss.Sector                    11        209
  changes.Change                 9         0
- contacts.Company               30        46
+ contacts.Company               30        47
  contacts.CompanyType           9         16
- contacts.Partner               26        158
+ contacts.Partner               26        159
  contacts.Person                33        106
  contacts.Role                  4         10
  contacts.RoleType              6         5
@@ -94,7 +94,7 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         12
  debts.Budget                   11        6
  debts.Entry                    16        294
- excerpts.Excerpt               8         10
+ excerpts.Excerpt               8         27
  excerpts.ExcerptType           16        10
  households.Household           29        6
  households.Member              13        12
@@ -133,7 +133,7 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    65        86
+ pcsw.Client                    65        61
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         77
@@ -173,7 +173,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Büro : Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu unterschreibende Hilfebestätigungen
+- ÖSHZ : Meine Begleitungen, Zu unterschreibende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Neuanträge : Neue Klienten, Verfügbare Begleiter

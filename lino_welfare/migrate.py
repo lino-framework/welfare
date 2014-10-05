@@ -931,6 +931,7 @@ def doit(a, b):
         cal_GuestRole = resolve_model("cal.GuestRole")
         uploads_UploadType = resolve_model("uploads.UploadType")
         uploads_Upload = resolve_model("uploads.Upload")
+        aids_AidType = resolve_model("aids.AidType")
 
         def create_cal_guestrole(id, name, attach_to_email, email_template):
             kw = dict()
@@ -974,5 +975,23 @@ def doit(a, b):
             kw.update(remark=remark)
             return uploads_Upload(**kw)
         globals_dict.update(create_uploads_upload=create_uploads_upload)
+
+        def create_aids_aidtype(id, name, company_id, contact_person_id, contact_role_id, aid_regime, confirmation_type, long_name, short_name, board_id, print_directly, confirmed_by_primary_coach, pharmacy_type_id):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(company_id=company_id)
+            kw.update(contact_person_id=contact_person_id)
+            kw.update(contact_role_id=contact_role_id)
+            kw.update(aid_regime=aid_regime)
+            kw.update(confirmation_type=confirmation_type)
+            # if long_name is not None: kw.update(bv2kw('long_name',long_name))
+            kw.update(short_name=short_name)
+            kw.update(board_id=board_id)
+            kw.update(print_directly=print_directly)
+            kw.update(confirmed_by_primary_coach=confirmed_by_primary_coach)
+            kw.update(pharmacy_type_id=pharmacy_type_id)
+            return aids_AidType(**kw)
+        globals_dict.update(create_aids_aidtype=create_aids_aidtype)
 
         return '1.1.17'

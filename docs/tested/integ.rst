@@ -12,7 +12,7 @@ Integration Service
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.docs.settings.test'
+    ...    'lino_welfare.projects.docs.settings.doctests'
     >>> from lino.runtime import *
     >>> from django.utils import translation
     >>> from django.test import Client
@@ -20,7 +20,7 @@ Integration Service
     >>> from bs4 import BeautifulSoup
 
 >>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.docs.settings.test
+lino_welfare.projects.docs.settings.doctests
 
 Coach changes while contract active
 -----------------------------------
@@ -84,40 +84,40 @@ The following code caused an Exception "ParameterStore of LayoutHandle
 for ParamsLayout on pcsw.Clients expects a list of 12 values but got
 16" on :blogref:`20140429`.
 
->>> print(pcsw.Client.objects.get(last_name="Keller", first_name="Karl"))
-KELLER Karl (177)
+>>> print(pcsw.Client.objects.get(pk=179))
+DUBOIS Robin (179)
 
 >>> client = Client()
->>> url = '/api/integ/Clients/177?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
+>>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
 >>> res = client.get(url, REMOTE_USER='rolf')
-
-This returns a huge JSON structure:
-
 >>> print(res.status_code)
 200
+
+The response to this AJAX request is in JSON:
+
 >>> d = json.loads(res.content)
 
 We test the MembersByPerson panel. It contains a summary:
 
 >>> print(d['data']['MembersByPerson'])
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +SKIP
-<div>KELLER Karl (177) ist<ul><li>Vorstand in <a href="javascript:Lino.households.Households.detail.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 184 })">Legale Wohngemeinschaft Keller-&#213;unapuu</a></li></ul><br /><a href="javascript:Lino.contacts.Persons.create_household.run(&quot;ext-comp-1351&quot;,{ &quot;record_id&quot;: 177, &quot;field_values&quot;: { &quot;head&quot;: &quot;KELLER Karl (177)&quot;, &quot;headHidden&quot;: 177, &quot;typeHidden&quot;: null, &quot;partner&quot;: null, &quot;partnerHidden&quot;: null, &quot;type&quot;: null }, &quot;param_values&quot;: { &quot;observed_event&quot;: null, &quot;and_coached_by&quot;: null, &quot;end_date&quot;: null, &quot;genderHidden&quot;: null, &quot;also_obsolete&quot;: false, &quot;gender&quot;: null, &quot;nationalityHidden&quot;: null, &quot;aged_from&quot;: null, &quot;only_primary&quot;: false, &quot;client_stateHidden&quot;: &quot;30&quot;, &quot;and_coached_byHidden&quot;: null, &quot;coached_by&quot;: null, &quot;coached_byHidden&quot;: null, &quot;observed_eventHidden&quot;: null, &quot;nationality&quot;: null, &quot;client_state&quot;: &quot;Begleitet&quot;, &quot;start_date&quot;: null, &quot;aged_to&quot;: null }, &quot;base_params&quot;: {  } })">Haushalt erstellen</a></div>
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<div>DUBOIS Robin (179) ist<ul><li><a href="javascript:Lino.households.Members.set_primary(...)...</div>
 
 Since this is not very human-readable, we are going to analyze it with
 `BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
-
 
 >>> soup = BeautifulSoup(d['data']['MembersByPerson'])
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
+DUBOIS Robin (179) ist ☐ Vorstand in Robin & Mélanie Dubois-Mélard Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Isolated / Sonstige
 
 >>> links = soup.find_all('a')
 
 It contains eight links:
 
 >>> len(links)
-6
+8
 
 The first link is the disabled checkbox for the :attr:`primary
 <ml.households.Member.primary>` field:
@@ -126,34 +126,35 @@ The first link is the disabled checkbox for the :attr:`primary
 ... #doctest: +NORMALIZE_WHITESPACE
 ☐
 
+Clicking on this would run the following JavaScript:
 
 >>> print(links[0].get('href'))
-javascript:Lino.households.Members.set_primary("ext-comp-1351",7,{  })
->>> print(links[1].get('href'))
-javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 230 })
+javascript:Lino.households.Members.set_primary("ext-comp-1351",9,{  })
+
+The next link is the name of the household, and clicking on it would
+equally execute some Javascript code:
+
 >>> print(links[1].string)
-Karl & Õie Keller-Õunapuu
+Robin & Mélanie Dubois-Mélard
+>>> print(links[1].get('href'))
+javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 232 })
+
+
+The third link is:
 
 >>> print(links[2].string)
 Ehepartner
-
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.pcsw.Clients.create_household.run("ext-comp-1351",{
+javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
 "field_values": { 
-  "head": "KELLER Karl (177)",
-  "headHidden": 177, "typeHidden": 1, "partner": null,
-  "partnerHidden": null, "type": "Ehepartner" }, 
-"param_values": {
-  "observed_event": null, "and_coached_by": null, "end_date": null,
-  "genderHidden": null, "also_obsolete": false, "gender": null,
-  "nationalityHidden": null, "aged_from": null, "only_primary": false,
-  "client_stateHidden": "30", "and_coached_byHidden": null,
-  "coached_by": null, "coached_byHidden": null, 
-  "observed_eventHidden": null, "nationality": null, 
-  "client_state": "Begleitet", "start_date": null, "aged_to": null }, 
-"base_params": { } 
-})
+  "head": "DUBOIS Robin (179)", "headHidden": 179, 
+  "typeHidden": 1, 
+  "partner": null, "partnerHidden": null, 
+  "type": "Ehepartner" 
+}, "param_values": { 
+  "also_obsolete": false, "gender": null, "genderHidden": null 
+}, "base_params": {  } })
 
 Let's automatize this trick:
 
@@ -164,7 +165,7 @@ Let's automatize this trick:
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('integ/Clients/177', 'MembersByPerson'))
+>>> soup = BeautifulSoup(check('integ/Clients/179', 'MembersByPerson'))
 >>> links = soup.find_all('a')
 >>> len(links)
 8
@@ -177,17 +178,17 @@ Paul Frisch
 Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links. His client id is 196.
 
->>> print(pcsw.Client.objects.get(first_name="Paul", last_name="Frisch"))
-FRISCH Paul (235)
+>>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
+Herr Paul Frisch (236)
 
->>> soup = BeautifulSoup(check('integ/Clients/235', 'LinksByHuman'))
+>>> soup = BeautifulSoup(check('contacts/Persons/236', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
 14
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.pcsw.Clients.detail.run(null,{ "record_id": 243 })
+javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 244 })
 
 These are the family relationships of Paul Frisch:
 
@@ -199,16 +200,41 @@ ZWEITH (45 Jahre) Sohn von Gaby FROGEMUTH (79 Jahre) Sohn von Hubert
 (80 Jahre) Beziehung erstellen als Vater / Sohn Adoptivvater /
 Adoptivsohn Ehemann Verwandter Sonstiger
 
->>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=116'
+
+Assigning a coach to a newcomer
+-------------------------------
+
+Similar test for a newcomer
+
+
+>>> obj = pcsw.Client.objects.get(pk=117)
+>>> print(obj)
+BASTIAENSEN Laurent (117)
+
+>>> rt.show(newcomers.AvailableCoachesByClient, master_instance=obj)
+====================== =============== ================= =============== ========== =========== =============== ===================
+ Name                   Arbeitsablauf   Komplette Akten   Neue Klienten   Quote NZ   Belastung   Mehrbelastung   Mehrbelastung (%)
+---------------------- --------------- ----------------- --------------- ---------- ----------- --------------- -------------------
+ Alicia Allmanns                        10                1               100        10,         6,              100,00
+ **Total (1 Zeilen)**                   **10**            **1**           **100**    **10,**     **6,**          **100,00**
+====================== =============== ================= =============== ========== =========== =============== ===================
+<BLANKLINE>
+
+>>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=117'
 >>> res = client.get(url, REMOTE_USER='rolf')
 >>> assert res.status_code == 200
 >>> d = json.loads(res.content)
 
-The second cell of the first row contains one call to
+The second cell of the first data row in the above table looks empty
+here, but when rendered on screen it contains a call to
 `newcomers.AvailableCoachesByClient.assign_coach`:
 
 >>> html = d['rows'][0][1]
 >>> soup = BeautifulSoup(html)
+>>> print(soup.get_text(' ', strip=True))
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
+Zuweisen
+
 >>> links = soup.find_all('a')
 >>> len(links)
 1
@@ -226,21 +252,30 @@ user being assigned (6 in this case):
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 javascript:Lino.newcomers.AvailableCoachesByClient.assign_coach.run(null,{
 "record_id": 6, "field_values": { "notify_body": "BASTIAENSEN
-Laurent (116) wird ab jetzt begleitet f\u00fcr Finanzielle Begleitung
-durch Alicia Allmanns.", "notify_subject": "BASTIAENSEN Laurent (116)
+Laurent (117) wird ab jetzt begleitet f\u00fcr Finanzielle Begleitung
+durch Alicia Allmanns.", "notify_subject": "BASTIAENSEN Laurent (117)
 zugewiesen zu Alicia Allmanns", "notify_silent": false },
 "param_values": { "since": "22.04.2014", "for_clientHidden": null,
-"for_client": null }, "base_params": { "mt": ..., "mk": 116 } })
+"for_client": null }, "base_params": { "mt": ..., "mk": 117 } })
 
 This call is generated by :meth:`dd.Actor.workflow_buttons`, which
 calls :meth:`rt.ActionRequest.action_button`. Which is where we had a
 bug on :blogref:`20150515`.
 
 
->>> soup = BeautifulSoup(check('pcsw/Clients/176', 'UploadsByClient'))
+
+Uploads by client
+-----------------
+
+The folowing example is for client # 177
+>>> obj = pcsw.Client.objects.get(pk=177)
+>>> print(obj)
+BRECHT Bernd (177)
+
+>>> soup = BeautifulSoup(check('pcsw/Clients/177', 'UploadsByClient'))
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diploma:
+Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diplom: 
 
 >>> links = soup.find_all('a')
 >>> len(links)
@@ -251,7 +286,7 @@ Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diplom
 
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 176 })\">BRECHT Bernd (176)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (176)" }, "base_params": { "mt": ..., "mk": 176, "type_id": 1 } })
+javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })\">BRECHT Bernd (177)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (177)" }, "base_params": { "mt": ..., "mk": 177, "type_id": 1 } })
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS

@@ -15,7 +15,7 @@ General PCSW
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.docs.settings.test'
+    ...    'lino_welfare.projects.docs.settings.doctests'
     >>> from bs4 import BeautifulSoup
     >>> from lino.utils import i2d
     >>> from lino.utils.xmlgen.html import E
@@ -50,12 +50,12 @@ set([u'Dobbelstein', u'Doroth\xe9e'])
 ================================================= ==========
  Other                                             Workflow
 ------------------------------------------------- ----------
- **Mrs Dorothée Dobbelstein (123)**
- **Mrs Dorothée Dobbelstein-Demeulenaere (122)**
+ **Mrs Dorothée Dobbelstein (124)**
+ **Mrs Dorothée Dobbelstein-Demeulenaere (123)**
 ================================================= ==========
 <BLANKLINE>
 
-Note that *Mrs Dorothée Demeulenaere (121)* is missing. Our algorithm
+Note that *Mrs Dorothée Demeulenaere (122)* is missing. Our algorithm
 detects only two of the existing three duplicates.
 
 
@@ -70,26 +70,26 @@ This function returns the names of the persons that Lino would detect
 as duplicates, depending on the given first_name and last_name.
 
 >>> check("Bernard", "Bodard")
-[u'Bernard Bodard (169)']
+[u'Bernard Bodard (170*)']
 
 Without our utility function the above test would be less readable:
 
 >>> obj = pcsw.Client(first_name="Bernard", last_name="Bodard")
 >>> ses.show(dedupe.SimilarPersons, obj)
-========================== ==========
- Other                      Workflow
--------------------------- ----------
- **Bernard Bodard (169)**
-========================== ==========
+=========================== ==========
+ Other                       Workflow
+--------------------------- ----------
+ **Bernard Bodard (170*)**
+=========================== ==========
 <BLANKLINE>
 
 Some users tend to mix up first and last name. Lino would detect that:
 
 >>> check("Bodard", "Bernard")
-[u'Bernard Bodard (169)']
+[u'Bernard Bodard (170*)']
 
 >>> check("Erna", "Odar")
-[u'Bernard Bodard (169)']
+[u'Bernard Bodard (170*)']
 
 The following duplicates are **not yet** detected though they obviously
 should. We are still experimenting...
@@ -114,12 +114,13 @@ UsersWithClients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns                   1                    1       1         2                 3                3
- Hubert Huppertz      3            2           3        4       4         11                16               16
- Mélanie Mélard       4            4           2        2       3         12                15               15
- **Total (3 rows)**   **7**        **7**       **5**    **7**   **8**     **25**            **34**           **34**
+ Alicia Allmanns                   1           2        2       1         5                 6                6
+ Hubert Huppertz      3            2           4        4       4         11                17               17
+ Mélanie Mélard       4            3           3        2       2         10                14               14
+ **Total (3 rows)**   **7**        **6**       **9**    **8**   **7**     **26**            **37**           **37**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
+
 
 Printing UsersWithClients to pdf
 --------------------------------
@@ -148,8 +149,8 @@ eID card summary
 Here a test case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
 
->>> url = '/api/pcsw/Clients/176?an=detail&fmt=json'
->>> res = client.get(url,REMOTE_USER='rolf')
+>>> url = '/api/pcsw/Clients/177?an=detail&fmt=json'
+>>> res = client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
 >>> result = json.loads(res.content)
@@ -171,8 +172,8 @@ Deutschland
 Adressen verwalten
 Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gültig von 19.08.11 bis 19.08.16
 
->>> url = '/api/reception/Clients/115?an=detail&fmt=json'
->>> res = client.get(url,REMOTE_USER='rolf')
+>>> url = '/api/reception/Clients/116?an=detail&fmt=json'
+>>> res = client.get(url, REMOTE_USER='rolf')
 >>> result = json.loads(res.content)
 >>> soup = BeautifulSoup(result['data']['overview'])
 >>> print(soup.get_text("\n"))
@@ -223,10 +224,10 @@ The demo database contains at least on client
 For example, let log in as Mélanie and look at client Robin DUBOIS:
 
 >>> ses = rt.login('melanie')
->>> pk = 178
+>>> pk = 179
 >>> obj = pcsw.Client.objects.get(pk=pk)
 >>> print(obj)
-DUBOIS Robin (178)
+DUBOIS Robin (179)
 
 Robin is coached:
 
@@ -251,9 +252,9 @@ on 24.10.2013:
 Another client is Dorothée Dobbelstein who is coached by three
 different agents at the same time:
 
->>> obj = pcsw.Client.objects.get(pk=123)
+>>> obj = pcsw.Client.objects.get(pk=124)
 >>> obj
-Client #123 (u'DOBBELSTEIN Doroth\xe9e (123)')
+Client #124 (u'DOBBELSTEIN Doroth\xe9e (124)')
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ====================== ===== ================= ========
@@ -268,9 +269,9 @@ Client #123 (u'DOBBELSTEIN Doroth\xe9e (123)')
 
 A third client is David DA VINCI:
 
->>> obj = pcsw.Client.objects.get(pk=164)
+>>> obj = pcsw.Client.objects.get(pk=165)
 >>> print(obj)
-DA VINCI David (164)
+DA VINCI David (165)
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ====================== ========== ================= ========
@@ -293,21 +294,20 @@ isn't):
 ============================
  Name
 ----------------------------
- AUSDEMWALD Alfons (115)
- DENON Denis (179)
- DOBBELSTEIN Dorothée (123)
- EMONTS Daniel (127)
- EVERS Eberhart (126)
- FAYMONVILLE Luc (129)
- JACOBS Jacqueline (136)
- JONAS Josef (138)
- LAMBERTZ Guido (141)
- LAZARUS Line (143)
- RADERMACHER Alfons (152)
- RADERMACHER Edgard (156)
- RADERMACHER Guido (158)
- DA VINCI David (164)
- VAN VEEN Vincent (165)
+ AUSDEMWALD Alfons (116)
+ DOBBELSTEIN Dorothée (124)
+ EMONTS Daniel (128)
+ EVERS Eberhart (127)
+ JACOBS Jacqueline (137)
+ JEANÉMART Jérôme (181)
+ JONAS Josef (139)
+ LAMBERTZ Guido (142)
+ LAZARUS Line (144)
+ RADERMACHER Alfons (153)
+ RADERMACHER Edgard (157)
+ RADERMACHER Guido (159)
+ DA VINCI David (165)
+ VAN VEEN Vincent (166)
 ============================
 <BLANKLINE>
 
@@ -326,14 +326,13 @@ manually filling that date into the
 =============================
  Name
 -----------------------------
- DENON Denis (179)
- DUBOIS Robin (178)
- ENGELS Edgar (128)
- JACOBS Jacqueline (136)
- LAMBERTZ Guido (141)
- MALMENDIER Marc (145)
- RADERMACHER Christian (154)
- DA VINCI David (164)
+ DUBOIS Robin (179)
+ ENGELS Edgar (129)
+ JACOBS Jacqueline (137)
+ LAMBERTZ Guido (142)
+ MALMENDIER Marc (146)
+ RADERMACHER Christian (155)
+ DA VINCI David (165)
 =============================
 <BLANKLINE>
 

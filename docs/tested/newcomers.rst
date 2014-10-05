@@ -21,14 +21,14 @@ Newcomers
 ================ ====================================== =============================
  Name             Job Provider                           Job Sector
 ---------------- -------------------------------------- -----------------------------
- Cook             R-Cycle Sperrgutsortierzentrum (196)   Maritime
- Cook             Pro Aktiv V.o.G. (198)                 Education
- Cook assistant   Pro Aktiv V.o.G. (198)                 Medical & paramedical
- Cook assistant   BISA (195)                             Cleaning
- Dishwasher       BISA (195)                             Construction & buildings
- Dishwasher       R-Cycle Sperrgutsortierzentrum (196)   Transport
- Waiter           BISA (195)                             Agriculture & horticulture
- Waiter           R-Cycle Sperrgutsortierzentrum (196)   Tourism
+ Cook             R-Cycle Sperrgutsortierzentrum (197)   Maritime
+ Cook             Pro Aktiv V.o.G. (199)                 Education
+ Cook assistant   Pro Aktiv V.o.G. (199)                 Medical & paramedical
+ Cook assistant   BISA (196)                             Cleaning
+ Dishwasher       BISA (196)                             Construction & buildings
+ Dishwasher       R-Cycle Sperrgutsortierzentrum (197)   Transport
+ Waiter           BISA (196)                             Agriculture & horticulture
+ Waiter           R-Cycle Sperrgutsortierzentrum (197)   Tourism
 ================ ====================================== =============================
 <BLANKLINE>
 

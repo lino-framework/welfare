@@ -12,7 +12,7 @@ Jobs
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.docs.settings.test'
+    ...    'lino_welfare.projects.docs.settings.doctests'
     >>> from django.utils import translation
     >>> from lino.runtime import *
     >>> from lino.utils.instantiator import i2d
@@ -35,14 +35,14 @@ Jobs
 ================= ====================================== ===========================
  Funktion          Stellenanbieter                        Sektor
 ----------------- -------------------------------------- ---------------------------
- Koch              R-Cycle Sperrgutsortierzentrum (196)    Seefahrt
- Koch              Pro Aktiv V.o.G. (198)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (198)                  Medizin & Paramedizin
- Küchenassistent   BISA (195)                              Reinigung
- Tellerwäscher     BISA (195)                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (196)    Transport
- Kellner           BISA (195)                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (196)    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum (197)    Seefahrt
+ Koch              Pro Aktiv V.o.G. (199)                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G. (199)                  Medizin & Paramedizin
+ Küchenassistent   BISA (196)                              Reinigung
+ Tellerwäscher     BISA (196)                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum (197)    Transport
+ Kellner           BISA (196)                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum (197)    Horeca
 ================= ====================================== ===========================
 <BLANKLINE>
 
@@ -75,12 +75,12 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========== ========== ========================= ===================================================== =============
- Anfang     Ende       Klient                    Firma                                                 Land
----------- ---------- ------------------------- ----------------------------------------------------- -------------
- 07.02.11   07.02.11   JACOBS Jacqueline (136)   Rumma & Ko OÜ (100)                                   Estland
- 04.04.11   04.04.11   FAYMONVILLE Luc (129)     Alliance Nationale des Mutualités Chrétiennes (202)   Niederlande
-========== ========== ========================= ===================================================== =============
+========== ========== ========================= ===================================== =============
+ Anfang     Ende       Klient                    Firma                                 Land
+---------- ---------- ------------------------- ------------------------------------- -------------
+ 07.02.11   07.02.11   JACOBS Jacqueline (137)   Belgisches Rotes Kreuz (100)          Estland
+ 04.04.11   04.04.11   FAYMONVILLE Luc (130*)    Beschützende Werkstätte Eupen (202)   Niederlande
+========== ========== ========================= ===================================== =============
 <BLANKLINE>
 
 
@@ -99,8 +99,8 @@ Example:
 ============== ========================== ======== ====================
  Anfragedatum   Klient                     Stelle   Kandidatur-Zustand
 -------------- -------------------------- -------- --------------------
- ...            JEANÉMART Jérôme (180*)             Aktiv
- ...            GROTECLAES Gregory (131)            Arbeitet
+ 02.05.14       JEANÉMART Jérôme (181)              Aktiv
+ 27.06.14       GROTECLAES Gregory (132)            Arbeitet
 ============== ========================== ======== ====================
 <BLANKLINE>
 
@@ -108,7 +108,7 @@ Example:
 >>> translation.activate('en')
 >>> obj = jobs.Contract.objects.get(pk=6)
 >>> print(unicode(obj.client))
-FAYMONVILLE Luc (129)
+FAYMONVILLE Luc (130*)
 >>> obj.active_period()
 (datetime.date(2013, 12, 13), datetime.date(2015, 12, 12))
 >>> obj.update_cal_rset()
@@ -152,8 +152,8 @@ Mélanie has two appointments on 2014-09-15:
 ================ =============== =========================
  Agent            Summary         Client
 ---------------- --------------- -------------------------
- Mélanie Mélard   Appointment 3   FAYMONVILLE Luc (129)
- Mélanie Mélard   Appointment 5   JACOBS Jacqueline (136)
+ Mélanie Mélard   Appointment 3   FAYMONVILLE Luc (130*)
+ Mélanie Mélard   Appointment 5   JACOBS Jacqueline (137)
 ================ =============== =========================
 <BLANKLINE>
 

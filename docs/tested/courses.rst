@@ -82,15 +82,15 @@ able to render RemoteFields as rst.
 >>> with translation.override('fr'):
 ...    ses.show(courses.PendingCourseRequests, limit=5,
 ...       column_names="person__first_name content urgent address")
-============ ============= ======================= ===========================
- Prénom       Contenu       cause professionnelle   Adresse
------------- ------------- ----------------------- ---------------------------
- Line         Französisch   Non                     Heidberg, 4700 Eupen
- Guido        Deutsch       Non                     Haasstraße, 4700 Eupen
- Karl         Französisch   Non                     Allemagne
- Josef        Französisch   Non                     Gülcherstraße, 4700 Eupen
- Jacqueline   Französisch   Non                     Fränzel, 4700 Eupen
-============ ============= ======================= ===========================
+======== ============= ======================= ===========================
+ Prénom   Contenu       cause professionnelle   Adresse
+-------- ------------- ----------------------- ---------------------------
+ Line     Französisch   Non                     Heidberg, 4700 Eupen
+ Guido    Deutsch       Non                     Haasstraße, 4700 Eupen
+ Karl     Französisch   Non                     Allemagne
+ Karl     Deutsch       Non                     Haasberg, 4700 Eupen
+ Josef    Französisch   Non                     Gülcherstraße, 4700 Eupen
+======== ============= ======================= ===========================
 <BLANKLINE>
 
 The virtual field `dsbe.Client.coachings` shows all active coachings
@@ -99,17 +99,17 @@ of a client:
 >>> with translation.override('fr'):
 ...    ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content person__coaches")
-========================= ============= =================================================
- Bénéficiaire              Contenu       Accompagnants
-------------------------- ------------- -------------------------------------------------
- LAZARUS Line (143)        Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
- LAMBERTZ Guido (141)      Deutsch       Mélanie Mélard, Hubert Huppertz
- KELLER Karl (177)         Französisch   Hubert Huppertz
- JONAS Josef (138)         Französisch   Mélanie Mélard
- JACOBS Jacqueline (136)   Französisch   Mélanie Mélard, Mélanie Mélard
-========================= ============= =================================================
+====================== ============= =================================================
+ Bénéficiaire           Contenu       Accompagnants
+---------------------- ------------- -------------------------------------------------
+ LAZARUS Line (144)     Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
+ LAMBERTZ Guido (142)   Deutsch       Mélanie Mélard, Hubert Huppertz
+ KELLER Karl (178)      Französisch   Hubert Huppertz
+ KAIVERS Karl (141)     Deutsch       Alicia Allmanns
+ JONAS Josef (139)      Französisch   Mélanie Mélard
+====================== ============= =================================================
 <BLANKLINE>
 
 The last column `coachings` (Accompagnements) is also a new feature:
-it is a RemoteField ponting to a VirtualField. Very subtle!
+it is a RemoteField pointing to a VirtualField. 
 

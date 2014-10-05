@@ -109,21 +109,38 @@ The demo fixtures also generated some excerpts:
 ==== ====================== ===========================================
  ID   Excerpt Type           Controlled by
 ---- ---------------------- -------------------------------------------
- 1    Simple confirmation    **Simple confirmation #1**
- 2    Income confirmation    **Income confirmation #1**
- 3    Refund confirmation    **Refund confirmation #1**
- 4    Budget                 **Budget 1 for Xhonneux-Kasennova (227)**
- 5    Job contract           **Job contract#1 (Bernd Brecht)**
- 6    ISIP                   **ISIP#1 (Alfons Ausdemwald)**
- 7    Presence certificate   **Guest #1 (22.05.2014)**
- 8    Curriculum vitae       **AUSDEMWALD Alfons (115)**
- 9    eID sheet              **AUSDEMWALD Alfons (115)**
- 10   to-do list             **AUSDEMWALD Alfons (115)**
+ 1    Income confirmation    **Income confirmation #1**
+ 2    Income confirmation    **Income confirmation #2**
+ 3    Income confirmation    **Income confirmation #3**
+ 4    Income confirmation    **Income confirmation #4**
+ 5    Income confirmation    **Income confirmation #5**
+ 6    Income confirmation    **Income confirmation #6**
+ 7    Simple confirmation    **Simple confirmation #1**
+ 8    Simple confirmation    **Simple confirmation #2**
+ 9    Simple confirmation    **Simple confirmation #3**
+ 10   Simple confirmation    **Simple confirmation #4**
+ 11   Refund confirmation    **Refund confirmation #1**
+ 12   Refund confirmation    **Refund confirmation #2**
+ 13   Refund confirmation    **Refund confirmation #3**
+ 14   Refund confirmation    **Refund confirmation #4**
+ 15   Simple confirmation    **Simple confirmation #5**
+ 16   Simple confirmation    **Simple confirmation #6**
+ 17   Simple confirmation    **Simple confirmation #7**
+ 18   Simple confirmation    **Simple confirmation #8**
+ 19   Simple confirmation    **Simple confirmation #9**
+ 20   Simple confirmation    **Simple confirmation #10**
+ 21   Budget                 **Budget 1 for Xhonneux-Kasennova (228)**
+ 22   Job contract           **Job contract#1 (Bernd Brecht)**
+ 23   ISIP                   **ISIP#1 (Alfons Ausdemwald)**
+ 24   Presence certificate   **Guest #1 (22.05.2014)**
+ 25   Curriculum vitae       **AUSDEMWALD Alfons (116)**
+ 26   eID sheet              **AUSDEMWALD Alfons (116)**
+ 27   to-do list             **AUSDEMWALD Alfons (116)**
 ==== ====================== ===========================================
 <BLANKLINE>
 
 >>> import shutil
->>> obj = excerpts.Excerpt.objects.get(pk=6)
+>>> obj = excerpts.Excerpt.objects.get(pk=23)
 >>> rv = ses.run(obj.do_print)
 >>> print(rv['open_url'])  #doctest: +NORMALIZE_WHITESPACE
 /media/cache/appypdf/isip.Contract-1.pdf
@@ -165,7 +182,7 @@ to see how we generated the following list:
         # kw.update(text="**%s** (%s)" % (obj.owner, obj.excerpt_type))
         kw.update(type=obj.excerpt_type)
         kw.update(owner=obj.owner)
-        return "%(type)s :welfare_srcref:`%(owner)s <docs/%(tail)s>`" % kw
+        return "%(type)s :welfare_srcref:`%(owner)s <docs/%(tail)s?raw=true>`" % kw
     
     print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
    

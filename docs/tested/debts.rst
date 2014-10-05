@@ -29,7 +29,7 @@ Or we can retrieve budget no. 3 from the database:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Dubois-Vandenmeulenbos (229)')
+Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen (230)')
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf`:
@@ -115,10 +115,10 @@ Here are some more slave tables.
 ================================= ================= ========= ============== ============== ============== ============ ==============
  Partner                           Description       Bailiff   Monthly rate   Common         Mr.            Mrs.         Total
 --------------------------------- ----------------- --------- -------------- -------------- -------------- ------------ --------------
- Bernd Brechts Bücherladen (108)   Invoices to pay                            1 200,00                                   1 200,00
- Reinhards Baumschule (109)        Loans                                                     1 500,00                    1 500,00
- Moulin Rouge (110*)               Debts                       15,00                                        300,00       300,00
- Auto École Verte (111)            Invoices to pay             30,00          600,00                                     600,00
+ Hans Flott & Co (108)             Invoices to pay                            1 200,00                                   1 200,00
+ Bernd Brechts Bücherladen (109)   Loans                                                     1 500,00                    1 500,00
+ Reinhards Baumschule (110*)       Debts                       15,00                                        300,00       300,00
+ Moulin Rouge (111)                Invoices to pay             30,00          600,00                                     600,00
  **Total (4 rows)**                                            **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
 ================================= ================= ========= ============== ============== ============== ============ ==============
 <BLANKLINE>
@@ -128,8 +128,8 @@ Here are some more slave tables.
 ================================= ================= ============== ============ ===========================
  Creditor                          Description       Debt           %            Monthly payback suggested
 --------------------------------- ----------------- -------------- ------------ ---------------------------
- Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
+ Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
  **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
 ================================= ================= ============== ============ ===========================
 <BLANKLINE>
@@ -179,8 +179,8 @@ Something in French
 ================================= ================= ============== ============ =======================
  Créancier                         Description       Dette          %            Remboursement mensuel
 --------------------------------- ----------------- -------------- ------------ -----------------------
- Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
+ Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
  **Total (2 lignes)**                                **2 700,00**   **100,00**   **120,00**
 ================================= ================= ============== ============ =======================
 <BLANKLINE>
@@ -192,8 +192,8 @@ Or the same in English:
 ================================= ================= ============== ============ ===========================
  Creditor                          Description       Debt           %            Monthly payback suggested
 --------------------------------- ----------------- -------------- ------------ ---------------------------
- Bernd Brechts Bücherladen (108)   Invoices to pay   1 200,00       44,44        53,33
- Reinhards Baumschule (109)        Loans             1 500,00       55,56        66,67
+ Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
+ Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
  **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
 ================================= ================= ============== ============ ===========================
 <BLANKLINE>

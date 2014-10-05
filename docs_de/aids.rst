@@ -41,19 +41,19 @@ Hilfearten
 
 Hier eine Liste der Hilfearten, die Lino kennt:
 
->>> ses.show(aids.AidTypes, column_names="name_de confirmed_by_primary_coach body_template")
+>>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================================================= =========================== ============================
- Bezeichnung (de)                                  Primärbegleiter bestätigt   Body template
+ Bezeichnung                                       Primärbegleiter bestätigt   Body template
 ------------------------------------------------- --------------------------- ----------------------------
  Ausländerbeihilfe                                 Ja                          foreigner_income.body.html
  DMH-Übernahmeschein                               Ja                          certificate.body.html
  Eingliederungseinkommen                           Ja                          integ_income.body.html
  Erstattung                                        Ja                          certificate.body.html
  Feste Beihilfe                                    Ja                          fixed_income.body.html
+ Heizkosten                                        Ja                          heating_refund.body.html
  Lebensmittelbank                                  Nein                        food_bank.body.html
  Möbellager                                        Ja                          furniture.body.html
- Heizkosten                                        Ja                          heating_refund.body.html
  Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          certificate.body.html
  Übernahmeschein                                   Ja                          certificate.body.html
  **Total (10 Zeilen)**                             **9**
@@ -116,44 +116,42 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 2 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+<span>Du hast 1 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================ ================= ============== ===== ======= ================================
- Klient                       Hilfeart          Laufzeit von   bis   Autor   Arbeitsablauf
----------------------------- ----------------- -------------- ----- ------- --------------------------------
- EMONTS-GAST Erna (152)       Möbellager        29.05.14                     **Unbestätigt** → [Bestätigen]
- DOBBELSTEIN Dorothée (124)   Übernahmeschein   26.05.14                     **Unbestätigt** → [Bestätigen]
-============================ ================= ============== ===== ======= ================================
+======================== ===================== ============== ===== ======= ================================
+ Klient                   Hilfeart              Laufzeit von   bis   Autor   Arbeitsablauf
+------------------------ --------------------- -------------- ----- ------- --------------------------------
+ FAYMONVILLE Luc (130*)   DMH-Übernahmeschein   28.05.14                     **Unbestätigt** → [Bestätigen]
+======================== ===================== ============== ===== ======= ================================
 <BLANKLINE>
 
 
 Hilfebestätigungen
 ==================
 
+In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 
 >>> translation.activate('de')
-
-Hier eine Liste aller bisher vorgesehenen Bescheinigungstexte:
-
 >>> for at in aids.AidType.objects.exclude(confirmation_type=''):
 ...    M = at.confirmation_type.model
 ...    qs = M.objects.filter(granting__aid_type=at)
 ...    obj = qs[0]
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
-...    print("%s : %s" % (unicode(at), txt))
-Eingliederungseinkommen : vom <b>23. Mai 2014</b> bis zum <b>24. Mai 2014</b> das durch Gesetz vom 26. Mai 2002 eingeführte <b>Eingliederungseinkommen</b> in Höhe von <b>123,00 €/Monat</b> (Kategorie: <b>Zusammenlebend</b>) bezieht.
-Ausländerbeihilfe : vom <b>24. Mai 2014</b> bis zum <b>25. Mai 2014</b> eine laut Gesetz vom 2. April 1965 eingeführte <b>Sozialhilfe für Ausländer</b> in Höhe von <b>234,00 €/Monat</b> (Kategorie: <b>Alleinstehend</b>) bezieht
-Feste Beihilfe : vom <b>25. Mai 2014</b> bis zum <b>26. Mai 2014</b> eine feste Beihilfe bezieht.
-Erstattung : vom <b>26. Mai 2014</b> bis zum <b>27. Mai 2014</b> Erstattung erhält.
-Übernahmeschein : vom <b>27. Mai 2014</b> bis zum <b>28. Mai 2014</b> Übernahmeschein erhält.
-Übernahme von Arzt- und/oder Medikamentenkosten : für den Zeitraum vom <b>28. Mai 2014</b> bis zum <b>29. Mai 2014</b> Anrecht auf Übernahme folgender <b>Arzt- und/oder Medikamentenkosten</b> durch das ÖSHZ hatte: <ul><li><b>Arzthonorare</b> in Höhe der LIKIV-Tarife für die Visite beim Arzt <b>Waltraud Waldmann</b>. </li><li><b>Arzneikosten</b> für die durch <b>Waltraud Waldmann</b> verschriebenen und <b>Apotheke Reul</b> ausgehändigten Medikamente. </li></ul> Falls weitere Behandlungen notwendig sind, benötigen wir unbedingt einen Kostenvoranschlag. Danke.
-DMH-Übernahmeschein : vom <b>29. Mai 2014</b> bis zum <b>30. Mai 2014</b> DMH-Übernahmeschein erhält.
-Möbellager : vom <b>30. Mai 2014</b> bis zum <b>31. Mai 2014</b> Möbellager erhält.
-Heizkosten : vom <b>31. Mai 2014</b> bis zum <b>1. Juni 2014</b> Heizkosten erhält.
-Lebensmittelbank : vom <b>1. Juni 2014</b> bis zum <b>2. Juni 2014</b> aus Gründen der sozial-finanziellen Lage Anrecht auf eine Sozialhilfe in Naturalien durch Nutzung der Lebensmittelbank hatte.
+...    print("%s : %d" % (unicode(at), qs.count()))
+Eingliederungseinkommen : 2
+Ausländerbeihilfe : 2
+Feste Beihilfe : 2
+Erstattung : 2
+Übernahmeschein : 2
+Übernahme von Arzt- und/oder Medikamentenkosten : 2
+DMH-Übernahmeschein : 2
+Möbellager : 2
+Heizkosten : 2
+Lebensmittelbank : 2
 
 Beispiele
 =========
@@ -178,20 +176,21 @@ hier die gleichen Texte als HTML:
         ex = obj.printed_by
         if ex:
             print(header(5, unicode(at)))
-            print(".. complextable::")
+            print(header(6, "Beispiel"))
             print("")
-            print("  ::")
-            print("")
-            for ln in ex.body_template_content(ses).splitlines():
-                print("    " + ln)
-            print("")
-            print("  <NEXTCELL>")
-            print("")
-            print("  .. raw:: html")
+            print(".. raw:: html")
             print("")
             for ln in ex.preview(ses).splitlines():
                 print("    " + ln)
             print("")
+    
+            print(header(6, "Vorlage"))
+            print("::")
+            print("")
+            for ln in ex.body_template_content(ses).splitlines():
+                print("    " + ln)
+            print("")
+
     print("")
 
 

@@ -14,7 +14,7 @@ To run only this test::
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = \
-    'lino_welfare.projects.docs.settings.test'
+    'lino_welfare.projects.docs.settings.doctests'
 
 from lino.utils.test import DemoTestCase
 from django.contrib.contenttypes.models import ContentType
@@ -29,11 +29,11 @@ class MyTestCase(DemoTestCase):
         json_fields = 'count rows title success no_data_text'
         kw = dict(fmt='json', limit=10, start=0)
         self.demo_get(
-            'rolf', 'api/contacts/Companies', json_fields, 47, **kw)
+            'rolf', 'api/contacts/Companies', json_fields, 48, **kw)
         self.demo_get(
             'rolf', 'api/households/Households', json_fields, 7, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Partners', json_fields, 159, **kw)
+            'rolf', 'api/contacts/Partners', json_fields, 160, **kw)
         self.demo_get(
             'rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
         self.demo_get(
@@ -51,22 +51,22 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Persons', json_fields, 98, **kw)
-        self.demo_get('rolf', 'api/pcsw/Clients', json_fields, 29, **kw)
+            'rolf', 'api/contacts/Persons', json_fields, 99, **kw)
+        self.demo_get('rolf', 'api/pcsw/Clients', json_fields, 30, **kw)
         self.demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
         self.demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
         self.demo_get(
-            'rolf', 'api/newcomers/NewClients', json_fields, 28, **kw)
+            'rolf', 'api/newcomers/NewClients', json_fields, 27, **kw)
         self.demo_get(
             'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
-            2, mt=50, mk=119, **kw)
-        self.demo_get('alicia', 'api/integ/Clients', json_fields, 3, **kw)
-        self.demo_get('hubert', 'api/integ/Clients', json_fields, 16, **kw)
+            2, mt=50, mk=120, **kw)
+        self.demo_get('alicia', 'api/integ/Clients', json_fields, 6, **kw)
+        self.demo_get('hubert', 'api/integ/Clients', json_fields, 17, **kw)
         
         alicia = settings.SITE.user_model.objects.get(username='alicia')
         # rolf working as alicia:
         kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
-        self.demo_get('rolf', 'api/integ/Clients', json_fields, 3, **kw)
+        self.demo_get('rolf', 'api/integ/Clients', json_fields, 6, **kw)
         
         kw = dict()
         json_fields = 'count rows'
