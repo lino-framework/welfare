@@ -161,6 +161,8 @@ class AidType(ContactRelated, dd.BabelNamed):
 
     @dd.chooser(simple_values=True)
     def body_template_choices(cls, confirmation_type):
+        if not confirmation_type:
+            return []
         tplgroup = confirmation_type.model.get_template_group()
         return settings.SITE.list_templates('.body.html', tplgroup)
 
@@ -289,9 +291,7 @@ class Confirmable(dd.Model):
             addr = self.client.get_address_by_type(at)
         else:
             addr = self.client.get_primary_address()
-
-        lines = list(addr.address_location_lines())
-        return addr.address_type.living_text + ' ' + ', '.join(lines)
+        return addr.living_at_text()
 
     def confirmation_when(self):
         if self.start_date and self.end_date:

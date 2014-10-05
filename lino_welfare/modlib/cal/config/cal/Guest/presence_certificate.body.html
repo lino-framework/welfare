@@ -6,6 +6,25 @@
 
 {% block body %}
 
+<p>{{tr(en="We hereby certify that",
+        de="Hiermit bescheinigen wir, dass",
+        fr="Par la présente nous certifions que")}}</p>
+
+<p class="EnhancedPar">
+{{obj.client.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{obj.client.national_id}}
+<br>
+{{obj.client.get_primary_address().living_at_text()}}
+{#
+{{tr(de="wohnhaft zu",fr="domicilié"+obj.client.mf("","e","(e)")+" à")}}
+{{', '.join(obj.client.address_location_lines())}}
+#}
+</p>
+
+
+
 {{ super() }}
 
 <p>
