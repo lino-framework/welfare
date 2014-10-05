@@ -24,15 +24,22 @@
 </p>
 
 
-
 {{ super() }}
 
 <p>
-{% set client = this.owner %}
-{% set times = (this.owner.waiting_since, this.owner.gone_since) %}
-{{tr(en="was present today between %s and %s o'clock",
-    de="am heutigen Tage in der Zeit von %s Uhr bis %s Uhr",
-    fr="s'est présenté aujourd'hui entre %s h et %s h") % times}}
+{{tr(en="was present today", 
+     de="am heutigen Tage", 
+     fr="s'est présenté aujourd'hui")}}
+{% set times = (dd.strftime(obj.waiting_since), dd.strftime(obj.gone_since)) %}
+<b>{%- if times[1] %}
+{{tr(en="between %s and %s o'clock",
+    de="in der Zeit von %s Uhr bis %s Uhr",
+    fr="entre %s h et %s h") % times}}
+{% else %}
+{{tr(en="at %s o'clock",
+    de="um %s Uhr",
+    fr="à %s h") % times[0] }}
+{% endif -%}</b>
 {{tr(en="in the centre for administrative reasons.",
 de="im ÖSHZ zwecks Regelung administrativer Angelegenheiten vorstellig wurde.",
     fr="au CPAS pour régler des affaires administratives.")}}

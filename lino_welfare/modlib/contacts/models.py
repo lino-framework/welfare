@@ -84,9 +84,10 @@ für neue Operationen nicht benutzt werden können.""")
         return super(Partner, self).disable_delete(ar)
 
     def __unicode__(self):
+        s = self.get_full_name(nominative=True)
         if self.is_obsolete:
-            return "%s (%s*)" % (self.get_full_name(), self.pk)
-        return "%s (%s)" % (self.get_full_name(), self.pk)
+            return "%s (%s*)" % (s, self.pk)
+        return "%s (%s)" % (s, self.pk)
 
 
 class PartnerDetail(PartnerDetail):
