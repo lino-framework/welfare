@@ -16,6 +16,7 @@ Miscellaneous
     >>> from django.utils import translation
     >>> from django.test import Client
     >>> import json
+    >>> import os
 
 
 .. _welfare.tested.notes:
@@ -109,26 +110,26 @@ The demo fixtures also generated some excerpts:
 ==== ====================== ===========================================
  ID   Excerpt Type           Controlled by
 ---- ---------------------- -------------------------------------------
- 1    Income confirmation    **Income confirmation #1**
- 2    Income confirmation    **Income confirmation #2**
- 3    Income confirmation    **Income confirmation #3**
- 4    Income confirmation    **Income confirmation #4**
- 5    Income confirmation    **Income confirmation #5**
- 6    Income confirmation    **Income confirmation #6**
- 7    Simple confirmation    **Simple confirmation #1**
- 8    Simple confirmation    **Simple confirmation #2**
- 9    Simple confirmation    **Simple confirmation #3**
- 10   Simple confirmation    **Simple confirmation #4**
- 11   Refund confirmation    **Refund confirmation #1**
- 12   Refund confirmation    **Refund confirmation #2**
- 13   Refund confirmation    **Refund confirmation #3**
- 14   Refund confirmation    **Refund confirmation #4**
- 15   Simple confirmation    **Simple confirmation #5**
- 16   Simple confirmation    **Simple confirmation #6**
- 17   Simple confirmation    **Simple confirmation #7**
- 18   Simple confirmation    **Simple confirmation #8**
- 19   Simple confirmation    **Simple confirmation #9**
- 20   Simple confirmation    **Simple confirmation #10**
+ 1    Income confirmation    **5/22/14/116/EiEi/1**
+ 2    Income confirmation    **5/22/14/116/EiEi/2**
+ 3    Income confirmation    **5/23/14/177/Ausländerbeihilfe/3**
+ 4    Income confirmation    **5/23/14/177/Ausländerbeihilfe/4**
+ 5    Income confirmation    **5/24/14/118/Feste Beihilfe/5**
+ 6    Income confirmation    **5/24/14/118/Feste Beihilfe/6**
+ 7    Simple confirmation    **5/25/14/180/Erstattung/1**
+ 8    Simple confirmation    **5/25/14/180/Erstattung/2**
+ 9    Simple confirmation    **5/26/14/124/Übernahmeschein/3**
+ 10   Simple confirmation    **5/26/14/124/Übernahmeschein/4**
+ 11   Refund confirmation    **5/27/14/179/AMK/1**
+ 12   Refund confirmation    **5/27/14/179/AMK/2**
+ 13   Refund confirmation    **5/28/14/128/AMK(DMH)/3**
+ 14   Refund confirmation    **5/28/14/128/AMK(DMH)/4**
+ 15   Simple confirmation    **5/29/14/152/Furniture/5**
+ 16   Simple confirmation    **5/29/14/152/Furniture/6**
+ 17   Simple confirmation    **5/30/14/129/Heating costs/7**
+ 18   Simple confirmation    **5/30/14/129/Heating costs/8**
+ 19   Simple confirmation    **5/31/14/127/Food bank/9**
+ 20   Simple confirmation    **5/31/14/127/Food bank/10**
  21   Budget                 **Budget 1 for Xhonneux-Kasennova (228)**
  22   Job contract           **Job contract#1 (Bernd Brecht)**
  23   ISIP                   **ISIP#1 (Alfons Ausdemwald)**
@@ -164,4 +165,26 @@ Link to this copy of the resulting file:
     Now the same in more generic. We write a formatter function and then
     call it on every excerpt. See the source code of this page if you want
     to see how we generated the following list:
+
+
+Editing document template of an excerpt
+=======================================
+
+Here we want to see what the `edit_template` action says, especially
+when called on an excerpt where Lino has two possible locations.
+
+(Note: the following test is the reason why `is_local_project_dir` is
+`True` in `lino_welfare.projects.docs.settings.doctests`.)
+
+>>> lcd = os.path.join(settings.SITE.project_dir, 'config')
+>>> # rt.makedirs_if_missing(lcd)
+>>> obj = excerpts.Excerpt.objects.get(pk=1)
+>>> rv = ses.run(obj.edit_template)
+>>> print(rv['info_message'])
+...     #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+Gonna copy ...lino_welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts/Default.odt
+>>> print(rv['message'])
+...     #doctest: +NORMALIZE_WHITESPACE
+Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
+Sind Sie sicher?
 

@@ -106,42 +106,6 @@ phonetic algorithms:
 >>> check("Bernhard", "Bodard")
 []
 
-UsersWithClients
-----------------
-
->>> ses.show(integ.UsersWithClients)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-==================== ============ =========== ======== ======= ========= ================= ================ ========
- Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
--------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns                   1           2        2       1         5                 6                6
- Hubert Huppertz      3            2           4        4       4         11                17               17
- Mélanie Mélard       4            3           3        2       2         10                14               14
- **Total (3 rows)**   **7**        **6**       **9**    **8**   **7**     **26**            **37**           **37**
-==================== ============ =========== ======== ======= ========= ================= ================ ========
-<BLANKLINE>
-
-
-Printing UsersWithClients to pdf
---------------------------------
-
-User problem report:
-
-  | pdf-Dokument aus Startseite erstellen:
-  | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
-
-The following lines reproduced this problem 
-(and passed when it was fixed):
-
->>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
->>> res = client.get(url,REMOTE_USER='rolf')  #doctest: +SKIP
->>> print(res.status_code)  #doctest: +SKIP
-200
->>> result = json.loads(res.content)  #doctest: +SKIP
->>> print(result)  #doctest: +SKIP
-{u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
-
-
 
 eID card summary
 ----------------

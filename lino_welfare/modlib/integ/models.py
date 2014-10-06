@@ -121,7 +121,7 @@ class Clients(pcsw.Clients):
 class UsersWithClients(dd.VirtualTable):
 
     """
-    A customized overview table.
+    An overview table for agents of the integration service.
     """
     #~ debug_permissions = True
     required = dict(user_groups='coaching newcomers')
@@ -188,14 +188,13 @@ class UsersWithClients(dd.VirtualTable):
 def on_database_ready(sender, **kw):
     """
     Builds columns dynamically from the :class:`PersonGroup` database table.
-    
+
     This must also be called before each test case.
     """
     self = UsersWithClients
     self.column_names = 'user:10'
     #~ try:
     if True:
-        # for pg in pcsw.PersonGroup.objects.filter(ref_name__isnull=False).order_by('ref_name'):
         for pg in pcsw.PersonGroup.objects.exclude(ref_name='').order_by('ref_name'):
             def w(pg):
                 # we must evaluate `today` for each request, not only once when
@@ -204,8 +203,9 @@ def on_database_ready(sender, **kw):
 
                 def func(self, obj, ar):
                     return Clients.request(
-                        param_values=dict(group=pg,
-                                          coached_by=obj, start_date=today, end_date=today))
+                        param_values=dict(
+                            group=pg,
+                            coached_by=obj, start_date=today, end_date=today))
                 return func
             vf = dd.RequestField(w(pg), verbose_name=pg.name)
             self.add_virtual_field('G' + pg.ref_name, vf)

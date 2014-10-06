@@ -18,8 +18,6 @@ class Site(Site):
     hidden_languages = None
     uppercase_last_name = True
 
-    the_demo_date = datetime.date(2014, 05, 22)
-
     demo_fixtures = """std few_languages props all_countries
     demo cbss mini demo2 local """.split()
 
