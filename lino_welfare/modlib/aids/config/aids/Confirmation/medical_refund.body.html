@@ -2,7 +2,6 @@
 
 {% block what %}
 <p>
-{% if language == 'de' %}
 für den Zeitraum {{when}} Anrecht auf
 Übernahme folgender <b>Arzt- und/oder Medikamentenkosten</b>
 durch das ÖSHZ {{iif(obj.is_past(), "hatte", "hat")}}:
@@ -25,12 +24,44 @@ beim {{obj.doctor_type}} {% else %} bei
 {%- endif -%}
 </ul>
 
-Falls weitere Behandlungen notwendig sind, benötigen wir unbedingt
+<p>Falls weitere Behandlungen notwendig sind, benötigen wir unbedingt
 einen Kostenvoranschlag. Danke.
-
-{% else %}
-{{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}} du ... remboursement de frais médicaux.
-{% endif %}
 </p>
+
+{% if obj.granting.aid_type.short_name == "DMH" %}
+<p><b>im Rahmen der dringenden medizinischen Hilfe.
+Bitte in jedem Fall die SIS-Karte prüfen und mit der Krankenkasse
+abrechnen.
+<br/>Bitte die beigefügte Bescheinigung ausgefüllt an das ÖSHZ zurück
+senden!</b>
+</p>
+{% endif %}
+
+
+<h1 class="PageBreakHeader">Attestation</h1>
+
+<p>Je sousigné, {{this.owner.doctor}},
+<br>
+<br>docteur en médecine, 
+<br>
+<br>déclare avoir reçu en consultation en date du {{fds(this.owner.date)}}
+<br>
+<br>{{this.owner.client.get_full_name()}}
+<br>
+<br>domicilié{{this.owner.client.mf('', 'e', '(e)')}} à <b>{{', '.join(this.owner.client.address_location_lines())}}</b>
+
+<br>dans le cadre de l'aide médicale urgente accordée conformément à
+l'article 57, §2, de la loi du 8 juillet 1976 organique des CPAS aux
+demandeurs d'asile déboutés ou à d'autres étranger en séjour illégal
+dans le Royaume et qui se trouvent dans un état d'indigence.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>................................................
+<br>(signature et cachet du médecin)
+</p>
+
 {% endblock %}
