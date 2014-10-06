@@ -42,4 +42,31 @@ Dr. {{aid.doctor}}
 {% if aid.remark %}
 <p>{{ aid.remark }}</p>
 {% endif %}
+
+<h1 class="PageBreakHeader">Attestation<h1>
+
+<p>Je sousigné, {{this.owner.doctor}},
+<br>
+<br>docteur en médecine, 
+<br>
+<br>déclare avoir reçu en consultation en date du {{fds(this.owner.date)}}
+<br>
+<br>{{this.owner.client.get_full_name()}}
+<br>
+<br>domicilié{{this.owner.client.mf('', 'e', '(e)')}} à <b>{{', '.join(this.owner.client.address_location_lines())}}</b>
+
+<br>dans le cadre de l'aide médicale urgente accordée conformément à
+l'article 57, §2, de la loi du 8 juillet 1976 organique des CPAS aux
+demandeurs d'asile déboutés ou à d'autres étranger en séjour illégal
+dans le Royaume et qui se trouvent dans un état d'indigence.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>................................................
+<br>(signature et cachet du médecin)
+</p>
+
 {% endblock %}
