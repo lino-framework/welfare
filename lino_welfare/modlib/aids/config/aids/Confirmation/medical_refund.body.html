@@ -28,7 +28,9 @@ beim {{obj.doctor_type}} {% else %} bei
 einen Kostenvoranschlag. Danke.
 </p>
 
+{{ repr(obj.granting.aid_type.short_name) }}
 {% if obj.granting.aid_type.short_name == "DMH" %}
+{% if True %}
 <p><b>im Rahmen der dringenden medizinischen Hilfe.
 Bitte in jedem Fall die SIS-Karte prüfen und mit der Krankenkasse
 abrechnen.
@@ -36,8 +38,9 @@ abrechnen.
 senden!</b>
 </p>
 {% endif %}
+{% endblock %}
 
-
+{% block trailer %}
 <h1 class="PageBreakHeader">Attestation</h1>
 
 <p>Je sousigné, {{this.owner.doctor}},
@@ -63,5 +66,4 @@ dans le Royaume et qui se trouvent dans un état d'indigence.
 <br>................................................
 <br>(signature et cachet du médecin)
 </p>
-
 {% endblock %}
