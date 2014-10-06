@@ -291,7 +291,8 @@ class Confirmable(dd.Model):
             addr = self.client.get_address_by_type(at)
         else:
             addr = self.client.get_primary_address()
-        return addr.living_at_text()
+        if addr is not None:
+            return addr.living_at_text()
 
     def confirmation_when(self):
         if self.start_date and self.end_date:

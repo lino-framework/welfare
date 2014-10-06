@@ -222,11 +222,13 @@ def get_household_summary(person, today=None, adult_age=18):
     l = []
     if adults:
         l.append(
-            ungettext("%(count)d adult", "%(count)d adults") % dict(
+            ungettext(
+                "%(count)d adult", "%(count)d adults", adults) % dict(
                 count=adults))
     if children:
         l.append(
-            ungettext("%(count)d child", "%(count)d children") % dict(
+            ungettext(
+                "%(count)d child", "%(count)d children", children) % dict(
                 count=children))
     return _(" and ").join(l)
 
