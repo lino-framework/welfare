@@ -17,7 +17,7 @@
 {{', '.join(this.project.address_location_lines())}}
 </p>
 
-{% if aid.urgent %}
+{% if obj.granting.aid_type.short_name == "DMH" %}
 <p><b>im Rahmen der dringenden medizinischen Hilfe.
 Bitte in jedem Fall die SIS-Karte prüfen und mit der Krankenkasse
 abrechnen.
@@ -43,7 +43,7 @@ Dr. {{aid.doctor}}
 <p>{{ aid.remark }}</p>
 {% endif %}
 
-<p class="PageBreakHeader">Attestation<h1>
+<p class="PageBreakHeader">Attestation</p>
 
 <p>Je sousigné, {{this.owner.doctor}},
 <br>
