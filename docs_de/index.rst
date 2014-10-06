@@ -8,11 +8,9 @@ Lino für ÖSHZ
 Deutschsprachige Dokumentation.
 
 
-Inhalt
-======
-
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    klienten
    partner
@@ -22,3 +20,4 @@ Inhalt
    aids
 
    
+

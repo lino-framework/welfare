@@ -554,7 +554,7 @@ class Confirmation(
 
     def __unicode__(self):
         if self.granting is not None:
-            return '%s / %s' % (self.granting, self.pk)
+            return '%s/%s' % (self.granting, self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def on_create(self, ar):
