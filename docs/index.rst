@@ -4,16 +4,17 @@
 Lino Welfare
 ============
 
-Welcome to the *Lino Welfare* project homepage.
+Welcome to the *Lino Welfare* project homepage.  
+
+This document tree is meant for system administrators and developers.
+For end users there are also less technical document trees in `French
+<http://fr.welfare.lino-framework.org>`_ and `German
+<http://de.welfare.lino-framework.org>`_.
 
 .. py2rst::
 
   import lino_welfare
   print(lino_welfare.SETUP_INFO['long_description'])
-
-This document is meant for system administrators and developers.
-there is also a :ref:`user manual <welfare.userdocs>`,
-which might be better suited for end-users.
 
 
 Content
@@ -22,7 +23,6 @@ Content
 .. toctree::
    :maxdepth: 1
 
-   fr/index
    admin/index
    ref/index
    releases/index
