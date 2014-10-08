@@ -1,5 +1,8 @@
-To-Do liste "Lino pour CPAS"
-============================
+Liste des tâches
+================
+
+Voici --en langage utilisateurs mais classifiés par le développeur--
+une liste des questions à discuter et choses à faire.
 
 .. contents:: 
    :local:
@@ -7,10 +10,6 @@ To-Do liste "Lino pour CPAS"
 
 à voir ensemble
 ===============
-
-#.  Vous vouliez ajouter une colonne "Suivi par" dans la composition
-    de ménage. Mais quelle serait la différence entre ce champ et un
-    accompagnement?
 
 #.  Recherche d'emploi active :
 
@@ -34,15 +33,16 @@ To-Do liste "Lino pour CPAS"
 à programmer
 ============
 
-#.  Remplacer "Accompagnement" par "Intervention", "Accompagnant" par
-    "Intervenant"
+#.  Vocabulaire: remplacer "Accompagnement" par "Intervention" et
+    "Accompagnant" par "Intervenant".
 
 #.  Ajouter un champ "Garde enfant" par ménage. Texte libre. 
 
 #.  Soit empècher de créer des interventions dans l'onglet "Personne"
-    (après avoir terminé ticket #104), soit faire en sorte que Lino
-    envoye un avertissement par courier aussi dans le cas d'une
-    création spontanée d'intervention.
+    (après avoir terminé `ticket #104
+    <http://lino-framework.org/tickets/104.html>`_), soit faire en
+    sorte que Lino envoye un avertissement par courier aussi dans le
+    cas d'une création spontanée d'intervention.
 
 #.  "EnrolmentsByPupil" : Renommer en "Orientations internes en attente"
 
@@ -64,5 +64,23 @@ To-Do liste "Lino pour CPAS"
 à installer
 ===========
 
-#)  Navigateur polymorphique pour passer facilement de la vue
-    "Bénéficiaire" à la vue "Personne"
+#.  Navigateur polymorphique pour passer facilement à la vue
+    "Bénéficiaire" en étant sur une "Personne" (#8).
+
+Problèmes connus
+================
+
+#.  Il est difficile d'ouvrir une boite de sélection (combobox) en mode
+    "tableau" (#10).
+
+Demandes refusées
+=================
+
+#.  Vous vouliez ajouter une colonne "Suivi par" dans la composition
+    de ménage. Pour l'instant cette info s'obtient indirectement en
+    cliquant sur la petite flèche en face du nom dans la colonne
+    "Personne", puis passer en vue bénéficiaire, puis passer à
+    l'onglet "Intervenants". Je peux afficher cette information
+    directement, mais le voulez-vous vraiment? Quid s'il y a plusieurs
+    intervenants?
+

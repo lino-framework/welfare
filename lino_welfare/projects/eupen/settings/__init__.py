@@ -17,6 +17,7 @@ class Site(Site):
     languages = 'de fr nl'  # tested docs rely on this distribution
     hidden_languages = None
     uppercase_last_name = True
+    help_url = "http://de.welfare.lino-framework.org"
 
     demo_fixtures = """std few_languages props all_countries
     demo cbss mini demo2 local """.split()

@@ -35,7 +35,6 @@ Zu besprechen
 #.  Soll Lino prüfen, ob Periode der Bescheinigung auch innerhalb der
     Periode des Beschlusses liegt?
 
-
 #.  Wie soll es funktionieren, wenn ein einmal festgelegter und
     offiziel mitgeteilter Termin dann doch verschoben werden muss?
     Momentan kann man den Terminzustand auf "Verlegt" setzen und dann
@@ -50,6 +49,9 @@ Zu besprechen
     erfüllen soll.  Ich habe notiert "Wann war ein Klient das letzte Mal
     da? Was ist alles passiert?", aber das reicht mir nicht. Bitte ein
     konkretes Beispiel beschreiben. 
+
+    Eine Übersicht der "Historie" ist ein fundamentales
+    Arbeitsinstrument.
 
 #.  Empfangsmodul: 
     Kann ein Klient eigentlich auf zwei Agenten zugleich warten? 

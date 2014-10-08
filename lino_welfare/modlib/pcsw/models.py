@@ -842,7 +842,7 @@ def only_coached_by(qs, user):
     return qs.filter(coachings_by_client__user=user).distinct()
 
 
-def only_coached_on(qs, today, join=None):
+def only_coached_on(qs, period, join=None):
     """
     Add a filter to the Queryset `qs` (on model Client) 
     which leaves only the clients that are (or were or will be) coached 
@@ -851,17 +851,21 @@ def only_coached_on(qs, today, join=None):
     n = 'coachings_by_client__'
     if join:
         n = join + '__' + n
-    return qs.filter(only_active_coachings_filter(today, n)).distinct()
+    return qs.filter(only_active_coachings_filter(period, n)).distinct()
 
 
 def only_active_coachings_filter(period, prefix=''):
     """
     """
     assert len(period) == 2
-    return Q(
-        Q(**{prefix + 'end_date__isnull': True}
-          ) | Q(**{prefix + 'end_date__gte': period[0]}),
-        Q(**{prefix + 'start_date__lte': period[1]}))
+    args = []
+    if period[0]:
+        args.append(Q(
+            **{prefix + 'end_date__isnull': True}) | Q(
+            **{prefix + 'end_date__gte': period[0]}))
+    if period[1]:
+        args.append(Q(**{prefix + 'start_date__lte': period[1]}))
+    return Q(*args)
 
 
 def add_coachings_filter(qs, user, period, primary):
