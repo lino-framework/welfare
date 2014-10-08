@@ -24,3 +24,4 @@ peuvent éditer directement.
    glossaire
    jobs
    contribuer
+   todo

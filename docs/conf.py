@@ -138,7 +138,8 @@ html_last_updated_fmt = '%b %d, %Y'
 # Custom sidebar templates, maps document names to template names.
 # http://sphinx.pocoo.org/latest/config.html#confval-html_sidebars
 html_sidebars = {
-    '**': ['globaltoc.html', 'searchbox.html', 'links.html'],
+    '**': ['languages.html', 'globaltoc.html',
+           'searchbox.html', 'links.html'],
 }
 
 
