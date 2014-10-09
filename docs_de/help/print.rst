@@ -4,7 +4,12 @@ Mein druckbares Dokument öffnet sich nicht
 
 Das kann diverse Gründe haben.
 
-- Ihr Browser ist eingestellt, dass er Popup-Fenster verweigern soll
+#.  Der Browser verhindert, dass das Dokument (in einem neuen Fenster)
+    geöffnet wird. Weil er so eingestellt wurde, dass er Popup-Fenster
+    verweigert.
 
-- Das Dokument soll über :ref:`davlink` bearbeitet werden, aber Java
-  macht Probleme.
+#.  Das Dokument soll über :ref:`davlink` bearbeitet werden, aber Java
+    macht Probleme. Gelegentlich dauert es einfach nur lange, bis die
+    Office-Anwendung startet.  Oder aber wir haben mit einem der
+    berüchtigten Ausführungserlaubnis-Problemen von Java zu tun.
+
