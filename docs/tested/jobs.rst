@@ -176,11 +176,13 @@ caused a "NotImplementedError: <i> inside <text:p>" traceback
 when one of the jobs had a remark. 
 
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
->>> ses.run(obj.do_print)
+>>> rv = ses.run(obj.do_print)
+>>> print(rv['success'])
+True
+>>> print(rv['open_url'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-{'open_url': u'/.../jobs.JobsOverview.odt',
- 'success': True}
+/.../jobs.JobsOverview.odt
 
 This bug was fixed :blogref:`20130423`.
-Note: the ``webdav/`` is only there when :attr:`dd.Site.user_java` is `True`.
+Note: the ``webdav/`` is only there when :attr:`dd.Site.use_java` is `True`.
 
