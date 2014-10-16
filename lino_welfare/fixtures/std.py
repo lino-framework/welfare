@@ -54,6 +54,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     yield attType(
         build_method='appyrtf',
         template='cv.odt',
+        shortcut="cvs_emitted",
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
         **babelkw('name',

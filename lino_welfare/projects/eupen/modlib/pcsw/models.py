@@ -167,7 +167,7 @@ class ClientDetail(dd.FormLayout):
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30
     is_cpas is_senior is_obsolete
-    created modified
+    created modified cvs_emitted
     remarks:30 remarks2:30
     contacts.RolesByPerson
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))

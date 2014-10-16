@@ -710,6 +710,10 @@ class Client(contacts.Person,
         return E.div(*elems)
 
 
+from lino.modlib.excerpts.mixins import Shortcuts
+Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
+
+
 class ClientDetail(dd.FormLayout):
 
     main = "general contact coaching aids_tab \
