@@ -58,6 +58,9 @@ class SimpleTests(BaseTestCase):
 
 class DocsTests(BaseTestCase):
     
+    def test_households(self):
+        return self.run_simple_doctests('docs/tested/households.rst')
+
     def test_integ(self):
         return self.run_simple_doctests('docs/tested/integ.rst')
 

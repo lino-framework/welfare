@@ -31,6 +31,7 @@ from lino.modlib.cal.utils import WORKDAYS
 
 from lino_welfare.modlib.isip.models import OverlappingContractsTest
 
+aids = dd.resolve_app('aids')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
@@ -1206,15 +1207,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 user=hubert,
                 valid_until=settings.SITE.demo_date(360+i*10),
                 type=UPLOAD_TYPES.pop())
-
-    # def person2client(f, l):
-    #    obj = contacts.Person.objects.get(first_name=f, last_name=l)
-    #    mti.insert_child(obj, pcsw.Client)
-
-    # person2client("Paul", "Frisch")
-    # person2client("Bruno", "Braun")
-
-
 
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

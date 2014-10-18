@@ -8,6 +8,7 @@ Miscellaneous
 ..
   This document is part of the test suite.
   To test only this document, run::
+
     $ python setup.py test -s tests.DocsTests.test_misc
 
 ..  
@@ -128,15 +129,18 @@ The demo fixtures also generated some excerpts:
  16   Simple confirmation    **5/29/14/152/Furniture/6**
  17   Simple confirmation    **5/30/14/129/Heating costs/7**
  18   Simple confirmation    **5/30/14/129/Heating costs/8**
- 19   Simple confirmation    **5/31/14/127/Food bank/9**
- 20   Simple confirmation    **5/31/14/127/Food bank/10**
- 21   Budget                 **Budget 1 for Xhonneux-Kasennova (228)**
- 22   Job contract           **Job contract#1 (Bernd Brecht)**
- 23   ISIP                   **ISIP#1 (Alfons Ausdemwald)**
- 24   Presence certificate   **Guest #1 (22.05.2014)**
- 25   Curriculum vitae       **AUSDEMWALD Alfons (116)**
- 26   eID sheet              **AUSDEMWALD Alfons (116)**
- 27   to-do list             **AUSDEMWALD Alfons (116)**
+ 19   Simple confirmation    **5/31/14/127/Clothing costs/9**
+ 20   Simple confirmation    **5/31/14/127/Clothing costs/10**
+ 21   Simple confirmation    **6/1/14/130/Food bank/11**
+ 22   Simple confirmation    **6/1/14/130/Food bank/12**
+ 23   Simple confirmation    **5/22/14/236/Clothing costs**
+ 24   Budget                 **Budget 1 for Xhonneux-Kasennova (228)**
+ 25   Job contract           **Job contract#1 (Bernd Brecht)**
+ 26   ISIP                   **ISIP#1 (Alfons Ausdemwald)**
+ 27   Presence certificate   **Guest #1 (22.05.2014)**
+ 28   Curriculum vitae       **AUSDEMWALD Alfons (116)**
+ 29   eID sheet              **AUSDEMWALD Alfons (116)**
+ 30   to-do list             **AUSDEMWALD Alfons (116)**
 ==== ====================== ===========================================
 <BLANKLINE>
 

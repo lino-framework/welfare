@@ -31,7 +31,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/contacts/Companies', json_fields, 48, **kw)
         self.demo_get(
-            'rolf', 'api/households/Households', json_fields, 7, **kw)
+            'rolf', 'api/households/Households', json_fields, 15, **kw)
         self.demo_get(
             'rolf', 'api/contacts/Partners', json_fields, 160, **kw)
         self.demo_get(

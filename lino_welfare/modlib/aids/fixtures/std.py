@@ -120,14 +120,23 @@ def objects():
         fr="Mobilier")
     kw.update(body_template='furniture.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
-
     yield aidType(**kw)
+
     kw = dd.babelkw(
         'name',
         de="Heizkosten",
         en="Heating costs",
         fr="Frais de chauffage")
     kw.update(body_template='heating_refund.body.html')
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
+    yield aidType(**kw)
+
+    kw = dd.babelkw(
+        'name',
+        de="Kostenübernahme Kleidung",
+        en="Clothing costs",
+        fr="Frais de vêtements")
+    kw.update(body_template='clothing_refund.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 

@@ -18,6 +18,7 @@
 from django.utils.translation import ugettext_lazy as _
 from lino.dd import resolve_model
 from lino.utils import Cycler, ONE_DAY
+from lino.utils import mti
 from lino import dd, rt
 
 
@@ -25,9 +26,11 @@ def objects():
     Granting = rt.modules.aids.Granting
     AidType = rt.modules.aids.AidType
     Person = rt.modules.contacts.Person
+    Client = rt.modules.pcsw.Client
     ClientStates = rt.modules.pcsw.ClientStates
     ClientContactType = rt.modules.pcsw.ClientContactType
     Board = rt.modules.boards.Board
+    ExcerptType = rt.modules.excerpts.ExcerptType
 
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
@@ -91,7 +94,6 @@ def objects():
 
     ses = rt.login('theresia')
 
-    ExcerptType = rt.modules.excerpts.ExcerptType
     for at in rt.modules.aids.AidType.objects.exclude(confirmation_type=''):
         M = at.confirmation_type.model
         et = ExcerptType.get_for_model(M)
@@ -100,3 +102,22 @@ def objects():
             ses.selected_rows = [obj]
             yield et.get_or_create_excerpt(ses)
             
+    def person2client(f, l):
+        obj = Person.objects.get(first_name=f, last_name=l)
+        mti.insert_child(obj, Client)
+
+    person2client("Paul", "Frisch")
+    person2client("Bruno", "Braun")
+
+    obj = Client.objects.get(name="Frisch Paul")
+    at = AidType.objects.get(
+        body_template='clothing_refund.body.html')
+    g = Granting(aid_type=at, client=obj)
+    yield g
+
+    M = at.confirmation_type.model
+    et = ExcerptType.get_for_model(M)
+    ses = rt.login("alicia")
+    ses.selected_rows = [g]
+    yield et.get_or_create_excerpt(ses)
+

@@ -20,10 +20,10 @@ We switch to German because the first PCSW with Lino was the one in Eupen:
 
 We can now refer to every installed app via it's `app_label`.
 For example here is how we can verify here that the demo database 
-has three Budgets:
+has 14 Budgets:
 
 >>> debts.Budget.objects.count()
-6
+14
 
 Or we can retrieve budget no. 3 from the database:
 
@@ -50,7 +50,7 @@ Here is the textual representation of the "Expenses" panel:
  (3012) Strom                           Electricity
  (3020) Festnetz-Telefon und Internet   Telephone & Internet   5,00
  (3021) Handy                           Cell phone             10,00
- (3030) Fahrtkosten                     Transport costs        15,00        Seminar
+ (3030) Fahrtkosten                     Transport costs        15,00        Shopping
  (3030) Fahrtkosten                     Transport costs        15,00        Cinema
  (3031) TEC Busabonnement               Public transport       20,00
  (3032) Benzin                          Fuel                   26,00

@@ -21,6 +21,7 @@ using `manage.py run`.
    cbss
    courses
    newcomers
+   households
    misc
 
 

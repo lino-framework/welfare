@@ -1,0 +1,26 @@
+{% extends "aids/Confirmation/certificate.body.html" %}
+
+{% block intro -%}
+
+<p>
+Wir bescheinigen hiermit, für folgende Personen die Kosten für den Ankauf von
+Kleidung bis in Höhe von 20 EUR zu übernehmen:
+</p>
+
+<p>
+{{ ar.show(rt.modules.households.RefundsByPerson, obj.client) }}
+</p>
+
+{%- endblock %}
+
+{% block what -%}
+
+<p>
+{% if language == 'de' %}
+Die Kostenübernahme ist gültig für ein Jahr ab dem {{fds(obj.start_date)}}.
+{% else %}
+Valable pendant un an à partir du {{fds(obj.start_date)}}.
+{% endif %}
+</p>
+
+{%- endblock %}

@@ -210,37 +210,6 @@ Let's automatize this trick:
 >>> len(links)
 8
 
-.. _paulfrisch:
-
-Paul Frisch
------------
-
-Mr. Paul Frisch is a fictive client for which the demo database
-contains fictive family links. His client id is 196.
-
->>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
-Herr Paul Frisch (236)
-
->>> soup = BeautifulSoup(check('contacts/Persons/236', 'LinksByHuman'))
->>> links = soup.find_all('a')
->>> len(links)
-14
-
->>> print(links[1].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 244 })
-
-These are the family relationships of Paul Frisch:
-
->>> print(soup.get_text(' ', strip=True))
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-Paul ist Vater von Dennis (12 Jahre) Vater von Clara (14 Jahre) Vater
-von Philippe (16 Jahre) Vater von Peter (26 Jahre) Ehemann von Petra
-ZWEITH (45 Jahre) Sohn von Gaby FROGEMUTH (79 Jahre) Sohn von Hubert
-(80 Jahre) Beziehung erstellen als Vater / Sohn Adoptivvater /
-Adoptivsohn Ehemann Verwandter Sonstiger
-
-
 Assigning a coach to a newcomer
 -------------------------------
 

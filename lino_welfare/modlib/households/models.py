@@ -9,6 +9,7 @@ This module extends :mod:`lino.modlib.households.models`
 from __future__ import unicode_literals
 
 import datetime
+from decimal import Decimal
 
 from lino.modlib.households.models import *
 
@@ -52,7 +53,7 @@ class Member(Member, dd.Human, dd.Born):
             for k in person_fields:
                 setattr(self, k, getattr(self.person, k))
         elif not settings.SITE.loading_from_dump:
-            # create Client if appropriate
+            # create Person row if all fields are filled
             has_all_fields = True
             kw = dict()
             for k in person_fields:
@@ -73,16 +74,21 @@ class Member(Member, dd.Human, dd.Born):
         super(Member, self).full_clean()
 
         if not settings.SITE.loading_from_dump:
+            # Auto-create human links between this member and other
+            # household members.
             if self.person_id and self.role and self.household_id:
-                Link = rt.modules.humanlinks.Link
-                if self.role in child_roles:
-                    for pm in Member.objects.filter(
-                            household=self.household, role__in=parent_roles):
-                        Link.check_autocreate(pm.person, self.person)
-                elif self.role in parent_roles:
-                    for cm in Member.objects.filter(
-                            household=self.household, role__in=child_roles):
-                        Link.check_autocreate(self.person, cm.person)
+                if dd.is_installed('humanlinks'):
+                    Link = rt.modules.humanlinks.Link
+                    if self.role in child_roles:
+                        for pm in Member.objects.filter(
+                                household=self.household,
+                                role__in=parent_roles):
+                            Link.check_autocreate(pm.person, self.person)
+                    elif self.role in parent_roles:
+                        for cm in Member.objects.filter(
+                                household=self.household,
+                                role__in=child_roles):
+                            Link.check_autocreate(self.person, cm.person)
 
     def disabled_fields(self, ar):
         rv = super(Member, self).disabled_fields(ar)
@@ -137,17 +143,39 @@ MembersByHousehold.column_names = SiblingsByPerson.column_names
 MembersByHousehold.order_by = SiblingsByPerson.order_by
 MembersByHousehold.auto_fit_column_widths = True
 
-
 ADULT_AGE = datetime.timedelta(days=18*365)
 
 
+class RefundsByPerson(SiblingsByPerson):
+    column_names = "age:10 gender person_info amount"
+
+    @dd.virtualfield(dd.PriceField(_("Amount")))
+    def amount(self, obj, ar):
+        age = obj.get_age(dd.today())
+        if age is None or age <= ADULT_AGE:
+            return Decimal(18)
+        return Decimal(20)
+
+    @dd.displayfield(_("Person"))
+    def person_info(self, obj, ar):
+        elems = [obj.get_full_name(salutation=False)]
+        # elems += [obj.first_name]
+        # if obj.person_id:
+        #     elems += obj.person.get_name_elems(ar)
+        return E.p(*elems)
+
+
 class PopulateMembers(dd.Action):
+    # populate household members from data in humanlinks
     # show_in_bbar = False
     custom_handler = True
     label = _("Populate")
     icon_name = 'lightning'
 
     def run_from_ui(self, ar, **kw):
+        if not dd.is_installed('humanlinks'):
+            return
+        today = dd.today()
         n = 0
         for hh in ar.selected_rows:
             known_children = set()
@@ -157,11 +185,11 @@ class PopulateMembers(dd.Action):
 
             new_children = dict()
             for parent in hh.member_set.filter(role__in=parent_roles):
-                for childlnk in parent.person.children.all():
+                for childlnk in parent.person.humanlinks_children.all():
                     child = childlnk.child
                     if not child.id in known_children:
-                        age = child.get_age()
-                        if age is not None and age <= ADULT_AGE:
+                        age = child.get_age(today)
+                        if age is None or age <= ADULT_AGE:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
                                 cr = MemberRoles.child
@@ -182,18 +210,10 @@ class PopulateMembers(dd.Action):
                             #     childmbr.dependency = MemberDependencies.full
                             childmbr.full_clean()
                             childmbr.save()
-            
+
         ar.success(
             _("Added %d children.") % n, refresh_all=True)
 
-
-# class CreateHousehold(CreateHousehold):
-#     def run_from_ui(self, ar, **kw):
-#         Member = rt.modules.households.Member
-#         super(CreateHousehold, self).run_from_ui(ar, **kw)
-#         def add_children(p):
-#             for child in Link(parent=p, type=LinkTypes.child)
-        
 
 dd.inject_action(
     'households.Household',

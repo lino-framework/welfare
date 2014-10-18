@@ -52,11 +52,12 @@ Hier eine Liste der Hilfearten, die Lino kennt:
  Erstattung                                        Ja                          certificate.body.html
  Feste Beihilfe                                    Ja                          fixed_income.body.html
  Heizkosten                                        Ja                          heating_refund.body.html
+ Kostenübernahme Kleidung                          Ja                          clothing_refund.body.html
  Lebensmittelbank                                  Nein                        food_bank.body.html
  Möbellager                                        Ja                          furniture.body.html
  Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          certificate.body.html
  Übernahmeschein                                   Ja                          certificate.body.html
- **Total (10 Zeilen)**                             **9**
+ **Total (11 Zeilen)**                             **10**
 ================================================= =========================== ============================
 <BLANKLINE>
 
@@ -151,6 +152,7 @@ Erstattung : 2
 DMH-Übernahmeschein : 2
 Möbellager : 2
 Heizkosten : 2
+Kostenübernahme Kleidung : 2
 Lebensmittelbank : 2
 
 Beispiele

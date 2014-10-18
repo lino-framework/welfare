@@ -2,6 +2,23 @@
 Bescheinigungen
 ===============
 
+**Vorbemerkung für Eupener**
+
+  Im Dezember 2015 wird im ÖSHZ Eupen der Empfang von TIM nach Lino
+  umsteigen.  Das, was in TIM als "Bescheinigungen" lief, haben wir
+  für Lino ziemlich stark umgekrempelt.  Auf den ersten Blick scheint
+  das alles viel komplizierter und unflexibler als in TIM.
+  Sozialarbeiter gehen lieber mit Menschen um als mit Computern.
+
+  Aber wir haben Grund zur Hoffnung, dass ihr schon auf den zweiten
+  Blick --nach Eingewöhnung-- erkennen werdet, dass das neue System
+  mit den Hilfebeschlüssen und standardisierten Bescheinigungen eure
+  tägliche Arbeit *spürbar erleichtert*.
+
+  Und nicht nur das: weil das neue System deutlich strukturierter ist,
+  wird es euch langfristig helfen, eure Arbeit *besser* zu machen,
+  also euren Klienten besser zu helfen.
+
 
 Anwesenheitsbescheinigung
 =========================

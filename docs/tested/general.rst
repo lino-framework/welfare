@@ -49,12 +49,12 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        119
- aids.AidType                   21        10
+ aids.AidType                   21        11
  aids.Category                  5         3
- aids.Granting                  10        10
+ aids.Granting                  10        12
  aids.IncomeConfirmation        17        6
  aids.RefundConfirmation        18        4
- aids.SimpleConfirmation        15        10
+ aids.SimpleConfirmation        15        12
  badges.Award                   6         0
  badges.Badge                   5         0
  boards.Board                   7         3
@@ -78,8 +78,8 @@ Test whether :meth:`get_db_overview_rst
  changes.Change                 9         0
  contacts.Company               30        47
  contacts.CompanyType           9         16
- contacts.Partner               26        159
- contacts.Person                33        106
+ contacts.Partner               26        170
+ contacts.Person                33        109
  contacts.Role                  4         10
  contacts.RoleType              6         5
  contenttypes.ContentType       4         113
@@ -91,15 +91,15 @@ Test whether :meth:`get_db_overview_rst
  courses.CourseProvider         31        2
  courses.CourseRequest          10        20
  cv.LanguageKnowledge           9         119
- debts.Actor                    6         12
- debts.Budget                   11        6
- debts.Entry                    16        294
- excerpts.Excerpt               8         27
+ debts.Actor                    6         63
+ debts.Budget                   11        14
+ debts.Entry                    16        686
+ excerpts.Excerpt               8         30
  excerpts.ExcerptType           17        10
- households.Household           29        6
- households.Member              13        12
+ households.Household           29        14
+ households.Member              13        63
  households.Type                5         6
- humanlinks.Link                4         36
+ humanlinks.Link                4         59
  isip.Contract                  22        17
  isip.ContractEnding            6         4
  isip.ContractPartner           6         16
@@ -133,7 +133,7 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    65        61
+ pcsw.Client                    65        63
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         77
