@@ -6,4 +6,3 @@ env.demo_databases.append('lino_welfare.projects.chatelet.settings.demo')
 
 env.use_mercurial = False
 env.apidoc_exclude_pathnames = ['lino_welfare/projects']
-env.doc_trees = ['docs', 'docs_de', 'docs_fr']
