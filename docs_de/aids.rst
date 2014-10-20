@@ -1,66 +1,8 @@
-.. _welfare.tested.aids:
+.. _welfare.de.aids:
 
 ============
 Beihilfen
 ============
-
-..
-  This document is part of the test suite.
-  To test only this document, run::
-    $ python setup.py test -s tests.DocsTests.test_aids
-
-..
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
-    >>> from bs4 import BeautifulSoup
-    >>> from lino.utils import i2d
-    >>> from lino.utils.xmlgen.html import E
-    >>> from lino.runtime import *
-    >>> from django.test import Client
-    >>> from django.utils import translation
-    >>> import json
-    >>> client = Client()
-
-
-
-
->>> ses = rt.login('rolf')
->>> translation.activate('de')
-
-Die Demo-Datenbank ist datiert auf den 22. Mai 2014:
-
->>> print(dd.fdl(dd.demo_date()))
-22. Mai 2014
-
-
-
-Hilfearten
-==========
-
-Hier eine Liste der Hilfearten, die Lino kennt:
-
->>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================================================= =========================== ============================
- Bezeichnung                                       Primärbegleiter bestätigt   Body template
-------------------------------------------------- --------------------------- ----------------------------
- Ausländerbeihilfe                                 Ja                          foreigner_income.body.html
- DMH-Übernahmeschein                               Ja                          certificate.body.html
- Eingliederungseinkommen                           Ja                          integ_income.body.html
- Erstattung                                        Ja                          certificate.body.html
- Feste Beihilfe                                    Ja                          fixed_income.body.html
- Heizkosten                                        Ja                          heating_refund.body.html
- Kostenübernahme Kleidung                          Ja                          clothing_refund.body.html
- Lebensmittelbank                                  Nein                        food_bank.body.html
- Möbellager                                        Ja                          furniture.body.html
- Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          certificate.body.html
- Übernahmeschein                                   Ja                          certificate.body.html
- **Total (11 Zeilen)**                             **10**
-================================================= =========================== ============================
-<BLANKLINE>
-
 
 
 Beschlüsse und Bestätigungen
@@ -85,6 +27,62 @@ Oder wenn jemand Anrecht auf *Übernahme von Arzt- und
 Medikamentenkosten* hat, ist das ein *Beschluss*. Um daraus eine
 *Bescheinigung* zu machen, muss man auch *Apotheke* und *Arzt*
 angeben.
+
+Hilfearten
+==========
+
+Hier eine Liste der Hilfearten, die Lino kennt:
+
+.. django2rst::
+
+   rt.show(aids.AidTypes, column_names="name excerpt_title confirmed_by_primary_coach body_template")
+
+
+
+Bestätigungsarten
+=================
+
+Hier eine Liste der Bestätigungsarten, die Lino kennt:
+
+.. django2rst::
+
+   rt.show(aids.ConfirmationTypes, column_names="text et_template")
+
+
+
+Vorlagen
+========
+
+Beim Generieren einer Bescheinigung werden jeweils *zwei*
+Dokumentvorlagen verwendet: die "Hauptvorlage" und die
+"Textkörper-Vorlage".
+
+Die **Hauptvorlage** ist ein LibreOffice-Dokument, das mit AppyPod
+gerendert wird.  Dort wird das allgemeine Seitenformat definiert,
+unter anderem auch das eventuelle Logo.  Normalerweise verwenden alle
+Auszüge (nicht nur Hilfebestätigungen) die gleiche Hauptvorlage
+"Default.odt".  Man kann diese Vorlage bearbeiten, indem man auf
+irgendeinem Auszug, der sie verwendet, auf den Button "Vorlage
+bearbeiten" klickt.  Geht natürlich nur wenn :ref:`davlink` aktiviert
+ist und man die entsprechenden Rechte hat. Beachte auch, dass diese
+Standard-Hauptvorlage für viele Dokumente verwendet wird.
+
+"Normalerweise" genauer gesagt: Welche Hauptvorlage zu verwenden ist,
+ergibt sich aus der *Auszugsart*, die für die *Bestätigungsart*
+definiert ist (die sich ihrerseits aus der *Hilfeart* ergibt).
+
+Die **Textkörper-Vorlage** `body_template` ist ein HTML-Dokument, das
+mit *Jinja gerendert wird. Welche Textkörper-Vorlage verwendet wird,
+ergibt sich aus der verwendeten *Hilfeart*. Hier die
+Standardkonfiguration:
+
+.. django2rst::
+
+   rt.show(aids.AidTypes, column_names="name body_template")
+
+Eine Beschreibung aller standardmäßig verfügbaren Textkörper-Vorlagen
+gibt es in der technischen Dokumentation (:mod:`welfare.aids`).
+
 
 Bemerkungen
 ===========
@@ -112,48 +110,16 @@ Hilfebeschlüsse
 Alicia hat 2 Hilfebestätigungen zu unterschreiben. Dies kriegt sie als
 Willkommensmeldung unter die Nase gerieben:
 
->>> ses = rt.login('alicia')
->>> translation.activate('de')
->>> for msg in settings.SITE.get_welcome_messages(ses):
-...     print(E.tostring(msg))
-<span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 1 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+.. django2rst::
+
+   from django.utils import translation
+   from lino.utils.xmlgen.html import E
+   ses = rt.login('alicia')
+   translation.activate('de')
+   for msg in settings.SITE.get_welcome_messages(ses):
+       print(E.tostring(msg))
 
 
->>> ses.show(aids.MyPendingGrantings)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================== ===================== ============== ===== ======= ================================
- Klient                   Hilfeart              Laufzeit von   bis   Autor   Arbeitsablauf
------------------------- --------------------- -------------- ----- ------- --------------------------------
- FAYMONVILLE Luc (130*)   DMH-Übernahmeschein   28.05.14                     **Unbestätigt** → [Bestätigen]
-======================== ===================== ============== ===== ======= ================================
-<BLANKLINE>
-
-
-Hilfebestätigungen
-==================
-
-In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
-
->>> translation.activate('de')
->>> for at in aids.AidType.objects.exclude(confirmation_type=''):
-...    M = at.confirmation_type.model
-...    qs = M.objects.filter(granting__aid_type=at)
-...    obj = qs[0]
-...    txt = obj.confirmation_text()
-...    txt = ' '.join(txt.split())
-...    print("%s : %d" % (unicode(at), qs.count()))
-Eingliederungseinkommen : 2
-Ausländerbeihilfe : 2
-Feste Beihilfe : 2
-Erstattung : 2
-Übernahmeschein : 2
-Übernahme von Arzt- und/oder Medikamentenkosten : 2
-DMH-Übernahmeschein : 2
-Möbellager : 2
-Heizkosten : 2
-Kostenübernahme Kleidung : 2
-Lebensmittelbank : 2
 
 Beispiele
 =========

@@ -29,7 +29,7 @@ Paul Frisch
 -----------
 
 Mr. Paul Frisch is a fictive client for which the demo database
-contains fictive family links. His client id is 196.
+contains fictive family links.
 
 >>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
 Mr Paul Frisch (236)

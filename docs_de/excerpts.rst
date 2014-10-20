@@ -35,15 +35,12 @@ Hilfebestätigungen
 
 Siehe :doc:`aids`.
 
-
 .. _welfare.excerpts.examples.de:
 
 Beispiele
 =========
 
 Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
-
-
 
 .. django2rst::
 
@@ -79,4 +76,5 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
     print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.order_by(
         'excerpt_type')]))
    
+
 

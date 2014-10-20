@@ -22,6 +22,7 @@ using `manage.py run`.
    courses
    newcomers
    households
+   aids
    misc
 
 

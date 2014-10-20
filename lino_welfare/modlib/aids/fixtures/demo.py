@@ -110,16 +110,19 @@ def objects():
     person2client("Bruno", "Braun")
 
     # create a clothing_refund granting and excerpt for Paul Frisch:
+    ses = rt.login("alicia")
     obj = Client.objects.get(name="Frisch Paul")
     at = AidType.objects.get(
-        body_template='clothing_refund.body.html')
+        body_template='clothing_bank.body.html')
     g = Granting(aid_type=at, client=obj)
+    g.full_clean()
     yield g
     M = at.confirmation_type.model
     conf = M(client=obj, granting=g)
+    conf.full_clean()
+    conf.on_create(ses)
     yield conf
     et = ExcerptType.get_for_model(M)
-    ses = rt.login("alicia")
     ses.selected_rows = [conf]
     yield et.get_or_create_excerpt(ses)
 

@@ -21,7 +21,7 @@ html_theme = 'alabaster'
 
 
 from django.conf import settings
-settings.SITE.title = "Lino für ÖSHZ"
+settings.SITE.title = "Benutzerhandbuch Lino für ÖSHZ"
 
 primary_domain = 'py'
 

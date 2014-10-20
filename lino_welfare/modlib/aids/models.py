@@ -72,6 +72,16 @@ class ConfirmationTypes(dd.ChoiceList):
     verbose_name_plural = _("Aid confirmation types")
 
     @classmethod
+    def get_column_names(self, ar):
+        return 'name value text et_template *'
+
+    @dd.virtualfield(models.CharField(_("Template"), max_length=20))
+    def et_template(cls, choice, ar):
+        et = rt.modules.excerpts.ExcerptType.get_for_model(choice.model)
+        if et:
+            return et.template
+
+    @classmethod
     def get_for_model(self, model):
         for o in self.objects():
             if o.model is model:
@@ -602,7 +612,8 @@ class Confirmation(
             return at.body_template
 
 
-dd.update_field(Confirmation, 'start_date', verbose_name=_('Period from'))
+dd.update_field(Confirmation, 'start_date', default=dd.today,
+                verbose_name=_('Period from'))
 dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
 # dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
 dd.update_field(Confirmation, 'company',
@@ -876,10 +887,10 @@ class RefundConfirmation(Confirmation):
         'contacts.Company', verbose_name=_("Pharmacy"),
         blank=True, null=True)
 
-    def on_create(self, ar):
-        super(RefundConfirmation, self).on_create(ar)
-        if self.client_id:
-            logger.info("20141003 %s", self.client)
+    # def on_create(self, ar):
+    #     super(RefundConfirmation, self).on_create(ar)
+    #     if self.client_id:
+    #         logger.info("20141003 %s", self.client)
 
     @dd.chooser()
     def doctor_choices(cls, doctor_type):

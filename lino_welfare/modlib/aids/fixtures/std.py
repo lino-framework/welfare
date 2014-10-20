@@ -131,8 +131,7 @@ def objects():
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
-    croix_rouge = rt.modules.contacts.Company(
-        name="Belgisches Rotes Kreuz")
+    croix_rouge = rt.modules.contacts.Company(name="Belgisches Rotes Kreuz")
     yield croix_rouge
 
     kw = dd.babelkw(
@@ -148,12 +147,12 @@ def objects():
 
     kw = dd.babelkw(
         'name',
-        de="Kostenübernahme Kleidung",
-        en="Clothing costs",
-        fr="Frais de vêtements")
-    kw.update(body_template='clothing_refund.body.html')
+        de="Kleiderkammer",
+        en="Clothes bank",
+        fr="Banque aux vêtements")
+    kw.update(body_template='clothing_bank.body.html')
     kw.update(company=croix_rouge)
-    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
+    kw.update(dd.str2kw('excerpt_title', _("Clothing costs transfer")))
     yield aidType(**kw)
 
     ## Categories

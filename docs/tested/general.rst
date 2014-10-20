@@ -54,7 +54,7 @@ Test whether :meth:`get_db_overview_rst
  aids.Granting                  10        12
  aids.IncomeConfirmation        17        6
  aids.RefundConfirmation        18        4
- aids.SimpleConfirmation        15        12
+ aids.SimpleConfirmation        15        13
  badges.Award                   6         0
  badges.Badge                   5         0
  boards.Board                   7         3
@@ -94,8 +94,8 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         63
  debts.Budget                   11        14
  debts.Entry                    16        686
- excerpts.Excerpt               8         30
- excerpts.ExcerptType           17        10
+ excerpts.Excerpt               11        30
+ excerpts.ExcerptType           18        10
  households.Household           29        14
  households.Member              13        63
  households.Type                5         6

@@ -73,8 +73,11 @@ class DocsTests(BaseTestCase):
     def test_misc(self):
         return self.run_docs_doctests('tested/misc.rst')
 
-    def test_aids(self):
+    def test_aids_de(self):
         return self.run_simple_doctests('docs_de/aids.rst')
+
+    def test_aids(self):
+        return self.run_simple_doctests('docs/tested/aids.rst')
 
     def test_debts(self):
         return self.run_docs_doctests('tested/debts.rst')
