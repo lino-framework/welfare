@@ -10,6 +10,7 @@ Lino Welfare class reference
    pcsw
    aids
    debts
+   households
    integ
    isip
    jobs

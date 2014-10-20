@@ -615,6 +615,8 @@ class Confirmations(dd.Table):
     model = 'aids.Confirmation'
     required = dd.required(user_groups='office', user_level='admin')
     order_by = ["-created"]
+    column_names = "description_column created user printed " \
+                   "start_date end_date *"
 
     parameters = dict(
         board=dd.ForeignKey(
@@ -752,6 +754,7 @@ class SimpleConfirmations(Confirmations):
     company contact_person language printed
     remark
     """)  # , window_size=(70, 24))
+
 
 class SimpleConfirmationsByGranting(SimpleConfirmations):
     master_key = 'granting'

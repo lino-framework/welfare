@@ -36,6 +36,8 @@ Hilfebestätigungen
 Siehe :doc:`aids`.
 
 
+.. _welfare.excerpts.examples.de:
+
 Beispiele
 =========
 
@@ -74,6 +76,7 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
             return msg
         return "%(type)s `%(owner)s <../%(tail)s>`__" % kw
     
-    print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.all()]))
+    print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.order_by(
+        'excerpt_type')]))
    
 

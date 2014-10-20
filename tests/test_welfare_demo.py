@@ -33,7 +33,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/households/Households', json_fields, 15, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Partners', json_fields, 160, **kw)
+            'rolf', 'api/contacts/Partners', json_fields, 171, **kw)
         self.demo_get(
             'rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
         self.demo_get(
@@ -51,12 +51,12 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Persons', json_fields, 99, **kw)
+            'rolf', 'api/contacts/Persons', json_fields, 102, **kw)
         self.demo_get('rolf', 'api/pcsw/Clients', json_fields, 30, **kw)
         self.demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
         self.demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
         self.demo_get(
-            'rolf', 'api/newcomers/NewClients', json_fields, 27, **kw)
+            'rolf', 'api/newcomers/NewClients', json_fields, 29, **kw)
         self.demo_get(
             'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
             2, mt=50, mk=120, **kw)
@@ -81,11 +81,11 @@ class MyTestCase(DemoTestCase):
 
         self.demo_get(
             'rolf', 'choices/aids/IncomeConfirmations/aid_type',
-            json_fields, 10, **kw)
+            json_fields, 11, **kw)
         
         self.demo_get(
             'rolf', 'choices/aids/RefundConfirmations/aid_type',
-            json_fields, 10, **kw)
+            json_fields, 11, **kw)
         
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)

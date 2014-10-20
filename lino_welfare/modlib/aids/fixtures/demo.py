@@ -109,15 +109,17 @@ def objects():
     person2client("Paul", "Frisch")
     person2client("Bruno", "Braun")
 
+    # create a clothing_refund granting and excerpt for Paul Frisch:
     obj = Client.objects.get(name="Frisch Paul")
     at = AidType.objects.get(
         body_template='clothing_refund.body.html')
     g = Granting(aid_type=at, client=obj)
     yield g
-
     M = at.confirmation_type.model
+    conf = M(client=obj, granting=g)
+    yield conf
     et = ExcerptType.get_for_model(M)
     ses = rt.login("alicia")
-    ses.selected_rows = [g]
+    ses.selected_rows = [conf]
     yield et.get_or_create_excerpt(ses)
 

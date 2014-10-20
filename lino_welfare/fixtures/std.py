@@ -32,7 +32,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     ConfirmationTypes = rt.modules.aids.ConfirmationTypes
     for ct in ConfirmationTypes.items():
         kw = dict(
-            body_template='aid_certificate.body.html',
+            body_template='certificate.body.html',
             template='Default.odt',
             primary=True,
             # print_directly=False,

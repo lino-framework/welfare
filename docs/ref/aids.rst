@@ -72,3 +72,11 @@ Tables and Layouts
 
 .. class:: AidsByClient
 
+
+Templates
+=========
+
+.. xfile:: clothing_refund.body.html
+
+(in the `config/aids/Confirmation` subdirectory of
+:mod:`lino_welfare.modlib.aids`).

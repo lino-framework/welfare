@@ -131,15 +131,6 @@ def objects():
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
-    kw = dd.babelkw(
-        'name',
-        de="Kostenübernahme Kleidung",
-        en="Clothing costs",
-        fr="Frais de vêtements")
-    kw.update(body_template='clothing_refund.body.html')
-    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
-    yield aidType(**kw)
-
     croix_rouge = rt.modules.contacts.Company(
         name="Belgisches Rotes Kreuz")
     yield croix_rouge
@@ -154,6 +145,18 @@ def objects():
     kw.update(body_template='food_bank.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
+
+    kw = dd.babelkw(
+        'name',
+        de="Kostenübernahme Kleidung",
+        en="Clothing costs",
+        fr="Frais de vêtements")
+    kw.update(body_template='clothing_refund.body.html')
+    kw.update(company=croix_rouge)
+    kw.update(dd.str2kw('excerpt_title', _("Attestation")))
+    yield aidType(**kw)
+
+    ## Categories
 
     Category = dd.resolve_model('aids.Category')
     yield Category(**babel_values(

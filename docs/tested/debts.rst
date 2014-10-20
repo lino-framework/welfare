@@ -134,40 +134,39 @@ Here are some more slave tables.
 ================================= ================= ============== ============ ===========================
 <BLANKLINE>
 
-The following table shows the new feature (:blogref:`20130325`) 
-of how Lino renders remarks in the printed version: they are added 
-to the description between parentheses (e.g. "Freizeit & Unterhaltung"),
-and if several entries were grouped into a same printable 
-row (e.g. "Fahrtkosten") separated by commas.
+The following table shows how Lino renders remarks in the printed
+version: they are added to the description between parentheses
+(e.g. "Spare time"), and if several entries were grouped into a same
+printable row (e.g. "Fahrtkosten"), they are separated by commas.
 
 >>> groups = list(obj.account_groups())
 >>> with translation.override('en'):
 ...     ses.show(obj.entries_by_group(groups[2]))
-=================================== ============ ===== ====== ============
- Description                         Common       Mr.   Mrs.   Total
------------------------------------ ------------ ----- ------ ------------
- Rent                                41,00                     41,00
- Water                               47,00                     47,00
- Telephone & Internet                5,00                      5,00
- Cell phone                          10,00                     10,00
- Transport costs (Seminar, Cinema)   30,00                     30,00
- Public transport                    20,00                     20,00
- Fuel                                26,00                     26,00
- Car maintenance                     31,00                     31,00
- School                              36,00                     36,00
- Babysitting                         41,00                     41,00
- Health                              47,00                     47,00
- Food                                5,00                      5,00
- Hygiene                             10,00                     10,00
- Health insurance                    15,00                     15,00
- Labour fees                         20,00                     20,00
- Unterhaltszahlungen                 26,00                     26,00
- Retirement savings                  31,00                     31,00
- Tobacco                             36,00                     36,00
- Spare time (Seminar)                41,00                     41,00
- Pets                                47,00                     47,00
- **Total (20 rows)**                 **565,00**                **565,00**
-=================================== ============ ===== ====== ============
+==================================== ============ ===== ====== ============
+ Description                          Common       Mr.   Mrs.   Total
+------------------------------------ ------------ ----- ------ ------------
+ Rent                                 41,00                     41,00
+ Water                                47,00                     47,00
+ Telephone & Internet                 5,00                      5,00
+ Cell phone                           10,00                     10,00
+ Transport costs (Shopping, Cinema)   30,00                     30,00
+ Public transport                     20,00                     20,00
+ Fuel                                 26,00                     26,00
+ Car maintenance                      31,00                     31,00
+ School                               36,00                     36,00
+ Babysitting                          41,00                     41,00
+ Health                               47,00                     47,00
+ Food                                 5,00                      5,00
+ Hygiene                              10,00                     10,00
+ Health insurance                     15,00                     15,00
+ Labour fees                          20,00                     20,00
+ Unterhaltszahlungen                  26,00                     26,00
+ Retirement savings                   31,00                     31,00
+ Tobacco                              36,00                     36,00
+ Spare time (Seminar)                 41,00                     41,00
+ Pets                                 47,00                     47,00
+ **Total (20 rows)**                  **565,00**                **565,00**
+==================================== ============ ===== ====== ============
 <BLANKLINE>
 
 
