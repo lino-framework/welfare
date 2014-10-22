@@ -12,8 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
 
-"""The :mod:`lino_welfare.modlib.integ` app groups things specific to
-the :ref:`welfare.integ`.
+"""See :mod:`welfare.integ`.
 
 """
 

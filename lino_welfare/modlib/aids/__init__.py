@@ -3,7 +3,7 @@
 
 
 """
-See :ref:`welfare.aids`
+See :mod:`welfare.aids`
 """
 
 from lino import ad

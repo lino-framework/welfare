@@ -13,3 +13,10 @@ Actions
 .. class:: CreateCoachingVisit
 
   Create a prompt event for this client with this coach.
+
+
+Tables
+=======
+
+.. class:: Clients
+

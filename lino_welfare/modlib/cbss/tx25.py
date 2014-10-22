@@ -6,7 +6,7 @@
 --------------
 
 
-See used documentation at :ddref:`cbss.RetrieveTIGroupsRequest`.
+See user documentation at :class:`welfare.cbss.RetrieveTIGroupsRequest`.
 
 This implements the "transaction 25", called also "Interrogation sur
 certains types d’informations légales" (in `Codes d'interrogations
@@ -506,6 +506,14 @@ def IT006(n):
     info = Info()
     info.addfrom(n, 'Country', '', CountryType)
     info.addfrom(n, 'Graphic', ' ')
+    info.add_deldate(n)
+    return info
+
+
+def IT008(n):  # ReturnPermissions
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    info.addfrom(n, 'ExpiryDate', _("expires "), DateType)
     info.add_deldate(n)
     return info
 
@@ -1107,6 +1115,8 @@ register_it_handler('NameModifications',
                     _("Name Modifications"), 'NameModification', 'IT013')
 register_it_handler('CountriesOfOrigin',
                     _("Countries Of Origin"), 'CountryOfOrigin', 'IT006')
+register_it_handler('ReturnPermissions',
+                    _("Return permissions"), 'ReturnPermission', 'IT008')
 register_it_handler('AddressDeclarationAbroad',
                     _("Address Declaration Abroad"), 'Address', 'IT018')
 register_it_handler('TemporaryRegistrations',

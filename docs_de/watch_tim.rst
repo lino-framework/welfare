@@ -4,9 +4,9 @@
 watch_tim
 =========
 
-Diese Seite ist die offizielle Dokumentation der Synchronisierung 
-von TIM nach Lino, einer Funktionalität, die ausschließlich im 
-deutschsprachigen Raum Belgiens genutzt wird.
+Diese Seite ist die offizielle Dokumentation der Synchronisierung von
+TIM nach Lino, einer Funktionalität, die ausschließlich im ÖSHZ Eupen
+genutzt wird.
 
 
 .. contents:: 
@@ -36,7 +36,8 @@ TIM unterscheidet vier "Partnerarten":
 - V Verschiedene
 - I Inaktive Partner
 
-Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin kommt:
+Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer
+wo hin kommt:
 
 - Wenn mindestens eines der Felder
   `PAR->NB2` (INSS) oder `PAR->NB1` (Gesdos-Nr) 
@@ -60,20 +61,16 @@ Bei der Synchronisierung wird nach folgenden Regeln entschieden, wer wo hin komm
 Zusatzregel:
 
 - um Klient oder Person werden zu können, muss ein Partner außerdem
-  auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein 
-  Leerzeichen enthalten.
-  Hat er das nicht, wird er zum einfachen 
-  :ddref:`Partner <contacts.Partner>`,
-  und eventuelle Information in `PAR->NB1` oder `PAR->NB2` 
+  auch einen *Vornamen* haben, d.h. `PAR->Firme` muss mindestens ein
+  Leerzeichen enthalten.  Hat er das nicht, wird er zum einfachen
+  Partner, und eventuelle Information in `PAR->NB1` oder `PAR->NB2`
   werden ignoriert.
   
 
-Ob eine :ddref:`Organisation <contacts.Company>` auch 
-:ddref:`Kursanbieter <courses.CourseProvider>` 
-und/oder 
-:ddref:`Stellenabieter <jobs.JobProvider>` 
-ist, wird lediglich in Lino 
-(durch Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden. 
+Ob eine Organisation auch Kursanbieter
+(:class:`welfare.courses.CourseProvider`) und/oder Stellenabieter
+(:class:`welfare.jobs.JobProvider`) ist, wird lediglich in Lino (durch
+Ankreuzen des antsprechenden Feldes im Detail-Fenster) entschieden.
 TIM kennt diese Information nicht.
 
 Partnerattribute

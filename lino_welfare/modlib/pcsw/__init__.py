@@ -3,7 +3,7 @@
 
 
 """
-See :ref:`welfare.aids`
+See :mod:`welfare.pcsw`
 """
 
 

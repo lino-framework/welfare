@@ -15,4 +15,6 @@ Lino Welfare class reference
    isip
    jobs
    cv
+   cbss
+   courses
    reception

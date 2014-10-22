@@ -75,7 +75,7 @@ as requested by the users: "Don't look into the past or future,
 only today matters".
 
 
-Weitere Arbeiten im Modul :ref:`Empfang <welfare.reception>`.
+Weitere Arbeiten im Modul :mod:`Empfang <welfare.reception>`.
 
 Änderungen im Menü : 
 Die Menübefehle 
@@ -85,7 +85,7 @@ und
 befinden sich jetzt unter 
 :menuselection:`Listings --> DSBE`.
 Siehe auch den neuen Abschnitt 
-:ref:`welfare.admin_main`
+:ref:`welfare.de.admin_main`
 im Benutzerhandbuch.
 
 
@@ -122,14 +122,15 @@ Sonstige:
 Version 1.1.8 (released :blogref:`20130723`)
 ============================================
 
-- Neues Modul :ref:`Empfang <welfare.reception>` und Änderungen im Kalendermodul. 
+- Neues Modul "Empfang" (:mod:`welfare.reception` und Änderungen im
+  Kalendermodul.
 
   Neues Benutzerprofil "Empfangsschalter".
   Neues Menü :menuselection:`Empfang` mit den 
   Befehlen 
-  :ddref:`reception.Clients`
-  :ddref:`reception.ExpectedGuests`
-  und :ddref:`reception.WaitingVisitors` 
+  :class:`welfare.reception.Clients`
+  :class:`reception.ExpectedGuests`
+  und :class:`reception.WaitingVisitors` 
 
   Konfigurierung: 
   :ddref:`cal.Calendar` hat jetzt ein neues Feld 
@@ -322,8 +323,8 @@ Version 1.1.4 (released :blogref:`20130512`)
   :menuselection:`Konfigurierung --> Schuldnerberatung --> Budget-Kopiervorlage`,
   und der ist auch für Kerstin sichtbar.
 
-- :ref:`welfare.debts` : neue Kolonne :guilabel:`Gerichtsvollzieher` 
-  in :ddref:`debts.Entry` : Alle Schulden können potentiell 
+- :mod:`welfare.debts` : neue Kolonne :guilabel:`Gerichtsvollzieher` 
+  in :class:`welfare.debts.Entry` : Alle Schulden können potentiell 
   irgendwann zum GV gehen, und dann wird diese Kolonne ausgefüllt 
   (indem man dort den GV auswählt).
 
@@ -356,7 +357,7 @@ Version 1.1.4 (released :blogref:`20130512`)
 Version 1.1.3 (released :blogref:`20130505`)
 ============================================
 
-- Im "Resultat" einer Tx25 (:ddref:`cbss.RetrieveTIGroupsRequest`  
+- Im "Resultat" einer Tx25 (:class:`cbss.RetrieveTIGroupsRequest`  
   wurde nichts angezeigt. Behoben.
 
 - :ddref:`courses.PendingCourseRequests`. 

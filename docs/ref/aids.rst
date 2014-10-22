@@ -5,10 +5,6 @@ Social aids
 ..  Building this document requires the lino_welfare.projects.docs
     database to be populated.
 
-.. module:: welfare
-
-bla
-
 .. module:: welfare.aids
 
 The :mod:`lino_welfare.modlib.aids` package provides data definitions

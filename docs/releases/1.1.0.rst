@@ -33,5 +33,4 @@ Sonstiges
   
   
 - Ich experimentiere mit der Dokumentation 
-  Siehe z.B. :ref:`welfare.jobs.JobsOverview` und   
-  :ref:`welfare.clients`.
+  Siehe z.B. :class:`welfare.jobs.JobsOverview`.

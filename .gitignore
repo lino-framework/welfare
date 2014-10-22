@@ -24,3 +24,4 @@ lino_welfare.egg-info
 htmlcov
 userdocs/gen
 .DS_Store
+.idea

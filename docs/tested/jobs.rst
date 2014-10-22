@@ -171,7 +171,7 @@ JobsOverview
 ------------
 
 Printing the document 
-:ref:`welfare.jobs.JobsOverview`
+:class:`welfare.jobs.JobsOverview`
 caused a "NotImplementedError: <i> inside <text:p>" traceback 
 when one of the jobs had a remark. 
 
