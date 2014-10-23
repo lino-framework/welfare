@@ -357,10 +357,7 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
     def __unicode__(self):
         if self.aid_type_id is not None:
             t1 = self.aid_type.short_name or unicode(self.aid_type)
-            return "%s/%s/%s" % (dd.fds(self.start_date), self.client.id, t1)
-            # t1 = "%s (%s)" % (t1, self.client.id)
-            # return _('%s since %s') % (
-            #     t1, dd.fds(self.start_date))
+            return "%s/%s/%s" % (t1, dd.fds(self.start_date), self.client.id)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def get_aid_type(self):

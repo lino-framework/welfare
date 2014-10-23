@@ -26,6 +26,16 @@ Client
     Inherits from :class:`ml.contacts.Person` and
     :class:`ml.beid.BeIdCardHolder`.
 
+    .. attribute:: cvs_emitted
+
+    A virtual field displaying a group of shortcut links for managing CVs
+    (Curriculum Vitaes).  
+
+    This field is an excerpts shortcut
+    (:class:`ml.excerpts.Shortcuts`) and works only if the database
+    has an :class:`ExcerptType <ml.excerpts.ExcerptType>` whose
+    `shortcut` points to it.
+
     .. attribute:: group
 
     Pointer to :class:`PersonGroup`.

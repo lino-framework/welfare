@@ -167,13 +167,14 @@ class ClientDetail(dd.FormLayout):
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30
     is_cpas is_senior is_obsolete
-    created modified cvs_emitted
+    created modified
     remarks:30 remarks2:30
     contacts.RolesByPerson
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
+    cvs_emitted
     jobs.StudiesByPerson
     # jobs.TrainingsByPerson
     jobs.ExperiencesByPerson:40
