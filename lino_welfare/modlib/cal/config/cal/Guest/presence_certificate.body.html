@@ -30,7 +30,8 @@
 {{tr(en="was present today", 
      de="am heutigen Tage", 
      fr="s'est présenté aujourd'hui")}}
-{% set times = (dd.strftime(obj.waiting_since), dd.strftime(obj.gone_since)) %}
+{% set times = (dd.strftime(obj.waiting_since), 
+dd.strftime(obj.gone_since or this.time)) %}
 <b>{%- if times[1] %}
 {{tr(en="between %s and %s o'clock",
     de="in der Zeit von %s Uhr bis %s Uhr",

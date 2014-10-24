@@ -20,6 +20,21 @@ Bescheinigungen
   also euren Klienten besser zu helfen.
 
 
+Was ist ein Auszug?
+===================
+
+Wenn man mit Lino etwas druckt, nennt Lino das einen **Auszug aus
+seiner Datenbank**.  Jeder Ausdruck wird als *Auszug* in der Tabelle
+der *Auszüge* gespeichert.
+
+Statt **Auszug** kann man also in der Praxis einfachheitshalber auch
+**Ausdruck** sagen.  Aber es ist eben nicht genau das Gleiche.  Ein
+Auszug kann entweder “ausgedruckt” sein oder auch nicht (was
+normalerweise irgendeinen technischen Grund hat). Ungedruckte Auszüge
+werden (voraussichtlich in Zukunft mal) jede Nacht automatisch
+gelöscht.
+
+
 Anwesenheitsbescheinigung
 =========================
 
