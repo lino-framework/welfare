@@ -693,6 +693,7 @@ class StudiesByPerson(HistoryByPerson, Studies):
         return self._label or self.__name__
 
 
+# "Trainings" (formations) are rather professional experiences than studies
 # class TrainingsByPerson(StudiesByPerson):
 #     "Just like :class:`StudiesByPerson`, but with different study_regime"
 #     _study_regime = isip.StudyRegimes.trainings

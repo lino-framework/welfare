@@ -25,6 +25,9 @@ Choicelists
 
 .. class:: ConfirmationTypes
 
+A list of the models that may be used as confirmation.
+:ref:`welfare` knows the following confirmation types:
+
 .. django2rst::
 
   rt.show(aids.ConfirmationTypes)
@@ -34,6 +37,18 @@ Models
 ======
 
 .. class:: AidType
+
+  .. attribute:: name
+
+  The multilingual name of this aid type.
+
+  .. attribute:: short_name
+
+  The short name for internal use.
+
+  .. attribute:: excerpt_title
+
+  The text to print as title in confirmations.
 
   .. attribute:: board
 

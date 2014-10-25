@@ -25,8 +25,8 @@ class Client(Client):
 
 class ClientDetail(dd.FormLayout):
 
-    main = "general parties family \
-    career competences aids_tab sis_tab isip.ContractsByPerson \
+    main = "general coaching family \
+    career competences #aids_tab sis_tab isip.ContractsByPerson \
     oi_tab #projects_tab \
     job_search contracts history calendar misc"
 
@@ -62,10 +62,11 @@ class ClientDetail(dd.FormLayout):
     humanlinks.LinksByHuman:30
     """, label=_("Family situation"))
 
-    parties = dd.Panel("""
-    newcomers_left:20 newcomers.AvailableCoachesByClient:40
+    coaching = dd.Panel("""
+    newcomers_left:20 projects.ProjectsByClient
+    newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
-    """, label=_("Intervening parties"))
+    """, label=_("Coaches"))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -90,7 +91,6 @@ class ClientDetail(dd.FormLayout):
 
     aids_tab = dd.Panel("""
     sepa.AccountsByClient
-    projects.ProjectsByClient
     aids.GrantingsByClient
     """, label=_("Aids"))
 
@@ -123,6 +123,7 @@ class ClientDetail(dd.FormLayout):
     is_obsolete
     created modified
     remarks:30 contacts.RolesByPerson
+    aids.GrantingsByClient
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     contracts = dd.Panel("""
