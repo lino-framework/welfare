@@ -101,11 +101,12 @@ def objects():
 
     kw = dd.babelkw(
         'name',
-        de="DMH-Übernahmeschein",
-        en="DMH-Übernahmeschein",
-        fr="DMH-Übernahmeschein")
-    kw.update(short_name="AMK(DMH)")
-    kw.update(body_template='certificate.body.html')
+        de="Dringende Medizinische Hilfe",
+        nl="Dringende medische Hulp",
+        en="Urgent Medical Care",
+        fr="Aide Médicale Urgente")
+    kw.update(short_name="DMH")
+    kw.update(body_template='urgent_medical_care.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 

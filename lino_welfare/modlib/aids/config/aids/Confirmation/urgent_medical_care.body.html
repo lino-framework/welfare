@@ -1,0 +1,25 @@
+{% extends "aids/Confirmation/certificate.body.html" %}
+
+{% block what %}
+<p>
+{%- if language == 'de' -%}
+
+{{when}} 
+
+weder Eingliederungseinkommen noch Sozialhilfe bezieht, da das
+augenblickliche Statut nur Anrecht auf die in Artikel 57 § 2.1 des
+Grundlagengesetzes über die ÖSHZ vom 08.07.1976 vorgesehene dringende
+medizinische Hilfe gibt.
+
+{%- else -%}
+
+{{when}}
+
+weder Eingliederungseinkommen noch Sozialhilfe bezieht, da das
+augenblickliche Statut nur Anrecht auf die in Artikel 57 § 2.1 des
+Grundlagengesetzes über die ÖSHZ vom 08.07.1976 vorgesehene dringende
+medizinische Hilfe gibt.
+
+{%- endif -%}
+</p>
+{% endblock %}

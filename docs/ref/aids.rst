@@ -144,6 +144,7 @@ Here is a list of the templates defined in this module.
     heating_refund.body.html
     integ_income.body.html
     medical_refund.body.html
+    urgent_medical_care.body.html
     """.split():
         if not name.startswith("#"):
             f(name)
@@ -151,3 +152,4 @@ Here is a list of the templates defined in this module.
 
   except Exception as e:
     print("Oops: %s" % e)
+
