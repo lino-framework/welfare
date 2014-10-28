@@ -44,7 +44,7 @@ Hier eine Liste der Hilfearten, die Lino kennt:
 >>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================================================= =========================== ============================
- Bezeichnung                                       Primärbegleiter bestätigt   Body template
+ Bezeichnung                                       Primärbegleiter bestätigt   Textkörper-Vorlage
 ------------------------------------------------- --------------------------- ----------------------------
  Ausländerbeihilfe                                 Ja                          foreigner_income.body.html
  DMH-Übernahmeschein                               Ja                          certificate.body.html

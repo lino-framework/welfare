@@ -150,7 +150,7 @@ Mélanie has two appointments on 2014-09-15:
 ...     column_names="user summary project")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ================ =============== =========================
- Agent            Summary         Client
+ Managed by       Summary         Client
 ---------------- --------------- -------------------------
  Mélanie Mélard   Appointment 3   FAYMONVILLE Luc (130*)
  Mélanie Mélard   Appointment 5   JACOBS Jacqueline (137)

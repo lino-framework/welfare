@@ -100,7 +100,7 @@ of a client:
 ...    ses.show(courses.PendingCourseRequests,limit=5,
 ...      column_names="person content person__coaches")
 ====================== ============= =================================================
- Bénéficiaire           Contenu       Accompagnants
+ Bénéficiaire           Contenu       Intervenants
 ---------------------- ------------- -------------------------------------------------
  LAZARUS Line (144)     Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
  LAMBERTZ Guido (142)   Deutsch       Mélanie Mélard, Hubert Huppertz
