@@ -148,13 +148,15 @@ ADULT_AGE = datetime.timedelta(days=18*365)
 
 class RefundsByPerson(SiblingsByPerson):
     column_names = "age:10 gender person_info amount"
+    child_tariff = Decimal(10)
+    adult_tariff = Decimal(20)
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, obj, ar):
         age = obj.get_age(dd.today())
         if age is None or age <= ADULT_AGE:
-            return Decimal(18)
-        return Decimal(20)
+            return self.child_tariff
+        return self.adult_tariff
 
     @dd.displayfield(_("Person"))
     def person_info(self, obj, ar):

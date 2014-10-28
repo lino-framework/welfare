@@ -13,9 +13,9 @@ Kleidung bis in Höhe von 20 EUR zu übernehmen:
 {% block what -%}
 <p>
 {% if language == 'de' %}
-Die Kostenübernahme ist gültig für ein Jahr ab dem {{fds(obj.start_date)}}.
+Die Kostenübernahme ist gültig für ein Jahr ab dem {{fdm(obj.start_date)}}.
 {% else %}
-Valable pendant un an à partir du {{fds(obj.start_date)}}.
+Valable pendant un an à partir du {{fdm(obj.start_date)}}.
 {% endif %}
 </p>
 {%- endblock %}

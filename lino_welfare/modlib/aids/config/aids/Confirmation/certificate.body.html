@@ -1,7 +1,10 @@
 {% extends "excerpts/base.body.html" %}
 
 {% block our_ref %}
-{{tr("U. Zeichen",fr="Notre réf.")}}: {{obj.user.initials}}/{{obj.signer.initials}}/{{obj.client.id}}/{{this.id}}
+{{tr("U. Zeichen",fr="Notre réf.")}}:
+<font class="VariableText">
+{{obj.user.initials}}/{{obj.signer.initials}}/{{obj.client.id}}/{{this.id}}
+</font>
 {% endblock %}
 
 {% block title %}
