@@ -5,7 +5,7 @@ ISIP (Individual Social Integration Projects)
 .. module:: welfare.isip
 
 The :mod:`lino_welfare.modlib.isip` package provides data definitions
-for managing ISIPs (Individual Social Integration Projects)
+for managing ISIPs (Individual Social Integration Projects).
 
 
 Mixins

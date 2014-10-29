@@ -62,7 +62,9 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
     import os
     import shutil
     from atelier import rstgen
+    from lino import dd
     ses = rt.login()
+    dd.logger.info("20141029 %s", settings.SITE)
     def asli(obj):
         rv = ses.run(obj.do_print)
         if rv['success']:
@@ -80,6 +82,7 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
         kw.update(type=obj.excerpt_type)
         kw.update(owner=obj.owner)
         try:
+            dd.logger.info("20141029 copy %s to %s", tmppath, tail)
             shutil.copyfile(tmppath, tail)
         except IOError as e:
             kw.update(error=str(e))
@@ -91,5 +94,4 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
     print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.order_by(
         'excerpt_type')]))
    
-
 

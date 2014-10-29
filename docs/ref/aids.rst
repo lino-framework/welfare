@@ -99,7 +99,7 @@ Tables and Layouts
 Templates
 =========
 
-Here is a list of the templates defined in this module.
+Here is a list of the templates defined in the `Aids` module.
 
 .. django2rst::
 
@@ -107,8 +107,6 @@ Here is a list of the templates defined in this module.
     from django.utils import translation
     from atelier.rstgen import header
     from lino.runtime import *
-    # ses = rt.login('hubert')
-    # translation.activate('de')
 
     def f(name):
         print("\n\n.. xfile:: %s\n\n" % name)

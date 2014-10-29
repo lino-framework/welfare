@@ -108,7 +108,7 @@ Hilfebeschlüsse
 ===============
 
 Alicia hat 2 Hilfebestätigungen zu unterschreiben. Dies kriegt sie als
-Willkommensmeldung unter die Nase gerieben:
+Willkommensmeldung präsentiert:
 
 .. django2rst::
 
@@ -124,10 +124,9 @@ Willkommensmeldung unter die Nase gerieben:
 Beispiele
 =========
 
-
-Für die Hilfearten aus obiger Liste, für die eine Vorlage definiert
-ist (also für wir nicht bloß den generischen Bestätigungstext haben)
-hier die gleichen Texte als HTML:
+Für die Hilfearten aus obiger Liste, für die eine Textkörpervorlage
+definiert ist (also für wir nicht bloß den generischen
+Bestätigungstext haben) hier die gleichen Texte als HTML:
 
 .. django2rst::
 
