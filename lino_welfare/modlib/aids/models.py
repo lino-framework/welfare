@@ -569,6 +569,7 @@ class Confirmation(
         if self.granting_id:
             self.signer = self.granting.signer
             self.client = self.granting.client
+            self.language = self.client.language
             if self.granting.aid_type_id:
                 at = self.granting.aid_type
                 self.company = at.company
