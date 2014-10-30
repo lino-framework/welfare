@@ -733,6 +733,12 @@ class ConfirmationsByGranting(dd.VirtualTable):
     def description_column(self, obj, ar):
         return ar.obj2html(obj)
 
+    @dd.action(_("Print"), icon_name="printer")
+    def do_print(self, obj, ar):
+        # never called because Lino cannot yet run row actions in a
+        # virtual table.
+        return obj.do_print.run(ar)
+
 
 ##
 ## SimpleConfirmation

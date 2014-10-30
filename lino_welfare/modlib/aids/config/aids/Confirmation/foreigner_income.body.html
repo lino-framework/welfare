@@ -10,7 +10,7 @@ in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
 {% endif -%}
 {%- if obj.category %}
 (Kategorie: <b>{{obj.category}}</b>)
-{% endif -%}
+{% endif %}
 {{iif(obj.is_past(), "bezogen hat", "bezieht")}}.
 {%- else -%}
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
