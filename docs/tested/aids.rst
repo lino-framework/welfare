@@ -43,11 +43,11 @@ Hier eine Liste der Hilfearten, die Lino kennt:
 
 >>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================================================= =========================== ============================
+================================================= =========================== ===============================
  Bezeichnung                                       Primärbegleiter bestätigt   Textkörper-Vorlage
-------------------------------------------------- --------------------------- ----------------------------
+------------------------------------------------- --------------------------- -------------------------------
  Ausländerbeihilfe                                 Ja                          foreigner_income.body.html
- DMH-Übernahmeschein                               Ja                          certificate.body.html
+ Dringende Medizinische Hilfe                      Ja                          urgent_medical_care.body.html
  Eingliederungseinkommen                           Ja                          integ_income.body.html
  Erstattung                                        Ja                          certificate.body.html
  Feste Beihilfe                                    Ja                          fixed_income.body.html
@@ -58,7 +58,7 @@ Hier eine Liste der Hilfearten, die Lino kennt:
  Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          certificate.body.html
  Übernahmeschein                                   Ja                          certificate.body.html
  **Total (11 Zeilen)**                             **10**
-================================================= =========================== ============================
+================================================= =========================== ===============================
 <BLANKLINE>
 
 
@@ -122,11 +122,11 @@ Willkommensmeldung unter die Nase gerieben:
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================== ===================== ============== ===== ======= ================================
- Klient                   Hilfeart              Laufzeit von   bis   Autor   Arbeitsablauf
------------------------- --------------------- -------------- ----- ------- --------------------------------
- FAYMONVILLE Luc (130*)   DMH-Übernahmeschein   28.05.14                     **Unbestätigt** → [Bestätigen]
-======================== ===================== ============== ===== ======= ================================
+======================== ============================== ============== ===== ======= ================================
+ Klient                   Hilfeart                       Laufzeit von   bis   Autor   Arbeitsablauf
+------------------------ ------------------------------ -------------- ----- ------- --------------------------------
+ FAYMONVILLE Luc (130*)   Dringende Medizinische Hilfe   28.05.14                     **Unbestätigt** → [Bestätigen]
+======================== ============================== ============== ===== ======= ================================
 <BLANKLINE>
 
 
@@ -149,7 +149,7 @@ Feste Beihilfe : 2
 Erstattung : 2
 Übernahmeschein : 2
 Übernahme von Arzt- und/oder Medikamentenkosten : 2
-DMH-Übernahmeschein : 2
+Dringende Medizinische Hilfe : 2
 Möbellager : 2
 Heizkosten : 2
 Lebensmittelbank : 2

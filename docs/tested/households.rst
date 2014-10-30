@@ -107,10 +107,10 @@ Here is their :class:`welfare.households.RefundsByPerson`:
 -------------------- -------- ----------------- -----------
  46 years             Male     Paul Frisch       20,00
  45 years             Female   Petra Zweith      20,00
- 16 years             Male     Philippe Frisch   18,00
- 14 years             Female   Clara Frisch      18,00
- 12 years             Male     Dennis Frisch     18,00
- **Total (5 rows)**                              **94,00**
+ 16 years             Male     Philippe Frisch   10,00
+ 14 years             Female   Clara Frisch      10,00
+ 12 years             Male     Dennis Frisch     10,00
+ **Total (5 rows)**                              **70,00**
 ==================== ======== ================= ===========
 <BLANKLINE>
 
@@ -141,8 +141,8 @@ Here is their :class:`welfare.households.RefundsByPerson`:
 -------------------- -------- ---------------- -----------
  46 years             Female   Laura Loslever   20,00
  46 years             Male     Ludwig Frisch    20,00
- 12 years             Female   Melba Frisch     18,00
- 6 years              Female   Irma Frisch      18,00
- **Total (4 rows)**                             **76,00**
+ 12 years             Female   Melba Frisch     10,00
+ 6 years              Female   Irma Frisch      10,00
+ **Total (4 rows)**                             **60,00**
 ==================== ======== ================ ===========
 <BLANKLINE>
