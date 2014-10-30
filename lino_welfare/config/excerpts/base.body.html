@@ -14,11 +14,12 @@ Guest, a Client, ... #}
 {% endblock %}
 
 {% block signature %}
-<p>{{tr(en="The PCSW", de="Für das Öffentliche Sozialhilfezentrum,",fr="Pour le Centre Public d’Action Sociale,")}}</p>
-<p>{{tr(en="The secretary", de="Der Sekretär,",fr="Le secrétaire,")}}</p>
-<p>{{tr(en="delegation", de="im Auftrag,",fr="par délégation,")}}</p>
-<p></p>
-<p></p>
-<p></p>
-<p>{{this.user}}</p>
+<p class="KeepTogether">{{tr(en="The PCSW", de="Für das Öffentliche Sozialhilfezentrum,",fr="Pour le Centre Public d’Action Sociale,")}}
+<br/>{{tr(en="The secretary", de="Der Sekretär,",fr="Le secrétaire,")}}
+<br/>{{tr(en="delegation", de="im Auftrag,",fr="par délégation,")}}
+<br/>
+<br/>
+<br/>
+<br/>{{this.user}}
+</p>
 {% endblock %}
