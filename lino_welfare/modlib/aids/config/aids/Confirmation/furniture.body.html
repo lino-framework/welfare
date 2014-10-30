@@ -5,17 +5,19 @@
 <p>
 {% if language == 'de' %}
 {{when}} aus Gründen der sozial-finanziellen Lage Anrecht auf
-eine Sozialhilfe in Naturalien durch Nutzung der
-<b>Lebensmittelbank</b> {{iif(obj.is_past(), "hatte", "hat")}}.
+eine Sozialhilfe in Naturalien durch Nutzung des
+<b>M&ouml;bellagers</b> {{iif(obj.is_past(), "hatte", "hat")}}.
 {% else %}
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}} du droit d'utiliser la <b>banque alimentaire</b>.
+{{when}} du droit d'utiliser le <b>dépot mobilier</b>.
 {% endif %}
 </p>
 
+{% if False %}
 <p>
-Haushaltszusammensetzung: 
-<b>{{ rt.modules.households.get_household_summary(obj.client) }}</b>.  
+Oben genannte Person bezieht eine Sozialhilfe / wird vom ÖSHZ
+finanziell begleitet.
 </p>
+{% endif %}
 
 {%- endblock %}

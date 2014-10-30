@@ -31,6 +31,7 @@ einfacher Anmeldung Inhalte direkt bearbeiten können.
    excerpts
    aids
    todo
+   glossar
    help/index
    
 
