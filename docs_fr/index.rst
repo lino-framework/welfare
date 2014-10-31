@@ -25,3 +25,4 @@ peuvent éditer directement.
    jobs
    contribuer
    todo
+   help/index
