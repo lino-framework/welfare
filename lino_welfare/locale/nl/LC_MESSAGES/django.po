@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-30 17:36+0200\n"
+"POT-Creation-Date: 2014-11-03 03:01+0200\n"
 "PO-Revision-Date: 2013-03-23 17:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -65,7 +65,7 @@ msgid "Health insurance"
 msgstr ""
 
 #: lino_welfare/fixtures/demo.py:594 lino_welfare/fixtures/std.py:100
-#: lino_welfare/modlib/aids/models.py:890
+#: lino_welfare/modlib/aids/models.py:891
 #: lino_welfare/modlib/aids/fixtures/demo.py:52
 #: lino_welfare/modlib/aids/fixtures/std.py:95
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:31
@@ -309,7 +309,7 @@ msgid "Applies from"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:406
-#: lino_welfare/modlib/aids/models.py:614
+#: lino_welfare/modlib/aids/models.py:615
 #: lino_welfare/modlib/integ/models.py:557
 #: lino_welfare/modlib/pcsw/coaching.py:233
 #: lino_welfare/modlib/pcsw/models.py:1301
@@ -318,37 +318,37 @@ msgid "until"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:434
-#: lino_welfare/modlib/aids/models.py:633
+#: lino_welfare/modlib/aids/models.py:634
 msgid "Only rows decided by this board."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:438
-#: lino_welfare/modlib/aids/models.py:642
+#: lino_welfare/modlib/aids/models.py:643
 msgid "Only confirmations about this aid type."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:441
-#: lino_welfare/modlib/aids/models.py:636
+#: lino_welfare/modlib/aids/models.py:637
 msgid "Author"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:443
-#: lino_welfare/modlib/aids/models.py:638
+#: lino_welfare/modlib/aids/models.py:639
 msgid "Only rows created by this user."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:446
-#: lino_welfare/modlib/aids/models.py:645
+#: lino_welfare/modlib/aids/models.py:646
 msgid "Signer"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:448
-#: lino_welfare/modlib/aids/models.py:647
+#: lino_welfare/modlib/aids/models.py:648
 msgid "Only rows confirmed (or to be confirmed) by this user."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:452
-#: lino_welfare/modlib/aids/models.py:651
+#: lino_welfare/modlib/aids/models.py:652
 msgid "Only rows having this state."
 msgstr ""
 
@@ -383,29 +383,29 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:613
+#: lino_welfare/modlib/aids/models.py:614
 #: lino_welfare/modlib/cbss/models.py:1446
 #: lino_welfare/modlib/integ/models.py:556
 msgid "Period from"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:617
+#: lino_welfare/modlib/aids/models.py:618
 msgid "Recipient (Organization)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:619
+#: lino_welfare/modlib/aids/models.py:620
 msgid "Recipient (Person)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:695
+#: lino_welfare/modlib/aids/models.py:696
 msgid "Issued confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:728
+#: lino_welfare/modlib/aids/models.py:729
 msgid "Printed"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:732
+#: lino_welfare/modlib/aids/models.py:733
 #: lino_welfare/modlib/courses/models.py:175
 #: lino_welfare/modlib/debts/models.py:618
 #: lino_welfare/modlib/debts/models.py:677
@@ -418,27 +418,27 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:736
+#: lino_welfare/modlib/aids/models.py:737
 msgid "Print"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:756
+#: lino_welfare/modlib/aids/models.py:757
 msgid "Simple confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:757
+#: lino_welfare/modlib/aids/models.py:758
 msgid "Simple confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:800
+#: lino_welfare/modlib/aids/models.py:801
 msgid "Income confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:801
+#: lino_welfare/modlib/aids/models.py:802
 msgid "Income confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:805
+#: lino_welfare/modlib/aids/models.py:806
 #: lino_welfare/modlib/debts/models.py:196
 #: lino_welfare/modlib/debts/models.py:597
 #: lino_welfare/modlib/debts/models.py:999
@@ -451,27 +451,27 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:861
+#: lino_welfare/modlib/aids/models.py:862
 msgid "Can refund"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:881
+#: lino_welfare/modlib/aids/models.py:882
 msgid "Refund confirmation"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:882
+#: lino_welfare/modlib/aids/models.py:883
 msgid "Refund confirmations"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:885
+#: lino_welfare/modlib/aids/models.py:886
 msgid "Doctor type"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:887
+#: lino_welfare/modlib/aids/models.py:888
 msgid "Doctor"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:927
+#: lino_welfare/modlib/aids/models.py:928
 msgid "Dr."
 msgstr ""
 
