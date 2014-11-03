@@ -149,6 +149,11 @@ class AidType(ContactRelated, dd.BabelNamed):
 
     print_directly = models.BooleanField(_("Print directly"), default=True)
 
+    is_integ_duty = models.BooleanField(
+        _("Integration duty"), default=False,
+        help_text=_("Whether grantings of this aid type are considered "
+                    "as duty for integration contract."))
+
     confirmed_by_primary_coach = models.BooleanField(
         _("Confirmed by primary coach"), default=True)
 
@@ -192,7 +197,7 @@ class AidTypes(dd.Table):
     id short_name confirmation_type
     name
     excerpt_title
-    print_directly confirmed_by_primary_coach board body_template
+    print_directly is_integ_duty confirmed_by_primary_coach board body_template
     company contact_person contact_role pharmacy_type
     aids.GrantingsByType
     """
@@ -533,9 +538,17 @@ class GrantingsByClient(GrantingsByX):
     """
 
 
+class ContractGrantingsByClient(GrantingsByClient):
+
+    # just a draft. will probably not be used.
+
+    column_names = "description_column start_date end_date"
+
+
 class GrantingsByType(GrantingsByX):
     master_key = 'aid_type'
     column_names = "description_column client start_date end_date *"
+
 
 
 ##
@@ -554,7 +567,6 @@ class Confirmation(
     client = models.ForeignKey(
         'pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_client")
-    language = dd.LanguageField()
     granting = models.ForeignKey('aids.Granting', blank=True, null=True)
     remark = dd.RichTextField(
         _("Remark"),
@@ -569,7 +581,7 @@ class Confirmation(
         if self.granting_id:
             self.signer = self.granting.signer
             self.client = self.granting.client
-            self.language = self.client.language
+            # self.language = self.client.language
             if self.granting.aid_type_id:
                 at = self.granting.aid_type
                 self.company = at.company
@@ -585,7 +597,10 @@ class Confirmation(
     #     return self.granting.aid_type
 
     def get_print_language(self):
-        return self.language
+        obj = self.recipient
+        if obj is not None:
+            return obj.language
+        return super(Confirmation, self).get_print_language()
 
     def get_excerpt_options(self, ar, **kw):
         # Set project field when creating an excerpt from Client.
@@ -766,7 +781,7 @@ class SimpleConfirmations(Confirmations):
     id client user signer workflow_buttons
     granting start_date end_date
     # confirmation_text
-    company contact_person language printed
+    company contact_person #language printed
     remark
     """)  # , window_size=(70, 24))
 
@@ -775,7 +790,7 @@ class SimpleConfirmationsByGranting(SimpleConfirmations):
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     start_date end_date
-    company contact_person language
+    company contact_person #language
     remark
     # client granting:25
     """, window_size=(50, 16))
@@ -825,7 +840,7 @@ class IncomeConfirmations(Confirmations):
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
-    company contact_person language
+    company contact_person #language
     granting:25 start_date end_date
     category amount id
     remark
@@ -838,7 +853,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
     client granting:25
     start_date end_date
     category amount
-    company contact_person language
+    company contact_person #language
     remark
     """, window_size=(70, 20), hidden_elements='client granting')
 
@@ -959,7 +974,7 @@ class RefundConfirmations(Confirmations):
     id client user signer workflow_buttons
     granting:25 start_date end_date
     doctor_type doctor pharmacy
-    company contact_person language printed
+    company contact_person #language printed
     remark
     """)  # , window_size=(70, 24))
 
@@ -970,7 +985,7 @@ class RefundConfirmationsByGranting(RefundConfirmations):
     # client granting:25
     start_date end_date
     doctor_type doctor pharmacy
-    company contact_person language printed
+    company contact_person #language printed
     remark
     """, window_size=(70, 20))
 

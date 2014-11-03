@@ -31,6 +31,13 @@ Mixins
   .. attribute:: applies_until
   .. attribute:: date_issued
 
+  .. method:: get_aid_type
+
+  Return the *integration aid type* for which there is one and only
+  one :class:`granting <welfare.aids.Granting>` active for the period
+  of this contract.  Integration aid types are those who have
+  :attr:`welfare.aids.AidType.is_integ_duty` checked.
+
 
 Models
 ======

@@ -19,6 +19,8 @@ from django.utils import translation
 #~ from django.utils.encoding import force_unicode
 
 
+from atelier.utils import AttrDict
+
 from lino import dd, rt
 from lino import mixins
 notes = dd.resolve_app('notes')
@@ -277,8 +279,8 @@ class PartnersByContract(ContractPartners):
 
 class ContractBase(Signers, Certifiable, cal.EventGenerator):
 
-    """Abstract base class for :ddref:`jobs.Contract` and
-    :ddref:`isip.Contract`.
+    """Abstract base class for :class:`welfare.jobs.Contract` and
+    :class:`welfare.isip.Contract`.
 
     """
 
@@ -445,6 +447,25 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
 
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
+
+    def get_granting(self):
+        ap = self.active_period()
+        ap = AttrDict(start_date=ap[0], end_date=ap[1])
+        at_list = rt.modules.aids.AidType.objects.filter(is_integ_duty=True)
+        qs = rt.modules.aids.Granting.objects.filter(
+            client=self.client, aid_type__in=at_list)
+        qs = rt.modules.lino.PeriodEvents.active.add_filter(qs, ap)
+        n = qs.count()
+        if n == 1:
+            return qs[0]
+        return None
+
+    def get_aid_type(self):
+        g = self.get_granting()
+        if g is not None:
+            return g.aid_type
+        return None
+        
 
 
 dd.update_field(ContractBase, 'signer1', default=default_signer1)

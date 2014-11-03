@@ -38,6 +38,7 @@ def objects():
         en="Eingliederungseinkommen",
         fr="Revenu d'intégration")
     kw.update(short_name="EiEi")
+    kw.update(is_integ_duty=True)
     kw.update(body_template='integ_income.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
@@ -48,6 +49,7 @@ def objects():
         en="Ausländerbeihilfe",
         fr="Aide aux immigrants")
     kw.update(body_template='foreigner_income.body.html')
+    kw.update(is_integ_duty=True)
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 

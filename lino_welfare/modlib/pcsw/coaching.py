@@ -225,7 +225,7 @@ during a given period.
         if self.user.email:
             yield "%s <%s>" % (unicode(self.user), self.user.email)
         for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True, email__isnull=False):
+                coaching_supervisor=True).exclude(email=''):
             yield "%s <%s>" % (unicode(u), u.email)
 
 
