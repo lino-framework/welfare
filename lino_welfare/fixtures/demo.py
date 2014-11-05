@@ -657,7 +657,7 @@ def objects():
     #~ yield iiris
 
     gerd = person(first_name="Gerd",
-                  last_name="Xhonneux", city=kettenis,
+                  last_name="Gerkens", city=kettenis,
                   email=settings.SITE.demo_email,  # 'gerd@example.com'
                   country='BE', gender=mixins.Genders.male)
     yield gerd

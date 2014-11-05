@@ -2,9 +2,9 @@
 
 {% block our_ref %}
 {{tr("U. Zeichen",fr="Notre réf.")}}:
-<font class="VariableText">
+<span class="VariableText">
 {{obj.user.initials}}/{{obj.signer.initials}}/{{obj.client.id}}/{{this.id}}
-</font>
+</span>
 {% endblock %}
 
 {% block title %}
