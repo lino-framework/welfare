@@ -62,22 +62,23 @@ class Site(Site):
         # must import it to activate workflows:
         from lino.modlib.courses import workflows
 
-        from lino import dd, rt
+        from lino import dd
         from django.utils.translation import ugettext_lazy as _
         dd.UserProfiles.reset(
-            '* office coaching integ courses cbss newcomers reception')
+            '* office coaching integ courses cbss newcomers '
+            'reception beid')
         add = dd.UserProfiles.add_item
-        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _',
+        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _',
             name='anonymous',
             readonly=True,
             authenticated=False)
-        add('100', _("Integration Agent"),           'U U U U U U _ _')
-        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _')
-        add('200', _("Newcomers consultant"),        'U U U _ M U U _')
-        add('210', _("Reception clerk"),             'U U _ _ _ _ _ U')
-        add('400', _("Social agent"),                'U U U _ U U _ _')
-        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _')
-        add('900', _("Administrator"),               'A A A A A A A A',
+        add('100', _("Integration Agent"),           'U U U U U U _ _ U')
+        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ U')
+        add('200', _("Newcomers consultant"),        'U U U _ M U U _ U')
+        add('210', _("Reception clerk"),             'U U _ _ _ _ _ U U')
+        add('400', _("Social agent"),                'U U U _ U U _ _ U')
+        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ U')
+        add('900', _("Administrator"),               'A A A A A A A A U',
             name='admin')
 
     def get_admin_main_items(self):
