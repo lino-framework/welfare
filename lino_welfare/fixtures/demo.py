@@ -1105,6 +1105,10 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
 
+    Granting = rt.modules.aids.Granting
+    AidType = rt.modules.aids.AidType
+    INTEG_DUTIES = Cycler(AidType.objects.filter(is_integ_duty=True))
+
     qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
     for i, client in enumerate(qs):
     # for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
@@ -1147,6 +1151,15 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if i % 4:
                     yield isip.ContractPartner(
                         contract=ctr, company=COMPANIES.pop())
+
+            # create an income Granting for each isip contract:
+            kw = dict(start_date=ctr.applies_from,
+                      aid_type=INTEG_DUTIES.pop())
+            kw.update(client=ctr.client)
+            g = Granting(**kw)
+            g.after_ui_create(None)
+            yield g
+        
 
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which

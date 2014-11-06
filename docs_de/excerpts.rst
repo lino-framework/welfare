@@ -20,6 +20,7 @@ Bescheinigungen
   also euren Klienten besser zu helfen.
 
 
+
 Was ist ein Auszug?
 ===================
 
@@ -29,10 +30,10 @@ der *Auszüge* gespeichert.
 
 Statt **Auszug** kann man also in der Praxis einfachheitshalber auch
 **Ausdruck** sagen.  Aber es ist eben nicht genau das Gleiche.  Ein
-Auszug kann entweder “ausgedruckt” sein oder auch nicht (was
-normalerweise irgendeinen technischen Grund hat). Ungedruckte Auszüge
-werden (voraussichtlich in Zukunft mal) jede Nacht automatisch
-gelöscht.
+Auszug kann entweder "ausgedruckt" sein oder auch nicht -- wobei
+Letzteres natürlich anormal ist und wahrscheinlich irgendeinen
+technischen Grund hat. Ungedruckte Auszüge werden voraussichtlich in
+Zukunft mal jede Nacht automatisch gelöscht.
 
 
 Anwesenheitsbescheinigung
@@ -59,13 +60,19 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
 
 .. django2rst::
 
+  try:
+
     import os
     import shutil
     from atelier import rstgen
     from lino import dd
     ses = rt.login()
-    dd.logger.info("20141029 %s", settings.SITE)
-    def asli(obj):
+    # dd.logger.info("20141029 %s", settings.SITE)
+    coll = {}
+    def collect(obj):
+        l = coll.setdefault(obj.excerpt_type, [])
+        if len(l) > 2:
+            return
         rv = ses.run(obj.do_print)
         if rv['success']:
             pass
@@ -82,16 +89,27 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
         kw.update(type=obj.excerpt_type)
         kw.update(owner=obj.owner)
         try:
-            dd.logger.info("20141029 copy %s to %s", tmppath, tail)
+            # dd.logger.info("20141029 copy %s to %s", tmppath, tail)
             shutil.copyfile(tmppath, tail)
         except IOError as e:
             kw.update(error=str(e))
             msg = "%(type)s %(owner)s %(tail)s Oops: %(error)s" % kw
             # raise Exception(msg)
-            return msg
-        return "%(type)s `%(owner)s <../%(tail)s>`__" % kw
-    
-    print(rstgen.ul([asli(o) for o in excerpts.Excerpt.objects.order_by(
-        'excerpt_type')]))
-   
+            kw.update(owner=msg)
 
+        l.append(kw)
+
+    for o in excerpts.Excerpt.objects.order_by('excerpt_type'):
+        collect(o)
+
+    def asli(et, items):
+        s = unicode(et)
+        s += " : " + ', '.join(
+            "`%(owner)s <../%(tail)s>`__" % kw % kw for kw in items)
+        return s
+    
+    print(rstgen.ul([asli(k, v) for k, v in coll.items()]))
+   
+  except Exception as e:
+
+     print(e)

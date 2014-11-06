@@ -538,13 +538,6 @@ class GrantingsByClient(GrantingsByX):
     """
 
 
-class ContractGrantingsByClient(GrantingsByClient):
-
-    # just a draft. will probably not be used.
-
-    column_names = "description_column start_date end_date"
-
-
 class GrantingsByType(GrantingsByX):
     master_key = 'aid_type'
     column_names = "description_column client start_date end_date *"

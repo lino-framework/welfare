@@ -117,7 +117,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 1 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+<span>Du hast 2 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
 
 
 >>> ses.show(aids.MyPendingGrantings)
@@ -125,6 +125,7 @@ Willkommensmeldung unter die Nase gerieben:
 ======================== ============================== ============== ===== ======= ================================
  Klient                   Hilfeart                       Laufzeit von   bis   Autor   Arbeitsablauf
 ------------------------ ------------------------------ -------------- ----- ------- --------------------------------
+ MEESSEN Melissa (147)    Eingliederungseinkommen        01.07.14                     **Unbestätigt** → [Bestätigen]
  FAYMONVILLE Luc (130*)   Dringende Medizinische Hilfe   28.05.14                     **Unbestätigt** → [Bestätigen]
 ======================== ============================== ============== ===== ======= ================================
 <BLANKLINE>
@@ -143,8 +144,8 @@ In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
 ...    print("%s : %d" % (unicode(at), qs.count()))
-Eingliederungseinkommen : 2
-Ausländerbeihilfe : 2
+Eingliederungseinkommen : 20
+Ausländerbeihilfe : 18
 Feste Beihilfe : 2
 Erstattung : 2
 Übernahmeschein : 2
@@ -154,4 +155,18 @@ Möbellager : 2
 Heizkosten : 2
 Lebensmittelbank : 2
 Kleiderkammer : 3
+
+
+There are 17 ISIP contracts, and each of them has one granting:
+
+>>> dist = {}
+>>> for con in isip.Contract.objects.all():
+...     qs = con.get_grantings()
+...     k = qs.count()
+...     if k in dist:
+...         dist[k] += 1
+...     else:
+...         dist[k] = 1
+>>> print(dist)
+{1: 17}
 

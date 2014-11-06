@@ -448,24 +448,22 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
 
-    def get_granting(self):
+    def get_grantings(self):
         ap = self.active_period()
         ap = AttrDict(start_date=ap[0], end_date=ap[1])
         at_list = rt.modules.aids.AidType.objects.filter(is_integ_duty=True)
         qs = rt.modules.aids.Granting.objects.filter(
             client=self.client, aid_type__in=at_list)
-        qs = rt.modules.lino.PeriodEvents.active.add_filter(qs, ap)
-        n = qs.count()
-        if n == 1:
-            return qs[0]
-        return None
+        return rt.modules.lino.PeriodEvents.active.add_filter(qs, ap)
 
     def get_aid_type(self):
-        g = self.get_granting()
-        if g is not None:
-            return g.aid_type
-        return None
-        
+        qs = self.get_grantings()
+        n = qs.count()
+        if n == 1:
+            g = qs[0]
+        else:
+            return None
+        return g.aid_type
 
 
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
