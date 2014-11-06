@@ -331,30 +331,12 @@ class AvailableCoaches(users.Users):
     def get_data_rows(self, ar):
         client = ar.param_values.for_client
         if client:
-            if client.client_state != pcsw.ClientStates.newcomer:
-                raise Warning(_("Only for newcomers"))
-            #~ if not client.national_id:
-                #~ raise Warning(_("Only for newcomers with valid SSIN"))
-            #~ if not ssin.is_valid_ssin(client.national_id):
-                #~ raise Warning(_("Only for newcomers with valid SSIN"))
+            # if client.client_state != pcsw.ClientStates.newcomer:
+            #     raise Warning(_("Only for newcomers"))
             if not client.faculty:
-                raise Warning(_("Only for newcomers with given `faculty`."))
-
-        #~ total_new_clients = NewClients.request(
-              #~ ar.ui,param_values=dict(new_since=ar.param_values.since)
-              #~ ).get_total_count()
-
-        #~ new_since = ar.param_values.since
-        #~ qs = pcsw.Client.objects.filter(
-                #~ client_state=pcsw.ClientStates.coached,
-                #~ coachings_by_client__start_date__gte=new_since)
-
-        #~ qs = pcsw.Coaching.objects.filter(
-                #~ client__client_state=pcsw.ClientStates.coached,
-                #~ start_date__gte=new_since)
+                raise Warning(_("Only for clients with given `faculty`."))
 
         total_weight = decimal.Decimal('0')
-        #~ total_quota = 0
         data = []
         qs = super(AvailableCoaches, self).get_request_queryset(ar)
         qs = qs.filter(newcomer_quota__gt=0)
