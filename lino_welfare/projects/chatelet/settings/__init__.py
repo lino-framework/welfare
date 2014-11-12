@@ -16,7 +16,7 @@ class Site(Site):
     uppercase_last_name = True
 
     demo_fixtures = """std few_languages props all_countries
-    demo cbss mini demo2 checklist local """.split()
+    demo cbss mini demo2 jobsearch local """.split()
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
 
@@ -24,7 +24,7 @@ class Site(Site):
         for a in super(Site, self). get_installed_apps():
             yield a
         yield 'lino_welfare.modlib.projects'
-        yield 'lino.modlib.polls'
+        yield 'lino_welfare.modlib.polls'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)

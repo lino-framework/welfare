@@ -89,6 +89,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.newcomers.fixtures',
     'lino_welfare.modlib.pcsw',
     'lino_welfare.modlib.pcsw.fixtures',
+    'lino_welfare.modlib.polls',
+    'lino_welfare.modlib.polls.fixtures',
     'lino_welfare.modlib.projects',
     'lino_welfare.modlib.reception',
     'lino_welfare.modlib.sales',
