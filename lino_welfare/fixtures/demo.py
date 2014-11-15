@@ -73,12 +73,14 @@ COACHING_STORIES[pcsw.ClientStates.former] = Cycler(
 COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
     # start end primary
     [   # hintereinander betreut durch drei verschiedene Benutzer
+        (-810, None, False, CT_GSS),
         (-800, -440, False, CT_INTEG),
         (-440, -210, False, CT_INTEG),
         (-210, None, True, CT_INTEG),
     ], [
-        (-220, None, True, CT_INTEG),
-    ], [
+        (-223, None, True, CT_GSS),
+        (-220, None, False, CT_INTEG),
+    ], [  # neu im DSBE, ASD noch nicht eingegeben
         (-10,  None, True, CT_INTEG),
     ], [
         (-810, None, True, CT_GSS),
@@ -263,12 +265,17 @@ def objects():
     yield obj
     judith = users.User(username="judith", partner=obj, profile='400')
     yield judith
+    
+    kw = dd.str2kw('name', _("Colleague"))
+    COLLEAGUE = cal.GuestRole(**kw)
+    yield COLLEAGUE
 
     # id must be 1 (see isip.ContactBase.person_changed
     ASD = pcsw.CoachingType(
         id=isip.COACHINGTYPE_ASD,
         does_integ=False,
         does_gss=True,
+        eval_guestrole=COLLEAGUE,
         **babelkw(
             'name',
             de="ASD (Allgemeiner Sozialdienst)",
@@ -286,6 +293,7 @@ def objects():
     DSBE = pcsw.CoachingType(
         does_gss=False,
         does_integ=True,
+        eval_guestrole=COLLEAGUE,
         id=isip.COACHINGTYPE_DSBE,
         **babelkw(
             'name',
@@ -323,15 +331,6 @@ def objects():
         ))
     yield obj
     settings.SITE.site_config.update(client_guestrole=obj)
-
-    obj = guest_role(**babelkw('name',
-                               de="Kollege",
-                               fr="Collègue",
-                               en="Colleague",
-                               et="Kolleeg",
-                               ))
-    yield obj
-    settings.SITE.site_config.update(team_guestrole=obj)
 
     yield guest_role(**babelkw('name',
                                de=u"Vorsitzender",
@@ -451,7 +450,6 @@ def objects():
 
     exam_policy = Instantiator('isip.ExamPolicy').build
     yield exam_policy(**babelkw('name', en='other', de="andere", fr="autre"))
-
 
     sector = Instantiator(jobs.Sector).build
     for ln in SECTORS_LIST.splitlines():
@@ -662,13 +660,6 @@ def objects():
                   country='BE', gender=mixins.Genders.male)
     yield gerd
     yield role(company=cpas, person=gerd, type=4)
-
-    #~ luc = person(first_name="Luc",
-      #~ last_name="Saffre",city=kettenis,
-      #~ email='luc@example.com',
-      #~ country='EE',gender=mixins.Genders.male)
-    #~ yield luc
-    #~ yield role(company=rumma,person=luc,type=4)
 
     # see :blogentry:`20111007`
     tatjana = client(
@@ -1160,7 +1151,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             g.after_ui_create(None)
             yield g
         
-
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which
 
@@ -1171,11 +1161,12 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     for i in range(1, 20):
         obj = RECEPTION_CLIENTS.pop()
         now += datetime.timedelta(minutes=3 * i, seconds=3 * i)
-        obj = reception.create_prompt_event(obj, obj,
-                                            AGENTS.pop(),
-                                            REASONS.pop(),
-                                            settings.SITE.site_config.client_guestrole,
-                                            now)
+        obj = reception.create_prompt_event(
+            obj, obj,
+            AGENTS.pop(),
+            REASONS.pop(),
+            settings.SITE.site_config.client_guestrole,
+            now)
         yield obj
 
     # TODO: the following possibly causes more than one busy guest per
@@ -1209,6 +1200,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
         obj.get_primary_address()
 
+    # create some uploads
     CLIENTS = Cycler(pcsw.Clients.request(user=hubert))
     UPLOAD_TYPES = Cycler(uploads.UploadType.objects.all())
     for i in range(3):

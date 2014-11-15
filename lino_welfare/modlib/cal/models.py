@@ -90,33 +90,6 @@ class Event(Event):
             self.event_type = settings.SITE.site_config.client_calendar
         super(Event, self).full_clean()
 
-    def suggest_guests(self):
-        "Will be called only when there are no Guests yet"
-        print "20140314 suggest_guests"
-        for g in super(Event, self).suggest_guests():
-            yield g
-        if self.event_type is None:
-            return
-
-        Guest = rt.modules.cal.Guest
-
-        if False:
-          if self.event_type.invite_team_members:
-            ug = self.event_type.invite_team_members
-            for obj in settings.SITE.modules.users.Membership.objects.filter(team=ug).exclude(user=self.user):
-                if obj.user.partner:
-                    yield Guest(event=self,
-                                partner=obj.user.partner,
-                                role=settings.SITE.site_config.team_guestrole)
-
-        if self.event_type.invite_client:
-            if self.project is not None:
-                st = GuestStates.accepted
-                yield Guest(event=self,
-                            partner=self.project,
-                            state=st,
-                            role=settings.SITE.site_config.client_guestrole)
-
     @dd.displayfield(_("When"))
     def when_text(self, ar):
         assert ar is not None

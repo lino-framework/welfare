@@ -46,10 +46,16 @@ class CoachingType(dd.BabelNamed):
         GSS_LABEL, default=True,
         help_text=_("Whether this coaching type does %s.") % GSS_LABEL)
 
+    eval_guestrole = dd.ForeignKey(
+        'cal.GuestRole',
+        verbose_name=_("Role in evaluations"),
+        help_text=_("Role when participating in evaluation meetings."),
+        blank=True, null=True)
+
 
 class CoachingTypes(dd.Table):
     model = CoachingType
-    column_names = 'name does_integ does_gss *'
+    column_names = 'name does_integ does_gss eval_guestrole *'
     #~ required_user_level = UserLevels.manager
     required = dict(user_level='manager')
 

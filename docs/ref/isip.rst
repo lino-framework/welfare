@@ -31,6 +31,14 @@ Mixins
   .. attribute:: applies_until
   .. attribute:: date_issued
 
+  .. attribute:: user
+
+  The responsible integration agent.
+
+  .. attribute:: user_asd
+
+  The responsible general social agent (if there is any).
+
   .. method:: get_aid_type
 
   Return the *integration aid type* for which there is one and only

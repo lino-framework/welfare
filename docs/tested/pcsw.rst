@@ -164,15 +164,16 @@ Coaching types
 >>> with translation.override('de'):
 ...    ses.show(pcsw.CoachingTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================== ============================== =================================================== ======= =======
- Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    DSBE    GSS
------------------------------- ------------------------------ --------------------------------------------------- ------- -------
- GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)                      Nein    Ja
- Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)   Ja      Nein
+============================== ============================== =================================================== ======= ======= =====================
+ Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    DSBE    GSS     Role in evaluations
+------------------------------ ------------------------------ --------------------------------------------------- ------- ------- ---------------------
+ GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)                      Nein    Ja      Colleague
+ Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)   Ja      Nein    Colleague
  Debts mediation                Médiation de dettes            Schuldnerberatung                                   Nein    Nein
  **Total (3 Zeilen)**                                                                                              **1**   **1**
-============================== ============================== =================================================== ======= =======
+============================== ============================== =================================================== ======= ======= =====================
 <BLANKLINE>
+
 
 
 .. _welfare.clients.parameters:

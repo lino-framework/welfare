@@ -465,6 +465,29 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
             return None
         return g.aid_type
 
+    def suggest_cal_guests(self, event):
+        # Automatic evaluation events have the client as mandatory
+        # participant, plus possibly some other coach.
+        Guest = rt.modules.cal.Guest
+        GuestStates = rt.modules.cal.GuestStates
+        st = GuestStates.accepted
+        client = event.project
+        yield Guest(event=event,
+                    partner=client,
+                    state=st,
+                    role=settings.SITE.site_config.client_guestrole)
+
+        period = (event.start_date, event.start_date)
+        qs = client.get_coachings(period)
+        qs = client.get_coachings(period, user__partner__isnull=False)
+        for coaching in qs:
+            role = coaching.type.eval_guestrole
+            if role is not None:
+                u = coaching.user
+                if u != event.user and u.partner is not None:
+                    yield Guest(event=event,
+                                partner=u.partner,
+                                role=role)
 
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)
