@@ -181,12 +181,12 @@ Coaching types
 Filtering clients
 -----------------
 
-The demo database contains at least on client 
+The demo database contains at least one client 
 - whose client_state is "Coached"
 - who has several coachings
-- at least one of these coachings has been ended
+- at least one of these coachings has been ended.
 
-For example, let log in as Mélanie and look at client Robin DUBOIS:
+For example, let's log in as Mélanie and look at client Robin DUBOIS:
 
 >>> ses = rt.login('melanie')
 >>> pk = 179
