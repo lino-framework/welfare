@@ -703,20 +703,24 @@ def objects():
     yield adg_dir
 
     kw = dd.str2kw('name', _("Physician"))  # Arzt
-    kw.update(can_refund=True)
+    if dd.is_installed('aids'):
+        kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield person(first_name="Waltraud", last_name="Waldmann", **kw)
 
     kw = dd.str2kw('name', _("Family doctor"))  # Hausarzt
-    kw.update(can_refund=True)
+    if dd.is_installed('aids'):
+        kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield person(first_name="Werner", last_name="Wehnicht", **kw)
 
-    kw = dd.str2kw('name', _("Dentist"), can_refund=True)
+    kw = dd.str2kw('name', _("Dentist"))
+    if dd.is_installed('aids'):
+        kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium,
@@ -724,7 +728,9 @@ def objects():
     yield person(first_name="Carmen", last_name="Castou", **kw)
     yield person(first_name="Walter", last_name="Waldmann", **kw)
 
-    kw = dd.str2kw('name', _("Pediatrician"), can_refund=True)
+    kw = dd.str2kw('name', _("Pediatrician"))
+    if dd.is_installed('aids'):
+        kw.update(can_refund=True)
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium,
@@ -1096,9 +1102,10 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         isip.ContractEnding.objects.filter(needs_date_ended=True))
     JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
 
-    Granting = rt.modules.aids.Granting
-    AidType = rt.modules.aids.AidType
-    INTEG_DUTIES = Cycler(AidType.objects.filter(is_integ_duty=True))
+    if dd.is_installed('aids'):
+        Granting = rt.modules.aids.Granting
+        AidType = rt.modules.aids.AidType
+        INTEG_DUTIES = Cycler(AidType.objects.filter(is_integ_duty=True))
 
     qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
     for i, client in enumerate(qs):
@@ -1143,13 +1150,14 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                     yield isip.ContractPartner(
                         contract=ctr, company=COMPANIES.pop())
 
-            # create an income Granting for each isip contract:
-            kw = dict(start_date=ctr.applies_from,
-                      aid_type=INTEG_DUTIES.pop())
-            kw.update(client=ctr.client)
-            g = Granting(**kw)
-            g.after_ui_create(None)
-            yield g
+            if dd.is_installed('aids'):
+                # create an income Granting for each isip contract:
+                kw = dict(start_date=ctr.applies_from,
+                          aid_type=INTEG_DUTIES.pop())
+                kw.update(client=ctr.client)
+                g = Granting(**kw)
+                g.after_ui_create(None)
+                yield g
         
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which

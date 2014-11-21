@@ -200,17 +200,18 @@ Robin is coached:
 <ClientStates.coached:30>
 
 Here are Robin's coachings. Note that Mélanie stopped to coach Robin
-on 24.10.2013:
+on 08.03.2013:
 
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ====================== ========== ================= ========
  Begleitet seit         bis        Begleiter         Primär 
 ---------------------- ---------- ----------------- --------
- 13.03.12               08.03.13   Hubert Huppertz   Nein   
- 08.03.13               24.10.13   Mélanie Mélard    Nein   
- 24.10.13                          Hubert Huppertz   Ja     
- **Total (3 Zeilen)**                                **1**
+  03.03.12                          Hubert Huppertz   Nein
+  13.03.12               08.03.13   Mélanie Mélard    Nein
+  08.03.13               24.10.13   Alicia Allmanns   Nein
+  24.10.13                          Hubert Huppertz   Ja
+  **Total (4 Zeilen)**                                **1**
 ====================== ========== ================= ========
 <BLANKLINE>
 
@@ -225,9 +226,9 @@ Client #124 (u'DOBBELSTEIN Doroth\xe9e (124)')
 ====================== ===== ================= ========
  Begleitet seit         bis   Begleiter         Primär
 ---------------------- ----- ----------------- --------
- 24.10.13                     Alicia Allmanns   Ja
- 13.12.13                     Hubert Huppertz   Nein
- 02.04.14                     Mélanie Mélard    Nein
+ 24.10.13                     Mélanie Mélard    Ja
+ 13.12.13                     Caroline Carnol   Nein
+ 02.04.14                     Hubert Huppertz   Nein
  **Total (3 Zeilen)**                           **1**
 ====================== ===== ================= ========
 <BLANKLINE>
@@ -242,9 +243,9 @@ DA VINCI David (165)
 ====================== ========== ================= ========
  Begleitet seit         bis        Begleiter         Primär
 ---------------------- ---------- ----------------- --------
- 03.03.12                          Mélanie Mélard    Ja
- 08.03.13               04.10.13   Caroline Carnol   Nein
- 04.10.13                          Hubert Huppertz   Nein
+ 03.03.12                          Hubert Huppertz   Ja
+ 08.03.13               04.10.13   Mélanie Mélard    Nein
+ 04.10.13                          Alicia Allmanns   Nein
  **Total (3 Zeilen)**                                **1**
 ====================== ========== ================= ========
 <BLANKLINE>
@@ -255,49 +256,52 @@ then she sees the following clients (Dorothée is there, but Robin
 isn't):
 
 >>> ses.show(integ.Clients, column_names="name_column")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=============================
  Name
-----------------------------
- AUSDEMWALD Alfons (116)
+-----------------------------
+ BRECHT Bernd (177)
  DOBBELSTEIN Dorothée (124)
  EMONTS Daniel (128)
+ ENGELS Edgar (129)
  EVERS Eberhart (127)
+ HILGERS Hildegard (133)
  JACOBS Jacqueline (137)
  JEANÉMART Jérôme (181)
- JONAS Josef (139)
+ KAIVERS Karl (141)
  LAMBERTZ Guido (142)
  LAZARUS Line (144)
+ MEESSEN Melissa (147)
  RADERMACHER Alfons (153)
+ RADERMACHER Christian (155)
  RADERMACHER Edgard (157)
  RADERMACHER Guido (159)
- DA VINCI David (165)
+ RADERMECKER Rik (173)
  VAN VEEN Vincent (166)
-============================
+=============================
 <BLANKLINE>
 
 Here is a list of Mélanies clients on 2013-04-01.  We get it by
 manually filling that date into the
 :attr:`welfare.pcsw.Clients.end_date` parameter field.  Note that
 
-- Dorothée is not included since Mélanie started coaching her only
+- Dorothée is **not** included since Mélanie started coaching her only
   2014-04-02
-- David is included since Mélanie started coaching him already
+- David **is** included since Mélanie started coaching him already
   2012-03-03
 
 >>> pv = dict(end_date=i2d(20130401))
 >>> ses.show(integ.Clients, column_names="name_column", param_values=pv)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-=============================
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=========================
  Name
------------------------------
- DUBOIS Robin (179)
+-------------------------
+ AUSDEMWALD Alfons (116)
  ENGELS Edgar (129)
- JACOBS Jacqueline (137)
+ JONAS Josef (139)
  LAMBERTZ Guido (142)
- MALMENDIER Marc (146)
- RADERMACHER Christian (155)
+ RADERMACHER Guido (159)
  DA VINCI David (165)
-=============================
+=========================
 <BLANKLINE>
 

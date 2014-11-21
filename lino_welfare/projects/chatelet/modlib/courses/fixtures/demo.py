@@ -21,9 +21,14 @@ def objects():
     def line(course_area, name, **kw):
         kw.update(course_area=course_area)
         kw.update(dd.str2kw('name', name))
+        
         return Line(**kw)
 
-    obj = line(CourseAreas.basic, _("Kitchen"))
+    # Introduction aux techniques de cuisine élémentaires
+    kw = dd.str2kw(
+        'description',
+        _("Introduction to basic kitchen technologies."))
+    obj = line(CourseAreas.basic, _("Kitchen"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 

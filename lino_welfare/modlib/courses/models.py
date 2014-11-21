@@ -2,12 +2,11 @@
 # Copyright 2008-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
+"""The :xfile:`models` module for the :mod:`lino_welfare.modlib.courses` app.
 
-The :xfile:`models` module for the :mod:`lino_welfare.modlib.courses` app.
+This module requires a model `courses.CourseProvider` to be defined by
+the application.
 
-This module requires a model `courses.CourseProvider` 
-to be defined by the application.
 """
 
 from __future__ import unicode_literals
@@ -15,43 +14,13 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import cgi
-import datetime
-
 from django.db import models
-from django.db.models import Q
-from django.db.utils import DatabaseError
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.translation import string_concat
-from django.utils.encoding import force_unicode
-from django.utils.functional import lazy
 
-#~ import lino
-#~ logger.debug(__file__+' : started')
-#~ from django.utils import translation
-
-
-#~ from lino import reports
-from lino import dd, rt
-#~ from lino import layouts
-#~ from lino.utils import printable
+from lino import dd
 from lino import mixins
-#~ from lino import actions
-#~ from lino import fields
-#~ from lino.modlib.contacts import models as contacts
-#~ from lino.modlib.notes import models as notes
-#~ from lino.modlib.links import models as links
-#~ from lino.modlib.uploads import models as uploads
-# ~ from lino.modlib.properties.utils import KnowledgeField #, StrengthField
-#~ from lino.modlib.uploads.models import UploadsByPerson
-#~ from north import babel
-from lino.dd import dtos
-from lino.utils.choosers import chooser
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
@@ -202,7 +171,7 @@ class CourseOffersByContent(CourseOffers):
     master_key = 'content'
 
 
-class Course(dd.Model, mixins.Printable):
+class Course(dd.Model):
 
     u"""
     Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
@@ -234,7 +203,7 @@ class Course(dd.Model, mixins.Printable):
     """
 
     def __unicode__(self):
-        s = dtos(self.start_date)
+        s = dd.dtos(self.start_date)
         if self.title:
             s += " " + self.title
         if self.offer:
@@ -447,7 +416,7 @@ class CourseRequest(dd.Model):
             self.content = self.offer.content
         super(CourseRequest, self).save(*args, **kw)
 
-    @chooser()
+    @dd.chooser()
     def offer_choices(cls, content):
         if content:
             return CourseOffer.objects.filter(content=content)

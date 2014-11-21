@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-19 11:39+0100\n"
+"POT-Creation-Date: 2014-11-20 10:05+0100\n"
 "PO-Revision-Date: 2013-03-23 17:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: nl <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Health insurance"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:592 lino_welfare/fixtures/std.py:100
+#: lino_welfare/fixtures/demo.py:592 lino_welfare/fixtures/std.py:102
 #: lino_welfare/modlib/aids/models.py:899
 #: lino_welfare/modlib/aids/fixtures/demo.py:52
 #: lino_welfare/modlib/aids/fixtures/std.py:97
@@ -92,59 +92,59 @@ msgstr ""
 msgid "Physician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:712
+#: lino_welfare/fixtures/demo.py:713
 msgid "Family doctor"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:719
+#: lino_welfare/fixtures/demo.py:721
 msgid "Dentist"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:727
+#: lino_welfare/fixtures/demo.py:731
 msgid "Pediatrician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:891
+#: lino_welfare/fixtures/demo.py:897
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:893
+#: lino_welfare/fixtures/demo.py:899
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1158
+#: lino_welfare/fixtures/demo.py:1166
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1158
+#: lino_welfare/fixtures/demo.py:1166
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1158
+#: lino_welfare/fixtures/demo.py:1166
 msgid "Information"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:285
+#: lino_welfare/fixtures/std.py:287
 msgid "Contract"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:305
+#: lino_welfare/fixtures/std.py:307
 msgid "Diploma"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:376
+#: lino_welfare/fixtures/std.py:378
 msgid "Normal"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:377
+#: lino_welfare/fixtures/std.py:379
 msgid "Alcohol"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:378
+#: lino_welfare/fixtures/std.py:380
 msgid "Health"
 msgstr ""
 
-#: lino_welfare/fixtures/std.py:379
+#: lino_welfare/fixtures/std.py:381
 msgid "Force majeure"
 msgstr ""
 
@@ -377,8 +377,8 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:565
 #: lino_welfare/modlib/badges/models.py:61
-#: lino_welfare/modlib/courses/models.py:231
-#: lino_welfare/modlib/courses/models.py:422
+#: lino_welfare/modlib/courses/models.py:200
+#: lino_welfare/modlib/courses/models.py:391
 #: lino_welfare/modlib/cv/models.py:145 lino_welfare/modlib/debts/models.py:536
 #: lino_welfare/modlib/debts/models.py:614
 #: lino_welfare/modlib/jobs/models.py:200
@@ -420,7 +420,7 @@ msgid "Printed"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:741
-#: lino_welfare/modlib/courses/models.py:175
+#: lino_welfare/modlib/courses/models.py:144
 #: lino_welfare/modlib/debts/models.py:618
 #: lino_welfare/modlib/debts/models.py:677
 #: lino_welfare/modlib/debts/models.py:978
@@ -813,7 +813,7 @@ msgid "Civil state"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:1325
-#: lino_welfare/modlib/courses/models.py:633
+#: lino_welfare/modlib/courses/models.py:602
 msgid "Address"
 msgstr ""
 
@@ -905,7 +905,7 @@ msgid "Dutch"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/tx25.py:76
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:42
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:47
 msgid "French"
 msgstr ""
 
@@ -1420,195 +1420,195 @@ msgid "Partners (all)"
 msgstr ""
 
 #: lino_welfare/modlib/courses/__init__.py:21
-#: lino_welfare/modlib/courses/models.py:217
+#: lino_welfare/modlib/courses/models.py:186
 msgid "Courses"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:74
+#: lino_welfare/modlib/courses/models.py:43
 msgid "Course provider"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:75
+#: lino_welfare/modlib/courses/models.py:44
 msgid "Course providers"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:88
+#: lino_welfare/modlib/courses/models.py:57
 msgid "is Course Provider"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:120
+#: lino_welfare/modlib/courses/models.py:89
 msgid "Course Content"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:121
+#: lino_welfare/modlib/courses/models.py:90
 msgid "Course Contents"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:125
-#: lino_welfare/modlib/courses/models.py:154
-#: lino_welfare/modlib/courses/models.py:224
+#: lino_welfare/modlib/courses/models.py:94
+#: lino_welfare/modlib/courses/models.py:123
+#: lino_welfare/modlib/courses/models.py:193
 #: lino_welfare/modlib/jobs/models.py:546
 #: lino_welfare/modlib/jobs/models.py:764
 msgid "Name"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:150
+#: lino_welfare/modlib/courses/models.py:119
 msgid "Course Offer"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:151
+#: lino_welfare/modlib/courses/models.py:120
 msgid "Course Offers"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:161
+#: lino_welfare/modlib/courses/models.py:130
 msgid "Default guest role for particpants of events."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:216
+#: lino_welfare/modlib/courses/models.py:185
 msgid "Course"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:226
+#: lino_welfare/modlib/courses/models.py:195
 #: lino_welfare/modlib/jobs/models.py:555
 msgid "start date"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:245
+#: lino_welfare/modlib/courses/models.py:214
 msgid "List of candidates"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:248
+#: lino_welfare/modlib/courses/models.py:217
 msgid "List of participants"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:294
+#: lino_welfare/modlib/courses/models.py:263
 msgid "List of possible states of a Course Request"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:318
+#: lino_welfare/modlib/courses/models.py:287
 msgctxt "courses"
 msgid "Open"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:321
+#: lino_welfare/modlib/courses/models.py:290
 msgctxt "courses"
 msgid "Registered"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:322
+#: lino_welfare/modlib/courses/models.py:291
 msgctxt "courses"
 msgid "Passed"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:323
+#: lino_welfare/modlib/courses/models.py:292
 msgid "Award"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:324
+#: lino_welfare/modlib/courses/models.py:293
 msgctxt "courses"
 msgid "Failed"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:325
+#: lino_welfare/modlib/courses/models.py:294
 msgctxt "courses"
 msgid "Aborted"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:326
+#: lino_welfare/modlib/courses/models.py:295
 msgid "Inactive"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:330
+#: lino_welfare/modlib/courses/models.py:299
 msgctxt "courses"
 msgid "Register"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:332
+#: lino_welfare/modlib/courses/models.py:301
 msgid "Register this candidate for this course."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:340
+#: lino_welfare/modlib/courses/models.py:309
 msgid "Cannot register to unknown course."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:343
+#: lino_welfare/modlib/courses/models.py:312
 #, python-format
 msgid "%(person)s has been registered to %(course)s"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:349
+#: lino_welfare/modlib/courses/models.py:318
 msgctxt "courses"
 msgid "Unregister"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:351
+#: lino_welfare/modlib/courses/models.py:320
 msgid "Unregister this candidate from this course."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:360
+#: lino_welfare/modlib/courses/models.py:329
 #, python-format
 msgid "%(person)s has been unregistered from %(course)s"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:375
-#: lino_welfare/modlib/courses/models.py:376
+#: lino_welfare/modlib/courses/models.py:344
+#: lino_welfare/modlib/courses/models.py:345
 msgid "Course Requests"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:384
+#: lino_welfare/modlib/courses/models.py:353
 msgid "Course content"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:388
+#: lino_welfare/modlib/courses/models.py:357
 #: lino_welfare/modlib/jobs/models.py:912
 msgid "date submitted"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:389
+#: lino_welfare/modlib/courses/models.py:358
 msgid "When this request has been submitted."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:392
+#: lino_welfare/modlib/courses/models.py:361
 msgid "Needed for job search"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:394
+#: lino_welfare/modlib/courses/models.py:363
 msgid "Check this if the request is needed for job search."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:410
+#: lino_welfare/modlib/courses/models.py:379
 msgid "The course which satisfies this request. Leave blank on open requests."
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:412
+#: lino_welfare/modlib/courses/models.py:381
 msgid "Course found"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:428
+#: lino_welfare/modlib/courses/models.py:397
 #: lino_welfare/modlib/isip/models.py:324
 msgid "date ended"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:525
+#: lino_welfare/modlib/courses/models.py:494
 msgid "Participants"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:536
+#: lino_welfare/modlib/courses/models.py:505
 #: lino_welfare/modlib/jobs/models.py:1052
 #: lino_welfare/modlib/jobs/models.py:1214
 #: lino_welfare/modlib/jobs/models.py:1268
 msgid "Candidates"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:565
+#: lino_welfare/modlib/courses/models.py:534
 msgid "Pending Course Requests"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:629
+#: lino_welfare/modlib/courses/models.py:598
 msgid "Age"
 msgstr ""
 
-#: lino_welfare/modlib/courses/models.py:643
+#: lino_welfare/modlib/courses/models.py:612
 msgid "unknown age"
 msgstr ""
 
@@ -3684,27 +3684,27 @@ msgid "Notify me when a coach has been assigned"
 msgstr ""
 
 #: lino_welfare/projects/base.py:82
-#: lino_welfare/projects/chatelet/settings/__init__.py:71
+#: lino_welfare/projects/chatelet/settings/__init__.py:72
 msgid "Anonymous"
 msgstr ""
 
 #: lino_welfare/projects/base.py:86
-#: lino_welfare/projects/chatelet/settings/__init__.py:75
+#: lino_welfare/projects/chatelet/settings/__init__.py:76
 msgid "Integration Agent"
 msgstr ""
 
 #: lino_welfare/projects/base.py:87
-#: lino_welfare/projects/chatelet/settings/__init__.py:76
+#: lino_welfare/projects/chatelet/settings/__init__.py:77
 msgid "Integration Agent (Manager)"
 msgstr ""
 
 #: lino_welfare/projects/base.py:88
-#: lino_welfare/projects/chatelet/settings/__init__.py:77
+#: lino_welfare/projects/chatelet/settings/__init__.py:78
 msgid "Newcomers consultant"
 msgstr ""
 
 #: lino_welfare/projects/base.py:89
-#: lino_welfare/projects/chatelet/settings/__init__.py:78
+#: lino_welfare/projects/chatelet/settings/__init__.py:79
 msgid "Reception clerk"
 msgstr ""
 
@@ -3713,17 +3713,17 @@ msgid "Debts consultant"
 msgstr ""
 
 #: lino_welfare/projects/base.py:91
-#: lino_welfare/projects/chatelet/settings/__init__.py:79
+#: lino_welfare/projects/chatelet/settings/__init__.py:80
 msgid "Social agent"
 msgstr ""
 
 #: lino_welfare/projects/base.py:92
-#: lino_welfare/projects/chatelet/settings/__init__.py:80
+#: lino_welfare/projects/chatelet/settings/__init__.py:81
 msgid "Social agent (Manager)"
 msgstr ""
 
 #: lino_welfare/projects/base.py:93
-#: lino_welfare/projects/chatelet/settings/__init__.py:81
+#: lino_welfare/projects/chatelet/settings/__init__.py:82
 msgid "Administrator"
 msgstr ""
 
@@ -3780,23 +3780,27 @@ msgstr ""
 msgid "Workshop lines"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:26
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:30
+msgid "Introduction to basic kitchen technologies."
+msgstr ""
+
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:31
 msgid "Kitchen"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:30
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:35
 msgid "Creativity"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:34
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:39
 msgid "Our first baby"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:38
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:43
 msgid "Mathematics"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:46
+#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:51
 msgid "Get active!"
 msgstr ""
 

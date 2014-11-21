@@ -30,6 +30,7 @@ class Site(Site):
         kw = super(Site, self).get_apps_modifiers(**kw)
         # remove whole apps:
         kw.update(debts=None)
+        kw.update(aids=None)
         kw.update(sepa=None)
         kw.update(iban=None)
         kw.update(badges=None)

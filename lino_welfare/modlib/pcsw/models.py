@@ -1415,7 +1415,7 @@ class ClientContactTypes(dd.Table):
     contacts.PartnersByClientContactType
     """
 
-    column_names = 'id name can_refund *'
+    column_names = 'id name *'
 
     stay_in_grid = True
 

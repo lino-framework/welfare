@@ -62,7 +62,7 @@ Test whether :meth:`get_db_overview_rst
  cal.Calendar                   7         10
  cal.Event                      24        314
  cal.EventType                  19        7
- cal.Guest                      9         19
+ cal.Guest                      9         240
  cal.GuestRole                  5         4
  cal.Priority                   6         4
  cal.RecurrentEvent             22        9
@@ -136,9 +136,9 @@ Test whether :meth:`get_db_overview_rst
  pcsw.Client                    65        63
  pcsw.ClientContact             7         0
  pcsw.ClientContactType         7         9
- pcsw.Coaching                  8         77
+ pcsw.Coaching                  8         90
  pcsw.CoachingEnding            7         4
- pcsw.CoachingType              7         3
+ pcsw.CoachingType              8         3
  pcsw.Dispense                  6         0
  pcsw.DispenseReason            6         4
  pcsw.Exclusion                 6         0

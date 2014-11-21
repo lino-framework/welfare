@@ -105,11 +105,11 @@ of a client:
  LAZARUS Line (144)     Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
  LAMBERTZ Guido (142)   Deutsch       Mélanie Mélard, Hubert Huppertz
  KELLER Karl (178)      Französisch   Hubert Huppertz
- KAIVERS Karl (141)     Deutsch       Alicia Allmanns
- JONAS Josef (139)      Französisch   Mélanie Mélard
+ KAIVERS Karl (141)     Deutsch       Mélanie Mélard, Alicia Allmanns
+ JONAS Josef (139)      Französisch   Caroline Carnol, Hubert Huppertz
 ====================== ============= =================================================
 <BLANKLINE>
 
-The last column `coachings` (Accompagnements) is also a new feature:
+The last column `coachings` ("Interventants") is also a new feature:
 it is a RemoteField pointing to a VirtualField. 
 

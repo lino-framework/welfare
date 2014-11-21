@@ -28,14 +28,14 @@ UsersWithClients
 ----------------
 
 >>> ses.show(integ.UsersWithClients)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns                   1           2        2       1         5                 6                6
- Hubert Huppertz      3            2           4        4       4         11                17               17
- Mélanie Mélard       4            3           3        2       2         10                14               14
- **Total (3 rows)**   **7**        **6**       **9**    **8**   **7**     **26**            **37**           **37**
+ Alicia Allmanns      2            2           1        1       1         3                 7                7
+ Hubert Huppertz      3            5           6        3       2         11                19               19
+ Mélanie Mélard       4            1           4        5       4         11                18               18
+ **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **44**           **44**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
 
@@ -70,24 +70,26 @@ Every contract potentially generates a series of calendar events for
 evaluation meetings (according to the
 :attr:`welfare.isip.ContractBase.exam_policy` field).
 
-Let's pick up ISIP contract #1, written by Alicia for client Alfons
+But a special condition which in reality arises quite often is that
+the coach changes while the contract is still active.  Here is a list
+of demo contracts which (roughly) have this condition:
 
->>> obj = isip.Contract.objects.get(pk=1)
->>> print(obj)
-ISIP#1 (Alfons Ausdemwald)
->>> print(obj.user.first_name)
-Alicia
+>>> integ = pcsw.CoachingType.objects.filter(does_integ=True)
+>>> for obj in isip.Contract.objects.all():
+...     ap = obj.active_period()
+...     qs = obj.client.get_coachings(ap, user=obj.user,
+...             type__in=integ, end_date__isnull=True)
+...     if qs.count() == 0:
+...         print("%s %s" % (obj, obj.user))
+ISIP#2 (Charlotte Collard) Hubert Huppertz
+ISIP#6 (Bernd Evertz) Caroline Carnol
+ISIP#14 (Fritz Radermacher) Hubert Huppertz
 
-This contract was active in the following period:
+Let's pick up ISIP contract #2:
 
->>> print(obj.applies_from)
-2012-09-29
->>> print(obj.applies_until)
-2013-08-07
+>>> obj = isip.Contract.objects.get(pk=14)
 
-This contract is an example of a special condition which in reality
-arise quite often: the coach changes while the contract is still
-active. In our example, Alicia handed this client over to Hubert on
+In our example, Alicia handed this client over to Hubert on
 March 8th, 2013:
 
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
@@ -100,6 +102,15 @@ March 8th, 2013:
  **Total (3 rows)**                                **1**
 ==================== ========== ================= ========= ===================== ============================
 <BLANKLINE>
+
+
+
+The contract was active in the following period:
+
+>>> print(obj.active_period())
+(datetime.date(2012, 12, 18), datetime.date(2014, 4, 12))
+
+
 
 Lino nicely attributes the automatic evaluation events to the coach in
 charge, depending on their date:
