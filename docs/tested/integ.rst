@@ -3,6 +3,7 @@
 Integration Service
 ===================
 
+
 .. include:: /include/tested.rst
 
 .. How to test only this document:
@@ -65,67 +66,91 @@ The following lines reproduced this problem
 Coach changes while contract active
 -----------------------------------
 
-The following verifies that :linoticket:`104` is solved.
-Every contract potentially generates a series of calendar events for
-evaluation meetings (according to the
-:attr:`welfare.isip.ContractBase.exam_policy` field).
+The following verifies that :linoticket:`104` is solved.  Every
+contract potentially generates a series of calendar events for
+evaluation meetings (according to the :attr:`exam_policy
+<welfare.isip.ContractBase.exam_policy>` field).
 
 But a special condition which in reality arises quite often is that
-the coach changes while the contract is still active.  Here is a list
-of demo contracts which (roughly) have this condition:
+the coach changes while the contract is still active.  
+
+
+TODO: we want to show that Lino attributes the automatic evaluation
+events to the coach in charge, depending on their date.  But currently
+there is no contract in our demo data which matches this specific
+condition.
+
+
+Display a list of demo contracts which meet this condition:
+
+>>> print(settings.SITE.ignore_dates_before)
+None
+>>> print(str(settings.SITE.ignore_dates_after))
+2019-05-22
+
+List of coaches who ended at least one integration coaching:
 
 >>> integ = pcsw.CoachingType.objects.filter(does_integ=True)
->>> for obj in isip.Contract.objects.all():
-...     ap = obj.active_period()
-...     qs = obj.client.get_coachings(ap, user=obj.user,
-...             type__in=integ, end_date__isnull=True)
-...     if qs.count() == 0:
-...         print("%s %s" % (obj, obj.user))
-ISIP#2 (Charlotte Collard) Hubert Huppertz
-ISIP#6 (Bernd Evertz) Caroline Carnol
-ISIP#14 (Fritz Radermacher) Hubert Huppertz
+>>> l = []
+>>> for u in users.User.objects.all():
+...     qs = pcsw.Coaching.objects.filter(user=u,
+...             type__in=integ, end_date__isnull=False)
+...     if qs.count():
+...         l.append("%s (%s)" % (u.username, qs[0].end_date))
+>>> print(', '.join(l))
+... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
+alicia (2013-10-24), caroline (2014-03-23), hubert (2013-03-08), melanie (2013-10-24)
 
-Let's pick up ISIP contract #2:
+List of contracts whose client
 
->>> obj = isip.Contract.objects.get(pk=14)
+>>> l = []
+>>> qs1 = isip.Contract.objects.all()
+>>> qs2 = jobs.Contract.objects.all()
+>>> for obj in list(qs1) + list(qs2):
+...     ar = cal.EventsByController.request(master_instance=obj)
+...     names = set([e.user.username for e in ar])
+...     if len(names) > 1:
+...         l.append(unicode(obj))
+>>> print(', '.join(l))
+... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
+ISIP#6 (Daniel Emonts), ISIP#19 (Line Lazarus), ISIP#21 (Melissa Meessen), Job contract#10 (Jérôme Jeanémart), Job contract#12 (Karl Kaivers), Job contract#17 (Alfons Radermacher), Job contract#18 (Edgard Radermacher), Job contract#22 (Rik Radermecker), Job contract#23 (Vincent van Veen)
 
-In our example, Alicia handed this client over to Hubert on
-March 8th, 2013:
+Let's pick up ISIP contract #6:
+
+>>> obj = isip.Contract.objects.get(pk=6)
+
+This contract was created by Alicia (without any coaching), and on
+2013-11-10 Mélanie started to coach this client:
+
+>>> print(obj.user.username)
+alicia
 
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
-==================== ========== ================= ========= ===================== ============================
- Coached from         until      Coach             Primary   Coaching type         Reason of termination
--------------------- ---------- ----------------- --------- --------------------- ----------------------------
- 3/13/12              3/8/13     Alicia Allmanns   No        Integration service   Transfer to colleague
- 3/8/13               10/24/13   Hubert Huppertz   No        Integration service   End of right on social aid
- 10/24/13                        Mélanie Mélard    Yes       Integration service
- **Total (3 rows)**                                **1**
-==================== ========== ================= ========= ===================== ============================
+... #doctest: -SKIP
+==================== ======= ================= ========= ============================== =======================
+ Coached from         until   Coach             Primary   Coaching type                  Reason of termination
+-------------------- ------- ----------------- --------- ------------------------------ -----------------------
+ 10/11/13                     Mélanie Mélard    Yes       GSS (General Social Service)
+ 10/14/13                     Caroline Carnol   No        Integration service
+ **Total (2 rows)**                             **1**
+==================== ======= ================= ========= ============================== =======================
 <BLANKLINE>
 
-
-
-The contract was active in the following period:
-
->>> print(obj.active_period())
-(datetime.date(2012, 12, 18), datetime.date(2014, 4, 12))
-
-
-
-Lino nicely attributes the automatic evaluation events to the coach in
-charge, depending on their date:
+Lino attributes the automatic evaluation
+events to the coach in charge, depending on their date.  
 
 >>> ar = cal.EventsByController.request(master_instance=obj)
 >>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
 >>> print(", ".join(events))
 ... #doctest: +NORMALIZE_WHITESPACE
-2012-10-29 (Alicia), 2012-11-29 (Alicia), 2012-12-31 (Alicia),
-2013-01-31 (Alicia), 2013-02-28 (Alicia), 2013-03-28 (Hubert),
-2013-04-29 (Hubert), 2013-05-29 (Hubert), 2013-07-01 (Hubert),
-2013-08-01 (Hubert)
+2012-11-29 (Alicia), 2012-12-31 (Alicia), 2013-01-31 (Alicia),
+2013-02-28 (Alicia), 2013-03-28 (Alicia), 2013-04-29 (Alicia),
+2013-05-29 (Alicia), 2013-07-01 (Alicia), 2013-08-01 (Alicia),
+2013-09-02 (Alicia), 2013-10-02 (Alicia), 2013-11-04 (Mélanie),
+2013-12-04 (Mélanie), 2014-01-06 (Mélanie), 2014-02-06 (Mélanie)
 
-The first 5 appointments are with Alicia, the next 5 with Hubert.
-That's what we wanted.
+Appointments before 2013-11-10 are with Alicia, later appointments are
+with Mélanie.  That's what we wanted.
 
 
 Expects a list of 12 values but got 16
@@ -235,8 +260,8 @@ BASTIAENSEN Laurent (117)
 ====================== =============== ================= =============== ========== =========== =============== ===================
  Name                   Arbeitsablauf   Komplette Akten   Neue Klienten   Quote NZ   Belastung   Mehrbelastung   Mehrbelastung (%)
 ---------------------- --------------- ----------------- --------------- ---------- ----------- --------------- -------------------
- Alicia Allmanns                        10                1               100        10,         6,              100,00
- **Total (1 Zeilen)**                   **10**            **1**           **100**    **10,**     **6,**          **100,00**
+ Alicia Allmanns                        12                                100                    6,              100,00
+ **Total (1 Zeilen)**                   **12**            **0**           **100**                **6,**          **100,00**
 ====================== =============== ================= =============== ========== =========== =============== ===================
 <BLANKLINE>
 

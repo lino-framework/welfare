@@ -33,15 +33,3 @@ Newcomers
 <BLANKLINE>
 
 
->>> with translation.override('de'):
-...    ses.show(pcsw.CoachingTypes)
-============================== ============================== =================================================== ======= =======
- Bezeichnung                    Bezeichnung (fr)               Bezeichnung (de)                                    DSBE    GSS
------------------------------- ------------------------------ --------------------------------------------------- ------- -------
- GSS (General Social Service)   SSG (Service social général)   ASD (Allgemeiner Sozialdienst)                      Nein    Ja
- Integration service            Service intégration            DSBE (Dienst für Sozial-Berufliche Eingliederung)   Ja      Nein
- Debts mediation                Médiation de dettes            Schuldnerberatung                                   Nein    Nein
- **Total (3 Zeilen)**                                                                                              **1**   **1**
-============================== ============================== =================================================== ======= =======
-<BLANKLINE>
-

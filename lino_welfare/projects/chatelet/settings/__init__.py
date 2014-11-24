@@ -20,11 +20,11 @@ class Site(Site):
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
 
-    def get_installed_apps(self):
-        for a in super(Site, self). get_installed_apps():
-            yield a
-        yield 'lino_welfare.modlib.projects'
-        yield 'lino_welfare.modlib.polls'
+    # def get_installed_apps(self):
+    #     for a in super(Site, self). get_installed_apps():
+    #         yield a
+    #     yield 'lino_welfare.modlib.projects'
+    #     yield 'lino_welfare.modlib.polls'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)

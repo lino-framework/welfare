@@ -60,13 +60,13 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
             2, mt=50, mk=120, **kw)
-        self.demo_get('alicia', 'api/integ/Clients', json_fields, 6, **kw)
-        self.demo_get('hubert', 'api/integ/Clients', json_fields, 17, **kw)
+        self.demo_get('alicia', 'api/integ/Clients', json_fields, 7, **kw)
+        self.demo_get('hubert', 'api/integ/Clients', json_fields, 19, **kw)
         
         alicia = settings.SITE.user_model.objects.get(username='alicia')
         # rolf working as alicia:
         kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
-        self.demo_get('rolf', 'api/integ/Clients', json_fields, 6, **kw)
+        self.demo_get('rolf', 'api/integ/Clients', json_fields, 7, **kw)
         
         kw = dict()
         json_fields = 'count rows'

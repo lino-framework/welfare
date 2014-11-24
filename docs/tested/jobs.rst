@@ -1,5 +1,6 @@
 .. _welfare.tested.jobs:
 
+===============
 Jobs
 ===============
 
@@ -99,18 +100,23 @@ Example:
 ============== ========================== ======== ====================
  Anfragedatum   Klient                     Stelle   Kandidatur-Zustand
 -------------- -------------------------- -------- --------------------
- 02.05.14       JEANÉMART Jérôme (181)              Aktiv
+ 02.05.14       JEANÉMART Jérôme (181)              Inaktiv
  27.06.14       GROTECLAES Gregory (132)            Arbeitet
 ============== ========================== ======== ====================
 <BLANKLINE>
 
 
+Evaluations of a contract
+-------------------------
+
 >>> translation.activate('en')
 >>> obj = jobs.Contract.objects.get(pk=6)
 >>> print(unicode(obj.client))
-FAYMONVILLE Luc (130*)
+EVERS Eberhart (127)
+
 >>> obj.active_period()
-(datetime.date(2013, 12, 13), datetime.date(2015, 12, 12))
+(datetime.date(2012, 11, 13), datetime.date(2014, 5, 12))
+
 >>> obj.update_cal_rset()
 ExamPolicy #3 (u'every 3 months')
 >>> print(unicode(obj.update_cal_rset().event_type))
@@ -119,11 +125,11 @@ Internal meetings with client
 4
 >>> settings.SITE.verbose_client_info_message = True
 >>> wanted = obj.get_wanted_auto_events(ses)
->>> [i.start_date.strftime('%Y-%m-%d') for i in wanted.values()]
-['2014-03-13', '2014-06-13', '2014-09-15', '2014-12-15', '2015-03-16', '2015-06-16', '2015-09-16']
+>>> [str(i.start_date) for i in wanted.values()]
+['2013-02-13', '2013-05-13', '2013-08-13', '2013-11-13', '2014-02-13']
 >>> print(ses.response['info_message'])
-Generating events between 2014-03-13 and 2015-12-12.
-Reached upper date limit 2015-12-12
+Generating events between 2013-02-13 and 2014-05-12.
+Reached upper date limit 2014-05-12
 
 
 >>> ses.show(cal.EventsByController.request(obj),
@@ -132,13 +138,11 @@ Reached upper date limit 2015-12-12
 ====================== ===============
  When                   Summary
 ---------------------- ---------------
- Thu 3/13/14 (09:00)    Appointment 1
- Fri 6/13/14 (09:00)    Appointment 2
- Mon 9/15/14 (09:00)    Appointment 3
- Mon 12/15/14 (09:00)   Appointment 4
- Mon 3/16/15 (09:00)    Appointment 5
- Tue 6/16/15 (09:00)    Appointment 6
- Wed 9/16/15 (09:00)    Appointment 7
+ Wed 2/13/13 (09:00)    Appointment 1
+ Mon 5/13/13 (09:00)    Appointment 2
+ Tue 8/13/13 (09:00)    Appointment 3
+ Wed 11/13/13 (09:00)   Appointment 4
+ Thu 2/13/14 (09:00)    Appointment 5
 ====================== ===============
 <BLANKLINE>
 

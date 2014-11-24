@@ -2,10 +2,6 @@
 # Copyright 2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-The settings.py used for building both `/docs` and `/userdocs`
-"""
-
 from __future__ import print_function
 from __future__ import unicode_literals
 
@@ -28,6 +24,8 @@ class Site(Site):
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
         kw.update(badges=None)  # remove the badges app
+        kw.update(polls=None)
+        kw.update(projects=None)
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         return kw
 

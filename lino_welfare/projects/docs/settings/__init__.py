@@ -1,6 +1,3 @@
-"""
-The settings used for building docs.
-"""
 import datetime
 from lino_welfare.projects.base import *
 

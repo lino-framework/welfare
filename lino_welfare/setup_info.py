@@ -80,6 +80,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.households',
     'lino_welfare.modlib.households.fixtures',
     'lino_welfare.modlib.integ',
+    'lino_welfare.modlib.integ.fixtures',
     'lino_welfare.modlib.isip',
     'lino_welfare.modlib.jobs',
     'lino_welfare.modlib.jobs.fixtures',

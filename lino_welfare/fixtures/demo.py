@@ -13,7 +13,6 @@ ONE_DAY = datetime.timedelta(days=1)
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils import translation
 
 from lino import dd, rt
 from lino import mixins
@@ -28,8 +27,6 @@ from lino.utils.ssin import generate_ssin
 
 from lino.modlib.cal.utils import DurationUnits
 from lino.modlib.cal.utils import WORKDAYS
-
-from lino_welfare.modlib.isip.models import OverlappingContractsTest
 
 aids = dd.resolve_app('aids')
 isip = dd.resolve_app('isip')
@@ -270,7 +267,7 @@ def objects():
     COLLEAGUE = cal.GuestRole(**kw)
     yield COLLEAGUE
 
-    # id must be 1 (see isip.ContactBase.person_changed
+    # id must match `isip.ContactBase.person_changed`
     ASD = pcsw.CoachingType(
         id=isip.COACHINGTYPE_ASD,
         does_integ=False,
@@ -291,10 +288,10 @@ def objects():
     judith.save()
 
     DSBE = pcsw.CoachingType(
+        id=isip.COACHINGTYPE_DSBE,
         does_gss=False,
         does_integ=True,
         eval_guestrole=COLLEAGUE,
-        id=isip.COACHINGTYPE_DSBE,
         **babelkw(
             'name',
             de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
@@ -880,14 +877,9 @@ def objects():
     proaktiv = mti.insert_child(proaktiv, jobs.JobProvider)
     yield proaktiv
 
-    # isip (VSE)
-    ISIP_DURATIONS = Cycler(312, 480, 312, 480, 30)
-    ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
-
     # jobs (Art.60-7)
     CSTATES = Cycler(jobs.CandidatureStates.objects())
     JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
-    STUDY_TYPES = Cycler(isip.StudyType.objects.all())
     JTYPES = Cycler(jobs.JobType.objects.all())
 
     PROVIDERS = Cycler(jobs.JobProvider.objects.all())
@@ -1095,70 +1087,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             p.is_obsolete = True
             p.save()
 
-    COMPANIES = Cycler(Company.objects.all()[:5])
-    NORMAL_CONTRACT_ENDINGS = Cycler(
-        isip.ContractEnding.objects.filter(needs_date_ended=False))
-    PREMATURE_CONTRACT_ENDINGS = Cycler(
-        isip.ContractEnding.objects.filter(needs_date_ended=True))
-    JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
-
-    if dd.is_installed('aids'):
-        Granting = rt.modules.aids.Granting
-        AidType = rt.modules.aids.AidType
-        INTEG_DUTIES = Cycler(AidType.objects.filter(is_integ_duty=True))
-
-    qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
-    for i, client in enumerate(qs):
-    # for i, coaching in enumerate(pcsw.Coaching.objects.filter(type=DSBE)):
-        # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
-        af = settings.SITE.demo_date(-600 + i * 40)
-        kw = dict(applies_from=af, client=client)
-        coaching = client.get_coachings(None, type=DSBE)[0]
-        kw.update(user=coaching.user)
-        if i % 2:
-            ctr = jobs.Contract(
-                type=JOBS_CONTRACT_TYPES.pop(),
-                duration=JOBS_CONTRACT_DURATIONS.pop(),
-                job=JOBS.pop(), **kw)
-        else:
-            #~ af = settings.SITE.demo_date(-100+i*7)
-            ct = ISIP_CONTRACT_TYPES.pop()
-            if ct.needs_study_type:
-                kw.update(study_type=STUDY_TYPES.pop())
-            ctr = isip.Contract(
-                type=ct,
-                applies_until=af + datetime.timedelta(
-                    days=ISIP_DURATIONS.pop()), **kw)
-        if af is not None and af > settings.SITE.demo_date(-14):
-            if i % 5:
-                ctr.ending = PREMATURE_CONTRACT_ENDINGS.pop()
-                ctr.date_ended = af + datetime.timedelta(days=14)
-            else:
-                if ctr.applies_until is None or ctr.applies_until < settings.SITE.demo_date():
-                    ctr.ending = NORMAL_CONTRACT_ENDINGS.pop()
-
-        # msg = OverlappingContractsTest(ctr.client).check(ctr)
-        # if msg is None:
-        yield ctr
-        ar = rt.login()
-        ctr.update_reminders(ar)
-        if isinstance(ctr, isip.Contract):
-            if i % 3:
-                yield isip.ContractPartner(
-                    contract=ctr, company=COMPANIES.pop())
-                if i % 4:
-                    yield isip.ContractPartner(
-                        contract=ctr, company=COMPANIES.pop())
-
-            if dd.is_installed('aids'):
-                # create an income Granting for each isip contract:
-                kw = dict(start_date=ctr.applies_from,
-                          aid_type=INTEG_DUTIES.pop())
-                kw.update(client=ctr.client)
-                g = Granting(**kw)
-                g.after_ui_create(None)
-                yield g
-        
     # The reception desk opens at 8am. 20 visitors have checked in,
     # half of which
 

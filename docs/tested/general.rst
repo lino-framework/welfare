@@ -40,8 +40,8 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-46 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, beid, davlink, appypod, export_excel, djangosite.
-112 models:
+48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, djangosite.
+121 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
@@ -51,8 +51,8 @@ Test whether :meth:`get_db_overview_rst
  addresses.Address              16        119
  aids.AidType                   22        11
  aids.Category                  5         3
- aids.Granting                  10        29
- aids.IncomeConfirmation        16        40
+ aids.Granting                  10        42
+ aids.IncomeConfirmation        16        66
  aids.RefundConfirmation        17        4
  aids.SimpleConfirmation        14        13
  badges.Award                   6         0
@@ -60,9 +60,9 @@ Test whether :meth:`get_db_overview_rst
  boards.Board                   7         3
  boards.Member                  4         0
  cal.Calendar                   7         10
- cal.Event                      24        314
+ cal.Event                      24        597
  cal.EventType                  19        7
- cal.Guest                      9         240
+ cal.Guest                      9         616
  cal.GuestRole                  5         4
  cal.Priority                   6         4
  cal.RecurrentEvent             22        9
@@ -82,7 +82,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Person                33        109
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         113
+ contenttypes.ContentType       4         122
  countries.Country              8         8
  countries.Place                10        78
  courses.Course                 5         3
@@ -94,21 +94,21 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         63
  debts.Budget                   11        14
  debts.Entry                    16        686
- excerpts.Excerpt               12        64
- excerpts.ExcerptType           18        10
+ excerpts.Excerpt               12        90
+ excerpts.ExcerptType           18        11
  households.Household           29        14
  households.Member              13        63
  households.Type                5         6
  humanlinks.Link                4         59
- isip.Contract                  22        17
+ isip.Contract                  22        30
  isip.ContractEnding            6         4
- isip.ContractPartner           6         16
+ isip.ContractPartner           6         35
  isip.ContractType              9         5
  isip.EducationLevel            6         5
  isip.ExamPolicy                20        5
  isip.StudyType                 7         8
  jobs.Candidature               8         74
- jobs.Contract                  28        16
+ jobs.Contract                  28        24
  jobs.ContractType              9         5
  jobs.Experience                13        30
  jobs.Function                  7         4
@@ -144,6 +144,15 @@ Test whether :meth:`get_db_overview_rst
  pcsw.Exclusion                 6         0
  pcsw.ExclusionType             2         2
  pcsw.PersonGroup               4         5
+ polls.AnswerChoice             4         0
+ polls.AnswerRemark             4         0
+ polls.Choice                   7         31
+ polls.ChoiceSet                5         7
+ polls.Poll                     11        0
+ polls.Question                 6         0
+ polls.Response                 8         0
+ projects.Project               10        0
+ projects.ProjectType           5         0
  properties.PersonProperty      6         310
  properties.PropChoice          7         2
  properties.PropGroup           5         3
@@ -178,6 +187,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Neuanträge : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
+- Polls : Meine Polls, Meine Responses
 - Listings :
   - ÖSHZ : Datenkontrolle Klienten
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
@@ -196,6 +206,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Neuanträge : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
+  - Client projects : Client project types
+  - Polls : Choice Sets
 - Explorer :
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
@@ -210,6 +222,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
+  - Client projects : Client Projects
+  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
 - Site : Info
 <BLANKLINE>
 
