@@ -1,5 +1,6 @@
 .. _welfare.tested.general:
 
+=======
 General
 =======
 
@@ -13,6 +14,7 @@ General
     >>> from __future__ import print_function
     >>> from lino.runtime import *
     >>> from django.utils import translation
+    >>> from lino.utils.xmlgen.html import E
 
 
 See :blogref:`20130508`:
@@ -325,3 +327,17 @@ Theresia is a reception clerk.
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 
+
+Permissions
+-----------
+
+Test whether everybody can display the detail of a client:
+
+>>> o = pcsw.Client.objects.get(id=177)
+>>> r = dd.plugins.extjs.renderer
+>>> for u in 'robin', 'alicia', 'theresia':
+...     print(E.tostring(rt.login(u, renderer=r).obj2html(o)))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>

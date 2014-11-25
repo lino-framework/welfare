@@ -303,13 +303,6 @@ class Client(contacts.Person,
         sort_index=100,
         icon_name="transmit")
 
-    # def get_detail_action(self, ar):
-    #     p = ar.get_user().profile
-    #     for T in (Clients, reception.Clients):
-    #         a = T.detail_action
-    #         if a.get_view_permission(p):
-    #             return a
-
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
         if not ar.get_user().profile.newcomers_level:
@@ -899,9 +892,7 @@ ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
 
 class Clients(contacts.Persons):
     # ~ debug_permissions = True # '20120925'
-    #~ title = _("All Clients")
-    #~ title = _("Clients")
-    required = dd.Required(user_groups='coaching')
+    # required = dd.Required(user_groups='coaching')
     model = 'pcsw.Client'
     params_panel_hidden = True
 
