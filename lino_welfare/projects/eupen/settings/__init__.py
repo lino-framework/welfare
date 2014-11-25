@@ -40,6 +40,31 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
 
+    def startup(self):
+        super(Site, self).startup()
+
+        from lino.modlib.changes.models import watch_changes as wc
+
+        wc(self.modules.contacts.Partner)
+        wc(self.modules.contacts.Person, master_key='partner_ptr')
+        wc(self.modules.contacts.Company, master_key='partner_ptr')
+        wc(self.modules.pcsw.Client, master_key='partner_ptr')
+        wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
+        wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
+        wc(self.modules.jobs.Candidature, master_key='person__partner_ptr')
+
+        #~ self.modules.notes.Note.watch_changes(master_key='project')
+        #~ self.modules.outbox.Mail.watch_changes(master_key='project')
+        #~ self.modules.cal.Event.watch_changes(master_key='project')
+        #~ self.modules.debts.Budget.watch_changes(master_key='partner')
+
+        # ContractBase is abstract, so it's not under self.modules
+        from lino_welfare.modlib.isip.models import ContractBase
+        wc(ContractBase, master_key='client__partner_ptr')
+
+        from lino_welfare.modlib.cbss.models import CBSSRequest
+        wc(CBSSRequest, master_key='person__partner_ptr')
+
 
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
