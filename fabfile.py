@@ -1,8 +1,9 @@
 from atelier.fablib import *
-setup_from_project('lino_welfare', 'lino_welfare.projects.docs.settings.demo')
+setup_from_project('lino_welfare')
 
-env.demo_databases.append('lino_welfare.projects.eupen.settings.demo')
-env.demo_databases.append('lino_welfare.projects.chatelet.settings.demo')
+add_demo_database('lino_welfare.projects.docs.settings.demo')
+add_demo_database('lino_welfare.projects.eupen.settings.demo')
+add_demo_database('lino_welfare.projects.chatelet.settings.demo')
 
 env.use_mercurial = False
 env.apidoc_exclude_pathnames = ['lino_welfare/projects']
