@@ -32,7 +32,7 @@ Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links.
 
 >>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
-Mr Paul Frisch (236)
+Mr Paul FRISCH (236)
 
 >>> client = Client()
 >>> def check(uri, fieldname):
@@ -72,13 +72,13 @@ together. Their children have moved out.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Hubert")
 >>> print(obj)
-Mr Hubert Frisch (234)
+Mr Hubert FRISCH (234)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== =============== ========================== ============ =========== ============ ========
  Age        Role                Dependency      Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- --------------- -------------------------- ------------ ----------- ------------ --------
- 80 years   Head of household   Not at charge   Mr Hubert Frisch (234)     Hubert       Frisch      1933-07-21   Male
- 79 years   Partner             Not at charge   Mrs Gaby Frogemuth (235)   Gaby         Frogemuth   1934-08-04   Female
+ 80 years   Head of household   Not at charge   Mr Hubert FRISCH (234)     Hubert       Frisch      1933-07-21   Male
+ 79 years   Partner             Not at charge   Mrs Gaby FROGEMUTH (235)   Gaby         Frogemuth   1934-08-04   Female
 ========== =================== =============== ========================== ============ =========== ============ ========
 <BLANKLINE>
 
@@ -87,16 +87,16 @@ marriage with Paula Einzig.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Paul")
 >>> print(obj)
-Mr Paul Frisch (236)
+Mr Paul FRISCH (236)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== ================ ========================== ============ =========== ============ ========
  Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Head of household   Not at charge    Mr Paul Frisch (236)       Paul         Frisch      1967-06-19   Male
- 45 years   Partner             Not at charge    Mrs Petra Zweith (242)     Petra        Zweith      1968-12-19   Female
- 16 years   Child               At full charge   Mr Philippe Frisch (243)   Philippe     Frisch      1997-06-19   Male
- 14 years   Child               At full charge   Mrs Clara Frisch (244)     Clara        Frisch      1999-06-19   Female
- 12 years   Child               At full charge   Mr Dennis Frisch (246)     Dennis       Frisch      2001-06-19   Male
+ 46 years   Head of household   Not at charge    Mr Paul FRISCH (236)       Paul         Frisch      1967-06-19   Male
+ 45 years   Partner             Not at charge    Mrs Petra ZWEITH (242)     Petra        Zweith      1968-12-19   Female
+ 16 years   Child               At full charge   Mr Philippe FRISCH (243)   Philippe     Frisch      1997-06-19   Male
+ 14 years   Child               At full charge   Mrs Clara FRISCH (244)     Clara        Frisch      1999-06-19   Female
+ 12 years   Child               At full charge   Mr Dennis FRISCH (246)     Dennis       Frisch      2001-06-19   Male
 ========== =================== ================ ========================== ============ =========== ============ ========
 <BLANKLINE>
 
@@ -106,11 +106,11 @@ Here is their :class:`welfare.households.RefundsByPerson`:
 ==================== ======== ================= ===========
  Age                  Gender   Person            Amount
 -------------------- -------- ----------------- -----------
- 46 years             Male     Paul Frisch       20,00
- 45 years             Female   Petra Zweith      20,00
- 16 years             Male     Philippe Frisch   10,00
- 14 years             Female   Clara Frisch      10,00
- 12 years             Male     Dennis Frisch     10,00
+ 46 years             Male     Paul FRISCH       20,00
+ 45 years             Female   Petra ZWEITH      20,00
+ 16 years             Male     Philippe FRISCH   10,00
+ 14 years             Female   Clara FRISCH      10,00
+ 12 years             Male     Dennis FRISCH     10,00
  **Total (5 rows)**                              **70,00**
 ==================== ======== ================= ===========
 <BLANKLINE>
@@ -121,15 +121,15 @@ with their two children.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Ludwig")
 >>> print(obj)
-Mr Ludwig Frisch (237)
+Mr Ludwig FRISCH (237)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== ================ ========================== ============ =========== ============ ========
  Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Partner             Not at charge    Mrs Laura Loslever (247)   Laura        Loslever    1968-04-27   Female
- 46 years   Head of household   Not at charge    Mr Ludwig Frisch (237)     Ludwig       Frisch      1968-06-01   Male
- 12 years   Child               At full charge   Mrs Melba Frisch (248)     Melba        Frisch      2002-04-05   Female
- 6 years    Child               At full charge   Mrs Irma Frisch (249)      Irma         Frisch      2008-03-24   Female
+ 46 years   Partner             Not at charge    Mrs Laura LOSLEVER (247)   Laura        Loslever    1968-04-27   Female
+ 46 years   Head of household   Not at charge    Mr Ludwig FRISCH (237)     Ludwig       Frisch      1968-06-01   Male
+ 12 years   Child               At full charge   Mrs Melba FRISCH (248)     Melba        Frisch      2002-04-05   Female
+ 6 years    Child               At full charge   Mrs Irma FRISCH (249)      Irma         Frisch      2008-03-24   Female
 ========== =================== ================ ========================== ============ =========== ============ ========
 <BLANKLINE>
 
@@ -140,10 +140,10 @@ Here is their :class:`welfare.households.RefundsByPerson`:
 ==================== ======== ================ ===========
  Age                  Gender   Person           Amount
 -------------------- -------- ---------------- -----------
- 46 years             Female   Laura Loslever   20,00
- 46 years             Male     Ludwig Frisch    20,00
- 12 years             Female   Melba Frisch     10,00
- 6 years              Female   Irma Frisch      10,00
+ 46 years             Female   Laura LOSLEVER   20,00
+ 46 years             Male     Ludwig FRISCH    20,00
+ 12 years             Female   Melba FRISCH     10,00
+ 6 years              Female   Irma FRISCH      10,00
  **Total (4 rows)**                             **60,00**
 ==================== ======== ================ ===========
 <BLANKLINE>

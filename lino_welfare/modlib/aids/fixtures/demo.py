@@ -13,6 +13,7 @@
 # along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
+The demo fixture for :mod:`welfare.aids`.
 """
 
 import datetime

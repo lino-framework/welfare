@@ -53,10 +53,10 @@ Test whether :meth:`get_db_overview_rst
  addresses.Address              16        119
  aids.AidType                   22        11
  aids.Category                  5         3
- aids.Granting                  10        42
- aids.IncomeConfirmation        16        66
- aids.RefundConfirmation        17        4
- aids.SimpleConfirmation        14        13
+ aids.Granting                  10        53
+ aids.IncomeConfirmation        16        54
+ aids.RefundConfirmation        17        12
+ aids.SimpleConfirmation        14        19
  badges.Award                   6         0
  badges.Badge                   5         0
  boards.Board                   7         3
@@ -96,7 +96,7 @@ Test whether :meth:`get_db_overview_rst
  debts.Actor                    6         63
  debts.Budget                   11        14
  debts.Entry                    16        686
- excerpts.Excerpt               12        90
+ excerpts.Excerpt               12        92
  excerpts.ExcerptType           18        11
  households.Household           29        14
  households.Member              13        63
@@ -136,7 +136,7 @@ Test whether :meth:`get_db_overview_rst
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
  pcsw.Client                    65        63
- pcsw.ClientContact             7         0
+ pcsw.ClientContact             7         14
  pcsw.ClientContactType         7         9
  pcsw.Coaching                  8         90
  pcsw.CoachingEnding            7         4

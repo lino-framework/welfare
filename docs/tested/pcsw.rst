@@ -50,8 +50,8 @@ set([u'Dobbelstein', u'Doroth\xe9e'])
 ================================================= ==========
  Other                                             Workflow
 ------------------------------------------------- ----------
- **Mrs Dorothée Dobbelstein (124)**
- **Mrs Dorothée Dobbelstein-Demeulenaere (123)**
+ **Mrs Dorothée DOBBELSTEIN (124)**
+ **Mrs Dorothée DOBBELSTEIN-DEMEULENAERE (123)**
 ================================================= ==========
 <BLANKLINE>
 
@@ -70,7 +70,7 @@ This function returns the names of the persons that Lino would detect
 as duplicates, depending on the given first_name and last_name.
 
 >>> check("Bernard", "Bodard")
-[u'Bernard Bodard (170*)']
+[u'Bernard BODARD (170*)']
 
 Without our utility function the above test would be less readable:
 
@@ -79,17 +79,17 @@ Without our utility function the above test would be less readable:
 =========================== ==========
  Other                       Workflow
 --------------------------- ----------
- **Bernard Bodard (170*)**
+ **Bernard BODARD (170*)**
 =========================== ==========
 <BLANKLINE>
 
 Some users tend to mix up first and last name. Lino would detect that:
 
 >>> check("Bodard", "Bernard")
-[u'Bernard Bodard (170*)']
+[u'Bernard BODARD (170*)']
 
 >>> check("Erna", "Odar")
-[u'Bernard Bodard (170*)']
+[u'Bernard BODARD (170*)']
 
 The following duplicates are **not yet** detected though they obviously
 should. We are still experimenting...

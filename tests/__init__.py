@@ -33,18 +33,19 @@ class BaseTestCase(TestCase):
     project_root = Path(__file__).parent.parent
 
 
-class DjangoTests(BaseTestCase):
+class ProjectsTests(BaseTestCase):
     """
-    $ python setup.py test -s tests.DjangoTests
+    $ python setup.py test -s tests.ProjectsTests
     """
     def test_docs(self):
-        # self.run_django_manage_test('lino_welfare/projects/docs')
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'docs', 'tests').absolute()
         self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
     
-    # def test_eupen(self):
-    #     self.run_django_manage_test('lino_welfare/projects/eupen')
+    def test_eupen(self):
+        cwd = self.project_root.child(
+            'lino_welfare', 'projects', 'eupen', 'tests').absolute()
+        self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
 
     # def test_chatelet(self):
     #     self.run_django_manage_test('lino_welfare/projects/chatelet')

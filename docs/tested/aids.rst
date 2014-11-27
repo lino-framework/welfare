@@ -117,18 +117,19 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 3 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+<span>Du hast 4 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
 
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================== ========================= ============== ===== ======= ================================
- Klient                 Hilfeart                  Laufzeit von   bis   Autor   Arbeitsablauf
----------------------- ------------------------- -------------- ----- ------- --------------------------------
- DUBOIS Robin (179)     Ausländerbeihilfe         05.01.14                     **Unbestätigt** → [Bestätigen]
- DUBOIS Robin (179)     Eingliederungseinkommen   26.02.13                     **Unbestätigt** → [Bestätigen]
- DA VINCI David (165)   Eingliederungseinkommen   27.01.13                     **Unbestätigt** → [Bestätigen]
-====================== ========================= ============== ===== ======= ================================
+======================== ========================= ============== ========== ======= ================================
+ Klient                   Hilfeart                  Laufzeit von   bis        Autor   Arbeitsablauf
+------------------------ ------------------------- -------------- ---------- ------- --------------------------------
+ EMONTS-GAST Erna (152)   Heizkosten                30.05.14       31.05.14           **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Ausländerbeihilfe         05.01.14                          **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Eingliederungseinkommen   26.02.13                          **Unbestätigt** → [Bestätigen]
+ DA VINCI David (165)     Eingliederungseinkommen   27.01.13                          **Unbestätigt** → [Bestätigen]
+======================== ========================= ============== ========== ======= ================================
 <BLANKLINE>
 
 
@@ -145,26 +146,32 @@ In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
 ...    print("%s : %d" % (unicode(at), qs.count()))
-Eingliederungseinkommen : 32
-Ausländerbeihilfe : 32
-Feste Beihilfe : 2
-Erstattung : 2
-Übernahmeschein : 2
-Übernahme von Arzt- und/oder Medikamentenkosten : 2
-Dringende Medizinische Hilfe : 2
-Möbellager : 2
-Heizkosten : 2
-Lebensmittelbank : 2
-Kleiderkammer : 3
+Eingliederungseinkommen : 18
+Ausländerbeihilfe : 33
+Feste Beihilfe : 3
+Erstattung : 3
+Übernahmeschein : 3
+Übernahme von Arzt- und/oder Medikamentenkosten : 6
+Dringende Medizinische Hilfe : 6
+Möbellager : 3
+Heizkosten : 3
+Lebensmittelbank : 3
+Kleiderkammer : 4
 
 
 Grantings by ISIP contract
 ==========================
 
-TODO: the following has changed. Verify whether new situation is
-okay.
+The :meth:`welfare.isip.ContractBase.get_aid_type`
+method (called from the document template when printing a 
+:mod:`welfare.isip.Contract` in Eupen)
+works only when 
+:meth:`welfare.isip.ContractBase.get_grantings`
+returns exactly one granting.
+Which is the normal situation.
 
-There are 30 ISIP contracts, and each of them has one granting:
+The demo fixtures generate some exceptions to this general rule.  Here
+we see that most contracts have indeed exactly 1 granting:
 
 >>> isip.Contract.objects.all().count()
 30
@@ -176,5 +183,5 @@ There are 30 ISIP contracts, and each of them has one granting:
 ...     l = dist.setdefault(k, [])
 ...     l.append(con.id)
 >>> print(dist)
-{1: [1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29], 2: [6, 9, 13, 15, 17, 20, 22, 25, 28, 30], 3: [2, 7], 4: [3]}
+{1: [1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29], 2: [9, 13, 15, 17, 20, 22, 25, 28, 30], 3: [2, 6, 7], 4: [3]}
 

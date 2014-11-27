@@ -2,17 +2,17 @@
 # Copyright 2013-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-This module contains tests for the 
-:mod:`watch_tim <lino_welfare.management.commands.watch_tim>`
-command.
+"""This module contains tests for the :mod:`watch_tim
+<lino_welfare.management.commands.watch_tim>` command.
+
 You can run only these tests by issuing::
 
-  $ python manage.py test lino_welfare.tests.test_watchtim
+  $ cd lino_welfare/projects/eupen/tests
+  $ ./run_tests.sh
   
-The module contains a single huge test case because we don't want 
+The module contains a single huge test case because we don't want
 Django to recreate a virgin test database for each of them.
-  
+
 """
 
 from __future__ import unicode_literals
@@ -20,16 +20,12 @@ from __future__ import unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-#~ from django.utils import unittest
-#~ from django.test.client import Client
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import translation
 
-from lino import dd, rt
+from lino import dd
 from lino.utils import i2d
-#~ from lino.core.dbutils import resolve_model
-#Companies = resolve_model('contacts.Companies')
 from djangosite.utils.djangotest import TestCase
 
 from lino_welfare.management.commands.watch_tim import process_line
@@ -207,7 +203,8 @@ class TestCase(TestCase):
         self.assertEqual(coaching.primary, True)
         self.assertEqual(coaching.user.username, 'alicia')
         self.assertEqual(coaching.start_date, i2d(19850723))
-        s = changes_to_rst(client.partner_ptr)
+        with translation.override('en'):
+            s = changes_to_rst(client.partner_ptr)
         # print s
         self.assertEqual(s, """\
 =========== ============= ================================ ============================================================================= ============= ===========
@@ -279,8 +276,9 @@ class TestCase(TestCase):
         process_line(ln)
         obj = Client.objects.get(id=23649)
         self.assertEqual(obj.first_name, "Denis")
-        s = changes_to_rst(obj.partner_ptr)
-        #~ cannot easily test due to `modified` timestamp
+        with translation.override('en'):
+            s = changes_to_rst(obj.partner_ptr)
+        #~ skipped because cannot easily test due to `modified` timestamp
         #~ print s
         #~ self.assertEqual(s,"""\
 #~ =========== ============= ======================== ====================
@@ -314,7 +312,8 @@ class TestCase(TestCase):
         self.assertDoesNotExist(Client, id=5)
         obj = Company.objects.get(id=5)
         self.assertEqual(obj.name, "Air Liquide Belgium")
-        s = changes_to_rst(obj.partner_ptr)
+        with translation.override('en'):
+            s = changes_to_rst(obj.partner_ptr)
         # print s
         self.assertEqual(s, """\
 +-----------+-------------+------------------------------+-------------------------------------+--------------+-----------+
@@ -328,7 +327,7 @@ class TestCase(TestCase):
 |           |             |                              | - prefix : '' --> 'S.A.'            |              |           |
 |           |             |                              | - street : '' --> 'Quai des Vennes' |              |           |
 |           |             |                              | - remarks : '' --> '\\n'             |              |           |
-|           |             |                              | - language : 'en' --> 'fr'          |              |           |
+|           |             |                              | - language : 'de' --> 'fr'          |              |           |
 |           |             |                              | - phone : '' --> '04/349.89.89'     |              |           |
 |           |             |                              | - country_id : None --> 'B'         |              |           |
 |           |             |                              | - zip_code : '' --> '4020'          |              |           |
@@ -346,7 +345,8 @@ class TestCase(TestCase):
         obj = Company.objects.get(id=9932)
         self.assertEqual(obj.name, "Andenne, CPAS")
 
-        s = changes_to_rst(obj.partner_ptr)
+        with translation.override('en'):
+            s = changes_to_rst(obj.partner_ptr)
         #~ print s
         self.assertEqual(s, """\
 =========== ============== ====================== ================== ============= ===========
@@ -608,7 +608,8 @@ class TestCase(TestCase):
 
 def changes_to_rst(master):
     A = settings.SITE.modules.changes.ChangesByMaster
-    return A.request(master).to_rst(column_names='user type object diff:30 object_type object_id')
+    return A.request(master).to_rst(
+        column_names='user type object diff:30 object_type object_id')
 
 
 def coachings_to_rst(master):
