@@ -1401,9 +1401,11 @@ class ClientContactTypes(dd.Table):
     required = dd.required(user_level='manager')
 
     # TODO: `can_refund` is injected in aids, `is_bailiff` in debts
+    # NOTE: this is being overridden by lino_welfare.projects.eupen
     detail_layout = """
     id name
     contacts.PartnersByClientContactType
+    pcsw.ClientContactsByType
     """
 
     column_names = 'id name *'

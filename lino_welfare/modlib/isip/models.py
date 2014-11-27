@@ -30,14 +30,12 @@ contacts = dd.resolve_app('contacts')
 from lino.modlib.excerpts.mixins import Certifiable
 
 from lino.utils.ranges import isrange, overlap2, encompass
+from lino.mixins.periods import rangefmt
+from lino.models import PeriodEvents
 
 from lino_welfare.modlib.system.models import Signers
 
-from lino_welfare.modlib.isip import Plugin
-
-
-def rangefmt(r):
-    return dd.dtos(r[0]) + '...' + dd.dtos(r[1])
+config = dd.plugins.isip
 
 
 cal = dd.resolve_app('cal')
@@ -124,7 +122,7 @@ class ContractEnding(dd.Model):
         verbose_name_plural = _('Contract termination reasons')
 
     name = models.CharField(_("designation"), max_length=200)
-    use_in_isip = models.BooleanField(Plugin.verbose_name, default=True)
+    use_in_isip = models.BooleanField(config.verbose_name, default=True)
     use_in_jobs = models.BooleanField(JOBS_MODULE_NAME, default=True)
     is_success = models.BooleanField(_("Success"), default=False)
     needs_date_ended = models.BooleanField(
@@ -454,7 +452,7 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
         at_list = rt.modules.aids.AidType.objects.filter(is_integ_duty=True)
         qs = rt.modules.aids.Granting.objects.filter(
             client=self.client, aid_type__in=at_list)
-        return rt.modules.lino.PeriodEvents.active.add_filter(qs, ap)
+        return PeriodEvents.active.add_filter(qs, ap)
 
     def get_aid_type(self):
         qs = self.get_grantings()

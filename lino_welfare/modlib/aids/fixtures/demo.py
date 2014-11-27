@@ -15,6 +15,8 @@
 """
 """
 
+import datetime
+
 from django.utils.translation import ugettext_lazy as _
 from lino.dd import resolve_model
 from lino.utils import Cycler, ONE_DAY
@@ -49,24 +51,33 @@ def objects():
 
     BOARDS = Cycler(Board.objects.all())
 
+    DURATIONS = Cycler(None, 1, 1, 30, 0, None, 365)
+
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     pharmacy_type = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
     PHARMACIES = Cycler(rt.modules.contacts.Company.objects.filter(
         client_contact_type=pharmacy_type))
 
     for i, at in enumerate(AidType.objects.all()):
-        kw = dict(start_date=dd.demo_date(days=i),
-                  board=BOARDS.pop(),
-                  decision_date=dd.demo_date(days=i-1),
-                  aid_type=at)
-        kw.update(client=PROJECTS.pop())
-        g = Granting(**kw)
-        g.after_ui_create(None)
-        yield g
+        for j in range(2):
+            sd = dd.demo_date(days=i)
+            kw = dict(start_date=sd,
+                      board=BOARDS.pop(),
+                      decision_date=dd.demo_date(days=i-1),
+                      aid_type=at)
+
+            kw.update(client=PROJECTS.pop())
+            duration = DURATIONS.pop()
+            if duration is not None:
+                kw.update(end_date=sd+datetime.timedelta(days=duration))
+            g = Granting(**kw)
+            g.after_ui_create(None)
+            yield g
 
     # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
     RefundConfirmation = rt.modules.aids.RefundConfirmation
     IncomeConfirmation = rt.modules.aids.IncomeConfirmation
+    ClientContact = rt.modules.pcsw.ClientContact
 
     COACHES = Cycler(rt.modules.users.User.objects.filter(
         coaching_type__isnull=False))
@@ -74,22 +85,36 @@ def objects():
     AMOUNTS = Cycler(123, 234, 345, 456, 678)
     CATEGORIES = Cycler(rt.modules.aids.Category.objects.all())
 
-    for g in Granting.objects.filter(aid_type__isnull=False):
-        for i in range(2):
-            ct = g.aid_type.confirmation_type
+    # create 1 or 2 confirmations per granting
+    for i, g in enumerate(Granting.objects.filter(aid_type__isnull=False)):
+        ct = g.aid_type.confirmation_type
+        num = i % 2 + 1
+        if ct.model == RefundConfirmation:
+            num = 3  # always create 3 confirmations per refund granting
+        if g.aid_type.pharmacy_type == pharmacy_type:
+            pharmacy = PHARMACIES.pop()
+            yield ClientContact(
+                type=pharmacy_type,
+                company=pharmacy, client=g.client)
+        for j in range(num):
             kw = dict(granting=g, client=g.client)
             kw.update(user=COACHES.pop())
-            kw.update(start_date=g.start_date + ONE_DAY)
-            kw.update(end_date=g.start_date + ONE_DAY + ONE_DAY)
+            kw.update(start_date=g.start_date)
+            kw.update(end_date=g.end_date)
             if ct.model == IncomeConfirmation:
                 kw.update(category=CATEGORIES.pop())
                 kw.update(amount=AMOUNTS.pop())
             if ct.model == RefundConfirmation:
-                type, cycler = PARTNERS.pop()
-                kw.update(doctor_type=type)
-                kw.update(doctor=cycler.pop())
+                doctor_type, doctor_cycler = PARTNERS.pop()
+                doctor = doctor_cycler.pop()
+                kw.update(doctor_type=doctor_type)
+                kw.update(doctor=doctor)
+                yield ClientContact(
+                    type=doctor_type,
+                    contact_person=doctor, client=g.client)
+
                 if g.aid_type.pharmacy_type == pharmacy_type:
-                    kw.update(pharmacy=PHARMACIES.pop())
+                    kw.update(pharmacy=pharmacy)
             yield ct.model(**kw)
 
     ses = rt.login('theresia')

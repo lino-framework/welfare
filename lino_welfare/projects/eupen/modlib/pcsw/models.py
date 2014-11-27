@@ -209,5 +209,6 @@ Clients.detail_layout = ClientDetail()
 ClientContactTypes.detail_layout = """
 id name can_refund is_bailiff
 contacts.PartnersByClientContactType
+pcsw.ClientContactsByType
 """
 ClientContactTypes.column_names = "id name can_refund is_bailiff"

@@ -214,7 +214,7 @@ latex_documents = [
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
 
-extlinks.update(ticket=('https://trac.mylino.org/ticket/%s', '#'))
+extlinks.update(ticket=('https://trac.lino-framework.org/ticket/%s', '#'))
 
 # extlinks = {
 #   'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),

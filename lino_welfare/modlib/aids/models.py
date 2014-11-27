@@ -21,6 +21,7 @@ import logging
 logger = logging.getLogger(__name__)
 import types
 
+from django.conf import settings
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -28,18 +29,15 @@ from django.utils.translation import pgettext_lazy as pgettext
 
 from lino import dd, rt
 from lino.utils.xmlgen.html import E
-from django.conf import settings
+from lino.utils.ranges import encompass
 
 from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.addresses.mixins import AddressTypes
+from lino.mixins.periods import rangefmt
 
-# contacts = dd.resolve_app('contacts')
 boards = dd.resolve_app('boards')
-# pcsw = dd.resolve_app('pcsw')
-# contacts = dd.require_app_models('contacts')
-# addresses = dd.require_app_models('addresses')
 
 
 def e2text(v):
@@ -543,7 +541,6 @@ class GrantingsByType(GrantingsByX):
     column_names = "description_column client start_date end_date *"
 
 
-
 ##
 ## Confirmation
 ##
@@ -569,6 +566,17 @@ class Confirmation(
         if self.granting is not None:
             return '%s/%s' % (self.granting, self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
+
+    def full_clean(self):
+        super(Confirmation, self).full_clean()
+        if self.granting is None:
+            return
+        gp = self.granting.get_period()
+        cp = self.get_period()
+        if not encompass(gp, cp):
+            msg = _("Date range %(p1)s lies outside of granted "
+                    "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
+            raise ValidationError(msg)
 
     def on_create(self, ar):
         if self.granting_id:
@@ -899,10 +907,16 @@ class RefundConfirmation(Confirmation):
         'contacts.Company', verbose_name=_("Pharmacy"),
         blank=True, null=True)
 
-    # def on_create(self, ar):
-    #     super(RefundConfirmation, self).on_create(ar)
-    #     if self.client_id:
-    #         logger.info("20141003 %s", self.client)
+    def after_ui_create(self, ar):
+        super(RefundConfirmation, self).after_ui_create(ar)
+        logger.info("20141127 RefundConfirmation %s %s",
+                    self.granting, self.client)
+
+    def on_create(self, ar):
+        super(RefundConfirmation, self).on_create(ar)
+        qs = self.pharmacy_choices(self.granting)
+        if qs.count() > 0:
+            self.pharmacy = qs[0]
 
     @dd.chooser()
     def doctor_choices(cls, doctor_type):
