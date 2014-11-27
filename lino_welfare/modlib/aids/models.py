@@ -707,8 +707,23 @@ class Confirmations(dd.Table):
 #         kw.update(state=ConfirmationStates.requested)
 #         return kw
 
+class PrintConfirmation(dd.Action):
+
+    label = _("Print")
+    icon_name = "printer"
+
+    def run_from_ui(self, ar, **kw):
+        for obj in ar.selected_rows:
+            obj.do_print.run_from_ui(ar)
+
 
 class ConfirmationsByGranting(dd.VirtualTable):
+
+    # This is a "pseudo-virtual" table because it operates on normal
+    # database objects.  It needs to be virtual because Confirmation
+    # is an abstract model.  In order to have a detail and a print
+    # function, it must define `get_pk_field` and `get_row_by_pk`.
+
     label = _("Issued confirmations")
     required = dd.required(user_groups='office')
     master = 'aids.Granting'
@@ -725,6 +740,25 @@ class ConfirmationsByGranting(dd.VirtualTable):
         if not ct:
             return []
         return ct.model.objects.filter(granting=mi).order_by()
+
+    @classmethod
+    def get_pk_field(self):
+        # We return the pk of SimpleConfirmation although in reality
+        # the table can also display other subclasses of
+        # Confirmation. That's ok since the primary keys of these
+        # subclasses are of same type and name (they are all automatic
+        # id fields).
+        return SimpleConfirmation._meta.pk
+
+    @classmethod
+    def get_row_by_pk(self, ar, pk):
+        mi = ar.master_instance
+        if mi is None:
+            return None
+        ct = mi.aid_type.confirmation_type
+        if not ct:
+            return None
+        return ct.model.objects.get(pk=pk)
 
     @dd.virtualfield('aids.SimpleConfirmation.start_date')
     def start_date(self, obj, ar):
@@ -750,11 +784,11 @@ class ConfirmationsByGranting(dd.VirtualTable):
     def description_column(self, obj, ar):
         return ar.obj2html(obj)
 
-    @dd.action(_("Print"), icon_name="printer")
-    def do_print(self, obj, ar):
-        # never called because Lino cannot yet run row actions in a
-        # virtual table.
-        return obj.do_print.run(ar)
+    # @dd.action(_("Print"), icon_name="printer")
+    # def do_print(self, obj, ar):
+    #     return obj.do_print.run(ar)
+
+    do_print = PrintConfirmation()
 
 
 ##
