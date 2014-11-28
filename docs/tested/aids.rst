@@ -4,9 +4,9 @@
 Social aids
 ===========
 
-..
-  This document is part of the test suite.
-  To test only this document, run::
+..  This document is part of the test suite.  To test only this
+  document, run::
+
     $ python setup.py test -s tests.DocsTests.test_aids
 
 ..
@@ -185,3 +185,17 @@ we see that most contracts have indeed exactly 1 granting:
 >>> print(dist)
 {1: [1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29], 2: [9, 13, 15, 17, 20, 22, 25, 28, 30], 3: [2, 6, 7], 4: [3]}
 
+
+
+The following test is rather useless...
+
+>>> client = Client()
+>>> url = "/api/aids/IncomeConfirmationsByGranting"
+>>> url += "?su=7&mt=107&mk=3&an=insert"
+>>> res = client.get(url, REMOTE_USER='rolf')
+>>> print(res.status_code)
+200
+>>> soup = BeautifulSoup(res.content)
+>>> scripts = soup.body.find_all('script', type="text/javascript")
+>>> "Lino.aids.IncomeConfirmationsByGranting.insert.run" in str(scripts[-1])
+True

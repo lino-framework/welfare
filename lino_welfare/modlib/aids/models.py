@@ -730,6 +730,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     master_key = 'granting'
     column_names = "description_column created user printed " \
                    "start_date end_date *"
+    do_print = PrintConfirmation()
 
     @classmethod
     def get_data_rows(self, ar):
@@ -783,12 +784,6 @@ class ConfirmationsByGranting(dd.VirtualTable):
     @dd.displayfield(_("Description"))
     def description_column(self, obj, ar):
         return ar.obj2html(obj)
-
-    # @dd.action(_("Print"), icon_name="printer")
-    # def do_print(self, obj, ar):
-    #     return obj.do_print.run(ar)
-
-    do_print = PrintConfirmation()
 
 
 ##
