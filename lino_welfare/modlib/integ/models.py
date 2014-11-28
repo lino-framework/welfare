@@ -27,8 +27,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from lino import dd, rt
+from lino import dd
 from lino.utils.xmlgen.html import E
+from lino.modlib.users.mixins import UserProfiles, UserLevels
 
 plugin = dd.apps.integ
 
@@ -143,13 +144,12 @@ class UsersWithClients(dd.VirtualTable):
         see other system admins.
 
         """
-        #~ profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
         u = ar.get_user()
-        if u is None or u.profile.level < dd.UserLevels.admin:
-            profiles = [p for p in dd.UserProfiles.items()
-                        if p.integ_level and p.level < dd.UserLevels.admin]
+        if u is None or u.profile.level < UserLevels.admin:
+            profiles = [p for p in UserProfiles.items()
+                        if p.integ_level and p.level < UserLevels.admin]
         else:
-            profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
+            profiles = [p for p in UserProfiles.items() if p.integ_level]
             #~ qs = qs.exclude(profile__gte=UserLevels.admin)
 
         qs = users.User.objects.filter(profile__in=profiles)

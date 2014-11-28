@@ -29,7 +29,7 @@ def objects():
     User = resolve_model('users.User')
     kerstin = User(username="kerstin",
                    first_name="Kerstin", last_name=u"Kerres",
-                   profile='300')  # UserProfiles.kerstin)
+                   profile='300')
         #~ level=UserLevel.user,
         #~ debts_level=UserLevel.user)
     yield kerstin

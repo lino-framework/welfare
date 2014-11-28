@@ -23,6 +23,8 @@ from lino.core import constants
 from djangosite.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 
+from lino.modlib.users.mixins import UserProfiles
+
 from lino.modlib.beid.mixins import holder_model
 Holder = holder_model()
 
@@ -48,7 +50,7 @@ class BeIdTests(RemoteAuthTestCase):
     def test01(self):
         self.assertEqual(1+1, 2)
         u = users.User(username='root',
-                       profile=dd.UserProfiles.admin,
+                       profile=UserProfiles.admin,
                        language="en")
         u.save()
         be = countries.Country(name="Belgium", isocode="BE")

@@ -65,7 +65,7 @@ class User(User):
             return
 
         coaching_profiles = set()
-        for p in dd.UserProfiles.items():
+        for p in UserProfiles.items():
             if p.coaching_level:
                 coaching_profiles.add(p)
         for u in User.objects.filter(

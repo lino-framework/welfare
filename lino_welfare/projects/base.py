@@ -74,12 +74,13 @@ class Site(Site):
         """
         This defines default user profiles for :ref:`welfare`.
         """
-        from lino import dd
         from django.utils.translation import ugettext_lazy as _
-        dd.UserProfiles.reset(
+        from lino.modlib.users.mixins import UserProfiles
+
+        UserProfiles.reset(
             '* office coaching integ courses cbss newcomers debts '
             'reception beid')
-        add = dd.UserProfiles.add_item
+        add = UserProfiles.add_item
         add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _ _',
             name='anonymous',
             readonly=True,

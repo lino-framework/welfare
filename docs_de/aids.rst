@@ -28,6 +28,31 @@ Medikamentenkosten* hat, ist das ein *Beschluss*. Um daraus eine
 *Bescheinigung* zu machen, muss man auch *Apotheke* und *Arzt*
 angeben.
 
+
+Wortschatz
+==========
+
+.. glossary::
+  :sorted:
+
+
+  DMH
+
+    Dringende medizinische Hilfe (en: Urgent medical care / fr: Aide
+    médicale urgente / nl: Dringende Medische Hulp)
+
+    Die dringende medizinische Hilfe ist eine medizinische Hilfe in
+    Form einer finanziellen Beteiligung durch das ÖSHZ an den
+    medizinischen Kosten einer Person, die sich illegal in Belgien
+    aufhält.  Die DMH ist keine finanzielle Hilfe, die direkt an die
+    Person gezahlt wird, sondern möchte Illegalen lediglich den Zugang
+    zur medizinischen Hilfe durch die Bezahlung des Arztes, des
+    Krankenhauses, des Apothekers sicherstellen.  (Quelle:
+    `www.mi-is.be
+    <http://www.mi-is.be/en/public-social-welfare-centers/urgent-medicale-care>`_)
+
+
+
 Hilfearten
 ==========
 

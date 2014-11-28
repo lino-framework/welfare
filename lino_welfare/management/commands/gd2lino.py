@@ -32,9 +32,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
-#~ from lino.modlib.contacts.models import name2kw, street2kw, join_words
 from lino.utils.instantiator import Instantiator
-#~ from lino.modlib.users.models import UserProfiles
 
 from lino import dd, rt
 from lino import rt

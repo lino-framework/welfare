@@ -10,9 +10,9 @@ from lino.core.dbutils import resolve_model
 
 #~ from django.db import models
 from north.dbutils import babel_values
-#~ from lino.core.perms import UserProfiles
 
 from lino import dd, rt
+from lino.modlib.users.mixins import UserProfiles
 
 
 def objects():
@@ -58,7 +58,7 @@ def objects():
     FACULTIES = Cycler(newcomers.Faculty.objects.all())
 
     profiles = [
-        p for p in dd.UserProfiles.items() if p.integ_level and p.level < dd.UserLevels.admin]
+        p for p in UserProfiles.items() if p.integ_level and p.level < dd.UserLevels.admin]
     qs = users.User.objects.filter(profile__in=profiles)
     for u in qs:
         u.newcomer_quota = QUOTAS.pop()

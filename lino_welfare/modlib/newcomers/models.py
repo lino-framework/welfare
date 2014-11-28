@@ -20,6 +20,7 @@ from lino.utils.choosers import chooser
 from lino import mixins
 from django.conf import settings
 from lino.modlib.cal.utils import amonthago
+from lino.modlib.users.mixins import UserProfiles
 
 
 users = dd.resolve_app('users')
@@ -324,7 +325,7 @@ class AvailableCoaches(users.Users):
 
     @classmethod
     def get_request_queryset(self, ar):
-        profiles = [p for p in dd.UserProfiles.items() if p.integ_level]
+        profiles = [p for p in UserProfiles.items() if p.integ_level]
         return super(AvailableCoaches, self, ar).filter(models.Q(profile__in=profiles))
 
     @classmethod
