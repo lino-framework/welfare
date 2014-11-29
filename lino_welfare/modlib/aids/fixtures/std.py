@@ -97,7 +97,7 @@ def objects():
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     cct_pharmacy = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
     kw.update(pharmacy_type=cct_pharmacy)
-    kw.update(body_template='certificate.body.html')
+    kw.update(body_template='medical_refund.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
@@ -108,6 +108,7 @@ def objects():
         en="Urgent Medical Care",
         fr="Aide Médicale Urgente")
     kw.update(short_name="DMH")
+    kw.update(is_urgent=True)
     kw.update(body_template='urgent_medical_care.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)

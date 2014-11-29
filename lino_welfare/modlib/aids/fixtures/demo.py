@@ -87,10 +87,11 @@ def objects():
     CATEGORIES = Cycler(rt.modules.aids.Category.objects.all())
 
     # create 1 or 2 confirmations per granting
+    urgent_aid_generated = 0
     for i, g in enumerate(Granting.objects.filter(aid_type__isnull=False)):
         ct = g.aid_type.confirmation_type
         num = i % 2 + 1
-        if ct.model == RefundConfirmation:
+        if ct.model is RefundConfirmation:
             num = 3  # always create 3 confirmations per refund granting
         if g.aid_type.pharmacy_type == pharmacy_type:
             pharmacy = PHARMACIES.pop()
@@ -102,10 +103,10 @@ def objects():
             kw.update(user=COACHES.pop())
             kw.update(start_date=g.start_date)
             kw.update(end_date=g.end_date)
-            if ct.model == IncomeConfirmation:
+            if ct.model is IncomeConfirmation:
                 kw.update(category=CATEGORIES.pop())
                 kw.update(amount=AMOUNTS.pop())
-            if ct.model == RefundConfirmation:
+            if ct.model is RefundConfirmation:
                 doctor_type, doctor_cycler = PARTNERS.pop()
                 doctor = doctor_cycler.pop()
                 kw.update(doctor_type=doctor_type)
@@ -113,10 +114,21 @@ def objects():
                 yield ClientContact(
                     type=doctor_type,
                     contact_person=doctor, client=g.client)
-
-                if g.aid_type.pharmacy_type == pharmacy_type:
+                # only the first confirmation has a pharmacy
+                if g.aid_type.pharmacy_type == pharmacy_type and j == 0:
                     kw.update(pharmacy=pharmacy)
             yield ct.model(**kw)
+
+        # for two refund grantings, create the corresponding
+        # additional granting of urgent medical help
+        if ct.model is RefundConfirmation and urgent_aid_generated < 2:
+            kw = dict()
+            kw.update(client=g.client)
+            kw.update(start_date=g.start_date)
+            kw.update(end_date=g.end_date)
+            kw.update(aid_type=AidType.objects.get(short_name="DMH"))
+            yield Granting(**kw)
+            urgent_aid_generated += 1
 
     ses = rt.login('theresia')
 

@@ -23,7 +23,8 @@ Mixins
 
   .. attribute:: exam_policy
 
-    Pointer to the :class:`ExamPolicy`
+    Pointer to the :class:`ExamPolicy`. This field tells Lino how many
+    automatic calendar events to generate for evaluation meetings.
 
   .. attribute:: language
 
@@ -33,18 +34,23 @@ Mixins
 
   .. attribute:: user
 
-  The responsible integration agent.
+    The responsible integration agent.
 
   .. attribute:: user_asd
 
-  The responsible general social agent (if there is any).
+    The responsible general social agent (if there is any).
 
+  .. method:: get_granting(self, **aidtype_filter)
+
+    Return the one and only granting which matches the specified
+    filter criteria and appliable during the period of this contract.
+  
   .. method:: get_aid_type
 
-  Return the *integration aid type* for which there is one and only
-  one :class:`granting <welfare.aids.Granting>` active for the period
-  of this contract.  Integration aid types are those who have
-  :attr:`welfare.aids.AidType.is_integ_duty` checked.
+    Return the *integration aid type* for which there is one and only
+    one :class:`aid granting <welfare.aids.Granting>` active for the
+    period of this contract.  Integration aid types are those who have
+    :attr:`welfare.aids.AidType.is_integ_duty` checked.
 
 
 Models

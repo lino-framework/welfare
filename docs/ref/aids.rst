@@ -38,44 +38,81 @@ Models
 
 .. class:: AidType
 
+  The type of aid being granted by a granting.
+  Every granting has a mandatory pointer (:attr:`Granting.aid_type`) to this.
+
   .. attribute:: name
 
-  The multilingual name of this aid type.
+    The multilingual name of this aid type.
+
+  .. attribute:: is_urgent
+
+    Whether aid grantings of this type are considered as urgent.
+    This is used by :meth:`Confirmation.get_urgent_granting`
+
+  .. attribute:: is_integ_duty
 
   .. attribute:: short_name
 
-  The short name for internal use.
+    The short name for internal use.
 
   .. attribute:: excerpt_title
 
-  The text to print as title in confirmations.
+    The text to print as title in confirmations.
 
   .. attribute:: board
 
-  Pointer to the default :class:`ml.boards.Board` for aid projects of
-  this type.
+    Pointer to the default :class:`ml.boards.Board` for aid projects of
+    this type.
 
   .. attribute:: excerpt_type
 
   .. attribute:: confirmation_type
 
-  Pointer to :class:`ConfirmationTypes`.
+    Pointer to :class:`ConfirmationTypes`.
+
+  .. attribute:: pharmacy_type
+
+    A pointer to the :class:`welfare.pcsw.ClientContactType` to be
+    used when selecting the pharmacy of a refund confirmation 
+    (:class:`RefundConfirmation.pharmacy`).
 
 .. class:: Confirmable
 
   .. attribute:: signer
 
-  The agent who has signed or is expected to sign this item.
+    The agent who has signed or is expected to sign this item.
 
 .. class:: Granting(Confirmable)
 
+  .. attribute:: aid_type
+
+    The type of aid being granted. Mandatory.
+    Pointer to :class:`AidType`.
+
 .. class:: Confirmation(Confirmable)
+
+  .. method:: get_urgent_granting()
+
+    Return the one and only one urgent aid granting for the client and
+    period defined for this confirmation.  Return None if there is no
+    such granting, or if there is more than one such granting.
 
 .. class:: SimpleConfirmation
 
 .. class:: IncomeConfirmation
 
 .. class:: RefundConfirmation
+
+  .. attribute:: pharmacy
+
+  The pharmacy for which this confirmation is being issued.
+
+  The selection list will work only if the aid type defined on the
+  granting of this confirmation has a pharmacy_type defined.
+
+  .. attribute:: doctor
+  .. attribute:: doctor_type
 
 .. class:: Category
 

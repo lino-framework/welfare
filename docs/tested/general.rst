@@ -51,9 +51,9 @@ Test whether :meth:`get_db_overview_rst
  accounts.Chart                 5         1
  accounts.Group                 8         7
  addresses.Address              16        119
- aids.AidType                   22        11
+ aids.AidType                   23        11
  aids.Category                  5         3
- aids.Granting                  10        53
+ aids.Granting                  10        55
  aids.IncomeConfirmation        16        54
  aids.RefundConfirmation        17        12
  aids.SimpleConfirmation        14        19

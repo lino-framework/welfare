@@ -39,9 +39,13 @@ senden!</b>
 {% endblock %}
 
 {% block trailer %}
+{% if this.owner.get_urgent_granting() %}
+{% for third in (this.owner.doctor, this.owner.pharmacy) %}
+{% if third %}
+
 <h1 class="PageBreakHeader">Attestation</h1>
 
-<p>Je sousigné, {{this.owner.doctor}},
+<p>Je sousigné, {{third}},
 <br>
 <br>docteur en médecine, 
 <br>
@@ -49,11 +53,12 @@ senden!</b>
 <br>
 <br>{{this.owner.client.get_full_name()}}
 <br>
-<br>domicilié{{this.owner.client.mf('', 'e', '(e)')}} à <b>{{', '.join(this.owner.client.address_location_lines())}}</b>
+<br>domicilié{{this.owner.client.mf('', 'e', '(e)')}} à 
+<b>{{', '.join(this.owner.client.address_location_lines())}}</b>
 
 <br>dans le cadre de l'aide médicale urgente accordée conformément à
 l'article 57, §2, de la loi du 8 juillet 1976 organique des CPAS aux
-demandeurs d'asile déboutés ou à d'autres étranger en séjour illégal
+demandeurs d'asile déboutés ou à d'autres étrangers en séjour illégal
 dans le Royaume et qui se trouvent dans un état d'indigence.
 <br>
 <br>
@@ -64,4 +69,7 @@ dans le Royaume et qui se trouvent dans un état d'indigence.
 <br>................................................
 <br>(signature et cachet du médecin)
 </p>
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endblock %}

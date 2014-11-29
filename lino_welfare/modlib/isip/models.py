@@ -13,11 +13,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils import translation
-#~ from django.utils.encoding import force_unicode
-
 
 from atelier.utils import AttrDict
 
@@ -25,13 +21,11 @@ from lino import dd, rt
 from lino import mixins
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')
-# excerpts = dd.resolve_app('excerpts')
 
 from lino.modlib.excerpts.mixins import Certifiable
 
 from lino.utils.ranges import isrange, overlap2, encompass
 from lino.mixins.periods import rangefmt
-from lino.models import PeriodEvents
 
 from lino_welfare.modlib.system.models import Signers
 
@@ -446,22 +440,17 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
     def active_period(self):
         return (self.applies_from, self.date_ended or self.applies_until)
 
-    def get_grantings(self):
+    def get_granting(self, **aidtype_filter):
         ap = self.active_period()
         ap = AttrDict(start_date=ap[0], end_date=ap[1])
-        at_list = rt.modules.aids.AidType.objects.filter(is_integ_duty=True)
-        qs = rt.modules.aids.Granting.objects.filter(
-            client=self.client, aid_type__in=at_list)
-        return PeriodEvents.active.add_filter(qs, ap)
+        return rt.modules.aids.Granting.objects.get_by_aidtype(
+            self.client, ap, **aidtype_filter)
 
     def get_aid_type(self):
-        qs = self.get_grantings()
-        n = qs.count()
-        if n == 1:
-            g = qs[0]
-        else:
-            return None
-        return g.aid_type
+        # may be used in `.odt` template for `isip.Contract`
+        g = self.get_granting(is_integ_duty=True)
+        if g is not None:
+            return g.aid_type
 
     def suggest_cal_guests(self, event):
         # Automatic evaluation events have the client as mandatory

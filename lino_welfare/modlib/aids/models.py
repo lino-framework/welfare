@@ -31,6 +31,7 @@ from lino import dd, rt
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
+from lino.models import PeriodEvents
 from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
@@ -149,8 +150,13 @@ class AidType(ContactRelated, dd.BabelNamed):
 
     is_integ_duty = models.BooleanField(
         _("Integration duty"), default=False,
-        help_text=_("Whether grantings of this aid type are considered "
+        help_text=_("Whether aid grantings of this type are considered "
                     "as duty for integration contract."))
+
+    is_urgent = models.BooleanField(
+        _("Urgent"), default=False,
+        help_text=_("Whether aid grantings of this type are considered "
+                    "as urgent."))
 
     confirmed_by_primary_coach = models.BooleanField(
         _("Confirmed by primary coach"), default=True)
@@ -195,7 +201,8 @@ class AidTypes(dd.Table):
     id short_name confirmation_type
     name
     excerpt_title
-    print_directly is_integ_duty confirmed_by_primary_coach board body_template
+    print_directly is_integ_duty is_urgent confirmed_by_primary_coach \
+    board body_template
     company contact_person contact_role pharmacy_type
     aids.GrantingsByType
     """
@@ -247,7 +254,7 @@ def setup_aids_workflows(sender=None, **kw):
         _("Revoke"), states='confirmed')
 
 
-class Confirmable(dd.Model):
+class Confirmable(dd.DatePeriod):
     # base class for Granting and for Confirmation
     class Meta:
         abstract = True
@@ -339,12 +346,26 @@ class Confirmable(dd.Model):
 ##
 
 
-class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
+class GrantingManager(models.Manager):
+
+    def get_by_aidtype(self, client, period, **aidtype_filter):
+        at_list = rt.modules.aids.AidType.objects.filter(**aidtype_filter)
+        qs = self.get_queryset()
+        qs = qs.filter(client=client, aid_type__in=at_list)
+        qs = PeriodEvents.active.add_filter(qs, period)
+        if qs.count() == 1:
+            return qs[0]
+        return None
+
+
+class Granting(Confirmable, boards.BoardDecision):
 
     class Meta:
         abstract = dd.is_abstract_model(__name__, 'Granting')
         verbose_name = _("Aid granting")
         verbose_name_plural = _("Aid grantings")
+
+    objects = GrantingManager()
 
     client = models.ForeignKey('pcsw.Client')
 
@@ -384,7 +405,8 @@ class Granting(Confirmable, boards.BoardDecision, dd.DatePeriod):
         sar = ar.spawn(ct.table_class, master_instance=self)
         txt = _("Create confirmation")
         btn = sar.insert_button(txt, icon_name=None)
-        return E.div(btn)
+        if btn is not None:
+            return E.div(btn)
 
     # def get_long_name(self):
     #     if self.aid_type_id:
@@ -547,7 +569,7 @@ class GrantingsByType(GrantingsByX):
 
 class Confirmation(
         Confirmable, dd.UserAuthored, ContactRelated,
-        dd.DatePeriod, dd.Created, Certifiable):
+        dd.Created, Certifiable):
               
     class Meta:
         abstract = True
@@ -612,6 +634,15 @@ class Confirmation(
         if self.granting_id and self.granting.aid_type_id:
             return self.granting.aid_type
         return None
+
+    def get_granting(self, **aidtype_filter):
+        if self.granting_id:
+            return rt.modules.aids.Granting.objects.get_by_aidtype(
+                self.granting.client, self, **aidtype_filter)
+
+    def get_urgent_granting(self):
+        # used in :xfile:`medical_refund.body.html`
+        return self.get_granting(is_urgent=True)
 
     @classmethod
     def get_template_group(cls):

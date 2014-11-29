@@ -55,7 +55,7 @@ Hier eine Liste der Hilfearten, die Lino kennt:
  Kleiderkammer                                     Ja                          clothing_bank.body.html
  Lebensmittelbank                                  Nein                        food_bank.body.html
  Möbellager                                        Ja                          furniture.body.html
- Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          certificate.body.html
+ Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          medical_refund.body.html
  Übernahmeschein                                   Ja                          certificate.body.html
  **Total (11 Zeilen)**                             **10**
 ================================================= =========================== ===============================
@@ -163,10 +163,10 @@ Grantings by ISIP contract
 ==========================
 
 The :meth:`welfare.isip.ContractBase.get_aid_type`
-method (called from the document template when printing a 
+method (called from the `.odt` document template when printing a 
 :mod:`welfare.isip.Contract` in Eupen)
 works only when 
-:meth:`welfare.isip.ContractBase.get_grantings`
+:meth:`welfare.isip.ContractBase.get_granting`
 returns exactly one granting.
 Which is the normal situation.
 
@@ -176,14 +176,12 @@ we see that most contracts have indeed exactly 1 granting:
 >>> isip.Contract.objects.all().count()
 30
 
->>> dist = {}
+>>> l = []
 >>> for con in isip.Contract.objects.all():
-...     qs = con.get_grantings()
-...     k = qs.count()
-...     l = dist.setdefault(k, [])
-...     l.append(con.id)
->>> print(dist)
-{1: [1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29], 2: [9, 13, 15, 17, 20, 22, 25, 28, 30], 3: [2, 6, 7], 4: [3]}
+...     if con.get_aid_type() is not None:
+...         l.append(con.id)
+>>> print(l)
+[1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29]
 
 
 
