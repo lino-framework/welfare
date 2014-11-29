@@ -25,7 +25,7 @@ The test database
 =================
 
 Test whether :meth:`get_db_overview_rst 
-<lino_site.Site.get_db_overview_rst>` returns the expected result:
+<ad.Site.get_db_overview_rst>` returns the expected result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
