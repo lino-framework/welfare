@@ -16,29 +16,16 @@ General
     >>> from django.utils import translation
     >>> from lino.utils.xmlgen.html import E
 
-
-See :blogref:`20130508`:
-
->>> for model in (debts.Entry,):
-...     for o in model.objects.all():
-...         o.full_clean()
-
-Check whether Lino returns the right default template for excerpts 
-(see :blogref:`20140208`):
-
->>> ffn = settings.SITE.find_config_file('Default.odt', 'excerpts')
->>> ffn.endswith('lino_welfare/config/excerpts/Default.odt')
-True
-
+.. contents:: 
+   :local:
+   :depth: 3
 
 
 The test database
------------------
+=================
 
 Test whether :meth:`get_db_overview_rst 
 <lino_site.Site.get_db_overview_rst>` returns the expected result:
-
-(currently not tested because times are changing)
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -172,7 +159,10 @@ Test whether :meth:`get_db_overview_rst
 <BLANKLINE>
 
 User profiles
--------------
+=============
+
+Rolf
+----
 
 Rolf is the local system administrator, he has a complete menu:
 
@@ -229,6 +219,8 @@ Rolf is the local system administrator, he has a complete menu:
 - Site : Info
 <BLANKLINE>
 
+Hubert
+------
 
 Hubert is an Integration agent.
 
@@ -252,6 +244,8 @@ Hubert is an Integration agent.
 - Site : Info
 
 
+Mélanie
+-------
 
 Mélanie is the manager of the Integration service.
 
@@ -283,6 +277,9 @@ Mélanie is the manager of the Integration service.
 - Site : Info
 
 
+Kerstin
+-------
+
 Kerstin is a debts consultant.
 
 >>> ses = rt.login('kerstin') 
@@ -299,6 +296,9 @@ Kerstin is a debts consultant.
   - Kontakte : Länder, Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Site : Info
+
+Caroline
+--------
 
 Caroline is a newcomers consultant.
 
@@ -318,6 +318,9 @@ Caroline is a newcomers consultant.
   - Kontakte : Länder, Sprachen
 - Site : Info
 
+Theresia
+--------
+
 Theresia is a reception clerk.
 
 >>> ses = rt.login('theresia') 
@@ -329,15 +332,35 @@ Theresia is a reception clerk.
 
 
 Permissions
------------
+===========
 
 Test whether everybody can display the detail of a client:
 
 >>> o = pcsw.Client.objects.get(id=177)
 >>> r = dd.plugins.extjs.renderer
->>> for u in 'robin', 'alicia', 'theresia':
+>>> for u in 'robin', 'alicia', 'theresia', 'caroline', 'kerstin':
 ...     print(E.tostring(rt.login(u, renderer=r).obj2html(o)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+
+Miscellaneous tests
+===================
+
+See :blogref:`20130508`:
+
+>>> for model in (debts.Entry,):
+...     for o in model.objects.all():
+...         o.full_clean()
+
+Check whether Lino returns the right default template for excerpts 
+(see :blogref:`20140208`):
+
+>>> ffn = settings.SITE.find_config_file('Default.odt', 'excerpts')
+>>> ffn.endswith('lino_welfare/config/excerpts/Default.odt')
+True
+
+
