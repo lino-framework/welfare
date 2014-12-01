@@ -23,9 +23,6 @@ Social aids
     >>> import json
     >>> client = Client()
 
-
-
-
 >>> ses = rt.login('rolf')
 >>> translation.activate('de')
 
