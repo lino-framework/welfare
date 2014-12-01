@@ -40,12 +40,10 @@ senden!</b>
 
 {% block trailer %}
 {% if this.owner.get_urgent_granting() %}
-{% for third in (this.owner.doctor, this.owner.pharmacy) %}
-{% if third %}
 
+{% if this.owner.doctor %}
 <h1 class="PageBreakHeader">Attestation</h1>
-
-<p>Je sousigné, {{third}},
+<p>Je sousigné, {{this.owner.doctor}},
 <br>
 <br>docteur en médecine, 
 <br>
@@ -70,6 +68,35 @@ dans le Royaume et qui se trouvent dans un état d'indigence.
 <br>(signature et cachet du médecin)
 </p>
 {% endif %}
-{% endfor %}
+
+{% if this.owner.pharmacy %}
+<h1 class="PageBreakHeader">Attestation</h1>
+<p>Je sousigné, ....................................
+<br>
+<br>pharmacien à {{this.owner.pharmacy}}
+<br>
+<br>déclare avoir remis des médicaments le {{fds(this.owner.date)}}
+<br>
+<br>à {{this.owner.client.get_full_name()}}
+<br>
+<br>domicilié{{this.owner.client.mf('', 'e', '(e)')}} à 
+<b>{{', '.join(this.owner.client.address_location_lines())}}</b>
+<br>dans le cadre de l'aide médicale urgente accordée conformément à
+l'article 57, §2, de la loi du 8 juillet 1976 organique des CPAS aux
+demandeurs d'asile déboutés ou à d'autres étrangers en séjour illégal
+dans le Royaume et qui se trouvent dans un état d'indigence.
+<br>
+<br>Je joins un relevé des médicaments.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>................................................
+<br>(signature et cachet du pharmacien)
+</p>
+{% endif %}
+
 {% endif %}
 {% endblock %}
