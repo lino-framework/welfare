@@ -168,13 +168,13 @@ def site_setup(site):
     name country inscode zip_code
     parent type id
     PlacesByPlace
-    contacts.PartnersByCity jobs.StudiesByPlace
+    contacts.PartnersByCity cv.StudiesByPlace
     """)
 
     site.modules.countries.Countries.set_detail_layout("""
     isocode name short_code inscode
     # nationalities
-    countries.PlacesByCountry jobs.StudiesByCountry
+    countries.PlacesByCountry cv.StudiesByCountry
     """)
 
     # site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())

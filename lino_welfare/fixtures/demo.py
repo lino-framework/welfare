@@ -38,6 +38,7 @@ users = dd.resolve_app('users')
 countries = dd.resolve_app('countries')
 reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
+cv = dd.resolve_app('cv')
 
 Company = dd.resolve_model('contacts.Company')
 
@@ -163,8 +164,8 @@ def objects():
     #~ Link = resolve_model('links.Link')
     #~ Contract = resolve_model('jobs.Contract')
     #~ JobProvider = resolve_model('jobs.JobProvider')
-    #~ Function = resolve_model('jobs.Function')
-    #~ Sector = resolve_model('jobs.Sector')
+    #~ Function = resolve_model('cv.Function')
+    #~ Sector = resolve_model('cv.Sector')
     Authority = resolve_model('users.Authority')
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
@@ -180,7 +181,7 @@ def objects():
     Place = resolve_model('countries.Place')
     #~ Job = resolve_model('jobs.Job')
     #~ Place = settings.SITE.modules.countries.Place
-    StudyType = resolve_model('isip.StudyType')
+    StudyType = resolve_model('cv.StudyType')
     #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
 
@@ -448,7 +449,7 @@ def objects():
     exam_policy = Instantiator('isip.ExamPolicy').build
     yield exam_policy(**babelkw('name', en='other', de="andere", fr="autre"))
 
-    sector = Instantiator(jobs.Sector).build
+    sector = Instantiator(cv.Sector).build
     for ln in SECTORS_LIST.splitlines():
         if ln:
             a = ln.split('|')
@@ -456,8 +457,8 @@ def objects():
                 kw = dict(en=a[0], fr=a[1], de=a[2])
                 yield sector(**babelkw('name', **kw))
 
-    horeca = jobs.Sector.objects.get(pk=5)
-    function = Instantiator(jobs.Function, sector=horeca).build
+    horeca = cv.Sector.objects.get(pk=5)
+    function = Instantiator(cv.Function, sector=horeca).build
     yield function(**babelkw('name',
                              de=u"Kellner",
                              fr=u'Serveur',
@@ -812,9 +813,8 @@ def objects():
 
     schule = StudyType.objects.get(pk=1)
     uni = StudyType.objects.get(pk=4)
-    #~ abi = StudyContent.objects.get(name=u"Abitur")
     abi = u"Abitur"
-    study = Instantiator('jobs.Study').build
+    study = Instantiator('cv.Study').build
 
     gerd = CLIENTS.pop()
     luc = CLIENTS.pop()
@@ -837,9 +837,9 @@ def objects():
     gerd.save()
 
     yield study(person=luc, type=schule, content=abi,
-                started='19740901', stopped='19860630')
+                start_date='19740901', end_date='19860630')
     yield study(person=gerd, type=schule, content=abi,
-                started='19740901', stopped='19860630')
+                start_date='19740901', end_date='19860630')
 
     yield langk(person=luc, language='ger', written='4', spoken='4')
     yield langk(person=gerd, language='ger', written='4', spoken='4')
@@ -883,8 +883,8 @@ def objects():
     JTYPES = Cycler(jobs.JobType.objects.all())
 
     PROVIDERS = Cycler(jobs.JobProvider.objects.all())
-    SECTORS = Cycler(jobs.Sector.objects.all())
-    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    SECTORS = Cycler(cv.Sector.objects.all())
+    FUNCTIONS = Cycler(cv.Function.objects.all())
     REMARKS = Cycler(
         _("A very hard job."),
         '',
@@ -908,8 +908,8 @@ def objects():
                                date_submitted=settings.SITE.demo_date(-40 + i))
 
     # reset SECTORS and FUNCTIONS
-    SECTORS = Cycler(jobs.Sector.objects.all())
-    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    SECTORS = Cycler(cv.Sector.objects.all())
+    FUNCTIONS = Cycler(cv.Function.objects.all())
 
     obj = jobs.Offer(
         name="Übersetzer DE-FR (m/w)",
@@ -931,8 +931,8 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     yield obj
 
     # reset SECTORS and FUNCTIONS
-    SECTORS = Cycler(jobs.Sector.objects.all())
-    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    SECTORS = Cycler(cv.Sector.objects.all())
+    FUNCTIONS = Cycler(cv.Function.objects.all())
 
     for i in range(30):
         yield jobs.Candidature(
@@ -947,16 +947,16 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     COMPANIES = Cycler(Company.objects.all())
 
     # reset SECTORS and FUNCTIONS
-    SECTORS = Cycler(jobs.Sector.objects.all())
-    FUNCTIONS = Cycler(jobs.Function.objects.all())
+    SECTORS = Cycler(cv.Sector.objects.all())
+    FUNCTIONS = Cycler(cv.Function.objects.all())
 
     for i in range(30):
-        yield jobs.Experience(
+        yield cv.Experience(
             person=CLIENTS.pop(),
             company=COMPANIES.pop(),
             country=COUNTRIES.pop(),
-            started=settings.SITE.demo_date(-1200 + i * 2),
-            stopped=settings.SITE.demo_date(-1200 + i * 2),
+            start_date=settings.SITE.demo_date(-1200 + i * 2),
+            end_date=settings.SITE.demo_date(-1200 + i * 2),
             sector=SECTORS.pop(),
             function=FUNCTIONS.pop(),
         )
@@ -1043,7 +1043,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     i = pcsw.Client.objects.order_by('name').__iter__()
     p = i.next()
     offset = 0
-    for f in jobs.Function.objects.all():
+    for f in cv.Function.objects.all():
         yield jobs.Candidature(person=p, function=f, sector=f.sector,
                                #~ date_submitted=i2d(20111019))
                                date_submitted=settings.SITE.demo_date(offset))

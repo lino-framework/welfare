@@ -11,6 +11,9 @@ General
 
 
 ..  
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.docs.settings.doctests'
     >>> from __future__ import print_function
     >>> from lino.runtime import *
     >>> from django.utils import translation
@@ -30,7 +33,7 @@ Test whether :meth:`get_db_overview_rst
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, djangosite.
-121 models:
+124 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
@@ -71,7 +74,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Person                33        109
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         122
+ contenttypes.ContentType       4         125
  countries.Country              8         8
  countries.Place                10        78
  courses.Course                 5         3
@@ -79,7 +82,18 @@ Test whether :meth:`get_db_overview_rst
  courses.CourseOffer            6         3
  courses.CourseProvider         31        2
  courses.CourseRequest          10        20
+ cv.Duration                    5         5
+ cv.EducationLevel              6         5
+ cv.Experience                  17        30
+ cv.Function                    7         4
  cv.LanguageKnowledge           9         119
+ cv.Regime                      5         3
+ cv.Sector                      6         14
+ cv.Status                      5         7
+ cv.Study                       15        2
+ cv.StudyType                   6         8
+ cv.Training                    13        0
+ cv.TrainingType                5         3
  debts.Actor                    6         63
  debts.Budget                   11        14
  debts.Entry                    16        686
@@ -93,23 +107,15 @@ Test whether :meth:`get_db_overview_rst
  isip.ContractEnding            6         4
  isip.ContractPartner           6         35
  isip.ContractType              9         5
- isip.EducationLevel            6         5
  isip.ExamPolicy                20        5
- isip.StudyType                 7         8
  jobs.Candidature               8         74
  jobs.Contract                  28        24
  jobs.ContractType              9         5
- jobs.Experience                13        30
- jobs.Function                  7         4
  jobs.Job                       10        8
  jobs.JobProvider               31        3
  jobs.JobType                   4         5
  jobs.Offer                     9         1
- jobs.Regime                    5         3
  jobs.Schedule                  5         3
- jobs.Sector                    6         14
- jobs.Status                    5         7
- jobs.Study                     14        2
  languages.Language             6         5
  newcomers.Broker               2         2
  newcomers.Competence           5         7
@@ -193,7 +199,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Ausbildungsarten, Akademische Grade, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes, Statuses
+  - Lebenslauf : Lehrenarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Regime, Statuus, Vertragsdauern
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
@@ -209,7 +216,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Badges : Badge Awards
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : Sprachkenntnisse, VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien, Vertragspartner
+  - Lebenslauf : Sprachkenntnisse, Lehren, Ausbildungen und Studien, Berufserfahrungen
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner
   - Kurse : Kurse, Kursanfragen
   - Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen

@@ -19,9 +19,9 @@ aids = dd.resolve_app('aids')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
+cv = dd.resolve_app('cv')
 
 ONE_DAY = datetime.timedelta(days=1)
-
 
 
 def objects():
@@ -35,7 +35,7 @@ def objects():
     JOBS = Cycler(jobs.Job.objects.all())
 
     JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
-    STUDY_TYPES = Cycler(isip.StudyType.objects.all())
+    STUDY_TYPES = Cycler(cv.StudyType.objects.all())
 
     COMPANIES = Cycler(rt.modules.contacts.Company.objects.all()[:5])
     NORMAL_CONTRACT_ENDINGS = Cycler(

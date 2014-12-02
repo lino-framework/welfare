@@ -28,7 +28,7 @@ from lino.utils.htmlgen import UL
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
 
-from .mixins import SectorFunction
+from lino.modlib.cv.mixins import SectorFunction
 
 uploads = dd.resolve_app('uploads')
 notes = dd.resolve_app('notes')
@@ -48,49 +48,11 @@ class Schedule(dd.BabelNamed):
 
 class Schedules(dd.Table):
     required = dd.required(user_groups='integ', user_level='manager')
-    model = Schedule
+    model = 'jobs.Schedule'
     order_by = ['name']
     detail_layout = """
     id name
     ContractsBySchedule
-    """
-
-
-class Regime(dd.BabelNamed):
-
-    """List of choices for `jobs.Contract.regime` field."""
-    class Meta:
-        verbose_name = _("Work Regime")
-        verbose_name_plural = _('Work Regimes')
-
-
-class Regimes(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Regime
-    order_by = ['name']
-    detail_layout = """
-    id name
-    ContractsByRegime
-    """
-
-
-class Status(dd.BabelNamed):
-
-    class Meta:
-        verbose_name = _("Status ")
-        verbose_name_plural = _('Statuses')
-
-
-class Statuses(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
-    model = 'jobs.Status'
-    order_by = ['name']
-
-    detail_layout = """
-    id name
-    ExperiencesByStatus
     """
 
 
@@ -188,68 +150,6 @@ class ContractTypes(dd.Table):
     """
 
 
-class Sector(dd.BabelNamed):
-
-    """Each Job should have an "Activity Sector"."""
-    class Meta:
-        verbose_name = _("Job Sector")
-        verbose_name_plural = _('Job Sectors')
-
-    remark = models.TextField(
-        blank=True,
-        verbose_name=_("Remark"))
-
-
-class Sectors(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Sector
-    order_by = ['name']
-    detail_layout = """
-    id name
-    remark FunctionsBySector
-    CandidaturesBySector
-  """
-
-
-class Function(dd.BabelNamed):
-
-    """Each Job may have a Function."""
-    class Meta:
-        verbose_name = _("Job Function")
-        verbose_name_plural = _('Job Functions')
-
-    remark = models.TextField(
-        blank=True,
-        verbose_name=_("Remark"))
-
-    sector = models.ForeignKey(Sector)
-        #~ related_name="%(app_label)s_%(class)s_set_by_provider",
-        #~ verbose_name=_("Job Provider"),
-        #~ blank=True,null=True)
-
-
-class Functions(dd.Table):
-    #~ debug_permissions = 20130704
-    required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Function
-    column_names = 'name sector *'
-    order_by = ['name']
-    detail_layout = """
-    id name sector
-    remark
-    CandidaturesByFunction
-    ExperiencesByFunction
-    """
-
-
-class FunctionsBySector(Functions):
-    master_key = 'sector'
-
-
 class Contract(isip.ContractBase, isip.ContractPartnerBase):
 
     """
@@ -276,8 +176,8 @@ class Contract(isip.ContractBase, isip.ContractPartnerBase):
     job = models.ForeignKey("jobs.Job")
     duration = models.IntegerField(_("duration (days)"),
                                    blank=True, null=True, default=None)
-    regime = dd.ForeignKey('jobs.Regime', blank=True, null=True)
-    schedule = dd.ForeignKey(Schedule, blank=True, null=True)
+    regime = dd.ForeignKey('cv.Regime', blank=True, null=True)
+    schedule = dd.ForeignKey('jobs.Schedule', blank=True, null=True)
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
     refund_rate = models.CharField(_("refund rate"), max_length=200,
                                    blank=True)
@@ -510,29 +410,6 @@ class MyContracts(Contracts):
         return kw
 
 
-class JobType(dd.Sequenced):
-
-    """
-    The list of Job Types is used for statistical analysis,
-    e.g. in :class:``
-    """
-
-    class Meta:
-        verbose_name = _("Job Type")
-        verbose_name_plural = _('Job Types')
-
-    name = models.CharField(max_length=200,
-                            blank=True,
-                            verbose_name=_("Designation"))
-
-    remark = models.CharField(max_length=200,
-                              blank=True,
-                              verbose_name=_("Remark"))
-
-    def __unicode__(self):
-        return unicode(self.name)
-
-
 class Offer(SectorFunction):
 
     "A Job Offer"
@@ -579,173 +456,6 @@ class Offers(dd.Table):
     """
 
 
-class PersonHistoryEntry(dd.Model):
-    "Base class for jobs.Study, jobs.Experience"
-    class Meta:
-        abstract = True
-
-    person = models.ForeignKey('pcsw.Client')
-    started = models.DateField(_("Beginning"), blank=True, null=True)
-    stopped = models.DateField(_("End"), blank=True, null=True)
-
-
-class HistoryByPerson(dd.Table):
-    """Abstract base class for :class:`StudiesByPerson` and
-    :class:`ExperiencesByPerson`
-
-    """
-    master_key = 'person'
-    order_by = ["started"]
-
-    @classmethod
-    def create_instance(self, req, **kw):
-        obj = super(HistoryByPerson, self).create_instance(req, **kw)
-        if obj.person is not None:
-            previous_exps = self.model.objects.filter(
-                person=obj.person).order_by('started')
-            if previous_exps.count() > 0:
-                exp = previous_exps[previous_exps.count() - 1]
-                if exp.stopped:
-                    obj.started = exp.stopped
-                else:
-                    obj.started = exp.started
-        return obj
-
-
-class Study(PersonHistoryEntry, CountryCity):
-
-    class Meta:
-        verbose_name = _("study or education")
-        verbose_name_plural = _("Studies & education")
-    study_regime = isip.StudyRegimes.field(default=isip.StudyRegimes.studies)
-    type = models.ForeignKey('isip.StudyType')
-    content = models.CharField(
-        max_length=200,
-        blank=True,  # null=True,
-        verbose_name=_("Study content"))
-
-    success = models.BooleanField(verbose_name=_("Success"), default=False)
-    language = dd.ForeignKey("languages.Language", blank=True, null=True)
-
-    school = models.CharField(_("Establishment"), max_length=200, blank=True)
-
-    remarks = models.TextField(
-        blank=True, null=True, verbose_name=_("Remarks"))
-
-    def __unicode__(self):
-        return unicode(self.type)
-
-    @dd.chooser()
-    def type_choices(self, study_regime):
-        M = dd.resolve_model('isip.StudyType')
-        return M.objects.filter(study_regime=study_regime).order_by('name')
-
-
-class Studies(dd.Table):
-
-    "General list of Studies (all Persons)"
-    required = dd.required(user_groups='integ', user_level='manager')
-    model = 'jobs.Study'
-    order_by = "country city type content".split()
-
-
-class StudiesByCountry(Studies):
-    required = dd.required(user_groups='integ')
-    master_key = 'country'
-
-
-class StudiesByPlace(Studies):
-
-    """
-    Lists all Studies in a given Place.
-    Used as slave grid in Places detail.
-    """
-    required = dd.required(user_groups='integ')
-    master_key = 'city'
-    column_names = 'school type person content started stopped \
-    success language remarks *'
-
-
-class StudiesByType(Studies):
-
-    required = dd.required(user_groups='integ')
-    master_key = 'type'
-    column_names = 'school person content started stopped \
-    success language remarks *'
-
-
-class StudiesByPerson(HistoryByPerson, Studies):
-    "List of studies for a given client."
-    _study_regime = isip.StudyRegimes.studies
-    required = dd.required(user_groups='integ')
-    column_names = 'type content started stopped country \
-    city success language school remarks *'
-    # _study_regime = None
-
-    @classmethod
-    def get_known_values(self):
-        return dict(study_regime=self._study_regime)
-
-    @classmethod
-    def get_actor_label(self):
-        if self._study_regime is not None:
-            return self._study_regime.text
-        return self._label or self.__name__
-
-
-# "Trainings" (formations) are rather professional experiences than studies
-# class TrainingsByPerson(StudiesByPerson):
-#     "Just like :class:`StudiesByPerson`, but with different study_regime"
-#     _study_regime = isip.StudyRegimes.trainings
-
-
-class Experience(PersonHistoryEntry, SectorFunction):
-
-    class Meta:
-        verbose_name = _("Job Experience")
-        verbose_name_plural = _("Job Experiences")
-        get_latest_by = 'started'
-
-    company = models.CharField(max_length=200, verbose_name=_("company"))
-    #~ type = models.ForeignKey(JobType,verbose_name=_("job type"))
-    title = models.CharField(
-        max_length=200, verbose_name=_("job title"), blank=True)
-    country = dd.ForeignKey("countries.Country", blank=True, null=True)
-    status = dd.ForeignKey(Status, blank=True, null=True)
-    is_training = models.BooleanField(_("Training"), default=False)
-    regime = dd.ForeignKey('jobs.Regime', blank=True, null=True)
-
-    remarks = models.TextField(_("Remarks"), blank=True, null=True)
-
-    def __unicode__(self):
-        return unicode(self.title)
-
-
-class Experiences(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
-    model = 'jobs.Experience'
-
-
-class ExperiencesByFunction(Experiences):
-    required = dd.required(user_groups='integ')
-    master_key = 'function'
-    order_by = ["started"]
-
-
-class ExperiencesByPerson(HistoryByPerson, Experiences):
-    "List of job experiences for a known person"
-    required = dd.required(user_groups='integ')
-    auto_fit_column_widths = True
-    column_names = "company started stopped title status is_training \
-    country remarks sector function"
-
-
-class ExperiencesByStatus(Experiences):
-    master_key = 'status'
-    column_names = "company started stopped title sector \
-    function country remarks"
-
-
 class Job(SectorFunction):
 
     """
@@ -767,10 +477,11 @@ class Job(SectorFunction):
                              blank=True, null=True,
                              verbose_name=_("Job Type"))
 
-    provider = models.ForeignKey(JobProvider,
+    provider = models.ForeignKey('jobs.JobProvider',
                                  blank=True, null=True)
 
-    contract_type = models.ForeignKey(ContractType, blank=True, null=True,
+    contract_type = models.ForeignKey('jobs.ContractType',
+                                      blank=True, null=True,
                                       verbose_name=_("Contract Type"))
 
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
@@ -999,16 +710,13 @@ class CandidaturesByJob(Candidatures):
 
 class SectorFunctionByOffer(dd.Table):
 
-    """
-    Shows the Candidatures or Experiences for this Offer.
+    """Shows the Candidatures or Experiences for this Offer.
     
-    It is a slave report without 
-    :attr:`master_key <lino.dd.Table.master_key>`,
-    which is allowed only because it overrides
-    :meth:`get_request_queryset`.
+    It is a slave report without :attr:`master_key
+    <dd.Table.master_key>`, which is allowed only because it overrides
+    :meth:`dd.Table.get_request_queryset`.
+
     """
-    #~ can_add = perms.never
-    #~ can_change = perms.never
     master = Offer
 
     @classmethod
@@ -1054,14 +762,14 @@ class CandidaturesByOffer(SectorFunctionByOffer):
 
 
 class ExperiencesByOffer(SectorFunctionByOffer):
-    model = Experience
+    model = 'cv.Experience'
     label = _("Experiences")
-    column_names = "started stopped person company country"
+    column_names = "start_date end_date person company country"
 
 
 class Jobs(dd.Table):
     help_text = _("""
-    Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter. 
+    Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter.
     """)
     required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
@@ -1071,11 +779,34 @@ class Jobs(dd.Table):
     column_names = 'name provider * id'
 
     detail_layout = """
-    name provider contract_type type id 
-    sector function capacity hourly_rate 
+    name provider contract_type type id
+    sector function capacity hourly_rate
     remark CandidaturesByJob
     ContractsByJob
     """
+
+
+class JobType(dd.Sequenced):
+
+    """
+    The list of Job Types is used for statistical analysis,
+    e.g. in :class:``
+    """
+
+    class Meta:
+        verbose_name = _("Job Type")
+        verbose_name_plural = _('Job Types')
+
+    name = models.CharField(max_length=200,
+                            blank=True,
+                            verbose_name=_("Designation"))
+
+    remark = models.CharField(max_length=200,
+                              blank=True,
+                              verbose_name=_("Remark"))
+
+    def __unicode__(self):
+        return unicode(self.name)
 
 
 class JobTypes(dd.Table):
@@ -1093,18 +824,8 @@ class JobTypes(dd.Table):
 class JobsByProvider(Jobs):
     master_key = 'provider'
 
-#~ class JobsByFunction(Jobs):
-    #~ master_key = 'function'
-
-#~ class JobsBySector(Jobs):
-    #~ master_key = 'sector'
-
 
 class JobsByType(Jobs):
-    master_key = 'type'
-
-
-class ContractsByType(Contracts):
     master_key = 'type'
 
 
@@ -1230,7 +951,6 @@ class OldJobsOverview(dd.EmptyTable):
         #~ html = str(html)
         #~ assert type(html) == type('')
         return html
-
 
 
 class JobsOverviewByType(Jobs):
@@ -1405,12 +1125,18 @@ class JobsOverview(dd.EmptyTable):
         """ % E.tostring(obj.preview).replace('\n', ' ')
 
 
-if True:  # dd.is_installed('contacts') and dd.is_installed('jobs'):
+dd.inject_field(
+    contacts.Company, 'is_jobprovider',
+    dd.EnableChild(
+        'jobs.JobProvider',
+        verbose_name=_("is Job Provider"),
+        help_text=_("Whether this Company is also a Job Provider.")))
 
-    dd.inject_field(contacts.Company,
-                    'is_jobprovider',
-                    dd.EnableChild('jobs.JobProvider',
-                                   verbose_name=_("is Job Provider")),
-        """Whether this Company is also a Job Provider."""
-                    )
 
+@dd.receiver(dd.post_analyze)
+def set_detail_layouts(sender=None, **kwargs):
+    rt.modules.cv.Regimes.set_detail_layout("""
+    id name
+    cv.ExperiencesByRegime
+    jobs.ContractsByRegime
+    """)

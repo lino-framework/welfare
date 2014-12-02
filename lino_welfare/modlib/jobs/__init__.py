@@ -1,12 +1,11 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013 Luc Saffre
+# Copyright 2013-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 
 from lino import ad
 
-# ~ def _(s) : return s # fake gettext method
 from django.utils.translation import ugettext_lazy as _
 
 

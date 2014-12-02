@@ -31,7 +31,7 @@ from lino import dd
 from lino.utils.xmlgen.html import E
 from lino.modlib.users.mixins import UserProfiles, UserLevels
 
-plugin = dd.apps.integ
+config = dd.plugins.integ
 
 contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw')
@@ -39,6 +39,7 @@ isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 courses = dd.resolve_app('courses')
 users = dd.resolve_app('users')
+cv = dd.resolve_app('cv')
 # properties = dd.resolve_app('properties')
 
 
@@ -279,7 +280,7 @@ class CompareRequestsTable(dd.VirtualTable):
             if st is not None:
                 yield add(isip.Contracts,
                           observed_event=isip.ContractEvents.active,
-                          study_type=isip.StudyType.objects.get(pk=st))
+                          study_type=cv.StudyType.objects.get(pk=st))
 
 
 class PeriodicNumbers(dd.VirtualTable):
@@ -455,7 +456,7 @@ class JobsContractsPerUserAndContractType(ContractsPerUserAndContractType):
     contract_type_model = jobs.ContractType
 
 
-class StudyTypesAndContracts(isip.StudyTypes, dd.VentilatingTable):
+class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
     label = _("PIIS et types de formation")
     help_text = _("""Nombre de PIIS actifs par 
     type de formation et type de contrat.""")
@@ -469,7 +470,7 @@ class StudyTypesAndContracts(isip.StudyTypes, dd.VentilatingTable):
         return qs.filter(count__gte=1)
         #~ return qs
 
-    @dd.virtualfield(dd.ForeignKey(isip.StudyType, _("Description")))
+    @dd.virtualfield(dd.ForeignKey('cv.StudyType', _("Description")))
     def description(self, obj, ar):
         return obj
 
@@ -609,18 +610,16 @@ class ActivityReport(dd.Report):
 #~ def setup_main_menu(site,ui,profile,m):
     #~ m  = m.add_menu("integ",pcsw.INTEG_MODULE_LABEL)
 def setup_reports_menu(site, ui, profile, m):
-    m = m.add_menu(plugin.app_label, plugin.verbose_name)
+    m = m.add_menu(config.app_label, config.verbose_name)
     #~ m.add_action(site.modules.jobs.OldJobsOverview)
     m.add_action(site.modules.integ.UsersWithClients)
 
-    m.add_action(jobs.JobsOverview)
-    m.add_action(ActivityReport)
-
-#~ def setup_my_menu(site,ui,profile,m):
+    m.add_action('jobs.JobsOverview')
+    m.add_action('integ.ActivityReport')
 
 
 def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu(plugin.app_label, plugin.verbose_name)
+    m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action('integ.Clients')
     m.add_action('isip.MyContracts')
 
@@ -631,29 +630,22 @@ def setup_main_menu(site, ui, profile, m):
 
 
 def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu(plugin.app_label, plugin.verbose_name)
+    m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action('isip.ContractTypes')
     m.add_action('isip.ContractEndings')
     m.add_action('isip.ExamPolicies')
-    m.add_action('isip.StudyTypes')
-    m.add_action('isip.EducationLevels')
 
     m.add_action('jobs.ContractTypes')
     m.add_action('jobs.JobTypes')
-    m.add_action('jobs.Sectors')
-    m.add_action('jobs.Functions')
     m.add_action('jobs.Schedules')
-    m.add_action('jobs.Regimes')
-    m.add_action('jobs.Statuses')
 
 
 def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(plugin.app_label, plugin.verbose_name)
+    m = m.add_menu(config.app_label, config.verbose_name)
     m.add_action('isip.Contracts')
     m.add_action('jobs.Contracts')
     m.add_action('jobs.Candidatures')
-    m.add_action('jobs.Studies')
     m.add_action('isip.ContractPartners')
 
 
-dd.add_user_group(plugin.app_label, plugin.verbose_name)
+dd.add_user_group(config.app_label, config.verbose_name)

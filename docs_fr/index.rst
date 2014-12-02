@@ -25,4 +25,5 @@ peuvent éditer directement.
    jobs
    contribuer
    todo
+   cv
    help/index

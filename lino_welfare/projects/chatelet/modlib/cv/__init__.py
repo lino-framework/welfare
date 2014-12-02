@@ -2,16 +2,7 @@
 # License: BSD (see file COPYING for details)
 
 """
-Chatelet version of :mod:`welfare.ml.cv`
+Chatelet version of :mod:`welfare.cv`
 """
 
-from lino import ad
-
-from django.utils.translation import ugettext_lazy as _
-
-
-class Plugin(ad.Plugin):
-    verbose_name = _("Career")
-
-    ## settings
-    person_model = 'pcsw.Client'
+from lino.modlib.cv import Plugin

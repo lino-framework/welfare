@@ -66,7 +66,7 @@ class DocsTests(BaseTestCase):
         return self.run_simple_doctests('docs/tested/integ.rst')
 
     def test_general(self):
-        return self.run_docs_doctests('tested/general.rst')
+        return self.run_simple_doctests('docs/tested/general.rst')
 
     def test_newcomers(self):
         return self.run_docs_doctests('tested/newcomers.rst')

@@ -138,9 +138,9 @@ class ClientDetail(dd.FormLayout):
     """, label=_("SIS"))
 
     career = dd.Panel("""
-    jobs.StudiesByPerson
-    # jobs.TrainingsByPerson
-    jobs.ExperiencesByPerson
+    cv.StudiesByPerson
+    cv.TrainingsByPerson
+    cv.ExperiencesByPerson
     """, label=_("Career"))
 
     competences = dd.Panel(
@@ -166,11 +166,11 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 # humanlinks = dd.resolve_app('humanlinks')
 # humanlinks.LinksByHuman.slave_grid_format = 'grid'
 
-jobs = dd.resolve_app('jobs')
-jobs.ExperiencesByPerson.column_names = "company started stopped \
+cv = dd.resolve_app('cv')
+cv.ExperiencesByPerson.column_names = "company start_date end_date \
 function regime status is_training country remarks *"
 
-jobs.StudiesByPerson.column_names = "type content started stopped \
+cv.StudiesByPerson.column_names = "type content start_date end_date \
 school country success language remarks *"
 
 ContactsByClient.column_names = 'company contact_person remark'

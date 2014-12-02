@@ -11,110 +11,17 @@ logger = logging.getLogger(__name__)
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils.functional import lazy
+
+from north.dbutils import babelattr
 
 from lino import dd, rt
-cal = dd.resolve_app('cal')
-# uploads = dd.resolve_app('uploads')
-# notes = dd.resolve_app('notes')
-# contacts = dd.resolve_app('contacts')
-from north.dbutils import babelattr
+
+from lino.modlib.cv.models import *
 
 from lino.modlib.properties import models as properties
 
-config = dd.apps.cv
+config = dd.plugins.cv
 
-
-class CefLevel(dd.ChoiceList):
-
-    """
-    Levels of the Common European Framework (CEF).
-    
-    | http://www.coe.int/t/dg4/linguistic/CADRE_EN.asp
-    | http://www.coe.int/t/dg4/linguistic/Source/ManualRevision-proofread-FINAL_en.pdf
-    | http://www.telc.net/en/what-telc-offers/cef-levels/a2/
-    
-    """
-    verbose_name = _("CEF level")
-    verbose_name_plural = _("CEF levels")
-    show_values = True
-
-    #~ @classmethod
-    #~ def display_text(cls,bc):
-        #~ def fn(bc):
-            #~ return u"%s (%s)" % (bc.value,unicode(bc))
-        #~ return lazy(fn,unicode)(bc)
-
-add = CefLevel.add_item
-add('A1', _("basic language skills"))
-add('A2', _("basic language skills"))
-add('A2+', _("basic language skills"))
-add('B1', _("independent use of language"))
-add('B2', _("independent use of language"))
-add('B2+', _("independent use of language"))
-add('C1', _("proficient use of language"))
-add('C2', _("proficient use of language"))
-add('C2+', _("proficient use of language"))
-
-
-#
-# LanguageKnowledge
-#
-class LanguageKnowledge(dd.Model):
-
-    """Specifies how well a certain Person knows a certain Language.
-    Deserves more documentation."""
-    class Meta:
-        verbose_name = _("language knowledge")
-        verbose_name_plural = _("language knowledges")
-
-    allow_cascaded_delete = ['person']
-
-    person = models.ForeignKey(config.person_model)
-    language = dd.ForeignKey("languages.Language")
-    spoken = properties.HowWell.field(_("Spoken"), blank=True)
-    written = properties.HowWell.field(_("Written"), blank=True)
-    spoken_passively = properties.HowWell.field(_("Spoken (passively)"),
-                                                blank=True)
-    written_passively = properties.HowWell.field(_("Written (passively)"),
-                                                 blank=True)
-    native = models.BooleanField(_("native language"), default=False)
-    cef_level = CefLevel.field(blank=True)  # ,null=True)
-
-    def __unicode__(self):
-        if self.language_id is None:
-            return ''
-        if self.cef_level:
-            return u"%s (%s)" % (self.language, self.cef_level)
-        if self.spoken > '1' and self.written > '1':
-            return _(u"%s (s/w)") % self.language
-        elif self.spoken > '1':
-            return _(u"%s (s)") % self.language
-        elif self.written > '1':
-            return _(u"%s (w)") % self.language
-        else:
-            return unicode(self.language)
-
-
-class LanguageKnowledges(dd.Table):
-    model = LanguageKnowledge
-    required = dd.required(
-        user_groups='coaching', user_level='manager')
-
-
-class LanguageKnowledgesByPerson(LanguageKnowledges):
-    master_key = 'person'
-    #~ label = _("Language knowledge")
-    #~ button_label = _("Languages")
-    column_names = "language native spoken written cef_level"
-    required = dd.required(user_groups='coaching')
-    auto_fit_column_widths = True
-
-
-class KnowledgesByLanguage(LanguageKnowledges):
-    master_key = 'language'
-    column_names = "person native spoken written cef_level"
-    required = dd.required(user_groups='coaching')
 
 #
 # PROPERTIES
@@ -146,7 +53,7 @@ class PersonProperty(properties.PropertyOccurence):
 
 
 class PersonProperties(dd.Table):
-    model = PersonProperty
+    model = 'properties.PersonProperty'
     hidden_columns = 'group id'
     required = dd.required(user_groups='integ', user_level='manager')
 
@@ -165,8 +72,6 @@ class PropsByPerson(PersonProperties):
 
 
 class PersonPropsByProp(PersonProperties):
-    model = PersonProperty
-    #~ app_label = 'properties'
     master_key = 'property'
     column_names = "person value remark *"
 
@@ -216,7 +121,6 @@ class ObstaclesByPerson(ConfiguredPropsByPerson):
     propgroup_config_name = 'propgroup_obstacles'
 
 
-
 def customize_siteconfig():
 
     dd.inject_field(
@@ -257,12 +161,6 @@ def customize_siteconfig():
 customize_siteconfig()
 
 
-def setup_explorer_menu(site, ui, profile, m):
-    menu = dd.apps.integ
-    m = m.add_menu(menu.app_label, menu.verbose_name)
-    m.add_action(LanguageKnowledges)
-
-
 @dd.receiver(dd.post_analyze)
 def set_detail_layouts(sender=None, **kwargs):
     rt.modules.properties.Properties.set_detail_layout("""
@@ -270,9 +168,3 @@ def set_detail_layouts(sender=None, **kwargs):
     name
     cv.PersonPropsByProp
     """)
-
-    rt.modules.languages.Languages.set_detail_layout("""
-    id iso2 name
-    cv.KnowledgesByLanguage
-    """)
-

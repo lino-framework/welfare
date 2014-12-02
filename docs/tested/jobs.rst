@@ -76,13 +76,14 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========== ========== ========================= ===================================== =============
- Anfang     Ende       Klient                    Firma                                 Land
----------- ---------- ------------------------- ------------------------------------- -------------
- 07.02.11   07.02.11   JACOBS Jacqueline (137)   Belgisches Rotes Kreuz (100)          Estland
- 04.04.11   04.04.11   FAYMONVILLE Luc (130*)    Beschützende Werkstätte Eupen (202)   Niederlande
-========== ========== ========================= ===================================== =============
+============ ========== ========================= ===================================== =============
+ Beginnt am   Enddatum   Klient                    Firma                                 Land
+------------ ---------- ------------------------- ------------------------------------- -------------
+ 07.02.11     07.02.11   JACOBS Jacqueline (137)   Belgisches Rotes Kreuz (100)          Estland
+ 04.04.11     04.04.11   FAYMONVILLE Luc (130*)    Beschützende Werkstätte Eupen (202)   Niederlande
+============ ========== ========================= ===================================== =============
 <BLANKLINE>
+
 
 
 .. _welfare.jobs.CandidaturesByOffer:

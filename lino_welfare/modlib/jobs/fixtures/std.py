@@ -1,19 +1,21 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011,2013-2014 Luc Saffre
+# Copyright 2011-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino.utils.instantiator import Instantiator, i2d
+from lino.utils.instantiator import Instantiator
 from lino.dd import babel_values
 
-from lino import dd, rt
+from lino import dd
+
+# TODO: move data for Regime and Status to `lino.modlib.cv`.
 
 
 def objects():
 
-    regime = Instantiator('jobs.Regime').build
+    regime = Instantiator('cv.Regime').build
     yield regime(**babel_values('name',
                                 de=u"20 Stunden/Woche", fr=u"20 heures/semaine", en=u"20 hours/week"))
     yield regime(**babel_values('name',
@@ -31,7 +33,7 @@ def objects():
                                   fr=u"lundi,mercredi,vendredi",
                                   en=u"Monday, Wednesday, Friday"))
 
-    status = Instantiator('jobs.Status').build
+    status = Instantiator('cv.Status').build
     yield status(**dd.str2kw('name', _("Worker")))
     yield status(**dd.str2kw('name', _("Employee")))
     yield status(**dd.str2kw('name', _("Freelancer")))

@@ -20,7 +20,6 @@ ExclusionType = dd.resolve_model('pcsw.ExclusionType')
 
 #~ from lino.modlib.properties import models as properties
 
-ContractEnding = dd.resolve_model('isip.ContractEnding')
 ExcerptType = dd.resolve_model('excerpts.ExcerptType')
 
 
@@ -144,104 +143,15 @@ def objects():
     yield eventType("Kontakt ÖSHZ intern", "Kontakte mit Kollegen oder Diensten im ÖSHZ, z.B. Fallbesprechung mit Allgemeinem Sozialdienst, Energieberatung, Schuldnerberatung, Sekretariat, ...")
     yield eventType("Telefonat", "Telefonischer Kontakt mit dem Kunden, anderen Personen, Diensten oder Organisationen ....")
 
-    #~ projectType = Instantiator('projects.ProjectType',"name").build
-    #~ yield projectType(u"VSE Ausbildung")
-    #~ yield projectType(u"VSE Arbeitssuche")
-    #~ yield projectType(u"VSE Integration")
-    #~ yield projectType(u"Hausinterne Arbeitsverträge")
-    #~ yield projectType(u"Externe Arbeitsverträge")
-    #~ yield projectType(u"Kurse und Zusatzausbildungen")
-
-    #~ yield projectType(u"Sozialhilfe")
-    #~ yield projectType(u"EiEi")
-    #~ yield projectType(u"Aufenthaltsgenehmigung")
-
-    eduLevel = Instantiator('isip.EducationLevel').build
-    yield eduLevel(**babel_values('name',
-                                  de="Primär",
-                                  fr="Primaire",
-                                  en="Primary"))
-    yield eduLevel(**babel_values('name',
-                                  de="Sekundär",
-                                  fr="Secondaire",
-                                  en="Secondary"))
-    yield eduLevel(**babel_values('name',
-                                  de="Hochschule",
-                                  fr="Supérieur",
-                                  en="Higher"))
-    yield eduLevel(**babel_values('name',
-                                  de="Bachelor",
-                                  fr="Bachelor",
-                                  en="Bachelor"))
-    yield eduLevel(**babel_values('name',
-                                  de="Master",
-                                  fr="Master",
-                                  en="Master"))
-
-    studyType = Instantiator('isip.StudyType').build
-    yield studyType(**babel_values('name',
-                                   de=u"Schule",
-                                   fr=u"École",
-                                   en=u"School",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Sonderschule",
-                                   fr=u"École spéciale",
-                                   en=u"Special school",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Ausbildung",
-                                   fr=u"Formation",
-                                   en=u"Schooling",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Lehre",
-                                   fr=u"Apprentissage",
-                                   en=u"Apprenticeship",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Hochschule",
-                                   fr=u"École supérieure",
-                                   en=u"Highschool",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Universität",
-                                   fr=u"Université",
-                                   en=u"University",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Teilzeitunterricht",
-                                   fr=u"Cours à temps partiel",
-                                   en=u"Part-time study",
-                                   ))
-    yield studyType(**babel_values('name',
-                                   de=u"Fernkurs",
-                                   fr=u"Cours à distance",
-                                   en=u"Remote study",
-                                   ))
-
-    #~ studyContent = Instantiator('pcsw.StudyContent',"name").build
-    #~ yield studyContent(u"Grundschule")
-    #~ yield studyContent(u"Mittlere Reife")
-    #~ yield studyContent(u"Abitur")
-    #~ yield studyContent(u"Schlosser")
-    #~ yield studyContent(u"Schreiner")
-    #~ yield studyContent(u"Biotechnologie")
-    #~ yield studyContent(u"Geschichte")
-    #~ license = Instantiator('pcsw.DrivingLicense',"id name").build
-    #~ yield license('A',u"Motorrad")
-    #~ yield license('B',u"PKW")
-    #~ yield license('C',u"LKW")
-    #~ yield license('CE',u"LKW über X Tonnen")
-    #~ yield license('D',u"Bus")
-    #~ coachingType = Instantiator('pcsw.CoachingType',"name").build
-    #~ yield coachingType(u"DSBE")
-    #~ yield coachingType(u"Schuldnerberatung")
-    #~ yield coachingType(u"Energieberatung")
-    #~ yield coachingType(u"allgemeiner Sozialdienst")
     excltype = Instantiator('pcsw.ExclusionType', 'name').build
     yield excltype(u"Termin nicht eingehalten")
     yield excltype(u"ONEM-Auflagen nicht erfüllt")
+
+    ContractEnding = dd.resolve_model('isip.ContractEnding')
+    yield ContractEnding(name=_("Normal"))
+    yield ContractEnding(name=_("Alcohol"), needs_date_ended=True)
+    yield ContractEnding(name=_("Health"), needs_date_ended=True)
+    yield ContractEnding(name=_("Force majeure"), needs_date_ended=True)
 
     #~ linkType = Instantiator('links.LinkType',"a_type b_type name").build
 
@@ -374,11 +284,6 @@ def objects():
     #     fr=u"Autre aide sociale",
     #     en=u"Autre aide sociale",
     # ))
-
-    yield ContractEnding(name=_("Normal"))
-    yield ContractEnding(name=_("Alcohol"), needs_date_ended=True)
-    yield ContractEnding(name=_("Health"), needs_date_ended=True)
-    yield ContractEnding(name=_("Force majeure"), needs_date_ended=True)
 
     I = Instantiator('system.HelpText', 'content_type field help_text').build
 

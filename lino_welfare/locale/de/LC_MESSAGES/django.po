@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-27 11:44+0200\n"
-"PO-Revision-Date: 2014-11-27 11:46+0300\n"
+"PO-Revision-Date: 2014-12-02 19:56+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2615,7 +2615,7 @@ msgstr "Ende"
 
 #: lino_welfare/modlib/jobs/models.py:618
 msgid "study or education"
-msgstr "Audbildung oder Studium"
+msgstr "Ausbildung oder Studium"
 
 #: lino_welfare/modlib/jobs/models.py:619
 msgid "Studies & education"

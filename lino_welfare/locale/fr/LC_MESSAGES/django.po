@@ -5,17 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  lino.apps.dsbe\n"
+"Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-27 11:44+0200\n"
-"PO-Revision-Date: 2014-11-20 10:07+0100\n"
+"PO-Revision-Date: 2014-12-02 19:47+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: fr\n"
 
 #: lino_welfare/models.py:50
 msgid "Local job office"
@@ -39,8 +41,7 @@ msgstr "utilisable dans contrats"
 
 #: lino_welfare/models.py:91
 msgid ""
-"Whether Links of this type can be used as contact person of a job "
-"contract."
+"Whether Links of this type can be used as contact person of a job contract."
 msgstr ""
 
 #: lino_welfare/config/excerpts/Excerpt/aus.body.html:5
@@ -223,8 +224,8 @@ msgstr "Intégration"
 
 #: lino_welfare/modlib/aids/models.py:152
 msgid ""
-"Whether grantings of this aid type are considered as duty for integration"
-" contract."
+"Whether grantings of this aid type are considered as duty for integration "
+"contract."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:156
@@ -233,8 +234,8 @@ msgstr "Confirmé par le titulaire"
 
 #: lino_welfare/modlib/aids/models.py:163
 msgid ""
-"Which client address to print on confirmations. If this is empty, Lino "
-"will use the primary address."
+"Which client address to print on confirmations. If this is empty, Lino will "
+"use the primary address."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:168
@@ -388,7 +389,8 @@ msgstr ""
 #: lino_welfare/modlib/badges/models.py:61
 #: lino_welfare/modlib/courses/models.py:200
 #: lino_welfare/modlib/courses/models.py:391
-#: lino_welfare/modlib/cv/models.py:145 lino_welfare/modlib/debts/models.py:536
+#: lino_welfare/modlib/cv/models.py:145
+#: lino_welfare/modlib/debts/models.py:536
 #: lino_welfare/modlib/debts/models.py:614
 #: lino_welfare/modlib/jobs/models.py:200
 #: lino_welfare/modlib/jobs/models.py:225
@@ -818,7 +820,8 @@ msgid "Using phonetic search"
 msgstr "Recherche phonétique"
 
 #: lino_welfare/modlib/cbss/models.py:1177
-#: lino_welfare/modlib/cbss/models.py:1565 lino_welfare/modlib/cbss/tx25.py:194
+#: lino_welfare/modlib/cbss/models.py:1565
+#: lino_welfare/modlib/cbss/tx25.py:194
 msgid "Parameters"
 msgstr "Paramètres"
 
@@ -1652,7 +1655,8 @@ msgstr ""
 msgid "unknown age"
 msgstr "age inconnu"
 
-#: lino_welfare/modlib/cv/__init__.py:14 lino_welfare/modlib/pcsw/models.py:819
+#: lino_welfare/modlib/cv/__init__.py:14
+#: lino_welfare/modlib/pcsw/models.py:819
 #: lino_welfare/projects/chatelet/modlib/cv/__init__.py:14
 #: lino_welfare/projects/chatelet/modlib/pcsw/models.py:144
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:181
@@ -1774,7 +1778,8 @@ msgid "Soft Skills Property Group"
 msgstr "Groupe de propriétés 'Soft Skills'"
 
 #: lino_welfare/modlib/cv/models.py:241
-msgid "The property group to be used as master for the SoftSkillsByPerson table."
+msgid ""
+"The property group to be used as master for the SoftSkillsByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/cv/models.py:250
@@ -1782,7 +1787,8 @@ msgid "Obstacles Property Group"
 msgstr "Groupe de propriétés 'Freins'"
 
 #: lino_welfare/modlib/cv/models.py:252
-msgid "The property group to be used as master for the ObstaclesByPerson table."
+msgid ""
+"The property group to be used as master for the ObstaclesByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/debts/__init__.py:10
@@ -1963,8 +1969,8 @@ msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:641
 msgid ""
-"Leave empty for simple debts, otherwise select         here the "
-"responsible bailiff or collection agency"
+"Leave empty for simple debts, otherwise select         here the responsible "
+"bailiff or collection agency"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:703
@@ -2020,8 +2026,7 @@ msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
 "checked, \n"
-"proportionally distributing the `Distributable amount` among the debtors."
-"\n"
+"proportionally distributing the `Distributable amount` among the debtors.\n"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:1214
@@ -2912,8 +2917,8 @@ msgstr "Attribuer"
 
 #: lino_welfare/modlib/newcomers/models.py:432
 msgid ""
-"Assign this agent as coach for this client. This will set the client's "
-"state to `Coached` and send a notification to the new coach."
+"Assign this agent as coach for this client. This will set the client's state "
+"to `Coached` and send a notification to the new coach."
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:444
@@ -3020,8 +3025,8 @@ msgstr "Intervenant"
 
 #: lino_welfare/modlib/pcsw/coaching.py:130
 msgid ""
-"There's at most one primary coach per client.         Enabling this field"
-" will automatically make the other         coachings non-primary."
+"There's at most one primary coach per client.         Enabling this field "
+"will automatically make the other         coachings non-primary."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/coaching.py:238
@@ -4269,4 +4274,3 @@ msgstr "Agences de travail"
 
 #~ msgid "Intervening parties"
 #~ msgstr "Intervenants"
-

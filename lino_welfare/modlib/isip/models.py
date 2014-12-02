@@ -128,7 +128,7 @@ class ContractEnding(dd.Model):
 
 class ContractEndings(dd.Table):
     required = dict(user_groups='integ', user_level='manager')
-    model = ContractEnding
+    model = 'isip.ContractEnding'
     column_names = 'name use_in_isip use_in_jobs is_success needs_date_ended *'
     order_by = ['name']
     detail_layout = """
@@ -137,77 +137,6 @@ class ContractEndings(dd.Table):
     isip.ContractsByEnding
     jobs.ContractsByEnding
     """
-
-
-# class EducationLevels(dd.ChoiceList):
-#     verbose_name = _("Study Level")
-# add = EducationLevels.add_item
-# add('10', _("Primary"), 'primary')
-# add('20', _("Secondary"), 'secondary')
-# add('21', _("Secondary 1"), 'secondary1')
-# add('22', _("Secondary 2"), 'secondary2')
-# add('23', _("Secondary 2"), 'secondary3')
-# add('30', _("Bachelor"), 'bachelor')
-# add('30', _("Master"), 'master')
-
-
-class StudyRegimes(dd.ChoiceList):
-    verbose_name = _("Study Regime")
-add = StudyRegimes.add_item
-add('S', _("Studies"), 'studies')
-add('T', _("Trainings"), 'trainings')
-
-
-class EducationLevel(dd.BabelNamed, dd.Sequenced):
-
-    class Meta:
-        verbose_name = _("Education Level")
-        verbose_name_plural = _("Education Levels")
-
-
-class EducationLevels(dd.Table):
-    required = dict(user_groups='integ', user_level='manager')
-    model = EducationLevel
-    column_names = 'name *'
-    order_by = ['name']
-    # detail_layout = """
-    # name
-    # isip.StudyTypesByLevel
-    # """
-
-
-class StudyType(dd.BabelNamed):
-
-    class Meta:
-        verbose_name = _("Study Type")
-        verbose_name_plural = _("Study Types")
-
-    study_regime = StudyRegimes.field(default=StudyRegimes.studies)
-    # level = EducationLevels.field(blank=True)
-    education_level = dd.ForeignKey(
-        EducationLevel,
-        null=True, blank=True)
-
-
-class StudyTypes(dd.Table):
-    required = dd.required(user_groups='integ', user_level='admin')
-    #~ label = _('Study types')
-    model = StudyType
-    order_by = ["name"]
-    detail_layout = """
-    name study_regime education_level id
-    ContractsByStudyType
-    jobs.StudiesByType
-    """
-
-    insert_layout = """
-    name
-    education_level
-    """
-
-
-class StudyTypesByLevel(StudyTypes):
-    master_key = 'education_level'
 
 
 def default_signer1():
@@ -659,7 +588,7 @@ class Contract(ContractBase):
         ContractBase.hidden_columns
         + " stages goals duties_asd duties_dsbe duties_person")
 
-    study_type = models.ForeignKey('isip.StudyType', blank=True, null=True)
+    study_type = models.ForeignKey('cv.StudyType', blank=True, null=True)
 
     @classmethod
     def get_certifiable_fields(cls):
@@ -711,7 +640,7 @@ class Contracts(ContractBaseTable):
 
     parameters = dict(
         type=models.ForeignKey(ContractType, blank=True),
-        study_type=models.ForeignKey('isip.StudyType', blank=True),
+        study_type=models.ForeignKey('cv.StudyType', blank=True),
         **ContractBaseTable.parameters)
 
     params_layout = """

@@ -813,9 +813,9 @@ class ClientDetail(dd.FormLayout):
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
-    jobs.StudiesByPerson
-    # jobs.TrainingsByPerson
-    jobs.ExperiencesByPerson:40
+    cv.StudiesByPerson
+    # cv.TrainingsByPerson
+    cv.ExperiencesByPerson:40
     """, label=_("Career"))
 
     languages = dd.Panel("""
