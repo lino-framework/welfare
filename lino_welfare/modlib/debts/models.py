@@ -246,7 +246,7 @@ The total monthly amount available for debts distribution."""))
 
     def entries_by_group(self, group, **kw):
         """
-        Return a TableRequest showing the Entries for the given `group`, 
+        Return a TableRequest showing the Entries for the given `group`,
         using the table layout depending on AccountType.
         Shows all Entries of the specified `accounts.Group`.
         """
@@ -780,6 +780,10 @@ class EntriesByType(Entries):
         #~ return accounts.Account.objects.filter(type=cls._account_type)
 
 
+class EntriesByAccount(Entries):
+    master_key = 'account'
+
+
 class EntriesByBudget(Entries):
 
     """
@@ -1039,7 +1043,6 @@ class PrintLiabilitiesByBudget(PrintEntriesByBudget):
     help_text = _(
         """Print version of :ref:`welfare.debts.LiabilitiesByBudget`.""")
     _account_type = AccountTypes.liabilities
-    #~ column_names = "partner description total monthly_rate todo"
     column_names = "partner:20 description:20 bailiff monthly_rate dynamic_amounts"
 
 
@@ -1236,35 +1239,15 @@ proportionally distributing the `Distributable amount` among the debtors.
         #~ return obj.description
 
 
-MODULE_LABEL = settings.SITE.plugins.debts.verbose_name
+MODULE_LABEL = dd.plugins.debts.verbose_name
 # _("Debts mediation")
 
 #~ settings.SITE.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))
 #~ settings.SITE.add_user_group('debts',MODULE_LABEL)
 
 
-def site_setup(site):
-    for T in (site.modules.contacts.Partners,
-              site.modules.contacts.Persons,
-              site.modules.pcsw.Clients,
-              site.modules.households.Households):
-        #~ T.add_detail_tab('debts.BudgetsByPartner')
-        T.add_detail_tab('debts', """
-        debts.BudgetsByPartner
-        debts.ActorsByPartner
-        """, MODULE_LABEL)
-
-    #~ site.modules.accounts.Accounts.set_required(
-        #~ user_groups=['debts'],user_level='manager')
-
-    cn = "ref name default_amount periods required_for_household required_for_person group "
-    site.modules.accounts.Accounts.column_names = cn
-    site.modules.accounts.AccountsByGroup.column_names = cn
-
-
 def setup_main_menu(site, ui, profile, m):
     m = m.add_menu("debts", MODULE_LABEL)
-    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
     m.add_action('debts.Clients')
     m.add_action('debts.MyBudgets')
 
@@ -1309,32 +1292,6 @@ def setup_explorer_menu(site, ui, profile, m):
 dd.add_user_group('debts', MODULE_LABEL)
 
 
-def customize_accounts():
-    """
-    Injects a list of fields to the accounts.Account model
-    """
-    dd.inject_field('accounts.Account',
-                    'required_for_household',
-                    models.BooleanField(
-                        _("Required for Households"), default=False)
-                    )
-    dd.inject_field('accounts.Account',
-                    'required_for_person',
-                    models.BooleanField(
-                        _("Required for Persons"), default=False)
-                    )
-    dd.inject_field('accounts.Account',
-                    'periods',
-                    PeriodsField(_("Periods"))
-                    )
-    dd.inject_field('accounts.Account',
-                    'default_amount',
-                    dd.PriceField(_("Default amount"), blank=True, null=True)
-                    )
-
-customize_accounts()
-
-
 dd.inject_field(
     'pcsw.ClientContactType',
     'is_bailiff',
@@ -1361,3 +1318,50 @@ dd.inject_field(
         related_name='master_budget_sites',
         help_text=_("The budget whose content is to be \
         copied into new budgets.")))
+
+# Inject a list of fields to the accounts.Account model.
+dd.inject_field('accounts.Account',
+                'required_for_household',
+                models.BooleanField(
+                    _("Required for Households"), default=False)
+                )
+dd.inject_field('accounts.Account',
+                'required_for_person',
+                models.BooleanField(
+                    _("Required for Persons"), default=False)
+                )
+dd.inject_field('accounts.Account',
+                'periods',
+                PeriodsField(_("Periods"))
+                )
+dd.inject_field('accounts.Account',
+                'default_amount',
+                dd.PriceField(_("Default amount"), blank=True, null=True)
+                )
+
+
+def site_setup(site):
+    for T in (site.modules.contacts.Partners,
+              site.modules.contacts.Persons,
+              site.modules.pcsw.Clients,
+              site.modules.households.Households):
+        #~ T.add_detail_tab('debts.BudgetsByPartner')
+        T.add_detail_tab('debts', """
+        debts.BudgetsByPartner
+        debts.ActorsByPartner
+        """, MODULE_LABEL)
+
+    #~ site.modules.accounts.Accounts.set_required(
+        #~ user_groups=['debts'],user_level='manager')
+
+    cn = "ref name default_amount periods required_for_household required_for_person group "
+    site.modules.accounts.Accounts.column_names = cn
+    site.modules.accounts.AccountsByGroup.column_names = cn
+
+    site.modules.accounts.Accounts.set_detail_layout("""
+    ref name
+    group type
+    required_for_household required_for_person periods default_amount
+    debts.EntriesByAccount
+    """)
+

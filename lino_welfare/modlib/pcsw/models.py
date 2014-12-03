@@ -272,7 +272,7 @@ class Client(contacts.Person,
                                        blank=True,  # null=True,
                                        verbose_name=_("reason"))
 
-    obstacles = models.TextField(_("Obstacles"), blank=True, null=True)
+    obstacles = models.TextField(_("Other obstacles"), blank=True, null=True)
     skills = models.TextField(_("Other skills"), blank=True, null=True)
 
     job_office_contact = models.ForeignKey(

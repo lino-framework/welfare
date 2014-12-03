@@ -605,13 +605,11 @@ def objects():
     yield company(name=u"Bourseaux Alexandre", street=u'Aachener Straße', street_no=21, **kw)
     yield company(name=u"Baguette Stéphanie", street=u'Gospertstraße', street_no=24, **kw)
 
+    # Bailiff = Gerichtsvollzieher = Huissier de justice
     kw = dd.str2kw('name', _("Bailiff"))
+    if dd.is_installed('debts'):
+        kw.update(is_bailiff=True)
     cct = ClientContactType(**kw)
-    # cct = ClientContactType(**babelkw('name',
-    #                                   de="Gerichtsvollzieher",
-    #                                   fr="Huissier de justice",
-    #                                   en="Bailiff"
-    #                                   ))
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield company(name="Demarteau Bernadette",
@@ -619,6 +617,18 @@ def objects():
     kw.update(city=stvith)
     yield company(name="Schmitz Marc", street='Rodter Straße',
                   street_no=43, street_box="B", **kw)
+
+    # Inkasso-Unternehmen
+    kw = dd.str2kw('name', _("Debt collecting company"))
+    if dd.is_installed('debts'):
+        kw.update(is_bailiff=True)
+    cct = ClientContactType(**kw)
+    yield cct
+    kw = dict(client_contact_type=cct, country=belgium, city=eupen)
+    yield company(name="Cashback sprl",
+                  street='Vervierser Straße', street_no=1, **kw)
+    yield company(name="Cashback sprl",
+                  street='Vervierser Straße', street_no=1, **kw)
 
     # settings.SITE.site_config.debts_bailiff_type = cct
     # yield settings.SITE.site_config
