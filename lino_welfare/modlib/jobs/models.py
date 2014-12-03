@@ -801,9 +801,8 @@ class JobType(dd.Sequenced):
                             blank=True,
                             verbose_name=_("Designation"))
 
-    remark = models.CharField(max_length=200,
-                              blank=True,
-                              verbose_name=_("Remark"))
+    remark = models.CharField(_("Remark"), max_length=200, blank=True)
+    is_social = models.BooleanField(_("Social economy"), default=False)
 
     def __unicode__(self):
         return unicode(self.name)
@@ -811,12 +810,10 @@ class JobType(dd.Sequenced):
 
 class JobTypes(dd.Table):
     required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
     model = JobType
     order_by = ['name']
     detail_layout = """
-    id name 
+    id name is_social
     JobsByType
     """
 

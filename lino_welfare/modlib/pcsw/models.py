@@ -1370,6 +1370,42 @@ class ExclusionsByClient(Exclusions):
     auto_fit_column_widths = True
 
 
+class Conviction(dd.Model):
+
+    class Meta:
+        verbose_name = _("Conviction")
+        verbose_name_plural = _('Convictions')
+
+    client = models.ForeignKey('pcsw.Client')
+    date = models.DateField(_("Date"), blank=True)
+    prejudicial = models.BooleanField(_("Prejudicial"), default=False)
+    designation = models.CharField(
+        _("Designation"), max_length=200, blank=True)
+
+    def full_clean(self, *args, **kw):
+        if self.date is None:
+            self.date = dd.today()
+        super(Conviction, self).full_clean(*args, **kw)
+
+    def __unicode__(self):
+        s = unicode(self.designation)
+        if self.date:
+            s += ' (%s)' % dd.fds(self.date)
+        return s
+
+
+class Convictions(dd.Table):
+    required = dd.required(user_level='admin')
+    model = 'pcsw.Conviction'
+
+
+class ConvictionsByClient(Convictions):
+    required = dd.required(user_groups='coaching')
+    master_key = 'client'
+    column_names = 'date designation prejudicial'
+    auto_fit_column_widths = True
+
+
 #
 # AID TYPES
 #
@@ -1493,24 +1529,25 @@ def setup_main_menu(site, ui, profile, m):
 
 def setup_config_menu(site, ui, profile, m):
     m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action(PersonGroups)
-    m.add_action(Activities)
-    m.add_action(ExclusionTypes)
-    m.add_action(CoachingTypes)
-    m.add_action(CoachingEndings)
-    m.add_action(DispenseReasons)
-    m.add_action(ClientContactTypes)
+    m.add_action('pcsw.PersonGroups')
+    m.add_action('pcsw.Activities')
+    m.add_action('pcsw.ExclusionTypes')
+    m.add_action('pcsw.CoachingTypes')
+    m.add_action('pcsw.CoachingEndings')
+    m.add_action('pcsw.DispenseReasons')
+    m.add_action('pcsw.ClientContactTypes')
 
 
 def setup_explorer_menu(site, ui, profile, m):
     m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action(Coachings)
-    m.add_action(ClientContacts)
-    m.add_action(Exclusions)
+    m.add_action('pcsw.Coachings')
+    m.add_action('pcsw.ClientContacts')
+    m.add_action('pcsw.Exclusions')
+    m.add_action('pcsw.Convictions')
     m.add_action(AllClients)
     #~ m.add_action(PersonSearches)
-    m.add_action(CivilState)
-    m.add_action(ClientStates)
+    m.add_action('pcsw.CivilState')
+    m.add_action('pcsw.ClientStates')
     m.add_action('beid.BeIdCardTypes')
 
 

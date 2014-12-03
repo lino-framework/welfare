@@ -69,14 +69,14 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Coaches"))
 
     suche = dd.Panel("""
-    # job_office_contact job_agents
-    pcsw.DispensesByClient:50x3
-    pcsw.ExclusionsByClient:50x3
-    polls.ResponsesByPartner
+    pcsw.DispensesByClient
+    pcsw.ExclusionsByClient
+    pcsw.ConvictionsByClient
     """)
 
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
+    polls.ResponsesByPartner
     needs_residence_permit needs_work_permit
     uploads.UploadsByClient
     """)
@@ -167,11 +167,11 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 # humanlinks.LinksByHuman.slave_grid_format = 'grid'
 
 cv = dd.resolve_app('cv')
-cv.ExperiencesByPerson.column_names = "company start_date end_date \
-function regime status is_training country remarks *"
+# cv.ExperiencesByPerson.column_names = "company start_date end_date \
+# function regime status is_training country remarks *"
 
-cv.StudiesByPerson.column_names = "type content start_date end_date \
-school country success language remarks *"
+# cv.StudiesByPerson.column_names = "type content start_date end_date \
+# school country success language remarks *"
 
 ContactsByClient.column_names = 'company contact_person remark'
 dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
