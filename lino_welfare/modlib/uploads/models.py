@@ -61,7 +61,7 @@ class UploadTypes(UploadTypes):
     """
 
 
-class Upload(Upload, dd.ProjectRelated, contacts.ContactRelated):
+class Upload(Upload, mixins.ProjectRelated, contacts.ContactRelated):
     """Extends the library model by adding:
 
 - ContactRelated

@@ -250,7 +250,7 @@ class unused_ExecuteRequest(dd.Action):
         ar.success(**kw)
 
 
-class Sector(dd.BabelNamed):
+class Sector(mixins.BabelNamed):
 
     """
     Default values filled from :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
@@ -267,10 +267,10 @@ class Sector(dd.BabelNamed):
     abbr = dd.BabelCharField(_("Abbreviation"), max_length=50, blank=True)
 
     def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + dd.BabelNamed.__unicode__(self)
+        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__unicode__(self)
         if self.subcode != 0:
-            return str(self.code) + '.' + str(self.subcode) + ' - ' + dd.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + dd.BabelNamed.__unicode__(self)
+            return str(self.code) + '.' + str(self.subcode) + ' - ' + mixins.BabelNamed.__unicode__(self)
+        return str(self.code) + ' - ' + mixins.BabelNamed.__unicode__(self)
 
 
 class Sectors(dd.Table):
@@ -282,7 +282,7 @@ class Sectors(dd.Table):
     order_by = ['code', 'subcode']
 
 
-class Purpose(dd.BabelNamed):
+class Purpose(mixins.BabelNamed):
 
     u"""
     Codes qualité (Hoedanigheidscodes). 
@@ -301,8 +301,8 @@ class Purpose(dd.BabelNamed):
     code = models.IntegerField(max_length=3, verbose_name=_("Code"))
 
     def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + dd.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + dd.BabelNamed.__unicode__(self)
+        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__unicode__(self)
+        return str(self.code) + ' - ' + mixins.BabelNamed.__unicode__(self)
 
 
 class Purposes(dd.Table):

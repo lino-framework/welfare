@@ -8,14 +8,12 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-import datetime
-
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino import dd, mixins
 
 
 class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
@@ -32,7 +30,7 @@ INTEG_LABEL = dd.apps.integ.verbose_name
 GSS_LABEL = _("GSS")  # General Social Service
 
 
-class CoachingType(dd.BabelNamed):
+class CoachingType(mixins.BabelNamed):
 
     class Meta:
         verbose_name = _("Coaching type")
@@ -71,7 +69,7 @@ class CoachingTypes(dd.Table):
 # ~ _("Human resources"),'human') # Energiedienst
 
 
-class CoachingEnding(dd.BabelNamed, dd.Sequenced):
+class CoachingEnding(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
         verbose_name = _("Reason of termination")
@@ -97,7 +95,7 @@ class CoachingEndings(dd.Table):
     """
 
 
-class Coaching(dd.DatePeriod, dd.ImportedFields):
+class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
     """
 A Coaching (Begleitung, accompagnement) 
@@ -255,9 +253,9 @@ class Coachings(dd.Table):
             blank=True, null=True,
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
-        observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active),
-        primary_coachings=dd.YesNo.field(
+        observed_event=mixins.PeriodEvents.field(
+            blank=True, default=mixins.PeriodEvents.active),
+        primary_coachings=mixins.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),
         coaching_type=models.ForeignKey(
@@ -297,9 +295,9 @@ class Coachings(dd.Table):
         if ce is not None:
             qs = ce.add_filter(qs, ar.param_values)
 
-        if ar.param_values.primary_coachings == dd.YesNo.yes:
+        if ar.param_values.primary_coachings == mixins.YesNo.yes:
             qs = qs.filter(primary=True)
-        elif ar.param_values.primary_coachings == dd.YesNo.no:
+        elif ar.param_values.primary_coachings == mixins.YesNo.no:
             qs = qs.filter(primary=False)
         if ar.param_values.coaching_type is not None:
             qs = qs.filter(type=ar.param_values.coaching_type)
@@ -362,7 +360,7 @@ class CoachingsByEnding(Coachings):
     master_key = 'ending'
 
 
-class MyCoachings(CoachingsByUser, dd.ByUser):
+class MyCoachings(CoachingsByUser, mixins.ByUser):
     column_names = 'client start_date end_date type primary id'
     order_by = ['client__name']
 

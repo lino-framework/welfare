@@ -27,11 +27,11 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
-from lino import dd, rt
+from lino import dd, rt, mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
-from lino.models import PeriodEvents
+from lino.mixins import PeriodEvents
 from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
@@ -99,7 +99,7 @@ add('20', _("Medical aids"), 'medical')
 add('30', _("Other aids"), 'other')
 
 
-class Category(dd.BabelNamed):
+class Category(mixins.BabelNamed):
 
     class Meta:
         verbose_name = _("Category")
@@ -122,7 +122,7 @@ class Categories(dd.Table):
     """
 
 
-class AidType(ContactRelated, dd.BabelNamed):
+class AidType(ContactRelated, mixins.BabelNamed):
 
     # templates_group = 'aids/Aid'
 
@@ -254,7 +254,7 @@ def setup_aids_workflows(sender=None, **kw):
         _("Revoke"), states='confirmed')
 
 
-class Confirmable(dd.DatePeriod):
+class Confirmable(mixins.DatePeriod):
     # base class for Granting and for Confirmation
     class Meta:
         abstract = True
@@ -290,10 +290,10 @@ class Confirmable(dd.DatePeriod):
     def is_past(self):
         return (self.end_date and self.end_date <= dd.today())
 
-    # def get_printable_context(self, ar, **kw):
-    #     kw = super(Confirmable, self).get_printable_context(ar, **kw)
-    #     kw.update(past=(self.end_date and self.end_date <= dd.today()))
-    #     return kw
+    def get_printable_context(self, ar, **kw):
+        kw.update(when=e2text(self.confirmation_when()))
+        kw = super(Confirmable, self).get_printable_context(ar, **kw)
+        return kw
 
     def confirmation_text(self):
         kw = dict()
@@ -568,8 +568,8 @@ class GrantingsByType(GrantingsByX):
 ##
 
 class Confirmation(
-        Confirmable, dd.UserAuthored, ContactRelated,
-        dd.Created, Certifiable):
+        Confirmable, mixins.UserAuthored, ContactRelated,
+        mixins.Created, Certifiable):
               
     class Meta:
         abstract = True

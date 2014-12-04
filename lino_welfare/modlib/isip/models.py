@@ -41,7 +41,7 @@ COACHINGTYPE_DSBE = 2
 #
 # CONTRACT TYPES
 #
-class ContractType(dd.BabelNamed):
+class ContractType(mixins.BabelNamed):
 
     #~ _lino_preferred_width = 20
     preferred_foreignkey_width = 20
@@ -79,7 +79,7 @@ class ContractTypes(dd.Table):
 #
 # EXAMINATION POLICIES
 #
-class ExamPolicy(dd.BabelNamed, cal.RecurrenceSet):
+class ExamPolicy(mixins.BabelNamed, cal.RecurrenceSet):
 
     class Meta:
         verbose_name = _("Examination Policy")
@@ -426,7 +426,7 @@ class ContractBaseTable(dd.Table):
         observed_event=ContractEvents.field(
             blank=True, default=ContractEvents.active),
 
-        ending_success=dd.YesNo.field(
+        ending_success=mixins.YesNo.field(
             _("Successfully ended"),
             blank=True,
             help_text="""Contrats terminés avec succès."""),
@@ -479,9 +479,9 @@ class ContractBaseTable(dd.Table):
             else:
                 raise Exception(repr(ce))
 
-        if pv.ending_success == dd.YesNo.yes:
+        if pv.ending_success == mixins.YesNo.yes:
             qs = qs.filter(ending__isnull=False, ending__success=True)
-        elif pv.ending_success == dd.YesNo.no:
+        elif pv.ending_success == mixins.YesNo.no:
             qs = qs.filter(ending__isnull=False, ending__success=False)
 
         if pv.ending is not None:

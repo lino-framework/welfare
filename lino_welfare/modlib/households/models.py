@@ -43,7 +43,7 @@ class Household(Household):
         self.populate_members.run_from_code(ar)
 
 
-class Member(Member, dd.Human, dd.Born):
+class Member(Member, mixins.Human, mixins.Born):
 
     dependency = MemberDependencies.field(default=MemberDependencies.none)
 

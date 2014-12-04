@@ -1255,7 +1255,7 @@ class Activities(dd.Table):
     #~ master_key = 'activity'
 
 
-class DispenseReason(dd.BabelNamed, dd.Sequenced):
+class DispenseReason(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
         verbose_name = _("Dispense reason")
@@ -1409,7 +1409,7 @@ class ConvictionsByClient(Convictions):
 #
 # AID TYPES
 #
-class AidType(dd.BabelNamed):
+class AidType(mixins.BabelNamed):
 
     class Meta:
         verbose_name = _("aid type")
@@ -1424,7 +1424,7 @@ class AidTypes(dd.Table):
     required = dict(user_level='manager')
 
 
-class ClientContactType(dd.BabelNamed):
+class ClientContactType(mixins.BabelNamed):
 
     class Meta:
         verbose_name = _("Client Contact type")

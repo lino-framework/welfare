@@ -26,12 +26,12 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino import dd, mixins
 
 config = dd.apps.badges
 
 
-class Badge(dd.BabelNamed):
+class Badge(mixins.BabelNamed):
     class Meta:
         verbose_name = _("Badge")
         verbose_name_plural = _("Badges")

@@ -126,7 +126,7 @@ def bulk_create_with_manual_ids(model, obj_list):
     return model.objects.bulk_create(obj_list)
 
 
-class Budget(dd.UserAuthored, Certifiable, dd.Duplicable):
+class Budget(mixins.UserAuthored, Certifiable, mixins.Duplicable):
     """See :class:`ml.debts.Budget`.
     """
 
@@ -260,8 +260,9 @@ The total monthly amount available for debts distribution."""))
         return ar
 
     def sum(self, fldname, types=None, exclude=None, *args, **kw):
-        """
-        Compute and return the sum of `fldname` (either ``amount`` or `monthly_rate`
+        """Compute and return the sum of `fldname` (either ``amount`` or
+        `monthly_rate`
+
         """
         fldnames = [fldname]
         if types is not None:
@@ -353,6 +354,10 @@ The total monthly amount available for debts distribution."""))
                     a.full_clean()
                     a.save()
 
+    @dd.virtualfield(dd.PriceField(_("Total debt")))
+    def total_debt(self, ar):
+        return self.sum('amount', 'L')
+
     @dd.virtualfield(dd.HtmlBox(_("Preview")))
     def preview(self, ar):
         chunks = []
@@ -424,7 +429,7 @@ class BudgetDetail(dd.FormLayout):
     """
     summary2 = """
     conclusion:30x5
-    dist_amount printed
+    dist_amount printed total_debt
     include_yearly_incomes print_empty_rows print_todos
     """
 
@@ -994,7 +999,8 @@ TODO: more explnations....
     def partner(self, obj, ar):
         return obj.partner
 
-    @dd.virtualfield(models.ForeignKey('contacts.Company', verbose_name=_("Bailiff")))
+    @dd.virtualfield(models.ForeignKey(
+        'contacts.Company', verbose_name=_("Bailiff")))
     def bailiff(self, obj, ar):
         return obj.bailiff
 

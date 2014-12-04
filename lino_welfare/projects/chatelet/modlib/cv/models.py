@@ -65,7 +65,7 @@ class SkillsByPerson(PropsByPerson, Skills):
 ##
 
 
-class SoftSkillType(dd.BabelNamed):
+class SoftSkillType(mixins.BabelNamed):
     class Meta:
         verbose_name = _("Soft skill type")
         verbose_name_plural = _("Soft skill types")
@@ -94,7 +94,7 @@ class SoftSkillsByPerson(PropsByPerson, SoftSkills):
 ##
 
 
-class ObstacleType(dd.BabelNamed):
+class ObstacleType(mixins.BabelNamed):
     class Meta:
         verbose_name = _("Obstacle type")
         verbose_name_plural = _("Obstacle types")

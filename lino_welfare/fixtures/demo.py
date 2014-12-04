@@ -627,8 +627,8 @@ def objects():
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield company(name="Cashback sprl",
                   street='Vervierser Straße', street_no=1, **kw)
-    yield company(name="Cashback sprl",
-                  street='Vervierser Straße', street_no=1, **kw)
+    yield company(name="Money Wizard AS",
+                  street='Neustraße', street_no=1, **kw)
 
     # settings.SITE.site_config.debts_bailiff_type = cct
     # yield settings.SITE.site_config

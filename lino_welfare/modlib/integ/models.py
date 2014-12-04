@@ -27,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from lino import dd
+from lino import dd, mixins
 from lino.utils.xmlgen.html import E
 from lino.modlib.users.mixins import UserProfiles, UserLevels
 
@@ -547,7 +547,7 @@ class JobProvidersAndContracts(CompaniesAndContracts):
         return qs.filter(count__gte=1)
 
 
-class ActivityReport(dd.Report):
+class ActivityReport(mixins.Report):
 
     required = dict(user_groups='integ')
     #~ required = dd.required(user_level='manager')

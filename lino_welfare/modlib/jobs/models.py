@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode
 
-from lino import dd, rt
+from lino import dd, rt, mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.htmlgen import UL
 from lino.modlib.countries.models import CountryCity
@@ -38,7 +38,7 @@ pcsw = dd.resolve_app('pcsw')
 cv = dd.resolve_app('cv')
 
 
-class Schedule(dd.BabelNamed):
+class Schedule(mixins.BabelNamed):
 
     """List of choices for `jobs.Contract.schedule` field."""
     class Meta:
@@ -111,7 +111,7 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 # CONTRACT TYPES
 #
-class ContractType(dd.PrintableType, dd.BabelNamed):
+class ContractType(mixins.PrintableType, mixins.BabelNamed):
 
     """This is the homologue of :class:`welfare.isip.ContractType` (see
     there for general documentation).
@@ -786,7 +786,7 @@ class Jobs(dd.Table):
     """
 
 
-class JobType(dd.Sequenced):
+class JobType(mixins.Sequenced):
 
     """
     The list of Job Types is used for statistical analysis,
@@ -855,7 +855,7 @@ if True:  # settings.SITE.user_model:
 COLS = 8
 
 
-class OldJobsOverview(dd.EmptyTable):
+class OldJobsOverview(mixins.EmptyTable):
 
     """
     """
@@ -1071,7 +1071,7 @@ class JobsOverviewByType(Jobs):
                 yield job
 
 
-class JobsOverview(dd.EmptyTable):
+class JobsOverview(mixins.EmptyTable):
 
     """
     New version of `welfare.jobs.JobsOverview`.

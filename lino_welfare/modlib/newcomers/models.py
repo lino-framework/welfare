@@ -63,7 +63,7 @@ class Brokers(dd.Table):
     order_by = ["name"]
 
 
-class Faculty(dd.BabelNamed):
+class Faculty(mixins.BabelNamed):
 
     """A Faculty (Fachbereich) is a conceptual (not organizational)
     department of this PCSW.  Each Newcomer will be assigned to one
@@ -100,7 +100,7 @@ class Faculties(dd.Table):
     """
 
 
-class Competence(dd.UserAuthored, mixins.Sequenced):
+class Competence(mixins.UserAuthored, mixins.Sequenced):
     """
     A competence is when a given user is declared to be competent
     in a given faculty.

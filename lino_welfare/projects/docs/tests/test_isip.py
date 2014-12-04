@@ -66,7 +66,7 @@ class QuickTest(RemoteAuthTestCase):
         kw.update(first_name="Max")
         kw.update(last_name="Mustermann")
         kw.update(
-            gender=dd.Genders.male,
+            gender=mixins.Genders.male,
             client_state=pcsw.ClientStates.coached)
         client = create(pcsw.Client, **kw)
 

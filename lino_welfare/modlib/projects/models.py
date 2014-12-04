@@ -24,11 +24,11 @@ logger = logging.getLogger(__name__)
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino import dd, mixins
 from lino.modlib.excerpts.mixins import Certifiable
 
 
-class ProjectType(dd.BabelNamed):
+class ProjectType(mixins.BabelNamed):
     class Meta:
         verbose_name = _("Client project type")
         verbose_name_plural = _("Client project types")
@@ -39,7 +39,7 @@ class ProjectTypes(dd.Table):
     required = dd.required(user_level='admin')
 
 
-class Project(dd.DatePeriod, Certifiable):
+class Project(mixins.DatePeriod, Certifiable):
 
     class Meta:
         verbose_name = _("Client Project")
