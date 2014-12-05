@@ -213,7 +213,7 @@ equally execute some Javascript code:
 >>> print(links[1].string)
 Robin & Mélanie Dubois-Mélard
 >>> print(links[1].get('href'))
-javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 232 })
+javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 234 })
 
 
 The third link is:

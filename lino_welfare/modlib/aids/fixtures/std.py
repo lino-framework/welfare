@@ -16,7 +16,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from north.dbutils import babel_values
+from lino.dd import babel_values
 from lino.utils.instantiator import Instantiator
 from lino import dd, rt
 

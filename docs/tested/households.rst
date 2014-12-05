@@ -32,7 +32,7 @@ Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links.
 
 >>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
-Mr Paul FRISCH (236)
+Mr Paul FRISCH (238)
 
 >>> client = Client()
 >>> def check(uri, fieldname):
@@ -42,14 +42,14 @@ Mr Paul FRISCH (236)
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('contacts/Persons/236', 'LinksByHuman'))
+>>> soup = BeautifulSoup(check('contacts/Persons/238', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
 21
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 244 })
+javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 246 })
 
 These are the family relationships of Paul Frisch:
 
@@ -72,13 +72,13 @@ together. Their children have moved out.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Hubert")
 >>> print(obj)
-Mr Hubert FRISCH (234)
+Mr Hubert FRISCH (236)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== =============== ========================== ============ =========== ============ ========
  Age        Role                Dependency      Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- --------------- -------------------------- ------------ ----------- ------------ --------
- 80 years   Head of household   Not at charge   Mr Hubert FRISCH (234)     Hubert       Frisch      1933-07-21   Male
- 79 years   Partner             Not at charge   Mrs Gaby FROGEMUTH (235)   Gaby         Frogemuth   1934-08-04   Female
+ 80 years   Head of household   Not at charge   Mr Hubert FRISCH (236)     Hubert       Frisch      1933-07-21   Male
+ 79 years   Partner             Not at charge   Mrs Gaby FROGEMUTH (237)   Gaby         Frogemuth   1934-08-04   Female
 ========== =================== =============== ========================== ============ =========== ============ ========
 <BLANKLINE>
 
@@ -87,16 +87,16 @@ marriage with Paula Einzig.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Paul")
 >>> print(obj)
-Mr Paul FRISCH (236)
+Mr Paul FRISCH (238)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== ================ ========================== ============ =========== ============ ========
  Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Head of household   Not at charge    Mr Paul FRISCH (236)       Paul         Frisch      1967-06-19   Male
- 45 years   Partner             Not at charge    Mrs Petra ZWEITH (242)     Petra        Zweith      1968-12-19   Female
- 16 years   Child               At full charge   Mr Philippe FRISCH (243)   Philippe     Frisch      1997-06-19   Male
- 14 years   Child               At full charge   Mrs Clara FRISCH (244)     Clara        Frisch      1999-06-19   Female
- 12 years   Child               At full charge   Mr Dennis FRISCH (246)     Dennis       Frisch      2001-06-19   Male
+ 46 years   Head of household   Not at charge    Mr Paul FRISCH (238)       Paul         Frisch      1967-06-19   Male
+ 45 years   Partner             Not at charge    Mrs Petra ZWEITH (244)     Petra        Zweith      1968-12-19   Female
+ 16 years   Child               At full charge   Mr Philippe FRISCH (245)   Philippe     Frisch      1997-06-19   Male
+ 14 years   Child               At full charge   Mrs Clara FRISCH (246)     Clara        Frisch      1999-06-19   Female
+ 12 years   Child               At full charge   Mr Dennis FRISCH (248)     Dennis       Frisch      2001-06-19   Male
 ========== =================== ================ ========================== ============ =========== ============ ========
 <BLANKLINE>
 
@@ -121,15 +121,15 @@ with their two children.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Ludwig")
 >>> print(obj)
-Mr Ludwig FRISCH (237)
+Mr Ludwig FRISCH (239)
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== ================ ========================== ============ =========== ============ ========
  Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
 ---------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Partner             Not at charge    Mrs Laura LOSLEVER (247)   Laura        Loslever    1968-04-27   Female
- 46 years   Head of household   Not at charge    Mr Ludwig FRISCH (237)     Ludwig       Frisch      1968-06-01   Male
- 12 years   Child               At full charge   Mrs Melba FRISCH (248)     Melba        Frisch      2002-04-05   Female
- 6 years    Child               At full charge   Mrs Irma FRISCH (249)      Irma         Frisch      2008-03-24   Female
+ 46 years   Partner             Not at charge    Mrs Laura LOSLEVER (249)   Laura        Loslever    1968-04-27   Female
+ 46 years   Head of household   Not at charge    Mr Ludwig FRISCH (239)     Ludwig       Frisch      1968-06-01   Male
+ 12 years   Child               At full charge   Mrs Melba FRISCH (250)     Melba        Frisch      2002-04-05   Female
+ 6 years    Child               At full charge   Mrs Irma FRISCH (251)      Irma         Frisch      2008-03-24   Female
 ========== =================== ================ ========================== ============ =========== ============ ========
 <BLANKLINE>
 

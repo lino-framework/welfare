@@ -12,8 +12,6 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from north.dbutils import babelattr
-
 from lino import dd, rt
 
 from lino.modlib.cv.models import *
@@ -106,7 +104,7 @@ class ConfiguredPropsByPerson(PropsByPerson):
         pg = getattr(settings.SITE.site_config, self.propgroup_config_name)
         if pg is None:
             return _("(SiteConfig %s is empty)" % self.propgroup_config_name)
-        return babelattr(pg, 'name')
+        return dd.babelattr(pg, 'name')
 
 
 class SkillsByPerson(ConfiguredPropsByPerson):

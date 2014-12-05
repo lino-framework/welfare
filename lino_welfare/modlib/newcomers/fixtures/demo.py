@@ -9,7 +9,7 @@ from lino.core.dbutils import resolve_model
 # from django.utils.translation import ugettext_lazy as _
 
 #~ from django.db import models
-from north.dbutils import babel_values
+from lino.dd import babel_values
 
 from lino import dd, rt
 from lino.modlib.users.mixins import UserProfiles

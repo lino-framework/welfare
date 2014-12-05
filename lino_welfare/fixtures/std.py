@@ -10,8 +10,6 @@ from lino.utils.instantiator import Instantiator
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from north.dbutils import babelkw, babel_values
-
 from lino import dd, rt
 
 Person = dd.resolve_model('contacts.Person')
@@ -48,7 +46,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         primary=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('cal.Guest')),
-        **babelkw('name',
+        **dd.babelkw('name',
                   de="Anwesenheitsbescheinigung",
                   fr="Attestation de présence",
                   en="Presence certificate"))
@@ -59,7 +57,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         shortcut=Shortcuts.cvs_emitted,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
-        **babelkw('name',
+        **dd.babelkw('name',
                   de="Lebenslauf",
                   fr="Curriculum vitae",
                   en="Curriculum vitae"))
@@ -69,7 +67,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         primary=True,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
-        **babelkw('name',
+        **dd.babelkw('name',
                   de="eID-Inhalt",
                   fr="Contenu carte eID",
                   en="eID sheet"))
@@ -79,7 +77,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         template='Default.odt',
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
-        **babelkw('name',
+        **dd.babelkw('name',
                   de="Aktionsplan",
                   fr="Plan d'action",
                   en="to-do list"))
@@ -124,7 +122,7 @@ def objects():
 
     yield noteType(
         build_method='appyrtf', template='Letter.odt',
-        **babelkw('name',
+        **dd.babelkw('name',
                   de="Brief oder Einschreiben",
                   fr="Lettre",
                   en="Letter"))
@@ -285,7 +283,8 @@ def objects():
     #     en=u"Autre aide sociale",
     # ))
 
-    I = Instantiator('system.HelpText', 'content_type field help_text').build
+    I = Instantiator(
+        'contenttypes.HelpText', 'content_type field help_text').build
 
     Client = dd.resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)

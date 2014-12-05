@@ -33,7 +33,7 @@ class Site(Site):
     migration_class = 'lino_welfare.migrate.Migrator'
 
     userdocs_prefix = 'welfare.'
-    auto_configure_logger_names = 'djangosite north lino lino_welfare'
+    auto_configure_logger_names = 'djangosite lino lino_welfare'
 
     project_model = 'pcsw.Client'
     user_model = 'users.User'
@@ -151,7 +151,7 @@ class Site(Site):
         yield super(Site, self).get_installed_apps()
 
         yield 'lino_welfare.modlib.system'
-        yield 'django.contrib.contenttypes'
+        yield 'lino.modlib.contenttypes'
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'

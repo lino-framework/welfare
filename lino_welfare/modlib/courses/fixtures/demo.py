@@ -21,7 +21,6 @@ from lino.utils import i2d, Cycler
 from lino.modlib.beid.mixins import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
 from lino.core.dbutils import resolve_model
-from north.dbutils import babelkw
 from lino.dd import field2kw
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin

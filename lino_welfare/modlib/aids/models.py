@@ -290,9 +290,9 @@ class Confirmable(mixins.DatePeriod):
     def is_past(self):
         return (self.end_date and self.end_date <= dd.today())
 
-    def get_printable_context(self, ar, **kw):
+    def get_printable_context(self, **kw):
         kw.update(when=e2text(self.confirmation_when()))
-        kw = super(Confirmable, self).get_printable_context(ar, **kw)
+        kw = super(Confirmable, self).get_printable_context(**kw)
         return kw
 
     def confirmation_text(self):

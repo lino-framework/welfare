@@ -10,9 +10,9 @@ Publics d'Action Sociale <about>`.
 Cette documentation s'adresse aux utilisateurs et est maintenue de
 manière centralisée. Votre aide est la :doc:`bienvenue <contribuer>`.
 
-Il y a également un `Wiki bilingue
-<http://wiki.perceivon.net/doku.php>`_ dans lequel les utilisateurs
-peuvent éditer directement.
+Il y a également un `Wiki
+<http://trac.lino-framework.org/wiki/Welfare/FR>`_ dans lequel les
+utilisateurs peuvent éditer directement.
 
 
 .. toctree::
@@ -25,5 +25,4 @@ peuvent éditer directement.
    jobs
    contribuer
    todo
-   cv
    help/index

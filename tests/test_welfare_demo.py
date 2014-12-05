@@ -29,11 +29,11 @@ class MyTestCase(DemoTestCase):
         json_fields = 'count rows title success no_data_text'
         kw = dict(fmt='json', limit=10, start=0)
         self.demo_get(
-            'rolf', 'api/contacts/Companies', json_fields, 48, **kw)
+            'rolf', 'api/contacts/Companies', json_fields, 50, **kw)
         self.demo_get(
             'rolf', 'api/households/Households', json_fields, 15, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Partners', json_fields, 171, **kw)
+            'rolf', 'api/contacts/Partners', json_fields, 173, **kw)
         self.demo_get(
             'rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
         self.demo_get(
@@ -51,7 +51,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
         self.demo_get(
-            'rolf', 'api/contacts/Persons', json_fields, 102, **kw)
+            'rolf', 'api/contacts/Persons', json_fields, 101, **kw)
         self.demo_get('rolf', 'api/pcsw/Clients', json_fields, 30, **kw)
         self.demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
         self.demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)

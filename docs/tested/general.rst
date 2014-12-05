@@ -33,14 +33,14 @@ Test whether :meth:`get_db_overview_rst
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, djangosite.
-124 models:
+125 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
  accounts.Account               14        49
  accounts.Chart                 5         1
  accounts.Group                 8         7
- addresses.Address              16        119
+ addresses.Address              16        121
  aids.AidType                   23        11
  aids.Category                  5         3
  aids.Granting                  10        55
@@ -68,13 +68,14 @@ Test whether :meth:`get_db_overview_rst
  cbss.RetrieveTIGroupsRequest   14        2
  cbss.Sector                    11        209
  changes.Change                 9         0
- contacts.Company               30        47
+ contacts.Company               30        49
  contacts.CompanyType           9         16
- contacts.Partner               26        170
+ contacts.Partner               26        172
  contacts.Person                33        109
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         125
+ contenttypes.ContentType       4         126
+ contenttypes.HelpText          4         5
  countries.Country              8         8
  countries.Place                10        78
  courses.Course                 5         3
@@ -92,7 +93,7 @@ Test whether :meth:`get_db_overview_rst
  cv.Status                      5         7
  cv.Study                       15        2
  cv.StudyType                   6         8
- cv.Training                    13        0
+ cv.Training                    14        0
  cv.TrainingType                5         3
  debts.Actor                    6         63
  debts.Budget                   11        14
@@ -113,7 +114,7 @@ Test whether :meth:`get_db_overview_rst
  jobs.ContractType              9         5
  jobs.Job                       10        8
  jobs.JobProvider               31        3
- jobs.JobType                   4         5
+ jobs.JobType                   5         5
  jobs.Offer                     9         1
  jobs.Schedule                  5         3
  languages.Language             6         5
@@ -130,10 +131,11 @@ Test whether :meth:`get_db_overview_rst
  pcsw.AidType                   5         0
  pcsw.Client                    65        63
  pcsw.ClientContact             7         14
- pcsw.ClientContactType         7         9
+ pcsw.ClientContactType         7         10
  pcsw.Coaching                  8         90
  pcsw.CoachingEnding            7         4
  pcsw.CoachingType              8         3
+ pcsw.Conviction                5         0
  pcsw.Dispense                  6         0
  pcsw.DispenseReason            6         4
  pcsw.Exclusion                 6         0
@@ -154,7 +156,6 @@ Test whether :meth:`get_db_overview_rst
  properties.PropType            9         3
  properties.Property            7         23
  sepa.Account                   8         13
- system.HelpText                4         5
  system.SiteConfig              30        1
  system.TextFieldTemplate       5         2
  uploads.Upload                 16        6
@@ -187,11 +188,12 @@ Rolf is the local system administrator, he has a complete menu:
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
 - Listings :
+  - System : Stale Controllables
   - ÖSHZ : Datenkontrolle Klienten
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
-  - System : Site-Parameter, Benutzer, Inhaltstypen, Hilfetexte
+  - System : Site-Parameter, Benutzer, Hilfetexte
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Sprachen, Gremien, Haushaltsarten
@@ -199,7 +201,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Lehrenarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Regime, Statuus, Vertragsdauern
+  - Lebenslauf : Lehrenarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
@@ -209,13 +211,13 @@ Rolf is the local system administrator, he has a complete menu:
   - Polls : Choice Sets
 - Explorer :
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Änderungen
+  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - Kalender : Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
+  - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Badges : Badge Awards
   - SEPA : Konten
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Lehren, Ausbildungen und Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner
   - Kurse : Kurse, Kursanfragen

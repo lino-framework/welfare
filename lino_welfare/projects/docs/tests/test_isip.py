@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 from django.conf import settings
 from djangosite.utils.djangotest import RemoteAuthTestCase
 
-from lino import dd
+from lino import mixins
 from lino.utils import i2d
 from lino.modlib.cal.utils import WORKDAYS
 from lino.modlib.users.mixins import UserProfiles
