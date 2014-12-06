@@ -23,6 +23,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.utils import translation
 from django.utils.encoding import force_unicode
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
@@ -413,7 +414,7 @@ class Client(contacts.Person,
         #~ user = self.coach2 or self.coach1
         user = self.get_primary_coach()
         if user:
-            def f():
+            with translation.override(user.language):
                 M = cal.DurationUnits.months
                 cal.update_reminder(1, self, user,
                                     self.card_valid_until,
@@ -427,7 +428,6 @@ class Client(contacts.Person,
                 #~ cal.update_reminder(4,self,user,
                   #~ self.coached_until,
                   #~ _("coaching ends in 1 month"),1,M)
-            dbutils.run_with_language(user.language, f)
 
     @classmethod
     def get_reminders(model, ui, user, today, back_until):
