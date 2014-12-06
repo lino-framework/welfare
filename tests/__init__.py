@@ -24,7 +24,7 @@ from unipath import Path
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
-from djangosite.utils.pythontest import TestCase
+from lino.utils.pythontest import TestCase
 
 import lino_welfare
 

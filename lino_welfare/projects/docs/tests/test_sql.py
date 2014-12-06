@@ -50,7 +50,7 @@ from lino.modlib.users.mixins import UserProfiles
     #~ return user(*args)
 
 
-from djangosite.utils.djangotest import TestCase, reset_queries
+from lino.utils.djangotest import TestCase, reset_queries
 
 #~ @override_settings(DEBUG=True)
 #~ class SqlTest(TestCase):

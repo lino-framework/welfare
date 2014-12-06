@@ -17,10 +17,9 @@ logger = logging.getLogger(__name__)
 
 import os
 
-from lino import dd, rt
 from lino.runtime import countries, addresses, pcsw, users
 from lino.core import constants
-from djangosite.utils.djangotest import RemoteAuthTestCase
+from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 
 from lino.modlib.users.mixins import UserProfiles

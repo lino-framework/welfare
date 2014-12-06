@@ -26,7 +26,7 @@ from django.utils import translation
 
 from lino import dd
 from lino.utils import i2d
-from djangosite.utils.djangotest import TestCase
+from lino.utils.djangotest import TestCase
 
 from lino_welfare.management.commands.watch_tim import process_line
 
