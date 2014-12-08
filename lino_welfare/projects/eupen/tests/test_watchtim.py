@@ -24,7 +24,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import translation
 
-from lino import dd
+from lino import dd, rt
 from lino.utils import i2d
 from lino.utils.djangotest import TestCase
 
@@ -140,17 +140,25 @@ class TestCase(TestCase):
         georges = Client.objects.get(id=23633)
         self.assertEqual(georges.first_name, "Georges")
 
-        #~ def test02(self):
-        """
-        Company becomes Client
+        ar = rt.modules.changes.ChangesByMaster.request(georges)
+        self.assertEqual(ar.get_total_count(), 0)
+
+        # Company becomes Client
         
-        ValidationError([u'A Partner cannot be parent for a Client']) (201302-22 12:42:07)
-        A Partner in TIM has both `PAR->NoTva` nonempty and `PARATTR_N` set. 
-        It currently exists in Lino as a Company but not as a Client.
-        `watch_tim` then must create a Client after creating also the intermediate Person.
-        The Company child must be removed.
-        """
-        Company(name="Müller Max Moritz", id=5088).save()
+        # ValidationError([u'A Partner cannot be parent for a Client']) (201302-22 12:42:07)
+
+        # A Partner in TIM has both `PAR->NoTva` nonempty and
+        # `PARATTR_N` set.  It currently exists in Lino as a Company but
+        # not as a Client.  `watch_tim` then must create a Client after
+        # creating also the intermediate Person.  The Company child must
+        # be removed.
+
+        obj = Company(name="Müller Max Moritz", id=5088)
+        obj.save()
+
+        ar = rt.modules.changes.ChangesByMaster.request(obj)
+        self.assertEqual(ar.get_total_count(), 0)
+        
         global PUT_MAX_MORITZ
         process_line(PUT_MAX_MORITZ)
         self.assertDoesNotExist(Company, id=5088)
