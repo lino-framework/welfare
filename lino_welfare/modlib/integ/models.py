@@ -125,8 +125,8 @@ class UsersWithClients(dd.VirtualTable):
     """
     An overview table for agents of the integration service.
     """
-    #~ debug_permissions = True
-    required = dict(user_groups='coaching newcomers')
+    # required = dict(user_groups='coaching newcomers')
+    required = dict(user_groups='integ')
     label = _("Users with their Clients")
     #~ column_defaults = dict(width=8)
 
