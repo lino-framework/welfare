@@ -367,6 +367,11 @@ The total monthly amount available for debts distribution."""))
     def summary_section(self, ar):
         return E.div(*ar.story2html(self.summary_story(ar)))
 
+    # @dd.virtualfield(dd.HtmlBox(_("Preview")))
+    # def data_section(self, ar):
+    #     # used 
+    #     return E.div(*ar.story2html(self.data_story(ar)))
+
     def data_story(self, ar):
         # logger.info("20141211 insert_story")
 
@@ -412,7 +417,7 @@ class BudgetDetail(dd.FormLayout):
     Defines the Detail form of a :class:`Budget`.
     
     """
-    main = "general entries1 entries2 summary_tab preview"
+    main = "general entries1 entries2 summary_tab preview_tab"
     general = dd.Panel("""
     date partner id user
     intro
@@ -450,7 +455,7 @@ class BudgetDetail(dd.FormLayout):
     include_yearly_incomes print_empty_rows print_todos
     """
 
-    preview = dd.Panel("""
+    preview_tab = dd.Panel("""
     data_section
     summary_section
     """, label=_("Preview"))

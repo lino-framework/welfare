@@ -634,7 +634,7 @@ SECTORS = dict()
 
 class ListeFonctionLoader(LinoMdbLoader):
     table_name = 'CboListeFonction'
-    model = jobs.Sector
+    model = 'cv.Sector'
     headers = u"""IdQualification Qualification Code filtre DetailFonction""".split(
     )
 
@@ -650,7 +650,7 @@ class ListeFonctionLoader(LinoMdbLoader):
 
 class DetailFonctionsLoader(LinoMdbLoader):
     table_name = 'CboDetailFonction'
-    model = jobs.Function
+    model = 'cv.Function'
     headers = u"""IDDetailFonction DetailFonction Code Secteur""".split()
 
     def row2obj(self, row):
@@ -667,7 +667,7 @@ class DetailFonctionsLoader(LinoMdbLoader):
 
 class JobsContractTypeLoader(LinoMdbLoader):
     table_name = 'CboTypeMiseEmplois'
-    model = jobs.ContractType
+    model = 'jobs.ContractType'
     headers = u"""IDTypeMiseEmplois TypeMiseEmplois""".split()
 
     def row2obj(self, row):
@@ -679,7 +679,7 @@ class JobsContractTypeLoader(LinoMdbLoader):
 
 class CboSubsideLoader(LinoMdbLoader):
     table_name = 'CboSubside'
-    model = jobs.JobType
+    model = 'jobs.JobType'
     headers = u"""IDSubside TypeSubside article""".split()
 
     def row2obj(self, row):
@@ -692,7 +692,7 @@ class CboSubsideLoader(LinoMdbLoader):
 
 class IsipContractTypeLoader(LinoMdbLoader):
     table_name = 'CboTypeContrat'
-    model = isip.ContractType
+    model = 'isip.ContractType'
     headers = u"""IDTypeContrat TypeContratCPAS""".split()
 
     def row2obj(self, row):
@@ -766,7 +766,7 @@ class TBMiseEmploisLoader(LinoMdbLoader):
 
 class IsipContractLoader(LinoMdbLoader):
     table_name = 'TBTypeDeContratCPAS'
-    model = isip.Contract
+    model = 'isip.Contract'
     headers = u"""
     IDTypeDeContratCPAS IDTypeContrat DateDebut DateFin 
     ASCPAS ASISP Statut Evaluation IDClient DateSignature 

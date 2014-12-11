@@ -144,54 +144,14 @@ Models
         rt.show('isip.ContractEndings')
 
 
-.. class:: EducationLevel
-.. class:: EducationLevels
-
-    The demo database has the following education levels:
-
-    .. django2rst::
-
-        rt.show('isip.EducationLevels')
-
-
-
-.. class:: StudyType
-
-    Used in :attr:`Contract.study_type` and by :attr:`jobs.Study.type`.
-
-    .. attribute:: education_level
-
-        Pointer to the :class:`EducationLevel`.
-
-    .. attribute:: study_regime
-
-        One choice from :class:`StudyRegimes`.
-
-
-
-.. class:: StudyTypes
-
-    The demo database has the following study types:
-
-    .. django2rst::
-
-        rt.show('isip.StudyTypes')
-
-
 
 Choicelists
 ===========
 
-.. class:: StudyRegimes
-
-    The demo database has the following study regimes:
-
-    .. django2rst::
-
-        rt.show('isip.StudyRegimes')
-
-
 .. class:: ContractEvents
+
+    A list of the possible things that people might want to observe
+    about the lifetime dates of a contract.
 
     The demo database has the following contract events:
 

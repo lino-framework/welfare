@@ -112,15 +112,15 @@ Here are some more slave tables.
 
 >>> with translation.override('en'):
 ...     ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-================================= ================= ========= ============== ============== ============== ============ ==============
- Partner                           Description       Bailiff   Monthly rate   Common         Mr.            Mrs.         Total
---------------------------------- ----------------- --------- -------------- -------------- -------------- ------------ --------------
- Hans Flott & Co (108)             Invoices to pay                            1 200,00                                   1 200,00
- Bernd Brechts Bücherladen (109)   Loans                                                     1 500,00                    1 500,00
- Reinhards Baumschule (110*)       Debts                       15,00                                        300,00       300,00
- Moulin Rouge (111)                Invoices to pay             30,00          600,00                                     600,00
- **Total (4 rows)**                                            **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-================================= ================= ========= ============== ============== ============== ============ ==============
+================================= ================= ============== ============== ============== ============ ==============
+ Partner                           Description       Monthly rate   Common         Mr.            Mrs.         Total
+--------------------------------- ----------------- -------------- -------------- -------------- ------------ --------------
+ Hans Flott & Co (108)             Invoices to pay                  1 200,00                                   1 200,00
+ Bernd Brechts Bücherladen (109)   Loans                                           1 500,00                    1 500,00
+ Reinhards Baumschule (110*)       Debts             15,00                                        300,00       300,00
+ Moulin Rouge (111)                Invoices to pay   30,00          600,00                                     600,00
+ **Total (4 rows)**                                  **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+================================= ================= ============== ============== ============== ============ ==============
 <BLANKLINE>
 
 >>> with translation.override('en'):
@@ -141,7 +141,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 
 >>> groups = list(obj.account_groups())
 >>> with translation.override('en'):
-...     ses.show(obj.entries_by_group(groups[2]))
+...     ses.show(obj.entries_by_group(ses, groups[2]))
 ==================================== ============ ===== ====== ============
  Description                          Common       Mr.   Mrs.   Total
 ------------------------------------ ------------ ----- ------ ------------
@@ -233,30 +233,6 @@ False
 True
 >>> debts.PrintLiabilitiesByBudget.editable
 False
-
-
-
-Work in progress
-----------------
-
-The rest of this document is work in progress.
-Lino doesn't yet have a satisfying API for doing such things,
-and I'm using the occasion to work on that.
-
-
->>> expenses = accounts.AccountTypes.expenses
->>> # settings.SITE.catch_layout_exceptions = False
->>> # ses.show(accounts.Accounts.request(known_values=dict(type=expenses)),column_names="ref name")
-
-A Preview:
-
-.. django2rst:: 
-
-   from lino.utils.xmlgen.html import E
-   print(".. raw:: html")
-   print("")
-   e = debts.Budget.objects.get(pk=3).to_html()
-   print("   " + E.tostring(e))
 
 
 
