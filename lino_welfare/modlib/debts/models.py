@@ -360,20 +360,17 @@ The total monthly amount available for debts distribution."""))
         return self.sum('amount', 'L')
 
     @dd.virtualfield(dd.HtmlBox(_("Entered data")))
-    def data_section(self, ar):
+    def data_box(self, ar):
         return E.div(*ar.story2html(self.data_story(ar)))
 
     @dd.virtualfield(dd.HtmlBox(pgettext(u"debts", u"Summary")))
-    def summary_section(self, ar):
+    def summary_box(self, ar):
         return E.div(*ar.story2html(self.summary_story(ar)))
-
-    # @dd.virtualfield(dd.HtmlBox(_("Preview")))
-    # def data_section(self, ar):
-    #     # used 
-    #     return E.div(*ar.story2html(self.data_story(ar)))
 
     def data_story(self, ar):
         # logger.info("20141211 insert_story")
+
+        Company = rt.modules.contacts.Company
 
         def render(sar):
             if sar.renderer is None:
@@ -389,7 +386,6 @@ The total monthly amount available for debts distribution."""))
                        master_instance=self,
                        filter=models.Q(bailiff__isnull=True))
         yield render(sar)
-        Company = rt.modules.contacts.Company
         qs = Company.objects.filter(bailiff_debts_set__budget=self).distinct()
         for bailiff in qs:
             sar = ar.spawn(PrintLiabilitiesByBudget,
@@ -456,8 +452,8 @@ class BudgetDetail(dd.FormLayout):
     """
 
     preview_tab = dd.Panel("""
-    data_section
-    summary_section
+    data_box
+    summary_box
     """, label=_("Preview"))
 
     #~ ExpensesSummaryByBudget IncomesSummaryByBudget
