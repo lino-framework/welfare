@@ -89,8 +89,15 @@ def excerpt_types():  # also used for migration to 1.1.11
         'isip.Contract', certifying=True, backward_compat=True)
 
     if dd.is_installed('debts'):
-        ExcerptType.update_for_model(
-            'debts.Budget', certifying=True, backward_compat=True)
+
+        kw = dict(
+            template='Default.odt',
+            certifying=True)
+        kw.update(dd.str2kw('name', _("Financial situation")))
+        ExcerptType.update_for_model('debts.Budget', **kw)
+
+        # ExcerptType.update_for_model(
+        #     'debts.Budget', certifying=True, backward_compat=True)
 
 
 def objects():

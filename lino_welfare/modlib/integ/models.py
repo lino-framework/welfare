@@ -27,9 +27,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.conf import settings
 
-from lino import dd, mixins
 from lino.utils.xmlgen.html import E
 from lino.modlib.users.mixins import UserProfiles, UserLevels
+
+from lino import dd, mixins
+from lino.mixins import PeriodEvents
 
 config = dd.plugins.integ
 
@@ -325,13 +327,13 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ return cells
         yield add(
             pcsw.Coachings,
-            observed_event=dd.PeriodEvents.started, coaching_type=DSBE)
+            observed_event=PeriodEvents.started, coaching_type=DSBE)
         yield add(
             pcsw.Coachings,
-            observed_event=dd.PeriodEvents.active, coaching_type=DSBE)
+            observed_event=PeriodEvents.active, coaching_type=DSBE)
         yield add(
             pcsw.Coachings,
-            observed_event=dd.PeriodEvents.ended, coaching_type=DSBE)
+            observed_event=PeriodEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.created)
@@ -361,7 +363,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 if mi is None:
                     return None
                 pv = dict(start_date=mi.start_date, end_date=mi.end_date)
-                pv.update(observed_event=dd.PeriodEvents.ended)
+                pv.update(observed_event=PeriodEvents.ended)
                 pv.update(coaching_type=DSBE)
                 if user is not None:
                     pv.update(coached_by=user)
@@ -386,7 +388,7 @@ class CoachingEndingsByType(dd.VentilatingTable, pcsw.CoachingEndings):
                 if mi is None:
                     return None
                 pv = dict(start_date=mi.start_date, end_date=mi.end_date)
-                pv.update(observed_event=dd.PeriodEvents.ended)
+                pv.update(observed_event=PeriodEvents.ended)
                 if ct is not None:
                     pv.update(coaching_type=ct)
                 pv.update(ending=obj)

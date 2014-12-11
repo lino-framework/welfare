@@ -51,8 +51,6 @@ class Clients(pcsw.Clients):
         return kw
 
 
-
-
 class PeriodsField(models.DecimalField):
 
     """
@@ -184,7 +182,6 @@ The total monthly amount available for debts distribution."""))
         dist_amount include_yearly_incomes
         print_empty_rows print_todos"""
 
-
     def get_actors(self):
         attname = "_cached_actors"
         if hasattr(self, attname):
@@ -244,7 +241,7 @@ The total monthly amount available for debts distribution."""))
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
 
-    def entries_by_group(self, group, **kw):
+    def entries_by_group(self, ar, group, **kw):
         """
         Return a TableRequest showing the Entries for the given `group`,
         using the table layout depending on AccountType.
@@ -252,9 +249,13 @@ The total monthly amount available for debts distribution."""))
         """
         t = entries_table_for_group(group)
         #~ print '20130327 entries_by_group', self, t
-        ar = t.request(self,
-                       title=unicode(group),
-                       filter=models.Q(account__group=group), **kw)
+        if t is None:
+            return None
+        # ar = t.request(self,
+        ar = ar.spawn(t,
+                      master_instance=self,
+                      title=unicode(group),
+                      filter=models.Q(account__group=group), **kw)
 
         #~ print 20120606, sar
         return ar
@@ -358,36 +359,52 @@ The total monthly amount available for debts distribution."""))
     def total_debt(self, ar):
         return self.sum('amount', 'L')
 
-    @dd.virtualfield(dd.HtmlBox(_("Preview")))
-    def preview(self, ar):
-        chunks = []
+    @dd.virtualfield(dd.HtmlBox(_("Entered data")))
+    def data_section(self, ar):
+        return E.div(*ar.story2html(self.data_story(ar)))
+
+    @dd.virtualfield(dd.HtmlBox(pgettext(u"debts", u"Summary")))
+    def summary_section(self, ar):
+        return E.div(*ar.story2html(self.summary_story(ar)))
+
+    def data_story(self, ar):
+        # logger.info("20141211 insert_story")
 
         def render(sar):
-            if sar.master_instance is None:
-                #~ raise Exception("20130327")
-                return
-            sar.setup_from(ar)
-            chunks.append(E.h2(unicode(sar.get_title())))
-            #~ chunks.append(ar.ui.table2xhtml(sar))
-            chunks.append(sar.table2xhtml())
-            #~ raise Exception("20130527")
+            if sar.renderer is None:
+                raise Exception("%s has no renderer", sar)
+            if sar.get_total_count():
+                yield E.h3(sar.get_title())
+                yield sar
+            
+        for group in self.account_groups('IEAC'):
+            yield render(self.entries_by_group(ar, group))
 
-        for grp in self.account_groups():
-            #~ render(self.entries_by_group(grp))
-            render(self.entries_by_group(grp))
-            #~ render(self.entries_by_group(grp,**ar.spawn_kw()))
-        #~ render(self.BudgetSummary(ar))
-        #~ render(self.ResultByBudget(ar))
-        #~ render(self.DebtsByBudget(ar))
-        #~ render(self.DistByBudget(ar))
-        #~ render(self.result_by_budget())
-        #~ render(self.debts_by_budget())
-        #~ render(self.dist_by_budget(ar))
-        render(ResultByBudget.request(self))
-        render(DebtsByBudget.request(self))
-        render(BailiffDebtsByBudget.request(self))
-        render(DistByBudget.request(self))
-        return E.div(*chunks)
+        sar = ar.spawn(PrintLiabilitiesByBudget,
+                       master_instance=self,
+                       filter=models.Q(bailiff__isnull=True))
+        yield render(sar)
+        Company = rt.modules.contacts.Company
+        qs = Company.objects.filter(bailiff_debts_set__budget=self).distinct()
+        for bailiff in qs:
+            sar = ar.spawn(PrintLiabilitiesByBudget,
+                           master_instance=self,
+                           filter=models.Q(bailiff=bailiff))
+            yield E.h3(_("Liabilities (%s)") % bailiff)
+            yield sar
+
+    def summary_story(self, ar):
+
+        def render(t):
+            sar = ar.spawn(t, master_instance=self)
+            if sar.get_total_count():
+                yield E.h2(unicode(sar.get_title()))
+                yield sar
+
+        yield render(ResultByBudget)
+        yield render(DebtsByBudget)
+        yield render(BailiffDebtsByBudget)
+        yield render(DistByBudget)
 
 
 class BudgetDetail(dd.FormLayout):
@@ -432,6 +449,11 @@ class BudgetDetail(dd.FormLayout):
     dist_amount printed total_debt
     include_yearly_incomes print_empty_rows print_todos
     """
+
+    preview = dd.Panel("""
+    data_section
+    summary_section
+    """, label=_("Preview"))
 
     #~ ExpensesSummaryByBudget IncomesSummaryByBudget
     #~ LiabilitiesSummaryByBudget AssetsSummaryByBudget
@@ -808,14 +830,10 @@ class ExpensesByBudget(EntriesByBudget, EntriesByType):
 
 
 class IncomesByBudget(EntriesByBudget, EntriesByType):
-
-    "Incomes By Budget"
     _account_type = AccountTypes.incomes
 
 
 class LiabilitiesByBudget(EntriesByBudget, EntriesByType):
-
-    "Liabilities By Budget"
     _account_type = AccountTypes.liabilities
     column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate move_buttons:8 todo seqno id"
 
@@ -861,12 +879,6 @@ TODO: more explnations....
             return self._account_type.text
         return self._label or self.__name__
 
-    #~ @classmethod
-    #~ def class_init(self):
-        #~ super(PrintEntriesByBudget,self).class_init()
-        #~ if self._account_type is not None:
-            #~ self.label = self._account_type.text
-
     @classmethod
     def get_handle_name(self, ar):
         hname = _handle_attr_name
@@ -881,7 +893,6 @@ TODO: more explnations....
         Builds columns dynamically by request. Called once per UI handle.
         """
         if 'dynamic_amounts' in self.column_names:
-            #~ todo
             amounts = ''
             if ar.master_instance is not None:
                 actors = ar.master_instance.get_actors()
@@ -889,7 +900,8 @@ TODO: more explnations....
                     amounts = 'amount0'
                 else:
                     for i, a in enumerate(actors):
-                        amounts += 'amount' + str(i) + ' '
+                        if i <= 4:  # amount4
+                            amounts += 'amount' + str(i) + ' '
                     amounts += 'total '
             return self.column_names.replace('dynamic_amounts', amounts)
         return self.column_names
@@ -897,9 +909,7 @@ TODO: more explnations....
     @classmethod
     def override_column_headers(self, ar):
         d = dict()
-        #~ d.update(amount0='')
         if ar.master_instance is not None:
-            #~ if len(ar.master_instance.get_actors()) > 1:
             for i, a in enumerate(ar.master_instance.get_actors()):
                 d['amount' + str(i)] = a.header
         return d
@@ -961,7 +971,6 @@ TODO: more explnations....
         budget = ar.master_instance
         if budget is None:
             return
-        #~ qs = self.get_request_queryset(ar)
         qs = budget.entry_set.filter(
             account__type=self._account_type).order_by('seqno')
         if ar.filter:
@@ -1039,17 +1048,15 @@ class PrintExpensesByBudget(PrintEntriesByBudget):
 
 
 class PrintIncomesByBudget(PrintEntriesByBudget):
-
-    """Print version of :class:`IncomesByBudget` table."""
+    """Print version of :class:`IncomesByBudget`."""
     _account_type = AccountTypes.incomes
     column_names = "description dynamic_amounts"
 
 
 class PrintLiabilitiesByBudget(PrintEntriesByBudget):
-    help_text = _(
-        """Print version of :ref:`welfare.debts.LiabilitiesByBudget`.""")
     _account_type = AccountTypes.liabilities
-    column_names = "partner:20 description:20 bailiff monthly_rate dynamic_amounts"
+    column_names = "partner:20 description:20 monthly_rate dynamic_amounts"
+
 
 
 class PrintAssetsByBudget(PrintEntriesByBudget):
@@ -1061,7 +1068,7 @@ class PrintAssetsByBudget(PrintEntriesByBudget):
 ENTRIES_BY_TYPE_TABLES = (
     PrintExpensesByBudget,
     PrintIncomesByBudget,
-    PrintLiabilitiesByBudget,
+    # PrintLiabilitiesByBudget,
     PrintAssetsByBudget)
 
 
@@ -1180,11 +1187,6 @@ class BailiffDebtsByBudget(DebtsByBudget):
 
 class DistByBudget(EntriesByBudget):
 
-    """
-    
-    """
-    #~ master = Budget
-    #~ model = Entry
     column_names = "partner description amount dist_perc dist_amount"
     filter = models.Q(distribute=True)
     label = _("Debts distribution")
@@ -1192,9 +1194,13 @@ class DistByBudget(EntriesByBudget):
     slave_grid_format = 'html'
     help_text = _("""\
 Répartition au marc-le-franc.
-A table with one row per entry in Liabilities which has "distribute" checked, 
+A table with one row per entry in Liabilities which has "distribute" checked,
 proportionally distributing the `Distributable amount` among the debtors.
 """)
+
+    @classmethod
+    def get_title_base(self, ar):
+        return self.label
 
     @classmethod
     def get_data_rows(self, ar):
@@ -1371,3 +1377,15 @@ def site_setup(site):
     debts.EntriesByAccount
     """)
 
+
+# There are no `message_extractors` for `.odt` files. One workaround
+# is to manually repeat them here so that :command:`fab mm` finds
+# them.
+
+_("Financial situation")  # Finanzielle Situation
+_("General information")  # Allgemeine Auskünfte
+_("Name of debts mediator")  # Name des Schuldnerberaters
+# _("Entered data")  # Erfasste Daten
+# _("Summary")  # Zusammenfassung
+# _("Conclusion")  # Schlussfolgerung
+    
