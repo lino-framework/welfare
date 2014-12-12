@@ -1005,6 +1005,7 @@ Removed field `study_regime` in `Study` and `StudyType`.
 New models cv.TrainingType, cv.Training, cv.Duration.
 Moved model `system.HelpText` to `contenttypes.HelpText`.
 """
+        from lino.modlib.cv.mixins import SchoolingStates
 
         bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict['new_content_type_id']
@@ -1060,7 +1061,9 @@ Moved model `system.HelpText` to `contenttypes.HelpText`.
             # kw.update(study_regime=study_regime)
             kw.update(type_id=type_id)
             kw.update(content=content)
-            kw.update(success=success)
+            # kw.update(success=success)
+            if success:
+                kw.update(state=SchoolingStates.success)
             kw.update(language_id=language_id)
             kw.update(school=school)
             kw.update(remarks=remarks)
