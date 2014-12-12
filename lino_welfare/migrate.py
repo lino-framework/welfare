@@ -995,3 +995,73 @@ def doit(a, b):
         globals_dict.update(create_aids_aidtype=create_aids_aidtype)
 
         return '1.1.17'
+
+    def migrate_from_1_1_18(self, globals_dict):
+        """\
+Moved models from jobs to cv: Study, Experience, Regime, Sector, Status
+Moved models from isip to cv: StudyType, EducationLevel
+Renamed field started to start_date and stopped to end_date in: cv.Study, cv.Experience
+Removed field `StudyType.study_regime`.
+New models cv.TrainingType, cv.Training, cv.Duration.
+"""
+
+        bv2kw = globals_dict['bv2kw']
+        new_content_type_id = globals_dict['new_content_type_id']
+
+        globals_dict.update(isip_Function=resolve_model("cv.Function"))
+        globals_dict.update(jobs_Function=resolve_model("cv.Function"))
+        globals_dict.update(jobs_Regime=resolve_model("cv.Regime"))
+        globals_dict.update(jobs_Status=resolve_model("cv.Status"))
+        globals_dict.update(jobs_Sector=resolve_model("cv.Sector"))
+
+        jobs_Experience = resolve_model("cv.Experience")
+        jobs_Study = resolve_model("cv.Study")
+        isip_StudyType = resolve_model("cv.StudyType")
+
+        def create_isip_studytype(id, name, study_regime, education_level_id):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(study_regime=study_regime)
+            kw.update(education_level_id=education_level_id)
+            return isip_StudyType(**kw)
+        globals_dict.update(create_isip_studytype=create_isip_studytype)
+
+        def create_jobs_experience(id, sector_id, function_id, person_id, started, stopped, company, title, country_id, status_id, is_training, regime_id, remarks):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(sector_id=sector_id)
+            kw.update(function_id=function_id)
+            kw.update(person_id=person_id)
+            kw.update(start_date=started)
+            kw.update(end_date=stopped)
+            kw.update(company=company)
+            kw.update(title=title)
+            kw.update(country_id=country_id)
+            kw.update(status_id=status_id)
+            kw.update(is_training=is_training)
+            kw.update(regime_id=regime_id)
+            kw.update(remarks=remarks)
+            return jobs_Experience(**kw)
+        globals_dict.update(create_jobs_experience=create_jobs_experience)
+
+        def create_jobs_study(id, country_id, city_id, zip_code, person_id, started, stopped, study_regime, type_id, content, success, language_id, school, remarks):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(country_id=country_id)
+            kw.update(city_id=city_id)
+            kw.update(zip_code=zip_code)
+            kw.update(person_id=person_id)
+            kw.update(start_date=started)
+            kw.update(end_date=stopped)
+            kw.update(study_regime=study_regime)
+            kw.update(type_id=type_id)
+            kw.update(content=content)
+            kw.update(success=success)
+            kw.update(language_id=language_id)
+            kw.update(school=school)
+            kw.update(remarks=remarks)
+            return jobs_Study(**kw)
+        globals_dict.update(create_jobs_study=create_jobs_study)
+
+        return '1.1.19'

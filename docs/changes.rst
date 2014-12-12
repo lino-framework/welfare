@@ -7,6 +7,19 @@ Changes in Lino Welfare
 See the author's :ref:`developer blog <blog>` to get detailed news.
 The final truth about what's going on is only the source code.
 
+Version 1.1.19 
+====================================
+
+http://trac.lino-framework.org/milestone/gx-2014-12
+
+Database migration: you must manually edit your :xfile:`restore.py`
+file:
+
+- Replace "from north.dpy" by "from lino.utils.dpy".
+- Replace "from north.dbutils" by "from lino.core.dbutils".
+
+
+
 Version 1.1.14 (released 2014-06-24)
 ====================================
 

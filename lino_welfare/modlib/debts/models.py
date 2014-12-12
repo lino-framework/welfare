@@ -995,26 +995,40 @@ TODO: more explnations....
         return obj.total / obj.periods
 
     @dd.displayfield(_("Description"))
-    def description(self, obj, ar):
+    def full_description(self, obj, ar):
         desc = obj.description
         if len(obj.remarks) > 0:
             desc += ' (%s)' % ', '.join(obj.remarks)
         if obj.periods != 1:
             desc += " (%s / %s)" % (obj.total, obj.periods)
         return desc
-            #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
-        #~ return obj.description
+
+    @dd.displayfield(_("Description"))
+    def description(self, obj, ar):
+        return obj.description
+
+    @dd.displayfield(_("Remarks"))
+    def remarks(self, obj, ar):
+        return ', '.join(obj.remarks)
+
+    @dd.displayfield(_("Yearly amount"))
+    def yearly_amount(self, obj, ar):
+        if obj.periods == 1:
+            return ''
+        if obj.periods == 12:
+            return str(obj.total)
+        return "%s / %s" % (obj.total, obj.periods)
 
     @dd.virtualfield(models.ForeignKey('contacts.Partner'))
     def partner(self, obj, ar):
         return obj.partner
 
     @dd.virtualfield(models.ForeignKey(
-        'contacts.Company', verbose_name=_("Bailiff")))
+        'contacts.Company', verbose_name=_("Debt collection agency")))
     def bailiff(self, obj, ar):
         return obj.bailiff
 
-    # TODO: generate them dynamically:
+    # TODO: generate amountN columns dynamically.
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount0(self, obj, ar):
@@ -1041,30 +1055,25 @@ TODO: more explnations....
         return obj.monthly_rate
 
 
-class PrintExpensesByBudget(PrintEntriesByBudget):
-
-    """Print version of :class:`ExpensesByBudget` table."""
-    _account_type = AccountTypes.expenses
-    column_names = "description dynamic_amounts"
-
-
 class PrintIncomesByBudget(PrintEntriesByBudget):
-    """Print version of :class:`IncomesByBudget`."""
     _account_type = AccountTypes.incomes
-    column_names = "description dynamic_amounts"
+    column_names = "full_description dynamic_amounts"
+
+
+class PrintExpensesByBudget(PrintEntriesByBudget):
+    _account_type = AccountTypes.expenses
+    column_names = "description remarks yearly_amount dynamic_amounts"
+    # column_names = "full_description dynamic_amounts"
 
 
 class PrintLiabilitiesByBudget(PrintEntriesByBudget):
     _account_type = AccountTypes.liabilities
-    column_names = "partner:20 description:20 monthly_rate dynamic_amounts"
-
+    column_names = "partner:20 remarks:20 monthly_rate dynamic_amounts"
 
 
 class PrintAssetsByBudget(PrintEntriesByBudget):
-
-    """Print version of :class:`AssetsByBudget` table."""
     _account_type = AccountTypes.assets
-    column_names = "description dynamic_amounts"
+    column_names = "full_description dynamic_amounts"
 
 ENTRIES_BY_TYPE_TABLES = (
     PrintExpensesByBudget,
@@ -1077,6 +1086,23 @@ def entries_table_for_group(group):
     for t in ENTRIES_BY_TYPE_TABLES:
         if t._account_type == group.account_type:
             return t
+
+
+if False:  # TODO: replace the above by selectable "table layouts"
+
+    class TableLayout(dd.Choice):
+        account_type = None
+        layout_columns = None
+
+    class TableLayouts(dd.ChoiceList):
+        verbose_name = _("Table layout")
+        item_class = TableLayout
+        column_names = 'value name text columns'
+
+        @dd.virtualfield(models.CharField(_("Columns"), max_length=20))
+        def layout_columns(cls, choice, ar):
+            return choice.layout_columns
+
 
 
 #~ class EntriesSummaryByBudget(EntriesByBudget,EntriesByType):
