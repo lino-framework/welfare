@@ -12,8 +12,13 @@ Version 1.1.19
 
 http://trac.lino-framework.org/milestone/gx-2014-12
 
-Database migration: you must manually edit your :xfile:`restore.py`
-file:
+- After the upgrade you can uninstall the `north` and `djangosite`
+  packages since Lino no longer needs them.
+- Changes in database see :meth:`migrate_from_1_1_18
+  <lino_welfare.migrate.Migrator.migrate_from_1_1_18>`.
+
+Database migration as usual, but you must manually edit your
+:xfile:`restore.py` file:
 
 - Replace "from north.dpy" by "from lino.utils.dpy".
 - Replace "from north.dbutils" by "from lino.core.dbutils".

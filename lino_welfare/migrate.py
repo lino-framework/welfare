@@ -34,7 +34,7 @@ SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
 
 class Migrator(Migrator):
-
+    "The standard migrator for :ref:`welfare`."
     def migrate_from_1_1_10(self, globals_dict):
         """
 
@@ -825,7 +825,7 @@ def doit(a, b):
 
 
     def migrate_from_1_1_13(self, globals_dict):
-        """- Move company, contact_person and contact_role from isip.Contract
+        """Move company, contact_person and contact_role from isip.Contract
         to isip.ContractPartner
 
         """
@@ -998,11 +998,12 @@ def doit(a, b):
 
     def migrate_from_1_1_18(self, globals_dict):
         """\
-Moved models from jobs to cv: Study, Experience, Regime, Sector, Status
-Moved models from isip to cv: StudyType, EducationLevel
-Renamed field started to start_date and stopped to end_date in: cv.Study, cv.Experience
-Removed field `StudyType.study_regime`.
+Moved models from jobs to cv: Study, Experience, Regime, Sector, Status.
+Moved models from isip to cv: StudyType, EducationLevel.
+Renamed field started to start_date and stopped to end_date in: cv.Study, cv.Experience.
+Removed field `study_regime` in `Study` and `StudyType`.
 New models cv.TrainingType, cv.Training, cv.Duration.
+Moved model `system.HelpText` to `contenttypes.HelpText`.
 """
 
         bv2kw = globals_dict['bv2kw']
@@ -1013,6 +1014,8 @@ New models cv.TrainingType, cv.Training, cv.Duration.
         globals_dict.update(jobs_Regime=resolve_model("cv.Regime"))
         globals_dict.update(jobs_Status=resolve_model("cv.Status"))
         globals_dict.update(jobs_Sector=resolve_model("cv.Sector"))
+        globals_dict.update(
+            system_HelpText=resolve_model("contenttypes.HelpText"))
 
         jobs_Experience = resolve_model("cv.Experience")
         jobs_Study = resolve_model("cv.Study")
@@ -1054,7 +1057,7 @@ New models cv.TrainingType, cv.Training, cv.Duration.
             kw.update(person_id=person_id)
             kw.update(start_date=started)
             kw.update(end_date=stopped)
-            kw.update(study_regime=study_regime)
+            # kw.update(study_regime=study_regime)
             kw.update(type_id=type_id)
             kw.update(content=content)
             kw.update(success=success)

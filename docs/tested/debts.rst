@@ -112,15 +112,15 @@ Here are some more slave tables.
 
 >>> with translation.override('en'):
 ...     ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-================================= ================= ============== ============== ============== ============ ==============
- Partner                           Description       Monthly rate   Common         Mr.            Mrs.         Total
---------------------------------- ----------------- -------------- -------------- -------------- ------------ --------------
- Hans Flott & Co (108)             Invoices to pay                  1 200,00                                   1 200,00
- Bernd Brechts Bücherladen (109)   Loans                                           1 500,00                    1 500,00
- Reinhards Baumschule (110*)       Debts             15,00                                        300,00       300,00
- Moulin Rouge (111)                Invoices to pay   30,00          600,00                                     600,00
- **Total (4 rows)**                                  **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-================================= ================= ============== ============== ============== ============ ==============
+================================= ========= ============== ============== ============== ============ ==============
+ Partner                           Remarks   Monthly rate   Common         Mr.            Mrs.         Total
+--------------------------------- --------- -------------- -------------- -------------- ------------ --------------
+ Hans Flott & Co (108)                                      1 200,00                                   1 200,00
+ Bernd Brechts Bücherladen (109)                                           1 500,00                    1 500,00
+ Reinhards Baumschule (110*)                 15,00                                        300,00       300,00
+ Moulin Rouge (111)                          30,00          600,00                                     600,00
+ **Total (4 rows)**                          **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
+================================= ========= ============== ============== ============== ============ ==============
 <BLANKLINE>
 
 >>> with translation.override('en'):
@@ -142,31 +142,31 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 >>> groups = list(obj.account_groups())
 >>> with translation.override('en'):
 ...     ses.show(obj.entries_by_group(ses, groups[2]))
-==================================== ============ ===== ====== ============
- Description                          Common       Mr.   Mrs.   Total
------------------------------------- ------------ ----- ------ ------------
- Rent                                 41,00                     41,00
- Water                                47,00                     47,00
- Telephone & Internet                 5,00                      5,00
- Cell phone                           10,00                     10,00
- Transport costs (Shopping, Cinema)   30,00                     30,00
- Public transport                     20,00                     20,00
- Fuel                                 26,00                     26,00
- Car maintenance                      31,00                     31,00
- School                               36,00                     36,00
- Babysitting                          41,00                     41,00
- Health                               47,00                     47,00
- Food                                 5,00                      5,00
- Hygiene                              10,00                     10,00
- Health insurance                     15,00                     15,00
- Labour fees                          20,00                     20,00
- Unterhaltszahlungen                  26,00                     26,00
- Retirement savings                   31,00                     31,00
- Tobacco                              36,00                     36,00
- Spare time (Seminar)                 41,00                     41,00
- Pets                                 47,00                     47,00
- **Total (20 rows)**                  **565,00**                **565,00**
-==================================== ============ ===== ====== ============
+====================== ================== =============== ============ ===== ====== ============
+ Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
+---------------------- ------------------ --------------- ------------ ----- ------ ------------
+ Rent                                                      41,00                     41,00
+ Water                                                     47,00                     47,00
+ Telephone & Internet                                      5,00                      5,00
+ Cell phone                                                10,00                     10,00
+ Transport costs        Shopping, Cinema                   30,00                     30,00
+ Public transport                                          20,00                     20,00
+ Fuel                                                      26,00                     26,00
+ Car maintenance                                           31,00                     31,00
+ School                                                    36,00                     36,00
+ Babysitting                                               41,00                     41,00
+ Health                                                    47,00                     47,00
+ Food                                                      5,00                      5,00
+ Hygiene                                                   10,00                     10,00
+ Health insurance                                          15,00                     15,00
+ Labour fees                                               20,00                     20,00
+ Unterhaltszahlungen                                       26,00                     26,00
+ Retirement savings                                        31,00                     31,00
+ Tobacco                                                   36,00                     36,00
+ Spare time             Seminar                            41,00                     41,00
+ Pets                                                      47,00                     47,00
+ **Total (20 rows)**                                       **565,00**                **565,00**
+====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 
 
