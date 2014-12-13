@@ -426,7 +426,7 @@ class ContractBaseTable(dd.Table):
         observed_event=ContractEvents.field(
             blank=True, default=ContractEvents.active),
 
-        ending_success=mixins.YesNo.field(
+        ending_success=dd.YesNo.field(
             _("Successfully ended"),
             blank=True,
             help_text="""Contrats terminés avec succès."""),
@@ -479,9 +479,9 @@ class ContractBaseTable(dd.Table):
             else:
                 raise Exception(repr(ce))
 
-        if pv.ending_success == mixins.YesNo.yes:
+        if pv.ending_success == dd.YesNo.yes:
             qs = qs.filter(ending__isnull=False, ending__success=True)
-        elif pv.ending_success == mixins.YesNo.no:
+        elif pv.ending_success == dd.YesNo.no:
             qs = qs.filter(ending__isnull=False, ending__success=False)
 
         if pv.ending is not None:
@@ -721,3 +721,11 @@ class EventsByContract(dd.Table):
     def override_column_headers(self, ar, **kwargs):
         kwargs.update(start_date=_("Date"))
         return kwargs
+
+
+def site_setup(site):
+    site.modules.cv.StudyTypes.set_detail_layout("""
+    name education_level id
+    isip.ContractsByStudyType
+    cv.StudiesByType
+    """)

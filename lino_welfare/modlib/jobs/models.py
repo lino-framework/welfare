@@ -25,6 +25,7 @@ from django.utils.encoding import force_unicode
 from lino import dd, rt, mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.htmlgen import UL
+from lino.utils.report import EmptyTable
 from lino.modlib.countries.models import CountryCity
 from lino.modlib.cal.utils import DurationUnits
 
@@ -855,7 +856,7 @@ if True:  # settings.SITE.user_model:
 COLS = 8
 
 
-class OldJobsOverview(mixins.EmptyTable):
+class OldJobsOverview(EmptyTable):
 
     """
     """
@@ -1071,7 +1072,7 @@ class JobsOverviewByType(Jobs):
                 yield job
 
 
-class JobsOverview(mixins.EmptyTable):
+class JobsOverview(EmptyTable):
 
     """
     New version of `welfare.jobs.JobsOverview`.

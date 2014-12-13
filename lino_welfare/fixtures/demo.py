@@ -209,7 +209,7 @@ def objects():
     #~ yield User(username='gerd',partner=gerd,profile='900')
     melanie = person(first_name="Mélanie", last_name="Mélard",
                      email=settings.SITE.demo_email,  # 'melanie@example.com',
-                     city=eupen, country='BE', gender=mixins.Genders.female,
+                     city=eupen, country='BE', gender=dd.Genders.female,
                      language='fr')
     yield melanie
     melanie = users.User(username="melanie", partner=melanie, profile='110')
@@ -217,7 +217,7 @@ def objects():
 
     hubert = person(first_name=u"Hubert", last_name=u"Huppertz",
                     email=settings.SITE.demo_email,  # 'hubert@example.com',
-                    city=kettenis, country='BE', gender=mixins.Genders.male)
+                    city=kettenis, country='BE', gender=dd.Genders.male)
     yield hubert
     hubert = users.User(username="hubert", partner=hubert, profile='100')
     yield hubert
@@ -226,7 +226,7 @@ def objects():
         first_name=u"Alicia", last_name=u"Allmanns",
         email=settings.SITE.demo_email,  # 'alicia@example.com',
         city=kettenis, country='BE',
-        gender=mixins.Genders.female, language='fr')
+        gender=dd.Genders.female, language='fr')
     yield alicia
     alicia = users.User(username="alicia", partner=alicia, profile='100')
     yield alicia
@@ -234,7 +234,7 @@ def objects():
     theresia = person(first_name=u"Theresia", last_name=u"Thelen",
                       # 'theresia@example.com',
                       email=settings.SITE.demo_email,
-                      city=eupen, country='BE', gender=mixins.Genders.female)
+                      city=eupen, country='BE', gender=dd.Genders.female)
     yield theresia
     theresia = users.User(username="theresia", partner=theresia, profile='210')
     yield theresia
@@ -257,7 +257,7 @@ def objects():
 
     obj = person(first_name="Judith", last_name="Jousten",
                  email=settings.SITE.demo_email,
-                 city=eupen, country='BE', gender=mixins.Genders.female)
+                 city=eupen, country='BE', gender=dd.Genders.female)
     yield obj
     judith = users.User(username="judith", partner=obj, profile='400')
     yield judith
@@ -649,21 +649,21 @@ def objects():
     #~
     #~ ly = person(first_name="Ly",last_name="Rumma",
       #~ city=vigala,country='EE',
-      #~ gender=mixins.Genders.female)
+      #~ gender=dd.Genders.female)
     #~ yield ly
     #~ mari = person(first_name="Mari",last_name="Saffre",
       #~ city=vigala,country='EE',
-      #~ gender=mixins.Genders.female)
+      #~ gender=dd.Genders.female)
     #~ yield mari
     #~ iiris = person(first_name="Iiris",last_name="Saffre",
       #~ city=vigala,country='EE',
-      #~ gender=mixins.Genders.female)
+      #~ gender=dd.Genders.female)
     #~ yield iiris
 
     gerd = person(first_name="Gerd",
                   last_name="Gerkens", city=kettenis,
                   email=settings.SITE.demo_email,  # 'gerd@example.com'
-                  country='BE', gender=mixins.Genders.male)
+                  country='BE', gender=dd.Genders.male)
     yield gerd
     yield role(company=cpas, person=gerd, type=4)
 
@@ -676,7 +676,7 @@ def objects():
         birth_place="Moskau",  # birth_country='SUHH',
         client_state=pcsw.ClientStates.newcomer,
         #~ newcomer=True,
-        gender=mixins.Genders.female)
+        gender=dd.Genders.female)
     yield tatjana
 
     michael = Person.objects.get(name__exact="Mießen Michael")

@@ -91,7 +91,7 @@ Test whether :meth:`get_db_overview_rst
  cv.Regime                      5         3
  cv.Sector                      6         14
  cv.Status                      5         7
- cv.Study                       15        2
+ cv.Study                       14        2
  cv.StudyType                   6         8
  cv.Training                    14        0
  cv.TrainingType                5         3
@@ -201,7 +201,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Lehrenarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
@@ -218,7 +218,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Badges : Badge Awards
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Lebenslauf : Sprachkenntnisse, Lehren, Ausbildungen und Studien, Berufserfahrungen
+  - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner
   - Kurse : Kurse, Kursanfragen
   - Kompetenzen

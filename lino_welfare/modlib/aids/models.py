@@ -31,7 +31,7 @@ from lino import dd, rt, mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
-from lino.mixins import PeriodEvents
+from lino.modlib.system.mixins import PeriodEvents
 from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable

@@ -18,10 +18,10 @@ logger = logging.getLogger(__name__)
 from django.conf import settings
 from lino.utils.djangotest import RemoteAuthTestCase
 
-from lino import mixins
 from lino.utils import i2d
 from lino.modlib.cal.utils import WORKDAYS
 from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.system.mixins import Genders
 
 
 def create(model, **kwargs):
@@ -66,7 +66,7 @@ class QuickTest(RemoteAuthTestCase):
         kw.update(first_name="Max")
         kw.update(last_name="Mustermann")
         kw.update(
-            gender=mixins.Genders.male,
+            gender=Genders.male,
             client_state=pcsw.ClientStates.coached)
         client = create(pcsw.Client, **kw)
 

@@ -997,13 +997,15 @@ def doit(a, b):
         return '1.1.17'
 
     def migrate_from_1_1_18(self, globals_dict):
-        """\
+        """
 Moved models from jobs to cv: Study, Experience, Regime, Sector, Status.
 Moved models from isip to cv: StudyType, EducationLevel.
 Renamed field started to start_date and stopped to end_date in: cv.Study, cv.Experience.
 Removed field `study_regime` in `Study` and `StudyType`.
 New models cv.TrainingType, cv.Training, cv.Duration.
 Moved model `system.HelpText` to `contenttypes.HelpText`.
+Convert field `Study.success` to `Study.state`.
+
 """
         from lino.modlib.cv.mixins import SchoolingStates
 

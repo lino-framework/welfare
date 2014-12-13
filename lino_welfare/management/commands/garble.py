@@ -103,7 +103,7 @@ class Command(BaseCommand):
                 p.nationality = Country.objects.get(
                     isocode=NATIONALITIES.pop())
                 p.last_name = LAST_NAMES.pop()
-                if p.gender == mixins.Genders.male:
+                if p.gender == dd.Genders.male:
                     p.first_name = MALES.pop()
                     FEMALES.pop()
                 else:
@@ -114,10 +114,10 @@ class Command(BaseCommand):
                 p.save()
                 dblogger.info("%s from %s", unicode(p), unicode(p.nationality))
 
-        MEN = Cycler(Person.objects.filter(gender=mixins.Genders.male)
+        MEN = Cycler(Person.objects.filter(gender=dd.Genders.male)
                      .order_by('id'))
         WOMEN = Cycler(
-            Person.objects.filter(gender=mixins.Genders.female).order_by('id'))
+            Person.objects.filter(gender=dd.Genders.female).order_by('id'))
         for h in Household.objects.all():
             if h.member_set.all().count() == 0:
                 he = MEN.pop()

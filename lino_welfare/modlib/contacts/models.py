@@ -216,7 +216,7 @@ class Persons(Persons):
 
     params_panel_hidden = True
     parameters = dict(
-        gender=mixins.Genders.field(
+        gender=dd.Genders.field(
             blank=True, help_text=_(
                 "Show only persons with the given gender.")),
         also_obsolete=models.BooleanField(

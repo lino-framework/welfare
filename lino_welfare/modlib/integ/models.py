@@ -29,9 +29,10 @@ from django.conf import settings
 
 from lino.utils.xmlgen.html import E
 from lino.modlib.users.mixins import UserProfiles, UserLevels
+from lino.utils.report import Report
 
-from lino import dd, mixins
-from lino.mixins import PeriodEvents
+from lino import dd
+from lino.modlib.system.mixins import PeriodEvents
 
 config = dd.plugins.integ
 
@@ -549,7 +550,7 @@ class JobProvidersAndContracts(CompaniesAndContracts):
         return qs.filter(count__gte=1)
 
 
-class ActivityReport(mixins.Report):
+class ActivityReport(Report):
 
     required = dict(user_groups='integ')
     #~ required = dd.required(user_level='manager')

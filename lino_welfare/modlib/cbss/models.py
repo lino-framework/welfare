@@ -108,9 +108,9 @@ CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 
 
 def gender2cbss(gender):
-    if gender == mixins.Genders.male:
+    if gender == dd.Genders.male:
         return '1'
-    elif gender == mixins.Genders.female:
+    elif gender == dd.Genders.female:
         return '2'
     else:
         return '0'
@@ -118,9 +118,9 @@ def gender2cbss(gender):
 
 def cbss2gender(v):
     if v == '1':
-        return mixins.Genders.male
+        return dd.Genders.male
     elif v == '2':
-        return mixins.Genders.female
+        return dd.Genders.female
     return None
 
 
@@ -1022,7 +1022,7 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
                                    verbose_name=_('Middle name'),
                                    help_text="Whatever this means...")
 
-    gender = mixins.Genders.field(blank=True)
+    gender = dd.Genders.field(blank=True)
 
     tolerance = models.IntegerField(verbose_name=_('Tolerance'),
                                     default=0,
@@ -1302,7 +1302,7 @@ class IdentifyPersonResult(dd.VirtualTable):
         return obj.first_name
         #~ return obj.childAtPath('/Basic/FirstName').text
 
-    @dd.virtualfield(mixins.Genders.field())
+    @dd.virtualfield(dd.Genders.field())
     def gender(self, obj, ar):
         return obj.gender
         #~ return cbss2gender(obj.childAtPath('/Basic/Gender').text)

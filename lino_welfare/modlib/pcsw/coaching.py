@@ -253,9 +253,9 @@ class Coachings(dd.Table):
             blank=True, null=True,
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
-        observed_event=mixins.PeriodEvents.field(
-            blank=True, default=mixins.PeriodEvents.active),
-        primary_coachings=mixins.YesNo.field(
+        observed_event=dd.PeriodEvents.field(
+            blank=True, default=dd.PeriodEvents.active),
+        primary_coachings=dd.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),
         coaching_type=models.ForeignKey(
@@ -295,9 +295,9 @@ class Coachings(dd.Table):
         if ce is not None:
             qs = ce.add_filter(qs, ar.param_values)
 
-        if ar.param_values.primary_coachings == mixins.YesNo.yes:
+        if ar.param_values.primary_coachings == dd.YesNo.yes:
             qs = qs.filter(primary=True)
-        elif ar.param_values.primary_coachings == mixins.YesNo.no:
+        elif ar.param_values.primary_coachings == dd.YesNo.no:
             qs = qs.filter(primary=False)
         if ar.param_values.coaching_type is not None:
             qs = qs.filter(type=ar.param_values.coaching_type)
