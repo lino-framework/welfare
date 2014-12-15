@@ -2,7 +2,7 @@
 # Copyright 2002-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""This is the main module of Lino Welfare.
+""":mod:`lino_welfare` is the main module of Lino Welfare.
 
 .. autosummary::
    :toctree:
