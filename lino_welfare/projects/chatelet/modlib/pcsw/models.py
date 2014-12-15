@@ -58,9 +58,14 @@ class ClientDetail(dd.FormLayout):
     """
 
     family = dd.Panel("""
-    households.MembersByPerson:20 households.SiblingsByPerson:50
+    family_left:20 households.SiblingsByPerson:50
     humanlinks.LinksByHuman:30
     """, label=_("Family situation"))
+
+    family_left = """
+    households.MembersByPerson
+    child_custody
+    """
 
     coaching = dd.Panel("""
     newcomers_left:20 projects.ProjectsByClient
@@ -69,21 +74,22 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Coaches"))
 
     suche = dd.Panel("""
+    is_seeking unemployed_since work_permit_suspended_until
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
     pcsw.ConvictionsByClient
     """)
 
     papers = dd.Panel("""
-    is_seeking unemployed_since work_permit_suspended_until
-    polls.ResponsesByPartner
     needs_residence_permit needs_work_permit
     uploads.UploadsByClient
+    active_job_search.ProofsByClient
+    polls.ResponsesByPartner
     """)
 
     job_search = dd.Panel("""
     suche:40  papers:40
-    """, label=_("Job search"))
+    """, label=dd.plugins.active_job_search.verbose_name)
 
     # projects_tab = dd.Panel("""
     # projects.ProjectsByClient

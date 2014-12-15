@@ -59,6 +59,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.management',
     'lino_welfare.management.commands',
     'lino_welfare.modlib',
+    'lino_welfare.modlib.active_job_search',
+    'lino_welfare.modlib.active_job_search.fixtures',
     'lino_welfare.modlib.aids',
     'lino_welfare.modlib.aids.fixtures',
     'lino_welfare.modlib.badges',

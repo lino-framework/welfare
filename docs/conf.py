@@ -27,6 +27,11 @@ from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
 
 
+extensions += ['sphinx.ext.autosummary']
+autosummary_generate = True
+autodoc_default_flags = ['members']
+
+
 primary_domain = 'py'
 
 # Add any paths that contain templates here, relative to this directory.

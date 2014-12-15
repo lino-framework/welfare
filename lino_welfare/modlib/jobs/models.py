@@ -166,8 +166,8 @@ class Contract(isip.ContractBase, isip.ContractPartnerBase):
     """
 
     class Meta:
-        verbose_name = _("Job contract")
-        verbose_name_plural = _('Job contracts')
+        verbose_name = _("Job supply contract")
+        verbose_name_plural = _('Job supply contracts')
 
     type = models.ForeignKey(
         "jobs.ContractType",

@@ -32,14 +32,15 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-47 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
-125 models:
+48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+126 models:
 ============================== ========= =======
  Name                           #fields   #rows
 ------------------------------ --------- -------
  accounts.Account               14        49
  accounts.Chart                 5         1
  accounts.Group                 8         7
+ active_job_search.Proof        7         10
  addresses.Address              16        121
  aids.AidType                   23        11
  aids.Category                  5         3
@@ -74,7 +75,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Person                33        109
  contacts.Role                  4         10
  contacts.RoleType              6         5
- contenttypes.ContentType       4         126
+ contenttypes.ContentType       4         127
  contenttypes.HelpText          4         5
  countries.Country              8         8
  countries.Place                10        78
@@ -129,7 +130,7 @@ Test whether :meth:`get_db_overview_rst
  outbox.Recipient               6         0
  pcsw.Activity                  3         0
  pcsw.AidType                   5         0
- pcsw.Client                    65        63
+ pcsw.Client                    67        63
  pcsw.ClientContact             7         14
  pcsw.ClientContactType         7         10
  pcsw.Coaching                  8         90
@@ -219,7 +220,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Proofs of search
   - Kurse : Kurse, Kursanfragen
   - Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen

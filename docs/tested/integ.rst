@@ -113,7 +113,7 @@ List of contracts whose client
 ...         l.append(unicode(obj))
 >>> print(', '.join(l))
 ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
-ISIP#6 (Daniel EMONTS), ISIP#19 (Line LAZARUS), ISIP#21 (Melissa MEESSEN), Job contract#10 (Jérôme JEANÉMART), Job contract#12 (Karl KAIVERS), Job contract#17 (Alfons RADERMACHER), Job contract#18 (Edgard RADERMACHER), Job contract#22 (Rik RADERMECKER), Job contract#23 (Vincent VAN VEEN)
+ISIP#6 (Daniel EMONTS), ISIP#19 (Line LAZARUS), ISIP#21 (Melissa MEESSEN), Job supply contract#10 (Jérôme JEANÉMART), Job supply contract#12 (Karl KAIVERS), Job supply contract#17 (Alfons RADERMACHER), Job supply contract#18 (Edgard RADERMACHER), Job supply contract#22 (Rik RADERMECKER), Job supply contract#23 (Vincent VAN VEEN)
 
 Let's pick up ISIP contract #6:
 
