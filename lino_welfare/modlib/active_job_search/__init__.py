@@ -4,6 +4,13 @@
 
 """Recherche active d'emploi.
 
+.. autosummary::
+   :toctree:
+
+    fixtures.demo
+    models
+
+
 """
 
 from lino import ad
