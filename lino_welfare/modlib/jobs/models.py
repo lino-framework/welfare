@@ -2,8 +2,10 @@
 # Copyright 2008-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-Mises au travail (Conventions Article 60 §7 ou Art 61).
+
+"""The :xfile:`models.py` module for the
+:mod:`lino_welfare.modlib.jobs` app.
+
 
 """
 from __future__ import unicode_literals
@@ -59,7 +61,14 @@ class Schedules(dd.Table):
 
 class JobProvider(contacts.Company):
 
-    """Stellenanbieter (BISA, BW, ...)
+    """A **job provider** (Stellenanbieter, Employant) is an organisation
+where the work will be executed. They are not necessarily also the
+employer. It may be either some public service or a private company.
+
+    :class:`JobProvider` is a polymorphic subclass of
+    :class:`contacts.Company
+    <lino_welfare.modlib.contacts.model.Company>`.
+
     """
     class Meta:
         app_label = 'jobs'
@@ -114,12 +123,19 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 class ContractType(mixins.PrintableType, mixins.BabelNamed):
 
-    """This is the homologue of :class:`welfare.isip.ContractType` (see
-    there for general documentation).
+    """This is the homologue of :class:`isip.ContractType
+    <lino_welfare.modlib.isip.models.ContractType>` (see there for
+    general documentation).
     
     They are separated tables because ISIP contracts are in practice
-    very different from JOBS contracts, and also their types should 
+    very different from JOBS contracts, and also their types should
     not be mixed.
+
+    The demo database comes with these contract types:
+
+    .. django2rst::
+
+        rt.show('jobs.ContractTypes')
 
     """
 
@@ -140,6 +156,8 @@ class ContractType(mixins.PrintableType, mixins.BabelNamed):
 
 
 class ContractTypes(dd.Table):
+    """
+    """
     required = dd.required(user_groups='integ', user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
@@ -792,6 +810,13 @@ class JobType(mixins.Sequenced):
     """
     The list of Job Types is used for statistical analysis,
     e.g. in :class:``
+
+    The demo database has the following job types:
+
+    .. django2rst::
+
+        rt.show('jobs.JobTypes')
+        
     """
 
     class Meta:
@@ -952,7 +977,6 @@ class OldJobsOverview(EmptyTable):
 
 
 class JobsOverviewByType(Jobs):
-
     """
     """
     required = dd.required(user_groups=['integ'])
@@ -1073,9 +1097,20 @@ class JobsOverviewByType(Jobs):
 
 
 class JobsOverview(EmptyTable):
-
     """
-    New version of `welfare.jobs.JobsOverview`.
+    This list helps integration agents to make decisions like:
+
+    - which jobs are soon going to be free, and which candidate(s) should we
+      suggest?
+
+    Example (using fictive demo data and only on one job type):
+
+    .. django2rst:: 
+
+       jt = jobs.JobType.objects.get(id=1)
+       rt.show('jobs.JobsOverview', param_values=dict(job_type=jt))
+        
+
     """
     required = dd.required(user_groups=['integ'])
     label = _("Contracts Situation")

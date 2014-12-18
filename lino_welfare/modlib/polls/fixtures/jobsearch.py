@@ -45,9 +45,11 @@ def objects():
 
     p1 = poll(
         "Q2", acquired,
-        "Pour commencer ma recherche d'emploi, je dois", """
-Veuillez sélectionner votre réponse pour chaque question
+        "Deuxieme série", """
+À remplir lors de la première entrevue.
 """, """
+=Pour commencer ma recherche d'emploi, je dois
+#Veuillez sélectionner votre réponse pour chaque question
 Avoir une farde de recherche d’emploi organisée
 Réaliser mon curriculum vitae
 Savoir faire une lettre de motivation adaptée au poste de travail visé
@@ -57,15 +59,9 @@ Créer mon compte sur le site de Forem
 Mettre mon curriculum vitae sur le site du Forem
 Connaître les aides à l’embauche qui me concernent
 Etre préparé à l’entretien d’embauche ou téléphonique
-""")
 
-    yield p1
-    p2 = poll(
-        "Q3",
-        acquired,
-        "Est-ce que je sais...", """
-Veuillez sélectionner votre réponse pour chaque question
-""", """
+=Est-ce que je sais...
+#Veuillez sélectionner votre réponse pour chaque question
 Utiliser le site du Forem pour consulter les offres d’emploi
 Décoder une offre d’emploi
 Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée
@@ -84,11 +80,10 @@ Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire v
 Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)
 Utiliser le téléphone pour poser ma candidature
 Utiliser le téléphone pour relancer ma candidature
-"Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant 
-sur le site de l’ONEm"
-
+Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm
 """)
-    yield p2
+
+    yield p1
 
     rae = poll(
         "Q1",
@@ -118,7 +113,7 @@ Avez-vous des antécédents judiciaires qui pourraient \
         s = s.strip()
         if s:
             yield polls.Choice(choiceset=temps, name=s)
-    yield polls.Question(text="Temps de travail acceptés", poll=rae,
+    yield polls.Question(title="Temps de travail acceptés", poll=rae,
                          choiceset=temps)
 
     PARTNERS = Cycler(pcsw.Client.objects.all())
@@ -133,12 +128,14 @@ Avez-vous des antécédents judiciaires qui pourraient \
         yield r
         i = 0
         for q in polls.Question.objects.filter(poll=r.poll):
-            choices = q.get_choiceset().choices.all()
-            if i >= choices.count():
-                i = 0
-            c = choices[i]
-            yield polls.AnswerChoice(response=r, question=q, choice=c)
-            i += 1
+            cs = q.get_choiceset()
+            if cs is not None:
+                choices = cs.choices.all()
+                if i >= choices.count():
+                    i = 0
+                c = choices[i]
+                yield polls.AnswerChoice(response=r, question=q, choice=c)
+                i += 1
     
     yield fill_response(p1)
-    yield fill_response(p2)
+    # yield fill_response(p2)

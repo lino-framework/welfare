@@ -2,6 +2,11 @@
 # Copyright 2011-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
+"""Adds default data to `jobs.Schedule`, `cv.Regime` and `cv.Status`.
+
+TODO: move data for `cv.Regime` and `cv.Status` to :mod:`lino.modlib.cv`.
+
+"""
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,8 +14,6 @@ from lino.utils.instantiator import Instantiator
 from lino.dd import babel_values
 
 from lino import dd
-
-# TODO: move data for Regime and Status to `lino.modlib.cv`.
 
 
 def objects():
