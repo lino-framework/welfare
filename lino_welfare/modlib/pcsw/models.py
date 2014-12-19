@@ -997,28 +997,29 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         # else:
         #     period = (ar.param_values.start_date, ar.param_values.end_date)
 
-        period = [ar.param_values.start_date, ar.param_values.end_date]
+        pv = ar.param_values
+        period = [pv.start_date, pv.end_date]
         if period[0] is None:
             period[0] = period[1] or dd.today()
         if period[1] is None:
             period[1] = period[0]
 
-        ce = ar.param_values.observed_event
-        if ce is not None:
+        ce = pv.observed_event
+        if pv.coached_by or ce or pv.start_date or pv.end_date:
             qs = add_coachings_filter(qs,
-                                      ar.param_values.coached_by,
+                                      pv.coached_by,
                                       period,
-                                      ar.param_values.only_primary)
-            if ar.param_values.and_coached_by:
+                                      pv.only_primary)
+            if pv.and_coached_by:
                 qs = add_coachings_filter(qs,
-                                          ar.param_values.and_coached_by,
+                                          pv.and_coached_by,
                                           period,
                                           False)
 
         if ce is None:
             pass
         elif ce == ClientEvents.active:
-            if ar.param_values.client_state is None:
+            if pv.client_state is None:
                 qs = qs.filter(client_state__in=ACTIVE_STATES)
         elif ce == ClientEvents.isip:
             f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(
@@ -1061,23 +1062,23 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         else:
             raise Warning(repr(ce))
 
-        if ar.param_values.client_state:
-            qs = qs.filter(client_state=ar.param_values.client_state)
+        if pv.client_state:
+            qs = qs.filter(client_state=pv.client_state)
 
-        if ar.param_values.nationality:
-            qs = qs.filter(nationality__exact=ar.param_values.nationality)
+        if pv.nationality:
+            qs = qs.filter(nationality__exact=pv.nationality)
         today = settings.SITE.today()
-        if ar.param_values.aged_from:
+        if pv.aged_from:
             min_date = today - \
-                datetime.timedelta(days=ar.param_values.aged_from * 365)
+                datetime.timedelta(days=pv.aged_from * 365)
             qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
             #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
-        if ar.param_values.aged_to:
+        if pv.aged_to:
             #~ q1 = models.Q(birth_date__isnull=True)
             #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
             #~ qs = qs.filter(q1|q2)
             max_date = today - \
-                datetime.timedelta(days=ar.param_values.aged_to * 365)
+                datetime.timedelta(days=pv.aged_to * 365)
             qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
             #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
 
