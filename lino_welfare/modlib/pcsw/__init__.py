@@ -3,7 +3,22 @@
 
 
 """
-See :mod:`welfare.pcsw`
+
+The :mod:`lino_welfare.modlib.pcsw` package provides data definitions
+for PCSW specific objects.
+
+Most important models are :class:`Client` and :class:`Coaching`.
+
+.. autosummary::
+   :toctree:
+
+   models
+   coaching
+   client_address
+   fixtures
+
+See also :mod:`welfare.pcsw`.
+
 """
 
 

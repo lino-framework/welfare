@@ -2,9 +2,7 @@
 # Copyright 2008-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Contains PCSW-specific models and tables that have not yet been
-moved into a separate module because they are really very PCSW
-specific.
+"""The :xfile:`models.py` for :mod:`lino_welfare.modlib.pcsw`.
 
 """
 
@@ -29,7 +27,6 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
 from lino import dd, rt
-from lino.core import dbutils
 from lino.core.dbutils import get_field
 
 from lino.utils.xmlgen.html import E
@@ -221,7 +218,43 @@ class Client(contacts.Person,
              # dd.BasePrintable,
              beid.BeIdCardHolder):
 
-    """A :class:`Client` is a specialized :class:`Person`.
+    """
+
+    Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
+    :class:`lino.modlib.beid.models.BeIdCardHolder`.
+
+    A :class:`Client` is a polymorphic specialization of :class:`Person`.
+
+    .. attribute:: cvs_emitted
+
+    A virtual field displaying a group of shortcut links for managing CVs
+    (Curriculum Vitaes).
+
+    This field is an excerpts shortcut
+    (:class:`ml.excerpts.Shortcuts`) and works only if the database
+    has an :class:`ExcerptType <ml.excerpts.ExcerptType>` whose
+    `shortcut` points to it.
+
+    .. attribute:: group
+
+    Pointer to :class:`PersonGroup`.
+    The intergration phase of this client.
+    
+    The :class:`UsersWithClients <welfare.integ.UsersWithClients>`
+    table groups clients using this field.
+
+
+    .. attribute:: client_state
+    
+    Pointer to :class:`ClientStates`.
+
+   
+
+    .. attribute:: client_contact_type
+    
+    Pointer to :class:`PersonGroup`.
+
+
 
     """
     class Meta:
@@ -891,6 +924,7 @@ ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
 
 
 class Clients(contacts.Persons):
+    "The default definition for :actor:`pcsw.Clients`. "
     # ~ debug_permissions = True # '20120925'
     # required = dd.Required(user_groups='coaching')
     model = 'pcsw.Client'
@@ -943,6 +977,10 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
     @classmethod
     def get_request_queryset(self, ar):
+        """This converts the values of the different parameter panel fields to
+        the query filter.
+
+        """
         #~ if ar.param_values.client_state == '':
             #~ raise Exception(20130901)
         #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
@@ -965,17 +1003,18 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if period[1] is None:
             period[1] = period[0]
 
-        qs = add_coachings_filter(qs,
-                                  ar.param_values.coached_by,
-                                  period,
-                                  ar.param_values.only_primary)
-        if ar.param_values.and_coached_by:
-            qs = add_coachings_filter(qs,
-                                      ar.param_values.and_coached_by,
-                                      period,
-                                      False)
-
         ce = ar.param_values.observed_event
+        if ce is not None:
+            qs = add_coachings_filter(qs,
+                                      ar.param_values.coached_by,
+                                      period,
+                                      ar.param_values.only_primary)
+            if ar.param_values.and_coached_by:
+                qs = add_coachings_filter(qs,
+                                          ar.param_values.and_coached_by,
+                                          period,
+                                          False)
+
         if ce is None:
             pass
         elif ce == ClientEvents.active:

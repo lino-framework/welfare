@@ -4,11 +4,6 @@ PCSW
 
 .. module:: welfare.pcsw
 
-The :mod:`lino_welfare.modlib.pcsw` package provides data definitions
-for PCSW specific objects. 
-
-Most important models are :class:`Client` and :class:`Coaching`.
-
 .. contents:: 
    :local:
    :depth: 3
@@ -17,43 +12,6 @@ Most important models are :class:`Client` and :class:`Coaching`.
 
 Models
 ======
-
-Client
-------
-
-.. class:: Client
-
-    Inherits from :class:`ml.contacts.Person` and
-    :class:`ml.beid.BeIdCardHolder`.
-
-    .. attribute:: cvs_emitted
-
-    A virtual field displaying a group of shortcut links for managing CVs
-    (Curriculum Vitaes).  
-
-    This field is an excerpts shortcut
-    (:class:`ml.excerpts.Shortcuts`) and works only if the database
-    has an :class:`ExcerptType <ml.excerpts.ExcerptType>` whose
-    `shortcut` points to it.
-
-    .. attribute:: group
-
-    Pointer to :class:`PersonGroup`.
-    The intergration phase of this client.  
-    
-    The :class:`UsersWithClients <welfare.integ.UsersWithClients>`
-    table groups clients using this field.
-
-
-    .. attribute:: client_state
-    
-    Pointer to :class:`ClientStates`.
-
-   
-
-    .. attribute:: client_contact_type
-    
-    Pointer to :class:`PersonGroup`.
 
 Coaching
 --------

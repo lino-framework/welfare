@@ -1,6 +1,10 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011,2013 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""
+Adds default data for `PersonGroup`, `CoachingEnding` and
+`DispenseReason`.
+"""
 
 from __future__ import unicode_literals
 

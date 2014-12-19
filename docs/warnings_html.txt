@@ -1,2 +1,0 @@
-/home/luc/hgwork/welfare/docs/tested/jobs.rst:: WARNING: document isn't included in any toctree
-/home/luc/hgwork/welfare/lino_welfare/migrate.py:docstring of lino_welfare.migrate.migrate_from_1_1_2:1: WARNING: undefined label: welfare.debts.budget (if the link has no caption the label must precede a section header)

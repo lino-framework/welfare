@@ -27,7 +27,6 @@ Content
    ref/index
    releases/index
    tested/index
-   todo
    changes
    dev/api/index
    
