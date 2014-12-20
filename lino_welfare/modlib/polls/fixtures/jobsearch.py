@@ -117,7 +117,8 @@ Avez-vous des antécédents judiciaires qui pourraient \
                          choiceset=temps)
 
     PARTNERS = Cycler(pcsw.Client.objects.all())
-    u = settings.SITE.user_model.objects.get(username='romain')
+    # u = settings.SITE.user_model.objects.get(username='romain')
+    u = USERS.pop()
 
     def fill_response(p):
 

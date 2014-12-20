@@ -1075,3 +1075,6 @@ Convert field `Study.success` to `Study.state`.
         globals_dict.update(create_jobs_study=create_jobs_study)
 
         return '1.1.19'
+
+    def migrate_from_1_1_19(self, globals_dict):
+        return '1.1.20'
