@@ -1013,6 +1013,8 @@ Convert field `Study.success` to `Study.state`.
         new_content_type_id = globals_dict['new_content_type_id']
 
         globals_dict.update(isip_Function=resolve_model("cv.Function"))
+        globals_dict.update(
+            isip_EducationLevel=resolve_model("cv.EducationLevel"))
         globals_dict.update(jobs_Function=resolve_model("cv.Function"))
         globals_dict.update(jobs_Regime=resolve_model("cv.Regime"))
         globals_dict.update(jobs_Status=resolve_model("cv.Status"))
