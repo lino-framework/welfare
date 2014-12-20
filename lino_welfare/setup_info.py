@@ -6,11 +6,17 @@
 #~ global variable defined here will override the global
 #~ namespace of lino_welfare/__init__.py who includes it with execfile
 
+# This module is part of the Lino test suite.
+# To test only this module:
+#
+#   $ python setup.py test -s tests.PackagesTests
+
+
 SETUP_INFO = dict(
     name='lino-welfare',
     #~ distclass=MyDistribution,
     #~ dist_dir=os.path.join('docs','dist'),
-    version='1.1.19',  # since 20141212
+    version='1.1.20',  # since 20141220
     install_requires=['lino', 'suds', 'vobject', 'django-iban', 'xlwt'],
     test_suite='tests',
     description=u"A Lino application for Belgian Centres for Public Welfare",

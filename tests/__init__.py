@@ -51,7 +51,7 @@ class ProjectsTests(BaseTestCase):
     #     self.run_django_manage_test('lino_welfare/projects/chatelet')
 
     
-class SimpleTests(BaseTestCase):
+class PackagesTests(BaseTestCase):
 
     def test_packages(self):
         self.run_packages_test(lino_welfare.SETUP_INFO['packages'])
