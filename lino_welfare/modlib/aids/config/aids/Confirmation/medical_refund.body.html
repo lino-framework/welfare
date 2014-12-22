@@ -36,6 +36,19 @@ abrechnen.
 senden!</b>
 </p>
 {% endif %}
+
+<p>
+{% if language == "de" %}
+Falls für {{obj.client.mf("den Inhaber", "die Inhaberin", "den/die Inhaber/in")}}  eine medizinische Karte besteht, kommt
+das ÖSHZ Eupen lediglich für Arzt- und Medikamentenkosten auf, die in
+einer Privatpraxis entstehen.
+{% else %}
+Le CPAS intervient uniquement dans les frais médicaux et
+pharmaceutiques qui résultent d’une consultation dans un cabinet privé
+pour les personnes ayant une carte médicale.
+{% endif %}
+</p>
+
 {% endblock %}
 
 {% block trailer %}
