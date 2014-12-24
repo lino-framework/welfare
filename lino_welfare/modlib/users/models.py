@@ -2,8 +2,8 @@
 # Copyright 2013-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-The `models` module for :mod:`lino_welfare.modlib.users`.
+"""The :xfile:`models.py` module for
+:mod:`lino_welfare.modlib.users`.
 
 """
 
@@ -76,6 +76,7 @@ class User(User):
 
 
 class UserDetail(UserDetail, cal.UserDetailMixin):
+    "Layout of User Detail in Lino Welfare."
 
     main = "general cal coaching"
 

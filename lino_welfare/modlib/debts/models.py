@@ -28,6 +28,7 @@ from lino.core.constants import _handle_attr_name
 
 from lino.modlib.accounts.utils import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
+from lino.modlib.users.mixins import ByUser, UserAuthored
 
 pcsw = dd.resolve_app('pcsw')
 
@@ -124,7 +125,7 @@ def bulk_create_with_manual_ids(model, obj_list):
     return model.objects.bulk_create(obj_list)
 
 
-class Budget(mixins.UserAuthored, Certifiable, mixins.Duplicable):
+class Budget(UserAuthored, Certifiable, mixins.Duplicable):
     """See :class:`ml.debts.Budget`.
     """
 
@@ -489,7 +490,7 @@ class Budgets(dd.Table):
         return '<br/>'
 
 
-class MyBudgets(Budgets, mixins.ByUser):
+class MyBudgets(Budgets, ByUser):
     required = dd.required(user_groups='debts')
 
 

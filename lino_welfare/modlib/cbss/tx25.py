@@ -44,6 +44,8 @@ from lino.utils import AttrDict, IncompleteDate
 from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
+from lino.modlib.users.mixins import ByUser
+
 
 try:
     import suds
@@ -230,7 +232,7 @@ class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
     master_key = 'person'
 
 
-class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, mixins.ByUser):
+class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
     pass
 
 

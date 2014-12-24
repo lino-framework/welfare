@@ -66,6 +66,7 @@ from lino.utils.xmlgen import html as xghtml
 #~ from lino.core.dbutils import makedirs_if_missing
 #~ from lino.mixins.printable import DirectPrintAction
 
+from lino.modlib.users.mixins import ByUser, UserAuthored
 from lino_welfare.modlib.pcsw import models as pcsw
 
 #~ try:
@@ -321,8 +322,7 @@ NSMAR = ('mar', "http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess")
 NSWSC = ('wsc', "http://ksz-bcss.fgov.be/connectors/WebServiceConnector")
 
 
-#~ class CBSSRequest(mixins.ProjectRelated,mixins.AutoUser):
-class CBSSRequest(mixins.AutoUser, mixins.Printable, mixins.Duplicable):
+class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
 
     """
     Common Abstract Base Class for :class:`SSDNRequest`
@@ -391,7 +391,7 @@ The raw XML response received.
         So please duplicate only the parameters, 
         not the execution data like `ticket`, `sent` and `status`.
         Note that also the `user` will be set to the user who asked to duplicate
-        (because this is a subclass of :mod:`lino.mixins.UserAuthored`.
+        (because this is a subclass of `UserAuthored`.
         """
         self.user = ar.get_user()
         self.debug_messages = ''
@@ -1057,7 +1057,7 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
       #~ </p>
 
     #~ def on_create(self,ar):
-        #~ mixins.AutoUser.on_create(self,ar)
+        #~ UserAuthored.on_create(self,ar)
         #~ SSIN.on_create(self,ar)
     def get_result_table(self, ar):
         return ar.spawn(IdentifyPersonResult, master_instance=self)
@@ -1227,7 +1227,7 @@ class IdentifyPersonRequests(CBSSRequests):
         return '<br/>'
 
 
-class MyIdentifyPersonRequests(mixins.ByUser, IdentifyPersonRequests):
+class MyIdentifyPersonRequests(ByUser, IdentifyPersonRequests):
     pass
 
 
@@ -1471,9 +1471,6 @@ for register/unregister it is mandatory.""")
         return Purpose.objects.filter(
             Q(sector_code=sector.code) | Q(sector_code__isnull=True)).order_by('code')
 
-    #~ def on_create(self,ar):
-        #~ mixins.AutoUser.on_create(self,ar)
-        #~ SSIN.on_create(self,ar)
     def build_request(self):
         """Construct and return the root element of the (inner) service request."""
         national_id = self.get_ssin()
@@ -1609,7 +1606,7 @@ class ManageAccessRequestsByPerson(ManageAccessRequests):
     master_key = 'person'
 
 
-class MyManageAccessRequests(ManageAccessRequests, mixins.ByUser):
+class MyManageAccessRequests(ManageAccessRequests, ByUser):
     pass
 
 

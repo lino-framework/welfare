@@ -14,7 +14,6 @@ Most important models are :class:`Client` and :class:`Coaching`.
 
    models
    coaching
-   client_address
    fixtures
 
 See also :mod:`welfare.pcsw`.

@@ -29,4 +29,5 @@ Content
    tested/index
    changes
    dev/api/index
+   tour
    

@@ -21,6 +21,7 @@ from lino import mixins
 from django.conf import settings
 from lino.modlib.cal.utils import amonthago
 from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.users.mixins import ByUser, UserAuthored
 
 
 users = dd.resolve_app('users')
@@ -100,7 +101,7 @@ class Faculties(dd.Table):
     """
 
 
-class Competence(mixins.UserAuthored, mixins.Sequenced):
+class Competence(UserAuthored, mixins.Sequenced):
     """
     A competence is when a given user is declared to be competent
     in a given faculty.
@@ -153,7 +154,7 @@ class CompetencesByFaculty(Competences):
     order_by = ["user"]
 
 
-class MyCompetences(mixins.ByUser, CompetencesByUser):
+class MyCompetences(ByUser, CompetencesByUser):
     pass
 
 

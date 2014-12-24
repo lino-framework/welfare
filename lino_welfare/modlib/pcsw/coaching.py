@@ -14,6 +14,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino import dd, mixins
+from lino.modlib.users.mixins import ByUser
 
 
 class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
@@ -360,7 +361,7 @@ class CoachingsByEnding(Coachings):
     master_key = 'ending'
 
 
-class MyCoachings(CoachingsByUser, mixins.ByUser):
+class MyCoachings(CoachingsByUser, ByUser):
     column_names = 'client start_date end_date type primary id'
     order_by = ['client__name']
 
