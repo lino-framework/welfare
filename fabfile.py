@@ -1,5 +1,5 @@
 from atelier.fablib import *
-setup_from_project('lino_welfare')
+setup_from_fabfile(globals(), 'lino_welfare')
 
 add_demo_database('lino_welfare.projects.docs.settings.demo')
 add_demo_database('lino_welfare.projects.eupen.settings.demo')

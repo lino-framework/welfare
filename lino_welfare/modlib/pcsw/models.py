@@ -943,7 +943,7 @@ class Clients(contacts.Persons):
 
     detail_layout = ClientDetail()
 
-    parameters = dd.ObservedPeriod(
+    parameters = mixins.ObservedPeriod(
         aged_from=models.IntegerField(
             _("Aged from"), blank=True, null=True, help_text=u"""\
 Nur Klienten, die mindestens so alt sind."""),

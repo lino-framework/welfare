@@ -420,7 +420,7 @@ add('40', _("Signed"), 'signed')
 
 
 class ContractBaseTable(dd.Table):
-    parameters = dd.ObservedPeriod(
+    parameters = mixins.ObservedPeriod(
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
 
         observed_event=ContractEvents.field(
