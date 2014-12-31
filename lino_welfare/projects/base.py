@@ -169,7 +169,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.cal'
         #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.reception'
-        yield 'lino.modlib.languages'
+        # yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
         yield 'lino_welfare.modlib.badges'
         yield 'lino.modlib.iban'

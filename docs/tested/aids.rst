@@ -191,6 +191,22 @@ The following test is rather useless...
 >>> print(res.status_code)
 200
 >>> soup = BeautifulSoup(res.content)
->>> scripts = soup.body.find_all('script', type="text/javascript")
->>> "Lino.aids.IncomeConfirmationsByGranting.insert.run" in str(scripts[-1])
+>>> scripts = soup.head.find_all('script', type="text/javascript")
+
+The page header includes a lot of scripts:
+
+>>> len(scripts)
+22
+
+We are interested in the last one, which defines the `onReady` function:
+
+>>> on_ready = unicode(scripts[-1])
+>>> len(on_ready.splitlines())
+13
+
+And one of these lines calls the Javascript version of the insert
+action of :class:`IncomeConfirmationsByGranting
+<lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting>`:
+
+>>> "Lino.aids.IncomeConfirmationsByGranting.insert.run" in on_ready
 True

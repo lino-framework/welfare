@@ -32,7 +32,7 @@ Test whether :meth:`get_db_overview_rst
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, languages, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
 126 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -314,12 +314,12 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Site-Parameter, Benutzer, Hilfetexte
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Kontakte : Organisationsarten, Funktionen, Sprachen, Gremien, Haushaltsarten
+  - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
   - Kurse : Kursinhalte
   - Neuanträge : Vermittler, Fachbereiche
