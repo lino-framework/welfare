@@ -28,6 +28,7 @@ from django.conf import settings
 from django.db import IntegrityError
 
 from lino.core.dbutils import is_valid_email
+from lino.core.utils import ChangeWatcher
 
 from lino import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
@@ -160,12 +161,12 @@ def checkcc(person, pk, nType):
             company_id=pk,
             type=pcsw.ClientContactType.objects.get(id=nType))
         cc.save()
-        dd.pre_ui_create.send(sender=cc, request=REQUEST)
+        dd.on_ui_created.send(sender=cc, request=REQUEST)
         #~ changes.log_create(REQUEST,cc)
     elif qs.count() == 1:
         cc = qs[0]
         if cc.company_id != pk:
-            watcher = dd.ChangeWatcher(cc)
+            watcher = ChangeWatcher(cc)
             cc.company_id = pk
             cc.save()
             watcher.send_update(REQUEST)
@@ -431,10 +432,10 @@ class Controller:
             dblogger.info("%s:%s (%s) : POST %s",
                           kw['alias'], kw['id'], dd.obj2str(obj), kw['data'])
             self.validate_and_save(obj)
-            dd.pre_ui_create.send(sender=obj, request=REQUEST)
+            dd.on_ui_created.send(sender=obj, request=REQUEST)
             #~ changes.log_create(REQUEST,obj)
         else:
-            watcher = dd.ChangeWatcher(obj)
+            watcher = ChangeWatcher(obj)
             dblogger.info("%s:%s : POST becomes PUT", kw['alias'], kw['id'])
             self.set_timestamp(kw['time'])
             self.applydata(obj, kw['data'])
@@ -458,7 +459,7 @@ class Controller:
                 dblogger.warning(
                     "%s:%s : PUT ignored (row does not exist)", kw['alias'], kw['id'])
                 return
-        watcher = dd.ChangeWatcher(obj)
+        watcher = ChangeWatcher(obj)
         if self.PUT_special(watcher, **kw):
             return
         self.set_timestamp(kw['time'])
@@ -596,7 +597,7 @@ class PAR(Controller):
                         try:
                             coaching = pcsw.Coaching.objects.get(
                                 client=obj, user=u, end_date__isnull=True)
-                            watcher = dd.ChangeWatcher(coaching)
+                            watcher = ChangeWatcher(coaching)
                             coaching.primary = True
                             coaching.save()
                             watcher.send_update(REQUEST)
@@ -608,7 +609,7 @@ class PAR(Controller):
                                     type=u.coaching_type,
                                     start_date=obj.created)
                                 coaching.save()
-                                dd.pre_ui_create.send(
+                                dd.on_ui_created.send(
                                     sender=coaching, request=REQUEST)
                                 #~ changes.log_create(REQUEST,coaching)
                         except Exception, e:
@@ -620,7 +621,7 @@ class PAR(Controller):
                             "More than one primary coaching for %r : %s" % (obj, e))
 
                     else:
-                        watcher = dd.ChangeWatcher(coaching)
+                        watcher = ChangeWatcher(coaching)
                         if u is None or u != coaching.user:
                             """
                             If the coach has changed, maintain the old coaching in history.
@@ -653,7 +654,7 @@ class PAR(Controller):
                                 type=u.coaching_type,
                                 start_date=self.today)
                             coaching.save()
-                            dd.pre_ui_create.send(
+                            dd.on_ui_created.send(
                                 sender=coaching, request=REQUEST)
 
         elif obj.__class__ is Company:

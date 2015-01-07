@@ -220,13 +220,13 @@ during a given period.
     def summary_row(self, ar, **kw):
         return [ar.href_to(self.client), " (%s)" % self.state.text]
 
-    def get_related_project(self, ar):
+    def get_related_project(self):
         return self.client
 
-    def get_system_note_type(self, ar):
+    def get_system_note_type(self, request):
         return settings.SITE.site_config.system_note_type
 
-    def get_system_note_recipients(self, ar, silent):
+    def get_system_note_recipients(self, request, silent):
         if self.user.email:
             yield "%s <%s>" % (unicode(self.user), self.user.email)
         for u in settings.SITE.user_model.objects.filter(

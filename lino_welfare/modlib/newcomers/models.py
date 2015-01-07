@@ -22,7 +22,7 @@ from django.conf import settings
 from lino.modlib.cal.utils import amonthago
 from lino.modlib.users.mixins import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
-
+from lino.core.utils import ChangeWatcher
 
 users = dd.resolve_app('users')
 contacts = dd.resolve_app('contacts')
@@ -456,7 +456,7 @@ class AssignCoach(dd.NotifyingAction):
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
         client = ar.master_instance
-        watcher = dd.ChangeWatcher(client)
+        watcher = ChangeWatcher(client)
 
         coaching = pcsw.Coaching(
             client=client, user=obj,
@@ -464,7 +464,7 @@ class AssignCoach(dd.NotifyingAction):
             type=obj.coaching_type)
         coaching.full_clean()
         coaching.save()
-        dd.pre_ui_create.send(coaching, request=ar.request)
+        dd.on_ui_created.send(coaching, request=ar.request)
         #~ changes.log_create(ar.request,coaching)
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()

@@ -653,10 +653,10 @@ class Client(contacts.Person,
         items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
 
-    def get_system_note_type(self, ar):
+    def get_system_note_type(self, request):
         return settings.SITE.site_config.system_note_type
 
-    def get_system_note_recipients(self, ar, silent):
+    def get_system_note_recipients(self, request, silent):
         for u in settings.SITE.user_model.objects.filter(
                 coaching_supervisor=True).exclude(email=''):
             yield "%s <%s>" % (unicode(u), u.email)

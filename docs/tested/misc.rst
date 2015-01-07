@@ -35,12 +35,9 @@ Notes
 We test whether a normal HTML response arrived:
 
 >>> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<!DOCTYPE html
-...
+<!DOCTYPE html ...
 Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
-...
-<BLANKLINE>
-</body>
+...</body>
 </html>
 
 
