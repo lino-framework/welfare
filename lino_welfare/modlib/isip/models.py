@@ -93,7 +93,7 @@ class ExamPolicy(mixins.BabelNamed, cal.RecurrenceSet):
 
 class ExamPolicies(dd.Table):
     required = dict(user_groups='integ', user_level='manager')
-    model = ExamPolicy
+    model = 'isip.ExamPolicy'
     column_names = 'name *'
     detail_layout = """
     id name

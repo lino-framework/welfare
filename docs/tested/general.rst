@@ -302,7 +302,7 @@ Rolf is the local system administrator, he has a complete menu:
 - ÖSHZ : Meine Begleitungen, Zu unterschreibende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Neuanträge : Neue Klienten, Verfügbare Begleiter
+- Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
 - Listings :
@@ -322,7 +322,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
   - Kurse : Kursinhalte
-  - Neuanträge : Vermittler, Fachbereiche
+  - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
   - Client projects : Client project types
@@ -339,7 +339,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Proofs of search
   - Kurse : Kurse, Kursanfragen
-  - Kompetenzen
+  - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
   - Client projects : Client Projects
@@ -443,7 +443,7 @@ Caroline is a newcomers consultant.
 - Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
-- Neuanträge : Neue Klienten, Verfügbare Begleiter
+- Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Listings :
   - DSBE : Benutzer und ihre Klienten
 - Konfigurierung :

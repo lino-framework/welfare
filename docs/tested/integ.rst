@@ -257,11 +257,11 @@ Similar test for a newcomer
 BASTIAENSEN Laurent (117)
 
 >>> rt.show(newcomers.AvailableCoachesByClient, master_instance=obj)
-================= =============== ================= =============== ========== =========== =============== ===================
- Name              Arbeitsablauf   Komplette Akten   Neue Klienten   Quote NZ   Belastung   Mehrbelastung   Mehrbelastung (%)
------------------ --------------- ----------------- --------------- ---------- ----------- --------------- -------------------
- Alicia Allmanns                   12                                100                    6,              100,00
-================= =============== ================= =============== ========== =========== =============== ===================
+================= =============== ================= =============== =================== =========== =============== ===================
+ Name              Arbeitsablauf   Komplette Akten   Neue Klienten   Quote Erstempfang   Belastung   Mehrbelastung   Mehrbelastung (%)
+----------------- --------------- ----------------- --------------- ------------------- ----------- --------------- -------------------
+ Alicia Allmanns                   12                                100                             6,              100,00
+================= =============== ================= =============== =================== =========== =============== ===================
 <BLANKLINE>
 
 >>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=117'

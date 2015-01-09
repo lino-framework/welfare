@@ -91,7 +91,7 @@ All users with one of the following profiles can see each other's calendars:
 >>> print('\n'.join([unicode(p) for p in users.UserProfiles.items() if p.coaching_level]))
 Begleiter im DSBE
 Integrations-Assistent (Manager)
-Berater Neuanträge
+Berater Erstempfang
 Schuldenberater
 Sozi
 Social agent (Manager)

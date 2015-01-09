@@ -29,8 +29,6 @@ contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw', strict=True)
 outbox = dd.resolve_app('outbox')
 
-MODULE_LABEL = _("Newcomers")
-
 WORKLOAD_BASE = decimal.Decimal('10')  # normal number of newcomers per month
 MAX_WEIGHT = decimal.Decimal('10')
 HUNDRED = decimal.Decimal('100.0')
@@ -417,10 +415,10 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 
     #~ @dd.virtualfield(models.CharField(_("Score"),max_length=6,help_text=u"""\
     @dd.virtualfield(
-        models.DecimalField(string_concat(_("Added workload"), " (%)"),
-                            max_digits=8, decimal_places=2,
-    help_text=u"""\
-Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
+        models.DecimalField(
+            string_concat(_("Added workload"), " (%)"),
+            max_digits=8, decimal_places=2,
+            help_text=u"""Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
     def score(self, obj, ar):
         #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
         #~ return "%6.0f%%" % obj._score
@@ -497,11 +495,11 @@ class AvailableCoachesByClient(AvailableCoaches):
 settings.SITE.add_user_field('newcomer_quota', models.IntegerField(
     _("Newcomers Quota"),
     default=0,
-    help_text=u"""\
+    help_text="""\
 Wieviel Arbeitszeit dieser Benutzer für Neuanträge zur Verfügung steht
 (100 = ganztags, 50 = halbtags, 0 = gar nicht).
-Wenn zwei Benutzer die gleiche Belastungspunktzahl haben, 
-aber einer davon sich nur zu 50% um Neuanträge kümmert, 
+Wenn zwei Benutzer die gleiche Belastungspunktzahl haben,
+aber einer davon sich nur zu 50% um Neuanträge kümmert,
 gilt er als doppelt so belastet wie sein Kollege.
 """))
 
@@ -524,24 +522,23 @@ dd.inject_field(
 
 
 def setup_main_menu(site, ui, profile, m):
-    #~ if user.profile.newcomers_level < UserLevels.user:
-        #~ return
-    m = m.add_menu("newcomers", MODULE_LABEL)
-    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
-    #~ m.add_action(Newcomers)
+    p = dd.plugins.newcomers
+    m = m.add_menu(p.app_label, p.verbose_name)
     m.add_action(NewClients)
     m.add_action(AvailableCoaches)
 
 
 def setup_config_menu(site, ui, profile, m):
-    #~ if user.profile.newcomers_level < UserLevels.manager:
-        #~ return
-    m = m.add_menu("newcomers", MODULE_LABEL)
+    p = dd.plugins.newcomers
+    m = m.add_menu(p.app_label, p.verbose_name)
     m.add_action(Brokers)
     m.add_action(Faculties)
 
 
 def setup_explorer_menu(site, ui, profile, m):
+    p = dd.plugins.newcomers
+    m = m.add_menu(p.app_label, p.verbose_name)
     m.add_action(Competences)
 
-dd.add_user_group('newcomers', MODULE_LABEL)
+p = dd.plugins.newcomers
+dd.add_user_group(p.app_label, p.verbose_name)

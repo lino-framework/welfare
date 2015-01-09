@@ -1,6 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2013 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+
+"""
+Adds demo data for :mod:`lino_welfare.modlib.newcomers`.
+"""
 
 
 from lino.utils.instantiator import Instantiator, i2d
@@ -8,7 +12,6 @@ from lino.utils import Cycler
 from lino.core.dbutils import resolve_model
 # from django.utils.translation import ugettext_lazy as _
 
-#~ from django.db import models
 from lino.dd import babel_values
 
 from lino import dd, rt
@@ -58,7 +61,8 @@ def objects():
     FACULTIES = Cycler(newcomers.Faculty.objects.all())
 
     profiles = [
-        p for p in UserProfiles.items() if p.integ_level and p.level < dd.UserLevels.admin]
+        p for p in UserProfiles.items()
+        if p.integ_level and p.level < dd.UserLevels.admin]
     qs = users.User.objects.filter(profile__in=profiles)
     for u in qs:
         u.newcomer_quota = QUOTAS.pop()
@@ -68,6 +72,7 @@ def objects():
     for i in range(7):
         yield newcomers.Competence(user=USERS.pop(), faculty=FACULTIES.pop())
 
-    for p in pcsw.Client.objects.exclude(client_state=pcsw.ClientStates.former):
-        p.faculty = FACULTIES.pop()
-        p.save()
+        for p in pcsw.Client.objects.exclude(
+                client_state=pcsw.ClientStates.former):
+            p.faculty = FACULTIES.pop()
+            p.save()
