@@ -87,6 +87,10 @@ class MyTestCase(DemoTestCase):
             'rolf', 'choices/aids/RefundConfirmations/aid_type',
             json_fields, 11, **kw)
         
+        self.demo_get(
+            'rolf', 'apchoices/pcsw/Clients/create_visit/user',
+            json_fields, 10, **kw)
+        
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
             

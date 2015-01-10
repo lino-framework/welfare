@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2014 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""
+The :xfile:`models.py` module for :mod:`lino_welfare.modlib.newcomers`.
+
+Defines the models 
+:class:`Broker`,
+:class:`Faculty` and
+:class:`Competence`.
+
+Tables like 
+:class:`NewClients`,
+:class:`AvailableCoaches`,
+:class:`AvailableCoachesByClient`.
+
+"""
 
 import logging
 logger = logging.getLogger(__name__)
@@ -204,6 +218,7 @@ def faculty_weight(user, client):
 
 
 class NewClients(pcsw.Clients):
+    "A list of clients designed for newcomers consultats."
     required = dict(user_groups='newcomers')
     #~ required_user_groups = ['newcomers']
     label = _("New Clients")
@@ -295,6 +310,8 @@ class ClientsByFaculty(pcsw.Clients):
 
 
 class AvailableCoaches(users.Users):
+    """List of users available for new coachings.  Visible
+only to Newcomers consultants."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
     required = dict(user_groups='newcomers')
@@ -426,7 +443,7 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 
 
 class AssignCoach(dd.NotifyingAction):
-
+    "Action to assign this agent as coach for this client."
     label = _("Assign")
     show_in_workflow = True
     help_text = _("Assign this agent as coach for this client. "
@@ -476,6 +493,10 @@ class AssignCoach(dd.NotifyingAction):
 
 
 class AvailableCoachesByClient(AvailableCoaches):
+    """List of users available for coaching this client.  Visible only to
+Newcomers consultants.
+
+    """
     #~ master_key = 'for_client'
     master = pcsw.Client
     label = _("Available Coaches")

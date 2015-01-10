@@ -382,8 +382,10 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
             return g.aid_type
 
     def suggest_cal_guests(self, event):
-        # Automatic evaluation events have the client as mandatory
-        # participant, plus possibly some other coach.
+        """Automatic evaluation events have the client as mandatory
+        participant, plus possibly some other coach.
+
+        """
         Guest = rt.modules.cal.Guest
         GuestStates = rt.modules.cal.GuestStates
         st = GuestStates.accepted

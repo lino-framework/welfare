@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -32,13 +32,63 @@ MyBusyVisitors.required.update(user_groups='coaching')
 MyGoneVisitors.required.update(user_groups='coaching')
 
 
-class CreateClientVisit(dd.Action):
+class ButtonsTable(dd.VirtualTable):
+    column_names = 'button'
+    auto_fit_column_widths = True
+    window_size = (60, 20)
+    hide_top_toolbar = True
+
+    @dd.displayfield(_("Button"))
+    def button(self, obj, ar):
+        return obj
+
+
+class CreateEventActionsByClient(ButtonsTable):
+    sort_index = 93
+    master = 'pcsw.Client'
+    label = _("Find date with...")
+    icon_name = 'calendar'
+    #~ icon_file = 'calendar.png'
+
+    @classmethod
+    def get_title(self, ar):
+        s = super(CreateEventActionsByClient, self).get_title(ar)
+        if ar.master_instance is not None:
+            s += _(" for %s") % ar.master_instance
+        return s
+
+    @classmethod
+    def get_data_rows(self, ar=None):
+        mi = ar.master_instance  # a Client
+        if mi is None:
+            return
+        for user in settings.SITE.user_model.objects.exclude(
+                profile__isnull=True):
+
+            sar = extensible.CalendarPanel.request(
+                subst_user=user,
+                current_project=mi.pk)
+            yield ar.href_to_request(sar, unicode(user), icon_name=None)
+
+
+            # sar = ar.spawn(
+            #     extensible.CalendarPanel.default_action,
+            #     current_project=ar.master_instance.pk,
+            #     subst_user=user)
+            # btn = sar.as_button(unicode(user), icon_name=None)
+
+            # if btn is not None:
+            #     yield btn
+
+
+class FindDateByClient(dd.Action):
+    """Create an appointment from a client for this client with a user to
+be selected manually."""
     show_in_bbar = True
     sort_index = 91
-    icon_name = 'hourglass'
-    label = _("Create visit")
+    icon_name = CreateEventActionsByClient.icon_name
+    label = _("Create appointment")
     parameters = dict(
-        #~ date=models.DateField(_("Date"),blank=True,null=True),
         user=dd.ForeignKey(settings.SITE.user_model),
         summary=models.CharField(verbose_name=_("Reason"), blank=True))
     params_layout = """
@@ -46,15 +96,42 @@ class CreateClientVisit(dd.Action):
     summary
     """
 
+    @dd.chooser()
+    def user_choices(self):
+        return settings.SITE.user_model.objects.exclude(profile='')
+
+    def run_from_ui(self, ar, **kw):
+        obj = ar.selected_rows[0]  # a Client
+        kw.update(
+            subst_user=ar.action_param_values.user,
+            current_project=obj.pk)
+        return extensible.CalendarPanel.default_action.run_from_ui(ar, **kw)
+
+
+class CreateClientVisit(dd.Action):
+    """Create a prompt event from a client."""
+    show_in_bbar = True
+    sort_index = 91
+    icon_name = 'hourglass'
+    label = _("Create visit")
+    parameters = dict(
+        user=dd.ForeignKey(settings.SITE.user_model),
+        summary=models.CharField(verbose_name=_("Reason"), blank=True))
+    params_layout = """
+    user
+    summary
+    """
+
+    @dd.chooser()
+    def user_choices(self):
+        return settings.SITE.user_model.objects.exclude(profile='')
+
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
         create_prompt_event(obj, obj,
                             ar.action_param_values.user,
                             ar.action_param_values.summary,
                             settings.SITE.site_config.client_guestrole)
-        #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
-        #~ kw.update(success=True)
-        #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
         ar.success(refresh=True)
 
 
@@ -119,47 +196,6 @@ class CreateNote(dd.Action):
                          _("Do you still want to issue an excerpt?")))
 
 
-class ButtonsTable(dd.VirtualTable):
-    column_names = 'button'
-    auto_fit_column_widths = True
-    window_size = (60, 20)
-    hide_top_toolbar = True
-
-    @dd.displayfield(_("Button"))
-    def button(self, obj, ar):
-        return obj
-
-
-class CreateEventActionsByClient(ButtonsTable):
-    sort_index = 93
-    master = 'pcsw.Client'
-    label = _("Find date with...")
-    icon_name = 'calendar'
-    #~ icon_file = 'calendar.png'
-
-    @classmethod
-    def get_title(self, ar):
-        s = super(CreateEventActionsByClient, self).get_title(ar)
-        if ar.master_instance is not None:
-            s += _(" for %s") % ar.master_instance
-        return s
-
-    @classmethod
-    def get_data_rows(self, ar=None):
-        if ar.master_instance is None:
-            return
-        for user in settings.SITE.user_model.objects.exclude(
-                profile__isnull=True):
-            sar = ar.spawn(
-                extensible.CalendarPanel.default_action,
-                current_project=ar.master_instance.pk,
-                subst_user=user)
-            btn = sar.as_button(unicode(user), icon_name=None)
-
-            if btn is not None:
-                yield btn
-
-
 # def fld2html(fld, value):
 #     if value:
 #         return ("%s: " % f.verbose_name, E.b(value))
@@ -186,10 +222,7 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     #~ read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
 
-    create_event_actions = dd.ShowSlaveTable(CreateEventActionsByClient)
-
-    create_visit = CreateClientVisit()
-    #~ create_note = CreateNote()
+    # create_event_actions = dd.ShowSlaveTable(CreateEventActionsByClient)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -200,6 +233,11 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
 
 
 dd.inject_action('pcsw.Coaching', create_visit=CreateCoachingVisit())
+dd.inject_action('pcsw.Client', create_visit=CreateClientVisit())
+dd.inject_action('pcsw.Client', find_date_dlg=FindDateByClient())
+dd.inject_action(
+    'pcsw.Client',
+    find_date_slave=dd.ShowSlaveTable(CreateEventActionsByClient))
 
 
 class CoachingsByClient(pcsw.CoachingsByClient):
