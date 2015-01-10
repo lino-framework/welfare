@@ -105,6 +105,26 @@ class Event(Event):
         #~ logger.info("20130802a when_text %r",txt)
         return ar.obj2html(self, txt)
 
+    def suggest_guests(self):
+        """Yields the guest suggested by `super`, but if Client field is
+        filled and if `event_type` is marked `invite_client`, add the
+        client as Guest.
+
+        """
+        for g in super(Event, self).suggest_guests():
+            yield g
+        client = self.project
+        if client is None:
+            return
+        if self.event_type and self.event_type.invite_client:
+            Guest = rt.modules.cal.Guest
+            GuestStates = rt.modules.cal.GuestStates
+            st = GuestStates.accepted
+            yield Guest(event=self,
+                        partner=client,
+                        state=st,
+                        role=settings.SITE.site_config.client_guestrole)
+
 dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 
 #~ class MyEvents(MyEvents):

@@ -55,7 +55,7 @@ Test whether :meth:`get_db_overview_rst
  cal.Calendar                   cal.Calendars                   7         10
  cal.Event                      cal.OneEvent                    24        597
  cal.EventType                  cal.EventTypes                  19        7
- cal.Guest                      cal.Guests                      9         616
+ cal.Guest                      cal.Guests                      9         1042
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9

@@ -108,10 +108,18 @@ class QuickTest(RemoteAuthTestCase):
         res = ses.run(obj.do_update_events)
         self.assertEqual(res['success'], True)
 
+        # note how this will generate 3 events, and for each event one
+        # guest.
         expected = """\
 Update Events for ISIP#1 (Max MUSTERMANN)...
 Generating events between 2014-07-01 and 2015-03-31.
 Reached upper date limit 2015-03-31
+Update Guests for Event #1 Appointment 1 (01.07.2014)...
+1 row(s) have been updated.
+Update Guests for Event #2 Appointment 2 (01.10.2014)...
+1 row(s) have been updated.
+Update Guests for Event #3 Appointment 3 (01.01.2015)...
+1 row(s) have been updated.
 3 row(s) have been updated."""
         # print(expected)
         self.assertEqual(res['info_message'], expected)
