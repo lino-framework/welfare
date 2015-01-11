@@ -234,10 +234,14 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
 
 dd.inject_action('pcsw.Coaching', create_visit=CreateCoachingVisit())
 dd.inject_action('pcsw.Client', create_visit=CreateClientVisit())
-dd.inject_action('pcsw.Client', find_date_dlg=FindDateByClient())
+if False:
+    # doesn't work because the combination (dialog action with JS
+    # instead of AJAX call) is not yet possible. But helps to imagine
+    # how it would look
+    dd.inject_action('pcsw.Client', find_date_dlg=FindDateByClient())
 dd.inject_action(
     'pcsw.Client',
-    find_date_slave=dd.ShowSlaveTable(CreateEventActionsByClient))
+    find_date=dd.ShowSlaveTable(CreateEventActionsByClient))
 
 
 class CoachingsByClient(pcsw.CoachingsByClient):
