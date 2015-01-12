@@ -9,9 +9,9 @@ lino_welfare.modlib.reception.models
 
    .. autosummary::
    
+      appointable_users
       beware
       create_prompt_event
-      find_date_with_users
       func
       inherited_setup_main_menu
       join_elems

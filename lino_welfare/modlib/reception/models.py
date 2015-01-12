@@ -37,9 +37,11 @@ MyBusyVisitors.required.update(user_groups='coaching')
 MyGoneVisitors.required.update(user_groups='coaching')
 
 
-def find_date_with_users():
-    """Return a queryset of the users for whom reception clerks can
-    create appointments.
+def appointable_users():
+    """Return a queryset of the users for whom reception clerks can create
+    appointments. Candidates must have a :attr:`profile
+    <lino.modlib.users.models.User.profile>` and a :attr:`calendar
+    <lino_welfare.modlib.users.models.User.calendar>`.
 
     """
     qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
@@ -74,7 +76,7 @@ class FindDateByClientTable(ButtonsTable):
         mi = ar.master_instance  # a Client
         if mi is None:
             return
-        for user in find_date_with_users():
+        for user in appointable_users():
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=mi.pk)
@@ -98,7 +100,7 @@ be selected manually."""
 
     @dd.chooser()
     def user_choices(self):
-        return find_date_with_users()
+        return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]  # a Client
@@ -124,7 +126,7 @@ class CreateClientVisit(dd.Action):
 
     @dd.chooser()
     def user_choices(self):
-        return find_date_with_users()
+        return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
