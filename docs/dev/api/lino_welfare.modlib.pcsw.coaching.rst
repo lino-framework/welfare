@@ -13,6 +13,7 @@ lino_welfare.modlib.pcsw.coaching
 
    .. autosummary::
    
+      ByUser
       Coaching
       CoachingEnding
       CoachingEndings

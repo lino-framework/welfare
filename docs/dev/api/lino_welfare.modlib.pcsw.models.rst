@@ -37,6 +37,7 @@ lino_welfare.modlib.pcsw.models
       AidType
       AidTypes
       AllClients
+      ByUser
       CivilState
       Client
       ClientContact

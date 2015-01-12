@@ -45,7 +45,6 @@ lino_welfare.modlib.jobs.models
       ContractsBySchedule
       ContractsByType
       ContractsSearch
-      CountryCity
       DurationUnits
       EmptyTable
       ExperiencesByOffer

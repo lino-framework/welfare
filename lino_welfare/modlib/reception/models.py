@@ -3,7 +3,10 @@
 # License: BSD (see file COPYING for details)
 
 """
-The :xfile:`models.py` for :mod:`lino_welfare.modlib.reception`.
+Database models for :mod:`lino_welfare.modlib.reception`.
+
+.. autosummary::
+
 """
 
 import logging
@@ -16,6 +19,8 @@ from django.utils.translation import ugettext_lazy as _
 from lino.utils.xmlgen.html import E
 
 from lino import dd
+
+from lino.core.tables import ButtonsTable
 
 from lino.modlib.reception.models import *
 
@@ -32,27 +37,34 @@ MyBusyVisitors.required.update(user_groups='coaching')
 MyGoneVisitors.required.update(user_groups='coaching')
 
 
-class ButtonsTable(dd.VirtualTable):
-    column_names = 'button'
-    auto_fit_column_widths = True
-    window_size = (60, 20)
-    hide_top_toolbar = True
+def find_date_with_users():
+    """Return a queryset of the users for whom reception clerks can
+    create appointments.
 
-    @dd.displayfield(_("Button"))
-    def button(self, obj, ar):
-        return obj
+    """
+    qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
+    qs = qs.filter(calendar__isnull=False)
+    return qs
 
 
-class CreateEventActionsByClient(ButtonsTable):
-    sort_index = 93
+class FindDateByClientTable(ButtonsTable):
+    """A :class:`ButtonsTable <lino.core.tables.ButtonsTable>` which shows
+    all users who are candidates responsible of new client
+    appointment. Clicking on one of them will open the
+    `extensible.CalendarPanel` with appropriate parameters
+    (`subst_user` and `current_project`).
+
+    """
     master = 'pcsw.Client'
+
+    # forwarded to ShowSlaveTable:
+    sort_index = 93
     label = _("Find date with...")
     icon_name = 'calendar'
-    #~ icon_file = 'calendar.png'
 
     @classmethod
     def get_title(self, ar):
-        s = super(CreateEventActionsByClient, self).get_title(ar)
+        s = super(FindDateByClientTable, self).get_title(ar)
         if ar.master_instance is not None:
             s += _(" for %s") % ar.master_instance
         return s
@@ -62,31 +74,19 @@ class CreateEventActionsByClient(ButtonsTable):
         mi = ar.master_instance  # a Client
         if mi is None:
             return
-        for user in settings.SITE.user_model.objects.exclude(
-                profile__isnull=True):
-
+        for user in find_date_with_users():
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=mi.pk)
             yield ar.href_to_request(sar, unicode(user), icon_name=None)
 
 
-            # sar = ar.spawn(
-            #     extensible.CalendarPanel.default_action,
-            #     current_project=ar.master_instance.pk,
-            #     subst_user=user)
-            # btn = sar.as_button(unicode(user), icon_name=None)
-
-            # if btn is not None:
-            #     yield btn
-
-
-class FindDateByClient(dd.Action):
+class FindDateByClientDlg(dd.Action):
     """Create an appointment from a client for this client with a user to
 be selected manually."""
     show_in_bbar = True
     sort_index = 91
-    icon_name = CreateEventActionsByClient.icon_name
+    icon_name = FindDateByClientTable.icon_name
     label = _("Create appointment")
     parameters = dict(
         user=dd.ForeignKey(settings.SITE.user_model),
@@ -98,7 +98,7 @@ be selected manually."""
 
     @dd.chooser()
     def user_choices(self):
-        return settings.SITE.user_model.objects.exclude(profile='')
+        return find_date_with_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]  # a Client
@@ -124,7 +124,7 @@ class CreateClientVisit(dd.Action):
 
     @dd.chooser()
     def user_choices(self):
-        return settings.SITE.user_model.objects.exclude(profile='')
+        return find_date_with_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
@@ -222,8 +222,6 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     #~ read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
 
-    # create_event_actions = dd.ShowSlaveTable(CreateEventActionsByClient)
-
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(Clients, self).param_defaults(ar, **kw)
@@ -238,10 +236,10 @@ if False:
     # doesn't work because the combination (dialog action with JS
     # instead of AJAX call) is not yet possible. But helps to imagine
     # how it would look
-    dd.inject_action('pcsw.Client', find_date_dlg=FindDateByClient())
+    dd.inject_action(
+        'pcsw.Client', find_date_dlg=FindDateByClientDlg())
 dd.inject_action(
-    'pcsw.Client',
-    find_date=dd.ShowSlaveTable(CreateEventActionsByClient))
+    'pcsw.Client', find_date=dd.ShowSlaveTable(FindDateByClientTable))
 
 
 class CoachingsByClient(pcsw.CoachingsByClient):
@@ -277,7 +275,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
             elems += [ar.href_to_request(
                 sar, _("Find date"),
                 title=_("Find date"),
-                icon_name=CreateEventActionsByClient.icon_name), ' ']
+                icon_name=FindDateByClientTable.icon_name), ' ']
             #~ icon_name = 'x-tbar-calendar'
             #~ icon_file = 'calendar.png'
 
