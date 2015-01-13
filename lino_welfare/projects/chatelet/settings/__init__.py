@@ -63,7 +63,7 @@ class Site(Site):
         from lino.modlib.courses import workflows
 
         from django.utils.translation import ugettext_lazy as _
-        from lino.modlib.users.mixins import UserProfiles
+        from lino.modlib.users.choicelists import UserProfiles
         UserProfiles.reset(
             '* office coaching integ courses cbss newcomers '
             'reception beid')

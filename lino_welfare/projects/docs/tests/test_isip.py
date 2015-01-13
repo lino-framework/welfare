@@ -20,7 +20,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 
 from lino.utils import i2d
 from lino.modlib.cal.utils import WORKDAYS
-from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.system.mixins import Genders
 
 

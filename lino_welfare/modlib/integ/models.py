@@ -28,7 +28,7 @@ from django.db import models
 from django.conf import settings
 
 from lino.utils.xmlgen.html import E
-from lino.modlib.users.mixins import UserProfiles, UserLevels
+from lino.modlib.users.choicelists import UserProfiles, UserLevels
 from lino.utils.report import Report
 
 from lino import dd

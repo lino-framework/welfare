@@ -34,7 +34,7 @@ from lino.utils.choosers import chooser
 from lino import mixins
 from django.conf import settings
 from lino.modlib.cal.utils import amonthago
-from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
 from lino.core.utils import ChangeWatcher
 

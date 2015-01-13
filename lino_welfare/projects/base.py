@@ -75,7 +75,7 @@ class Site(Site):
         This defines default user profiles for :ref:`welfare`.
         """
         from django.utils.translation import ugettext_lazy as _
-        from lino.modlib.users.mixins import UserProfiles
+        from lino.modlib.users.choicelists import UserProfiles
 
         UserProfiles.reset(
             '* office coaching integ courses cbss newcomers debts '

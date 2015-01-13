@@ -22,7 +22,7 @@ from lino.core import constants
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 
-from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.users.choicelists import UserProfiles
 
 from lino.modlib.beid.mixins import holder_model
 Holder = holder_model()

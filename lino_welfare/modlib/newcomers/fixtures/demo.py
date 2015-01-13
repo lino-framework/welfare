@@ -15,7 +15,7 @@ from lino.core.dbutils import resolve_model
 from lino.dd import babel_values
 
 from lino import dd, rt
-from lino.modlib.users.mixins import UserProfiles
+from lino.modlib.users.choicelists import UserProfiles
 
 
 def objects():
