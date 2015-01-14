@@ -1706,10 +1706,6 @@ dd.inject_field(pcsw.Client,
                 dd.VirtualField(dd.HtmlBox(_("CBSS summary")), cbss_summary))
 
 
-MODULE_LABEL = dd.apps.cbss.verbose_name
-# verbose_name = _("CBSS")
-
-
 def setup_site_cache(self, force):
     """
     Called from :meth:`build_site_cache`. 
@@ -1755,60 +1751,5 @@ def setup_site_cache(self, force):
             shutil.copy(src, target)
 
 
-def site_setup(self):
-    """
-    (Called during site setup.)
-    
-    Adds a new tab "CBSS" to the Detail of `pcsw.Clients`.
-    """
-    #~ self.modules.pcsw.Clients.add_detail_tab('cbss',"""
-    #~ cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
-    #~ cbss_summary
-    #~ """,MODULE_LABEL,required=dict(user_groups='cbss')
-    #~ )
-    #~ from lino_welfare.modlib.pcsw.models import ClientDetail
-    #~ ClientDetail.add_tabpanel('cbss',"""
-    #~ cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
-    #~ cbss_summary
-    #~ """,MODULE_LABEL,required=dict(user_groups='cbss')
-    #~ )
-    #~ required_user_groups=['cbss']
-    #~ cbss.IdentifyRequestsByPerson
-    #~ self.modules.contacts.AllPersons.add_detail_panel('cbssrequests',"""
-    #~ cbss_identify_person
-    #~ cbss_manage_access
-    #~ cbss_retrieve_ti_groups
-    #~ """,_("CBSS Requests"))
-    #~ self.modules.contacts.AllPersons.add_detail_tab('cbss',"cbssrequests",MODULE_LABEL,required_user_groups=['cbss'])
-    #~
-
-    # self.modules.system.SiteConfigs.add_detail_tab('cbss', """
-    # cbss_org_unit sector ssdn_user_id ssdn_email
-    # cbss_http_username cbss_http_password
-    # """, MODULE_LABEL, required=dict(user_groups='cbss'))
-
-
-#~ def setup_main_menu(site,ui,profile,m): pass
-#~ def setup_master_menu(site,ui,profile,m): pass
-#~ def setup_my_menu(site,ui,user,m):
-    #~ if user.profile.cbss_level < UserLevels.user:
-        #~ return
-    #~ m  = m.add_menu("cbss",MODULE_LABEL)
-    #~ m.add_action(MyIdentifyPersonRequests)
-    #~ m.add_action(MyManageAccessRequests)
-    #~ m.add_action(MyRetrieveTIGroupsRequests)
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("cbss", MODULE_LABEL)
-    m.add_action(Sectors)
-    m.add_action(Purposes)
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    if profile.cbss_level < dd.UserLevels.manager:
-        return
-    m = m.add_menu("cbss", MODULE_LABEL)
-    m.add_action(IdentifyPersonRequests)
-    m.add_action(ManageAccessRequests)
-    m.add_action(RetrieveTIGroupsRequests)
-
-dd.add_user_group('cbss', MODULE_LABEL)
+p = dd.plugins.cbss
+dd.add_user_group(p.app_label, p.verbose_name)

@@ -542,24 +542,5 @@ dd.inject_field(
         help_text=_("The Faculty this client has been attributed to.")))
 
 
-def setup_main_menu(site, ui, profile, m):
-    p = dd.plugins.newcomers
-    m = m.add_menu(p.app_label, p.verbose_name)
-    m.add_action(NewClients)
-    m.add_action(AvailableCoaches)
-
-
-def setup_config_menu(site, ui, profile, m):
-    p = dd.plugins.newcomers
-    m = m.add_menu(p.app_label, p.verbose_name)
-    m.add_action(Brokers)
-    m.add_action(Faculties)
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    p = dd.plugins.newcomers
-    m = m.add_menu(p.app_label, p.verbose_name)
-    m.add_action(Competences)
-
 p = dd.plugins.newcomers
 dd.add_user_group(p.app_label, p.verbose_name)

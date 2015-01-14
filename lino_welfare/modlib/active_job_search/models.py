@@ -63,9 +63,3 @@ dd.inject_field(
         help_text=_("Notes concerning child custody.")))
 
 
-menugroup = dd.plugins.integ
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(menugroup.app_label, menugroup.verbose_name)
-    m.add_action('active_job_search.Proofs')

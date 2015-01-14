@@ -1086,27 +1086,3 @@ action of :class:`welfare.aids.Confirmation` with
 """
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
 
-
-menu_host = dd.plugins.pcsw
-
-
-def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
-    m.add_action('aids.MyPendingGrantings')
-
-
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
-    m.add_action('aids.AidTypes')
-    m.add_action('aids.Categories')
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
-    m.add_action('aids.Grantings')
-    # m.add_action('aids.AidRegimes')
-    m.add_action('aids.IncomeConfirmations')
-    m.add_action('aids.RefundConfirmations')
-    m.add_action('aids.SimpleConfirmations')
-    # m.add_action('aids.Helpers')
-    # m.add_action('aids.HelperRoles')

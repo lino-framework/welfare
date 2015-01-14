@@ -42,3 +42,13 @@ class Plugin(ad.Plugin):
 
     ## settings
     holder_model = 'contacts.Person'
+
+    def setup_config_menu(config, site, profile, m):
+        m = m.add_menu(config.app_label, config.verbose_name)
+        m.add_action('badges.Badges')
+
+    def setup_explorer_menu(config, site, profile, m):
+        m = m.add_menu(config.app_label, config.verbose_name)
+        m.add_action('badges.Awards')
+
+

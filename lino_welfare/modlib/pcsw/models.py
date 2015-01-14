@@ -1559,46 +1559,6 @@ class ClientContactsByType(ClientContacts):
     label = _("Contacts")
     auto_fit_column_widths = True
 
-config = dd.plugins.pcsw
-
-
-def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action('pcsw.MyCoachings')
-
-
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action('pcsw.PersonGroups')
-    m.add_action('pcsw.Activities')
-    m.add_action('pcsw.ExclusionTypes')
-    m.add_action('pcsw.CoachingTypes')
-    m.add_action('pcsw.CoachingEndings')
-    m.add_action('pcsw.DispenseReasons')
-    m.add_action('pcsw.ClientContactTypes')
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action('pcsw.Coachings')
-    m.add_action('pcsw.ClientContacts')
-    m.add_action('pcsw.Exclusions')
-    m.add_action('pcsw.Convictions')
-    m.add_action(AllClients)
-    #~ m.add_action(PersonSearches)
-    m.add_action('pcsw.CivilState')
-    m.add_action('pcsw.ClientStates')
-    m.add_action('beid.BeIdCardTypes')
-
-
-def setup_reports_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    #~ m.add_action(site.modules.jobs.OldJobsOverview)
-    #~ m.add_action(site.modules.integ.UsersWithClients)
-    m.add_action(ClientsTest)
-    #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
-    # ~ m.add_action(ActivityReport1) # old version
-
 
 def setup_quicklinks(self, ar, tb):
     tb.add_action('pcsw.Clients', 'find_by_beid')

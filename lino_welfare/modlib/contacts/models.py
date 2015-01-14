@@ -9,7 +9,6 @@ The `models` module for :mod:`lino_welfare.modlib.contacts`.
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import string_concat
 
 from lino import dd, rt
 
@@ -332,15 +331,3 @@ def my_details(sender, **kw):
     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
 
-config = dd.apps.contacts
-
-
-def setup_main_menu(self, ui, profile, main):
-    m = main.add_menu(config.app_label, config.verbose_name)
-    m.add_action('contacts.Persons')
-    m.add_action(
-        'pcsw.Clients',
-        label=string_concat(u' \u25b6 ', self.modules.pcsw.Clients.label))
-    m.add_action('contacts.Companies')
-    m.add_separator('-')
-    m.add_action('contacts.Partners', label=_("Partners (all)"))

@@ -108,21 +108,12 @@ class Site(Site):
         tb.add_action(self.modules.jobs.MyContracts)
         tb.add_action(self.modules.cal.EventsByDay)
 
-    def setup_menu(self, ui, profile, main):
+    def unused_setup_menu(self, profile, main):
         from django.utils.translation import ugettext_lazy as _
         from django.utils.translation import string_concat
         from django.db import models
         from lino import dd, rt
         contacts = dd.resolve_app("contacts")
-
-        #~ m = main.add_menu("contacts",_("Contacts"))
-        #~ m = main.add_menu("contacts",contacts.MODULE_LABEL)
-        #~ m.add_action(self.modules.pcsw.Clients)
-
-        #~ if user.profile.level:
-            #~ m.add_action(self.modules.contacts.Companies)
-            #~ m.add_action(self.modules.contacts.Persons)
-            #~ m.add_action(self.modules.contacts.AllPartners)
 
         m = main.add_menu("master", _("Master"))
         self.on_each_app('setup_master_menu', ui, profile, m)
@@ -132,17 +123,13 @@ class Site(Site):
         m = main.add_menu("reports", _("Listings"))
         self.on_each_app('setup_reports_menu', ui, profile, m)
 
-        # ~ if profile.level >= dd.UserLevels.manager: # is_staff:
         m = main.add_menu("config", _("Configure"))
         self.on_each_app('setup_config_menu', ui, profile, m)
-
-        # ~ if profile.level >= dd.UserLevels.manager: # is_staff:
 
         m = main.add_menu("explorer", _("Explorer"))
         self.on_each_app('setup_explorer_menu', ui, profile, m)
 
         m = main.add_menu("site", _("Site"))
-        #~ self.modules.lino.setup_site_menu(self,ui,user,m)
         self.on_each_app('setup_site_menu', ui, profile, m)
 
         return main

@@ -305,7 +305,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
-- Listings :
+- Berichte :
   - System : Stale Controllables
   - ÖSHZ : Datenkontrolle Klienten
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
@@ -364,7 +364,7 @@ Hubert is an Integration agent.
 - Empfang : Meine Warteschlange
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Listings :
+- Berichte :
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
@@ -390,7 +390,7 @@ Mélanie is the manager of the Integration service.
 - Empfang : Meine Warteschlange
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Listings :
+- Berichte :
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
@@ -444,7 +444,7 @@ Caroline is a newcomers consultant.
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Meine Warteschlange
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
-- Listings :
+- Berichte :
   - DSBE : Benutzer und ihre Klienten
 - Konfigurierung :
   - Büro : Meine Einfügetexte

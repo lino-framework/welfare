@@ -83,16 +83,6 @@ class AwardsByBadge(Awards):
     auto_fit_column_widths = True
 
 
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action('badges.Badges')
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action('badges.Awards')
-
-
 __all__ = [
     'Badge',
     'Badges',

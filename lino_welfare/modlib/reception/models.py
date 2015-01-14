@@ -17,6 +17,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.xmlgen.html import E
+from lino.utils import AttrDict
 
 from lino import dd
 
@@ -244,6 +245,61 @@ dd.inject_action(
     'pcsw.Client', find_date=dd.ShowSlaveTable(FindDateByClientTable))
 
 
+class AgentsByClient(dd.VirtualTable):
+
+    label = _("Create appointment with")
+    filter = models.Q(end_date__isnull=True)
+    column_names = "user coaching_type actions"
+    master = 'pcsw.Client'
+    # slave_grid_format = 'html'
+    auto_fit_column_widths = True
+
+    @classmethod
+    def get_data_rows(self, ar=None):
+        mi = ar.master_instance
+        if mi is None:
+            return
+        if mi.client_state == pcsw.ClientStates.coached:
+            for obj in pcsw.Coaching.objects.filter(
+                    client=mi, end_date__isnull=False):
+                yield obj
+        else:
+            # yield agents available for open consultation
+            for u in appointable_users():
+                yield AttrDict(user=u, type=u.coaching_type)
+
+    @dd.displayfield(_("Agent"))
+    def user(self, obj, ar):
+        return unicode(obj.user)
+
+    @dd.displayfield(_("Coaching type"))
+    def coaching_type(self, obj, ar):
+        return unicode(obj.type)
+
+    @dd.displayfield(_("Actions"))
+    def actions(cls, obj, ar):
+        client = ar.master_instance
+        if client is None:
+            return ''
+        elems = []
+        elems += [ar.instance_action_button(
+            obj.create_visit,
+            _("Visit"), icon_name=CreateClientVisit.icon_name), ' ']
+
+        if obj.user.profile is not None:
+            sar = extensible.CalendarPanel.request(
+                subst_user=obj.user,
+                current_project=client.pk)
+            elems += [ar.href_to_request(
+                sar, _("Find date"),
+                title=_("Find date"),
+                icon_name=FindDateByClientTable.icon_name), ' ']
+            #~ icon_name = 'x-tbar-calendar'
+            #~ icon_file = 'calendar.png'
+
+        return E.div(*elems)
+
+
 class CoachingsByClient(pcsw.CoachingsByClient):
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
@@ -258,22 +314,18 @@ class CoachingsByClient(pcsw.CoachingsByClient):
 
     @dd.displayfield(_("Actions"))
     def actions(cls, obj, ar):
+        client = ar.master_instance
+        if client is None:
+            return ''
         elems = []
         elems += [ar.instance_action_button(
             obj.create_visit,
             _("Visit"), icon_name=CreateClientVisit.icon_name), ' ']
 
-        #~ ba = cls.get_action_by_name('create_visit')
-        #~ u = obj.user
-        # ~ sar = ba.request(obj) # ,action_param_values=dict(user=u))
-        #~ kw = dict()
-        #~ kw.update(title=)
-        #~ elems += [ar.href_to_request(sar,**kw),' ']
-
         if obj.user.profile is not None:
             sar = extensible.CalendarPanel.request(
                 subst_user=obj.user,
-                current_project=obj.client.pk)
+                current_project=client.pk)
             elems += [ar.href_to_request(
                 sar, _("Find date"),
                 title=_("Find date"),
@@ -334,11 +386,4 @@ if False:  # works, but is very stupid
             return pcsw.Client.objects.get(pk=obj.partner.pk)
 
 
-inherited_setup_main_menu = setup_main_menu
 
-
-def setup_main_menu(site, ui, profile, main):
-    app = dd.apps.reception
-    m = main.add_menu(app.app_name, app.verbose_name)
-    m.add_action('reception.Clients')
-    inherited_setup_main_menu(site, ui, profile, main)

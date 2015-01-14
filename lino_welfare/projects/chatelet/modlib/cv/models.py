@@ -129,15 +129,3 @@ dd.inject_field('system.SiteConfig', 'propgroup_softskills', dd.DummyField())
 dd.inject_field('system.SiteConfig', 'propgroup_obstacles', dd.DummyField())
 
 
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action(SoftSkillTypes)
-    m.add_action(ObstacleTypes)
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    m = m.add_menu(config.app_label, config.verbose_name)
-    m.add_action(LanguageKnowledges)
-    m.add_action(Skills)
-    m.add_action(SoftSkills)
-    m.add_action(Obstacles)

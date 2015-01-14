@@ -41,3 +41,17 @@ class Plugin(ad.Plugin):
 You probably want to replace this by:
 SITE.plugins.cbss.configure(%s=%r)
 """ % (self.site, k, k, v))
+
+    def setup_config_menu(self, site, profile, m):
+        m = m.add_menu(self.app_label, self.verbose_name)
+        m.add_action('cbss.Sectors')
+        m.add_action('cbss.Purposes')
+
+    def setup_explorer_menu(self, site, profile, m):
+        if profile.cbss_level < site.modules.users.UserLevels.manager:
+            return
+        m = m.add_menu(self.app_label, self.verbose_name)
+        m.add_action('cbss.IdentifyPersonRequests')
+        m.add_action('cbss.ManageAccessRequests')
+        m.add_action('cbss.RetrieveTIGroupsRequests')
+

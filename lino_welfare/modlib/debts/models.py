@@ -1279,57 +1279,8 @@ proportionally distributing the `Distributable amount` among the debtors.
         #~ return obj.description
 
 
-MODULE_LABEL = dd.plugins.debts.verbose_name
-# _("Debts mediation")
-
-#~ settings.SITE.add_user_field('debts_level',UserLevel.field(MODULE_LABEL))
-#~ settings.SITE.add_user_group('debts',MODULE_LABEL)
-
-
-def setup_main_menu(site, ui, profile, m):
-    m = m.add_menu("debts", MODULE_LABEL)
-    m.add_action('debts.Clients')
-    m.add_action('debts.MyBudgets')
-
-
-#~ def setup_master_menu(site,ui,profile,m): pass
-
-def unused_setup_my_menu(site, ui, profile, m):
-    m = m.add_menu("debts", MODULE_LABEL)
-    m.add_action(MyBudgets)
-
-
-def setup_config_menu(site, ui, profile, m):
-    m = m.add_menu("debts", MODULE_LABEL)
-    mb = site.site_config.master_budget
-    if mb is not None:
-        """
-        the following line is to specify user permissions: non-manager 
-        debts agents users should have this command.
-        """
-        #~ mb._detail_action = MyBudgets.get_url_action('detail_action')
-        # (TODO: find a more elegant solution)
-
-        fld = site.modules.system.SiteConfig._meta.get_field('master_budget')
-        m.add_instance_action(mb, label=unicode(fld.verbose_name),
-                              action=MyBudgets.detail_action)
-    #~ if user.profile.debts_level < UserLevels.manager:
-        #~ return
-    #~ m.add_action(Accounts)
-    #~ m.add_action(accounts.Groups)
-    #~ m.add_action(DebtTypes)
-    #~ m.add_action(Accounts)
-
-
-def setup_explorer_menu(site, ui, profile, m):
-    #~ if user.profile.debts_level < UserLevels.manager:
-        #~ return
-    m = m.add_menu("debts", MODULE_LABEL)
-    m.add_action(Budgets)
-    m.add_action(Entries)
-    #~ m.add_action(Debts)
-
-dd.add_user_group('debts', MODULE_LABEL)
+p = dd.plugins.debts
+dd.add_user_group(p.app_label, p.verbose_name)
 
 
 dd.inject_field(
@@ -1389,7 +1340,7 @@ def site_setup(site):
         T.add_detail_tab('debts', """
         debts.BudgetsByPartner
         debts.ActorsByPartner
-        """, MODULE_LABEL)
+        """, dd.plugins.debts.verbose_name)
 
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
