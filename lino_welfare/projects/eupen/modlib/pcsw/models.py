@@ -65,7 +65,7 @@ class ClientDetail(dd.FormLayout):
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
-    reception.AppointmentsByPartner reception.AgentsByClient #reception.CoachingsByClient
+    reception.AppointmentsByPartner #reception.AgentsByClient reception.CoachingsByClient
     """, label=_("Person"))
 
     general2 = """
