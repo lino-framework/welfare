@@ -199,6 +199,16 @@ class Site(Site):
         yield 'lino.modlib.export_excel'
 
     def get_admin_main_items(self):
+        """Returns the items of the admin index page:
+
+        - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
+        - :class:`lino_welfare.modlib.reception.models.MyWaitingVisitors`
+        - :class:`lino.modlib.cal.models.MyEvents`
+        - :class:`lino.modlib.cal.models.MyTasks`
+        - ...
+
+
+        """
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
