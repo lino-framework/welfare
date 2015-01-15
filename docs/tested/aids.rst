@@ -106,7 +106,7 @@ Bemerkungen
 Hilfebeschlüsse
 ===============
 
-Alicia hat 2 Hilfebestätigungen zu unterschreiben. Dies kriegt sie als
+Alicia hat 2 Hilfebeschlüsse zu bestätigen. Dies kriegt sie als
 Willkommensmeldung unter die Nase gerieben:
 
 >>> ses = rt.login('alicia')
@@ -114,7 +114,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 4 Eintr&#228;ge in <i>Zu unterschreibende Hilfebeschl&#252;sse</i>.</span>
+<span>Du hast 4 Eintr&#228;ge in <i>Zu best&#228;tigende Hilfebeschl&#252;sse</i>.</span>
 
 
 >>> ses.show(aids.MyPendingGrantings)

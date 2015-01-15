@@ -17,7 +17,6 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.xmlgen.html import E
-from lino.utils import AttrDict
 
 from lino import dd
 
@@ -139,7 +138,10 @@ class CreateClientVisit(dd.Action):
 
 
 class CreateCoachingVisit(CreateClientVisit):
+    """Call a prompt event from a :class:`Coaching`.  See also
+:func:`lino.modlib.reception.models.create_prompt_event`.
 
+    """
     help_text = _("Create a prompt event for this client with this coach.")
 
     def action_param_defaults(self, ar, obj, **kw):
@@ -151,10 +153,11 @@ class CreateCoachingVisit(CreateClientVisit):
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
-        event = create_prompt_event(obj.client, obj.client,
-                                    ar.action_param_values.user,
-                                    ar.action_param_values.summary,
-                                    settings.SITE.site_config.client_guestrole)
+        create_prompt_event(
+            obj.client, obj.client,
+            ar.action_param_values.user,
+            ar.action_param_values.summary,
+            settings.SITE.site_config.client_guestrole)
         #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
         #~ kw.update(success=True)
         #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
@@ -246,13 +249,18 @@ dd.inject_action(
 
 
 class AgentsByClient(dd.VirtualTable):
+    """Shows the users for whom an appointment can be made with this
+client. Per user you have two possible buttons: (1) a prompt
+consultation (client will wait in the lounge until the user receives
+them) or (2) a scheduled appointment in the user's calendar.
 
+    """
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
     column_names = "user coaching_type actions"
     master = 'pcsw.Client'
-    # slave_grid_format = 'html'
-    auto_fit_column_widths = True
+    slave_grid_format = 'html'
+    # auto_fit_column_widths = True
 
     @classmethod
     def get_data_rows(self, ar=None):
@@ -266,7 +274,10 @@ class AgentsByClient(dd.VirtualTable):
         else:
             # yield agents available for open consultation
             for u in appointable_users():
-                yield AttrDict(user=u, type=u.coaching_type)
+                # create a temporary coaching!
+                yield pcsw.Coaching(
+                    client=mi, user=u, type=u.coaching_type,
+                    start_date=dd.today())
 
     @dd.displayfield(_("Agent"))
     def user(self, obj, ar):
@@ -275,6 +286,8 @@ class AgentsByClient(dd.VirtualTable):
     @dd.displayfield(_("Coaching type"))
     def coaching_type(self, obj, ar):
         return unicode(obj.type)
+
+    create_visit = CreateCoachingVisit()
 
     @dd.displayfield(_("Actions"))
     def actions(cls, obj, ar):

@@ -33,7 +33,6 @@ lino_welfare.modlib.users.models
       User
       UserAuthored
       UserDetail
-      UserGroups
       UserInsert
       UserLevels
       UserProfiles

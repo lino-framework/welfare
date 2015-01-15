@@ -299,7 +299,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Büro : Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu unterschreibende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter

@@ -1,12 +1,14 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
-The :xfile:`models.py` module for the :mod:`lino_welfare.modlib.cal` app.
+Database models for :mod:`lino_welfare.modlib.cal`.
 """
 
 from __future__ import unicode_literals
+
+import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
@@ -19,13 +21,45 @@ from lino import dd, rt
 
 from lino.modlib.cal.models import *
 
-#~ add = EventEvents.add_item
-#~ add('30', _("Visit"),'visit')
-
-
 from lino.modlib.cal.workflows import take, feedback
+from lino.modlib.reception.models import checkout_guest
+
 
 EventStates.published.text = _("Notified")
+
+
+class CloseMeeting(feedback.CloseMeeting):
+    """Close the meeting (mark it as took place") and check out all
+guests. Ask confirmation naming the guests who need to check out.
+
+    """
+    def execute(self, ar, obj):
+
+        def yes(ar):
+            if not obj.end_time:
+                obj.end_time = datetime.datetime.now()
+                ar.info("event.end_time has been set by CloseMeeting")
+            return super(CloseMeeting, self).execute(ar, obj)
+
+        guests = obj.guest_set.filter(gone_since__isnull=True,
+                                      waiting_since__isnull=False)
+        num = len(guests)
+        if num == 0:
+            return yes(ar)  # no confirmation
+        msg = _("This will checkout {num} guests: {guests}".format(
+            num=num,
+            guests=', '.join([unicode(g.partner) for g in guests])))
+        rv = ar.confirm(yes, msg)
+        for g in guests:
+            checkout_guest(g, ar)
+        
+        return rv
+
+
+@dd.receiver(dd.pre_analyze)
+def my_event_workflows(sender=None, **kw):
+
+    EventStates.override_transition(close_meeting=CloseMeeting)
 
 
 class EventType(EventType):

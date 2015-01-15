@@ -17,11 +17,7 @@ lino_welfare.modlib.pcsw.models
       only_active_coachings_filter
       only_coached_by
       only_coached_on
-      setup_config_menu
-      setup_explorer_menu
-      setup_main_menu
       setup_quicklinks
-      setup_reports_menu
       setup_workflows
    
    

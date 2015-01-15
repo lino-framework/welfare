@@ -11,13 +11,12 @@ lino_welfare.modlib.reception.models
    
       appointable_users
       beware
+      checkout_guest
       create_prompt_event
       func
-      inherited_setup_main_menu
       join_elems
       my_guest_workflows
       naturaltime
-      setup_main_menu
    
    
 
@@ -27,6 +26,7 @@ lino_welfare.modlib.reception.models
 
    .. autosummary::
    
+      AgentsByClient
       AppointmentsByPartner
       BusyVisitors
       ButtonsTable

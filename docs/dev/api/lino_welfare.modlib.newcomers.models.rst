@@ -13,9 +13,6 @@ lino_welfare.modlib.newcomers.models
       chooser
       dtos
       faculty_weight
-      setup_config_menu
-      setup_explorer_menu
-      setup_main_menu
       string_concat
    
    

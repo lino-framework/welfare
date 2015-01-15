@@ -5,6 +5,12 @@ lino_welfare.modlib.contacts
 
    
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      string_concat
+   
    
 
    

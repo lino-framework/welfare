@@ -13,12 +13,11 @@ from lino_welfare import SETUP_INFO
 
 
 class Site(Site):
-
     """
     The base class for all Lino Welfare sites.
     """
     version = SETUP_INFO['version']  # lino_welfare.__version__
-    url = SETUP_INFO['url']  # "http://code.google.com/p/lino-welfare/"
+    url = SETUP_INFO['url']
     uppercase_last_name = True
 
     # use_java = False  # temporarily
