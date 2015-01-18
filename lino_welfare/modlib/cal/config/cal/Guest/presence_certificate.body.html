@@ -27,12 +27,19 @@
 {{ super() }}
 
 <p>
+
+{%- set times = (dd.strftime(obj.waiting_since), 
+dd.strftime(obj.gone_since or this.time)) -%}
+<b>{%- if obj.waiting_since.date() == this.time.date() -%}
 {{tr(en="was present today", 
      de="am heutigen Tage", 
      fr="s'est présenté aujourd'hui")}}
-{% set times = (dd.strftime(obj.waiting_since), 
-dd.strftime(obj.gone_since or this.time)) %}
-<b>{%- if times[1] %}
+{% else %}
+{{tr(en="was present on ", 
+     de="am ", 
+     fr="s'est présenté le")+fdf(obj.waiting_since.date())}}
+{% endif -%}
+{%- if times[1] %}
 {{tr(en="between %s and %s o'clock",
     de="in der Zeit von %s Uhr bis %s Uhr",
     fr="entre %s h et %s h") % times}}

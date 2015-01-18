@@ -13,7 +13,6 @@ Lino-Welfare extension of :mod:`lino.modlib.reception`
 
 """
 
-# must import it so that Lino knows from where to inherit
 from lino.modlib.reception import Plugin
 
 

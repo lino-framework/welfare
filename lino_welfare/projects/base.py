@@ -35,7 +35,6 @@ class Site(Site):
     auto_configure_logger_names = 'djangosite lino lino_welfare'
 
     project_model = 'pcsw.Client'
-    user_model = 'users.User'
 
     # verbose_client_info_message = True
 

@@ -27,8 +27,9 @@ General
 The test database
 =================
 
-Test whether :meth:`get_db_overview_rst 
-<ad.Site.get_db_overview_rst>` returns the expected result:
+Test whether :meth:`get_db_overview_rst
+<lino.core.site_def.Site.get_db_overview_rst>` returns the expected
+result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -75,7 +76,7 @@ Test whether :meth:`get_db_overview_rst
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         127
+ contenttypes.ContentType       contenttypes.ContentTypes       4         126
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78

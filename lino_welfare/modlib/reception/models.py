@@ -269,7 +269,7 @@ them) or (2) a scheduled appointment in the user's calendar.
             return
         if mi.client_state == pcsw.ClientStates.coached:
             for obj in pcsw.Coaching.objects.filter(
-                    client=mi, end_date__isnull=False):
+                    client=mi, end_date__isnull=True):
                 yield obj
         else:
             # yield agents available for open consultation
