@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2014 Luc Saffre
+# Copyright 2002-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """:mod:`lino_welfare` is the main module of Lino Welfare.

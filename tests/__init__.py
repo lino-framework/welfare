@@ -95,3 +95,6 @@ class DocsTests(BaseTestCase):
     def test_jobs(self):
         return self.run_simple_doctests('docs/tested/jobs.rst')
 
+    def test_reception(self):
+        return self.run_simple_doctests('docs/tested/reception.rst')
+

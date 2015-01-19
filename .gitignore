@@ -17,7 +17,7 @@ tmp
 SciTE.session
 default.db
 media
-docs/api
+docs/api/lino_welfare.*
 
 lino_welfare.egg-info
 .build

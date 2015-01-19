@@ -23,6 +23,7 @@ using `manage.py run`.
    newcomers
    households
    aids
+   reception
    misc
 
 

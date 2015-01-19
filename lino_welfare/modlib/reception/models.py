@@ -60,7 +60,7 @@ class FindDateByClientTable(ButtonsTable):
     master = 'pcsw.Client'
 
     # forwarded to ShowSlaveTable:
-    sort_index = 93
+    sort_index = 103
     label = _("Find date with...")
     icon_name = 'calendar'
 
@@ -87,7 +87,7 @@ class FindDateByClientDlg(dd.Action):
     """Create an appointment from a client for this client with a user to
 be selected manually."""
     show_in_bbar = True
-    sort_index = 91
+    sort_index = 101
     icon_name = FindDateByClientTable.icon_name
     label = _("Create appointment")
     parameters = dict(
@@ -113,7 +113,7 @@ be selected manually."""
 class CreateClientVisit(dd.Action):
     """Create a prompt event from a client."""
     show_in_bbar = True
-    sort_index = 91
+    sort_index = 101
     icon_name = 'hourglass'
     label = _("Create visit")
     parameters = dict(
@@ -248,7 +248,7 @@ dd.inject_action(
     'pcsw.Client', find_date=dd.ShowSlaveTable(FindDateByClientTable))
 
 
-class AgentsByClient(dd.VirtualTable):
+class AgentsByClient(pcsw.CoachingsByClient):
     """Shows the users for whom an appointment can be made with this
 client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
@@ -258,7 +258,8 @@ them) or (2) a scheduled appointment in the user's calendar.
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
     column_names = "user coaching_type actions"
-    master = 'pcsw.Client'
+    # master = 'pcsw.Client'
+    master_key = 'client'
     slave_grid_format = 'html'
     # auto_fit_column_widths = True
 
@@ -269,12 +270,13 @@ them) or (2) a scheduled appointment in the user's calendar.
             return
         if mi.client_state == pcsw.ClientStates.coached:
             for obj in pcsw.Coaching.objects.filter(
-                    client=mi, end_date__isnull=True):
+                    client=mi, end_date__isnull=True).order_by('start_date'):
                 yield obj
         else:
             # yield agents available for open consultation
             for u in appointable_users():
-                # create a temporary coaching!
+                # Create a temporary coaching. needed for generating
+                # the action buttons below.
                 yield pcsw.Coaching(
                     client=mi, user=u, type=u.coaching_type,
                     start_date=dd.today())
@@ -287,17 +289,23 @@ them) or (2) a scheduled appointment in the user's calendar.
     def coaching_type(self, obj, ar):
         return unicode(obj.type)
 
-    create_visit = CreateCoachingVisit()
-
     @dd.displayfield(_("Actions"))
     def actions(cls, obj, ar):
         client = ar.master_instance
         if client is None:
             return ''
         elems = []
-        elems += [ar.instance_action_button(
-            obj.create_visit,
-            _("Visit"), icon_name=CreateClientVisit.icon_name), ' ']
+        # client.create_visit is the instance action for
+        # CreateClientVisit
+        ba = pcsw.Clients.get_action_by_name('create_visit')
+        sar = ba.request(action_param_values=dict(user=obj.user))
+        sar.setup_from(ar)
+        elems += [sar.row_action_button_ar(client, _("Visit")), ' ']
+        # elems += [ar.instance_action_button(
+        #     client.create_visit,
+        #     _("Visit"),
+        #     request_kwargs=dict(action_param_values=dict(user=obj.user)),
+        #     icon_name=CreateClientVisit.icon_name), ' ']
 
         if obj.user.profile is not None:
             sar = extensible.CalendarPanel.request(

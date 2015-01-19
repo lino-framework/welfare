@@ -28,6 +28,6 @@ Content
    releases/index
    tested/index
    changes
-   dev/api/index
+   api/index
    tour
    

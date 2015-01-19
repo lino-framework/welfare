@@ -1,9 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""The :xfile:`models.py` module for
-:mod:`lino_welfare.modlib.users`.
+"""Database models for :mod:`lino_welfare.modlib.users`.
 
 """
 
@@ -15,9 +14,8 @@ logger = logging.getLogger(__name__)
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import string_concat
 
-from lino import dd, rt
+from lino import dd
 
 from lino.modlib.users.models import *
 
@@ -25,6 +23,10 @@ cal = dd.resolve_app('cal')
 
 
 class User(User):
+    """The `users.User` model used in Lino Welfare.  We add a few fields
+    to the standard models (:class:`lino.modlib.users.models.User`).
+
+    """
 
     coaching_type = dd.ForeignKey(
         'pcsw.CoachingType',
@@ -38,6 +40,16 @@ class User(User):
         help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
         wurde, wird außer dem Begleiter auch dieser Benutzer \
         benachrichtigt.""")
+
+    newcomer_consultations = models.BooleanField(
+        _("Newcomer consultations"),
+        default=False,
+        help_text="""Accepts prompt consultations for newcomers.""")
+
+    newcomer_appointments = models.BooleanField(
+        _("Newcomer appointments"),
+        default=False,
+        help_text="""Accepts appointments for newcomers.""")
 
     def save(self, *args, **kwargs):
         """For a user with a office_level, create a default calendar.  If
@@ -76,7 +88,7 @@ class User(User):
 
 
 class UserDetail(UserDetail, cal.UserDetailMixin):
-    "Layout of User Detail in Lino Welfare."
+    """Layout of User Detail in Lino Welfare."""
 
     main = "general cal coaching"
 
@@ -89,6 +101,8 @@ class UserDetail(UserDetail, cal.UserDetailMixin):
     newcomer_quota
     coaching_type
     coaching_supervisor
+    newcomer_consultations
+    newcomer_appointments
     newcomers.CompetencesByUser
     """
 
