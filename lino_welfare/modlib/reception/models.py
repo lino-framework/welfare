@@ -37,7 +37,7 @@ MyBusyVisitors.required.update(user_groups='coaching')
 MyGoneVisitors.required.update(user_groups='coaching')
 
 
-def appointable_users():
+def appointable_users(**filterkw):
     """Return a queryset of the users for whom reception clerks can create
     appointments. Candidates must have a :attr:`profile
     <lino.modlib.users.models.User.profile>` and a :attr:`calendar
@@ -45,7 +45,7 @@ def appointable_users():
 
     """
     qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
-    qs = qs.filter(calendar__isnull=False)
+    qs = qs.filter(calendar__isnull=False, **filterkw)
     return qs
 
 
@@ -76,7 +76,7 @@ class FindDateByClientTable(ButtonsTable):
         mi = ar.master_instance  # a Client
         if mi is None:
             return
-        for user in appointable_users():
+        for user in appointable_users(newcomer_appointments=True):
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=mi.pk)
@@ -100,7 +100,7 @@ be selected manually."""
 
     @dd.chooser()
     def user_choices(self):
-        return appointable_users()
+        return appointable_users(newcomer_appointments=True)
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]  # a Client
@@ -126,7 +126,7 @@ class CreateClientVisit(dd.Action):
 
     @dd.chooser()
     def user_choices(self):
-        return appointable_users()
+        return appointable_users(newcomer_consultations=True)
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
@@ -216,12 +216,6 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     auto_fit_column_widths = True
     use_as_default_table = False
     required = dd.Required(user_groups='reception')
-    # detail_layout = ClientDetail()
-    # ~ insert_layout = pcsw.Clients.insert_layout.main # manually inherited
-    #~ editable = False
-    # ~ parameters = None # don't inherit filter parameters
-    # ~ params_layout = None # don't inherit filter parameters
-    #~ params_panel_hidden = True
     create_event = None  # don't inherit this action
     print_eid_content = None
 

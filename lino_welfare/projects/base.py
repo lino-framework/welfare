@@ -70,7 +70,7 @@ class Site(Site):
 
     def setup_choicelists(self):
         """
-        This defines default user profiles for :ref:`welfare`.
+        This defines default user profiles and shortcuts for :ref:`welfare`.
         """
         from django.utils.translation import ugettext_lazy as _
         from lino.modlib.users.choicelists import UserProfiles
@@ -92,6 +92,17 @@ class Site(Site):
         add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ _ U')
         add('900', _("Administrator"),               'A A A A A A A A A U',
             name='admin')
+
+        #
+        # shortcuts
+        #
+
+        from lino.modlib.excerpts.choicelists import Shortcuts
+        Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
+        
+        from lino.modlib.uploads.choicelists import Shortcuts
+        Shortcuts.add_item('pcsw.Client', 'id_document',
+                           _("Identifying document"))
 
     def setup_quicklinks(self, ar, tb):
         #~ tb.add_action(self.modules.contacts.Persons().detail)

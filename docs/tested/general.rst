@@ -28,7 +28,7 @@ The test database
 =================
 
 Test whether :meth:`get_db_overview_rst
-<lino.core.site_def.Site.get_db_overview_rst>` returns the expected
+<lino.core.site.Site.get_db_overview_rst>` returns the expected
 result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
@@ -163,7 +163,7 @@ result:
  uploads.Upload                 uploads.Uploads                 16        6
  uploads.UploadType             uploads.UploadTypes             10        8
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     19        10
+ users.User                     users.Users                     21        10
 ============================== =============================== ========= =======
 <BLANKLINE>
 

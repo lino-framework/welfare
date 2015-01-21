@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2014 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-The :xfile:`models.py` module for :mod:`lino_welfare.modlib.newcomers`.
+Database models for :mod:`lino_welfare.modlib.newcomers`.
 
 Defines the models 
 :class:`Broker`,
@@ -49,10 +49,9 @@ HUNDRED = decimal.Decimal('100.0')
 
 
 class Broker(dd.Model):
+    """A Broker (Vermittler) is an external institution who suggests
+    newcomers.
 
-    """
-    A Broker (Vermittler) is an external institution 
-    who suggests newcomers.
     """
     class Meta:
         verbose_name = _("Broker")
@@ -189,17 +188,6 @@ class MyCompetences(ByUser, CompetencesByUser):
         #~ return kw
 
 
-#~ class NewcomersByFaculty(Newcomers):
-    #~ master_key = 'faculty'
-    #~ column_names = "name_column broker address_column *"
-#~ class NewClientDetail(pcsw.ClientDetail):
-    #~ main = "newcomers " + pcsw.ClientDetail.main
-    #~ newcomers = dd.Panel("""
-    #~ broker:12 faculty:12
-    #~ workflow_buttons
-    #~ newcomers.AvailableCoachesByClient
-    #~ """,label=_(newcomers.MODULE_LABEL))
-#~ print pcsw, dir(pcsw)
 def faculty_weight(user, client):
 
     if not client or not client.faculty:
@@ -220,7 +208,6 @@ def faculty_weight(user, client):
 class NewClients(pcsw.Clients):
     "A list of clients designed for newcomers consultats."
     required = dict(user_groups='newcomers')
-    #~ required_user_groups = ['newcomers']
     label = _("New Clients")
     use_as_default_table = False
 
@@ -228,15 +215,7 @@ class NewClients(pcsw.Clients):
 Liste der neuen Klienten zwecks Zuweisung 
 eines Begleiters oder Ablehnen des Hilfeantrags."""
 
-    #~ detail_layout = NewClientDetail()
-
     column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id aid_type language:10 *"
-
-    #~ @classmethod
-    #~ def param_defaults(self,ar,**kw):
-        #~ kw = super(NewClients,self).param_defaults(ar,**kw)
-        #~ kw.update(new_since=amonthago())
-        #~ return kw
 
     parameters = dict(
         also_refused=models.BooleanField(_("Also refused clients"),
@@ -497,8 +476,7 @@ class AvailableCoachesByClient(AvailableCoaches):
 Newcomers consultants.
 
     """
-    #~ master_key = 'for_client'
-    master = pcsw.Client
+    master = 'pcsw.Client'
     label = _("Available Coaches")
 
     assign_coach = AssignCoach()

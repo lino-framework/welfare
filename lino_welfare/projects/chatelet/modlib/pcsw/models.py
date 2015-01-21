@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino import dd
 
 from lino_welfare.modlib.pcsw.models import *
 
@@ -101,14 +101,12 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Aids"))
 
     newcomers_left = dd.Panel("""
-    workflow_buttons
+    workflow_buttons id_document
     broker:12
     faculty:12
     # refusal_reason
     """, required=dict(user_groups='newcomers'))
 
-    #~ coaching_left = """
-    #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject

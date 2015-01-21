@@ -1,25 +1,22 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
-The `models` module for :mod:`lino_welfare.modlib.uploads`.
+Database model overrides for :mod:`lino_welfare.modlib.uploads`.
 
 """
 
 from __future__ import unicode_literals
 
-import datetime
-
 from django.utils.translation import ugettext_lazy as _
-# from django.utils.translation import string_concat
 
 from lino import dd, rt
 
 from lino.modlib.uploads.models import *
+from lino.modlib.contacts.mixins import ContactRelated
 
 cal = dd.resolve_app('cal')
-contacts = dd.resolve_app('contacts')
 
 
 # add = UploadAreas.add_item
@@ -46,7 +43,7 @@ class UploadType(UploadType):
 class UploadTypes(UploadTypes):
 
     detail_layout = """
-    id upload_area
+    id upload_area shortcut
     name
     warn_expiry_value warn_expiry_unit wanted max_number
     # company contact_person contact_role
@@ -61,7 +58,7 @@ class UploadTypes(UploadTypes):
     """
 
 
-class Upload(Upload, mixins.ProjectRelated, contacts.ContactRelated):
+class Upload(Upload, mixins.ProjectRelated, ContactRelated):
     """Extends the library model by adding:
 
 - ContactRelated

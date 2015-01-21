@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""The :xfile:`models.py` for :mod:`lino_welfare.modlib.pcsw`.
+"""Database models for :mod:`lino_welfare.modlib.pcsw`.
 
 """
 
@@ -164,7 +164,8 @@ Es existiert keine *aktive* Begleitung.
 
 
 class RefusalReasons(dd.ChoiceList):
-    pass
+    verbose_name = _("Refusal reason")
+    verbose_name_plural = _("Refusal reasons")
 
 add = RefusalReasons.add_item
 add('10', _("Information request (No coaching needed)"))
@@ -218,9 +219,7 @@ class Client(contacts.Person,
              # dd.BasePrintable,
              beid.BeIdCardHolder):
 
-    """
-
-    Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
+    """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino.modlib.beid.models.BeIdCardHolder`.
 
     A :class:`Client` is a polymorphic specialization of :class:`Person`.
@@ -231,9 +230,16 @@ class Client(contacts.Person,
     (Curriculum Vitaes).
 
     This field is an excerpts shortcut
-    (:class:`ml.excerpts.Shortcuts`) and works only if the database
-    has an :class:`ExcerptType <ml.excerpts.ExcerptType>` whose
-    `shortcut` points to it.
+    (:class:`lino.modlib.excerpts.models.Shortcuts`) and works only if
+    the database has an :class:`ExcerptType
+    <lino.modlib.excerpts.models.ExcerptType>` whose `shortcut` points
+    to it.
+
+    .. attribute:: id_document
+
+    A virtual field displaying a group of shortcut links for managing
+    the "identifying document", i.e. an uploaded document which has
+    been used as alternative to the eID card.
 
     .. attribute:: group
 
@@ -253,8 +259,6 @@ class Client(contacts.Person,
     .. attribute:: client_contact_type
     
     Pointer to :class:`PersonGroup`.
-
-
 
     """
     class Meta:
@@ -734,10 +738,6 @@ class Client(contacts.Person,
         if None in elems:
             raise Exception("20140513 None in %r" % elems)
         return E.div(*elems)
-
-
-from lino.modlib.excerpts.mixins import Shortcuts
-Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
 
 class ClientDetail(dd.FormLayout):

@@ -94,11 +94,12 @@ class ClientDetail(dd.FormLayout):
     pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
     """, label=_("Coaching"))
 
-    #~ suche = dd.Panel("""
-    #~ is_seeking unemployed_since work_permit_suspended_until
-    # ~ # job_office_contact job_agents
-    #~ pcsw.ExclusionsByClient:50x3
-    #~ """,label = _("Job search"))
+    newcomers_left = dd.Panel("""
+    workflow_buttons id_document
+    broker:12
+    faculty:12
+    refusal_reason
+    """, required=dict(user_groups='newcomers'))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -134,13 +135,6 @@ class ClientDetail(dd.FormLayout):
     income_kg   income_rente
     income_misc
     """
-
-    newcomers_left = dd.Panel("""
-    workflow_buttons
-    broker:12
-    faculty:12
-    refusal_reason
-    """, required=dict(user_groups='newcomers'))
 
     #~ coaching_left = """
     #~ """
