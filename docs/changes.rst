@@ -34,7 +34,7 @@ Version 1.1.14 (released 2014-06-24)
 Version 1.1.13 released (2014-06-20)
 ====================================
 
-- Configuring :mod:`ml.excerpts` is getting user-friendly.
+- Configuring :mod:`lino.modlib.excerpts` is getting user-friendly.
 
 
 Version 1.1.12 (released 2014-05-27)
