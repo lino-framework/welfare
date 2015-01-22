@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -222,73 +222,6 @@ def objects():
     yield uploadType(wanted=True, **dd.str2kw('name', _("Diploma")))
 
     yield settings.SITE.site_config
-
-    #~ from lino.modlib.cal.utils import DurationUnits
-    #~ from lino.modlib.cal.models import EventType
-    #~ from lino.modlib.cal.models import Calendar
-    #~ yield Calendar(**babel_values('name',
-          #~ de=u"Erstgespräch",
-          #~ fr=u"Première rencontre",
-          #~ en=u"First meeting",
-      #~ ))
-    #~ yield et
-    #~ calendar = Instantiator('cal.Calendar').build
-    #~ et = calendar(invite_client=True,**babel_values('name',
-          #~ de="Privat",
-          #~ fr="Privé",
-          #~ en="Private",
-          #~ ))
-    #~ yield et
-    #~ et = Calendar(**babel_values('name',
-      #~ de=u'Auswertungen',
-      #~ fr=u"Evaluations",
-      #~ en=u"Evaluations",
-      #~ ))
-    #~ def create_dsbe_aidtype(id,name,name_fr):
-        #~ return AidType(id=id,name=name,name_fr=name_fr)
-    # aidtype = Instantiator('pcsw.AidType').build
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Eingliederungseinkommen Kat 1 (Zusammenlebend)',
-    #     fr=u"Revenu d'intégration cat. 1 (couple)",
-    #     en=u"Revenu d'intégration cat. 1 (couple)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Eingliederungseinkommen Kat 2 (Alleinlebend)',
-    #     fr=u"Revenu d'intégration cat. 2 (célibataire)",
-    #     en=u"Revenu d'intégration cat. 2 (célibataire)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Eingliederungseinkommen Kat 3 (Familie zu Lasten)',
-    #     fr=u"Revenu d'intégration cat. 3 (famille à charge)",
-    #     en=u"Revenu d'intégration cat. 3 (famille à charge)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Ausl\xe4nderbeihilfe Kat 1 (Zusammenlebend)',
-    #     fr=u"Aide aux immigrants cat. 1 (couple)",
-    #     en=u"Aide aux immigrants cat. 1 (couple)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Ausl\xe4nderbeihilfe Kat 2 (Alleinlebend)',
-    #     fr=u"Aide aux immigrants cat. 2 (célibataire)",
-    #     en=u"Aide aux immigrants cat. 2 (célibataire)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Ausl\xe4nderbeihilfe Kat 3 (Familie zu Lasten)',
-    #     fr=u"Aide aux immigrants cat. 3 (famille à charge)",
-    #     en=u"Aide aux immigrants cat. 3 (famille à charge)",
-    # ))
-    # yield aidtype(**babel_values(
-    #     'name',
-    #     de=u'Sonstige Sozialhilfe',
-    #     fr=u"Autre aide sociale",
-    #     en=u"Autre aide sociale",
-    # ))
 
     I = Instantiator(
         'contenttypes.HelpText', 'content_type field help_text').build

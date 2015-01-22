@@ -19,6 +19,8 @@ from django.db.models import Q
 
 from lino import dd, rt
 
+from lino.utils.xmlgen.html import E
+
 from lino.modlib.cal.models import *
 
 from lino.modlib.cal.workflows import take, feedback
@@ -29,7 +31,7 @@ EventStates.published.text = _("Notified")
 
 
 class CloseMeeting(feedback.CloseMeeting):
-    """Close the meeting (mark it as took place") and check out all
+    """Close the meeting (mark it as "took place") and check out all
 guests. Ask confirmation naming the guests who need to check out.
 
     """
@@ -52,7 +54,7 @@ guests. Ask confirmation naming the guests who need to check out.
         rv = ar.confirm(yes, msg)
         for g in guests:
             checkout_guest(g, ar)
-        
+
         return rv
 
 
@@ -60,6 +62,42 @@ guests. Ask confirmation naming the guests who need to check out.
 def my_event_workflows(sender=None, **kw):
 
     EventStates.override_transition(close_meeting=CloseMeeting)
+
+
+def you_are_busy_messages(ar):
+    """Yield :message:`You are busy in XXX` messages for the welcome
+page."""
+
+    events = rt.modules.cal.Event.objects.filter(
+        user=ar.get_user(), guest__state=GuestStates.busy).distinct()
+    if events.count() > 0:
+        chunks = [unicode(_("You are busy in "))]
+        sep = None
+        for evt in events:
+            if sep:
+                chunks.append(sep)
+            ctx = dict(id=evt.id)
+            if evt.event_type is None:
+                ctx.update(label=unicode(evt))
+            else:
+                ctx.update(label=evt.event_type.event_label)
+
+            if evt.project is None:
+                txt = _("{label} #{id}").format(**ctx)
+            else:
+                ctx.update(project=unicode(evt.project))
+                txt = _("{label} with {project}").format(**ctx)
+            chunks.append(ar.obj2html(evt, txt))
+            chunks += [
+                ' (',
+                ar.instance_action_button(evt.close_meeting),
+                ')']
+            sep = ', '
+        chunks.append('. ')
+        yield E.span(*chunks)
+            
+
+dd.add_welcome_handler(you_are_busy_messages)
 
 
 class EventType(EventType):

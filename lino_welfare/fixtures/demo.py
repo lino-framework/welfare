@@ -367,14 +367,16 @@ def objects():
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
 
-    obj = calendar(
-        invite_client=False, is_appointment=False, **dd.babelkw(
-            'name',
-            de="Visiten (ohne Termin)",
-            fr="Visites (sans rendez-vous)",
-            en="Prompt events",
-            et="Külaline",
-        ))
+    kw = dict(invite_client=False, is_appointment=False)
+    kw.update(dd.str2kw('event_label', _("Consultation")))
+    kw.update(dd.babelkw(
+        'name',
+        de="Visiten (ohne Verabredung)",
+        fr="Consultations sans rendez-vous",
+        en="Live consultation",
+        et="Külaline",
+    ))
+    obj = calendar(**kw)
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)
 
