@@ -281,10 +281,10 @@ def objects():
         eval_guestrole=COLLEAGUE,
         **dd.babelkw(
             'name',
-            de="ASD (Allgemeiner Sozialdienst)",
-            nl="ASD (Algemene Sociale Dienst)",
-            fr="SSG (Service social général)",
-            en="GSS (General Social Service)",
+            de="ASD",  # (Allgemeiner Sozialdienst)
+            nl="ASD",  # (Algemene Sociale Dienst)
+            fr="SSG",  # (Service social général)
+            en="General",  # (General Social Service)
         ))
     yield ASD
 
@@ -293,6 +293,9 @@ def objects():
     judith.coaching_type_id = isip.COACHINGTYPE_ASD
     judith.save()
 
+    # We use only abbreviated names in `CoachingType.name` because the
+    # users usually know these abbrevs.
+
     DSBE = pcsw.CoachingType(
         id=isip.COACHINGTYPE_DSBE,
         does_gss=False,
@@ -300,9 +303,9 @@ def objects():
         eval_guestrole=COLLEAGUE,
         **dd.babelkw(
             'name',
-            de="DSBE (Dienst für Sozial-Berufliche Eingliederung)",
-            fr="Service intégration",
-            en="Integration service",
+            de="DSBE",  # (Dienst für Sozial-Berufliche Eingliederung)
+            fr="SI",  # Service intégration
+            en="Integ",  # Integration service
         ))
 
     yield DSBE
@@ -338,25 +341,15 @@ def objects():
     yield guest_role(**dd.babelkw('name',
                                de=u"Vorsitzender",
                                fr=u"Président",
-                               en=u"Presider",
+                               en=u"Chairman",
                                et=u"Eesistuja",
                                ))
     yield guest_role(**dd.babelkw('name',
-                               de=u"Protokollführer",
+                               de=u"Schriftführer",
                                fr=u"Greffier",
                                en=u"Reporter",
                                et=u"Sekretär",
                                ))
-
-    # note_nature = Instantiator('notes.EventType').build
-    # obj = note_nature(**dd.babelkw('name',
-    #                             de="Bescheinigung",
-    #                             fr="Attestation",
-    #                             en="Attestation",
-    #                             et="Tõend",
-    #                             ))
-    # yield obj
-    # settings.SITE.site_config.update(attestation_note_nature=obj)
 
     calendar = Instantiator('cal.EventType').build
     kw = dd.babelkw('name',
@@ -381,7 +374,7 @@ def objects():
         'name',
         de="Visiten (ohne Verabredung)",
         fr="Consultations sans rendez-vous",
-        en="Live consultation",
+        en="Prompt consultation",
         et="Külaline",
     ))
     obj = calendar(**kw)

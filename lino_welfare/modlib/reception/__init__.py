@@ -2,9 +2,9 @@
 # Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-Lino-Welfare extension of :mod:`lino.modlib.reception`
+"""Lino-Welfare extension of :mod:`lino.modlib.reception`.
 
+See also the tested document about :doc:`/tested/reception`.
 
 .. autosummary::
    :toctree:

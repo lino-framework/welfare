@@ -1,8 +1,13 @@
 .. _welfare.tested.integ:
 
+===================
 Integration Service
 ===================
 
+A technical tour into the :mod:`lino_welfare.modlib.integ` module.
+
+.. contents::
+   :depth: 2
 
 .. include:: /include/tested.rst
 
@@ -126,14 +131,13 @@ This contract was created by Alicia (without any coaching), and on
 alicia
 
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
-... #doctest: -SKIP
-==================== ======= ================= ========= ============================== =======================
- Coached from         until   Coach             Primary   Coaching type                  Reason of termination
--------------------- ------- ----------------- --------- ------------------------------ -----------------------
- 10/11/13                     Mélanie Mélard    Yes       GSS (General Social Service)
- 10/14/13                     Caroline Carnol   No        Integration service
+==================== ======= ================= ========= =============== =======================
+ Coached from         until   Coach             Primary   Coaching type   Reason of termination
+-------------------- ------- ----------------- --------- --------------- -----------------------
+ 10/11/13                     Mélanie Mélard    Yes       General
+ 10/14/13                     Caroline Carnol   No        Integ
  **Total (2 rows)**                             **1**
-==================== ======= ================= ========= ============================== =======================
+==================== ======= ================= ========= =============== =======================
 <BLANKLINE>
 
 Lino attributes the automatic evaluation

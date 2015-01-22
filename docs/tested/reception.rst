@@ -4,7 +4,12 @@
 Reception
 ===================
 
+A technical tour into the :mod:`lino_welfare.modlib.reception` module.
+
 .. include:: /include/tested.rst
+
+.. contents::
+   :depth: 2
 
 .. How to test only this document:
 
@@ -89,16 +94,13 @@ EVERS Eberhart (127)
 >>> print(obj.client_state)
 coached
 >>> ses.show(reception.AgentsByClient, obj, language='en')
-================= =================================================== =========================
- Coach             Coaching type                                       Actions
------------------ --------------------------------------------------- -------------------------
- Hubert Huppertz   ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
- Caroline Carnol   DSBE (Dienst für Sozial-Berufliche Eingliederung)   **Visit** **Find date**
-================= =================================================== =========================
+================= =============== =========================
+ Coach             Coaching type   Actions
+----------------- --------------- -------------------------
+ Hubert Huppertz   ASD             **Visit** **Find date**
+ Caroline Carnol   DSBE            **Visit** **Find date**
+================= =============== =========================
 <BLANKLINE>
-
-TODO: use only abbreviated names in `CoachingType.name` because the
-users usually know these abbrevs.
 
 Client 257 is not coached but a `ClientStates.newcomer`. So
 AgentsByClient shows all users who care for newcomers (i.e. who have
@@ -111,14 +113,14 @@ BRAUN Bruno (257)
 >>> print(obj.client_state)
 newcomer
 >>> ses.show(reception.AgentsByClient, obj, language='en')
-================= =================================================== =========================
- Coach             Coaching type                                       Actions
------------------ --------------------------------------------------- -------------------------
- Alicia Allmanns   DSBE (Dienst für Sozial-Berufliche Eingliederung)   **Visit** **Find date**
- Caroline Carnol   ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
- Hubert Huppertz   None                                                **Visit**
- Judith Jousten    ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
-================= =================================================== =========================
+================= =============== =========================
+ Coach             Coaching type   Actions
+----------------- --------------- -------------------------
+ Alicia Allmanns   DSBE            **Visit** **Find date**
+ Caroline Carnol   ASD             **Visit** **Find date**
+ Hubert Huppertz   None            **Visit**
+ Judith Jousten    ASD             **Visit** **Find date**
+================= =============== =========================
 <BLANKLINE>
 
 TODO: For Hubert the "Service" column says "None" because his
