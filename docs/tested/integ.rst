@@ -33,9 +33,9 @@ UsersWithClients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns      2            2           1        1       1         3                 7                7
- Hubert Huppertz      3            5           6        3       2         11                19               19
- Mélanie Mélard       4            1           4        5       4         11                18               18
+ Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **7**            **7**
+ Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **19**           **19**
+ Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **18**           **18**
  **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **44**           **44**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
@@ -260,7 +260,7 @@ BASTIAENSEN Laurent (117)
 ================= =============== ================= =============== =================== =========== =============== ===================
  Name              Arbeitsablauf   Komplette Akten   Neue Klienten   Quote Erstempfang   Belastung   Mehrbelastung   Mehrbelastung (%)
 ----------------- --------------- ----------------- --------------- ------------------- ----------- --------------- -------------------
- Alicia Allmanns                   12                                100                             6,              100,00
+ Alicia Allmanns                   **12**                            100                             6,              100,00
 ================= =============== ================= =============== =================== =========== =============== ===================
 <BLANKLINE>
 
@@ -328,9 +328,12 @@ Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diplom
 >>> rt.modules.uploads.UploadsByClient._upload_area
 <UploadAreas.general:90>
 
+The first link would run the insert action on UploadsByClient, with
+the owner set to this client
+
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })\">BRECHT Bernd (177)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (177)" }, "base_params": { "mt": ..., "mk": 177, "type_id": 1 } })
+javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })\">BRECHT Bernd (177)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (177)" }, "param_values": { "pupload_type": null, "puser": null, "end_date": null, "pupload_typeHidden": null, "puserHidden": null, "start_date": null }, "base_params": { "mt": ..., "mk": 177, "type_id": 1 } })
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS

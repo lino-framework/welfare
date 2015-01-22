@@ -57,10 +57,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         shortcut=Shortcuts.cvs_emitted,
         content_type=ContentType.objects.get_for_model(
             dd.resolve_model('pcsw.Client')),
-        **dd.babelkw('name',
-                  de="Lebenslauf",
-                  fr="Curriculum vitae",
-                  en="Curriculum vitae"))
+        **dd.str2kw('name', "Curriculum vitae"))
 
     yield attType(
         template='eid-content.odt',
@@ -182,7 +179,6 @@ def objects():
     UploadAreas = rt.modules.uploads.UploadAreas
     uploadType = Instantiator(
         'uploads.UploadType',
-        # upload_area=UploadAreas.job_search, 
         max_number=1, wanted=True).build
     yield uploadType(**dd.babelkw(
         'name',
@@ -217,9 +213,14 @@ def objects():
             fr="Certificat de handicap",
             en="Handicap certificate"))
 
+    from lino.modlib.uploads.choicelists import Shortcuts
+
     uploadType = Instantiator('uploads.UploadType').build
-    # upload_area=UploadAreas.career
     yield uploadType(wanted=True, **dd.str2kw('name', _("Diploma")))
+
+    yield uploadType(
+        shortcut=Shortcuts.id_document,
+        **dd.str2kw('name', _("Identifying document")))
 
     yield settings.SITE.site_config
 

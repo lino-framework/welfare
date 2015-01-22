@@ -56,7 +56,7 @@ result:
  cal.Calendar                   cal.Calendars                   7         10
  cal.Event                      cal.OneEvent                    24        597
  cal.EventType                  cal.EventTypes                  19        7
- cal.Guest                      cal.Guests                      9         1042
+ cal.Guest                      cal.Guests                      9         616
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
@@ -161,7 +161,7 @@ result:
  system.SiteConfig              system.SiteConfigs              30        1
  system.TextFieldTemplate       system.TextFieldTemplates       5         2
  uploads.Upload                 uploads.Uploads                 16        6
- uploads.UploadType             uploads.UploadTypes             10        8
+ uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        10
 ============================== =============================== ========= =======
@@ -174,112 +174,308 @@ List of detail layouts
 
 The following table lists information about all detail layouts.
 
-
 >>> ses = rt.login('rolf') 
 >>> ses.show('about.DetailLayouts')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-=============================== ===================================== ===================================================================================
- Datasource                      Viewable for                          Fields
-------------------------------- ------------------------------------- -----------------------------------------------------------------------------------
- about.About                     all                                   server_status
- about.Models                    all except anonymous                  app name docstring rows
- accounts.Accounts               admin                                 ref name name_fr ... periods default_amount
- accounts.Charts                 admin                                 id name name_fr name_de name_nl
- accounts.Groups                 admin                                 ref name name_fr ... account_type id
- active_job_search.Proofs        all except anonymous                  date client company ... response remarks
- addresses.Addresses             admin                                 country city zip_code ... data_source partner
- aids.AidTypes                   admin                                 id short_name confirmation_type ... contact_role pharmacy_type
- aids.Categories                 admin                                 id name name_fr name_de name_nl
- aids.Grantings                  admin                                 id client user ... end_date custom_actions
- aids.IncomeConfirmations        all except anonymous                  client user signer ... id remark
- aids.RefundConfirmations        all except anonymous                  id client user ... printed remark
- aids.SimpleConfirmations        all except anonymous                  id client user ... printed remark
- boards.Boards                   admin                                 id name name_fr name_de name_nl
- cal.Calendars                   110, 410, admin                       name name_fr name_de ... id description
- cal.EventTypes                  110, 410, admin                       name name_fr name_de ... email_template attach_to_email
- cal.Events                      110, 410, admin                       event_type summary project ... modified state
- cal.GuestRoles                  admin                                 id name name_fr name_de name_nl
- cal.Guests                      admin                                 event partner role ... busy_since gone_since
- cal.RecurrentEvents             110, 410, admin                       name name_fr name_de ... sunday description
- cal.Rooms                       110, 410, admin                       id name name_fr name_de name_nl
- cal.Tasks                       110, 410, admin                       start_date due_date id ... modified description
- cbss.IdentifyPersonRequests     all except anonymous, 210, 300        id person user ... info_messages debug_messages
- cbss.ManageAccessRequests       all except anonymous, 210, 300        id person user ... info_messages debug_messages
- cbss.RetrieveTIGroupsRequests   all except anonymous                  id person user ... info_messages debug_messages
- changes.Changes                 admin                                 time user type ... id diff
- contacts.Companies              all except anonymous                  overview prefix name ... created modified
- contacts.Partners               all except anonymous                  overview id language ... created modified
- contacts.Persons                all except anonymous                  overview title first_name ... created modified
- contenttypes.ContentTypes       admin                                 id name app_label model base_classes
- countries.Countries             all except anonymous                  isocode name name_fr ... short_code inscode
- countries.Places                admin                                 name name_fr name_de ... type id
- courses.CourseContents          110, 410, admin                       id name
- courses.CourseOffers            all except anonymous, 200, 210, 300   id title content ... guest_role description
- courses.CourseProviders         all except anonymous, 200, 210, 300   overview prefix name ... gsm fax
- courses.CourseRequests          110, 410, admin                       date_submitted person content ... remark UploadsByController
- courses.Courses                 admin                                 id start_date offer title remark
- cv.Durations                    110, admin                            id name name_fr name_de name_nl
- cv.EducationLevels              110, admin                            name name_fr name_de name_nl
- cv.Experiences                  110, admin                            person start_date end_date ... is_training remarks
- cv.Functions                    110, admin                            id name name_fr ... sector remark
- cv.Regimes                      110, admin                            id name name_fr name_de name_nl
- cv.Sectors                      110, admin                            id name name_fr ... name_nl remark
- cv.Statuses                     110, admin                            id name name_fr name_de name_nl
- cv.Studies                      110, admin                            person start_date end_date ... city remarks
- cv.StudyTypes                   admin                                 name name_fr name_de ... education_level id
- cv.TrainingTypes                admin                                 name name_fr name_de name_nl id
- cv.Trainings                    110, admin                            person start_date end_date ... city remarks
- debts.Budgets                   admin                                 date partner id ... data_box summary_box
- excerpts.ExcerptTypes           admin                                 id name name_fr ... backward_compat attach_to_email
- excerpts.Excerpts               admin                                 id excerpt_type project ... build_time body_template_content
- households.Households           all except anonymous                  type prefix name id
- households.HouseholdsByType     all except anonymous                  type name language ... url remarks
- households.Types                admin                                 name name_fr name_de name_nl
- humanlinks.Links                admin                                 parent child type
- integ.ActivityReport            100, 110, admin                       body
- isip.ContractEndings            110, admin                            name use_in_isip use_in_jobs is_success needs_date_ended
- isip.ContractPartners           all except anonymous                  company contact_person contact_role duties_company
- isip.ContractTypes              110, admin                            id ref exam_policy ... name_nl full_name
- isip.Contracts                  100, 110, admin                       id client type ... duties_dsbe duties_person
- isip.ExamPolicies               110, admin                            id name name_fr ... saturday sunday
- jobs.ContractTypes              110, admin                            id name name_fr ... name_nl ref
- jobs.Contracts                  100, 110, admin                       id client user ... ending responsibilities
- jobs.JobProviders               100, 110, admin                       overview prefix name ... gsm fax
- jobs.JobTypes                   110, admin                            id name is_social
- jobs.Jobs                       100, 110, admin                       name provider contract_type ... hourly_rate remark
- jobs.JobsOverview               100, 110, admin                       preview
- jobs.Offers                     100, 110, admin                       name provider sector ... start_date remark
- jobs.OldJobsOverview            100, 110, admin                       body
- jobs.Schedules                  110, admin                            id name name_fr name_de name_nl
- languages.Languages             all except anonymous                  id iso2 name ... name_de name_nl
- newcomers.Faculties             admin                                 id name name_fr ... name_nl weight
- notes.EventTypes                admin                                 id name name_fr ... name_nl remark
- notes.NoteTypes                 admin                                 id name name_fr ... attach_to_email remark
- notes.Notes                    all except anonymous                  date time event_type ... body UploadsByController
- outbox.Mails                    110, 410, admin                       subject project date ... UploadsByController body
- pcsw.ClientContactTypes         admin                                 id name name_fr name_de name_nl
- pcsw.Clients                    all except anonymous                  overview gender id ... modified remarks
- pcsw.CoachingEndings            110, admin                            id name name_fr ... name_nl seqno
- polls.ChoiceSets                all except anonymous                  name name_fr name_de name_nl
- polls.Polls                     all except anonymous                  title state details ... default_choiceset default_multiple_choices
- polls.Responses                 all except anonymous                  user poll state ... modified remark
- projects.Projects               admin                                 id client project_type ... remark result
- properties.PropGroups           admin                                 id name name_fr name_de name_nl
- properties.PropTypes            admin                                 id name name_fr ... choicelist default_value
- properties.Properties           admin                                 id group type ... name_de name_nl
- reception.BusyVisitors          all except anonymous, 210             event client role ... remark workflow_buttons
- reception.GoneVisitors          all except anonymous, 210             event client role ... remark workflow_buttons
- reception.MyWaitingVisitors     all except anonymous, 210             event client role ... remark workflow_buttons
- reception.WaitingVisitors       all except anonymous, 210             event client role ... remark workflow_buttons
- system.SiteConfigs              admin                                 site_company next_partner_id job_office ... cbss_http_username cbss_http_password
- system.TextFieldTemplates       admin                                 id name user description text
- uploads.AreaUploads             all except anonymous                  file user upload_area ... description owner
- uploads.MyUploads               all except anonymous                  file user upload_area ... description owner
- uploads.UploadTypes             admin                                 id upload_area name ... wanted max_number
- uploads.Uploads                 admin                                 user project id ... owner remark
- uploads.UploadsByType           admin                                 file user upload_area ... description owner
- users.Users                     admin                                 username profile partner ... coaching_type coaching_supervisor
-=============================== ===================================== ===================================================================================
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| Datasource                    | Viewable for                        | Fields                                                       |
++===============================+=====================================+==============================================================+
+| about.About                   | all                                 | server_status                                                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| about.Models                  | all except anonymous                | app name docstring rows                                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| accounts.Accounts             | admin                               | ref name name_fr name_de name_nl group type                  |
+|                               |                                     | required_for_household required_for_person periods           |
+|                               |                                     | default_amount                                               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| accounts.Charts               | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| accounts.Groups               | admin                               | ref name name_fr name_de name_nl account_type id             |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| active_job_search.Proofs      | all except anonymous                | date client company id spontaneous response remarks          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| addresses.Addresses           | admin                               | country city zip_code addr1 street street_no street_box      |
+|                               |                                     | addr2 address_type remark data_source partner                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.AidTypes                 | admin                               | id short_name confirmation_type name name_fr name_de name_nl |
+|                               |                                     | excerpt_title excerpt_title_fr excerpt_title_de              |
+|                               |                                     | excerpt_title_nl print_directly is_integ_duty is_urgent      |
+|                               |                                     | confirmed_by_primary_coach board body_template company       |
+|                               |                                     | contact_person contact_role pharmacy_type                    |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.Categories               | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.Grantings                | admin                               | id client user signer workflow_buttons board decision_date   |
+|                               |                                     | aid_type start_date end_date custom_actions                  |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.IncomeConfirmations      | all except anonymous                | client user signer workflow_buttons printed company          |
+|                               |                                     | contact_person granting start_date end_date category amount  |
+|                               |                                     | id remark                                                    |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.RefundConfirmations      | all except anonymous                | id client user signer workflow_buttons granting start_date   |
+|                               |                                     | end_date doctor_type doctor pharmacy company contact_person  |
+|                               |                                     | printed remark                                               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| aids.SimpleConfirmations      | all except anonymous                | id client user signer workflow_buttons granting start_date   |
+|                               |                                     | end_date company contact_person printed remark               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| boards.Boards                 | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.Calendars                 | 110, 410, admin                     | name name_fr name_de name_nl color id description            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.EventTypes                | 110, 410, admin                     | name name_fr name_de name_nl event_label event_label_fr      |
+|                               |                                     | event_label_de event_label_nl max_conflicting all_rooms      |
+|                               |                                     | locks_user id invite_client is_appointment email_template    |
+|                               |                                     | attach_to_email                                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.Events                    | 110, 410, admin                     | event_type summary project start_date start_time end_date    |
+|                               |                                     | end_time user assigned_to room priority access_class         |
+|                               |                                     | transparent owner workflow_buttons description id created    |
+|                               |                                     | modified state                                               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.GuestRoles                | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.Guests                    | admin                               | event partner role state remark workflow_buttons             |
+|                               |                                     | waiting_since busy_since gone_since                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.RecurrentEvents           | 110, 410, admin                     | name name_fr name_de name_nl id user event_type start_date   |
+|                               |                                     | start_time end_date end_time every_unit every max_events     |
+|                               |                                     | monday tuesday wednesday thursday friday saturday sunday     |
+|                               |                                     | description                                                  |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.Rooms                     | 110, 410, admin                     | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cal.Tasks                     | 110, 410, admin                     | start_date due_date id workflow_buttons summary project user |
+|                               |                                     | delegated owner created modified description                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cbss.IdentifyPersonRequests   | all except anonymous, 210, 300      | id person user environment sent status ticket national_id    |
+|                               |                                     | first_name middle_name last_name birth_date tolerance gender |
+|                               |                                     | response_xml info_messages debug_messages                    |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cbss.ManageAccessRequests     | all except anonymous, 210, 300      | id person user environment sent status ticket action         |
+|                               |                                     | start_date end_date purpose query_register national_id       |
+|                               |                                     | sis_card_no id_card_no first_name last_name birth_date       |
+|                               |                                     | result response_xml info_messages debug_messages             |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cbss.RetrieveTIGroupsRequests | all except anonymous                | id person user environment sent status ticket national_id    |
+|                               |                                     | language history response_xml info_messages debug_messages   |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| changes.Changes               | admin                               | time user type master object id diff                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| contacts.Companies            | all except anonymous                | overview prefix name type vat_id client_contact_type url     |
+|                               |                                     | email phone gsm fax remarks id language activity             |
+|                               |                                     | is_courseprovider is_jobprovider is_obsolete created         |
+|                               |                                     | modified                                                     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| contacts.Partners             | all except anonymous                | overview id language activity client_contact_type url email  |
+|                               |                                     | phone gsm fax country region city zip_code addr1             |
+|                               |                                     | street_prefix street street_no street_box addr2 remarks      |
+|                               |                                     | is_obsolete is_person is_company is_household created        |
+|                               |                                     | modified                                                     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| contacts.Persons              | all except anonymous                | overview title first_name middle_name last_name gender       |
+|                               |                                     | birth_date age id language email phone gsm fax               |
+|                               |                                     | MembersByPerson LinksByHuman remarks activity url            |
+|                               |                                     | client_contact_type is_obsolete is_client created modified   |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| contenttypes.ContentTypes     | admin                               | id name app_label model base_classes                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| countries.Countries           | all except anonymous                | isocode name name_fr name_de name_nl short_code inscode      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| countries.Places              | admin                               | name name_fr name_de name_nl country inscode zip_code parent |
+|                               |                                     | type id                                                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| courses.CourseContents        | 110, 410, admin                     | id name                                                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| courses.CourseOffers          | all except anonymous, 200, 210, 300 | id title content provider guest_role description             |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| courses.CourseProviders       | all except anonymous, 200, 210, 300 | overview prefix name type vat_id client_contact_type url     |
+|                               |                                     | email phone gsm fax                                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| courses.CourseRequests        | 110, 410, admin                     | date_submitted person content offer urgent course state      |
+|                               |                                     | date_ended id remark UploadsByController                     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| courses.Courses               | admin                               | id start_date offer title remark                             |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Durations                  | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.EducationLevels            | 110, admin                          | name name_fr name_de name_nl                                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Experiences                | 110, admin                          | person start_date end_date termination_reason company        |
+|                               |                                     | country city sector function title status duration regime    |
+|                               |                                     | is_training remarks                                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Functions                  | 110, admin                          | id name name_fr name_de name_nl sector remark                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Regimes                    | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Sectors                    | 110, admin                          | id name name_fr name_de name_nl remark                       |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Statuses                   | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Studies                    | 110, admin                          | person start_date end_date type content education_level      |
+|                               |                                     | state school country city remarks                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.StudyTypes                 | admin                               | name name_fr name_de name_nl education_level id              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.TrainingTypes              | admin                               | name name_fr name_de name_nl id                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| cv.Trainings                  | 110, admin                          | person start_date end_date type state certificates school    |
+|                               |                                     | country city remarks                                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| debts.Budgets                 | admin                               | date partner id user intro ResultByBudget DebtsByBudget      |
+|                               |                                     | BailiffDebtsByBudget conclusion dist_amount printed          |
+|                               |                                     | total_debt include_yearly_incomes print_empty_rows           |
+|                               |                                     | print_todos DistByBudget data_box summary_box                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| excerpts.ExcerptTypes         | admin                               | id name name_fr name_de name_nl content_type build_method    |
+|                               |                                     | template body_template email_template shortcut primary       |
+|                               |                                     | print_directly certifying print_recipient backward_compat    |
+|                               |                                     | attach_to_email                                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| excerpts.Excerpts             | admin                               | id excerpt_type project user build_method company            |
+|                               |                                     | contact_person language owner build_time                     |
+|                               |                                     | body_template_content                                        |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| households.Households         | all except anonymous                | type prefix name id                                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| households.HouseholdsByType   | all except anonymous                | type name language id country region city zip_code           |
+|                               |                                     | street_prefix street street_no street_box addr2 phone gsm    |
+|                               |                                     | email url remarks                                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| households.Types              | admin                               | name name_fr name_de name_nl                                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| humanlinks.Links              | admin                               | parent child type                                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| integ.ActivityReport          | 100, 110, admin                     | body                                                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| isip.ContractEndings          | 110, admin                          | name use_in_isip use_in_jobs is_success needs_date_ended     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| isip.ContractPartners         | all except anonymous                | company contact_person contact_role duties_company           |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| isip.ContractTypes            | 110, admin                          | id ref exam_policy needs_study_type name name_fr name_de     |
+|                               |                                     | name_nl full_name                                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| isip.Contracts                | 100, 110, admin                     | id client type user user_asd study_type applies_from         |
+|                               |                                     | applies_until exam_policy language date_decided date_issued  |
+|                               |                                     | printed date_ended ending stages goals duties_asd            |
+|                               |                                     | duties_dsbe duties_person                                    |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| isip.ExamPolicies             | 110, admin                          | id name name_fr name_de name_nl max_events every every_unit  |
+|                               |                                     | event_type monday tuesday wednesday thursday friday saturday |
+|                               |                                     | sunday                                                       |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.ContractTypes            | 110, admin                          | id name name_fr name_de name_nl ref                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.Contracts                | 100, 110, admin                     | id client user user_asd language job type company            |
+|                               |                                     | contact_person contact_role applies_from duration            |
+|                               |                                     | applies_until exam_policy regime schedule hourly_rate        |
+|                               |                                     | refund_rate reference_person printed date_decided            |
+|                               |                                     | date_issued date_ended ending responsibilities               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.JobProviders             | 100, 110, admin                     | overview prefix name type vat_id client_contact_type url     |
+|                               |                                     | email phone gsm fax                                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.JobTypes                 | 110, admin                          | id name is_social                                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.Jobs                     | 100, 110, admin                     | name provider contract_type type id sector function capacity |
+|                               |                                     | hourly_rate remark                                           |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.JobsOverview             | 100, 110, admin                     | preview                                                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.Offers                   | 100, 110, admin                     | name provider sector function selection_from selection_until |
+|                               |                                     | start_date remark                                            |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.OldJobsOverview          | 100, 110, admin                     | body                                                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| jobs.Schedules                | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| languages.Languages           | all except anonymous                | id iso2 name name_fr name_de name_nl                         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| newcomers.Faculties           | admin                               | id name name_fr name_de name_nl weight                       |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| notes.EventTypes              | admin                               | id name name_fr name_de name_nl remark                       |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| notes.NoteTypes               | admin                               | id name name_fr name_de name_nl build_method template        |
+|                               |                                     | email_template attach_to_email remark                        |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| notes.Notes                   | all except anonymous                | date time event_type type project subject company            |
+|                               |                                     | contact_person user language build_time id body              |
+|                               |                                     | UploadsByController                                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| outbox.Mails                  | 110, 410, admin                     | subject project date user sent id owner AttachmentsByMail    |
+|                               |                                     | UploadsByController body                                     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| pcsw.ClientContactTypes       | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| pcsw.Clients                  | all except anonymous                | overview gender id first_name middle_name last_name          |
+|                               |                                     | birth_date age national_id nationality declared_name         |
+|                               |                                     | civil_state birth_country birth_place language email phone   |
+|                               |                                     | fax gsm image SimilarPersons LinksByHuman cbss_relations     |
+|                               |                                     | MembersByPerson workflow_buttons broker faculty              |
+|                               |                                     | refusal_reason in_belgium_since residence_type               |
+|                               |                                     | residence_until group is_seeking unemployed_since            |
+|                               |                                     | work_permit_suspended_until needs_residence_permit           |
+|                               |                                     | needs_work_permit UploadsByClient skills obstacles           |
+|                               |                                     | ExcerptsByProject activity client_state noble_condition      |
+|                               |                                     | unavailable_until unavailable_why is_obsolete created        |
+|                               |                                     | modified remarks                                             |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| pcsw.CoachingEndings          | 110, admin                          | id name name_fr name_de name_nl seqno                        |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| polls.ChoiceSets              | all except anonymous                | name name_fr name_de name_nl                                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| polls.Polls                   | all except anonymous                | title state details user created modified default_choiceset  |
+|                               |                                     | default_multiple_choices                                     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| polls.Responses               | all except anonymous                | user poll state created modified remark                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| projects.Projects             | admin                               | id client project_type start_date end_date origin target     |
+|                               |                                     | remark result                                                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| properties.PropGroups         | admin                               | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| properties.PropTypes          | admin                               | id name name_fr name_de name_nl choicelist default_value     |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| properties.Properties         | admin                               | id group type name name_fr name_de name_nl                   |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| reception.BusyVisitors        | all except anonymous, 210           | event client role state remark workflow_buttons              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| reception.GoneVisitors        | all except anonymous, 210           | event client role state remark workflow_buttons              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| reception.MyWaitingVisitors   | all except anonymous, 210           | event client role state remark workflow_buttons              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| reception.WaitingVisitors     | all except anonymous, 210           | event client role state remark workflow_buttons              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| system.SiteConfigs            | admin                               | site_company next_partner_id job_office master_budget        |
+|                               |                                     | signer1 signer2 signer1_function signer2_function            |
+|                               |                                     | system_note_type default_build_method propgroup_skills       |
+|                               |                                     | propgroup_softskills propgroup_obstacles                     |
+|                               |                                     | residence_permit_upload_type work_permit_upload_type         |
+|                               |                                     | driving_licence_upload_type default_event_type               |
+|                               |                                     | prompt_calendar client_guestrole team_guestrole              |
+|                               |                                     | cbss_org_unit sector ssdn_user_id ssdn_email                 |
+|                               |                                     | cbss_http_username cbss_http_password                        |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| system.TextFieldTemplates     | admin                               | id name user description text                                |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| uploads.AreaUploads           | all except anonymous                | file user upload_area type description owner                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| uploads.MyUploads             | all except anonymous                | file user upload_area type description owner                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| uploads.UploadTypes           | admin                               | id upload_area shortcut name name_fr name_de name_nl         |
+|                               |                                     | warn_expiry_value warn_expiry_unit wanted max_number         |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| uploads.Uploads               | admin                               | user project id type description valid_from valid_until      |
+|                               |                                     | company contact_person contact_role file owner remark        |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| uploads.UploadsByType         | admin                               | file user upload_area type description owner                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| users.Users                   | admin                               | username profile partner first_name last_name initials email |
+|                               |                                     | language id created modified remarks event_type access_class |
+|                               |                                     | calendar newcomer_quota coaching_type coaching_supervisor    |
+|                               |                                     | newcomer_consultations newcomer_appointments                 |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
 <BLANKLINE>
 
 

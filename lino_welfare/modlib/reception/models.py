@@ -13,6 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -37,7 +38,7 @@ MyBusyVisitors.required.update(user_groups='coaching')
 MyGoneVisitors.required.update(user_groups='coaching')
 
 
-def appointable_users(**filterkw):
+def appointable_users(*args, **kw):
     """Return a queryset of the users for whom reception clerks can create
     appointments. Candidates must have a :attr:`profile
     <lino.modlib.users.models.User.profile>` and a :attr:`calendar
@@ -45,7 +46,8 @@ def appointable_users(**filterkw):
 
     """
     qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
-    qs = qs.filter(calendar__isnull=False, **filterkw)
+    kw.update(calendar__isnull=False)
+    qs = qs.filter(*args, **kw)
     return qs
 
 
@@ -268,7 +270,9 @@ them) or (2) a scheduled appointment in the user's calendar.
                 yield obj
         else:
             # yield agents available for open consultation
-            for u in appointable_users():
+            cnd = Q(newcomer_appointments=True) \
+                | Q(newcomer_consultations=True)
+            for u in appointable_users(cnd):
                 # Create a temporary coaching. needed for generating
                 # the action buttons below.
                 yield pcsw.Coaching(
@@ -294,14 +298,15 @@ them) or (2) a scheduled appointment in the user's calendar.
         ba = pcsw.Clients.get_action_by_name('create_visit')
         sar = ba.request(action_param_values=dict(user=obj.user))
         sar.setup_from(ar)
-        elems += [sar.row_action_button_ar(client, _("Visit")), ' ']
+        if obj.user.newcomer_consultations:
+            elems += [sar.row_action_button_ar(client, _("Visit")), ' ']
         # elems += [ar.instance_action_button(
         #     client.create_visit,
         #     _("Visit"),
         #     request_kwargs=dict(action_param_values=dict(user=obj.user)),
         #     icon_name=CreateClientVisit.icon_name), ' ']
 
-        if obj.user.profile is not None:
+        if obj.user.profile and obj.user.newcomer_appointments:
             sar = extensible.CalendarPanel.request(
                 subst_user=obj.user,
                 current_project=client.pk)

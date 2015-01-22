@@ -68,7 +68,7 @@ class Site(Site):
         # self.plugins.households.configure(person_model='pcsw.Client')
         super(Site, self).setup_plugins()
 
-    def setup_choicelists(self):
+    def setup_user_profiles(self):
         """
         This defines default user profiles and shortcuts for :ref:`welfare`.
         """
@@ -93,10 +93,14 @@ class Site(Site):
         add('900', _("Administrator"),               'A A A A A A A A A U',
             name='admin')
 
-        #
-        # shortcuts
-        #
+    def setup_choicelists(self):
+        """Adds two shortcut fields."""
 
+        super(Site, self).setup_choicelists()
+
+        self.setup_user_profiles()
+
+        from django.utils.translation import ugettext_lazy as _
         from lino.modlib.excerpts.choicelists import Shortcuts
         Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
         

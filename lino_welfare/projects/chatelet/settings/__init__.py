@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -53,13 +53,16 @@ class Site(Site):
     # def get_default_language(self):
     #     return 'fr'
 
-    def setup_choicelists(self):
+    def setup_user_profiles(self):
         """
         This defines default user profiles for
         :mod:`lino_welfare.settings.chatelet`.
         """
 
-        # must import it to activate workflows:
+        # Do NOT call super() which would raise "Unexpected name 'debts'"
+        # super(Site, self).setup_choicelists()
+
+        # activate workflows for courses:
         from lino.modlib.courses import workflows
 
         from django.utils.translation import ugettext_lazy as _

@@ -211,15 +211,24 @@ def objects():
                      email=settings.SITE.demo_email,  # 'melanie@example.com',
                      city=eupen, country='BE', gender=dd.Genders.female,
                      language='fr')
+
+    ## newcomers : Melanie does not work with newcomers because she is
+    ## the boss. Hubert does live consultations (no appointments). And
+    ## Alicia does only appointments but no life
+    ## consultations. Caroline and Judith do both.
     yield melanie
-    melanie = users.User(username="melanie", partner=melanie, profile='110')
+    melanie = users.User(
+        username="melanie", partner=melanie, profile='110',
+        newcomer_consultations=False, newcomer_appointments=False)
     yield melanie
 
     hubert = person(first_name=u"Hubert", last_name=u"Huppertz",
                     email=settings.SITE.demo_email,  # 'hubert@example.com',
                     city=kettenis, country='BE', gender=dd.Genders.male)
     yield hubert
-    hubert = users.User(username="hubert", partner=hubert, profile='100')
+    hubert = users.User(
+        username="hubert", partner=hubert, profile='100',
+        newcomer_consultations=True, newcomer_appointments=False)
     yield hubert
 
     alicia = person(
@@ -228,7 +237,9 @@ def objects():
         city=kettenis, country='BE',
         gender=dd.Genders.female, language='fr')
     yield alicia
-    alicia = users.User(username="alicia", partner=alicia, profile='100')
+    alicia = users.User(
+        username="alicia", partner=alicia, profile='100',
+        newcomer_consultations=True, newcomer_appointments=True)
     yield alicia
 
     theresia = person(first_name=u"Theresia", last_name=u"Thelen",
@@ -243,23 +254,19 @@ def objects():
     yield Authority(user=alicia, authorized=melanie)
     yield Authority(user=hubert, authorized=melanie)
 
-    #~ yield users.Membership(user=alicia,group=ug_dsbe)
-    #~ yield users.Membership(user=hubert,group=ug_dsbe)
-    #~ yield users.Membership(user=melanie,group=ug_dsbe)
-    #~ yield users.Membership(user=melanie,group=ug_courses)
-    #~ yield users.Membership(user=melanie,group=ug_sek)
-
-    caroline = users.User(username="caroline",
-                          first_name="Caroline", last_name="Carnol",
-                          profile='200')  # UserProfiles.caroline)
+    caroline = users.User(
+        username="caroline", first_name="Caroline", last_name="Carnol",
+        profile='200',
+        newcomer_consultations=True, newcomer_appointments=True)
     yield caroline
-    #~ yield users.Membership(user=caroline,group=ug_asd)
 
     obj = person(first_name="Judith", last_name="Jousten",
                  email=settings.SITE.demo_email,
                  city=eupen, country='BE', gender=dd.Genders.female)
     yield obj
-    judith = users.User(username="judith", partner=obj, profile='400')
+    judith = users.User(
+        username="judith", partner=obj, profile='400',
+        newcomer_consultations=True, newcomer_appointments=True)
     yield judith
     
     kw = dd.str2kw('name', _("Colleague"))
@@ -360,8 +367,9 @@ def objects():
                       de="Termin",
                       fr="Rendez-vous",
                       en="Appointment"))
-    # Lino Welfare does not use time slots when generating evaluation meetings.
-    # Here we define a limit of 4 client meetings per day per user.
+    # Lino Welfare does not use time slots when generating evaluation
+    # meetings because the exasct planning is done by the user. But we
+    # define a limit of 4 client meetings per day per user.
     kw.update(max_conflicting=4)
     client_calendar = calendar(invite_client=True, **kw)
     yield client_calendar

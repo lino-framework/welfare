@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
-  python manage.py test lino_welfare.tests.test_isip
+  $ cd lino_welfare/projects/docs
+  $ python manage.py test lino_welfare.tests.test_isip
 
 """
 
@@ -115,11 +116,11 @@ Update Events for ISIP#1 (Max MUSTERMANN)...
 Generating events between 2014-07-01 and 2015-03-31.
 Reached upper date limit 2015-03-31
 Update Guests for Event #1 Appointment 1 (01.07.2014)...
-1 row(s) have been updated.
+0 row(s) have been updated.
 Update Guests for Event #2 Appointment 2 (01.10.2014)...
-1 row(s) have been updated.
+0 row(s) have been updated.
 Update Guests for Event #3 Appointment 3 (01.01.2015)...
-1 row(s) have been updated.
+0 row(s) have been updated.
 3 row(s) have been updated."""
         # print(expected)
         self.assertEqual(res['info_message'], expected)

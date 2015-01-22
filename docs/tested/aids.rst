@@ -113,8 +113,8 @@ Willkommensmeldung unter die Nase gerieben:
 >>> translation.activate('de')
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
-<span>Du bist besch&#228;ftigt mit <b>Collard Charlotte (118)</b>.</span>
-<span>Du hast 4 Eintr&#228;ge in <i>Zu best&#228;tigende Hilfebeschl&#252;sse</i>.</span>
+<span>Du bist besch&#228;ftigt in <b>Beratung mit COLLARD Charlotte (118)</b> (<b>Versammlung beenden</b>). </span>
+<span>Du hast 4 Eintr&#228;ge in <b>Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 
 
 >>> ses.show(aids.MyPendingGrantings)

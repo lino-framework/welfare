@@ -44,12 +44,12 @@ class User(User):
     newcomer_consultations = models.BooleanField(
         _("Newcomer consultations"),
         default=False,
-        help_text="""Accepts prompt consultations for newcomers.""")
+        help_text=_("Accepts prompt consultations for newcomers."))
 
     newcomer_appointments = models.BooleanField(
         _("Newcomer appointments"),
         default=False,
-        help_text="""Accepts appointments for newcomers.""")
+        help_text=_("Accepts appointments for newcomers."))
 
     def save(self, *args, **kwargs):
         """For a user with a office_level, create a default calendar.  If

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-## Copyright 2013-2014 Luc Saffre
+## Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -89,7 +89,7 @@ class MyTestCase(DemoTestCase):
         
         self.demo_get(
             'rolf', 'apchoices/pcsw/Clients/create_visit/user',
-            json_fields, 9, **kw)
+            json_fields, 5, **kw)
         
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)

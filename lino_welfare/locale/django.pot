@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.20\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-21 07:27+0200\n"
+"POT-Creation-Date: 2015-01-22 07:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,12 +63,16 @@ msgstr ""
 msgid "Colleague"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:577
+#: lino_welfare/fixtures/demo.py:371
+msgid "Consultation"
+msgstr ""
+
+#: lino_welfare/fixtures/demo.py:579
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:27
 msgid "Health insurance"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:588 lino_welfare/fixtures/std.py:106
+#: lino_welfare/fixtures/demo.py:590 lino_welfare/fixtures/std.py:106
 #: lino_welfare/modlib/aids/models.py:968
 #: lino_welfare/modlib/aids/fixtures/demo.py:57
 #: lino_welfare/modlib/aids/fixtures/std.py:97
@@ -76,55 +80,55 @@ msgstr ""
 msgid "Pharmacy"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:596
+#: lino_welfare/fixtures/demo.py:598
 msgid "Advocate"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:607
+#: lino_welfare/fixtures/demo.py:609
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:620
+#: lino_welfare/fixtures/demo.py:622
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:699
+#: lino_welfare/fixtures/demo.py:701
 msgid "Employment office"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:711
+#: lino_welfare/fixtures/demo.py:713
 msgid "Physician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:719
+#: lino_welfare/fixtures/demo.py:721
 msgid "Family doctor"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:727
+#: lino_welfare/fixtures/demo.py:729
 msgid "Dentist"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:737
+#: lino_welfare/fixtures/demo.py:739
 msgid "Pediatrician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:897
+#: lino_welfare/fixtures/demo.py:899
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:899
+#: lino_welfare/fixtures/demo.py:901
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1102
+#: lino_welfare/fixtures/demo.py:1104
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1102
+#: lino_welfare/fixtures/demo.py:1104
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1102
+#: lino_welfare/fixtures/demo.py:1104
 msgid "Information"
 msgstr ""
 
@@ -170,7 +174,7 @@ msgstr ""
 
 #: lino_welfare/modlib/active_job_search/models.py:27
 #: lino_welfare/modlib/badges/models.py:56
-#: lino_welfare/modlib/cal/models.py:265 lino_welfare/modlib/cbss/tx25.py:517
+#: lino_welfare/modlib/cal/models.py:303 lino_welfare/modlib/cbss/tx25.py:517
 #: lino_welfare/modlib/cbss/tx25.py:557 lino_welfare/modlib/cbss/tx25.py:645
 #: lino_welfare/modlib/debts/models.py:137
 #: lino_welfare/modlib/isip/models.py:724
@@ -618,47 +622,59 @@ msgstr ""
 msgid "Awards"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:28
+#: lino_welfare/modlib/cal/models.py:30
 msgid "Notified"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:51
+#: lino_welfare/modlib/cal/models.py:53
 msgid "This will checkout {num} guests: {guests}"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:70
+#: lino_welfare/modlib/cal/models.py:74
+msgid "You are busy in "
+msgstr ""
+
+#: lino_welfare/modlib/cal/models.py:86
+msgid "{label} #{id}"
+msgstr ""
+
+#: lino_welfare/modlib/cal/models.py:89
+msgid "{label} with {project}"
+msgstr ""
+
+#: lino_welfare/modlib/cal/models.py:108
 msgid "Invite client"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:76
+#: lino_welfare/modlib/cal/models.py:114
 msgid "Calendar where your events are published."
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:84
+#: lino_welfare/modlib/cal/models.py:122
 msgid "Default type for client events"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:90
+#: lino_welfare/modlib/cal/models.py:128
 msgid "Default guest role of client in events."
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:97
+#: lino_welfare/modlib/cal/models.py:135
 msgid "Guest role for team members"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:127
+#: lino_welfare/modlib/cal/models.py:165
 msgid "When"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:162
+#: lino_welfare/modlib/cal/models.py:200
 msgid "Managed by"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:199
+#: lino_welfare/modlib/cal/models.py:237
 msgid "Notes"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:242
+#: lino_welfare/modlib/cal/models.py:280
 #: lino_welfare/modlib/contacts/models.py:99
 #: lino_welfare/modlib/contacts/models.py:175
 #: lino_welfare/modlib/contacts/models.py:272
@@ -670,32 +686,32 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:246
+#: lino_welfare/modlib/cal/models.py:284
 msgid "More"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:262
+#: lino_welfare/modlib/cal/models.py:300
 msgid "Appointment"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:267
+#: lino_welfare/modlib/cal/models.py:305
 msgid "Summary"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:283
+#: lino_welfare/modlib/cal/models.py:321
 #, python-format
 msgid "Created appointment for %(user)s with %(partner)s"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:319
+#: lino_welfare/modlib/cal/models.py:357
 msgid "Task"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:320
+#: lino_welfare/modlib/cal/models.py:358
 msgid "Tasks"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:324
+#: lino_welfare/modlib/cal/models.py:362
 msgid "Delegated to client"
 msgstr ""
 

@@ -1,11 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-The :xfile:`models.py` module for the
-:mod:`lino_welfare.modlib.isip` app
-(eee :ddref:`isip`)
+"""Database models for :mod:`lino_welfare.modlib.isip`.
 
 """
 
@@ -386,14 +383,14 @@ class ContractBase(Signers, Certifiable, cal.EventGenerator):
         participant, plus possibly some other coach.
 
         """
-        Guest = rt.modules.cal.Guest
-        GuestStates = rt.modules.cal.GuestStates
-        st = GuestStates.accepted
         client = event.project
-        yield Guest(event=event,
-                    partner=client,
-                    state=st,
-                    role=settings.SITE.site_config.client_guestrole)
+        Guest = rt.modules.cal.Guest
+        # GuestStates = rt.modules.cal.GuestStates
+        # st = GuestStates.accepted
+        # yield Guest(event=event,
+        #             partner=client,
+        #             state=st,
+        #             role=settings.SITE.site_config.client_guestrole)
 
         period = (event.start_date, event.start_date)
         qs = client.get_coachings(period)
