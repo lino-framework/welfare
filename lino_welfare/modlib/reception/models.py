@@ -27,6 +27,7 @@ from lino.modlib.reception.models import *
 
 pcsw = dd.resolve_app('pcsw')
 extensible = dd.resolve_app('extensible')
+from lino_welfare.modlib.pcsw.models import ClientStates
 
 # Make EventsByDay available also for reception agents who are not in
 # office group.
@@ -250,6 +251,8 @@ client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
 them) or (2) a scheduled appointment in the user's calendar.
 
+Tested document about :ref:`welfare.tested.reception.AgentsByClient`
+
     """
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
@@ -264,7 +267,7 @@ them) or (2) a scheduled appointment in the user's calendar.
         mi = ar.master_instance
         if mi is None:
             return
-        if mi.client_state == pcsw.ClientStates.coached:
+        if mi.client_state == ClientStates.coached:
             for obj in pcsw.Coaching.objects.filter(
                     client=mi, end_date__isnull=True).order_by('start_date'):
                 yield obj
@@ -289,26 +292,36 @@ them) or (2) a scheduled appointment in the user's calendar.
 
     @dd.displayfield(_("Actions"))
     def actions(cls, obj, ar):
+        
         client = ar.master_instance
         if client is None:
             return ''
         elems = []
+
+        user = obj.user
+
         # client.create_visit is the instance action for
         # CreateClientVisit
-        ba = pcsw.Clients.get_action_by_name('create_visit')
-        sar = ba.request(action_param_values=dict(user=obj.user))
-        sar.setup_from(ar)
-        if obj.user.newcomer_consultations:
-            elems += [sar.row_action_button_ar(client, _("Visit")), ' ']
-        # elems += [ar.instance_action_button(
-        #     client.create_visit,
-        #     _("Visit"),
-        #     request_kwargs=dict(action_param_values=dict(user=obj.user)),
-        #     icon_name=CreateClientVisit.icon_name), ' ']
+        if client.client_state == ClientStates.coached \
+           or user.newcomer_consultations:
+            apv = dict(user=user)
+            if False:  # apv are ignored, and it's ugly
+                ba = pcsw.Clients.get_action_by_name('create_visit')
+                sar = ba.request(action_param_values=apv)
+                sar.setup_from(ar)
+                btn = sar.row_action_button_ar(client, _("Visit"))
+            else:
+                btn = ar.instance_action_button(
+                    client.create_visit,
+                    _("Visit"),
+                    request_kwargs=dict(action_param_values=apv),
+                    icon_name=CreateClientVisit.icon_name)
+            elems += [btn, ' ']
 
-        if obj.user.profile and obj.user.newcomer_appointments:
+        if client.client_state == ClientStates.coached \
+           or user.newcomer_appointments:
             sar = extensible.CalendarPanel.request(
-                subst_user=obj.user,
+                subst_user=user,
                 current_project=client.pk)
             elems += [ar.href_to_request(
                 sar, _("Find date"),

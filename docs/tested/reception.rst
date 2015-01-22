@@ -20,6 +20,7 @@ Reception
     >>> from django.test import Client
     >>> import json
     >>> from bs4 import BeautifulSoup
+    >>> from lino.utils import AttrDict
 
 This documents uses the :mod:`lino_welfare.projects.eupen` test
 database:
@@ -30,6 +31,7 @@ lino_welfare.projects.eupen.settings.doctests
 >>> ses = rt.login('romain')
 >>> translation.activate('fr')
 
+.. _welfare.tested.reception.AppointmentsByPartner:
 
 AppointmentsByPartner
 =====================
@@ -65,10 +67,17 @@ supposed to be run only by users who have root permissions).
 Aucun enregistrement
 <BLANKLINE>
 
-
+.. _welfare.tested.reception.AgentsByClient:
 
 AgentsByClient
 ==============
+
+The :class:`AgentsByClient
+<lino_welfare.modlib.reception.models.AgentsByClient>` table shows the
+users for whom a reception clerk can make an appointment with a given
+client. Per user you have two possible buttons: (1) a prompt
+consultation (client will wait in the lounge until the user receives
+them) or (2) a scheduled appointment in the user's calendar.
 
 >>> ses = rt.login('romain')
 
@@ -79,14 +88,17 @@ Client #127 is `ClientStates.coached` and has two coachings:
 EVERS Eberhart (127)
 >>> print(obj.client_state)
 coached
->>> ses.show(reception.AgentsByClient, obj)
-================= ============================== ==========================
- Intervenant       Service                        Actions
------------------ ------------------------------ --------------------------
- Hubert Huppertz   SSG (Service social général)   **Visite** **Find date**
- Caroline Carnol   Service intégration            **Visite** **Find date**
-================= ============================== ==========================
+>>> ses.show(reception.AgentsByClient, obj, language='en')
+================= =================================================== =========================
+ Coach             Coaching type                                       Actions
+----------------- --------------------------------------------------- -------------------------
+ Hubert Huppertz   ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
+ Caroline Carnol   DSBE (Dienst für Sozial-Berufliche Eingliederung)   **Visit** **Find date**
+================= =================================================== =========================
 <BLANKLINE>
+
+TODO: use only abbreviated names in `CoachingType.name` because the
+users usually know these abbrevs.
 
 Client 257 is not coached but a `ClientStates.newcomer`. So
 AgentsByClient shows all users who care for newcomers (i.e. who have
@@ -98,24 +110,26 @@ AgentsByClient shows all users who care for newcomers (i.e. who have
 BRAUN Bruno (257)
 >>> print(obj.client_state)
 newcomer
->>> ses.show(reception.AgentsByClient, obj)
-================= ============================== ==========================
- Intervenant       Service                        Actions
------------------ ------------------------------ --------------------------
- Alicia Allmanns   Service intégration            **Visite** **Find date**
- Caroline Carnol   SSG (Service social général)   **Visite** **Find date**
- Hubert Huppertz   None                           **Visite** **Find date**
- Judith Jousten    SSG (Service social général)   **Visite** **Find date**
- Mélanie Mélard    None                           **Visite** **Find date**
-================= ============================== ==========================
+>>> ses.show(reception.AgentsByClient, obj, language='en')
+================= =================================================== =========================
+ Coach             Coaching type                                       Actions
+----------------- --------------------------------------------------- -------------------------
+ Alicia Allmanns   DSBE (Dienst für Sozial-Berufliche Eingliederung)   **Visit** **Find date**
+ Caroline Carnol   ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
+ Hubert Huppertz   None                                                **Visit**
+ Judith Jousten    ASD (Allgemeiner Sozialdienst)                      **Visit** **Find date**
+================= =================================================== =========================
 <BLANKLINE>
 
-(TODO: why do Hubert and Mélanie have no service defined?)
+TODO: For Hubert the "Service" column says "None" because his
+`User.coaching_type` field is empty.  Why was this?
 
 
+Now let's have a closer look at the action buttons in the third column
+of above table.  This column is defined by a
+:func:`lino.core.fields.displayfield`.
 
-Now let's have a closer look at these action buttons.
-
+It has up to two actions (labeled Visite** **Find date**
 
 >>> obj = pcsw.Client.objects.get(pk=127)
 >>> client = Client()
@@ -130,14 +144,71 @@ The response to this AJAX request is in JSON:
 
 >>> d = json.loads(res.content)
 
-We test the AgentsByClient panel. 
+We are going to inspect the AgentsByClient panel using `BeautifulSoup
+<http://www.crummy.com/software/BeautifulSoup/bs4/doc/>`_:
 
->>> chunk = d['data']['AgentsByClient']
+>>> soup = BeautifulSoup(d['data']['AgentsByClient'])
 
-It contains a table:
+It contains a table, and we want the cell at the first data row and
+third column:
 
->>> print(chunk)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<table bgcolor="#ffffff" ...
-src="/media/lino/extjs/images/mjames/calendar.png" /></a> </div></td></tr></tbody></table>
+>>> td = soup.table.tbody.tr.contents[2]
+>>> #print(td.div)
+>>> #len(td.div.contents)
 
+The first button ("Visit") is here:
+
+>>> btn = td.div.contents[0]
+>>> print(btn.contents)
+[<img alt="hourglass" src="/media/lino/extjs/images/mjames/hourglass.png"/>]
+
+And yes, the `href` attribute is a javascript snippet:
+
+>>> print(btn['href'])
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+javascript:Lino.pcsw.Clients.create_visit.run("ext-comp-1268",...)
+
+Now let's inspect these three dots (`...`). 
+
+>>> dots = btn['href'][62:-1]
+>>> print(dots)  #doctest: +ELLIPSIS 
+{ ... }
+
+They are a big "object" (in Python we call it a `dict`):
+
+>>> d = AttrDict(json.loads(dots))
+
+It has 4 keys:
+
+>>> d.keys()
+[u'record_id', u'field_values', u'param_values', u'base_params']
+
+>>> d.record_id
+127
+>>> d.base_params
+{}
+>>> d.field_values
+{u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
+
+(This last line was right only since :blogref:`20150122`)
+
+
+
+
+**Now the second action (Find date):**
+
+The button is here:
+
+>>> btn = td.div.contents[2]
+>>> print(btn.contents)
+[<img alt="calendar" src="/media/lino/extjs/images/mjames/calendar.png"/>]
+
+And also here, the `href` attribute is a javascript snippet:
+
+>>> print(btn['href'])
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "su": 5, "base_params": { "su": 5, "prj": 127 } })
+
+This one is shorter, so we don't need to parse it for inspecting it.
+Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
+And `prj` will become the value of the `project` field if a new event would be created.
