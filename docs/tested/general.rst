@@ -160,7 +160,7 @@ result:
  sepa.Account                   sepa.Accounts                   8         13
  system.SiteConfig              system.SiteConfigs              30        1
  system.TextFieldTemplate       system.TextFieldTemplates       5         2
- uploads.Upload                 uploads.Uploads                 16        6
+ uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        10

@@ -1078,3 +1078,31 @@ Convert field `Study.success` to `Study.state`.
 
     def migrate_from_1_1_19(self, globals_dict):
         return '1.1.20'
+
+    def migrate_from_1_1_20(self, globals_dict):
+        uploads_Upload = resolve_model("uploads.Upload")
+        new_content_type_id = globals_dict['new_content_type_id']
+
+        def create_uploads_upload(id, project_id, file, mimetype, user_id, owner_type_id, owner_id, company_id, contact_person_id, contact_role_id, upload_area, type_id, description, valid_from, valid_until, remark):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(project_id=project_id)
+            kw.update(file=file)
+            kw.update(mimetype=mimetype)
+            kw.update(user_id=user_id)
+            owner_type_id = new_content_type_id(owner_type_id)
+            kw.update(owner_type_id=owner_type_id)
+            kw.update(owner_id=owner_id)
+            kw.update(company_id=company_id)
+            kw.update(contact_person_id=contact_person_id)
+            kw.update(contact_role_id=contact_role_id)
+            kw.update(upload_area=upload_area)
+            kw.update(type_id=type_id)
+            kw.update(description=description)
+            kw.update(start_date=valid_from)
+            kw.update(end_date=valid_until)
+            kw.update(remark=remark)
+            return uploads_Upload(**kw)
+        globals_dict.update(create_uploads_upload=create_uploads_upload)
+
+        return '1.1.21'

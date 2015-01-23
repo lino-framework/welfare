@@ -131,7 +131,7 @@ def objects():
                   fr="Lettre",
                   en="Letter"))
 
-    yield excerpt_types()
+    # yield excerpt_types()
         
     eventType = Instantiator('notes.EventType', "name remark").build
 
@@ -154,75 +154,6 @@ def objects():
     yield ContractEnding(name=_("Alcohol"), needs_date_ended=True)
     yield ContractEnding(name=_("Health"), needs_date_ended=True)
     yield ContractEnding(name=_("Force majeure"), needs_date_ended=True)
-
-    #~ linkType = Instantiator('links.LinkType',"a_type b_type name").build
-
-    #~ yield linkType(
-        #~ ContentType.objects.get_for_model(Company),
-        #~ ContentType.objects.get_for_model(Person),
-        #~ babelitem(de=u"Direktor",fr=u"directeur"))
-    #~ yield linkType(
-        #~ ContentType.objects.get_for_model(Person),
-        #~ ContentType.objects.get_for_model(Person),
-        #~ babelitem(de=u"Vater",fr=u"père"))
-    #~ yield linkType(
-        #~ ContentType.objects.get_for_model(Person),
-        #~ ContentType.objects.get_for_model(Person),
-        #~ babelitem(de=u"Mutter",fr=u"mère"))
-    #~ yield linkType(babelitem(de=u"Private Website",fr=u"Site privé"))
-    #~ yield linkType(babelitem(de=u"Firmen-Website",fr=u"Site commercial"))
-    #~ yield linkType(babelitem(de=u"Facebook-Profil",fr=u"Profil Facebook"))
-    #~ yield linkType(babelitem(de=u"Sonstige",fr=u"Autres"))
-
-    #~ from lino.models import update_site_config
-
-    UploadAreas = rt.modules.uploads.UploadAreas
-    uploadType = Instantiator(
-        'uploads.UploadType',
-        max_number=1, wanted=True).build
-    yield uploadType(**dd.babelkw(
-        'name',
-        de=u"Personalausweis", fr=u"Carte d'identité", en="ID card"))
-    yield uploadType(**dd.babelkw(
-        'name', de=u"Aufenthaltserlaubnis",
-        fr=u"Permis de séjour", en="Residence permit"))
-    yield uploadType(**dd.babelkw(
-        'name', de=u"Arbeitserlaubnis",
-        fr=u"Permis de travail", en="Work permit"))
-    yield uploadType(**dd.babelkw(
-        'name', de=u"Führerschein",
-        fr=u"Permis de conduire", en="Diving licence"))
-    uploadType = Instantiator(
-        'uploads.UploadType'  # , upload_area=UploadAreas.job_search
-    ).build
-    yield uploadType(**dd.str2kw('name', _("Contract")))
-    # settings.SITE.site_config.driving_licence_upload_type = p
-    uploadType = Instantiator(
-        'uploads.UploadType'  # , upload_area=UploadAreas.medical
-    ).build
-    yield uploadType(
-        **dd.babelkw(
-            'name',
-            de="Ärztliche Bescheinigung",
-            fr="Certificat médical",
-            en="Medical certificate"))
-    yield uploadType(
-        **dd.babelkw(
-            'name',
-            de="Behindertenausweis",
-            fr="Certificat de handicap",
-            en="Handicap certificate"))
-
-    from lino.modlib.uploads.choicelists import Shortcuts
-
-    uploadType = Instantiator('uploads.UploadType').build
-    yield uploadType(wanted=True, **dd.str2kw('name', _("Diploma")))
-
-    yield uploadType(
-        shortcut=Shortcuts.id_document,
-        **dd.str2kw('name', _("Identifying document")))
-
-    yield settings.SITE.site_config
 
     I = Instantiator(
         'contenttypes.HelpText', 'content_type field help_text').build

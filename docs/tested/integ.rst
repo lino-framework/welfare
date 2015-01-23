@@ -4,6 +4,9 @@
 Integration Service
 ===================
 
+.. How to test only this document:
+  $ python setup.py test -s tests.DocsTests.test_integ
+
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 
 .. contents::
@@ -11,21 +14,14 @@ A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 
 .. include:: /include/tested.rst
 
-.. How to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_integ
-
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.docs.settings.doctests'
->>> from lino.runtime import *
->>> from django.utils import translation
->>> from django.test import Client
->>> import json
->>> from bs4 import BeautifulSoup
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.docs.settings.doctests
+>>> from lino.api.doctest import *
+
+
 >>> ses = rt.login('robin')
 >>> translation.activate('en')
 
@@ -236,16 +232,10 @@ javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
   "also_obsolete": false, "gender": null, "genderHidden": null 
 }, "base_params": {  } })
 
-Let's automatize this trick:
 
->>> def check(uri, fieldname):
-...     url = '/api/%s?fmt=json&an=detail' % uri
-...     res = client.get(url, REMOTE_USER='rolf')
-...     assert res.status_code == 200
-...     d = json.loads(res.content)
-...     return d['data'][fieldname]
+The :func:`lino.api.doctest.get_json_soup` automates this trick:
 
->>> soup = BeautifulSoup(check('integ/Clients/179', 'MembersByPerson'))
+>>> soup = get_json_soup('rolf', 'integ/Clients/179', 'MembersByPerson')
 >>> links = soup.find_all('a')
 >>> len(links)
 8
@@ -312,37 +302,3 @@ bug on :blogref:`20150515`.
 
 
 
-Uploads by client
------------------
-
-The folowing example is for client # 177
->>> obj = pcsw.Client.objects.get(pk=177)
->>> print(obj)
-BRECHT Bernd (177)
-
->>> soup = BeautifulSoup(check('pcsw/Clients/177', 'UploadsByClient'))
->>> print(soup.get_text())
-... #doctest: +NORMALIZE_WHITESPACE
-Personalausweis: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Diplom: 
-
->>> links = soup.find_all('a')
->>> len(links)
-5
-
->>> rt.modules.uploads.UploadsByClient._upload_area
-<UploadAreas.general:90>
-
-The first link would run the insert action on UploadsByClient, with
-the owner set to this client
-
->>> print(links[0].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.UploadsByClient.insert.run(null,{ "data_record": { "phantom": true, "data": { "valid_until": null, "typeHidden": 1, "description": "", "disabled_actions": {  }, "userHidden": 3, "upload_area": "Uploads", "disable_editing": false, "upload_areaHidden": "90", "user": "Rolf Rompen", "file": "", "owner": "<a href=\"javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })\">BRECHT Bernd (177)</a>", "disabled_fields": { "mimetype": true }, "type": "Personalausweis", "id": null }, "title": "Uploads von BRECHT Bernd (177)" }, "param_values": { "pupload_type": null, "puser": null, "end_date": null, "pupload_typeHidden": null, "puserHidden": null, "start_date": null }, "base_params": { "mt": ..., "mk": 177, "type_id": 1 } })
-
->>> print(links[2].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 3 })
-
->>> print(links[3].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 4 })

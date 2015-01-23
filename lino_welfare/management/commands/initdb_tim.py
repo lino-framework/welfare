@@ -222,10 +222,10 @@ def pxs2person(row, person):
     if row['APOTHEKE']:
         try:
             person.pharmacy = Company.objects.get(pk=int(row['APOTHEKE']))
-        except ValueError, e:
+        except ValueError:
             dblogger.warning(u"%s : invalid pharmacy %r",
                              obj2str(person), row['APOTHEKE'])
-        except Company.DoesNotExist, e:
+        except Company.DoesNotExist:
             dblogger.warning(u"%s : pharmacy %s not found",
                              obj2str(person), row['APOTHEKE'])
 

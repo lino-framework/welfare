@@ -285,25 +285,26 @@ class Coachings(dd.Table):
     @classmethod
     def get_request_queryset(self, ar):
         qs = super(Coachings, self).get_request_queryset(ar)
+        pv = ar.param_values
         coaches = []
-        for u in (ar.param_values.coached_by, ar.param_values.and_coached_by):
+        for u in (pv.coached_by, pv.and_coached_by):
             if u is not None:
                 coaches.append(u)
         if len(coaches):
             qs = qs.filter(user__in=coaches)
 
-        ce = ar.param_values.observed_event
+        ce = pv.observed_event
         if ce is not None:
-            qs = ce.add_filter(qs, ar.param_values)
+            qs = ce.add_filter(qs, pv)
 
-        if ar.param_values.primary_coachings == dd.YesNo.yes:
+        if pv.primary_coachings == dd.YesNo.yes:
             qs = qs.filter(primary=True)
-        elif ar.param_values.primary_coachings == dd.YesNo.no:
+        elif pv.primary_coachings == dd.YesNo.no:
             qs = qs.filter(primary=False)
-        if ar.param_values.coaching_type is not None:
-            qs = qs.filter(type=ar.param_values.coaching_type)
-        if ar.param_values.ending is not None:
-            qs = qs.filter(ending=ar.param_values.ending)
+        if pv.coaching_type is not None:
+            qs = qs.filter(type=pv.coaching_type)
+        if pv.ending is not None:
+            qs = qs.filter(ending=pv.ending)
         return qs
 
     @classmethod
@@ -311,19 +312,22 @@ class Coachings(dd.Table):
         for t in super(Coachings, self).get_title_tags(ar):
             yield t
 
-        if ar.param_values.observed_event:
-            yield unicode(ar.param_values.observed_event)
+        pv = ar.param_values
 
-        if ar.param_values.coached_by:
+        if pv.observed_event:
+            yield unicode(pv.observed_event)
+
+        if pv.coached_by:
             s = unicode(self.parameters['coached_by'].verbose_name) + \
-                ' ' + unicode(ar.param_values.coached_by)
-            if ar.param_values.and_coached_by:
+                ' ' + unicode(pv.coached_by)
+            if pv.and_coached_by:
                 s += " %s %s" % (unicode(_('and')),
-                                 ar.param_values.and_coached_by)
+                                 pv.and_coached_by)
             yield s
 
-        if ar.param_values.primary_coachings:
-            yield unicode(self.parameters['primary_coachings'].verbose_name) + ' ' + unicode(ar.param_values.primary_coachings)
+        if pv.primary_coachings:
+            yield unicode(self.parameters['primary_coachings'].verbose_name) \
+                + ' ' + unicode(pv.primary_coachings)
 
     @classmethod
     def get_create_permission(self, ar):

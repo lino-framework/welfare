@@ -1,9 +1,17 @@
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 
-"""
-See :mod:`welfare.aids`
+"""See :mod:`welfare.aids`.
+
+.. autosummary::
+   :toctree:
+
+    models
+    fixtures.std
+    fixtures.demo
+
+
 """
 
 from lino import ad

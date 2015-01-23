@@ -24,7 +24,7 @@ class Site(Site):
 
     verbose_name = "Lino Welfare"
 
-    demo_fixtures = """std few_languages props demo cbss
+    demo_fixtures = """std std2 few_languages props demo cbss
     democfg cbss_demo demo2 demo_events""".split()
 
     # ~ catch_layout_exceptions = False # 20130804
@@ -69,8 +69,9 @@ class Site(Site):
         super(Site, self).setup_plugins()
 
     def setup_user_profiles(self):
-        """
-        This defines default user profiles and shortcuts for :ref:`welfare`.
+        """This defines default user profiles and shortcuts for
+        :ref:`welfare`.
+
         """
         from django.utils.translation import ugettext_lazy as _
         from lino.modlib.users.choicelists import UserProfiles
@@ -98,15 +99,17 @@ class Site(Site):
 
         super(Site, self).setup_choicelists()
 
-        self.setup_user_profiles()
-
         from django.utils.translation import ugettext_lazy as _
         from lino.modlib.excerpts.choicelists import Shortcuts
         Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
-        
-        from lino.modlib.uploads.choicelists import Shortcuts
-        Shortcuts.add_item('pcsw.Client', 'id_document',
-                           _("Identifying document"))
+
+        from lino.modlib.uploads.choicelists import add_shortcut as add
+        add('pcsw.Client', 'id_document', _("Identifying document"),
+            target='uploads.UploadsByClient')
+        # from lino.modlib.uploads.choicelists import Shortcuts
+        # Shortcuts.add_item(
+        #     'pcsw.Client', 'id_document', _("Identifying document"),
+        #     target='uploads.UploadsByClient')
 
     def setup_quicklinks(self, ar, tb):
         #~ tb.add_action(self.modules.contacts.Persons().detail)
@@ -159,12 +162,8 @@ class Site(Site):
         yield 'lino.modlib.properties'
         yield 'lino_welfare.modlib.contacts'
         yield 'lino.modlib.addresses'
-        #~ 'lino.modlib.projects'
-        #~ 'lino.modlib.notes',
-        #~ 'lino.modlib.links',
-        yield 'lino_welfare.modlib.uploads'
-        #~ 'lino.modlib.thirds'
-        yield 'lino.modlib.outbox'
+        # yield 'lino_welfare.modlib.uploads'
+        # yield 'lino.modlib.outbox'
         yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
         #~ yield 'lino.modlib.postings'
@@ -175,7 +174,6 @@ class Site(Site):
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
-        yield 'lino.modlib.excerpts'
         yield 'lino.modlib.dedupe'
         yield 'lino.modlib.boards'
 
@@ -187,6 +185,9 @@ class Site(Site):
         yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
+        yield 'lino_welfare.modlib.uploads'
+        yield 'lino.modlib.outbox'
+        yield 'lino.modlib.excerpts'
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.cv'

@@ -11,7 +11,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino import dd
 
 from lino.modlib.uploads.models import *
 from lino.modlib.contacts.mixins import ContactRelated
@@ -26,7 +26,8 @@ cal = dd.resolve_app('cal')
 
 
 class UploadType(UploadType):
-    """Extends the library model by adding warn_expiry info.
+    """Extends the library model by adding `warn_expiry` info.
+
     """
     warn_expiry_unit = cal.Recurrencies.field(
         _("Expiry warning (unit)"),
@@ -46,7 +47,6 @@ class UploadTypes(UploadTypes):
     id upload_area shortcut
     name
     warn_expiry_value warn_expiry_unit wanted max_number
-    # company contact_person contact_role
     uploads.UploadsByType
     """
 
@@ -58,45 +58,48 @@ class UploadTypes(UploadTypes):
     """
 
 
-class Upload(Upload, mixins.ProjectRelated, ContactRelated):
+class Upload(Upload, mixins.ProjectRelated, ContactRelated,
+             mixins.DatePeriod):
     """Extends the library model by adding:
 
-- ContactRelated
-- ProjectRelated
-- `valid_from` and `valid_until`
+    - ContactRelated
+    - ProjectRelated
+    - `start_date` and `end_date`
+    
     """
-    valid_from = models.DateField(
-        blank=True, null=True,
-        verbose_name=_("Valid from"))
-
-    valid_until = models.DateField(
-        blank=True, null=True,
-        verbose_name=_("Valid until"))
+    # valid_from = models.DateField(_("Valid from"), blank=True, null=True)
+    # valid_until = models.DateField(_("Valid until"), blank=True, null=True)
 
     remark = models.TextField(_("Remark"), blank=True)
+    needed = models.BooleanField(_("Needed"), default=True)
+
+    # def on_create(self, ar):
+    #     super(Upload, self).on_create()
 
     def save(self, *args, **kw):
+        if self.id is None:
+            if self.type and self.type.warn_expiry_unit:
+                self.needed = True
+            else:
+                self.needed = False
         super(Upload, self).save(*args, **kw)
         self.update_reminders()
 
     def update_reminders(self):
-        """Overrides :meth:`dd.Model.update_reminders`.
+        """Overrides :meth:`lino.core.model.Model.update_reminders`.
 
         """
         ut = self.type
         if not ut or not ut.warn_expiry_unit:
             return
+        if not self.needed:
+            return
         cal.update_reminder(
             1, self, self.user,
-            self.valid_until,
+            self.end_date,
             _("%s expires") % unicode(ut),
             ut.warn_expiry_value,
             ut.warn_expiry_unit)
-
-    # def update_owned_instance(self, controllable):
-    #     super(Upload, self).update_owned_instance(controllable)
-    #     if isinstance(controllable, rt.modules.pcsw.Client):
-    #         self.client = controllable
 
 
 dd.update_field(
@@ -104,6 +107,8 @@ dd.update_field(
 dd.update_field(
     Upload, 'contact_person',
     verbose_name=_("Issued by (Person)"))
+dd.update_field(Upload, 'start_date', verbose_name=_("Valid from"))
+dd.update_field(Upload, 'end_date', verbose_name=_("Valid until"))
 # dd.update_field(
 #     Upload, 'upload_area', default=UploadAreas.job_search)
 
@@ -113,36 +118,146 @@ class UploadDetail(dd.FormLayout):
 
     main = """
     user project id
-    type description valid_from valid_until
+    type description start_date end_date needed
     company contact_person contact_role
     file owner
     remark cal.TasksByController
     """
 
-# Uploads.detail_layout = UploadDetail()
-# Uploads.insert_layout = """
-# type file
-# valid_from valid_until
-# description
-# """
-
+LibraryUploads = Uploads
 
 class Uploads(Uploads):
-    column_names = 'user project type file valid_from valid_until ' \
+    column_names = 'user project type file start_date end_date ' \
                    'description *'
 
+    detail_layout = UploadDetail()
 
-class UploadsByClient(AreaUploads):
+    insert_layout = """
+    type file
+    start_date end_date
+    description
+    """
+
+    parameters = mixins.ObservedPeriod(
+        puser=models.ForeignKey(
+            'users.User', blank=True, null=True,
+            verbose_name=_("Uploaded by")),
+        pupload_type=models.ForeignKey(
+            'uploads.UploadType', blank=True, null=True),
+        coached_by=models.ForeignKey(
+            'users.User',
+            blank=True, null=True,
+            verbose_name=_("Coached by"),
+            help_text=_(
+                "Show only uploads for clients coached by this user.")),
+        observed_event=dd.PeriodEvents.field(
+            _("Validity"),
+            blank=True, default=dd.PeriodEvents.active))
+    params_layout = "observed_event:20 start_date end_date \
+    coached_by puser pupload_type"
+
+    auto_fit_column_widths = True
+
+    @classmethod
+    def get_request_queryset(cls, ar):
+        # use inherited method from grandparent (not direct parent)
+        qs = super(LibraryUploads, cls).get_request_queryset(ar)
+        pv = ar.param_values
+
+        ce = pv.observed_event
+        if ce is not None:
+            qs = ce.add_filter(qs, pv)
+
+        if pv.puser:
+            qs = qs.filter(user=pv.puser)
+
+        if pv.coached_by:
+            qs = qs.filter(project__coachings_by_client__user=pv.coached_by)
+            qs = qs.filter(needed=True)
+            
+        if pv.pupload_type:
+            qs = qs.filter(type=pv.pupload_type)
+
+        return qs
+
+    @classmethod
+    def get_title_tags(self, ar):
+        for t in super(Uploads, self).get_title_tags(ar):
+            yield t
+
+        pv = ar.param_values
+
+        if pv.observed_event:
+            yield unicode(pv.observed_event)
+
+        if pv.coached_by:
+            yield unicode(self.parameters['coached_by'].verbose_name) + \
+                ' ' + unicode(pv.coached_by)
+
+        if pv.puser:
+            yield unicode(self.parameters['puser'].verbose_name) + \
+                ' ' + unicode(pv.puser)
+
+
+class UploadsByType(Uploads, UploadsByType):
+    pass
+
+
+class MyUploads(Uploads):
+    required = dd.required()
+    column_names = "id project type start_date end_date \
+    needed description file *"
+    order_by = ['-id']
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyUploads, self).param_defaults(ar, **kw)
+        kw.update(puser=ar.get_user())
+        return kw
+
+
+class MyExpiringUploads(Uploads):
+    "Expiring uploads for client coached by me"
+    required = dd.required()
+    label = _("My expiring uploads")
+    help_text = _("Show needed uploads whose validity expires soon")
+    column_names = "project type user start_date end_date needed *"
+    order_by = ['end_date']
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyExpiringUploads, self).param_defaults(ar, **kw)
+        kw.update(coached_by=ar.get_user())
+        kw.update(observed_event=dd.PeriodEvents.ended)
+        kw.update(start_date=dd.today())
+        kw.update(end_date=dd.today(365))
+        return kw
+
+
+class AreaUploads(Uploads, AreaUploads):
+    pass
+
+
+class UploadsByController(Uploads, UploadsByController):
+    insert_layout = """
+    file
+    type end_date
+    description
+    """
+
+
+# class UploadsByClient(AreaUploads):
+class UploadsByClient(AreaUploads, UploadsByController):
     "Uploads by Client"
     master = 'pcsw.Client'
     master_key = 'project'
-    column_names = "type valid_until description user file *"
+    column_names = "type end_date needed description user file *"
     # auto_fit_column_widths = True
     # debug_sql = "20140519"
 
     insert_layout = """
-    type valid_until
     file
+    type end_date
     description
     """
 
@@ -154,11 +269,10 @@ class UploadsByClient(AreaUploads):
 
     @classmethod
     def format_row_in_slave_summary(self, ar, obj):
-        if obj.valid_until and obj.valid_until < settings.SITE.today():
+        if obj.end_date and obj.end_date < settings.SITE.today():
             return None
         return super(UploadsByClient, self).format_row_in_slave_summary(
             ar, obj)
-
 
 # class JobSearchUploadsByClient(UploadsByClient):
 #     _upload_area = UploadAreas.job_search
@@ -172,12 +286,17 @@ class UploadsByClient(AreaUploads):
 #     _upload_area = UploadAreas.career
 
 
-def site_setup(site):
-    site.modules.uploads.Uploads.set_detail_layout(UploadDetail())
-    site.modules.uploads.Uploads.set_insert_layout("""
-    type file
-    valid_from valid_until
+def unused_site_setup(site):
+    uploads = site.modules.uploads
+    uploads.Uploads.set_detail_layout(UploadDetail())
+    # uploads.Uploads.set_insert_layout("""
+    # type file
+    # start_date end_date
+    # description
+    # """)
+    uploads.UploadsByController.set_insert_layout("""
+    file
+    type
+    start_date end_date
     description
     """)
-
-

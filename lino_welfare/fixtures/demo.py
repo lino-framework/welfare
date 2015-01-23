@@ -196,19 +196,8 @@ def objects():
     ulrike = Person.objects.get(name__exact="Charlier Ulrike")
     erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
 
-    #~ ug_dsbe = users.Group(name="DSBE")
-    #~ yield ug_dsbe
-    #~ ug_courses = users.Group(name="Courses")
-    #~ yield ug_courses
-    #~ ug_asd = users.Group(name="ASD")
-    #~ yield ug_asd
-    #~ ug_sek = users.Group(name="Sekretariat")
-    #~ yield ug_sek
-    #~ ug_staff = users.Group(name="Staff")
-    #~ yield ug_staff
-    #~ yield User(username='gerd',partner=gerd,profile='900')
     melanie = person(first_name="Mélanie", last_name="Mélard",
-                     email=settings.SITE.demo_email,  # 'melanie@example.com',
+                     email=settings.SITE.demo_email,
                      city=eupen, country='BE', gender=dd.Genders.female,
                      language='fr')
 
@@ -223,7 +212,7 @@ def objects():
     yield melanie
 
     hubert = person(first_name=u"Hubert", last_name=u"Huppertz",
-                    email=settings.SITE.demo_email,  # 'hubert@example.com',
+                    email=settings.SITE.demo_email,
                     city=kettenis, country='BE', gender=dd.Genders.male)
     yield hubert
     hubert = users.User(
@@ -233,7 +222,7 @@ def objects():
 
     alicia = person(
         first_name=u"Alicia", last_name=u"Allmanns",
-        email=settings.SITE.demo_email,  # 'alicia@example.com',
+        email=settings.SITE.demo_email,
         city=kettenis, country='BE',
         gender=dd.Genders.female, language='fr')
     yield alicia
@@ -243,7 +232,6 @@ def objects():
     yield alicia
 
     theresia = person(first_name=u"Theresia", last_name=u"Thelen",
-                      # 'theresia@example.com',
                       email=settings.SITE.demo_email,
                       city=eupen, country='BE', gender=dd.Genders.female)
     yield theresia
@@ -1147,7 +1135,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
         obj.get_primary_address()
 
-    # create some uploads
+    # create some uploads, all authored by hubert
     CLIENTS = Cycler(pcsw.Clients.request(user=hubert))
     UPLOAD_TYPES = Cycler(uploads.UploadType.objects.all())
     for i in range(3):
@@ -1157,7 +1145,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 project=obj,
                 owner=obj,
                 user=hubert,
-                valid_until=settings.SITE.demo_date(360+i*10),
+                end_date=settings.SITE.demo_date(360+i*10),
                 type=UPLOAD_TYPES.pop())
 
 

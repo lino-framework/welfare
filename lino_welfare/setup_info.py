@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2014 Luc Saffre
+# Copyright 2002-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 #~ Note that this module may not have a docstring because any
@@ -16,7 +16,7 @@ SETUP_INFO = dict(
     name='lino-welfare',
     #~ distclass=MyDistribution,
     #~ dist_dir=os.path.join('docs','dist'),
-    version='1.1.20',  # since 20141220
+    version='1.1.21',  # since 20150123
     install_requires=['lino', 'suds', 'vobject', 'django-iban', 'xlwt'],
     test_suite='tests',
     description=u"A Lino application for Belgian Centres for Public Welfare",
@@ -108,6 +108,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.system',
     'lino_welfare.modlib.system.fixtures',
     'lino_welfare.modlib.uploads',
+    'lino_welfare.modlib.uploads.fixtures',
     'lino_welfare.modlib.users',
     'lino_welfare.modlib.users.fixtures',
     'lino_welfare.projects',

@@ -60,7 +60,7 @@ class Site(Site):
         """
 
         # Do NOT call super() which would raise "Unexpected name 'debts'"
-        # super(Site, self).setup_choicelists()
+        # super(Site, self).setup_user_profiles()
 
         # activate workflows for courses:
         from lino.modlib.courses import workflows
