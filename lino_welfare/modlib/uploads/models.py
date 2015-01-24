@@ -42,30 +42,39 @@ class UploadType(UploadType):
 
 
 class UploadTypes(UploadTypes):
+    column_names = "id name wanted max_number \
+    warn_expiry_unit warn_expiry_value shortcut"
 
     detail_layout = """
     id upload_area shortcut
     name
-    warn_expiry_value warn_expiry_unit wanted max_number
+    warn_expiry_unit warn_expiry_value wanted max_number
     uploads.UploadsByType
     """
 
     insert_layout = """
     upload_area
     name
-    warn_expiry_value warn_expiry_unit
+    warn_expiry_unit warn_expiry_value
     # company contact_person contact_role
     """
 
 
 class Upload(Upload, mixins.ProjectRelated, ContactRelated,
              mixins.DatePeriod):
-    """Extends the library model by adding:
+    """Extends the library model by adding the `ContactRelated`,
+    `ProjectRelated` and `DatePeriod` mixins and two fields.
 
-    - ContactRelated
-    - ProjectRelated
-    - `start_date` and `end_date`
+    .. attribute:: remark
     
+    A remark about this document.
+
+    .. attribute:: needed
+    
+    Whether this particular upload is a needed document. Default value
+    is True if the new Upload has an UploadType with a nonempty
+    `warn_expiry_unit`.
+
     """
     # valid_from = models.DateField(_("Valid from"), blank=True, null=True)
     # valid_until = models.DateField(_("Valid until"), blank=True, null=True)
@@ -73,15 +82,14 @@ class Upload(Upload, mixins.ProjectRelated, ContactRelated,
     remark = models.TextField(_("Remark"), blank=True)
     needed = models.BooleanField(_("Needed"), default=True)
 
-    # def on_create(self, ar):
-    #     super(Upload, self).on_create()
+    def on_create(self, ar):
+        super(Upload, self).on_create(ar)
+        if self.type and self.type.warn_expiry_unit:
+            self.needed = True
+        else:
+            self.needed = False
 
     def save(self, *args, **kw):
-        if self.id is None:
-            if self.type and self.type.warn_expiry_unit:
-                self.needed = True
-            else:
-                self.needed = False
         super(Upload, self).save(*args, **kw)
         self.update_reminders()
 
@@ -208,6 +216,10 @@ class MyUploads(Uploads):
     column_names = "id project type start_date end_date \
     needed description file *"
     order_by = ['-id']
+
+    @classmethod
+    def get_actor_label(self):
+        return _("My %s") % _("Uploads")
 
     @classmethod
     def param_defaults(self, ar, **kw):

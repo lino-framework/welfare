@@ -5,6 +5,8 @@
 Demo data for :mod:`lino_welfare.modlib.uploads`.
 """
 
+from django.conf import settings
+from lino.utils import Cycler
 from lino import dd, rt
 
 from lino.modlib.uploads.choicelists import Shortcuts
@@ -20,6 +22,24 @@ def objects():
     UploadType = rt.modules.uploads.UploadType
     Client = rt.modules.pcsw.Client
     ClientStates = rt.modules.pcsw.ClientStates
+
+    # create some random uploads, all uploaded by hubert
+    hubert = rt.login('hubert')
+    CLIENTS = Cycler(rt.modules.pcsw.Clients.request(user=hubert))
+    UPLOAD_TYPES = Cycler(UploadType.objects.all())
+    for i in range(3):
+        cli = CLIENTS.pop()
+        for j in range(2):
+            obj = Upload(
+                project=cli,
+                owner=cli,
+                # user=hubert,
+                end_date=settings.SITE.demo_date(360+i*10),
+                type=UPLOAD_TYPES.pop())
+            obj.on_create(hubert)  # sets `user` and `needed`
+            yield obj
+
+    # some upload stories
 
     newcomer = Client.objects.get(id=121)
     assert newcomer.client_state == ClientStates.newcomer
@@ -60,3 +80,4 @@ def objects():
                  user=ai, **kw)
     yield Upload(type=driving_license, end_date=dd.demo_date(10),
                  user=agent, **kw)
+

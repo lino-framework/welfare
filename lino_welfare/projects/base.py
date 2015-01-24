@@ -159,11 +159,15 @@ class Site(Site):
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
         yield 'lino.modlib.countries'
+
         yield 'lino.modlib.properties'
         yield 'lino_welfare.modlib.contacts'
         yield 'lino.modlib.addresses'
-        # yield 'lino_welfare.modlib.uploads'
-        # yield 'lino.modlib.outbox'
+
+        yield 'lino_welfare.modlib.uploads'
+        yield 'lino.modlib.outbox'
+        yield 'lino.modlib.excerpts'
+
         yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
         #~ yield 'lino.modlib.postings'
@@ -185,9 +189,6 @@ class Site(Site):
         yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
-        yield 'lino_welfare.modlib.uploads'
-        yield 'lino.modlib.outbox'
-        yield 'lino.modlib.excerpts'
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.cv'

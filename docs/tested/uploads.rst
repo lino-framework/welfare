@@ -34,6 +34,28 @@ lino_welfare.projects.eupen.settings.doctests
 datetime.date(2014, 5, 22)
 
 
+Configuring upload types
+========================
+
+This is the list of upload types:
+
+>>> rt.login('rolf').show(uploads.UploadTypes)
+======= ============================ ======== ============= ========================= ====================== ============================
+ ID      Bezeichnung                  Wanted   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
+------- ---------------------------- -------- ------------- ------------------------- ---------------------- ----------------------------
+ 2       Arbeitserlaubnis             Ja       1             monatlich                 2
+ 1       Aufenthaltserlaubnis         Ja       1             monatlich                 2
+ 7       Behindertenausweis           Nein     -1                                      1
+ 8       Diplom                       Ja       -1                                      1
+ 3       Führerschein                 Ja       1             monatlich                 1
+ 4       Identifizierendes Dokument   Ja       1             monatlich                 1                      Identifizierendes Dokument
+ 9       Personalausweis              Nein     -1                                      1
+ 5       Vertrag                      Nein     -1                                      1
+ 6       Ärztliche Bescheinigung      Nein     -1                                      1
+ **0**                                **5**    **-1**                                  **11**
+======= ============================ ======== ============= ========================= ====================== ============================
+<BLANKLINE>
+
 
 Two clients and their uploads
 =============================
@@ -72,6 +94,20 @@ DOBBELSTEIN Dorothée (124)
 ====================== ============ ======= ============== =================== =======
 <BLANKLINE>
 
+
+My uploads
+==========
+
+Most users can open two tables which show "their" uploads.
+
+>>> print(unicode(uploads.MyUploads.label))
+Meine Uploads
+
+>>> print(unicode(uploads.MyExpiringUploads.label))
+Ablaufende Uploads
+
+This is the MyUploads table for Theresia:
+
 >>> rt.login('theresia').show(uploads.MyUploads)
 ======= ============================ ============================ ============ ============ ======= ============== =======
  ID      Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung   Datei
@@ -83,6 +119,9 @@ DOBBELSTEIN Dorothée (124)
 ======= ============================ ============================ ============ ============ ======= ============== =======
 <BLANKLINE>
 
+
+And the same for Caroline:
+
 >>> rt.login('caroline').show(uploads.MyUploads)
 ======= ============================ ============== ============ ============ ======= ============== =======
  ID      Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
@@ -91,6 +130,9 @@ DOBBELSTEIN Dorothée (124)
  **0**                                                                         **1**
 ======= ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
+
+
+This is the MyExpiringUploads table for :ref:`hubert`:
 
 >>> rt.login('hubert').show(uploads.MyExpiringUploads)
 ========================= ====================== =================== ============ ============ =======
@@ -102,7 +144,14 @@ DOBBELSTEIN Dorothée (124)
 ========================= ====================== =================== ============ ============ =======
 <BLANKLINE>
 
-TODO: not sure
+:ref:`theresia` does not coach anybody, so the `MyExpiringUploads`
+table is empty for her:
+
+>>> rt.login('theresia').show(uploads.MyExpiringUploads)
+<BLANKLINE>
+Keine Daten anzuzeigen
+<BLANKLINE>
+
 
 
 Shortcut fields
@@ -162,7 +211,7 @@ It has 3 keys:
 >>> d.record_id
 7
 >>> d.base_params
-{u'mt': 54, u'type': 9, u'mk': 121}
+{u'mt': 54, u'type': 4, u'mk': 121}
 >>> d.param_values
 {u'pupload_type': None, u'puser': None, u'end_date': None, u'observed_eventHidden': u'20', u'observed_event': u'Is active', u'coached_by': None, u'pupload_typeHidden': None, u'coached_byHidden': None, u'puserHidden': None, u'start_date': None}
 
@@ -179,7 +228,7 @@ BRECHT Bernd (177)
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'UploadsByClient')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Aufenthaltserlaubnis: Arbeitserlaubnis: Führerschein: 3Vertrag: 4Diplom: 
+Aufenthaltserlaubnis: Arbeitserlaubnis: Führerschein: 3Identifizierendes Dokument: 4Diplom:
 
 >>> links = soup.find_all('a')
 >>> len(links)

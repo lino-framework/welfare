@@ -9,8 +9,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd
-from lino.utils.instantiator import Instantiator
+from lino.api import dd, rt
 from lino.modlib.uploads.choicelists import Shortcuts
 
 UPLOADTYPE_RESIDENCE_PERMIT = 1
@@ -19,54 +18,54 @@ UPLOADTYPE_DRIVING_LICENSE = 3
 
 
 def objects():
+    Recurrencies = rt.modules.cal.Recurrencies
+    UploadType = rt.modules.uploads.UploadType
 
-    uploadType = Instantiator(
-        'uploads.UploadType',
-        max_number=1, wanted=True).build
-    yield uploadType(
-        id=UPLOADTYPE_RESIDENCE_PERMIT,
-        **dd.str2kw('name', _("Residence  permit")))
-        # 'name', de=u"Aufenthaltserlaubnis",
-        # fr=u"Permis de séjour", en="Residence permit"))
+    kw = dict(
+        warn_expiry_unit=Recurrencies.monthly,
+        warn_expiry_value=2)
+    kw.update(max_number=1, wanted=True)
+    kw.update(dd.str2kw('name', _("Residence permit")))
+    # 'name', de=u"Aufenthaltserlaubnis",
+    # fr=u"Permis de séjour", en="Residence permit"))
+    yield UploadType(id=UPLOADTYPE_RESIDENCE_PERMIT, **kw)
 
-    yield uploadType(
-        id=UPLOADTYPE_WORK_PERMIT,
-        **dd.str2kw('name', _("Work permit")))
-        # **dd.babelkw(
+    kw.update(dd.str2kw('name', _("Work permit")))
         # 'name', de=u"Arbeitserlaubnis",
         # fr=u"Permis de travail", en="Work permit"))
-    yield uploadType(
-        id=UPLOADTYPE_DRIVING_LICENSE,
-        **dd.str2kw('name', _("Driving licence")))
+    yield UploadType(id=UPLOADTYPE_WORK_PERMIT, **kw)
 
-    uploadType = Instantiator(
-        'uploads.UploadType'  # , upload_area=UploadAreas.job_search
-    ).build
-    yield uploadType(**dd.str2kw('name', _("Contract")))
-    uploadType = Instantiator(
-        'uploads.UploadType'  # , upload_area=UploadAreas.medical
-    ).build
-    yield uploadType(
-        **dd.babelkw(
-            'name',
-            de="Ärztliche Bescheinigung",
-            fr="Certificat médical",
-            en="Medical certificate"))
-    yield uploadType(
-        **dd.babelkw(
-            'name',
-            de="Behindertenausweis",
-            fr="Certificat de handicap",
-            en="Handicap certificate"))
+    kw.update(warn_expiry_value=1)
 
-    uploadType = Instantiator('uploads.UploadType').build
-    yield uploadType(wanted=True, **dd.str2kw('name', _("Diploma")))
+    kw.update(dd.str2kw('name', _("Driving licence")))
+    yield UploadType(id=UPLOADTYPE_DRIVING_LICENSE, **kw)
 
-    yield uploadType(
-        **dd.babelkw(
-            'name', de=u"Personalausweis",
-            fr=u"Carte d'identité", en="ID card"))
-    yield uploadType(
-        shortcut=Shortcuts.id_document,
-        **dd.str2kw('name', _("Identifying document")))
+    kw.update(dd.str2kw('name', _("Identifying document")))
+    yield UploadType(shortcut=Shortcuts.id_document, **kw)
+
+    kw.update(max_number=-1, wanted=False)
+    kw.update(warn_expiry_unit='')
+
+    kw.update(dd.str2kw('name', _("Contract")))
+    yield UploadType(**kw)
+
+    kw.update(dd.str2kw('name', _("Medical certificate")))
+    # de="Ärztliche Bescheinigung",
+    # fr="Certificat médical",
+    yield UploadType(**kw)
+
+    kw.update(dd.str2kw('name', _("Handicap certificate")))
+    # de="Behindertenausweis",
+    # fr="Certificat de handicap",
+    yield UploadType(**kw)
+
+    kw.update(wanted=True)
+    kw.update(dd.str2kw('name', _("Diploma")))
+    yield UploadType(**kw)
+
+    kw.update(wanted=False)
+    kw.update(dd.str2kw('name', _("Identity card")))
+    # fr=u"Carte d'identité", en="Identity card"))
+    yield UploadType(**kw)
+
 

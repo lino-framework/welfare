@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -15,7 +15,6 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino import dd, rt
-from lino import mixins
 from lino.utils import i2d, Cycler
 from lino.modlib.beid.mixins import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
@@ -1135,18 +1134,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
         obj.get_primary_address()
 
-    # create some uploads, all authored by hubert
-    CLIENTS = Cycler(pcsw.Clients.request(user=hubert))
-    UPLOAD_TYPES = Cycler(uploads.UploadType.objects.all())
-    for i in range(3):
-        obj = CLIENTS.pop()
-        for j in range(2):
-            yield uploads.Upload(
-                project=obj,
-                owner=obj,
-                user=hubert,
-                end_date=settings.SITE.demo_date(360+i*10),
-                type=UPLOAD_TYPES.pop())
 
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

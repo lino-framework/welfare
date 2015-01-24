@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-23 20:59+0200\n"
-"PO-Revision-Date: 2015-01-23 21:33+0300\n"
+"POT-Creation-Date: 2015-01-24 01:43+0200\n"
+"PO-Revision-Date: 2015-01-24 02:29+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2770,7 +2770,7 @@ msgstr "Neue Klienten seit"
 #: lino_welfare/modlib/newcomers/models.py:233
 #: lino_welfare/modlib/pcsw/coaching.py:250
 #: lino_welfare/modlib/pcsw/models.py:955
-#: lino_welfare/modlib/uploads/models.py:139
+#: lino_welfare/modlib/uploads/models.py:149
 msgid "Coached by"
 msgstr "Begleitet durch"
 
@@ -3206,6 +3206,7 @@ msgid "Overview"
 msgstr "Übersicht"
 
 #: lino_welfare/modlib/pcsw/models.py:571
+#: lino_welfare/modlib/uploads/fixtures/std.py:29
 msgid "Residence permit"
 msgstr "Aufenthaltserlaubnis"
 
@@ -3664,57 +3665,77 @@ msgstr "Ablaufwarnung (Wert)"
 msgid "Needed"
 msgstr "Nötig"
 
-#: lino_welfare/modlib/uploads/models.py:92
+#: lino_welfare/modlib/uploads/models.py:99
 #, python-format
 msgid "%s expires"
 msgstr "%s wird ungültig"
 
-#: lino_welfare/modlib/uploads/models.py:98
+#: lino_welfare/modlib/uploads/models.py:105
 #, fuzzy
 msgid "Issued by (Organization)"
 msgstr "Organisation"
 
-#: lino_welfare/modlib/uploads/models.py:101
+#: lino_welfare/modlib/uploads/models.py:108
 #, fuzzy
 msgid "Issued by (Person)"
 msgstr "ausgestellt durch "
 
-#: lino_welfare/modlib/uploads/models.py:133
+#: lino_welfare/modlib/uploads/models.py:109
+msgid "Valid from"
+msgstr "Gültig von"
+
+#: lino_welfare/modlib/uploads/models.py:110
+msgid "Valid until"
+msgstr "Gültig bis"
+
+#: lino_welfare/modlib/uploads/models.py:143
 msgid "Uploaded by"
 msgstr "Hochgeladen durch"
 
-#: lino_welfare/modlib/uploads/models.py:140
+#: lino_welfare/modlib/uploads/models.py:150
 msgid "Show only uploads for clients coached by this user."
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:143
+#: lino_welfare/modlib/uploads/models.py:153
 msgid "Validity"
 msgstr "Gültigkeit"
 
-#: lino_welfare/modlib/uploads/models.py:209
+#: lino_welfare/modlib/uploads/models.py:221
 msgid "My expiring uploads"
-msgstr "Ablaufende Dokumente"
+msgstr "Ablaufende Uploads"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:28
-msgid "Residence  permit"
-msgstr "Aufenthaltserlaubnis"
+#: lino_welfare/modlib/uploads/models.py:222
+msgid "Show needed uploads whose validity expires soon"
+msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:40
+#: lino_welfare/modlib/uploads/fixtures/std.py:41
 msgid "Driving licence"
 msgstr "Führerschein"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:45
-msgid "Contract"
-msgstr "Vertrag"
-
-#: lino_welfare/modlib/uploads/fixtures/std.py:63
-msgid "Diploma"
-msgstr "Diplom"
-
-#: lino_welfare/modlib/uploads/fixtures/std.py:71
+#: lino_welfare/modlib/uploads/fixtures/std.py:44
 #: lino_welfare/projects/base.py:107
 msgid "Identifying document"
 msgstr "Identifizierendes Dokument"
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:50
+msgid "Contract"
+msgstr "Vertrag"
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:53
+msgid "Medical certificate"
+msgstr "Ärztliche Bescheinigung"
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:58
+msgid "Handicap certificate"
+msgstr "Behindertenausweis"
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:64
+msgid "Diploma"
+msgstr "Diplom"
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:68
+msgid "Identity card"
+msgstr "Personalausweis"
 
 #: lino_welfare/modlib/users/models.py:34
 msgid "The default CoachingType used when creating Coachings."
@@ -4018,18 +4039,6 @@ msgstr "andere Einkommen"
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:47
 msgid "Job agents"
 msgstr "Interim-Agenturen"
-
-msgid "valid from"
-msgstr "Gültig von"
-
-msgid "valid until"
-msgstr "Gültig bis"
-
-msgid "Valid from"
-msgstr "Gültig von"
-
-msgid "Valid until"
-msgstr "Gültig bis"
 
 #~ msgid "Bilan"
 #~ msgstr "Auswertung"
@@ -4405,3 +4414,12 @@ msgstr "Gültig bis"
 
 #~ msgid "Art.60§7"
 #~ msgstr "Art.60§7"
+
+#~ msgid "Residence  permit"
+#~ msgstr "Aufenthaltserlaubnis"
+
+#~ msgid "valid from"
+#~ msgstr "Gültig von"
+
+#~ msgid "valid until"
+#~ msgstr "Gültig bis"

@@ -33,7 +33,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, extensible, cal, reception, accounts, badges, iban, sepa, excerpts, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
 126 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -76,7 +76,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         126
+ contenttypes.ContentType       contenttypes.ContentTypes       4         127
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78
@@ -459,17 +459,11 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | system.TextFieldTemplates     | admin                               | id name user description text                                |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| uploads.AreaUploads           | all except anonymous                | file user upload_area type description owner                 |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| uploads.MyUploads             | all except anonymous                | file user upload_area type description owner                 |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | uploads.UploadTypes           | admin                               | id upload_area shortcut name name_fr name_de name_nl         |
-|                               |                                     | warn_expiry_value warn_expiry_unit wanted max_number         |
+|                               |                                     | warn_expiry_unit warn_expiry_value wanted max_number         |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| uploads.Uploads               | admin                               | user project id type description valid_from valid_until      |
+| uploads.Uploads               | admin                               | user project id type description start_date end_date needed  |
 |                               |                                     | company contact_person contact_role file owner remark        |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| uploads.UploadsByType         | admin                               | file user upload_area type description owner                 |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | users.Users                   | admin                               | username profile partner first_name last_name initials email |
 |                               |                                     | language id created modified remarks event_type access_class |
@@ -483,6 +477,8 @@ The following table lists information about all detail layouts.
 User profiles
 =============
 
+.. _rolf:
+
 Rolf
 ----
 
@@ -493,7 +489,7 @@ Rolf is the local system administrator, he has a complete menu:
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -544,7 +540,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Site : Info
 <BLANKLINE>
 
-
+.. _hubert:
 
 Hubert
 ------
@@ -571,6 +567,7 @@ Hubert is an Integration agent.
 - Site : Info
 
 
+.. _melanie:
 
 Mélanie
 -------
@@ -648,7 +645,7 @@ Caroline is a newcomers consultant.
   - Kontakte : Länder, Sprachen
 - Site : Info
 
-
+.. _theresia:
 
 Theresia
 --------

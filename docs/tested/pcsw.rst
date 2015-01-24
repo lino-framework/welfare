@@ -173,13 +173,12 @@ Coaching types
 ====================== ===================== =================== ======= ======= =====================
  Bezeichnung            Bezeichnung (fr)      Bezeichnung (de)    DSBE    GSS     Role in evaluations
 ---------------------- --------------------- ------------------- ------- ------- ---------------------
- General                SSG                   ASD                 Nein    Ja      Colleague
- Integ                  SI                    DSBE                Ja      Nein    Colleague
+ General                SSG                   ASD                 Nein    Ja      Kollege
+ Integ                  SI                    DSBE                Ja      Nein    Kollege
  Debts mediation        Médiation de dettes   Schuldnerberatung   Nein    Nein
  **Total (3 Zeilen)**                                             **1**   **1**
 ====================== ===================== =================== ======= ======= =====================
 <BLANKLINE>
-
 
 
 .. _welfare.clients.parameters:

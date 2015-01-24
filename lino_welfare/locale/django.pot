@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.21\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-23 20:59+0200\n"
+"POT-Creation-Date: 2015-01-24 01:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2723,7 +2723,7 @@ msgstr ""
 #: lino_welfare/modlib/newcomers/models.py:233
 #: lino_welfare/modlib/pcsw/coaching.py:250
 #: lino_welfare/modlib/pcsw/models.py:955
-#: lino_welfare/modlib/uploads/models.py:139
+#: lino_welfare/modlib/uploads/models.py:149
 msgid "Coached by"
 msgstr ""
 
@@ -3156,6 +3156,7 @@ msgid "Overview"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:571
+#: lino_welfare/modlib/uploads/fixtures/std.py:29
 msgid "Residence permit"
 msgstr ""
 
@@ -3602,54 +3603,74 @@ msgstr ""
 msgid "Needed"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:92
+#: lino_welfare/modlib/uploads/models.py:99
 #, python-format
 msgid "%s expires"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:98
+#: lino_welfare/modlib/uploads/models.py:105
 msgid "Issued by (Organization)"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:101
+#: lino_welfare/modlib/uploads/models.py:108
 msgid "Issued by (Person)"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:133
-msgid "Uploaded by"
+#: lino_welfare/modlib/uploads/models.py:109
+msgid "Valid from"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:140
-msgid "Show only uploads for clients coached by this user."
+#: lino_welfare/modlib/uploads/models.py:110
+msgid "Valid until"
 msgstr ""
 
 #: lino_welfare/modlib/uploads/models.py:143
+msgid "Uploaded by"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/models.py:150
+msgid "Show only uploads for clients coached by this user."
+msgstr ""
+
+#: lino_welfare/modlib/uploads/models.py:153
 msgid "Validity"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:209
+#: lino_welfare/modlib/uploads/models.py:221
 msgid "My expiring uploads"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:28
-msgid "Residence  permit"
+#: lino_welfare/modlib/uploads/models.py:222
+msgid "Show needed uploads whose validity expires soon"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:40
+#: lino_welfare/modlib/uploads/fixtures/std.py:41
 msgid "Driving licence"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:45
+#: lino_welfare/modlib/uploads/fixtures/std.py:44
+#: lino_welfare/projects/base.py:107
+msgid "Identifying document"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:50
 msgid "Contract"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:63
+#: lino_welfare/modlib/uploads/fixtures/std.py:53
+msgid "Medical certificate"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:58
+msgid "Handicap certificate"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/fixtures/std.py:64
 msgid "Diploma"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:71
-#: lino_welfare/projects/base.py:107
-msgid "Identifying document"
+#: lino_welfare/modlib/uploads/fixtures/std.py:68
+msgid "Identity card"
 msgstr ""
 
 #: lino_welfare/modlib/users/models.py:34
