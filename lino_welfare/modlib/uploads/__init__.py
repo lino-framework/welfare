@@ -2,15 +2,14 @@
 # License: BSD (see file COPYING for details)
 
 """Functionality for uploading files to the server and managing them.
-
-Lino-Welfare extension of :mod:`lino.modlib.uploads`
+This is an extension of :mod:`lino.modlib.uploads`.
 
 .. autosummary::
    :toctree:
 
     models
     fixtures.std
-    fixtures.demo
+    fixtures.demo2
 
 """
 
