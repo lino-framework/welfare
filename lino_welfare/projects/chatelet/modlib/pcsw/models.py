@@ -38,10 +38,12 @@ class ClientDetail(dd.FormLayout):
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
-    national_id:15 civil_state birth_country birth_place declared_name
+    national_id:15 civil_state:20 birth_country birth_place \
+    declared_name:15 needs_residence_permit:20 needs_work_permit:20
     in_belgium_since:15 residence_type residence_until group:16
-    reception.AppointmentsByPartner reception.CoachingsByClient courses.EnrolmentsByPupil
+    reception.AppointmentsByPartner:40 reception.AgentsByClient:30 #reception.CoachingsByClient courses.EnrolmentsByPupil:40
     """, label=_("Person"))
+
 
     general2 = """
     gender:10 id:10 nationality:15
@@ -81,7 +83,6 @@ class ClientDetail(dd.FormLayout):
     """)
 
     papers = dd.Panel("""
-    needs_residence_permit needs_work_permit
     uploads.UploadsByClient
     active_job_search.ProofsByClient
     polls.ResponsesByPartner

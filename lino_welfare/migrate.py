@@ -1080,6 +1080,10 @@ Convert field `Study.success` to `Study.state`.
         return '1.1.20'
 
     def migrate_from_1_1_20(self, globals_dict):
+        """In `uploads.Upload`, renamed valid_from to start_date and
+valid_until to end_date.
+
+        """
         uploads_Upload = resolve_model("uploads.Upload")
         new_content_type_id = globals_dict['new_content_type_id']
 
