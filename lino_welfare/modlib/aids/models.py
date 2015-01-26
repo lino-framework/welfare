@@ -995,9 +995,9 @@ class RefundConfirmation(Confirmation):
         return rt.modules.contacts.Company.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
-        """
-        Called when an unknown doctor name was given.
-        Try to auto-create it.
+        """Called when an unknown doctor name was given.  Try to auto-create
+        it.
+
         """
         if not self.doctor_type:
             raise ValidationError("Cannot auto-create without doctor type")

@@ -8,7 +8,13 @@ Uploads
 
   $ python setup.py test -s tests.DocsTests.test_uploads
 
-A technical tour into the :mod:`lino_welfare.modlib.uploads` module.
+A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
+
+Lino Welfare extends the standard :mod:`lino.modlib.uploads` plugin
+into a system which helps social agents to manage certain documents
+about their clients. For example, integration agents want to get a
+reminder when the driving license of one of their client is going to
+expire.
 
 .. contents::
    :depth: 2

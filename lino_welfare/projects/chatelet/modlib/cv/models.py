@@ -1,6 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""Database models for :mod:`lino_modlib.projects.chatelet.modlib.cv`.
+
+"""
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -12,13 +15,24 @@ logger = logging.getLogger(__name__)
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd
+from lino.api import dd
 
 from lino.modlib.cv.models import *
 
 
 LanguageKnowledgesByPerson.column_names = "language native spoken \
 written spoken_passively written_passively *"
+
+
+class Proof(mixins.BabelNamed):
+    class Meta:
+        verbose_name = _("Skill proof")
+        verbose_name_plural = _("Skill proofs")
+
+
+class Proofs(dd.Table):
+    model = 'cv.Proof'
+
 
 
 class PersonProperty(dd.Model):
@@ -37,7 +51,7 @@ class PersonProperty(dd.Model):
 class PropsByPerson(dd.Table):
     master_key = 'person'
     auto_fit_column_widths = True
-    
+
 
 ##
 ## SKILLS
@@ -48,6 +62,8 @@ class Skill(PersonProperty, SectorFunction):
     class Meta:
         verbose_name = _("Skill")
         verbose_name_plural = _("Skills")
+
+    proof = dd.ForeignKey('cv.Proof', blank=True, null=True)
 
 dd.update_field(Skill, 'remark', verbose_name=_("Competences"))
 
@@ -80,6 +96,7 @@ class SoftSkill(PersonProperty):
         verbose_name = _("Soft skill")
         verbose_name_plural = _("Soft skills")
     type = dd.ForeignKey('cv.SoftSkillType', verbose_name=_("Type"))
+    proof = dd.ForeignKey('cv.Proof', blank=True, null=True)
 
 
 class SoftSkills(dd.Table):

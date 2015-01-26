@@ -26,6 +26,7 @@ using `manage.py run`.
    reception
    misc
    uploads
+   cv2
 
 
 

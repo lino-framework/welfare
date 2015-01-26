@@ -258,7 +258,6 @@ class UploadsByController(Uploads, UploadsByController):
     """
 
 
-# class UploadsByClient(AreaUploads):
 class UploadsByClient(AreaUploads, UploadsByController):
     "Uploads by Client"
     master = 'pcsw.Client'
