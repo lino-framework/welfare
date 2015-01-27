@@ -21,7 +21,7 @@ class Plugin(Plugin):
     extends_models = ['UploadType', 'Upload']
 
     def setup_main_menu(config, site, profile, m):
-        system = site.plugins.system
-        m = m.add_menu("office", system.OFFICE_MODULE_LABEL)
+        mg = site.plugins.office
+        m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('uploads.MyExpiringUploads')
         m.add_action('uploads.MyUploads')
