@@ -126,7 +126,9 @@ def bulk_create_with_manual_ids(model, obj_list):
 
 
 class Budget(UserAuthored, Certifiable, mixins.Duplicable):
-    """See :class:`ml.debts.Budget`.
+    """A document which expresses the financial situation of a partner at
+    a given date.
+
     """
 
     class Meta:
@@ -606,8 +608,21 @@ class ActorsByPartner(Actors):
 
 
 class Entry(SequencedBudgetComponent):
+    """A detail row of a :class:`Budget`.
 
-    """
+    .. attribute:: budget
+
+    The :class:`Budget` who contains this entry.
+
+    .. attribute:: amount
+
+    The amount of money.
+
+    .. attribute:: account
+
+    The related :class:`Account`.
+
+
     """
     class Meta:
         verbose_name = _("Budget Entry")

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2010-2014 Luc Saffre
+# Copyright 2010-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """.. management_command:: watch_tim
@@ -771,7 +771,8 @@ class PAR(Controller):
             newobj = obj = person
 
         if new_class is not Partner:
-            dd.pre_add_child.send(sender=obj, request=REQUEST, child=new_class)
+            dd.pre_add_child.send(sender=obj, request=REQUEST,
+                                  child=new_class)
             newobj = mti.insert_child(obj, new_class)
         if newobj is not None:
             self.applydata(newobj, data)

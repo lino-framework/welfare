@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # This file is part of the Lino-Welfare project.
 # Lino-Welfare is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -970,10 +970,10 @@ class RefundConfirmation(Confirmation):
         'contacts.Company', verbose_name=_("Pharmacy"),
         blank=True, null=True)
 
-    def after_ui_create(self, ar):
-        super(RefundConfirmation, self).after_ui_create(ar)
-        logger.info("20141127 RefundConfirmation %s %s",
-                    self.granting, self.client)
+    # def after_ui_create(self, ar):
+    #     super(RefundConfirmation, self).after_ui_create(ar)
+    #     logger.info("20141127 RefundConfirmation %s %s",
+    #                 self.granting, self.client)
 
     def on_create(self, ar):
         super(RefundConfirmation, self).on_create(ar)
@@ -982,19 +982,19 @@ class RefundConfirmation(Confirmation):
             self.pharmacy = qs[0]
 
     @dd.chooser()
-    def doctor_choices(cls, doctor_type):
-        fkw = dict()
-        if doctor_type:
-            fkw.update(client_contact_type=doctor_type)
-        return rt.modules.contacts.Person.objects.filter(**fkw)
-
-    @dd.chooser()
     def pharmacy_choices(cls, granting):
         fkw = dict()
         pt = granting.aid_type.pharmacy_type
         if pt:
             fkw.update(client_contact_type=pt)
         return rt.modules.contacts.Company.objects.filter(**fkw)
+
+    @dd.chooser()
+    def doctor_choices(cls, doctor_type):
+        fkw = dict()
+        if doctor_type:
+            fkw.update(client_contact_type=doctor_type)
+        return rt.modules.contacts.Person.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
         """Called when an unknown doctor name was given.  Try to auto-create
@@ -1072,7 +1072,7 @@ ConfirmationTypes.add_item(RefundConfirmation, RefundConfirmationsByGranting)
 class SubmitInsertAndPrint(dd.SubmitInsert):
     """A customized variant of the standard :class:`SubmitInsert
     <dd.SubmitInsert>` which prints the `Confirmation` after
-    successful creation.
+    successful creation (if :attr:`AidType.print_directly` is checked).
 
     """
     def run_from_ui(self, ar, **kw):
@@ -1082,9 +1082,10 @@ class SubmitInsertAndPrint(dd.SubmitInsert):
         if elem.granting and elem.granting.aid_type.print_directly:
             elem.do_print.run_from_ui(ar, **kw)
 
-"""
-Overrides the :attr:`submit_insert <dd.Model.submit_insert>`
-action of :class:`welfare.aids.Confirmation` with
+"""Overrides the :attr:`submit_insert
+<lino.core.model.Model.submit_insert>` action of :class:`Confirmation`
+with our custom action :class:`SubmitInsertAndPrint`.
+
 """
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
 

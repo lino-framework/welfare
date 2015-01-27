@@ -503,8 +503,8 @@ Rolf is the local system administrator, he has a complete menu:
   - ÖSHZ : Datenkontrolle Klienten
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Hilfetexte
+  - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
@@ -521,8 +521,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Client projects : Client project types
   - Polls : Choice Sets
 - Explorer :
-  - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
+  - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
