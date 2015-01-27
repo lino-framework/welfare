@@ -14,7 +14,7 @@ ONE_DAY = datetime.timedelta(days=1)
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils import i2d, Cycler
 from lino.modlib.beid.mixins import BeIdCardTypes
 from lino.utils.instantiator import Instantiator

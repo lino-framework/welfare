@@ -24,7 +24,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import translation
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils import i2d
 from lino.utils.djangotest import TestCase
 

@@ -11,7 +11,7 @@ recherche active d'emploi.
 from __future__ import unicode_literals
 
 from django.conf import settings
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils import Cycler
 from lino.ad import _
 

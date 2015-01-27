@@ -10,7 +10,7 @@ import os
 from django.conf import settings
 from lino.utils import IncompleteDate, Cycler
 #~ from lino.modlib.cbss import models as cbss
-from lino import dd, rt
+from lino.api import dd, rt
 cbss = dd.resolve_app('cbss')
 
 if cbss:

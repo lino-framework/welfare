@@ -21,12 +21,11 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-import datetime
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, mixins
+from lino.api import dd
+from lino import mixins
 
 config = dd.apps.badges
 

@@ -31,7 +31,7 @@ from lino.utils.xmlgen.html import E
 from lino.modlib.users.choicelists import UserProfiles, UserLevels
 from lino.utils.report import Report
 
-from lino import dd
+from lino.api import dd
 from lino.modlib.system.mixins import PeriodEvents
 
 config = dd.plugins.integ

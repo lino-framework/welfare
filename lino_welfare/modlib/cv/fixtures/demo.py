@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils import Cycler
 
 

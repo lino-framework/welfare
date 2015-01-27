@@ -128,7 +128,7 @@ class Site(Site):
         from django.utils.translation import ugettext_lazy as _
         from django.utils.translation import string_concat
         from django.db import models
-        from lino import dd, rt
+        from lino.api import dd, rt
         contacts = dd.resolve_app("contacts")
 
         m = main.add_menu("master", _("Master"))

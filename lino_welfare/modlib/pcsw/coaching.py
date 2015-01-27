@@ -13,7 +13,9 @@ from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd, mixins
+from lino.api import dd
+from lino import mixins
+
 from lino.modlib.users.mixins import ByUser
 
 

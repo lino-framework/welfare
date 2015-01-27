@@ -7,7 +7,7 @@ Demo data for :mod:`lino_welfare.modlib.uploads`.
 
 from django.conf import settings
 from lino.utils import Cycler
-from lino import dd, rt
+from lino.api import dd, rt
 
 from lino.modlib.uploads.choicelists import Shortcuts
 

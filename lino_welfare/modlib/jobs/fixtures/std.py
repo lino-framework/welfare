@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.utils.instantiator import Instantiator
 from lino.dd import babel_values
 
-from lino import dd
+from lino.api import dd
 
 
 def objects():

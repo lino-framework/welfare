@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from atelier.utils import AttrDict
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino import mixins
 notes = dd.resolve_app('notes')
 contacts = dd.resolve_app('contacts')

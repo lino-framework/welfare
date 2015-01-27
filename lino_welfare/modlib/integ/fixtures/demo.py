@@ -12,7 +12,7 @@ import datetime
 
 from django.conf import settings
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils import Cycler
 
 aids = dd.resolve_app('aids')

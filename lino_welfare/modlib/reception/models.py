@@ -19,7 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.xmlgen.html import E
 
-from lino import dd
+from lino.api import dd
 
 from lino.core.tables import ButtonsTable
 

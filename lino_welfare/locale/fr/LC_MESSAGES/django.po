@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-24 01:43+0200\n"
-"PO-Revision-Date: 2015-01-25 08:27+0300\n"
+"POT-Creation-Date: 2015-01-26 21:31+0200\n"
+"PO-Revision-Date: 2015-01-26 21:33+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -56,24 +56,25 @@ msgstr ""
 #: lino_welfare/modlib/aids/fixtures/std.py:135
 #: lino_welfare/modlib/aids/fixtures/std.py:149
 #: lino_welfare/modlib/reception/models.py:172
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:30
 msgid "Attestation"
 msgstr "Attestation"
 
-#: lino_welfare/fixtures/demo.py:260
+#: lino_welfare/fixtures/demo.py:259
 msgid "Colleague"
 msgstr "Collègue"
 
-#: lino_welfare/fixtures/demo.py:360
+#: lino_welfare/fixtures/demo.py:359
 #, fuzzy
 msgid "Consultation"
 msgstr "Consultat nouveaux clients"
 
-#: lino_welfare/fixtures/demo.py:568
+#: lino_welfare/fixtures/demo.py:567
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:27
 msgid "Health insurance"
 msgstr "Caisse d'assurance maladie"
 
-#: lino_welfare/fixtures/demo.py:579 lino_welfare/fixtures/std.py:103
+#: lino_welfare/fixtures/demo.py:578 lino_welfare/fixtures/std.py:103
 #: lino_welfare/modlib/aids/models.py:968
 #: lino_welfare/modlib/aids/fixtures/demo.py:57
 #: lino_welfare/modlib/aids/fixtures/std.py:97
@@ -81,56 +82,56 @@ msgstr "Caisse d'assurance maladie"
 msgid "Pharmacy"
 msgstr "Pharmacie"
 
-#: lino_welfare/fixtures/demo.py:587
+#: lino_welfare/fixtures/demo.py:586
 msgid "Advocate"
 msgstr "Avocat"
 
-#: lino_welfare/fixtures/demo.py:598
+#: lino_welfare/fixtures/demo.py:597
 msgid "Bailiff"
 msgstr "Huissier"
 
-#: lino_welfare/fixtures/demo.py:611
+#: lino_welfare/fixtures/demo.py:610
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:690
+#: lino_welfare/fixtures/demo.py:689
 msgid "Employment office"
 msgstr "Bureau de chômage"
 
-#: lino_welfare/fixtures/demo.py:702
+#: lino_welfare/fixtures/demo.py:701
 msgid "Physician"
 msgstr "Médecin"
 
-#: lino_welfare/fixtures/demo.py:710
+#: lino_welfare/fixtures/demo.py:709
 msgid "Family doctor"
 msgstr "Médecin traitant"
 
-#: lino_welfare/fixtures/demo.py:718
+#: lino_welfare/fixtures/demo.py:717
 msgid "Dentist"
 msgstr "Dentiste"
 
-#: lino_welfare/fixtures/demo.py:728
+#: lino_welfare/fixtures/demo.py:727
 msgid "Pediatrician"
 msgstr "Pédiatre"
 
-#: lino_welfare/fixtures/demo.py:888
+#: lino_welfare/fixtures/demo.py:887
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:890
+#: lino_welfare/fixtures/demo.py:889
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 msgid "Urgent problem"
 msgstr "Problème urgent"
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 #, fuzzy
 msgid "Complain"
 msgstr "Société"
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 #, fuzzy
 msgid "Information"
 msgstr "période d'essai"
@@ -215,7 +216,7 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:23
 #: lino_welfare/modlib/pcsw/models.py:809
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:101
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:102
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:126
 msgid "Aids"
 msgstr "Aides"
@@ -470,8 +471,8 @@ msgstr ""
 #: lino_welfare/modlib/pcsw/models.py:1326
 #: lino_welfare/modlib/pcsw/models.py:1385
 #: lino_welfare/modlib/projects/models.py:41
-#: lino_welfare/modlib/uploads/models.py:73
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:34
+#: lino_welfare/modlib/uploads/models.py:82
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:48
 msgid "Remark"
 msgstr "Remarque"
 
@@ -1026,7 +1027,7 @@ msgid "Tx25 Requests"
 msgstr "Requêtes Tx25"
 
 #: lino_welfare/modlib/cbss/tx25.py:97 lino_welfare/modlib/pcsw/models.py:825
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:115
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:116
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:146
 msgid "History"
 msgstr "Historique"
@@ -1479,7 +1480,7 @@ msgstr "Contact"
 #: lino_welfare/modlib/contacts/models.py:209
 #: lino_welfare/modlib/contacts/models.py:307
 #: lino_welfare/modlib/pcsw/models.py:845
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:131
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:132
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:167
 msgid "Miscellaneous"
 msgstr "Divers"
@@ -1487,7 +1488,7 @@ msgstr "Divers"
 #: lino_welfare/modlib/contacts/models.py:141
 #: lino_welfare/modlib/households/models.py:161
 #: lino_welfare/modlib/pcsw/models.py:752
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:44
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:45
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:69
 msgid "Person"
 msgstr "Personne"
@@ -2749,8 +2750,8 @@ msgstr "Compétence"
 
 #: lino_welfare/modlib/newcomers/models.py:123
 #: lino_welfare/modlib/pcsw/models.py:862
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:52
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:152
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:68
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:153
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:185
 msgid "Competences"
 msgstr "Compétences"
@@ -2781,7 +2782,7 @@ msgstr "Nouveaux bénéficiaires depuis"
 #: lino_welfare/modlib/newcomers/models.py:233
 #: lino_welfare/modlib/pcsw/coaching.py:250
 #: lino_welfare/modlib/pcsw/models.py:955
-#: lino_welfare/modlib/uploads/models.py:149
+#: lino_welfare/modlib/uploads/models.py:158
 msgid "Coached by"
 msgstr "Intervenant"
 
@@ -3218,12 +3219,12 @@ msgid "Overview"
 msgstr "Apercu"
 
 #: lino_welfare/modlib/pcsw/models.py:571
-#: lino_welfare/modlib/uploads/fixtures/std.py:29
+#: lino_welfare/modlib/uploads/fixtures/std.py:28
 msgid "Residence permit"
 msgstr "Permis de séjour"
 
 #: lino_welfare/modlib/pcsw/models.py:579
-#: lino_welfare/modlib/uploads/fixtures/std.py:34
+#: lino_welfare/modlib/uploads/fixtures/std.py:33
 msgid "Work permit"
 msgstr "Permis de travail"
 
@@ -3249,7 +3250,7 @@ msgid "Active contract"
 msgstr "Contrat actif"
 
 #: lino_welfare/modlib/pcsw/models.py:653
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:74
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:76
 msgid "Coaches"
 msgstr "Intervenants"
 
@@ -3268,13 +3269,13 @@ msgid "Job search"
 msgstr "Recherche d'emploi"
 
 #: lino_welfare/modlib/pcsw/models.py:837
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:122
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:123
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:158
 msgid "Calendar"
 msgstr "Calendrier"
 
 #: lino_welfare/modlib/pcsw/models.py:852
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:148
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:149
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:175
 msgid "Career"
 msgstr "Parcours"
@@ -3671,77 +3672,87 @@ msgstr ""
 msgid "Expiry warning (value)"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:74
+#: lino_welfare/modlib/uploads/models.py:83
 msgid "Needed"
 msgstr "Nécessaire"
 
-#: lino_welfare/modlib/uploads/models.py:99
+#: lino_welfare/modlib/uploads/models.py:108
 #, python-format
 msgid "%s expires"
 msgstr "%s expire le "
 
-#: lino_welfare/modlib/uploads/models.py:105
+#: lino_welfare/modlib/uploads/models.py:114
 msgid "Issued by (Organization)"
 msgstr "Émis par (Organisation)"
 
-#: lino_welfare/modlib/uploads/models.py:108
+#: lino_welfare/modlib/uploads/models.py:117
 msgid "Issued by (Person)"
 msgstr "Émis par (Personne)"
 
-#: lino_welfare/modlib/uploads/models.py:109
+#: lino_welfare/modlib/uploads/models.py:118
 msgid "Valid from"
 msgstr "Valide depuis"
 
-#: lino_welfare/modlib/uploads/models.py:110
+#: lino_welfare/modlib/uploads/models.py:119
 msgid "Valid until"
 msgstr "Valide jusque"
 
-#: lino_welfare/modlib/uploads/models.py:143
+#: lino_welfare/modlib/uploads/models.py:152
 msgid "Uploaded by"
 msgstr "Téléchargé par"
 
-#: lino_welfare/modlib/uploads/models.py:150
+#: lino_welfare/modlib/uploads/models.py:159
 msgid "Show only uploads for clients coached by this user."
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:153
+#: lino_welfare/modlib/uploads/models.py:162
 msgid "Validity"
 msgstr "Validité"
 
-#: lino_welfare/modlib/uploads/models.py:221
+#: lino_welfare/modlib/uploads/models.py:222
+#, fuzzy, python-format
+msgid "My %s"
+msgstr "le %s"
+
+#: lino_welfare/modlib/uploads/models.py:222
+msgid "Uploads"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/models.py:234
 msgid "My expiring uploads"
 msgstr "Mes téléchargements à renouveler"
 
-#: lino_welfare/modlib/uploads/models.py:222
+#: lino_welfare/modlib/uploads/models.py:235
 msgid "Show needed uploads whose validity expires soon"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:41
+#: lino_welfare/modlib/uploads/fixtures/std.py:40
 msgid "Driving licence"
 msgstr "Permis de conduire"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:44
+#: lino_welfare/modlib/uploads/fixtures/std.py:43
 #: lino_welfare/projects/base.py:107
 msgid "Identifying document"
 msgstr "Document identifiant"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:50
+#: lino_welfare/modlib/uploads/fixtures/std.py:49
 msgid "Contract"
 msgstr "Contrat"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:53
+#: lino_welfare/modlib/uploads/fixtures/std.py:52
 msgid "Medical certificate"
 msgstr "Certificat médical"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:58
+#: lino_welfare/modlib/uploads/fixtures/std.py:57
 msgid "Handicap certificate"
 msgstr "Certificat d'handicap"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:64
+#: lino_welfare/modlib/uploads/fixtures/std.py:63
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:31
 msgid "Diploma"
 msgstr "Diplôme"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:68
+#: lino_welfare/modlib/uploads/fixtures/std.py:67
 msgid "Identity card"
 msgstr "Carte d'identité"
 
@@ -3815,7 +3826,7 @@ msgstr "Administrateur"
 
 #: lino_welfare/projects/base.py:104
 msgid "CVs emitted"
-msgstr ""
+msgstr "CVs émis"
 
 #: lino_welfare/projects/base.py:134
 msgid "Master"
@@ -3896,55 +3907,73 @@ msgstr "Mathématiques"
 msgid "Get active!"
 msgstr "Inactif"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:49
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:29
+msgid "Skill proof"
+msgstr "Preuve de qualification"
+
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:30
+msgid "Skill proofs"
+msgstr "Preuves de qualification"
+
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:63
 msgid "Skill"
 msgstr "Compétence professionnelle"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:50
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:64
 msgid "Skills"
 msgstr "Compétences professionnelles"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:70
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:86
 msgid "Soft skill type"
 msgstr "Type de compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:71
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:87
 msgid "Soft skill types"
 msgstr "Types de compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:80
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:96
 msgid "Soft skill"
 msgstr "Compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:81
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:97
 msgid "Soft skills"
 msgstr "Compétences sociales"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:82
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:111
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:98
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:128
 #, fuzzy
 msgid "Type"
 msgstr "Type d'aide sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:99
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:116
 msgid "Obstacle type"
 msgstr "Type de frein"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:100
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:117
 msgid "Obstacle types"
 msgstr "Types de freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:109
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:126
 msgid "Obstacle"
 msgstr "Freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:110
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:127
 msgid "Obstacles"
 msgstr "Freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:115
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:132
 msgid "Detected by"
 msgstr "Détecté par"
+
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:28
+#, fuzzy
+msgid "Declarative"
+msgstr "séparé"
+
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:29
+#, fuzzy
+msgid "Certificate"
+msgstr "Certificat médical"
 
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:32
 msgid "Evaluations"
@@ -3981,15 +4010,15 @@ msgstr ""
 msgid "Orientation interne"
 msgstr "Première inscription"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:63
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:65
 msgid "Family situation"
 msgstr "Situation familiale"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:142
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:143
 msgid "SIS"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:181
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:182
 msgid "Contact details"
 msgstr "Coordonnées"
 
@@ -4032,12 +4061,6 @@ msgstr "autres revenus"
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:47
 msgid "Job agents"
 msgstr "Agences de travail"
-
-msgid "valid from"
-msgstr "valide de"
-
-msgid "valid until"
-msgstr "valide jusqué"
 
 #~ msgid "My menu"
 #~ msgstr "Mon menu"
@@ -4368,3 +4391,9 @@ msgstr "valide jusqué"
 
 #~ msgid "Residence  permit"
 #~ msgstr "Permis de séjour"
+
+#~ msgid "valid from"
+#~ msgstr "valide de"
+
+#~ msgid "valid until"
+#~ msgstr "valide jusqué"

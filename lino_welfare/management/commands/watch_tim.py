@@ -30,7 +30,7 @@ from django.db import IntegrityError
 from lino.core.dbutils import is_valid_email
 from lino.core.utils import ChangeWatcher
 
-from lino import dd
+from lino.api import dd
 from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
 

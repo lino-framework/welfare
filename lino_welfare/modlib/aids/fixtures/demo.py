@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.dd import resolve_model
 from lino.utils import Cycler, ONE_DAY
 from lino.utils import mti
-from lino import dd, rt
+from lino.api import dd, rt
 
 
 def objects():

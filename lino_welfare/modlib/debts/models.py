@@ -21,7 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_unicode
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.utils.xmlgen.html import E
 from lino import mixins
 from lino.core.constants import _handle_attr_name

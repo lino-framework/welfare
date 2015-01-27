@@ -34,7 +34,7 @@ from lino.modlib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
 from lino.utils.instantiator import Instantiator
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino import rt
 from lino.utils import camelize
 

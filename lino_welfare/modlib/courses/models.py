@@ -19,7 +19,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
-from lino import dd
+from lino.api import dd
 from lino import mixins
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable

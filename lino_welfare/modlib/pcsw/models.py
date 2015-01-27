@@ -26,7 +26,7 @@ from django.utils.encoding import force_unicode
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
-from lino import dd, rt
+from lino.api import dd, rt
 from lino.core.dbutils import get_field
 
 from lino.utils.xmlgen.html import E

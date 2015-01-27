@@ -219,7 +219,7 @@ It has 3 keys:
 >>> d.base_params
 {u'mt': 54, u'type': 4, u'mk': 121}
 >>> d.param_values
-{u'pupload_type': None, u'puser': None, u'end_date': None, u'observed_eventHidden': u'20', u'observed_event': u'Is active', u'coached_by': None, u'pupload_typeHidden': None, u'coached_byHidden': None, u'puserHidden': None, u'start_date': None}
+{u'pupload_type': None, u'puser': None, u'end_date': None, u'observed_eventHidden': u'20', u'observed_event': u'Est active', u'coached_by': None, u'pupload_typeHidden': None, u'coached_byHidden': None, u'puserHidden': None, u'start_date': None}
 
 
 

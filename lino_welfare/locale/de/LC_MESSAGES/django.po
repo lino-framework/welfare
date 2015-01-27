@@ -5,19 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-DSBE\n"
+"Project-Id-Version:  Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-24 01:43+0200\n"
+"POT-Creation-Date: 2015-01-26 21:31+0200\n"
 "PO-Revision-Date: 2015-01-24 02:29+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"X-Generator: Poedit 1.5.4\n"
-"Language: de\n"
 
 #: lino_welfare/models.py:50
 msgid "Local job office"
@@ -41,7 +39,8 @@ msgstr "erlaubt in Verträgen"
 
 #: lino_welfare/models.py:91
 msgid ""
-"Whether Links of this type can be used as contact person of a job contract."
+"Whether Links of this type can be used as contact person of a job "
+"contract."
 msgstr ""
 
 #: lino_welfare/config/excerpts/Excerpt/aus.body.html:5
@@ -56,23 +55,24 @@ msgstr ""
 #: lino_welfare/modlib/aids/fixtures/std.py:135
 #: lino_welfare/modlib/aids/fixtures/std.py:149
 #: lino_welfare/modlib/reception/models.py:172
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:30
 msgid "Attestation"
 msgstr "Bescheinigung"
 
-#: lino_welfare/fixtures/demo.py:260
+#: lino_welfare/fixtures/demo.py:259
 msgid "Colleague"
 msgstr "Kollege"
 
-#: lino_welfare/fixtures/demo.py:360
+#: lino_welfare/fixtures/demo.py:359
 msgid "Consultation"
 msgstr "Beratung"
 
-#: lino_welfare/fixtures/demo.py:568
+#: lino_welfare/fixtures/demo.py:567
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:27
 msgid "Health insurance"
 msgstr "Krankenkasse"
 
-#: lino_welfare/fixtures/demo.py:579 lino_welfare/fixtures/std.py:103
+#: lino_welfare/fixtures/demo.py:578 lino_welfare/fixtures/std.py:103
 #: lino_welfare/modlib/aids/models.py:968
 #: lino_welfare/modlib/aids/fixtures/demo.py:57
 #: lino_welfare/modlib/aids/fixtures/std.py:97
@@ -80,56 +80,56 @@ msgstr "Krankenkasse"
 msgid "Pharmacy"
 msgstr "Apotheke"
 
-#: lino_welfare/fixtures/demo.py:587
+#: lino_welfare/fixtures/demo.py:586
 msgid "Advocate"
 msgstr "Rechtsanwalt"
 
-#: lino_welfare/fixtures/demo.py:598
+#: lino_welfare/fixtures/demo.py:597
 msgid "Bailiff"
 msgstr "Gerichtsvollzieher"
 
-#: lino_welfare/fixtures/demo.py:611
+#: lino_welfare/fixtures/demo.py:610
 msgid "Debt collecting company"
 msgstr "Inkasso-Unternehmen"
 
-#: lino_welfare/fixtures/demo.py:690
+#: lino_welfare/fixtures/demo.py:689
 msgid "Employment office"
 msgstr "Arbeitsvermittler"
 
-#: lino_welfare/fixtures/demo.py:702
+#: lino_welfare/fixtures/demo.py:701
 msgid "Physician"
 msgstr "Arzt"
 
-#: lino_welfare/fixtures/demo.py:710
+#: lino_welfare/fixtures/demo.py:709
 msgid "Family doctor"
 msgstr "Hausarzt"
 
-#: lino_welfare/fixtures/demo.py:718
+#: lino_welfare/fixtures/demo.py:717
 msgid "Dentist"
 msgstr "Zahnarzt"
 
-#: lino_welfare/fixtures/demo.py:728
+#: lino_welfare/fixtures/demo.py:727
 msgid "Pediatrician"
 msgstr "Kinderarzt"
 
-#: lino_welfare/fixtures/demo.py:888
+#: lino_welfare/fixtures/demo.py:887
 msgid "A very hard job."
 msgstr "Sehr harte Stelle"
 
-#: lino_welfare/fixtures/demo.py:890
+#: lino_welfare/fixtures/demo.py:889
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 #, fuzzy
 msgid "Complain"
 msgstr "Firma"
 
-#: lino_welfare/fixtures/demo.py:1093
+#: lino_welfare/fixtures/demo.py:1092
 #, fuzzy
 msgid "Information"
 msgstr "Ausbildung"
@@ -215,7 +215,7 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:23
 #: lino_welfare/modlib/pcsw/models.py:809
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:101
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:102
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:126
 msgid "Aids"
 msgstr "Hilfen"
@@ -283,8 +283,8 @@ msgstr "Verpflichtung DSBE"
 
 #: lino_welfare/modlib/aids/models.py:154
 msgid ""
-"Whether aid grantings of this type are considered as duty for integration "
-"contract."
+"Whether aid grantings of this type are considered as duty for integration"
+" contract."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:158
@@ -302,8 +302,8 @@ msgstr "Primärbegleiter bestätigt"
 
 #: lino_welfare/modlib/aids/models.py:170
 msgid ""
-"Which client address to print on confirmations. If this is empty, Lino will "
-"use the primary address."
+"Which client address to print on confirmations. If this is empty, Lino "
+"will use the primary address."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:175
@@ -466,8 +466,8 @@ msgstr "Du hast %s Einträge in "
 #: lino_welfare/modlib/pcsw/models.py:1326
 #: lino_welfare/modlib/pcsw/models.py:1385
 #: lino_welfare/modlib/projects/models.py:41
-#: lino_welfare/modlib/uploads/models.py:73
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:34
+#: lino_welfare/modlib/uploads/models.py:82
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:48
 msgid "Remark"
 msgstr "Bemerkung"
 
@@ -883,8 +883,7 @@ msgid "Using phonetic search"
 msgstr "Phonetische Suche"
 
 #: lino_welfare/modlib/cbss/models.py:1177
-#: lino_welfare/modlib/cbss/models.py:1562
-#: lino_welfare/modlib/cbss/tx25.py:196
+#: lino_welfare/modlib/cbss/models.py:1562 lino_welfare/modlib/cbss/tx25.py:196
 msgid "Parameters"
 msgstr "Parameter"
 
@@ -1016,7 +1015,7 @@ msgid "Tx25 Requests"
 msgstr "Tx25-Anfragen"
 
 #: lino_welfare/modlib/cbss/tx25.py:97 lino_welfare/modlib/pcsw/models.py:825
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:115
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:116
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:146
 msgid "History"
 msgstr "Historie"
@@ -1466,7 +1465,7 @@ msgstr "Kontakt"
 #: lino_welfare/modlib/contacts/models.py:209
 #: lino_welfare/modlib/contacts/models.py:307
 #: lino_welfare/modlib/pcsw/models.py:845
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:131
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:132
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:167
 msgid "Miscellaneous"
 msgstr "Sonstiges"
@@ -1474,7 +1473,7 @@ msgstr "Sonstiges"
 #: lino_welfare/modlib/contacts/models.py:141
 #: lino_welfare/modlib/households/models.py:161
 #: lino_welfare/modlib/pcsw/models.py:752
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:44
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:45
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:69
 msgid "Person"
 msgstr ""
@@ -1736,8 +1735,7 @@ msgid "Soft Skills Property Group"
 msgstr "Eigenschaftsgruppe Sozialkompetenzen"
 
 #: lino_welfare/modlib/cv/models.py:143
-msgid ""
-"The property group to be used as master for the SoftSkillsByPerson table."
+msgid "The property group to be used as master for the SoftSkillsByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/cv/models.py:152
@@ -1745,8 +1743,7 @@ msgid "Obstacles Property Group"
 msgstr "Eigenschaftsgruppe Hindernisse"
 
 #: lino_welfare/modlib/cv/models.py:154
-msgid ""
-"The property group to be used as master for the ObstaclesByPerson table."
+msgid "The property group to be used as master for the ObstaclesByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/debts/__init__.py:10
@@ -1939,8 +1936,8 @@ msgstr "Schuldeneintreiber"
 
 #: lino_welfare/modlib/debts/models.py:670
 msgid ""
-"Leave empty for simple debts, otherwise select         here the responsible "
-"bailiff or collection agency"
+"Leave empty for simple debts, otherwise select         here the "
+"responsible bailiff or collection agency"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:732
@@ -2007,11 +2004,12 @@ msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
 "checked,\n"
-"proportionally distributing the `Distributable amount` among the debtors.\n"
+"proportionally distributing the `Distributable amount` among the debtors."
+"\n"
 msgstr ""
 "Répartition au marc-le-franc.\n"
-"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option "
-"\"verteilen\" angekreuzt ist. \n"
+"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option"
+" \"verteilen\" angekreuzt ist. \n"
 "Der verfügbare Betrag wird dabei proportional zum geschuldeten Betrag "
 "aufgeteilt.\n"
 
@@ -2468,8 +2466,7 @@ msgstr "Stellenanbieter"
 msgid "Job Providers"
 msgstr "Stellenanbieter"
 
-#: lino_welfare/modlib/jobs/models.py:96
-#: lino_welfare/modlib/jobs/models.py:488
+#: lino_welfare/modlib/jobs/models.py:96 lino_welfare/modlib/jobs/models.py:488
 msgid "Jobs"
 msgstr "Stellen"
 
@@ -2738,8 +2735,8 @@ msgstr "Kompetenz"
 
 #: lino_welfare/modlib/newcomers/models.py:123
 #: lino_welfare/modlib/pcsw/models.py:862
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:52
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:152
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:68
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:153
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:185
 msgid "Competences"
 msgstr "Kompetenzen"
@@ -2770,7 +2767,7 @@ msgstr "Neue Klienten seit"
 #: lino_welfare/modlib/newcomers/models.py:233
 #: lino_welfare/modlib/pcsw/coaching.py:250
 #: lino_welfare/modlib/pcsw/models.py:955
-#: lino_welfare/modlib/uploads/models.py:149
+#: lino_welfare/modlib/uploads/models.py:158
 msgid "Coached by"
 msgstr "Begleitet durch"
 
@@ -2816,8 +2813,8 @@ msgstr "Zuweisen"
 
 #: lino_welfare/modlib/newcomers/models.py:428
 msgid ""
-"Assign this agent as coach for this client. This will set the client's state "
-"to `Coached` and send a notification to the new coach."
+"Assign this agent as coach for this client. This will set the client's "
+"state to `Coached` and send a notification to the new coach."
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:440
@@ -2925,8 +2922,8 @@ msgstr "Begleiter"
 
 #: lino_welfare/modlib/pcsw/coaching.py:129
 msgid ""
-"There's at most one primary coach per client.         Enabling this field "
-"will automatically make the other         coachings non-primary."
+"There's at most one primary coach per client.         Enabling this field"
+" will automatically make the other         coachings non-primary."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/coaching.py:237
@@ -3206,12 +3203,12 @@ msgid "Overview"
 msgstr "Übersicht"
 
 #: lino_welfare/modlib/pcsw/models.py:571
-#: lino_welfare/modlib/uploads/fixtures/std.py:29
+#: lino_welfare/modlib/uploads/fixtures/std.py:28
 msgid "Residence permit"
 msgstr "Aufenthaltserlaubnis"
 
 #: lino_welfare/modlib/pcsw/models.py:579
-#: lino_welfare/modlib/uploads/fixtures/std.py:34
+#: lino_welfare/modlib/uploads/fixtures/std.py:33
 msgid "Work permit"
 msgstr "Arbeitserlaubnis"
 
@@ -3237,7 +3234,7 @@ msgid "Active contract"
 msgstr "erlaubt in Verträgen"
 
 #: lino_welfare/modlib/pcsw/models.py:653
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:74
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:76
 msgid "Coaches"
 msgstr "Begleiter"
 
@@ -3256,13 +3253,13 @@ msgid "Job search"
 msgstr "Arbeitssuche"
 
 #: lino_welfare/modlib/pcsw/models.py:837
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:122
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:123
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:158
 msgid "Calendar"
 msgstr "Kalender"
 
 #: lino_welfare/modlib/pcsw/models.py:852
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:148
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:149
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:175
 msgid "Career"
 msgstr "Lebenslauf"
@@ -3661,79 +3658,89 @@ msgstr "Ablaufwarnung (Einheit)"
 msgid "Expiry warning (value)"
 msgstr "Ablaufwarnung (Wert)"
 
-#: lino_welfare/modlib/uploads/models.py:74
+#: lino_welfare/modlib/uploads/models.py:83
 msgid "Needed"
 msgstr "Nötig"
 
-#: lino_welfare/modlib/uploads/models.py:99
+#: lino_welfare/modlib/uploads/models.py:108
 #, python-format
 msgid "%s expires"
 msgstr "%s wird ungültig"
 
-#: lino_welfare/modlib/uploads/models.py:105
+#: lino_welfare/modlib/uploads/models.py:114
 #, fuzzy
 msgid "Issued by (Organization)"
 msgstr "Organisation"
 
-#: lino_welfare/modlib/uploads/models.py:108
+#: lino_welfare/modlib/uploads/models.py:117
 #, fuzzy
 msgid "Issued by (Person)"
 msgstr "ausgestellt durch "
 
-#: lino_welfare/modlib/uploads/models.py:109
+#: lino_welfare/modlib/uploads/models.py:118
 msgid "Valid from"
 msgstr "Gültig von"
 
-#: lino_welfare/modlib/uploads/models.py:110
+#: lino_welfare/modlib/uploads/models.py:119
 msgid "Valid until"
 msgstr "Gültig bis"
 
-#: lino_welfare/modlib/uploads/models.py:143
+#: lino_welfare/modlib/uploads/models.py:152
 msgid "Uploaded by"
 msgstr "Hochgeladen durch"
 
-#: lino_welfare/modlib/uploads/models.py:150
+#: lino_welfare/modlib/uploads/models.py:159
 msgid "Show only uploads for clients coached by this user."
 msgstr ""
 
-#: lino_welfare/modlib/uploads/models.py:153
+#: lino_welfare/modlib/uploads/models.py:162
 msgid "Validity"
 msgstr "Gültigkeit"
 
-#: lino_welfare/modlib/uploads/models.py:221
+#: lino_welfare/modlib/uploads/models.py:222
+#, fuzzy, python-format
+msgid "My %s"
+msgstr " am %s"
+
+#: lino_welfare/modlib/uploads/models.py:222
+msgid "Uploads"
+msgstr ""
+
+#: lino_welfare/modlib/uploads/models.py:234
 msgid "My expiring uploads"
 msgstr "Ablaufende Uploads"
 
-#: lino_welfare/modlib/uploads/models.py:222
+#: lino_welfare/modlib/uploads/models.py:235
 msgid "Show needed uploads whose validity expires soon"
 msgstr ""
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:41
+#: lino_welfare/modlib/uploads/fixtures/std.py:40
 msgid "Driving licence"
 msgstr "Führerschein"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:44
+#: lino_welfare/modlib/uploads/fixtures/std.py:43
 #: lino_welfare/projects/base.py:107
 msgid "Identifying document"
 msgstr "Identifizierendes Dokument"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:50
+#: lino_welfare/modlib/uploads/fixtures/std.py:49
 msgid "Contract"
 msgstr "Vertrag"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:53
+#: lino_welfare/modlib/uploads/fixtures/std.py:52
 msgid "Medical certificate"
 msgstr "Ärztliche Bescheinigung"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:58
+#: lino_welfare/modlib/uploads/fixtures/std.py:57
 msgid "Handicap certificate"
 msgstr "Behindertenausweis"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:64
+#: lino_welfare/modlib/uploads/fixtures/std.py:63
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:31
 msgid "Diploma"
 msgstr "Diplom"
 
-#: lino_welfare/modlib/uploads/fixtures/std.py:68
+#: lino_welfare/modlib/uploads/fixtures/std.py:67
 msgid "Identity card"
 msgstr "Personalausweis"
 
@@ -3892,62 +3899,80 @@ msgstr ""
 msgid "Get active!"
 msgstr "Inaktiv"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:49
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:29
+msgid "Skill proof"
+msgstr ""
+
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:30
+msgid "Skill proofs"
+msgstr ""
+
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:63
 msgid "Skill"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:50
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:64
 #, fuzzy
 msgid "Skills"
 msgstr "Sonstige Fähigkeiten"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:70
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:86
 msgid "Soft skill type"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:71
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:87
 msgid "Soft skill types"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:80
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:96
 #, fuzzy
 msgid "Soft skill"
 msgstr "Erwünschte Eigenschaft"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:81
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:97
 #, fuzzy
 msgid "Soft skills"
 msgstr "Sonstige Fähigkeiten"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:82
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:111
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:98
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:128
 #, fuzzy
 msgid "Type"
 msgstr "Typ "
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:99
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:116
 #, fuzzy
 msgid "Obstacle type"
 msgstr "veraltet"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:100
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:117
 #, fuzzy
 msgid "Obstacle types"
 msgstr "Hindernisse"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:109
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:126
 #, fuzzy
 msgid "Obstacle"
 msgstr "Hindernisse"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:110
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:127
 msgid "Obstacles"
 msgstr "Hindernisse"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:115
+#: lino_welfare/projects/chatelet/modlib/cv/models.py:132
 #, fuzzy
 msgid "Detected by"
 msgstr "Angefragt von"
+
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:28
+#, fuzzy
+msgid "Declarative"
+msgstr "Deklaration"
+
+#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:29
+#, fuzzy
+msgid "Certificate"
+msgstr "Ärztliche Bescheinigung"
 
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:32
 #, fuzzy
@@ -3986,16 +4011,16 @@ msgstr ""
 msgid "Orientation interne"
 msgstr "Erstelldatum"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:63
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:65
 #, fuzzy
 msgid "Family situation"
 msgstr "Abstammung"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:142
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:143
 msgid "SIS"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:181
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:182
 #, fuzzy
 msgid "Contact details"
 msgstr "Vertrag beginnt"
@@ -4423,3 +4448,4 @@ msgstr "Interim-Agenturen"
 
 #~ msgid "valid until"
 #~ msgstr "Gültig bis"
+

@@ -27,7 +27,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
-from lino import dd, rt, mixins
+from lino.api import dd, rt
+from lino import mixins
+
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 

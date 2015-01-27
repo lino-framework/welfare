@@ -11,7 +11,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import dd
+from lino.api import dd
 
 from lino.modlib.uploads.models import *
 from lino.modlib.contacts.mixins import ContactRelated

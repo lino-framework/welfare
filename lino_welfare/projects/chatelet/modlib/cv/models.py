@@ -73,7 +73,7 @@ class Skills(dd.Table):
 
 
 class SkillsByPerson(PropsByPerson, Skills):
-    column_names = 'sector function remark'
+    column_names = 'sector function remark proof *'
 
 
 ##

@@ -17,7 +17,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime, naturalda
 
 from django.db.models import Q
 
-from lino import dd, rt
+from lino.api import dd, rt
 
 from lino.utils.xmlgen.html import E
 

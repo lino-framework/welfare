@@ -10,7 +10,7 @@ from lino.utils.instantiator import Instantiator
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from lino import dd, rt
+from lino.api import dd, rt
 
 Person = dd.resolve_model('contacts.Person')
 Company = dd.resolve_model('contacts.Company')

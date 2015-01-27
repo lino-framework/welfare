@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 from lino.modlib.cal.fixtures.demo2 import objects as lino_objects
-from lino import dd
+from lino.api import dd
 from lino.utils import Cycler
 
 

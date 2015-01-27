@@ -77,7 +77,7 @@ A B spouse
 
 import sys
 
-from lino import dd, rt
+from lino.api import dd, rt
 
 from lino.utils import dbfreader
 from lino.utils import dblogger
