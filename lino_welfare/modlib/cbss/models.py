@@ -47,7 +47,7 @@ from lino.api import dd, rt
 #~ from lino.utils import Warning
 from lino.utils import join_words
 from lino.utils import AttrDict, IncompleteDate
-#~ from lino.core.dbutils import obj2str
+#~ from lino.core.utils import obj2str
 
 from lino.utils.choosers import chooser
 from lino.utils.ssin import ssin_validator
@@ -55,7 +55,7 @@ from lino.utils.ssin import ssin_validator
 from lino.utils.xmlgen import html as xghtml
 
 #~ from lino.utils import dblogger
-#~ from lino.core.dbutils import resolve_model
+#~ from lino.core.utils import resolve_model
 #~ from lino.utils.xmlgen import etree
 #~ from lino.utils.xmlgen import cbss
 
@@ -63,7 +63,7 @@ from lino.utils.xmlgen import html as xghtml
 #~ from lino.utils.choicelists import Gender
 #~ from lino.modlib.users.models import UserLevels
 #~ from lino.modlib.contacts import models as contacts
-#~ from lino.core.dbutils import makedirs_if_missing
+#~ from lino.core.utils import makedirs_if_missing
 #~ from lino.mixins.printable import DirectPrintAction
 
 from lino.modlib.users.mixins import ByUser, UserAuthored

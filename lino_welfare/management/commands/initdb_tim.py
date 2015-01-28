@@ -43,12 +43,12 @@ from lino.utils import join_words
 #~ from lino.modlib.contacts.models import name2kw, street2kw, join_words
 from lino.utils.instantiator import Instantiator
 
-from lino.core.dbutils import resolve_model, obj2str
-from lino.core.dbutils import is_valid_email
+from lino.core.utils import resolve_model, obj2str
+from lino.core.utils import is_valid_email
 import lino
 
 from lino.utils import confirm, iif
-from lino.core.dbutils import app_labels
+from lino.core.utils import app_labels
 from lino.modlib.beid.mixins import BeIdCardTypes
 
 

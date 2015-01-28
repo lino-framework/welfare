@@ -27,7 +27,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
 from lino.api import dd, rt
-from lino.core.dbutils import get_field
+from lino.core.utils import get_field
 
 from lino.utils.xmlgen.html import E
 
@@ -503,7 +503,7 @@ class Client(contacts.Person,
                            _("coaching ends"), tab=1):
             yield o
 
-    @dd.virtualfield(dd.HtmlBox())
+    @dd.htmlbox()
     def image(self, ar):
         url = self.get_image_url(ar)
         s = '<img src="%s" width="100%%"/>' % url
@@ -703,7 +703,7 @@ class Client(contacts.Person,
                 setattr(obj, fld.name, new)
         return objects, diffs
 
-    @dd.virtualfield(dd.HtmlBox(_("CBSS")))
+    @dd.htmlbox(_("CBSS"))
     def cbss_relations(self, ar):
         cbss = dd.resolve_app('cbss')
         elems = []

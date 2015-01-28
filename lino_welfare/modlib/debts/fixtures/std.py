@@ -18,7 +18,7 @@ from lino.api import dd
 
 from lino.utils import i2d
 from lino.utils.instantiator import Instantiator
-from lino.core.dbutils import resolve_model
+from lino.core.utils import resolve_model
 
 accounts = dd.resolve_app('accounts')
 

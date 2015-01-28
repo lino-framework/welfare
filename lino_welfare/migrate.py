@@ -21,7 +21,7 @@ import datetime
 from decimal import Decimal
 from django.conf import settings
 from lino.utils.dpy import Migrator
-from lino.core.dbutils import resolve_model
+from lino.core.utils import resolve_model
 from lino.api import dd, rt
 from lino.modlib.iban.utils import belgian_nban_to_iban_bic
 from lino.modlib.cal.utils import WORKDAYS

@@ -362,11 +362,11 @@ The total monthly amount available for debts distribution."""))
     def total_debt(self, ar):
         return self.sum('amount', 'L')
 
-    @dd.virtualfield(dd.HtmlBox(_("Entered data")))
+    @dd.htmlbox(_("Entered data"))
     def data_box(self, ar):
         return E.div(*ar.story2html(self.data_story(ar)))
 
-    @dd.virtualfield(dd.HtmlBox(pgettext(u"debts", u"Summary")))
+    @dd.htmlbox(pgettext(u"debts", u"Summary"))
     def summary_box(self, ar):
         return E.div(*ar.story2html(self.summary_story(ar)))
 

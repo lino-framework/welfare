@@ -38,7 +38,7 @@ from lino.api import dd, rt
 from lino import rt
 from lino.utils import camelize
 
-from lino.core.dbutils import app_labels
+from lino.core.utils import app_labels
 from lino.modlib.beid.mixins import BeIdCardTypes
 
 

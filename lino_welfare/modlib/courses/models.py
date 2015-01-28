@@ -24,7 +24,7 @@ from lino import mixins
 from lino.utils import mti
 from lino.mixins.printable import DirectPrintAction, Printable
 #~ from lino.mixins.reminder import ReminderEntry
-#~ from lino.core.dbutils import obj2str
+#~ from lino.core.utils import obj2str
 
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')

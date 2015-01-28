@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 
 from lino.utils import i2d
 from lino.utils.instantiator import Instantiator
-from lino.core.dbutils import resolve_model
+from lino.core.utils import resolve_model
 from lino.utils import Cycler
 
 from lino.modlib.accounts.utils import AccountTypes

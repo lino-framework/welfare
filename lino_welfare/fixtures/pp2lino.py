@@ -36,9 +36,9 @@ from django.conf import settings
 
 from lino.utils import dblogger
 from lino.utils.instantiator import Instantiator
-from lino.core.dbutils import resolve_model, full_model_name
+from lino.core.utils import resolve_model, full_model_name
 from lino.utils.mdbtools import Loader
-from lino.core.dbutils import is_valid_url, is_valid_email
+from lino.core.utils import is_valid_url, is_valid_email
 
 from lino.modlib.countries.models import Place, Country
 from lino.modlib.notes.models import Note

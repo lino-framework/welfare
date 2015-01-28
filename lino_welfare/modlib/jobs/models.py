@@ -855,7 +855,7 @@ class JobsByType(Jobs):
 
 if True:  # settings.SITE.user_model:
 
-    from lino.core.dbutils import resolve_model, UnresolvedModel
+    from lino.core.utils import resolve_model, UnresolvedModel
     #~ USER_MODEL = resolve_model(settings.SITE.user_model)
 
     class ContractsSearch(Contracts):

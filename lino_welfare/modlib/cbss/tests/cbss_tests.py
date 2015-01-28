@@ -28,7 +28,7 @@ from django.core.exceptions import ValidationError
 
 
 from lino.utils import i2d
-from lino.core.dbutils import resolve_model
+from lino.core.utils import resolve_model
 from lino.utils.djangotest import TestCase
 
 from lino_welfare.modlib.cbss import models as cbss

@@ -10,7 +10,7 @@ http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_va
 from lino.api import dd, rt
 from django.conf import settings
 from lino.utils import ucsv
-from lino.core.dbutils import resolve_model
+from lino.core.utils import resolve_model
 from os.path import join, dirname
 
 ENCODING = 'latin1'  # the encoding used by the mdb file
