@@ -133,10 +133,8 @@ class PartnerDetail(PartnerDetail):
 
 
 class Person(Partner, Person):
+    """Represents a physical person.
 
-    """
-    Represents a physical person.
-    
     """
 
     class Meta(Person.Meta):
