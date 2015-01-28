@@ -4,6 +4,11 @@
 General PCSW
 ============
 
+..
+  This document is part of the test suite.
+  To test only this document, run::
+    $ python setup.py test -s tests.DocsTests.test_pcsw
+
 A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 
 .. include:: /include/tested.rst
@@ -13,23 +18,11 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 
 
 ..
-  This document is part of the test suite.
-  To test only this document, run::
-    $ python setup.py test -s tests.DocsTests.test_pcsw
-
-..
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.docs.settings.doctests'
-    >>> from bs4 import BeautifulSoup
-    >>> from lino.utils import i2d
-    >>> from lino.utils.xmlgen.html import E
-    >>> from lino.runtime import *
-    >>> from django.test import Client
-    >>> from django.utils import translation
-    >>> import json
-    >>> client = Client()
+    >>> from lino.api.doctest import *
 
 
 >>> ses = rt.login('robin')
@@ -119,18 +112,10 @@ eID card summary
 Here a test case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
 
->>> url = '/api/pcsw/Clients/177?an=detail&fmt=json'
->>> res = client.get(url, REMOTE_USER='rolf')
->>> print(res.status_code)
-200
->>> result = json.loads(res.content)
->>> print(result.keys())
-[u'navinfo', u'data', u'disable_delete', u'id', u'title']
-
->>> soup = BeautifulSoup(result['data']['overview'])
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als
+Ansicht als 
 Partner
 , 
 Person
@@ -142,10 +127,7 @@ Deutschland
 Adressen verwalten
 Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gültig von 19.08.11 bis 19.08.16
 
->>> url = '/api/reception/Clients/116?an=detail&fmt=json'
->>> res = client.get(url, REMOTE_USER='rolf')
->>> result = json.loads(res.content)
->>> soup = BeautifulSoup(result['data']['overview'])
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/116', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Ansicht als

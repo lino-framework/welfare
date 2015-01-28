@@ -270,8 +270,7 @@ The following table lists information about all detail layouts.
 | contacts.Partners             | all except anonymous                | overview id language activity client_contact_type url email  |
 |                               |                                     | phone gsm fax country region city zip_code addr1             |
 |                               |                                     | street_prefix street street_no street_box addr2 remarks      |
-|                               |                                     | is_obsolete is_person is_company is_household created        |
-|                               |                                     | modified                                                     |
+|                               |                                     | is_obsolete created modified                                 |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | contacts.Persons              | all except anonymous                | overview title first_name middle_name last_name gender       |
 |                               |                                     | birth_date age id language email phone gsm fax               |
