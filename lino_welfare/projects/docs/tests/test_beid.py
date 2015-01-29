@@ -5,7 +5,9 @@
 """This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
-  python manage.py test lino_welfare.tests.test_beid
+  $ go welfare
+  $ cd lino_welfare/projects/std
+  $ python manage.py test tests.test_beid
 
 """
 
@@ -17,15 +19,9 @@ logger = logging.getLogger(__name__)
 
 import os
 
-from lino.runtime import countries, addresses, pcsw, users
-from lino.core import constants
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
-
-from lino.modlib.users.choicelists import UserProfiles
-
-from lino.modlib.beid.mixins import holder_model
-Holder = holder_model()
+from lino.utils.djangotest import WebIndexTestCase
 
 
 def readfile(name):
@@ -45,9 +41,27 @@ class WebRequest:
 
 class BeIdTests(RemoteAuthTestCase):
     maxDiff = None
+    override_djangosite_settings = dict(use_java=True)
 
     def test01(self):
-        self.assertEqual(1+1, 2)
+        from lino.core import constants
+        from django.conf import settings
+        from lino.modlib.users.choicelists import UserProfiles
+        from lino.modlib.beid.mixins import holder_model
+        Holder = holder_model()
+        
+        from lino.api.runtime import countries, addresses, pcsw, users
+
+        # is it the right settings module?
+        self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
+                         'lino_welfare.projects.docs.settings.demo')
+
+        self.assertEqual(settings.MIDDLEWARE_CLASSES, (
+            'django.middleware.common.CommonMiddleware',
+            'django.middleware.locale.LocaleMiddleware',
+            'lino.core.auth.RemoteUserMiddleware',
+            'lino.utils.ajax.AjaxExceptionResponse'))
+
         u = users.User(username='root',
                        profile=UserProfiles.admin,
                        language="en")
@@ -75,9 +89,7 @@ class BeIdTests(RemoteAuthTestCase):
             url, post_data,
             REMOTE_USER='root',
             HTTP_ACCEPT_LANGUAGE='en')
-        result = self.check_json_result(
-            response,
-            'alert success message')
+        result = self.check_json_result(response, 'alert success message')
         self.assertEqual(result['success'], False)
         expected = ("Sorry, I cannot handle that case: Cannot create "
                     "new client because there is already a person named "

@@ -11,8 +11,8 @@ Examples how to run these tests::
   $ python setup.py test -s tests.DocsTests.test_docs
 """
 from unipath import Path
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
+# import os
+# os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
 from lino.utils.pythontest import TestCase
 
@@ -27,15 +27,22 @@ class ProjectsTests(BaseTestCase):
     """
     $ python setup.py test -s tests.ProjectsTests
     """
+
     def test_docs(self):
+        # cwd = self.project_root.child(
+        #     'lino_welfare', 'projects', 'docs', 'tests').absolute()
+        # self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
         cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'docs', 'tests').absolute()
-        self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
+            'lino_welfare', 'projects', 'docs').absolute()
+        self.run_django_manage_test(cwd)
     
     def test_eupen(self):
+        # cwd = self.project_root.child(
+        #     'lino_welfare', 'projects', 'eupen', 'tests').absolute()
+        # self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
         cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'eupen', 'tests').absolute()
-        self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
+            'lino_welfare', 'projects', 'eupen').absolute()
+        self.run_django_manage_test(cwd)
 
     # def test_chatelet(self):
     #     self.run_django_manage_test('lino_welfare/projects/chatelet')

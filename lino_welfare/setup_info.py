@@ -123,10 +123,12 @@ SETUP_INFO.update(packages=[
     'lino_welfare.projects.chatelet.settings',
     'lino_welfare.projects.docs',
     'lino_welfare.projects.docs.settings',
+    'lino_welfare.projects.docs.tests',
     'lino_welfare.projects.eupen',
     'lino_welfare.projects.eupen.modlib',
     'lino_welfare.projects.eupen.modlib.pcsw',
     'lino_welfare.projects.eupen.settings',
+    'lino_welfare.projects.eupen.tests',
     'lino_welfare.scripts',
 ])
 

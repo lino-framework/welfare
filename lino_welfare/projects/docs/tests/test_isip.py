@@ -6,7 +6,7 @@
 without any fixture. You can run only these tests by issuing::
 
   $ cd lino_welfare/projects/docs
-  $ python manage.py test lino_welfare.tests.test_isip
+  $ python manage.py test tests.test_isip
 
 """
 

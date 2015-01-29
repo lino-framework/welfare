@@ -925,7 +925,7 @@ ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
 
 class Clients(contacts.Persons):
     "The default definition for :actor:`pcsw.Clients`. "
-    # ~ debug_permissions = True # '20120925'
+    # debug_permissions = '20150129'
     # required = dd.Required(user_groups='coaching')
     model = 'pcsw.Client'
     params_panel_hidden = True
