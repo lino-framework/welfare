@@ -6,6 +6,9 @@ class Site(Site):
 
     title = "Lino Welfare"
 
+    project_name = 'welfare_std'  # avoid name clash with
+                                  # `lino/projects/docs`.
+
     the_demo_date = datetime.date(2014, 05, 22)
     # test cases which rely on this date:
     # docs/tested/jobs.rst

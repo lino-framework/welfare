@@ -82,11 +82,11 @@ class AwardsByBadge(Awards):
     auto_fit_column_widths = True
 
 
-__all__ = [
-    'Badge',
-    'Badges',
-    'Award',
-    'Awards',
-    'AwardsByHolder',
-    'AwardsByBadge']
+# __all__ = [
+#     'Badge',
+#     'Badges',
+#     'Award',
+#     'Awards',
+#     'AwardsByHolder',
+#     'AwardsByBadge']
 

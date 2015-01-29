@@ -139,4 +139,4 @@ Update Guests for Event #3 Appointment 3 (01.01.2015)...
 """)
 
 
-__all__ = ['QuickTest']
+# __all__ = ['QuickTest']
