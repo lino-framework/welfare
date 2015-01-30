@@ -6,5 +6,6 @@
    test_beid
    test_isip
    test_sql
+   test_households
 
 """
