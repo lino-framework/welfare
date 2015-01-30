@@ -37,3 +37,5 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     # verbose_name = _("Art.60§7")
     verbose_name = _("Job supply")
+    needs_plugins = ['lino_welfare.modlib.isip']
+

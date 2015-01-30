@@ -25,6 +25,7 @@ using `manage.py run`.
    aids
    reception
    misc
+   trainings
    uploads
    cv2
 

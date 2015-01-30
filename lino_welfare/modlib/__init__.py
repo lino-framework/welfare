@@ -17,6 +17,7 @@
     pcsw
     projects
     reception
+    trainings
 
 
 

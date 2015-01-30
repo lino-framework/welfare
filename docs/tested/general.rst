@@ -33,8 +33,8 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-48 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, isip, jobs, integ, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
-126 models:
+49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, trainings, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+129 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -76,7 +76,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         127
+ contenttypes.ContentType       contenttypes.ContentTypes       4         130
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78
@@ -101,7 +101,7 @@ result:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
  excerpts.Excerpt               excerpts.ExcerptsByX            12        92
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        11
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        12
  households.Household           households.Households           29        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
@@ -113,7 +113,7 @@ result:
  isip.ExamPolicy                isip.ExamPolicies               20        5
  jobs.Candidature               jobs.Candidatures               8         74
  jobs.Contract                  jobs.Contracts                  28        24
- jobs.ContractType              jobs.ContractTypes              9         5
+ jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
  jobs.JobProvider               jobs.JobProviders               31        3
  jobs.JobType                   jobs.JobTypes                   5         5
@@ -160,6 +160,9 @@ result:
  sepa.Account                   sepa.Accounts                   8         13
  system.SiteConfig              system.SiteConfigs              30        1
  system.TextFieldTemplate       system.TextFieldTemplates       5         2
+ trainings.Goal                 trainings.TrainingGoals         5         4
+ trainings.Training             trainings.Trainings             25        0
+ trainings.TrainingType         trainings.TrainingTypes         7         3
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
@@ -458,6 +461,15 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | system.TextFieldTemplates     | admin                               | id name user description text                                |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| trainings.TrainingGoals       | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| trainings.TrainingTypes       | 110, admin                          | id name name_fr name_de name_nl exam_policy                  |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| trainings.Trainings           | 100, 110, admin                     | id client user user_asd language type company contact_person |
+|                               |                                     | contact_role applies_from applies_until exam_policy sector   |
+|                               |                                     | function reference_person printed date_decided date_issued   |
+|                               |                                     | date_ended ending responsibilities                           |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | uploads.UploadTypes           | admin                               | id upload_area shortcut name name_fr name_de name_nl         |
 |                               |                                     | warn_expiry_unit warn_expiry_value wanted max_number         |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
@@ -492,7 +504,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
@@ -512,7 +524,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Immersion training types
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
@@ -529,7 +541,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Proofs of search
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Immersion trainings, Proofs of search
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen

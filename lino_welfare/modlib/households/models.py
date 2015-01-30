@@ -15,6 +15,7 @@ from lino.modlib.households.models import *
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ungettext
 
 from lino_welfare.modlib.contacts.models import Partner
 # we want to inherit also from lino_welfare's Partner

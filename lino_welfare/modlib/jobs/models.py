@@ -41,6 +41,9 @@ isip = dd.resolve_app('isip')
 pcsw = dd.resolve_app('pcsw')
 cv = dd.resolve_app('cv')
 
+from lino_welfare.modlib.isip.mixins import (
+    ContractTypeBase, ContractPartnerBase, ContractBase)
+
 
 class Schedule(mixins.BabelNamed):
 
@@ -122,7 +125,7 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 # CONTRACT TYPES
 #
-class ContractType(mixins.PrintableType, mixins.BabelNamed):
+class ContractType(ContractTypeBase, mixins.PrintableType):
 
     """This is the homologue of :class:`isip.ContractType
     <lino_welfare.modlib.isip.models.ContractType>` (see there for
@@ -150,10 +153,6 @@ class ContractType(mixins.PrintableType, mixins.BabelNamed):
         ordering = ['name']
 
     ref = models.CharField(_("Reference"), max_length=20, blank=True)
-    exam_policy = dd.ForeignKey(
-        "isip.ExamPolicy",
-        related_name="%(app_label)s_%(class)s_set",
-        blank=True, null=True)
 
 
 class ContractTypes(dd.Table):
@@ -170,7 +169,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class Contract(isip.ContractBase, isip.ContractPartnerBase):
+class Contract(ContractBase, ContractPartnerBase):
 
     """
     A Contract

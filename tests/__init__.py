@@ -65,6 +65,9 @@ class DocsTests(BaseTestCase):
     def test_uploads(self):
         return self.run_simple_doctests('docs/tested/uploads.rst')
 
+    def test_trainings(self):
+        return self.run_simple_doctests('docs/tested/trainings.rst')
+
     def test_cv2(self):
         return self.run_simple_doctests('docs/tested/cv2.rst')
 

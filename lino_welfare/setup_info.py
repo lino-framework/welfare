@@ -107,6 +107,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.sepa.fixtures',
     'lino_welfare.modlib.system',
     'lino_welfare.modlib.system.fixtures',
+    'lino_welfare.modlib.trainings',
+    'lino_welfare.modlib.trainings.fixtures',
     'lino_welfare.modlib.uploads',
     'lino_welfare.modlib.uploads.fixtures',
     'lino_welfare.modlib.users',

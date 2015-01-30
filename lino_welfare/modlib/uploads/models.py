@@ -15,8 +15,7 @@ from lino.api import dd
 
 from lino.modlib.uploads.models import *
 from lino.modlib.contacts.mixins import ContactRelated
-
-cal = dd.resolve_app('cal')
+from lino.modlib.cal.utils import update_reminder, Recurrencies
 
 
 # add = UploadAreas.add_item
@@ -29,9 +28,9 @@ class UploadType(UploadType):
     """Extends the library model by adding `warn_expiry` info.
 
     """
-    warn_expiry_unit = cal.Recurrencies.field(
+    warn_expiry_unit = Recurrencies.field(
         _("Expiry warning (unit)"),
-        default=cal.Recurrencies.monthly,
+        default=Recurrencies.monthly,
         blank=True)  # iCal:DURATION
     warn_expiry_value = models.IntegerField(
         _("Expiry warning (value)"),
@@ -102,7 +101,7 @@ class Upload(Upload, mixins.ProjectRelated, ContactRelated,
             return
         if not self.needed:
             return
-        cal.update_reminder(
+        update_reminder(
             1, self, self.user,
             self.end_date,
             _("%s expires") % unicode(ut),

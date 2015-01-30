@@ -21,6 +21,7 @@ Thismodule is also used and extended by :mod:`lino_welfare.modlib.jobs`.
    :toctree:
 
    models
+   mixins
 
 """
 
@@ -28,8 +29,9 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import ad
+from lino.api import ad
 
 
 class Plugin(ad.Plugin):
     verbose_name = _("ISIP")
+    needs_plugins = ['lino_welfare.modlib.integ']

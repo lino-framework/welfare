@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2014 Luc Saffre
+# Copyright 2009-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -124,32 +124,6 @@ class Site(Site):
         tb.add_action(self.modules.jobs.MyContracts)
         tb.add_action(self.modules.cal.EventsByDay)
 
-    def unused_setup_menu(self, profile, main):
-        from django.utils.translation import ugettext_lazy as _
-        from django.utils.translation import string_concat
-        from django.db import models
-        from lino.api import dd, rt
-        contacts = dd.resolve_app("contacts")
-
-        m = main.add_menu("master", _("Master"))
-        self.on_each_app('setup_master_menu', ui, profile, m)
-
-        self.on_each_app('setup_main_menu', ui, profile, main)
-
-        m = main.add_menu("reports", _("Listings"))
-        self.on_each_app('setup_reports_menu', ui, profile, m)
-
-        m = main.add_menu("config", _("Configure"))
-        self.on_each_app('setup_config_menu', ui, profile, m)
-
-        m = main.add_menu("explorer", _("Explorer"))
-        self.on_each_app('setup_explorer_menu', ui, profile, m)
-
-        m = main.add_menu("site", _("Site"))
-        self.on_each_app('setup_site_menu', ui, profile, m)
-
-        return main
-
     def get_installed_apps(self):
         yield super(Site, self).get_installed_apps()
 
@@ -192,9 +166,10 @@ class Site(Site):
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.cv'
+        yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.isip'
         yield 'lino_welfare.modlib.jobs'
-        yield 'lino_welfare.modlib.integ'
+        yield 'lino_welfare.modlib.trainings'
         yield 'lino_welfare.modlib.active_job_search'
         yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.newcomers'

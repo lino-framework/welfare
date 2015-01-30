@@ -9,13 +9,13 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     verbose_name = _("Debts mediation")
 
-    def setup_main_menu(config, site, profile, m):
-        m = m.add_menu(config.app_label, config.verbose_name)
+    def setup_main_menu(self, site, profile, m):
+        m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('debts.Clients')
         m.add_action('debts.MyBudgets')
 
-    def setup_config_menu(config, site, profile, m):
-        m = m.add_menu(config.app_label, config.verbose_name)
+    def setup_config_menu(self, site, profile, m):
+        m = m.add_menu(self.app_label, self.verbose_name)
         mb = site.site_config.master_budget
         if mb is not None:
             """
@@ -33,7 +33,7 @@ class Plugin(ad.Plugin):
                 mb, label=unicode(fld.verbose_name),
                 action=MyBudgets.detail_action)
 
-    def setup_explorer_menu(config, site, profile, m):
-        m = m.add_menu(config.app_label, config.verbose_name)
+    def setup_explorer_menu(self, site, profile, m):
+        m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('debts.Budgets')
         m.add_action('debts.Entries')
