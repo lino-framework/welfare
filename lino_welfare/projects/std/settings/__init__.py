@@ -8,7 +8,7 @@ Default settings of a :ref:`welfare` project.
 """
 
 from lino.projects.std.settings import *
-from lino_welfare import SETUP_INFO
+import lino_welfare
 
 
 class Site(Site):
@@ -18,8 +18,8 @@ class Site(Site):
 
     verbose_name = "Lino Welfare"
 
-    version = SETUP_INFO['version']  # lino_welfare.__version__
-    url = SETUP_INFO['url']
+    version = lino_welfare.SETUP_INFO['version']
+    url = lino_welfare.SETUP_INFO['url']
 
     demo_fixtures = """std std2 few_languages props demo cbss
     democfg cbss_demo demo2 demo_events""".split()
