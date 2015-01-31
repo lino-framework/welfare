@@ -51,31 +51,21 @@ class CourseProvider(contacts.Company):
         return super(contacts.Partner, self).disable_delete(ar)
 
 
-dd.inject_field(contacts.Company,
-                'is_courseprovider',
-                mti.EnableChild(CourseProvider,
-                                verbose_name=_("is Course Provider")),
-    """Whether this Company is also a Course Provider."""
-                )
-
-
 class CourseProviderDetail(contacts.CompanyDetail):
+    """Same as CompanyDetail, except that we add a tab
+    :guilabel:`Courses`.
 
-    """
-    This is the same as CompanyDetail, except that we remove MTI fields
-    and add a tab :guilabel:`Courses`.
     """
     box5 = "remarks"
     main = "general notes CourseOffersByProvider"
 
 
 class CourseProviders(contacts.Companies):
+    """Table of all course providers
 
     """
-    List of Companies that have `Company.is_courseprovider` activated.
-    """
     required = dd.required(user_groups='courses')
-    model = CourseProvider
+    model = 'courses.CourseProvider'
     detail_layout = CourseProviderDetail()
 
 

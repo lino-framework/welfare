@@ -44,6 +44,10 @@ def objects():
     newcomer = Client.objects.get(id=121)
     coached = Client.objects.get(id=124)
 
+    # assert newcomer.client_state == ClientStates.newcomer
+    # assert coached.client_state == ClientStates.coached
+    # true only for eupen, not for chatelet
+
     id_card = UploadType.objects.get(shortcut=Shortcuts.id_document)
     residence_permit = UploadType.objects.get(id=UPLOADTYPE_RESIDENCE_PERMIT)
     work_permit = UploadType.objects.get(id=UPLOADTYPE_WORK_PERMIT)

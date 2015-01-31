@@ -55,8 +55,6 @@ def objects():
     oikos = courseprovider(name=u"Oikos", city=eupen, country='BE')
     yield oikos
 
-    #~ kap = company(name=u"KAP",city=eupen,country='BE',
-      #~ is_courseprovider=True)
     kap = courseprovider(name=u"KAP", city=eupen, country='BE')
     yield kap
 

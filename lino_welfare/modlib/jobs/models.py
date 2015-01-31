@@ -107,17 +107,15 @@ class JobProviderDetail(contacts.CompanyDetail):
         #~ lh.jobs.label = _("Jobs")
 
 
-#~ class JobProviders(pcsw.Companies,dd.Table):
 class JobProviders(contacts.Companies, dd.Table):
+    """The table of all job providers.
 
-    """
-    List of Companies that have `Company.is_jobprovider` activated.
     """
     required = dd.required(user_groups='integ')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
     #~ use_as_default_table = False
-    model = JobProvider
+    model = 'jobs.JobProvider'
     app_label = 'jobs'
     detail_layout = JobProviderDetail()
 
@@ -1156,14 +1154,6 @@ class JobsOverview(EmptyTable):
         
            %s
         """ % E.tostring(obj.preview).replace('\n', ' ')
-
-
-dd.inject_field(
-    contacts.Company, 'is_jobprovider',
-    dd.EnableChild(
-        'jobs.JobProvider',
-        verbose_name=_("is Job Provider"),
-        help_text=_("Whether this Company is also a Job Provider.")))
 
 
 @dd.receiver(dd.post_analyze)

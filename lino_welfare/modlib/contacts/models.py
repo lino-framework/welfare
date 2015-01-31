@@ -63,11 +63,6 @@ für neue Operationen nicht benutzt werden können.""")
           phone fax email url
           activity is_obsolete
           ''')
-        # not e.g. on JobProvider who has no own site_setup()
-        if cls is Partner:
-            cls.declare_imported_fields('''
-            is_person is_company
-            ''')
 
     def disabled_fields(self, ar):
         rv = super(Partner, self).disabled_fields(ar)
@@ -125,9 +120,7 @@ class PartnerDetail(PartnerDetail):
     """
 
     misc = dd.Panel("""
-    is_obsolete \
-    #is_person #is_company #is_household \
-    created modified
+    is_obsolete created modified
     changes.ChangesByMaster
     """, label=_("Miscellaneous"))
 
@@ -142,10 +135,6 @@ class Person(Partner, Person):
         verbose_name_plural = _("Persons")  # :doc:`/tickets/14`
         #~ ordering = ['last_name','first_name']
 
-    is_client = mti.EnableChild(
-        'pcsw.Client', verbose_name=_("is Client"),
-        help_text=_("Whether this Person is a Client."))
-
     def get_queryset(self, ar):
         return self.model.objects.select_related('country', 'city')
 
@@ -158,7 +147,7 @@ class Person(Partner, Person):
         super(Person, cls).on_analyze(site)
         cls.declare_imported_fields(
             '''name first_name middle_name last_name title
-            birth_date gender is_client''')
+            birth_date gender''')
 
 
 dd.update_field(Person, 'first_name', blank=False)
@@ -202,8 +191,7 @@ class PersonDetail(PersonDetail):
     """
 
     misc = dd.Panel("""
-    activity url client_contact_type
-    is_obsolete is_client
+    activity url client_contact_type is_obsolete
     created modified
     reception.AppointmentsByPartner
     """, label=_("Miscellaneous"))
@@ -300,8 +288,7 @@ class CompanyDetail(CompanyDetail):
     notes = "notes.NotesByCompany"
 
     misc = dd.Panel("""
-    id language activity
-    is_courseprovider is_jobprovider is_obsolete
+    id language activity is_obsolete
     created modified
     reception.AppointmentsByPartner
     """, label=_("Miscellaneous"))
@@ -320,13 +307,6 @@ class PartnersByClientContactType(Partners):
 @dd.receiver(dd.post_analyze)
 def my_details(sender, **kw):
     contacts = sender.modules.contacts
-
-    # if not dd.is_installed('courses'):
-    #     CompanyDetail.box5.replace('is_courseprovider', '')
-    if not rt.modules.resolve('contacts.Company.is_courseprovider'):
-        CompanyDetail.misc.replace('is_courseprovider', '')
-    # TODO: find a more elegant way to do the above
-
     contacts.Partners.set_detail_layout(contacts.PartnerDetail())
     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 

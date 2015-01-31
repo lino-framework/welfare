@@ -266,9 +266,8 @@ The following table lists information about all detail layouts.
 | changes.Changes               | admin                               | time user type master object id diff                         |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | contacts.Companies            | all except anonymous                | overview prefix name type vat_id client_contact_type url     |
-|                               |                                     | email phone gsm fax remarks id language activity             |
-|                               |                                     | is_courseprovider is_jobprovider is_obsolete created         |
-|                               |                                     | modified                                                     |
+|                               |                                     | email phone gsm fax remarks id language activity is_obsolete |
+|                               |                                     | created modified                                             |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | contacts.Partners             | all except anonymous                | overview id language activity client_contact_type url email  |
 |                               |                                     | phone gsm fax country region city zip_code addr1             |
@@ -278,7 +277,7 @@ The following table lists information about all detail layouts.
 | contacts.Persons              | all except anonymous                | overview title first_name middle_name last_name gender       |
 |                               |                                     | birth_date age id language email phone gsm fax               |
 |                               |                                     | MembersByPerson LinksByHuman remarks activity url            |
-|                               |                                     | client_contact_type is_obsolete is_client created modified   |
+|                               |                                     | client_contact_type is_obsolete created modified             |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | contenttypes.ContentTypes     | admin                               | id name app_label model base_classes                         |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
