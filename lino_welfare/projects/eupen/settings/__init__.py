@@ -5,14 +5,14 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from lino_welfare.projects.base import *
+from lino_welfare.projects.std.settings import *
 
 configure_plugin('beid', read_only_simulate=True)
 
 
 class Site(Site):
 
-    title = "Lino für ÖSHZ"
+    verbose_name = "Lino für ÖSHZ"
     languages = 'de fr nl'  # tested docs rely on this distribution
     hidden_languages = None
     help_url = "http://de.welfare.lino-framework.org"

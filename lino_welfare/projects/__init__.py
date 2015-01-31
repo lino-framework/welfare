@@ -5,7 +5,6 @@
 
    chatelet
    eupen
-   base
-   docs
+   std
 
 """

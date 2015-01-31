@@ -14,7 +14,7 @@ To run only this test::
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = \
-    'lino_welfare.projects.docs.settings.doctests'
+    'lino_welfare.projects.std.settings.doctests'
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -24,7 +24,7 @@ from lino.utils.test import DemoTestCase
 
 class MyTestCase(DemoTestCase):
 
-    django_settings_module = 'lino_welfare.projects.docs.settings.doctests'
+    django_settings_module = 'lino_welfare.projects.std.settings.doctests'
 
     def test_001(self):
         

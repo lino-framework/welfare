@@ -29,17 +29,11 @@ class ProjectsTests(BaseTestCase):
     """
 
     def test_docs(self):
-        # cwd = self.project_root.child(
-        #     'lino_welfare', 'projects', 'docs', 'tests').absolute()
-        # self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
         cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'docs').absolute()
+            'lino_welfare', 'projects', 'std').absolute()
         self.run_django_manage_test(cwd)
     
     def test_eupen(self):
-        # cwd = self.project_root.child(
-        #     'lino_welfare', 'projects', 'eupen', 'tests').absolute()
-        # self.run_subprocess([cwd.child('run_tests.sh')], cwd=cwd)
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'eupen').absolute()
         self.run_django_manage_test(cwd)

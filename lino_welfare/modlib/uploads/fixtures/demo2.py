@@ -2,7 +2,7 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 """
-Demo data for :mod:`lino_welfare.modlib.uploads`.
+Demo data for `lino_welfare.modlib.uploads`.
 """
 
 from django.conf import settings

@@ -140,7 +140,7 @@ class Trainings(ContractBaseTable):
 
     required = dd.required(user_groups='integ')
     model = Training
-    column_names = 'id applies_from applies_until user type *'
+    column_names = 'id client applies_from applies_until user type *'
     order_by = ['id']
     detail_layout = TrainingDetail()
     insert_layout = """

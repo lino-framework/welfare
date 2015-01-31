@@ -1,13 +1,12 @@
 import datetime
-from lino_welfare.projects.base import *
+
+from lino_welfare.projects.std.settings import *
 
 
 class Site(Site):
 
-    title = "Lino Welfare"
-
-    project_name = 'welfare_std'  # avoid name clash with
-                                  # `lino/projects/docs`.
+    project_name = 'welfare_std'
+    # avoid name clash with `lino/projects/docs`.
 
     the_demo_date = datetime.date(2014, 05, 22)
     # test cases which rely on this date:
@@ -22,3 +21,5 @@ class Site(Site):
             return True
         return False
 
+
+SITE = Site(globals())

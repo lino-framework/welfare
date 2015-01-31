@@ -38,7 +38,7 @@ database:
 lino_welfare.projects.chatelet.settings.doctests
 
 >>> dd.today()
-datetime.date(2015, 1, 25)
+datetime.date(2014, 5, 22)
 
 
 Configuration data

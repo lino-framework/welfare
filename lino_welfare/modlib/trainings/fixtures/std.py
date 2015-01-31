@@ -3,7 +3,10 @@
 # License: BSD (see file COPYING for details)
 """Adds some training types and some training goals.
 
-https://www.leforem.be/particuliers/seformer/stages/stages-en-entreprises.html
+TODO: ask Mathieu and Gerd for their advice in establishing a more or
+less complete/useful set of default data.  See also `leforem.be
+<https://www.leforem.be/particuliers/seformer/stages/stages-en-entreprises.html>`_.
+
 """
 
 from django.utils.translation import ugettext_lazy as _

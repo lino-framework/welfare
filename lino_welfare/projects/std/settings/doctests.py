@@ -1,4 +1,4 @@
-from ..settings import *
+from .demo import *
 SITE = Site(
     globals(),
     no_local=True,
@@ -8,5 +8,4 @@ SITE = Site(
 DEBUG = True
 SITE.appy_params.update(raiseOnError=True)
 SITE.appy_params.update(pythonWithUnoPath='/usr/bin/python3')
-SITE.default_build_method = "appyodt"
 SITE.webdav_url = '/'

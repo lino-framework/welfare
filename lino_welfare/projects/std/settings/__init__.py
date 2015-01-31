@@ -3,10 +3,9 @@
 # License: BSD (see file COPYING for details)
 
 """
-Default settings of a :ref:`welfare` site.
+Default settings of a :ref:`welfare` project.
 
 """
-import datetime
 
 from lino.projects.std.settings import *
 from lino_welfare import SETUP_INFO
@@ -16,44 +15,29 @@ class Site(Site):
     """
     The base class for all Lino Welfare sites.
     """
-    version = SETUP_INFO['version']  # lino_welfare.__version__
-    url = SETUP_INFO['url']
-    uppercase_last_name = True
-
-    # use_java = False  # temporarily
 
     verbose_name = "Lino Welfare"
+
+    version = SETUP_INFO['version']  # lino_welfare.__version__
+    url = SETUP_INFO['url']
 
     demo_fixtures = """std std2 few_languages props demo cbss
     democfg cbss_demo demo2 demo_events""".split()
 
-    # ~ catch_layout_exceptions = False # 20130804
-
-    migration_class = 'lino_welfare.migrate.Migrator'
-
-    userdocs_prefix = 'welfare.'
-    auto_configure_logger_names = 'djangosite lino lino_welfare'
-
-    project_model = 'pcsw.Client'
-
-    # verbose_client_info_message = True
-
-    languages = 'en fr de nl'  # tested docs rely on this distribution
+    languages = 'en fr de nl'
     hidden_languages = 'nl'
 
-    # def get_default_language(self):
-    #     """The default returns German which is statistically not correct, but
-    #     Lino Welfare was born in the German-speaking region, and quite
-    #     some test cases rely on this default setting.
+    migration_class = 'lino_welfare.migrate.Migrator'
+    project_model = 'pcsw.Client'
 
-    #     """
-    #     return 'de'
+    # ~ catch_layout_exceptions = False # 20130804
 
-    #~ index_view_action = "pcsw.Home"
-
-    #~ remote_user_header = "REMOTE_USER"
-
-    #~ admin_url = '/admin'
+    userdocs_prefix = 'welfare.'
+    auto_configure_logger_names = 'lino lino_welfare'
+    # use_java = False  # temporarily
+    # verbose_client_info_message = True
+    default_build_method = "appyodt"
+    uppercase_last_name = True
 
     def setup_plugins(self):
         """
@@ -206,7 +190,3 @@ class Site(Site):
         yield self.modules.cal.MyTasks
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
-
-
-
-

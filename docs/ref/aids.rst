@@ -2,7 +2,7 @@
 Social aids
 ===========
 
-..  Building this document requires the lino_welfare.projects.docs
+..  Building this document requires the lino_welfare.projects.std
     database to be populated.
 
 .. module:: welfare.aids

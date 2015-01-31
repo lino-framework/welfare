@@ -13,7 +13,7 @@ General
 ..  
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.docs.settings.doctests'
+    ...    'lino_welfare.projects.std.settings.doctests'
     >>> from __future__ import print_function
     >>> from lino.runtime import *
     >>> from django.utils import translation
@@ -100,7 +100,7 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
- excerpts.Excerpt               excerpts.ExcerptsByX            12        92
+ excerpts.Excerpt               excerpts.ExcerptsByX            12        93
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        12
  households.Household           households.Households           29        14
  households.Member              households.Members              13        63
@@ -161,7 +161,7 @@ result:
  system.SiteConfig              system.SiteConfigs              30        1
  system.TextFieldTemplate       system.TextFieldTemplates       5         2
  trainings.Goal                 trainings.TrainingGoals         5         4
- trainings.Training             trainings.Trainings             25        0
+ trainings.Training             trainings.Trainings             25        3
  trainings.TrainingType         trainings.TrainingTypes         7         3
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9

@@ -141,7 +141,7 @@ Here we want to see what the `edit_template` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
 (Note: the following test is the reason why `is_local_project_dir` is
-`True` in `lino_welfare.projects.docs.settings.doctests`.)
+`True` in `lino_welfare.projects.std.settings.doctests`.)
 
 >>> lcd = os.path.join(settings.SITE.project_dir, 'config')
 >>> # rt.makedirs_if_missing(lcd)

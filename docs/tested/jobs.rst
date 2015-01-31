@@ -13,7 +13,7 @@ Jobs
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.docs.settings.doctests'
+    ...    'lino_welfare.projects.std.settings.doctests'
     >>> from django.utils import translation
     >>> from lino.runtime import *
     >>> from lino.utils.instantiator import i2d

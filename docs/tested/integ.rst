@@ -18,7 +18,7 @@ A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.docs.settings.doctests'
+...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.api.doctest import *
 
 

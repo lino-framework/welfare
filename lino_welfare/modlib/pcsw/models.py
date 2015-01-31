@@ -2,7 +2,7 @@
 # Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Database models for :mod:`lino_welfare.modlib.pcsw`.
+"""Database models for `lino_welfare.modlib.pcsw`.
 
 """
 
@@ -30,9 +30,8 @@ from lino.api import dd, rt
 from lino.core.utils import get_field
 
 from lino.utils.xmlgen.html import E
+from lino.modlib.cal.utils import DurationUnits, update_reminder
 
-households = dd.resolve_app('households')
-# reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
 properties = dd.resolve_app('properties')
@@ -49,6 +48,7 @@ beid = dd.resolve_app('beid')
 from lino.utils import ssin
 
 from .coaching import *
+from .mixins import ClientContactBase
 
 
 class CivilState(dd.ChoiceList):
@@ -126,13 +126,14 @@ add('10', _("Active"), 'active')
 add('20', _("ISIP"), 'isip')
 add('21', _("Art.60§7 contract"), 'jobs')
 add('22', _("Dispense"), 'dispense')
+if dd.is_installed('trainings'):
+    add('23', _("Training"), 'training')
 add('30', _("Penalty"), 'penalty')
 add('31', _("Exclusion"), 'exclusion')
 add('40', _("Note"), 'note')
 add('50', _("Created"), 'created')
 add('60', _("Modified"), 'modified')
-#~ add('20', _("Started"),'started')
-#~ add('30', _("Ended"),'ended')
+add('70', _("Available"), 'available')
 
 
 class ClientStates(dd.Workflow):
@@ -452,19 +453,17 @@ class Client(contacts.Person,
         user = self.get_primary_coach()
         if user:
             with translation.override(user.language):
-                M = cal.DurationUnits.months
-                cal.update_reminder(1, self, user,
-                                    self.card_valid_until,
-                                    _("eID card expires in 2 months"), 2, M)
-                cal.update_reminder(2, self, user,
-                                    self.unavailable_until,
-                                    _("becomes available again in 1 month"), 1, M)
-                cal.update_reminder(3, self, user,
-                                    self.work_permit_suspended_until,
-                                    _("work permit suspension ends in 1 month"), 1, M)
-                #~ cal.update_reminder(4,self,user,
-                  #~ self.coached_until,
-                  #~ _("coaching ends in 1 month"),1,M)
+                M = DurationUnits.months
+                update_reminder(
+                    1, self, user, self.card_valid_until,
+                    _("eID card expires in 2 months"), 2, M)
+                update_reminder(
+                    2, self, user,
+                    self.unavailable_until,
+                    _("becomes available again in 1 month"), 1, M)
+                update_reminder(
+                    3, self, user, self.work_permit_suspended_until,
+                    _("work permit suspension ends in 1 month"), 1, M)
 
     @classmethod
     def get_reminders(model, ui, user, today, back_until):
@@ -923,6 +922,15 @@ def daterange_text(a, b):
 ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
 
 
+def has_contracts_filter(prefix, period):
+    f1 = Q(**{prefix+'__applies_until__isnull': True})
+    f1 |= Q(**{prefix+'__applies_until__gte': period[0]})
+    f2 = Q(**{prefix+'__date_ended__isnull': True})
+    f2 |= Q(**{prefix+'__date_ended__gte': period[0]})
+    return f1 & f2 & Q(**{prefix+'__applies_from__lte': period[1]})
+
+
+
 class Clients(contacts.Persons):
     "The default definition for :actor:`pcsw.Clients`. "
     # debug_permissions = '20150129'
@@ -1022,19 +1030,25 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             if pv.client_state is None:
                 qs = qs.filter(client_state__in=ACTIVE_STATES)
         elif ce == ClientEvents.isip:
-            f1 = Q(isip_contract_set_by_client__applies_until__isnull=True) | Q(
-                isip_contract_set_by_client__applies_until__gte=period[0])
-            flt = f1 & (Q(isip_contract_set_by_client__date_ended__isnull=True)
-                        | Q(isip_contract_set_by_client__date_ended__gte=period[0]))
-            flt &= Q(isip_contract_set_by_client__applies_from__lte=period[1])
+            flt = has_contracts_filter('isip_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
         elif ce == ClientEvents.jobs:
-            f1 = Q(jobs_contract_set_by_client__applies_until__isnull=True) | Q(
-                jobs_contract_set_by_client__applies_until__gte=period[0])
-            flt = f1 & (Q(jobs_contract_set_by_client__date_ended__isnull=True)
-                        | Q(jobs_contract_set_by_client__date_ended__gte=period[0]))
-            flt &= Q(jobs_contract_set_by_client__applies_from__lte=period[1])
+            flt = has_contracts_filter('jobs_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
+        elif ce == ClientEvents.training:
+            flt = has_contracts_filter(
+                'trainings_training_set_by_client', period)
+            qs = qs.filter(flt).distinct()
+
+        elif ce == ClientEvents.available:
+            # Build a condition "has some ISIP or some jobs.Contract
+            # or some trainings.Training" and then `exclude` it.
+            flt = has_contracts_filter('isip_contract_set_by_client', period)
+            flt |= has_contracts_filter('jobs_contract_set_by_client', period)
+            if dd.is_installed('trainings'):
+                flt |= has_contracts_filter(
+                    'trainings_training_set_by_client', period)
+            qs = qs.exclude(flt).distinct()
 
         elif ce == ClientEvents.dispense:
             qs = qs.filter(
@@ -1487,30 +1501,6 @@ class ClientContactTypes(dd.Table):
     column_names = 'id name *'
 
     stay_in_grid = True
-
-
-class ClientContactBase(contacts.ContactRelated):
-    # also used by lino_welfare.modlib.aids.models.RefundPartner
-    class Meta:
-        abstract = True
-    type = dd.ForeignKey('pcsw.ClientContactType', blank=True, null=True)
-
-    @dd.chooser()
-    def company_choices(self, type):
-        qs = contacts.Companies.request().data_iterator
-        if type is not None:
-            qs = qs.filter(client_contact_type=type)
-        return qs
-
-    @dd.chooser()
-    def contact_person_choices(self, type):
-        qs = contacts.Persons.request().data_iterator
-        if type is not None:
-            qs = qs.filter(client_contact_type=type)
-        return qs
-
-    def __unicode__(self):
-        return unicode(self.contact_person or self.company or self.type)
 
 
 class ClientContact(ClientContactBase):

@@ -12,6 +12,7 @@ Most important models are :class:`Client` and :class:`Coaching`.
 .. autosummary::
    :toctree:
 
+   mixins
    models
    coaching
    fixtures
@@ -21,13 +22,11 @@ See also :mod:`welfare.pcsw`.
 """
 
 
-from lino import ad
-
-from django.utils.translation import ugettext_lazy as _
+from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):
-    "Ceci n'est pas une documentation."
+    "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("PCSW")
 
     def setup_main_menu(self, site, profile, m):

@@ -6,6 +6,8 @@
 
 """
 
+from __future__ import unicode_literals
+
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -105,6 +107,13 @@ class OverlappingContractsTest:
                 self.actives.append((ap, con1))
 
     def check(self, con1):
+        """
+Checks for the following error conditions:
+
+- Date range X lies outside of coached period (Y)
+- Date range overlaps with X #Y
+
+        """
         ap = con1.active_period()
         if ap[0] is None and ap[1] is None:
             return
@@ -187,11 +196,16 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     exam_policy user_asd ending date_ended signer1 signer2'
 
     def __unicode__(self):
-        # ~ return u'%s # %s' % (self._meta.verbose_name,self.pk)
-        # ~ return u'%s#%s (%s)' % (self.job.name,self.pk,
-            #~ self.person.get_full_name(salutation=False))
-        return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
-                                self.client.get_full_name(salutation=False))
+        kw = dict(type=unicode(self._meta.verbose_name))
+        if self.pk is None:
+            kw.update(client=unicode(self.client))
+            return '{type} ({client})'.format(**kw)
+        kw.update(
+            id=self.pk,
+            client=self.client.get_full_name(salutation=False))
+        return '{type}#{id} ({client})'.format(**kw)
+        # return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
+        #                         self.client.get_full_name(salutation=False))
 
     # backwards compat for document templates
     def get_person(self):
@@ -234,12 +248,19 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         self.update_reminders(ar)
 
     def full_clean(self, *args, **kw):
+        """Checks for the following error conditions:
+
+- Contract ends before it started.
+- You must specify a contract type.
+- Any error message returned by :meth:`OverlappingContractsTest.check`
+
+"""
         r = self.active_period()
         if not isrange(*r):
             raise ValidationError(_('Contract ends before it started.'))
 
-        if self.type_id and self.type.exam_policy_id:
-            if not self.exam_policy_id:
+        if not self.exam_policy_id:
+            if self.type_id and self.type.exam_policy_id:
                 self.exam_policy_id = self.type.exam_policy_id
 
         if self.client_id is not None:

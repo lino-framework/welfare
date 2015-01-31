@@ -15,7 +15,7 @@ Preparatory stuff:
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.docs.settings.doctests'
+...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.runtime import *
 >>> from django.utils import translation
 >>> from django.test import Client

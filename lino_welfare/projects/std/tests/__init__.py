@@ -1,4 +1,4 @@
-"""The test suite for `lino_welfare.projects.docs`.
+"""The test suite for `lino_welfare.projects.std`.
 
 .. autosummary::
    :toctree:

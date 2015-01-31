@@ -2,7 +2,8 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Provides for managing "immersion trainings" (stages d'immersion).
+"""Provides functionality for managing "immersion trainings" (stages
+d'immersion).
 
 A tested document is here: :ref:`welfare.tested.trainings`
 
@@ -10,6 +11,8 @@ A tested document is here: :ref:`welfare.tested.trainings`
    :toctree:
 
    models
+   fixtures.std
+   fixtures.demo
 
 """
 

@@ -5,12 +5,12 @@
 """
 The settings.py used for building both `/docs` and `/userdocs`
 """
-from lino_welfare.projects.base import *
 
+from lino_welfare.projects.std.settings import *
 
 class Site(Site):
 
-    title = "Lino pour CPAS"
+    verbose_name = "Lino pour CPAS"
     languages = 'fr nl en'
     hidden_languages = None
 

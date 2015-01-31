@@ -14,14 +14,7 @@ Social aids
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.eupen.settings.doctests'
-    >>> from bs4 import BeautifulSoup
-    >>> from lino.utils import i2d
-    >>> from lino.utils.xmlgen.html import E
-    >>> from lino.runtime import *
-    >>> from django.test import Client
-    >>> from django.utils import translation
-    >>> import json
-    >>> client = Client()
+    >>> from lino.api.doctest import *
 
 >>> ses = rt.login('rolf')
 >>> translation.activate('de')

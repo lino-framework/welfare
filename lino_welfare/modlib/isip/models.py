@@ -60,7 +60,12 @@ class ContractTypes(dd.Table):
 # EXAMINATION POLICIES
 #
 class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
+    """A **policy of examination** is mostly a
+    :class:`RecurrenceSet<lino.modlib.cal.mixins.RecurrenceSet>` used
+    for generating "evaluation meetings".  That is, Lino automatically
+    suggests dates where the agent invites the client.
 
+    """
     class Meta:
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
