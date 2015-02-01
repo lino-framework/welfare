@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Une série de questionnaires utilisés par les CPAS dans leur
-interviews avec les bénéficiaires dans le cadre d'un project de
-recherche active d'emploi.
+"""A series of polls used by intergration agents to interview their
+clients who start an "active job search" project ("recherche active
+d'emploi").
 
 """
 
@@ -43,9 +43,9 @@ def objects():
         obj.after_ui_save(None)
         return obj
 
-    p1 = poll(
-        "Q2", acquired,
-        "Deuxieme série", """
+    first = poll(
+        "INI", acquired,
+        "Interview initial", """
 À remplir lors de la première entrevue.
 """, """
 =Pour commencer ma recherche d'emploi, je dois
@@ -83,17 +83,17 @@ Utiliser le téléphone pour relancer ma candidature
 Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm
 """)
 
-    yield p1
+    yield first
 
     rae = poll(
-        "Q1",
+        "RAE",
         yesmaybeno,
         "Recherche active d'emploi", """
 Veuillez sélectionner votre réponse pour chaque question
 """, """
 Cherchez-vous du travail actuellement?
 Avez-vous un CV à jour?
-Est-ce que vous vous présentéz régulièrement au FOREM?
+Est-ce que vous vous présentez régulièrement au FOREM?
 Est-ce que vous consultez les petites annonces?
 Demande à l’entourage?
 Candidature spontanée?
@@ -120,10 +120,11 @@ Avez-vous des antécédents judiciaires qui pourraient \
     # u = settings.SITE.user_model.objects.get(username='romain')
     u = USERS.pop()
 
-    def fill_response(p):
-
-        kw = dict(poll=p, state=polls.ResponseStates.registered)
-        kw.update(partner=PARTNERS.pop())
+    def response(date_offset, partner, poll):
+        
+        kw = dict(poll=poll, state=polls.ResponseStates.registered)
+        kw.update(date=settings.SITE.demo_date(date_offset))
+        kw.update(partner=partner)
         kw.update(user=u)
         r = polls.Response(**kw)
         yield r
@@ -137,6 +138,12 @@ Avez-vous des antécédents judiciaires qui pourraient \
                 c = choices[i]
                 yield polls.AnswerChoice(response=r, question=q, choice=c)
                 i += 1
-    
-    yield fill_response(p1)
-    # yield fill_response(p2)
+
+    p = PARTNERS.pop()
+    yield response(-80, p, first)
+    yield response(-80, p, rae)
+    yield response(-50, p, rae)
+    yield response(-20, p, rae)
+    p = PARTNERS.pop()
+    yield response(-30, p, first)
+    yield response(-20, p, rae)

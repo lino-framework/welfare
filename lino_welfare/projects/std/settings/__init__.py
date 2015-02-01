@@ -2,12 +2,12 @@
 # Copyright 2009-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-Default settings of a :ref:`welfare` project.
+"""Default settings of a :ref:`welfare` project.
 
 """
 
 from lino.projects.std.settings import *
+from django.utils.translation import ugettext_lazy as _
 import lino_welfare
 
 
@@ -16,7 +16,7 @@ class Site(Site):
     The base class for all Lino Welfare sites.
     """
 
-    verbose_name = "Lino Welfare"
+    verbose_name = _("Lino Welfare")
 
     version = lino_welfare.SETUP_INFO['version']
     url = lino_welfare.SETUP_INFO['url']

@@ -65,14 +65,11 @@ class DocsTests(BaseTestCase):
     def test_cv2(self):
         return self.run_simple_doctests('docs/tested/cv2.rst')
 
+    def test_polls(self):
+        return self.run_simple_doctests('docs/tested/polls.rst')
+
     def test_general(self):
         return self.run_simple_doctests('docs/tested/general.rst')
-
-    def test_newcomers(self):
-        return self.run_docs_doctests('tested/newcomers.rst')
-
-    def test_misc(self):
-        return self.run_docs_doctests('tested/misc.rst')
 
     def test_aids_de(self):
         return self.run_simple_doctests('docs_de/aids.rst')
@@ -80,21 +77,27 @@ class DocsTests(BaseTestCase):
     def test_aids(self):
         return self.run_simple_doctests('docs/tested/aids.rst')
 
-    def test_debts(self):
-        return self.run_docs_doctests('tested/debts.rst')
-
-    def test_cbss(self):
-        return self.run_docs_doctests('tested/cbss.rst')
-
     def test_pcsw(self):
         return self.run_simple_doctests('docs/tested/pcsw.rst')
-
-    def test_courses(self):
-        return self.run_docs_doctests('tested/courses.rst')
 
     def test_jobs(self):
         return self.run_simple_doctests('docs/tested/jobs.rst')
 
     def test_reception(self):
         return self.run_simple_doctests('docs/tested/reception.rst')
+
+    def test_newcomers(self):
+        return self.run_docs_doctests('tested/newcomers.rst')
+
+    def test_misc(self):
+        return self.run_docs_doctests('tested/misc.rst')
+
+    def test_debts(self):
+        return self.run_docs_doctests('tested/debts.rst')
+
+    def test_cbss(self):
+        return self.run_docs_doctests('tested/cbss.rst')
+
+    def test_courses(self):
+        return self.run_docs_doctests('tested/courses.rst')
 
