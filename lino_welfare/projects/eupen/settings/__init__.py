@@ -12,7 +12,6 @@ configure_plugin('beid', read_only_simulate=True)
 
 class Site(Site):
 
-    title = "Welfare Eupen Demo"
     languages = 'de fr nl'  # tested docs rely on this distribution
     hidden_languages = None
     help_url = "http://de.welfare.lino-framework.org"

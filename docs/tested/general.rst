@@ -149,7 +149,7 @@ result:
  polls.ChoiceSet                polls.ChoiceSets                5         7
  polls.Poll                     polls.Polls                     11        0
  polls.Question                 polls.Questions                 9         0
- polls.Response                 polls.Responses                 8         0
+ polls.Response                 polls.Responses                 7         0
  projects.Project               projects.Projects               10        0
  projects.ProjectType           projects.ProjectTypes           5         0
  properties.PersonProperty      cv.PersonProperties             6         310
@@ -429,7 +429,7 @@ The following table lists information about all detail layouts.
 | polls.Polls                   | all except anonymous                | title state details user created modified default_choiceset  |
 |                               |                                     | default_multiple_choices                                     |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| polls.Responses               | all except anonymous                | user poll state created modified remark                      |
+| polls.Responses               | all except anonymous                | user poll date state remark                                  |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | projects.Projects             | admin                               | id client project_type start_date end_date origin target     |
 |                               |                                     | remark result                                                |

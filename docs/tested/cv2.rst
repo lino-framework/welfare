@@ -46,42 +46,42 @@ Configuration data
 
 This is the list of training types:
 
->>> rt.login('romain').show(cv.TrainingTypes)
-==== ==================
- ID   Description
----- ------------------
- 3    Alpha
- 1    Préqualification
- 2    Qualification
-==== ==================
+>>> rt.login('robin').show(cv.TrainingTypes)
+==== =============== ================== ==================
+ ID   Designation     Designation (fr)   Designation (de)
+---- --------------- ------------------ ------------------
+ 3    Alpha           Alpha              Alpha
+ 1    Prequalifying   Préqualification   Prequalifying
+ 2    Qualifying      Qualification      Qualifying
+==== =============== ================== ==================
 <BLANKLINE>
 
->>> rt.login('romain').show(cv.EducationLevels)
-=============
- Description
--------------
- Bachelor
- Master
- Primaire
- Secondaire
- Supérieur
-=============
+>>> rt.login('robin').show(cv.EducationLevels)
+============= ================== ==================
+ Designation   Designation (fr)   Designation (de)
+------------- ------------------ ------------------
+ Bachelor      Bachelor           Bachelor
+ Higher        Supérieur          Hochschule
+ Master        Master             Master
+ Primary       Primaire           Primär
+ Secondary     Secondaire         Sekundär
+============= ================== ==================
 <BLANKLINE>
 
 And the list of Study types:
 
->>> rt.login('romain').show(cv.StudyTypes)
-==== ======================= ===================
- ID   Description             Niveau académique
----- ----------------------- -------------------
- 4    Apprentissage
- 8    Cours à distance
- 7    Cours à temps partiel
- 3    Formation
- 6    Université
- 1    École
- 2    École spéciale
- 5    École supérieure
-==== ======================= ===================
+>>> rt.login('robin').show(cv.StudyTypes)
+==== ================= ======================= ==================== =================
+ ID   Designation       Designation (fr)        Designation (de)     Education Level
+---- ----------------- ----------------------- -------------------- -----------------
+ 4    Apprenticeship    Apprentissage           Lehre
+ 5    Highschool        École supérieure        Hochschule
+ 7    Part-time study   Cours à temps partiel   Teilzeitunterricht
+ 8    Remote study      Cours à distance        Fernkurs
+ 1    School            École                   Schule
+ 2    Special school    École spéciale          Sonderschule
+ 3    Training          Formation               Ausbildung
+ 6    University        Université              Universität
+==== ================= ======================= ==================== =================
 <BLANKLINE>
 

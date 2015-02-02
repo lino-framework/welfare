@@ -10,9 +10,9 @@ from lino_welfare.projects.std.settings import *
 
 class Site(Site):
 
-    verbose_name = "Lino pour CPAS"
-    languages = 'fr nl en'
-    hidden_languages = None
+    # verbose_name = "Lino pour CPAS"
+    # languages = 'fr nl en'
+    # hidden_languages = None
 
     demo_fixtures = """std few_languages props all_countries
     demo cbss mini demo2 jobsearch local """.split()

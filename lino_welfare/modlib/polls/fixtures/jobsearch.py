@@ -129,7 +129,7 @@ Avez-vous des antécédents judiciaires qui pourraient \
         r = polls.Response(**kw)
         yield r
         i = 0
-        for q in polls.Question.objects.filter(poll=r.poll):
+        for q in polls.Question.objects.filter(poll=poll):
             cs = q.get_choiceset()
             if cs is not None:
                 choices = cs.choices.all()

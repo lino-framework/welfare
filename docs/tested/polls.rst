@@ -62,85 +62,102 @@ Configuration data
 This is the list of choice sets:
 
 >>> rt.login('romain').show(polls.ChoiceSets)
-==== =====================
- ID   Description
----- ---------------------
- 1    Yes/No
- 2    Yes/Maybe/No
- 3    That's it!...Never!
- 4    -1..+1
- 5    Acquis
- 6    1...5
- 7    1...10
+==== ===================== ===================== =====================
+ ID   Designation           Designation (fr)      Designation (de)
+---- --------------------- --------------------- ---------------------
+ 1    Yes/No                Yes/No                Yes/No
+ 2    Yes/Maybe/No          Yes/Maybe/No          Yes/Maybe/No
+ 3    That's it!...Never!   That's it!...Never!   That's it!...Never!
+ 4    -1..+1                -1..+1                -1..+1
+ 5    Acquired              Acquis                Acquired
+ 6    1...5                 1...5                 1...5
+ 7    1...10                1...10                1...10
  8    Temps de travail
-==== =====================
+==== ===================== ===================== =====================
 <BLANKLINE>
 
+
 >>> rt.login('romain').show(polls.Polls)
-============================ =========================== ================= ========
- Créé                         Allocution                  Auteur            État
----------------------------- --------------------------- ----------------- --------
- 2015-02-01 18:13:32.733205   Interview initial           Alicia Allmanns   Publié
- 2015-02-01 18:13:32.767200   Recherche active d'emploi   Caroline Carnol   Publié
-============================ =========================== ================= ========
+=========== =========================== ================= ===========
+ Reference   Title                       Author            State
+----------- --------------------------- ----------------- -----------
+ INI         Interview initial           Alicia Allmanns   Published
+ RAE         Recherche active d'emploi   Caroline Carnol   Published
+=========== =========================== ================= ===========
 <BLANKLINE>
 
 >>> rt.login('romain').show(polls.Questions)
-======================= ==== ======================================================================================================== ================== =========
- Questionnaire           No   Title                                                                                                    Liste de choix     Heading
------------------------ ---- -------------------------------------------------------------------------------------------------------- ------------------ ---------
- INI                          Pour commencer ma recherche d'emploi, je dois                                                                               Oui
- INI                     1    Avoir une farde de recherche d’emploi organisée                                                                             Non
- INI                     2    Réaliser mon curriculum vitae                                                                                               Non
- INI                     3    Savoir faire une lettre de motivation adaptée au poste de travail visé                                                      Non
- INI                     4    Respecter les modalités de candidature                                                                                      Non
- INI                     5    Me créer une boite e-mail appropriée à la recherche d’emploi                                                                Non
- INI                     6    Créer mon compte sur le site de Forem                                                                                       Non
- INI                     7    Mettre mon curriculum vitae sur le site du Forem                                                                            Non
- INI                     8    Connaître les aides à l’embauche qui me concernent                                                                          Non
- INI                     9    Etre préparé à l’entretien d’embauche ou téléphonique                                                                       Non
- INI                          Est-ce que je sais...                                                                                                       Oui
- INI                     1    Utiliser le site du Forem pour consulter les offres d’emploi                                                                Non
- INI                     2    Décoder une offre d’emploi                                                                                                  Non
- INI                     3    Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée                                      Non
- INI                     4    Réaliser une lettre de motivation suite à une offre d’emploi                                                                Non
- INI                     5    Adapter une lettre de motivation par rapport à l’offre d’emploi                                                             Non
- INI                     6    Réaliser une lettre de motivation spontanée                                                                                 Non
- INI                     7    Utiliser le fax pour envoyer mes candidatures                                                                               Non
- INI                     8    Utiliser ma boite e-mail pour envoyer mes candidatures                                                                      Non
- INI                     9    Mettre mon curriculum vitae en ligne sur des sites d’entreprise                                                             Non
- INI                     10   Compléter en ligne les formulaires de candidature                                                                           Non
- INI                     11   M’inscrire aux agences intérim via Internet                                                                                 Non
- INI                     12   M’inscrire auprès d’agence de recrutement via Internet                                                                      Non
- INI                     13   Utiliser Internet pour faire des recherches sur une entreprise                                                              Non
- INI                     14   Préparer un entretien d’embauche (questions, argumentation du C.V.,…)                                                       Non
- INI                     15   Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire voiture)                                        Non
- INI                     16   Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)                                    Non
- INI                     17   Utiliser le téléphone pour poser ma candidature                                                                             Non
- INI                     18   Utiliser le téléphone pour relancer ma candidature                                                                          Non
- INI                     19   Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm                      Non
- RAE                     1    Cherchez-vous du travail actuellement?                                                                                      Non
- RAE                     2    Avez-vous un CV à jour?                                                                                                     Non
- RAE                     3    Est-ce que vous vous présentez régulièrement au FOREM?                                                                      Non
- RAE                     4    Est-ce que vous consultez les petites annonces?                                                                             Non
- RAE                     5    Demande à l’entourage?                                                                                                      Non
- RAE                     6    Candidature spontanée?                                                                                                      Non
- RAE                     7    Avez-vous des antécédents judiciaires qui pourraient être préjudiciables à votre recherce d’emploi?                         Non
- RAE                          Temps de travail acceptés                                                                                Temps de travail   Non
- **Total (38 lignes)**                                                                                                                                    **2**
-======================= ==== ======================================================================================================== ================== =========
+===================== ===== ======================================================================================================== ================== =========
+ Poll                  No.   Title                                                                                                    Choice Set         Heading
+--------------------- ----- -------------------------------------------------------------------------------------------------------- ------------------ ---------
+ INI                         Pour commencer ma recherche d'emploi, je dois                                                                               Yes
+ INI                   1     Avoir une farde de recherche d’emploi organisée                                                                             No
+ INI                   2     Réaliser mon curriculum vitae                                                                                               No
+ INI                   3     Savoir faire une lettre de motivation adaptée au poste de travail visé                                                      No
+ INI                   4     Respecter les modalités de candidature                                                                                      No
+ INI                   5     Me créer une boite e-mail appropriée à la recherche d’emploi                                                                No
+ INI                   6     Créer mon compte sur le site de Forem                                                                                       No
+ INI                   7     Mettre mon curriculum vitae sur le site du Forem                                                                            No
+ INI                   8     Connaître les aides à l’embauche qui me concernent                                                                          No
+ INI                   9     Etre préparé à l’entretien d’embauche ou téléphonique                                                                       No
+ INI                         Est-ce que je sais...                                                                                                       Yes
+ INI                   1     Utiliser le site du Forem pour consulter les offres d’emploi                                                                No
+ INI                   2     Décoder une offre d’emploi                                                                                                  No
+ INI                   3     Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée                                      No
+ INI                   4     Réaliser une lettre de motivation suite à une offre d’emploi                                                                No
+ INI                   5     Adapter une lettre de motivation par rapport à l’offre d’emploi                                                             No
+ INI                   6     Réaliser une lettre de motivation spontanée                                                                                 No
+ INI                   7     Utiliser le fax pour envoyer mes candidatures                                                                               No
+ INI                   8     Utiliser ma boite e-mail pour envoyer mes candidatures                                                                      No
+ INI                   9     Mettre mon curriculum vitae en ligne sur des sites d’entreprise                                                             No
+ INI                   10    Compléter en ligne les formulaires de candidature                                                                           No
+ INI                   11    M’inscrire aux agences intérim via Internet                                                                                 No
+ INI                   12    M’inscrire auprès d’agence de recrutement via Internet                                                                      No
+ INI                   13    Utiliser Internet pour faire des recherches sur une entreprise                                                              No
+ INI                   14    Préparer un entretien d’embauche (questions, argumentation du C.V.,…)                                                       No
+ INI                   15    Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire voiture)                                        No
+ INI                   16    Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)                                    No
+ INI                   17    Utiliser le téléphone pour poser ma candidature                                                                             No
+ INI                   18    Utiliser le téléphone pour relancer ma candidature                                                                          No
+ INI                   19    Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm                      No
+ RAE                   1     Cherchez-vous du travail actuellement?                                                                                      No
+ RAE                   2     Avez-vous un CV à jour?                                                                                                     No
+ RAE                   3     Est-ce que vous vous présentez régulièrement au FOREM?                                                                      No
+ RAE                   4     Est-ce que vous consultez les petites annonces?                                                                             No
+ RAE                   5     Demande à l’entourage?                                                                                                      No
+ RAE                   6     Candidature spontanée?                                                                                                      No
+ RAE                   7     Avez-vous des antécédents judiciaires qui pourraient être préjudiciables à votre recherce d’emploi?                         No
+ RAE                         Temps de travail acceptés                                                                                Temps de travail   No
+ **Total (38 rows)**                                                                                                                                     **2**
+===================== ===== ======================================================================================================== ================== =========
 <BLANKLINE>
 
 >>> rt.login('romain').show(polls.Responses)
-==== ================= =============== ============ ============ =================== ===========================
- ID   Auteur            Questionnaire   Date         État         Remarque générale   Partenaire
----- ----------------- --------------- ------------ ------------ ------------------- ---------------------------
- 1    Hubert Huppertz   INI             03/03/2014   Enregistré                       Ausdemwald Alfons (115)
- 2    Hubert Huppertz   RAE             03/03/2014   Enregistré                       Ausdemwald Alfons (115)
- 3    Hubert Huppertz   RAE             02/04/2014   Enregistré                       Ausdemwald Alfons (115)
- 5    Hubert Huppertz   INI             22/04/2014   Enregistré                       Bastiaensen Laurent (116)
- 4    Hubert Huppertz   RAE             02/05/2014   Enregistré                       Ausdemwald Alfons (115)
- 6    Hubert Huppertz   RAE             02/05/2014   Enregistré                       Bastiaensen Laurent (116)
-==== ================= =============== ============ ============ =================== ===========================
+==== ================= ====== ========= ============ =================== ===========================
+ ID   Author            Poll   Date      State        My general remark   Partner
+---- ----------------- ------ --------- ------------ ------------------- ---------------------------
+ 1    Hubert Huppertz   INI    3/3/14    Registered                       Ausdemwald Alfons (115)
+ 2    Hubert Huppertz   RAE    3/3/14    Registered                       Ausdemwald Alfons (115)
+ 3    Hubert Huppertz   RAE    4/2/14    Registered                       Ausdemwald Alfons (115)
+ 5    Hubert Huppertz   INI    4/22/14   Registered                       Bastiaensen Laurent (116)
+ 4    Hubert Huppertz   RAE    5/2/14    Registered                       Ausdemwald Alfons (115)
+ 6    Hubert Huppertz   RAE    5/2/14    Registered                       Bastiaensen Laurent (116)
+==== ================= ====== ========= ============ =================== ===========================
 <BLANKLINE>
 
+>>> obj = polls.Response.objects.get(id=3)
+>>> #polls.AnswersByResponse.show(obj)
+>>> rt.login('romain').show(polls.AnswersByResponse, obj)
+======================================================================================================== ======================================================================= ===========
+ Question                                                                                                 My answer                                                               My remark
+-------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------- -----------
+ 1) Cherchez-vous du travail actuellement?                                                                ****[Yes]**** **Maybe** **No**
+ 2) Avez-vous un CV à jour?                                                                               **Yes** ****[Maybe]**** **No**
+ 3) Est-ce que vous vous présentez régulièrement au FOREM?                                                **Yes** **Maybe** ****[No]****
+ 4) Est-ce que vous consultez les petites annonces?                                                       ****[Yes]**** **Maybe** **No**
+ 5) Demande à l’entourage?                                                                                **Yes** ****[Maybe]**** **No**
+ 6) Candidature spontanée?                                                                                **Yes** **Maybe** ****[No]****
+ 7) Avez-vous des antécédents judiciaires qui pourraient être préjudiciables à votre recherce d’emploi?   ****[Yes]**** **Maybe** **No**
+ Temps de travail acceptés                                                                                **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine**
+======================================================================================================== ======================================================================= ===========
+<BLANKLINE>
