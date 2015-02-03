@@ -429,7 +429,11 @@ The following table lists information about all detail layouts.
 | polls.Polls                   | all except anonymous                | title state details user created modified default_choiceset  |
 |                               |                                     | default_multiple_choices                                     |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| polls.Responses               | all except anonymous                | user poll date state remark                                  |
+| polls.Questions               | all except anonymous                | poll number is_heading choiceset multiple_choices title      |
+|                               |                                     | details                                                      |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| polls.Responses               | all except anonymous                | poll partner date workflow_buttons AnswersByResponse user    |
+|                               |                                     | state remark                                                 |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | projects.Projects             | admin                               | id client project_type start_date end_date origin target     |
 |                               |                                     | remark result                                                |

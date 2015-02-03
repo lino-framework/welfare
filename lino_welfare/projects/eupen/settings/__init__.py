@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""Main settings module for `lino_welfare.projects.eupen`.
+"""
 
 from __future__ import print_function
 from __future__ import unicode_literals

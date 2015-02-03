@@ -14,6 +14,27 @@ A tour into the :mod:`lino_welfare.modlib.polls` plugin.
    :depth: 2
 
 
+About this document
+===================
+
+.. include:: /include/tested.rst
+
+This documents uses the :mod:`lino_welfare.projects.chatelet` test
+database:
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.chatelet.settings.doctests'
+>>> from lino.api.doctest import *
+    
+>>> print(settings.SETTINGS_MODULE)
+lino_welfare.projects.chatelet.settings.doctests
+
+>>> dd.today()
+datetime.date(2014, 5, 22)
+
+
 Recurrent polls
 ===============
 
@@ -35,29 +56,8 @@ Question                    01/03  05/04 03/05
 =========================== =====  ===== =====================   
 
 
-About this document
-===================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.chatelet.settings.doctests'
->>> from lino.api.doctest import *
-    
-This documents uses the :mod:`lino_welfare.projects.chatelet` test
-database:
-
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.chatelet.settings.doctests
-
->>> dd.today()
-datetime.date(2014, 5, 22)
-
-
-Configuration data
-========================
+Configuration
+=============
 
 This is the list of choice sets:
 
@@ -66,7 +66,7 @@ This is the list of choice sets:
  ID   Designation           Designation (fr)      Designation (de)
 ---- --------------------- --------------------- ---------------------
  1    Yes/No                Yes/No                Yes/No
- 2    Yes/Maybe/No          Yes/Maybe/No          Yes/Maybe/No
+ 2    Yes/Maybe/No          Oui/Peut-être/Non     Yes/Maybe/No
  3    That's it!...Never!   That's it!...Never!   That's it!...Never!
  4    -1..+1                -1..+1                -1..+1
  5    Acquired              Acquis                Acquired
@@ -77,14 +77,18 @@ This is the list of choice sets:
 <BLANKLINE>
 
 
->>> rt.login('romain').show(polls.Polls)
-=========== =========================== ================= ===========
- Reference   Title                       Author            State
------------ --------------------------- ----------------- -----------
- INI         Interview initial           Alicia Allmanns   Published
- RAE         Recherche active d'emploi   Caroline Carnol   Published
-=========== =========================== ================= ===========
+>>> rt.show(polls.Polls)
+=========== =========================== ============ ===========
+ Reference   Title                       Author       State
+----------- --------------------------- ------------ -----------
+ INI         Interview initial           Robin Rood   Published
+ RAE         Recherche active d'emploi   Robin Rood   Published
+=========== =========================== ============ ===========
 <BLANKLINE>
+
+Here is the global table of all questions (for all polls). This list
+is accessible through :menuselection:`Explorer --> Polls -->
+Questions`:
 
 >>> rt.login('romain').show(polls.Questions)
 ===================== ===== ======================================================================================================== ================== =========
@@ -126,7 +130,7 @@ This is the list of choice sets:
  RAE                   4     Est-ce que vous consultez les petites annonces?                                                                             No
  RAE                   5     Demande à l’entourage?                                                                                                      No
  RAE                   6     Candidature spontanée?                                                                                                      No
- RAE                   7     Avez-vous des antécédents judiciaires qui pourraient être préjudiciables à votre recherce d’emploi?                         No
+ RAE                   7     Antécédents judiciaires?                                                                                                    No
  RAE                         Temps de travail acceptés                                                                                Temps de travail   No
  **Total (38 rows)**                                                                                                                                     **2**
 ===================== ===== ======================================================================================================== ================== =========
@@ -136,28 +140,45 @@ This is the list of choice sets:
 ==== ================= ====== ========= ============ =================== ===========================
  ID   Author            Poll   Date      State        My general remark   Partner
 ---- ----------------- ------ --------- ------------ ------------------- ---------------------------
- 1    Hubert Huppertz   INI    3/3/14    Registered                       Ausdemwald Alfons (115)
- 2    Hubert Huppertz   RAE    3/3/14    Registered                       Ausdemwald Alfons (115)
- 3    Hubert Huppertz   RAE    4/2/14    Registered                       Ausdemwald Alfons (115)
- 5    Hubert Huppertz   INI    4/22/14   Registered                       Bastiaensen Laurent (116)
- 4    Hubert Huppertz   RAE    5/2/14    Registered                       Ausdemwald Alfons (115)
- 6    Hubert Huppertz   RAE    5/2/14    Registered                       Bastiaensen Laurent (116)
+ 1    Alicia Allmanns   INI    3/3/14    Registered                       Ausdemwald Alfons (115)
+ 2    Alicia Allmanns   RAE    3/3/14    Registered                       Ausdemwald Alfons (115)
+ 3    Alicia Allmanns   RAE    4/2/14    Draft                            Ausdemwald Alfons (115)
+ 5    Alicia Allmanns   INI    4/22/14   Registered                       Bastiaensen Laurent (116)
+ 4    Alicia Allmanns   RAE    5/2/14    Draft                            Ausdemwald Alfons (115)
+ 6    Alicia Allmanns   RAE    5/2/14    Registered                       Bastiaensen Laurent (116)
 ==== ================= ====== ========= ============ =================== ===========================
 <BLANKLINE>
 
 >>> obj = polls.Response.objects.get(id=3)
->>> #polls.AnswersByResponse.show(obj)
->>> rt.login('romain').show(polls.AnswersByResponse, obj)
-======================================================================================================== ======================================================================= ===========
- Question                                                                                                 My answer                                                               My remark
--------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------- -----------
- 1) Cherchez-vous du travail actuellement?                                                                ****[Yes]**** **Maybe** **No**
- 2) Avez-vous un CV à jour?                                                                               **Yes** ****[Maybe]**** **No**
- 3) Est-ce que vous vous présentez régulièrement au FOREM?                                                **Yes** **Maybe** ****[No]****
- 4) Est-ce que vous consultez les petites annonces?                                                       ****[Yes]**** **Maybe** **No**
- 5) Demande à l’entourage?                                                                                **Yes** ****[Maybe]**** **No**
- 6) Candidature spontanée?                                                                                **Yes** **Maybe** ****[No]****
- 7) Avez-vous des antécédents judiciaires qui pourraient être préjudiciables à votre recherce d’emploi?   ****[Yes]**** **Maybe** **No**
- Temps de travail acceptés                                                                                **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine**
-======================================================================================================== ======================================================================= ===========
+>>> rt.login('alicia').show(polls.AnswersByResponse, obj)
+=========================================================== ======================================================================= ===========
+ Question                                                    My answer                                                               My remark
+----------------------------------------------------------- ----------------------------------------------------------------------- -----------
+ 1) Cherchez-vous du travail actuellement?                   ****[Yes]**** **Maybe** **No**
+ 2) Avez-vous un CV à jour?                                  **Yes** ****[Maybe]**** **No**
+ 3) Est-ce que vous vous présentez régulièrement au FOREM?   **Yes** **Maybe** ****[No]****
+ 4) Est-ce que vous consultez les petites annonces?          ****[Yes]**** **Maybe** **No**
+ 5) Demande à l’entourage?                                   **Yes** ****[Maybe]**** **No**
+ 6) Candidature spontanée?                                   **Yes** **Maybe** ****[No]****
+ 7) Antécédents judiciaires?                                 ****[Yes]**** **Maybe** **No**
+ Temps de travail acceptés                                   **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine**
+=========================================================== ======================================================================= ===========
+<BLANKLINE>
+
+When Hubert looks at the same response, he cannot edit it because he
+is not the author:
+
+>>> rt.login('hubert').show(polls.AnswersByResponse, obj)
+=========================================================== =========== ===========
+ Question                                                    My answer   My remark
+----------------------------------------------------------- ----------- -----------
+ 1) Cherchez-vous du travail actuellement?                   Yes
+ 2) Avez-vous un CV à jour?                                  Maybe
+ 3) Est-ce que vous vous présentez régulièrement au FOREM?   No
+ 4) Est-ce que vous consultez les petites annonces?          Yes
+ 5) Demande à l’entourage?                                   Maybe
+ 6) Candidature spontanée?                                   No
+ 7) Antécédents judiciaires?                                 Yes
+ Temps de travail acceptés                                   3/4
+=========================================================== =========== ===========
 <BLANKLINE>

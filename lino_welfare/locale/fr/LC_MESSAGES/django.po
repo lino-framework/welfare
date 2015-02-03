@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-02 06:30+0200\n"
-"PO-Revision-Date: 2015-02-02 06:38+0300\n"
+"POT-Creation-Date: 2015-02-03 09:16+0200\n"
+"PO-Revision-Date: 2015-02-03 09:17+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -3507,11 +3507,11 @@ msgstr "et par"
 
 #: lino_welfare/modlib/polls/fixtures/jobsearch.py:24
 msgid "Acquired"
-msgstr ""
+msgstr "Acquis"
 
 #: lino_welfare/modlib/polls/fixtures/jobsearch.py:27
 msgid "Yes/Maybe/No"
-msgstr ""
+msgstr "Oui/Peut-être/Non"
 
 #: lino_welfare/modlib/projects/__init__.py:11
 msgid "Client projects"

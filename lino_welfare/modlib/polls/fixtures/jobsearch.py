@@ -27,11 +27,12 @@ def objects():
     name = dd.str2kw('name', _("Yes/Maybe/No"))['name']
     yesmaybeno = polls.ChoiceSet.objects.get(name=name)
 
-    USERS = Cycler(settings.SITE.user_model.objects.all())
+    robin = settings.SITE.user_model.objects.get(username="robin")
+    alicia = settings.SITE.user_model.objects.get(username="alicia")
 
     def poll(ref, choiceset, title, details, questions):
         obj = polls.Poll(
-            user=USERS.pop(),
+            user=robin,
             ref=ref,
             title=title.strip(),
             details=details.strip(),
@@ -52,6 +53,7 @@ def objects():
 #Veuillez sélectionner votre réponse pour chaque question
 Avoir une farde de recherche d’emploi organisée
 Réaliser mon curriculum vitae
+#Sinon, faites-vous aider par votre agent d'insertion.
 Savoir faire une lettre de motivation adaptée au poste de travail visé
 Respecter les modalités de candidature
 Me créer une boite e-mail appropriée à la recherche d’emploi
@@ -96,8 +98,11 @@ Avez-vous un CV à jour?
 Est-ce que vous vous présentez régulièrement au FOREM?
 Est-ce que vous consultez les petites annonces?
 Demande à l’entourage?
+#Demandez-vous à vos connaissances s'ils connaissent quelqu'un qui connait...?
 Candidature spontanée?
-Avez-vous des antécédents judiciaires qui pourraient \
+#Avez-vous fait des candidatures spontanées depuis notre dernière entrevue?
+Antécédents judiciaires?
+#Avez-vous des antécédents judiciaires qui pourraient \
 être préjudiciables à votre recherce d’emploi?
 """)
 
@@ -117,15 +122,15 @@ Avez-vous des antécédents judiciaires qui pourraient \
                          choiceset=temps)
 
     PARTNERS = Cycler(pcsw.Client.objects.all())
-    # u = settings.SITE.user_model.objects.get(username='romain')
-    u = USERS.pop()
 
-    def response(date_offset, partner, poll):
+    def response(date_offset, isreg, partner, poll):
         
-        kw = dict(poll=poll, state=polls.ResponseStates.registered)
+        kw = dict(poll=poll)
+        if isreg:
+            kw.update(state=polls.ResponseStates.registered)
         kw.update(date=settings.SITE.demo_date(date_offset))
         kw.update(partner=partner)
-        kw.update(user=u)
+        kw.update(user=alicia)
         r = polls.Response(**kw)
         yield r
         i = 0
@@ -133,17 +138,16 @@ Avez-vous des antécédents judiciaires qui pourraient \
             cs = q.get_choiceset()
             if cs is not None:
                 choices = cs.choices.all()
-                if i >= choices.count():
-                    i = 0
+                i = i % choices.count()
                 c = choices[i]
                 yield polls.AnswerChoice(response=r, question=q, choice=c)
                 i += 1
 
     p = PARTNERS.pop()
-    yield response(-80, p, first)
-    yield response(-80, p, rae)
-    yield response(-50, p, rae)
-    yield response(-20, p, rae)
+    yield response(-80, True, p, first)
+    yield response(-80, True, p, rae)
+    yield response(-50, False, p, rae)
+    yield response(-20, False, p, rae)
     p = PARTNERS.pop()
-    yield response(-30, p, first)
-    yield response(-20, p, rae)
+    yield response(-30, True, p, first)
+    yield response(-20, True, p, rae)

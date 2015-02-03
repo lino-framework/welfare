@@ -4,5 +4,13 @@
 
 """
 The Lino Welfare variant used in Eupen.
+
+.. autosummary::
+   :toctree:
+
+   settings
+   modlib
+   tests
+
 """
 from __future__ import unicode_literals
