@@ -44,6 +44,7 @@ def appointable_users(*args, **kw):
     appointments. Candidates must have a :attr:`profile
     <lino.modlib.users.models.User.profile>` and a :attr:`calendar
     <lino_welfare.modlib.users.models.User.calendar>`.
+    Additional arguments are forwarded to the query filter.
 
     """
     qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
@@ -80,6 +81,7 @@ class FindDateByClientTable(ButtonsTable):
         if mi is None:
             return
         for user in appointable_users(newcomer_appointments=True):
+        # for user in appointable_users():
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=mi.pk)
@@ -103,7 +105,8 @@ be selected manually."""
 
     @dd.chooser()
     def user_choices(self):
-        return appointable_users(newcomer_appointments=True)
+        #return appointable_users(newcomer_appointments=True)
+        return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]  # a Client
@@ -129,7 +132,8 @@ class CreateClientVisit(dd.Action):
 
     @dd.chooser()
     def user_choices(self):
-        return appointable_users(newcomer_consultations=True)
+        #return appointable_users(newcomer_consultations=True)
+        return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]

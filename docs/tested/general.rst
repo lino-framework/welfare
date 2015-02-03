@@ -426,8 +426,8 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | polls.ChoiceSets              | all except anonymous                | name name_fr name_de name_nl                                 |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| polls.Polls                   | all except anonymous                | title state details user created modified default_choiceset  |
-|                               |                                     | default_multiple_choices                                     |
+| polls.Polls                   | all except anonymous                | ref title workflow_buttons details default_choiceset         |
+|                               |                                     | default_multiple_choices id user created modified state      |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | polls.Questions               | all except anonymous                | poll number is_heading choiceset multiple_choices title      |
 |                               |                                     | details                                                      |

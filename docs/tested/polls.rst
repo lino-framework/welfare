@@ -79,7 +79,7 @@ This is the list of choice sets:
 
 >>> rt.show(polls.Polls)
 =========== =========================== ============ ===========
- Reference   Title                       Author       State
+ Reference   Heading                     Author       State
 ----------- --------------------------- ------------ -----------
  INI         Interview initial           Robin Rood   Published
  RAE         Recherche active d'emploi   Robin Rood   Published

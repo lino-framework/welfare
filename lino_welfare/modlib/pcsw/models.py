@@ -543,56 +543,6 @@ class Client(contacts.Person,
             except cv.PersonProperty.DoesNotExist:
                 pass
 
-    def unused_get_property(self, prop_id):
-        """used in notes/Note/cv.odt"""
-        return self.personproperty_set.get(property__id=prop_id)
-        #~ return PersonProperty.objects.get(property_id=prop_id,person=self)
-
-    def unused_overview(self, request):
-        def qsfmt(qs):
-            s = qs.model._meta.verbose_name_plural + ': '
-            if qs.count():
-                s += ', '.join([unicode(lk) for lk in qs])
-            else:
-                s += '<b>%s</b>' % force_unicode(_("not filled in"))
-            return force_unicode(s)
-
-        lines = []
-        #~ lines.append('<div>')
-        lines.append(qsfmt(self.languageknowledge_set.all()))
-        lines.append(qsfmt(self.study_set.all()))
-        lines.append(qsfmt(self.contract_set.all()))
-        #~ from django.utils.translation import string_concat
-        #~ lines.append('</div>')
-        return '<br/>'.join(lines)
-    unused_overview.return_type = dd.HtmlBox(_("Overview"))
-
-    @dd.displayfield(_("Residence permit"))
-    def residence_permit(self, ar):
-        kv = dict(type=settings.SITE.site_config.residence_permit_upload_type)
-        r = ar.spawn(uploads.UploadsByController,
-                     master_instance=self,
-                     known_values=kv)
-        return ar.renderer.quick_upload_buttons(r)
-
-    @dd.displayfield(_("Work permit"))
-    def work_permit(self, ar):
-        kv = dict(type=settings.SITE.site_config.work_permit_upload_type)
-        r = ar.spawn(uploads.UploadsByController,
-                     master_instance=self,
-                     known_values=kv)
-        return ar.renderer.quick_upload_buttons(r)
-    #~ work_permit.return_type = dd.DisplayField(_("Work permit"))
-
-    @dd.displayfield(_("driving licence"))
-    #~ @dd.virtualfield(dd.DisplayField(_("driving licence")))
-    def driving_licence(self, ar):
-        kv = dict(type=settings.SITE.site_config.driving_licence_upload_type)
-        r = ar.spawn(uploads.UploadsByController,
-                     master_instance=self, known_values=kv)
-        return ar.renderer.quick_upload_buttons(r)
-    #~ driving_licence.return_type = dd.DisplayField(_("driving licence"))
-
     def get_active_contract(self):
         """Return the one and only "active contract" of this client.  A
         contract is active if `applies_from` is <= `today` and
@@ -791,8 +741,6 @@ class ClientDetail(dd.FormLayout):
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
-    # residence_permit work_permit driving_licence
-    # uploads.UploadsByController
     uploads.UploadsByClient
     """)  # ,label = _("Papers"))
 

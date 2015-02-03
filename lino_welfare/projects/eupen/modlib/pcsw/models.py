@@ -110,8 +110,6 @@ class ClientDetail(dd.FormLayout):
     papers = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
-    # residence_permit work_permit driving_licence
-    # uploads.UploadsByController
     uploads.UploadsByClient
     """)  # ,label = _("Papers"))
 
