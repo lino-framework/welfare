@@ -25,6 +25,23 @@ Die Demo-Datenbank ist datiert auf den 22. Mai 2014:
 22. Mai 2014
 
 
+Bestätigungsarten
+=================
+
+Hier die Liste der Bestätigungsarten, die Lino kennt. Diese Liste ist
+nicht über das Web-Interface veränderbar.
+
+>>> ses.show(aids.ConfirmationTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+========================= ========================= =================================================== =============
+ name                      Wert                      Text                                                Vorlage
+------------------------- ------------------------- --------------------------------------------------- -------------
+ aids.SimpleConfirmation   aids.SimpleConfirmation   Einfache Bescheinigung (aids.SimpleConfirmation)    Default.odt
+ aids.IncomeConfirmation   aids.IncomeConfirmation   Einkommensbescheinigung (aids.IncomeConfirmation)   Default.odt
+ aids.RefundConfirmation   aids.RefundConfirmation   Kostenübernahmeschein (aids.RefundConfirmation)     Default.odt
+========================= ========================= =================================================== =============
+<BLANKLINE>
+
 
 Hilfearten
 ==========
@@ -203,3 +220,4 @@ action of :class:`IncomeConfirmationsByGranting
 
 >>> "Lino.aids.IncomeConfirmationsByGranting.insert.run" in on_ready
 True
+

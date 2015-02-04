@@ -8,7 +8,6 @@ Lino Welfare class reference
    :maxdepth: 2
 
    pcsw
-   aids
    debts
    households
    integ
@@ -18,3 +17,8 @@ Lino Welfare class reference
    cbss
    courses
    reception
+
+.. toctree::
+   :hidden:
+
+   aids

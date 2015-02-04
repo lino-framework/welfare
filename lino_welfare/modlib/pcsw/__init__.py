@@ -13,6 +13,7 @@ Most important models are :class:`Client` and :class:`Coaching`.
    :toctree:
 
    mixins
+   choicelists
    models
    coaching
    fixtures

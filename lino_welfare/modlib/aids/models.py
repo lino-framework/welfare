@@ -1,18 +1,12 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2015 Luc Saffre
-# This file is part of the Lino-Welfare project.
-# Lino-Welfare is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino-Welfare is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 """
-The :xfile:`models.py` file for :mod:`lino_welfare.modlib.aids`.
+Database models for `lino_welfare.modlib.aids`.
+
+.. autosummary::
+
+
 """
 
 from __future__ import unicode_literals
@@ -40,66 +34,12 @@ from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.addresses.mixins import AddressTypes
 from lino.mixins.periods import rangefmt
+from lino.modlib.boards.mixins import BoardDecision
 
 boards = dd.resolve_app('boards')
 
-
-def e2text(v):
-    if isinstance(v, types.GeneratorType):
-        return "".join([e2text(x) for x in v])
-    if E.iselement(v):
-        return E.tostring(v)
-    return unicode(v)
-
-
-class ConfirmationType(dd.Choice):
-
-    def __init__(self, model, table_class):
-        self.table_class = table_class
-        model = dd.resolve_model(model)
-        self.model = model
-        value = dd.full_model_name(model)
-        text = model._meta.verbose_name + ' (%s)' % dd.full_model_name(model)
-        name = None
-        super(ConfirmationType, self).__init__(value, text, name)
-
-    def get_aidtypes(self):
-        return AidType.objects.filter(confirmation_type=self)
-
-
-class ConfirmationTypes(dd.ChoiceList):
-    item_class = ConfirmationType
-    max_length = 100
-    verbose_name = _("Aid confirmation type")
-    verbose_name_plural = _("Aid confirmation types")
-
-    @classmethod
-    def get_column_names(self, ar):
-        return 'name value text et_template *'
-
-    @dd.virtualfield(models.CharField(_("Template"), max_length=20))
-    def et_template(cls, choice, ar):
-        et = rt.modules.excerpts.ExcerptType.get_for_model(choice.model)
-        if et:
-            return et.template
-
-    @classmethod
-    def get_for_model(self, model):
-        for o in self.objects():
-            if o.model is model:
-                return o
-
-    @classmethod
-    def add_item(cls, model, table_class):
-        return cls.add_item_instance(ConfirmationType(model, table_class))
-
-
-class AidRegimes(dd.ChoiceList):
-    verbose_name = _("Aid Regime")
-add = AidRegimes.add_item
-add('10', _("Financial aids"), 'financial')
-add('20', _("Medical aids"), 'medical')
-add('30', _("Other aids"), 'other')
+from .mixins import Confirmable, Confirmation
+from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
 
 
 class Category(mixins.BabelNamed):
@@ -126,6 +66,53 @@ class Categories(dd.Table):
 
 
 class AidType(ContactRelated, mixins.BabelNamed):
+    """The type of aid being granted by a granting.
+    Every granting has a mandatory pointer (:attr:`Granting.aid_type`) to this.
+
+    .. attribute:: name
+
+    The multilingual name of this aid type.
+
+    .. attribute:: is_urgent
+
+    Whether aid grantings of this type are considered as urgent.
+    This is used by :meth:`Confirmation.get_urgent_granting`
+
+    .. attribute:: is_integ_duty
+
+    .. attribute:: short_name
+
+    The short name for internal use.
+
+    .. attribute:: excerpt_title
+
+    The text to print as title in confirmations.
+
+    .. attribute:: board
+
+    Pointer to the default :class:`ml.boards.Board` for aid projects of
+    this type.
+
+    .. attribute:: excerpt_type
+
+    .. attribute:: confirmation_type
+
+    Pointer to :class:`ConfirmationTypes`.
+    
+    .. attribute:: confirmed_by_primary_coach
+    
+    Whether grantings for this aid type are to be signed by the
+    client's primary coach (see :meth:`Client.get_primary_coach
+    <lino_welfare.modlib.pcsw.models.Client.get_primary_coach>`).
+
+    .. attribute:: pharmacy_type
+
+    A pointer to the :class:`ClientContactType
+    <lino_welfare.modlib.pcsw.models.ClientContactType>` to be used when
+    selecting the pharmacy of a refund confirmation
+    (:attr:`RefundConfirmation.pharmacy`).
+
+    """
 
     # templates_group = 'aids/Aid'
 
@@ -162,7 +149,8 @@ class AidType(ContactRelated, mixins.BabelNamed):
                     "as urgent."))
 
     confirmed_by_primary_coach = models.BooleanField(
-        _("Confirmed by primary coach"), default=True)
+        _("Confirmed by primary coach"), default=True, 
+        help_text=_("Whether grantings for this aid type are to be signed by the client's primary coach."))
 
     pharmacy_type = dd.ForeignKey(
         'pcsw.ClientContactType', blank=True, null=True)
@@ -211,138 +199,12 @@ class AidTypes(dd.Table):
     """
 
 
-class ConfirmationStates(dd.Workflow):
-    required = dd.required(user_level='admin')
-    verbose_name_plural = _("Aid confirmation states")
-
-add = ConfirmationStates.add_item
-add('01', _("Unconfirmed"), 'requested')
-add('02', _("Confirmed"), 'confirmed')
-# add('03', _("Cancelled"), 'cancelled')
-
-
-class SignConfirmation(dd.Action):
-    label = pgettext("aids", "Sign")
-    show_in_workflow = True
-    show_in_bbar = False
-
-    # icon_name = 'flag_green'
-    required = dd.required(states="requested")
-    help_text = _("You confirm that this aid confirmation is correct.")
-
-    def get_action_permission(self, ar, obj, state):
-        if obj.signer is not None and obj.signer != ar.get_user():
-            return False
-        return super(SignConfirmation,
-                     self).get_action_permission(ar, obj, state)
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-
-        def ok(ar):
-            obj.signer = ar.get_user()
-            obj.state = ConfirmationStates.confirmed
-            obj.save()
-            ar.set_response(refresh=True)
-        d = dict(text=obj.confirmation_text())
-        d.update(client=e2text(obj.client.get_full_name(nominative=True)))
-        msg = _("You confirm that %(client)s %(text)s") % d
-        ar.confirm(ok, msg, _("Are you sure?"))
-
-
 @dd.receiver(dd.pre_analyze)
 def setup_aids_workflows(sender=None, **kw):
 
     ConfirmationStates.requested.add_transition(
         _("Revoke"), states='confirmed')
 
-
-class Confirmable(mixins.DatePeriod):
-    # base class for Granting and for Confirmation
-    class Meta:
-        abstract = True
-
-    signer = models.ForeignKey(
-        settings.SITE.user_model,
-        verbose_name=pgettext("aids", "Signer"),
-        blank=True, null=True,
-        related_name="%(app_label)s_%(class)s_set_by_signer",
-    )
-
-    state = ConfirmationStates.field(default=ConfirmationStates.requested)
-    workflow_state_field = 'state'
-
-    sign = SignConfirmation()
-
-    def disabled_fields(self, ar):
-        if self.state is ConfirmationStates.requested:
-            return set()
-        return self.CONFIRMED_FIELDS
-
-    @classmethod
-    def on_analyze(cls, site):
-        cls.CONFIRMED_FIELDS = dd.fields_list(
-            cls,
-            cls.get_confirmable_fields())
-        super(Confirmable, cls).on_analyze(site)
-
-    @classmethod
-    def get_confirmable_fields(cls):
-        return ''
-
-    def is_past(self):
-        return (self.end_date and self.end_date <= dd.today())
-
-    def get_printable_context(self, **kw):
-        kw.update(when=e2text(self.confirmation_when()))
-        kw = super(Confirmable, self).get_printable_context(**kw)
-        return kw
-
-    def confirmation_text(self):
-        kw = dict()
-        kw.update(when=e2text(self.confirmation_when()))
-        at = self.get_aid_type()
-        if at:
-            kw.update(what=unicode(at))
-        else:
-            kw.update(what=unicode(self))
-        return _("receives %(what)s %(when)s.") % kw
-
-    def confirmation_address(self):
-        at = self.get_aid_type()
-        if at and at.address_type:
-            addr = self.client.get_address_by_type(at)
-        else:
-            addr = self.client.get_primary_address()
-        if addr is not None:
-            return addr.living_at_text()
-
-    def confirmation_when(self):
-        if self.start_date and self.end_date:
-            yield " "
-            if self.start_date == self.end_date:
-                s = e2text(E.b(dd.fdl(self.start_date)))
-                yield pgettext("date", "on %s") % s
-            else:
-                kw = dict()
-                kw.update(a=e2text(E.b(dd.fdl(self.start_date))))
-                kw.update(b=e2text(E.b(dd.fdl(self.end_date))))
-                yield pgettext("date range", "between %(a)s and %(b)s") % kw
-        elif self.start_date:
-            yield pgettext("date range", "from")
-            yield " "
-            yield E.b(dd.fdl(self.start_date))
-        elif self.end_date:
-            yield " "
-            yield pgettext("date range", "until")
-            yield " "
-            yield E.b(dd.fdl(self.end_date))
-
-    def get_excerpt_title(self):
-        at = self.get_aid_type()
-        if at:
-            return at.get_excerpt_title()
-        return unicode(self)
 
 ##
 ## Granting
@@ -361,8 +223,35 @@ class GrantingManager(models.Manager):
         return None
 
 
-class Granting(Confirmable, boards.BoardDecision):
+class Granting(Confirmable, BoardDecision):
+    """An **aid granting** is the principal promise that a given client
+    gets a given aid during a given period.
 
+    .. attribute:: client
+
+    Pointer to the :class:`lino_welfare.modlib.pcsw.models.Client`.
+
+    .. attribute:: aid_type
+
+    The type of aid being granted. Mandatory.
+    Pointer to the :class:`AidType`.
+
+    .. attribute:: signer
+
+    Pointer to the :class:`User <lino.modlib.users.models.User>` who
+    is expected to "sign" this granting (i.e. to confirm that it is
+    real).
+
+    The default value is the client's primary coach for grantings
+    whose :attr:`aid_type` has :attr:`confirmed_by_primary_coach
+    <AidType.confirmed_by_primary_coach>` checked.
+
+    .. attribute:: board
+
+    Pointer to the :class:`Board <lino.modlib.boards.models.Board>`
+    which decided to allocate this aid project.
+
+    """
     class Meta:
         abstract = dd.is_abstract_model(__name__, 'Granting')
         verbose_name = _("Aid granting")
@@ -374,9 +263,9 @@ class Granting(Confirmable, boards.BoardDecision):
 
     aid_type = models.ForeignKey('aids.AidType')
 
-    def after_ui_create(self, ar):
-        super(Granting, self).after_ui_create(ar)
-        # dd.logger.info("20141001 %s %s", self.client_id, self.aid_type_id)
+    def full_clean(self):
+        super(Granting, self).full_clean()
+        # dd.logger.info("20150204 %s %s", self.client_id, self.aid_type_id)
         if self.client_id and self.aid_type_id \
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
@@ -411,31 +300,16 @@ class Granting(Confirmable, boards.BoardDecision):
         if btn is not None:
             return E.div(btn)
 
-    # def get_long_name(self):
-    #     if self.aid_type_id:
-    #         return self.aid_type.get_long_name()
-    #     return ''
-
-
-    # @dd.chooser()
-    # def aid_type_choices(cls):
-    #     return cls.get_aid_types()
-
-    # @classmethod
-    # def get_aid_types(cls):
-    #     ct = ConfirmationTypes.get_by_value(dd.full_model_name(cls))
-    #     # logger.info("20140811 get_aid_types %s", cls)
-    #     return rt.modules.aids.AidType.objects.filter(confirmation_type=ct)
 
 dd.update_field(Granting, 'start_date',
                 verbose_name=_('Applies from'),
                 default=dd.today,
                 null=False, blank=False)
 dd.update_field(Granting, 'end_date', verbose_name=_('until'))
-# dd.update_field(Granting, 'user', verbose_name=_('Requested by'))
 
 
 class Grantings(dd.Table):
+    """The default table for :class:`Granting`."""
     model = 'aids.Granting'
     required = dd.required(user_groups='office', user_level='admin')
     use_as_default_table = False
@@ -569,106 +443,6 @@ class GrantingsByType(GrantingsByX):
 ##
 ## Confirmation
 ##
-
-class Confirmation(
-        Confirmable, UserAuthored, ContactRelated,
-        mixins.Created, Certifiable):
-              
-    class Meta:
-        abstract = True
-
-    allow_cascaded_delete = ['client']
-
-    client = models.ForeignKey(
-        'pcsw.Client',
-        related_name="%(app_label)s_%(class)s_set_by_client")
-    granting = models.ForeignKey('aids.Granting', blank=True, null=True)
-    remark = dd.RichTextField(
-        _("Remark"),
-        blank=True, format='html')
-
-    def __unicode__(self):
-        if self.granting is not None:
-            return '%s/%s' % (self.granting, self.pk)
-        return '%s #%s' % (self._meta.verbose_name, self.pk)
-
-    def full_clean(self):
-        super(Confirmation, self).full_clean()
-        if self.granting is None:
-            return
-        gp = self.granting.get_period()
-        cp = self.get_period()
-        if not encompass(gp, cp):
-            msg = _("Date range %(p1)s lies outside of granted "
-                    "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
-            raise ValidationError(msg)
-
-    def on_create(self, ar):
-        if self.granting_id:
-            self.signer = self.granting.signer
-            self.client = self.granting.client
-            # self.language = self.client.language
-            if self.granting.aid_type_id:
-                at = self.granting.aid_type
-                self.company = at.company
-                self.contact_person = at.contact_person
-                self.contact_role = at.contact_role
-        super(Confirmation, self).on_create(ar)
-        
-    @classmethod
-    def get_confirmable_fields(cls):
-        return 'client signer granting remark start_date end_date'
-
-    # def get_mailable_type(self):
-    #     return self.granting.aid_type
-
-    def get_print_language(self):
-        obj = self.recipient
-        if obj is not None:
-            return obj.language
-        return super(Confirmation, self).get_print_language()
-
-    def get_excerpt_options(self, ar, **kw):
-        # Set project field when creating an excerpt from Client.
-        kw.update(project=self.client)
-        return super(Confirmation, self).get_excerpt_options(ar, **kw)
-
-    def get_aid_type(self):
-        if self.granting_id and self.granting.aid_type_id:
-            return self.granting.aid_type
-        return None
-
-    def get_granting(self, **aidtype_filter):
-        if self.granting_id:
-            return rt.modules.aids.Granting.objects.get_by_aidtype(
-                self.granting.client, self, **aidtype_filter)
-
-    def get_urgent_granting(self):
-        # used in :xfile:`medical_refund.body.html`
-        return self.get_granting(is_urgent=True)
-
-    @classmethod
-    def get_template_group(cls):
-        # Used by excerpts and printable.  The individual confirmation
-        # models use a common tree of templates.
-        return 'aids/Confirmation'
-
-    def get_body_template(self):
-        # used by excerpts
-        at = self.get_aid_type()
-        if at is not None:
-            return at.body_template
-
-
-dd.update_field(Confirmation, 'start_date', default=dd.today,
-                verbose_name=_('Period from'))
-dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
-# dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
-dd.update_field(Confirmation, 'company',
-                verbose_name=_("Recipient (Organization)"))
-dd.update_field(Confirmation, 'contact_person',
-                verbose_name=_("Recipient (Person)"))
-
 
 class Confirmations(dd.Table):
     model = 'aids.Confirmation'
@@ -962,6 +736,11 @@ class RefundConfirmation(Confirmation):
     <lino.modlib.contacts.models.Person>`).
 
     .. attribute:: pharmacy
+
+    The pharmacy for which this confirmation is being issued.
+
+    The selection list will work only if the aid type defined on the
+    granting of this confirmation has a pharmacy_type defined.
 
     """
 

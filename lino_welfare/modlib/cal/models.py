@@ -204,7 +204,8 @@ dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 
 
 class EventsByClient(Events):
-    """Events where project is this OR one participant is this.
+    """Events where :attr:`Event.project` **or** one guest is this client.
+
     """
     required = dd.required(user_groups='office')
     # master_key = 'project'
@@ -213,6 +214,11 @@ class EventsByClient(Events):
     auto_fit_column_widths = True
     column_names = 'linked_date user summary workflow_buttons'
     # column_names = 'when_text user summary workflow_buttons'
+    insert_layout = """
+    event_type
+    summary
+    start_date start_time end_date end_time
+    """
 
     @classmethod
     def get_queryset(self, ar):
@@ -226,7 +232,12 @@ class EventsByClient(Events):
 
     @classmethod
     def get_filter_kw(self, ar, **kw):
-        return kw  # tricky
+        # cannot call super() since we don't have a master_key
+        mi = ar.master_instance
+        if mi is None:
+            return None
+        kw.update(project=mi)
+        return kw
 
 
 class TasksByClient(Tasks):
