@@ -22,7 +22,6 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
-from django.utils.encoding import force_unicode
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
@@ -1427,7 +1426,15 @@ class AidTypes(dd.Table):
 
 
 class ClientContactType(mixins.BabelNamed):
+    """A **client contact type** is the type or "role" which must be
+    specified for a given :class:`ClientContact`.
 
+    .. attribute:: can_refund
+
+    Whether persons of this type can be used as doctor of a refund
+    confirmation. Injected by :mod:`lino_welfare.modlib.aids`.
+
+    """
     class Meta:
         verbose_name = _("Client Contact type")
         verbose_name_plural = _("Client Contact types")
@@ -1452,11 +1459,29 @@ class ClientContactTypes(dd.Table):
 
 
 class ClientContact(ClientContactBase):
-    """
-    client : the Client
-    company : the Company
-    contact_person : the Contact person in the Company
-    contact_role : the role of the contact person in the Company
+    """A **client contact** is when a given partner has a given role for
+    a given client.
+
+    .. attribute:: client
+
+    The :class:`Client`
+
+    .. attribute:: company
+
+    the Company
+
+    .. attribute:: contact_person
+    
+    the Contact person in the Company
+
+    .. attribute:: contact_role
+    
+    the role of the contact person in the Company
+
+    .. attribute:: type
+    
+    The :class:`ClientContactType`.
+
     """
     class Meta:
         verbose_name = _("Client Contact")

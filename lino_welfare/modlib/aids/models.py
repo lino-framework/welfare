@@ -939,8 +939,8 @@ dd.inject_field(
     'can_refund',
     models.BooleanField(
         _("Can refund"), default=False,
-        help_text=_("")
-    ))
+        help_text=_("Whether persons of this type can be used "
+                    "as doctor of a refund confirmation.")))
 
 # class DoctorTypes(dd.ChoiceList):
 #     verbose_name = _("Doctor type")
@@ -954,6 +954,15 @@ class RefundConfirmation(Confirmation):
     """This is when a social agent confirms that a client benefits of a
     refund aid (Kostenrückerstattung) during a given period.
 
+    .. attribute:: doctor_type
+
+    .. attribute:: doctor
+
+    Pointer to the doctor (an instance of :class:`contacts.Person
+    <lino.modlib.contacts.models.Person>`).
+
+    .. attribute:: pharmacy
+
     """
 
     class Meta:
@@ -962,7 +971,7 @@ class RefundConfirmation(Confirmation):
         verbose_name_plural = _("Refund confirmations")
 
     doctor_type = dd.ForeignKey(
-        'pcsw.ClientContactType', verbose_name=_("Doctor type"))
+        'pcsw.ClientContactType', verbose_name=_("Doctor type"), blank=True)
     doctor = dd.ForeignKey(
         'contacts.Person', verbose_name=_("Doctor"),
         blank=True, null=True)
@@ -994,6 +1003,11 @@ class RefundConfirmation(Confirmation):
         fkw = dict()
         if doctor_type:
             fkw.update(client_contact_type=doctor_type)
+        else:
+            qs = rt.modules.pcsw.ClientContactType.objects.filter(
+                can_refund=True)
+            fkw.update(client_contact_type__in=qs)
+            
         return rt.modules.contacts.Person.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
@@ -1021,19 +1035,10 @@ class RefundConfirmation(Confirmation):
         return rt.modules.pcsw.ClientContactType.objects.filter(
             can_refund=True)
 
-    # def confirmation_what(self, ar):
-    #     if self.granting:
-    #         yield E.b(self.granting.aid_type.get_long_name())
-    #         yield ". "
-    #     if self.doctor and self.doctor_type_id:
-    #         yield _("Recipes issued by")
-    #         yield unicode(self.doctor_type)
-    #         yield " "
-    #         yield E.b(self.doctor.get_full_name())
-    #     if self.pharmacy:
-    #         yield _("Drugs delivered by")
-    #         yield " "
-    #         yield E.b(self.pharmacy.get_full_name())
+    def full_clean(self):
+        super(RefundConfirmation, self).full_clean()
+        if self.doctor_type_id is None and self.doctor_id:
+            self.doctor_type = self.doctor.client_contact_type
 
 
 class RefundConfirmations(Confirmations):
