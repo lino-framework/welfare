@@ -14,7 +14,7 @@ class Site(Site):
     # languages = 'fr nl en'
     # hidden_languages = None
 
-    demo_fixtures = """std few_languages props all_countries
+    demo_fixtures = """std std2 few_languages props all_countries
     demo cbss mini demo2 jobsearch local """.split()
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'

@@ -36,7 +36,7 @@ class Site(Site):
     auto_configure_logger_names = 'lino lino_welfare'
     # use_java = False  # temporarily
     # verbose_client_info_message = True
-    default_build_method = "appyodt"
+    # default_build_method = "appyodt"
     uppercase_last_name = True
 
     def setup_plugins(self):

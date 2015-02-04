@@ -16,6 +16,7 @@ them to a script and run it using :manage:`run`.
    cbss
    courses
    debts
+   excerpts
    general
    integ
    jobs

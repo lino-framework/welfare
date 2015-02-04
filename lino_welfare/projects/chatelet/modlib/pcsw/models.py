@@ -44,7 +44,6 @@ class ClientDetail(dd.FormLayout):
     reception.AppointmentsByPartner:40 reception.AgentsByClient:30 #reception.CoachingsByClient courses.EnrolmentsByPupil:40
     """, label=_("Person"))
 
-
     general2 = """
     gender:10 id:10 nationality:15
     last_name

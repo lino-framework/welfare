@@ -188,7 +188,7 @@ when one of the jobs had a remark.
 True
 >>> print(rv['open_url'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-/.../jobs.JobsOverview.odt
+/.../jobs.JobsOverview.pdf
 
 This bug was fixed :blogref:`20130423`.
 Note: the ``webdav/`` is only there when :attr:`ad.Site.use_java` is `True`.
