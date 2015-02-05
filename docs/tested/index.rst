@@ -26,7 +26,7 @@ them to a script and run it using :manage:`run`.
    pcsw
    polls
    reception
-   trainings
+   immersion
    uploads
    cv2
 

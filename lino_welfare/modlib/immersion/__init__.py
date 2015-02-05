@@ -5,7 +5,7 @@
 """Provides functionality for managing "immersion trainings" (stages
 d'immersion).
 
-A tested document is here: :ref:`welfare.tested.trainings`
+A tested document is here: :ref:`welfare.tested.immersion`
 
 .. autosummary::
    :toctree:
@@ -31,14 +31,14 @@ class Plugin(ad.Plugin):
     def setup_main_menu(self, site, profile, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('trainings.MyTrainings')
+        m.add_action('immersion.MyContracts')
 
     def setup_config_menu(self, site, profile, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('trainings.TrainingTypes')
+        m.add_action('immersion.ContractTypes')
 
     def setup_explorer_menu(self, site, profile, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('trainings.Trainings')
+        m.add_action('immersion.Contracts')

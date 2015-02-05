@@ -1,4 +1,4 @@
-.. _welfare.tested.trainings:
+.. _welfare.tested.immersion:
 
 ===================
 Immersion trainings
@@ -6,9 +6,9 @@ Immersion trainings
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_trainings
+  $ python setup.py test -s tests.DocsTests.test_immersion
 
-A technical tour into the :mod:`lino_welfare.modlib.trainings` plugin.
+A technical tour into the :mod:`lino_welfare.modlib.immersion` plugin.
 
 
 .. contents::
@@ -39,9 +39,9 @@ Configuration
 =============
 
 These are the training types defined in
-:mod:`lino_welfare.modlib.trainings.fixtures.std`:
+:mod:`lino_welfare.modlib.immersion.fixtures.std`:
 
->>> rt.show(trainings.TrainingTypes)  #doctest: -SKIP
+>>> rt.show(immersion.ContractTypes)  #doctest: -SKIP
 ===================== =========================== =====================
  Designation           Designation (fr)            Designation (de)
 --------------------- --------------------------- ---------------------
@@ -57,7 +57,7 @@ Demo data
 
 :class:`lino_welfare.modlib.isip.models.ExamPolicy`
 
->>> rt.show(trainings.Trainings)
+>>> rt.show(immersion.Contracts)
 ==== ========================== ============== =============== ================== =========================
  ID   Client                     applies from   applies until   responsible (IS)   Immersion training type
 ---- -------------------------- -------------- --------------- ------------------ -------------------------

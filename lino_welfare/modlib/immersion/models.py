@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 
-"""The :xfile:`models.py` module for `lino_welfare.modlib.trainings`.
+"""The :xfile:`models.py` module for `lino_welfare.modlib.immersion`.
 
 """
 from __future__ import unicode_literals
@@ -21,12 +21,10 @@ from lino.modlib.cv.mixins import SectorFunction
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractBase, ContractPartnerBase, ContractBaseTable)
 
-isip = dd.resolve_app('isip')
 
+class ContractType(ContractTypeBase):
 
-class TrainingType(ContractTypeBase):
-
-    templates_group = 'trainings/Training'
+    templates_group = 'immersion/Contract'
 
     class Meta:
         verbose_name = _("Immersion training type")
@@ -34,17 +32,17 @@ class TrainingType(ContractTypeBase):
         ordering = ['name']
 
 
-class TrainingTypes(dd.Table):
+class ContractTypes(dd.Table):
     """
     """
     required = dd.required(user_groups='integ', user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
-    model = 'trainings.TrainingType'
+    model = 'immersion.ContractType'
     column_names = 'name *'
     detail_layout = """
     id name exam_policy
-    TrainingsByType
+    ContractsByType
     """
     insert_layout = """
     name
@@ -57,24 +55,24 @@ class Goal(mixins.BabelNamed):
     preferred_foreignkey_width = 20
 
     class Meta:
-        verbose_name = _("Training goal")
-        verbose_name_plural = _('Training goals')
+        verbose_name = _("Immersion training goal")
+        verbose_name_plural = _('Immersion training goals')
         ordering = ['name']
 
 
-class TrainingGoals(dd.Table):
+class Goals(dd.Table):
     """
     """
     required = dd.required(user_groups='integ', user_level='manager')
-    model = 'trainings.Goal'
+    model = 'immersion.Goal'
     column_names = 'name *'
     detail_layout = """
     id name
-    TrainingsByGoal
+    ContractsByGoal
     """
 
 
-class Training(ContractBase, ContractPartnerBase, SectorFunction):
+class Contract(ContractBase, ContractPartnerBase, SectorFunction):
     """An immersion training.
 
     """
@@ -84,12 +82,12 @@ class Training(ContractBase, ContractPartnerBase, SectorFunction):
         verbose_name_plural = _('Immersion trainings')
 
     type = dd.ForeignKey(
-        "trainings.TrainingType",
+        "immersion.ContractType",
         related_name="%(app_label)s_%(class)s_set_by_type",
         blank=True)
 
     goal = dd.ForeignKey(
-        "trainings.Goal", related_name="trainings", blank=True)
+        "immersion.Goal", related_name="trainings", blank=True)
 
     reference_person = models.CharField(
         _("reference person"), max_length=200, blank=True)
@@ -112,10 +110,10 @@ class Training(ContractBase, ContractPartnerBase, SectorFunction):
             'date_decided date_issued ')
 
 
-dd.update_field(Training, 'user', verbose_name=_("responsible (IS)"))
+dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 
 
-class TrainingDetail(dd.FormLayout):
+class ContractDetail(dd.FormLayout):
     box1 = """
     id:8 client:25 user:15 user_asd:15 language:8
     type company contact_person contact_role
@@ -136,13 +134,13 @@ class TrainingDetail(dd.FormLayout):
     """
 
 
-class Trainings(ContractBaseTable):
+class Contracts(ContractBaseTable):
 
     required = dd.required(user_groups='integ')
-    model = Training
+    model = 'immersion.Contract'
     column_names = 'id client applies_from applies_until user type *'
     order_by = ['id']
-    detail_layout = TrainingDetail()
+    detail_layout = ContractDetail()
     insert_layout = """
     client
     company
@@ -150,9 +148,9 @@ class Trainings(ContractBaseTable):
 
     parameters = dict(
         type=models.ForeignKey(
-            'trainings.TrainingType', blank=True,
-            verbose_name=_("Only trainings of type")),
-        **isip.ContractBaseTable.parameters)
+            'immersion.ContractType', blank=True,
+            verbose_name=_("Only immersion trainings of type")),
+        **ContractBaseTable.parameters)
 
     params_layout = """
     user type start_date end_date observed_event
@@ -161,14 +159,14 @@ class Trainings(ContractBaseTable):
 
     @classmethod
     def get_request_queryset(cls, ar):
-        qs = super(Trainings, cls).get_request_queryset(ar)
+        qs = super(Contracts, cls).get_request_queryset(ar)
         pv = ar.param_values
         if pv.company:
             qs = qs.filter(company=pv.company)
         return qs
 
 
-class TrainingsByClient(Trainings):
+class ContractsByClient(Contracts):
     """
     """
     master_key = 'client'
@@ -176,38 +174,38 @@ class TrainingsByClient(Trainings):
     column_names = 'applies_from applies_until user type *'
 
 
-class TrainingsByProvider(Trainings):
+class ContractsByProvider(Contracts):
     master_key = 'company'
     column_names = 'client applies_from applies_until user type *'
 
 
-class TrainingsByPolicy(Trainings):
+class ContractsByPolicy(Contracts):
     master_key = 'exam_policy'
 
 
-class TrainingsByType(Trainings):
+class ContractsByType(Contracts):
     master_key = 'type'
     column_names = "applies_from client user *"
     order_by = ["applies_from"]
 
 
-class TrainingsByGoal(Trainings):
+class ContractsByGoal(Contracts):
     master_key = 'goal'
     column_names = "applies_from client user *"
     order_by = ["applies_from"]
 
 
-class TrainingsByEnding(Trainings):
+class ContractsByEnding(Contracts):
     master_key = 'ending'
 
 
 
-class MyTrainings(Trainings):
+class MyContracts(Contracts):
     column_names = "applies_from client type company applies_until date_ended ending *"
 
     @classmethod
     def param_defaults(self, ar, **kw):
-        kw = super(MyTrainings, self).param_defaults(ar, **kw)
+        kw = super(MyContracts, self).param_defaults(ar, **kw)
         kw.update(user=ar.get_user())
         return kw
 

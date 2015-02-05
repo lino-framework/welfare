@@ -12,9 +12,9 @@ from lino.utils.cycler import Cycler
 
 
 def objects():
-    TT = Cycler(rt.modules.trainings.TrainingType.objects.all())
-    TG = Cycler(rt.modules.trainings.Goal.objects.all())
-    Training = rt.modules.trainings.Training
+    TT = Cycler(rt.modules.immersion.ContractType.objects.all())
+    TG = Cycler(rt.modules.immersion.Goal.objects.all())
+    Training = rt.modules.immersion.Contract
 
     alicia = rt.login('alicia').get_user()
     selected_clients = (131, 149, 161)

@@ -4,8 +4,20 @@
 Changes in Lino Welfare
 ========================
 
-See the author's :ref:`developer blog <blog>` to get detailed news.
-The final truth about what's going on is only the source code.
+The final truth about what's going on is only 
+`the source code.
+<https://github.com/lsaffre/lino-welfare/commits/master>`_.
+
+Development
+===========
+
+- Miscellaneous bugfixes
+
+Version 1.1.21
+===============
+
+- 20150130 : new field `jobs.ContractType.full_name`
+
 
 Version 1.1.19 
 ====================================

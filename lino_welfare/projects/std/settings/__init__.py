@@ -153,7 +153,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.isip'
         yield 'lino_welfare.modlib.jobs'
-        yield 'lino_welfare.modlib.trainings'
+        yield 'lino_welfare.modlib.immersion'
         yield 'lino_welfare.modlib.active_job_search'
         yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.newcomers'

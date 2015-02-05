@@ -62,8 +62,8 @@ class DocsTests(BaseTestCase):
     def test_excerpts(self):
         return self.run_simple_doctests('docs/tested/excerpts.rst')
 
-    def test_trainings(self):
-        return self.run_simple_doctests('docs/tested/trainings.rst')
+    def test_immersion(self):
+        return self.run_simple_doctests('docs/tested/immersion.rst')
 
     def test_cv2(self):
         return self.run_simple_doctests('docs/tested/cv2.rst')

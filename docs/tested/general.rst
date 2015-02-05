@@ -33,7 +33,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, trainings, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
 129 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -106,6 +106,9 @@ result:
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
+ immersion.Contract             immersion.Contracts             25        3
+ immersion.ContractType         immersion.ContractTypes         7         3
+ immersion.Goal                 immersion.Goals                 5         4
  isip.Contract                  isip.Contracts                  22        30
  isip.ContractEnding            isip.ContractEndings            6         4
  isip.ContractPartner           isip.ContractPartners           6         35
@@ -160,9 +163,6 @@ result:
  sepa.Account                   sepa.Accounts                   8         13
  system.SiteConfig              system.SiteConfigs              30        1
  system.TextFieldTemplate       system.TextFieldTemplates       5         2
- trainings.Goal                 trainings.TrainingGoals         5         4
- trainings.Training             trainings.Trainings             25        3
- trainings.TrainingType         trainings.TrainingTypes         7         3
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
@@ -348,6 +348,15 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | humanlinks.Links              | admin                               | parent child type                                            |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| immersion.ContractTypes       | 110, admin                          | id name name_fr name_de name_nl exam_policy                  |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| immersion.Contracts           | 100, 110, admin                     | id client user user_asd language type company contact_person |
+|                               |                                     | contact_role applies_from applies_until exam_policy sector   |
+|                               |                                     | function reference_person printed date_decided date_issued   |
+|                               |                                     | date_ended ending responsibilities                           |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| immersion.Goals               | 110, admin                          | id name name_fr name_de name_nl                              |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | integ.ActivityReport          | 100, 110, admin                     | body                                                         |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | isip.ContractEndings          | 110, admin                          | name use_in_isip use_in_jobs is_success needs_date_ended     |
@@ -463,15 +472,6 @@ The following table lists information about all detail layouts.
 |                               |                                     | cbss_http_username cbss_http_password                        |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | system.TextFieldTemplates     | admin                               | id name user description text                                |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| trainings.TrainingGoals       | 110, admin                          | id name name_fr name_de name_nl                              |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| trainings.TrainingTypes       | 110, admin                          | id name name_fr name_de name_nl exam_policy                  |
-+-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| trainings.Trainings           | 100, 110, admin                     | id client user user_asd language type company contact_person |
-|                               |                                     | contact_role applies_from applies_until exam_policy sector   |
-|                               |                                     | function reference_person printed date_decided date_issued   |
-|                               |                                     | date_ended ending responsibilities                           |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | uploads.UploadTypes           | admin                               | id upload_area shortcut name name_fr name_de name_nl         |
 |                               |                                     | warn_expiry_unit warn_expiry_value wanted max_number         |

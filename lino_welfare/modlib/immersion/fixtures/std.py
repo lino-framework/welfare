@@ -15,8 +15,8 @@ from lino.api import rt, dd
 
 
 def objects():
-    TT = rt.modules.trainings.TrainingType
-    TG = rt.modules.trainings.Goal
+    TT = rt.modules.immersion.ContractType
+    TG = rt.modules.immersion.Goal
 
     def str2obj(model, name):
         return model(**dd.str2kw('name', name))

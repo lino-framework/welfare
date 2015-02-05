@@ -1,23 +1,26 @@
 """
 
+Plugins which have been written specifically for Lino Welfare:
+
 .. autosummary::
    :toctree:
 
-    active_job_search
-    aids
-    badges
-    cbss
     contacts
-    courses
-    debts
     integ
     isip
     jobs
     newcomers
     pcsw
-    projects
     reception
-    trainings
+
+    cbss
+    courses
+    debts
+    active_job_search
+    aids
+    badges
+    projects
+    immersion
 
 
 

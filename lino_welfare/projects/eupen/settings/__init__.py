@@ -29,7 +29,7 @@ class Site(Site):
         kw.update(badges=None)  # remove the badges app
         kw.update(polls=None)
         kw.update(projects=None)
-        kw.update(trainings=None)
+        kw.update(immersion=None)
         kw.update(active_job_search=None)
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         return kw
