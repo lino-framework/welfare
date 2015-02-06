@@ -1,16 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
-# This file is part of the Lino-Welfare project.
-# Lino-Welfare is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino-Welfare is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2014-2015 Luc Saffre
+# License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 
@@ -186,3 +176,15 @@ def objects():
     yield Decider(**dd.str2kw(
         'name', _("Permanent Board (PB)")))  # Ständiges Präsidium (SP)
 
+    ContentType = rt.modules.contenttypes.ContentType
+    ExcerptType = rt.modules.excerpts.ExcerptType
+    ConfirmationTypes = rt.modules.aids.ConfirmationTypes
+    for ct in ConfirmationTypes.items():
+        kw = dict(
+            body_template='certificate.body.html',
+            template='Default.odt',
+            primary=True,
+            # print_directly=False,
+            content_type=ContentType.objects.get_for_model(ct.model))
+        kw.update(dd.str2kw('name', ct.model._meta.verbose_name))
+        ExcerptType.update_for_model(ct.model, **kw)

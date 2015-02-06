@@ -1,16 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
-# This file is part of the Lino-Welfare project.
-# Lino-Welfare is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino-Welfare is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
+# Copyright 2013-2015 Luc Saffre
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -124,9 +113,16 @@ class Clients(pcsw.Clients):
 
 
 class UsersWithClients(dd.VirtualTable):
+    """An overview table for agents of the integration service.
 
-    """
-    An overview table for agents of the integration service.
+    Example data:
+
+    .. django2rst::
+
+      rt.show(integ.UsersWithClients)
+
+
+
     """
     # required = dict(user_groups='coaching newcomers')
     required = dict(user_groups='integ')
@@ -223,6 +219,10 @@ def on_database_ready(sender, **kw):
 
 
 class CompareRequestsTable(dd.VirtualTable):
+    """
+    This is one of the tables of the :class:`ActivityReport`.
+
+    """
     label = _("Evolution générale")
     auto_fit_column_widths = True
     column_names = "description old_value new_value"
@@ -551,6 +551,10 @@ class JobProvidersAndContracts(CompaniesAndContracts):
 
 
 class ActivityReport(Report):
+    """Gives an overview about the work of the Integration Service during
+    a given period.
+
+    """
 
     required = dict(user_groups='integ')
     #~ required = dd.required(user_level='manager')

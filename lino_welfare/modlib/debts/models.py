@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2014 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
-The :xfile:`models.py` for :mod:`lino_welfare.modlib.debts`.
+The :xfile:`models.py` for `lino_welfare.modlib.debts`.
 
 """
 

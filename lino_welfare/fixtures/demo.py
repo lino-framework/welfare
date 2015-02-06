@@ -158,11 +158,6 @@ def objects():
     #~ Contact = resolve_model('contacts.Contact')
     Role = resolve_model('contacts.Role')
     RoleType = resolve_model('contacts.RoleType')
-    #~ Link = resolve_model('links.Link')
-    #~ Contract = resolve_model('jobs.Contract')
-    #~ JobProvider = resolve_model('jobs.JobProvider')
-    #~ Function = resolve_model('cv.Function')
-    #~ Sector = resolve_model('cv.Sector')
     Authority = resolve_model('users.Authority')
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
@@ -237,9 +232,12 @@ def objects():
     theresia = users.User(username="theresia", partner=theresia, profile='210')
     yield theresia
 
-    yield Authority(user=alicia, authorized=hubert)
-    yield Authority(user=alicia, authorized=melanie)
-    yield Authority(user=hubert, authorized=melanie)
+    # yield Authority(user=alicia, authorized=hubert)
+    # yield Authority(user=alicia, authorized=melanie)
+    # yield Authority(user=hubert, authorized=melanie)
+    yield Authority(user=hubert, authorized=theresia)
+    yield Authority(user=alicia, authorized=theresia)
+    yield Authority(user=melanie, authorized=theresia)
 
     caroline = users.User(
         username="caroline", first_name="Caroline", last_name="Carnol",
@@ -339,21 +337,6 @@ def objects():
                                ))
 
     calendar = Instantiator('cal.EventType').build
-    kw = dd.babelkw('name',
-                 de="Klientengespräche intern",
-                 fr="Rencontres internes avec client",
-                 en="Internal meetings with client")
-    kw.update(dd.babelkw('event_label',
-                      de="Termin",
-                      fr="Rendez-vous",
-                      en="Appointment"))
-    # Lino Welfare does not use time slots when generating evaluation
-    # meetings because the exasct planning is done by the user. But we
-    # define a limit of 4 client meetings per day per user.
-    kw.update(max_conflicting=4)
-    client_calendar = calendar(invite_client=True, **kw)
-    yield client_calendar
-    settings.SITE.site_config.update(client_calendar=client_calendar)
 
     kw = dict(invite_client=False, is_appointment=False)
     kw.update(dd.str2kw('event_label', _("Consultation")))
@@ -377,65 +360,19 @@ def objects():
         ))
 
     yield calendar(**dd.babelkw('name',
-                             de=u"Versammlung intern",
-                             fr=u"Réunions internes",
-                             en=u"Internal meetings",
-                             ))
+                                de=u"Versammlung intern",
+                                fr=u"Réunions internes",
+                                en=u"Internal meetings"))
 
     yield calendar(**dd.babelkw('name',
-                             de=u"Versammlung extern",
-                             fr=u"Réunions externes",
-                             en=u"External meetings",
-                             ))
-
-    # for obj in users.Team.objects.all():
-    #     yield calendar(
-    #         invite_team_members=obj,
-    #         email_template='Team.eml.html',
-    #         **dd.babelkw('name', **field2kw(obj, 'name')))
-
-    #~ yield calendar(
-        #~ email_template='Team.eml.html',
-        #~ **dd.babelkw('name',
-          #~ de=u"Team-Besprechungen",
-          #~ fr=u"Coordinations en équipe",
-          #~ en=u"Team Meetings",
-          #~ ))
+                                de=u"Versammlung extern",
+                                fr=u"Réunions externes",
+                                en=u"External meetings"))
 
     yield calendar(**dd.babelkw('name',
-                             de="Privat",
-                             fr="Privé",
-                             en="Private",
-                             ))
-
-    kw = dict()
-    for wd in WORKDAYS:
-        kw[wd.name] = True
-    exam_policy = Instantiator(
-        'isip.ExamPolicy', 'every',
-        every_unit=DurationUnits.months, **kw).build
-    yield exam_policy(
-        1, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every month', de=u'monatlich', fr=u"mensuel"))
-    yield exam_policy(
-        2, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
-    yield exam_policy(
-        3, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every 3 months', de=u'alle 3 Monate',
-            fr=u"tous les 3 mois"))
-
-    exam_policy = Instantiator(
-        'isip.ExamPolicy', 'every',
-        every_unit=DurationUnits.weeks, **kw).build
-    yield exam_policy(
-        2,
-        event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every 2 weeks', de=u'zweiwöchentlich',
-            fr=u"hebdomadaire"))
-
-    exam_policy = Instantiator('isip.ExamPolicy').build
-    yield exam_policy(**dd.babelkw('name', en='other', de="andere", fr="autre"))
+                                de="Privat",
+                                fr="Privé",
+                                en="Private"))
 
     sector = Instantiator(cv.Sector).build
     for ln in SECTORS_LIST.splitlines():

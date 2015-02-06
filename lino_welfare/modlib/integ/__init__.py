@@ -2,7 +2,16 @@
 # Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""See :mod:`welfare.integ`.
+"""Provides data definitions used by the Integration Service.
+
+
+.. autosummary::
+   :toctree:
+
+   models
+   fixtures.demo
+
+
 
 """
 
@@ -12,6 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Plugin(ad.Plugin):
+    "See :doc:`/dev/plugins`."
     verbose_name = _("Integration")
 
     def setup_reports_menu(config, site, profile, m):

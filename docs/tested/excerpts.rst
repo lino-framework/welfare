@@ -35,12 +35,14 @@ Configuring excerpts
 This is the list of excerpt types:
 
 >>> rt.show(excerpts.ExcerptTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ======================================================= ======== =============== =========================== ====================== ================= ================================
  Modell                                                  Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
 ------------------------------------------------------- -------- --------------- --------------------------- ---------------------- ----------------- --------------------------------
  **aids.IncomeConfirmation (Einkommensbescheinigung)**   Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
  **aids.RefundConfirmation (Kostenübernahmeschein)**     Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
  **aids.SimpleConfirmation (Einfache Bescheinigung)**    Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
+ **art61.Contract (Art.61-Konvention)**                  Ja       Ja              Art.61-Konvention                                  Default.odt
  **cal.Guest (Teilnehmer)**                              Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
  **debts.Budget (Budget)**                               Ja       Ja              Finanzielle Situation                              Default.odt
  **isip.Contract (VSE)**                                 Ja       Ja              VSE                                                Default.odt
@@ -48,6 +50,6 @@ This is the list of excerpt types:
  **pcsw.Client (Klient)**                                Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
  **pcsw.Client (Klient)**                                Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
  **pcsw.Client (Klient)**                                Ja       Nein            eID-Inhalt                                         eid-content.odt
- **Total (10 Zeilen)**                                   **8**    **6**
+ **Total (11 Zeilen)**                                   **9**    **7**
 ======================================================= ======== =============== =========================== ====================== ================= ================================
 <BLANKLINE>

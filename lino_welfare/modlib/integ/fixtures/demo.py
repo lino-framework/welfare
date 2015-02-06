@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -18,6 +18,8 @@ from lino.utils import Cycler
 aids = dd.resolve_app('aids')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
+art61 = dd.resolve_app('art61')
+immersion = dd.resolve_app('immersion')
 pcsw = dd.resolve_app('pcsw')
 cv = dd.resolve_app('cv')
 
@@ -65,6 +67,7 @@ def objects():
     qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
     # dd.logger.info("20141122 generating %d integ contracts", qs.count())
     for i, client in enumerate(qs):
+
         # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
         # oldest contract started 200 days ago.
         af = settings.SITE.demo_date(-600 + i * 5)
@@ -77,13 +80,15 @@ def objects():
             kw.update(user=coaching.user)
         else:
             kw.update(user=ar.user)
-        if i % 2:
+
+        def jobs_contract():
             kw.update(
                 type=JOBS_CONTRACT_TYPES.pop(),
                 duration=JOBS_CONTRACT_DURATIONS.pop(),
                 job=JOBS.pop())
-            ctr = jobs.Contract(**kw)
-        else:
+            return jobs.Contract(**kw)
+
+        def isip_contract():
             ct = ISIP_CONTRACT_TYPES.pop()
             if ct.needs_study_type:
                 kw.update(study_type=STUDY_TYPES.pop())
@@ -91,7 +96,50 @@ def objects():
                 type=ct,
                 applies_until=af + datetime.timedelta(
                     days=ISIP_DURATIONS.pop()))
-            ctr = isip.Contract(**kw)
+            return isip.Contract(**kw)
+
+        factories = []
+        factories.append(isip_contract)
+        factories.append(jobs_contract)
+        factories.append(isip_contract)
+        factories.append(jobs_contract)
+        factories.append(isip_contract)
+
+        if dd.is_installed('art61'):
+            ART61_CONTRACT_TYPES = Cycler(art61.ContractType.objects.all())
+
+            def f():
+                kw.update(
+                    type=ART61_CONTRACT_TYPES.pop(),
+                    company=COMPANIES.pop(),
+                    duration=JOBS_CONTRACT_DURATIONS.pop())
+                return art61.Contract(**kw)
+            factories.append(f)
+
+        if dd.is_installed('immersion'):
+            IMMERSION_CONTRACT_TYPES = Cycler(
+                immersion.ContractType.objects.all())
+            GOALS = Cycler(immersion.Goal.objects.all())
+        
+            def f():
+                kw.update(
+                    company=COMPANIES.pop(),
+                    type=IMMERSION_CONTRACT_TYPES.pop())
+                kw.update(
+                    applies_until=af + datetime.timedelta(
+                        days=ISIP_DURATIONS.pop()))
+                kw.update(goal=GOALS.pop())
+                return immersion.Contract(**kw)
+            factories.append(f)
+
+        f = factories[i % len(factories)]
+        ctr = f()
+
+        # if i % 2:
+        #     ctr = jobs_contract()
+        # else:
+        #     ctr = isip_contract()
+
         if af is not None and af > settings.SITE.demo_date(-14):
             # every fifth contract ends prematuredly
             if i % 5 == 0:

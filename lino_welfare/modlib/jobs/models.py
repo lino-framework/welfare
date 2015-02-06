@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 
@@ -14,8 +14,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 import cgi
-import datetime
-ONE_DAY = datetime.timedelta(days=1)
 
 from django.db import models
 from django.conf import settings
@@ -30,7 +28,6 @@ from lino import mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.htmlgen import UL
 from lino.utils.report import EmptyTable
-from lino.modlib.cal.utils import DurationUnits
 
 from lino.modlib.cv.mixins import SectorFunction
 
@@ -43,6 +40,8 @@ cv = dd.resolve_app('cv')
 
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
+
+from .mixins import JobSupplyment
 
 
 class Schedule(mixins.BabelNamed):
@@ -123,7 +122,8 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 # CONTRACT TYPES
 #
-class ContractType(ContractTypeBase, mixins.PrintableType):
+class ContractType(ContractTypeBase, mixins.PrintableType,
+                   mixins.Referrable):
 
     """This is the homologue of :class:`isip.ContractType
     <lino_welfare.modlib.isip.models.ContractType>` (see there for
@@ -146,11 +146,11 @@ class ContractType(ContractTypeBase, mixins.PrintableType):
     templates_group = 'jobs/Contract'
 
     class Meta:
-        verbose_name = _("Job Contract Type")
-        verbose_name_plural = _('Job Contract Types')
+        verbose_name = _("Art60§7 job supplyment type")
+        verbose_name_plural = _('Art60§7 job supplyment types')
         ordering = ['name']
 
-    ref = models.CharField(_("Reference"), max_length=20, blank=True)
+    # ref = models.CharField(_("Reference"), max_length=20, blank=True)
 
 
 class ContractTypes(dd.Table):
@@ -167,7 +167,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class Contract(ContractBase, ContractPartnerBase):
+class Contract(JobSupplyment):
 
     """
     A Contract
@@ -182,35 +182,24 @@ class Contract(ContractBase, ContractPartnerBase):
     """
 
     class Meta:
-        verbose_name = _("Job supply contract")
-        verbose_name_plural = _('Job supply contracts')
+        verbose_name = _("Art60§7 job supplyment")
+        verbose_name_plural = _('Art60§7 job supplyments')
 
-    type = models.ForeignKey(
+    type = dd.ForeignKey(
         "jobs.ContractType",
         related_name="%(app_label)s_%(class)s_set_by_type",
         blank=True)
 
     job = models.ForeignKey("jobs.Job")
-    duration = models.IntegerField(_("duration (days)"),
-                                   blank=True, null=True, default=None)
     regime = dd.ForeignKey('cv.Regime', blank=True, null=True)
     schedule = dd.ForeignKey('jobs.Schedule', blank=True, null=True)
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
     refund_rate = models.CharField(_("refund rate"), max_length=200,
                                    blank=True)
-    reference_person = models.CharField(_("reference person"), max_length=200,
-                                        blank=True)
-    responsibilities = dd.RichTextField(_("responsibilities"),
-                                        blank=True, null=True, format='html')
-    remark = models.TextField(_("Remark"), blank=True)
 
     @dd.chooser()
     def company_choices(cls):
-        return JobProvider.objects.all()
-
-    @dd.chooser()
-    def ending_choices(cls):
-        return isip.ContractEnding.objects.filter(use_in_jobs=True)
+        return rt.modules.jobs.JobProvider.objects.all()
 
     @dd.chooser(simple_values=True)
     def duration_choices(cls):
@@ -238,7 +227,7 @@ class Contract(ContractBase, ContractPartnerBase):
     def after_ui_save(self, ar):
         super(Contract, self).after_ui_save(ar)
         if self.job_id is not None:
-            if self.applies_until and self.applies_until > settings.SITE.today():
+            if self.applies_until and self.applies_until > dd.today():
                 n = 0
                 for candi in self.client.candidature_set.filter(
                         state=CandidatureStates.active):
@@ -251,34 +240,6 @@ class Contract(ContractBase, ContractPartnerBase):
                     ar.set_response(alert=_("Success"))
 
     def full_clean(self, *args, **kw):
-        if self.client_id is not None:
-            if self.applies_from:
-                if self.client.birth_date:
-                    def duration(refdate):
-                        if type(refdate) != datetime.date:
-                            raise Exception("%r is not a date!" % refdate)
-                        delta = refdate - self.client.birth_date.as_date()
-                        age = delta.days / 365
-                        if age < 36:
-                            return 312
-                        elif age < 50:
-                            return 468
-                        else:
-                            return 624
-
-                    if self.duration is None:
-                        if self.applies_until:
-                            self.duration = duration(self.applies_until)
-                        else:
-                            self.duration = duration(self.applies_from)
-                            self.applies_until = self.applies_from + \
-                                datetime.timedelta(days=self.duration)
-
-                if self.duration and not self.applies_until:
-                    # [NOTE1]
-                    self.applies_until = DurationUnits.months.add_duration(
-                        self.applies_from, self.duration / 26) - ONE_DAY
-
         if self.job_id is not None:
             if self.job.provider is not None:
                 self.company = self.job.provider

@@ -15,9 +15,7 @@ General
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from __future__ import print_function
-    >>> from lino.runtime import *
-    >>> from django.utils import translation
-    >>> from lino.utils.xmlgen.html import E
+    >>> from lino.api.doctest import *
 
 .. contents:: 
    :local:
@@ -33,8 +31,8 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
-129 models:
+50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+131 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -45,25 +43,27 @@ result:
  addresses.Address              addresses.Addresses             16        121
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
- aids.Granting                  aids.GrantingsByX               10        55
- aids.IncomeConfirmation        aids.IncomeConfirmations        16        54
+ aids.Granting                  aids.GrantingsByX               10        51
+ aids.IncomeConfirmation        aids.IncomeConfirmations        16        48
  aids.RefundConfirmation        aids.RefundConfirmations        17        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        14        19
+ art61.Contract                 art61.Contracts                 23        4
+ art61.ContractType             art61.ContractTypes             8         1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         10
- cal.Event                      cal.OneEvent                    24        597
+ cal.Event                      cal.OneEvent                    24        505
  cal.EventType                  cal.EventTypes                  19        7
- cal.Guest                      cal.Guests                      9         616
+ cal.Guest                      cal.Guests                      9         492
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
  cal.Subscription               cal.Subscriptions               4         9
- cal.Task                       cal.Tasks                       19        34
+ cal.Task                       cal.Tasks                       19        33
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     20        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       23        1
  cbss.Purpose                   cbss.Purposes                   7         106
@@ -76,7 +76,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         130
+ contenttypes.ContentType       contenttypes.ContentTypes       4         132
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78
@@ -100,22 +100,22 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
- excerpts.Excerpt               excerpts.ExcerptsByX            12        93
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        12
+ excerpts.Excerpt               excerpts.ExcerptsByX            12        88
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
  households.Household           households.Households           29        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
- immersion.Contract             immersion.Contracts             25        3
+ immersion.Contract             immersion.Contracts             25        7
  immersion.ContractType         immersion.ContractTypes         7         3
  immersion.Goal                 immersion.Goals                 5         4
- isip.Contract                  isip.Contracts                  22        30
+ isip.Contract                  isip.Contracts                  22        26
  isip.ContractEnding            isip.ContractEndings            6         4
- isip.ContractPartner           isip.ContractPartners           6         35
+ isip.ContractPartner           isip.ContractPartners           6         30
  isip.ContractType              isip.ContractTypes              9         5
- isip.ExamPolicy                isip.ExamPolicies               20        5
+ isip.ExamPolicy                isip.ExamPolicies               20        6
  jobs.Candidature               jobs.Candidatures               8         74
- jobs.Contract                  jobs.Contracts                  28        24
+ jobs.Contract                  jobs.Contracts                  28        16
  jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
  jobs.JobProvider               jobs.JobProviders               31        3
@@ -221,6 +221,13 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | aids.SimpleConfirmations      | all except anonymous                | id client user signer workflow_buttons granting start_date   |
 |                               |                                     | end_date company contact_person printed remark               |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| art61.ContractTypes           | 110, admin                          | id name name_fr name_de name_nl ref                          |
++-------------------------------+-------------------------------------+--------------------------------------------------------------+
+| art61.Contracts               | 100, 110, admin                     | id client user user_asd language type company contact_person |
+|                               |                                     | contact_role applies_from duration applies_until exam_policy |
+|                               |                                     | reference_person printed date_decided date_issued date_ended |
+|                               |                                     | ending responsibilities                                      |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | boards.Boards                 | admin                               | id name name_fr name_de name_nl                              |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
@@ -350,10 +357,10 @@ The following table lists information about all detail layouts.
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | immersion.ContractTypes       | 110, admin                          | id name name_fr name_de name_nl exam_policy                  |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
-| immersion.Contracts           | 100, 110, admin                     | id client user user_asd language type company contact_person |
-|                               |                                     | contact_role applies_from applies_until exam_policy sector   |
-|                               |                                     | function reference_person printed date_decided date_issued   |
-|                               |                                     | date_ended ending responsibilities                           |
+| immersion.Contracts           | 100, 110, admin                     | id client user user_asd language type company goal           |
+|                               |                                     | contact_person contact_role applies_from applies_until       |
+|                               |                                     | exam_policy sector function reference_person printed         |
+|                               |                                     | date_decided date_issued date_ended ending responsibilities  |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
 | immersion.Goals               | 110, admin                          | id name name_fr name_de name_nl                              |
 +-------------------------------+-------------------------------------+--------------------------------------------------------------+
@@ -507,7 +514,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Immersion trainings
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
@@ -527,7 +534,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Immersion training types
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
@@ -544,7 +551,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Immersion trainings, Proofs of search
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen

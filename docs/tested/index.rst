@@ -12,12 +12,13 @@ them to a script and run it using :manage:`run`.
 .. toctree::
    :maxdepth: 1
   
+   users
+   general
    aids
    cbss
    courses
    debts
    excerpts
-   general
    integ
    jobs
    newcomers

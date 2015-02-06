@@ -28,6 +28,46 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 >>> ses = rt.login('robin')
 >>> translation.activate('en')
 
+ClientsTest
+===========
+
+>>> ses.show(pcsw.ClientsTest)
+============================= ============================================================= =============== ===== =================
+ Name                          Error message                                                 National ID     ID    Primary coach
+----------------------------- ------------------------------------------------------------- --------------- ----- -----------------
+ AUSDEMWALD Alfons (116)       Neither valid eId data nor alternative identifying document   980526 001-51   116   Caroline Carnol
+ COLLARD Charlotte (118)       Neither valid eId data nor alternative identifying document   960715 002-61   118   Hubert Huppertz
+ DOBBELSTEIN Dorothée (124)    Neither valid eId data nor alternative identifying document   940904 002-72   124   Mélanie Mélard
+ DUBOIS Robin (179)            Neither valid eId data nor alternative identifying document   930929 001-78   179   Hubert Huppertz
+ EMONTS Daniel (128)           Neither valid eId data nor alternative identifying document   921024 001-20   128   Mélanie Mélard
+ EMONTS-GAST Erna (152)        Neither valid eId data nor alternative identifying document   911119 002-58   152   Hubert Huppertz
+ ENGELS Edgar (129)            Neither valid eId data nor alternative identifying document   901214 001-01   129   Mélanie Mélard
+ EVERS Eberhart (127)          Neither valid eId data nor alternative identifying document   900108 001-07   127   Alicia Allmanns
+ GROTECLAES Gregory (132)      Neither valid eId data nor alternative identifying document   880228 001-51   132   Alicia Allmanns
+ HILGERS Hildegard (133)       Neither valid eId data nor alternative identifying document   870325 002-29   133   Mélanie Mélard
+ JACOBS Jacqueline (137)       Neither valid eId data nor alternative identifying document   860419 002-01   137   Caroline Carnol
+ JEANÉMART Jérôme (181)        Neither valid eId data nor alternative identifying document   850514 001-41   181   Hubert Huppertz
+ JONAS Josef (139)             Neither valid eId data nor alternative identifying document   840608 001-13   139   Hubert Huppertz
+ KAIVERS Karl (141)            Neither valid eId data nor alternative identifying document   830704 001-22   141   Mélanie Mélard
+ KELLER Karl (178)             Neither valid eId data nor alternative identifying document   820729 001-27   178   Hubert Huppertz
+ LAMBERTZ Guido (142)          Neither valid eId data nor alternative identifying document   810823 001-96   142   Mélanie Mélard
+ LAZARUS Line (144)            Neither valid eId data nor alternative identifying document   800917 002-67   144   Mélanie Mélard
+ MALMENDIER Marc (146)         Neither valid eId data nor alternative identifying document   791013 001-77   146   Hubert Huppertz
+ MEESSEN Melissa (147)         Neither valid eId data nor alternative identifying document   781107 002-48   147   Mélanie Mélard
+ RADERMACHER Alfons (153)      Neither valid eId data nor alternative identifying document   771202 001-88   153   Mélanie Mélard
+ RADERMACHER Christian (155)   Neither valid eId data nor alternative identifying document   761227 001-93   155   Alicia Allmanns
+ RADERMACHER Edgard (157)      Neither valid eId data nor alternative identifying document   760122 001-69   157   Caroline Carnol
+ RADERMACHER Guido (159)       Neither valid eId data nor alternative identifying document   750216 001-41   159   Mélanie Mélard
+ RADERMACHER Hedi (161)        Neither valid eId data nor alternative identifying document   740313 002-19   161   Caroline Carnol
+ RADERMECKER Rik (173)         Neither valid eId data nor alternative identifying document   730407 001-89   173   Mélanie Mélard
+ DA VINCI David (165)          Neither valid eId data nor alternative identifying document   720502 001-31   165   Hubert Huppertz
+ VAN VEEN Vincent (166)        Neither valid eId data nor alternative identifying document   710528 001-06   166   Hubert Huppertz
+ ÖSTGES Otto (168)             Neither valid eId data nor alternative identifying document   700622 001-75   168   Hubert Huppertz
+============================= ============================================================= =============== ===== =================
+<BLANKLINE>
+
+
+
 Similar Persons
 ---------------
 
@@ -169,6 +209,7 @@ Filtering clients
 -----------------
 
 The demo database contains at least one client 
+
 - whose client_state is "Coached"
 - who has several coachings
 - at least one of these coachings has been ended.

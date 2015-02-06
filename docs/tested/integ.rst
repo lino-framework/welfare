@@ -26,6 +26,112 @@ A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 >>> translation.activate('en')
 
 
+Configuration
+=============
+
+>>> ses.show(isip.ExamPolicies)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================== ========================= ====================
+ Designation          Designation (fr)          Designation (de)
+-------------------- ------------------------- --------------------
+ every month          mensuel                   monatlich
+ every 2 months       bimensuel                 zweimonatlich
+ every 3 months       tous les 3 mois           alle 3 Monate
+ every 2 weeks        hebdomadaire              zweiwöchentlich
+ Once after 10 days   Une fois après 10 jours   Once after 10 days
+ Other                Autre                     Sonstige
+==================== ========================= ====================
+<BLANKLINE>
+
+>>> ses.show(isip.ContractTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+===================== ===================== ===================== =========== ==================== ==================
+ Designation           Designation (fr)      Designation (de)      Reference   Examination Policy   needs Study type
+--------------------- --------------------- --------------------- ----------- -------------------- ------------------
+ VSE Ausbildung        VSE Ausbildung        VSE Ausbildung        vsea        every month          Yes
+ VSE Arbeitssuche      VSE Arbeitssuche      VSE Arbeitssuche      vseb        every month          No
+ VSE Lehre             VSE Lehre             VSE Lehre             vsec        every month          No
+ VSE Vollzeitstudium   VSE Vollzeitstudium   VSE Vollzeitstudium   vsed        every month          Yes
+ VSE Sprachkurs        VSE Sprachkurs        VSE Sprachkurs        vsee        every month          No
+ **Total (5 rows)**                                                                                 **2**
+===================== ===================== ===================== =========== ==================== ==================
+<BLANKLINE>
+
+
+>>> ses.show(isip.ContractEndings)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================== ======= =============== ========= ====================
+ designation          ISIP    Job supplying   Success   Require date ended
+-------------------- ------- --------------- --------- --------------------
+ Alcohol              Yes     Yes             No        Yes
+ Force majeure        Yes     Yes             No        Yes
+ Health               Yes     Yes             No        Yes
+ Normal               Yes     Yes             No        No
+ **Total (4 rows)**   **4**   **4**           **0**     **3**
+==================== ======= =============== ========= ====================
+<BLANKLINE>
+
+
+>>> ses.show(jobs.Schedules)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==== =========================== ========================= ===========================
+ ID   Designation                 Designation (fr)          Designation (de)
+---- --------------------------- ------------------------- ---------------------------
+ 1    5 days/week                 5 jours/semaine           5-Tage-Woche
+ 2    Individual                  individuel                Individuell
+ 3    Monday, Wednesday, Friday   lundi,mercredi,vendredi   Montag, Mittwoch, Freitag
+==== =========================== ========================= ===========================
+<BLANKLINE>
+
+>>> ses.show(jobs.ContractTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+============================ =========================== =========================== ===========
+ Designation                  Designation (fr)            Designation (de)            Reference
+---------------------------- --------------------------- --------------------------- -----------
+ social economy               économie sociale            Sozialökonomie              art60-7a
+ social economy - increased   économie sociale - majoré   Sozialökonomie - majoré     art60-7b
+ social economy school        avec remboursement école    mit Rückerstattung Schule   art60-7d
+ social economy with refund   avec remboursement          mit Rückerstattung          art60-7c
+ town                         ville d'Eupen               Stadt Eupen                 art60-7e
+============================ =========================== =========================== ===========
+<BLANKLINE>
+
+>>> ses.show(art61.ContractTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+============= ================== ================== ===========
+ Designation   Designation (fr)   Designation (de)   Reference
+------------- ------------------ ------------------ -----------
+ Default       Default            Default
+============= ================== ================== ===========
+<BLANKLINE>
+
+>>> ses.show(immersion.ContractTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+===================== =========================== =====================
+ Designation           Designation (fr)            Designation (de)
+--------------------- --------------------------- ---------------------
+ Immersion training    Stage d'immersion           Immersion training
+ Internal engagement   Mise en situation interne   Internal engagement
+ MISIP                 MISIP                       MISIP
+===================== =========================== =====================
+<BLANKLINE>
+
+>>> ses.show(jobs.JobTypes)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+======= ========= ================================================ ======== ================
+ ID      Seq.No.   Designation                                      Remark   Social economy
+------- --------- ------------------------------------------------ -------- ----------------
+ 4       4         Extern (Privat Kostenrückerstattung)                      No
+ 3       3         Extern (Öffentl. VoE mit Kostenrückerstattung)            No
+ 2       2         Intern                                                    No
+ 5       5         Sonstige                                                  No
+ 1       1         Sozialwirtschaft = "majorés"                              No
+ **0**   **15**                                                              **0**
+======= ========= ================================================ ======== ================
+<BLANKLINE>
+
+
+
 UsersWithClients
 ----------------
 
@@ -102,7 +208,8 @@ List of coaches who ended at least one integration coaching:
 ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
 alicia (2013-10-24), caroline (2014-03-23), hubert (2013-03-08), melanie (2013-10-24)
 
-List of contracts whose client
+List of contracts (isip + jobs) whose client changed the coach during
+application period:
 
 >>> l = []
 >>> qs1 = isip.Contract.objects.all()
@@ -112,45 +219,46 @@ List of contracts whose client
 ...     names = set([e.user.username for e in ar])
 ...     if len(names) > 1:
 ...         l.append(unicode(obj))
+>>> print(len(l))
+4
 >>> print(', '.join(l))
 ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
-ISIP#6 (Daniel EMONTS), ISIP#19 (Line LAZARUS), ISIP#21 (Melissa MEESSEN), Job supply contract#10 (Jérôme JEANÉMART), Job supply contract#12 (Karl KAIVERS), Job supply contract#17 (Alfons RADERMACHER), Job supply contract#18 (Edgard RADERMACHER), Job supply contract#22 (Rik RADERMECKER), Job supply contract#23 (Vincent VAN VEEN)
+ISIP#21 (Hedi RADERMACHER), Art60§7 job supplyment#9 (Karl KAIVERS), Art60§7 job supplyment#11 (Melissa MEESSEN), Art60§7 job supplyment#16 (Vincent VAN VEEN)
 
-Let's pick up ISIP contract #6:
+Let's pick up ISIP contract #21:
 
->>> obj = isip.Contract.objects.get(pk=6)
+>>> obj = isip.Contract.objects.get(pk=21)
 
 This contract was created by Alicia (without any coaching), and on
-2013-11-10 Mélanie started to coach this client:
+2013-11-10 Caroline started to coach this client:
 
 >>> print(obj.user.username)
 alicia
-
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
 ==================== ======= ================= ========= =============== =======================
  Coached from         until   Coach             Primary   Coaching type   Reason of termination
 -------------------- ------- ----------------- --------- --------------- -----------------------
- 10/11/13                     Mélanie Mélard    Yes       General
- 10/14/13                     Caroline Carnol   No        Integ
+ 10/11/13                     Caroline Carnol   Yes       General
+ 10/14/13                     Hubert Huppertz   No        Integ
  **Total (2 rows)**                             **1**
 ==================== ======= ================= ========= =============== =======================
 <BLANKLINE>
 
-Lino attributes the automatic evaluation
-events to the coach in charge, depending on their date.  
+Lino attributes the automatic evaluation events to the coach in
+charge, depending on their date.
 
 >>> ar = cal.EventsByController.request(master_instance=obj)
 >>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
 >>> print(", ".join(events))
 ... #doctest: +NORMALIZE_WHITESPACE
-2012-11-29 (Alicia), 2012-12-31 (Alicia), 2013-01-31 (Alicia),
-2013-02-28 (Alicia), 2013-03-28 (Alicia), 2013-04-29 (Alicia),
-2013-05-29 (Alicia), 2013-07-01 (Alicia), 2013-08-01 (Alicia),
-2013-09-02 (Alicia), 2013-10-02 (Alicia), 2013-11-04 (Mélanie),
-2013-12-04 (Mélanie), 2014-01-06 (Mélanie), 2014-02-06 (Mélanie)
+2013-03-18 (Alicia), 2013-04-18 (Alicia), 2013-05-20 (Alicia),
+2013-06-20 (Alicia), 2013-07-22 (Alicia), 2013-08-22 (Alicia),
+2013-09-23 (Alicia), 2013-10-23 (Caroline), 2013-11-25 (Caroline),
+2013-12-25 (Caroline), 2014-01-27 (Caroline), 2014-02-27 (Caroline),
+2014-03-27 (Caroline), 2014-04-28 (Caroline), 2014-05-28 (Caroline)
 
-Appointments before 2013-11-10 are with Alicia, later appointments are
-with Mélanie.  That's what we wanted.
+Note that appointments before 2013-11-10 are with Alicia, later
+appointments are with Caroline.  That's what we wanted.
 
 
 Expects a list of 12 values but got 16

@@ -30,7 +30,7 @@ About this document
 ...    'lino_welfare.projects.eupen.settings.doctests'
 >>> from lino.api.doctest import *
     
-This documents uses the :mod:`lino_welfare.projects.eupen` test
+This document uses the :mod:`lino_welfare.projects.eupen` test
 database:
 
 >>> print(settings.SETTINGS_MODULE)

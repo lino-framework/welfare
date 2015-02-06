@@ -16,7 +16,7 @@ from lino.api import rt, dd
 
 def objects():
     TT = rt.modules.immersion.ContractType
-    TG = rt.modules.immersion.Goal
+    Goal = rt.modules.immersion.Goal
 
     def str2obj(model, name):
         return model(**dd.str2kw('name', name))
@@ -25,7 +25,17 @@ def objects():
     yield str2obj(TT, _("Immersion training"))
     yield str2obj(TT, _("MISIP"))
 
-    yield str2obj(TG, _("Discover a job"))
-    yield str2obj(TG, _("Confirm a professional project"))
-    yield str2obj(TG, _("Gain work experience"))
-    yield str2obj(TG, _("Show competences"))
+    yield str2obj(Goal, _("Discover a job"))
+    yield str2obj(Goal, _("Confirm a professional project"))
+    yield str2obj(Goal, _("Gain work experience"))
+    yield str2obj(Goal, _("Show competences"))
+
+    kw = dict(
+        email_template='Default.eml.html',
+        body_template='immersion.body.html',
+        primary=True, certifying=True,
+        template='Default.odt',
+        **dd.str2kw('name', _("Immersion training")))
+    rt.modules.excerpts.ExcerptType.update_for_model(
+        'immersion.Contract', **kw)
+

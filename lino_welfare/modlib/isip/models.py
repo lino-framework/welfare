@@ -7,14 +7,11 @@
 """
 
 from django.db import models
-from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino.api import dd, rt
+from lino.api import dd
 from lino import mixins
-notes = dd.resolve_app('notes')
-contacts = dd.resolve_app('contacts')
 
 from lino.modlib.cal.mixins import RecurrenceSet
 
@@ -60,10 +57,12 @@ class ContractTypes(dd.Table):
 # EXAMINATION POLICIES
 #
 class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
-    """A **policy of examination** is mostly a
-    :class:`RecurrenceSet<lino.modlib.cal.mixins.RecurrenceSet>` used
-    for generating "evaluation meetings".  That is, Lino automatically
-    suggests dates where the agent invites the client.
+    """An **examination policy** is mostly a :class:`RecurrenceSet
+    <lino.modlib.cal.mixins.RecurrenceSet>` used for generating
+    "evaluation meetings".  That is, Lino automatically suggests dates
+    where the agent invites the client.
+
+    TODO: move this to :mod:`lino_welfare.modlib.integ.modules`.
 
     """
     class Meta:
@@ -95,7 +94,11 @@ JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 
 
 class ContractEnding(dd.Model):
+    """A possible reason for premature termination of a contract.
 
+    TODO: move this to :mod:`lino_welfare.modlib.integ.modules`.
+
+    """
     class Meta:
         verbose_name = _("Reason of termination")
         verbose_name_plural = _('Contract termination reasons')

@@ -1,0 +1,43 @@
+{% extends "excerpts/base.body.html" %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}:
+<span class="VariableText">
+{{obj.user.initials}}/{{obj.client.id}}/{{this.id}}
+</span>
+{% endblock %}
+
+{% block title %}
+{% if language != settings.SITE.get_default_language() %}
+<p class="CenteredHeader">({{_("Translation")}})</p>
+{% endif %}
+<h1>{{obj.get_excerpt_title()}}</h1>
+{% endblock %}
+
+{% block body %}
+<p>
+{%- if language == 'de' -%}
+Dies ist eine Vereinbarung zwischen dem ÖSHZ und...
+{%- else -%}
+Ceci est une convention entre le CPAS et...
+{%- endif -%}
+</p>
+<p class="EnhancedPar">
+{{obj.client.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{obj.client.national_id}}
+<br>
+{{tr(de="wohnhaft zu",fr="domicilié"+obj.client.mf("","e","(e)")+" à")}}
+{{', '.join(obj.client.address_location_lines())}}
+</p>
+
+{% block what %}
+<p></p>
+{% endblock %}
+
+{% if obj.remark %}
+<p>{{ obj.remark }}</p>
+{% endif %}
+
+{% endblock %}

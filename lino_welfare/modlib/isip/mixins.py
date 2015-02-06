@@ -17,11 +17,10 @@ from atelier.utils import AttrDict
 
 from lino.api import dd, rt
 from lino import mixins
-notes = dd.resolve_app('notes')
-contacts = dd.resolve_app('contacts')
 
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.cal.mixins import EventGenerator
+from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.cal.utils import DurationUnits, update_auto_task
 
 from lino.utils.ranges import isrange
@@ -63,7 +62,7 @@ class ContractTypeBase(mixins.BabelNamed):
         blank=True, null=True)
 
 
-class ContractPartnerBase(contacts.ContactRelated):
+class ContractPartnerBase(ContactRelated):
     class Meta:
         abstract = True
 
@@ -78,13 +77,14 @@ class ContractPartnerBase(contacts.ContactRelated):
 
     @classmethod
     def contact_person_choices_queryset(cls, company):
-        return settings.SITE.modules.contacts.Person.objects.filter(
+        return rt.modules.contacts.Person.objects.filter(
             rolesbyperson__company=company,
             rolesbyperson__type__use_in_contracts=True)
 
     @dd.chooser()
     def contact_role_choices(cls):
-        return contacts.RoleType.objects.filter(use_in_contracts=True)
+        return rt.modules.contacts.RoleType.objects.filter(
+            use_in_contracts=True)
 
 
 class OverlappingContractsTest:

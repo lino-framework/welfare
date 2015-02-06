@@ -2,24 +2,5 @@
 Debts mediation
 ===============
 
-.. module:: welfare.debts
+Content moved to :mod:`lino_welfare.modlib.debts`.
 
-The :mod:`lino_welfare.modlib.debts` package provides data definitions
-for doing "debts mediation".
-
-Models
-======
-
-.. class:: Budget
-
-.. class:: Entry
-
-.. class:: Actor
-
-
-Tables and Layouts
-==================
-
-.. class:: PrintEntriesByBudget
-
-  Foo.

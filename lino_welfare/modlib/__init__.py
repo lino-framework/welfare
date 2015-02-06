@@ -9,6 +9,7 @@ Plugins which have been written specifically for Lino Welfare:
     integ
     isip
     jobs
+    art61
     newcomers
     pcsw
     reception

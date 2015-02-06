@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2014 Luc Saffre
+# Copyright 2011-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -26,7 +26,7 @@ from lino.api import dd, rt
 from lino.modlib.iban.utils import belgian_nban_to_iban_bic
 from lino.modlib.cal.utils import WORKDAYS
 
-from lino_welfare.fixtures.std import excerpt_types
+from lino_welfare.fixtures.std2 import excerpt_types
 from lino_welfare.modlib.aids.fixtures.std import objects as aids_objects
                     
 

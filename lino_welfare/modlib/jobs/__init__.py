@@ -35,7 +35,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Plugin(ad.Plugin):
+    "See :doc:`/dev/plugins`."
     # verbose_name = _("Art.60§7")
-    verbose_name = _("Job supply")
+    verbose_name = _("Job supplying")  # Mise à l'emploi
     needs_plugins = ['lino_welfare.modlib.isip']
 

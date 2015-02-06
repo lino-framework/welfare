@@ -8,9 +8,7 @@ Lino Welfare class reference
    :maxdepth: 2
 
    pcsw
-   debts
    households
-   integ
    isip
    jobs
    cv
@@ -22,3 +20,5 @@ Lino Welfare class reference
    :hidden:
 
    aids
+   integ
+   debts

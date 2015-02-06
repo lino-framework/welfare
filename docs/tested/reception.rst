@@ -4,6 +4,11 @@
 Reception
 ===================
 
+.. How to test only this document:
+
+  $ python setup.py test -s tests.DocsTests.test_reception
+
+
 A technical tour into the :mod:`lino_welfare.modlib.reception` module.
 
 .. include:: /include/tested.rst
@@ -11,23 +16,17 @@ A technical tour into the :mod:`lino_welfare.modlib.reception` module.
 .. contents::
    :depth: 2
 
-.. How to test only this document:
-
-  $ python setup.py test -s tests.DocsTests.test_reception
+About this document
+===================
 
 .. 
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.eupen.settings.doctests'
-    >>> from lino.runtime import *
-    >>> from django.utils import translation
-    >>> from django.test import Client
-    >>> import json
-    >>> from bs4 import BeautifulSoup
-    >>> from lino.utils import AttrDict
+    >>> from lino.api.doctest import *
 
-This documents uses the :mod:`lino_welfare.projects.eupen` test
+This document uses the :mod:`lino_welfare.projects.eupen` test
 database:
 
 >>> print(settings.SETTINGS_MODULE)
@@ -50,13 +49,13 @@ led by Hubert with a client for whom she also has a coaching.
 
 >>> ses = rt.login('romain')
 >>> ses.show(reception.AppointmentsByPartner, obj)
-=========================== ================= =======================================================
+=========================== ================= =====================================================
  Quand                       Traité par        État
---------------------------- ----------------- -------------------------------------------------------
- **mai 22, 2014**            Mélanie Mélard    **Attend** → [Excusé] [Absent] [Recevoir] [Congédier]
+--------------------------- ----------------- -----------------------------------------------------
+ **mai 22, 2014**            Mélanie Mélard    **Attend** → [Excusé] [Absent] [Recevoir] [Quitter]
  **mai 5, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
  **juin 5, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
-=========================== ================= =======================================================
+=========================== ================= =====================================================
 <BLANKLINE>
 
 

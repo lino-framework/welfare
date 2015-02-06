@@ -69,6 +69,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.active_job_search.fixtures',
     'lino_welfare.modlib.aids',
     'lino_welfare.modlib.aids.fixtures',
+    'lino_welfare.modlib.art61',
+    'lino_welfare.modlib.art61.fixtures',
     'lino_welfare.modlib.badges',
     'lino_welfare.modlib.cal',
     'lino_welfare.modlib.cal.fixtures',

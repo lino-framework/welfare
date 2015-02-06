@@ -30,6 +30,7 @@ from lino.core.utils import get_field
 
 from lino.utils.xmlgen.html import E
 from lino.modlib.cal.utils import DurationUnits, update_reminder
+from lino.modlib.uploads.choicelists import Shortcuts
 
 cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
@@ -45,6 +46,8 @@ notes = dd.resolve_app('notes')
 beid = dd.resolve_app('beid')
 
 from lino.utils import ssin
+
+from lino_welfare.modlib.isip.mixins import OverlappingContractsTest
 
 from .coaching import *
 from .mixins import ClientContactBase
@@ -116,9 +119,9 @@ class Client(contacts.Person,
 
     .. attribute:: id_document
 
-    A virtual field displaying a group of shortcut links for managing
-    the "identifying document", i.e. an uploaded document which has
-    been used as alternative to the eID card.
+    A virtual field displaying a group of buttons for managing the
+    "identifying document", i.e. an uploaded document which has been
+    used as alternative to the eID card.
 
     .. attribute:: group
 
@@ -321,7 +324,11 @@ class Client(contacts.Person,
         # logger.info("20140725 qs is %s", qs)
         return None
 
-    primary_coach = property(get_primary_coach)
+    @dd.displayfield(_('Primary coach'))
+    def primary_coach(self, ar=None):
+        return self.get_primary_coach()
+
+    # primary_coach = property(get_primary_coach)
 
     def update_reminders(self, ar):
         """
@@ -1013,11 +1020,12 @@ class AllClients(Clients):
 
 
 class ClientsTest(Clients):
+    """Table of Clients whose data seems unlogical or inconsistent."""
+    label = _("Data Test Clients")
     help_text = _(
         "Table of Clients whose data seems unlogical or inconsistent.")
     required = dict(user_level='manager')
     use_as_default_table = False
-    label = _("Data Test Clients")
     parameters = dict(
         invalid_niss=models.BooleanField(
             _("Check NISS validity"), default=True),
@@ -1030,14 +1038,14 @@ class ClientsTest(Clients):
     invalid_niss overlapping_contracts only_primary nationality
     """
 
-    column_names = "name_column error_message national_id id"
+    column_names = "name_column error_message national_id id primary_coach"
 
     @classmethod
     def get_row_by_pk(self, ar, pk):
-        """
-        This would be to avoid "AttributeError 'Client' object has no attribute 'error_message'"
-        after a PUT from GridView.
-        Not tested.
+        """This would be to avoid "AttributeError 'Client' object has no
+        attribute 'error_message'" after a PUT from GridView.  Not
+        tested.
+
         """
         obj = super(ClientsTest, self).get_row_by_pk(ar, pk)
         if obj is None:
@@ -1048,36 +1056,36 @@ class ClientsTest(Clients):
     def get_data_rows(self, ar, qs=None):
         """
         """
-        #~ from lino_welfare.modlib.isip.models import OverlappingContractsTest
-        #~ qs = Person.objects.all()
-
         if qs is None:
             qs = self.get_request_queryset(ar)
 
         #~ logger.info("Building ClientsTest data rows...")
         #~ for p in qs.order_by('name'):
+        pv = ar.param_values
         for obj in qs:
             messages = []
-            if ar.param_values.overlapping_contracts:
-                messages += isip.OverlappingContractsTest(obj).check_all()
+            if pv.overlapping_contracts:
+                messages += OverlappingContractsTest(obj).check_all()
 
-            if ar.param_values.invalid_niss and obj.national_id is not None:
+            if pv.invalid_niss and obj.national_id is not None:
                 try:
                     ssin.ssin_validator(obj.national_id)
-                except ValidationError, e:
+                except ValidationError as e:
                     messages += e.messages
 
+            if obj.client_state == ClientStates.coached:
+                if not obj.has_valid_card_data():
+                    qs = Shortcuts.id_document.get_uploads(project=obj)
+                    if qs.count() == 0:
+                        messages.append(unicode(_(
+                            "Neither valid eId data "
+                            "nor alternative identifying document")))
             if messages:
-                #~ client.error_message = ';<br/>'.join([cgi.escape(m) for m in messages])
                 obj.error_message = ';\n'.join(messages)
-                #~ logger.info("%s : %s", p, p.error_message)
                 yield obj
-
-        #~ logger.info("Building ClientsTest data rows: done")
 
     @dd.displayfield(_('Error message'))
     def error_message(self, obj, ar):
-        #~ return obj.error_message.replace('\n','<br/>')
         return obj.error_message
 
 

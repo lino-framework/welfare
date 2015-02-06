@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2014 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -9,16 +9,11 @@ import decimal
 from dateutil.relativedelta import relativedelta
 ONE_DAY = relativedelta(days=1)
 
-from django.db import models
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
-from lino.api import dd
+from lino.api import dd, rt
 
-from lino.utils import i2d
 from lino.utils.instantiator import Instantiator
-from lino.core.utils import resolve_model
 
 accounts = dd.resolve_app('accounts')
 
@@ -369,13 +364,16 @@ def objects():
                                              fr="Emprunts",
                                              en="Debts"
                                              ))
-    #~ yield account(ref="7030",**dd.babel_values('name',
-          #~ de="Gerichtsvollzieher",
-          #~ fr="Huissier de justice",
-          #~ en="Bailiff"
-          #~ ))
     yield account(ref="7040", **dd.babel_values('name',
                                              de="Zahlungsrückstände",
                                              fr="Factures à payer",
                                              en="Invoices to pay"
                                              ))
+
+    ExcerptType = rt.modules.excerpts.ExcerptType
+    kw = dict(
+        template='Default.odt',
+        certifying=True)
+    kw.update(dd.str2kw('name', _("Financial situation")))
+    ExcerptType.update_for_model('debts.Budget', **kw)
+
