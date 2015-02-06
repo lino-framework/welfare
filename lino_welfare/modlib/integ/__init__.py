@@ -21,7 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Plugin(ad.Plugin):
-    "See :doc:`/dev/plugins`."
+    "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("Integration")
 
     def setup_reports_menu(config, site, profile, m):

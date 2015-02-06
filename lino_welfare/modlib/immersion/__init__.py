@@ -24,6 +24,7 @@ from lino import ad
 
 
 class Plugin(ad.Plugin):
+    "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("Immersion trainings")
 
     needs_plugins = ['lino_welfare.modlib.jobs']
@@ -37,6 +38,7 @@ class Plugin(ad.Plugin):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('immersion.ContractTypes')
+        m.add_action('immersion.Goals')
 
     def setup_explorer_menu(self, site, profile, m):
         mg = site.plugins.integ

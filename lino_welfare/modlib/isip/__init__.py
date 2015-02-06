@@ -33,6 +33,6 @@ from lino.api import ad
 
 
 class Plugin(ad.Plugin):
-    "See :doc:`/dev/plugins`."
+    "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("ISIP")
     needs_plugins = ['lino_welfare.modlib.integ']
