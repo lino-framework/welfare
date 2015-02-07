@@ -1,7 +1,7 @@
 # Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Database models for :mod:`lino_welfare.modlib.polls`.
+"""Database models for `lino_welfare.modlib.polls`.
 
 """
 
