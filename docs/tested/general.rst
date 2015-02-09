@@ -146,13 +146,13 @@ result:
  pcsw.Exclusion                 pcsw.Exclusions                 6         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
- polls.AnswerChoice             polls.AnswerChoices             4         0
+ polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarkTable         4         0
- polls.Choice                   polls.Choices                   7         31
- polls.ChoiceSet                polls.ChoiceSets                5         7
- polls.Poll                     polls.Polls                     11        0
- polls.Question                 polls.Questions                 9         0
- polls.Response                 polls.Responses                 7         0
+ polls.Choice                   polls.Choices                   7         35
+ polls.ChoiceSet                polls.ChoiceSets                5         8
+ polls.Poll                     polls.Polls                     11        2
+ polls.Question                 polls.Questions                 9         38
+ polls.Response                 polls.Responses                 7         6
  projects.Project               projects.Projects               10        0
  projects.ProjectType           projects.ProjectTypes           5         0
  properties.PersonProperty      cv.PersonProperties             6         310
@@ -534,7 +534,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
