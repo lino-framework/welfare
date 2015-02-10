@@ -13,13 +13,12 @@
 
 """
 
-from lino import ad
-
-from django.utils.translation import ugettext_lazy as _
+from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):
     verbose_name = _("Active Job Search")
+    short_name = _("AJS")
 
     def setup_explorer_menu(self, site, profile, m):
         menugroup = site.plugins.integ

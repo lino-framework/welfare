@@ -27,21 +27,25 @@ class ClientDetail(dd.FormLayout):
 
     main = "general coaching family \
     career competences #aids_tab sis_tab isip.ContractsByPerson \
-    oi_tab #projects_tab immersion.ContractsByClient \
+    courses_tab projects_tab immersion_tab \
     job_search contracts history calendar misc"
 
-    oi_tab = dd.Panel("""
-    courses.BasicEnrolmentsByPupil
-    courses.JobEnrolmentsByPupil
-    oi_demarches
-    """, label=_("Orientation interne"))
+    courses_tab = dd.Panel(
+        """
+        courses.BasicEnrolmentsByPupil
+        courses.JobEnrolmentsByPupil
+        oi_demarches
+        """,
+        label=dd.plugins.courses.short_name)
+        # help_text=dd.plugins.courses.verbose_name)
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
     national_id:15 civil_state:20 birth_country birth_place \
     declared_name:15 needs_residence_permit:20 needs_work_permit:20
     in_belgium_since:15 residence_type residence_until group:16
-    reception.AppointmentsByPartner:40 reception.AgentsByClient:30 #reception.CoachingsByClient courses.EnrolmentsByPupil:40
+    reception.AppointmentsByPartner:40 reception.AgentsByClient:30 \
+    #reception.CoachingsByClient courses.EnrolmentsByPupil:40
     """, label=_("Person"))
 
     general2 = """
@@ -69,8 +73,7 @@ class ClientDetail(dd.FormLayout):
     """
 
     coaching = dd.Panel("""
-    newcomers_left:20 projects.ProjectsByClient
-    newcomers.AvailableCoachesByClient:40
+    newcomers_left:20 newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
     """, label=_("Coaches"))
 
@@ -89,11 +92,15 @@ class ClientDetail(dd.FormLayout):
 
     job_search = dd.Panel("""
     suche:40  papers:40
-    """, label=dd.plugins.active_job_search.verbose_name)
+    """, label=dd.plugins.active_job_search.short_name)
 
-    # projects_tab = dd.Panel("""
-    # projects.ProjectsByClient
-    # """, label=dd.plugins.projects.verbose_name)
+    projects_tab = dd.Panel("""
+    projects.ProjectsByClient
+    """, label=dd.plugins.projects.verbose_name)
+
+    immersion_tab = dd.Panel("""
+    immersion.ContractsByClient
+    """, label=dd.plugins.immersion.verbose_name)
 
     aids_tab = dd.Panel("""
     sepa.AccountsByClient
@@ -137,7 +144,7 @@ class ClientDetail(dd.FormLayout):
     """, label=dd.plugins.jobs.verbose_name)
 
     sis_tab = dd.Panel("""
-    #courses.IntegEnrolmentsByPupil #isip.ContractsByPerson
+    #isip.ContractsByPerson
     sis_motif sis_attentes
     sis_moteurs sis_objectifs
     """, label=_("SIS"))

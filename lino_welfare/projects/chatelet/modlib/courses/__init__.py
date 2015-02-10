@@ -1,4 +1,4 @@
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -13,3 +13,4 @@ class Plugin(Plugin):
     extends_models = ['Course', 'Line']
     verbose_name = _("Workshops")
     pupil_model = 'pcsw.Client'
+    short_name = _("IO")  # "internal orientation"
