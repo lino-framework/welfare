@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino.api import dd, rt
+from lino.api import dd
 
 from lino_welfare.modlib.pcsw.models import *
 
@@ -18,6 +18,7 @@ from lino_welfare.modlib.pcsw.models import *
 class Client(Client):
     remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
     gesdos_id = models.CharField(_("Gesdos ID"), max_length=40, blank=True)
+    tim_id = models.CharField(_("TIM ID"), max_length=10, blank=True)
 
     is_cpas = models.BooleanField(_("receives social help"), default=False)
     is_senior = models.BooleanField(_("is senior"), default=False)
@@ -53,7 +54,7 @@ class Client(Client):
             '''remarks2
             health_insurance pharmacy
             is_cpas is_senior
-            gesdos_id
+            gesdos_id tim_id
             ''')
 
 
@@ -124,7 +125,7 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Aids"))
 
     status = """
-    in_belgium_since:15 residence_type gesdos_id
+    in_belgium_since:15 residence_type gesdos_id tim_id
     job_agents group:16 aid_type
     """
 

@@ -1,3 +1,14 @@
+# -*- coding: UTF-8 -*-
+# Copyright 2014-2015 Luc Saffre
+# License: BSD (see file COPYING for details)
+"""
+Model mixins for `lino_welfare.modlib.aids`.
+
+.. autosummary::
+
+
+"""
+
 from __future__ import unicode_literals
 
 import logging
@@ -16,12 +27,13 @@ from lino import mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
-from lino.modlib.system.mixins import PeriodEvents
+# from lino.modlib.system.mixins import PeriodEvents
 from lino.modlib.users.mixins import UserAuthored
-from lino.modlib.contacts.utils import parse_name
+from lino.modlib.users.choicelists import UserLevels
+# from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
-from lino.modlib.addresses.mixins import AddressTypes
+# from lino.modlib.addresses.mixins import AddressTypes
 from lino.mixins.periods import rangefmt
 
 from .choicelists import ConfirmationStates
@@ -36,16 +48,27 @@ def e2text(v):
 
 
 class SignConfirmation(dd.Action):
+    """Sign this database object.
+
+    This is available if signer is either empty or equals the
+    requesting user.  Except for system managers who can sign as
+    somebody else by manually setting the signer field before running
+    this action.
+
+    """
     label = pgettext("aids", "Sign")
     show_in_workflow = True
     show_in_bbar = False
 
     # icon_name = 'flag_green'
     required = dd.required(states="requested")
-    help_text = _("You confirm that this aid confirmation is correct.")
+    help_text = _("You sign this confirmation, making most "
+                  "fields read-only.")
 
     def get_action_permission(self, ar, obj, state):
-        if obj.signer is not None and obj.signer != ar.get_user():
+        user = ar.get_user()
+        if obj.signer_id and obj.signer != user \
+           and user.profile.level < UserLevels.manager:
             return False
         return super(SignConfirmation,
                      self).get_action_permission(ar, obj, state)
@@ -54,7 +77,8 @@ class SignConfirmation(dd.Action):
         obj = ar.selected_rows[0]
 
         def ok(ar):
-            obj.signer = ar.get_user()
+            if not obj.signer_id:
+                obj.signer = ar.get_user()
             obj.state = ConfirmationStates.confirmed
             obj.save()
             ar.set_response(refresh=True)
@@ -64,17 +88,54 @@ class SignConfirmation(dd.Action):
         ar.confirm(ok, msg, _("Are you sure?"))
 
 
+class RevokeConfirmation(dd.Action):
+    label = pgettext("aids", "Revoke")
+    show_in_workflow = True
+    show_in_bbar = False
+
+    # icon_name = 'flag_green'
+    required = dd.required(states="confirmed")
+    help_text = _("You revoke your signatore from this confirmation.")
+
+    def get_action_permission(self, ar, obj, state):
+        user = ar.get_user()
+        if obj.signer != user and user.profile.level < UserLevels.manager:
+            return False
+        return super(RevokeConfirmation,
+                     self).get_action_permission(ar, obj, state)
+
+    def run_from_ui(self, ar, **kw):
+        obj = ar.selected_rows[0]
+
+        def ok(ar):
+            # obj.signer = None
+            obj.state = ConfirmationStates.requested
+            obj.save()
+            ar.set_response(refresh=True)
+        d = dict(text=obj.confirmation_text())
+        d.update(client=e2text(obj.client.get_full_name(nominative=True)))
+        msg = _("You revoke your confirmation that %(client)s %(text)s") % d
+        ar.confirm(ok, msg, _("Are you sure?"))
+
+
 class Confirmable(mixins.DatePeriod):
-    """
-    Base class for Granting and for Confirmation
+    """Base class for both :class:`Granting` and :class:`Confirmation`.
 
     .. attribute:: signer
  
     The agent who has signed or is expected to sign this item.
 
+    .. attribute:: state
+
+    The confirmation state of this object. Pointer to
+    :class:`ConfirmationStates`.
+
     """
     class Meta:
         abstract = True
+
+    manager_level_field = None
+    workflow_state_field = 'state'
 
     signer = models.ForeignKey(
         settings.SITE.user_model,
@@ -84,14 +145,9 @@ class Confirmable(mixins.DatePeriod):
     )
 
     state = ConfirmationStates.field(default=ConfirmationStates.requested)
-    workflow_state_field = 'state'
 
     sign = SignConfirmation()
-
-    def disabled_fields(self, ar):
-        if self.state is ConfirmationStates.requested:
-            return set()
-        return self.CONFIRMED_FIELDS
+    revoke = RevokeConfirmation()
 
     @classmethod
     def on_analyze(cls, site):
@@ -103,6 +159,29 @@ class Confirmable(mixins.DatePeriod):
     @classmethod
     def get_confirmable_fields(cls):
         return ''
+
+    def full_clean(self):
+        super(Confirmable, self).full_clean()
+        if self.signer is None and self.state == ConfirmationStates.confirmed:
+            raise ValidationError(_("Cannot confirm without signer!"))
+
+    def get_row_permission(self, ar, state, ba):
+        """A signed confirmation cannot be modified, even not by a privileged
+        user.
+
+        """
+        if not super(Confirmable, self).get_row_permission(ar, state, ba):
+            return False
+        if self.state == ConfirmationStates.confirmed \
+           and self.signer is not None \
+           and self.signer != ar.get_user():
+            return ba.action.readonly
+        return True
+
+    def disabled_fields(self, ar):
+        if self.state is ConfirmationStates.requested:
+            return set()
+        return self.CONFIRMED_FIELDS
 
     def is_past(self):
         return (self.end_date and self.end_date <= dd.today())
@@ -177,7 +256,7 @@ class Confirmation(
 
     allow_cascaded_delete = ['client']
 
-    client = models.ForeignKey(
+    client = dd.ForeignKey(
         'pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_client")
     granting = models.ForeignKey('aids.Granting', blank=True, null=True)
@@ -217,14 +296,12 @@ class Confirmation(
     def get_confirmable_fields(cls):
         return 'client signer granting remark start_date end_date'
 
-    # def get_mailable_type(self):
-    #     return self.granting.aid_type
-
     def get_print_language(self):
         obj = self.recipient
         if obj is not None:
             return obj.language
-        return super(Confirmation, self).get_print_language()
+        return self.client.language
+        # return super(Confirmation, self).get_print_language()
 
     def get_excerpt_options(self, ar, **kw):
         # Set project field when creating an excerpt from Client.

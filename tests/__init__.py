@@ -59,6 +59,9 @@ class DocsTests(BaseTestCase):
     def test_uploads(self):
         return self.run_simple_doctests('docs/tested/uploads.rst')
 
+    def test_dedupe(self):
+        return self.run_simple_doctests('docs/tested/dedupe.rst')
+
     def test_users(self):
         return self.run_simple_doctests('docs/tested/users.rst')
 
@@ -93,7 +96,7 @@ class DocsTests(BaseTestCase):
         return self.run_simple_doctests('docs/tested/reception.rst')
 
     def test_newcomers(self):
-        return self.run_docs_doctests('tested/newcomers.rst')
+        return self.run_simple_doctests('docs/tested/newcomers.rst')
 
     def test_misc(self):
         return self.run_docs_doctests('tested/misc.rst')

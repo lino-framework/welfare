@@ -431,7 +431,7 @@ Version 1.1.3 (released :blogref:`20130505`)
   fehlte in der Tabelle "Guthaben, Schulden, Verpflichtungen" 
   die Kolonne "Monatsrate".
 
-- :ddref:`pcsw.ClientsTest` produced a traceback
+- :ddref:`pcsw.StrangeClients` produced a traceback
   `'NoneType' object has no attribute 'strip'` for Clients 
   with national_id is None.
   

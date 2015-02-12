@@ -14,6 +14,10 @@ them to a script and run it using :manage:`run`.
   
    users
    general
+   pcsw
+   newcomers
+   households
+   dedupe
    aids
    cbss
    courses
@@ -21,16 +25,12 @@ them to a script and run it using :manage:`run`.
    excerpts
    integ
    jobs
-   newcomers
-   households
    misc
-   pcsw
    polls
    reception
    immersion
    uploads
    cv2
-
 
 
 

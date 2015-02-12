@@ -1,16 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014 Luc Saffre
-# This file is part of the Lino-Welfare project.
-# Lino-Welfare is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-# Lino-Welfare is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with Lino-Welfare; if not, see <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 """
 The demo fixture for :mod:`welfare.aids`.
@@ -34,6 +24,7 @@ def objects():
     ClientContactType = rt.modules.pcsw.ClientContactType
     Board = rt.modules.boards.Board
     ExcerptType = rt.modules.excerpts.ExcerptType
+    ConfirmationStates = rt.modules.aids.ConfirmationStates
 
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
@@ -51,6 +42,7 @@ def objects():
     PARTNERS = Cycler(l)
 
     BOARDS = Cycler(Board.objects.all())
+    CONFIRMSTATES = Cycler(ConfirmationStates.objects())
 
     DURATIONS = Cycler(None, 1, 1, 30, 0, None, 365)
 
@@ -72,7 +64,10 @@ def objects():
             if duration is not None:
                 kw.update(end_date=sd+datetime.timedelta(days=duration))
             g = Granting(**kw)
-            g.after_ui_create(None)
+            # g.after_ui_create(None)
+            g.full_clean()
+            if g.signer is not None:
+                g.state = CONFIRMSTATES.pop()
             yield g
 
     # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
@@ -103,6 +98,9 @@ def objects():
             kw.update(user=COACHES.pop())
             kw.update(start_date=g.start_date)
             kw.update(end_date=g.end_date)
+            if g.signer is not None:
+                kw.update(state=CONFIRMSTATES.pop())
+                kw.update(signer=g.signer)
             if ct.model is IncomeConfirmation:
                 kw.update(category=CATEGORIES.pop())
                 kw.update(amount=AMOUNTS.pop())
@@ -117,6 +115,7 @@ def objects():
                 # only the first confirmation has a pharmacy
                 if g.aid_type.pharmacy_type == pharmacy_type and j == 0:
                     kw.update(pharmacy=pharmacy)
+
             yield ct.model(**kw)
 
         # for two refund grantings, create the corresponding

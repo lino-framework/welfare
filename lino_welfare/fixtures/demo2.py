@@ -1,9 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-
-from lino import rt
+from lino.api import rt
 
 
 def objects():

@@ -206,16 +206,18 @@ def faculty_weight(user, client):
 
 
 class NewClients(pcsw.Clients):
-    "A list of clients designed for newcomers consultats."
+    "A list of clients designed for newcomers consultants."
     required = dict(user_groups='newcomers')
     label = _("New Clients")
     use_as_default_table = False
 
     help_text = u"""\
-Liste der neuen Klienten zwecks Zuweisung 
+Liste der neuen Klienten zwecks Zuweisung
 eines Begleiters oder Ablehnen des Hilfeantrags."""
 
-    column_names = "name_column:20 client_state broker faculty national_id:10 gsm:10 address_column age:10 email phone:10 id aid_type language:10 *"
+    column_names = ("name_column:20 client_state broker faculty "
+                    "national_id:10 gsm:10 address_column age:10 "
+                    "email phone:10 id aid_type language:10 *")
 
     parameters = dict(
         also_refused=models.BooleanField(_("Also refused clients"),
@@ -223,14 +225,15 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
         also_obsolete=models.BooleanField(
             _("Also obsolete records"),
             default=False),
-        #~ new_since = models.DateField(_("New clients since"),blank=True),
-        new_since=models.DateField(_("New clients since"),
-                                   #~ default=amonthago,
-          blank=True, null=True, help_text=u"""\
-Auch Klienten, die erst seit Kurzem begleitet sind."""),
-        coached_by=models.ForeignKey('users.User',
-                                     blank=True, null=True,
-                                     verbose_name=_("Coached by")),
+        new_since=models.DateField(
+            _("New clients since"),
+            #~ default=amonthago,
+            blank=True, null=True,
+            help_text="Auch Klienten, die erst seit Kurzem begleitet sind."),
+        coached_by=models.ForeignKey(
+            'users.User',
+            blank=True, null=True,
+            verbose_name=_("Coached by")),
         #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
     )
     params_layout = 'new_since also_refused also_obsolete coached_by'
@@ -254,7 +257,7 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
 
         if ar.param_values.also_refused:
             q = q | models.Q(client_state=pcsw.ClientStates.refused)
-        #~ q = models.Q(client_state__in=(pcsw.ClientStates.new,pcsw.ClientStates.refused))
+
         if ar.param_values.new_since:
             q = q | models.Q(
                 client_state=pcsw.ClientStates.coached,
@@ -265,9 +268,6 @@ Auch Klienten, die erst seit Kurzem begleitet sind."""),
             qs = pcsw.only_coached_by(qs, ar.param_values.coached_by)
         if not ar.param_values.also_obsolete:
             qs = qs.filter(is_obsolete=False)
-        #~ if not ar.param_values.also_refused:
-            #~ qs = qs.filter(client_status=False)
-        #~ logger.info('20120914 Clients.get_request_queryset --> %d',qs.count())
         return qs
 
     @classmethod

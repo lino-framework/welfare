@@ -1,28 +1,39 @@
+# -*- coding: UTF-8 -*-
+# Copyright 2014-2015 Luc Saffre
+# License: BSD (see file COPYING for details)
+"""
+Choicelists for `lino_welfare.modlib.aids`.
+
+.. autosummary::
+
+
+"""
+
 from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
-import types
+# import types
 
-from django.conf import settings
+# from django.conf import settings
 from django.db import models
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy as pgettext
+# from django.utils.translation import pgettext_lazy as pgettext
 
 from lino.api import dd, rt
-from lino import mixins
+# from lino import mixins
 
-from lino.utils.xmlgen.html import E
-from lino.utils.ranges import encompass
+# from lino.utils.xmlgen.html import E
+# from lino.utils.ranges import encompass
 
-from lino.modlib.system.mixins import PeriodEvents
-from lino.modlib.users.mixins import UserAuthored
-from lino.modlib.contacts.utils import parse_name
-from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.excerpts.mixins import Certifiable
-from lino.modlib.addresses.mixins import AddressTypes
-from lino.mixins.periods import rangefmt
+# from lino.modlib.system.mixins import PeriodEvents
+# from lino.modlib.users.mixins import UserAuthored
+# from lino.modlib.contacts.utils import parse_name
+# from lino.modlib.contacts.mixins import ContactRelated
+# from lino.modlib.excerpts.mixins import Certifiable
+# from lino.modlib.addresses.mixins import AddressTypes
+# from lino.mixins.periods import rangefmt
 
 
 class ConfirmationType(dd.Choice):
@@ -37,7 +48,7 @@ class ConfirmationType(dd.Choice):
         super(ConfirmationType, self).__init__(value, text, name)
 
     def get_aidtypes(self):
-        return AidType.objects.filter(confirmation_type=self)
+        return rt.modules.aids.AidType.objects.filter(confirmation_type=self)
 
 
 class ConfirmationTypes(dd.ChoiceList):

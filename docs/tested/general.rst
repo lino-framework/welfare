@@ -100,8 +100,8 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
- excerpts.Excerpt               excerpts.ExcerptsByX            12        88
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
+ excerpts.Excerpt               excerpts.ExcerptsByX            12        89
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
  households.Household           households.Households           29        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
@@ -811,7 +811,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -819,7 +819,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Polls : Meine Polls, Meine Responses
 - Berichte :
   - System : Stale Controllables
-  - ÖSHZ : Datenkontrolle Klienten
+  - ÖSHZ : Aktenkontrollliste
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte
@@ -869,20 +869,30 @@ Hubert is an Integration agent.
 >>> ses = rt.login('hubert') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Meine Warteschlange
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
+- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
+- Polls : Meine Polls, Meine Responses
 - Berichte :
+  - System : Stale Controllables
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
+  - Orte : Länder
+  - Lebenslauf : Sprachen
+  - Polls : Choice Sets
 - Explorer :
-  - DSBE : VSEs, Art.60§7-Konventionen
+  - Büro : Upload-Bereiche
+  - Kontakte : Adressenarten, Rollen
+  - SEPA : Konten
+  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - DSBE : VSEs, Art.60§7-Konventionen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
+  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
 - Site : Info
 
 
@@ -896,28 +906,37 @@ Mélanie is the manager of the Integration service.
 >>> ses = rt.login('melanie') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Meine Warteschlange
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote
+- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
+- Polls : Meine Polls, Meine Responses
 - Berichte :
+  - System : Stale Controllables
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
+  - Orte : Länder
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Ereignisarten, Externe Kalender
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Sektoren, Funktionen, Stundenpläne, Regimes
+  - Lebenslauf : Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
+  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
+  - Polls : Choice Sets
 - Explorer :
-  - Büro : E-Mail-Ausgänge, Anhänge
+  - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
+  - Kontakte : Adressenarten, Rollen
   - Kalender : Aufgaben, Abonnements
-  - CV : Sprachkenntnisse
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Ausbildungen und Studien
+  - SEPA : Konten
+  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
   - Kurse : Kursanfragen
+  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
 - Site : Info
 
 

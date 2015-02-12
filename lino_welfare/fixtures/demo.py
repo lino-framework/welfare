@@ -1071,6 +1071,20 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
         obj.get_primary_address()
 
-
+    # have partners speak different languages
+    # most partners speak first language
+    if len(settings.SITE.languages):
+        ld = []  # language distribution
+        ld = [settings.SITE.languages[0].django_code] * 10
+        if len(settings.SITE.languages) > 1:
+            ld += [settings.SITE.languages[1].django_code] * 3
+            if len(settings.SITE.languages) > 2:
+                ld += [settings.SITE.languages[2].django_code]
+        LANGS = Cycler(ld)
+        for obj in settings.SITE.modules.contacts.Partner.objects.all():
+            obj.language = LANGS.pop()
+            obj.save()
+            
+        
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")

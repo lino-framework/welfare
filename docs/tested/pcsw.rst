@@ -7,6 +7,7 @@ General PCSW
 ..
   This document is part of the test suite.
   To test only this document, run::
+
     $ python setup.py test -s tests.DocsTests.test_pcsw
 
 A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
@@ -28,122 +29,62 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 >>> ses = rt.login('robin')
 >>> translation.activate('en')
 
-ClientsTest
-===========
+StrangeClients
+==============
 
->>> ses.show(pcsw.ClientsTest)
-============================= ============================================================= =============== ===== =================
- Name                          Error message                                                 National ID     ID    Primary coach
------------------------------ ------------------------------------------------------------- --------------- ----- -----------------
- AUSDEMWALD Alfons (116)       Neither valid eId data nor alternative identifying document   980526 001-51   116   Caroline Carnol
- COLLARD Charlotte (118)       Neither valid eId data nor alternative identifying document   960715 002-61   118   Hubert Huppertz
- DOBBELSTEIN Dorothée (124)    Neither valid eId data nor alternative identifying document   940904 002-72   124   Mélanie Mélard
- DUBOIS Robin (179)            Neither valid eId data nor alternative identifying document   930929 001-78   179   Hubert Huppertz
- EMONTS Daniel (128)           Neither valid eId data nor alternative identifying document   921024 001-20   128   Mélanie Mélard
- EMONTS-GAST Erna (152)        Neither valid eId data nor alternative identifying document   911119 002-58   152   Hubert Huppertz
- ENGELS Edgar (129)            Neither valid eId data nor alternative identifying document   901214 001-01   129   Mélanie Mélard
- EVERS Eberhart (127)          Neither valid eId data nor alternative identifying document   900108 001-07   127   Alicia Allmanns
- GROTECLAES Gregory (132)      Neither valid eId data nor alternative identifying document   880228 001-51   132   Alicia Allmanns
- HILGERS Hildegard (133)       Neither valid eId data nor alternative identifying document   870325 002-29   133   Mélanie Mélard
- JACOBS Jacqueline (137)       Neither valid eId data nor alternative identifying document   860419 002-01   137   Caroline Carnol
- JEANÉMART Jérôme (181)        Neither valid eId data nor alternative identifying document   850514 001-41   181   Hubert Huppertz
- JONAS Josef (139)             Neither valid eId data nor alternative identifying document   840608 001-13   139   Hubert Huppertz
- KAIVERS Karl (141)            Neither valid eId data nor alternative identifying document   830704 001-22   141   Mélanie Mélard
- KELLER Karl (178)             Neither valid eId data nor alternative identifying document   820729 001-27   178   Hubert Huppertz
- LAMBERTZ Guido (142)          Neither valid eId data nor alternative identifying document   810823 001-96   142   Mélanie Mélard
- LAZARUS Line (144)            Neither valid eId data nor alternative identifying document   800917 002-67   144   Mélanie Mélard
- MALMENDIER Marc (146)         Neither valid eId data nor alternative identifying document   791013 001-77   146   Hubert Huppertz
- MEESSEN Melissa (147)         Neither valid eId data nor alternative identifying document   781107 002-48   147   Mélanie Mélard
- RADERMACHER Alfons (153)      Neither valid eId data nor alternative identifying document   771202 001-88   153   Mélanie Mélard
- RADERMACHER Christian (155)   Neither valid eId data nor alternative identifying document   761227 001-93   155   Alicia Allmanns
- RADERMACHER Edgard (157)      Neither valid eId data nor alternative identifying document   760122 001-69   157   Caroline Carnol
- RADERMACHER Guido (159)       Neither valid eId data nor alternative identifying document   750216 001-41   159   Mélanie Mélard
- RADERMACHER Hedi (161)        Neither valid eId data nor alternative identifying document   740313 002-19   161   Caroline Carnol
- RADERMECKER Rik (173)         Neither valid eId data nor alternative identifying document   730407 001-89   173   Mélanie Mélard
- DA VINCI David (165)          Neither valid eId data nor alternative identifying document   720502 001-31   165   Hubert Huppertz
- VAN VEEN Vincent (166)        Neither valid eId data nor alternative identifying document   710528 001-06   166   Hubert Huppertz
- ÖSTGES Otto (168)             Neither valid eId data nor alternative identifying document   700622 001-75   168   Hubert Huppertz
-============================= ============================================================= =============== ===== =================
+>>> ses.show(pcsw.StrangeClients)
+============================= ============================================================= =================
+ Name                          Error message                                                 Primary coach
+----------------------------- ------------------------------------------------------------- -----------------
+ AUSDEMWALD Alfons (116)       Neither valid eId data nor alternative identifying document   Caroline Carnol
+ COLLARD Charlotte (118)       Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ DOBBELSTEIN Dorothée (124)    Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ DUBOIS Robin (179)            Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ EMONTS Daniel (128)           Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ EMONTS-GAST Erna (152)        Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ ENGELS Edgar (129)            Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ EVERS Eberhart (127)          Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ GROTECLAES Gregory (132)      Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ HILGERS Hildegard (133)       Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ JACOBS Jacqueline (137)       Neither valid eId data nor alternative identifying document   Caroline Carnol
+ JEANÉMART Jérôme (181)        Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ JONAS Josef (139)             Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ KAIVERS Karl (141)            Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ KELLER Karl (178)             Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ LAMBERTZ Guido (142)          Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ LAZARUS Line (144)            Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ MALMENDIER Marc (146)         Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ MEESSEN Melissa (147)         Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ RADERMACHER Alfons (153)      Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ RADERMACHER Christian (155)   Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ RADERMACHER Edgard (157)      Neither valid eId data nor alternative identifying document   Caroline Carnol
+ RADERMACHER Guido (159)       Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ RADERMACHER Hedi (161)        Neither valid eId data nor alternative identifying document   Caroline Carnol
+ RADERMECKER Rik (173)         Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ DA VINCI David (165)          Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ VAN VEEN Vincent (166)        Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ ÖSTGES Otto (168)             Neither valid eId data nor alternative identifying document   Hubert Huppertz
+============================= ============================================================= =================
 <BLANKLINE>
 
 
+The MyStrangeClients table (here e.g. Alicia's) shows only those
+strange client for whom :
 
-Similar Persons
----------------
-
-The test database contains some examples of accidental duplicate data
-entry.
-
-One fictive person exists 3 times:
-
-- Dorothée Dobbelstein-Demeulenaere
-- Dorothée Demeulenaere
-- Dorothée Dobbelstein
-
-Here we try to create a fourth one:
-
->>> obj = pcsw.Client(first_name=u"Dorothée", last_name="Dobbelstein")
->>> dedupe.SimilarPersons.get_words(obj)
-set([u'Dobbelstein', u'Doroth\xe9e'])
->>> ses.show(dedupe.SimilarPersons, obj)
-================================================= ==========
- Other                                             Workflow
-------------------------------------------------- ----------
- **Mrs Dorothée DOBBELSTEIN (124)**
- **Mrs Dorothée DOBBELSTEIN-DEMEULENAERE (123)**
-================================================= ==========
+>>> rt.login('alicia').show(pcsw.MyStrangeClients)
+============================= ============================================================= =================
+ Name                          Error message                                                 Primary coach
+----------------------------- ------------------------------------------------------------- -----------------
+ AUSDEMWALD Alfons (116)       Neither valid eId data nor alternative identifying document   Caroline Carnol
+ EVERS Eberhart (127)          Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ GROTECLAES Gregory (132)      Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ JEANÉMART Jérôme (181)        Neither valid eId data nor alternative identifying document   Hubert Huppertz
+ KAIVERS Karl (141)            Neither valid eId data nor alternative identifying document   Mélanie Mélard
+ RADERMACHER Christian (155)   Neither valid eId data nor alternative identifying document   Alicia Allmanns
+ DA VINCI David (165)          Neither valid eId data nor alternative identifying document   Hubert Huppertz
+============================= ============================================================= =================
 <BLANKLINE>
 
-Note that *Mrs Dorothée Demeulenaere (122)* is missing. Our algorithm
-detects only two of the existing three duplicates.
-
-
-For the following tests we write a utility function:
-
->>> def check(first_name, last_name):
-...     obj = pcsw.Client(first_name=first_name, last_name=last_name)
-...     qs = ses.spawn(dedupe.SimilarPersons, master_instance=obj)
-...     return [unicode(r) for r in qs.data_iterator]
-
-This function returns the names of the persons that Lino would detect
-as duplicates, depending on the given first_name and last_name.
-
->>> check("Bernard", "Bodard")
-[u'Bernard BODARD (170*)']
-
-Without our utility function the above test would be less readable:
-
->>> obj = pcsw.Client(first_name="Bernard", last_name="Bodard")
->>> ses.show(dedupe.SimilarPersons, obj)
-=========================== ==========
- Other                       Workflow
---------------------------- ----------
- **Bernard BODARD (170*)**
-=========================== ==========
-<BLANKLINE>
-
-Some users tend to mix up first and last name. Lino would detect that:
-
->>> check("Bodard", "Bernard")
-[u'Bernard BODARD (170*)']
-
->>> check("Erna", "Odar")
-[u'Bernard BODARD (170*)']
-
-The following duplicates are **not yet** detected though they obviously
-should. We are still experimenting...
-
->>> check("Bernard-Marie", "Bodard")
-[]
-
->>> check("Marie", "Bernard-Bodard")
-[]
-
-The following duplicate is not detected because Lino doesn't yet use
-phonetic algorithms:
-
->>> check("Bernhard", "Bodard")
-[]
 
 
 eID card summary

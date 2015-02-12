@@ -199,17 +199,9 @@ class AidTypes(dd.Table):
     """
 
 
-@dd.receiver(dd.pre_analyze)
-def setup_aids_workflows(sender=None, **kw):
-
-    ConfirmationStates.requested.add_transition(
-        _("Revoke"), states='confirmed')
-
-
 ##
 ## Granting
 ##
-
 
 class GrantingManager(models.Manager):
 
@@ -266,7 +258,9 @@ class Granting(Confirmable, BoardDecision):
     def full_clean(self):
         super(Granting, self).full_clean()
         # dd.logger.info("20150204 %s %s", self.client_id, self.aid_type_id)
-        if self.client_id and self.aid_type_id \
+        if self.client_id \
+           and not self.signer_id \
+           and self.aid_type_id \
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
         
@@ -287,13 +281,10 @@ class Granting(Confirmable, BoardDecision):
     def custom_actions(self, ar, **kw):
         if self.aid_type_id is None:
             return ''
-        # kv = dict(client=self.client)
-        # kv.update(granting=self)
         at = self.aid_type
         ct = at.confirmation_type
         if not ct:
             return ''
-        # sar = ar.spawn(ct.table_class, known_values=kv)
         sar = ar.spawn(ct.table_class, master_instance=self)
         txt = _("Create confirmation")
         btn = sar.insert_button(txt, icon_name=None)
@@ -389,6 +380,7 @@ class MyPendingGrantings(Grantings):
     column_names = "client aid_type start_date " \
                    "end_date user workflow_buttons *"
     label = _("Grantings to confirm")
+    auto_fit_column_widths = True
 
     @classmethod
     def get_welcome_messages(cls, ar):
@@ -526,17 +518,19 @@ class PrintConfirmation(dd.Action):
 
 
 class ConfirmationsByGranting(dd.VirtualTable):
+    """Shows the confirmations issued for a given granting.
 
-    # This is a "pseudo-virtual" table because it operates on normal
-    # database objects.  It needs to be virtual because Confirmation
-    # is an abstract model.  In order to have a detail and a print
-    # function, it must define `get_pk_field` and `get_row_by_pk`.
+    This is a "pseudo-virtual" table because it operates on normal
+    database objects.  It needs to be virtual because Confirmation
+    is an abstract model.  In order to have a detail and a print
+    function, it must define `get_pk_field` and `get_row_by_pk`.
+    """
 
     label = _("Issued confirmations")
     required = dd.required(user_groups='office')
     master = 'aids.Granting'
     master_key = 'granting'
-    column_names = "description_column created user printed " \
+    column_names = "description_column created user signer printed " \
                    "start_date end_date *"
     do_print = PrintConfirmation()
 
@@ -584,6 +578,10 @@ class ConfirmationsByGranting(dd.VirtualTable):
     @dd.virtualfield('aids.SimpleConfirmation.user')
     def user(self, obj, ar):
         return obj.user
+
+    @dd.virtualfield('aids.SimpleConfirmation.signer')
+    def signer(self, obj, ar):
+        return obj.signer
 
     @dd.displayfield(_('Printed'))
     def printed(self, obj, ar):

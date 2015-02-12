@@ -763,7 +763,6 @@ def has_contracts_filter(prefix, period):
     return f1 & f2 & Q(**{prefix+'__applies_from__lte': period[1]})
 
 
-
 class Clients(contacts.Persons):
     "The default definition for :actor:`pcsw.Clients`. "
     # debug_permissions = '20150129'
@@ -1005,26 +1004,13 @@ class AllClients(Clients):
     column_names = '*'
     required = dd.Required(user_level='admin')
 
-#~ class MyClients(integ.Clients):
-    #~ label = _("Integration Clients")
-    # ~ # label = _("My clients")
-    #~ required = dict(user_groups = 'integ')
-    #~ use_as_default_table = False
 
-    #~ @classmethod
-    #~ def param_defaults(self,ar,**kw):
-        #~ kw = super(MyClients,self).param_defaults(ar,**kw)
-        #~ kw.update(coached_by=ar.get_user())
-        # ~ # print "20120918 MyClients.param_defaults", kw['coached_by']
-        #~ return kw
-
-
-class ClientsTest(Clients):
+class StrangeClients(Clients):
     """Table of Clients whose data seems unlogical or inconsistent."""
-    label = _("Data Test Clients")
+    label = _("Strange Clients")
     help_text = _(
         "Table of Clients whose data seems unlogical or inconsistent.")
-    required = dict(user_level='manager')
+    required = dd.Required(user_level='manager')
     use_as_default_table = False
     parameters = dict(
         invalid_niss=models.BooleanField(
@@ -1038,7 +1024,7 @@ class ClientsTest(Clients):
     invalid_niss overlapping_contracts only_primary nationality
     """
 
-    column_names = "name_column error_message national_id id primary_coach"
+    column_names = "name_column error_message primary_coach"
 
     @classmethod
     def get_row_by_pk(self, ar, pk):
@@ -1047,7 +1033,7 @@ class ClientsTest(Clients):
         tested.
 
         """
-        obj = super(ClientsTest, self).get_row_by_pk(ar, pk)
+        obj = super(StrangeClients, self).get_row_by_pk(ar, pk)
         if obj is None:
             return obj
         return list(self.get_data_rows(ar, [obj]))[0]
@@ -1059,7 +1045,7 @@ class ClientsTest(Clients):
         if qs is None:
             qs = self.get_request_queryset(ar)
 
-        #~ logger.info("Building ClientsTest data rows...")
+        #~ logger.info("Building StrangeClients data rows...")
         #~ for p in qs.order_by('name'):
         pv = ar.param_values
         for obj in qs:
@@ -1087,6 +1073,20 @@ class ClientsTest(Clients):
     @dd.displayfield(_('Error message'))
     def error_message(self, obj, ar):
         return obj.error_message
+
+
+class MyStrangeClients(StrangeClients):
+    label = _("My strange clients")
+    required = dd.Required(user_groups='coaching')
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(MyStrangeClients, self).param_defaults(ar, **kw)
+        kw.update(client_state=ClientStates.coached)
+        kw.update(coached_by=ar.get_user())
+        kw.update(start_date=dd.today())
+        kw.update(end_date=dd.today())
+        return kw
 
 
 #
