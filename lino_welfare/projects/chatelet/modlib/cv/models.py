@@ -18,6 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 
 from lino.modlib.cv.models import *
+from lino.core.signals import pre_ui_save
 
 
 LanguageKnowledgesByPerson.column_names = "language native spoken \
@@ -34,13 +35,15 @@ class Proofs(dd.Table):
     model = 'cv.Proof'
 
 
-
 class PersonProperty(dd.Model):
+    """Abstract base for :class:`Skill`, :class:`SoftSkill` and
+    :class:`Obstacle`.
 
-    allow_cascaded_delete = ['person']
-
+    """
     class Meta:
         abstract = True
+
+    allow_cascaded_delete = ['person']
 
     person = models.ForeignKey(config.person_model)
     remark = models.CharField(max_length=200,
@@ -127,10 +130,15 @@ class Obstacle(PersonProperty):
         verbose_name_plural = _("Obstacles")
     type = dd.ForeignKey('cv.ObstacleType', verbose_name=_("Type"))
     user = dd.ForeignKey(
-        'users.User',
+        settings.SITE.user_model,
         related_name='obstacles_detected',
         verbose_name=_("Detected by"),
         blank=True, null=True)
+
+
+@dd.receiver(pre_ui_save, sender=Obstacle)
+def on_create(sender, instance=None, ar=None, **kwargs):
+    instance.user = ar.get_user()
 
 
 class Obstacles(dd.Table):

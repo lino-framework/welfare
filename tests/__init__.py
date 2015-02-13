@@ -38,10 +38,12 @@ class ProjectsTests(BaseTestCase):
             'lino_welfare', 'projects', 'eupen').absolute()
         self.run_django_manage_test(cwd)
 
-    # def test_chatelet(self):
-    #     self.run_django_manage_test('lino_welfare/projects/chatelet')
+    def test_chatelet(self):
+        cwd = self.project_root.child(
+            'lino_welfare', 'projects', 'chatelet').absolute()
+        self.run_django_manage_test(cwd)
 
-    
+
 class PackagesTests(BaseTestCase):
 
     def test_packages(self):
