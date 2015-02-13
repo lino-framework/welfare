@@ -12,24 +12,8 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-import os
-import cgi
-import datetime
 
-from django.db import models
-from django.db.models import Q
-from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
-from django.utils import translation
-from django.contrib.humanize.templatetags.humanize import naturaltime
-
-
-from lino.api import dd, rt
-from lino.core.utils import get_field
-
-from lino.utils.xmlgen.html import E
-from lino.modlib.cal.utils import DurationUnits, update_reminder
+from lino.api import dd, _
 
 
 class CivilState(dd.ChoiceList):
@@ -105,10 +89,12 @@ add = ClientEvents.add_item
 #~ add('10', _("Coached"),'coached')
 add('10', _("Active"), 'active')
 add('20', _("ISIP"), 'isip')
-add('21', _("Art.60§7 contract"), 'jobs')
+add('21', _("Art60§7 job supplyment"), 'jobs')
 add('22', _("Dispense"), 'dispense')
-if dd.is_installed('trainings'):
-    add('23', _("Training"), 'training')
+if dd.is_installed('immersion'):
+    add('23', _("Immersion training"), 'immersion')
+if dd.is_installed('art61'):
+    add('24', _("Art61 job supplyment"), 'art61')
 add('30', _("Penalty"), 'penalty')
 add('31', _("Exclusion"), 'exclusion')
 add('40', _("Note"), 'note')

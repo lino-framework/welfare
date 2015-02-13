@@ -821,21 +821,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         the query filter.
 
         """
-        #~ if ar.param_values.client_state == '':
-            #~ raise Exception(20130901)
-        #~ logger.info("20121010 Clients.get_request_queryset %s",ar.param_values)
         qs = super(Clients, self).get_request_queryset(ar)
-        #~ if ar.param_values.new_since:
-            #~ qs = only_new_since(qs,ar.param_values.new_since)
-
-        #~ print(20130901,ar.param_values)
-
-        # 20140912 don't remember why blank period was interpreted in
-        # a special way for coached_by and and_coached_by...
-        # if ar.param_values.start_date is None or ar.param_values.end_date is None:
-        #     period = None
-        # else:
-        #     period = (ar.param_values.start_date, ar.param_values.end_date)
 
         pv = ar.param_values
         period = [pv.start_date, pv.end_date]
@@ -846,15 +832,11 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         ce = pv.observed_event
         if pv.coached_by or ce or pv.start_date or pv.end_date:
-            qs = add_coachings_filter(qs,
-                                      pv.coached_by,
-                                      period,
-                                      pv.only_primary)
+            qs = add_coachings_filter(
+                qs, pv.coached_by, period, pv.only_primary)
             if pv.and_coached_by:
-                qs = add_coachings_filter(qs,
-                                          pv.and_coached_by,
-                                          period,
-                                          False)
+                qs = add_coachings_filter(
+                    qs, pv.and_coached_by, period, False)
 
         if ce is None:
             pass
@@ -867,9 +849,9 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         elif ce == ClientEvents.jobs:
             flt = has_contracts_filter('jobs_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
-        elif ce == ClientEvents.training:
+        elif ce == ClientEvents.immersion:
             flt = has_contracts_filter(
-                'trainings_training_set_by_client', period)
+                'immersion_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
 
         elif ce == ClientEvents.available:
@@ -877,9 +859,9 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             # or some trainings.Training" and then `exclude` it.
             flt = has_contracts_filter('isip_contract_set_by_client', period)
             flt |= has_contracts_filter('jobs_contract_set_by_client', period)
-            if dd.is_installed('trainings'):
+            if dd.is_installed('immersion'):
                 flt |= has_contracts_filter(
-                    'trainings_training_set_by_client', period)
+                    'immersion_contract_set_by_client', period)
             qs = qs.exclude(flt).distinct()
 
         elif ce == ClientEvents.dispense:
@@ -890,13 +872,15 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             qs = qs.filter(
                 created__gte=datetime.datetime.combine(
                     period[0], datetime.time()),
-                created__lte=datetime.datetime.combine(period[1], datetime.time()))
+                created__lte=datetime.datetime.combine(
+                    period[1], datetime.time()))
             #~ print 20130527, qs.query
         elif ce == ClientEvents.modified:
             qs = qs.filter(
                 modified__gte=datetime.datetime.combine(
                     period[0], datetime.time()),
-                modified__lte=datetime.datetime.combine(period[1], datetime.time()))
+                modified__lte=datetime.datetime.combine(
+                    period[1], datetime.time()))
         elif ce == ClientEvents.penalty:
             qs = qs.filter(
                 exclusion__excluded_until__gte=period[0],
@@ -942,29 +926,30 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
     def get_title_tags(self, ar):
         for t in super(Clients, self).get_title_tags(ar):
             yield t
-        if ar.param_values.aged_from or ar.param_values.aged_to:
+        pv = ar.param_values
+        if pv.aged_from or pv.aged_to:
             yield unicode(_("Aged %(min)s to %(max)s") % dict(
-                min=ar.param_values.aged_from or'...',
-                max=ar.param_values.aged_to or '...'))
+                min=pv.aged_from or'...',
+                max=pv.aged_to or '...'))
 
-        if ar.param_values.observed_event:
-            yield unicode(ar.param_values.observed_event)
+        if pv.observed_event:
+            yield unicode(pv.observed_event)
 
-        if ar.param_values.client_state:
-            yield unicode(ar.param_values.client_state)
+        if pv.client_state:
+            yield unicode(pv.client_state)
 
-        if ar.param_values.start_date is None or ar.param_values.end_date is None:
+        if pv.start_date is None or pv.end_date is None:
             period = None
         else:
             period = daterange_text(
-                ar.param_values.start_date, ar.param_values.end_date)
+                pv.start_date, pv.end_date)
 
-        if ar.param_values.coached_by:
+        if pv.coached_by:
             s = unicode(self.parameters['coached_by'].verbose_name) + \
-                ' ' + unicode(ar.param_values.coached_by)
-            if ar.param_values.and_coached_by:
+                ' ' + unicode(pv.coached_by)
+            if pv.and_coached_by:
                 s += " %s %s" % (unicode(_('and')),
-                                 ar.param_values.and_coached_by)
+                                 pv.and_coached_by)
 
             if period:
                 yield s \
@@ -974,7 +959,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         elif period:
             yield _("Coached on %s") % period
 
-        if ar.param_values.only_primary:
+        if pv.only_primary:
             #~ yield unicode(_("primary"))
             yield unicode(self.parameters['only_primary'].verbose_name)
 

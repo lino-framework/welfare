@@ -1,18 +1,15 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
-"""
-Database models for :mod:`lino_welfare.modlib.newcomers`.
+"""Database models for :mod:`lino_welfare.modlib.newcomers`.
 
-Defines the models 
-:class:`Broker`,
-:class:`Faculty` and
+Defines the models :class:`Broker`, :class:`Faculty` and
 :class:`Competence`.
 
-Tables like 
-:class:`NewClients`,
-:class:`AvailableCoaches`,
+Tables like :class:`NewClients`, :class:`AvailableCoaches`,
 :class:`AvailableCoachesByClient`.
+
+See also :ref:`welfare.tested.newcomers`.
 
 """
 
@@ -146,7 +143,7 @@ class Competences(dd.Table):
     #~ required_user_groups = ['newcomers']
     #~ required_user_level = UserLevels.manager
     model = Competence
-    column_names = 'id *'
+    column_names = 'id user faculty weight *'
     order_by = ["id"]
 
 
@@ -206,7 +203,11 @@ def faculty_weight(user, client):
 
 
 class NewClients(pcsw.Clients):
-    "A list of clients designed for newcomers consultants."
+    """A variant of :class:`pcsw.Clients
+    <lino_welfare.modlib.pcsw.models.Clients>` designed for newcomers
+    consultants.
+
+    """
     required = dict(user_groups='newcomers')
     label = _("New Clients")
     use_as_default_table = False
@@ -217,70 +218,41 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
 
     column_names = ("name_column:20 client_state broker faculty "
                     "national_id:10 gsm:10 address_column age:10 "
-                    "email phone:10 id aid_type language:10 *")
+                    "email phone:10 *")
 
     parameters = dict(
-        also_refused=models.BooleanField(_("Also refused clients"),
-                                         default=False),
-        also_obsolete=models.BooleanField(
-            _("Also obsolete records"),
-            default=False),
         new_since=models.DateField(
             _("New clients since"),
-            #~ default=amonthago,
             blank=True, null=True,
             help_text="Auch Klienten, die erst seit Kurzem begleitet sind."),
-        coached_by=models.ForeignKey(
-            'users.User',
-            blank=True, null=True,
-            verbose_name=_("Coached by")),
-        #~ coached_on = models.DateField(_("Coached on"),blank=True,null=True),
-    )
-    params_layout = 'new_since also_refused also_obsolete coached_by'
+        **pcsw.Clients.parameters)
+
+    params_layout = 'client_state new_since also_obsolete coached_by'
 
     @classmethod
     def param_defaults(self, ar, **kw):
-        # Note that we skip pcsw.Clients mro parent
-        #~ kw = super(NewClients,self).param_defaults(ar,**kw)
-        kw = super(contacts.Persons, self).param_defaults(ar, **kw)
-        kw.update(new_since=amonthago())
+        kw = super(NewClients, self).param_defaults(ar, **kw)
+        kw.update(client_state=pcsw.ClientStates.newcomer)
+        # kw.update(new_since=amonthago())
         return kw
 
     @classmethod
     def get_request_queryset(self, ar):
-        # Note that we skip pcsw.Clients mro parent
-        #~ qs = super(pcsw.Clients,self).get_request_queryset(ar)
-        qs = super(contacts.Persons, self).get_request_queryset(ar)
-        #~ qs = dd.Table.get_request_queryset(ar)
-
-        q = models.Q(client_state=pcsw.ClientStates.newcomer)
-
-        if ar.param_values.also_refused:
-            q = q | models.Q(client_state=pcsw.ClientStates.refused)
-
-        if ar.param_values.new_since:
-            q = q | models.Q(
-                client_state=pcsw.ClientStates.coached,
-                coachings_by_client__start_date__gte=ar.param_values.new_since)
-        qs = qs.filter(q)
-
-        if ar.param_values.coached_by:
-            qs = pcsw.only_coached_by(qs, ar.param_values.coached_by)
-        if not ar.param_values.also_obsolete:
-            qs = qs.filter(is_obsolete=False)
+        qs = super(NewClients, self).get_request_queryset(ar)
+        pv = ar.param_values
+        if pv.new_since:
+            qs = qs.filter(
+                coachings_by_client__start_date__gte=pv.new_since)
         return qs
 
     @classmethod
     def get_title_tags(self, ar):
-        if ar.param_values.also_refused:
-            yield unicode(self.parameters['also_refused'].verbose_name)
-        if ar.param_values.also_obsolete:
-            yield unicode(self.parameters['also_obsolete'].verbose_name)
-            #~ tags.append(unicode(_("obsolete")))
-        if ar.param_values.new_since:
-            yield unicode(self.parameters['new_since'].verbose_name) + ' ' + dtos(ar.param_values.new_since)
-        if ar.param_values.coached_by:
-            yield unicode(self.parameters['coached_by'].verbose_name) + ' ' + unicode(ar.param_values.coached_by)
+        for t in super(NewClients, self).get_title_tags(ar):
+            yield t
+        pv = ar.param_values
+        if pv.new_since:
+            yield unicode(self.parameters['new_since'].verbose_name) \
+                + ' ' + dtos(pv.new_since)
 
 
 class ClientsByFaculty(pcsw.Clients):
@@ -295,22 +267,18 @@ only to Newcomers consultants."""
     use_as_default_table = False
     required = dict(user_groups='newcomers')
     auto_fit_column_widths = True
-    #~ required_user_groups = ['newcomers']
-    #~ model = users.User
     editable = False  # even root should not edit here
-    #~ filter = models.Q(profile__in=[p for p in UserProfiles.items() if p.integ_level])
-    #~ label = _("Users by Newcomer")
     label = _("Available Coaches")
     column_names = 'name_column workflow_buttons:10 primary_clients new_clients newcomer_quota current_weight added_weight score'
     parameters = dict(
-        for_client=models.ForeignKey('pcsw.Client',
-                                     verbose_name=_(
-                                         "Show suggested agents for"),
-                                     blank=True),
-        since=models.DateField(_("New clients since"),
-                               blank=True, default=amonthago,
-                               help_text=_(
-                                   "New clients are those whose coaching started after this date")),
+        for_client=models.ForeignKey(
+            'pcsw.Client',
+            verbose_name=_("Show suggested agents for"), blank=True),
+        since=models.DateField(
+            _("New clients since"),
+            blank=True, default=amonthago,
+            help_text=_("New clients are those whose coaching "
+                        "started after this date")),
     )
     params_layout = "for_client since"
 
@@ -321,7 +289,8 @@ only to Newcomers consultants."""
     @classmethod
     def get_request_queryset(self, ar):
         profiles = [p for p in UserProfiles.items() if p.integ_level]
-        return super(AvailableCoaches, self, ar).filter(models.Q(profile__in=profiles))
+        return super(AvailableCoaches, self, ar).filter(
+            models.Q(profile__in=profiles))
 
     @classmethod
     def get_data_rows(self, ar):
@@ -346,6 +315,7 @@ only to Newcomers consultants."""
 
             user.new_clients = NewClients.request(param_values=dict(
                 coached_by=user,
+                client_state=pcsw.ClientStates.coached,
                 new_since=ar.param_values.since))
 
             user._score = HUNDRED
