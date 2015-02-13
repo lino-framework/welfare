@@ -163,7 +163,8 @@ class Confirmable(mixins.DatePeriod):
     def full_clean(self):
         super(Confirmable, self).full_clean()
         if self.signer is None and self.state == ConfirmationStates.confirmed:
-            raise ValidationError(_("Cannot confirm without signer!"))
+            self.state = ConfirmationStates.requested
+            # raise ValidationError(_("Cannot confirm without signer!"))
 
     def get_row_permission(self, ar, state, ba):
         """A signed confirmation cannot be modified, even not by a privileged
