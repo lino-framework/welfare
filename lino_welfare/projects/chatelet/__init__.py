@@ -11,6 +11,7 @@ The Lino Welfare variant used in Chatelet.
     modlib
     settings
     migrate
+    tests.test_chatelet
 
 
 """

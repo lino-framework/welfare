@@ -2,15 +2,17 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
+"""Test whether cv.Obstacle.user is correctly set to the requesting
+user.
 
 You can run only these tests by issuing::
 
   $ python setup.py test -s tests.ProjectsTests.test_chatelet
 
+Or::
+
   $ cd lino_welfare/projects/chatelet
   $ python manage.py test
-  
 
 """
 
@@ -33,7 +35,7 @@ class TestCase(TestCase):
     maxDiff = None
 
     def test00(self):
-
+        
         ContentType = rt.modules.contenttypes.ContentType
         Obstacle = rt.modules.cv.Obstacle
         ObstacleType = rt.modules.cv.ObstacleType

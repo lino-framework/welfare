@@ -43,7 +43,7 @@ class ContractType(ContractTypeBase):
 
 class ContractTypes(dd.Table):
     required = dict(user_groups='integ', user_level='manager')
-    model = ContractType
+    model = 'isip.ContractType'
     column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
     id ref exam_policy needs_study_type
@@ -69,7 +69,7 @@ class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
 
-    hidden_columns = 'start_date start_time end_date end_time'
+    # hidden_columns = 'start_date start_time end_date end_time'
     event_type = dd.ForeignKey(
         'cal.EventType', null=True, blank=True,
         help_text=_("""Generated events will receive this type."""))
@@ -180,9 +180,9 @@ class Contract(ContractBase):
         _("duties person"),
         blank=True, null=True, format='html')
 
-    hidden_columns = (
-        ContractBase.hidden_columns
-        + " stages goals duties_asd duties_dsbe duties_person")
+    # hidden_columns = (
+    #     ContractBase.hidden_columns
+    #     + " stages goals duties_asd duties_dsbe duties_person")
 
     study_type = models.ForeignKey('cv.StudyType', blank=True, null=True)
 
@@ -273,9 +273,10 @@ class MyContracts(Contracts):
         return kw
 
 
-class ContractsByPerson(Contracts):
+class ContractsByClient(Contracts):
     master_key = 'client'
-    column_names = 'applies_from applies_until user type *'
+    column_names = ('applies_from applies_until type '
+                    'user study_type date_ended ending *')
 
 
 class ContractsByPolicy(Contracts):

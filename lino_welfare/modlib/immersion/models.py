@@ -114,8 +114,8 @@ dd.update_field(Contract, 'company', blank=False, null=False)
 
 class ContractDetail(dd.FormLayout):
     box1 = """
-    id:8 client:25 user:15 user_asd:15 language:8
-    type company goal contact_person contact_role
+    id:8 client:25 user:15 language:8
+    type goal company contact_person contact_role
     applies_from applies_until exam_policy
     sector function
     reference_person printed
@@ -171,7 +171,8 @@ class ContractsByClient(Contracts):
     """
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = 'applies_from applies_until user type *'
+    column_names = ('applies_from applies_until type '
+                    'company contact_person user remark:20 *')
 
 
 class ContractsByProvider(Contracts):

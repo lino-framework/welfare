@@ -192,8 +192,8 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     date_ended = models.DateField(
         blank=True, null=True, verbose_name=_("date ended"))
 
-    hidden_columns = 'date_decided date_issued \
-    exam_policy user_asd ending date_ended signer1 signer2'
+    # hidden_columns = 'date_decided date_issued \
+    # exam_policy user_asd ending date_ended signer1 signer2'
 
     def __unicode__(self):
         kw = dict(type=unicode(self._meta.verbose_name))

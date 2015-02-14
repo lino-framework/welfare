@@ -184,9 +184,9 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Competences"), required=dict(user_groups='integ'))
 
     contracts = dd.Panel("""
-    isip.ContractsByPerson
+    isip.ContractsByClient
     jobs.CandidaturesByPerson
-    jobs.ContractsByPerson
+    jobs.ContractsByClient
     """, label=_("Contracts"))
 
 if settings.SITE.is_installed('cbss'):

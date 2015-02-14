@@ -74,12 +74,13 @@ class Contract(JobSupplyment):
 
     type = dd.ForeignKey(
         "art61.ContractType",
+        verbose_name=_("Type"),
         related_name="%(app_label)s_%(class)s_set_by_type")
 
     @classmethod
     def get_certifiable_fields(cls):
         return (
-            'client company contact_person contact_role type '
+            'client type company contact_person contact_role '
             'applies_from applies_until duration '
             'language  '
             'reference_person responsibilities '
@@ -93,7 +94,7 @@ dd.update_field(Contract, 'company', blank=False, null=False)
 
 class ContractDetail(dd.FormLayout):
     box1 = """
-    id:8 client:25 user:15 user_asd:15 language:8
+    id:8 client:25 user:15 language:8
     type company contact_person contact_role
     applies_from duration applies_until exam_policy
     reference_person printed
@@ -152,7 +153,8 @@ class ContractsByClient(Contracts):
     """
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = 'applies_from applies_until user type *'
+    column_names = ('applies_from applies_until duration type '
+                    'company contact_person user remark:20 *')
 
 
 class ContractsByProvider(Contracts):

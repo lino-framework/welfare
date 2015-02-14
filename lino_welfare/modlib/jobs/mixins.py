@@ -26,18 +26,21 @@ class JobSupplyment(ContractBase, ContractPartnerBase):
     """Base class for :class:`Contract` and
     :class:`lino_welfare.modlib.art61.models.Contract`.
 
+    .. attribute:: duration
+
+    The duration of this job supplyment (number of working days).
+
     """
 
     class Meta:
         abstract = True
 
-    duration = models.IntegerField(_("duration (days)"),
-                                   blank=True, null=True, default=None)
-
-    reference_person = models.CharField(_("reference person"), max_length=200,
-                                        blank=True)
-    responsibilities = dd.RichTextField(_("responsibilities"),
-                                        blank=True, null=True, format='html')
+    duration = models.IntegerField(
+        _("duration (days)"), blank=True, null=True, default=None)
+    reference_person = models.CharField(
+        _("reference person"), max_length=200, blank=True)
+    responsibilities = dd.RichTextField(
+        _("responsibilities"), blank=True, null=True, format='html')
     remark = models.TextField(_("Remark"), blank=True)
 
     @dd.chooser()
@@ -74,3 +77,5 @@ class JobSupplyment(ContractBase, ContractPartnerBase):
                         self.applies_from, self.duration / 26) - ONE_DAY
 
         super(JobSupplyment, self).full_clean(*args, **kw)
+
+JobSupplyment.set_widget_options('duration', width=10)

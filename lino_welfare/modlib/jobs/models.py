@@ -162,7 +162,7 @@ class ContractTypes(dd.Table):
     required = dd.required(user_groups='integ', user_level='manager')
     #~ required_user_groups = ['integ']
     #~ required_user_level = UserLevels.manager
-    model = ContractType
+    model = 'jobs.ContractType'
     column_names = 'name ref *'
     detail_layout = """
     id name ref
@@ -190,6 +190,7 @@ class Contract(JobSupplyment):
 
     type = dd.ForeignKey(
         "jobs.ContractType",
+        verbose_name=_("Type"),
         related_name="%(app_label)s_%(class)s_set_by_type",
         blank=True)
 
@@ -324,19 +325,20 @@ class Contracts(isip.ContractBaseTable):
         return qs
 
 
-class ContractsByPerson(Contracts):
+class ContractsByClient(Contracts):
 
     """
     """
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = 'job applies_from applies_until user type *'
-    hidden_columns = """
-    language contact_person contact_role
-    printed regime schedule hourly_rate
-    date_decided date_issued user_asd exam_policy ending date_ended
-    duration reference_person responsibilities remark
-    """
+    column_names = ("applies_from applies_until duration type "
+                    "job company user remark:20 *")
+    # hidden_columns = """
+    # language contact_person contact_role
+    # printed regime schedule hourly_rate
+    # date_decided date_issued user_asd exam_policy ending date_ended
+    # duration reference_person responsibilities remark
+    # """
 
 
 class ContractsByProvider(Contracts):
