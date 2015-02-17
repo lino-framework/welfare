@@ -116,7 +116,7 @@ Antécédents judiciaires?
         if s:
             yield polls.Choice(choiceset=temps, name=s)
     yield polls.Question(title="Temps de travail acceptés", poll=rae,
-                         choiceset=temps)
+                         choiceset=temps, multiple_choices=True)
 
 
 def demo_responses():

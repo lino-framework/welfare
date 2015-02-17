@@ -49,13 +49,13 @@ led by Hubert with a client for whom she also has a coaching.
 
 >>> ses = rt.login('romain')
 >>> ses.show(reception.AppointmentsByPartner, obj)
-=========================== ================= =====================================================
+=========================== ================= ===========================================
  Quand                       Traité par        État
---------------------------- ----------------- -----------------------------------------------------
- **mai 22, 2014**            Mélanie Mélard    **Attend** → [Excusé] [Absent] [Recevoir] [Quitter]
+--------------------------- ----------------- -------------------------------------------
+ **mai 22, 2014**            Mélanie Mélard    **Attend** → [Recevoir] [Quitter]
  **mai 5, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
  **juin 5, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
-=========================== ================= =====================================================
+=========================== ================= ===========================================
 <BLANKLINE>
 
 
@@ -116,14 +116,13 @@ newcomer
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
  Alicia Allmanns   DSBE            **Visit** **Find date**
- Caroline Carnol   ASD             **Visit** **Find date**
- Hubert Huppertz   None            **Visit**
- Judith Jousten    ASD             **Visit** **Find date**
+ Hubert Huppertz   None            **Visit** **Find date**
+ Mélanie Mélard    None            **Visit** **Find date**
 ================= =============== =========================
 <BLANKLINE>
 
-TODO: For Hubert the "Service" column says "None" because his
-`User.coaching_type` field is empty.  Why was this?
+TODO: For Hubert and Mélani the "Service" column says "None" because
+their `User.coaching_type` field are empty.  Why was this?
 
 
 Now let's have a closer look at the action buttons in the third column

@@ -199,9 +199,6 @@ class Event(Event):
 
 dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 
-#~ class MyEvents(MyEvents):
-    #~ exclude = dict(state=EventStates.visit)
-
 
 class EventsByClient(Events):
     """Events where :attr:`Event.project` **or** one guest is this client.
@@ -356,7 +353,7 @@ if False:
             ar.success(**kw)
 
 EventsByDay.column_names = 'start_time project summary user \
-assigned_to room workflow_buttons *'
+assigned_to event_type room workflow_buttons *'
 
 EventsByController.column_names = 'when_text summary user \
 assigned_to workflow_buttons *'

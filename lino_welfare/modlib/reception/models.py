@@ -80,7 +80,8 @@ class FindDateByClientTable(ButtonsTable):
         mi = ar.master_instance  # a Client
         if mi is None:
             return
-        for user in appointable_users(newcomer_appointments=True):
+        for user in appointable_users(newcomer_quota__gt=0):
+        # for user in appointable_users(newcomer_appointments=True):
         # for user in appointable_users():
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
@@ -277,9 +278,10 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
                 yield obj
         else:
             # yield agents available for open consultation
-            cnd = Q(newcomer_appointments=True) \
-                | Q(newcomer_consultations=True)
-            for u in appointable_users(cnd):
+            # cnd = Q(newcomer_appointments=True) \
+            #     | Q(newcomer_consultations=True)
+            # for u in appointable_users(cnd):
+            for u in appointable_users(newcomer_quota__gt=0):
                 # Create a temporary coaching. needed for generating
                 # the action buttons below.
                 yield pcsw.Coaching(
@@ -307,7 +309,8 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
         # client.create_visit is the instance action for
         # CreateClientVisit
         if client.client_state == ClientStates.coached \
-           or user.newcomer_consultations:
+           or user.newcomer_quota > 0:
+           # or user.newcomer_consultations:
             apv = dict(user=user)
             if False:  # apv are ignored, and it's ugly
                 ba = pcsw.Clients.get_action_by_name('create_visit')
@@ -323,7 +326,8 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
             elems += [btn, ' ']
 
         if client.client_state == ClientStates.coached \
-           or user.newcomer_appointments:
+           or user.newcomer_quota > 0:
+           # or user.newcomer_appointments:
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=client.pk)
@@ -338,6 +342,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
 
 
 class CoachingsByClient(pcsw.CoachingsByClient):
+    # obsolete. replaced by AgentsByClient
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)
     column_names = "user type actions"

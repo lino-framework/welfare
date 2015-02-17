@@ -5,6 +5,7 @@ Integration Service
 ===================
 
 .. How to test only this document:
+
   $ python setup.py test -s tests.DocsTests.test_integ
 
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
@@ -20,7 +21,6 @@ A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.api.doctest import *
-
 
 >>> ses = rt.login('robin')
 >>> translation.activate('en')
@@ -157,7 +157,7 @@ User problem report:
   | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
 
 The following lines reproduced this problem 
-(and passed when it was fixed):
+and passed when it was fixed:
 
 >>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
 >>> res = client.get(url, REMOTE_USER='rolf')  #doctest: +SKIP

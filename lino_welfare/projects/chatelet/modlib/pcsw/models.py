@@ -45,7 +45,7 @@ class ClientDetail(dd.FormLayout):
     declared_name:15 needs_residence_permit:20 needs_work_permit:20
     in_belgium_since:15 residence_type residence_until group:16
     reception.AppointmentsByPartner:40 reception.AgentsByClient:30 \
-    #reception.CoachingsByClient courses.EnrolmentsByPupil:40
+    courses.EnrolmentsByPupil:40
     """, label=_("Person"))
 
     general2 = """

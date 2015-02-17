@@ -31,6 +31,7 @@ them to a script and run it using :manage:`run`.
    immersion
    uploads
    cv2
+   main
 
 
 

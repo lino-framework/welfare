@@ -561,15 +561,16 @@ changes.
 |                                                 |                                     | last_name birth_date age national_id nationality   |
 |                                                 |                                     | declared_name civil_state birth_country            |
 |                                                 |                                     | birth_place language email phone fax gsm image     |
-|                                                 |                                     | SimilarPersons LinksByHuman cbss_relations         |
-|                                                 |                                     | MembersByPerson workflow_buttons broker faculty    |
-|                                                 |                                     | refusal_reason in_belgium_since residence_type     |
-|                                                 |                                     | residence_until group is_seeking unemployed_since  |
-|                                                 |                                     | work_permit_suspended_until needs_residence_permit |
-|                                                 |                                     | needs_work_permit UploadsByClient skills obstacles |
-|                                                 |                                     | ExcerptsByProject activity client_state            |
-|                                                 |                                     | noble_condition unavailable_until unavailable_why  |
-|                                                 |                                     | is_obsolete created modified remarks               |
+|                                                 |                                     | AgentsByClient SimilarPersons LinksByHuman         |
+|                                                 |                                     | cbss_relations MembersByPerson workflow_buttons    |
+|                                                 |                                     | broker faculty refusal_reason in_belgium_since     |
+|                                                 |                                     | residence_type residence_until group is_seeking    |
+|                                                 |                                     | unemployed_since work_permit_suspended_until       |
+|                                                 |                                     | needs_residence_permit needs_work_permit           |
+|                                                 |                                     | UploadsByClient skills obstacles ExcerptsByProject |
+|                                                 |                                     | activity client_state noble_condition              |
+|                                                 |                                     | unavailable_until unavailable_why is_obsolete      |
+|                                                 |                                     | created modified remarks                           |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.Clients.insert                             | all except anonymous                | first_name last_name national_id gender language   |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -662,7 +663,6 @@ changes.
 |                                                 |                                     | initials email language id created modified        |
 |                                                 |                                     | remarks event_type access_class calendar           |
 |                                                 |                                     | newcomer_quota coaching_type coaching_supervisor   |
-|                                                 |                                     | newcomer_consultations newcomer_appointments       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | users.Users.insert                              | all except anonymous                | username email first_name last_name partner        |
 |                                                 |                                     | language profile                                   |

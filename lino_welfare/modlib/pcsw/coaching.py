@@ -378,14 +378,3 @@ class MyCoachings(CoachingsByUser, ByUser):
         kw.update(end_date=dd.today())
         return kw
 
-
-#~ class MySuggestedCoachings(MyCoachings):
-    #~ label = _("Suggested coachings")
-    #~ known_values = dict(state=CoachingStates.suggested)
-
-
-# __all__ = [
-#     "CoachingType", "CoachingTypes", "CoachingEnding",
-#     "CoachingEndings", "Coaching", "Coachings", "CoachingsByClient",
-#     "CoachingsByUser", "CoachingsByEnding"
-# ]
