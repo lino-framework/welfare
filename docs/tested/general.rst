@@ -147,7 +147,7 @@ result:
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
  polls.AnswerChoice             polls.AnswerChoices             4         88
- polls.AnswerRemark             polls.AnswerRemarkTable         4         0
+ polls.AnswerRemark             polls.AnswerRemarks             4         0
  polls.Choice                   polls.Choices                   7         35
  polls.ChoiceSet                polls.ChoiceSets                5         8
  polls.Poll                     polls.Polls                     11        2
@@ -582,6 +582,8 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.Coachings.create_visit                     | admin                               | user summary                                       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| polls.AnswerRemarks.insert                      | all except anonymous                | remark response question                           |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | polls.ChoiceSets.insert                         | all except anonymous                | name name_fr name_de name_nl                       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | polls.Polls.detail                              | all except anonymous                | ref title workflow_buttons details                 |
@@ -732,7 +734,7 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
   - Client projects : Client Projects
-  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
+  - Polls : Polls, Questions, Choices, Responses, Answer Choices, Answer Remarks
 - Site : Info
 <BLANKLINE>
 
@@ -762,14 +764,12 @@ Hubert is an Integration agent.
   - Büro : Meine Einfügetexte
   - Orte : Länder
   - Lebenslauf : Sprachen
-  - Polls : Choice Sets
 - Explorer :
   - Büro : Upload-Bereiche
   - Kontakte : Adressenarten, Rollen
   - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : VSEs, Art.60§7-Konventionen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
 - Site : Info
 
 
@@ -803,7 +803,6 @@ Mélanie is the manager of the Integration service.
   - Lebenslauf : Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
-  - Polls : Choice Sets
 - Explorer :
   - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kontakte : Adressenarten, Rollen
@@ -813,7 +812,6 @@ Mélanie is the manager of the Integration service.
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
   - Kurse : Kursanfragen
-  - Polls : Polls, Questions, Choices, Responses, Answer Choices, AnswerRemarks
 - Site : Info
 
 
@@ -825,16 +823,27 @@ Kerstin is a debts consultant.
 >>> ses = rt.login('kerstin') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Meine Warteschlange
+- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
 - Schuldnerberatung : Klienten, Meine Budgets
+- Polls : Meine Polls, Meine Responses
+- Berichte :
+  - System : Stale Controllables
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
+  - Orte : Länder
+  - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
+- Explorer :
+  - Büro : Upload-Bereiche
+  - Kontakte : Adressenarten, Rollen
+  - SEPA : Konten
+  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - DSBE : Vertragspartner, Proofs of search
 - Site : Info
 
 
@@ -847,18 +856,28 @@ Caroline is a newcomers consultant.
 >>> ses = rt.login('caroline') 
 >>> with translation.override('de'):
 ...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Meine Warteschlange
+- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
+- Polls : Meine Polls, Meine Responses
 - Berichte :
-  - DSBE : Benutzer und ihre Klienten
+  - System : Stale Controllables
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Kontakte : Länder, Sprachen
+  - Orte : Länder
+  - Lebenslauf : Sprachen
+- Explorer :
+  - Büro : Upload-Bereiche
+  - Kontakte : Adressenarten, Rollen
+  - SEPA : Konten
+  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - DSBE : Vertragspartner, Proofs of search
 - Site : Info
+
 
 .. _theresia:
 
