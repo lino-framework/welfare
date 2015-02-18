@@ -132,6 +132,53 @@ Configuration
 
 
 
+Evaluation events
+=================
+
+For every contract, Lino automatically generates a series of calendar
+events according to the value of `exam_policy`.  The
+:class:`cal.EventsByController
+<lino.modlib.cal.models.EventsByController>` table shows the
+evaluation events which have been generated.
+
+>>> translation.activate('en')
+>>> obj = isip.Contract.objects.get(pk=26)
+>>> obj.exam_policy
+ExamPolicy #1 (u'every month')
+>>> rt.show(cal.EventsByController, obj)
+============================ ================ ================= ============= ===============
+ When                         Summary          Managed by        Assigned to   Workflow
+---------------------------- ---------------- ----------------- ------------- ---------------
+ **Aug. 4, 2014 at 09:00**    Appointment 1    Hubert Huppertz                 **Suggested**
+ **Sept. 4, 2014 at 09:00**   Appointment 2    Hubert Huppertz                 **Suggested**
+ **Oct. 6, 2014 at 09:00**    Appointment 3    Hubert Huppertz                 **Suggested**
+ **Nov. 6, 2014 at 09:00**    Appointment 4    Hubert Huppertz                 **Suggested**
+ **Dec. 8, 2014 at 09:00**    Appointment 5    Hubert Huppertz                 **Suggested**
+ **Jan. 8, 2015 at 09:00**    Appointment 6    Hubert Huppertz                 **Suggested**
+ **Feb. 9, 2015 at 09:00**    Appointment 7    Hubert Huppertz                 **Suggested**
+ **March 9, 2015 at 09:00**   Appointment 8    Hubert Huppertz                 **Suggested**
+ **April 9, 2015 at 09:00**   Appointment 9    Hubert Huppertz                 **Suggested**
+ **May 11, 2015 at 09:00**    Appointment 10   Hubert Huppertz                 **Suggested**
+ **June 11, 2015 at 09:00**   Appointment 11   Hubert Huppertz                 **Suggested**
+============================ ================ ================= ============= ===============
+<BLANKLINE>
+
+
+>>> mt = contenttypes.ContentType.objects.get_for_model(obj.__class__)
+>>> print(mt)
+ISIP
+>>> uri = '/api/cal/EventsByController?mt={0}&mk={1}&fmt=json'
+>>> uri = uri.format(mt.id, obj.id)
+>>> res = client.get(uri, REMOTE_USER='robin')
+>>> res.status_code
+200
+>>> d = AttrDict(json.loads(res.content))
+>>> print(d.title)
+Events of ISIP#26 (Otto ÖSTGES)
+>>> print(len(d.rows))
+12
+
+
 UsersWithClients
 ----------------
 
@@ -173,20 +220,15 @@ and passed when it was fixed:
 Coach changes while contract active
 -----------------------------------
 
-The following verifies that :linoticket:`104` is solved.  Every
-contract potentially generates a series of calendar events for
+Every contract potentially generates a series of calendar events for
 evaluation meetings (according to the :attr:`exam_policy
-<welfare.isip.ContractBase.exam_policy>` field).
+<welfare.isip.ContractBase.exam_policy>` field).  But a special
+condition which in reality arises quite often is that the coach
+changes while the contract is still active.  This is why Lino must
+attribute every automatic evaluation event to the coach in charge at
+the event's date.
 
-But a special condition which in reality arises quite often is that
-the coach changes while the contract is still active.  
-
-
-TODO: we want to show that Lino attributes the automatic evaluation
-events to the coach in charge, depending on their date.  But currently
-there is no contract in our demo data which matches this specific
-condition.
-
+The following verifies this.
 
 Display a list of demo contracts which meet this condition:
 
