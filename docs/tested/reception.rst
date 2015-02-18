@@ -49,13 +49,26 @@ led by Hubert with a client for whom she also has a coaching.
 
 >>> ses = rt.login('romain')
 >>> ses.show(reception.AppointmentsByPartner, obj)
-=========================== ================= ===========================================
- Quand                       Traité par        État
---------------------------- ----------------- -------------------------------------------
- **mai 22, 2014**            Mélanie Mélard    **Attend** → [Recevoir] [Quitter]
- **mai 5, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **juin 5, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
-=========================== ================= ===========================================
+============================ ================= ===========================================
+ Quand                        Traité par        État
+---------------------------- ----------------- -------------------------------------------
+ **mai 5, 2014 at 09:00**     Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **mai 22, 2014**             Mélanie Mélard    **Attend** → [Recevoir] [Quitter]
+ **juin 5, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **juil. 7, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **août 7, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **sep. 29, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **oct. 29, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **déc. 1, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **jan. 1, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **fév. 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **mars 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **avr. 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **mai 4, 2015 at 09:00**     Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **juin 4, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **juil. 6, 2015 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+ **août 6, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
+============================ ================= ===========================================
 <BLANKLINE>
 
 
@@ -66,7 +79,7 @@ denied. It might be better to write "no permission" in that case. Or
 to ignore any permission requirements here (since console scripts are
 supposed to be run only by users who have root permissions).
 
->>> reception.AppointmentsByPartner.show(obj)
+>>> reception.AppointmentsByPartner.show(obj)  #doctest: +SKIP
 <BLANKLINE>
 Aucun enregistrement
 <BLANKLINE>
@@ -102,9 +115,9 @@ coached
 <BLANKLINE>
 
 Client 257 is not coached but a `ClientStates.newcomer`. So
-AgentsByClient shows all users who care for newcomers (i.e. who have
-:attr:`newcomer_consultations
-<lino_welfare.modlib.users.User.newcomer_consultations>` set).
+AgentsByClient shows all users who care for newcomers (i.e. who have a
+non-zero :attr:`newcomer_quota
+<lino_welfare.modlib.users.User.newcomer_quota>`).
 
 >>> obj = pcsw.Client.objects.get(pk=257)
 >>> print(obj)
@@ -121,7 +134,7 @@ newcomer
 ================= =============== =========================
 <BLANKLINE>
 
-TODO: For Hubert and Mélani the "Service" column says "None" because
+TODO: For Hubert and Mélanie the "Service" column says "None" because
 their `User.coaching_type` field are empty.  Why was this?
 
 
@@ -129,25 +142,12 @@ Now let's have a closer look at the action buttons in the third column
 of above table.  This column is defined by a
 :func:`lino.core.fields.displayfield`.
 
-It has up to two actions (labeled Visite** **Find date**
+It has up to two actions (labeled `Create prompt event` and `Find
+date`)
 
->>> obj = pcsw.Client.objects.get(pk=127)
->>> client = Client()
->>> url = "/api/pcsw/Clients/{0}?_dc=1421645352616&pv=&pv=&pv=&pv=&pv=false&pv=30&pv=&pv=&pv=&pv=&pv=&pv=false&an=detail&rp=ext-comp-1268&fmt=json"
->>> url = url.format(obj.pk)
+We are going to inspect the AgentsByClient panel.
 
->>> res = client.get(url, REMOTE_USER='romain')
->>> print(res.status_code)
-200
-
-The response to this AJAX request is in JSON:
-
->>> d = json.loads(res.content)
-
-We are going to inspect the AgentsByClient panel using `BeautifulSoup
-<http://www.crummy.com/software/BeautifulSoup/bs4/doc/>`_:
-
->>> soup = BeautifulSoup(d['data']['AgentsByClient'])
+>>> soup = get_json_soup('romain', 'pcsw/Clients/127', 'AgentsByClient')
 
 It contains a table, and we want the cell at the first data row and
 third column:
@@ -166,11 +166,11 @@ And yes, the `href` attribute is a javascript snippet:
 
 >>> print(btn['href'])
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-javascript:Lino.pcsw.Clients.create_visit.run("ext-comp-1268",...)
+javascript:Lino.pcsw.Clients.create_visit.run(null,...)
 
-Now let's inspect these three dots (`...`). 
+Now let's inspect the three dots (`...`). 
 
->>> dots = btn['href'][62:-1]
+>>> dots = btn['href'][51:-1]
 >>> print(dots)  #doctest: +ELLIPSIS 
 { ... }
 
@@ -186,14 +186,11 @@ It has 4 keys:
 >>> d.record_id
 127
 >>> d.base_params
-{}
+{u'mk': 127}
 >>> d.field_values
 {u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
 
 (This last line was right only since :blogref:`20150122`)
-
-
-
 
 **Now the second action (Find date):**
 

@@ -289,8 +289,11 @@ They are a big "object" (in Python we call it a `dict`):
 
 It has 3 keys:
 
->>> d.keys()
-[u'data_record', u'param_values', u'base_params']
+>>> len(d)
+3
+
+>>> len(d.param_values)
+10
 
 >>> d.base_params
 {u'mt': 54, u'mk': 177, u'type_id': 1}
@@ -299,8 +302,9 @@ It has 3 keys:
 [u'phantom', u'data', u'title']
 >>> d.data_record['phantom']
 True
->>> d.data_record['title']
-u'Uploads von BRECHT Bernd (177) (Ist aktiv)'
+>>> print(d.data_record['title'])
+Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
+
 >>> d.data_record['data'].keys()
 [u'file', u'owner', u'id', u'userHidden', u'projectHidden', u'needed', u'disabled_fields', u'type', u'start_date', u'description', u'end_date', u'company', u'contact_role', u'disable_editing', u'companyHidden', u'contact_personHidden', u'user', u'contact_roleHidden', u'remark', u'disabled_actions', u'typeHidden', u'project', u'contact_person']
 

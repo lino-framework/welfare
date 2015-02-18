@@ -140,8 +140,9 @@ BASTIAENSEN Laurent (117)
 <BLANKLINE>
 
 >>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=117'
->>> res = client.get(url, REMOTE_USER='rolf')
->>> assert res.status_code == 200
+>>> res = test_client.get(url, REMOTE_USER='rolf')
+>>> res.status_code
+200
 >>> d = json.loads(res.content)
 
 The value in column "Arbeitsablauf" of the first data row in the above

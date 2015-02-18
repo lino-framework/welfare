@@ -169,7 +169,7 @@ ExamPolicy #1 (u'every month')
 ISIP
 >>> uri = '/api/cal/EventsByController?mt={0}&mk={1}&fmt=json'
 >>> uri = uri.format(mt.id, obj.id)
->>> res = client.get(uri, REMOTE_USER='robin')
+>>> res = test_client.get(uri, REMOTE_USER='robin')
 >>> res.status_code
 200
 >>> d = AttrDict(json.loads(res.content))
@@ -207,7 +207,7 @@ The following lines reproduced this problem
 and passed when it was fixed:
 
 >>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
->>> res = client.get(url, REMOTE_USER='rolf')  #doctest: +SKIP
+>>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: +SKIP
 >>> print(res.status_code)  #doctest: +SKIP
 200
 >>> result = json.loads(res.content)  #doctest: +SKIP
@@ -315,7 +315,7 @@ DUBOIS Robin (179)
 
 >>> client = Client()
 >>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
->>> res = client.get(url, REMOTE_USER='rolf')
+>>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
 

@@ -274,3 +274,25 @@ manually filling that date into the
 =========================
 <BLANKLINE>
 
+
+
+Creating a new client
+=====================
+
+
+>>> url = '/api/pcsw/Clients/-99999?an=insert&fmt=json'
+>>> res = test_client.get(url, REMOTE_USER='rolf')
+>>> res.status_code
+200
+>>> d = AttrDict(json.loads(res.content))
+>>> d.keys()
+[u'phantom', u'data', u'title']
+>>> d.phantom
+True
+>>> print(d.title)
+Einfügen in Klienten (Begleitet)
+
+There are a lot of data fields:
+
+>>> len(d.data.keys())
+67

@@ -285,11 +285,13 @@ class Granting(Confirmable, BoardDecision):
         ct = at.confirmation_type
         if not ct:
             return ''
-        sar = ar.spawn(ct.table_class, master_instance=self)
+        sar = ct.table_class.insert_action.request_from(
+            ar, master_instance=self)
+        # print(20150218, sar)
         txt = _("Create confirmation")
-        btn = sar.insert_button(txt, icon_name=None)
-        if btn is not None:
-            return E.div(btn)
+        btn = sar.ar2button(None, txt, icon_name=None)
+        # btn = sar.insert_button(txt, icon_name=None)
+        return E.div(btn)
 
 
 dd.update_field(Granting, 'start_date',

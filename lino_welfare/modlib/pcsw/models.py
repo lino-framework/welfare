@@ -540,12 +540,12 @@ class Client(contacts.Person,
     @dd.htmlbox(_("CBSS"))
     def cbss_relations(self, ar):
         cbss = dd.resolve_app('cbss')
+        SLAVE = cbss.RetrieveTIGroupsRequestsByPerson
         elems = []
         sar = ar.spawn(
-            cbss.RetrieveTIGroupsRequestsByPerson,
-            master_instance=self,
+            SLAVE, master_instance=self,
             filter=models.Q(status__in=cbss.OK_STATES))
-        btn = sar.insert_button()
+        btn = SLAVE.insert_action.request_from(ar).ar2button()
         n = sar.get_total_count()
         if n > 0:
             items = []

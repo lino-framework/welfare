@@ -24,7 +24,7 @@ A technical tour into the :mod:`lino_welfare.modlib.main` module.
 
 Test the content of the admin main page.
 
->>> res = client.get('/api/main_html', REMOTE_USER='rolf')
+>>> res = test_client.get('/api/main_html', REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
 >>> result = json.loads(res.content)
