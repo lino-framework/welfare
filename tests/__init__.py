@@ -115,3 +115,6 @@ class DocsTests(BaseTestCase):
     def test_courses(self):
         return self.run_docs_doctests('tested/courses.rst')
 
+    def test_20150219(self):
+        return self.run_simple_doctests('docs/tested/2015/0219.rst')
+

@@ -1,0 +1,198 @@
+.. _welfare.tested.20150219:
+
+===========================
+Thursday, February 19, 2015
+===========================
+
+On :blogref:`20150219` I discovered a layout problem in the insert
+window of :class:`aids.IncomeConfirmationsByGranting
+<lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting>`: all
+form fields except `remark` were hidden.  The problem was a side
+effect of the new feature "hidden form fields" introduced some days
+earlier (:blogref:`20150217`).
+
+This document helped me to understand the problem, it also verifies
+that the problem is now solved, and maybe it has some pedagogical
+value.
+
+Open the detail window (tab panel "Aids") on Client 116.  We know that
+this client has four grantings:
+
+.. image:: 0219a.png
+    :scale: 50
+
+Clicking on the "Create confirmation" should show the window on the left, 
+but currently it shows the window on the right:
+
+.. image:: 0219b.png
+    :scale: 30
+
+.. image:: 0219c.png
+    :scale: 30
+
+
+This document is part of the test suite.  To test only this document,
+run::
+
+    $ python setup.py test -s tests.DocsTests.test_20150219
+
+Or::
+
+    $ python -m atelier.doctest_utf8 docs/tested/2015/0219.rst
+
+Note that the official method for testing would be::
+
+    $ python -m docutils docs/tested/2015/0219.rst
+
+But this fails on files with non-ascii characters. See
+:mod:`atelier.doctest_utf8`.
+
+Some initialization code:
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.std.settings.doctests'
+>>> from lino.api.doctest import *
+
+Some preliminary tests, just to see whether we are at the right place:
+
+>>> obj = pcsw.Client.objects.get(id=116)
+>>> obj
+Client #116 (u'AUSDEMWALD Alfons (116)')
+>>> rt.login('robin').show(aids.GrantingsByClient, obj)
+================================== ============== ======= ================= ========================== =================== =========================
+ Description                        Applies from   until   Signer            Workflow                   Board               Actions
+---------------------------------- -------------- ------- ----------------- -------------------------- ------------------- -------------------------
+ **EiEi/8/9/14/116**                8/9/14                 Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
+ **EiEi/5/22/14/116**               5/22/14                Caroline Carnol   **Unconfirmed** → [Sign]   Social Board (SB)   **Create confirmation**
+ **Ausländerbeihilfe/8/8/13/116**   8/8/13                 Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
+ **EiEi/9/29/12/116**               9/29/12                Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
+================================== ============== ======= ================= ========================== =================== =========================
+<BLANKLINE>
+
+
+
+Let's have a closer look the `insert_layout` in question.
+
+:attr:`lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting`
+
+>>> layout = aids.IncomeConfirmationsByGranting.insert_layout
+
+Yes it is a :class:`lino.core.layouts.FormLayout`:
+
+>>> layout.__class__
+<class 'lino.core.layouts.FormLayout'>
+
+And its `hidden_elements` has only those fields which I actually want
+to be hidden:
+
+>>> layout.hidden_elements
+set(['client', 'granting'])
+
+The main panel is as we designed it:
+
+>>> print layout.main
+<BLANKLINE>
+    client granting:25
+    start_date end_date
+    category amount
+    company contact_person #language
+    remark
+<BLANKLINE>
+
+Let's look at the LayoutHandle (i.e. version of the Layout which has
+been "compiled" for a given user interface, in our case
+:mod:`lino.modlib.extjs`).
+
+>>> lh = layout.get_layout_handle(dd.plugins.extjs)
+>>> print(lh)
+LayoutHandle for FormLayout on aids.IncomeConfirmationsByGranting
+
+>>> lh.main.__class__
+<class 'lino.modlib.extjs.elems.DetailMainPanel'>
+
+
+The :mod:`lino.modlib.extjs.elems` module contains "Layout Elements"
+or "Widgets". The only purpose of these objects is to generate
+Javascript.  They are ExtJS (version 3) specific.  
+
+They all inherit from :class:`lino.utils.jsgen.Component`, which is
+part of :mod:`lino.utils.jsgen`, which is a general framework for
+generating Javascript.
+
+It uses functions like 
+:func:`set_user_profile <lino.utils.jsgen.set_user_profile>`,
+:func:`declare_vars <lino.utils.jsgen.declare_vars>` and
+:func:`py2js <lino.utils.jsgen.py2js>`.
+
+>>> from lino.utils.jsgen import py2js, declare_vars, set_user_profile
+
+Before we can render any Javascript, we must set the user profile for
+which we want it:
+
+>>> ses = rt.login("robin")
+>>> set_user_profile(ses.user.profile)
+
+And we must activate a language:
+
+>>> translation.activate('en')
+
+Now we can call :func:`declare_vars <lino.utils.jsgen.declare_vars>`
+who will yield us a series of lines of javascript code.  These lines
+declare the variables used to define the main panel.
+
+Here is the Javascript generated *before* the change (the following
+snippet has `+SKIP` specified which means that it is **not** being
+tested:
+
+>>> js = '\n'.join(declare_vars(lh.main))
+>>> print(js)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
+var client91 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
+var granting92 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Aid granting", "name": "granting", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.GrantingsByX.detail,Lino.aids.GrantingsByX.insert)}, "emptyText": "Select a Aid granting...", "listeners": { "render": Lino.quicktip_renderer("Aid granting","(aids.IncomeConfirmationsByGranting.granting) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "grantingHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/granting", "method": "GET" }) }) });
+var main_1_panel93 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 117, "hideCheckBoxLabels": true, "items": [ { "flex": 44, "autoHeight": true, "layout": "form", "xtype": "panel", "items": client91, "labelAlign": "top" }, { "flex": 55, "autoHeight": true, "layout": "form", "xtype": "panel", "items": granting92, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var start_date96 = new Lino.DateField({ "autoHeight": true, "fieldLabel": "Period from", "name": "start_date", "selectOnFocus": true, "listeners": { "render": Lino.quicktip_renderer("Period from","(aids.IncomeConfirmationsByGranting.start_date) ") }, "anchor": "-20" });
+var end_date97 = new Lino.DateField({ "autoHeight": true, "fieldLabel": "until", "name": "end_date", "selectOnFocus": true, "listeners": { "render": Lino.quicktip_renderer("until","(aids.IncomeConfirmationsByGranting.end_date) ") }, "anchor": "-20" });
+var main_2_panel98 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 108, "hideCheckBoxLabels": true, "items": [ { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": start_date96, "labelAlign": "top" }, { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": end_date97, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var category101 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Category", "name": "category", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.Categories.detail,Lino.aids.Categories.insert)}, "emptyText": "Select a Category...", "listeners": { "render": Lino.quicktip_renderer("Category","(aids.IncomeConfirmationsByGranting.category) ") }, "selectOnFocus": true, "hiddenName": "categoryHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/category", "method": "GET" }) }) });
+var amount102 = new Ext.form.NumberField({ "autoHeight": true, "decimalPrecision": 2, "fieldLabel": "Amount", "name": "amount", "decimalSeparator": ",", "listeners": { "render": Lino.quicktip_renderer("Amount","(aids.IncomeConfirmationsByGranting.amount) ") }, "selectOnFocus": true, "anchor": "-20", "allowBlank": true });
+var main_3_panel103 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 81, "hideCheckBoxLabels": true, "items": [ { "flex": 62, "autoHeight": true, "layout": "form", "xtype": "panel", "items": category101, "labelAlign": "top" }, { "flex": 37, "autoHeight": true, "layout": "form", "xtype": "panel", "items": amount102, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var company106 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Recipient (Organization)", "name": "company", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.contacts.Companies.detail,Lino.contacts.Companies.insert)}, "hiddenName": "companyHidden", "listeners": { "render": Lino.quicktip_renderer("Recipient (Organization)","(aids.IncomeConfirmationsByGranting.company) ") }, "selectOnFocus": true, "emptyText": "Select a Organisation...", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/company", "method": "GET" }) }) });
+var contact_person107 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Recipient (Person)", "name": "contact_person", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.contacts.Persons.detail,Lino.contacts.Persons.insert)}, "hiddenName": "contact_personHidden", "listeners": { "render": Lino.quicktip_renderer("Recipient (Person)","(aids.IncomeConfirmationsByGranting.contact_person) ") }, "selectOnFocus": true, "emptyText": "Select a Person...", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/contact_person", "method": "GET" }) }) });
+var main_4_panel108 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 225, "hideCheckBoxLabels": true, "items": [ { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": company106, "labelAlign": "top" }, { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": contact_person107, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var remark111 = new Lino.RichTextPanel({ "selectOnFocus": true, "flex": 55, "containing_panel": this, "name": "remark", "title": "Remark" });
+var main_panel112 = new Ext.Panel({ "autoScroll": false, "border": false, "layout": "vbox", "labelWidth": 0, "hideCheckBoxLabels": true, "items": [ main_1_panel93, main_2_panel98, main_3_panel103, main_4_panel108, remark111 ], "frame": true, "layoutConfig": { "align": "stretch" }, "bodyBorder": false, "labelAlign": "top" });
+
+
+This structure caused the ExtJS layout manager to produce unexpected
+behaviour because the horizontal panel for the two fields `client` and
+`granting` is not hidden.  In that case the panel must also be hidden.
+
+
+>>> js = '\n'.join(declare_vars(lh.main))
+>>> print(js)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF -SKIP
+var client222 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
+var granting223 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Aid granting", "name": "granting", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.GrantingsByX.detail,Lino.aids.GrantingsByX.insert)}, "emptyText": "Select a Aid granting...", "listeners": { "render": Lino.quicktip_renderer("Aid granting","(aids.IncomeConfirmationsByGranting.granting) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "grantingHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/granting", "method": "GET" }) }) });
+var main_1_panel224 = new Ext.Panel({ "autoHeight": true, "layout": "hbox", "items": [ { "flex": 44, "autoHeight": true, "layout": "form", "xtype": "panel", "items": client222, "labelAlign": "top" }, { "flex": 55, "autoHeight": true, "layout": "form", "xtype": "panel", "items": granting223, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "hideCheckBoxLabels": true, "autoScroll": false, "labelWidth": 117, "hidden": true, "border": false, "labelAlign": "top" });
+var start_date227 = new Lino.DateField({ "autoHeight": true, "fieldLabel": "Period from", "name": "start_date", "selectOnFocus": true, "listeners": { "render": Lino.quicktip_renderer("Period from","(aids.IncomeConfirmationsByGranting.start_date) ") }, "anchor": "-20" });
+var end_date228 = new Lino.DateField({ "autoHeight": true, "fieldLabel": "until", "name": "end_date", "selectOnFocus": true, "listeners": { "render": Lino.quicktip_renderer("until","(aids.IncomeConfirmationsByGranting.end_date) ") }, "anchor": "-20" });
+var main_2_panel229 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 108, "hideCheckBoxLabels": true, "items": [ { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": start_date227, "labelAlign": "top" }, { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": end_date228, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var category232 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Category", "name": "category", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.Categories.detail,Lino.aids.Categories.insert)}, "emptyText": "Select a Category...", "listeners": { "render": Lino.quicktip_renderer("Category","(aids.IncomeConfirmationsByGranting.category) ") }, "selectOnFocus": true, "hiddenName": "categoryHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/category", "method": "GET" }) }) });
+var amount233 = new Ext.form.NumberField({ "autoHeight": true, "decimalPrecision": 2, "fieldLabel": "Amount", "name": "amount", "decimalSeparator": ",", "listeners": { "render": Lino.quicktip_renderer("Amount","(aids.IncomeConfirmationsByGranting.amount) ") }, "selectOnFocus": true, "anchor": "-20", "allowBlank": true });
+var main_3_panel234 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 81, "hideCheckBoxLabels": true, "items": [ { "flex": 62, "autoHeight": true, "layout": "form", "xtype": "panel", "items": category232, "labelAlign": "top" }, { "flex": 37, "autoHeight": true, "layout": "form", "xtype": "panel", "items": amount233, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var company237 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Recipient (Organization)", "name": "company", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.contacts.Companies.detail,Lino.contacts.Companies.insert)}, "hiddenName": "companyHidden", "listeners": { "render": Lino.quicktip_renderer("Recipient (Organization)","(aids.IncomeConfirmationsByGranting.company) ") }, "selectOnFocus": true, "emptyText": "Select a Organisation...", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/company", "method": "GET" }) }) });
+var contact_person238 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Recipient (Person)", "name": "contact_person", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.contacts.Persons.detail,Lino.contacts.Persons.insert)}, "hiddenName": "contact_personHidden", "listeners": { "render": Lino.quicktip_renderer("Recipient (Person)","(aids.IncomeConfirmationsByGranting.contact_person) ") }, "selectOnFocus": true, "emptyText": "Select a Person...", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/contact_person", "method": "GET" }) }) });
+var main_4_panel239 = new Ext.Panel({ "autoScroll": false, "autoHeight": true, "border": false, "layout": "hbox", "labelWidth": 225, "hideCheckBoxLabels": true, "items": [ { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": company237, "labelAlign": "top" }, { "flex": 50, "autoHeight": true, "layout": "form", "xtype": "panel", "items": contact_person238, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "labelAlign": "top" });
+var remark242 = new Lino.RichTextPanel({ "selectOnFocus": true, "flex": 55, "containing_panel": this, "name": "remark", "title": "Remark" });
+var main_panel243 = new Ext.Panel({ "autoScroll": false, "border": false, "layout": "vbox", "labelWidth": 0, "hideCheckBoxLabels": true, "items": [ main_1_panel224, main_2_panel229, main_3_panel234, main_4_panel239, remark242 ], "frame": true, "layoutConfig": { "align": "stretch" }, "bodyBorder": false, "labelAlign": "top" });
+
+That's a bit string, but we can test whether it declares three
+components with an attribute "hidden":
+
+>>> js.count('"hidden"')
+3
+
+Which corresponds to what we want.
+

@@ -683,6 +683,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
 
     """
     master_key = 'granting'
+
     insert_layout = dd.FormLayout("""
     client granting:25
     start_date end_date

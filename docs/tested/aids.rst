@@ -221,3 +221,4 @@ action of :class:`IncomeConfirmationsByGranting
 >>> "Lino.aids.IncomeConfirmationsByGranting.insert.run" in on_ready
 True
 
+
