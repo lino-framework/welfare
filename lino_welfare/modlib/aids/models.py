@@ -13,30 +13,22 @@ from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
-import types
 
 from django.conf import settings
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy as pgettext
 
 from lino.api import dd, rt
 from lino import mixins
 
 from lino.utils.xmlgen.html import E
-from lino.utils.ranges import encompass
 
 from lino.modlib.system.mixins import PeriodEvents
-from lino.modlib.users.mixins import UserAuthored
 from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.addresses.mixins import AddressTypes
-from lino.mixins.periods import rangefmt
 from lino.modlib.boards.mixins import BoardDecision
-
-boards = dd.resolve_app('boards')
 
 from .mixins import Confirmable, Confirmation
 from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
@@ -90,8 +82,8 @@ class AidType(ContactRelated, mixins.BabelNamed):
 
     .. attribute:: board
 
-    Pointer to the default :class:`ml.boards.Board` for aid projects of
-    this type.
+    Pointer to the default :class:`lino.modlib.boards.models.Board`
+    for aid projects of this type.
 
     .. attribute:: excerpt_type
 
@@ -686,6 +678,10 @@ class IncomeConfirmations(Confirmations):
 
 
 class IncomeConfirmationsByGranting(IncomeConfirmations):
+    """Show the confirmations of a Granting whose `aid_type` has
+    :class:`IncomeConfirmation` as `confirmation_type`.
+
+    """
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     client granting:25
