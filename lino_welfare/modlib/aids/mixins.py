@@ -264,6 +264,7 @@ class Confirmation(
     remark = dd.RichTextField(
         _("Remark"),
         blank=True, format='html')
+    language = dd.LanguageField(blank=True)
 
     def __unicode__(self):
         if self.granting is not None:
@@ -280,6 +281,12 @@ class Confirmation(
             msg = _("Date range %(p1)s lies outside of granted "
                     "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
             raise ValidationError(msg)
+        if not self.language:
+            obj = self.recipient
+            if obj is None:
+                self.language = self.client.language
+            else:
+                self.language = obj.language
 
     def on_create(self, ar):
         if self.granting_id:
@@ -298,10 +305,7 @@ class Confirmation(
         return 'client signer granting remark start_date end_date'
 
     def get_print_language(self):
-        obj = self.recipient
-        if obj is not None:
-            return obj.language
-        return self.client.language
+        return self.language
         # return super(Confirmation, self).get_print_language()
 
     def get_excerpt_options(self, ar, **kw):

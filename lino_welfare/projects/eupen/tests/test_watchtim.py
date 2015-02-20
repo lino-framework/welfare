@@ -335,7 +335,7 @@ class TestCase(TestCase):
 |           |             |                                  | - prefix : '' --> 'S.A.'            |              |           |
 |           |             |                                  | - street : '' --> 'Quai des Vennes' |              |           |
 |           |             |                                  | - remarks : '' --> '\\n'             |              |           |
-|           |             |                                  | - language : 'de' --> 'fr'          |              |           |
+|           |             |                                  | - language : '' --> 'fr'            |              |           |
 |           |             |                                  | - phone : '' --> '04/349.89.89'     |              |           |
 |           |             |                                  | - country_id : None --> 'B'         |              |           |
 |           |             |                                  | - zip_code : '' --> '4020'          |              |           |

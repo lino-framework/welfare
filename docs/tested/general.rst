@@ -44,9 +44,9 @@ result:
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.GrantingsByX               10        51
- aids.IncomeConfirmation        aids.IncomeConfirmations        16        48
- aids.RefundConfirmation        aids.RefundConfirmations        17        12
- aids.SimpleConfirmation        aids.SimpleConfirmations        14        19
+ aids.IncomeConfirmation        aids.IncomeConfirmations        17        48
+ aids.RefundConfirmation        aids.RefundConfirmations        18        12
+ aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
  art61.Contract                 art61.Contracts                 23        4
  art61.ContractType             art61.ContractTypes             8         1
  badges.Award                   badges.Awards                   6         0
@@ -240,24 +240,25 @@ changes.
 | aids.GrantingsByClient.insert                   | all except anonymous                | aid_type board decision_date start_date end_date   |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.IncomeConfirmations.insert                 | all except anonymous                | client user signer workflow_buttons printed        |
-|                                                 |                                     | company contact_person granting start_date         |
-|                                                 |                                     | end_date category amount id remark                 |
+|                                                 |                                     | company contact_person language granting           |
+|                                                 |                                     | start_date end_date category amount id remark      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.IncomeConfirmationsByGranting.insert       | all except anonymous                | client granting start_date end_date category       |
-|                                                 |                                     | amount company contact_person remark               |
+|                                                 |                                     | amount company contact_person language remark      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.RefundConfirmations.insert                 | all except anonymous                | id client user signer workflow_buttons granting    |
 |                                                 |                                     | start_date end_date doctor_type doctor pharmacy    |
-|                                                 |                                     | company contact_person printed remark              |
+|                                                 |                                     | company contact_person language printed remark     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.RefundConfirmationsByGranting.insert       | all except anonymous                | start_date end_date doctor_type doctor pharmacy    |
-|                                                 |                                     | company contact_person printed remark              |
+|                                                 |                                     | company contact_person language printed remark     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.SimpleConfirmations.insert                 | all except anonymous                | id client user signer workflow_buttons granting    |
-|                                                 |                                     | start_date end_date company contact_person printed |
-|                                                 |                                     | remark                                             |
+|                                                 |                                     | start_date end_date company contact_person         |
+|                                                 |                                     | language printed remark                            |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| aids.SimpleConfirmationsByGranting.insert       | all except anonymous                | start_date end_date company contact_person remark  |
+| aids.SimpleConfirmationsByGranting.insert       | all except anonymous                | start_date end_date company contact_person         |
+|                                                 |                                     | language remark                                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | art61.ContractTypes.insert                      | 100, 110, admin                     | id name name_fr name_de name_nl ref                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+

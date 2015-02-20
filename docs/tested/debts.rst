@@ -60,11 +60,11 @@ Here is the textual representation of the "Expenses" panel:
 <BLANKLINE>
 
 Note that the above table contains a mixture of German and English
-texts. This is because our **current language** is German while the
-**partner** speaks English:
+texts because our **current language** is German while the **partner**
+speaks English:
 
 >>> print(obj.partner.language)
-en
+<BLANKLINE>
 
 Description and Remark have been entererd for this particular Budget
 instance and are therefore in the partner's language. Everything else

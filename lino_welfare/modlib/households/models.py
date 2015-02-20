@@ -13,12 +13,16 @@ from decimal import Decimal
 
 from lino.modlib.households.models import *
 
+from lino.modlib.households.choicelists import child_roles, parent_roles
+
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ungettext
 
+# There is a Partner model imported from lino.modlib.households, but
+# we override it because we want to inherit also from lino_welfare's
+# Partner
 from lino_welfare.modlib.contacts.models import Partner
-# we want to inherit also from lino_welfare's Partner
 
 
 class MemberDependencies(dd.ChoiceList):

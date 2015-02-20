@@ -611,7 +611,7 @@ class SimpleConfirmations(Confirmations):
     id client user signer workflow_buttons
     granting start_date end_date
     # confirmation_text
-    company contact_person #language printed
+    company contact_person language printed
     remark
     """)  # , window_size=(70, 24))
 
@@ -620,7 +620,7 @@ class SimpleConfirmationsByGranting(SimpleConfirmations):
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     start_date end_date
-    company contact_person #language
+    company contact_person language
     remark
     # client granting:25
     """, window_size=(50, 16))
@@ -670,7 +670,7 @@ class IncomeConfirmations(Confirmations):
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
-    company contact_person #language
+    company contact_person language
     granting:25 start_date end_date
     category amount id
     remark
@@ -688,7 +688,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
     client granting:25
     start_date end_date
     category amount
-    company contact_person #language
+    company contact_person language
     remark
     """, window_size=(70, 20), hidden_elements='client granting')
 
@@ -825,7 +825,7 @@ class RefundConfirmations(Confirmations):
     id client user signer workflow_buttons
     granting:25 start_date end_date
     doctor_type doctor pharmacy
-    company contact_person #language printed
+    company contact_person language printed
     remark
     """)  # , window_size=(70, 24))
 
@@ -836,7 +836,7 @@ class RefundConfirmationsByGranting(RefundConfirmations):
     # client granting:25
     start_date end_date
     doctor_type doctor pharmacy
-    company contact_person #language printed
+    company contact_person language printed
     remark
     """, window_size=(70, 20))
 

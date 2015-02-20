@@ -153,10 +153,10 @@ of an excerpt depends on the recipient and the client.
  83   Einfache Bescheinigung      **Kleiderkammer/01.06.14/161/17**               RADERMACHER Hedi (161)                                        de
  84   Einfache Bescheinigung      **Kleiderkammer/01.06.14/161/18**               RADERMACHER Hedi (161)                                        de
  85   Einfache Bescheinigung      **Kleiderkammer/22.05.14/238/19**               FRISCH Paul (238)             Belgisches Rotes Kreuz (100*)   de
- 86   Finanzielle Situation       **Budget Nr. 1 für Gerkens-Kasennova (230)**                                                                  de
+ 86   Finanzielle Situation       **Budget Nr. 1 für Gerkens-Kasennova (230)**
  87   Art.61-Konvention           **Art.61-Konvention#1 (Daniel EMONTS)**         EMONTS Daniel (128)           Belgisches Rotes Kreuz (100*)   de
  88   Art.60§7-Konvention         **Art.60§7-Konvention#1 (Charlotte COLLARD)**   COLLARD Charlotte (118)       BISA (196)                      fr
- 89   VSE                         **VSE#1 (Alfons AUSDEMWALD)**                   AUSDEMWALD Alfons (116)                                       de
+ 89   VSE                         **VSE#1 (Alfons AUSDEMWALD)**                   AUSDEMWALD Alfons (116)
  90   Anwesenheitsbescheinigung   **Teilnehmer #1 (22.05.2014)**                  AUSDEMWALD Alfons (116)                                       de
  91   Curriculum vitae            **AUSDEMWALD Alfons (116)**                     AUSDEMWALD Alfons (116)                                       de
  92   Aktenblatt                  **AUSDEMWALD Alfons (116)**                     AUSDEMWALD Alfons (116)                                       de
