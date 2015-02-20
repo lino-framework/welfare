@@ -9,3 +9,5 @@
    test_households
 
 """
+
+from lino.utils.djangotest import WebIndexTestCase

@@ -2,8 +2,9 @@
 # Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""This module contains "quick" tests that are run on a demo database
-without any fixture. You can run only these tests by issuing::
+"""Runs some tests about reading eID cards.
+
+You can run only these tests by issuing::
 
   $ go welfare
   $ cd lino_welfare/projects/std
@@ -21,7 +22,6 @@ import os
 
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
-from lino.utils.djangotest import WebIndexTestCase
 
 
 def readfile(name):

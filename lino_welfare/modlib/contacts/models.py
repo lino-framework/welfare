@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2013-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
-The `models` module for :mod:`lino_welfare.modlib.contacts`.
+Database models for :mod:`lino_welfare.modlib.contacts`.
 """
 
 from __future__ import unicode_literals
@@ -14,12 +14,12 @@ from lino.api import dd, rt
 
 from lino.modlib.contacts.models import *
 
-addresses = dd.resolve_app('addresses')
+from lino.modlib.addresses.mixins import AddressOwner
 
 
 class Partner(
         Partner,
-        addresses.AddressOwner,
+        AddressOwner,
         mixins.CreatedModified,
         dd.ImportedFields):
 
@@ -48,7 +48,7 @@ für neue Operationen nicht benutzt werden können.""")
         # want to get the `get_overview_elems` from AddressOwner, not
         # from Partner (i.e. AddressLocation).
         elems = super(Partner, self).get_overview_elems(ar)
-        elems += addresses.AddressOwner.get_overview_elems(self, ar)
+        elems += AddressOwner.get_overview_elems(self, ar)
         return elems
 
     @classmethod

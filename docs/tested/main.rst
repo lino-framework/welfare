@@ -13,8 +13,6 @@ A technical tour into the :mod:`lino_welfare.modlib.main` module.
 .. contents::
    :depth: 2
 
-.. include:: /include/tested.rst
-
 
 >>> from __future__ import print_function
 >>> import os

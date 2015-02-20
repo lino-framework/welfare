@@ -23,12 +23,12 @@ class BaseTestCase(TestCase):
     project_root = Path(__file__).parent.parent
 
 
-class ProjectsTests(BaseTestCase):
+class DemoTests(BaseTestCase):
     """
-    $ python setup.py test -s tests.ProjectsTests
+    $ python setup.py test -s tests.DemoTests
     """
 
-    def test_docs(self):
+    def test_std(self):
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'std').absolute()
         self.run_django_manage_test(cwd)
@@ -72,6 +72,9 @@ class DocsTests(BaseTestCase):
 
     def test_excerpts(self):
         return self.run_simple_doctests('docs/tested/excerpts.rst')
+
+    def test_addresses(self):
+        return self.run_simple_doctests('docs/tested/addresses.rst')
 
     def test_immersion(self):
         return self.run_simple_doctests('docs/tested/immersion.rst')
