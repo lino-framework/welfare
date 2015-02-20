@@ -92,7 +92,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get(
             'rolf', 'apchoices/pcsw/Clients/create_visit/user',
             json_fields, 9, **kw)
-        
+
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)
             

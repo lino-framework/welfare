@@ -247,6 +247,10 @@ class Granting(Confirmable, BoardDecision):
 
     aid_type = models.ForeignKey('aids.AidType')
 
+    @classmethod
+    def get_confirmable_fields(cls):
+        return 'client signer aid_type board decision_date start_date end_date'
+
     def full_clean(self):
         super(Granting, self).full_clean()
         # dd.logger.info("20150204 %s %s", self.client_id, self.aid_type_id)
@@ -265,9 +269,12 @@ class Granting(Confirmable, BoardDecision):
     def get_aid_type(self):
         return self.aid_type
 
-    @classmethod
-    def get_confirmable_fields(cls):
-        return 'client signer aid_type board decision_date start_date end_date'
+    def get_pharmacies(self, **kw):
+        pt = self.aid_type.pharmacy_type
+        if pt:
+            return rt.modules.contacts.Company.objects.filter(
+                client_contact_type=pt, **kw)
+        return []
 
     @dd.displayfield(_("Actions"))
     def custom_actions(self, ar, **kw):
@@ -423,7 +430,7 @@ class GrantingsByClient(GrantingsByX):
 
 class GrantingsByType(GrantingsByX):
     master_key = 'aid_type'
-    column_names = "description_column client start_date end_date *"
+    column_names = "description_column client start_date end_date id *"
 
 
 ##
@@ -762,17 +769,19 @@ class RefundConfirmation(Confirmation):
 
     def on_create(self, ar):
         super(RefundConfirmation, self).on_create(ar)
-        qs = self.pharmacy_choices(self.granting)
-        if qs.count() > 0:
-            self.pharmacy = qs[0]
-
+        if self.granting_id:
+            # suggest a default pharmacy only if the client has define
+            # exactly one pharmacy contact.
+            qs = self.granting.get_pharmacies(
+                pcsw_clientcontact_set_by_company__client=self.client)
+            if len(qs) == 1:
+                self.pharmacy = qs[0]
+            
     @dd.chooser()
     def pharmacy_choices(cls, granting):
-        fkw = dict()
-        pt = granting.aid_type.pharmacy_type
-        if pt:
-            fkw.update(client_contact_type=pt)
-        return rt.modules.contacts.Company.objects.filter(**fkw)
+        if granting:
+            return granting.get_pharmacies()
+        return []
 
     @dd.chooser()
     def doctor_choices(cls, doctor_type):

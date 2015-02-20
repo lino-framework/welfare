@@ -1395,6 +1395,11 @@ class ClientContactsByType(ClientContacts):
     auto_fit_column_widths = True
 
 
+class PartnersByClientContactType(contacts.Partners):
+    master_key = 'client_contact_type'
+    column_names = 'name id mti_navigator *'
+
+
 def setup_quicklinks(self, ar, tb):
     tb.add_action('pcsw.Clients', 'find_by_beid')
 

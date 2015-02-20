@@ -222,3 +222,104 @@ action of :class:`IncomeConfirmationsByGranting
 True
 
 
+The pharmacy of a RefundConfirmation
+====================================
+
+The demo database has exactly one AidType with a nonempty
+`pharmacy_type` field:
+
+>>> at = aids.AidType.objects.get(pharmacy_type__isnull=False)
+>>> at
+AidType #6 (u'\xdcbernahme von Arzt- und/oder Medikamentenkosten')
+
+
+There are 4 pharmacies altogether:
+
+>>> rt.show(pcsw.PartnersByClientContactType, at.pharmacy_type)
+=================================== ===== =================================================
+ Name                                ID    Ansicht als
+----------------------------------- ----- -------------------------------------------------
+ Apotheke Reul                       208   Haushalt, **Partner**, Person, **Organisation**
+ Apotheke Schunck                    209   Haushalt, **Partner**, Person, **Organisation**
+ Bosten-Bocken A                     211   Haushalt, **Partner**, Person, **Organisation**
+ Pharmacies Populaires de Verviers   210   Haushalt, **Partner**, Person, **Organisation**
+=================================== ===== =================================================
+<BLANKLINE>
+
+
+There are two grantings with this aid type:
+
+>>> rt.show(aids.GrantingsByType, at)
+====================== ==================== ============== ========== ====
+ Beschreibung           Klient               Laufzeit von   bis        ID
+---------------------- -------------------- -------------- ---------- ----
+ **AMK/27.05.14/139**   JONAS Josef (139)    27.05.14       26.06.14   41
+ **AMK/27.05.14/141**   KAIVERS Karl (141)   27.05.14       27.05.14   42
+====================== ==================== ============== ========== ====
+<BLANKLINE>
+
+
+Usually there is at most one pharmacy among the client's client
+contacts:
+
+>>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=139))
+==================== ===================== ========================= =============
+ Klientenkontaktart   Organisation          Kontaktperson             Bemerkungen
+-------------------- --------------------- ------------------------- -------------
+ Apotheke             Apotheke Reul (208)
+ Arzt                                       Waltraud WALDMANN (223)
+ Hausarzt                                   Werner WEHNICHT (224)
+ Zahnarzt                                   Carmen CASTOU (225)
+==================== ===================== ========================= =============
+<BLANKLINE>
+
+>>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=141))
+==================== ======================== ========================= =============
+ Klientenkontaktart   Organisation             Kontaktperson             Bemerkungen
+-------------------- ------------------------ ------------------------- -------------
+ Apotheke             Apotheke Schunck (209)
+ Kinderarzt                                    Killian KIMMEL (227)
+ Arzt                                          Waltraud WALDMANN (223)
+ Hausarzt                                      Werner WEHNICHT (224)
+==================== ======================== ========================= =============
+<BLANKLINE>
+
+
+
+>>> column_names = "id granting "
+>>> column_names += "granting__client "
+>>> column_names += "pharmacy doctor_type doctor"
+>>> rt.show(aids.RefundConfirmations, column_names=column_names)
+==== ================== ====================== ======================== ================ =========================
+ ID   Hilfebeschluss     Klient                 Apotheke                 Art des Arztes   Arzt
+---- ------------------ ---------------------- ------------------------ ---------------- -------------------------
+ 12   DMH/28.05.14/144   LAZARUS Line (144)                              Kinderarzt       Killian KIMMEL (227)
+ 11   DMH/28.05.14/144   LAZARUS Line (144)                              Zahnarzt         Carmen CASTOU (225)
+ 10   DMH/28.05.14/144   LAZARUS Line (144)                              Hausarzt         Werner WEHNICHT (224)
+ 9    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Arzt             Waltraud WALDMANN (223)
+ 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Kinderarzt       Killian KIMMEL (227)
+ 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Zahnarzt         Walter WALDMANN (226)
+ 6    AMK/27.05.14/141   KAIVERS Karl (141)                              Hausarzt         Werner WEHNICHT (224)
+ 5    AMK/27.05.14/141   KAIVERS Karl (141)                              Arzt             Waltraud WALDMANN (223)
+ 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck (209)   Kinderarzt       Killian KIMMEL (227)
+ 3    AMK/27.05.14/139   JONAS Josef (139)                               Zahnarzt         Carmen CASTOU (225)
+ 2    AMK/27.05.14/139   JONAS Josef (139)                               Hausarzt         Werner WEHNICHT (224)
+ 1    AMK/27.05.14/139   JONAS Josef (139)      Apotheke Reul (208)      Arzt             Waltraud WALDMANN (223)
+==== ================== ====================== ======================== ================ =========================
+<BLANKLINE>
+
+
+There is only one pharmacy per client, but in a confirmation I can
+manually choose any other pharmacy:
+
+>>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt=113&mk=42'
+>>> response = test_client.get(url, REMOTE_USER="rolf")
+>>> result = json.loads(response.content)
+>>> for r in result['rows']:
+...     print r['text']
+<br/>
+Apotheke Reul (208)
+Apotheke Schunck (209)
+Pharmacies Populaires de Verviers (210*)
+Bosten-Bocken A (211)
+
