@@ -80,4 +80,4 @@ class TestCase(TestCase):
         self.assertEqual(Note.objects.all().count(), 0)
     
         rst = StaleGenericRelateds.to_rst(ar)
-        self.assertEqual(rst, "")
+        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n")

@@ -1,23 +1,19 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2013 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 import decimal
 from dateutil.relativedelta import relativedelta
 ONE_DAY = relativedelta(days=1)
 
-from django.db import models
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 
 
-from lino.utils import i2d
-from lino.utils.instantiator import Instantiator
 from lino.core.utils import resolve_model
 from lino.utils import Cycler
 
-from lino.modlib.accounts.utils import AccountTypes
+from lino.modlib.accounts.choicelists import AccountTypes
 
 
 def n2dec(v):

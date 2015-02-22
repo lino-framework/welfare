@@ -26,7 +26,7 @@ from lino.utils.xmlgen.html import E
 from lino import mixins
 from lino.core.constants import _handle_attr_name
 
-from lino.modlib.accounts.utils import AccountTypes
+from lino.modlib.accounts.choicelists import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import ByUser, UserAuthored
 
