@@ -698,7 +698,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
 - Berichte :
-  - System : Stale Controllables
+  - System : Broken GFKs
   - ÖSHZ : Aktenkontrollliste
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
@@ -759,7 +759,7 @@ Hubert is an Integration agent.
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Polls : Meine Polls, Meine Responses
 - Berichte :
-  - System : Stale Controllables
+  - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
@@ -794,7 +794,7 @@ Mélanie is the manager of the Integration service.
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Polls : Meine Polls, Meine Responses
 - Berichte :
-  - System : Stale Controllables
+  - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
@@ -833,7 +833,7 @@ Kerstin is a debts consultant.
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
 - Berichte :
-  - System : Stale Controllables
+  - System : Broken GFKs
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - Orte : Länder
@@ -866,7 +866,7 @@ Caroline is a newcomers consultant.
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Polls : Meine Polls, Meine Responses
 - Berichte :
-  - System : Stale Controllables
+  - System : Broken GFKs
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - Orte : Länder
