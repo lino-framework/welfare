@@ -9,13 +9,14 @@ Social aids
 
     $ python setup.py test -s tests.DocsTests.test_aids
 
-..
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
-    >>> from lino.api.doctest import *
 
+Here we initialize this doctest session:
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.eupen.settings.doctests'
+>>> from lino.api.doctest import *
 >>> ses = rt.login('rolf')
 >>> translation.activate('de')
 

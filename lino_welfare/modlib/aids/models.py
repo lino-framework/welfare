@@ -800,8 +800,8 @@ class RefundConfirmation(Confirmation):
         it.
 
         """
-        if not self.doctor_type:
-            raise ValidationError("Cannot auto-create without doctor type")
+        if not self.doctor_type_id:
+            raise ValidationError(_("Cannot auto-create without doctor type"))
         Person = rt.modules.contacts.Person
         kw = parse_name(text)
         if len(kw) != 2:
