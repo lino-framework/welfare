@@ -11,7 +11,7 @@ The Lino Welfare variant used in Eupen.
    settings
    modlib
    tests.test_watchtim
-   tests.test_stale_gfk
+   tests.test_broken_gfks
 
 """
 from __future__ import unicode_literals

@@ -53,14 +53,10 @@ class Site(Site):
         wc(self.modules.contacts.Person, master_key='partner_ptr')
         wc(self.modules.contacts.Company, master_key='partner_ptr')
         wc(self.modules.pcsw.Client, master_key='partner_ptr')
+
         wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
         wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
         wc(self.modules.jobs.Candidature, master_key='person__partner_ptr')
-
-        #~ self.modules.notes.Note.watch_changes(master_key='project')
-        #~ self.modules.outbox.Mail.watch_changes(master_key='project')
-        #~ self.modules.cal.Event.watch_changes(master_key='project')
-        #~ self.modules.debts.Budget.watch_changes(master_key='partner')
 
         # ContractBase is abstract, so it's not under self.modules
         from lino_welfare.modlib.isip.models import ContractBase
