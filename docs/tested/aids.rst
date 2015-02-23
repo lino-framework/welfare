@@ -4,13 +4,23 @@
 Social aids (tested tour)
 =========================
 
+This document is a technical tour into the
+:mod:`lino_welfare.modlib.aids` module.
+
 ..  This document is part of the test suite.  To test only this
   document, run::
 
     $ python setup.py test -s tests.DocsTests.test_aids
 
-This is a technical tour into the :mod:`lino_welfare.modlib.aids`
-module. Here is how this doctest session:
+.. contents::
+   :local:
+   :depth: 2
+
+A tested document
+=================
+
+This document is part of the Lino Welfare test suite and has been
+tested using doctest with the following initialization code:
 
 >>> from __future__ import print_function
 >>> import os

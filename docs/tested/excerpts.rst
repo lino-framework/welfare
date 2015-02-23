@@ -10,6 +10,7 @@ Excerpts
 
 
 .. contents::
+   :local:
    :depth: 2
 
 About this document

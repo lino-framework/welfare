@@ -16,7 +16,7 @@ A technical tour into the :mod:`lino_welfare.modlib.reception` module.
 A tested document
 =================
 
-This document is part of the Lino Welfare test suite ant has been
+This document is part of the Lino Welfare test suite and has been
 tested using doctest with the following initialization code:
 
 >>> from __future__ import print_function

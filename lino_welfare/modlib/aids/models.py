@@ -796,8 +796,24 @@ class RefundConfirmation(Confirmation):
         return rt.modules.contacts.Person.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
-        """Called when an unknown doctor name was given.  Try to auto-create
-        it.
+        """The :meth:`create_FOO_choice
+        <lino.core.model.Model.create_FOO_choice>` method which turns
+        :attr:`doctor` into a learning combobox.
+
+        This is called when an unknown doctor name was given in order
+        to auto-create a new doctor.
+
+        The text is expected to be the doctor's name, formatted
+        "first_name last_name" without title.
+
+        Doctors are stored as :class:`contacts.Person
+        <lino.modlib.contacts.models.Person>`.
+
+        The :attr:`title` field of the new doctor will be "Dr." (this
+        is currently not configurable).
+
+        The user can enter title, phone number and more by clicking on
+        the pointer arrow when the confirmation has been created.
 
         """
         if not self.doctor_type_id:
