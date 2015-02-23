@@ -14,7 +14,7 @@ configure_plugin('beid', read_only_simulate=True)
 
 class Site(Site):
 
-    languages = 'de fr nl'  # tested docs rely on this distribution
+    languages = 'de fr en'
     hidden_languages = None
     help_url = "http://de.welfare.lino-framework.org"
 

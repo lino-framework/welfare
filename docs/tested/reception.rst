@@ -8,23 +8,22 @@ Reception
 
   $ python setup.py test -s tests.DocsTests.test_reception
 
-
 A technical tour into the :mod:`lino_welfare.modlib.reception` module.
-
-.. include:: /include/tested.rst
 
 .. contents::
    :depth: 2
 
-About this document
-===================
+A tested document
+=================
 
-.. 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
-    >>> from lino.api.doctest import *
+This document is part of the Lino Welfare test suite ant has been
+tested using doctest with the following initialization code:
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.eupen.settings.doctests'
+>>> from lino.api.doctest import *
 
 This document uses the :mod:`lino_welfare.projects.eupen` test
 database:
@@ -109,8 +108,8 @@ coached
 ================= =============== =========================
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
- Hubert Huppertz   ASD             **Visit** **Find date**
- Caroline Carnol   DSBE            **Visit** **Find date**
+ Hubert Huppertz   General         **Visit** **Find date**
+ Caroline Carnol   Integ           **Visit** **Find date**
 ================= =============== =========================
 <BLANKLINE>
 
@@ -128,7 +127,7 @@ newcomer
 ================= =============== =========================
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
- Alicia Allmanns   DSBE            **Visit** **Find date**
+ Alicia Allmanns   Integ           **Visit** **Find date**
  Hubert Huppertz   None            **Visit** **Find date**
  Mélanie Mélard    None            **Visit** **Find date**
 ================= =============== =========================

@@ -1,16 +1,16 @@
 .. _welfare.tested.aids:
 
-===========
-Social aids
-===========
+=========================
+Social aids (tested tour)
+=========================
 
 ..  This document is part of the test suite.  To test only this
   document, run::
 
     $ python setup.py test -s tests.DocsTests.test_aids
 
-
-Here we initialize this doctest session:
+This is a technical tour into the :mod:`lino_welfare.modlib.aids`
+module. Here is how this doctest session:
 
 >>> from __future__ import print_function
 >>> import os
@@ -20,17 +20,17 @@ Here we initialize this doctest session:
 >>> ses = rt.login('rolf')
 >>> translation.activate('de')
 
-Die Demo-Datenbank ist datiert auf den 22. Mai 2014:
 
->>> print(dd.fdl(dd.demo_date()))
-22. Mai 2014
-
-
-Bestätigungsarten
+ConfirmationTypes
 =================
 
-Hier die Liste der Bestätigungsarten, die Lino kennt. Diese Liste ist
-nicht über das Web-Interface veränderbar.
+:class:`ConfirmationTypes
+<lino_welfare.modlib.aids.choicelists.ConfirmationTypes>` is a
+choicelist where each subclass of :class:`Confirmation
+<lino_welfare.modlib.aids.mixins.Confirmation>`
+has been registered. 
+
+Currently Lino Welfare knows three confirmation types.
 
 >>> ses.show(aids.ConfirmationTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -44,10 +44,10 @@ nicht über das Web-Interface veränderbar.
 <BLANKLINE>
 
 
-Hilfearten
+Aid types
 ==========
 
-Hier eine Liste der Hilfearten, die Lino kennt:
+This list can be modified by a user with admin level.
 
 >>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -68,50 +68,6 @@ Hier eine Liste der Hilfearten, die Lino kennt:
  **Total (11 Zeilen)**                             **10**
 ================================================= =========================== ===============================
 <BLANKLINE>
-
-
-
-Beschlüsse und Bestätigungen
-============================
-
-Lino unterscheidet zwischen Hilfe\ *beschlüssen*
-(:class:`Granting <welfare.aids.Granting>`) und Hilfe\ *bestätigungen*
-(:class:`Confirmation <welfare.aids.Confirmation>`).
-
-Hilfe\ *bestätigungen* sind "Präzisierungen" eines Hilfe\
-*beschlusses*.  Beschlüsse sind *prinzipiell*, *langfristig* und
-*allgemein*, Bestätigungen sind *detailliert*, *befristet* und
-*konkret*.  Der Beschluss ist sozusagen die Erlaubnis oder Grundlage,
-Bestätigungen für eine bestimmte Hilfeart auszuhändigen.
-
-Zum Beispiel ist es ein *Beschluss*, wenn jemand
-*Eingliederungseinkommen* erhält.  Aber der monatliche Betrag steht
-nicht im *Beschluss*, sondern nur in der *Bestätigung*, weil der sich
-im Laufe der Zeit ändern kann.
-
-Oder wenn jemand Anrecht auf *Übernahme von Arzt- und
-Medikamentenkosten* hat, ist das ein *Beschluss*. Um daraus eine
-*Bescheinigung* zu machen, muss man auch *Apotheke* und *Arzt*
-angeben.
-
-Bemerkungen
-===========
-
-- Es gibt Hilfearten (z.B. “Erstattung”), für die nie eine
-  Bescheinigung gedruckt wird. Deren Feld (:attr:`Bescheinigungsart
-  <welfare.aids.AidType.confirmation_type>` ist leer.
-
-- Einen “Bestätiger” (:attr:`signer
-  <welfare.aids.Confirmable.signer>`) kann es pro Bescheinigung als
-  auch pro Beschluss geben.  Bestätiger des Beschlusses ist par défaut
-  der Primärbegleiter, Bestätiger einer Bescheinigung ist der des
-  Beschlusses.
-
-- Pro Bescheinigung auch die Apotheke sehen und ändern können (d.h.:
-  Neue Felder AidType.pharmacy_type und RefundConfirmation.pharmacy.
-  (ist allerdings noch nicht vorbelegt aus Klientenkontakt)
-
-
 
 
 Hilfebeschlüsse
@@ -323,4 +279,39 @@ Apotheke Reul (208)
 Apotheke Schunck (209)
 Pharmacies Populaires de Verviers (210*)
 Bosten-Bocken A (211)
+
+
+Creating a doctor
+=================
+
+Here we try to insert a `RefundConfirmation`, specifying a new doctor
+in the `doctor` combobox, and leaving the doctor_type empty.
+
+>>> url = "/api/aids/RefundConfirmationsByGranting"
+>>> data = dict(
+...     mt=119, mk=38,
+...     rp="ext-comp-3054",
+...     an="submit_insert",
+...     start_date="27.05.2014",
+...     end_date="27.05.2014",
+...     doctor_typeHidden="",
+...     doctor_type="Select a Client Contact type...",
+...     doctorHidden="Dr. Bean",
+...     doctor="Dr. Bean",
+...     pharmacyHidden=209,
+...     pharmacy="Apotheke Schunck (209)",
+...     companyHidden="",
+...     company="Select a Organisation...",
+...     contact_personHidden='',
+...     contact_person="Select a Person...",
+...     languageHidden='',
+...     language='',
+...     remark='')
+>>> result = post_json_dict('rolf', url, data)
+>>> result.success
+False
+>>> print(result.message)
+Arzt : [u'Kann keinen Arzt erstellen ohne Arztart']
+
+Doctor : [u'Cannot auto-create without doctor type']
 

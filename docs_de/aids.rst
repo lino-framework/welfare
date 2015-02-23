@@ -28,6 +28,26 @@ Medikamentenkosten* hat, ist das ein *Beschluss*. Um daraus eine
 *Bescheinigung* zu machen, muss man auch *Apotheke* und *Arzt*
 angeben.
 
+Bemerkungen
+===========
+
+- Es gibt Hilfearten (z.B. “Erstattung”), für die nie eine
+  Bescheinigung gedruckt wird. Deren Feld (:attr:`Bescheinigungsart
+  <welfare.aids.AidType.confirmation_type>` ist leer.
+
+- Einen “Bestätiger” (:attr:`signer
+  <welfare.aids.Confirmable.signer>`) kann es pro Bescheinigung als
+  auch pro Beschluss geben.  Bestätiger des Beschlusses ist par défaut
+  der Primärbegleiter, Bestätiger einer Bescheinigung ist der des
+  Beschlusses.
+
+- Pro Bescheinigung auch die Apotheke sehen und ändern können (d.h.:
+  Neue Felder AidType.pharmacy_type und RefundConfirmation.pharmacy.
+  (ist allerdings noch nicht vorbelegt aus Klientenkontakt)
+
+
+
+
 
 Wortschatz
 ==========
