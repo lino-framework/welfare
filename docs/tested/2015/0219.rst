@@ -122,17 +122,14 @@ part of :mod:`lino.utils.jsgen`, which is a general framework for
 generating Javascript.
 
 It uses functions like 
-:func:`set_user_profile <lino.utils.jsgen.set_user_profile>`,
+:func:`with_user_profile <lino.utils.jsgen.with_user_profile>`,
 :func:`declare_vars <lino.utils.jsgen.declare_vars>` and
 :func:`py2js <lino.utils.jsgen.py2js>`.
 
->>> from lino.utils.jsgen import py2js, declare_vars, set_user_profile
+>>> from lino.utils.jsgen import py2js, declare_vars, with_user_profile
 
-Before we can render any Javascript, we must set the user profile for
-which we want it:
 
 >>> ses = rt.login("robin")
->>> set_user_profile(ses.user.profile)
 
 And we must activate a language:
 
@@ -142,11 +139,15 @@ Now we can call :func:`declare_vars <lino.utils.jsgen.declare_vars>`
 who will yield us a series of lines of javascript code.  These lines
 declare the variables used to define the main panel.
 
+When rendering any Javascript, Lino must know the user profile for
+which we want it:
+
 Here is the Javascript generated *before* the change (the following
 snippet has `+SKIP` specified which means that it is **not** being
 tested:
 
->>> js = '\n'.join(declare_vars(lh.main))
+>>> lines = with_user_profile(ses.user.profile, declare_vars, lh.main)
+>>> js = '\n'.join(lines)
 >>> print(js)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
 var client91 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
@@ -170,7 +171,8 @@ behaviour because the horizontal panel for the two fields `client` and
 `granting` is not hidden.  In that case the panel must also be hidden.
 
 
->>> js = '\n'.join(declare_vars(lh.main))
+>>> lines = with_user_profile(ses.user.profile, declare_vars, lh.main)
+>>> js = '\n'.join(lines)
 >>> print(js)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF -SKIP
 var client225 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });

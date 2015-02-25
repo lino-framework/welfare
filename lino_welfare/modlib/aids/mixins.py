@@ -292,7 +292,6 @@ class Confirmation(
         if self.granting_id:
             self.signer = self.granting.signer
             self.client = self.granting.client
-            # self.language = self.client.language
             if self.granting.aid_type_id:
                 at = self.granting.aid_type
                 self.company = at.company
@@ -306,7 +305,6 @@ class Confirmation(
 
     def get_print_language(self):
         return self.language
-        # return super(Confirmation, self).get_print_language()
 
     def get_excerpt_options(self, ar, **kw):
         # Set project field when creating an excerpt from Client.
