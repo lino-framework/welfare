@@ -2,7 +2,10 @@
 
 {% block what %}
 <p>
-für den Zeitraum <b>{{when}}</b> Anrecht auf
+{%- if obj.start_date or obj.end_date %}
+für den Zeitraum <b>{{when}}</b> 
+{% endif -%}
+Anrecht auf
 Übernahme folgender <b>Arzt- und/oder Medikamentenkosten</b>
 durch das ÖSHZ {{iif(obj.is_past(), "hatte", "hat")}}:
 <ul>
