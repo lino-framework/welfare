@@ -4,12 +4,12 @@
 
 <p>
 {% if language == 'de' %}
-{{when}} aus Gründen der sozial-finanziellen Lage Anrecht auf
+<b>{{when}}</b> aus Gründen der sozial-finanziellen Lage Anrecht auf
 eine Sozialhilfe in Naturalien durch Nutzung der
 <b>Lebensmittelbank</b> {{iif(obj.is_past(), "hatte", "hat")}}.
 {% else %}
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}} du droit d'utiliser la <b>banque alimentaire</b>.
+<b>{{when}}</b> du droit d'utiliser la <b>banque alimentaire</b>.
 {% endif %}
 </p>
 

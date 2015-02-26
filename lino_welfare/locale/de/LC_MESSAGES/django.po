@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-23 20:41+0200\n"
-"PO-Revision-Date: 2015-02-25 10:18+0300\n"
+"PO-Revision-Date: 2015-02-25 23:24+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -323,7 +323,7 @@ msgstr "%(when)s %(what)s erhält."
 #, python-format
 msgctxt "date"
 msgid "on %s"
-msgstr " am %s"
+msgstr "am %s"
 
 #: lino_welfare/modlib/aids/mixins.py:224
 #, python-format

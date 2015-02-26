@@ -13,7 +13,6 @@ from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
-import types
 
 from django.conf import settings
 from django.db import models
@@ -27,24 +26,22 @@ from lino import mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
-# from lino.modlib.system.mixins import PeriodEvents
 from lino.modlib.users.mixins import UserAuthored
 from lino.modlib.users.choicelists import UserLevels
-# from lino.modlib.contacts.utils import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
-# from lino.modlib.addresses.mixins import AddressTypes
 from lino.mixins.periods import rangefmt
 
 from .choicelists import ConfirmationStates
 
 
 def e2text(v):
-    if isinstance(v, types.GeneratorType):
-        return "".join([e2text(x) for x in v])
-    if E.iselement(v):
-        return E.tostring(v)
-    return unicode(v)
+    return E.tostring(v)
+#     if isinstance(v, types.GeneratorType):
+#         return "".join([e2text(x) for x in v])
+#     if E.iselement(v):
+#         return E.tostring(v)
+#     return unicode(v)
 
 
 class SignConfirmation(dd.Action):
@@ -184,17 +181,14 @@ class Confirmable(mixins.DatePeriod):
             return set()
         return self.CONFIRMED_FIELDS
 
-    def is_past(self):
-        return (self.end_date and self.end_date <= dd.today())
-
     def get_printable_context(self, **kw):
-        kw.update(when=e2text(self.confirmation_when()))
+        kw.update(when=self.get_period_text())
         kw = super(Confirmable, self).get_printable_context(**kw)
         return kw
 
     def confirmation_text(self):
         kw = dict()
-        kw.update(when=e2text(self.confirmation_when()))
+        kw.update(when=self.get_period_text())
         at = self.get_aid_type()
         if at:
             kw.update(what=unicode(at))
@@ -210,27 +204,6 @@ class Confirmable(mixins.DatePeriod):
             addr = self.client.get_primary_address()
         if addr is not None:
             return addr.living_at_text()
-
-    def confirmation_when(self):
-        if self.start_date and self.end_date:
-            yield " "
-            if self.start_date == self.end_date:
-                s = e2text(E.b(dd.fdl(self.start_date)))
-                yield pgettext("date", "on %s") % s
-            else:
-                kw = dict()
-                kw.update(a=e2text(E.b(dd.fdl(self.start_date))))
-                kw.update(b=e2text(E.b(dd.fdl(self.end_date))))
-                yield pgettext("date range", "between %(a)s and %(b)s") % kw
-        elif self.start_date:
-            yield pgettext("date range", "from")
-            yield " "
-            yield E.b(dd.fdl(self.start_date))
-        elif self.end_date:
-            yield " "
-            yield pgettext("date range", "until")
-            yield " "
-            yield E.b(dd.fdl(self.end_date))
 
     def get_excerpt_title(self):
         at = self.get_aid_type()
@@ -276,11 +249,13 @@ class Confirmation(
         if self.granting is None:
             return
         gp = self.granting.get_period()
-        cp = self.get_period()
-        if not encompass(gp, cp):
-            msg = _("Date range %(p1)s lies outside of granted "
+        if self.start_date or self.end_date:
+            cp = self.get_period()
+            if not encompass(gp, cp):
+                msg = _(
+                    "Date range %(p1)s lies outside of granted "
                     "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
-            raise ValidationError(msg)
+                raise ValidationError(msg)
         if not self.language:
             obj = self.recipient
             if obj is None:
@@ -344,7 +319,7 @@ class Confirmation(
             return at.body_template
 
 
-dd.update_field(Confirmation, 'start_date', default=dd.today,
+dd.update_field(Confirmation, 'start_date',  # default=dd.today,
                 verbose_name=_('Period from'))
 dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
 # dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))

@@ -4,7 +4,7 @@
 <p>
 {%- if language == 'de' -%}
 
-{{when}} eine <b>feste Beilhilfe</b>
+<b>{{when}}</b> eine <b>feste Beilhilfe</b>
 {%- if obj.amount %}
 in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
 {% endif -%}
@@ -16,7 +16,7 @@ in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
 {%- else -%}
 
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}} d'une <b>aide sociale fixe</b>
+<b>{{when}}</b> d'une <b>aide sociale fixe</b>
 prévue par la loi du 2 avril 1965
 {%- if obj.amount %}
 d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>

@@ -4,7 +4,7 @@
 <p>
 {%- if language == 'de' -%}
 
-{{when}} 
+<b>{{when}}</b> 
 das durch Gesetz vom 26. Mai 2002 eingeführte <b>Eingliederungseinkommen</b>
 {%- if obj.amount %}
 in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
@@ -17,7 +17,7 @@ in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
 {%- else -%}
 
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}}
+<b>{{when}}</b>
 du <b>revenu d'intégration</b> prévu par la loi du 26 mai 2002
 {%- if obj.amount %}
 d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>

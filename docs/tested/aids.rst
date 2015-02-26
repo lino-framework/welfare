@@ -325,3 +325,67 @@ Arzt : [u'Kann keinen Arzt erstellen ohne Arztart']
 
 Doctor : [u'Cannot auto-create without doctor type']
 
+
+The period of a confirmation
+============================
+
+>>> from lino.utils.format_date import fdl
+>>> from lino.mixins.periods import DatePeriod
+>>> print(dd.fdl(dd.today()))
+22. Mai 2014
+
+We define a utility function:
+
+>>> def f(start_date, end_date):
+...     if end_date: end_date = i2d(end_date)
+...     if start_date: start_date = i2d(start_date)
+...     p = aids.IncomeConfirmation(
+...         start_date=start_date, end_date=end_date)
+...     for lang in ('en', 'de', 'fr'):
+...         translation.activate(lang)
+...         print(p.get_period_text())
+
+
+A **single day**:
+
+>>> f(20140522, 20140522)
+on May 22, 2014
+am 22. Mai 2014
+le 22 mai 2014
+
+A **fully defined** date range:
+
+>>> f(20140522, 20140621)
+between May 22, 2014 and June 21, 2014
+vom 22. Mai 2014 bis zum 21. Juni 2014
+entre le 22 mai 2014 et le 21 juin 2014
+
+The text of a date range **with open end** can differ depending on whether
+it is in the future or in the past.
+
+>>> f(20140522, None)
+from May 22, 2014
+seit dem 22. Mai 2014
+depuis le 22 mai 2014
+
+>>> f(20140523, None)
+from May 23, 2014
+ab dem 23. Mai 2014
+à partir du 23 mai 2014
+
+
+No start date:
+
+>>> f(None, 20140501)
+until May 1, 2014
+bis zum 1. Mai 2014
+jusqu'au 1 mai 2014
+
+Neither start nor end:
+
+>>> f(None, None)
+<BLANKLINE>
+<BLANKLINE>
+<BLANKLINE>
+ 
+

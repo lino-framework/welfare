@@ -3,7 +3,7 @@
 {% block what %}
 <p>
 {%- if language == 'de' -%}
-{{when}} eine laut Gesetz vom 2. April 1965 eingeführte
+<b>{{when}}</b> eine laut Gesetz vom 2. April 1965 eingeführte
 <b>Sozialhilfe für Ausländer</b>
 {%- if obj.amount %}
 in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
@@ -14,7 +14,7 @@ in Höhe von <b>{{decfmt(obj.amount)}} €/Monat</b>
 {{iif(obj.is_past(), "bezogen hat", "bezieht")}}.
 {%- else -%}
 {{iif(obj.is_past(), "a bénéficié", "bénéficie")}}
-{{when}} d'une <b>aide sociale pour étrangers</b>
+<b>{{when}}</b> d'une <b>aide sociale pour étrangers</b>
 prévue par la loi du 2 avril 1965
 {%- if obj.amount %}
 d'un montant de <b>{{decfmt(obj.amount)}} €/mois</b>
