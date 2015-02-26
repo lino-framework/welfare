@@ -138,9 +138,10 @@ class CreateClientVisit(dd.Action):
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
-        create_prompt_event(obj, obj,
-                            ar.action_param_values.user,
-                            ar.action_param_values.summary,
+        pv = ar.action_param_values
+        if not pv.user:
+            raise Warning(_("Please select a user!"))
+        create_prompt_event(obj, obj, pv.user, pv.summary,
                             settings.SITE.site_config.client_guestrole)
         ar.success(refresh=True)
 
@@ -376,56 +377,3 @@ class CoachingsByClient(pcsw.CoachingsByClient):
             #~ icon_file = 'calendar.png'
 
         return E.div(*elems)
-
-
-"""
-Override library :mod:`WaitingVisitors
-<ml.reception.WaitingVisitors>` table to change one
-behaviour: when clicking in that table on the partner, :ref:`welfare`
-should show the *Client's* and not the *Partner's* detail.
-
-"""
-
-if False:  # doesn't work
-
-    def partner2client(self, obj, ar):
-        return pcsw.Client.objects.get(pk=obj.partner.pk)
-    WaitingVisitors.virtual_fields['partner'].override_getter(partner2client)
-
-if False:  # doesn't work
-    WaitingVisitors.partner = dd.VirtualField(
-        dd.ForeignKey('pcsw.Client'), partner2client)
-    MyWaitingVisitors.partner = dd.VirtualField(
-        dd.ForeignKey('pcsw.Client'), partner2client)
-
-if True:  # works, though is very hackerish
-
-    def func(obj, ar):
-        return pcsw.Client.objects.get(pk=obj.partner.pk)
-    dd.inject_field('cal.Guest', 'client',
-                    dd.VirtualField(dd.ForeignKey('pcsw.Client'), func))
-    for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
-        T.column_names = T.column_names.replace('partner', 'client')
-        T.detail_layout = T.detail_layout.replace('partner', 'client')
-
-if False:  # works, but is very stupid
-
-    class WaitingVisitors(WaitingVisitors):
-    # labels are not automatically inherited. Must inherit manually
-        label = WaitingVisitors.label
-
-        @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
-        def partner(self, obj, ar):
-            return pcsw.Client.objects.get(pk=obj.partner.pk)
-
-    #~ The same for MyWaitingVisitors. See :blogref:`20130817`
-    class MyWaitingVisitors(MyWaitingVisitors):
-        # labels are not automatically inherited. Must inherit manually
-        label = MyWaitingVisitors.label
-
-        @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
-        def partner(self, obj, ar):
-            return pcsw.Client.objects.get(pk=obj.partner.pk)
-
-
-
