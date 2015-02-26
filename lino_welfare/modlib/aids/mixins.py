@@ -319,9 +319,10 @@ class Confirmation(
             return at.body_template
 
 
-dd.update_field(Confirmation, 'start_date',  # default=dd.today,
+dd.update_field(Confirmation, 'start_date',  default=dd.today,
                 verbose_name=_('Period from'))
-dd.update_field(Confirmation, 'end_date', verbose_name=_('until'))
+dd.update_field(Confirmation, 'end_date', default=dd.today,
+                verbose_name=_('until'))
 # dd.update_field(Confirmation, 'user', verbose_name=_('Requested by'))
 dd.update_field(Confirmation, 'company',
                 verbose_name=_("Recipient (Organization)"))
