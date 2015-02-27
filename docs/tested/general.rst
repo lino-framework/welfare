@@ -617,6 +617,14 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | properties.Properties.insert                    | all except anonymous                | id group type name name_fr name_de name_nl         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| reception.BusyVisitors.detail                   | all except anonymous                | event client role state remark workflow_buttons    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| reception.GoneVisitors.detail                   | all except anonymous                | event client role state remark workflow_buttons    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| reception.MyWaitingVisitors.detail              | all except anonymous                | event client role state remark workflow_buttons    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| reception.WaitingVisitors.detail                | all except anonymous                | event client role state remark workflow_buttons    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | system.SiteConfigs.detail                       | admin                               | site_company next_partner_id job_office            |
 |                                                 |                                     | master_budget signer1 signer2 signer1_function     |
 |                                                 |                                     | signer2_function system_note_type                  |

@@ -301,8 +301,8 @@ There are a lot of data fields:
 The detail action
 =================
 
-The following detected a bug which caused the MTI navigator to not
-work:
+The following would have detected a bug which caused the MTI navigator
+to not work (bug has been fixed :blogref:`20150227`) :
 
 >>> from lino.utils.xmlgen.html import E
 >>> p = contacts.Person.objects.get(pk=178)
@@ -311,7 +311,9 @@ work:
 >>> ses = rt.login('robin')
 >>> ar = contacts.Partners.request_from(ses)
 >>> print(cli.get_detail_action(ses))
+<BoundAction(pcsw.Clients, <ShowDetailAction detail (u'Detail')>)>
 >>> print(cli.get_detail_action(ar))
+<BoundAction(pcsw.Clients, <ShowDetailAction detail (u'Detail')>)>
 
 And this tests a potential source of problems in `E.tostring` which I
 removed at the same time:
@@ -320,6 +322,17 @@ removed at the same time:
 >>> ar = contacts.Partners.request_from(ses)
 >>> ar.renderer = settings.SITE.kernel.extjs_renderer
 >>> print(E.tostring(ar.obj2html(p)))
+<a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER (178)</a>
+
 >>> print(E.tostring(ar.obj2html(cli)))
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
 >>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli))
+Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(E.tostring(p.get_mti_buttons(ar)))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+<a href="javascript:Lino.contacts.Partners.detail.run(null,{
+&quot;record_id&quot;: 178 })">Partner</a>, <b>Person</b>, <a
+href="javascript:Lino.pcsw.Clients.detail.run(null,{
+&quot;record_id&quot;: 178 })">Klient</a> [<a
+href="javascript:Lino.contacts.Partners.del_client(null,178,{
+})">&#10060;</a>]

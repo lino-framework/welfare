@@ -339,14 +339,15 @@ def objects():
     calendar = Instantiator('cal.EventType').build
 
     kw = dict(invite_client=False, is_appointment=False)
+    kw.update(dd.str2kw('name', _("Consultations with client")))
     kw.update(dd.str2kw('event_label', _("Consultation")))
-    kw.update(dd.babelkw(
-        'name',
-        de="Visiten (ohne Verabredung)",
-        fr="Consultations sans rendez-vous",
-        en="Prompt consultation",
-        et="Külaline",
-    ))
+    # kw.update(dd.babelkw(
+    #     'name',
+    #     de="Visiten (ohne Verabredung)",
+    #     fr="Consultations sans rendez-vous",
+    #     en="Prompt consultation",
+    #     et="Külaline",
+    # ))
     obj = calendar(**kw)
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)

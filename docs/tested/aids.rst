@@ -324,7 +324,7 @@ in the `doctor` combobox, and leaving the doctor_type empty.
 >>> result.success
 False
 >>> print(result.message)
-Arzt : [u'Kann keinen Arzt erstellen ohne Arztart']
+Arzt : [u'Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist']
 
 Doctor : [u'Cannot auto-create without doctor type']
 

@@ -33,9 +33,11 @@ from lino_welfare.modlib.pcsw.models import ClientStates
 cal = dd.resolve_app('cal')
 cal.EventsByDay.required.update(user_groups='office reception')
 
-MyWaitingVisitors.required.update(user_groups='coaching')
-MyBusyVisitors.required.update(user_groups='coaching')
-MyGoneVisitors.required.update(user_groups='coaching')
+# Visitors.required.update(user_groups='coaching reception')
+# WaitingVisitors.required.update(user_groups='coaching reception')
+# MyWaitingVisitors.required.update(user_groups='coaching')
+# MyBusyVisitors.required.update(user_groups='coaching')
+# MyGoneVisitors.required.update(user_groups='coaching')
 
 
 def appointable_users(*args, **kw):

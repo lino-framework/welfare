@@ -7,6 +7,7 @@ Jobs
 .. include:: /include/tested.rst
 
 .. to test only this document:
+
   $ python setup.py test -s tests.DocsTests.test_jobs
 
 About this document
@@ -115,7 +116,7 @@ HILGERS Hildegard (133)
 ExamPolicy #3 (u'alle 3 Monate')
 
 >>> print(unicode(obj.update_cal_rset().event_type))
-Klientengespräche intern
+Termin
 >>> print(obj.update_cal_rset().event_type.max_conflicting)
 4
 >>> settings.SITE.verbose_client_info_message = True
@@ -164,7 +165,7 @@ conflicting events:
 
 >>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
 >>> e.event_type
-EventType #2 (u'Klientengespr\xe4che intern')
+EventType #2 (u'Termin')
 >>> e.event_type.max_conflicting
 4
 

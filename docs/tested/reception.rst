@@ -25,13 +25,6 @@ tested using doctest with the following initialization code:
 ...    'lino_welfare.projects.eupen.settings.doctests'
 >>> from lino.api.doctest import *
 
-This document uses the :mod:`lino_welfare.projects.eupen` test
-database:
-
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.eupen.settings.doctests
-
->>> ses = rt.login('romain')
 >>> translation.activate('fr')
 
 .. _welfare.tested.reception.AppointmentsByPartner:
@@ -46,8 +39,7 @@ EVERS Eberhart (127)
 This client has 3 appointments. The second and third are evaluations
 led by Hubert with a client for whom she also has a coaching.
 
->>> ses = rt.login('romain')
->>> ses.show(reception.AppointmentsByPartner, obj)
+>>> rt.login('romain').show(reception.AppointmentsByPartner, obj)
 ============================ ================= ===========================================
  Quand                        Traité par        État
 ---------------------------- ----------------- -------------------------------------------
@@ -95,8 +87,6 @@ client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
 them) or (2) a scheduled appointment in the user's calendar.
 
->>> ses = rt.login('romain')
-
 Client #127 is `ClientStates.coached` and has two coachings:
 
 >>> obj = pcsw.Client.objects.get(pk=127)
@@ -104,7 +94,7 @@ Client #127 is `ClientStates.coached` and has two coachings:
 EVERS Eberhart (127)
 >>> print(obj.client_state)
 coached
->>> ses.show(reception.AgentsByClient, obj, language='en')
+>>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
@@ -123,7 +113,7 @@ non-zero :attr:`newcomer_quota
 BRAUN Bruno (257)
 >>> print(obj.client_state)
 newcomer
->>> ses.show(reception.AgentsByClient, obj, language='en')
+>>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
@@ -208,3 +198,96 @@ javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "su": 5, "base_params":
 This one is shorter, so we don't need to parse it for inspecting it.
 Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
 And `prj` will become the value of the `project` field if a new event would be created.
+
+
+Some tables
+===========
+
+In the following tables we remove some columns which are not relevant
+here. Here we define the keyword arguments we are going to pass to the
+:meth:`show <lino.core.requests.BaseRequest.show>` method:
+
+>>> kwargs = dict(language="en")
+>>> kwargs.update(column_names="client position workflow_buttons")
+
+Social workers can see on their computer who is waiting for them in
+the lounge:
+
+>>> rt.login('alicia').show(reception.MyWaitingVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+========================= ========== ====================================
+ Client                    Position   Workflow
+------------------------- ---------- ------------------------------------
+ HILGERS Hildegard (133)   1          **Waiting** → [Receive] [Checkout]
+ KAIVERS Karl (141)        2          **Waiting** → [Receive] [Checkout]
+========================= ========== ====================================
+<BLANKLINE>
+
+>>> rt.login('hubert').show(reception.MyWaitingVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+===================== ========== ====================================
+ Client                Position   Workflow
+--------------------- ---------- ------------------------------------
+ EMONTS Daniel (128)   1          **Waiting** → [Receive] [Checkout]
+ JONAS Josef (139)     2          **Waiting** → [Receive] [Checkout]
+ LAZARUS Line (144)    3          **Waiting** → [Receive] [Checkout]
+===================== ========== ====================================
+<BLANKLINE>
+
+Theresia is the reception clerk. She has no visitors on her own.
+
+>>> rt.login('theresia').show(reception.MyWaitingVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+<BLANKLINE>
+No data to display
+<BLANKLINE>
+
+Theresia is rather going to use the overview tables:
+
+>>> kwargs.update(column_names="client event__user workflow_buttons")
+>>> rt.login('theresia').show(reception.WaitingVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+========================= ================= ====================================
+ Client                    Managed by        Workflow
+------------------------- ----------------- ------------------------------------
+ EMONTS Daniel (128)       Hubert Huppertz   **Waiting** → [Receive] [Checkout]
+ EVERS Eberhart (127)      Mélanie Mélard    **Waiting** → [Receive] [Checkout]
+ HILGERS Hildegard (133)   Alicia Allmanns   **Waiting** → [Receive] [Checkout]
+ JACOBS Jacqueline (137)   Judith Jousten    **Waiting** → [Receive] [Checkout]
+ JONAS Josef (139)         Hubert Huppertz   **Waiting** → [Receive] [Checkout]
+ KAIVERS Karl (141)        Alicia Allmanns   **Waiting** → [Receive] [Checkout]
+ LAMBERTZ Guido (142)      Mélanie Mélard    **Waiting** → [Receive] [Checkout]
+ LAZARUS Line (144)        Hubert Huppertz   **Waiting** → [Receive] [Checkout]
+========================= ================= ====================================
+<BLANKLINE>
+
+>>> rt.login('theresia').show(reception.BusyVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+========================= ================= =======================
+ Client                    Managed by        Workflow
+------------------------- ----------------- -----------------------
+ BRECHT Bernd (177)        Hubert Huppertz   **Busy** → [Checkout]
+ COLLARD Charlotte (118)   Alicia Allmanns   **Busy** → [Checkout]
+ DUBOIS Robin (179)        Mélanie Mélard    **Busy** → [Checkout]
+ ENGELS Edgar (129)        Judith Jousten    **Busy** → [Checkout]
+========================= ================= =======================
+<BLANKLINE>
+
+
+>>> rt.login('theresia').show(reception.GoneVisitors, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+============================ ================= ==========
+ Client                       Managed by        Workflow
+---------------------------- ----------------- ----------
+ MALMENDIER Marc (146)        Alicia Allmanns   **Gone**
+ KELLER Karl (178)            Judith Jousten    **Gone**
+ JEANÉMART Jérôme (181)       Mélanie Mélard    **Gone**
+ GROTECLAES Gregory (132)     Hubert Huppertz   **Gone**
+ EMONTS-GAST Erna (152)       Alicia Allmanns   **Gone**
+ DOBBELSTEIN Dorothée (124)   Judith Jousten    **Gone**
+ AUSDEMWALD Alfons (116)      Mélanie Mélard    **Gone**
+============================ ================= ==========
+<BLANKLINE>
+
+
+

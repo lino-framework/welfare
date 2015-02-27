@@ -52,6 +52,9 @@ class PackagesTests(BaseTestCase):
 
 class DocsTests(BaseTestCase):
     
+    def test_cal(self):
+        return self.run_simple_doctests('docs/tested/cal.rst')
+
     def test_households(self):
         return self.run_simple_doctests('docs/tested/households.rst')
 

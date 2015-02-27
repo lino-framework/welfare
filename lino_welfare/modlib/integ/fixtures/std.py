@@ -23,14 +23,17 @@ from lino.modlib.cal.utils import WORKDAYS
 def objects():
 
     calendar = Instantiator('cal.EventType').build
-    kw = dd.babelkw('name',
-                    de="Klientengespräche intern",
-                    fr="Rencontres internes avec client",
-                    en="Internal meetings with client")
-    kw.update(dd.babelkw('event_label',
-                         de="Termin",
-                         fr="Rendez-vous",
-                         en="Appointment"))
+    kw = dict()
+    kw.update(dd.str2kw('name', _("Internal meetings with client")))
+    kw.update(dd.str2kw('event_label', _("Appointment")))
+    # kw = dd.babelkw('name',
+    #                 de="Klientengespräche intern",
+    #                 fr="Rencontres internes avec client",
+    #                 en="Internal meetings with client")
+    # kw.update(dd.babelkw('event_label',
+    #                      de="Termin",
+    #                      fr="Rendez-vous",
+    #                      en="Appointment"))
     # Lino Welfare does not use time slots when generating evaluation
     # meetings because the exact planning is done by the user. But we
     # define a limit of 4 client meetings per day per user.
