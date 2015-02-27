@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """
-The :xfile:`models.py` for `lino_welfare.modlib.debts`.
+Database models for `lino_welfare.modlib.debts`.
 
 """
 
@@ -134,6 +134,8 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
     class Meta:
         verbose_name = _("Budget")
         verbose_name_plural = _("Budgets")
+
+    quick_search_fields = ['partner__name']
 
     date = models.DateField(
         _("Date"), blank=True,

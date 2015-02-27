@@ -606,7 +606,7 @@ msgstr "Arzt"
 
 #: lino_welfare/modlib/aids/models.py:804
 msgid "Cannot auto-create without doctor type"
-msgstr "Kann keinen Arzt erstellen ohne Arztart"
+msgstr "Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist"
 
 #: lino_welfare/modlib/aids/models.py:812
 #, fuzzy

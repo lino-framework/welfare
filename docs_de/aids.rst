@@ -80,12 +80,19 @@ Hier eine Liste der Hilfearten, die Lino kennt:
 
 .. django2rst::
 
-   rt.show(aids.AidTypes, column_names="name excerpt_title confirmed_by_primary_coach body_template")
+   rt.show(aids.AidTypes, column_names="name excerpt_title confirmed_by_primary_coach body_template confirmation_type")
 
+
+Pro Hilfeart muss man sich entscheiden, welche **Bestätigungsart**
+benutzt wird, um Bestätigunen ausstellen zu können.
 
 
 Bestätigungsarten
 =================
+
+Lino kennt momentan drei Bestätigungsarten. Es können weitere
+hinzugefügt werden, aber dazu wäre entsprechende Programmierung und
+eine neue Version nötig.
 
 Hier eine Liste der Bestätigungsarten, die Lino kennt:
 
@@ -93,6 +100,14 @@ Hier eine Liste der Bestätigungsarten, die Lino kennt:
 
    rt.show(aids.ConfirmationTypes, column_names="text et_template")
 
+
+.. currentmodule:: lino_welfare.modlib.aids.models
+
+:class:`SimpleConfirmation`
+:class:`IncomeConfirmation`
+:class:`RefundConfirmation`
+
+Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist
 
 
 Vorlagen

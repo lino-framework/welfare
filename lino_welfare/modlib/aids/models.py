@@ -734,6 +734,9 @@ class RefundConfirmation(Confirmation):
 
     .. attribute:: doctor_type
 
+    You can leave this field empty, but if you do so, you must specify
+    a :attr:`doctor`, and Lino will use that doctor's type.
+
     .. attribute:: doctor
 
     Pointer to the doctor (an instance of :class:`contacts.Person

@@ -52,8 +52,13 @@ class ConfirmationType(dd.Choice):
 
 
 class ConfirmationTypes(dd.ChoiceList):
-    """
-    A list of the models that may be used as confirmation.
+    """A list of the models that may be used as confirmation.
+
+    .. attribute:: et_template
+
+        The `template` defined for the `ExcerptType` defined for this
+        confirmation type.
+
     """
     item_class = ConfirmationType
     max_length = 100
