@@ -13,7 +13,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 from django.db import models
-from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -377,3 +376,40 @@ class CoachingsByClient(pcsw.CoachingsByClient):
             #~ icon_file = 'calendar.png'
 
         return E.div(*elems)
+
+
+# Override library :mod:`WaitingVisitors
+# <ml.reception.WaitingVisitors>` table to change one
+# behaviour: when clicking in that table on the partner, :ref:`welfare`
+# should show the *Client's* and not the *Partner's* detail.
+
+if True:  # works, though is very hackerish
+
+    def func(obj, ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+    dd.inject_field('cal.Guest', 'client',
+                    dd.VirtualField(dd.ForeignKey('pcsw.Client'), func))
+    for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
+        T.column_names = T.column_names.replace('partner', 'client')
+        T.detail_layout = T.detail_layout.replace('partner', 'client')
+
+if False:  # works, but is very stupid
+
+    class WaitingVisitors(WaitingVisitors):
+        # labels are not automatically inherited. Must inherit manually
+        label = WaitingVisitors.label
+
+        @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+        def partner(self, obj, ar):
+            return pcsw.Client.objects.get(pk=obj.partner.pk)
+
+    #~ The same for MyWaitingVisitors. See :blogref:`20130817`
+    class MyWaitingVisitors(MyWaitingVisitors):
+        # labels are not automatically inherited. Must inherit manually
+        label = MyWaitingVisitors.label
+
+    @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+    def partner(self, obj, ar):
+        return pcsw.Client.objects.get(pk=obj.partner.pk)
+
+

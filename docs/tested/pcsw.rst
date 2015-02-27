@@ -298,5 +298,28 @@ There are a lot of data fields:
 67
 
 
+The detail action
+=================
 
+The following detected a bug which caused the MTI navigator to not
+work:
 
+>>> from lino.utils.xmlgen.html import E
+>>> p = contacts.Person.objects.get(pk=178)
+>>> cli = pcsw.Client.objects.get(pk=178)
+
+>>> ses = rt.login('robin')
+>>> ar = contacts.Partners.request_from(ses)
+>>> print(cli.get_detail_action(ses))
+>>> print(cli.get_detail_action(ar))
+
+And this tests a potential source of problems in `E.tostring` which I
+removed at the same time:
+
+>>> ses = rt.login('robin', renderer=settings.SITE.kernel.extjs_renderer)
+>>> ar = contacts.Partners.request_from(ses)
+>>> ar.renderer = settings.SITE.kernel.extjs_renderer
+>>> print(E.tostring(ar.obj2html(p)))
+>>> print(E.tostring(ar.obj2html(cli)))
+>>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli))
+>>> print(E.tostring(p.get_mti_buttons(ar)))
