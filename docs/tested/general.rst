@@ -7,8 +7,8 @@ Lino Welfare General (tested tour)
 .. include:: /include/tested.rst
 
 .. How to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_general
 
+  $ python setup.py test -s tests.DocsTests.test_general
 
 ..  
     >>> import os
@@ -31,7 +31,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, cv, languages, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
+50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
 131 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -48,7 +48,7 @@ result:
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
  art61.Contract                 art61.Contracts                 23        4
- art61.ContractType             art61.ContractTypes             8         1
+ art61.ContractType             art61.ContractTypes             9         1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
@@ -107,16 +107,16 @@ result:
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
  immersion.Contract             immersion.Contracts             25        7
- immersion.ContractType         immersion.ContractTypes         7         3
+ immersion.ContractType         immersion.ContractTypes         8         3
  immersion.Goal                 immersion.Goals                 5         4
  isip.Contract                  isip.Contracts                  22        26
  isip.ContractEnding            isip.ContractEndings            6         4
  isip.ContractPartner           isip.ContractPartners           6         30
- isip.ContractType              isip.ContractTypes              9         5
+ isip.ContractType              isip.ContractTypes              10        5
  isip.ExamPolicy                isip.ExamPolicies               20        6
  jobs.Candidature               jobs.Candidatures               8         74
  jobs.Contract                  jobs.Contracts                  28        16
- jobs.ContractType              jobs.ContractTypes              10        5
+ jobs.ContractType              jobs.ContractTypes              11        5
  jobs.Job                       jobs.Jobs                       10        8
  jobs.JobProvider               jobs.JobProviders               31        3
  jobs.JobType                   jobs.JobTypes                   5         5
@@ -617,14 +617,6 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | properties.Properties.insert                    | all except anonymous                | id group type name name_fr name_de name_nl         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| reception.BusyVisitors.detail                   | all except anonymous, 210           | event client role state remark workflow_buttons    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| reception.GoneVisitors.detail                   | all except anonymous, 210           | event client role state remark workflow_buttons    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| reception.MyWaitingVisitors.detail              | all except anonymous, 210           | event client role state remark workflow_buttons    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| reception.WaitingVisitors.detail                | all except anonymous, 210           | event client role state remark workflow_buttons    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | system.SiteConfigs.detail                       | admin                               | site_company next_partner_id job_office            |
 |                                                 |                                     | master_budget signer1 signer2 signer1_function     |
 |                                                 |                                     | signer2_function system_note_type                  |
@@ -702,8 +694,8 @@ Rolf is the local system administrator, he has a complete menu:
   - ÖSHZ : Aktenkontrollliste
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - System : Site-Parameter, Benutzer, Hilfetexte
   - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
+  - System : Site-Parameter, Benutzer, Hilfetexte
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
@@ -711,7 +703,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
+  - Lebenslauf : Sprachen, Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
@@ -720,8 +712,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Client projects : Client project types
   - Polls : Choice Sets
 - Explorer :
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
+  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
@@ -801,7 +793,7 @@ Mélanie is the manager of the Integration service.
   - Orte : Länder
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Ereignisarten, Externe Kalender
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
-  - Lebenslauf : Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
+  - Lebenslauf : Sprachen, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
 - Explorer :

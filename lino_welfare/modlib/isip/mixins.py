@@ -29,6 +29,8 @@ from lino.mixins.periods import rangefmt
 
 from lino_welfare.modlib.system.models import Signers
 
+from .choicelists import ContractEvents, OverlapGroups
+
 
 def default_signer1():
     return settings.SITE.site_config.signer1
@@ -38,28 +40,42 @@ def default_signer2():
     return settings.SITE.site_config.signer2
 
 
-class ContractEvents(dd.ChoiceList):
-    verbose_name = _("Observed event")
-    verbose_name_plural = _("Observed events")
-add = ContractEvents.add_item
-add('10', _("Started"), 'started')
-add('20', _("Active"), 'active')
-add('30', _("Ended"), 'ended')
-add('40', _("Signed"), 'signed')
-
-
 class ContractTypeBase(mixins.BabelNamed):
+    """Base class for all `ContractType` models.
+
+    .. attribute:: full_name
+
+        The full description of this contract type as used in printed
+        documents.
+
+    .. attribute:: exam_policy
+
+        The default examination policy to be used for contracts of
+        this type.
+
+        This is a pointer to :class:`ExamPolicy
+        <lino_welfare.modlib.isip.models.ExamPolicy>`. All contract
+        types share the same set of examination policies.
+
+    .. attribute:: overlap_group
+
+        The overlap group to use when checking whether two contracts
+        are overlapping or not.  See
+        :class:`OverlappingContractsTest`.
+
+    """
 
     class Meta:
         abstract = True
 
-    full_name = models.CharField(
-        _("Full name"), blank=True, max_length=200)
+    full_name = models.CharField(_("Full name"), blank=True, max_length=200)
 
     exam_policy = dd.ForeignKey(
         "isip.ExamPolicy",
         related_name="%(app_label)s_%(class)s_set",
         blank=True, null=True)
+
+    overlap_group = OverlapGroups.field(default=OverlapGroups.contracts)
 
 
 class ContractPartnerBase(ContactRelated):
@@ -88,15 +104,18 @@ class ContractPartnerBase(ContactRelated):
 
 
 class OverlappingContractsTest:
-    """
-    Volatile object used to test for overlapping contracts.
+    """Volatile object used to test for overlapping contracts.  It is
+    responsible for issuing the following error messages:
+
+    - :message:`Date range overlaps with X #Y` means that the date
+      periods of two contracts of the same client and the same overlap
+      group (see :class:`OverlapGroups`) overlap.
+
+    - (Currently deactivated) Date range X lies outside of coached period (Y)
+
     """
 
     def __init__(self, client):
-        """
-        Test whether this client has overlapping contracts.
-        """
-        #~ from lino_welfare.modlib.isip.models import ContractBase
         self.client = client
         self.actives = []
         for model in rt.models_by_base(ContractBase):
@@ -108,10 +127,6 @@ class OverlappingContractsTest:
 
     def check(self, con1):
         """
-Checks for the following error conditions:
-
-- Date range X lies outside of coached period (Y)
-- Date range overlaps with X #Y
 
         """
         ap = con1.active_period()
@@ -125,10 +140,12 @@ Checks for the following error conditions:
                     % dict(p2=rangefmt(cp), p1=rangefmt(ap))
         for (p2, con2) in self.actives:
             if con1 != con2 and overlap2(ap, p2):
-                return _("Date range overlaps with %(ctype)s #%(id)s") % dict(
-                    ctype=con2.__class__._meta.verbose_name,
-                    id=con2.pk
-                )
+                if con1.type.overlap_group == con2.type.overlap_group:
+                    msg = _("Date range overlaps with %(ctype)s #%(id)s")
+                    msg %= dict(
+                        ctype=con2.__class__._meta.verbose_name,
+                        id=con2.pk)
+                    return msg
         return None
 
     def check_all(self):
@@ -146,10 +163,18 @@ Checks for the following error conditions:
 
 class ContractBase(Signers, Certifiable, EventGenerator):
 
-    """Abstract base class for
-    :class:`jobs.Contract<lino_welfare.modlib.jobs.models.Contract>`
-    :class:`isip.Contract<lino_welfare.modlib.isip.models.Contract>`
-    :class:`trainings.Training<lino_welfare.modlib.trainings.models.Training>`
+    """Abstract base class for all **integration contracts** (an
+    unofficial term), i.e.
+    :class:`isip.Contract <lino_welfare.modlib.isip.models.Contract>`
+    :class:`jobs.Contract <lino_welfare.modlib.jobs.models.Contract>`
+    and
+    :class:`immersions.Contract
+    <lino_welfare.modlib.immersions.models.Contract>`
+
+    .. attribute:: type
+
+        The type of this contract. Pointer to a subclass of
+        :class:`ContractTypeBase`.
 
     """
 

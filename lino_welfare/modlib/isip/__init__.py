@@ -15,13 +15,16 @@ convention entre le CPAS et un jeune client qui engendra un
 accompagnement individuel de la personne surtout au niveau
 enseignement.
 
-Thismodule is also used and extended by :mod:`lino_welfare.modlib.jobs`.
+This module is also used and extended by
+:mod:`lino_welfare.modlib.jobs` and
+:mod:`lino_welfare.modlib.immersion`.
 
 .. autosummary::
    :toctree:
 
    models
    mixins
+   choicelists
 
 """
 

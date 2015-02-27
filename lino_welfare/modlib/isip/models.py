@@ -27,7 +27,7 @@ COACHINGTYPE_DSBE = 2
 
 
 class ContractType(ContractTypeBase):
-
+    """The type of an :class:`isip.Contract <Class>`."""
     preferred_foreignkey_width = 20
 
     templates_group = 'isip/Contract'
