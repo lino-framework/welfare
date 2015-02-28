@@ -48,55 +48,6 @@ Some database content
 
 >>> ses = rt.login('rolf')
 
-.. _welfare.tested.cal:
-
-Calendars and Subscriptions
----------------------------
-
-A Calendar is a set of events that can be shown or hidden in the
-Calendar Panel.
-
-In Lino Welfare, we have one Calendar per User.  Or to be more
-precise: 
-
-- The :ddref:`users.User` model has a :ddref:`users.User.calendar`
-  field.
-
-- The calendar of an :ddref:`cal.Event` is indirectly defined by the
-  Event's :ddref:`cal.Event.user` field.
-
-Two users can share a common calendar.  This is possible when two
-colleagues really work together when receiving visitors.
-
-A Subscription is when a given user decides that she wants to see the
-calendar of another user.
-
-Every user is, by default, subscribed to her own calendar.
-For example, demo user `rolf` is automatically subscribed to the
-following calendars:
-
->>> with translation.override('de'):
-...    ses.show(cal.SubscriptionsByUser, ses.get_user()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========== ===========
- ID   Kalender   versteckt
----- ---------- -----------
- 7    rolf       Nein
-==== ========== ===========
-<BLANKLINE>
-
-Each user who has view access to the calendar.
-Only UserProfile with a non-empty `office_level` can see the calendar.
-All users with one of the following profiles can see each other's calendars:
-
->>> print('\n'.join([unicode(p) for p in users.UserProfiles.items() if p.coaching_level]))
-Begleiter im DSBE
-Integrations-Assistent (Manager)
-Berater Erstempfang
-Schuldenberater
-Sozi
-Social agent (Manager)
-Verwalter
-
 
 .. 
 
