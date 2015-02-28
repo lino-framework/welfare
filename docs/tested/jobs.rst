@@ -165,7 +165,7 @@ conflicting events:
 
 >>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
 >>> e.event_type
-EventType #2 (u'Termin')
+EventType #3 (u'Termin')
 >>> e.event_type.max_conflicting
 4
 

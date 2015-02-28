@@ -55,7 +55,7 @@ result:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         10
  cal.Event                      cal.OneEvent                    24        505
- cal.EventType                  cal.EventTypes                  19        7
+ cal.EventType                  cal.EventTypes                  19        8
  cal.Guest                      cal.Guests                      9         492
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4

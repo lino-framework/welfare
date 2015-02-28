@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """
-Adds PCSW-specific demo data.
+Demo data for `lino_welfare.modlib.integ`.
 """
 
 from __future__ import unicode_literals
@@ -21,7 +21,11 @@ from lino.modlib.cal.utils import WORKDAYS
 
 
 def objects():
-
+    """
+    Lino Welfare does not use time slots when generating evaluation
+    meetings because the exact planning is done by the user. But we
+    define a limit of 4 client meetings per day per user.
+    """
     calendar = Instantiator('cal.EventType').build
     kw = dict()
     kw.update(dd.str2kw('name', _("Internal meetings with client")))
@@ -34,13 +38,12 @@ def objects():
     #                      de="Termin",
     #                      fr="Rendez-vous",
     #                      en="Appointment"))
-    # Lino Welfare does not use time slots when generating evaluation
-    # meetings because the exact planning is done by the user. But we
-    # define a limit of 4 client meetings per day per user.
+
     kw.update(max_conflicting=4)
     client_calendar = calendar(invite_client=True, **kw)
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
+    yield settings.SITE.site_config
 
     kw = dict()
     for wd in WORKDAYS:
