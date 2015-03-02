@@ -39,28 +39,31 @@ EVERS Eberhart (127)
 This client has 3 appointments. The second and third are evaluations
 led by Hubert with a client for whom she also has a coaching.
 
->>> rt.login('romain').show(reception.AppointmentsByPartner, obj)
-============================ ================= ===========================================
- Quand                        Traité par        État
----------------------------- ----------------- -------------------------------------------
- **mai 5, 2014 at 09:00**     Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **mai 22, 2014**             Mélanie Mélard    **Attend** → [Recevoir] [Quitter]
- **juin 5, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **juil. 7, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **août 7, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **sep. 29, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **oct. 29, 2014 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **déc. 1, 2014 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **jan. 1, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **fév. 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **mars 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **avr. 2, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **mai 4, 2015 at 09:00**     Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **juin 4, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **juil. 6, 2015 at 09:00**   Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
- **août 6, 2015 at 09:00**    Hubert Huppertz   **Accepté** → [Excusé] [Absent] [Arriver]
-============================ ================= ===========================================
+>>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
+...     column_names="event__start_date event__start_time event__user workflow_buttons",
+...     language="en")
+============ ============ ================= =============================================
+ Start date   Start time   Managed by        Workflow
+------------ ------------ ----------------- ---------------------------------------------
+ 5/5/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 5/22/14                   Mélanie Mélard    **Waiting** → [Receive] [Checkout]
+ 6/5/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 7/7/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 8/7/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 9/29/14      09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 10/29/14     09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 12/1/14      09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 1/1/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 2/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 3/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 4/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 5/4/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 6/4/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 7/6/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+ 8/6/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
+============ ============ ================= =============================================
 <BLANKLINE>
+
 
 
 TODO: Note that we had to log in to show the above table.  Not yet

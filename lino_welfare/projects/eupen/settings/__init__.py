@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 
 from lino_welfare.projects.std.settings import *
 
-configure_plugin('beid', read_only_simulate=True)
+# configure_plugin('beid', read_only_simulate=True)
 
 
 class Site(Site):

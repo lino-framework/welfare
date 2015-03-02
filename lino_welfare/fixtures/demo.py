@@ -1018,6 +1018,8 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                     kw.update(ending=ENDINGS.pop())
                 yield pcsw.Coaching(**kw)
 
+    # every 10th partner is obsolete
+
     for i, p in enumerate(contacts.Partner.objects.all()):
         if i % 10 == 0:
             p.is_obsolete = True
@@ -1085,7 +1087,5 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         for obj in settings.SITE.modules.contacts.Partner.objects.all():
             obj.language = LANGS.pop()
             obj.save()
-            
-        
 
 #~ logger.info("20121010 lino_welfare.fixtures.demo has been imported")
