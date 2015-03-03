@@ -121,8 +121,9 @@ newcomer
  Coach             Coaching type   Actions
 ----------------- --------------- -------------------------
  Alicia Allmanns   Integ           **Visit** **Find date**
- Hubert Huppertz   None            **Visit** **Find date**
- Mélanie Mélard    None            **Visit** **Find date**
+ Caroline Carnol   General         **Visit** **Find date**
+ Hubert Huppertz   None            **Visit**
+ Judith Jousten    General         **Visit** **Find date**
 ================= =============== =========================
 <BLANKLINE>
 

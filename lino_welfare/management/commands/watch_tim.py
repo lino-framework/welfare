@@ -31,7 +31,8 @@ from lino.core.utils import is_valid_email
 from lino.core.utils import ChangeWatcher
 
 from lino.api import dd
-from lino.modlib.contacts.utils import name2kw, street2kw
+from lino.mixins.human import name2kw
+from lino.modlib.contacts.utils import street2kw
 from lino.utils import join_words
 
 from lino.utils import dblogger
@@ -1039,4 +1040,5 @@ class Command(DaemonCommand):
 
     #~ def handle_daemon(self, *args, **options):
     def handle(self, *args, **options):
+        raise Exception("No longer used since 20150301")
         main(*args, **options)

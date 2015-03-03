@@ -16,17 +16,20 @@ import os
 os.environ['DJANGO_SETTINGS_MODULE'] = \
     'lino_welfare.projects.std.settings.doctests'
 
-from django.contrib.contenttypes.models import ContentType
-
-from lino.runtime import *
+from lino.api import rt
+from django.conf import settings
 
 from lino.utils.test import DemoTestCase
+
 
 class MyTestCase(DemoTestCase):
 
     django_settings_module = 'lino_welfare.projects.std.settings.doctests'
 
     def test_001(self):
+
+        RetrieveTIGroupsRequest = rt.modules.cbss.RetrieveTIGroupsRequest
+        ContentType = rt.modules.contenttypes.ContentType
         
         json_fields = 'count rows title success no_data_text'
         kw = dict(fmt='json', limit=10, start=0)
@@ -45,7 +48,7 @@ class MyTestCase(DemoTestCase):
         self.demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
         self.demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
         
-        mt = ContentType.objects.get_for_model(cbss.RetrieveTIGroupsRequest).pk
+        mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
         self.demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult',
                       json_fields, 18, mt=mt, mk=1, **kw)
         
@@ -91,7 +94,7 @@ class MyTestCase(DemoTestCase):
         
         self.demo_get(
             'rolf', 'apchoices/pcsw/Clients/create_visit/user',
-            json_fields, 9, **kw)
+            json_fields, 4, **kw)
 
         if False: # TODO
             self.demo_get('rolf','choices/pcsw/ContactsByClient/company?type=1&query=mutu',json_fields,2,**kw)

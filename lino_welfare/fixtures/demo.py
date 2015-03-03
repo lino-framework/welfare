@@ -232,6 +232,9 @@ def objects():
     theresia = users.User(username="theresia", partner=theresia, profile='210')
     yield theresia
 
+    nicolas = users.User(username="nicolas", profile='')
+    yield nicolas
+
     # yield Authority(user=alicia, authorized=hubert)
     # yield Authority(user=alicia, authorized=melanie)
     # yield Authority(user=hubert, authorized=melanie)

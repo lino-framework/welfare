@@ -101,8 +101,8 @@ class UserDetail(UserDetail, cal.UserDetailMixin):
     newcomer_quota
     coaching_type
     coaching_supervisor
-    # newcomer_consultations
-    # newcomer_appointments
+    newcomer_consultations
+    newcomer_appointments
     newcomers.CompetencesByUser
     """
 

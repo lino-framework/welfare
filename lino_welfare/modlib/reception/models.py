@@ -48,7 +48,7 @@ def appointable_users(*args, **kw):
     Additional arguments are forwarded to the query filter.
 
     """
-    qs = settings.SITE.user_model.objects.exclude(profile__isnull=True)
+    qs = settings.SITE.user_model.objects.exclude(profile='')
     kw.update(calendar__isnull=False)
     qs = qs.filter(*args, **kw)
     return qs
@@ -81,8 +81,8 @@ class FindDateByClientTable(ButtonsTable):
         mi = ar.master_instance  # a Client
         if mi is None:
             return
-        for user in appointable_users(newcomer_quota__gt=0):
-        # for user in appointable_users(newcomer_appointments=True):
+        # for user in appointable_users(newcomer_quota__gt=0):
+        for user in appointable_users(newcomer_appointments=True):
         # for user in appointable_users():
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
@@ -107,8 +107,8 @@ be selected manually."""
 
     @dd.chooser()
     def user_choices(self):
-        #return appointable_users(newcomer_appointments=True)
-        return appointable_users()
+        return appointable_users(newcomer_appointments=True)
+        # return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]  # a Client
@@ -134,8 +134,8 @@ class CreateClientVisit(dd.Action):
 
     @dd.chooser()
     def user_choices(self):
-        #return appointable_users(newcomer_consultations=True)
-        return appointable_users()
+        return appointable_users(newcomer_consultations=True)
+        # return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
@@ -280,10 +280,10 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
                 yield obj
         else:
             # yield agents available for open consultation
-            # cnd = Q(newcomer_appointments=True) \
-            #     | Q(newcomer_consultations=True)
-            # for u in appointable_users(cnd):
-            for u in appointable_users(newcomer_quota__gt=0):
+            cnd = Q(newcomer_appointments=True) \
+                | Q(newcomer_consultations=True)
+            for u in appointable_users(cnd):
+            # for u in appointable_users(newcomer_quota__gt=0):
                 # Create a temporary coaching. needed for generating
                 # the action buttons below.
                 yield pcsw.Coaching(
@@ -311,8 +311,8 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
         # client.create_visit is the instance action for
         # CreateClientVisit
         if client.client_state == ClientStates.coached \
-           or user.newcomer_quota > 0:
-           # or user.newcomer_consultations:
+           or user.newcomer_consultations:
+           # or user.newcomer_quota > 0:
             apv = dict(user=user)
             if False:  # apv are ignored, and it's ugly
                 ba = pcsw.Clients.get_action_by_name('create_visit')
@@ -328,8 +328,8 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
             elems += [btn, ' ']
 
         if client.client_state == ClientStates.coached \
-           or user.newcomer_quota > 0:
-           # or user.newcomer_appointments:
+           or user.newcomer_appointments:
+           # or user.newcomer_quota > 0:
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=client.pk)

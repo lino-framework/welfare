@@ -11,10 +11,10 @@ Lino Welfare General (tested tour)
   $ python setup.py test -s tests.DocsTests.test_general
 
 ..  
+    >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
-    >>> from __future__ import print_function
     >>> from lino.api.doctest import *
 
 .. contents:: 
@@ -53,7 +53,7 @@ result:
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
- cal.Calendar                   cal.Calendars                   7         10
+ cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        505
  cal.EventType                  cal.EventTypes                  19        8
  cal.Guest                      cal.Guests                      9         492
@@ -166,7 +166,7 @@ result:
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     21        10
+ users.User                     users.Users                     21        11
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -664,6 +664,7 @@ changes.
 |                                                 |                                     | initials email language id created modified        |
 |                                                 |                                     | remarks event_type access_class calendar           |
 |                                                 |                                     | newcomer_quota coaching_type coaching_supervisor   |
+|                                                 |                                     | newcomer_consultations newcomer_appointments       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | users.Users.insert                              | all except anonymous                | username email first_name last_name partner        |
 |                                                 |                                     | language profile                                   |
