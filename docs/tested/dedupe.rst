@@ -18,7 +18,7 @@ A technical tour into the :mod:`lino.modlib.dedupe` module.
 
 
 ..
-    >>> from __future__ import print_function
+    >>> from __future__ import print_function, unicode_literals
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
@@ -29,7 +29,7 @@ A technical tour into the :mod:`lino.modlib.dedupe` module.
 >>> translation.activate('en')
 
 
-Similar Persons
+Similar Partners
 ---------------
 
 The test database contains some examples of accidental duplicate data
@@ -37,22 +37,26 @@ entry.
 
 One fictive person exists 3 times:
 
-- Dorothée Dobbelstein-Demeulenaere
-- Dorothée Demeulenaere
-- Dorothée Dobbelstein
+>>> for p in contacts.Partner.objects.filter(name__contains=u"Dorothée"):
+...     print(unicode(p))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+Demeulenaere Dorothée (122)
+Dobbelstein-Demeulenaere Dorothée (123)
+Dobbelstein Dorothée (124)
 
 Here we try to create a fourth one:
 
 >>> obj = pcsw.Client(first_name=u"Dorothée", last_name="Dobbelstein")
->>> dedupe.SimilarPersons.get_words(obj)
-set([u'Dobbelstein', u'Doroth\xe9e'])
->>> ses.show(dedupe.SimilarPersons, obj)
-=================================================
+>>> obj.full_clean()  # 
+>>> obj.get_words()
+[u'Dobbelstein', u'Doroth\xe9e']
+>>> ses.show(dedupe.SimilarPartners, obj)
+=============================================
  Other
--------------------------------------------------
- **Mrs Dorothée DOBBELSTEIN (124)**
- **Mrs Dorothée DOBBELSTEIN-DEMEULENAERE (123)**
-=================================================
+---------------------------------------------
+ **Dobbelstein-Demeulenaere Dorothée (123)**
+ **Dobbelstein Dorothée (124)**
+=============================================
 <BLANKLINE>
 
 Note that *Mrs Dorothée Demeulenaere (122)* is missing. Our algorithm
@@ -63,47 +67,52 @@ For the following tests we write a utility function:
 
 >>> def check(first_name, last_name):
 ...     obj = pcsw.Client(first_name=first_name, last_name=last_name)
-...     qs = ses.spawn(dedupe.SimilarPersons, master_instance=obj)
+...     obj.full_clean()
+...     qs = ses.spawn(dedupe.SimilarPartners, master_instance=obj)
 ...     return [unicode(r) for r in qs.data_iterator]
 
 This function returns the names of the persons that Lino would detect
 as duplicates, depending on the given first_name and last_name.
 
 >>> check("Bernard", "Bodard")
-[u'Bernard BODARD (170*)']
+[u'Bodard Bernard (170*)']
 
 Without our utility function the above test would be less readable:
 
 >>> obj = pcsw.Client(first_name="Bernard", last_name="Bodard")
->>> ses.show(dedupe.SimilarPersons, obj)
+>>> obj.full_clean()
+>>> ses.show(dedupe.SimilarPartners, obj)
 ===========================
  Other
 ---------------------------
- **Bernard BODARD (170*)**
+ **Bodard Bernard (170*)**
 ===========================
 <BLANKLINE>
 
 Some users tend to mix up first and last name. Lino would detect that:
 
 >>> check("Bodard", "Bernard")
-[u'Bernard BODARD (170*)']
+[u'Bodard Bernard (170*)']
+
+Until 20150304, a person named "Erna Odar" would have been detected as
+similar to "Bernard Bodard". Which was of course nonsense.
 
 >>> check("Erna", "Odar")
-[u'Bernard BODARD (170*)']
-
-The following duplicates are **not yet** detected though they obviously
-should. We are still experimenting...
-
->>> check("Bernard-Marie", "Bodard")
 []
 
->>> check("Marie", "Bernard-Bodard")
-[]
-
-The following duplicate is not detected because Lino doesn't yet use
-phonetic algorithms:
+And also the following duplicates are now detected because Lino now
+uses "phonetic algorithms":
 
 >>> check("Bernhard", "Bodard")
-[]
+[u'Bodard Bernard (170*)']
 
+>>> check("Bernard-Marie", "Bodard")
+[u'Bodard Bernard (170*)']
+
+
+>>> check("Marie", "Bernard-Bodard")
+[u'Bodard Bernard (170*)']
+
+(That last one is actually not a duplicate, but we should expect Lino to
+make a false positive.)
 

@@ -7,8 +7,8 @@
 
 You can run only these tests by issuing::
 
-  $ cd lino_welfare/projects/eupen/tests
-  $ ./run_tests.sh
+  $ cd lino_welfare/projects/eupen
+  $ python manage.py test tests.test_watchtim
   
 The module contains a single huge test case because we don't want
 Django to recreate a virgin test database for each of them.
@@ -324,22 +324,23 @@ class TestCase(TestCase):
             s = changes_to_rst(obj.partner_ptr)
         # print s
         self.assertEqual(s, """\
-+-----------+-------------+----------------------------------+-------------------------------------+--------------+-----------+
-| User      | Change Type | Object                           | Changes                             | Object type  | object id |
-+===========+=============+==================================+=====================================+==============+===========+
-| watch_tim | Update      | **S.A. Air Liquide Belgium (5)** | - activity_id : None --> 19         | Organisation | 5         |
-|           |             |                                  | - city_id : None --> 3              |              |           |
-|           |             |                                  | - fax : '' --> '04/341.20.70'       |              |           |
-|           |             |                                  | - street_no : '' --> '8'            |              |           |
-|           |             |                                  | - vat_id : '' --> 'BE-0441.857.467' |              |           |
-|           |             |                                  | - prefix : '' --> 'S.A.'            |              |           |
-|           |             |                                  | - street : '' --> 'Quai des Vennes' |              |           |
-|           |             |                                  | - remarks : '' --> '\\n'             |              |           |
-|           |             |                                  | - language : '' --> 'fr'            |              |           |
-|           |             |                                  | - phone : '' --> '04/349.89.89'     |              |           |
-|           |             |                                  | - country_id : None --> 'B'         |              |           |
-|           |             |                                  | - zip_code : '' --> '4020'          |              |           |
-+-----------+-------------+----------------------------------+-------------------------------------+--------------+-----------+
++-----------+-------------+----------------------------------+--------------------------------------------+--------------+-----------+
+| User      | Change Type | Object                           | Changes                                    | Object type  | object id |
++===========+=============+==================================+============================================+==============+===========+
+| watch_tim | Update      | **S.A. Air Liquide Belgium (5)** | - city_id : None --> 3                     | Organisation | 5         |
+|           |             |                                  | - fax : '' --> '04/341.20.70'              |              |           |
+|           |             |                                  | - vat_id : '' --> 'BE-0441.857.467'        |              |           |
+|           |             |                                  | - prefix : '' --> 'S.A.'                   |              |           |
+|           |             |                                  | - street : '' --> 'Quai des Vennes'        |              |           |
+|           |             |                                  | - phonetic_name : '' --> 'AR LAGAD BALGAN' |              |           |
+|           |             |                                  | - country_id : None --> 'B'                |              |           |
+|           |             |                                  | - zip_code : '' --> '4020'                 |              |           |
+|           |             |                                  | - activity_id : None --> 19                |              |           |
+|           |             |                                  | - street_no : '' --> '8'                   |              |           |
+|           |             |                                  | - phone : '' --> '04/349.89.89'            |              |           |
+|           |             |                                  | - remarks : '' --> '\\n'                    |              |           |
+|           |             |                                  | - language : '' --> 'fr'                   |              |           |
++-----------+-------------+----------------------------------+--------------------------------------------+--------------+-----------+
 """)
 
         """

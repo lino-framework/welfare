@@ -70,10 +70,10 @@ result:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   14        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
- contacts.Company               contacts.Companies              30        49
+ contacts.Company               contacts.Companies              31        49
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               26        172
- contacts.Person                contacts.Persons                33        109
+ contacts.Partner               contacts.Partners               27        172
+ contacts.Person                contacts.Persons                34        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
  contenttypes.ContentType       contenttypes.ContentTypes       4         132
@@ -83,7 +83,7 @@ result:
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
  courses.CourseOffer            courses.CourseOffers            6         3
- courses.CourseProvider         courses.CourseProviders         31        2
+ courses.CourseProvider         courses.CourseProviders         32        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              6         5
@@ -102,7 +102,7 @@ result:
  debts.Entry                    debts.Entries                   16        686
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
- households.Household           households.Households           29        14
+ households.Household           households.Households           30        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
@@ -118,7 +118,7 @@ result:
  jobs.Contract                  jobs.Contracts                  28        16
  jobs.ContractType              jobs.ContractTypes              11        5
  jobs.Job                       jobs.Jobs                       10        8
- jobs.JobProvider               jobs.JobProviders               31        3
+ jobs.JobProvider               jobs.JobProviders               32        3
  jobs.JobType                   jobs.JobTypes                   5         5
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
@@ -134,7 +134,7 @@ result:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    67        63
+ pcsw.Client                    pcsw.Clients                    68        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -562,7 +562,7 @@ changes.
 |                                                 |                                     | last_name birth_date age national_id nationality   |
 |                                                 |                                     | declared_name civil_state birth_country            |
 |                                                 |                                     | birth_place language email phone fax gsm image     |
-|                                                 |                                     | AgentsByClient SimilarPersons LinksByHuman         |
+|                                                 |                                     | AgentsByClient SimilarPartners LinksByHuman        |
 |                                                 |                                     | cbss_relations MembersByPerson workflow_buttons    |
 |                                                 |                                     | broker faculty refusal_reason in_belgium_since     |
 |                                                 |                                     | residence_type residence_until group is_seeking    |

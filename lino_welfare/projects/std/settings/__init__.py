@@ -97,7 +97,8 @@ class Site(Site):
 
     def setup_quicklinks(self, ar, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)
-        self.on_each_app('setup_quicklinks', ar, tb)
+
+        super(Site, self).setup_quicklinks(ar, tb)
 
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)

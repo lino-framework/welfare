@@ -15,10 +15,12 @@ from lino.api import dd, rt
 from lino.modlib.contacts.models import *
 
 from lino.modlib.addresses.mixins import AddressOwner
+from lino.modlib.dedupe.mixins import Dedupable
 
 
 class Partner(
         Partner,
+        Dedupable,
         AddressOwner,
         mixins.CreatedModified,
         dd.ImportedFields):
