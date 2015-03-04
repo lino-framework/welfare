@@ -261,7 +261,10 @@ class Confirmation(
             if obj is None:
                 self.language = self.client.language
             else:
-                self.language = obj.language
+                if isinstance(obj, rt.modules.contacts.Role):
+                    self.language = obj.person.language
+                else:
+                    self.language = obj.language
 
     def on_create(self, ar):
         if self.granting_id:
