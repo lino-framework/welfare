@@ -843,6 +843,8 @@ class RefundConfirmation(Confirmation):
         super(RefundConfirmation, self).full_clean()
         if self.doctor_type_id is None and self.doctor_id:
             self.doctor_type = self.doctor.client_contact_type
+        if not self.doctor_type_id:
+            raise ValidationError(_("Please specify a doctor type."))
 
 
 class RefundConfirmations(Confirmations):

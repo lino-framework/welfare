@@ -1040,5 +1040,4 @@ class Command(DaemonCommand):
 
     #~ def handle_daemon(self, *args, **options):
     def handle(self, *args, **options):
-        raise Exception("No longer used since 20150301")
         main(*args, **options)

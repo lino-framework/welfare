@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.21\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-27 17:46+0200\n"
+"POT-Creation-Date: 2015-03-04 03:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,24 +60,24 @@ msgstr ""
 msgid "Attestation"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:257
+#: lino_welfare/fixtures/demo.py:260
 msgid "Colleague"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:342
+#: lino_welfare/fixtures/demo.py:345
 msgid "Consultations with client"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:343
+#: lino_welfare/fixtures/demo.py:346
 msgid "Consultation"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:505
+#: lino_welfare/fixtures/demo.py:508
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:28
 msgid "Health insurance"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:516 lino_welfare/fixtures/std.py:18
+#: lino_welfare/fixtures/demo.py:519 lino_welfare/fixtures/std.py:18
 #: lino_welfare/modlib/aids/models.py:765
 #: lino_welfare/modlib/aids/fixtures/demo.py:49
 #: lino_welfare/modlib/aids/fixtures/std.py:87
@@ -85,55 +85,55 @@ msgstr ""
 msgid "Pharmacy"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:524
+#: lino_welfare/fixtures/demo.py:527
 msgid "Advocate"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:535
+#: lino_welfare/fixtures/demo.py:538
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:548
+#: lino_welfare/fixtures/demo.py:551
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:627
+#: lino_welfare/fixtures/demo.py:630
 msgid "Employment office"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:639
+#: lino_welfare/fixtures/demo.py:642
 msgid "Physician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:647
+#: lino_welfare/fixtures/demo.py:650
 msgid "Family doctor"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:655
+#: lino_welfare/fixtures/demo.py:658
 msgid "Dentist"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:665
+#: lino_welfare/fixtures/demo.py:668
 msgid "Pediatrician"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:825
+#: lino_welfare/fixtures/demo.py:828
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:827
+#: lino_welfare/fixtures/demo.py:830
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 msgid "Information"
 msgstr ""
 
@@ -583,6 +583,10 @@ msgstr ""
 msgid "Dr."
 msgstr ""
 
+#: lino_welfare/modlib/aids/models.py:847
+msgid "Please specify a doctor type."
+msgstr ""
+
 #: lino_welfare/modlib/aids/config/aids/Confirmation/certificate.body.html:12
 #: lino_welfare/modlib/immersion/config/immersion/Contract/immersion.body.html:12
 msgid "Translation"
@@ -748,7 +752,7 @@ msgid "More"
 msgstr ""
 
 #: lino_welfare/modlib/cal/models.py:308
-#: lino_welfare/modlib/integ/fixtures/std.py:28
+#: lino_welfare/modlib/integ/fixtures/std.py:32
 msgid "Appointment"
 msgstr ""
 
@@ -2347,15 +2351,15 @@ msgstr ""
 msgid "Causes d'arrêt des accompagnements"
 msgstr ""
 
-#: lino_welfare/modlib/integ/fixtures/std.py:27
+#: lino_welfare/modlib/integ/fixtures/std.py:31
 msgid "Internal meetings with client"
 msgstr ""
 
-#: lino_welfare/modlib/integ/fixtures/std.py:77
+#: lino_welfare/modlib/integ/fixtures/std.py:80
 msgid "Once after 10 days"
 msgstr ""
 
-#: lino_welfare/modlib/integ/fixtures/std.py:80
+#: lino_welfare/modlib/integ/fixtures/std.py:83
 #: lino_welfare/modlib/sepa/models.py:24
 msgid "Other"
 msgstr ""

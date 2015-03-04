@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-27 17:46+0200\n"
+"POT-Creation-Date: 2015-03-04 03:23+0200\n"
 "PO-Revision-Date: 2015-02-25 23:24+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -59,25 +59,25 @@ msgstr ""
 msgid "Attestation"
 msgstr "Attestation"
 
-#: lino_welfare/fixtures/demo.py:257
+#: lino_welfare/fixtures/demo.py:260
 msgid "Colleague"
 msgstr "Collègue"
 
-#: lino_welfare/fixtures/demo.py:342
+#: lino_welfare/fixtures/demo.py:345
 msgid "Consultations with client"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:343
+#: lino_welfare/fixtures/demo.py:346
 #, fuzzy
 msgid "Consultation"
 msgstr "Consultat nouveaux clients"
 
-#: lino_welfare/fixtures/demo.py:505
+#: lino_welfare/fixtures/demo.py:508
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:28
 msgid "Health insurance"
 msgstr "Caisse d'assurance maladie"
 
-#: lino_welfare/fixtures/demo.py:516 lino_welfare/fixtures/std.py:18
+#: lino_welfare/fixtures/demo.py:519 lino_welfare/fixtures/std.py:18
 #: lino_welfare/modlib/aids/models.py:765
 #: lino_welfare/modlib/aids/fixtures/demo.py:49
 #: lino_welfare/modlib/aids/fixtures/std.py:87
@@ -85,56 +85,56 @@ msgstr "Caisse d'assurance maladie"
 msgid "Pharmacy"
 msgstr "Pharmacie"
 
-#: lino_welfare/fixtures/demo.py:524
+#: lino_welfare/fixtures/demo.py:527
 msgid "Advocate"
 msgstr "Avocat"
 
-#: lino_welfare/fixtures/demo.py:535
+#: lino_welfare/fixtures/demo.py:538
 msgid "Bailiff"
 msgstr "Huissier"
 
-#: lino_welfare/fixtures/demo.py:548
+#: lino_welfare/fixtures/demo.py:551
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:627
+#: lino_welfare/fixtures/demo.py:630
 msgid "Employment office"
 msgstr "Bureau de chômage"
 
-#: lino_welfare/fixtures/demo.py:639
+#: lino_welfare/fixtures/demo.py:642
 msgid "Physician"
 msgstr "Médecin"
 
-#: lino_welfare/fixtures/demo.py:647
+#: lino_welfare/fixtures/demo.py:650
 msgid "Family doctor"
 msgstr "Médecin traitant"
 
-#: lino_welfare/fixtures/demo.py:655
+#: lino_welfare/fixtures/demo.py:658
 msgid "Dentist"
 msgstr "Dentiste"
 
-#: lino_welfare/fixtures/demo.py:665
+#: lino_welfare/fixtures/demo.py:668
 msgid "Pediatrician"
 msgstr "Pédiatre"
 
-#: lino_welfare/fixtures/demo.py:825
+#: lino_welfare/fixtures/demo.py:828
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:827
+#: lino_welfare/fixtures/demo.py:830
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 msgid "Urgent problem"
 msgstr "Problème urgent"
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 #, fuzzy
 msgid "Complain"
 msgstr "Société"
 
-#: lino_welfare/fixtures/demo.py:1030
+#: lino_welfare/fixtures/demo.py:1035
 #, fuzzy
 msgid "Information"
 msgstr "période d'essai"
@@ -599,6 +599,10 @@ msgstr ""
 msgid "Dr."
 msgstr "Monsieur"
 
+#: lino_welfare/modlib/aids/models.py:847
+msgid "Please specify a doctor type."
+msgstr ""
+
 #: lino_welfare/modlib/aids/config/aids/Confirmation/certificate.body.html:12
 #: lino_welfare/modlib/immersion/config/immersion/Contract/immersion.body.html:12
 msgid "Translation"
@@ -770,7 +774,7 @@ msgid "More"
 msgstr "Plus"
 
 #: lino_welfare/modlib/cal/models.py:308
-#: lino_welfare/modlib/integ/fixtures/std.py:28
+#: lino_welfare/modlib/integ/fixtures/std.py:32
 msgid "Appointment"
 msgstr "Rendez-vous"
 
@@ -2399,15 +2403,15 @@ msgstr ""
 msgid "Causes d'arrêt des accompagnements"
 msgstr ""
 
-#: lino_welfare/modlib/integ/fixtures/std.py:27
+#: lino_welfare/modlib/integ/fixtures/std.py:31
 msgid "Internal meetings with client"
 msgstr ""
 
-#: lino_welfare/modlib/integ/fixtures/std.py:77
+#: lino_welfare/modlib/integ/fixtures/std.py:80
 msgid "Once after 10 days"
 msgstr "Une fois après 10 jours"
 
-#: lino_welfare/modlib/integ/fixtures/std.py:80
+#: lino_welfare/modlib/integ/fixtures/std.py:83
 #: lino_welfare/modlib/sepa/models.py:24
 msgid "Other"
 msgstr "Autre"
