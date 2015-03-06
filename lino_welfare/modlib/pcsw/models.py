@@ -21,6 +21,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import string_concat
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
@@ -752,7 +753,7 @@ def daterange_text(a, b):
     return dd.dtos(a) + "-" + dd.dtos(b)
 
 
-ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
+# ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
 
 
 def has_contracts_filter(prefix, period):
@@ -764,7 +765,9 @@ def has_contracts_filter(prefix, period):
 
 
 class Clients(contacts.Persons):
-    "The default definition for :actor:`pcsw.Clients`. "
+    """The list that opens by :menuselection:`Contacts --> Clients`.
+
+    """
     # debug_permissions = '20150129'
     # required = dd.Required(user_groups='coaching')
     model = 'pcsw.Client'
@@ -801,7 +804,11 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality=dd.ForeignKey(
             'countries.Country', blank=True, null=True,
             verbose_name=_("Nationality")),
-        observed_event=ClientEvents.field(blank=True),
+        observed_event=ClientEvents.field(
+            blank=True, help_text=string_concat(
+                _("Extended filter criteria, e.g.:"),
+                "<br/>",
+                _("Active: All those who have some active coaching."))),
         only_primary=models.BooleanField(
             _("Only primary clients"), default=False, help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
@@ -820,6 +827,14 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         """This converts the values of the different parameter panel fields to
         the query filter.
 
+        The filter condition extends to the coachings if and only if
+        at least on of the following is true:
+
+        - `coached_by` is specified
+        - some explicit date range is specified
+        - `observed_event` is set to "active" (which means "All those
+          who have some active coaching".
+
         """
         qs = super(Clients, self).get_request_queryset(ar)
 
@@ -831,7 +846,8 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             period[1] = period[0]
 
         ce = pv.observed_event
-        if pv.coached_by or ce or pv.start_date or pv.end_date:
+        if pv.coached_by or ce == ClientEvents.active \
+           or pv.start_date or pv.end_date:
             qs = add_coachings_filter(
                 qs, pv.coached_by, period, pv.only_primary)
             if pv.and_coached_by:
@@ -841,22 +857,23 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if ce is None:
             pass
         elif ce == ClientEvents.active:
-            if pv.client_state is None:
-                qs = qs.filter(client_state__in=ACTIVE_STATES)
+            pass
+        #     if pv.client_state is None:
+        #         qs = qs.filter(client_state__in=ACTIVE_STATES)
         elif ce == ClientEvents.isip:
             flt = has_contracts_filter('isip_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
         elif ce == ClientEvents.jobs:
             flt = has_contracts_filter('jobs_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
-        elif ce == ClientEvents.immersion:
+        elif dd.is_installed('immersion') and ce == ClientEvents.immersion:
             flt = has_contracts_filter(
                 'immersion_contract_set_by_client', period)
             qs = qs.filter(flt).distinct()
 
         elif ce == ClientEvents.available:
             # Build a condition "has some ISIP or some jobs.Contract
-            # or some trainings.Training" and then `exclude` it.
+            # or some immersion.Contract" and then `exclude` it.
             flt = has_contracts_filter('isip_contract_set_by_client', period)
             flt |= has_contracts_filter('jobs_contract_set_by_client', period)
             if dd.is_installed('immersion'):
@@ -897,7 +914,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         if pv.nationality:
             qs = qs.filter(nationality__exact=pv.nationality)
-        today = settings.SITE.today()
+        today = dd.today()
         if pv.aged_from:
             min_date = today - \
                 datetime.timedelta(days=pv.aged_from * 365)
@@ -912,7 +929,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
             #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
 
-        #~ print(20130901,qs.query)
+        # print(20150305, qs.query)
 
         return qs
 
@@ -991,10 +1008,10 @@ class AllClients(Clients):
 
 
 class StrangeClients(Clients):
-    """Table of Clients whose data seems unlogical or inconsistent."""
+    """Table of Clients whose data seems inconsistent."""
     label = _("Strange Clients")
     help_text = _(
-        "Table of Clients whose data seems unlogical or inconsistent.")
+        "Table of Clients whose data seems inconsistent.")
     required = dd.Required(user_level='manager')
     use_as_default_table = False
     parameters = dict(
@@ -1044,15 +1061,34 @@ class StrangeClients(Clients):
                 except ValidationError as e:
                     messages += e.messages
 
+            if obj.national_id and not obj.is_obsolete:
+                qs = obj.find_similar_instances(
+                    is_obsolete=False, national_id__isnull=False)
+                if qs.count() > 0:
+                    kw = dict(num=qs.count(),
+                              clients=', '.join(map(unicode, qs)))
+                    messages.append(
+                        _("%(num)d similar clients: %(clients)s") % kw)
+                    
             if obj.client_state == ClientStates.coached:
-                if not obj.has_valid_card_data():
+                if obj.is_obsolete:
+                    messages.append(_("Both coached and obsolete."))
+                elif not obj.has_valid_card_data():
                     qs = Shortcuts.id_document.get_uploads(project=obj)
                     if qs.count() == 0:
-                        messages.append(unicode(_(
+                        messages.append(_(
                             "Neither valid eId data "
-                            "nor alternative identifying document")))
+                            "nor alternative identifying document"))
+            else:
+                today = settings.SITE.today()
+                period = (today, today)
+                qs = self.get_coachings(period)
+                if qs.count():
+                    messages.append(_(
+                        "Not coached, but with active coachings."))
+                    
             if messages:
-                obj.error_message = ';\n'.join(messages)
+                obj.error_message = ';\n'.join(map(unicode, messages))
                 yield obj
 
     @dd.displayfield(_('Error message'))

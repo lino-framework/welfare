@@ -69,7 +69,7 @@ StrangeClients
 
 
 The MyStrangeClients table (here e.g. Alicia's) shows only those
-strange client for whom :
+strange client for whom i am the primary coach:
 
 >>> rt.login('alicia').show(pcsw.MyStrangeClients)
 ============================= ============================================================= =================

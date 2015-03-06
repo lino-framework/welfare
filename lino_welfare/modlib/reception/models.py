@@ -221,6 +221,13 @@ class CreateNote(dd.Action):
 
 
 class Clients(pcsw.Clients):  # see blog 2013/0817
+    """The list that opens by :menuselection:`Reception --> Clients`.
+
+    Visible to user profiles in group "reception".
+    It differs from :class:`pcsw.Clients
+    <lino_welfare.modlib.pcsw.models.Clients>` by the visible columns.
+
+    """
     #~ model = 'pcsw.Client'
     column_names = "name_column address_column national_id workflow_buttons"
     auto_fit_column_widths = True
@@ -232,12 +239,12 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     #~ read_beid = beid.BeIdReadCardAction()
     #~ find_by_beid = beid.FindByBeIdAction()
 
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(Clients, self).param_defaults(ar, **kw)
-        kw.update(client_state=None)
-        kw.update(observed_event=pcsw.ClientEvents.active)
-        return kw
+    # @classmethod
+    # def param_defaults(self, ar, **kw):
+    #     kw = super(Clients, self).param_defaults(ar, **kw)
+    #     kw.update(client_state=None)
+    #     kw.update(observed_event=pcsw.ClientEvents.active)
+    #     return kw
 
 
 dd.inject_action('pcsw.Coaching', create_visit=CreateCoachingVisit())
