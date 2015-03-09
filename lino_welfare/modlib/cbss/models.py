@@ -448,7 +448,7 @@ The raw XML response received.
     def __unicode__(self):
         return u"%s #%s" % (self._meta.verbose_name, self.pk)
 
-    def after_ui_save(self, ar):
+    def after_ui_save(self, ar, cw):
         self.execute_request(ar)
         if self.status == RequestStates.failed:
             ar.set_response(message=self.debug_messages)

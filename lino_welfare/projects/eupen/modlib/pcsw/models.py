@@ -86,7 +86,7 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    dedupe.SimilarPartners:10 humanlinks.LinksByHuman:30 cbss_relations:30
+    dupable_partners.SimilarPartners:10 humanlinks.LinksByHuman:30 cbss_relations:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
     """, label=_("Human Links"))
 

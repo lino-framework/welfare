@@ -21,13 +21,14 @@ class Site(Site):
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
-        # remove whole apps:
+        # remove whole plugin:
         kw.update(debts=None)
         kw.update(aids=None)
         kw.update(sepa=None)
         kw.update(iban=None)
         kw.update(badges=None)
         kw.update(properties=None)
+        kw.update(dupable_partners=None)
         # alternative implementations:
         kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')

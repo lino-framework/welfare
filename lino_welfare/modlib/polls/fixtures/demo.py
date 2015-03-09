@@ -40,7 +40,7 @@ def demo_polls():
             default_choiceset=choiceset)
         obj.full_clean()
         obj.save()
-        obj.after_ui_save(None)
+        obj.after_ui_save(None, None)
         return obj
 
     yield poll(

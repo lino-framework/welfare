@@ -37,7 +37,6 @@ cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
 properties = dd.resolve_app('properties')
 contacts = dd.resolve_app('contacts')
-dedupe = dd.resolve_app('dedupe')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
@@ -90,17 +89,11 @@ class RefuseClient(dd.ChangeStateAction):
         super(RefuseClient, self).run_from_ui(ar)
         #~ self.add_system_note(ar,obj)
         silent = False
-        ar.add_system_note(
-            obj,
-            subject,
-            body,
-            silent)
+        ar.add_system_note(obj, subject, body, silent)
         ar.success(**kw)
 
 
-class Client(contacts.Person,
-             # dd.BasePrintable,
-             beid.BeIdCardHolder):
+class Client(contacts.Person, beid.BeIdCardHolder):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino.modlib.beid.models.BeIdCardHolder`.
@@ -309,8 +302,8 @@ class Client(contacts.Person,
                 ssin.ssin_validator(self.national_id)
         super(Client, self).full_clean(*args, **kw)
 
-    def after_ui_save(self, ar):
-        super(Client, self).after_ui_save(ar)
+    def after_ui_save(self, ar, cw):
+        super(Client, self).after_ui_save(ar, cw)
         self.update_reminders(ar)
         #~ return kw
 
@@ -603,7 +596,8 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    dedupe.SimilarPartners:10 humanlinks.LinksByHuman:30 cbss_relations:30
+    dupable_partners.SimilarPartners:10 \
+    humanlinks.LinksByHuman:30 cbss_relations:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
     """, label=_("Human Links"))
 
@@ -1062,8 +1056,8 @@ class StrangeClients(Clients):
                     messages += e.messages
 
             if obj.national_id and not obj.is_obsolete:
-                qs = obj.find_similar_instances(
-                    is_obsolete=False, national_id__isnull=False)
+                qs = obj.find_similar_instances(is_obsolete=False)
+                #, national_id__isnull=False)
                 if qs.count() > 0:
                     kw = dict(num=qs.count(),
                               clients=', '.join(map(unicode, qs)))

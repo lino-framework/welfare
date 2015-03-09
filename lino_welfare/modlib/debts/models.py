@@ -290,7 +290,7 @@ The total monthly amount available for debts distribution."""))
             rv += amount
         return rv
 
-    def after_ui_save(self, ar):
+    def after_ui_save(self, ar, cw):
         """
         Called after successful save()
         """

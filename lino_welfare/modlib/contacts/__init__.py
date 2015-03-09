@@ -24,3 +24,4 @@ class Plugin(Plugin):
         m.add_action('contacts.Companies')
         m.add_separator('-')
         m.add_action('contacts.Partners', label=_("Partners (all)"))
+

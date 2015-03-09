@@ -15,15 +15,13 @@ from lino.api import dd, rt
 from lino.modlib.contacts.models import *
 
 from lino.modlib.addresses.mixins import AddressOwner
-from lino.modlib.dedupe.mixins import Dupable
+
+from lino.modlib.dupable_partners.mixins import DupablePartner
 
 
 class Partner(
-        Partner,
-        Dupable,
-        AddressOwner,
-        mixins.CreatedModified,
-        dd.ImportedFields):
+        Partner, DupablePartner,
+        AddressOwner, mixins.CreatedModified, dd.ImportedFields):
 
     """
     :ref:`welfare` defines a `vat_id` field on Partner but doesn't

@@ -17,7 +17,7 @@ them to a script and run it using :manage:`run`.
    pcsw
    newcomers
    households
-   dedupe
+   dupable_partners
    aids
    cbss
    courses

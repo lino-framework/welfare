@@ -228,8 +228,8 @@ class Contract(JobSupplyment):
                 df.add('type')
         return df
 
-    def after_ui_save(self, ar):
-        super(Contract, self).after_ui_save(ar)
+    def after_ui_save(self, ar, cw):
+        super(Contract, self).after_ui_save(ar, cw)
         if self.job_id is not None:
             if self.applies_until and self.applies_until > dd.today():
                 n = 0

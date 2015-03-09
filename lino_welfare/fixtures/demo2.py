@@ -17,4 +17,3 @@ def objects():
         if qs.count() > 0:
             ses.selected_rows = [qs[0]]
             yield et.get_or_create_excerpt(ses)
-

@@ -133,7 +133,6 @@ class Site(Site):
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
-        yield 'lino.modlib.dedupe'
         yield 'lino.modlib.boards'
 
         if False:  # not yet ready
@@ -170,6 +169,7 @@ class Site(Site):
 
         yield 'lino.modlib.appypod'
         yield 'lino.modlib.export_excel'
+        yield 'lino.modlib.dupable_partners'
 
     def get_admin_main_items(self):
         """Returns the items of the admin index page:

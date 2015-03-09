@@ -162,8 +162,9 @@ class Event(Event):
             self.event_type = settings.SITE.site_config.client_calendar
         super(Event, self).full_clean()
 
+    # def when_text(self, ar):
     @dd.displayfield(_("When"))
-    def when_text(self, ar):
+    def natural_when(self, ar):
         assert ar is not None
         #~ print 20130802, ar.renderer
         #~ raise foo

@@ -268,8 +268,8 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         super(ContractBase, self).on_create(ar)
         self.client_changed(ar)
 
-    def after_ui_save(self, ar):
-        super(ContractBase, self).after_ui_save(ar)
+    def after_ui_save(self, ar, cw):
+        super(ContractBase, self).after_ui_save(ar, cw)
         self.update_reminders(ar)
 
     def full_clean(self, *args, **kw):

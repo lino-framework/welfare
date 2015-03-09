@@ -146,21 +146,21 @@ evaluation events which have been generated.
 >>> obj.exam_policy
 ExamPolicy #1 (u'every month')
 >>> rt.show(cal.EventsByController, obj)
-============================ ================ ================= ============= ===============
- When                         Summary          Managed by        Assigned to   Workflow
----------------------------- ---------------- ----------------- ------------- ---------------
- **Aug. 4, 2014 at 09:00**    Appointment 1    Hubert Huppertz                 **Suggested**
- **Sept. 4, 2014 at 09:00**   Appointment 2    Hubert Huppertz                 **Suggested**
- **Oct. 6, 2014 at 09:00**    Appointment 3    Hubert Huppertz                 **Suggested**
- **Nov. 6, 2014 at 09:00**    Appointment 4    Hubert Huppertz                 **Suggested**
- **Dec. 8, 2014 at 09:00**    Appointment 5    Hubert Huppertz                 **Suggested**
- **Jan. 8, 2015 at 09:00**    Appointment 6    Hubert Huppertz                 **Suggested**
- **Feb. 9, 2015 at 09:00**    Appointment 7    Hubert Huppertz                 **Suggested**
- **March 9, 2015 at 09:00**   Appointment 8    Hubert Huppertz                 **Suggested**
- **April 9, 2015 at 09:00**   Appointment 9    Hubert Huppertz                 **Suggested**
- **May 11, 2015 at 09:00**    Appointment 10   Hubert Huppertz                 **Suggested**
- **June 11, 2015 at 09:00**   Appointment 11   Hubert Huppertz                 **Suggested**
-============================ ================ ================= ============= ===============
+======================= ================ ================= ============= ===============
+ When                    Summary          Managed by        Assigned to   Workflow
+----------------------- ---------------- ----------------- ------------- ---------------
+ *Mon 8/4/14 (09:00)*    Appointment 1    Hubert Huppertz                 **Suggested**
+ *Thu 9/4/14 (09:00)*    Appointment 2    Hubert Huppertz                 **Suggested**
+ *Mon 10/6/14 (09:00)*   Appointment 3    Hubert Huppertz                 **Suggested**
+ *Thu 11/6/14 (09:00)*   Appointment 4    Hubert Huppertz                 **Suggested**
+ *Mon 12/8/14 (09:00)*   Appointment 5    Hubert Huppertz                 **Suggested**
+ *Thu 1/8/15 (09:00)*    Appointment 6    Hubert Huppertz                 **Suggested**
+ *Mon 2/9/15 (09:00)*    Appointment 7    Hubert Huppertz                 **Suggested**
+ *Mon 3/9/15 (09:00)*    Appointment 8    Hubert Huppertz                 **Suggested**
+ *Thu 4/9/15 (09:00)*    Appointment 9    Hubert Huppertz                 **Suggested**
+ *Mon 5/11/15 (09:00)*   Appointment 10   Hubert Huppertz                 **Suggested**
+ *Thu 6/11/15 (09:00)*   Appointment 11   Hubert Huppertz                 **Suggested**
+======================= ================ ================= ============= ===============
 <BLANKLINE>
 
 

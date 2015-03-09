@@ -56,7 +56,7 @@ def objects():
     def finish_contract(ctr):
         ctr.full_clean()
         ctr.save()
-        ctr.after_ui_save(ar)
+        ctr.after_ui_save(ar, None)
         ctr.update_reminders(ar)
         return ctr
 

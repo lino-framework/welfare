@@ -190,8 +190,8 @@ during a given period.
         #~ return self.user.username+' / '+self.client.first_name+' '+self.client.last_name[0]
         return self.user.username + ' / ' + self.client.last_name + ' ' + self.client.first_name[0]
 
-    def after_ui_save(self, ar):
-        super(Coaching, self).after_ui_save(ar)
+    def after_ui_save(self, ar, cw):
+        super(Coaching, self).after_ui_save(ar, cw)
         if self.primary:
             for c in self.client.coachings_by_client.exclude(id=self.id):
                 if c.primary:

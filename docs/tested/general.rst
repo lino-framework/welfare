@@ -31,8 +31,8 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, dedupe, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel.
-131 models:
+50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_partners.
+132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -70,20 +70,20 @@ result:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   14        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
- contacts.Company               contacts.Companies              31        49
+ contacts.Company               contacts.Companies              30        49
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               27        172
- contacts.Person                contacts.Persons                34        109
+ contacts.Partner               contacts.Partners               26        172
+ contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         132
+ contenttypes.ContentType       contenttypes.ContentTypes       4         133
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
  courses.CourseOffer            courses.CourseOffers            6         3
- courses.CourseProvider         courses.CourseProviders         32        2
+ courses.CourseProvider         courses.CourseProviders         31        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              6         5
@@ -100,9 +100,10 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
+ dupable_partners.Word          dupable_partners.Words          3         390
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
- households.Household           households.Households           30        14
+ households.Household           households.Households           29        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
@@ -118,7 +119,7 @@ result:
  jobs.Contract                  jobs.Contracts                  28        16
  jobs.ContractType              jobs.ContractTypes              11        5
  jobs.Job                       jobs.Jobs                       10        8
- jobs.JobProvider               jobs.JobProviders               32        3
+ jobs.JobProvider               jobs.JobProviders               31        3
  jobs.JobType                   jobs.JobTypes                   5         5
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
@@ -134,7 +135,7 @@ result:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    68        63
+ pcsw.Client                    pcsw.Clients                    67        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -724,7 +725,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
   - Eigenschaften : Eigenschaften
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten, Phonetic words
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Badges : Badge Awards
   - SEPA : Konten
