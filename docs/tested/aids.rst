@@ -90,7 +90,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> translation.activate('de')
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
-<span>Du bist besch&#228;ftigt in <b>Beratung mit COLLARD Charlotte (118)</b> (<b>Versammlung beenden</b>). </span>
+<span>Du bist besch&#228;ftigt in <em>Beratung mit COLLARD Charlotte (118)</em> (<b>Versammlung beenden</b>). </span>
 <span>Du hast 4 Eintr&#228;ge in <b>Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 
 
@@ -203,26 +203,26 @@ AidType #6 (u'\xdcbernahme von Arzt- und/oder Medikamentenkosten')
 There are 4 pharmacies altogether:
 
 >>> rt.show(pcsw.PartnersByClientContactType, at.pharmacy_type)
-=================================== ===== =================================================
+=================================== ===== ===============================================
  Name                                ID    Ansicht als
------------------------------------ ----- -------------------------------------------------
- Apotheke Reul                       208   Haushalt, **Partner**, Person, **Organisation**
- Apotheke Schunck                    209   Haushalt, **Partner**, Person, **Organisation**
- Bosten-Bocken A                     211   Haushalt, **Partner**, Person, **Organisation**
- Pharmacies Populaires de Verviers   210   Haushalt, **Partner**, Person, **Organisation**
-=================================== ===== =================================================
+----------------------------------- ----- -----------------------------------------------
+ Apotheke Reul                       208   Haushalt, **Partner**, Person, *Organisation*
+ Apotheke Schunck                    209   Haushalt, **Partner**, Person, *Organisation*
+ Bosten-Bocken A                     211   Haushalt, **Partner**, Person, *Organisation*
+ Pharmacies Populaires de Verviers   210   Haushalt, **Partner**, Person, *Organisation*
+=================================== ===== ===============================================
 <BLANKLINE>
 
 
 There are two grantings with this aid type:
 
 >>> rt.show(aids.GrantingsByType, at)
-====================== ==================== ============== ========== ====
- Beschreibung           Klient               Laufzeit von   bis        ID
----------------------- -------------------- -------------- ---------- ----
- **AMK/27.05.14/139**   JONAS Josef (139)    27.05.14       26.06.14   41
- **AMK/27.05.14/141**   KAIVERS Karl (141)   27.05.14       27.05.14   42
-====================== ==================== ============== ========== ====
+==================== ==================== ============== ========== ====
+ Beschreibung         Klient               Laufzeit von   bis        ID
+-------------------- -------------------- -------------- ---------- ----
+ *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   41
+ *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   42
+==================== ==================== ============== ========== ====
 <BLANKLINE>
 
 

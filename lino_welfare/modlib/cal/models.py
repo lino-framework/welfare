@@ -10,10 +10,10 @@ from __future__ import unicode_literals
 
 import datetime
 
+
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
-from django.utils.translation import ugettext
-from django.contrib.humanize.templatetags.humanize import naturaltime, naturalday
+from django.contrib.humanize.templatetags.humanize import naturalday
 
 from django.db.models import Q
 
@@ -22,6 +22,7 @@ from lino.api import dd, rt
 from lino.utils.xmlgen.html import E
 
 from lino.modlib.cal.models import *
+from lino.modlib.cal.utils import format_date
 
 from lino.modlib.cal.workflows import take, feedback
 from lino.modlib.reception.models import checkout_guest
@@ -162,14 +163,15 @@ class Event(Event):
             self.event_type = settings.SITE.site_config.client_calendar
         super(Event, self).full_clean()
 
-    # def when_text(self, ar):
     @dd.displayfield(_("When"))
-    def natural_when(self, ar):
+    def when_text(self, ar):
+        # Overrides `lino.modlib.cal.models_event.Event.when_text`.
+        # It is a bit of redundant code, but making it configurable
+        # would be nitpicky.
         assert ar is not None
-        #~ print 20130802, ar.renderer
-        #~ raise foo
-        #~ txt = naturaltime(datetime.datetime.combine(self.start_date,self.start_time or datetime.datetime.now().time()))
-        txt = naturalday(self.start_date)
+        # txt = naturalday(self.start_date)
+        txt = format_date(self.start_date, 'EE ')
+        txt += dd.fds(self.start_date)
         if self.start_time is not None:
             txt = "%s %s %s" % (
                 txt, pgettext_lazy("(time)", "at"),

@@ -7,7 +7,7 @@ user.
 
 You can run only these tests by issuing::
 
-  $ python setup.py test -s tests.ProjectsTests.test_chatelet
+  $ python setup.py test -s tests.DemoTests.test_chatelet
 
 Or::
 
@@ -67,7 +67,7 @@ class TestCase(TestCase):
         self.assertEqual(result['message'],
                          """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
-            [u'Alcohol', 1, u'robin', 1, u'', 1, {u'id': True}, {}, False]])
+            [u'Alcohol', 1, u'robin', 1, u'', 1, {}, {}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
