@@ -761,6 +761,11 @@ def has_contracts_filter(prefix, period):
 class Clients(contacts.Persons):
     """The list that opens by :menuselection:`Contacts --> Clients`.
 
+    .. attribute:: client_state
+
+        If not empty, show only Clients whose `client_state` equals
+        the specified value.
+
     """
     # debug_permissions = '20150129'
     # required = dd.Required(user_groups='coaching')
@@ -1000,24 +1005,57 @@ class AllClients(Clients):
     column_names = '*'
     required = dd.Required(user_level='admin')
 
+need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
+
 
 class StrangeClients(Clients):
-    """Table of Clients whose data seems inconsistent."""
+    """Table of Clients whose data seems inconsistent.
+
+    .. attribute:: invalid_ssin
+
+       Whether to check for invalid SSIN
+
+    .. attribute:: overlapping_contracts
+
+       Whether to check for overlapping contracts.
+
+    .. attribute:: similar_persons
+
+       Whether to check for similar persons.
+
+    .. attribute:: invalid_coaching
+
+        If this is checked, Lino consults :class:`Coaching` and tests for
+        the following error conditions:
+
+        - :message:`Both coached and obsolete.`
+    
+        - :message:`Neither valid eId data nor alternative identifying
+          document`
+    
+        - :message:`Not coached, but with active coachings.`
+
+    """
     label = _("Strange Clients")
     help_text = _(
         "Table of Clients whose data seems inconsistent.")
     required = dd.Required(user_level='manager')
     use_as_default_table = False
     parameters = dict(
-        invalid_niss=models.BooleanField(
-            _("Check NISS validity"), default=True),
+        invalid_ssin=models.BooleanField(
+            _("Check SSIN validity"), default=True),
         overlapping_contracts=models.BooleanField(
-            _("Check for overlapping contracts"), default=True),
+            _("Check for overlapping contracts"), default=False),
+        similar_persons=models.BooleanField(
+            _("Check for similar persons"), default=False),
+        invalid_coaching=models.BooleanField(
+            _("Check for invalid coaching data"), default=False),
         **Clients.parameters)
     params_layout = """
-    aged_from aged_to gender also_obsolete
+    aged_from aged_to gender also_obsolete nationality
     client_state coached_by and_coached_by start_date end_date observed_event
-    invalid_niss overlapping_contracts only_primary nationality
+    invalid_ssin overlapping_contracts invalid_coaching similar_persons \
+    only_primary
     """
 
     column_names = "name_column error_message primary_coach"
@@ -1035,6 +1073,12 @@ class StrangeClients(Clients):
         return list(self.get_data_rows(ar, [obj]))[0]
 
     @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(StrangeClients, self).param_defaults(ar, **kw)
+        kw.update(client_state='')
+        return kw
+
+    @classmethod
     def get_data_rows(self, ar, qs=None):
         """
         """
@@ -1049,13 +1093,19 @@ class StrangeClients(Clients):
             if pv.overlapping_contracts:
                 messages += OverlappingContractsTest(obj).check_all()
 
-            if pv.invalid_niss and obj.national_id is not None:
+            if pv.invalid_ssin and obj.national_id is not None:
                 try:
                     ssin.ssin_validator(obj.national_id)
                 except ValidationError as e:
                     messages += e.messages
 
-            if obj.national_id and not obj.is_obsolete:
+                # formatted = ssin.format_ssin(obj.national_id)
+                # if obj.national_id != formatted:
+                #     messages.append(
+                #         _("Wrongly formatted SSIN {0} should be {1}").format(
+                #             obj.national_id, formatted))
+
+            if pv.similar_persons:
                 qs = obj.find_similar_instances(is_obsolete=False)
                 #, national_id__isnull=False)
                 if qs.count() > 0:
@@ -1064,22 +1114,26 @@ class StrangeClients(Clients):
                     messages.append(
                         _("%(num)d similar clients: %(clients)s") % kw)
                     
-            if obj.client_state == ClientStates.coached:
-                if obj.is_obsolete:
-                    messages.append(_("Both coached and obsolete."))
-                elif not obj.has_valid_card_data():
+            if pv.invalid_ssin:
+                if obj.client_state == ClientStates.coached:
+                    if obj.is_obsolete:
+                        messages.append(_("Both coached and obsolete."))
+            if pv.invalid_ssin:
+                if obj.client_state in need_valid_card_data \
+                   and not obj.has_valid_card_data():
                     qs = Shortcuts.id_document.get_uploads(project=obj)
                     if qs.count() == 0:
                         messages.append(_(
                             "Neither valid eId data "
                             "nor alternative identifying document"))
-            else:
-                today = settings.SITE.today()
-                period = (today, today)
-                qs = self.get_coachings(period)
-                if qs.count():
-                    messages.append(_(
-                        "Not coached, but with active coachings."))
+            if pv.invalid_coaching:
+                if obj.client_state != ClientStates.coached:
+                    today = settings.SITE.today()
+                    period = (today, today)
+                    qs = self.get_coachings(period)
+                    if qs.count():
+                        messages.append(_(
+                            "Not coached, but with active coachings."))
                     
             if messages:
                 obj.error_message = ';\n'.join(map(unicode, messages))

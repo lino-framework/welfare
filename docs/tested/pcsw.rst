@@ -32,68 +32,116 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 StrangeClients
 ==============
 
->>> ses.show(pcsw.StrangeClients)
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| Name                        | Error message                                               | Primary coach   |
-+=============================+=============================================================+=================+
-| AUSDEMWALD Alfons (116)     | Neither valid eId data nor alternative identifying document | Caroline Carnol |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| COLLARD Charlotte (118)     | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| DOBBELSTEIN Dorothée (124)  | 1 similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123); | Mélanie Mélard  |
-|                             | Neither valid eId data nor alternative identifying document |                 |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| DUBOIS Robin (179)          | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| EMONTS Daniel (128)         | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| EMONTS-GAST Erna (152)      | 1 similar clients: EMONTSPOOL Erwin (151);                  | Hubert Huppertz |
-|                             | Neither valid eId data nor alternative identifying document |                 |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| ENGELS Edgar (129)          | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| EVERS Eberhart (127)        | Neither valid eId data nor alternative identifying document | Alicia Allmanns |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| GROTECLAES Gregory (132)    | Neither valid eId data nor alternative identifying document | Alicia Allmanns |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| HILGERS Hildegard (133)     | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| JACOBS Jacqueline (137)     | Neither valid eId data nor alternative identifying document | Caroline Carnol |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| JEANÉMART Jérôme (181)      | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| JONAS Josef (139)           | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| KAIVERS Karl (141)          | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| KELLER Karl (178)           | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| LAMBERTZ Guido (142)        | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| LAZARUS Line (144)          | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| MALMENDIER Marc (146)       | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| MEESSEN Melissa (147)       | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMACHER Alfons (153)    | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMACHER Christian (155) | Neither valid eId data nor alternative identifying document | Alicia Allmanns |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMACHER Edgard (157)    | Neither valid eId data nor alternative identifying document | Caroline Carnol |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMACHER Guido (159)     | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMACHER Hedi (161)      | Neither valid eId data nor alternative identifying document | Caroline Carnol |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| RADERMECKER Rik (173)       | Neither valid eId data nor alternative identifying document | Mélanie Mélard  |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| DA VINCI David (165)        | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| VAN VEEN Vincent (166)      | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
-| ÖSTGES Otto (168)           | Neither valid eId data nor alternative identifying document | Hubert Huppertz |
-+-----------------------------+-------------------------------------------------------------+-----------------+
+>>> ses.show(pcsw.StrangeClients, param_values=dict(similar_persons=True))
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| Name                                    | Error message                                                              | Primary coach   |
++=========================================+============================================================================+=================+
+| AUSDEMWALD Alfons (116)                 | Neither valid eId data nor alternative identifying document                | Caroline Carnol |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| BASTIAENSEN Laurent (117)               | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| BRAUN Bruno (257)                       | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| COLLARD Charlotte (118)                 | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DEMEULENAERE Dorothée (122)             | 1 similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123);                |                 |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DOBBELSTEIN Dorothée (124)              | 1 similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123);                | Mélanie Mélard  |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DOBBELSTEIN-DEMEULENAERE Dorothée (123) | 2 similar clients: DEMEULENAERE Dorothée (122), DOBBELSTEIN Dorothée (124) | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DUBOIS Robin (179)                      | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| EIERSCHAL Emil (175)                    | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| EMONTS Daniel (128)                     | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| EMONTS-GAST Erna (152)                  | 1 similar clients: EMONTSPOOL Erwin (151);                                 | Hubert Huppertz |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| EMONTSPOOL Erwin (151)                  | 1 similar clients: EMONTS-GAST Erna (152);                                 |                 |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| ENGELS Edgar (129)                      | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| ERNST Berta (125)                       | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| EVERS Eberhart (127)                    | Neither valid eId data nor alternative identifying document                | Alicia Allmanns |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| FRISCH Paul (238)                       | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| GERNEGROß Germaine (131)                | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| GROTECLAES Gregory (132)                | Neither valid eId data nor alternative identifying document                | Alicia Allmanns |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| HILGERS Henri (134)                     | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| HILGERS Hildegard (133)                 | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| INGELS Irene (135)                      | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| JACOBS Jacqueline (137)                 | Neither valid eId data nor alternative identifying document                | Caroline Carnol |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| JANSEN Jérémy (136)                     | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| JEANÉMART Jérôme (181)                  | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| JONAS Josef (139)                       | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| KAIVERS Karl (141)                      | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| KASENNOVA Tatjana (221)                 | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| KELLER Karl (178)                       | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| LAHM Lisa (176)                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| LAMBERTZ Guido (142)                    | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| LASCHET Laura (143)                     | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| LAZARUS Line (144)                      | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| MALMENDIER Marc (146)                   | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| MARTELAER Mark (172)                    | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| MEESSEN Melissa (147)                   | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| MEIER Marie-Louise (149)                | 1 similar clients: VANDENMEULENBOS Marie-Louise (174);                     |                 |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Alfons (153)                | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Berta (154)                 | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Christian (155)             | Neither valid eId data nor alternative identifying document                | Alicia Allmanns |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Daniela (156)               | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Edgard (157)                | Neither valid eId data nor alternative identifying document                | Caroline Carnol |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Guido (159)                 | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Hedi (161)                  | Neither valid eId data nor alternative identifying document                | Caroline Carnol |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMACHER Inge (162)                  | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| RADERMECKER Rik (173)                   | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| VANDENMEULENBOS Marie-Louise (174)      | 1 similar clients: MEIER Marie-Louise (149);                               |                 |
+|                                         | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DA VINCI David (165)                    | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| DI RUPO Didier (164)                    | Neither valid eId data nor alternative identifying document                |                 |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| VAN VEEN Vincent (166)                  | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
+| ÖSTGES Otto (168)                       | Neither valid eId data nor alternative identifying document                | Hubert Huppertz |
++-----------------------------------------+----------------------------------------------------------------------------+-----------------+
 <BLANKLINE>
 
 

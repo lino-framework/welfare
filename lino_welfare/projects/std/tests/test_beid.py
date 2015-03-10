@@ -84,7 +84,8 @@ class BeIdTests(RemoteAuthTestCase):
             card_data=readfile('beid_tests_1.txt'))
         post_data[constants.URL_PARAM_ACTION_NAME] = 'find_by_beid'
 
-        # First attempt
+        # First attempt fails because a person with exactly the same
+        # name already exists.
         response = self.client.post(
             url, post_data,
             REMOTE_USER='root',
@@ -96,7 +97,8 @@ class BeIdTests(RemoteAuthTestCase):
                     "Jean Jacques Jeffin in our database.")
         self.assertEqual(result['message'], expected)
 
-        # Second attempt
+        # Second attempt. We are reading the same card, but this time
+        # there is a person with this `national_id`.
         obj.national_id = "680601 053-29"
         # obj.first_name = "Jean-Claude"
         obj.full_clean()
@@ -127,6 +129,8 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
         # print(result['message'])
         self.assertEqual(result['message'], expected)
 
+        # ... and we answer yes:
+
         cb = result['xcallback']
         self.assertEqual(cb['title'], "Confirmation")
         self.assertEqual(cb['buttons'], {'yes': 'Yes', 'no': 'No'})
@@ -146,7 +150,79 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
         addr = addresses.Address.objects.get(partner=obj)
         self.assertEqual(addr.city.name, "Tallinn")
 
-        # No similar person exists. Create new client from eid
+        # Third attempt. A person with almost same name and same
+        # national_id.
+
+        url = '/api/pcsw/Clients'
+        obj.national_id = "680601 053-29"
+        obj.first_name = "Jean-Jacques"
+        obj.middle_name = ""
+        obj.full_clean()
+        obj.save()
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = """\
+Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name : 'Jean-Jacques' -> 'Jean'
+<br/>Middle name : '' -> 'Jacques'"""
+        # print(result['message'])
+        self.assertEqual(result['message'], expected)
+
+        # Fourth attempt. A person with slightly different name and
+        # equivalent but wrongly formatted national_id exists.  Lino
+        # does not recognize this duplicate here. To avoid this case,
+        # the StrangeClients table warns about wrongly formatted
+        # national_id fields.
+
+        url = '/api/pcsw/Clients'
+        obj.national_id = "68060105329"
+        obj.first_name = "Jean-Jacques"
+        obj.middle_name = ""
+        # obj.client_state = pcsw.ClientStates.coached
+        obj.full_clean()
+        obj.save()
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='root',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = "Create new client Jean Jacques Jeffin : Are you sure?"
+        # print(result['message'])
+        self.assertEqual(result['message'], expected)
+
+        # two methods to test whether the StrangeClients table
+        # actually would have warned:
+
+        ar = pcsw.StrangeClients.request()
+        self.assertEqual(ar.get_total_count(), 1)
+        self.assertEqual(
+            ar[0].error_message,
+            "Invalid SSIN 68060105329 : "
+            "A formatted SSIN must have 13 positions")
+
+        # second method to test the same result:
+
+        s = pcsw.StrangeClients.request().to_rst()
+        self.assertEqual(s, """\
+=========================== ==================================================================== ===============
+ Name                        Error message                                                        Primary coach
+--------------------------- -------------------------------------------------------------------- ---------------
+ JEFFIN Jean-Jacques (100)   Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions
+=========================== ==================================================================== ===============
+""")
+        
+        # Last attempt for this card. No similar person exists. Create
+        # new client from eid.
 
         obj.first_name = "Jean-Claude"
         obj.national_id = ""
