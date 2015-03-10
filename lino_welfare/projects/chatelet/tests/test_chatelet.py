@@ -12,7 +12,7 @@ You can run only these tests by issuing::
 Or::
 
   $ cd lino_welfare/projects/chatelet
-  $ python manage.py test
+  $ python manage.py test tests.test_chatelet
 
 """
 
@@ -71,3 +71,29 @@ class TestCase(TestCase):
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
+    def test_dupable_hidden(self):
+        """Since dupable_partners is hidden, we can create duplicate partners
+        without wearning.
+
+        """
+        Client = rt.modules.pcsw.Client
+        User = settings.SITE.user_model
+
+        User(username='robin', profile=UserProfiles.admin).save()
+
+        Client(first_name="First", last_name="Last").save()
+
+        data = dict(an="submit_insert")
+        data.update(first_name="First")
+        data.update(last_name="Last")
+        data.update(genderHidden="M")
+        data.update(gender="Male")
+        response = self.client.post(
+            '/api/pcsw/Clients', data=data, REMOTE_USER="robin")
+        result = self.check_json_result(
+            response,
+            "detail_handler_name data_record rows "
+            "close_window success message")
+        self.assertEqual(result['success'], True)
+        self.assertEqual(
+            result['message'], 'Client "LAST First (101)" has been created.')
