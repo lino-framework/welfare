@@ -24,7 +24,7 @@ from django.utils.translation import string_concat
 
 
 from lino.api import dd
-from lino.dd import dtos
+from lino.api.dd import dtos
 
 from lino.utils.choosers import chooser
 # from lino.utils import ssin

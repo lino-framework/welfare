@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino.dd import babel_values
+from lino.api.dd import babel_values
 from lino.utils.instantiator import Instantiator
 from lino.api import dd, rt
 

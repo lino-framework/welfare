@@ -58,7 +58,7 @@ class BeIdTests(RemoteAuthTestCase):
         from django.conf import settings
         from lino.modlib.users.choicelists import UserProfiles
         
-        from lino.api.runtime import countries, addresses, pcsw, users
+        from lino.api.shell import countries, addresses, pcsw, users
 
         # is it the right settings module?
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],

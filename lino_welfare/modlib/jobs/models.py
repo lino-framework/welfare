@@ -542,7 +542,7 @@ class Job(SectorFunction):
     #~ Shows the persons that whish this Offer.
 
     #~ It is a slave report without
-    #~ :attr:`master_key <lino.dd.Table.master_key>`,
+    #~ :attr:`master_key <lino.api.dd.Table.master_key>`,
     #~ which is allowed only because it also overrides
     #~ :meth:`get_request_queryset`
     #~ """

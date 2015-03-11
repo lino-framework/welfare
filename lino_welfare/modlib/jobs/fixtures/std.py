@@ -11,7 +11,7 @@ TODO: move data for `cv.Regime` and `cv.Status` to :mod:`lino.modlib.cv`.
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.instantiator import Instantiator
-from lino.dd import babel_values
+from lino.api.dd import babel_values
 
 from lino.api import dd
 

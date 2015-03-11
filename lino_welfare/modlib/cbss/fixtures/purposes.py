@@ -9,7 +9,7 @@ Fills the cbss.Purposes table with the official values defined in
 
 """
 
-from lino.dd import babel_values
+from lino.api.dd import babel_values
 from lino.core.utils import resolve_model
 
 

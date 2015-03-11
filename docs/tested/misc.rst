@@ -14,7 +14,7 @@ Miscellaneous
 
 ..  
     >>> from __future__ import print_function
-    >>> from lino.runtime import *
+    >>> from lino.api.shell import *
     >>> from django.utils import translation
     >>> from django.test import Client
     >>> import json

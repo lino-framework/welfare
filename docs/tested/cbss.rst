@@ -9,7 +9,7 @@ CBSS connection
   $ python setup.py test -s tests.DocsTests.test_cbss
 
 .. 
-  >>> from lino.runtime import *
+  >>> from lino.api.shell import *
   >>> from django.utils import translation
 
 The examples in this document are in German:

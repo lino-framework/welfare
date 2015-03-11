@@ -10,7 +10,7 @@ Courses
 
 .. 
   >>> from django.utils import translation
-  >>> from lino.runtime import *
+  >>> from lino.api.shell import *
 
 >>> ses = settings.SITE.login('rolf')
 

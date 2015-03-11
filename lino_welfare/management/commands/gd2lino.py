@@ -35,7 +35,7 @@ from lino.utils import join_words
 from lino.utils.instantiator import Instantiator
 
 from lino.api import dd, rt
-from lino import rt
+from lino.api import rt
 from lino.utils import camelize
 
 from lino.core.utils import app_labels

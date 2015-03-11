@@ -50,7 +50,7 @@ class BeIdTests(RemoteAuthTestCase):
         from lino.modlib.beid.mixins import holder_model
         Holder = holder_model()
         
-        from lino.api.runtime import countries, addresses, pcsw, users
+        from lino.api.shell import countries, addresses, pcsw, users
 
         # is it the right settings module?
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],

@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from lino.utils.instantiator import Instantiator
-from lino.dd import babel_values
+from lino.api.dd import babel_values
 #~ from lino.models import update_site_config
 from lino.modlib.properties.models import PropType
 

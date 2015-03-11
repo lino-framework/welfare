@@ -12,7 +12,7 @@ from lino.utils import Cycler
 from lino.core.utils import resolve_model
 # from django.utils.translation import ugettext_lazy as _
 
-from lino.dd import babel_values
+from lino.api.dd import babel_values
 
 from lino.api import dd, rt
 from lino.modlib.users.choicelists import UserProfiles

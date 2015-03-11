@@ -16,7 +16,7 @@ Preparatory stuff:
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.runtime import *
+>>> from lino.api.shell import *
 >>> from django.utils import translation
 >>> from django.test import Client
 >>> import json
