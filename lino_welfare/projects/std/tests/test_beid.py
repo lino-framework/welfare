@@ -149,6 +149,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
         obj = pcsw.Client.objects.get(id=100)
         addr = addresses.Address.objects.get(partner=obj)
         self.assertEqual(addr.city.name, "Tallinn")
+        self.assertEqual(addr.primary, True)
 
         # Third attempt. A person with almost same name and same
         # national_id.

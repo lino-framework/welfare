@@ -503,7 +503,8 @@ class Client(contacts.Person, beid.BeIdCardHolder):
         return E.div(*elems)
 
     def get_beid_diffs(self, attrs):
-        """Overrides :meth:`dd.beid.BeIdCardHolder.get_beid_diffs`.
+        """Overrides
+        :meth:`lino.modlib.beid.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
         Address = rt.modules.addresses.Address
@@ -514,6 +515,8 @@ class Client(contacts.Person, beid.BeIdCardHolder):
         try:
             addr = Address.objects.get(**kw)
         except Address.DoesNotExist:
+            if Address.objects.filter(partner=self, primary=True).count() == 0:
+                kw.update(primary=True)
             addr = Address(**kw)
         objects.append(addr)
         for fldname, new in attrs.items():
