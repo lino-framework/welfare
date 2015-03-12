@@ -65,7 +65,7 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
     import os
     import shutil
     from atelier import rstgen
-    from lino import dd
+    from lino.api import rt
     ses = rt.login()
     # dd.logger.info("20141029 %s", settings.SITE)
     coll = {}

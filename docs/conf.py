@@ -238,32 +238,10 @@ extlinks.update(ticket=('http://trac.lino-framework.org/ticket/%s', '#'))
 # import lino_welfare
 # extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
-
-
 #~ nitpicky = True # use -n in Makefile instead
 
 #~ todo_include_todos = True
 
-if True:
-
-    # http://sphinx.pocoo.org/theming.html
-    #~ html_theme = "default"
-    html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
-
-else:
-    # http://sphinx-better-theme.readthedocs.org/en/latest/installation.html
-    from better import better_theme_path
-    html_theme_path = [better_theme_path]
-    # html_static_path.append(better_theme_path + '/better')
-    # html_static_path.insert(0, better_theme_path + '/better')
-    # print 20140629, html_static_path
-
-    html_theme = 'better'
-    html_theme_options = dict()
-    html_theme_options.update(sidebarwidth='100rem')
-    html_short_title = "Home"
-    # html_theme_options.update(cssfiles=['_static/style.css'])
-    # html_logo = None
-    # html_favicon = None
-
-
+# http://sphinx.pocoo.org/theming.html
+html_theme = "classic"
+html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
