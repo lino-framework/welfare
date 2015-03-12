@@ -85,7 +85,7 @@ from lino.utils import dblogger
 from lino_welfare.modlib.households.models import (
     Member, MemberRoles, Household)
 
-from lino.runtime import households, contacts
+from lino.api.shell import households, contacts
 
 LinkTypes = rt.modules.humanlinks.LinkTypes
 Link = rt.modules.humanlinks.Link

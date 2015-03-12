@@ -36,14 +36,14 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.runtime import cal
-        from lino.runtime import pcsw
-        from lino.runtime import isip
-        from lino.runtime import users
-        from lino.runtime import contacts
+        from lino.api.shell import cal
+        from lino.api.shell import pcsw
+        from lino.api.shell import isip
+        from lino.api.shell import users
+        from lino.api.shell import contacts
         # pcsw = dd.resolve_app('pcsw')
         # isip = dd.resolve_app('isip')
-        # from lino.runtime import courses, users, settings
+        # from lino.api.shell import courses, users, settings
 
         users.User(username="robin",
                    profile=UserProfiles.admin,

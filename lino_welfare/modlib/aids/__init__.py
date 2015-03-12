@@ -30,7 +30,7 @@ Here is a list of the templates defined in the `Aids` module.
   try:
     from django.utils import translation
     from atelier.rstgen import header
-    from lino.runtime import *
+    from lino.api.shell import *
 
     def f(name):
         print("\n\n.. xfile:: %s\n\n" % name)
