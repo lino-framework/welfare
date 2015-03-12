@@ -21,6 +21,8 @@ from lino.api import dd, rt
 
 from lino.utils.xmlgen.html import E
 
+from lino.mixins.repairable import Repairable
+
 from lino.modlib.cal.models import *
 from lino.modlib.cal.utils import format_date
 
@@ -138,7 +140,7 @@ dd.inject_field('system.SiteConfig', 'team_guestrole',
                               blank=True, null=True))
 
 
-class Event(Event):
+class Event(Event, Repairable):
 
     # course = models.ForeignKey(
     #     "courses.Course", blank=True, null=True,
@@ -199,6 +201,10 @@ class Event(Event):
                         partner=client,
                         state=st,
                         role=settings.SITE.site_config.client_guestrole)
+
+    def repairdata(self, really=False):
+        yield super(Event, self).repairdata(really)
+        # TODO
 
 dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 

@@ -22,7 +22,8 @@ import os
 
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
-
+from lino.mixins.repairable import repairdata
+from lino.utils import ssin
 
 def readfile(name):
     fn = os.path.join(os.path.dirname(__file__), name)
@@ -181,6 +182,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         # the StrangeClients table warns about wrongly formatted
         # national_id fields.
 
+        ssin.parse_ssin('68060105329')
         url = '/api/pcsw/Clients'
         obj.national_id = "68060105329"
         obj.first_name = "Jean-Jacques"
@@ -221,6 +223,17 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
  JEFFIN Jean-Jacques (100)   Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions
 =========================== ==================================================================== ===============
 """)
+
+        l = list(repairdata(really=False))
+        self.assertEqual(l, [
+            "JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' "
+            "changed to '680601 053-29'."])
+        l = list(repairdata(really=True))
+        self.assertEqual(l, [
+            "JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' "
+            "changed to '680601 053-29'."])
+        l = list(repairdata(really=False))
+        self.assertEqual(l, [])
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.
