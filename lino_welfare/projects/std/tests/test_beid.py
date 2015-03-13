@@ -189,6 +189,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         obj.first_name = "Jean-Jacques"
         obj.middle_name = ""
         # obj.client_state = pcsw.ClientStates.coached
+        obj.update_dupable_words()  # avoid repairable message
         obj.full_clean()
         obj.save()
         response = self.client.post(
@@ -228,7 +229,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         g = '\n'.join(repairdata(really=False))
         e = """\
 JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' must be '680601 053-29'."""
-        # print(g)
+        print(g)
         self.assertEqual(g, e)
 
         g = '\n'.join(repairdata(really=True))
