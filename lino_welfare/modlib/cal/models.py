@@ -202,9 +202,6 @@ class Event(Event, Repairable):
                         state=st,
                         role=settings.SITE.site_config.client_guestrole)
 
-    def repairdata(self, really=False):
-        yield super(Event, self).repairdata(really)
-        # TODO
 
 dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 

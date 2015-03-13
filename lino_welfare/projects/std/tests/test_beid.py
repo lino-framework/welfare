@@ -25,6 +25,7 @@ from django.utils.datastructures import MultiValueDict
 from lino.mixins.repairable import repairdata
 from lino.utils import ssin
 
+
 def readfile(name):
     fn = os.path.join(os.path.dirname(__file__), name)
     return open(fn).read()
@@ -224,16 +225,19 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
 =========================== ==================================================================== ===============
 """)
 
-        l = list(repairdata(really=False))
-        self.assertEqual(l, [
-            "JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' "
-            "changed to '680601 053-29'."])
-        l = list(repairdata(really=True))
-        self.assertEqual(l, [
-            "JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' "
-            "changed to '680601 053-29'."])
-        l = list(repairdata(really=False))
-        self.assertEqual(l, [])
+        g = '\n'.join(repairdata(really=False))
+        e = """\
+JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' must be '680601 053-29'."""
+        # print(g)
+        self.assertEqual(g, e)
+
+        g = '\n'.join(repairdata(really=True))
+        # print(g)
+        self.assertEqual(g, e)
+
+        g = '\n'.join(repairdata(really=False))
+        # print(g)
+        self.assertEqual(g, '')
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.

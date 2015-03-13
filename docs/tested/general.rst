@@ -40,7 +40,7 @@ result:
  accounts.Chart                 accounts.Charts                 5         1
  accounts.Group                 accounts.Groups                 8         7
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        165
+ addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.GrantingsByX               10        51
@@ -56,7 +56,7 @@ result:
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        505
  cal.EventType                  cal.EventTypes                  19        8
- cal.Guest                      cal.Guests                      9         492
+ cal.Guest                      cal.Guests                      9         508
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9

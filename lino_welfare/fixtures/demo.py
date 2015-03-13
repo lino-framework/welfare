@@ -1075,7 +1075,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
 
     # create a primary ClientAddress for each Client.
     for obj in settings.SITE.modules.contacts.Partner.objects.all():
-        obj.get_primary_address(True)
+        obj.repairdata()
 
     # have partners speak different languages
     # most partners speak first language

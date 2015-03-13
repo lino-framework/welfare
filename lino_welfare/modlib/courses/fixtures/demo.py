@@ -54,9 +54,11 @@ def objects():
     courseprovider = Instantiator('courses.CourseProvider').build
     oikos = courseprovider(name=u"Oikos", city=eupen, country='BE')
     yield oikos
+    oikos.repairdata()
 
     kap = courseprovider(name=u"KAP", city=eupen, country='BE')
     yield kap
+    kap.repairdata()
 
     yield CourseContent(id=1, name=u"Deutsch")
     yield CourseContent(id=2, name=u"Französisch")

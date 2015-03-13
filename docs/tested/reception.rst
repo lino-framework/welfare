@@ -36,42 +36,41 @@ AppointmentsByPartner
 >>> print(obj)
 EVERS Eberhart (127)
 
-This client has 3 appointments. The second and third are evaluations
-led by Hubert with a client for whom she also has a coaching.
+This client has the following appointments. 
 
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
-...     column_names="event__start_date event__start_time event__user workflow_buttons",
+...     column_names="event__start_date event__start_time event__user event__summary workflow_buttons",
 ...     language="en")
-============ ============ ================= =============================================
- Start date   Start time   Managed by        Workflow
------------- ------------ ----------------- ---------------------------------------------
- 5/5/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 5/22/14                   Mélanie Mélard    **Waiting** → [Receive] [Checkout]
- 6/5/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 7/7/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 8/7/14       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 9/29/14      09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 10/29/14     09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 12/1/14      09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 1/1/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 2/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 3/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 4/2/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 5/4/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 6/4/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 7/6/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
- 8/6/15       09:00:00     Hubert Huppertz   **Accepted** → [Excused] [Absent] [Checkin]
-============ ============ ================= =============================================
+============ ============ ================= ================ =============================================
+ Start date   Start time   Managed by        Summary          Workflow
+------------ ------------ ----------------- ---------------- ---------------------------------------------
+ 5/5/14       09:00:00     Hubert Huppertz   Termin 8         **Accepted** → [Excused] [Absent] [Checkin]
+ 5/22/14                   Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
+ 5/23/14      09:40:00     Rolf Rompen       Erstgespräch     **Accepted** → [Excused] [Absent] [Checkin]
+ 6/5/14       09:00:00     Hubert Huppertz   Termin 9         **Accepted** → [Excused] [Absent] [Checkin]
+ 7/7/14       09:00:00     Hubert Huppertz   Termin 10        **Accepted** → [Excused] [Absent] [Checkin]
+ 8/7/14       09:00:00     Hubert Huppertz   Termin 11        **Accepted** → [Excused] [Absent] [Checkin]
+ 9/29/14      09:00:00     Hubert Huppertz   Termin 1         **Accepted** → [Excused] [Absent] [Checkin]
+ 10/29/14     09:00:00     Hubert Huppertz   Termin 2         **Accepted** → [Excused] [Absent] [Checkin]
+ 12/1/14      09:00:00     Hubert Huppertz   Termin 3         **Accepted** → [Excused] [Absent] [Checkin]
+ 1/1/15       09:00:00     Hubert Huppertz   Termin 4         **Accepted** → [Excused] [Absent] [Checkin]
+ 2/2/15       09:00:00     Hubert Huppertz   Termin 5         **Accepted** → [Excused] [Absent] [Checkin]
+ 3/2/15       09:00:00     Hubert Huppertz   Termin 6         **Accepted** → [Excused] [Absent] [Checkin]
+ 4/2/15       09:00:00     Hubert Huppertz   Termin 7         **Accepted** → [Excused] [Absent] [Checkin]
+ 5/4/15       09:00:00     Hubert Huppertz   Termin 8         **Accepted** → [Excused] [Absent] [Checkin]
+ 6/4/15       09:00:00     Hubert Huppertz   Termin 9         **Accepted** → [Excused] [Absent] [Checkin]
+ 7/6/15       09:00:00     Hubert Huppertz   Termin 10        **Accepted** → [Excused] [Absent] [Checkin]
+ 8/6/15       09:00:00     Hubert Huppertz   Termin 11        **Accepted** → [Excused] [Absent] [Checkin]
+============ ============ ================= ================ =============================================
 <BLANKLINE>
 
 
-
-TODO: Note that we had to log in to show the above table.  Not yet
-sure whether this is correct. A simple show() says "aucun
-enregistrement" ("no data to display") because the permission is
-denied. It might be better to write "no permission" in that case. Or
-to ignore any permission requirements here (since console scripts are
-supposed to be run only by users who have root permissions).
+Note that we had to log in to show the above table.  Not yet sure
+whether this is correct. A simple show() says "aucun enregistrement"
+("no data to display") because the permission is denied. It might be
+better to write "no permission" in that case. Or to ignore any
+permission requirements here (since console scripts are supposed to be
+run only by users who have root permissions).
 
 >>> reception.AppointmentsByPartner.show(obj)  #doctest: +SKIP
 <BLANKLINE>
