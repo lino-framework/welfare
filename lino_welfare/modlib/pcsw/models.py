@@ -1109,13 +1109,13 @@ class StrangeClients(Clients):
                 #             obj.national_id, formatted))
 
             if pv.similar_persons:
-                qs = obj.find_similar_instances(is_obsolete=False)
+                lst = obj.find_similar_instances(3, is_obsolete=False)
                 #, national_id__isnull=False)
-                if qs.count() > 0:
-                    kw = dict(num=qs.count(),
-                              clients=', '.join(map(unicode, qs)))
+                if len(lst) > 0:
                     messages.append(
-                        _("%(num)d similar clients: %(clients)s") % kw)
+                        _("{num} similar clients: {clients}").format(
+                            num=len(lst),
+                            clients=', '.join(map(unicode, lst))))
                     
             if pv.invalid_ssin:
                 if obj.client_state == ClientStates.coached:

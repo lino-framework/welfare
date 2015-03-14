@@ -32,6 +32,7 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 StrangeClients
 ==============
 
+
 >>> ses.show(pcsw.StrangeClients, param_values=dict(similar_persons=True))
 +-----------------------------------------+----------------------------------------------------------------------------+-----------------+
 | Name                                    | Error message                                                              | Primary coach   |
@@ -110,8 +111,7 @@ StrangeClients
 +-----------------------------------------+----------------------------------------------------------------------------+-----------------+
 | MEESSEN Melissa (147)                   | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
 +-----------------------------------------+----------------------------------------------------------------------------+-----------------+
-| MEIER Marie-Louise (149)                | 1 similar clients: VANDENMEULENBOS Marie-Louise (174);                     |                 |
-|                                         | Neither valid eId data nor alternative identifying document                |                 |
+| MEIER Marie-Louise (149)                | Neither valid eId data nor alternative identifying document                |                 |
 +-----------------------------------------+----------------------------------------------------------------------------+-----------------+
 | RADERMACHER Alfons (153)                | Neither valid eId data nor alternative identifying document                | Mélanie Mélard  |
 +-----------------------------------------+----------------------------------------------------------------------------+-----------------+
@@ -413,3 +413,53 @@ href="javascript:Lino.pcsw.Clients.detail.run(null,{
 &quot;record_id&quot;: 178 })">Klient</a> [<a
 href="javascript:Lino.contacts.Partners.del_client(null,178,{
 })">&#10060;</a>]
+
+
+Combined first names
+====================
+
+Normal people need *two* matching words.  And by "words" we mean the
+phonetic reductions of the words in their first and last name (not
+middle).
+
+>>> alf = pcsw.Client.objects.get(pk=116)
+>>> alf.name
+u'Ausdemwald Alfons'
+>>> alf.get_dupable_words('name')
+[u'ASTM', u'ALFN']
+
+>>> alf.dupable_matches_required()
+2
+
+Marie-Louise is a frist name with two words. Such people need *three*
+instead of the usual *two* matching words:
+
+>>> mlv = pcsw.Client.objects.get(pk=174)
+>>> mlv.name
+u'Vandenmeulenbos Marie-Louise'
+>>> mlv.get_dupable_words('name')
+[u'FNTN', u'MR', u'LS']
+>>> mlv.dupable_matches_required()
+3
+
+>>> mlm = pcsw.Client.objects.get(pk=149)
+>>> mlm.name
+u'Meier Marie-Louise'
+>>> mlm.get_dupable_words('name')
+[u'MR', u'MR', u'LS']
+>>> mlm.dupable_matches_required()
+3
+
+Another problem is that "Meier" and "Marie" have the same phonetic
+reduction "MR". This is why M-L Vandenmeulenbos is still wrongly
+detected as being similar to M-L Meier:
+
+>>> mlv.find_similar_instances()
+[Client #149 (u'MEIER Marie-Louise (149)')]
+
+While M-L Meier does not 
+
+>>> mlm.find_similar_instances()
+[]
+
+
