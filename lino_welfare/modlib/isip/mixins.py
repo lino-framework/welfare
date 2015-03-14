@@ -384,13 +384,12 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         qs = client.get_coachings(period)
         qs = client.get_coachings(period, user__partner__isnull=False)
         for coaching in qs:
-            role = coaching.type.eval_guestrole
-            if role is not None:
+            if coaching.type and coaching.type.eval_guestrole:
                 u = coaching.user
                 if u != event.user and u.partner is not None:
                     yield Guest(event=event,
                                 partner=u.partner,
-                                role=role)
+                                role=coaching.type.eval_guestrole)
 
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)

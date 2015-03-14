@@ -14,7 +14,8 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 
 .. include:: /include/tested.rst
 
-.. contents::
+.. contents:: Contents
+   :local:
    :depth: 2
 
 
