@@ -372,6 +372,8 @@ class ContractBase(Signers, Certifiable, EventGenerator):
 
         """
         client = event.project
+        if client is None:
+            return
         Guest = rt.modules.cal.Guest
         # GuestStates = rt.modules.cal.GuestStates
         # st = GuestStates.accepted
