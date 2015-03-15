@@ -71,7 +71,7 @@ The test database contains a fictive person named Dorothée
 Dobbelstein-Demeulenaere as an example of accidental duplicate data
 entry.  Dorothée exists 3 times in our database:
 
->>> for p in contacts.Partner.objects.filter(name__contains=u"Dorothée"):
+>>> for p in contacts.Partner.objects.filter(name__contains="Dorothée"):
 ...     print(unicode(p))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Demeulenaere Dorothée (122)

@@ -10,12 +10,11 @@ Lino Welfare General (tested tour)
 
   $ python setup.py test -s tests.DocsTests.test_general
 
-..  
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
-    >>> from lino.api.doctest import *
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.std.settings.doctests'
+>>> from lino.api.doctest import *
 
 .. contents:: 
    :local:
