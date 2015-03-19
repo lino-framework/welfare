@@ -17,3 +17,8 @@ class Plugin(Plugin):
 
     ## settings
     person_model = 'pcsw.Client'
+
+    def required(self, **kwargs):
+        kwargs = super(Plugin, self).required(**kwargs)
+        kwargs.update(user_groups='integ')
+        return kwargs

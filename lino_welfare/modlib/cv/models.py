@@ -166,3 +166,15 @@ def set_detail_layouts(sender=None, **kwargs):
     name
     cv.PersonPropsByProp
     """)
+    Sectors.set_detail_layout("""
+    id name
+    remark FunctionsBySector
+    cv.ExperiencesBySector
+    jobs.CandidaturesBySector
+    """)
+    Functions.set_detail_layout("""
+    id name sector
+    remark
+    jobs.CandidaturesByFunction
+    cv.ExperiencesByFunction
+    """)
