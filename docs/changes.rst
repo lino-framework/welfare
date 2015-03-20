@@ -4,8 +4,8 @@
 Changes in Lino Welfare
 ========================
 
-The final truth about what's going on is only 
-`the source code.
+This page is possibly not very well maintained.  The final truth about
+what's going on is only `the source code.
 <https://github.com/lsaffre/lino-welfare/commits/master>`_.
 
 Development
@@ -431,7 +431,7 @@ Version 1.1.3 (released :blogref:`20130505`)
   fehlte in der Tabelle "Guthaben, Schulden, Verpflichtungen" 
   die Kolonne "Monatsrate".
 
-- :ddref:`pcsw.StrangeClients` produced a traceback
+- `StrangeClients` produced a traceback
   `'NoneType' object has no attribute 'strip'` for Clients 
   with national_id is None.
   

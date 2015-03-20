@@ -24,6 +24,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 from lino.mixins.repairable import repairdata
 from lino.utils import ssin
+from lino.api import rt
 
 
 def readfile(name):
@@ -205,25 +206,18 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         # print(result['message'])
         self.assertEqual(result['message'], expected)
 
-        # two methods to test whether the StrangeClients table
-        # actually would have warned:
-
-        ar = pcsw.StrangeClients.request()
-        self.assertEqual(ar.get_total_count(), 1)
-        self.assertEqual(
-            ar[0].error_message,
-            "Invalid SSIN 68060105329 : "
-            "A formatted SSIN must have 13 positions")
-
-        # second method to test the same result:
-
-        s = pcsw.StrangeClients.request().to_rst()
+        # test whether we would have been warned:
+        ar = rt.modules.plausibility.ProblemsByOwner.request(
+            master_instance=obj)
+        obj.check_plausibility(ar)
+        s = ar.to_rst()
+        # print(s)
         self.assertEqual(s, """\
-=========================== ==================================================================== ===============
- Name                        Error message                                                        Primary coach
---------------------------- -------------------------------------------------------------------- ---------------
- JEFFIN Jean-Jacques (100)   Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions
-=========================== ==================================================================== ===============
+==================================================================== ====================== =============
+ Message                                                              Plausibility checker   Responsible
+-------------------------------------------------------------------- ---------------------- -------------
+ Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions   Check SSIN validity
+==================================================================== ====================== =============
 """)
 
         g = '\n'.join(repairdata(really=False))

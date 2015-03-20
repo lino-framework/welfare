@@ -30,8 +30,8 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_partners.
-132 models:
+51 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
+133 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -75,7 +75,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         133
+ contenttypes.ContentType       contenttypes.ContentTypes       4         134
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             8         8
  countries.Place                countries.Places                10        78
@@ -99,7 +99,7 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
- dupable_partners.Word          dupable_partners.Words          3         390
+ dupable_clients.Word           dupable_clients.Words           3         133
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
  households.Household           households.Households           29        14
@@ -146,6 +146,7 @@ result:
  pcsw.Exclusion                 pcsw.Exclusions                 6         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
+ plausibility.Problem           plausibility.Problems           6         60
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0
  polls.Choice                   polls.Choices                   7         35
@@ -562,7 +563,7 @@ changes.
 |                                                 |                                     | last_name birth_date age national_id nationality   |
 |                                                 |                                     | declared_name civil_state birth_country            |
 |                                                 |                                     | birth_place language email phone fax gsm image     |
-|                                                 |                                     | AgentsByClient SimilarPartners LinksByHuman        |
+|                                                 |                                     | AgentsByClient SimilarClients LinksByHuman         |
 |                                                 |                                     | cbss_relations MembersByPerson workflow_buttons    |
 |                                                 |                                     | broker faculty refusal_reason in_belgium_since     |
 |                                                 |                                     | residence_type residence_until group is_seeking    |
@@ -578,11 +579,14 @@ changes.
 | pcsw.Clients.merge_row                          | admin                               | merge_to aids_SimpleConfirmation                   |
 |                                                 |                                     | aids_IncomeConfirmation aids_RefundConfirmation    |
 |                                                 |                                     | cv_LanguageKnowledge pcsw_Coaching pcsw_Dispense   |
-|                                                 |                                     | properties_PersonProperty reason                   |
+|                                                 |                                     | dupable_clients_Word properties_PersonProperty     |
+|                                                 |                                     | reason                                             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.CoachingEndings.insert                     | 100, 110, admin                     | id name name_fr name_de name_nl seqno              |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.Coachings.create_visit                     | admin                               | user summary                                       |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| plausibility.Checkers.detail                    | admin                               | value name text                                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | polls.AnswerRemarks.insert                      | all except anonymous                | remark response question                           |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -689,10 +693,10 @@ Rolf is the local system administrator, he has a complete menu:
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Plausibilitätsprobleme
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -700,7 +704,6 @@ Rolf is the local system administrator, he has a complete menu:
 - Polls : Meine Polls, Meine Responses
 - Berichte :
   - System : Broken GFKs
-  - ÖSHZ : Aktenkontrollliste
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
@@ -722,13 +725,13 @@ Rolf is the local system administrator, he has a complete menu:
   - Polls : Choice Sets
 - Explorer :
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen
+  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen, Plausibilitätstests, Plausibilitätsprobleme
   - Eigenschaften : Eigenschaften
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten, Phonetic words
+  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Badges : Badge Awards
   - SEPA : Konten
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
   - Kurse : Kurse, Kursanfragen
@@ -752,10 +755,10 @@ Hubert is an Integration agent.
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Plausibilitätsprobleme
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Polls : Meine Polls, Meine Responses
@@ -787,10 +790,10 @@ Mélanie is the manager of the Integration service.
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Plausibilitätsprobleme
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Polls : Meine Polls, Meine Responses
@@ -827,10 +830,10 @@ Kerstin is a debts consultant.
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Plausibilitätsprobleme
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Schuldnerberatung : Klienten, Meine Budgets
 - Polls : Meine Polls, Meine Responses
 - Berichte :
@@ -860,10 +863,10 @@ Caroline is a newcomers consultant.
 ...     ses.show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Plausibilitätsprobleme
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Meine Aktenkontrollliste, Zu bestätigende Hilfebeschlüsse
+- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Polls : Meine Polls, Meine Responses
 - Berichte :

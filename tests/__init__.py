@@ -68,7 +68,10 @@ class DocsTests(BaseTestCase):
         return self.run_simple_doctests('docs/tested/uploads.rst')
 
     def test_dupable(self):
-        return self.run_simple_doctests('docs/tested/dupable_partners.rst')
+        return self.run_simple_doctests('docs/tested/dupable_clients.rst')
+
+    def test_plausibility(self):
+        return self.run_simple_doctests('docs/tested/plausibility.rst')
 
     def test_users(self):
         return self.run_simple_doctests('docs/tested/users.rst')

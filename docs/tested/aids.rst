@@ -280,9 +280,8 @@ There is only one pharmacy per client, but in a confirmation I can
 manually choose any other pharmacy:
 
 >>> ContentType = rt.modules.contenttypes.ContentType
->>> ContentType.objects.get_for_model(rt.modules.aids.Granting).id
-112
->>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt=112&mk=42'
+>>> mt = ContentType.objects.get_for_model(rt.modules.aids.Granting).id
+>>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk=42'.format(mt)
 >>> response = test_client.get(url, REMOTE_USER="rolf")
 >>> result = json.loads(response.content)
 >>> for r in result['rows']:

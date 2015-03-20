@@ -33,7 +33,6 @@ class Plugin(ad.Plugin):
     def setup_main_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('pcsw.MyCoachings')
-        m.add_action('pcsw.MyStrangeClients')
 
     def setup_config_menu(config, site, profile, m):
         m = m.add_menu(config.app_label, config.verbose_name)
@@ -56,12 +55,4 @@ class Plugin(ad.Plugin):
         m.add_action('pcsw.CivilState')
         m.add_action('pcsw.ClientStates')
         m.add_action('beid.BeIdCardTypes')
-
-    def setup_reports_menu(config, site, profile, m):
-        m = m.add_menu(config.app_label, config.verbose_name)
-        #~ m.add_action(site.modules.jobs.OldJobsOverview)
-        #~ m.add_action(site.modules.integ.UsersWithClients)
-        m.add_action('pcsw.StrangeClients')
-        #~ m  = m.add_menu("pcsw",pcsw.MODULE_LABEL)
-        # ~ m.add_action(ActivityReport1) # old version
 

@@ -28,6 +28,7 @@ from lino.utils.ranges import overlap2, encompass
 from lino.mixins.periods import rangefmt
 
 from lino_welfare.modlib.system.models import Signers
+from lino_welfare.modlib.pcsw.models import ClientChecker
 
 from .choicelists import ContractEvents, OverlapGroups
 
@@ -141,8 +142,8 @@ class OverlappingContractsTest:
         for (p2, con2) in self.actives:
             if con1 != con2 and overlap2(ap, p2):
                 if con1.type.overlap_group == con2.type.overlap_group:
-                    msg = _("Date range overlaps with %(ctype)s #%(id)s")
-                    msg %= dict(
+                    msg = _("Date range overlaps with {ctype} #{id}.")
+                    msg = msg.format(
                         ctype=con2.__class__._meta.verbose_name,
                         id=con2.pk)
                     return msg
@@ -159,6 +160,20 @@ class OverlappingContractsTest:
                         ctype=con1.__class__._meta.verbose_name,
                         id=con1.pk))
         return messages
+
+
+class OverlappingContractsChecker(ClientChecker):
+    """A given client cannot have two active contracts at the same time.
+
+    """
+    verbose_name = _("Check for overlapping contracts")
+
+    def get_checker_problems(self, obj):
+        msg = '  '.join(OverlappingContractsTest(obj).check_all())
+        if msg:
+            yield msg
+
+OverlappingContractsChecker.activate()
 
 
 class ContractBase(Signers, Certifiable, EventGenerator):

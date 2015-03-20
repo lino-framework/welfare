@@ -169,7 +169,8 @@ class Site(Site):
 
         yield 'lino.modlib.appypod'
         yield 'lino.modlib.export_excel'
-        yield 'lino.modlib.dupable_partners'
+        yield 'lino_welfare.modlib.dupable_clients'
+        yield 'lino.modlib.plausibility'
 
     def get_admin_main_items(self):
         """Returns the items of the admin index page:

@@ -87,6 +87,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.cv.fixtures',
     'lino_welfare.modlib.debts',
     'lino_welfare.modlib.debts.fixtures',
+    'lino_welfare.modlib.dupable_clients',
+    'lino_welfare.modlib.dupable_clients.fixtures',
     'lino_welfare.modlib.households',
     'lino_welfare.modlib.households.fixtures',
     'lino_welfare.modlib.integ',

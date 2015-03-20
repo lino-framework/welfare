@@ -715,6 +715,11 @@ def objects():
                     else:
                         client.client_state = pcsw.ClientStates.former
 
+                    # Dorothée is three times in our database
+                    if client.first_name == "Dorothée":
+                        client.national_id = None
+                        client.birth_date = ''
+
                     client.full_clean()
                     client.save()
 

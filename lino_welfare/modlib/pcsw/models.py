@@ -32,22 +32,19 @@ from lino.core.utils import get_field
 from lino.utils.xmlgen.html import E
 from lino.modlib.cal.utils import DurationUnits, update_reminder
 from lino.modlib.uploads.choicelists import Shortcuts
+from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
 extensible = dd.resolve_app('extensible')
-properties = dd.resolve_app('properties')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
-isip = dd.resolve_app('isip')
-jobs = dd.resolve_app('jobs')
-notes = dd.resolve_app('notes')
-beid = dd.resolve_app('beid')
+from lino.modlib.beid.mixins import BeIdCardHolder
+from lino.modlib.plausibility.choicelists import Checker
+
 
 from lino.utils import ssin
-
-from lino_welfare.modlib.isip.mixins import OverlappingContractsTest
 
 from .coaching import *
 from .mixins import ClientContactBase
@@ -93,7 +90,7 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
-class Client(contacts.Person, beid.BeIdCardHolder):
+class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino.modlib.beid.models.BeIdCardHolder`.
@@ -462,7 +459,7 @@ class Client(contacts.Person, beid.BeIdCardHolder):
                                        _("Working at ")))
     def contract_company(obj, ar):
         c = obj.get_active_contract()
-        if isinstance(c, jobs.Contract):
+        if isinstance(c, rt.modules.jobs.Contract):
             return c.company
 
     @dd.displayfield(_("Active contract"))
@@ -470,7 +467,7 @@ class Client(contacts.Person, beid.BeIdCardHolder):
         c = obj.get_active_contract()
         if c is not None:
             txt = unicode(daterange_text(c.applies_from, c.applies_until))
-            if isinstance(c, jobs.Contract):
+            if isinstance(c, rt.modules.jobs.Contract):
                 if c.company is not None:
                     # txt += unicode(pgettext("(place)", " at "))
                     # txt += '\n'
@@ -599,7 +596,7 @@ class ClientDetail(dd.FormLayout):
     """
 
     contact = dd.Panel("""
-    dupable_partners.SimilarPartners:10 \
+    dupable_clients.SimilarClients:10 \
     humanlinks.LinksByHuman:30 cbss_relations:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
     """, label=_("Human Links"))
@@ -669,9 +666,9 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30
-    is_obsolete
-    created modified
-    remarks:30 contacts.RolesByPerson
+    is_obsolete created modified
+    remarks
+    plausibility.ProblemsByOwner:25 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     # the career tab will be overwritten by settings.chatelet
@@ -1008,157 +1005,60 @@ class AllClients(Clients):
     column_names = '*'
     required = dd.Required(user_level='admin')
 
-need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
+
+class ClientChecker(Checker):
+    model = 'pcsw.Client'
+
+    def get_responsible_user(self, obj):
+        return obj.get_primary_coach()
 
 
-class StrangeClients(Clients):
-    """Table of Clients whose data seems inconsistent.
-
-    .. attribute:: invalid_ssin
-
-       Whether to check for invalid SSIN
-
-    .. attribute:: overlapping_contracts
-
-       Whether to check for overlapping contracts.
-
-    .. attribute:: similar_persons
-
-       Whether to check for similar persons.
-
-    .. attribute:: invalid_coaching
-
-        If this is checked, Lino consults :class:`Coaching` and tests for
-        the following error conditions:
-
-        - :message:`Both coached and obsolete.`
-    
-        - :message:`Neither valid eId data nor alternative identifying
-          document`
-    
-        - :message:`Not coached, but with active coachings.`
+class SSINChecker(ClientChecker):
+    """Clients must have a valid SSIN and either valid eId data or an
+    alternative identifying document.
 
     """
-    label = _("Strange Clients")
-    help_text = _(
-        "Table of Clients whose data seems inconsistent.")
-    required = dd.Required(user_level='manager')
-    use_as_default_table = False
-    parameters = dict(
-        invalid_ssin=models.BooleanField(
-            _("Check SSIN validity"), default=True),
-        overlapping_contracts=models.BooleanField(
-            _("Check for overlapping contracts"), default=False),
-        similar_persons=models.BooleanField(
-            _("Check for similar persons"), default=False),
-        invalid_coaching=models.BooleanField(
-            _("Check for invalid coaching data"), default=False),
-        **Clients.parameters)
-    params_layout = """
-    aged_from aged_to gender also_obsolete nationality
-    client_state coached_by and_coached_by start_date end_date observed_event
-    invalid_ssin overlapping_contracts invalid_coaching similar_persons \
-    only_primary
+    verbose_name = _("Check SSIN validity")
+    need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
+    
+    def get_checker_problems(self, obj):
+        if obj.national_id is not None:
+            try:
+                ssin.ssin_validator(obj.national_id)
+            except ValidationError as e:
+                yield '; '.join(e.messages)
+
+        if obj.client_state in self.need_valid_card_data \
+           and not obj.has_valid_card_data():
+            qs = Shortcuts.id_document.get_uploads(project=obj)
+            if qs.count() == 0:
+                msg = _(
+                    "Neither valid eId data "
+                    "nor alternative identifying document.")
+                yield msg
+
+SSINChecker.activate()
+
+
+class ClientCoachingsChecker(ClientChecker):
+    """Coached clients should not be obsolete.  Only coached clients
+    should have active coachings
+
     """
+    verbose_name = _("Check coachings")
 
-    column_names = "name_column error_message primary_coach"
+    def get_checker_problems(self, obj):
+        if obj.client_state == ClientStates.coached:
+            if obj.is_obsolete:
+                yield _("Both coached and obsolete.")
+        if obj.client_state != ClientStates.coached:
+            today = settings.SITE.today()
+            period = (today, today)
+            qs = obj.get_coachings(period)
+            if qs.count():
+                yield(_("Not coached, but with active coachings."))
 
-    @classmethod
-    def get_row_by_pk(self, ar, pk):
-        """This would be to avoid "AttributeError 'Client' object has no
-        attribute 'error_message'" after a PUT from GridView.  Not
-        tested.
-
-        """
-        obj = super(StrangeClients, self).get_row_by_pk(ar, pk)
-        if obj is None:
-            return obj
-        return list(self.get_data_rows(ar, [obj]))[0]
-
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(StrangeClients, self).param_defaults(ar, **kw)
-        kw.update(client_state='')
-        return kw
-
-    @classmethod
-    def get_data_rows(self, ar, qs=None):
-        """
-        """
-        if qs is None:
-            qs = self.get_request_queryset(ar)
-
-        #~ logger.info("Building StrangeClients data rows...")
-        #~ for p in qs.order_by('name'):
-        pv = ar.param_values
-        for obj in qs:
-            messages = []
-            if pv.overlapping_contracts:
-                messages += OverlappingContractsTest(obj).check_all()
-
-            if pv.invalid_ssin and obj.national_id is not None:
-                try:
-                    ssin.ssin_validator(obj.national_id)
-                except ValidationError as e:
-                    messages += e.messages
-
-                # formatted = ssin.format_ssin(obj.national_id)
-                # if obj.national_id != formatted:
-                #     messages.append(
-                #         _("Wrongly formatted SSIN {0} should be {1}").format(
-                #             obj.national_id, formatted))
-
-            if pv.similar_persons:
-                lst = obj.find_similar_instances(3, is_obsolete=False)
-                #, national_id__isnull=False)
-                if len(lst) > 0:
-                    messages.append(
-                        _("{num} similar clients: {clients}").format(
-                            num=len(lst),
-                            clients=', '.join(map(unicode, lst))))
-                    
-            if pv.invalid_ssin:
-                if obj.client_state == ClientStates.coached:
-                    if obj.is_obsolete:
-                        messages.append(_("Both coached and obsolete."))
-            if pv.invalid_ssin:
-                if obj.client_state in need_valid_card_data \
-                   and not obj.has_valid_card_data():
-                    qs = Shortcuts.id_document.get_uploads(project=obj)
-                    if qs.count() == 0:
-                        messages.append(_(
-                            "Neither valid eId data "
-                            "nor alternative identifying document"))
-            if pv.invalid_coaching:
-                if obj.client_state != ClientStates.coached:
-                    today = settings.SITE.today()
-                    period = (today, today)
-                    qs = self.get_coachings(period)
-                    if qs.count():
-                        messages.append(_(
-                            "Not coached, but with active coachings."))
-                    
-            if messages:
-                obj.error_message = ';\n'.join(map(unicode, messages))
-                yield obj
-
-    @dd.displayfield(_('Error message'))
-    def error_message(self, obj, ar):
-        return obj.error_message
-
-
-class MyStrangeClients(StrangeClients):
-    label = _("My strange clients")
-    required = dd.Required(user_groups='coaching')
-
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(MyStrangeClients, self).param_defaults(ar, **kw)
-        kw.update(client_state=ClientStates.coached)
-        kw.update(coached_by=ar.get_user())
-        kw.update(start_date=dd.today())
-        kw.update(end_date=dd.today())
-        return kw
+ClientCoachingsChecker.activate()
 
 
 #

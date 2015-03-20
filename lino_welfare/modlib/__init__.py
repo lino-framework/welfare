@@ -6,6 +6,7 @@ Plugins which have been written specifically for Lino Welfare:
    :toctree:
 
     contacts
+    dupable_clients
     integ
     isip
     jobs

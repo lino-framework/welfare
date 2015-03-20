@@ -17,7 +17,8 @@ them to a script and run it using :manage:`run`.
    pcsw
    newcomers
    households
-   dupable_partners
+   dupable_clients
+   plausibility
    aids
    cbss
    courses

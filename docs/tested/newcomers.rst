@@ -88,12 +88,12 @@ The newcomers table
 
 >>> rt.show('newcomers.NewClients')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==================================== =========== ============ ================================ =============== ===== ================================= ========== ======== =========
- Name                                 Zustand     Vermittler   Fachbereich                      NR-Nummer       GSM   Adresse                           Alter      E-Mail   Telefon
------------------------------------- ----------- ------------ -------------------------------- --------------- ----- --------------------------------- ---------- -------- ---------
+==================================== =========== ============ ================================ =============== ===== ================================= =========== ======== =========
+ Name                                 Zustand     Vermittler   Fachbereich                      NR-Nummer       GSM   Adresse                           Alter       E-Mail   Telefon
+------------------------------------ ----------- ------------ -------------------------------- --------------- ----- --------------------------------- ----------- -------- ---------
  BASTIAENSEN Laurent (117)            Neuantrag                Finanzielle Begleitung           971207 001-67         Am Berg, 4700 Eupen               16 Jahre
  BRAUN Bruno (257)                    Neuantrag                                                                                                         40 Jahre
- DEMEULENAERE Dorothée (122)          Neuantrag                Ausländerbeihilfe                960127 002-47         Auf'm Rain, 4700 Eupen            18 Jahre
+ DEMEULENAERE Dorothée (122)          Neuantrag                Ausländerbeihilfe                                      Auf'm Rain, 4700 Eupen            unbekannt
  DERICUM Daniel (121)                 Neuantrag                DSBE                             950221 001-20         August-Thonnar-Str., 4700 Eupen   19 Jahre
  EIERSCHAL Emil (175)                 Neuantrag                Laufende Beihilfe                930412 001-68         Deutschland                       21 Jahre
  EMONTSPOOL Erwin (151)               Neuantrag                DSBE                             910602 001-49         4730 Raeren                       22 Jahre
@@ -113,9 +113,8 @@ The newcomers table
  RADERMACHER Inge (162)               Neuantrag                DSBE                             730924 002-01         4730 Raeren                       40 Jahre
  VANDENMEULENBOS Marie-Louise (174)   Neuantrag                Finanzielle Begleitung           721019 002-40         Amsterdam, Niederlande            41 Jahre
  DI RUPO Didier (164)                 Neuantrag                Ausländerbeihilfe                711114 001-80         4730 Raeren                       42 Jahre
-==================================== =========== ============ ================================ =============== ===== ================================= ========== ======== =========
+==================================== =========== ============ ================================ =============== ===== ================================= =========== ======== =========
 <BLANKLINE>
-
 
 
 Assigning a coach to a newcomer
