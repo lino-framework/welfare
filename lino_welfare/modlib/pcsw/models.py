@@ -1021,7 +1021,7 @@ class SSINChecker(ClientChecker):
     verbose_name = _("Check SSIN validity")
     need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
     
-    def get_checker_problems(self, obj, really=False):
+    def get_plausibility_problems(self, obj, fix=False):
         if obj.national_id is not None:
             try:
                 ssin.ssin_validator(obj.national_id)
@@ -1047,7 +1047,7 @@ class ClientCoachingsChecker(ClientChecker):
     """
     verbose_name = _("Check coachings")
 
-    def get_checker_problems(self, obj, really=False):
+    def get_plausibility_problems(self, obj, fix=False):
         if obj.client_state == ClientStates.coached:
             if obj.is_obsolete:
                 yield (False, _("Both coached and obsolete."))

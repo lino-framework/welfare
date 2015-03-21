@@ -162,7 +162,7 @@ class ClientDetail(dd.FormLayout):
     is_cpas is_senior is_obsolete
     created modified
     remarks:30 remarks2:30
-    contacts.RolesByPerson
+    plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     # the career tab will be overwritten by settings.chatelet

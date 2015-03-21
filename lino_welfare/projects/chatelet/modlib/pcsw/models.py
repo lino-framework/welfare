@@ -131,10 +131,9 @@ class ClientDetail(dd.FormLayout):
     misc = dd.Panel("""
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30
-    is_obsolete
-    created modified
-    remarks:30 contacts.RolesByPerson
-    aids.GrantingsByClient
+    is_obsolete created modified
+    remarks:30 aids.GrantingsByClient:20
+    plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required=dict(user_level='manager'))
 
     contracts = dd.Panel("""
