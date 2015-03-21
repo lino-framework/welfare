@@ -43,14 +43,15 @@ class Site(Site):
         """
         Change the default value of certain plugin settings.
 
-        - :setting:`accounts.ref_length` = 5
+        - :attr:`lino.modlib.accounts.Plugin.ref_length` = 5
+        
         - (no longer) :setting:`humanlinks.human_model` = 'pcsw.Client'
         
         """
+        super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=5)
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')
         # self.plugins.households.configure(person_model='pcsw.Client')
-        super(Site, self).setup_plugins()
 
     def setup_user_profiles(self):
         """This defines default user profiles and shortcuts for
