@@ -22,7 +22,6 @@ import os
 
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
-from lino.mixins.repairable import repairdata
 from lino.utils import ssin
 from lino.api import rt
 
