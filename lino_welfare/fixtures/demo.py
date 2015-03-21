@@ -1079,8 +1079,9 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         u.save()
 
     # create a primary ClientAddress for each Client.
-    for obj in settings.SITE.modules.contacts.Partner.objects.all():
-        obj.repairdata()
+    # no longer needed. done by plausibility.fixtures.demo2
+    # for obj in settings.SITE.modules.contacts.Partner.objects.all():
+    #     obj.repairdata()
 
     # have partners speak different languages
     # most partners speak first language

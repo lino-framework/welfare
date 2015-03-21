@@ -18,7 +18,7 @@ About this document
 
 .. include:: /include/tested.rst
 
-This documents uses the :mod:`lino_welfare.projects.eupen` test
+This document uses the :mod:`lino_welfare.projects.eupen` test
 database:
 
 >>> from __future__ import print_function
@@ -47,8 +47,8 @@ Here are the addresses of one of partner #123:
 ====================== =========== =========================== ========
  Adressenart            Bemerkung   Adresse                     Primär
 ---------------------- ----------- --------------------------- --------
- Offizielle Adresse                 Bahnhofstraße, 4700 Eupen   Ja
  Ungeprüfte Adresse                 August-Thonnar-Str. 14      Nein
+ Offizielle Adresse                 Bahnhofstraße, 4700 Eupen   Ja
  **Total (2 Zeilen)**                                           **1**
 ====================== =========== =========================== ========
 <BLANKLINE>

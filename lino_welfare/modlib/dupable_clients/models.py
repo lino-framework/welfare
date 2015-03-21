@@ -41,12 +41,12 @@ class SimilarClientsChecker(ClientChecker):
     """
     verbose_name = _("Check for similar clients")
 
-    def get_checker_problems(self, obj):
+    def get_checker_problems(self, obj, fix=False):
         qs = obj.find_similar_instances(3)
         if qs.count() > 0:
-            yield _("{num} similar clients: {clients}").format(
+            msg = _("{num} similar clients: {clients}").format(
                 num=qs.count(),
                 clients=', '.join(map(unicode, qs)))
-
+            yield (False, msg)
 
 SimilarClientsChecker.activate()

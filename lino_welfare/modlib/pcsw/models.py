@@ -1021,12 +1021,12 @@ class SSINChecker(ClientChecker):
     verbose_name = _("Check SSIN validity")
     need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
     
-    def get_checker_problems(self, obj):
+    def get_checker_problems(self, obj, really=False):
         if obj.national_id is not None:
             try:
                 ssin.ssin_validator(obj.national_id)
             except ValidationError as e:
-                yield '; '.join(e.messages)
+                yield (False, '; '.join(e.messages))
 
         if obj.client_state in self.need_valid_card_data \
            and not obj.has_valid_card_data():
@@ -1035,7 +1035,7 @@ class SSINChecker(ClientChecker):
                 msg = _(
                     "Neither valid eId data "
                     "nor alternative identifying document.")
-                yield msg
+                yield (False, msg)
 
 SSINChecker.activate()
 
@@ -1047,16 +1047,16 @@ class ClientCoachingsChecker(ClientChecker):
     """
     verbose_name = _("Check coachings")
 
-    def get_checker_problems(self, obj):
+    def get_checker_problems(self, obj, really=False):
         if obj.client_state == ClientStates.coached:
             if obj.is_obsolete:
-                yield _("Both coached and obsolete.")
+                yield (False, _("Both coached and obsolete."))
         if obj.client_state != ClientStates.coached:
             today = settings.SITE.today()
             period = (today, today)
             qs = obj.get_coachings(period)
             if qs.count():
-                yield(_("Not coached, but with active coachings."))
+                yield (False, _("Not coached, but with active coachings."))
 
 ClientCoachingsChecker.activate()
 

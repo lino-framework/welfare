@@ -65,7 +65,7 @@ class BeIdTests(RemoteAuthTestCase):
             'lino.core.auth.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
-        u = users.User(username='root',
+        u = users.User(username='robin',
                        profile=UserProfiles.admin,
                        language="en")
         u.save()
@@ -91,7 +91,7 @@ class BeIdTests(RemoteAuthTestCase):
         # name already exists.
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response, 'alert success message')
         self.assertEqual(result['success'], False)
@@ -108,7 +108,7 @@ class BeIdTests(RemoteAuthTestCase):
         obj.save()
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, '')
         result = self.check_json_result(
@@ -140,7 +140,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
         url = '/callbacks/%d/yes' % cb['id']
         response = self.client.get(
             url,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(
             response,
@@ -165,7 +165,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
         obj.save()
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, '')
         result = self.check_json_result(
@@ -195,7 +195,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         obj.save()
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, '')
         result = self.check_json_result(
@@ -213,26 +213,23 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         s = ar.to_rst()
         # print(s)
         self.assertEqual(s, """\
-==================================================================== ====================== =============
- Message                                                              Plausibility checker   Responsible
--------------------------------------------------------------------- ---------------------- -------------
- Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions   Check SSIN validity
-==================================================================== ====================== =============
+==================================================================== ========================= ============= ============
+ Message                                                              Plausibility checker      Responsible   Repairable
+-------------------------------------------------------------------- ------------------------- ------------- ------------
+ Malformed SSIN '68060105329' must be '680601 053-29'.                Check for invalid SSINs   robin         Yes
+ Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions   Check SSIN validity                     No
+ **Total (2 rows)**                                                                                           **1**
+==================================================================== ========================= ============= ============
 """)
 
-        g = '\n'.join(repairdata(really=False))
-        e = """\
-JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' must be '680601 053-29'."""
-        print(g)
-        self.assertEqual(g, e)
-
-        g = '\n'.join(repairdata(really=True))
-        # print(g)
-        self.assertEqual(g, e)
-
-        g = '\n'.join(repairdata(really=False))
-        # print(g)
-        self.assertEqual(g, '')
+        obj.check_plausibility(ar, fix=True)
+        ar = rt.modules.plausibility.ProblemsByOwner.request(
+            master_instance=obj)
+        s = ar.to_rst()
+        # print(s)
+        self.assertEqual(s, """
+No data to display
+""")
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.
@@ -244,7 +241,7 @@ JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' must be '680601 053-29'
         url = '/api/pcsw/Clients'
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, '')
         result = self.check_json_result(
@@ -260,7 +257,7 @@ JEFFIN Jean-Jacques (100) : Malformed SSIN '68060105329' must be '680601 053-29'
         url = '/api/pcsw/Clients'
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='root',
+            REMOTE_USER='robin',
             HTTP_ACCEPT_LANGUAGE='en')
         # self.assertEqual(response.content, '')
         result = self.check_json_result(

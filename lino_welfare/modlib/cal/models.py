@@ -21,11 +21,9 @@ from lino.api import dd, rt
 
 from lino.utils.xmlgen.html import E
 
-from lino.mixins.repairable import Repairable
-
 from lino.modlib.cal.models import *
-from lino.modlib.cal.utils import format_date
 
+from lino.modlib.cal.utils import format_date
 from lino.modlib.cal.workflows import take, feedback
 from lino.modlib.reception.models import checkout_guest
 
@@ -140,7 +138,7 @@ dd.inject_field('system.SiteConfig', 'team_guestrole',
                               blank=True, null=True))
 
 
-class Event(Event, Repairable):
+class Event(Event):
 
     # course = models.ForeignKey(
     #     "courses.Course", blank=True, null=True,
