@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-23 15:35+0200\n"
-"PO-Revision-Date: 2015-03-23 15:36+0300\n"
+"PO-Revision-Date: 2015-03-23 15:45+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -3726,7 +3726,7 @@ msgstr "Visite erstellen"
 
 #: lino_welfare/modlib/reception/models.py:144
 msgid "Please select a user!"
-msgstr ""
+msgstr "Bitten wählen Sie einen Benutzer aus!"
 
 #: lino_welfare/modlib/reception/models.py:155
 #, fuzzy
