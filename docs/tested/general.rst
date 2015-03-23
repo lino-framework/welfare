@@ -185,6 +185,7 @@ The primary purpose of the following is to get a warning when anything
 changes.
 
 
+>>> settings.SITE.catch_layout_exceptions = False
 >>> rt.show(about.WindowActions)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
