@@ -1014,19 +1014,14 @@ class ClientChecker(Checker):
 
 
 class SSINChecker(ClientChecker):
-    """Clients must have a valid SSIN and either valid eId data or an
-    alternative identifying document.
+    """Clients must have either valid eId data or an alternative
+    identifying document.
 
     """
-    verbose_name = _("Check SSIN validity")
+    verbose_name = _("Check for valid identification")
     need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
     
     def get_plausibility_problems(self, obj, fix=False):
-        if obj.national_id is not None:
-            try:
-                ssin.ssin_validator(obj.national_id)
-            except ValidationError as e:
-                yield (False, '; '.join(e.messages))
 
         if obj.client_state in self.need_valid_card_data \
            and not obj.has_valid_card_data():
