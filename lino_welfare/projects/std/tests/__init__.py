@@ -7,6 +7,7 @@
    test_isip
    test_sql
    test_households
+   test_dupe_clients
 
 """
 
