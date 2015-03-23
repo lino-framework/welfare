@@ -13,13 +13,6 @@ class DupableClient(Dupable):
     """Model mixin to add to the base classes of your application's
     `pcsw.Client` model.
 
-    Note that using the mixin does not yet install the plugin, it just
-    declares a model as being dupable. In order to activate
-    verification, you must also add
-    :mod:`lino.modlib.dupable_clients` to your
-    :meth:`get_installed_apps
-    <lino.core.site.Site.get_installed_apps>` method.
-
     """
 
     class Meta:
@@ -30,6 +23,10 @@ class DupableClient(Dupable):
     def find_similar_instances(self, limit=None, **kwargs):
         # kwargs.update(is_obsolete=False, national_id__isnull=True)
         qs = super(DupableClient, self).find_similar_instances(None, **kwargs)
+        if self.national_id:
+            qs = qs.filter(national_id__isnull=True)
+        else:
+            qs = qs.filter(national_id__isnull=True)
         if self.birth_date:
             qs = qs.filter(
                 Q(birth_date__isnull=True) | Q(birth_date=self.birth_date))
