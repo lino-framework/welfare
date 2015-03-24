@@ -94,6 +94,9 @@ class DocsTests(BaseTestCase):
     def test_general(self):
         return self.run_simple_doctests('docs/tested/general.rst')
 
+    def test_misc(self):
+        return self.run_simple_doctests('docs/tested/misc.rst')
+
     def test_aids_de(self):
         return self.run_simple_doctests('docs_de/aids.rst')
 
@@ -111,9 +114,6 @@ class DocsTests(BaseTestCase):
 
     def test_newcomers(self):
         return self.run_simple_doctests('docs/tested/newcomers.rst')
-
-    def test_misc(self):
-        return self.run_docs_doctests('tested/misc.rst')
 
     def test_debts(self):
         return self.run_docs_doctests('tested/debts.rst')

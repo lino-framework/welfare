@@ -6,19 +6,19 @@ Miscellaneous
 
 .. include:: /include/tested.rst
 
-..
-  This document is part of the test suite.
-  To test only this document, run::
+.. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_misc
+  $ python setup.py test -s tests.DocsTests.test_misc
 
-..  
-    >>> from __future__ import print_function
-    >>> from lino.api.shell import *
-    >>> from django.utils import translation
-    >>> from django.test import Client
-    >>> import json
-    >>> import os
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.std.settings.doctests'
+>>> from lino.api.doctest import *
+
+.. contents:: 
+   :local:
+   :depth: 3
 
 
 .. _welfare.tested.notes:
@@ -26,15 +26,14 @@ Miscellaneous
 Notes
 =======
 
->>> client = Client()
 >>> url = '/api/notes/NoteTypes/1?fmt=detail'
->>> res = client.get(url, REMOTE_USER='rolf')
+>>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
 
 We test whether a normal HTML response arrived:
 
->>> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 <!DOCTYPE html ...
 Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
 ...</body>
@@ -45,12 +44,9 @@ Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
 Some database content
 ---------------------
 
-
 >>> ses = rt.login('rolf')
 
-
 .. 
-
 
     Rendering some more excerpts
 
@@ -105,4 +101,69 @@ Gonna copy ...lino_welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
 Sind Sie sicher?
+
+
+Yet another series of GET requests
+==================================
+
+>>> RetrieveTIGroupsRequest = rt.modules.cbss.RetrieveTIGroupsRequest
+>>> ContentType = rt.modules.contenttypes.ContentType
+
+>>> json_fields = 'count rows title success no_data_text'
+>>> kw = dict(fmt='json', limit=10, start=0)
+>>> demo_get('rolf', 'api/contacts/Companies', json_fields, 50, **kw)
+>>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
+>>> demo_get('rolf', 'api/contacts/Partners', json_fields, 173, **kw)
+
+>>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
+>>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
+>>> demo_get('rolf', 'api/countries/Countries', json_fields, 9, **kw)
+>>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
+>>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
+
+>>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
+>>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
+...     json_fields, 18, mt=mt, mk=1, **kw)
+
+>>> json_fields = 'count rows title success no_data_text param_values'
+>>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
+>>> demo_get('rolf', 'api/contacts/Persons', json_fields, 101, **kw)
+>>> demo_get('rolf', 'api/pcsw/Clients', json_fields, 30, **kw)
+>>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
+>>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
+>>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)
+>>> demo_get(
+...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
+...    2, mt=50, mk=120, **kw)
+>>> demo_get('alicia', 'api/integ/Clients', json_fields, 7, **kw)
+>>> demo_get('hubert', 'api/integ/Clients', json_fields, 19, **kw)
+
+>>> alicia = settings.SITE.user_model.objects.get(username='alicia')
+
+Rolf working as Alicia:
+
+>>> kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
+>>> demo_get('rolf', 'api/integ/Clients', json_fields, 7, **kw)
+
+>>> kw = dict()
+>>> json_fields = 'count rows'
+>>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', json_fields, 6, **kw)
+>>> demo_get(
+...    'rolf', 'choices/cv/ObstaclesByPerson/property', json_fields,
+...    15, **kw)
+>>> demo_get(
+...    'rolf', 'choices/pcsw/ContactsByClient/company?type=1',
+...    json_fields, 4, **kw)
+
+>>> demo_get(
+...    'rolf', 'choices/aids/IncomeConfirmations/aid_type',
+...    json_fields, 11, **kw)
+
+>>> demo_get(
+...    'rolf', 'choices/aids/RefundConfirmations/aid_type',
+...    json_fields, 11, **kw)
+
+>>> demo_get(
+...    'rolf', 'apchoices/pcsw/Clients/create_visit/user',
+...    json_fields, 4, **kw)
 

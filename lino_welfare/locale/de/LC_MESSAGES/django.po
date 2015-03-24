@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-23 15:35+0200\n"
-"PO-Revision-Date: 2015-03-23 15:45+0300\n"
+"PO-Revision-Date: 2015-03-24 20:31+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2141,34 +2141,29 @@ msgid "Seminar"
 msgstr "Seminar"
 
 #: lino_welfare/modlib/dupable_clients/__init__.py:26
-#, fuzzy
 msgid "Dupable clients"
-msgstr "Aktive Klienten"
+msgstr "Dublettenkontrolle Klienten"
 
 #: lino_welfare/modlib/dupable_clients/models.py:18
-#, fuzzy
 msgid "Phonetic word"
-msgstr "Phonetische Suche"
+msgstr "Phonetisches Wort"
 
 #: lino_welfare/modlib/dupable_clients/models.py:19
-#, fuzzy
 msgid "Phonetic words"
-msgstr "Phonetische Suche"
+msgstr "Phonetische Wörter"
 
 #: lino_welfare/modlib/dupable_clients/models.py:31
-#, fuzzy
 msgid "Similar clients"
-msgstr "Komplette Akten"
+msgstr "Ähnliche Klienten"
 
 #: lino_welfare/modlib/dupable_clients/models.py:42
-#, fuzzy
 msgid "Check for similar clients"
-msgstr "Komplette Akten"
+msgstr "Dublettenkontrolle"
 
 #: lino_welfare/modlib/dupable_clients/models.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "{num} similar clients: {clients}"
-msgstr "%(num)d ähnliche Klienten: %(clients)s"
+msgstr "{num} ähnliche Klienten: {clients}"
 
 #: lino_welfare/modlib/households/models.py:31
 #, fuzzy
@@ -2216,9 +2211,8 @@ msgstr[0] "%(count)d Kind"
 msgstr[1] "%(count)d Kinder"
 
 #: lino_welfare/modlib/households/models.py:260
-#, fuzzy
 msgid " and "
-msgstr "und"
+msgstr " und "
 
 #: lino_welfare/modlib/immersion/__init__.py:28
 #: lino_welfare/modlib/immersion/models.py:82
@@ -3479,14 +3473,12 @@ msgid "Check for valid identification"
 msgstr "Auf gültige Identifizierungsangaben prüfen"
 
 #: lino_welfare/modlib/pcsw/models.py:1030
-#, fuzzy
 msgid "Neither valid eId data nor alternative identifying document."
-msgstr "Weder gültige eID-Daten noch identifizierendes Dokument"
+msgstr "Weder gültige eID-Daten noch identifizierendes Dokument."
 
 #: lino_welfare/modlib/pcsw/models.py:1043
-#, fuzzy
 msgid "Check coachings"
-msgstr "Begleitung beenden"
+msgstr "Begleitung prüfen"
 
 #: lino_welfare/modlib/pcsw/models.py:1048
 msgid "Both coached and obsolete."

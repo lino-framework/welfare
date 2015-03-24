@@ -6,7 +6,10 @@
 Like :mod:`lino.modlib.dupable_partners`, but specialized for
 `pcsw.Client`.
 
-Examples and test cases in :ref:`welfare.tested.dupable_clients`.
+Examples and test cases in
+:ref:`welfare.tested.dupable_clients`.
+and
+:mod:`lino_welfare.projects.std.tests.test_dupe_clients`.
 
 .. autosummary::
    :toctree:

@@ -80,3 +80,9 @@ class TestCase(RemoteAuthTestCase):
         jj1.birth_date = ""
         jj1.save()
         jjcheck(100, 101)
+
+        # both national_id and birth_date are missing for both clients
+        jj2.national_id = ""
+        jj2.birth_date = ""
+        jj2.save()
+        jjcheck(100, 101)

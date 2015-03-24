@@ -212,13 +212,12 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         s = ar.to_rst()
         # print(s)
         self.assertEqual(s, """\
-==================================================================== ========================= ============= =========
- Message                                                              Plausibility checker      Responsible   Fixable
--------------------------------------------------------------------- ------------------------- ------------- ---------
- Malformed SSIN '68060105329' must be '680601 053-29'.                Check for invalid SSINs   robin         Yes
- Invalid SSIN 68060105329 : A formatted SSIN must have 13 positions   Check SSIN validity                     No
- **Total (2 rows)**                                                                                           **1**
-==================================================================== ========================= ============= =========
+======================================================= ========================= ============= =========
+ Message                                                 Plausibility checker      Responsible   Fixable
+------------------------------------------------------- ------------------------- ------------- ---------
+ Malformed SSIN '68060105329' must be '680601 053-29'.   Check for invalid SSINs   robin         Yes
+ **Total (1 rows)**                                                                              **1**
+======================================================= ========================= ============= =========
 """)
 
         obj.check_plausibility(ar, fix=True)
