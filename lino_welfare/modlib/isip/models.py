@@ -27,7 +27,14 @@ COACHINGTYPE_DSBE = 2
 
 
 class ContractType(ContractTypeBase):
-    """The type of an :class:`isip.Contract <Class>`."""
+    """The type of an :class:`isip.Contract <Class>`.
+
+    .. attribute:: needs_study_type
+
+        Whether contracts of this type need their :attr:`study_type`
+        field filled in.
+
+    """
     preferred_foreignkey_width = 20
 
     templates_group = 'isip/Contract'
@@ -155,6 +162,19 @@ class PartnersByContract(ContractPartners):
 
 
 class Contract(ContractBase):
+    """
+    .. attribute:: type
+
+        The type of this contract.
+        Pointer to :class:`ContractType`.
+
+    .. attribute:: study_type
+
+        The type of study required(?) for this contract.
+
+        Pointer to :class:`lino.modlib.cv.models.StudyType`.
+
+    """
     class Meta:
         verbose_name = _("ISIP")
         verbose_name_plural = _("ISIPs")
@@ -163,6 +183,8 @@ class Contract(ContractBase):
         "isip.ContractType",
         related_name="%(app_label)s_%(class)s_set_by_type",
         verbose_name=_("Contract Type"), blank=True)
+
+    study_type = models.ForeignKey('cv.StudyType', blank=True, null=True)
 
     stages = dd.RichTextField(
         _("stages"),
@@ -179,12 +201,6 @@ class Contract(ContractBase):
     duties_person = dd.RichTextField(
         _("duties person"),
         blank=True, null=True, format='html')
-
-    # hidden_columns = (
-    #     ContractBase.hidden_columns
-    #     + " stages goals duties_asd duties_dsbe duties_person")
-
-    study_type = models.ForeignKey('cv.StudyType', blank=True, null=True)
 
     @classmethod
     def get_certifiable_fields(cls):
