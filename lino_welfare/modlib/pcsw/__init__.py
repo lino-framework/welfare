@@ -38,6 +38,7 @@ class Plugin(ad.Plugin):
         m = m.add_menu(config.app_label, config.verbose_name)
         m.add_action('pcsw.PersonGroups')
         m.add_action('pcsw.Activities')
+        # m.add_action('pcsw.AidTypes')
         m.add_action('pcsw.ExclusionTypes')
         m.add_action('pcsw.CoachingTypes')
         m.add_action('pcsw.CoachingEndings')
