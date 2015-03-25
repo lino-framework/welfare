@@ -1,4 +1,4 @@
-.. _welfare.tested.dupable_clients:
+.. _welfare.tested.dupe_clients:
 
 ===========================
 Avoiding duplicate clients
@@ -31,8 +31,44 @@ In Lino Welfare, a :class:`Client
 Phonetic words
 --------------
 
+See :class:`lino.mixins.dupable.PhoneticWordBase`.
+
 >>> rt.show(pcsw.Clients, column_names="id name dupable_words")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+===== ======================= ======================
+ ID    Name                    dupable_words
+----- ----------------------- ----------------------
+ 116   Ausdemwald Alfons       *ASTM*, *ALFN*
+ 177   Brecht Bernd            *PRKT*, *PRNT*
+ 118   Collard Charlotte       *KLRT*, *XRLT*
+ 124   Dobbelstein Dorothée    *TPLS*, *TR0*
+ 179   Dubois Robin            *TP*, *RPN*
+ 128   Emonts Daniel           *AMNT*, *TNL*
+ 152   Emonts-Gast Erna        *AMNT*, *KST*, *ARN*
+ 129   Engels Edgar            *ANJL*, *ATKR*
+ 127   Evers Eberhart          *AFRS*, *APRR*
+ 132   Groteclaes Gregory      *KRTK*, *KRKR*
+ 133   Hilgers Hildegard       *HLKR*, *HLTK*
+ 137   Jacobs Jacqueline       *JKPS*, *JKLN*
+ 181   Jeanémart Jérôme        *JNMR*, *JRM*
+ 139   Jonas Josef             *JNS*, *JSF*
+ 141   Kaivers Karl            *KFRS*, *KRL*
+ 178   Keller Karl             *KLR*, *KRL*
+ 142   Lambertz Guido          *LMPR*, *KT*
+ 144   Lazarus Line            *LSRS*, *LN*
+ 146   Malmendier Marc         *MLMN*, *MRK*
+ 147   Meessen Melissa         *MSN*, *MLS*
+ 153   Radermacher Alfons      *RTRM*, *ALFN*
+ 155   Radermacher Christian   *RTRM*, *KRSX*
+ 157   Radermacher Edgard      *RTRM*, *ATKR*
+ 159   Radermacher Guido       *RTRM*, *KT*
+ 161   Radermacher Hedi        *RTRM*, *HT*
+ 173   Radermecker Rik         *RTRM*, *RK*
+ 165   da Vinci David          *T*, *FNK*, *TFT*
+ 166   van Veen Vincent        *FN*, *FN*, *FNKN*
+ 168   Östges Otto             *STJS*, *AT*
+===== ======================= ======================
+<BLANKLINE>
 
 
 

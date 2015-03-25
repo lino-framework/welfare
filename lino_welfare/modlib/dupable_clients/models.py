@@ -8,11 +8,13 @@ Database models for `lino_welfare.modlib.dupable_clients`.
 
 from lino.api import dd, _
 
-from lino.mixins.dupable import DupableWordBase, SimilarObjects
+from lino.mixins.dupable import PhoneticWordBase, SimilarObjects
 
 
-class Word(DupableWordBase):
-    """Phonetic words for Clients."""
+class Word(PhoneticWordBase):
+    """Phonetic word for `pcsw.Client`.
+    See :class:`lino.mixins.dupable.PhoneticWordBase`.
+    """
 
     class Meta:
         verbose_name = _("Phonetic word")

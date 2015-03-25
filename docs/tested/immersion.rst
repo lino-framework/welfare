@@ -63,16 +63,16 @@ Demo data
 :class:`lino_welfare.modlib.immersion.models.Contract`
 
 >>> rt.show(immersion.Contracts)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==== ========================== ============== =============== ================== =========================
  ID   Client                     applies from   applies until   responsible (IS)   Immersion training type
 ---- -------------------------- -------------- --------------- ------------------ -------------------------
- 1    ENGELS Edgar (128)         10/29/12       2/21/14         Mélanie Mélard     Immersion training
- 2    ENGELS Edgar (128)         2/22/14        2/22/15         Mélanie Mélard     Immersion training
- 3    LAMBERTZ Guido (141)       12/3/12        10/11/13        Alicia Allmanns    Immersion training
- 4    RADERMACHER Edgard (156)   1/7/13         5/2/14          Alicia Allmanns    Immersion training
- 5    RADERMACHER Edgard (156)   5/3/14         5/3/15          Hubert Huppertz    Immersion training
- 6    RADERMECKER Rik (172)      2/11/13        12/20/13        Hubert Huppertz    Immersion training
- 7    RADERMECKER Rik (172)      12/21/13       12/21/14        Hubert Huppertz    Immersion training
+ 1    ENGELS Edgar (129)         10/29/12       2/21/14         Mélanie Mélard     Immersion training
+ 2    ENGELS Edgar (129)         2/22/14        2/22/15         Mélanie Mélard     Immersion training
+ 3    LAMBERTZ Guido (142)       12/3/12        10/11/13        Alicia Allmanns    Immersion training
+ 4    RADERMACHER Edgard (157)   1/7/13         5/2/14          Alicia Allmanns    Immersion training
+ 5    RADERMACHER Edgard (157)   5/3/14         5/3/15          Hubert Huppertz    Immersion training
+ 6    RADERMECKER Rik (173)      2/11/13        12/20/13        Hubert Huppertz    Immersion training
+ 7    RADERMECKER Rik (173)      12/21/13       12/21/14        Hubert Huppertz    Immersion training
 ==== ========================== ============== =============== ================== =========================
 <BLANKLINE>
