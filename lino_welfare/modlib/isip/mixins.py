@@ -319,14 +319,22 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         super(ContractBase, self).update_owned_instance(other)
 
     def setup_auto_event(self, evt):
-        # Suggested evaluation events should be for the currently
-        # responsible coach, not for the contract's author. This is
-        # relevant if coach changes while contract is active.  See
-        # :doc:`/tickets/104`
+        """This implements the rule that suggested evaluation events should
+        be for the *currently responsible* coach, which may differ from
+        the contract's author. This is relevant if coach changes while
+        contract is active (see :doc:`/tested/integ`).
+
+        The **currently responsible coach** is the user for which
+        there is a coaching which has :attr:`does_integ
+        <lino_welfare.modlib.pcsw.coaching.CoachingType.does_integ>`
+        set to `True`..
+
+        """
+        super(ContractBase, self).setup_auto_event(evt)
         d = evt.start_date
         coachings = evt.owner.client.get_coachings(
             (d, d), type__does_integ=True)
-        if coachings.count() > 0:
+        if coachings.count() == 1:
             evt.user = coachings[0].user
 
     def update_cal_rset(self):

@@ -230,11 +230,15 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         kw.update(project=self)
         return super(Client, self).get_excerpt_options(ar, **kw)
 
-    def get_coachings(self, period=None, **flt):
-        qs = self.coachings_by_client.filter(**flt)
+    def get_coachings(self, period=None, *args, **flt):
+        """"Return a queryset with the coachings of this client. If `period`
+        is not None, it must be a tuple of two date objects. Any
+        additional arguments are applied as filter of the queryset.
+
+        """
+        qs = self.coachings_by_client.filter(*args, **flt)
         if period is not None:
-            qs = self.coachings_by_client.filter(
-                only_active_coachings_filter(period))
+            qs = qs.filter(only_active_coachings_filter(period))
         return qs
 
     @dd.chooser()

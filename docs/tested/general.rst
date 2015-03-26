@@ -55,7 +55,7 @@ result:
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        505
  cal.EventType                  cal.EventTypes                  19        8
- cal.Guest                      cal.Guests                      9         508
+ cal.Guest                      cal.Guests                      9         492
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9

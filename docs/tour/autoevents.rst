@@ -1,0 +1,267 @@
+.. _welfare.tour.autoevents:
+
+=========================
+Automatic calendar events
+=========================
+
+.. How to test only this document:
+
+  $ python setup.py test -s tests.DocsTests.test_autoevents
+
+For every contract, Lino Welfare automatically generates a series of
+calendar events for evaluation meetings.
+
+
+.. contents::
+   :local:
+   :depth: 1
+
+Technical stuff
+===============
+
+This document is part of the test suite:
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.std.settings.doctests'
+>>> from lino.api.doctest import *
+
+>>> ses = rt.login('robin')
+>>> translation.activate('en')
+
+Some local settings which influence automatic generation of
+calendar events:
+
+>>> print(settings.SITE.ignore_dates_before)
+None
+>>> print(str(settings.SITE.ignore_dates_after))
+2019-05-22
+
+
+Evaluation events
+=================
+
+The :class:`cal.EventsByController
+<lino.modlib.cal.models.EventsByController>` table shows the
+evaluation events which have been generated.
+
+For example let's look at ISIP contract #26 of the demo database.
+
+>>> obj = isip.Contract.objects.get(pk=26)
+>>> obj.exam_policy
+ExamPolicy #1 (u'every month')
+>>> rt.show(cal.EventsByController, obj)
+======================== ================ ================= ============= ===============
+ When                     Summary          Managed by        Assigned to   Workflow
+------------------------ ---------------- ----------------- ------------- ---------------
+ *Mon 8/4/14 at 09:00*    Appointment 1    Hubert Huppertz                 **Suggested**
+ *Thu 9/4/14 at 09:00*    Appointment 2    Hubert Huppertz                 **Suggested**
+ *Mon 10/6/14 at 09:00*   Appointment 3    Hubert Huppertz                 **Suggested**
+ *Thu 11/6/14 at 09:00*   Appointment 4    Hubert Huppertz                 **Suggested**
+ *Mon 12/8/14 at 09:00*   Appointment 5    Hubert Huppertz                 **Suggested**
+ *Thu 1/8/15 at 09:00*    Appointment 6    Hubert Huppertz                 **Suggested**
+ *Mon 2/9/15 at 09:00*    Appointment 7    Hubert Huppertz                 **Suggested**
+ *Mon 3/9/15 at 09:00*    Appointment 8    Hubert Huppertz                 **Suggested**
+ *Thu 4/9/15 at 09:00*    Appointment 9    Hubert Huppertz                 **Suggested**
+ *Mon 5/11/15 at 09:00*   Appointment 10   Hubert Huppertz                 **Suggested**
+ *Thu 6/11/15 at 09:00*   Appointment 11   Hubert Huppertz                 **Suggested**
+======================== ================ ================= ============= ===============
+<BLANKLINE>
+
+.. the following verifies a related bugfix
+
+    >>> mt = contenttypes.ContentType.objects.get_for_model(obj.__class__)
+    >>> print(mt)
+    ISIP
+    >>> uri = '/api/cal/EventsByController?mt={0}&mk={1}&fmt=json'
+    >>> uri = uri.format(mt.id, obj.id)
+    >>> res = test_client.get(uri, REMOTE_USER='robin')
+    >>> res.status_code
+    200
+    >>> d = AttrDict(json.loads(res.content))
+    >>> print(d.title)
+    Events of ISIP#26 (Otto ÖSTGES)
+    >>> print(len(d.rows))
+    12
+
+
+Configuration
+=============
+
+The frequence of the evaluation meetings depends on the *evaluation
+policy* :attr:`exam_policy
+<lino_welfare.modlib.isip.mixins.ContractTypeBase.exam_policy>` used
+for this contract.
+
+You can configure the list of allowed examination policies via the
+:menuselection:`Configure --> Integration --> Examination policies`
+command.
+
+>>> ses.show(isip.ExamPolicies)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==================== ========================= ====================
+ Designation          Designation (fr)          Designation (de)
+-------------------- ------------------------- --------------------
+ every month          mensuel                   monatlich
+ every 2 months       bimensuel                 zweimonatlich
+ every 3 months       tous les 3 mois           alle 3 Monate
+ every 2 weeks        hebdomadaire              zweiwöchentlich
+ Once after 10 days   Une fois après 10 jours   Once after 10 days
+ Other                Autre                     Sonstige
+==================== ========================= ====================
+<BLANKLINE>
+
+
+Coach changes while contract active
+===================================
+
+A special condition --which in reality arises quite often-- is that
+the coach changes while the contract is still active.  This is why
+Lino must attribute every automatic evaluation event to the *currently
+responsible coach* at the event's date.
+
+For example, let's pick up ISIP contract #21.  
+
+>>> obj = isip.Contract.objects.get(pk=21)
+>>> rt.show(cal.EventsByController, obj)
+========================= ================ ================= ============= ===============
+ When                      Summary          Managed by        Assigned to   Workflow
+------------------------- ---------------- ----------------- ------------- ---------------
+ *Mon 3/18/13 at 09:00*    Appointment 1    Alicia Allmanns                 **Suggested**
+ *Thu 4/18/13 at 09:00*    Appointment 2    Alicia Allmanns                 **Suggested**
+ *Mon 5/20/13 at 09:00*    Appointment 3    Alicia Allmanns                 **Suggested**
+ *Thu 6/20/13 at 09:00*    Appointment 4    Alicia Allmanns                 **Suggested**
+ *Mon 7/22/13 at 09:00*    Appointment 5    Alicia Allmanns                 **Suggested**
+ *Thu 8/22/13 at 09:00*    Appointment 6    Alicia Allmanns                 **Suggested**
+ *Mon 9/23/13 at 09:00*    Appointment 7    Alicia Allmanns                 **Suggested**
+ *Wed 10/23/13 at 09:00*   Appointment 8    Hubert Huppertz                 **Suggested**
+ *Mon 11/25/13 at 09:00*   Appointment 9    Hubert Huppertz                 **Suggested**
+ *Wed 12/25/13 at 09:00*   Appointment 10   Hubert Huppertz                 **Suggested**
+ *Mon 1/27/14 at 09:00*    Appointment 11   Hubert Huppertz                 **Suggested**
+ *Thu 2/27/14 at 09:00*    Appointment 12   Hubert Huppertz                 **Suggested**
+ *Thu 3/27/14 at 09:00*    Appointment 13   Hubert Huppertz                 **Suggested**
+ *Mon 4/28/14 at 09:00*    Appointment 14   Hubert Huppertz                 **Suggested**
+ *Wed 5/28/14 at 09:00*    Appointment 15   Hubert Huppertz                 **Suggested**
+========================= ================ ================= ============= ===============
+<BLANKLINE>
+
+The above shows that appointments before 2013-11-10 are with Alicia,
+while later appointments are with Caroline. How did Lino know which
+coach to assign?
+
+To find an answer, we must look at the coachings of this client:
+
+>>> rt.show(pcsw.CoachingsByClient, obj.client)
+==================== ======= ================= ========= =============== =======================
+ Coached from         until   Coach             Primary   Coaching type   Reason of termination
+-------------------- ------- ----------------- --------- --------------- -----------------------
+ 10/11/13                     Caroline Carnol   Yes       General
+ 10/14/13                     Hubert Huppertz   No        Integ
+ **Total (2 rows)**                             **1**
+==================== ======= ================= ========= =============== =======================
+<BLANKLINE>
+
+ISIP contract #21 was signed by Alicia for a period from 2013-02-16
+until 2014-06-11.
+
+>>> print(obj.user.username)
+alicia
+>>> print(obj.applies_from)
+2013-02-16
+>>> print(obj.applies_until)
+2014-06-11
+
+So there was no coaching at all defined for this client when the
+contract started. This is theoretically not possible, but Lino does
+not prevent us from creating such a contract.
+
+This is why Alicia got responsible for the first evaluation meetings.
+On 2013-11-10 Caroline started to coach this client, but this didn't
+change the responsible user since this coaching was for the General
+social service which is not considered integration work.
+
+The **currently responsible coach** is the user for which there is an
+active *integration coaching*.  An **integration coaching** is a
+coaching whose type has its :attr:`does_integ
+<lino_welfare.modlib.pcsw.coaching.CoachingType.does_integ>` field set
+to `True`. You can configure this via :menuselection:`Configure -->
+PCSW --> Coaching types`. The default configuration is as follows:
+
+>>> ses.show(pcsw.CoachingTypes)
+==================== ===================== =================== ============= ======= =====================
+ Designation          Designation (fr)      Designation (de)    Integration   GSS     Role in evaluations
+-------------------- --------------------- ------------------- ------------- ------- ---------------------
+ General              SSG                   ASD                 No            Yes     Colleague
+ Integ                SI                    DSBE                Yes           No      Colleague
+ Debts mediation      Médiation de dettes   Schuldnerberatung   No            No
+ **Total (3 rows)**                                             **1**         **1**
+==================== ===================== =================== ============= ======= =====================
+<BLANKLINE>
+
+The above is coded in
+:meth:`lino_welfare.modlib.isip.mixins.ContractBase.setup_auto_event`.
+
+.. The following should be useful if the demo data changes, in order
+   to find out which contract to take as new example.
+
+    Display a list of demo contracts which meet this condition.
+
+    List of coaches who ended at least one integration coaching:
+
+    >>> integ = pcsw.CoachingType.objects.filter(does_integ=True)
+    >>> l = []
+    >>> for u in users.User.objects.all():
+    ...     qs = pcsw.Coaching.objects.filter(user=u,
+    ...             type__in=integ, end_date__isnull=False)
+    ...     if qs.count():
+    ...         l.append("%s (%s)" % (u.username, qs[0].end_date))
+    >>> print(', '.join(l))
+    ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE
+    alicia (2013-10-24), caroline (2014-03-23), hubert (2013-03-08), melanie (2013-10-24)
+
+    List of contracts (isip + jobs) whose client changed the coach during
+    application period:
+
+    >>> l = []
+    >>> qs1 = isip.Contract.objects.all()
+    >>> qs2 = jobs.Contract.objects.all()
+    >>> for obj in list(qs1) + list(qs2):
+    ...     ar = cal.EventsByController.request(master_instance=obj)
+    ...     names = set([e.user.username for e in ar])
+    ...     if len(names) > 1:
+    ...         l.append(unicode(obj))
+    >>> print(len(l))
+    12
+    >>> print(', '.join(l))
+    ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE    
+    ISIP#1 (Alfons AUSDEMWALD), ISIP#2 (Alfons AUSDEMWALD), ISIP#8
+    (Luc FAYMONVILLE), ISIP#10 (Jacqueline JACOBS), ISIP#13 (Josef
+    JONAS), ISIP#16 (Marc MALMENDIER), ISIP#21 (Hedi RADERMACHER),
+    ISIP#25 (Otto ÖSTGES), Art60§7 job supplyment#2 (Denis DENON),
+    Art60§7 job supplyment#11 (Melissa MEESSEN), Art60§7 job
+    supplyment#13 (Christian RADERMACHER), Art60§7 job supplyment#16
+    (Vincent VAN VEEN)
+    
+    >>> obj = isip.Contract.objects.get(pk=21)
+
+    >>> print(obj.user.username)
+    alicia
+    
+    Lino attributes the automatic evaluation events to the coach in
+    charge, depending on their date.
+
+    >>> ar = cal.EventsByController.request(master_instance=obj)
+    >>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
+    >>> print(", ".join(events))
+    ... #doctest: +NORMALIZE_WHITESPACE
+    2013-03-18 (Alicia), 2013-04-18 (Alicia), 2013-05-20 (Alicia),
+    2013-06-20 (Alicia), 2013-07-22 (Alicia), 2013-08-22 (Alicia),
+    2013-09-23 (Alicia), 2013-10-23 (Hubert), 2013-11-25 (Hubert),
+    2013-12-25 (Hubert), 2014-01-27 (Hubert), 2014-02-27 (Hubert),
+    2014-03-27 (Hubert), 2014-04-28 (Hubert), 2014-05-28 (Hubert)
+
+    The above shows that appointments before 2013-11-10 are with Alicia,
+    later appointments are with Hubert.  That's what we wanted.
+
+

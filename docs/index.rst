@@ -29,5 +29,5 @@ Content
    tested/index
    changes
    api/index
-   tour
+   tour/index
    
