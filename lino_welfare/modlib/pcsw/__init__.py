@@ -34,16 +34,17 @@ class Plugin(ad.Plugin):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('pcsw.MyCoachings')
 
-    def setup_config_menu(config, site, profile, m):
-        m = m.add_menu(config.app_label, config.verbose_name)
+    def setup_config_menu(self, site, profile, m):
+        m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('pcsw.PersonGroups')
         m.add_action('pcsw.Activities')
-        # m.add_action('pcsw.AidTypes')
         m.add_action('pcsw.ExclusionTypes')
         m.add_action('pcsw.CoachingTypes')
         m.add_action('pcsw.CoachingEndings')
         m.add_action('pcsw.DispenseReasons')
         m.add_action('pcsw.ClientContactTypes')
+        if not site.is_installed('aids'):
+            m.add_action('pcsw.AidTypes')
 
     def setup_explorer_menu(config, site, profile, m):
         m = m.add_menu(config.app_label, config.verbose_name)
