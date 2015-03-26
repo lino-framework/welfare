@@ -43,7 +43,7 @@ class ClientDetail(dd.FormLayout):
     overview:30 general2:40 general3:20 image:15
     national_id:15 civil_state:20 birth_country birth_place \
     declared_name:15 needs_residence_permit:20 needs_work_permit:20
-    in_belgium_since:15 residence_type residence_until group:16
+    in_belgium_since:15 residence_type residence_until group:16 aid_type
     reception.AppointmentsByPartner:40 reception.AgentsByClient:30 \
     courses.EnrolmentsByPupil:40
     """, label=_("Person"))
@@ -145,8 +145,7 @@ class ClientDetail(dd.FormLayout):
     sis_tab = dd.Panel("""
     #isip.ContractsByClient
     sis_motif sis_attentes
-    sis_moteurs sis_objectifs
-    aids.GrantingsByClient
+    sis_moteurs sis_objectifs #aids.GrantingsByClient
     """, label=_("SIS"))
 
     career = dd.Panel("""

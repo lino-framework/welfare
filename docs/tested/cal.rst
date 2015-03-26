@@ -67,12 +67,8 @@ These are Alicia's calendar entries of the last two months:
 >>> last_week = dict(start_date=dd.today(-30), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEvents, language='en',
 ...     param_values=last_week)
-======================== ========================= ============= ========== ============================
- When                     Client                    Event Type    Summary    Workflow
------------------------- ------------------------- ------------- ---------- ----------------------------
- *Wed 5/7/14 at 09:00*    DUBOIS Robin (179)        Appointment   Termin 4   **Suggested** → [Notified]
- *Wed 5/14/14 at 09:00*   AUSDEMWALD Alfons (116)   Appointment   Termin 9   **Suggested** → [Notified]
-======================== ========================= ============= ========== ============================
+<BLANKLINE>
+No data to display
 <BLANKLINE>
 
 
@@ -93,7 +89,7 @@ These are Alicia's calendar entries of the last two months:
  *Wed 5/28/14 at 09:40*                             Calendar entry   Treffen        **Cancelled**
  *Thu 5/29/14 at 10:20*                             Calendar entry   Beratung       **Omitted**
  *Fri 5/30/14 at 11:10*                             Calendar entry   Seminar        **Notified** → [Cancel] [Reset]
- *Thu 6/5/14 at 09:00*    EVERS Eberhart (127)      Appointment      Termin 9       **Suggested** → [Notified]
+ *Tue 6/3/14 at 09:00*    DENON Denis (180*)        Appointment      Termin 1       **Suggested** → [Notified]
 ======================== ========================= ================ ============== =================================
 <BLANKLINE>
 
@@ -108,7 +104,6 @@ These are Alicia's calendar entries of the last two months:
  *Sat 5/24/14 at 13:30*                                             Calendar entry   Rencontre            **Cancelled**
  *Sun 5/25/14 at 08:30*                                             Calendar entry   Consultation         **Omitted**
  *Mon 5/26/14 at 09:00*   ENGELS Edgar (129)                        Appointment      Termin 3             **Suggested** → [Notified]
- *Mon 5/26/14 at 09:00*   KAIVERS Karl (141)                        Appointment      Termin 2             **Suggested** → [Notified]
  *Mon 5/26/14 at 09:40*                                             Calendar entry   Séminaire            **Notified** → [Cancel] [Reset]
  *Mon 5/26/14 at 10:20*                                             Calendar entry   Evaluation           **Suggested** → [Notified]
  *Tue 5/27/14 at 11:10*   DOBBELSTEIN Dorothée (124)                Appointment      Première rencontre   **Draft** → [Notified] [Cancel]
@@ -118,7 +113,6 @@ These are Alicia's calendar entries of the last two months:
  *Fri 5/30/14 at 10:20*                                             Calendar entry   Petit-déjeuner       **Notified** → [Cancel] [Reset]
 ======================== ========================================= ================ ==================== =================================
 <BLANKLINE>
-
 
 
 Calendars and Subscriptions
