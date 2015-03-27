@@ -216,27 +216,19 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         s = ar.to_rst()
         # print(s)
         self.assertEqual(s, """\
-============================================================================================================================ ================================================== ============= =========
- Message                                                                                                                      Plausibility checker                               Responsible   Fixable
----------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------- ------------- ---------
- Primary address differs from owner address (city:Tallinn->None, street:Estland->, zip_code:1418->, country:Belgium->None).   Check for missing or non-primary address records   robin         No
- Malformed SSIN '68060105329' must be '680601 053-29'.                                                                        Check for invalid SSINs                            robin         Yes
- **Total (2 rows)**                                                                                                                                                                            **1**
-============================================================================================================================ ================================================== ============= =========
+=========================================================== ========================= =============
+ Message                                                     Plausibility checker      Responsible
+----------------------------------------------------------- ------------------------- -------------
+ (★) Malformed SSIN '68060105329' must be '680601 053-29'.   Check for invalid SSINs   robin
+=========================================================== ========================= =============
 """)
 
         obj.check_plausibility(ar, fix=True)
         ar = rt.modules.plausibility.ProblemsByOwner.request(
             master_instance=obj)
         s = ar.to_rst()
-        # print(s)
-        self.assertEqual(s, """\
-============================================================================================================================ ================================================== ============= =========
- Message                                                                                                                      Plausibility checker                               Responsible   Fixable
----------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------- ------------- ---------
- Primary address differs from owner address (city:Tallinn->None, street:Estland->, zip_code:1418->, country:Belgium->None).   Check for missing or non-primary address records   robin         No
-============================================================================================================================ ================================================== ============= =========
-""")
+        print(s)
+        self.assertEqual(s, "\nNo data to display\n")
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.

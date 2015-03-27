@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-27 08:53+0200\n"
+"POT-Creation-Date: 2015-03-27 15:32+0200\n"
 "PO-Revision-Date: 2015-03-26 09:26+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -2178,8 +2178,9 @@ msgid "Check for similar clients"
 msgstr "Dossiers complèts"
 
 #: lino_welfare/modlib/dupable_clients/models.py:49
-msgid "{num} similar clients: {clients}"
-msgstr ""
+#, fuzzy
+msgid "Similar clients: {clients}"
+msgstr "Dossiers complèts"
 
 #: lino_welfare/modlib/households/models.py:31
 #, fuzzy
@@ -4626,4 +4627,7 @@ msgstr "CVs émis"
 
 #~ msgid "My strange clients"
 #~ msgstr "Bénéficiaires actifs seulement"
+
+#~ msgid "{num} similar clients: {clients}"
+#~ msgstr ""
 

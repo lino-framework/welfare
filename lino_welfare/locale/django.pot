@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.21\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-27 08:53+0200\n"
+"POT-Creation-Date: 2015-03-27 15:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2127,7 +2127,7 @@ msgid "Check for similar clients"
 msgstr ""
 
 #: lino_welfare/modlib/dupable_clients/models.py:49
-msgid "{num} similar clients: {clients}"
+msgid "Similar clients: {clients}"
 msgstr ""
 
 #: lino_welfare/modlib/households/models.py:31

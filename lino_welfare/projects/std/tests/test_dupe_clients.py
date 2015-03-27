@@ -30,8 +30,8 @@ class TestCase(RemoteAuthTestCase):
 
         def C(*args):
             kw = dict()
-            for i, k in enumerate(argnames):
-                kw[k] = args[i]
+            for i, v in enumerate(args):
+                kw[argnames[i]] = v
             obj = Client(**kw)
             obj.full_clean()
             obj.save()
@@ -86,3 +86,20 @@ class TestCase(RemoteAuthTestCase):
         jj2.birth_date = ""
         jj2.save()
         jjcheck(100, 101)
+
+        # Now some checks just on names
+        def check2(fn1, ln1, fn2, ln2, similar):
+            o1 = C(fn1, ln1)
+            o2 = C(fn2, ln2)
+            s1 = o1.find_similar_instances()
+            s2 = o2.find_similar_instances()
+            self.assertEqual(o1 in s2, similar)
+            self.assertEqual(o2 in s1, similar)
+            
+        check2("Jean", "Nemard", "Jacques", "Nemard", False)
+        check2("Jean", "Nemard", "Jean-Jacques", "Nemard", True)
+        check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Vandenberg", False)
+        check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Namard", True)
+        check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Nomard", True)
+        check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Homard", False)
+

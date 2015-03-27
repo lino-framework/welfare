@@ -25,9 +25,9 @@ class DupableClient(Dupable):
         :meth:`lino.mixins.dupable.Dupable.find_similar_instances`,
         adding some additional rules:
 
-        
-
         """
+        if self.dupable_word_model is None:
+            return
         # kwargs.update(is_obsolete=False, national_id__isnull=True)
         qs = super(DupableClient, self).find_similar_instances(None, **kwargs)
         if self.national_id:
@@ -36,9 +36,21 @@ class DupableClient(Dupable):
         #     qs = qs.filter(national_id__isnull=False)
         if self.birth_date:
             qs = qs.filter(Q(birth_date='') | Q(birth_date=self.birth_date))
-        if limit is not None:
-            qs = qs[:limit]
-        # print qs.query
-        return qs
+
+        last_name_words = set(self.get_dupable_words('last_name'))
+
+        found = 0
+        for other in qs:
+            found += 1
+            if limit is not None and found > limit:
+                return
+            ok = False
+            for w in other.get_dupable_words('last_name'):
+                if w in last_name_words:
+                    ok = True
+                    break
+            if ok:
+                yield other
+
 
 

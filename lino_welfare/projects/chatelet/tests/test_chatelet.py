@@ -72,8 +72,8 @@ class TestCase(TestCase):
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
     def test_dupable_hidden(self):
-        """Since dupable_partners is hidden, we can create duplicate partners
-        without wearning.
+        """Since `dupable_clients` is hidden, we can create duplicate partners
+        without warning.
 
         """
         Client = rt.modules.pcsw.Client

@@ -44,11 +44,10 @@ class SimilarClientsChecker(ClientChecker):
     verbose_name = _("Check for similar clients")
 
     def get_plausibility_problems(self, obj, fix=False):
-        qs = obj.find_similar_instances(3)
-        if qs.count() > 0:
-            msg = _("{num} similar clients: {clients}").format(
-                num=qs.count(),
-                clients=', '.join(map(unicode, qs)))
+        lst = list(obj.find_similar_instances(1))
+        if len(lst):
+            msg = _("Similar clients: {clients}").format(
+                clients=', '.join(map(unicode, lst)))
             yield (False, msg)
 
 SimilarClientsChecker.activate()
