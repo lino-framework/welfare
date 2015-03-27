@@ -101,9 +101,9 @@ Willkommensmeldung unter die Nase gerieben:
  Klient                   Hilfeart                  Laufzeit von   bis        Autor   Arbeitsablauf
 ------------------------ ------------------------- -------------- ---------- ------- --------------------------------
  EMONTS-GAST Erna (152)   Heizkosten                30.05.14       31.05.14           **Unbestätigt** → [Bestätigen]
- DUBOIS Robin (179)       Ausländerbeihilfe         05.01.14                          **Unbestätigt** → [Bestätigen]
- DUBOIS Robin (179)       Eingliederungseinkommen   26.02.13                          **Unbestätigt** → [Bestätigen]
- DA VINCI David (165)     Eingliederungseinkommen   27.01.13                          **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Eingliederungseinkommen   05.01.14                          **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Ausländerbeihilfe         26.02.13                          **Unbestätigt** → [Bestätigen]
+ DA VINCI David (165)     Ausländerbeihilfe         27.01.13                          **Unbestätigt** → [Bestätigen]
 ======================== ========================= ============== ========== ======= ================================
 <BLANKLINE>
 
@@ -121,8 +121,8 @@ In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
 ...    print("%s : %d" % (unicode(at), qs.count()))
-Eingliederungseinkommen : 18
-Ausländerbeihilfe : 33
+Eingliederungseinkommen : 17
+Ausländerbeihilfe : 29
 Feste Beihilfe : 3
 Erstattung : 3
 Übernahmeschein : 3
@@ -149,15 +149,14 @@ The demo fixtures generate some exceptions to this general rule.  Here
 we see that most contracts have indeed exactly 1 granting:
 
 >>> isip.Contract.objects.all().count()
-30
+27
 
 >>> l = []
 >>> for con in isip.Contract.objects.all():
 ...     if con.get_aid_type() is not None:
 ...         l.append(con.id)
 >>> print(l)
-[1, 4, 5, 8, 10, 11, 12, 14, 16, 18, 19, 21, 23, 24, 26, 27, 29]
-
+[1, 4, 5, 6, 8, 9, 10, 12, 14, 16, 17, 18, 20, 21, 23, 24, 26]
 
 
 The following test is rather useless...
@@ -221,8 +220,8 @@ There are two grantings with this aid type:
 ==================== ==================== ============== ========== ====
  Beschreibung         Klient               Laufzeit von   bis        ID
 -------------------- -------------------- -------------- ---------- ----
- *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   41
- *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   42
+ *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   38
+ *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   39
 ==================== ==================== ============== ========== ====
 <BLANKLINE>
 
@@ -282,7 +281,8 @@ manually choose any other pharmacy:
 
 >>> ContentType = rt.modules.contenttypes.ContentType
 >>> mt = ContentType.objects.get_for_model(rt.modules.aids.Granting).id
->>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk=42'.format(mt)
+>>> obj = rt.modules.aids.Granting.objects.get(id=38)
+>>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk={1}'.format(mt, obj.id)
 >>> response = test_client.get(url, REMOTE_USER="rolf")
 >>> result = json.loads(response.content)
 >>> for r in result['rows']:

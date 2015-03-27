@@ -10,6 +10,10 @@ You can run only these tests by issuing::
   $ cd lino_welfare/projects/std
   $ python manage.py test tests.test_beid
 
+Or::
+
+  $ python setup.py test -s tests.DemoTests.test_std
+
 """
 
 from __future__ import unicode_literals
@@ -212,12 +216,13 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         s = ar.to_rst()
         # print(s)
         self.assertEqual(s, """\
-======================================================= ========================= ============= =========
- Message                                                 Plausibility checker      Responsible   Fixable
-------------------------------------------------------- ------------------------- ------------- ---------
- Malformed SSIN '68060105329' must be '680601 053-29'.   Check for invalid SSINs   robin         Yes
- **Total (1 rows)**                                                                              **1**
-======================================================= ========================= ============= =========
+============================================================================================================================ ================================================== ============= =========
+ Message                                                                                                                      Plausibility checker                               Responsible   Fixable
+---------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------- ------------- ---------
+ Primary address differs from owner address (city:Tallinn->None, street:Estland->, zip_code:1418->, country:Belgium->None).   Check for missing or non-primary address records   robin         No
+ Malformed SSIN '68060105329' must be '680601 053-29'.                                                                        Check for invalid SSINs                            robin         Yes
+ **Total (2 rows)**                                                                                                                                                                            **1**
+============================================================================================================================ ================================================== ============= =========
 """)
 
         obj.check_plausibility(ar, fix=True)
@@ -225,8 +230,12 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
             master_instance=obj)
         s = ar.to_rst()
         # print(s)
-        self.assertEqual(s, """
-No data to display
+        self.assertEqual(s, """\
+============================================================================================================================ ================================================== ============= =========
+ Message                                                                                                                      Plausibility checker                               Responsible   Fixable
+---------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------- ------------- ---------
+ Primary address differs from owner address (city:Tallinn->None, street:Estland->, zip_code:1418->, country:Belgium->None).   Check for missing or non-primary address records   robin         No
+============================================================================================================================ ================================================== ============= =========
 """)
         
         # Last attempt for this card. No similar person exists. Create
