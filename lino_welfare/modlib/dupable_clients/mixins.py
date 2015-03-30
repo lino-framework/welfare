@@ -5,8 +5,7 @@
 
 from django.db.models import Q
 from lino.mixins.dupable import Dupable
-
-from lino.api import _
+from lino.mixins.human import strip_name_prefix
 
 
 class DupableClient(Dupable):
@@ -20,10 +19,14 @@ class DupableClient(Dupable):
 
     dupable_word_model = 'dupable_clients.Word'
 
+    def get_dupable_words(self, s):
+        s = strip_name_prefix(s)
+        return super(DupableClient, self).get_dupable_words(s)
+
     def find_similar_instances(self, limit=None, **kwargs):
         """Overrides
         :meth:`lino.mixins.dupable.Dupable.find_similar_instances`,
-        adding some additional rules:
+        adding some additional rules.
 
         """
         if self.dupable_word_model is None:
@@ -37,7 +40,7 @@ class DupableClient(Dupable):
         if self.birth_date:
             qs = qs.filter(Q(birth_date='') | Q(birth_date=self.birth_date))
 
-        last_name_words = set(self.get_dupable_words('last_name'))
+        last_name_words = set(self.get_dupable_words(self.last_name))
 
         found = 0
         for other in qs:
@@ -45,7 +48,7 @@ class DupableClient(Dupable):
             if limit is not None and found > limit:
                 return
             ok = False
-            for w in other.get_dupable_words('last_name'):
+            for w in other.get_dupable_words(other.last_name):
                 if w in last_name_words:
                     ok = True
                     break

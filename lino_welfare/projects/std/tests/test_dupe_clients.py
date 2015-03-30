@@ -89,6 +89,8 @@ class TestCase(RemoteAuthTestCase):
 
         # Now some checks just on names
         def check2(fn1, ln1, fn2, ln2, similar):
+            Client.objects.all().delete()
+            Word.objects.all().delete()
             o1 = C(fn1, ln1)
             o2 = C(fn2, ln2)
             s1 = o1.find_similar_instances()
@@ -102,4 +104,13 @@ class TestCase(RemoteAuthTestCase):
         check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Namard", True)
         check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Nomard", True)
         check2("Jean-Jacques", "Nemard", "Jean-Jacques", "Homard", False)
+
+        # common family name prefixes make no difference:
+
+        check2("Norbert", "Berg", "Norbert", "van Berg", True)
+        check2("Norbert", "Berg", "Norbert", "van den Berg", True)
+        check2("Norbert", "Berg", "Lydia", "van Berg", False)
+        check2("Norbert", "Berg", "Lydia", "van den Berg", False)
+        check2("Norbert", "van Berg", "Lydia", "van Berg", False)
+        check2("Norbert", "van den Berg", "Lydia", "van den Berg", False)
 

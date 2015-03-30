@@ -99,7 +99,7 @@ result:
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
- dupable_clients.Word           dupable_clients.Words           3         133
+ dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
  households.Household           households.Households           29        14
@@ -385,8 +385,10 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | contenttypes.ContentTypes.insert                | all except anonymous                | id name app_label model base_classes               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| countries.Countries.insert                      | all except anonymous                | isocode name name_fr name_de name_nl short_code    |
+| countries.Countries.detail                      | all except anonymous                | isocode name name_fr name_de name_nl short_code    |
 |                                                 |                                     | inscode                                            |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| countries.Countries.insert                      | all except anonymous                | isocode short_code name name_fr name_de name_nl    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | countries.Places.insert                         | all except anonymous                | name name_fr name_de name_nl country inscode       |
 |                                                 |                                     | zip_code parent type id                            |

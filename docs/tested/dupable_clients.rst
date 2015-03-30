@@ -65,7 +65,7 @@ See :class:`lino.mixins.dupable.PhoneticWordBase`.
  161   Radermacher Hedi        *RTRM*, *HT*
  173   Radermecker Rik         *RTRM*, *RK*
  165   da Vinci David          *T*, *FNK*, *TFT*
- 166   van Veen Vincent        *FN*, *FN*, *FNKN*
+ 166   van Veen Vincent        *FN*, *FNKN*
  168   Östges Otto             *STJS*, *AT*
 ===== ======================= ======================
 <BLANKLINE>
