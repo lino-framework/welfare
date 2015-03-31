@@ -81,6 +81,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.cbss.tests',
     'lino_welfare.modlib.contacts',
     'lino_welfare.modlib.contacts.fixtures',
+    'lino_welfare.modlib.countries',
+    'lino_welfare.modlib.countries.fixtures',
     'lino_welfare.modlib.courses',
     'lino_welfare.modlib.courses.fixtures',
     'lino_welfare.modlib.cv',

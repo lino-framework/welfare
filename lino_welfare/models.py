@@ -177,14 +177,6 @@ def site_setup(site):
     countries.PlacesByCountry cv.StudiesByCountry
     """)
 
-    # site.modules.contacts.Partners.set_detail_layout(contacts.PartnerDetail())
-    # site.modules.contacts.Companies.set_detail_layout(contacts.CompanyDetail())
-    # site.modules.contacts.Partners.add_detail_tab(
-    #     'changes', 'changes.ChangesByMaster')
-
-
-#~ logger.info("20130409 %s declare set_merge_actions()",__name__)
-#~ raise Exception("20130409 %s declare set_merge_actions()" % __name__)
 
 @dd.receiver(dd.pre_analyze)
 def set_merge_actions(sender, **kw):
@@ -195,12 +187,8 @@ def set_merge_actions(sender, **kw):
         m.define_action(merge_row=dd.MergeAction(m))
         #~ m.merge_row = dd.MergeAction(m)
 
-#~ dd.signals.pre_startup.connect()
-
 
 customize_siteconfig()
-#~ customize_countries()
 customize_contacts()
-#~ customize_notes()
 customize_sqlite()
 

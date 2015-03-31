@@ -28,12 +28,20 @@ class Words(dd.Table):
     required = dd.Required(user_level='admin')
 
 
+class WordsByOwner(Words):
+    required = dd.Required()
+    master_key = 'owner'
+    column_names = "word"
+
+
 class SimilarClients(SimilarObjects):
     """Shows the other clients who are similar to this one."""
     label = _("Similar clients")
 
 from lino_welfare.modlib.pcsw.models import ClientChecker
 
+dd.inject_action('pcsw.Client', show_phonetic_words=dd.ShowSlaveTable(
+    WordsByOwner))
 
 class SimilarClientsChecker(ClientChecker):
     """If several clients have similar names, their coach should fill at
