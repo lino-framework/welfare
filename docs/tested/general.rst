@@ -30,7 +30,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-51 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, statbel, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
+50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
 133 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -388,7 +388,7 @@ changes.
 | countries.Countries.detail                      | all except anonymous                | isocode name name_fr name_de name_nl short_code    |
 |                                                 |                                     | inscode                                            |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| countries.Countries.insert                      | all except anonymous                | isocode short_code name name_fr name_de name_nl    |
+| countries.Countries.insert                      | all except anonymous                | isocode inscode name name_fr name_de name_nl       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | countries.Places.insert                         | all except anonymous                | name name_fr name_de name_nl country inscode       |
 |                                                 |                                     | zip_code parent type id                            |

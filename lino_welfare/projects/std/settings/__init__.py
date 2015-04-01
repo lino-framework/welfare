@@ -114,7 +114,7 @@ class Site(Site):
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
-        yield 'lino_welfare.modlib.countries'
+        yield 'lino.modlib.statbel.countries'
 
         yield 'lino.modlib.properties'
         yield 'lino_welfare.modlib.contacts'
@@ -141,7 +141,6 @@ class Site(Site):
 
         yield 'lino_welfare'
 
-        # yield 'lino.modlib.statbel'
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
