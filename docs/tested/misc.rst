@@ -145,25 +145,26 @@ Rolf working as Alicia:
 >>> kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
 >>> demo_get('rolf', 'api/integ/Clients', json_fields, 7, **kw)
 
+Some choices lists:
+
 >>> kw = dict()
->>> json_fields = 'count rows'
->>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', json_fields, 6, **kw)
+>>> fields = 'count rows'
 >>> demo_get(
-...    'rolf', 'choices/cv/ObstaclesByPerson/property', json_fields,
-...    15, **kw)
+...     'rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
 >>> demo_get(
-...    'rolf', 'choices/pcsw/ContactsByClient/company?type=1',
-...    json_fields, 4, **kw)
+...    'rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+>>> demo_get(
+...    'rolf', 'choices/pcsw/ContactsByClient/company?type=1', fields, 4, **kw)
 
 >>> demo_get(
-...    'rolf', 'choices/aids/IncomeConfirmations/aid_type',
-...    json_fields, 11, **kw)
+...    'rolf', 'choices/aids/IncomeConfirmations/aid_type', fields, 11, **kw)
 
 >>> demo_get(
-...    'rolf', 'choices/aids/RefundConfirmations/aid_type',
-...    json_fields, 11, **kw)
+...    'rolf', 'choices/aids/RefundConfirmations/aid_type', fields, 11, **kw)
 
 >>> demo_get(
-...    'rolf', 'apchoices/pcsw/Clients/create_visit/user',
-...    json_fields, 4, **kw)
+...    'rolf', 'apchoices/pcsw/Clients/create_visit/user', fields, 4, **kw)
+
+>>> demo_get(
+...    'robin', 'choices/countries/Countries/actual_country', fields, 8, **kw)
 

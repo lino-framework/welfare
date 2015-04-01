@@ -46,16 +46,6 @@ Configuration data
 
 This is the list of training types:
 
->>> rt.login('robin').show(cv.TrainingTypes)
-==== =============== ================== ==================
- ID   Designation     Designation (fr)   Designation (de)
----- --------------- ------------------ ------------------
- 3    Alpha           Alpha              Alpha
- 1    Prequalifying   Préqualification   Prequalifying
- 2    Qualifying      Qualification      Qualifying
-==== =============== ================== ==================
-<BLANKLINE>
-
 >>> rt.login('robin').show(cv.EducationLevels)
 ============= ================== ==================
  Designation   Designation (fr)   Designation (de)
@@ -71,17 +61,33 @@ This is the list of training types:
 And the list of Study types:
 
 >>> rt.login('robin').show(cv.StudyTypes)
-==== ================= ======================= ==================== =================
- ID   Designation       Designation (fr)        Designation (de)     Education Level
----- ----------------- ----------------------- -------------------- -----------------
- 4    Apprenticeship    Apprentissage           Lehre
- 5    Highschool        École supérieure        Hochschule
- 7    Part-time study   Cours à temps partiel   Teilzeitunterricht
- 8    Remote study      Cours à distance        Fernkurs
- 1    School            École                   Schule
- 2    Special school    École spéciale          Sonderschule
- 3    Training          Formation               Ausbildung
- 6    University        Université              Universität
-==== ================= ======================= ==================== =================
+======= ================= ======================= ==================== ======= ========== =================
+ ID      Designation       Designation (fr)        Designation (de)     Study   Training   Education Level
+------- ----------------- ----------------------- -------------------- ------- ---------- -----------------
+ 11      Alpha             Alpha                   Alpha                No      Yes
+ 4       Apprenticeship    Apprentissage           Lehre                Yes     No
+ 5       Highschool        École supérieure        Hochschule           Yes     No
+ 7       Part-time study   Cours à temps partiel   Teilzeitunterricht   Yes     No
+ 9       Prequalifying     Préqualification        Prequalifying        No      Yes
+ 10      Qualifying        Qualification           Qualifying           No      Yes
+ 8       Remote study      Cours à distance        Fernkurs             Yes     No
+ 1       School            École                   Schule               Yes     No
+ 2       Special school    École spéciale          Sonderschule         Yes     No
+ 3       Training          Formation               Ausbildung           Yes     No
+ 6       University        Université              Universität          Yes     No
+ **0**                                                                  **8**   **3**
+======= ================= ======================= ==================== ======= ========== =================
 <BLANKLINE>
 
+
+>>> for m, f in rt.modules.cv.StudyType._lino_ddh.fklist:
+...     print dd.full_model_name(m), f.name
+cv.Training type
+cv.Study type
+isip.Contract study_type
+
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> demo_get('rolf', 'choices/cv/Training/type', fields, 3, **kw)
+>>> demo_get('rolf', 'choices/cv/Study/type', fields, 8, **kw)
+>>> demo_get('rolf', 'choices/isip/Contract/study_type', fields, 11, **kw)

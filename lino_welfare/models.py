@@ -156,28 +156,6 @@ def customize_sqlite():
     connection_created.connect(my_callback)
 
 
-def site_setup(site):
-    """This is the place where we can override or define
-    application-specific things.  This includes especially those
-    detail layouts which depend on the *combination* of installed
-    modules.
-
-    """
-
-    site.modules.countries.Places.set_detail_layout("""
-    name country inscode zip_code
-    parent type id
-    PlacesByPlace
-    contacts.PartnersByCity cv.StudiesByPlace
-    """)
-
-    site.modules.countries.Countries.set_detail_layout("""
-    isocode name short_code inscode
-    # nationalities
-    countries.PlacesByCountry cv.StudiesByCountry
-    """)
-
-
 @dd.receiver(dd.pre_analyze)
 def set_merge_actions(sender, **kw):
     #~ logger.info("20130409 %s.set_merge_actions()",__name__)
@@ -186,6 +164,23 @@ def set_merge_actions(sender, **kw):
         #~ print repr(m)
         m.define_action(merge_row=dd.MergeAction(m))
         #~ m.merge_row = dd.MergeAction(m)
+
+
+@dd.receiver(dd.post_analyze)
+def my_details(sender, **kw):
+    site = sender
+    site.modules.countries.Places.set_detail_layout("""
+    name country inscode zip_code
+    parent type id
+    PlacesByPlace
+    contacts.PartnersByCity cv.StudiesByPlace
+    """)
+
+    site.modules.countries.Countries.set_detail_layout("""
+    isocode name short_code:10 inscode actual_country
+    # nationalities
+    countries.PlacesByCountry cv.StudiesByCountry
+    """)
 
 
 customize_siteconfig()

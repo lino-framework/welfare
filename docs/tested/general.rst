@@ -31,7 +31,7 @@ result:
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
-133 models:
+132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -75,9 +75,9 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         134
+ contenttypes.ContentType       contenttypes.ContentTypes       4         133
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
- countries.Country              countries.Countries             8         8
+ countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
@@ -85,7 +85,7 @@ result:
  courses.CourseProvider         courses.CourseProviders         31        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
- cv.EducationLevel              cv.EducationLevels              6         5
+ cv.EducationLevel              cv.EducationLevels              8         5
  cv.Experience                  cv.Experiences                  17        30
  cv.Function                    cv.Functions                    7         4
  cv.LanguageKnowledge           cv.LanguageKnowledges           9         119
@@ -93,9 +93,8 @@ result:
  cv.Sector                      cv.Sectors                      6         14
  cv.Status                      cv.Statuses                     5         7
  cv.Study                       cv.Studies                      14        2
- cv.StudyType                   cv.StudyTypes                   6         8
+ cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    14        0
- cv.TrainingType                cv.TrainingTypes                5         3
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
@@ -386,12 +385,12 @@ changes.
 | contenttypes.ContentTypes.insert                | all except anonymous                | id name app_label model base_classes               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | countries.Countries.detail                      | all except anonymous                | isocode name name_fr name_de name_nl short_code    |
-|                                                 |                                     | inscode                                            |
+|                                                 |                                     | inscode actual_country                             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | countries.Countries.insert                      | all except anonymous                | isocode inscode name name_fr name_de name_nl       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| countries.Places.insert                         | all except anonymous                | name name_fr name_de name_nl country inscode       |
-|                                                 |                                     | zip_code parent type id                            |
+| countries.Places.insert                         | all except anonymous                | name name_fr name_de name_nl country type parent   |
+|                                                 |                                     | zip_code id                                        |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | courses.CourseContents.insert                   | all except anonymous, 200, 210, 300 | id name                                            |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -411,7 +410,7 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.Durations.insert                             | 100, 110, admin                     | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.EducationLevels.insert                       | 100, 110, admin                     | name name_fr name_de name_nl                       |
+| cv.EducationLevels.insert                       | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.Experiences.insert                           | 100, 110, admin                     | person start_date end_date termination_reason      |
 |                                                 |                                     | company country city sector function title status  |
@@ -430,9 +429,8 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.StudyTypes.detail                            | admin                               | name name_fr name_de name_nl education_level id    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.StudyTypes.insert                            | 100, 110, admin                     | name name_fr name_de name_nl education_level       |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.TrainingTypes.insert                         | 100, 110, admin                     | name name_fr name_de name_nl id                    |
+| cv.StudyTypes.insert                            | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
+|                                                 |                                     | education_level                                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.Trainings.insert                             | 100, 110, admin                     | person start_date end_date type state certificates |
 |                                                 |                                     | school country city remarks                        |
@@ -718,7 +716,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Badges : Badges
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Sprachen, Ausbildungsarten, Studienarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche

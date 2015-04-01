@@ -91,7 +91,7 @@ records in the `SimilarClients` table:
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=122))
 ===========================================
- Other
+ Similar record
 -------------------------------------------
  *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*
 ===========================================
@@ -100,7 +100,7 @@ records in the `SimilarClients` table:
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=123))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===============================
- Other
+ Similar record
 -------------------------------
  *DEMEULENAERE Dorothée (122)*
  *DOBBELSTEIN Dorothée (124)*
@@ -110,7 +110,7 @@ records in the `SimilarClients` table:
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=124))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===========================================
- Other
+ Similar record
 -------------------------------------------
  *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*
 ===========================================

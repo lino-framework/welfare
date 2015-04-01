@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2013 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -7,7 +7,7 @@ Loads all cbss specific default data.
 """
 
 from lino_welfare.modlib.cbss.fixtures import sectors, purposes
-from lino.modlib.statbel.fixtures import inscodes
+from lino.modlib.statbel.countries.fixtures import inscodes
 
 
 def objects():

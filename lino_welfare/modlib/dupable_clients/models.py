@@ -40,8 +40,9 @@ class SimilarClients(SimilarObjects):
 
 from lino_welfare.modlib.pcsw.models import ClientChecker
 
-dd.inject_action('pcsw.Client', show_phonetic_words=dd.ShowSlaveTable(
-    WordsByOwner))
+# dd.inject_action('pcsw.Client', show_phonetic_words=dd.ShowSlaveTable(
+#     WordsByOwner))
+
 
 class SimilarClientsChecker(ClientChecker):
     """If several clients have similar names, their coach should fill at

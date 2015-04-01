@@ -162,7 +162,11 @@ class PartnersByContract(ContractPartners):
 
 
 class Contract(ContractBase):
-    """
+    """An **ISIP** (called "PIIS" in French and "VSE" in German) is a
+    convention or contract between the PCSW and a young client that
+    leads to an individual coaching of the person, mostly concerning
+    the client's scholar education.
+
     .. attribute:: type
 
         The type of this contract.
@@ -170,7 +174,8 @@ class Contract(ContractBase):
 
     .. attribute:: study_type
 
-        The type of study required(?) for this contract.
+        The type of study that is going to be followed during this
+        contract.
 
         Pointer to :class:`lino.modlib.cv.models.StudyType`.
 
