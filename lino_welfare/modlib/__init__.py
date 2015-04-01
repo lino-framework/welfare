@@ -6,7 +6,6 @@ Plugins which have been written specifically for Lino Welfare:
    :toctree:
 
     contacts
-    countries
     dupable_clients
     integ
     isip
