@@ -140,7 +140,8 @@ class ClientDetail(dd.FormLayout):
     """, label=_("SIS"))
 
     isip_tab = dd.Panel("""
-    aids.GrantingsByClient isip.ContractsByClient \
+    isip.ContractsByClient
+    aids.GrantingsByClient
     """, label=dd.plugins.isip.short_name)
 
     courses_tab = dd.Panel("""
