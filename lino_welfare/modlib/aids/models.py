@@ -47,10 +47,6 @@ class Categories(dd.Table):
     column_names = 'name *'
     order_by = ["name"]
 
-    insert_layout = """
-    id name
-    """
-
     detail_layout = """
     id name
     aids.IncomeConfirmationsByCategory
