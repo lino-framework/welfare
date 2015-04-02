@@ -5,19 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Lino-DSBE\n"
+"Project-Id-Version:  Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-27 15:32+0200\n"
+"POT-Creation-Date: 2015-04-02 08:47+0300\n"
 "PO-Revision-Date: 2015-03-27 15:32+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"X-Generator: Poedit 1.5.4\n"
-"Language: de\n"
 
 #: lino_welfare/models.py:50
 msgid "Local job office"
@@ -41,7 +39,8 @@ msgstr "erlaubt in Verträgen"
 
 #: lino_welfare/models.py:91
 msgid ""
-"Whether Links of this type can be used as contact person of a job contract."
+"Whether Links of this type can be used as contact person of a job "
+"contract."
 msgstr ""
 
 #: lino_welfare/config/excerpts/Excerpt/aus.body.html:5
@@ -193,7 +192,7 @@ msgstr "Arbeitssuche"
 #: lino_welfare/modlib/cal/models.py:315 lino_welfare/modlib/cbss/tx25.py:516
 #: lino_welfare/modlib/cbss/tx25.py:556 lino_welfare/modlib/cbss/tx25.py:644
 #: lino_welfare/modlib/debts/models.py:141
-#: lino_welfare/modlib/isip/models.py:335
+#: lino_welfare/modlib/isip/models.py:340
 #: lino_welfare/modlib/jobs/models.py:859
 #: lino_welfare/modlib/jobs/models.py:952
 #: lino_welfare/modlib/jobs/models.py:1086
@@ -294,8 +293,7 @@ msgstr ""
 msgid "You confirm that %(client)s %(text)s"
 msgstr "Sie bestätigen, dass %(client)s %(text)s"
 
-#: lino_welfare/modlib/aids/mixins.py:85
-#: lino_welfare/modlib/aids/mixins.py:115
+#: lino_welfare/modlib/aids/mixins.py:85 lino_welfare/modlib/aids/mixins.py:115
 msgid "Are you sure?"
 msgstr "Sind Sie sicher?"
 
@@ -330,12 +328,10 @@ msgstr "%(when)s %(what)s erhält."
 #: lino_welfare/modlib/cv/models.py:50 lino_welfare/modlib/debts/models.py:569
 #: lino_welfare/modlib/debts/models.py:660
 #: lino_welfare/modlib/immersion/models.py:94
-#: lino_welfare/modlib/jobs/mixins.py:44
-#: lino_welfare/modlib/jobs/models.py:420
+#: lino_welfare/modlib/jobs/mixins.py:44 lino_welfare/modlib/jobs/models.py:420
 #: lino_welfare/modlib/jobs/models.py:477
 #: lino_welfare/modlib/jobs/models.py:620
-#: lino_welfare/modlib/jobs/models.py:794
-#: lino_welfare/modlib/pcsw/models.py:68
+#: lino_welfare/modlib/jobs/models.py:794 lino_welfare/modlib/pcsw/models.py:68
 #: lino_welfare/modlib/pcsw/models.py:1145
 #: lino_welfare/modlib/pcsw/models.py:1204
 #: lino_welfare/modlib/projects/models.py:43
@@ -406,8 +402,8 @@ msgstr "Verpflichtung DSBE"
 
 #: lino_welfare/modlib/aids/models.py:135
 msgid ""
-"Whether aid grantings of this type are considered as duty for integration "
-"contract."
+"Whether aid grantings of this type are considered as duty for integration"
+" contract."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:139
@@ -425,14 +421,14 @@ msgstr "Primärbegleiter bestätigt"
 
 #: lino_welfare/modlib/aids/models.py:145
 msgid ""
-"Whether grantings for this aid type are to be signed by the client's primary "
-"coach."
+"Whether grantings for this aid type are to be signed by the client's "
+"primary coach."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:152
 msgid ""
-"Which client address to print on confirmations. If this is empty, Lino will "
-"use the primary address."
+"Which client address to print on confirmations. If this is empty, Lino "
+"will use the primary address."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:157
@@ -567,7 +563,8 @@ msgstr "Kostenrückerstattung"
 
 #: lino_welfare/modlib/aids/models.py:720
 msgid ""
-"Whether persons of this type can be used as doctor of a refund confirmation."
+"Whether persons of this type can be used as doctor of a refund "
+"confirmation."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:756
@@ -759,7 +756,7 @@ msgstr "Notiz"
 #: lino_welfare/modlib/contacts/models.py:162
 #: lino_welfare/modlib/contacts/models.py:258
 #: lino_welfare/modlib/debts/models.py:426
-#: lino_welfare/modlib/isip/models.py:228
+#: lino_welfare/modlib/isip/models.py:233
 #: lino_welfare/modlib/system/models.py:99
 #: lino_welfare/modlib/users/models.py:98
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:24
@@ -957,8 +954,7 @@ msgid "Using phonetic search"
 msgstr "Phonetische Suche"
 
 #: lino_welfare/modlib/cbss/models.py:1177
-#: lino_welfare/modlib/cbss/models.py:1562
-#: lino_welfare/modlib/cbss/tx25.py:195
+#: lino_welfare/modlib/cbss/models.py:1562 lino_welfare/modlib/cbss/tx25.py:195
 msgid "Parameters"
 msgstr "Parameter"
 
@@ -1798,8 +1794,7 @@ msgid "Soft Skills Property Group"
 msgstr "Eigenschaftsgruppe Sozialkompetenzen"
 
 #: lino_welfare/modlib/cv/models.py:143
-msgid ""
-"The property group to be used as master for the SoftSkillsByPerson table."
+msgid "The property group to be used as master for the SoftSkillsByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/cv/models.py:152
@@ -1807,8 +1802,7 @@ msgid "Obstacles Property Group"
 msgstr "Eigenschaftsgruppe Hindernisse"
 
 #: lino_welfare/modlib/cv/models.py:154
-msgid ""
-"The property group to be used as master for the ObstaclesByPerson table."
+msgid "The property group to be used as master for the ObstaclesByPerson table."
 msgstr ""
 
 #: lino_welfare/modlib/debts/__init__.py:22
@@ -2001,8 +1995,8 @@ msgstr "Schuldeneintreiber"
 
 #: lino_welfare/modlib/debts/models.py:687
 msgid ""
-"Leave empty for simple debts, otherwise select         here the responsible "
-"bailiff or collection agency"
+"Leave empty for simple debts, otherwise select         here the "
+"responsible bailiff or collection agency"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:749
@@ -2070,11 +2064,12 @@ msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
 "checked,\n"
-"proportionally distributing the `Distributable amount` among the debtors.\n"
+"proportionally distributing the `Distributable amount` among the debtors."
+"\n"
 msgstr ""
 "Répartition au marc-le-franc.\n"
-"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option "
-"\"verteilen\" angekreuzt ist. \n"
+"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option"
+" \"verteilen\" angekreuzt ist. \n"
 "Der verfügbare Betrag wird dabei proportional zum geschuldeten Betrag "
 "aufgeteilt.\n"
 
@@ -2152,15 +2147,15 @@ msgstr "Phonetisches Wort"
 msgid "Phonetic words"
 msgstr "Phonetische Wörter"
 
-#: lino_welfare/modlib/dupable_clients/models.py:33
+#: lino_welfare/modlib/dupable_clients/models.py:39
 msgid "Similar clients"
 msgstr "Ähnliche Klienten"
 
-#: lino_welfare/modlib/dupable_clients/models.py:44
+#: lino_welfare/modlib/dupable_clients/models.py:53
 msgid "Check for similar clients"
 msgstr "Dublettenkontrolle"
 
-#: lino_welfare/modlib/dupable_clients/models.py:49
+#: lino_welfare/modlib/dupable_clients/models.py:58
 msgid "Similar clients: {clients}"
 msgstr "Ähnliche Klienten: {clients}"
 
@@ -2404,9 +2399,9 @@ msgid "Activity Report"
 msgstr "Tätigkeitsbericht"
 
 #: lino_welfare/modlib/integ/models.py:568
-#: lino_welfare/modlib/isip/__init__.py:40
-#: lino_welfare/modlib/isip/models.py:179
-#: lino_welfare/modlib/isip/models.py:233
+#: lino_welfare/modlib/isip/__init__.py:30
+#: lino_welfare/modlib/isip/models.py:184
+#: lino_welfare/modlib/isip/models.py:238
 #: lino_welfare/modlib/pcsw/choicelists.py:91
 msgid "ISIP"
 msgstr "VSE"
@@ -2584,8 +2579,7 @@ msgid "designation"
 msgstr "Bezeichnung"
 
 #: lino_welfare/modlib/isip/models.py:116
-#: lino_welfare/modlib/jobs/models.py:244
-#: lino_welfare/modlib/pcsw/models.py:85
+#: lino_welfare/modlib/jobs/models.py:244 lino_welfare/modlib/pcsw/models.py:85
 msgid "Success"
 msgstr "Abschluss"
 
@@ -2605,40 +2599,40 @@ msgstr "Vertragspartner"
 msgid "duties company"
 msgstr "Verpflichtungen Firma"
 
-#: lino_welfare/modlib/isip/models.py:180
+#: lino_welfare/modlib/isip/models.py:185
 msgid "ISIPs"
 msgstr "VSEs"
 
-#: lino_welfare/modlib/isip/models.py:185
+#: lino_welfare/modlib/isip/models.py:190
 #: lino_welfare/modlib/jobs/models.py:468
 msgid "Contract Type"
 msgstr "Vertragsart"
 
-#: lino_welfare/modlib/isip/models.py:190
+#: lino_welfare/modlib/isip/models.py:195
 msgid "stages"
 msgstr "Etappen"
 
-#: lino_welfare/modlib/isip/models.py:193
+#: lino_welfare/modlib/isip/models.py:198
 msgid "goals"
 msgstr "Zielsetzungen"
 
-#: lino_welfare/modlib/isip/models.py:196
+#: lino_welfare/modlib/isip/models.py:201
 msgid "duties ASD"
 msgstr "Verpflichtungen ASD"
 
-#: lino_welfare/modlib/isip/models.py:199
+#: lino_welfare/modlib/isip/models.py:204
 msgid "duties DSBE"
 msgstr "Verpflichtungen DSBE"
 
-#: lino_welfare/modlib/isip/models.py:202
+#: lino_welfare/modlib/isip/models.py:207
 msgid "duties person"
 msgstr "Verpflichtungen Person"
 
-#: lino_welfare/modlib/isip/models.py:218
+#: lino_welfare/modlib/isip/models.py:223
 msgid "Integration agent"
 msgstr "Begleiter im DSBE"
 
-#: lino_welfare/modlib/isip/models.py:324
+#: lino_welfare/modlib/isip/models.py:329
 #, fuzzy
 msgid "Proceedings"
 msgstr "prodziert"
@@ -2977,8 +2971,8 @@ msgstr "Zuweisen"
 
 #: lino_welfare/modlib/newcomers/models.py:398
 msgid ""
-"Assign this agent as coach for this client. This will set the client's state "
-"to `Coached` and send a notification to the new coach."
+"Assign this agent as coach for this client. This will set the client's "
+"state to `Coached` and send a notification to the new coach."
 msgstr ""
 
 #: lino_welfare/modlib/newcomers/models.py:410
@@ -3218,8 +3212,8 @@ msgstr "Begleiter"
 
 #: lino_welfare/modlib/pcsw/coaching.py:139
 msgid ""
-"There's at most one primary coach per client.         Enabling this field "
-"will automatically make the other         coachings non-primary."
+"There's at most one primary coach per client.         Enabling this field"
+" will automatically make the other         coachings non-primary."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/coaching.py:247
@@ -4697,3 +4691,4 @@ msgstr "Erstellte Lebensläufe"
 
 #~ msgid "My strange clients"
 #~ msgstr "Meine Aktenkontrollliste"
+

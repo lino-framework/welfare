@@ -26,18 +26,9 @@ class Client(Client):
 class ClientDetail(dd.FormLayout):
 
     main = "general coaching family \
-    career competences #aids_tab sis_tab isip.ContractsByClient \
+    career competences #aids_tab sis_tab isip_tab \
     courses_tab projects_tab immersion_tab \
     job_search contracts history calendar misc"
-
-    courses_tab = dd.Panel(
-        """
-        courses.BasicEnrolmentsByPupil
-        courses.JobEnrolmentsByPupil
-        oi_demarches
-        """,
-        label=dd.plugins.courses.short_name)
-        # help_text=dd.plugins.courses.verbose_name)
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
@@ -145,8 +136,19 @@ class ClientDetail(dd.FormLayout):
     sis_tab = dd.Panel("""
     #isip.ContractsByClient
     sis_motif sis_attentes
-    sis_moteurs sis_objectifs #aids.GrantingsByClient
+    sis_moteurs sis_objectifs
     """, label=_("SIS"))
+
+    isip_tab = dd.Panel("""
+    aids.GrantingsByClient isip.ContractsByClient \
+    """, label=dd.plugins.isip.short_name)
+
+    courses_tab = dd.Panel("""
+    courses.BasicEnrolmentsByPupil
+    courses.JobEnrolmentsByPupil
+    oi_demarches
+    """, label=dd.plugins.courses.short_name)
+    # help_text=dd.plugins.courses.verbose_name)
 
     career = dd.Panel("""
     cv.StudiesByPerson

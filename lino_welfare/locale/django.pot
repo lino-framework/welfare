@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.21\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-27 15:32+0200\n"
+"POT-Creation-Date: 2015-04-02 08:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgstr ""
 #: lino_welfare/modlib/cal/models.py:315 lino_welfare/modlib/cbss/tx25.py:516
 #: lino_welfare/modlib/cbss/tx25.py:556 lino_welfare/modlib/cbss/tx25.py:644
 #: lino_welfare/modlib/debts/models.py:141
-#: lino_welfare/modlib/isip/models.py:335
+#: lino_welfare/modlib/isip/models.py:340
 #: lino_welfare/modlib/jobs/models.py:859
 #: lino_welfare/modlib/jobs/models.py:952
 #: lino_welfare/modlib/jobs/models.py:1086
@@ -740,7 +740,7 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:162
 #: lino_welfare/modlib/contacts/models.py:258
 #: lino_welfare/modlib/debts/models.py:426
-#: lino_welfare/modlib/isip/models.py:228
+#: lino_welfare/modlib/isip/models.py:233
 #: lino_welfare/modlib/system/models.py:99
 #: lino_welfare/modlib/users/models.py:98
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:24
@@ -2118,15 +2118,15 @@ msgstr ""
 msgid "Phonetic words"
 msgstr ""
 
-#: lino_welfare/modlib/dupable_clients/models.py:33
+#: lino_welfare/modlib/dupable_clients/models.py:39
 msgid "Similar clients"
 msgstr ""
 
-#: lino_welfare/modlib/dupable_clients/models.py:44
+#: lino_welfare/modlib/dupable_clients/models.py:53
 msgid "Check for similar clients"
 msgstr ""
 
-#: lino_welfare/modlib/dupable_clients/models.py:49
+#: lino_welfare/modlib/dupable_clients/models.py:58
 msgid "Similar clients: {clients}"
 msgstr ""
 
@@ -2360,9 +2360,9 @@ msgid "Activity Report"
 msgstr ""
 
 #: lino_welfare/modlib/integ/models.py:568
-#: lino_welfare/modlib/isip/__init__.py:40
-#: lino_welfare/modlib/isip/models.py:179
-#: lino_welfare/modlib/isip/models.py:233
+#: lino_welfare/modlib/isip/__init__.py:30
+#: lino_welfare/modlib/isip/models.py:184
+#: lino_welfare/modlib/isip/models.py:238
 #: lino_welfare/modlib/pcsw/choicelists.py:91
 msgid "ISIP"
 msgstr ""
@@ -2557,40 +2557,40 @@ msgstr ""
 msgid "duties company"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:180
+#: lino_welfare/modlib/isip/models.py:185
 msgid "ISIPs"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:185
+#: lino_welfare/modlib/isip/models.py:190
 #: lino_welfare/modlib/jobs/models.py:468
 msgid "Contract Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:190
+#: lino_welfare/modlib/isip/models.py:195
 msgid "stages"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:193
+#: lino_welfare/modlib/isip/models.py:198
 msgid "goals"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:196
+#: lino_welfare/modlib/isip/models.py:201
 msgid "duties ASD"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:199
+#: lino_welfare/modlib/isip/models.py:204
 msgid "duties DSBE"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:202
+#: lino_welfare/modlib/isip/models.py:207
 msgid "duties person"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:218
+#: lino_welfare/modlib/isip/models.py:223
 msgid "Integration agent"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:324
+#: lino_welfare/modlib/isip/models.py:329
 msgid "Proceedings"
 msgstr ""
 
