@@ -22,6 +22,7 @@ from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.cal.mixins import EventGenerator
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.cal.utils import DurationUnits, update_auto_task
+from lino.modlib.system.mixins import PeriodEvents
 
 from lino.utils.ranges import isrange
 from lino.utils.ranges import overlap2, encompass
@@ -388,6 +389,21 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         g = self.get_granting(is_integ_duty=True)
         if g is not None:
             return g.aid_type
+
+    def get_aid_confirmation(self):
+        """Returns the last aid confirmation that has been issued for this
+        contract. May be used in `.odt` template.
+
+        """
+        g = self.get_granting(is_integ_duty=True)
+        if g and g.aid_type and g.aid_type.confirmation_type:
+            ct = g.aid_type.confirmation_type
+            qs = ct.model.objects.filter(granting=g)
+            # ap = self.active_period()
+            # ap = AttrDict(start_date=ap[0], end_date=ap[1])
+            # qs = PeriodEvents.active.add_filter(qs, ap)
+            if qs.count() > 0:
+                return qs[qs.count()-1]
 
     def suggest_cal_guests(self, event):
         """Automatic evaluation events have the client as mandatory
