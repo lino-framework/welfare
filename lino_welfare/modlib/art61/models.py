@@ -24,6 +24,8 @@ from lino_welfare.modlib.isip.mixins import (ContractBaseTable,
 
 from lino_welfare.modlib.jobs.mixins import JobSupplyment
 
+from .choicelists import Subsidizations
+
 
 class ContractType(ContractTypeBase, mixins.Referrable):
 
@@ -99,6 +101,7 @@ class ContractDetail(dd.FormLayout):
     applies_from duration applies_until exam_policy
     reference_person printed
     date_decided date_issued date_ended ending:20
+    subsidize_10 subsidize_20 subsidize_30
     # signer1 signer2
     responsibilities
     """
@@ -186,3 +189,10 @@ class MyContracts(Contracts):
         kw.update(user=ar.get_user())
         return kw
 
+
+@dd.receiver(dd.pre_analyze)
+def inject_subsidization_fields(sender, **kw):
+    for sub in Subsidizations.items():
+        dd.inject_field(
+            'art61.Contract', 'subsidize_' + sub.value,
+            models.BooleanField(verbose_name=sub.text, default=False))

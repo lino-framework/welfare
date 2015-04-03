@@ -26,7 +26,7 @@ class Site(Site):
         # kw.update(aids=None)
         kw.update(sepa=None)
         kw.update(iban=None)
-        kw.update(badges=None)
+        # kw.update(badges=None)
         kw.update(properties=None)
         kw.update(dupable_clients=None)
         # alternative implementations:

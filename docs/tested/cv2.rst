@@ -47,15 +47,16 @@ Configuration data
 This is the list of training types:
 
 >>> rt.login('robin').show(cv.EducationLevels)
-============= ================== ==================
- Designation   Designation (fr)   Designation (de)
-------------- ------------------ ------------------
- Bachelor      Bachelor           Bachelor
- Higher        Supérieur          Hochschule
- Master        Master             Master
- Primary       Primaire           Primär
- Secondary     Secondaire         Sekundär
-============= ================== ==================
+==================== ================== ================== ======= ==========
+ Designation          Designation (fr)   Designation (de)   Study   Training
+-------------------- ------------------ ------------------ ------- ----------
+ Bachelor             Bachelor           Bachelor           Yes     No
+ Higher               Supérieur          Hochschule         Yes     No
+ Master               Master             Master             Yes     No
+ Primary              Primaire           Primär             Yes     No
+ Secondary            Secondaire         Sekundär           Yes     No
+ **Total (5 rows)**                                         **5**   **0**
+==================== ================== ================== ======= ==========
 <BLANKLINE>
 
 And the list of Study types:

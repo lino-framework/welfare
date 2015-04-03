@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
@@ -39,6 +39,26 @@ class Course(Course):
         verbose_name = _("Workshop")
         verbose_name_plural = _('Workshops')
         abstract = dd.is_abstract_model(__name__, 'Course')
+
+
+class Enrolment(Enrolment):
+    """Adds two text fields :attr:`motivation` and :attr:`problems`.
+
+    """
+    motivation = dd.RichTextField(
+        _("Motif de l'orientation"),
+        blank=True)
+    problems = dd.RichTextField(
+        _("Difficultés à l'origine de la demande / "
+          "Problématiques repérées"),
+        blank=True)
+
+Enrolments.detail_layout = """
+request_date user
+course pupil
+remark amount workflow_buttons
+motivation problems
+"""
 
 
 class Line(Line):

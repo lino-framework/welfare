@@ -161,7 +161,7 @@ class Site(Site):
         # The `notes` demo fixture creates Notes for Clients.
         yield 'lino_welfare.modlib.notes'
         yield 'lino_welfare.modlib.aids'
-        yield 'lino_welfare.modlib.projects'
+        # yield 'lino_welfare.modlib.projects'
         yield 'lino_welfare.modlib.polls'
 
         yield 'lino.modlib.beid'

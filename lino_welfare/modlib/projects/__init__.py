@@ -1,7 +1,10 @@
 # Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""
+This module is not actively used.
+"""
 
-from lino import ad
+from lino.api import ad
 
 from django.utils.translation import ugettext_lazy as _
 

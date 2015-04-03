@@ -30,8 +30,8 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, projects, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
-132 models:
+49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
+130 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -42,11 +42,11 @@ result:
  addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
- aids.Granting                  aids.GrantingsByX               10        51
+ aids.Granting                  aids.GrantingsByX               12        51
  aids.IncomeConfirmation        aids.IncomeConfirmations        17        48
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
- art61.Contract                 art61.Contracts                 23        4
+ art61.Contract                 art61.Contracts                 26        4
  art61.ContractType             art61.ContractTypes             9         1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
@@ -75,7 +75,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         133
+ contenttypes.ContentType       contenttypes.ContentTypes       4         131
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
@@ -94,13 +94,13 @@ result:
  cv.Status                      cv.Statuses                     5         7
  cv.Study                       cv.Studies                      14        2
  cv.StudyType                   cv.StudyTypes                   8         11
- cv.Training                    cv.Trainings                    14        0
+ cv.Training                    cv.Trainings                    16        0
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        686
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        14
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
  households.Household           households.Households           29        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
@@ -153,8 +153,6 @@ result:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
- projects.Project               projects.Projects               10        0
- projects.ProjectType           projects.ProjectTypes           5         0
  properties.PersonProperty      cv.PersonProperties             6         310
  properties.PropChoice          properties.PropChoices          7         2
  properties.PropGroup           properties.PropGroups           5         3
@@ -227,13 +225,11 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.AidTypes.insert                            | all except anonymous                | name name_fr name_de name_nl confirmation_type     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| aids.Categories.detail                          | admin                               | id name name_fr name_de name_nl                    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.Categories.insert                          | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| aids.Grantings.detail                           | admin                               | id client user signer workflow_buttons board       |
-|                                                 |                                     | decision_date aid_type start_date end_date         |
-|                                                 |                                     | custom_actions                                     |
+| aids.Grantings.detail                           | admin                               | id client user signer workflow_buttons             |
+|                                                 |                                     | request_date board decision_date aid_type category |
+|                                                 |                                     | start_date end_date custom_actions                 |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | aids.Grantings.insert                           | all except anonymous                | client aid_type signer board decision_date         |
 |                                                 |                                     | start_date end_date                                |
@@ -267,6 +263,7 @@ changes.
 |                                                 |                                     | contact_person contact_role applies_from duration  |
 |                                                 |                                     | applies_until exam_policy reference_person printed |
 |                                                 |                                     | date_decided date_issued date_ended ending         |
+|                                                 |                                     | subsidize_10 subsidize_20 subsidize_30             |
 |                                                 |                                     | responsibilities                                   |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | art61.Contracts.insert                          | 100, 110, admin                     | client company type                                |
@@ -432,8 +429,11 @@ changes.
 | cv.StudyTypes.insert                            | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
 |                                                 |                                     | education_level                                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Trainings.insert                             | 100, 110, admin                     | person start_date end_date type state certificates |
-|                                                 |                                     | school country city remarks                        |
+| cv.Trainings.detail                             | all except anonymous                | person start_date end_date type state certificates |
+|                                                 |                                     | sector function school country city remarks        |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| cv.Trainings.insert                             | all except anonymous                | person start_date end_date type state certificates |
+|                                                 |                                     | sector function school country city                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | debts.Budgets.detail                            | admin                               | date partner id user intro ResultByBudget          |
 |                                                 |                                     | DebtsByBudget BailiffDebtsByBudget conclusion      |
@@ -608,13 +608,6 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | polls.Responses.insert                          | all except anonymous                | user date poll                                     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| projects.Projects.detail                        | admin                               | id client project_type start_date end_date origin  |
-|                                                 |                                     | target remark result                               |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| projects.Projects.insert                        | all except anonymous                | client project_type start_date end_date            |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| projects.ProjectsByClient.insert                | all except anonymous                | project_type start_date end_date                   |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | properties.PropGroups.insert                    | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | properties.PropTypes.insert                     | all except anonymous                | id name name_fr name_de name_nl choicelist         |
@@ -712,17 +705,15 @@ Rolf is the local system administrator, he has a complete menu:
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Ereignisarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
-  - Badges : Badges
+  - Kurse : Badges, Kursinhalte
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
-  - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
-  - Client projects : Client project types
   - Polls : Choice Sets
 - Explorer :
   - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
@@ -730,16 +721,14 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - Badges : Badge Awards
+  - Kurse : Badgeprüfungen, Kurse, Kursanfragen
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-  - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
-  - Client projects : Client Projects
   - Polls : Polls, Questions, Choices, Responses, Answer Choices, Answer Remarks
 - Site : Info
 <BLANKLINE>
@@ -804,20 +793,20 @@ Mélanie is the manager of the Integration service.
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - Orte : Länder
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Ereignisarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
+  - Kurse : Kursinhalte
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
   - Lebenslauf : Sprachen, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
-  - Kurse : Kursinhalte
 - Explorer :
   - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kontakte : Adressenarten, Rollen
   - Kalender : Aufgaben, Abonnements
+  - Kurse : Kursanfragen
   - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-  - Kurse : Kursanfragen
 - Site : Info
 
 

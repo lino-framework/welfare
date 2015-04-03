@@ -15,19 +15,19 @@ from lino.api import dd
 from lino_welfare.modlib.pcsw.models import *
 
 
-class Client(Client):
-    sis_motif = models.TextField(_("Motif de l'orientation"), blank=True)
-    sis_attentes = models.TextField(_("Attentes de la personne"), blank=True)
-    sis_moteurs = models.TextField(_("Moteurs"), blank=True)
-    sis_objectifs = models.TextField(_("Objectifs"), blank=True)
-    oi_demarches = models.TextField(_("Démarches à réaliser"), blank=True)
+# class Client(Client):
+#     sis_motif = models.TextField(_("Motif de l'orientation"), blank=True)
+#     sis_attentes = models.TextField(_("Attentes de la personne"), blank=True)
+#     sis_moteurs = models.TextField(_("Moteurs"), blank=True)
+#     sis_objectifs = models.TextField(_("Objectifs"), blank=True)
+#     oi_demarches = models.TextField(_("Démarches à réaliser"), blank=True)
     
 
 class ClientDetail(dd.FormLayout):
 
     main = "general coaching family \
-    career competences #aids_tab sis_tab isip_tab \
-    courses_tab projects_tab immersion_tab \
+    career competences obstacles_tab #aids_tab #sis_tab isip_tab \
+    courses_tab #projects_tab immersion_tab \
     job_search contracts history calendar misc"
 
     general = dd.Panel("""
@@ -72,7 +72,7 @@ class ClientDetail(dd.FormLayout):
     is_seeking unemployed_since work_permit_suspended_until
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
-    pcsw.ConvictionsByClient
+    # pcsw.ConvictionsByClient
     """)
 
     papers = dd.Panel("""
@@ -85,9 +85,9 @@ class ClientDetail(dd.FormLayout):
     suche:40  papers:40
     """, label=dd.plugins.active_job_search.short_name)
 
-    projects_tab = dd.Panel("""
-    projects.ProjectsByClient
-    """, label=dd.plugins.projects.verbose_name)
+    # projects_tab = dd.Panel("""
+    # projects.ProjectsByClient
+    # """, label=dd.plugins.projects.verbose_name)
 
     immersion_tab = dd.Panel("""
     immersion.ContractsByClient
@@ -133,11 +133,11 @@ class ClientDetail(dd.FormLayout):
     art61.ContractsByClient
     """, label=dd.plugins.jobs.verbose_name)
 
-    sis_tab = dd.Panel("""
-    #isip.ContractsByClient
-    sis_motif sis_attentes
-    sis_moteurs sis_objectifs
-    """, label=_("SIS"))
+    # sis_tab = dd.Panel("""
+    # #isip.ContractsByClient
+    # sis_motif sis_attentes
+    # sis_moteurs sis_objectifs
+    # """, label=_("SIS"))
 
     isip_tab = dd.Panel("""
     isip.ContractsByClient
@@ -147,7 +147,7 @@ class ClientDetail(dd.FormLayout):
     courses_tab = dd.Panel("""
     courses.BasicEnrolmentsByPupil
     courses.JobEnrolmentsByPupil
-    oi_demarches
+    # oi_demarches
     """, label=dd.plugins.courses.short_name)
     # help_text=dd.plugins.courses.verbose_name)
 
@@ -157,20 +157,15 @@ class ClientDetail(dd.FormLayout):
     cv.ExperiencesByPerson
     """, label=_("Career"))
 
-    competences = dd.Panel(
-        "good_panel bad_panel",
-        label=_("Competences"),
-        required=dict(user_groups='integ'))
-
-    good_panel = """
-    cv.SkillsByPerson cv.SoftSkillsByPerson
+    competences = dd.Panel("""
+    cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
-    """
+    """, label=_("Competences"), required=dict(user_groups='integ'))
 
-    bad_panel = """
-    cv.ObstaclesByPerson
+    obstacles_tab = dd.Panel("""
+    cv.ObstaclesByPerson pcsw.ConvictionsByClient
     obstacles
-    """
+    """, label=_("Obstacles"), required=dict(user_groups='integ'))
 
 Clients.detail_layout = ClientDetail()
 
@@ -180,7 +175,7 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 # humanlinks = dd.resolve_app('humanlinks')
 # humanlinks.LinksByHuman.slave_grid_format = 'grid'
 
-cv = dd.resolve_app('cv')
+# cv = dd.resolve_app('cv')
 # cv.ExperiencesByPerson.column_names = "company start_date end_date \
 # function regime status is_training country remarks *"
 
@@ -189,3 +184,4 @@ cv = dd.resolve_app('cv')
 
 ContactsByClient.column_names = 'company contact_person remark'
 dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
+

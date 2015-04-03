@@ -355,28 +355,42 @@ def objects():
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)
 
-    yield calendar(
-        invite_client=False, **dd.babelkw(
-            'name',
-            de="Klientengespräche extern",
-            fr="Rencontres client externes",
-            en="External meetings with client",
-        ))
+    kw = dict(invite_client=False)
+    kw.update(dd.str2kw("name", _("External meetings with client")))
+    kw.update(dd.str2kw("event_label", _("External meeting")))
+    # dd.babelkw(
+    #     'name',
+    #     de="Klientengespräche extern",
+    #     fr="Rencontres client externes",
+    #     en="External meetings with client",
+    # )
+    yield calendar(**kw)
 
-    yield calendar(**dd.babelkw('name',
-                                de=u"Versammlung intern",
-                                fr=u"Réunions internes",
-                                en=u"Internal meetings"))
+    kw = dict(invite_client=False)
+    kw.update(dd.str2kw("name", _("Internal meetings")))
+    kw.update(dd.str2kw("event_label", _("Internal meeting")))
+    yield calendar(**kw)
+    # yield calendar(**dd.babelkw('name',
+    #                             de=u"Versammlung intern",
+    #                             fr=u"Réunions internes",
+    #                             en=u"Internal meetings"))
 
-    yield calendar(**dd.babelkw('name',
-                                de=u"Versammlung extern",
-                                fr=u"Réunions externes",
-                                en=u"External meetings"))
+    kw = dict(invite_client=False)
+    kw.update(dd.str2kw("name", _("External meetings")))
+    kw.update(dd.str2kw("event_label", _("External meeting")))
+    yield calendar(**kw)
+    # yield calendar(**dd.babelkw('name',
+    #                             de=u"Versammlung extern",
+    #                             fr=u"Réunions externes",
+    #                             en=u"External meetings"))
 
-    yield calendar(**dd.babelkw('name',
-                                de="Privat",
-                                fr="Privé",
-                                en="Private"))
+    kw = dict(invite_client=False)
+    kw.update(dd.str2kw("name", _("Private")))
+    yield calendar(**kw)
+    # yield calendar(**dd.babelkw('name',
+    #                             de="Privat",
+    #                             fr="Privé",
+    #                             en="Private"))
 
     sector = Instantiator(cv.Sector).build
     for ln in SECTORS_LIST.splitlines():

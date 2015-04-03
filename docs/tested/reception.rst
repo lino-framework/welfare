@@ -41,12 +41,12 @@ This client has the following appointments.
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary workflow_buttons",
 ...     language="en")
-============ ============ ================ ================ =============================================
+============ ============ ================ ================ =======================================================
  Start date   Start time   Managed by       Summary          Workflow
------------- ------------ ---------------- ---------------- ---------------------------------------------
+------------ ------------ ---------------- ---------------- -------------------------------------------------------
  5/22/14                   Mélanie Mélard   Urgent problem   **Waiting** → [Receive] [Checkout]
- 5/23/14      09:40:00     Rolf Rompen      Erstgespräch     **Accepted** → [Excused] [Absent] [Checkin]
-============ ============ ================ ================ =============================================
+ 5/23/14      09:40:00     Rolf Rompen      Erstgespräch     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+============ ============ ================ ================ =======================================================
 <BLANKLINE>
 
 

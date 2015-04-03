@@ -64,15 +64,15 @@ Demo data
 
 >>> rt.show(immersion.Contracts)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==== ========================== ============== =============== ================== =========================
- ID   Client                     applies from   applies until   responsible (IS)   Immersion training type
----- -------------------------- -------------- --------------- ------------------ -------------------------
- 1    ENGELS Edgar (128)         10/29/12       2/21/14         Alicia Allmanns    Immersion training
- 2    ENGELS Edgar (128)         2/22/14        2/22/15         Mélanie Mélard     Immersion training
- 3    LAMBERTZ Guido (141)       12/3/12        10/11/13        Alicia Allmanns    Immersion training
- 4    RADERMACHER Edgard (156)   1/7/13         5/2/14          Alicia Allmanns    Immersion training
- 5    RADERMACHER Edgard (156)   5/3/14         5/3/15          Mélanie Mélard     Immersion training
- 6    RADERMECKER Rik (172)      2/11/13        12/20/13        Mélanie Mélard     Immersion training
- 7    RADERMECKER Rik (172)      12/21/13       12/21/14        Hubert Huppertz    Immersion training
-==== ========================== ============== =============== ================== =========================
+==== ========================= ============== =============== ================== =========================
+ ID   Client                    applies from   applies until   responsible (IS)   Immersion training type
+---- ------------------------- -------------- --------------- ------------------ -------------------------
+ 1    EMONTS Daniel (128)       10/29/12       2/21/14         Alicia Allmanns    Immersion training
+ 2    EMONTS Daniel (128)       2/22/14        2/22/15         Caroline Carnol    Immersion training
+ 3    HILGERS Hildegard (133)   12/3/12        10/11/13        Alicia Allmanns    Immersion training
+ 4    LAZARUS Line (144)        1/7/13         5/2/14          Alicia Allmanns    Immersion training
+ 5    LAZARUS Line (144)        5/3/14         5/3/15          Hubert Huppertz    Immersion training
+ 6    RADERMACHER Guido (159)   2/11/13        12/20/13        Alicia Allmanns    Immersion training
+ 7    RADERMACHER Guido (159)   12/21/13       12/21/14        Mélanie Mélard     Immersion training
+==== ========================= ============== =============== ================== =========================
 <BLANKLINE>

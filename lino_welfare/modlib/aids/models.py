@@ -231,6 +231,10 @@ class Granting(Confirmable, BoardDecision):
     Pointer to the :class:`Board <lino.modlib.boards.models.Board>`
     which decided to allocate this aid project.
 
+    .. attribute:: category
+
+    Currently only used for printing an `isip.Contract`.
+
     """
     class Meta:
         abstract = dd.is_abstract_model(__name__, 'Granting')
@@ -240,12 +244,14 @@ class Granting(Confirmable, BoardDecision):
     objects = GrantingManager()
 
     client = models.ForeignKey('pcsw.Client')
-
     aid_type = models.ForeignKey('aids.AidType')
+    category = models.ForeignKey('aids.Category', blank=True, null=True)
+    request_date = models.DateField(
+        _("Date of request"), blank=True, null=True)
 
     @classmethod
     def get_confirmable_fields(cls):
-        return 'client signer aid_type board decision_date start_date end_date'
+        return 'client signer aid_type board decision_date start_date end_date category request_date'
 
     def full_clean(self):
         super(Granting, self).full_clean()
@@ -305,8 +311,8 @@ class Grantings(dd.Table):
 
     detail_layout = """
     id client user signer workflow_buttons
-    board decision_date
-    aid_type start_date end_date custom_actions
+    request_date board decision_date
+    aid_type category start_date end_date custom_actions
     aids.ConfirmationsByGranting
     """
 

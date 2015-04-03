@@ -112,7 +112,8 @@ dd.inject_field(
     'users.User', 'calendar',
     dd.ForeignKey(
         'cal.Calendar',
-        verbose_name=_("Calendar where your events are published."),
+        verbose_name=_("User Calendar"),
+        help_text=_("Calendar where your events are published."),
         related_name='user_calendars',
         blank=True, null=True))
 
@@ -120,22 +121,26 @@ dd.inject_field(
     'system.SiteConfig', 'client_calendar',
     dd.ForeignKey(
         'cal.EventType',
-        verbose_name=_("Default type for client events"),
+        verbose_name=_("Default type for client calendar events"),
         related_name='client_calendars',
         blank=True, null=True))
 
-dd.inject_field('system.SiteConfig', 'client_guestrole',
-                dd.ForeignKey('cal.GuestRole',
-                              verbose_name=_(
-                                  "Default guest role of client in events."),
-                              related_name='client_guestroles',
-                              blank=True, null=True))
+dd.inject_field(
+    'system.SiteConfig', 'client_guestrole',
+    dd.ForeignKey(
+        'cal.GuestRole',
+        verbose_name=_("Client guest role"),
+        help_text=_("Default guest role of client in calendar events."),
+        related_name='client_guestroles',
+        blank=True, null=True))
 
-dd.inject_field('system.SiteConfig', 'team_guestrole',
-                dd.ForeignKey('cal.GuestRole',
-                              verbose_name=_("Guest role for team members"),
-                              related_name='team_guestroles',
-                              blank=True, null=True))
+dd.inject_field(
+    'system.SiteConfig', 'team_guestrole',
+    dd.ForeignKey(
+        'cal.GuestRole',
+        verbose_name=_("Guest role for team members"),
+        related_name='team_guestroles',
+        blank=True, null=True))
 
 
 class Event(Event):

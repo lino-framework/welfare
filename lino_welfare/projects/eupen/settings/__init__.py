@@ -28,7 +28,7 @@ class Site(Site):
         kw = super(Site, self).get_apps_modifiers(**kw)
         kw.update(badges=None)  # remove the badges app
         kw.update(polls=None)
-        kw.update(projects=None)
+        # kw.update(projects=None)
         kw.update(immersion=None)
         kw.update(active_job_search=None)
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')

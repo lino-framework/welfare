@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Plugin(Plugin):
-    extends_models = ['Course', 'Line']
+    extends_models = ['Course', 'Line', 'Enrolment']
     verbose_name = _("Workshops")
     pupil_model = 'pcsw.Client'
     short_name = _("IO")  # "internal orientation"

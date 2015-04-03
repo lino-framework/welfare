@@ -17,11 +17,16 @@ def objects():
     CourseAreas = rt.modules.courses.CourseAreas
     Line = rt.modules.courses.Line
     Course = rt.modules.courses.Course
+    EventType = rt.modules.cal.EventType
+
+    kw = dd.str2kw('name', _("Workshop"))
+    event_type = EventType(**kw)
+    yield event_type
 
     def line(course_area, name, **kw):
         kw.update(course_area=course_area)
+        kw.update(event_type=event_type)
         kw.update(dd.str2kw('name', name))
-        
         return Line(**kw)
 
     # Introduction aux techniques de cuisine élémentaires
