@@ -4,6 +4,19 @@
 Thursday, February 19, 2015
 ===========================
 
+
+.. To test only this document, run::
+
+    $ python setup.py test -s tests.DocsTests.test_20150219
+
+  Or::
+
+    $ python -m atelier.doctest_utf8 docs/tested/2015/0219.rst
+
+  Or::
+
+    $ python -m doctest docs/tested/2015/0219.rst
+
 On :blogref:`20150219` I discovered a layout problem in the insert
 window of :class:`aids.IncomeConfirmationsByGranting
 <lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting>`: all
@@ -30,22 +43,6 @@ but currently it shows the window on the right:
 .. image:: 0219c.png
     :scale: 30
 
-
-This document is part of the test suite.  To test only this document,
-run::
-
-    $ python setup.py test -s tests.DocsTests.test_20150219
-
-Or::
-
-    $ python -m atelier.doctest_utf8 docs/tested/2015/0219.rst
-
-Note that the official method for testing would be::
-
-    $ python -m docutils docs/tested/2015/0219.rst
-
-But this fails on files with non-ascii characters. See
-:mod:`atelier.doctest_utf8`.
 
 Some initialization code:
 
@@ -172,7 +169,7 @@ behaviour because the horizontal panel for the two fields `client` and
 >>> lines = with_user_profile(ses.user.profile, declare_vars, lh.main)
 >>> js = '\n'.join(lines)
 >>> print(js)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF -SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 var client228 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
 var granting229 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Aid granting", "name": "granting", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.GrantingsByX.detail,Lino.aids.GrantingsByX.insert)}, "emptyText": "Select a Aid granting...", "listeners": { "render": Lino.quicktip_renderer("Aid granting","(aids.IncomeConfirmationsByGranting.granting) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "grantingHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/granting", "method": "GET" }) }) });
 var main_1_panel230 = new Ext.Panel({ "autoHeight": true, "layout": "hbox", "items": [ { "flex": 44, "autoHeight": true, "layout": "form", "xtype": "panel", "items": client228, "labelAlign": "top" }, { "flex": 55, "autoHeight": true, "layout": "form", "xtype": "panel", "items": granting229, "labelAlign": "top" } ], "frame": false, "layoutConfig": { "align": "stretchmax" }, "hideCheckBoxLabels": true, "autoScroll": false, "labelWidth": 117, "hidden": true, "border": false, "labelAlign": "top" });
