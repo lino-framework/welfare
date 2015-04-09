@@ -2,8 +2,7 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Test whether cv.Obstacle.user is correctly set to the requesting
-user.
+"""Miscellaneous tests on an empty database.
 
 You can run only these tests by issuing::
 
@@ -25,17 +24,21 @@ from django.conf import settings
 
 from lino.api import rt
 from lino.utils.djangotest import TestCase
+from lino.utils import i2d
 from lino.core import constants
 
 from lino.modlib.users.choicelists import UserProfiles
 
 
 class TestCase(TestCase):
-
+    """Miscellaneous tests on an empty database."""
     maxDiff = None
 
-    def test00(self):
-        
+    def test_cv_obstacle(self):
+        """Test whether cv.Obstacle.user is correctly set to the requesting
+        user.
+
+        """
         ContentType = rt.modules.contenttypes.ContentType
         Obstacle = rt.modules.cv.Obstacle
         ObstacleType = rt.modules.cv.ObstacleType
@@ -97,3 +100,66 @@ class TestCase(TestCase):
         self.assertEqual(result['success'], True)
         self.assertEqual(
             result['message'], 'Client "LAST First (101)" has been created.')
+
+    def test_suggest_cal_guests(self):
+        """Tests a bugfix in :meth:`suggest_cal_guests
+        <lino.modlib.courses.Course.suggest_cal_guests>`.
+
+        """
+        User = settings.SITE.user_model
+        Guest = rt.modules.cal.Guest
+        Event = rt.modules.cal.Event
+        EventType = rt.modules.cal.EventType
+        GuestRole = rt.modules.cal.GuestRole
+        Recurrencies = rt.modules.cal.Recurrencies
+        Room = rt.modules.cal.Room
+        Enrolment = rt.modules.courses.Enrolment
+        Course = rt.modules.courses.Course
+        Line = rt.modules.courses.Line
+        EnrolmentStates = rt.modules.courses.EnrolmentStates
+        Pupil = rt.modules.pcsw.Client
+
+        robin = User(username='robin', profile=UserProfiles.admin)
+        robin.save()
+        ar = rt.login('robin')
+        settings.SITE.verbose_client_info_message = False
+
+        pupil = Pupil(first_name="First", last_name="Last")
+        pupil.save()
+
+        et = EventType(name="lesson")
+        et.full_clean()
+        et.save()
+
+        gr = GuestRole(name="pupil")
+        gr.save()
+
+        room = Room(name="classroom")
+        room.save()
+
+        line = Line(
+            name="Test", guest_role=gr,
+            event_type=et,
+            every_unit=Recurrencies.weekly)
+        line.full_clean()
+        line.save()
+        course = Course(
+            max_events=4,
+            line=line, start_date=i2d(20150409), user=robin,
+            monday=True, room=room)
+        course.full_clean()
+        course.save()
+        wanted = course.get_wanted_auto_events(ar)
+        # self.assertEqual(
+        # ar.response['info_message'], 'Generating events between...')
+        self.assertEqual(len(wanted), 4)
+        enr = Enrolment(
+            course=course, state=EnrolmentStates.requested, pupil=pupil)
+        enr.save()
+
+        course.do_update_events.run_from_ui(ar)
+        self.assertEqual(ar.response['success'], True)
+        self.assertEqual(Event.objects.all().count(), 4)
+        self.assertEqual(Guest.objects.all().count(), 4)
+        # self.assertEqual(ar.response['info_message'], '')
+
