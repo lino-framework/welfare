@@ -30,7 +30,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-49 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility.
+50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
 130 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -160,7 +160,7 @@ result:
  properties.Property            properties.Properties           7         23
  sepa.Account                   sepa.Accounts                   8         13
  system.SiteConfig              system.SiteConfigs              30        1
- system.TextFieldTemplate       system.TextFieldTemplates       5         2
+ tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
@@ -635,9 +635,9 @@ changes.
 |                                                 |                                     | cbss_org_unit sector ssdn_user_id ssdn_email       |
 |                                                 |                                     | cbss_http_username cbss_http_password              |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| system.TextFieldTemplates.detail                | admin                               | id name user description text                      |
+| tinymce.TextFieldTemplates.detail               | admin                               | id name user description text                      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| system.TextFieldTemplates.insert                | all except anonymous                | name user                                          |
+| tinymce.TextFieldTemplates.insert               | all except anonymous                | name user                                          |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | uploads.UploadTypes.detail                      | admin                               | id upload_area shortcut name name_fr name_de       |
 |                                                 |                                     | name_nl warn_expiry_unit warn_expiry_value wanted  |
@@ -700,11 +700,11 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Büro : Meine Einfügetexte, Upload-Arten, Auszugsarten, Notizarten, Ereignisarten
   - System : Site-Parameter, Benutzer, Hilfetexte
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
+  - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
   - Buchhaltung : Kontenpläne, Kontengruppen, Konten
   - Kurse : Badges, Kursinhalte
@@ -716,10 +716,10 @@ Rolf is the local system administrator, he has a complete menu:
   - Schuldnerberatung : Budget-Kopiervorlage
   - Polls : Choice Sets
 - Explorer :
-  - Büro : Einfügetexte, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen
   - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - Kurse : Badgeprüfungen, Kurse, Kursanfragen
   - SEPA : Konten
@@ -756,12 +756,12 @@ Hubert is an Integration agent.
   - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Büro : Meine Einfügetexte
   - Orte : Länder
+  - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - Büro : Upload-Bereiche
   - Kontakte : Adressenarten, Rollen
+  - Büro : Upload-Bereiche
   - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : VSEs, Art.60§7-Konventionen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
@@ -791,16 +791,16 @@ Mélanie is the manager of the Integration service.
   - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Büro : Meine Einfügetexte
   - Orte : Länder
+  - Büro : Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
   - Kurse : Kursinhalte
   - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
   - Lebenslauf : Sprachen, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
 - Explorer :
-  - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kontakte : Adressenarten, Rollen
+  - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kalender : Aufgaben, Abonnements
   - Kurse : Kursanfragen
   - SEPA : Konten
@@ -829,13 +829,13 @@ Kerstin is a debts consultant.
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
-  - Büro : Meine Einfügetexte
   - Orte : Länder
+  - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - Büro : Upload-Bereiche
   - Kontakte : Adressenarten, Rollen
+  - Büro : Upload-Bereiche
   - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : Vertragspartner, Proofs of search
@@ -862,12 +862,12 @@ Caroline is a newcomers consultant.
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
-  - Büro : Meine Einfügetexte
   - Orte : Länder
+  - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - Büro : Upload-Bereiche
   - Kontakte : Adressenarten, Rollen
+  - Büro : Upload-Bereiche
   - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : Vertragspartner, Proofs of search

@@ -110,7 +110,6 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.sepa',
     'lino_welfare.modlib.sepa.fixtures',
     'lino_welfare.modlib.system',
-    'lino_welfare.modlib.system.fixtures',
     'lino_welfare.modlib.immersion',
     'lino_welfare.modlib.immersion.fixtures',
     'lino_welfare.modlib.uploads',

@@ -175,6 +175,34 @@ The page header includes a lot of scripts:
 >>> len(scripts)
 22
 
+Here are the default values for their source URLs::
+
+>>> for s in scripts:
+...     print(s.get('src', '(inline)'))
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/adapter/ext/ext-base-debug.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/ext-all-debug.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/src/locale/ext-lang-de.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/statusbar/StatusBar.js
+/media/lino/extjs/Ext.ux.form.DateTime.js
+http://ext.ensible.com/deploy/1.0.2/extensible-all-debug.js
+http://ext.ensible.com/deploy/1.0.2/src/locale/extensible-lang-de.js
+http://www.tinymce.com/js/tinymce/jscripts/tiny_mce/tiny_mce.js
+/media/lino/tinymce/Ext.ux.TinyMCE.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/menu/RangeMenu.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/menu/ListMenu.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/GridFilters.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/Filter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/StringFilter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/DateFilter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/ListFilter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/NumericFilter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/BooleanFilter.js
+http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/fileuploadfield/FileUploadField.js
+(inline)
+/media/cache/js/lino_210_de.js
+(inline)
+
+
 We are interested in the last one, which defines the `onReady` function:
 
 >>> on_ready = unicode(scripts[-1])
