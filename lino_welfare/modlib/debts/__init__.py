@@ -5,7 +5,10 @@
 .. autosummary::
    :toctree:
 
+   mixins
+   fields
    models
+   ui
    fixtures.std
    fixtures.demo
 
