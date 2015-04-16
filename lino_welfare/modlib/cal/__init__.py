@@ -20,5 +20,6 @@ from lino.modlib.cal import Plugin
 
 
 class Plugin(Plugin):
+    """See :class:`lino.core.plugin.Plugin`."""
 
     extends_models = ['Event', 'EventType', 'Guest', 'Task']
