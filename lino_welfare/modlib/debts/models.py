@@ -116,6 +116,7 @@ The total monthly amount available for debts distribution."""))
         print_empty_rows print_todos"""
 
     def get_actors(self):
+        """Return a list of the actors of this budget."""
         attname = "_cached_actors"
         if hasattr(self, attname):
             return getattr(self, attname)
@@ -342,11 +343,22 @@ The total monthly amount available for debts distribution."""))
 
 
 class ActorBase:
-
     ""
+
+    def get_last_note(self, nt):
+        obj = self.client
+        if obj:
+            return obj.get_last_note(nt)
+
     @property
     def person(self):
         return self.partner.get_mti_child('person')
+
+    @property
+    def client(self):
+        person = self.partner.get_mti_child('person')
+        if person is not None:
+            return person.get_mti_child('client')
 
     @property
     def household(self):
@@ -367,10 +379,10 @@ class MainActor(ActorBase):
         self.remark = ''
 
 
-
 class Actor(ActorBase, SequencedBudgetComponent):
+    """An **actor** of a budget is a partner who is part of the household
+    for which the budget has been established.
 
-    """
     """
     class Meta:
         verbose_name = _("Budget Actor")
@@ -378,23 +390,10 @@ class Actor(ActorBase, SequencedBudgetComponent):
 
     allow_cascaded_delete = ['budget']
 
-    #~ budget = models.ForeignKey(Budget,related_name="actors")
-    #~ budget = models.ForeignKey(Budget)
     partner = models.ForeignKey('contacts.Partner', blank=True)
-    #~ sub_budget = models.ForeignKey(Budget,
-        #~ verbose_name=_("Linked Budget"),
-        #~ related_name="used_by")
     header = models.CharField(_("Header"), max_length=20, blank=True)
     remark = dd.RichTextField(_("Remark"), format="html", blank=True)
-    #~ remark = models.CharField(_("Remark"),max_length=200,blank=True)
-    #~ closed = models.BooleanField(verbose_name=_("Closed"))
 
-    #~ def get_siblings(self):
-        #~ "Overrides :meth:`lino.mixins.Sequenced.get_siblings`"
-        #~ return self.__class__.objects.filter(budget=self.budget).order_by('seqno')
-    #~ @property
-    #~ def partner(self):
-        #~ return self.partner
     def save(self, *args, **kw):
         if not self.header:
             self.header = _("Actor") + " " + str(self.seqno)

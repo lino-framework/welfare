@@ -241,6 +241,14 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             qs = qs.filter(only_active_coachings_filter(period))
         return qs
 
+    def get_last_note(self, note_type):
+        """Return the last note of the given type for this client."""
+        qs = self.notes_note_set_by_project.order_by('date', 'time')
+        nt = rt.modules.notes.NoteType.objects.get(id=note_type)
+        qs = qs.filter(type=nt)
+        if qs.count():
+            return qs.reverse()[0]
+
     @dd.chooser()
     def job_office_contact_choices(cls):
         sc = settings.SITE.site_config  # get_site_config()

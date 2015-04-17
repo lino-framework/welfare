@@ -175,7 +175,7 @@ The page header includes a lot of scripts:
 >>> len(scripts)
 22
 
-Here are the default values for their source URLs::
+Here are the default values for their source URLs:
 
 >>> for s in scripts:
 ...     print(s.get('src', '(inline)'))

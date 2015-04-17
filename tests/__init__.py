@@ -122,7 +122,10 @@ class DocsTests(BaseTestCase):
         return self.run_simple_doctests('docs/tested/newcomers.rst')
 
     def test_debts(self):
-        return self.run_docs_doctests('tested/debts.rst')
+        return self.run_simple_doctests('docs/tested/debts.rst')
+
+    def test_notes(self):
+        return self.run_simple_doctests('docs/tested/notes.rst')
 
     def test_cbss(self):
         return self.run_docs_doctests('tested/cbss.rst')

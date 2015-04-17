@@ -15,17 +15,14 @@ module.
 .. contents::
    :local:
 
-Test context
-============
+.. This document is part of the Lino Welfare test suite where it runs in
+   the following context:
 
-This document is part of the Lino Welfare test suite where it runs in
-the following context:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
 
 
 Newcomers configuration
@@ -36,6 +33,8 @@ The newcomer module adds three configuration models:
 :class:`Faculty <lino_welfare.modlib.newcomers.models.Faculty>`
 and
 :class:`Competence <lino_welfare.modlib.newcomers.models.Competence>`.
+
+The corresponding tables are populated with the following data:
 
 >>> rt.show('newcomers.Brokers')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE

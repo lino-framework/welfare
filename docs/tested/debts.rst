@@ -1,40 +1,76 @@
 .. _welfare.tested.debts:
 
+===============
 Debts mediation
 ===============
-
-.. include:: /include/tested.rst
 
 .. to test only this document:
   $ python setup.py test -s tests.DocsTests.test_debts
 
-..
-    >>> from django.utils import translation
-    >>> from lino.api.shell import *
-    >>> from django.test import Client
-    >>> import json
+.. This document is part of the Lino Welfare test suite where it runs in
+   the following context:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+
 
 We switch to German because the first PCSW with Lino was the one in Eupen:
 
+>>> ses = rt.login('rolf')
 >>> translation.activate('de')
 
-We can now refer to every installed app via it's `app_label`.
-For example here is how we can verify here that the demo database 
-has 14 Budgets:
+The demo database has 14 Budgets:
 
 >>> debts.Budget.objects.count()
 14
 
-Or we can retrieve budget no. 3 from the database:
+For the following examples we will use budget no. 3:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
 Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen (232)')
 
-So far this was standard Django API. To use Lino's extended API we 
-first need to "log in" as user `rolf`:
+Actors
+======
 
->>> ses = rt.login('rolf')
+This budget has 3 actors:
+
+>>> len(obj.get_actors())
+3
+
+Every actor is an instance of :class:`Actor
+<lino_welfare.modlib.debts.models.Actor>`, which is designed to be
+used in templates. For example, every actor has four attributes
+`header`, `person`, `client` and `household`:
+
+>>> u = attrtable(obj.get_actors(), 'header person client household')
+>>> print(u)
+... #doctest: +REPORT_UDIFF
+=========== ============================= ======================== ====================================
+ header      person                        client                   household
+----------- ----------------------------- ------------------------ ------------------------------------
+ Gemeinsam   None                          None                     Jérôme & Theresia Jeanémart-Thelen
+ Mr.         Herr Jérôme JEANÉMART (181)   JEANÉMART Jérôme (181)   None
+ Mrs.        Frau Theresia THELEN (193)    None                     None
+=========== ============================= ======================== ====================================
+<BLANKLINE>
+
+
+>>> from django.utils.translation import ugettext_lazy as _
+>>> flt = dd.str2kw("name", _("First meeting"))
+>>> fm = rt.modules.notes.NoteType.objects.get(**flt)
+>>> for actor in obj.get_actors():
+...     for note in [actor.get_last_note(fm.id)]:
+...         print(note)
+None
+None
+None
+
+Expenses
+========
 
 Here is the textual representation of the "Expenses" panel:
 
@@ -171,7 +207,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 
 
 Something in French
--------------------
+===================
 
 >>> with translation.override('fr'):
 ...    ses.show(debts.DistByBudget.request(obj))
@@ -202,14 +238,13 @@ and Budget #3 is addressed to a German-speaking partner.
 
 
 A web request
--------------
+=============
 
 The following snippet reproduces a one-day bug 
 discovered :blogref:`20130527`:
 
->>> client = Client()
 >>> url = '/api/debts/Budgets/3?fmt=json&an=detail'
->>> res = client.get(url,REMOTE_USER='rolf')
+>>> res = test_client.get(url,REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
 >>> result = json.loads(res.content)
@@ -217,8 +252,8 @@ discovered :blogref:`20130527`:
 [u'navinfo', u'data', u'disable_delete', u'id', u'title']
 
 
-Editability of tables 
----------------------
+Editability of tables
+=====================
 
 The following is to check whether the editable attribute inherited 
 correctly.

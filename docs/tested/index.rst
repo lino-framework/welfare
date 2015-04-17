@@ -37,3 +37,4 @@ them to a script and run it using :manage:`run`.
    addresses
    cal
    countries
+   notes

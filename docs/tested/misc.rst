@@ -21,25 +21,6 @@ Miscellaneous
    :depth: 3
 
 
-.. _welfare.tested.notes:
-
-Notes
-=======
-
->>> url = '/api/notes/NoteTypes/1?fmt=detail'
->>> res = test_client.get(url, REMOTE_USER='rolf')
->>> print(res.status_code)
-200
-
-We test whether a normal HTML response arrived:
-
->> print(res.content)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<!DOCTYPE html ...
-Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
-...</body>
-</html>
-
-
 
 Some database content
 ---------------------

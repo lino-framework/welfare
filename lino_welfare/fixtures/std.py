@@ -35,17 +35,18 @@ def objects():
     yield noteType("Übergabeblatt", remark="Übergabeblatt vom allgemeinen Sozialdienst")
     yield noteType("Neuantrag")
     yield noteType("Antragsformular")
-    yield noteType("Auswertungsbogen allgemein", build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
-    #~ yield noteType("Anwesenheitsbescheinigung",build_method='rtf',template='Anwesenheitsbescheinigung.rtf')
-    yield noteType("Erstgespräch")
+    yield noteType(
+        "Auswertungsbogen allgemein",
+        build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
+    yield noteType(**dd.str2kw("name", _("First meeting")))  # "Erstgespräch"
 
     yield noteType(
         build_method='appyrtf', template='Letter.odt',
         **dd.babelkw('name',
-                  de="Brief oder Einschreiben",
-                  fr="Lettre",
-                  en="Letter"))
-
+                     de="Brief oder Einschreiben",
+                     fr="Lettre",
+                     en="Letter"))
+    
     # yield excerpt_types()
         
     eventType = Instantiator('notes.EventType', "name remark").build
