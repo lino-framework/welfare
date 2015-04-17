@@ -8,6 +8,7 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from lino.utils.instantiator import Instantiator
 from django.utils.translation import ugettext_lazy as _
+from lino.modlib.notes.choicelists import SpecialTypes
 
 from lino.api import dd, rt
 
@@ -38,7 +39,10 @@ def objects():
     yield noteType(
         "Auswertungsbogen allgemein",
         build_method='rtf', template='Auswertungsbogen_allgemein.rtf')
-    yield noteType(**dd.str2kw("name", _("First meeting")))  # "Erstgespräch"
+
+    yield noteType(
+        special_type=SpecialTypes.first_meeting,
+        **dd.str2kw("name", _("First meeting")))  # "Erstgespräch"
 
     yield noteType(
         build_method='appyrtf', template='Letter.odt',

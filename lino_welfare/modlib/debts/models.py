@@ -27,11 +27,9 @@ from lino.modlib.accounts.choicelists import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
-pcsw = dd.resolve_app('pcsw')
-
 
 from .fields import PeriodsField
-from .mixins import SequencedBudgetComponent
+from .mixins import SequencedBudgetComponent, ActorBase, MainActor
 
 from django.db import transaction
 
@@ -342,43 +340,6 @@ The total monthly amount available for debts distribution."""))
         yield render(DistByBudget)
 
 
-class ActorBase:
-    ""
-
-    def get_last_note(self, nt):
-        obj = self.client
-        if obj:
-            return obj.get_last_note(nt)
-
-    @property
-    def person(self):
-        return self.partner.get_mti_child('person')
-
-    @property
-    def client(self):
-        person = self.partner.get_mti_child('person')
-        if person is not None:
-            return person.get_mti_child('client')
-
-    @property
-    def household(self):
-        return self.partner.get_mti_child('household')
-
-    def __unicode__(self):
-        return self.header
-
-
-class MainActor(ActorBase):
-
-    "A volatile object that represents the budget partner as actor"
-
-    def __init__(self, budget, header):
-        self.budget = budget
-        self.partner = budget.partner
-        self.header = header
-        self.remark = ''
-
-
 class Actor(ActorBase, SequencedBudgetComponent):
     """An **actor** of a budget is a partner who is part of the household
     for which the budget has been established.
@@ -563,17 +524,17 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         super(Entry, self).save(*args, **kw)
 
     def on_duplicate(self, ar, master):
-        """
-        This is called when an entry has been duplicated.
-        It is needed when we are doing a "related" duplication 
-        (initiated by the duplication of a Budget).
-        In that case, `master` is not None but the new Budget that has been created.
-        We now need to adapt the `actor` of this Entry by making it 
-        an actor of the new Budget.
+        """This is called when an entry has been duplicated.  It is needed
+        when we are doing a "related" duplication (initiated by the
+        duplication of a Budget).  In that case, `master` is not None
+        but the new Budget that has been created.  We now need to
+        adapt the `actor` of this Entry by making it an actor of the
+        new Budget.
         
-        TODO: this method relies on the fact that related Actors 
-        get duplicated *before* related Entries. 
-        The order of `fklist` in `_lino_ddh` 
+        TODO: this method relies on the fact that related Actors get
+        duplicated *before* related Entries.  The order of `fklist` in
+        `_lino_ddh`
+
         """
         if master is not None and self.actor is not None and self.actor.budget != master:
             self.actor = master.actor_set.get(seqno=self.actor.seqno)

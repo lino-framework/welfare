@@ -80,7 +80,7 @@ class Site(Site):
             name='admin')
 
     def setup_choicelists(self):
-        """Adds two shortcut fields."""
+        """Adds two shortcut fields and a special note type."""
 
         super(Site, self).setup_choicelists()
 
@@ -95,6 +95,10 @@ class Site(Site):
         # Shortcuts.add_item(
         #     'pcsw.Client', 'id_document', _("Identifying document"),
         #     target='uploads.UploadsByClient')
+
+        from lino.modlib.notes.choicelists import SpecialTypes
+        add = SpecialTypes.add_item
+        add('100', _("First meeting"), 'first_meeting')
 
     def setup_quicklinks(self, ar, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)

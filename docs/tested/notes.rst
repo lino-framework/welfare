@@ -6,7 +6,7 @@ Notes
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_misc
+  $ python setup.py test -s tests.DocsTests.test_notes
 
 .. doctest init:
 
@@ -41,7 +41,7 @@ Lino.notes.NoteTypes.detail.run(null,{ "record_id": "1", "base_params": {  } })
 The first meeting
 =================
 
-We can use the :meth:`lino_welfare.modlib.pcsw.Client.get_last_note`
+We can use the :meth:`lino_welfare.modlib.pcsw.Client.get_first_meeting`
 method for getting the last note about a given client and of given
 type.
 
@@ -67,8 +67,8 @@ type.
 
 Client 124 has a first meeting, while client 125 doesn't:
 
->>> rt.modules.pcsw.Client.objects.get(pk=124).get_last_note(fm.id)
+>>> rt.modules.pcsw.Client.objects.get(pk=124).get_first_meeting()
 Note #19 (u'Ereignis/Notiz #19')
->>> rt.modules.pcsw.Client.objects.get(pk=125).get_last_note(fm.id)
+>>> rt.modules.pcsw.Client.objects.get(pk=125).get_first_meeting()
 
 

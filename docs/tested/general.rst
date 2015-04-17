@@ -127,7 +127,7 @@ result:
  newcomers.Faculty              newcomers.Faculties             6         5
  notes.EventType                notes.EventTypes                10        9
  notes.Note                     notes.Notes                     17        110
- notes.NoteType                 notes.NoteTypes                 11        13
+ notes.NoteType                 notes.NoteTypes                 12        13
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
@@ -539,7 +539,8 @@ changes.
 | notes.EventTypes.insert                         | all except anonymous                | id name name_fr name_de name_nl remark             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | notes.NoteTypes.detail                          | admin                               | id name name_fr name_de name_nl build_method       |
-|                                                 |                                     | template email_template attach_to_email remark     |
+|                                                 |                                     | template special_type email_template               |
+|                                                 |                                     | attach_to_email remark                             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | notes.NoteTypes.insert                          | all except anonymous                | name name_fr name_de name_nl build_method          |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+

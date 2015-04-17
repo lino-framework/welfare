@@ -32,6 +32,7 @@ from lino.core.utils import get_field
 from lino.utils.xmlgen.html import E
 from lino.modlib.cal.utils import DurationUnits, update_reminder
 from lino.modlib.uploads.choicelists import Shortcuts
+from lino.modlib.notes.choicelists import SpecialTypes
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -241,11 +242,19 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             qs = qs.filter(only_active_coachings_filter(period))
         return qs
 
-    def get_last_note(self, note_type):
-        """Return the last note of the given type for this client."""
-        qs = self.notes_note_set_by_project.order_by('date', 'time')
-        nt = rt.modules.notes.NoteType.objects.get(id=note_type)
-        qs = qs.filter(type=nt)
+    def get_first_meeting(self, today=None):
+        """Return the last note of type "First meeting" for this client.
+        Usage example see :ref:`welfare.tested.debts` and
+        :ref:`welfare.tested.notes`.
+
+        """
+        if today is None:
+            today = dd.today()
+        qs = SpecialTypes.first_meeting.get_notes(
+            project=self, date__lte=today).order_by('date', 'time')
+        # qs = self.notes_note_set_by_project.order_by('date', 'time')
+        # nt = rt.modules.notes.NoteType.objects.get(id=note_type)
+        # qs = qs.filter(type=nt)
         if qs.count():
             return qs.reverse()[0]
 

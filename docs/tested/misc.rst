@@ -81,7 +81,7 @@ Gonna copy ...lino_welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
-Sind Sie sicher?
+Are you sure?
 
 
 Yet another series of GET requests

@@ -16,13 +16,16 @@ Debts mediation
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from lino.api.doctest import *
 
+    >>> ses = rt.login('rolf')
+    >>> translation.activate('de')
+    
+The :mod:`lino_welfare.modlib.debts` modules adds functionality for
+managing "budgets". A :class:`Budget
+<lino_welfare.modlib.debts.modles.Budget>` is a document based on
+financial data about a person or household.  It is just about entering
+this data and then printing it.
 
-We switch to German because the first PCSW with Lino was the one in Eupen:
-
->>> ses = rt.login('rolf')
->>> translation.activate('de')
-
-The demo database has 14 Budgets:
+The demo database has 14 such documents with fictive generated data:
 
 >>> debts.Budget.objects.count()
 14
@@ -58,16 +61,6 @@ used in templates. For example, every actor has four attributes
 =========== ============================= ======================== ====================================
 <BLANKLINE>
 
-
->>> from django.utils.translation import ugettext_lazy as _
->>> flt = dd.str2kw("name", _("First meeting"))
->>> fm = rt.modules.notes.NoteType.objects.get(**flt)
->>> for actor in obj.get_actors():
-...     for note in [actor.get_last_note(fm.id)]:
-...         print(note)
-None
-None
-None
 
 Expenses
 ========
@@ -269,5 +262,38 @@ True
 >>> debts.PrintLiabilitiesByBudget.editable
 False
 
+
+
+The first meeting of a budget
+=============================
+
+>>> translation.activate('en')
+    
+The following shows how we use the
+:meth:`lino_welfare.modlib.debts.models.Actor.get_first_meeting`
+method for printing the date and user of the first meeting.
+
+Here is a list of all actors for which there is a first meeting.
+
+>>> msg = "Budget {0} : First meeting on {1} with user {2}"
+>>> for actor in debts.Actor.objects.all():
+...     n = actor.get_first_meeting()
+...     if n is not None:
+...         print(msg.format(actor.budget.id, dd.fdl(n.date), n.user))
+Budget 4 : First meeting on July 22, 2013 with user Rolf Rompen
+
+The `syntax of appy.pod templates
+<http://appyframework.org/podWritingTemplates.html>`_ does not yet
+have a ``with`` statement.
+
+The :xfile:`Default.odt` template uses this in a construct similar to
+the following snippet:
+
+>>> budget = debts.Budget.objects.get(pk=4)
+>>> for actor in budget.get_actors():
+...     print(actor.get_first_meeting_text())
+None
+First meeting on July 22, 2013 with Rolf Rompen
+None
 
 
