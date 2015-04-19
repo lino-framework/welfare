@@ -199,8 +199,7 @@ The total monthly amount available for debts distribution."""))
  
             ar: the ActionRequest
 
-            group: an instance of :class:`accounts.Group
-                   <lino.modlib.accounts.models.Group>` .
+            group: an instance of :class:`accounts.Group <lino.modlib.accounts.models.Group>`.
 
         """
         t = entries_table_for_group(group)
