@@ -258,25 +258,25 @@ Usually there is at most one pharmacy among the client's client
 contacts:
 
 >>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=139))
-==================== ===================== ========================= =============
- Klientenkontaktart   Organisation          Kontaktperson             Bemerkungen
--------------------- --------------------- ------------------------- -------------
- Apotheke             Apotheke Reul (208)
- Arzt                                       Waltraud WALDMANN (223)
- Hausarzt                                   Werner WEHNICHT (224)
- Zahnarzt                                   Carmen CASTOU (225)
-==================== ===================== ========================= =============
+==================== =============== =================== =============
+ Klientenkontaktart   Organisation    Kontaktperson       Bemerkungen
+-------------------- --------------- ------------------- -------------
+ Apotheke             Apotheke Reul
+ Arzt                                 Waltraud WALDMANN
+ Hausarzt                             Werner WEHNICHT
+ Zahnarzt                             Carmen CASTOU
+==================== =============== =================== =============
 <BLANKLINE>
 
 >>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=141))
-==================== ======================== ========================= =============
- Klientenkontaktart   Organisation             Kontaktperson             Bemerkungen
--------------------- ------------------------ ------------------------- -------------
- Apotheke             Apotheke Schunck (209)
- Kinderarzt                                    Killian KIMMEL (227)
- Arzt                                          Waltraud WALDMANN (223)
- Hausarzt                                      Werner WEHNICHT (224)
-==================== ======================== ========================= =============
+==================== ================== =================== =============
+ Klientenkontaktart   Organisation       Kontaktperson       Bemerkungen
+-------------------- ------------------ ------------------- -------------
+ Apotheke             Apotheke Schunck
+ Kinderarzt                              Killian KIMMEL
+ Arzt                                    Waltraud WALDMANN
+ Hausarzt                                Werner WEHNICHT
+==================== ================== =================== =============
 <BLANKLINE>
 
 
@@ -285,22 +285,22 @@ contacts:
 >>> column_names += "granting__client "
 >>> column_names += "pharmacy doctor_type doctor"
 >>> rt.show(aids.RefundConfirmations, column_names=column_names)
-==== ================== ====================== ======================== ================ =========================
- ID   Hilfebeschluss     Klient                 Apotheke                 Art des Arztes   Arzt
----- ------------------ ---------------------- ------------------------ ---------------- -------------------------
- 12   DMH/28.05.14/144   LAZARUS Line (144)                              Kinderarzt       Killian KIMMEL (227)
- 11   DMH/28.05.14/144   LAZARUS Line (144)                              Zahnarzt         Carmen CASTOU (225)
- 10   DMH/28.05.14/144   LAZARUS Line (144)                              Hausarzt         Werner WEHNICHT (224)
- 9    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Arzt             Waltraud WALDMANN (223)
- 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Kinderarzt       Killian KIMMEL (227)
- 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                            Zahnarzt         Walter WALDMANN (226)
- 6    AMK/27.05.14/141   KAIVERS Karl (141)                              Hausarzt         Werner WEHNICHT (224)
- 5    AMK/27.05.14/141   KAIVERS Karl (141)                              Arzt             Waltraud WALDMANN (223)
- 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck (209)   Kinderarzt       Killian KIMMEL (227)
- 3    AMK/27.05.14/139   JONAS Josef (139)                               Zahnarzt         Carmen CASTOU (225)
- 2    AMK/27.05.14/139   JONAS Josef (139)                               Hausarzt         Werner WEHNICHT (224)
- 1    AMK/27.05.14/139   JONAS Josef (139)      Apotheke Reul (208)      Arzt             Waltraud WALDMANN (223)
-==== ================== ====================== ======================== ================ =========================
+==== ================== ====================== ================== ================ ===================
+ ID   Hilfebeschluss     Klient                 Apotheke           Art des Arztes   Arzt
+---- ------------------ ---------------------- ------------------ ---------------- -------------------
+ 12   DMH/28.05.14/144   LAZARUS Line (144)                        Kinderarzt       Killian KIMMEL
+ 11   DMH/28.05.14/144   LAZARUS Line (144)                        Zahnarzt         Carmen CASTOU
+ 10   DMH/28.05.14/144   LAZARUS Line (144)                        Hausarzt         Werner WEHNICHT
+ 9    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Arzt             Waltraud WALDMANN
+ 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Kinderarzt       Killian KIMMEL
+ 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Zahnarzt         Walter WALDMANN
+ 6    AMK/27.05.14/141   KAIVERS Karl (141)                        Hausarzt         Werner WEHNICHT
+ 5    AMK/27.05.14/141   KAIVERS Karl (141)                        Arzt             Waltraud WALDMANN
+ 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck   Kinderarzt       Killian KIMMEL
+ 3    AMK/27.05.14/139   JONAS Josef (139)                         Zahnarzt         Carmen CASTOU
+ 2    AMK/27.05.14/139   JONAS Josef (139)                         Hausarzt         Werner WEHNICHT
+ 1    AMK/27.05.14/139   JONAS Josef (139)      Apotheke Reul      Arzt             Waltraud WALDMANN
+==== ================== ====================== ================== ================ ===================
 <BLANKLINE>
 
 
@@ -316,10 +316,10 @@ manually choose any other pharmacy:
 >>> for r in result['rows']:
 ...     print r['text']
 <br/>
-Apotheke Reul (208)
-Apotheke Schunck (209)
-Pharmacies Populaires de Verviers (210*)
-Bosten-Bocken A (211)
+Apotheke Reul
+Apotheke Schunck
+Pharmacies Populaires de Verviers
+Bosten-Bocken A
 
 
 Creating a doctor

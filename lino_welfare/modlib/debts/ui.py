@@ -26,7 +26,6 @@ from lino.modlib.users.mixins import ByUser
 
 from lino_welfare.modlib.pcsw import models as pcsw
 
-
 class Clients(pcsw.Clients):
     # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
@@ -72,9 +71,8 @@ class ActorsByPartner(Actors):
 
 
 class BudgetDetail(dd.FormLayout):
-    """
-    Defines the Detail form of a :class:`Budget`.
-    
+    """Defines the Detail form of a :class:`Budget`.
+
     """
     main = "general entries1 entries2 summary_tab preview_tab"
     general = dd.Panel("""
@@ -106,7 +104,6 @@ class BudgetDetail(dd.FormLayout):
     summary1 = """
     ResultByBudget
     DebtsByBudget
-    BailiffDebtsByBudget
     """
     summary2 = """
     conclusion:30x5
@@ -235,6 +232,37 @@ class AssetsByBudget(EntriesByBudget, EntriesByType):
     column_names = "account remark amount actor move_buttons:8 todo seqno id"
 
 
+## PrintEntriesByBudget
+
+
+class EntryGroup(object):
+
+    pk = None
+
+    def __init__(self, budget, group, ar):
+        self.budget = budget
+        self.group = group
+        self.action_request = ar.spawn(
+            PrintEntriesByBudget, master_instance=self)
+        # self.qs = qs
+        # group.entries_layout
+
+    def has_data(self):
+        return self.action_request.get_total_count() > 0
+
+    # def child_request(self, ar):
+    #     t = group.entries_layout.columns_spec
+    #     if t is None:
+    #         return None
+    #     ar = ar.spawn(t,
+    #                   master_instance=self,
+    #                   title=unicode(group),
+    #                   filter=models.Q(account__group=group), **kw)
+
+    #     #~ print 20120606, sar
+    #     return ar
+
+
 class PrintEntriesByBudget(dd.VirtualTable):
     """Base class for the printable tables of entries by budget
 (:class:`PrintExpensesByBudget`, :class:`PrintIncomesByBudget`,
@@ -258,25 +286,34 @@ per user) you would add the user name to the default name::
             hname += ar.get_user().username
             return hname
     
-TODO: more explnations....
+TODO: more explanations....
 
 
     """
+    master = EntryGroup
     slave_grid_format = 'html'
-    _account_type = None
+    # _account_type = None
+
+    # @classmethod
+    # def get_actor_label(self):  # 20130906
+    #     if self._account_type is not None:
+    #         return self._account_type.text
+    #     return self._label or self.__name__
 
     @classmethod
-    def get_actor_label(self):  # 20130906
-        if self._account_type is not None:
-            return self._account_type.text
-        return self._label or self.__name__
-
+    def get_title(self, ar):
+        eg = ar.master_instance
+        if eg is None:
+            return None
+        return unicode(eg.group)
+        
     @classmethod
     def get_handle_name(self, ar):
         hname = _handle_attr_name
-        if ar.master_instance is not None:
-            #~ hname = super(PrintEntriesByBudget,self).get_handle_name(ar)
-            hname += str(len(ar.master_instance.get_actors()))
+        eg = ar.master_instance
+        if eg is not None:
+            hname += eg.group.entries_layout.value
+            hname += "_" + str(len(eg.budget.get_actors()))
         return hname
 
     @classmethod
@@ -284,25 +321,30 @@ TODO: more explnations....
         """
         Builds columns dynamically by request. Called once per UI handle.
         """
-        if 'dynamic_amounts' in self.column_names:
+        eg = ar.master_instance
+        if eg is None:
+            return
+        column_names = eg.group.entries_layout.columns_spec
+
+        if 'dynamic_amounts' in column_names:
             amounts = ''
-            if ar.master_instance is not None:
-                actors = ar.master_instance.get_actors()
-                if len(actors) == 1:
-                    amounts = 'amount0'
-                else:
-                    for i, a in enumerate(actors):
-                        if i <= 4:  # amount4
-                            amounts += 'amount' + str(i) + ' '
-                    amounts += 'total '
-            return self.column_names.replace('dynamic_amounts', amounts)
-        return self.column_names
+            actors = eg.budget.get_actors()
+            if len(actors) == 1:
+                amounts = 'amount0'
+            else:
+                for i, a in enumerate(actors):
+                    if i <= 4:  # amount4
+                        amounts += 'amount' + str(i) + ' '
+                amounts += 'total '
+            column_names = column_names.replace('dynamic_amounts', amounts)
+        return column_names
 
     @classmethod
     def override_column_headers(self, ar):
         d = dict()
-        if ar.master_instance is not None:
-            for i, a in enumerate(ar.master_instance.get_actors()):
+        eg = ar.master_instance
+        if eg is not None:
+            for i, a in enumerate(eg.budget.get_actors()):
                 d['amount' + str(i)] = a.header
         return d
 
@@ -360,11 +402,11 @@ TODO: more explnations....
     def get_data_rows(self, ar):
         """
         """
-        budget = ar.master_instance
-        if budget is None:
+        eg = ar.master_instance
+        if eg is None:
             return
-        qs = budget.entry_set.filter(
-            account__type=self._account_type).order_by('seqno')
+        qs = eg.budget.entry_set.filter(
+            account__group=eg.group).order_by('seqno')
         if ar.filter:
             qs = qs.filter(ar.filter)
         row = None
@@ -419,6 +461,10 @@ TODO: more explnations....
     def bailiff(self, obj, ar):
         return obj.bailiff
 
+    @dd.virtualfield(dd.PriceField(_("Monthly rate")))
+    def monthly_rate(self, obj, ar):
+        return obj.monthly_rate
+
     # TODO: generate amountN columns dynamically.
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
@@ -441,58 +487,48 @@ TODO: more explnations....
     def amount4(self, obj, ar):
         return obj.amounts[4] / obj.periods
 
-    @dd.virtualfield(dd.PriceField(_("Monthly rate")))
-    def monthly_rate(self, obj, ar):
-        return obj.monthly_rate
+
+if False:
+
+    class PrintIncomesByBudget(PrintEntriesByBudget):
+        _account_type = AccountTypes.incomes
+        column_names = "full_description dynamic_amounts"
 
 
-class PrintIncomesByBudget(PrintEntriesByBudget):
-    _account_type = AccountTypes.incomes
-    column_names = "full_description dynamic_amounts"
+    class PrintExpensesByBudget(PrintEntriesByBudget):
+        _account_type = AccountTypes.expenses
+        column_names = "description remarks yearly_amount:10 dynamic_amounts"
+        # column_names = "full_description dynamic_amounts"
 
 
-class PrintExpensesByBudget(PrintEntriesByBudget):
-    _account_type = AccountTypes.expenses
-    column_names = "description remarks yearly_amount dynamic_amounts"
-    # column_names = "full_description dynamic_amounts"
+    class PrintLiabilitiesByBudget(PrintEntriesByBudget):
+        _account_type = AccountTypes.liabilities
+        column_names = "partner:20 remarks:20 monthly_rate dynamic_amounts"
 
 
-class PrintLiabilitiesByBudget(PrintEntriesByBudget):
-    _account_type = AccountTypes.liabilities
-    column_names = "partner:20 remarks:20 monthly_rate dynamic_amounts"
+    class PrintAssetsByBudget(PrintEntriesByBudget):
+        _account_type = AccountTypes.assets
+        column_names = "full_description dynamic_amounts"
 
+if False:
+    
+    ENTRIES_BY_TYPE_TABLES = (
+        PrintExpensesByBudget,
+        PrintIncomesByBudget,
+        # PrintLiabilitiesByBudget,
+        PrintAssetsByBudget)
 
-class PrintAssetsByBudget(PrintEntriesByBudget):
-    _account_type = AccountTypes.assets
-    column_names = "full_description dynamic_amounts"
+    def entries_table_for_group(group):
+        for t in ENTRIES_BY_TYPE_TABLES:
+            if t._account_type == group.account_type:
+                return t
 
-ENTRIES_BY_TYPE_TABLES = (
-    PrintExpensesByBudget,
-    PrintIncomesByBudget,
-    # PrintLiabilitiesByBudget,
-    PrintAssetsByBudget)
-
-
-def entries_table_for_group(group):
-    for t in ENTRIES_BY_TYPE_TABLES:
-        if t._account_type == group.account_type:
-            return t
-
-
-if False:  # TODO: replace the above by selectable "table layouts"
-
-    class TableLayout(dd.Choice):
-        account_type = None
-        layout_columns = None
-
-    class TableLayouts(dd.ChoiceList):
-        verbose_name = _("Table layout")
-        item_class = TableLayout
-        column_names = 'value name text columns'
-
-        @dd.virtualfield(models.CharField(_("Columns"), max_length=20))
-        def layout_columns(cls, choice, ar):
-            return choice.layout_columns
+# from .choicelists import TableLayouts
+# add = TableLayouts.add_item
+# add(PrintExpensesByBudget)
+# add(PrintIncomesByBudget)
+# add(PrintLiabilitiesByBudget)
+# add(PrintAssetsByBudget)
 
 
 #~ class EntriesSummaryByBudget(EntriesByBudget,EntriesByType):
@@ -504,6 +540,11 @@ class SummaryTable(dd.VirtualTable):
     auto_fit_column_widths = True
     column_names = "desc amount"
     slave_grid_format = 'html'
+
+    @classmethod
+    def get_title_base(self, ar):
+        # we want just "Debts", not "Debts of Budget #3"
+        return self.title or self.label
 
     @dd.displayfield(_("Description"))
     def desc(self, row, ar):
@@ -527,7 +568,6 @@ class SummaryTable(dd.VirtualTable):
                 yield row
 
 
-#~ class BudgetSummary(SummaryTable):
 class ResultByBudget(SummaryTable):
     help_text = _("""Shows the Incomes & Expenses for this budget.""")
     label = _("Incomes & Expenses")
@@ -576,30 +616,25 @@ class ResultByBudget(SummaryTable):
 
 
 class DebtsByBudget(SummaryTable):
-    label = _("Debts")
+    label = _("Liabilities")
     required = dd.required(user_groups='debts')
     master = 'debts.Budget'
-    bailiff_isnull = True
 
     @classmethod
     def get_summary_numbers(self, ar):
         budget = ar.master_instance
         if budget is None:
             return
-        for grp in budget.account_groups('L'):
-            for acc in grp.account_set.all():
+        # for grp in budget.account_groups('L'):
+        for eg in budget.entry_groups(ar, 'L'):
+            if not eg.has_data():
+                continue
+            for acc in eg.group.account_set.all():
                 yield [_("%s (distributable)") % dd.babelattr(acc, 'name'),
-                       budget.sum('amount', account=acc, distribute=True,
-                                  bailiff__isnull=self.bailiff_isnull)]
+                       budget.sum('amount', account=acc, distribute=True)]
                 yield [dd.babelattr(acc, 'name'),
-                       budget.sum('amount', account=acc, distribute=False,
-                                  bailiff__isnull=self.bailiff_isnull)]
+                       budget.sum('amount', account=acc, distribute=False)]
         #~ "Total Kredite / Schulden"
-
-
-class BailiffDebtsByBudget(DebtsByBudget):
-    label = _("Bailiff Debts")
-    bailiff_isnull = False
 
 
 class DistByBudget(EntriesByBudget):

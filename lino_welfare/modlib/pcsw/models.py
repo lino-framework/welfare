@@ -269,7 +269,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         return []
 
     def __unicode__(self):
-        #~ return u"%s (%s)" % (self.get_full_name(salutation=False),self.pk)
         if self.is_obsolete:
             return "%s %s (%s*)" % (
                 self.last_name.upper(), self.first_name, self.pk)

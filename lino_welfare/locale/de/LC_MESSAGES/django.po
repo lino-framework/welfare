@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-17 03:24+0300\n"
-"PO-Revision-Date: 2015-04-17 03:24+0300\n"
+"PO-Revision-Date: 2015-04-19 02:29+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -2113,14 +2113,12 @@ msgid "Total"
 msgstr ""
 
 #: lino_welfare/modlib/debts/ui.py:405
-#, fuzzy
 msgid "Yearly amount"
-msgstr "Standard-Betrag"
+msgstr "Jährl. Betrag"
 
 #: lino_welfare/modlib/debts/ui.py:489
-#, fuzzy
 msgid "Table layout"
-msgstr "Verteilbarer Betrag"
+msgstr "Tabellenlayout"
 
 #: lino_welfare/modlib/debts/ui.py:493
 msgid "Columns"

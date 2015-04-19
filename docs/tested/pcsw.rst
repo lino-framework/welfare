@@ -267,7 +267,7 @@ removed at the same time:
 >>> ar = contacts.Partners.request_from(ses)
 >>> ar.renderer = settings.SITE.kernel.extjs_renderer
 >>> print(E.tostring(ar.obj2html(p)))
-<a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER (178)</a>
+<a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER</a>
 
 >>> print(E.tostring(ar.obj2html(cli)))
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>

@@ -30,6 +30,7 @@ from lino.modlib.users.mixins import UserAuthored
 
 from .fields import PeriodsField
 from .mixins import SequencedBudgetComponent, ActorBase, MainActor
+from .choicelists import TableLayouts
 
 from django.db import transaction
 
@@ -157,33 +158,55 @@ The total monthly amount available for debts distribution."""))
     def actor3(self):
         return self.get_actor(2)
 
+    def entry_groups(self, ar, types=None, **kw):
+        if types is not None:
+            kw.update(
+                account_type__in=[AccountTypes.items_dict[t] for t in types])
+        Group = rt.modules.accounts.Group
+        for g in Group.objects.filter(**kw).order_by('ref'):
+            eg = EntryGroup(self, g, ar)
+            if eg.has_data():
+                yield eg
+            # qs = Entry.objects.filter(budget=self, account__group=g)
+            # if qs.count():
+            #     yield EntryGroup(self, g, qs)
+
     def account_groups(self, types=None, **kw):
-        """
-        Yield all AccountGroups which have at least one Entry in this Budget.
+        """Yield all AccountGroups which have at least one entry in this
+        Budget.
+
+        Parameters:
+
+            types: an optional string specifying a set of one-letter
+                   account type names. See :class: `AccountTypes
+                   <lino.modlib.accounts.choicelists.AccountTypes>`.
+
         """
         if types is not None:
             kw.update(account_type__in=[AccountTypes.items_dict[t]
                       for t in types])
-        #~ for t in types:
-        #~ types = [AccountTypes.items_dict[t] for t in types]
-        #~ types = [t for t in types]
         Group = rt.modules.accounts.Group
-        for g in Group.objects.filter(
-                **kw).order_by('ref'):
+        for g in Group.objects.filter(**kw).order_by('ref'):
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
 
-    def entries_by_group(self, ar, group, **kw):
-        """
-        Return a TableRequest showing the Entries for the given `group`,
-        using the table layout depending on AccountType.
-        Shows all Entries of the specified `accounts.Group`.
+    def unused_entries_by_group(self, ar, group, **kw):
+        """Return a TableRequest showing the entries of this budget for the
+        given `group`, using the table layout depending on
+        AccountType.
+
+        Parameters:
+ 
+            ar: the ActionRequest
+
+            group: an instance of :class:`accounts.Group
+                   <lino.modlib.accounts.models.Group>` .
+
         """
         t = entries_table_for_group(group)
         #~ print '20130327 entries_by_group', self, t
         if t is None:
             return None
-        # ar = t.request(self,
         ar = ar.spawn(t,
                       master_instance=self,
                       title=unicode(group),
@@ -293,11 +316,11 @@ The total monthly amount available for debts distribution."""))
 
     @dd.htmlbox(_("Entered data"))
     def data_box(self, ar):
-        return E.div(*ar.story2html(self.data_story(ar)))
+        return E.div(*tuple(ar.story2html(self.data_story(ar))))
 
     @dd.htmlbox(pgettext("debts", "Summary"))
     def summary_box(self, ar):
-        return E.div(*ar.story2html(self.summary_story(ar)))
+        return E.div(*tuple(ar.story2html(self.summary_story(ar))))
 
     def data_story(self, ar):
         # logger.info("20141211 insert_story")
@@ -311,20 +334,27 @@ The total monthly amount available for debts distribution."""))
                 yield E.h3(sar.get_title())
                 yield sar
             
-        for group in self.account_groups('IEAC'):
-            yield render(self.entries_by_group(ar, group))
+        if True:  # since 201504
+            for eg in self.entry_groups(ar):
+                yield render(eg.action_request)
+                
+            # for group in self.account_groups():
+            #     yield render(self.entries_by_group(ar, group))
+        else:
+            for group in self.account_groups('IEAC'):
+                yield render(self.entries_by_group(ar, group))
 
-        sar = ar.spawn(PrintLiabilitiesByBudget,
-                       master_instance=self,
-                       filter=models.Q(bailiff__isnull=True))
-        yield render(sar)
-        qs = Company.objects.filter(bailiff_debts_set__budget=self).distinct()
-        for bailiff in qs:
             sar = ar.spawn(PrintLiabilitiesByBudget,
                            master_instance=self,
-                           filter=models.Q(bailiff=bailiff))
-            yield E.h3(_("Liabilities (%s)") % bailiff)
-            yield sar
+                           filter=models.Q(bailiff__isnull=True))
+            yield render(sar)
+            qs = Company.objects.filter(bailiff_debts_set__budget=self).distinct()
+            for bailiff in qs:
+                sar = ar.spawn(PrintLiabilitiesByBudget,
+                               master_instance=self,
+                               filter=models.Q(bailiff=bailiff))
+                yield E.h3(_("Liabilities (%s)") % bailiff)
+                yield sar
 
     def summary_story(self, ar):
 
@@ -336,7 +366,6 @@ The total monthly amount available for debts distribution."""))
 
         yield render(ResultByBudget)
         yield render(DebtsByBudget)
-        yield render(BailiffDebtsByBudget)
         yield render(DistByBudget)
 
 
@@ -405,14 +434,13 @@ sich nicht auf den Gesamthaushalt bezieht.""")
         _("Distribute"),
         default=False,
         help_text=u"""\
-Ob diese Schuld in die Schuldenverteilung aufgeommen wird oder nicht."""
+Ob diese Schuld in die Schuldenverteilung aufgenommen wird oder nicht."""
     )
     todo = models.CharField(
         verbose_name=_("To Do"), max_length=200, blank=True)
     remark = models.CharField(_("Remark"),
                               max_length=200, blank=True,
-        help_text=u"""\
-Bemerkungen sind intern und werden nie ausgedruckt.""")
+        help_text=u"Bemerkungen sind intern und werden nie ausgedruckt.")
     description = models.CharField(_("Description"),
                                    max_length=200, blank=True,
         help_text=u"""\
@@ -549,8 +577,7 @@ dd.inject_field(
     'pcsw.ClientContactType',
     'is_bailiff',
     models.BooleanField(
-        _("Debt collection agency"), default=False)
-)
+        _("Debt collection agency"), default=False))
 
 # dd.inject_field(
 #     'system.SiteConfig',
@@ -576,21 +603,21 @@ dd.inject_field(
 dd.inject_field('accounts.Account',
                 'required_for_household',
                 models.BooleanField(
-                    _("Required for Households"), default=False)
-                )
+                    _("Required for Households"), default=False))
 dd.inject_field('accounts.Account',
                 'required_for_person',
                 models.BooleanField(
-                    _("Required for Persons"), default=False)
-                )
+                    _("Required for Persons"), default=False))
 dd.inject_field('accounts.Account',
                 'periods',
-                PeriodsField(_("Periods"))
-                )
+                PeriodsField(_("Periods")))
 dd.inject_field('accounts.Account',
                 'default_amount',
-                dd.PriceField(_("Default amount"), blank=True, null=True)
-                )
+                dd.PriceField(_("Default amount"), blank=True, null=True))
+
+dd.inject_field('accounts.Group',
+                'entries_layout',
+                TableLayouts.field(_("Budget entries layout"), blank=True))
 
 
 def site_setup(site):
@@ -607,7 +634,7 @@ def site_setup(site):
     #~ site.modules.accounts.Accounts.set_required(
         #~ user_groups=['debts'],user_level='manager')
 
-    cn = "ref name default_amount periods required_for_household required_for_person group "
+    cn = "ref name default_amount periods required_for_household required_for_person group *"
     site.modules.accounts.Accounts.column_names = cn
     site.modules.accounts.AccountsByGroup.column_names = cn
 
@@ -617,6 +644,17 @@ def site_setup(site):
     required_for_household required_for_person periods default_amount
     debts.EntriesByAccount
     """)
+
+    site.modules.accounts.Groups.column_names = \
+        'chart ref name account_type entries_layout *'
+    site.modules.accounts.Groups.set_detail_layout("""
+    ref name id
+    account_type entries_layout
+    AccountsByGroup
+    """)
+
+    site.modules.accounts.GroupsByChart.column_names = \
+        'ref name account_type entries_layout *'
 
 
 # There are no `message_extractors` for `.odt` files. One workaround

@@ -35,9 +35,9 @@ result:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               14        49
+ accounts.Account               accounts.Accounts               14        51
  accounts.Chart                 accounts.Charts                 5         1
- accounts.Group                 accounts.Groups                 8         7
+ accounts.Group                 accounts.Groups                 9         8
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
@@ -97,7 +97,7 @@ result:
  cv.Training                    cv.Trainings                    16        0
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
- debts.Entry                    debts.Entries                   16        686
+ debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.ExcerptsByX            12        89
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
@@ -184,7 +184,7 @@ changes.
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> rt.show(about.WindowActions)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_CDIFF -SKIP
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | Name                                            | Viewable for                        | Fields                                             |
 +=================================================+=====================================+====================================================+
@@ -202,7 +202,8 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | accounts.Charts.insert                          | all except anonymous                | name name_fr name_de name_nl                       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| accounts.Groups.detail                          | admin                               | ref name name_fr name_de name_nl account_type id   |
+| accounts.Groups.detail                          | admin                               | ref name name_fr name_de name_nl id account_type   |
+|                                                 |                                     | entries_layout                                     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | accounts.Groups.insert                          | all except anonymous                | name name_fr name_de name_nl account_type ref      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -436,9 +437,8 @@ changes.
 |                                                 |                                     | sector function school country city                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | debts.Budgets.detail                            | admin                               | date partner id user intro ResultByBudget          |
-|                                                 |                                     | DebtsByBudget BailiffDebtsByBudget conclusion      |
-|                                                 |                                     | dist_amount printed total_debt                     |
-|                                                 |                                     | include_yearly_incomes print_empty_rows            |
+|                                                 |                                     | DebtsByBudget conclusion dist_amount printed       |
+|                                                 |                                     | total_debt include_yearly_incomes print_empty_rows |
 |                                                 |                                     | print_todos DistByBudget data_box summary_box      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | debts.Budgets.insert                            | 300, admin                          | partner date user                                  |

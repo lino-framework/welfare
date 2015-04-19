@@ -10,6 +10,12 @@ Jobs
 
   $ python setup.py test -s tests.DocsTests.test_jobs
 
+.. contents::
+   :local:
+   :depth: 2
+
+
+
 About this document
 ===================
 
@@ -29,18 +35,18 @@ Jobs
 >>> with translation.override('de'):
 ...     ses.show(jobs.Jobs, column_names="function provider sector")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================= ====================================== ===========================
- Funktion          Stellenanbieter                        Sektor
------------------ -------------------------------------- ---------------------------
- Kellner           BISA (196)                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum (197)    Horeca
- Koch              R-Cycle Sperrgutsortierzentrum (197)    Seefahrt
- Koch              Pro Aktiv V.o.G. (199)                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G. (199)                  Medizin & Paramedizin
- Küchenassistent   BISA (196)                              Reinigung
- Tellerwäscher     BISA (196)                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum (197)    Transport
-================= ====================================== ===========================
+================= ================================ ===========================
+ Funktion          Stellenanbieter                  Sektor
+----------------- -------------------------------- ---------------------------
+ Kellner           BISA                              Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum    Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum    Seefahrt
+ Koch              Pro Aktiv V.o.G.                  Unterricht
+ Küchenassistent   Pro Aktiv V.o.G.                  Medizin & Paramedizin
+ Küchenassistent   BISA                              Reinigung
+ Tellerwäscher     BISA                              Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum    Transport
+================= ================================ ===========================
 <BLANKLINE>
 
 
@@ -52,11 +58,11 @@ Job Offers
 
 >>> # settings.SITE.catch_layout_exceptions = False
 >>> jobs.Offers.show() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========================== ========== ======================== ======================== ================ ============== =============
- ID   Sektor                     Funktion   Name                     Stellenanbieter          Beginn Auswahl   Ende Auswahl   Beginndatum
----- -------------------------- ---------- ------------------------ ------------------------ ---------------- -------------- -------------
- 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G. (...)   ...              ...            ...     
-==== ========================== ========== ======================== ======================== ================ ============== =============
+==== ========================== ========== ======================== ================== ================ ============== =============
+ ID   Sektor                     Funktion   Name                     Stellenanbieter    Beginn Auswahl   Ende Auswahl   Beginndatum
+---- -------------------------- ---------- ------------------------ ------------------ ---------------- -------------- -------------
+ 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   ...              ...            ...     
+==== ========================== ========== ======================== ================== ================ ============== =============
 <BLANKLINE>
 
 
@@ -71,12 +77,12 @@ Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-============ ========== ==================== ===================================== ==========================
- Beginnt am   Enddatum   Klient               Firma                                 Land
------------- ---------- -------------------- ------------------------------------- --------------------------
- 07.02.11     07.02.11   LAZARUS Line (144)   Belgisches Rotes Kreuz (100)          Afghanistan
- 04.04.11     04.04.11   JONAS Josef (139)    Beschützende Werkstätte Eupen (202)   Britische Jungferninseln
-============ ========== ==================== ===================================== ==========================
+============ ========== ==================== =============================== ==========================
+ Beginnt am   Enddatum   Klient               Firma                           Land
+------------ ---------- -------------------- ------------------------------- --------------------------
+ 07.02.11     07.02.11   LAZARUS Line (144)   Belgisches Rotes Kreuz          Afghanistan
+ 04.04.11     04.04.11   JONAS Josef (139)    Beschützende Werkstätte Eupen   Britische Jungferninseln
+============ ========== ==================== =============================== ==========================
 <BLANKLINE>
 
 

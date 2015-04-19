@@ -32,7 +32,7 @@ Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links.
 
 >>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
-Mr Paul FRISCH (238)
+Mr Paul FRISCH
 
 >>> client = Client()
 >>> def check(uri, fieldname):
@@ -72,14 +72,14 @@ together. Their children have moved out.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Hubert")
 >>> print(obj)
-Mr Hubert FRISCH (236)
+Mr Hubert FRISCH
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
-========== =================== =============== ========================== ============ =========== ============ ========
- Age        Role                Dependency      Person                     First name   Last name   Birth date   Gender
----------- ------------------- --------------- -------------------------- ------------ ----------- ------------ --------
- 80 years   Head of household   Not at charge   Mr Hubert FRISCH (236)     Hubert       Frisch      1933-07-21   Male
- 79 years   Partner             Not at charge   Mrs Gaby FROGEMUTH (237)   Gaby         Frogemuth   1934-08-04   Female
-========== =================== =============== ========================== ============ =========== ============ ========
+========== =================== =============== ==================== ============ =========== ============ ========
+ Age        Role                Dependency      Person               First name   Last name   Birth date   Gender
+---------- ------------------- --------------- -------------------- ------------ ----------- ------------ --------
+ 80 years   Head of household   Not at charge   Mr Hubert FRISCH     Hubert       Frisch      1933-07-21   Male
+ 79 years   Partner             Not at charge   Mrs Gaby FROGEMUTH   Gaby         Frogemuth   1934-08-04   Female
+========== =================== =============== ==================== ============ =========== ============ ========
 <BLANKLINE>
 
 Paul Frisch is married with Petra Zweith and has a child from divorced
@@ -87,17 +87,17 @@ marriage with Paula Einzig.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Paul")
 >>> print(obj)
-Mr Paul FRISCH (238)
+Mr Paul FRISCH
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
-========== =================== ================ ========================== ============ =========== ============ ========
- Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
----------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Head of household   Not at charge    Mr Paul FRISCH (238)       Paul         Frisch      1967-06-19   Male
- 45 years   Partner             Not at charge    Mrs Petra ZWEITH (244)     Petra        Zweith      1968-12-19   Female
- 16 years   Child               At full charge   Mr Philippe FRISCH (245)   Philippe     Frisch      1997-06-19   Male
- 14 years   Child               At full charge   Mrs Clara FRISCH (246)     Clara        Frisch      1999-06-19   Female
- 12 years   Child               At full charge   Mr Dennis FRISCH (248)     Dennis       Frisch      2001-06-19   Male
-========== =================== ================ ========================== ============ =========== ============ ========
+========== =================== ================ ==================== ============ =========== ============ ========
+ Age        Role                Dependency       Person               First name   Last name   Birth date   Gender
+---------- ------------------- ---------------- -------------------- ------------ ----------- ------------ --------
+ 46 years   Head of household   Not at charge    Mr Paul FRISCH       Paul         Frisch      1967-06-19   Male
+ 45 years   Partner             Not at charge    Mrs Petra ZWEITH     Petra        Zweith      1968-12-19   Female
+ 16 years   Child               At full charge   Mr Philippe FRISCH   Philippe     Frisch      1997-06-19   Male
+ 14 years   Child               At full charge   Mrs Clara FRISCH     Clara        Frisch      1999-06-19   Female
+ 12 years   Child               At full charge   Mr Dennis FRISCH     Dennis       Frisch      2001-06-19   Male
+========== =================== ================ ==================== ============ =========== ============ ========
 <BLANKLINE>
 
 Here is their :class:`welfare.households.RefundsByPerson`:
@@ -121,16 +121,16 @@ with their two children.
 
 >>> obj = contacts.Person.objects.get(name="Frisch Ludwig")
 >>> print(obj)
-Mr Ludwig FRISCH (239)
+Mr Ludwig FRISCH
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
-========== =================== ================ ========================== ============ =========== ============ ========
- Age        Role                Dependency       Person                     First name   Last name   Birth date   Gender
----------- ------------------- ---------------- -------------------------- ------------ ----------- ------------ --------
- 46 years   Partner             Not at charge    Mrs Laura LOSLEVER (249)   Laura        Loslever    1968-04-27   Female
- 46 years   Head of household   Not at charge    Mr Ludwig FRISCH (239)     Ludwig       Frisch      1968-06-01   Male
- 12 years   Child               At full charge   Mrs Melba FRISCH (250)     Melba        Frisch      2002-04-05   Female
- 6 years    Child               At full charge   Mrs Irma FRISCH (251)      Irma         Frisch      2008-03-24   Female
-========== =================== ================ ========================== ============ =========== ============ ========
+========== =================== ================ ==================== ============ =========== ============ ========
+ Age        Role                Dependency       Person               First name   Last name   Birth date   Gender
+---------- ------------------- ---------------- -------------------- ------------ ----------- ------------ --------
+ 46 years   Partner             Not at charge    Mrs Laura LOSLEVER   Laura        Loslever    1968-04-27   Female
+ 46 years   Head of household   Not at charge    Mr Ludwig FRISCH     Ludwig       Frisch      1968-06-01   Male
+ 12 years   Child               At full charge   Mrs Melba FRISCH     Melba        Frisch      2002-04-05   Female
+ 6 years    Child               At full charge   Mrs Irma FRISCH      Irma         Frisch      2008-03-24   Female
+========== =================== ================ ==================== ============ =========== ============ ========
 <BLANKLINE>
 
 

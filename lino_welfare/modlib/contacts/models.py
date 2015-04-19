@@ -18,7 +18,7 @@ from lino.modlib.addresses.mixins import AddressOwner
 
 
 class Partner(
-        Partner, 
+        Partner,
         AddressOwner, mixins.CreatedModified, dd.ImportedFields):
 
     """
@@ -76,10 +76,15 @@ für neue Operationen nicht benutzt werden können.""")
         return super(Partner, self).disable_delete(ar)
 
     def __unicode__(self):
-        s = self.get_full_name(nominative=True)
-        if self.is_obsolete:
-            return "%s (%s*)" % (s, self.pk)
-        return "%s (%s)" % (s, self.pk)
+        # 20150419 : print partner id only for clients because the
+        # numbers become annoying when printing a debts.Budget.
+        return self.get_full_name(nominative=True)
+
+    # def __unicode__(self):
+    #     s = self.get_full_name(nominative=True)
+    #     if self.is_obsolete:
+    #         return "%s (%s*)" % (s, self.pk)
+    #     return "%s (%s)" % (s, self.pk)
 
 
 class PartnerDetail(PartnerDetail):

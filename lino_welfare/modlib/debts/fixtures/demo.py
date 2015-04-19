@@ -12,6 +12,7 @@ from django.utils.translation import ugettext as _
 
 from lino.core.utils import resolve_model
 from lino.utils import Cycler
+from lino.api import rt
 
 from lino.modlib.accounts.choicelists import AccountTypes
 
@@ -30,29 +31,30 @@ def objects():
         #~ debts_level=UserLevel.user)
     yield kerstin
 
-    Household = resolve_model('households.Household')
-    Budget = resolve_model('debts.Budget')
-    Actor = resolve_model('debts.Actor')
+    Household = rt.modules.households.Household
+    Budget = rt.modules.debts.Budget
     for hh in Household.objects.all():
         b = Budget(partner_id=hh.id, user=kerstin)
         b.fill_defaults(None)
         yield b
 
-    Budget = resolve_model('debts.Budget')
-    Entry = resolve_model('debts.Entry')
-    Account = resolve_model('accounts.Account')
-    Company = resolve_model('contacts.Company')
+    Entry = rt.modules.debts.Entry
+    Account = rt.modules.accounts.Account
+    Company = rt.modules.contacts.Company
     INCOME_AMOUNTS = Cycler([i * 200 for i in range(8)])
     EXPENSE_AMOUNTS = Cycler([i * 5.24 for i in range(10)])
     DEBT_AMOUNTS = Cycler([(i + 1) * 300 for i in range(5)])
+    DEBT_ENTRIES = Cycler([4, 8, 5, 3, 12, 5])
     PARTNERS = Cycler(Company.objects.all())
     LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liabilities))
     EXPENSE_REMARKS = Cycler(_("Shopping"), _("Cinema"), _("Seminar"))
+    # qs = rt.modules.contacts.Companies.request().data_iterator
+    # qs = qs.filter(client_contact_type__is_bailiff=True)
+    BAILIFFS = Cycler(
+        Company.objects.filter(client_contact_type__is_bailiff=True))
 
     for b in Budget.objects.all():
-        #~ n = min(3,b.actor_set.count())
         for e in b.entry_set.all():
-            #~ for i in range(n):
             if e.account.type == AccountTypes.incomes:
                 amount = INCOME_AMOUNTS.pop()
             elif e.account.type == AccountTypes.expenses:
@@ -65,16 +67,18 @@ def objects():
                 for a in b.actor_set.all():
                     e.amount = n2dec(amount)
                     e.actor = a
-            # ~ e.account_changed(None) # set description
             e.save()
         ACTORS = Cycler(None, *[a for a in b.actor_set.all()])
-        for i in range(4):
+        for i in range(DEBT_ENTRIES.pop()):
             amount = int(DEBT_AMOUNTS.pop())
+            account = LIABILITIES.pop()
             kw = dict(budget=b,
-                      account=LIABILITIES.pop(),
+                      account=account,
                       partner=PARTNERS.pop(),
                       amount=amount,
                       actor=ACTORS.pop())
+            if account.ref.startswith('71'):
+                kw.update(bailiff=BAILIFFS.pop())
             if amount > 600:
                 kw.update(distribute=True)
             else:

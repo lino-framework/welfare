@@ -19,11 +19,20 @@ Debts mediation
     >>> ses = rt.login('rolf')
     >>> translation.activate('de')
     
+.. contents::
+   :local:
+   :depth: 2
+
+
+Budgets
+=======
+    
 The :mod:`lino_welfare.modlib.debts` modules adds functionality for
 managing "budgets". A :class:`Budget
 <lino_welfare.modlib.debts.modles.Budget>` is a document based on
 financial data about a person or household.  It is just about entering
 this data and then printing it.
+
 
 The demo database has 14 such documents with fictive generated data:
 
@@ -34,7 +43,7 @@ For the following examples we will use budget no. 3:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen (232)')
+Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen')
 
 Actors
 ======
@@ -51,19 +60,18 @@ used in templates. For example, every actor has four attributes
 
 >>> u = attrtable(obj.get_actors(), 'header person client household')
 >>> print(u)
-... #doctest: +REPORT_UDIFF
-=========== ============================= ======================== ====================================
- header      person                        client                   household
------------ ----------------------------- ------------------------ ------------------------------------
- Gemeinsam   None                          None                     Jérôme & Theresia Jeanémart-Thelen
- Mr.         Herr Jérôme JEANÉMART (181)   JEANÉMART Jérôme (181)   None
- Mrs.        Frau Theresia THELEN (193)    None                     None
-=========== ============================= ======================== ====================================
+=========== ======================= ======================== ====================================
+ header      person                  client                   household
+----------- ----------------------- ------------------------ ------------------------------------
+ Gemeinsam   None                    None                     Jérôme & Theresia Jeanémart-Thelen
+ Mr.         Herr Jérôme JEANÉMART   JEANÉMART Jérôme (181)   None
+ Mrs.        Frau Theresia THELEN    None                     None
+=========== ======================= ======================== ====================================
 <BLANKLINE>
 
 
-Expenses
-========
+Data entry panels
+=================
 
 Here is the textual representation of the "Expenses" panel:
 
@@ -99,6 +107,10 @@ Description and Remark have been entererd for this particular Budget
 instance and are therefore in the partner's language. Everything else
 depends on the current user language.
 
+
+The summary panel
+=================
+
 Here are some more slave tables.
 
 >>> ses.show(debts.ResultByBudget.request(obj))
@@ -128,49 +140,72 @@ Here are some more slave tables.
 <BLANKLINE>
 
 >>> ses.show(debts.DebtsByBudget.request(obj))
-================================= ==============
- Beschreibung                      Betrag
---------------------------------- --------------
- Kredite (verteilbar)              1 500,00
- Schulden                          300,00
- Zahlungsrückstände (verteilbar)   1 200,00
- Zahlungsrückstände                600,00
- **Schulden**                      **3 600,00**
-================================= ==============
+================================== ==============
+ Beschreibung                       Betrag
+---------------------------------- --------------
+ Kredite                            300,00
+ Schulden                           600,00
+ Zahlungsrückstände (verteilbar)    900,00
+ Gerichtsvollzieher (verteilbar)    1 200,00
+ Inkasso-Unternehmen (verteilbar)   1 500,00
+ **Verpflichtungen**                **4 500,00**
+================================== ==============
 <BLANKLINE>
 
 >>> with translation.override('en'):
-...     ses.show(debts.PrintLiabilitiesByBudget.request(obj))
-================================= ========= ============== ============== ============== ============ ==============
- Partner                           Remarks   Monthly rate   Common         Mr.            Mrs.         Total
---------------------------------- --------- -------------- -------------- -------------- ------------ --------------
- Hans Flott & Co (108)                                      1 200,00                                   1 200,00
- Bernd Brechts Bücherladen (109)                                           1 500,00                    1 500,00
- Reinhards Baumschule (110*)                 15,00                                        300,00       300,00
- Moulin Rouge (111)                          30,00          600,00                                     600,00
- **Total (4 rows)**                          **45,00**      **1 800,00**   **1 500,00**   **300,00**   **3 600,00**
-================================= ========= ============== ============== ============== ============ ==============
+...     ses.show(debts.DebtsByBudget.request(obj))
+================================= ==============
+ Description                       Amount
+--------------------------------- --------------
+ Loans                             300,00
+ Debts                             600,00
+ Invoices to pay (distributable)   900,00
+ Bailiff (distributable)           1 200,00
+ Cash agency (distributable)       1 500,00
+ **Liabilities**                   **4 500,00**
+================================= ==============
 <BLANKLINE>
 
 >>> with translation.override('en'):
 ...     ses.show(debts.DistByBudget.request(obj))
-================================= ================= ============== ============ ===========================
- Creditor                          Description       Debt           %            Monthly payback suggested
---------------------------------- ----------------- -------------- ------------ ---------------------------
- Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
- Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
- **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
-================================= ================= ============== ============ ===========================
+==================== ================= ============== ============ ===========================
+ Creditor             Description       Debt           %            Monthly payback suggested
+-------------------- ----------------- -------------- ------------ ---------------------------
+ Auto École Verte     Invoices to pay   900,00         25,00        30,00
+ AS Express Post      Bailiff           1 200,00       33,33        40,00
+ AS Matsalu Veevärk   Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
+==================== ================= ============== ============ ===========================
 <BLANKLINE>
+
+The printed document
+====================
 
 The following table shows how Lino renders remarks in the printed
 version: they are added to the description between parentheses
 (e.g. "Spare time"), and if several entries were grouped into a same
 printable row (e.g. "Fahrtkosten"), they are separated by commas.
 
->>> groups = list(obj.account_groups())
+>>> groups = list(obj.entry_groups(ses))
 >>> with translation.override('en'):
-...     ses.show(obj.entries_by_group(ses, groups[2]))
+...     ses.show(groups[0].action_request)
+... #doctest: +REPORT_UDIFF
+==================== ======== ===== ============== ==============
+ Description          Common   Mr.   Mrs.           Total
+-------------------- -------- ----- -------------- --------------
+ Salaries                            800,00         800,00
+ Pension                             1 000,00       1 000,00
+ Integration aid                     1 200,00       1 200,00
+ Ersatzeinkünfte                     1 400,00       1 400,00
+ Chèques-repas                       200,00         200,00
+ Andere                              400,00         400,00
+ **Total (6 rows)**                  **5 000,00**   **5 000,00**
+==================== ======== ===== ============== ==============
+<BLANKLINE>
+
+>>> with translation.override('en'):
+...     ses.show(groups[2].action_request)
+... #doctest: +REPORT_UDIFF
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
@@ -204,26 +239,28 @@ Something in French
 
 >>> with translation.override('fr'):
 ...    ses.show(debts.DistByBudget.request(obj))
-================================= ================= ============== ============ =======================
- Créancier                         Description       Dette          %            Remboursement mensuel
---------------------------------- ----------------- -------------- ------------ -----------------------
- Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
- Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
- **Total (2 lignes)**                                **2 700,00**   **100,00**   **120,00**
-================================= ================= ============== ============ =======================
+====================== ================= ============== ============ =======================
+ Créancier              Description       Dette          %            Remboursement mensuel
+---------------------- ----------------- -------------- ------------ -----------------------
+ Auto École Verte       Invoices to pay   900,00         25,00        30,00
+ AS Express Post        Bailiff           1 200,00       33,33        40,00
+ AS Matsalu Veevärk     Cash agency       1 500,00       41,67        50,00
+ **Total (3 lignes)**                     **3 600,00**   **100,00**   **120,00**
+====================== ================= ============== ============ =======================
 <BLANKLINE>
 
 Or the same in English:
 
 >>> with translation.override('en'):
 ...     ses.show(debts.DistByBudget.request(obj))
-================================= ================= ============== ============ ===========================
- Creditor                          Description       Debt           %            Monthly payback suggested
---------------------------------- ----------------- -------------- ------------ ---------------------------
- Hans Flott & Co (108)             Invoices to pay   1 200,00       44,44        53,33
- Bernd Brechts Bücherladen (109)   Loans             1 500,00       55,56        66,67
- **Total (2 rows)**                                  **2 700,00**   **100,00**   **120,00**
-================================= ================= ============== ============ ===========================
+==================== ================= ============== ============ ===========================
+ Creditor             Description       Debt           %            Monthly payback suggested
+-------------------- ----------------- -------------- ------------ ---------------------------
+ Auto École Verte     Invoices to pay   900,00         25,00        30,00
+ AS Express Post      Bailiff           1 200,00       33,33        40,00
+ AS Matsalu Veevärk   Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
+==================== ================= ============== ============ ===========================
 <BLANKLINE>
 
 Note that the Description still shows German words because these are stored per Budget, 
@@ -259,7 +296,7 @@ True
 False
 >>> debts.LiabilitiesByBudget.editable
 True
->>> debts.PrintLiabilitiesByBudget.editable
+>>> debts.PrintEntriesByBudget.editable
 False
 
 

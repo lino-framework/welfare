@@ -151,16 +151,16 @@ Responses
 
 
 >>> rt.login('romain').show(polls.Responses)
-==== ================= ====== ========= ============ =================== ===========================
+==== ================= ====== ========= ============ =================== =====================
  ID   Author            Poll   Date      State        My general remark   Partner
----- ----------------- ------ --------- ------------ ------------------- ---------------------------
- 1    Alicia Allmanns   INI    3/3/14    Registered                       Ausdemwald Alfons (116)
- 2    Alicia Allmanns   RAE    3/3/14    Registered                       Ausdemwald Alfons (116)
- 3    Alicia Allmanns   RAE    4/2/14    Draft                            Ausdemwald Alfons (116)
- 5    Alicia Allmanns   INI    4/22/14   Registered                       Bastiaensen Laurent (117)
- 4    Alicia Allmanns   RAE    5/2/14    Draft                            Ausdemwald Alfons (116)
- 6    Alicia Allmanns   RAE    5/2/14    Registered                       Bastiaensen Laurent (117)
-==== ================= ====== ========= ============ =================== ===========================
+---- ----------------- ------ --------- ------------ ------------------- ---------------------
+ 1    Alicia Allmanns   INI    3/3/14    Registered                       Ausdemwald Alfons
+ 2    Alicia Allmanns   RAE    3/3/14    Registered                       Ausdemwald Alfons
+ 3    Alicia Allmanns   RAE    4/2/14    Draft                            Ausdemwald Alfons
+ 5    Alicia Allmanns   INI    4/22/14   Registered                       Bastiaensen Laurent
+ 4    Alicia Allmanns   RAE    5/2/14    Draft                            Ausdemwald Alfons
+ 6    Alicia Allmanns   RAE    5/2/14    Registered                       Bastiaensen Laurent
+==== ================= ====== ========= ============ =================== =====================
 <BLANKLINE>
 
 >>> obj = polls.Response.objects.get(id=3)
