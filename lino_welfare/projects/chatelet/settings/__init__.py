@@ -79,7 +79,7 @@ class Site(Site):
         add('900', _("Administrator"),               'A A A A A A A A U',
             name='admin')
 
-    def get_admin_main_items(self):
+    def get_admin_main_items(self, ar):
 
         # Mathieu: je remarque que le module "Visiteurs qui
         # m'attendent" ne fonctionne plus. Hors, c'est surtout ce

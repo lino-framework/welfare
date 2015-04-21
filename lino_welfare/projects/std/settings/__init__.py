@@ -177,7 +177,7 @@ class Site(Site):
         yield 'lino.modlib.plausibility'
         yield 'lino.modlib.tinymce'
 
-    def get_admin_main_items(self):
+    def get_admin_main_items(self, ar):
         """Returns the items of the admin index page:
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`

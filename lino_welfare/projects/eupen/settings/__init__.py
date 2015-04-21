@@ -34,7 +34,7 @@ class Site(Site):
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         return kw
 
-    def get_admin_main_items(self):
+    def get_admin_main_items(self, ar):
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
