@@ -184,7 +184,7 @@ changes.
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> rt.show(about.WindowActions)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_CDIFF -SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | Name                                            | Viewable for                        | Fields                                             |
 +=================================================+=====================================+====================================================+
@@ -437,8 +437,9 @@ changes.
 |                                                 |                                     | sector function school country city                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | debts.Budgets.detail                            | admin                               | date partner id user intro ResultByBudget          |
-|                                                 |                                     | DebtsByBudget conclusion dist_amount printed       |
-|                                                 |                                     | total_debt include_yearly_incomes print_empty_rows |
+|                                                 |                                     | DebtsByBudget AssetsByBudgetSummary conclusion     |
+|                                                 |                                     | dist_amount printed total_debt                     |
+|                                                 |                                     | include_yearly_incomes print_empty_rows            |
 |                                                 |                                     | print_todos DistByBudget data_box summary_box      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | debts.Budgets.insert                            | 300, admin                          | partner date user                                  |

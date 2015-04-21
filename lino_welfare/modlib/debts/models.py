@@ -365,6 +365,7 @@ The total monthly amount available for debts distribution."""))
 
         yield render(ResultByBudget)
         yield render(DebtsByBudget)
+        yield render(AssetsByBudget)
         yield render(DistByBudget)
 
 

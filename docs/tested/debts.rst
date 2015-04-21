@@ -189,22 +189,22 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 >>> groups = list(obj.entry_groups(ses))
 >>> with translation.override('en'):
 ...     ses.show(groups[0].action_request)
-... #doctest: +REPORT_UDIFF
-==================== ======== ===== ============== ==============
- Description          Common   Mr.   Mrs.           Total
--------------------- -------- ----- -------------- --------------
- Salaries                            800,00         800,00
- Pension                             1 000,00       1 000,00
- Integration aid                     1 200,00       1 200,00
- Ersatzeinkünfte                     1 400,00       1 400,00
- Chèques-repas                       200,00         200,00
- Andere                              400,00         400,00
- **Total (6 rows)**                  **5 000,00**   **5 000,00**
-==================== ======== ===== ============== ==============
+... #doctest: -REPORT_UDIFF
+==================== ========= ======== ===== ============== ==============
+ Description          Remarks   Common   Mr.   Mrs.           Total
+-------------------- --------- -------- ----- -------------- --------------
+ Salaries                                      800,00         800,00
+ Pension                                       1 000,00       1 000,00
+ Integration aid                               1 200,00       1 200,00
+ Ersatzeinkünfte                               1 400,00       1 400,00
+ Chèques-repas                                 200,00         200,00
+ Andere                                        400,00         400,00
+ **Total (6 rows)**                            **5 000,00**   **5 000,00**
+==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
 
 >>> with translation.override('en'):
-...     ses.show(groups[2].action_request)
+...     ses.show(groups[1].action_request)
 ... #doctest: +REPORT_UDIFF
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
@@ -232,6 +232,20 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  **Total (20 rows)**                                       **565,00**                **565,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
+
+>>> with translation.override('en'):
+...     ses.show(groups[2].action_request)
+... #doctest: +REPORT_UDIFF
+================================= ======== ===== ============ ============
+ Description                       Common   Mr.   Mrs.         Total
+--------------------------------- -------- ----- ------------ ------------
+ Paid holiday (600 / 12)                          50,00        50,00
+ Year-end prime (800 / 12)                        66,67        66,67
+ Gewerkschaftsprämie (1000 / 12)                  83,33        83,33
+ **Total (3 rows)**                               **200,00**   **200,00**
+================================= ======== ===== ============ ============
+<BLANKLINE>
+
 
 
 Something in French

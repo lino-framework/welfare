@@ -104,6 +104,7 @@ class BudgetDetail(dd.FormLayout):
     summary1 = """
     ResultByBudget
     DebtsByBudget
+    AssetsByBudgetSummary
     """
     summary2 = """
     conclusion:30x5
@@ -625,7 +626,6 @@ class DebtsByBudget(SummaryTable):
         budget = ar.master_instance
         if budget is None:
             return
-        # for grp in budget.account_groups('L'):
         for eg in budget.entry_groups(ar, 'L'):
             if not eg.has_data():
                 continue
@@ -635,6 +635,24 @@ class DebtsByBudget(SummaryTable):
                 yield [dd.babelattr(acc, 'name'),
                        budget.sum('amount', account=acc, distribute=False)]
         #~ "Total Kredite / Schulden"
+
+
+class AssetsByBudgetSummary(SummaryTable):
+    label = _("Assets")
+    required = dd.required(user_groups='debts')
+    master = 'debts.Budget'
+
+    @classmethod
+    def get_summary_numbers(self, ar):
+        budget = ar.master_instance
+        if budget is None:
+            return
+        for eg in budget.entry_groups(ar, 'A'):
+            if not eg.has_data():
+                continue
+            for acc in eg.group.account_set.all():
+                yield [dd.babelattr(acc, 'name'),
+                       budget.sum('amount', account=acc)]
 
 
 class DistByBudget(EntriesByBudget):
