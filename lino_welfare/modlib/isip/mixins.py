@@ -9,6 +9,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -22,7 +23,7 @@ from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.cal.mixins import EventGenerator
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.cal.utils import DurationUnits, update_auto_task
-from lino.modlib.system.mixins import PeriodEvents
+# from lino.modlib.system.mixins import PeriodEvents
 
 from lino.utils.ranges import isrange
 from lino.utils.ranges import overlap2, encompass
