@@ -143,7 +143,7 @@ class Site(Site):
         if False:  # not yet ready
             yield 'lino.modlib.families'
 
-        yield 'lino_welfare'
+        yield 'lino_welfare.modlib.welfare'
 
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo

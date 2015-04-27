@@ -125,7 +125,7 @@ The first button ("Visit") is here:
 
 >>> btn = td.div.contents[0]
 >>> print(btn.contents)
-[<img alt="hourglass" src="/media/lino/extjs/images/mjames/hourglass.png"/>]
+[<img alt="hourglass" src="/static/lino/extjs/images/mjames/hourglass.png"/>]
 
 And yes, the `href` attribute is a javascript snippet:
 
@@ -163,7 +163,7 @@ The button is here:
 
 >>> btn = td.div.contents[2]
 >>> print(btn.contents)
-[<img alt="calendar" src="/media/lino/extjs/images/mjames/calendar.png"/>]
+[<img alt="calendar" src="/static/lino/extjs/images/mjames/calendar.png"/>]
 
 And also here, the `href` attribute is a javascript snippet:
 

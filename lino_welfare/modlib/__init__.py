@@ -14,6 +14,7 @@ Plugins which have been written specifically for Lino Welfare:
     newcomers
     pcsw
     reception
+    welfare
 
     cbss
     courses

@@ -10,8 +10,6 @@
    modlib
    migrate
    projects
-   management.commands
-   models
 
 
 """

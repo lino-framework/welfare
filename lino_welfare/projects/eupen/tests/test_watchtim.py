@@ -28,7 +28,7 @@ from lino.api import dd, rt
 from lino.utils import i2d
 from lino.utils.djangotest import TestCase
 
-from lino_welfare.management.commands.watch_tim import process_line
+from lino_welfare.modlib.welfare.management.commands.watch_tim import process_line
 
 
 POST_GEORGES = """{"method":"POST","alias":"PAR","id":"0000023633","time":"20130220 08:55:30",\

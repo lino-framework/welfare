@@ -30,7 +30,7 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, lino_welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
+51 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
 130 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -916,11 +916,27 @@ See :blogref:`20130508`:
 ...     for o in model.objects.all():
 ...         o.full_clean()
 
-Check whether Lino returns the right default template for excerpts 
-(see :blogref:`20140208`):
+Default template for excerpts
+=============================
 
->>> ffn = settings.SITE.find_config_file('Default.odt', 'excerpts')
->>> ffn.endswith('lino_welfare/config/excerpts/Default.odt')
-True
+Check whether Lino returns the right default template for excerpts.
 
+:mod:`lino.modlib.excerpts` defines a template
+:xfile:`excerpts/Default.odt`, and :mod:`lino_welfare.modlib.welfare`
+:overrides this template.
+
+The rule is that **the *last* plugin wins** when Lino searches for
+templates.
+
+This means that if we want to see the welfare-specific version, our
+:meth:`get_installed_apps <lino.core.site.Site.get_installed_apps>` in
+:mod:`lino_welare.projects.std.settings` must yield
+:mod:`lino_welfare.modlib.welfare` **after**
+:mod:`lino.modlib.excerpts`.
+
+The following test verifies this rule:
+
+>>> print(settings.SITE.find_config_file('Default.odt', 'excerpts'))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+/.../welfare/config/excerpts/Default.odt
 

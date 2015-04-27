@@ -27,7 +27,7 @@ from lino import mixins
 
 from lino.utils.xmlgen.html import E
 from lino.utils.htmlgen import UL
-from lino.utils.report import EmptyTable
+from lino.utils.report import Report
 
 from lino.modlib.cv.mixins import SectorFunction
 
@@ -845,7 +845,7 @@ if True:  # settings.SITE.user_model:
 COLS = 8
 
 
-class OldJobsOverview(EmptyTable):
+class OldJobsOverview(Report):
 
     """
     """
@@ -1060,7 +1060,7 @@ class JobsOverviewByType(Jobs):
                 yield job
 
 
-class JobsOverview(EmptyTable):
+class JobsOverview(Report):
     """
     This list helps integration agents to make decisions like:
 

@@ -77,7 +77,7 @@ when called on an excerpt where Lino has two possible locations.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ...     #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy ...lino_welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts/Default.odt
+Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts/Default.odt
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.

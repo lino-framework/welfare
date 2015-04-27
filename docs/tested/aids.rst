@@ -179,25 +179,25 @@ Here are the default values for their source URLs:
 
 >>> for s in scripts:
 ...     print(s.get('src', '(inline)'))
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/adapter/ext/ext-base-debug.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/ext-all-debug.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/src/locale/ext-lang-de.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/statusbar/StatusBar.js
-/media/lino/extjs/Ext.ux.form.DateTime.js
-http://ext.ensible.com/deploy/1.0.2/extensible-all-debug.js
-http://ext.ensible.com/deploy/1.0.2/src/locale/extensible-lang-de.js
-http://www.tinymce.com/js/tinymce/jscripts/tiny_mce/tiny_mce.js
-/media/lino/tinymce/Ext.ux.TinyMCE.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/menu/RangeMenu.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/menu/ListMenu.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/GridFilters.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/Filter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/StringFilter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/DateFilter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/ListFilter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/NumericFilter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/gridfilters/filter/BooleanFilter.js
-http://extjs-public.googlecode.com/svn/tags/extjs-3.3.1/release/examples/ux/fileuploadfield/FileUploadField.js
+/static/ext-3.3.1/adapter/ext/ext-base-debug.js
+/static/ext-3.3.1/ext-all-debug.js
+/static/ext-3.3.1/src/locale/ext-lang-de.js
+/static/ext-3.3.1/examples/ux/statusbar/StatusBar.js
+/static/extjs/Ext.ux.form.DateTime.js
+/static/extensible-1.0.1/extensible-all-debug.js
+/static/extensible-1.0.1/src/locale/extensible-lang-de.js
+/static/tinymce-3.4.8/tiny_mce.js
+/static/tinymce/Ext.ux.TinyMCE.js
+/static/ext-3.3.1/examples/ux/gridfilters/menu/RangeMenu.js
+/static/ext-3.3.1/examples/ux/gridfilters/menu/ListMenu.js
+/static/ext-3.3.1/examples/ux/gridfilters/GridFilters.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/Filter.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/StringFilter.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/DateFilter.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/ListFilter.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/NumericFilter.js
+/static/ext-3.3.1/examples/ux/gridfilters/filter/BooleanFilter.js
+/static/ext-3.3.1/examples/ux/fileuploadfield/FileUploadField.js
 (inline)
 /media/cache/js/lino_210_de.js
 (inline)

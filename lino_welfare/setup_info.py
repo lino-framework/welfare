@@ -61,9 +61,6 @@ Topic :: Education""".splitlines())
 
 SETUP_INFO.update(packages=[
     'lino_welfare',
-    'lino_welfare.fixtures',
-    'lino_welfare.management',
-    'lino_welfare.management.commands',
     'lino_welfare.modlib',
     'lino_welfare.modlib.active_job_search',
     'lino_welfare.modlib.active_job_search.fixtures',
@@ -116,6 +113,10 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.uploads.fixtures',
     'lino_welfare.modlib.users',
     'lino_welfare.modlib.users.fixtures',
+    'lino_welfare.modlib.welfare',
+    'lino_welfare.modlib.welfare.fixtures',
+    'lino_welfare.modlib.welfare.management',
+    'lino_welfare.modlib.welfare.management.commands',
     'lino_welfare.projects',
     'lino_welfare.projects.chatelet',
     'lino_welfare.projects.chatelet.modlib',
@@ -187,6 +188,6 @@ add_package_data('lino_welfare.modlib.jobs', 'config/jobs/JobsOverview/*.odt')
 add_package_data('lino_welfare.settings', 'media/pictures/contacts.Person.jpg')
 add_package_data('lino_welfare', 'config/lino_welfare/ActivityReport/*.odt')
 add_package_data('lino_welfare', 'config/admin_main.html')
-l = add_package_data('lino_welfare')
+l = add_package_data('lino_welfare.modlib.welfare')
 for lng in 'fr de nl'.split():
-    l.append('locale/%s/LC_MESSAGES/*.mo' % lng)
+    l.append('lino_welfare/modlib/welfare/locale/%s/LC_MESSAGES/*.mo' % lng)

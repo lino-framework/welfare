@@ -49,7 +49,7 @@ Here are the addresses of one of these partners (123):
  Adressenart            Bemerkung   Adresse                     Primär
 ---------------------- ----------- --------------------------- --------
  Offizielle Adresse                 Bahnhofstraße, 4700 Eupen   Ja
- Ungeprüfte Adresse                 August-Thonnar-Str. 14      Nein
+ Referenzadresse                    August-Thonnar-Str. 14      Nein
  **Total (2 Zeilen)**                                           **1**
 ====================== =========== =========================== ========
 <BLANKLINE>
