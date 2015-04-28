@@ -260,14 +260,14 @@ the owner set to this client
 >>> print(btn.string)
 None
 >>> print(btn.img['src'])
-/static/lino/extjs/images/mjames/add.png
+/static/images/mjames/add.png
 
 >>> print(btn)
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 <a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })' 
 style="vertical-align:-30%;" 
 title="Neuen Datensatz erstellen"><img alt="add" 
-src="/static/lino/extjs/images/mjames/add.png"/></a>
+src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
