@@ -398,29 +398,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
                            _("coaching ends"), tab=1):
             yield o
 
-    @dd.htmlbox()
-    def image(self, ar):
-        url = self.get_image_url(ar)
-        s = '<img src="%s" width="100%%"/>' % url
-        s = '<a href="%s" target="_blank">%s</a>' % (url, s)
-        return s
-
-    def get_image_parts(self):
-        if self.card_number:
-            parts = ("beid", self.card_number + ".jpg")
-            fn = os.path.join(settings.MEDIA_ROOT, *parts)
-            if os.path.exists(fn):
-                return parts
-        # return ("pictures", "contacts.Person.jpg")
-        return ("lino", "contacts.Person.jpg")
-
-    def get_image_url(self, ar):
-        return settings.SITE.build_media_url(*self.get_image_parts())
-
-    def get_image_path(self):
-        #~ TODO: handle configurability of card_number_to_picture_file
-        return os.path.join(settings.MEDIA_ROOT, *self.get_image_parts())
-
     def get_skills_set(self):
         return self.personproperty_set.filter(
             group=settings.SITE.site_config.propgroup_skills)
