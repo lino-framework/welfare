@@ -1,3 +1,4 @@
+import datetime
 from lino_welfare.projects.chatelet.settings import *
 
 class Site(Site):
