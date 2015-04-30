@@ -195,7 +195,7 @@ u', '
 The second button opens the list of uploads:
 
 >>> div.contents[2]  #doctest: +ELLIPSIS
-<a href='javascript:Lino.uploads.UploadsByClient.grid.run(null,...)'>All 2 files</a>
+<a href='javascript:Lino.uploads.UploadsByClient.grid.run(null,...)'...>All 2 files</a>
 
 And as you can see, it does not use the default table
 (UploadsByController) but the welfare specific table UploadsByClient.

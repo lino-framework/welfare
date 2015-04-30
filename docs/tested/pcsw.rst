@@ -280,5 +280,5 @@ Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 href="javascript:Lino.pcsw.Clients.detail.run(null,{
 &quot;record_id&quot;: 178 })">Klient</a> [<a
 href="javascript:Lino.contacts.Partners.del_client(null,178,{
-})">&#10060;</a>]
+})...">&#10060;</a>]
 
