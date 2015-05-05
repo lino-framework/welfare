@@ -1,0 +1,8 @@
+User {{request.user}} a modifié {{obj}}
+
+Sujet: {{obj.subject}}
+Bénéficiaire: {{obj.project}}
+
+{{request.build_absolute_uri('/api/notes/Note/{0}'.format(obj.id))}}
+
+

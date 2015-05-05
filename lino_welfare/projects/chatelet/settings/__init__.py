@@ -94,6 +94,13 @@ class Site(Site):
         yield self.modules.integ.UsersWithClients
         #~ yield self.modules.reception.ReceivedVisitors
 
+    # def do_site_startup(self):
+    #     super(Site, self).do_site_startup()
+    #     from lino.utils.sendchanges import register, subscribe
+    #     e = register('notes.Note', 'subject body',
+    #                  update_tpl='note_updated.eml')
+    #     e.updated_subject = "Changement dans {obj}"
+    #     subscribe('john.doe@example.org')
 
 # the following line should not be active in a checked-in version
 #~ DATABASES['default']['NAME'] = ':memory:'
