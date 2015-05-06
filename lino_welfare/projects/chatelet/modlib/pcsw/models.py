@@ -185,3 +185,27 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 ContactsByClient.column_names = 'company contact_person remark'
 dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
 
+notes = dd.resolve_app('notes')
+
+
+@dd.receiver(dd.on_ui_updated, sender=notes.Note)
+def myhandler(sender=None, watcher=None, request=None, **kwargs):
+    obj = watcher.watched
+    if obj.project is None:
+        return
+    recipients = []
+    period = (dd.today(), dd.today())
+    for c in obj.project.get_coachings(period, user__email__gt=''):
+        if c.user != request.user:
+            recipients.append(c.user.email)
+    if len(recipients) == 0:
+        return
+    context = dict(obj=obj, request=request)
+    subject = "Modification dans {obj}".format(**context)
+    tpl = rt.get_template('notes/note_updated.eml')
+    body = tpl.render(**context)
+    sender = request.user.email or settings.SERVER_EMAIL
+    # dd.logger.info("20150505 %s", recipients)
+    rt.send_email(subject, sender, body, recipients)
+
+

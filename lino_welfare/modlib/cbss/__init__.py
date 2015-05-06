@@ -1,22 +1,43 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2014 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-.. setting:: cbss.cbss_live_tests
+"""Adds functionality to make CBSS requests.
 
-Whether unit tests should try to really connect to the cbss.
-Some test cases of the test suite would fail with a timeout if run 
-from behind an IP address that is not registered at the :term:`CBSS`.
-These tests are skipped by default. To activate them,
-set `cbss_live_tests` to `True` in your :xfile:`settings.py`.
+CBSS (Crossroads Bank for Social Security, French *Banque Carrefour de
+la Sécurité Sociale*) is an information system for data exchange
+between different Belgian government agencies.
+`Official website <http://www.ksz-bcss.fgov.be>`__
+
+
+.. autosummary::
+   :toctree:
+
+    mixins
+    choicelists
+    models
+    tx25
+    fixtures
+
+.. rubric:: Plugin configuration
+
+
+.. attribute:: cbss_live_tests
+
+    Whether unit tests should try to really connect to the CBSS.  Some
+    test cases of the test suite would fail with a timeout if run from
+    behind an IP address that is not registered at the :term:`CBSS`.
+    These tests are skipped by default. To activate them, set
+    :attr:`cbss_live_tests` to `True`.
+
+.. attribute:: cbss_environment
+
+    Either `None` or one of 'test', 'acpt' or 'prod'.
+    See :mod:`lino_welfare.modlib.cbss.models`.
     
-.. setting:: cbss.cbss_environment
+    Setting this to `None` means that the cbss app is "inactive" even
+    if installed.
 
-Either `None` or one of 'test', 'acpt' or 'prod'.
-See :mod:`lino_welfare.modlib.cbss.models`.
-Leaving this to `None` means that the cbss app
-is "inactive" even if installed.
 
 """
 
@@ -31,16 +52,6 @@ class Plugin(ad.Plugin):
 
     #~ cbss_environment = None
     cbss_environment = 'test'
-
-    def __init__(self, *args):
-        super(Plugin, self).__init__(*args)
-        for k in 'cbss_environment cbss_live_tests'.split():
-            if hasattr(self.site, k):
-                v = getattr(self.site, k)
-                raise Exception("""%s has an attribute '%s'!.
-You probably want to replace this by:
-SITE.plugins.cbss.configure(%s=%r)
-""" % (self.site, k, k, v))
 
     def setup_config_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)
