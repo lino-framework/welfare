@@ -3,8 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 
-"""The :xfile:`models.py` module for the
-:mod:`lino_welfare.modlib.art61` app.
+"""Database models for the `lino_welfare.modlib.art61`.
 
 
 """
@@ -89,6 +88,24 @@ class Contract(JobSupplyment):
             'user user_asd exam_policy '
             'date_decided date_issued ')
 
+    def get_subsidizations(self):
+        """Yield a list of all subsidizations activated for this contract.
+        """
+        for sub in Subsidizations.items():
+            if getattr(self, subsidization_field_name(sub)):
+                yield sub
+
+    def get_excerpt_options(self, ar, **kw):
+        """Implements :meth:`lino.core.model.Model.get_excerpt_options`.
+
+        When printing a contract, there is no recipient.
+
+        """
+        kw = super(Contract, self).get_excerpt_options(ar, **kw)
+        del kw['company']
+        del kw['contact_person']
+        del kw['contact_role']
+        return kw
 
 dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 dd.update_field(Contract, 'company', blank=False, null=False)
@@ -189,10 +206,12 @@ class MyContracts(Contracts):
         kw.update(user=ar.get_user())
         return kw
 
+def subsidization_field_name(sub):
+                       return 'subsidize_' + sub.value
 
 @dd.receiver(dd.pre_analyze)
 def inject_subsidization_fields(sender, **kw):
     for sub in Subsidizations.items():
         dd.inject_field(
-            'art61.Contract', 'subsidize_' + sub.value,
+            'art61.Contract', subsidization_field_name(sub),
             models.BooleanField(verbose_name=sub.text, default=False))

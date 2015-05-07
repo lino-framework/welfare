@@ -1,0 +1,232 @@
+{% extends "excerpts/base.body.html" %}
+{% set pcsw = site_config.site_company %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}:
+<span class="VariableText">
+{{obj.user.initials}}/{{obj.id}}/{{obj.client.id}}/{{this.id}}
+</span>
+{% endblock %}
+
+{% block title %}
+{% if language != settings.SITE.get_default_language() %}
+<p class="CenteredHeader">({{_("Translation")}})</p>
+{% endif %}
+<h1>{{obj.get_excerpt_title()}}
+</h1>
+{% endblock %}
+
+{% block body %}
+
+{% if obj.subsidize_10 %}
+Plan Activa
+{% endif %}
+{% if obj.subsidize_20 %}
+avec tutorat
+{% else %}
+sans tutorat
+{% endif %}
+
+{{iif(obj.subsidize_30, "Région Wallonne", "")}}
+
+
+Entre, 
+
+<p>d'une part, le {{pcsw}}
+ci-après dénommé «le CPAS», dont le siège est situé à
+<b>{{', '.join(pcsw.address_location_lines())}}</b>,
+représenté par
+<b>{{site_config.signer1}}, {{site_config.signer1_function}}</b>
+et
+<b>{{site_config.signer2}}, {{site_config.signer2_function}}</b>,
+
+<p>d'autre part l'entreprise
+
+<p class="EnhancedPar">
+{{obj.company.get_full_name(nominative=True)}}
+<br>
+{{obj.company.get_primary_address()}}
+</p>
+
+ci-après dénommée, «l'employeur», dont le siège est situé à 
+<b>{{', '.join(obj.company.address_location_lines())}}</b>,
+représentée par 
+{{obj.contact_person.get_full_name(nominative=True)}}
+{%- if obj.contact_role %}, {{obj.contact_role}}{%- endif %},
+
+
+<p>il est convenu et accepté ce qui suit:</p>
+
+
+<h2>Article 1</h2>
+
+Dans le but de contribuer à l’insertion sociale et professionnelle des
+ayants droit à l’intégration sociale ou à l’aide sociale financière du
+CPAS de {{pcsw.city}}, il est décidé d'établir une collaboration sous
+forme de convention entre les contractants précités.
+
+<h2>Article 2</h2>
+
+
+<p>Pour l'employeur, cette convention consiste à engager en 
+qualité de XXXXXXXXXX
+
+<p class="EnhancedPar">
+{{obj.client.get_full_name(nominative=True)}}
+<br>
+{{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
+{{obj.client.national_id}}
+<br>
+{{obj.client.get_primary_address()}}
+{#
+{{tr(de="wohnhaft zu",fr="domicilié"+obj.client.mf("","e","(e)")+" à")}}
+{{', '.join(obj.client.address_location_lines())}}
+#}
+</p>
+
+<p>dans les liens d'un contrat de travail dont les conditions sont les
+suivantes:
+
+
+x ouvrier
+O employé
+X pour une durée déterminée prenant cours le 17/11/2014 et se terminant le 16/02/2015, renouvelable
+o  pour une durée indéterminée prenant cours.
+O à temps plein
+X à temps partiel à raison de 19 heures par semaine1
+
+
+<h2>Article 3</h2>
+
+§1 - Ce contrat de travail sera régi par toutes les dispositions de la loi du 3 juillet 1978 relative aux
+contrats de travail.
+
+§2 - L'employeur veillera à respecter la législation en vigueur en matière de médecine du travail.
+
+§3 - L'employeur veillera également à souscrire à une assurance pour le travailleur engagé.
+
+
+
+<h2>Article 4</h2>
+
+§1 - Ensemble, les parties décident de mettre en œuvre le programme
+d'insertion suivant:
+
+<table>
+<tr>
+<td>Objectifs d'insertion</td>
+<td>Horaires</td>
+</tr>
+<tr>
+<td>
+Respect des horaires et des procédures en cas d’absence
+<br>Faire preuve de politesse, de motivation, de capacité d’adaptation
+<br>Savoir accepter les remarques et les conseils
+<br>Savoir respecter les consignes
+<br>S’intégrer dans les équipes de travail
+<br>Acquérir le rythme de travail exigé par l’entreprise
+<br>Apprendre à bien utiliser le matériel, et le respecter
+<br>Apprendre à travailler de manière ordonnée et précise
+</td>
+<td>19h semaine prestées selon un horaire variable</td>
+</tr>
+</table>
+ 
+<p>§2 - Le CPAS désigne Monsieur {{obj.user}}, mandaté par le CPAS,
+pour effectuer le suivi social du travailleur pendant la durée de la
+présente convention.
+
+
+<h2>Article 5</h2>
+
+<p>§1 - En contrepartie du programme d'Insertion Professionnelle que
+permet l'entreprise, le CPAS s'engage à verser mensuellement à
+l'employeur une prime de 150 euro. (Le CPAS peut décider de rétrocéder
+la subvention régionale qui lui est due en fonction de l'A.G.W. du
+28.4.2005 portant exécution, en ce qui concerne l’intégration
+professionnelle des ayants droit à l’intégration sociale, du
+décret-programme du 18.12.2003 portant diverses mesures en matière de
+trésorerie et de dette, d’action sociale et de santé.)
+
+<p>Cette prime sera due pendant la durée du contrat reprise à l’art 2
+de la présente avec un maximum de 12 mois, à partir du 01/12/2014 et
+sera versée sur le compte IBAN n° : BE 13 6528 3623 2739
+
+<p>§2 - Le CPAS s'engage à verser à l'employeur cette somme au prorata
+des journées de travail effectivement rémunérées par l'employeur,
+après réception du contrat de travail signé, des fiches de paie, de la
+dernière déclaration trimestrielle à l'O.N.S.S ainsi que des preuves
+de paiement des cotisations à l’ONSS.
+
+<p>§3 - Toutefois, le CPAS se réserve le droit de suspendre ou
+d'interrompre tout remboursement en cas de non respect des clauses du
+programme d'insertion.
+
+
+<h2>Article 6</h2>
+
+L'employeur s'engage à avertir le CPAS de Châtelet de tout changement
+survenant dans le contrat de travail.
+
+<p>L'employeur s'engage également à avertir, le plus rapidement
+possible, le CPAS de tout changement de domicile du travailleur
+survenant pendant la durée de la présente convention.
+
+<h2>Article 7</h2>
+
+Le CPAS peut mettre fin, sans préavis, au paiement prévu à l'article 5
+dès que le travailleur transfère sa résidence principale / son
+domicile ailleurs que sur le territoire de la commune de
+{{pcsw.city}}.  (Toutefois, le CPAS d’origine peut poursuivre la
+convention. Ceci est admis par le SPP-IS.)
+
+
+<h2>Article 8</h2>
+
+En cas de rupture de contrat de travail conclu entre l'employeur et
+{{obj.client.get_salutation()}} {{obj.client.last_name.upper()}}, le CPAS ne pourra être nullement tenu d'une
+éventuelle indemnité de préavis.
+
+
+<h2>Article 9</h2>
+
+En cas
+
+<ul>
+<li>de rupture unilatérale ou abusive du contrat,</li>
+<li>de non respect de la présente convention,</li>
+</ul>
+
+le CPAS se réserve le droit de récupérer les sommes versées.
+
+
+<h2>Article 10</h2>
+
+En cas de rupture du contrat pour motif grave, le bureau permanent ou
+le conseil de l’action sociale du CPAS sera directement saisi de la
+situation du travailleur.
+
+
+<h2>Article 11</h2>
+
+La convention est établie dès la signature du contrat de travail.
+
+
+<h2>Article 12</h2>
+
+Tout litige qui surviendrait dans la présente convention sera examiné
+par un Comité qui sera composé paritairement et qui comprendra des
+représentants de chacune des parties contractantes. En cas de
+contestation, les tribunaux de Charleroi sont les seuls compétents.
+
+<p>Fait à {{pcsw.city}},  en 2 exemplaires
+
+
+
+
+
+{% if obj.remark %}
+<p>{{ obj.remark }}</p>
+{% endif %}
+
+{% endblock %}
