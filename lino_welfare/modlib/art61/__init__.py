@@ -23,7 +23,7 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("Art61 job supplying")  # Mises à l'emploi art.61
-    needs_plugins = ['lino_welfare.modlib.jobs']
+    needs_plugins = ['lino_welfare.modlib.jobs', 'lino.modlib.cv']
 
     def setup_main_menu(self, site, profile, m):
         mg = site.plugins.integ

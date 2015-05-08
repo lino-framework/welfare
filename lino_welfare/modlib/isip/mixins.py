@@ -438,6 +438,27 @@ dd.update_field(ContractBase, 'signer2', default=default_signer2)
 
 
 class ContractBaseTable(dd.Table):
+    """Base for contract tables. Defines the following parameter fields:
+
+    .. attribute:: user
+    .. attribute:: observed_event
+
+    .. attribute:: ending
+
+        Show only contracts with the specified
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.models.ContractEnding>`.
+
+    .. attribute:: ending_success
+
+        Select "Yes" to show only contracts whose ending
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.models.ContractEnding>` has
+        :attr:`is_success
+        <lino_welfare.modlib.isip.models.ContractEnding.is_success>`
+        checked.
+
+    """
     parameters = mixins.ObservedPeriod(
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
 
@@ -498,9 +519,9 @@ class ContractBaseTable(dd.Table):
                 raise Exception(repr(ce))
 
         if pv.ending_success == dd.YesNo.yes:
-            qs = qs.filter(ending__isnull=False, ending__success=True)
+            qs = qs.filter(ending__isnull=False, ending__is_success=True)
         elif pv.ending_success == dd.YesNo.no:
-            qs = qs.filter(ending__isnull=False, ending__success=False)
+            qs = qs.filter(ending__isnull=False, ending__is_success=False)
 
         if pv.ending is not None:
             qs = qs.filter(ending=pv.ending)

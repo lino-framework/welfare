@@ -74,6 +74,10 @@ def excerpt_types():  # also used for migration to 1.1.11
     ExcerptType.update_for_model(
         'isip.Contract', certifying=True, backward_compat=True)
 
+    ExcerptType.update_for_model(
+        'art61.Contract', certifying=True,
+        print_recipient=False, body_template='contract.body.html')
+
 
 def objects():
     yield excerpt_types()

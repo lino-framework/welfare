@@ -78,12 +78,23 @@ class Contract(JobSupplyment):
         verbose_name=_("Type"),
         related_name="%(app_label)s_%(class)s_set_by_type")
 
+    # The following four fields are the same as in `cv.Experience`
+    # except that `duration` is `cv_duration` because we have already
+    # another field `duration` (number of days) from `JobSupplyment`
+    job_title = models.CharField(
+        max_length=200, verbose_name=_("Job title"), blank=True)
+    status = dd.ForeignKey('cv.Status', blank=True, null=True)
+    cv_duration = dd.ForeignKey('cv.Duration', blank=True, null=True)
+    regime = dd.ForeignKey(
+        'cv.Regime', blank=True, null=True,
+        related_name="art61_contracts")
+
     @classmethod
     def get_certifiable_fields(cls):
         return (
             'client type company contact_person contact_role '
             'applies_from applies_until duration '
-            'language  '
+            'language job_title status cv_duration regime '
             'reference_person responsibilities '
             'user user_asd exam_policy '
             'date_decided date_issued ')
@@ -116,6 +127,7 @@ class ContractDetail(dd.FormLayout):
     id:8 client:25 user:15 language:8
     type company contact_person contact_role
     applies_from duration applies_until exam_policy
+    job_title status cv_duration regime
     reference_person printed
     date_decided date_issued date_ended ending:20
     subsidize_10 subsidize_20 subsidize_30

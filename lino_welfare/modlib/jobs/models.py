@@ -195,7 +195,9 @@ class Contract(JobSupplyment):
         blank=True)
 
     job = models.ForeignKey("jobs.Job")
-    regime = dd.ForeignKey('cv.Regime', blank=True, null=True)
+    regime = dd.ForeignKey(
+        'cv.Regime', blank=True, null=True,
+        related_name="jobs_contracts")
     schedule = dd.ForeignKey('jobs.Schedule', blank=True, null=True)
     hourly_rate = dd.PriceField(_("hourly rate"), blank=True, null=True)
     refund_rate = models.CharField(_("refund rate"), max_length=200,

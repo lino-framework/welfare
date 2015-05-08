@@ -49,10 +49,11 @@ et
 </p>
 
 ci-après dénommée, «l'employeur», dont le siège est situé à 
-<b>{{', '.join(obj.company.address_location_lines())}}</b>,
-représentée par 
-{{obj.contact_person.get_full_name(nominative=True)}}
-{%- if obj.contact_role %}, {{obj.contact_role}}{%- endif %},
+<b>{{', '.join(obj.company.address_location_lines())}}</b>
+{%- if obj.contact_person -%}
+, représentée par {{obj.contact_person.get_full_name(nominative=True)}}
+{%- endif -%},
+{%- if obj.contact_role -%}, {{obj.contact_role}}{%- endif -%},
 
 
 <p>il est convenu et accepté ce qui suit:</p>
@@ -68,8 +69,10 @@ forme de convention entre les contractants précités.
 <h2>Article 2</h2>
 
 
-<p>Pour l'employeur, cette convention consiste à engager en 
-qualité de XXXXXXXXXX
+<p>Pour l'employeur, cette convention consiste à engager 
+{%- if obj.job_title -%}
+en qualité de {{obj.job_title}}
+{%- endif -%}
 
 <p class="EnhancedPar">
 {{obj.client.get_full_name(nominative=True)}}
@@ -87,6 +90,14 @@ qualité de XXXXXXXXXX
 <p>dans les liens d'un contrat de travail dont les conditions sont les
 suivantes:
 
+<ul>
+<li>Statut : {{obj.status}}</li>
+<li>Durée : {{obj.cv_duration}}
+prenant cours le {{fds(obj.applies_from)}}
+et se terminant le {{fds(obj.applies_until)}}
+</li>
+<li>Régime de travail : {{obj.regime}}</li>
+</ul>
 
 x ouvrier
 O employé
