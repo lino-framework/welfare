@@ -46,7 +46,7 @@ result:
  aids.IncomeConfirmation        aids.IncomeConfirmations        17        48
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
- art61.Contract                 art61.Contracts                 26        4
+ art61.Contract                 art61.Contracts                 30        4
  art61.ContractType             art61.ContractTypes             9         1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
@@ -262,7 +262,8 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | art61.Contracts.detail                          | 100, 110, admin                     | id client user language type company               |
 |                                                 |                                     | contact_person contact_role applies_from duration  |
-|                                                 |                                     | applies_until exam_policy reference_person printed |
+|                                                 |                                     | applies_until exam_policy job_title status         |
+|                                                 |                                     | cv_duration regime reference_person printed        |
 |                                                 |                                     | date_decided date_issued date_ended ending         |
 |                                                 |                                     | subsidize_10 subsidize_20 subsidize_30             |
 |                                                 |                                     | responsibilities                                   |

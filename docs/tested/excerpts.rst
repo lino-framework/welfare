@@ -43,7 +43,7 @@ This is the list of excerpt types:
  *aids.IncomeConfirmation (Einkommensbescheinigung)*   Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
  *aids.RefundConfirmation (Kostenübernahmeschein)*     Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
  *aids.SimpleConfirmation (Einfache Bescheinigung)*    Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
- *art61.Contract (Art.61-Konvention)*                  Ja       Ja              Art.61-Konvention                                  Default.odt
+ *art61.Contract (Art.61-Konvention)*                  Ja       Ja              Art.61-Konvention                                  Default.odt       contract.body.html
  *cal.Guest (Teilnehmer)*                              Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
  *debts.Budget (Budget)*                               Ja       Ja              Finanzielle Situation                              Default.odt
  *isip.Contract (VSE)*                                 Ja       Ja              VSE                                                Default.odt
@@ -149,7 +149,7 @@ of an excerpt depends on the recipient and the client.
  79   Simple confirmation      *Clothes bank/6/1/14/161/18*                     RADERMACHER Hedi (161)                                   de
  80   Simple confirmation      *Clothes bank/5/22/14/238/19*                    FRISCH Paul (238)             Belgisches Rotes Kreuz     de
  81   Finanzielle Situation    *Budget 1 for Gerkens-Kasennova*
- 82   Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*         EMONTS Daniel (128)           Belgisches Rotes Kreuz     de
+ 82   Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*         EMONTS Daniel (128)
  83   Art60§7 job supplyment   *Art60§7 job supplyment#1 (Charlotte COLLARD)*   COLLARD Charlotte (118)       BISA                       fr
  84   ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                     AUSDEMWALD Alfons (116)
  85   Presence certificate     *Participant #1 (22.05.2014)*                    AUSDEMWALD Alfons (116)                                  de

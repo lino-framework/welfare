@@ -55,6 +55,10 @@ add('30',  # used by PrintAssetsByBudget, PrintIncomesByBudget
     _("Full description, actor amounts"),
     "full_description dynamic_amounts")
 
+add('40',  # used by Inkasso-Unternehmen and Gerichtsvollzieher
+    _("Debt-collector, partner, remarks, monthly rate, amounts"),
+    "bailiff:20 partner:20 remarks:20 monthly_rate dynamic_amounts")
+
 # add('I', '10',  # used by PrintAssetsByBudget, PrintIncomesByBudget
 #     _("Full description, actor amounts"),
 #     "full_description dynamic_amounts")

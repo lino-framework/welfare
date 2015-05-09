@@ -322,6 +322,7 @@ The total monthly amount available for debts distribution."""))
         return E.div(*tuple(ar.story2html(self.summary_story(ar))))
 
     def data_story(self, ar):
+        """Yield a sequence of """
         # logger.info("20141211 insert_story")
 
         Company = rt.modules.contacts.Company

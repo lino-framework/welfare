@@ -388,7 +388,7 @@ def objects():
 
     g = group(
         ref="71", account_type=AccountTypes.liabilities,
-        entries_layout=TableLayouts.get_by_value('20'), **dd.babel_values(
+        entries_layout=TableLayouts.get_by_value('40'), **dd.babel_values(
             'name',
             de="Gerichtsvollzieher und Inkasso",
             fr="Huissiers et agents d'encaissement",

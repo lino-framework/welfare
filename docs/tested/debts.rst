@@ -348,3 +348,143 @@ First meeting on July 22, 2013 with Rolf Rompen
 None
 
 
+The stories
+===========
+
+Here is now (almost) the whole content of a printed budget.
+
+The following code is a bit hackerish because we don't yet have a
+`story2rst` method. 
+
+>>> from lino.utils.xmlgen.html import html2rst
+>>> obj = debts.Budget.objects.get(pk=4)
+>>> def story2rst(story):
+...     for i in ses.story2html(story):
+...         if E.iselement(i):
+...             print(html2rst(i))
+
+>>> story2rst(obj.data_story(ses))
+Monthly incomes
+==================== ========= ======== ===== ============== ==============
+ Description          Remarks   Common   Mr.   Mrs.           Total
+-------------------- --------- -------- ----- -------------- --------------
+ Salaries                                      1 200,00       1 200,00
+ Pension                                       1 400,00       1 400,00
+ Ersatzeinkünfte                               200,00         200,00
+ Aliments                                      400,00         400,00
+ Chèques-repas                                 600,00         600,00
+ Andere                                        800,00         800,00
+ **Total (6 rows)**                            **4 600,00**   **4 600,00**
+==================== ========= ======== ===== ============== ==============
+<BLANKLINE>
+Monthly expenses
+====================== ================== =============== ============ ===== ====== ============
+ Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
+---------------------- ------------------ --------------- ------------ ----- ------ ------------
+ Rent                                                      10,00                     10,00
+ Water                                                     15,00                     15,00
+ Electricity                                               20,00                     20,00
+ Telephone & Internet                                      26,00                     26,00
+ Cell phone                                                31,00                     31,00
+ Transport costs        Cinema, Shopping                   72,00                     72,00
+ Public transport                                          41,00                     41,00
+ Fuel                                                      47,00                     47,00
+ School                                                    5,00                      5,00
+ Babysitting                                               10,00                     10,00
+ Health                                                    15,00                     15,00
+ Clothes                                                   20,00                     20,00
+ Food                                                      26,00                     26,00
+ Hygiene                                                   31,00                     31,00
+ Health insurance                                          36,00                     36,00
+ Labour fees                                               41,00                     41,00
+ Unterhaltszahlungen                                       47,00                     47,00
+ Tobacco                                                   5,00                      5,00
+ Spare time             Cinema                             10,00                     10,00
+ Pets                                                      15,00                     15,00
+ Other                                                     20,00                     20,00
+ **Total (21 rows)**                                       **543,00**                **543,00**
+====================== ================== =============== ============ ===== ====== ============
+<BLANKLINE>
+Yearly incomes
+================================= ======== ===== ============ ============
+ Description                       Common   Mr.   Mrs.         Total
+--------------------------------- -------- ----- ------------ ------------
+ Paid holiday (1000 / 12)                         83,33        83,33
+ Year-end prime (1200 / 12)                       100,00       100,00
+ Gewerkschaftsprämie (1400 / 12)                  116,67       116,67
+ **Total (3 rows)**                               **300,00**   **300,00**
+================================= ======== ===== ============ ============
+<BLANKLINE>
+Taxes
+===================== ========= =============== =========== ===== ====== ===========
+ Description           Remarks   Yearly amount   Common      Mr.   Mrs.   Total
+--------------------- --------- --------------- ----------- ----- ------ -----------
+ Municipal tax                   26              2,17                     2,17
+ Kanalisationssteuer             31              2,58                     2,58
+ Waste tax                       36              3,00                     3,00
+ Autosteuer                      41              3,42                     3,42
+ Immobiliensteuer                47              3,92                     3,92
+ **Total (5 rows)**                              **15,08**                **15,08**
+===================== ========= =============== =========== ===== ====== ===========
+<BLANKLINE>
+Insurances
+===================== ========= =============== ========== ===== ====== ==========
+ Description           Remarks   Yearly amount   Common     Mr.   Mrs.   Total
+--------------------- --------- --------------- ---------- ----- ------ ----------
+ Fire                            5               0,42                    0,42
+ Familienhaftpflicht             10              0,83                    0,83
+ Car insurance                   15              1,25                    1,25
+ Life insurance                  20              1,67                    1,67
+ Other insurances                26              2,17                    2,17
+ **Total (5 rows)**                              **6,33**                **6,33**
+===================== ========= =============== ========== ===== ====== ==========
+<BLANKLINE>
+Debts, outsanding payments and credits
+===================== ========= ============== ============ ===== ====== ============
+ Partner               Remarks   Monthly rate   Common       Mr.   Mrs.   Total
+--------------------- --------- -------------- ------------ ----- ------ ------------
+ Maksu- ja tolliamet                            900,00                    900,00
+ **Total (1 rows)**                             **900,00**                **900,00**
+===================== ========= ============== ============ ===== ====== ============
+<BLANKLINE>
+Bailiffs and cash collectors
+======================== =============================== ========= ============== ======== ============== ============== ==============
+ Debt collection agency   Partner                         Remarks   Monthly rate   Common   Mr.            Mrs.           Total
+------------------------ ------------------------------- --------- -------------- -------- -------------- -------------- --------------
+ Cashback sprl            Ragn-Sells AS                                                     1 200,00                      1 200,00
+ Money Wizard AS          Electrabel Customer Solutions                                                    1 500,00       1 500,00
+ **Total (2 rows)**                                                                         **1 200,00**   **1 500,00**   **2 700,00**
+======================== =============================== ========= ============== ======== ============== ============== ==============
+<BLANKLINE>
+
+>>> story2rst(obj.summary_story(ses))
+Incomes & Expenses
+========================================================= ==============
+ Description                                               Amount
+--------------------------------------------------------- --------------
+ Monatliche Einkünfte                                      4 600,00
+ Monatliche Ausgaben                                       -543,00
+ Monatliche Reserve für jährliche Ausgaben (257,00 / 12)   -21,42
+ **Restbetrag für Kredite und Zahlungsrückstände**         **4 035,58**
+========================================================= ==============
+<BLANKLINE>
+Liabilities
+================================= ==============
+ Description                       Amount
+--------------------------------- --------------
+ Invoices to pay (distributable)   900,00
+ Bailiff (distributable)           1 200,00
+ Cash agency (distributable)       1 500,00
+ **Liabilities**                   **3 600,00**
+================================= ==============
+<BLANKLINE>
+Debts distribution
+=============================== ================= ============== ============ ===========================
+ Creditor                        Description       Debt           %            Monthly payback suggested
+------------------------------- ----------------- -------------- ------------ ---------------------------
+ Maksu- ja tolliamet             Invoices to pay   900,00         25,00        30,00
+ Ragn-Sells AS                   Bailiff           1 200,00       33,33        40,00
+ Electrabel Customer Solutions   Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                                **3 600,00**   **100,00**   **120,00**
+=============================== ================= ============== ============ ===========================
+<BLANKLINE>
