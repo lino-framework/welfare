@@ -22,23 +22,6 @@ between different Belgian government agencies.
 .. rubric:: Plugin configuration
 
 
-.. attribute:: cbss_live_tests
-
-    Whether unit tests should try to really connect to the CBSS.  Some
-    test cases of the test suite would fail with a timeout if run from
-    behind an IP address that is not registered at the :term:`CBSS`.
-    These tests are skipped by default. To activate them, set
-    :attr:`cbss_live_tests` to `True`.
-
-.. attribute:: cbss_environment
-
-    Either `None` or one of 'test', 'acpt' or 'prod'.
-    See :mod:`lino_welfare.modlib.cbss.models`.
-    
-    Setting this to `None` means that the cbss app is "inactive" even
-    if installed.
-
-
 """
 
 from lino import ad
@@ -48,10 +31,22 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     verbose_name = _("CBSS")
 
-    cbss_live_tests = False
+    cbss_live_requests = False
+    """Whether executing requests should try to really connect to the
+    CBSS.  Real requests would fail with a timeout if run from behind
+    an IP address that is not registered at the :term:`CBSS`.
+
+    """
 
     #~ cbss_environment = None
     cbss_environment = 'test'
+    """
+    Either `None` or one of 'test', 'acpt' or 'prod'.
+    
+    Setting this to `None` means that the cbss app is "inactive" even
+    if installed.
+
+    """
 
     def setup_config_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)

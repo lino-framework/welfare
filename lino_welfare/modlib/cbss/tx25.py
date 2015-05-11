@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2014 Luc Saffre
+# Copyright 2011-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """Transaction 25
@@ -36,203 +36,14 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
-from lino import mixins
 from lino.api import dd, rt
-from lino.utils import assert_pure
 from lino.utils import AttrDict, IncompleteDate
 
 from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
-from lino.modlib.users.mixins import ByUser
 
-
-try:
-    import suds
-except ImportError, e:
-    pass
-
-
-from lino_welfare.modlib.cbss.models import (
-    NewStyleRequest, SSIN,
-    get_client, CBSSRequestDetail, CBSSRequests, cbss2gender,
-    RequestStates, CBSS_ERROR_MESSAGE)
-
-
-def reply_has_result(reply):
-    if reply.status.value == "NO_RESULT":
-        msg = CBSS_ERROR_MESSAGE % reply.status.code
-        keys = ('value', 'code', 'description')
-        msg += '\n'.join([
-            k + ' : ' + getattr(reply.status, k)
-            for k in keys])
-        for i in reply.status.information:
-            msg += "\n- %s = %s" % (i.fieldName, i.fieldValue)
-        raise Warning(msg)
-
-
-class RequestLanguages(dd.ChoiceList):
-    verbose_name = _("Language")
-add = RequestLanguages.add_item
-add("nl", _("Dutch"), "nl")
-add("fr", _("French"), "fr")
-add("de", _("German"), "de")
-
-
-class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
-
-    """
-    A request to the RetrieveTIGroups service (aka Tx25)
-    """
-
-    class Meta:
-        verbose_name = _("Tx25 Request")
-        verbose_name_plural = _('Tx25 Requests')
-
-    wsdl_parts = ('cache', 'wsdl', 'RetrieveTIGroupsV3.wsdl')
-
-    language = RequestLanguages.field(blank=True, default=RequestLanguages.fr)
-    history = models.BooleanField(
-        verbose_name=_("History"), default=True,
-        help_text="Whatever this means.")
-
-    def get_print_language(self):
-        if settings.SITE.get_language_info(self.language.value):
-        #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
-            return self.language.value
-        return settings.SITE.DEFAULT_LANGUAGE.django_code
-
-    def fill_from_person(self, person):
-        self.national_id = person.national_id
-        if RequestLanguages.get_by_value(person.language, None):
-            self.language = person.language  # .value # babel.DEFAULT_LANGUAGE
-
-    def get_service_reply(self, **kwargs):
-        assert_pure(self.response_xml)
-        client = get_client(self)
-        meth = client.service.retrieveTI
-        clientclass = meth.clientclass(kwargs)
-        client = clientclass(meth.client, meth.method)
-        #~ print 20120613, portSelector[0]
-        #~ print '20120613b', dir(client)
-        s = self.response_xml.encode('utf-8')
-        return client.succeeded(client.method.binding.input, s)
-
-    def execute_newstyle(self, client, infoCustomer, simulate_response):
-        si = client.factory.create('ns0:SearchInformationType')
-        si.ssin = self.get_ssin()
-        if self.language:
-            si.language = self.language.value
-        #~ if self.history:
-            #~ si.history = 'true'
-        si.history = self.history
-        #~ if validate:
-            #~ self.validate_newstyle(srvreq)
-        if simulate_response is None:
-            self.check_environment(si)
-            try:
-                reply = client.service.retrieveTI(infoCustomer, None, si)
-            except suds.WebFault, e:
-                """
-                Example of a SOAP fault:
-          <soapenv:Fault>
-             <faultcode>soapenv:Server</faultcode>
-             <faultstring>An error occurred while servicing your request.</faultstring>
-             <detail>
-                <v1:retrieveTIGroupsFault>
-                   <informationCustomer xmlns:ns0="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
-                      <ticket>2</ticket>
-                      <timestampSent>2012-05-23T10:19:27.636628+01:00</timestampSent>
-                      <customerIdentification>
-                         <cbeNumber>0212344876</cbeNumber>
-                      </customerIdentification>
-                   </informationCustomer>
-                   <informationCBSS>
-                      <ticketCBSS>f4b9cabe-e457-4f6b-bfcc-00fe258a9b7f</ticketCBSS>
-                      <timestampReceive>2012-05-23T08:19:09.029Z</timestampReceive>
-                      <timestampReply>2012-05-23T08:19:09.325Z</timestampReply>
-                   </informationCBSS>
-                   <error>
-                      <severity>FATAL</severity>
-                      <reasonCode>MSG00003</reasonCode>
-                      <diagnostic>Unexpected internal error occurred</diagnostic>
-                      <authorCode>http://www.bcss.fgov.be/en/international/home/index.html</authorCode>
-                   </error>
-                </v1:retrieveTIGroupsFault>
-             </detail>
-          </soapenv:Fault>
-                """
-
-                msg = CBSS_ERROR_MESSAGE % e.fault.faultstring
-                msg += unicode(e.document)
-                self.status = RequestStates.failed
-                raise Warning(msg)
-            self.response_xml = reply.decode('utf-8')  # 20130201
-        else:
-            self.response_xml = simulate_response
-
-        #~ self.response_xml = unicode(reply)
-        reply = self.get_service_reply()
-        self.ticket = reply.informationCBSS.ticketCBSS
-        self.status = RequestStates.warnings
-
-        reply_has_result(reply)
-
-        self.status = RequestStates.ok
-        #~ self.response_xml = str(res)
-        #~ self.response_xml = "20120522 %s %s" % (res.__class__,res)
-        #~ print 20120523, res.informationCustomer
-        #~ print self.response_xml
-        return reply
-
-    def Result(self, ar):
-        return ar.spawn(RetrieveTIGroupsResult, master_instance=self)
-
-
-class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
-
-    parameters = dd.Panel("national_id language history",
-                          label=_("Parameters"))
-
-    result = "cbss.RetrieveTIGroupsResult"
-
-    #~ def setup_handle(self,lh):
-        #~ CBSSRequestDetail.setup_handle(self,lh)
-
-#~ class RetrieveTIGroupsRequestInsert(dd.FormLayout):
-    #~ window_size = (40,'auto')
-    #~ main = """
-    #~ person
-    #~ national_id language
-    #~ history
-    #~ """
-
-
-class RetrieveTIGroupsRequests(CBSSRequests):
-    #~ debug_permissions = True
-    model = RetrieveTIGroupsRequest
-    detail_layout = RetrieveTIGroupsRequestDetail()
-    column_names = 'id user person national_id language history status ticket sent environment'
-    #~ insert_layout = RetrieveTIGroupsRequestInsert()
-    insert_layout = dd.FormLayout("""
-    person
-    national_id language
-    history
-    """, window_size=(40, 'auto'))
-    #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
-    required_user_groups = ['cbss']
-
-    #~ @dd.virtualfield(dd.HtmlBox())
-    #~ def result(self,row,ar):
-        #~ return row.response_xml
-
-
-class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
-    master_key = 'person'
-
-
-class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
-    pass
+from lino_welfare.modlib.cbss.models import cbss2gender, reply_has_result
 
 
 def rn2date(rd):
@@ -308,8 +119,8 @@ class Info(object):
 
 def code_label(n):
     if hasattr(n, 'Label') and n.Label:
-        return Info(E.b(n.Label), ' (', n.Code, ')')
-    return Info(E.b(n.Code))
+        return Info(xghtml.E.b(n.Label), ' (', n.Code, ')')
+    return Info(xghtml.E.b(n.Code))
 
 
 #~ CodeLabel = code_label
@@ -321,7 +132,7 @@ def code_label(n):
 def NameType(n):
     info = Info()
     s = ' '.join([ln.Label for ln in n.LastName])
-    info.chunks.append(E.b(s))
+    info.chunks.append(xghtml.E.b(s))
     if hasattr(n, 'FirstName'):
         info.chunks.append(', ')
         s = ' '.join([fn.Label for fn in n.FirstName])
@@ -700,6 +511,7 @@ def DeliveryType194(n):
     #~ info.add_codelabel(n)
     #~ info += code_label(n)
     return info
+
 
 def CategoryType(n):
     return code_label(n)
@@ -1416,7 +1228,7 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
     Displays the response of an :class:`RetrieveTIGroupsRequest`
     as a table.
     """
-    master = RetrieveTIGroupsRequest
+    master = 'cbss.RetrieveTIGroupsRequest'
     master_key = None
     label = _("Results")
     column_names = 'group:18 type:5 since:14 info:50'

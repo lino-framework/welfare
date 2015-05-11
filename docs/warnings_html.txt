@@ -4,3 +4,5 @@ WARNING: [autosummary] failed to import u'lino_welfare.projects.chatelet.migrate
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
+None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
+None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'

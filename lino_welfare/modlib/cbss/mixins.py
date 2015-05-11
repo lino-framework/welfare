@@ -14,7 +14,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from appy.shared.xml_parser import XmlUnmarshaller
+# from appy.shared.xml_parser import XmlUnmarshaller
 
 from lino import mixins
 from lino.api import dd
@@ -25,9 +25,11 @@ from lino.modlib.users.mixins import UserAuthored
 
 from .choicelists import *
 
+CBSS_ENVS = ('test', 'acpt', 'prod')
+
 #~ try:
 
-import suds
+# import suds
 from suds.client import Client
 from suds.transport.http import HttpAuthenticated
 from suds.transport.http import HttpTransport
@@ -48,6 +50,11 @@ def get_client(obj):
     c = obj.create_client()
     _clients_dict[obj.__class__] = c
     return c
+
+
+def xsdpath(*parts):
+    p1 = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(p1, 'XSD', *parts)
 
 
 class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
@@ -190,10 +197,11 @@ The raw XML response received.
         #~ return kw
 
     def execute_request(self, ar=None, now=None,
-                        simulate_response=None, environment=None):
-        """
-        This is the general method for all SSDN services,
-        executed when a user runs :class:`ExecuteRequest`.
+                        simulate_response=None,
+                        environment=None):
+        """This is the common part of a request for both classic and
+        new-style.
+
         """
         if self.ticket:
             raise Warning("Cannot re-execute %s with non-empty ticket." % self)
@@ -210,8 +218,8 @@ The raw XML response received.
         self.debug_messages = ''
         self.info_messages = ''
 
-        if not settings.SITE.plugins.cbss.cbss_live_tests:
-            if simulate_response is None and environment:
+        if not settings.SITE.plugins.cbss.cbss_live_requests:
+            if simulate_response is None:  # and environment:
                 self.validate_request()
                 self.status = RequestStates.validated
                 self.save()
@@ -222,8 +230,6 @@ The raw XML response received.
 
         retval = None
         try:
-            #~ if not settings.SITE.cbss_live_tests:
-                #~ self.validate_request()
             retval = self.execute_request_(now, simulate_response)
         except (IOError, Warning) as e:
             if self.ticket:
@@ -242,17 +248,6 @@ The raw XML response received.
         self.save()
         return retval
 
-    #~ @dd.action(_("Validate"))
-    #~ def validate(self,ar):
-        #~ try:
-            #~ self.validate_request()
-            #~ self.save()
-            #~ return ar.ui.success(
-                #~ message="%s validation passed." % self)
-        #~ except Exception,e:
-            #~ self.logmsg(traceback.format_exc(e))
-            #~ self.save()
-            #~ return ar.ui.error_response(e)
     def validate_request(self):
         pass
 
@@ -267,10 +262,10 @@ The raw XML response received.
         return url
 
     def check_environment(self, req):
-        if not self.environment:
-            raise Warning("""\
-Not actually sending because environment is empty. Request would be:
-""" + unicode(req))
+#         if not self.environment:
+#             raise Warning("""\
+# Not actually sending because environment is empty. Request would be:
+# """ + unicode(req))
 
         assert self.environment in CBSS_ENVS
 
@@ -283,10 +278,9 @@ dd.update_field(CBSSRequest, 'user', blank=False, null=False)
 
 
 class SSDNRequest(CBSSRequest):
+    """Abstract Base Class for Models that represent SSDN ("classic")
+    requests.
 
-    """
-    Abstract Base Class for Models that represent 
-    SSDN ("classic") requests to the :term:`CBSS`.
     """
 
     wsdl_parts = ('cache', 'wsdl', 'WebServiceConnector.wsdl')
@@ -346,40 +340,31 @@ class SSDNRequest(CBSSRequest):
         """
         srvreq = self.build_request()
 
-        #~ if validate:
-            #~ self.validate_inner(srvreq)
-
         wrapped_srvreq = self.wrap_ssdn_request(srvreq, now)
+        xmlString = unicode(wrapped_srvreq)
+        self.request_xml = xmlString
 
-        #~ if validate:
-            #~ self.validate_wrapped(wrapped_srvreq)
-            #~ logger.info("XSD validation passed.")
-
-        if simulate_response is None:
-            # this is the normal case
-            self.check_environment(srvreq)
-
-            client = get_client(self)
-
-            xmlString = unicode(wrapped_srvreq)
-            self.request_xml = xmlString
-            #~ logger.info("20120521 Gonna sendXML(<xmlString>):\n%s",xmlString)
-            if not settings.SITE.plugins.cbss.cbss_live_tests:
-                #~ raise Warning("NOT sending because `cbss_live_tests` is False:\n" + unicode(xmlString))
-                raise Warning(
-                    "NOT sending because `cbss_live_tests` is False:\n" + xmlString)
-            #~ xmlString.append(wrapped_srvreq)
-            self.logmsg_debug("client.service.sendXML(\n%s\n)", xmlString)
-            res = client.service.sendXML(xmlString)
-            #~ print 20120522, res
-            self.response_xml = unicode(res)
-            #~ self.save()
-            #~ return self.fill_from_string(res.encode('utf-8'),xmlString)
-            return self.fill_from_string(res.encode('utf-8'))
-        else:
+        if simulate_response is not None:
             self.environment = 'demo'
             self.response_xml = unicode(simulate_response)
             return self.fill_from_string(simulate_response)
+
+        # the normal case
+        self.check_environment(srvreq)
+
+        client = get_client(self)
+
+        #~ logger.info("20120521 Gonna sendXML(<xmlString>):\n%s",xmlString)
+        if not settings.SITE.plugins.cbss.cbss_live_requests:
+            raise Warning(
+                "NOT sending because `cbss_live_requests` is False:\n"
+                + xmlString)
+        #~ xmlString.append(wrapped_srvreq)
+        self.logmsg_debug("client.service.sendXML(\n%s\n)", xmlString)
+        res = client.service.sendXML(xmlString)
+        #~ print 20120522, res
+        self.response_xml = unicode(res)
+        return self.fill_from_string(res.encode('utf-8'))
 
     def fill_from_string(self, s, sent_xmlString=None):
         #~ self.response_xml = unicode(res)
@@ -487,7 +472,8 @@ class SSDNRequest(CBSSRequest):
         sr.append(srvreq)
 
         #~ xg.set_default_namespace(SSDN)
-        e = E('ssdn:SSDNRequest', ns=NSSSDN)
+        e = E('ssdn:SSDNRequest',
+              ns=('ssdn', 'http://www.ksz-bcss.fgov.be/XSD/SSDN/Service'))
         e.append(context)
         e.append(sr)
         #~ if srvreq.prefix != e.prefix:
@@ -509,7 +495,7 @@ class NewStyleRequest(CBSSRequest):
     def create_client(self):
         url = self.get_wsdl_uri()
 
-        #~ logger.info("Instantiate Client at %s", url)
+        logger.info("Instantiate CBSS client at %s", url)
         sc = settings.SITE.site_config
         #~ t = HttpAuthenticated(
             #~ username=settings.SITE.cbss_username,
@@ -522,6 +508,9 @@ class NewStyleRequest(CBSSRequest):
         return client
 
     def execute_request_(self, now, simulate_response):
+        """
+        NewStyle specific part of a request.
+        """
 
         client = get_client(self)
 

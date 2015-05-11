@@ -17,7 +17,7 @@ http://www.bcss.fgov.be):
 - :class:`ManageAccessRequest`: Enregistrer, désenregistrer ou
   consulter un dossier dans le registre du réseau de la sécurité
   sociale (registre BCSS) et dans le répertoire sectoriel des CPAS
-  géré par la SmalS-MvM (:class:`QueryRegister`).
+  géré par la SmalS-MvM.
   
 - :class:`RetrieveTIGroupsRequest
   <lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsRequest>`: Obtenir
@@ -29,41 +29,30 @@ http://www.bcss.fgov.be):
 
 import os
 import shutil
-import traceback
-import datetime
 import logging
 logger = logging.getLogger(__name__)
 
+
+from suds import WebFault
 
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from appy.shared.xml_parser import XmlUnmarshaller
-
+# from appy.shared.xml_parser import XmlUnmarshaller
 
 from lino import mixins
 from lino.api import dd, rt
-#~ from lino.utils import Warning
+from lino.utils import assert_pure
 from lino.utils import join_words
 from lino.utils import AttrDict
 
 from lino.modlib.users.mixins import ByUser
 from lino_welfare.modlib.pcsw import models as pcsw
 
-
 from .mixins import *
 from .choicelists import *
 
-countries = dd.resolve_app('countries')
-contacts = dd.resolve_app('contacts')
-
-CBSS_ENVS = ('test', 'acpt', 'prod')
-
-
-def xsdpath(*parts):
-    p1 = os.path.abspath(os.path.dirname(__file__))
-    return os.path.join(p1, 'XSD', *parts)
 
 CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 
@@ -110,7 +99,7 @@ def nodetext(node):
 
 def cbss2country(code):
     try:
-        return countries.Country.objects.get(inscode=code)
+        return rt.modules.countries.Country.objects.get(inscode=code)
     except Country.DoesNotExist:
         logger.warning("Unknown country code %s", code)
 
@@ -242,7 +231,6 @@ class Purposes(dd.Table):
 
 
 NSCOMMON = ('common', 'http://www.ksz-bcss.fgov.be/XSD/SSDN/Common')
-NSSSDN = ('ssdn', 'http://www.ksz-bcss.fgov.be/XSD/SSDN/Service')
 NSIPR = ('ipr',
          "http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson")
 NSMAR = ('mar', "http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess")
@@ -314,7 +302,7 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
     tolerance = models.IntegerField(verbose_name=_('Tolerance'),
                                     default=0,
       help_text=u"""
-      Falls Monat oder Tag des Geburtsdatums unbekannt sind, 
+      Falls Monat oder Tag des Geburtsdatums unbekannt sind,
       um wieviel Monate bzw. Tage die Suche nach unten/oben ausgeweitet wird.
       Gültige Werte: 0 bis 10.
       """)
@@ -625,68 +613,37 @@ class IdentifyPersonResult(dd.VirtualTable):
             #~ except Person.DoesNotExist:
                 #~ pass
         #~ return ''
-class ManageAction(dd.ChoiceList):
-
-    u"""
-    Possible values for the 
-    `action` field of a :class:`ManageAccessRequest`.
-    
-    
-    - `ManageAction.REGISTER` : 
-      Ce service est sollicité au moment du démarrage de l’enquête sociale.  
-      Le CPAS déclare au réseau de la sécurité sociale qu’il possède un dossier pour lequel il a 
-      l’autorisation (dispositions légales et réglementaires) d’obtenir des informations des autres 
-      institutions en vue de compléter son enquête dans le cadre de l’octroi du revenu d’intégration.  
-      Cette déclaration concerne le répertoire sectoriel des CPAS à la SmalS-MvM et peut 
-      concerner plusieurs catégories de personnes : 
-      le demandeur, les cohabitants et les tiers concernés et ce, pour des finalités différentes. 
-    - `ManageAction.UNREGISTER` : 
-      L’opération contraire est aussi mise à disposition. 
-    - `ManageAction.LIST` : 
-      Il est en plus possible d’obtenir une liste des enregistrements 
-      dans le répertoire sectoriel des CPAS à la SmalS-MvM 
-      ainsi qu’au sein du réseau BCSS.
-    
-    """
-    verbose_name = _("Action")
-
-add = ManageAction.add_item
-add('1', _("Register"), 'REGISTER')
-add('2', _("Unregister"), 'UNREGISTER')
-add('3', _("List"), 'LIST')
-
-
-class QueryRegister(dd.ChoiceList):
-
-    """
-    Possible values for the 
-    `query_register` field of a :class:`ManageAccessRequest`.
-    
-    """
-    verbose_name = _("Query Register")
-
-add = QueryRegister.add_item
-add('1', _("Primary"), 'PRIMARY')
-add('2', _("Secondary"), 'SECONDARY')
-add('3', _("All"), 'ALL')
-
 
 class ManageAccessRequest(SSDNRequest, WithPerson):
 
-    """
-    A request to the ManageAccess service.
+    """A request to the ManageAccess service.
     
-    Registering a person means that this PCSW is 
-    going to maintain a dossier about this person.
-    Users commonly say "to integrate" a person.
+    Registering a person means that this PCSW is going to maintain a
+    dossier about this person.  Users commonly say "to integrate" a
+    person.
     
     Fields include:
+
     
-    - action : one of the values in :class:`ManageAction`
-    - query_register : one of the values in :class:`QueryRegister`
-      
+    .. attribute:: sector
+
+        Pointer to :class:`Sector`.
+
+    .. attribute:: purpose
+
+        Pointer to :class:`Purpose`.
+
+    .. attribute:: action
     
+        The action to perform.  This must be one of the values in
+        :class:`lino_welfare.modlib.cbss.choicelists.ManageActions`
     
+    .. attribute:: query_register
+
+        The register to be query.
+        This must be one of the values in
+        :class:`lino_welfare.modlib.cbss.choicelists.QueryRegisters`
+
     """
 
     ssdn_service_id = 'OCMWCPASManageAccess'
@@ -712,7 +669,7 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
 #~ It can be used for list,
 #~ when information about sectors is required.""")
 
-    sector = models.ForeignKey(Sector,
+    sector = models.ForeignKey('cbss.Sector',
                                #~ blank=True,
                                editable=False,
       help_text="""\
@@ -720,7 +677,7 @@ For register and unregister this element is ignored.
 It can be used for list, 
 when information about sectors is required.""")
 
-    purpose = models.ForeignKey(Purpose,
+    purpose = models.ForeignKey('cbss.Purpose',
                                 #~ blank=True,null=True,
       help_text="""\
 The purpose for which the inscription needs to be 
@@ -737,11 +694,11 @@ for register/unregister it is mandatory.""")
 
     # 20120527 : Django converts default value to unicode. didnt yet
     # understand why.
-    action = ManageAction.field(blank=False, default=ManageAction.LIST)
-    query_register = QueryRegister.field(
-        blank=False, default=QueryRegister.ALL)
-    #~ action = ManageAction.field(blank=False)
-    # ~ query_register = QueryRegister.field(blank=False) # ,default=QueryRegister.ALL)
+    action = ManageActions.field(blank=False, default=ManageActions.LIST)
+    query_register = QueryRegisters.field(
+        blank=False, default=QueryRegisters.ALL)
+    #~ action = ManageActions.field(blank=False)
+    # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL)
 
     def save(self, *args, **kw):
         if not self.sector_id:
@@ -897,7 +854,177 @@ class MyManageAccessRequests(ManageAccessRequests, ByUser):
     pass
 
 
-from lino_welfare.modlib.cbss.tx25 import *
+##
+## RetrieveTIGroupsRequest ("Transaction 25")
+##
+
+def reply_has_result(reply):
+    if reply.status.value == "NO_RESULT":
+        msg = CBSS_ERROR_MESSAGE % reply.status.code
+        keys = ('value', 'code', 'description')
+        msg += '\n'.join([
+            k + ' : ' + getattr(reply.status, k)
+            for k in keys])
+        for i in reply.status.information:
+            msg += "\n- %s = %s" % (i.fieldName, i.fieldValue)
+        raise Warning(msg)
+
+
+class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
+
+    """
+    A request to the RetrieveTIGroups service (aka Tx25)
+    """
+
+    class Meta:
+        verbose_name = _("Tx25 Request")
+        verbose_name_plural = _('Tx25 Requests')
+
+    wsdl_parts = ('cache', 'wsdl', 'RetrieveTIGroupsV3.wsdl')
+
+    language = RequestLanguages.field(blank=True, default=RequestLanguages.fr)
+    history = models.BooleanField(
+        verbose_name=_("History"), default=True,
+        help_text="Whatever this means.")
+
+    def get_print_language(self):
+        if settings.SITE.get_language_info(self.language.value):
+        #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
+            return self.language.value
+        return settings.SITE.DEFAULT_LANGUAGE.django_code
+
+    def fill_from_person(self, person):
+        self.national_id = person.national_id
+        if RequestLanguages.get_by_value(person.language, None):
+            self.language = person.language  # .value # babel.DEFAULT_LANGUAGE
+
+    def get_service_reply(self, **kwargs):
+        assert_pure(self.response_xml)
+        client = get_client(self)
+        meth = client.service.retrieveTI
+        clientclass = meth.clientclass(kwargs)
+        client = clientclass(meth.client, meth.method)
+        #~ print 20120613, portSelector[0]
+        #~ print '20120613b', dir(client)
+        s = self.response_xml.encode('utf-8')
+        return client.succeeded(client.method.binding.input, s)
+
+    def execute_newstyle(self, client, infoCustomer, simulate_response):
+        si = client.factory.create('ns0:SearchInformationType')
+        si.ssin = self.get_ssin()
+        if self.language:
+            si.language = self.language.value
+        si.history = self.history
+        if simulate_response is not None:
+            self.environment = 'demo'
+            self.response_xml = simulate_response
+        else:
+            self.check_environment(si)
+            try:
+                reply = client.service.retrieveTI(infoCustomer, None, si)
+            except WebFault as e:
+                """
+                Example of a SOAP fault:
+          <soapenv:Fault>
+             <faultcode>soapenv:Server</faultcode>
+             <faultstring>An error occurred while servicing your request.</faultstring>
+             <detail>
+                <v1:retrieveTIGroupsFault>
+                   <informationCustomer xmlns:ns0="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/">
+                      <ticket>2</ticket>
+                      <timestampSent>2012-05-23T10:19:27.636628+01:00</timestampSent>
+                      <customerIdentification>
+                         <cbeNumber>0212344876</cbeNumber>
+                      </customerIdentification>
+                   </informationCustomer>
+                   <informationCBSS>
+                      <ticketCBSS>f4b9cabe-e457-4f6b-bfcc-00fe258a9b7f</ticketCBSS>
+                      <timestampReceive>2012-05-23T08:19:09.029Z</timestampReceive>
+                      <timestampReply>2012-05-23T08:19:09.325Z</timestampReply>
+                   </informationCBSS>
+                   <error>
+                      <severity>FATAL</severity>
+                      <reasonCode>MSG00003</reasonCode>
+                      <diagnostic>Unexpected internal error occurred</diagnostic>
+                      <authorCode>http://www.bcss.fgov.be/en/international/home/index.html</authorCode>
+                   </error>
+                </v1:retrieveTIGroupsFault>
+             </detail>
+          </soapenv:Fault>
+                """
+
+                msg = CBSS_ERROR_MESSAGE % e.fault.faultstring
+                msg += unicode(e.document)
+                self.status = RequestStates.failed
+                raise Warning(msg)
+            self.response_xml = reply.decode('utf-8')  # 20130201
+
+        #~ self.response_xml = unicode(reply)
+        reply = self.get_service_reply()
+        self.ticket = reply.informationCBSS.ticketCBSS
+        self.status = RequestStates.warnings
+
+        reply_has_result(reply)
+
+        self.status = RequestStates.ok
+        #~ self.response_xml = str(res)
+        #~ self.response_xml = "20120522 %s %s" % (res.__class__,res)
+        #~ print 20120523, res.informationCustomer
+        #~ print self.response_xml
+        return reply
+
+    def Result(self, ar):
+        return ar.spawn(RetrieveTIGroupsResult, master_instance=self)
+
+
+class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
+
+    parameters = dd.Panel("national_id language history",
+                          label=_("Parameters"))
+
+    result = "cbss.RetrieveTIGroupsResult"
+
+    #~ def setup_handle(self,lh):
+        #~ CBSSRequestDetail.setup_handle(self,lh)
+
+#~ class RetrieveTIGroupsRequestInsert(dd.FormLayout):
+    #~ window_size = (40,'auto')
+    #~ main = """
+    #~ person
+    #~ national_id language
+    #~ history
+    #~ """
+
+
+class RetrieveTIGroupsRequests(CBSSRequests):
+    #~ debug_permissions = True
+    model = RetrieveTIGroupsRequest
+    detail_layout = RetrieveTIGroupsRequestDetail()
+    column_names = 'id user person national_id language history status ticket sent environment'
+    #~ insert_layout = RetrieveTIGroupsRequestInsert()
+    insert_layout = dd.FormLayout("""
+    person
+    national_id language
+    history
+    """, window_size=(40, 'auto'))
+    #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
+    required_user_groups = ['cbss']
+
+    #~ @dd.virtualfield(dd.HtmlBox())
+    #~ def result(self,row,ar):
+        #~ return row.response_xml
+
+
+class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
+    master_key = 'person'
+
+
+class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
+    pass
+
+
+from .tx25 import RetrieveTIGroupsResult
+
 
 dd.inject_field('system.SiteConfig',
                 'sector',

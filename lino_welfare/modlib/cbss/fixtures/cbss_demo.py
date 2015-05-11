@@ -1,15 +1,15 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012 Luc Saffre
+# Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""
-Fills in a suite of fictive CBSS requests.
+"""Fills in a suite of fictive CBSS requests, including a simulated
+response.
+
 """
 
 import os
 from django.conf import settings
 from lino.utils import IncompleteDate, Cycler
-#~ from lino.modlib.cbss import models as cbss
 from lino.api import dd, rt
 cbss = dd.resolve_app('cbss')
 
@@ -38,8 +38,8 @@ if cbss:
             end_date=settings.SITE.demo_date(15),
             sector=cbss.Sector.objects.get(code=17, subcode=1),
             purpose=cbss.Purpose.objects.get(code=902),
-            action=cbss.ManageAction.REGISTER,
-            query_register=cbss.QueryRegister.ALL,
+            action=cbss.ManageActions.REGISTER,
+            query_register=cbss.QueryRegisters.ALL,
         ), ''],
         [cbss.RetrieveTIGroupsRequest,
          dict(national_id='680601 053-29', history=False, language='de'),
@@ -54,7 +54,6 @@ if cbss:
         User = dd.resolve_model(settings.SITE.user_model)
         root = User.objects.get(username='hubert')
         Client = dd.resolve_model('pcsw.Client')
-        #~ PERSONS = Cycler(Person.objects.filter(coached_from__isnull=False).order_by('id'))
         CLIENTS = Cycler(Client.objects.all().order_by('id'))
         mustermann = CLIENTS.pop()
         for model, kw, fn in DEMO_REQUESTS:
@@ -68,7 +67,3 @@ if cbss:
                 #~ print obj.debug_messages
             yield obj
 
-
-        #~ Company = resolve_model('contacts.Company')
-        #~ settings.SITE.site_config.site_company = Company.objects.get(pk=1)
-        #~ settings.SITE.site_config.save()
