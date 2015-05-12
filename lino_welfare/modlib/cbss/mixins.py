@@ -57,6 +57,12 @@ def xsdpath(*parts):
     return os.path.join(p1, 'XSD', *parts)
 
 
+def nodetext(node):
+    if node is None:
+        return ''
+    return node.text
+
+
 class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
 
     """

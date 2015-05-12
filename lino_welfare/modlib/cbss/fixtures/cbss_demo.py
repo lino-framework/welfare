@@ -2,18 +2,20 @@
 # Copyright 2012-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Fills in a suite of fictive CBSS requests, including a simulated
-response.
+"""Fills in a suite of fictive CBSS requests using simulated responses
+in order to avoid live requests to the CBSS.
 
 """
 
 import os
 from django.conf import settings
 from lino.utils import IncompleteDate, Cycler
-from lino.api import dd, rt
-cbss = dd.resolve_app('cbss')
+from lino.api import rt
 
-if cbss:
+
+def objects():
+
+    cbss = rt.modules.cbss
 
     DEMO_REQUESTS = [
         [cbss.IdentifyPersonRequest,
@@ -49,21 +51,21 @@ if cbss:
          'demo_tx25_2.xml'],
     ]
 
-    def objects():
-
-        User = dd.resolve_model(settings.SITE.user_model)
-        root = User.objects.get(username='hubert')
-        Client = dd.resolve_model('pcsw.Client')
-        CLIENTS = Cycler(Client.objects.all().order_by('id'))
-        mustermann = CLIENTS.pop()
-        for model, kw, fn in DEMO_REQUESTS:
-            kw.update(person=mustermann)
-            kw.update(user=root)
-            obj = model(**kw)
-            if fn:
-                fn = os.path.join(os.path.dirname(__file__), fn)
-                xml = open(fn).read()
-                obj.execute_request(simulate_response=xml)
-                #~ print obj.debug_messages
-            yield obj
+    User = settings.SITE.user_model
+    root = User.objects.get(username='hubert')
+    Client = rt.modules.pcsw.Client
+    # CLIENTS = Cycler(Client.objects.all().order_by('id'))
+    # mustermann = CLIENTS.pop()
+    # print 20150512, Client.objects.all()
+    mustermann = Client.objects.get(pk=116)
+    for model, kw, fn in DEMO_REQUESTS:
+        kw.update(person=mustermann)
+        kw.update(user=root)
+        obj = model(**kw)
+        if fn:
+            fn = os.path.join(os.path.dirname(__file__), fn)
+            xml = open(fn).read()
+            obj.execute_request(simulate_response=xml)
+            #~ print obj.debug_messages
+        yield obj
 

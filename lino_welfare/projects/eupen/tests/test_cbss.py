@@ -56,9 +56,7 @@ class QuickTest(TestCase):
     fixtures = 'sectors purposes democfg'.split()
 
     def test01(self):
-        """
-        Execute an IdentifyPersonRequest.
-        """
+
         settings.SITE.startup()  # create cache/wsdl files
 
         root = create_and_get(settings.SITE.user_model, username='root')
@@ -66,6 +64,7 @@ class QuickTest(TestCase):
         luc = create_and_get(
             'pcsw.Client', first_name='Luc', last_name='Saffre')
 
+        # First IdentifyPersonRequest
         # Create an IPR with NISS just to have the XML validated.
 
         req = cbss.IdentifyPersonRequest(national_id="70100853190")
@@ -78,11 +77,19 @@ class QuickTest(TestCase):
         req.birth_date = IncompleteDate(1938, 6, 1)
         try:
             req.validate_request()
-        except Warning:
+        except Warning as e:
+            self.assertEqual(unicode(e), "")
             pass
 
         req.birth_date = IncompleteDate(1938, 0, 0)
         req.validate_request()
+        req.execute_request(simulate_response='Foo', now=NOW)
+
+        expected = """\
+        """
+        self.assertEquivalent(expected, req.request_xml)
+
+        ## 
 
         req = cbss.IdentifyPersonRequest(
             last_name="MUSTERMANN",

@@ -19,7 +19,7 @@ class Site(Site):
     help_url = "http://de.welfare.lino-framework.org"
 
     demo_fixtures = """std std2 few_languages props all_countries
-    demo cbss mini demo2 checkdata local """.split()
+    demo mini demo2 cbss checkdata local """.split()
 
     def get_default_language(self):
         return 'de'

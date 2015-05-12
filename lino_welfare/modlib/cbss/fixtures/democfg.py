@@ -12,7 +12,7 @@ from lino.api import dd, rt
 
 def objects():
 
-    Sector = dd.resolve_model('cbss.Sector')
+    Sector = rt.modules.cbss.Sector
     sc = settings.SITE.site_config
     sc.sector = Sector.objects.get(code=17, subcode=1)
     sc.cbss_org_unit = '0123456789'

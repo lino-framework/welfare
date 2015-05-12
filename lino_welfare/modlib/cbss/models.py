@@ -91,12 +91,6 @@ def cbss2civilstate(node):
     return unicode(v)
 
 
-def nodetext(node):
-    if node is None:
-        return ''
-    return node.text
-
-
 def cbss2country(code):
     try:
         return rt.modules.countries.Country.objects.get(inscode=code)
@@ -446,17 +440,13 @@ class IdentifyPersonRequestDetail(CBSSRequestDetail):
 
     p2 = dd.Panel("""
     first_name middle_name last_name
-    birth_date tolerance  gender 
+    birth_date tolerance  gender
     """, label=_("Using phonetic search"))
 
     parameters = dd.Panel("p1 p2", label=_("Parameters"))
 
-    result = dd.Panel("IdentifyPersonResult", label=_("Result"))
-
-    #~ def setup_handle(self,lh):
-        #~ lh.p1.label = _("Using the national ID")
-        #~ lh.p2.label = _("Using phonetic search")
-        #~ CBSSRequestDetail.setup_handle(self,lh)
+    # result = dd.Panel("IdentifyPersonResult", label=_("Result"))
+    result = "IdentifyPersonResult"
 
 
 class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
@@ -512,15 +502,19 @@ class IdentifyRequestsByPerson(IdentifyPersonRequests):
 
 
 class IdentifyPersonResult(dd.VirtualTable):
-
     """
     Displays the response of an :class:`IdentifyPersonRequest`
     as a table.
     """
-    master = IdentifyPersonRequest
+    master = 'cbss.IdentifyPersonRequest'
     master_key = None
     label = _("Results")
     column_names = 'national_id:10 last_name:20 first_name:10 address birth_date:10 birth_location civil_state *'
+
+    class Row(AttrDict):
+        @classmethod
+        def get_chooser_for_field(cls, fieldname):
+            return None
 
     @classmethod
     def get_data_rows(self, ar):
@@ -539,6 +533,7 @@ class IdentifyPersonResult(dd.VirtualTable):
             #~ print "20120606 no /SearchResults"
             #~ return []
             return
+        Client = rt.modules.pcsw.Client
         for obj in results:
             data = dict()
             data.update(
@@ -556,37 +551,28 @@ class IdentifyPersonResult(dd.VirtualTable):
             data.update(
                 birth_location=nodetext(obj.childAtPath('/Extended/BirthLocation')))
             data.update(cbss2address(obj))
-            yield AttrDict(**data)
-        #~ return results
-        #~ if service_reply is not None:
-            #~ results = service_reply.childAtPath('/SearchResults')
-            #~ if results is not None:
+            yield self.Row(**data)
+            # yield Client(**data)
 
     @dd.displayfield(_("National ID"))
     def national_id(self, obj, ar):
-        #~ return obj.childAtPath('/Basic/SocialSecurityUser').text
         return obj.national_id
 
     @dd.displayfield(_("Last name"))
     def last_name(self, obj, ar):
         return obj.last_name
-        #~ return obj.childAtPath('/Basic/LastName').text
 
     @dd.displayfield(_("First name"))
     def first_name(self, obj, ar):
         return obj.first_name
-        #~ return obj.childAtPath('/Basic/FirstName').text
 
     @dd.virtualfield(dd.Genders.field())
     def gender(self, obj, ar):
         return obj.gender
-        #~ return cbss2gender(obj.childAtPath('/Basic/Gender').text)
 
-    #~ @dd.displayfield(dd.IncompleteDateField(_("Birth date")))
     @dd.displayfield(_("Birth date"))
     def birth_date(self, obj, ar):
         return obj.birth_date
-        #~ return obj.childAtPath('/Basic/BirthDate').text
 
     @dd.displayfield(_("Birth location"))
     def birth_location(self, obj, ar):
@@ -595,24 +581,11 @@ class IdentifyPersonResult(dd.VirtualTable):
     @dd.displayfield(_("Civil state"))
     def civil_state(self, obj, ar):
         return obj.civil_state
-        #~ return obj.childAtPath('/Extended/CivilState').text
 
     @dd.displayfield(_("Address"))
     def address(self, obj, ar):
         return obj.address
 
-
-    #~ @dd.virtualfield(models.ForeignKey(settings.SITE.person_model))
-    #~ @dd.displayfield(_("Person"))
-    #~ def person(self,obj,ar):
-        #~ from lino.modlib.pcsw.models import Person
-        #~ niss = obj.childAtPath('/Basic/SocialSecurityUser').text
-        #~ if niss:
-            #~ try:
-                #~ return unicode(Person.objects.get(national_id=niss))
-            #~ except Person.DoesNotExist:
-                #~ pass
-        #~ return ''
 
 class ManageAccessRequest(SSDNRequest, WithPerson):
 
