@@ -63,8 +63,9 @@ class ContractTypeBase(mixins.BabelNamed):
     .. attribute:: overlap_group
 
         The overlap group to use when checking whether two contracts
-        are overlapping or not.  See
-        :class:`OverlappingContractsTest`.
+        are overlapping or not. See :class:`OverlappingContractsTest`.
+        If this field is empty, Lino does not check at all for
+        overlapping contracts.
 
     """
 
@@ -78,7 +79,7 @@ class ContractTypeBase(mixins.BabelNamed):
         related_name="%(app_label)s_%(class)s_set",
         blank=True, null=True)
 
-    overlap_group = OverlapGroups.field(default=OverlapGroups.contracts)
+    overlap_group = OverlapGroups.field(blank=True)
 
 
 class ContractPartnerBase(ContactRelated):
@@ -129,9 +130,6 @@ class OverlappingContractsTest:
                 self.actives.append((ap, con1))
 
     def check(self, con1):
-        """
-
-        """
         ap = con1.active_period()
         if ap[0] is None and ap[1] is None:
             return
@@ -292,23 +290,25 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     def full_clean(self, *args, **kw):
         """Checks for the following error conditions:
 
-- Contract ends before it started.
 - You must specify a contract type.
-- Any error message returned by :meth:`OverlappingContractsTest.check`
+- :message:`Contract ends before it started.`
+- Any error message returned by :class:`OverlappingContractsTest`
 
 """
         r = self.active_period()
         if not isrange(*r):
             raise ValidationError(_('Contract ends before it started.'))
 
-        if not self.exam_policy_id:
-            if self.type_id and self.type.exam_policy_id:
-                self.exam_policy_id = self.type.exam_policy_id
+        if self.type_id:
+            if not self.exam_policy_id:
+                if self.type.exam_policy_id:
+                    self.exam_policy_id = self.type.exam_policy_id
 
-        if self.client_id is not None:
-            msg = OverlappingContractsTest(self.client).check(self)
-            if msg:
-                raise ValidationError(msg)
+            if self.client_id is not None:
+                if self.type.overlap_group:
+                    msg = OverlappingContractsTest(self.client).check(self)
+                    if msg:
+                        raise ValidationError(msg)
         super(ContractBase, self).full_clean(*args, **kw)
 
         if self.type_id is None:

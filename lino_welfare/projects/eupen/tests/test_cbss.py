@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """
-This module contains "quick" tests that are run on a demo database 
+This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
   $ python manage.py test cbss.QuickTest
@@ -12,7 +12,6 @@ without any fixture. You can run only these tests by issuing::
   
 """
 import datetime
-import unittest
 import logging
 logger = logging.getLogger(__name__)
 
@@ -21,32 +20,12 @@ logger = logging.getLogger(__name__)
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
-#from lino.igen import models
-#from lino.modlib.contacts.models import Contact, Companies
-#from lino.modlib.countries.models import Country
-#~ from lino.modlib.contacts.models import Companies
-
-
-from lino.utils import i2d
-from lino.core.utils import resolve_model
 from lino.utils.djangotest import TestCase
 
 from lino_welfare.modlib.cbss import models as cbss
 
 from lino.utils import IncompleteDate
 from lino.utils.instantiator import create_and_get
-
-
-TIMEOUT_RESPONSE = '<urlopen error [Errno 10060] A connection attempt '\
-    'failed because the connected party did not properly respond '\
-    'after a period of time, or established connection failed '\
-    'because connected host has failed to respond>'
-
-TIMEOUT_MESSAGE = """\
-We got a timeout.
-That's normal when this test is run behind an IP address that is not registered.
-Set your :setting:`cbss.cbss_live_requests` setting to False to skip this test.
-"""
 
 NOW = datetime.datetime(2015, 5, 11, 18, 31, 1)
 
@@ -67,7 +46,8 @@ class QuickTest(TestCase):
         # First IdentifyPersonRequest
         # Create an IPR with NISS just to have the XML validated.
 
-        req = cbss.IdentifyPersonRequest(national_id="70100853190")
+        req = cbss.IdentifyPersonRequest(
+            national_id="70100853190", user=root, person=luc)
         try:
             req.full_clean()
             self.fail('Expected ValidationError "birth_date cannot be blank."')
@@ -86,7 +66,44 @@ class QuickTest(TestCase):
         req.execute_request(simulate_response='Foo', now=NOW)
 
         expected = """\
-        """
+<ssdn:SSDNRequest xmlns:ssdn="http://www.ksz-bcss.fgov.be/XSD/SSDN/Service">
+<ssdn:RequestContext>
+<ssdn:AuthorizedUser>
+<ssdn:UserID>00901234567</ssdn:UserID>
+<ssdn:Email>info@example.com</ssdn:Email>
+<ssdn:OrgUnit>0123456789</ssdn:OrgUnit>
+<ssdn:MatrixID>17</ssdn:MatrixID>
+<ssdn:MatrixSubID>1</ssdn:MatrixSubID>
+</ssdn:AuthorizedUser>
+<ssdn:Message>
+<ssdn:Reference>IdentifyPersonRequest # 1</ssdn:Reference>
+<ssdn:TimeRequest>20150511T183101</ssdn:TimeRequest>
+</ssdn:Message>
+</ssdn:RequestContext>
+<ssdn:ServiceRequest>
+<ssdn:ServiceId>OCMWCPASIdentifyPerson</ssdn:ServiceId>
+<ssdn:Version>20050930</ssdn:Version>
+<ipr:IdentifyPersonRequest xmlns:ipr="http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson">
+<ipr:SearchCriteria>
+<ipr:SSIN>70100853190</ipr:SSIN>
+<ipr:PhoneticCriteria>
+<ipr:LastName></ipr:LastName>
+<ipr:FirstName></ipr:FirstName>
+<ipr:MiddleName></ipr:MiddleName>
+<ipr:BirthDate>1938-00-00</ipr:BirthDate>
+</ipr:PhoneticCriteria>
+</ipr:SearchCriteria>
+<ipr:VerificationData>
+<ipr:PersonData>
+<ipr:LastName></ipr:LastName>
+<ipr:FirstName></ipr:FirstName>
+<ipr:MiddleName></ipr:MiddleName>
+<ipr:BirthDate>1938-00-00</ipr:BirthDate>
+</ipr:PersonData>
+</ipr:VerificationData>
+</ipr:IdentifyPersonRequest>
+</ssdn:ServiceRequest>
+</ssdn:SSDNRequest>"""
         self.assertEquivalent(expected, req.request_xml)
 
         ## 
@@ -118,7 +135,7 @@ class QuickTest(TestCase):
 <ssdn:MatrixSubID>1</ssdn:MatrixSubID>
 </ssdn:AuthorizedUser>
 <ssdn:Message>
-<ssdn:Reference>IdentifyPersonRequest # 1</ssdn:Reference>
+<ssdn:Reference>IdentifyPersonRequest # 2</ssdn:Reference>
 <ssdn:TimeRequest>20150511T183101</ssdn:TimeRequest>
 </ssdn:Message>
 </ssdn:RequestContext>
@@ -179,7 +196,24 @@ class QuickTest(TestCase):
         req = cbss.ManageAccessRequest(**kw)
 
         req.execute_request(simulate_response='Foo', now=NOW)
-        expected = """<ssdn:SSDNRequest xmlns:ssdn="http://www.ksz-bcss.fgov.be/XSD/SSDN/Service"> <ssdn:RequestContext> <ssdn:AuthorizedUser> <ssdn:UserID>00901234567</ssdn:UserID> <ssdn:Email>info@example.com</ssdn:Email> <ssdn:OrgUnit>0123456789</ssdn:OrgUnit> <ssdn:MatrixID>17</ssdn:MatrixID> <ssdn:MatrixSubID>1</ssdn:MatrixSubID> </ssdn:AuthorizedUser> <ssdn:Message> <ssdn:Reference>ManageAccessRequest # 1</ssdn:Reference> <ssdn:TimeRequest>20150511T183101</ssdn:TimeRequest> </ssdn:Message> </ssdn:RequestContext> <ssdn:ServiceRequest> <ssdn:ServiceId>OCMWCPASManageAccess</ssdn:ServiceId> <ssdn:Version>20050930</ssdn:Version> <mar:ManageAccessRequest xmlns:mar="http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess">
+        expected = """<ssdn:SSDNRequest xmlns:ssdn="http://www.ksz-bcss.fgov.be/XSD/SSDN/Service">
+<ssdn:RequestContext>
+<ssdn:AuthorizedUser>
+<ssdn:UserID>00901234567</ssdn:UserID>
+<ssdn:Email>info@example.com</ssdn:Email>
+<ssdn:OrgUnit>0123456789</ssdn:OrgUnit>
+<ssdn:MatrixID>17</ssdn:MatrixID>
+<ssdn:MatrixSubID>1</ssdn:MatrixSubID>
+</ssdn:AuthorizedUser>
+<ssdn:Message>
+<ssdn:Reference>ManageAccessRequest # 1</ssdn:Reference>
+<ssdn:TimeRequest>20150511T183101</ssdn:TimeRequest>
+</ssdn:Message>
+</ssdn:RequestContext>
+<ssdn:ServiceRequest>
+<ssdn:ServiceId>OCMWCPASManageAccess</ssdn:ServiceId>
+<ssdn:Version>20050930</ssdn:Version>
+<mar:ManageAccessRequest xmlns:mar="http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess">
 <mar:SSIN>68060105329</mar:SSIN>
 <mar:Purpose>10</mar:Purpose>
 <mar:Period>
@@ -194,7 +228,11 @@ class QuickTest(TestCase):
 <mar:LastName>SAFFRE</mar:LastName>
 <mar:FirstName>LUC JOHANNES</mar:FirstName>
 <mar:BirthDate>1968-06-01</mar:BirthDate>
-</mar:PersonData> </mar:ProofOfAuthentication> </mar:ManageAccessRequest> </ssdn:ServiceRequest> </ssdn:SSDNRequest>
+</mar:PersonData>
+</mar:ProofOfAuthentication>
+</mar:ManageAccessRequest>
+</ssdn:ServiceRequest>
+</ssdn:SSDNRequest>
 """
         self.assertEquivalent(expected, req.request_xml)
 
