@@ -118,9 +118,12 @@ class Info(object):
 
 
 def code_label(n):
+    chunks = []
     if hasattr(n, 'Label') and n.Label:
-        return Info(xghtml.E.b(n.Label), ' (', n.Code, ')')
-    return Info(xghtml.E.b(n.Code))
+        chunks.append(xghtml.E.b(n.Label))
+    if hasattr(n, 'Code') and n.Code:
+        chunks += [' (', n.Code, ')']
+    return Info(*chunks)
 
 
 #~ CodeLabel = code_label
@@ -766,6 +769,7 @@ def ApplicationFiledType(n):
 
 
 def DecisionType206(n):
+    # print 20150513, unicode(n).encode("ascii", errors="replace")
     info = code_label(n)
     info.addfrom(n, 'Reference', _("Reference"))
     info.addfrom(n, 'OpenClose', _("Open/Close"), OpenCloseType)
