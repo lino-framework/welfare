@@ -11,6 +11,18 @@
    models
    fixtures.std
 
+Document templates:
+
+.. xfile:: art61/Contract/contract.body.html
+
+  This file is used as :attr:`body_template
+  <lino.modlib.excerpts.models.Excerpt.body_template>` on the excerpt
+  type used to print a
+  :class:`lino_welfare.modlib.art61.models.Contract`.
+
+  Source code: :srcref:`art61/Contract/contract.body.html
+  <lino_welfare/modlib/art61/config/art61/Contract/contract.body.html>`.
+
 """
 
 from __future__ import unicode_literals
