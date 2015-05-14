@@ -15,24 +15,21 @@ import sys, os
 
 extlinks = {}
 extensions = []
-intersphinx_mapping = {}
 
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
-extensions += ['lino.sphinxcontrib.actordoc']
-extensions += ['lino.sphinxcontrib.logo']
-
-
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
 
+intersphinx_mapping = {}
 from django.utils.importlib import import_module
 for n in 'atelier lino'.split():
     m = import_module(n)
     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
 
-
+extensions += ['lino.sphinxcontrib.actordoc']
+extensions += ['lino.sphinxcontrib.logo']
 extensions += ['sphinx.ext.autosummary']
 autosummary_generate = True
 autodoc_default_flags = ['members']
