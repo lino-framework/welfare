@@ -22,14 +22,19 @@ Original request:
 from __future__ import unicode_literals
 from __future__ import print_function
 
-from django.db import models
+from lino.api import dd, _
 
-from lino.api import dd, rt, _
+
+class Subsidization(dd.Choice):
+
+    def contract_field_name(self):
+        return 'subsidize_' + self.value
 
 
 class Subsidizations(dd.ChoiceList):
     verbose_name = _("Subsidization")
     verbose_name_plural = _("Subsidizations")
+    item_class = Subsidization
 
 add = Subsidizations.add_item
 add('10', _("Activa"), 'activa')

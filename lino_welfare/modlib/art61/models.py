@@ -103,7 +103,7 @@ class Contract(JobSupplyment):
         """Yield a list of all subsidizations activated for this contract.
         """
         for sub in Subsidizations.items():
-            if getattr(self, subsidization_field_name(sub)):
+            if getattr(self, sub.contract_field_name()):
                 yield sub
 
     def get_excerpt_options(self, ar, **kw):
@@ -218,12 +218,10 @@ class MyContracts(Contracts):
         kw.update(user=ar.get_user())
         return kw
 
-def subsidization_field_name(sub):
-                       return 'subsidize_' + sub.value
 
 @dd.receiver(dd.pre_analyze)
 def inject_subsidization_fields(sender, **kw):
     for sub in Subsidizations.items():
         dd.inject_field(
-            'art61.Contract', subsidization_field_name(sub),
+            'art61.Contract', sub.contract_field_name(),
             models.BooleanField(verbose_name=sub.text, default=False))

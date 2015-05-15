@@ -238,8 +238,8 @@ extlinks.update(ticket=('http://trac.lino-framework.org/ticket/%s', '#'))
 # extlinks.update(
 #     lino=('http://www.lino-framework.org%s.html', ''))
 
-# import lino_welfare
-# extlinks.update(srcref=(lino_welfare.srcref_url, ''))
+import lino_welfare
+extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
 #~ nitpicky = True # use -n in Makefile instead
 

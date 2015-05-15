@@ -50,6 +50,11 @@ class PackagesTests(BaseTestCase):
         self.run_packages_test(lino_welfare.SETUP_INFO['packages'])
 
 
+class SpecsTests(BaseTestCase):
+    def test_art61(self):
+        return self.run_simple_doctests('docs/specs/art61.rst')
+
+
 class DocsTests(BaseTestCase):
     
     def test_cal(self):

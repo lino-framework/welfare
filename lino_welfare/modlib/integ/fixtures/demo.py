@@ -106,6 +106,14 @@ def objects():
         factories.append(isip_contract)
 
         if dd.is_installed('art61'):
+            Subsidizations = art61.Subsidizations
+            SUBS_STORIES = Cycler([
+                [Subsidizations.activa],
+                [Subsidizations.tutorat],
+                [Subsidizations.activa, Subsidizations.tutorat],
+                [Subsidizations.region]
+            ])
+
             ART61_CONTRACT_TYPES = Cycler(art61.ContractType.objects.all())
 
             def f():
@@ -113,6 +121,9 @@ def objects():
                     type=ART61_CONTRACT_TYPES.pop(),
                     company=COMPANIES.pop(),
                     duration=JOBS_CONTRACT_DURATIONS.pop())
+                ss = SUBS_STORIES.pop()
+                for sub in ss:
+                    kw[sub.contract_field_name()] = True
                 return art61.Contract(**kw)
             factories.append(f)
 

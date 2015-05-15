@@ -2,7 +2,8 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Provides functionality for managing so-called "art61 job supply" projects.
+"""Provides functionality for managing so-called "article 61 job
+supplyments".  See :doc:`/tested/art61` for an overview.
 
 
 .. autosummary::
@@ -10,18 +11,6 @@
 
    models
    fixtures.std
-
-Document templates:
-
-.. xfile:: art61/Contract/contract.body.html
-
-  This file is used as :attr:`body_template
-  <lino.modlib.excerpts.models.Excerpt.body_template>` on the excerpt
-  type used to print a
-  :class:`lino_welfare.modlib.art61.models.Contract`.
-
-  Source code: :srcref:`art61/Contract/contract.body.html
-  <lino_welfare/modlib/art61/config/art61/Contract/contract.body.html>`.
 
 """
 

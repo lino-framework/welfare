@@ -27,6 +27,7 @@ Content
    ref/index
    releases/index
    tested/index
+   specs/index
    changes
    api/index
    tour/index
