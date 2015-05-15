@@ -114,6 +114,9 @@ matière de médecine du travail.</p>
 pour le travailleur engagé.</p>
 
 
+{% if obj.subsidize_20 %}
+
+{% else %}
 
 <h2>Article {{article()}} (sans tutorat)</h2>
 
@@ -143,6 +146,8 @@ Respect des horaires et des procédures en cas d’absence
 <p>§2 - Le CPAS désigne Monsieur {{obj.user}}, mandaté par le CPAS,
 pour effectuer le suivi social du travailleur pendant la durée de la
 présente convention.</p>
+
+{% endif %}
 
 <h2>Article {{article()}} (activa)</h2>
 
