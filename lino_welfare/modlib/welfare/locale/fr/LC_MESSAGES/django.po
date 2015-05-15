@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-21 15:51+0300\n"
-"PO-Revision-Date: 2015-04-21 16:00+0300\n"
+"PO-Revision-Date: 2015-05-15 20:09+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -2262,15 +2262,15 @@ msgstr ""
 
 #: lino_welfare/modlib/households/models.py:35
 msgid "At full charge"
-msgstr ""
+msgstr "Entièrement à charge"
 
 #: lino_welfare/modlib/households/models.py:36
 msgid "Not at charge"
-msgstr ""
+msgstr "Pas à charge"
 
 #: lino_welfare/modlib/households/models.py:37
 msgid "At shared charge"
-msgstr ""
+msgstr "Partiellement à charge"
 
 #: lino_welfare/modlib/households/models.py:179
 #, fuzzy
@@ -2280,21 +2280,21 @@ msgstr "coût horaire"
 #: lino_welfare/modlib/households/models.py:222
 #, python-format
 msgid "Added %d children."
-msgstr ""
+msgstr "Ajouté %d enfants."
 
 #: lino_welfare/modlib/households/models.py:252
 #, python-format
 msgid "%(count)d adult"
 msgid_plural "%(count)d adults"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(count)d adulte"
+msgstr[1] "%(count)d adultes"
 
 #: lino_welfare/modlib/households/models.py:257
 #, python-format
 msgid "%(count)d child"
 msgid_plural "%(count)d children"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(count)d enfant"
+msgstr[1] "%(count)d enfants"
 
 #: lino_welfare/modlib/households/models.py:260
 msgid " and "
@@ -2659,7 +2659,7 @@ msgstr "Cause d'abandon"
 
 #: lino_welfare/modlib/isip/models.py:111
 msgid "Contract termination reasons"
-msgstr ""
+msgstr "Raisons d’arrêt de contrat"
 
 #: lino_welfare/modlib/isip/models.py:113
 msgid "designation"
@@ -3059,12 +3059,13 @@ msgstr ""
 #: lino_welfare/modlib/newcomers/models.py:410
 #, python-format
 msgid "%(client)s assigned to %(coach)s "
-msgstr ""
+msgstr "%(client)s a été attribué à %(coach)s "
 
 #: lino_welfare/modlib/newcomers/models.py:416
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr ""
+"%(client)s sera suivi par %(coach)s dans le cadre de sa/son %(faculty)s."
 
 #: lino_welfare/modlib/newcomers/models.py:465
 msgid "Newcomers Quota"
@@ -3268,7 +3269,7 @@ msgstr ""
 
 #: lino_welfare/modlib/pcsw/coaching.py:87
 msgid "Coaching termination reasons"
-msgstr ""
+msgstr "Raisons d’arrêt d'intervention"
 
 #: lino_welfare/modlib/pcsw/coaching.py:93
 msgid "If not empty, allow this ending only on coachings of specified type."
