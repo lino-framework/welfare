@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-21 15:51+0300\n"
-"PO-Revision-Date: 2015-05-15 20:09+0300\n"
+"PO-Revision-Date: 2015-05-16 03:52+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
@@ -749,9 +749,8 @@ msgid "Awards"
 msgstr "Tests de niveau"
 
 #: lino_welfare/modlib/cal/models.py:31
-#, fuzzy
 msgid "Notified"
-msgstr "non rempli"
+msgstr "Planifié"
 
 #: lino_welfare/modlib/cal/models.py:54
 msgid "This will checkout {num} guests: {guests}"
@@ -774,9 +773,8 @@ msgid "Invite client"
 msgstr "Inviter le bénéficiare"
 
 #: lino_welfare/modlib/cal/models.py:115
-#, fuzzy
 msgid "User Calendar"
-msgstr "Calendrier"
+msgstr "Calendrier de l'utilisateur"
 
 #: lino_welfare/modlib/cal/models.py:116
 msgid "Calendar where your events are published."
