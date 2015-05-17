@@ -6,7 +6,7 @@ Article 61 job supplyments
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.SpecTests.test_art61
+  $ python setup.py test -s tests.SpecsTests.test_art61
 
 This document is an overview of the functionality provided by
 :mod:`lino_welfare.modlib.art61`.

@@ -54,6 +54,9 @@ class SpecsTests(BaseTestCase):
     def test_art61(self):
         return self.run_simple_doctests('docs/specs/art61.rst')
 
+    def test_choicelists(self):
+        return self.run_simple_doctests('docs/specs/choicelists.rst')
+
 
 class DocsTests(BaseTestCase):
     
