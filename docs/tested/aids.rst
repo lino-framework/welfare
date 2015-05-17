@@ -43,14 +43,14 @@ has been registered.
 Currently Lino Welfare knows three confirmation types.
 
 >>> ses.show(aids.ConfirmationTypes)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-========================= ========================= =================================================== =============
- name                      Wert                      Text                                                Vorlage
-------------------------- ------------------------- --------------------------------------------------- -------------
- aids.SimpleConfirmation   aids.SimpleConfirmation   Einfache Bescheinigung (aids.SimpleConfirmation)    Default.odt
- aids.IncomeConfirmation   aids.IncomeConfirmation   Einkommensbescheinigung (aids.IncomeConfirmation)   Default.odt
- aids.RefundConfirmation   aids.RefundConfirmation   Kostenübernahmeschein (aids.RefundConfirmation)     Default.odt
-========================= ========================= =================================================== =============
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+====== ========================= =================================================== =============
+ name   Wert                      Text                                                Vorlage
+------ ------------------------- --------------------------------------------------- -------------
+        aids.SimpleConfirmation   Einfache Bescheinigung (aids.SimpleConfirmation)    Default.odt
+        aids.IncomeConfirmation   Einkommensbescheinigung (aids.IncomeConfirmation)   Default.odt
+        aids.RefundConfirmation   Kostenübernahmeschein (aids.RefundConfirmation)     Default.odt
+====== ========================= =================================================== =============
 <BLANKLINE>
 
 

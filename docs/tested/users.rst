@@ -44,13 +44,13 @@ This is the list of user profiles:
  value   name        text
 ------- ----------- -----------------------------
  000     anonymous   Anonymous
- 100     100         Integration Agent
- 110     110         Integration Agent (Manager)
- 200     200         Newcomers consultant
- 210     210         Reception clerk
- 300     300         Debts consultant
- 400     400         Social agent
- 410     410         Social agent (Manager)
+ 100                 Integration Agent
+ 110                 Integration Agent (Manager)
+ 200                 Newcomers consultant
+ 210                 Reception clerk
+ 300                 Debts consultant
+ 400                 Social agent
+ 410                 Social agent (Manager)
  900     admin       Administrator
 ======= =========== =============================
 <BLANKLINE>
