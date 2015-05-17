@@ -64,10 +64,10 @@ class Schedules(dd.Table):
 
 class JobProvider(contacts.Company):
 
-    """A **job provider** (Stellenanbieter, Employant) is an organisation
-    where the work will be executed. They are not necessarily also the
-    employer. It may be either some public service or a private
-    company.
+    """A **job provider** (Stellenanbieter, Services utilisateurs) is an
+    organisation where the work will be executed. They are not
+    necessarily also the employer. It may be either some public
+    service or a private company.
 
     :class:`JobProvider` is a polymorphic subclass of
     :class:`contacts.Company

@@ -536,9 +536,8 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
 
 
 class JobProvidersAndContracts(CompaniesAndContracts):
-    label = _("Employants et contrats Art 60§7")
-    help_text = _("""Nombre de projets Art 60§7 actifs par 
-    employants et type de contrat.""")
+    """Ventilates number of job supplyments by provider and type."""
+    label = _("Job providers and contrats")
     contracts_table = jobs.Contracts
     contract_types = jobs.ContractType
 
@@ -557,7 +556,6 @@ class ActivityReport(Report):
     """
 
     required = dict(user_groups='integ')
-    #~ required = dd.required(user_level='manager')
     label = _("Activity Report")
 
     parameters = dict(
