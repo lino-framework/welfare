@@ -126,6 +126,22 @@ class ObstacleTypes(dd.Table):
 
 
 class Obstacle(PersonProperty):
+    """An **obstacle** is an observed fact or characteristic of a client
+    which might be reason to not get a given job.
+
+    .. attribute:: type
+
+        A pointer to :class:`ObstacleType`.
+
+    .. attribute:: user
+
+        The agent who observed this obstacle.
+
+    .. attribute:: detected_date
+
+        The date when the agent observed this obstacle.
+
+    """
     class Meta:
         verbose_name = _("Obstacle")
         verbose_name_plural = _("Obstacles")
@@ -135,6 +151,8 @@ class Obstacle(PersonProperty):
         related_name='obstacles_detected',
         verbose_name=_("Detected by"),
         blank=True, null=True)
+    detected_date = models.DateField(
+        _("Date"), blank=True, null=True, default=settings.SITE.today)
 
 
 @dd.receiver(pre_ui_save, sender=Obstacle)
@@ -147,7 +165,7 @@ class Obstacles(dd.Table):
 
 
 class ObstaclesByPerson(PropsByPerson, Obstacles):
-    column_names = 'type user remark'
+    column_names = 'type user detected_date remark  *'
 
 
 dd.inject_field('system.SiteConfig', 'propgroup_skills', dd.DummyField())

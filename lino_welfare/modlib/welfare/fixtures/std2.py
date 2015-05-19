@@ -68,13 +68,13 @@ def excerpt_types():  # also used for migration to 1.1.11
         #              fr="Plan d'action",
         #              en="to-do list"))
 
-    ExcerptType.update_for_model(
+    yield ExcerptType.update_for_model(
         'jobs.Contract', certifying=True, backward_compat=True)
 
-    ExcerptType.update_for_model(
+    yield ExcerptType.update_for_model(
         'isip.Contract', certifying=True, backward_compat=True)
 
-    ExcerptType.update_for_model(
+    yield ExcerptType.update_for_model(
         'art61.Contract', certifying=True,
         print_recipient=False, body_template='contract.body.html')
 

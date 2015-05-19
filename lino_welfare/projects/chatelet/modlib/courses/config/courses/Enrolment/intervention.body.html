@@ -1,0 +1,57 @@
+{% extends "excerpts/base.body.html" %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}:
+<span class="VariableText">
+{{obj.user.initials}}/{{obj.id}}/{{obj.pupil.id}}/{{this.id}}
+</span>
+{% endblock %}
+
+{% block title %}
+{% if language != settings.SITE.get_default_language() %}
+<p class="CenteredHeader">({{_("Translation")}})</p>
+{% endif %}
+<h1>Demande d'intervention psychosociale</h1>
+{% endblock %}
+
+{% block body %}
+
+<p><b>Date de la demande:</b> {{fdl(obj.request_date)}}</p>
+
+<p><b>Bénéficiaire:</b>
+{{obj.pupil.get_full_name(nominative=True)}}, 
+{{obj.pupil.get_primary_address()}}
+{{_("Phone")}}: {{obj.pupil.phone}}
+{{_("GSM")}}: {{obj.pupil.gsm}}
+</p>
+{% if obj.user.coaching_type %}
+<p>Service demandeur: {{obj.user.coaching_type}}</p>
+{% endif %}
+<p>Assistant(e) social(e) pourvoyeur(se) : {{obj.user.get_full_name()}}</p>
+<p>Autre assistant(e) social(e) :</p>
+
+{% if obj.motivation %}
+<p><b>Projet envisagé par l’assistant(e) social(e) avec l’usager :</b></p>
+{{obj.motivation}}
+{% endif %}
+{% if obj.problems %}
+<p><b>Difficultés détectées chez la personne et à l’origine de la demande:<b></p>
+{{obj.problems}}
+{% endif %}
+
+{% if obj.remark %}
+<p>Remarque: {{ obj.remark }}</p>
+{% endif %}
+
+{% endblock %}
+
+{% block signature %}
+<table>
+<tr>
+<td>Signature du responsable<br/><br/></td>
+<td>Signature de l'assistant(e) social(e)<br/><br/></td>
+<td>Signature de la psychologue<br/><br/></td>
+</tr>
+</table>
+{% endblock %}
+

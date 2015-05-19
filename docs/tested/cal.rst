@@ -45,22 +45,23 @@ tested using doctest with the following initialization code:
 
 >>> rt.login('alicia').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-======================== =========================== ===================== ==================== =================================
- When                     Client                      Calendar Event Type   Summary              Workflow
------------------------- --------------------------- --------------------- -------------------- ---------------------------------
- *Thu 5/22/14 at 08:30*                               Meeting               Diner                **Suggested** → [Notified]
- *Fri 5/23/14 at 09:40*   AUSDEMWALD Alfons (116)     Appointment           Souper               **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 10:20*                               External meeting      Petit-déjeuner       **Took place** → [Reset]
- *Sat 5/24/14 at 11:10*                               Internal meeting      Rencontre            **Cancelled**
- *Sun 5/25/14 at 13:30*                               External meeting      Consultation         **Omitted**
- *Mon 5/26/14 at 08:30*                               Private               Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 09:40*                               Meeting               Evaluation           **Suggested** → [Notified]
- *Tue 5/27/14 at 10:20*   BASTIAENSEN Laurent (117)   Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 11:10*                               External meeting      Interview            **Took place** → [Reset]
- *Wed 5/28/14 at 13:30*                               Internal meeting      Diner                **Cancelled**
- *Thu 5/29/14 at 08:30*                               External meeting      Souper               **Omitted**
- *Fri 5/30/14 at 09:40*                               Private               Petit-déjeuner       **Notified** → [Cancel] [Reset]
-======================== =========================== ===================== ==================== =================================
+========================= =========================== ===================== ==================== =================================
+ When                      Client                      Calendar Event Type   Summary              Workflow
+------------------------- --------------------------- --------------------- -------------------- ---------------------------------
+ *Thu 5/22/14 at 08:30*                                Meeting               Diner                **Suggested** → [Notified]
+ *Fri 5/23/14 at 09:40*    AUSDEMWALD Alfons (116)     Appointment           Souper               **Draft** → [Notified] [Cancel]
+ *Sat 5/24/14 at 10:20*                                External meeting      Petit-déjeuner       **Took place** → [Reset]
+ *Sat 5/24/14 at 11:10*                                Internal meeting      Rencontre            **Cancelled**
+ *Sun 5/25/14 at 13:30*                                External meeting      Consultation         **Omitted**
+ *Mon 5/26/14 at 08:30*                                Private               Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 5/26/14 at 09:40*                                Meeting               Evaluation           **Suggested** → [Notified]
+ *Tue 5/27/14 at 10:20*    BASTIAENSEN Laurent (117)   Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 5/28/14 at 11:10*                                External meeting      Interview            **Took place** → [Reset]
+ *Wed 5/28/14 at 13:30*                                Internal meeting      Diner                **Cancelled**
+ *Thu 5/29/14 at 08:30*                                External meeting      Souper               **Omitted**
+ *Fri 5/30/14 at 09:40*                                Private               Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ ...
+========================= =========================== ===================== ==================== =================================
 <BLANKLINE>
 
 These are Alicia's calendar entries of the last two months:
@@ -76,45 +77,47 @@ No data to display
 
 >>> rt.login('hubert').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-======================== ========================= ===================== ============== =================================
- When                     Client                    Calendar Event Type   Summary        Workflow
------------------------- ------------------------- --------------------- -------------- ---------------------------------
- *Thu 5/22/14 at 10:20*                             Meeting               Treffen        **Suggested** → [Notified]
- *Fri 5/23/14 at 11:10*   COLLARD Charlotte (118)   Appointment           Beratung       **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 08:30*                             Internal meeting      Auswertung     **Cancelled**
- *Sat 5/24/14 at 13:30*                             External meeting      Seminar        **Took place** → [Reset]
- *Sun 5/25/14 at 09:40*                             External meeting      Erstgespräch   **Omitted**
- *Mon 5/26/14 at 10:20*                             Private               Interview      **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 11:10*                             Meeting               Mittagessen    **Suggested** → [Notified]
- *Tue 5/27/14 at 13:30*   CHANTRAINE Marc (120*)    Appointment           Abendessen     **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 08:30*                             External meeting      Frühstück      **Took place** → [Reset]
- *Wed 5/28/14 at 09:40*                             Internal meeting      Treffen        **Cancelled**
- *Thu 5/29/14 at 10:20*                             External meeting      Beratung       **Omitted**
- *Fri 5/30/14 at 11:10*                             Private               Seminar        **Notified** → [Cancel] [Reset]
- *Tue 6/3/14 at 09:00*    DENON Denis (180*)        Appointment           Termin 1       **Suggested** → [Notified]
-======================== ========================= ===================== ============== =================================
+========================= ========================= ===================== ============== =================================
+ When                      Client                    Calendar Event Type   Summary        Workflow
+------------------------- ------------------------- --------------------- -------------- ---------------------------------
+ *Thu 5/22/14 at 10:20*                              Meeting               Treffen        **Suggested** → [Notified]
+ *Fri 5/23/14 at 11:10*    COLLARD Charlotte (118)   Appointment           Beratung       **Draft** → [Notified] [Cancel]
+ *Sat 5/24/14 at 08:30*                              Internal meeting      Auswertung     **Cancelled**
+ *Sat 5/24/14 at 13:30*                              External meeting      Seminar        **Took place** → [Reset]
+ *Sun 5/25/14 at 09:40*                              External meeting      Erstgespräch   **Omitted**
+ *Mon 5/26/14 at 10:20*                              Private               Interview      **Notified** → [Cancel] [Reset]
+ *Mon 5/26/14 at 11:10*                              Meeting               Mittagessen    **Suggested** → [Notified]
+ *Tue 5/27/14 at 13:30*    CHANTRAINE Marc (120*)    Appointment           Abendessen     **Draft** → [Notified] [Cancel]
+ *Wed 5/28/14 at 08:30*                              External meeting      Frühstück      **Took place** → [Reset]
+ *Wed 5/28/14 at 09:40*                              Internal meeting      Treffen        **Cancelled**
+ *Thu 5/29/14 at 10:20*                              External meeting      Beratung       **Omitted**
+ *Fri 5/30/14 at 11:10*                              Private               Seminar        **Notified** → [Cancel] [Reset]
+ *Tue 6/3/14 at 09:00*     DENON Denis (180*)        Appointment           Termin 1       **Suggested** → [Notified]
+ ...
+========================= ========================= ===================== ============== =================================
 <BLANKLINE>
 
 
 >>> rt.login('melanie').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-======================== ========================================= ===================== ==================== =================================
- When                     Client                                    Calendar Event Type   Summary              Workflow
------------------------- ----------------------------------------- --------------------- -------------------- ---------------------------------
- *Thu 5/22/14 at 09:40*                                             Meeting               Diner                **Suggested** → [Notified]
- *Fri 5/23/14 at 10:20*   DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Souper               **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 11:10*                                             External meeting      Petit-déjeuner       **Took place** → [Reset]
- *Sat 5/24/14 at 13:30*                                             Internal meeting      Rencontre            **Cancelled**
- *Sun 5/25/14 at 08:30*                                             External meeting      Consultation         **Omitted**
- *Mon 5/26/14 at 09:00*   ENGELS Edgar (129)                        Appointment           Termin 3             **Suggested** → [Notified]
- *Mon 5/26/14 at 09:40*                                             Private               Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 10:20*                                             Meeting               Evaluation           **Suggested** → [Notified]
- *Tue 5/27/14 at 11:10*   DOBBELSTEIN Dorothée (124)                Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 08:30*                                             Internal meeting      Diner                **Cancelled**
- *Wed 5/28/14 at 13:30*                                             External meeting      Interview            **Took place** → [Reset]
- *Thu 5/29/14 at 09:40*                                             External meeting      Souper               **Omitted**
- *Fri 5/30/14 at 10:20*                                             Private               Petit-déjeuner       **Notified** → [Cancel] [Reset]
-======================== ========================================= ===================== ==================== =================================
+========================= ========================================= ===================== ==================== =================================
+ When                      Client                                    Calendar Event Type   Summary              Workflow
+------------------------- ----------------------------------------- --------------------- -------------------- ---------------------------------
+ *Thu 5/22/14 at 09:40*                                              Meeting               Diner                **Suggested** → [Notified]
+ *Fri 5/23/14 at 10:20*    DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Souper               **Draft** → [Notified] [Cancel]
+ *Sat 5/24/14 at 11:10*                                              External meeting      Petit-déjeuner       **Took place** → [Reset]
+ *Sat 5/24/14 at 13:30*                                              Internal meeting      Rencontre            **Cancelled**
+ *Sun 5/25/14 at 08:30*                                              External meeting      Consultation         **Omitted**
+ *Mon 5/26/14 at 09:00*    ENGELS Edgar (129)                        Appointment           Termin 3             **Suggested** → [Notified]
+ *Mon 5/26/14 at 09:40*                                              Private               Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 5/26/14 at 10:20*                                              Meeting               Evaluation           **Suggested** → [Notified]
+ *Tue 5/27/14 at 11:10*    DOBBELSTEIN Dorothée (124)                Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 5/28/14 at 08:30*                                              Internal meeting      Diner                **Cancelled**
+ *Wed 5/28/14 at 13:30*                                              External meeting      Interview            **Took place** → [Reset]
+ *Thu 5/29/14 at 09:40*                                              External meeting      Souper               **Omitted**
+ *Fri 5/30/14 at 10:20*                                              Private               Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ ...
+========================= ========================================= ===================== ==================== =================================
 <BLANKLINE>
 
 

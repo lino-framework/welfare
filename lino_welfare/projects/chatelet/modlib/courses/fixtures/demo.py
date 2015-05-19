@@ -8,9 +8,9 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext_lazy as _
-
-from lino.api import dd, rt
+from django.conf import settings
+from lino.api import dd, rt, _
+from lino.utils import Cycler
 
 
 def objects():
@@ -18,6 +18,9 @@ def objects():
     Line = rt.modules.courses.Line
     Course = rt.modules.courses.Course
     EventType = rt.modules.cal.EventType
+    Pupil = rt.modules.pcsw.Client
+    Enrolment = rt.modules.courses.Enrolment
+    EnrolmentStates = rt.modules.courses.EnrolmentStates
 
     kw = dd.str2kw('name', _("Workshop"))
     event_type = EventType(**kw)
@@ -55,4 +58,32 @@ def objects():
 
     obj = line(CourseAreas.job, _("Get active!"))
     yield obj
-    yield Course(line=obj, start_date=dd.demo_date(-10))
+    yield Course(line=obj, start_date=dd.demo_date(-10), max_places=3)
+
+    obj = line(CourseAreas.job,
+               body_template="intervention.body.html",
+               **dd.str2kw('name', _("Psycho-social intervention")))
+    yield obj
+    yield Course(line=obj, start_date=dd.demo_date(-200), max_places=1)
+
+    PUPILS = Cycler(Pupil.objects.all())
+    #~ print 20130712, Pupil.objects.all()
+    COURSES = Cycler(Course.objects.all())
+    STATES = Cycler(EnrolmentStates.objects())
+    USERS = Cycler(settings.SITE.user_model.objects.all())
+
+    def fits(course, pupil):
+        if course.max_places and course.get_free_places() == 0:
+            return False
+        if Enrolment.objects.filter(course=course, pupil=pupil).count():
+            return False
+        return True
+    for i in range(100):
+        course = COURSES.pop()
+        pupil = PUPILS.pop()
+        while not fits(course, pupil):
+            course = COURSES.pop()
+        kw = dict(user=USERS.pop(), course=course, pupil=pupil)
+        kw.update(request_date=dd.demo_date(-i))
+        kw.update(state=STATES.pop())
+        yield Enrolment(**kw)

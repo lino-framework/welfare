@@ -36,6 +36,6 @@ def objects():
         primary=True, certifying=True,
         template='Default.odt',
         **dd.str2kw('name', _("Immersion training")))
-    rt.modules.excerpts.ExcerptType.update_for_model(
+    yield rt.modules.excerpts.ExcerptType.update_for_model(
         'immersion.Contract', **kw)
 

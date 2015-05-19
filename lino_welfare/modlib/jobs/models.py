@@ -587,9 +587,8 @@ add('30', pgettext("jobs", "Inactive"), 'inactive')
 
 
 class Candidature(SectorFunction):
-
     """
-    A candidature is when a Client applies for a known :class:`Job`.
+    A candidature is when a client applies for a known :class:`Job`.
     
     """
     class Meta:
@@ -597,31 +596,18 @@ class Candidature(SectorFunction):
         verbose_name_plural = _('Job Candidatures')
         get_latest_by = 'date_submitted'
 
-    #~ person = models.ForeignKey(settings.SITE.person_model)
     person = models.ForeignKey('pcsw.Client')
 
-    job = models.ForeignKey("jobs.Job",
-                            blank=True, null=True)
-        #~ verbose_name=_("Requested Job"))
+    job = models.ForeignKey("jobs.Job", blank=True, null=True)
 
-    #~ date_submitted = models.DateField(_("date submitted"),auto_now_add=True)
-    date_submitted = models.DateField(_("date submitted"),
-                                      help_text=_("Date when the IA introduced this candidature."))
-    #~ u"Datum, an dem die Anfrage erstellt wurde."
-
-    #~ contract = models.ForeignKey("jobs.Contract",blank=True,null=True,
-        #~ verbose_name=_("Contract found"))
-    #~ u"""
-    #~ Der Vertrag, durch den diese Anfrage befriedigt wurde
-    #~ (ein Objekt vom Typ :class:`Contract`).
-    #~ So lange dieses Feld leer ist, gilt die Anfrage als offen.
-    #~ """
+    date_submitted = models.DateField(
+        _("date submitted"),
+        help_text=_("Date when the IA introduced this candidature."))
 
     remark = models.TextField(
         blank=True, null=True,
         verbose_name=_("Remark"))
 
-    #~ active = models.BooleanField(_("Active"),default=True)
     state = CandidatureStates.field(default=CandidatureStates.active)
 
     def __unicode__(self):
@@ -652,22 +638,19 @@ class Candidatures(dd.Table):
     List of :class:`Candidatures <Candidature>`.
     """
     required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Candidature
+    model = 'jobs.Candidature'
     order_by = ['date_submitted']
-    column_names = 'date_submitted job:25 state * id'
+    column_names = 'date_submitted job:25 person state * id'
 
 
 class CandidaturesByPerson(Candidatures):
-
     """
     ...
     """
     required = dd.required(user_groups='integ')
     #~ required_user_level = None
     master_key = 'person'
-    hidden_columns = 'id'
+    column_names = 'date_submitted job:25 sector function remark state *'
     auto_fit_column_widths = True
 
 
@@ -681,7 +664,6 @@ class CandidaturesByFunction(Candidatures):
 
 class CandidaturesByJob(Candidatures):
     required = dd.required(user_groups='integ')
-    #~ required_user_level = None
     master_key = 'job'
     column_names = 'date_submitted person:25 state * id'
 
@@ -696,7 +678,7 @@ class CandidaturesByJob(Candidatures):
 class SectorFunctionByOffer(dd.Table):
 
     """Shows the Candidatures or Experiences for this Offer.
-    
+
     It is a slave report without :attr:`master_key
     <dd.Table.master_key>`, which is allowed only because it overrides
     :meth:`dd.Table.get_request_queryset`.

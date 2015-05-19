@@ -187,4 +187,4 @@ def objects():
             # print_directly=False,
             content_type=ContentType.objects.get_for_model(ct.model))
         kw.update(dd.str2kw('name', ct.model._meta.verbose_name))
-        ExcerptType.update_for_model(ct.model, **kw)
+        yield ExcerptType.update_for_model(ct.model, **kw)

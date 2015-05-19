@@ -411,5 +411,4 @@ def objects():
         template='Default.odt',
         certifying=True)
     kw.update(dd.str2kw('name', _("Financial situation")))
-    ExcerptType.update_for_model('debts.Budget', **kw)
-
+    yield ExcerptType.update_for_model('debts.Budget', **kw)

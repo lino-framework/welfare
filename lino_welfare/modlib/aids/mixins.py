@@ -316,7 +316,7 @@ class Confirmation(
         return 'aids/Confirmation'
 
     def get_body_template(self):
-        # used by excerpts
+        """Overrides :meth:`lino.core.model.Model.get_body_template`."""
         at = self.get_aid_type()
         if at is not None:
             return at.body_template

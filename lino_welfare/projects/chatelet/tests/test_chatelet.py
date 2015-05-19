@@ -70,7 +70,7 @@ class TestCase(TestCase):
         self.assertEqual(result['message'],
                          """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
-            [u'Alcohol', 1, u'robin', 1, u'', 1, {}, {}, False]])
+            [u'Alcohol', 1, u'robin', 1, u'22.05.2014', u'', 1, {u'id': True}, {}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
