@@ -34,6 +34,24 @@ users = dd.resolve_app('users')
 cv = dd.resolve_app('cv')
 # properties = dd.resolve_app('properties')
 
+from lino_welfare.modlib.pcsw.choicelists import (
+    ClientEvents, ObservedEvent, has_contracts_filter)
+
+
+class ClientHasContract(ObservedEvent):
+    text = _("Available")
+
+    def add_filter(self, qs, pv):
+        period = (pv.start_date, pv.end_date)
+        flt = has_contracts_filter('isip_contract_set_by_client', period)
+        flt = has_contracts_filter('job_contract_set_by_client', period)
+        if dd.is_installed('immersion'):
+            flt |= has_contracts_filter(
+                'immersion_contract_set_by_client', period)
+        qs = qs.exclude(flt).distinct()
+        return qs
+
+ClientEvents.add_item_instance(ClientHasContract("available"))
 
 
 class Clients(pcsw.Clients):

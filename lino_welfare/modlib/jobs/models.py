@@ -44,6 +44,22 @@ from lino_welfare.modlib.isip.mixins import (
 from .mixins import JobSupplyment
 
 
+from lino_welfare.modlib.pcsw.choicelists import (
+    ClientEvents, ObservedEvent, has_contracts_filter)
+
+
+class ClientHasContract(ObservedEvent):
+    text = _("Art60§7 job supplyment")
+
+    def add_filter(self, qs, pv):
+        period = (pv.start_date, pv.end_date)
+        flt = has_contracts_filter('jobs_contract_set_by_client', period)
+        qs = qs.filter(flt).distinct()
+        return qs
+
+ClientEvents.add_item_instance(ClientHasContract("jobs"))
+
+
 class Schedule(mixins.BabelNamed):
 
     """List of choices for `jobs.Contract.schedule` field."""

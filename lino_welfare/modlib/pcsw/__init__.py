@@ -12,11 +12,12 @@ Most important models are :class:`Client` and :class:`Coaching`.
 .. autosummary::
    :toctree:
 
-   mixins
-   choicelists
-   models
-   coaching
-   fixtures
+    mixins
+    choicelists
+    models
+    coaching
+    fixtures
+    utils
 
 See also :mod:`welfare.pcsw`.
 

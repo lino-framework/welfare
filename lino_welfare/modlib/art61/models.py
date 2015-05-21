@@ -25,6 +25,21 @@ from lino_welfare.modlib.jobs.mixins import JobSupplyment
 
 from .choicelists import Subsidizations
 
+from lino_welfare.modlib.pcsw.choicelists import (
+    ClientEvents, ObservedEvent, has_contracts_filter)
+
+
+class ClientHasContract(ObservedEvent):
+    text = _("Art61 job supplyment")
+
+    def add_filter(self, qs, pv):
+        period = (pv.start_date, pv.end_date)
+        flt = has_contracts_filter('art61_contract_set_by_client', period)
+        qs = qs.filter(flt).distinct()
+        return qs
+
+ClientEvents.add_item_instance(ClientHasContract("art61"))
+
 
 class ContractType(ContractTypeBase, mixins.Referrable):
 

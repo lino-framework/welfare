@@ -99,6 +99,9 @@ class DocsTests(BaseTestCase):
     def test_immersion(self):
         return self.run_simple_doctests('docs/tested/immersion.rst')
 
+    def test_clients(self):
+        return self.run_simple_doctests('docs/tested/clients.rst')
+
     def test_cv2(self):
         return self.run_simple_doctests('docs/tested/cv2.rst')
 

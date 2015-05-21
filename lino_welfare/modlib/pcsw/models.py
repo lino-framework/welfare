@@ -36,7 +36,6 @@ from lino.modlib.notes.choicelists import SpecialTypes
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
-extensible = dd.resolve_app('extensible')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
@@ -49,6 +48,10 @@ from lino.utils import ssin
 
 from .coaching import *
 from .mixins import ClientContactBase
+from .utils import (only_coached_by, only_coached_on,
+                    only_active_coachings_filter,
+                    add_coachings_filter, daterange_text,
+                    has_contracts_filter)
 from .choicelists import (CivilState, ResidenceType, ClientEvents,
                           ClientStates, RefusalReasons)
 
@@ -489,9 +492,10 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     @dd.displayfield(_("Find appointment"))
     def find_appointment(self, ar):  # not used
+        CalendarPanel = rt.modules.extensible.CalendarPanel
         elems = []
         for obj in self.coachings_by_client.all():
-            sar = extensible.CalendarPanel.request(
+            sar = CalendarPanel.request(
                 subst_user=obj.user, current_project=self.pk)
             elems += [ar.href_to_request(sar, obj.user.username), ' ']
         return E.div(*elems)
@@ -692,69 +696,6 @@ class ClientDetail(dd.FormLayout):
     """, label=_("Contracts"))
 
 
-def only_coached_by(qs, user):
-    return qs.filter(coachings_by_client__user=user).distinct()
-
-
-def only_coached_on(qs, period, join=None):
-    """
-    Add a filter to the Queryset `qs` (on model Client) 
-    which leaves only the clients that are (or were or will be) coached 
-    on the specified date.
-    """
-    n = 'coachings_by_client__'
-    if join:
-        n = join + '__' + n
-    return qs.filter(only_active_coachings_filter(period, n)).distinct()
-
-
-def only_active_coachings_filter(period, prefix=''):
-    """
-    """
-    assert len(period) == 2
-    args = []
-    if period[0]:
-        args.append(Q(
-            **{prefix + 'end_date__isnull': True}) | Q(
-            **{prefix + 'end_date__gte': period[0]}))
-    if period[1]:
-        args.append(Q(**{prefix + 'start_date__lte': period[1]}))
-    return Q(*args)
-
-
-def add_coachings_filter(qs, user, period, primary):
-    assert period is None or len(period) == 2
-    if not (user or period or primary):
-        return qs
-    flt = Q()
-    if period:
-        flt &= only_active_coachings_filter(period, 'coachings_by_client__')
-    if user:
-        flt &= Q(coachings_by_client__user=user)
-    if primary:
-        flt &= Q(coachings_by_client__primary=True)
-    return qs.filter(flt).distinct()
-
-
-def daterange_text(a, b):
-    """
-    """
-    if a == b:
-        return dd.dtos(a)
-    return dd.dtos(a) + "-" + dd.dtos(b)
-
-
-# ACTIVE_STATES = [ClientStates.coached, ClientStates.newcomer]
-
-
-def has_contracts_filter(prefix, period):
-    f1 = Q(**{prefix+'__applies_until__isnull': True})
-    f1 |= Q(**{prefix+'__applies_until__gte': period[0]})
-    f2 = Q(**{prefix+'__date_ended__isnull': True})
-    f2 |= Q(**{prefix+'__date_ended__gte': period[0]})
-    return f1 & f2 & Q(**{prefix+'__applies_from__lte': period[1]})
-
-
 class Clients(contacts.Persons):
     """The list that opens by :menuselection:`Contacts --> Clients`.
 
@@ -842,68 +783,68 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             period[1] = period[0]
 
         ce = pv.observed_event
-        if pv.coached_by or ce == ClientEvents.active \
-           or pv.start_date or pv.end_date:
+        if ce:
+            qs = ce.add_filter(qs, pv)
+
+        if pv.coached_by:  # or pv.start_date or pv.end_date:
             qs = add_coachings_filter(
                 qs, pv.coached_by, period, pv.only_primary)
             if pv.and_coached_by:
                 qs = add_coachings_filter(
                     qs, pv.and_coached_by, period, False)
 
-        if ce is None:
-            pass
-        elif ce == ClientEvents.active:
-            pass
-        #     if pv.client_state is None:
-        #         qs = qs.filter(client_state__in=ACTIVE_STATES)
-        elif ce == ClientEvents.isip:
-            flt = has_contracts_filter('isip_contract_set_by_client', period)
-            qs = qs.filter(flt).distinct()
-        elif ce == ClientEvents.jobs:
-            flt = has_contracts_filter('jobs_contract_set_by_client', period)
-            qs = qs.filter(flt).distinct()
-        elif dd.is_installed('immersion') and ce == ClientEvents.immersion:
-            flt = has_contracts_filter(
-                'immersion_contract_set_by_client', period)
-            qs = qs.filter(flt).distinct()
+        # if ce is None:
+        #     pass
+        # elif ce == ClientEvents.active:
+        #     pass
+        # elif ce == ClientEvents.isip:
+        #     flt = has_contracts_filter('isip_contract_set_by_client', period)
+        #     qs = qs.filter(flt).distinct()
+        # elif ce == ClientEvents.jobs:
+        #     flt = has_contracts_filter('jobs_contract_set_by_client', period)
+        #     qs = qs.filter(flt).distinct()
+        # elif dd.is_installed('immersion') and ce == ClientEvents.immersion:
+        #     flt = has_contracts_filter(
+        #         'immersion_contract_set_by_client', period)
+        #     qs = qs.filter(flt).distinct()
 
-        elif ce == ClientEvents.available:
-            # Build a condition "has some ISIP or some jobs.Contract
-            # or some immersion.Contract" and then `exclude` it.
-            flt = has_contracts_filter('isip_contract_set_by_client', period)
-            flt |= has_contracts_filter('jobs_contract_set_by_client', period)
-            if dd.is_installed('immersion'):
-                flt |= has_contracts_filter(
-                    'immersion_contract_set_by_client', period)
-            qs = qs.exclude(flt).distinct()
+        # elif ce == ClientEvents.available:
+        #     # Build a condition "has some ISIP or some jobs.Contract
+        #     # or some immersion.Contract" and then `exclude` it.
+        #     flt = has_contracts_filter('isip_contract_set_by_client', period)
+        #     flt |= has_contracts_filter('jobs_contract_set_by_client', period)
+        #     if dd.is_installed('immersion'):
+        #         flt |= has_contracts_filter(
+        #             'immersion_contract_set_by_client', period)
+        #     qs = qs.exclude(flt).distinct()
 
-        elif ce == ClientEvents.dispense:
-            qs = qs.filter(
-                dispense__end_date__gte=period[0],
-                dispense__start_date__lte=period[1]).distinct()
-        elif ce == ClientEvents.created:
-            qs = qs.filter(
-                created__gte=datetime.datetime.combine(
-                    period[0], datetime.time()),
-                created__lte=datetime.datetime.combine(
-                    period[1], datetime.time()))
-            #~ print 20130527, qs.query
-        elif ce == ClientEvents.modified:
-            qs = qs.filter(
-                modified__gte=datetime.datetime.combine(
-                    period[0], datetime.time()),
-                modified__lte=datetime.datetime.combine(
-                    period[1], datetime.time()))
-        elif ce == ClientEvents.penalty:
-            qs = qs.filter(
-                exclusion__excluded_until__gte=period[0],
-                exclusion__excluded_from__lte=period[1]).distinct()
-        elif ce == ClientEvents.note:
-            qs = qs.filter(
-                notes_note_set_by_project__date__gte=period[0],
-                notes_note_set_by_project__date__lte=period[1]).distinct()
-        else:
-            raise Warning(repr(ce))
+        # elif ce == ClientEvents.dispense:
+        #     qs = qs.filter(
+        #         dispense__end_date__gte=period[0],
+        #         dispense__start_date__lte=period[1]).distinct()
+        # elif ce == ClientEvents.created:
+        #     qs = qs.filter(
+        #         created__gte=datetime.datetime.combine(
+        #             period[0], datetime.time()),
+        #         created__lte=datetime.datetime.combine(
+        #             period[1], datetime.time()))
+        #     #~ print 20130527, qs.query
+        # elif ce == ClientEvents.modified:
+        #     qs = qs.filter(
+        #         modified__gte=datetime.datetime.combine(
+        #             period[0], datetime.time()),
+        #         modified__lte=datetime.datetime.combine(
+        #             period[1], datetime.time()))
+        # elif ce == ClientEvents.penalty:
+        #     qs = qs.filter(
+        #         exclusion__excluded_until__gte=period[0],
+        #         exclusion__excluded_from__lte=period[1]).distinct()
+        # elif ce == ClientEvents.note:
+        #     qs = qs.filter(
+        #         notes_note_set_by_project__date__gte=period[0],
+        #         notes_note_set_by_project__date__lte=period[1]).distinct()
+        # else:
+        #     raise Warning(repr(ce))
 
         if pv.client_state:
             qs = qs.filter(client_state=pv.client_state)

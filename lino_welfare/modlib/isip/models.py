@@ -21,6 +21,21 @@ from .mixins import (ContractEvents, ContractTypeBase,
 
 config = dd.plugins.isip
 
+from lino_welfare.modlib.pcsw.choicelists import (
+    ClientEvents, ObservedEvent, has_contracts_filter)
+
+
+class ClientHasContract(ObservedEvent):
+    text = config.verbose_name
+
+    def add_filter(self, qs, pv):
+        period = (pv.start_date, pv.end_date)
+        flt = has_contracts_filter('isip_contract_set_by_client', period)
+        qs = qs.filter(flt).distinct()
+        return qs
+
+ClientEvents.add_item_instance(ClientHasContract("isip"))
+
 
 COACHINGTYPE_ASD = 1
 COACHINGTYPE_DSBE = 2

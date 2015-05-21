@@ -10,14 +10,14 @@ Immersion trainings
 
 A technical tour into the :mod:`lino_welfare.modlib.immersion` plugin.
 
-
 .. contents::
    :depth: 2
 
-About this document
-===================
+A tested document
+=================
 
-.. include:: /include/tested.rst
+This document is part of the Lino Welfare test suite and has been
+tested using doctest with the following initialization code:
 
 >>> from __future__ import print_function
 >>> import os

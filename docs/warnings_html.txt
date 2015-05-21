@@ -1,19 +1,16 @@
 WARNING: [autosummary] failed to import u'lino_welfare.migrate': no module named lino_welfare.migrate (name=u'lino_welfare.migrate', path=u'/home/luc/hgwork/welfare/docs/api')
 WARNING: [autosummary] failed to import u'lino_welfare.projects.chatelet.migrate': no module named lino_welfare.projects.chatelet.migrate (name=u'lino_welfare.projects.chatelet.migrate', path=u'/home/luc/hgwork/welfare/docs/api')
+/home/luc/hgwork/welfare/docs/tested/clients.rst:6: WARNING: duplicate label welfare.clients.parameters, other instance in /home/luc/hgwork/welfare/docs/tested/pcsw.rst
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
+/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.art61.rst:4: WARNING: unknown document: /tested/art61
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
-None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
-None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
-None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
-None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
-<autosummary>:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
