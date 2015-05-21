@@ -356,9 +356,21 @@ class EventsByContract(dd.Table):
         return kwargs
 
 
-def site_setup(site):
+@dd.receiver(dd.post_analyze)
+def customize_cv(sender, **kw):
+    site = sender
+
     site.modules.cv.StudyTypes.set_detail_layout("""
-    name education_level id
-    isip.ContractsByStudyType
+    name id
+    education_level is_study is_training
     cv.StudiesByType
+    cv.TrainingsByType
+    isip.ContractsByStudyType
     """)
+
+# def site_setup(site):
+#     site.modules.cv.StudyTypes.set_detail_layout("""
+#     name education_level id
+#     isip.ContractsByStudyType
+#     cv.StudiesByType
+#     """)

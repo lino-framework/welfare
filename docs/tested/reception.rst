@@ -94,14 +94,10 @@ newcomer
 ----------------- --------------- -------------------------
  Alicia Allmanns   Integ           **Visit** **Find date**
  Caroline Carnol   General         **Visit** **Find date**
- Hubert Huppertz   None            **Visit**
+ Hubert Huppertz   Integ           **Visit**
  Judith Jousten    General         **Visit** **Find date**
 ================= =============== =========================
 <BLANKLINE>
-
-TODO: For Hubert and Mélanie the "Service" column says "None" because
-their `User.coaching_type` field are empty.  Why was this?
-
 
 Now let's have a closer look at the action buttons in the third column
 of above table.  This column is defined by a

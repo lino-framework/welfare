@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -21,12 +22,47 @@ from lino.api import dd
 from lino.modlib.cv.models import *
 from lino.core.signals import pre_ui_save
 
+from lino_welfare.modlib.pcsw.choicelists import (
+    ClientEvents, ObservedEvent, has_contracts_filter)
+
+
+class ClientIsLearning(ObservedEvent):
+    """Select only clients who are "learning" during the given period.
+    That is, who have an active :class:`Study`, :class:`Training` or
+    :class:`Experience`.
+
+    """
+    text = _("Client is learning")
+
+    def add_filter(self, qs, pv):
+        if pv.start_date:
+            flt = Q(training_set__start_date__gte=pv.start_date)
+            flt |= Q(study_set__start_date__gte=pv.start_date)
+            flt |= Q(experience_set__start_date__gte=pv.start_date)
+            qs = qs.filter(flt)
+        else:
+            flt = Q(training_set__start_date__isnull=True)
+            flt |= Q(study_set__start_date__isnull=True)
+            flt |= Q(experience_set__start_date__isnull=True)
+            qs = qs.filter(flt)
+
+        if pv.end_date:
+            flt = Q(training_set__end_date__lte=pv.end_date)
+            flt |= Q(study_set__end_date__lte=pv.end_date)
+            flt |= Q(experience_set__end_date__lte=pv.end_date)
+            qs = qs.filter(flt)
+        return qs
+
+ClientEvents.add_item_instance(ClientIsLearning("learning"))
+
 
 LanguageKnowledgesByPerson.column_names = "language native spoken \
 written spoken_passively written_passively *"
 
 
 class Proof(mixins.BabelNamed):
+    """A **proof** is some document which certifies that a given person
+    has a given skill."""
     class Meta:
         verbose_name = _("Skill proof")
         verbose_name_plural = _("Skill proofs")

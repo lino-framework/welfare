@@ -426,7 +426,8 @@ changes.
 | cv.Studies.insert                               | 100, 110, admin                     | person start_date end_date type content            |
 |                                                 |                                     | education_level state school country city remarks  |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.StudyTypes.detail                            | admin                               | name name_fr name_de name_nl education_level id    |
+| cv.StudyTypes.detail                            | admin                               | name name_fr name_de name_nl id education_level    |
+|                                                 |                                     | is_study is_training                               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.StudyTypes.insert                            | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
 |                                                 |                                     | education_level                                    |

@@ -190,6 +190,53 @@ def objects():
     ulrike = Person.objects.get(name__exact="Charlier Ulrike")
     erna = Person.objects.get(name__exact=u"Ärgerlich Erna")
 
+    ## Coaching types
+    # We use only abbreviated names in `CoachingType.name` because the
+    # users usually know these abbrevs.
+
+    kw = dd.str2kw('name', _("Colleague"))
+    COLLEAGUE = cal.GuestRole(**kw)
+    yield COLLEAGUE
+
+    # id must match `isip.ContactBase.person_changed`
+    ASD = pcsw.CoachingType(
+        id=isip.COACHINGTYPE_ASD,
+        does_integ=False,
+        does_gss=True,
+        eval_guestrole=COLLEAGUE,
+        **dd.babelkw(
+            'name',
+            de="ASD",  # (Allgemeiner Sozialdienst)
+            nl="ASD",  # (Algemene Sociale Dienst)
+            fr="SSG",  # (Service social général)
+            en="General",  # (General Social Service)
+        ))
+    yield ASD
+
+    DSBE = pcsw.CoachingType(
+        id=isip.COACHINGTYPE_DSBE,
+        does_gss=False,
+        does_integ=True,
+        eval_guestrole=COLLEAGUE,
+        **dd.babelkw(
+            'name',
+            de="DSBE",  # (Dienst für Sozial-Berufliche Eingliederung)
+            fr="SI",  # Service intégration
+            en="Integ",  # Integration service
+        ))
+    yield DSBE
+
+    DEBTS = pcsw.CoachingType(
+        does_gss=False,
+        does_integ=False,
+        **dd.babelkw(
+            'name',
+            de="Schuldnerberatung",
+            fr="Médiation de dettes",
+            en="Debts mediation",
+        ))
+    yield DEBTS
+
     melanie = person(first_name="Mélanie", last_name="Mélard",
                      email=settings.SITE.demo_email,
                      city=eupen, country='BE', gender=dd.Genders.female,
@@ -202,6 +249,7 @@ def objects():
     yield melanie
     melanie = users.User(
         username="melanie", partner=melanie, profile='110',
+        coaching_type=DSBE,
         newcomer_consultations=False, newcomer_appointments=False)
     yield melanie
 
@@ -211,6 +259,7 @@ def objects():
     yield hubert
     hubert = users.User(
         username="hubert", partner=hubert, profile='100',
+        coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=False)
     yield hubert
 
@@ -222,6 +271,7 @@ def objects():
     yield alicia
     alicia = users.User(
         username="alicia", partner=alicia, profile='100',
+        coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=True)
     yield alicia
 
@@ -245,6 +295,7 @@ def objects():
     caroline = users.User(
         username="caroline", first_name="Caroline", last_name="Carnol",
         profile='200',
+        coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield caroline
 
@@ -252,69 +303,17 @@ def objects():
                  email=settings.SITE.demo_email,
                  city=eupen, country='BE', gender=dd.Genders.female)
     yield obj
+
     judith = users.User(
         username="judith", partner=obj, profile='400',
+        coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield judith
-    
-    kw = dd.str2kw('name', _("Colleague"))
-    COLLEAGUE = cal.GuestRole(**kw)
-    yield COLLEAGUE
-
-    # id must match `isip.ContactBase.person_changed`
-    ASD = pcsw.CoachingType(
-        id=isip.COACHINGTYPE_ASD,
-        does_integ=False,
-        does_gss=True,
-        eval_guestrole=COLLEAGUE,
-        **dd.babelkw(
-            'name',
-            de="ASD",  # (Allgemeiner Sozialdienst)
-            nl="ASD",  # (Algemene Sociale Dienst)
-            fr="SSG",  # (Service social général)
-            en="General",  # (General Social Service)
-        ))
-    yield ASD
-
-    caroline.coaching_type_id = isip.COACHINGTYPE_ASD
-    caroline.save()
-    judith.coaching_type_id = isip.COACHINGTYPE_ASD
-    judith.save()
-
-    # We use only abbreviated names in `CoachingType.name` because the
-    # users usually know these abbrevs.
-
-    DSBE = pcsw.CoachingType(
-        id=isip.COACHINGTYPE_DSBE,
-        does_gss=False,
-        does_integ=True,
-        eval_guestrole=COLLEAGUE,
-        **dd.babelkw(
-            'name',
-            de="DSBE",  # (Dienst für Sozial-Berufliche Eingliederung)
-            fr="SI",  # Service intégration
-            en="Integ",  # Integration service
-        ))
-
-    yield DSBE
-    yield pcsw.CoachingType(
-        does_gss=False,
-        does_integ=False,
-        **dd.babelkw(
-            'name',
-            de="Schuldnerberatung",
-            fr="Médiation de dettes",
-            en="Debts mediation",
-        ))
-
-    alicia.coaching_type = DSBE
-    alicia.save()
 
     # for obj in pcsw.CoachingType.objects.all():
     #     yield users.Team(**dd.babelkw('name', **field2kw(obj, 'name')))
 
-    guest_role = Instantiator('cal.GuestRole').build
-    obj = guest_role(
+    obj = cal.GuestRole(
         # email_template="Visitor.eml.html",
         **dd.babelkw(
             'name',
@@ -326,18 +325,18 @@ def objects():
     yield obj
     settings.SITE.site_config.update(client_guestrole=obj)
 
-    yield guest_role(**dd.babelkw('name',
-                               de=u"Vorsitzender",
-                               fr=u"Président",
-                               en=u"Chairman",
-                               et=u"Eesistuja",
-                               ))
-    yield guest_role(**dd.babelkw('name',
-                               de=u"Schriftführer",
-                               fr=u"Greffier",
-                               en=u"Reporter",
-                               et=u"Sekretär",
-                               ))
+    yield cal.GuestRole(**dd.babelkw('name',
+                                     de=u"Vorsitzender",
+                                     fr=u"Président",
+                                     en=u"Chairman",
+                                     et=u"Eesistuja",
+                                 ))
+    yield cal.GuestRole(**dd.babelkw('name',
+                                     de=u"Schriftführer",
+                                     fr=u"Greffier",
+                                     en=u"Reporter",
+                                     et=u"Sekretär",
+                                 ))
 
     calendar = Instantiator('cal.EventType').build
 
@@ -927,42 +926,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     Distribute properties to persons. The distribution should be
     "randomly", but independant of site's language setting.
     """
-
-    #~ pp = Instantiator('properties.PersonProperty',
-        #~ 'person property value').build
-    #~ props = [p for p in Property.objects.order_by('id')]
-    #~ i = 0
-    #~ L = len(props)
-    #~ assert L > 10
-    #~ for p in Person.objects.all():
-        #~ for n in range(3):
-                #~ if i >= L:
-                    #~ i = 0
-                #~ prop = props[i]
-                #~ i += 1
-                #~ yield pp(p,prop,prop.type.default_value)
-
-    #~ langk = Instantiator('cv.LanguageKnowledge',
-        #~ 'person:name language written spoken').build
-    #~ yield langk(u"Ausdemwald Alfons",'est','1','1')
-    #~ yield langk(u"Ausdemwald Alfons",'ger','4','3')
-    #~ yield langk(u"Bastiaensen Laurent",'ger','4','3')
-    #~ yield langk(u"Bastiaensen Laurent",'fre','4','3')
-    #~ yield langk(u"Eierschal Emil",'ger','4','3')
-    #~ yield langk(u"Ärgerlich Erna",'ger','4','4')
-    if False:  # moved to pcsw.fixtures.std
-        persongroup = Instantiator('pcsw.PersonGroup', 'name').build
-        #~ pg1 = persongroup(u"Art. 60 § 7",ref_name='1')
-        pg1 = persongroup(u"Bilan", ref_name='1')
-        yield pg1
-        #~ pg2 = persongroup(u"Préformation",ref_name='2')
-        pg2 = persongroup(u"Formation", ref_name='2')
-        yield pg2
-        #~ yield persongroup(u"Formation",ref_name='3')
-        yield persongroup(u"Recherche", ref_name='4')
-        yield persongroup(u"Travail", ref_name='4bis')
-        standby = persongroup(u"Standby", ref_name='9', active=False)
-        yield standby
 
     for i, p in enumerate(Client.objects.all()):
         if i % 2:
