@@ -80,8 +80,8 @@ Example:
 ============ ========== ==================== =============================== ==========================
  Beginnt am   Enddatum   Klient               Firma                           Land
 ------------ ---------- -------------------- ------------------------------- --------------------------
- 07.02.11     07.02.11   LAZARUS Line (144)   Belgisches Rotes Kreuz          Afghanistan
- 04.04.11     04.04.11   JONAS Josef (139)    Beschützende Werkstätte Eupen   Britische Jungferninseln
+ 07.02.11     07.03.11   LAZARUS Line (144)   Belgisches Rotes Kreuz          Afghanistan
+ 04.04.11     04.04.13   JONAS Josef (139)    Beschützende Werkstätte Eupen   Britische Jungferninseln
 ============ ========== ==================== =============================== ==========================
 <BLANKLINE>
 

@@ -92,9 +92,9 @@ result:
  cv.Regime                      cv.Regimes                      5         3
  cv.Sector                      cv.Sectors                      6         14
  cv.Status                      cv.Statuses                     5         7
- cv.Study                       cv.Studies                      14        2
+ cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
- cv.Training                    cv.Trainings                    16        0
+ cv.Training                    cv.Trainings                    16        20
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716

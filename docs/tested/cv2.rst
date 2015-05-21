@@ -1,8 +1,8 @@
 .. _welfare.tested.cv2:
 
-==================
-CV's (new version)
-==================
+=====================
+Career (new version)
+=====================
 
 .. How to test only this document:
 
@@ -11,19 +11,16 @@ CV's (new version)
 A technical tour into the
 :mod:`lino_welfare.projects.chatelet.modlib.cv` plugin.
 
-Lino Welfare extends the standard :mod:`lino.modlib.uploads` plugin
-into a system which helps social agents to manage certain documents
-about their clients. For example, integration agents want to get a
-reminder when the driving license of one of their client is going to
-expire.
+Lino Welfare extends the standard :mod:`lino.modlib.cv` plugin 
 
 .. contents::
    :depth: 2
 
-About this document
-===================
+A tested document
+=================
 
-.. include:: /include/tested.rst
+This document is being tested using doctest with the following
+initialization:
 
 >>> from __future__ import print_function
 >>> import os
@@ -31,12 +28,6 @@ About this document
 ...    'lino_welfare.projects.chatelet.settings.doctests'
 >>> from lino.api.doctest import *
     
-This documents uses the :mod:`lino_welfare.projects.chatelet` test
-database:
-
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.chatelet.settings.doctests
-
 >>> dd.today()
 datetime.date(2014, 5, 22)
 

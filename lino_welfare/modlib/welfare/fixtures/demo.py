@@ -128,6 +128,24 @@ Sales | Vente | Verkauf
 Administration & Finance | Administration & Finance | Verwaltung & Finanzwesen
 """
 
+SCHOOLS = Cycler([s.strip() for s in """
+Darul Uloom Leicester
+Emmanuel Christian School, Leicester
+Leicester High School for Girls
+Leicester Grammar School
+Leicester Islamic Academy
+Leicester Montessori School
+Sathya Sai School
+Stoneygate School
+St Crispin's School
+
+Leicester College
+Gateway College
+Regent College, Leicester
+Wyggeston and Queen Elizabeth I College
+""".splitlines()])
+# taken from https://en.wikipedia.org/wiki/List_of_schools_in_Leicester
+
 
 def unused_coachings(p, type, coach1, coach2, coached_from, coached_until=None):
     if coach1:
@@ -906,17 +924,57 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     # reset SECTORS and FUNCTIONS
     SECTORS = Cycler(cv.Sector.objects.all())
     FUNCTIONS = Cycler(cv.Function.objects.all())
+    DURATIONS = Cycler([1, 2, 3, 6, 6, 9, 12, 12, 24, 24])  # months
+    STATES = Cycler(cv.EducationEntryStates.items())
 
     for i in range(30):
+        start_date = settings.SITE.demo_date(-1200 + i * 2)
+        d = DURATIONS.pop()
+        end_date = DurationUnits.months.add_duration(start_date, d)
         yield cv.Experience(
             person=CLIENTS.pop(),
             company=COMPANIES.pop(),
             country=COUNTRIES.pop(),
-            start_date=settings.SITE.demo_date(-1200 + i * 2),
-            end_date=settings.SITE.demo_date(-1200 + i * 2),
+            start_date=start_date,
+            end_date=end_date,
             sector=SECTORS.pop(),
             function=FUNCTIONS.pop(),
         )
+
+    TRAINING_TYPES = Cycler(cv.StudyType.objects.filter(is_training=True))
+    for i in range(20):
+        start_date = settings.SITE.demo_date(-1200 + i * 2)
+        d = DURATIONS.pop()
+        end_date = DurationUnits.months.add_duration(start_date, d)
+        yield cv.Training(
+            person=CLIENTS.pop(),
+            type=TRAINING_TYPES.pop(),
+            school=SCHOOLS.pop(),
+            country=COUNTRIES.pop(),
+            start_date=start_date,
+            end_date=end_date,
+            sector=SECTORS.pop(),
+            function=FUNCTIONS.pop(),
+            state=STATES.pop(),
+        )
+
+    STUDY_TYPES = Cycler(cv.StudyType.objects.filter(is_study=True))
+    EDULEVELS = Cycler(cv.EducationLevel.objects.all())
+    for i in range(20):
+        start_date = settings.SITE.demo_date(-1200 + i * 2)
+        d = DURATIONS.pop()
+        end_date = DurationUnits.months.add_duration(start_date, d)
+        yield cv.Study(
+            person=CLIENTS.pop(),
+            type=STUDY_TYPES.pop(),
+            school=SCHOOLS.pop(),
+            country=COUNTRIES.pop(),
+            start_date=start_date,
+            end_date=end_date,
+            state=STATES.pop(),
+            education_level=EDULEVELS.pop(),
+        )
+
 
     #~ baker = Properties.objects.get(pk=1)
     #~ baker.save()
