@@ -25,32 +25,62 @@ from lino.core.signals import pre_ui_save
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
+# from lino.core.utils import range_filter
+
+
+def is_learning_filter(prefix, a, b):
+    if a is None:
+        flt = Q(**{prefix+'start_date__isnull': False})
+    else:
+        flt = Q(**{prefix+'start_date__lte': a})
+    if b is not None:
+        flt &= Q(**{prefix+'end_date__isnull': True}) \
+            | Q(**{prefix+'end_date__gte': b})
+    return flt
+
 
 class ClientIsLearning(ObservedEvent):
-    """Select only clients who are "learning" during the given period.
+    """Select only clients who are "learning" during the given date.
     That is, who have an active :class:`Study`, :class:`Training` or
     :class:`Experience`.
+    Only the `start_date` is used, `end_date` has no effect when
+    this criteria.
 
     """
-    text = _("Client is learning")
+    text = _("Learning")
 
     def add_filter(self, qs, pv):
-        if pv.start_date:
-            flt = Q(training_set__start_date__gte=pv.start_date)
-            flt |= Q(study_set__start_date__gte=pv.start_date)
-            flt |= Q(experience_set__start_date__gte=pv.start_date)
-            qs = qs.filter(flt)
-        else:
-            flt = Q(training_set__start_date__isnull=True)
-            flt |= Q(study_set__start_date__isnull=True)
-            flt |= Q(experience_set__start_date__isnull=True)
-            qs = qs.filter(flt)
+        p = (pv.start_date, pv.end_date)
+        flt = is_learning_filter('training__', *p)
+        flt |= is_learning_filter('study__', *p)
+        flt |= is_learning_filter('experience__', *p)
+        qs = qs.filter(flt)
+        # logger.info("20150522 %s", qs.query)
+        return qs
 
-        if pv.end_date:
-            flt = Q(training_set__end_date__lte=pv.end_date)
-            flt |= Q(study_set__end_date__lte=pv.end_date)
-            flt |= Q(experience_set__end_date__lte=pv.end_date)
-            qs = qs.filter(flt)
+        # if pv.start_date:
+        #     flt = range_filter(
+        #         pv.start_date, 'training__start_date', 'training__end_date')
+        #     flt |= range_filter(
+        #         pv.start_date, 'study__start_date', 'study__end_date')
+        #     flt |= range_filter(
+        #         pv.start_date, 'experience__start_date',
+        #         'experience__end_date')
+        #     # flt = Q(training__start_date__gte=pv.start_date)
+        #     # flt |= Q(study__start_date__gte=pv.start_date)
+        #     # flt |= Q(experience__start_date__gte=pv.start_date)
+        #     qs = qs.filter(flt)
+        # else:
+        #     flt = Q(training__start_date__isnull=False)
+        #     flt |= Q(study__start_date__isnull=False)
+        #     flt |= Q(experience__start_date__isnull=False)
+        #     qs = qs.filter(flt)
+
+        # if pv.end_date:
+        #     flt = Q(training__end_date__lte=pv.end_date)
+        #     flt |= Q(study__end_date__lte=pv.end_date)
+        #     flt |= Q(experience__end_date__lte=pv.end_date)
+        #     qs = qs.filter(flt)
         return qs
 
 ClientEvents.add_item_instance(ClientIsLearning("learning"))

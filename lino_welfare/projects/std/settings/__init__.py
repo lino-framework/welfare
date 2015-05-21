@@ -149,7 +149,7 @@ class Site(Site):
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
-        yield 'lino_welfare.modlib.cv'
+        yield 'lino_welfare.projects.chatelet.modlib.cv'
         yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.isip'
         yield 'lino_welfare.modlib.jobs'

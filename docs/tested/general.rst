@@ -4,22 +4,24 @@
 Lino Welfare General (tested tour)
 ==================================
 
-.. include:: /include/tested.rst
-
 .. How to test only this document:
 
   $ python setup.py test -s tests.DocsTests.test_general
+
+.. contents:: 
+   :local:
+   :depth: 2
+
+A tested document
+=================
+
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.api.doctest import *
-
-.. contents:: 
-   :local:
-   :depth: 3
-
 
 The test database
 =================
@@ -31,7 +33,7 @@ result:
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 51 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
-130 models:
+135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -75,7 +77,7 @@ result:
  contacts.Person                contacts.Persons                33        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         131
+ contenttypes.ContentType       contenttypes.ContentTypes       4         136
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
@@ -89,8 +91,14 @@ result:
  cv.Experience                  cv.Experiences                  17        30
  cv.Function                    cv.Functions                    7         4
  cv.LanguageKnowledge           cv.LanguageKnowledges           9         119
+ cv.Obstacle                    cv.Obstacles                    6         0
+ cv.ObstacleType                cv.ObstacleTypes                5         4
+ cv.Proof                       cv.Proofs                       5         4
  cv.Regime                      cv.Regimes                      5         3
  cv.Sector                      cv.Sectors                      6         14
+ cv.Skill                       cv.Skills                       6         0
+ cv.SoftSkill                   cv.SoftSkills                   5         0
+ cv.SoftSkillType               cv.SoftSkillTypes               5         0
  cv.Status                      cv.Statuses                     5         7
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
@@ -153,13 +161,12 @@ result:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
- properties.PersonProperty      cv.PersonProperties             6         310
  properties.PropChoice          properties.PropChoices          7         2
- properties.PropGroup           properties.PropGroups           5         3
+ properties.PropGroup           properties.PropGroups           5         0
  properties.PropType            properties.PropTypes            9         3
- properties.Property            properties.Properties           7         23
+ properties.Property            properties.Properties           7         0
  sepa.Account                   sepa.Accounts                   8         13
- system.SiteConfig              system.SiteConfigs              30        1
+ system.SiteConfig              system.SiteConfigs              27        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
@@ -407,29 +414,29 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | courses.Courses.insert                          | all except anonymous, 200, 210, 300 | start_date offer title                             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Durations.insert                             | 100, 110, admin                     | id name name_fr name_de name_nl                    |
+| cv.Durations.insert                             | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.EducationLevels.insert                       | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
+| cv.EducationLevels.insert                       | all except anonymous                | name name_fr name_de name_nl is_study is_training  |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Experiences.insert                           | 100, 110, admin                     | person start_date end_date termination_reason      |
+| cv.Experiences.insert                           | all except anonymous                | person start_date end_date termination_reason      |
 |                                                 |                                     | company country city sector function title status  |
 |                                                 |                                     | duration regime is_training remarks                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Functions.insert                             | 100, 110, admin                     | id name name_fr name_de name_nl sector remark      |
+| cv.Functions.insert                             | all except anonymous                | id name name_fr name_de name_nl sector remark      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Regimes.insert                               | 100, 110, admin                     | id name name_fr name_de name_nl                    |
+| cv.Regimes.insert                               | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Sectors.insert                               | 100, 110, admin                     | id name name_fr name_de name_nl remark             |
+| cv.Sectors.insert                               | all except anonymous                | id name name_fr name_de name_nl remark             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Statuses.insert                              | 100, 110, admin                     | id name name_fr name_de name_nl                    |
+| cv.Statuses.insert                              | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.Studies.insert                               | 100, 110, admin                     | person start_date end_date type content            |
+| cv.Studies.insert                               | all except anonymous                | person start_date end_date type content            |
 |                                                 |                                     | education_level state school country city remarks  |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.StudyTypes.detail                            | admin                               | name name_fr name_de name_nl id education_level    |
 |                                                 |                                     | is_study is_training                               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| cv.StudyTypes.insert                            | 100, 110, admin                     | name name_fr name_de name_nl is_study is_training  |
+| cv.StudyTypes.insert                            | all except anonymous                | name name_fr name_de name_nl is_study is_training  |
 |                                                 |                                     | education_level                                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | cv.Trainings.detail                             | all except anonymous                | person start_date end_date type state certificates |
@@ -583,8 +590,7 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.Clients.merge_row                          | admin                               | merge_to aids_SimpleConfirmation                   |
 |                                                 |                                     | aids_IncomeConfirmation aids_RefundConfirmation    |
-|                                                 |                                     | cv_LanguageKnowledge pcsw_Coaching pcsw_Dispense   |
-|                                                 |                                     | dupable_clients_Word properties_PersonProperty     |
+|                                                 |                                     | pcsw_Coaching pcsw_Dispense dupable_clients_Word   |
 |                                                 |                                     | reason                                             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.CoachingEndings.insert                     | 100, 110, admin                     | id name name_fr name_de name_nl seqno              |
@@ -616,8 +622,6 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | properties.PropTypes.insert                     | all except anonymous                | id name name_fr name_de name_nl choicelist         |
 |                                                 |                                     | default_value                                      |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| properties.Properties.insert                    | all except anonymous                | id group type name name_fr name_de name_nl         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | reception.BusyVisitors.detail                   | all except anonymous                | event client role state remark workflow_buttons    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -673,224 +677,6 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 <BLANKLINE>
 
-
-
-
-User profiles
-=============
-
-.. _rolf:
-
-Rolf
-----
-
-Rolf is the local system administrator, he has a complete menu:
-
->>> ses = rt.login('rolf') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Erstempfang : Neue Klienten, Verfügbare Begleiter
-- Schuldnerberatung : Klienten, Meine Budgets
-- Polls : Meine Polls, Meine Responses
-- Berichte :
-  - System : Broken GFKs
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-- Konfigurierung :
-  - System : Site-Parameter, Benutzer, Hilfetexte
-  - Orte : Länder, Orte
-  - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
-  - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
-  - Buchhaltung : Kontenpläne, Kontengruppen, Konten
-  - Kurse : Badges, Kursinhalte
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
-  - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
-  - Erstempfang : Vermittler, Fachbereiche
-  - ZDSS : Sektoren, Eigenschafts-Codes
-  - Schuldnerberatung : Budget-Kopiervorlage
-  - Polls : Choice Sets
-- Explorer :
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
-  - Eigenschaften : Eigenschaften
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
-  - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - Kurse : Badgeprüfungen, Kurse, Kursanfragen
-  - SEPA : Konten
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-  - Erstempfang : Kompetenzen
-  - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
-  - Schuldnerberatung : Budgets, Einträge
-  - Polls : Polls, Questions, Choices, Responses, Answer Choices, Answer Remarks
-- Site : Info
-<BLANKLINE>
-
-.. _hubert:
-
-Hubert
-------
-
-Hubert is an Integration agent.
-
->>> ses = rt.login('hubert') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Polls : Meine Polls, Meine Responses
-- Berichte :
-  - System : Broken GFKs
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-- Konfigurierung :
-  - Orte : Länder
-  - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
-- Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-- Site : Info
-
-
-.. _melanie:
-
-Mélanie
--------
-
-Mélanie is the manager of the Integration service.
-
->>> ses = rt.login('melanie') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen, Immersion trainings
-- Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
-- Polls : Meine Polls, Meine Responses
-- Berichte :
-  - System : Broken GFKs
-  - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
-- Konfigurierung :
-  - Orte : Länder
-  - Büro : Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
-  - Kurse : Kursinhalte
-  - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
-  - Lebenslauf : Sprachen, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
-  - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten, Immersion training types, Immersion training goals
-- Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
-  - Kalender : Aufgaben, Abonnements
-  - Kurse : Kursanfragen
-  - SEPA : Konten
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, Immersion trainings, Proofs of search
-- Site : Info
-
-
-Kerstin
--------
-
-Kerstin is a debts consultant.
-
->>> ses = rt.login('kerstin') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- Schuldnerberatung : Klienten, Meine Budgets
-- Polls : Meine Polls, Meine Responses
-- Berichte :
-  - System : Broken GFKs
-- Konfigurierung :
-  - Orte : Länder
-  - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
-  - Schuldnerberatung : Budget-Kopiervorlage
-- Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : Vertragspartner, Proofs of search
-- Site : Info
-
-
-
-Caroline
---------
-
-Caroline is a newcomers consultant.
-
->>> ses = rt.login('caroline') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- Erstempfang : Neue Klienten, Verfügbare Begleiter
-- Polls : Meine Polls, Meine Responses
-- Berichte :
-  - System : Broken GFKs
-- Konfigurierung :
-  - Orte : Länder
-  - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
-- Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : Vertragspartner, Proofs of search
-- Site : Info
-
-
-.. _theresia:
-
-Theresia
---------
-
-Theresia is a reception clerk.
-
->>> ses = rt.login('theresia') 
->>> with translation.override('de'):
-...     ses.show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
-- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
-- Site : Info
 
 
 Permissions

@@ -111,6 +111,9 @@ class DocsTests(BaseTestCase):
     def test_general(self):
         return self.run_simple_doctests('docs/tested/general.rst')
 
+    def test_eupen(self):
+        return self.run_simple_doctests('docs/tested/eupen.rst')
+
     def test_misc(self):
         return self.run_simple_doctests('docs/tested/misc.rst')
 

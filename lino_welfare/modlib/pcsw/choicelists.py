@@ -95,19 +95,19 @@ class ClientEvents(dd.ChoiceList):
     max_length = 50
 
 
-class ClientIsActive(ObservedEvent):
-    text = _("Active")
+# class ClientIsActive(ObservedEvent):
+#     text = _("Active")
 
-    def add_filter(self, qs, pv):
-        period = (pv.start_date, pv.end_date)
-        qs = only_coached_on(qs, period)
-        return qs
+#     def add_filter(self, qs, pv):
+#         period = (pv.start_date, pv.end_date)
+#         qs = only_coached_on(qs, period)
+#         return qs
 
-ClientEvents.add_item_instance(ClientIsActive("active"))
+# ClientEvents.add_item_instance(ClientIsActive("active"))
 
 
 class ClientHasCoaching(ObservedEvent):
-    text = _("Active")
+    text = _("Coaching")
 
     def add_filter(self, qs, pv):
         period = (pv.start_date, pv.end_date)

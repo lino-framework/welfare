@@ -33,7 +33,6 @@ class Site(Site):
         kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')
         kw.update(isip='lino_welfare.projects.chatelet.modlib.isip')
-        kw.update(cv='lino_welfare.projects.chatelet.modlib.cv')
         return kw
 
     # def setup_plugins(self):

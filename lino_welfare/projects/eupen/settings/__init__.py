@@ -32,6 +32,7 @@ class Site(Site):
         kw.update(immersion=None)
         kw.update(active_job_search=None)
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
+        kw.update(cv='lino_welfare.modlib.cv')
         return kw
 
     def get_admin_main_items(self, ar):

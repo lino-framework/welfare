@@ -4,22 +4,25 @@
 Miscellaneous
 =============
 
-.. include:: /include/tested.rst
-
 .. How to test only this document:
 
   $ python setup.py test -s tests.DocsTests.test_misc
+
+.. contents:: 
+   :local:
+   :depth: 3
+
+
+A tested document
+=================
+
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.api.doctest import *
-
-.. contents:: 
-   :local:
-   :depth: 3
-
 
 
 Some database content
@@ -130,10 +133,6 @@ Some choices lists:
 
 >>> kw = dict()
 >>> fields = 'count rows'
->>> demo_get(
-...     'rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
->>> demo_get(
-...    'rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
 >>> demo_get(
 ...    'rolf', 'choices/pcsw/ContactsByClient/company?type=1', fields, 4, **kw)
 

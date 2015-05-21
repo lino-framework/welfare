@@ -18,8 +18,7 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` plugin.
 A tested document
 =================
 
-This document is part of the Lino Welfare test suite and has been
-tested using doctest with the following initialization code:
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
@@ -99,8 +98,8 @@ Default lists of clients
 
 
 
-Filtering on coachings
-======================
+Filtering clients about their coachings
+=======================================
 
 The demo database contains at least one client which meets the
 following conditions:
@@ -235,9 +234,9 @@ manually filling that date into the
 
 
 
+Filtering clients about their notes
+===================================
 
-Observed events
-===============
 
 >>> ses = rt.login('robin')
 
@@ -302,4 +301,62 @@ All clients who have at least one note dated 2013-07-25 or later:
  DOBBELSTEIN-DEMEULENAERE Dorothée (123)
 =========================================
 <BLANKLINE>
+
+
+Filtering clients about their career
+====================================
+
+
+All clients who were learning between 2011-03-11 and 2012-03-11 (at least):
+
+>>> pv = dict(start_date=i2d(20110311), end_date=i2d(20120311), observed_event=ClientEvents.learning)
+>>> pv.update(client_state=None)
+>>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+==========================
+ Name
+--------------------------
+ EVERS Eberhart (127)
+ KELLER Karl (178)
+ MALMENDIER Marc (146)
+ MEESSEN Melissa (147)
+ RADERMACHER Alfons (153)
+ DA VINCI David (165)
+ VAN VEEN Vincent (166)
+==========================
+<BLANKLINE>
+
+Just as a random sample, let's verify one of these clients.  Vincent
+van Veen does have a training, but that started only two days later:
+
+>>> obj = pcsw.Client.objects.get(pk=166)
+>>> ses.show(cv.TrainingsByPerson, obj, column_names="type start_date end_date")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+================ ============ ==========
+ Education Type   Start date   End date
+---------------- ------------ ----------
+ Alpha            3/13/11      3/13/12
+================ ============ ==========
+<BLANKLINE>
+
+And he has no studies:
+
+>>> ses.show(cv.StudiesByPerson, obj, column_names="type start_date end_date")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+<BLANKLINE>
+No data to display
+<BLANKLINE>
+
+... but here is a work experience which matches exactly our query:
+
+>>> ses.show(cv.ExperiencesByPerson, obj, column_names="start_date end_date")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+============ ==========
+ Start date   End date
+------------ ----------
+ 3/11/11      3/11/12
+============ ==========
+<BLANKLINE>
+
+
 

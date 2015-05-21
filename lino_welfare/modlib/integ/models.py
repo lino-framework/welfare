@@ -38,20 +38,20 @@ from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
 
-class ClientHasContract(ObservedEvent):
+class ClientIsAvailable(ObservedEvent):
     text = _("Available")
 
     def add_filter(self, qs, pv):
         period = (pv.start_date, pv.end_date)
         flt = has_contracts_filter('isip_contract_set_by_client', period)
-        flt = has_contracts_filter('job_contract_set_by_client', period)
+        flt |= has_contracts_filter('job_contract_set_by_client', period)
         if dd.is_installed('immersion'):
             flt |= has_contracts_filter(
                 'immersion_contract_set_by_client', period)
-        qs = qs.exclude(flt).distinct()
+        qs = qs.exclude(flt)
         return qs
 
-ClientEvents.add_item_instance(ClientHasContract("available"))
+ClientEvents.add_item_instance(ClientIsAvailable("available"))
 
 
 class Clients(pcsw.Clients):

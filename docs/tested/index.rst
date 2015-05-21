@@ -14,6 +14,7 @@ them to a script and run it using :manage:`run`.
   
    users
    general
+   eupen
    pcsw
    clients
    newcomers
