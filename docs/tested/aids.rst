@@ -173,7 +173,7 @@ The following test is rather useless...
 The page header includes a lot of scripts:
 
 >>> len(scripts)
-22
+21
 
 Here are the default values for their source URLs:
 
@@ -186,8 +186,8 @@ Here are the default values for their source URLs:
 /static/extjs/Ext.ux.form.DateTime.js
 /static/extensible-1.0.1/extensible-all-debug.js
 /static/extensible-1.0.1/src/locale/extensible-lang-de.js
-/static/tinymce-3.4.8/tiny_mce.js
-/static/tinymce/Ext.ux.TinyMCE.js
+/static/tinymce-3.5.11/tiny_mce.js
+/static/byteforce/Ext.ux.TinyMCE.js
 /static/ext-3.3.1/examples/ux/gridfilters/menu/RangeMenu.js
 /static/ext-3.3.1/examples/ux/gridfilters/menu/ListMenu.js
 /static/ext-3.3.1/examples/ux/gridfilters/GridFilters.js
@@ -198,7 +198,6 @@ Here are the default values for their source URLs:
 /static/ext-3.3.1/examples/ux/gridfilters/filter/NumericFilter.js
 /static/ext-3.3.1/examples/ux/gridfilters/filter/BooleanFilter.js
 /static/ext-3.3.1/examples/ux/fileuploadfield/FileUploadField.js
-(inline)
 /media/cache/js/lino_210_de.js
 (inline)
 
