@@ -4,20 +4,21 @@
 Jobs
 ===============
 
-.. include:: /include/tested.rst
-
 .. to test only this document:
 
   $ python setup.py test -s tests.DocsTests.test_jobs
 
+A tested tour into :mod:`lino_welfare.modlib.jobs`.
+
 .. contents::
    :local:
-   :depth: 2
-
+   :depth: 1
 
 
 About this document
 ===================
+
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
@@ -30,7 +31,9 @@ We log in as Rolf:
 >>> ses = rt.login('rolf')
 
 Jobs
-----
+====
+
+The central concept added by this module is a table of **jobs**.
 
 >>> with translation.override('de'):
 ...     ses.show(jobs.Jobs, column_names="function provider sector")
@@ -50,19 +53,33 @@ Jobs
 <BLANKLINE>
 
 
+Job providers
+=============
+
+>>> ses.show(jobs.JobProviders)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+================================ ============ ======== ========= ===== ===== =========
+ Name                             Adresse      E-Mail   Telefon   GSM   ID    Sprache
+-------------------------------- ------------ -------- --------- ----- ----- ---------
+ BISA                             4700 Eupen                            196   fr
+ Pro Aktiv V.o.G.                 4700 Eupen                            199   de
+ R-Cycle Sperrgutsortierzentrum   4700 Eupen                            197   en
+================================ ============ ======== ========= ===== ===== =========
+<BLANKLINE>
+
 .. _welfare.jobs.Offers:
 
 Job Offers
-----------
+==========
 
 
 >>> # settings.SITE.catch_layout_exceptions = False
 >>> jobs.Offers.show() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========================== ========== ======================== ================== ================ ============== =============
- ID   Sektor                     Funktion   Name                     Stellenanbieter    Beginn Auswahl   Ende Auswahl   Beginndatum
----- -------------------------- ---------- ------------------------ ------------------ ---------------- -------------- -------------
- 1     Landwirtschaft & Garten   Kellner    Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   ...              ...            ...     
-==== ========================== ========== ======================== ================== ================ ============== =============
+======================== ================== ========================== ========== ================ ============== =============
+ Name                     Stellenanbieter    Sektor                     Funktion   Beginn Auswahl   Ende Auswahl   Beginndatum
+------------------------ ------------------ -------------------------- ---------- ---------------- -------------- -------------
+ Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.    Landwirtschaft & Garten   Kellner    22.01.14         02.05.14       01.06.14
+======================== ================== ========================== ========== ================ ============== =============
 <BLANKLINE>
 
 

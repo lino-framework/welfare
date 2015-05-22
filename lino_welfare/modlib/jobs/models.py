@@ -3,8 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 
-"""The :xfile:`models.py` module for the
-:mod:`lino_welfare.modlib.jobs` app.
+"""Database models for `lino_welfare.modlib.jobs`.
 
 
 """
@@ -31,17 +30,15 @@ from lino.utils.report import Report
 
 from lino.modlib.cv.mixins import SectorFunction
 
-uploads = dd.resolve_app('uploads')
-notes = dd.resolve_app('notes')
-contacts = dd.resolve_app('contacts')
-isip = dd.resolve_app('isip')
-pcsw = dd.resolve_app('pcsw')
-cv = dd.resolve_app('cv')
+from lino_welfare.modlib.pcsw.utils import only_coached_on
 
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
 
 from .mixins import JobSupplyment
+
+contacts = dd.resolve_app('contacts')
+isip = dd.resolve_app('isip')
 
 
 from lino_welfare.modlib.pcsw.choicelists import (
@@ -446,9 +443,9 @@ class Offer(SectorFunction):
 
 class Offers(dd.Table):
     required = dd.required(user_groups='integ')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Offer
+    model = 'jobs.Offer'
+    column_names = 'name provider sector function '\
+                   'selection_from selection_until start_date *'
     detail_layout = """
     name provider sector function
     selection_from selection_until start_date
@@ -458,9 +455,8 @@ class Offers(dd.Table):
 
 
 class Job(SectorFunction):
-
     """
-    A place where a Client can work. The Job Provider
+    A **job** is a place where a Client can work. The Job Provider
     
     """
 
@@ -897,13 +893,13 @@ class OldJobsOverview(Report):
 
                 qs = job.candidature_set.order_by('date_submitted').filter(
                     state=CandidatureStates.active)
-                qs = pcsw.only_coached_on(qs, period, 'person')
+                qs = only_coached_on(qs, period, 'person')
                 for cand in qs:
                     candidates.append(cand)
 
                 qs = job.candidature_set.order_by('date_submitted').filter(
                     state=CandidatureStates.probation)
-                qs = pcsw.only_coached_on(qs, period, 'person')
+                qs = only_coached_on(qs, period, 'person')
                 for cand in qs:
                     probation.append(cand)
 
@@ -1029,7 +1025,7 @@ class JobsOverviewByType(Jobs):
             candidates = []
             qs = job.candidature_set.order_by('date_submitted').filter(
                 state=CandidatureStates.active)
-            qs = pcsw.only_coached_on(qs, period, 'person')
+            qs = only_coached_on(qs, period, 'person')
             for cand in qs:
                 candidates.append(cand)
             if candidates:
@@ -1044,7 +1040,7 @@ class JobsOverviewByType(Jobs):
             probation = []
             qs = job.candidature_set.order_by('date_submitted').filter(
                 state=CandidatureStates.probation)
-            qs = pcsw.only_coached_on(qs, period, 'person')
+            qs = only_coached_on(qs, period, 'person')
             for cand in qs:
                 probation.append(cand)
             if probation:
