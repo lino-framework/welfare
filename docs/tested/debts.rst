@@ -4,24 +4,28 @@
 Debts mediation
 ===============
 
-.. to test only this document:
+.. How to test only this document:
   $ python setup.py test -s tests.DocsTests.test_debts
 
-.. This document is part of the Lino Welfare test suite where it runs in
-   the following context:
-
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
-    >>> from lino.api.doctest import *
-
-    >>> ses = rt.login('rolf')
-    >>> translation.activate('de')
     
 .. contents::
    :local:
-   :depth: 2
+   :depth: 1
+
+A tested document
+=================
+
+.. include:: /include/tested.rst
+
+
+>>> from __future__ import print_function
+>>> import os
+>>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+...    'lino_welfare.projects.std.settings.doctests'
+>>> from lino.api.doctest import *
+
+>>> ses = rt.login('rolf')
+>>> translation.activate('de')
 
 
 Budgets
@@ -209,29 +213,30 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
- Rent                                                      41,00                     41,00
- Water                                                     47,00                     47,00
- Telephone & Internet                                      5,00                      5,00
- Cell phone                                                10,00                     10,00
- Transport costs        Shopping, Cinema                   30,00                     30,00
- Public transport                                          20,00                     20,00
- Fuel                                                      26,00                     26,00
- Car maintenance                                           31,00                     31,00
- School                                                    36,00                     36,00
- Babysitting                                               41,00                     41,00
- Health                                                    47,00                     47,00
- Food                                                      5,00                      5,00
- Hygiene                                                   10,00                     10,00
- Health insurance                                          15,00                     15,00
- Labour fees                                               20,00                     20,00
- Unterhaltszahlungen                                       26,00                     26,00
- Retirement savings                                        31,00                     31,00
- Tobacco                                                   36,00                     36,00
- Spare time             Seminar                            41,00                     41,00
- Pets                                                      47,00                     47,00
- **Total (20 rows)**                                       **565,00**                **565,00**
+ Rent                                      492,00          41,00                     41,00
+ Water                                     564,00          47,00                     47,00
+ Telephone & Internet                      60,00           5,00                      5,00
+ Cell phone                                120,00          10,00                     10,00
+ Transport costs        Shopping, Cinema   360,00          30,00                     30,00
+ Public transport                          240,00          20,00                     20,00
+ Fuel                                      312,00          26,00                     26,00
+ Car maintenance                           372,00          31,00                     31,00
+ School                                    432,00          36,00                     36,00
+ Babysitting                               492,00          41,00                     41,00
+ Health                                    564,00          47,00                     47,00
+ Food                                      60,00           5,00                      5,00
+ Hygiene                                   120,00          10,00                     10,00
+ Health insurance                          180,00          15,00                     15,00
+ Labour fees                               240,00          20,00                     20,00
+ Unterhaltszahlungen                       312,00          26,00                     26,00
+ Retirement savings                        372,00          31,00                     31,00
+ Tobacco                                   432,00          36,00                     36,00
+ Spare time             Seminar            492,00          41,00                     41,00
+ Pets                                      564,00          47,00                     47,00
+ **Total (20 rows)**                       **6 780,00**    **565,00**                **565,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
+
 
 >>> with translation.override('en'):
 ...     ses.show(groups[2].action_request)
@@ -381,28 +386,28 @@ Monthly expenses
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
- Rent                                                      10,00                     10,00
- Water                                                     15,00                     15,00
- Electricity                                               20,00                     20,00
- Telephone & Internet                                      26,00                     26,00
- Cell phone                                                31,00                     31,00
- Transport costs        Cinema, Shopping                   72,00                     72,00
- Public transport                                          41,00                     41,00
- Fuel                                                      47,00                     47,00
- School                                                    5,00                      5,00
- Babysitting                                               10,00                     10,00
- Health                                                    15,00                     15,00
- Clothes                                                   20,00                     20,00
- Food                                                      26,00                     26,00
- Hygiene                                                   31,00                     31,00
- Health insurance                                          36,00                     36,00
- Labour fees                                               41,00                     41,00
- Unterhaltszahlungen                                       47,00                     47,00
- Tobacco                                                   5,00                      5,00
- Spare time             Cinema                             10,00                     10,00
- Pets                                                      15,00                     15,00
- Other                                                     20,00                     20,00
- **Total (21 rows)**                                       **543,00**                **543,00**
+ Rent                                      120,00          10,00                     10,00
+ Water                                     180,00          15,00                     15,00
+ Electricity                               240,00          20,00                     20,00
+ Telephone & Internet                      312,00          26,00                     26,00
+ Cell phone                                372,00          31,00                     31,00
+ Transport costs        Cinema, Shopping   864,00          72,00                     72,00
+ Public transport                          492,00          41,00                     41,00
+ Fuel                                      564,00          47,00                     47,00
+ School                                    60,00           5,00                      5,00
+ Babysitting                               120,00          10,00                     10,00
+ Health                                    180,00          15,00                     15,00
+ Clothes                                   240,00          20,00                     20,00
+ Food                                      312,00          26,00                     26,00
+ Hygiene                                   372,00          31,00                     31,00
+ Health insurance                          432,00          36,00                     36,00
+ Labour fees                               492,00          41,00                     41,00
+ Unterhaltszahlungen                       564,00          47,00                     47,00
+ Tobacco                                   60,00           5,00                      5,00
+ Spare time             Cinema             120,00          10,00                     10,00
+ Pets                                      180,00          15,00                     15,00
+ Other                                     240,00          20,00                     20,00
+ **Total (21 rows)**                       **6 516,00**    **543,00**                **543,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 Yearly incomes
@@ -419,24 +424,24 @@ Taxes
 ===================== ========= =============== =========== ===== ====== ===========
  Description           Remarks   Yearly amount   Common      Mr.   Mrs.   Total
 --------------------- --------- --------------- ----------- ----- ------ -----------
- Municipal tax                   26              2,17                     2,17
- Kanalisationssteuer             31              2,58                     2,58
- Waste tax                       36              3,00                     3,00
- Autosteuer                      41              3,42                     3,42
- Immobiliensteuer                47              3,92                     3,92
- **Total (5 rows)**                              **15,08**                **15,08**
+ Municipal tax                   26,00           2,17                     2,17
+ Kanalisationssteuer             31,00           2,58                     2,58
+ Waste tax                       36,00           3,00                     3,00
+ Autosteuer                      41,00           3,42                     3,42
+ Immobiliensteuer                47,00           3,92                     3,92
+ **Total (5 rows)**              **181,00**      **15,08**                **15,08**
 ===================== ========= =============== =========== ===== ====== ===========
 <BLANKLINE>
 Insurances
 ===================== ========= =============== ========== ===== ====== ==========
  Description           Remarks   Yearly amount   Common     Mr.   Mrs.   Total
 --------------------- --------- --------------- ---------- ----- ------ ----------
- Fire                            5               0,42                    0,42
- Familienhaftpflicht             10              0,83                    0,83
- Car insurance                   15              1,25                    1,25
- Life insurance                  20              1,67                    1,67
- Other insurances                26              2,17                    2,17
- **Total (5 rows)**                              **6,33**                **6,33**
+ Fire                            5,00            0,42                    0,42
+ Familienhaftpflicht             10,00           0,83                    0,83
+ Car insurance                   15,00           1,25                    1,25
+ Life insurance                  20,00           1,67                    1,67
+ Other insurances                26,00           2,17                    2,17
+ **Total (5 rows)**              **76,00**       **6,33**                **6,33**
 ===================== ========= =============== ========== ===== ====== ==========
 <BLANKLINE>
 Debts, outsanding payments and credits

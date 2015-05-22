@@ -289,6 +289,10 @@ per user) you would add the user name to the default name::
     
 TODO: more explanations....
 
+.. attribute:: yearly_amount
+
+  Shows the yearly amount. For entries with periodicity 12 this is the
+  same as :attr:`total`, otherwise it is `total` * 12 / `periods`.
 
     """
     master = EntryGroup
@@ -445,8 +449,14 @@ TODO: more explanations....
     def remarks(self, obj, ar):
         return ', '.join(obj.remarks)
 
-    @dd.displayfield(_("Yearly amount"))
+    @dd.virtualfield(dd.PriceField(_("Yearly amount")))
     def yearly_amount(self, obj, ar):
+        if obj.periods == 12:
+            return obj.total
+        return obj.total * 12 / obj.periods
+
+    @dd.displayfield(_("Yearly amount"))
+    def old_yearly_amount(self, obj, ar):
         if obj.periods == 1:
             return ''
         if obj.periods == 12:
