@@ -201,9 +201,10 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  Pension                                       1 000,00       1 000,00
  Integration aid                               1 200,00       1 200,00
  Ersatzeinkünfte                               1 400,00       1 400,00
+ Aliments
  Chèques-repas                                 200,00         200,00
  Andere                                        400,00         400,00
- **Total (6 rows)**                            **5 000,00**   **5 000,00**
+ **Total (7 rows)**                            **5 000,00**   **5 000,00**
 ==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
 
@@ -215,6 +216,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
  Rent                                      492,00          41,00                     41,00
  Water                                     564,00          47,00                     47,00
+ Electricity
  Telephone & Internet                      60,00           5,00                      5,00
  Cell phone                                120,00          10,00                     10,00
  Transport costs        Shopping, Cinema   360,00          30,00                     30,00
@@ -224,6 +226,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  School                                    432,00          36,00                     36,00
  Babysitting                               492,00          41,00                     41,00
  Health                                    564,00          47,00                     47,00
+ Clothes
  Food                                      60,00           5,00                      5,00
  Hygiene                                   120,00          10,00                     10,00
  Health insurance                          180,00          15,00                     15,00
@@ -233,7 +236,8 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  Tobacco                                   432,00          36,00                     36,00
  Spare time             Seminar            492,00          41,00                     41,00
  Pets                                      564,00          47,00                     47,00
- **Total (20 rows)**                       **6 780,00**    **565,00**                **565,00**
+ Other
+ **Total (23 rows)**                       **6 780,00**    **565,00**                **565,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 
@@ -369,17 +373,19 @@ The following code is a bit hackerish because we don't yet have a
 ...             print(html2rst(i))
 
 >>> story2rst(obj.data_story(ses))
+... #doctest: +REPORT_UDIFF
 Monthly incomes
 ==================== ========= ======== ===== ============== ==============
  Description          Remarks   Common   Mr.   Mrs.           Total
 -------------------- --------- -------- ----- -------------- --------------
  Salaries                                      1 200,00       1 200,00
  Pension                                       1 400,00       1 400,00
+ Integration aid
  Ersatzeinkünfte                               200,00         200,00
  Aliments                                      400,00         400,00
  Chèques-repas                                 600,00         600,00
  Andere                                        800,00         800,00
- **Total (6 rows)**                            **4 600,00**   **4 600,00**
+ **Total (7 rows)**                            **4 600,00**   **4 600,00**
 ==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
 Monthly expenses
@@ -394,6 +400,7 @@ Monthly expenses
  Transport costs        Cinema, Shopping   864,00          72,00                     72,00
  Public transport                          492,00          41,00                     41,00
  Fuel                                      564,00          47,00                     47,00
+ Car maintenance
  School                                    60,00           5,00                      5,00
  Babysitting                               120,00          10,00                     10,00
  Health                                    180,00          15,00                     15,00
@@ -403,11 +410,12 @@ Monthly expenses
  Health insurance                          432,00          36,00                     36,00
  Labour fees                               492,00          41,00                     41,00
  Unterhaltszahlungen                       564,00          47,00                     47,00
+ Retirement savings
  Tobacco                                   60,00           5,00                      5,00
  Spare time             Cinema             120,00          10,00                     10,00
  Pets                                      180,00          15,00                     15,00
  Other                                     240,00          20,00                     20,00
- **Total (21 rows)**                       **6 516,00**    **543,00**                **543,00**
+ **Total (23 rows)**                       **6 516,00**    **543,00**                **543,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 Yearly incomes
@@ -429,7 +437,8 @@ Taxes
  Waste tax                       36,00           3,00                     3,00
  Autosteuer                      41,00           3,42                     3,42
  Immobiliensteuer                47,00           3,92                     3,92
- **Total (5 rows)**              **181,00**      **15,08**                **15,08**
+ Other
+ **Total (6 rows)**              **181,00**      **15,08**                **15,08**
 ===================== ========= =============== =========== ===== ====== ===========
 <BLANKLINE>
 Insurances
@@ -461,6 +470,7 @@ Bailiffs and cash collectors
  **Total (2 rows)**                                                                         **1 200,00**   **1 500,00**   **2 700,00**
 ======================== =============================== ========= ============== ======== ============== ============== ==============
 <BLANKLINE>
+
 
 >>> story2rst(obj.summary_story(ses))
 Incomes & Expenses

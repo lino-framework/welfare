@@ -390,9 +390,8 @@ TODO: more explanations....
                 i = 0
             else:
                 i = e.budget.get_actor_index(e.actor)
-            amount = e.amount  # / e.periods
-            #~ if amount != 0:
-            if amount:
+            amount = e.amount
+            if amount is not None:
                 self.has_data = True
                 self.amounts[i] += amount
                 self.total += amount

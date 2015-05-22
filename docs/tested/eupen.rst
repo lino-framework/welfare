@@ -171,7 +171,8 @@ Kerstin is a debts consultant.
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- Schuldnerberatung : Klienten, Meine Budgets
+ - Erstempfang : Neue Klienten, Verfügbare Begleiter
+ - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :

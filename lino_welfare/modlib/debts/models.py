@@ -400,12 +400,13 @@ class Entry(SequencedBudgetComponent):
 
     .. attribute:: amount
 
-    The amount of money.
+        The amount of money. An empty amount is different from a zero
+        amount in that the latter will be printed while the former
+        not.
 
     .. attribute:: account
 
-    The related :class:`Account`.
-
+        The related :class:`Account`.
 
     """
     class Meta:

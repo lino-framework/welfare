@@ -540,11 +540,11 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | languages.Languages.insert                      | all except anonymous                | id iso2 name name_fr name_de name_nl               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| newcomers.AvailableCoachesByClient.assign_coach | 200, admin                          | notify_subject notify_body notify_silent           |
+| newcomers.AvailableCoachesByClient.assign_coach | 200, 300, admin                     | notify_subject notify_body notify_silent           |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | newcomers.Faculties.detail                      | admin                               | id name name_fr name_de name_nl weight             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| newcomers.Faculties.insert                      | 200, admin                          | name name_fr name_de name_nl weight                |
+| newcomers.Faculties.insert                      | 200, 300, admin                     | name name_fr name_de name_nl weight                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | notes.EventTypes.insert                         | all except anonymous                | id name name_fr name_de name_nl remark             |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -567,7 +567,7 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.ClientContactTypes.insert                  | all except anonymous                | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| pcsw.ClientStates.wf1                           | 200, admin                          | reason remark                                      |
+| pcsw.ClientStates.wf1                           | 200, 300, admin                     | reason remark                                      |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | pcsw.Clients.create_visit                       | all except anonymous                | user summary                                       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
