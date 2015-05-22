@@ -54,7 +54,9 @@ def objects():
         Company.objects.filter(client_contact_type__is_bailiff=True))
 
     for b in Budget.objects.all():
+        seqno = 0
         for e in b.entry_set.all():
+            seqno += 1
             if e.account.type == AccountTypes.incomes:
                 amount = INCOME_AMOUNTS.pop()
             elif e.account.type == AccountTypes.expenses:
@@ -70,13 +72,15 @@ def objects():
             e.save()
         ACTORS = Cycler(None, *[a for a in b.actor_set.all()])
         for i in range(DEBT_ENTRIES.pop()):
+            seqno += 1
             amount = int(DEBT_AMOUNTS.pop())
             account = LIABILITIES.pop()
             kw = dict(budget=b,
                       account=account,
                       partner=PARTNERS.pop(),
                       amount=amount,
-                      actor=ACTORS.pop())
+                      actor=ACTORS.pop(),
+                      seqno=seqno)
             if account.ref.startswith('71'):
                 kw.update(bailiff=BAILIFFS.pop())
             if amount > 600:

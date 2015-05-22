@@ -273,9 +273,7 @@ The total monthly amount available for debts distribution."""))
                     e.amount = e.account.default_amount
                 entries.append(e)
         else:
-            seqno = 0
             for me in master_budget.entry_set.order_by('seqno').select_related():
-                seqno += 1
                 e = Entry(account=me.account, budget=self,
                           account_type=me.account_type,
                           seqno=me.seqno, periods=me.periods,
