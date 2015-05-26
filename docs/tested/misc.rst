@@ -25,10 +25,11 @@ A tested document
 >>> from lino.api.doctest import *
 
 
-Some database content
----------------------
-
 >>> ses = rt.login('rolf')
+
+
+Build all excerpts
+===================
 
 .. 
 

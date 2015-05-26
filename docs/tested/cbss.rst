@@ -55,7 +55,7 @@ Printing a Tx25
 True
 >>> print(rv['open_url'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-/.../cbss.RetrieveTIGroupsRequest-1.pdf
+/.../cbss.RetrieveTIGroupsRequest-1.odt
 
 
 

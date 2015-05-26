@@ -63,11 +63,11 @@ Demo excerpts
 Here is the list of all demo excerpts. It shows e.g. how the language
 of an excerpt depends on the recipient and the client.
 
->>> rt.show(excerpts.Excerpts, language="en")
+>>> rt.show(excerpts.Excerpts, language="en", column_names="id excerpt_type owner project company language")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-==== ======================== ================================================ ============================= ========================== ========== ============
- ID   Excerpt Type             Controlled by                                    Client                        Recipient (Organization)   Language   build time
----- ------------------------ ------------------------------------------------ ----------------------------- -------------------------- ---------- ------------
+==== ======================== ================================================ ============================= ========================== ==========
+ ID   Excerpt Type             Controlled by                                    Client                        Recipient (Organization)   Language
+---- ------------------------ ------------------------------------------------ ----------------------------- -------------------------- ----------
  1    Income confirmation      *EiEi/9/29/12/116/1*                             AUSDEMWALD Alfons (116)                                  de
  2    Income confirmation      *EiEi/8/9/14/116/4*                              AUSDEMWALD Alfons (116)                                  de
  3    Income confirmation      *EiEi/10/19/12/127/7*                            EVERS Eberhart (127)                                     en
@@ -157,7 +157,7 @@ of an excerpt depends on the recipient and the client.
  87   File sheet               *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                                  de
  88   eID sheet                *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                                  de
  89   Action plan              *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                                  de
-==== ======================== ================================================ ============================= ========================== ========== ============
+==== ======================== ================================================ ============================= ========================== ==========
 <BLANKLINE>
 
 

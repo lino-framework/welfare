@@ -178,3 +178,12 @@ def set_detail_layouts(sender=None, **kwargs):
     jobs.CandidaturesByFunction
     cv.ExperiencesByFunction
     """)
+
+
+def properties_list(owner, *prop_ids):
+    for pk in prop_ids:
+        try:
+            yield owner.personproperty_set.get(property__id=pk)
+        except PersonProperty.DoesNotExist:
+            pass
+

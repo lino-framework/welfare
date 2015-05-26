@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
 """
@@ -10,7 +10,7 @@ import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from lino.api.dd import resolve_model
-from lino.utils import Cycler, ONE_DAY
+from lino.utils import Cycler
 from lino.utils import mti
 from lino.api import dd, rt
 

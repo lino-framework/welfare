@@ -407,17 +407,14 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
     skills_set = property(get_skills_set)
 
     def properties_list(self, *prop_ids):
+        """Yields a list of the :class:`PersonProperty
+        <lino_welfare.modlib.cv.models.PersonProperty>` properties of
+        this person in the specified order.  If this person has no
+        entry for a requested :class:`Property`, it is simply skipped.
+        Used in :xfile:`cv.odt.  `
+
         """
-        Yields a list of the :class:`PersonProperty <lino_welfare.modlib.cv.models.PersonProperty>` 
-        properties of this person in the specified order.
-        If this person has no entry for a 
-        requested :class:`Property`, it is simply skipped.
-        Used in notes/Note/cv.odt"""
-        for pk in prop_ids:
-            try:
-                yield self.personproperty_set.get(property__id=pk)
-            except cv.PersonProperty.DoesNotExist:
-                pass
+        return cv.properties_list(self, *prop_ids)
 
     def get_active_contract(self):
         """Return the one and only "active contract" of this client.  A
