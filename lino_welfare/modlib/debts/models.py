@@ -23,7 +23,7 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 from lino import mixins
 
-from lino.modlib.accounts.choicelists import AccountTypes
+from lino.modlib.accounts.choicelists import AccountTypes, AccountCharts
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
@@ -160,6 +160,7 @@ The total monthly amount available for debts distribution."""))
 
     def entry_groups(self, ar, types=None, **kw):
         Group = rt.modules.accounts.Group
+        kw.update(chart=AccountCharts.debts)
         kw.update(entries_layout__gt='')
         if types is not None:
             kw.update(
@@ -652,3 +653,5 @@ _("Name of debts mediator")  # Name des Schuldnerberaters
 # _("Conclusion")  # Schlussfolgerung
 
 from .ui import *
+
+AccountCharts.add_item("debts", dd.plugins.debts.verbose_name, 'debts')

@@ -45,6 +45,7 @@ name to read the documentation):
     >>> from lino.core.choicelists import choicelist_choices
     >>> for value, text in choicelist_choices():
     ...     print "%s : %s" % (value, unicode(text))
+    accounts.AccountCharts : Account Charts
     accounts.AccountTypes : AccountTypes
     addresses.AddressTypes : Address types
     addresses.DataSources : Data sources

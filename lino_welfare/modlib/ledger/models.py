@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 
 from lino.modlib.ledger.models import *
 
+from lino.api import _
 from .mixins import PaymentRecipient
 
 
@@ -19,3 +20,5 @@ class Movement(Movement, PaymentRecipient):
 
 class AccountInvoice(AccountInvoice, PaymentRecipient):
     pass
+
+AccountCharts.add_item("welfare", _("Social accounting"), 'welfare')

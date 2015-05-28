@@ -26,8 +26,9 @@ def n2dec(v):
 
 def objects():
     TableLayouts = rt.modules.debts.TableLayouts
-    c = accounts.Chart(name="debts.default")
-    yield c
+    # c = accounts.Chart(name="debts.default")
+    # yield c
+    c = rt.modules.accounts.AccountCharts.debts
     group = Instantiator('accounts.Group', chart=c).build
     g = group(
         ref="10", account_type=AccountTypes.incomes,

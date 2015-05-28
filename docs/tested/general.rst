@@ -33,12 +33,11 @@ result:
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 54 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, vat, ledger, finan, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
-151 models:
+150 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
  accounts.Account               accounts.Accounts               19        58
- accounts.Chart                 accounts.Charts                 5         2
  accounts.Group                 accounts.Groups                 9         14
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        167
@@ -77,7 +76,7 @@ result:
  contacts.Person                contacts.Persons                35        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         152
+ contenttypes.ContentType       contenttypes.ContentTypes       4         151
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
@@ -198,12 +197,16 @@ List of window layouts
 
 
 The :class:`lino.modlib.about.models.WindowActions` table lists
-information about all detail layouts, insert layouts and action
-parameter layouts.
+information about all data entry form definitions (detail layouts,
+insert layouts and action parameter layouts).
+
+Lino Welfare contains 174 layouts:
+
+>>> about.WindowActions.request().get_total_count()
+174
 
 The primary purpose of the following is to get a warning when anything
-changes.
-
+on one of these changes.
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> rt.show(about.WindowActions)
@@ -215,15 +218,13 @@ changes.
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | about.Models.detail                             | all except anonymous                | app name docstring rows                            |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| accounts.AccountCharts.detail                   | admin                               | name                                               |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | accounts.Accounts.detail                        | admin                               | ref name name_fr name_de name_nl group type        |
 |                                                 |                                     | required_for_household required_for_person periods |
 |                                                 |                                     | default_amount                                     |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | accounts.Accounts.insert                        | all except anonymous                | ref group type name name_fr name_de name_nl        |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| accounts.Charts.detail                          | admin                               | id name name_fr name_de name_nl                    |
-+-------------------------------------------------+-------------------------------------+----------------------------------------------------+
-| accounts.Charts.insert                          | all except anonymous                | name name_fr name_de name_nl                       |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | accounts.Groups.detail                          | admin                               | ref name name_fr name_de name_nl id account_type   |
 |                                                 |                                     | entries_layout                                     |

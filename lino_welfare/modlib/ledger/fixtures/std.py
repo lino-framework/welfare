@@ -18,13 +18,14 @@ def objects():
     AccountInvoice = rt.modules.ledger.AccountInvoice
     JournalGroups = rt.modules.ledger.JournalGroups
     BankStatement = rt.modules.finan.BankStatement
-    Chart = rt.modules.accounts.Chart
+    # Chart = rt.modules.accounts.Chart
     Group = rt.modules.accounts.Group
     Account = rt.modules.accounts.Account
     AccountTypes = rt.modules.accounts.AccountTypes
 
-    chart = Chart(**dd.str2kw('name',  _("Social Accounting")))
-    yield chart
+    # chart = Chart(**dd.str2kw('name',  _("Social Accounting")))
+    # yield chart
+    chart = rt.modules.accounts.AccountCharts.welfare
 
     def group(ref, type, name):
         global current_group
