@@ -159,10 +159,11 @@ The total monthly amount available for debts distribution."""))
         return self.get_actor(2)
 
     def entry_groups(self, ar, types=None, **kw):
+        Group = rt.modules.accounts.Group
+        kw.update(entries_layout__gt='')
         if types is not None:
             kw.update(
                 account_type__in=[AccountTypes.items_dict[t] for t in types])
-        Group = rt.modules.accounts.Group
         for g in Group.objects.filter(**kw).order_by('ref'):
             eg = EntryGroup(self, g, ar)
             if eg.has_data():
@@ -250,6 +251,9 @@ The total monthly amount available for debts distribution."""))
         If the budget is empty, fill it with default entries
         by copying the master_budget.
         """
+        Entry = rt.modules.debts.Entry
+        Actor = rt.modules.debts.Actor
+        Account = rt.modules.accounts.Account
         #~ if self.closed:
         if not self.partner or self.printed_by is not None:
             return
@@ -262,7 +266,6 @@ The total monthly amount available for debts distribution."""))
             flt = models.Q(required_for_household=True)
             flt = flt | models.Q(required_for_person=True)
             seqno = 0
-            Account = rt.modules.accounts.Account
             for acc in Account.objects.filter(flt).order_by('ref'):
                 seqno += 1
                 e = Entry(account=acc, budget=self,
@@ -273,7 +276,8 @@ The total monthly amount available for debts distribution."""))
                     e.amount = e.account.default_amount
                 entries.append(e)
         else:
-            for me in master_budget.entry_set.order_by('seqno').select_related():
+            for me in master_budget.entry_set.order_by(
+                    'seqno').select_related():
                 e = Entry(account=me.account, budget=self,
                           account_type=me.account_type,
                           seqno=me.seqno, periods=me.periods,
@@ -323,8 +327,6 @@ The total monthly amount available for debts distribution."""))
         """Yield a sequence of """
         # logger.info("20141211 insert_story")
 
-        Company = rt.modules.contacts.Company
-
         def render(sar):
             if sar.renderer is None:
                 raise Exception("%s has no renderer", sar)
@@ -332,27 +334,8 @@ The total monthly amount available for debts distribution."""))
                 yield E.h3(sar.get_title())
                 yield sar
             
-        if True:  # since 201504
-            for eg in self.entry_groups(ar):
-                yield render(eg.action_request)
-                
-            # for group in self.account_groups():
-            #     yield render(self.entries_by_group(ar, group))
-        else:
-            for group in self.account_groups('IEAC'):
-                yield render(self.entries_by_group(ar, group))
-
-            sar = ar.spawn(PrintLiabilitiesByBudget,
-                           master_instance=self,
-                           filter=models.Q(bailiff__isnull=True))
-            yield render(sar)
-            qs = Company.objects.filter(bailiff_debts_set__budget=self).distinct()
-            for bailiff in qs:
-                sar = ar.spawn(PrintLiabilitiesByBudget,
-                               master_instance=self,
-                               filter=models.Q(bailiff=bailiff))
-                yield E.h3(_("Liabilities (%s)") % bailiff)
-                yield sar
+        for eg in self.entry_groups(ar):
+            yield render(eg.action_request)
 
     def summary_story(self, ar):
 

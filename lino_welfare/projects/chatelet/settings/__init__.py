@@ -22,6 +22,9 @@ class Site(Site):
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)
         # remove whole plugin:
+        # kw.update(ledger=None)
+        # kw.update(finan=None)
+        # kw.update(vat=None)
         kw.update(debts=None)
         # kw.update(aids=None)
         kw.update(sepa=None)

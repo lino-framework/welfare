@@ -38,8 +38,13 @@ tests to pass:
 lino_welfare.projects.eupen.settings.doctests
 >>> dd.today()
 datetime.date(2014, 5, 22)
+
+Some of the following tests rely on the right value for the
+contenttype id of `pcsw.Client` model. If the following line changes,
+subsequent snippets need to get adapted:
+
 >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-52
+68
 
 Configuring upload types
 ========================
@@ -219,7 +224,7 @@ It has 3 keys:
 >>> d.record_id
 7
 >>> d.base_params
-{u'mt': 52, u'type': 4, u'mk': 121}
+{u'mt': 68, u'type': 4, u'mk': 121}
 >>> d.param_values
 {u'pupload_type': None, u'puser': None, u'end_date': None, u'observed_eventHidden': u'20', u'observed_event': u'Est active', u'coached_by': None, u'pupload_typeHidden': None, u'coached_byHidden': None, u'puserHidden': None, u'start_date': None}
 
@@ -297,7 +302,7 @@ It has 3 keys:
 10
 
 >>> d.base_params
-{u'mt': 52, u'mk': 177, u'type_id': 1}
+{u'mt': 68, u'mk': 177, u'type_id': 1}
 
 >>> d.data_record.keys()
 [u'phantom', u'data', u'title']

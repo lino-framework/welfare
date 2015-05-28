@@ -7,9 +7,11 @@
 .. autosummary::
    :toctree:
 
-   fixtures
    models
    management.commands
+   fixtures.std
+   fixtures.demo
+   fixtures.demo2
 
 """
 

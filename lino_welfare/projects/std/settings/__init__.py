@@ -130,13 +130,14 @@ class Site(Site):
 
         yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
-        #~ yield 'lino.modlib.postings'
         yield 'lino_welfare.modlib.reception'
-        # yield 'lino.modlib.languages'
         yield 'lino.modlib.accounts'
         yield 'lino_welfare.modlib.badges'
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
+
+        yield 'lino_welfare.modlib.ledger'
+        yield 'lino_welfare.modlib.finan'
 
         yield 'lino.modlib.boards'
 

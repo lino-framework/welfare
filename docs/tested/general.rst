@@ -32,14 +32,14 @@ result:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-51 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
-135 models:
+54 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, vat, ledger, finan, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
+151 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               14        51
- accounts.Chart                 accounts.Charts                 5         1
- accounts.Group                 accounts.Groups                 9         8
+ accounts.Account               accounts.Accounts               19        58
+ accounts.Chart                 accounts.Charts                 5         2
+ accounts.Group                 accounts.Groups                 9         14
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
@@ -71,20 +71,20 @@ result:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   14        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
- contacts.Company               contacts.Companies              30        49
+ contacts.Company               contacts.Companies              32        49
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               26        172
- contacts.Person                contacts.Persons                33        109
+ contacts.Partner               contacts.Partners               28        172
+ contacts.Person                contacts.Persons                35        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         136
+ contenttypes.ContentType       contenttypes.ContentTypes       4         152
  contenttypes.HelpText          contenttypes.HelpTexts          4         5
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
  courses.CourseOffer            courses.CourseOffers            6         3
- courses.CourseProvider         courses.CourseProviders         31        2
+ courses.CourseProvider         courses.CourseProviders         33        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              8         5
@@ -107,9 +107,17 @@ result:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.ExcerptsByX            12        89
+ excerpts.Excerpt               excerpts.ExcerptsByX            12        13
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
- households.Household           households.Households           29        14
+ finan.BankStatement            finan.BankStatements            11        0
+ finan.BankStatementItem        finan.BankStatementItemTable    11        0
+ finan.Grouper                  finan.Groupers                  10        0
+ finan.GrouperItem              finan.GrouperItemTable          10        0
+ finan.JournalEntry             finan.FinancialVouchers         9         0
+ finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
+ finan.PaymentOrder             finan.PaymentOrders             11        0
+ finan.PaymentOrderItem         finan.PaymentOrderItemTable     10        0
+ households.Household           households.Households           31        14
  households.Member              households.Members              13        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
@@ -125,11 +133,17 @@ result:
  jobs.Contract                  jobs.Contracts                  28        16
  jobs.ContractType              jobs.ContractTypes              11        5
  jobs.Job                       jobs.Jobs                       10        8
- jobs.JobProvider               jobs.JobProviders               31        3
+ jobs.JobProvider               jobs.JobProviders               33        3
  jobs.JobType                   jobs.JobTypes                   5         5
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
+ ledger.AccountInvoice          ledger.AccountInvoices          18        20
+ ledger.InvoiceItem             ledger.InvoiceItemTable         9         0
+ ledger.Journal                 ledger.Journals                 20        2
+ ledger.MatchRule               ledger.MatchRules               3         0
+ ledger.Movement                ledger.Movements                9         0
+ ledger.Voucher                 ledger.Vouchers                 7         20
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
@@ -141,7 +155,7 @@ result:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    67        63
+ pcsw.Client                    pcsw.Clients                    69        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -166,12 +180,14 @@ result:
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
  sepa.Account                   sepa.Accounts                   8         13
- system.SiteConfig              system.SiteConfigs              27        1
+ system.SiteConfig              system.SiteConfigs              30        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        11
+ vat.PaymentTerm                vat.PaymentTerms                8         0
+ vat.VatRule                    vat.VatRules                    9         0
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -364,7 +380,7 @@ changes.
 | contacts.Companies.detail                       | all except anonymous                | overview prefix name type vat_id                   |
 |                                                 |                                     | client_contact_type url email phone gsm fax        |
 |                                                 |                                     | remarks id language activity is_obsolete created   |
-|                                                 |                                     | modified                                           |
+|                                                 |                                     | modified VouchersByPartner                         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | contacts.Companies.insert                       | all except anonymous                | name language email type id                        |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -374,7 +390,7 @@ changes.
 |                                                 |                                     | url email phone gsm fax country region city        |
 |                                                 |                                     | zip_code addr1 street_prefix street street_no      |
 |                                                 |                                     | street_box addr2 remarks is_obsolete created       |
-|                                                 |                                     | modified                                           |
+|                                                 |                                     | modified VouchersByPartner                         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | contacts.Partners.insert                        | all except anonymous                | name language email                                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -384,7 +400,7 @@ changes.
 |                                                 |                                     | gender birth_date age id language email phone gsm  |
 |                                                 |                                     | fax MembersByPerson LinksByHuman remarks activity  |
 |                                                 |                                     | url client_contact_type is_obsolete created        |
-|                                                 |                                     | modified                                           |
+|                                                 |                                     | modified VouchersByPartner                         |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | contacts.Persons.insert                         | all except anonymous                | first_name last_name gender language               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
@@ -465,6 +481,24 @@ changes.
 |                                                 |                                     | contact_person language owner build_time           |
 |                                                 |                                     | body_template_content                              |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.BankStatements.detail                     | all except anonymous                | date balance1 balance2 user workflow_buttons id    |
+|                                                 |                                     | journal year number                                |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.BankStatements.insert                     | all except anonymous                | date user balance1 balance2                        |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.FinancialVouchers.detail                  | all except anonymous                | date user narration workflow_buttons id journal    |
+|                                                 |                                     | year number                                        |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.FinancialVouchers.insert                  | all except anonymous                | date user narration                                |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.Groupers.detail                           | all except anonymous                | date partner user workflow_buttons id journal year |
+|                                                 |                                     | number                                             |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.Groupers.insert                           | all except anonymous                | date user partner                                  |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| finan.PaymentOrders.detail                      | all except anonymous                | date user narration total execution_date           |
+|                                                 |                                     | workflow_buttons id journal year number            |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | households.Households.detail                    | all except anonymous                | type prefix name id                                |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | households.HouseholdsByType.detail              | all except anonymous                | type name language id country region city zip_code |
@@ -539,6 +573,26 @@ changes.
 | jobs.Schedules.insert                           | 100, 110, admin                     | id name name_fr name_de name_nl                    |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | languages.Languages.insert                      | all except anonymous                | id iso2 name name_fr name_de name_nl               |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.AccountInvoices.detail                   | all except anonymous                | id date partner user due_date your_ref vat_regime  |
+|                                                 |                                     | total_base total_vat total_incl workflow_buttons   |
+|                                                 |                                     | journal year number narration                      |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.AccountInvoices.insert                   | all except anonymous                | journal partner date total_incl                    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.ActivityReport.show                      | nobody                              | body                                               |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.InvoicesByJournal.insert                 | all except anonymous                | partner date total_incl                            |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.Journals.detail                          | all except anonymous                | ref trade_type seqno id voucher_type journal_group |
+|                                                 |                                     | force_sequence account dc build_method template    |
+|                                                 |                                     | name name_fr name_de name_nl printed_name          |
+|                                                 |                                     | printed_name_fr printed_name_de printed_name_nl    |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.Journals.insert                          | all except anonymous                | ref name name_fr name_de name_nl trade_type        |
+|                                                 |                                     | voucher_type                                       |
++-------------------------------------------------+-------------------------------------+----------------------------------------------------+
+| ledger.Situation.show                           | nobody                              | body                                               |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+
 | newcomers.AvailableCoachesByClient.assign_coach | 200, 300, admin                     | notify_subject notify_body notify_silent           |
 +-------------------------------------------------+-------------------------------------+----------------------------------------------------+

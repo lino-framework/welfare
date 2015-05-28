@@ -129,15 +129,17 @@ def objects():
             yield Granting(**kw)
             urgent_aid_generated += 1
 
-    ses = rt.login('theresia')
-
-    for at in rt.modules.aids.AidType.objects.exclude(confirmation_type=''):
-        M = at.confirmation_type.model
-        et = ExcerptType.get_for_model(M)
-        qs = M.objects.filter(granting__aid_type=at)
-        for obj in qs:
-            ses.selected_rows = [obj]
-            yield et.get_or_create_excerpt(ses)
+    if False:  # no need to print them all.
+               # lino_welfare.modlib.welfare.fixtures.demo2 is enough.
+        ses = rt.login('theresia')
+        for at in rt.modules.aids.AidType.objects.exclude(
+                confirmation_type=''):
+            M = at.confirmation_type.model
+            et = ExcerptType.get_for_model(M)
+            qs = M.objects.filter(granting__aid_type=at)
+            for obj in qs:
+                ses.selected_rows = [obj]
+                yield et.get_or_create_excerpt(ses)
             
     def person2client(f, l):
         obj = Person.objects.get(first_name=f, last_name=l)

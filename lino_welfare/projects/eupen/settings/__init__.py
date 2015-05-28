@@ -30,6 +30,9 @@ class Site(Site):
         kw.update(polls=None)
         # kw.update(projects=None)
         kw.update(immersion=None)
+        # kw.update(ledger=None)
+        # kw.update(finan=None)
+        # kw.update(vat=None)  # injects Company.vat_id
         kw.update(active_job_search=None)
         kw.update(pcsw='lino_welfare.projects.eupen.modlib.pcsw')
         kw.update(cv='lino_welfare.modlib.cv')

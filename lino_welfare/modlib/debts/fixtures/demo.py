@@ -9,8 +9,6 @@ ONE_DAY = relativedelta(days=1)
 from django.conf import settings
 from django.utils.translation import ugettext as _
 
-
-from lino.core.utils import resolve_model
 from lino.utils import Cycler
 from lino.api import rt
 
@@ -23,7 +21,14 @@ def n2dec(v):
 
 def objects():
 
-    User = resolve_model('users.User')
+    User = rt.modules.users.User
+    Household = rt.modules.households.Household
+    Budget = rt.modules.debts.Budget
+    Chart = rt.modules.accounts.Chart
+    Entry = rt.modules.debts.Entry
+    Account = rt.modules.accounts.Account
+    Company = rt.modules.contacts.Company
+
     kerstin = User(username="kerstin",
                    first_name="Kerstin", last_name=u"Kerres",
                    profile='300')
@@ -31,22 +36,20 @@ def objects():
         #~ debts_level=UserLevel.user)
     yield kerstin
 
-    Household = rt.modules.households.Household
-    Budget = rt.modules.debts.Budget
     for hh in Household.objects.all():
         b = Budget(partner_id=hh.id, user=kerstin)
         b.fill_defaults(None)
         yield b
 
-    Entry = rt.modules.debts.Entry
-    Account = rt.modules.accounts.Account
-    Company = rt.modules.contacts.Company
     INCOME_AMOUNTS = Cycler([i * 200 for i in range(8)])
     EXPENSE_AMOUNTS = Cycler([i * 5.24 for i in range(10)])
     DEBT_AMOUNTS = Cycler([(i + 1) * 300 for i in range(5)])
     DEBT_ENTRIES = Cycler([4, 8, 5, 3, 12, 5])
     PARTNERS = Cycler(Company.objects.all())
-    LIABILITIES = Cycler(Account.objects.filter(type=AccountTypes.liabilities))
+    
+    LIABILITIES = Cycler(Account.objects.filter(
+        type=AccountTypes.liabilities,
+        chart=Chart.objects.get(name="debts.default")))
     EXPENSE_REMARKS = Cycler(_("Shopping"), _("Cinema"), _("Seminar"))
     # qs = rt.modules.contacts.Companies.request().data_iterator
     # qs = qs.filter(client_contact_type__is_bailiff=True)

@@ -74,7 +74,7 @@ Job Offers
 
 
 >>> # settings.SITE.catch_layout_exceptions = False
->>> jobs.Offers.show() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(jobs.Offers)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ======================== ================== ========================== ========== ================ ============== =============
  Name                     Stellenanbieter    Sektor                     Funktion   Beginn Auswahl   Ende Auswahl   Beginndatum
 ------------------------ ------------------ -------------------------- ---------- ---------------- -------------- -------------
@@ -93,7 +93,8 @@ This table shows the Experiences which satisfy a given Job offer.
 Example:
 
 >>> obj = jobs.Offer.objects.get(pk=1)
->>> ses.show(jobs.ExperiencesByOffer.request(obj)) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ses.show(jobs.ExperiencesByOffer, obj)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ============ ========== ==================== =============================== ==========================
  Beginnt am   Enddatum   Klient               Firma                           Land
 ------------ ---------- -------------------- ------------------------------- --------------------------

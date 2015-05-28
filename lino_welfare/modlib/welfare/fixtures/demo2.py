@@ -1,6 +1,10 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""
+Makes sure that there is at least one excerpt for every ExcerptType.
+Render all excerpts by running their do_print method.
+"""
 
 from lino.api import rt
 

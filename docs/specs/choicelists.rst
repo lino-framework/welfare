@@ -72,12 +72,17 @@ name to read the documentation):
     cv.HowWell : HowWell
     debts.TableLayouts : Table layouts
     excerpts.Shortcuts : Excerpt shortcuts
+    finan.VoucherStates : States
     households.MemberDependencies : Household Member Dependencies
     households.MemberRoles : Roles
     humanlinks.LinkTypes : Parency types
     isip.ContractEvents : Observed events
     isip.OverlapGroups : Overlap groups
     jobs.CandidatureStates : Candidature states
+    ledger.FiscalYears : Fiscal Years
+    ledger.InvoiceStates : States
+    ledger.JournalGroups : JournalGroups
+    ledger.VoucherTypes : VoucherTypes
     lino.BuildMethods : BuildMethods
     lino.ChangeTypes : Change Types
     notes.SpecialTypes : Special note types
@@ -101,5 +106,8 @@ name to read the documentation):
     users.UserGroups : User Groups
     users.UserLevels : User Levels
     users.UserProfiles : User Profiles
+    vat.TradeTypes : TradeTypes
+    vat.VatClasses : VatClasses
+    vat.VatRegimes : VatRegimes
 
 
