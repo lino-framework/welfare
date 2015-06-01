@@ -242,7 +242,7 @@ class Company(Partner, Company):
         verbose_name = _("Organisation")
         verbose_name_plural = _("Organisations")
 
-    # vat_id = models.CharField(_("VAT id"), max_length=200, blank=True)
+    vat_id = models.CharField(_("VAT id"), max_length=200, blank=True)
 
     @classmethod
     def on_analyze(cls, site):

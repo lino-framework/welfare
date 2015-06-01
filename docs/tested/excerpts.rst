@@ -79,7 +79,6 @@ Here is the list of all demo excerpts.
  10   File sheet               *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
  11   eID sheet                *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
  12   Action plan              *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 13   Art60§7 job supplyment   *Art60§7 job supplyment#6 (Hildegard HILGERS)*   HILGERS Hildegard (133)   Pro Aktiv V.o.G.           de
 ==== ======================== ================================================ ========================= ========================== ==========
 <BLANKLINE>
 

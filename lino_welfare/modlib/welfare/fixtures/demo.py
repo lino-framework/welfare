@@ -23,9 +23,8 @@ from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
 from lino.modlib.cal.utils import DurationUnits
-from lino.modlib.cal.utils import WORKDAYS
+# from lino.modlib.cal.utils import WORKDAYS
 
-aids = dd.resolve_app('aids')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
@@ -40,16 +39,6 @@ cv = dd.resolve_app('cv')
 Company = dd.resolve_model('contacts.Company')
 
 #~ dblogger.info('Loading')
-
-
-#~ DEMO_LINKS = [
-  #~ dict(name="Lino website",url="http://lino.saffre-rumma.net"),
-  #~ dict(name="Django website",url="http://www.djangoproject.com"),
-  #~ dict(name="ExtJS website",url="http://www.sencha.com"),
-  #~ dict(name="Python website",url="http://www.python.org"),
-  #~ dict(name="Google",url="http://www.google.com"),
-#~ ]
-
 
 #~ def coaching_stories(state):
 CT_GSS = 1
@@ -787,7 +776,7 @@ def objects():
                    subject=SUBJECTS.pop())
 
     schule = StudyType.objects.get(pk=1)
-    uni = StudyType.objects.get(pk=4)
+    # uni = StudyType.objects.get(pk=4)
     abi = u"Abitur"
     study = Instantiator('cv.Study').build
 

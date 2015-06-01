@@ -13,7 +13,7 @@ import lino_welfare
 
 class Site(Site):
     """
-    The base class for all Lino Welfare sites.
+    The base class for all Lino Welfare applications.
     """
 
     verbose_name = _("Lino Welfare")
@@ -21,8 +21,8 @@ class Site(Site):
     version = lino_welfare.SETUP_INFO['version']
     url = lino_welfare.SETUP_INFO['url']
 
-    demo_fixtures = """std std2 few_languages props demo
-    demo2 cbss demo_events checkdata""".split()
+    demo_fixtures = """std welfare_std std2 few_languages props demo
+    welfare_demo demo2 cbss demo_events checkdata""".split()
 
     languages = 'en fr de nl'
     hidden_languages = 'nl'
@@ -49,7 +49,8 @@ class Site(Site):
         
         """
         super(Site, self).setup_plugins()
-        self.plugins.accounts.configure(ref_length=5)
+        self.plugins.accounts.configure(ref_length=16)
+        self.plugins.ledger.configure(project_model='pcsw.Client')
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')
         # self.plugins.households.configure(person_model='pcsw.Client')
 
@@ -136,8 +137,11 @@ class Site(Site):
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
-        yield 'lino_welfare.modlib.ledger'
-        yield 'lino_welfare.modlib.finan'
+        # yield 'lino_welfare.modlib.ledger'
+        # yield 'lino_welfare.modlib.finan'
+        # yield 'lino.modlib.ledger'
+        yield 'lino.modlib.novat'
+        yield 'lino.modlib.finan'
 
         yield 'lino.modlib.boards'
 
