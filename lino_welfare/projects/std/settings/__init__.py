@@ -50,7 +50,8 @@ class Site(Site):
         """
         super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=16)
-        self.plugins.ledger.configure(project_model='pcsw.Client')
+        if 'ledger' in self.plugins:
+            self.plugins.ledger.configure(project_model='pcsw.Client')
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')
         # self.plugins.households.configure(person_model='pcsw.Client')
 
@@ -140,7 +141,7 @@ class Site(Site):
         # yield 'lino_welfare.modlib.ledger'
         # yield 'lino_welfare.modlib.finan'
         # yield 'lino.modlib.ledger'
-        yield 'lino.modlib.novat'
+        yield 'lino.modlib.vatless'
         yield 'lino.modlib.finan'
 
         yield 'lino.modlib.boards'

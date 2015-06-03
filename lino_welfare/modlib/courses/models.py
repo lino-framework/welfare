@@ -46,7 +46,7 @@ class CourseProvider(contacts.Company):
           #~ verbose_name=_("Name"))
     #~ company = models.ForeignKey("contacts.Company",blank=True,null=True,verbose_name=_("Company"))
 
-    def disable_delete(self, ar):
+    def disable_delete(self, ar=None):
         # skip the is_imported_partner test
         return super(contacts.Partner, self).disable_delete(ar)
 

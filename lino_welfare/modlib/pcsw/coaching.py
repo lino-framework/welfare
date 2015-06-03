@@ -174,7 +174,7 @@ during a given period.
                 self.user = u
         super(Coaching, self).on_create(ar)
 
-    def disable_delete(self, ar):
+    def disable_delete(self, ar=None):
         if ar is not None and settings.SITE.is_imported_partner(self.client):
             if self.primary:
                 return _("Cannot delete companies and persons imported from TIM")

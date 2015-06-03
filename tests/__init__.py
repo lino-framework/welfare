@@ -57,6 +57,9 @@ class SpecsTests(BaseTestCase):
     def test_choicelists(self):
         return self.run_simple_doctests('docs/specs/choicelists.rst')
 
+    def test_ledger(self):
+        return self.run_simple_doctests('docs/specs/ledger.rst')
+
 
 class DocsTests(BaseTestCase):
     

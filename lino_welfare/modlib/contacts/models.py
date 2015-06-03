@@ -4,6 +4,10 @@
 
 """
 Database models for :mod:`lino_welfare.modlib.contacts`.
+
+Lino Welfare defines a `vat_id` field on :class:`Company` but
+doesn't need :mod:`lino.modlib.vat`
+
 """
 
 from __future__ import unicode_literals
@@ -21,15 +25,24 @@ class Partner(
         Partner,
         AddressOwner, mixins.CreatedModified, dd.ImportedFields):
 
-    """
-    :ref:`welfare` defines a `vat_id` field on Partner but doesn't
-    need :mod:`lino.modlib.vat`
+    """Extends :class:`lino.modlib.contacts.models.Partner` by adding the
+    following fields:
+
+    .. attribute:: is_obsolete
+
+        Marking a partner as obsolete means to stop using this partner
+        for new operations. Obsolete partners are hidden in most
+        views.
+
+    .. attribute:: activity
+
+    .. attribute:: client_contact_type
 
     """
 
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
-Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und 
+Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und
 für neue Operationen nicht benutzt werden können.""")
 
     activity = models.ForeignKey("pcsw.Activity",
@@ -70,7 +83,7 @@ für neue Operationen nicht benutzt werden können.""")
             rv |= self._imported_fields
         return rv
 
-    def disable_delete(self, ar):
+    def disable_delete(self, ar=None):
         if ar is not None and settings.SITE.is_imported_partner(self):
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner, self).disable_delete(ar)

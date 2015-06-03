@@ -2,6 +2,6 @@ WARNING: [autosummary] failed to import u'lino_welfare.migrate': no module named
 WARNING: [autosummary] failed to import u'lino_welfare.projects.chatelet.migrate': no module named lino_welfare.projects.chatelet.migrate (name=u'lino_welfare.projects.chatelet.migrate', path=u'/home/luc/hgwork/welfare/docs/api')
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
-/home/luc/hgwork/welfare/docs/specs/ledger.rst:: WARNING: document isn't included in any toctree
+/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.welfare.fixtures.rst:: WARNING: document isn't included in any toctree
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'
 None:None: WARNING: toctree contains reference to nonexisting document u'api/migrate'

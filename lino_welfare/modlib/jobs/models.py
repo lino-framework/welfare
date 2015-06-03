@@ -94,7 +94,7 @@ class JobProvider(contacts.Company):
         verbose_name = _("Job Provider")
         verbose_name_plural = _('Job Providers')
 
-    def disable_delete(self, ar):
+    def disable_delete(self, ar=None):
         # skip the is_imported_partner test
         return super(contacts.Partner, self).disable_delete(ar)
 

@@ -39,7 +39,7 @@ add('03', _("At shared charge"), 'shared')
 
 class Household(Household):
 
-    def disable_delete(self, ar):
+    def disable_delete(self, ar=None):
         # skip the is_imported_partner test
         return super(Partner, self).disable_delete(ar)
 
