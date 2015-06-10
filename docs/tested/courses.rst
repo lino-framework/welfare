@@ -22,10 +22,9 @@ This should rather be somewhere in the general Lino documentation,
 probably in :ref:`layouts_tutorial`,
 but this document isn't yet tested, so we do it here.
 
-This setting tells Lino what to do when
-it encounters a wrong fieldname in a layout specification.
-It will anyway raise an Exception, but the difference is 
-is the content of the error message.
+This setting tells Lino what to do when it encounters a wrong
+fieldname in a layout specification.  It will anyway raise an
+Exception, but the difference is is the content of the error message.
 
 The default value for this setting is True.
 In that case the error message reports only a summary of the 
@@ -35,24 +34,25 @@ the bug is hidden.
 
 For example:
 
->>> ses.show(courses.PendingCourseRequests,limit=5,
+>>> ses.show(courses.PendingCourseRequests,
 ...      column_names="personX content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element 'personX' (None) referred in layout <ColumnsLayout on courses.PendingCourseRequests>."
+Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'personX'
 
->>> ses.show(courses.PendingCourseRequests,limit=5,
+
+>>> ses.show(courses.PendingCourseRequests,
 ...      column_names="person__foo content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' (None) referred in layout <ColumnsLayout on courses.PendingCourseRequests>."
+Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 
 >>> ses.show(courses.PendingCourseRequests,
 ...      column_names="person content urgent address person__foo")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))' (None) referred in layout <ColumnsLayout on courses.PendingCourseRequests>."
+Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> ses.show(courses.PendingCourseRequests,
@@ -69,12 +69,11 @@ Yes it was a nice feature to silently ignore non installed app_labels
 but mistakenly specifying "person.first_name" instead of "person__first_name"
 did not raise an error. Now it does:
 
->>> ses.show(courses.PendingCourseRequests, limit=5,
+>>> ses.show(courses.PendingCourseRequests,
 ...      column_names="person.first_name content urgent address")
 Traceback (most recent call last):
   ...
-KeyError: u"Unknown element 'person.first_name' (None) referred in layout <ColumnsLayout on courses.PendingCourseRequests>."
-
+Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person.first_name'
 
 And then the following example failed because Lino simply wasn't yet 
 able to render RemoteFields as rst.

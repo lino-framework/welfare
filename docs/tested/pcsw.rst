@@ -109,7 +109,7 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-67
+68
 
 
 The detail action

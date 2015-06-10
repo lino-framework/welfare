@@ -42,6 +42,7 @@ uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 from lino.modlib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
+from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 
 from lino.utils import ssin
@@ -566,11 +567,11 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         return E.div(*elems)
 
 
-class ClientDetail(dd.FormLayout):
+class ClientDetail(PartnerDetailMixin):
 
     main = "general contact coaching aids_tab \
     work_tab career languages \
-    competences contracts history calendar misc"
+    competences contracts history calendar ledger misc"
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15

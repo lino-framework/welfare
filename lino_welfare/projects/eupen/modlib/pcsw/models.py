@@ -14,6 +14,8 @@ from lino.api import dd
 
 from lino_welfare.modlib.pcsw.models import *
 
+from lino.modlib.vatless.mixins import PartnerDetailMixin
+
 
 class Client(Client):
     remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
@@ -58,11 +60,11 @@ class Client(Client):
             ''')
 
 
-class ClientDetail(dd.FormLayout):
+class ClientDetail(PartnerDetailMixin):
 
     main = "general contact coaching aids_tab \
     work_tab career languages \
-    competences contracts history calendar misc"
+    competences contracts history calendar ledger misc"
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15

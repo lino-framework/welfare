@@ -19,6 +19,7 @@ from lino.api import dd, rt
 from lino.modlib.contacts.models import *
 
 from lino.modlib.addresses.mixins import AddressOwner
+from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 
 class Partner(
@@ -100,9 +101,9 @@ für neue Operationen nicht benutzt werden können.""")
     #     return "%s (%s)" % (s, self.pk)
 
 
-class PartnerDetail(PartnerDetail):
+class PartnerDetail(PartnerDetail, PartnerDetailMixin):
 
-    main = "general contact misc "
+    main = "general contact ledger misc"
 
     general = dd.Panel("""
     overview:30 general2:45 general3:20
@@ -170,9 +171,9 @@ dd.update_field(Person, 'first_name', blank=False)
 dd.update_field(Person, 'last_name', blank=False)
 
 
-class PersonDetail(PersonDetail):
+class PersonDetail(PersonDetail, PartnerDetailMixin):
 
-    main = "general contact misc"
+    main = "general contact ledger misc"
 
     general = dd.Panel("""
     overview:30 general2:45 general3:30
@@ -266,9 +267,9 @@ class Company(Partner, Company):
             '''name vat_id prefix phone fax email activity''')
 
 
-class CompanyDetail(CompanyDetail):
+class CompanyDetail(CompanyDetail, PartnerDetailMixin):
 
-    main = "general contact notes misc"
+    main = "general contact notes ledger misc"
 
     general = dd.Panel("""
     overview:30 general2:45 general3:30
