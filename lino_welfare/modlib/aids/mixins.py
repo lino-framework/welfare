@@ -181,7 +181,7 @@ class Confirmable(mixins.DatePeriod):
             return set()
         return self.CONFIRMED_FIELDS
 
-    def get_printable_context(self, ar, **kw):
+    def get_printable_context(self, ar=None, **kw):
         kw.update(when=self.get_period_text())
         return super(Confirmable, self).get_printable_context(ar, **kw)
 
