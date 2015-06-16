@@ -10,3 +10,5 @@ env.languages = ['en', 'de', 'fr']
 env.revision_control_system = 'git'
 env.apidoc_exclude_pathnames = ['lino_welfare/projects']
 env.tolerate_sphinx_warnings = True
+
+env.cleanable_files = ['docs/api/lino_welfare.*']

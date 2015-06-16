@@ -39,23 +39,28 @@ A **voucher** (German *Beleg*) is a document which serves as legal
 proof for a transaction. A transaction is a set of **movements** whose
 debit equals to their credit.
 
+Lino Welfare uses the following voucher types:
+
 >>> rt.show(rt.modules.ledger.VoucherTypes)
-===================== ====== ======================================
- value                 name   text
---------------------- ------ --------------------------------------
- vatless.Invoice              invoice (vatless.Invoice)
- finan.JournalEntry           Journal Entry (finan.JournalEntry)
- finan.PaymentOrder           Payment Order (finan.PaymentOrder)
- finan.BankStatement          Bank Statement (finan.BankStatement)
- finan.Grouper                Grouper (finan.Grouper)
-===================== ====== ======================================
+======================== ====== ======================================
+ value                    name   text
+------------------------ ------ --------------------------------------
+ vatless.AccountInvoice          Invoice (vatless.AccountInvoice)
+ finan.JournalEntry              Journal Entry (finan.JournalEntry)
+ finan.PaymentOrder              Payment Order (finan.PaymentOrder)
+ finan.BankStatement             Bank Statement (finan.BankStatement)
+ finan.Grouper                   Grouper (finan.Grouper)
+======================== ====== ======================================
 <BLANKLINE>
+
+What is a voucher type? See :class:`lino.modlib.ledger.choicelists.VoucherTypes`.
+
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
 =========== =================== ================== ==================== ======================================
  Reference   Designation         Designation (fr)   Designation (de)     voucher type
 ----------- ------------------- ------------------ -------------------- --------------------------------------
- PRC         Purchase invoices   Factures achat     Einkaufsrechnungen   invoice (vatless.Invoice)
+ PRC         Purchase invoices   Factures achat     Einkaufsrechnungen   Invoice (vatless.AccountInvoice)
  KBC         KBC                 KBC                KBC                  Bank Statement (finan.BankStatement)
  POKBC       PO KBC              PO KBC             PO KBC               Payment Order (finan.PaymentOrder)
 =========== =================== ================== ==================== ======================================
@@ -84,7 +89,7 @@ debit equals to their credit.
     ...        print("%s.%s.%s" % (model._meta.app_label, model.__name__, f.name))
     ledger.Voucher.state
 
-    >>> obj = rt.modules.vatless.Invoice.objects.get(id=1)
+    >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(rt.modules.vatless.Invoices)
     >>> print(E.tostring(obj.workflow_buttons(ar)))
     <span><b>Registered</b> &#8594; [Deregister]</span>
@@ -119,7 +124,7 @@ debit equals to their credit.
 ========= ========= ============================ =================== ============ ========== ============ ================
 <BLANKLINE>
     
->>> obj = rt.modules.vatless.Invoice.objects.get(id=1)
+>>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
 >>> obj.state
 <VoucherStates.registered:20>
 

@@ -184,7 +184,7 @@ result:
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        11
- vatless.Invoice                vatless.Invoices                17        20
+ vatless.AccountInvoice         vatless.Invoices                17        20
  vatless.InvoiceItem            vatless.InvoiceItems            6         24
 ============================== =============================== ========= =======
 <BLANKLINE>
