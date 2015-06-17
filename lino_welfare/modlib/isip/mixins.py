@@ -177,14 +177,42 @@ OverlappingContractsChecker.activate()
 
 
 class ContractBase(Signers, Certifiable, EventGenerator):
-
-    """Abstract base class for all **integration contracts** (an
-    unofficial term), i.e.
-    :class:`isip.Contract <lino_welfare.modlib.isip.models.Contract>`
-    :class:`jobs.Contract <lino_welfare.modlib.jobs.models.Contract>`
-    and
+    """Abstract base class for all *integration contracts* (an unofficial
+    term), i.e.  :class:`isip.Contract
+    <lino_welfare.modlib.isip.models.Contract>` :class:`jobs.Contract
+    <lino_welfare.modlib.jobs.models.Contract>` and
     :class:`immersions.Contract
     <lino_welfare.modlib.immersions.models.Contract>`
+
+    .. attribute:: client
+
+        The client for whom this contract is done.
+
+    .. attribute:: applies_from
+
+        The start date of the contract.
+    
+    .. attribute:: applies_until
+
+        The planned end date.
+    
+    .. attribute:: date_ended
+
+        The date when this contract was prematuredly ended. When
+        nonempty, the :attr:`ended` field should also be filled.  This field
+        is usually empty.
+
+    .. attribute:: ending
+
+        The reason of prematured ending.  Pointer to
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.choicelists.ContractEnding>`
+
+    .. attribute:: date_decided
+    .. attribute:: language
+
+        The language of this contract. Default value is the client's
+        :attr:`language<lino_welfare.modlib.pcw.models.Client.language>`.
 
     .. attribute:: type
 
