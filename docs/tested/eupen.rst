@@ -24,6 +24,20 @@ A tested document
 >>> from lino.api.doctest import *
 
 
+The murder bug
+==============
+
+Before 20150623 it was possible to inadvertently cause a cascaded
+delete by calling `delete` on an object in a script. For example the
+following line would have deleted client 127 and all related data
+instead of raising an exception:
+
+>>> pcsw.Client.objects.get(id=127).delete()
+Traceback (most recent call last):
+...
+Exception: Kann EVERS Eberhart (127) nicht l\xf6schen weil 2 Hilfebeschl\xfcsse darauf verweisen.
+
+
 User profiles
 =============
 
@@ -246,3 +260,4 @@ Some choices lists:
 ...     'rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
 >>> demo_get(
 ...    'rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+

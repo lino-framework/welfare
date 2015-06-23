@@ -31,11 +31,11 @@ def objects():
         fn = obj.get_image_path()
         if not os.path.exists(fn):
             src = get_image_path(None)
-            dd.logger.info("20150531 copy %s to %s...", src, fn)
+            #dd.logger.info("20150531 copy %s to %s...", src, fn)
             rt.makedirs_if_missing(os.path.dirname(fn))
             shutil.copyfile(src, fn)
-        else:
-            dd.logger.info("20150531  %s exists", fn)
+        #else:
+            #dd.logger.info("20150531  %s exists", fn)
         
     for et in ExcerptType.objects.all():
         if Excerpt.objects.filter(excerpt_type=et).count() == 0:

@@ -52,6 +52,7 @@ class TestCase(TestCase):
     
         cli = create_related_objects()
         self.assertEqual(Note.objects.all().count(), 1)
+        Note.objects.all().delete()
         cli.delete()
         self.assertEqual(Note.objects.all().count(), 0)
         rst = BrokenGFKs.to_rst(ar)

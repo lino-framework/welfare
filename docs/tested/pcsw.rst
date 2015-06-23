@@ -151,3 +151,4 @@ href="javascript:Lino.pcsw.Clients.detail.run(null,{
 href="javascript:Lino.contacts.Partners.del_client(null,178,{
 })...">&#10060;</a>]
 
+
