@@ -13,7 +13,14 @@ New installations should use
 from lino.modlib.cv import Plugin
 
 from lino.api import _
-from lino.core.permissions import UserRole
+try:
+
+    from lino.core.permissions import UserRole
+
+except ImportError:  # branch master
+
+    class UserRole(object):
+        pass
 
 
 class IntegrationAgent(UserRole):
