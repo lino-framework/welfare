@@ -46,9 +46,7 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
 
-    # def startup(self):
     def do_site_startup(self):
-        # super(Site, self).startup()
         super(Site, self).do_site_startup()
 
         from lino.modlib.changes.models import watch_changes as wc
