@@ -34,6 +34,7 @@ class Plugin(Plugin):
 
     # classic permission system (until June 2015)
     def get_default_required(self, **kwargs):
+        kwargs.update(user_groups='integ')
         return super(Plugin, self).get_default_required(**kwargs)
 
     # coming permission system before 201506
