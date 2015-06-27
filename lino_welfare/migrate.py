@@ -29,6 +29,8 @@ from lino.modlib.cal.utils import WORKDAYS
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
 
+def noop(*args):
+    return None
 
 class Migrator(Migrator):
     "The standard migrator for :ref:`welfare`."
@@ -587,8 +589,6 @@ def doit(a, b):
         globals_dict.update(
             create_households_member=create_households_member)
 
-        def noop(*args):
-            return None
         globals_dict.update(create_users_team=noop)
 
         # globals_dict.update(create_households_member=noop)
@@ -1153,5 +1153,7 @@ valid_until to end_date.
             kw.update(default_amount=default_amount)
             return accounts_Account(**kw)
         globals_dict.update(create_accounts_account=create_accounts_account)
+
+        globals_dict.update(create_accounts_chart=noop)
 
         return '1.1.22'
