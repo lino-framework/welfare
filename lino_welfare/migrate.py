@@ -1110,3 +1110,47 @@ valid_until to end_date.
         globals_dict.update(create_uploads_upload=create_uploads_upload)
 
         return '1.1.21'
+
+    def migrate_from_1_1_21(self, globals_dict):
+        """The account charts model has been replaced by a choicelist.
+
+        """
+
+        from lino.modlib.accounts.choicelists import AccountCharts
+        bv2kw = globals_dict['bv2kw']
+
+        accounts_Group = rt.modules.accounts.Group
+        accounts_Account = rt.modules.accounts.Account
+
+        def create_accounts_group(id, name, chart_id, ref, account_type, entries_layout):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(chart_id=chart_id)
+            kw.update(chart=AccountCharts.debts)
+            kw.update(ref=ref)
+            kw.update(account_type=account_type)
+            kw.update(entries_layout=entries_layout)
+            return accounts_Group(**kw)
+        globals_dict.update(create_accounts_group=create_accounts_group)
+
+        def create_accounts_account(id, seqno, name, chart_id, group_id, ref, type, required_for_household, required_for_person, periods, default_amount):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(seqno=seqno)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(chart=AccountCharts.debts)
+            # kw.update(chart_id=chart_id)
+            kw.update(group_id=group_id)
+            kw.update(ref=ref)
+            kw.update(type=type)
+            kw.update(required_for_household=required_for_household)
+            kw.update(required_for_person=required_for_person)
+            if periods is not None: periods = Decimal(periods)
+            kw.update(periods=periods)
+            if default_amount is not None: default_amount = Decimal(default_amount)
+            kw.update(default_amount=default_amount)
+            return accounts_Account(**kw)
+        globals_dict.update(create_accounts_account=create_accounts_account)
+
+        return '1.1.22'

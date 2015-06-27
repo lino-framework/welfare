@@ -14,9 +14,7 @@
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    #~ distclass=MyDistribution,
-    #~ dist_dir=os.path.join('docs','dist'),
-    version='1.1.21',  # since 20150123
+    version='1.1.22',  # since 20150627
     install_requires=['lino', 'suds', 'vobject', 'django-iban', 'xlwt'],
     test_suite='tests',
     description=u"A Lino application for Belgian Centres for Public Welfare",
