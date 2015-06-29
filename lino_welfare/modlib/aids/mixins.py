@@ -27,12 +27,12 @@ from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
 from lino.modlib.users.mixins import UserAuthored
-from lino.modlib.users.choicelists import UserLevels
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.mixins.periods import rangefmt
 
 from .choicelists import ConfirmationStates
+from .roles import AidsStaff
 
 
 def e2text(v):
@@ -58,14 +58,14 @@ class SignConfirmation(dd.Action):
     show_in_bbar = False
 
     # icon_name = 'flag_green'
-    required = dd.required(states="requested")
+    required_states = "requested"
     help_text = _("You sign this confirmation, making most "
                   "fields read-only.")
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
         if obj.signer_id and obj.signer != user \
-           and user.profile.level < UserLevels.manager:
+           and not isinstance(user.profile.role, AidsStaff):
             return False
         return super(SignConfirmation,
                      self).get_action_permission(ar, obj, state)
@@ -91,12 +91,13 @@ class RevokeConfirmation(dd.Action):
     show_in_bbar = False
 
     # icon_name = 'flag_green'
-    required = dd.required(states="confirmed")
+    required_states = "confirmed"
     help_text = _("You revoke your signatore from this confirmation.")
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
-        if obj.signer != user and user.profile.level < UserLevels.manager:
+        if obj.signer != user and not isinstance(
+                user.profile.role, AidsStaff):
             return False
         return super(RevokeConfirmation,
                      self).get_action_permission(ar, obj, state)
@@ -131,7 +132,8 @@ class Confirmable(mixins.DatePeriod):
     class Meta:
         abstract = True
 
-    manager_level_field = None
+    manager_roles_required = None
+    # manager_level_field = None
     workflow_state_field = 'state'
 
     signer = models.ForeignKey(

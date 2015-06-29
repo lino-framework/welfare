@@ -29,6 +29,8 @@ from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.addresses.mixins import AddressTypes
 from lino.modlib.boards.mixins import BoardDecision
+from lino.modlib.office.roles import OfficeUser, OfficeStaff
+from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 from .mixins import Confirmable, Confirmation
 from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
@@ -43,7 +45,7 @@ class Category(mixins.BabelNamed):
 
 class Categories(dd.Table):
     model = 'aids.Category'
-    required = dd.required(user_level='admin', user_groups='office')
+    required_roles = dd.required(OfficeStaff)
     column_names = 'name *'
     order_by = ["name"]
 
@@ -167,7 +169,7 @@ class AidType(ContactRelated, mixins.BabelNamed):
 
 class AidTypes(dd.Table):
     model = 'aids.AidType'
-    required = dd.required(user_level='admin', user_groups='office')
+    required_roles = dd.required(OfficeStaff)
     column_names = 'name board short_name *'
     order_by = ["name"]
 
@@ -305,7 +307,7 @@ dd.update_field(Granting, 'end_date', verbose_name=_('until'))
 class Grantings(dd.Table):
     """The default table for :class:`Granting`."""
     model = 'aids.Granting'
-    required = dd.required(user_groups='office', user_level='admin')
+    required_roles = dd.required(OfficeStaff)
     use_as_default_table = False
     order_by = ['-start_date']
 
@@ -379,7 +381,7 @@ class Grantings(dd.Table):
 
 
 class MyPendingGrantings(Grantings):
-    required = dd.required(user_groups='coaching')
+    required_roles = dd.required(SocialAgent)
     column_names = "client aid_type start_date " \
                    "end_date user workflow_buttons *"
     label = _("Grantings to confirm")
@@ -406,7 +408,7 @@ class MyPendingGrantings(Grantings):
 
 
 class GrantingsByX(Grantings):
-    required = dd.required(user_groups='office coaching')
+    required_roles = dd.required(OfficeUser)
     use_as_default_table = True
     auto_fit_column_widths = True
 
@@ -441,7 +443,7 @@ class GrantingsByType(GrantingsByX):
 
 class Confirmations(dd.Table):
     model = 'aids.Confirmation'
-    required = dd.required(user_groups='office', user_level='admin')
+    required_roles = dd.required(OfficeStaff)
     order_by = ["-created"]
     column_names = "description_column created user printed " \
                    "start_date end_date *"
@@ -530,7 +532,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     """
 
     label = _("Issued confirmations")
-    required = dd.required(user_groups='office')
+    required_roles = dd.required(OfficeUser)
     master = 'aids.Granting'
     master_key = 'granting'
     column_names = "description_column created user signer printed " \
@@ -614,7 +616,7 @@ simple aid during a given period.
 
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
-    required = dd.required(user_groups='office')
+    required_roles = dd.required(OfficeUser)
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -675,7 +677,7 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
-    required = dd.required(user_groups='office')
+    required_roles = dd.required(OfficeUser)
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
@@ -851,7 +853,7 @@ class RefundConfirmation(Confirmation):
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
-    required = dd.required(user_groups='office')
+    required_roles = dd.required(OfficeUser)
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons

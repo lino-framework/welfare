@@ -24,6 +24,9 @@ config = dd.plugins.isip
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
+from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+
 
 class ClientHasContract(ObservedEvent):
     text = config.verbose_name
@@ -64,7 +67,7 @@ class ContractType(ContractTypeBase):
 
 
 class ContractTypes(dd.Table):
-    required = dict(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'isip.ContractType'
     column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
@@ -98,7 +101,7 @@ class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
 
 
 class ExamPolicies(dd.Table):
-    required = dict(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'isip.ExamPolicy'
     column_names = 'name *'
     detail_layout = """
@@ -137,7 +140,7 @@ class ContractEnding(dd.Model):
 
 
 class ContractEndings(dd.Table):
-    required = dict(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'isip.ContractEnding'
     column_names = 'name use_in_isip use_in_jobs is_success needs_date_ended *'
     order_by = ['name']
@@ -260,8 +263,8 @@ class ContractDetail(dd.FormLayout):
 
 
 class Contracts(ContractBaseTable):
-    required = dd.required(user_groups='integ')
-    model = Contract
+    required_roles = dd.required(IntegrationAgent)
+    model = 'isip.Contract'
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
     detail_layout = ContractDetail()

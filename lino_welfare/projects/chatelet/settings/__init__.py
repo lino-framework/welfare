@@ -49,37 +49,6 @@ class Site(Site):
     # def get_default_language(self):
     #     return 'fr'
 
-    def setup_user_profiles(self):
-        """
-        This defines default user profiles for
-        :mod:`lino_welfare.settings.chatelet`.
-        """
-
-        # Do NOT call super() which would raise "Unexpected name 'debts'"
-        # super(Site, self).setup_user_profiles()
-
-        # activate workflows for courses:
-        from lino.modlib.courses import workflows
-
-        from django.utils.translation import ugettext_lazy as _
-        from lino.modlib.users.choicelists import UserProfiles
-        UserProfiles.reset(
-            '* office coaching integ courses cbss newcomers reception beid')
-        add = UserProfiles.add_item
-        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _',
-            name='anonymous',
-            readonly=True,
-            authenticated=False)
-        add('100', _("Integration Agent"),           'U U U U U U U _ U')
-        add('110', _("Integration Agent (Manager)"), 'U M M M M M M _ M')
-        add('200', _("Newcomers consultant"),        'U U U _ _ U U _ U')
-        add('210', _("Reception clerk"),             'U U _ _ _ _ U U U')
-        add('300', _("Debts consultant"),            'U U U _ _ _ U _ U')
-        add('400', _("Social agent"),                'U U U _ U U U _ U')
-        add('410', _("Social agent (Manager)"),      'U M M _ M M M _ M')
-        add('900', _("Administrator"),               'A A A A A A A A U',
-            name='admin')
-
     def get_admin_main_items(self, ar):
 
         # Mathieu: je remarque que le module "Visiteurs qui

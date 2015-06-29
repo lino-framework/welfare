@@ -7,23 +7,19 @@ Adds demo data for :mod:`lino_welfare.modlib.newcomers`.
 """
 
 
-from lino.utils.instantiator import Instantiator, i2d
+from lino.utils.instantiator import Instantiator
 from lino.utils import Cycler
-from lino.core.utils import resolve_model
-# from django.utils.translation import ugettext_lazy as _
 
 from lino.api.dd import babel_values
 
-from lino.api import dd, rt
+from lino.api import dd
 from lino.modlib.users.choicelists import UserProfiles
+from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 
 def objects():
 
-    #~ from lino.modlib.users.models import
     from lino_welfare.modlib.newcomers.models import Broker, Faculty, Competence
-    # from lino_welfare.modlib.contacts.models import Person
-    # from lino_welfare.modlib.pcsw import models as pcsw
     pcsw = dd.resolve_app('pcsw')
     Person = dd.resolve_model('contacts.Person')
 
@@ -62,7 +58,8 @@ def objects():
 
     profiles = [
         p for p in UserProfiles.items()
-        if p.integ_level and p.level < dd.UserLevels.admin]
+        if isinstance(p.role, IntegrationAgent)
+        and not isinstance(p.role, dd.SiteStaff)]
     qs = users.User.objects.filter(profile__in=profiles)
     for u in qs:
         u.newcomer_quota = QUOTAS.pop()

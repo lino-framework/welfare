@@ -12,6 +12,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
+from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff
+
 from lino_welfare.modlib.pcsw.models import *
 
 
@@ -103,7 +107,7 @@ class ClientDetail(dd.FormLayout):
     broker:12
     faculty:12
     # refusal_reason
-    """, required=dict(user_groups='newcomers'))
+    """, required_roles=dd.required(NewcomersAgent))
 
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
@@ -125,7 +129,7 @@ class ClientDetail(dd.FormLayout):
     is_obsolete created modified
     remarks
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required=dict(user_level='manager'))
+    """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))
 
     contracts = dd.Panel("""
     jobs.CandidaturesByPerson
@@ -160,12 +164,12 @@ class ClientDetail(dd.FormLayout):
     competences = dd.Panel("""
     cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
-    """, label=_("Competences"), required=dict(user_groups='integ'))
+    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
 
     obstacles_tab = dd.Panel("""
     cv.ObstaclesByPerson pcsw.ConvictionsByClient
     obstacles
-    """, label=_("Obstacles"), required=dict(user_groups='integ'))
+    """, label=_("Obstacles"), required_roles=dd.required(IntegrationAgent))
 
 Clients.detail_layout = ClientDetail()
 

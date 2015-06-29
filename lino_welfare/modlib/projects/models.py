@@ -17,6 +17,7 @@ from lino.api import dd
 from lino import mixins
 
 from lino.modlib.excerpts.mixins import Certifiable
+from lino.modlib.users.choicelists import SiteStaff
 
 
 class ProjectType(mixins.BabelNamed):
@@ -27,7 +28,7 @@ class ProjectType(mixins.BabelNamed):
 
 class ProjectTypes(dd.Table):
     model = 'projects.ProjectType'
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SiteStaff)
 
 
 class Project(mixins.DatePeriod, Certifiable):
@@ -46,7 +47,7 @@ class Project(mixins.DatePeriod, Certifiable):
 
 class Projects(dd.Table):
     model = 'projects.Project'
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SiteStaff)
 
     detail_layout = """
     id client project_type start_date end_date
@@ -61,7 +62,7 @@ class Projects(dd.Table):
 
 
 class ProjectsByClient(Projects):
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'client'
     column_names = 'start_date project_type result remark'
     auto_fit_column_widths = True
@@ -73,7 +74,7 @@ class ProjectsByClient(Projects):
 
 
 class ProjectsByType(Projects):
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'project_type'
     column_names = 'start_date client result remark'
     auto_fit_column_widths = True

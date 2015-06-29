@@ -54,8 +54,8 @@ class Plugin(ad.Plugin):
         m.add_action('cbss.Purposes')
 
     def setup_explorer_menu(self, site, profile, m):
-        if profile.cbss_level < site.modules.users.UserLevels.manager:
-            return
+        # if profile.cbss_level < site.modules.users.UserLevels.manager:
+        #     return
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cbss.IdentifyPersonRequests')
         m.add_action('cbss.ManageAccessRequests')

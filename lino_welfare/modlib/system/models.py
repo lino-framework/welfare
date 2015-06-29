@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd, rt
 
 from lino.modlib.system.models import *
+from lino_welfare.modlib.cbss.roles import CBSSUser
 
 
 class Signers(dd.Model):
@@ -116,7 +117,7 @@ class SiteConfigDetail(dd.FormLayout):
         cbss_http_username cbss_http_password
         """,
         label=dd.apps.cbss.verbose_name,
-        required=dict(user_groups='cbss'))
+        required_roles=dd.required(CBSSUser))
 
 
 # When a Welfare Site decides to hide the "debts" app (as chatelet does)

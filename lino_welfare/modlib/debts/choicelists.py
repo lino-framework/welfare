@@ -13,18 +13,12 @@ from django.db import models
 
 from lino.api import dd, _
 
-from lino.modlib.accounts.choicelists import AccountTypes
-
 
 class TableLayout(dd.Choice):
-    # account_type = None
     columns_spec = None
 
-    # def __init__(self, account_type, value, verbose_name, columns_spec):
     def __init__(self, value, verbose_name, columns_spec):
-        # self.account_type = AccountTypes.items_dict[account_type]
         self.columns_spec = columns_spec
-        # value = account_type + value
         super(TableLayout, self).__init__(value, verbose_name, None)
 
 

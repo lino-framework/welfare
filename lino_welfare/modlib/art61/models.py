@@ -18,9 +18,10 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
+from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+
 from lino_welfare.modlib.isip.mixins import (ContractBaseTable,
                                              ContractTypeBase)
-
 from lino_welfare.modlib.jobs.mixins import JobSupplyment
 
 from .choicelists import Subsidizations
@@ -68,7 +69,7 @@ class ContractType(ContractTypeBase, mixins.Referrable):
 class ContractTypes(dd.Table):
     """
     """
-    required = dd.required(user_groups='integ', user_level='manager')
+    required_roles = dd.required(IntegrationStaff)
     model = ContractType
     column_names = 'name ref *'
     detail_layout = """
@@ -162,9 +163,7 @@ class ContractDetail(dd.FormLayout):
 
 class Contracts(ContractBaseTable):
     #~ debug_permissions = "20130222"
-    required = dd.required(user_groups='integ')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(IntegrationAgent)
     model = Contract
     column_names = 'id applies_from applies_until user type *'
     order_by = ['id']

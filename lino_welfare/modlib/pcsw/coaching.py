@@ -17,12 +17,14 @@ from lino.api import dd
 from lino import mixins
 
 from lino.modlib.users.mixins import ByUser
+from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 
 
 class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")
-    required = dict(states='active standby', user_groups='integ', owner=True)
+    required_states = 'active standby'
+    required_roles = dd.required(SocialAgent)
 
     def get_notify_subject(self, ar, obj, **kw):
         return _("%(client)s no longer coached by %(coach)s") % dict(
@@ -63,21 +65,9 @@ class CoachingType(mixins.BabelNamed):
 
 
 class CoachingTypes(dd.Table):
-    model = CoachingType
+    model = 'pcsw.CoachingType'
     column_names = 'name does_integ does_gss eval_guestrole *'
-    #~ required_user_level = UserLevels.manager
-    required = dict(user_level='manager')
-
-# ~ _("Integration"),'integ')     # DSBE
-# ~ _("General"),'general')       # ASD
-# ~ _("Debt mediation"),'debts')  # Schuldnerberatung
-# ~ _("Accounting"),'accounting') # Buchhaltung
-# ~ _("Human resources"),'human') # Personaldienst
-# ~ _("Human resources"),'human') # Altenheim
-# ~ _("Human resources"),'human') # Mosaik
-# ~ _("Human resources"),'human') # Sekretariat
-# ~ _("Human resources"),'human') # Häusliche Hilfe
-# ~ _("Human resources"),'human') # Energiedienst
+    required_roles = dd.required(SocialStaff)
 
 
 class CoachingEnding(mixins.BabelNamed, mixins.Sequenced):
@@ -96,8 +86,8 @@ class CoachingEnding(mixins.BabelNamed, mixins.Sequenced):
 
 class CoachingEndings(dd.Table):
     help_text = _("A list of reasons expressing why a coaching was ended")
-    required = dict(user_groups=['integ'], user_level='manager')
-    model = CoachingEnding
+    required_roles = dd.required(SocialStaff)
+    model = 'pcsw.CoachingEnding'
     column_names = 'seqno name type *'
     order_by = ['seqno']
     detail_layout = """
@@ -114,7 +104,6 @@ is when a Client is being coached by a User (a social assistant)
 during a given period.
     """
 
-    #~ required = dict(user_level='manager')
     class Meta:
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
@@ -249,9 +238,9 @@ dd.update_field(Coaching, 'end_date', verbose_name=_("until"))
 
 
 class Coachings(dd.Table):
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     help_text = _("Liste des accompagnements.")
-    model = Coaching
+    model = 'pcsw.Coaching'
 
     parameters = mixins.ObservedPeriod(
         coached_by=models.ForeignKey(
@@ -356,7 +345,7 @@ class CoachingsByClient(Coachings):
     """
     The :class:`Coachings` table in a :class:`Clients` detail.
     """
-    required = dd.required()
+    required_roles = dd.required()
     #~ debug_permissions = 20121016
     master_key = 'client'
     order_by = ['start_date']
@@ -366,7 +355,7 @@ class CoachingsByClient(Coachings):
 
 
 class CoachingsByUser(Coachings):
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'user'
     column_names = 'start_date end_date client type primary id'
 

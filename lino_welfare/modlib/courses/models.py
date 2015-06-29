@@ -20,17 +20,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 
 from lino.api import dd
-from lino import mixins
-from lino.utils import mti
-from lino.mixins.printable import DirectPrintAction, Printable
-#~ from lino.mixins.reminder import ReminderEntry
-#~ from lino.core.utils import obj2str
+from lino.mixins.printable import DirectPrintAction
+
+from .roles import CoursesUser, CoursesStaff
+
 
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
-
-
-from lino_welfare.modlib.courses import Plugin
 
 
 class CourseProvider(contacts.Company):
@@ -39,12 +35,8 @@ class CourseProvider(contacts.Company):
     A CourseProvider is a Company that offers Courses. 
     """
     class Meta:
-        #~ app_label = 'courses'
         verbose_name = _("Course provider")
         verbose_name_plural = _("Course providers")
-    #~ name = models.CharField(max_length=200,
-          #~ verbose_name=_("Name"))
-    #~ company = models.ForeignKey("contacts.Company",blank=True,null=True,verbose_name=_("Company"))
 
     def disable_delete(self, ar=None):
         # skip the is_imported_partner test
@@ -64,7 +56,7 @@ class CourseProviders(contacts.Companies):
     """Table of all course providers
 
     """
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     model = 'courses.CourseProvider'
     detail_layout = CourseProviderDetail()
 
@@ -91,8 +83,8 @@ class CourseContent(dd.Model):
 
 
 class CourseContents(dd.Table):
-    required = dd.required(user_level='manager', user_groups='courses')
-    model = CourseContent
+    required_roles = dd.required(CoursesStaff)
+    model = 'courses.CourseContent'
     order_by = ['name']
     detail_layout = """
     id name
@@ -138,8 +130,8 @@ class CourseOffer(dd.Model):
 
 
 class CourseOffers(dd.Table):
-    required = dd.required(user_groups='courses')
-    model = CourseOffer
+    required_roles = dd.required(CoursesUser)
+    model = 'courses.CourseOffer'
 
     insert_layout = """
     provider
@@ -225,8 +217,8 @@ class Course(dd.Model):
 
 class Courses(dd.Table):
     # ~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
-    required = dd.required(user_groups='courses', user_level='admin')
-    model = Course
+    required_roles = dd.required(CoursesStaff)
+    model = 'courses.Course'
     order_by = ['start_date']
 
     insert_layout = """
@@ -244,7 +236,7 @@ class Courses(dd.Table):
 
 
 class CoursesByOffer(Courses):
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     master_key = 'offer'
     column_names = 'start_date * id'
 
@@ -287,7 +279,7 @@ add('70', _("Inactive"), "inactive")
 
 class RegisterCandidate(dd.ChangeStateAction):
     label = pgettext("courses", "Register")
-    required = dict(states=['candidate'])
+    required_states = 'candidate'
     help_text = _("Register this candidate for this course.")
 
     def run_from_ui(self, ar, **kw):
@@ -306,7 +298,7 @@ class RegisterCandidate(dd.ChangeStateAction):
 
 class UnRegisterCandidate(dd.ChangeStateAction):
     label = pgettext("courses", "Unregister")
-    required = dict(states=['registered'])
+    required_states = 'registered'
     help_text = _("Unregister this candidate from this course.")
 
     def run_from_ui(self, ar, **kw):
@@ -431,8 +423,8 @@ class CourseRequest(dd.Model):
 
 class CourseRequests(dd.Table):
     #~ debug_permissions = 20130424
-    model = CourseRequest
-    required = dd.required(user_groups='courses', user_level='manager')
+    model = 'courses.CourseRequest'
+    required_roles = dd.required(CoursesStaff)
     detail_layout = """
     date_submitted person content offer urgent 
     course state date_ended id:8 
@@ -448,7 +440,7 @@ class CourseRequestsByPerson(CourseRequests):
     Table of :class:`CourseRequest` instances of a 
     :class:`lino.modlib.pcsw.models.Client`.
     """
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'
@@ -456,7 +448,7 @@ class CourseRequestsByPerson(CourseRequests):
 
 
 class CourseRequestsByContent(CourseRequests):
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     master_key = 'content'
 
 
@@ -465,7 +457,7 @@ class RequestsByCourse(CourseRequests):
     """
     Table of :class:`CourseRequest` instances of a :class:`Course`.
     """
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     master_key = 'course'
 
     @classmethod
@@ -520,7 +512,7 @@ class PendingCourseRequests(CourseRequests):
     """
     List of pending course requests.
     """
-    required = dd.required(user_groups='courses')
+    required_roles = dd.required(CoursesUser)
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)
@@ -648,12 +640,11 @@ def setup_workflows(site):
 
     CourseRequestStates.registered.add_transition(RegisterCandidate)
     CourseRequestStates.candidate.add_transition(UnRegisterCandidate)
-    CourseRequestStates.passed.add_transition(states="registered")
-    CourseRequestStates.failed.add_transition(states="registered")
-    CourseRequestStates.aborted.add_transition(states="registered")
+    CourseRequestStates.passed.add_transition(required_states="registered")
+    CourseRequestStates.failed.add_transition(required_states="registered")
+    CourseRequestStates.aborted.add_transition(required_states="registered")
 
-    CourseRequestStates.inactive.add_transition(states="candidate")
-    CourseRequestStates.candidate.add_transition(states="inactive")
+    CourseRequestStates.inactive.add_transition(required_states="candidate")
+    CourseRequestStates.candidate.add_transition(required_states="inactive")
         #~ debug_permissions = 20130424)
 
-dd.add_user_group('courses', Plugin.verbose_name)

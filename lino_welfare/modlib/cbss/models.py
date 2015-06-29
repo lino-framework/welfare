@@ -53,6 +53,8 @@ from lino_welfare.modlib.pcsw import models as pcsw
 from .mixins import *
 from .choicelists import *
 
+from .roles import CBSSUser
+
 
 CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 
@@ -127,40 +129,6 @@ def cbss2address(obj, **data):
     return data
 
 
-class unused_ExecuteRequest(dd.Action):
-
-    """
-    This defines the "Execute" button on a 
-    :class:`CBSSRequest` or
-    :class:`SSDNRequest` 
-    record.
-    """
-    readonly = False
-    url_action_name = 'exec'
-    label = _('Execute')
-    #~ callable_from = None
-    callable_from = (dd.GridEdit, dd.ShowDetailAction)
-    required = dict(states=['', 'validated', 'failed'])
-
-    #~ def get_row_permission(self,user,obj):
-        #~ if obj.ticket:
-            #~ return False
-        #~ return super(ExecuteRequest,self).get_row_permission(user,obj)
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        obj.execute_request(ar)
-        if obj.status == RequestStates.failed:
-            kw.update(message=obj.debug_messages)
-            kw.update(alert=True)
-        elif obj.status == RequestStates.warnings:
-            kw.update(message=obj.info_messages)
-            #~ kw.update(message=_("Got valid response, but it contains warnings."))
-            kw.update(alert=True)
-        kw.update(refresh=True)
-        ar.success(**kw)
-
-
 class Sector(mixins.BabelNamed):
 
     """
@@ -168,7 +136,7 @@ class Sector(mixins.BabelNamed):
     """
     class Meta:
         verbose_name = _("Sector")
-        verbose_name_plural = _('Sectors')
+        verbose_name_plural = _("Sectors")
         unique_together = ['code', 'subcode']
 
     #~ code = models.CharField(max_length=2,verbose_name=_("Code"),primary_key=True)
@@ -185,10 +153,8 @@ class Sector(mixins.BabelNamed):
 
 
 class Sectors(dd.Table):
-    model = Sector
-    #~ read_permission = perms.Required(user_groups = ['cbss'])
-    #~ required_user_groups = ['cbss']
-    required = dd.required(user_groups='cbss', user_level='admin')
+    model = 'cbss.Sector'
+    required_roles = dd.required(CBSSUser, dd.SiteStaff)
     column_names = 'code subcode abbr name *'
     order_by = ['code', 'subcode']
 
@@ -217,9 +183,8 @@ class Purpose(mixins.BabelNamed):
 
 
 class Purposes(dd.Table):
-    model = Purpose
-    required = dd.required(user_groups='cbss', user_level='admin')
-    #~ required_user_groups = ['cbss']
+    model = 'cbss.Purpose'
+    required_roles = dd.required(CBSSUser, dd.SiteStaff)
     column_names = 'sector_code code name *'
     order_by = ['sector_code', 'code']
 
@@ -245,29 +210,12 @@ class CBSSRequestDetail(dd.FormLayout):
     response_xml
     info_messages
     debug_messages
-    """, label=_("Technical"), required=dict(user_groups='cbss', user_level='admin'))
+    """, label=_("Technical"),
+        required_roles=dd.required(CBSSUser, dd.SiteStaff))
 
     info = dd.Panel("""
     id person user environment sent status ticket
     """, label=_("Request information"))
-
-
-    #~ response = "response_xml\nlogged_messages"
-
-    #~ def setup_handle(self,lh):
-        #~ lh.request.label = _("Request")
-        #~ lh.info.label = _("Request information")
-        #~ lh.result.label = _("Result")
-        # 20120927
-        #~ lh.technical.label = _("Technical")
-        #~ lh.technical.required.update(user_level='admin')
-        #~ lh.technical.required_user_level = UserLevels.manager
-        #~ lh.technical.read_permission = perms.Required(user_groups = ['cbss'])
-        #~ lh.technical.required = dict(user_level='admin')
-
-        #~ lh.response.label = _("Response")
-        #~ lh.log.label = _("Log")
-        #~ lh.parameters.label = _("Parameters")
 
 
 class IdentifyPersonRequest(SSDNRequest, WithPerson):
@@ -467,22 +415,13 @@ class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
 
 
 class CBSSRequests(dd.Table):
-    #~ create_required = dict(user_level='user')
     pass
-    #~ @classmethod
-    #~ def get_row_permission(cls,action,user,row):
-        #~ if row.ticket and not action.readonly:
-            #~ return False
-        #~ if not super(CBSSRequests,cls).get_row_permission(action,user,row):
-            #~ return False
-        #~ return True
 
 
 class IdentifyPersonRequests(CBSSRequests):
     #~ window_size = (500,400)
-    required = dict(user_groups='cbss')
-    #~ required_user_groups = ['cbss']
-    model = IdentifyPersonRequest
+    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+    model = 'cbss.IdentifyPersonRequest'
     active_fields = 'person'
     detail_layout = IdentifyPersonRequestDetail()
     insert_layout = IdentifyPersonRequestInsert()
@@ -493,10 +432,11 @@ class IdentifyPersonRequests(CBSSRequests):
 
 
 class MyIdentifyPersonRequests(ByUser, IdentifyPersonRequests):
-    pass
+    required_roles = dd.required(CBSSUser)
 
 
 class IdentifyRequestsByPerson(IdentifyPersonRequests):
+    required_roles = dd.required(CBSSUser)
     master_key = 'person'
     column_names = 'user sent status *'
 
@@ -533,11 +473,11 @@ class IdentifyPersonResult(dd.VirtualTable):
             #~ print "20120606 no /SearchResults"
             #~ return []
             return
-        Client = rt.modules.pcsw.Client
         for obj in results:
             data = dict()
             data.update(
-                national_id=nodetext(obj.childAtPath('/Basic/SocialSecurityUser')))
+                national_id=nodetext(
+                    obj.childAtPath('/Basic/SocialSecurityUser')))
             data.update(
                 last_name=nodetext(obj.childAtPath('/Basic/LastName')))
             data.update(
@@ -545,14 +485,15 @@ class IdentifyPersonResult(dd.VirtualTable):
             data.update(
                 gender=cbss2gender(nodetext(obj.childAtPath('/Basic/Gender'))))
             data.update(
-                birth_date=cbss2date(nodetext(obj.childAtPath('/Basic/BirthDate'))))
+                birth_date=cbss2date(nodetext(
+                    obj.childAtPath('/Basic/BirthDate'))))
             data.update(civil_state=cbss2civilstate(
                 obj.childAtPath('/Extended/CivilState')))
             data.update(
-                birth_location=nodetext(obj.childAtPath('/Extended/BirthLocation')))
+                birth_location=nodetext(
+                    obj.childAtPath('/Extended/BirthLocation')))
             data.update(cbss2address(obj))
             yield self.Row(**data)
-            # yield Client(**data)
 
     @dd.displayfield(_("National ID"))
     def national_id(self, obj, ar):
@@ -650,12 +591,13 @@ For register and unregister this element is ignored.
 It can be used for list, 
 when information about sectors is required.""")
 
-    purpose = models.ForeignKey('cbss.Purpose',
-                                #~ blank=True,null=True,
-      help_text="""\
-The purpose for which the inscription needs to be 
-registered/unregistered or listed. 
-For listing this field is optional, 
+    purpose = models.ForeignKey(
+        'cbss.Purpose',
+        #~ blank=True,null=True,
+        help_text="""\
+The purpose for which the inscription needs to be
+registered/unregistered or listed.
+For listing this field is optional,
 for register/unregister it is mandatory.""")
 
     start_date = models.DateField(
@@ -768,13 +710,13 @@ The SSIN of the person to register/unregister/list.
 class ManageAccessRequestDetail(CBSSRequestDetail):
 
     p1 = dd.Panel("""
-    action start_date end_date 
+    action start_date end_date
     purpose query_register
     """, label=_("Requested action"))
 
     proof = dd.Panel("""
     national_id sis_card_no id_card_no
-    first_name last_name birth_date 
+    first_name last_name birth_date
     """, label=_("Proof of authentication"))
     parameters = dd.Panel("p1 proof", label=_("Parameters"))
 
@@ -788,18 +730,18 @@ class ManageAccessRequestInsert(dd.FormLayout):
     window_size = (60, 'auto')
 
     p1 = dd.Panel("""
-    action start_date end_date 
+    action start_date end_date
     purpose query_register
     """, label=_("Requested action"))
 
     proof = dd.Panel("""
     national_id sis_card_no id_card_no
-    first_name last_name birth_date 
+    first_name last_name birth_date
     """, label=_("Proof of authentication"))
 
     main = """
     person
-    p1 
+    p1
     proof
     """
 
@@ -810,21 +752,21 @@ class ManageAccessRequestInsert(dd.FormLayout):
 
 
 class ManageAccessRequests(CBSSRequests):
+    required_roles = dd.required(dd.SiteStaff, CBSSUser)
     #~ window_size = (500,400)
-    model = ManageAccessRequest
+    model = 'cbss.ManageAccessRequest'
     detail_layout = ManageAccessRequestDetail()
     insert_layout = ManageAccessRequestInsert()
-    required = dict(user_groups='cbss')
-    #~ required_user_groups = ['cbss']
     active_fields = 'person'
 
 
 class ManageAccessRequestsByPerson(ManageAccessRequests):
+    required_roles = dd.required(CBSSUser)
     master_key = 'person'
 
 
 class MyManageAccessRequests(ManageAccessRequests, ByUser):
-    pass
+    required_roles = dd.required(CBSSUser)
 
 
 ##
@@ -971,6 +913,7 @@ class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
 
 class RetrieveTIGroupsRequests(CBSSRequests):
     #~ debug_permissions = True
+    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
     model = RetrieveTIGroupsRequest
     detail_layout = RetrieveTIGroupsRequestDetail()
     column_names = 'id user person national_id language history status ticket sent environment'
@@ -981,90 +924,90 @@ class RetrieveTIGroupsRequests(CBSSRequests):
     history
     """, window_size=(40, 'auto'))
     #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
-    required_user_groups = ['cbss']
-
-    #~ @dd.virtualfield(dd.HtmlBox())
-    #~ def result(self,row,ar):
-        #~ return row.response_xml
 
 
 class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
+    required_roles = dd.login_required(CBSSUser)
     master_key = 'person'
 
 
 class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
-    pass
+    required_roles = dd.login_required(CBSSUser)
 
 
 from .tx25 import RetrieveTIGroupsResult
 
+@dd.receiver(dd.pre_analyze)
+def customize_system(sender, **kw):
 
-dd.inject_field('system.SiteConfig',
-                'sector',
-                models.ForeignKey(Sector,
-                                  blank=True, null=True,
-        help_text="""\
-The CBSS sector/subsector of the requesting organization.        
-For PCSWs this is always 17.1.
-Used in SSDN requests as text of the `MatrixID` and `MatrixSubID` 
-elements of `AuthorizedUser`. 
-Used in ManageAccess requests as default value 
-for the non-editable field `sector` 
-(which defines the choices of the `purpose` field).
-"""))
+    dd.inject_field('system.SiteConfig',
+                    'sector',
+                    models.ForeignKey(Sector,
+                                      blank=True, null=True,
+            help_text="""\
+    The CBSS sector/subsector of the requesting organization.        
+    For PCSWs this is always 17.1.
+    Used in SSDN requests as text of the `MatrixID` and `MatrixSubID` 
+    elements of `AuthorizedUser`. 
+    Used in ManageAccess requests as default value 
+    for the non-editable field `sector` 
+    (which defines the choices of the `purpose` field).
+    """))
 
-dd.inject_field('system.SiteConfig',
-                'cbss_org_unit',
-                models.CharField(_("Requesting organisation"),
-                                 max_length=50,
-                                 blank=True,
-      help_text="""\
-In CBSS requests, identifies the requesting organization.
-For PCSWs this is the enterprise number 
-(CBE, KBO) and should have 10 digits and no formatting characters.
+    dd.inject_field('system.SiteConfig',
+                    'cbss_org_unit',
+                    models.CharField(_("Requesting organisation"),
+                                     max_length=50,
+                                     blank=True,
+          help_text="""\
+    In CBSS requests, identifies the requesting organization.
+    For PCSWs this is the enterprise number 
+    (CBE, KBO) and should have 10 digits and no formatting characters.
 
-Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
-Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
-"""))
-dd.inject_field('system.SiteConfig',
-                'ssdn_user_id',
-                models.CharField(_("SSDN User Id"),
-                                 max_length=50,
-                                 blank=True,
-      help_text="""\
-Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
-"""))
-dd.inject_field('system.SiteConfig',
-                'ssdn_email',
-                models.EmailField(_("SSDN email address"),
-                                  blank=True,
-      help_text="""\
-Used in SSDN requests as text of the `AuthorizedUser\Email` element.
-"""))
-dd.inject_field('system.SiteConfig',
-                'cbss_http_username',
-                models.CharField(_("HTTP username"),
-                                 max_length=50,
-                                 blank=True,
-      help_text="""\
-Used in the http header of new-style requests.
-"""))
-dd.inject_field('system.SiteConfig',
-                'cbss_http_password',
-                models.CharField(_("HTTP password"),
-                                 max_length=50,
-                                 blank=True,
-      help_text="""\
-Used in the http header of new-style requests.
-"""))
+    Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
+    Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
+    """))
+    dd.inject_field('system.SiteConfig',
+                    'ssdn_user_id',
+                    models.CharField(_("SSDN User Id"),
+                                     max_length=50,
+                                     blank=True,
+          help_text="""\
+    Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
+    """))
+    dd.inject_field('system.SiteConfig',
+                    'ssdn_email',
+                    models.EmailField(_("SSDN email address"),
+                                      blank=True,
+          help_text="""\
+    Used in SSDN requests as text of the `AuthorizedUser\Email` element.
+    """))
+    dd.inject_field(
+        'system.SiteConfig', 'cbss_http_username',
+        models.CharField(
+            _("HTTP username"), max_length=50, blank=True,
+            help_text="""\
+            Used in the http header of new-style requests.
+            """))
+    dd.inject_field(
+        'system.SiteConfig', 'cbss_http_password',
+        models.CharField(
+            _("HTTP password"), max_length=50, blank=True,
+            help_text="""\
+            Used in the http header of new-style requests.
+            """))
 
 
-dd.inject_quick_add_buttons(
-    pcsw.Client, 'cbss_identify_person', IdentifyRequestsByPerson)
-dd.inject_quick_add_buttons(
-    pcsw.Client, 'cbss_manage_access', ManageAccessRequestsByPerson)
-dd.inject_quick_add_buttons(
-    pcsw.Client, 'cbss_retrieve_ti_groups', RetrieveTIGroupsRequestsByPerson)
+@dd.receiver(dd.pre_analyze)
+def customize_pcsw(sender, **kw):
+
+    dd.inject_quick_add_buttons(
+        pcsw.Client, 'cbss_identify_person', IdentifyRequestsByPerson)
+    dd.inject_quick_add_buttons(
+        pcsw.Client, 'cbss_manage_access', ManageAccessRequestsByPerson)
+    dd.inject_quick_add_buttons(
+        pcsw.Client, 'cbss_retrieve_ti_groups',
+        RetrieveTIGroupsRequestsByPerson)
 
 
 def cbss_summary(self, ar):
@@ -1140,5 +1083,3 @@ def setup_site_cache(self, force):
             shutil.copy(src, target)
 
 
-p = dd.plugins.cbss
-dd.add_user_group(p.app_label, p.verbose_name)

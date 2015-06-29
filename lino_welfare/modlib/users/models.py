@@ -19,6 +19,9 @@ from lino.api import dd
 
 from lino.modlib.users.models import *
 
+from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino.modlib.office.roles import OfficeUser
+
 cal = dd.resolve_app('cal')
 
 
@@ -62,7 +65,7 @@ class User(User):
         if not self.profile:
             return
 
-        if not self.profile.office_level:
+        if not isinstance(self.profile.role, OfficeUser):
             return
 
         if not self.calendar:
@@ -73,12 +76,12 @@ class User(User):
 
     def check_all_subscriptions(self):
 
-        if not self.profile.coaching_level:
+        if not isinstance(self.profile.role, SocialAgent):
             return
 
         coaching_profiles = set()
         for p in UserProfiles.items():
-            if p.coaching_level:
+            if isinstance(p.role, SocialAgent):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
                 profile__in=coaching_profiles).exclude(id=self.id):

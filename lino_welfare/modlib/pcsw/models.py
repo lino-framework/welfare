@@ -44,6 +44,8 @@ from lino.modlib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 from lino.modlib.vatless.mixins import PartnerDetailMixin
 
+from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 from lino.utils import ssin
 
@@ -53,6 +55,7 @@ from .utils import (only_coached_by, only_coached_on,
                     only_active_coachings_filter,
                     add_coachings_filter, daterange_text,
                     has_contracts_filter)
+from .roles import SocialAgent, SocialStaff
 from .choicelists import (CivilState, ResidenceType, ClientEvents,
                           ClientStates, RefusalReasons)
 
@@ -63,7 +66,8 @@ class RefuseClient(dd.ChangeStateAction):
     This is not a docstring
     """
     label = _("Refuse")
-    required = dict(states='newcomer', user_groups='newcomers')
+    required_states = 'newcomer'
+    required_roles = dd.required(NewcomersAgent)
 
     #~ icon_file = 'flag_blue.png'
     help_text = _("Refuse this newcomer request.")
@@ -221,7 +225,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not ar.get_user().profile.newcomers_level:
+        if not isinstance(ar.get_user().profile, NewcomersAgent):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -639,7 +643,9 @@ class ClientDetail(PartnerDetailMixin):
     broker:12
     faculty:12
     refusal_reason
-    """, required=dict(user_groups='newcomers'))
+    """, required_roles=dd.required(NewcomersAgent))
+
+
 
     #~ coaching_left = """
     #~ """
@@ -668,7 +674,8 @@ class ClientDetail(PartnerDetailMixin):
     is_obsolete created modified
     remarks
     plausibility.ProblemsByOwner:25 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required=dict(user_level='manager'))
+    """, label=_("Miscellaneous"),
+        required_roles=dd.required(SocialStaff))
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
@@ -685,7 +692,7 @@ class ClientDetail(PartnerDetailMixin):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required=dict(user_groups='integ'))
+    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -939,7 +946,7 @@ class ClientsByNationality(Clients):
 
 class AllClients(Clients):
     column_names = '*'
-    required = dd.Required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
 
 
 class ClientChecker(Checker):
@@ -1012,7 +1019,7 @@ class PersonGroup(dd.Model):
 class PersonGroups(dd.Table):
     help_text = _("Liste des phases d'intégration possibles.")
     model = 'pcsw.PersonGroup'
-    required = dict(user_level='manager', user_groups='integ')
+    required_roles = dd.required(SocialStaff)
 
     order_by = ["ref_name"]
 
@@ -1035,9 +1042,7 @@ class Activity(dd.Model):
 class Activities(dd.Table):
     help_text = _("""Liste des "activités" ou "codes profession".""")
     model = 'pcsw.Activity'
-    #~ required_user_level = UserLevels.manager
-    required = dict(user_level='manager')
-    #~ label = _('Activities')
+    required_roles = dd.required(SocialStaff)
 
 #~ class ActivitiesByPerson(Activities):
     #~ master_key = 'activity'
@@ -1060,7 +1065,7 @@ class DispenseReason(mixins.BabelNamed, mixins.Sequenced):
 
 class DispenseReasons(dd.Table):
     help_text = _("A list of reasons for being dispensed")
-    required = dict(user_groups='coaching', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'pcsw.DispenseReason'
     column_names = 'seqno name *'
     order_by = ['seqno']
@@ -1086,7 +1091,7 @@ class Dispense(dd.Model):
 class Dispenses(dd.Table):
     order_by = ['start_date']
     help_text = _("Liste de dispenses")
-    required = dict(user_groups='coaching', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'pcsw.Dispense'
 
 
@@ -1095,7 +1100,7 @@ class DispensesByClient(Dispenses):
     column_names = 'start_date end_date reason remarks:10'
     hidden_columns = 'id'
     auto_fit_column_widths = True
-    required = dict(user_groups='coaching')
+    required_roles = dd.required(SocialAgent)
 
 
 class ExclusionType(dd.Model):
@@ -1113,10 +1118,8 @@ class ExclusionType(dd.Model):
 class ExclusionTypes(dd.Table):
     help_text = _("""Liste des raisons possibles d'arrêter temporairement 
     le paiement d'une aide financière prévue.""")
-    required = dict(user_level='manager')
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(SocialStaff)
     model = 'pcsw.ExclusionType'
-    #~ label = _('Exclusion Types')
 
 
 class Exclusion(dd.Model):
@@ -1145,17 +1148,14 @@ class Exclusion(dd.Model):
 
 
 class Exclusions(dd.Table):
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     help_text = _("Liste des exclusions.")
 
-    #~ required_user_level = UserLevels.manager
     model = 'pcsw.Exclusion'
-    #~ label = _('Exclusions')
 
 
 class ExclusionsByClient(Exclusions):
-    required = dd.required(user_groups='coaching')
-    #~ required_user_level = None
+    required_roles = dd.required(SocialAgent)
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark:10'
     auto_fit_column_widths = True
@@ -1186,12 +1186,12 @@ class Conviction(dd.Model):
 
 
 class Convictions(dd.Table):
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     model = 'pcsw.Conviction'
 
 
 class ConvictionsByClient(Convictions):
-    required = dd.required(user_groups='coaching')
+    required_roles = dd.required(SocialAgent)
     master_key = 'client'
     column_names = 'date designation prejudicial'
     auto_fit_column_widths = True
@@ -1211,8 +1211,7 @@ class AidTypes(dd.Table):
     help_text = _("Liste des types d'aide financière.")
     model = 'pcsw.AidType'
     column_names = 'name *'
-    #~ required_user_level = UserLevels.manager
-    required = dict(user_level='manager')
+    required_roles = dd.required(SocialStaff)
 
 
 class ClientContactType(mixins.BabelNamed):
@@ -1233,7 +1232,7 @@ class ClientContactType(mixins.BabelNamed):
 class ClientContactTypes(dd.Table):
     help_text = _("Liste des types de contacts client.")
     model = 'pcsw.ClientContactType'
-    required = dd.required(user_level='manager')
+    required_roles = dd.required(SocialStaff)
 
     # TODO: `can_refund` is injected in aids, `is_bailiff` in debts
     # NOTE: this is being overridden by lino_welfare.projects.eupen
@@ -1292,13 +1291,13 @@ dd.update_field(ClientContact, 'contact_person',
 
 
 class ClientContacts(dd.Table):
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     help_text = _("Liste des contacts clients.")
     model = 'pcsw.ClientContact'
 
 
 class ContactsByClient(ClientContacts):
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'client'
     column_names = 'type company contact_person remark *'
     label = _("Contacts")
@@ -1306,7 +1305,7 @@ class ContactsByClient(ClientContacts):
 
 
 class ClientContactsByType(ClientContacts):
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'type'
     column_names = 'company contact_person client remark *'
     label = _("Contacts")
@@ -1336,17 +1335,16 @@ def setup_workflows(site):
             return True
 
         ClientStates.newcomer.add_transition(
-            states='refused coached former',
-            user_groups='newcomers', allow=allow_state_newcomer)
+            required_states='refused coached former',
+            required_roles=dd.required(NewcomersAgent),
+            allow=allow_state_newcomer)
 
     ClientStates.refused.add_transition(RefuseClient)
     ClientStates.former.add_transition(
         _("Former"),
-        #~ states='coached invalid',
-        states='coached',
-        user_groups='newcomers')
+        required_states='coached',
+        required_roles=dd.required(NewcomersAgent))
     #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
 
 
-dd.add_user_group('coaching', _("Coaching"))
 

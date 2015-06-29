@@ -29,9 +29,9 @@ add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
 def my_enrolment_workflows(sender=None, **kw):
 
     EnrolmentStates.started.add_transition(
-        states="confirmed requested")
+        required_states="confirmed requested")
     EnrolmentStates.finished.add_transition(
-        states="started")
+        required_states="started")
 
 
 class Course(Course):

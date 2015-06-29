@@ -35,6 +35,9 @@ from lino_welfare.modlib.pcsw.utils import only_coached_on
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
 
+from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+
 from .mixins import JobSupplyment
 
 contacts = dd.resolve_app('contacts')
@@ -66,7 +69,7 @@ class Schedule(mixins.BabelNamed):
 
 
 class Schedules(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'jobs.Schedule'
     order_by = ['name']
     detail_layout = """
@@ -126,9 +129,7 @@ class JobProviders(contacts.Companies, dd.Table):
     """The table of all job providers.
 
     """
-    required = dd.required(user_groups='integ')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(IntegrationAgent)
     #~ use_as_default_table = False
     model = 'jobs.JobProvider'
     app_label = 'jobs'
@@ -172,9 +173,7 @@ class ContractType(ContractTypeBase, mixins.PrintableType,
 class ContractTypes(dd.Table):
     """
     """
-    required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(SocialStaff)
     model = 'jobs.ContractType'
     column_names = 'name ref *'
     detail_layout = """
@@ -307,10 +306,9 @@ class ContractDetail(dd.FormLayout):
 
 class Contracts(isip.ContractBaseTable):
     #~ debug_permissions = "20130222"
-    required = dd.required(user_groups='integ')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Contract
+
+    required_roles = dd.required(IntegrationAgent)
+    model = 'jobs.Contract'
     column_names = 'id job applies_from applies_until user type *'
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'
@@ -442,7 +440,7 @@ class Offer(SectorFunction):
 
 
 class Offers(dd.Table):
-    required = dd.required(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     model = 'jobs.Offer'
     column_names = 'name provider sector function '\
                    'selection_from selection_until start_date *'
@@ -649,7 +647,7 @@ class Candidatures(dd.Table):
     """
     List of :class:`Candidatures <Candidature>`.
     """
-    required = dd.required(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     model = 'jobs.Candidature'
     order_by = ['date_submitted']
     column_names = 'date_submitted job:25 person state * id'
@@ -659,8 +657,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required = dd.required(user_groups='integ')
-    #~ required_user_level = None
+    required_roles = dd.required(IntegrationAgent)
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function remark state *'
     auto_fit_column_widths = True
@@ -675,7 +672,7 @@ class CandidaturesByFunction(Candidatures):
 
 
 class CandidaturesByJob(Candidatures):
-    required = dd.required(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     master_key = 'job'
     column_names = 'date_submitted person:25 state * id'
 
@@ -715,22 +712,6 @@ class SectorFunctionByOffer(dd.Table):
         if offer.sector:
             qs = qs.filter(sector=offer.sector)
 
-        #~ required_id_sets = []
-
-        #~ if offer.function:
-            #~ q = JobRequest.objects.filter(function=offer.function)
-            #~ required_id_sets.append(set(q.values_list('person__id',flat=True)))
-        #~ if offer.sector:
-            #~ q = JobRequest.objects.filter(sector=offer.sector)
-            #~ required_id_sets.append(set(q.values_list('person__id',flat=True)))
-
-        #~ if required_id_sets:
-            #~ s = set(required_id_sets[0])
-            #~ for i in required_id_sets[1:]:
-                #~ s.intersection_update(i)
-                # ~ # keep only elements found in both s and i.
-            #~ qs = qs.filter(id__in=s)
-
         return qs
 
 
@@ -750,10 +731,8 @@ class Jobs(dd.Table):
     help_text = _("""
     Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter.
     """)
-    required = dd.required(user_groups='integ')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
-    model = Job
+    required_roles = dd.required(IntegrationAgent)
+    model = 'jobs.Job'
     #~ order_by = ['start_date']
     column_names = 'name provider * id'
 
@@ -795,8 +774,8 @@ class JobType(mixins.Sequenced):
 
 
 class JobTypes(dd.Table):
-    required = dd.required(user_groups='integ', user_level='manager')
-    model = JobType
+    required_roles = dd.required(SocialStaff)
+    model = 'jobs.JobType'
     order_by = ['name']
     detail_layout = """
     id name is_social
@@ -845,7 +824,7 @@ class OldJobsOverview(Report):
 
     """
     """
-    required = dd.required(user_groups=['integ'])
+    required_roles = dd.required(IntegrationAgent)
     label = _("Contracts Situation")
     #~ detail_layout = JobsOverviewDetail()
     detail_layout = "body"
@@ -939,7 +918,7 @@ class OldJobsOverview(Report):
 class JobsOverviewByType(Jobs):
     """
     """
-    required = dd.required(user_groups=['integ'])
+    required_roles = dd.required(IntegrationAgent)
     label = _("Contracts Situation")
     column_names = "job_desc:20 working:30 probation:30 candidates:30"
     master_key = 'type'
@@ -1072,7 +1051,7 @@ class JobsOverview(Report):
         
 
     """
-    required = dd.required(user_groups=['integ'])
+    required_roles = dd.required(IntegrationAgent)
     label = _("Contracts Situation")
     #~ detail_layout = JobsOverviewDetail()
     detail_layout = "preview"

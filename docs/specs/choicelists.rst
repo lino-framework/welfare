@@ -45,6 +45,7 @@ name to read the documentation):
     >>> from lino.core.choicelists import choicelist_choices
     >>> for value, text in choicelist_choices():
     ...     print "%s : %s" % (value, unicode(text))
+    ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
     accounts.AccountCharts : Account Charts
     accounts.AccountTypes : AccountTypes
     addresses.AddressTypes : Address types
@@ -104,8 +105,6 @@ name to read the documentation):
     system.YesNo : Yes or no
     uploads.Shortcuts : Upload shortcuts
     uploads.UploadAreas : Upload Areas
-    users.UserGroups : User Groups
-    users.UserLevels : User Levels
     users.UserProfiles : User Profiles
 
 

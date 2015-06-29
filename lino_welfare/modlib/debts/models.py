@@ -553,10 +553,6 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         super(Entry, self).on_duplicate(ar, master)
 
 
-p = dd.plugins.debts
-dd.add_user_group(p.app_label, p.verbose_name)
-
-
 dd.inject_field(
     'pcsw.ClientContactType',
     'is_bailiff',

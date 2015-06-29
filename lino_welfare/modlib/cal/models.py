@@ -26,6 +26,8 @@ from lino.modlib.cal.models import *
 from lino.modlib.cal.utils import format_date
 from lino.modlib.cal.workflows import take, feedback
 from lino.modlib.reception.models import checkout_guest
+from lino.modlib.office.roles import OfficeUser
+from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 
 EventStates.published.text = _("Notified")
@@ -213,7 +215,7 @@ class EventsByClient(Events):
     """Events where :attr:`Event.project` **or** one guest is this client.
 
     """
-    required = dd.required(user_groups='office')
+    required_roles = dd.required(OfficeUser)
     # master_key = 'project'
     # master = 'cal.Event'
     master = 'pcsw.Client'
@@ -247,7 +249,7 @@ class EventsByClient(Events):
 
 
 class TasksByClient(Tasks):
-    required = dd.required(user_groups='coaching')
+    required_roles = dd.required(SocialAgent)
     master_key = 'project'
     column_names = 'start_date due_date summary description notes'
 
@@ -324,9 +326,7 @@ if False:
     date user 
     summary
     """
-        #~ required = dict(states='coached')
 
-        #~ @classmethod
         def action_param_defaults(self, ar, obj, **kw):
             kw = super(CreateClientEvent,
                        self).action_param_defaults(ar, obj, **kw)

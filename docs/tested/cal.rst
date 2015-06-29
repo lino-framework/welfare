@@ -160,7 +160,9 @@ Each user who has view access to the calendar.
 Only UserProfile with a non-empty `office_level` can see the calendar.
 All users with one of the following profiles can see each other's calendars:
 
->>> print('\n'.join([unicode(p) for p in users.UserProfiles.items() if p.coaching_level]))
+>>> from lino_welfare.modlib.pcsw.roles import SocialAgent
+>>> print('\n'.join([unicode(p) for p in users.UserProfiles.items()
+... if isinstance(p.role, SocialAgent)]))
 Begleiter im DSBE
 Integrations-Assistent (Manager)
 Berater Erstempfang

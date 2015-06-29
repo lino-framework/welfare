@@ -14,10 +14,11 @@ logger = logging.getLogger(__name__)
 
 from django.db.models import Count
 
-
+from lino.mixins.periods import ObservedEvent
 from lino.api import dd, _
 
 from .utils import only_coached_on, has_contracts_filter
+from .roles import SocialStaff
 
 
 class CivilState(dd.ChoiceList):
@@ -26,7 +27,7 @@ class CivilState(dd.ChoiceList):
     Civil states, using Belgian codes.
     
     """
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     verbose_name = _("Civil state")
     verbose_name_plural = _("Civil states")
 
@@ -84,9 +85,6 @@ add('1', _("Registry of citizens"))
 # Fremdenregister        Registre des étrangers      vreemdelingenregister
 add('2', _("Registry of foreigners"))
 add('3', _("Waiting for registry"))    # Warteregister
-
-from lino.mixins.periods import ObservedEvent
-from django.db.models import Q
 
 
 class ClientEvents(dd.ChoiceList):
@@ -204,7 +202,7 @@ ClientEvents.add_item_instance(ClientHasNote("note"))
 
 
 class ClientStates(dd.Workflow):
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(SocialStaff)
     verbose_name_plural = _("Client states")
 
 add = ClientStates.add_item

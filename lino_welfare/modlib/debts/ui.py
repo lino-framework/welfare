@@ -26,11 +26,13 @@ from lino.modlib.users.mixins import ByUser
 
 from lino_welfare.modlib.pcsw import models as pcsw
 
+from .roles import DebtsUser, DebtsStaff
+
 class Clients(pcsw.Clients):
     # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
     help_text = u"""Wie Kontakte --> Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
-    required = dict(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     params_panel_hidden = True
     title = _("DM Clients")
     order_by = "last_name first_name id".split()
@@ -46,8 +48,7 @@ class Clients(pcsw.Clients):
 
 
 class Actors(dd.Table):
-    required = dd.required(user_groups='debts', user_level='manager')
-    #~ required_user_groups = ['debts']
+    required_roles = dd.required(DebtsStaff)
     model = 'debts.Actor'
     column_names = "budget seqno partner header remark *"
 
@@ -56,7 +57,7 @@ class ActorsByBudget(Actors):
     """The table used to edit Actors in a Budget's detail.
 
     """
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     master_key = 'budget'
     column_names = "seqno partner header remark *"
     auto_fit_column_widths = True
@@ -64,7 +65,7 @@ class ActorsByBudget(Actors):
 
 
 class ActorsByPartner(Actors):
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     master_key = 'partner'
     label = _("Is actor in these budgets:")
     editable = False
@@ -135,8 +136,7 @@ class Budgets(dd.Table):
     but is directly used by :menuselection:`Explorer --> Debts -->Budgets`.
     """
     model = 'debts.Budget'
-    required = dd.required(user_groups='debts', user_level='manager')
-    #~ required_user_groups = ['debts']
+    required_roles = dd.required(DebtsStaff)
     detail_layout = BudgetDetail()
     insert_layout = """
     partner
@@ -149,29 +149,25 @@ class Budgets(dd.Table):
 
 
 class MyBudgets(Budgets, ByUser):
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
 
 
 class BudgetsByPartner(Budgets):
     master_key = 'partner'
     label = _("Is partner of these budgets:")
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
 
 
 #
 
 class Entries(dd.Table):
     model = 'debts.Entry'
-    required = dd.required(user_groups='debts', user_level='admin')
-
-    #~ required_user_groups = ['debts']
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(DebtsStaff)
 
 
 class EntriesByType(Entries):
     _account_type = None
-    #~ required_user_level = None
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
 
     @classmethod
     def get_known_values(self):  # 20130906
@@ -210,8 +206,7 @@ class EntriesByBudget(Entries):
     column_names = "account description amount actor:10 periods:10 remark move_buttons:8 seqno todo id"
     hidden_columns = "seqno id"
     auto_fit_column_widths = True
-    required = dd.required(user_groups='debts')
-    #~ required_user_level = None
+    required_roles = dd.required(DebtsUser)
     order_by = ['seqno']
 
 
@@ -581,7 +576,7 @@ class SummaryTable(dd.VirtualTable):
 class ResultByBudget(SummaryTable):
     help_text = _("""Shows the Incomes & Expenses for this budget.""")
     label = _("Incomes & Expenses")
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod
@@ -627,7 +622,7 @@ class ResultByBudget(SummaryTable):
 
 class DebtsByBudget(SummaryTable):
     label = _("Liabilities")
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod
@@ -648,7 +643,7 @@ class DebtsByBudget(SummaryTable):
 
 class AssetsByBudgetSummary(SummaryTable):
     label = _("Assets")
-    required = dd.required(user_groups='debts')
+    required_roles = dd.required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod

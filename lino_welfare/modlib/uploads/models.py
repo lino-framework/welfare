@@ -211,7 +211,7 @@ class UploadsByType(Uploads, UploadsByType):
 
 
 class MyUploads(Uploads):
-    required = dd.required()
+    required_roles = dd.required()
     column_names = "id project type start_date end_date \
     needed description file *"
     order_by = ['-id']
@@ -229,7 +229,7 @@ class MyUploads(Uploads):
 
 class MyExpiringUploads(Uploads):
     "Expiring uploads for client coached by me"
-    required = dd.required()
+    required_roles = dd.required()
     label = _("My expiring uploads")
     help_text = _("Show needed uploads whose validity expires soon")
     column_names = "project type user start_date end_date needed *"

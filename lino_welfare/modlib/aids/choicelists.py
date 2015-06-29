@@ -13,27 +13,10 @@ from __future__ import unicode_literals
 
 import logging
 logger = logging.getLogger(__name__)
-# import types
 
-# from django.conf import settings
 from django.db import models
-# from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
-# from django.utils.translation import pgettext_lazy as pgettext
 
-from lino.api import dd, rt
-# from lino import mixins
-
-# from lino.utils.xmlgen.html import E
-# from lino.utils.ranges import encompass
-
-# from lino.modlib.system.mixins import PeriodEvents
-# from lino.modlib.users.mixins import UserAuthored
-# from lino.modlib.contacts.utils import parse_name
-# from lino.modlib.contacts.mixins import ContactRelated
-# from lino.modlib.excerpts.mixins import Certifiable
-# from lino.modlib.addresses.mixins import AddressTypes
-# from lino.mixins.periods import rangefmt
+from lino.api import dd, rt, _
 
 
 class ConfirmationType(dd.Choice):
@@ -95,7 +78,6 @@ add('30', _("Other aids"), 'other')
 
 
 class ConfirmationStates(dd.Workflow):
-    required = dd.required(user_level='admin')
     verbose_name_plural = _("Aid confirmation states")
 
 add = ConfirmationStates.add_item

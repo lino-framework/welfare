@@ -12,32 +12,9 @@ New installations should use
 
 from lino.modlib.cv import Plugin
 
-from lino.api import _
-try:
-
-    from lino.core.permissions import UserRole
-
-except ImportError:  # branch master
-
-    class UserRole(object):
-        pass
-
-
-class IntegrationAgent(UserRole):
-    verbose_name = _("Integration agent")
-
 
 class Plugin(Plugin):
 
     ## settings
     person_model = 'pcsw.Client'
 
-    # classic permission system (until June 2015)
-    def get_default_required(self, **kwargs):
-        kwargs.update(user_groups='integ')
-        return super(Plugin, self).get_default_required(**kwargs)
-
-    # coming permission system before 201506
-    def get_default_required_roles(self, *args):
-        return super(Plugin, self).get_default_required_roles(
-            IntegrationAgent, *args)

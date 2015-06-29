@@ -60,26 +60,34 @@ class Site(Site):
         :ref:`welfare`.
 
         """
-        from django.utils.translation import ugettext_lazy as _
         from lino.modlib.users.choicelists import UserProfiles
+        from lino_welfare.modlib.welfare.roles import *
 
-        UserProfiles.reset(
-            '* office coaching integ courses cbss newcomers debts '
-            'reception beid')
+        UserProfiles.clear()
+
         add = UserProfiles.add_item
-        add('000', _("Anonymous"),                   '_ _ _ _ _ _ _ _ _ _',
-            name='anonymous',
-            readonly=True,
-            authenticated=False)
-        add('100', _("Integration Agent"),           'U U U U U U _ _ _ U')
-        add('110', _("Integration Agent (Manager)"), 'U M M M M U _ _ _ U')
-        add('200', _("Newcomers consultant"),        'U U U _ _ U U _ _ U')
-        add('210', _("Reception clerk"),             'U U _ _ _ _ _ _ U U')
-        add('300', _("Debts consultant"),            'U U U _ _ _ U U _ U')
-        add('400', _("Social agent"),                'U U U _ U U _ _ _ U')
-        add('410', _("Social agent (Manager)"),      'U M M _ M U _ _ _ U')
-        add('900', _("Administrator"),               'A A A A A A A A A U',
-            name='admin')
+        
+        add('000', _("Anonymous"), Anonymous, name='anonymous',
+            readonly=True, authenticated=False)
+        add('100', _("Integration Agent"),           IntegrationAgent)
+        add('110', _("Integration Agent (Manager)"), IntegrationStaff)
+        add('200', _("Newcomers consultant"),        NewcomersAgent)
+        add('210', _("Reception clerk"),             ReceptionOperator)
+        add('300', _("Debts consultant"),            DebtsUser)
+        add('400', _("Social agent"),                SocialAgent)
+        add('410', _("Social agent (Manager)"),      SocialStaff)
+        add('900', _("Administrator"),               SiteAdmin, name='admin')
+        
+        # add(Anonymous('000', name='anonymous', readonly=True,
+        #               authenticated=False))
+        # add(IntegrationAgent('100'))
+        # add(IntegrationStaff('110'))
+        # add(NewcomersAgent('200'))
+        # add(ReceptionUser('210'))
+        # add(DebtsUser('300'))
+        # add(SocialAgent('400'))
+        # add(SocialStaff('410'))
+        # add(SiteAdmin('900', name='admin'))
 
     def setup_choicelists(self):
         """Adds two shortcut fields and a special note type."""
@@ -162,6 +170,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.art61'
         yield 'lino_welfare.modlib.immersion'
         yield 'lino_welfare.modlib.active_job_search'
+        # chatelent replaces courses by
         yield 'lino_welfare.modlib.courses'
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.cbss'  # must come after pcsw

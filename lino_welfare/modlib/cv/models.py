@@ -16,9 +16,10 @@ from lino.api import dd, rt
 
 from lino.modlib.cv.models import *
 
-from lino.modlib.properties import models as properties
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff
 
-config = dd.plugins.cv
+from lino.modlib.properties import models as properties
 
 
 #
@@ -42,9 +43,7 @@ class PersonProperty(properties.PropertyOccurence):
         verbose_name = _("Property")
         verbose_name_plural = _("Properties")
 
-    #~ person = models.ForeignKey("contacts.Person")
-    #~ person = models.ForeignKey(settings.SITE.person_model)
-    person = models.ForeignKey(config.person_model)
+    person = models.ForeignKey(dd.plugins.cv.person_model)
     remark = models.CharField(max_length=200,
                               blank=True,  # null=True,
                               verbose_name=_("Remark"))
@@ -53,7 +52,7 @@ class PersonProperty(properties.PropertyOccurence):
 class PersonProperties(dd.Table):
     model = 'properties.PersonProperty'
     hidden_columns = 'group id'
-    required = dd.required(user_groups='integ', user_level='manager')
+    required_roles = dd.required(SocialStaff)
 
 
 class PropsByPerson(PersonProperties):
@@ -64,7 +63,7 @@ class PropsByPerson(PersonProperties):
     """
     master_key = 'person'
     column_names = "property value remark *"
-    required = dd.required(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     #~ hidden_columns = 'id'
     auto_fit_column_widths = True
 

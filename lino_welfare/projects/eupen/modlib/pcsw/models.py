@@ -12,6 +12,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
+from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+
 from lino_welfare.modlib.pcsw.models import *
 
 from lino.modlib.vatless.mixins import PartnerDetailMixin
@@ -102,7 +106,7 @@ class ClientDetail(PartnerDetailMixin):
     broker:12
     faculty:12
     refusal_reason
-    """, required=dict(user_groups='newcomers'))
+    """, required_roles=dd.required(NewcomersAgent))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -165,7 +169,7 @@ class ClientDetail(PartnerDetailMixin):
     created modified
     remarks:30 remarks2:30
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required=dict(user_level='manager'))
+    """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))
 
     # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
@@ -183,7 +187,7 @@ class ClientDetail(PartnerDetailMixin):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required=dict(user_groups='integ'))
+    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -196,7 +200,7 @@ if settings.SITE.is_installed('cbss'):
     ClientDetail.cbss = dd.Panel("""
 cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
 cbss_summary
-""", label=_("CBSS"), required=dict(user_groups='cbss'))
+    """, label=_("CBSS"), required_roles=dd.required(SocialAgent))
 
 
 Clients.detail_layout = ClientDetail()

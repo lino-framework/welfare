@@ -35,10 +35,12 @@ from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
 from lino.core.utils import ChangeWatcher
 
+from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.integ.roles import IntegrationAgent
+from .roles import NewcomersAgent
+
 users = dd.resolve_app('users')
-contacts = dd.resolve_app('contacts')
 pcsw = dd.resolve_app('pcsw', strict=True)
-outbox = dd.resolve_app('outbox')
 
 WORKLOAD_BASE = decimal.Decimal('10')  # normal number of newcomers per month
 MAX_WEIGHT = decimal.Decimal('10')
@@ -65,9 +67,8 @@ class Brokers(dd.Table):
     """
     List of Brokers on this site.
     """
-    required = dict(user_groups='newcomers', user_level='manager')
-    #~ required_user_level = UserLevels.manager
-    model = Broker
+    required_roles = dd.required(SocialStaff)
+    model = 'newcomers.Broker'
     column_names = 'name *'
     order_by = ["name"]
 
@@ -92,10 +93,10 @@ Wieviel Aufwand ein Neuantrag in diesem Fachbereich allgemein verursacht
 
 
 class Faculties(dd.Table):
-    required = dict(user_groups='newcomers', user_level='manager')
+    required_roles = dd.required(SocialStaff)
     #~ required_user_groups = ['newcomers']
     #~ required_user_level = UserLevels.manager
-    model = Faculty
+    model = 'newcomers.Faculty'
     column_names = 'name weight *'
     order_by = ["name"]
     detail_layout = """
@@ -139,18 +140,14 @@ dd.update_field(Competence, 'user', verbose_name=_("User"))
 
 
 class Competences(dd.Table):
-    required = dict(user_groups='newcomers', user_level='manager')
-    #~ required_user_groups = ['newcomers']
-    #~ required_user_level = UserLevels.manager
-    model = Competence
+    required_roles = dd.required(SocialStaff)
+    model = 'newcomers.Competence'
     column_names = 'id user faculty weight *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
-    #~ required = dict(user_groups=['newcomers'])
-    required = dict()
-    #~ required_user_level = None
+    required_roles = dd.required()
     master_key = 'user'
     column_names = 'seqno faculty weight *'
     order_by = ["seqno"]
@@ -208,7 +205,7 @@ class NewClients(pcsw.Clients):
     consultants.
 
     """
-    required = dict(user_groups='newcomers')
+    required_roles = dd.required(NewcomersAgent)
     label = _("New Clients")
     use_as_default_table = False
 
@@ -265,7 +262,7 @@ class AvailableCoaches(users.Users):
 only to Newcomers consultants."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
-    required = dict(user_groups='newcomers')
+    required_roles = dd.required(NewcomersAgent)
     auto_fit_column_widths = True
     editable = False  # even root should not edit here
     label = _("Available Coaches")
@@ -288,7 +285,8 @@ only to Newcomers consultants."""
 
     @classmethod
     def get_request_queryset(self, ar):
-        profiles = [p for p in UserProfiles.items() if p.integ_level]
+        profiles = [p for p in UserProfiles.items()
+                    if isinstance(p.role, IntegrationAgent)]
         return super(AvailableCoaches, self, ar).filter(
             models.Q(profile__in=profiles))
 
@@ -490,5 +488,3 @@ dd.inject_field(
         help_text=_("The Faculty this client has been attributed to.")))
 
 
-p = dd.plugins.newcomers
-dd.add_user_group(p.app_label, p.verbose_name)

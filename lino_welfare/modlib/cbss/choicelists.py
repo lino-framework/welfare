@@ -3,8 +3,6 @@
 # License: BSD (see file COPYING for details)
 """Choicelists for `lino_welfare.modlib.cbss`.
 
-.. autosummary::
-
 """
 
 from lino.api import dd, _

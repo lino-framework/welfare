@@ -22,6 +22,8 @@ from lino.api import dd
 
 from lino.core.tables import ButtonsTable
 
+from lino.modlib.reception.roles import ReceptionUser, ReceptionOperator
+
 from lino.modlib.reception.models import *
 
 pcsw = dd.resolve_app('pcsw')
@@ -30,8 +32,9 @@ from lino_welfare.modlib.pcsw.models import ClientStates
 
 # Make EventsByDay available also for reception agents who are not in
 # office group.
-cal = dd.resolve_app('cal')
-cal.EventsByDay.required.update(user_groups='office reception')
+# cal = dd.resolve_app('cal')
+# cal.EventsByDay.required_roles.add(OfficeUser)
+# cal.EventsByDay.required_roles = dd.required(ReceptionUser)
 
 # Visitors.required.update(user_groups='coaching reception')
 # WaitingVisitors.required.update(user_groups='coaching reception')
@@ -228,11 +231,11 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     <lino_welfare.modlib.pcsw.models.Clients>` by the visible columns.
 
     """
+    required_roles = dd.required(ReceptionUser)
     #~ model = 'pcsw.Client'
     column_names = "name_column address_column national_id workflow_buttons"
     auto_fit_column_widths = True
     use_as_default_table = False
-    required = dd.Required(user_groups='reception')
     create_event = None  # don't inherit this action
     print_eid_content = None
 
@@ -388,7 +391,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
 
 
 # Override library :mod:`WaitingVisitors
-# <ml.reception.WaitingVisitors>` table to change one
+# <lino.modlib.reception.models.WaitingVisitors>` table to change one
 # behaviour: when clicking in that table on the partner, :ref:`welfare`
 # should show the *Client's* and not the *Partner's* detail.
 

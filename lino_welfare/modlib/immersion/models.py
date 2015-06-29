@@ -24,6 +24,8 @@ from lino_welfare.modlib.isip.mixins import (
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
+from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+
 
 class ClientHasContract(ObservedEvent):
     text = _("Immersion training")
@@ -50,9 +52,7 @@ class ContractType(ContractTypeBase):
 class ContractTypes(dd.Table):
     """
     """
-    required = dd.required(user_groups='integ', user_level='manager')
-    #~ required_user_groups = ['integ']
-    #~ required_user_level = UserLevels.manager
+    required_roles = dd.required(IntegrationStaff)
     model = 'immersion.ContractType'
     column_names = 'name *'
     detail_layout = """
@@ -78,7 +78,7 @@ class Goal(mixins.BabelNamed):
 class Goals(dd.Table):
     """
     """
-    required = dd.required(user_groups='integ', user_level='manager')
+    required_roles = dd.required(IntegrationStaff)
     model = 'immersion.Goal'
     column_names = 'name *'
     detail_layout = """
@@ -150,7 +150,7 @@ class ContractDetail(dd.FormLayout):
 
 class Contracts(ContractBaseTable):
 
-    required = dd.required(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     model = 'immersion.Contract'
     column_names = 'id client applies_from applies_until user type *'
     order_by = ['id']

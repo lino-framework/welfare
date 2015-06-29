@@ -48,9 +48,8 @@ Rolf
 
 Rolf is the local system administrator, he has a complete menu:
 
->>> ses = rt.login('rolf') 
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -80,7 +79,7 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - System : Vollmachten, Benutzergruppen, Benutzer-Levels, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
+  - System : Vollmachten, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
@@ -103,14 +102,13 @@ Hubert
 
 Hubert is an Integration agent.
 
->>> ses = rt.login('hubert') 
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('hubert').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -135,16 +133,21 @@ Hubert is an Integration agent.
 Mélanie
 -------
 
-Mélanie is the manager of the Integration service.
+Mélanie is a manager of the Integration service.
 
->>> ses = rt.login('melanie') 
+>>> p = rt.login('melanie').get_user().profile
+>>> print(p)
+Integrations-Assistent (Manager)
+>>> p.role.__class__
+<class 'lino_welfare.modlib.integ.roles.IntegrationStaff'>
+
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('melanie').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -153,21 +156,24 @@ Mélanie is the manager of the Integration service.
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Orte : Länder
-  - Büro : Meine Einfügetexte
+  - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
+  - Büro : Upload-Arten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
-  - ÖSHZ : Integrationsphasen, Begleitungsbeendigungsgründe, Dispenzgründe
-  - Lebenslauf : Sprachen, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
+  - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
+  - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche, E-Mail-Ausgänge, Anhänge
+  - Kontakte : Kontaktpersonen, Adressenarten, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kalender : Aufgaben, Abonnements
   - SEPA : Konten
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
-  - Kurse : Kursanfragen
+  - Kurse : Kurse, Kursanfragen
+  - Erstempfang : Kompetenzen
 - Site : Info
 
 
@@ -176,17 +182,22 @@ Kerstin
 
 Kerstin is a debts consultant.
 
->>> ses = rt.login('kerstin') 
+>>> p = rt.login('kerstin').get_user().profile
+>>> print(p)
+Schuldenberater
+>>> p.role.__class__
+<class 'lino_welfare.modlib.debts.roles.DebtsUser'>
+
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('kerstin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
- - Erstempfang : Neue Klienten, Verfügbare Begleiter
- - Schuldnerberatung : Klienten, Meine Budgets
+- Erstempfang : Neue Klienten, Verfügbare Begleiter
+- Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
   - System : Broken GFKs
 - Konfigurierung :
@@ -209,14 +220,19 @@ Caroline
 
 Caroline is a newcomers consultant.
 
->>> ses = rt.login('caroline') 
+>>> p = rt.login('caroline').get_user().profile
+>>> print(p)
+Berater Erstempfang
+>>> p.role.__class__
+<class 'lino_welfare.modlib.newcomers.roles.NewcomersAgent'>
+
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('caroline').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
-- Empfang : Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Berichte :
@@ -241,9 +257,15 @@ Theresia
 
 Theresia is a reception clerk.
 
->>> ses = rt.login('theresia') 
+>>> p = rt.login('theresia').get_user().profile
+>>> print(p)
+Empfangsschalter
+>>> p.role.__class__
+<class 'lino.modlib.reception.roles.ReceptionOperator'>
+
+
 >>> with translation.override('de'):
-...     ses.show_menu()
+...     rt.login('theresia') .show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info

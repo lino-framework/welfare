@@ -10,7 +10,7 @@ class Plugin(ad.Plugin):
     short_name = _("Courses")
 
     def setup_main_menu(self, site, profile, m):
-        if profile.courses_level:
+        if True:  # profile.courses_level:
             m = m.add_menu(self.app_label, self.verbose_name)
             m.add_action('courses.CourseProviders')
             m.add_action('courses.CourseOffers')

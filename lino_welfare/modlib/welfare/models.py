@@ -37,7 +37,8 @@ courses = dd.resolve_app('courses')
 #~ newcomers = dd.resolve_app('newcomers')
 
 
-def customize_siteconfig():
+@dd.receiver(dd.pre_analyze)
+def customize_siteconfig(sender, **kw):
     """
     Injects application-specific fields to
     :class:`SiteConfig <lino.models.SiteConfig>`.
@@ -78,7 +79,8 @@ def customize_siteconfig():
                                       related_name='driving_licence_sites'))
 
 
-def customize_contacts():
+@dd.receiver(dd.pre_analyze)
+def customize_contacts(sender, **kw):
     """
     Injects application-specific fields to :mod:`contacts <lino.modlib.contacts>`.
     """
@@ -105,7 +107,8 @@ def on_auto_create(sender, **kw):
 #~ dd.auto_create.connect(on_auto_create)
 
 
-def customize_sqlite():
+@dd.receiver(dd.pre_analyze)
+def customize_sqlite(sender, **kw):
     """
     Here is how we install case-insensitive sorting in sqlite3.
     Note that this caused noticeable performance degradation...
@@ -183,7 +186,7 @@ def my_details(sender, **kw):
     """)
 
 
-customize_siteconfig()
-customize_contacts()
-customize_sqlite()
+# customize_siteconfig()
+# customize_contacts()
+# customize_sqlite()
 

@@ -18,8 +18,6 @@ from lino.modlib.reception import Plugin
 
 class Plugin(Plugin):
 
-    required_user_groups = 'reception coaching'
-
     def setup_main_menu(self, site, profile, main):
         m = main.add_menu(self.app_name, self.verbose_name)
         m.add_action('reception.Clients')

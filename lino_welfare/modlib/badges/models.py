@@ -28,7 +28,7 @@ class Badge(mixins.BabelNamed):
 
 class Badges(dd.Table):
     model = 'badges.Badge'
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(dd.SiteStaff)
 
 
 class Award(dd.Model):
@@ -53,12 +53,12 @@ class Award(dd.Model):
 
 class Awards(dd.Table):
     model = 'badges.Award'
-    required = dd.required(user_level='admin')
+    required_roles = dd.required(dd.SiteStaff)
 
 
 class AwardsByHolder(Awards):
     label = _("Awards")
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'holder'
     column_names = 'date badge result remark'
     auto_fit_column_widths = True
@@ -66,7 +66,7 @@ class AwardsByHolder(Awards):
 
 class AwardsByBadge(Awards):
     label = _("Awards")
-    required = dd.required()
+    required_roles = dd.required()
     master_key = 'badge'
     column_names = 'date holder result remark'
     auto_fit_column_widths = True

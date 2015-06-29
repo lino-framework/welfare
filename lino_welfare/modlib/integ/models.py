@@ -17,11 +17,12 @@ from django.db import models
 from django.conf import settings
 
 from lino.utils.xmlgen.html import E
-from lino.modlib.users.choicelists import UserProfiles, UserLevels
+from lino.modlib.users.choicelists import UserProfiles
 from lino.utils.report import Report
 
 from lino.api import dd
 from lino.modlib.system.mixins import PeriodEvents
+from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 config = dd.plugins.integ
 
@@ -60,7 +61,7 @@ class Clients(pcsw.Clients):
     help_text = """Wie Kontakte --> Klienten, aber mit \
     DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
-    required = dict(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
@@ -142,10 +143,8 @@ class UsersWithClients(dd.VirtualTable):
 
 
     """
-    # required = dict(user_groups='coaching newcomers')
-    required = dict(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     label = _("Users with their Clients")
-    #~ column_defaults = dict(width=8)
 
     slave_grid_format = 'html'
 
@@ -163,12 +162,14 @@ class UsersWithClients(dd.VirtualTable):
 
         """
         u = ar.get_user()
-        if u is None or u.profile.level < UserLevels.admin:
+        if u is None or not isinstance(u.profile.role, dd.SiteAdmin):
             profiles = [p for p in UserProfiles.items()
-                        if p.integ_level and p.level < UserLevels.admin]
+                        if isinstance(p.role, IntegrationAgent)
+                        and not isinstance(p.role, dd.SiteAdmin)]
         else:
-            profiles = [p for p in UserProfiles.items() if p.integ_level]
-            #~ qs = qs.exclude(profile__gte=UserLevels.admin)
+            profiles = [
+                p for p in UserProfiles.items()
+                if isinstance(p.role, IntegrationAgent)]
 
         qs = users.User.objects.filter(profile__in=profiles)
         for user in qs.order_by('username'):
@@ -573,7 +574,7 @@ class ActivityReport(Report):
 
     """
 
-    required = dict(user_groups='integ')
+    required_roles = dd.required(IntegrationAgent)
     label = _("Activity Report")
 
     parameters = dict(
@@ -628,5 +629,3 @@ class ActivityReport(Report):
             if A.help_text:
                 yield E.p(unicode(A.help_text))
             yield A
-
-dd.add_user_group(config.app_label, config.verbose_name)
