@@ -263,19 +263,19 @@ contacts:
  Apotheke             Apotheke Reul
  Arzt                                 Waltraud WALDMANN
  Hausarzt                             Werner WEHNICHT
- Zahnarzt                             Carmen CASTOU
+ Zahnarzt                             Dr. Carmen CASTOU
 ==================== =============== =================== =============
 <BLANKLINE>
 
 >>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=141))
-==================== ================== =================== =============
- Klientenkontaktart   Organisation       Kontaktperson       Bemerkungen
--------------------- ------------------ ------------------- -------------
+==================== ================== ==================== =============
+ Klientenkontaktart   Organisation       Kontaktperson        Bemerkungen
+-------------------- ------------------ -------------------- -------------
  Apotheke             Apotheke Schunck
- Kinderarzt                              Killian KIMMEL
+ Kinderarzt                              Dr. Killian KIMMEL
  Arzt                                    Waltraud WALDMANN
  Hausarzt                                Werner WEHNICHT
-==================== ================== =================== =============
+==================== ================== ==================== =============
 <BLANKLINE>
 
 
@@ -284,22 +284,22 @@ contacts:
 >>> column_names += "granting__client "
 >>> column_names += "pharmacy doctor_type doctor"
 >>> rt.show(aids.RefundConfirmations, column_names=column_names)
-==== ================== ====================== ================== ================ ===================
+==== ================== ====================== ================== ================ =====================
  ID   Hilfebeschluss     Klient                 Apotheke           Art des Arztes   Arzt
----- ------------------ ---------------------- ------------------ ---------------- -------------------
- 12   DMH/28.05.14/144   LAZARUS Line (144)                        Kinderarzt       Killian KIMMEL
- 11   DMH/28.05.14/144   LAZARUS Line (144)                        Zahnarzt         Carmen CASTOU
+---- ------------------ ---------------------- ------------------ ---------------- ---------------------
+ 12   DMH/28.05.14/144   LAZARUS Line (144)                        Kinderarzt       Dr. Killian KIMMEL
+ 11   DMH/28.05.14/144   LAZARUS Line (144)                        Zahnarzt         Dr. Carmen CASTOU
  10   DMH/28.05.14/144   LAZARUS Line (144)                        Hausarzt         Werner WEHNICHT
  9    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Arzt             Waltraud WALDMANN
- 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Kinderarzt       Killian KIMMEL
- 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Zahnarzt         Walter WALDMANN
+ 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Kinderarzt       Dr. Killian KIMMEL
+ 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Zahnarzt         Dr. Walter WALDMANN
  6    AMK/27.05.14/141   KAIVERS Karl (141)                        Hausarzt         Werner WEHNICHT
  5    AMK/27.05.14/141   KAIVERS Karl (141)                        Arzt             Waltraud WALDMANN
- 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck   Kinderarzt       Killian KIMMEL
- 3    AMK/27.05.14/139   JONAS Josef (139)                         Zahnarzt         Carmen CASTOU
+ 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck   Kinderarzt       Dr. Killian KIMMEL
+ 3    AMK/27.05.14/139   JONAS Josef (139)                         Zahnarzt         Dr. Carmen CASTOU
  2    AMK/27.05.14/139   JONAS Josef (139)                         Hausarzt         Werner WEHNICHT
  1    AMK/27.05.14/139   JONAS Josef (139)      Apotheke Reul      Arzt             Waltraud WALDMANN
-==== ================== ====================== ================== ================ ===================
+==== ================== ====================== ================== ================ =====================
 <BLANKLINE>
 
 

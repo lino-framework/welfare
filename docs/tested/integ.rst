@@ -89,7 +89,7 @@ Configuration
 ============= ================== ================== ===========
  Designation   Designation (fr)   Designation (de)   Reference
 ------------- ------------------ ------------------ -----------
- Default       Default            Default
+ Default       Default            Standardwert
 ============= ================== ================== ===========
 <BLANKLINE>
 

@@ -215,13 +215,13 @@ class TestCase(TestCase):
             s = changes_to_rst(client.partner_ptr)
         # print s
         self.assertEqual(s, """\
-=========== ============= =============================== ============================================================================= ============= ===========
- User        Change Type   Object                          Changes                                                                       Object type   object id
------------ ------------- ------------------------------- ----------------------------------------------------------------------------- ------------- -----------
- watch_tim   Create        *alicia / Voldemort-Potter H*   Coaching(id=1,start_date=1985-07-23,user=2,client=4260,type=2,primary=True)   Coaching      1
- watch_tim   Add child     *Harald VOLDEMORT-POTTER*       pcsw.Client                                                                   Person        4260
- watch_tim   Add child     *Voldemort-Potter Harald*       contacts.Person                                                               Partner       4260
-=========== ============= =============================== ============================================================================= ============= ===========
+=========== ============= ==================================== ============================================================================= ============= ===========
+ User        Change Type   Object                               Changes                                                                       Object type   object id
+----------- ------------- ------------------------------------ ----------------------------------------------------------------------------- ------------- -----------
+ watch_tim   Create        *alicia / Voldemort-Potter H*        Coaching(id=1,start_date=1985-07-23,user=2,client=4260,type=2,primary=True)   Coaching      1
+ watch_tim   Add child     *Eheleute Harald VOLDEMORT-POTTER*   pcsw.Client                                                                   Person        4260
+ watch_tim   Add child     *Voldemort-Potter Harald*            contacts.Person                                                               Partner       4260
+=========== ============= ==================================== ============================================================================= ============= ===========
 """)
 
         #~ def test05(self):

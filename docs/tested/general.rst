@@ -117,7 +117,7 @@ result:
  finan.PaymentOrder             finan.PaymentOrders             11        0
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     9         0
  households.Household           households.Households           29        14
- households.Member              households.Members              13        63
+ households.Member              households.Members              14        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
  immersion.Contract             immersion.Contracts             25        7
