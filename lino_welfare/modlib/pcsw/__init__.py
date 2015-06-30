@@ -12,6 +12,7 @@ Most important models are :class:`Client` and :class:`Coaching`.
 .. autosummary::
    :toctree:
 
+    roles
     mixins
     choicelists
     models

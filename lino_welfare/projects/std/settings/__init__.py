@@ -39,6 +39,8 @@ class Site(Site):
     # default_build_method = "appyodt"
     uppercase_last_name = True
 
+    enable_role_based_permissions = True
+
     def setup_plugins(self):
         """
         Change the default value of certain plugin settings.
@@ -77,17 +79,6 @@ class Site(Site):
         add('400', _("Social agent"),                SocialAgent)
         add('410', _("Social agent (Manager)"),      SocialStaff)
         add('900', _("Administrator"),               SiteAdmin, name='admin')
-        
-        # add(Anonymous('000', name='anonymous', readonly=True,
-        #               authenticated=False))
-        # add(IntegrationAgent('100'))
-        # add(IntegrationStaff('110'))
-        # add(NewcomersAgent('200'))
-        # add(ReceptionUser('210'))
-        # add(DebtsUser('300'))
-        # add(SocialAgent('400'))
-        # add(SocialStaff('410'))
-        # add(SiteAdmin('900', name='admin'))
 
     def setup_choicelists(self):
         """Adds two shortcut fields and a special note type."""

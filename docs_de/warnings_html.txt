@@ -1,4 +1,0 @@
-/home/luc/hgwork/welfare/docs_de/aids.rst:120: WARNING: undefined label: davlink (if the link has no caption the label must precede a section header)
-/home/luc/hgwork/welfare/docs_de/help/print.rst:11: WARNING: undefined label: davlink (if the link has no caption the label must precede a section header)
-/home/luc/hgwork/welfare/docs_de/preise.rst:107: WARNING: undefined label: eidreader (if the link has no caption the label must precede a section header)
-/home/luc/hgwork/welfare/docs_de/preise.rst:109: WARNING: undefined label: davlink (if the link has no caption the label must precede a section header)

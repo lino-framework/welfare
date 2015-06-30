@@ -7,6 +7,7 @@
 .. autosummary::
    :toctree:
 
+   roles
    models
    management.commands
    fixtures.std

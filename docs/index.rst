@@ -23,6 +23,7 @@ Content
 .. toctree::
    :maxdepth: 1
 
+   status
    admin/index
    ref/index
    releases/index
