@@ -35,7 +35,7 @@ instead of raising an exception:
 >>> pcsw.Client.objects.get(id=127).delete()
 Traceback (most recent call last):
 ...
-Warning: Kann EVERS Eberhart (127) nicht l\xf6schen weil 2 Hilfebeschl\xfcsse darauf verweisen.
+Warning: Kann Klient EVERS Eberhart (127) nicht l\xf6schen weil 2 Hilfebeschl\xfcsse darauf verweisen.
 
 
 User profiles

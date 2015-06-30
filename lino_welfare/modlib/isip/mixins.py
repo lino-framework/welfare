@@ -222,7 +222,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
 
     """
 
-    manager_roles_required = set([IntegrationAgent])
+    manager_roles_required = IntegrationAgent
     # manager_level_field = 'integ_level'
 
     TASKTYPE_CONTRACT_APPLIES_UNTIL = 1
