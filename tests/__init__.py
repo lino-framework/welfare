@@ -60,6 +60,9 @@ class SpecsTests(BaseTestCase):
     def test_ledger(self):
         return self.run_simple_doctests('docs/specs/ledger.rst')
 
+    def test_clients(self):
+        return self.run_simple_doctests('docs/specs/clients.rst')
+
 
 class DocsTests(BaseTestCase):
     

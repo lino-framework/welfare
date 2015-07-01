@@ -271,15 +271,15 @@ Empfangsschalter
 - Site : Info
 
 
+
 Some requests
 =============
 
 
 Some choices lists:
+
 >>> kw = dict()
 >>> fields = 'count rows'
->>> demo_get(
-...     'rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
->>> demo_get(
-...    'rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+>>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
+>>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
 
