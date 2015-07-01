@@ -81,7 +81,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Explorer :
   - System : Vollmachten, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - SEPA : Konten
@@ -113,18 +113,14 @@ Hubert is an Integration agent.
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Berichte :
-  - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Vertragspartner, Art.61-Konventionen
+  - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
 
 
@@ -152,7 +148,6 @@ Integrations-Assistent (Manager)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Berichte :
-  - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Orte : Länder
@@ -165,7 +160,7 @@ Integrations-Assistent (Manager)
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Rollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Adressenarten, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge
   - Kalender : Aufgaben, Abonnements
   - SEPA : Konten
@@ -198,19 +193,13 @@ Schuldenberater
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
-- Berichte :
-  - System : Broken GFKs
 - Konfigurierung :
   - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : Vertragspartner
 - Site : Info
 
 
@@ -235,18 +224,12 @@ Berater Erstempfang
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
-- Berichte :
-  - System : Broken GFKs
 - Konfigurierung :
   - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - Kontakte : Adressenarten, Rollen
-  - Büro : Upload-Bereiche
-  - SEPA : Konten
   - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - DSBE : Vertragspartner
 - Site : Info
 
 
@@ -261,12 +244,12 @@ Theresia is a reception clerk.
 >>> print(p)
 Empfangsschalter
 >>> p.role.__class__
-<class 'lino.modlib.reception.roles.ReceptionOperator'>
+<class 'lino.modlib.office.roles.OfficeOperator'>
 
 
 >>> with translation.override('de'):
 ...     rt.login('theresia') .show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 

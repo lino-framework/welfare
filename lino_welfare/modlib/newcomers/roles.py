@@ -6,9 +6,8 @@
 """
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
-from lino.modlib.reception.roles import ReceptionUser
 
 
-class NewcomersAgent(SocialAgent, ReceptionUser):
+class NewcomersAgent(SocialAgent):
     pass
 

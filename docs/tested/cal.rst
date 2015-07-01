@@ -5,19 +5,14 @@ Calendar (tested)
 ===================
 
 .. How to test only this document:
-
-  $ python setup.py test -s tests.DocsTests.test_cal
+   $ python setup.py test -s tests.DocsTests.test_cal
 
 A technical tour into the :mod:`lino_welfare.modlib.cal` module.
 
 .. contents::
-   :depth: 2
+   :local:
 
-A tested document
-=================
-
-This document is part of the Lino Welfare test suite and has been
-tested using doctest with the following initialization code:
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
@@ -25,7 +20,34 @@ tested using doctest with the following initialization code:
 ...    'lino_welfare.projects.eupen.settings.doctests'
 >>> from lino.api.doctest import *
 
+Not for everybody
+=================
 
+Only users with the :class:`OfficeUser
+<lino.modlib.office.roles.OfficeUser>` role can see the calendar
+functionality.  All users with one of the following profiles can see
+each other's calendars:
+
+>>> from lino.modlib.office.roles import OfficeUser
+>>> for p in users.UserProfiles.items():
+...     if isinstance(p.role, OfficeUser):
+...         print repr(p), unicode(p)
+users.UserProfiles:100 Begleiter im DSBE
+users.UserProfiles:110 Integrations-Assistent (Manager)
+users.UserProfiles:200 Berater Erstempfang
+users.UserProfiles:300 Schuldenberater
+users.UserProfiles:400 Sozi
+users.UserProfiles:410 Social agent (Manager)
+users.UserProfiles.admin:900 Verwalter
+
+
+
+
+
+Events today
+============
+
+Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
 >>> rt.login('theresia').show(cal.EventsByDay, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -42,6 +64,11 @@ tested using doctest with the following initialization code:
  13:30:00              Treffen      Theresia Thelen                 Meeting                      **Suggested** → [Notified]
 ============ ======== ============ ================= ============= ===================== ====== ===================================
 <BLANKLINE>
+
+Users looking at their events
+=============================
+
+For Alicia, Hubert and Mélanie.
 
 >>> rt.login('alicia').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -155,19 +182,4 @@ following calendars:
  7    rolf       Nein
 ==== ========== ===========
 <BLANKLINE>
-
-Each user who has view access to the calendar.
-Only UserProfile with a non-empty `office_level` can see the calendar.
-All users with one of the following profiles can see each other's calendars:
-
->>> from lino_welfare.modlib.pcsw.roles import SocialAgent
->>> print('\n'.join([unicode(p) for p in users.UserProfiles.items()
-... if isinstance(p.role, SocialAgent)]))
-Begleiter im DSBE
-Integrations-Assistent (Manager)
-Berater Erstempfang
-Schuldenberater
-Sozi
-Social agent (Manager)
-Verwalter
 

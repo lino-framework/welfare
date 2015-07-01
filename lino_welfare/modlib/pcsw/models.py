@@ -44,6 +44,7 @@ from lino.modlib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 from lino.modlib.vatless.mixins import PartnerDetailMixin
 
+from lino.modlib.office.roles import OfficeOperator
 from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
@@ -712,6 +713,7 @@ class Clients(contacts.Persons):
     """
     # debug_permissions = '20150129'
     # required = dd.Required(user_groups='coaching')
+    required_roles = dd.login_required((SocialAgent, OfficeOperator))
     model = 'pcsw.Client'
     params_panel_hidden = True
 

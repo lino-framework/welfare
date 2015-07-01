@@ -11,11 +11,7 @@ Clients
    :depth: 2
    :local:
 
-A tested document
-=================
-
-This document is being tested using doctest with the following
-initializations:
+.. include::: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
@@ -59,7 +55,7 @@ used in Lino Welfare à la Eupen:
       - (contact_1): **Ähnliche Klienten** (SimilarClients), **Beziehungen** (LinksByHuman), **ZDSS** (cbss_relations)
       - (contact_2):
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
-        - **Haushaltszusammensetzung** (households.SiblingsByPerson)
+        - **Haushaltszusammensetzung** (households.SiblingsByPerson) [visible for all except anonymous, 210]
     - **Begleitung** (coaching):
       - (coaching_1) [visible for 200, 300, admin]:
         - (newcomers_left):
@@ -80,8 +76,8 @@ used in Lino Welfare à la Eupen:
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
-      - **Konten** (sepa.AccountsByClient)
-      - **Hilfebeschlüsse** (aids.GrantingsByClient)
+      - **Konten** (sepa.AccountsByClient) [visible for all except anonymous, 210]
+      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for all except anonymous, 210]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for all except anonymous, 210]:
         - **Dispenzen** (pcsw.DispensesByClient)
@@ -113,7 +109,7 @@ used in Lino Welfare à la Eupen:
     - **Historie** (history):
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
-    - **Kalender** (calendar):
+    - **Kalender** (calendar) [visible for all except anonymous, 210]:
       - **Termine** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
     - **Sonstiges** (misc) [visible for 110, 410, admin]:
@@ -123,7 +119,7 @@ used in Lino Welfare à la Eupen:
       - (misc_4) [visible for all except anonymous]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
       - (misc_5) [visible for all except anonymous]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
-        - **Kontaktperson für** (contacts.RolesByPerson)
+        - **Kontaktperson für** (contacts.RolesByPerson) [visible for all except anonymous, 210]
     - **ZDSS** (cbss) [visible for all except anonymous, 210]:
       - (cbss_1) [visible for all except anonymous]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
       - **Zusammenfassung ZDSS** (cbss_summary) [visible for all except anonymous]
@@ -131,5 +127,3 @@ used in Lino Welfare à la Eupen:
       - **Ist Hauptpartner in folgenden Budgets:** (debts.BudgetsByPartner)
       - **Ist Akteur in folgenden Budgets:** (debts.ActorsByPartner)
     <BLANKLINE>
-
-

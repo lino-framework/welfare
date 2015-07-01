@@ -5,15 +5,13 @@ Integration Service
 ===================
 
 .. How to test only this document:
-
-  $ python setup.py test -s tests.DocsTests.test_integ
+   $ python setup.py test -s tests.DocsTests.test_integ
 
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 See also :doc:`/tour/autoevents`.
 
 .. contents::
    :local:
-   :depth: 2
 
 .. include:: /include/tested.rst
 
@@ -121,7 +119,7 @@ Configuration
 
 
 UsersWithClients
-----------------
+================
 
 >>> ses.show(integ.UsersWithClients)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -156,91 +154,4 @@ and passed when it was fixed:
 {u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
 
 
-
-Expects a list of 12 values but got 16
---------------------------------------
-
-The following code caused an Exception "ParameterStore of LayoutHandle
-for ParamsLayout on pcsw.Clients expects a list of 12 values but got
-16" on :blogref:`20140429`.
-
->>> print(pcsw.Client.objects.get(pk=179))
-DUBOIS Robin (179)
-
->>> client = Client()
->>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
->>> res = test_client.get(url, REMOTE_USER='rolf')
->>> print(res.status_code)
-200
-
-The response to this AJAX request is in JSON:
-
->>> d = json.loads(res.content)
-
-We test the MembersByPerson panel. It contains a summary:
-
->>> print(d['data']['MembersByPerson'])
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<div>DUBOIS Robin (179) ist<ul><li><a href="javascript:Lino.households.Members.set_primary(...)...</div>
-
-Since this is not very human-readable, we are going to analyze it with
-`BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
-
->>> soup = BeautifulSoup(d['data']['MembersByPerson'])
-
->>> print(soup.get_text(' ', strip=True))
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-DUBOIS Robin (179) ist ☐ Vorstand in Robin & Mélanie Dubois-Mélard Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
-
->>> links = soup.find_all('a')
-
-It contains eight links:
-
->>> len(links)
-8
-
-The first link is the disabled checkbox for the :attr:`primary
-<ml.households.Member.primary>` field:
-
->>> print(links[0].string)
-... #doctest: +NORMALIZE_WHITESPACE
-☐
-
-Clicking on this would run the following JavaScript:
-
->>> print(links[0].get('href'))
-javascript:Lino.households.Members.set_primary("ext-comp-1351",9,{  })
-
-The next link is the name of the household, and clicking on it would
-equally execute some Javascript code:
-
->>> print(links[1].string)
-Robin & Mélanie Dubois-Mélard
->>> print(links[1].get('href'))
-javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 234 })
-
-
-The third link is:
-
->>> print(links[2].string)
-Ehepartner
->>> print(links[2].get('href'))
-... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
-"field_values": { 
-  "head": "DUBOIS Robin (179)", "headHidden": 179, 
-  "typeHidden": 1, 
-  "partner": null, "partnerHidden": null, 
-  "type": "Ehepartner" 
-}, "param_values": { 
-  "also_obsolete": false, "gender": null, "genderHidden": null 
-}, "base_params": {  } })
-
-
-The :func:`lino.api.doctest.get_json_soup` automates this trick:
-
->>> soup = get_json_soup('rolf', 'integ/Clients/179', 'MembersByPerson')
->>> links = soup.find_all('a')
->>> len(links)
-8
 

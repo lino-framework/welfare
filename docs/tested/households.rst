@@ -1,32 +1,34 @@
 .. _welfare.tested.households:
 
+==========
 Households
 ==========
 
-.. include:: /include/tested.rst
+.. How to test only this document:
 
-..
-  This document is part of the test suite.
-  To test only this document, run::
     $ python setup.py test -s tests.DocsTests.test_households
 
-Preparatory stuff:
+A technical tour into the :mod:`lino_welfare.modlib.households` module.
+
+
+.. contents::
+   :local:
+
+.. include:: /include/tested.rst
+
+
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.shell import *
->>> from django.utils import translation
->>> from django.test import Client
->>> import json
->>> from bs4 import BeautifulSoup
->>> ses = rt.login('rolf')
+>>> from lino.api.doctest import *
+
 
 .. _paulfrisch:
 
 Paul Frisch
------------
+===========
 
 Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links.
@@ -73,6 +75,7 @@ together. Their children have moved out.
 >>> obj = contacts.Person.objects.get(name="Frisch Hubert")
 >>> print(obj)
 Mr Hubert FRISCH
+>>> ses = rt.login('rolf')
 >>> ses.show(households.SiblingsByPerson, master_instance=obj)
 ========== =================== =============== ==================== ============ =========== ============ ========
  Age        Role                Dependency      Person               First name   Last name   Birth date   Gender
@@ -147,3 +150,91 @@ Here is their :class:`welfare.households.RefundsByPerson`:
  **Total (4 rows)**                             **60,00**
 ==================== ======== ================ ===========
 <BLANKLINE>
+
+
+Inspecting the MembersByPerson panel
+====================================
+
+The following code caused an exception "ParameterStore of LayoutHandle
+for ParamsLayout on pcsw.Clients expects a list of 12 values but got
+16" on :blogref:`20140429`.
+
+>>> print(pcsw.Client.objects.get(pk=179))
+DUBOIS Robin (179)
+
+>>> client = Client()
+>>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
+>>> res = test_client.get(url, REMOTE_USER='rolf')
+>>> print(res.status_code)
+200
+
+The response to this AJAX request is in JSON:
+
+>>> d = json.loads(res.content)
+
+We test the MembersByPerson panel. It contains a summary:
+
+>>> print(d['data']['MembersByPerson'])
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<div>DUBOIS Robin (179) ist<ul><li><a href="javascript:Lino.households.Members.set_primary(...)...</div>
+
+Since this is not very human-readable, we are going to analyze it with
+`BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
+
+>>> soup = BeautifulSoup(d['data']['MembersByPerson'])
+
+>>> print(soup.get_text(' ', strip=True))
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
+DUBOIS Robin (179) ist ☐ Vorstand in Robin & Mélanie Dubois-Mélard Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
+
+>>> links = soup.find_all('a')
+
+It contains eight links:
+
+>>> len(links)
+8
+
+The first link is the disabled checkbox for the :attr:`primary
+<lino.modlib.households.models.Member.primary>` field:
+
+>>> print(links[0].string)
+... #doctest: +NORMALIZE_WHITESPACE
+☐
+
+Clicking on this would run the following JavaScript:
+
+>>> print(links[0].get('href'))
+javascript:Lino.households.Members.set_primary("ext-comp-1351",9,{  })
+
+The next link is the name of the household, and clicking on it would
+equally execute some Javascript code:
+
+>>> print(links[1].string)
+Robin & Mélanie Dubois-Mélard
+>>> print(links[1].get('href'))
+javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 234 })
+
+
+The third link is:
+
+>>> print(links[2].string)
+Ehepartner
+>>> print(links[2].get('href'))
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
+"field_values": { 
+  "head": "DUBOIS Robin (179)", "headHidden": 179, 
+  "typeHidden": 1, 
+  "partner": null, "partnerHidden": null, 
+  "type": "Ehepartner" 
+}, "param_values": { 
+  "also_obsolete": false, "gender": null, "genderHidden": null 
+}, "base_params": {  } })
+
+
+The :func:`lino.api.doctest.get_json_soup` automates this trick:
+
+>>> soup = get_json_soup('rolf', 'integ/Clients/179', 'MembersByPerson')
+>>> links = soup.find_all('a')
+>>> len(links)
+8

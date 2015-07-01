@@ -15,9 +15,6 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` plugin.
    :depth: 2
    :local:
 
-A tested document
-=================
-
 .. include:: /include/tested.rst
 
 >>> from __future__ import print_function

@@ -75,7 +75,7 @@ name to read the documentation):
     debts.TableLayouts : Table layouts
     excerpts.Shortcuts : Excerpt shortcuts
     households.MemberDependencies : Household Member Dependencies
-    households.MemberRoles : Roles
+    households.MemberRoles : Household member roles
     humanlinks.LinkTypes : Parency types
     isip.ContractEvents : Observed events
     isip.OverlapGroups : Overlap groups

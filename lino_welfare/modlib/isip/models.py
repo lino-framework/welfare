@@ -25,7 +25,7 @@ from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
 
 
 class ClientHasContract(ObservedEvent):
@@ -166,6 +166,7 @@ class ContractPartner(ContractPartnerBase):
 
 
 class ContractPartners(dd.Table):
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'isip.ContractPartner'
     columns = 'contract company contact_person contact_role'
     detail_layout = """
@@ -175,6 +176,7 @@ class ContractPartners(dd.Table):
 
 
 class PartnersByContract(ContractPartners):
+    required_roles = dd.login_required(IntegrationAgent)
     master_key = 'contract'
     columns = 'company contact_person contact_role duties_company'
 
@@ -263,7 +265,7 @@ class ContractDetail(dd.FormLayout):
 
 
 class Contracts(ContractBaseTable):
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     model = 'isip.Contract'
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']

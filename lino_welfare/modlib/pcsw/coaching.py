@@ -341,7 +341,6 @@ class Coachings(dd.Table):
 
 
 class CoachingsByClient(Coachings):
-
     """
     The :class:`Coachings` table in a :class:`Clients` detail.
     """
@@ -354,14 +353,14 @@ class CoachingsByClient(Coachings):
     auto_fit_column_widths = True
 
 
-class CoachingsByUser(Coachings):
-    required_roles = dd.required()
-    master_key = 'user'
-    column_names = 'start_date end_date client type primary id'
-
-
 class CoachingsByEnding(Coachings):
     master_key = 'ending'
+
+
+class CoachingsByUser(Coachings):
+    required_roles = dd.required(SocialAgent)
+    master_key = 'user'
+    column_names = 'start_date end_date client type primary id'
 
 
 class MyCoachings(CoachingsByUser, ByUser):

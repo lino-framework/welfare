@@ -62,7 +62,7 @@ result:
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
- cal.Subscription               cal.Subscriptions               4         9
+ cal.Subscription               cal.Subscriptions               4         8
  cal.Task                       cal.Tasks                       19        33
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     20        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       23        1
@@ -227,13 +227,13 @@ on one of these changes.
 - aids.Categories.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
 - aids.Grantings.detail (viewable for 110, 410, admin) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
 - aids.Grantings.insert (viewable for 110, 410, admin) : client, aid_type, signer, board, decision_date, start_date, end_date
-- aids.GrantingsByClient.insert (viewable for all except anonymous) : aid_type, board, decision_date, start_date, end_date
-- aids.IncomeConfirmations.insert (viewable for all except anonymous) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
-- aids.IncomeConfirmationsByGranting.insert (viewable for all except anonymous) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
-- aids.RefundConfirmations.insert (viewable for all except anonymous) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.RefundConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.SimpleConfirmations.insert (viewable for all except anonymous) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
-- aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, company, contact_person, language, remark
+- aids.GrantingsByClient.insert (viewable for all except anonymous, 210) : aid_type, board, decision_date, start_date, end_date
+- aids.IncomeConfirmations.insert (viewable for all except anonymous, 210) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
+- aids.IncomeConfirmationsByGranting.insert (viewable for all except anonymous, 210) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
+- aids.RefundConfirmations.insert (viewable for all except anonymous, 210) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.RefundConfirmationsByGranting.insert (viewable for all except anonymous, 210) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.SimpleConfirmations.insert (viewable for all except anonymous, 210) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
+- aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous, 210) : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert (viewable for 110, admin) : id, name, name_fr, name_de, name_nl, ref
 - art61.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
 - art61.Contracts.insert (viewable for 100, 110, admin) : client, company, type
@@ -245,7 +245,7 @@ on one of these changes.
 - cal.EventTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, invite_client
 - cal.Events.detail (viewable for 110, 410, admin) : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert (viewable for 110, 410, admin) : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.EventsByClient.insert (viewable for all except anonymous) : event_type, summary, start_date, start_time, end_date, end_time
+- cal.EventsByClient.insert (viewable for all except anonymous, 210) : event_type, summary, start_date, start_time, end_date, end_time
 - cal.GuestRoles.insert (viewable for admin) : id, name, name_fr, name_de, name_nl
 - cal.GuestStates.wf1 (viewable for admin) : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 (viewable for admin) : notify_subject, notify_body, notify_silent
@@ -257,7 +257,7 @@ on one of these changes.
 - cal.Rooms.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
 - cal.Tasks.detail (viewable for 110, 410, admin) : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert (viewable for 110, 410, admin) : summary, user, project
-- cal.TasksByController.insert (viewable for all except anonymous) : summary, start_date, due_date, user, delegated
+- cal.TasksByController.insert (viewable for all except anonymous, 210) : summary, start_date, due_date, user, delegated
 - cbss.IdentifyPersonRequests.detail (viewable for admin) : id, person, user, environment, sent, status, ticket, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, response_xml, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert (viewable for admin) : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail (viewable for admin) : id, person, user, environment, sent, status, ticket, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, response_xml, info_messages, debug_messages
@@ -265,17 +265,17 @@ on one of these changes.
 - cbss.RetrieveTIGroupsRequests.detail (viewable for admin) : id, person, user, environment, sent, status, ticket, national_id, language, history, response_xml, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert (viewable for admin) : person, national_id, language, history
 - changes.Changes.detail (viewable for admin) : time, user, type, master, object, id, diff
-- contacts.Companies.detail (viewable for all except anonymous) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, id, language, activity, is_obsolete, created, modified
-- contacts.Companies.insert (viewable for all except anonymous) : name, language, email, type, id
+- contacts.Companies.detail (viewable for all except anonymous, 210) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.insert (viewable for all except anonymous, 210) : name, language, email, type, id
 - contacts.Companies.merge_row (viewable for admin) : merge_to, reason
-- contacts.Partners.detail (viewable for all except anonymous) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, is_obsolete, created, modified
-- contacts.Partners.insert (viewable for all except anonymous) : name, language, email
-- contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
-- contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
-- contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
+- contacts.Partners.detail (viewable for all except anonymous, 210) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, is_obsolete, created, modified
+- contacts.Partners.insert (viewable for all except anonymous, 210) : name, language, email
+- contacts.Persons.create_household (viewable for all except anonymous, 210) : partner, type, head
+- contacts.Persons.detail (viewable for all except anonymous, 210) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.insert (viewable for all except anonymous, 210) : first_name, last_name, gender, language
 - contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
-- countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
-- countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_fr, name_de, name_nl
+- countries.Countries.detail (viewable for all except anonymous, 210) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
+- countries.Countries.insert (viewable for all except anonymous, 210) : isocode, inscode, name, name_fr, name_de, name_nl
 - countries.Places.insert (viewable for admin) : name, name_fr, name_de, name_nl, country, type, parent, zip_code, id
 - courses.CourseContents.insert (viewable for 110, admin) : id, name
 - courses.CourseOffers.detail (viewable for 100, 110, admin) : id, title, content, provider, guest_role, description
@@ -308,8 +308,8 @@ on one of these changes.
 - finan.Groupers.detail (viewable for all except anonymous) : date, partner, user, workflow_buttons, id, journal, year, number
 - finan.Groupers.insert (viewable for all except anonymous) : date, user, partner
 - finan.PaymentOrders.detail (viewable for all except anonymous) : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number
-- households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
-- households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
+- households.Households.detail (viewable for all except anonymous, 210) : type, prefix, name, id
+- households.HouseholdsByType.detail (viewable for all except anonymous, 210) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl
 - humanlinks.Links.insert (viewable for 110, 410, admin) : parent, child, type
 - immersion.ContractTypes.detail (viewable for 110, admin) : id, name, name_fr, name_de, name_nl, exam_policy
@@ -319,7 +319,7 @@ on one of these changes.
 - immersion.Goals.insert (viewable for 110, admin) : id, name, name_fr, name_de, name_nl
 - integ.ActivityReport.show (viewable for 100, 110, admin) : body
 - isip.ContractEndings.insert (viewable for 110, 410, admin) : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
-- isip.ContractPartners.insert (viewable for all except anonymous) : company, contact_person, contact_role, duties_company
+- isip.ContractPartners.insert (viewable for 110, admin) : company, contact_person, contact_role, duties_company
 - isip.ContractTypes.insert (viewable for 110, 410, admin) : id, ref, exam_policy, needs_study_type, name, name_fr, name_de, name_nl, full_name
 - isip.Contracts.detail (viewable for 100, 110, admin) : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_asd, duties_dsbe, duties_person
 - isip.Contracts.insert (viewable for 100, 110, admin) : client, type
@@ -334,7 +334,7 @@ on one of these changes.
 - jobs.Offers.insert (viewable for 100, 110, admin) : name, provider, sector, function, selection_from, selection_until, start_date, remark
 - jobs.OldJobsOverview.show (viewable for 100, 110, admin) : body
 - jobs.Schedules.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
-- languages.Languages.insert (viewable for all except anonymous) : id, iso2, name, name_fr, name_de, name_nl
+- languages.Languages.insert (viewable for all except anonymous, 210) : id, iso2, name, name_fr, name_de, name_nl
 - ledger.ActivityReport.show (viewable for nobody) : body
 - ledger.Journals.detail (viewable for all except anonymous) : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_de, name_nl, printed_name, printed_name_fr, printed_name_de, printed_name_nl
 - ledger.Journals.insert (viewable for all except anonymous) : ref, name, name_fr, name_de, name_nl, trade_type, voucher_type
@@ -345,8 +345,8 @@ on one of these changes.
 - notes.EventTypes.insert (viewable for admin) : id, name, name_fr, name_de, name_nl, remark
 - notes.NoteTypes.detail (viewable for admin) : id, name, name_fr, name_de, name_nl, build_method, template, special_type, email_template, attach_to_email, remark
 - notes.NoteTypes.insert (viewable for admin) : name, name_fr, name_de, name_nl, build_method
-- notes.Notes.detail (viewable for all except anonymous) : date, time, event_type, type, project, subject, company, contact_person, user, language, build_time, id, body, UploadsByController
-- notes.Notes.insert (viewable for all except anonymous) : event_type, type, subject, project
+- notes.Notes.detail (viewable for all except anonymous, 210) : date, time, event_type, type, project, subject, company, contact_person, user, language, build_time, id, body, UploadsByController
+- notes.Notes.insert (viewable for all except anonymous, 210) : event_type, type, subject, project
 - outbox.Mails.detail (viewable for 110, 410, admin) : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert (viewable for 110, 410, admin) : project, subject, body
 - pcsw.ClientContactTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
@@ -369,7 +369,7 @@ on one of these changes.
 - properties.PropTypes.insert (viewable for admin) : id, name, name_fr, name_de, name_nl, choicelist, default_value
 - reception.BusyVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - reception.GoneVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
-- reception.MyWaitingVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
+- reception.MyWaitingVisitors.detail (viewable for all except anonymous, 210) : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - system.SiteConfigs.detail (viewable for admin) : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail (viewable for admin) : id, name, user, description, text
@@ -378,8 +378,8 @@ on one of these changes.
 - uploads.UploadTypes.insert (viewable for 110, 410, admin) : upload_area, name, name_fr, name_de, name_nl, warn_expiry_unit, warn_expiry_value
 - uploads.Uploads.detail (viewable for 110, 410, admin) : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
 - uploads.Uploads.insert (viewable for 110, 410, admin) : type, file, start_date, end_date, description
-- uploads.UploadsByClient.insert (viewable for all except anonymous) : file, type, end_date, description
-- uploads.UploadsByController.insert (viewable for all except anonymous) : file, type, end_date, description
+- uploads.UploadsByClient.insert (viewable for all except anonymous, 210) : file, type, end_date, description
+- uploads.UploadsByController.insert (viewable for all except anonymous, 210) : file, type, end_date, description
 - users.Users.change_password (viewable for admin) : current, new1, new2
 - users.Users.detail (viewable for admin) : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert (viewable for admin) : username, email, first_name, last_name, partner, language, profile

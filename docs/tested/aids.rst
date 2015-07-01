@@ -7,26 +7,21 @@ Social aids (tested tour)
 This document is a technical tour into the
 :mod:`lino_welfare.modlib.aids` module.
 
-..  This document is part of the test suite.  To test only this
-  document, run::
-
+..  To test only this document:
     $ python setup.py test -s tests.DocsTests.test_aids
 
 .. contents::
    :local:
    :depth: 2
 
-A tested document
-=================
-
-This document is part of the Lino Welfare test suite and has been
-tested using doctest with the following initialization code:
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.eupen.settings.doctests'
 >>> from lino.api.doctest import *
+
 >>> ses = rt.login('rolf')
 >>> translation.activate('de')
 
@@ -137,13 +132,11 @@ Kleiderkammer : 4
 Grantings by ISIP contract
 ==========================
 
-The :meth:`welfare.isip.ContractBase.get_aid_type`
-method (called from the `.odt` document template when printing a 
-:mod:`welfare.isip.Contract` in Eupen)
-works only when 
-:meth:`welfare.isip.ContractBase.get_granting`
-returns exactly one granting.
-Which is the normal situation.
+The :meth:`get_aid_type<welfare.isip.ContractBase.get_aid_type>`
+method of a contract (called from the `.odt` document template when
+printing a :mod:`welfare.isip.Contract` in Eupen) works only when
+:meth:`get_granting <welfare.isip.ContractBase.get_granting>` returns
+exactly one granting.  Which is the normal situation.
 
 The demo fixtures generate some exceptions to this general rule.  Here
 we see that most contracts have indeed exactly 1 granting:
@@ -158,15 +151,45 @@ we see that most contracts have indeed exactly 1 granting:
 >>> print(l)
 [1, 4, 5, 6, 8, 9, 10, 12, 14, 16, 17, 18, 20, 21, 23, 24, 26]
 
+>>> rr = aids.IncomeConfirmationsByGranting.insert_action.action.required_roles
+>>> print rt.login("rolf").get_user().profile.has_required_role(rr)
+True
 
-The following test is rather useless...
+>>> ct = contenttypes.ContentType.objects.get_for_model(aids.Granting)
+>>> mt = ct.pk
+>>> mk = 3
 
->>> client = Client()
+>>> ct = contenttypes.ContentType.objects.get(pk=mt)
+>>> ct.model_class()
+<class 'lino_welfare.modlib.aids.models.Granting'>
+
+
+>>> obj = aids.Granting.objects.get(pk=mk)
+>>> obj
+Granting #3 (u'EiEi/09.08.14/116')
+
+
+>>> rt.show(aids.IncomeConfirmationsByGranting, obj)
+======= ========================= ================ ============ ============= =====
+ ID      Klient                    Kategorie        Betrag       Periode vom   bis
+------- ------------------------- ---------------- ------------ ------------- -----
+ 4       AUSDEMWALD Alfons (116)   Zusammenlebend   456,00       09.08.14
+ **0**                                              **456,00**
+======= ========================= ================ ============ ============= =====
+<BLANKLINE>
+
+We test whether Theresia is allowed to create an income confirmation.
+
+>>> theresia = rt.login('theresia').user
+>>> headers = dict(HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+>>> headers.update(REMOTE_USER='rolf')
 >>> url = "/api/aids/IncomeConfirmationsByGranting"
->>> url += "?su=7&mt=107&mk=3&an=insert"
->>> res = client.get(url, REMOTE_USER='rolf')
+>>> url += "?su={2}&mt={0}&mk={1}&an=insert".format(mt, mk, theresia.pk)
+>>> res = test_client.get(url, **headers)
 >>> print(res.status_code)
 200
+
+
 >>> soup = BeautifulSoup(res.content)
 >>> scripts = soup.head.find_all('script', type="text/javascript")
 

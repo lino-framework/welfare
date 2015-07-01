@@ -2,14 +2,14 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-from lino_welfare.modlib.cbss.roles import CBSSUser
-from lino.modlib.office.roles import OfficeStaff
+from lino.modlib.office.roles import OfficeUser, OfficeStaff
 from lino.modlib.beid.roles import BeIdUser
-from lino.modlib.reception.roles import ReceptionUser
+from lino.modlib.plausibility.roles import PlausibilityUser
+from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff
 
 
-class SocialAgent(ReceptionUser, CBSSUser, BeIdUser):
+class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.

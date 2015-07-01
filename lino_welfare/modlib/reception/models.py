@@ -22,7 +22,7 @@ from lino.api import dd
 
 from lino.core.tables import ButtonsTable
 
-from lino.modlib.reception.roles import ReceptionUser, ReceptionOperator
+from lino.modlib.contacts.roles import ContactsUser
 
 from lino.modlib.reception.models import *
 
@@ -34,7 +34,7 @@ from lino_welfare.modlib.pcsw.models import ClientStates
 # office group.
 # cal = dd.resolve_app('cal')
 # cal.EventsByDay.required_roles.add(OfficeUser)
-# cal.EventsByDay.required_roles = dd.required(ReceptionUser)
+# cal.EventsByDay.required_roles = dd.required(OfficeUser)
 
 # Visitors.required.update(user_groups='coaching reception')
 # WaitingVisitors.required.update(user_groups='coaching reception')
@@ -231,7 +231,7 @@ class Clients(pcsw.Clients):  # see blog 2013/0817
     <lino_welfare.modlib.pcsw.models.Clients>` by the visible columns.
 
     """
-    required_roles = dd.required(ReceptionUser)
+    required_roles = dd.required((ContactsUser, OfficeOperator))
     #~ model = 'pcsw.Client'
     column_names = "name_column address_column national_id workflow_buttons"
     auto_fit_column_widths = True

@@ -29,7 +29,7 @@ from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.addresses.mixins import AddressTypes
 from lino.modlib.boards.mixins import BoardDecision
-from lino.modlib.office.roles import OfficeUser, OfficeStaff
+from lino.modlib.office.roles import OfficeUser, OfficeStaff, OfficeOperator
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 from .mixins import Confirmable, Confirmation
@@ -532,7 +532,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     """
 
     label = _("Issued confirmations")
-    required_roles = dd.required(OfficeUser)
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     master = 'aids.Granting'
     master_key = 'granting'
     column_names = "description_column created user signer printed " \
@@ -677,7 +677,7 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
-    required_roles = dd.required(OfficeUser)
+    required_roles = dd.required((OfficeUser, OfficeOperator))
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed

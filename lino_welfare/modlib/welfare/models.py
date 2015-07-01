@@ -19,7 +19,6 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
-from lino.modlib.contacts import models as contacts
 
 households = dd.resolve_app('households')
 #~ cal = dd.resolve_app('cal')
@@ -184,9 +183,4 @@ def my_details(sender, **kw):
     # nationalities
     countries.PlacesByCountry cv.StudiesByCountry
     """)
-
-
-# customize_siteconfig()
-# customize_contacts()
-# customize_sqlite()
 

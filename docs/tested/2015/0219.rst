@@ -1,8 +1,8 @@
 .. _welfare.tested.20150219:
 
-===========================
-Thursday, February 19, 2015
-===========================
+==========================================
+Inspecting a FormLayout and its JavaScript
+==========================================
 
 
 .. To test only this document, run::
