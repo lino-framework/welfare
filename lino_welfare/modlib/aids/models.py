@@ -56,51 +56,63 @@ class Categories(dd.Table):
 
 
 class AidType(ContactRelated, mixins.BabelNamed):
-    """The type of aid being granted by a granting.
-    Every granting has a mandatory pointer (:attr:`Granting.aid_type`) to this.
-
-    .. attribute:: name
-
-    The multilingual name of this aid type.
-
-    .. attribute:: is_urgent
-
-    Whether aid grantings of this type are considered as urgent.
-    This is used by :meth:`Confirmation.get_urgent_granting`
-
-    .. attribute:: is_integ_duty
+    """The type of aid being granted to a client.  Every granting has a
+    mandatory field :attr:`Granting.aid_type` which points to an
+    :class:`AidType` instance.
 
     .. attribute:: short_name
 
-    The short name for internal use.
-
-    .. attribute:: excerpt_title
-
-    The text to print as title in confirmations.
-
-    .. attribute:: board
-
-    Pointer to the default :class:`lino.modlib.boards.models.Board`
-    for aid projects of this type.
-
-    .. attribute:: excerpt_type
+        The short name for internal use, e.g. when a user must select
+        an aid type from a combobox.
 
     .. attribute:: confirmation_type
 
-    Pointer to :class:`ConfirmationTypes`.
+        The database model to use for issuing an aid confirmation of
+        this type. This is a mandatory pointer to
+        :class:`ConfirmationTypes`.
     
+    .. attribute:: name
+
+        The name of this aid type.
+        One field for every :attr:`language <lino.core.site.Site.language>`.
+
+    .. attribute:: excerpt_title
+
+        The text to print as title in confirmations.
+        One field for every :attr:`language <lino.core.site.Site.language>`.
+
+    .. attribute:: body_template
+
+        The body template to use when printing a confirmation of this type.
+        If this field is empty, Lino uses the excerpt type's
+        :attr:`body_template
+        <lino.modlib.excerpts.models.ExcerptType.body_template>`.
+        See also :doc:`/admin/printing`.
+
+    .. attribute:: is_urgent
+
+        Whether aid grantings of this type are considered as urgent.
+        This is used by :meth:`Confirmation.get_urgent_granting`
+
+    .. attribute:: is_integ_duty
+
+    .. attribute:: board
+
+        Pointer to the default :class:`lino.modlib.boards.models.Board`
+        for aid projects of this type.
+
     .. attribute:: confirmed_by_primary_coach
     
-    Whether grantings for this aid type are to be signed by the
-    client's primary coach (see :meth:`Client.get_primary_coach
-    <lino_welfare.modlib.pcsw.models.Client.get_primary_coach>`).
+        Whether grantings for this aid type are to be signed by the
+        client's primary coach (see :meth:`Client.get_primary_coach
+        <lino_welfare.modlib.pcsw.models.Client.get_primary_coach>`).
 
     .. attribute:: pharmacy_type
 
-    A pointer to the :class:`ClientContactType
-    <lino_welfare.modlib.pcsw.models.ClientContactType>` to be used when
-    selecting the pharmacy of a refund confirmation
-    (:attr:`RefundConfirmation.pharmacy`).
+        A pointer to the :class:`ClientContactType
+        <lino_welfare.modlib.pcsw.models.ClientContactType>` to be used when
+        selecting the pharmacy of a refund confirmation
+        (:attr:`RefundConfirmation.pharmacy`).
 
     """
 
@@ -182,8 +194,8 @@ class AidTypes(dd.Table):
     id short_name confirmation_type
     name
     excerpt_title
-    print_directly is_integ_duty is_urgent confirmed_by_primary_coach \
-    board body_template
+    body_template print_directly is_integ_duty is_urgent \
+    confirmed_by_primary_coach board
     company contact_person contact_role pharmacy_type
     aids.GrantingsByType
     """

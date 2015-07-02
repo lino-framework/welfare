@@ -23,13 +23,17 @@ Content
 .. toctree::
    :maxdepth: 1
 
+   tour/index
+   Administrator's Guide <admin/index>
+   Specs <specs/index>
    status
-   admin/index
-   ref/index
-   releases/index
-   tested/index
-   specs/index
    changes
    api/index
-   tour/index
+
    
+.. toctree::
+   :hidden:
+
+   releases/index
+   ref/index
+   tested/index

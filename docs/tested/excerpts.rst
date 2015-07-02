@@ -33,7 +33,8 @@ lino_welfare.projects.eupen.settings.doctests
 Configuring excerpts
 ====================
 
-This is the list of excerpt types:
+See also :doc:`/admin/printing`.
+Here is a more complete list of excerpt types:
 
 >>> rt.show(excerpts.ExcerptTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -84,7 +85,7 @@ Here is the list of all demo excerpts.
 
 
 As for the default language of an excerpt: the recipient overrides the
-owner.  
+owner.
 
 The above list no longer shows well how the language of an excerpt
 depends on the recipient and the client.  That would need some more

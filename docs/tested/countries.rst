@@ -5,41 +5,59 @@ Countries
 =============
 
 .. How to test only this document:
-
-  $ python setup.py test -s tests.DocsTests.test_countries
+   $ python setup.py test -s tests.DocsTests.test_countries
 
 
 .. contents::
    :local:
    :depth: 2
 
-About this document
-===================
-
-This documents uses the :mod:`lino_welfare.projects.eupen` test
-database:
+.. include:: /include/tested.rst
 
 >>> from __future__ import print_function
 >>> import os
 >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
 ...    'lino_welfare.projects.eupen.settings.doctests'
 >>> from lino.api.doctest import *
+>>> from django.db.models import Q
 
+Refugee statuses and former country
+===================================
 
+The demo database comes with 270 known countries, but some of them are
+not real countries because actually represent for example a *refugee
+status* or a *former country*.
+
+Lino knows them because their :attr:`actual_country
+<lino.modlib.statbel.countries.models.Country.actual_country>` field
+points to another (the "real") country.
 
 >>> countries.Country.objects.all().count()
 270
-
 >>> countries.Country.objects.filter(actual_country__isnull=True).count()
 266
+>>> rt.show(countries.Countries,
+...     filter=Q(actual_country__isnull=False),
+...     column_names="isocode name inscode actual_country actual_country__isocode")
+========== ============================================ ========== ====================== ==========
+ ISO-Code   Bezeichnung                                  INS code   Actual country         ISO-Code
+---------- -------------------------------------------- ---------- ---------------------- ----------
+ BYAA       Byelorussian SSR Soviet Socialist Republic              Belarus                BY
+ DDDE       German Democratic Republic                   170        Deutschland            DE
+ DEDE       German Federal Republic                      103        Deutschland            DE
+ SUHH       USSR, Union of Soviet Socialist Republics               Russische Föderation   RU
+========== ============================================ ========== ====================== ==========
+<BLANKLINE>
 
->>> qs = countries.Country.objects.filter(actual_country__isnull=False)
->>> for obj in qs:
-...     print obj.pk, obj.name, obj.inscode, obj.actual_country.name
-BYAA Byelorussian SSR Soviet Socialist Republic  Belarus
-DEDE German Federal Republic 103 Deutschland
-DDDE German Democratic Republic 170 Deutschland
-SUHH USSR, Union of Soviet Socialist Republics  Russische Föderation
+
+The following database fields refer to a country:
+
+.. py2rst::
+
+   from lino.api import rt
+   tpl = "- :class:`{1} <{0}.{1}>`  :attr:`{2} <{0}.{1}.{2}>`"
+   for m, f in rt.modules.countries.Country._lino_ddh.fklist:
+       print(tpl.format(m.__module__, m.__name__, f.name))
 
 >>> for m, f in rt.modules.countries.Country._lino_ddh.fklist:
 ...     print dd.full_model_name(m), f.name

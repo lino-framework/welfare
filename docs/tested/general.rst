@@ -1,8 +1,8 @@
 .. _welfare.tested.general:
 
-==================================
-Lino Welfare General (tested tour)
-==================================
+================================
+General overview of Lino Welfare
+================================
 
 .. How to test only this document:
 
@@ -12,9 +12,6 @@ Lino Welfare General (tested tour)
    :local:
    :depth: 2
 
-A tested document
-=================
-
 .. include:: /include/tested.rst
 
 >>> from __future__ import print_function
@@ -23,12 +20,18 @@ A tested document
 ...    'lino_welfare.projects.std.settings.doctests'
 >>> from lino.api.doctest import *
 
-The test database
-=================
+Database structure
+==================
 
-Test whether :meth:`get_db_overview_rst
-<lino.core.site.Site.get_db_overview_rst>` returns the expected
-result:
+Lino Welfare consists of many *modules* (called **plugins** or
+"apps"), each of which defines a series of *database tables* (called
+**models**).  Each model defines a number of **fields**.
+
+For each database model, Lino defines at least one **table** which it
+calls "default table".
+
+The following table gives an overview of these things.
+
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
@@ -106,7 +109,7 @@ result:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.ExcerptsByX            12        13
+ excerpts.Excerpt               excerpts.Excerpts               12        13
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    10        0
@@ -195,18 +198,14 @@ List of window layouts
 ======================
 
 
-The :class:`lino.modlib.about.models.WindowActions` table lists
-information about all data entry form definitions (detail layouts,
-insert layouts and action parameter layouts).
+The following table lists information about all *data entry form
+definitions* (called **window layouts**) used by Lino Welfare.
 
-..
-   Lino Welfare contains 174 layouts:
+Each window layout is **viewable** by a given set of user profiles.
 
-   >> about.WindowActions.request().get_total_count()
-   174
+Each window layout defines a given set of fields.
 
-The primary purpose of the following is to get a warning when anything
-on one of these changes.
+There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> from lino.utils.diag import window_actions
@@ -387,7 +386,6 @@ on one of these changes.
 - vatless.Invoices.insert (viewable for all except anonymous) : journal, project, partner, date, amount
 - vatless.InvoicesByJournal.insert (viewable for all except anonymous) : project, partner, date, amount
 <BLANKLINE>
-
 
 
 Permissions

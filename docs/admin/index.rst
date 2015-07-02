@@ -1,9 +1,12 @@
-===========================
-Site Administrator's manual
-===========================
+.. _welfare.admin:
+
+======================================
+Lino Welfare Site Administator's Guide
+======================================
 
 .. toctree::
    :maxdepth: 1
 
    install
    testlauf
+   printing
