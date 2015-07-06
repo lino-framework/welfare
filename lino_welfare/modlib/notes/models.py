@@ -18,7 +18,14 @@ from lino.modlib.notes.models import *
 
 
 class Note(Note):
+    """Overrides the library model, giving an alternative verbose name and
+    adding the :attr:`person` property.
 
+    .. attribute:: person
+
+        An alias to :attr:`lino.modlib.notes.models.Note.project`.
+
+    """
     class Meta:
         verbose_name = _("Event/Note")
         verbose_name_plural = _("Events/Notes")

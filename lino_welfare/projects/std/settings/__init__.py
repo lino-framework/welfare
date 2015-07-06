@@ -159,7 +159,6 @@ class Site(Site):
         yield 'lino.modlib.beid'
         yield 'lino.modlib.davlink'
 
-        yield 'lino.modlib.appypod'
         yield 'lino.modlib.export_excel'
         yield 'lino_welfare.modlib.dupable_clients'
         yield 'lino.modlib.plausibility'

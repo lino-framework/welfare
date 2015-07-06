@@ -5,25 +5,24 @@ Integration Service
 ===================
 
 .. How to test only this document:
-   $ python setup.py test -s tests.DocsTests.test_integ
+    $ python setup.py test -s tests.DocsTests.test_integ
+    
+    Doctest initialization:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+
+    >>> ses = rt.login('robin')
+    >>> translation.activate('en')
 
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 See also :doc:`/tour/autoevents`.
 
 .. contents::
    :local:
-
-.. include:: /include/tested.rst
-
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
-
->>> ses = rt.login('robin')
->>> translation.activate('en')
 
 
 Configuration
@@ -154,4 +153,148 @@ and passed when it was fixed:
 {u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
 
 
+Activity report
+===============
 
+>>> ses.show(integ.ActivityReport)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+------------
+Introduction
+------------
+Ceci est un **rapport**,
+càd un document complet généré par Lino, contenant des
+sections, des tables et du texte libre.
+Dans la version écran cliquer sur un chiffre pour voir d'où
+il vient.
+--------------------
+Indicateurs généraux
+--------------------
+<BLANKLINE>
+No data to display
+<BLANKLINE>
+.
+<BLANKLINE>
+No data to display
+<BLANKLINE>
+--------------------------------
+Causes d'arrêt des interventions
+--------------------------------
+============================ ========= ======== ========== ======== ======== ========= ========= ======== ====== ======= ========== =======
+ Description                  nicolas   alicia   caroline   hubert   judith   kerstin   melanie   romain   rolf   robin   theresia   Total
+---------------------------- --------- -------- ---------- -------- -------- --------- --------- -------- ------ ------- ---------- -------
+ Transfer to colleague
+ End of right on social aid
+ Moved to another town
+ Found a job
+============================ ========= ======== ========== ======== ======== ========= ========= ======== ====== ======= ========== =======
+<BLANKLINE>
+=====
+ISIPs
+=====
+----------------------
+PIIS par agent et type
+----------------------
+================= ================ ================== =========== ===================== ================ =======
+ Description       VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
+----------------- ---------------- ------------------ ----------- --------------------- ---------------- -------
+ Alicia Allmanns
+ Caroline Carnol
+ Hubert Huppertz
+ Judith Jousten
+ Kerstin Kerres
+ Mélanie Mélard
+ nicolas
+ Robin Rood
+ Rolf Rompen
+ Romain Raffault
+ Theresia Thelen
+================= ================ ================== =========== ===================== ================ =======
+<BLANKLINE>
+----------------------------------
+Organisations externes et contrats
+----------------------------------
+Nombre de PIIS actifs par 
+    organisation externe et type de contrat.
+======================== ================ ================== =========== ===================== ================ =======
+ Organisation             VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
+------------------------ ---------------- ------------------ ----------- --------------------- ---------------- -------
+ Belgisches Rotes Kreuz
+ Bäckerei Ausdemwald
+ Bäckerei Mießen
+ Bäckerei Schmitz
+ Rumma & Ko OÜ
+======================== ================ ================== =========== ===================== ================ =======
+<BLANKLINE>
+------------------------
+Contract endings by type
+------------------------
+=============== ================ ================== =========== ===================== ================ =======
+ Description     VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
+--------------- ---------------- ------------------ ----------- --------------------- ---------------- -------
+ Alcohol
+ Force majeure
+ Health
+ Normal
+=============== ================ ================== =========== ===================== ================ =======
+<BLANKLINE>
+--------------------------
+PIIS et types de formation
+--------------------------
+Nombre de PIIS actifs par 
+    type de formation et type de contrat.
+================ ================ ===================== =======
+ Education Type   VSE Ausbildung   VSE Vollzeitstudium   Total
+---------------- ---------------- --------------------- -------
+ Apprenticeship
+ Highschool
+ School
+ Special school
+ Training
+ University
+================ ================ ===================== =======
+<BLANKLINE>
+=======================
+Art60§7 job supplyments
+=======================
+-------------------------
+Art60§7 par agent et type
+-------------------------
+================= ================ ============================ ======================= ============================ ====== =======
+ Description       social economy   social economy - increased   social economy school   social economy with refund   town   Total
+----------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
+ Alicia Allmanns
+ Caroline Carnol
+ Hubert Huppertz
+ Judith Jousten
+ Kerstin Kerres
+ Mélanie Mélard
+ nicolas
+ Robin Rood
+ Rolf Rompen
+ Romain Raffault
+ Theresia Thelen
+================= ================ ============================ ======================= ============================ ====== =======
+<BLANKLINE>
+--------------------------
+Job providers and contrats
+--------------------------
+================================ ================ ============================ ======================= ============================ ====== =======
+ Organisation                     social economy   social economy - increased   social economy school   social economy with refund   town   Total
+-------------------------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
+ BISA
+ R-Cycle Sperrgutsortierzentrum
+ Pro Aktiv V.o.G.
+================================ ================ ============================ ======================= ============================ ====== =======
+<BLANKLINE>
+------------------------
+Contract endings by type
+------------------------
+=============== ================ ============================ ======================= ============================ ====== =======
+ Description     social economy   social economy - increased   social economy school   social economy with refund   town   Total
+--------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
+ Alcohol
+ Force majeure
+ Health
+ Normal
+=============== ================ ============================ ======================= ============================ ====== =======
+<BLANKLINE>

@@ -26,10 +26,10 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` plugin.
 >>> ClientEvents = pcsw.ClientEvents
 >>> ses = rt.login("hubert")
 
-Default lists of clients
-========================
+Default lists of coached clients
+================================
 
->>> ses.show(pcsw.Clients, column_names="name_column")
+>>> ses.show(pcsw.CoachedClients, column_names="name_column")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =============================
  Name
@@ -240,7 +240,7 @@ Filtering clients about their notes
 Coached clients who have at least one note:
 
 >>> pv = dict(observed_event=ClientEvents.note)
->>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+>>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ============================
  Name
@@ -255,7 +255,7 @@ Coached clients who have at least one note:
 All clients who have at least one note:
 
 >>> pv = dict(client_state=None, observed_event=ClientEvents.note)
->>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+>>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =========================================
  Name
@@ -275,14 +275,14 @@ All clients who have at least one note:
 Coached clients who have at least one note dated 2013-07-25 or later:
 
 >>> pv = dict(start_date=i2d(20130725), observed_event=ClientEvents.note)
->>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+>>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 <BLANKLINE>
 No data to display
 <BLANKLINE>
 
 .. show the SQL when debugging:
-    >>> # ar = ses.spawn(pcsw.Clients, param_values=pv)
+    >>> # ar = ses.spawn(pcsw.CoachedClients, param_values=pv)
     >>> # print(ar.data_iterator.query)
     >>> # ses.show(ar, column_names="name_column")
 
@@ -290,7 +290,7 @@ All clients who have at least one note dated 2013-07-25 or later:
 
 >>> pv = dict(start_date=i2d(20130725), observed_event=ClientEvents.note)
 >>> pv.update(client_state=None)
->>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+>>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =========================================
  Name
@@ -308,7 +308,7 @@ All clients who were learning between 2011-03-11 and 2012-03-11 (at least):
 
 >>> pv = dict(start_date=i2d(20110311), end_date=i2d(20120311), observed_event=ClientEvents.learning)
 >>> pv.update(client_state=None)
->>> ses.show(pcsw.Clients, column_names="name_column", param_values=pv)
+>>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==========================
  Name

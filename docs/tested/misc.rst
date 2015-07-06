@@ -113,7 +113,7 @@ Yet another series of GET requests
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 101, **kw)
->>> demo_get('rolf', 'api/pcsw/Clients', json_fields, 30, **kw)
+>>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
 >>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
 >>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)

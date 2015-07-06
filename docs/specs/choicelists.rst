@@ -5,6 +5,14 @@ Choicelists in Lino Welfare
 .. How to test only this document:
   $ python setup.py test -s tests.SpecsTests.test_choicelists
 
+    doctest initializations:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+    
 This document is an overview on the choicelists used in Lino Welfare.
 
 Choicelists are "hard-coded" tables. They are not stored in the
@@ -14,17 +22,6 @@ database but in the source code or the local configuration.
    :depth: 2
    :local:
 
-A tested document
-=================
-
-This document is being tested using doctest with the following
-initializations:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
 
 Overview
 ========
@@ -85,7 +82,6 @@ name to read the documentation):
     ledger.TradeTypes : TradeTypes
     ledger.VoucherStates : States
     ledger.VoucherTypes : VoucherTypes
-    lino.BuildMethods : BuildMethods
     lino.ChangeTypes : Change Types
     notes.SpecialTypes : Special note types
     outbox.RecipientTypes : RecipientTypes
@@ -97,6 +93,7 @@ name to read the documentation):
     plausibility.Checkers : Plausibility checkers
     polls.PollStates : Poll States
     polls.ResponseStates : Response States
+    printing.BuildMethods : BuildMethods
     properties.DoYouLike : DoYouLike
     properties.HowWell : HowWell
     sepa.AccountTypes : Account types

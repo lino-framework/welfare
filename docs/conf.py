@@ -19,6 +19,13 @@ extensions = []
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
+# Building the docs for Lino Welfare requires a development version of
+# Lino because we often use :rst:role:`ref` for refering to general
+# Lino docs.
+
+from atelier.sphinxconf import interproject
+interproject.configure(globals())
+
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
 
@@ -132,7 +139,7 @@ html_title = "Lino Welfare"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['.static']
+html_static_path = ['.static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -249,3 +256,4 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 # http://sphinx.pocoo.org/theming.html
 # html_theme = "classic"
 # html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
+

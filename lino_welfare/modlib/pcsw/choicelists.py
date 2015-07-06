@@ -88,6 +88,9 @@ add('3', _("Waiting for registry"))    # Warteregister
 
 
 class ClientEvents(dd.ChoiceList):
+    """A choicelist of observable client events.
+
+    """
     verbose_name = _("Observed event")
     verbose_name_plural = _("Observed events")
     max_length = 50
@@ -113,6 +116,40 @@ class ClientHasCoaching(ObservedEvent):
         return qs
 
 ClientEvents.add_item_instance(ClientHasCoaching("active"))
+
+
+class ClientCreated(ObservedEvent):
+    """The choice for :class:`ClientEvents` which
+    selects clients whose record has been *created* during the observed
+    period.
+    """
+    text = _("Created")
+
+    def add_filter(self, qs, pv):
+        if pv.start_date:
+            qs = qs.filter(created__gte=pv.start_date)
+        if pv.end_date:
+            qs = qs.filter(created__lte=pv.end_date)
+        return qs
+
+ClientEvents.add_item_instance(ClientCreated("created"))
+
+
+class ClientModified(ObservedEvent):
+    """The choice for :class:`ClientEvents` which selects clients whose
+    main record has been *modified* during the observed period.
+
+    """
+    text = _("Modified")
+
+    def add_filter(self, qs, pv):
+        if pv.start_date:
+            qs = qs.filter(modified__gte=pv.start_date)
+        if pv.end_date:
+            qs = qs.filter(modified__lte=pv.end_date)
+        return qs
+
+ClientEvents.add_item_instance(ClientModified("modified"))
 
 
 class ClientHasDispense(ObservedEvent):

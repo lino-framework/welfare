@@ -19,8 +19,9 @@ class Plugin(Plugin):
         m = main.add_menu(self.app_label, self.verbose_name)
         m.add_action('contacts.Persons')
         m.add_action(
-            'pcsw.Clients',
-            label=string_concat(u' \u25b6 ', site.modules.pcsw.Clients.label))
+            'pcsw.CoachedClients',
+            label=string_concat(
+                u' \u25b6 ', site.modules.pcsw.CoachedClients.label))
         m.add_action('contacts.Companies')
         m.add_separator('-')
         m.add_action('contacts.Partners', label=_("Partners (all)"))

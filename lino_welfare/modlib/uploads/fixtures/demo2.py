@@ -25,7 +25,7 @@ def objects():
 
     # create some random uploads, all uploaded by hubert
     hubert = rt.login('hubert')
-    CLIENTS = Cycler(rt.modules.pcsw.Clients.request(user=hubert))
+    CLIENTS = Cycler(rt.modules.pcsw.CoachedClients.request(user=hubert))
     UPLOAD_TYPES = Cycler(UploadType.objects.all())
     for i in range(3):
         cli = CLIENTS.pop()

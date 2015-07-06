@@ -40,8 +40,6 @@ class TestCase(TestCase):
         # ContentType = rt.modules.contenttypes.ContentType
         BrokenGFKs = rt.modules.contenttypes.BrokenGFKs
 
-        ar = BrokenGFKs.request()
-    
         def create_related_objects():
             cli = Client(first_name="John", last_name="Doe")
             cli.save()
@@ -55,7 +53,8 @@ class TestCase(TestCase):
         Note.objects.all().delete()
         cli.delete()
         self.assertEqual(Note.objects.all().count(), 0)
-        rst = BrokenGFKs.to_rst(ar)
+        ar = BrokenGFKs.request()
+        rst = ar.table2rst()
         self.assertEqual(rst, "\nKeine Daten anzuzeigen\n")
 
         cli = create_related_objects()
@@ -69,5 +68,5 @@ class TestCase(TestCase):
         models.Model.delete(cli)
         self.assertEqual(Note.objects.all().count(), 0)
     
-        rst = BrokenGFKs.to_rst(ar)
+        rst = ar.table2rst()
         self.assertEqual(rst, "\nKeine Daten anzuzeigen\n")

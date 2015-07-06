@@ -119,7 +119,6 @@ Hubert is an Integration agent.
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
 
@@ -198,8 +197,6 @@ Schuldenberater
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
-- Explorer :
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
 - Site : Info
 
 
@@ -228,8 +225,6 @@ Berater Erstempfang
   - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
-- Explorer :
-  - ÖSHZ : Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
 - Site : Info
 
 
@@ -244,12 +239,14 @@ Theresia is a reception clerk.
 >>> print(p)
 Empfangsschalter
 >>> p.role.__class__
-<class 'lino.modlib.office.roles.OfficeOperator'>
+<class 'lino_welfare.projects.std.roles.ReceptionClerk'>
 
 
 >>> with translation.override('de'):
 ...     rt.login('theresia') .show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+- Kontakte : Personen, Organisationen, -, Partner (alle), Haushalte
+- Büro : Meine Auszüge
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 

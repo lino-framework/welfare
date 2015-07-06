@@ -5,30 +5,26 @@ General PCSW
 ============
 
 ..
-  This document is part of the test suite.
   To test only this document, run::
 
     $ python setup.py test -s tests.DocsTests.test_pcsw
 
-A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
+  doctest init:
 
-.. include:: /include/tested.rst
-
-.. contents:: Contents
-   :local:
-   :depth: 2
-
-
-..
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from lino.api.doctest import *
 
+A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 
->>> ses = rt.login('robin')
->>> translation.activate('en')
+.. contents:: Contents
+   :local:
+   :depth: 2
+
+
+
 
 
 
@@ -75,6 +71,7 @@ Muss eID-Karte einlesen!
 Coaching types
 --------------
 
+>>> ses = rt.login('robin')
 >>> with translation.override('de'):
 ...    ses.show(pcsw.CoachingTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -94,7 +91,7 @@ Creating a new client
 =====================
 
 
->>> url = '/api/pcsw/Clients/-99999?an=insert&fmt=json'
+>>> url = '/api/pcsw/CoachedClients/-99999?an=insert&fmt=json'
 >>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> res.status_code
 200

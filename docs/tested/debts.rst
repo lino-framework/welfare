@@ -5,38 +5,35 @@ Debts mediation
 ===============
 
 .. How to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_debts
+    $ python setup.py test -s tests.DocsTests.test_debts
+    
+    Doctest initialization:
 
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+
+    >>> ses = rt.login('rolf')
+    >>> translation.activate('de')
+    
+The :mod:`lino_welfare.modlib.debts` modules adds functionality for
+managing "budgets".     
     
 .. contents::
    :local:
    :depth: 1
 
-A tested document
-=================
-
-.. include:: /include/tested.rst
-
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
-
->>> ses = rt.login('rolf')
->>> translation.activate('de')
 
 
 Budgets
 =======
     
-The :mod:`lino_welfare.modlib.debts` modules adds functionality for
-managing "budgets". A :class:`Budget
+A :class:`Budget
 <lino_welfare.modlib.debts.modles.Budget>` is a document based on
 financial data about a person or household.  It is just about entering
 this data and then printing it.
-
 
 The demo database has 14 such documents with fictive generated data:
 
@@ -48,6 +45,7 @@ For the following examples we will use budget no. 3:
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
 Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen')
+
 
 Actors
 ======
@@ -362,19 +360,26 @@ The stories
 
 Here is now (almost) the whole content of a printed budget.
 
-The following code is a bit hackerish because we don't yet have a
-`story2rst` method. 
+>>> obj = debts.Budget.objects.get(pk=4)
+
+>> def story2rst(story):
+..     for i in ses.story2html(story):
+..         if E.iselement(i):
+..             print(html2rst(i))
+
 
 >>> from lino.utils.xmlgen.html import html2rst
 >>> obj = debts.Budget.objects.get(pk=4)
 >>> def story2rst(story):
-...     for i in ses.story2html(story):
-...         if E.iselement(i):
-...             print(html2rst(i))
+...     for ln in ses.story2rst(story):
+...             print(ln)
+
 
 >>> story2rst(obj.data_story(ses))
 ... #doctest: +REPORT_UDIFF
+~~~~~~~~~~~~~~~
 Monthly incomes
+~~~~~~~~~~~~~~~
 ==================== ========= ======== ===== ============== ==============
  Description          Remarks   Common   Mr.   Mrs.           Total
 -------------------- --------- -------- ----- -------------- --------------
@@ -388,7 +393,9 @@ Monthly incomes
  **Total (7 rows)**                            **4 600,00**   **4 600,00**
 ==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
+~~~~~~~~~~~~~~~~
 Monthly expenses
+~~~~~~~~~~~~~~~~
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
@@ -418,7 +425,9 @@ Monthly expenses
  **Total (23 rows)**                       **6 516,00**    **543,00**                **543,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
+~~~~~~~~~~~~~~
 Yearly incomes
+~~~~~~~~~~~~~~
 ================================= ======== ===== ============ ============
  Description                       Common   Mr.   Mrs.         Total
 --------------------------------- -------- ----- ------------ ------------
@@ -428,7 +437,9 @@ Yearly incomes
  **Total (3 rows)**                               **300,00**   **300,00**
 ================================= ======== ===== ============ ============
 <BLANKLINE>
+~~~~~
 Taxes
+~~~~~
 ===================== ========= =============== =========== ===== ====== ===========
  Description           Remarks   Yearly amount   Common      Mr.   Mrs.   Total
 --------------------- --------- --------------- ----------- ----- ------ -----------
@@ -441,7 +452,9 @@ Taxes
  **Total (6 rows)**              **181,00**      **15,08**                **15,08**
 ===================== ========= =============== =========== ===== ====== ===========
 <BLANKLINE>
+~~~~~~~~~~
 Insurances
+~~~~~~~~~~
 ===================== ========= =============== ========== ===== ====== ==========
  Description           Remarks   Yearly amount   Common     Mr.   Mrs.   Total
 --------------------- --------- --------------- ---------- ----- ------ ----------
@@ -453,7 +466,9 @@ Insurances
  **Total (5 rows)**              **76,00**       **6,33**                **6,33**
 ===================== ========= =============== ========== ===== ====== ==========
 <BLANKLINE>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Debts, outsanding payments and credits
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ===================== ========= ============== ============ ===== ====== ============
  Partner               Remarks   Monthly rate   Common       Mr.   Mrs.   Total
 --------------------- --------- -------------- ------------ ----- ------ ------------
@@ -461,7 +476,9 @@ Debts, outsanding payments and credits
  **Total (1 rows)**                             **900,00**                **900,00**
 ===================== ========= ============== ============ ===== ====== ============
 <BLANKLINE>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Bailiffs and cash collectors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ======================== =============================== ========= ============== ======== ============== ============== ==============
  Debt collection agency   Partner                         Remarks   Monthly rate   Common   Mr.            Mrs.           Total
 ------------------------ ------------------------------- --------- -------------- -------- -------------- -------------- --------------
@@ -473,7 +490,10 @@ Bailiffs and cash collectors
 
 
 >>> story2rst(obj.summary_story(ses))
+... #doctest: +REPORT_UDIFF
+------------------
 Incomes & Expenses
+------------------
 ========================================================= ==============
  Description                                               Amount
 --------------------------------------------------------- --------------
@@ -483,7 +503,9 @@ Incomes & Expenses
  **Restbetrag für Kredite und Zahlungsrückstände**         **4 035,58**
 ========================================================= ==============
 <BLANKLINE>
+-----------
 Liabilities
+-----------
 ================================= ==============
  Description                       Amount
 --------------------------------- --------------
@@ -493,7 +515,9 @@ Liabilities
  **Liabilities**                   **3 600,00**
 ================================= ==============
 <BLANKLINE>
+------------------
 Debts distribution
+------------------
 =============================== ================= ============== ============ ===========================
  Creditor                        Description       Debt           %            Monthly payback suggested
 ------------------------------- ----------------- -------------- ------------ ---------------------------

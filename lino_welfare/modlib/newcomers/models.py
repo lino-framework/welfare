@@ -199,9 +199,9 @@ def faculty_weight(user, client):
     return w
 
 
-class NewClients(pcsw.Clients):
-    """A variant of :class:`pcsw.Clients
-    <lino_welfare.modlib.pcsw.models.Clients>` designed for newcomers
+class NewClients(pcsw.CoachedClients):
+    """A variant of :class:`pcsw.CoachedClients
+    <lino_welfare.modlib.pcsw.models.CoachedClients>` designed for newcomers
     consultants.
 
     """
@@ -222,7 +222,7 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
             _("New clients since"),
             blank=True, null=True,
             help_text="Auch Klienten, die erst seit Kurzem begleitet sind."),
-        **pcsw.Clients.parameters)
+        **pcsw.CoachedClients.parameters)
 
     params_layout = 'client_state new_since also_obsolete coached_by'
 

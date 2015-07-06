@@ -1,9 +1,21 @@
+.. _welfare.admin.printing:
+
 ===========================
 Configuring print templates
 ===========================
 
 .. How to test only this document:
-   $ python setup.py test -s tests.AdminTests.test_printing
+
+     $ python setup.py test -s tests.AdminTests.test_printing
+
+   Initialize doctest:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+    
 
 This document explains everything you need to know about how to
 configure print templates in Lino Welfare.
@@ -11,38 +23,49 @@ configure print templates in Lino Welfare.
 .. contents::
    :local:
 
-.. Initialize
-
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
-    >>> from lino.api.doctest import *
-
-Excerpt-based versus direct printing
-====================================
+Which database objects are printable?
+=====================================
 
 While most database models in Lino Welfare are being printed using
-excerpts (see :ref:`lino.admin.excerpts`), some models still use the
-more primitive direct printing method (:ref:`lino.admin.printable`).
-Here is a list of these models:
+excerpts (see `Excerpt types`_ below), some models still use the more
+primitive direct printing method (see :ref:`lino.admin.printable`):
 
->>> from lino.mixins.printable import Printable
->>> for m in rt.models_by_base(Printable):
-...     if m is not rt.modules.excerpts.Excerpt:
-...         print dd.full_model_name(m)
-cbss.IdentifyPersonRequest
-cbss.ManageAccessRequest
-cbss.RetrieveTIGroupsRequest
-outbox.Mail
-notes.Note
-cal.Event
+- :class:`notes.Note <lino_welfare.modlib.notes.models.Note>`,
+  :class:`cal.Event<lino_welfare.modlib.cal.models.Event>` and
+  :class:`outbox.Mail <lino.modlib.outbox.models.Mail>`.
+
+- :class:`IdentifyPersonRequest
+  <lino_welfare.modlib.cbss.models.IdentifyPersonRequest>`,
+  :class:`ManageAccessRequest
+  <lino_welfare.modlib.cbss.models.ManageAccessRequest>` and
+  :class:`RetrieveTIGroupsRequest
+  <lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest>` of the
+  :mod:`lino_welfare.modlib.cbss` plugin.
+
+- and of course :class:`excerpts.Excerpt
+  <lino.modlib.excerpts.models.Excerpt>` itself
+
+.. Here is a list of these models:
+
+    >>> from lino.mixins import Printable
+    >>> for m in rt.models_by_base(Printable):
+    ...     print m
+    <class 'lino.modlib.excerpts.models.Excerpt'>
+    <class 'lino_welfare.modlib.cbss.models.IdentifyPersonRequest'>
+    <class 'lino_welfare.modlib.cbss.models.ManageAccessRequest'>
+    <class 'lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest'>
+    <class 'lino.modlib.outbox.models.Mail'>
+    <class 'lino_welfare.modlib.notes.models.Note'>
+    <class 'lino_welfare.modlib.cal.models.Event'>
+
+A logical consequence is that printing an object of one of above
+models will *not* appear in the history of excerpts.
 
 We did not yet test what happens if you define an excerpt type for one
 of the above models.
 
-A logical consequence is that printing an object of one of above
-models will *not* appear in any history of excerpts.
+For configuring the printing of these models, see
+:ref:`lino.admin.printable`.
 
 
 Main templates
@@ -60,6 +83,9 @@ designing the template itself.
 
 Excerpt types
 =============  
+
+See :ref:`lino.admin.excerpts` for a general introduction to
+excerpt-based printing.
 
 This is the list of excerpt types:
 

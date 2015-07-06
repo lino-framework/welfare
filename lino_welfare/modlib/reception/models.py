@@ -223,12 +223,12 @@ class CreateNote(dd.Action):
 #~ class Clients(dd.Table):
 
 
-class Clients(pcsw.Clients):  # see blog 2013/0817
+class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     """The list that opens by :menuselection:`Reception --> Clients`.
 
     Visible to user profiles in group "reception".
-    It differs from :class:`pcsw.Clients
-    <lino_welfare.modlib.pcsw.models.Clients>` by the visible columns.
+    It differs from :class:`pcsw.CoachedClients
+    <lino_welfare.modlib.pcsw.models.CoachedClients>` by the visible columns.
 
     """
     required_roles = dd.required((ContactsUser, OfficeOperator))
@@ -325,7 +325,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
            # or user.newcomer_quota > 0:
             apv = dict(user=user)
             if False:  # apv are ignored, and it's ugly
-                ba = pcsw.Clients.get_action_by_name('create_visit')
+                ba = pcsw.CoachedClients.get_action_by_name('create_visit')
                 sar = ba.request(action_param_values=apv)
                 sar.setup_from(ar)
                 btn = sar.row_action_button_ar(client, _("Visit"))

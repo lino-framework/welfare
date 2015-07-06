@@ -628,7 +628,6 @@ simple aid during a given period.
 
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
-    required_roles = dd.required(OfficeUser)
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -640,6 +639,7 @@ class SimpleConfirmations(Confirmations):
 
 
 class SimpleConfirmationsByGranting(SimpleConfirmations):
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     start_date end_date
@@ -689,7 +689,6 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
-    required_roles = dd.required((OfficeUser, OfficeOperator))
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
@@ -705,6 +704,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
     :class:`IncomeConfirmation` as `confirmation_type`.
 
     """
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
 
     insert_layout = dd.FormLayout("""
@@ -865,7 +865,6 @@ class RefundConfirmation(Confirmation):
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
-    required_roles = dd.required(OfficeUser)
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -877,6 +876,7 @@ class RefundConfirmations(Confirmations):
 
 
 class RefundConfirmationsByGranting(RefundConfirmations):
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     # client granting:25

@@ -33,7 +33,7 @@ Phonetic words
 
 See :class:`lino.mixins.dupable.PhoneticWordBase`.
 
->>> rt.show(pcsw.Clients, column_names="id name dupable_words")
+>>> rt.show(pcsw.CoachedClients, column_names="id name dupable_words")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===== ======================= ======================
  ID    Name                    dupable_words

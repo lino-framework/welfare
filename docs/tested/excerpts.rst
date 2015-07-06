@@ -64,22 +64,22 @@ Demo excerpts
 Here is the list of all demo excerpts. 
 
 >>> rt.show(excerpts.Excerpts, language="en", column_names="id excerpt_type owner project company language")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==== ======================== ================================================ ========================= ========================== ==========
  ID   Excerpt Type             Controlled by                                    Client                    Recipient (Organization)   Language
 ---- ------------------------ ------------------------------------------------ ------------------------- -------------------------- ----------
- 1    Simple confirmation      *Clothes bank/5/22/14/238/19*                    FRISCH Paul (238)         Belgisches Rotes Kreuz     de
- 2    Income confirmation      *EiEi/9/29/12/116/1*                             AUSDEMWALD Alfons (116)                              de
- 3    Refund confirmation      *AMK/5/27/14/139/1*                              JONAS Josef (139)                                    fr
- 4    Finanzielle Situation    *Budget 1 for Gerkens-Kasennova*
- 5    Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*         EMONTS Daniel (128)
- 6    Art60§7 job supplyment   *Art60§7 job supplyment#1 (Charlotte COLLARD)*   COLLARD Charlotte (118)   BISA                       fr
- 7    ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                     AUSDEMWALD Alfons (116)
- 8    Presence certificate     *Participant #1 (22.05.2014)*                    AUSDEMWALD Alfons (116)                              de
- 9    Curriculum vitae         *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 10   File sheet               *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 11   eID sheet                *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
  12   Action plan              *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
+ 11   eID sheet                *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
+ 10   File sheet               *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
+ 9    Curriculum vitae         *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
+ 8    Presence certificate     *Participant #1 (22.05.2014)*                    AUSDEMWALD Alfons (116)                              de
+ 7    ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                     AUSDEMWALD Alfons (116)
+ 6    Art60§7 job supplyment   *Art60§7 job supplyment#1 (Charlotte COLLARD)*   COLLARD Charlotte (118)   BISA                       fr
+ 5    Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*         EMONTS Daniel (128)
+ 4    Finanzielle Situation    *Budget 1 for Gerkens-Kasennova*
+ 3    Refund confirmation      *AMK/5/27/14/139/1*                              JONAS Josef (139)                                    fr
+ 2    Income confirmation      *EiEi/9/29/12/116/1*                             AUSDEMWALD Alfons (116)                              de
+ 1    Simple confirmation      *Clothes bank/5/22/14/238/19*                    FRISCH Paul (238)         Belgisches Rotes Kreuz     de
 ==== ======================== ================================================ ========================= ========================== ==========
 <BLANKLINE>
 

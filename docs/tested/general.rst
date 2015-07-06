@@ -35,7 +35,7 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-54 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, ledger, vatless, finan, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, appypod, export_excel, dupable_clients, plausibility, tinymce.
+55 apps: staticfiles, about, bootstrap3, lino, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, appypod, printing, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, ledger, vatless, finan, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 149 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -221,18 +221,18 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - active_job_search.Proofs.insert (viewable for all except anonymous) : date, client, company, id, spontaneous, response, remarks
 - addresses.Addresses.detail (viewable for admin) : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert (viewable for admin) : country, city, street, street_no, street_box, address_type, remark
-- aids.AidTypes.detail (viewable for 110, 410, admin) : id, short_name, confirmation_type, name, name_fr, name_de, name_nl, excerpt_title, excerpt_title_fr, excerpt_title_de, excerpt_title_nl, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, body_template, company, contact_person, contact_role, pharmacy_type
+- aids.AidTypes.detail (viewable for 110, 410, admin) : id, short_name, confirmation_type, name, name_fr, name_de, name_nl, excerpt_title, excerpt_title_fr, excerpt_title_de, excerpt_title_nl, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
 - aids.AidTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, confirmation_type
 - aids.Categories.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
 - aids.Grantings.detail (viewable for 110, 410, admin) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
 - aids.Grantings.insert (viewable for 110, 410, admin) : client, aid_type, signer, board, decision_date, start_date, end_date
 - aids.GrantingsByClient.insert (viewable for all except anonymous, 210) : aid_type, board, decision_date, start_date, end_date
-- aids.IncomeConfirmations.insert (viewable for all except anonymous, 210) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
-- aids.IncomeConfirmationsByGranting.insert (viewable for all except anonymous, 210) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
-- aids.RefundConfirmations.insert (viewable for all except anonymous, 210) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.RefundConfirmationsByGranting.insert (viewable for all except anonymous, 210) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.SimpleConfirmations.insert (viewable for all except anonymous, 210) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
-- aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous, 210) : start_date, end_date, company, contact_person, language, remark
+- aids.IncomeConfirmations.insert (viewable for 110, 410, admin) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
+- aids.IncomeConfirmationsByGranting.insert (viewable for all except anonymous) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
+- aids.RefundConfirmations.insert (viewable for  110, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.RefundConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.SimpleConfirmations.insert (viewable for 110, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
+- aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert (viewable for 110, admin) : id, name, name_fr, name_de, name_nl, ref
 - art61.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
 - art61.Contracts.insert (viewable for 100, 110, admin) : client, company, type
@@ -264,14 +264,14 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - cbss.RetrieveTIGroupsRequests.detail (viewable for admin) : id, person, user, environment, sent, status, ticket, national_id, language, history, response_xml, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert (viewable for admin) : person, national_id, language, history
 - changes.Changes.detail (viewable for admin) : time, user, type, master, object, id, diff
-- contacts.Companies.detail (viewable for all except anonymous, 210) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, id, language, activity, is_obsolete, created, modified
-- contacts.Companies.insert (viewable for all except anonymous, 210) : name, language, email, type, id
+- contacts.Companies.detail (viewable for all except anonymous) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.insert (viewable for all except anonymous) : name, language, email, type, id
 - contacts.Companies.merge_row (viewable for admin) : merge_to, reason
-- contacts.Partners.detail (viewable for all except anonymous, 210) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, is_obsolete, created, modified
-- contacts.Partners.insert (viewable for all except anonymous, 210) : name, language, email
-- contacts.Persons.create_household (viewable for all except anonymous, 210) : partner, type, head
-- contacts.Persons.detail (viewable for all except anonymous, 210) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
-- contacts.Persons.insert (viewable for all except anonymous, 210) : first_name, last_name, gender, language
+- contacts.Partners.detail (viewable for all except anonymous) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, is_obsolete, created, modified
+- contacts.Partners.insert (viewable for all except anonymous) : name, language, email
+- contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
+- contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
 - contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - countries.Countries.detail (viewable for all except anonymous, 210) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous, 210) : isocode, inscode, name, name_fr, name_de, name_nl
@@ -299,7 +299,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - debts.Budgets.insert (viewable for admin) : partner, date, user
 - excerpts.ExcerptTypes.detail (viewable for admin) : id, name, name_fr, name_de, name_nl, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert (viewable for admin) : name, name_fr, name_de, name_nl, content_type, primary, certifying, build_method, template, body_template
-- excerpts.Excerpts.detail (viewable for admin) : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
+- excerpts.Excerpts.detail (viewable for all except anonymous) : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - finan.BankStatements.detail (viewable for all except anonymous) : date, balance1, balance2, user, workflow_buttons, id, journal, year, number
 - finan.BankStatements.insert (viewable for all except anonymous) : date, user, balance1, balance2
 - finan.FinancialVouchers.detail (viewable for all except anonymous) : date, user, narration, workflow_buttons, id, journal, year, number
@@ -307,8 +307,8 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - finan.Groupers.detail (viewable for all except anonymous) : date, partner, user, workflow_buttons, id, journal, year, number
 - finan.Groupers.insert (viewable for all except anonymous) : date, user, partner
 - finan.PaymentOrders.detail (viewable for all except anonymous) : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number
-- households.Households.detail (viewable for all except anonymous, 210) : type, prefix, name, id
-- households.HouseholdsByType.detail (viewable for all except anonymous, 210) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
+- households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
+- households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl
 - humanlinks.Links.insert (viewable for 110, 410, admin) : parent, child, type
 - immersion.ContractTypes.detail (viewable for 110, admin) : id, name, name_fr, name_de, name_nl, exam_policy

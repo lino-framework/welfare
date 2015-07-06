@@ -12,7 +12,6 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-import os
 import cgi
 import datetime
 
@@ -383,14 +382,10 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             for obj in model.objects.filter(q, **filterkw).order_by(fieldname):
                 linkkw.update(fmt='detail')
                 url = ui.get_detail_url(obj, **linkkw)
-                html = '<a href="%s">%s</a>&nbsp;: %s' % (url,
-                                                          unicode(obj), cgi.escape(msg))
+                html = '<a href="%s">%s</a>&nbsp;: %s' % (
+                    url, unicode(obj), cgi.escape(msg))
                 yield ReminderEntry(getattr(obj, fieldname), html)
 
-        #~ delay = 30
-        #~ for obj in model.objects.filter(q,
-              #~ card_valid_until__lte=date+datetime.timedelta(days=delay)).order_by('card_valid_until'):
-            #~ yield ReminderEntry(obj,obj.card_valid_until,_("eID card expires in %d days") % delay,fmt='detail',tab=3)
         for o in find_them(
             'card_valid_until', today, datetime.timedelta(days=30),
                 _("eID card expires"), tab=0):
@@ -717,8 +712,6 @@ class Clients(contacts.Persons):
     model = 'pcsw.Client'
     params_panel_hidden = True
 
-    #~ create_event = cal.CreateClientEvent()
-
     insert_layout = dd.FormLayout("""
     first_name last_name
     national_id
@@ -878,12 +871,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         return qs
 
     @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(Clients, self).param_defaults(ar, **kw)
-        kw.update(client_state=ClientStates.coached)
-        return kw
-
-    @classmethod
     def get_title_tags(self, ar):
         for t in super(Clients, self).get_title_tags(ar):
             yield t
@@ -937,6 +924,16 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             yield 'yellow'
         #~ if not obj.has_valid_card_data():
             #~ return 'red'
+
+
+class CoachedClients(Clients):
+    required_roles = dd.login_required(SocialAgent)
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(CoachedClients, self).param_defaults(ar, **kw)
+        kw.update(client_state=ClientStates.coached)
+        return kw
 
 
 class ClientsByNationality(Clients):
@@ -1320,7 +1317,7 @@ class PartnersByClientContactType(contacts.Partners):
 
 
 def setup_quicklinks(self, ar, tb):
-    tb.add_action('pcsw.Clients', 'find_by_beid')
+    tb.add_action('pcsw.CoachedClients', 'find_by_beid')
 
 
 def setup_workflows(site):

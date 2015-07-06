@@ -504,7 +504,7 @@ class CandidatesByCourse(RequestsByCourse):
         obj.course = None
         return obj
 
-CLIENTS_TABLE = pcsw.Clients
+CLIENTS_TABLE = pcsw.CoachedClients
 
 
 class PendingCourseRequests(CourseRequests):

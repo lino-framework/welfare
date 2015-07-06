@@ -28,7 +28,8 @@ from lino_welfare.modlib.pcsw import models as pcsw
 
 from .roles import DebtsUser, DebtsStaff
 
-class Clients(pcsw.Clients):
+
+class Clients(pcsw.CoachedClients):
     # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
     help_text = u"""Wie Kontakte --> Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""

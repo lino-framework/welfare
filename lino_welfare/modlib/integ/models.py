@@ -55,7 +55,7 @@ class ClientIsAvailable(ObservedEvent):
 ClientEvents.add_item_instance(ClientIsAvailable("available"))
 
 
-class Clients(pcsw.Clients):
+class Clients(pcsw.CoachedClients):
     # Black right-pointing triangle : U+25B6   &#9654;
     # Black right-pointing pointer : U+25BA    &#9658;
     help_text = """Wie Kontakte --> Klienten, aber mit \
@@ -85,7 +85,7 @@ class Clients(pcsw.Clients):
             _("Only active clients"), default=False,
             help_text=_(
                 "Show only clients in 'active' integration phases")),
-        **pcsw.Clients.parameters)
+        **pcsw.CoachedClients.parameters)
 
     params_layout = """
     client_state coached_by and_coached_by start_date end_date observed_event
@@ -279,7 +279,8 @@ class CompareRequestsTable(dd.VirtualTable):
                 cells.append(ar)
             return cells
 
-        yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
+        yield add(
+            pcsw.CoachedClients, observed_event=pcsw.ClientEvents.active)
 
         yield add(isip.Contracts, observed_event=isip.ContractEvents.active)
         #~ yield add(isip.Contracts,isip.ContractEvents.ended)
@@ -598,18 +599,18 @@ class ActivityReport(Report):
     @classmethod
     def get_story(cls, self, ar):
         yield E.h2(_("Introduction"))
-        yield E.p("Ceci est un ", E.b("rapport"), """, 
-            càd un document complet généré par Lino, contenant des 
-            sections, des tables et du texte libre.
-            Dans la version écran cliquer sur un chiffre pour voir d'où 
-            il vient.
-            """)
+        yield E.p("Ceci est un ", E.b("rapport"), """,
+càd un document complet généré par Lino, contenant des
+sections, des tables et du texte libre.
+Dans la version écran cliquer sur un chiffre pour voir d'où
+il vient.
+""")
         yield E.h2(_("Indicateurs généraux"))
         yield CompareRequestsTable
         yield E.p('.')
         yield PeriodicNumbers
 
-        yield E.h2(_("Causes d'arrêt des accompagnements"))
+        yield E.h2(_("Causes d'arrêt des interventions"))
         yield CoachingEndingsByUser
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType

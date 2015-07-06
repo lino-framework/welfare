@@ -5,27 +5,33 @@ Clients
 =======
 
 .. How to test only this document:
-  $ python setup.py test -s tests.SpecsTests.test_clients
+
+    $ python setup.py test -s tests.SpecsTests.test_clients
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
 
 .. contents::
    :depth: 2
    :local:
 
-.. include::: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
 
 
 The detail layout of a client
 =============================
 
-Here is the :class:`ClientDetail
-<lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail>` layout
-used in Lino Welfare à la Eupen:
+Here is a textual description of the fields and their layout used in
+the :class:`ClientDetail
+<lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail>` of a
+Lino Welfare à la Eupen.
+
+Some panels are not visible to everybody. Their modified visibility is marked 
+between brackets (e.g. `[visible for all except anonymous, 210]`).
 
 .. py2rst::
     from lino.api.doctest import *
@@ -36,6 +42,7 @@ used in Lino Welfare à la Eupen:
 ..
     >>> from lino.utils.diag import py2rst
     >>> print(py2rst(pcsw.Clients.detail_layout, True))
+    ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
     (main) [visible for all except anonymous]:
     - **Person** (general):
       - (general_1):
@@ -55,7 +62,7 @@ used in Lino Welfare à la Eupen:
       - (contact_1): **Ähnliche Klienten** (SimilarClients), **Beziehungen** (LinksByHuman), **ZDSS** (cbss_relations)
       - (contact_2):
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
-        - **Haushaltszusammensetzung** (households.SiblingsByPerson) [visible for all except anonymous, 210]
+        - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleitung** (coaching):
       - (coaching_1) [visible for 200, 300, admin]:
         - (newcomers_left):
@@ -76,7 +83,7 @@ used in Lino Welfare à la Eupen:
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
-      - **Konten** (sepa.AccountsByClient) [visible for all except anonymous, 210]
+      - **Konten** (sepa.AccountsByClient)
       - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for all except anonymous, 210]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for all except anonymous, 210]:
@@ -119,7 +126,7 @@ used in Lino Welfare à la Eupen:
       - (misc_4) [visible for all except anonymous]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
       - (misc_5) [visible for all except anonymous]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
-        - **Kontaktperson für** (contacts.RolesByPerson) [visible for all except anonymous, 210]
+        - **Kontaktperson für** (contacts.RolesByPerson)
     - **ZDSS** (cbss) [visible for all except anonymous, 210]:
       - (cbss_1) [visible for all except anonymous]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
       - **Zusammenfassung ZDSS** (cbss_summary) [visible for all except anonymous]

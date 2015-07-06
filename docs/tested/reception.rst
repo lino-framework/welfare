@@ -6,26 +6,20 @@ Reception
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_reception
+    $ python setup.py test -s tests.DocsTests.test_reception
 
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
+    >>> translation.activate('fr')
+    
 A technical tour into the :mod:`lino_welfare.modlib.reception` module.
 
 .. contents::
    :depth: 2
 
-A tested document
-=================
-
-This document is part of the Lino Welfare test suite and has been
-tested using doctest with the following initialization code:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
-
->>> translation.activate('fr')
 
 .. _welfare.tested.reception.AppointmentsByPartner:
 
