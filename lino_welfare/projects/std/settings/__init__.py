@@ -39,7 +39,7 @@ class Site(Site):
     # default_build_method = "appyodt"
     uppercase_last_name = True
 
-    enable_role_based_permissions = True
+    user_profiles_module = 'lino_welfare.projects.std.roles'
 
     def setup_plugins(self):
         """
@@ -56,11 +56,6 @@ class Site(Site):
             self.plugins.ledger.configure(project_model='pcsw.Client')
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')
         # self.plugins.households.configure(person_model='pcsw.Client')
-
-    def setup_user_profiles(self):
-        """This imports :mod:`lino_welfare.projects.std.roles`.
-        """
-        import lino_welfare.projects.std.roles
 
     def setup_choicelists(self):
         """Adds two shortcut fields and a special note type."""
