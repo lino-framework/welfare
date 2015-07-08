@@ -6,22 +6,17 @@ Eupen (tested tour)
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_eupen
+    $ python setup.py test -s tests.DocsTests.test_eupen
 
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
+    
 .. contents:: 
    :local:
    :depth: 2
-
-A tested document
-=================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
 
 
 The murder bug
@@ -151,7 +146,7 @@ Integrations-Assistent (Manager)
 - Konfigurierung :
   - Orte : Länder
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
-  - Büro : Upload-Arten, Meine Einfügetexte
+  - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -160,7 +155,7 @@ Integrations-Assistent (Manager)
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
   - Kontakte : Kontaktpersonen, Adressenarten, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge
+  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
@@ -246,7 +241,7 @@ Empfangsschalter
 ...     rt.login('theresia') .show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Auszüge
+- Büro : Ablaufende Uploads, Meine Uploads, Meine Auszüge, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Site : Info
 

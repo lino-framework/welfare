@@ -133,6 +133,7 @@ class UploadDetail(dd.FormLayout):
 
 LibraryUploads = Uploads
 
+
 class Uploads(Uploads):
     column_names = 'user project type file start_date end_date ' \
                    'description *'
@@ -211,7 +212,7 @@ class UploadsByType(Uploads, UploadsByType):
 
 
 class MyUploads(Uploads):
-    required_roles = dd.required(OfficeUser)
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     column_names = "id project type start_date end_date \
     needed description file *"
     order_by = ['-id']
@@ -229,7 +230,7 @@ class MyUploads(Uploads):
 
 class MyExpiringUploads(Uploads):
     "Expiring uploads for client coached by me"
-    required_roles = dd.required(OfficeUser)
+    required_roles = dd.required((OfficeUser, OfficeOperator))
     label = _("My expiring uploads")
     help_text = _("Show needed uploads whose validity expires soon")
     column_names = "project type user start_date end_date needed *"

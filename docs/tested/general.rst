@@ -6,19 +6,18 @@ General overview of Lino Welfare
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_general
+    $ python setup.py test -s tests.DocsTests.test_general
 
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+    
 .. contents:: 
    :local:
    :depth: 2
 
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
 
 Database structure
 ==================
@@ -341,11 +340,11 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - newcomers.AvailableCoachesByClient.assign_coach (viewable for 200, 300, admin) : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, weight
 - newcomers.Faculties.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, weight
-- notes.EventTypes.insert (viewable for admin) : id, name, name_fr, name_de, name_nl, remark
-- notes.NoteTypes.detail (viewable for admin) : id, name, name_fr, name_de, name_nl, build_method, template, special_type, email_template, attach_to_email, remark
-- notes.NoteTypes.insert (viewable for admin) : name, name_fr, name_de, name_nl, build_method
-- notes.Notes.detail (viewable for all except anonymous, 210) : date, time, event_type, type, project, subject, company, contact_person, user, language, build_time, id, body, UploadsByController
-- notes.Notes.insert (viewable for all except anonymous, 210) : event_type, type, subject, project
+- notes.EventTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, remark
+- notes.NoteTypes.detail (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, build_method, template, special_type, email_template, attach_to_email, remark
+- notes.NoteTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, build_method
+- notes.Notes.detail (viewable for all except anonymous) : date, time, event_type, type, project, subject, company, contact_person, user, language, build_time, id, body, UploadsByController
+- notes.Notes.insert (viewable for all except anonymous) : event_type, type, subject, project
 - outbox.Mails.detail (viewable for 110, 410, admin) : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert (viewable for 110, 410, admin) : project, subject, body
 - pcsw.ClientContactTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
@@ -377,8 +376,8 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - uploads.UploadTypes.insert (viewable for 110, 410, admin) : upload_area, name, name_fr, name_de, name_nl, warn_expiry_unit, warn_expiry_value
 - uploads.Uploads.detail (viewable for 110, 410, admin) : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
 - uploads.Uploads.insert (viewable for 110, 410, admin) : type, file, start_date, end_date, description
-- uploads.UploadsByClient.insert (viewable for all except anonymous, 210) : file, type, end_date, description
-- uploads.UploadsByController.insert (viewable for all except anonymous, 210) : file, type, end_date, description
+- uploads.UploadsByClient.insert (viewable for all except anonymous) : file, type, end_date, description
+- uploads.UploadsByController.insert (viewable for all except anonymous) : file, type, end_date, description
 - users.Users.change_password (viewable for admin) : current, new1, new2
 - users.Users.detail (viewable for admin) : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert (viewable for admin) : username, email, first_name, last_name, partner, language, profile
