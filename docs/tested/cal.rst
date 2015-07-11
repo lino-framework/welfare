@@ -5,20 +5,22 @@ Calendar (tested)
 ===================
 
 .. How to test only this document:
-   $ python setup.py test -s tests.DocsTests.test_cal
+
+    $ python setup.py test -s tests.DocsTests.test_cal
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.cal` module.
 
 .. contents::
    :local:
 
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
 
 Not for everybody
 =================
@@ -96,11 +98,16 @@ These are Alicia's calendar entries of the last two months:
 >>> last_week = dict(start_date=dd.today(-30), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEvents, language='en',
 ...     param_values=last_week)
-<BLANKLINE>
-No data to display
+======================== ========================= ===================== =========== ============================
+ When                     Client                    Calendar Event Type   Summary     Workflow
+------------------------ ------------------------- --------------------- ----------- ----------------------------
+ *Wed 5/7/14 at 09:00*    DA VINCI David (165)      Appointment           Termin 15   **Suggested** → [Notified]
+ *Tue 5/13/14 at 09:00*   HILGERS Hildegard (133)   Appointment           Termin 6    **Suggested** → [Notified]
+======================== ========================= ===================== =========== ============================
 <BLANKLINE>
 
 
+These are Hubert's calendar entries of the last two months:
 
 >>> rt.login('hubert').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -116,11 +123,39 @@ No data to display
  *Mon 5/26/14 at 11:10*                              Meeting               Mittagessen    **Suggested** → [Notified]
  *Tue 5/27/14 at 13:30*    CHANTRAINE Marc (120*)    Appointment           Abendessen     **Draft** → [Notified] [Cancel]
  *Wed 5/28/14 at 08:30*                              External meeting      Frühstück      **Took place** → [Reset]
+ *Wed 5/28/14 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 15      **Suggested** → [Notified]
  *Wed 5/28/14 at 09:40*                              Internal meeting      Treffen        **Cancelled**
  *Thu 5/29/14 at 10:20*                              External meeting      Beratung       **Omitted**
  *Fri 5/30/14 at 11:10*                              Private               Seminar        **Notified** → [Cancel] [Reset]
  *Tue 6/3/14 at 09:00*     DENON Denis (180*)        Appointment           Termin 1       **Suggested** → [Notified]
- ...
+ *Wed 6/4/14 at 09:00*     LAMBERTZ Guido (142)      Appointment           Termin 6       **Suggested** → [Notified]
+ *Thu 6/19/14 at 09:00*    JEANÉMART Jérôme (181)    Appointment           Termin 15      **Suggested** → [Notified]
+ *Mon 7/14/14 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 1       **Suggested** → [Notified]
+ *Mon 8/4/14 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 1       **Suggested** → [Notified]
+ *Tue 8/5/14 at 09:00*     FAYMONVILLE Luc (130*)    Appointment           Termin 3       **Suggested** → [Notified]
+ *Tue 8/12/14 at 09:00*    RADERMECKER Rik (173)     Appointment           Termin 2       **Suggested** → [Notified]
+ *Thu 8/14/14 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 2       **Suggested** → [Notified]
+ *Wed 9/3/14 at 09:00*     DENON Denis (180*)        Appointment           Termin 2       **Suggested** → [Notified]
+ *Thu 9/4/14 at 09:00*     LAMBERTZ Guido (142)      Appointment           Termin 7       **Suggested** → [Notified]
+ *Thu 9/4/14 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 2       **Suggested** → [Notified]
+ *Mon 9/15/14 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 3       **Suggested** → [Notified]
+ *Mon 10/6/14 at 09:00*    JEANÉMART Jérôme (181)    Appointment           Termin 3       **Suggested** → [Notified]
+ *Wed 10/15/14 at 09:00*   BRECHT Bernd (177)        Appointment           Termin 4       **Suggested** → [Notified]
+ *Thu 11/6/14 at 09:00*    JEANÉMART Jérôme (181)    Appointment           Termin 4       **Suggested** → [Notified]
+ *Wed 11/12/14 at 09:00*   RADERMECKER Rik (173)     Appointment           Termin 3       **Suggested** → [Notified]
+ *Mon 11/17/14 at 09:00*   BRECHT Bernd (177)        Appointment           Termin 5       **Suggested** → [Notified]
+ *Wed 12/3/14 at 09:00*    DENON Denis (180*)        Appointment           Termin 3       **Suggested** → [Notified]
+ *Mon 12/8/14 at 09:00*    JEANÉMART Jérôme (181)    Appointment           Termin 5       **Suggested** → [Notified]
+ *Wed 12/17/14 at 09:00*   BRECHT Bernd (177)        Appointment           Termin 6       **Suggested** → [Notified]
+ *Thu 1/8/15 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 6       **Suggested** → [Notified]
+ *Mon 1/19/15 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 7       **Suggested** → [Notified]
+ *Mon 2/9/15 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 7       **Suggested** → [Notified]
+ *Thu 2/19/15 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 8       **Suggested** → [Notified]
+ *Tue 3/3/15 at 09:00*     DENON Denis (180*)        Appointment           Termin 4       **Suggested** → [Notified]
+ *Mon 3/9/15 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 8       **Suggested** → [Notified]
+ *Thu 3/19/15 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 9       **Suggested** → [Notified]
+ *Thu 4/9/15 at 09:00*     JEANÉMART Jérôme (181)    Appointment           Termin 9       **Suggested** → [Notified]
+ *Mon 4/20/15 at 09:00*    BRECHT Bernd (177)        Appointment           Termin 10      **Suggested** → [Notified]
 ========================= ========================= ===================== ============== =================================
 <BLANKLINE>
 

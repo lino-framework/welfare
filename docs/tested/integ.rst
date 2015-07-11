@@ -5,6 +5,7 @@ Integration Service
 ===================
 
 .. How to test only this document:
+
     $ python setup.py test -s tests.DocsTests.test_integ
     
     Doctest initialization:
@@ -83,22 +84,22 @@ Configuration
 
 >>> ses.show(art61.ContractTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============= ================== ================== ===========
- Designation   Designation (fr)   Designation (de)   Reference
-------------- ------------------ ------------------ -----------
- Default       Default            Standardwert
-============= ================== ================== ===========
+====================== ======================= =================== ===========
+ Designation            Designation (fr)        Designation (de)    Reference
+---------------------- ----------------------- ------------------- -----------
+ Art61 job supplyment   Mise à l'emploi art61   Art.61-Konvention
+====================== ======================= =================== ===========
 <BLANKLINE>
 
 >>> ses.show(immersion.ContractTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-===================== =========================== =====================
- Designation           Designation (fr)            Designation (de)
---------------------- --------------------------- ---------------------
- Immersion training    Stage d'immersion           Immersion training
- Internal engagement   Mise en situation interne   Internal engagement
- MISIP                 MISIP                       MISIP
-===================== =========================== =====================
+===================== =========================== ===================== ==================== ================
+ Designation           Designation (fr)            Designation (de)      Examination Policy   Template
+--------------------- --------------------------- --------------------- -------------------- ----------------
+ Immersion training    Stage d'immersion           Immersion training                         StageForem.odt
+ Internal engagement   Mise en situation interne   Internal engagement                        Default.odt
+ MISIP                 MISIP                       MISIP                                      Default.odt
+===================== =========================== ===================== ==================== ================
 <BLANKLINE>
 
 >>> ses.show(jobs.JobTypes)
@@ -157,7 +158,7 @@ Activity report
 ===============
 
 >>> ses.show(integ.ActivityReport)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ------------
 Introduction
 ------------
@@ -242,16 +243,21 @@ PIIS et types de formation
 --------------------------
 Nombre de PIIS actifs par 
     type de formation et type de contrat.
-================ ================ ===================== =======
- Education Type   VSE Ausbildung   VSE Vollzeitstudium   Total
----------------- ---------------- --------------------- -------
+================= ================ ===================== =======
+ Education Type    VSE Ausbildung   VSE Vollzeitstudium   Total
+----------------- ---------------- --------------------- -------
+ Alpha
  Apprenticeship
  Highschool
+ Part-time study
+ Prequalifying
+ Qualifying
+ Remote study
  School
  Special school
  Training
  University
-================ ================ ===================== =======
+================= ================ ===================== =======
 <BLANKLINE>
 =======================
 Art60§7 job supplyments

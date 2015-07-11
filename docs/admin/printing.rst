@@ -98,12 +98,12 @@ This is the list of excerpt types:
  Income confirmation      Yes       Yes          Default.odt       certificate.body.html
  Refund confirmation      Yes       Yes          Default.odt       certificate.body.html
  Simple confirmation      Yes       Yes          Default.odt       certificate.body.html
- Art61 job supplyment     Yes       Yes          Default.odt       contract.body.html
+ Art61 job supplyment     Yes       Yes                            contract.body.html
  Participant              Yes       No           Default.odt       presence_certificate.body.html
  Budget                   Yes       Yes          Default.odt
- Immersion training       Yes       Yes          Default.odt       immersion.body.html
- ISIP                     Yes       Yes          Default.odt
- Art60§7 job supplyment   Yes       Yes          Default.odt
+ Immersion training       Yes       Yes                            immersion.body.html
+ ISIP                     Yes       Yes          
+ Art60§7 job supplyment   Yes       Yes          
  Client                   No        No           Default.odt       pac.body.html
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt

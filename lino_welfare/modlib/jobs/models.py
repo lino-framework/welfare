@@ -139,7 +139,7 @@ class JobProviders(contacts.Companies, dd.Table):
 #
 # CONTRACT TYPES
 #
-class ContractType(ContractTypeBase, mixins.PrintableType,
+class ContractType(ContractTypeBase,  # mixins.PrintableType,
                    mixins.Referrable):
 
     """This is the homologue of :class:`isip.ContractType

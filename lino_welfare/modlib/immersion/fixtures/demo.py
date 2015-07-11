@@ -17,7 +17,7 @@ def objects():
     
     yield rt.login('alicia').get_user()
 
-    if False:
+    if False:  # done in lino_welfare/modlib/integ/fixtures/
 
         TT = Cycler(rt.modules.immersion.ContractType.objects.all())
         TG = Cycler(rt.modules.immersion.Goal.objects.all())

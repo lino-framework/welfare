@@ -6,11 +6,18 @@ Automatic calendar events
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_autoevents
+    $ python setup.py test -s tests.DocsTests.test_autoevents
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
 
 For every contract, Lino Welfare automatically generates a series of
 calendar events for evaluation meetings.
-
 
 .. contents::
    :local:
@@ -18,17 +25,6 @@ calendar events for evaluation meetings.
 
 Technical stuff
 ===============
-
-This document is part of the test suite:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
-
->>> ses = rt.login('robin')
->>> translation.activate('en')
 
 Some local settings which influence automatic generation of
 calendar events:
@@ -52,22 +48,28 @@ For example let's look at ISIP contract #26 of the demo database.
 >>> obj.exam_policy
 ExamPolicy #1 (u'every month')
 >>> rt.show(cal.EventsByController, obj)
-======================== ================ ================= ============= ===============
- When                     Summary          Managed by        Assigned to   Workflow
------------------------- ---------------- ----------------- ------------- ---------------
- *Mon 8/4/14 at 09:00*    Appointment 1    Hubert Huppertz                 **Suggested**
- *Thu 9/4/14 at 09:00*    Appointment 2    Hubert Huppertz                 **Suggested**
- *Mon 10/6/14 at 09:00*   Appointment 3    Hubert Huppertz                 **Suggested**
- *Thu 11/6/14 at 09:00*   Appointment 4    Hubert Huppertz                 **Suggested**
- *Mon 12/8/14 at 09:00*   Appointment 5    Hubert Huppertz                 **Suggested**
- *Thu 1/8/15 at 09:00*    Appointment 6    Hubert Huppertz                 **Suggested**
- *Mon 2/9/15 at 09:00*    Appointment 7    Hubert Huppertz                 **Suggested**
- *Mon 3/9/15 at 09:00*    Appointment 8    Hubert Huppertz                 **Suggested**
- *Thu 4/9/15 at 09:00*    Appointment 9    Hubert Huppertz                 **Suggested**
- *Mon 5/11/15 at 09:00*   Appointment 10   Hubert Huppertz                 **Suggested**
- *Thu 6/11/15 at 09:00*   Appointment 11   Hubert Huppertz                 **Suggested**
-======================== ================ ================= ============= ===============
+========================= ================ ================= ============= ===============
+ When                      Summary          Managed by        Assigned to   Workflow
+------------------------- ---------------- ----------------- ------------- ---------------
+ *Tue 3/26/13 at 09:00*    Appointment 1    Alicia Allmanns                 **Suggested**
+ *Fri 4/26/13 at 09:00*    Appointment 2    Alicia Allmanns                 **Suggested**
+ *Mon 5/27/13 at 09:00*    Appointment 3    Alicia Allmanns                 **Suggested**
+ *Thu 6/27/13 at 09:00*    Appointment 4    Alicia Allmanns                 **Suggested**
+ *Mon 7/29/13 at 09:00*    Appointment 5    Alicia Allmanns                 **Suggested**
+ *Thu 8/29/13 at 09:00*    Appointment 6    Alicia Allmanns                 **Suggested**
+ *Mon 9/30/13 at 09:00*    Appointment 7    Alicia Allmanns                 **Suggested**
+ *Wed 10/30/13 at 09:00*   Appointment 8    Alicia Allmanns                 **Suggested**
+ *Mon 12/2/13 at 09:00*    Appointment 9    Alicia Allmanns                 **Suggested**
+ *Thu 1/2/14 at 09:00*     Appointment 10   Alicia Allmanns                 **Suggested**
+ *Mon 2/3/14 at 09:00*     Appointment 11   Alicia Allmanns                 **Suggested**
+ *Mon 3/3/14 at 09:00*     Appointment 12   Alicia Allmanns                 **Suggested**
+ *Thu 4/3/14 at 09:00*     Appointment 13   Alicia Allmanns                 **Suggested**
+ *Mon 5/5/14 at 09:00*     Appointment 14   Alicia Allmanns                 **Suggested**
+ *Thu 6/5/14 at 09:00*     Appointment 15   Alicia Allmanns                 **Suggested**
+========================= ================ ================= ============= ===============
 <BLANKLINE>
+
+
 
 .. the following verifies a related bugfix
 
@@ -81,9 +83,9 @@ ExamPolicy #1 (u'every month')
     200
     >>> d = AttrDict(json.loads(res.content))
     >>> print(d.title)
-    Events of ISIP#26 (Otto ÖSTGES)
+    Events of ISIP#26 (David DA VINCI)
     >>> print(len(d.rows))
-    12
+    16
 
 
 Configuration
@@ -97,6 +99,9 @@ for this contract.
 You can configure the list of allowed examination policies via the
 :menuselection:`Configure --> Integration --> Examination policies`
 command.
+
+>>> ses = rt.login('robin')
+>>> translation.activate('en')
 
 >>> ses.show(isip.ExamPolicies)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -121,62 +126,59 @@ the coach changes while the contract is still active.  This is why
 Lino must attribute every automatic evaluation event to the *currently
 responsible coach* at the event's date.
 
-For example, let's pick up ISIP contract #21.  
+For example, let's pick up ISIP contract #1.
 
->>> obj = isip.Contract.objects.get(pk=21)
+>>> obj = isip.Contract.objects.get(pk=1)
 >>> rt.show(cal.EventsByController, obj)
 ========================= ================ ================= ============= ===============
  When                      Summary          Managed by        Assigned to   Workflow
 ------------------------- ---------------- ----------------- ------------- ---------------
- *Mon 3/18/13 at 09:00*    Appointment 1    Alicia Allmanns                 **Suggested**
- *Thu 4/18/13 at 09:00*    Appointment 2    Alicia Allmanns                 **Suggested**
- *Mon 5/20/13 at 09:00*    Appointment 3    Alicia Allmanns                 **Suggested**
- *Thu 6/20/13 at 09:00*    Appointment 4    Alicia Allmanns                 **Suggested**
- *Mon 7/22/13 at 09:00*    Appointment 5    Alicia Allmanns                 **Suggested**
- *Thu 8/22/13 at 09:00*    Appointment 6    Alicia Allmanns                 **Suggested**
- *Mon 9/23/13 at 09:00*    Appointment 7    Alicia Allmanns                 **Suggested**
- *Wed 10/23/13 at 09:00*   Appointment 8    Hubert Huppertz                 **Suggested**
- *Mon 11/25/13 at 09:00*   Appointment 9    Hubert Huppertz                 **Suggested**
- *Wed 12/25/13 at 09:00*   Appointment 10   Hubert Huppertz                 **Suggested**
- *Mon 1/27/14 at 09:00*    Appointment 11   Hubert Huppertz                 **Suggested**
- *Thu 2/27/14 at 09:00*    Appointment 12   Hubert Huppertz                 **Suggested**
- *Thu 3/27/14 at 09:00*    Appointment 13   Hubert Huppertz                 **Suggested**
- *Mon 4/28/14 at 09:00*    Appointment 14   Hubert Huppertz                 **Suggested**
- *Wed 5/28/14 at 09:00*    Appointment 15   Hubert Huppertz                 **Suggested**
+ *Mon 10/29/12 at 09:00*   Appointment 1    Hubert Huppertz                 **Suggested**
+ *Thu 11/29/12 at 09:00*   Appointment 2    Hubert Huppertz                 **Suggested**
+ *Mon 12/31/12 at 09:00*   Appointment 3    Hubert Huppertz                 **Suggested**
+ *Thu 1/31/13 at 09:00*    Appointment 4    Hubert Huppertz                 **Suggested**
+ *Thu 2/28/13 at 09:00*    Appointment 5    Hubert Huppertz                 **Suggested**
+ *Thu 3/28/13 at 09:00*    Appointment 6    Mélanie Mélard                  **Suggested**
+ *Mon 4/29/13 at 09:00*    Appointment 7    Mélanie Mélard                  **Suggested**
+ *Wed 5/29/13 at 09:00*    Appointment 8    Mélanie Mélard                  **Suggested**
+ *Mon 7/1/13 at 09:00*     Appointment 9    Mélanie Mélard                  **Suggested**
+ *Thu 8/1/13 at 09:00*     Appointment 10   Mélanie Mélard                  **Suggested**
 ========================= ================ ================= ============= ===============
 <BLANKLINE>
 
-The above shows that appointments before 2013-11-10 are with Alicia,
+The above shows that appointments before 2013-11-10 are with Hubert,
 while later appointments are with Caroline. How did Lino know which
 coach to assign?
 
 To find an answer, we must look at the coachings of this client:
 
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
-==================== ======= ================= ========= =============== =======================
- Coached from         until   Coach             Primary   Coaching type   Reason of termination
--------------------- ------- ----------------- --------- --------------- -----------------------
- 10/11/13                     Caroline Carnol   Yes       General
- 10/14/13                     Hubert Huppertz   No        Integ
- **Total (2 rows)**                             **1**
-==================== ======= ================= ========= =============== =======================
+==================== ========== ================= ========= =============== ============================
+ Coached from         until      Coach             Primary   Coaching type   Reason of termination
+-------------------- ---------- ----------------- --------- --------------- ----------------------------
+ 3/3/12                          Alicia Allmanns   No        General
+ 3/13/12              3/8/13     Hubert Huppertz   No        Integ           Transfer to colleague
+ 3/8/13               10/24/13   Mélanie Mélard    No        Integ           End of right on social aid
+ 10/24/13                        Caroline Carnol   Yes       Integ
+ **Total (4 rows)**                                **1**
+==================== ========== ================= ========= =============== ============================
 <BLANKLINE>
 
-ISIP contract #21 was signed by Alicia for a period from 2013-02-16
+ISIP contract #21 was signed by Hubert for a period from 2013-02-16
 until 2014-06-11.
 
 >>> print(obj.user.username)
-alicia
+hubert
 >>> print(obj.applies_from)
-2013-02-16
+2012-09-29
 >>> print(obj.applies_until)
-2014-06-11
+2013-08-07
 
 So there was no coaching at all defined for this client when the
 contract started. This is theoretically not possible, but Lino does
 not prevent us from creating such a contract.
 
-This is why Alicia got responsible for the first evaluation meetings.
+This is why Hubert got responsible for the first evaluation meetings.
 On 2013-11-10 Caroline started to coach this client, but this didn't
 change the responsible user since this coaching was for the General
 social service which is not considered integration work.
@@ -232,21 +234,23 @@ The above is coded in
     ...     if len(names) > 1:
     ...         l.append(unicode(obj))
     >>> print(len(l))
-    12
+    15
     >>> print(', '.join(l))
     ... #doctest: +ELLIPSIS -REPORT_UDIFF +NORMALIZE_WHITESPACE    
-    ISIP#1 (Alfons AUSDEMWALD), ISIP#2 (Alfons AUSDEMWALD), ISIP#8
-    (Luc FAYMONVILLE), ISIP#10 (Jacqueline JACOBS), ISIP#13 (Josef
-    JONAS), ISIP#16 (Marc MALMENDIER), ISIP#21 (Hedi RADERMACHER),
-    ISIP#25 (Otto ÖSTGES), Art60§7 job supplyment#2 (Denis DENON),
-    Art60§7 job supplyment#11 (Melissa MEESSEN), Art60§7 job
-    supplyment#13 (Christian RADERMACHER), Art60§7 job supplyment#16
-    (Vincent VAN VEEN)
-    
-    >>> obj = isip.Contract.objects.get(pk=21)
+    ISIP#1 (Alfons AUSDEMWALD), ISIP#2 (Alfons AUSDEMWALD), ISIP#4
+    (Dorothée DOBBELSTEIN), ISIP#9 (Luc FAYMONVILLE), ISIP#11
+    (Jacqueline JACOBS), ISIP#14 (Josef JONAS), ISIP#17 (Marc
+    MALMENDIER), ISIP#20 (Edgard RADERMACHER), ISIP#23 (Hedi
+    RADERMACHER), ISIP#28 (Otto ÖSTGES), Art60§7 job supplyment#2
+    (Denis DENON), Art60§7 job supplyment#4 (Edgar ENGELS), Art60§7
+    job supplyment#9 (Melissa MEESSEN), Art60§7 job supplyment#10
+    (Christian RADERMACHER), Art60§7 job supplyment#13 (Vincent VAN
+    VEEN)
+
+    >>> obj = isip.Contract.objects.get(pk=1)
 
     >>> print(obj.user.username)
-    alicia
+    hubert
     
     Lino attributes the automatic evaluation events to the coach in
     charge, depending on their date.
@@ -255,13 +259,13 @@ The above is coded in
     >>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
     >>> print(", ".join(events))
     ... #doctest: +NORMALIZE_WHITESPACE
-    2013-03-18 (Alicia), 2013-04-18 (Alicia), 2013-05-20 (Alicia),
-    2013-06-20 (Alicia), 2013-07-22 (Alicia), 2013-08-22 (Alicia),
-    2013-09-23 (Alicia), 2013-10-23 (Hubert), 2013-11-25 (Hubert),
-    2013-12-25 (Hubert), 2014-01-27 (Hubert), 2014-02-27 (Hubert),
-    2014-03-27 (Hubert), 2014-04-28 (Hubert), 2014-05-28 (Hubert)
+    2012-10-29 (Hubert), 2012-11-29 (Hubert), 2012-12-31 (Hubert), 
+    2013-01-31 (Hubert), 2013-02-28 (Hubert), 2013-03-28 (Mélanie), 
+    2013-04-29 (Mélanie), 2013-05-29 (Mélanie), 2013-07-01 (Mélanie), 
+    2013-08-01 (Mélanie)
 
-    The above shows that appointments before 2013-11-10 are with Alicia,
-    later appointments are with Hubert.  That's what we wanted.
+    The above shows that appointments before 2013-11-10 are with Hubert,
+    later appointments are with Mélanie.  That's what we wanted.
+
 
 

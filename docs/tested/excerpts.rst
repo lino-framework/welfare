@@ -6,49 +6,42 @@ Excerpts
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_excerpts
+    $ python setup.py test -s tests.DocsTests.test_excerpts
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
 
 
 .. contents::
    :local:
    :depth: 2
 
-About this document
-===================
-
-.. include:: /include/tested.rst
-
-This documents uses the :mod:`lino_welfare.projects.eupen` test
-database:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.eupen.settings.doctests
-
 
 Configuring excerpts
 ====================
 
 See also :doc:`/admin/printing`.
+
 Here is a more complete list of excerpt types:
 
 >>> rt.show(excerpts.ExcerptTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===================================================== ======== =============== =========================== ====================== ================= ================================
- Modell                                                  Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
+ Modell                                                Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
 ----------------------------------------------------- -------- --------------- --------------------------- ---------------------- ----------------- --------------------------------
  *aids.IncomeConfirmation (Einkommensbescheinigung)*   Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
  *aids.RefundConfirmation (Kostenübernahmeschein)*     Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
  *aids.SimpleConfirmation (Einfache Bescheinigung)*    Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
- *art61.Contract (Art.61-Konvention)*                  Ja       Ja              Art.61-Konvention                                  Default.odt       contract.body.html
+ *art61.Contract (Art.61-Konvention)*                  Ja       Ja              Art.61-Konvention                                                    contract.body.html
  *cal.Guest (Teilnehmer)*                              Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
  *debts.Budget (Budget)*                               Ja       Ja              Finanzielle Situation                              Default.odt
- *isip.Contract (VSE)*                                 Ja       Ja              VSE                                                Default.odt
- *jobs.Contract (Art.60§7-Konvention)*                 Ja       Ja              Art.60§7-Konvention                                Default.odt
+ *isip.Contract (VSE)*                                 Ja       Ja              VSE
+ *jobs.Contract (Art.60§7-Konvention)*                 Ja       Ja              Art.60§7-Konvention
  *pcsw.Client (Klient)*                                Ja       Nein            Aktenblatt                                         file_sheet.odt
  *pcsw.Client (Klient)*                                Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
  *pcsw.Client (Klient)*                                Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt

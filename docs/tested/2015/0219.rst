@@ -61,7 +61,6 @@ Client #116 (u'AUSDEMWALD Alfons (116)')
 ================================ ============== ======= ================= ========================== =================== =========================
  Description                      Applies from   until   Signer            Workflow                   Board               Actions
 -------------------------------- -------------- ------- ----------------- -------------------------- ------------------- -------------------------
- *EiEi/8/9/14/116*                8/9/14                 Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
  *EiEi/5/22/14/116*               5/22/14                Caroline Carnol   **Unconfirmed** → [Sign]   Social Board (SB)   **Create confirmation**
  *Ausländerbeihilfe/8/8/13/116*   8/8/13                 Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
  *EiEi/9/29/12/116*               9/29/12                Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**

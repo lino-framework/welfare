@@ -6,7 +6,16 @@ Jobs
 
 .. to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_jobs
+    $ python setup.py test -s tests.DocsTests.test_jobs
+    
+    doctest initialization:
+    
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
+
 
 A tested tour into :mod:`lino_welfare.modlib.jobs`.
 
@@ -14,17 +23,6 @@ A tested tour into :mod:`lino_welfare.modlib.jobs`.
    :local:
    :depth: 1
 
-
-About this document
-===================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
 
 We log in as Rolf:
 
@@ -126,15 +124,45 @@ Example:
 <BLANKLINE>
 
 
+Show all contracts
+------------------
+
+The demo database contains 16 job supplyment contracts:
+
+>>> ses.show(jobs.Contracts)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+==== ================================================== ============== ============== ========================= ===========================
+ ID   Stelle                                             Laufzeit von   Laufzeit bis   Verantwortlicher (DSBE)   Art
+---- -------------------------------------------------- -------------- -------------- ------------------------- ---------------------------
+ 1    Kellner bei BISA                                   04.10.12       03.10.13       Alicia Allmanns           Sozialökonomie
+ 2    Kellner bei R-Cycle Sperrgutsortierzentrum         14.10.12       13.04.14       Alicia Allmanns           mit Rückerstattung Schule
+ 3    Koch bei R-Cycle Sperrgutsortierzentrum            03.11.12       02.11.13       Alicia Allmanns           Sozialökonomie - majoré
+ 4    Koch bei Pro Aktiv V.o.G.                          03.11.13       03.11.14       Hubert Huppertz           Sozialökonomie
+ 5    Küchenassistent bei Pro Aktiv V.o.G.               13.11.12       12.11.14       Alicia Allmanns           Stadt Eupen
+ 6    Küchenassistent bei BISA                           03.12.12       02.12.14       Alicia Allmanns           Sozialökonomie - majoré
+ 7    Tellerwäscher bei BISA                             13.12.12       12.12.13       Alicia Allmanns           mit Rückerstattung
+ 8    Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   13.12.13       13.12.14       Mélanie Mélard            Stadt Eupen
+ 9    Kellner bei BISA                                   02.01.13       01.01.14       Alicia Allmanns           Sozialökonomie
+ 10   Kellner bei R-Cycle Sperrgutsortierzentrum         02.01.14       02.01.15       Mélanie Mélard            mit Rückerstattung Schule
+ 11   Koch bei R-Cycle Sperrgutsortierzentrum            12.01.13       11.01.15       Alicia Allmanns           Sozialökonomie - majoré
+ 12   Koch bei Pro Aktiv V.o.G.                          01.02.13       31.01.15       Alicia Allmanns           Sozialökonomie
+ 13   Küchenassistent bei Pro Aktiv V.o.G.               11.02.13       10.02.14       Mélanie Mélard            Stadt Eupen
+ 14   Küchenassistent bei BISA                           11.02.14       11.02.15       Hubert Huppertz           Sozialökonomie - majoré
+ 15   Tellerwäscher bei BISA                             03.03.13       02.03.14       Alicia Allmanns           mit Rückerstattung
+ 16   Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   03.03.14       03.03.15       Hubert Huppertz           Stadt Eupen
+==== ================================================== ============== ============== ========================= ===========================
+<BLANKLINE>
+
+
+
 Evaluations of a contract
 -------------------------
 
 >>> obj = jobs.Contract.objects.get(pk=6)
 >>> print(unicode(obj.client))
-HILGERS Hildegard (133)
+LAMBERTZ Guido (142)
 
 >>> obj.active_period()
-(datetime.date(2014, 5, 13), datetime.date(2015, 5, 13))
+(datetime.date(2012, 12, 3), datetime.date(2014, 12, 2))
 
 >>> obj.update_cal_rset()
 ExamPolicy #3 (u'alle 3 Monate')
@@ -146,10 +174,10 @@ Termin
 >>> settings.SITE.verbose_client_info_message = True
 >>> wanted = obj.get_wanted_auto_events(ses)
 >>> [str(i.start_date) for i in wanted.values()]
-['2014-08-13', '2014-11-13', '2015-02-13', '2015-05-13']
+['2013-03-04', '2013-06-04', '2013-09-04', '2013-12-04', '2014-03-04', '2014-06-04', '2014-09-04']
 >>> print(ses.response['info_message'])
-Generating events between 2014-08-13 and 2015-05-13.
-Reached upper date limit 2015-05-13
+Generating events between 2013-03-04 and 2014-12-02.
+Reached upper date limit 2014-12-02
 
 
 >>> ses.show(cal.EventsByController.request(obj),
@@ -158,10 +186,13 @@ Reached upper date limit 2015-05-13
 ========================== ==================
  Wann                       Kurzbeschreibung
 -------------------------- ------------------
- **Mi. 13.08.14 (09:00)**   Termin 1
- **Do. 13.11.14 (09:00)**   Termin 2
- **Fr. 13.02.15 (09:00)**   Termin 3
- **Mi. 13.05.15 (09:00)**   Termin 4
+ **Mo. 04.03.13 (09:00)**   Termin 1
+ **Di. 04.06.13 (09:00)**   Termin 2
+ **Mi. 04.09.13 (09:00)**   Termin 3
+ **Mi. 04.12.13 (09:00)**   Termin 4
+ **Di. 04.03.14 (09:00)**   Termin 5
+ **Mi. 04.06.14 (09:00)**   Termin 6
+ **Do. 04.09.14 (09:00)**   Termin 7
 ========================== ==================
 <BLANKLINE>
 

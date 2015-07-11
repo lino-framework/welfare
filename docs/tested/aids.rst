@@ -8,22 +8,23 @@ This document is a technical tour into the
 :mod:`lino_welfare.modlib.aids` module.
 
 ..  To test only this document:
+
     $ python setup.py test -s tests.DocsTests.test_aids
+
+    doctest initialization:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
+
+    >>> ses = rt.login('rolf')
+    >>> translation.activate('de')
 
 .. contents::
    :local:
    :depth: 2
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
-
->>> ses = rt.login('rolf')
->>> translation.activate('de')
 
 
 ConfirmationTypes
@@ -86,18 +87,21 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt in <em>Beratung mit COLLARD Charlotte (118)</em> (<b>Versammlung beenden</b>). </span>
-<span>Du hast 4 Eintr&#228;ge in <b>Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
+<span>Du hast 6 Eintr&#228;ge in <b>Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 <b>Du hast 3 offene Datenkontrollen.</b>
 
+When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ======================== ========================= ============== ========== ======= ================================
  Klient                   Hilfeart                  Laufzeit von   bis        Autor   Arbeitsablauf
 ------------------------ ------------------------- -------------- ---------- ------- --------------------------------
+ DUBOIS Robin (179)       Eingliederungseinkommen   23.07.14                          **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Ausländerbeihilfe         22.06.14                          **Unbestätigt** → [Bestätigen]
  EMONTS-GAST Erna (152)   Heizkosten                30.05.14       31.05.14           **Unbestätigt** → [Bestätigen]
- DUBOIS Robin (179)       Eingliederungseinkommen   05.01.14                          **Unbestätigt** → [Bestätigen]
- DUBOIS Robin (179)       Ausländerbeihilfe         26.02.13                          **Unbestätigt** → [Bestätigen]
+ DA VINCI David (165)     Eingliederungseinkommen   23.05.14                          **Unbestätigt** → [Bestätigen]
+ DUBOIS Robin (179)       Eingliederungseinkommen   26.02.13                          **Unbestätigt** → [Bestätigen]
  DA VINCI David (165)     Ausländerbeihilfe         27.01.13                          **Unbestätigt** → [Bestätigen]
 ======================== ========================= ============== ========== ======= ================================
 <BLANKLINE>
@@ -116,8 +120,8 @@ In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
 ...    print("%s : %d" % (unicode(at), qs.count()))
-Eingliederungseinkommen : 17
-Ausländerbeihilfe : 29
+Eingliederungseinkommen : 20
+Ausländerbeihilfe : 35
 Feste Beihilfe : 3
 Erstattung : 3
 Übernahmeschein : 3
@@ -142,14 +146,14 @@ The demo fixtures generate some exceptions to this general rule.  Here
 we see that most contracts have indeed exactly 1 granting:
 
 >>> isip.Contract.objects.all().count()
-27
+33
 
 >>> l = []
 >>> for con in isip.Contract.objects.all():
 ...     if con.get_aid_type() is not None:
 ...         l.append(con.id)
 >>> print(l)
-[1, 4, 5, 6, 8, 9, 10, 12, 14, 16, 17, 18, 20, 21, 23, 24, 26]
+[1, 3, 4, 7, 9, 10, 11, 12, 14, 17, 18, 19, 22, 24, 27, 29, 32]
 
 >>> rr = aids.IncomeConfirmationsByGranting.insert_action.action.required_roles
 >>> print rt.login("rolf").get_user().profile.has_required_role(rr)
@@ -166,17 +170,21 @@ True
 
 >>> obj = aids.Granting.objects.get(pk=mk)
 >>> obj
-Granting #3 (u'EiEi/09.08.14/116')
+Granting #3 (u'EiEi/09.10.12/124')
 
+This granting has been confirmed once:
 
 >>> rt.show(aids.IncomeConfirmationsByGranting, obj)
-======= ========================= ================ ============ ============= =====
- ID      Klient                    Kategorie        Betrag       Periode vom   bis
-------- ------------------------- ---------------- ------------ ------------- -----
- 4       AUSDEMWALD Alfons (116)   Zusammenlebend   456,00       09.08.14
- **0**                                              **456,00**
-======= ========================= ================ ============ ============= =====
+======= ============================ ================ ============ ============= =====
+ ID      Klient                       Kategorie        Betrag       Periode vom   bis
+------- ---------------------------- ---------------- ------------ ------------- -----
+ 4       DOBBELSTEIN Dorothée (124)   Zusammenlebend   456,00       09.10.12
+ **0**                                                 **456,00**
+======= ============================ ================ ============ ============= =====
 <BLANKLINE>
+
+Permissions
+===========
 
 We test whether Theresia is allowed to create an income confirmation.
 
@@ -270,11 +278,10 @@ There are two grantings with this aid type:
 ==================== ==================== ============== ========== ====
  Beschreibung         Klient               Laufzeit von   bis        ID
 -------------------- -------------------- -------------- ---------- ----
- *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   38
- *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   39
+ *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   44
+ *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   45
 ==================== ==================== ============== ========== ====
 <BLANKLINE>
-
 
 Usually there is at most one pharmacy among the client's client
 contacts:
@@ -290,18 +297,27 @@ contacts:
 ==================== =============== =================== =============
 <BLANKLINE>
 
->>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=141))
-==================== ================== ==================== =============
- Klientenkontaktart   Organisation       Kontaktperson        Bemerkungen
--------------------- ------------------ -------------------- -------------
- Apotheke             Apotheke Schunck
- Kinderarzt                              Dr. Killian KIMMEL
- Arzt                                    Waltraud WALDMANN
- Hausarzt                                Werner WEHNICHT
-==================== ================== ==================== =============
-<BLANKLINE>
+
+There is only one pharmacy per client, but in a confirmation I can
+manually choose any other pharmacy:
+
+>>> ContentType = rt.modules.contenttypes.ContentType
+>>> mt = ContentType.objects.get_for_model(rt.modules.aids.Granting).id
+>>> obj = rt.modules.aids.Granting.objects.get(id=44)
+>>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk={1}'.format(mt, obj.id)
+>>> response = test_client.get(url, REMOTE_USER="rolf")
+>>> result = json.loads(response.content)
+>>> for r in result['rows']:
+...     print r['text']
+<br/>
+Apotheke Reul
+Apotheke Schunck
+Pharmacies Populaires de Verviers
+Bosten-Bocken A
 
 
+Refund confirmations
+====================
 
 >>> column_names = "id granting "
 >>> column_names += "granting__client "
@@ -325,23 +341,6 @@ contacts:
 ==== ================== ====================== ================== ================ =====================
 <BLANKLINE>
 
-
-There is only one pharmacy per client, but in a confirmation I can
-manually choose any other pharmacy:
-
->>> ContentType = rt.modules.contenttypes.ContentType
->>> mt = ContentType.objects.get_for_model(rt.modules.aids.Granting).id
->>> obj = rt.modules.aids.Granting.objects.get(id=38)
->>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk={1}'.format(mt, obj.id)
->>> response = test_client.get(url, REMOTE_USER="rolf")
->>> result = json.loads(response.content)
->>> for r in result['rows']:
-...     print r['text']
-<br/>
-Apotheke Reul
-Apotheke Schunck
-Pharmacies Populaires de Verviers
-Bosten-Bocken A
 
 
 Creating a doctor

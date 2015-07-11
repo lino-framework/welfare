@@ -32,11 +32,9 @@ def objects():
 
     # isip (VSE)
     ISIP_DURATIONS = Cycler(312, 480, 312, 480, 30)
-    ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
 
     JOBS = Cycler(jobs.Job.objects.all())
 
-    JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
     STUDY_TYPES = Cycler(cv.StudyType.objects.all())
 
     COMPANIES = Cycler(rt.modules.contacts.Company.objects.all()[:5])
@@ -54,6 +52,7 @@ def objects():
     ar = rt.login('alicia')
 
     def finish_contract(ctr):
+        # print 20150711, ctr, ctr.type
         ctr.full_clean()
         ctr.save()
         ctr.after_ui_save(ar, None)
@@ -66,6 +65,83 @@ def objects():
 
     qs = pcsw.Client.objects.filter(coachings_by_client__type=DSBE).distinct()
     # dd.logger.info("20141122 generating %d integ contracts", qs.count())
+
+    factories = []
+
+    JOBS_CONTRACT_TYPES = Cycler(jobs.ContractType.objects.all())
+
+    def jobs_contract(**kw):
+        kw.update(
+            type=JOBS_CONTRACT_TYPES.pop(),
+            duration=JOBS_CONTRACT_DURATIONS.pop(),
+            job=JOBS.pop())
+        if not 'type' in kw:
+            raise Exception("20150711, %s" % kw)
+        return jobs.Contract(**kw)
+
+    ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
+    print "20150711b", isip.ContractType.objects.all()
+
+    def isip_contract(**kw):
+        ct = ISIP_CONTRACT_TYPES.pop()
+        if ct.needs_study_type:
+            kw.update(study_type=STUDY_TYPES.pop())
+        kw.update(
+            type=ct,
+            applies_until=af + datetime.timedelta(
+                days=ISIP_DURATIONS.pop()))
+        if not 'type' in kw:
+            raise Exception("20150711, %s" % kw)
+        return isip.Contract(**kw)
+
+    factories.append(isip_contract)
+    factories.append(jobs_contract)
+    factories.append(isip_contract)
+    factories.append(jobs_contract)
+    factories.append(isip_contract)
+
+    if dd.is_installed('art61'):
+        Subsidizations = art61.Subsidizations
+        SUBS_STORIES = Cycler([
+            [Subsidizations.activa],
+            [Subsidizations.tutorat],
+            [Subsidizations.activa, Subsidizations.tutorat],
+            [Subsidizations.region]
+        ])
+
+        ART61_CONTRACT_TYPES = Cycler(art61.ContractType.objects.all())
+
+        def f(**kw):
+            kw.update(
+                type=ART61_CONTRACT_TYPES.pop(),
+                company=COMPANIES.pop(),
+                duration=JOBS_CONTRACT_DURATIONS.pop())
+            ss = SUBS_STORIES.pop()
+            for sub in ss:
+                kw[sub.contract_field_name()] = True
+            if not 'type' in kw:
+                raise Exception("20150711, %s" % kw)
+            return art61.Contract(**kw)
+        factories.append(f)
+
+    if dd.is_installed('immersion'):
+        IMMERSION_CONTRACT_TYPES = Cycler(
+            immersion.ContractType.objects.all())
+        GOALS = Cycler(immersion.Goal.objects.all())
+
+        def f(**kw):
+            kw.update(
+                company=COMPANIES.pop(),
+                type=IMMERSION_CONTRACT_TYPES.pop())
+            kw.update(
+                applies_until=af + datetime.timedelta(
+                    days=ISIP_DURATIONS.pop()))
+            kw.update(goal=GOALS.pop())
+            if not 'type' in kw:
+                raise Exception("20150711, %s" % kw)
+            return immersion.Contract(**kw)
+        factories.append(f)
+
     for i, client in enumerate(qs):
 
         # af = coaching.start_date or settings.SITE.demo_date(-600 + i * 40)
@@ -81,70 +157,8 @@ def objects():
         else:
             kw.update(user=ar.user)
 
-        def jobs_contract():
-            kw.update(
-                type=JOBS_CONTRACT_TYPES.pop(),
-                duration=JOBS_CONTRACT_DURATIONS.pop(),
-                job=JOBS.pop())
-            return jobs.Contract(**kw)
-
-        def isip_contract():
-            ct = ISIP_CONTRACT_TYPES.pop()
-            if ct.needs_study_type:
-                kw.update(study_type=STUDY_TYPES.pop())
-            kw.update(
-                type=ct,
-                applies_until=af + datetime.timedelta(
-                    days=ISIP_DURATIONS.pop()))
-            return isip.Contract(**kw)
-
-        factories = []
-        factories.append(isip_contract)
-        factories.append(jobs_contract)
-        factories.append(isip_contract)
-        factories.append(jobs_contract)
-        factories.append(isip_contract)
-
-        if dd.is_installed('art61'):
-            Subsidizations = art61.Subsidizations
-            SUBS_STORIES = Cycler([
-                [Subsidizations.activa],
-                [Subsidizations.tutorat],
-                [Subsidizations.activa, Subsidizations.tutorat],
-                [Subsidizations.region]
-            ])
-
-            ART61_CONTRACT_TYPES = Cycler(art61.ContractType.objects.all())
-
-            def f():
-                kw.update(
-                    type=ART61_CONTRACT_TYPES.pop(),
-                    company=COMPANIES.pop(),
-                    duration=JOBS_CONTRACT_DURATIONS.pop())
-                ss = SUBS_STORIES.pop()
-                for sub in ss:
-                    kw[sub.contract_field_name()] = True
-                return art61.Contract(**kw)
-            factories.append(f)
-
-        if dd.is_installed('immersion'):
-            IMMERSION_CONTRACT_TYPES = Cycler(
-                immersion.ContractType.objects.all())
-            GOALS = Cycler(immersion.Goal.objects.all())
-        
-            def f():
-                kw.update(
-                    company=COMPANIES.pop(),
-                    type=IMMERSION_CONTRACT_TYPES.pop())
-                kw.update(
-                    applies_until=af + datetime.timedelta(
-                        days=ISIP_DURATIONS.pop()))
-                kw.update(goal=GOALS.pop())
-                return immersion.Contract(**kw)
-            factories.append(f)
-
-        f = factories[i % len(factories)]
-        ctr = f()
+        cf = factories[i % len(factories)]
+        ctr = cf(**kw)
 
         # if i % 2:
         #     ctr = jobs_contract()
@@ -175,7 +189,8 @@ def objects():
                     kw.update(user=coaching.user)
                     kw.update(applies_from=af)
                     kw.update(applies_until=af+datetime.timedelta(days=365))
-                    ctr = ctr.__class__(**kw)
+                    # ctr = ctr.__class__(**kw)
+                    ctr = cf(**kw)
                     yield finish_contract(ctr)
 
     # additional loop over isip contracts to add related objects

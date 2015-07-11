@@ -8,11 +8,12 @@ d'immersion).
 A tested document is here: :ref:`welfare.tested.immersion`
 
 .. autosummary::
-   :toctree:
+    :toctree:
 
-   models
-   fixtures.std
-   fixtures.demo
+    models
+    ui
+    fixtures.std
+    fixtures.demo
 
 """
 
@@ -20,7 +21,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino import ad
+from lino.api import ad
 
 
 class Plugin(ad.Plugin):

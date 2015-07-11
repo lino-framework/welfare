@@ -6,9 +6,9 @@
 
 """
 
-from lino.api import dd, rt, _
+from lino.api import dd, rt
 
 
 def objects():
     CT = rt.modules.art61.ContractType
-    yield CT(**dd.str2kw('name', _("Default")))
+    yield CT(**dd.str2kw('name', rt.modules.art61.Contract._meta.verbose_name))

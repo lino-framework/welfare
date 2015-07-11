@@ -68,6 +68,14 @@ class ContractTypeBase(mixins.BabelNamed):
         If this field is empty, Lino does not check at all for
         overlapping contracts.
 
+    .. attribute:: template
+
+        The main template to use instead of the default template
+        defined on the excerpt type.
+    
+        See
+        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_excerpt_templates`.
+
     """
 
     class Meta:
@@ -81,6 +89,13 @@ class ContractTypeBase(mixins.BabelNamed):
         blank=True, null=True)
 
     overlap_group = OverlapGroups.field(blank=True)
+    template = models.CharField(_("Template"), max_length=200, blank=True)
+
+    @dd.chooser(simple_values=True)
+    def template_choices(cls):
+        bm = rt.modules.printing.BuildMethods.get_system_default()
+        return rt.find_template_config_files(
+            bm.template_ext, cls.templates_group)
 
 
 class ContractPartnerBase(ContactRelated):
@@ -277,6 +292,24 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         # return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
         #                         self.client.get_full_name(salutation=False))
 
+    def get_excerpt_title(self):
+        """The printed title of a contract specifies just the contract type
+        (not the number and name of client).
+
+        """
+        return unicode(self.type)
+        # return unicode(self._meta.verbose_name)
+
+    def get_excerpt_templates(self, bm):
+        """Overrides
+        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_excerpt_templates`.
+
+        """
+        if self.type_id:
+            if self.type.template:
+                # assert self.type.template.endswith(bm.template_ext)
+                return [self.type.template]
+        
     # backwards compat for document templates
     def get_person(self):
         return self.client

@@ -257,3 +257,5 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 # html_theme = "classic"
 # html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
 
+autodoc_member_order = 'bysource'
+autodoc_default_flags = ['show-inheritance', 'members']

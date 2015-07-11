@@ -4,7 +4,18 @@ Ledger for Lino Welfare (Sozialbuchhaltung)
 ===========================================
 
 .. How to test only this document:
-  $ python setup.py test -s tests.SpecsTests.test_ledger
+
+    $ python setup.py test -s tests.SpecsTests.test_ledger
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.utils.xmlgen.html import E
+    >>> from lino.api.doctest import *
+    >>> from lino.api import rt
 
 This document describes the new functionalities implemented as a
 project called "Sozialbuchhaltung" and started in May 2015.
@@ -12,20 +23,6 @@ project called "Sozialbuchhaltung" and started in May 2015.
 .. contents::
    :depth: 1
    :local:
-
-A tested document
-=================
-
-This document is being tested using doctest with the following
-initializations:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.utils.xmlgen.html import E
->>> from lino.api.doctest import *
->>> from lino.api import rt
 
 Implementation notes
 ====================

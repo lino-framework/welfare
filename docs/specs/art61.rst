@@ -6,7 +6,15 @@ Article 61 job supplyments
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.SpecsTests.test_art61
+    $ python setup.py test -s tests.SpecsTests.test_art61
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino.api.doctest import *
 
 This document is an overview of the functionality provided by
 :mod:`lino_welfare.modlib.art61`.
@@ -15,18 +23,6 @@ This document is an overview of the functionality provided by
    :depth: 2
    :local:
 
-
-A tested document
-=================
-
-This document is being tested using doctest with the following
-initializations:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.chatelet.settings.doctests'
->>> from lino.api.doctest import *
 
 
 What are article 61 job supplyments?
@@ -72,7 +68,7 @@ The printed document
 >>> soup = BeautifulSoup(html)
 >>> for h in soup.find_all('h1'):
 ...     print(h)
-<h1>Art61 job supplyment#1 (Robin DUBOIS)
+<h1>Art61 job supplyment
 </h1>
 
 >>> for h in soup.find_all('h2'):

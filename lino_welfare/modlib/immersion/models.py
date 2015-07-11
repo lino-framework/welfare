@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 
-"""The :xfile:`models.py` module for `lino_welfare.modlib.immersion`.
+"""Database models for `lino_welfare.modlib.immersion`.
 
 """
 from __future__ import unicode_literals
@@ -19,12 +19,10 @@ from lino import mixins
 
 from lino.modlib.cv.mixins import SectorFunction
 from lino_welfare.modlib.isip.mixins import (
-    ContractTypeBase, ContractBase, ContractPartnerBase, ContractBaseTable)
+    ContractTypeBase, ContractBase, ContractPartnerBase)
 
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
-
-from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
 
 
 class ClientHasContract(ObservedEvent):
@@ -40,6 +38,20 @@ ClientEvents.add_item_instance(ClientHasContract("immersion"))
 
 
 class ContractType(ContractTypeBase):
+    """Every *immersion training* has a mandatory field
+    :attr:`Contract.type` which points to this.  The **immersion
+    training type** defines certain properties of the immersion
+    trainings that use it.
+
+    .. attribute:: name
+
+        Translatable description.
+
+    .. attribute:: template
+
+        See :attr:`lino_welfare.modlib.isip.mixins.ContractTypeBase.template`
+
+    """
 
     templates_group = 'immersion/Contract'
 
@@ -47,22 +59,6 @@ class ContractType(ContractTypeBase):
         verbose_name = _("Immersion training type")
         verbose_name_plural = _('Immersion training types')
         ordering = ['name']
-
-
-class ContractTypes(dd.Table):
-    """
-    """
-    required_roles = dd.required(IntegrationStaff)
-    model = 'immersion.ContractType'
-    column_names = 'name *'
-    detail_layout = """
-    id name exam_policy
-    ContractsByType
-    """
-    insert_layout = """
-    name
-    exam_policy
-    """
 
 
 class Goal(mixins.BabelNamed):
@@ -73,18 +69,6 @@ class Goal(mixins.BabelNamed):
         verbose_name = _("Immersion training goal")
         verbose_name_plural = _('Immersion training goals')
         ordering = ['name']
-
-
-class Goals(dd.Table):
-    """
-    """
-    required_roles = dd.required(IntegrationStaff)
-    model = 'immersion.Goal'
-    column_names = 'name *'
-    detail_layout = """
-    id name
-    ContractsByGoal
-    """
 
 
 class Contract(ContractBase, ContractPartnerBase, SectorFunction):
@@ -127,102 +111,4 @@ dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 dd.update_field(Contract, 'company', blank=False, null=False)
 
 
-class ContractDetail(dd.FormLayout):
-    box1 = """
-    id:8 client:25 user:15 language:8
-    type goal company contact_person contact_role
-    applies_from applies_until exam_policy
-    sector function
-    reference_person printed
-    date_decided date_issued date_ended ending:20
-    responsibilities
-    """
-
-    right = """
-    cal.EventsByController
-    cal.TasksByController
-    """
-
-    main = """
-    box1:70 right:30
-    """
-
-
-class Contracts(ContractBaseTable):
-
-    required_roles = dd.required(IntegrationAgent)
-    model = 'immersion.Contract'
-    column_names = 'id client applies_from applies_until user type *'
-    order_by = ['id']
-    detail_layout = ContractDetail()
-    insert_layout = """
-    client
-    company
-    type goal
-    """
-
-    parameters = dict(
-        type=models.ForeignKey(
-            'immersion.ContractType', blank=True,
-            verbose_name=_("Only immersion trainings of type")),
-        **ContractBaseTable.parameters)
-
-    params_layout = """
-    user type start_date end_date observed_event
-    company ending_success ending
-    """
-
-    @classmethod
-    def get_request_queryset(cls, ar):
-        qs = super(Contracts, cls).get_request_queryset(ar)
-        pv = ar.param_values
-        if pv.company:
-            qs = qs.filter(company=pv.company)
-        return qs
-
-
-class ContractsByClient(Contracts):
-    """
-    """
-    master_key = 'client'
-    auto_fit_column_widths = True
-    column_names = ('applies_from applies_until type '
-                    'company contact_person user remark:20 *')
-
-
-class ContractsByProvider(Contracts):
-    master_key = 'company'
-    column_names = 'client applies_from applies_until user type *'
-
-
-class ContractsByPolicy(Contracts):
-    master_key = 'exam_policy'
-
-
-class ContractsByType(Contracts):
-    master_key = 'type'
-    column_names = "applies_from client user *"
-    order_by = ["applies_from"]
-
-
-class ContractsByGoal(Contracts):
-    master_key = 'goal'
-    column_names = "applies_from client user *"
-    order_by = ["applies_from"]
-
-
-class ContractsByEnding(Contracts):
-    master_key = 'ending'
-
-
-
-class MyContracts(Contracts):
-    column_names = "applies_from client type company applies_until date_ended ending *"
-
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(MyContracts, self).param_defaults(ar, **kw)
-        kw.update(user=ar.get_user())
-        return kw
-
-
+from .ui import *

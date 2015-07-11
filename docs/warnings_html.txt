@@ -1,2 +1,15 @@
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:4: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:12: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:21: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:30: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:39: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:48: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:57: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:66: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/lino_welfare/modlib/aids/__init__.py:docstring of lino_welfare.modlib.aids:75: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.aids.rst:87: ERROR: Unknown interpreted text role "welfare_srcref".
+/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.jobs.models.rst:394: WARNING: 'type' object is not iterable
+/home/luc/hgwork/welfare/lino_welfare/modlib/pcsw/models.py:docstring of lino_welfare.modlib.pcsw.models.Client.properties_list:1: WARNING: Inline interpreted text or phrase reference start-string without end-string.
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
+/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.art61.rst:4: WARNING: unknown document: /tested/art61

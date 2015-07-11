@@ -8,6 +8,8 @@ General overview of Lino Welfare
 
     $ python setup.py test -s tests.DocsTests.test_general
 
+    doctest init:
+
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
@@ -45,27 +47,27 @@ The following table gives an overview of these things.
  addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
- aids.Granting                  aids.GrantingsByX               12        51
- aids.IncomeConfirmation        aids.IncomeConfirmations        17        48
+ aids.Granting                  aids.GrantingsByX               12        55
+ aids.IncomeConfirmation        aids.IncomeConfirmations        17        54
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
- art61.Contract                 art61.Contracts                 30        4
- art61.ContractType             art61.ContractTypes             9         1
+ art61.Contract                 art61.Contracts                 30        7
+ art61.ContractType             art61.ContractTypes             10        1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
- cal.Event                      cal.OneEvent                    24        505
+ cal.Event                      cal.OneEvent                    24        528
  cal.EventType                  cal.EventTypes                  19        8
- cal.Guest                      cal.Guests                      9         492
+ cal.Guest                      cal.Guests                      9         521
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
  cal.Subscription               cal.Subscriptions               4         8
- cal.Task                       cal.Tasks                       19        33
+ cal.Task                       cal.Tasks                       19        34
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     20        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       23        1
  cbss.Purpose                   cbss.Purposes                   7         106
@@ -122,17 +124,17 @@ The following table gives an overview of these things.
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
- immersion.Contract             immersion.Contracts             25        7
- immersion.ContractType         immersion.ContractTypes         8         3
+ immersion.Contract             immersion.Contracts             25        6
+ immersion.ContractType         immersion.ContractTypes         9         3
  immersion.Goal                 immersion.Goals                 5         4
- isip.Contract                  isip.Contracts                  22        26
+ isip.Contract                  isip.Contracts                  22        30
  isip.ContractEnding            isip.ContractEndings            6         4
- isip.ContractPartner           isip.ContractPartners           6         30
- isip.ContractType              isip.ContractTypes              10        5
+ isip.ContractPartner           isip.ContractPartners           6         35
+ isip.ContractType              isip.ContractTypes              11        5
  isip.ExamPolicy                isip.ExamPolicies               20        6
  jobs.Candidature               jobs.Candidatures               8         74
- jobs.Contract                  jobs.Contracts                  28        16
- jobs.ContractType              jobs.ContractTypes              11        5
+ jobs.Contract                  jobs.Contracts                  28        13
+ jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
  jobs.JobProvider               jobs.JobProviders               31        3
  jobs.JobType                   jobs.JobTypes                   5         5

@@ -35,12 +35,20 @@ This client has the following appointments.
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary workflow_buttons",
 ...     language="en")
-============ ============ ================ ================ =======================================================
- Start date   Start time   Managed by       Summary          Workflow
------------- ------------ ---------------- ---------------- -------------------------------------------------------
- 5/22/14                   Mélanie Mélard   Urgent problem   **Waiting** → [Receive] [Checkout]
- 5/23/14      09:40:00     Rolf Rompen      Erstgespräch     **Accepted** → [Excused] [Absent] [Present] [Checkin]
-============ ============ ================ ================ =======================================================
+============ ============ ================= ================ =======================================================
+ Start date   Start time   Managed by        Summary          Workflow
+------------ ------------ ----------------- ---------------- -------------------------------------------------------
+ 5/15/14      09:00:00     Caroline Carnol   Termin 2         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 5/22/14                   Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
+ 5/23/14      09:40:00     Rolf Rompen       Erstgespräch     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 6/16/14      09:00:00     Caroline Carnol   Termin 3         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 7/16/14      09:00:00     Caroline Carnol   Termin 4         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 8/18/14      09:00:00     Caroline Carnol   Termin 5         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 9/18/14      09:00:00     Caroline Carnol   Termin 6         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 10/20/14     09:00:00     Caroline Carnol   Termin 7         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 11/20/14     09:00:00     Caroline Carnol   Termin 8         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 12/22/14     09:00:00     Caroline Carnol   Termin 9         **Accepted** → [Excused] [Absent] [Present] [Checkin]
+============ ============ ================= ================ =======================================================
 <BLANKLINE>
 
 

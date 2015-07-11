@@ -8,6 +8,7 @@ The settings.py used for building both `/docs` and `/userdocs`
 
 from lino_welfare.projects.std.settings import *
 
+
 class Site(Site):
 
     # verbose_name = "Lino pour CPAS"
@@ -65,6 +66,7 @@ class Site(Site):
         #~ yield self.modules.reception.ReceivedVisitors
 
     def do_site_startup(self):
+        
         super(Site, self).do_site_startup()
         # from lino.utils.sendchanges import register, subscribe
         # e = register('notes.Note', 'subject body',
@@ -72,8 +74,20 @@ class Site(Site):
         # e.updated_subject = "Changement dans {obj}"
         # subscribe('john.doe@example.org')
 
-        from lino.core.signals import receiver, on_ui_updated
+        # from lino.core.signals import receiver, on_ui_updated
 
+        # def immersion_template(obj, bm):
+        #     # Use a custom template for immersion trainings with
+        #     # external partner.
+
+        #     if bm.template_ext != '.odt':
+        #         raise Exception("Not supported")
+        #     if obj.company is None:
+        #         return "Default.odt"
+        #     return "StageForem.odt"
+
+        # self.plugins.excerpts.register_default_template_handler(
+        #     self.modules.immersion.Contract, immersion_template)
 
 
 # the following line should not be active in a checked-in version
