@@ -57,7 +57,7 @@ class Plugin(ad.Plugin):
         # if profile.cbss_level < site.modules.users.UserLevels.manager:
         #     return
         m = m.add_menu(self.app_label, self.verbose_name)
-        m.add_action('cbss.IdentifyPersonRequests')
-        m.add_action('cbss.ManageAccessRequests')
-        m.add_action('cbss.RetrieveTIGroupsRequests')
+        m.add_action('cbss.AllIdentifyPersonRequests')
+        m.add_action('cbss.AllManageAccessRequests')
+        m.add_action('cbss.AllRetrieveTIGroupsRequests')
 

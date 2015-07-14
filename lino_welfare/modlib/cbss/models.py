@@ -207,6 +207,7 @@ class CBSSRequestDetail(dd.FormLayout):
     """, label=_("Request"))
 
     technical = dd.Panel("""
+    environment ticket
     response_xml
     info_messages
     debug_messages
@@ -214,7 +215,7 @@ class CBSSRequestDetail(dd.FormLayout):
         required_roles=dd.required(CBSSUser, dd.SiteStaff))
 
     info = dd.Panel("""
-    id person user environment sent status ticket
+    id person user sent status printed
     """, label=_("Request information"))
 
 
@@ -407,7 +408,7 @@ class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
 
     p2 = dd.Panel("""
     first_name middle_name last_name
-    birth_date tolerance  gender 
+    birth_date tolerance gender
     """, label=_("Phonetic search"))
 
     #~ def setup_handle(self,lh):
@@ -419,8 +420,7 @@ class CBSSRequests(dd.Table):
 
 
 class IdentifyPersonRequests(CBSSRequests):
-    #~ window_size = (500,400)
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+    required_roles = dd.required(CBSSUser)
     model = 'cbss.IdentifyPersonRequest'
     active_fields = 'person'
     detail_layout = IdentifyPersonRequestDetail()
@@ -431,8 +431,12 @@ class IdentifyPersonRequests(CBSSRequests):
         return '<br/>'
 
 
+class AllIdentifyPersonRequests(IdentifyPersonRequests):
+    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+
+
 class MyIdentifyPersonRequests(ByUser, IdentifyPersonRequests):
-    required_roles = dd.required(CBSSUser)
+    pass
 
 
 class IdentifyRequestsByPerson(IdentifyPersonRequests):
@@ -752,7 +756,7 @@ class ManageAccessRequestInsert(dd.FormLayout):
 
 
 class ManageAccessRequests(CBSSRequests):
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+    required_roles = dd.required(CBSSUser)
     #~ window_size = (500,400)
     model = 'cbss.ManageAccessRequest'
     detail_layout = ManageAccessRequestDetail()
@@ -760,8 +764,11 @@ class ManageAccessRequests(CBSSRequests):
     active_fields = 'person'
 
 
+class AllManageAccessRequests(ManageAccessRequests):
+    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+
+
 class ManageAccessRequestsByPerson(ManageAccessRequests):
-    required_roles = dd.required(CBSSUser)
     master_key = 'person'
 
 
@@ -913,7 +920,7 @@ class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
 
 class RetrieveTIGroupsRequests(CBSSRequests):
     #~ debug_permissions = True
-    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
     model = RetrieveTIGroupsRequest
     detail_layout = RetrieveTIGroupsRequestDetail()
     column_names = 'id user person national_id language history status ticket sent environment'
@@ -926,8 +933,11 @@ class RetrieveTIGroupsRequests(CBSSRequests):
     #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
 
 
+class AllRetrieveTIGroupsRequests(RetrieveTIGroupsRequests):
+    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
+
+
 class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
-    required_roles = dd.login_required(CBSSUser)
     master_key = 'person'
 
 
@@ -936,6 +946,7 @@ class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
 
 
 from .tx25 import RetrieveTIGroupsResult
+
 
 @dd.receiver(dd.pre_analyze)
 def customize_system(sender, **kw):

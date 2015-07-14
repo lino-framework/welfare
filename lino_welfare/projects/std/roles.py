@@ -7,6 +7,7 @@ for :ref:`welfare`.
 
 from lino.core.roles import Anonymous, SiteAdmin
 from lino.modlib.office.roles import OfficeOperator
+from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
@@ -27,7 +28,7 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, NewcomersOperator, AidsUser):
+class ReceptionClerk(OfficeOperator, NewcomersOperator, AidsUser, CBSSUser):
     pass
 
 from lino.modlib.users.choicelists import UserProfiles
