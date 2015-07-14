@@ -6,7 +6,15 @@ Uploads
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_uploads
+    $ python setup.py test -s tests.DocsTests.test_uploads
+
+    doctest init:
+    
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
 
@@ -18,17 +26,6 @@ expire.
 
 .. contents::
    :depth: 2
-
-About this document
-===================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
->>> from lino.api.doctest import *
 
     
 A few things that should pass, otherwise don't expect the remaining
@@ -84,8 +81,8 @@ DERICUM Daniel (121)
 ============================ ============ ======= ============== =================== =======
  Upload-Art                   Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
 ---------------------------- ------------ ------- -------------- ------------------- -------
- Identifizierendes Dokument   22.04.14     Nein                   Theresia Thelen
  Identifizierendes Dokument   25.05.14     Ja                     Theresia Thelen
+ Identifizierendes Dokument   22.04.14     Nein                   Theresia Thelen
  **Total (2 Zeilen)**                      **1**
 ============================ ============ ======= ============== =================== =======
 <BLANKLINE>
@@ -100,9 +97,9 @@ DOBBELSTEIN Dorothée (124)
 ====================== ============ ======= ============== =================== =======
  Upload-Art             Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
 ---------------------- ------------ ------- -------------- ------------------- -------
- Aufenthaltserlaubnis   18.03.15     Ja                     Theresia Thelen
- Arbeitserlaubnis       30.08.14     Ja                     Alicia Allmanns
  Führerschein           01.06.14     Ja                     Caroline Carnol
+ Arbeitserlaubnis       30.08.14     Ja                     Alicia Allmanns
+ Aufenthaltserlaubnis   18.03.15     Ja                     Theresia Thelen
  **Total (3 Zeilen)**                **3**
 ====================== ============ ======= ============== =================== =======
 <BLANKLINE>
@@ -190,7 +187,7 @@ row. Which means that it has two buttons.
 The first button opens a detail window on the *last* uploaded filed:
 
 >>> div.contents[0]
-<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 7 })'>Last</a>
+<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 8 })'>Last</a>
 
 The second item is just the comma which separates the two buttons:
 
@@ -222,11 +219,11 @@ It has 3 keys:
 [u'record_id', u'param_values', u'base_params']
 
 >>> d.record_id
-7
+8
 >>> d.base_params
 {u'mt': 51, u'type': 4, u'mk': 121}
 >>> d.param_values
-{u'pupload_type': None, u'puser': None, u'end_date': None, u'observed_eventHidden': u'20', u'observed_event': u'Est active', u'coached_by': None, u'pupload_typeHidden': None, u'coached_byHidden': None, u'puserHidden': None, u'start_date': None}
+{u'observed_event': u'Est active', u'upload_typeHidden': None, u'end_date': None, u'observed_eventHidden': u'20', u'userHidden': None, u'coached_by': None, u'user': None, u'coached_byHidden': None, u'start_date': None, u'upload_type': None}
 
 
 

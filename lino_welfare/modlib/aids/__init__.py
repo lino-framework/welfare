@@ -101,7 +101,7 @@ class Plugin(ad.Plugin):
     def setup_explorer_menu(config, site, profile, m):
         menu_host = site.plugins.pcsw
         m = m.add_menu(menu_host.app_label, menu_host.verbose_name)
-        m.add_action('aids.Grantings')
-        m.add_action('aids.IncomeConfirmations')
-        m.add_action('aids.RefundConfirmations')
-        m.add_action('aids.SimpleConfirmations')
+        m.add_action('aids.AllGrantings')
+        m.add_action('aids.AllIncomeConfirmations')
+        m.add_action('aids.AllRefundConfirmations')
+        m.add_action('aids.AllSimpleConfirmations')

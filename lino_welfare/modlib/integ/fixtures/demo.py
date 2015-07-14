@@ -80,7 +80,7 @@ def objects():
         return jobs.Contract(**kw)
 
     ISIP_CONTRACT_TYPES = Cycler(isip.ContractType.objects.all())
-    print "20150711b", isip.ContractType.objects.all()
+    # print "20150711b", isip.ContractType.objects.all()
 
     def isip_contract(**kw):
         ct = ISIP_CONTRACT_TYPES.pop()

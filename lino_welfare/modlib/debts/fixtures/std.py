@@ -409,7 +409,7 @@ def objects():
 
     ExcerptType = rt.modules.excerpts.ExcerptType
     kw = dict(
-        template='Default.odt',
+        # template='Default.odt',
         certifying=True)
     kw.update(dd.str2kw('name', _("Financial situation")))
     yield ExcerptType.update_for_model('debts.Budget', **kw)

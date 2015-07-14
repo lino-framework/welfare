@@ -37,6 +37,8 @@ from suds.sax.element import Element as E
 from suds.sax.parser import Parser
 PARSER = Parser()
 
+from lino.modlib.excerpts.mixins import Certifiable
+
 #~ except ImportError, e:
     #~ pass
 
@@ -63,7 +65,8 @@ def nodetext(node):
     return node.text
 
 
-class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
+# class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
+class CBSSRequest(UserAuthored, mixins.Duplicable, Certifiable):
 
     """
     Common Abstract Base Class for :class:`SSDNRequest`

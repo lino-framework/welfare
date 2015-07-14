@@ -34,14 +34,6 @@ primitive direct printing method (see :ref:`lino.admin.printable`):
   :class:`cal.Event<lino_welfare.modlib.cal.models.Event>` and
   :class:`outbox.Mail <lino.modlib.outbox.models.Mail>`.
 
-- :class:`IdentifyPersonRequest
-  <lino_welfare.modlib.cbss.models.IdentifyPersonRequest>`,
-  :class:`ManageAccessRequest
-  <lino_welfare.modlib.cbss.models.ManageAccessRequest>` and
-  :class:`RetrieveTIGroupsRequest
-  <lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest>` of the
-  :mod:`lino_welfare.modlib.cbss` plugin.
-
 - and of course :class:`excerpts.Excerpt
   <lino.modlib.excerpts.models.Excerpt>` itself
 
@@ -51,9 +43,6 @@ primitive direct printing method (see :ref:`lino.admin.printable`):
     >>> for m in rt.models_by_base(Printable):
     ...     print m
     <class 'lino.modlib.excerpts.models.Excerpt'>
-    <class 'lino_welfare.modlib.cbss.models.IdentifyPersonRequest'>
-    <class 'lino_welfare.modlib.cbss.models.ManageAccessRequest'>
-    <class 'lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest'>
     <class 'lino.modlib.outbox.models.Mail'>
     <class 'lino_welfare.modlib.notes.models.Note'>
     <class 'lino_welfare.modlib.cal.models.Event'>
@@ -100,17 +89,21 @@ This is the list of excerpt types:
  Simple confirmation      Yes       Yes          Default.odt       certificate.body.html
  Art61 job supplyment     Yes       Yes                            contract.body.html
  Participant              Yes       No           Default.odt       presence_certificate.body.html
- Budget                   Yes       Yes          Default.odt
+ IdentifyPerson Request   Yes       Yes
+ ManageAccess Request     Yes       Yes
+ Tx25 Request             Yes       Yes
+ Budget                   Yes       Yes
  Immersion training       Yes       Yes                            immersion.body.html
- ISIP                     Yes       Yes          
- Art60§7 job supplyment   Yes       Yes          
+ ISIP                     Yes       Yes
+ Art60§7 job supplyment   Yes       Yes
  Client                   No        No           Default.odt       pac.body.html
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt
  Client                   No        No           eid-content.odt
- **Total (13 rows)**      **10**    **8**
+ **Total (16 rows)**      **13**    **11**
 ======================== ========= ============ ================= ================================
 <BLANKLINE>
+
 
 Aid confirmations
 =================

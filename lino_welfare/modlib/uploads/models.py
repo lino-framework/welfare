@@ -147,10 +147,10 @@ class Uploads(Uploads):
     """
 
     parameters = mixins.ObservedPeriod(
-        puser=models.ForeignKey(
-            'users.User', blank=True, null=True,
-            verbose_name=_("Uploaded by")),
-        pupload_type=models.ForeignKey(
+        # puser=models.ForeignKey(
+        #     'users.User', blank=True, null=True,
+        #     verbose_name=_("Uploaded by")),
+        upload_type=models.ForeignKey(
             'uploads.UploadType', blank=True, null=True),
         coached_by=models.ForeignKey(
             'users.User',
@@ -162,29 +162,31 @@ class Uploads(Uploads):
             _("Validity"),
             blank=True, default=dd.PeriodEvents.active))
     params_layout = "observed_event:20 start_date end_date \
-    coached_by puser pupload_type"
+    coached_by user upload_type"
 
     auto_fit_column_widths = True
 
     @classmethod
     def get_request_queryset(cls, ar):
-        # use inherited method from grandparent (not direct parent)
-        qs = super(LibraryUploads, cls).get_request_queryset(ar)
+        # (why was this?) use inherited method from grandparent (not
+        # direct parent)
+        # qs = super(LibraryUploads, cls).get_request_queryset(ar)
+        qs = super(Uploads, cls).get_request_queryset(ar)
         pv = ar.param_values
 
         ce = pv.observed_event
         if ce is not None:
             qs = ce.add_filter(qs, pv)
 
-        if pv.puser:
-            qs = qs.filter(user=pv.puser)
+        # if pv.puser:
+        #     qs = qs.filter(user=pv.puser)
 
         if pv.coached_by:
             qs = qs.filter(project__coachings_by_client__user=pv.coached_by)
             qs = qs.filter(needed=True)
             
-        if pv.pupload_type:
-            qs = qs.filter(type=pv.pupload_type)
+        # if pv.pupload_type:
+        #     qs = qs.filter(type=pv.pupload_type)
 
         return qs
 
@@ -202,33 +204,22 @@ class Uploads(Uploads):
             yield unicode(self.parameters['coached_by'].verbose_name) + \
                 ' ' + unicode(pv.coached_by)
 
-        if pv.puser:
-            yield unicode(self.parameters['puser'].verbose_name) + \
-                ' ' + unicode(pv.puser)
+        if pv.user:
+            yield unicode(self.parameters['user'].verbose_name) + \
+                ' ' + unicode(pv.user)
 
 
 class UploadsByType(Uploads, UploadsByType):
     pass
 
 
-class MyUploads(Uploads):
+class MyUploads(My, Uploads):
     required_roles = dd.required((OfficeUser, OfficeOperator))
     column_names = "id project type start_date end_date \
     needed description file *"
-    order_by = ['-id']
-
-    @classmethod
-    def get_actor_label(self):
-        return _("My %s") % _("Uploads")
-
-    @classmethod
-    def param_defaults(self, ar, **kw):
-        kw = super(MyUploads, self).param_defaults(ar, **kw)
-        kw.update(puser=ar.get_user())
-        return kw
 
 
-class MyExpiringUploads(Uploads):
+class MyExpiringUploads(MyUploads):
     "Expiring uploads for client coached by me"
     required_roles = dd.required((OfficeUser, OfficeOperator))
     label = _("My expiring uploads")

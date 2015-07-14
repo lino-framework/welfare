@@ -5,6 +5,12 @@
 from lino.core.roles import SiteUser
 
 
-class AidsStaff(SiteUser):
+class AidsUser(SiteUser):
+    """A user who can issue aids grantings and confirmations."""
+    pass
+
+
+class AidsStaff(AidsUser):
+    """A user who can manage aids grantings and confirmations."""
     pass
 

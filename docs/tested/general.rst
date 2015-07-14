@@ -47,7 +47,7 @@ The following table gives an overview of these things.
  addresses.Address              addresses.Addresses             16        167
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
- aids.Granting                  aids.GrantingsByX               12        55
+ aids.Granting                  aids.Grantings                  12        55
  aids.IncomeConfirmation        aids.IncomeConfirmations        17        54
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
@@ -68,10 +68,10 @@ The following table gives an overview of these things.
  cal.Room                       cal.Rooms                       5         0
  cal.Subscription               cal.Subscriptions               4         8
  cal.Task                       cal.Tasks                       19        34
- cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     20        5
- cbss.ManageAccessRequest       cbss.ManageAccessRequests       23        1
+ cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
+ cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
- cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   14        2
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
  contacts.Company               contacts.Companies              30        49
@@ -110,8 +110,8 @@ The following table gives an overview of these things.
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.Excerpts               12        13
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        13
+ excerpts.Excerpt               excerpts.Excerpts               12        14
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    10        0
  finan.Grouper                  finan.Groupers                  10        0
@@ -225,15 +225,15 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - aids.AidTypes.detail (viewable for 110, 410, admin) : id, short_name, confirmation_type, name, name_fr, name_de, name_nl, excerpt_title, excerpt_title_fr, excerpt_title_de, excerpt_title_nl, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
 - aids.AidTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, confirmation_type
 - aids.Categories.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
-- aids.Grantings.detail (viewable for 110, 410, admin) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
-- aids.Grantings.insert (viewable for 110, 410, admin) : client, aid_type, signer, board, decision_date, start_date, end_date
-- aids.GrantingsByClient.insert (viewable for all except anonymous, 210) : aid_type, board, decision_date, start_date, end_date
-- aids.IncomeConfirmations.insert (viewable for 110, 410, admin) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
-- aids.IncomeConfirmationsByGranting.insert (viewable for all except anonymous) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
-- aids.RefundConfirmations.insert (viewable for  110, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.RefundConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.SimpleConfirmations.insert (viewable for 110, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
-- aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, company, contact_person, language, remark
+- aids.Grantings.detail (viewable for 110, 210, 410, admin) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
+- aids.Grantings.insert (viewable for 110, 210, 410, admin) : client, aid_type, signer, board, decision_date, start_date, end_date
+- aids.GrantingsByClient.insert (viewable for 110, 210, 410, admin) : aid_type, board, decision_date, start_date, end_date
+- aids.IncomeConfirmations.insert (viewable for 110, 210, 410, admin) : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
+- aids.IncomeConfirmationsByGranting.insert (viewable for 110, 210, 410, admin) : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
+- aids.RefundConfirmations.insert (viewable for 110, 210, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.RefundConfirmationsByGranting.insert (viewable for 110, 210, 410, admin) : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.SimpleConfirmations.insert (viewable for 110, 210, 410, admin) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
+- aids.SimpleConfirmationsByGranting.insert (viewable for 110, 210, 410, admin) : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert (viewable for 110, admin) : id, name, name_fr, name_de, name_nl, ref
 - art61.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
 - art61.Contracts.insert (viewable for 100, 110, admin) : client, company, type
@@ -274,9 +274,9 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
 - contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
-- countries.Countries.detail (viewable for all except anonymous, 210) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
-- countries.Countries.insert (viewable for all except anonymous, 210) : isocode, inscode, name, name_fr, name_de, name_nl
-- countries.Places.insert (viewable for admin) : name, name_fr, name_de, name_nl, country, type, parent, zip_code, id
+- countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
+- countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_fr, name_de, name_nl
+- countries.Places.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, country, type, parent, zip_code, id
 - courses.CourseContents.insert (viewable for 110, admin) : id, name
 - courses.CourseOffers.detail (viewable for 100, 110, admin) : id, title, content, provider, guest_role, description
 - courses.CourseOffers.insert (viewable for 100, 110, admin) : provider, content, title
@@ -374,10 +374,12 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - system.SiteConfigs.detail (viewable for admin) : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail (viewable for admin) : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert (viewable for admin) : name, user
+- uploads.AllUploads.detail (viewable for 110, 410, admin) : file, user, upload_area, type, description, owner
+- uploads.AllUploads.insert (viewable for 110, 410, admin) : type, description, file, user
 - uploads.UploadTypes.detail (viewable for 110, 410, admin) : id, upload_area, shortcut, name, name_fr, name_de, name_nl, warn_expiry_unit, warn_expiry_value, wanted, max_number
 - uploads.UploadTypes.insert (viewable for 110, 410, admin) : upload_area, name, name_fr, name_de, name_nl, warn_expiry_unit, warn_expiry_value
-- uploads.Uploads.detail (viewable for 110, 410, admin) : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
-- uploads.Uploads.insert (viewable for 110, 410, admin) : type, file, start_date, end_date, description
+- uploads.Uploads.detail (viewable for all except anonymous) : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
+- uploads.Uploads.insert (viewable for all except anonymous) : type, file, start_date, end_date, description
 - uploads.UploadsByClient.insert (viewable for all except anonymous) : file, type, end_date, description
 - uploads.UploadsByController.insert (viewable for all except anonymous) : file, type, end_date, description
 - users.Users.change_password (viewable for admin) : current, new1, new2

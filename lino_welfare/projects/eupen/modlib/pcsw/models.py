@@ -172,13 +172,12 @@ class ClientDetail(PartnerDetailMixin):
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))
 
-    # the career tab will be overwritten by settings.chatelet
     career = dd.Panel("""
     cvs_emitted
     cv.StudiesByPerson
     cv.TrainingsByPerson
     cv.ExperiencesByPerson:40
-    """, label=_("Career"))
+    """, label=_("Career"), required_roles=dd.required(IntegrationAgent))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson

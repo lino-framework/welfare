@@ -64,13 +64,13 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleitung** (coaching):
-      - (coaching_1) [visible for 200, 300, admin]:
+      - (coaching_1):
         - (newcomers_left):
-          - (newcomers_left_1) [visible for all except anonymous]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
-          - **Vermittler** (broker) [visible for all except anonymous]
-          - **Fachbereich** (faculty) [visible for all except anonymous]
-          - **Ablehnungsgrund** (refusal_reason) [visible for all except anonymous]
-        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient)
+          - (newcomers_left_1): **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
+          - **Vermittler** (broker)
+          - **Fachbereich** (faculty)
+          - **Ablehnungsgrund** (refusal_reason)
+        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient) [visible for 200, 210, 300, admin]
       - (coaching_2):
         - **Kontakte** (pcsw.ContactsByClient)
         - **Begleitungen** (pcsw.CoachingsByClient)
@@ -84,7 +84,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
       - **Konten** (sepa.AccountsByClient)
-      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for all except anonymous, 210]
+      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 110, 210, 410, admin]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for all except anonymous, 210]:
         - **Dispenzen** (pcsw.DispensesByClient)
@@ -93,11 +93,11 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - (papers_1): **Arbeit suchend** (is_seeking), **eingetragen seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
         - **Uploads** (UploadsByClient)
-    - **Lebenslauf** (career):
-      - **Erstellte Lebensläufe** (cvs_emitted)
-      - **Studien** (cv.StudiesByPerson) [visible for 100, 110, admin]
-      - **Ausbildungen** (cv.TrainingsByPerson) [visible for 100, 110, admin]
-      - **Berufserfahrungen** (cv.ExperiencesByPerson) [visible for 100, 110, admin]
+    - **Lebenslauf** (career) [visible for 100, 110, admin]:
+      - **Erstellte Lebensläufe** (cvs_emitted) [visible for all except anonymous]
+      - **Studien** (cv.StudiesByPerson)
+      - **Ausbildungen** (cv.TrainingsByPerson)
+      - **Berufserfahrungen** (cv.ExperiencesByPerson)
     - **Sprachen** (languages) [visible for 100, 110, admin]:
       - **Sprachkenntnisse** (cv.LanguageKnowledgesByPerson)
       - **Kursanfragen** (courses.CourseRequestsByPerson)

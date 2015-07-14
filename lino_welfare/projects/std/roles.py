@@ -1,6 +1,7 @@
 """
 Importing this module defines default user profiles and shortcuts
 for :ref:`welfare`.
+
 """
 
 
@@ -8,6 +9,7 @@ from lino.core.roles import Anonymous, SiteAdmin
 from lino.modlib.office.roles import OfficeOperator
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.integ.roles import IntegrationStaff
 from lino_welfare.modlib.debts.roles import DebtsUser, DebtsStaff
@@ -20,11 +22,12 @@ class SiteAdmin(
         IntegrationStaff,
         DebtsStaff,
         NewcomersAgent, NewcomersOperator,
-        OfficeOperator):
+        OfficeOperator,
+        AidsStaff):
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, NewcomersOperator):
+class ReceptionClerk(OfficeOperator, NewcomersOperator, AidsUser):
     pass
 
 from lino.modlib.users.choicelists import UserProfiles

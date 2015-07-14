@@ -29,8 +29,9 @@ from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.addresses.mixins import AddressTypes
 from lino.modlib.boards.mixins import BoardDecision
-from lino.modlib.office.roles import OfficeUser, OfficeStaff, OfficeOperator
+
 from lino_welfare.modlib.pcsw.roles import SocialAgent
+from .roles import AidsUser, AidsStaff
 
 from .mixins import Confirmable, Confirmation
 from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
@@ -45,7 +46,7 @@ class Category(mixins.BabelNamed):
 
 class Categories(dd.Table):
     model = 'aids.Category'
-    required_roles = dd.required(OfficeStaff)
+    required_roles = dd.required(AidsStaff)
     column_names = 'name *'
     order_by = ["name"]
 
@@ -181,7 +182,7 @@ class AidType(ContactRelated, mixins.BabelNamed):
 
 class AidTypes(dd.Table):
     model = 'aids.AidType'
-    required_roles = dd.required(OfficeStaff)
+    required_roles = dd.required(AidsStaff)
     column_names = 'name board short_name *'
     order_by = ["name"]
 
@@ -319,8 +320,7 @@ dd.update_field(Granting, 'end_date', verbose_name=_('until'))
 class Grantings(dd.Table):
     """The default table for :class:`Granting`."""
     model = 'aids.Granting'
-    required_roles = dd.required(OfficeStaff)
-    use_as_default_table = False
+    required_roles = dd.required(AidsUser)
     order_by = ['-start_date']
 
     detail_layout = """
@@ -392,6 +392,10 @@ class Grantings(dd.Table):
                     + ' ' + unicode(v)
 
 
+class AllGrantings(Grantings):
+    required_roles = dd.required(AidsStaff)
+
+
 class MyPendingGrantings(Grantings):
     required_roles = dd.required(SocialAgent)
     column_names = "client aid_type start_date " \
@@ -419,18 +423,13 @@ class MyPendingGrantings(Grantings):
         return kw
 
 
-class GrantingsByX(Grantings):
-    required_roles = dd.required(OfficeUser)
-    use_as_default_table = True
-    auto_fit_column_widths = True
-
-
-class GrantingsByClient(GrantingsByX):
+class GrantingsByClient(Grantings):
 
     master_key = 'client'
     column_names = "description_column start_date end_date " \
                    "signer workflow_buttons " \
                    "board custom_actions *"
+    auto_fit_column_widths = True
     # allow_create = False
     # stay_in_grid = True
     # stay_in_grid is not useless here --even though allow_create is
@@ -444,7 +443,8 @@ class GrantingsByClient(GrantingsByX):
     """
 
 
-class GrantingsByType(GrantingsByX):
+class GrantingsByType(Grantings):
+    auto_fit_column_widths = True
     master_key = 'aid_type'
     column_names = "description_column client start_date end_date id *"
 
@@ -455,7 +455,7 @@ class GrantingsByType(GrantingsByX):
 
 class Confirmations(dd.Table):
     model = 'aids.Confirmation'
-    required_roles = dd.required(OfficeStaff)
+    required_roles = dd.required(AidsStaff)
     order_by = ["-created"]
     column_names = "description_column created user printed " \
                    "start_date end_date *"
@@ -544,7 +544,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     """
 
     label = _("Issued confirmations")
-    required_roles = dd.required((OfficeUser, OfficeOperator))
+    required_roles = dd.required(AidsUser)
     master = 'aids.Granting'
     master_key = 'granting'
     column_names = "description_column created user signer printed " \
@@ -628,7 +628,7 @@ simple aid during a given period.
 
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
-
+    required_roles = dd.required(AidsUser)
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
     granting start_date end_date
@@ -638,8 +638,11 @@ class SimpleConfirmations(Confirmations):
     """)  # , window_size=(70, 24))
 
 
+class AllSimpleConfirmations(SimpleConfirmations):
+    required_roles = dd.required(AidsStaff)
+
+
 class SimpleConfirmationsByGranting(SimpleConfirmations):
-    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     start_date end_date
@@ -689,6 +692,7 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
+    required_roles = dd.required(AidsUser)
 
     detail_layout = dd.FormLayout("""
     client user signer workflow_buttons printed
@@ -699,12 +703,15 @@ class IncomeConfirmations(Confirmations):
     """)  # , window_size=(70, 24))
 
 
+class AllIncomeConfirmations(IncomeConfirmations):
+    required_roles = dd.required(AidsStaff)
+
+
 class IncomeConfirmationsByGranting(IncomeConfirmations):
     """Show the confirmations of a Granting whose `aid_type` has
     :class:`IncomeConfirmation` as `confirmation_type`.
 
     """
-    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
 
     insert_layout = dd.FormLayout("""
@@ -865,6 +872,7 @@ class RefundConfirmation(Confirmation):
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
+    required_roles = dd.required(AidsUser)
 
     detail_layout = dd.FormLayout("""
     id client user signer workflow_buttons
@@ -875,8 +883,11 @@ class RefundConfirmations(Confirmations):
     """)  # , window_size=(70, 24))
 
 
+class AllRefundConfirmations(RefundConfirmations):
+    required_roles = dd.required(AidsStaff)
+
+
 class RefundConfirmationsByGranting(RefundConfirmations):
-    required_roles = dd.required((OfficeUser, OfficeOperator))
     master_key = 'granting'
     insert_layout = dd.FormLayout("""
     # client granting:25

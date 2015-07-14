@@ -31,24 +31,28 @@ Here is a more complete list of excerpt types:
 
 >>> rt.show(excerpts.ExcerptTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-===================================================== ======== =============== =========================== ====================== ================= ================================
- Modell                                                Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
------------------------------------------------------ -------- --------------- --------------------------- ---------------------- ----------------- --------------------------------
- *aids.IncomeConfirmation (Einkommensbescheinigung)*   Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
- *aids.RefundConfirmation (Kostenübernahmeschein)*     Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
- *aids.SimpleConfirmation (Einfache Bescheinigung)*    Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
- *art61.Contract (Art.61-Konvention)*                  Ja       Ja              Art.61-Konvention                                                    contract.body.html
- *cal.Guest (Teilnehmer)*                              Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
- *debts.Budget (Budget)*                               Ja       Ja              Finanzielle Situation                              Default.odt
- *isip.Contract (VSE)*                                 Ja       Ja              VSE
- *jobs.Contract (Art.60§7-Konvention)*                 Ja       Ja              Art.60§7-Konvention
- *pcsw.Client (Klient)*                                Ja       Nein            Aktenblatt                                         file_sheet.odt
- *pcsw.Client (Klient)*                                Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
- *pcsw.Client (Klient)*                                Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
- *pcsw.Client (Klient)*                                Nein     Nein            eID-Inhalt                                         eid-content.odt
- **Total (12 Zeilen)**                                 **9**    **7**
-===================================================== ======== =============== =========================== ====================== ================= ================================
+======================================================= ======== =============== =========================== ====================== ================= ================================
+ Modell                                                  Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
+------------------------------------------------------- -------- --------------- --------------------------- ---------------------- ----------------- --------------------------------
+ *aids.IncomeConfirmation (Einkommensbescheinigung)*     Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
+ *aids.RefundConfirmation (Kostenübernahmeschein)*       Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
+ *aids.SimpleConfirmation (Einfache Bescheinigung)*      Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
+ *art61.Contract (Art.61-Konvention)*                    Ja       Ja              Art.61-Konvention                                                    contract.body.html
+ *cal.Guest (Teilnehmer)*                                Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
+ *cbss.IdentifyPersonRequest (IdentifyPerson-Anfrage)*   Ja       Ja              IdentifyPerson-Anfrage
+ *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
+ *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
+ *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
+ *isip.Contract (VSE)*                                   Ja       Ja              VSE
+ *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
+ *pcsw.Client (Klient)*                                  Ja       Nein            Aktenblatt                                         file_sheet.odt
+ *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
+ *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
+ *pcsw.Client (Klient)*                                  Nein     Nein            eID-Inhalt                                         eid-content.odt
+ **Total (15 Zeilen)**                                   **12**   **10**
+======================================================= ======== =============== =========================== ====================== ================= ================================
 <BLANKLINE>
+
 
 
 Demo excerpts

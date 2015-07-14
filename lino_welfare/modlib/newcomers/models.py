@@ -261,7 +261,7 @@ class AvailableCoaches(users.Users):
     """List of users available for new coachings."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
-    required_roles = dd.required((NewcomersOperator, NewcomersAgent))
+    required_roles = dd.required(NewcomersAgent)
     auto_fit_column_widths = True
     editable = False  # even root should not edit here
     label = _("Available Coaches")
@@ -391,6 +391,7 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 class AssignCoach(dd.NotifyingAction):
     "Action to assign this agent as coach for this client."
     label = _("Assign")
+    required_roles = dd.required(NewcomersAgent)
     show_in_workflow = True
     help_text = _("Assign this agent as coach for this client. "
                   "This will set the client's state to `Coached` "
@@ -445,6 +446,7 @@ Newcomers consultants.
     """
     master = 'pcsw.Client'
     label = _("Available Coaches")
+    required_roles = dd.required((NewcomersOperator, NewcomersAgent))
 
     assign_coach = AssignCoach()
 
