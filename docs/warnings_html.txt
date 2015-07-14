@@ -1,5 +1,2 @@
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
-/home/luc/hgwork/welfare/docs/admin/printing.rst:29: WARNING: undefined label: lino.admin.printable (if the link has no caption the label must precede a section header)
-/home/luc/hgwork/welfare/docs/admin/printing.rst:67: WARNING: undefined label: lino.admin.printable (if the link has no caption the label must precede a section header)
-/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.art61.rst:4: WARNING: unknown document: /tested/art61

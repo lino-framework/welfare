@@ -35,9 +35,9 @@ from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
 from lino.core.utils import ChangeWatcher
 
-from lino_welfare.modlib.pcsw.roles import SocialStaff
-from lino_welfare.modlib.integ.roles import IntegrationAgent
-from .roles import NewcomersAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+# from lino_welfare.modlib.integ.roles import IntegrationAgent
+from .roles import NewcomersAgent, NewcomersOperator
 
 users = dd.resolve_app('users')
 pcsw = dd.resolve_app('pcsw', strict=True)
@@ -258,11 +258,10 @@ class ClientsByFaculty(pcsw.Clients):
 
 
 class AvailableCoaches(users.Users):
-    """List of users available for new coachings.  Visible
-only to Newcomers consultants."""
+    """List of users available for new coachings."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.required((NewcomersOperator, NewcomersAgent))
     auto_fit_column_widths = True
     editable = False  # even root should not edit here
     label = _("Available Coaches")
@@ -286,7 +285,7 @@ only to Newcomers consultants."""
     @classmethod
     def get_request_queryset(self, ar):
         profiles = [p for p in UserProfiles.items()
-                    if isinstance(p.role, IntegrationAgent)]
+                    if isinstance(p.role, SocialAgent)]
         return super(AvailableCoaches, self, ar).filter(
             models.Q(profile__in=profiles))
 

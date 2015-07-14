@@ -12,7 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino.modlib.contacts.roles import ContactsUser
+# from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 
@@ -106,7 +107,7 @@ class ClientDetail(PartnerDetailMixin):
     broker:12
     faculty:12
     refusal_reason
-    """, required_roles=dd.required(NewcomersAgent))
+    """, required_roles=dd.required(ContactsUser))
 
     suche = dd.Panel("""
     # job_office_contact job_agents

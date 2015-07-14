@@ -43,8 +43,10 @@ from lino.modlib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 from lino.modlib.vatless.mixins import PartnerDetailMixin
 
-from lino.modlib.office.roles import OfficeOperator
-from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino.modlib.contacts.roles import ContactsUser
+# from lino.modlib.office.roles import OfficeOperator
+from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
+                                                 NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 from lino.utils import ssin
@@ -225,7 +227,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not isinstance(ar.get_user().profile, NewcomersAgent):
+        if not isinstance(ar.get_user().profile.role,
+                          (NewcomersOperator, NewcomersAgent)):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -639,7 +642,7 @@ class ClientDetail(PartnerDetailMixin):
     broker:12
     faculty:12
     refusal_reason
-    """, required_roles=dd.required(NewcomersAgent))
+    """, required_roles=dd.required((NewcomersOperator, NewcomersAgent)))
 
 
 
@@ -708,7 +711,8 @@ class Clients(contacts.Persons):
     """
     # debug_permissions = '20150129'
     # required = dd.Required(user_groups='coaching')
-    required_roles = dd.login_required((SocialAgent, OfficeOperator))
+    required_roles = dd.login_required(ContactsUser)
+    # required_roles = dd.login_required((SocialAgent, OfficeOperator))
     model = 'pcsw.Client'
     params_panel_hidden = True
 
@@ -1321,22 +1325,6 @@ def setup_quicklinks(self, ar, tb):
 
 
 def setup_workflows(site):
-
-    if False:  # removed 20130904
-
-        def allow_state_newcomer(action, user, obj, state):
-            """
-            A Client with at least one Coaching cannot become newcomer.
-            """
-            #~ if obj.client_state == ClientStates.coached:
-            if obj.coachings_by_client.count() > 0:
-                return False
-            return True
-
-        ClientStates.newcomer.add_transition(
-            required_states='refused coached former',
-            required_roles=dd.required(NewcomersAgent),
-            allow=allow_state_newcomer)
 
     ClientStates.refused.add_transition(RefuseClient)
     ClientStates.former.add_transition(

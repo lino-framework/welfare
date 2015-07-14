@@ -2,15 +2,11 @@
 # Copyright 2011-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Transaction 25
---------------
-
+"""This implements the "transaction 25", called also "Interrogation
+sur certains types d’informations légales" (in `Codes d'interrogations
+<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
 
 See user documentation at :class:`welfare.cbss.RetrieveTIGroupsRequest`.
-
-This implements the "transaction 25", called also "Interrogation sur
-certains types d’informations légales" (in `Codes d'interrogations
-<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
 
 All common information types are being handled. See
 :class:`RowFactory`
