@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2015 Luc Saffre
 # License: BSD (see file COPYING for details)
+"""Separate module for defining the Coaching model."""
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -98,10 +99,9 @@ class CoachingEndings(dd.Table):
 
 class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
-    """
-A Coaching (Begleitung, accompagnement) 
-is when a Client is being coached by a User (a social assistant) 
-during a given period.
+    """A Coaching (Begleitung, intervention) is when a Client is being
+    coached by a User (a social assistant) during a given period.
+
     """
 
     class Meta:

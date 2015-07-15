@@ -68,6 +68,12 @@ def excerpt_types():  # also used for migration to 1.1.11
         #              fr="Plan d'action",
         #              en="to-do list"))
 
+    yield attType(
+        body_template='orientation.body.html',
+        content_type=ContentType.objects.get_for_model(
+            dd.resolve_model('pcsw.Coaching')),
+        **dd.str2kw('name', _("Orientation sheet")))
+
     yield ExcerptType.update_for_model(
         'jobs.Contract', certifying=True, backward_compat=True)
 

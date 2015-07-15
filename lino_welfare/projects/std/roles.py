@@ -28,7 +28,7 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, NewcomersOperator, AidsUser, CBSSUser):
+class ReceptionClerk(OfficeOperator, NewcomersOperator, AidsStaff, CBSSUser):
     pass
 
 from lino.modlib.users.choicelists import UserProfiles
