@@ -68,9 +68,6 @@ class SpecsTests(BaseTestCase):
     def test_clients(self):
         return self.run_simple_doctests('docs/specs/clients.rst')
 
-    def test_roles(self):
-        return self.run_simple_doctests('docs/specs/roles.rst')
-
 
 class DocsTests(BaseTestCase):
     
@@ -163,6 +160,9 @@ class DocsTests(BaseTestCase):
 
     def test_20150219(self):
         return self.run_simple_doctests('docs/tested/2015/0219.rst')
+
+    def test_20150715(self):
+        return self.run_simple_doctests('docs/tested/2015/0715.rst')
 
 
 

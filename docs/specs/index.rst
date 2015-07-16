@@ -42,8 +42,9 @@ part of Lino Welfare).
    /tested/uploads
    /tested/cv2
    /tested/main
-   /tested/2015/0219
    /tested/addresses
    /tested/cal
    /tested/countries
    /tested/notes
+   /tested/2015/0219
+   /tested/2015/0715

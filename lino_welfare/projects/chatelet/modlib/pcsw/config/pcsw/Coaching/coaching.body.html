@@ -1,0 +1,33 @@
+{% extends "excerpts/base.body.html" %}
+
+{% block our_ref %}
+{{tr("U. Zeichen",fr="Notre réf.")}}:
+<span class="VariableText">
+{{obj.user.initials}}/{{obj.id}}/{{obj.client.id}}/{{this.id}}
+</span>
+{% endblock %}
+
+{% block title %}
+<h1>{{this.excerpt_type}}
+</h1>
+{% endblock %}
+
+{% block body %}
+
+<p>{{_("Client")}}:
+
+<p class="EnhancedPar">
+{{obj.client.get_full_name(nominative=True)}}
+<br>
+{{obj.client.get_primary_address()}}
+</p>
+
+<p>From: {{obj.start_date}}</p>
+<p>From: {{obj.end_date}}</p>
+<p>{{_("Coach")}}: {{obj.user}}</p>
+
+{% if obj.type %}
+<p>Remark: {{ obj.type }}</p>
+{% endif %}
+
+{% endblock %}

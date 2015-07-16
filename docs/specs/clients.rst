@@ -84,7 +84,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
       - **Konten** (sepa.AccountsByClient)
-      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 110, 210, 410, admin]
+      - **Hilfebeschlüsse** (aids.GrantingsByClient)
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for all except anonymous, 210]:
         - **Dispenzen** (pcsw.DispensesByClient)

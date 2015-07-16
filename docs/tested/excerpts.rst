@@ -60,7 +60,7 @@ Demo excerpts
 
 Here is the list of all demo excerpts. 
 
->>> rt.show(excerpts.Excerpts, language="en", column_names="id excerpt_type owner project company language")
+>>> rt.show(excerpts.AllExcerpts, language="en", column_names="id excerpt_type owner project company language")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==== ======================== ================================================ ========================= ========================== ==========
  ID   Excerpt Type             Controlled by                                    Client                    Recipient (Organization)   Language

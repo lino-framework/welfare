@@ -245,6 +245,9 @@ Empfangsschalter
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - Konfigurierung :
   - Orte : Länder
+  - ÖSHZ : Hilfearten, Kategorien
+- Explorer :
+  - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
 - Site : Info
 
 

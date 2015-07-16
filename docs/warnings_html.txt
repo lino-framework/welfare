@@ -1,3 +1,2 @@
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
-/home/luc/hgwork/welfare/docs/specs/roles.rst:: WARNING: document isn't included in any toctree

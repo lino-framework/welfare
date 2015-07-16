@@ -1,0 +1,132 @@
+.. _welfare.tested.20150715:
+
+====================================
+Reception clerk sees "Career" tab
+====================================
+
+.. How to test only this document:
+
+    $ python setup.py test -s tests.DocsTests.test_20150715
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.utils.xmlgen.html import E
+    >>> from lino.api.doctest import *
+    >>> from lino.api import rt
+
+This document helped us to understand and solve ticket :ticket:`340`
+(discovered :blogref:`20150714`).
+
+The problem: A reception clerk in Eupen
+(:mod:`lino_welfare.projects.eupen`) should not see the career tab of
+a client because the `required_roles
+<lino.core.permissions.Permittable.required_roles>` of that panel
+include :class:`IntegrationAgent
+<lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they do see
+it nevertheless:
+
+.. image:: 20150715.png
+
+
+A reception clerk is not an integration agent:
+
+>>> from lino_welfare.projects.std.roles import *
+>>> isinstance(ReceptionClerk, IntegrationAgent)
+False
+
+We are talking about the detail layout of a client, defined by
+:class:`lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail`:
+
+>>> dtl = rt.modules.pcsw.Clients.detail_layout
+>>> dtl  #doctest: +ELLIPSIS
+<lino_welfare.modlib.pcsw.models.ClientDetail object at ...>
+>>> dtl.__class__
+<class 'lino_welfare.modlib.pcsw.models.ClientDetail'>
+
+>>> lh = dtl.get_layout_handle(settings.SITE.kernel.default_ui)
+>>> print(lh)
+LayoutHandle for ClientDetail on pcsw.Clients
+
+Let's get the `career` panel. It is a
+:class:`lino.modlib.extjs.elems.Panel`:
+
+>>> career_panel = lh.main.find_by_name('career')
+>>> career_panel
+<Panel career in ClientDetail on pcsw.Clients>
+>>> career_panel.__class__
+<class 'lino.modlib.extjs.elems.Panel'>
+
+To see this panel, you need to be an integration agent:
+
+>>> career_panel.required_roles
+set([<class 'lino_welfare.modlib.integ.roles.IntegrationAgent'>])
+
+Theresia is a reception clerk
+(:class:`lino_welfare.projects.std.roles.ReceptionClerk`):
+
+>>> theresia = users.User.objects.get(username="theresia")
+>>> theresia.profile.role.__class__
+<class 'lino_welfare.projects.std.roles.ReceptionClerk'>
+
+And that's not the role required to view this panel:
+
+>>> theresia.profile.has_required_role(career_panel.required_roles)
+False
+
+And thus this panel is not visible for her:
+
+>>> career_panel.get_view_permission(theresia.profile)
+False
+
+Note that the Panel objects which are not visible continue to be in
+`lh.main.elements`:
+
+>>> [e.name for e in lh.main.elements]
+... #doctest: +NORMALIZE_WHITESPACE
+[u'general', u'contact', u'coaching', u'aids_tab', u'work_tab_1',
+u'career', u'languages', u'competences', u'contracts', u'history',
+u'calendar', u'ledger', u'misc', u'debts']
+
+But when generating the js files, py2js and declare_vars filter it away:
+
+>>> from lino.utils.jsgen import with_user_profile, py2js, declare_vars
+>>> def f():
+...     print(py2js(lh.main.elements))
+...     for ln in declare_vars(lh.main):
+...         if ln.startswith("var career"):
+...             print(ln)
+>>> with_user_profile(theresia.profile, f)
+... #doctest: +NORMALIZE_WHITESPACE
+[ general_panel142, contact_panel166, coaching_panel401,
+aids_tab_panel496, work_tab_1_panel525, history_panel1245,
+ledger_panel1316 ]
+
+I can even render the lino*.js file (at least once):
+
+>>> from lino.utils.jsgen import with_user_profile
+>>> class W:
+...     def write(self, s):
+...         if "career" in s: print(s)
+>>> w = W()
+>>> def f():
+...     dd.plugins.extjs.renderer.write_lino_js(w)
+>>> with_user_profile(theresia.profile, f)
+... #doctest: +NORMALIZE_WHITESPACE
+
+So until now everything looks okay. The only problem is that the panel
+actually *is* there.
+
+>>> theresia.profile.has_required_role(career_panel.required_roles)
+False
+
+Until :blogref:`20150716`, when :meth:`write_lino_js` had run once,
+then we had the requirements of our career panel modified (loosened)
+after the first run of 
+
+>>> theresia.profile.has_required_role(career_panel.required_roles)
+False
+
