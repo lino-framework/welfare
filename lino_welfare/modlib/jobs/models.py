@@ -1042,13 +1042,6 @@ class JobsOverview(Report):
     - which jobs are soon going to be free, and which candidate(s) should we
       suggest?
 
-    Example (using fictive demo data and only on one job type):
-
-    .. django2rst:: 
-
-       jt = jobs.JobType.objects.get(id=1)
-       rt.show('jobs.JobsOverview', param_values=dict(job_type=jt))
-        
 
     """
     required_roles = dd.required(IntegrationAgent)

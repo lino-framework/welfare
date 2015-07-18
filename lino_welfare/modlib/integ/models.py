@@ -19,6 +19,7 @@ from django.conf import settings
 from lino.utils.xmlgen.html import E
 from lino.modlib.users.choicelists import UserProfiles
 from lino.utils.report import Report
+from lino.mixins import ObservedPeriod
 
 from lino.api import dd
 from lino.modlib.system.mixins import PeriodEvents
@@ -578,9 +579,9 @@ class ActivityReport(Report):
     required_roles = dd.required(IntegrationAgent)
     label = _("Activity Report")
 
-    parameters = dict(
-        start_date=models.DateField(verbose_name=_("Period from")),
-        end_date=models.DateField(verbose_name=_("until")),
+    parameters = ObservedPeriod(
+        # start_date=models.DateField(verbose_name=_("Period from")),
+        # end_date=models.DateField(verbose_name=_("until")),
         include_jobs=models.BooleanField(
             verbose_name=dd.apps.jobs.verbose_name),
         include_isip=models.BooleanField(verbose_name=_("ISIP")),
@@ -625,7 +626,8 @@ il vient.
             yield A
 
         yield E.h1(jobs.Contract._meta.verbose_name_plural)
-        for A in (JobsContractsPerUserAndContractType, JobProvidersAndContracts, JobsContractEndingsByType):
+        for A in (JobsContractsPerUserAndContractType,
+                  JobProvidersAndContracts, JobsContractEndingsByType):
             yield E.h2(A.label)
             if A.help_text:
                 yield E.p(unicode(A.help_text))
