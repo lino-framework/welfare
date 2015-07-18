@@ -5,7 +5,7 @@ for :ref:`welfare`.
 """
 
 
-from lino.core.roles import Anonymous, SiteAdmin
+from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.office.roles import OfficeOperator
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -38,7 +38,7 @@ UserProfiles.clear()
 
 add = UserProfiles.add_item
 
-add('000', _("Anonymous"), Anonymous, name='anonymous',
+add('000', _("Anonymous"), UserRole, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration Agent"),           IntegrationAgent)
 add('110', _("Integration Agent (Manager)"), IntegrationStaff)

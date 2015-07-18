@@ -164,5 +164,8 @@ class DocsTests(BaseTestCase):
     def test_20150715(self):
         return self.run_simple_doctests('docs/tested/2015/0715.rst')
 
+    def test_20150717(self):
+        return self.run_simple_doctests('docs/tested/2015/0717.rst')
+
 
 

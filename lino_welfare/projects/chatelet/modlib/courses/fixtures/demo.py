@@ -36,15 +36,19 @@ def objects():
     kw = dd.str2kw(
         'description',
         _("Introduction to basic kitchen technologies."))
+    kw.update(body_template="enrolment.body.html")
+    kw.update(dd.str2kw(
+        'excerpt_title', _("Request for enrolment")))
     obj = line(CourseAreas.basic, _("Kitchen"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
-
-    obj = line(CourseAreas.basic, _("Creativity"))
+    
+    kw.update(dd.str2kw('description', ""))
+    obj = line(CourseAreas.basic, _("Creativity"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.basic, _("Our first baby"))
+    obj = line(CourseAreas.basic, _("Our first baby"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
@@ -60,9 +64,11 @@ def objects():
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10), max_places=3)
 
-    obj = line(CourseAreas.job,
-               body_template="intervention.body.html",
-               **dd.str2kw('name', _("Psycho-social intervention")))
+    kw = dict()
+    kw.update(dd.str2kw('excerpt_title',
+                        _("Request for intervention")))
+    kw.update(body_template="intervention.body.html")
+    obj = line(CourseAreas.job, _("Psycho-social intervention"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-200), max_places=1)
 

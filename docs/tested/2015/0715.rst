@@ -117,14 +117,16 @@ I can even render the lino*.js file (at least once):
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
 
-So until now everything looks okay. The only problem is that the panel
-actually *is* there.
+So until now everything looks okay. 
+
+The problem was that until :blogref:`20150716`, when
+:meth:`write_lino_js` had run once, then it left the requirements of
+our career panel modified (loosened).
+
 
 >>> theresia.profile.has_required_role(career_panel.required_roles)
 False
 
-Until :blogref:`20150716`, when :meth:`write_lino_js` had run once,
-then we had the requirements of our career panel modified (loosened)
 after the first run of 
 
 >>> theresia.profile.has_required_role(career_panel.required_roles)

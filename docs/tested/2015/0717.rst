@@ -1,0 +1,39 @@
+.. _welfare.tested.20150717:
+
+=====================================
+<ParamsPanel main ...has no variables
+=====================================
+
+.. How to test only this document:
+
+    $ python setup.py test -s tests.DocsTests.test_20150717
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.utils.xmlgen.html import E
+    >>> from lino.api.doctest import *
+    >>> from lino.api import rt
+
+
+
+This document helped us to understand and solve another problem which
+occured while working on ticket :ticket:`340`.
+
+<ParamsPanel main in ParamsLayout on cal.Subscriptions> of
+LayoutHandle for ParamsLayout on cal.Subscriptions has no variables
+
+
+>>> from lino.utils.jsgen import with_user_profile
+>>> class W:
+...     def write(self, s):
+...         pass
+>>> w = W()
+>>> def f():
+...     dd.plugins.extjs.renderer.write_lino_js(w)
+>>> with_user_profile(users.UserProfiles.anonymous, f)
+... #doctest: +NORMALIZE_WHITESPACE
+

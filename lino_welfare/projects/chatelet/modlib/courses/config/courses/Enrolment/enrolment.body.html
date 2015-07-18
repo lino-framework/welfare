@@ -29,6 +29,16 @@
 <p>User: {{obj.user}}</p>
 <p>Date: {{fdl(obj.request_date)}}</p>
 
+
+{% if obj.motivation %}
+<p><b>Projet envisagé par l’assistant(e) social(e) avec l’usager :</b></p>
+{{obj.motivation}}
+{% endif %}
+{% if obj.problems %}
+<p><b>Difficultés détectées chez la personne et à l’origine de la demande:<b></p>
+{{obj.problems}}
+{% endif %}
+
 {% if obj.remark %}
 <p>Remark: {{ obj.remark }}</p>
 {% endif %}

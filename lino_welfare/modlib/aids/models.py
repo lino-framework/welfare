@@ -29,6 +29,7 @@ from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.addresses.mixins import AddressTypes
 from lino.modlib.boards.mixins import BoardDecision
+from lino.modlib.excerpts.mixins import ExcerptTitle
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from .roles import AidsUser, AidsStaff
@@ -56,7 +57,7 @@ class Categories(dd.Table):
     """
 
 
-class AidType(ContactRelated, mixins.BabelNamed):
+class AidType(ContactRelated, ExcerptTitle):
     """The type of aid being granted to a client.  Every granting has a
     mandatory field :attr:`Granting.aid_type` which points to an
     :class:`AidType` instance.
@@ -74,13 +75,16 @@ class AidType(ContactRelated, mixins.BabelNamed):
     
     .. attribute:: name
 
-        The name of this aid type.
+        The designation of this aid type as seen by the user e.g. when
+        selecting an aid type.
+
         One field for every :attr:`language <lino.core.site.Site.language>`.
 
     .. attribute:: excerpt_title
 
         The text to print as title in confirmations.
-        One field for every :attr:`language <lino.core.site.Site.language>`.
+        See also
+        :attr:`lino.modlib.excerpts.mixins.ExcerptTitle.excerpt_title`.
 
     .. attribute:: body_template
 
@@ -128,13 +132,6 @@ class AidType(ContactRelated, mixins.BabelNamed):
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
-    excerpt_title = dd.BabelCharField(
-        _("Excerpt title"),
-        max_length=200,
-        blank=True,
-        help_text=_(
-            "The title to be used when printing confirmation excerpts."))
-
     short_name = models.CharField(max_length=50, blank=True)
 
     board = models.ForeignKey('boards.Board', blank=True, null=True)
@@ -168,9 +165,6 @@ class AidType(ContactRelated, mixins.BabelNamed):
         verbose_name=_("Body template"),
         blank=True, help_text="The body template to use instead of the "
         "default body template as defined for the excerpt type.")
-
-    def get_excerpt_title(self):
-        return dd.babelattr(self, 'excerpt_title') or unicode(self)
 
     @dd.chooser(simple_values=True)
     def body_template_choices(cls, confirmation_type):
