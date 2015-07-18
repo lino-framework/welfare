@@ -74,7 +74,7 @@ Theresia is a reception clerk
 
 And that's not the role required to view this panel:
 
->>> theresia.profile.has_required_role(career_panel.required_roles)
+>>> theresia.profile.has_required_roles(career_panel.required_roles)
 False
 
 And thus this panel is not visible for her:
@@ -124,11 +124,11 @@ The problem was that until :blogref:`20150716`, when
 our career panel modified (loosened).
 
 
->>> theresia.profile.has_required_role(career_panel.required_roles)
+>>> theresia.profile.has_required_roles(career_panel.required_roles)
 False
 
 after the first run of 
 
->>> theresia.profile.has_required_role(career_panel.required_roles)
+>>> theresia.profile.has_required_roles(career_panel.required_roles)
 False
 

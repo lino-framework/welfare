@@ -156,7 +156,7 @@ we see that most contracts have indeed exactly 1 granting:
 [1, 3, 4, 7, 9, 10, 11, 12, 14, 17, 18, 19, 22, 24, 27, 29, 32]
 
 >>> rr = aids.IncomeConfirmationsByGranting.insert_action.action.required_roles
->>> print rt.login("rolf").get_user().profile.has_required_role(rr)
+>>> print rt.login("rolf").get_user().profile.has_required_roles(rr)
 True
 
 >>> ct = contenttypes.ContentType.objects.get_for_model(aids.Granting)

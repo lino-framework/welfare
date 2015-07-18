@@ -59,7 +59,7 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Broken GFKs
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - System : Site-Parameter, Benutzer, Hilfetexte
+  - System : Site-Parameter, Hilfetexte, Benutzer
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
@@ -74,7 +74,7 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - System : Vollmachten, Benutzerprofile, Datenbankmodelle, Änderungen, Datentests, Datenprobleme
+  - System : Datenbankmodelle, Vollmachten, Benutzerprofile, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
