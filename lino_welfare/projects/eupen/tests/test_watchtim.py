@@ -222,6 +222,7 @@ class TestCase(TestCase):
  watch_tim   Add child     *Eheleute Harald VOLDEMORT-POTTER*   pcsw.Client                                                                   Person        4260
  watch_tim   Add child     *Voldemort-Potter Harald*            contacts.Person                                                               Partner       4260
 =========== ============= ==================================== ============================================================================= ============= ===========
+
 """)
 
         #~ def test05(self):
@@ -340,6 +341,7 @@ class TestCase(TestCase):
 |           |             |                            | - country_id : None --> 'B'         |              |           |
 |           |             |                            | - zip_code : '' --> '4020'          |              |           |
 +-----------+-------------+----------------------------+-------------------------------------+--------------+-----------+
+
 """)
 
         """
@@ -363,6 +365,7 @@ class TestCase(TestCase):
  watch_tim   Add child      *Andenne, CPAS*   contacts.Company   Partner       9932
  watch_tim   Remove child                     contacts.Person    Person        9932
 =========== ============== ================= ================== ============= ===========
+
 """)
 
         """
@@ -445,6 +448,7 @@ class TestCase(TestCase):
  05.01.06                     alicia      Ja       DSBE
  **Total (1 Zeilen)**                     **1**
 ====================== ===== =========== ======== ======== ==================
+
 """)
 
             """
@@ -461,6 +465,7 @@ class TestCase(TestCase):
  05.01.06               05.01.06   alicia      Ja       DSBE
  **Total (1 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
+
 """)
 
             """
@@ -480,6 +485,7 @@ class TestCase(TestCase):
 ---------------- ---------- ----------- -------- -------- ------------------
  05.01.06         05.01.06   alicia      Nein     DSBE
 ================ ========== =========== ======== ======== ==================
+
 """)
 
             ln = ln.replace('"IDPRT":"I"', '"IDPRT":"S"')
@@ -494,6 +500,7 @@ class TestCase(TestCase):
  05.01.06                          alicia      Ja       DSBE
  **Total (2 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
+
 """)
             ln = ln.replace('"IDUSR":"ALICIA"', '"IDUSR":"ROGER"')
             process_line(ln)
@@ -508,6 +515,7 @@ class TestCase(TestCase):
  17.05.13                          roger       Ja       ASD
  **Total (3 Zeilen)**                          **1**
 ====================== ========== =========== ======== ======== ==================
+
 """)
 
         """

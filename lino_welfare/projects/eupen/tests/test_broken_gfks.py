@@ -54,8 +54,8 @@ class TestCase(TestCase):
         cli.delete()
         self.assertEqual(Note.objects.all().count(), 0)
         ar = BrokenGFKs.request()
-        rst = ar.table2rst()
-        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n")
+        rst = ar.to_rst()
+        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n\n")
 
         cli = create_related_objects()
         self.assertEqual(Note.objects.all().count(), 1)
@@ -68,5 +68,5 @@ class TestCase(TestCase):
         models.Model.delete(cli)
         self.assertEqual(Note.objects.all().count(), 0)
     
-        rst = ar.table2rst()
-        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n")
+        rst = ar.to_rst()
+        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n\n")

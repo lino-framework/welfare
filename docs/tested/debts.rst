@@ -368,14 +368,13 @@ Here is now (almost) the whole content of a printed budget.
 ..             print(html2rst(i))
 
 
->>> from lino.utils.xmlgen.html import html2rst
->>> obj = debts.Budget.objects.get(pk=4)
->>> def story2rst(story):
-...     for ln in ses.story2rst(story):
-...             print(ln)
+>> from lino.utils.xmlgen.html import html2rst
+>> def story2rst(story):
+..     for ln in ses.story2rst(story):
+..             print(ln)
 
 
->>> story2rst(obj.data_story(ses))
+>>> ses.story2rst(obj.data_story(ses))
 ... #doctest: +REPORT_UDIFF
 ~~~~~~~~~~~~~~~
 Monthly incomes
@@ -489,7 +488,7 @@ Bailiffs and cash collectors
 <BLANKLINE>
 
 
->>> story2rst(obj.summary_story(ses))
+>>> ses.story2rst(obj.summary_story(ses))
 ... #doctest: +REPORT_UDIFF
 ------------------
 Incomes & Expenses
