@@ -6,26 +6,22 @@ Miscellaneous
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_misc
+    $ python setup.py test -s tests.DocsTests.test_misc
+    
+    doctest init:
+    
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+    >>> ses = rt.login('rolf')
+
 
 .. contents:: 
    :local:
    :depth: 3
 
-
-A tested document
-=================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
-
-
->>> ses = rt.login('rolf')
 
 
 Build all excerpts

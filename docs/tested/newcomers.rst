@@ -64,18 +64,18 @@ Every newcomer agent gets attributed a set of Competences:
 
 >>> rt.show('newcomers.Competences')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-======= ================= ================================ =========
- ID      Benutzer          Fachbereich                      Aufwand
-------- ----------------- -------------------------------- ---------
- 1       Alicia Allmanns   Eingliederungseinkommen (EiEi)   10
- 2       Hubert Huppertz   DSBE                             5
- 3       Mélanie Mélard    Ausländerbeihilfe                4
- 4       Alicia Allmanns   Finanzielle Begleitung           6
- 5       Hubert Huppertz   Laufende Beihilfe                2
- 6       Mélanie Mélard    Eingliederungseinkommen (EiEi)   10
- 7       Alicia Allmanns   DSBE                             5
- **0**                                                      **42**
-======= ================= ================================ =========
+==== ================= ================================ =========
+ ID   Benutzer          Fachbereich                      Aufwand
+---- ----------------- -------------------------------- ---------
+ 1    Alicia Allmanns   Eingliederungseinkommen (EiEi)   10
+ 2    Hubert Huppertz   DSBE                             5
+ 3    Mélanie Mélard    Ausländerbeihilfe                4
+ 4    Alicia Allmanns   Finanzielle Begleitung           6
+ 5    Hubert Huppertz   Laufende Beihilfe                2
+ 6    Mélanie Mélard    Eingliederungseinkommen (EiEi)   10
+ 7    Alicia Allmanns   DSBE                             5
+                                                         **42**
+==== ================= ================================ =========
 <BLANKLINE>
 
 

@@ -49,20 +49,20 @@ Configuring upload types
 This is the list of upload types:
 
 >>> rt.login('rolf').show(uploads.UploadTypes)
-======= ============================ ======== ============= ========================= ====================== ============================
- ID      Bezeichnung                  Wanted   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
-------- ---------------------------- -------- ------------- ------------------------- ---------------------- ----------------------------
- 2       Arbeitserlaubnis             Ja       1             monatlich                 2
- 1       Aufenthaltserlaubnis         Ja       1             monatlich                 2
- 7       Behindertenausweis           Nein     -1                                      1
- 8       Diplom                       Ja       -1                                      1
- 3       Führerschein                 Ja       1             monatlich                 1
- 4       Identifizierendes Dokument   Ja       1             monatlich                 1                      Identifizierendes Dokument
- 9       Personalausweis              Nein     -1                                      1
- 5       Vertrag                      Nein     -1                                      1
- 6       Ärztliche Bescheinigung      Nein     -1                                      1
- **0**                                **5**    **-1**                                  **11**
-======= ============================ ======== ============= ========================= ====================== ============================
+==== ============================ ======== ============= ========================= ====================== ============================
+ ID   Bezeichnung                  Wanted   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
+---- ---------------------------- -------- ------------- ------------------------- ---------------------- ----------------------------
+ 2    Arbeitserlaubnis             Ja       1             monatlich                 2
+ 1    Aufenthaltserlaubnis         Ja       1             monatlich                 2
+ 7    Behindertenausweis           Nein     -1                                      1
+ 8    Diplom                       Ja       -1                                      1
+ 3    Führerschein                 Ja       1             monatlich                 1
+ 4    Identifizierendes Dokument   Ja       1             monatlich                 1                      Identifizierendes Dokument
+ 9    Personalausweis              Nein     -1                                      1
+ 5    Vertrag                      Nein     -1                                      1
+ 6    Ärztliche Bescheinigung      Nein     -1                                      1
+                                   **5**    **-1**                               **11**
+==== ============================ ======== ============= ========================= ====================== ============================
 <BLANKLINE>
 
 
@@ -125,7 +125,7 @@ This is the MyUploads table for Theresia:
  9       DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja
  8       DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja
  7       DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein
- **0**                                                                                       **2**
+                                                                                             **2**
 ======= ============================ ============================ ============ ============ ======= ============== =======
 <BLANKLINE>
 
@@ -133,12 +133,12 @@ This is the MyUploads table for Theresia:
 And the same for Caroline:
 
 >>> rt.login('caroline').show(uploads.MyUploads)
-======= ============================ ============== ============ ============ ======= ============== =======
- ID      Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
-------- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
+==== ============================ ============== ============ ============ ======= ============== =======
+ ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
+---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
  11      DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja
- **0**                                                                         **1**
-======= ============================ ============== ============ ============ ======= ============== =======
+                                                                            **1**
+==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
 
 

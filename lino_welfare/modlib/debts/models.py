@@ -318,11 +318,13 @@ The total monthly amount available for debts distribution."""))
 
     @dd.htmlbox(_("Entered data"))
     def data_box(self, ar):
-        return E.div(*tuple(ar.story2html(self.data_story(ar))))
+        # return E.div(*tuple(ar.story2html(self.data_story(ar))))
+        return ar.story2html(self.data_story(ar))
 
     @dd.htmlbox(pgettext("debts", "Summary"))
     def summary_box(self, ar):
-        return E.div(*tuple(ar.story2html(self.summary_story(ar))))
+        # return E.div(*tuple(ar.story2html(self.summary_story(ar))))
+        return ar.story2html(self.summary_story(ar))
 
     def data_story(self, ar):
         """Yield a sequence of """
