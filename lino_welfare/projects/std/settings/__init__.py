@@ -47,11 +47,15 @@ class Site(Site):
 
         - :attr:`lino.modlib.accounts.Plugin.ref_length` = 5
         
-        - (no longer) :setting:`humanlinks.human_model` = 'pcsw.Client'
-        
+        - :attr:`excerpts.responsible_user
+          <lino.modlib.excerpts.Plugin.responsible_user>` is set to
+          ``'melanie'``.
+
         """
         super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=16)
+        self.plugins.excerpts.configure(responsible_user='melanie')
+
         if 'ledger' in self.plugins:
             self.plugins.ledger.configure(project_model='pcsw.Client')
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')

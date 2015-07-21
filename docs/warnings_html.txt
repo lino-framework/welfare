@@ -1,3 +1,4 @@
+/home/luc/hgwork/welfare/docs/tested/misc.rst:57: ERROR: Unknown interpreted text role "welfare_srcref".
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tested/2015/0717.rst:: WARNING: document isn't included in any toctree

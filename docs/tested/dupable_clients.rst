@@ -13,13 +13,13 @@ Lino Welfare offers some functionality for avoiding duplicate
 
     $ python setup.py test -s tests.DocsTests.test_dupable
 
-This is a tested document:
+    doctest init:
 
->>> from __future__ import print_function, unicode_literals
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
+    >>> from __future__ import print_function, unicode_literals
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
 
 
 In Lino Welfare, a :class:`Client
