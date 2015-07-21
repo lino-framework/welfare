@@ -41,7 +41,7 @@ uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
 from lino.modlib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
-from lino.modlib.vatless.mixins import PartnerDetailMixin
+# from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 from lino.modlib.contacts.roles import ContactsUser
 # from lino.modlib.office.roles import OfficeOperator
@@ -570,7 +570,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         return E.div(*elems)
 
 
-class ClientDetail(PartnerDetailMixin):
+class ClientDetail(dd.DetailLayout):
 
     main = "general contact coaching aids_tab \
     work_tab career languages \
@@ -697,6 +697,12 @@ class ClientDetail(PartnerDetailMixin):
     jobs.CandidaturesByPerson
     jobs.ContractsByClient
     """, label=_("Contracts"))
+
+    if dd.is_installed('ledger'):
+        ledger = dd.Panel("""
+        vatless.VouchersByProject
+        ledger.MovementsByProject
+        """, label=dd.plugins.ledger.verbose_name)
 
 
 class Clients(contacts.Persons):

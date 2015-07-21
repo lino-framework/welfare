@@ -32,11 +32,14 @@ This project integrates several plugins into Lino Welfare:
 :mod:`lino.modlib.vatless` and
 :mod:`lino.modlib.finan`.
 
-A **voucher** (German *Beleg*) is a document which serves as legal
-proof for a transaction. A transaction is a set of **movements** whose
-debit equals to their credit.
+Vouchers
+========
 
-Lino Welfare uses the following voucher types:
+A **voucher** (German *Beleg*) is a document which serves as legal
+proof for a transaction. A transaction is a set of accounting
+**movements** whose debit equals to their credit.
+
+Lino Welfare uses the following **voucher types**:
 
 >>> rt.show(rt.modules.ledger.VoucherTypes)
 ======================== ====== ======================================
@@ -50,8 +53,26 @@ Lino Welfare uses the following voucher types:
 ======================== ====== ======================================
 <BLANKLINE>
 
-What is a voucher type? See :class:`lino.modlib.ledger.choicelists.VoucherTypes`.
+The first one (Invoice) is a partner-related voucher (often we simply
+say **partner voucher**). That is, you select one partner per
+voucher. Every partner-related voucher points to to one and only one
+partner.
 
+The other voucher types (Bank statements etc) are called **financial
+vouchers**. Financial vouchers have their individual *entries*
+partner-related, so the vouchers themselves are *not* related to a
+single partner.
+
+More about voucher types in
+:class:`lino.modlib.ledger.choicelists.VoucherTypes`.
+
+Journals
+========
+
+A **journal** is a sequence of numbered vouchers. All vouchers of a
+given journal are of same type, but there may be more than one journal
+per voucher type.  The demo database currently has the following
+journals defined:
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
 =========== =================== ================== ==================== ======================================
@@ -62,6 +83,15 @@ What is a voucher type? See :class:`lino.modlib.ledger.choicelists.VoucherTypes`
  POKBC       PO KBC              PO KBC             PO KBC               Payment Order (finan.PaymentOrder)
 =========== =================== ================== ==================== ======================================
 <BLANKLINE>
+
+
+The state of a voucher
+=======================
+
+Vouchers can be "draft" or "registered". Draft vouchers can be
+modified but are not yet visible as movements in the
+ledger. Registered vouchers cannot be modified, but are visible as
+movements in the ledger.
 
 >>> rt.show(rt.modules.ledger.VoucherStates)
 ======= ============ ============
@@ -136,6 +166,49 @@ What is a voucher type? See :class:`lino.modlib.ledger.choicelists.VoucherTypes`
  3         (4400) Suppliers                                          22,50               No
  **6**                                                   **22,50**   **22,50**           **0**
 ========= ============================================= =========== =========== ======= ===========
+<BLANKLINE>
+
+
+Partners and Clients
+====================
+
+Every partner voucher (and every entry of a financial voucher) is
+actually related not only to a "partner" but also to a "payment
+recipient" and to a "client".
+
+>>> killian = rt.modules.contacts.Person.objects.get(pk=227)
+>>> karl = rt.modules.pcsw.Client.objects.get(pk=141)
+>>> rt.login('robin').show(rt.modules.vatless.VouchersByPartner, killian)
+|br| 
+Create voucher in journal **Purchase invoices (PRC)**
+
+>>> rt.login('robin').show(rt.modules.vatless.VouchersByProject, karl)
+|br| 
+Create voucher in journal **Purchase invoices (PRC)**
+
+
+Dr. Killian has sent several invoices for different clients:
+
+>>> rt.show(rt.modules.ledger.MovementsByPartner, killian)
+==================== ========== ======= ============ ================== ======= ========================= ===========
+ Date                 Voucher    Debit   Credit       Account            Match   Client                    Satisfied
+-------------------- ---------- ------- ------------ ------------------ ------- ------------------------- -----------
+ 5/7/14               *PRC#4*            120,00       (4400) Suppliers           COLLARD Charlotte (118)   No
+ 4/17/14              *PRC#8*            29,95        (4400) Suppliers           EMONTS Daniel (128)       No
+ 3/28/14              *PRC#12*           25,00        (4400) Suppliers           EVERS Eberhart (127)      No
+ 3/8/14               *PRC#16*           22,50        (4400) Suppliers           JACOBS Jacqueline (137)   No
+ 2/16/14              *PRC#20*           5,33         (4400) Suppliers           KAIVERS Karl (141)        No
+ **Total (5 rows)**                      **202,78**                                                        **0**
+==================== ========== ======= ============ ================== ======= ========================= ===========
+<BLANKLINE>
+
+>>> rt.show(rt.modules.ledger.MovementsByProject, karl)
+==================== ========== ======= ========== ================== ======= ===========
+ Date                 Voucher    Debit   Credit     Account            Match   Satisfied
+-------------------- ---------- ------- ---------- ------------------ ------- -----------
+ 2/16/14              *PRC#20*           5,33       (4400) Suppliers           No
+ **Total (1 rows)**                      **5,33**                              **0**
+==================== ========== ======= ========== ================== ======= ===========
 <BLANKLINE>
 
 
