@@ -61,7 +61,7 @@ This is the list of upload types:
  9    Personalausweis              Nein     -1                                      1
  5    Vertrag                      Nein     -1                                      1
  6    Ärztliche Bescheinigung      Nein     -1                                      1
-                                   **5**    **-1**                               **11**
+                                   **5**    **-1**                                  **11**
 ==== ============================ ======== ============= ========================= ====================== ============================
 <BLANKLINE>
 
@@ -119,14 +119,14 @@ Ablaufende Uploads
 This is the MyUploads table for Theresia:
 
 >>> rt.login('theresia').show(uploads.MyUploads)
-======= ============================ ============================ ============ ============ ======= ============== =======
- ID      Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung   Datei
-------- ---------------------------- ---------------------------- ------------ ------------ ------- -------------- -------
- 9       DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja
- 8       DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja
- 7       DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein
-                                                                                             **2**
-======= ============================ ============================ ============ ============ ======= ============== =======
+==== ============================ ============================ ============ ============ ======= ============== =======
+ ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung   Datei
+---- ---------------------------- ---------------------------- ------------ ------------ ------- -------------- -------
+ 9    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja
+ 8    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja
+ 7    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein
+                                                                                          **2**
+==== ============================ ============================ ============ ============ ======= ============== =======
 <BLANKLINE>
 
 
@@ -136,7 +136,7 @@ And the same for Caroline:
 ==== ============================ ============== ============ ============ ======= ============== =======
  ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
 ---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
- 11      DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja
+ 11   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja
                                                                             **1**
 ==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>

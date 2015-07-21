@@ -6,7 +6,14 @@ Career (new version)
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_cv2
+    $ python setup.py test -s tests.DocsTests.test_cv2
+    
+    doctest init:
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino.api.doctest import *
 
 A technical tour into the
 :mod:`lino_welfare.projects.chatelet.modlib.cv` plugin.
@@ -16,17 +23,6 @@ Lino Welfare extends the standard :mod:`lino.modlib.cv` plugin
 .. contents::
    :depth: 2
 
-A tested document
-=================
-
-This document is being tested using doctest with the following
-initialization:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.chatelet.settings.doctests'
->>> from lino.api.doctest import *
     
 >>> dd.today()
 datetime.date(2014, 5, 22)
@@ -53,22 +49,22 @@ This is the list of training types:
 And the list of Study types:
 
 >>> rt.login('robin').show(cv.StudyTypes)
-======= ================= ======================= ==================== ======= ========== =================
- ID      Designation       Designation (fr)        Designation (de)     Study   Training   Education Level
-------- ----------------- ----------------------- -------------------- ------- ---------- -----------------
- 11      Alpha             Alpha                   Alpha                No      Yes
- 4       Apprenticeship    Apprentissage           Lehre                Yes     No
- 5       Highschool        École supérieure        Hochschule           Yes     No
- 7       Part-time study   Cours à temps partiel   Teilzeitunterricht   Yes     No
- 9       Prequalifying     Préqualification        Prequalifying        No      Yes
- 10      Qualifying        Qualification           Qualifying           No      Yes
- 8       Remote study      Cours à distance        Fernkurs             Yes     No
- 1       School            École                   Schule               Yes     No
- 2       Special school    École spéciale          Sonderschule         Yes     No
- 3       Training          Formation               Ausbildung           Yes     No
- 6       University        Université              Universität          Yes     No
- **0**                                                                  **8**   **3**
-======= ================= ======================= ==================== ======= ========== =================
+==== ================= ======================= ==================== ======= ========== =================
+ ID   Designation       Designation (fr)        Designation (de)     Study   Training   Education Level
+---- ----------------- ----------------------- -------------------- ------- ---------- -----------------
+ 11   Alpha             Alpha                   Alpha                No      Yes
+ 4    Apprenticeship    Apprentissage           Lehre                Yes     No
+ 5    Highschool        École supérieure        Hochschule           Yes     No
+ 7    Part-time study   Cours à temps partiel   Teilzeitunterricht   Yes     No
+ 9    Prequalifying     Préqualification        Prequalifying        No      Yes
+ 10   Qualifying        Qualification           Qualifying           No      Yes
+ 8    Remote study      Cours à distance        Fernkurs             Yes     No
+ 1    School            École                   Schule               Yes     No
+ 2    Special school    École spéciale          Sonderschule         Yes     No
+ 3    Training          Formation               Ausbildung           Yes     No
+ 6    University        Université              Universität          Yes     No
+                                                                     **8**   **3**
+==== ================= ======================= ==================== ======= ========== =================
 <BLANKLINE>
 
 
