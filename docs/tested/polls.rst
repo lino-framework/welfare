@@ -165,6 +165,43 @@ Responses
 
 >>> obj = polls.Response.objects.get(id=3)
 >>> rt.login('alicia').show(polls.AnswersByResponse, obj)
+Question *3/3/14* 4/2/14 *5/2/14* 
+<BLANKLINE>
+1) Cherchez-vous du travail actuellement? Yes
+ ****[Yes]**** **Maybe** **No** (**Remark**)
+ Yes
+<BLANKLINE>
+2) Avez-vous un CV à jour? Maybe
+ **Yes** ****[Maybe]**** **No** (**Remark**)
+ Maybe
+<BLANKLINE>
+3) Est-ce que vous vous présentez régulièrement au FOREM? No
+ **Yes** **Maybe** ****[No]**** (**Remark**)
+ No
+<BLANKLINE>
+4) Est-ce que vous consultez les petites annonces? Yes
+ ****[Yes]**** **Maybe** **No** (**Remark**)
+ Yes
+<BLANKLINE>
+5) Demande à l’entourage? Maybe
+ **Yes** ****[Maybe]**** **No** (**Remark**)
+ Maybe
+<BLANKLINE>
+6) Candidature spontanée? No
+ **Yes** **Maybe** ****[No]**** (**Remark**)
+ No
+<BLANKLINE>
+7) Antécédents judiciaires? Yes
+ ****[Yes]**** **Maybe** **No** (**Remark**)
+ Yes
+<BLANKLINE>
+Temps de travail acceptés 3/4
+ **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine** (**Remark**)
+ 3/4
+<BLANKLINE>
+<BLANKLINE>
+
+>>> rt.login('alicia').show(polls.AnswersByResponse, obj, nosummary=True)
 =========================================================== ======================================================================= ===========
  Question                                                    My answer                                                               My remark
 ----------------------------------------------------------- ----------------------------------------------------------------------- -----------
@@ -183,6 +220,45 @@ When Hubert looks at the same response, he cannot edit it because he
 is not the author:
 
 >>> rt.login('hubert').show(polls.AnswersByResponse, obj)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+Question *3/3/14* 4/2/14 *5/2/14* 
+<BLANKLINE>
+1) Cherchez-vous du travail actuellement? Yes
+ Yes
+ Yes
+<BLANKLINE>
+2) Avez-vous un CV à jour? Maybe
+ Maybe
+ Maybe
+<BLANKLINE>
+3) Est-ce que vous vous présentez régulièrement au FOREM? No
+ No
+ No
+<BLANKLINE>
+4) Est-ce que vous consultez les petites annonces? Yes
+ Yes
+ Yes
+<BLANKLINE>
+5) Demande à l’entourage? Maybe
+ Maybe
+ Maybe
+<BLANKLINE>
+6) Candidature spontanée? No
+ No
+ No
+<BLANKLINE>
+7) Antécédents judiciaires? Yes
+ Yes
+ Yes
+<BLANKLINE>
+Temps de travail acceptés 3/4
+ 3/4
+ 3/4
+<BLANKLINE>
+<BLANKLINE>
+
+>>> rt.login('hubert').show(polls.AnswersByResponse, obj, nosummary=True)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 =========================================================== =========== ===========
  Question                                                    My answer   My remark
 ----------------------------------------------------------- ----------- -----------

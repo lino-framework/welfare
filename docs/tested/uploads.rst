@@ -78,6 +78,10 @@ The other is still valid but will expire in 3 days.
 DERICUM Daniel (121)
 
 >>> rt.show(uploads.UploadsByClient, newcomer)
+Identifizierendes Dokument: *8*
+<BLANKLINE>
+
+>>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
 ============================ ============ ======= ============== =================== =======
  Upload-Art                   Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
 ---------------------------- ------------ ------- -------------- ------------------- -------
@@ -94,6 +98,12 @@ Here is another client with three uploads:
 DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByClient, oldclient)
+Aufenthaltserlaubnis: *9*
+Arbeitserlaubnis: *10*
+Führerschein: *11*
+<BLANKLINE>
+
+>>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
 ====================== ============ ======= ============== =================== =======
  Upload-Art             Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
 ---------------------- ------------ ------- -------------- ------------------- -------
@@ -158,9 +168,7 @@ This is the MyExpiringUploads table for :ref:`hubert`:
 table is empty for her:
 
 >>> rt.login('theresia').show(uploads.MyExpiringUploads)
-<BLANKLINE>
 Keine Daten anzuzeigen
-<BLANKLINE>
 
 
 

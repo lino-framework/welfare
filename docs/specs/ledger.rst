@@ -179,12 +179,12 @@ recipient" and to a "client".
 >>> killian = rt.modules.contacts.Person.objects.get(pk=227)
 >>> karl = rt.modules.pcsw.Client.objects.get(pk=141)
 >>> rt.login('robin').show(rt.modules.vatless.VouchersByPartner, killian)
-|br| 
-Create voucher in journal **Purchase invoices (PRC)**
+<BLANKLINE>
+Create voucher in journal **Purchase invoices (PRC)** 
 
 >>> rt.login('robin').show(rt.modules.vatless.VouchersByProject, karl)
-|br| 
-Create voucher in journal **Purchase invoices (PRC)**
+<BLANKLINE>
+Create voucher in journal **Purchase invoices (PRC)** 
 
 
 Dr. Killian has sent several invoices for different clients:
