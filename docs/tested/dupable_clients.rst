@@ -90,31 +90,15 @@ The detail window of each of these records shows some of the other
 records in the `SimilarClients` table:
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=122))
-===========================================
- Similar record
--------------------------------------------
- *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*
-===========================================
-<BLANKLINE>
+*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TMLN, TR0
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=123))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-===============================
- Similar record
--------------------------------
- *DEMEULENAERE Dorothée (122)*
- *DOBBELSTEIN Dorothée (124)*
-===============================
-<BLANKLINE>
+*DEMEULENAERE Dorothée (122)* *DOBBELSTEIN Dorothée (124)* Phonetic words: TPLS, TMLN, TR0
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=124))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-===========================================
- Similar record
--------------------------------------------
- *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*
-===========================================
-<BLANKLINE>
+*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TPLS, TR0
 
 Note how the result can differ depending on the partner.  Our
 algorithm is not perfect and does not detect all duplicates. 

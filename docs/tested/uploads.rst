@@ -79,7 +79,6 @@ DERICUM Daniel (121)
 
 >>> rt.show(uploads.UploadsByClient, newcomer)
 Identifizierendes Dokument: *8*
-<BLANKLINE>
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
 ============================ ============ ======= ============== =================== =======
@@ -99,9 +98,11 @@ DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByClient, oldclient)
 Aufenthaltserlaubnis: *9*
-Arbeitserlaubnis: *10*
-Führerschein: *11*
 <BLANKLINE>
+Arbeitserlaubnis: *10*
+<BLANKLINE>
+Führerschein: *11*
+
 
 >>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
 ====================== ============ ======= ============== =================== =======

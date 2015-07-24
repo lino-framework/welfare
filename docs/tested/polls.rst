@@ -8,28 +8,19 @@ A tested tour into the :mod:`lino_welfare.modlib.polls` plugin.
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_polls
+    $ python setup.py test -s tests.DocsTests.test_polls
+
+    doctest init:
+    
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino.api.doctest import *
 
 .. contents::
    :depth: 2
 
-
-About this document
-===================
-
-.. include:: /include/tested.rst
-
-This documents uses the :mod:`lino_welfare.projects.chatelet` test
-database:
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.chatelet.settings.doctests'
->>> from lino.api.doctest import *
-    
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.chatelet.settings.doctests
 
 >>> dd.today()
 datetime.date(2014, 5, 22)
@@ -198,8 +189,6 @@ Question *3/3/14* 4/2/14 *5/2/14*
 Temps de travail acceptés 3/4
  **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine** (**Remark**)
  3/4
-<BLANKLINE>
-<BLANKLINE>
 
 >>> rt.login('alicia').show(polls.AnswersByResponse, obj, nosummary=True)
 =========================================================== ======================================================================= ===========
@@ -254,8 +243,6 @@ Question *3/3/14* 4/2/14 *5/2/14*
 Temps de travail acceptés 3/4
  3/4
  3/4
-<BLANKLINE>
-<BLANKLINE>
 
 >>> rt.login('hubert').show(polls.AnswersByResponse, obj, nosummary=True)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF

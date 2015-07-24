@@ -5,6 +5,7 @@ Debts mediation
 ===============
 
 .. How to test only this document:
+
     $ python setup.py test -s tests.DocsTests.test_debts
     
     Doctest initialization:
@@ -362,23 +363,12 @@ Here is now (almost) the whole content of a printed budget.
 
 >>> obj = debts.Budget.objects.get(pk=4)
 
->> def story2rst(story):
-..     for i in ses.story2html(story):
-..         if E.iselement(i):
-..             print(html2rst(i))
-
-
->> from lino.utils.xmlgen.html import html2rst
->> def story2rst(story):
-..     for ln in ses.story2rst(story):
-..             print(ln)
-
-
 >>> ses.story2rst(obj.data_story(ses))
 ... #doctest: +REPORT_UDIFF
 ~~~~~~~~~~~~~~~
 Monthly incomes
 ~~~~~~~~~~~~~~~
+<BLANKLINE>
 ==================== ========= ======== ===== ============== ==============
  Description          Remarks   Common   Mr.   Mrs.           Total
 -------------------- --------- -------- ----- -------------- --------------
@@ -395,6 +385,7 @@ Monthly incomes
 ~~~~~~~~~~~~~~~~
 Monthly expenses
 ~~~~~~~~~~~~~~~~
+<BLANKLINE>
 ====================== ================== =============== ============ ===== ====== ============
  Description            Remarks            Yearly amount   Common       Mr.   Mrs.   Total
 ---------------------- ------------------ --------------- ------------ ----- ------ ------------
@@ -427,6 +418,7 @@ Monthly expenses
 ~~~~~~~~~~~~~~
 Yearly incomes
 ~~~~~~~~~~~~~~
+<BLANKLINE>
 ================================= ======== ===== ============ ============
  Description                       Common   Mr.   Mrs.         Total
 --------------------------------- -------- ----- ------------ ------------
@@ -439,6 +431,7 @@ Yearly incomes
 ~~~~~
 Taxes
 ~~~~~
+<BLANKLINE>
 ===================== ========= =============== =========== ===== ====== ===========
  Description           Remarks   Yearly amount   Common      Mr.   Mrs.   Total
 --------------------- --------- --------------- ----------- ----- ------ -----------
@@ -454,6 +447,7 @@ Taxes
 ~~~~~~~~~~
 Insurances
 ~~~~~~~~~~
+<BLANKLINE>
 ===================== ========= =============== ========== ===== ====== ==========
  Description           Remarks   Yearly amount   Common     Mr.   Mrs.   Total
 --------------------- --------- --------------- ---------- ----- ------ ----------
@@ -468,6 +462,7 @@ Insurances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Debts, outsanding payments and credits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<BLANKLINE>
 ===================== ========= ============== ============ ===== ====== ============
  Partner               Remarks   Monthly rate   Common       Mr.   Mrs.   Total
 --------------------- --------- -------------- ------------ ----- ------ ------------
@@ -478,6 +473,7 @@ Debts, outsanding payments and credits
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Bailiffs and cash collectors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<BLANKLINE>
 ======================== =============================== ========= ============== ======== ============== ============== ==============
  Debt collection agency   Partner                         Remarks   Monthly rate   Common   Mr.            Mrs.           Total
 ------------------------ ------------------------------- --------- -------------- -------- -------------- -------------- --------------
@@ -493,6 +489,7 @@ Bailiffs and cash collectors
 ------------------
 Incomes & Expenses
 ------------------
+<BLANKLINE>
 ========================================================= ==============
  Description                                               Amount
 --------------------------------------------------------- --------------
@@ -505,6 +502,7 @@ Incomes & Expenses
 -----------
 Liabilities
 -----------
+<BLANKLINE>
 ================================= ==============
  Description                       Amount
 --------------------------------- --------------
@@ -517,6 +515,7 @@ Liabilities
 ------------------
 Debts distribution
 ------------------
+<BLANKLINE>
 =============================== ================= ============== ============ ===========================
  Creditor                        Description       Debt           %            Monthly payback suggested
 ------------------------------- ----------------- -------------- ------------ ---------------------------

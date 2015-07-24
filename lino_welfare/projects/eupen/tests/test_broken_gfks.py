@@ -55,7 +55,7 @@ class TestCase(TestCase):
         self.assertEqual(Note.objects.all().count(), 0)
         ar = BrokenGFKs.request()
         rst = ar.to_rst()
-        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n\n")
+        self.assertEqual(rst, "Keine Daten anzuzeigen\n")
 
         cli = create_related_objects()
         self.assertEqual(Note.objects.all().count(), 1)
@@ -69,4 +69,4 @@ class TestCase(TestCase):
         self.assertEqual(Note.objects.all().count(), 0)
     
         rst = ar.to_rst()
-        self.assertEqual(rst, "\nKeine Daten anzuzeigen\n\n")
+        self.assertEqual(rst, "Keine Daten anzuzeigen\n")

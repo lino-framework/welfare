@@ -229,7 +229,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
             master_instance=obj)
         s = ar.to_rst()
         print(s)
-        self.assertEqual(s, "\nNo data to display\n\n")
+        self.assertEqual(s, "No data to display\n")
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.

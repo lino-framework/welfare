@@ -36,18 +36,18 @@ The central concept added by this module is a table of **jobs**.
 >>> with translation.override('de'):
 ...     ses.show(jobs.Jobs, column_names="function provider sector")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================= ================================ ===========================
+================= ================================ ==========================
  Funktion          Stellenanbieter                  Sektor
------------------ -------------------------------- ---------------------------
- Kellner           BISA                              Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum    Horeca
- Koch              R-Cycle Sperrgutsortierzentrum    Seefahrt
- Koch              Pro Aktiv V.o.G.                  Unterricht
- Küchenassistent   Pro Aktiv V.o.G.                  Medizin & Paramedizin
- Küchenassistent   BISA                              Reinigung
- Tellerwäscher     BISA                              Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum    Transport
-================= ================================ ===========================
+----------------- -------------------------------- --------------------------
+ Kellner           BISA                             Landwirtschaft & Garten
+ Kellner           R-Cycle Sperrgutsortierzentrum   Horeca
+ Koch              R-Cycle Sperrgutsortierzentrum   Seefahrt
+ Koch              Pro Aktiv V.o.G.                 Unterricht
+ Küchenassistent   Pro Aktiv V.o.G.                 Medizin & Paramedizin
+ Küchenassistent   BISA                             Reinigung
+ Tellerwäscher     BISA                             Bauwesen & Gebäudepflege
+ Tellerwäscher     R-Cycle Sperrgutsortierzentrum   Transport
+================= ================================ ==========================
 <BLANKLINE>
 
 
@@ -73,11 +73,11 @@ Job Offers
 
 >>> # settings.SITE.catch_layout_exceptions = False
 >>> ses.show(jobs.Offers)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-======================== ================== ========================== ========== ================ ============== =============
- Name                     Stellenanbieter    Sektor                     Funktion   Beginn Auswahl   Ende Auswahl   Beginndatum
------------------------- ------------------ -------------------------- ---------- ---------------- -------------- -------------
- Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.    Landwirtschaft & Garten   Kellner    22.01.14         02.05.14       01.06.14
-======================== ================== ========================== ========== ================ ============== =============
+======================== ================== ========================= ========== ================ ============== =============
+ Name                     Stellenanbieter    Sektor                    Funktion   Beginn Auswahl   Ende Auswahl   Beginndatum
+------------------------ ------------------ ------------------------- ---------- ---------------- -------------- -------------
+ Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   Landwirtschaft & Garten   Kellner    22.01.14         02.05.14       01.06.14
+======================== ================== ========================= ========== ================ ============== =============
 <BLANKLINE>
 
 
