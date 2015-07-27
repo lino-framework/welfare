@@ -391,7 +391,8 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 class AssignCoach(dd.NotifyingAction):
     "Action to assign this agent as coach for this client."
     label = _("Assign")
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.required((NewcomersAgent, NewcomersOperator))
+    # required_roles = dd.required(NewcomersAgent)
     show_in_workflow = True
     help_text = _("Assign this agent as coach for this client. "
                   "This will set the client's state to `Coached` "
