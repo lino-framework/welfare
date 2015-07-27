@@ -1,4 +1,3 @@
-/home/luc/hgwork/welfare/docs/specs/ledger.rst:2: WARNING: Explicit markup ends without a blank line; unexpected unindent.
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tested/2015/0717.rst:: WARNING: document isn't included in any toctree

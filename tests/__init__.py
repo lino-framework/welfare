@@ -56,6 +56,9 @@ class AdminTests(BaseTestCase):
 
 
 class SpecsTests(BaseTestCase):
+    def test_chatelet(self):
+        return self.run_simple_doctests('docs/specs/chatelet.rst')
+
     def test_art61(self):
         return self.run_simple_doctests('docs/specs/art61.rst')
 
@@ -156,7 +159,7 @@ class DocsTests(BaseTestCase):
         return self.run_docs_doctests('tested/cbss.rst')
 
     def test_courses(self):
-        return self.run_docs_doctests('tested/courses.rst')
+        return self.run_simple_doctests('docs/tested/courses.rst')
 
     def test_20150219(self):
         return self.run_simple_doctests('docs/tested/2015/0219.rst')

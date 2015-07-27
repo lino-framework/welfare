@@ -12,7 +12,7 @@ from lino_welfare.projects.std.settings import *
 class Site(Site):
 
     # verbose_name = "Lino pour CPAS"
-    # languages = 'fr nl en'
+    languages = "fr nl de en"
     # hidden_languages = None
 
     demo_fixtures = """std std2 few_languages props all_countries

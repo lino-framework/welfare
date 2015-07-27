@@ -212,3 +212,15 @@ def objects():
             g.after_ui_create(None)
             yield g
         
+    if dd.is_installed('immersion'):
+        # Extra loop on immersion trainings to print one of every type
+        ExcerptType = rt.modules.excerpts.ExcerptType
+        CT = rt.modules.immersion.ContractType
+        Contract = rt.modules.immersion.Contract
+        ses = rt.login("alicia")
+        for ct in CT.objects.all():
+            # There must be at least one contract per type
+            ctr = Contract.objects.filter(type=ct)[0]
+            et = ExcerptType.get_for_model(Contract)
+            ses.selected_rows = [ctr]
+            yield et.get_or_create_excerpt(ses)

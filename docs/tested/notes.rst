@@ -6,9 +6,9 @@ Notes
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_notes
+    $ python setup.py test -s tests.DocsTests.test_notes
 
-.. doctest init:
+    doctest init:
 
     >>> from __future__ import print_function
     >>> import os
@@ -18,7 +18,7 @@ Notes
 
 .. contents:: 
    :local:
-   :depth: 3
+   :depth: 2
 
 
 Permalink to the detail of a note type

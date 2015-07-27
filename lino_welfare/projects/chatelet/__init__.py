@@ -3,7 +3,9 @@
 # License: BSD (see file COPYING for details)
 
 """
-The Lino Welfare variant used in Chatelet.
+The Lino Welfare variant used in Châtelet.
+
+Technical Specification see :ref:`welfare.specs.chatelet`.
 
 .. autosummary::
    :toctree:

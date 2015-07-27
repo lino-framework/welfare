@@ -67,8 +67,8 @@ The printed document
 >>> html = obj.printed_by.preview(ar)
 >>> soup = BeautifulSoup(html)
 >>> for h in soup.find_all('h1'):
-...     print(h)
-<h1>Art61 job supplyment
+...     print(unicode(h))
+<h1>Mise à l'emploi art61
 </h1>
 
 >>> for h in soup.find_all('h2'):

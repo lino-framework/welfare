@@ -11,17 +11,17 @@ give a complete and testable overview of the functionality of some
 part of Lino Welfare).
 
 
+General
+=======
 
 .. toctree::
    :maxdepth: 2
   
    /tested/general
-   art61
    choicelists
    ledger
    clients
    /tested/users
-   /tested/eupen
    /tested/pcsw
    /tested/clients
    /tested/newcomers
@@ -38,9 +38,7 @@ part of Lino Welfare).
    /tested/misc
    /tested/polls
    /tested/reception
-   /tested/immersion
    /tested/uploads
-   /tested/cv2
    /tested/main
    /tested/addresses
    /tested/cal
@@ -48,3 +46,22 @@ part of Lino Welfare).
    /tested/notes
    /tested/2015/0219
    /tested/2015/0715
+
+Eupen
+=====
+
+.. toctree::
+   :maxdepth: 2
+  
+   /tested/eupen
+
+Châtelet
+========
+
+.. toctree::
+   :maxdepth: 2
+  
+   chatelet
+   art61
+   /tested/immersion
+   /tested/cv2

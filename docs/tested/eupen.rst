@@ -33,7 +33,7 @@ Traceback (most recent call last):
 Warning: Kann Klient EVERS Eberhart (127) nicht l\xf6schen weil 4 Hilfebeschl\xfcsse darauf verweisen.
 
 
-User profiles
+The main menu
 =============
 
 .. _rolf:
@@ -43,8 +43,7 @@ Rolf
 
 Rolf is the local system administrator, he has a complete menu:
 
->>> with translation.override('de'):
-...     rt.login('rolf').show_menu()
+>>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
