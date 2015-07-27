@@ -4,11 +4,10 @@
 Lino Welfare Functional Specification
 =====================================
 
-This section contains a series of documents whose primary goal is to
-be `functional specifications
-<https://en.wikipedia.org/wiki/Functional_specification>`_ (i.e. which
-give a complete and testable overview of the functionality of some
-part of Lino Welfare).
+This section contains `functional specifications
+<https://en.wikipedia.org/wiki/Functional_specification>`_,
+i.e. documents which describe and test the functionality of some part
+of Lino Welfare.
 
 
 General
@@ -17,33 +16,33 @@ General
 .. toctree::
    :maxdepth: 2
   
-   /tested/general
+   general
    choicelists
    ledger
    clients
-   /tested/users
-   /tested/pcsw
-   /tested/clients
-   /tested/newcomers
-   /tested/households
-   /tested/dupable_clients
-   /tested/plausibility
-   /tested/aids
-   /tested/cbss
-   /tested/courses
-   /tested/debts
-   /tested/excerpts
-   /tested/integ
-   /tested/jobs
-   /tested/misc
-   /tested/polls
-   /tested/reception
-   /tested/uploads
-   /tested/main
-   /tested/addresses
-   /tested/cal
-   /tested/countries
-   /tested/notes
+   users
+   pcsw
+   clients
+   newcomers
+   households
+   dupable_clients
+   plausibility
+   aids
+   cbss
+   courses
+   debts
+   excerpts
+   integ
+   jobs
+   misc
+   polls
+   reception
+   uploads
+   main
+   addresses
+   cal
+   countries
+   notes
    /tested/2015/0219
    /tested/2015/0715
 
@@ -53,7 +52,8 @@ Eupen
 .. toctree::
    :maxdepth: 2
   
-   /tested/eupen
+   clients_eupen
+   eupen
 
 Châtelet
 ========
@@ -63,5 +63,5 @@ Châtelet
   
    chatelet
    art61
-   /tested/immersion
-   /tested/cv2
+   immersion
+   cv2

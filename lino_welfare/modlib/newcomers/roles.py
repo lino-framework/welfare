@@ -22,8 +22,8 @@ class NewcomersAgent(SocialAgent):
 
 
 class NewcomersOperator(ContactsUser, BeIdUser):
-    """A **newcomers operator** is a user who can register newcomers and
-    assign them a coach.
+    """A **newcomers operator** is a user who is not *social agent* but
+    can e.g. register newcomers and assign them a coach.
 
     """
     pass

@@ -210,7 +210,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> from lino.utils.diag import window_actions
->>> print window_actions()
+>>> print(window_actions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - about.About.show (viewable for all except anonymous) : server_status
 - about.Models.detail (viewable for all except anonymous) : app, name, docstring, rows
@@ -421,9 +421,9 @@ Default template for excerpts
 
 Check whether Lino returns the right default template for excerpts.
 
-:mod:`lino.modlib.excerpts` defines a template
-:xfile:`excerpts/Default.odt`, and :mod:`lino_welfare.modlib.welfare`
-:overrides this template.
+In :mod:`lino.modlib.excerpts` we define a template
+:xfile:`excerpts/Default.odt`, but :mod:`lino_welfare.modlib.welfare`
+overrides this template.
 
 The rule is that **the *last* plugin wins** when Lino searches for
 templates.

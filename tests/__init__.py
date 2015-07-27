@@ -75,91 +75,91 @@ class SpecsTests(BaseTestCase):
 class DocsTests(BaseTestCase):
     
     def test_cal(self):
-        return self.run_simple_doctests('docs/tested/cal.rst')
+        return self.run_simple_doctests('docs/specs/cal.rst')
 
     def test_countries(self):
-        return self.run_simple_doctests('docs/tested/countries.rst')
+        return self.run_simple_doctests('docs/specs/countries.rst')
 
     def test_households(self):
-        return self.run_simple_doctests('docs/tested/households.rst')
+        return self.run_simple_doctests('docs/specs/households.rst')
 
     def test_integ(self):
-        return self.run_simple_doctests('docs/tested/integ.rst')
+        return self.run_simple_doctests('docs/specs/integ.rst')
 
     def test_autoevents(self):
         return self.run_simple_doctests('docs/tour/autoevents.rst')
 
     def test_main(self):
-        return self.run_simple_doctests('docs/tested/main.rst')
+        return self.run_simple_doctests('docs/specs/main.rst')
 
     def test_uploads(self):
-        return self.run_simple_doctests('docs/tested/uploads.rst')
+        return self.run_simple_doctests('docs/specs/uploads.rst')
 
     def test_dupable(self):
-        return self.run_simple_doctests('docs/tested/dupable_clients.rst')
+        return self.run_simple_doctests('docs/specs/dupable_clients.rst')
 
     def test_plausibility(self):
-        return self.run_simple_doctests('docs/tested/plausibility.rst')
+        return self.run_simple_doctests('docs/specs/plausibility.rst')
 
     def test_users(self):
-        return self.run_simple_doctests('docs/tested/users.rst')
+        return self.run_simple_doctests('docs/specs/users.rst')
 
     def test_excerpts(self):
-        return self.run_simple_doctests('docs/tested/excerpts.rst')
+        return self.run_simple_doctests('docs/specs/excerpts.rst')
 
     def test_addresses(self):
-        return self.run_simple_doctests('docs/tested/addresses.rst')
+        return self.run_simple_doctests('docs/specs/addresses.rst')
 
     def test_immersion(self):
-        return self.run_simple_doctests('docs/tested/immersion.rst')
+        return self.run_simple_doctests('docs/specs/immersion.rst')
 
-    def test_clients(self):
-        return self.run_simple_doctests('docs/tested/clients.rst')
+    def test_clients_eupen(self):
+        return self.run_simple_doctests('docs/specs/clients_eupen.rst')
 
     def test_cv2(self):
-        return self.run_simple_doctests('docs/tested/cv2.rst')
+        return self.run_simple_doctests('docs/specs/cv2.rst')
 
     def test_polls(self):
-        return self.run_simple_doctests('docs/tested/polls.rst')
+        return self.run_simple_doctests('docs/specs/polls.rst')
 
     def test_general(self):
-        return self.run_simple_doctests('docs/tested/general.rst')
+        return self.run_simple_doctests('docs/specs/general.rst')
 
     def test_eupen(self):
-        return self.run_simple_doctests('docs/tested/eupen.rst')
+        return self.run_simple_doctests('docs/specs/eupen.rst')
 
     def test_misc(self):
-        return self.run_simple_doctests('docs/tested/misc.rst')
+        return self.run_simple_doctests('docs/specs/misc.rst')
 
     def test_aids_de(self):
         return self.run_simple_doctests('docs_de/aids.rst')
 
     def test_aids(self):
-        return self.run_simple_doctests('docs/tested/aids.rst')
+        return self.run_simple_doctests('docs/specs/aids.rst')
 
     def test_pcsw(self):
-        return self.run_simple_doctests('docs/tested/pcsw.rst')
+        return self.run_simple_doctests('docs/specs/pcsw.rst')
 
     def test_jobs(self):
-        return self.run_simple_doctests('docs/tested/jobs.rst')
+        return self.run_simple_doctests('docs/specs/jobs.rst')
 
     def test_reception(self):
-        return self.run_simple_doctests('docs/tested/reception.rst')
+        return self.run_simple_doctests('docs/specs/reception.rst')
 
     def test_newcomers(self):
-        return self.run_simple_doctests('docs/tested/newcomers.rst')
+        return self.run_simple_doctests('docs/specs/newcomers.rst')
 
     def test_debts(self):
-        return self.run_simple_doctests('docs/tested/debts.rst')
+        return self.run_simple_doctests('docs/specs/debts.rst')
 
     def test_notes(self):
-        return self.run_simple_doctests('docs/tested/notes.rst')
+        return self.run_simple_doctests('docs/specs/notes.rst')
 
     def test_cbss(self):
-        return self.run_docs_doctests('tested/cbss.rst')
+        return self.run_docs_doctests('specs/cbss.rst')
 
     def test_courses(self):
-        return self.run_simple_doctests('docs/tested/courses.rst')
+        return self.run_simple_doctests('docs/specs/courses.rst')
 
     def test_20150219(self):
         return self.run_simple_doctests('docs/tested/2015/0219.rst')
