@@ -6,36 +6,23 @@ Users
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_users
+    $ python setup.py test -s tests.SpecsTests.test_users
+    
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino.modlib.users` plugin.
 
 .. contents::
    :depth: 2
 
-About this document
-===================
-
-.. include:: /include/tested.rst
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
-    
-This document uses the :mod:`lino_welfare.projects.std` test
-database:
-
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.std.settings.doctests
-
->>> dd.today()
-datetime.date(2014, 5, 22)
-
-
 User profiles
-========================
+=============
 
 This is the list of user profiles:
 
@@ -44,10 +31,11 @@ This is the list of user profiles:
  value   name        text
 ------- ----------- -----------------------------
  000     anonymous   Anonymous
- 100                 Integration Agent
- 110                 Integration Agent (Manager)
+ 100                 Integration agent
+ 110                 Integration agent (Manager)
  200                 Newcomers consultant
  210                 Reception clerk
+ 220                 Newcomers reception clerk
  300                 Debts consultant
  400                 Social agent
  410                 Social agent (Manager)

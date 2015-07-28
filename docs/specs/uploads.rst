@@ -1,4 +1,4 @@
-.. _welfare.tested.uploads:
+.. _welfare.specs.uploads:
 
 =============
 Uploads
@@ -6,7 +6,7 @@ Uploads
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_uploads
+    $ python setup.py test -s tests.SpecsTests.test_uploads
 
     doctest init:
     

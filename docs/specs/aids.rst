@@ -9,7 +9,7 @@ This document is a technical tour into the
 
 ..  To test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_aids
+    $ python setup.py test -s tests.SpecsTests.test_aids
 
     doctest initialization:
 

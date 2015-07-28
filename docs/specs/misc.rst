@@ -6,7 +6,7 @@ Miscellaneous
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_misc
+    $ python setup.py test -s tests.SpecsTests.test_misc
     
     doctest init:
     
@@ -73,7 +73,7 @@ when called on an excerpt where Lino has two possible locations.
 
 >>> lcd = os.path.join(settings.SITE.project_dir, 'config')
 >>> # rt.makedirs_if_missing(lcd)
->>> obj = excerpts.Excerpt.objects.get(pk=1)
+>>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ...     #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS

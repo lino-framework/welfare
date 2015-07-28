@@ -12,7 +12,7 @@ See :mod:`<lino.modlib.plausibility`.
 ..  This document is part of the test suite.  To test only this
   document, run::
 
-  $ python setup.py test -s tests.DocsTests.test_plausibility
+  $ python setup.py test -s tests.SpecsTests.test_plausibility
 
 This is a tested document:
 

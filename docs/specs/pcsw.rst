@@ -7,7 +7,7 @@ General PCSW
 ..
   To test only this document, run::
 
-    $ python setup.py test -s tests.DocsTests.test_pcsw
+    $ python setup.py test -s tests.SpecsTests.test_pcsw
 
   doctest init:
 

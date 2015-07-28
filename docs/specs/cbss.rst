@@ -6,7 +6,7 @@ CBSS connection
 .. include:: /include/tested.rst
 
 .. to test only this document:
-  $ python setup.py test -s tests.DocsTests.test_cbss
+  $ python setup.py test -s tests.SpecsTests.test_cbss
 
 .. 
   >>> from lino.api.shell import *

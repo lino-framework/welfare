@@ -6,7 +6,7 @@ Integration Service
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_integ
+    $ python setup.py test -s tests.SpecsTests.test_integ
     
     Doctest initialization:
 

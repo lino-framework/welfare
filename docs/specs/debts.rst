@@ -6,7 +6,7 @@ Debts mediation
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_debts
+    $ python setup.py test -s tests.SpecsTests.test_debts
     
     Doctest initialization:
 

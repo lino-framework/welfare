@@ -1,4 +1,4 @@
-.. _welfare.tested.polls:
+.. _welfare.specs.polls:
 
 ==================
 Polls tested tour
@@ -8,7 +8,7 @@ A tested tour into the :mod:`lino_welfare.modlib.polls` plugin.
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_polls
+    $ python setup.py test -s tests.SpecsTests.test_polls
 
     doctest init:
     
@@ -118,18 +118,18 @@ Configuration
 This is the list of choice sets:
 
 >>> rt.show(polls.ChoiceSets)
-==== ===================== =====================
- ID   Description           Description (de)
----- --------------------- ---------------------
- 1    Yes/No                Yes/No
- 2    Oui/Peut-être/Non     Yes/Maybe/No
- 3    That's it!...Never!   That's it!...Never!
- 4    -1..+1                -1..+1
- 5    Acquis                Acquired
- 6    1...5                 1...5
- 7    1...10                1...10
+==== ===================== ===================== =====================
+ ID   Description           Description (de)      Description (en)
+---- --------------------- --------------------- ---------------------
+ 1    Yes/No                Yes/No                Yes/No
+ 2    Oui/Peut-être/Non     Yes/Maybe/No          Yes/Maybe/No
+ 3    That's it!...Never!   That's it!...Never!   That's it!...Never!
+ 4    -1..+1                -1..+1                -1..+1
+ 5    Acquis                Acquired              Acquired
+ 6    1...5                 1...5                 1...5
+ 7    1...10                1...10                1...10
  8    Temps de travail
-==== ===================== =====================
+==== ===================== ===================== =====================
 <BLANKLINE>
 
 
@@ -137,7 +137,6 @@ This is the list of choice sets:
 
 Responses
 =========
-
 
 
 >>> rt.login('romain').show(polls.Responses)

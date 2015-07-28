@@ -1,12 +1,13 @@
 .. _welfare.tested.eupen:
+.. _welfare.specs.eupen:
 
-==================================
-Eupen (tested tour)
-==================================
+=======================
+Lino Welfare à la Eupen
+=======================
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_eupen
+    $ python setup.py test -s tests.SpecsTests.test_eupen
 
     >>> from __future__ import print_function
     >>> import os
@@ -126,12 +127,16 @@ Mélanie is a manager of the Integration service.
 
 >>> p = rt.login('melanie').get_user().profile
 >>> print(p)
-Integrations-Assistent (Manager)
+Begleiter im DSBE (Manager)
 >>> p.role.__class__
 <class 'lino_welfare.modlib.integ.roles.IntegrationStaff'>
 
->>> with translation.override('de'):
-...     rt.login('melanie').show_menu()
+Because Mélanie has her :attr:`language
+<lino.modlib.users.models.User.language>` field set to French, we need
+to explicitly override the language of :meth:`show_menu
+<lino.core.requests.BaseRequest.show_menu>` to get her menu in German:
+
+>>> rt.login('melanie').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste

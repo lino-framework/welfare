@@ -1,4 +1,5 @@
 .. _welfare.tested.general:
+.. _welfare.specs.general:
 
 ================================
 General overview of Lino Welfare
@@ -6,7 +7,7 @@ General overview of Lino Welfare
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_general
+    $ python setup.py test -s tests.SpecsTests.test_general
 
     doctest init:
 
@@ -110,7 +111,7 @@ The following table gives an overview of these things.
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.Excerpts               12        14
+ excerpts.Excerpt               excerpts.Excerpts               12        16
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    10        0
@@ -222,9 +223,9 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - active_job_search.Proofs.insert (viewable for all except anonymous) : date, client, company, id, spontaneous, response, remarks
 - addresses.Addresses.detail (viewable for admin) : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert (viewable for admin) : country, city, street, street_no, street_box, address_type, remark
-- aids.AidTypes.detail (viewable for 110, 210, 410, admin) : id, short_name, confirmation_type, name, name_fr, name_de, name_nl, excerpt_title, excerpt_title_fr, excerpt_title_de, excerpt_title_nl, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
-- aids.AidTypes.insert (viewable for 110, 210, 410, admin) : name, name_fr, name_de, name_nl, confirmation_type
-- aids.Categories.insert (viewable for 110, 210, 410, admin) : id, name, name_fr, name_de, name_nl
+- aids.AidTypes.detail (viewable for 110, 210, 220, 410, admin) : id, short_name, confirmation_type, name, name_fr, name_de, name_nl, excerpt_title, excerpt_title_fr, excerpt_title_de, excerpt_title_nl, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
+- aids.AidTypes.insert (viewable for 110, 210, 220, 410, admin) : name, name_fr, name_de, name_nl, confirmation_type
+- aids.Categories.insert (viewable for 110, 210, 220, 410, admin) : id, name, name_fr, name_de, name_nl
 - aids.Grantings.detail (viewable for all except anonymous) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
 - aids.Grantings.insert (viewable for all except anonymous) : client, aid_type, signer, board, decision_date, start_date, end_date
 - aids.GrantingsByClient.insert (viewable for all except anonymous) : aid_type, board, decision_date, start_date, end_date
@@ -245,7 +246,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - cal.EventTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, invite_client
 - cal.Events.detail (viewable for 110, 410, admin) : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert (viewable for 110, 410, admin) : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.EventsByClient.insert (viewable for all except anonymous, 210) : event_type, summary, start_date, start_time, end_date, end_time
+- cal.EventsByClient.insert (viewable for all except anonymous, 210, 220) : event_type, summary, start_date, start_time, end_date, end_time
 - cal.GuestRoles.insert (viewable for admin) : id, name, name_fr, name_de, name_nl
 - cal.GuestStates.wf1 (viewable for admin) : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 (viewable for admin) : notify_subject, notify_body, notify_silent
@@ -257,7 +258,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - cal.Rooms.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
 - cal.Tasks.detail (viewable for 110, 410, admin) : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert (viewable for 110, 410, admin) : summary, user, project
-- cal.TasksByController.insert (viewable for all except anonymous, 210) : summary, start_date, due_date, user, delegated
+- cal.TasksByController.insert (viewable for all except anonymous, 210, 220) : summary, start_date, due_date, user, delegated
 - cbss.IdentifyPersonRequests.detail (viewable for all except anonymous) : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, response_xml, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert (viewable for all except anonymous) : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail (viewable for all except anonymous) : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, response_xml, info_messages, debug_messages
@@ -334,12 +335,12 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - jobs.Offers.insert (viewable for 100, 110, admin) : name, provider, sector, function, selection_from, selection_until, start_date, remark
 - jobs.OldJobsOverview.show (viewable for 100, 110, admin) : body
 - jobs.Schedules.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
-- languages.Languages.insert (viewable for all except anonymous, 210) : id, iso2, name, name_fr, name_de, name_nl
+- languages.Languages.insert (viewable for all except anonymous, 210, 220) : id, iso2, name, name_fr, name_de, name_nl
 - ledger.ActivityReport.show (viewable for nobody) : body
 - ledger.Journals.detail (viewable for all except anonymous) : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_de, name_nl, printed_name, printed_name_fr, printed_name_de, printed_name_nl
 - ledger.Journals.insert (viewable for all except anonymous) : ref, name, name_fr, name_de, name_nl, trade_type, voucher_type
 - ledger.Situation.show (viewable for nobody) : body
-- newcomers.AvailableCoachesByClient.assign_coach (viewable for 200, 300, admin) : notify_subject, notify_body, notify_silent
+- newcomers.AvailableCoachesByClient.assign_coach (viewable for 200, 220, 300, admin) : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, weight
 - newcomers.Faculties.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, weight
 - notes.EventTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, remark
@@ -369,7 +370,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - properties.PropTypes.insert (viewable for admin) : id, name, name_fr, name_de, name_nl, choicelist, default_value
 - reception.BusyVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - reception.GoneVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
-- reception.MyWaitingVisitors.detail (viewable for all except anonymous, 210) : event, client, role, state, remark, workflow_buttons
+- reception.MyWaitingVisitors.detail (viewable for all except anonymous, 210, 220) : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - system.SiteConfigs.detail (viewable for admin) : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail (viewable for admin) : id, name, user, description, text

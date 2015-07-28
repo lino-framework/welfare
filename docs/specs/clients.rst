@@ -12,7 +12,7 @@ Most code is in :mod:`lino_welfare.modlib.pcsw` plugin.
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_clients
+    $ python setup.py test -s tests.SpecsTests.test_clients
     
     doctest init
     

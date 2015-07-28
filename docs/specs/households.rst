@@ -6,7 +6,7 @@ Households
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_households
+    $ python setup.py test -s tests.SpecsTests.test_households
 
 A technical tour into the :mod:`lino_welfare.modlib.households` module.
 

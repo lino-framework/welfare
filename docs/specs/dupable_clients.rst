@@ -11,7 +11,7 @@ Lino Welfare offers some functionality for avoiding duplicate
 ..  This document is part of the test suite.  To test only this
   document, run::
 
-    $ python setup.py test -s tests.DocsTests.test_dupable
+    $ python setup.py test -s tests.SpecsTests.test_dupable
 
     doctest init:
 

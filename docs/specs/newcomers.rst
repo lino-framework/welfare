@@ -6,7 +6,7 @@ Newcomers (tested tour)
 
 .. to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_newcomers
+    $ python setup.py test -s tests.SpecsTests.test_newcomers
     
     doctest init:
 

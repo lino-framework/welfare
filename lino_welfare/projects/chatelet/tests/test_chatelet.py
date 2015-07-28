@@ -67,8 +67,9 @@ class TestCase(TestCase):
             HTTP_ACCEPT_LANGUAGE='en')
         result = self.check_json_result(response, 'rows success message')
         self.assertEqual(result['success'], True)
-        self.assertEqual(result['message'],
-                         """Obstacle "Obstacle object" has been created.""")
+        self.assertEqual(
+            result['message'],
+            """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
         self.assertEqual(result['rows'], [
             [u'Alcohol', 1, u'robin', 1, u'22.05.2014', u'', 1, {u'id': True}, {}, False]])
 
@@ -99,7 +100,8 @@ class TestCase(TestCase):
             "close_window success message")
         self.assertEqual(result['success'], True)
         self.assertEqual(
-            result['message'], 'Client "LAST First (101)" has been created.')
+            result['message'],
+            'B\xe9n\xe9ficiaire "LAST First (101)" a \xe9t\xe9 cr\xe9\xe9')
 
     def test_suggest_cal_guests(self):
         """Tests a bugfix in :meth:`suggest_cal_guests

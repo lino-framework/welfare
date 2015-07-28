@@ -1,4 +1,5 @@
 .. _welfare.tested.cv2:
+.. _welfare.specs.cv2:
 
 =====================
 Career (new version)
@@ -6,7 +7,7 @@ Career (new version)
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_cv2
+    $ python setup.py test -s tests.SpecsTests.test_cv2
     
     doctest init:
     >>> from __future__ import print_function
@@ -34,37 +35,37 @@ Configuration data
 This is the list of training types:
 
 >>> rt.login('robin').show(cv.EducationLevels)
-==================== ================== ================== ======= ==========
- Designation          Designation (fr)   Designation (de)   Study   Training
--------------------- ------------------ ------------------ ------- ----------
- Bachelor             Bachelor           Bachelor           Yes     No
- Higher               Supérieur          Hochschule         Yes     No
- Master               Master             Master             Yes     No
- Primary              Primaire           Primär             Yes     No
- Secondary            Secondaire         Sekundär           Yes     No
- **Total (5 rows)**                                         **5**   **0**
-==================== ================== ================== ======= ==========
+====================== ================== ================== ======= ===========
+ Description            Description (de)   Description (en)   Étude   Formation
+---------------------- ------------------ ------------------ ------- -----------
+ Bachelor               Bachelor           Bachelor           Oui     Non
+ Master                 Master             Master             Oui     Non
+ Primaire               Primär             Primary            Oui     Non
+ Secondaire             Sekundär           Secondary          Oui     Non
+ Supérieur              Hochschule         Higher             Oui     Non
+ **Total (5 lignes)**                                         **5**   **0**
+====================== ================== ================== ======= ===========
 <BLANKLINE>
 
 And the list of Study types:
 
 >>> rt.login('robin').show(cv.StudyTypes)
-==== ================= ======================= ==================== ======= ========== =================
- ID   Designation       Designation (fr)        Designation (de)     Study   Training   Education Level
----- ----------------- ----------------------- -------------------- ------- ---------- -----------------
- 11   Alpha             Alpha                   Alpha                No      Yes
- 4    Apprenticeship    Apprentissage           Lehre                Yes     No
- 5    Highschool        École supérieure        Hochschule           Yes     No
- 7    Part-time study   Cours à temps partiel   Teilzeitunterricht   Yes     No
- 9    Prequalifying     Préqualification        Prequalifying        No      Yes
- 10   Qualifying        Qualification           Qualifying           No      Yes
- 8    Remote study      Cours à distance        Fernkurs             Yes     No
- 1    School            École                   Schule               Yes     No
- 2    Special school    École spéciale          Sonderschule         Yes     No
- 3    Training          Formation               Ausbildung           Yes     No
- 6    University        Université              Universität          Yes     No
-                                                                     **8**   **3**
-==== ================= ======================= ==================== ======= ========== =================
+==== ======================= ==================== ================== ======= =========== ===================
+ ID   Description             Description (de)     Description (en)   Étude   Formation   Niveau académique
+---- ----------------------- -------------------- ------------------ ------- ----------- -------------------
+ 11   Alpha                   Alpha                Alpha              Non     Oui
+ 4    Apprentissage           Lehre                Apprenticeship     Oui     Non
+ 8    Cours à distance        Fernkurs             Remote study       Oui     Non
+ 7    Cours à temps partiel   Teilzeitunterricht   Part-time study    Oui     Non
+ 3    Formation               Ausbildung           Training           Oui     Non
+ 9    Préqualification        Prequalifying        Prequalifying      Non     Oui
+ 10   Qualification           Qualifying           Qualifying         Non     Oui
+ 6    Université              Universität          University         Oui     Non
+ 1    École                   Schule               School             Oui     Non
+ 2    École spéciale          Sonderschule         Special school     Oui     Non
+ 5    École supérieure        Hochschule           Highschool         Oui     Non
+                                                                      **8**   **3**
+==== ======================= ==================== ================== ======= =========== ===================
 <BLANKLINE>
 
 

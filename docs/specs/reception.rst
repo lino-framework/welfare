@@ -6,7 +6,7 @@ Reception
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_reception
+    $ python setup.py test -s tests.SpecsTests.test_reception
 
     >>> from __future__ import print_function
     >>> import os

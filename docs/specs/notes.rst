@@ -6,7 +6,7 @@ Notes
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_notes
+    $ python setup.py test -s tests.SpecsTests.test_notes
 
     doctest init:
 

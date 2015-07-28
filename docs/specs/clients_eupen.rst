@@ -70,7 +70,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - **Vermittler** (broker)
           - **Fachbereich** (faculty)
           - **Ablehnungsgrund** (refusal_reason)
-        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient) [visible for 200, 210, 300, admin]
+        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient) [visible for 200, 220, 300, admin]
       - (coaching_2):
         - **Kontakte** (pcsw.ContactsByClient)
         - **Begleitungen** (pcsw.CoachingsByClient)
@@ -86,7 +86,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - **Konten** (sepa.AccountsByClient)
       - **Hilfebeschlüsse** (aids.GrantingsByClient)
     - **Arbeitssuche** (work_tab_1):
-      - (suche) [visible for all except anonymous, 210]:
+      - (suche) [visible for all except anonymous, 210, 220]:
         - **Dispenzen** (pcsw.DispensesByClient)
         - **AG-Sperren** (pcsw.ExclusionsByClient)
       - (papers):
@@ -116,7 +116,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
     - **Historie** (history):
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
-    - **Kalender** (calendar) [visible for all except anonymous, 210]:
+    - **Kalender** (calendar) [visible for all except anonymous, 210, 220]:
       - **Termine** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
     - **Sonstiges** (misc) [visible for 110, 410, admin]:
@@ -127,7 +127,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - (misc_5) [visible for all except anonymous]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
-    - **ZDSS** (cbss) [visible for all except anonymous, 210]:
+    - **ZDSS** (cbss) [visible for all except anonymous, 210, 220]:
       - (cbss_1) [visible for all except anonymous]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
       - **Zusammenfassung ZDSS** (cbss_summary) [visible for all except anonymous]
     - **Schuldnerberatung** (debts) [visible for 300, admin]:

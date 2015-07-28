@@ -71,9 +71,6 @@ class SpecsTests(BaseTestCase):
     def test_clients(self):
         return self.run_simple_doctests('docs/specs/clients.rst')
 
-
-class DocsTests(BaseTestCase):
-    
     def test_cal(self):
         return self.run_simple_doctests('docs/specs/cal.rst')
 
@@ -85,9 +82,6 @@ class DocsTests(BaseTestCase):
 
     def test_integ(self):
         return self.run_simple_doctests('docs/specs/integ.rst')
-
-    def test_autoevents(self):
-        return self.run_simple_doctests('docs/tour/autoevents.rst')
 
     def test_main(self):
         return self.run_simple_doctests('docs/specs/main.rst')
@@ -131,9 +125,6 @@ class DocsTests(BaseTestCase):
     def test_misc(self):
         return self.run_simple_doctests('docs/specs/misc.rst')
 
-    def test_aids_de(self):
-        return self.run_simple_doctests('docs_de/aids.rst')
-
     def test_aids(self):
         return self.run_simple_doctests('docs/specs/aids.rst')
 
@@ -155,11 +146,20 @@ class DocsTests(BaseTestCase):
     def test_notes(self):
         return self.run_simple_doctests('docs/specs/notes.rst')
 
-    def test_cbss(self):
-        return self.run_docs_doctests('specs/cbss.rst')
-
     def test_courses(self):
         return self.run_simple_doctests('docs/specs/courses.rst')
+
+
+class DocsTests(BaseTestCase):
+    
+    def test_autoevents(self):
+        return self.run_simple_doctests('docs/tour/autoevents.rst')
+
+    def test_aids_de(self):
+        return self.run_simple_doctests('docs_de/aids.rst')
+
+    def test_cbss(self):
+        return self.run_docs_doctests('specs/cbss.rst')
 
     def test_20150219(self):
         return self.run_simple_doctests('docs/tested/2015/0219.rst')

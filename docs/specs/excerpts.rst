@@ -6,7 +6,7 @@ Excerpts
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_excerpts
+    $ python setup.py test -s tests.SpecsTests.test_excerpts
     
     doctest init:
 

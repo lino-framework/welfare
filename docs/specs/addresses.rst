@@ -7,7 +7,7 @@ Multiple postal addresses
 
 .. How to test only this document:
 
-  $ python setup.py test -s tests.DocsTests.test_addresses
+  $ python setup.py test -s tests.SpecsTests.test_addresses
 
 
 .. contents::
