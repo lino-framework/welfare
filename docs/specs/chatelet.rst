@@ -316,7 +316,7 @@ List of window layouts
 - households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en
 - humanlinks.Links.insert (viewable for 110, 410, admin) : parent, child, type
-- immersion.ContractTypes.detail (viewable for 110, admin) : id, name, name_nl, name_de, name_en, exam_policy
+- immersion.ContractTypes.detail (viewable for 110, admin) : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
 - immersion.ContractTypes.insert (viewable for 110, admin) : name, name_nl, name_de, name_en, exam_policy
 - immersion.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - immersion.Contracts.insert (viewable for 100, 110, admin) : client, company, type, goal

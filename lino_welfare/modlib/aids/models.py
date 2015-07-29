@@ -540,7 +540,11 @@ class ConfirmationsByGranting(dd.VirtualTable):
     label = _("Issued confirmations")
     required_roles = dd.required(AidsUser)
     master = 'aids.Granting'
-    master_key = 'granting'
+
+    # removed 20150729 because it disturbed after optimization "Cannot
+    # add column with `master_key`":
+    # master_key = 'granting'
+
     column_names = "description_column created user signer printed " \
                    "start_date end_date *"
     do_print = PrintConfirmation()

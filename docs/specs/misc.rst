@@ -1,4 +1,4 @@
-.. _welfare.tested.misc:
+.. _welfare.specs.misc:
 
 =============
 Miscellaneous
@@ -62,26 +62,54 @@ Build all excerpts
     to see how we generated the following list:
 
 
-Editing document template of an excerpt
-=======================================
+Editing the print template of an excerpt
+========================================
 
 Here we want to see what the `edit_template` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
-(Note: the following test is the reason why `is_local_project_dir` is
-`True` in `lino_welfare.projects.std.settings.doctests`.)
+Excerpts are printables with *two* template groups
+(`templates_group`).  The first template group is given by the owner
+(e.g. `"immersion/Contract"`) and the second is just `"excerpts"`.
+
+For example the owner of Excerpt #1 is an immersion training, while
+the owner of Excerpt #4 is an aids confirmation:
+
+>>> excerpts.Excerpt.objects.get(pk=1).get_template_groups()
+[u'immersion/Contract', u'excerpts']
+>>> excerpts.Excerpt.objects.get(pk=4).get_template_groups()
+[u'aids/Confirmation', u'excerpts']
+
+When creating a local copy of the factory template, Lino copies the
+factory file to the directory given by the *first* group.
 
 >>> lcd = os.path.join(settings.SITE.project_dir, 'config')
 >>> # rt.makedirs_if_missing(lcd)
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
+>>> obj.owner
+Contract #2 (u'Immersion training#2 (Daniel EMONTS)')
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
-...     #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/excerpts/Default.odt
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
 Are you sure?
+
+
+Another thing is the location of the factory template. 
+
+>>> obj = excerpts.Excerpt.objects.get(pk=1)
+>>> rv = ses.run(obj.edit_template)
+>>> print(rv['info_message'])
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
+
+
+(Note: the abve tests are the reason why `is_local_project_dir` is
+`True` in `lino_welfare.projects.std.settings.doctests`.)
+
 
 
 Yet another series of GET requests

@@ -37,7 +37,9 @@ class ContractTypes(dd.Table):
     model = 'immersion.ContractType'
     column_names = 'name exam_policy template *'
     detail_layout = """
-    id name exam_policy
+    id name
+    exam_policy template overlap_group
+    full_name
     ContractsByType
     """
     insert_layout = """
