@@ -1,4 +1,4 @@
-.. _welfare.tested.excerpts:
+.. _welfare.specs.excerpts:
 
 =============
 Excerpts
@@ -94,3 +94,4 @@ speaks *German*:
 fr
 >>> print(contacts.Partner.objects.get(id=118).language)
 de
+

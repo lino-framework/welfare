@@ -65,12 +65,13 @@ Build all excerpts
 Editing the print template of an excerpt
 ========================================
 
-Here we want to see what the `edit_template` action says, especially
+Here we want to see what the :class:`EditTemplate
+<lino.modlib.printing.mixins.EditTemplate>` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
-Excerpts are printables with *two* template groups
-(`templates_group`).  The first template group is given by the owner
-(e.g. `"immersion/Contract"`) and the second is just `"excerpts"`.
+Excerpts are printables with *two* template groups.  The first
+template group is given by the owner (e.g. `"immersion/Contract"`) and
+the second is just `"excerpts"`.
 
 For example the owner of Excerpt #1 is an immersion training, while
 the owner of Excerpt #4 is an aids confirmation:
@@ -81,7 +82,8 @@ the owner of Excerpt #4 is an aids confirmation:
 [u'aids/Confirmation', u'excerpts']
 
 When creating a local copy of the factory template, Lino copies the
-factory file to the directory given by the *first* group.
+factory file to the directory given by the *first* group. Before doing
+so, it will ask for user confirmation.
 
 >>> lcd = os.path.join(settings.SITE.project_dir, 'config')
 >>> # rt.makedirs_if_missing(lcd)
@@ -96,7 +98,6 @@ Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Con
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
 Are you sure?
-
 
 Another thing is the location of the factory template. 
 

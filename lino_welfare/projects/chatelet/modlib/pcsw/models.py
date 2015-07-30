@@ -12,22 +12,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
+                                                 NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 
 from lino_welfare.modlib.pcsw.models import *
 
 
-# class Client(Client):
-#     sis_motif = models.TextField(_("Motif de l'orientation"), blank=True)
-#     sis_attentes = models.TextField(_("Attentes de la personne"), blank=True)
-#     sis_moteurs = models.TextField(_("Moteurs"), blank=True)
-#     sis_objectifs = models.TextField(_("Objectifs"), blank=True)
-#     oi_demarches = models.TextField(_("Démarches à réaliser"), blank=True)
-    
-
-class ClientDetail(dd.FormLayout):
+class ClientDetail(ClientDetail):
 
     main = "general coaching family \
     career competences obstacles_tab #aids_tab #sis_tab isip_tab \
@@ -67,10 +60,12 @@ class ClientDetail(dd.FormLayout):
     child_custody
     """
 
-    coaching = dd.Panel("""
-    newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
-    """, label=_("Coaches"))
+    newcomers_left = dd.Panel("""
+    workflow_buttons id_document
+    broker:12
+    faculty:12
+    # refusal_reason
+    """, required_roles=dd.required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""
     is_seeking unemployed_since work_permit_suspended_until
@@ -101,13 +96,6 @@ class ClientDetail(dd.FormLayout):
     sepa.AccountsByClient
     aids.GrantingsByClient
     """, label=_("Aids"))
-
-    newcomers_left = dd.Panel("""
-    workflow_buttons id_document
-    broker:12
-    faculty:12
-    # refusal_reason
-    """, required_roles=dd.required(NewcomersAgent))
 
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20

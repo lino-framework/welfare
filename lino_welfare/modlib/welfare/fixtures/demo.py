@@ -8,8 +8,11 @@ Adds PCSW-specific demo data.
 
 from __future__ import unicode_literals
 
+import shutil
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
+
+from unipath import Path
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -792,6 +795,7 @@ def objects():
     luc.card_issuer = "Eupen"
     luc.card_type = BeIdCardTypes.belgian_citizen
     luc.save()
+    luc.make_demo_picture()
 
     gerd.card_number = '123456789012'
     gerd.card_valid_from = i2d(20120819)
@@ -799,6 +803,7 @@ def objects():
     gerd.card_issuer = "Eupen"
     gerd.card_type = BeIdCardTypes.foreigner_c
     gerd.save()
+    gerd.make_demo_picture()
 
     yield study(person=luc, type=schule, content=abi,
                 start_date='19740901', end_date='19860630')

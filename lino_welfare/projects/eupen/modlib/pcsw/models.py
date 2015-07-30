@@ -12,8 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino.modlib.contacts.roles import ContactsUser
-# from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 
@@ -65,7 +63,7 @@ class Client(Client):
             ''')
 
 
-class ClientDetail(PartnerDetailMixin):
+class ClientDetail(ClientDetail, PartnerDetailMixin):
 
     main = "general contact coaching aids_tab \
     work_tab career languages \
@@ -96,18 +94,6 @@ class ClientDetail(PartnerDetailMixin):
     dupable_clients.SimilarClients:10 humanlinks.LinksByHuman:30 cbss_relations:30
     households.MembersByPerson:20 households.SiblingsByPerson:50
     """, label=_("Human Links"))
-
-    coaching = dd.Panel("""
-    newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
-    """, label=_("Coaching"))
-
-    newcomers_left = dd.Panel("""
-    workflow_buttons id_document
-    broker:12
-    faculty:12
-    refusal_reason
-    """, required_roles=dd.required(ContactsUser))
 
     suche = dd.Panel("""
     # job_office_contact job_agents

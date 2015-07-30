@@ -606,13 +606,14 @@ class ClientDetail(dd.DetailLayout):
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
     pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
-    """, label=_("Coaching"))
+    """, label=_("Coaches"))
 
-    #~ suche = dd.Panel("""
-    #~ is_seeking unemployed_since work_permit_suspended_until
-    # ~ # job_office_contact job_agents
-    #~ pcsw.ExclusionsByClient:50x3
-    #~ """,label = _("Job search"))
+    newcomers_left = dd.Panel("""
+    workflow_buttons id_document
+    broker:12
+    faculty:12
+    refusal_reason
+    """, required_roles=dd.required((NewcomersOperator, NewcomersAgent)))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -637,17 +638,6 @@ class ClientDetail(dd.DetailLayout):
     aids.GrantingsByClient
     """, label=_("Aids"))
 
-    newcomers_left = dd.Panel("""
-    workflow_buttons
-    broker:12
-    faculty:12
-    refusal_reason
-    """, required_roles=dd.required((NewcomersOperator, NewcomersAgent)))
-
-
-
-    #~ coaching_left = """
-    #~ """
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject

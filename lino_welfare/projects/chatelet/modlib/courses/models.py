@@ -56,7 +56,7 @@ class Enrolment(Enrolment):
 Enrolments.detail_layout = """
 request_date user
 course pupil
-remark amount workflow_buttons
+remark amount workflow_buttons printed
 motivation problems
 """
 
