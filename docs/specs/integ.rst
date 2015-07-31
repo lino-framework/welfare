@@ -1,4 +1,4 @@
-.. _welfare.tested.integ:
+.. _welfare.specs.integ:
 
 ===================
 Integration Service
@@ -132,26 +132,6 @@ UsersWithClients
  **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **44**           **44**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
-
-
-Printing UsersWithClients to pdf
---------------------------------
-
-User problem report:
-
-  | pdf-Dokument aus Startseite erstellen:
-  | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
-
-The following lines reproduced this problem 
-and passed when it was fixed:
-
->>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
->>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: +SKIP
->>> print(res.status_code)  #doctest: +SKIP
-200
->>> result = json.loads(res.content)  #doctest: +SKIP
->>> print(result)  #doctest: +SKIP
-{u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
 
 
 Activity report
@@ -304,3 +284,26 @@ Contract endings by type
  Normal
 =============== ================ ============================ ======================= ============================ ====== =======
 <BLANKLINE>
+
+
+Printing UsersWithClients to pdf
+--------------------------------
+
+User problem report:
+
+  | pdf-Dokument aus Startseite erstellen:
+  | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
+
+The following lines reproduced this problem 
+and passed when it was fixed:
+
+>>> settings.SITE.appy_params.update(raiseOnError=True)
+>>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
+>>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: -SKIP
+>>> print(res.status_code)  #doctest: +SKIP
+200
+>>> result = json.loads(res.content)  #doctest: -SKIP
+>>> print(result)  #doctest: -SKIP
+{u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
+
+
