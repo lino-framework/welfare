@@ -47,11 +47,11 @@ class Enrolment(Enrolment):
     """
     motivation = dd.RichTextField(
         _("Motif de l'orientation"),
-        blank=True)
+        blank=True, format="html")
     problems = dd.RichTextField(
         _("Difficultés à l'origine de la demande / "
           "Problématiques repérées"),
-        blank=True)
+        blank=True, format="html")
 
 Enrolments.detail_layout = """
 request_date user
