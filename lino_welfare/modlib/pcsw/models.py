@@ -1315,10 +1315,6 @@ class PartnersByClientContactType(contacts.Partners):
     column_names = 'name id mti_navigator *'
 
 
-def setup_quicklinks(self, ar, tb):
-    tb.add_action('pcsw.CoachedClients', 'find_by_beid')
-
-
 def setup_workflows(site):
 
     ClientStates.refused.add_transition(RefuseClient)

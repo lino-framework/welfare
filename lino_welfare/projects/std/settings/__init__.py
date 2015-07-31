@@ -87,6 +87,7 @@ class Site(Site):
 
         super(Site, self).setup_quicklinks(ar, tb)
 
+        tb.add_action(self.modules.pcsw.Clients, 'find_by_beid')
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
