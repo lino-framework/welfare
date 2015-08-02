@@ -1,6 +1,3 @@
-/home/luc/hgwork/welfare/docs/api/lino_welfare.modlib.pcsw.models.rst:12: WARNING: failed to import setup_quicklinks
-/home/luc/hgwork/welfare/lino_welfare/modlib/pcsw/models.py:docstring of lino_welfare.modlib.pcsw.models.Client.properties_list:1: WARNING: Inline interpreted text or phrase reference start-string without end-string.
-/home/luc/hgwork/welfare/docs/specs/misc.rst:57: ERROR: Unknown interpreted text role "welfare_srcref".
 /home/luc/hgwork/welfare/docs/tour/reception.rst:7: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tour/reception.rst:30: WARNING: image file not readable: ../../lino/lino/media/extjs/images/xsite/link.png
 /home/luc/hgwork/welfare/docs/tested/2015/0717.rst:: WARNING: document isn't included in any toctree

@@ -63,14 +63,14 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - (contact_2):
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
-    - **Begleitung** (coaching):
-      - (coaching_1):
+    - **Begleiter** (coaching):
+      - (coaching_1) [visible for 200, 220, 300, admin]:
         - (newcomers_left):
-          - (newcomers_left_1): **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
-          - **Vermittler** (broker)
-          - **Fachbereich** (faculty)
-          - **Ablehnungsgrund** (refusal_reason)
-        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient) [visible for 200, 220, 300, admin]
+          - (newcomers_left_1) [visible for all except anonymous]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
+          - **Vermittler** (broker) [visible for all except anonymous]
+          - **Fachbereich** (faculty) [visible for all except anonymous]
+          - **Ablehnungsgrund** (refusal_reason) [visible for all except anonymous]
+        - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient)
       - (coaching_2):
         - **Kontakte** (pcsw.ContactsByClient)
         - **Begleitungen** (pcsw.CoachingsByClient)

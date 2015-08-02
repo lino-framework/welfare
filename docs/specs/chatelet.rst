@@ -292,7 +292,7 @@ List of window layouts
 - courses.Enrolments.insert (viewable for admin) : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert (viewable for all except anonymous) : pupil, places, option, remark, request_date, user
 - courses.EnrolmentsByPupil.insert (viewable for all except anonymous) : course, places, option, remark, request_date, user
-- courses.Lines.detail (viewable for all except anonymous) : id, name, name_nl, name_de, name_en, ref, topic, fees_cat, tariff, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
+- courses.Lines.detail (viewable for all except anonymous) : id, name, name_nl, name_de, name_en, ref, course_area, topic, fees_cat, tariff, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
 - courses.Lines.insert (viewable for all except anonymous) : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail (viewable for admin) : name, start_time, end_time
 - courses.Slots.insert (viewable for admin) : start_time, end_time, name

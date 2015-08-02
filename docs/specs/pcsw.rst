@@ -106,7 +106,27 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-68
+69
+
+>>> print(' '.join(sorted(d.data.keys())))
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
+AgentsByClient ExcerptsByProject LinksByHuman MembersByPerson
+SimilarClients UploadsByClient VouchersByProject activity
+activityHidden age birth_country birth_countryHidden birth_date
+birth_place broker brokerHidden cbss_relations civil_state
+civil_stateHidden client_state client_stateHidden created
+declared_name disable_editing disabled_actions disabled_fields email
+faculty facultyHidden fax first_name gender genderHidden group
+groupHidden gsm id id_document image in_belgium_since is_obsolete
+is_seeking language languageHidden last_name middle_name modified
+national_id nationality nationalityHidden needs_residence_permit
+needs_work_permit noble_condition obstacles overview phone
+refusal_reason refusal_reasonHidden remarks residence_type
+residence_typeHidden residence_until row_class skills
+unavailable_until unavailable_why unemployed_since
+work_permit_suspended_until workflow_buttons
+
+
 
 
 The detail action
