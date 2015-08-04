@@ -55,7 +55,7 @@ Build all excerpts
     >> shutil.copyfile(tmppath, 'isip.Contract-1.pdf')
 
     Link to this copy of the resulting file:
-    :welfare_srcref:`/docs/tested/isip.Contract-1.pdf`
+    :srcref:`/docs/tested/isip.Contract-1.pdf`
 
     Now the same in more generic. We write a formatter function and then
     call it on every excerpt. See the source code of this page if you want

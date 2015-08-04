@@ -1,10 +1,12 @@
-.. _welfare.tour:
+.. _welfare.tour.reception:
+
 
 Tour of Lino Welfare
 ====================
 
+.. |fa-external-link| raw:: html
 
-.. |open| image:: /../../lino/lino/media/extjs/images/xsite/link.png
+   <i class="fa fa-external-link"></i>
 
 
 Imagine you are the reception clerk.
@@ -28,7 +30,8 @@ A visitor enters.
   - Select the :ddref:`reception.Clients.create_visit` action.
 
   - Consult the :ddref:`reception.WaitingVisitors` table in your
-    welcome screen (if necessary, click on the |open| icon).
+    welcome screen (if necessary, click on the |fa-external-link| icon).
+
 
   - Click on "Checkin"
 

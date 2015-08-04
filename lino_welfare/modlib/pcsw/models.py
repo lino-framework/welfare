@@ -415,7 +415,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         <lino_welfare.modlib.cv.models.PersonProperty>` properties of
         this person in the specified order.  If this person has no
         entry for a requested :class:`Property`, it is simply skipped.
-        Used in :xfile:`cv.odt.  `
+        Used in :xfile:`cv.odt`.  `
 
         """
         return cv.properties_list(self, *prop_ids)

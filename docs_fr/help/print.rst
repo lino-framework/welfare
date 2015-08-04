@@ -8,5 +8,5 @@ Il y a différentes explications possibles.
     Lino d'ouvrir une nouvelle fenêtre avec le document.
 
 #.  Il s'agit d'un document éditable qu'il faut ouvrir en utilisant
-    :ref:`davlink`, mais Java vous cause des problèmes.
+    :mod:`lino.modlib.davlink`, mais Java vous cause des problèmes.
 

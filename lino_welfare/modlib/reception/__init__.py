@@ -3,8 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """Lino-Welfare extension of :mod:`lino.modlib.reception`.
-
-See also the tested document about :doc:`/tested/reception`.
+Technical specs see :doc:`/specs/reception`.
 
 .. autosummary::
    :toctree:

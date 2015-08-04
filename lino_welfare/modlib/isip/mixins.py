@@ -387,7 +387,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         """This implements the rule that suggested evaluation events should
         be for the *currently responsible* coach, which may differ from
         the contract's author. This is relevant if coach changes while
-        contract is active (see :doc:`/tested/integ`).
+        contract is active (see :doc:`/specs/integ`).
 
         The **currently responsible coach** is the user for which
         there is a coaching which has :attr:`does_integ

@@ -159,6 +159,17 @@ The total monthly amount available for debts distribution."""))
         return self.get_actor(2)
 
     def entry_groups(self, ar, types=None, **kw):
+        """Yield the **entry groups** for this budget, i.e. one item for each
+        account group for which this budget has some data.
+
+        :types: an optional string specifying a set of one-letter
+                account type names. See :class:`AccountTypes
+                <lino.modlib.accounts.choicelists.AccountTypes>`.
+
+        Each entry group is encapsulated as a volatile helper object
+        :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
+
+        """
         Group = rt.modules.accounts.Group
         kw.update(chart=AccountCharts.debts)
         kw.update(entries_layout__gt='')
@@ -169,11 +180,8 @@ The total monthly amount available for debts distribution."""))
             eg = EntryGroup(self, g, ar)
             if eg.has_data():
                 yield eg
-            # qs = Entry.objects.filter(budget=self, account__group=g)
-            # if qs.count():
-            #     yield EntryGroup(self, g, qs)
 
-    def account_groups(self, types=None, **kw):
+    def unused_account_groups(self, types=None, **kw):
         """Yield all AccountGroups which have at least one entry in this
         Budget.
 

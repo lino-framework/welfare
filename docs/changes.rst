@@ -115,7 +115,7 @@ und
 befinden sich jetzt unter 
 :menuselection:`Listings --> DSBE`.
 Siehe auch den neuen Abschnitt 
-:ref:`welfare.de.admin_main`
+`welfare.de.admin_main`
 im Benutzerhandbuch.
 
 
@@ -240,7 +240,6 @@ Version 1.1.7 (released :blogref:`20130604`)
 - watch_tim : datum_bis einer primären Begleitung eines Ehemaligen darf
   nicht leer sein. Wenn es das ist, setzt watch_tim es jetzt 
   auf 01.01.1990 setzen. 
-  Also Erweitungung der Doku (:ref:`welfare.watch_tim`):
   
   - `bis` : entweder leer (wenn es eine aktive Begleitung ist) 
     oder 01.01.1990 (wenn es ein Neuzugänge oder ehemaliger Klient ist)
@@ -327,7 +326,7 @@ Miscellaneous:
 -   bugfix 'City' object has no attribute '_change_watcher_spec'
     :blogref:`20130520`
     
-- Subtle changes in :ref:`welfare.watch_tim`.
+- Subtle changes in `welfare.watch_tim`.
 
 Version 1.1.4 (released :blogref:`20130512`)
 ============================================
@@ -379,7 +378,7 @@ Version 1.1.4 (released :blogref:`20130512`)
   Ein Lauf mit tim2lino und watch_tim hatte ca 200 "Neuzugänge" geschaffen, 
   die eigentlich gar keine waren. Subtile Änderungen in 
   :mod:`watchtim <lino_welfare.management.commands.watchtim>`
-  und der Dokumentation (:ref:`welfare.watch_tim`).
+  und der Dokumentation (`welfare.watch_tim`).
 
   
 

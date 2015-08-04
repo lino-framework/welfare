@@ -1,4 +1,5 @@
 .. _welfare.specs.ledger:
+
 ===========================================
 Ledger for Lino Welfare (Sozialbuchhaltung)
 ===========================================

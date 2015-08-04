@@ -123,9 +123,10 @@ unter anderem auch das eventuelle Logo.  Normalerweise verwenden alle
 Auszüge (nicht nur Hilfebestätigungen) die gleiche Hauptvorlage
 "Default.odt".  Man kann diese Vorlage bearbeiten, indem man auf
 irgendeinem Auszug, der sie verwendet, auf den Button "Vorlage
-bearbeiten" klickt.  Geht natürlich nur wenn :ref:`davlink` aktiviert
-ist und man die entsprechenden Rechte hat. Beachte auch, dass diese
-Standard-Hauptvorlage für viele Dokumente verwendet wird.
+bearbeiten" klickt.  Geht natürlich nur wenn
+:mod:`lino.modlib.davlink` aktiviert ist und man die entsprechenden
+Rechte hat. Beachte auch, dass diese Standard-Hauptvorlage für viele
+Dokumente verwendet wird.
 
 "Normalerweise" genauer gesagt: Welche Hauptvorlage zu verwenden ist,
 ergibt sich aus der *Auszugsart*, die für die *Bestätigungsart*

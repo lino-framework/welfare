@@ -3,7 +3,7 @@
 # License: BSD (see file COPYING for details)
 
 """Provides functionality for managing so-called "article 61 job
-supplyments".  See :doc:`/tested/art61` for an overview.
+supplyments".  Technical specs and overview see :doc:`/specs/art61`.
 
 
 .. autosummary::

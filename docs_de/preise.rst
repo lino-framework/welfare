@@ -104,6 +104,8 @@ Optionen
 
 
 - :mod:`ml.extensible` : Grafischer Kalender 
-- **eId-Karten einlesen** :mod:`ml.beid`, :ref:`eidreader`
+- **eId-Karten einlesen** :mod:`lino.modlib.beid`,
+  :mod:`lino.modlib.eidreader`
+
 - :mod:`welfare.cbss` : Kommunikation mit Zentralbank (BCSS, ZDSS)
-- :ref:`davlink` : Writer oder Word starten von Lino aus
+- :mod:`lino.modlib.davlink`  : Writer oder Word starten von Lino aus

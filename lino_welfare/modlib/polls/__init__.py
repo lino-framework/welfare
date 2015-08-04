@@ -3,7 +3,7 @@
 
 """The Lino Welfare extension of :mod:`lino.modlib.polls`.
 This just adds one fixture.
-See also :doc:`/tested/polls`.
+Technical specs see :doc:`/specs/polls`.
 
 .. autosummary::
    :toctree:

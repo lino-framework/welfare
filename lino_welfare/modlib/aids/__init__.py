@@ -6,7 +6,7 @@ r"""Provides functionality for managing "social aids". An "aid" here
 means the decision that some client gets some kind of aid during a
 given period.
 
-See also :doc:`/tested/aids`.
+See also :doc:`/specs/aids`.
 
 .. autosummary::
    :toctree:
@@ -35,7 +35,7 @@ Here is a list of the templates defined in the `Aids` module.
     def f(name):
         print("\n\n.. xfile:: %s\n\n" % name)
     
-        print("\nSee the :welfare_srcref:`source code <lino_welfare/modlib/aids/config/aids/Confirmation/%s>`" % name)
+        print("\nSee the :srcref:`source code <lino_welfare/modlib/aids/config/aids/Confirmation/%s>`" % name)
 
         try:
             at = aids.AidType.objects.get(body_template=name)

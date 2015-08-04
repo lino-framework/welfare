@@ -5,7 +5,7 @@
 """Provides functionality for managing "immersion trainings" (stages
 d'immersion).
 
-A tested document is here: :ref:`welfare.tested.immersion`
+Technical specs and overview see :doc:`/specs/immersion`.
 
 .. autosummary::
     :toctree:

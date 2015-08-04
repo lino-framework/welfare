@@ -233,6 +233,14 @@ class AssetsByBudget(EntriesByBudget, EntriesByType):
 
 
 class EntryGroup(object):
+    """Volatile object used to encapsulate the account groups which have
+    some data in a given budget.  Entry groups are instantiated and
+    yeld by :meth:`Budget.entry_groups
+    <lino_welfare.modlib.debts.models.Budget.entry_groups>`, and they
+    are used as the master instance for all
+    :class:`PrintEntriesByBudget` tables.
+
+    """
 
     pk = None
 
@@ -241,23 +249,9 @@ class EntryGroup(object):
         self.group = group
         self.action_request = ar.spawn(
             PrintEntriesByBudget, master_instance=self)
-        # self.qs = qs
-        # group.entries_layout
 
     def has_data(self):
         return self.action_request.get_total_count() > 0
-
-    # def child_request(self, ar):
-    #     t = group.entries_layout.columns_spec
-    #     if t is None:
-    #         return None
-    #     ar = ar.spawn(t,
-    #                   master_instance=self,
-    #                   title=unicode(group),
-    #                   filter=models.Q(account__group=group), **kw)
-
-    #     #~ print 20120606, sar
-    #     return ar
 
 
 class PrintEntriesByBudget(dd.VirtualTable):
@@ -270,8 +264,8 @@ dynamic columns feature.
 
 This feature means that a single table can have different "column
 sets".  You must define a `get_handle_name` method which returns a
-"handle name" for each request.  In you case if you want a column set
-per user) you would add the user name to the default name::
+"handle name" for each request.  For example if you want a column set
+per user, you would add the user name to the default name::
 
     from lino.core.constants import _handle_attr_name
 
@@ -494,54 +488,6 @@ TODO: more explanations....
         return obj.amounts[4] / obj.periods
 
 
-if False:
-
-    class PrintIncomesByBudget(PrintEntriesByBudget):
-        _account_type = AccountTypes.incomes
-        column_names = "full_description dynamic_amounts"
-
-
-    class PrintExpensesByBudget(PrintEntriesByBudget):
-        _account_type = AccountTypes.expenses
-        column_names = "description remarks yearly_amount:10 dynamic_amounts"
-        # column_names = "full_description dynamic_amounts"
-
-
-    class PrintLiabilitiesByBudget(PrintEntriesByBudget):
-        _account_type = AccountTypes.liabilities
-        column_names = "partner:20 remarks:20 monthly_rate dynamic_amounts"
-
-
-    class PrintAssetsByBudget(PrintEntriesByBudget):
-        _account_type = AccountTypes.assets
-        column_names = "full_description dynamic_amounts"
-
-if False:
-    
-    ENTRIES_BY_TYPE_TABLES = (
-        PrintExpensesByBudget,
-        PrintIncomesByBudget,
-        # PrintLiabilitiesByBudget,
-        PrintAssetsByBudget)
-
-    def entries_table_for_group(group):
-        for t in ENTRIES_BY_TYPE_TABLES:
-            if t._account_type == group.account_type:
-                return t
-
-# from .choicelists import TableLayouts
-# add = TableLayouts.add_item
-# add(PrintExpensesByBudget)
-# add(PrintIncomesByBudget)
-# add(PrintLiabilitiesByBudget)
-# add(PrintAssetsByBudget)
-
-
-#~ class EntriesSummaryByBudget(EntriesByBudget,EntriesByType):
-    #~ """
-    #~ """
-    #~ order_by = ('account','partner', 'remark', 'seqno')
-    #~ column_names = "summary_description amount1 amount2 amount3 total"
 class SummaryTable(dd.VirtualTable):
     auto_fit_column_widths = True
     column_names = "desc amount"
