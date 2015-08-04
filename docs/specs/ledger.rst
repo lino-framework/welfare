@@ -170,12 +170,42 @@ movements in the ledger.
 <BLANKLINE>
 
 
+
+
 Partners and Clients
 ====================
 
 Every partner voucher (and every entry of a financial voucher) is
-actually related not only to a "partner" but also to a "payment
-recipient" and to a "client".
+actually related not only to a "partner" (or "payment recipient") but
+also to a "client".
+
+Lino Welfare does not currently allow to register invoices issued by
+one partner and containing amounts for several clients at once.
+
+
+Client contacts
+===============
+
+>>> rt.show('pcsw.ClientContactTypes', column_names="id name can_refund")
+==== ========================= ============================ ===================== ============
+ ID   Designation               Designation (fr)             Designation (de)      Can refund
+---- ------------------------- ---------------------------- --------------------- ------------
+ 1    Pharmacy                  Pharmacie                    Apotheke              No
+ 2    Health insurance          Caisse d'assurance maladie   Krankenkasse          No
+ 3    Advocate                  Avocat                       Rechtsanwalt          No
+ 4    Bailiff                   Huissier                     Gerichtsvollzieher    No
+ 5    Debt collecting company   Debt collecting company      Inkasso-Unternehmen   No
+ 6    Employment office         Bureau de chômage            Arbeitsvermittler     No
+ 7    Physician                 Médecin                      Arzt                  Yes
+ 8    Family doctor             Médecin traitant             Hausarzt              Yes
+ 9    Dentist                   Dentiste                     Zahnarzt              Yes
+ 10   Pediatrician              Pédiatre                     Kinderarzt            Yes
+                                                                                   **4**
+==== ========================= ============================ ===================== ============
+<BLANKLINE>
+
+Purchase invoices
+=================
 
 >>> killian = rt.modules.contacts.Person.objects.get(pk=227)
 >>> karl = rt.modules.pcsw.Client.objects.get(pk=141)
@@ -209,6 +239,16 @@ Dr. Killian has sent several invoices for different clients:
  **Total (1 rows)**                      **5,33**                              **0**
 ==================== ========== ======= ========== ================== ======= ===========
 <BLANKLINE>
+
+
+
+General accounts
+================
+
+>>> rt.show('accounts.Accounts')
+
+>>> obj = accounts.Account.get_by_ref('820/333/01')
+>>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
 
 
 Relics

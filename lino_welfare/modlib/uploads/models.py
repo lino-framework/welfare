@@ -66,13 +66,13 @@ class Upload(Upload, mixins.ProjectRelated, ContactRelated,
 
     .. attribute:: remark
     
-    A remark about this document.
+        A remark about this document.
 
     .. attribute:: needed
     
-    Whether this particular upload is a needed document. Default value
-    is True if the new Upload has an UploadType with a nonempty
-    `warn_expiry_unit`.
+        Whether this particular upload is a needed document. Default value
+        is `True` if the new Upload has an UploadType with a nonempty
+        `warn_expiry_unit`.
 
     """
     # valid_from = models.DateField(_("Valid from"), blank=True, null=True)

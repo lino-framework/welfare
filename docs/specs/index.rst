@@ -41,6 +41,7 @@ General
    main
    addresses
    cal
+   tasks
    countries
    notes
    /tested/2015/0219
