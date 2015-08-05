@@ -30,7 +30,7 @@ class Site(Site):
         kw.update(polls=None)
         # kw.update(projects=None)
         kw.update(immersion=None)
-        # kw.update(ledger=None)
+        kw.update(ledger=None)
         kw.update(finan=None)
         kw.update(vatless=None)
         kw.update(active_job_search=None)

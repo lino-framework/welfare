@@ -37,7 +37,7 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-55 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, ledger, vatless, finan, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+55 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 149 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -45,7 +45,7 @@ The following table gives an overview of these things.
  accounts.Account               accounts.Accounts               19        76
  accounts.Group                 accounts.Groups                 9         14
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        167
+ addresses.Address              addresses.Addresses             16        173
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.Grantings                  12        55
@@ -95,7 +95,7 @@ The following table gives an overview of these things.
  cv.Experience                  cv.Experiences                  17        30
  cv.Function                    cv.Functions                    7         4
  cv.LanguageKnowledge           cv.LanguageKnowledges           9         119
- cv.Obstacle                    cv.Obstacles                    6         0
+ cv.Obstacle                    cv.Obstacles                    6         20
  cv.ObstacleType                cv.ObstacleTypes                5         4
  cv.Proof                       cv.Proofs                       5         4
  cv.Regime                      cv.Regimes                      5         3
@@ -114,13 +114,13 @@ The following table gives an overview of these things.
  excerpts.Excerpt               excerpts.Excerpts               12        16
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
  finan.BankStatement            finan.BankStatements            11        0
- finan.BankStatementItem        finan.BankStatementItemTable    10        0
+ finan.BankStatementItem        finan.BankStatementItemTable    11        0
  finan.Grouper                  finan.Groupers                  10        0
- finan.GrouperItem              finan.GrouperItemTable          9         0
+ finan.GrouperItem              finan.GrouperItemTable          10        0
  finan.JournalEntry             finan.FinancialVouchers         9         0
- finan.JournalEntryItem         finan.JournalEntryItemTable     10        0
+ finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             11        0
- finan.PaymentOrderItem         finan.PaymentOrderItemTable     9         0
+ finan.PaymentOrderItem         finan.PaymentOrderItemTable     12        0
  households.Household           households.Households           29        14
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
@@ -144,7 +144,7 @@ The following table gives an overview of these things.
  languages.Language             languages.Languages             6         5
  ledger.Journal                 ledger.Journals                 20        3
  ledger.MatchRule               ledger.MatchRules               3         0
- ledger.Movement                ledger.Movements                11        44
+ ledger.Movement                ledger.Movements                10        44
  ledger.PaymentTerm             ledger.PaymentTerms             8         0
  ledger.Voucher                 ledger.Vouchers                 8         20
  newcomers.Broker               newcomers.Brokers               2         2
@@ -182,14 +182,14 @@ The following table gives an overview of these things.
  properties.PropGroup           properties.PropGroups           5         0
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
- sepa.Account                   sepa.Accounts                   8         13
- system.SiteConfig              system.SiteConfigs              28        1
+ sepa.Account                   sepa.Accounts                   8         15
+ system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        11
- vatless.AccountInvoice         vatless.Invoices                17        20
+ vatless.AccountInvoice         vatless.Invoices                19        20
  vatless.InvoiceItem            vatless.InvoiceItems            6         24
 ============================== =============================== ========= =======
 <BLANKLINE>
@@ -386,7 +386,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - users.Users.change_password (viewable for admin) : current, new1, new2
 - users.Users.detail (viewable for admin) : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert (viewable for admin) : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail (viewable for all except anonymous) : id, date, project, partner, user, due_date, your_ref, workflow_buttons, amount, journal, year, number, narration, state
+- vatless.Invoices.detail (viewable for all except anonymous) : id, date, project, partner, user, due_date, your_ref, iban, bic, workflow_buttons, amount, journal, year, number, narration, state
 - vatless.Invoices.insert (viewable for all except anonymous) : journal, project, partner, date, amount
 - vatless.InvoicesByJournal.insert (viewable for all except anonymous) : project, partner, date, amount
 <BLANKLINE>

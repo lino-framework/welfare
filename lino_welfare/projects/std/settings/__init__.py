@@ -21,8 +21,8 @@ class Site(Site):
     version = lino_welfare.SETUP_INFO['version']
     url = lino_welfare.SETUP_INFO['url']
 
-    demo_fixtures = """std welfare_std std2 few_languages props demo
-    welfare_demo demo2 cbss demo_events checkdata""".split()
+    demo_fixtures = """std std2 few_languages props demo
+    demo2 cbss demo_events checkdata""".split()
 
     languages = 'en fr de nl'
     hidden_languages = 'nl'
@@ -119,12 +119,6 @@ class Site(Site):
         yield 'lino.modlib.iban'
         yield 'lino_welfare.modlib.sepa'
 
-        # yield 'lino_welfare.modlib.ledger'
-        # yield 'lino_welfare.modlib.finan'
-        # yield 'lino.modlib.ledger'
-        yield 'lino.modlib.vatless'
-        yield 'lino.modlib.finan'
-
         yield 'lino.modlib.boards'
 
         if False:  # not yet ready
@@ -136,6 +130,15 @@ class Site(Site):
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
+
+        yield 'lino_welfare.modlib.ledger'
+        # yield 'lino_welfare.modlib.finan'
+        # yield 'lino.modlib.ledger'
+        yield 'lino.modlib.vatless'
+        if False:  # not sure whether they make sense
+            yield 'lino_welfare.modlib.client_vouchers'
+        yield 'lino.modlib.finan'
+
         yield 'lino_welfare.projects.chatelet.modlib.cv'
         yield 'lino_welfare.modlib.integ'
         yield 'lino_welfare.modlib.isip'

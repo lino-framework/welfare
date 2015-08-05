@@ -111,7 +111,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.Experience                  cv.Experiences                  17        30
  cv.Function                    cv.Functions                    7         4
  cv.LanguageKnowledge           cv.LanguageKnowledges           9         119
- cv.Obstacle                    cv.Obstacles                    6         0
+ cv.Obstacle                    cv.Obstacles                    6         20
  cv.ObstacleType                cv.ObstacleTypes                5         4
  cv.Proof                       cv.Proofs                       5         4
  cv.Regime                      cv.Regimes                      5         3

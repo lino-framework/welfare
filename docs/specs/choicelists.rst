@@ -79,9 +79,9 @@ name to read the documentation):
     jobs.CandidatureStates : Candidature states
     ledger.FiscalYears : Fiscal Years
     ledger.JournalGroups : JournalGroups
-    ledger.TradeTypes : TradeTypes
+    ledger.TradeTypes : Trade types
     ledger.VoucherStates : States
-    ledger.VoucherTypes : VoucherTypes
+    ledger.VoucherTypes : Voucher types
     lino.ChangeTypes : Change Types
     notes.SpecialTypes : Special note types
     outbox.RecipientTypes : RecipientTypes

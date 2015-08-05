@@ -11,9 +11,36 @@ from lino.api import dd, rt
 from lino.modlib.contacts.mixins import ContactRelated
 
 
+class ClientRelated(dd.Model):
+    """Base class for things that are related to one and only one client.
+
+    .. attribute:: client
+
+        Pointer to the client.
+
+    """
+
+    class Meta:
+        abstract = True
+
+    client = dd.ForeignKey('pcsw.Client')
+
+    @classmethod
+    def get_registrable_fields(cls, site):
+        for f in super(ClientRelated, cls).get_registrable_fields(site):
+            yield f
+        yield 'client'
+
+    def get_recipient(self):
+        return self.client
+    recipient = property(get_recipient)
+
+
 class ClientContactBase(ContactRelated):
     """Also used by :class:`aids.RefundPartner
-<lino_welfare.modlib.aids.models.RefundPartner>`."""
+    <lino_welfare.modlib.aids.models.RefundPartner>`.
+
+    """
 
     class Meta:
         abstract = True

@@ -22,10 +22,7 @@ Plugins which have been written specifically for Lino Welfare:
     active_job_search
     aids
     badges
-    projects
     immersion
-
-
 
 The following plugins are extensions of their respective version in
 :mod:`lino.modlib`:
@@ -44,5 +41,15 @@ The following plugins are extensions of their respective version in
     system
     uploads
     users
+
+The following plugins are not being used:
+
+.. autosummary::
+   :toctree:
+
+    projects
+    client_vouchers
+
+
 
 """

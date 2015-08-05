@@ -77,6 +77,61 @@ isip.Contract study_type
 
 >>> kw = dict()
 >>> fields = 'count rows'
->>> demo_get('rolf', 'choices/cv/Training/type', fields, 3, **kw)
->>> demo_get('rolf', 'choices/cv/Study/type', fields, 8, **kw)
->>> demo_get('rolf', 'choices/isip/Contract/study_type', fields, 11, **kw)
+>>> demo_get('romain', 'choices/cv/Training/type', fields, 3, **kw)
+>>> demo_get('romain', 'choices/cv/Study/type', fields, 8, **kw)
+>>> demo_get('romain', 'choices/isip/Contract/study_type', fields, 11, **kw)
+
+
+Obstacles
+=========
+
+
+>>> rt.show(cv.ObstacleTypes)
+==== ================= ================== ==================
+ ID   Description       Description (de)   Description (en)
+---- ----------------- ------------------ ------------------
+ 1    Alcohol           Alkohol            Alcohol
+ 2    Santé             Gesundheit         Health
+ 3    Dettes            Schulden           Debts
+ 4    Family problems   Family problems    Family problems
+==== ================= ================== ==================
+<BLANKLINE>
+
+>>> rt.show(cv.Obstacles)
+==== ======================= ========== ================= ============= ============
+ ID   Personne                Remarque   Type              Détecté par   Date
+---- ----------------------- ---------- ----------------- ------------- ------------
+ 1    M. Luc FAYMONVILLE                 Alcohol                         22/05/2014
+ 2    M. Gregory GROTECLAES              Santé                           22/05/2014
+ 3    Mme Hildegard HILGERS              Dettes                          22/05/2014
+ 4    Mme Jacqueline JACOBS              Family problems                 22/05/2014
+ 5    M. Jérôme JEANÉMART                Alcohol                         22/05/2014
+ 6    M. Luc FAYMONVILLE                 Santé                           22/05/2014
+ 7    M. Gregory GROTECLAES              Dettes                          22/05/2014
+ 8    Mme Hildegard HILGERS              Family problems                 22/05/2014
+ 9    Mme Jacqueline JACOBS              Alcohol                         22/05/2014
+ 10   M. Jérôme JEANÉMART                Santé                           22/05/2014
+ 11   M. Luc FAYMONVILLE                 Dettes                          22/05/2014
+ 12   M. Gregory GROTECLAES              Family problems                 22/05/2014
+ 13   Mme Hildegard HILGERS              Alcohol                         22/05/2014
+ 14   Mme Jacqueline JACOBS              Santé                           22/05/2014
+ 15   M. Jérôme JEANÉMART                Dettes                          22/05/2014
+ 16   M. Luc FAYMONVILLE                 Family problems                 22/05/2014
+ 17   M. Gregory GROTECLAES              Alcohol                         22/05/2014
+ 18   Mme Hildegard HILGERS              Santé                           22/05/2014
+ 19   Mme Jacqueline JACOBS              Dettes                          22/05/2014
+ 20   M. Jérôme JEANÉMART                Family problems                 22/05/2014
+==== ======================= ========== ================= ============= ============
+<BLANKLINE>
+
+>>> hildegard = pcsw.Client.objects.get(first_name="Hildegard")
+>>> rt.login('robin').show(cv.ObstaclesByPerson, hildegard)
+================= ============= ============ ==========
+ Type              Détecté par   Date         Remarque
+----------------- ------------- ------------ ----------
+ Dettes                          22/05/2014
+ Family problems                 22/05/2014
+ Alcohol                         22/05/2014
+ Santé                           22/05/2014
+================= ============= ============ ==========
+<BLANKLINE>

@@ -161,7 +161,7 @@ def unused_coachings(p, type, coach1, coach2, coached_from, coached_until=None):
 
 def objects():
 
-    ClientContactType = resolve_model('pcsw.ClientContactType')
+    ClientContactType = rt.modules.pcsw.ClientContactType
 
     Person = resolve_model('contacts.Person')
     Company = resolve_model('contacts.Company')
@@ -551,7 +551,6 @@ def objects():
     cct = ClientContactType(**kw)
     yield cct
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
-    #~ kw = dict(is_attorney=True,country=belgium,city=eupen)
     yield company(name=u"Brüll Christine", street=u'Schilsweg', street_no=4, **kw)
     yield company(name=u"Brocal Catherine", street=u'Neustraße', street_no=115, **kw)
     yield company(name=u"Bourseaux Alexandre", street=u'Aachener Straße', street_no=21, **kw)
@@ -696,6 +695,15 @@ def objects():
     kw = dict(client_contact_type=cct, country=belgium,
               city=eupen, title="Dr.")
     yield person(first_name="Killian", last_name="Kimmel", **kw)
+
+    # kw = dd.str2kw('name', _("Landlord"))  # Vermieter
+    # if dd.is_installed('aids'):
+    #     kw.update(can_refund=True)
+    # cct = ClientContactType(**kw)
+    # yield cct
+    # kw = dict(client_contact_type=cct, country=belgium, city=eupen)
+    # yield person(first_name="Vera", last_name="Veltz", **kw)
+    # yield person(first_name="Vanessa", last_name="Veithen", **kw)
 
     #~ from django.core.exceptions import ValidationError
     # ~ # a circular reference: bernard is contact for company adg and also has himself as `job_office_contact`

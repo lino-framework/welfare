@@ -53,6 +53,10 @@ class TestCase(TestCase):
 
         self.assertEqual(obj.first_name, "First")
 
+        self.assertEqual(
+            rt.modules.cv.ObstaclesByPerson.column_names,
+            "type user detected_date remark  *")
+
         url = "/api/cv/ObstaclesByPerson"
         post_data = dict()
         post_data.update(type='1')
@@ -71,7 +75,9 @@ class TestCase(TestCase):
             result['message'],
             """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
         self.assertEqual(result['rows'], [
-            [u'Alcohol', 1, u'robin', 1, u'22.05.2014', u'', 1, {u'id': True}, {}, False]])
+            ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
+             'First LAST', 100,
+             {'id': True}, {}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 

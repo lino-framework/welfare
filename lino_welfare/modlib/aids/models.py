@@ -720,7 +720,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
     remark
     """, window_size=(70, 20), hidden_elements='client granting')
 
-    column_names = "id client granting category amount start_date end_date *"
+    column_names = "id client category amount start_date end_date *"
 
 
 class IncomeConfirmationsByCategory(IncomeConfirmations):

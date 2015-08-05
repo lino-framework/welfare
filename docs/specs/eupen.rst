@@ -76,7 +76,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerprofile, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - SEPA : Konten
@@ -158,7 +158,7 @@ to explicitly override the language of :meth:`show_menu
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Household member roles, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - SEPA : Konten

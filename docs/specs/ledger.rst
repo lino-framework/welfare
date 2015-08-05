@@ -1,8 +1,8 @@
 .. _welfare.specs.ledger:
 
-===========================================
-Ledger for Lino Welfare (Sozialbuchhaltung)
-===========================================
+=======================
+Ledger for Lino Welfare
+=======================
 
 .. How to test only this document:
 
@@ -18,8 +18,9 @@ Ledger for Lino Welfare (Sozialbuchhaltung)
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
-This document describes the new functionalities implemented as a
-project called "Sozialbuchhaltung" and started in May 2015.
+This document describes the new functionalities added between May and
+September 2015 as a project called "Nebenbuchhaltung
+Sozialhilfeausgaben" (:ticket:`143`).
 
 .. contents::
    :depth: 1
@@ -29,9 +30,22 @@ Implementation notes
 ====================
 
 This project integrates several plugins into Lino Welfare:
-:mod:`lino.modlib.ledger`, 
-:mod:`lino.modlib.vatless` and
-:mod:`lino.modlib.finan`.
+:mod:`lino.modlib.ledger`, :mod:`lino.modlib.vatless` and
+:mod:`lino.modlib.finan`.  
+
+The :mod:`lino.modlib.accounts` plugin was already used before (for
+:mod:`lino_welfare.modlib.debts`), but now we add a second account
+chart.
+
+>>> rt.show('accounts.AccountCharts')
+========= ========= =================
+ value     name      text
+--------- --------- -----------------
+ default   default   Default
+ debts     debts     Debts mediation
+========= ========= =================
+<BLANKLINE>
+
 
 Vouchers
 ========
@@ -77,7 +91,7 @@ journals defined:
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
 =========== =================== ================== ==================== ======================================
- Reference   Designation         Designation (fr)   Designation (de)     voucher type
+ Reference   Designation         Designation (fr)   Designation (de)     Voucher type
 ----------- ------------------- ------------------ -------------------- --------------------------------------
  PRC         Purchase invoices   Factures achat     Einkaufsrechnungen   Invoice (vatless.AccountInvoice)
  KBC         KBC                 KBC                KBC                  Bank Statement (finan.BankStatement)
@@ -122,34 +136,36 @@ movements in the ledger.
     >>> print(E.tostring(obj.workflow_buttons(ar)))
     <span><b>Registered</b> &#8594; [Deregister]</span>
     
+Here is an overview of all purchase invoices contained in the demo
+database:
 
 >>> jnl = rt.modules.ledger.Journal.get_by_ref('PRC')
 >>> rt.show(rt.modules.vatless.InvoicesByJournal, jnl)
-========= ========= ============================ =================== ============ ========== ============ ================
- number    Date      Client                       Partner             Amount       Due date   Author       Workflow
---------- --------- ---------------------------- ------------------- ------------ ---------- ------------ ----------------
- 20        2/16/14   KAIVERS Karl (141)           Kimmel Killian      5,33                    Robin Rood   **Registered**
- 19        2/21/14                                Castou Carmen       120,00                  Robin Rood   **Registered**
- 18        2/26/14   JONAS Josef (139)            Wehnicht Werner     29,95                   Robin Rood   **Registered**
- 17        3/3/14    JEANÉMART Jérôme (181)       Waldmann Waltraud   25,00                   Robin Rood   **Registered**
- 16        3/8/14    JACOBS Jacqueline (137)      Kimmel Killian      22,50                   Robin Rood   **Registered**
- 15        3/13/14   HILGERS Hildegard (133)      Waldmann Walter     5,33                    Robin Rood   **Registered**
- 14        3/18/14   GROTECLAES Gregory (132)     Wehnicht Werner     120,00                  Robin Rood   **Registered**
- 13        3/23/14   FAYMONVILLE Luc (130*)       Waldmann Waltraud   29,95                   Robin Rood   **Registered**
- 12        3/28/14   EVERS Eberhart (127)         Kimmel Killian      25,00                   Robin Rood   **Registered**
- 11        4/2/14    ENGELS Edgar (129)           Castou Carmen       22,50                   Robin Rood   **Registered**
- 10        4/7/14                                 Wehnicht Werner     5,33                    Robin Rood   **Registered**
- 9         4/12/14   EMONTS-GAST Erna (152)       Waldmann Waltraud   120,00                  Robin Rood   **Registered**
- 8         4/17/14   EMONTS Daniel (128)          Kimmel Killian      29,95                   Robin Rood   **Registered**
- 7         4/22/14   DUBOIS Robin (179)           Waldmann Walter     25,00                   Robin Rood   **Registered**
- 6         4/27/14   DOBBELSTEIN Dorothée (124)   Wehnicht Werner     22,50                   Robin Rood   **Registered**
- 5         5/2/14    DENON Denis (180*)           Waldmann Waltraud   5,33                    Robin Rood   **Registered**
- 4         5/7/14    COLLARD Charlotte (118)      Kimmel Killian      120,00                  Robin Rood   **Registered**
- 3         5/12/14   BRECHT Bernd (177)           Castou Carmen       29,95                   Robin Rood   **Registered**
- 2         5/17/14   AUSDEMWALD Alfons (116)      Wehnicht Werner     25,00                   Robin Rood   **Registered**
- 1         5/22/14                                Waldmann Waltraud   22,50                   Robin Rood   **Registered**
- **210**                                                              **811,12**
-========= ========= ============================ =================== ============ ========== ============ ================
+========= ========= ============================ ======================== ============ ========== ============ ================
+ number    Date      Client                       Partner                  Amount       Due date   Author       Workflow
+--------- --------- ---------------------------- ------------------------ ------------ ---------- ------------ ----------------
+ 20        2/16/14   BRECHT Bernd (177)           Bäckerei Schmitz         5,33                    Robin Rood   **Registered**
+ 19        2/21/14                                Bäckerei Mießen          120,00                  Robin Rood   **Registered**
+ 18        2/26/14   AUSDEMWALD Alfons (116)      Bäckerei Ausdemwald      29,95                   Robin Rood   **Registered**
+ 17        3/3/14    DOBBELSTEIN Dorothée (124)   Rumma & Ko OÜ            25,00                   Robin Rood   **Registered**
+ 16        3/8/14    DENON Denis (180*)           Belgisches Rotes Kreuz   22,50                   Robin Rood   **Registered**
+ 15        3/13/14   COLLARD Charlotte (118)      Bäckerei Schmitz         5,33                    Robin Rood   **Registered**
+ 14        3/18/14   BRECHT Bernd (177)           Bäckerei Mießen          120,00                  Robin Rood   **Registered**
+ 13        3/23/14   AUSDEMWALD Alfons (116)      Bäckerei Ausdemwald      29,95                   Robin Rood   **Registered**
+ 12        3/28/14   DOBBELSTEIN Dorothée (124)   Rumma & Ko OÜ            25,00                   Robin Rood   **Registered**
+ 11        4/2/14    DENON Denis (180*)           Belgisches Rotes Kreuz   22,50                   Robin Rood   **Registered**
+ 10        4/7/14                                 Bäckerei Schmitz         5,33                    Robin Rood   **Registered**
+ 9         4/12/14   COLLARD Charlotte (118)      Bäckerei Mießen          120,00                  Robin Rood   **Registered**
+ 8         4/17/14   BRECHT Bernd (177)           Bäckerei Ausdemwald      29,95                   Robin Rood   **Registered**
+ 7         4/22/14   AUSDEMWALD Alfons (116)      Rumma & Ko OÜ            25,00                   Robin Rood   **Registered**
+ 6         4/27/14   DOBBELSTEIN Dorothée (124)   Belgisches Rotes Kreuz   22,50                   Robin Rood   **Registered**
+ 5         5/2/14    DENON Denis (180*)           Bäckerei Schmitz         5,33                    Robin Rood   **Registered**
+ 4         5/7/14    COLLARD Charlotte (118)      Bäckerei Mießen          120,00                  Robin Rood   **Registered**
+ 3         5/12/14   BRECHT Bernd (177)           Bäckerei Ausdemwald      29,95                   Robin Rood   **Registered**
+ 2         5/17/14   AUSDEMWALD Alfons (116)      Rumma & Ko OÜ            25,00                   Robin Rood   **Registered**
+ 1         5/22/14                                Belgisches Rotes Kreuz   22,50                   Robin Rood   **Registered**
+ **210**                                                                   **811,12**
+========= ========= ============================ ======================== ============ ========== ============ ================
 <BLANKLINE>
     
 >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
@@ -176,11 +192,9 @@ Partners and Clients
 ====================
 
 Every partner voucher (and every entry of a financial voucher) is
-actually related not only to a "partner" (or "payment recipient") but
-also to a "client".
-
-Lino Welfare does not currently allow to register invoices issued by
-one partner and containing amounts for several clients at once.
+related not only to a "partner" (or "payment recipient") but also to a
+"client".  Lino Welfare does not currently allow to register invoices
+containing amounts for several clients at once.
 
 
 Client contacts
@@ -207,37 +221,45 @@ Client contacts
 Purchase invoices
 =================
 
->>> killian = rt.modules.contacts.Person.objects.get(pk=227)
->>> karl = rt.modules.pcsw.Client.objects.get(pk=141)
->>> rt.login('robin').show(rt.modules.vatless.VouchersByPartner, killian)
+>>> partner = rt.modules.contacts.Company.objects.get(pk=100)
+>>> print(partner)
+Belgisches Rotes Kreuz
+
+>>> client = rt.modules.pcsw.Client.objects.get(pk=180)
+>>> print(client)
+DENON Denis (180*)
+
+>>> rt.login('robin').show(rt.modules.vatless.VouchersByPartner, partner)
 Create voucher in journal **Purchase invoices (PRC)**
 
->>> rt.login('robin').show(rt.modules.vatless.VouchersByProject, karl)
+>>> rt.login('robin').show(rt.modules.vatless.VouchersByProject, client)
 Create voucher in journal **Purchase invoices (PRC)**
 
+Our partner has sent several invoices for different clients:
 
-Dr. Killian has sent several invoices for different clients:
-
->>> rt.show(rt.modules.ledger.MovementsByPartner, killian)
-==================== ========== ======= ============ ================== ======= ========================= ===========
- Date                 Voucher    Debit   Credit       Account            Match   Client                    Satisfied
--------------------- ---------- ------- ------------ ------------------ ------- ------------------------- -----------
- 5/7/14               *PRC#4*            120,00       (4400) Suppliers           COLLARD Charlotte (118)   No
- 4/17/14              *PRC#8*            29,95        (4400) Suppliers           EMONTS Daniel (128)       No
- 3/28/14              *PRC#12*           25,00        (4400) Suppliers           EVERS Eberhart (127)      No
- 3/8/14               *PRC#16*           22,50        (4400) Suppliers           JACOBS Jacqueline (137)   No
- 2/16/14              *PRC#20*           5,33         (4400) Suppliers           KAIVERS Karl (141)        No
- **Total (5 rows)**                      **202,78**                                                        **0**
-==================== ========== ======= ============ ================== ======= ========================= ===========
+>>> rt.show(rt.modules.ledger.MovementsByPartner, partner)
+==================== ========== ======= =========== ======= ============================ ===========
+ Date                 Voucher    Debit   Credit      Match   Client                       Satisfied
+-------------------- ---------- ------- ----------- ------- ---------------------------- -----------
+ 5/22/14              *PRC#1*            22,50                                            No
+ 4/27/14              *PRC#6*            22,50               DOBBELSTEIN Dorothée (124)   No
+ 4/2/14               *PRC#11*           22,50               DENON Denis (180*)           No
+ 3/8/14               *PRC#16*           22,50               DENON Denis (180*)           No
+ **Total (4 rows)**                      **90,00**                                        **0**
+==================== ========== ======= =========== ======= ============================ ===========
 <BLANKLINE>
 
->>> rt.show(rt.modules.ledger.MovementsByProject, karl)
-==================== ========== ======= ========== ================== ======= ===========
- Date                 Voucher    Debit   Credit     Account            Match   Satisfied
--------------------- ---------- ------- ---------- ------------------ ------- -----------
- 2/16/14              *PRC#20*           5,33       (4400) Suppliers           No
- **Total (1 rows)**                      **5,33**                              **0**
-==================== ========== ======= ========== ================== ======= ===========
+Our client has several invoices from different partners:
+
+>>> rt.show(ledger.MovementsByProject, client)
+==================== ========== ======================== ======= =========== ======= ===========
+ Date                 Voucher    Partner                  Debit   Credit      Match   Satisfied
+-------------------- ---------- ------------------------ ------- ----------- ------- -----------
+ 5/2/14               *PRC#5*    Bäckerei Schmitz                 5,33                No
+ 4/2/14               *PRC#11*   Belgisches Rotes Kreuz           22,50               No
+ 3/8/14               *PRC#16*   Belgisches Rotes Kreuz           22,50               No
+ **Total (3 rows)**                                               **50,33**           **0**
+==================== ========== ======================== ======= =========== ======= ===========
 <BLANKLINE>
 
 
@@ -245,10 +267,61 @@ Dr. Killian has sent several invoices for different clients:
 General accounts
 ================
 
->>> rt.show('accounts.Accounts')
+>>> rt.show(accounts.GroupsByChart, accounts.AccountCharts.default)
+===== ====================== ====================== ====================== ============== =======================
+ ref   Designation            Designation (fr)       Designation (de)       Account Type   Budget entries layout
+----- ---------------------- ---------------------- ---------------------- -------------- -----------------------
+ 40    Receivables            Receivables            Receivables            Assets
+ 44    Suppliers              Suppliers              Suppliers              Assets
+ 55    Financial institutes   Financial institutes   Financial institutes   Assets
+ 58    Current transactions   Current transactions   Current transactions   Assets
+ 6     Expenses               Dépenses               Ausgaben               Expenses
+ 7     Revenues               Revenues               Revenues               Incomes
+===== ====================== ====================== ====================== ============== =======================
+<BLANKLINE>
+
+>>> expenses = accounts.Group.objects.get(ref="6")
+>>> rt.show(accounts.AccountsByGroup, expenses, column_names="ref name")
+============= ================================ ================================ ================================
+ Reference     Designation                      Designation (fr)                 Designation (de)
+------------- -------------------------------- -------------------------------- --------------------------------
+ 820/333/01    Vorschuss auf Vergütungen o.ä.   Vorschuss auf Vergütungen o.ä.   Vorschuss auf Vergütungen o.ä.
+ 821/333/01    Vorschuss auf Pensionen          Vorschuss auf Pensionen          Vorschuss auf Pensionen
+ 822/333/01    Vorsch. Entsch. Arbeitsunfälle   Vorsch. Entsch. Arbeitsunfälle   Vorsch. Entsch. Arbeitsunfälle
+ 823/333/01    Vor. Kranken- u. Invalidengeld   Vor. Kranken- u. Invalidengeld   Vor. Kranken- u. Invalidengeld
+ 825/333/01    Vorschuss auf Familienzulage     Vorschuss auf Familienzulage     Vorschuss auf Familienzulage
+ 826/333/01    Vorschuss auf Arbeitslosengeld   Vorschuss auf Arbeitslosengeld   Vorschuss auf Arbeitslosengeld
+ 827/333/01    Vorschuss auf Behindertenzulag   Vorschuss auf Behindertenzulag   Vorschuss auf Behindertenzulag
+ 832/330/01    Allgemeine Beihilfen             Allgemeine Beihilfen             Allgemeine Beihilfen
+ 832/330/02    Gesundheitsbeihilfe              Gesundheitsbeihilfe              Gesundheitsbeihilfe
+ 832/330/03    Heizkosten- u. Energiebeihilfe   Heizkosten- u. Energiebeihilfe   Heizkosten- u. Energiebeihilfe
+ 832/330/03F   Fonds Gas und Elektrizität       Fonds Gas und Elektrizität       Fonds Gas und Elektrizität
+ 832/330/04    Mietkaution                      Mietkaution                      Mietkaution
+ 832/333/22    Mietbeihilfe                     Mietbeihilfe                     Mietbeihilfe
+ 832/3331/01   Eingliederungseinkommen          Eingliederungseinkommen          Eingliederungseinkommen
+ 832/334/27    Sozialhilfe                      Sozialhilfe                      Sozialhilfe
+ 832/3343/21   Beihilfe für Ausländer           Beihilfe für Ausländer           Beihilfe für Ausländer
+ P82/000/00    Einn. Dritter: Weiterleitung     Einn. Dritter: Weiterleitung     Einn. Dritter: Weiterleitung
+ P83/000/00    Unber. erh. Beträge + Erstatt.   Unber. erh. Beträge + Erstatt.   Unber. erh. Beträge + Erstatt.
+ P87/000/00    Abhebung von pers. Guthaben      Abhebung von pers. Guthaben      Abhebung von pers. Guthaben
+============= ================================ ================================ ================================
+<BLANKLINE>
+
 
 >>> obj = accounts.Account.get_by_ref('820/333/01')
+>>> print(unicode(obj))
+(820/333/01) Vorschuss auf Vergütungen o.ä.
+
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
+==================== ========== =========== ======== ========= ======= ===========
+ Date                 Voucher    Debit       Credit   Partner   Match   Satisfied
+-------------------- ---------- ----------- -------- --------- ------- -----------
+ 5/22/14              *PRC#1*    10,00                                  No
+ 3/8/14               *PRC#16*   12,50                                  No
+ **Total (2 rows)**              **22,50**                              **0**
+==================== ========== =========== ======== ========= ======= ===========
+<BLANKLINE>
+
 
 
 Relics
@@ -281,20 +354,3 @@ shouldn't rather do ticket :ticket:`246` (Work around inject_field)
 first.  Also e.g. to define a choosers and validation methods for
 these fields.
 
-
-
-======= ==================== ============ ========================
- ID      Designation          Can refund   Debt collection agency
-------- -------------------- ------------ ------------------------
- 1       Krankenkasse         No           No
- 2       Apotheke             No           No
- 3       Arbeitsvermittler    No           No
- 4       Gerichtsvollzieher   No           Yes
- 5       Inkassounternehmen   No           Yes
- 6       Facharzt             Yes          No
- 7       Hausarzt             Yes          No
- 8       Zahnarzt             Yes          No
- 9       Gynäkologe           Yes          No
- 10      Augenarzt            Yes          No
- 11      Kinderarzt           Yes          No
-======= ==================== ============ ========================

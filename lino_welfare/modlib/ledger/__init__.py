@@ -19,4 +19,4 @@ from lino.modlib.ledger import Plugin
 class Plugin(Plugin):
     """See :class:`lino.core.plugin.Plugin`."""
 
-    extends_models = ['Movement', 'AccountInvoice']
+    extends_models = ['Movement']
