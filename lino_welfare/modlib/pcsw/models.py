@@ -690,7 +690,7 @@ class ClientDetail(dd.DetailLayout):
 
     if dd.is_installed('ledger'):
         ledger = dd.Panel("""
-        vatless.VouchersByProject
+        #vatless.VouchersByProject
         ledger.MovementsByProject
         """, label=dd.plugins.ledger.verbose_name)
 

@@ -12,15 +12,15 @@ See :mod:`<lino.modlib.plausibility`.
 ..  This document is part of the test suite.  To test only this
   document, run::
 
-  $ python setup.py test -s tests.SpecsTests.test_plausibility
+    $ python setup.py test -s tests.SpecsTests.test_plausibility
 
-This is a tested document:
+    doctest init:
 
->>> from __future__ import print_function, unicode_literals
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
+    >>> from __future__ import print_function, unicode_literals
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
 
 
 Showing all problems
@@ -88,9 +88,9 @@ Showing all problems
  Mélanie Mélard    *DENON Denis (180*)*                        Both coached and obsolete.                                     Check coachings
  Mélanie Mélard    *DENON Denis (180*)*                        Neither valid eId data nor alternative identifying document.   Check for valid identification
  Hubert Huppertz   *JEANÉMART Jérôme (181)*                    Neither valid eId data nor alternative identifying document.   Check for valid identification
-                   *KASENNOVA Tatjana (221)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
-                   *FRISCH Paul (238)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
-                   *BRAUN Bruno (257)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
+                   *KASENNOVA Tatjana (223)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
+                   *FRISCH Paul (240)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
+                   *BRAUN Bruno (259)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
 ================= =========================================== ============================================================== ================================
 <BLANKLINE>
 

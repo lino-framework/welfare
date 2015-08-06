@@ -252,14 +252,29 @@ Our partner has sent several invoices for different clients:
 Our client has several invoices from different partners:
 
 >>> rt.show(ledger.MovementsByProject, client)
-==================== ========== ======================== ======= =========== ======= ===========
- Date                 Voucher    Partner                  Debit   Credit      Match   Satisfied
--------------------- ---------- ------------------------ ------- ----------- ------- -----------
- 5/2/14               *PRC#5*    Bäckerei Schmitz                 5,33                No
- 4/2/14               *PRC#11*   Belgisches Rotes Kreuz           22,50               No
- 3/8/14               *PRC#16*   Belgisches Rotes Kreuz           22,50               No
- **Total (3 rows)**                                               **50,33**           **0**
-==================== ========== ======================== ======= =========== ======= ===========
+===================== ========== ============================================= ========= ============ ======== ======= ===========
+ Date                  Voucher    Account                                       Partner   Debit        Credit   Match   Satisfied
+--------------------- ---------- --------------------------------------------- --------- ------------ -------- ------- -----------
+ 5/12/14               *PRC#3*    (823/333/01) Vor. Kranken- u. Invalidengeld             29,95                         No
+ 5/7/14                *PRC#4*    (832/330/02) Gesundheitsbeihilfe                        25,00                         No
+ 5/2/14                *PRC#5*    (832/3331/01) Eingliederungseinkommen                   12,50                         No
+ 4/17/14               *PRC#8*    (P87/000/00) Abhebung von pers. Guthaben                10,00                         No
+ 4/12/14               *PRC#9*    (825/333/01) Vorschuss auf Familienzulage               5,33                          No
+ 4/7/14                *PRC#10*   (832/330/03) Heizkosten- u. Energiebeihilfe             120,00                        No
+ 3/23/14               *PRC#13*   (832/334/27) Sozialhilfe                                29,95                         No
+ 3/18/14               *PRC#14*   (820/333/01) Vorschuss auf Vergütungen o.ä.             25,00                         No
+ 3/13/14               *PRC#15*   (826/333/01) Vorschuss auf Arbeitslosengeld             12,50                         No
+ 2/26/14               *PRC#18*   (832/330/03F) Fonds Gas und Elektrizität                10,00                         No
+ 2/21/14               *PRC#19*   (832/3343/21) Beihilfe für Ausländer                    5,33                          No
+ 2/16/14               *PRC#20*   (821/333/01) Vorschuss auf Pensionen                    120,00                        No
+ 2/1/14                *PRC#23*   (827/333/01) Vorschuss auf Behindertenzulag             29,95                         No
+ 1/27/14               *PRC#24*   (832/330/04) Mietkaution                                25,00                         No
+ 1/22/14               *PRC#25*   (P82/000/00) Einn. Dritter: Weiterleitung               12,50                         No
+ 1/7/14                *PRC#28*   (822/333/01) Vorsch. Entsch. Arbeitsunfälle             10,00                         No
+ 1/2/14                *PRC#29*   (832/330/01) Allgemeine Beihilfen                       5,33                          No
+ 12/28/13              *PRC#30*   (832/333/22) Mietbeihilfe                               120,00                        No
+ **Total (18 rows)**                                                                      **608,34**                    **0**
+===================== ========== ============================================= ========= ============ ======== ======= ===========
 <BLANKLINE>
 
 
@@ -313,13 +328,16 @@ General accounts
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
-==================== ========== =========== ======== ========= ======= ===========
- Date                 Voucher    Debit       Credit   Partner   Match   Satisfied
--------------------- ---------- ----------- -------- --------- ------- -----------
- 5/22/14              *PRC#1*    10,00                                  No
- 3/8/14               *PRC#16*   12,50                                  No
- **Total (2 rows)**              **22,50**                              **0**
-==================== ========== =========== ======== ========= ======= ===========
+==================== ========== ============ ======== ========= ======= ===========
+ Date                 Voucher    Debit        Credit   Partner   Match   Satisfied
+-------------------- ---------- ------------ -------- --------- ------- -----------
+ 5/22/14              *PRC#1*    10,00                                   No
+ 4/17/14              *PRC#8*    12,50                                   No
+ 3/18/14              *PRC#14*   25,00                                   No
+ 2/16/14              *PRC#20*   29,95                                   No
+ 1/12/14              *PRC#27*   120,00                                  No
+ **Total (5 rows)**              **197,45**                              **0**
+==================== ========== ============ ======== ========= ======= ===========
 <BLANKLINE>
 
 

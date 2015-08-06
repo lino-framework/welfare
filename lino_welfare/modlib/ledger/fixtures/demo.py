@@ -17,7 +17,7 @@ def objects():
     Client = rt.modules.pcsw.Client
     ClientStates = rt.modules.pcsw.ClientStates
     Journal = rt.modules.ledger.Journal
-    Invoice = rt.modules.vatless.AccountInvoice
+    AccountInvoice = rt.modules.vatless.AccountInvoice
     InvoiceItem = rt.modules.vatless.InvoiceItem
     Account = rt.modules.accounts.Account
     AccountCharts = rt.modules.accounts.AccountCharts
@@ -26,28 +26,34 @@ def objects():
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
 
-    RECIPIENTS = Cycler(Company.objects.all()[:5])
+    qs = Company.objects.filter(sepa_accounts__iban__gt='').distinct()
+    # RECIPIENTS = Cycler(qs[:5])
+    RECIPIENTS = Cycler(qs)
     ACCOUNTS = Cycler(Account.objects.filter(
         chart=AccountCharts.default, type=AccountTypes.expenses))
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
 
     ses = rt.login('robin')
     jnl = Journal.get_by_ref('PRC')
-    for i in range(20):
+    for i in range(30):
         kw = dict()
         kw.update(partner=RECIPIENTS.pop())
-        if i % 9 != 0:
-            kw.update(project=CLIENTS.pop())
+        # if i % 9 != 0:
+        #     kw.update(project=CLIENTS.pop())
         kw.update(date=dd.today(-5*i))
         kw.update(journal=jnl)
         kw.update(user=ses.get_user())
-        obj = Invoice(**kw)
+        obj = AccountInvoice(**kw)
         yield obj
-        yield InvoiceItem(
-            voucher=obj, amount=AMOUNTS.pop(), account=ACCOUNTS.pop())
-        if i % 5 == 0:
+
+        for j in range(i % 5 + 1):
             yield InvoiceItem(
-                voucher=obj, amount=AMOUNTS.pop(), account=ACCOUNTS.pop())
+                voucher=obj, amount=AMOUNTS.pop(),
+                project=CLIENTS.pop(),
+                account=ACCOUNTS.pop())
+        # if i % 5 == 0:
+        #     yield InvoiceItem(
+        #         voucher=obj, amount=AMOUNTS.pop(), account=ACCOUNTS.pop())
         obj.register(ses)
         obj.save()
 

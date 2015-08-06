@@ -11,7 +11,7 @@ from lino.api import dd, rt
 from lino.modlib.contacts.mixins import ContactRelated
 
 
-class ClientRelated(dd.Model):
+class unused_ClientRelated(dd.Model):
     """Base class for things that are related to one and only one client.
 
     .. attribute:: client

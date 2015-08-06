@@ -80,14 +80,15 @@ coached
 ================= =============== =========================
 <BLANKLINE>
 
-Client 257 is not coached but a `ClientStates.newcomer`. So
-AgentsByClient shows all users who care for newcomers (i.e. who have a
-non-zero :attr:`newcomer_quota
+Client 257 is a `ClientStates.newcomer` and *not* coached. In that
+case Lino shows all social agents who care for newcomers (i.e. who
+have a non-zero :attr:`newcomer_quota
 <lino_welfare.modlib.users.User.newcomer_quota>`).
 
->>> obj = pcsw.Client.objects.get(pk=257)
+
+>>> obj = pcsw.Client.objects.get(first_name="Bruno", last_name="Braun")
 >>> print(obj)
-BRAUN Bruno (257)
+BRAUN Bruno (259)
 >>> print(obj.client_state)
 newcomer
 >>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')

@@ -111,7 +111,7 @@ There are a lot of data fields:
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 AgentsByClient ExcerptsByProject LinksByHuman MembersByPerson
-SimilarClients UploadsByClient VouchersByProject activity
+MovementsByProject SimilarClients UploadsByClient activity
 activityHidden age birth_country birth_countryHidden birth_date
 birth_place broker brokerHidden cbss_relations civil_state
 civil_stateHidden client_state client_stateHidden created

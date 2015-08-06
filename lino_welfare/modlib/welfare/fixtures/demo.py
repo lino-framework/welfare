@@ -533,19 +533,25 @@ def objects():
     yield cct
     kw = dict(client_contact_type=cct, country=belgium)
     #~ kw = dict(is_health_insurance=True,country=belgium)
-    yield company(name=u"Alliance Nationale des Mutualités Chrétiennes", **kw)
-    yield company(name=u"Mutualité Chrétienne de Verviers - Eupen", **kw)
-    yield company(name=u"Union Nationale des Mutualités Neutres", **kw)
-    yield company(name=u"Mutualia - Mutualité Neutre", **kw)
-    yield company(name=u"Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
+    yield company(name="Alliance Nationale des Mutualités Chrétiennes", **kw)
+    yield company(name="Mutualité Chrétienne de Verviers - Eupen", **kw)
+    yield company(name="Union Nationale des Mutualités Neutres", **kw)
+    yield company(name="Mutualia - Mutualité Neutre", **kw)
+    yield company(name="Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
 
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     cct = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
-    kw = dict(client_contact_type=cct, country=belgium)
-    yield company(name=u"Apotheke Reul", street=u'Klosterstraße', street_no=20, **kw)
-    yield company(name=u"Apotheke Schunck", street=u'Bergstraße', street_no=59, **kw)
-    yield company(name=u"Pharmacies Populaires de Verviers", street=u'Aachener Straße', street_no=258, **kw)
-    yield company(name=u"Bosten-Bocken A", street=u'Haasstraße', street_no=6, **kw)
+    kw = dict(client_contact_type=cct, country=belgium, city=eupen)
+    yield company(
+        name="Apotheke Reul",
+        street='Klosterstraße', street_no=20, **kw)
+    yield company(
+        name="Apotheke Schunck", street='Bergstraße', street_no=59, **kw)
+    yield company(
+        name="Pharmacies Populaires de Verviers",
+        street='Aachener Straße', street_no=258, **kw)
+    yield company(
+        name="Bosten-Bocken A", street='Haasstraße', street_no=6, **kw)
 
     kw = dd.str2kw('name', _("Advocate"))
     cct = ClientContactType(**kw)

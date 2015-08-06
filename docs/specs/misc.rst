@@ -121,9 +121,9 @@ Yet another series of GET requests
 
 >>> json_fields = 'count rows title success no_data_text'
 >>> kw = dict(fmt='json', limit=10, start=0)
->>> demo_get('rolf', 'api/contacts/Companies', json_fields, 50, **kw)
+>>> demo_get('rolf', 'api/contacts/Companies', json_fields, 52, **kw)
 >>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
->>> demo_get('rolf', 'api/contacts/Partners', json_fields, 173, **kw)
+>>> demo_get('rolf', 'api/contacts/Partners', json_fields, 175, **kw)
 
 >>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
 >>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
@@ -137,7 +137,7 @@ Yet another series of GET requests
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
->>> demo_get('rolf', 'api/contacts/Persons', json_fields, 101, **kw)
+>>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
 >>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
 >>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
