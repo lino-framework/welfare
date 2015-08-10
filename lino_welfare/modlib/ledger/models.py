@@ -13,14 +13,22 @@ from lino.api import _
 from lino.modlib.accounts.utils import DEBIT
 from lino.modlib.ledger.choicelists import TradeTypes
 
+JournalGroups.clear()
 add = JournalGroups.add_item
-add('50', _("Aids"), 'aids')
+add('10', _("Purchases"), 'purchases')
+add('20', _("Aids"), 'aids')
+add('40', _("Financial"), 'financial')
 
-TradeTypes.add_item('A', _("Aids"), 'aids', dc=DEBIT)
+
+TradeTypes.clear
+add = TradeTypes.add_item
+add('P', _("Purchases"), 'purchases', dc=DEBIT)
+add('A', _("Aids"), 'aids', dc=DEBIT)
+add('C', _("Clearings"), 'clearings', dc=DEBIT)
+
 TradeTypes.aids.update(
     partner_account_field_name='aids_account',
     partner_account_field_label=_("Aids account"))
-
 
 
 # from lino_welfare.modlib.pcsw.mixins import ClientRelated

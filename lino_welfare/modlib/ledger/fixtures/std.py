@@ -5,6 +5,27 @@
 """Defines a default accounts chart with account groups and accounts
 for social accounting.
 
+
+Purchase invoices go to 4400 (suppliers). Unlike default ledger, 4400
+is to be matched by a payment *instruction* which moves them to 4450
+(instructions to execute). And then we write a payment *order* which
+satisfies the payment *instruction*.
+
+Classic accounting:
+
+#. Purchase invoice -> 4400
+#. (4400 ->) Payment order -> 5800
+#. Bank Statement -> 5500
+
+Lino Welfare accounting:
+
+#. Purchase invoice -> 4400
+#. (4400 ->) Payment instruction -> 4450
+#. (4450 ->) Payment order -> 5800
+#. (5800 ->) Bank Statement -> 5500
+
+
+
 """
 
 from __future__ import unicode_literals
@@ -26,6 +47,7 @@ def objects():
     BankStatement = rt.modules.finan.BankStatement
     PaymentOrder = rt.modules.finan.PaymentOrder
     AccountInvoice = rt.modules.vatless.AccountInvoice
+    MatchRule = rt.modules.ledger.MatchRule
 
     # chart = Chart(**dd.str2kw('name',  _("Social Accounting")))
     # yield chart
@@ -55,18 +77,26 @@ def objects():
     # if sales:
     #     settings.SITE.site_config.update(clients_account=obj)
 
-    yield group('44', 'assets', _("Suppliers"))
-    obj = account('4400', 'liabilities', _("Suppliers"), clearable=True)
-    yield obj
-    settings.SITE.site_config.update(suppliers_account=obj)
+    yield group('44', 'assets', _("Liabilities"))
+    a4400 = account('4400', 'liabilities', _("Suppliers"), clearable=True)
+    yield a4400
+    settings.SITE.site_config.update(suppliers_account=a4400)
+
+    a4450 = account('4450', 'liabilities',
+                    _("Instructions to execute"), clearable=True)
+    yield a4450
+    # settings.SITE.site_config.update(suppliers_account=a4400)
 
     yield group('55', 'assets', _("Financial institutes"))
     yield account("5500", 'bank_accounts', "KBC")
+    # a5600 = account("5600", 'bank_accounts', _("Payment instructions"))
+    # yield a5600
     yield account("5700", 'bank_accounts', _("Cash"))
 
     yield group('58', 'assets', _("Current transactions"))
-    yield account("5800", 'bank_accounts', _("Payment Orders"),
-                  clearable=True)
+    a5800 = account("5800", 'bank_accounts', _("Payment Orders"),
+                    clearable=True)
+    yield a5800
 
     yield group('6', 'expenses', _("Expenses"))
     for ref, name in (
@@ -101,20 +131,34 @@ def objects():
     kw.update(dd.str2kw('name', _("Purchase invoices")))
     yield AccountInvoice.create_journal(**kw)
 
+    kw = dict(chart=chart, journal_group=JournalGroups.aids)
+    kw.update(dd.str2kw('name', _("Payment instructions")))
+    kw.update(account='4450', ref="AAW")
+    jnl = PaymentOrder.create_journal(**kw)
+    yield jnl
+    yield MatchRule(journal=jnl, account=a4400)
+
     if dd.is_installed('client_vouchers'):
         ClientVoucher = rt.modules.client_vouchers.ClientVoucher
         kw = dict(chart=chart, journal_group=JournalGroups.aids)
         kw.update(trade_type='aids', ref="AIDS")
         kw.update(dd.str2kw('name', _("Aids allocations")))
-        yield ClientVoucher.create_journal(**kw)
+        jnl = ClientVoucher.create_journal(**kw)
+        yield jnl
+        yield MatchRule(journal=jnl, account=a4400)
 
     kw.update(journal_group=JournalGroups.financial)
     kw.update(dd.str2kw('name', _("KBC")))
     kw.update(account='5500', ref="KBC")
-    yield BankStatement.create_journal(**kw)
+    jnl = BankStatement.create_journal(**kw)
+    yield jnl
+    yield MatchRule(journal=jnl, account=a4450)
+    yield MatchRule(journal=jnl, account=a5800)
 
     kw.update(journal_group=JournalGroups.financial)
     kw.update(dd.str2kw('name', _("PO KBC")))
     kw.update(account='5800', ref="POKBC")
-    yield PaymentOrder.create_journal(**kw)
+    jnl = PaymentOrder.create_journal(**kw)
+    yield jnl
+    yield MatchRule(journal=jnl, account=a4450)
 
