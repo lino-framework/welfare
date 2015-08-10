@@ -61,7 +61,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  accounts.Account               accounts.Accounts               10        0
  accounts.Group                 accounts.Groups                 8         0
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        84
+ addresses.Address              addresses.Addresses             16        90
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.Grantings                  12        55
@@ -358,6 +358,7 @@ List of window layouts
 - pcsw.CoachingEndings.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, seqno
 - pcsw.Coachings.create_visit (viewable for 110, 410, admin) : user, summary
 - plausibility.Checkers.detail (viewable for admin) : value, name, text
+- plausibility.Problems.detail (viewable for all except anonymous) : user, owner, checker, id, message
 - polls.AnswerRemarks.insert (viewable for all except anonymous) : remark, response, question
 - polls.ChoiceSets.insert (viewable for admin) : name, name_nl, name_de, name_en
 - polls.Polls.detail (viewable for all except anonymous) : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state

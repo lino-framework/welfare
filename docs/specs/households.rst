@@ -8,21 +8,20 @@ Households
 
     $ python setup.py test -s tests.SpecsTests.test_households
 
+    doctest init:
+
+    >>> from __future__ import print_function
+    >>> import os
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
+    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino.api.doctest import *
+
 A technical tour into the :mod:`lino_welfare.modlib.households` module.
 
 
 .. contents::
    :local:
 
-.. include:: /include/tested.rst
-
-
-
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.std.settings.doctests'
->>> from lino.api.doctest import *
 
 
 .. _paulfrisch:
@@ -33,7 +32,10 @@ Paul Frisch
 Mr. Paul Frisch is a fictive client for which the demo database
 contains fictive family links.
 
->>> print(contacts.Person.objects.get(first_name="Paul", last_name="Frisch"))
+>>> paul = contacts.Person.objects.get(first_name="Paul", last_name="Frisch")
+>>> print(paul.id)
+240
+>>> print(paul)
 Mr Paul FRISCH
 
 >>> client = Client()
@@ -44,14 +46,14 @@ Mr Paul FRISCH
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('contacts/Persons/238', 'LinksByHuman'))
+>>> soup = BeautifulSoup(check('contacts/Persons/240', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
 21
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
-javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 246 })
+javascript:Lino.contacts.Persons.detail.run(null,{ "record_id": 248 })
 
 These are the family relationships of Paul Frisch:
 
@@ -212,7 +214,7 @@ equally execute some Javascript code:
 >>> print(links[1].string)
 Robin & Mélanie Dubois-Mélard
 >>> print(links[1].get('href'))
-javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 234 })
+javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 236 })
 
 
 The third link is:

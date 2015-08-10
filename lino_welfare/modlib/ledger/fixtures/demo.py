@@ -34,7 +34,7 @@ def objects():
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
 
     ses = rt.login('robin')
-    jnl = Journal.get_by_ref('PRC')
+    jnl = Journal.get_by_ref('REG')
     for i in range(30):
         kw = dict()
         kw.update(partner=RECIPIENTS.pop())

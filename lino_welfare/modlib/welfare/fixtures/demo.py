@@ -8,11 +8,8 @@ Adds PCSW-specific demo data.
 
 from __future__ import unicode_literals
 
-import shutil
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
-
-from unipath import Path
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _

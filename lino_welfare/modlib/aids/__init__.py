@@ -50,7 +50,7 @@ Here is a list of the templates defined in the `Aids` module.
         items = []
         for conf in qs:
             ex = conf.printed_by
-            url = "http://de.welfare.lino-framework.org/dl/excerpts/" 
+            url = "http://de.welfare.lino-framework.org/dl/excerpts/"
             url += ex.filename_root()
             url += ex.get_build_method().target_ext
             items.append("`%s <%s>`__" % (conf, url))

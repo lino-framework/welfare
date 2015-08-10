@@ -37,15 +37,15 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-55 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, iban, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+54 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 149 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               19        76
+ accounts.Account               accounts.Accounts               19        77
  accounts.Group                 accounts.Groups                 9         14
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        173
+ addresses.Address              addresses.Addresses             16        179
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.Grantings                  12        55
@@ -75,10 +75,10 @@ The following table gives an overview of these things.
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
- contacts.Company               contacts.Companies              30        49
+ contacts.Company               contacts.Companies              28        51
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               26        172
- contacts.Person                contacts.Persons                33        109
+ contacts.Partner               contacts.Partners               24        174
+ contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
  contenttypes.ContentType       contenttypes.ContentTypes       4         150
@@ -88,7 +88,7 @@ The following table gives an overview of these things.
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
  courses.CourseOffer            courses.CourseOffers            6         3
- courses.CourseProvider         courses.CourseProviders         31        2
+ courses.CourseProvider         courses.CourseProviders         29        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              8         5
@@ -120,8 +120,8 @@ The following table gives an overview of these things.
  finan.JournalEntry             finan.FinancialVouchers         9         0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             11        0
- finan.PaymentOrderItem         finan.PaymentOrderItemTable     12        0
- households.Household           households.Households           29        14
+ finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
+ households.Household           households.Households           27        14
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
@@ -137,16 +137,16 @@ The following table gives an overview of these things.
  jobs.Contract                  jobs.Contracts                  28        13
  jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
- jobs.JobProvider               jobs.JobProviders               31        3
+ jobs.JobProvider               jobs.JobProviders               29        3
  jobs.JobType                   jobs.JobTypes                   5         5
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
- ledger.Journal                 ledger.Journals                 20        3
- ledger.MatchRule               ledger.MatchRules               3         0
- ledger.Movement                ledger.Movements                10        44
+ ledger.Journal                 ledger.Journals                 20        4
+ ledger.MatchRule               ledger.MatchRules               3         4
+ ledger.Movement                ledger.Movements                10        120
  ledger.PaymentTerm             ledger.PaymentTerms             8         0
- ledger.Voucher                 ledger.Vouchers                 8         20
+ ledger.Voucher                 ledger.Vouchers                 8         30
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
@@ -158,7 +158,7 @@ The following table gives an overview of these things.
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    67        63
+ pcsw.Client                    pcsw.Clients                    65        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -182,15 +182,15 @@ The following table gives an overview of these things.
  properties.PropGroup           properties.PropGroups           5         0
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
- sepa.Account                   sepa.Accounts                   8         15
+ sepa.Account                   sepa.Accounts                   8         17
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        11
- vatless.AccountInvoice         vatless.Invoices                19        20
- vatless.InvoiceItem            vatless.InvoiceItems            6         24
+ vatless.AccountInvoice         vatless.Invoices                17        30
+ vatless.InvoiceItem            vatless.InvoiceItems            7         90
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -266,13 +266,13 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - cbss.RetrieveTIGroupsRequests.detail (viewable for all except anonymous) : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert (viewable for all except anonymous) : person, national_id, language, history
 - changes.Changes.detail (viewable for admin) : time, user, type, master, object, id, diff
-- contacts.Companies.detail (viewable for all except anonymous) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.detail (viewable for all except anonymous) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert (viewable for all except anonymous) : name, language, email, type, id
 - contacts.Companies.merge_row (viewable for admin) : merge_to, reason
-- contacts.Partners.detail (viewable for all except anonymous) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, is_obsolete, created, modified
+- contacts.Partners.detail (viewable for all except anonymous) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert (viewable for all except anonymous) : name, language, email
 - contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
-- contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
 - contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
@@ -302,13 +302,13 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - excerpts.ExcerptTypes.detail (viewable for admin) : id, name, name_fr, name_de, name_nl, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert (viewable for admin) : name, name_fr, name_de, name_nl, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail (viewable for all except anonymous) : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail (viewable for all except anonymous) : date, balance1, balance2, user, workflow_buttons, id, journal, year, number
+- finan.BankStatements.detail (viewable for all except anonymous) : date, balance1, balance2, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.BankStatements.insert (viewable for all except anonymous) : date, user, balance1, balance2
-- finan.FinancialVouchers.detail (viewable for all except anonymous) : date, user, narration, workflow_buttons, id, journal, year, number
+- finan.FinancialVouchers.detail (viewable for all except anonymous) : date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.FinancialVouchers.insert (viewable for all except anonymous) : date, user, narration
-- finan.Groupers.detail (viewable for all except anonymous) : date, partner, user, workflow_buttons, id, journal, year, number
+- finan.Groupers.detail (viewable for all except anonymous) : date, partner, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.Groupers.insert (viewable for all except anonymous) : date, user, partner
-- finan.PaymentOrders.detail (viewable for all except anonymous) : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number
+- finan.PaymentOrders.detail (viewable for all except anonymous) : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
 - households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl
@@ -353,12 +353,13 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - pcsw.ClientContactTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl
 - pcsw.ClientStates.wf1 (viewable for 200, 300, admin) : reason, remark
 - pcsw.Clients.create_visit (viewable for all except anonymous) : user, summary
-- pcsw.Clients.detail (viewable for all except anonymous) : overview, gender, id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, residence_until, group, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, skills, obstacles, ExcerptsByProject, VouchersByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
+- pcsw.Clients.detail (viewable for all except anonymous) : overview, gender, id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, residence_until, group, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
 - pcsw.Clients.insert (viewable for all except anonymous) : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row (viewable for admin) : merge_to, aids_SimpleConfirmation, aids_IncomeConfirmation, aids_RefundConfirmation, pcsw_Coaching, pcsw_Dispense, dupable_clients_Word, reason
 - pcsw.CoachingEndings.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, seqno
 - pcsw.Coachings.create_visit (viewable for 110, 410, admin) : user, summary
 - plausibility.Checkers.detail (viewable for admin) : value, name, text
+- plausibility.Problems.detail (viewable for all except anonymous) : user, owner, checker, id, message
 - polls.AnswerRemarks.insert (viewable for all except anonymous) : remark, response, question
 - polls.ChoiceSets.insert (viewable for admin) : name, name_fr, name_de, name_nl
 - polls.Polls.detail (viewable for all except anonymous) : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state
@@ -386,9 +387,9 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - users.Users.change_password (viewable for admin) : current, new1, new2
 - users.Users.detail (viewable for admin) : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert (viewable for admin) : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail (viewable for all except anonymous) : id, date, project, partner, user, due_date, your_ref, iban, bic, workflow_buttons, amount, journal, year, number, narration, state
-- vatless.Invoices.insert (viewable for all except anonymous) : journal, project, partner, date, amount
-- vatless.InvoicesByJournal.insert (viewable for all except anonymous) : project, partner, date, amount
+- vatless.Invoices.detail (viewable for all except anonymous) : id, date, partner, user, due_date, your_ref, bank_account, workflow_buttons, amount, journal, year, number, narration, state, MovementsByVoucher
+- vatless.Invoices.insert (viewable for all except anonymous) : journal, partner, date, amount
+- vatless.InvoicesByJournal.insert (viewable for all except anonymous) : partner, date, amount
 <BLANKLINE>
 
 

@@ -127,7 +127,7 @@ def objects():
     yield obj
 
     kw = dict(chart=chart, journal_group=JournalGroups.purchases)
-    kw.update(trade_type='purchases', ref="PRC")
+    kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Purchase invoices")))
     yield AccountInvoice.create_journal(**kw)
 

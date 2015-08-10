@@ -81,7 +81,8 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
             raise Exception("Oops: %s" % rv['message'])
         if not 'open_url' in rv:
             raise Exception("Oops: %s" % rv['message'])
-        tmppath = settings.SITE.project_dir + rv['open_url']
+        # tmppath = settings.SITE.project_dir + rv['open_url']
+        tmppath = settings.SITE.cache_dir + rv['open_url']
         head, tail = os.path.split(tmppath)
         # tail = 'tested/' + tail
         tail = 'dl/excerpts/' + tail
@@ -113,3 +114,4 @@ Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
   except Exception as e:
 
      print(e)
+

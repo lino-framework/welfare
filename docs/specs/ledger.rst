@@ -287,7 +287,7 @@ General accounts
  ref   Designation            Designation (fr)       Designation (de)       Account Type   Budget entries layout
 ----- ---------------------- ---------------------- ---------------------- -------------- -----------------------
  40    Receivables            Receivables            Receivables            Assets
- 44    Suppliers              Suppliers              Suppliers              Assets
+ 44    Liabilities            Obligations            Verpflichtungen        Assets
  55    Financial institutes   Financial institutes   Financial institutes   Assets
  58    Current transactions   Current transactions   Current transactions   Assets
  6     Expenses               Dépenses               Ausgaben               Expenses
