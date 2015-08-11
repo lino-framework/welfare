@@ -11,6 +11,7 @@ have :attr:`lino.core.site.Site.user_profiles_module` point to it.
 
 from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.office.roles import OfficeOperator
+from lino.modlib.ledger.roles import LedgerStaff
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
@@ -25,7 +26,7 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
 class SiteAdmin(
         SiteAdmin,
         IntegrationStaff,
-        DebtsStaff,
+        DebtsStaff, LedgerStaff,
         NewcomersAgent, NewcomersOperator,
         OfficeOperator,
         AidsStaff):
