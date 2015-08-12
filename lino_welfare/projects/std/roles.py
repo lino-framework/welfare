@@ -16,8 +16,7 @@ from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.aids.roles import AidsStaff
-from lino_welfare.modlib.integ.roles import IntegrationAgent
-from lino_welfare.modlib.integ.roles import IntegrationStaff
+from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
 from lino_welfare.modlib.debts.roles import DebtsUser, DebtsStaff
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
@@ -27,7 +26,7 @@ class SiteAdmin(
         SiteAdmin,
         IntegrationStaff,
         DebtsStaff, LedgerStaff,
-        NewcomersAgent, NewcomersOperator,
+        NewcomersAgent,
         OfficeOperator,
         AidsStaff):
     """The site adminstrator has permission for everything."""
@@ -43,7 +42,15 @@ class ReceptionClerk(OfficeOperator, AidsStaff, CBSSUser):
     pass
 
 
-class NewcomersReceptionClerk(ReceptionClerk, NewcomersOperator):
+class ReceptionClerkNewcomers(ReceptionClerk, NewcomersOperator):
+    """A **newcomers reception clerk** is a *reception clerk* who also
+    can assign coaches to clients.
+
+    """
+    pass
+
+
+class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     """A **newcomers reception clerk** is a *reception clerk* who also
     can assign coaches to clients.
 
@@ -61,9 +68,10 @@ add('000', _("Anonymous"), UserRole, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration agent"),             IntegrationAgent)
 add('110', _("Integration agent (Manager)"),   IntegrationStaff)
+add('120', _("Integration agent (Newcomers)"), IntegrationAgentNewcomers)
 add('200', _("Newcomers consultant"),          NewcomersAgent)
 add('210', _("Reception clerk"),               ReceptionClerk)
-add('220', _("Newcomers reception clerk"),     NewcomersReceptionClerk)
+add('220', _("Newcomers reception clerk"),     ReceptionClerkNewcomers)
 add('300', _("Debts consultant"),              DebtsUser)
 add('400', _("Social agent"),                  SocialAgent)
 add('410', _("Social agent (Manager)"),        SocialStaff)

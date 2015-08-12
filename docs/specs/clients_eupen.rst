@@ -64,7 +64,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleiter** (coaching):
-      - (coaching_1) [visible for 200, 220, 300, admin]:
+      - (coaching_1) [visible for all except anonymous, 100, 210, 400, 410]:
         - (newcomers_left):
           - (newcomers_left_1) [visible for all except anonymous]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
           - **Vermittler** (broker) [visible for all except anonymous]
@@ -93,23 +93,23 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - (papers_1): **Arbeit suchend** (is_seeking), **eingetragen seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
         - **Uploads** (UploadsByClient)
-    - **Lebenslauf** (career) [visible for 100, 110, admin]:
+    - **Lebenslauf** (career) [visible for 100, 110, 120, admin]:
       - **Erstellte Lebensläufe** (cvs_emitted) [visible for all except anonymous]
       - **Studien** (cv.StudiesByPerson)
       - **Ausbildungen** (cv.TrainingsByPerson)
       - **Berufserfahrungen** (cv.ExperiencesByPerson)
-    - **Sprachen** (languages) [visible for 100, 110, admin]:
+    - **Sprachen** (languages) [visible for 100, 110, 120, admin]:
       - **Sprachkenntnisse** (cv.LanguageKnowledgesByPerson)
       - **Kursanfragen** (courses.CourseRequestsByPerson)
-    - **Kompetenzen** (competences) [visible for 100, 110, admin]:
+    - **Kompetenzen** (competences) [visible for 100, 110, 120, admin]:
       - (competences_1) [visible for all except anonymous]:
-        - **Fachkompetenzen** (cv.SkillsByPerson) [visible for 100, 110, admin]
-        - **Sozialkompetenzen** (cv.SoftSkillsByPerson) [visible for 100, 110, admin]
+        - **Fachkompetenzen** (cv.SkillsByPerson) [visible for 100, 110, 120, admin]
+        - **Sozialkompetenzen** (cv.SoftSkillsByPerson) [visible for 100, 110, 120, admin]
         - **Sonstige Fähigkeiten** (skills)
       - (competences_2) [visible for all except anonymous]:
-        - **Hindernisse** (cv.ObstaclesByPerson) [visible for 100, 110, admin]
+        - **Hindernisse** (cv.ObstaclesByPerson) [visible for 100, 110, 120, admin]
         - **Sonstige Hindernisse** (obstacles)
-    - **Verträge** (contracts) [visible for 100, 110, admin]:
+    - **Verträge** (contracts) [visible for 100, 110, 120, admin]:
       - **VSEs** (isip.ContractsByClient)
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)

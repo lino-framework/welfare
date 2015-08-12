@@ -37,6 +37,7 @@ each other's calendars:
 ...         print repr(p), unicode(p)
 users.UserProfiles:100 Begleiter im DSBE
 users.UserProfiles:110 Begleiter im DSBE (Manager)
+users.UserProfiles:120 Begleiter im DSBE (+Erstempfang)
 users.UserProfiles:200 Berater Erstempfang
 users.UserProfiles:300 Schuldenberater
 users.UserProfiles:400 Sozi

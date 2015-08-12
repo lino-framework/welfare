@@ -22,6 +22,7 @@ def objects():
     Account = rt.modules.accounts.Account
     AccountCharts = rt.modules.accounts.AccountCharts
     AccountTypes = rt.modules.accounts.AccountTypes
+    PaymentOrder = rt.modules.finan.PaymentOrder
 
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
@@ -41,6 +42,7 @@ def objects():
         # if i % 9 != 0:
         #     kw.update(project=CLIENTS.pop())
         kw.update(date=dd.today(-5*i))
+        kw.update(due_date=dd.today(30-5*i))
         kw.update(journal=jnl)
         kw.update(user=ses.get_user())
         obj = AccountInvoice(**kw)
@@ -56,6 +58,15 @@ def objects():
         #         voucher=obj, amount=AMOUNTS.pop(), account=ACCOUNTS.pop())
         obj.register(ses)
         obj.save()
+
+    jnl = Journal.get_by_ref('AAW')
+    for i in range(30):
+        kw = dict()
+        kw.update(date=dd.today(-5*i))
+        kw.update(journal=jnl)
+        kw.update(user=ses.get_user())
+        obj = PaymentOrder(**kw)
+        yield obj
 
     if dd.is_installed('client_vouchers'):
         ClientVoucher = rt.modules.client_vouchers.ClientVoucher

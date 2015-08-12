@@ -196,20 +196,21 @@ We use the user profiles defined in
 >>> settings.SITE.user_profiles_module
 'lino_welfare.projects.std.roles'
 >>> rt.show(users.UserProfiles)
-======= =========== =====================================
+======= =========== ============================================
  value   name        text
-------- ----------- -------------------------------------
+------- ----------- --------------------------------------------
  000     anonymous   Anonyme
  100                 Agent d'insertion
  110                 Agent d'insertion (chef de service)
- 200                 Consultant nouveaux clients
+ 120                 Agent d'insertion (nouveaux bénéficiaires)
+ 200                 Consultant nouveaux bénéficiaires
  210                 Agent d'accueil
- 220                 Agent d'accueil (nouveaux clients)
+ 220                 Agent d'accueil (nouveaux bénéficiaires)
  300                 Médiateur de dettes
  400                 Agent social
  410                 Agent social (Chef de service)
  900     admin       Administrateur
-======= =========== =====================================
+======= =========== ============================================
 <BLANKLINE>
 
 
@@ -244,8 +245,8 @@ List of window layouts
 - aids.SimpleConfirmations.insert (viewable for all except anonymous) : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert (viewable for all except anonymous) : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert (viewable for 110, admin) : id, name, name_nl, name_de, name_en, ref
-- art61.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
-- art61.Contracts.insert (viewable for 100, 110, admin) : client, company, type
+- art61.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
+- art61.Contracts.insert (viewable for 100, 110, 120, admin) : client, company, type
 - boards.Boards.detail (viewable for admin) : id, name, name_nl, name_de, name_en
 - boards.Boards.insert (viewable for admin) : name, name_nl, name_de, name_en
 - cal.Calendars.detail (viewable for 110, 410, admin) : name, name_nl, name_de, name_en, color, id, description
@@ -318,28 +319,28 @@ List of window layouts
 - humanlinks.Links.insert (viewable for 110, 410, admin) : parent, child, type
 - immersion.ContractTypes.detail (viewable for 110, admin) : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
 - immersion.ContractTypes.insert (viewable for 110, admin) : name, name_nl, name_de, name_en, exam_policy
-- immersion.Contracts.detail (viewable for 100, 110, admin) : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
-- immersion.Contracts.insert (viewable for 100, 110, admin) : client, company, type, goal
+- immersion.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
+- immersion.Contracts.insert (viewable for 100, 110, 120, admin) : client, company, type, goal
 - immersion.Goals.insert (viewable for 110, admin) : id, name, name_nl, name_de, name_en
-- integ.ActivityReport.show (viewable for 100, 110, admin) : body
+- integ.ActivityReport.show (viewable for 100, 110, 120, admin) : body
 - isip.ContractEndings.insert (viewable for 110, 410, admin) : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartners.insert (viewable for 110, admin) : company, contact_person, contact_role, duties_company
 - isip.ContractTypes.insert (viewable for 110, 410, admin) : id, ref, exam_policy, needs_study_type, name, name_nl, name_de, name_en, full_name
-- isip.Contracts.detail (viewable for 100, 110, admin) : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_asd, duties_dsbe, duties_person
-- isip.Contracts.insert (viewable for 100, 110, admin) : client, type
+- isip.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_asd, duties_dsbe, duties_person
+- isip.Contracts.insert (viewable for 100, 110, 120, admin) : client, type
 - isip.ExamPolicies.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
 - jobs.ContractTypes.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, ref
-- jobs.Contracts.detail (viewable for 100, 110, admin) : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
-- jobs.Contracts.insert (viewable for 100, 110, admin) : client, job
-- jobs.JobProviders.detail (viewable for 100, 110, admin) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
+- jobs.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
+- jobs.Contracts.insert (viewable for 100, 110, 120, admin) : client, job
+- jobs.JobProviders.detail (viewable for 100, 110, 120, admin) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
 - jobs.JobTypes.insert (viewable for 110, 410, admin) : id, name, is_social
-- jobs.Jobs.insert (viewable for 100, 110, admin) : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
-- jobs.JobsOverview.show (viewable for 100, 110, admin) : preview
-- jobs.Offers.insert (viewable for 100, 110, admin) : name, provider, sector, function, selection_from, selection_until, start_date, remark
-- jobs.OldJobsOverview.show (viewable for 100, 110, admin) : body
+- jobs.Jobs.insert (viewable for 100, 110, 120, admin) : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
+- jobs.JobsOverview.show (viewable for 100, 110, 120, admin) : preview
+- jobs.Offers.insert (viewable for 100, 110, 120, admin) : name, provider, sector, function, selection_from, selection_until, start_date, remark
+- jobs.OldJobsOverview.show (viewable for 100, 110, 120, admin) : body
 - jobs.Schedules.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en
 - languages.Languages.insert (viewable for all except anonymous, 210, 220) : id, iso2, name, name_nl, name_de, name_en
-- newcomers.AvailableCoachesByClient.assign_coach (viewable for 200, 220, 300, admin) : notify_subject, notify_body, notify_silent
+- newcomers.AvailableCoachesByClient.assign_coach (viewable for all except anonymous, 100, 210, 400, 410) : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, weight
 - newcomers.Faculties.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en, weight
 - notes.EventTypes.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, remark

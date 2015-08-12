@@ -27,12 +27,13 @@ User profiles
 This is the list of user profiles:
 
 >>> rt.show(users.UserProfiles)
-======= =========== =============================
+======= =========== ===============================
  value   name        text
-------- ----------- -----------------------------
+------- ----------- -------------------------------
  000     anonymous   Anonymous
  100                 Integration agent
  110                 Integration agent (Manager)
+ 120                 Integration agent (Newcomers)
  200                 Newcomers consultant
  210                 Reception clerk
  220                 Newcomers reception clerk
@@ -40,7 +41,7 @@ This is the list of user profiles:
  400                 Social agent
  410                 Social agent (Manager)
  900     admin       Administrator
-======= =========== =============================
+======= =========== ===============================
 <BLANKLINE>
 
 
