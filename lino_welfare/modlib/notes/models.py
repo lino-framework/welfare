@@ -18,8 +18,16 @@ from lino.modlib.notes.models import *
 
 
 class Note(Note):
-    """Overrides the library model, giving an alternative verbose name and
-    adding the :attr:`person` property.
+    """Overrides the library model, setting an alternative verbose name,
+    adding a real database field :attr:`important` and the
+    :attr:`person` property.
+
+    .. attribute:: important
+
+        Checking this will cause this note to appear in the
+        :attr:`overview
+        <lino_welfare.modlib.pcsw.models.Client.overview>` panel of
+        the :attr:`person` linked to this note.
 
     .. attribute:: person
 
@@ -29,6 +37,8 @@ class Note(Note):
     class Meta:
         verbose_name = _("Event/Note")
         verbose_name_plural = _("Events/Notes")
+
+    important = models.BooleanField(_('Important'), default=False)
 
     def get_person(self):
         return self.project
@@ -43,7 +53,7 @@ class NoteDetail(NoteDetail):
 
     left = """
     date:10 time event_type:25 type:25
-    project subject
+    project subject important
     company contact_person #contact_role
     user:10 language:8 build_time id
     body

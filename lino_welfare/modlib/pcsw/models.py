@@ -108,41 +108,45 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     A :class:`Client` is a polymorphic specialization of :class:`Person`.
 
+    .. attribute:: overview
+
+        A panel with general information about this client.
+
     .. attribute:: cvs_emitted
 
-    A virtual field displaying a group of shortcut links for managing CVs
-    (Curriculum Vitaes).
+        A virtual field displaying a group of shortcut links for managing CVs
+        (Curriculum Vitaes).
 
-    This field is an excerpts shortcut
-    (:class:`lino.modlib.excerpts.models.Shortcuts`) and works only if
-    the database has an :class:`ExcerptType
-    <lino.modlib.excerpts.models.ExcerptType>` whose `shortcut` points
-    to it.
+        This field is an excerpts shortcut
+        (:class:`lino.modlib.excerpts.models.Shortcuts`) and works only if
+        the database has an :class:`ExcerptType
+        <lino.modlib.excerpts.models.ExcerptType>` whose `shortcut` points
+        to it.
 
     .. attribute:: id_document
 
-    A virtual field displaying a group of buttons for managing the
-    "identifying document", i.e. an uploaded document which has been
-    used as alternative to the eID card.
+        A virtual field displaying a group of buttons for managing the
+        "identifying document", i.e. an uploaded document which has been
+        used as alternative to the eID card.
 
     .. attribute:: group
 
-    Pointer to :class:`PersonGroup`.
-    The intergration phase of this client.
-    
-    The :class:`UsersWithClients <welfare.integ.UsersWithClients>`
-    table groups clients using this field.
+        Pointer to :class:`PersonGroup`.
+        The intergration phase of this client.
+
+        The :class:`UsersWithClients <welfare.integ.UsersWithClients>`
+        table groups clients using this field.
 
 
     .. attribute:: client_state
     
-    Pointer to :class:`ClientStates`.
+        Pointer to :class:`ClientStates`.
 
    
 
     .. attribute:: client_contact_type
     
-    Pointer to :class:`PersonGroup`.
+        Pointer to :class:`PersonGroup`.
 
     """
     class Meta:
@@ -290,6 +294,12 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
+        for note in rt.modules.notes.Note.objects.filter(
+                project=self, important=True):
+            elems += [
+                E.br(), E.b(ar.obj2html(note, note.subject),
+                            class_="lino-info-red")]
+            
         # elems += [
         #     E.br(), ar.instance_action_button(self.create_excerpt)]
 
