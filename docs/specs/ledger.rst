@@ -200,39 +200,40 @@ The REG journal contains the following invoices:
 ========= ========== =============================== ============== ========== ============ ================
  number    Date       Partner                         Amount         Due date   Author       Workflow
 --------- ---------- ------------------------------- -------------- ---------- ------------ ----------------
- 29        1/2/14     Niederau Eupen AG               165,28                    Robin Rood   **Registered**
- 28        1/7/14     Ethias s.a.                     47,50                     Robin Rood   **Registered**
- 27        1/12/14    Electrabel Customer Solutions   125,33                    Robin Rood   **Registered**
- 26        1/17/14    Ragn-Sells AS                   29,95                     Robin Rood   **Registered**
- 25        1/22/14    Maksu- ja tolliamet             172,83                    Robin Rood   **Registered**
- 24        1/27/14    IIZI kindlustusmaakler AS       77,45                     Robin Rood   **Registered**
- 23        2/1/14     Eesti Energia AS                155,28                    Robin Rood   **Registered**
- 22        2/6/14     AS Matsalu Veevärk              37,50                     Robin Rood   **Registered**
- 21        2/11/14    AS Express Post                 10,00                     Robin Rood   **Registered**
- 20        2/16/14    Leffin Electronics              192,78                    Robin Rood   **Registered**
- 19        2/21/14    Niederau Eupen AG               165,28                    Robin Rood   **Registered**
- 18        2/26/14    Ethias s.a.                     47,50                     Robin Rood   **Registered**
- 17        3/3/14     Electrabel Customer Solutions   125,33                    Robin Rood   **Registered**
- 16        3/8/14     Ragn-Sells AS                   29,95                     Robin Rood   **Registered**
- 15        3/13/14    Maksu- ja tolliamet             172,83                    Robin Rood   **Registered**
- 14        3/18/14    IIZI kindlustusmaakler AS       77,45                     Robin Rood   **Registered**
- 13        3/23/14    Eesti Energia AS                155,28                    Robin Rood   **Registered**
- 12        3/28/14    AS Matsalu Veevärk              37,50                     Robin Rood   **Registered**
- 11        4/2/14     AS Express Post                 10,00                     Robin Rood   **Registered**
- 10        4/7/14     Leffin Electronics              192,78                    Robin Rood   **Registered**
- 9         4/12/14    Niederau Eupen AG               165,28                    Robin Rood   **Registered**
- 8         4/17/14    Ethias s.a.                     47,50                     Robin Rood   **Registered**
- 7         4/22/14    Electrabel Customer Solutions   125,33                    Robin Rood   **Registered**
- 6         4/27/14    Ragn-Sells AS                   29,95                     Robin Rood   **Registered**
- 5         5/2/14     Maksu- ja tolliamet             172,83                    Robin Rood   **Registered**
- 4         5/7/14     IIZI kindlustusmaakler AS       77,45                     Robin Rood   **Registered**
- 3         5/12/14    Eesti Energia AS                155,28                    Robin Rood   **Registered**
- 2         5/17/14    AS Matsalu Veevärk              37,50                     Robin Rood   **Registered**
- 1         5/22/14    AS Express Post                 10,00                     Robin Rood   **Registered**
- 1         12/28/13   Leffin Electronics              192,78                    Robin Rood   **Registered**
+ 29        1/2/14     Niederau Eupen AG               165,28         2/1/14     Robin Rood   **Registered**
+ 28        1/7/14     Ethias s.a.                     47,50          2/6/14     Robin Rood   **Registered**
+ 27        1/12/14    Electrabel Customer Solutions   125,33         2/11/14    Robin Rood   **Registered**
+ 26        1/17/14    Ragn-Sells AS                   29,95          2/16/14    Robin Rood   **Registered**
+ 25        1/22/14    Maksu- ja tolliamet             172,83         2/21/14    Robin Rood   **Registered**
+ 24        1/27/14    IIZI kindlustusmaakler AS       77,45          2/26/14    Robin Rood   **Registered**
+ 23        2/1/14     Eesti Energia AS                155,28         3/3/14     Robin Rood   **Registered**
+ 22        2/6/14     AS Matsalu Veevärk              37,50          3/8/14     Robin Rood   **Registered**
+ 21        2/11/14    AS Express Post                 10,00          3/13/14    Robin Rood   **Registered**
+ 20        2/16/14    Leffin Electronics              192,78         3/18/14    Robin Rood   **Registered**
+ 19        2/21/14    Niederau Eupen AG               165,28         3/23/14    Robin Rood   **Registered**
+ 18        2/26/14    Ethias s.a.                     47,50          3/28/14    Robin Rood   **Registered**
+ 17        3/3/14     Electrabel Customer Solutions   125,33         4/2/14     Robin Rood   **Registered**
+ 16        3/8/14     Ragn-Sells AS                   29,95          4/7/14     Robin Rood   **Registered**
+ 15        3/13/14    Maksu- ja tolliamet             172,83         4/12/14    Robin Rood   **Registered**
+ 14        3/18/14    IIZI kindlustusmaakler AS       77,45          4/17/14    Robin Rood   **Registered**
+ 13        3/23/14    Eesti Energia AS                155,28         4/22/14    Robin Rood   **Registered**
+ 12        3/28/14    AS Matsalu Veevärk              37,50          4/27/14    Robin Rood   **Registered**
+ 11        4/2/14     AS Express Post                 10,00          5/2/14     Robin Rood   **Registered**
+ 10        4/7/14     Leffin Electronics              192,78         5/7/14     Robin Rood   **Registered**
+ 9         4/12/14    Niederau Eupen AG               165,28         5/12/14    Robin Rood   **Registered**
+ 8         4/17/14    Ethias s.a.                     47,50          5/17/14    Robin Rood   **Registered**
+ 7         4/22/14    Electrabel Customer Solutions   125,33         5/22/14    Robin Rood   **Registered**
+ 6         4/27/14    Ragn-Sells AS                   29,95          5/27/14    Robin Rood   **Registered**
+ 5         5/2/14     Maksu- ja tolliamet             172,83         6/1/14     Robin Rood   **Registered**
+ 4         5/7/14     IIZI kindlustusmaakler AS       77,45          6/6/14     Robin Rood   **Registered**
+ 3         5/12/14    Eesti Energia AS                155,28         6/11/14    Robin Rood   **Registered**
+ 2         5/17/14    AS Matsalu Veevärk              37,50          6/16/14    Robin Rood   **Registered**
+ 1         5/22/14    AS Express Post                 10,00          6/21/14    Robin Rood   **Registered**
+ 1         12/28/13   Leffin Electronics              192,78         1/27/14    Robin Rood   **Registered**
  **436**                                              **3 041,70**
 ========= ========== =============================== ============== ========== ============ ================
 <BLANKLINE>
+
 
 Let's have a closer look at one of them.  The partner (provider) is
 #184, and the costs are distributed over three clients:
@@ -374,20 +375,20 @@ Creditors
 <BLANKLINE>
 List of partners (usually suppliers)     who are giving credit to us.
 <BLANKLINE>
-========== ========== ================================= ============== ===============================
- Age        Due date   Partner                           Balance        Actions
----------- ---------- --------------------------------- -------------- -------------------------------
- 145        12/28/13   *Leffin Electronics*              578,34         [Show debts] [Issue reminder]
- 140        1/2/14     *Niederau Eupen AG*               495,84         [Show debts] [Issue reminder]
- 135        1/7/14     *Ethias s.a.*                     142,50         [Show debts] [Issue reminder]
- 130        1/12/14    *Electrabel Customer Solutions*   375,99         [Show debts] [Issue reminder]
- 125        1/17/14    *Ragn-Sells AS*                   89,85          [Show debts] [Issue reminder]
- 120        1/22/14    *Maksu- ja tolliamet*             518,49         [Show debts] [Issue reminder]
- 115        1/27/14    *IIZI kindlustusmaakler AS*       232,35         [Show debts] [Issue reminder]
- 110        2/1/14     *Eesti Energia AS*                465,84         [Show debts] [Issue reminder]
- 105        2/6/14     *AS Matsalu Veevärk*              112,50         [Show debts] [Issue reminder]
- 100        2/11/14    *AS Express Post*                 30,00          [Show debts] [Issue reminder]
- **1225**                                                **3 041,70**
-========== ========== ================================= ============== ===============================
+========= ========== ================================= ============== ===============================
+ Age       Due date   Partner                           Balance        Actions
+--------- ---------- --------------------------------- -------------- -------------------------------
+ 115       1/27/14    *Leffin Electronics*              578,34         [Show debts] [Issue reminder]
+ 110       2/1/14     *Niederau Eupen AG*               495,84         [Show debts] [Issue reminder]
+ 105       2/6/14     *Ethias s.a.*                     142,50         [Show debts] [Issue reminder]
+ 100       2/11/14    *Electrabel Customer Solutions*   375,99         [Show debts] [Issue reminder]
+ 95        2/16/14    *Ragn-Sells AS*                   89,85          [Show debts] [Issue reminder]
+ 90        2/21/14    *Maksu- ja tolliamet*             518,49         [Show debts] [Issue reminder]
+ 85        2/26/14    *IIZI kindlustusmaakler AS*       232,35         [Show debts] [Issue reminder]
+ 80        3/3/14     *Eesti Energia AS*                465,84         [Show debts] [Issue reminder]
+ 75        3/8/14     *AS Matsalu Veevärk*              112,50         [Show debts] [Issue reminder]
+ 70        3/13/14    *AS Express Post*                 30,00          [Show debts] [Issue reminder]
+ **925**                                                **3 041,70**
+========= ========== ================================= ============== ===============================
 <BLANKLINE>
 

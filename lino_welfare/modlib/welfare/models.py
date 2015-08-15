@@ -161,8 +161,8 @@ def customize_sqlite(sender, **kw):
 @dd.receiver(dd.pre_analyze)
 def set_merge_actions(sender, **kw):
     #~ logger.info("20130409 %s.set_merge_actions()",__name__)
-    modules = sender.modules
-    for m in (modules.pcsw.Client, modules.contacts.Company):
+    lib = sender.modules
+    for m in (lib.pcsw.Client, lib.contacts.Company, lib.countries.Place):
         #~ print repr(m)
         m.define_action(merge_row=dd.MergeAction(m))
         #~ m.merge_row = dd.MergeAction(m)

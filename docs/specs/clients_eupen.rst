@@ -48,7 +48,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - (general_1):
         - **None** (overview)
         - (general2):
-          - (general2_1): **Geschlecht** (gender), **ID** (id)
+          - (general2_1): **Geschlecht** (gender), **ID** (id), **TIM-ID** (tim_id)
           - (general2_2): **Vorname** (first_name), **Zwischenname** (middle_name), **Familienname** (last_name)
           - (general2_3): **Geburtsdatum** (birth_date), **Alter** (age), **NR-Nummer** (national_id)
           - (general2_4): **Staatsangehörigkeit** (nationality), **Deklarierter Name** (declared_name)
@@ -77,7 +77,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
     - **Hilfen** (aids_tab):
       - (aids_tab_1):
         - (status):
-          - (status_1): **Lebt in Belgien seit** (in_belgium_since), **Register** (residence_type), **Gesdos-Nr** (gesdos_id), **TIM ID** (tim_id)
+          - (status_1): **Lebt in Belgien seit** (in_belgium_since), **Register** (residence_type), **Gesdos-Nr** (gesdos_id)
           - (status_2): **Interim-Agenturen** (job_agents), **Integrationsphase** (group), **Sozialhilfeart** (aid_type)
         - (income):
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)

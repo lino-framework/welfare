@@ -75,7 +75,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     """, label=_("Person"))
 
     general2 = """
-    gender:10 id:10
+    gender:10 id:8 tim_id:8
     first_name middle_name last_name
     birth_date age:10 national_id:15
     nationality:15 declared_name
@@ -118,7 +118,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     """, label=_("Aids"))
 
     status = """
-    in_belgium_since:15 residence_type gesdos_id tim_id
+    in_belgium_since:15 residence_type gesdos_id #tim_id
     job_agents group:16 aid_type
     """
 

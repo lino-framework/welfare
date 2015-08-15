@@ -14,7 +14,7 @@ Since the problem was caused by Javascript code in
 How to run only this test::
 
   $ go welfare
-  $ cd lino_welfare/projects/docs
+  $ cd lino_welfare/projects/std
   $ python manage.py test tests.test_households
 
 """

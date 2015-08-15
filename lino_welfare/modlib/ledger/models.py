@@ -20,7 +20,7 @@ add('20', _("Aids"), 'aids')
 add('40', _("Financial"), 'financial')
 
 
-TradeTypes.clear
+TradeTypes.clear()
 add = TradeTypes.add_item
 add('P', _("Purchases"), 'purchases', dc=DEBIT)
 add('A', _("Aids"), 'aids', dc=DEBIT)

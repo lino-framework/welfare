@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-12 11:54+0300\n"
-"PO-Revision-Date: 2015-08-12 11:59+0300\n"
+"PO-Revision-Date: 2015-08-14 22:06+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmx.net>\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -4378,7 +4378,7 @@ msgstr "Gesdos-Nr"
 
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:26
 msgid "TIM ID"
-msgstr ""
+msgstr "TIM-ID"
 
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:28
 msgid "receives social help"

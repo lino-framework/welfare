@@ -266,3 +266,38 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         self.assertEqual(result['success'], True)
         expected = "Create new client Marc Petitjean : Are you sure?"
         self.assertEqual(result['message'], expected)
+
+        # next card. issued after 2015 and the photo is invalid
+
+        post_data.update(card_data=readfile('beid_tests_3.txt'))
+        url = '/api/pcsw/Clients'
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='robin',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = "Create new client Bernd Brecht : Are you sure?"
+        self.assertEqual(result['message'], expected)
+
+        # next card. issued after 2015 and the photo is valid
+
+        post_data.update(card_data=readfile('beid_tests_4.txt'))
+        url = '/api/pcsw/Clients'
+        response = self.client.post(
+            url, post_data,
+            REMOTE_USER='robin',
+            HTTP_ACCEPT_LANGUAGE='en')
+        # self.assertEqual(response.content, '')
+        result = self.check_json_result(
+            response,
+            'xcallback success message')
+        self.assertEqual(result['success'], True)
+        expected = "Create new client Jean Dupont : Are you sure?"
+        self.assertEqual(result['message'], expected)
+
+
+

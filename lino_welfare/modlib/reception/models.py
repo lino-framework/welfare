@@ -138,7 +138,6 @@ class CreateClientVisit(dd.Action):
     @dd.chooser()
     def user_choices(self):
         return appointable_users(newcomer_consultations=True)
-        # return appointable_users()
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]

@@ -287,6 +287,7 @@ List of window layouts
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_nl, name_de, name_en, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
+- countries.Places.merge_row (viewable for admin) : merge_to, reason
 - courses.Courses.detail (viewable for all except anonymous) : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday
 - courses.Courses.insert (viewable for all except anonymous) : start_date, line, teacher
 - courses.Enrolments.detail (viewable for admin) : request_date, user, course, pupil, remark, amount, workflow_buttons, printed, motivation, problems

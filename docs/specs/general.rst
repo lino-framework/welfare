@@ -119,7 +119,7 @@ The following table gives an overview of these things.
  finan.GrouperItem              finan.GrouperItemTable          10        0
  finan.JournalEntry             finan.FinancialVouchers         9         0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             11        0
+ finan.PaymentOrder             finan.PaymentOrders             11        30
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
  households.Household           households.Households           27        14
  households.Member              households.Members              14        63
@@ -146,7 +146,7 @@ The following table gives an overview of these things.
  ledger.MatchRule               ledger.MatchRules               3         4
  ledger.Movement                ledger.Movements                10        120
  ledger.PaymentTerm             ledger.PaymentTerms             8         0
- ledger.Voucher                 ledger.Vouchers                 8         30
+ ledger.Voucher                 ledger.Vouchers                 8         60
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
@@ -278,6 +278,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_fr, name_de, name_nl
 - countries.Places.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, country, type, parent, zip_code, id
+- countries.Places.merge_row (viewable for admin) : merge_to, reason
 - courses.CourseContents.insert (viewable for 110, admin) : id, name
 - courses.CourseOffers.detail (viewable for 100, 110, 120, admin) : id, title, content, provider, guest_role, description
 - courses.CourseOffers.insert (viewable for 100, 110, 120, admin) : provider, content, title

@@ -101,9 +101,9 @@ But when generating the js files, py2js and declare_vars filter it away:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel142, contact_panel166, coaching_panel408,
-aids_tab_panel504, work_tab_1_panel533, history_panel1266,
-MovementsByProject_htmlbox1311 ]
+[ general_panel147, contact_panel171, coaching_panel413,
+aids_tab_panel509, work_tab_1_panel538, history_panel1271,
+MovementsByProject_htmlbox1316 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 
