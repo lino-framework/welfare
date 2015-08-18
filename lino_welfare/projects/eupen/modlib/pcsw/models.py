@@ -21,7 +21,8 @@ from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 
 class Client(Client):
-    remarks2 = models.TextField(_("Remarks (Social Office)"), blank=True)
+    remarks2 = models.TextField(
+        _("Remarks (Social Office)"), blank=True, editable=False)
     gesdos_id = models.CharField(_("Gesdos ID"), max_length=40, blank=True)
     tim_id = models.CharField(_("TIM ID"), max_length=10, blank=True)
 
@@ -61,6 +62,8 @@ class Client(Client):
             is_cpas is_senior
             gesdos_id tim_id
             ''')
+
+dd.update_field('contacts.Partner', 'remarks', editable=False)
 
 
 class ClientDetail(ClientDetail, PartnerDetailMixin):

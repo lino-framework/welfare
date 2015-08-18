@@ -335,7 +335,6 @@ class TestCase(TestCase):
 |           |             |                            | - vat_id : '' --> 'BE-0441.857.467' |              |           |
 |           |             |                            | - prefix : '' --> 'S.A.'            |              |           |
 |           |             |                            | - street : '' --> 'Quai des Vennes' |              |           |
-|           |             |                            | - remarks : '' --> '\\n'             |              |           |
 |           |             |                            | - language : '' --> 'fr'            |              |           |
 |           |             |                            | - phone : '' --> '04/349.89.89'     |              |           |
 |           |             |                            | - country_id : None --> 'B'         |              |           |
