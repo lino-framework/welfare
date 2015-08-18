@@ -8,6 +8,8 @@ Lino Welfare extension of :mod:`lino.modlib.notes`
    :toctree:
 
     models
+    fixtures.std
+    fixtures.demo
 
 """
 

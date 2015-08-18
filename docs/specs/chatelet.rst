@@ -150,7 +150,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
  notes.EventType                notes.EventTypes                10        9
- notes.Note                     notes.Notes                     17        110
+ notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
@@ -347,7 +347,7 @@ List of window layouts
 - notes.EventTypes.insert (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, remark
 - notes.NoteTypes.detail (viewable for 110, 410, admin) : id, name, name_nl, name_de, name_en, build_method, template, special_type, email_template, attach_to_email, remark
 - notes.NoteTypes.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en, build_method
-- notes.Notes.detail (viewable for all except anonymous) : date, time, event_type, type, project, subject, company, contact_person, user, language, build_time, id, body, UploadsByController
+- notes.Notes.detail (viewable for all except anonymous) : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
 - notes.Notes.insert (viewable for all except anonymous) : event_type, type, subject, project
 - outbox.Mails.detail (viewable for 110, 410, admin) : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert (viewable for 110, 410, admin) : project, subject, body

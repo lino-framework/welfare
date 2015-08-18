@@ -282,8 +282,11 @@ Coached clients who have at least one note dated 2013-07-25 or later:
 >>> pv = dict(start_date=i2d(20130725), observed_event=ClientEvents.note)
 >>> ses.show(pcsw.CoachedClients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-<BLANKLINE>
-No data to display
+=========================
+ Name
+-------------------------
+ AUSDEMWALD Alfons (116)
+=========================
 <BLANKLINE>
 
 .. show the SQL when debugging:
@@ -300,6 +303,7 @@ All clients who have at least one note dated 2013-07-25 or later:
 =========================================
  Name
 -----------------------------------------
+ AUSDEMWALD Alfons (116)
  DOBBELSTEIN-DEMEULENAERE Dorothée (123)
 =========================================
 <BLANKLINE>

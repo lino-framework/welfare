@@ -37,11 +37,7 @@ to test the new `eid_info` field:
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als 
-Partner
-, 
-Person
-, Klient
+Ansicht als Partner ,  Person , Klient
 Herr
 Bernd 
 Brecht
@@ -52,11 +48,7 @@ Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gül
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/116', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als
-Partner
-, 
-Person
-, Klient
+Ansicht als Partner , Person , Klient
 Herr
 Alfons 
 Ausdemwald
@@ -66,6 +58,7 @@ Adressen verwalten
 Karte Nr. 123456789012 (C (Personalausweis für Ausländer)), ausgestellt durch Eupen
 , gültig von 19.08.12 bis 18.08.13
 Muss eID-Karte einlesen!
+Do not offer coffee
 
 
 Coaching types
