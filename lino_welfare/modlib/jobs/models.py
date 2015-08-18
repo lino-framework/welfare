@@ -288,7 +288,7 @@ class ContractDetail(dd.FormLayout):
     job type company contact_person contact_role
     applies_from duration applies_until exam_policy
     regime:20 schedule:30 hourly_rate:10 refund_rate:10
-    reference_person printed
+    reference_person remark printed
     date_decided date_issued date_ended ending:20
     # signer1 signer2
     responsibilities

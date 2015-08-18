@@ -327,7 +327,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - isip.Contracts.insert (viewable for 100, 110, 120, admin) : client, type
 - isip.ExamPolicies.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
 - jobs.ContractTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_de, name_nl, ref
-- jobs.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
+- jobs.Contracts.detail (viewable for 100, 110, 120, admin) : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - jobs.Contracts.insert (viewable for 100, 110, 120, admin) : client, job
 - jobs.JobProviders.detail (viewable for 100, 110, 120, admin) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
 - jobs.JobTypes.insert (viewable for 110, 410, admin) : id, name, is_social
