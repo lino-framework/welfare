@@ -33,6 +33,10 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import AttrDict
 from django.utils.datastructures import MultiValueDict
 
+from django.conf import settings
+from lino.modlib.users.choicelists import UserProfiles
+from lino.api.shell import countries, pcsw, users
+
 
 def readfile(name):
     fn = os.path.join(os.path.dirname(__file__), name)
@@ -54,11 +58,6 @@ class BeIdTests(RemoteAuthTestCase):
     # override_djangosite_settings = dict(use_java=True)
 
     def test01(self):
-        from lino.core import constants
-        from django.conf import settings
-        from lino.modlib.users.choicelists import UserProfiles
-        
-        from lino.api.shell import countries, addresses, pcsw, users
 
         # is it the right settings module?
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
@@ -94,7 +93,7 @@ class BeIdTests(RemoteAuthTestCase):
         # Reception --> Clients --> Detail on client 116
 
         url = "/api/reception/Clients/116?"
-        url += "pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=&pv=&pv=&pv=10&pv=false"
+        # url += "pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=&pv=&pv=&pv=10&pv=false"
         url += "&an=detail&rp=ext-comp-1359&fmt=json"
 
         response = self.client.get(url, REMOTE_USER='root')

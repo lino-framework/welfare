@@ -79,8 +79,7 @@ Here is a list of the templates defined in the `Aids` module.
 
 """
 
-from lino import ad
-from django.utils.translation import ugettext_lazy as _
+from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):
