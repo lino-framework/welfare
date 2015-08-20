@@ -3,7 +3,8 @@ Choicelists in Lino Welfare
 ===========================
 
 .. How to test only this document:
-  $ python setup.py test -s tests.SpecsTests.test_choicelists
+
+    $ python setup.py test -s tests.SpecsTests.test_choicelists
 
     doctest initializations:
 
@@ -64,6 +65,7 @@ name to read the documentation):
     cbss.QueryRegisters : QueryRegisters
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : States
+    changes.ChangeTypes : Change Types
     countries.PlaceTypes : PlaceTypes
     courses.CourseRequestStates : States
     cv.CefLevel : CEF levels
@@ -82,7 +84,6 @@ name to read the documentation):
     ledger.TradeTypes : Trade types
     ledger.VoucherStates : States
     ledger.VoucherTypes : Voucher types
-    lino.ChangeTypes : Change Types
     notes.SpecialTypes : Special note types
     outbox.RecipientTypes : RecipientTypes
     pcsw.CivilState : Civil states
