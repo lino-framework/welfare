@@ -2,7 +2,7 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""Tests :class:`lino.modlib.contenttypes.models.BrokenGFKs`.
+"""Tests :class:`lino.modlib.gfks.models.BrokenGFKs`.
 
 You can run only these tests by issuing::
 
@@ -38,7 +38,7 @@ class TestCase(TestCase):
         Client = rt.modules.pcsw.Client
         Note = rt.modules.notes.Note
         # ContentType = rt.modules.contenttypes.ContentType
-        BrokenGFKs = rt.modules.contenttypes.BrokenGFKs
+        BrokenGFKs = rt.modules.gfks.BrokenGFKs
 
         def create_related_objects():
             cli = Client(first_name="John", last_name="Doe")

@@ -37,7 +37,7 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-54 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+55 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 149 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -81,8 +81,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         150
- contenttypes.HelpText          contenttypes.HelpTexts          4         5
+ contenttypes.ContentType       gfks.ContentTypes               4         150
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -121,6 +120,7 @@ The following table gives an overview of these things.
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             11        30
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
+ gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
@@ -274,7 +274,6 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
 - contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
-- contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_de, name_nl, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_fr, name_de, name_nl
 - countries.Places.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl, country, type, parent, zip_code, id
@@ -310,6 +309,7 @@ There are *detail* layouts, *insert* layouts and *action parameter* layouts.
 - finan.Groupers.detail (viewable for all except anonymous) : date, partner, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.Groupers.insert (viewable for all except anonymous) : date, user, partner
 - finan.PaymentOrders.detail (viewable for all except anonymous) : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- gfks.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
 - households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_fr, name_de, name_nl

@@ -97,7 +97,7 @@ class Site(Site):
         yield super(Site, self).get_installed_apps()
 
         yield 'lino_welfare.modlib.system'
-        yield 'lino.modlib.contenttypes'
+        yield 'lino.modlib.gfks'
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'

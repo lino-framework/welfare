@@ -53,7 +53,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-47 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, humanize, users, changes, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, beid, davlink, export_excel, plausibility, tinymce.
+48 apps: staticfiles, about, bootstrap3, lino, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, beid, davlink, export_excel, plausibility, tinymce.
 125 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -97,8 +97,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       contenttypes.ContentTypes       4         126
- contenttypes.HelpText          contenttypes.HelpTexts          4         5
+ contenttypes.ContentType       gfks.ContentTypes               4         126
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
@@ -125,6 +124,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.Training                    cv.Trainings                    16        20
  excerpts.Excerpt               excerpts.Excerpts               12        18
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
+ gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
@@ -283,7 +283,6 @@ List of window layouts
 - contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
 - contacts.Persons.detail (viewable for all except anonymous) : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
-- contenttypes.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_nl, name_de, name_en, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
@@ -314,6 +313,7 @@ List of window layouts
 - excerpts.ExcerptTypes.detail (viewable for admin) : id, name, name_nl, name_de, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert (viewable for admin) : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail (viewable for all except anonymous) : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
+- gfks.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
 - households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert (viewable for 110, 410, admin) : name, name_nl, name_de, name_en
@@ -424,7 +424,7 @@ Romain
   - BCSS : Secteurs, Codes fonction
   - Questionnaires : Listes de choix
 - Explorateur :
-  - Système : content types, Procurations, Profils d'utilisateur, Changes, Plausibility checkers, Plausibility problems
+  - Système : types de contenu, Procurations, Profils d'utilisateur, Changes, Plausibility checkers, Plausibility problems
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
   - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Participants, Abonnements, Event states, Guest states, Task states

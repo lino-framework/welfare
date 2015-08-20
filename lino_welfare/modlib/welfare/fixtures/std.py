@@ -76,7 +76,7 @@ def objects():
     yield ContractEnding(name=_("Force majeure"), needs_date_ended=True)
 
     I = Instantiator(
-        'contenttypes.HelpText', 'content_type field help_text').build
+        'gfks.HelpText', 'content_type field help_text').build
 
     Client = dd.resolve_model('pcsw.Client')
     t = ContentType.objects.get_for_model(Client)
