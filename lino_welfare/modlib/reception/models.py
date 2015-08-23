@@ -22,7 +22,7 @@ from lino.api import dd
 
 from lino.core.tables import ButtonsTable
 
-from lino.modlib.contacts.roles import ContactsUser
+#from lino.modlib.contacts.roles import ContactsUser
 
 from lino.modlib.reception.models import *
 
@@ -230,8 +230,8 @@ class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     <lino_welfare.modlib.pcsw.models.CoachedClients>` by the visible columns.
 
     """
-    required_roles = dd.required((ContactsUser, OfficeOperator))
-    #~ model = 'pcsw.Client'
+    required_roles = dd.required((OfficeUser, OfficeOperator))
+    # required_roles = dd.required((ContactsUser, OfficeOperator))
     column_names = "name_column address_column national_id workflow_buttons"
     auto_fit_column_widths = True
     use_as_default_table = False

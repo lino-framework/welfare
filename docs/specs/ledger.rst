@@ -47,6 +47,43 @@ chart:
 ========= ========= =================
 <BLANKLINE>
 
+
+The "accountant" user profile
+=============================
+
+.. _wilfried:
+
+Wilfried
+--------
+
+Wilfried is an accountant
+(:class:`lino_welfare.modlib.welfare.roles.LedgerUser`).
+
+>>> p = rt.login('wilfried').get_user().profile
+>>> print(p)
+Accountant
+>>> p.role.__class__
+<class 'lino_welfare.modlib.welfare.roles.LedgerUser'>
+
+
+>>> rt.login('wilfried').show_menu(language="de")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+- Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
+- Buchhaltung :
+  - Einkauf : Einkaufsrechnungen (REG)
+  - Hilfen : Payment instructions (AAW)
+  - Finanzjournale : KBC (KBC), PO KBC (POKBC)
+- Berichte :
+  - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
+- Konfigurierung :
+  - Orte : Länder
+  - Buchhaltung : Journale, Zahlungsbedingungen
+- Explorer :
+  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
+  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
+- Site : Info
+
+
 General accounts
 ================
 
@@ -197,41 +234,41 @@ referenced as "REG" (for German *Rechnungseingang*).
 The REG journal contains the following invoices:
 
 >>> rt.show(rt.modules.vatless.InvoicesByJournal, jnl)
-========= ========== =============================== ============== ========== ============ ================
- number    Date       Partner                         Amount         Due date   Author       Workflow
---------- ---------- ------------------------------- -------------- ---------- ------------ ----------------
- 29        1/2/14     Niederau Eupen AG               165,28         2/1/14     Robin Rood   **Registered**
- 28        1/7/14     Ethias s.a.                     47,50          2/6/14     Robin Rood   **Registered**
- 27        1/12/14    Electrabel Customer Solutions   125,33         2/11/14    Robin Rood   **Registered**
- 26        1/17/14    Ragn-Sells AS                   29,95          2/16/14    Robin Rood   **Registered**
- 25        1/22/14    Maksu- ja tolliamet             172,83         2/21/14    Robin Rood   **Registered**
- 24        1/27/14    IIZI kindlustusmaakler AS       77,45          2/26/14    Robin Rood   **Registered**
- 23        2/1/14     Eesti Energia AS                155,28         3/3/14     Robin Rood   **Registered**
- 22        2/6/14     AS Matsalu Veevärk              37,50          3/8/14     Robin Rood   **Registered**
- 21        2/11/14    AS Express Post                 10,00          3/13/14    Robin Rood   **Registered**
- 20        2/16/14    Leffin Electronics              192,78         3/18/14    Robin Rood   **Registered**
- 19        2/21/14    Niederau Eupen AG               165,28         3/23/14    Robin Rood   **Registered**
- 18        2/26/14    Ethias s.a.                     47,50          3/28/14    Robin Rood   **Registered**
- 17        3/3/14     Electrabel Customer Solutions   125,33         4/2/14     Robin Rood   **Registered**
- 16        3/8/14     Ragn-Sells AS                   29,95          4/7/14     Robin Rood   **Registered**
- 15        3/13/14    Maksu- ja tolliamet             172,83         4/12/14    Robin Rood   **Registered**
- 14        3/18/14    IIZI kindlustusmaakler AS       77,45          4/17/14    Robin Rood   **Registered**
- 13        3/23/14    Eesti Energia AS                155,28         4/22/14    Robin Rood   **Registered**
- 12        3/28/14    AS Matsalu Veevärk              37,50          4/27/14    Robin Rood   **Registered**
- 11        4/2/14     AS Express Post                 10,00          5/2/14     Robin Rood   **Registered**
- 10        4/7/14     Leffin Electronics              192,78         5/7/14     Robin Rood   **Registered**
- 9         4/12/14    Niederau Eupen AG               165,28         5/12/14    Robin Rood   **Registered**
- 8         4/17/14    Ethias s.a.                     47,50          5/17/14    Robin Rood   **Registered**
- 7         4/22/14    Electrabel Customer Solutions   125,33         5/22/14    Robin Rood   **Registered**
- 6         4/27/14    Ragn-Sells AS                   29,95          5/27/14    Robin Rood   **Registered**
- 5         5/2/14     Maksu- ja tolliamet             172,83         6/1/14     Robin Rood   **Registered**
- 4         5/7/14     IIZI kindlustusmaakler AS       77,45          6/6/14     Robin Rood   **Registered**
- 3         5/12/14    Eesti Energia AS                155,28         6/11/14    Robin Rood   **Registered**
- 2         5/17/14    AS Matsalu Veevärk              37,50          6/16/14    Robin Rood   **Registered**
- 1         5/22/14    AS Express Post                 10,00          6/21/14    Robin Rood   **Registered**
- 1         12/28/13   Leffin Electronics              192,78         1/27/14    Robin Rood   **Registered**
+========= ========== =============================== ============== ========== ================== ================
+ number    Date       Partner                         Amount         Due date   Author             Workflow
+--------- ---------- ------------------------------- -------------- ---------- ------------------ ----------------
+ 29        1/2/14     Niederau Eupen AG               165,28         2/1/14     Wilfried Willems   **Registered**
+ 28        1/7/14     Ethias s.a.                     47,50          2/6/14     Wilfried Willems   **Registered**
+ 27        1/12/14    Electrabel Customer Solutions   125,33         2/11/14    Wilfried Willems   **Registered**
+ 26        1/17/14    Ragn-Sells AS                   29,95          2/16/14    Wilfried Willems   **Registered**
+ 25        1/22/14    Maksu- ja tolliamet             172,83         2/21/14    Wilfried Willems   **Registered**
+ 24        1/27/14    IIZI kindlustusmaakler AS       77,45          2/26/14    Wilfried Willems   **Registered**
+ 23        2/1/14     Eesti Energia AS                155,28         3/3/14     Wilfried Willems   **Registered**
+ 22        2/6/14     AS Matsalu Veevärk              37,50          3/8/14     Wilfried Willems   **Registered**
+ 21        2/11/14    AS Express Post                 10,00          3/13/14    Wilfried Willems   **Registered**
+ 20        2/16/14    Leffin Electronics              192,78         3/18/14    Wilfried Willems   **Registered**
+ 19        2/21/14    Niederau Eupen AG               165,28         3/23/14    Wilfried Willems   **Registered**
+ 18        2/26/14    Ethias s.a.                     47,50          3/28/14    Wilfried Willems   **Registered**
+ 17        3/3/14     Electrabel Customer Solutions   125,33         4/2/14     Wilfried Willems   **Registered**
+ 16        3/8/14     Ragn-Sells AS                   29,95          4/7/14     Wilfried Willems   **Registered**
+ 15        3/13/14    Maksu- ja tolliamet             172,83         4/12/14    Wilfried Willems   **Registered**
+ 14        3/18/14    IIZI kindlustusmaakler AS       77,45          4/17/14    Wilfried Willems   **Registered**
+ 13        3/23/14    Eesti Energia AS                155,28         4/22/14    Wilfried Willems   **Registered**
+ 12        3/28/14    AS Matsalu Veevärk              37,50          4/27/14    Wilfried Willems   **Registered**
+ 11        4/2/14     AS Express Post                 10,00          5/2/14     Wilfried Willems   **Registered**
+ 10        4/7/14     Leffin Electronics              192,78         5/7/14     Wilfried Willems   **Registered**
+ 9         4/12/14    Niederau Eupen AG               165,28         5/12/14    Wilfried Willems   **Registered**
+ 8         4/17/14    Ethias s.a.                     47,50          5/17/14    Wilfried Willems   **Registered**
+ 7         4/22/14    Electrabel Customer Solutions   125,33         5/22/14    Wilfried Willems   **Registered**
+ 6         4/27/14    Ragn-Sells AS                   29,95          5/27/14    Wilfried Willems   **Registered**
+ 5         5/2/14     Maksu- ja tolliamet             172,83         6/1/14     Wilfried Willems   **Registered**
+ 4         5/7/14     IIZI kindlustusmaakler AS       77,45          6/6/14     Wilfried Willems   **Registered**
+ 3         5/12/14    Eesti Energia AS                155,28         6/11/14    Wilfried Willems   **Registered**
+ 2         5/17/14    AS Matsalu Veevärk              37,50          6/16/14    Wilfried Willems   **Registered**
+ 1         5/22/14    AS Express Post                 10,00          6/21/14    Wilfried Willems   **Registered**
+ 1         12/28/13   Leffin Electronics              192,78         1/27/14    Wilfried Willems   **Registered**
  **436**                                              **3 041,70**
-========= ========== =============================== ============== ========== ============ ================
+========= ========== =============================== ============== ========== ================== ================
 <BLANKLINE>
 
 

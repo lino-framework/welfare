@@ -16,7 +16,7 @@ Lino Welfare extension of :mod:`lino.modlib.ledger`
 from lino.modlib.ledger import Plugin
 
 
-class Plugin(Plugin):
-    """See :class:`lino.core.plugin.Plugin`."""
+# class Plugin(Plugin):
+#     """See :class:`lino.core.plugin.Plugin`."""
 
-    extends_models = ['Movement']
+#     extends_models = ['Movement']

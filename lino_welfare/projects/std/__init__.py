@@ -5,7 +5,6 @@ on any production site.
    :toctree:
 
    settings
-   roles
    tests
 
 """

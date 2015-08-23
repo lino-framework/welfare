@@ -32,8 +32,6 @@ def objects():
     kerstin = User(username="kerstin",
                    first_name="Kerstin", last_name=u"Kerres",
                    profile='300')
-        #~ level=UserLevel.user,
-        #~ debts_level=UserLevel.user)
     yield kerstin
 
     for hh in Household.objects.all():

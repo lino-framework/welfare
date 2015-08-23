@@ -25,6 +25,8 @@ from lino.core.signals import pre_ui_save
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
+from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
+
 # from lino.core.utils import range_filter
 
 
@@ -100,7 +102,7 @@ class Proof(mixins.BabelNamed):
 
 class Proofs(dd.Table):
     model = 'cv.Proof'
-
+    required_roles = dd.login_required(IntegrationStaff)
 
 class PersonProperty(dd.Model):
     """Abstract base for :class:`Skill`, :class:`SoftSkill` and
@@ -121,6 +123,7 @@ class PersonProperty(dd.Model):
 class PropsByPerson(dd.Table):
     master_key = 'person'
     auto_fit_column_widths = True
+    required_roles = dd.login_required(IntegrationAgent)
 
 
 ##
@@ -140,10 +143,12 @@ dd.update_field(Skill, 'remark', verbose_name=_("Competences"))
 
 class Skills(dd.Table):
     model = 'cv.Skill'
+    required_roles = dd.login_required(IntegrationStaff)
 
 
 class SkillsByPerson(PropsByPerson, Skills):
     column_names = 'sector function remark proof *'
+    required_roles = dd.login_required(IntegrationAgent)
 
 
 ##
@@ -159,6 +164,7 @@ class SoftSkillType(mixins.BabelNamed):
 
 class SoftSkillTypes(dd.Table):
     model = 'cv.SoftSkillType'
+    required_roles = dd.login_required(IntegrationStaff)
 
     
 class SoftSkill(PersonProperty):
@@ -171,10 +177,12 @@ class SoftSkill(PersonProperty):
 
 class SoftSkills(dd.Table):
     model = 'cv.SoftSkill'
+    required_roles = dd.login_required(IntegrationStaff)
 
 
 class SoftSkillsByPerson(PropsByPerson, SoftSkills):
     column_names = 'type remark'
+    required_roles = dd.login_required(IntegrationAgent)
 
 ##
 ## OBSTACLES
@@ -188,6 +196,7 @@ class ObstacleType(mixins.BabelNamed):
 
 
 class ObstacleTypes(dd.Table):
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'cv.ObstacleType'
 
 
@@ -227,10 +236,12 @@ def on_create(sender, instance=None, ar=None, **kwargs):
 
 
 class Obstacles(dd.Table):
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'cv.Obstacle'
 
 
 class ObstaclesByPerson(PropsByPerson, Obstacles):
+    required_roles = dd.login_required(IntegrationAgent)
     column_names = 'type user detected_date remark  *'
 
 

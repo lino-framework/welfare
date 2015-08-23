@@ -13,6 +13,7 @@ current_group = None
 
 
 def objects():
+    User = rt.modules.users.User
     Company = rt.modules.contacts.Company
     Client = rt.modules.pcsw.Client
     ClientStates = rt.modules.pcsw.ClientStates
@@ -27,6 +28,11 @@ def objects():
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
 
+    wilfried = User(username="wilfried",
+                    first_name="Wilfried", last_name="Willems",
+                    profile='500')
+    yield wilfried
+
     qs = Company.objects.filter(sepa_accounts__iban__gt='').distinct()
     # RECIPIENTS = Cycler(qs[:5])
     RECIPIENTS = Cycler(qs)
@@ -34,7 +40,7 @@ def objects():
         chart=AccountCharts.default, type=AccountTypes.expenses))
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
 
-    ses = rt.login('robin')
+    ses = rt.login('wilfried')
     jnl = Journal.get_by_ref('REG')
     for i in range(30):
         kw = dict()

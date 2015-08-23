@@ -31,13 +31,3 @@ TradeTypes.aids.update(
     partner_account_field_label=_("Aids account"))
 
 
-# from lino_welfare.modlib.pcsw.mixins import ClientRelated
-
-
-# class Movement(Movement, ClientRelated):
-#     """In Lino Welfare, a *movement* can be *client-related*.
-
-#     """
-#     pass
-
-# dd.update_field(Movement, 'client', blank=True, null=True)

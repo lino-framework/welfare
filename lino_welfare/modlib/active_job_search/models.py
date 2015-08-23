@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-config = dd.plugins.active_job_search
+from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
 
 
 class Proof(dd.Model):
@@ -35,6 +35,7 @@ class Proof(dd.Model):
 
 
 class Proofs(dd.Table):
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'active_job_search.Proof'
     detail_layout = """
     date client company id
@@ -44,6 +45,7 @@ class Proofs(dd.Table):
 
 
 class ProofsByClient(Proofs):
+    required_roles = dd.login_required(IntegrationAgent)
     master_key = 'client'
     column_names = "date company spontaneous response *"
     auto_fit_column_widths = True
