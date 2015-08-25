@@ -1166,6 +1166,8 @@ valid_until to end_date.
 
         """
 
+        globals_dict.update(contenttypes_HelpText=rt.gfks.HelpText)
+
         self.sepa_accounts = []
 
         contacts_Partner = rt.modules.contacts.Partner
