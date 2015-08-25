@@ -1157,3 +1157,63 @@ valid_until to end_date.
         globals_dict.update(create_accounts_chart=noop)
 
         return '1.1.22'
+
+
+    def migrate_from_1_1_22(self, globals_dict):
+        """- contenttypes.HelpText renamed to gfks.HelpText 
+
+- Fields Partner.bic and Partner.iban no longer exist. Check whether
+  sepa.Account exists.
+
+        """
+
+        self.sepa_accounts = []
+
+        contacts_Partner = rt.modules.contacts.Partner
+
+        def create_contacts_partner(id, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, client_contact_type_id, iban, bic):
+        
+            kw = dict()
+            kw.update(id=id)
+            kw.update(modified=modified)
+            kw.update(created=created)
+            kw.update(country_id=country_id)
+            kw.update(city_id=city_id)
+            kw.update(zip_code=zip_code)
+            kw.update(region_id=region_id)
+            kw.update(addr1=addr1)
+            kw.update(street_prefix=street_prefix)
+            kw.update(street=street)
+            kw.update(street_no=street_no)
+            kw.update(street_box=street_box)
+            kw.update(addr2=addr2)
+            kw.update(name=name)
+            kw.update(language=language)
+            kw.update(email=email)
+            kw.update(url=url)
+            kw.update(phone=phone)
+            kw.update(gsm=gsm)
+            kw.update(fax=fax)
+            kw.update(remarks=remarks)
+            kw.update(is_obsolete=is_obsolete)
+            kw.update(activity_id=activity_id)
+            kw.update(client_contact_type_id=client_contact_type_id)
+            # kw.update(iban=iban)
+            # kw.update(bic=bic)
+            self.sepa_accounts.append((id, bic, iban))
+            return contacts_Partner(**kw)
+        globals_dict.update(create_contacts_partner=create_contacts_partner)
+
+        def check_sepa_accounts(loader):
+            Account = rt.sepa.Account
+            for pk, bic, iban in self.sepa_accounts:
+                try:
+                    Account.objects.get(partner_id=pk, bic=bic, iban=iban)
+                except Account.DoesNotExist:
+                    obj = Account(partner_id=pk, bic=bic, iban=iban)
+                    obj.full_clean()
+                    obj.save()
+                    logger.info("20150825 created %s for partner #%s",
+                                obj, pk)
+        self.after_load(check_sepa_accounts)
+
