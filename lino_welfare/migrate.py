@@ -1158,7 +1158,6 @@ valid_until to end_date.
 
         return '1.1.22'
 
-
     def migrate_from_1_1_22(self, globals_dict):
         """- contenttypes.HelpText renamed to gfks.HelpText 
 
@@ -1216,4 +1215,4 @@ valid_until to end_date.
                     logger.info("20150825 created %s for partner #%s",
                                 obj, pk)
         self.after_load(check_sepa_accounts)
-
+        return '1.1.23'
