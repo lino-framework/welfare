@@ -23,7 +23,8 @@ from lino.mixins import ObservedPeriod
 
 from lino.api import dd
 from lino.modlib.system.mixins import PeriodEvents
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino.modlib.users.choicelists import UserProfiles
+from .roles import IntegrationAgent
 
 config = dd.plugins.integ
 
@@ -392,7 +393,10 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 pv.update(ending=obj)
                 return pcsw.Coachings.request(param_values=pv)
             return func
-        for u in settings.SITE.user_model.objects.all():
+
+        profiles = [p for p in UserProfiles.items()
+                    if p.has_required_roles([IntegrationAgent])]
+        for u in settings.SITE.user_model.objects.filter(profile__in=profiles):
             yield dd.RequestField(w(u), verbose_name=unicode(u.username))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 

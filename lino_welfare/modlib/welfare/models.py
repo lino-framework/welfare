@@ -20,6 +20,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
+from lino.core.roles import SiteStaff
+from lino.modlib.contacts.roles import ContactsStaff
+
 households = dd.resolve_app('households')
 #~ cal = dd.resolve_app('cal')
 properties = dd.resolve_app('properties')
@@ -164,7 +167,8 @@ def set_merge_actions(sender, **kw):
     lib = sender.modules
     for m in (lib.pcsw.Client, lib.contacts.Company, lib.countries.Place):
         #~ print repr(m)
-        m.define_action(merge_row=dd.MergeAction(m))
+        m.define_action(merge_row=dd.MergeAction(
+            m, required_roles=set([(SiteStaff, ContactsStaff)])))
         #~ m.merge_row = dd.MergeAction(m)
 
 

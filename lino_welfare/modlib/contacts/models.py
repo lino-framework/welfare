@@ -167,7 +167,7 @@ class Person(Partner, Person):
             birth_date gender''')
 
 
-dd.update_field(Person, 'first_name', blank=False)
+#dd.update_field(Person, 'first_name', blank=False)
 dd.update_field(Person, 'last_name', blank=False)
 
 

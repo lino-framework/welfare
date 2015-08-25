@@ -587,10 +587,9 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
 #~ It can be used for list,
 #~ when information about sectors is required.""")
 
-    sector = models.ForeignKey('cbss.Sector',
-                               #~ blank=True,
-                               editable=False,
-      help_text="""\
+    sector = models.ForeignKey(
+        'cbss.Sector', # on_delete=models.PROTECT,
+        editable=False, help_text="""\
 For register and unregister this element is ignored. 
 It can be used for list, 
 when information about sectors is required.""")

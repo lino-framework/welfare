@@ -40,9 +40,33 @@ This is the list of user profiles:
  300                 Debts consultant
  400                 Social agent
  410                 Social agent (Manager)
+ 500                 Accountant
  900     admin       Administrator
 ======= =========== ===============================
 <BLANKLINE>
+
+
+**Remarks:**
+
+An integration agent (manager) has some staff permissions but is not a
+:class:`lino.core.roles.SiteStaff`:
+
+>>> from lino.core.roles import SiteStaff
+>>> from lino.modlib.contacts.roles import ContactsStaff
+
+>>> p110 = users.UserProfiles.get_by_value('110')
+>>> p110.has_required_roles([SiteStaff])
+False
+
+A reception clerk is a
+:class:`lino.modlib.contacts.roles.ContactsStaff`:
+
+>>> p210 = users.UserProfiles.get_by_value('210')
+>>> p210.has_required_roles([SiteStaff])
+False
+>>> p210.has_required_roles([ContactsStaff])
+True
+
 
 
 Authorities
@@ -60,3 +84,5 @@ work when they are absent.
  3    Mélanie Mélard    Theresia Thelen
 ==== ================= =================
 <BLANKLINE>
+
+

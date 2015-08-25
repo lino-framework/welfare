@@ -64,7 +64,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleiter** (coaching):
-      - (coaching_1) [visible for all except anonymous, 100, 210, 400, 410]:
+      - (coaching_1) [visible for 110, 120, 200, 220, 300, admin]:
         - (newcomers_left):
           - (newcomers_left_1) [visible for all except anonymous]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
           - **Vermittler** (broker) [visible for all except anonymous]
@@ -86,7 +86,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - **Konten** (sepa.AccountsByClient)
       - **Hilfebeschlüsse** (aids.GrantingsByClient)
     - **Arbeitssuche** (work_tab_1):
-      - (suche) [visible for all except anonymous, 210, 220]:
+      - (suche) [visible for all except anonymous, 210, 220, 500]:
         - **Dispenzen** (pcsw.DispensesByClient)
         - **AG-Sperren** (pcsw.ExclusionsByClient)
       - (papers):
@@ -127,7 +127,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - (misc_5) [visible for all except anonymous]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
-    - **ZDSS** (cbss) [visible for all except anonymous, 210, 220]:
+    - **ZDSS** (cbss) [visible for all except anonymous, 210, 220, 500]:
       - (cbss_1) [visible for all except anonymous]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
       - **Zusammenfassung ZDSS** (cbss_summary) [visible for all except anonymous]
     - **Schuldnerberatung** (debts) [visible for 300, admin]:

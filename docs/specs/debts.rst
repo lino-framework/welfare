@@ -339,7 +339,7 @@ Here is a list of all actors for which there is a first meeting.
 ...     n = actor.get_first_meeting()
 ...     if n is not None:
 ...         print(msg.format(actor.budget.id, dd.fdl(n.date), n.user))
-Budget 4 : First meeting on July 22, 2013 with user Rolf Rompen
+Budget 4 : First meeting on July 22, 2013 with user nicolas
 
 The `syntax of appy.pod templates
 <http://appyframework.org/podWritingTemplates.html>`_ does not yet
@@ -352,7 +352,7 @@ the following snippet:
 >>> for actor in budget.get_actors():
 ...     print(actor.get_first_meeting_text())
 None
-First meeting on July 22, 2013 with Rolf Rompen
+First meeting on July 22, 2013 with nicolas
 None
 
 

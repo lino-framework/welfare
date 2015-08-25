@@ -18,9 +18,11 @@ Ledger for Lino Welfare
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
-This document describes the new functionalities added between May and
-September 2015 as a project called "Nebenbuchhaltung
-Sozialhilfeausgaben" (:ticket:`143`).
+This document describes the functionalities for registering social
+aids expenses like client-related payments of social aid, including
+refunding or payment of certain costs.  This is not a complete ledger,
+just a subledger.  It was developed between May and September 2015 as
+ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben").
 
 .. contents::
    :depth: 1
@@ -48,15 +50,12 @@ chart:
 <BLANKLINE>
 
 
+.. _wilfried:
+
 The "accountant" user profile
 =============================
 
-.. _wilfried:
-
-Wilfried
---------
-
-Wilfried is an accountant
+Demo user Wilfried Willems has the user profile of an accountant
 (:class:`lino_welfare.modlib.welfare.roles.LedgerUser`).
 
 >>> p = rt.login('wilfried').get_user().profile
@@ -65,10 +64,23 @@ Accountant
 >>> p.role.__class__
 <class 'lino_welfare.modlib.welfare.roles.LedgerUser'>
 
+Accountants have no direct contact with clients and probably won't use
+the calendar.  But for the first prototype they get :class:`OfficeUser
+<lino.modlib.office.roles.OfficeUser>` functionality so they can
+decide themselves whether they want it.
+
+>>> from lino.modlib.office.roles import OfficeUser
+>>> p.has_required_roles([OfficeUser])
+True
+
+Here is the main menu for accountants:
 
 >>> rt.login('wilfried').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
+- Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
+- Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
@@ -77,8 +89,12 @@ Accountant
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
   - Orte : Länder
+  - Büro : Meine Einfügetexte
   - Buchhaltung : Journale, Zahlungsbedingungen
+  - ÖSHZ : Hilfearten, Kategorien
+  - Lebenslauf : Sprachen
 - Explorer :
+  - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
 - Site : Info

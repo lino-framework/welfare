@@ -11,8 +11,8 @@ have :attr:`lino.core.site.Site.user_profiles_module` point to it.
 
 from lino.core.roles import UserRole, SiteAdmin
 from lino.modlib.office.roles import OfficeOperator
-from lino.modlib.contacts.roles import ContactsUser
-# from lino.modlib.office.roles import OfficeUser
+from lino.modlib.contacts.roles import ContactsStaff
+from lino.modlib.office.roles import OfficeUser
 from lino.modlib.ledger.roles import LedgerStaff, LedgerUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -34,7 +34,7 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, AidsStaff, CBSSUser):
+class ReceptionClerk(OfficeOperator, ContactsStaff, AidsStaff, CBSSUser):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
@@ -60,7 +60,7 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     pass
 
 
-class LedgerUser(LedgerUser, ContactsUser):
+class LedgerUser(LedgerUser, OfficeUser, AidsStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 
