@@ -1211,6 +1211,8 @@ valid_until to end_date.
             for pk, bic, iban in self.sepa_accounts:
                 try:
                     Account.objects.get(partner_id=pk, bic=bic, iban=iban)
+                except Account.MultipleObjectsReturned:
+                    pass
                 except Account.DoesNotExist:
                     obj = Account(partner_id=pk, bic=bic, iban=iban)
                     obj.full_clean()
