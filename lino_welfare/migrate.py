@@ -1201,7 +1201,8 @@ valid_until to end_date.
             kw.update(client_contact_type_id=client_contact_type_id)
             # kw.update(iban=iban)
             # kw.update(bic=bic)
-            self.sepa_accounts.append((id, bic, iban))
+            if iban:
+                self.sepa_accounts.append((id, bic, iban))
             return contacts_Partner(**kw)
         globals_dict.update(create_contacts_partner=create_contacts_partner)
 
