@@ -123,6 +123,7 @@ be selected manually."""
 
 class CreateClientVisit(dd.Action):
     """Create a prompt event from a client."""
+    readonly = False
     show_in_bbar = True
     sort_index = 101
     icon_name = 'hourglass'
