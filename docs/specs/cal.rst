@@ -56,19 +56,22 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
 >>> rt.login('theresia').show(cal.EventsByDay, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============ ======== ============ ================= ============= ===================== ====== ===================================
+============ ======== ============ ================= ============= ===================== ====== ============================
  Start time   Client   Summary      Managed by        Assigned to   Calendar Event Type   Room   Workflow
------------- -------- ------------ ----------------- ------------- --------------------- ------ -----------------------------------
- 08:30:00              Diner        Alicia Allmanns                 Meeting                      **Suggested** → [Notified] [Take]
- 08:30:00              Auswertung   Rolf Rompen                     Meeting                      **Suggested** → [Notified] [Take]
- 09:40:00              Diner        Mélanie Mélard                  Meeting                      **Suggested** → [Notified] [Take]
- 10:20:00              Treffen      Hubert Huppertz                 Meeting                      **Suggested** → [Notified] [Take]
- 10:20:00              Lunch        Robin Rood                      Meeting                      **Suggested** → [Notified] [Take]
- 11:10:00              Rencontre    Romain Raffault                 Meeting                      **Suggested** → [Notified] [Take]
- 13:30:00              Auswertung   Judith Jousten                  Meeting                      **Suggested** → [Notified] [Take]
+------------ -------- ------------ ----------------- ------------- --------------------- ------ ----------------------------
+ 08:30:00              Diner        Alicia Allmanns                 Meeting                      **Suggested** → [Take]
+ 08:30:00              Auswertung   Rolf Rompen                     Meeting                      **Suggested** → [Take]
+ 09:40:00              Diner        Mélanie Mélard                  Meeting                      **Suggested** → [Take]
+ 10:20:00              Treffen      Hubert Huppertz                 Meeting                      **Suggested** → [Take]
+ 10:20:00              Lunch        Robin Rood                      Meeting                      **Suggested** → [Take]
+ 11:10:00              Rencontre    Romain Raffault                 Meeting                      **Suggested** → [Take]
+ 13:30:00              Auswertung   Judith Jousten                  Meeting                      **Suggested** → [Take]
  13:30:00              Treffen      Theresia Thelen                 Meeting                      **Suggested** → [Notified]
-============ ======== ============ ================= ============= ===================== ====== ===================================
+============ ======== ============ ================= ============= ===================== ====== ============================
 <BLANKLINE>
+
+Note how Theresia cannot [Take] her own event (because she has it
+already), and how she set only her own event to [Notified].
 
 Users looking at their events
 =============================

@@ -14,6 +14,7 @@ from lino.api import dd
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+from lino.modlib.contacts.roles import ContactsStaff
 
 from lino_welfare.modlib.pcsw.models import *
 
@@ -159,7 +160,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     created modified
     remarks:30 remarks2:30
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))
+    """, label=_("Miscellaneous"), required_roles=dd.required((SocialStaff, ContactsStaff)))
 
     career = dd.Panel("""
     cvs_emitted
