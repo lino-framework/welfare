@@ -9,7 +9,7 @@ have :attr:`lino.core.site.Site.user_profiles_module` point to it.
 
 """
 
-from lino.core.roles import UserRole, SiteAdmin
+from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
@@ -52,6 +52,12 @@ class ReceptionClerkNewcomers(ReceptionClerk, NewcomersOperator):
     pass
 
 
+class Supervisor(Supervisor, OfficeOperator, ContactsStaff, AidsStaff,
+                 NewcomersOperator):
+    """A backoffice user who can act as others."""
+    pass
+
+
 class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     """A **newcomers reception clerk** is a *reception clerk* who also
     can assign coaches to clients.
@@ -86,4 +92,5 @@ add('300', _("Debts consultant"),              DebtsUser)
 add('400', _("Social agent"),                  SocialAgent)
 add('410', _("Social agent (Manager)"),        SocialStaff)
 add('500', _("Accountant"),                    LedgerUser)
+add('800', _("Supervior"),                     Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')
