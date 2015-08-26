@@ -226,6 +226,8 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
         return settings.SITE.site_config.system_note_type
 
     def get_system_note_recipients(self, request, silent):
+        if silent:
+            return
         if self.user.email:
             yield "%s <%s>" % (unicode(self.user), self.user.email)
         for u in settings.SITE.user_model.objects.filter(

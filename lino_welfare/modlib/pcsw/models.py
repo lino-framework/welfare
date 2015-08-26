@@ -497,6 +497,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         return settings.SITE.site_config.system_note_type
 
     def get_system_note_recipients(self, request, silent):
+        if silent:
+            return
         for u in settings.SITE.user_model.objects.filter(
                 coaching_supervisor=True).exclude(email=''):
             yield "%s <%s>" % (unicode(u), u.email)

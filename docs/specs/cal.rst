@@ -54,8 +54,11 @@ Events today
 
 Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
->>> rt.login('theresia').show(cal.EventsByDay, language='en')
+>>> rt.login('theresia').show(cal.EventsByDay, language='en', header_level=1)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+========================
+Thu 5/22/14 (22.05.2014)
+========================
 ============ ======== ============ ================= ============= ===================== ====== ============================
  Start time   Client   Summary      Managed by        Assigned to   Calendar Event Type   Room   Workflow
 ------------ -------- ------------ ----------------- ------------- --------------------- ------ ----------------------------
@@ -224,3 +227,57 @@ following calendars:
 ==== ========== ===========
 <BLANKLINE>
 
+
+Events by client
+================
+
+This table is special in that it shows not only events directly
+related to the client (i.e. :attr:`Event.project` pointing to it) but
+also those where this client is among the guests.
+
+>>> candidates = set()
+>>> for obj in cal.Guest.objects.all():
+...     if obj.partner and obj.partner_id != obj.event.project_id:
+...         #print obj, obj.event.project_id, obj.partner_id
+...         candidates.add(obj.event.project_id)
+>>> print sorted(candidates)
+[116, 127, 129, 133, 144, 146, 147, 157, 159, 166, 168, 173, 177, 179, 181]
+
+
+>>> obj = pcsw.Client.objects.get(pk=127)
+>>> rt.show(cal.EventsByClient, obj, header_level=1, language="en")
+==============================
+Events of EVERS Eberhart (127)
+==============================
+========================== ================= ================ ===============
+ When                       Managed by        Summary          Workflow
+-------------------------- ----------------- ---------------- ---------------
+ **Mon 11/19/12 (09:00)**   Alicia Allmanns   Termin 1         **Suggested**
+ **Wed 12/19/12 (09:00)**   Alicia Allmanns   Termin 2         **Suggested**
+ **Mon 1/21/13 (09:00)**    Alicia Allmanns   Termin 3         **Suggested**
+ **Thu 2/21/13 (09:00)**    Alicia Allmanns   Termin 4         **Suggested**
+ **Thu 3/21/13 (09:00)**    Alicia Allmanns   Termin 5         **Suggested**
+ **Mon 4/22/13 (09:00)**    Alicia Allmanns   Termin 6         **Suggested**
+ **Wed 5/22/13 (09:00)**    Alicia Allmanns   Termin 7         **Suggested**
+ **Mon 6/24/13 (09:00)**    Alicia Allmanns   Termin 8         **Suggested**
+ **Wed 7/24/13 (09:00)**    Alicia Allmanns   Termin 9         **Suggested**
+ **Mon 8/26/13 (09:00)**    Alicia Allmanns   Termin 10        **Suggested**
+ **Thu 9/26/13 (09:00)**    Alicia Allmanns   Termin 11        **Suggested**
+ **Mon 10/28/13 (09:00)**   Caroline Carnol   Termin 12        **Suggested**
+ **Thu 11/28/13 (09:00)**   Caroline Carnol   Termin 13        **Suggested**
+ **Mon 12/30/13 (09:00)**   Caroline Carnol   Termin 14        **Suggested**
+ **Thu 1/30/14 (09:00)**    Caroline Carnol   Termin 15        **Suggested**
+ **Wed 3/12/14 (09:00)**    Caroline Carnol   Termin 1         **Suggested**
+ **Tue 4/15/14 (09:00)**    Caroline Carnol   Termin 1         **Suggested**
+ **Thu 5/15/14 (09:00)**    Caroline Carnol   Termin 2         **Suggested**
+ **Thu 5/22/14**            Mélanie Mélard    Urgent problem   **Notified**
+ **Fri 5/23/14 (09:40)**    Rolf Rompen       Erstgespräch     **Draft**
+ **Mon 6/16/14 (09:00)**    Caroline Carnol   Termin 3         **Suggested**
+ **Wed 7/16/14 (09:00)**    Caroline Carnol   Termin 4         **Suggested**
+ **Mon 8/18/14 (09:00)**    Caroline Carnol   Termin 5         **Suggested**
+ **Thu 9/18/14 (09:00)**    Caroline Carnol   Termin 6         **Suggested**
+ **Mon 10/20/14 (09:00)**   Caroline Carnol   Termin 7         **Suggested**
+ **Thu 11/20/14 (09:00)**   Caroline Carnol   Termin 8         **Suggested**
+ **Mon 12/22/14 (09:00)**   Caroline Carnol   Termin 9         **Suggested**
+========================== ================= ================ ===============
+<BLANKLINE>

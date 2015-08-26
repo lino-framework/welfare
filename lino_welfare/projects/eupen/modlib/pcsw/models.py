@@ -160,7 +160,8 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     created modified
     remarks:30 remarks2:30
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required_roles=dd.required((SocialStaff, ContactsStaff)))
+    """, label=_("Miscellaneous"),
+        required_roles=dd.required((SocialStaff, ContactsStaff)))
 
     career = dd.Panel("""
     cvs_emitted

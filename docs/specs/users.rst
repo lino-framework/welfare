@@ -41,6 +41,7 @@ This is the list of user profiles:
  400                 Social agent
  410                 Social agent (Manager)
  500                 Accountant
+ 800                 Supervisor
  900     admin       Administrator
 ======= =========== ===============================
 <BLANKLINE>

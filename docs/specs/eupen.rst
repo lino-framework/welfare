@@ -282,9 +282,9 @@ Each window layout defines a given set of fields.
 - accounts.Groups.insert (viewable for admin) : name, name_fr, name_en, account_type, ref
 - addresses.Addresses.detail (viewable for admin) : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert (viewable for admin) : country, city, street, street_no, street_box, address_type, remark
-- aids.AidTypes.detail (viewable for 110, 210, 220, 410, 500, admin) : id, short_name, confirmation_type, name, name_fr, name_en, excerpt_title, excerpt_title_fr, excerpt_title_en, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
-- aids.AidTypes.insert (viewable for 110, 210, 220, 410, 500, admin) : name, name_fr, name_en, confirmation_type
-- aids.Categories.insert (viewable for 110, 210, 220, 410, 500, admin) : id, name, name_fr, name_en
+- aids.AidTypes.detail (viewable for all except anonymous, 100, 120, 200, 300, 400) : id, short_name, confirmation_type, name, name_fr, name_en, excerpt_title, excerpt_title_fr, excerpt_title_en, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
+- aids.AidTypes.insert (viewable for all except anonymous, 100, 120, 200, 300, 400) : name, name_fr, name_en, confirmation_type
+- aids.Categories.insert (viewable for all except anonymous, 100, 120, 200, 300, 400) : id, name, name_fr, name_en
 - aids.Grantings.detail (viewable for all except anonymous) : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
 - aids.Grantings.insert (viewable for all except anonymous) : client, aid_type, signer, board, decision_date, start_date, end_date
 - aids.GrantingsByClient.insert (viewable for all except anonymous) : aid_type, board, decision_date, start_date, end_date
@@ -305,7 +305,7 @@ Each window layout defines a given set of fields.
 - cal.EventTypes.insert (viewable for 110, 410, admin) : name, name_fr, name_en, invite_client
 - cal.Events.detail (viewable for 110, 410, admin) : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert (viewable for 110, 410, admin) : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.EventsByClient.insert (viewable for all except anonymous, 210, 220) : event_type, summary, start_date, start_time, end_date, end_time
+- cal.EventsByClient.insert (viewable for all except anonymous, 210, 220, 800) : event_type, summary, start_date, start_time, end_date, end_time
 - cal.GuestRoles.insert (viewable for admin) : id, name, name_fr, name_en
 - cal.GuestStates.wf1 (viewable for admin) : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 (viewable for admin) : notify_subject, notify_body, notify_silent
@@ -317,17 +317,17 @@ Each window layout defines a given set of fields.
 - cal.Rooms.insert (viewable for 110, 410, admin) : id, name, name_fr, name_en
 - cal.Tasks.detail (viewable for 110, 410, admin) : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert (viewable for 110, 410, admin) : summary, user, project
-- cal.TasksByController.insert (viewable for all except anonymous, 210, 220) : summary, start_date, due_date, user, delegated
-- cbss.IdentifyPersonRequests.detail (viewable for all except anonymous, 500) : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, response_xml, info_messages, debug_messages
-- cbss.IdentifyPersonRequests.insert (viewable for all except anonymous, 500) : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
-- cbss.ManageAccessRequests.detail (viewable for all except anonymous, 500) : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, response_xml, info_messages, debug_messages
-- cbss.ManageAccessRequests.insert (viewable for all except anonymous, 500) : person, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date
-- cbss.RetrieveTIGroupsRequests.detail (viewable for all except anonymous, 500) : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
-- cbss.RetrieveTIGroupsRequests.insert (viewable for all except anonymous, 500) : person, national_id, language, history
+- cal.TasksByController.insert (viewable for all except anonymous, 210, 220, 800) : summary, start_date, due_date, user, delegated
+- cbss.IdentifyPersonRequests.detail (viewable for all except anonymous, 500, 800) : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.IdentifyPersonRequests.insert (viewable for all except anonymous, 500, 800) : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
+- cbss.ManageAccessRequests.detail (viewable for all except anonymous, 500, 800) : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.ManageAccessRequests.insert (viewable for all except anonymous, 500, 800) : person, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date
+- cbss.RetrieveTIGroupsRequests.detail (viewable for all except anonymous, 500, 800) : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.RetrieveTIGroupsRequests.insert (viewable for all except anonymous, 500, 800) : person, national_id, language, history
 - changes.Changes.detail (viewable for admin) : time, user, type, master, object, id, diff
 - contacts.Companies.detail (viewable for all except anonymous) : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert (viewable for all except anonymous) : name, language, email, type, id
-- contacts.Companies.merge_row (viewable for 110, 210, 220, 410, admin) : merge_to, reason
+- contacts.Companies.merge_row (viewable for 110, 210, 220, 410, 800, admin) : merge_to, reason
 - contacts.Partners.detail (viewable for all except anonymous) : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
 - contacts.Partners.insert (viewable for all except anonymous) : name, language, email
 - contacts.Persons.create_household (viewable for all except anonymous) : partner, type, head
@@ -335,8 +335,8 @@ Each window layout defines a given set of fields.
 - contacts.Persons.insert (viewable for all except anonymous) : first_name, last_name, gender, language
 - countries.Countries.detail (viewable for all except anonymous) : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert (viewable for all except anonymous) : isocode, inscode, name, name_fr, name_en
-- countries.Places.insert (viewable for 110, 210, 220, 410, admin) : name, name_fr, name_en, country, type, parent, zip_code, id
-- countries.Places.merge_row (viewable for 110, 210, 220, 410, admin) : merge_to, reason
+- countries.Places.insert (viewable for 110, 210, 220, 410, 800, admin) : name, name_fr, name_en, country, type, parent, zip_code, id
+- countries.Places.merge_row (viewable for 110, 210, 220, 410, 800, admin) : merge_to, reason
 - courses.CourseContents.insert (viewable for 110, admin) : id, name
 - courses.CourseOffers.detail (viewable for 100, 110, 120, admin) : id, title, content, provider, guest_role, description
 - courses.CourseOffers.insert (viewable for 100, 110, 120, admin) : provider, content, title
@@ -364,8 +364,8 @@ Each window layout defines a given set of fields.
 - gfks.ContentTypes.insert (viewable for admin) : id, name, app_label, model, base_classes
 - households.Households.detail (viewable for all except anonymous) : type, prefix, name, id
 - households.HouseholdsByType.detail (viewable for all except anonymous) : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
-- households.Types.insert (viewable for 110, 210, 220, 410, admin) : name, name_fr, name_en
-- humanlinks.Links.insert (viewable for 110, 210, 220, 410, admin) : parent, child, type
+- households.Types.insert (viewable for 110, 210, 220, 410, 800, admin) : name, name_fr, name_en
+- humanlinks.Links.insert (viewable for 110, 210, 220, 410, 800, admin) : parent, child, type
 - integ.ActivityReport.show (viewable for 100, 110, 120, admin) : body
 - isip.ContractEndings.insert (viewable for 110, 410, admin) : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartners.insert (viewable for 110, admin) : company, contact_person, contact_role, duties_company
@@ -383,8 +383,8 @@ Each window layout defines a given set of fields.
 - jobs.Offers.insert (viewable for 100, 110, 120, admin) : name, provider, sector, function, selection_from, selection_until, start_date, remark
 - jobs.OldJobsOverview.show (viewable for 100, 110, 120, admin) : body
 - jobs.Schedules.insert (viewable for 110, 410, admin) : id, name, name_fr, name_en
-- languages.Languages.insert (viewable for all except anonymous, 210, 220) : id, iso2, name, name_fr, name_en
-- newcomers.AvailableCoachesByClient.assign_coach (viewable for 110, 120, 200, 220, 300, admin) : notify_subject, notify_body, notify_silent
+- languages.Languages.insert (viewable for all except anonymous, 210, 220, 800) : id, iso2, name, name_fr, name_en
+- newcomers.AvailableCoachesByClient.assign_coach (viewable for all except anonymous, 100, 210, 400, 410, 500) : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail (viewable for 110, 410, admin) : id, name, name_fr, name_en, weight
 - newcomers.Faculties.insert (viewable for 110, 410, admin) : name, name_fr, name_en, weight
 - notes.EventTypes.insert (viewable for 110, 410, admin) : id, name, name_fr, name_en, remark
@@ -399,7 +399,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit (viewable for all except anonymous) : user, summary
 - pcsw.Clients.detail (viewable for all except anonymous) : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert (viewable for all except anonymous) : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row (viewable for 110, 210, 220, 410, admin) : merge_to, aids_SimpleConfirmation, aids_IncomeConfirmation, aids_RefundConfirmation, cv_LanguageKnowledge, pcsw_Coaching, pcsw_Dispense, dupable_clients_Word, properties_PersonProperty, reason
+- pcsw.Clients.merge_row (viewable for 110, 210, 220, 410, 800, admin) : merge_to, aids_SimpleConfirmation, aids_IncomeConfirmation, aids_RefundConfirmation, cv_LanguageKnowledge, pcsw_Coaching, pcsw_Dispense, dupable_clients_Word, properties_PersonProperty, reason
 - pcsw.CoachingEndings.insert (viewable for 110, 410, admin) : id, name, name_fr, name_en, seqno
 - pcsw.Coachings.create_visit (viewable for 110, 410, admin) : user, summary
 - plausibility.Checkers.detail (viewable for admin) : value, name, text
@@ -409,7 +409,7 @@ Each window layout defines a given set of fields.
 - properties.Properties.insert (viewable for admin) : id, group, type, name, name_fr, name_en
 - reception.BusyVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - reception.GoneVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
-- reception.MyWaitingVisitors.detail (viewable for all except anonymous, 210, 220) : event, client, role, state, remark, workflow_buttons
+- reception.MyWaitingVisitors.detail (viewable for all except anonymous, 210, 220, 800) : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail (viewable for all except anonymous) : event, client, role, state, remark, workflow_buttons
 - system.SiteConfigs.detail (viewable for admin) : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail (viewable for admin) : id, name, user, description, text
