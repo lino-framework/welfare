@@ -23,7 +23,7 @@ This document helped us to understand and solve ticket :ticket:`340`
 
 The problem: A reception clerk in Eupen
 (:mod:`lino_welfare.projects.eupen`) should not see the career tab of
-a client because the `required_roles
+a client because the :attr:`required_roles
 <lino.core.permissions.Permittable.required_roles>` of that panel
 include :class:`IntegrationAgent
 <lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they do see
