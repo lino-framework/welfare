@@ -14,6 +14,7 @@ from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
 from lino.modlib.ledger.roles import LedgerStaff, LedgerUser
+from lino.modlib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
@@ -34,7 +35,8 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, ContactsStaff, AidsStaff, CBSSUser):
+class ReceptionClerk(OfficeOperator, ContactsStaff, AidsStaff,
+                     CBSSUser, BeIdUser):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
