@@ -132,8 +132,7 @@ class Confirmable(mixins.DatePeriod):
     class Meta:
         abstract = True
 
-    manager_roles_required = None
-    # manager_level_field = None
+    manager_roles_required = dd.login_required()
     workflow_state_field = 'state'
 
     signer = models.ForeignKey(

@@ -237,8 +237,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
 
     """
 
-    manager_roles_required = IntegrationAgent
-    # manager_level_field = 'integ_level'
+    manager_roles_required = dd.login_required(IntegrationAgent)
 
     TASKTYPE_CONTRACT_APPLIES_UNTIL = 1
 
