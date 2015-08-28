@@ -43,7 +43,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
     >>> from lino.utils.diag import py2rst
     >>> print(py2rst(pcsw.Clients.detail_layout, True))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-    (main) [visible for all except anonymous]:
+    (main) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
     - **Person** (general):
       - (general_1):
         - **None** (overview)
@@ -64,12 +64,12 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleiter** (coaching):
-      - (coaching_1) [visible for all except anonymous, 100, 210, 400, 410, 500]:
+      - (coaching_1) [visible for 110 120 200 220 300 800 admin]:
         - (newcomers_left):
-          - (newcomers_left_1) [visible for all except anonymous]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
-          - **Vermittler** (broker) [visible for all except anonymous]
-          - **Fachbereich** (faculty) [visible for all except anonymous]
-          - **Ablehnungsgrund** (refusal_reason) [visible for all except anonymous]
+          - (newcomers_left_1) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
+          - **Vermittler** (broker) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+          - **Fachbereich** (faculty) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+          - **Ablehnungsgrund** (refusal_reason) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
         - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient)
       - (coaching_2):
         - **Kontakte** (pcsw.ContactsByClient)
@@ -86,51 +86,51 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - **Konten** (sepa.AccountsByClient)
       - **Hilfebeschlüsse** (aids.GrantingsByClient)
     - **Arbeitssuche** (work_tab_1):
-      - (suche) [visible for all except anonymous, 210, 220, 500, 800]:
+      - (suche) [visible for 100 110 120 200 300 400 410 admin]:
         - **Dispenzen** (pcsw.DispensesByClient)
         - **AG-Sperren** (pcsw.ExclusionsByClient)
       - (papers):
         - (papers_1): **Arbeit suchend** (is_seeking), **eingetragen seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
         - **Uploads** (UploadsByClient)
-    - **Lebenslauf** (career) [visible for 100, 110, 120, admin]:
-      - **Erstellte Lebensläufe** (cvs_emitted) [visible for all except anonymous]
+    - **Lebenslauf** (career) [visible for 100 110 120 admin]:
+      - **Erstellte Lebensläufe** (cvs_emitted) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
       - **Studien** (cv.StudiesByPerson)
       - **Ausbildungen** (cv.TrainingsByPerson)
       - **Berufserfahrungen** (cv.ExperiencesByPerson)
-    - **Sprachen** (languages) [visible for 100, 110, 120, admin]:
+    - **Sprachen** (languages) [visible for 100 110 120 admin]:
       - **Sprachkenntnisse** (cv.LanguageKnowledgesByPerson)
       - **Kursanfragen** (courses.CourseRequestsByPerson)
-    - **Kompetenzen** (competences) [visible for 100, 110, 120, admin]:
-      - (competences_1) [visible for all except anonymous]:
-        - **Fachkompetenzen** (cv.SkillsByPerson) [visible for 100, 110, 120, admin]
-        - **Sozialkompetenzen** (cv.SoftSkillsByPerson) [visible for 100, 110, 120, admin]
+    - **Kompetenzen** (competences) [visible for 100 110 120 admin]:
+      - (competences_1) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
+        - **Fachkompetenzen** (cv.SkillsByPerson) [visible for 100 110 120 admin]
+        - **Sozialkompetenzen** (cv.SoftSkillsByPerson) [visible for 100 110 120 admin]
         - **Sonstige Fähigkeiten** (skills)
-      - (competences_2) [visible for all except anonymous]:
-        - **Hindernisse** (cv.ObstaclesByPerson) [visible for 100, 110, 120, admin]
+      - (competences_2) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
+        - **Hindernisse** (cv.ObstaclesByPerson) [visible for 100 110 120 admin]
         - **Sonstige Hindernisse** (obstacles)
-    - **Verträge** (contracts) [visible for 100, 110, 120, admin]:
+    - **Verträge** (contracts) [visible for 100 110 120 admin]:
       - **VSEs** (isip.ContractsByClient)
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
     - **Historie** (history):
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
-    - **Kalender** (calendar) [visible for all except anonymous, 210, 220, 800]:
+    - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 admin]:
       - **Termine** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
-    - **Sonstiges** (misc) [visible for 110, 210, 220, 410, 800, admin]:
-      - (misc_1) [visible for all except anonymous]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)
-      - (misc_2) [visible for all except anonymous]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
-      - (misc_3) [visible for all except anonymous]: **Erstellt** (created), **Bearbeitet** (modified)
-      - (misc_4) [visible for all except anonymous]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
-      - (misc_5) [visible for all except anonymous]:
+    - **Sonstiges** (misc) [visible for 110 210 220 410 800 admin]:
+      - (misc_1) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)
+      - (misc_2) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
+      - (misc_3) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **Erstellt** (created), **Bearbeitet** (modified)
+      - (misc_4) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
+      - (misc_5) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
-    - **ZDSS** (cbss) [visible for all except anonymous, 210, 220, 500, 800]:
-      - (cbss_1) [visible for all except anonymous]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
-      - **Zusammenfassung ZDSS** (cbss_summary) [visible for all except anonymous]
-    - **Schuldnerberatung** (debts) [visible for 300, admin]:
+    - **ZDSS** (cbss) [visible for 100 110 120 200 300 400 410 admin]:
+      - (cbss_1) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
+      - **Zusammenfassung ZDSS** (cbss_summary) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+    - **Schuldnerberatung** (debts) [visible for 300 admin]:
       - **Ist Hauptpartner in folgenden Budgets:** (debts.BudgetsByPartner)
       - **Ist Akteur in folgenden Budgets:** (debts.ActorsByPartner)
     <BLANKLINE>
