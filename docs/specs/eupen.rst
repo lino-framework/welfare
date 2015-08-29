@@ -269,7 +269,6 @@ Each window layout defines a given set of fields.
 
 >>> #settings.SITE.catch_layout_exceptions = False
 
->>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
@@ -431,7 +430,6 @@ Windows and permissions
 
 Each window layout is **viewable** by a given set of user profiles.
 
->>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
@@ -596,9 +594,7 @@ Here is a list of the eid card reader actions and their availability
 per user profile.
 
 >>> from lino.modlib.beid.mixins import BaseBeIdReadCardAction
->>> classes = (BaseBeIdReadCardAction, )
->>> from lino.utils.diag import analyzer
->>> print(analyzer.show_action_permissions(classes))
+>>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - debts.Clients.find_by_beid : visible for 300 admin
 - debts.Clients.read_beid : visible for 300 admin

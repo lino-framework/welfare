@@ -174,3 +174,144 @@ Some choices lists:
 >>> demo_get(
 ...    'robin', 'choices/countries/Countries/actual_country', fields, 8, **kw)
 
+
+Visibility of eID reader action
+===============================
+
+Here is a list of the tables that have the
+:class:`lino.modlib.beid.mixins.FindByBeIdAction` and the user
+profiles that can see it.
+
+>>> from lino.modlib.beid.mixins import FindByBeIdAction
+>>> print(analyzer.show_action_permissions(FindByBeIdAction))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- debts.Clients.find_by_beid : visible for 300 admin
+- integ.Clients.find_by_beid : visible for 100 110 120 admin
+- newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
+- newcomers.NewClients.find_by_beid : visible for 200 300 admin
+- pcsw.AllClients.find_by_beid : visible for 110 410 admin
+- pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
+- pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
+- pcsw.CoachedClients.find_by_beid : visible for 100 110 120 200 300 400 410 admin
+- reception.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
+<BLANKLINE>
+
+
+
+Visibility of merge action
+==========================
+
+Here is a list of the tables that have the
+:class:`lino.core.merge.MergeAction` and the user profiles that can
+see it.
+
+
+
+>>> from lino.core.merge import MergeAction
+>>> print(analyzer.show_action_permissions(MergeAction))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- contacts.Companies.merge_row : visible for 110 210 220 410 800 admin
+- countries.Places.merge_row : visible for 110 210 220 410 800 admin
+- pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin
+<BLANKLINE>
+
+
+
+Visibility of duplicate action
+==============================
+
+Here is a list of the tables that have the
+:class:`lino.mixins.duplicable.Duplicate` and the user profiles that can
+see it.
+
+
+>>> from lino.mixins.duplicable import Duplicate
+>>> print(analyzer.show_action_permissions(Duplicate))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- accounts.Accounts.duplicate : visible for admin
+- accounts.AccountsByChart.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- cal.EventTypes.duplicate : visible for 110 410 admin
+- cal.Events.duplicate : visible for 110 410 admin
+- cal.EventsByClient.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.EventsByController.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.EventsByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- cal.EventsByProject.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.EventsByRoom.duplicate : visible for 110 410 admin
+- cal.EventsByType.duplicate : visible for 110 410 admin
+- cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.OneEvent.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- cal.RemoteCalendars.duplicate : visible for 110 410 admin
+- cbss.AllIdentifyPersonRequests.duplicate : visible for admin
+- cbss.AllManageAccessRequests.duplicate : visible for admin
+- cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin
+- cbss.IdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.IdentifyRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.ManageAccessRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.ManageAccessRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.MyIdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.MyManageAccessRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- cv.EducationLevels.duplicate : visible for 110 admin
+- debts.Actors.duplicate : visible for admin
+- debts.ActorsByBudget.duplicate : visible for 300 admin
+- debts.ActorsByPartner.duplicate : visible for 300 admin
+- debts.AssetsByBudget.duplicate : visible for 300 admin
+- debts.Budgets.duplicate : visible for admin
+- debts.BudgetsByPartner.duplicate : visible for 300 admin
+- debts.DistByBudget.duplicate : visible for 300 admin
+- debts.Entries.duplicate : visible for admin
+- debts.EntriesByAccount.duplicate : visible for admin
+- debts.EntriesByBudget.duplicate : visible for 300 admin
+- debts.EntriesByType.duplicate : visible for 300 admin
+- debts.ExpensesByBudget.duplicate : visible for 300 admin
+- debts.IncomesByBudget.duplicate : visible for 300 admin
+- debts.LiabilitiesByBudget.duplicate : visible for 300 admin
+- debts.MyBudgets.duplicate : visible for 300 admin
+- excerpts.AllExcerpts.duplicate : visible for admin
+- excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 admin
+- finan.BankStatementItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.GrouperItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.ItemsByBankStatement.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.ItemsByGrouper.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.ItemsByJournalEntry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.ItemsByPaymentOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.JournalEntryItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.PaymentOrderItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- integ.CoachingEndingsByType.duplicate : visible for 110 410 admin
+- integ.CoachingEndingsByUser.duplicate : visible for 110 410 admin
+- isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- jobs.JobTypes.duplicate : visible for 110 410 admin
+- ledger.Journals.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- newcomers.Competences.duplicate : visible for 110 410 admin
+- newcomers.CompetencesByFaculty.duplicate : visible for 110 410 admin
+- newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- newcomers.MyCompetences.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.AllNotes.duplicate : visible for 110 410 admin
+- notes.MyNotes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.Notes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.NotesByX.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- pcsw.CoachingEndings.duplicate : visible for 110 410 admin
+- pcsw.DispenseReasons.duplicate : visible for 110 410 admin
+- polls.Choices.duplicate : visible for 110 410 admin
+- polls.ChoicesBySet.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- polls.PollResult.duplicate : visible for 110 410 admin
+- polls.Questions.duplicate : visible for 110 410 admin
+- polls.QuestionsByPoll.duplicate : visible for 100 110 120 200 300 400 410 admin
+- vatless.InvoiceItems.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- vatless.ItemsByInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+<BLANKLINE>

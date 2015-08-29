@@ -234,7 +234,6 @@ are *detail* layouts, *insert* layouts and *action parameter* layouts.
 Each window layout defines a given set of fields.
 
 
->>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
@@ -410,7 +409,6 @@ Windows and permissions
 
 Each window layout is **viewable** by a given set of user profiles.
 
->>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for 100 110 120 200 210 220 300 400 410 500 800 admin

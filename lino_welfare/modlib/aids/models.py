@@ -36,6 +36,7 @@ from .roles import AidsUser, AidsStaff
 
 from .mixins import Confirmable, Confirmation
 from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
+from lino.mixins import ObservedPeriod
 
 
 class Category(mixins.BabelNamed):
@@ -332,6 +333,8 @@ class Grantings(dd.Table):
     """
 
     parameters = dict(
+        observed_event=dd.PeriodEvents.field(
+            blank=True, default=dd.PeriodEvents.active),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,
@@ -340,20 +343,21 @@ class Grantings(dd.Table):
             'aids.AidType',
             blank=True, null=True,
             help_text=_("Only confirmations about this aid type.")),
-        user=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Author"),
-            blank=True, null=True,
-            help_text=_("Only rows created by this user.")),
-        signer=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Signer"),
-            blank=True, null=True,
-            help_text=_("Only rows confirmed (or to be confirmed) "
-                        "by this user.")),
-        state=ConfirmationStates.field(
-            blank=True,
-            help_text=_("Only rows having this state.")))
+        # user=dd.ForeignKey(
+        #     settings.SITE.user_model,
+        #     verbose_name=_("Author"),
+        #     blank=True, null=True,
+        #     help_text=_("Only rows created by this user.")),
+        # signer=dd.ForeignKey(
+        #     settings.SITE.user_model,
+        #     verbose_name=_("Signer"),
+        #     blank=True, null=True,
+        #     help_text=_("Only rows confirmed (or to be confirmed) "
+        #                 "by this user.")),
+        # state=ConfirmationStates.field(
+        #     blank=True,
+        #     help_text=_("Only rows having this state."))
+    )
 
     params_layout = "board aid_type user signer state"
 
@@ -365,12 +369,12 @@ class Grantings(dd.Table):
             qs = qs.filter(aid_type=pv.aid_type)
         if pv.board:
             qs = qs.filter(board=pv.board)
-        if pv.user:
-            qs = qs.filter(user=pv.user)
-        if pv.signer:
-            qs = qs.filter(signer=pv.signer)
-        if pv.state:
-            qs = qs.filter(state=pv.state)
+        # if pv.user:
+        #     qs = qs.filter(user=pv.user)
+        # if pv.signer:
+        #     qs = qs.filter(signer=pv.signer)
+        # if pv.state:
+        #     qs = qs.filter(state=pv.state)
         return qs
 
     @classmethod
@@ -379,7 +383,8 @@ class Grantings(dd.Table):
             yield t
         pv = ar.param_values
 
-        for k in ('board', 'aid_type', 'user', 'signer', 'state'):
+        # for k in ('board', 'aid_type', 'user', 'signer', 'state'):
+        for k in ('board', 'aid_type'):
             v = pv[k]
             if v:
                 yield unicode(self.parameters[k].verbose_name) \
@@ -448,6 +453,7 @@ class GrantingsByType(Grantings):
 ##
 
 class Confirmations(dd.Table):
+    """Abstract base class for all confirmation tables."""
     model = 'aids.Confirmation'
     required_roles = dd.required(AidsStaff)
     order_by = ["-created"]
@@ -455,43 +461,51 @@ class Confirmations(dd.Table):
                    "start_date end_date *"
 
     parameters = dict(
+        observed_event=dd.PeriodEvents.field(
+            blank=True, default=dd.PeriodEvents.active),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,
             help_text=_("Only rows decided by this board.")),
-        user=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Author"),
-            blank=True, null=True,
-            help_text=_("Only rows created by this user.")),
+        # user=dd.ForeignKey(
+        #     settings.SITE.user_model,
+        #     verbose_name=_("Author"),
+        #     blank=True, null=True,
+        #     help_text=_("Only rows created by this user.")),
         aid_type=dd.ForeignKey(
             'aids.AidType',
             blank=True, null=True,
             help_text=_("Only confirmations about this aid type.")),
-        signer=dd.ForeignKey(
-            settings.SITE.user_model,
-            verbose_name=_("Signer"),
-            blank=True, null=True,
-            help_text=_("Only rows confirmed (or to be confirmed) "
-                        "by this user.")),
-        state=ConfirmationStates.field(
-            blank=True,
-            help_text=_("Only rows having this state.")))
+        # signer=dd.ForeignKey(
+        #     settings.SITE.user_model,
+        #     verbose_name=_("Signer"),
+        #     blank=True, null=True,
+        #     help_text=_("Only rows confirmed (or to be confirmed) "
+        #                 "by this user.")),
+        # state=ConfirmationStates.field(
+        #     blank=True,
+        #     help_text=_("Only rows having this state."))
+    )
 
-    params_layout = "board signer user aid_type state"
+    params_layout = """start_date end_date observed_event board signer user
+    aid_type state client gender"""
 
     @classmethod
     def get_request_queryset(self, ar):
         qs = super(Confirmations, self).get_request_queryset(ar)
         pv = ar.param_values
+        if pv.observed_event:
+            qs = pv.observed_event.add_filter(qs, pv)
         if pv.aid_type:
             qs = qs.filter(granting__aid_type=pv.aid_type)
+        if pv.gender:
+            qs = qs.filter(client__gender=pv.gender)
         if pv.board:
             qs = qs.filter(granting__board=pv.board)
-        if pv.signer:
-            qs = qs.filter(signer=pv.signer)
-        if pv.state:
-            qs = qs.filter(state=pv.state)
+        # if pv.signer:
+        #     qs = qs.filter(signer=pv.signer)
+        # if pv.state:
+        #     qs = qs.filter(state=pv.state)
         return qs
 
     @classmethod
