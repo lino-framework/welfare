@@ -153,12 +153,11 @@ class RefundsByPerson(SiblingsByPerson):
     column_names = "age:10 gender person_info amount"
     child_tariff = Decimal(10)
     adult_tariff = Decimal(20)
-    ADULT_AGE = datetime.timedelta(days=18*365)
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, obj, ar):
         age = obj.get_age(dd.today())
-        if age is None or age <= self.ADULT_AGE:
+        if age is None or age <= dd.plugins.households.adult_age:
             return self.child_tariff
         return self.adult_tariff
 
@@ -183,7 +182,7 @@ class RefundsByPerson(SiblingsByPerson):
         children = adults = 0
         for obj in cls.request(master_instance=person):
             age = obj.get_age(today)
-            if age is None or age <= cls.ADULT_AGE:
+            if age is None or age <= dd.plugins.households.adult_age:
                 children += 1
             else:
                 adults += 1
@@ -214,7 +213,7 @@ class PopulateMembers(dd.Action):
                     child = childlnk.child
                     if not child.id in known_children:
                         age = child.get_age(today)
-                        if age is None or age <= self.ADULT_AGE:
+                        if age is None or age <= dd.plugins.households.adult_age:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
                                 cr = MemberRoles.child
@@ -245,10 +244,12 @@ dd.inject_action(
     populate_members=PopulateMembers())
 
 
-def get_household_summary(person, today=None, adult_age=18):
+def get_household_summary(person, today=None, adult_age=None):
     """
     Note that members without `birth_date` are considered as children.
     """
+    if adult_age is None:
+        adult_age = dd.plugins.households.adult_age
     ar = SiblingsByPerson.request(master_instance=person)
     if ar.get_total_count() == 0:
         return ar.no_data_text
