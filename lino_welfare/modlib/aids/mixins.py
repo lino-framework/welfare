@@ -247,12 +247,10 @@ class Confirmation(
     allow_cascaded_delete = ['client']
 
     client = dd.ForeignKey(
-        'pcsw.Client',
-        related_name="%(app_label)s_%(class)s_set_by_client")
+        'pcsw.Client', related_name="%(app_label)s_%(class)s_set_by_client")
     granting = models.ForeignKey('aids.Granting', blank=True, null=True)
     remark = dd.RichTextField(
-        _("Remark"),
-        blank=True, format='html')
+        _("Remark"), blank=True, format='html')
     language = dd.LanguageField(blank=True)
 
     @classmethod

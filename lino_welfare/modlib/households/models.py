@@ -148,18 +148,17 @@ MembersByHousehold.column_names = SiblingsByPerson.column_names
 MembersByHousehold.order_by = SiblingsByPerson.order_by
 MembersByHousehold.auto_fit_column_widths = True
 
-ADULT_AGE = datetime.timedelta(days=18*365)
-
 
 class RefundsByPerson(SiblingsByPerson):
     column_names = "age:10 gender person_info amount"
     child_tariff = Decimal(10)
     adult_tariff = Decimal(20)
+    ADULT_AGE = datetime.timedelta(days=18*365)
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, obj, ar):
         age = obj.get_age(dd.today())
-        if age is None or age <= ADULT_AGE:
+        if age is None or age <= self.ADULT_AGE:
             return self.child_tariff
         return self.adult_tariff
 
@@ -170,6 +169,25 @@ class RefundsByPerson(SiblingsByPerson):
         # if obj.person_id:
         #     elems += obj.person.get_name_elems(ar)
         return E.p(*elems)
+
+    @classmethod
+    def get_adults_and_children(cls, person, today):
+        """Return a tuble with two integers: number of adults and number of
+        children in the primary household of the given person on the
+        given date `today`.
+
+        Used by
+        :class:`lino_welfare.modlib.aids.models.Confirmations`.
+
+        """
+        children = adults = 0
+        for obj in cls.request(master_instance=person):
+            age = obj.get_age(today)
+            if age is None or age <= cls.ADULT_AGE:
+                children += 1
+            else:
+                adults += 1
+        return (adults, children)
 
 
 class PopulateMembers(dd.Action):
@@ -196,7 +214,7 @@ class PopulateMembers(dd.Action):
                     child = childlnk.child
                     if not child.id in known_children:
                         age = child.get_age(today)
-                        if age is None or age <= ADULT_AGE:
+                        if age is None or age <= self.ADULT_AGE:
                             childmbr = new_children.get(child.id, None)
                             if childmbr is None:
                                 cr = MemberRoles.child

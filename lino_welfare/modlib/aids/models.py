@@ -453,7 +453,12 @@ class GrantingsByType(Grantings):
 ##
 
 class Confirmations(dd.Table):
-    """Abstract base class for all confirmation tables."""
+    """Abstract base class for all confirmation tables.
+
+    Note that Lino is not currently able to render tables on abstract
+    database models.
+
+    """
     model = 'aids.Confirmation'
     required_roles = dd.required(AidsStaff)
     order_by = ["-created"]
@@ -520,6 +525,18 @@ class Confirmations(dd.Table):
                 yield unicode(self.parameters[k].verbose_name) \
                     + ' ' + unicode(v)
 
+    @dd.virtualfield(models.IntegerField(_("Adults")))
+    def num_adults(self, obj, ar):
+        ac = rt.modules.households.RefundsByPerson.get_adults_and_children(
+            obj.client, obj.start_date or obj.end_date or dd.today())
+        return ac[0]
+
+    @dd.virtualfield(models.IntegerField(_("Children")))
+    def num_children(self, obj, ar):
+        ac = rt.modules.households.RefundsByPerson.get_adults_and_children(
+            obj.client, obj.start_date or obj.end_date or dd.today())
+        return ac[1]
+            
 
 # class ConfirmationsToSign(Confirmations):
 #     label = _("Aid confirmations to sign")

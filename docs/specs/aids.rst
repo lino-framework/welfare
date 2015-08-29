@@ -1,10 +1,11 @@
+.. _welfare.specs.aids:
 .. _welfare.tested.aids:
 
-=========================
-Social aids (tested tour)
-=========================
+======================
+The Social Aids module
+======================
 
-This document is a technical tour into the
+This document describes the functionality implemented by the
 :mod:`lino_welfare.modlib.aids` module.
 
 ..  To test only this document:
@@ -27,8 +28,8 @@ This document is a technical tour into the
    :depth: 2
 
 
-ConfirmationTypes
-=================
+Confirmation types
+==================
 
 :class:`ConfirmationTypes
 <lino_welfare.modlib.aids.choicelists.ConfirmationTypes>` is a
@@ -55,24 +56,24 @@ Aid types
 
 This list can be modified by a user with admin level.
 
->>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template")
+>>> ses.show(aids.AidTypes, column_names="name confirmed_by_primary_coach body_template id")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================================================= =========================== ===============================
- Bezeichnung                                       Primärbegleiter bestätigt   Textkörper-Vorlage
-------------------------------------------------- --------------------------- -------------------------------
- Ausländerbeihilfe                                 Ja                          foreigner_income.body.html
- Dringende Medizinische Hilfe                      Ja                          urgent_medical_care.body.html
- Eingliederungseinkommen                           Ja                          integ_income.body.html
- Erstattung                                        Ja                          certificate.body.html
- Feste Beihilfe                                    Ja                          fixed_income.body.html
- Heizkosten                                        Ja                          heating_refund.body.html
- Kleiderkammer                                     Ja                          clothing_bank.body.html
- Lebensmittelbank                                  Nein                        food_bank.body.html
- Möbellager                                        Ja                          furniture.body.html
- Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          medical_refund.body.html
- Übernahmeschein                                   Ja                          certificate.body.html
+================================================= =========================== =============================== ====
+ Bezeichnung                                       Primärbegleiter bestätigt   Textkörper-Vorlage              ID
+------------------------------------------------- --------------------------- ------------------------------- ----
+ Ausländerbeihilfe                                 Ja                          foreigner_income.body.html      2
+ Dringende Medizinische Hilfe                      Ja                          urgent_medical_care.body.html   7
+ Eingliederungseinkommen                           Ja                          integ_income.body.html          1
+ Erstattung                                        Ja                          certificate.body.html           4
+ Feste Beihilfe                                    Ja                          fixed_income.body.html          3
+ Heizkosten                                        Ja                          heating_refund.body.html        9
+ Kleiderkammer                                     Ja                          clothing_bank.body.html         11
+ Lebensmittelbank                                  Nein                        food_bank.body.html             10
+ Möbellager                                        Ja                          furniture.body.html             8
+ Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          medical_refund.body.html        6
+ Übernahmeschein                                   Ja                          certificate.body.html           5
  **Total (11 Zeilen)**                             **10**
-================================================= =========================== ===============================
+================================================= =========================== =============================== ====
 <BLANKLINE>
 
 
@@ -319,28 +320,78 @@ Bosten-Bocken A
 Refund confirmations
 ====================
 
->>> column_names = "id granting "
->>> column_names += "granting__client "
->>> column_names += "pharmacy doctor_type doctor"
->>> rt.show(aids.RefundConfirmations, column_names=column_names)
-==== ================== ====================== ================== ================ =====================
- ID   Hilfebeschluss     Klient                 Apotheke           Art des Arztes   Arzt
----- ------------------ ---------------------- ------------------ ---------------- ---------------------
- 12   DMH/28.05.14/144   LAZARUS Line (144)                        Kinderarzt       Dr. Killian KIMMEL
- 11   DMH/28.05.14/144   LAZARUS Line (144)                        Zahnarzt         Dr. Carmen CASTOU
- 10   DMH/28.05.14/144   LAZARUS Line (144)                        Hausarzt         Werner WEHNICHT
- 9    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Arzt             Waltraud WALDMANN
- 8    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Kinderarzt       Dr. Killian KIMMEL
- 7    DMH/28.05.14/142   LAMBERTZ Guido (142)                      Zahnarzt         Dr. Walter WALDMANN
- 6    AMK/27.05.14/141   KAIVERS Karl (141)                        Hausarzt         Werner WEHNICHT
- 5    AMK/27.05.14/141   KAIVERS Karl (141)                        Arzt             Waltraud WALDMANN
- 4    AMK/27.05.14/141   KAIVERS Karl (141)     Apotheke Schunck   Kinderarzt       Dr. Killian KIMMEL
- 3    AMK/27.05.14/139   JONAS Josef (139)                         Zahnarzt         Dr. Carmen CASTOU
- 2    AMK/27.05.14/139   JONAS Josef (139)                         Hausarzt         Werner WEHNICHT
- 1    AMK/27.05.14/139   JONAS Josef (139)      Apotheke Reul      Arzt             Waltraud WALDMANN
-==== ================== ====================== ================== ================ =====================
+Some example of how to view refund confirmations.
+
+>>> cn = "id granting"
+>>> cn += " granting__client granting__aid_type"
+>>> cn += " start_date end_date"
+>>> #cn += " pharmacy doctor"
+>>> rt.show(aids.RefundConfirmations, column_names=cn)
+==== ================== ====================== ================================================= ============= ==========
+ ID   Hilfebeschluss     Klient                 Hilfeart                                          Periode vom   bis
+---- ------------------ ---------------------- ------------------------------------------------- ------------- ----------
+ 12   DMH/28.05.14/144   LAZARUS Line (144)     Dringende Medizinische Hilfe                      28.05.14      28.05.15
+ 11   DMH/28.05.14/144   LAZARUS Line (144)     Dringende Medizinische Hilfe                      28.05.14      28.05.15
+ 10   DMH/28.05.14/144   LAZARUS Line (144)     Dringende Medizinische Hilfe                      28.05.14      28.05.15
+ 9    DMH/28.05.14/142   LAMBERTZ Guido (142)   Dringende Medizinische Hilfe                      28.05.14
+ 8    DMH/28.05.14/142   LAMBERTZ Guido (142)   Dringende Medizinische Hilfe                      28.05.14
+ 7    DMH/28.05.14/142   LAMBERTZ Guido (142)   Dringende Medizinische Hilfe                      28.05.14
+ 6    AMK/27.05.14/141   KAIVERS Karl (141)     Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      27.05.14
+ 5    AMK/27.05.14/141   KAIVERS Karl (141)     Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      27.05.14
+ 4    AMK/27.05.14/141   KAIVERS Karl (141)     Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      27.05.14
+ 3    AMK/27.05.14/139   JONAS Josef (139)      Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      26.06.14
+ 2    AMK/27.05.14/139   JONAS Josef (139)      Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      26.06.14
+ 1    AMK/27.05.14/139   JONAS Josef (139)      Übernahme von Arzt- und/oder Medikamentenkosten   27.05.14      26.06.14
+==== ================== ====================== ================================================= ============= ==========
 <BLANKLINE>
 
+>>> cn = "id client start_date end_date"
+>>> pv = dict(client=pcsw.Client.objects.get(pk=144))
+>>> rt.show(aids.RefundConfirmations, column_names=cn, param_values=pv)
+==== ==================== ============= ==========
+ ID   Klient               Periode vom   bis
+---- -------------------- ------------- ----------
+ 12   LAZARUS Line (144)   28.05.14      28.05.15
+ 11   LAZARUS Line (144)   28.05.14      28.05.15
+ 10   LAZARUS Line (144)   28.05.14      28.05.15
+==== ==================== ============= ==========
+<BLANKLINE>
+
+>>> cn = "id client start_date end_date"
+>>> pv = dict(aid_type=aids.AidType.objects.get(pk=7))
+>>> rt.show(aids.RefundConfirmations, column_names=cn, param_values=pv)
+==== ====================== ============= ==========
+ ID   Klient                 Periode vom   bis
+---- ---------------------- ------------- ----------
+ 12   LAZARUS Line (144)     28.05.14      28.05.15
+ 11   LAZARUS Line (144)     28.05.14      28.05.15
+ 10   LAZARUS Line (144)     28.05.14      28.05.15
+ 9    LAMBERTZ Guido (142)   28.05.14
+ 8    LAMBERTZ Guido (142)   28.05.14
+ 7    LAMBERTZ Guido (142)   28.05.14
+==== ====================== ============= ==========
+<BLANKLINE>
+
+
+Number of children and adults in household
+==========================================
+
+>>> cn = "id client start_date end_date num_adults num_children"
+>>> #rt.show(aids.RefundConfirmations, column_names=cn)
+>>> #rt.show(aids.SimpleConfirmations, column_names=cn)
+>>> #rt.show(aids.IncomeConfirmations, column_names=cn)
+
+>>> pv = dict(client=pcsw.Client.objects.get(pk=181))
+>>> rt.show(aids.IncomeConfirmations, column_names=cn, param_values=pv)
+==== ======================== ============= ===== ======== ========
+ ID   Klient                   Periode vom   bis   Adults   Kinder
+---- ------------------------ ------------- ----- -------- --------
+ 49   JEANÉMART Jérôme (181)   02.07.14            2        0
+ 48   JEANÉMART Jérôme (181)   08.03.13            2        0
+ 47   JEANÉMART Jérôme (181)   08.03.13            2        0
+                                                   **6**    **0**
+==== ======================== ============= ===== ======== ========
+<BLANKLINE>
 
 
 Creating a doctor
