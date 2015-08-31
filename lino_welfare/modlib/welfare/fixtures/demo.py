@@ -274,7 +274,8 @@ def objects():
         first_name=u"Alicia", last_name=u"Allmanns",
         email=settings.SITE.demo_email,
         city=kettenis, country='BE',
-        gender=dd.Genders.female, language='fr')
+        # gender=dd.Genders.female,  # don't set gender
+        language='fr')
     yield alicia
     alicia = users.User(
         username="alicia", partner=alicia, profile='100',

@@ -44,6 +44,7 @@ General
    tasks
    countries
    notes
+   ddh
    /tested/2015/0219
    /tested/2015/0715
    /tested/2015/0717

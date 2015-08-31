@@ -432,7 +432,7 @@ Each window layout is **viewable** by a given set of user profiles.
 
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- about.About.show : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- about.About.show : visible for all
 - about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - accounts.AccountCharts.detail : visible for admin
 - accounts.Accounts.detail : visible for admin

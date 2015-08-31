@@ -187,7 +187,7 @@ Since this is not very human-readable, we are going to analyze it with
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-DUBOIS Robin (179) ist ☐ Vorstand in Robin & Mélanie Dubois-Mélard Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
+DUBOIS Robin (179) ist ☐ Vorstand in Robin & Lisa Dubois-Lahm Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
 
 >>> links = soup.find_all('a')
 
@@ -212,7 +212,7 @@ The next link is the name of the household, and clicking on it would
 equally execute some Javascript code:
 
 >>> print(links[1].string)
-Robin & Mélanie Dubois-Mélard
+Robin & Lisa Dubois-Lahm
 >>> print(links[1].get('href'))
 javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 236 })
 

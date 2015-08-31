@@ -101,6 +101,9 @@ class SpecsTests(BaseTestCase):
     def test_users(self):
         return self.run_simple_doctests('docs/specs/users.rst')
 
+    def test_ddh(self):
+        return self.run_simple_doctests('docs/specs/ddh.rst')
+
     def test_excerpts(self):
         return self.run_simple_doctests('docs/specs/excerpts.rst')
 

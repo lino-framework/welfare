@@ -28,12 +28,14 @@ class TestCase(TestCase):
     def test01(self):
         """Test whether BrokenGFKs works as expected.
 
-        We create a Client, some Excerpt and a Note whose owner field
-        points to that client.  And then, when we have all these
-        database objects (generically) related to our client, we
-        delete that client. Django does not prevent us from doing it.
+        We create a Client and a Note whose owner field points to that
+        client.  And then, when we have all these database objects
+        (generically) related to our client, we delete that
+        client. Django does not prevent us from doing it.
 
         """
+
+        from django.db.models.deletion import ProtectedError
 
         Client = rt.modules.pcsw.Client
         Note = rt.modules.notes.Note
@@ -65,8 +67,17 @@ class TestCase(TestCase):
         # Djangos original delete method, the Note objects should
         # remain in the database with a stale GFK. should be 1, but it
         # is 0:
-        models.Model.delete(cli)
-        self.assertEqual(Note.objects.all().count(), 0)
+        try:
+            models.Model.delete(cli)
+            self.fail("Failed to raise ProtectedError")
+        except ProtectedError:
+            # ProtectedError: ("Cannot delete some instances of model
+            # 'Client' because they are referenced through a protected
+            # foreign key: 'Note.project'", [Note #1 (u'Ereignis/Notiz
+            # #1')])
+            pass
+
+        self.assertEqual(Note.objects.all().count(), 1)
     
         rst = ar.to_rst()
         self.assertEqual(rst, "Keine Daten anzuzeigen\n")

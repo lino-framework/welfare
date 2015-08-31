@@ -4,6 +4,7 @@
    :toctree:
 
    test_beid
+   test_ddh
    test_isip
    test_sql
    test_households
