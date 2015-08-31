@@ -669,6 +669,10 @@ class SimpleConfirmations(Confirmations):
 
 class AllSimpleConfirmations(SimpleConfirmations):
     required_roles = dd.required(AidsStaff)
+    column_names = (
+        "id client start_date end_date granting "
+        "client__address_column client__gender "
+        "num_adults num_children *")
 
 
 class SimpleConfirmationsByGranting(SimpleConfirmations):
@@ -734,6 +738,10 @@ class IncomeConfirmations(Confirmations):
 
 class AllIncomeConfirmations(IncomeConfirmations):
     required_roles = dd.required(AidsStaff)
+    column_names = (
+        "id client start_date end_date granting "
+        "client__address_column client__gender "
+        "num_adults num_children *")
 
 
 class IncomeConfirmationsByGranting(IncomeConfirmations):
