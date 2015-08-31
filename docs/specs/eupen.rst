@@ -31,7 +31,7 @@ instead of raising an exception:
 >>> pcsw.Client.objects.get(id=127).delete()
 Traceback (most recent call last):
 ...
-Warning: Kann Klient EVERS Eberhart (127) nicht l\xf6schen weil 4 Hilfebeschl\xfcsse darauf verweisen.
+Warning: Kann Klient EVERS Eberhart (127) nicht l\xf6schen weil 18 Bewegungen darauf verweisen.
 
 
 The main menu
@@ -51,12 +51,17 @@ Rolf is the local system administrator, he has a complete menu:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
+- Buchhaltung :
+  - Einkauf : Einkaufsrechnungen (REG)
+  - Hilfen : Payment instructions (AAW)
+  - Finanzjournale : KBC (KBC), PO KBC (POKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
   - System : Broken GFKs
+  - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Hilfetexte, Benutzer
@@ -65,7 +70,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
-  - Buchhaltung : Kontenpläne, Kontengruppen, Konten
+  - Buchhaltung : Kontenpläne, Kontengruppen, Konten, Journale, Zahlungsbedingungen
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -81,6 +86,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - SEPA : Konten
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
+  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
+  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -323,13 +330,13 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
-- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
 - contacts.Companies.merge_row : merge_to, reason
-- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
+- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
-- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, language
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
@@ -359,6 +366,13 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
+- finan.BankStatements.detail : date, balance1, balance2, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.BankStatements.insert : date, user, balance1, balance2
+- finan.FinancialVouchers.detail : date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.FinancialVouchers.insert : date, user, narration
+- finan.Groupers.detail : date, partner, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.Groupers.insert : date, user, partner
+- finan.PaymentOrders.detail : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - gfks.ContentTypes.insert : id, name, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -382,6 +396,10 @@ Each window layout defines a given set of fields.
 - jobs.OldJobsOverview.show : body
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
+- ledger.ActivityReport.show : body
+- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.insert : ref, name, name_fr, name_en, trade_type, voucher_type
+- ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
 - newcomers.Faculties.insert : name, name_fr, name_en, weight
@@ -395,7 +413,7 @@ Each window layout defines a given set of fields.
 - pcsw.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
 - pcsw.ClientStates.wf1 : reason, remark
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_SimpleConfirmation, aids_IncomeConfirmation, aids_RefundConfirmation, cv_LanguageKnowledge, pcsw_Coaching, pcsw_Dispense, dupable_clients_Word, properties_PersonProperty, reason
 - pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
@@ -423,6 +441,9 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
+- vatless.Invoices.detail : id, date, partner, user, due_date, your_ref, bank_account, workflow_buttons, amount, journal, year, number, narration, state, MovementsByVoucher
+- vatless.Invoices.insert : journal, partner, date, amount
+- vatless.InvoicesByJournal.insert : partner, date, amount
 <BLANKLINE>
 
 Windows and permissions
@@ -520,6 +541,13 @@ Each window layout is **viewable** by a given set of user profiles.
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.BankStatements.detail : visible for 500 admin
+- finan.BankStatements.insert : visible for 500 admin
+- finan.FinancialVouchers.detail : visible for 500 admin
+- finan.FinancialVouchers.insert : visible for 500 admin
+- finan.Groupers.detail : visible for 500 admin
+- finan.Groupers.insert : visible for 500 admin
+- finan.PaymentOrders.detail : visible for 500 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
@@ -543,6 +571,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.OldJobsOverview.show : visible for 100 110 120 admin
 - jobs.Schedules.insert : visible for 110 410 admin
 - languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 admin
+- ledger.ActivityReport.show : visible for 500 admin
+- ledger.Journals.detail : visible for 500 admin
+- ledger.Journals.insert : visible for 500 admin
+- ledger.Situation.show : visible for 500 admin
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin
 - newcomers.Faculties.detail : visible for 110 410 admin
 - newcomers.Faculties.insert : visible for 110 410 admin
@@ -584,6 +616,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - users.Users.change_password : visible for admin
 - users.Users.detail : visible for admin
 - users.Users.insert : visible for admin
+- vatless.Invoices.detail : visible for 500 admin
+- vatless.Invoices.insert : visible for 500 admin
+- vatless.InvoicesByJournal.insert : visible for 500 admin
 <BLANKLINE>
 
 

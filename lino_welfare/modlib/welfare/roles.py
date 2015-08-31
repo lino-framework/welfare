@@ -13,7 +13,7 @@ from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
-from lino.modlib.ledger.roles import LedgerStaff, LedgerUser
+from lino.modlib.ledger.roles import LedgerStaff
 from lino.modlib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -68,7 +68,7 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     pass
 
 
-class LedgerUser(LedgerUser, OfficeUser, AidsStaff):
+class LedgerUser(LedgerStaff, OfficeUser, AidsStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 

@@ -119,6 +119,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
     - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 admin]:
       - **Termine** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
+    - **Bewegungen** (MovementsByProject) [visible for 500 admin]
     - **Sonstiges** (misc) [visible for 110 210 220 410 800 admin]:
       - (misc_1) [visible for all]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)
       - (misc_2) [visible for all]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
