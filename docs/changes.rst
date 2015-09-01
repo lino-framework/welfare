@@ -13,6 +13,19 @@ Development
 
 - Miscellaneous bugfixes
 
+Version 1.1.24 (released :blogref:`20150901`)
+=============================================
+
+- Changed Development Status from beta to stable.
+- Lots of changes, especially the murder bug (:blogref:`20150831`)
+
+
+
+Version 1.1.23 (released :blogref:`20150825`)
+=============================================
+
+
+
 Version 1.1.21
 ===============
 

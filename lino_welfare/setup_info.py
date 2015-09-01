@@ -14,7 +14,7 @@
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='1.1.23',  # since 20150825
+    version='1.1.24',  # since 20150825
     install_requires=['lino', 'suds', 'vobject', 'django-iban', 'xlwt'],
     test_suite='tests',
     description=u"A Lino application for Belgian Centres for Public Welfare",
@@ -41,7 +41,7 @@ independant organization.""",
     classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
-Development Status :: 4 - Beta
+Development Status :: 5 - Production/Stable
 Environment :: Web Environment
 Framework :: Django
 Intended Audience :: Developers
