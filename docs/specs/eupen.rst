@@ -31,7 +31,7 @@ instead of raising an exception:
 >>> pcsw.Client.objects.get(id=127).delete()
 Traceback (most recent call last):
 ...
-Warning: Kann Klient EVERS Eberhart (127) nicht l\xf6schen weil 18 Bewegungen darauf verweisen.
+Warning: Kann Partner Evers Eberhart nicht l\xf6schen weil 27 Teilnehmer darauf verweisen.
 
 
 The main menu

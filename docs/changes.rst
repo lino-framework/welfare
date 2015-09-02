@@ -35,8 +35,6 @@ Version 1.1.21
 Version 1.1.19 
 ====================================
 
-http://trac.lino-framework.org/milestone/gx-2014-12
-
 - After the upgrade you can uninstall the `north` and `djangosite`
   packages since Lino no longer needs them.
 - Changes in database see :meth:`migrate_from_1_1_18

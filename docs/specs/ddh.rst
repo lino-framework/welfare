@@ -255,14 +255,20 @@ It is not allowed to delete a person who is being used as the
 ==== ========== ================= =====
 <BLANKLINE>
 
+The message is the same whether you try on the Person or on the Partner:
+
 >>> obj = contacts.Person.objects.get(id=194)
 >>> print(obj.disable_delete())
-Cannot delete Person Alicia ALLMANNS because 1 Users refer to it.
-
-
-You cannot delete a partner when a person exists because MTI children
-are not in `allow_cascaded_delete`:
+Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
 
 >>> obj = contacts.Partner.objects.get(id=194)
 >>> print(obj.disable_delete())
-Cannot delete Partner Allmanns Alicia because 1 Persons refer to it.
+Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
+
+
+You can delete a partner when a person or some other MTI child exists:
+
+>>> obj = contacts.Partner.objects.get(id=200)
+>>> print(obj.disable_delete())
+Cannot delete Partner Die neue Alternative V.o.G. because 2 Budget Entries refer to it.
+
