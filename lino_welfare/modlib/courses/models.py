@@ -570,8 +570,8 @@ class PendingCourseRequests(CourseRequests):
         qs = self.get_request_queryset(ar)
         for obj in qs:
             age = obj.person.get_age()
-            if age is not None:
-                age = age.days / 365
+            # if age is not None:
+            #     age = age.days / 365
             obj._age_in_years = age
             yield obj
 

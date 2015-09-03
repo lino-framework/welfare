@@ -257,11 +257,8 @@ def get_household_summary(person, today=None, adult_age=None):
         today = dd.today()
     adults = children = 0
     for m in ar:
-        # if m.dependency == MemberDependencies.none:
-        #     adults += 1
-        # else:
-        #     children += 1
-        if m.birth_date and m.birth_date.get_age(today) >= adult_age:
+        if m.birth_date is not None and (
+                m.birth_date.get_age(today) >= adult_age):
             adults += 1
         else:
             children += 1

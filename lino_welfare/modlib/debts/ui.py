@@ -22,7 +22,7 @@ from lino.api import dd
 from lino.core.constants import _handle_attr_name
 
 from lino.modlib.accounts.choicelists import AccountTypes
-from lino.modlib.users.mixins import ByUser
+from lino.modlib.users.mixins import My
 
 from lino_welfare.modlib.pcsw import models as pcsw
 
@@ -149,14 +149,14 @@ class Budgets(dd.Table):
         return '<br/>'
 
 
-class MyBudgets(Budgets, ByUser):
+class MyBudgets(My, Budgets):
     required_roles = dd.required(DebtsUser)
 
 
 class BudgetsByPartner(Budgets):
+    required_roles = dd.required(DebtsUser)
     master_key = 'partner'
     label = _("Is partner of these budgets:")
-    required_roles = dd.required(DebtsUser)
 
 
 #

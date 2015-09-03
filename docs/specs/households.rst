@@ -38,6 +38,10 @@ contains fictive family links.
 >>> print(paul)
 Mr Paul FRISCH
 
+>>> print(rt.modules.households.get_household_summary(paul))
+2 adults and 3 children
+
+
 >>> client = Client()
 >>> def check(uri, fieldname):
 ...     url = '/api/%s?fmt=json&an=detail' % uri
@@ -240,3 +244,5 @@ The :func:`lino.api.doctest.get_json_soup` automates this trick:
 >>> links = soup.find_all('a')
 >>> len(links)
 8
+
+

@@ -14,6 +14,8 @@ from lino.api import rt
 
 from lino.modlib.accounts.choicelists import AccountTypes
 
+from lino_welfare.modlib.debts.roles import DebtsUser
+
 
 def n2dec(v):
     return decimal.Decimal("%.2d" % v)
@@ -33,9 +35,13 @@ def objects():
                    first_name="Kerstin", last_name=u"Kerres",
                    profile='300')
     yield kerstin
+    profiles = [
+        p for p in rt.modules.users.UserProfiles.get_list_items()
+        if p.has_required_roles([DebtsUser])]
+    USERS = Cycler(User.objects.filter(profile__in=profiles))
 
     for hh in Household.objects.all():
-        b = Budget(partner_id=hh.id, user=kerstin)
+        b = Budget(partner_id=hh.id, user=USERS.pop())
         b.fill_defaults(None)
         yield b
 

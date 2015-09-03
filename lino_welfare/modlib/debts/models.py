@@ -82,24 +82,16 @@ Vielleicht mit Fußnoten?"""))
         _("Print empty rows"),
         default=False,
         help_text=_("""Check this to print also empty rows for later completion."""))
-    #~ ignore_yearly_incomes = models.BooleanField(
-        #~ verbose_name=_("Ignore yearly incomes"),
-        #~ help_text=_("""Check this to ignore yearly incomes in the :ref:`welfare.debts.DebtsByBudget`."""))
     include_yearly_incomes = models.BooleanField(
         _("Include yearly incomes"),
         default=False,
-        help_text=_("""Check this to include yearly incomes in the Debts Overview table of this Budget."""))
+        help_text=_("Check this to include yearly incomes in the "
+                    "Debts Overview table of this Budget."))
     intro = dd.RichTextField(_("Introduction"), format="html", blank=True)
     conclusion = dd.RichTextField(_("Conclusion"), format="html", blank=True)
     dist_amount = dd.PriceField(_("Distributable amount"), default=120,
         help_text=_("""\
 The total monthly amount available for debts distribution."""))
-
-    #~ def duplicated_fields(self):
-        #~ return dd.fields_list('partner print_todo intro conclusion dist_amount')
-
-    #~ duplicated_fields = """partner print_todos intro
-    #~ conclusion dist_amount actor_set entry_set"""
 
     def __unicode__(self):
         if self.pk is None:

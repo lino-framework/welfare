@@ -43,16 +43,6 @@ def readfile(name):
     return open(fn).read()
 
 
-class WebRequest:
-    method = "POST"
-    subst_user = None
-    requesting_panel = None
-
-    def __init__(self, user, data):
-        self.POST = self.REQUEST = MultiValueDict(data)
-        self.user = user
-
-
 class BeIdTests(RemoteAuthTestCase):
     maxDiff = None
     # override_djangosite_settings = dict(use_java=True)

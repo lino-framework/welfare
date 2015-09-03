@@ -525,3 +525,65 @@ Debts distribution
  **Total (3 rows)**                                **3 600,00**   **100,00**   **120,00**
 =============================== ================= ============== ============ ===========================
 <BLANKLINE>
+
+
+Filtering budgets
+=================
+
+The :menuselection:`Explorer --> Debt mediation --> Budgets` nenu
+command shows the table of all budgets.
+
+>>> kwargs = dict(column_names="id user date partner dist_amount")
+>>> ses.show(debts.Budgets, **kwargs)
+==== ================= ========= =========================== ======================
+ ID   Author            Date      Partner                     Distributable amount
+---- ----------------- --------- --------------------------- ----------------------
+ 1    Kerstin Kerres    5/22/14   Gerkens-Kasennova           120,00
+ 2    Romain Raffault   5/22/14   Huppertz-Jousten            120,00
+ 3    Rolf Rompen       5/22/14   Jeanémart-Thelen            120,00
+ 4    Robin Rood        5/22/14   Denon-Mélard                120,00
+ 5    Kerstin Kerres    5/22/14   Dubois-Lahm                 120,00
+ 6    Romain Raffault   5/22/14   Jeanémart-Vandenmeulenbos   120,00
+ 7    Rolf Rompen       5/22/14   Frisch-Frogemuth            120,00
+ 8    Robin Rood        5/22/14   Frisch-Einzig               120,00
+ 9    Kerstin Kerres    5/22/14   Frisch-Zweith               120,00
+ 10   Romain Raffault   5/22/14   Frisch-Loslever             120,00
+ 11   Rolf Rompen       5/22/14   Adam-Evrard                 120,00
+ 12   Robin Rood        5/22/14   Adam-Freisen                120,00
+ 13   Kerstin Kerres    5/22/14   Braun-Evrard                120,00
+ 14   Romain Raffault   5/22/14   Braun-Freisen               120,00
+                                                              **1 680,00**
+==== ================= ========= =========================== ======================
+<BLANKLINE>
+
+The nenu command :menuselection:`Debts mediation --> My budgets` shows
+the budgets authored by the requesting user.
+
+
+>>> ses.show(debts.MyBudgets, **kwargs)
+==== ============= ========= ================== ======================
+ ID   Author        Date      Partner            Distributable amount
+---- ------------- --------- ------------------ ----------------------
+ 3    Rolf Rompen   5/22/14   Jeanémart-Thelen   120,00
+ 7    Rolf Rompen   5/22/14   Frisch-Frogemuth   120,00
+ 11   Rolf Rompen   5/22/14   Adam-Evrard        120,00
+                                                 **360,00**
+==== ============= ========= ================== ======================
+<BLANKLINE>
+
+In order to see the budgets issued by other users, users can manually
+select that other user in the filter parameter "Author".
+
+>>> pv = dict(user=users.User.objects.get(username='kerstin'))
+>>> kwargs.update(param_values=pv)
+>>> ses.show(debts.Budgets, **kwargs)
+==== ================ ========= =================== ======================
+ ID   Author           Date      Partner             Distributable amount
+---- ---------------- --------- ------------------- ----------------------
+ 1    Kerstin Kerres   5/22/14   Gerkens-Kasennova   120,00
+ 5    Kerstin Kerres   5/22/14   Dubois-Lahm         120,00
+ 9    Kerstin Kerres   5/22/14   Frisch-Zweith       120,00
+ 13   Kerstin Kerres   5/22/14   Braun-Evrard        120,00
+                                                     **480,00**
+==== ================ ========= =================== ======================
+<BLANKLINE>
