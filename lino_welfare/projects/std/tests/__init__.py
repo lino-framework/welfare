@@ -7,6 +7,7 @@
    test_ddh
    test_isip
    test_sql
+   test_sepa
    test_households
    test_dupe_clients
 
