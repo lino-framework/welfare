@@ -68,6 +68,17 @@ class Site(Site):
     def do_site_startup(self):
         
         super(Site, self).do_site_startup()
+
+        from lino.modlib.changes.models import watch_changes as wc
+
+        wc(self.modules.contacts.Partner)
+        wc(self.modules.contacts.Person, master_key='partner_ptr')
+        wc(self.modules.contacts.Company, master_key='partner_ptr')
+        wc(self.modules.pcsw.Client, master_key='partner_ptr')
+
+        wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
+        wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
+
         # from lino.utils.sendchanges import register, subscribe
         # e = register('notes.Note', 'subject body',
         #              update_tpl='note_updated.eml')
