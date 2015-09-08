@@ -1207,18 +1207,18 @@ valid_until to end_date.
 
             globals_dict.update(create_contacts_partner=create_contacts_partner)
 
-        def check_sepa_accounts(loader):
-            Account = rt.modules.sepa.Account
-            for pk, bic, iban in self.sepa_accounts:
-                try:
-                    Account.objects.get(partner_id=pk, bic=bic, iban=iban)
-                except Account.MultipleObjectsReturned:
-                    pass
-                except Account.DoesNotExist:
-                    obj = Account(partner_id=pk, bic=bic, iban=iban)
-                    obj.full_clean()
-                    obj.save()
-                    logger.info("20150825 created %s for partner #%s",
-                                obj, pk)
-        self.after_load(check_sepa_accounts)
+            def check_sepa_accounts(loader):
+                Account = rt.modules.sepa.Account
+                for pk, bic, iban in self.sepa_accounts:
+                    try:
+                        Account.objects.get(partner_id=pk, bic=bic, iban=iban)
+                    except Account.MultipleObjectsReturned:
+                        pass
+                    except Account.DoesNotExist:
+                        obj = Account(partner_id=pk, bic=bic, iban=iban)
+                        obj.full_clean()
+                        obj.save()
+                        logger.info("20150825 created %s for partner #%s",
+                                    obj, pk)
+            self.after_load(check_sepa_accounts)
         return '1.1.23'
