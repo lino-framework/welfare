@@ -1168,43 +1168,44 @@ valid_until to end_date.
 
         globals_dict.update(contenttypes_HelpText=rt.modules.gfks.HelpText)
 
-        self.sepa_accounts = []
+        if dd.is_installed('sepa'):
+            self.sepa_accounts = []
+            contacts_Partner = rt.modules.contacts.Partner
 
-        contacts_Partner = rt.modules.contacts.Partner
+            def create_contacts_partner(id, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, client_contact_type_id, iban, bic):
 
-        def create_contacts_partner(id, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, client_contact_type_id, iban, bic):
-        
-            kw = dict()
-            kw.update(id=id)
-            kw.update(modified=modified)
-            kw.update(created=created)
-            kw.update(country_id=country_id)
-            kw.update(city_id=city_id)
-            kw.update(zip_code=zip_code)
-            kw.update(region_id=region_id)
-            kw.update(addr1=addr1)
-            kw.update(street_prefix=street_prefix)
-            kw.update(street=street)
-            kw.update(street_no=street_no)
-            kw.update(street_box=street_box)
-            kw.update(addr2=addr2)
-            kw.update(name=name)
-            kw.update(language=language)
-            kw.update(email=email)
-            kw.update(url=url)
-            kw.update(phone=phone)
-            kw.update(gsm=gsm)
-            kw.update(fax=fax)
-            kw.update(remarks=remarks)
-            kw.update(is_obsolete=is_obsolete)
-            kw.update(activity_id=activity_id)
-            kw.update(client_contact_type_id=client_contact_type_id)
-            # kw.update(iban=iban)
-            # kw.update(bic=bic)
-            if iban:
-                self.sepa_accounts.append((id, bic, iban))
-            return contacts_Partner(**kw)
-        globals_dict.update(create_contacts_partner=create_contacts_partner)
+                kw = dict()
+                kw.update(id=id)
+                kw.update(modified=modified)
+                kw.update(created=created)
+                kw.update(country_id=country_id)
+                kw.update(city_id=city_id)
+                kw.update(zip_code=zip_code)
+                kw.update(region_id=region_id)
+                kw.update(addr1=addr1)
+                kw.update(street_prefix=street_prefix)
+                kw.update(street=street)
+                kw.update(street_no=street_no)
+                kw.update(street_box=street_box)
+                kw.update(addr2=addr2)
+                kw.update(name=name)
+                kw.update(language=language)
+                kw.update(email=email)
+                kw.update(url=url)
+                kw.update(phone=phone)
+                kw.update(gsm=gsm)
+                kw.update(fax=fax)
+                kw.update(remarks=remarks)
+                kw.update(is_obsolete=is_obsolete)
+                kw.update(activity_id=activity_id)
+                kw.update(client_contact_type_id=client_contact_type_id)
+                # kw.update(iban=iban)
+                # kw.update(bic=bic)
+                if iban:
+                    self.sepa_accounts.append((id, bic, iban))
+                return contacts_Partner(**kw)
+
+            globals_dict.update(create_contacts_partner=create_contacts_partner)
 
         def check_sepa_accounts(loader):
             Account = rt.modules.sepa.Account
