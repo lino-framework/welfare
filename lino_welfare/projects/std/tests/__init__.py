@@ -9,6 +9,7 @@
    test_sql
    test_sepa
    test_households
+   test_debts
    test_dupe_clients
 
 """

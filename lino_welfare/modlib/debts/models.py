@@ -297,7 +297,8 @@ The total monthly amount available for debts distribution."""))
             if household:
                 mr = False
                 mrs = False
-                for m in household.member_set.all():
+                for m in household.member_set.filter(person__isnull=False):
+                # for m in household.member_set.all():
                     #~ if m.role and m.role.header:
                         #~ header = m.role.header
                     if m.person.gender == dd.Genders.male and not mr:

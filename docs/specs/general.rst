@@ -38,7 +38,7 @@ The following table gives an overview of these things.
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 55 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-149 models:
+151 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -81,7 +81,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               4         150
+ contenttypes.ContentType       gfks.ContentTypes               4         152
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -183,6 +183,8 @@ The following table gives an overview of these things.
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
  sepa.Account                   sepa.Accounts                   8         17
+ sepa.Movement                  sepa.MovementTable              2         0
+ sepa.Statement                 sepa.StatementTable             2         0
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11

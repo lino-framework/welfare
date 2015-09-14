@@ -2,14 +2,7 @@
 # Copyright 2015 Luc Saffre
 # License: BSD (see file COPYING for details)
 
-"""This test helped me to understand the problem fixed
-:blogref:`20150130` ("Submitting an ActionFormPanel no longer forwards
-`param_values`").
-
-Since the problem was caused by Javascript code in
-:xfile:`linoweb.js`, it cannot not actually reproduce the problem
-(that would require a Javascript testing framework).
-
+"""Some test cases for :mod:`lino_welfare.modlib.debts`.
 
 How to run only this test::
 
@@ -31,7 +24,6 @@ from bs4 import BeautifulSoup
 
 from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import AttrDict
-from django.utils.datastructures import MultiValueDict
 
 from django.conf import settings
 from lino.modlib.users.choicelists import UserProfiles
@@ -79,6 +71,13 @@ class BeIdTests(RemoteAuthTestCase):
         from lino.modlib.households.fixtures.std import objects
         for o in objects():
             o.save()
+
+        # FIRST TEST : helped me to understand a problem on 20150130
+        # ("Submitting an ActionFormPanel no longer forwards
+        # `param_values`").  Since the problem was caused by
+        # Javascript code in :xfile:`linoweb.js`, it cannot
+        # actually reproduce the problem (that would
+        # require a Javascript testing framework).
 
         # Reception --> Clients --> Detail on client 116
 
@@ -141,4 +140,5 @@ class BeIdTests(RemoteAuthTestCase):
         response = self.client.get(url, REMOTE_USER='root')
         result = self.check_json_result(
             response, 'message eval_js success refresh_all close_window')
+
 
