@@ -217,7 +217,9 @@ Delete handlers are:
 - properties.PropType :
   - PROTECT : properties.PropChoice.type, properties.Property.type
 - sepa.Account :
-  - PROTECT : vatless.AccountInvoice.bank_account, finan.PaymentOrderItem.bank_account
+  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, finan.PaymentOrderItem.bank_account
+- sepa.Statement :
+  - PROTECT : sepa.Movement.statement
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
