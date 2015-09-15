@@ -10,7 +10,7 @@ from lino.api import dd, rt, _
 
 def objects():
 
-    from lino_welfare.modlib.debts.fixtures import objects
+    from lino_welfare.modlib.debts.fixtures.minimal import objects
     yield objects()
 
     ExcerptType = rt.modules.excerpts.ExcerptType
