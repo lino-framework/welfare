@@ -10,6 +10,7 @@
    models
    ui
    fixtures.std
+   fixtures.minimal
    fixtures.demo
 
 

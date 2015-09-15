@@ -328,7 +328,7 @@ The total monthly amount available for debts distribution."""))
         return ar.story2html(self.summary_story(ar))
 
     def data_story(self, ar):
-        """Yield a sequence of """
+        """Yield a sequence of story items about the entered data."""
         # logger.info("20141211 insert_story")
 
         def render(sar):

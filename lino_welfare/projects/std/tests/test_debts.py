@@ -31,11 +31,7 @@ from django.conf import settings
 from lino.modlib.users.choicelists import UserProfiles
 from lino.api.shell import countries, pcsw, users
 from lino.api import rt
-
-
-def readfile(name):
-    fn = os.path.join(os.path.dirname(__file__), name)
-    return open(fn).read()
+from lino.api.doctest import test_client
 
 
 class DebtsTests(RemoteAuthTestCase):
@@ -43,16 +39,6 @@ class DebtsTests(RemoteAuthTestCase):
     # override_djangosite_settings = dict(use_java=True)
 
     def test01(self):
-
-        # is it the right settings module?
-        self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
-                         'lino_welfare.projects.std.settings.demo')
-
-        self.assertEqual(settings.MIDDLEWARE_CLASSES, (
-            'django.middleware.common.CommonMiddleware',
-            'django.middleware.locale.LocaleMiddleware',
-            'lino.core.auth.RemoteUserMiddleware',
-            'lino.utils.ajax.AjaxExceptionResponse'))
 
         u = users.User(username='root',
                        profile=UserProfiles.admin,
@@ -71,6 +57,9 @@ class DebtsTests(RemoteAuthTestCase):
         # obj.full_clean()
         # obj.save()
 
+        from lino_welfare.modlib.debts.fixtures.minimal import objects
+        for o in objects():
+            o.save()
         # from lino.modlib.households.fixtures.std import objects
         # for o in objects():
         #     o.save()
@@ -93,11 +82,43 @@ class DebtsTests(RemoteAuthTestCase):
         # entry. Lino should ignore this entry.
         h.add_member(None)
 
-        b = Budget(partner=h)
+        b = Budget(partner=h, user=u)
         b.save()
         b.fill_defaults()
         # from django.utils.encoding import force_unicode
         # s = ' & '.join([force_unicode(a) for a in b.get_actors()])
         # s = '{0} & {1}'.format(*b.get_actors())
         # self.assertEqual(s, "Mr. & Mrs.")
+
+        ##
+        ## Reproduce ticket #159 ('NoneType' object is not iterable
+        ## (after duplicating a budget)) and verify ticket #471
+        ## (Become the author after duplicating a budget).
+        ##
         
+        self.assertEqual(b.user.username, 'root')
+        self.assertEqual(b.id, 1)
+
+        ou = users.User(username='other',
+                        profile=UserProfiles.admin,
+                        language="en")
+        ou.save()
+        ar = rt.login('other')
+        new = b.duplicate.run_from_code(ar)
+        self.assertEqual(new.user.username, 'other')
+        self.assertEqual(new.id, 2)
+        new.save()  # must save after on_duplicate
+        new = rt.modules.debts.Budget.objects.get(pk=2)
+        self.assertEqual(new.user.username, 'other')
+
+        url = "/api/debts/Budgets/1?&an=duplicate&sr=1"
+        res = test_client.get(url, REMOTE_USER='other')
+        rv = json.loads(res.content)
+        self.assertEqual(
+            rv['message'],
+            u'Duplicated Budget 1 for A-B to Budget 3 for A-B.')
+        new = rt.modules.debts.Budget.objects.get(pk=3)
+
+        # The following line shows that the user did not change to
+        # requesting user because the duplicate had not been saved:
+        self.assertEqual(new.user.username, 'root')
