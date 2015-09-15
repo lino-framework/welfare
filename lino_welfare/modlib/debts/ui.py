@@ -180,19 +180,6 @@ class EntriesByType(Entries):
             return self._account_type.text
         return self._label or self.__name__
 
-    @classmethod
-    def unused_class_init(self):
-        super(EntriesByType, self).class_init()
-        if self._account_type is not None:
-            #~ self.label = self._account_type.text 20130906
-            #~ print 20120411, unicode(self.label)
-            self.known_values = dict(account_type=self._account_type)
-
-    #~ @dd.chooser()
-    #~ def account_choices(cls):
-        #~ print '20120918 account_choices', account_type
-        #~ return accounts.Account.objects.filter(type=cls._account_type)
-
 
 class EntriesByAccount(Entries):
     master_key = 'account'
