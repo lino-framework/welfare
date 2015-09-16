@@ -155,6 +155,9 @@ class SpecsTests(BaseTestCase):
     def test_courses(self):
         return self.run_simple_doctests('docs/specs/courses.rst')
 
+    def test_courses2(self):
+        return self.run_simple_doctests('docs/specs/courses2.rst')
+
 
 class DocsTests(BaseTestCase):
     
