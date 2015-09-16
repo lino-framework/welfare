@@ -1,8 +1,8 @@
 .. _welfare.specs.courses:
 
-=======
-Courses
-=======
+================
+External courses
+================
 
 .. to test only this document:
 
@@ -17,9 +17,18 @@ Courses
     >>> from lino.api.doctest import *
     >>> ses = settings.SITE.login('rolf')
 
+
 .. contents:: 
     :local:
     :depth: 1
+
+
+
+This is about *external* courses
+:mod:`lino_welfare.modlib.courses.models` (not :doc:`courses2`).
+
+>>> rt.modules.courses.__name__
+'lino_welfare.modlib.courses.models'
 
 
 
@@ -75,8 +84,8 @@ Changed since 20130422
 ----------------------
 
 Yes it was a nice feature to silently ignore non installed app_labels
-but mistakenly specifying "person.first_name" instead of "person__first_name"
-did not raise an error. Now it does:
+but mistakenly specifying "person.first_name" instead of
+"person__first_name" did not raise an error. Now it does:
 
 >>> ses.show(courses.PendingCourseRequests,
 ...      column_names="person.first_name content urgent address")

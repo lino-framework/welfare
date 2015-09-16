@@ -68,3 +68,4 @@ Châtelet
    art61
    immersion
    cv2
+   courses2
