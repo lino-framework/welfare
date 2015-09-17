@@ -107,7 +107,7 @@ class DebtsTests(RemoteAuthTestCase):
         new = b.duplicate.run_from_code(ar)
         self.assertEqual(new.user.username, 'other')
         self.assertEqual(new.id, 2)
-        new.save()  # must save after on_duplicate
+        # new.save()  # must save after on_duplicate
         new = rt.modules.debts.Budget.objects.get(pk=2)
         self.assertEqual(new.user.username, 'other')
 
@@ -119,6 +119,4 @@ class DebtsTests(RemoteAuthTestCase):
             u'Duplicated Budget 1 for A-B to Budget 3 for A-B.')
         new = rt.modules.debts.Budget.objects.get(pk=3)
 
-        # The following line shows that the user did not change to
-        # requesting user because the duplicate had not been saved:
-        self.assertEqual(new.user.username, 'root')
+        self.assertEqual(new.user.username, 'other')
