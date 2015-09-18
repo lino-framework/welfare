@@ -11,6 +11,10 @@ what's going on is only `the source code.
 Development
 ===========
 
+Version 1.1.25 (released :blogref:`20150918`)
+=============================================
+
+- Changed license from BSD to AGPL (:ticket:`528`)
 - Miscellaneous bugfixes
 
 Version 1.1.24 (released :blogref:`20150901`)
