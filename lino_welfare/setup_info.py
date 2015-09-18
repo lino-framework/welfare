@@ -60,7 +60,7 @@ Environment :: Web Environment
 Framework :: Django
 Intended Audience :: Developers
 Intended Audience :: System Administrators
-License :: OSI Approved :: GNU Affero General Public License
+License :: OSI Approved :: GNU Affero General Public License v3
 Natural Language :: English
 Natural Language :: French
 Natural Language :: German
