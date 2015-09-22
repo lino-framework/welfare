@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Dummy module to satisfy `lino.modlib.courses` dependency
+Dummy module to satisfy `lino_cosi.lib.courses` dependency
 on a ``sales`` app.
 """
 

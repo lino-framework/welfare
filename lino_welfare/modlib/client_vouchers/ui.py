@@ -26,8 +26,8 @@ from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 
-from lino.modlib.ledger.choicelists import VoucherTypes
-from lino.modlib.ledger.ui import PartnerVouchers, ByJournal
+from lino_cosi.lib.ledger.choicelists import VoucherTypes
+from lino_cosi.lib.ledger.ui import PartnerVouchers, ByJournal
 
 from .models import ClientVoucher
 
@@ -73,7 +73,7 @@ class ClientVouchers(PartnerVouchers):
 class ClientVouchersByJournal(ClientVouchers, ByJournal):
     """Shows all simple invoices of a given journal (whose
     :attr:`Journal.voucher_type` must be
-    :class:`lino.modlib.sales.models.ClientVoucher`).
+    :class:`lino_cosi.lib.sales.models.ClientVoucher`).
 
     """
     params_layout = "project partner state year"

@@ -32,7 +32,7 @@ from lino.modlib.contacts.roles import ContactsStaff
 
 from lino_welfare.modlib.pcsw.models import *
 
-from lino.modlib.vatless.mixins import PartnerDetailMixin
+from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
 
 
 class Client(Client):

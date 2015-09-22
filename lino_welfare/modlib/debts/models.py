@@ -37,7 +37,7 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 from lino import mixins
 
-from lino.modlib.accounts.choicelists import AccountTypes, AccountCharts
+from lino_cosi.lib.accounts.choicelists import AccountTypes, AccountCharts
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
@@ -170,7 +170,7 @@ The total monthly amount available for debts distribution."""))
 
         :types: an optional string specifying a set of one-letter
                 account type names. See :class:`AccountTypes
-                <lino.modlib.accounts.choicelists.AccountTypes>`.
+                <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
 
         Each entry group is encapsulated as a volatile helper object
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
@@ -195,7 +195,7 @@ The total monthly amount available for debts distribution."""))
 
             types: an optional string specifying a set of one-letter
                    account type names. See :class: `AccountTypes
-                   <lino.modlib.accounts.choicelists.AccountTypes>`.
+                   <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
 
         """
         if types is not None:
@@ -215,7 +215,7 @@ The total monthly amount available for debts distribution."""))
  
             ar: the ActionRequest
 
-            group: an instance of :class:`accounts.Group <lino.modlib.accounts.models.Group>`.
+            group: an instance of :class:`accounts.Group <lino_cosi.lib.accounts.models.Group>`.
 
         """
         t = entries_table_for_group(group)

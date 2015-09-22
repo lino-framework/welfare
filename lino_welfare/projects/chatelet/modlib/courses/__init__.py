@@ -16,10 +16,10 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-The Chatelet extension of :mod:`lino.modlib.courses`
+The Chatelet extension of :mod:`lino_cosi.lib.courses`
 """
 
-from lino.modlib.courses import Plugin
+from lino_cosi.lib.courses import Plugin
 from django.utils.translation import ugettext_lazy as _
 
 

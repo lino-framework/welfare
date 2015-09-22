@@ -26,7 +26,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino.modlib.courses.models import *
+from lino_cosi.lib.courses.models import *
 
 CourseAreas.clear()
 add = CourseAreas.add_item

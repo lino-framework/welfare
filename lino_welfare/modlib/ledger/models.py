@@ -22,10 +22,10 @@ Database models for :mod:`lino_welfare.modlib.ledger`.
 
 from __future__ import unicode_literals
 
-from lino.modlib.ledger.models import *
+from lino_cosi.lib.ledger.models import *
 from lino.api import _
-from lino.modlib.accounts.utils import DEBIT
-from lino.modlib.ledger.choicelists import TradeTypes
+from lino_cosi.lib.accounts.utils import DEBIT
+from lino_cosi.lib.ledger.choicelists import TradeTypes
 
 JournalGroups.clear()
 add = JournalGroups.add_item

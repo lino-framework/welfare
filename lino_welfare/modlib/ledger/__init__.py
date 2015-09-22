@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino Welfare extension of :mod:`lino.modlib.ledger`
+Lino Welfare extension of :mod:`lino_cosi.lib.ledger`
 
 .. autosummary::
    :toctree:
@@ -27,7 +27,7 @@ Lino Welfare extension of :mod:`lino.modlib.ledger`
 
 """
 
-from lino.modlib.ledger import Plugin
+from lino_cosi.lib.ledger import Plugin
 
 
 # class Plugin(Plugin):

@@ -23,7 +23,7 @@ from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 from lino.modlib.cv.roles import CareerUser, CareerStaff
 from lino_welfare.modlib.courses.roles import CoursesUser, CoursesStaff
 from lino_welfare.modlib.newcomers.roles import NewcomersOperator
-from lino.modlib.courses.roles import CoursesUser as CoursesUser2
+from lino_cosi.lib.courses.roles import CoursesUser as CoursesUser2
 
 
 class IntegrationAgent(SocialAgent, CareerUser, CoursesUser, CoursesUser2):

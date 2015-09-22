@@ -37,7 +37,7 @@ from django.conf import settings
 from lino.utils.dpy import Migrator
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
-from lino.modlib.sepa.utils import belgian_nban_to_iban_bic
+from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
 from lino.modlib.cal.utils import WORKDAYS
 
 
@@ -935,7 +935,7 @@ def doit(a, b):
 
     def migrate_from_1_1_16(self, globals_dict):
         """\
-- lino.modlib.courses.CourseStates : state 40 (Ended) no longer exists
+- lino_cosi.lib.courses.CourseStates : state 40 (Ended) no longer exists
 - excerpts.Excerpt: remove fields language, company, contact_person
   and contact_role
 - cal.GuestRole is no longer a PrintableType
@@ -1131,7 +1131,7 @@ valid_until to end_date.
 
         """
 
-        from lino.modlib.accounts.choicelists import AccountCharts
+        from lino_cosi.lib.accounts.choicelists import AccountCharts
         bv2kw = globals_dict['bv2kw']
 
         accounts_Group = rt.modules.accounts.Group

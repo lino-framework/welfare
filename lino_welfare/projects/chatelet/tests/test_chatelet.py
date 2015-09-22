@@ -125,7 +125,7 @@ class TestCase(TestCase):
 
     def test_suggest_cal_guests(self):
         """Tests a bugfix in :meth:`suggest_cal_guests
-        <lino.modlib.courses.Course.suggest_cal_guests>`.
+        <lino_cosi.lib.courses.Course.suggest_cal_guests>`.
 
         """
         User = settings.SITE.user_model

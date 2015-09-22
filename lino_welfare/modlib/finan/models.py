@@ -34,7 +34,7 @@ from lino.api import dd, rt
 
 from lino.utils.xmlgen.html import E
 
-from lino.modlib.finan.models import *
+from lino_cosi.lib.finan.models import *
 
 from lino_welfare.modlib.ledger.mixins import PaymentRecipient
 

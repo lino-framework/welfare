@@ -1,3 +1,3 @@
-from lino.modlib.sepa.fixtures.demo import objects
+from lino_cosi.lib.sepa.fixtures.demo import objects
 
 

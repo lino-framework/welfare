@@ -31,7 +31,7 @@ représenté par
 <b>{{site_config.signer1}}, {{site_config.signer1_function}}</b>
 et
 <b>{{site_config.signer2}}, {{site_config.signer2_function}}</b>,
-ci-après dénommé «le CPAS»,
+ci-après dénommé «le CPAS»,</p>
 
 <p class="EnhancedPar">
 et <b>le Service Insertion Socio-Professionnelle</b> 
@@ -62,99 +62,100 @@ ci-après dénommé{{obj.client.mf(" le","e la","(e) le(la)")}} « stagiaire �
 
 <h2>Article {{article()}}</h2>
 
-Dans le cadre des initiatives du CPAS, pour l’insertion
+<p>Dans le cadre des initiatives du CPAS, pour l’insertion
 socioprofessionnelle de ses usagers et afin d’organiser une insertion
 professionnelle de qualité, le service insertion et le service
 accueillant réunissent leurs efforts pour permettre à
 <b>{{obj.company.get_full_name()}}<b> d’effectuer une formation par mise en
 situation, afin d’approcher le métier d’auxiliaire polyvalente, les
 contraintes inhérentes à un horaire, un rythme régulier, un travail
-dirigé.
+dirigé.</p>
 
 <h2>Article {{article()}}</h2>
 
-Le présent contrat est signé pour une période de <b>{{obj.cv_duration}}</b>
+<p>Le présent contrat est signé pour une période de <b>{{obj.cv_duration}}</b>
 jours ouvrables,
 soit du <b>{{fds(obj.applies_from)}}</b> 
 au <b>{{fds(obj.applies_until)}}</b>, selon l’horaire suivant : 
 <b>de 7h00 à 15 h, du lundi au vendredi</b>.
+</p>
 
 <h2>Article {{article()}}</h2>
 
-Le CPAS s’engage :
+<p>Le CPAS s’engage :</p>
 
 <ul>
 <li>à souscrire toutes les assurances contre les risques d’accident de
 travail et en responsabilité civile durant la période sus-indiquée de
-la formation par mise en situation;
+la formation par mise en situation;</li>
 <li>à défrayer <em>{{obj.client.get_full_name(nominative=True)}}</em>, à
-raison de <b>1 € par heure</b> prestée durant cette même période.
+raison de <b>1 € par heure</b> prestée durant cette même période.</li>
 </ul>
 
 <h2>Article {{article()}}</h2>
 
-Le service accueillant s’engage à :
+<p>Le service accueillant s’engage à :</p>
 <ul>
-<li>accueillir et diriger <em>{{obj.client.get_full_name(nominative=True)}}</em> durant la période de formation par mise en situation. 
+<li>accueillir et diriger <em>{{obj.client.get_full_name(nominative=True)}}</em> durant la période de formation par mise en situation.</li>
 </ul>
 
 
 <h2>Article {{article()}}</h2>
 
-Le C.P.A.S. confie sa mission d’accompagnement au service insertion.
+<p>Le C.P.A.S. confie sa mission d’accompagnement au service insertion.
 Le service insertion s’engage à accompagner la stagiaire.  Cet
-accompagnement a pour objet :
+accompagnement a pour objet :</p>
 
 <ul>
-<li>d’examiner avec le stagiaire le déroulement de sa participation au travail ;
+<li>d’examiner avec le stagiaire le déroulement de sa participation au travail ;</li>
 
 <li>de lui apporter une aide en cas de difficultés susceptibles de
-nuire à son insertion professionnelle.
+nuire à son insertion professionnelle.</li>
 </ul>
 
 
 <h2>Article {{article()}}</h2>
 
-{{obj.client.get_full_name(nominative=True)}} s’engage à :
+<p>{{obj.client.get_full_name(nominative=True)}} s’engage à:</p>
 
 <ul>
-<li>démontrer ses compétences en tant qu’auxiliaire polyvalente ; 
-<li>à respecter les contraintes inhérentes au travail :
+<li>démontrer ses compétences en tant qu’auxiliaire polyvalente ;</li>
+<li>à respecter les contraintes inhérentes au travail :</li>
 <ul>
-<li>respect des horaires ;
-<li>respect du matériel ;
-<li>respect des collègues ;
-<li>respect de la patientèle ;
-<li>respect des ordres et remarques.
+<li>respect des horaires ;</li>
+<li>respect du matériel ;</li>
+<li>respect des collègues ;</li>
+<li>respect de la patientèle ;</li>
+<li>respect des ordres et remarques.</li>
 </ul>
 </ul>
 
 <h2>Article {{article()}}</h2>
 
-Au cours et au terme de la période de formation par mise en situation,
+<p>Au cours et au terme de la période de formation par mise en situation,
 une évaluation entre le service Insertion, le service accueillant et
 {{obj.client.mf("le","la","le (la)")}} stagiaire déterminera les aptitudes
 de {{obj.client.mf("ce dernier","cette dernière","ce dernier")}}
-à exercer un travail sous contrat.
+à exercer un travail sous contrat.</p>
 
 
 <h2>Article {{article()}}</h2>
 
-Si une situation se présentait mettant en péril la bonne fin de la
+<p>Si une situation se présentait mettant en péril la bonne fin de la
 formation par mise en situation, chacune des parties se réserve le
 droit d’en référer aux autres afin d’examiner l’opportunité de mettre
-fin au présent contrat.
-
+fin au présent contrat.</p>
 
 <p>Fait à {{pcsw.city}}, en autant d’exemplaires que de parties dont
-chacune reconnaît avoir reçu le sien.
+chacune reconnaît avoir reçu le sien.</p>
 
 <ul>
-<li>Pour le CPAS: 
+<li>Pour le CPAS:
 <ul>
-<li>{{site_config.signer1}}, {{site_config.signer1_function}} {{dots}}
-<li>{{site_config.signer2}}, {{site_config.signer2_function}} {{dots}}
+<li>{{site_config.signer1}}, {{site_config.signer1_function}} {{dots}}</li>
+<li>{{site_config.signer2}}, {{site_config.signer2_function}} {{dots}}</li>
 </ul>
+</li>
 
 <li>Pour le Service Accueillant:
 {%- if obj.contact_person -%}
@@ -162,14 +163,17 @@ chacune reconnaît avoir reçu le sien.
 {%- endif -%}
 {%- if obj.contact_role -%} ({{obj.contact_role}}){%- endif -%}
 {{dots}}
+</li>
 
 <li>Pour le Service Insertion:
 {{obj.user}}
 {{dots}}
+</li>
 
 <li>{{obj.client.mf("le","la","le (la)")}} stagiaire:
 {{obj.client.get_full_name(nominative=True)}}
-{{dots}}
+{{dots}}</li>
 
+</ul>
 
 {% endblock %}

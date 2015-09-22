@@ -24,7 +24,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino.modlib.sepa.models import *
+from lino_cosi.lib.sepa.models import *
 
 
 class AccountTypes(dd.ChoiceList):

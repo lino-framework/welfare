@@ -1338,7 +1338,7 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(
         create_bcss_identifypersonrequest=create_bcss_identifypersonrequest)
 
-    from lino.modlib.courses.models import CourseRequestStates
+    from lino_cosi.lib.courses.models import CourseRequestStates
     #~ courses_CourseRequest = resolve_model("courses.CourseRequest")
     dsbe_CourseRequest = resolve_model("courses.CourseRequest")
 

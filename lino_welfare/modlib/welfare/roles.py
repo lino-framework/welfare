@@ -27,7 +27,7 @@ from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
-from lino.modlib.ledger.roles import LedgerStaff
+from lino_cosi.lib.ledger.roles import LedgerStaff
 from lino.modlib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
