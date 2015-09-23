@@ -28,6 +28,7 @@ from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
 from lino_cosi.lib.ledger.roles import LedgerStaff
+from lino_cosi.lib.sepa.roles import SepaStaff
 from lino.modlib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -45,7 +46,7 @@ class SiteAdmin(
         DebtsStaff, LedgerStaff,
         NewcomersAgent,
         OfficeOperator,
-        AidsStaff):
+        AidsStaff, SepaStaff):
     """The site adminstrator has permission for everything."""
 
 
@@ -82,7 +83,7 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     pass
 
 
-class LedgerUser(LedgerStaff, OfficeUser, AidsStaff):
+class LedgerUser(LedgerStaff, OfficeUser, AidsStaff, SepaStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 

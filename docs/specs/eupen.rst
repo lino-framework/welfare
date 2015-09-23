@@ -84,7 +84,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - SEPA : Konten
+  - SEPA : Konten, Statements, Bewegungen
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
@@ -168,7 +168,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
-  - SEPA : Konten
+  - SEPA : Konten, Statements, Bewegungen
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -259,7 +259,6 @@ Empfangsschalter
   - ÖSHZ : Hilfearten, Kategorien
 - Explorer :
   - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - SEPA : Konten
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
 - Site : Info
 
@@ -427,6 +426,8 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
+- sepa.Accounts.insert : partner, iban, bic, remark
+- sepa.Statements.insert : account, date, statement_number, balance_start
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
@@ -602,6 +603,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 admin
 - reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- sepa.Accounts.insert : visible for 110 410 500 admin
+- sepa.Statements.insert : visible for 110 410 500 admin
 - system.SiteConfigs.detail : visible for admin
 - tinymce.TextFieldTemplates.detail : visible for admin
 - tinymce.TextFieldTemplates.insert : visible for admin

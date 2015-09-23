@@ -76,7 +76,7 @@ Delete handlers are:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : addresses.Address.partner, sepa.Account.partner
-  - PROTECT : polls.Response.partner, ledger.Movement.partner, households.Household.partner_ptr, contacts.Person.partner_ptr, contacts.Company.partner_ptr, debts.Budget.partner, debts.Actor.partner, debts.Entry.partner, vatless.AccountInvoice.partner, users.User.partner, outbox.Recipient.partner, cal.Guest.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.BankStatementItem.partner, finan.PaymentOrderItem.partner
+  - PROTECT : polls.Response.partner, ledger.Movement.partner, households.Household.partner_ptr, contacts.Person.partner_ptr, contacts.Company.partner_ptr, debts.Budget.partner, debts.Actor.partner, debts.Entry.partner, vatless.AccountInvoice.partner, users.User.partner, outbox.Recipient.partner, sepa.Movement.partner, cal.Guest.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.BankStatementItem.partner, finan.PaymentOrderItem.partner
 - contacts.Person :
   - CASCADE : cv.LanguageKnowledge.person, cv.Skill.person, cv.SoftSkill.person, cv.Obstacle.person
   - PROTECT : aids.AidType.contact_person, aids.SimpleConfirmation.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, excerpts.Excerpt.contact_person, cv.Training.person, cv.Study.person, cv.Experience.person, badges.Award.holder, households.Member.person, contacts.Role.person, system.SiteConfig.signer1, art61.Contract.signer1, immersion.Contract.signer1, uploads.Upload.contact_person, jobs.Contract.signer1, pcsw.Client.person_ptr, pcsw.ClientContact.contact_person, boards.Member.person, notes.Note.contact_person, isip.ContractPartner.contact_person, isip.Contract.signer1, humanlinks.Link.parent
@@ -217,7 +217,7 @@ Delete handlers are:
 - properties.PropType :
   - PROTECT : properties.PropChoice.type, properties.Property.type
 - sepa.Account :
-  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, finan.PaymentOrderItem.bank_account
+  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, sepa.Movement.bank_account, finan.PaymentOrderItem.bank_account
 - sepa.Statement :
   - PROTECT : sepa.Movement.statement
 - uploads.UploadType :

@@ -22,10 +22,11 @@ from lino.modlib.beid.roles import BeIdUser
 from lino.modlib.plausibility.roles import PlausibilityUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
+from lino_cosi.lib.sepa.roles import SepaUser, SepaStaff
 
 
 class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
-                  AidsUser, PollsUser):
+                  AidsUser, PollsUser, SepaUser):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.
@@ -33,7 +34,7 @@ class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
     """
 
 
-class SocialStaff(SocialAgent, OfficeStaff, AidsStaff, PollsStaff):
+class SocialStaff(SocialAgent, OfficeStaff, AidsStaff, PollsStaff, SepaStaff):
     """A **social staff member** is a social agent who has access to more
     technical information about welfare clients.  For example the
     `Miscellaneous` panel.
