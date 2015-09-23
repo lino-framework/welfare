@@ -48,4 +48,9 @@ class Account(Account):
 
 
 class AccountsByClient(AccountsByPartner):
+    detail_layout = """
+    partner:30 iban:40 bic:20 remark:15 managed account_type
+    sepa.StatementsByAccount
+    """
     column_names = 'account_type managed iban bic primary'
+
