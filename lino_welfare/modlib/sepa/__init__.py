@@ -15,7 +15,7 @@
 Lino-Welfare extension of :mod:`lino.modlib.cal`
 """
 
-from lino.modlib.sepa import Plugin
+from lino_cosi.lib.sepa import Plugin
 
 
 class Plugin(Plugin):

@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """Actors for `lino.modlib.client_vouchers`.
 
@@ -12,8 +26,8 @@ from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 
-from lino.modlib.ledger.choicelists import VoucherTypes
-from lino.modlib.ledger.ui import PartnerVouchers, ByJournal
+from lino_cosi.lib.ledger.choicelists import VoucherTypes
+from lino_cosi.lib.ledger.ui import PartnerVouchers, ByJournal
 
 from .models import ClientVoucher
 
@@ -59,7 +73,7 @@ class ClientVouchers(PartnerVouchers):
 class ClientVouchersByJournal(ClientVouchers, ByJournal):
     """Shows all simple invoices of a given journal (whose
     :attr:`Journal.voucher_type` must be
-    :class:`lino.modlib.sales.models.ClientVoucher`).
+    :class:`lino_cosi.lib.sales.models.ClientVoucher`).
 
     """
     params_layout = "project partner state year"

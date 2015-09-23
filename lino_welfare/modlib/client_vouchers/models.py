@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 """Database models for `lino_welfare.modlib.client_vouchers`.
 
 See also :ref:`welfare.specs.ledger`.
@@ -19,11 +33,11 @@ from django.utils.translation import string_concat
 
 from lino.api import dd
 
-from lino.modlib.ledger.mixins import (
+from lino_cosi.lib.ledger.mixins import (
     PartnerRelated, ProjectRelated, AccountVoucherItem, Matching)
-from lino.modlib.ledger.models import Voucher
+from lino_cosi.lib.ledger.models import Voucher
 
-from lino.modlib.ledger.roles import LedgerUser
+from lino_cosi.lib.ledger.roles import LedgerUser
 
 
 class ClientVoucher(Voucher, ProjectRelated):

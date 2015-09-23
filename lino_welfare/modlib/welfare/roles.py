@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2009-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
@@ -13,7 +27,8 @@ from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.office.roles import OfficeOperator
 from lino.modlib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
-from lino.modlib.ledger.roles import LedgerStaff
+from lino_cosi.lib.ledger.roles import LedgerStaff
+from lino_cosi.lib.sepa.roles import SepaStaff
 from lino.modlib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -31,7 +46,7 @@ class SiteAdmin(
         DebtsStaff, LedgerStaff,
         NewcomersAgent,
         OfficeOperator,
-        AidsStaff):
+        AidsStaff, SepaStaff):
     """The site adminstrator has permission for everything."""
 
 
@@ -68,7 +83,7 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
     pass
 
 
-class LedgerUser(LedgerStaff, OfficeUser, AidsStaff):
+class LedgerUser(LedgerStaff, OfficeUser, AidsStaff, SepaStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 

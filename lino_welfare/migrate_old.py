@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011-2012 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """
 The migrations in this module are no longer being used 
@@ -1324,7 +1338,7 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(
         create_bcss_identifypersonrequest=create_bcss_identifypersonrequest)
 
-    from lino.modlib.courses.models import CourseRequestStates
+    from lino_cosi.lib.courses.models import CourseRequestStates
     #~ courses_CourseRequest = resolve_model("courses.CourseRequest")
     dsbe_CourseRequest = resolve_model("courses.CourseRequest")
 

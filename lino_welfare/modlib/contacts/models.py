@@ -1,12 +1,26 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """
 Database models for :mod:`lino_welfare.modlib.contacts`.
 
 Lino Welfare defines a `vat_id` field on :class:`Company` but
-doesn't need :mod:`lino.modlib.vat`
+doesn't need :mod:`lino_cosi.lib.vat`
 
 """
 
@@ -19,7 +33,7 @@ from lino.api import dd, rt
 from lino.modlib.contacts.models import *
 
 from lino.modlib.addresses.mixins import AddressOwner
-from lino.modlib.vatless.mixins import PartnerDetailMixin
+from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
 
 
 class Partner(

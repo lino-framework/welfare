@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """
 Database models for the :mod:`lino_welfare.modlib.sepa`.
@@ -10,7 +24,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from lino.modlib.sepa.models import *
+from lino_cosi.lib.sepa.models import *
 
 
 class AccountTypes(dd.ChoiceList):
@@ -34,4 +48,9 @@ class Account(Account):
 
 
 class AccountsByClient(AccountsByPartner):
+    detail_layout = """
+    partner:30 iban:40 bic:20 remark:15 managed account_type
+    sepa.StatementsByAccount
+    """
     column_names = 'account_type managed iban bic primary'
+

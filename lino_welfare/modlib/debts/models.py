@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """
 Database models for `lino_welfare.modlib.debts`.
@@ -23,7 +37,7 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 from lino import mixins
 
-from lino.modlib.accounts.choicelists import AccountTypes, AccountCharts
+from lino_cosi.lib.accounts.choicelists import AccountTypes, AccountCharts
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
@@ -156,7 +170,7 @@ The total monthly amount available for debts distribution."""))
 
         :types: an optional string specifying a set of one-letter
                 account type names. See :class:`AccountTypes
-                <lino.modlib.accounts.choicelists.AccountTypes>`.
+                <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
 
         Each entry group is encapsulated as a volatile helper object
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
@@ -181,7 +195,7 @@ The total monthly amount available for debts distribution."""))
 
             types: an optional string specifying a set of one-letter
                    account type names. See :class: `AccountTypes
-                   <lino.modlib.accounts.choicelists.AccountTypes>`.
+                   <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
 
         """
         if types is not None:
@@ -201,7 +215,7 @@ The total monthly amount available for debts distribution."""))
  
             ar: the ActionRequest
 
-            group: an instance of :class:`accounts.Group <lino.modlib.accounts.models.Group>`.
+            group: an instance of :class:`accounts.Group <lino_cosi.lib.accounts.models.Group>`.
 
         """
         t = entries_table_for_group(group)

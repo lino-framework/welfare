@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2009-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """Default settings of a :ref:`welfare` project.
 
@@ -45,7 +59,7 @@ class Site(Site):
         """
         Change the default value of certain plugin settings.
 
-        - :attr:`lino.modlib.accounts.Plugin.ref_length` = 5
+        - :attr:`lino_cosi.lib.accounts.Plugin.ref_length` = 5
         
         - :attr:`excerpts.responsible_user
           <lino.modlib.excerpts.Plugin.responsible_user>` is set to
@@ -114,7 +128,7 @@ class Site(Site):
         yield 'lino.modlib.extensible'
         yield 'lino_welfare.modlib.cal'
         yield 'lino_welfare.modlib.reception'
-        yield 'lino.modlib.accounts'
+        yield 'lino_cosi.lib.accounts'
         yield 'lino_welfare.modlib.badges'
         yield 'lino_welfare.modlib.sepa'
 
@@ -132,11 +146,11 @@ class Site(Site):
 
         yield 'lino_welfare.modlib.ledger'
         # yield 'lino_welfare.modlib.finan'
-        # yield 'lino.modlib.ledger'
-        yield 'lino.modlib.vatless'
+        # yield 'lino_cosi.lib.ledger'
+        yield 'lino_cosi.lib.vatless'
         if False:  # not sure whether they make sense
             yield 'lino_welfare.modlib.client_vouchers'
-        yield 'lino.modlib.finan'
+        yield 'lino_cosi.lib.finan'
 
         yield 'lino_welfare.projects.chatelet.modlib.cv'
         yield 'lino_welfare.modlib.integ'

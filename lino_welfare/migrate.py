@@ -1,6 +1,20 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2011-2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# This file is part of Lino Welfare.
+#
+# Lino Welfare is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Lino Welfare is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with Lino Welfare.  If not, see
+# <http://www.gnu.org/licenses/>.
 
 """
 This is a real-world example of how the application developer
@@ -23,7 +37,7 @@ from django.conf import settings
 from lino.utils.dpy import Migrator
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
-from lino.modlib.sepa.utils import belgian_nban_to_iban_bic
+from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
 from lino.modlib.cal.utils import WORKDAYS
 
 
@@ -921,7 +935,7 @@ def doit(a, b):
 
     def migrate_from_1_1_16(self, globals_dict):
         """\
-- lino.modlib.courses.CourseStates : state 40 (Ended) no longer exists
+- lino_cosi.lib.courses.CourseStates : state 40 (Ended) no longer exists
 - excerpts.Excerpt: remove fields language, company, contact_person
   and contact_role
 - cal.GuestRole is no longer a PrintableType
@@ -1117,7 +1131,7 @@ valid_until to end_date.
 
         """
 
-        from lino.modlib.accounts.choicelists import AccountCharts
+        from lino_cosi.lib.accounts.choicelists import AccountCharts
         bv2kw = globals_dict['bv2kw']
 
         accounts_Group = rt.modules.accounts.Group
