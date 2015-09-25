@@ -1341,14 +1341,21 @@ class PartnersByClientContactType(contacts.Partners):
     column_names = 'name id mti_navigator *'
 
 
-def setup_workflows(site):
+@dd.receiver(dd.pre_analyze)
+def setup_client_workflow(sender=None, **kw):
+    """Set up workflow for :class:`ClientStates
+    <lino_welfare.modlib.pcsw.choicelists.ClientStates>`.
 
+    Note that AssignNewcomer action also changes the state.
+    """
     ClientStates.refused.add_transition(RefuseClient)
     ClientStates.former.add_transition(
         _("Former"),
         required_states='coached',
         required_roles=dd.required(NewcomersAgent))
-    #~ ClientStates.add_transition('new','refused',user_groups='newcomers')
+    ClientStates.newcomer.add_transition(
+        required_states='former',
+        required_roles=dd.required(NewcomersAgent))
 
 
 

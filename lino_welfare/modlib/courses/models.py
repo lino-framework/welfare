@@ -649,8 +649,8 @@ def site_setup(self):
     pass
 
 
-
-def setup_workflows(site):
+@dd.receiver(dd.pre_analyze)
+def setup_courses_workflow(sender=None, **kw):
 
     CourseRequestStates.registered.add_transition(RegisterCandidate)
     CourseRequestStates.candidate.add_transition(UnRegisterCandidate)
