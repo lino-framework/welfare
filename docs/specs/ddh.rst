@@ -20,20 +20,9 @@ Preventing accidental deletes
 Foreign Keys and their `on_delete` setting
 ==========================================
 
-The following list shows how Lino detects whether a database object is
-being referred to by some other database object. This information is
-important (1) before deleting objects and (2) when merging them.
+Here is the output of :meth:`lino.utils.diag.Analyzer.show_foreign_keys` in
+Lino Welfare:
 
-For every model we see a list of "delete handlers" and a list of
-fields from other models that point to this model using that delete
-handler.
-
-Delete handlers are:
-
-- PROTECT : refuse to delete when other objects refer to this object
-- CASCADE : delete objects refering to this object
-- set_on_delete : make other objects point to something else (or set
-  their pointer to None)
 
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_foreign_keys())
@@ -71,15 +60,16 @@ Delete handlers are:
 - cbss.Sector :
   - PROTECT : cbss.ManageAccessRequest.sector
 - contacts.Company :
-  - PROTECT : aids.AidType.company, aids.SimpleConfirmation.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, excerpts.Excerpt.company, contacts.Role.company, debts.Entry.bailiff, system.SiteConfig.site_company, art61.Contract.company, immersion.Contract.company, uploads.Upload.company, jobs.JobProvider.company_ptr, jobs.Contract.company, pcsw.ClientContact.company, active_job_search.Proof.company, notes.Note.company, isip.ContractPartner.company, courses.CourseProvider.company_ptr
+  - CASCADE : jobs.JobProvider.company_ptr, courses.CourseProvider.company_ptr
+  - PROTECT : aids.AidType.company, aids.SimpleConfirmation.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, excerpts.Excerpt.company, contacts.Role.company, debts.Entry.bailiff, system.SiteConfig.site_company, art61.Contract.company, immersion.Contract.company, uploads.Upload.company, jobs.Contract.company, pcsw.ClientContact.company, active_job_search.Proof.company, notes.Note.company, isip.ContractPartner.company
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
-  - CASCADE : addresses.Address.partner, sepa.Account.partner
-  - PROTECT : polls.Response.partner, ledger.Movement.partner, households.Household.partner_ptr, contacts.Person.partner_ptr, contacts.Company.partner_ptr, debts.Budget.partner, debts.Actor.partner, debts.Entry.partner, vatless.AccountInvoice.partner, users.User.partner, outbox.Recipient.partner, sepa.Movement.partner, cal.Guest.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.BankStatementItem.partner, finan.PaymentOrderItem.partner
+  - CASCADE : addresses.Address.partner, households.Household.partner_ptr, contacts.Person.partner_ptr, contacts.Company.partner_ptr, sepa.Account.partner
+  - PROTECT : polls.Response.partner, ledger.Movement.partner, debts.Budget.partner, debts.Actor.partner, debts.Entry.partner, vatless.AccountInvoice.partner, users.User.partner, outbox.Recipient.partner, sepa.Movement.partner, cal.Guest.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.BankStatementItem.partner, finan.PaymentOrderItem.partner
 - contacts.Person :
-  - CASCADE : cv.LanguageKnowledge.person, cv.Skill.person, cv.SoftSkill.person, cv.Obstacle.person
-  - PROTECT : aids.AidType.contact_person, aids.SimpleConfirmation.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, excerpts.Excerpt.contact_person, cv.Training.person, cv.Study.person, cv.Experience.person, badges.Award.holder, households.Member.person, contacts.Role.person, system.SiteConfig.signer1, art61.Contract.signer1, immersion.Contract.signer1, uploads.Upload.contact_person, jobs.Contract.signer1, pcsw.Client.person_ptr, pcsw.ClientContact.contact_person, boards.Member.person, notes.Note.contact_person, isip.ContractPartner.contact_person, isip.Contract.signer1, humanlinks.Link.parent
+  - CASCADE : cv.LanguageKnowledge.person, cv.Skill.person, cv.SoftSkill.person, cv.Obstacle.person, pcsw.Client.person_ptr
+  - PROTECT : aids.AidType.contact_person, aids.SimpleConfirmation.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, excerpts.Excerpt.contact_person, cv.Training.person, cv.Study.person, cv.Experience.person, badges.Award.holder, households.Member.person, contacts.Role.person, system.SiteConfig.signer1, art61.Contract.signer1, immersion.Contract.signer1, uploads.Upload.contact_person, jobs.Contract.signer1, pcsw.ClientContact.contact_person, boards.Member.person, notes.Note.contact_person, isip.ContractPartner.contact_person, isip.Contract.signer1, humanlinks.Link.parent
 - contacts.Role :
   - PROTECT : pcsw.Client.job_office_contact
 - contacts.RoleType :
