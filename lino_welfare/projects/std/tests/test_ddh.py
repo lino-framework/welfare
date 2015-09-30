@@ -18,6 +18,8 @@
 
 """Runs some tests about the disable-delete handler and cascading deletes.
 
+Reproduces :ticket:`503`.
+
 You can run only these tests by issuing::
 
   $ go welfare
@@ -48,23 +50,92 @@ class DDHTests(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.core import constants
-        from django.conf import settings
         from lino.modlib.users.choicelists import UserProfiles
-        
-        from lino.api.shell import countries, addresses, pcsw, users
+        Client = rt.modules.pcsw.Client
+        User = rt.modules.users.User
+        Person = rt.modules.contacts.Person
+        Partner = rt.modules.contacts.Partner
+        Country = rt.modules.countries.Country
+        Address = rt.modules.addresses.Address
+        Note = rt.modules.notes.Note
 
-        # is it the right settings module?
-        self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
-                         'lino_welfare.projects.std.settings.demo')
-
-        self.assertEqual(settings.MIDDLEWARE_CLASSES, (
-            'django.middleware.common.CommonMiddleware',
-            'django.middleware.locale.LocaleMiddleware',
-            'lino.core.auth.RemoteUserMiddleware',
-            'lino.utils.ajax.AjaxExceptionResponse'))
-
-        u = users.User(username='robin',
-                       profile=UserProfiles.admin,
-                       language="en")
+        u = User(username='robin',
+                 profile=UserProfiles.admin,
+                 language="en")
         u.save()
+
+        def createit():
+            obj = Client(first_name="John", last_name="Doe")
+            obj.full_clean()
+            obj.save()
+            pk = obj.pk
+            return (obj, Person.objects.get(pk=pk), Partner.objects.get(pk=pk))
+
+        #
+        # If there are no vetos, user can ask to delete from any MTI form
+        #
+        cl, pe, pa = createit()
+        cl.delete()
+
+        cl, pe, pa = createit()
+        pe.delete()
+
+        cl, pe, pa = createit()
+        pa.delete()
+
+        #
+        # Cascade-related objects (e.g. addresses) are deleted
+        # independently of the polymorphic form which initiated
+        # deletion.
+        #
+
+        BE = Country(name="Belgium")
+        BE.save()
+
+        def check_cascade(model):
+            cl, pe, pa = createit()
+            obj = model.objects.get(pk=cl.pk)
+            addr = Address(partner=pa, country=BE)
+            addr.full_clean()
+            addr.save()
+            obj.delete()
+            self.assertEqual(Address.objects.count(), 0)
+
+        check_cascade(Partner)
+        check_cascade(Person)
+        check_cascade(Client)
+
+        #
+        # Vetos of one form are deteced by all other forms.
+        #
+        def check_veto(obj, expected):
+            try:
+                obj.delete()
+                self.fail("Failed to raise Warning({0})".format(expected))
+            except Warning as e:
+                self.assertEqual(str(e), expected)
+
+        def check_vetos(obj, msg):
+            m = obj.__class__
+            obj.full_clean()
+            obj.save()
+            check_veto(pa, msg)
+            check_veto(pe, msg)
+            check_veto(cl, msg)
+            self.assertEqual(m.objects.count(), 1)
+            obj.delete()
+            self.assertEqual(m.objects.count(), 0)
+
+        cl, pe, pa = createit()
+
+        msg = "Cannot delete Client DOE John (106) because " \
+              "1 Events/Notes refer to it."
+        check_vetos(Note(project=cl), msg)
+
+        ct = rt.modules.contenttypes.ContentType.objects.get_for_model(Client)
+        check_vetos(Note(owner_type=ct, owner_id=pa.pk), msg)
+
+        msg = "Cannot delete Person John DOE because " \
+              "1 Events/Notes refer to it."
+        check_vetos(Note(contact_person=pe), msg)
+

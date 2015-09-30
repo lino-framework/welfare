@@ -396,8 +396,8 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
-- ledger.Journals.insert : ref, name, name_fr, name_en, trade_type, voucher_type
+- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, chart, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.insert : ref, name, name_fr, name_en, chart, journal_group, voucher_type
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
