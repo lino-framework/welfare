@@ -37,7 +37,7 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-55 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+56 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, sepa, boards, welfare, sales, pcsw, ledger, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 151 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
