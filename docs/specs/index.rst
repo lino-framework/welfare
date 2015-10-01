@@ -33,6 +33,7 @@ General
    debts
    excerpts
    integ
+   isip
    jobs
    misc
    polls

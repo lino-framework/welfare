@@ -65,6 +65,9 @@ class Site(Site):
     #     return 'fr'
 
     def get_admin_main_items(self, ar):
+        """Defines the items to show in :xfile:`admin_main.html`.
+        See :meth:`lino.core.site.Site.get_admin_main_items`.
+        """
 
         # Mathieu: je remarque que le module "Visiteurs qui
         # m'attendent" ne fonctionne plus. Hors, c'est surtout ce
@@ -72,7 +75,7 @@ class Site(Site):
         # qui attendent leurs rdv ou qui tiennent des permanences.
 
         yield self.modules.reception.MyWaitingVisitors
-        yield self.modules.cal.MyEvents
+        yield self.modules.cal.MyEventsToday
         yield self.modules.cal.MyTasks
         
         yield self.modules.reception.WaitingVisitors

@@ -17,7 +17,10 @@ Jobs
     >>> from lino.api.doctest import *
 
 
-A tested tour into :mod:`lino_welfare.modlib.jobs`.
+Lino Welfare helps integration agents to manage their work with job
+providers.
+
+ :mod:`lino_welfare.modlib.jobs`.
 
 .. contents::
    :local:
@@ -122,6 +125,21 @@ Example:
  27.06.14       KAIVERS Karl (141)               Arbeitet
 ============== ======================= ======== ====================
 <BLANKLINE>
+
+
+
+>>> ses.show(jobs.ContractTypes)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+=========================== ==========
+ Bezeichnung                 Referenz
+--------------------------- ----------
+ Sozialökonomie              art60-7a
+ Sozialökonomie - majoré     art60-7b
+ Stadt Eupen                 art60-7e
+ mit Rückerstattung          art60-7c
+ mit Rückerstattung Schule   art60-7d
+=========================== ==========
+<BLANKLINE>
+
 
 
 Show all contracts

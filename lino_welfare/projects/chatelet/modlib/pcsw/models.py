@@ -106,10 +106,10 @@ class ClientDetail(ClientDetail):
     immersion.ContractsByClient
     """, label=dd.plugins.immersion.verbose_name)
 
-    aids_tab = dd.Panel("""
-    sepa.AccountsByClient
-    aids.GrantingsByClient
-    """, label=_("Aids"))
+    # aids_tab = dd.Panel("""
+    # sepa.AccountsByClient
+    # aids.GrantingsByClient
+    # """, label=_("Aids"))
 
     history = dd.Panel("""
     # reception.CreateNoteActionsByClient:20
@@ -190,6 +190,11 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 
 ContactsByClient.column_names = 'company contact_person remark'
 dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
+
+
+aids = dd.resolve_app('aids')
+aids.GrantingsByClient.column_names = "description_column request_date "\
+                                      "aid_type category start_date"
 
 notes = dd.resolve_app('notes')
 

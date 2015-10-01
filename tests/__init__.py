@@ -140,6 +140,9 @@ class SpecsTests(BaseTestCase):
     def test_jobs(self):
         return self.run_simple_doctests('docs/specs/jobs.rst')
 
+    def test_isip(self):
+        return self.run_simple_doctests('docs/specs/isip.rst')
+
     def test_reception(self):
         return self.run_simple_doctests('docs/specs/reception.rst')
 
