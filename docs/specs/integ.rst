@@ -29,21 +29,6 @@ See also :doc:`/tour/autoevents`.
 Configuration
 =============
 
->>> ses.show(isip.ContractTypes)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-===================== ===================== ===================== =========== ==================== ==================
- Designation           Designation (fr)      Designation (de)      Reference   Examination Policy   needs Study type
---------------------- --------------------- --------------------- ----------- -------------------- ------------------
- VSE Ausbildung        VSE Ausbildung        VSE Ausbildung        vsea        every month          Yes
- VSE Arbeitssuche      VSE Arbeitssuche      VSE Arbeitssuche      vseb        every month          No
- VSE Lehre             VSE Lehre             VSE Lehre             vsec        every month          No
- VSE Vollzeitstudium   VSE Vollzeitstudium   VSE Vollzeitstudium   vsed        every month          Yes
- VSE Sprachkurs        VSE Sprachkurs        VSE Sprachkurs        vsee        every month          No
- **Total (5 rows)**                                                                                 **2**
-===================== ===================== ===================== =========== ==================== ==================
-<BLANKLINE>
-
-
 >>> ses.show(isip.ContractEndings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==================== ======= =============== ========= ====================
