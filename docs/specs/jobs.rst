@@ -183,10 +183,10 @@ LAMBERTZ Guido (142)
 (datetime.date(2012, 12, 3), datetime.date(2014, 12, 2))
 
 >>> obj.update_cal_rset()
-ExamPolicy #3 (u'alle 3 Monate')
+ExamPolicy #3 (u'Alle 3 Monate')
 
 >>> print(unicode(obj.update_cal_rset().event_type))
-Termin
+Auswertung
 >>> print(obj.update_cal_rset().event_type.max_conflicting)
 4
 >>> settings.SITE.verbose_client_info_message = True
@@ -201,19 +201,18 @@ Reached upper date limit 2014-12-02
 >>> ses.show(cal.EventsByController.request(obj),
 ... column_names="linked_date summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-========================== ==================
- Wann                       Kurzbeschreibung
--------------------------- ------------------
- **Mo. 04.03.13 (09:00)**   Termin 1
- **Di. 04.06.13 (09:00)**   Termin 2
- **Mi. 04.09.13 (09:00)**   Termin 3
- **Mi. 04.12.13 (09:00)**   Termin 4
- **Di. 04.03.14 (09:00)**   Termin 5
- **Mi. 04.06.14 (09:00)**   Termin 6
- **Do. 04.09.14 (09:00)**   Termin 7
-========================== ==================
+================== ==================
+ Wann               Kurzbeschreibung
+------------------ ------------------
+ **Mo. 04.03.13**   Évaluation 1
+ **Di. 04.06.13**   Évaluation 2
+ **Mi. 04.09.13**   Évaluation 3
+ **Mi. 04.12.13**   Évaluation 4
+ **Di. 04.03.14**   Évaluation 5
+ **Mi. 04.06.14**   Évaluation 6
+ **Do. 04.09.14**   Évaluation 7
+================== ==================
 <BLANKLINE>
-
 
 Mélanie has two appointments on 2014-09-15 (TODO: this test currently
 fails because coaching stories have changed. Currently there's no
@@ -238,7 +237,7 @@ conflicting events:
 
 >>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
 >>> e.event_type
-EventType #3 (u'Termin')
+EventType #4 (u'Auswertung')
 >>> e.event_type.max_conflicting
 4
 

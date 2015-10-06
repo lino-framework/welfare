@@ -11,16 +11,19 @@
         fr="Par la présente nous certifions que")}}</p>
 
 <p class="EnhancedPar">
+{%- if obj.client() -%}
 {{obj.client.get_full_name(nominative=True)}}
 <br>
 {{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
 {{obj.client.national_id}}
 <br>
-{{obj.client.get_primary_address().living_at_text()}}
+{%- set addr = obj.client.get_primary_address() -%}
+{{addr.living_at_text() if addr else ""}}
 {#
 {{tr(de="wohnhaft zu",fr="domicilié"+obj.client.mf("","e","(e)")+" à")}}
 {{', '.join(obj.client.address_location_lines())}}
 #}
+{%- endif -%}
 </p>
 
 
@@ -30,6 +33,7 @@
 
 {%- set times = (dd.strftime(obj.waiting_since), 
 dd.strftime(obj.gone_since or this.time)) -%}
+{%- if obj.waiting_since -%}
 <b>{%- if obj.waiting_since.date() == this.time.date() -%}
 {{tr(en="was present today", 
      de="am heutigen Tage", 
@@ -38,6 +42,7 @@ dd.strftime(obj.gone_since or this.time)) -%}
 {{tr(en="was present on ", 
      de="am ", 
      fr="s'est présenté le")+fdf(obj.waiting_since.date())}}
+{% endif -%}
 {% endif -%}
 {%- if times[1] %}
 {{tr(en="between %s and %s o'clock",

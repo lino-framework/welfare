@@ -59,6 +59,9 @@ class SpecsTests(BaseTestCase):
     def test_chatelet(self):
         return self.run_simple_doctests('docs/specs/chatelet.rst')
 
+    def test_isip_chatelet(self):
+        return self.run_simple_doctests('docs/specs/isip_chatelet.rst')
+
     def test_art61(self):
         return self.run_simple_doctests('docs/specs/art61.rst')
 

@@ -34,6 +34,7 @@ General
    excerpts
    integ
    isip
+   isip_chatelet
    jobs
    misc
    polls

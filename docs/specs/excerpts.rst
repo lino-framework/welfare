@@ -58,26 +58,32 @@ Here is a more complete list of excerpt types:
 Demo excerpts
 =============
 
-Here is the list of all demo excerpts. 
+Here is a list of all demo excerpts. 
 
 >>> rt.show(excerpts.AllExcerpts, language="en", column_names="id excerpt_type owner project company language")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==== ======================== ================================================ ========================= ========================== ==========
- ID   Excerpt Type             Controlled by                                    Client                    Recipient (Organization)   Language
----- ------------------------ ------------------------------------------------ ------------------------- -------------------------- ----------
- 12   Action plan              *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 11   eID sheet                *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 10   File sheet               *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 9    Curriculum vitae         *AUSDEMWALD Alfons (116)*                        AUSDEMWALD Alfons (116)                              de
- 8    Presence certificate     *Participant #1 (22.05.2014)*                    AUSDEMWALD Alfons (116)                              de
- 7    ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                     AUSDEMWALD Alfons (116)
- 6    Art60§7 job supplyment   *Art60§7 job supplyment#1 (Charlotte COLLARD)*   COLLARD Charlotte (118)   BISA                       de
- 5    Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*         EMONTS Daniel (128)
- 4    Financial situation      *Budget 1 for Gerkens-Kasennova*
- 3    Refund confirmation      *AMK/5/27/14/139/1*                              JONAS Josef (139)                                    fr
- 2    Income confirmation      *EiEi/9/29/12/116/1*                             AUSDEMWALD Alfons (116)                              de
- 1    Simple confirmation      *Clothes bank/5/22/14/240/19*                    FRISCH Paul (240)         Belgisches Rotes Kreuz     de
-==== ======================== ================================================ ========================= ========================== ==========
+==== ======================== ===================================================== ============================= ================================ ==========
+ ID   Excerpt Type             Controlled by                                         Client                        Recipient (Organization)         Language
+---- ------------------------ ----------------------------------------------------- ----------------------------- -------------------------------- ----------
+ 66   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 65   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 64   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 63   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 62   Presence certificate     *Participant #1 (22.05.2014)*                         AUSDEMWALD Alfons (116)                                        de
+ 61   ISIP                     *ISIP#33 (Jérôme JEANÉMART)*                          JEANÉMART Jérôme (181)
+ ...
+ 29   ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                          AUSDEMWALD Alfons (116)
+ 28   Art60§7 job supplyment   *Art60§7 job supplyment#16 (Denis DENON)*             DENON Denis (180*)            R-Cycle Sperrgutsortierzentrum   de
+ 27   Art60§7 job supplyment   *Art60§7 job supplyment#15 (Denis DENON)*             DENON Denis (180*)            BISA                             de
+ ...
+ 12   Art61 job supplyment     *Art61 job supplyment#7 (Karl KELLER)*                KELLER Karl (178)
+ ...
+ 5    Financial situation      *Budget 1 for Gerkens-Kasennova*
+ 4    Refund confirmation      *AMK/5/27/14/139/1*                                   JONAS Josef (139)                                              fr
+ 3    Income confirmation      *EiEi/9/29/12/116/1*                                  AUSDEMWALD Alfons (116)                                        de
+ 2    Simple confirmation      *Erstattung/5/25/14/130/1*                            FAYMONVILLE Luc (130*)                                         de
+ 1    Simple confirmation      *Clothes bank/5/22/14/240/19*                         FRISCH Paul (240)             Belgisches Rotes Kreuz           de
+==== ======================== ===================================================== ============================= ================================ ==========
 <BLANKLINE>
 
 

@@ -411,10 +411,8 @@ class CoachingsByClient(pcsw.CoachingsByClient):
 
 if True:  # works, though is very hackerish
 
-    def func(obj, ar):
-        return pcsw.Client.objects.get(pk=obj.partner.pk)
-    dd.inject_field('cal.Guest', 'client',
-                    dd.VirtualField(dd.ForeignKey('pcsw.Client'), func))
+    # uses virtual field "Guest.client" defined in
+    # lino_welfare.modlib.cal.models
     for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
         T.column_names = T.column_names.replace('partner', 'client')
         T.detail_layout = T.detail_layout.replace('partner', 'client')

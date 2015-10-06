@@ -29,8 +29,6 @@ from lino.api import dd, rt, _
 from lino_cosi.lib.ledger.choicelists import VoucherTypes
 from lino_cosi.lib.ledger.ui import PartnerVouchers, ByJournal
 
-from .models import ClientVoucher
-
 
 class VoucherItems(dd.Table):
     model = 'client_vouchers.VoucherItem'
@@ -84,5 +82,7 @@ class ClientVouchersByJournal(ClientVouchers, ByJournal):
     """
     order_by = ["-number"]
 
+
+from .models import ClientVoucher
 VoucherTypes.add_item(ClientVoucher, ClientVouchersByJournal)
 
