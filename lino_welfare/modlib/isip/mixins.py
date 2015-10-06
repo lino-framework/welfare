@@ -509,6 +509,13 @@ class ContractBase(Signers, Certifiable, EventGenerator):
                                 partner=u.partner,
                                 role=coaching.type.eval_guestrole)
 
+    @classmethod
+    def get_printable_demo_objects(cls, excerpt_type):
+        """All contracts of a demo project are being printed.  Overrides
+        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_printable_demo_objects`.
+
+        """
+        return cls.objects.all()
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)
 

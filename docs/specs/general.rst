@@ -60,8 +60,8 @@ The following table gives an overview of these things.
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        528
- cal.EventType                  cal.EventTypes                  19        8
- cal.Guest                      cal.Guests                      9         521
+ cal.EventType                  cal.EventTypes                  19        9
+ cal.Guest                      cal.Guests                      9         524
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
@@ -110,7 +110,7 @@ The following table gives an overview of these things.
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.Excerpts               12        16
+ excerpts.Excerpt               excerpts.Excerpts               12        67
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0

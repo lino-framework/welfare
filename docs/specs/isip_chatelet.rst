@@ -1,47 +1,30 @@
-.. _welfare.specs.isip:
+.. _welfare.specs.isip_chatelet:
 
-==============
-ISIP contracts
-==============
+=========================
+ISIP contracts (Chatelet)
+=========================
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_isip
+    $ python setup.py test -s tests.SpecsTests.test_isip_chatelet
     
     Doctest initialization:
 
     >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    ...    'lino_welfare.projects.chatelet.settings.doctests'
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('robin')
     >>> translation.activate('en')
 
-A technical tour into the :mod:`lino_welfare.modlib.isip` module.
-See also :doc:`/tour/autoevents`.
 
 .. contents::
    :local:
 
-Configuration
-=============
-
->>> ses.show(isip.ContractTypes)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-===================== ===================== ===================== =========== ==================== ==================
- Designation           Designation (fr)      Designation (de)      Reference   Examination Policy   needs Study type
---------------------- --------------------- --------------------- ----------- -------------------- ------------------
- VSE Ausbildung        VSE Ausbildung        VSE Ausbildung        vsea        Every month          Yes
- VSE Arbeitssuche      VSE Arbeitssuche      VSE Arbeitssuche      vseb        Every month          No
- VSE Lehre             VSE Lehre             VSE Lehre             vsec        Every month          No
- VSE Vollzeitstudium   VSE Vollzeitstudium   VSE Vollzeitstudium   vsed        Every month          Yes
- VSE Sprachkurs        VSE Sprachkurs        VSE Sprachkurs        vsee        Every month          No
- **Total (5 rows)**                                                                                 **2**
-===================== ===================== ===================== =========== ==================== ==================
-<BLANKLINE>
-
+Contracts
+=========
 
 >>> rt.show(isip.Contracts)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -81,41 +64,39 @@ Configuration
 ==== ============== =============== ============================ =================== =====================
 <BLANKLINE>
 
+This contract has a slave table 
+:class:`EventsByContract<lino_welfare.modlib.isip.models.EventsByContract>`
+which contains non-ascii characters:
 
-Contracts and Grantings
-=======================
+>>> obj = isip.Contract.objects.get(id=1)
+>>> rt.show(isip.EventsByContract, obj)
+=============== ==========
+ Summary         Date
+--------------- ----------
+ Évaluation 1    10/29/12
+ Évaluation 2    11/29/12
+ Évaluation 3    12/31/12
+ Évaluation 4    1/31/13
+ Évaluation 5    2/28/13
+ Évaluation 6    3/28/13
+ Évaluation 7    4/29/13
+ Évaluation 8    5/29/13
+ Évaluation 9    7/1/13
+ Évaluation 10   8/1/13
+=============== ==========
+<BLANKLINE>
 
-(The following is not yet very useful:)
 
->>> for obj in isip.Contracts.request():
-...    print obj.id, obj.applies_from, repr(obj.get_granting())
-1 2012-09-29 Granting #1 (u'EiEi/9/29/12/116')
-2 2013-08-08 None
-3 2012-10-09 Granting #3 (u'EiEi/10/9/12/118')
-4 2012-10-19 Granting #4 (u'Ausl\xe4nderbeihilfe/10/19/12/124')
-5 2014-02-12 None
-6 2014-03-15 None
-7 2012-11-03 Granting #7 (u'EiEi/11/3/12/152')
-8 2012-11-13 Granting #8 (u'Ausl\xe4nderbeihilfe/11/13/12/127')
-9 2012-11-23 Granting #9 (u'EiEi/11/23/12/130')
-10 2013-10-02 None
-11 2012-12-08 Granting #11 (u'EiEi/12/8/12/137')
-12 2014-04-03 None
-13 2014-05-04 None
-14 2012-12-18 Granting #14 (u'Ausl\xe4nderbeihilfe/12/18/12/139')
-15 2014-04-13 None
-16 2012-12-28 Granting #16 (u'Ausl\xe4nderbeihilfe/12/28/12/178')
-17 2013-01-12 Granting #17 (u'EiEi/1/12/13/146')
-18 2013-11-21 None
-19 2013-01-22 Granting #19 (u'EiEi/1/22/13/153')
-20 2013-02-01 Granting #20 (u'Ausl\xe4nderbeihilfe/2/1/13/157')
-21 2014-05-28 None
-22 2014-06-28 None
-23 2013-02-16 Granting #23 (u'EiEi/2/16/13/161')
-24 2014-06-12 None
-25 2014-07-13 None
-26 2013-02-26 Granting #26 (u'Ausl\xe4nderbeihilfe/2/26/13/165')
-27 2014-06-22 None
-28 2013-03-08 Granting #28 (u'Ausl\xe4nderbeihilfe/3/8/13/168')
-29 2014-07-02 None
-30 2014-08-02 None
+.. 20151005 tried to reproduce a unicode error
+    >> context = obj.get_printable_context(ar)
+    >> context.update(self=obj)
+    >> context.update(self=obj)
+    >> target = "tmp.odt"
+    >> #bm = rt.modules.printing.BuildMethods.appyodt
+    >> #action = obj.do_print.bound_action.action
+    >> #action = rt.modules.excerpts.Excerpt.do_print
+    >> # tplfile = bm.get_template_file(ar, action, obj)
+    >> tplfile = settings.SITE.find_config_file('Default.odt', 'isip/Contract')
+
+    >> from lino.modlib.appypod.appy_renderer import AppyRenderer
+    >> r = AppyRenderer(ar, tplfile, context, target, **settings.SITE.appy_params).run()

@@ -16,7 +16,8 @@ Households
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from lino.api.doctest import *
 
-A technical tour into the :mod:`lino_welfare.modlib.households` module.
+The :mod:`lino_welfare.modlib.households` plugin is an extension of 
+:mod:`lino.modlib.households` which adds some PCSW-specific features.
 
 
 .. contents::
@@ -109,7 +110,8 @@ Mr Paul FRISCH
 ========== =================== ================ ==================== ============ =========== ============ ========
 <BLANKLINE>
 
-Here is their :class:`welfare.households.RefundsByPerson`:
+Here is their :class:`RefundsByPerson
+<lino_welfare.modlib.households.models.RefundsByPerson>`:
 
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
 ==================== ======== ================= ===========

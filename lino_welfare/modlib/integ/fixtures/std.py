@@ -40,24 +40,21 @@ def objects():
     meetings because the exact planning is done by the user. But we
     define a limit of 4 client meetings per day per user.
     """
-    calendar = Instantiator('cal.EventType').build
+    event_type = Instantiator('cal.EventType').build
     kw = dict()
     kw.update(dd.str2kw('name', _("Internal meetings with client")))
     kw.update(dd.str2kw('event_label', _("Appointment")))
-    # kw = dd.babelkw('name',
-    #                 de="Klientengespräche intern",
-    #                 fr="Rencontres internes avec client",
-    #                 en="Internal meetings with client")
-    # kw.update(dd.babelkw('event_label',
-    #                      de="Termin",
-    #                      fr="Rendez-vous",
-    #                      en="Appointment"))
-
     kw.update(max_conflicting=4)
-    client_calendar = calendar(invite_client=True, **kw)
+    client_calendar = event_type(invite_client=True, **kw)
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
     yield settings.SITE.site_config
+
+    kw = dict()
+    kw.update(dd.str2kw('name', _("Evaluation")))
+    kw.update(max_conflicting=4)
+    client_calendar = event_type(invite_client=True, **kw)
+    yield client_calendar
 
     kw = dict()
     for wd in WORKDAYS:
@@ -66,15 +63,21 @@ def objects():
         'isip.ExamPolicy', 'every',
         every_unit=DurationUnits.months, **kw).build
     yield exam_policy(
-        1, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every month', de=u'monatlich', fr=u"mensuel"))
+        1, event_type=client_calendar, start_time="9:00",
+        **dd.str2kw('name', _("Every month")))
+        # **dd.babelkw(
+        #     'name', en='every month', de=u'monatlich', fr=u"mensuel"))
     yield exam_policy(
-        2, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
+        2, event_type=client_calendar, start_time="9:00",
+        **dd.str2kw('name', _("Every 2 months")))
+        # **dd.babelkw(
+        #     'name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
     yield exam_policy(
-        3, event_type=client_calendar, start_time="9:00", **dd.babelkw(
-            'name', en='every 3 months', de=u'alle 3 Monate',
-            fr=u"tous les 3 mois"))
+        3, event_type=client_calendar,
+        **dd.str2kw('name', _("Every 3 months")))
+        # start_time="9:00", **dd.babelkw(
+        #     'name', en='every 3 months', de=u'alle 3 Monate',
+        #     fr=u"tous les 3 mois"))
 
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every',
@@ -82,8 +85,9 @@ def objects():
     yield exam_policy(
         2,
         event_type=client_calendar, start_time="9:00",
-        **dd.babelkw('name', en='every 2 weeks', de=u'zweiwöchentlich',
-                     fr=u"hebdomadaire"))
+        **dd.str2kw('name', _("Every 2 weeks")))
+        # **dd.babelkw('name', en='every 2 weeks', de=u'zweiwöchentlich',
+        #              fr=u"hebdomadaire"))
 
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every',

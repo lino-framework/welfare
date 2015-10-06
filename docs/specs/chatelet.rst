@@ -76,8 +76,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        528
- cal.EventType                  cal.EventTypes                  19        9
- cal.Guest                      cal.Guests                      9         515
+ cal.EventType                  cal.EventTypes                  19        10
+ cal.Guest                      cal.Guests                      9         521
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
@@ -122,7 +122,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
- excerpts.Excerpt               excerpts.Excerpts               12        18
+ excerpts.Excerpt               excerpts.Excerpts               12        69
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14

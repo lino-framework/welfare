@@ -273,10 +273,29 @@ class TasksByClient(Tasks):
 
 
 class Guest(Guest):
+    """
+    
+    .. attribute:: client
+    
+        Virtual field which returns the `partner` if it is a client.
+
+        When clicking in :class:`WaitingVisitors
+        <lino.modlib.reception.models.WaitingVisitors>` on the partner
+        show the *Client's* and not the *Partner's* detail.
+
+    """
 
     def get_excerpt_options(self, ar, **kw):
         kw.update(project=self.event.project)
         return super(Guest, self).get_excerpt_options(ar, **kw)
+
+    @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
+    def client(self, ar):
+        Client = rt.modules.pcsw.Client
+        try:
+            return Client.objects.get(pk=self.partner.pk)
+        except Client.DoesNotExist:
+            return None
 
 
 @dd.receiver(dd.post_analyze)
