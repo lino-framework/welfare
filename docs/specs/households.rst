@@ -54,7 +54,7 @@ Mr Paul FRISCH
 >>> soup = BeautifulSoup(check('contacts/Persons/240', 'LinksByHuman'))
 >>> links = soup.find_all('a')
 >>> len(links)
-21
+23
 
 >>> print(links[1].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE
@@ -68,8 +68,8 @@ Paul ist Vater von Dennis (12 Jahre) Vater von Clara (14 Jahre) Vater
 von Philippe (16 Jahre) Vater von Peter (26 Jahre) Ehemann von Petra
 ZWEITH (45 Jahre) Sohn von Gaby FROGEMUTH (79 Jahre) Sohn von Hubert
 (80 Jahre) Beziehung erstellen als Vater / Sohn Adoptivvater /
-Adoptivsohn Ehemann Partner Stiefvater / Stiefsohn Bruder Vetter Onkel
-/ Neffe Verwandter Sonstiger
+Adoptivsohn Pflegevater / Pflegesohn Ehemann Partner Stiefvater /
+Stiefsohn Bruder Vetter Onkel / Neffe Verwandter Sonstiger
 
 The previous AJAX call caused Django's translation machine to switch
 to German. Switch back to English.

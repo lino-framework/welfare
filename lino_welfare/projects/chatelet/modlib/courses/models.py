@@ -16,6 +16,10 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
+"""
+Does some adaptions.
+"""
+
 from __future__ import unicode_literals
 from __future__ import print_function
 
@@ -47,12 +51,20 @@ def my_enrolment_workflows(sender=None, **kw):
     EnrolmentStates.finished.add_transition(
         required_states="started")
 
+    CourseStates.registered.add_transition(required_states="draft")
+    CourseStates.draft.add_transition(required_states="registered")
+
 
 class Course(Course):
     class Meta:
         verbose_name = _("Workshop")
         verbose_name_plural = _('Workshops')
         abstract = dd.is_abstract_model(__name__, 'Course')
+
+
+# GUEST_ENROLMENT_STATES = set([
+#     EnrolmentStates.confirmed,
+#     EnrolmentStates.started])
 
 
 class Enrolment(Enrolment):
@@ -66,6 +78,9 @@ class Enrolment(Enrolment):
         _("Difficultés à l'origine de la demande / "
           "Problématiques repérées"),
         blank=True, format="html")
+
+    # def suggest_guest_for(self, event):
+    #     return self.state in GUEST_ENROLMENT_STATES
 
 Enrolments.detail_layout = """
 request_date user
