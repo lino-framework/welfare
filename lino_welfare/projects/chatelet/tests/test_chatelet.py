@@ -31,10 +31,8 @@ Or::
 
 from __future__ import unicode_literals
 
-import logging
-logger = logging.getLogger(__name__)
-
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 from lino.api import rt
 from lino.utils.djangotest import TestCase
@@ -146,8 +144,11 @@ class TestCase(TestCase):
         ar = rt.login('robin')
         settings.SITE.verbose_client_info_message = False
 
-        pupil = Pupil(first_name="First", last_name="Last")
+        pupil = Pupil(first_name="First", last_name="Pupil")
         pupil.save()
+
+        pupil2 = Pupil(first_name="Second", last_name="Pupil")
+        pupil2.save()
 
         et = EventType(name="lesson")
         et.full_clean()
@@ -171,17 +172,36 @@ class TestCase(TestCase):
             monday=True, room=room)
         course.full_clean()
         course.save()
+
+        # Two enrolments, one is requested, the other confirmed. Only
+        # the confirmed enrolments will be inserted as guests.
+
+        self.create_obj(Enrolment, course=course,
+                        state=EnrolmentStates.requested, pupil=pupil2)
+
+        self.create_obj(Enrolment, course=course,
+                        state=EnrolmentStates.confirmed,
+                        pupil=pupil)
+
         wanted = course.get_wanted_auto_events(ar)
-        # self.assertEqual(
-        # ar.response['info_message'], 'Generating events between...')
+        self.assertEqual(
+            ar.response['info_message'],
+            'Generating events between 2015-04-13 and 2019-05-22.')
         self.assertEqual(len(wanted), 4)
-        enr = Enrolment(
-            course=course, state=EnrolmentStates.requested, pupil=pupil)
-        enr.save()
 
         course.do_update_events.run_from_ui(ar)
         self.assertEqual(ar.response['success'], True)
         self.assertEqual(Event.objects.all().count(), 4)
         self.assertEqual(Guest.objects.all().count(), 4)
         # self.assertEqual(ar.response['info_message'], '')
+
+        try:
+            self.create_obj(Enrolment, course=course,
+                            state=EnrolmentStates.confirmed, pupil=pupil)
+            self.fail("Expected ValidationError")
+        except ValidationError as e:
+            self.assertEqual(
+                str(e),
+                "{'__all__': [u'Un(e) Inscription avec ce Atelier et "
+                "B\\xe9n\\xe9ficiaire existe d\\xe9j\\xe0.']}")
 
