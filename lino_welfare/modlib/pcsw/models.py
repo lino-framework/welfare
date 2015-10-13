@@ -152,6 +152,12 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         table groups clients using this field.
 
 
+    .. attribute:: civil_state
+
+       The civil state of this client. Allowed choices are defined in
+       :class:`CivilState
+       <lino_welfare.modlib.pcsw.choicelists.CivilState>`.
+
     .. attribute:: client_state
     
         Pointer to :class:`ClientStates`.

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2015 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -176,3 +176,14 @@ class Migrator(Migrator):
             create_properties_personproperty=create_properties_personproperty)
 
         return '1.1.17'
+
+    def unused_migrate_from_1_1_25(self, globals_dict):
+        """:class:`CivilState <lino_welfare.modlib.pcsw.choicelists.CivilState>`"""
+
+        CivilState = rt.modules.pcsw.CivilState
+        contacts_Person = globals_dict('contacts_Person')
+        pcsw_Client = globals_dict('pcsw_Client')
+        create_mti_child = globals_dict('create_mti_child')
+
+        def create_pcsw_client(person_ptr_id, national_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, group_id, birth_place, birth_country_id, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type_id, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact_id, client_state, refusal_reason, geographic_area, child_custody, broker_id, faculty_id):
+            return create_mti_child(contacts_Person,person_ptr_id,pcsw_Client,national_id=national_id,nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,group_id=group_id,birth_place=birth_place,birth_country_id=birth_country_id,civil_state=civil_state,residence_type=residence_type,in_belgium_since=in_belgium_since,residence_until=residence_until,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,declared_name=declared_name,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_office_contact_id=job_office_contact_id,client_state=client_state,refusal_reason=refusal_reason,geographic_area=geographic_area,child_custody=child_custody,broker_id=broker_id,faculty_id=faculty_id)
