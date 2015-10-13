@@ -53,7 +53,6 @@ class TestCase(TestCase):
 
         rt.modules.users.User(username='robin').save()
         ses = rt.login('robin')
-
         settings.SITE.site_config.import_sepa(ses)
 
         self.assertEqual(1+1, 2)
