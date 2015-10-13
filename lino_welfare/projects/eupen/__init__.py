@@ -26,6 +26,7 @@ The Lino Welfare variant used in Eupen.
    modlib
    tests.test_watchtim
    tests.test_broken_gfks
+   tests.test_import_sepa
 
 """
 from __future__ import unicode_literals
