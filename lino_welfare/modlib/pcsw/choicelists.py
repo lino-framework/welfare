@@ -82,8 +82,8 @@ class CivilState(dd.ChoiceList):
 
     .. attribute:: separated
 
-        Legally separated, Separated as to property (Séparé de corps
-        et de biens, Von Tisch und Bett getrennt)
+        Legally separated, aka "Separated as to property" (Séparé de
+        corps et de biens, Getrennt von Tisch und Bett)
 
         La séparation de corps et de biens est une procédure
         judiciaire qui, sans dissoudre le mariage, réduit les droits
@@ -108,9 +108,7 @@ class CivilState(dd.ChoiceList):
     <http://www4.gouv.qc.ca/EN/Portail/Citoyens/Evenements/separation-divorce/Pages/separation-fait.aspx>`__,
     `wikipedia.org <https://en.wikipedia.org/wiki/Cohabitation>`__
 
-    The default list currently contains the following data which comes
-    from unreliable sources and will be migrated in October 2015 (see
-    :meth:`old2new`):
+    The default list contains the following data:
 
     .. django2rst::
         
@@ -124,7 +122,7 @@ class CivilState(dd.ChoiceList):
     @classmethod
     def old2new(cls, old):
         """
-        **Migration rules (October 2015)**
+        **Migration rules** (October 2015) to remove some obsolete choices:
 
         - 13 (Single cohabitating) becomes :attr:`cohabitating`
         - 18 (Single with child) becomes :attr:`single`
@@ -145,17 +143,31 @@ class CivilState(dd.ChoiceList):
             return cls.widowed
         return cls.get_by_value(old)
 
+    @classmethod
+    def to_python(cls, value):
+        """This will call :meth:`old2new` when loading data from previous
+        version. Can be removed when all production sites have been
+        migrated.
+
+        """
+        if value:
+            return cls.old2new(value)
+        return None
+        # return super(CivilState, cls).to_python(value)
+
 add = CivilState.add_item
 add('10', _("Single"), 'single')
-add('13', _("Single cohabitating"))
-add('18', _("Single with child"))
+# add('13', _("Single cohabitating"))
+# add('18', _("Single with child"))
 add('20', _("Married"), 'married')
-add('21', _("Married (living alone)"))
-add('22', _("Married (living with another partner)"))
+# add('21', _("Married (living alone)"))
+# add('22', _("Married (living with another partner)"))
 add('30', _("Widowed"), 'widowed')
-add('33', _("Widow cohabitating"))
+# add('33', _("Widow cohabitating"))
 add('40', _("Divorced"), 'divorced')
 add('50', _("Separated"), 'separated')  # Getrennt von Tisch und Bett /
+add('51', _("De facto separated"), 'separated_de_facto')  # Faktisch getrennt
+add('60', _("Cohabitating"), 'cohabitating')
 
 
 #~ '10', 'Célibataire', 'Ongehuwd', 'ledig'
