@@ -36,28 +36,114 @@ from .roles import SocialStaff
 
 
 class CivilState(dd.ChoiceList):
+    """The global list of **civil states** that a client can have.  This
+    is the list of choices for the :attr:`civil_state
+    <lino_welfare.modlib.pcsw.models.Client.civil_state>` field of a
+    :class:`Client <lino_welfare.modlib.pcsw.models.Client>`.
 
-    """
-    Civil states, using Belgian codes.
-    
+    **The four official civil states** according to Belgian law are:
+
+    .. attribute:: single
+
+        célibataire : vous n’avez pas de partenaire auquel vous êtes
+        officiellement lié
+
+    .. attribute:: married
+
+        marié(e) : vous êtes légalement marié
+
+    .. attribute:: widowed
+
+        veuf (veuve) / Verwitwet : vous êtes légalement marié mais
+        votre partenaire est décédé
+
+    .. attribute:: divorced
+
+        divorcé(e) (Geschieden) : votre mariage a été juridiquement dissolu
+
+    **Some institutions define additional civil states** for people
+    who are officially still married but at different degrees of
+    separation:
+
+    .. attribute:: de_facto_separated
+
+        De facto separated (Séparé de fait, faktisch getrennt)
+
+        Des conjoints sont séparés de fait lorsqu'ils ne respectent
+        plus le devoir de cohabitation. Leur mariage n'est cependant
+        pas dissous.
+
+        La notion de séparation de fait n'est pas définie par la
+        loi. Toutefois, le droit en tient compte dans différents
+        domaines, par exemple en matière fiscale ou en matière de
+        sécurité sociale (assurance maladie invalidité, allocations
+        familiales, chômage, pension, accidents du travail, maladies
+        professionnelles).
+
+    .. attribute:: separated
+
+        Legally separated, Separated as to property (Séparé de corps
+        et de biens, Von Tisch und Bett getrennt)
+
+        La séparation de corps et de biens est une procédure
+        judiciaire qui, sans dissoudre le mariage, réduit les droits
+        et devoirs réciproques des conjoints.  Le devoir de
+        cohabitation est supprimé.  Les biens sont séparés.  Les
+        impôts sont perçus de la même manière que dans le cas d'un
+        divorce. Cette procédure est devenue très rare.
+
+    **Another unofficial civil state** (but relevant in certain
+    situations) is:
+
+    .. attribute:: cohabitating
+
+        Cohabitating (cohabitant, zusammenlebend)
+
+        Vous habitez avec votre partenaire et c’est
+        reconnu légalement.
+
+    Sources for above: `belgium.be
+    <http://www.belgium.be/fr/famille/couple/divorce_et_separation/separation_de_fait/>`__,
+    `gouv.qc.ca
+    <http://www4.gouv.qc.ca/EN/Portail/Citoyens/Evenements/separation-divorce/Pages/separation-fait.aspx>`__,
+    `wikipedia.org <https://en.wikipedia.org/wiki/Cohabitation>`__
+
+    The default list currently contains the following data which comes
+    from unreliable sources and will be migrated in October 2015 (see
+    :meth:`old2new`):
+
+    .. django2rst::
+        
+        rt.show(pcsw.CivilState)
+
     """
     required_roles = dd.required(SocialStaff)
     verbose_name = _("Civil state")
     verbose_name_plural = _("Civil states")
 
     @classmethod
-    def old2new(cls, old):  # was used for migrating to 1.4...
-        if old == '1':
+    def old2new(cls, old):
+        """
+        **Migration rules (October 2015)**
+
+        - 13 (Single cohabitating) becomes :attr:`cohabitating`
+        - 18 (Single with child) becomes :attr:`single`
+        - 21 (Married (living alone)) becomes :attr:`separated_de_facto`
+        - 22 (Married (living with another partner)) becomes :attr:`separated_de_facto`
+        - 33 (Widow cohabitating) becomes :attr:`widowed`
+
+        """
+        if old == '13':
+            return cls.cohabitating
+        if old == '18':
             return cls.single
-        if old == '2':
-            return cls.married
-        if old == '3':
-            return cls.divorced
-        if old == '4':
+        if old == '21':
+            return cls.separated_de_facto
+        if old == '22':
+            return cls.separated_de_facto
+        if old == '33':
             return cls.widowed
-        if old == '5':
-            return cls.separated
-        return ''
+        return cls.get_by_value(old)
 
 add = CivilState.add_item
 add('10', _("Single"), 'single')
