@@ -56,3 +56,9 @@ class TestCase(TestCase):
         settings.SITE.site_config.import_sepa(ses)
 
         self.assertEqual(1+1, 2)
+
+        Account = rt.modules.sepa.Account
+        Movement = rt.modules.sepa.Movement
+        self.assertEqual(Account.objects.count(), 1)
+        self.assertEqual(Movement.objects.count(), 2)
+        
