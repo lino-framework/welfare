@@ -39,7 +39,6 @@ HERE = os.path.dirname(__file__)
 
 
 class TestCase(TestCase):
-
     # fixtures = ['std']
 
     maxDiff = None
@@ -55,10 +54,7 @@ class TestCase(TestCase):
         ses = rt.login('robin')
         settings.SITE.site_config.import_sepa(ses)
 
-        self.assertEqual(1+1, 2)
-
         Account = rt.modules.sepa.Account
         Movement = rt.modules.sepa.Movement
-        self.assertEqual(Account.objects.count(), 1)
-        self.assertEqual(Movement.objects.count(), 0)
-        
+        self.assertEqual(Account.objects.count(), 197)
+        self.assertEqual(Movement.objects.count(), 134)
