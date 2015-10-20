@@ -28,11 +28,10 @@ Charactéristiques du framework
   (2) désignations des codes et (3) destinataire d’un document
 - Génération automatique de documents de type PDF, MS-Word, OpenOffice et autres se basant sur des templates (modèles, gabarits)
 - WebDAV automatique intégré afin de pouvoir éditer des documents générés et stockés sur le serveur sans que l’utilisateur doive intervenir.
-- Export des données vers des tableurs 
-  en Hypertext Markup Language (HTML) et Portable Document Format (PDF)
+- Export des données vers des tables  en `.pdf`, `.xls` ou `.csv`
 - Filtres et fonctions de recherche intuitifs et avancés
-- Authentication annuaire LDAP
-- Customisation facile
+- Authentication en utilisant votre annuaire LDAP
+- Il est facile de créer des adaptations sur mesure
 - Système sophistiqué pour définir et modifier les workflows 
 
 Fonctionnalités générales secrétariat
