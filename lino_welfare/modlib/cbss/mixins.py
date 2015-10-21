@@ -141,7 +141,8 @@ The raw XML response received.
 
     #~ send_action = ExecuteRequest()
     #~ print_action = mixins.DirectPrintAction(required=dict(states=['ok','warnings']))
-    do_print = mixins.DirectPrintAction()
+    if False:  # removed 20151021
+        do_print = mixins.DirectPrintAction()
 
     def on_duplicate(self, ar, master):
         """
@@ -295,6 +296,15 @@ The raw XML response received.
     @dd.virtualfield(dd.HtmlBox(_("Result")))
     def result(self, ar):
         return self.response_xml
+
+    def get_excerpt_options(self, ar, **kw):
+        """When we print a request, the resulting excerpt should go to the
+        client's history.
+
+        """
+        kw.update(project=self.person)
+        return super(CBSSRequest, self).get_excerpt_options(ar, **kw)
+
 
 #~ dd.update_field(CBSSRequest,'project',blank=False,null=False)
 dd.update_field(CBSSRequest, 'user', blank=False, null=False)
