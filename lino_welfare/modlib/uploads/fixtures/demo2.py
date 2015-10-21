@@ -41,6 +41,8 @@ def objects():
     hubert = rt.login('hubert')
     CLIENTS = Cycler(rt.modules.pcsw.CoachedClients.request(user=hubert))
     UPLOAD_TYPES = Cycler(UploadType.objects.all())
+    if len(CLIENTS) == 0:
+        raise Exception("There are no clients?!")
     for i in range(3):
         cli = CLIENTS.pop()
         for j in range(2):

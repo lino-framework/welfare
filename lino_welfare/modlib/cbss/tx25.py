@@ -22,7 +22,19 @@ sur certains types d’informations légales" (in `Codes d'interrogations
 
 See user documentation at :class:`welfare.cbss.RetrieveTIGroupsRequest`.
 
-All common information types are being handled. See
+Incomplete list of the supported TIs:
+
+.. py2rst::
+
+    from lino_welfare.modlib.cbss.tx25 import HANDLERS
+    tpl = "- {0} ({1}) : {2} "
+    for name, v in HANDLERS.items():
+        label, subname, itname = v
+        print(tpl.format(name, itname, unicode(label)))
+
+All common information types are being handled.
+
+See
 :class:`RowFactory`
 
 See also:
@@ -367,6 +379,26 @@ def IT018(n):
 
 def IT024(n):
     info = Info()
+    info.add_deldate(n)
+    return info
+
+
+def TypeOfBurialType(n):
+    return code_label(n)
+
+
+def LegalRepresentativeType(n):
+    info = Info()
+    info.addfrom(n, 'NationalNumber', " ", NationalNumberType)
+    info.addfrom(n, 'Graphic', " ")
+    return info
+
+
+def IT152(n):  # BurialModes, Mode de sépulture
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    info.addfrom(n, 'TypeOfBurial', "", TypeOfBurialType)
+    info.addfrom(n, 'LegalRepresentative', "", LegalRepresentativeType)
     info.add_deldate(n)
     return info
 
@@ -963,6 +995,8 @@ register_it_handler('PseudoNationalNumbers',
                     'IT208')
 register_it_handler('TemporaryAbsences',
                     _("Temporary absences"), 'TemporaryAbsence', 'IT026')
+register_it_handler('BurialModes',
+                    _("Burial modes"), 'BurialMode', 'IT152')
 
 
 class RowFactory(object):
@@ -971,9 +1005,6 @@ class RowFactory(object):
     given type.  Consult the source code of this class to see how it
     works.
     
-    TODO: present here a complete list of the supported TIs (generated
-    from source code).
-
     """
 
     def start_group(self, group):
