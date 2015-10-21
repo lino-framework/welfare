@@ -50,11 +50,12 @@ Rolf is the local system administrator, he has a complete menu:
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
-- ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
+  - Orphaned bank accounts
+- ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -84,9 +85,9 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
+  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
   - SEPA : Konten, Statements, Bewegungen
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -149,6 +150,7 @@ to explicitly override the language of :meth:`show_menu
 - Büro : Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Buchhaltung : Orphaned bank accounts
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -430,7 +432,10 @@ Each window layout defines a given set of fields.
 - sepa.Accounts.insert : partner, iban, bic
 - sepa.AccountsByClient.detail : partner, iban, bic, remark, managed, account_type
 - sepa.AccountsByPartner.insert : iban, bic, remark
-- sepa.Statements.insert : account, date, statement_number, balance_start
+- sepa.Movements.insert : statement, unique_import_id, movement_date, amount, partner, remote_account, remote_bic, ref, message, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date
+- sepa.OrphanedAccounts.detail : partner, iban, bic, remark
+- sepa.OrphanedAccounts.insert : partner, iban, bic
+- sepa.Statements.insert : account, statement_number, balance_start, balance_end, account__partner, date, date_done
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
@@ -610,6 +615,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - sepa.Accounts.insert : visible for 110 410 500 admin
 - sepa.AccountsByClient.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - sepa.AccountsByPartner.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- sepa.Movements.insert : visible for 110 410 500 admin
+- sepa.OrphanedAccounts.detail : visible for 110 410 500 admin
+- sepa.OrphanedAccounts.insert : visible for 110 410 500 admin
 - sepa.Statements.insert : visible for 110 410 500 admin
 - system.SiteConfigs.detail : visible for admin
 - tinymce.TextFieldTemplates.detail : visible for admin
