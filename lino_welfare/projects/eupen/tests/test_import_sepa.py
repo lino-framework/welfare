@@ -56,5 +56,5 @@ class TestCase(TestCase):
 
         Account = rt.modules.sepa.Account
         Movement = rt.modules.sepa.Movement
-        self.assertEqual(Account.objects.count(), 197)
-        self.assertEqual(Movement.objects.count(), 134)
+        self.assertEqual(Account.objects.count(), 193)
+        self.assertEqual(Movement.objects.count(), 131)
