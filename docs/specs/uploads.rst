@@ -41,7 +41,7 @@ contenttype id of `pcsw.Client` model. If the following line changes,
 subsequent snippets need to get adapted:
 
 >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-53
+58
 
 Configuring upload types
 ========================
@@ -308,7 +308,7 @@ It has 3 keys:
 10
 
 >>> d.base_params
-{u'mt': 53, u'mk': 177, u'type_id': 1}
+{u'mt': 58, u'mk': 177, u'type_id': 1}
 
 >>> d.data_record.keys()
 [u'phantom', u'data', u'title']

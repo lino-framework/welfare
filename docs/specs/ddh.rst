@@ -155,8 +155,6 @@ Lino Welfare:
   - PROTECT : cv.LanguageKnowledge.language, cv.Training.language, cv.Study.language
 - ledger.Journal :
   - PROTECT : ledger.Voucher.journal, ledger.MatchRule.journal
-- ledger.Movement :
-  - PROTECT : ledger.Movement.match, vatless.AccountInvoice.match, finan.GrouperItem.match, finan.JournalEntryItem.match, finan.BankStatementItem.match, finan.PaymentOrderItem.match
 - ledger.PaymentTerm :
   - PROTECT : vatless.AccountInvoice.payment_term
 - ledger.Voucher :
@@ -207,7 +205,7 @@ Lino Welfare:
 - properties.PropType :
   - PROTECT : properties.PropChoice.type, properties.Property.type
 - sepa.Account :
-  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, sepa.Movement.bank_account, finan.PaymentOrderItem.bank_account
+  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, finan.PaymentOrderItem.bank_account
 - sepa.Statement :
   - PROTECT : sepa.Movement.statement
 - uploads.UploadType :
@@ -232,18 +230,18 @@ It is not allowed to delete a person who is being used as the
 ==== ========== ================= =====
  ID   Username   Partner           ID
 ---- ---------- ----------------- -----
- 6    alicia     Allmanns Alicia   194
- 9    caroline
- 5    hubert     Huppertz Hubert   193
- 10   judith     Jousten Judith    196
+ 7    alicia     Allmanns Alicia   194
+ 10   caroline
+ 6    hubert     Huppertz Hubert   193
+ 11   judith     Jousten Judith    196
  12   kerstin
- 4    melanie    Mélard Mélanie    192
- 8    nicolas
+ 5    melanie    Mélard Mélanie    192
+ 9    nicolas
  1    robin
  3    rolf
  2    romain
- 7    theresia   Thelen Theresia   195
- 11   wilfried
+ 8    theresia   Thelen Theresia   195
+ 4    wilfried
 ==== ========== ================= =====
 <BLANKLINE>
 
