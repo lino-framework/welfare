@@ -4,10 +4,11 @@
 Fiche technique Lino pour CPAS
 ==============================
 
-"Lino" est un framework (une bibliotheque de modules pour créer des
-applications), "Lino pour CPAS" (anglais "Lino Welfare") est la
-première application qui a été faite avec Lino. Il existe d'autres
-applications Lino qui n'ont rien à voir avec les CPAS.
+Vocabulaire: "Lino" est un `framework
+<https://fr.wikipedia.org/wiki/Framework>`_ (une bibliotheque de
+modules pour créer des applications).  "Lino pour CPAS" (anglais "Lino
+Welfare") est une application qui a été faite avec Lino. Il existe
+d'autres applications Lino qui n'ont rien à voir avec les CPAS.
 
 
 Charactéristiques du framework
@@ -44,21 +45,22 @@ Fonctionnalités générales secrétariat
 - Les utilisateurs peuvent donner procuration à leurs collègue de 
   travailler et effectuer certaines actions en leur nom.
 
-Fonctionnalités spécifiques aux CPAS 
--------------------------------------
+Fonctionnalités spécifiques aux CPAS
+------------------------------------
 
-- Les données signalétiques spécifiques aux CPAS (Clients,
-  Ménages,...)  sont intégrées de manière transparente dans la gestion
+- Les données signalétiques spécifiques aux CPAS (bénéficiaires,
+  ménages,...)  sont intégrées de manière transparente dans la gestion
   générale des contacts.
   
-- Un même client peut être accompagné par plusieurs agents dans des
-  services différents.
+- Un même bénéficiaire peut être accompagné par plusieurs agents dans
+  des services différents. Nous parlons d'interventions et
+  d'intervenants.
 
-- Lecture de la carte d'identité électronique (eID)
+- Lecture des données de la carte d'identité électronique (eID)
   
 
-Historique client
------------------
+Historique bénéficiaire
+-----------------------
 
 - Gestion des documents scannés (permis de conduire, de résidence, de
   travail,...).  Rappel optionnel si la date de fin de validité
@@ -66,7 +68,7 @@ Historique client
   
 - Les travailleurs sociaux notent chaque événement.  Traçabilité par
   exemple des appels téléphoniques, des contacts internes et externe
-  avec clients, collègues ou partenaires, courriers, ...
+  avec bénéficiaire, collègues ou partenaires, courriers, ...
   
 Service d’insertion socio-professionnelle
 -----------------------------------------
@@ -75,32 +77,41 @@ Service d’insertion socio-professionnelle
   professionnelles, connaissances des langues, compétences, ...)
   Possibilité de recherche avancée sur base de ces critères.
   
-- Gestion des PIIS (VSE): saisie, création automatique et impression
-  du contrat papier, consultation, analyse statistique, rappels
+- Gestion des PIIS: saisie, création automatique et impression du
+  contrat papier, consultation, analyse statistique, rappels
   automatique des évaluations intermédiaires à prévoir
   
-- Gestion des projets de mise au travail (Art. 60§7): saisie, création
-  automatique et impression de la convention papier, consultation,
-  analyse statistique, rappels automatique des évaluations
-  intermédiaires à prévoir
+- Gestion des projets de mise à l'emploi (articles 60§7 et 61):
+  saisie, création automatique et impression de la convention papier,
+  consultation, analyse statistique, rappels automatique des
+  évaluations intermédiaires à prévoir
 
-- Gestion des partenaires Art60§7
+- Gestion des partenaires art. 60§7
 
 - Gestions des offres d’emploi vacants 
 
-Gestion des cours de langues
-----------------------------
+
+Ateliers internes
+-----------------
+
+- Planning et calendrier des ateliers
+- Inscription des bénéficiaires aux ateliers
+- Gestion des présences
+
+Cours de langues
+----------------
 
 - Gestion des organisations externes organisant des cours de langue
-- Par client saisir des demandes de cours
+- Par bénéficiaire saisir des demandes de cours
 - Par organisation une liste des candidats
 - Gestion de l’offre et de la demande
 
-Gestion des nouvelles demandes/clients
---------------------------------------
 
-- Gestion des spécialités attribuées aux travailleurs sociaux.
-- Proposition automatique des travailleurs sociaux compétents selon
+Nouvelles demandes
+------------------
+
+- Gestion des spécialités attribuées aux agents sociaux.
+- Proposition automatique des agents sociaux compétents selon
   les spécificités de la demande et attribution selon la disponibilité
 
 Médiation de dettes
@@ -111,8 +122,8 @@ répartition au marc-le-franc) et création automatique d’un budget
 mensuel individuel ou par ménage.
 
 
-Reception desk
---------------
+Accueil
+-------
 
 - Visitors are checked in at a reception desk and
   attributed to the responsible social agent.
@@ -128,8 +139,8 @@ Reception desk
   configurable set of templates.
   
 
-Connexion BCSS (nouvelle technologie SOAP/XML)
-----------------------------------------------
+Connexion BCSS
+--------------
 
 - Données légales RN (IdentifyPerson)
 - Intégration (ManageAccess)
