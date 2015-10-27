@@ -131,9 +131,6 @@ class Site(Site):
         yield 'lino_welfare.modlib.reception'
         yield 'lino_cosi.lib.accounts'
         yield 'lino_welfare.modlib.badges'
-        yield 'lino_welfare.modlib.ledger'
-        yield 'lino_welfare.modlib.sepa'
-
         yield 'lino.modlib.boards'
 
         if False:  # not yet ready
@@ -145,6 +142,9 @@ class Site(Site):
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
         yield 'lino_welfare.modlib.pcsw'
+        yield 'lino_welfare.modlib.ledger'
+        yield 'lino_welfare.modlib.sepa'
+
 
         # yield 'lino_welfare.modlib.finan'
         # yield 'lino_cosi.lib.ledger'

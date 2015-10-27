@@ -41,6 +41,8 @@ def objects():
 
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
+    if len(CLIENTS) == 0:
+        raise Exception("Oops, no CLIENTS in %s" % CLIENTS)
     qs = Company.objects.filter(sepa_accounts__iban__gt='').distinct()
     # RECIPIENTS = Cycler(qs[:5])
     RECIPIENTS = Cycler(qs)
@@ -48,6 +50,8 @@ def objects():
         raise Exception("Oops, no recipients in %s" % qs)
     ACCOUNTS = Cycler(Account.objects.filter(
         chart=AccountCharts.default, type=AccountTypes.expenses))
+    if len(ACCOUNTS) == 0:
+        raise Exception("Oops, no ACCOUNTS in %s" % ACCOUNTS)
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
 
     ses = rt.login('wilfried')

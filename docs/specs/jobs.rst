@@ -62,9 +62,9 @@ Job providers
 ================================ ============ ======== ========= ===== ===== =========
  Name                             Adresse      E-Mail   Telefon   GSM   ID    Sprache
 -------------------------------- ------------ -------- --------- ----- ----- ---------
- BISA                             4700 Eupen                            198   de
- Pro Aktiv V.o.G.                 4700 Eupen                            201   de
- R-Cycle Sperrgutsortierzentrum   4700 Eupen                            199   de
+ BISA                             4700 Eupen                            188   de
+ Pro Aktiv V.o.G.                 4700 Eupen                            191   de
+ R-Cycle Sperrgutsortierzentrum   4700 Eupen                            189   de
 ================================ ============ ======== ========= ===== ===== =========
 <BLANKLINE>
 
@@ -96,12 +96,12 @@ Example:
 >>> obj = jobs.Offer.objects.get(pk=1)
 >>> ses.show(jobs.ExperiencesByOffer, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-============ ========== ==================== ========================== ==========================
- Beginnt am   Enddatum   Klient               Firma                      Land
------------- ---------- -------------------- -------------------------- --------------------------
- 07.02.11     07.03.11   LAZARUS Line (144)   Belgisches Rotes Kreuz     Afghanistan
- 04.04.11     04.04.13   JONAS Josef (139)    Werkstatt Cardijn V.o.G.   Britische Jungferninseln
-============ ========== ==================== ========================== ==========================
+============ ========== ==================== =================================== ==========================
+ Beginnt am   Enddatum   Klient               Firma                               Land
+------------ ---------- -------------------- ----------------------------------- --------------------------
+ 07.02.11     07.03.11   LAZARUS Line (144)   Belgisches Rotes Kreuz              Afghanistan
+ 04.04.11     04.04.13   JONAS Josef (139)    Pharmacies Populaires de Verviers   Britische Jungferninseln
+============ ========== ==================== =================================== ==========================
 <BLANKLINE>
 
 
