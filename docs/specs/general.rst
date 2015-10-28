@@ -37,7 +37,7 @@ The following table gives an overview of these things.
 
 >>> print(settings.SITE.get_db_overview_rst()) 
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-56 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, ledger, sepa, boards, welfare, sales, pcsw, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+56 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 151 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -58,7 +58,7 @@ The following table gives an overview of these things.
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
- cal.Calendar                   cal.Calendars                   7         12
+ cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        528
  cal.EventType                  cal.EventTypes                  19        9
  cal.Guest                      cal.Guests                      9         524
@@ -67,7 +67,7 @@ The following table gives an overview of these things.
  cal.RecurrentEvent             cal.RecurrentEvents             22        9
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
- cal.Subscription               cal.Subscriptions               4         9
+ cal.Subscription               cal.Subscriptions               4         8
  cal.Task                       cal.Tasks                       19        34
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
@@ -118,7 +118,7 @@ The following table gives an overview of these things.
  finan.GrouperItem              finan.GrouperItemTable          10        0
  finan.JournalEntry             finan.FinancialVouchers         9         0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             11        30
+ finan.PaymentOrder             finan.PaymentOrders             11        0
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
@@ -146,7 +146,7 @@ The following table gives an overview of these things.
  ledger.MatchRule               ledger.MatchRules               3         4
  ledger.Movement                ledger.Movements                10        120
  ledger.PaymentTerm             ledger.PaymentTerms             8         0
- ledger.Voucher                 ledger.Vouchers                 8         60
+ ledger.Voucher                 ledger.Vouchers                 8         30
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5

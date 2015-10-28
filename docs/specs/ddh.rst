@@ -230,35 +230,35 @@ It is not allowed to delete a person who is being used as the
 ==== ========== ================= =====
  ID   Username   Partner           ID
 ---- ---------- ----------------- -----
- 7    alicia     Allmanns Alicia   194
- 10   caroline
- 6    hubert     Huppertz Hubert   193
- 11   judith     Jousten Judith    196
+ 6    alicia     Allmanns Alicia   184
+ 9    caroline
+ 5    hubert     Huppertz Hubert   183
+ 10   judith     Jousten Judith    186
  12   kerstin
- 5    melanie    Mélard Mélanie    192
- 9    nicolas
+ 4    melanie    Mélard Mélanie    182
+ 8    nicolas
  1    robin
  3    rolf
  2    romain
- 8    theresia   Thelen Theresia   195
- 4    wilfried
+ 7    theresia   Thelen Theresia   185
+ 11   wilfried
 ==== ========== ================= =====
 <BLANKLINE>
 
 The message is the same whether you try on the Person or on the Partner:
 
->>> obj = contacts.Person.objects.get(id=194)
+>>> obj = contacts.Person.objects.get(id=184)
 >>> print(obj.disable_delete())
 Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
 
->>> obj = contacts.Partner.objects.get(id=194)
+>>> obj = contacts.Partner.objects.get(id=184)
 >>> print(obj.disable_delete())
 Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
 
 
 You can delete a partner when a person or some other MTI child exists:
 
->>> obj = contacts.Partner.objects.get(id=200)
+>>> obj = contacts.Partner.objects.get(id=190)
 >>> print(obj.disable_delete())
 Cannot delete Partner Die neue Alternative V.o.G. because 2 Budget Entries refer to it.
 

@@ -95,9 +95,9 @@ Here is the main menu for accountants:
   - ÖSHZ : Hilfearten, Kategorien
   - Lebenslauf : Sprachen
 - Explorer :
+  - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
   - SEPA : Konten, Statements, Bewegungen
-  - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
 - Site : Info
 
@@ -291,11 +291,11 @@ The REG journal contains the following invoices:
 
 
 Let's have a closer look at one of them.  The partner (provider) is
-#184, and the costs are distributed over three clients:
+#222, and the costs are distributed over three clients:
     
 >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=3)
 >>> obj.partner
-Partner #184 (u'Eesti Energia AS')
+Partner #222 (u'Eesti Energia AS')
 >>> rt.show(rt.modules.vatless.ItemsByInvoice, obj)
 ============================ ============================================= ============ =============
  Client                       Account                                       Amount       Description
@@ -433,17 +433,17 @@ List of partners (usually suppliers)     who are giving credit to us.
 ========= ========== =============================== ========== ============== ===============================
  Age       Due date   Partner                         ID         Balance        Actions
 --------- ---------- ------------------------------- ---------- -------------- -------------------------------
- 115       1/27/14    Leffin Electronics              191        578,34         [Show debts] [Issue reminder]
- 110       2/1/14     Niederau Eupen AG               190        495,84         [Show debts] [Issue reminder]
- 105       2/6/14     Ethias s.a.                     189        142,50         [Show debts] [Issue reminder]
- 100       2/11/14    Electrabel Customer Solutions   188        375,99         [Show debts] [Issue reminder]
- 95        2/16/14    Ragn-Sells AS                   187        89,85          [Show debts] [Issue reminder]
- 90        2/21/14    Maksu- ja tolliamet             186        518,49         [Show debts] [Issue reminder]
- 85        2/26/14    IIZI kindlustusmaakler AS       185        232,35         [Show debts] [Issue reminder]
- 80        3/3/14     Eesti Energia AS                184        465,84         [Show debts] [Issue reminder]
- 75        3/8/14     AS Matsalu Veevärk              183        112,50         [Show debts] [Issue reminder]
- 70        3/13/14    AS Express Post                 182        30,00          [Show debts] [Issue reminder]
- **925**                                              **1865**   **3 041,70**
+ 115       1/27/14    Leffin Electronics              229        578,34         [Show debts] [Issue reminder]
+ 110       2/1/14     Niederau Eupen AG               228        495,84         [Show debts] [Issue reminder]
+ 105       2/6/14     Ethias s.a.                     227        142,50         [Show debts] [Issue reminder]
+ 100       2/11/14    Electrabel Customer Solutions   226        375,99         [Show debts] [Issue reminder]
+ 95        2/16/14    Ragn-Sells AS                   225        89,85          [Show debts] [Issue reminder]
+ 90        2/21/14    Maksu- ja tolliamet             224        518,49         [Show debts] [Issue reminder]
+ 85        2/26/14    IIZI kindlustusmaakler AS       223        232,35         [Show debts] [Issue reminder]
+ 80        3/3/14     Eesti Energia AS                222        465,84         [Show debts] [Issue reminder]
+ 75        3/8/14     AS Matsalu Veevärk              221        112,50         [Show debts] [Issue reminder]
+ 70        3/13/14    AS Express Post                 220        30,00          [Show debts] [Issue reminder]
+ **925**                                              **2245**   **3 041,70**
 ========= ========== =============================== ========== ============== ===============================
 <BLANKLINE>
 

@@ -49,7 +49,6 @@ class TestCase(TestCase):
         """
 
         dd.plugins.sepa.import_statements_path = HERE
-        dd.plugins.sepa.delete_imported_xml_files = False
 
         rt.modules.users.User(username='robin').save()
         ses = rt.login('robin')

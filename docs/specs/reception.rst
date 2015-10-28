@@ -152,7 +152,7 @@ It has 4 keys:
 >>> d.base_params
 {u'mk': 127}
 >>> d.field_values
-{u'userHidden': 6, u'user': u'Hubert Huppertz', u'summary': u''}
+{u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
 
 (This last line was right only since :blogref:`20150122`)
 
@@ -168,7 +168,7 @@ And also here, the `href` attribute is a javascript snippet:
 
 >>> print(btn['href'])
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "su": 6, "base_params": { "su": 6, "prj": 127 } })
+javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "su": 5, "base_params": { "su": 5, "prj": 127 } })
 
 This one is shorter, so we don't need to parse it for inspecting it.
 Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
