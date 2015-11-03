@@ -156,7 +156,8 @@ class Confirmable(mixins.DatePeriod):
         related_name="%(app_label)s_%(class)s_set_by_signer",
     )
 
-    state = ConfirmationStates.field(default=ConfirmationStates.requested)
+    state = ConfirmationStates.field(
+        default=ConfirmationStates.requested.as_callable())
 
     sign = SignConfirmation()
     revoke = RevokeConfirmation()

@@ -41,7 +41,8 @@ add("04", _("Other"), 'other')
 
 class Account(Account):
 
-    account_type = AccountTypes.field(default=AccountTypes.giro)
+    account_type = AccountTypes.field(
+        default=AccountTypes.giro.as_callable())
     managed = models.BooleanField(
         _("Managed"), default=False,
         help_text=_("Whether this account is being managed by the PCSW."))

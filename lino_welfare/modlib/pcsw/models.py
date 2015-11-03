@@ -228,7 +228,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             "Contact person at local job office"),
         related_name='persons_job_office')
 
-    client_state = ClientStates.field(default=ClientStates.newcomer)
+    client_state = ClientStates.field(
+        default=ClientStates.newcomer.as_callable())
 
     refusal_reason = RefusalReasons.field(blank=True)
 
