@@ -432,7 +432,7 @@ Each window layout defines a given set of fields.
 - sepa.Accounts.insert : partner, iban, bic
 - sepa.AccountsByClient.detail : partner, iban, bic, remark, managed, account_type
 - sepa.AccountsByPartner.insert : iban, bic, remark
-- sepa.Movements.insert : statement, unique_import_id, movement_date, amount, partner, remote_account, remote_bic, ref, message, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date
+- sepa.Movements.insert : statement, unique_import_id, movement_date, amount, partner, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
 - sepa.OrphanedAccounts.detail : partner, iban, bic, remark
 - sepa.OrphanedAccounts.insert : partner, iban, bic
 - sepa.Statements.insert : account, statement_number, balance_start, balance_end, account__partner, date, date_done
