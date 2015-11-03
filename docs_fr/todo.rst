@@ -1,5 +1,9 @@
+================
 Liste des tâches
 ================
+
+(Document obsolète. Demandez un accès à http://bugs.lino-framework.org
+pour voir nos listes des tâches.)
 
 Voici --en langage utilisateurs mais classifiés par le développeur--
 une liste des questions à discuter et choses à faire.

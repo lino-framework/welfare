@@ -133,8 +133,6 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
     client = models.ForeignKey('pcsw.Client',
                                related_name="coachings_by_client")
-    #~ state = CoachingStates.field(default=CoachingStates.active)
-    #~ type = CoachingTypes.field()
     type = dd.ForeignKey(CoachingType, blank=True, null=True)
     primary = models.BooleanField(
         _("Primary"),
@@ -270,7 +268,7 @@ class Coachings(dd.Table):
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active),
+            blank=True, default=dd.PeriodEvents.active.as_callable()),
         primary_coachings=dd.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),

@@ -107,7 +107,6 @@ The date and time when this request has been executed.
 This is empty for requests than haven't been sent.
 Read-only.""")
 
-    #~ status = RequestStates.field(default=RequestStates.new,editable=False)
     status = RequestStates.field(editable=False, blank=True)
     environment = models.CharField(
         max_length=4, editable=False, verbose_name=_("T/A/B"))

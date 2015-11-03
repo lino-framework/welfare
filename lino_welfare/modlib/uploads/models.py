@@ -44,14 +44,14 @@ class UploadType(UploadType):
     """
     warn_expiry_unit = Recurrencies.field(
         _("Expiry warning (unit)"),
-        default=Recurrencies.monthly,
+        default=Recurrencies.monthly.as_callable(),
         blank=True)  # iCal:DURATION
     warn_expiry_value = models.IntegerField(
         _("Expiry warning (value)"),
         default=2)
 
 # dd.update_field(
-#     'uploads.UploadType', 'upload_area', default=UploadAreas.job_search)
+#     'uploads.UploadType', 'upload_area', default=UploadAreas.job_search.as_callable())
 
 
 class UploadTypes(UploadTypes):
@@ -131,7 +131,7 @@ dd.update_field(
 dd.update_field(Upload, 'start_date', verbose_name=_("Valid from"))
 dd.update_field(Upload, 'end_date', verbose_name=_("Valid until"))
 # dd.update_field(
-#     Upload, 'upload_area', default=UploadAreas.job_search)
+#     Upload, 'upload_area', default=UploadAreas.job_search.as_callable())
 
 
 class UploadDetail(dd.FormLayout):
@@ -174,7 +174,7 @@ class Uploads(Uploads):
                 "Show only uploads for clients coached by this user.")),
         observed_event=dd.PeriodEvents.field(
             _("Validity"),
-            blank=True, default=dd.PeriodEvents.active))
+            blank=True, default=dd.PeriodEvents.active.as_callable()))
     params_layout = "observed_event:20 start_date end_date \
     coached_by user upload_type"
 

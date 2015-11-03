@@ -12,17 +12,16 @@ manière centralisée. Votre aide est la :doc:`bienvenue <contribuer>`.
 
 Il y a également un `Wiki
 <http://trac.lino-framework.org/wiki/Welfare/FR>`_ dans lequel les
-utilisateurs peuvent éditer directement.
+utilisateurs peuvent éditer directement. Mais attention: ce wiki ne
+semble pas être la bonne formule et nous comptons le supprimer à moyen
+terme.
 
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-   about
-   fiche_technique
-   glossaire
-   jobs
-   contribuer
-   todo
-   help/index
+   Introduction <about>
+   Fiche technique <fiche_technique>
+   Services <services>
+   user/index
