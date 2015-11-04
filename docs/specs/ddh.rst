@@ -28,7 +28,7 @@ Lino Welfare:
 >>> print(analyzer.show_foreign_keys())
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account :
-  - PROTECT : ledger.Journal.account, ledger.Movement.account, ledger.MatchRule.account, debts.Entry.account, vatless.InvoiceItem.account, finan.GrouperItem.account, finan.JournalEntryItem.account, finan.BankStatementItem.account, finan.PaymentOrderItem.account
+  - PROTECT : debts.Entry.account, finan.BankStatementItem.account, finan.GrouperItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - accounts.Group :
   - PROTECT : accounts.Account.group
 - aids.AidType :
@@ -36,7 +36,7 @@ Lino Welfare:
 - aids.Category :
   - PROTECT : aids.Granting.category, aids.IncomeConfirmation.category
 - aids.Granting :
-  - PROTECT : aids.SimpleConfirmation.granting, aids.IncomeConfirmation.granting, aids.RefundConfirmation.granting
+  - PROTECT : aids.IncomeConfirmation.granting, aids.RefundConfirmation.granting, aids.SimpleConfirmation.granting
 - art61.ContractType :
   - PROTECT : art61.Contract.type
 - badges.Badge :
@@ -44,13 +44,13 @@ Lino Welfare:
 - boards.Board :
   - PROTECT : aids.AidType.board, aids.Granting.board, boards.Member.board
 - cal.Calendar :
-  - PROTECT : system.SiteConfig.site_calendar, users.User.calendar, cal.Subscription.calendar
+  - PROTECT : cal.Subscription.calendar, system.SiteConfig.site_calendar, users.User.calendar
 - cal.Event :
   - CASCADE : cal.Guest.event
 - cal.EventType :
-  - PROTECT : system.SiteConfig.default_event_type, users.User.event_type, isip.ExamPolicy.event_type, cal.RecurrentEvent.event_type, cal.Event.event_type
+  - PROTECT : cal.Event.event_type, cal.RecurrentEvent.event_type, isip.ExamPolicy.event_type, system.SiteConfig.default_event_type, users.User.event_type
 - cal.GuestRole :
-  - PROTECT : system.SiteConfig.client_guestrole, pcsw.CoachingType.eval_guestrole, courses.CourseOffer.guest_role, cal.Guest.role
+  - PROTECT : cal.Guest.role, courses.CourseOffer.guest_role, pcsw.CoachingType.eval_guestrole, system.SiteConfig.client_guestrole
 - cal.Priority :
   - PROTECT : cal.Event.priority
 - cal.Room :
@@ -60,26 +60,26 @@ Lino Welfare:
 - cbss.Sector :
   - PROTECT : cbss.ManageAccessRequest.sector
 - contacts.Company :
-  - CASCADE : jobs.JobProvider.company_ptr, courses.CourseProvider.company_ptr
-  - PROTECT : aids.AidType.company, aids.SimpleConfirmation.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, excerpts.Excerpt.company, contacts.Role.company, debts.Entry.bailiff, system.SiteConfig.site_company, art61.Contract.company, immersion.Contract.company, uploads.Upload.company, jobs.Contract.company, pcsw.ClientContact.company, active_job_search.Proof.company, notes.Note.company, isip.ContractPartner.company
+  - CASCADE : courses.CourseProvider.company_ptr, jobs.JobProvider.company_ptr
+  - PROTECT : active_job_search.Proof.company, aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.SimpleConfirmation.company, art61.Contract.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, immersion.Contract.company, isip.ContractPartner.company, jobs.Contract.company, notes.Note.company, pcsw.ClientContact.company, system.SiteConfig.site_company, uploads.Upload.company
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
-  - CASCADE : addresses.Address.partner, households.Household.partner_ptr, contacts.Person.partner_ptr, contacts.Company.partner_ptr, sepa.Account.partner
-  - PROTECT : polls.Response.partner, ledger.Movement.partner, debts.Budget.partner, debts.Actor.partner, debts.Entry.partner, vatless.AccountInvoice.partner, users.User.partner, outbox.Recipient.partner, sepa.Movement.partner, cal.Guest.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.BankStatementItem.partner, finan.PaymentOrderItem.partner
+  - CASCADE : addresses.Address.partner, contacts.Company.partner_ptr, contacts.Person.partner_ptr, households.Household.partner_ptr, sepa.Account.partner
+  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, polls.Response.partner, users.User.partner, vatless.AccountInvoice.partner
 - contacts.Person :
-  - CASCADE : cv.LanguageKnowledge.person, cv.Skill.person, cv.SoftSkill.person, cv.Obstacle.person, pcsw.Client.person_ptr
-  - PROTECT : aids.AidType.contact_person, aids.SimpleConfirmation.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, excerpts.Excerpt.contact_person, cv.Training.person, cv.Study.person, cv.Experience.person, badges.Award.holder, households.Member.person, contacts.Role.person, system.SiteConfig.signer1, art61.Contract.signer1, immersion.Contract.signer1, uploads.Upload.contact_person, jobs.Contract.signer1, pcsw.ClientContact.contact_person, boards.Member.person, notes.Note.contact_person, isip.ContractPartner.contact_person, isip.Contract.signer1, humanlinks.Link.parent
+  - CASCADE : cv.LanguageKnowledge.person, cv.Obstacle.person, cv.Skill.person, cv.SoftSkill.person, pcsw.Client.person_ptr
+  - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.SimpleConfirmation.contact_person, art61.Contract.signer1, badges.Award.holder, boards.Member.person, contacts.Role.person, cv.Experience.person, cv.Study.person, cv.Training.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.parent, immersion.Contract.signer1, isip.Contract.signer1, isip.ContractPartner.contact_person, jobs.Contract.signer1, notes.Note.contact_person, pcsw.ClientContact.contact_person, system.SiteConfig.signer1, uploads.Upload.contact_person
 - contacts.Role :
   - PROTECT : pcsw.Client.job_office_contact
 - contacts.RoleType :
-  - PROTECT : aids.AidType.contact_role, aids.SimpleConfirmation.contact_role, aids.IncomeConfirmation.contact_role, aids.RefundConfirmation.contact_role, excerpts.Excerpt.contact_role, contacts.Role.type, system.SiteConfig.signer1_function, art61.Contract.contact_role, immersion.Contract.contact_role, uploads.Upload.contact_role, jobs.Contract.contact_role, pcsw.ClientContact.contact_role, boards.Member.role, notes.Note.contact_role, isip.ContractPartner.contact_role
+  - PROTECT : aids.AidType.contact_role, aids.IncomeConfirmation.contact_role, aids.RefundConfirmation.contact_role, aids.SimpleConfirmation.contact_role, art61.Contract.contact_role, boards.Member.role, contacts.Role.type, excerpts.Excerpt.contact_role, immersion.Contract.contact_role, isip.ContractPartner.contact_role, jobs.Contract.contact_role, notes.Note.contact_role, pcsw.ClientContact.contact_role, system.SiteConfig.signer1_function, uploads.Upload.contact_role
 - contenttypes.ContentType :
-  - PROTECT : excerpts.ExcerptType.content_type, excerpts.Excerpt.owner_type, uploads.Upload.owner_type, gfks.HelpText.content_type, plausibility.Problem.owner_type, outbox.Mail.owner_type, outbox.Attachment.owner_type, notes.Note.owner_type, cal.Event.owner_type, cal.Task.owner_type, changes.Change.object_type
+  - PROTECT : cal.Event.owner_type, cal.Task.owner_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notes.Note.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, plausibility.Problem.owner_type, uploads.Upload.owner_type
 - countries.Country :
-  - PROTECT : addresses.Address.country, cv.Training.country, cv.Study.country, cv.Experience.country, contacts.Partner.country, pcsw.Client.nationality, countries.Country.actual_country, countries.Place.country
+  - PROTECT : addresses.Address.country, contacts.Partner.country, countries.Country.actual_country, countries.Place.country, cv.Experience.country, cv.Study.country, cv.Training.country, pcsw.Client.nationality
 - countries.Place :
-  - PROTECT : addresses.Address.city, cv.Training.city, cv.Study.city, cv.Experience.city, contacts.Partner.city, countries.Place.parent
+  - PROTECT : addresses.Address.city, contacts.Partner.city, countries.Place.parent, cv.Experience.city, cv.Study.city, cv.Training.city
 - courses.Course :
   - PROTECT : courses.CourseRequest.course
 - courses.CourseContent :
@@ -89,32 +89,32 @@ Lino Welfare:
 - courses.CourseProvider :
   - PROTECT : courses.CourseOffer.provider
 - cv.Duration :
-  - PROTECT : cv.Experience.duration, art61.Contract.cv_duration
+  - PROTECT : art61.Contract.cv_duration, cv.Experience.duration
 - cv.EducationLevel :
-  - PROTECT : cv.StudyType.education_level, cv.Study.education_level
+  - PROTECT : cv.Study.education_level, cv.StudyType.education_level
 - cv.Function :
-  - PROTECT : cv.Training.function, cv.Experience.function, cv.Skill.function, immersion.Contract.function, jobs.Offer.function, jobs.Job.function, jobs.Candidature.function
+  - PROTECT : cv.Experience.function, cv.Skill.function, cv.Training.function, immersion.Contract.function, jobs.Candidature.function, jobs.Job.function, jobs.Offer.function
 - cv.ObstacleType :
   - PROTECT : cv.Obstacle.type
 - cv.Proof :
   - PROTECT : cv.Skill.proof, cv.SoftSkill.proof
 - cv.Regime :
-  - PROTECT : cv.Experience.regime, art61.Contract.regime, jobs.Contract.regime
+  - PROTECT : art61.Contract.regime, cv.Experience.regime, jobs.Contract.regime
 - cv.Sector :
-  - PROTECT : cv.Training.sector, cv.Function.sector, cv.Experience.sector, cv.Skill.sector, immersion.Contract.sector, jobs.Offer.sector, jobs.Job.sector, jobs.Candidature.sector
+  - PROTECT : cv.Experience.sector, cv.Function.sector, cv.Skill.sector, cv.Training.sector, immersion.Contract.sector, jobs.Candidature.sector, jobs.Job.sector, jobs.Offer.sector
 - cv.SoftSkillType :
   - PROTECT : cv.SoftSkill.type
 - cv.Status :
-  - PROTECT : cv.Experience.status, art61.Contract.status
+  - PROTECT : art61.Contract.status, cv.Experience.status
 - cv.StudyType :
-  - PROTECT : cv.Training.type, cv.Study.type, isip.Contract.study_type
+  - PROTECT : cv.Study.type, cv.Training.type, isip.Contract.study_type
 - debts.Actor :
   - PROTECT : debts.Entry.actor
 - debts.Budget :
   - CASCADE : debts.Actor.budget, debts.Entry.budget
   - PROTECT : system.SiteConfig.master_budget
 - excerpts.Excerpt :
-  - set_on_delete : cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, aids.SimpleConfirmation.printed_by, aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, debts.Budget.printed_by, art61.Contract.printed_by, immersion.Contract.printed_by, jobs.Contract.printed_by, isip.Contract.printed_by
+  - set_on_delete : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
 - excerpts.ExcerptType :
   - PROTECT : excerpts.Excerpt.excerpt_type
 - finan.BankStatement :
@@ -136,53 +136,53 @@ Lino Welfare:
 - isip.Contract :
   - PROTECT : isip.ContractPartner.contract
 - isip.ContractEnding :
-  - PROTECT : art61.Contract.ending, immersion.Contract.ending, jobs.Contract.ending, isip.Contract.ending
+  - PROTECT : art61.Contract.ending, immersion.Contract.ending, isip.Contract.ending, jobs.Contract.ending
 - isip.ContractType :
   - PROTECT : isip.Contract.type
 - isip.ExamPolicy :
-  - PROTECT : art61.ContractType.exam_policy, art61.Contract.exam_policy, immersion.ContractType.exam_policy, immersion.Contract.exam_policy, jobs.ContractType.exam_policy, jobs.Contract.exam_policy, isip.ContractType.exam_policy, isip.Contract.exam_policy
+  - PROTECT : art61.Contract.exam_policy, art61.ContractType.exam_policy, immersion.Contract.exam_policy, immersion.ContractType.exam_policy, isip.Contract.exam_policy, isip.ContractType.exam_policy, jobs.Contract.exam_policy, jobs.ContractType.exam_policy
 - jobs.ContractType :
   - PROTECT : jobs.Contract.type, jobs.Job.contract_type
 - jobs.Job :
-  - PROTECT : jobs.Contract.job, jobs.Candidature.job
+  - PROTECT : jobs.Candidature.job, jobs.Contract.job
 - jobs.JobProvider :
-  - PROTECT : jobs.Offer.provider, jobs.Job.provider
+  - PROTECT : jobs.Job.provider, jobs.Offer.provider
 - jobs.JobType :
   - PROTECT : jobs.Job.type
 - jobs.Schedule :
   - PROTECT : jobs.Contract.schedule
 - languages.Language :
-  - PROTECT : cv.LanguageKnowledge.language, cv.Training.language, cv.Study.language
+  - PROTECT : cv.LanguageKnowledge.language, cv.Study.language, cv.Training.language
 - ledger.Journal :
-  - PROTECT : ledger.Voucher.journal, ledger.MatchRule.journal
+  - PROTECT : ledger.MatchRule.journal, ledger.Voucher.journal
 - ledger.PaymentTerm :
   - PROTECT : vatless.AccountInvoice.payment_term
 - ledger.Voucher :
   - CASCADE : ledger.Movement.voucher
-  - PROTECT : vatless.AccountInvoice.voucher_ptr, finan.Grouper.voucher_ptr, finan.JournalEntry.voucher_ptr, finan.PaymentOrder.voucher_ptr, finan.BankStatement.voucher_ptr
+  - PROTECT : finan.BankStatement.voucher_ptr, finan.Grouper.voucher_ptr, finan.JournalEntry.voucher_ptr, finan.PaymentOrder.voucher_ptr, vatless.AccountInvoice.voucher_ptr
 - newcomers.Broker :
   - PROTECT : pcsw.Client.broker
 - newcomers.Faculty :
   - PROTECT : newcomers.Competence.faculty, pcsw.Client.faculty
 - notes.EventType :
-  - PROTECT : system.SiteConfig.system_note_type, notes.Note.event_type
+  - PROTECT : notes.Note.event_type, system.SiteConfig.system_note_type
 - notes.NoteType :
   - PROTECT : notes.Note.type
 - outbox.Mail :
-  - CASCADE : outbox.Recipient.mail, outbox.Attachment.mail
+  - CASCADE : outbox.Attachment.mail, outbox.Recipient.mail
 - pcsw.Activity :
   - PROTECT : contacts.Partner.activity
 - pcsw.AidType :
   - PROTECT : pcsw.Client.aid_type
 - pcsw.Client :
-  - CASCADE : aids.SimpleConfirmation.client, aids.IncomeConfirmation.client, aids.RefundConfirmation.client, pcsw.Coaching.client, pcsw.Dispense.client, dupable_clients.Word.owner
-  - PROTECT : cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, ledger.Movement.project, aids.Granting.client, excerpts.Excerpt.project, art61.Contract.client, immersion.Contract.client, vatless.InvoiceItem.project, uploads.Upload.project, jobs.Contract.client, jobs.Candidature.person, pcsw.Exclusion.person, pcsw.Conviction.client, pcsw.ClientContact.client, active_job_search.Proof.client, outbox.Mail.project, notes.Note.project, isip.Contract.client, courses.CourseRequest.person, cal.Event.project, cal.Task.project, finan.GrouperItem.project, finan.JournalEntryItem.project, finan.BankStatementItem.project, finan.PaymentOrderItem.project
+  - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, dupable_clients.Word.owner, pcsw.Coaching.client, pcsw.Dispense.client
+  - PROTECT : active_job_search.Proof.client, aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, courses.CourseRequest.person, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.GrouperItem.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, immersion.Contract.client, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.ClientContact.client, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.InvoiceItem.project
 - pcsw.ClientContactType :
   - PROTECT : aids.AidType.pharmacy_type, aids.RefundConfirmation.doctor_type, contacts.Partner.client_contact_type, pcsw.ClientContact.type
 - pcsw.CoachingEnding :
   - PROTECT : pcsw.Coaching.ending
 - pcsw.CoachingType :
-  - PROTECT : users.User.coaching_type, pcsw.CoachingEnding.type, pcsw.Coaching.type
+  - PROTECT : pcsw.Coaching.type, pcsw.CoachingEnding.type, users.User.coaching_type
 - pcsw.DispenseReason :
   - PROTECT : pcsw.Dispense.reason
 - pcsw.ExclusionType :
@@ -205,17 +205,16 @@ Lino Welfare:
 - properties.PropType :
   - PROTECT : properties.PropChoice.type, properties.Property.type
 - sepa.Account :
-  - PROTECT : vatless.AccountInvoice.bank_account, sepa.Statement.account, finan.PaymentOrderItem.bank_account
+  - PROTECT : finan.PaymentOrderItem.bank_account, sepa.Statement.account, vatless.AccountInvoice.bank_account
 - sepa.Statement :
   - PROTECT : sepa.Movement.statement
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
-  - PROTECT : polls.Poll.user, polls.Response.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, ledger.Voucher.user, newcomers.Competence.user, aids.Granting.user, aids.SimpleConfirmation.user, aids.IncomeConfirmation.user, aids.RefundConfirmation.user, excerpts.Excerpt.user, cv.Obstacle.user, debts.Budget.user, tinymce.TextFieldTemplate.user, art61.Contract.user, immersion.Contract.user, uploads.Upload.user, jobs.Contract.user, users.Authority.user, plausibility.Problem.user, pcsw.Coaching.user, outbox.Mail.user, notes.Note.user, isip.Contract.user, cal.Subscription.user, cal.RecurrentEvent.user, cal.Event.user, cal.Task.user, changes.Change.user
+  - PROTECT : aids.Granting.user, aids.IncomeConfirmation.user, aids.RefundConfirmation.user, aids.SimpleConfirmation.user, art61.Contract.user, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, cv.Obstacle.user, debts.Budget.user, excerpts.Excerpt.user, immersion.Contract.user, isip.Contract.user, jobs.Contract.user, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, outbox.Mail.user, pcsw.Coaching.user, plausibility.Problem.user, polls.Poll.user, polls.Response.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.user
 - vatless.AccountInvoice :
   - CASCADE : vatless.InvoiceItem.voucher
 <BLANKLINE>
-
 
 
 
@@ -249,11 +248,11 @@ The message is the same whether you try on the Person or on the Partner:
 
 >>> obj = contacts.Person.objects.get(id=184)
 >>> print(obj.disable_delete())
-Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
+Cannot delete Partner Allmanns Alicia because 29 Participants refer to it.
 
 >>> obj = contacts.Partner.objects.get(id=184)
 >>> print(obj.disable_delete())
-Cannot delete Partner Allmanns Alicia because 1 Users refer to it.
+Cannot delete Partner Allmanns Alicia because 29 Participants refer to it.
 
 
 You can delete a partner when a person or some other MTI child exists:

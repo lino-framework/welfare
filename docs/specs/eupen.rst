@@ -374,7 +374,7 @@ Each window layout defines a given set of fields.
 - finan.Groupers.detail : date, partner, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.Groupers.insert : date, user, partner
 - finan.PaymentOrders.detail : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- gfks.ContentTypes.insert : id, name, app_label, model, base_classes
+- gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert : name, name_fr, name_en
@@ -416,7 +416,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, is_seeking, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_SimpleConfirmation, aids_IncomeConfirmation, aids_RefundConfirmation, cv_LanguageKnowledge, pcsw_Coaching, pcsw_Dispense, dupable_clients_Word, properties_PersonProperty, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, reason
 - pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, name, text
@@ -432,7 +432,7 @@ Each window layout defines a given set of fields.
 - sepa.Accounts.insert : partner, iban, bic
 - sepa.AccountsByClient.detail : partner, iban, bic, remark, managed, account_type
 - sepa.AccountsByPartner.insert : iban, bic, remark
-- sepa.Movements.insert : statement, unique_import_id, movement_date, amount, partner, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
+- sepa.Movements.insert : statement, unique_import_id, movement_date, amount, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
 - sepa.OrphanedAccounts.detail : partner, iban, bic, remark
 - sepa.OrphanedAccounts.insert : partner, iban, bic
 - sepa.Statements.insert : account, statement_number, balance_start, balance_end, account__partner, date, date_done

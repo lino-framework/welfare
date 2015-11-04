@@ -71,8 +71,8 @@ And the list of Study types:
 
 >>> for m, f in rt.modules.cv.StudyType._lino_ddh.fklist:
 ...     print dd.full_model_name(m), f.name
-cv.Training type
 cv.Study type
+cv.Training type
 isip.Contract study_type
 
 >>> kw = dict()

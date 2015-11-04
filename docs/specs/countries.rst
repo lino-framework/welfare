@@ -62,13 +62,13 @@ The following database fields refer to a country:
 >>> for m, f in rt.modules.countries.Country._lino_ddh.fklist:
 ...     print dd.full_model_name(m), f.name
 addresses.Address country
-cv.Training country
-cv.Study country
-cv.Experience country
 contacts.Partner country
-pcsw.Client nationality
 countries.Country actual_country
 countries.Place country
+cv.Experience country
+cv.Study country
+cv.Training country
+pcsw.Client nationality
 
 
 >>> kw = dict()

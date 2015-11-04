@@ -42,10 +42,10 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     >>> from lino.mixins import Printable
     >>> for m in rt.models_by_base(Printable):
     ...     print m
-    <class 'lino.modlib.excerpts.models.Excerpt'>
-    <class 'lino.modlib.outbox.models.Mail'>
-    <class 'lino_welfare.modlib.notes.models.Note'>
     <class 'lino_welfare.modlib.cal.models.Event'>
+    <class 'lino.modlib.excerpts.models.Excerpt'>
+    <class 'lino_welfare.modlib.notes.models.Note'>
+    <class 'lino.modlib.outbox.models.Mail'>
 
 A logical consequence is that printing an object of one of above
 models will *not* appear in the history of excerpts.

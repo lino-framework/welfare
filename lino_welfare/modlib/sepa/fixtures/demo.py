@@ -20,10 +20,15 @@
 
 """
 
+import os
+HERE = os.path.dirname(__file__)
+
 from lino_cosi.lib.sepa.fixtures.demo import objects as lib_objects
 
 from lino.utils import Cycler
 from lino.api import dd, rt
+
+from django.conf import settings
 
 
 def objects():
@@ -79,3 +84,6 @@ def objects():
         obj.register(ses)
         obj.save()
 
+    dd.plugins.sepa.import_statements_path = HERE
+    settings.SITE.site_config.import_sepa(ses)
+    
