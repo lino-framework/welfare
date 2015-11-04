@@ -26,7 +26,7 @@ Lino Welfare:
 
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_foreign_keys())
-... #doctest: +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account :
   - PROTECT : debts.Entry.account, finan.BankStatementItem.account, finan.GrouperItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - accounts.Group :
@@ -66,7 +66,7 @@ Lino Welfare:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : addresses.Address.partner, contacts.Company.partner_ptr, contacts.Person.partner_ptr, households.Household.partner_ptr, sepa.Account.partner
-  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, polls.Response.partner, sepa.Movement.partner, users.User.partner, vatless.AccountInvoice.partner
+  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, polls.Response.partner, users.User.partner, vatless.AccountInvoice.partner
 - contacts.Person :
   - CASCADE : cv.LanguageKnowledge.person, cv.Obstacle.person, cv.Skill.person, cv.SoftSkill.person, pcsw.Client.person_ptr
   - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.SimpleConfirmation.contact_person, art61.Contract.signer1, badges.Award.holder, boards.Member.person, contacts.Role.person, cv.Experience.person, cv.Study.person, cv.Training.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.parent, immersion.Contract.signer1, isip.Contract.signer1, isip.ContractPartner.contact_person, jobs.Contract.signer1, notes.Note.contact_person, pcsw.ClientContact.contact_person, system.SiteConfig.signer1, uploads.Upload.contact_person

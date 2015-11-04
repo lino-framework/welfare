@@ -182,9 +182,9 @@ The following table gives an overview of these things.
  properties.PropGroup           properties.PropGroups           5         0
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
- sepa.Account                   sepa.Accounts                   8         17
- sepa.Movement                  sepa.Movements                  20        0
- sepa.Statement                 sepa.Statements                 9         0
+ sepa.Account                   sepa.Accounts                   8         79
+ sepa.Movement                  sepa.Movements                  19        138
+ sepa.Statement                 sepa.Statements                 9         62
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
