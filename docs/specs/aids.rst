@@ -265,10 +265,10 @@ There are 4 pharmacies altogether:
 =================================== ===== ===============================================
  Name                                ID    Ansicht als
 ----------------------------------- ----- -----------------------------------------------
- Apotheke Reul                       200   Haushalt, **Partner**, Person, *Organisation*
- Apotheke Schunck                    201   Haushalt, **Partner**, Person, *Organisation*
- Bosten-Bocken A                     203   Haushalt, **Partner**, Person, *Organisation*
- Pharmacies Populaires de Verviers   202   Haushalt, **Partner**, Person, *Organisation*
+ Apotheke Reul                       200   *Organisation*, **Partner**, Person, Haushalt
+ Apotheke Schunck                    201   *Organisation*, **Partner**, Person, Haushalt
+ Bosten-Bocken A                     203   *Organisation*, **Partner**, Person, Haushalt
+ Pharmacies Populaires de Verviers   202   *Organisation*, **Partner**, Person, Haushalt
 =================================== ===== ===============================================
 <BLANKLINE>
 
