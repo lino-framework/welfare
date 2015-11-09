@@ -35,7 +35,8 @@ calls "default table".
 The following table gives an overview of these things.
 
 
->>> print(settings.SITE.get_db_overview_rst()) 
+>>> from lino.utils.diag import analyzer
+>>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 56 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 151 models:
@@ -75,10 +76,10 @@ The following table gives an overview of these things.
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        2
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
- contacts.Company               contacts.Companies              28        51
+ contacts.Company               contacts.Companies              29        51
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               24        174
- contacts.Person                contacts.Persons                31        109
+ contacts.Partner               contacts.Partners               25        174
+ contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
  contenttypes.ContentType       gfks.ContentTypes               4         152
@@ -87,7 +88,7 @@ The following table gives an overview of these things.
  courses.Course                 courses.Courses                 5         3
  courses.CourseContent          courses.CourseContents          2         2
  courses.CourseOffer            courses.CourseOffers            6         3
- courses.CourseProvider         courses.CourseProviders         29        2
+ courses.CourseProvider         courses.CourseProviders         30        2
  courses.CourseRequest          courses.CourseRequests          10        20
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              8         5
@@ -121,7 +122,7 @@ The following table gives an overview of these things.
  finan.PaymentOrder             finan.PaymentOrders             11        0
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
- households.Household           households.Households           27        14
+ households.Household           households.Households           28        14
  households.Member              households.Members              14        63
  households.Type                households.Types                5         6
  humanlinks.Link                humanlinks.Links                4         59
@@ -137,7 +138,7 @@ The following table gives an overview of these things.
  jobs.Contract                  jobs.Contracts                  28        13
  jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
- jobs.JobProvider               jobs.JobProviders               29        3
+ jobs.JobProvider               jobs.JobProviders               30        3
  jobs.JobType                   jobs.JobTypes                   5         5
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
@@ -158,7 +159,7 @@ The following table gives an overview of these things.
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    65        63
+ pcsw.Client                    pcsw.Clients                    66        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90

@@ -156,7 +156,7 @@ Lino Welfare:
 - ledger.Journal :
   - PROTECT : ledger.MatchRule.journal, ledger.Voucher.journal
 - ledger.PaymentTerm :
-  - PROTECT : vatless.AccountInvoice.payment_term
+  - PROTECT : contacts.Partner.payment_term, vatless.AccountInvoice.payment_term
 - ledger.Voucher :
   - CASCADE : ledger.Movement.voucher
   - PROTECT : finan.BankStatement.voucher_ptr, finan.Grouper.voucher_ptr, finan.JournalEntry.voucher_ptr, finan.PaymentOrder.voucher_ptr, vatless.AccountInvoice.voucher_ptr
