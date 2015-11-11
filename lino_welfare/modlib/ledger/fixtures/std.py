@@ -16,9 +16,9 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Defines a default accounts chart with account groups and accounts
-for social accounting.
+"""Defines a default accounts chart for social accounting.
 
+Also loads :mod:`lino_cosi.lib.ledger.fixtures.std`
 
 Purchase invoices go to 4400 (suppliers). Unlike default ledger, 4400
 is to be matched by a payment *instruction* which moves them to 4450
@@ -53,6 +53,10 @@ current_group = None
 
 
 def objects():
+
+    from lino_cosi.lib.ledger.fixtures.std import objects as std_objects
+    yield std_objects()
+
     # Chart = rt.modules.accounts.Chart
     Group = rt.modules.accounts.Group
     Account = rt.modules.accounts.Account

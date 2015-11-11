@@ -111,8 +111,8 @@ The following table gives an overview of these things.
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.Excerpts               12        67
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
+ excerpts.Excerpt               excerpts.Excerpts               12        68
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
  finan.Grouper                  finan.Groupers                  10        0
@@ -146,7 +146,7 @@ The following table gives an overview of these things.
  ledger.Journal                 ledger.Journals                 21        4
  ledger.MatchRule               ledger.MatchRules               3         4
  ledger.Movement                ledger.Movements                10        120
- ledger.PaymentTerm             ledger.PaymentTerms             8         0
+ ledger.PaymentTerm             ledger.PaymentTerms             9         7
  ledger.Voucher                 ledger.Vouchers                 8         30
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7

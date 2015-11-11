@@ -42,6 +42,7 @@ Here is a more complete list of excerpt types:
  *cbss.IdentifyPersonRequest (IdentifyPerson-Anfrage)*   Ja       Ja              IdentifyPerson-Anfrage
  *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
+ *contacts.Partner (Partner)*                            Nein     Nein            Payment reminder                                                     payment_reminder.body.html
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
@@ -49,7 +50,7 @@ Here is a more complete list of excerpt types:
  *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
  *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            eID-Inhalt                                         eid-content.odt
- **Total (15 Zeilen)**                                   **12**   **10**
+ **Total (16 Zeilen)**                                   **12**   **10**
 ======================================================= ======== =============== =========================== ====================== ================= ================================
 <BLANKLINE>
 
@@ -61,15 +62,16 @@ Demo excerpts
 Here is a list of all demo excerpts. 
 
 >>> rt.show(excerpts.AllExcerpts, language="en", column_names="id excerpt_type owner project company language")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ==== ======================== ===================================================== ============================= ================================ ==========
  ID   Excerpt Type             Controlled by                                         Client                        Recipient (Organization)         Language
 ---- ------------------------ ----------------------------------------------------- ----------------------------- -------------------------------- ----------
- 66   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 65   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 64   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 63   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 62   Presence certificate     *Participant #1 (22.05.2014)*                         AUSDEMWALD Alfons (116)                                        de
+ 67   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 66   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 65   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 64   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 63   Presence certificate     *Participant #1 (22.05.2014)*                         AUSDEMWALD Alfons (116)                                        de
+ 62   Payment reminder         *Belgisches Rotes Kreuz*                                                                                             de
  61   Art60§7 job supplyment   *Art60§7 job supplyment#16 (Denis DENON)*             DENON Denis (180*)            R-Cycle Sperrgutsortierzentrum   de
  60   Art60§7 job supplyment   *Art60§7 job supplyment#15 (Denis DENON)*             DENON Denis (180*)            BISA                             de
  59   Art60§7 job supplyment   *Art60§7 job supplyment#14 (Rik RADERMECKER)*         RADERMECKER Rik (173)         BISA                             de
