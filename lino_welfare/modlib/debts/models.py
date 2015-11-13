@@ -76,7 +76,7 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
         verbose_name = _("Budget")
         verbose_name_plural = _("Budgets")
 
-    quick_search_fields = ['partner__name']
+    quick_search_fields = 'partner__name'
 
     date = models.DateField(
         _("Date"), blank=True,

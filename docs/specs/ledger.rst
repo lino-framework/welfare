@@ -85,7 +85,7 @@ Here is the main menu for accountants:
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
-  - Orphaned bank accounts
+  - Partnerlose Bankkonten
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -97,7 +97,7 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Statements, Bewegungen
+  - SEPA : Konten, Kontoauszüge, Bewegungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
 - Site : Info
 
@@ -285,7 +285,7 @@ The REG journal contains the following invoices:
  2         5/17/14    AS Matsalu Veevärk              37,50          6/16/14    Wilfried Willems   **Registered**
  1         5/22/14    AS Express Post                 10,00          6/21/14    Wilfried Willems   **Registered**
  1         12/28/13   Leffin Electronics              192,78         1/27/14    Wilfried Willems   **Registered**
- **436**                                              **3 041,70**
+ **436**                                              **3 041,70**
 ========= ========== =============================== ============== ========== ================== ================
 <BLANKLINE>
 
@@ -443,8 +443,7 @@ List of partners (usually suppliers)     who are giving credit to us.
  80        3/3/14     Eesti Energia AS                222        465,84         [Show debts] [Issue reminder]
  75        3/8/14     AS Matsalu Veevärk              221        112,50         [Show debts] [Issue reminder]
  70        3/13/14    AS Express Post                 220        30,00          [Show debts] [Issue reminder]
- **925**                                              **2245**   **3 041,70**
+ **925**                                              **2245**   **3 041,70**
 ========= ========== =============================== ========== ============== ===============================
 <BLANKLINE>
-
 

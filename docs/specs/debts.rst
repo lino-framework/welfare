@@ -120,11 +120,11 @@ Here are some more slave tables.
 ========================================================= ==============
  Beschreibung                                              Betrag
 --------------------------------------------------------- --------------
- Monatliche Einkünfte                                      5 000,00
+ Monatliche Einkünfte                                      5 000,00
  Monatliche Ausgaben                                       -565,00
  Monatliche Reserve für jährliche Ausgaben (236,00 / 12)   -19,67
  Raten der laufenden Kredite                               -45,00
- **Restbetrag für Kredite und Zahlungsrückstände**         **4 370,33**
+ **Restbetrag für Kredite und Zahlungsrückstände**         **4 370,33**
 ========================================================= ==============
 <BLANKLINE>
 
@@ -133,12 +133,12 @@ Here are some more slave tables.
 ========================================================= ==============
  Beschreibung                                              Betrag
 --------------------------------------------------------- --------------
- Monatliche Einkünfte                                      5 000,00
- Jährliche Einkünfte (2 400,00 / 12)                       200,00
+ Monatliche Einkünfte                                      5 000,00
+ Jährliche Einkünfte (2 400,00 / 12)                       200,00
  Monatliche Ausgaben                                       -565,00
  Monatliche Reserve für jährliche Ausgaben (236,00 / 12)   -19,67
  Raten der laufenden Kredite                               -45,00
- **Restbetrag für Kredite und Zahlungsrückstände**         **4 570,33**
+ **Restbetrag für Kredite und Zahlungsrückstände**         **4 570,33**
 ========================================================= ==============
 <BLANKLINE>
 
@@ -149,9 +149,9 @@ Here are some more slave tables.
  Kredite                            300,00
  Schulden                           600,00
  Zahlungsrückstände (verteilbar)    900,00
- Gerichtsvollzieher (verteilbar)    1 200,00
- Inkasso-Unternehmen (verteilbar)   1 500,00
- **Verpflichtungen**                **4 500,00**
+ Gerichtsvollzieher (verteilbar)    1 200,00
+ Inkasso-Unternehmen (verteilbar)   1 500,00
+ **Verpflichtungen**                **4 500,00**
 ================================== ==============
 <BLANKLINE>
 
@@ -163,9 +163,9 @@ Here are some more slave tables.
  Loans                             300,00
  Debts                             600,00
  Invoices to pay (distributable)   900,00
- Bailiff (distributable)           1 200,00
- Cash agency (distributable)       1 500,00
- **Liabilities**                   **4 500,00**
+ Bailiff (distributable)           1 200,00
+ Cash agency (distributable)       1 500,00
+ **Liabilities**                   **4 500,00**
 ================================= ==============
 <BLANKLINE>
 
@@ -175,9 +175,9 @@ Here are some more slave tables.
  Creditor             Description       Debt           %            Monthly payback suggested
 -------------------- ----------------- -------------- ------------ ---------------------------
  Auto École Verte     Invoices to pay   900,00         25,00        30,00
- ÖSHZ Kettenis        Bailiff           1 200,00       33,33        40,00
- BISA                 Cash agency       1 500,00       41,67        50,00
- **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
+ ÖSHZ Kettenis        Bailiff           1 200,00       33,33        40,00
+ BISA                 Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
 ==================== ================= ============== ============ ===========================
 <BLANKLINE>
 
@@ -197,13 +197,13 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  Description          Remarks   Common   Mr.   Mrs.           Total
 -------------------- --------- -------- ----- -------------- --------------
  Salaries                                      800,00         800,00
- Pension                                       1 000,00       1 000,00
- Integration aid                               1 200,00       1 200,00
- Ersatzeinkünfte                               1 400,00       1 400,00
+ Pension                                       1 000,00       1 000,00
+ Integration aid                               1 200,00       1 200,00
+ Ersatzeinkünfte                               1 400,00       1 400,00
  Aliments
  Chèques-repas                                 200,00         200,00
  Andere                                        400,00         400,00
- **Total (7 rows)**                            **5 000,00**   **5 000,00**
+ **Total (7 rows)**                            **5 000,00**   **5 000,00**
 ==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
 
@@ -236,7 +236,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  Spare time             Seminar            492,00          41,00                     41,00
  Pets                                      564,00          47,00                     47,00
  Other
- **Total (23 rows)**                       **6 780,00**    **565,00**                **565,00**
+ **Total (23 rows)**                       **6 780,00**    **565,00**                **565,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 
@@ -265,9 +265,9 @@ Something in French
  Créancier              Description       Dette          %            Remboursement mensuel
 ---------------------- ----------------- -------------- ------------ -----------------------
  Auto École Verte       Invoices to pay   900,00         25,00        30,00
- ÖSHZ Kettenis          Bailiff           1 200,00       33,33        40,00
- BISA                   Cash agency       1 500,00       41,67        50,00
- **Total (3 lignes)**                     **3 600,00**   **100,00**   **120,00**
+ ÖSHZ Kettenis          Bailiff           1 200,00       33,33        40,00
+ BISA                   Cash agency       1 500,00       41,67        50,00
+ **Total (3 lignes)**                     **3 600,00**   **100,00**   **120,00**
 ====================== ================= ============== ============ =======================
 <BLANKLINE>
 
@@ -279,9 +279,9 @@ Or the same in English:
  Creditor             Description       Debt           %            Monthly payback suggested
 -------------------- ----------------- -------------- ------------ ---------------------------
  Auto École Verte     Invoices to pay   900,00         25,00        30,00
- ÖSHZ Kettenis        Bailiff           1 200,00       33,33        40,00
- BISA                 Cash agency       1 500,00       41,67        50,00
- **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
+ ÖSHZ Kettenis        Bailiff           1 200,00       33,33        40,00
+ BISA                 Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                     **3 600,00**   **100,00**   **120,00**
 ==================== ================= ============== ============ ===========================
 <BLANKLINE>
 
@@ -364,7 +364,7 @@ Here is now (almost) the whole content of a printed budget.
 >>> obj = debts.Budget.objects.get(pk=4)
 
 >>> ses.story2rst(obj.data_story(ses))
-... #doctest: +REPORT_UDIFF
+... #doctest: +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ~~~~~~~~~~~~~~~
 Monthly incomes
 ~~~~~~~~~~~~~~~
@@ -372,14 +372,14 @@ Monthly incomes
 ==================== ========= ======== ===== ============== ==============
  Description          Remarks   Common   Mr.   Mrs.           Total
 -------------------- --------- -------- ----- -------------- --------------
- Salaries                                      1 200,00       1 200,00
- Pension                                       1 400,00       1 400,00
+ Salaries                                      1 200,00       1 200,00
+ Pension                                       1 400,00       1 400,00
  Integration aid
  Ersatzeinkünfte                               200,00         200,00
  Aliments                                      400,00         400,00
  Chèques-repas                                 600,00         600,00
  Andere                                        800,00         800,00
- **Total (7 rows)**                            **4 600,00**   **4 600,00**
+ **Total (7 rows)**                            **4 600,00**   **4 600,00**
 ==================== ========= ======== ===== ============== ==============
 <BLANKLINE>
 ~~~~~~~~~~~~~~~~
@@ -412,7 +412,7 @@ Monthly expenses
  Spare time             Cinema             120,00          10,00                     10,00
  Pets                                      180,00          15,00                     15,00
  Other                                     240,00          20,00                     20,00
- **Total (23 rows)**                       **6 516,00**    **543,00**                **543,00**
+ **Total (23 rows)**                       **6 516,00**    **543,00**                **543,00**
 ====================== ================== =============== ============ ===== ====== ============
 <BLANKLINE>
 ~~~~~~~~~~~~~~
@@ -477,15 +477,15 @@ Bailiffs and cash collectors
 ======================== ========================== ========= ============== ======== ============== ============== ==============
  Debt collection agency   Partner                    Remarks   Monthly rate   Common   Mr.            Mrs.           Total
 ------------------------ -------------------------- --------- -------------- -------- -------------- -------------- --------------
- Cashback sprl            Werkstatt Cardijn V.o.G.                                     1 200,00                      1 200,00
- Money Wizard AS          Behindertenstätten Eupen                                                    1 500,00       1 500,00
- **Total (2 rows)**                                                                    **1 200,00**   **1 500,00**   **2 700,00**
+ Cashback sprl            Werkstatt Cardijn V.o.G.                                     1 200,00                      1 200,00
+ Money Wizard AS          Behindertenstätten Eupen                                                    1 500,00       1 500,00
+ **Total (2 rows)**                                                                    **1 200,00**   **1 500,00**   **2 700,00**
 ======================== ========================== ========= ============== ======== ============== ============== ==============
 <BLANKLINE>
 
 
 >>> ses.story2rst(obj.summary_story(ses))
-... #doctest: +REPORT_UDIFF
+... #doctest: +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ------------------
 Incomes & Expenses
 ------------------
@@ -493,10 +493,10 @@ Incomes & Expenses
 ========================================================= ==============
  Description                                               Amount
 --------------------------------------------------------- --------------
- Monatliche Einkünfte                                      4 600,00
+ Monatliche Einkünfte                                      4 600,00
  Monatliche Ausgaben                                       -543,00
  Monatliche Reserve für jährliche Ausgaben (257,00 / 12)   -21,42
- **Restbetrag für Kredite und Zahlungsrückstände**         **4 035,58**
+ **Restbetrag für Kredite und Zahlungsrückstände**         **4 035,58**
 ========================================================= ==============
 <BLANKLINE>
 -----------
@@ -507,9 +507,9 @@ Liabilities
  Description                       Amount
 --------------------------------- --------------
  Invoices to pay (distributable)   900,00
- Bailiff (distributable)           1 200,00
- Cash agency (distributable)       1 500,00
- **Liabilities**                   **3 600,00**
+ Bailiff (distributable)           1 200,00
+ Cash agency (distributable)       1 500,00
+ **Liabilities**                   **3 600,00**
 ================================= ==============
 <BLANKLINE>
 ------------------
@@ -520,9 +520,9 @@ Debts distribution
  Creditor                   Description       Debt           %            Monthly payback suggested
 -------------------------- ----------------- -------------- ------------ ---------------------------
  Pro Aktiv V.o.G.           Invoices to pay   900,00         25,00        30,00
- Werkstatt Cardijn V.o.G.   Bailiff           1 200,00       33,33        40,00
- Behindertenstätten Eupen   Cash agency       1 500,00       41,67        50,00
- **Total (3 rows)**                           **3 600,00**   **100,00**   **120,00**
+ Werkstatt Cardijn V.o.G.   Bailiff           1 200,00       33,33        40,00
+ Behindertenstätten Eupen   Cash agency       1 500,00       41,67        50,00
+ **Total (3 rows)**                           **3 600,00**   **100,00**   **120,00**
 ========================== ================= ============== ============ ===========================
 <BLANKLINE>
 
@@ -552,7 +552,7 @@ command shows the table of all budgets.
  12   Robin Rood        5/22/14   Adam-Freisen                120,00
  13   Kerstin Kerres    5/22/14   Braun-Evrard                120,00
  14   Romain Raffault   5/22/14   Braun-Freisen               120,00
-                                                              **1 680,00**
+                                                              **1 680,00**
 ==== ================= ========= =========================== ======================
 <BLANKLINE>
 
