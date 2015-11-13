@@ -85,7 +85,7 @@ Here is the main menu for accountants:
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
-  - Orphaned bank accounts
+  - Partnerlose Bankkonten
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -97,7 +97,7 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Statements, Bewegungen
+  - SEPA : Konten, Kontoauszüge, Bewegungen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
 - Site : Info
 
