@@ -75,7 +75,7 @@ Lino Welfare:
 - contacts.RoleType :
   - PROTECT : aids.AidType.contact_role, aids.IncomeConfirmation.contact_role, aids.RefundConfirmation.contact_role, aids.SimpleConfirmation.contact_role, art61.Contract.contact_role, boards.Member.role, contacts.Role.type, excerpts.Excerpt.contact_role, immersion.Contract.contact_role, isip.ContractPartner.contact_role, jobs.Contract.contact_role, notes.Note.contact_role, pcsw.ClientContact.contact_role, system.SiteConfig.signer1_function, uploads.Upload.contact_role
 - contenttypes.ContentType :
-  - PROTECT : cal.Event.owner_type, cal.Task.owner_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notes.Note.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, plausibility.Problem.owner_type, uploads.Upload.owner_type
+  - PROTECT : cal.Event.owner_type, cal.Task.owner_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notes.Note.owner_type, notifier.Notification.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, plausibility.Problem.owner_type, uploads.Upload.owner_type
 - countries.Country :
   - PROTECT : addresses.Address.country, contacts.Partner.country, countries.Country.actual_country, countries.Place.country, cv.Experience.country, cv.Study.country, cv.Training.country, pcsw.Client.nationality
 - countries.Place :
@@ -211,7 +211,7 @@ Lino Welfare:
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
-  - PROTECT : aids.Granting.user, aids.IncomeConfirmation.user, aids.RefundConfirmation.user, aids.SimpleConfirmation.user, art61.Contract.user, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, cv.Obstacle.user, debts.Budget.user, excerpts.Excerpt.user, immersion.Contract.user, isip.Contract.user, jobs.Contract.user, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, outbox.Mail.user, pcsw.Coaching.user, plausibility.Problem.user, polls.Poll.user, polls.Response.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.user
+  - PROTECT : aids.Granting.user, aids.IncomeConfirmation.user, aids.RefundConfirmation.user, aids.SimpleConfirmation.user, art61.Contract.user, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, cv.Obstacle.user, debts.Budget.user, excerpts.Excerpt.user, immersion.Contract.user, isip.Contract.user, jobs.Contract.user, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, notifier.Notification.user, outbox.Mail.user, pcsw.Coaching.user, plausibility.Problem.user, polls.Poll.user, polls.Response.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.user
 - vatless.AccountInvoice :
   - CASCADE : vatless.InvoiceItem.voucher
 <BLANKLINE>
