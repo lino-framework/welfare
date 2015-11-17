@@ -49,8 +49,9 @@ from .choicelists import TableLayouts
 from django.db import transaction
 
 
-@transaction.commit_on_success
-def bulk_create_with_manual_ids(model, obj_list):
+if False:
+  @transaction.commit_on_success
+  def bulk_create_with_manual_ids(model, obj_list):
     """
     Originally copied from http://stackoverflow.com/a/13143062/407239
     

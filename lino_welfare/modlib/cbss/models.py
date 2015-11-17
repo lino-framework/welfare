@@ -1041,6 +1041,8 @@ def cbss_summary(self, ar):
     """
     returns a summary overview of the CBSS requests for this person.
     """
+    if ar is None:
+        return ''
     #~ qs = IdentifyPersonRequest.objects.filter(person=self,status=RequestStates.ok)
     html = '<p><ul>'
     #~ for m in (IdentifyPersonRequest,ManageAccessRequest,RetrieveTIGroupsRequest):

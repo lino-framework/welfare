@@ -312,6 +312,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             self.last_name.upper(), self.first_name, self.pk)
 
     def get_overview_elems(self, ar):
+        if ar is None:
+            return []
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
         elems.append(self.eid_info(ar))
@@ -568,6 +570,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     @dd.htmlbox(_("CBSS"))
     def cbss_relations(self, ar):
+        if ar is None:
+            return ''
         cbss = dd.resolve_app('cbss')
         SLAVE = cbss.RetrieveTIGroupsRequestsByPerson
         elems = []
