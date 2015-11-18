@@ -330,15 +330,21 @@ The total monthly amount available for debts distribution."""))
 
     @dd.virtualfield(dd.PriceField(_("Total debt")))
     def total_debt(self, ar):
+        if ar is None:
+            return None
         return self.sum('amount', 'L')
 
     @dd.htmlbox(_("Entered data"))
     def data_box(self, ar):
+        if ar is None:
+            return ''
         # return E.div(*tuple(ar.story2html(self.data_story(ar))))
         return ar.story2html(self.data_story(ar))
 
     @dd.htmlbox(pgettext("debts", "Summary"))
     def summary_box(self, ar):
+        if ar is None:
+            return ''
         # return E.div(*tuple(ar.story2html(self.summary_story(ar))))
         return ar.story2html(self.summary_story(ar))
 

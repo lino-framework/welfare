@@ -12,9 +12,8 @@ General overview of Lino Welfare
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     
 .. contents:: 
@@ -38,7 +37,7 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-57 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+60 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 152 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -82,7 +81,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               4         153
+ contenttypes.ContentType       gfks.ContentTypes               3         153
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -186,7 +185,7 @@ The following table gives an overview of these things.
  properties.Property            properties.Properties           7         0
  sepa.Account                   sepa.Accounts                   8         79
  sepa.Movement                  sepa.Movements                  19        138
- sepa.Statement                 sepa.Statements                 9         62
+ sepa.Statement                 sepa.Statements                 10        62
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11

@@ -11,9 +11,8 @@ Lino Welfare à la Châtelet
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
 This document describes the *Châtelet* variant of Lino Welfare.
@@ -54,7 +53,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-50 apps: staticfiles, about, bootstrap3, lino_startup, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, beid, davlink, export_excel, plausibility, tinymce.
+53 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, beid, davlink, export_excel, plausibility, tinymce.
 126 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -98,7 +97,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               4         127
+ contenttypes.ContentType       gfks.ContentTypes               3         127
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
@@ -541,7 +540,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.NoteTypes.insert : visible for 110 410 admin
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- notifier.Notifications.insert : visible for admin
+- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin

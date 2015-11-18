@@ -305,7 +305,7 @@ class Granting(Confirmable, BoardDecision):
 
     @dd.displayfield(_("Actions"))
     def custom_actions(self, ar, **kw):
-        if self.aid_type_id is None:
+        if self.aid_type_id is None or ar is None:
             return ''
         at = self.aid_type
         ct = at.confirmation_type

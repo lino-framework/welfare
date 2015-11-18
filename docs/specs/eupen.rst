@@ -10,9 +10,8 @@ Lino Welfare à la Eupen
     $ python setup.py test -s tests.SpecsTests.test_eupen
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     
 .. contents:: 
@@ -435,7 +434,7 @@ Each window layout defines a given set of fields.
 - sepa.AccountsByPartner.insert : iban, bic, remark
 - sepa.Movements.detail : statement, unique_import_id, movement_date, amount, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
 - sepa.OrphanedAccounts.insert : partner, iban, bic
-- sepa.Statements.detail : account, account__partner, statement_number, currency_code, balance_start, start_date, balance_end, end_date
+- sepa.Statements.detail : account, account__partner, statement_number, sequence_number, currency_code, balance_start, start_date, balance_end, end_date
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
@@ -592,7 +591,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.NoteTypes.insert : visible for 110 410 admin
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- notifier.Notifications.insert : visible for admin
+- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin

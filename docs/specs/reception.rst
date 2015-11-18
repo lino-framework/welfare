@@ -39,7 +39,7 @@ This client has the following appointments.
  Start date   Start time   Managed by        Summary          Workflow
 ------------ ------------ ----------------- ---------------- -------------------------------------------------------
  5/15/14      09:00:00     Caroline Carnol   Auswertung 2     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 5/22/14      09:00:00     Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
+ 5/22/14                   Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
  5/22/14      09:40:00     Mélanie Mélard    Diner            **Accepted** → [Excused] [Absent] [Present] [Checkin]
  6/16/14      09:00:00     Caroline Carnol   Auswertung 3     **Accepted** → [Excused] [Absent] [Present] [Checkin]
  7/16/14      09:00:00     Caroline Carnol   Auswertung 4     **Accepted** → [Excused] [Absent] [Present] [Checkin]

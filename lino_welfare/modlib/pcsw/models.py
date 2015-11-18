@@ -316,7 +316,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             return []
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
-        elems.append(self.eid_info(ar))
+        elems.append(ar.get_data_value(self, 'eid_info'))
         for note in rt.modules.notes.Note.objects.filter(
                 project=self, important=True):
             elems += [

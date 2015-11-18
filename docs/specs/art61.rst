@@ -11,9 +11,8 @@ Article 61 job supplyments
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
 This document is an overview of the functionality provided by
@@ -64,7 +63,7 @@ The printed document
 [<Subsidizations.activa:10>]
 
 >>> ar = rt.login('romain')
->>> html = obj.printed_by.preview(ar)
+>>> html = ar.get_data_value(obj.printed_by, 'preview')
 >>> soup = BeautifulSoup(html)
 >>> for h in soup.find_all('h1'):
 ...     print(unicode(h))

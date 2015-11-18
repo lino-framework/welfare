@@ -11,9 +11,8 @@ Preventing accidental deletes
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 
@@ -114,7 +113,7 @@ Lino Welfare:
   - CASCADE : debts.Actor.budget, debts.Entry.budget
   - PROTECT : system.SiteConfig.master_budget
 - excerpts.Excerpt :
-  - set_on_delete : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
+  - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
 - excerpts.ExcerptType :
   - PROTECT : excerpts.Excerpt.excerpt_type
 - finan.BankStatement :
