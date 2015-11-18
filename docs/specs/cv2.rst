@@ -11,9 +11,8 @@ Career (new version)
     
     doctest init:
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the
@@ -58,8 +57,8 @@ And the list of Study types:
  8    Cours à distance        Fernkurs             Remote study       Oui     Non
  7    Cours à temps partiel   Teilzeitunterricht   Part-time study    Oui     Non
  3    Formation               Ausbildung           Training           Oui     Non
- 9    Préqualification        Prequalifying        Prequalifying      Non     Oui
- 10   Qualification           Qualifying           Qualifying         Non     Oui
+ 9    Préqualification        Préqualification     Prequalifying      Non     Oui
+ 10   Qualification           Qualification        Qualifying         Non     Oui
  6    Université              Universität          University         Oui     Non
  1    École                   Schule               School             Oui     Non
  2    École spéciale          Sonderschule         Special school     Oui     Non

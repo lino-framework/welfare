@@ -10,9 +10,8 @@ Lino Welfare à la Eupen
     $ python setup.py test -s tests.SpecsTests.test_eupen
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     
 .. contents:: 
@@ -55,7 +54,6 @@ Rolf is the local system administrator, he has a complete menu:
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
-  - Partnerlose Bankkonten
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -122,6 +120,7 @@ Hubert is an Integration agent.
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
+  - SEPA : Konten, Kontoauszüge, Bewegungen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
 
@@ -151,7 +150,6 @@ to explicitly override the language of :meth:`show_menu
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- Buchhaltung : Partnerlose Bankkonten
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Berichte :
@@ -205,6 +203,8 @@ Schuldenberater
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
+- Explorer :
+  - SEPA : Konten, Kontoauszüge, Bewegungen
 - Site : Info
 
 
@@ -233,6 +233,8 @@ Berater Erstempfang
   - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
+- Explorer :
+  - SEPA : Konten, Kontoauszüge, Bewegungen
 - Site : Info
 
 
@@ -303,6 +305,9 @@ Each window layout defines a given set of fields.
 - art61.ContractTypes.insert : id, name, name_fr, name_en, ref
 - art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
 - art61.Contracts.insert : client, company, type
+- b2c.Accounts.insert : iban, bic, last_movement
+- b2c.Movements.detail : statement, unique_import_id, movement_date, amount, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
+- b2c.Statements.detail : account, currency_code, statement_number, sequence_number, balance_start, start_date, balance_end, end_date
 - boards.Boards.detail : id, name, name_fr, name_en
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
@@ -429,13 +434,6 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- sepa.Accounts.detail : partner, iban, bic, remark
-- sepa.Accounts.insert : partner, iban, bic
-- sepa.AccountsByClient.detail : partner, iban, bic, remark, managed, account_type
-- sepa.AccountsByPartner.insert : iban, bic, remark
-- sepa.Movements.detail : statement, unique_import_id, movement_date, amount, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
-- sepa.OrphanedAccounts.insert : partner, iban, bic
-- sepa.Statements.detail : account, account__partner, statement_number, currency_code, balance_start, start_date, balance_end, end_date
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
@@ -486,6 +484,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - art61.ContractTypes.insert : visible for 110 admin
 - art61.Contracts.detail : visible for 100 110 120 admin
 - art61.Contracts.insert : visible for 100 110 120 admin
+- b2c.Accounts.insert : visible for 100 110 120 200 300 400 410 admin
+- b2c.Movements.detail : visible for 100 110 120 200 300 400 410 admin
+- b2c.Statements.detail : visible for 100 110 120 200 300 400 410 admin
 - boards.Boards.detail : visible for admin
 - boards.Boards.insert : visible for admin
 - cal.Calendars.detail : visible for 110 410 admin
@@ -592,7 +593,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.NoteTypes.insert : visible for 110 410 admin
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- notifier.Notifications.insert : visible for admin
+- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin
@@ -612,13 +613,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 admin
 - reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- sepa.Accounts.detail : visible for 110 410 500 admin
-- sepa.Accounts.insert : visible for 110 410 500 admin
-- sepa.AccountsByClient.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- sepa.AccountsByPartner.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- sepa.Movements.detail : visible for 110 410 500 admin
-- sepa.OrphanedAccounts.insert : visible for 110 410 500 admin
-- sepa.Statements.detail : visible for 110 410 500 admin
 - system.SiteConfigs.detail : visible for admin
 - tinymce.TextFieldTemplates.detail : visible for admin
 - tinymce.TextFieldTemplates.insert : visible for admin

@@ -144,6 +144,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.ledger'
         yield 'lino_welfare.modlib.sepa'
+        yield 'lino_cosi.lib.b2c'
 
 
         # yield 'lino_welfare.modlib.finan'

@@ -34,7 +34,7 @@ This client has the following appointments.
 
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary workflow_buttons",
-...     language="en")
+...     language="en")  #doctest: +REPORT_UDIFF
 ============ ============ ================= ================ =======================================================
  Start date   Start time   Managed by        Summary          Workflow
 ------------ ------------ ----------------- ---------------- -------------------------------------------------------

@@ -122,10 +122,10 @@ This is the list of choice sets:
  ID   Description           Description (de)      Description (en)
 ---- --------------------- --------------------- ---------------------
  1    Yes/No                Yes/No                Yes/No
- 2    Oui/Peut-être/Non     Yes/Maybe/No          Yes/Maybe/No
+ 2    Oui/Peut-être/Non     Oui/Peut-être/Non     Yes/Maybe/No
  3    That's it!...Never!   That's it!...Never!   That's it!...Never!
  4    -1..+1                -1..+1                -1..+1
- 5    Acquis                Acquired              Acquired
+ 5    Acquis                Acquis                Acquired
  6    1...5                 1...5                 1...5
  7    1...10                1...10                1...10
  8    Temps de travail

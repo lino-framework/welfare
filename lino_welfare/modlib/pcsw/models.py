@@ -170,6 +170,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
         abstract = dd.is_abstract_model(__name__, 'Client')
@@ -229,7 +230,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         related_name='persons_job_office')
 
     client_state = ClientStates.field(
-        default=ClientStates.newcomer.as_callable())
+        default=ClientStates.newcomer.as_callable)
 
     refusal_reason = RefusalReasons.field(blank=True)
 
@@ -312,9 +313,11 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             self.last_name.upper(), self.first_name, self.pk)
 
     def get_overview_elems(self, ar):
+        if ar is None:
+            return []
         elems = super(Client, self).get_overview_elems(ar)
         elems.append(E.br())
-        elems.append(self.eid_info(ar))
+        elems.append(ar.get_data_value(self, 'eid_info'))
         for note in rt.modules.notes.Note.objects.filter(
                 project=self, important=True):
             elems += [
@@ -525,7 +528,9 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             yield "%s <%s>" % (unicode(u), u.email)
 
     @dd.displayfield(_("Find appointment"))
-    def find_appointment(self, ar):  # not used
+    def find_appointment(self, ar):
+        if ar is None:
+            return ''
         CalendarPanel = rt.modules.extensible.CalendarPanel
         elems = []
         for obj in self.coachings_by_client.all():
@@ -568,6 +573,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     @dd.htmlbox(_("CBSS"))
     def cbss_relations(self, ar):
+        if ar is None:
+            return ''
         cbss = dd.resolve_app('cbss')
         SLAVE = cbss.RetrieveTIGroupsRequestsByPerson
         elems = []
@@ -1040,6 +1047,7 @@ class PersonGroup(dd.Model):
     #~ text = models.TextField(_("Description"),blank=True,null=True)
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Integration Phase")
         verbose_name_plural = _("Integration Phases")
 
@@ -1061,6 +1069,7 @@ class PersonGroups(dd.Table):
 class Activity(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("activity")
         verbose_name_plural = _("activities")
     name = models.CharField(max_length=80)
@@ -1085,6 +1094,7 @@ class Activities(dd.Table):
 class DispenseReason(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Dispense reason")
         verbose_name_plural = _('Dispense reasons')
 
@@ -1105,6 +1115,7 @@ class DispenseReasons(dd.Table):
 class Dispense(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Dispense")
         verbose_name_plural = _("Dispenses")
     allow_cascaded_delete = ['client']
@@ -1137,6 +1148,7 @@ class DispensesByClient(Dispenses):
 class ExclusionType(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Exclusion Type")
         verbose_name_plural = _('Exclusion Types')
 
@@ -1156,6 +1168,7 @@ class ExclusionTypes(dd.Table):
 class Exclusion(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Penalty")
         verbose_name_plural = _('Penalties')
 
@@ -1195,6 +1208,7 @@ class ExclusionsByClient(Exclusions):
 class Conviction(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Conviction")
         verbose_name_plural = _('Convictions')
 
@@ -1234,6 +1248,7 @@ class ConvictionsByClient(Convictions):
 class AidType(mixins.BabelNamed):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("aid type")
         verbose_name_plural = _('aid types')
 
@@ -1256,6 +1271,7 @@ class ClientContactType(mixins.BabelNamed):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client Contact type")
         verbose_name_plural = _("Client Contact types")
 
@@ -1304,6 +1320,7 @@ class ClientContact(ClientContactBase):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client Contact")
         verbose_name_plural = _("Client Contacts")
     #~ type = ClientContactTypes.field(blank=True)

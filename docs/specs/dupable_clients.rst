@@ -16,9 +16,8 @@ Lino Welfare offers some functionality for avoiding duplicate
     doctest init:
 
     >>> from __future__ import print_function, unicode_literals
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 

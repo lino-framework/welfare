@@ -61,6 +61,7 @@ class CoachingType(mixins.BabelNamed):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Coaching type")
         verbose_name_plural = _('Coaching types')
 
@@ -88,6 +89,7 @@ class CoachingTypes(dd.Table):
 class CoachingEnding(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Reason of termination")
         verbose_name_plural = _('Coaching termination reasons')
 
@@ -119,6 +121,7 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
     """
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
 
@@ -268,7 +271,7 @@ class Coachings(dd.Table):
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         primary_coachings=dd.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),

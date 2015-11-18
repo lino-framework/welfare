@@ -369,7 +369,7 @@ class CourseRequest(dd.Model):
         #~ return CourseProviders.request().queryset
 
     state = CourseRequestStates.field(
-        default=CourseRequestStates.candidate.as_callable())
+        default=CourseRequestStates.candidate.as_callable)
 
     course = models.ForeignKey(
         "courses.Course", blank=True, null=True,

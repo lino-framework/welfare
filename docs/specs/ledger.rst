@@ -85,7 +85,6 @@ Here is the main menu for accountants:
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
-  - Partnerlose Bankkonten
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -235,7 +234,7 @@ be deregistered anymore.
 
     >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(rt.modules.vatless.Invoices)
-    >>> print(E.tostring(obj.workflow_buttons(ar)))
+    >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
     <span><b>Registered</b> &#8594; [&#9671;]</span>
     
 

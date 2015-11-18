@@ -84,6 +84,3 @@ def objects():
         obj.register(ses)
         obj.save()
 
-    dd.plugins.sepa.import_statements_path = HERE
-    settings.SITE.site_config.import_sepa(ses)
-    

@@ -189,7 +189,8 @@ class Event(Event):
         # Overrides `lino.modlib.cal.models_event.Event.when_text`.
         # It is a bit of redundant code, but making it configurable
         # would be nitpicky.
-        assert ar is not None
+        if ar is None:
+            return ''
         # txt = naturalday(self.start_date)
         txt = format_date(self.start_date, 'EE ')
         txt += dd.fds(self.start_date)

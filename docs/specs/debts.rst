@@ -11,9 +11,8 @@ Debts mediation
     Doctest initialization:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('rolf')
@@ -244,14 +243,14 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
 >>> with translation.override('en'):
 ...     ses.show(groups[2].action_request)
 ... #doctest: +REPORT_UDIFF
-================================= ======== ===== ============ ============
- Description                       Common   Mr.   Mrs.         Total
---------------------------------- -------- ----- ------------ ------------
- Paid holiday (600 / 12)                          50,00        50,00
- Year-end prime (800 / 12)                        66,67        66,67
- Gewerkschaftsprämie (1000 / 12)                  83,33        83,33
- **Total (3 rows)**                               **200,00**   **200,00**
-================================= ======== ===== ============ ============
+==================================== ======== ===== ============ ============
+ Description                          Common   Mr.   Mrs.         Total
+------------------------------------ -------- ----- ------------ ------------
+ Paid holiday (600.00 / 12)                          50,00        50,00
+ Year-end prime (800.00 / 12)                        66,67        66,67
+ Gewerkschaftsprämie (1000.00 / 12)                  83,33        83,33
+ **Total (3 rows)**                                  **200,00**   **200,00**
+==================================== ======== ===== ============ ============
 <BLANKLINE>
 
 
@@ -364,7 +363,7 @@ Here is now (almost) the whole content of a printed budget.
 >>> obj = debts.Budget.objects.get(pk=4)
 
 >>> ses.story2rst(obj.data_story(ses))
-... #doctest: +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ~~~~~~~~~~~~~~~
 Monthly incomes
 ~~~~~~~~~~~~~~~
@@ -419,15 +418,14 @@ Monthly expenses
 Yearly incomes
 ~~~~~~~~~~~~~~
 <BLANKLINE>
-================================= ======== ===== ============ ============
- Description                       Common   Mr.   Mrs.         Total
---------------------------------- -------- ----- ------------ ------------
- Paid holiday (1000 / 12)                         83,33        83,33
- Year-end prime (1200 / 12)                       100,00       100,00
- Gewerkschaftsprämie (1400 / 12)                  116,67       116,67
- **Total (3 rows)**                               **300,00**   **300,00**
-================================= ======== ===== ============ ============
-<BLANKLINE>
+==================================== ======== ===== ============ ============
+ Description                          Common   Mr.   Mrs.         Total
+------------------------------------ -------- ----- ------------ ------------
+ Paid holiday (1000.00 / 12)                         83,33        83,33
+ Year-end prime (1200.00 / 12)                       100,00       100,00
+ Gewerkschaftsprämie (1400.00 / 12)                  116,67       116,67
+ **Total (3 rows)**                                  **300,00**   **300,00**
+==================================== ======== ===== ============ ============
 ~~~~~
 Taxes
 ~~~~~

@@ -40,18 +40,33 @@ add("04", _("Other"), 'other')
 
 
 class Account(Account):
+    """A bank account of a partner.
+
+    .. attribute:: account_type
+
+    .. attribute:: managed
+
+        Whether this account is being managed by the PCSW.
+
+        This attribute may be deprecated since managed accounts
+        usually also have imported :attr:`statements
+        <lino_cosi.lib.b2c.models.Account.statements>`.
+
+    """
 
     account_type = AccountTypes.field(
-        default=AccountTypes.giro.as_callable())
+        default=AccountTypes.giro.as_callable)
     managed = models.BooleanField(
         _("Managed"), default=False,
         help_text=_("Whether this account is being managed by the PCSW."))
 
 
 class AccountsByClient(AccountsByPartner):
-    detail_layout = """
-    partner:30 iban:40 bic:20 remark:15 managed account_type
-    sepa.StatementsByAccount
+    """Shows the accounts for a given client. This includes additional
+    information :attr:`managed <Account.managed>`,
+    :attr:`account_type <Account.account_type>` and
+    :attr:`statements <lino_cosi.lib.b2c.models.Account.statements>`.
+
     """
-    column_names = 'account_type managed iban bic primary'
+    column_names = 'account_type iban bic primary managed statements'
 

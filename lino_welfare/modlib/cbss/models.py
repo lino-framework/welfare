@@ -149,14 +149,14 @@ class Sector(mixins.BabelNamed):
     Default values filled from :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
     """
     class Meta:
+        app_label = 'cbss'
         verbose_name = _("Sector")
         verbose_name_plural = _("Sectors")
         unique_together = ['code', 'subcode']
 
     #~ code = models.CharField(max_length=2,verbose_name=_("Code"),primary_key=True)
-    code = models.IntegerField(max_length=2, verbose_name=_("Code"))
-    subcode = models.IntegerField(
-        max_length=2, verbose_name=_("Subcode"), default=0)
+    code = models.IntegerField(_("Code"))
+    subcode = models.IntegerField(_("Subcode"), default=0)
     abbr = dd.BabelCharField(_("Abbreviation"), max_length=50, blank=True)
 
     def __unicode__(self):
@@ -176,20 +176,20 @@ class Sectors(dd.Table):
 class Purpose(mixins.BabelNamed):
 
     u"""
-    Codes qualité (Hoedanigheidscodes). 
+    Codes qualité (Hoedanigheidscodes).
     This table is usually filled with the official codes
     by :mod:`lino_welfare.modlib.cbss.fixtures.purposes`.
     """
     class Meta:
+        app_label = 'cbss'
         verbose_name = _("Purpose")
         verbose_name_plural = _('Purposes')
         unique_together = ['sector_code', 'code']
-    sector_code = models.IntegerField(
-        max_length=2, verbose_name=_("Sector"), blank=True, null=True)
+    sector_code = models.IntegerField(_("Sector"), blank=True, null=True)
     #~ sector_subcode = models.IntegerField(max_length=2,verbose_name=_("Subsector"),blank=True,null=True)
     #~ sector = models.ForeignKey(Sector,blank=True,null=True)
     #~ code = models.CharField(max_length=3,verbose_name=_("Code"))
-    code = models.IntegerField(max_length=3, verbose_name=_("Code"))
+    code = models.IntegerField(_("Code"))
 
     def __unicode__(self):
         #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__unicode__(self)
@@ -246,6 +246,7 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
                            'IdentifyPerson', 'IdentifyPersonRequest.xsd')
 
     class Meta:
+        app_label = 'cbss'
         verbose_name = _("IdentifyPerson Request")
         verbose_name_plural = _("IdentifyPerson Requests")
 
@@ -585,6 +586,7 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
                            'ManageAccess', 'ManageAccessRequest.xsd')
 
     class Meta:
+        app_label = 'cbss'
         verbose_name = _("ManageAccess Request")
         verbose_name_plural = _("ManageAccess Requests")
 
@@ -627,11 +629,11 @@ for register/unregister it is mandatory.""")
     # 20120527 : Django converts default value to unicode. didnt yet
     # understand why.
     action = ManageActions.field(
-        blank=False, default=ManageActions.LIST.as_callable())
+        blank=False, default=ManageActions.LIST.as_callable)
     query_register = QueryRegisters.field(
-        blank=False, default=QueryRegisters.ALL.as_callable())
+        blank=False, default=QueryRegisters.ALL.as_callable)
     #~ action = ManageActions.field(blank=False)
-    # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL.as_callable())
+    # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL.as_callable)
 
     def save(self, *args, **kw):
         if not self.sector_id:
@@ -813,6 +815,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
     """
 
     class Meta:
+        app_label = 'cbss'
         verbose_name = _("Tx25 Request")
         verbose_name_plural = _('Tx25 Requests')
 
@@ -820,7 +823,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
 
     language = RequestLanguages.field(
         blank=True,
-        default=RequestLanguages.fr.as_callable())
+        default=RequestLanguages.fr.as_callable)
     history = models.BooleanField(
         verbose_name=_("History"), default=True,
         help_text="Whatever this means.")
@@ -1041,6 +1044,8 @@ def cbss_summary(self, ar):
     """
     returns a summary overview of the CBSS requests for this person.
     """
+    if ar is None:
+        return ''
     #~ qs = IdentifyPersonRequest.objects.filter(person=self,status=RequestStates.ok)
     html = '<p><ul>'
     #~ for m in (IdentifyPersonRequest,ManageAccessRequest,RetrieveTIGroupsRequest):

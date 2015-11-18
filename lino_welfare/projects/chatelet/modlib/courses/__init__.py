@@ -18,12 +18,6 @@
 """
 The Chatelet extension of :mod:`lino_cosi.lib.courses`
 
-.. autosummary::
-   :toctree:
-
-   models
-
-
 """
 
 from lino_cosi.lib.courses import Plugin

@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Adds demo journals and some bookings for usage by Lino Welfare.
+"""Adds demo user "Wilfried".
 
 """
 

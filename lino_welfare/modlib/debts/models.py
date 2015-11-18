@@ -49,8 +49,9 @@ from .choicelists import TableLayouts
 from django.db import transaction
 
 
-@transaction.commit_on_success
-def bulk_create_with_manual_ids(model, obj_list):
+if False:
+  @transaction.commit_on_success
+  def bulk_create_with_manual_ids(model, obj_list):
     """
     Originally copied from http://stackoverflow.com/a/13143062/407239
     
@@ -80,7 +81,7 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
 
     date = models.DateField(
         _("Date"), blank=True,
-        default=settings.SITE.today)
+        default=dd.today)
     partner = models.ForeignKey('contacts.Partner')
     print_todos = models.BooleanField(
         _("Print to-do list"),
@@ -329,15 +330,21 @@ The total monthly amount available for debts distribution."""))
 
     @dd.virtualfield(dd.PriceField(_("Total debt")))
     def total_debt(self, ar):
+        if ar is None:
+            return None
         return self.sum('amount', 'L')
 
     @dd.htmlbox(_("Entered data"))
     def data_box(self, ar):
+        if ar is None:
+            return ''
         # return E.div(*tuple(ar.story2html(self.data_story(ar))))
         return ar.story2html(self.data_story(ar))
 
     @dd.htmlbox(pgettext("debts", "Summary"))
     def summary_box(self, ar):
+        if ar is None:
+            return ''
         # return E.div(*tuple(ar.story2html(self.summary_story(ar))))
         return ar.story2html(self.summary_story(ar))
 

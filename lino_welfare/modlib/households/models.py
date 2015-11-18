@@ -65,7 +65,7 @@ class Household(Household):
 class Member(Member, mixins.Human, mixins.Born):
 
     dependency = MemberDependencies.field(
-        default=MemberDependencies.none.as_callable())
+        default=MemberDependencies.none.as_callable)
 
     def full_clean(self):
         """Copy data fields from child"""

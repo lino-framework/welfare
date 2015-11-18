@@ -18,8 +18,6 @@
 """
 Database models for `lino_welfare.modlib.aids`.
 
-.. autosummary::
-
 
 """
 
@@ -144,7 +142,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
     # not used:
     aid_regime = AidRegimes.field(
-        default=AidRegimes.financial.as_callable())
+        default=AidRegimes.financial.as_callable)
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
@@ -305,7 +303,7 @@ class Granting(Confirmable, BoardDecision):
 
     @dd.displayfield(_("Actions"))
     def custom_actions(self, ar, **kw):
-        if self.aid_type_id is None:
+        if self.aid_type_id is None or ar is None:
             return ''
         at = self.aid_type
         ct = at.confirmation_type
@@ -349,7 +347,7 @@ class Grantings(dd.Table):
 
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,
@@ -482,7 +480,7 @@ class Confirmations(dd.Table):
 
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,

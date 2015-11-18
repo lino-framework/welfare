@@ -241,7 +241,7 @@ class Obstacle(PersonProperty):
         verbose_name=_("Detected by"),
         blank=True, null=True)
     detected_date = models.DateField(
-        _("Date"), blank=True, null=True, default=settings.SITE.today)
+        _("Date"), blank=True, null=True, default=dd.today)
 
 
 @dd.receiver(pre_ui_save, sender=Obstacle)

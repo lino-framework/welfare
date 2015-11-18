@@ -11,9 +11,8 @@ Uploads
     doctest init:
     
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
