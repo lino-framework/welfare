@@ -85,7 +85,6 @@ Here is the main menu for accountants:
   - Einkauf : Einkaufsrechnungen (REG)
   - Hilfen : Payment instructions (AAW)
   - Finanzjournale : KBC (KBC), PO KBC (POKBC)
-  - Partnerlose Bankkonten
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :

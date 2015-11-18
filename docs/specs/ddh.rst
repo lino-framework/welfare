@@ -38,6 +38,10 @@ Lino Welfare:
   - PROTECT : aids.IncomeConfirmation.granting, aids.RefundConfirmation.granting, aids.SimpleConfirmation.granting
 - art61.ContractType :
   - PROTECT : art61.Contract.type
+- b2c.Account :
+  - PROTECT : b2c.Statement.account
+- b2c.Statement :
+  - PROTECT : b2c.Movement.statement
 - badges.Badge :
   - PROTECT : badges.Award.badge
 - boards.Board :
@@ -204,9 +208,7 @@ Lino Welfare:
 - properties.PropType :
   - PROTECT : properties.PropChoice.type, properties.Property.type
 - sepa.Account :
-  - PROTECT : finan.PaymentOrderItem.bank_account, sepa.Statement.account, vatless.AccountInvoice.bank_account
-- sepa.Statement :
-  - PROTECT : sepa.Movement.statement
+  - PROTECT : finan.PaymentOrderItem.bank_account, vatless.AccountInvoice.bank_account
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
