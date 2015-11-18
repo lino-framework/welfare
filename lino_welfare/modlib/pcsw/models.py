@@ -170,6 +170,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client")
         verbose_name_plural = _("Clients")
         abstract = dd.is_abstract_model(__name__, 'Client')
@@ -1046,6 +1047,7 @@ class PersonGroup(dd.Model):
     #~ text = models.TextField(_("Description"),blank=True,null=True)
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Integration Phase")
         verbose_name_plural = _("Integration Phases")
 
@@ -1067,6 +1069,7 @@ class PersonGroups(dd.Table):
 class Activity(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("activity")
         verbose_name_plural = _("activities")
     name = models.CharField(max_length=80)
@@ -1091,6 +1094,7 @@ class Activities(dd.Table):
 class DispenseReason(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Dispense reason")
         verbose_name_plural = _('Dispense reasons')
 
@@ -1111,6 +1115,7 @@ class DispenseReasons(dd.Table):
 class Dispense(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Dispense")
         verbose_name_plural = _("Dispenses")
     allow_cascaded_delete = ['client']
@@ -1143,6 +1148,7 @@ class DispensesByClient(Dispenses):
 class ExclusionType(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Exclusion Type")
         verbose_name_plural = _('Exclusion Types')
 
@@ -1162,6 +1168,7 @@ class ExclusionTypes(dd.Table):
 class Exclusion(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Penalty")
         verbose_name_plural = _('Penalties')
 
@@ -1201,6 +1208,7 @@ class ExclusionsByClient(Exclusions):
 class Conviction(dd.Model):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Conviction")
         verbose_name_plural = _('Convictions')
 
@@ -1240,6 +1248,7 @@ class ConvictionsByClient(Convictions):
 class AidType(mixins.BabelNamed):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("aid type")
         verbose_name_plural = _('aid types')
 
@@ -1262,6 +1271,7 @@ class ClientContactType(mixins.BabelNamed):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client Contact type")
         verbose_name_plural = _("Client Contact types")
 
@@ -1310,6 +1320,7 @@ class ClientContact(ClientContactBase):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Client Contact")
         verbose_name_plural = _("Client Contacts")
     #~ type = ClientContactTypes.field(blank=True)

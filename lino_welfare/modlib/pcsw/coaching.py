@@ -61,6 +61,7 @@ class CoachingType(mixins.BabelNamed):
 
     """
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Coaching type")
         verbose_name_plural = _('Coaching types')
 
@@ -88,6 +89,7 @@ class CoachingTypes(dd.Table):
 class CoachingEnding(mixins.BabelNamed, mixins.Sequenced):
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Reason of termination")
         verbose_name_plural = _('Coaching termination reasons')
 
@@ -119,6 +121,7 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
     """
 
     class Meta:
+        app_label = 'pcsw'
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
 

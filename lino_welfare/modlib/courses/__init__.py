@@ -16,6 +16,14 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 """Adds functionality for managing *external* courses.
+
+.. autosummary::
+   :toctree:
+
+   models
+   roles
+   fixtures
+
 """
 
 from lino.api import ad, _

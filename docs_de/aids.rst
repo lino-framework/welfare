@@ -208,14 +208,14 @@ Bestätigungstext haben) hier die gleichen Texte als HTML:
             print("")
             print(".. raw:: html")
             print("")
-            for ln in ex.preview(ses).splitlines():
+            for ln in ses.get_data_value(ex, 'preview').splitlines():
                 print("    " + ln)
             print("")
     
             print(header(6, "Vorlage"))
             print("::")
             print("")
-            for ln in ex.body_template_content(ses).splitlines():
+            for ln in ses.get_data_value(ex, 'body_template_content').splitlines():
                 print("    " + ln)
             print("")
 

@@ -18,8 +18,6 @@
 """
 Database models for `lino_welfare.modlib.aids`.
 
-.. autosummary::
-
 
 """
 

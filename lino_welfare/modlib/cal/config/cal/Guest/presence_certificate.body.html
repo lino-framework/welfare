@@ -11,7 +11,7 @@
         fr="Par la présente nous certifions que")}}</p>
 
 <p class="EnhancedPar">
-{%- if obj.client() -%}
+{%- if obj.client -%}
 {{obj.client.get_full_name(nominative=True)}}
 <br>
 {{tr(de="Nationalregisternummer",fr="Numéro du Registre National")}}
