@@ -230,7 +230,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         related_name='persons_job_office')
 
     client_state = ClientStates.field(
-        default=ClientStates.newcomer.as_callable())
+        default=ClientStates.newcomer.as_callable)
 
     refusal_reason = RefusalReasons.field(blank=True)
 

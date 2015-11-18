@@ -546,7 +546,7 @@ class ContractBaseTable(dd.Table):
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
 
         observed_event=ContractEvents.field(
-            blank=True, default=ContractEvents.active.as_callable()),
+            blank=True, default=ContractEvents.active.as_callable),
 
         ending_success=dd.YesNo.field(
             _("Successfully ended"),

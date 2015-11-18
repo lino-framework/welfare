@@ -81,7 +81,7 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
 
     date = models.DateField(
         _("Date"), blank=True,
-        default=settings.SITE.today)
+        default=dd.today)
     partner = models.ForeignKey('contacts.Partner')
     print_todos = models.BooleanField(
         _("Print to-do list"),

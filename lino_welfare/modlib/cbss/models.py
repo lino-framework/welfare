@@ -629,11 +629,11 @@ for register/unregister it is mandatory.""")
     # 20120527 : Django converts default value to unicode. didnt yet
     # understand why.
     action = ManageActions.field(
-        blank=False, default=ManageActions.LIST.as_callable())
+        blank=False, default=ManageActions.LIST.as_callable)
     query_register = QueryRegisters.field(
-        blank=False, default=QueryRegisters.ALL.as_callable())
+        blank=False, default=QueryRegisters.ALL.as_callable)
     #~ action = ManageActions.field(blank=False)
-    # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL.as_callable())
+    # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL.as_callable)
 
     def save(self, *args, **kw):
         if not self.sector_id:
@@ -823,7 +823,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
 
     language = RequestLanguages.field(
         blank=True,
-        default=RequestLanguages.fr.as_callable())
+        default=RequestLanguages.fr.as_callable)
     history = models.BooleanField(
         verbose_name=_("History"), default=True,
         help_text="Whatever this means.")

@@ -271,7 +271,7 @@ class Coachings(dd.Table):
             verbose_name=_("and by"),
             help_text="""... und auch Begleitungen dieses Benutzers."""),
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         primary_coachings=dd.YesNo.field(
             _("Primary coachings"),
             blank=True, help_text="""Accompagnements primaires."""),

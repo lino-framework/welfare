@@ -633,7 +633,7 @@ class Candidature(SectorFunction):
         verbose_name=_("Remark"))
 
     state = CandidatureStates.field(
-        default=CandidatureStates.active.as_callable())
+        default=CandidatureStates.active.as_callable)
 
     def __unicode__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(

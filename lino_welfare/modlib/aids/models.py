@@ -142,7 +142,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
     # not used:
     aid_regime = AidRegimes.field(
-        default=AidRegimes.financial.as_callable())
+        default=AidRegimes.financial.as_callable)
 
     confirmation_type = ConfirmationTypes.field(blank=True)
 
@@ -347,7 +347,7 @@ class Grantings(dd.Table):
 
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,
@@ -480,7 +480,7 @@ class Confirmations(dd.Table):
 
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
-            blank=True, default=dd.PeriodEvents.active.as_callable()),
+            blank=True, default=dd.PeriodEvents.active.as_callable),
         board=dd.ForeignKey(
             'boards.Board',
             blank=True, null=True,
