@@ -108,7 +108,7 @@ Another thing is the location of the factory template.
 Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
 
 
-(Note: the abve tests are the reason why `is_local_project_dir` is
+(Note: the above tests are the reason why `is_local_project_dir` is
 `True` in `lino_welfare.projects.std.settings.doctests`.)
 
 

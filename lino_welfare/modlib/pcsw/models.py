@@ -527,7 +527,9 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             yield "%s <%s>" % (unicode(u), u.email)
 
     @dd.displayfield(_("Find appointment"))
-    def find_appointment(self, ar):  # not used
+    def find_appointment(self, ar):
+        if ar is None:
+            return ''
         CalendarPanel = rt.modules.extensible.CalendarPanel
         elems = []
         for obj in self.coachings_by_client.all():
