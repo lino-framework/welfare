@@ -67,11 +67,11 @@ class CoachingType(mixins.BabelNamed):
 
     does_integ = models.BooleanField(
         INTEG_LABEL, default=True,
-        help_text=_("Whether this coaching type does %s.") % INTEG_LABEL)
+        help_text=_("Whether this coaching type does integration."))
 
     does_gss = models.BooleanField(
         GSS_LABEL, default=True,
-        help_text=_("Whether this coaching type does %s.") % GSS_LABEL)
+        help_text=_("Whether this coaching type does general social work."))
 
     eval_guestrole = dd.ForeignKey(
         'cal.GuestRole',
