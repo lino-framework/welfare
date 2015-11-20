@@ -89,7 +89,6 @@ class ClientDetail(ClientDetail):
     """)
 
     papers = dd.Panel("""
-    uploads.UploadsByClient
     active_job_search.ProofsByClient
     polls.ResponsesByPartner
     """)
@@ -111,12 +110,15 @@ class ClientDetail(ClientDetail):
     # aids.GrantingsByClient
     # """, label=_("Aids"))
 
-    history = dd.Panel("""
+    history = dd.Panel("history_left history_right", label=_("History"))
+
+    history_left = """
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject
     excerpts.ExcerptsByProject
     # lino.ChangesByMaster
-    """, label=_("History"))
+    """
+    history_right = "uploads.UploadsByClient"
 
     calendar = dd.Panel("""
     # find_appointment
