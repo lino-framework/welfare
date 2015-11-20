@@ -35,8 +35,12 @@ from lino_cosi.lib.courses.models import *
 CourseAreas.clear()
 add = CourseAreas.add_item
 add('S', _("Integration workshops"), 'integ')  # no longer used
-add('B', _("Basic skills"), 'basic')
-add('J', _("Job search modules"), 'job')
+add('B', _("General integration workshops"), 'basic')  # requested #564
+add('J', _("Job search workshops"), 'job')  # requested #564
+
+# Dans l'onglet O.I., remplacer "Ateliers" par "Ateliers d'Insertion
+# sociale" et "Module de détermination d'un projet socioprofessionnel"
+# par "Ateliers d'Insertion socioprofessionnelle".
 
 add = EnrolmentStates.add_item
 add('40', _("Started"), 'started', invoiceable=False, uses_a_place=True)
