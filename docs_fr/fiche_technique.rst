@@ -147,3 +147,9 @@ Connexion BCSS
 - Registre National avec historique (Tx25)
 
 
+Connexion SEPA
+--------------
+
+- Lino importe les extraits de compte des clients dont le compte est
+  géré par le CPAS.
+- Les agents sociaux peuvent consulter ces données à tout moment.

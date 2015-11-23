@@ -13,7 +13,6 @@ Willkommen auf der deutschsprachigen Internet-Dokumentation von
    :hidden:
 
    about
-   preise
    kontakt
    handbuch
    help/index
