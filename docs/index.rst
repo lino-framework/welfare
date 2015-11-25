@@ -6,16 +6,11 @@ Lino Welfare
 
 Welcome to the *Lino Welfare* project homepage.  
 
-.. note::
-
-  Rumma & Ko is hiring a `Lino Core Developer
-  <http://www.saffre-rumma.net/jobs/coredev.html>`_ to help Luc with
-  his work on Lino Welfare.
-
-
-
 This document tree is meant for system administrators and developers.
-For end users there are also less technical document trees in `French
+
+Commercial information is `here <http://www.saffre-rumma.net/welfare/>`.
+
+There are also user guides in `French
 <http://fr.welfare.lino-framework.org>`_ and `German
 <http://de.welfare.lino-framework.org>`_.
 

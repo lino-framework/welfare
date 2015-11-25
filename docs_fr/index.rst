@@ -4,8 +4,8 @@
 Lino pour CPAS
 ==============
 
-Bienvenue sur la documentation francophone de :doc:`Lino pour Centres
-Publics d'Action Sociale <about>`.
+Bienvenue sur le guide utilsateur francophone de :doc:`Lino Welfare
+<about>`.
 
 Cette documentation s'adresse aux utilisateurs et est maintenue de
 manière centralisée. Votre aide est la :doc:`bienvenue <contribuer>`.
