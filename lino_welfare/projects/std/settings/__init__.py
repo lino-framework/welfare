@@ -69,7 +69,7 @@ class Site(Site):
         super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=16)
         self.plugins.excerpts.configure(responsible_user='melanie')
-        self.plugins.extjs.configure(enter_submits_form=False)
+        # self.plugins.extjs.configure(enter_submits_form=True)
 
         if 'ledger' in self.plugins:
             self.plugins.ledger.configure(project_model='pcsw.Client')
