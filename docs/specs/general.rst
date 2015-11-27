@@ -54,9 +54,9 @@ The following table gives an overview of these things.
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
  art61.Contract                 art61.Contracts                 30        7
  art61.ContractType             art61.ContractTypes             10        1
- b2c.Account                    b2c.Accounts                    4         62
- b2c.Movement                   b2c.Movements                   19        138
- b2c.Statement                  b2c.Statements                  10        62
+ b2c.Account                    b2c.Accounts                    6         34
+ b2c.Statement                  b2c.Statements                  8         34
+ b2c.Transaction                b2c.Transactions                17        57
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
