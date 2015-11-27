@@ -41,7 +41,7 @@ Lino Welfare:
 - b2c.Account :
   - PROTECT : b2c.Statement.account
 - b2c.Statement :
-  - PROTECT : b2c.Movement.statement
+  - PROTECT : b2c.Transaction.statement
 - badges.Badge :
   - PROTECT : badges.Award.badge
 - boards.Board :

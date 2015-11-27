@@ -85,7 +85,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Kontoauszüge, Bewegungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -120,7 +120,7 @@ Hubert is an Integration agent.
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - SEPA : Konten, Kontoauszüge, Bewegungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
 
@@ -169,7 +169,7 @@ to explicitly override the language of :meth:`show_menu
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - SEPA : Konten, Kontoauszüge, Bewegungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -204,7 +204,7 @@ Schuldenberater
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - SEPA : Konten, Kontoauszüge, Bewegungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -234,7 +234,7 @@ Berater Erstempfang
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - SEPA : Konten, Kontoauszüge, Bewegungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -264,6 +264,7 @@ Empfangsschalter
 - Explorer :
   - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -305,9 +306,9 @@ Each window layout defines a given set of fields.
 - art61.ContractTypes.insert : id, name, name_fr, name_en, ref
 - art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
 - art61.Contracts.insert : client, company, type
-- b2c.Accounts.insert : iban, bic, last_movement
-- b2c.Movements.detail : statement, unique_import_id, movement_date, amount, remote_account, remote_bic, ref, eref, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, transfer_type, execution_date, value_date, message
-- b2c.Statements.detail : account, currency_code, statement_number, sequence_number, balance_start, start_date, balance_end, end_date
+- b2c.Accounts.detail : iban, bic, last_transaction, owner_name, account_name, partners
+- b2c.Statements.detail : account, account__owner_name, account__account_name, statement_number, local_currency, balance_start, start_date, balance_end, end_date
+- b2c.Transactions.detail : statement, seqno, booking_date, value_date, amount, remote_account, remote_bic, eref, txcd_text, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, message
 - boards.Boards.detail : id, name, name_fr, name_en
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
@@ -484,9 +485,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - art61.ContractTypes.insert : visible for 110 admin
 - art61.Contracts.detail : visible for 100 110 120 admin
 - art61.Contracts.insert : visible for 100 110 120 admin
-- b2c.Accounts.insert : visible for 100 110 120 200 300 400 410 admin
-- b2c.Movements.detail : visible for 100 110 120 200 300 400 410 admin
-- b2c.Statements.detail : visible for 100 110 120 200 300 400 410 admin
+- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
+- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
+- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
 - boards.Boards.detail : visible for admin
 - boards.Boards.insert : visible for admin
 - cal.Calendars.detail : visible for 110 410 admin
