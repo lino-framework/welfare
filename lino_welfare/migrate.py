@@ -1237,8 +1237,10 @@ valid_until to end_date.
             self.after_load(check_sepa_accounts)
         return '1.1.23'
 
-    def unused_migrate_from_1_1_25(self, globals_dict):
-        """:class:`CivilState <lino_welfare.modlib.pcsw.choicelists.CivilState>`"""
+    def migrate_from_1_1_24(self, globals_dict):
+        """
+- convert civil_state to new codification (see :class:`CivilState <lino_welfare.modlib.pcsw.choicelists.CivilState>`)
+- ignore ledger, finan, vatless and sepa"""
 
         CivilState = rt.modules.pcsw.CivilState
         contacts_Person = globals_dict('contacts_Person')
@@ -1261,5 +1263,20 @@ valid_until to end_date.
             if civil_state:
                 civil_state = CivilState.old2new(civil_state)
             return create_mti_child(contacts_Person,person_ptr_id,pcsw_Client,person_ptr_id=person_ptr_id,national_id=national_id,nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,group_id=group_id,birth_place=birth_place,birth_country_id=birth_country_id,civil_state=civil_state,residence_type=residence_type,in_belgium_since=in_belgium_since,residence_until=residence_until,unemployed_since=unemployed_since,needs_residence_permit=needs_residence_permit,needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,declared_name=declared_name,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,obstacles=obstacles,skills=skills,job_office_contact_id=job_office_contact_id,client_state=client_state,refusal_reason=refusal_reason,remarks2=remarks2,gesdos_id=gesdos_id,tim_id=tim_id,is_cpas=is_cpas,is_senior=is_senior,health_insurance_id=health_insurance_id,pharmacy_id=pharmacy_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,job_agents=job_agents,broker_id=broker_id,faculty_id=faculty_id)
+            globals_dict.update(create_mti_child=create_mti_child)
+
+            globals_dict.update(create_ledger_movement=noop)
+            globals_dict.update(create_vatless_accountinvoice=noop)
+            globals_dict.update(create_vatless_invoiceitem=noop)
+            globals_dict.update(create_finan_paymentorder=noop)
+            globals_dict.update(create_finan_paymentorderitem=noop)
+            globals_dict.update(create_finan_bankstatement=noop)
+            globals_dict.update(create_finan_bankstatementitem=noop)
+            globals_dict.update(create_finan_grouper=noop)
+            globals_dict.update(create_finan_grouperitem=noop)
+            globals_dict.update(create_finan_journalentry=noop)
+            globals_dict.update(create_finan_journalentryitem=noop)
+            globals_dict.update(create_sepa_movement=noop)
+            globals_dict.update(create_sepa_statement=noop)
 
         return '1.1.26'
