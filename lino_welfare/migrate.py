@@ -1243,9 +1243,9 @@ valid_until to end_date.
 - ignore ledger, finan, vatless and sepa"""
 
         CivilState = rt.modules.pcsw.CivilState
-        contacts_Person = globals_dict('contacts_Person')
-        pcsw_Client = globals_dict('pcsw_Client')
-        create_mti_child = globals_dict('create_mti_child')
+        contacts_Person = globals_dict['contacts_Person']
+        pcsw_Client = globals_dict['pcsw_Client']
+        create_mti_child = globals_dict['create_mti_child']
 
         def create_pcsw_client(person_ptr_id, national_id,
                                nationality_id, card_number, card_valid_from,
