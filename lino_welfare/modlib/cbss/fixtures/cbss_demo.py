@@ -63,6 +63,9 @@ def objects():
         [cbss.RetrieveTIGroupsRequest,
          dict(national_id='680307 001-74', history=True),
          'demo_tx25_2.xml'],
+        [cbss.RetrieveTIGroupsRequest,
+         dict(national_id='680307 001-74', history=True),
+         'demo_tx25_3.xml'],
     ]
 
     User = settings.SITE.user_model
