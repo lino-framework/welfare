@@ -3,6 +3,9 @@
 # License: BSD, see LICENSE for more details.
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.
+
+It generates the :ref:`welfare.de.screenshots` page.
+
 """
 from __future__ import unicode_literals
 
@@ -12,27 +15,35 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.action_chains import ActionChains
 
-from lino.api.selenium import Application
+from lino.api.selenium import Album, runserver
 
 
-def main():
+def album1():
 
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
-    app = Application(driver, 'screenshots', "Bildertour")
-    actionChains = ActionChains(driver)
+    app = Album(
+        driver, 'screenshots', title="Bildertour",
+        ref="welfare.de.screenshots", intro="""
+
+        Die Online-Demo von Lino Welfare befindet sich unter
+        http://welfare-demo.lino-framework.org
+
+        Dort können Sie die folgenden Bildschirmansichten auch selber
+        nachspielen.
+
+        """)
 
     app.checktitle("Lino für ÖSHZ")
 
     app.screenshot('login1.png', "Vor der Anmeldung", """
 
-    Die Online-Demo von Lino Welfare befindet sich unter
-    http://welfare-demo.lino-framework.org
-
-    Dort können Sie die folgenden Bildschirmansichten auch selber
-    nachspielen.
+    Solange Sie sich nicht angemeldet haben, sind sie ein anonymer
+    Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
+    alle Benutzer sowie deren Passwörter gezeigt.  Beachten Sie, dass
+    *Sprache* und *Benutzerprofil* variieren.
+    (siehe :mod:`lino_welfare.modlib.welfare.roles`)
 
     """)
 
@@ -71,17 +82,12 @@ def main():
     elem = driver.find_element(By.LINK_TEXT, "▶ Klienten")
     elem.click()
 
-    # I did not yet find a general condition that waits until grid
-    # contains data
+    # wait until grid contains data
 
     elem = WebDriverWait(driver, 10).until(
         EC.invisibility_of_element_located(
             # (By.CLASS_NAME, "ext-el-mask-msg x-mask-loading")))
             (By.CSS_SELECTOR, ".x-mask-loading")))
-
-    # elem = WebDriverWait(driver, 10).until(
-    #     EC.invisibility_of_element_located(
-    #         (By.XPATH, '//button[text()="Bitte warten..."]')))
 
     # elem = WebDriverWait(driver, 10).until(
     #     EC.text_to_be_present_in_element(
@@ -92,10 +98,9 @@ def main():
     aller Klienten zu zeigen.
     """)
 
-    elem = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.CLASS_NAME, 'x-grid3-col')))
-    actionChains.double_click(elem).perform()
+    # find the first row and doubleclick it:
+    elem = driver.find_elements(By.CLASS_NAME, 'x-grid3-row')[0]
+    app.doubleclick(elem)
 
     # wait until no more loadmask is visible:
     elem = WebDriverWait(driver, 10).until(
@@ -103,26 +108,16 @@ def main():
             # (By.CLASS_NAME, "ext-el-mask-msg x-mask-loading")))
             (By.CSS_SELECTOR, ".x-mask-loading")))
 
-    # try:
-    #     elem = WebDriverWait(driver, 10).until(
-    #         EC.text_to_be_present_in_element_value(
-    #             (By.CLASS_NAME, 'x-window-header-text'),
-    #             "Klienten » AUSDEMWALD Alfons (116)"))
-    # except TimeoutException:
-    #     elem = driver.find_element(By.CLASS_NAME, 'x-window-header-text')
-    #     print elem.text
-
     app.screenshot('contacts.Clients.detail.png', "Detail Klient", """
     Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
     """)
 
-    driver.quit()
     app.write_index()
 
+    driver.quit()
+
+
 if __name__ == '__main__':
-    main()
+    runserver('lino_welfare.projects.eupen.settings.demo', album1)
 
 
-# <div>Bitte warten...</div>
-
-# <div style="left: 289px; top: 220px;" id="ext-gen553" class="ext-el-mask-msg x-mask-loading"><div>Bitte warten...</div></div>

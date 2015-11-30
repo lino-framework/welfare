@@ -1,6 +1,19 @@
+.. _welfare.de.screenshots:
+
 ==========
 Bildertour
 ==========
+
+
+
+
+
+
+Die Online-Demo von Lino Welfare befindet sich unter
+http://welfare-demo.lino-framework.org
+
+Dort können Sie die folgenden Bildschirmansichten auch selber
+nachspielen.
 
 
 
@@ -15,11 +28,11 @@ Vor der Anmeldung
 
 
 
-Die Online-Demo von Lino Welfare befindet sich unter
-http://welfare-demo.lino-framework.org
-
-Dort können Sie die folgenden Bildschirmansichten auch selber
-nachspielen.
+Solange Sie sich nicht angemeldet haben, sind sie ein anonymer
+Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
+alle Benutzer sowie deren Passwörter gezeigt.  Beachten Sie, dass
+*Sprache* und *Benutzerprofil* variieren.
+(siehe :mod:`lino_welfare.modlib.welfare.roles`)
 
 
 
@@ -53,8 +66,8 @@ Nach der Anmeldung
 Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
 
 - Das Hauptmenü
-- Meldungen
 - Quicklinks
+- Begrüßungsmeldungen
 - Diverse Tabellen
 
 
@@ -84,7 +97,7 @@ Liste der Klienten
 
 
 
-Klicken Sie :menuselection:`Kontakte --> Klienten`, um die Liste
+Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
 aller Klienten zu zeigen.
 
 
@@ -100,7 +113,7 @@ Detail Klient
 
 
 
-Doppelklick auf einer Zeile, um das Detail dieses Klienten zu zeigen.
+Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
 
 
 .. image:: contacts.Clients.detail.png
