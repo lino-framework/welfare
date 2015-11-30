@@ -16,4 +16,6 @@ Willkommen auf der deutschsprachigen Internet-Dokumentation von
    kontakt
    handbuch
    help/index
+   screenshots/index
+   
 

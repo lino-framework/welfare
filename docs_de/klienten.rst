@@ -11,6 +11,8 @@ Kolonnenreihenfolge und Filterparameter unterscheiden:
   (Menü :menuselection:`Kontakte --> Klienten`) : 
   allgemeine Liste, die jeder Benutzer sehen darf.
 
+  .. image:: /screenshots/contacts.Clients.grid.png
+
 - DSBE-Klienten
   (Menü :menuselection:`DSBE --> Klienten`)
   spezielle Liste für die Kollegen im DSBE.
@@ -23,12 +25,16 @@ Kolonnenreihenfolge und Filterparameter unterscheiden:
 
 N.B.  Das Detail, das bei Doppelklick angezeigt wird, ist bei allen
 drei Ansichten das Gleiche.  *Was* im Detail alles angezeigt wird
-(bzw. was nicht), das hängt jedoch von den Zugriffsrechten ab (sh.
-*Benutzerprofil*, :attr:`ml.users.User.profile`).
+(bzw. was nicht), das hängt jedoch von den Zugriffsrechten ab.
+
+  .. image:: /screenshots/contacts.Clients.detail.png
 
 Eine vierte Tabellenansicht ist :menuselection:`Empfang --> Klienten`:
 das ist eine spezielle Liste für den Empfangsschalter, die ihr eigenes
 Detail-Layout hat.
 
-Technische Details sind in Englisch unter :class:`welfare.pcsw.Client`
-dokumentiert.
+Technische Details in Englisch unter 
+
+- `welfare.specs.pcsw`
+- :class:`lino_welfare.modlib.pcsw.models.Client`
+

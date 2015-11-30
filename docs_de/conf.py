@@ -13,6 +13,15 @@ extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']
 extensions += ['lino.sphinxcontrib.actordoc']
 
+
+intersphinx_mapping = {}
+from django.utils.importlib import import_module
+for n in 'lino lino_welfare'.split():
+    m = import_module(n)
+    n = n.replace('_', '')
+    intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
+
+
 import alabaster
 extensions.append('alabaster')
 html_style = 'alabaster.css'

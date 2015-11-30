@@ -31,7 +31,10 @@ between different Belgian government agencies.
     choicelists
     models
     tx25
-    fixtures
+    fixtures.cbss_demo
+    fixtures.cbss
+    fixtures.purposes
+    fixtures.sectors
 
 .. rubric:: Plugin configuration
 

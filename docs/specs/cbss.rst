@@ -1,14 +1,14 @@
 .. _welfare.tested.cbss:
+.. _welfare.specs.cbss:
 
 CBSS connection
 ===============
 
-.. include:: /include/tested.rst
-
 .. to test only this document:
   $ python setup.py test -s tests.SpecsTests.test_cbss
 
-.. 
+  doctest init:
+
   >>> from lino.api.shell import *
   >>> from django.utils import translation
 
@@ -25,9 +25,9 @@ RetrieveTIGroupsRequest #1 (u'Tx25-Anfrage #1')
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf` 
-using the :meth:`login <lino.ui.Site.login>` method:
+using the :meth:`login <lino.core.site.Site.login>` method:
 
->>> ses = settings.SITE.login('rolf')
+>>> ses = rt.login('rolf')
 
 Here is the textual representation of the "Result" panel 
 (only the first lines, this is just a test after all):

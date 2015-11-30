@@ -1,3 +1,4 @@
+.. _welfare.specs.pcsw:
 .. _welfare.tested.pcsw:
 
 ============

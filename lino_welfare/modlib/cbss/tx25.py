@@ -20,9 +20,11 @@
 sur certains types d’informations légales" (in `Codes d'interrogations
 <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
 
-See user documentation at :class:`welfare.cbss.RetrieveTIGroupsRequest`.
+See also :ref:`welfare.specs.cbss`
 
-Incomplete list of the supported TIs:
+Incomplete list of the supported TIs (incomplete because the first
+handlers were written with an older syntax which did not worry about
+how to generate a documentation page for them):
 
 .. py2rst::
 
@@ -34,8 +36,16 @@ Incomplete list of the supported TIs:
 
 All common information types are being handled.
 
-See
-:class:`RowFactory`
+This is a masterpiece of untransparent code, difficult to understand
+and maintain.  But I didn't find a better solution.  Maybe an XSLT
+expert might help us to rewrite this from scratch. The purpose is very
+simple: transform the content of a Tx25 response into a printable
+document.  A Tx25 response is a rather complex data structure with
+lots and lots of elements.  It contains a handler for every element
+type
+
+In case you need to understand, consult the source code of
+:class:`RowFactory`.
 
 See also:
 
@@ -116,11 +126,11 @@ class Info(object):
             prefix = '%s ' % name
         else:
             prefix = force_unicode(prefix)
+            if prefix and prefix[-1] not in ' :(':
+                prefix += ': '
         if len(self.chunks):
             if not prefix.startswith(' '):
                 prefix = ', ' + prefix
-        if prefix and prefix[-1] not in ' :':
-            prefix += ': '
         self.chunks += [prefix] + fmt(v).chunks
         if suffix:
             self.chunks.append(force_unicode(suffix))
@@ -399,6 +409,14 @@ def IT152(n):  # BurialModes, Mode de sépulture
     info.addfrom(n, 'Date', _("Date"), DateType)
     info.addfrom(n, 'TypeOfBurial', "", TypeOfBurialType)
     info.addfrom(n, 'LegalRepresentative', "", LegalRepresentativeType)
+    info.add_deldate(n)
+    return info
+
+
+def IT023(n):  # PostalAddressAbroad, Adresse postale à l'étranger
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    info.addfrom(n, 'Address', "", AddressType)
     info.add_deldate(n)
     return info
 
@@ -997,6 +1015,8 @@ register_it_handler('TemporaryAbsences',
                     _("Temporary absences"), 'TemporaryAbsence', 'IT026')
 register_it_handler('BurialModes',
                     _("Burial modes"), 'BurialMode', 'IT152')
+register_it_handler('PostalAddressAbroad',
+                    _("Postal address abroad"), 'PostalAddressAbroad', 'IT023')
 
 
 class RowFactory(object):
@@ -1117,7 +1137,7 @@ class RowFactory(object):
         for n in node.LegalMainAddress:
             yield self.datarow(n, n.Date, IT020(n))
 
-    def ResidenceAbroad(self, node, name):
+    def ResidenceAbroad(self, node, name):  # IT022
         def ResidenceAbroadAddressType(n):
             info = Info('Address')
             info.addfrom(n, 'PosteDiplomatique', None, DiplomaticPostType)
@@ -1192,15 +1212,15 @@ class RowFactory(object):
             info.add_deldate(n)
             yield self.datarow(n, n.Date, info)
 
-    def FamilyMembers(self, node, name):
-        self.start_group(_("Family Members"))
-        for n in node.FamilyMember:
-            info = IT140(n)
-            yield self.datarow(n, n.Date, info)
-
     def HeadOfFamily(self, node, name):
         self.start_group(_("Head Of Family"))
         for n in node.HeadOfFamily:
+            info = IT140(n)
+            yield self.datarow(n, n.Date, info)
+
+    def FamilyMembers(self, node, name):
+        self.start_group(_("Family Members"))
+        for n in node.FamilyMember:
             info = IT141(n)
             yield self.datarow(n, n.Date, info)
 
