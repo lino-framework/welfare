@@ -200,6 +200,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
     residence_until = models.DateField(
         _("Residence until"), blank=True, null=True)
     unemployed_since = models.DateField(
+        _("Unemployed since"), blank=True, null=True)
+    seeking_since = models.DateField(
         _("Seeking work since"), blank=True, null=True)
     needs_residence_permit = models.BooleanField(
         _("Needs residence permit"), default=False)
@@ -662,7 +664,7 @@ class ClientDetail(dd.DetailLayout):
     """)
 
     papers = dd.Panel("""
-    is_seeking unemployed_since work_permit_suspended_until
+    unemployed_since seeking_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
     uploads.UploadsByClient
     """)  # ,label = _("Papers"))

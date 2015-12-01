@@ -28,11 +28,12 @@ Vor der Anmeldung
 
 
 
-Solange Sie sich nicht angemeldet haben, sind sie ein anonymer
+Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
 Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
-alle Benutzer sowie deren Passwörter gezeigt.  Beachten Sie, dass
-*Sprache* und *Benutzerprofil* variieren.
-(siehe :mod:`lino_welfare.modlib.welfare.roles`)
+alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
+Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
+und *Benutzerprofil* variieren.  (Siehe
+:mod:`lino_welfare.modlib.welfare.roles`)
 
 
 

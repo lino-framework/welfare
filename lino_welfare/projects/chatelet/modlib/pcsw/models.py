@@ -82,7 +82,7 @@ class ClientDetail(ClientDetail):
     """, required_roles=dd.required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""
-    is_seeking unemployed_since work_permit_suspended_until
+    is_seeking unemployed_since seeking_since work_permit_suspended_until
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
     # pcsw.ConvictionsByClient
@@ -115,10 +115,12 @@ class ClientDetail(ClientDetail):
     history_left = """
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject
-    excerpts.ExcerptsByProject
     # lino.ChangesByMaster
     """
-    history_right = "uploads.UploadsByClient"
+    history_right = """
+    uploads.UploadsByClient
+    excerpts.ExcerptsByProject
+    """
 
     calendar = dd.Panel("""
     # find_appointment
@@ -222,3 +224,5 @@ def myhandler(sender=None, watcher=None, request=None, **kwargs):
     rt.send_email(subject, sender, body, recipients)
 
 
+uploads = dd.resolve_app('uploads')
+uploads.UploadsByClient.slave_grid_format = 'grid'

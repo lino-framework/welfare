@@ -14,7 +14,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 
 from lino.api.selenium import Album, runserver
 
@@ -39,11 +38,12 @@ def album1():
 
     app.screenshot('login1.png', "Vor der Anmeldung", """
 
-    Solange Sie sich nicht angemeldet haben, sind sie ein anonymer
+    Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
     Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
-    alle Benutzer sowie deren Passwörter gezeigt.  Beachten Sie, dass
-    *Sprache* und *Benutzerprofil* variieren.
-    (siehe :mod:`lino_welfare.modlib.welfare.roles`)
+    alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
+    Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
+    und *Benutzerprofil* variieren.  (Siehe
+    :mod:`lino_welfare.modlib.welfare.roles`)
 
     """)
 
@@ -60,9 +60,12 @@ def album1():
     elem.send_keys("1234")
     elem.send_keys(Keys.RETURN)
 
-    elem = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.NAME, 'integ.UsersWithClients.grid')))
+    # elem = WebDriverWait(driver, 10).until(
+    #     EC.presence_of_element_located(
+    #         (By.NAME, 'integ.UsersWithClients.grid')))
+
+    app.stabilize()
+
     app.screenshot('welcome.png', "Nach der Anmeldung", """
     Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
 
@@ -82,16 +85,7 @@ def album1():
     elem = driver.find_element(By.LINK_TEXT, "▶ Klienten")
     elem.click()
 
-    # wait until grid contains data
-
-    elem = WebDriverWait(driver, 10).until(
-        EC.invisibility_of_element_located(
-            # (By.CLASS_NAME, "ext-el-mask-msg x-mask-loading")))
-            (By.CSS_SELECTOR, ".x-mask-loading")))
-
-    # elem = WebDriverWait(driver, 10).until(
-    #     EC.text_to_be_present_in_element(
-    #         (By.CLASS_NAME, 'x-window-header-text'), "Klienten"))
+    app.stabilize()
 
     app.screenshot('contacts.Clients.grid.png', "Liste der Klienten", """
     Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
@@ -102,11 +96,7 @@ def album1():
     elem = driver.find_elements(By.CLASS_NAME, 'x-grid3-row')[0]
     app.doubleclick(elem)
 
-    # wait until no more loadmask is visible:
-    elem = WebDriverWait(driver, 10).until(
-        EC.invisibility_of_element_located(
-            # (By.CLASS_NAME, "ext-el-mask-msg x-mask-loading")))
-            (By.CSS_SELECTOR, ".x-mask-loading")))
+    app.stabilize()
 
     app.screenshot('contacts.Clients.detail.png', "Detail Klient", """
     Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.

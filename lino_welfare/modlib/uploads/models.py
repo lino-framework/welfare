@@ -267,7 +267,7 @@ class UploadsByClient(AreaUploads, UploadsByController):
     "Uploads by Client"
     master = 'pcsw.Client'
     master_key = 'project'
-    column_names = "type end_date needed description user file *"
+    column_names = "type end_date needed description user *"
     # auto_fit_column_widths = True
     # debug_sql = "20140519"
 

@@ -397,10 +397,10 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         super(ContractBase, self).update_owned_instance(other)
 
     def setup_auto_event(self, evt):
-        """This implements the rule that suggested evaluation events should
-        be for the *currently responsible* coach, which may differ from
-        the contract's author. This is relevant if coach changes while
-        contract is active (see :doc:`/specs/integ`).
+        """This implements the rule that suggested evaluation events should be
+        for the *currently responsible* coach if the contract's author
+        no longer coaches that client.  This is relevant if coach
+        changes while contract is active (see :doc:`/specs/integ`).
 
         The **currently responsible coach** is the user for which
         there is a coaching which has :attr:`does_integ
@@ -411,9 +411,12 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         super(ContractBase, self).setup_auto_event(evt)
         d = evt.start_date
         coachings = evt.owner.client.get_coachings(
-            (d, d), type__does_integ=True)
-        if coachings.count() == 1:
-            evt.user = coachings[0].user
+            (d, d), type__does_integ=True, user=evt.user)
+        if not coachings.exists():
+            coachings = evt.owner.client.get_coachings(
+                (d, d), type__does_integ=True)
+            if coachings.count() == 1:
+                evt.user = coachings[0].user
 
     def update_cal_rset(self):
         return self.exam_policy
