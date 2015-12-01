@@ -178,8 +178,8 @@ class ContractDetail(dd.FormLayout):
 class Contracts(ContractBaseTable):
     #~ debug_permissions = "20130222"
     required_roles = dd.required(IntegrationAgent)
-    model = Contract
-    column_names = 'id applies_from applies_until user type *'
+    model = 'art61.Contract'
+    column_names = 'id client applies_from applies_until user type *'
     order_by = ['id']
     detail_layout = ContractDetail()
     insert_layout = """

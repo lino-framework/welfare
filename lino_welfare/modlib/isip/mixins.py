@@ -224,13 +224,12 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     
     .. attribute:: applies_until
 
-        The planned end date.
+        The *planned* end date of this contract.
     
     .. attribute:: date_ended
 
-        The date when this contract was prematuredly ended. When
-        nonempty, the :attr:`ended` field should also be filled.  This field
-        is usually empty.
+        The date when this contract was *effectively* ended.
+        This field is set to the same value as :attr:`applies_until`.
 
     .. attribute:: ending
 
@@ -335,6 +334,9 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     def ending_choices(cls):
         return rt.modules.isip.ContractEnding.objects.filter(use_in_isip=True)
 
+    def applies_until_changed(self, ar):
+        self.date_ended = self.applies_until
+
     def client_changed(self, ar):
 
         """If the contract's author is the client's primary coach, then set
@@ -371,6 +373,8 @@ class ContractBase(Signers, Certifiable, EventGenerator):
 - Any error message returned by :class:`OverlappingContractsTest`
 
 """
+        if not self.date_ended:
+            self.date_ended = self.applies_until
         r = self.active_period()
         if not isrange(*r):
             raise ValidationError(_('Contract ends before it started.'))
@@ -588,8 +592,7 @@ class ContractBaseTable(dd.Table):
             period = (pv.start_date, pv.end_date)
         if ce and period is not None:
             if ce == ContractEvents.ended:
-                qs = qs.filter(dd.inrange_filter('applies_until', period)
-                               | dd.inrange_filter('date_ended', period))
+                qs = qs.filter(dd.inrange_filter('date_ended', period))
             elif ce == ContractEvents.started:
                 qs = qs.filter(dd.inrange_filter('applies_from', period))
             elif ce == ContractEvents.signed:

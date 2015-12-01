@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-01 08:36+0200\n"
+"POT-Creation-Date: 2015-12-01 15:58+0200\n"
 "PO-Revision-Date: 2015-12-01 08:11+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
@@ -1668,7 +1668,7 @@ msgid "Course found"
 msgstr "Kurs gefunden"
 
 #: lino_welfare/modlib/courses/models.py:394
-#: lino_welfare/modlib/isip/mixins.py:291
+#: lino_welfare/modlib/isip/mixins.py:290
 msgid "date ended"
 msgstr "Enddatum"
 
@@ -2467,48 +2467,48 @@ msgstr ""
 msgid "Check for overlapping contracts"
 msgstr "auf Vertragsüberschneidungen prüfen"
 
-#: lino_welfare/modlib/isip/mixins.py:267
+#: lino_welfare/modlib/isip/mixins.py:266
 msgid "applies from"
 msgstr "Laufzeit von"
 
-#: lino_welfare/modlib/isip/mixins.py:268
+#: lino_welfare/modlib/isip/mixins.py:267
 msgid "applies until"
 msgstr "Laufzeit bis"
 
-#: lino_welfare/modlib/isip/mixins.py:270
+#: lino_welfare/modlib/isip/mixins.py:269
 msgid "date decided"
 msgstr "Beschlossen am"
 
-#: lino_welfare/modlib/isip/mixins.py:272
+#: lino_welfare/modlib/isip/mixins.py:271
 msgid "date issued"
 msgstr "Ausgestellt am"
 
-#: lino_welfare/modlib/isip/mixins.py:276
+#: lino_welfare/modlib/isip/mixins.py:275
 msgid "responsible (ASD)"
 msgstr "Verantwortlicher (ASD)"
 
-#: lino_welfare/modlib/isip/mixins.py:376
+#: lino_welfare/modlib/isip/mixins.py:380
 msgid "Contract ends before it started."
 msgstr "Vertrag endet bevor er startet."
 
-#: lino_welfare/modlib/isip/mixins.py:392
+#: lino_welfare/modlib/isip/mixins.py:396
 msgid "You must specify a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:443
+#: lino_welfare/modlib/isip/mixins.py:447
 #, python-format
 msgid "Evaluation %d"
 msgstr "Auswertung %d"
 
-#: lino_welfare/modlib/isip/mixins.py:454
+#: lino_welfare/modlib/isip/mixins.py:458
 msgid "Contract ends in a month"
 msgstr "Vertrag endet in einem Monat"
 
-#: lino_welfare/modlib/isip/mixins.py:555
+#: lino_welfare/modlib/isip/mixins.py:559
 msgid "Successfully ended"
 msgstr "Erfolgreich abgeschlossen"
 
-#: lino_welfare/modlib/isip/mixins.py:565
+#: lino_welfare/modlib/isip/mixins.py:569
 msgid "Only contracts with this company as partner."
 msgstr ""
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.25\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-01 08:36+0200\n"
+"POT-Creation-Date: 2015-12-01 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1638,7 +1638,7 @@ msgid "Course found"
 msgstr ""
 
 #: lino_welfare/modlib/courses/models.py:394
-#: lino_welfare/modlib/isip/mixins.py:291
+#: lino_welfare/modlib/isip/mixins.py:290
 msgid "date ended"
 msgstr ""
 
@@ -2411,48 +2411,48 @@ msgstr ""
 msgid "Check for overlapping contracts"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:267
+#: lino_welfare/modlib/isip/mixins.py:266
 msgid "applies from"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:268
+#: lino_welfare/modlib/isip/mixins.py:267
 msgid "applies until"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:270
+#: lino_welfare/modlib/isip/mixins.py:269
 msgid "date decided"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:272
+#: lino_welfare/modlib/isip/mixins.py:271
 msgid "date issued"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:276
+#: lino_welfare/modlib/isip/mixins.py:275
 msgid "responsible (ASD)"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:376
+#: lino_welfare/modlib/isip/mixins.py:380
 msgid "Contract ends before it started."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:392
+#: lino_welfare/modlib/isip/mixins.py:396
 msgid "You must specify a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:443
+#: lino_welfare/modlib/isip/mixins.py:447
 #, python-format
 msgid "Evaluation %d"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:454
+#: lino_welfare/modlib/isip/mixins.py:458
 msgid "Contract ends in a month"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:555
+#: lino_welfare/modlib/isip/mixins.py:559
 msgid "Successfully ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:565
+#: lino_welfare/modlib/isip/mixins.py:569
 msgid "Only contracts with this company as partner."
 msgstr ""
 

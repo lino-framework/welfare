@@ -74,11 +74,15 @@ class ClientDetail(ClientDetail):
     child_custody
     """
 
+    coaching = dd.Panel("""
+    newcomers_left:20 newcomers.AvailableCoachesByClient:40
+    pcsw.CoachingsByClient:40
+    """, label=_("Coaches"))
+
     newcomers_left = dd.Panel("""
     workflow_buttons id_document
-    broker:12
     faculty:12
-    # refusal_reason
+    pcsw.ContactsByClient:20
     """, required_roles=dd.required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""
@@ -201,6 +205,8 @@ aids.GrantingsByClient.column_names = "description_column request_date "\
                                       "aid_type category start_date"
 
 notes = dd.resolve_app('notes')
+notes.Note.hidden_elements = dd.fields_list(
+    notes.Note, 'company contact_person contact_role')
 
 
 @dd.receiver(dd.on_ui_updated, sender=notes.Note)
@@ -226,3 +232,4 @@ def myhandler(sender=None, watcher=None, request=None, **kwargs):
 
 uploads = dd.resolve_app('uploads')
 uploads.UploadsByClient.slave_grid_format = 'grid'
+

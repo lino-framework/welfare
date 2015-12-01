@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-01 08:36+0200\n"
-"PO-Revision-Date: 2015-12-01 08:37+0300\n"
+"POT-Creation-Date: 2015-12-01 15:58+0200\n"
+"PO-Revision-Date: 2015-12-01 15:59+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -1673,7 +1673,7 @@ msgid "Course found"
 msgstr "Cours trouvé"
 
 #: lino_welfare/modlib/courses/models.py:394
-#: lino_welfare/modlib/isip/mixins.py:291
+#: lino_welfare/modlib/isip/mixins.py:290
 msgid "date ended"
 msgstr "Date de fin"
 
@@ -2468,48 +2468,48 @@ msgstr ""
 msgid "Check for overlapping contracts"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:267
+#: lino_welfare/modlib/isip/mixins.py:266
 msgid "applies from"
 msgstr "Début de contrat"
 
-#: lino_welfare/modlib/isip/mixins.py:268
+#: lino_welfare/modlib/isip/mixins.py:267
 msgid "applies until"
 msgstr "Fin prévue"
 
-#: lino_welfare/modlib/isip/mixins.py:270
+#: lino_welfare/modlib/isip/mixins.py:269
 msgid "date decided"
 msgstr "Décidé le"
 
-#: lino_welfare/modlib/isip/mixins.py:272
+#: lino_welfare/modlib/isip/mixins.py:271
 msgid "date issued"
 msgstr "Date de signature"
 
-#: lino_welfare/modlib/isip/mixins.py:276
+#: lino_welfare/modlib/isip/mixins.py:275
 msgid "responsible (ASD)"
 msgstr "Titulaire (SSG)"
 
-#: lino_welfare/modlib/isip/mixins.py:376
+#: lino_welfare/modlib/isip/mixins.py:380
 msgid "Contract ends before it started."
 msgstr "La date de fin est antérieure à la date de début"
 
-#: lino_welfare/modlib/isip/mixins.py:392
+#: lino_welfare/modlib/isip/mixins.py:396
 msgid "You must specify a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:443
+#: lino_welfare/modlib/isip/mixins.py:447
 #, python-format
 msgid "Evaluation %d"
 msgstr "Évaluation %d"
 
-#: lino_welfare/modlib/isip/mixins.py:454
+#: lino_welfare/modlib/isip/mixins.py:458
 msgid "Contract ends in a month"
 msgstr "Projet termine dans un mois"
 
-#: lino_welfare/modlib/isip/mixins.py:555
+#: lino_welfare/modlib/isip/mixins.py:559
 msgid "Successfully ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:565
+#: lino_welfare/modlib/isip/mixins.py:569
 msgid "Only contracts with this company as partner."
 msgstr ""
 
@@ -2541,11 +2541,11 @@ msgstr ""
 #: lino_welfare/modlib/isip/models.py:142
 #: lino_welfare/modlib/pcsw/coaching.py:93
 msgid "Reason of termination"
-msgstr "Cause d'abandon"
+msgstr "Motif d'arrêt"
 
 #: lino_welfare/modlib/isip/models.py:143
 msgid "Contract termination reasons"
-msgstr "Raisons d’arrêt de contrat"
+msgstr "Motifs d’arrêt de contrat"
 
 #: lino_welfare/modlib/isip/models.py:145
 msgid "designation"
