@@ -4,20 +4,15 @@
 Lino Welfare
 ============
 
-Welcome to the *Lino Welfare* project homepage.  
+Welcome to the **Technical Guide** to 
+`Lino Welfare <http://www.saffre-rumma.net/welfare/>`_.
 
-This document tree is meant for system administrators and developers.
-
-Commercial information is `here <http://www.saffre-rumma.net/welfare/>`.
-
-There are also user guides in `French
+This website is meant for system administrators and developers.  There
+are separate *user guides* in `French
 <http://fr.welfare.lino-framework.org>`_ and `German
-<http://de.welfare.lino-framework.org>`_.
-
-.. py2rst::
-
-  import lino_welfare
-  print(lino_welfare.SETUP_INFO['long_description'])
+<http://de.welfare.lino-framework.org>`_.  For *introductions and
+commercial information* about Lino Welfare please see
+`www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
 
 
 Content

@@ -11,16 +11,19 @@ Lino Welfare is a modular customized
 `Lino <http://www.lino-framework.org>`__
 application for Belgian
 *Public Centres for Social Welfare*.
-It currently covers the following functions of a PCSW:
 
-- General client management
-- Integration service
-- Debt mediation
-- Calendar management
-- Issuing attestations
+- For *introductions* and *commercial information* about Lino Welfare
+  please see `www.saffre-rumma.net
+  <http://www.saffre-rumma.net/welfare/>`_.
 
-It started as a part of the Lino project and forked off in August 2012
-to become an independent project, possibly to be maintained by an
-independant organization.
+- There is a *technical guide* for system administrators and
+  developers.
+
+- There are separate *user guides* in `French
+  <http://fr.welfare.lino-framework.org>`_ and `German
+  <http://de.welfare.lino-framework.org>`_.
+
+
+
 
 Read more on http://welfare.lino-framework.org

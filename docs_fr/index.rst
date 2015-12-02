@@ -4,23 +4,43 @@
 Lino pour CPAS
 ==============
 
-Bienvenue sur le guide utilsateur francophone de :doc:`Lino Welfare
-<about>`.
+Bienvenue sur le **guide de l'utilisateur** de `Lino Welfare
+<http://www.saffre-rumma.net/fr/welfare/>`_.
 
-Cette documentation s'adresse aux utilisateurs et est maintenue de
-manière centralisée. Votre aide est la :doc:`bienvenue <contribuer>`.
+Un document similaire existe en `allemand
+<http://de.welfare.lino-framework.org/>`_.  Pour des informations plus
+*techniques* veuillez consulter la version `anglaise
+<http://welfare.lino-framework.org/>`_.  
+Pour des questions *commerciales* veuillez consulter
+`www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
+
+.. Il y avait également un `Wiki
+    <http://trac.lino-framework.org/wiki/Welfare/FR>`_ qui ne semble
+    pas être la bonne formule et nous comptons le supprimer à moyen
+    terme.
+
+
+Table des matières
+==================
+
+.. toctree::
+   :maxdepth: 2
+
+   /screenshots/index
+   clients
+   users
+   jobs
+   /glossaire
+   /help/index
+
+
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
+   /contribuer
    Introduction <about>
    Fiche technique <fiche_technique>
-   user/index
-
-Il y a également un `Wiki
-<http://trac.lino-framework.org/wiki/Welfare/FR>`_ dans lequel les
-utilisateurs peuvent éditer directement. Mais attention: ce wiki ne
-semble pas être la bonne formule et nous comptons le supprimer à moyen
-terme.
+   /todo
 
