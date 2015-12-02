@@ -22,7 +22,7 @@ def album1():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
     app = Album(
-        driver, 'tour', title="Le tour de Lino",
+        driver, 'tour', title="Tour de Lino",
         ref="welfare.fr.tour", intro="""
 
         Un site de démonstraton en ligne se trouve sur
@@ -61,7 +61,7 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('welcome.png', "Après l'identification", """
+    app.screenshot('welcome.png', "L'écran d'accueil", """
     Nous voici dans l'écran d'accueil. Il consiste d'une série d'éléments:
 
     - Le menu principal
@@ -74,17 +74,23 @@ def album1():
     elem = driver.find_element(By.XPATH, '//button[text()="Contacts"]')
     elem.click()
 
-    app.screenshot('menu_kontakte.png', "Le menu :menuselection:`Contacts`")
+    app.screenshot('menu_contacts.png', "Le menu :menuselection:`Contacts`")
 
     # elem = driver.find_element(By.XPATH, '//button[text()="▶ Klienten"]')
     elem = driver.find_element(By.LINK_TEXT, "▶ Bénéficiaires")
     elem.click()
-
     app.stabilize()
 
-    app.screenshot('contacts.Clients.grid.png', "La liste des bénéficiaires", """
+    app.screenshot('pcsw.Clients.grid.png', "La liste des bénéficiaires", """
     Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
     aller Klienten zu zeigen.
+    """)
+
+    elem = driver.find_element(
+        By.CLASS_NAME, "x-tbar-database_gear")
+    elem.click()
+    app.stabilize()
+    app.screenshot('pcsw.Clients.grid.params.png', "Le panneau à paramètres", """
     """)
 
     # find the first row and doubleclick it:
@@ -93,7 +99,7 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('contacts.Clients.detail.png', "Le détail d'un bénéficiaire", """
+    app.screenshot('pcsw.Clients.detail.png', "Le détail d'un bénéficiaire", """
     Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
     """)
 

@@ -13,7 +13,7 @@ Tabellenansichten
 
 Eine Tabellenansicht der Klienten sieht ungefähr so aus:
 
-.. image:: /tour/contacts.Clients.grid.png
+.. image:: /tour/pcsw.Clients.grid.png
 
 Merke: **Begleitete Klienten** sind **weiß** dargestellt,  **Neuanträge** sind **grün** und **ehemalige Klienten** sind **gelb**.
 
@@ -38,6 +38,8 @@ Kolonnenreihenfolge und Filterparameter unterscheiden:
 - :menupath:`reception.Clients` : 
   Liste für den Empfangsschalter.
 
+- :menupath:`debts.Clients` : 
+  spezielle Liste für die Kollegen der Schuldnerberatung.
 
 Detail-Ansicht
 ==============
@@ -46,18 +48,14 @@ Das Detail, das bei Doppelklick angezeigt wird, ist für alle
 Klientenansichten das Gleiche.  *Was* im Detail alles angezeigt wird
 (bzw. was nicht), das hängt jedoch von den Zugriffsrechten ab.
 
-  .. image:: /tour/contacts.Clients.detail.png
+  .. image:: /tour/pcsw.Clients.detail.png
 
 Hier drei interessante Felder:
 
-.. show_fields:: pcsw.Client
+.. fields_list:: pcsw.Client
    unemployed_since seeking_since unavailable_until
 
-Und hier sind sie alle:
-
-.. show_fields:: pcsw.Client
-   :debug:
-
+Das Feld :ddref:`pcsw.Client.unemployed_since` ist besonders bla bla...
 
 Technisches
 ===========

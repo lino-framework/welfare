@@ -14,6 +14,8 @@ Un document similaire existe en `allemand
 Pour des questions *commerciales* veuillez consulter
 `www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
 
+- `Tutoriel Lino Service Insertion <dl/Tutoriel_Lino.pdf>`_
+
 .. Il y avait également un `Wiki
     <http://trac.lino-framework.org/wiki/Welfare/FR>`_ qui ne semble
     pas être la bonne formule et nous comptons le supprimer à moyen

@@ -1,15 +1,15 @@
-.. _welfare.fr.screenshots:
+.. _welfare.fr.tour:
 
-==============
-Images d'écran
-==============
-
-
+============
+Tour de Lino
+============
 
 
 
 
-Die Online-Demo von Lino Welfare befindet sich unter
+
+
+Un site de démonstraton en ligne se trouve sur
 http://welfare-demo.lino-framework.org
 
 Dort können Sie die folgenden Bildschirmansichten auch selber
@@ -57,9 +57,9 @@ Nous nous connectons avec le nom de "romain" et mot de passe "1234".
 
 
 
-----------------------
-Après l'identification
-----------------------
+-----------------
+L'écran d'accueil
+-----------------
 
 
 
@@ -74,7 +74,7 @@ Nous voici dans l'écran d'accueil. Il consiste d'une série d'éléments:
 
 
 .. image:: welcome.png
-    :alt: Après l'identification
+    :alt: L'écran d'accueil
 
 
 
@@ -86,7 +86,7 @@ Le menu :menuselection:`Contacts`
 
 
 
-.. image:: menu_kontakte.png
+.. image:: menu_contacts.png
     :alt: Le menu :menuselection:`Contacts`
 
 
@@ -102,8 +102,22 @@ Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
 aller Klienten zu zeigen.
 
 
-.. image:: contacts.Clients.grid.png
+.. image:: pcsw.Clients.grid.png
     :alt: La liste des bénéficiaires
+
+
+
+-----------------------
+Le panneau à paramètres
+-----------------------
+
+
+
+
+    
+
+.. image:: pcsw.Clients.grid.params.png
+    :alt: Le panneau à paramètres
 
 
 
@@ -117,6 +131,6 @@ Le détail d'un bénéficiaire
 Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
 
 
-.. image:: contacts.Clients.detail.png
+.. image:: pcsw.Clients.detail.png
     :alt: Le détail d'un bénéficiaire
 

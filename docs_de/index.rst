@@ -23,7 +23,9 @@ gibt es in der `englischen Version
    :maxdepth: 2
 
    tour/index
+   users
    klienten
+   coachings
    partner
    watch_tim
    cal

@@ -23,7 +23,7 @@ def album1():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
     app = Album(
-        driver, 'tour', title="Bildertour",
+        driver, 'tour', title="Lino-Tour",
         ref="welfare.de.tour", intro="""
 
         Die Online-Demo von Lino Welfare befindet sich unter
@@ -42,8 +42,7 @@ def album1():
     Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
     alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
     Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
-    und *Benutzerprofil* variieren.  (Siehe
-    :mod:`lino_welfare.modlib.welfare.roles`)
+    und *Benutzerprofil* variieren.
 
     """)
 
@@ -66,7 +65,7 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('welcome.png', "Nach der Anmeldung", """
+    app.screenshot('welcome.png', "Der Startbildschirm", """
     Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
 
     - Das Hauptmenü
@@ -87,9 +86,26 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('contacts.Clients.grid.png', "Liste der Klienten", """
+    app.screenshot('pcsw.Clients.grid.png', "Liste der Klienten", """
     Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
     aller Klienten zu zeigen.
+    """)
+
+    if False:
+        driver.get("http://127.0.0.1:8000/api/pcsw/Clients?sp=true")
+        app.stabilize()
+
+    elem = driver.find_element(
+        By.CLASS_NAME, "x-tbar-database_gear")
+    elem.click()
+    app.stabilize()
+
+    if False:
+        elem.screenshot("tour/database_gear.png")
+        # ValueError: No JSON object could be decoded
+        # https://github.com/SeleniumHQ/selenium/issues/912
+
+    app.screenshot('pcsw.Clients.grid.params.png', "Filterparameter", """
     """)
 
     # find the first row and doubleclick it:
@@ -98,7 +114,7 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('contacts.Clients.detail.png', "Detail Klient", """
+    app.screenshot('pcsw.Clients.detail.png', "Detail Klient", """
     Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
     """)
 
