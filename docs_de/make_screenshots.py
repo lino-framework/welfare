@@ -4,7 +4,7 @@
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.
 
-It generates the :ref:`welfare.de.screenshots` page.
+It generates the :ref:`welfare.de.tour` page.
 
 """
 from __future__ import unicode_literals
@@ -23,8 +23,8 @@ def album1():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
     app = Album(
-        driver, 'screenshots', title="Bildertour",
-        ref="welfare.de.screenshots", intro="""
+        driver, 'tour', title="Bildertour",
+        ref="welfare.de.tour", intro="""
 
         Die Online-Demo von Lino Welfare befindet sich unter
         http://welfare-demo.lino-framework.org

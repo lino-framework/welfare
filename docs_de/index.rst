@@ -22,7 +22,7 @@ gibt es in der `englischen Version
 .. toctree::
    :maxdepth: 2
 
-   screenshots/index
+   tour/index
    klienten
    partner
    watch_tim

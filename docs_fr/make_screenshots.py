@@ -12,7 +12,6 @@ from __future__ import unicode_literals
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from lino.api.selenium import Album, runserver
@@ -23,10 +22,10 @@ def album1():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
     app = Album(
-        driver, 'screenshots', title="Images d'écran",
-        ref="welfare.fr.screenshots", intro="""
+        driver, 'tour', title="Le tour de Lino",
+        ref="welfare.fr.tour", intro="""
 
-        Die Online-Demo von Lino Welfare befindet sich unter
+        Un site de démonstraton en ligne se trouve sur
         http://welfare-demo.lino-framework.org
 
         Dort können Sie die folgenden Bildschirmansichten auch selber

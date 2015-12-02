@@ -1,15 +1,15 @@
+.. _welfare.fr.clients:
+
 =============
 Bénéficiaires
 =============
 
 
 
+- La **liste générale des bénéficiaires** (:menuselection:`Contacts
+  --> Bénéficiaires` dans le menu) montre "tous" les bénéficiaires.
 
-- "Alle Klienten" 
-  (Menü :menuselection:`Kontakte --> Klienten`) : 
-  allgemeine Liste, die jeder Benutzer sehen darf.
-
-  .. image:: /screenshots/contacts.Clients.grid.png
+  .. image:: /tour/contacts.Clients.grid.png
 
 
 

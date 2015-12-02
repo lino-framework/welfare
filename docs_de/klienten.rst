@@ -1,37 +1,66 @@
+.. _welfare.de.clients:
+
+========
 Klienten
 ========
 
 Ein Klient ist eine Person, für die wir eine Serie von zusätzlichen
 Daten erfassen.
 
-Für Klienten gibt es drei **Tabellenansichten**, die sich durch
+
+Tabellenansichten
+=================
+
+Eine Tabellenansicht der Klienten sieht ungefähr so aus:
+
+.. image:: /tour/contacts.Clients.grid.png
+
+Merke: **Begleitete Klienten** sind **weiß** dargestellt,  **Neuanträge** sind **grün** und **ehemalige Klienten** sind **gelb**.
+
+Für Klienten gibt es mehrere **Tabellenansichten**, die sich durch
 Kolonnenreihenfolge und Filterparameter unterscheiden:
 
-- "Alle Klienten" 
-  (Menü :menuselection:`Kontakte --> Klienten`) : 
+.. 
+  actors_overview:: pcsw.Clients integ.Clients reception.Clients
+                     newcomers.NewClients debts.Clients
+
+- :menupath:`pcsw.Clients` :
   allgemeine Liste, die jeder Benutzer sehen darf.
 
-  .. image:: /screenshots/contacts.Clients.grid.png
-
-- DSBE-Klienten
-  (Menü :menuselection:`DSBE --> Klienten`)
+- :menupath:`integ.Clients` :
   spezielle Liste für die Kollegen im DSBE.
   Zeigt immer nur **begleitete** Kunden. 
   Hier kann man keine neuen Klienten anlegen.
 
-- Neue Klienten
-  (Menü :menuselection:`Neuanträge --> Klienten`):
+- :menupath:`newcomers.NewClients` :
   spezielle Liste für die Zuweisung von Neuanträgen.
 
-N.B.  Das Detail, das bei Doppelklick angezeigt wird, ist bei allen
-drei Ansichten das Gleiche.  *Was* im Detail alles angezeigt wird
+- :menupath:`reception.Clients` : 
+  Liste für den Empfangsschalter.
+
+
+Detail-Ansicht
+==============
+
+Das Detail, das bei Doppelklick angezeigt wird, ist für alle
+Klientenansichten das Gleiche.  *Was* im Detail alles angezeigt wird
 (bzw. was nicht), das hängt jedoch von den Zugriffsrechten ab.
 
-  .. image:: /screenshots/contacts.Clients.detail.png
+  .. image:: /tour/contacts.Clients.detail.png
 
-Eine vierte Tabellenansicht ist :menuselection:`Empfang --> Klienten`:
-das ist eine spezielle Liste für den Empfangsschalter, die ihr eigenes
-Detail-Layout hat.
+Hier drei interessante Felder:
+
+.. show_fields:: pcsw.Client
+   unemployed_since seeking_since unavailable_until
+
+Und hier sind sie alle:
+
+.. show_fields:: pcsw.Client
+   :debug:
+
+
+Technisches
+===========
 
 Technische Details in Englisch unter 
 

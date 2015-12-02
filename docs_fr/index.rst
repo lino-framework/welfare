@@ -26,7 +26,7 @@ Table des matières
 .. toctree::
    :maxdepth: 2
 
-   /screenshots/index
+   /tour/index
    clients
    users
    jobs
