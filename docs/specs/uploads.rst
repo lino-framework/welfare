@@ -80,13 +80,13 @@ DERICUM Daniel (121)
 Identifizierendes Dokument: *8*
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
-============================ ============ ======= ============== =================== =======
- Upload-Art                   Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
----------------------------- ------------ ------- -------------- ------------------- -------
+============================ ============ ======= ============== ===================
+ Upload-Art                   Gültig bis   Nötig   Beschreibung   Hochgeladen durch
+---------------------------- ------------ ------- -------------- -------------------
  Identifizierendes Dokument   25.05.14     Ja                     Theresia Thelen
  Identifizierendes Dokument   22.04.14     Nein                   Theresia Thelen
  **Total (2 Zeilen)**                      **1**
-============================ ============ ======= ============== =================== =======
+============================ ============ ======= ============== ===================
 <BLANKLINE>
 
 Here is another client with three uploads:
@@ -104,14 +104,14 @@ Führerschein: *11*
 
 
 >>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
-====================== ============ ======= ============== =================== =======
- Upload-Art             Gültig bis   Nötig   Beschreibung   Hochgeladen durch   Datei
----------------------- ------------ ------- -------------- ------------------- -------
+====================== ============ ======= ============== ===================
+ Upload-Art             Gültig bis   Nötig   Beschreibung   Hochgeladen durch
+---------------------- ------------ ------- -------------- -------------------
  Führerschein           01.06.14     Ja                     Caroline Carnol
  Arbeitserlaubnis       30.08.14     Ja                     Alicia Allmanns
  Aufenthaltserlaubnis   18.03.15     Ja                     Theresia Thelen
  **Total (3 Zeilen)**                **3**
-====================== ============ ======= ============== =================== =======
+====================== ============ ======= ============== ===================
 <BLANKLINE>
 
 

@@ -116,3 +116,5 @@ class JobEnrolmentsByPupil(EnrolmentsByPupil):
     _course_area = CourseAreas.job
 
 
+ActiveCourses._label = _("Active workshops")
+DraftCourses._label = _("Draft workshops")

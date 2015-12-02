@@ -200,7 +200,12 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
     residence_until = models.DateField(
         _("Residence until"), blank=True, null=True)
     unemployed_since = models.DateField(
-        _("Seeking work since"), blank=True, null=True)
+        _("Unemployed since"), blank=True, null=True,
+        help_text=_("Since when the client has not been employed "
+                    "in any regular job."))
+    seeking_since = models.DateField(
+        _("Seeking work since"), blank=True, null=True,
+        help_text=_("Since when the client is seeking for a job."))
     needs_residence_permit = models.BooleanField(
         _("Needs residence permit"), default=False)
     needs_work_permit = models.BooleanField(
@@ -213,6 +218,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
     declared_name = models.BooleanField(_("Declared name"), default=False)
 
     is_seeking = models.BooleanField(_("is seeking work"), default=False)
+    # removed in chatelet, maybe soon also in Eupen (replaced by seeking_since)
+
     unavailable_until = models.DateField(
         blank=True, null=True, verbose_name=_("Unavailable until"))
     unavailable_why = models.CharField(max_length=100,
@@ -662,7 +669,7 @@ class ClientDetail(dd.DetailLayout):
     """)
 
     papers = dd.Panel("""
-    is_seeking unemployed_since work_permit_suspended_until
+    unemployed_since seeking_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
     uploads.UploadsByClient
     """)  # ,label = _("Papers"))

@@ -1,8 +1,8 @@
-.. _welfare.de.screenshots:
+.. _welfare.de.tour:
 
-==========
-Bildertour
-==========
+=========
+Lino-Tour
+=========
 
 
 
@@ -28,11 +28,11 @@ Vor der Anmeldung
 
 
 
-Solange Sie sich nicht angemeldet haben, sind sie ein anonymer
+Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
 Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
-alle Benutzer sowie deren Passwörter gezeigt.  Beachten Sie, dass
-*Sprache* und *Benutzerprofil* variieren.
-(siehe :mod:`lino_welfare.modlib.welfare.roles`)
+alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
+Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
+und *Benutzerprofil* variieren.
 
 
 
@@ -56,9 +56,9 @@ Wir melden uns an mit Benutzernamen "rolf" und Passwort "1234".
 
 
 
-------------------
-Nach der Anmeldung
-------------------
+-------------------
+Der Startbildschirm
+-------------------
 
 
 
@@ -73,7 +73,7 @@ Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
 
 
 .. image:: welcome.png
-    :alt: Nach der Anmeldung
+    :alt: Der Startbildschirm
 
 
 
@@ -101,8 +101,22 @@ Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
 aller Klienten zu zeigen.
 
 
-.. image:: contacts.Clients.grid.png
+.. image:: pcsw.Clients.grid.png
     :alt: Liste der Klienten
+
+
+
+---------------
+Filterparameter
+---------------
+
+
+
+
+    
+
+.. image:: pcsw.Clients.grid.params.png
+    :alt: Filterparameter
 
 
 
@@ -116,6 +130,6 @@ Detail Klient
 Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
 
 
-.. image:: contacts.Clients.detail.png
+.. image:: pcsw.Clients.detail.png
     :alt: Detail Klient
 

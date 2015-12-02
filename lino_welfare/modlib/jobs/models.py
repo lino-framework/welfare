@@ -323,7 +323,7 @@ class Contracts(isip.ContractBaseTable):
 
     required_roles = dd.required(IntegrationAgent)
     model = 'jobs.Contract'
-    column_names = 'id job applies_from applies_until user type *'
+    column_names = 'id client applies_from applies_until job user type *'
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'
     detail_layout = ContractDetail()
@@ -611,9 +611,14 @@ add('30', pgettext("jobs", "Inactive"), 'inactive')
 
 
 class Candidature(SectorFunction):
-    """
-    A candidature is when a client applies for a known :class:`Job`.
-    
+    """A candidature is when a client applies for a known :class:`Job`.
+
+    .. attribute:: art60
+    .. attribute:: art61
+
+        Whether an art.61 (art.60) contract can satisfy this
+        candidature. Check at least one of them.
+
     """
     class Meta:
         verbose_name = _("Job Candidature")
@@ -634,6 +639,14 @@ class Candidature(SectorFunction):
 
     state = CandidatureStates.field(
         default=CandidatureStates.active.as_callable)
+
+    art60 = models.BooleanField(
+        _("Art.60"), default=False, help_text=_(
+            "Whether an art.60 contract can satisfy this candidature."))
+
+    art61 = models.BooleanField(
+        _("Art.61"), default=False, help_text=_(
+            "Whether an art.61 contract can satisfy this candidature."))
 
     def __unicode__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(
@@ -674,7 +687,8 @@ class CandidaturesByPerson(Candidatures):
     """
     required_roles = dd.required(IntegrationAgent)
     master_key = 'person'
-    column_names = 'date_submitted job:25 sector function remark state *'
+    column_names = 'date_submitted job:25 sector function ' \
+                   'art60 art61 remark state *'
     auto_fit_column_widths = True
 
 
@@ -705,7 +719,7 @@ class SectorFunctionByOffer(dd.Table):
 
     It is a slave report without :attr:`master_key
     <dd.Table.master_key>`, which is allowed only because it overrides
-    :meth:`dd.Table.get_request_queryset`.
+    :meth:`lino.core.dbtables..Table.get_request_queryset`.
 
     """
     master = Offer
@@ -832,104 +846,6 @@ if True:  # settings.SITE.user_model:
             return
 
 
-COLS = 8
-
-
-class OldJobsOverview(Report):
-
-    """
-    """
-    required_roles = dd.required(IntegrationAgent)
-    label = _("Contracts Situation")
-    #~ detail_layout = JobsOverviewDetail()
-    detail_layout = "body"
-
-    parameters = dict(
-        #~ date = models.DateField(default=settings.SITE.today,blank=True,null=True),
-        date=models.DateField(blank=True, null=True, verbose_name=_("Date")),
-        contract_type=models.ForeignKey(ContractType, blank=True, null=True),
-        job_type=models.ForeignKey(JobType, blank=True, null=True),
-    )
-    params_panel_hidden = True
-
-    #~ @dd.displayfield(_("Body"))
-    @dd.virtualfield(dd.HtmlBox())
-    def body(cls, self, ar):
-        #~ logger.info("20120221 3 body(%s)",req)
-        #~ logger.info("Waiting 5 seconds...")
-        #~ time.sleep(5)
-        #~ today = self.date or settings.SITE.today()
-        today = ar.param_values.date or settings.SITE.today()
-        period = (today, today)
-        html = ''
-        rows = []
-
-        if ar.param_values.job_type:
-            jobtypes = [ar.param_values.job_type]
-        else:
-            jobtypes = JobType.objects.all()
-        for jobtype in jobtypes:
-            cells = []
-            #~ for job in jobtype.job_set.all():
-            for job in jobtype.job_set.order_by('provider'):
-                working = []
-                candidates = []
-                probation = []
-                #~ qs = job.contract_set.all()
-                qs = job.contract_set.order_by('applies_from')
-                if ar.param_values.contract_type:
-                    qs = qs.filter(type=ar.param_values.contract_type)
-                for ct in qs:
-                    if ct.applies_from:
-                        until = ct.date_ended or ct.applies_until
-                        if not until or (ct.applies_from <= today and until >= today):
-                            working.append(ct)
-
-                qs = job.candidature_set.order_by('date_submitted').filter(
-                    state=CandidatureStates.active)
-                qs = only_coached_on(qs, period, 'person')
-                for cand in qs:
-                    candidates.append(cand)
-
-                qs = job.candidature_set.order_by('date_submitted').filter(
-                    state=CandidatureStates.probation)
-                qs = only_coached_on(qs, period, 'person')
-                for cand in qs:
-                    probation.append(cand)
-
-                if candidates + working + probation:
-                    s = "<p>"
-                    s += "<b>%s (%s)</b>" % (
-                        cgi.escape(unicode(job)), job.capacity)
-                    if job.remark:
-                        s += " <i>%s</i>" % cgi.escape(job.remark)
-                    s += "</p>"
-                    s += UL(['%s bis %s' % (
-                        ct.person.last_name.upper(),
-                        dd.dtos(ct.applies_until)
-                    ) for ct in working])
-                    if candidates:
-                        s += "<p>%s:</p>" % cgi.escape(unicode(_("Candidates")))
-                        s += UL([i.person for i in candidates])
-                    if probation:
-                        s += "<p>%s:</p>" % cgi.escape(unicode(_("Probation")))
-                        s += UL([i.person for i in probation])
-                    cells.append(s)
-            if cells:
-                html += '<h1>%s</h1>' % cgi.escape(unicode(jobtype))
-                #~ head = ''.join(['<col width="30" />' for c in cells])
-                #~ head = '<colgroup>%s</colgroup>' % head
-                s = ''.join(['<td valign="top">%s</td>' % c for c in cells])
-                s = '<tr>%s</tr>' % s
-                #~ s = head + s
-                html += '<table border="1" width="100%%">%s</table>' % s
-        html = '<div class="htmlText">%s</div>' % html
-        #~ logger.info(html[46:58])
-        #~ html = str(html)
-        #~ assert type(html) == type('')
-        return html
-
-
 class JobsOverviewByType(Jobs):
     """
     """
@@ -1009,7 +925,7 @@ class JobsOverviewByType(Jobs):
                         ar.obj2html(ct.person),
                         # pgettext("(place)", " at ")
                         # + unicode(ct.company.name),
-                        ' bis %s' % dd.dtos(ct.applies_until)
+                        ' bis %s' % dd.fds(ct.applies_until)
                     )
                     for ct in working])
                 showit = True

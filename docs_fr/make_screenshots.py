@@ -4,7 +4,7 @@
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.
 
-It generates the :ref:`welfare.de.tour` page.
+It generates the :ref:`welfare.de.screenshots` page.
 
 """
 from __future__ import unicode_literals
@@ -12,7 +12,6 @@ from __future__ import unicode_literals
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from lino.api.selenium import Album, runserver
@@ -23,10 +22,10 @@ def album1():
     driver = webdriver.Firefox()
     driver.get("http://127.0.0.1:8000/")
     app = Album(
-        driver, 'tour', title="Lino-Tour",
-        ref="welfare.de.tour", intro="""
+        driver, 'tour', title="Tour de Lino",
+        ref="welfare.fr.tour", intro="""
 
-        Die Online-Demo von Lino Welfare befindet sich unter
+        Un site de démonstraton en ligne se trouve sur
         http://welfare-demo.lino-framework.org
 
         Dort können Sie die folgenden Bildschirmansichten auch selber
@@ -34,78 +33,64 @@ def album1():
 
         """)
 
-    app.checktitle("Lino für ÖSHZ")
+    app.checktitle("Lino pour CPAS")
 
-    app.screenshot('login1.png', "Vor der Anmeldung", """
+    app.screenshot('login1.png', "Avant l'identification", """
 
     Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
     Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
     alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
     Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
-    und *Benutzerprofil* variieren.
+    und *Benutzerprofil* variieren.  (Siehe
+    :mod:`lino_welfare.modlib.welfare.roles`)
 
     """)
 
-    elem = driver.find_element(By.XPATH, '//button[text()="Anmelden"]')
+    elem = driver.find_element(By.XPATH, '//button[text()="Se connecter"]')
     elem.click()
 
-    app.screenshot('login2.png', "Das Anmeldefenster", """
-    Wir melden uns an mit Benutzernamen "rolf" und Passwort "1234".
+    app.screenshot('login2.png', "S'identifier", """
+    Nous nous connectons avec le nom de "romain" et mot de passe "1234".
     """)
 
     elem = driver.find_element(By.NAME, 'username')
-    elem.send_keys("rolf")
+    elem.send_keys("romain")
     elem = driver.find_element(By.NAME, 'password')
     elem.send_keys("1234")
     elem.send_keys(Keys.RETURN)
 
-    # elem = WebDriverWait(driver, 10).until(
-    #     EC.presence_of_element_located(
-    #         (By.NAME, 'integ.UsersWithClients.grid')))
-
     app.stabilize()
 
-    app.screenshot('welcome.png', "Der Startbildschirm", """
-    Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
+    app.screenshot('welcome.png', "L'écran d'accueil", """
+    Nous voici dans l'écran d'accueil. Il consiste d'une série d'éléments:
 
-    - Das Hauptmenü
-    - Quicklinks
-    - Begrüßungsmeldungen
-    - Diverse Tabellen
+    - Le menu principal
+    - Les raccourcis ("quick links")
+    - Les messages d'accueil
+    - Un certain nombre de tables
 
     """)
 
-    elem = driver.find_element(By.XPATH, '//button[text()="Kontakte"]')
+    elem = driver.find_element(By.XPATH, '//button[text()="Contacts"]')
     elem.click()
 
-    app.screenshot('menu_kontakte.png', "Das Menü :menuselection:`Kontakte`")
+    app.screenshot('menu_contacts.png', "Le menu :menuselection:`Contacts`")
 
     # elem = driver.find_element(By.XPATH, '//button[text()="▶ Klienten"]')
-    elem = driver.find_element(By.LINK_TEXT, "▶ Klienten")
+    elem = driver.find_element(By.LINK_TEXT, "▶ Bénéficiaires")
     elem.click()
-
     app.stabilize()
 
-    app.screenshot('pcsw.Clients.grid.png', "Liste der Klienten", """
+    app.screenshot('pcsw.Clients.grid.png', "La liste des bénéficiaires", """
     Wählen Sie :menuselection:`Kontakte --> Klienten`, um die Liste
     aller Klienten zu zeigen.
     """)
-
-    if False:
-        driver.get("http://127.0.0.1:8000/api/pcsw/Clients?sp=true")
-        app.stabilize()
 
     elem = driver.find_element(
         By.CLASS_NAME, "x-tbar-database_gear")
     elem.click()
     app.stabilize()
-
-    if False:
-        elem.screenshot("tour/database_gear.png")
-        # ValueError: No JSON object could be decoded
-        # https://github.com/SeleniumHQ/selenium/issues/912
-
-    app.screenshot('pcsw.Clients.grid.params.png', "Filterparameter", """
+    app.screenshot('pcsw.Clients.grid.params.png', "Le panneau à paramètres", """
     """)
 
     # find the first row and doubleclick it:
@@ -114,7 +99,7 @@ def album1():
 
     app.stabilize()
 
-    app.screenshot('pcsw.Clients.detail.png', "Detail Klient", """
+    app.screenshot('pcsw.Clients.detail.png', "Le détail d'un bénéficiaire", """
     Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
     """)
 
@@ -124,6 +109,6 @@ def album1():
 
 
 if __name__ == '__main__':
-    runserver('lino_welfare.projects.eupen.settings.demo', album1)
+    runserver('lino_welfare.projects.chatelet.settings.demo', album1)
 
 

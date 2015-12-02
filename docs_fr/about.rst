@@ -2,6 +2,6 @@
 Qu'est-ce que Lino pour CPAS?
 =============================
 
-L'information de style "commercial" se trouve maintenant 
+Ce contenu a été déplacé vers
 `ici <http://www.saffre-rumma.net/fr/welfare/>`_
 

@@ -160,7 +160,7 @@ class ContractDetail(dd.FormLayout):
     job_title status cv_duration regime
     reference_person printed
     date_decided date_issued date_ended ending:20
-    subsidize_10 subsidize_20 subsidize_30
+    subsidize_10 subsidize_20 subsidize_30 subsidize_40 subsidize_50
     # signer1 signer2
     responsibilities
     """
@@ -178,8 +178,8 @@ class ContractDetail(dd.FormLayout):
 class Contracts(ContractBaseTable):
     #~ debug_permissions = "20130222"
     required_roles = dd.required(IntegrationAgent)
-    model = Contract
-    column_names = 'id applies_from applies_until user type *'
+    model = 'art61.Contract'
+    column_names = 'id client applies_from applies_until user type *'
     order_by = ['id']
     detail_layout = ContractDetail()
     insert_layout = """
@@ -211,6 +211,7 @@ class Contracts(ContractBaseTable):
 class ContractsByClient(Contracts):
     """
     """
+    label = _("Art61 job supplyments and activations")
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = ('applies_from applies_until duration type '
