@@ -26,11 +26,10 @@ The problem: A reception clerk in Eupen
 a client because the :attr:`required_roles
 <lino.core.permissions.Permittable.required_roles>` of that panel
 include :class:`IntegrationAgent
-<lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they do see
-it nevertheless:
+<lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they saw it
+nevertheless:
 
 .. image:: 20150715.png
-
 
 A reception clerk is not an integration agent:
 
@@ -91,7 +90,8 @@ Note that the Panel objects which are not visible continue to be in
 u'career', u'languages', u'competences', u'contracts', u'history',
 u'calendar', 'MovementsByProject', u'misc', u'debts']
 
-But when generating the js files, py2js and declare_vars filter it away:
+Lino filters them away only when generating the js files, py2js and
+declare_vars:
 
 >>> from lino.utils.jsgen import with_user_profile, py2js, declare_vars
 >>> def f():
@@ -101,7 +101,7 @@ But when generating the js files, py2js and declare_vars filter it away:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel147, contact_panel176, coaching_panel418, aids_tab_panel523, work_tab_1_panel552, history_panel1300 ]
+[ general_panel147, contact_panel176, coaching_panel418, aids_tab_panel523, work_tab_1_panel552, history_panel1306 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 
@@ -119,14 +119,11 @@ So until now everything looks okay.
 
 The problem was that until :blogref:`20150716`, when
 :meth:`write_lino_js` had run once, then it left the requirements of
-our career panel modified (loosened).
-
+our career panel modified (loosened).  So the following was `False`
+only after the first time and `True` all subsequent times:
 
 >>> theresia.profile.has_required_roles(career_panel.required_roles)
 False
-
-after the first run of 
-
 >>> theresia.profile.has_required_roles(career_panel.required_roles)
 False
 

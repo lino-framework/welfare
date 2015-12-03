@@ -69,11 +69,11 @@ Configuration
 
 >>> ses.show(art61.ContractTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================== ======================= =================== ===========
- Designation            Designation (fr)        Designation (de)    Reference
----------------------- ----------------------- ------------------- -----------
- Art61 job supplyment   Mise à l'emploi art61   Art.61-Konvention
-====================== ======================= =================== ===========
+====================== ======================== =================== ===========
+ Designation            Designation (fr)         Designation (de)    Reference
+---------------------- ------------------------ ------------------- -----------
+ Art61 job supplyment   Mise à l'emploi art.61   Art.61-Konvention
+====================== ======================== =================== ===========
 <BLANKLINE>
 
 >>> ses.show(immersion.ContractTypes)

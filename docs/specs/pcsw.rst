@@ -112,13 +112,14 @@ civil_stateHidden client_state client_stateHidden created
 declared_name disable_editing disabled_actions disabled_fields email
 faculty facultyHidden fax first_name gender genderHidden group
 groupHidden gsm id id_document image in_belgium_since is_obsolete
-is_seeking language languageHidden last_name middle_name modified
+language languageHidden last_name middle_name modified
 national_id nationality nationalityHidden needs_residence_permit
 needs_work_permit noble_condition obstacles overview phone
 refusal_reason refusal_reasonHidden remarks residence_type
 residence_typeHidden residence_until row_class seeking_since skills
 unavailable_until unavailable_why unemployed_since
 work_permit_suspended_until workflow_buttons
+
 
 
 

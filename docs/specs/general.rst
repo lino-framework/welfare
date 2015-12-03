@@ -52,7 +52,7 @@ The following table gives an overview of these things.
  aids.IncomeConfirmation        aids.IncomeConfirmations        17        54
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
- art61.Contract                 art61.Contracts                 30        7
+ art61.Contract                 art61.Contracts                 32        7
  art61.ContractType             art61.ContractTypes             10        1
  b2c.Account                    b2c.Accounts                    6         34
  b2c.Statement                  b2c.Statements                  8         34
@@ -136,7 +136,7 @@ The following table gives an overview of these things.
  isip.ContractPartner           isip.ContractPartners           6         35
  isip.ContractType              isip.ContractTypes              11        5
  isip.ExamPolicy                isip.ExamPolicies               20        6
- jobs.Candidature               jobs.Candidatures               8         74
+ jobs.Candidature               jobs.Candidatures               10        74
  jobs.Contract                  jobs.Contracts                  28        13
  jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
@@ -162,7 +162,7 @@ The following table gives an overview of these things.
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    66        63
+ pcsw.Client                    pcsw.Clients                    67        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
