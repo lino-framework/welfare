@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-01 15:58+0200\n"
-"PO-Revision-Date: 2015-12-01 15:59+0300\n"
+"PO-Revision-Date: 2015-12-03 03:10+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -4269,7 +4269,7 @@ msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/courses/models.py:99
 msgid "Workshop series"
-msgstr "Séries d'ateliers"
+msgstr "Série d'ateliers"
 
 #: lino_welfare/projects/chatelet/modlib/courses/models.py:100
 msgid "Workshop lines"

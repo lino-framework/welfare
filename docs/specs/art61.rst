@@ -67,7 +67,7 @@ The printed document
 >>> soup = BeautifulSoup(html)
 >>> for h in soup.find_all('h1'):
 ...     print(unicode(h))
-<h1>Mise à l'emploi art61
+<h1>Mise à l'emploi art.61
 </h1>
 
 >>> for h in soup.find_all('h2'):

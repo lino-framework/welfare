@@ -68,7 +68,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  aids.IncomeConfirmation        aids.IncomeConfirmations        17        54
  aids.RefundConfirmation        aids.RefundConfirmations        18        12
  aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
- art61.Contract                 art61.Contracts                 30        7
+ art61.Contract                 art61.Contracts                 32        7
  art61.ContractType             art61.ContractTypes             10        1
  badges.Award                   badges.Awards                   6         0
  badges.Badge                   badges.Badges                   5         0
@@ -88,7 +88,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
- cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        2
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        3
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
  contacts.Company               contacts.Companies              28        39
@@ -137,7 +137,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  isip.ContractPartner           isip.ContractPartners           6         35
  isip.ContractType              isip.ContractTypes              11        5
  isip.ExamPolicy                isip.ExamPolicies               20        6
- jobs.Candidature               jobs.Candidatures               8         74
+ jobs.Candidature               jobs.Candidatures               10        74
  jobs.Contract                  jobs.Contracts                  28        13
  jobs.ContractType              jobs.ContractTypes              10        5
  jobs.Job                       jobs.Jobs                       10        8
@@ -158,7 +158,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    65        63
+ pcsw.Client                    pcsw.Clients                    66        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         6         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -260,7 +260,7 @@ Each window layout defines a given set of fields.
 - aids.SimpleConfirmations.insert : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert : id, name, name_nl, name_de, name_en, ref
-- art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, responsibilities
+- art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
 - art61.Contracts.insert : client, company, type
 - boards.Boards.detail : id, name, name_nl, name_de, name_en
 - boards.Boards.insert : name, name_nl, name_de, name_en
@@ -353,7 +353,6 @@ Each window layout defines a given set of fields.
 - jobs.Jobs.insert : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
 - jobs.JobsOverview.show : preview
 - jobs.Offers.insert : name, provider, sector, function, selection_from, selection_until, start_date, remark
-- jobs.OldJobsOverview.show : body
 - jobs.Schedules.insert : id, name, name_nl, name_de, name_en
 - languages.Languages.insert : id, iso2, name, name_nl, name_de, name_en
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
@@ -370,7 +369,7 @@ Each window layout defines a given set of fields.
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
 - pcsw.ClientStates.wf1 : reason, remark
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, broker, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, UploadsByClient, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, reason
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
@@ -400,7 +399,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
-- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 <BLANKLINE>
 
@@ -529,7 +528,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.Jobs.insert : visible for 100 110 120 admin
 - jobs.JobsOverview.show : visible for 100 110 120 admin
 - jobs.Offers.insert : visible for 100 110 120 admin
-- jobs.OldJobsOverview.show : visible for 100 110 120 admin
 - jobs.Schedules.insert : visible for 110 410 admin
 - languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 admin
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin
@@ -590,12 +588,12 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Plausibility problems assigned to me
+- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
 - Intégration : Bénéficiaires, PIISs, Mises à l'emploi art60§7, Services utilisateurs, Postes de travail, Offres d'emploi, Mises à l'emploi art61, Stages d'immersion
-- Ateliers : Ateliers, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Ateliers : Ateliers en préparation, Ateliers actifs, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
 - Questionnaires : Mes Questionnaires, Mes Interviews
 - Rapports :
@@ -610,17 +608,17 @@ Romain
   - Comptabilité : Plan comptables, Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 
-  - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régime de travail, Statuts, Durées de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
-  - Intégration : Types de PIIS, Raisons d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art61, Types de stage d'immersion, Objectifs
+  - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
+  - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
   - BCSS : Secteurs, Codes fonction
   - Questionnaires : Listes de choix
 - Explorateur :
-  - Système : types de contenu, Procurations, Profils d'utilisateur, Notifications, Changes, Plausibility checkers, Plausibility problems
+  - Système : types de contenu, Procurations, Profils d'utilisateur, Notifications, Changes, Tests de données, Problèmes de données
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
   - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Participants, Abonnements, Event states, Guest states, Task states
-  - Ateliers : Tests de niveau, Inscriptions, États d'inscription
+  - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche
@@ -642,12 +640,13 @@ sociales, freins.
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
-- Ateliers : Ateliers, Séries d'ateliers
+- Ateliers : Ateliers en préparation, Ateliers actifs, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
   - CPAS : Types d'aide sociale, Catégories
 - Explorateur :
   - Contacts : Personnes de contact, Household member roles, Membres de ménage, Personal Links, Type de parenté
+  - Ateliers : Ateliers
   - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos

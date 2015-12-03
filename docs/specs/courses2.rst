@@ -21,7 +21,6 @@ Internal courses
     :depth: 1
 
 
-
 This is about *internal* courses
 (:mod:`lino_welfare.projects.chatelet.modlib.courses.models`), not
 :doc:`courses`.
@@ -32,14 +31,14 @@ This is about *internal* courses
 
 >>> rt.show(courses.Courses)
 ============ ======================= ============================ ============= ======= ===============
- Date début   Inscriptions jusqu'au   Workshop series              Instructeur   Local   État
+ Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   État
 ------------ ----------------------- ---------------------------- ------------- ------- ---------------
  12/05/2014   12/05/2014              Cuisine                                            **Brouillon**
- 12/05/2014   12/05/2014              Creativity                                         **Brouillon**
+ 12/05/2014   12/05/2014              Créativité                                         **Brouillon**
  12/05/2014   12/05/2014              Notre premier bébé                                 **Brouillon**
  12/05/2014   12/05/2014              Mathématiques                                      **Brouillon**
  12/05/2014   12/05/2014              Français                                           **Brouillon**
- 12/05/2014   12/05/2014              Get active!                                        **Brouillon**
+ 12/05/2014   12/05/2014              Activons-nous!                                     **Brouillon**
  03/11/2013   03/11/2013              Psycho-social intervention                         **Brouillon**
 ============ ======================= ============================ ============= ======= ===============
 <BLANKLINE>

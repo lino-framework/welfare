@@ -90,7 +90,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
         - **Dispenzen** (pcsw.DispensesByClient)
         - **AG-Sperren** (pcsw.ExclusionsByClient)
       - (papers):
-        - (papers_1): **Arbeit suchend** (is_seeking), **eingetragen seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
+        - (papers_1): **Sucht Arbeit seit** (seeking_since), **Arbeitslos seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
         - **Uploads** (UploadsByClient)
     - **Lebenslauf** (career) [visible for 100 110 120 admin]:
