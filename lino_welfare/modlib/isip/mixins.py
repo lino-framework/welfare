@@ -36,7 +36,8 @@ from lino import mixins
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.cal.mixins import EventGenerator
 from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.cal.utils import DurationUnits, update_auto_task
+from lino.modlib.cal.utils import update_auto_task
+from lino.modlib.cal.choicelists import DurationUnits
 # from lino.modlib.system.mixins import PeriodEvents
 
 from lino.utils.ranges import isrange

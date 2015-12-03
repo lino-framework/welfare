@@ -39,8 +39,6 @@ from lino.api.dd import field2kw
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
-from lino.modlib.cal.utils import DurationUnits
-
 # isip = dd.resolve_app('isip')
 # jobs = dd.resolve_app('jobs')
 # contacts = dd.resolve_app('contacts')

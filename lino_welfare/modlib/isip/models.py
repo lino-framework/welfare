@@ -72,6 +72,7 @@ class ContractType(ContractTypeBase):
     templates_group = 'isip/Contract'
 
     class Meta:
+        app_label = 'isip'
         verbose_name = _("ISIP Type")
         verbose_name_plural = _('ISIP Types')
 
@@ -105,6 +106,7 @@ class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
 
     """
     class Meta:
+        app_label = 'isip'
         verbose_name = _("Examination Policy")
         verbose_name_plural = _('Examination Policies')
 
@@ -139,6 +141,7 @@ class ContractEnding(dd.Model):
 
     """
     class Meta:
+        app_label = 'isip'
         verbose_name = _("Reason of termination")
         verbose_name_plural = _('Contract termination reasons')
 
@@ -169,6 +172,7 @@ class ContractEndings(dd.Table):
 class ContractPartner(ContractPartnerBase):
 
     class Meta:
+        app_label = 'isip'
         verbose_name = _("Contract partner")
         verbose_name_plural = _("Contract partners")
 
@@ -215,6 +219,7 @@ class Contract(ContractBase):
 
     """
     class Meta:
+        app_label = 'isip'
         verbose_name = _("ISIP")
         verbose_name_plural = _("ISIPs")
 

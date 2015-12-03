@@ -36,7 +36,7 @@ from lino import mixins
 
 from lino.utils.xmlgen.html import E
 
-from lino.modlib.system.mixins import PeriodEvents
+from lino.modlib.system.choicelists import PeriodEvents
 from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
 from lino.modlib.addresses.mixins import AddressTypes

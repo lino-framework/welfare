@@ -22,7 +22,7 @@ from lino.utils.report import Report
 from lino.mixins import ObservedPeriod
 
 from lino.api import dd
-from lino.modlib.system.mixins import PeriodEvents
+from lino.modlib.system.choicelists import PeriodEvents
 from lino.modlib.users.choicelists import UserProfiles
 from .roles import IntegrationAgent
 

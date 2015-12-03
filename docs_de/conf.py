@@ -15,7 +15,7 @@ extensions += ['lino.sphinxcontrib.actordoc']
 
 
 intersphinx_mapping = {}
-from django.utils.importlib import import_module
+from importlib import import_module
 for n in 'lino lino_welfare'.split():
     m = import_module(n)
     n = n.replace('_', '')
