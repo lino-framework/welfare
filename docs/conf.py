@@ -30,7 +30,7 @@ from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
 
 intersphinx_mapping = {}
-from django.utils.importlib import import_module
+from importlib import import_module
 for n in 'atelier lino'.split():
     m = import_module(n)
     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)

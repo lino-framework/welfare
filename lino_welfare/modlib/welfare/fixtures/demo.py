@@ -36,7 +36,7 @@ from lino.core.utils import resolve_model
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
-from lino.modlib.cal.utils import DurationUnits
+from lino.modlib.cal.choicelists import DurationUnits
 # from lino.modlib.cal.utils import WORKDAYS
 
 isip = dd.resolve_app('isip')

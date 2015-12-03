@@ -29,7 +29,8 @@ from lino.api import dd
 
 from lino.modlib.uploads.models import *
 from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.cal.utils import update_reminder, Recurrencies
+from lino.modlib.cal.utils import update_reminder
+from lino.modlib.cal.choicelists import Recurrencies
 
 
 # add = UploadAreas.add_item

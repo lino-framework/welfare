@@ -43,7 +43,8 @@ from lino.api import dd, rt
 from lino.core.utils import get_field
 
 from lino.utils.xmlgen.html import E
-from lino.modlib.cal.utils import DurationUnits, update_reminder
+from lino.modlib.cal.utils import update_reminder
+from lino.modlib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
 from lino.modlib.notes.choicelists import SpecialTypes
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
