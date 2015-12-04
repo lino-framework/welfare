@@ -43,8 +43,9 @@ from lino_cosi.lib.ledger.roles import LedgerUser
 class ClientVoucher(Voucher, ProjectRelated):
 
     class Meta:
-        verbose_name = _("Invoice")
-        verbose_name_plural = _("Invoices")
+        app_label = 'client_vouchers'
+        verbose_name = _("Client voucher")
+        verbose_name_plural = _("Client vouchers")
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
@@ -107,6 +108,13 @@ class ClientVoucher(Voucher, ProjectRelated):
 
 class VoucherItem(Matching, PartnerRelated, AccountVoucherItem):
     """An item of an :class:`ClientVoucher`."""
+
+    class Meta:
+        app_label = 'client_vouchers'
+        verbose_name = _("Client voucher item")
+        verbose_name_plural = _("Client voucher items")
+
+
     voucher = dd.ForeignKey(
         'client_vouchers.ClientVoucher', related_name='items')
     amount = dd.PriceField(_("Amount"), blank=True, null=True)

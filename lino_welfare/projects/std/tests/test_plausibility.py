@@ -35,7 +35,7 @@ See also :mod:`lino.projects.min2.tests.test_addresses`.
 from __future__ import unicode_literals
 from __future__ import print_function
 
-from lino.core.utils import gfk2lookup
+from lino.core.gfks import gfk2lookup
 from lino.utils.djangotest import RemoteAuthTestCase
 from lino.api import rt
 
