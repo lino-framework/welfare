@@ -34,6 +34,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
+from lino import AFTER18
 from lino.api import rt
 from lino.utils.djangotest import TestCase
 from lino.utils import i2d
@@ -88,6 +89,7 @@ class TestCase(TestCase):
             """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
+             '<span />', '<b>Obstacle object</b>',
              'First LAST', 100,
              {'id': True}, {}, False]])
 
@@ -200,8 +202,12 @@ class TestCase(TestCase):
                             state=EnrolmentStates.confirmed, pupil=pupil)
             self.fail("Expected ValidationError")
         except ValidationError as e:
-            self.assertEqual(
-                str(e),
-                "{'__all__': [u'Un(e) Inscription avec ce Atelier et "
-                "B\\xe9n\\xe9ficiaire existe d\\xe9j\\xe0.']}")
+            if AFTER18:
+                expected = "{'__all__': [u'Un object Inscription avec ces " \
+                           "champs Atelier et B\\xe9n\\xe9ficiaire existe " \
+                           "d\\xe9j\\xe0.']}"
+            else:
+                expected = "{'__all__': [u'Un(e) Inscription avec ce Atelier et " \
+                           "B\\xe9n\\xe9ficiaire existe d\\xe9j\\xe0.']}"
+            self.assertEqual(str(e), expected)
 

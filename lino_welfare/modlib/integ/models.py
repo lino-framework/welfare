@@ -14,6 +14,7 @@ import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.db.utils import OperationalError
 from django.conf import settings
 
 from lino.utils.xmlgen.html import E
@@ -201,11 +202,9 @@ class UsersWithClients(dd.VirtualTable):
         return Clients.request(param_values=dict(
             only_active=True, coached_by=obj, start_date=t, end_date=t))
 
-#~ @dd.receiver(dd.database_connected)
-#~ def on_database_connected(sender,**kw):
 
-
-@dd.receiver(dd.database_ready)
+# @dd.receiver(dd.database_ready)
+@dd.receiver(dd.post_analyze)
 def on_database_ready(sender, **kw):
     """
     Builds columns dynamically from the :class:`PersonGroup` database table.
@@ -214,8 +213,7 @@ def on_database_ready(sender, **kw):
     """
     self = UsersWithClients
     self.column_names = 'user:10'
-    #~ try:
-    if True:
+    try:
         for pg in pcsw.PersonGroup.objects.exclude(ref_name='').order_by('ref_name'):
             def w(pg):
                 # we must evaluate `today` for each request, not only once when
@@ -231,8 +229,8 @@ def on_database_ready(sender, **kw):
             vf = dd.RequestField(w(pg), verbose_name=pg.name)
             self.add_virtual_field('G' + pg.ref_name, vf)
             self.column_names += ' ' + vf.name
-    #~ except DatabaseError as e:
-        # ~ pass # happens e.g. if database isn't yet initialized
+    except OperationalError:
+        pass  # happens e.g. if database isn't yet initialized
 
     self.column_names += ' primary_clients active_clients row_total'
     self.clear_handle()  # avoid side effects when running multiple test cases

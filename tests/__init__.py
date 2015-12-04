@@ -122,6 +122,9 @@ class SpecsTests(BaseTestCase):
     def test_cv2(self):
         return self.run_simple_doctests('docs/specs/cv2.rst')
 
+    def test_b2c(self):
+        return self.run_simple_doctests('docs/specs/b2c.rst')
+
     def test_polls(self):
         return self.run_simple_doctests('docs/specs/polls.rst')
 

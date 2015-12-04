@@ -38,7 +38,7 @@ from lino.utils.dpy import Migrator
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
 from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
-from lino.modlib.cal.utils import WORKDAYS
+from lino.modlib.cal.choicelists import WORKDAYS
 
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)

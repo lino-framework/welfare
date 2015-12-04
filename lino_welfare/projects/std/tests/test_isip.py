@@ -34,9 +34,9 @@ from django.conf import settings
 from lino.utils.djangotest import RemoteAuthTestCase
 
 from lino.utils import i2d
-from lino.modlib.cal.utils import WORKDAYS
+from lino.modlib.cal.choicelists import WORKDAYS
 from lino.modlib.users.choicelists import UserProfiles
-from lino.modlib.system.mixins import Genders
+from lino.modlib.system.choicelists import Genders
 
 
 def create(model, **kwargs):
