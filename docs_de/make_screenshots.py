@@ -26,15 +26,17 @@ def album1():
         driver, 'tour', title="Lino-Tour",
         ref="welfare.de.tour", intro="""
 
-        Die Online-Demo von Lino Welfare befindet sich unter
-        http://welfare-demo.lino-framework.org
+        Eine Serie von Bildschirmansichten um zu zeigen, wie Lino
+        Welfare aussieht.
 
-        Dort können Sie die folgenden Bildschirmansichten auch selber
-        nachspielen.
+        Sie können die hier beschriebenen Aktionen auch selber
+        nachspielen in unserer `Online-Demo
+        <http://welfare-demo.lino-framework.org>`_
 
         """)
 
-    app.checktitle("Lino für ÖSHZ")
+    app.checktitle("Lino Welfare")
+    # app.checktitle("Lino für ÖSHZ")
 
     app.screenshot('login1.png', "Vor der Anmeldung", """
 
@@ -43,20 +45,22 @@ def album1():
     alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
     Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
     und *Benutzerprofil* variieren.
+    Mehr dazu unter :doc:`/users`.
 
     """)
 
-    elem = driver.find_element(By.XPATH, '//button[text()="Anmelden"]')
+    elem = driver.find_element(By.XPATH, '//button[text()="Log in"]')
     elem.click()
-
-    app.screenshot('login2.png', "Das Anmeldefenster", """
-    Wir melden uns an mit Benutzernamen "rolf" und Passwort "1234".
-    """)
 
     elem = driver.find_element(By.NAME, 'username')
     elem.send_keys("rolf")
     elem = driver.find_element(By.NAME, 'password')
     elem.send_keys("1234")
+
+    app.screenshot('login2.png', "Das Anmeldefenster", """
+    Wir melden uns an mit Benutzernamen "rolf" und Passwort "1234".
+    """)
+
     elem.send_keys(Keys.RETURN)
 
     # elem = WebDriverWait(driver, 10).until(
