@@ -9,11 +9,12 @@ Lino-Tour
 
 
 
-Die Online-Demo von Lino Welfare befindet sich unter
-http://welfare-demo.lino-framework.org
+Eine Serie von Bildschirmansichten um zu zeigen, wie Lino
+Welfare aussieht.
 
-Dort können Sie die folgenden Bildschirmansichten auch selber
-nachspielen.
+Sie können die hier beschriebenen Aktionen auch selber
+nachspielen in unserer `Online-Demo
+<http://welfare-demo.lino-framework.org>`_
 
 
 
@@ -33,11 +34,15 @@ Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
 alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
 Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
 und *Benutzerprofil* variieren.
+Mehr dazu unter :doc:`/users`.
 
 
 
 .. image:: login1.png
     :alt: Vor der Anmeldung
+    :width: 500
+
+
 
 
 
@@ -53,6 +58,9 @@ Wir melden uns an mit Benutzernamen "rolf" und Passwort "1234".
 
 .. image:: login2.png
     :alt: Das Anmeldefenster
+    :width: 500
+
+
 
 
 
@@ -74,6 +82,9 @@ Das ist der Startbildschirm. Hier haben wir eine Serie von Elementen:
 
 .. image:: welcome.png
     :alt: Der Startbildschirm
+    :width: 500
+
+
 
 
 
@@ -87,6 +98,9 @@ Das Menü :menuselection:`Kontakte`
 
 .. image:: menu_kontakte.png
     :alt: Das Menü :menuselection:`Kontakte`
+    :width: 500
+
+
 
 
 
@@ -103,6 +117,9 @@ aller Klienten zu zeigen.
 
 .. image:: pcsw.Clients.grid.png
     :alt: Liste der Klienten
+    :width: 500
+
+
 
 
 
@@ -117,6 +134,9 @@ Filterparameter
 
 .. image:: pcsw.Clients.grid.params.png
     :alt: Filterparameter
+    :width: 500
+
+
 
 
 
@@ -132,4 +152,7 @@ Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
 
 .. image:: pcsw.Clients.detail.png
     :alt: Detail Klient
+    :width: 500
+
+
 

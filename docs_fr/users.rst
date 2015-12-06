@@ -14,3 +14,11 @@ valeurs suivantes:
     from lino.api import rt
     rt.show('users.UserProfiles', stripped=False)
     
+
+Détails techniques
+==================
+
+La liste des profils utilisateurs disponible est définie dans
+:mod:`lino_welfare.modlib.welfare.roles` (sauf si
+:attr:`user_profiles_module <lino.core.site.Site.user_profiles_module`
+a été changé).

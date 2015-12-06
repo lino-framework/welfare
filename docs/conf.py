@@ -29,11 +29,11 @@ interproject.configure(globals())
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
 
-intersphinx_mapping = {}
-from importlib import import_module
-for n in 'atelier lino'.split():
-    m = import_module(n)
-    intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
+# intersphinx_mapping = {}
+# from importlib import import_module
+# for n in 'atelier lino'.split():
+#     m = import_module(n)
+#     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
 
 extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.sphinxcontrib.logo']
@@ -59,7 +59,7 @@ master_doc = 'index'
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = settings.SITE.title
-copyright = u'2012-2014, Luc Saffre'
+copyright = u'2012-2015, Luc Saffre'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -256,4 +256,9 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 # http://sphinx.pocoo.org/theming.html
 # html_theme = "classic"
 # html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
+
+
+inheritance_graph_attrs = dict(rankdir="TB")
+inheritance_graph_attrs.update(size='"12.0, 16.0"')
+inheritance_graph_attrs.update(fontsize=14, ratio='compress')
 
