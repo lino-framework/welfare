@@ -17,7 +17,9 @@ Damit ein Benutzer sich anmelden kann, muss sein
 Technisches
 ===========
 
-Die Liste der Benutzerprofile ist definiert in
-:mod:`lino_welfare.modlib.welfare.roles` (außer wenn
-:attr:`user_profiles_module <lino.core.site.Site.user_profiles_module`
-verändert wurde).
+Technische Details unter :ref:`welfare.specs.users`.
+
+.. Die Liste der Benutzerprofile ist definiert in
+   :mod:`lino_welfare.modlib.welfare.roles` (außer wenn
+   :attr:`user_profiles_module
+   <lino.core.site.Site.user_profiles_module>` verändert wurde).

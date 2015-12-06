@@ -1,4 +1,4 @@
-.. _welfare.tested.users:
+.. _welfare.specs.users:
 
 =============
 Users
@@ -47,6 +47,15 @@ This is the list of user profiles:
 <BLANKLINE>
 
 
+
+The default set of user roles for Lino Welfare is defined in
+:mod:`lino_welfare.modlib.welfare.roles`, but this module is only the
+tip of the iceberg.  Lino defines a *lot* of user roles.  For example,
+the following diagram visualizes the genealogy of a reception clerk:
+
+.. inheritance-diagram:: lino_welfare.modlib.welfare.roles.ReceptionClerk
+
+
 **Remarks:**
 
 An integration agent (manager) has some staff permissions but is not a
@@ -67,6 +76,7 @@ A reception clerk is a
 False
 >>> p210.has_required_roles([ContactsStaff])
 True
+
 
 
 
