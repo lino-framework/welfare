@@ -21,9 +21,9 @@
 Also loads :mod:`lino_cosi.lib.ledger.fixtures.std`
 
 Purchase invoices go to 4400 (suppliers). Unlike default ledger, 4400
-is to be matched by a payment *instruction* which moves them to 4450
-(instructions to execute). And then we write a payment *order* which
-satisfies the payment *instruction*.
+is to be matched by a payment *instruction* (Zahlungsanweisung) which
+moves them to 4450 (instructions to execute). And then we write a
+payment *order* which satisfies the payment *instruction*.
 
 Classic accounting:
 
@@ -37,8 +37,7 @@ Lino Welfare accounting:
 #. (4400 ->) Payment instruction -> 4450
 #. (4450 ->) Payment order -> 5800
 #. (5800 ->) Bank Statement -> 5500
-
-
+#. (4450 ->) Bank Statement -> 5500
 
 """
 
@@ -64,6 +63,7 @@ def objects():
     JournalGroups = rt.modules.ledger.JournalGroups
     BankStatement = rt.modules.finan.BankStatement
     PaymentOrder = rt.modules.finan.PaymentOrder
+    PaymentInstructionsByJournal = rt.modules.finan.PaymentInstructionsByJournal
     AccountInvoice = rt.modules.vatless.AccountInvoice
     MatchRule = rt.modules.ledger.MatchRule
 
@@ -101,8 +101,12 @@ def objects():
     settings.SITE.site_config.update(suppliers_account=a4400)
 
     a4450 = account('4450', 'liabilities',
-                    _("Instructions to execute"), clearable=True)
+                    _("Payment instructions to execute"), clearable=True)
     yield a4450
+
+    # a4460 = account('4460', 'liabilities',
+    #                 _("Instructions to execute"), clearable=True)
+    # yield a4460
     # settings.SITE.site_config.update(suppliers_account=a4400)
 
     yield group('55', 'assets', _("Financial institutes"))
@@ -115,6 +119,9 @@ def objects():
     a5800 = account("5800", 'bank_accounts', _("Payment Orders"),
                     clearable=True)
     yield a5800
+    # a5810 = account("5810", 'bank_accounts', _("Aid allocations"),
+    #                 clearable=True)
+    # yield a5810
 
     yield group('6', 'expenses', _("Expenses"))
     for ref, name in (
@@ -149,18 +156,18 @@ def objects():
     kw.update(dd.str2kw('name', _("Purchase invoices")))
     yield AccountInvoice.create_journal(**kw)
 
-    kw = dict(chart=chart, journal_group=JournalGroups.aids)
     kw.update(dd.str2kw('name', _("Payment instructions")))
     kw.update(account='4450', ref="AAW")
-    jnl = PaymentOrder.create_journal(**kw)
+    jnl = PaymentInstructionsByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4400)
 
+    kw = dict(chart=chart, journal_group=JournalGroups.financial)
     if dd.is_installed('client_vouchers'):
         ClientVoucher = rt.modules.client_vouchers.ClientVoucher
         kw = dict(chart=chart, journal_group=JournalGroups.aids)
         kw.update(trade_type='aids', ref="AIDS")
-        kw.update(dd.str2kw('name', _("Aids allocations")))
+        kw.update(dd.str2kw('name', _("Aid allocations")))
         jnl = ClientVoucher.create_journal(**kw)
         yield jnl
         yield MatchRule(journal=jnl, account=a4400)
@@ -174,9 +181,18 @@ def objects():
     yield MatchRule(journal=jnl, account=a5800)
 
     kw.update(journal_group=JournalGroups.financial)
-    kw.update(dd.str2kw('name', _("PO KBC")))
-    kw.update(account='5800', ref="POKBC")
+    kw.update(dd.str2kw('name', _("KBC Payment Orders")))
+    kw.update(account='5800', ref="ZKBC")
     jnl = PaymentOrder.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)
+
+    # kw.update(journal_group=JournalGroups.financial)
+    # kw.update(trade_type='aids')
+    # kw.update(ref="AAW")
+    # kw.update(dd.str2kw('name', _("Aid allocations")))  # Zahlungsanweisungen
+    # kw.update(account='5810')
+    # jnl = PaymentOrder.create_journal(**kw)
+    # yield jnl
+    # yield MatchRule(journal=jnl, account=a4460)
 

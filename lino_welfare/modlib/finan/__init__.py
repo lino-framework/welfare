@@ -30,7 +30,7 @@ Lino Welfare extension of :mod:`lino_cosi.lib.finan`
 from lino_cosi.lib.finan import Plugin
 
 
-class Plugin(Plugin):
-    """See :class:`lino.core.plugin.Plugin`."""
+# class Plugin(Plugin):
+#     """See :class:`lino.core.plugin.Plugin`."""
 
-    extends_models = ['BankStatementItem']
+#     extends_models = ['BankStatementItem']

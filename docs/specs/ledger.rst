@@ -11,18 +11,19 @@ Ledger for Lino Welfare
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
 This document describes the functionalities for registering social
 aids expenses like client-related payments of social aid, including
-refunding or payment of certain costs.  This is not a complete ledger,
-just a subledger.  It was developed between May and September 2015 as
-ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben").
+refunding or payment of certain costs.  This does not turn Lino
+Welfare into a complete accounting package, rather a subledger.  It
+was developed between May and September 2015 as ticket :ticket:`143`
+("Nebenbuchhaltung Sozialhilfeausgaben") and child tickets. The code
+examples contain German texts, which is for practical resaons to
+facilitate analysis.
 
 .. contents::
    :depth: 1
@@ -31,23 +32,74 @@ ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben").
 Implementation notes
 ====================
 
-This project integrates several plugins into Lino Welfare:
-:mod:`lino_welfare.modlib.ledger` (a thin extension of
-:mod:`lino.modlib.ledger`), :mod:`lino.modlib.vatless` and
-:mod:`lino.modlib.finan`.  
+This project integrates several plugins into Lino Welfare which are
+also used by :ref:`cosi`: 
 
-The :mod:`lino.modlib.accounts` plugin was already used before (for
+- :mod:`lino_welfare.modlib.ledger` (a thin extension of :mod:`lino_cosi.lib.ledger`), 
+- :mod:`lino_cosi.lib.vatless` is for VAT-less invoices (mostly incoming invoices)
+- :mod:`lino_cosi.lib.finan`.
+
+
+Account charts
+==============
+
+A cool example of reusability is the :mod:`lino_cosi.lib.accounts`
+plugin which was already used before (for
 :mod:`lino_welfare.modlib.debts`), but now we add a second account
-chart:
+chart for accounting:
 
 >>> rt.show('accounts.AccountCharts')
-========= ========= =================
- value     name      text
---------- --------- -----------------
- default   default   Default
- debts     debts     Debts mediation
-========= ========= =================
+========= ========= ===================
+ Wert      name      Text
+--------- --------- -------------------
+ default   default   Standardwert
+ debts     debts     Schuldnerberatung
+========= ========= ===================
 <BLANKLINE>
+
+Note that :class:`lino_cosi.lib.accounts.choicelists.AccountCharts` is
+a choicelist: web users cannot add new charts (because they don't need
+to).
+
+
+
+Partner versus Project
+======================
+
+Accounting in Lino Welfare is special because every transaction
+usually has *two* external partners: (1) the "beneficiary" or "client"
+to which this transaction must be assigned and (2) the actual
+recipient (or sender) of the payment.
+
+The :attr:`project_model <lino_cosi.lib.ledger.Plugin.project_model>`
+of the ledger plugin is `contacts.Client`, which means that every
+ledger movement can additionally point to a *client* as the "project".
+
+The client of a transaction can be somebody else than the partner.
+
+The following models are
+:class:`lino_cosi.lib.ledger.mixins.ProjectRelated` (don't mix that up
+with :class:`lino.mixins.ProjectRelated`) and can point to a client::
+
+>>> from lino_cosi.lib.ledger.mixins import ProjectRelated
+>>> # from lino.mixins import ProjectRelated
+>>> for m in rt.models_by_base(ProjectRelated):
+...     print m
+<class 'lino_cosi.lib.finan.models.BankStatementItem'>
+<class 'lino_cosi.lib.finan.models.JournalEntryItem'>
+<class 'lino_cosi.lib.finan.models.PaymentOrderItem'>
+<class 'lino_cosi.lib.ledger.models.Movement'>
+<class 'lino_cosi.lib.vatless.models.InvoiceItem'>
+
+
+===================================== ========== =========
+Document type                          Partner    Client
+===================================== ========== =========
+Invoice (vatless.AccountInvoice)       voucher    item
+Journal Entry (finan.JournalEntry)     item       item
+Payment Order (finan.PaymentOrder)     item       item
+Bank Statement (finan.BankStatement)   item       item
+===================================== ========== =========
 
 
 .. _wilfried:
@@ -96,8 +148,9 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
+  - SEPA : Konten
   - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
-  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
+  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
 - Site : Info
 
 
@@ -163,7 +216,6 @@ Lino Welfare uses the following **voucher types**:
  finan.JournalEntry              Journal Entry (finan.JournalEntry)
  finan.PaymentOrder              Payment Order (finan.PaymentOrder)
  finan.BankStatement             Bank Statement (finan.BankStatement)
- finan.Grouper                   Grouper (finan.Grouper)
 ======================== ====== ======================================
 <BLANKLINE>
 
@@ -176,6 +228,7 @@ The other voucher types (Bank statements etc) are called **financial
 vouchers**. Financial vouchers have their individual *entries*
 partner-related, so the vouchers themselves are *not* related to a
 single partner.
+
 
 More about voucher types in
 :class:`lino.modlib.ledger.choicelists.VoucherTypes`.
@@ -235,7 +288,7 @@ be deregistered anymore.
     >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(rt.modules.vatless.Invoices)
     >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
-    <span><b>Registered</b> &#8594; [&#9671;]</span>
+    <span><b>Registered</b> &#8594; [Deregister]</span>
     
 
 Purchase invoices
@@ -432,17 +485,18 @@ List of partners (usually suppliers)     who are giving credit to us.
 ========= ========== =============================== ========== ============== ===============================
  Age       Due date   Partner                         ID         Balance        Actions
 --------- ---------- ------------------------------- ---------- -------------- -------------------------------
- 115       1/27/14    Leffin Electronics              229        578,34         [Show debts] [Issue reminder]
- 110       2/1/14     Niederau Eupen AG               228        495,84         [Show debts] [Issue reminder]
- 105       2/6/14     Ethias s.a.                     227        142,50         [Show debts] [Issue reminder]
- 100       2/11/14    Electrabel Customer Solutions   226        375,99         [Show debts] [Issue reminder]
- 95        2/16/14    Ragn-Sells AS                   225        89,85          [Show debts] [Issue reminder]
- 90        2/21/14    Maksu- ja tolliamet             224        518,49         [Show debts] [Issue reminder]
- 85        2/26/14    IIZI kindlustusmaakler AS       223        232,35         [Show debts] [Issue reminder]
- 80        3/3/14     Eesti Energia AS                222        465,84         [Show debts] [Issue reminder]
- 75        3/8/14     AS Matsalu Veevärk              221        112,50         [Show debts] [Issue reminder]
- 70        3/13/14    AS Express Post                 220        30,00          [Show debts] [Issue reminder]
- **925**                                              **2245**   **3 041,70**
+ 115       1/27/14    Leffin Electronics              229        1 735,02       [Show debts] [Issue reminder]
+ 110       2/1/14     Niederau Eupen AG               228        1 487,52       [Show debts] [Issue reminder]
+ 105       2/6/14     Ethias s.a.                     227        427,50         [Show debts] [Issue reminder]
+ 100       2/11/14    Electrabel Customer Solutions   226        1 127,97       [Show debts] [Issue reminder]
+ 95        2/16/14    Ragn-Sells AS                   225        269,55         [Show debts] [Issue reminder]
+ 90        2/21/14    Maksu- ja tolliamet             224        1 555,47       [Show debts] [Issue reminder]
+ 85        2/26/14    IIZI kindlustusmaakler AS       223        697,05         [Show debts] [Issue reminder]
+ 80        3/3/14     Eesti Energia AS                222        1 397,52       [Show debts] [Issue reminder]
+ 75        3/8/14     AS Matsalu Veevärk              221        337,50         [Show debts] [Issue reminder]
+ 70        3/13/14    AS Express Post                 220        90,00          [Show debts] [Issue reminder]
+ **925**                                              **2245**   **9 125,10**
 ========= ========== =============================== ========== ============== ===============================
 <BLANKLINE>
+
 

@@ -43,6 +43,8 @@ def objects():
     Account = rt.modules.accounts.Account
     AccountCharts = rt.modules.accounts.AccountCharts
     AccountTypes = rt.modules.accounts.AccountTypes
+    PaymentOrder = rt.modules.finan.PaymentOrder
+    PaymentOrderItem = rt.modules.finan.PaymentOrderItem
 
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
@@ -84,3 +86,31 @@ def objects():
         obj.register(ses)
         obj.save()
 
+    refs = ('832/3331/01', '832/330/01', '832/330/03F',
+            '832/330/03', '832/3343/21', '832/334/27')
+    ACCOUNTS = list(rt.modules.accounts.Account.objects.filter(ref__in=refs))
+    AMOUNTS = Cycler('648.91', '817.36', '544.91', '800.08')
+    jnl = Journal.get_by_ref('AAW')
+    for i in range(3):
+        kw = dict()
+        kw.update(date=dd.today(-30*i))
+        kw.update(journal=jnl)
+        kw.update(user=ses.get_user())
+        for acc in ACCOUNTS:
+            kw.update(narration=acc.name)
+            obj = PaymentOrder(**kw)
+            yield obj
+            for j in range(5):
+                cli = CLIENTS.pop()
+                yield PaymentOrderItem(
+                    seqno=j+1,
+                    voucher=obj,
+                    account=acc,
+                    amount=AMOUNTS.pop(),
+                    project=cli, partner=cli)
+            # this is especially slow in a sqlite :memory: databae
+            dd.logger.info(
+                "20151211 Gonna register PaymentOrder %s %s %s",
+                dd.fds(obj.date), obj, obj.narration)
+            obj.register(ses)
+            obj.save()

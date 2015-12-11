@@ -71,7 +71,7 @@ class ReceptionClerkNewcomers(ReceptionClerk, NewcomersOperator):
 
 
 class Supervisor(Supervisor, OfficeOperator, ContactsStaff, AidsStaff,
-                 NewcomersOperator):
+                 NewcomersOperator, SepaUser):
     """A backoffice user who can act as others."""
     pass
 
