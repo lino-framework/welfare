@@ -60,9 +60,11 @@ def objects():
     if len(ACCOUNTS) == 0:
         raise Exception("Oops, no ACCOUNTS in %s" % ACCOUNTS)
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
+    ITEMNUMS = Cycler(1, 5, 1, 1, 7, 1)
 
     ses = rt.login('wilfried')
-    jnl = Journal.get_by_ref('REG')
+    REG = Journal.get_by_ref('REG')
+    SREG = Journal.get_by_ref('SREG')
     for i in range(30):
         kw = dict()
         kw.update(partner=RECIPIENTS.pop())
@@ -70,19 +72,22 @@ def objects():
         #     kw.update(project=CLIENTS.pop())
         kw.update(date=dd.today(-5*i))
         kw.update(due_date=dd.today(30-5*i))
-        kw.update(journal=jnl)
         kw.update(user=ses.get_user())
+        itemnum = ITEMNUMS.pop()
+        acc = ACCOUNTS.pop()
+        prj = CLIENTS.pop()
+        if itemnum == 1:
+            kw.update(journal=REG)
+            kw.update(project=prj)
+        else:
+            kw.update(journal=SREG)
         obj = AccountInvoice(**kw)
         yield obj
-
-        for j in range(i % 5 + 1):
+        for j in range(itemnum):
             yield InvoiceItem(
                 voucher=obj, amount=AMOUNTS.pop(),
-                project=CLIENTS.pop(),
-                account=ACCOUNTS.pop())
-        # if i % 5 == 0:
-        #     yield InvoiceItem(
-        #         voucher=obj, amount=AMOUNTS.pop(), account=ACCOUNTS.pop())
+                project=prj, account=acc)
+            prj = CLIENTS.pop()
         obj.register(ses)
         obj.save()
 

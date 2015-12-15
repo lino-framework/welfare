@@ -79,16 +79,18 @@ The client of a transaction can be somebody else than the partner.
 
 The following models are
 :class:`lino_cosi.lib.ledger.mixins.ProjectRelated` (don't mix that up
-with :class:`lino.mixins.ProjectRelated`) and can point to a client::
+with :class:`lino.mixins.ProjectRelated`) and can point to a client:
 
 >>> from lino_cosi.lib.ledger.mixins import ProjectRelated
 >>> # from lino.mixins import ProjectRelated
 >>> for m in rt.models_by_base(ProjectRelated):
 ...     print m
 <class 'lino_cosi.lib.finan.models.BankStatementItem'>
+<class 'lino_cosi.lib.finan.models.JournalEntry'>
 <class 'lino_cosi.lib.finan.models.JournalEntryItem'>
 <class 'lino_cosi.lib.finan.models.PaymentOrderItem'>
 <class 'lino_cosi.lib.ledger.models.Movement'>
+<class 'lino_cosi.lib.vatless.models.AccountInvoice'>
 <class 'lino_cosi.lib.vatless.models.InvoiceItem'>
 
 
@@ -112,7 +114,7 @@ Demo user Wilfried Willems has the user profile of an accountant
 
 >>> p = rt.login('wilfried').get_user().profile
 >>> print(p)
-Accountant
+Buchhalter
 >>> p.role.__class__
 <class 'lino_welfare.modlib.welfare.roles.LedgerUser'>
 
@@ -134,9 +136,9 @@ Here is the main menu for accountants:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG)
-  - Hilfen : Payment instructions (AAW)
-  - Finanzjournale : KBC (KBC), PO KBC (POKBC)
+  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Hilfen : Zahlungsanweisungen (AAW)
+  - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -148,8 +150,7 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
 - Site : Info
 
@@ -158,43 +159,44 @@ General accounts
 ================
 
 >>> rt.show(accounts.GroupsByChart, accounts.AccountCharts.default)
-===== ====================== ====================== ====================== ============== =======================
- ref   Designation            Designation (fr)       Designation (de)       Account Type   Budget entries layout
------ ---------------------- ---------------------- ---------------------- -------------- -----------------------
- 40    Receivables            Receivables            Receivables            Assets
- 44    Liabilities            Obligations            Verpflichtungen        Assets
- 55    Financial institutes   Financial institutes   Financial institutes   Assets
- 58    Current transactions   Current transactions   Current transactions   Assets
- 6     Expenses               Dépenses               Ausgaben               Expenses
- 7     Revenues               Revenues               Revenues               Incomes
-===== ====================== ====================== ====================== ============== =======================
+===== ====================== =========== =======================
+ ref   Bezeichnung            Kontenart   Budget entries layout
+----- ---------------------- ----------- -----------------------
+ 40    Receivables            Vermögen
+ 44    Verpflichtungen        Vermögen
+ 55    Financial institutes   Vermögen
+ 58    Current transactions   Vermögen
+ 6     Ausgaben               Ausgaben
+ 7     Revenues               Einkünfte
+===== ====================== =========== =======================
 <BLANKLINE>
+
 
 >>> expenses = accounts.Group.objects.get(ref="6")
 >>> rt.show(accounts.AccountsByGroup, expenses, column_names="ref name")
-============= ================================ ================================ ================================
- Reference     Designation                      Designation (fr)                 Designation (de)
-------------- -------------------------------- -------------------------------- --------------------------------
- 820/333/01    Vorschuss auf Vergütungen o.ä.   Vorschuss auf Vergütungen o.ä.   Vorschuss auf Vergütungen o.ä.
- 821/333/01    Vorschuss auf Pensionen          Vorschuss auf Pensionen          Vorschuss auf Pensionen
- 822/333/01    Vorsch. Entsch. Arbeitsunfälle   Vorsch. Entsch. Arbeitsunfälle   Vorsch. Entsch. Arbeitsunfälle
- 823/333/01    Vor. Kranken- u. Invalidengeld   Vor. Kranken- u. Invalidengeld   Vor. Kranken- u. Invalidengeld
- 825/333/01    Vorschuss auf Familienzulage     Vorschuss auf Familienzulage     Vorschuss auf Familienzulage
- 826/333/01    Vorschuss auf Arbeitslosengeld   Vorschuss auf Arbeitslosengeld   Vorschuss auf Arbeitslosengeld
- 827/333/01    Vorschuss auf Behindertenzulag   Vorschuss auf Behindertenzulag   Vorschuss auf Behindertenzulag
- 832/330/01    Allgemeine Beihilfen             Allgemeine Beihilfen             Allgemeine Beihilfen
- 832/330/02    Gesundheitsbeihilfe              Gesundheitsbeihilfe              Gesundheitsbeihilfe
- 832/330/03    Heizkosten- u. Energiebeihilfe   Heizkosten- u. Energiebeihilfe   Heizkosten- u. Energiebeihilfe
- 832/330/03F   Fonds Gas und Elektrizität       Fonds Gas und Elektrizität       Fonds Gas und Elektrizität
- 832/330/04    Mietkaution                      Mietkaution                      Mietkaution
- 832/333/22    Mietbeihilfe                     Mietbeihilfe                     Mietbeihilfe
- 832/3331/01   Eingliederungseinkommen          Eingliederungseinkommen          Eingliederungseinkommen
- 832/334/27    Sozialhilfe                      Sozialhilfe                      Sozialhilfe
- 832/3343/21   Beihilfe für Ausländer           Beihilfe für Ausländer           Beihilfe für Ausländer
- P82/000/00    Einn. Dritter: Weiterleitung     Einn. Dritter: Weiterleitung     Einn. Dritter: Weiterleitung
- P83/000/00    Unber. erh. Beträge + Erstatt.   Unber. erh. Beträge + Erstatt.   Unber. erh. Beträge + Erstatt.
- P87/000/00    Abhebung von pers. Guthaben      Abhebung von pers. Guthaben      Abhebung von pers. Guthaben
-============= ================================ ================================ ================================
+============= ================================
+ Referenz      Bezeichnung
+------------- --------------------------------
+ 820/333/01    Vorschuss auf Vergütungen o.ä.
+ 821/333/01    Vorschuss auf Pensionen
+ 822/333/01    Vorsch. Entsch. Arbeitsunfälle
+ 823/333/01    Vor. Kranken- u. Invalidengeld
+ 825/333/01    Vorschuss auf Familienzulage
+ 826/333/01    Vorschuss auf Arbeitslosengeld
+ 827/333/01    Vorschuss auf Behindertenzulag
+ 832/330/01    Allgemeine Beihilfen
+ 832/330/02    Gesundheitsbeihilfe
+ 832/330/03    Heizkosten- u. Energiebeihilfe
+ 832/330/03F   Fonds Gas und Elektrizität
+ 832/330/04    Mietkaution
+ 832/333/22    Mietbeihilfe
+ 832/3331/01   Eingliederungseinkommen
+ 832/334/27    Sozialhilfe
+ 832/3343/21   Beihilfe für Ausländer
+ P82/000/00    Einn. Dritter: Weiterleitung
+ P83/000/00    Unber. erh. Beträge + Erstatt.
+ P87/000/00    Abhebung von pers. Guthaben
+============= ================================
 <BLANKLINE>
 
 
@@ -209,26 +211,29 @@ proof for a transaction. A transaction is a set of accounting
 Lino Welfare uses the following **voucher types**:
 
 >>> rt.show(rt.modules.ledger.VoucherTypes)
-======================== ====== ======================================
- value                    name   text
------------------------- ------ --------------------------------------
- vatless.AccountInvoice          Invoice (vatless.AccountInvoice)
- finan.JournalEntry              Journal Entry (finan.JournalEntry)
- finan.PaymentOrder              Payment Order (finan.PaymentOrder)
- finan.BankStatement             Bank Statement (finan.BankStatement)
-======================== ====== ======================================
+==================================== ====== ======================================================
+ Wert                                 name   Text
+------------------------------------ ------ ------------------------------------------------------
+ finan.JournalEntriesByJournal               Diverse Buchung (finan.JournalEntriesByJournal)
+ finan.PaymentOrdersByJournal                Zahlungsauftrag (finan.PaymentOrdersByJournal)
+ finan.BankStatementsByJournal               Kontoauszug (finan.BankStatementsByJournal)
+ finan.PaymentInstructionsByJournal          Zahlungsauftrag (finan.PaymentInstructionsByJournal)
+ vatless.InvoicesByJournal                   Rechnung (vatless.InvoicesByJournal)
+ vatless.ProjectInvoicesByJournal            Rechnung (vatless.ProjectInvoicesByJournal)
+==================================== ====== ======================================================
 <BLANKLINE>
 
-The first one (Invoice) is a partner-related voucher (often we simply
-say **partner voucher**). That is, you select one partner per
-voucher. Every partner-related voucher points to to one and only one
-partner.
+Invoices are partner-related vouchers (often we simply say **partner
+voucher**). That is, you select one partner per voucher. Every
+partner-related voucher points to to one and only one partner. 
 
 The other voucher types (Bank statements etc) are called **financial
 vouchers**. Financial vouchers have their individual *entries*
 partner-related, so the vouchers themselves are *not* related to a
 single partner.
 
+There are two types of invoice: those with only one project (client)
+and those with more than one projects.
 
 More about voucher types in
 :class:`lino.modlib.ledger.choicelists.VoucherTypes`.
@@ -242,14 +247,15 @@ per voucher type.  The demo database currently has the following
 journals defined:
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
-=========== ====================== ====================== ====================== ======================================
- Reference   Designation            Designation (fr)       Designation (de)       Voucher type
------------ ---------------------- ---------------------- ---------------------- --------------------------------------
- REG         Purchase invoices      Factures achat         Einkaufsrechnungen     Invoice (vatless.AccountInvoice)
- AAW         Payment instructions   Payment instructions   Payment instructions   Payment Order (finan.PaymentOrder)
- KBC         KBC                    KBC                    KBC                    Bank Statement (finan.BankStatement)
- POKBC       PO KBC                 PO KBC                 PO KBC                 Payment Order (finan.PaymentOrder)
-=========== ====================== ====================== ====================== ======================================
+========== ====================== ======================================================
+ Referenz   Bezeichnung            Belegart
+---------- ---------------------- ------------------------------------------------------
+ REG        Einkaufsrechnungen     Rechnung (vatless.ProjectInvoicesByJournal)
+ SREG       Sammelrechnungen       Rechnung (vatless.InvoicesByJournal)
+ AAW        Zahlungsanweisungen    Zahlungsauftrag (finan.PaymentInstructionsByJournal)
+ KBC        KBC                    Kontoauszug (finan.BankStatementsByJournal)
+ ZKBC       KBC Zahlungsaufträge   Zahlungsauftrag (finan.PaymentOrdersByJournal)
+========== ====================== ======================================================
 <BLANKLINE>
 
 
@@ -263,13 +269,13 @@ movements in the ledger. Fixed is the same as registered, but cannot
 be deregistered anymore.
 
 >>> rt.show(rt.modules.ledger.VoucherStates)
-======= ============ ============
- value   name         text
-------- ------------ ------------
- 10      draft        Draft
- 20      registered   Registered
- 30      fixed        Fixed
-======= ============ ============
+====== ============ =============
+ Wert   name         Text
+------ ------------ -------------
+ 10     draft        Entwurf
+ 20     registered   Registriert
+ 30     fixed        Fixed
+====== ============ =============
 <BLANKLINE>
 
 .. technical:
@@ -288,76 +294,98 @@ be deregistered anymore.
     >>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(rt.modules.vatless.Invoices)
     >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
-    <span><b>Registered</b> &#8594; [Deregister]</span>
+    <span><b>Registriert</b> &#8594; [Entregistrieren]</span>
     
 
-Purchase invoices
-=================
+Simple purchase invoices
+========================
 
-The demo database has one journal with **purchase invoices**,
-referenced as "REG" (for German *Rechnungseingang*).
+The demo database has two journals with **purchase invoices**,
+referenced as "REG" (for German *Rechnungseingang*) and SREG
+(*Sammelrechnungen*).
 
 >>> jnl = rt.modules.ledger.Journal.get_by_ref('REG')
->>> jnl.voucher_type.table_class
-<class 'lino_cosi.lib.vatless.ui.InvoicesByJournal'>
 
 The REG journal contains the following invoices:
 
->>> rt.show(rt.modules.vatless.InvoicesByJournal, jnl)
-========= ========== =============================== ============== ========== ================== ================
- number    Date       Partner                         Amount         Due date   Author             Workflow
---------- ---------- ------------------------------- -------------- ---------- ------------------ ----------------
- 29        1/2/14     Niederau Eupen AG               165,28         2/1/14     Wilfried Willems   **Registered**
- 28        1/7/14     Ethias s.a.                     47,50          2/6/14     Wilfried Willems   **Registered**
- 27        1/12/14    Electrabel Customer Solutions   125,33         2/11/14    Wilfried Willems   **Registered**
- 26        1/17/14    Ragn-Sells AS                   29,95          2/16/14    Wilfried Willems   **Registered**
- 25        1/22/14    Maksu- ja tolliamet             172,83         2/21/14    Wilfried Willems   **Registered**
- 24        1/27/14    IIZI kindlustusmaakler AS       77,45          2/26/14    Wilfried Willems   **Registered**
- 23        2/1/14     Eesti Energia AS                155,28         3/3/14     Wilfried Willems   **Registered**
- 22        2/6/14     AS Matsalu Veevärk              37,50          3/8/14     Wilfried Willems   **Registered**
- 21        2/11/14    AS Express Post                 10,00          3/13/14    Wilfried Willems   **Registered**
- 20        2/16/14    Leffin Electronics              192,78         3/18/14    Wilfried Willems   **Registered**
- 19        2/21/14    Niederau Eupen AG               165,28         3/23/14    Wilfried Willems   **Registered**
- 18        2/26/14    Ethias s.a.                     47,50          3/28/14    Wilfried Willems   **Registered**
- 17        3/3/14     Electrabel Customer Solutions   125,33         4/2/14     Wilfried Willems   **Registered**
- 16        3/8/14     Ragn-Sells AS                   29,95          4/7/14     Wilfried Willems   **Registered**
- 15        3/13/14    Maksu- ja tolliamet             172,83         4/12/14    Wilfried Willems   **Registered**
- 14        3/18/14    IIZI kindlustusmaakler AS       77,45          4/17/14    Wilfried Willems   **Registered**
- 13        3/23/14    Eesti Energia AS                155,28         4/22/14    Wilfried Willems   **Registered**
- 12        3/28/14    AS Matsalu Veevärk              37,50          4/27/14    Wilfried Willems   **Registered**
- 11        4/2/14     AS Express Post                 10,00          5/2/14     Wilfried Willems   **Registered**
- 10        4/7/14     Leffin Electronics              192,78         5/7/14     Wilfried Willems   **Registered**
- 9         4/12/14    Niederau Eupen AG               165,28         5/12/14    Wilfried Willems   **Registered**
- 8         4/17/14    Ethias s.a.                     47,50          5/17/14    Wilfried Willems   **Registered**
- 7         4/22/14    Electrabel Customer Solutions   125,33         5/22/14    Wilfried Willems   **Registered**
- 6         4/27/14    Ragn-Sells AS                   29,95          5/27/14    Wilfried Willems   **Registered**
- 5         5/2/14     Maksu- ja tolliamet             172,83         6/1/14     Wilfried Willems   **Registered**
- 4         5/7/14     IIZI kindlustusmaakler AS       77,45          6/6/14     Wilfried Willems   **Registered**
- 3         5/12/14    Eesti Energia AS                155,28         6/11/14    Wilfried Willems   **Registered**
- 2         5/17/14    AS Matsalu Veevärk              37,50          6/16/14    Wilfried Willems   **Registered**
- 1         5/22/14    AS Express Post                 10,00          6/21/14    Wilfried Willems   **Registered**
- 1         12/28/13   Leffin Electronics              192,78         1/27/14    Wilfried Willems   **Registered**
- **436**                                              **3 041,70**
-========= ========== =============================== ============== ========== ================== ================
+>>> # rt.show(rt.modules.vatless.InvoicesByJournal, jnl)
+>>> rt.show(jnl.voucher_type.table_class, jnl)
+========= ========== ============================ =============================== ============ ============== ================== =================
+ number    Datum      Klient                       Partner                         Betrag       Zahlungsziel   Autor              Arbeitsablauf
+--------- ---------- ---------------------------- ------------------------------- ------------ -------------- ------------------ -----------------
+ 19        07.01.14   EVERS Eberhart (127)         Ethias s.a.                     5,33         06.02.14       Wilfried Willems   **Registriert**
+ 18        12.01.14   COLLARD Charlotte (118)      Electrabel Customer Solutions   120,00       11.02.14       Wilfried Willems   **Registriert**
+ 17        22.01.14   EVERS Eberhart (127)         Maksu- ja tolliamet             120,00       21.02.14       Wilfried Willems   **Registriert**
+ 16        27.01.14   COLLARD Charlotte (118)      IIZI kindlustusmaakler AS       29,95        26.02.14       Wilfried Willems   **Registriert**
+ 15        06.02.14   COLLARD Charlotte (118)      AS Matsalu Veevärk              12,50        08.03.14       Wilfried Willems   **Registriert**
+ 14        11.02.14   EMONTS Daniel (128)          AS Express Post                 10,00        13.03.14       Wilfried Willems   **Registriert**
+ 13        21.02.14   COLLARD Charlotte (118)      Niederau Eupen AG               10,00        23.03.14       Wilfried Willems   **Registriert**
+ 12        26.02.14   EMONTS Daniel (128)          Ethias s.a.                     5,33         28.03.14       Wilfried Willems   **Registriert**
+ 11        08.03.14   EMONTS Daniel (128)          Ragn-Sells AS                   29,95        07.04.14       Wilfried Willems   **Registriert**
+ 10        13.03.14   DOBBELSTEIN Dorothée (124)   Maksu- ja tolliamet             25,00        12.04.14       Wilfried Willems   **Registriert**
+ 9         23.03.14   EMONTS Daniel (128)          Eesti Energia AS                25,00        22.04.14       Wilfried Willems   **Registriert**
+ 8         28.03.14   DOBBELSTEIN Dorothée (124)   AS Matsalu Veevärk              12,50        27.04.14       Wilfried Willems   **Registriert**
+ 7         07.04.14   DOBBELSTEIN Dorothée (124)   Leffin Electronics              5,33         07.05.14       Wilfried Willems   **Registriert**
+ 6         12.04.14   AUSDEMWALD Alfons (116)      Niederau Eupen AG               120,00       12.05.14       Wilfried Willems   **Registriert**
+ 5         22.04.14   DOBBELSTEIN Dorothée (124)   Electrabel Customer Solutions   120,00       22.05.14       Wilfried Willems   **Registriert**
+ 4         27.04.14   AUSDEMWALD Alfons (116)      Ragn-Sells AS                   29,95        27.05.14       Wilfried Willems   **Registriert**
+ 3         07.05.14   AUSDEMWALD Alfons (116)      IIZI kindlustusmaakler AS       12,50        06.06.14       Wilfried Willems   **Registriert**
+ 2         12.05.14   EVERS Eberhart (127)         Eesti Energia AS                10,00        11.06.14       Wilfried Willems   **Registriert**
+ 1         22.05.14   AUSDEMWALD Alfons (116)      AS Express Post                 10,00        21.06.14       Wilfried Willems   **Registriert**
+ 1         28.12.13   EVERS Eberhart (127)         Leffin Electronics              12,50        27.01.14       Wilfried Willems   **Registriert**
+ **191**                                                                           **725,84**
+========= ========== ============================ =============================== ============ ============== ================== =================
 <BLANKLINE>
 
 
-Let's have a closer look at one of them.  The partner (provider) is
-#222, and the costs are distributed over three clients:
+Collective purchase invoices
+============================
+
+>>> jnl = rt.modules.ledger.Journal.get_by_ref('SREG')
+
+The SREG journal contains the following invoices:
+
+>>> rt.show(jnl.voucher_type.table_class, jnl)
+======== ========== =============================== ============== ============== ================== =================
+ number   Datum      Partner                         Betrag         Zahlungsziel   Autor              Arbeitsablauf
+-------- ---------- ------------------------------- -------------- -------------- ------------------ -----------------
+ 10       02.01.14   Niederau Eupen AG               212,78         01.02.14       Wilfried Willems   **Registriert**
+ 9        17.01.14   Ragn-Sells AS                   82,78          16.02.14       Wilfried Willems   **Registriert**
+ 8        01.02.14   Eesti Energia AS                227,78         03.03.14       Wilfried Willems   **Registriert**
+ 7        16.02.14   Leffin Electronics              192,78         18.03.14       Wilfried Willems   **Registriert**
+ 6        03.03.14   Electrabel Customer Solutions   322,78         02.04.14       Wilfried Willems   **Registriert**
+ 5        18.03.14   IIZI kindlustusmaakler AS       177,78         17.04.14       Wilfried Willems   **Registriert**
+ 4        02.04.14   AS Express Post                 212,78         02.05.14       Wilfried Willems   **Registriert**
+ 3        17.04.14   Ethias s.a.                     82,78          17.05.14       Wilfried Willems   **Registriert**
+ 2        02.05.14   Maksu- ja tolliamet             227,78         01.06.14       Wilfried Willems   **Registriert**
+ 1        17.05.14   AS Matsalu Veevärk              192,78         16.06.14       Wilfried Willems   **Registriert**
+ **55**                                              **1 932,80**
+======== ========== =============================== ============== ============== ================== =================
+<BLANKLINE>
+
+
+Let's have a closer look at one of them.  
     
->>> obj = rt.modules.vatless.AccountInvoice.objects.get(id=3)
+>>> obj = jnl.voucher_type.model.objects.get(number=3, journal=jnl)
+
+The partner is #222, and the costs are distributed over three clients:
+
 >>> obj.partner
-Partner #222 (u'Eesti Energia AS')
->>> rt.show(rt.modules.vatless.ItemsByInvoice, obj)
-============================ ============================================= ============ =============
- Client                       Account                                       Amount       Description
----------------------------- --------------------------------------------- ------------ -------------
- DENON Denis (180*)           (823/333/01) Vor. Kranken- u. Invalidengeld   29,95
- DOBBELSTEIN Dorothée (124)   (825/333/01) Vorschuss auf Familienzulage     120,00
- AUSDEMWALD Alfons (116)      (826/333/01) Vorschuss auf Arbeitslosengeld   5,33
- **Total (3 rows)**                                                         **155,28**
-============================ ============================================= ============ =============
+Partner #227 (u'Ethias s.a.')
+
+>>> rt.show(rt.modules.vatless.ItemsByProjectInvoice, obj)
+=================================== =========== ==============
+ Konto                               Betrag      Beschreibung
+----------------------------------- ----------- --------------
+ (832/330/01) Allgemeine Beihilfen   5,33
+ (832/330/01) Allgemeine Beihilfen   10,00
+ (832/330/01) Allgemeine Beihilfen   12,50
+ (832/330/01) Allgemeine Beihilfen   25,00
+ (832/330/01) Allgemeine Beihilfen   29,95
+ **Total (5 Zeilen)**                **82,78**
+=================================== =========== ==============
 <BLANKLINE>
+
 
 Note that the accounts are randomly generated. A real electricity
 invoice would probably book to the same account for every item.
@@ -367,92 +395,87 @@ This invoice is registered, and ledger movements have been created:
 >>> obj.state
 <VoucherStates.registered:20>
 >>> rt.show(rt.modules.ledger.MovementsByVoucher, obj)
-========= ============================ ================== ============================================= ============ ============ ======= ===========
- Seq.No.   Client                       Partner            Account                                       Debit        Credit       Match   Satisfied
---------- ---------------------------- ------------------ --------------------------------------------- ------------ ------------ ------- -----------
- 1         AUSDEMWALD Alfons (116)                         (826/333/01) Vorschuss auf Arbeitslosengeld   5,33                              No
- 2         DOBBELSTEIN Dorothée (124)                      (825/333/01) Vorschuss auf Familienzulage     120,00                            No
- 3         DENON Denis (180*)                              (823/333/01) Vor. Kranken- u. Invalidengeld   29,95                             No
- 4                                      Eesti Energia AS   (4400) Suppliers                                           155,28               No
- **10**                                                                                                  **155,28**   **155,28**           **0**
-========= ============================ ================== ============================================= ============ ============ ======= ===========
+========== ============================ ============= =================================== =========== =========== ======= ============
+ Seq.-Nr.   Klient                       Partner       Konto                               Debit       Kredit      Match   Befriedigt
+---------- ---------------------------- ------------- ----------------------------------- ----------- ----------- ------- ------------
+ 1                                                     (832/330/01) Allgemeine Beihilfen   12,50                           Nein
+ 2                                                     (832/330/01) Allgemeine Beihilfen   5,33                            Nein
+ 3                                                     (832/330/01) Allgemeine Beihilfen   29,95                           Nein
+ 4                                                     (832/330/01) Allgemeine Beihilfen   25,00                           Nein
+ 5                                                     (832/330/01) Allgemeine Beihilfen   10,00                           Nein
+ 6          EMONTS Daniel (128)          Ethias s.a.   (4400) Lieferanten                              5,33        8SREG   Nein
+ 7          AUSDEMWALD Alfons (116)      Ethias s.a.   (4400) Lieferanten                              10,00       8SREG   Nein
+ 8          DOBBELSTEIN Dorothée (124)   Ethias s.a.   (4400) Lieferanten                              25,00       8SREG   Nein
+ 9          COLLARD Charlotte (118)      Ethias s.a.   (4400) Lieferanten                              12,50       8SREG   Nein
+ 10         EVERS Eberhart (127)         Ethias s.a.   (4400) Lieferanten                              29,95       8SREG   Nein
+ **55**                                                                                    **82,78**   **82,78**           **0**
+========== ============================ ============= =================================== =========== =========== ======= ============
 <BLANKLINE>
-
 
 
 Purchase invoices
 =================
 
->>> rt.login('robin').show(rt.modules.vatless.VouchersByPartner, obj.partner)
-Create voucher in journal **Purchase invoices (REG)**
+>>> rt.login('rolf').show(rt.modules.vatless.VouchersByPartner, obj.partner)
+Beleg erstellen in Journal **Sammelrechnungen (SREG)**, **Einkaufsrechnungen (REG)**
 
 Our partner has sent several invoices:
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-==================== ========== ======= ============ ======= ======== ===========
- Date                 Voucher    Debit   Credit       Match   Client   Satisfied
--------------------- ---------- ------- ------------ ------- -------- -----------
- 5/12/14              *REG#3*            155,28                        No
- 3/23/14              *REG#13*           155,28                        No
- 2/1/14               *REG#23*           155,28                        No
- **Total (3 rows)**                      **465,84**                    **0**
-==================== ========== ======= ============ ======= ======== ===========
+====================== ========== ===================================================== ======= =========== ======= ============
+ Datum                  Beleg      Beschreibung                                          Debit   Kredit      Match   Befriedigt
+---------------------- ---------- ----------------------------------------------------- ------- ----------- ------- ------------
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                  5,33        8SREG   Nein
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*              10,00       8SREG   Nein
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*           25,00       8SREG   Nein
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*              12,50       8SREG   Nein
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                 29,95       8SREG   Nein
+ **Total (5 Zeilen)**                                                                            **82,78**           **0**
+====================== ========== ===================================================== ======= =========== ======= ============
 <BLANKLINE>
 
 
-
->>> client = rt.modules.pcsw.Client.objects.get(pk=180)
+>>> client = rt.modules.pcsw.Client.objects.get(pk=128)
 >>> print(client)
-DENON Denis (180*)
+EMONTS Daniel (128)
 
 Our client has invoices from different partners:
 
 >>> rt.show(ledger.MovementsByProject, client)
-===================== ========== ============================================= ========= ============ ======== ======= ===========
- Date                  Voucher    Account                                       Partner   Debit        Credit   Match   Satisfied
---------------------- ---------- --------------------------------------------- --------- ------------ -------- ------- -----------
- 5/12/14               *REG#3*    (823/333/01) Vor. Kranken- u. Invalidengeld             29,95                         No
- 5/7/14                *REG#4*    (832/330/02) Gesundheitsbeihilfe                        25,00                         No
- 5/2/14                *REG#5*    (832/3331/01) Eingliederungseinkommen                   12,50                         No
- 4/17/14               *REG#8*    (P87/000/00) Abhebung von pers. Guthaben                10,00                         No
- 4/12/14               *REG#9*    (825/333/01) Vorschuss auf Familienzulage               5,33                          No
- 4/7/14                *REG#10*   (832/330/03) Heizkosten- u. Energiebeihilfe             120,00                        No
- 3/23/14               *REG#13*   (832/334/27) Sozialhilfe                                29,95                         No
- 3/18/14               *REG#14*   (820/333/01) Vorschuss auf Vergütungen o.ä.             25,00                         No
- 3/13/14               *REG#15*   (826/333/01) Vorschuss auf Arbeitslosengeld             12,50                         No
- 2/26/14               *REG#18*   (832/330/03F) Fonds Gas und Elektrizität                10,00                         No
- 2/21/14               *REG#19*   (832/3343/21) Beihilfe für Ausländer                    5,33                          No
- 2/16/14               *REG#20*   (821/333/01) Vorschuss auf Pensionen                    120,00                        No
- 2/1/14                *REG#23*   (827/333/01) Vorschuss auf Behindertenzulag             29,95                         No
- 1/27/14               *REG#24*   (832/330/04) Mietkaution                                25,00                         No
- 1/22/14               *REG#25*   (P82/000/00) Einn. Dritter: Weiterleitung               12,50                         No
- 1/7/14                *REG#28*   (822/333/01) Vorsch. Entsch. Arbeitsunfälle             10,00                         No
- 1/2/14                *REG#29*   (832/330/01) Allgemeine Beihilfen                       5,33                          No
- 12/28/13              *REG#30*   (832/333/22) Mietbeihilfe                               120,00                        No
- **Total (18 rows)**                                                                      **608,34**                    **0**
-===================== ========== ============================================= ========= ============ ======== ======= ===========
+====================== ========== ============================================== ======= ============ ======= ============
+ Datum                  Beleg      Beschreibung                                   Debit   Kredit       Match   Befriedigt
+---------------------- ---------- ---------------------------------------------- ------- ------------ ------- ------------
+ 17.05.14               *SREG#2*   *(4400) Lieferanten* / *AS Matsalu Veevärk*            29,95        2SREG   Nein
+ 02.05.14               *SREG#5*   *(4400) Lieferanten* / *Maksu- ja tolliamet*           120,00       5SREG   Nein
+ 17.04.14               *SREG#8*   *(4400) Lieferanten* / *Ethias s.a.*                   5,33         8SREG   Nein
+ **Total (3 Zeilen)**                                                                     **155,28**           **0**
+====================== ========== ============================================== ======= ============ ======= ============
 <BLANKLINE>
 
 
 Movements
 =========
 
+Users can consult to movements of a given general account.
+
 >>> obj = accounts.Account.get_by_ref('820/333/01')
 >>> print(unicode(obj))
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
-==================== ========== ============ ======== ========= ======= ===========
- Date                 Voucher    Debit        Credit   Partner   Match   Satisfied
--------------------- ---------- ------------ -------- --------- ------- -----------
- 5/22/14              *REG#1*    10,00                                   No
- 4/17/14              *REG#8*    12,50                                   No
- 3/18/14              *REG#14*   25,00                                   No
- 2/16/14              *REG#20*   29,95                                   No
- 1/12/14              *REG#27*   120,00                                  No
- **Total (5 rows)**              **197,45**                              **0**
-==================== ========== ============ ======== ========= ======= ===========
+====================== =========== ====================== ============ ======== ======= ============
+ Datum                  Beleg       Beschreibung           Debit        Kredit   Match   Befriedigt
+---------------------- ----------- ---------------------- ------------ -------- ------- ------------
+ 22.05.14               *REG#1*     *AS Express Post*      10,00                         Nein
+ 16.02.14               *SREG#20*   *Leffin Electronics*   29,95                         Nein
+ 16.02.14               *SREG#20*   *Leffin Electronics*   5,33                          Nein
+ 16.02.14               *SREG#20*   *Leffin Electronics*   120,00                        Nein
+ 16.02.14               *SREG#20*   *Leffin Electronics*   25,00                         Nein
+ 16.02.14               *SREG#20*   *Leffin Electronics*   12,50                         Nein
+ **Total (6 Zeilen)**                                      **202,78**                    **0**
+====================== =========== ====================== ============ ======== ======= ============
 <BLANKLINE>
+
 
 Situation
 =========
@@ -460,43 +483,45 @@ Situation
 The :class:`lino.modlib.ledger.ui.Situation` report is one of the
 well-known accounting documents. Since accounting in Lino Welfare is
 not complete (it is just a *Nebenbuchhaltung*), there are no debtors
-and thus the situation cannot be balanced.
-
-TODO: 
-
-- No "Actions" column in printed version.
-- Report title not shown
-- Report title must contain the date
+(Schuldner) and the situation cannot be balanced.
 
 >>> rt.show(ledger.Situation)  #doctest: +NORMALIZE_WHITESPACE
--------
-Debtors
--------
-<BLANKLINE>
-List of partners (usually clients)     who are in debt towards us.
-<BLANKLINE>
-No data to display
 ---------
-Creditors
+Schuldner
 ---------
 <BLANKLINE>
-List of partners (usually suppliers)     who are giving credit to us.
+List of partners who are in debt towards us (usually customers).
 <BLANKLINE>
-========= ========== =============================== ========== ============== ===============================
- Age       Due date   Partner                         ID         Balance        Actions
---------- ---------- ------------------------------- ---------- -------------- -------------------------------
- 115       1/27/14    Leffin Electronics              229        1 735,02       [Show debts] [Issue reminder]
- 110       2/1/14     Niederau Eupen AG               228        1 487,52       [Show debts] [Issue reminder]
- 105       2/6/14     Ethias s.a.                     227        427,50         [Show debts] [Issue reminder]
- 100       2/11/14    Electrabel Customer Solutions   226        1 127,97       [Show debts] [Issue reminder]
- 95        2/16/14    Ragn-Sells AS                   225        269,55         [Show debts] [Issue reminder]
- 90        2/21/14    Maksu- ja tolliamet             224        1 555,47       [Show debts] [Issue reminder]
- 85        2/26/14    IIZI kindlustusmaakler AS       223        697,05         [Show debts] [Issue reminder]
- 80        3/3/14     Eesti Energia AS                222        1 397,52       [Show debts] [Issue reminder]
- 75        3/8/14     AS Matsalu Veevärk              221        337,50         [Show debts] [Issue reminder]
- 70        3/13/14    AS Express Post                 220        90,00          [Show debts] [Issue reminder]
- **925**                                              **2245**   **9 125,10**
-========= ========== =============================== ========== ============== ===============================
+Keine Daten anzuzeigen
+---------
+Gläubiger
+---------
 <BLANKLINE>
+List of partners who are giving credit to us (usually suppliers).
+<BLANKLINE>
+========== ============== =============================== ========== =============== ===============================
+ Alter      Zahlungsziel   Partner                         ID         Saldo           Aktionen
+---------- -------------- ------------------------------- ---------- --------------- -------------------------------
+ 105        06.02.14       Ethias s.a.                     227        82,78           [Show debts] [Issue reminder]
+ 100        11.02.14       Electrabel Customer Solutions   226        120,00          [Show debts] [Issue reminder]
+ 95         16.02.14       Ragn-Sells AS                   225        29,95           [Show debts] [Issue reminder]
+ 90         21.02.14       Maksu- ja tolliamet             224        227,78          [Show debts] [Issue reminder]
+ 85         26.02.14       IIZI kindlustusmaakler AS       223        12,50           [Show debts] [Issue reminder]
+ 80         03.03.14       Eesti Energia AS                222        10,00           [Show debts] [Issue reminder]
+ 75         08.03.14       AS Matsalu Veevärk              221        192,78          [Show debts] [Issue reminder]
+ 70         13.03.14       AS Express Post                 220        10,00           [Show debts] [Issue reminder]
+ 60         23.03.14       Ausdemwald Alfons               116        12 711,31       [Show debts] [Issue reminder]
+ 60         23.03.14       Collard Charlotte               118        12 607,31       [Show debts] [Issue reminder]
+ 60         23.03.14       Dobbelstein Dorothée            124        12 590,03       [Show debts] [Issue reminder]
+ 60         23.03.14       Emonts Daniel                   128        12 711,31       [Show debts] [Issue reminder]
+ 60         23.03.14       Evers Eberhart                  127        12 694,03       [Show debts] [Issue reminder]
+ **1000**                                                  **2401**   **63 999,78**
+========== ============== =============================== ========== =============== ===============================
+<BLANKLINE>
+
+TODO in above report: 
+
+- Hide "Actions" column in printed version.
+- :ticket:`666` (Report title not shown, Report title must contain the date, ...)
 
 

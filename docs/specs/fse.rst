@@ -35,7 +35,9 @@ Dossier
 
 There will be one central database object model (:class:`Dossier
 <lino_welfare.modlib.fse.models.Dossier>`). Every *dossier* represents
-a document to be printed as "Fiche stagiaire".  List of the data
+a document to be printed as "Fiche stagiaire".  
+
+List of the data
 fields per *dossier*:
 
 - `client` : a pointer to the :class:`Client
@@ -116,4 +118,29 @@ for each column. Most columns must automatically get generated from
 database content (one entry per `courses.Line` as it seems), but some
 columns are special and require a hard-coded method.
 
+
+Notes de discussion
+===================
+
+- Par bénéficiaire il peut y avoir plusieurs fiches stagiaire au cours
+  du temps. En principe une fiche pour chaque stage.
+- Où dans le détail du bénéficaire faut-il afficher ce panneau avec
+  les "fiches stagiaire"? --> dans l'onglet "Historique"
+- Idéal serait d'avoir une checkbox "Générer fiches stagiaire" par
+  bénéficiaire.
+- Bouton "Remplir les données"
+- la fiche est un document à usage interne utilisé par Sandra pour
+  encoder les données dans un fichier Excel protégé issu par 
+- topic "Insertion " si la personne arrive en retard, tant pis pour la
+  statistique, elle aura les heures de présence de l'évènement.
+- Colonne "Mise en situation professionnelle" : calculer les heures
+  par stage d'immersion, en fonction des dates de début et de fin et
+  de l'horaire de travail.
+- Colonne "Recherche d'emploi" : Somme des présences aux ateliers
+  "Cyber-emploi", mais pour ces ateliers on note les heures d'arrivée
+  et de départ par participation.
+- Il y a deux modes d'encodage de présences des ateliers: soit avec
+  soit sans les heures de d'arrivée de départ individuelles.
+- Colonne "Mise à l'emploi sous contrat a60" : comme pour 
+  "Mise en situation professionnelle"
 
