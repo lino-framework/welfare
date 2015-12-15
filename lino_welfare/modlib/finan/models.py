@@ -22,22 +22,36 @@ Database models for :mod:`lino_welfare.modlib.cal`.
 
 from __future__ import unicode_literals
 
-import datetime
-
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
-from django.contrib.humanize.templatetags.humanize import naturalday
-
-from django.db.models import Q
-
-from lino.api import dd, rt
-
-from lino.utils.xmlgen.html import E
-
 from lino_cosi.lib.finan.models import *
+from lino.api import _
 
-from lino_welfare.modlib.ledger.mixins import PaymentRecipient
+
+class PaymentInstructionDetail(JournalEntryDetail):
+    general = dd.Panel("""
+    date user narration total workflow_buttons
+    finan.ItemsByPaymentInstruction
+    """, label=_("General"))
 
 
-class BankStatementItem(BankStatementItem, PaymentRecipient):
+class PaymentInstructions(PaymentOrders):
+    """The table of all :class:`PaymentOrder` vouchers seen as payment
+    instructions."""
+    detail_layout = PaymentInstructionDetail()
+    suggestions_table = 'finan.SuggestionsByPaymentOrder'
+
+
+class ItemsByPaymentOrder(ItemsByPaymentOrder):
+    column_names = "seqno project partner workflow_buttons bank_account match "\
+                   "amount remark *"
+
+
+class ItemsByPaymentInstruction(ItemsByPaymentOrder):
+    column_names = "seqno project partner account workflow_buttons match "\
+                   "amount remark *"
+
+
+class PaymentInstructionsByJournal(ledger.ByJournal, PaymentInstructions):
     pass
+
+
+VoucherTypes.add_item(PaymentOrder, PaymentInstructionsByJournal)

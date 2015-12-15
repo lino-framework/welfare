@@ -51,9 +51,9 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG)
-  - Hilfen : Payment instructions (AAW)
-  - Finanzjournale : KBC (KBC), PO KBC (POKBC)
+  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Hilfen : Zahlungsanweisungen (AAW)
+  - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -85,8 +85,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
-  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge, Groupers
+  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -120,7 +120,7 @@ Hubert is an Integration agent.
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
 
@@ -169,7 +169,7 @@ to explicitly override the language of :meth:`show_menu
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -204,7 +204,7 @@ Schuldenberater
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -234,7 +234,7 @@ Berater Erstempfang
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -264,7 +264,7 @@ Empfangsschalter
 - Explorer :
   - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - SEPA import : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
 
@@ -377,8 +377,7 @@ Each window layout defines a given set of fields.
 - finan.BankStatements.insert : date, user, balance1, balance2
 - finan.FinancialVouchers.detail : date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.FinancialVouchers.insert : date, user, narration
-- finan.Groupers.detail : date, partner, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- finan.Groupers.insert : date, user, partner
+- finan.PaymentInstructions.detail : date, user, narration, total, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.PaymentOrders.detail : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
@@ -403,7 +402,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, chart, journal_group, force_sequence, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, auto_check_clearings, chart, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, chart, journal_group, voucher_type
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
@@ -448,9 +447,11 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail : id, date, partner, user, due_date, your_ref, bank_account, workflow_buttons, amount, journal, year, number, narration, state, MovementsByVoucher
+- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, date, amount
 - vatless.InvoicesByJournal.insert : partner, date, amount
+- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.insert : project, partner, date, amount
 <BLANKLINE>
 
 Windows and permissions
@@ -484,9 +485,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - art61.ContractTypes.insert : visible for 110 admin
 - art61.Contracts.detail : visible for 100 110 120 admin
 - art61.Contracts.insert : visible for 100 110 120 admin
-- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
-- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
-- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 admin
+- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - boards.Boards.detail : visible for admin
 - boards.Boards.insert : visible for admin
 - cal.Calendars.detail : visible for 110 410 admin
@@ -555,8 +556,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - finan.BankStatements.insert : visible for 500 admin
 - finan.FinancialVouchers.detail : visible for 500 admin
 - finan.FinancialVouchers.insert : visible for 500 admin
-- finan.Groupers.detail : visible for 500 admin
-- finan.Groupers.insert : visible for 500 admin
+- finan.PaymentInstructions.detail : visible for 500 admin
 - finan.PaymentOrders.detail : visible for 500 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
@@ -629,6 +629,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - vatless.Invoices.detail : visible for 500 admin
 - vatless.Invoices.insert : visible for 500 admin
 - vatless.InvoicesByJournal.insert : visible for 500 admin
+- vatless.ProjectInvoicesByJournal.detail : visible for 500 admin
+- vatless.ProjectInvoicesByJournal.insert : visible for 500 admin
 <BLANKLINE>
 
 

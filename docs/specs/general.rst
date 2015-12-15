@@ -37,8 +37,8 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-61 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, vatless, finan, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-153 models:
+61 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+151 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -84,7 +84,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         154
+ contenttypes.ContentType       gfks.ContentTypes               3         152
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -117,12 +117,10 @@ The following table gives an overview of these things.
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
  finan.BankStatement            finan.BankStatements            11        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
- finan.Grouper                  finan.Groupers                  10        0
- finan.GrouperItem              finan.GrouperItemTable          10        0
- finan.JournalEntry             finan.FinancialVouchers         9         0
+ finan.JournalEntry             finan.FinancialVouchers         10        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             11        0
- finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        0
+ finan.PaymentOrder             finan.PaymentOrders             11        18
+ finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           28        14
  households.Member              households.Members              14        63
@@ -145,11 +143,11 @@ The following table gives an overview of these things.
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
- ledger.Journal                 ledger.Journals                 21        4
+ ledger.Journal                 ledger.Journals                 21        5
  ledger.MatchRule               ledger.MatchRules               3         4
- ledger.Movement                ledger.Movements                10        120
+ ledger.Movement                ledger.Movements                10        248
  ledger.PaymentTerm             ledger.PaymentTerms             9         7
- ledger.Voucher                 ledger.Vouchers                 8         30
+ ledger.Voucher                 ledger.Vouchers                 8         48
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
@@ -193,8 +191,8 @@ The following table gives an overview of these things.
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        12
- vatless.AccountInvoice         vatless.Invoices                17        30
- vatless.InvoiceItem            vatless.InvoiceItems            7         90
+ vatless.AccountInvoice         vatless.Invoices                18        30
+ vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======
 <BLANKLINE>
 

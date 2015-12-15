@@ -27,7 +27,7 @@ Lino Welfare:
 >>> print(analyzer.show_foreign_keys())
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account :
-  - PROTECT : debts.Entry.account, finan.BankStatementItem.account, finan.GrouperItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
+  - PROTECT : debts.Entry.account, finan.BankStatementItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - accounts.Group :
   - PROTECT : accounts.Account.group
 - aids.AidType :
@@ -69,7 +69,7 @@ Lino Welfare:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : addresses.Address.partner, contacts.Company.partner_ptr, contacts.Person.partner_ptr, households.Household.partner_ptr, sepa.Account.partner
-  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.Grouper.partner, finan.GrouperItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, polls.Response.partner, users.User.partner, vatless.AccountInvoice.partner
+  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, polls.Response.partner, users.User.partner, vatless.AccountInvoice.partner
 - contacts.Person :
   - CASCADE : cv.LanguageKnowledge.person, cv.Obstacle.person, cv.Skill.person, cv.SoftSkill.person, pcsw.Client.person_ptr
   - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.SimpleConfirmation.contact_person, art61.Contract.signer1, badges.Award.holder, boards.Member.person, contacts.Role.person, cv.Experience.person, cv.Study.person, cv.Training.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.parent, immersion.Contract.signer1, isip.Contract.signer1, isip.ContractPartner.contact_person, jobs.Contract.signer1, notes.Note.contact_person, pcsw.ClientContact.contact_person, system.SiteConfig.signer1, uploads.Upload.contact_person
@@ -122,8 +122,6 @@ Lino Welfare:
   - PROTECT : excerpts.Excerpt.excerpt_type
 - finan.BankStatement :
   - CASCADE : finan.BankStatementItem.voucher
-- finan.Grouper :
-  - CASCADE : finan.GrouperItem.voucher
 - finan.JournalEntry :
   - CASCADE : finan.JournalEntryItem.voucher
 - finan.PaymentOrder :
@@ -162,7 +160,7 @@ Lino Welfare:
   - PROTECT : contacts.Partner.payment_term, vatless.AccountInvoice.payment_term
 - ledger.Voucher :
   - CASCADE : ledger.Movement.voucher
-  - PROTECT : finan.BankStatement.voucher_ptr, finan.Grouper.voucher_ptr, finan.JournalEntry.voucher_ptr, finan.PaymentOrder.voucher_ptr, vatless.AccountInvoice.voucher_ptr
+  - PROTECT : finan.BankStatement.voucher_ptr, finan.JournalEntry.voucher_ptr, finan.PaymentOrder.voucher_ptr, vatless.AccountInvoice.voucher_ptr
 - newcomers.Broker :
   - PROTECT : pcsw.Client.broker
 - newcomers.Faculty :
@@ -179,7 +177,7 @@ Lino Welfare:
   - PROTECT : pcsw.Client.aid_type
 - pcsw.Client :
   - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, dupable_clients.Word.owner, pcsw.Coaching.client, pcsw.Dispense.client
-  - PROTECT : active_job_search.Proof.client, aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, courses.CourseRequest.person, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.GrouperItem.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, immersion.Contract.client, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.ClientContact.client, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.InvoiceItem.project
+  - PROTECT : active_job_search.Proof.client, aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, courses.CourseRequest.person, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, immersion.Contract.client, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.ClientContact.client, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project
 - pcsw.ClientContactType :
   - PROTECT : aids.AidType.pharmacy_type, aids.RefundConfirmation.doctor_type, contacts.Partner.client_contact_type, pcsw.ClientContact.type
 - pcsw.CoachingEnding :

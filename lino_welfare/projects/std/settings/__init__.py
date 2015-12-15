@@ -145,14 +145,13 @@ class Site(Site):
         yield 'lino_welfare.modlib.ledger'
         yield 'lino_welfare.modlib.sepa'
         yield 'lino_cosi.lib.b2c'
+        yield 'lino_welfare.modlib.finan'
 
-
-        # yield 'lino_welfare.modlib.finan'
         # yield 'lino_cosi.lib.ledger'
         yield 'lino_cosi.lib.vatless'
         if False:  # not sure whether they make sense
             yield 'lino_welfare.modlib.client_vouchers'
-        yield 'lino_cosi.lib.finan'
+        # yield 'lino_cosi.lib.finan'
 
         yield 'lino_welfare.projects.chatelet.modlib.cv'
         yield 'lino_welfare.modlib.integ'

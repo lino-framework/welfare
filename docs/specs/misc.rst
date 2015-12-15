@@ -280,10 +280,9 @@ see it.
 - excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 admin
 - finan.BankStatementItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- finan.GrouperItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - finan.ItemsByBankStatement.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- finan.ItemsByGrouper.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - finan.ItemsByJournalEntry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- finan.ItemsByPaymentInstruction.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - finan.ItemsByPaymentOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - finan.JournalEntryItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - finan.PaymentOrderItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
@@ -315,4 +314,5 @@ see it.
 - polls.QuestionsByPoll.duplicate : visible for 100 110 120 200 300 400 410 admin
 - vatless.InvoiceItems.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - vatless.ItemsByInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- vatless.ItemsByProjectInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 <BLANKLINE>
