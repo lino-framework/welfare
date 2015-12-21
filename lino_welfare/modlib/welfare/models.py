@@ -185,6 +185,9 @@ def set_merge_actions(sender, **kw):
             m, required_roles=set([(SiteStaff, ContactsStaff)])))
         #~ m.merge_row = dd.MergeAction(m)
 
+    dd.update_field(
+        lib.vatless.InvoiceItem, 'account', verbose_name=_("Article"))
+
 
 @dd.receiver(dd.post_analyze)
 def my_details(sender, **kw):

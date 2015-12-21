@@ -1304,5 +1304,14 @@ valid_until to end_date.
         globals_dict.update(create_finan_journalentryitem=noop)
         globals_dict.update(create_sepa_movement=noop)
         globals_dict.update(create_sepa_statement=noop)
+        globals_dict.update(create_ledger_journal=noop)
+        globals_dict.update(create_ledger_matchrule=noop)
+
+        from lino_welfare.modlib.ledger.fixtures.std_journals import objects \
+            as std_journals
+        
+        def after_load(loader):
+            loader.save(std_journals())
+        self.after_load(after_load)
 
         return '1.1.25'
