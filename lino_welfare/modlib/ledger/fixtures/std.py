@@ -60,13 +60,6 @@ def objects():
     Group = rt.modules.accounts.Group
     Account = rt.modules.accounts.Account
     AccountTypes = rt.modules.accounts.AccountTypes
-    JournalGroups = rt.modules.ledger.JournalGroups
-    BankStatement = rt.modules.finan.BankStatement
-    PaymentOrder = rt.modules.finan.PaymentOrder
-    PaymentInstructionsByJournal = rt.modules.finan.PaymentInstructionsByJournal
-    InvoicesByJournal = rt.modules.vatless.InvoicesByJournal
-    ProjectInvoicesByJournal = rt.modules.vatless.ProjectInvoicesByJournal
-    MatchRule = rt.modules.ledger.MatchRule
 
     # chart = Chart(**dd.str2kw('name',  _("Social Accounting")))
     # yield chart
@@ -152,53 +145,6 @@ def objects():
     obj = account('7000', 'incomes', _("Sales"), sales_allowed=True)
     yield obj
 
-    kw = dict(chart=chart, journal_group=JournalGroups.purchases)
-    kw.update(trade_type='purchases', ref="REG")
-    kw.update(dd.str2kw('name', _("Purchase invoices")))
-    yield ProjectInvoicesByJournal.create_journal(**kw)
-
-    kw.update(ref="SREG")
-    kw.update(dd.str2kw('name', _("Collective purchase invoices")))
-    yield InvoicesByJournal.create_journal(**kw)
-
-    kw.update(dd.str2kw('name', _("Payment instructions")))
-    kw.update(account='4450', ref="AAW")
-    kw.update(journal_group=JournalGroups.aids)
-    jnl = PaymentInstructionsByJournal.create_journal(**kw)
-    yield jnl
-    yield MatchRule(journal=jnl, account=a4400)
-
-    kw = dict(chart=chart, journal_group=JournalGroups.financial)
-    if dd.is_installed('client_vouchers'):
-        ClientVoucher = rt.modules.client_vouchers.ClientVoucher
-        kw = dict(chart=chart, journal_group=JournalGroups.aids)
-        kw.update(trade_type='aids', ref="AIDS")
-        kw.update(dd.str2kw('name', _("Aid allocations")))
-        jnl = ClientVoucher.create_journal(**kw)
-        yield jnl
-        yield MatchRule(journal=jnl, account=a4400)
-
-    kw.update(journal_group=JournalGroups.financial)
-    kw.update(dd.str2kw('name', _("KBC")))
-    kw.update(account='5500', ref="KBC")
-    jnl = BankStatement.create_journal(**kw)
-    yield jnl
-    yield MatchRule(journal=jnl, account=a4450)
-    yield MatchRule(journal=jnl, account=a5800)
-
-    kw.update(journal_group=JournalGroups.financial)
-    kw.update(dd.str2kw('name', _("KBC Payment Orders")))
-    kw.update(account='5800', ref="ZKBC")
-    jnl = PaymentOrder.create_journal(**kw)
-    yield jnl
-    yield MatchRule(journal=jnl, account=a4450)
-
-    # kw.update(journal_group=JournalGroups.financial)
-    # kw.update(trade_type='aids')
-    # kw.update(ref="AAW")
-    # kw.update(dd.str2kw('name', _("Aid allocations")))  # Zahlungsanweisungen
-    # kw.update(account='5810')
-    # jnl = PaymentOrder.create_journal(**kw)
-    # yield jnl
-    # yield MatchRule(journal=jnl, account=a4460)
-
+    from lino_welfare.modlib.ledger.fixtures.std_journals import objects \
+        as std_journals
+    yield std_journals()
