@@ -1304,5 +1304,6 @@ valid_until to end_date.
         globals_dict.update(create_finan_journalentryitem=noop)
         globals_dict.update(create_sepa_movement=noop)
         globals_dict.update(create_sepa_statement=noop)
+        globals_dict.update(create_ledger_journal=noop)
 
         return '1.1.25'
