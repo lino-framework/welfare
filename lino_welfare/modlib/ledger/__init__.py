@@ -22,7 +22,6 @@ Lino Welfare extension of :mod:`lino_cosi.lib.ledger`
    :toctree:
 
     models
-    mixins
     fixtures.std
     fixtures.std_journals
     fixtures.demo

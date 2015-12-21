@@ -19,6 +19,8 @@
 """Defines a default accounts chart for social accounting.
 
 Also loads :mod:`lino_cosi.lib.ledger.fixtures.std`
+and :mod:`lino_welfare.modlib.ledger.fixtures.std_journals`
+
 
 Purchase invoices go to 4400 (suppliers). Unlike default ledger, 4400
 is to be matched by a payment *instruction* (Zahlungsanweisung) which

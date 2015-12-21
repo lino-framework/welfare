@@ -18,8 +18,6 @@
 
 """Defines some default journals for social accounting.
 
-Also loads :mod:`lino_cosi.lib.ledger.fixtures.std`
-
 
 """
 

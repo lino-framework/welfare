@@ -36,6 +36,7 @@ The following plugins are extensions of their respective version in
     households
     notes
     polls
+    ledger
     sales
     sepa
     system
