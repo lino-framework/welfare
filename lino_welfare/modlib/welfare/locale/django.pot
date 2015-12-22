@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 1.1.25\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-14 16:32+0200\n"
+"POT-Creation-Date: 2015-12-22 09:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1996,7 +1996,7 @@ msgid "Incomes & Expenses"
 msgstr ""
 
 #: lino_welfare/modlib/debts/ui.py:572
-#: lino_welfare/modlib/ledger/fixtures/std.py:99
+#: lino_welfare/modlib/ledger/fixtures/std.py:94
 msgid "Liabilities"
 msgstr ""
 
@@ -2793,147 +2793,147 @@ msgstr ""
 msgid "Aids account"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:93
+#: lino_welfare/modlib/ledger/fixtures/std.py:88
 msgid "Receivables"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:94
+#: lino_welfare/modlib/ledger/fixtures/std.py:89
 msgid "Customers"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:100
+#: lino_welfare/modlib/ledger/fixtures/std.py:95
 msgid "Suppliers"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:105
+#: lino_welfare/modlib/ledger/fixtures/std.py:100
 msgid "Payment instructions to execute"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:113
+#: lino_welfare/modlib/ledger/fixtures/std.py:108
 msgid "Financial institutes"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:117
+#: lino_welfare/modlib/ledger/fixtures/std.py:112
 msgid "Cash"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:119
+#: lino_welfare/modlib/ledger/fixtures/std.py:114
 msgid "Current transactions"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:120
+#: lino_welfare/modlib/ledger/fixtures/std.py:115
 msgid "Payment Orders"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:127
+#: lino_welfare/modlib/ledger/fixtures/std.py:122
 msgid "Expenses"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:129
+#: lino_welfare/modlib/ledger/fixtures/std.py:124
 msgid "Eingliederungseinkommen"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:130
+#: lino_welfare/modlib/ledger/fixtures/std.py:125
 msgid "Allgemeine Beihilfen"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:131
+#: lino_welfare/modlib/ledger/fixtures/std.py:126
 msgid "Fonds Gas und Elektrizität"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:132
+#: lino_welfare/modlib/ledger/fixtures/std.py:127
 msgid "Heizkosten- u. Energiebeihilfe"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:133
+#: lino_welfare/modlib/ledger/fixtures/std.py:128
 msgid "Beihilfe für Ausländer"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:134
+#: lino_welfare/modlib/ledger/fixtures/std.py:129
 msgid "Sozialhilfe"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:135
+#: lino_welfare/modlib/ledger/fixtures/std.py:130
 msgid "Mietbeihilfe"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:136
+#: lino_welfare/modlib/ledger/fixtures/std.py:131
 msgid "Mietkaution"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:137
+#: lino_welfare/modlib/ledger/fixtures/std.py:132
 msgid "Vorschuss auf Vergütungen o.ä."
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:138
+#: lino_welfare/modlib/ledger/fixtures/std.py:133
 msgid "Vorschuss auf Pensionen"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:139
+#: lino_welfare/modlib/ledger/fixtures/std.py:134
 msgid "Vorsch. Entsch. Arbeitsunfälle"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:140
+#: lino_welfare/modlib/ledger/fixtures/std.py:135
 msgid "Vor. Kranken- u. Invalidengeld"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:141
+#: lino_welfare/modlib/ledger/fixtures/std.py:136
 msgid "Vorschuss auf Familienzulage"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:142
+#: lino_welfare/modlib/ledger/fixtures/std.py:137
 msgid "Vorschuss auf Arbeitslosengeld"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:143
+#: lino_welfare/modlib/ledger/fixtures/std.py:138
 msgid "Vorschuss auf Behindertenzulag"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:144
+#: lino_welfare/modlib/ledger/fixtures/std.py:139
 msgid "Abhebung von pers. Guthaben"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:145
+#: lino_welfare/modlib/ledger/fixtures/std.py:140
 msgid "Einn. Dritter: Weiterleitung"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:146
+#: lino_welfare/modlib/ledger/fixtures/std.py:141
 msgid "Unber. erh. Beträge + Erstatt."
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:147
+#: lino_welfare/modlib/ledger/fixtures/std.py:142
 msgid "Gesundheitsbeihilfe"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:151
+#: lino_welfare/modlib/ledger/fixtures/std.py:146
 msgid "Revenues"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:152
+#: lino_welfare/modlib/ledger/fixtures/std.py:147
 msgid "Sales"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:157
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:46
 msgid "Purchase invoices"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:161
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:50
 msgid "Collective purchase invoices"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:164
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:53
 msgid "Payment instructions"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:176
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:65
 msgid "Aid allocations"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:182
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:71
 msgid "KBC"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std.py:190
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:79
 msgid "KBC Payment Orders"
 msgstr ""
 
@@ -3986,6 +3986,10 @@ msgstr ""
 msgid ""
 "Whether Links of this type can be used as contact person of a job "
 "contract."
+msgstr ""
+
+#: lino_welfare/modlib/welfare/models.py:190
+msgid "Budgetary article"
 msgstr ""
 
 #: lino_welfare/modlib/welfare/roles.py:101
