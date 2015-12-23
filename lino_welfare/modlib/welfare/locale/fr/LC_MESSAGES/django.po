@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-22 09:50+0200\n"
+"POT-Creation-Date: 2015-12-23 03:04+0200\n"
 "PO-Revision-Date: 2015-12-03 03:10+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
@@ -78,7 +78,6 @@ msgid "Notes concerning child custody."
 msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:101
-#: lino_welfare/modlib/ledger/models.py:33
 #: lino_welfare/modlib/ledger/models.py:40
 #: lino_welfare/modlib/pcsw/models.py:687
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
@@ -2831,15 +2830,24 @@ msgid "Nom du médiateur de dettes"
 msgstr ""
 
 #: lino_welfare/modlib/ledger/models.py:32
-#: lino_welfare/modlib/ledger/models.py:39
+msgid "Incoming invoices"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:33
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:53
 #, fuzzy
-msgid "Purchases"
-msgstr "Cours"
+msgid "Payment instructions"
+msgstr "Répartition au marc-le-franc"
 
 #: lino_welfare/modlib/ledger/models.py:34
 #, fuzzy
 msgid "Financial"
 msgstr "Aides financières"
+
+#: lino_welfare/modlib/ledger/models.py:39
+#, fuzzy
+msgid "Purchases"
+msgstr "Cours"
 
 #: lino_welfare/modlib/ledger/models.py:41
 #, fuzzy
@@ -2985,11 +2993,6 @@ msgstr ""
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:50
 msgid "Collective purchase invoices"
 msgstr ""
-
-#: lino_welfare/modlib/ledger/fixtures/std_journals.py:53
-#, fuzzy
-msgid "Payment instructions"
-msgstr "Répartition au marc-le-franc"
 
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:65
 #, fuzzy
