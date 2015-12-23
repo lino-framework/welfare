@@ -136,8 +136,8 @@ Here is the main menu for accountants:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
-  - Hilfen : Zahlungsanweisungen (AAW)
+  - Rechnungseingänge : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
   - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
@@ -150,7 +150,7 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
 - Site : Info
 
@@ -373,22 +373,19 @@ The partner is #222, and the costs are distributed over three clients:
 >>> obj.partner
 Partner #227 (u'Ethias s.a.')
 
->>> rt.show(rt.modules.vatless.ItemsByProjectInvoice, obj)
-=================================== =========== ==============
- Konto                               Betrag      Beschreibung
------------------------------------ ----------- --------------
+>>> rt.login('wilfried').show(rt.modules.vatless.ItemsByProjectInvoice, obj)
+=================================== =========== ============== ============
+ Haushaltsartikel                    Betrag      Beschreibung   Bearbeiten
+----------------------------------- ----------- -------------- ------------
  (832/330/01) Allgemeine Beihilfen   5,33
  (832/330/01) Allgemeine Beihilfen   10,00
  (832/330/01) Allgemeine Beihilfen   12,50
  (832/330/01) Allgemeine Beihilfen   25,00
  (832/330/01) Allgemeine Beihilfen   29,95
  **Total (5 Zeilen)**                **82,78**
-=================================== =========== ==============
+=================================== =========== ============== ============
 <BLANKLINE>
 
-
-Note that the accounts are randomly generated. A real electricity
-invoice would probably book to the same account for every item.
 
 This invoice is registered, and ledger movements have been created:
 

@@ -51,8 +51,8 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
-  - Hilfen : Zahlungsanweisungen (AAW)
+  - Rechnungseingänge : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
   - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -85,7 +85,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -169,7 +169,7 @@ to explicitly override the language of :meth:`show_menu
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -402,7 +402,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, auto_check_clearings, chart, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, chart, account, build_method, template, dc, force_sequence, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, chart, journal_group, voucher_type
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
@@ -447,10 +447,10 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
+- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, date, amount
 - vatless.InvoicesByJournal.insert : partner, date, amount
-- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, date, amount
 <BLANKLINE>
 

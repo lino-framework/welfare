@@ -8,10 +8,8 @@ Choicelists in Lino Welfare
 
     doctest initializations:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     
 This document is an overview on the choicelists used in Lino Welfare.
@@ -80,7 +78,7 @@ name to read the documentation):
     isip.OverlapGroups : Overlap groups
     jobs.CandidatureStates : Candidature states
     ledger.FiscalYears : Fiscal Years
-    ledger.JournalGroups : JournalGroups
+    ledger.JournalGroups : Journal groups
     ledger.TradeTypes : Trade types
     ledger.VoucherStates : States
     ledger.VoucherTypes : Voucher types
