@@ -58,19 +58,14 @@ def objects():
     from lino_cosi.lib.ledger.fixtures.std import objects as std_objects
     yield std_objects()
 
-    # Chart = rt.modules.accounts.Chart
     Group = rt.modules.accounts.Group
     Account = rt.modules.accounts.Account
     AccountTypes = rt.modules.accounts.AccountTypes
 
-    # chart = Chart(**dd.str2kw('name',  _("Social Accounting")))
-    # yield chart
-    chart = rt.modules.accounts.AccountCharts.default
 
     def group(ref, type, name):
         global current_group
         current_group = Group(
-            chart=chart,
             ref=ref,
             account_type=AccountTypes.get_by_name(type),
             **dd.str2kw('name', name))
@@ -79,7 +74,6 @@ def objects():
     def account(ref, type, name, **kw):
         kw.update(dd.str2kw('name', name))
         return Account(
-            chart=chart,
             group=current_group,
             ref=ref,
             type=AccountTypes.get_by_name(type), **kw)

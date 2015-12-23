@@ -42,7 +42,6 @@ name to read the documentation):
     >>> for value, text in choicelist_choices():
     ...     print "%s : %s" % (value, unicode(text))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-    accounts.AccountCharts : Account Charts
     accounts.AccountTypes : AccountTypes
     addresses.AddressTypes : Address types
     addresses.DataSources : Data sources

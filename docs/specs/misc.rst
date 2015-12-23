@@ -10,10 +10,10 @@ Miscellaneous
     
     doctest init:
     
-    >>> from __future__ import print_function
     >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from __future__ import print_function
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     >>> ses = rt.login('rolf')
 
@@ -229,7 +229,6 @@ see it.
 >>> print(analyzer.show_action_permissions(Duplicate))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Accounts.duplicate : visible for admin
-- accounts.AccountsByChart.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - cal.EventTypes.duplicate : visible for 110 410 admin
 - cal.Events.duplicate : visible for 110 410 admin
@@ -257,6 +256,8 @@ see it.
 - cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
 - cv.EducationLevels.duplicate : visible for 110 admin
+- debts.Accounts.duplicate : visible for admin
+- debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - debts.Actors.duplicate : visible for admin
 - debts.ActorsByBudget.duplicate : visible for 300 admin
 - debts.ActorsByPartner.duplicate : visible for 300 admin

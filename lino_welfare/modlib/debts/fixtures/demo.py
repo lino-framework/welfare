@@ -40,9 +40,8 @@ def objects():
     User = rt.modules.users.User
     Household = rt.modules.households.Household
     Budget = rt.modules.debts.Budget
-    # Chart = rt.modules.accounts.Chart
     Entry = rt.modules.debts.Entry
-    Account = rt.modules.accounts.Account
+    Account = rt.modules.debts.Account
     Company = rt.modules.contacts.Company
 
     kerstin = User(username="kerstin",
@@ -66,8 +65,7 @@ def objects():
     PARTNERS = Cycler(Company.objects.all())
     
     LIABILITIES = Cycler(Account.objects.filter(
-        type=AccountTypes.liabilities,
-        chart=rt.modules.accounts.AccountCharts.debts))
+        type=AccountTypes.liabilities))
     EXPENSE_REMARKS = Cycler(_("Shopping"), _("Cinema"), _("Seminar"))
     # qs = rt.modules.contacts.Companies.request().data_iterator
     # qs = qs.filter(client_contact_type__is_bailiff=True)

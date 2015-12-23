@@ -41,7 +41,6 @@ def objects():
     AccountInvoice = rt.modules.vatless.AccountInvoice
     InvoiceItem = rt.modules.vatless.InvoiceItem
     Account = rt.modules.accounts.Account
-    AccountCharts = rt.modules.accounts.AccountCharts
     AccountTypes = rt.modules.accounts.AccountTypes
     PaymentOrder = rt.modules.finan.PaymentOrder
     PaymentOrderItem = rt.modules.finan.PaymentOrderItem
@@ -55,8 +54,7 @@ def objects():
     RECIPIENTS = Cycler(qs)
     if len(RECIPIENTS) == 0:
         raise Exception("Oops, no recipients in %s" % qs)
-    ACCOUNTS = Cycler(Account.objects.filter(
-        chart=AccountCharts.default, type=AccountTypes.expenses))
+    ACCOUNTS = Cycler(Account.objects.filter(type=AccountTypes.expenses))
     if len(ACCOUNTS) == 0:
         raise Exception("Oops, no ACCOUNTS in %s" % ACCOUNTS)
     AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')

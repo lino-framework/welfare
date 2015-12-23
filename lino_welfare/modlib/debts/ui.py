@@ -62,6 +62,48 @@ class Clients(pcsw.CoachedClients):
         return kw
 
 
+class Groups(dd.Table):
+    """The global table of all account groups."""
+    model = 'debts.Group'
+    required_roles = dd.required(DebtsStaff)
+    order_by = ['ref']
+    column_names = 'ref name account_type entries_layout *'
+
+    insert_layout = """
+    name
+    account_type ref
+    """
+
+    detail_layout = """
+    ref name id
+    account_type entries_layout
+    AccountsByGroup
+    """
+
+
+class Accounts(dd.Table):
+    model = 'debts.Account'
+    required_roles = dd.required(DebtsStaff)
+    order_by = ['ref']
+    column_names = "ref name default_amount periods required_for_household "\
+                   "required_for_person group *"
+    insert_layout = """
+    ref group type
+    name
+    """
+    detail_layout = """
+    ref name
+    group type
+    required_for_household required_for_person periods default_amount
+    debts.EntriesByAccount
+    """
+
+
+class AccountsByGroup(Accounts):
+    required_roles = dd.login_required()
+    master_key = 'group'
+
+
 class Actors(dd.Table):
     required_roles = dd.required(DebtsStaff)
     model = 'debts.Actor'

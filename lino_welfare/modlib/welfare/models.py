@@ -185,10 +185,10 @@ def set_merge_actions(sender, **kw):
             m, required_roles=set([(SiteStaff, ContactsStaff)])))
         #~ m.merge_row = dd.MergeAction(m)
 
-    if sender.is_installed('ledger'):
-        for x in (lib.vatless.InvoiceItem, lib.finan.JournalEntryItem,
-                  lib.finan.BankStatementItem, lib.finan.PaymentOrderItem):
-            dd.update_field(x, 'account', verbose_name=_("Budgetary article"))
+    # if sender.is_installed('ledger'):
+        # for x in (lib.vatless.InvoiceItem, lib.finan.JournalEntryItem,
+        #           lib.finan.BankStatementItem, lib.finan.PaymentOrderItem):
+        #     dd.update_field(x, 'account', verbose_name=_("Budgetary article"))
 
 
 @dd.receiver(dd.post_analyze)

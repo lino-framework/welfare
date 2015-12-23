@@ -29,10 +29,11 @@ Lino Welfare extension of :mod:`lino_cosi.lib.ledger`
 
 """
 
-from lino_cosi.lib.ledger import Plugin
+from lino_cosi.lib.ledger import Plugin, _
 
 
-# class Plugin(Plugin):
-#     """See :class:`lino.core.plugin.Plugin`."""
+class Plugin(Plugin):
+    """See :class:`lino.core.plugin.Plugin`."""
 
 #     extends_models = ['Movement']
+

@@ -1241,6 +1241,7 @@ valid_until to end_date.
         """
 - ignore ledger, finan, vatless and sepa
 - migrate Client.is_seeking to Client.seeking_since"""
+- separate ledger accounts from debts accounts
         
         # no need to convert civil_state to new codification here (see
         # 20151013)
@@ -1313,5 +1314,53 @@ valid_until to end_date.
         def after_load(loader):
             loader.save(std_journals())
         self.after_load(after_load)
+
+
+        bv2kw = globals_dict['bv2kw']
+        accounts_Group = rt.modules.accounts.Group
+        accounts_Account = rt.modules.accounts.Account
+        debts_Group = rt.modules.debts.Group
+        debts_Account = rt.modules.debts.Account
+
+        def create_accounts_group(id, name, chart, ref, account_type, entries_layout):
+            kw = dict()
+            kw.update(id=id)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(ref=ref)
+            kw.update(account_type=account_type)
+            kw.update(entries_layout=entries_layout)
+            if chart == 'debts':
+                return debts_Group(**kw)
+            else:
+                return accounts_Group(**kw)
+        globals_dict.update(create_accounts_group=create_accounts_group)
+
+
+        def create_accounts_account(id, ref, seqno, name, chart, group_id, type, sales_allowed, purchases_allowed, wages_allowed, clearings_allowed, clearable, required_for_household, required_for_person, periods, default_amount):
+
+            kw = dict()
+            kw.update(id=id)
+            kw.update(ref=ref)
+            kw.update(seqno=seqno)
+            if name is not None: kw.update(bv2kw('name',name))
+            # kw.update(chart=chart)
+            kw.update(group_id=group_id)
+            kw.update(type=type)
+            kw.update(sales_allowed=sales_allowed)
+            kw.update(purchases_allowed=purchases_allowed)
+            kw.update(wages_allowed=wages_allowed)
+            kw.update(clearings_allowed=clearings_allowed)
+            kw.update(clearable=clearable)
+            kw.update(required_for_household=required_for_household)
+            kw.update(required_for_person=required_for_person)
+            if periods is not None: periods = Decimal(periods)
+            kw.update(periods=periods)
+            if default_amount is not None: default_amount = Decimal(default_amount)
+            kw.update(default_amount=default_amount)
+            if chart == 'debts':
+                return debts_Account(**kw)
+            else:
+                return accounts_Account(**kw)
+        globals_dict.update(create_accounts_account=create_accounts_account)
 
         return '1.1.25'

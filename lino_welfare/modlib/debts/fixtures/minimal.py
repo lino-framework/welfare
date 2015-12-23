@@ -31,8 +31,8 @@ def objects():
     TableLayouts = rt.modules.debts.TableLayouts
     # c = accounts.Chart(name="debts.default")
     # yield c
-    c = rt.modules.accounts.AccountCharts.debts
-    group = Instantiator('accounts.Group', chart=c).build
+    # c = rt.modules.accounts.AccountCharts.debts
+    group = Instantiator('debts.Group').build
     g = group(
         ref="10", account_type=AccountTypes.incomes,
         entries_layout=TableLayouts.get_by_value('11'),
@@ -42,7 +42,7 @@ def objects():
             fr=u"Revenus mensuels",
             en=u"Monthly incomes"))
     yield g
-    account = Instantiator('accounts.Account', group=g).build
+    account = Instantiator('debts.Account', group=g).build
     yield account(
         ref="1010", required_for_person=True, **dd.babel_values(
             'name',
@@ -94,7 +94,7 @@ def objects():
             fr=u"Revenus annuels",
             en=u"Yearly incomes"))
     yield g
-    account = Instantiator('accounts.Account', group=g, periods=12).build
+    account = Instantiator('debts.Account', group=g, periods=12).build
     yield account(ref="2010", required_for_person=True, **dd.babel_values(
         'name',
         de=u"Urlaubsgeld",
@@ -119,7 +119,7 @@ def objects():
                           fr=u"Dépenses mensuelles",
                           en=u"Monthly expenses"))
     yield g
-    account = Instantiator('accounts.Account', group=g).build
+    account = Instantiator('debts.Account', group=g).build
     yield account(
         ref="3010", required_for_household=True, **dd.babel_values('name',
                                                                 de=u"Miete",
@@ -267,7 +267,7 @@ def objects():
             fr=u"Taxes",
             en=u"Taxes"))
     yield g
-    account = Instantiator('accounts.Account', group=g, periods=12).build
+    account = Instantiator('debts.Account', group=g, periods=12).build
     yield account(
         ref="4010", required_for_household=True, **dd.babel_values('name',
                                                                 de=u"Gemeindesteuer",
@@ -313,7 +313,7 @@ def objects():
             fr=u"Assurances",
             en=u"Insurances"))
     yield g
-    account = Instantiator('accounts.Account', group=g, periods=12).build
+    account = Instantiator('debts.Account', group=g, periods=12).build
     yield account(
         ref="5010", required_for_household=True, **dd.babel_values('name',
                                                                 de=u"Feuer",
@@ -353,7 +353,7 @@ def objects():
             fr=u"Actifs",
             en=u"Assets"))
     yield g
-    account = Instantiator('accounts.Account', group=g).build
+    account = Instantiator('debts.Account', group=g).build
     yield account(ref="6010", **dd.babel_values('name',
                                              de=u"Haus",
                                              fr=u"Maison",
@@ -373,7 +373,7 @@ def objects():
             fr="Dettes, paiements en retard et crédits",
             en="Debts, outsanding payments and credits"))
     yield g
-    account = Instantiator('accounts.Account', group=g).build
+    account = Instantiator('debts.Account', group=g).build
     yield account(ref="7010", **dd.babel_values(
         'name',
         de="Kredite",
@@ -398,7 +398,7 @@ def objects():
             fr="Huissiers et agents d'encaissement",
             en="Bailiffs and cash collectors"))
     yield g
-    account = Instantiator('accounts.Account', group=g).build
+    account = Instantiator('debts.Account', group=g).build
     yield account(ref="7100", **dd.babel_values(
         'name',
         de="Gerichtsvollzieher",

@@ -38,12 +38,12 @@ The following table gives an overview of these things.
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 61 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-151 models:
+153 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               19        77
- accounts.Group                 accounts.Groups                 9         14
+ accounts.Account               accounts.Accounts               14        26
+ accounts.Group                 accounts.Groups                 7         6
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        179
  aids.AidType                   aids.AidTypes                   23        11
@@ -84,7 +84,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         152
+ contenttypes.ContentType       gfks.ContentTypes               3         154
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -109,9 +109,11 @@ The following table gives an overview of these things.
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
+ debts.Account                  debts.Accounts                  13        51
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
+ debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
@@ -143,7 +145,7 @@ The following table gives an overview of these things.
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
- ledger.Journal                 ledger.Journals                 21        5
+ ledger.Journal                 ledger.Journals                 20        5
  ledger.MatchRule               ledger.MatchRules               3         4
  ledger.Movement                ledger.Movements                10        248
  ledger.PaymentTerm             ledger.PaymentTerms             9         7

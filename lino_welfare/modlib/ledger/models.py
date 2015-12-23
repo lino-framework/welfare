@@ -45,3 +45,6 @@ TradeTypes.aids.update(
     partner_account_field_label=_("Aids account"))
 
 
+from lino_cosi.lib.accounts.models import Account
+Account._meta.verbose_name = _("Budgetary article")
+Account._meta.verbose_name_plural = _("Budgetary articles")
