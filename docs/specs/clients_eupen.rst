@@ -11,9 +11,8 @@ Clients (Eupen)
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 .. contents::
@@ -83,7 +82,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
-      - **Konten** (sepa.AccountsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+      - **Bankkonten** (sepa.AccountsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
       - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for 100 110 120 200 300 400 410 admin]:

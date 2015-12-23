@@ -37,7 +37,7 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 from lino import mixins
 
-from lino_cosi.lib.accounts.choicelists import AccountTypes, AccountCharts
+from lino_cosi.lib.accounts.choicelists import AccountTypes
 from lino.modlib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
@@ -65,6 +65,82 @@ if False:
         obj.id = id_start + i
     #~ print 20130508, [dd.obj2str(o) for o in obj_list]
     return model.objects.bulk_create(obj_list)
+
+
+class Group(mixins.BabelNamed):
+    "A group of accounts."
+    class Meta:
+        verbose_name = _("Account Group")
+        verbose_name_plural = _("Account Groups")
+
+    ref = dd.NullCharField(
+        max_length=settings.SITE.plugins.debts.ref_length, unique=True)
+    account_type = AccountTypes.field(blank=True)
+    entries_layout = TableLayouts.field(_("Budget entries layout"), blank=True)
+
+
+class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
+    """An **account** is an item of an account chart used to collect
+    ledger transactions or other accountable items.
+
+    .. attribute:: name
+
+        The multilingual designation of this account, as the users see
+        it.
+
+
+    .. attribute:: group
+
+        The *account group* to which this account belongs.  This must
+        point to an instance of :class:`Group`.
+    
+    .. attribute:: seqno
+
+        The sequence number of this account within its :attr:`group`.
+    
+    .. attribute:: ref
+
+        An optional unique name which can be used to reference a given
+        account.
+
+    .. attribute:: type
+
+        The *account type* of this account.  This must
+        point to an item of
+        :class:`lino_cosi.lib.accounts.choicelists.AccountTypes`.
+    
+    """
+    ref_max_length = settings.SITE.plugins.debts.ref_length
+
+    class Meta:
+        verbose_name = _("Account")
+        verbose_name_plural = _("Accounts")
+        ordering = ['ref']
+
+    group = models.ForeignKey('debts.Group')
+    type = AccountTypes.field()
+    required_for_household = models.BooleanField(
+        _("Required for Households"), default=False)
+    required_for_person = models.BooleanField(
+        _("Required for Persons"), default=False)
+    periods = PeriodsField(_("Periods"))
+    default_amount = dd.PriceField(_("Default amount"), blank=True, null=True)
+
+
+    def full_clean(self, *args, **kw):
+        if self.group_id is not None:
+            if not self.ref:
+                qs = rt.modules.debts.Account.objects.all()
+                self.ref = str(qs.count() + 1)
+            if not self.name:
+                self.name = self.group.name
+            self.type = self.group.account_type
+        super(Account, self).full_clean(*args, **kw)
+
+    def __unicode__(self):
+        return "(%(ref)s) %(title)s" % dict(
+            ref=self.ref,
+            title=settings.SITE.babelattr(self, 'name'))
 
 
 class Budget(UserAuthored, Certifiable, mixins.Duplicable):
@@ -177,8 +253,7 @@ The total monthly amount available for debts distribution."""))
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
 
         """
-        Group = rt.modules.accounts.Group
-        kw.update(chart=AccountCharts.debts)
+        Group = rt.modules.debts.Group
         kw.update(entries_layout__gt='')
         if types is not None:
             kw.update(
@@ -202,7 +277,7 @@ The total monthly amount available for debts distribution."""))
         if types is not None:
             kw.update(account_type__in=[AccountTypes.items_dict[t]
                       for t in types])
-        Group = rt.modules.accounts.Group
+        Group = rt.modules.debts.Group
         for g in Group.objects.filter(**kw).order_by('ref'):
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
@@ -216,7 +291,8 @@ The total monthly amount available for debts distribution."""))
  
             ar: the ActionRequest
 
-            group: an instance of :class:`accounts.Group <lino_cosi.lib.accounts.models.Group>`.
+            group: an instance of :class:`debts.Group
+            <lino_welfare.modlib.debts.models.Group>`.
 
         """
         t = entries_table_for_group(group)
@@ -269,7 +345,7 @@ The total monthly amount available for debts distribution."""))
         """
         Entry = rt.modules.debts.Entry
         Actor = rt.modules.debts.Actor
-        Account = rt.modules.accounts.Account
+        Account = rt.modules.debts.Account
         #~ if self.closed:
         if not self.partner or self.printed_by is not None:
             return
@@ -425,7 +501,7 @@ class Entry(SequencedBudgetComponent):
 
     #~ group = models.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
-    account = models.ForeignKey('accounts.Account')
+    account = models.ForeignKey('debts.Account')
     partner = models.ForeignKey('contacts.Partner', blank=True, null=True)
     #~ name = models.CharField(_("Remark"),max_length=200,blank=True)
     #~ amount = dd.PriceField(_("Amount"),default=0)
@@ -493,7 +569,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     @dd.chooser()
     def account_choices(cls, account_type):
         #~ print '20120918 account_choices', account_type
-        return rt.modules.accounts.Account.objects.filter(type=account_type)
+        return rt.modules.debts.Account.objects.filter(type=account_type)
 
     @dd.chooser()
     def bailiff_choices(self):
@@ -603,26 +679,6 @@ dd.inject_field(
         help_text=_("The budget whose content is to be \
         copied into new budgets.")))
 
-# Inject a list of fields to the accounts.Account model.
-dd.inject_field('accounts.Account',
-                'required_for_household',
-                models.BooleanField(
-                    _("Required for Households"), default=False))
-dd.inject_field('accounts.Account',
-                'required_for_person',
-                models.BooleanField(
-                    _("Required for Persons"), default=False))
-dd.inject_field('accounts.Account',
-                'periods',
-                PeriodsField(_("Periods")))
-dd.inject_field('accounts.Account',
-                'default_amount',
-                dd.PriceField(_("Default amount"), blank=True, null=True))
-
-dd.inject_field('accounts.Group',
-                'entries_layout',
-                TableLayouts.field(_("Budget entries layout"), blank=True))
-
 
 def site_setup(site):
     for T in (site.modules.contacts.Partners,
@@ -634,31 +690,6 @@ def site_setup(site):
         debts.BudgetsByPartner
         debts.ActorsByPartner
         """, dd.plugins.debts.verbose_name)
-
-    #~ site.modules.accounts.Accounts.set_required(
-        #~ user_groups=['debts'],user_level='manager')
-
-    cn = "ref name default_amount periods required_for_household required_for_person group *"
-    site.modules.accounts.Accounts.column_names = cn
-    site.modules.accounts.AccountsByGroup.column_names = cn
-
-    site.modules.accounts.Accounts.set_detail_layout("""
-    ref name
-    group type
-    required_for_household required_for_person periods default_amount
-    debts.EntriesByAccount
-    """)
-
-    site.modules.accounts.Groups.column_names = \
-        'chart ref name account_type entries_layout *'
-    site.modules.accounts.Groups.set_detail_layout("""
-    ref name id
-    account_type entries_layout
-    AccountsByGroup
-    """)
-
-    site.modules.accounts.GroupsByChart.column_names = \
-        'ref name account_type entries_layout *'
 
 
 # There are no `message_extractors` for `.odt` files. One workaround
@@ -674,4 +705,3 @@ _("Name of debts mediator")  # Name des Schuldnerberaters
 
 from .ui import *
 
-AccountCharts.add_item("debts", dd.plugins.debts.verbose_name, 'debts')

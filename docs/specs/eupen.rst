@@ -51,8 +51,8 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
-  - Hilfen : Zahlungsanweisungen (AAW)
+  - Rechnungseingänge : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
   - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
@@ -69,14 +69,14 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
-  - Buchhaltung : Kontenpläne, Kontengruppen, Konten, Journale, Zahlungsbedingungen
+  - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Zahlungsbedingungen
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
   - ZDSS : Sektoren, Eigenschafts-Codes
-  - Schuldnerberatung : Budget-Kopiervorlage
+  - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
   - System : Datenbankmodelle, Vollmachten, Benutzerprofile, Notifications, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
@@ -85,7 +85,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -169,7 +169,7 @@ to explicitly override the language of :meth:`show_menu
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
   - Kurse : Kurse, Kursanfragen
@@ -284,10 +284,9 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.AccountCharts.detail : name
-- accounts.Accounts.detail : ref, name, name_fr, name_en, group, type, required_for_household, required_for_person, periods, default_amount
+- accounts.Accounts.detail : ref, name, name_fr, name_en, group, type
 - accounts.Accounts.insert : ref, group, type, name, name_fr, name_en
-- accounts.Groups.detail : ref, name, name_fr, name_en, id, account_type, entries_layout
+- accounts.Groups.detail : ref, name, name_fr, name_en, account_type, id
 - accounts.Groups.insert : name, name_fr, name_en, account_type, ref
 - addresses.Addresses.detail : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert : country, city, street, street_no, street_box, address_type, remark
@@ -368,8 +367,12 @@ Each window layout defines a given set of fields.
 - cv.StudyTypes.insert : name, name_fr, name_en, is_study, is_training, education_level
 - cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
 - cv.Trainings.insert : person, start_date, end_date, type, state, certificates, sector, function, school, country, city
+- debts.Accounts.detail : ref, name, name_fr, name_en, group, type, required_for_household, required_for_person, periods, default_amount
+- debts.Accounts.insert : ref, group, type, name, name_fr, name_en
 - debts.Budgets.detail : date, partner, id, user, intro, ResultByBudget, DebtsByBudget, AssetsByBudgetSummary, conclusion, dist_amount, printed, total_debt, include_yearly_incomes, print_empty_rows, print_todos, DistByBudget, data_box, summary_box
 - debts.Budgets.insert : partner, date, user
+- debts.Groups.detail : ref, name, name_fr, name_en, id, account_type, entries_layout
+- debts.Groups.insert : name, name_fr, name_en, account_type, ref
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
@@ -402,8 +405,8 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : ref, trade_type, seqno, id, voucher_type, journal_group, force_sequence, auto_check_clearings, chart, account, dc, build_method, template, name, name_fr, name_en, printed_name, printed_name_fr, printed_name_en
-- ledger.Journals.insert : ref, name, name_fr, name_en, chart, journal_group, voucher_type
+- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
@@ -447,10 +450,10 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
+- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, date, amount
 - vatless.InvoicesByJournal.insert : partner, date, amount
-- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, narration, match, state, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, date, amount
 <BLANKLINE>
 
@@ -463,7 +466,6 @@ Each window layout is **viewable** by a given set of user profiles.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
 - about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- accounts.AccountCharts.detail : visible for admin
 - accounts.Accounts.detail : visible for admin
 - accounts.Accounts.insert : visible for admin
 - accounts.Groups.detail : visible for admin
@@ -547,8 +549,12 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.StudyTypes.insert : visible for 110 admin
 - cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- debts.Accounts.detail : visible for admin
+- debts.Accounts.insert : visible for admin
 - debts.Budgets.detail : visible for admin
 - debts.Budgets.insert : visible for admin
+- debts.Groups.detail : visible for admin
+- debts.Groups.insert : visible for admin
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin

@@ -40,29 +40,6 @@ also used by :ref:`cosi`:
 - :mod:`lino_cosi.lib.finan`.
 
 
-Account charts
-==============
-
-A cool example of reusability is the :mod:`lino_cosi.lib.accounts`
-plugin which was already used before (for
-:mod:`lino_welfare.modlib.debts`), but now we add a second account
-chart for accounting:
-
->>> rt.show('accounts.AccountCharts')
-========= ========= ===================
- Wert      name      Text
---------- --------- -------------------
- default   default   Standardwert
- debts     debts     Schuldnerberatung
-========= ========= ===================
-<BLANKLINE>
-
-Note that :class:`lino_cosi.lib.accounts.choicelists.AccountCharts` is
-a choicelist: web users cannot add new charts (because they don't need
-to).
-
-
-
 Partner versus Project
 ======================
 
@@ -136,8 +113,8 @@ Here is the main menu for accountants:
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
-  - Einkauf : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
-  - Hilfen : Zahlungsanweisungen (AAW)
+  - Rechnungseingänge : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
   - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
@@ -150,27 +127,42 @@ Here is the main menu for accountants:
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
-  - SEPA : Konten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
 - Site : Info
 
 
-General accounts
-================
+General accounts ("budgetary articles")
+=======================================
 
->>> rt.show(accounts.GroupsByChart, accounts.AccountCharts.default)
-===== ====================== =========== =======================
- ref   Bezeichnung            Kontenart   Budget entries layout
------ ---------------------- ----------- -----------------------
+German-speaking PCSWs are used to speak about "Haushaltsartikel" (and
+not "Konto").  The official name is indeed `Articles budgétaires
+<http://www.pouvoirslocaux.irisnet.be/fr/theme/finances/docfin/la-structure-dun-article-budgetaire>`_.
+It seems that the usage of the term "budgetary articles" is being
+replaced by the term "accounts".
+
+Anyway, these budgetary articles are in social sector accounting
+exactly what general accounts are in private sector accounting.
+
+The account chart is made of two models: :class:`Account
+<lino_cosi.lib.accounts.models.Account>` and :class:`Group
+<lino_cosi.lib.accounts.models.Group>`.
+
+
+>>> rt.show(accounts.Groups)
+===== ====================== ===========
+ ref   Bezeichnung            Kontenart
+----- ---------------------- -----------
  40    Receivables            Vermögen
  44    Verpflichtungen        Vermögen
  55    Financial institutes   Vermögen
  58    Current transactions   Vermögen
  6     Ausgaben               Ausgaben
  7     Revenues               Einkünfte
-===== ====================== =========== =======================
+===== ====================== ===========
 <BLANKLINE>
 
+Some expenses accounts:
 
 >>> expenses = accounts.Group.objects.get(ref="6")
 >>> rt.show(accounts.AccountsByGroup, expenses, column_names="ref name")
@@ -373,22 +365,20 @@ The partner is #222, and the costs are distributed over three clients:
 >>> obj.partner
 Partner #227 (u'Ethias s.a.')
 
->>> rt.show(rt.modules.vatless.ItemsByProjectInvoice, obj)
-=================================== =========== ==============
- Konto                               Betrag      Beschreibung
------------------------------------ ----------- --------------
+>>> rt.login('wilfried').show(rt.modules.vatless.ItemsByProjectInvoice, obj)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+=================================== =========== ============== ============
+ Haushaltsartikel                    Betrag      Beschreibung   Bearbeiten
+----------------------------------- ----------- -------------- ------------
  (832/330/01) Allgemeine Beihilfen   5,33
  (832/330/01) Allgemeine Beihilfen   10,00
  (832/330/01) Allgemeine Beihilfen   12,50
  (832/330/01) Allgemeine Beihilfen   25,00
  (832/330/01) Allgemeine Beihilfen   29,95
  **Total (5 Zeilen)**                **82,78**
-=================================== =========== ==============
+=================================== =========== ============== ============
 <BLANKLINE>
 
-
-Note that the accounts are randomly generated. A real electricity
-invoice would probably book to the same account for every item.
 
 This invoice is registered, and ledger movements have been created:
 
@@ -396,7 +386,7 @@ This invoice is registered, and ledger movements have been created:
 <VoucherStates.registered:20>
 >>> rt.show(rt.modules.ledger.MovementsByVoucher, obj)
 ========== ============================ ============= =================================== =========== =========== ======= ============
- Seq.-Nr.   Klient                       Partner       Konto                               Debit       Kredit      Match   Befriedigt
+ Seq.-Nr.   Klient                       Partner       Haushaltsartikel                    Debit       Kredit      Match   Befriedigt
 ---------- ---------------------------- ------------- ----------------------------------- ----------- ----------- ------- ------------
  1                                                     (832/330/01) Allgemeine Beihilfen   12,50                           Nein
  2                                                     (832/330/01) Allgemeine Beihilfen   5,33                            Nein

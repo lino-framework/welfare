@@ -58,8 +58,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               10        0
- accounts.Group                 accounts.Groups                 8         0
+ accounts.Account               accounts.Accounts               9         0
+ accounts.Group                 accounts.Groups                 7         0
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        90
  aids.AidType                   aids.AidTypes                   23        11
@@ -239,7 +239,6 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.AccountCharts.detail : name
 - accounts.Accounts.detail : ref, name, name_nl, name_de, name_en, group, type
 - accounts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
 - accounts.Groups.detail : ref, name, name_nl, name_de, name_en, account_type, id
@@ -414,7 +413,6 @@ Each window layout is **viewable** by a given set of user profiles.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
 - about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- accounts.AccountCharts.detail : visible for admin
 - accounts.Accounts.detail : visible for admin
 - accounts.Accounts.insert : visible for admin
 - accounts.Groups.detail : visible for admin
@@ -605,7 +603,7 @@ Romain
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Priorités, Évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
-  - Comptabilité : Plan comptables, Groupes de comptes, Comptes
+  - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification

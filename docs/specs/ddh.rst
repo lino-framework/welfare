@@ -27,7 +27,7 @@ Lino Welfare:
 >>> print(analyzer.show_foreign_keys())
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account :
-  - PROTECT : debts.Entry.account, finan.BankStatementItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
+  - PROTECT : finan.BankStatementItem.account, finan.JournalEntryItem.account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - accounts.Group :
   - PROTECT : accounts.Account.group
 - aids.AidType :
@@ -111,11 +111,15 @@ Lino Welfare:
   - PROTECT : art61.Contract.status, cv.Experience.status
 - cv.StudyType :
   - PROTECT : cv.Study.type, cv.Training.type, isip.Contract.study_type
+- debts.Account :
+  - PROTECT : debts.Entry.account
 - debts.Actor :
   - PROTECT : debts.Entry.actor
 - debts.Budget :
   - CASCADE : debts.Actor.budget, debts.Entry.budget
   - PROTECT : system.SiteConfig.master_budget
+- debts.Group :
+  - PROTECT : debts.Account.group
 - excerpts.Excerpt :
   - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
 - excerpts.ExcerptType :

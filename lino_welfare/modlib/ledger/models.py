@@ -29,8 +29,8 @@ from lino_cosi.lib.ledger.choicelists import TradeTypes
 
 JournalGroups.clear()
 add = JournalGroups.add_item
-add('10', _("Purchases"), 'purchases')
-add('20', _("Aids"), 'aids')
+add('10', _("Incoming invoices"), 'purchases')
+add('20', _("Payment instructions"), 'aids')
 add('40', _("Financial"), 'financial')
 
 
@@ -45,3 +45,6 @@ TradeTypes.aids.update(
     partner_account_field_label=_("Aids account"))
 
 
+from lino_cosi.lib.accounts.models import Account
+Account._meta.verbose_name = _("Budgetary article")
+Account._meta.verbose_name_plural = _("Budgetary articles")

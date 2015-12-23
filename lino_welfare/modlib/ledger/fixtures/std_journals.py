@@ -36,12 +36,11 @@ def objects():
     InvoicesByJournal = rt.modules.vatless.InvoicesByJournal
     ProjectInvoicesByJournal = rt.modules.vatless.ProjectInvoicesByJournal
     MatchRule = rt.modules.ledger.MatchRule
-    chart = rt.modules.accounts.AccountCharts.default
     a4400 = Account.objects.get(ref="4400")
     a4450 = Account.objects.get(ref="4450")
     a5800 = Account.objects.get(ref="5800")
 
-    kw = dict(chart=chart, journal_group=JournalGroups.purchases)
+    kw = dict(journal_group=JournalGroups.purchases)
     kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Purchase invoices")))
     yield ProjectInvoicesByJournal.create_journal(**kw)
@@ -57,10 +56,10 @@ def objects():
     yield jnl
     yield MatchRule(journal=jnl, account=a4400)
 
-    kw = dict(chart=chart, journal_group=JournalGroups.financial)
+    kw = dict(journal_group=JournalGroups.financial)
     if dd.is_installed('client_vouchers'):
         ClientVoucher = rt.modules.client_vouchers.ClientVoucher
-        kw = dict(chart=chart, journal_group=JournalGroups.aids)
+        kw = dict(journal_group=JournalGroups.aids)
         kw.update(trade_type='aids', ref="AIDS")
         kw.update(dd.str2kw('name', _("Aid allocations")))
         jnl = ClientVoucher.create_journal(**kw)

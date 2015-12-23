@@ -39,6 +39,10 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     verbose_name = _("Debts mediation")
 
+    ref_length = 20
+    """The `max_length` of the `Reference` field of an account.
+    """
+
     def setup_main_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('debts.Clients')
@@ -46,6 +50,10 @@ class Plugin(ad.Plugin):
 
     def setup_config_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)
+
+        m.add_action('debts.Groups')
+        m.add_action('debts.Accounts')
+
         mb = site.site_config.master_budget
         if mb is not None:
             """
