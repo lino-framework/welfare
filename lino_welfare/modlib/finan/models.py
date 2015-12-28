@@ -28,7 +28,7 @@ from lino.api import _
 
 class PaymentInstructionDetail(JournalEntryDetail):
     general = dd.Panel("""
-    date user narration total workflow_buttons
+    voucher_date user narration total workflow_buttons
     finan.ItemsByPaymentInstruction
     """, label=_("General"))
 
@@ -46,7 +46,7 @@ class ItemsByPaymentOrder(ItemsByPaymentOrder):
 
 
 class ItemsByPaymentInstruction(ItemsByPaymentOrder):
-    column_names = "seqno project partner account workflow_buttons match "\
+    column_names = "seqno account project partner bank_account workflow_buttons match "\
                    "amount remark *"
 
 

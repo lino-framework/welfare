@@ -68,7 +68,8 @@ def objects():
         kw.update(partner=RECIPIENTS.pop())
         # if i % 9 != 0:
         #     kw.update(project=CLIENTS.pop())
-        kw.update(date=dd.today(-5*i))
+        kw.update(entry_date=dd.today(-5*i))
+        kw.update(voucher_date=dd.today(-5*i-1))
         kw.update(due_date=dd.today(30-5*i))
         kw.update(user=ses.get_user())
         itemnum = ITEMNUMS.pop()
@@ -96,7 +97,8 @@ def objects():
     jnl = Journal.get_by_ref('AAW')
     for i in range(3):
         kw = dict()
-        kw.update(date=dd.today(-30*i))
+        kw.update(entry_date=dd.today(-30*i))
+        kw.update(voucher_date=dd.today(-30*i))
         kw.update(journal=jnl)
         kw.update(user=ses.get_user())
         for acc in ACCOUNTS:
@@ -112,8 +114,8 @@ def objects():
                     amount=AMOUNTS.pop(),
                     project=cli, partner=cli)
             # this is especially slow in a sqlite :memory: databae
-            dd.logger.info(
-                "20151211 Gonna register PaymentOrder %s %s %s",
-                dd.fds(obj.date), obj, obj.narration)
+            # dd.logger.info(
+            #     "20151211 Gonna register PaymentOrder %s %s %s",
+            #     dd.fds(obj.entry_date), obj, obj.narration)
             obj.register(ses)
             obj.save()

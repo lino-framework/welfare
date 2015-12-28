@@ -16,14 +16,16 @@ Ledger for Lino Welfare
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
-This document describes the functionalities for registering social
-aids expenses like client-related payments of social aid, including
-refunding or payment of certain costs.  This does not turn Lino
-Welfare into a complete accounting package, rather a subledger.  It
-was developed between May and September 2015 as ticket :ticket:`143`
-("Nebenbuchhaltung Sozialhilfeausgaben") and child tickets. The code
-examples contain German texts, which is for practical resaons to
-facilitate analysis.
+This document describes the functionalities for registering social aid
+expenses like client-related payments of monthly social aid and
+refunding of certain costs, including communication with the bank in
+both directions.  This will partly turn Lino Welfare into an
+accounting package (or at least a subledger).
+
+A first prototype was developed between May and December 2015 as
+ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben") and
+child tickets. The code examples contain German texts for practical
+reasons to facilitate analysis.
 
 .. contents::
    :depth: 1
@@ -228,15 +230,15 @@ There are two types of invoice: those with only one project (client)
 and those with more than one projects.
 
 More about voucher types in
-:class:`lino.modlib.ledger.choicelists.VoucherTypes`.
+:class:`lino_cosi.lib.ledger.choicelists.VoucherTypes`.
 
 Journals
 ========
 
-A **journal** is a sequence of numbered vouchers. All vouchers of a
-given journal are of same type, but there may be more than one journal
-per voucher type.  The demo database currently has the following
-journals defined:
+A :class:`Journal <lino_cosi.lib.edger.models.Journal>` is a sequence
+of numbered vouchers. All vouchers of a given journal are of same
+type, but there may be more than one journal per voucher type.  The
+demo database currently has the following journals defined:
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
 ========== ====================== ======================================================
@@ -454,7 +456,7 @@ Users can consult to movements of a given general account.
 
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
 ====================== =========== ====================== ============ ======== ======= ============
- Datum                  Beleg       Beschreibung           Debit        Kredit   Match   Befriedigt
+ Buchungsdatum          Beleg       Beschreibung           Debit        Kredit   Match   Befriedigt
 ---------------------- ----------- ---------------------- ------------ -------- ------- ------------
  22.05.14               *REG#1*     *AS Express Post*      10,00                         Nein
  16.02.14               *SREG#20*   *Leffin Electronics*   29,95                         Nein

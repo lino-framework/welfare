@@ -42,7 +42,7 @@ The following table gives an overview of these things.
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               14        26
+ accounts.Account               accounts.Accounts               15        26
  accounts.Group                 accounts.Groups                 7         6
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        179
@@ -117,11 +117,11 @@ The following table gives an overview of these things.
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
- finan.BankStatement            finan.BankStatements            11        0
+ finan.BankStatement            finan.BankStatements            12        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
- finan.JournalEntry             finan.FinancialVouchers         10        0
+ finan.JournalEntry             finan.FinancialVouchers         11        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             11        18
+ finan.PaymentOrder             finan.PaymentOrders             12        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           28        14
@@ -147,9 +147,9 @@ The following table gives an overview of these things.
  languages.Language             languages.Languages             6         5
  ledger.Journal                 ledger.Journals                 20        5
  ledger.MatchRule               ledger.MatchRules               3         4
- ledger.Movement                ledger.Movements                10        248
+ ledger.Movement                ledger.Movements                10        320
  ledger.PaymentTerm             ledger.PaymentTerms             9         7
- ledger.Voucher                 ledger.Vouchers                 8         48
+ ledger.Voucher                 ledger.Vouchers                 9         48
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
@@ -193,7 +193,7 @@ The following table gives an overview of these things.
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        12
- vatless.AccountInvoice         vatless.Invoices                18        30
+ vatless.AccountInvoice         vatless.Invoices                19        30
  vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======
 <BLANKLINE>

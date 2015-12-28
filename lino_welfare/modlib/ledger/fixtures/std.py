@@ -90,8 +90,9 @@ def objects():
     yield a4400
     settings.SITE.site_config.update(suppliers_account=a4400)
 
-    a4450 = account('4450', 'liabilities',
-                    _("Payment instructions to execute"), clearable=True)
+    a4450 = account(
+        '4450', 'liabilities', _("Payment instructions to execute"),
+        clearable=True, needs_partner=True)
     yield a4450
 
     # a4460 = account('4460', 'liabilities',

@@ -42,7 +42,7 @@ def objects():
 
     kw = dict(journal_group=JournalGroups.purchases)
     kw.update(trade_type='purchases', ref="REG")
-    kw.update(dd.str2kw('name', _("Purchase invoices")))
+    kw.update(dd.str2kw('name', _("Incoming invoices")))
     yield ProjectInvoicesByJournal.create_journal(**kw)
 
     kw.update(ref="SREG")
