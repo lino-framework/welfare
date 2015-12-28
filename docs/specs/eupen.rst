@@ -51,7 +51,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Rechnungseingänge : Einkaufsrechnungen (REG), Sammelrechnungen (SREG)
+  - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
   - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
@@ -336,13 +336,13 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
-- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
 - contacts.Companies.merge_row : merge_to, reason
-- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
+- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
-- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, payment_term, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, language
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
@@ -376,12 +376,12 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : date, balance1, balance2, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- finan.BankStatements.insert : date, user, balance1, balance2
-- finan.FinancialVouchers.detail : date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- finan.FinancialVouchers.insert : date, user, narration
-- finan.PaymentInstructions.detail : date, user, narration, total, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- finan.PaymentOrders.detail : date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.BankStatements.insert : voucher_date, balance1, balance2
+- finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.FinancialVouchers.insert : voucher_date, narration
+- finan.PaymentInstructions.detail : voucher_date, user, narration, total, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -450,11 +450,11 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail : id, date, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
-- vatless.Invoices.insert : journal, partner, date, amount
-- vatless.InvoicesByJournal.insert : partner, date, amount
-- vatless.ProjectInvoicesByJournal.detail : id, date, project, partner, bank_account, due_date, your_ref, user, workflow_buttons, amount, journal, year, number, match, state, narration, MovementsByVoucher
-- vatless.ProjectInvoicesByJournal.insert : project, partner, date, amount
+- vatless.Invoices.detail : id, voucher_date, user, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, entry_date, journal, year, number, match, state, MovementsByVoucher
+- vatless.Invoices.insert : journal, partner, voucher_date
+- vatless.InvoicesByJournal.insert : partner, voucher_date
+- vatless.ProjectInvoicesByJournal.detail : id, voucher_date, project, user, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, entry_date, journal, year, number, match, state, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.insert : project, partner, voucher_date
 <BLANKLINE>
 
 Windows and permissions

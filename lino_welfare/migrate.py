@@ -1240,8 +1240,9 @@ valid_until to end_date.
     def migrate_from_1_1_24(self, globals_dict):
         """
 - ignore ledger, finan, vatless and sepa
-- migrate Client.is_seeking to Client.seeking_since"""
+- migrate Client.is_seeking to Client.seeking_since
 - separate ledger accounts from debts accounts
+"""
         
         # no need to convert civil_state to new codification here (see
         # 20151013)

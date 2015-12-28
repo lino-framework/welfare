@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-23 16:57+0200\n"
-"PO-Revision-Date: 2015-12-23 16:57+0300\n"
+"PO-Revision-Date: 2015-12-25 04:52+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -2911,32 +2911,28 @@ msgid "Suppliers"
 msgstr "Lieferanten"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:94
-#, fuzzy
 msgid "Payment instructions to execute"
-msgstr "Schuldenverteilung"
+msgstr "Auszuführende Zahlungsanweisungen"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:102
-#, fuzzy
 msgid "Financial institutes"
-msgstr "Finanzielle Situation"
+msgstr "Finanzinstitute"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:106
 msgid "Cash"
-msgstr ""
+msgstr "Bargeld"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:108
-#, fuzzy
 msgid "Current transactions"
-msgstr "Organisationen"
+msgstr "Laufende Transaktionen"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:109
 msgid "Payment Orders"
 msgstr ""
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:116
-#, fuzzy
 msgid "Expenses"
-msgstr "Dispenzen"
+msgstr "Ausgaben"
 
 #: lino_welfare/modlib/ledger/fixtures/std.py:118
 msgid "Eingliederungseinkommen"
