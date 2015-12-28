@@ -1329,8 +1329,8 @@ valid_until to end_date.
             if name is not None: kw.update(bv2kw('name',name))
             kw.update(ref=ref)
             kw.update(account_type=account_type)
-            kw.update(entries_layout=entries_layout)
             if chart == 'debts':
+                kw.update(entries_layout=entries_layout)
                 return debts_Group(**kw)
             else:
                 return accounts_Group(**kw)
