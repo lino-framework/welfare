@@ -11,9 +11,8 @@ Households
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 The :mod:`lino_welfare.modlib.households` plugin is an extension of 
@@ -193,7 +192,7 @@ Since this is not very human-readable, we are going to analyze it with
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-DUBOIS Robin (179) ist ☐ Vorstand in Robin & Lisa Dubois-Lahm Haushalt erstellen : Ehepartner / Geschieden / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
+DUBOIS Robin (179) ist ☐ Vorstand in Robin & Lisa Dubois-Lahm Haushalt erstellen : Ehepaar / Geschiedenes Paar / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
 
 >>> links = soup.find_all('a')
 
@@ -226,7 +225,7 @@ javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 
 The third link is:
 
 >>> print(links[2].string)
-Ehepartner
+Ehepaar
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
@@ -234,7 +233,7 @@ javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
   "head": "DUBOIS Robin (179)", "headHidden": 179, 
   "typeHidden": 1, 
   "partner": null, "partnerHidden": null, 
-  "type": "Ehepartner" 
+  "type": "Ehepaar" 
 }, "param_values": { 
   "also_obsolete": false, "gender": null, "genderHidden": null 
 }, "base_params": {  } })

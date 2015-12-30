@@ -163,11 +163,23 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
     
         Pointer to :class:`ClientStates`.
 
-   
-
     .. attribute:: client_contact_type
     
         Pointer to :class:`PersonGroup`.
+
+    .. attribute:: needs_residence_permit
+
+    .. attribute:: unemployed_since
+
+       The date when this client got unemployed and stopped to have a
+       regular work.
+
+    .. attribute:: seeking_since
+
+       The date when this client registered as unemployed and started
+       to look for a new job.
+
+    .. attribute:: work_permit_suspended_until
 
     """
     class Meta:

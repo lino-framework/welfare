@@ -9,9 +9,8 @@ Reception
     $ python setup.py test -s tests.SpecsTests.test_reception
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     >>> translation.activate('fr')
     
@@ -150,7 +149,8 @@ It has 4 keys:
 >>> d.record_id
 127
 >>> d.base_params
-{u'mk': 127}
+{u'mt': 51, u'mk': 127}
+
 >>> d.field_values
 {u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
 

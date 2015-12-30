@@ -58,7 +58,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               9         0
+ accounts.Account               accounts.Accounts               11        0
  accounts.Group                 accounts.Groups                 7         0
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        90
@@ -239,7 +239,7 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.Accounts.detail : ref, name, name_nl, name_de, name_en, group, type
+- accounts.Accounts.detail : ref, group, type, id, name, name_nl, name_de, name_en, needs_partner, clearable
 - accounts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
 - accounts.Groups.detail : ref, name, name_nl, name_de, name_en, account_type, id
 - accounts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
