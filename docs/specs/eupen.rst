@@ -284,7 +284,7 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.Accounts.detail : ref, name, name_fr, name_en, group, type
+- accounts.Accounts.detail : ref, group, type, id, name, name_fr, name_en, needs_partner, clearable, MovementsByAccount
 - accounts.Accounts.insert : ref, group, type, name, name_fr, name_en
 - accounts.Groups.detail : ref, name, name_fr, name_en, account_type, id
 - accounts.Groups.insert : name, name_fr, name_en, account_type, ref
@@ -587,8 +587,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.Schedules.insert : visible for 110 410 admin
 - languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 admin
 - ledger.ActivityReport.show : visible for 500 admin
-- ledger.Journals.detail : visible for 500 admin
-- ledger.Journals.insert : visible for 500 admin
+- ledger.Journals.detail : visible for admin
+- ledger.Journals.insert : visible for admin
 - ledger.Situation.show : visible for 500 admin
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin
 - newcomers.Faculties.detail : visible for 110 410 admin

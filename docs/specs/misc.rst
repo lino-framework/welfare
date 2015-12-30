@@ -90,6 +90,8 @@ so, it will ask for user confirmation.
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner
 Contract #2 (u'Immersion training#2 (Daniel EMONTS)')
+
+>>> ses.set_confirm_answer(False)
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
@@ -102,6 +104,7 @@ Are you sure?
 Another thing is the location of the factory template. 
 
 >>> obj = excerpts.Excerpt.objects.get(pk=1)
+>>> ses.set_confirm_answer(False)
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
@@ -291,7 +294,7 @@ see it.
 - integ.CoachingEndingsByUser.duplicate : visible for 110 410 admin
 - isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - jobs.JobTypes.duplicate : visible for 110 410 admin
-- ledger.Journals.duplicate : visible for 500 admin
+- ledger.Journals.duplicate : visible for admin
 - newcomers.Competences.duplicate : visible for 110 410 admin
 - newcomers.CompetencesByFaculty.duplicate : visible for 110 410 admin
 - newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
