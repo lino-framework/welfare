@@ -109,8 +109,8 @@ class BeIdTests(RemoteAuthTestCase):
     
         links = soup.find_all('a')
         self.assertEqual(len(links), 6)
-        self.assertEqual(links[0].string, 'Married')
-        self.assertEqual(links[1].get_text(), 'Divorced')
+        self.assertEqual(links[0].string, 'Married couple')
+        self.assertEqual(links[1].get_text(), 'Divorced couple')
         js = links[0]['href']
 
         # javascript:Lino.contacts.Persons.create_household.run(\
