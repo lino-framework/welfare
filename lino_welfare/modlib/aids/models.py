@@ -644,16 +644,20 @@ class ConfirmationsByGranting(dd.VirtualTable):
 
     @dd.displayfield(_('Printed'))
     def printed(self, obj, ar):
-        return obj.printed(ar)
+        # We cannot simply say "return obj.printed" here because
+        # `printed` is a virtual field, and that would ignore the
+        # `ar`, but we need the `ar` if we want the displayed
+        # timestamp to be clickable.
+        return obj._meta.get_field('printed').value_from_object(obj, ar)
 
     @dd.displayfield(_("Description"))
     def description_column(self, obj, ar):
         return ar.obj2html(obj)
 
 
-##
-## SimpleConfirmation
-##
+#
+# SimpleConfirmation
+#
 
 
 class SimpleConfirmation(Confirmation):

@@ -15,9 +15,8 @@ This document describes the functionality implemented by the
     doctest initialization:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('rolf')
@@ -491,4 +490,21 @@ Neither start nor end:
 <BLANKLINE>
 <BLANKLINE>
  
+
+ConfirmationsByGranting
+=======================
+
+The detail of a Granting shows a list of the confirmations which have
+been issued for this granting.
+
+>>> obj = aids.Granting.objects.get(pk=mk)
+>>> rt.show(aids.ConfirmationsByGranting, obj)
+========================= ============================ ================ ================ ========= ============ ====
+ Description               Créé                         Auteur           Signataire       Imprimé   Période du   au
+------------------------- ---------------------------- ---------------- ---------------- --------- ------------ ----
+ *EiEi/09/10/2012/124/4*   2015-12-31 06:42:29.812390   Judith Jousten   Mélanie Mélard             09/10/2012
+========================= ============================ ================ ================ ========= ============ ====
+<BLANKLINE>
+
+The above was written to reproduce :ticket:`685`.
 
