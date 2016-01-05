@@ -289,10 +289,10 @@ be deregistered anymore.
     <span><b>Registriert</b> &#8594; [Entregistrieren]</span>
     
 
-Simple purchase invoices
+Simple incoming invoices
 ========================
 
-The demo database has two journals with **purchase invoices**,
+The demo database has two journals with **incoming invoices**,
 referenced as "REG" (for German *Rechnungseingang*) and SREG
 (*Sammelrechnungen*).
 
@@ -330,7 +330,7 @@ The REG journal contains the following invoices:
 <BLANKLINE>
 
 
-Collective purchase invoices
+Collective incoming invoices
 ============================
 
 >>> jnl = rt.modules.ledger.Journal.get_by_ref('SREG')
@@ -403,7 +403,7 @@ This invoice is registered, and ledger movements have been created:
 <BLANKLINE>
 
 
-Purchase invoices
+Incoming invoices
 =================
 
 It is possible to create new invoices from the detail view of a partner.
@@ -469,6 +469,66 @@ Our client has invoices from different partners:
  **Total (20 Zeilen)**                                                                                                              **4 277,53**   **493,29**                  **0**
 ======================= ========== =============================================================================================== ============== ============ ============== ============
 <BLANKLINE>
+
+
+Bank statements
+===============
+
+
+>>> jnl = rt.modules.ledger.Journal.get_by_ref('KBC')
+
+The KBC journal contains the following statements:
+
+>>> rt.show(jnl.voucher_type.table_class, jnl)
+====================== ===== ======== ============= =============== ============= ==================
+ Belegdatum             ID    number   Alter Saldo   Neuer Saldo     Zustand       Autor
+---------------------- ----- -------- ------------- --------------- ------------- ------------------
+ 29.04.14               132   1                      21 023,81       Registriert   Wilfried Willems
+ **Total (1 Zeilen)**         **1**                  **21 023,81**
+====================== ===== ======== ============= =============== ============= ==================
+<BLANKLINE>
+
+>>> obj = jnl.voucher_type.model.objects.get(number=1, journal=jnl)
+>>> rt.login('wilfried').show(rt.modules.finan.ItemsByBankStatement, obj)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+======================= ====================== ========================================== ========== =========== =============== ========= =============== ==========
+ date                    Partner                Haushaltsartikel                           Match      Bemerkung   Eingang         Ausgabe   Arbeitsablauf   Seq.-Nr.
+----------------------- ---------------------- ------------------------------------------ ---------- ----------- --------------- --------- --------------- ----------
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#37:1               544,91                                    1
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#37:2               800,08                                    2
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#37:3               648,91                                    3
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#37:4               817,36                                    4
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#37:5               544,91                                    5
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#38:1               800,08                                    6
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#38:2               648,91                                    7
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#38:3               817,36                                    8
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#38:4               544,91                                    9
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#38:5               800,08                                    10
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#39:1               648,91                                    11
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#39:2               817,36                                    12
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#39:3               544,91                                    13
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#39:4               800,08                                    14
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#39:5               648,91                                    15
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#40:1               817,36                                    16
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#40:2               544,91                                    17
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#40:3               800,08                                    18
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#40:4               648,91                                    19
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#40:5               817,36                                    20
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#41:1               544,91                                    21
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#41:2               800,08                                    22
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#41:3               648,91                                    23
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#41:4               817,36                                    24
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#41:5               544,91                                    25
+                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#42:1               800,08                                    26
+                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#42:2               648,91                                    27
+                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#42:3               817,36                                    28
+                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#42:4               544,91                                    29
+                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#42:5               800,08                                    30
+ **Total (30 Zeilen)**                                                                                            **21 023,81**                             **465**
+======================= ====================== ========================================== ========== =========== =============== ========= =============== ==========
+<BLANKLINE>
+
+
 
 
 Movements
@@ -549,4 +609,25 @@ TODO in above report:
 - Hide "Actions" column in printed version.
 - :ticket:`666` (Report title not shown, Report title must contain the date, ...)
 
+
+.. _welfare.specs.r20160105:
+
+
+Some choices requests
+=====================
+
+>>> ContentType = rt.modules.contenttypes.ContentType
+>>> InvoiceItem = rt.modules.vatless.InvoiceItem
+>>> BankStatement = rt.modules.finan.BankStatement
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> mt = ContentType.objects.get_for_model(InvoiceItem).pk
+>>> demo_get(
+...    'wilfried', 'choices/vatless/ItemsByProjectInvoice/account',
+...    fields, 19, mt=mt, mk=1, **kw)
+
+>>> mt = ContentType.objects.get_for_model(BankStatement).pk
+>>> demo_get(
+...    'wilfried', 'choices/finan/ItemsByBankStatement/match',
+...    fields, 81, mt=mt, mk=132, **kw)
 
