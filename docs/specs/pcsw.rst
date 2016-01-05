@@ -164,3 +164,20 @@ href="javascript:Lino.contacts.Partners.del_client(null,178,{
 })...">&#10060;</a>]
 
 
+Virtual fields on client
+========================
+
+The following snippet just tests some virtual fields on Client for
+runtime errors.
+
+>>> vfields = ('primary_coach', 'coaches', 'active_contract', 'contract_company',
+...     'find_appointment', 'cbss_relations', 'applies_from', 'applies_until')
+>>> counters = dict()
+>>> for k in vfields:
+...     counters[k] = set()
+>>> for cli in pcsw.Client.objects.all():
+...     for k in vfields:
+...         counters[k].add(getattr(cli, k))
+
+>>> [len(counters[k]) for k in vfields]
+[5, 21, 18, 4, 1, 1, 18, 18]

@@ -528,6 +528,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
                     # txt += '\n'
                     # txt += unicode(c.company)
                     txt = (txt, E.br(), c.company.name)
+            if ar is None:
+                return txt
             return ar.obj2html(c, txt)
 
     @dd.displayfield(_("Coaches"))
