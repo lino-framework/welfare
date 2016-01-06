@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2015 Luc Saffre
+# Copyright 2009-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -110,5 +110,6 @@ add('300', _("Debts consultant"),              DebtsUser)
 add('400', _("Social agent"),                  SocialAgent)
 add('410', _("Social agent (Manager)"),        SocialStaff)
 add('500', _("Accountant"),                    LedgerUser)
+add('510', _("Accountant (Manager)"),          LedgerStaff)
 add('800', _("Supervisor"),                    Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')

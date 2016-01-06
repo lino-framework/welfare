@@ -260,8 +260,11 @@ dd.inject_action(
 
 
 def get_household_summary(person, today=None, adult_age=None):
-    """
+    """Return a string which expresses the household composition in a few
+    words. See :ref:`welfare.specs.households` for some examples.
+
     Note that members without `birth_date` are considered as children.
+
     """
     if adult_age is None:
         adult_age = dd.plugins.households.adult_age
@@ -273,7 +276,7 @@ def get_household_summary(person, today=None, adult_age=None):
     adults = children = 0
     for m in ar:
         if m.birth_date is not None and (
-                m.birth_date.get_age(today) >= adult_age):
+                m.get_age(today) >= adult_age):
             adults += 1
         else:
             children += 1
