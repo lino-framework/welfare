@@ -1,3 +1,4 @@
+.. _welfare.specs.households:
 .. _welfare.tested.households:
 
 ==========
@@ -247,3 +248,22 @@ The :func:`lino.api.doctest.get_json_soup` automates this trick:
 8
 
 
+The household summary
+=====================
+
+The utility function `get_household_summary
+<lino_welfare.modlib.households.models.get_household_summary>`_ is
+used for printing certain aid confirmations. Some examples:
+
+>>> for cli in pcsw.Client.objects.all():
+...     s = households.get_household_summary(cli)
+...     if not s.endswith("ist in keinem Haushalt"):
+...         print unicode(cli), ':', s
+BRAUN Bruno (259) : BRAUN Bruno (259) ist in mehreren Haushalten zugleich
+DENON Denis (180*) : 1 Erwachsener und 1 Kind
+DUBOIS Robin (179) : 2 Erwachsene
+FRISCH Paul (240) : 2 Erwachsene und 3 Kinder
+JEANÉMART Jérôme (181) : 2 Erwachsene
+KASENNOVA Tatjana (213) : 1 Erwachsener und 1 Kind
+LAHM Lisa (176) : 2 Erwachsene
+VANDENMEULENBOS Marie-Louise (174) : 2 Erwachsene
