@@ -498,12 +498,12 @@ The detail of a Granting shows a list of the confirmations which have
 been issued for this granting.
 
 >>> obj = aids.Granting.objects.get(pk=mk)
->>> rt.show(aids.ConfirmationsByGranting, obj)
-========================= ============================ ================ ================ ========= ============ ====
- Description               Créé                         Auteur           Signataire       Imprimé   Période du   au
-------------------------- ---------------------------- ---------------- ---------------- --------- ------------ ----
- *EiEi/09/10/2012/124/4*   2015-12-31 06:42:29.812390   Judith Jousten   Mélanie Mélard             09/10/2012
-========================= ============================ ================ ================ ========= ============ ====
+>>> rt.show(aids.ConfirmationsByGranting, obj, column_names=" description_column user signer printed")
+========================= ================ ================ =========
+ Description               Auteur           Signataire       Imprimé
+------------------------- ---------------- ---------------- ---------
+ *EiEi/09/10/2012/124/4*   Judith Jousten   Mélanie Mélard
+========================= ================ ================ =========
 <BLANKLINE>
 
 The above was written to reproduce :ticket:`685`.
