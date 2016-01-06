@@ -211,6 +211,7 @@ We use the user profiles defined in
  400                 Agent social
  410                 Agent social (Chef de service)
  500                 Comptable
+ 510                 Accountant (Manager)
  800                 Supervisor
  900     admin       Administrateur
 ======= =========== ============================================

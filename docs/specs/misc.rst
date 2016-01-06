@@ -294,7 +294,7 @@ see it.
 - integ.CoachingEndingsByUser.duplicate : visible for 110 410 admin
 - isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - jobs.JobTypes.duplicate : visible for 110 410 admin
-- ledger.Journals.duplicate : visible for admin
+- ledger.Journals.duplicate : visible for 510 admin
 - newcomers.Competences.duplicate : visible for 110 410 admin
 - newcomers.CompetencesByFaculty.duplicate : visible for 110 410 admin
 - newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 800 admin

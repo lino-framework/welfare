@@ -558,12 +558,12 @@ Each window layout is **viewable** by a given set of user profiles.
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- finan.BankStatements.detail : visible for 500 admin
-- finan.BankStatements.insert : visible for 500 admin
-- finan.FinancialVouchers.detail : visible for 500 admin
-- finan.FinancialVouchers.insert : visible for 500 admin
-- finan.PaymentInstructions.detail : visible for 500 admin
-- finan.PaymentOrders.detail : visible for 500 admin
+- finan.BankStatements.detail : visible for 500 510 admin
+- finan.BankStatements.insert : visible for 500 510 admin
+- finan.FinancialVouchers.detail : visible for 500 510 admin
+- finan.FinancialVouchers.insert : visible for 500 510 admin
+- finan.PaymentInstructions.detail : visible for 500 510 admin
+- finan.PaymentOrders.detail : visible for 500 510 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
@@ -586,10 +586,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.Offers.insert : visible for 100 110 120 admin
 - jobs.Schedules.insert : visible for 110 410 admin
 - languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 admin
-- ledger.ActivityReport.show : visible for 500 admin
-- ledger.Journals.detail : visible for admin
-- ledger.Journals.insert : visible for admin
-- ledger.Situation.show : visible for 500 admin
+- ledger.ActivityReport.show : visible for 500 510 admin
+- ledger.Journals.detail : visible for 510 admin
+- ledger.Journals.insert : visible for 510 admin
+- ledger.Situation.show : visible for 500 510 admin
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin
 - newcomers.Faculties.detail : visible for 110 410 admin
 - newcomers.Faculties.insert : visible for 110 410 admin
@@ -632,11 +632,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - users.Users.change_password : visible for admin
 - users.Users.detail : visible for admin
 - users.Users.insert : visible for admin
-- vatless.Invoices.detail : visible for 500 admin
-- vatless.Invoices.insert : visible for 500 admin
-- vatless.InvoicesByJournal.insert : visible for 500 admin
-- vatless.ProjectInvoicesByJournal.detail : visible for 500 admin
-- vatless.ProjectInvoicesByJournal.insert : visible for 500 admin
+- vatless.Invoices.detail : visible for 500 510 admin
+- vatless.Invoices.insert : visible for 500 510 admin
+- vatless.InvoicesByJournal.insert : visible for 500 510 admin
+- vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin
+- vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin
 <BLANKLINE>
 
 

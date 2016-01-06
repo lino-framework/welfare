@@ -11,19 +11,19 @@ Reception clerk sees "Career" tab
     doctest init:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
+    >>> from lino.utils.jsgen import with_user_profile
 
 This document helped us to understand and solve ticket :ticket:`340`
 (discovered :blogref:`20150714`).
 
 The problem: A reception clerk in Eupen
 (:mod:`lino_welfare.projects.eupen`) should not see the career tab of
-a client because the :attr:`required_roles
+a client, because the :attr:`required_roles
 <lino.core.permissions.Permittable.required_roles>` of that panel
 include :class:`IntegrationAgent
 <lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they saw it
@@ -36,6 +36,15 @@ A reception clerk is not an integration agent:
 >>> from lino_welfare.modlib.welfare.roles import *
 >>> isinstance(ReceptionClerk, IntegrationAgent)
 False
+
+>>> ia_profile = users.UserProfiles.get_by_value('100')
+>>> print(ia_profile)
+Integration agent
+
+>>> rc_profile = users.UserProfiles.get_by_value('210')
+>>> print(rc_profile)
+Reception clerk
+
 
 We are talking about the detail layout of a client, defined by
 :class:`lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail`:
@@ -53,7 +62,8 @@ LayoutHandle for ClientDetail on pcsw.Clients
 Let's get the `career` panel. It is a
 :class:`lino.modlib.extjs.elems.Panel`:
 
->>> career_panel = lh.main.find_by_name('career')
+>>> # career_panel = lh.main.find_by_name('career')
+>>> career_panel = with_user_profile(ia_profile, lh.main.find_by_name, 'career')
 >>> career_panel
 <Panel career in ClientDetail on pcsw.Clients>
 >>> career_panel.__class__
