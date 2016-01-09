@@ -54,15 +54,15 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - (general2_5): **Zivilstand** (civil_state), **Geburtsland** (birth_country), **Geburtsort** (birth_place)
         - (general3): **Sprache** (language), **E-Mail** (email), **Telefon** (phone), **Fax** (fax), **GSM** (gsm)
         - **None** (image)
-      - (general_2) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
+      - (general_2) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]:
         - **Termine** (reception.AppointmentsByPartner)
         - **Termin machen mit** (AgentsByClient)
     - **Beziehungen** (contact):
       - (contact_1): **Ähnliche Klienten** (SimilarClients), **Beziehungen** (LinksByHuman), **ZDSS** (cbss_relations)
       - (contact_2):
         - **Mitgliedschaft in Haushalten** (MembersByPerson)
-        - **Haushaltszusammensetzung** (households.SiblingsByPerson) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
-    - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
+        - **Haushaltszusammensetzung** (households.SiblingsByPerson) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]
+    - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]:
       - (coaching_1) [visible for 110 120 200 220 300 800 admin]:
         - (newcomers_left):
           - (newcomers_left_1) [visible for all]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
@@ -82,8 +82,8 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
-      - **Bankkonten** (sepa.AccountsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
-      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+      - **Bankkonten** (sepa.AccountsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]
+      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for 100 110 120 200 300 400 410 admin]:
         - **Dispenzen** (pcsw.DispensesByClient)
@@ -113,9 +113,9 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
     - **Historie** (history):
-      - **Ereignisse/Notizen** (notes.NotesByProject) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]
+      - **Ereignisse/Notizen** (notes.NotesByProject) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]
       - **Bestehende Auszüge** (ExcerptsByProject)
-    - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 admin]:
+    - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin]:
       - **Termine** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
     - **Bewegungen** (MovementsByProject) [visible for 500 510 admin]
@@ -124,7 +124,7 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - (misc_2) [visible for all]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
       - (misc_3) [visible for all]: **Erstellt** (created), **Bearbeitet** (modified)
       - (misc_4) [visible for all]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
-      - (misc_5) [visible for 100 110 120 200 210 220 300 400 410 500 800 admin]:
+      - (misc_5) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
     - **ZDSS** (cbss) [visible for 100 110 120 200 300 400 410 admin]:

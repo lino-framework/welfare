@@ -413,7 +413,7 @@ Each window layout is **viewable** by a given set of user profiles.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - accounts.Accounts.detail : visible for admin
 - accounts.Accounts.insert : visible for admin
 - accounts.Groups.detail : visible for admin
@@ -421,18 +421,18 @@ Each window layout is **viewable** by a given set of user profiles.
 - active_job_search.Proofs.insert : visible for 110 admin
 - addresses.Addresses.detail : visible for admin
 - addresses.Addresses.insert : visible for admin
-- aids.AidTypes.detail : visible for 110 210 220 410 500 800 admin
-- aids.AidTypes.insert : visible for 110 210 220 410 500 800 admin
-- aids.Categories.insert : visible for 110 210 220 410 500 800 admin
-- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- aids.AidTypes.detail : visible for 110 210 220 410 500 510 800 admin
+- aids.AidTypes.insert : visible for 110 210 220 410 500 510 800 admin
+- aids.Categories.insert : visible for 110 210 220 410 500 510 800 admin
+- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - art61.ContractTypes.insert : visible for 110 admin
 - art61.Contracts.detail : visible for 100 110 120 admin
 - art61.Contracts.insert : visible for 100 110 120 admin
@@ -444,7 +444,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.EventTypes.insert : visible for 110 410 admin
 - cal.Events.detail : visible for 110 410 admin
 - cal.Events.insert : visible for 110 410 admin
-- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 admin
+- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin
 - cal.GuestRoles.insert : visible for admin
 - cal.GuestStates.wf1 : visible for admin
 - cal.GuestStates.wf2 : visible for admin
@@ -456,7 +456,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Rooms.insert : visible for 110 410 admin
 - cal.Tasks.detail : visible for 110 410 admin
 - cal.Tasks.insert : visible for 110 410 admin
-- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 admin
+- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
