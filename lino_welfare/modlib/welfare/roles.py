@@ -18,8 +18,7 @@
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
-Local administrators may define their own module, similar to this, and
-have :attr:`lino.core.site.Site.user_profiles_module` point to it.
+See :ref:`welfare.specs.users`
 
 """
 
