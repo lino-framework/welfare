@@ -16,7 +16,8 @@ Users
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from lino.api.doctest import *
 
-A technical tour into the :mod:`lino.modlib.users` plugin.
+This document describes how Lino Welfare uses the
+:mod:`lino.modlib.users` plugin.
 
 .. contents::
    :depth: 2
@@ -24,7 +25,9 @@ A technical tour into the :mod:`lino.modlib.users` plugin.
 User profiles
 =============
 
-This is the list of user profiles:
+The default set of user profiles for Lino Welfare is defined in
+:mod:`lino_welfare.modlib.welfare.roles` and leads to the following
+list of profiles:
 
 >>> rt.show(users.UserProfiles)
 ======= =========== ===============================
@@ -49,10 +52,14 @@ This is the list of user profiles:
 
 
 
-The default set of user roles for Lino Welfare is defined in
-:mod:`lino_welfare.modlib.welfare.roles`, but this module is only the
-tip of the iceberg.  Lino defines a *lot* of user roles.  For example,
-the following diagram visualizes the genealogy of a reception clerk:
+Note that local administrators may define their own module, similar to
+this, and have :attr:`lino.core.site.Site.user_profiles_module` point
+to it.
+
+The user profiles are only the tip of the iceberg.  A user profile is
+an arbitrary choice of user roles made available for a given
+application.  Lino defines a lot of user roles.  For example, the
+following diagram visualizes the genealogy of a reception clerk:
 
 .. inheritance-diagram:: lino_welfare.modlib.welfare.roles.ReceptionClerk
 

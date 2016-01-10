@@ -18,8 +18,7 @@
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
-Local administrators may define their own module, similar to this, and
-have :attr:`lino.core.site.Site.user_profiles_module` point to it.
+See :ref:`welfare.specs.users`
 
 """
 
@@ -87,6 +86,13 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
 class LedgerUser(LedgerUser, OfficeUser, AidsStaff, SepaStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
+
+    """
+    pass
+
+
+class LedgerStaff(LedgerStaff, OfficeUser, AidsStaff, SepaStaff):
+    """Like an **accountant**, but also has access to configuration.
 
     """
     pass

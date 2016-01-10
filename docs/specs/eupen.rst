@@ -465,31 +465,31 @@ Each window layout is **viewable** by a given set of user profiles.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - accounts.Accounts.detail : visible for admin
 - accounts.Accounts.insert : visible for admin
 - accounts.Groups.detail : visible for admin
 - accounts.Groups.insert : visible for admin
 - addresses.Addresses.detail : visible for admin
 - addresses.Addresses.insert : visible for admin
-- aids.AidTypes.detail : visible for 110 210 220 410 500 800 admin
-- aids.AidTypes.insert : visible for 110 210 220 410 500 800 admin
-- aids.Categories.insert : visible for 110 210 220 410 500 800 admin
-- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- aids.AidTypes.detail : visible for 110 210 220 410 500 510 800 admin
+- aids.AidTypes.insert : visible for 110 210 220 410 500 510 800 admin
+- aids.Categories.insert : visible for 110 210 220 410 500 510 800 admin
+- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - art61.ContractTypes.insert : visible for 110 admin
 - art61.Contracts.detail : visible for 100 110 120 admin
 - art61.Contracts.insert : visible for 100 110 120 admin
-- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - boards.Boards.detail : visible for admin
 - boards.Boards.insert : visible for admin
 - cal.Calendars.detail : visible for 110 410 admin
@@ -498,7 +498,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.EventTypes.insert : visible for 110 410 admin
 - cal.Events.detail : visible for 110 410 admin
 - cal.Events.insert : visible for 110 410 admin
-- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 admin
+- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin
 - cal.GuestRoles.insert : visible for admin
 - cal.GuestStates.wf1 : visible for admin
 - cal.GuestStates.wf2 : visible for admin
@@ -510,7 +510,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Rooms.insert : visible for 110 410 admin
 - cal.Tasks.detail : visible for 110 410 admin
 - cal.Tasks.insert : visible for 110 410 admin
-- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 admin
+- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
@@ -518,16 +518,16 @@ Each window layout is **viewable** by a given set of user profiles.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
 - changes.Changes.detail : visible for admin
-- contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - contacts.Companies.merge_row : visible for 110 210 220 410 800 admin
-- contacts.Partners.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- contacts.Partners.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- countries.Countries.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- countries.Countries.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- contacts.Partners.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- contacts.Partners.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- countries.Countries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- countries.Countries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - countries.Places.insert : visible for 110 210 220 410 800 admin
 - countries.Places.merge_row : visible for 110 210 220 410 800 admin
 - courses.CourseContents.insert : visible for 110 admin
@@ -547,8 +547,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Studies.insert : visible for 110 admin
 - cv.StudyTypes.detail : visible for 110 admin
 - cv.StudyTypes.insert : visible for 110 admin
-- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - debts.Accounts.detail : visible for admin
 - debts.Accounts.insert : visible for admin
 - debts.Budgets.detail : visible for admin
@@ -557,7 +557,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - debts.Groups.insert : visible for admin
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
-- excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.BankStatements.detail : visible for 500 510 admin
 - finan.BankStatements.insert : visible for 500 510 admin
 - finan.FinancialVouchers.detail : visible for 500 510 admin
@@ -565,8 +565,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - finan.PaymentInstructions.detail : visible for 500 510 admin
 - finan.PaymentOrders.detail : visible for 500 510 admin
 - gfks.ContentTypes.insert : visible for admin
-- households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.Types.insert : visible for 110 210 220 410 800 admin
 - humanlinks.Links.insert : visible for 110 210 220 410 800 admin
 - integ.ActivityReport.show : visible for 100 110 120 admin
@@ -585,7 +585,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.JobsOverview.show : visible for 100 110 120 admin
 - jobs.Offers.insert : visible for 100 110 120 admin
 - jobs.Schedules.insert : visible for 110 410 admin
-- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 admin
+- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 510 admin
 - ledger.ActivityReport.show : visible for 500 510 admin
 - ledger.Journals.detail : visible for 510 admin
 - ledger.Journals.insert : visible for 510 admin
@@ -596,28 +596,28 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.EventTypes.insert : visible for 110 410 admin
 - notes.NoteTypes.detail : visible for 110 410 admin
 - notes.NoteTypes.insert : visible for 110 410 admin
-- notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin
 - pcsw.ClientStates.wf1 : visible for 200 300 admin
-- pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin
 - pcsw.CoachingEndings.insert : visible for 110 410 admin
 - pcsw.Coachings.create_visit : visible for 110 410 admin
 - plausibility.Checkers.detail : visible for admin
-- plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - properties.PropGroups.insert : visible for admin
 - properties.PropTypes.insert : visible for admin
 - properties.Properties.insert : visible for admin
-- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 admin
-- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin
+- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - system.SiteConfigs.detail : visible for admin
 - tinymce.TextFieldTemplates.detail : visible for admin
 - tinymce.TextFieldTemplates.insert : visible for admin
@@ -625,10 +625,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.AllUploads.insert : visible for 110 410 admin
 - uploads.UploadTypes.detail : visible for 110 410 admin
 - uploads.UploadTypes.insert : visible for 110 410 admin
-- uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
-- uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 800 admin
+- uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - users.Users.change_password : visible for admin
 - users.Users.detail : visible for admin
 - users.Users.insert : visible for admin

@@ -44,6 +44,7 @@ users.UserProfiles:300 Schuldenberater
 users.UserProfiles:400 Sozi
 users.UserProfiles:410 Sozi (Manager)
 users.UserProfiles:500 Buchhalter
+users.UserProfiles:510 Accountant (Manager)
 users.UserProfiles.admin:900 Verwalter
 
 
