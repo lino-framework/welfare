@@ -17,13 +17,9 @@ Ticket :ticket:`584` is to write a first prototype.
     doctest initialization:
 
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
-
-    >>> ses = rt.login('rolf')
-    >>> translation.activate('de')
 
 .. contents::
    :local:
@@ -37,8 +33,7 @@ There will be one central database object model (:class:`Dossier
 <lino_welfare.modlib.fse.models.Dossier>`). Every *dossier* represents
 a document to be printed as "Fiche stagiaire".  
 
-List of the data
-fields per *dossier*:
+List of the data fields per *dossier*:
 
 - `client` : a pointer to the :class:`Client
   <lino_welfare.modlib.pcsw.models.Client>`
@@ -49,30 +44,29 @@ fields per *dossier*:
 - Situation professionnelle à l’entrée: Bénéficiaire CPAS (ce sera
   uniquement cette appellation)
 
-- Inoccupé(e) depuis : date field filled from « Cherche du travail
-  depuis » date FSE (onglet RAE))
+- Inoccupé(e) depuis : date field filled from «Cherche du travail
+  depuis» date FSE (onglet RAE))
 
 - Ménage: combo box ("ménage sans emploi", "ménage dont au moins 1
   personne occupe un emploi")
   
 - Enfant(s) à charge: checkbox
 
-- Niveau diplôme : combobox (Sans diplôme - CEB - CE1D - CESI -
+- Niveau diplôme: combobox (Sans diplôme - CEB - CE1D - CESI -
   CESS-CQ6-CE6P-7P - Bachelier-graduat - Master-licence - 
   Enseignement secondaire complémentaire - Non reconnu – inconnu)
 
 - Handicap reconnu: checkbox
 
-- Autre difficulté rencontrée :	checkbox
+- Autre difficulté rencontrée:	checkbox
 
-- Date d’entrée : reprendre date de l’atelier « Séance d’information » 
-- Contrat de travail sous art. 60 depuis le : date field filled from `jobs.Contract`
-- Date de sortie : Onglet intervenant – module intervention date « au »  
-- Type de sortie : Onglet intervenants – Module intervention - « Cause d’abandon »
+- Date d’entrée: reprendre date de l’atelier « Séance d’information » 
+- Contrat de travail sous art. 60 depuis le: date field filled from `jobs.Contract`
+- Date de sortie: Onglet intervenant – module intervention date « au »  
+- Type de sortie: Onglet intervenants – Module intervention - « Cause d’abandon »
 
 - Acquis en fin de formation : filled from Onglet Compétence – Module
   compétences professionnelles - case « Preuve de qualification »
-
 
 - Attestation de participation: combobox (Epreuve d’évaluation réussie
   sans titre spécifique - Certificat sectoriel - Titre de validation
@@ -131,8 +125,6 @@ Notes de discussion
 - Bouton "Remplir les données"
 - la fiche est un document à usage interne utilisé par Sandra pour
   encoder les données dans un fichier Excel protégé issu par 
-- topic "Insertion " si la personne arrive en retard, tant pis pour la
-  statistique, elle aura les heures de présence de l'évènement.
 - Colonne "Mise en situation professionnelle" : calculer les heures
   par stage d'immersion, en fonction des dates de début et de fin et
   de l'horaire de travail.
@@ -140,7 +132,9 @@ Notes de discussion
   "Cyber-emploi", mais pour ces ateliers on note les heures d'arrivée
   et de départ par participation.
 - Il y a deux modes d'encodage de présences des ateliers: soit avec
-  soit sans les heures de d'arrivée de départ individuelles.
+  soit sans les heures de d'arrivée de départ individuelles.  Par
+  exemple en Insertion si la personne arrive en retard, elle aura les
+  heures de présence de l'évènement. tant pis pour la statistique.
 - Colonne "Mise à l'emploi sous contrat a60" : comme pour 
   "Mise en situation professionnelle"
 

@@ -38,11 +38,12 @@ from django.utils.translation import string_concat
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
+from lino.utils import join_elems
+from lino.utils.xmlgen.html import E
 
 from lino.api import dd, rt
 from lino.core.utils import get_field
 
-from lino.utils.xmlgen.html import E
 from lino.modlib.cal.utils import update_reminder
 from lino.modlib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
@@ -336,18 +337,15 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         if ar is None:
             return []
         elems = super(Client, self).get_overview_elems(ar)
-        elems.append(E.br())
+        # elems.append(E.br())
         elems.append(ar.get_data_value(self, 'eid_info'))
+        notes = []
         for note in rt.modules.notes.Note.objects.filter(
                 project=self, important=True):
-            elems += [
-                E.br(), E.b(ar.obj2html(note, note.subject),
-                            class_="lino-info-red")]
-            
-        # elems += [
-        #     E.br(), ar.instance_action_button(self.create_excerpt)]
-
-        # elems = [E.div(*elems)]
+            notes.append(E.b(ar.obj2html(note, note.subject)))
+        if len(notes):
+            notes = join_elems(notes, " / ")
+            elems += E.p(*notes, class_="lino-info-red")
         return elems
 
     def before_state_change(obj, ar, oldstate, newstate):
