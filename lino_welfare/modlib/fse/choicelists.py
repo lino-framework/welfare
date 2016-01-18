@@ -31,3 +31,19 @@ add = ParticipationCertificates.add_item
 add('10', _("Epreuve d’évaluation réussie sans titre spécifique"))
 
 
+class DossierColumns(dd.ChoiceList):
+    verbose_name = _("Dossier column")
+    verbose_name_plural = _("Dossier columns")
+add = DossierColumns.add_item
+add('10', _("Informative sessions"))
+add('20', _("Individual consultation"))
+add('21', _("Evaluation session"))
+add('30', _("Certified SIS"))
+add('40', _("Level test"))
+add('41', _("ICT"))
+add('42', _("Mobility"))
+add('43', _("Math and French"))
+
+
+
+
