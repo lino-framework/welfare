@@ -23,17 +23,17 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 from django.db import models
-from django.db.utils import OperationalError
 from django.conf import settings
 
 from lino.api import rt, dd, _
 from lino import mixins
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino.modlib.excerpts.mixins import Certifiable
 from .choicelists import ParticipationCertificates, DossierColumns
 
 
-class Dossier(mixins.DatePeriod):
+class Dossier(mixins.DatePeriod, Certifiable):
 
     class Meta:
         verbose_name = _("FSE Dossier")
@@ -61,6 +61,7 @@ class Dossiers(dd.Table):
     HoursByDossier
     """
     insert_layout = """
+    client
     education_level result
     remark
     """
@@ -75,6 +76,10 @@ class DossiersByClient(Dossiers):
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = "start_date end_date remark *"
+    insert_layout = """
+    education_level result
+    remark
+    """
 
 
 class HoursByDossier(dd.VirtualTable):
