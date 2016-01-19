@@ -8,3 +8,4 @@ class Site(Site):
     ignore_dates_after = datetime.date(2019, 05, 22)
 
 SITE = Site(globals())
+DEBUG = True

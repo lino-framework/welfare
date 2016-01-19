@@ -40,6 +40,13 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 
 
+class LedgerStaff(LedgerStaff, OfficeUser, AidsStaff, SepaStaff):
+    """Like an **accountant**, but also has access to configuration.
+
+    """
+    pass
+
+
 class SiteAdmin(
         SiteAdmin,
         IntegrationStaff,
@@ -90,12 +97,6 @@ class LedgerUser(LedgerUser, OfficeUser, AidsStaff, SepaStaff):
     """
     pass
 
-
-class LedgerStaff(LedgerStaff, OfficeUser, AidsStaff, SepaStaff):
-    """Like an **accountant**, but also has access to configuration.
-
-    """
-    pass
 
 from lino.modlib.users.choicelists import UserProfiles
 from lino.api import _
