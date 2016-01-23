@@ -78,9 +78,12 @@ List of the data fields per *dossier*:
 HoursByDossier
 ==============
 
-And then a virtual table which summarizes the total duration of
-presences (:class:`Guest <lino.modlib.cal.models.Guest>` objects) of
-that client into the following columns:
+And then the module provides a way for defining a series of
+"statistical numbers" which represent the activity of that client
+during a given period.
+
+For most fields this is the total duration of presences (:class:`Guest
+<lino.modlib.cal.models.Guest>` objects) of that client.
 
 - Information : Séance d’info. (2h FSE)
 
@@ -108,9 +111,15 @@ that client into the following columns:
 - Mise à l’emploi sous contrat art.60§7 (Sélection des années – case Heure)
 
 This distribution will probably require a choicelist with one choice
-for each column. Most columns must automatically get generated from
-database content (one entry per `courses.Line` as it seems), but some
-columns are special and require a hard-coded method.
+for each field. 
+
+These fields will probably not be columns of a slave table but
+(dynamicaly generated) database fields in the Dossier model.
+
+There will also be a pointer to 
+(one entry per `courses.Line` as it seems), but some columns are
+special and require a hard-coded method.
+
 
 
 Notes de discussion

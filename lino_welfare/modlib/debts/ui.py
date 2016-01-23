@@ -678,8 +678,8 @@ proportionally distributing the `Distributable amount` among the debtors.
 
         entries = []
         for e in qs.annotate(models.Sum('amount')):
-            #~ assert e.periods is None
-            total += e.amount__sum
+            if e.amount__sum:
+                total += e.amount__sum
             entries.append(e)
 
         for e in entries:
