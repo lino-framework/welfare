@@ -41,6 +41,8 @@ class ClientSummary(Certifiable, Summary):
         verbose_name = _("FSE Summary")
         verbose_name_plural = _("FSE Summaries")
 
+    summary_period = 'yearly'
+
     master = dd.ForeignKey('pcsw.Client')
     education_level = dd.ForeignKey('cv.EducationLevel', blank=True, null=True)
     children_at_charge = models.BooleanField(
@@ -109,12 +111,18 @@ class SummariesByClient(Summaries):
     """Lists the FSE summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
-    column_names = "year month results *"
     insert_layout = """
     education_level result
     remark
     """
 
+    @classmethod
+    def setup_columns(cls):
+        cls.column_names = "year"
+        for sf in StatisticalFields.items():
+            if sf.field_name is not None:
+                cls.column_names += ' ' + sf.field_name
+        
 
 dd.inject_field(
     'pcsw.Client', 'has_fse', models.BooleanField(_("FSE data"), default=True))

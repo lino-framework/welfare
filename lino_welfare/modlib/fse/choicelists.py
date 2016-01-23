@@ -40,8 +40,8 @@ class StatisticalField(dd.Choice):
 
     def __init__(self, value, text, name=None, **kwargs):
         super(StatisticalField, self).__init__(value, text, name, **kwargs)
-        self.field = models.IntegerField(text, default=0)
-        self.field_name = "statfld_" + value
+        self.field = models.IntegerField(value, default=0, help_text=text)
+        self.field_name = "fse" + value
 
     def collect_value_from_guest(self, obj):
         sf = obj.event.event_type.fse_field
