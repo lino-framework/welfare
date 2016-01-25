@@ -53,8 +53,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-53 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, beid, davlink, export_excel, plausibility, tinymce.
-126 models:
+56 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
+127 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -76,7 +76,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        528
- cal.EventType                  cal.EventTypes                  19        10
+ cal.EventType                  cal.EventTypes                  20        10
  cal.Guest                      cal.Guests                      9         521
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
@@ -97,7 +97,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         127
+ contenttypes.ContentType       gfks.ContentTypes               3         128
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
@@ -123,7 +123,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
  excerpts.Excerpt               excerpts.Excerpts               12        69
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        16
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
+ fse.ClientSummary              fse.Summaries                   19        126
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
  households.Member              households.Members              14        63
@@ -158,7 +159,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    66        63
+ pcsw.Client                    pcsw.Clients                    67        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         6         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
@@ -328,6 +329,9 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_nl, name_de, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
+- fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
+- fse.Summaries.insert : master, education_level, result, remark
+- fse.SummariesByClient.insert : education_level, result, remark
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -414,10 +418,10 @@ Each window layout is **viewable** by a given set of user profiles.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
 - about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- accounts.Accounts.detail : visible for admin
-- accounts.Accounts.insert : visible for admin
-- accounts.Groups.detail : visible for admin
-- accounts.Groups.insert : visible for admin
+- accounts.Accounts.detail : visible for 510 admin
+- accounts.Accounts.insert : visible for 510 admin
+- accounts.Groups.detail : visible for 510 admin
+- accounts.Groups.insert : visible for 510 admin
 - active_job_search.Proofs.insert : visible for 110 admin
 - addresses.Addresses.detail : visible for admin
 - addresses.Addresses.insert : visible for admin
@@ -502,6 +506,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- fse.Summaries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- fse.SummariesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
@@ -599,7 +606,7 @@ Romain
   - Système : Broken GFKs
   - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
 - Configuration :
-  - Système : Paramètres du Site, Textes d'aide, Utilisateurs
+  - Système : Paramètres du Site, Textes d'aide, Utilisateurs, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
@@ -620,7 +627,7 @@ Romain
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
-  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche
+  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, FSE Summaries
   - Nouvelles demandes : Compétences
   - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
   - Questionnaires : Questionnaires, Questions, Choix, Interviews, Choix de réponse, Answer Remarks

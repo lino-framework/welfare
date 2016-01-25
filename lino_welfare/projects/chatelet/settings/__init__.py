@@ -30,7 +30,7 @@ class Site(Site):
     # hidden_languages = None
 
     demo_fixtures = """std std2 few_languages props all_countries
-    demo cbss mini demo2 local""".split()
+    demo cbss mini demo2 checksummaries local""".split()
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
 

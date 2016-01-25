@@ -44,13 +44,14 @@ Here is a more complete list of excerpt types:
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
  *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung                                                   payment_reminder.body.html
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
+ *fse.ClientSummary (FSE Summary)*                       Ja       Ja              Training report             WkBuildMethod
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
  *pcsw.Client (Klient)*                                  Ja       Nein            Aktenblatt                                         file_sheet.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
  *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            eID-Inhalt                                         eid-content.odt
- **Total (16 Zeilen)**                                   **12**   **10**
+ **Total (17 Zeilen)**                                   **13**   **11**
 ======================================================= ======== =============== =========================== ====================== ================= ================================
 <BLANKLINE>
 

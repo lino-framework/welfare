@@ -94,6 +94,7 @@ This is the list of excerpt types:
  Tx25 Request             Yes       Yes
  Partner                  No        No                             payment_reminder.body.html
  Budget                   Yes       Yes
+ FSE Summary              Yes       Yes
  Immersion training       Yes       Yes                            immersion.body.html
  ISIP                     Yes       Yes
  Art60§7 job supplyment   Yes       Yes
@@ -101,7 +102,7 @@ This is the list of excerpt types:
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt
  Client                   No        No           eid-content.odt
- **Total (17 rows)**      **13**    **11**
+ **Total (18 rows)**      **14**    **12**
 ======================== ========= ============ ================= ================================
 <BLANKLINE>
 

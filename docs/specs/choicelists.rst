@@ -70,6 +70,8 @@ name to read the documentation):
     cv.HowWell : HowWell
     debts.TableLayouts : Table layouts
     excerpts.Shortcuts : Excerpt shortcuts
+    fse.ParticipationCertificates : Participation Certificates
+    fse.StatisticalFields : FSE fields
     households.MemberDependencies : Household Member Dependencies
     households.MemberRoles : Household member roles
     humanlinks.LinkTypes : Parency types

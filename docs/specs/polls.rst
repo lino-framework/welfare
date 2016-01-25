@@ -119,7 +119,7 @@ This is the list of choice sets:
 
 >>> rt.show(polls.ChoiceSets)
 ==== ===================== ===================== =====================
- ID   Description           Description (de)      Description (en)
+ ID   Désignation           Désignation (de)      Désignation (en)
 ---- --------------------- --------------------- ---------------------
  1    Yes/No                Yes/No                Yes/No
  2    Oui/Peut-être/Non     Oui/Peut-être/Non     Yes/Maybe/No

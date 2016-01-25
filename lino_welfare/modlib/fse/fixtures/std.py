@@ -29,4 +29,4 @@ def objects():
         build_method='wkhtmltopdf',
         certifying=True)
     kw.update(dd.str2kw('name', _("Training report")))
-    yield ExcerptType.update_for_model('fse.Dossier', **kw)
+    yield ExcerptType.update_for_model('fse.ClientSummary', **kw)

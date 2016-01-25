@@ -103,6 +103,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.dupable_clients.fixtures',
     'lino_welfare.modlib.finan',
     'lino_welfare.modlib.finan.fixtures',
+    'lino_welfare.modlib.fse',
+    'lino_welfare.modlib.fse.fixtures',
     'lino_welfare.modlib.households',
     'lino_welfare.modlib.households.fixtures',
     'lino_welfare.modlib.integ',

@@ -21,6 +21,8 @@
 """
 from __future__ import unicode_literals
 
+from django.db import models
+
 from lino.api import dd, _
 
 
@@ -31,10 +33,29 @@ add = ParticipationCertificates.add_item
 add('10', _("Epreuve d’évaluation réussie sans titre spécifique"))
 
 
-class DossierColumns(dd.ChoiceList):
-    verbose_name = _("Dossier column")
-    verbose_name_plural = _("Dossier columns")
-add = DossierColumns.add_item
+class StatisticalField(dd.Choice):
+
+    field_name = None
+    field = None
+
+    def __init__(self, value, text, name=None, **kwargs):
+        super(StatisticalField, self).__init__(value, text, name, **kwargs)
+        self.field = models.IntegerField(value, default=0, help_text=text)
+        self.field_name = "fse" + value
+
+    def collect_value_from_guest(self, obj):
+        sf = obj.event.event_type.fse_field
+        if sf is not None and sf.value == self.value:
+            return 1
+        return 0
+
+
+class StatisticalFields(dd.ChoiceList):
+    verbose_name = _("FSE field")
+    verbose_name_plural = _("FSE fields")
+    item_class = StatisticalField
+
+add = StatisticalFields.add_item
 add('10', _("Informative sessions"))
 add('20', _("Individual consultation"))
 add('21', _("Evaluation session"))
@@ -45,5 +66,11 @@ add('42', _("Mobility"))
 add('43', _("Math and French"))
 
 
+@dd.receiver(dd.pre_analyze)
+def inject_statistical_fields(sender, **kw):
+    for sf in StatisticalFields.items():
+        if sf.field_name is not None:
+            dd.inject_field('fse.ClientSummary', sf.field_name, sf.field)
 
-
+dd.inject_field(
+    'cal.EventType', 'fse_field', StatisticalFields.field(blank=True))

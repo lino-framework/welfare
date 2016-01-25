@@ -27,124 +27,103 @@ from django.conf import settings
 
 from lino.api import rt, dd, _
 from lino import mixins
+from lino.utils.xmlgen.html import E
+from lino.modlib.summaries.mixins import Summary
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino.modlib.excerpts.mixins import Certifiable
-from .choicelists import ParticipationCertificates, DossierColumns
+from .choicelists import ParticipationCertificates, StatisticalFields
 
 
-class Dossier(mixins.DatePeriod, Certifiable):
+class ClientSummary(Certifiable, Summary):
 
     class Meta:
-        verbose_name = _("FSE Dossier")
-        verbose_name_plural = _("FSE Dossiers")
+        verbose_name = _("FSE Summary")
+        verbose_name_plural = _("FSE Summaries")
 
-    client = dd.ForeignKey('pcsw.Client')
-    education_level = dd.ForeignKey('cv.EducationLevel')
+    summary_period = 'yearly'
+
+    master = dd.ForeignKey('pcsw.Client')
+    education_level = dd.ForeignKey('cv.EducationLevel', blank=True, null=True)
     children_at_charge = models.BooleanField(
         _("Children at charge"), default=False)
     certified_handicap = models.BooleanField(
         _("Certified handicap"), default=False)
     other_difficulty = models.BooleanField(
         _("Other difficulty"), default=False)
-    result = ParticipationCertificates.field()
+    result = ParticipationCertificates.field(blank=True)
     remark = models.CharField(
         _("Remark"),
         blank=True, max_length=200)
 
+    @classmethod
+    def get_summary_master_model(cls):
+        return rt.modules.pcsw.Client
 
-class Dossiers(dd.Table):
-    model = 'fse.Dossier'
+    @classmethod
+    def get_summary_masters(cls):
+        return rt.modules.pcsw.Client.objects.filter(has_fse=True)
+
+    def get_summary_collectors(self):
+        qs = rt.modules.cal.Guest.objects.all()
+        qs = self.add_date_filter(qs, 'event__start_date', partner=self.master)
+        yield self.collect_from_guest, qs
+
+    def collect_from_guest(self, obj):
+        for sf in StatisticalFields.objects():
+            value = sf.collect_value_from_guest(obj)
+            if value:
+                value += getattr(self, sf.field_name)
+                setattr(self, sf.field_name, value)
+
+    @dd.displayfield(_("Results"))
+    def results(self, ar):
+        if ar is None:
+            return
+        cells = []
+        for sf in StatisticalFields.objects():
+            v = getattr(self, sf.field_name)
+            cells.append(E.td(
+                unicode(sf.text), E.br(), unicode(v), **ar.cellattrs))
+        return E.table(E.tr(*cells), **ar.tableattrs)
+
+
+class Summaries(dd.Table):
+    model = 'fse.ClientSummary'
     detail_layout = """
-    client children_at_charge certified_handicap other_difficulty id
+    master year month
+    children_at_charge certified_handicap other_difficulty id
     education_level result remark
-    HoursByDossier
+    results
     """
     insert_layout = """
-    client
+    master
     education_level result
     remark
     """
 
 
-class AllDossiers(Dossiers):
+class AllSummaries(Summaries):
     required_roles = dd.required(dd.SiteStaff)
 
 
-class DossiersByClient(Dossiers):
-    """Lists the FSE dossiers for a given client."""
-    master_key = 'client'
+class SummariesByClient(Summaries):
+    """Lists the FSE summaries for a given client."""
+    master_key = 'master'
     auto_fit_column_widths = True
-    column_names = "start_date end_date remark *"
     insert_layout = """
     education_level result
     remark
     """
 
-
-class HoursByDossier(dd.VirtualTable):
-    required_roles = dd.required(IntegrationAgent)
-    label = _("Hours by dossier")
-    master = 'fse.Dossier'
-
-    slave_grid_format = 'html'
-
     @classmethod
-    def get_data_rows(self, ar):
-        if ar is None or ar.master_instance is None or ar.param_values is None:
-            return
-        pv = ar.param_values
-        qs = rt.modules.cal.Guest.objects(
-            partner=ar.master_instance,
-            event__date__gte=pv.start_date,
-            event__date__lte=pv.end_date)
-        qs = qs.order_by('event__date')
-        for obj in qs:
-            hours = 1
-            dc = obj.event_type.dossier_column
-            obj._sums.collect(dc, hours)
-            yield obj
+    def setup_columns(cls):
+        cls.column_names = "year"
+        for sf in StatisticalFields.items():
+            if sf.field_name is not None:
+                cls.column_names += ' ' + sf.field_name
+        
 
-    @dd.virtualfield('pcsw.Coaching.user')
-    def user(self, obj, ar):
-        return obj
-
-    @dd.requestfield(_("Total"))
-    def row_total(self, obj, ar):
-        pv = ar.param_values
-        return rt.modules.cal.Guests.request(
-            partner=ar.master_instance,
-            start_date=pv.start_date, end_date=pv.end_date)
-        return obj.my_persons
-
-
-@dd.receiver(dd.post_analyze)
-def on_database_ready(sender, **kw):
-    """
-    Add columns to HoursByDossier from DossierColumns
-
-    This must also be called before each test case.
-    """
-    self = HoursByDossier
-    self.column_names = ''
-    for dc in DossierColumns.objects():
-        def w(dc):
-            def func(self, obj, ar):
-                if ar is None:
-                    return None
-                pv = ar.param_values
-                return rt.modules.cal.Guests.request(
-                    param_values=dict(
-                        partner=ar.master_instance,
-                        dossier_column=dc,
-                        start_date=pv.start_date, end_date=pv.end_date))
-            return func
-        vf = dd.RequestField(w(dc), verbose_name=dc.text)
-        self.add_virtual_field('FSE' + dc.value, vf)
-        self.column_names += ' ' + vf.name
-
-    self.column_names += ' row_total'
-    self.clear_handle()  # avoid side effects when running multiple test cases
-    settings.SITE.resolve_virtual_fields()
-
+dd.inject_field(
+    'pcsw.Client', 'has_fse', models.BooleanField(_("FSE data"), default=True))
 

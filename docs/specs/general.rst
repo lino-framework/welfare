@@ -37,8 +37,8 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-61 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-153 models:
+64 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+154 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -63,7 +63,7 @@ The following table gives an overview of these things.
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
  cal.Event                      cal.OneEvent                    24        528
- cal.EventType                  cal.EventTypes                  19        9
+ cal.EventType                  cal.EventTypes                  20        9
  cal.Guest                      cal.Guests                      9         524
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
@@ -84,7 +84,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         154
+ contenttypes.ContentType       gfks.ContentTypes               3         155
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -116,13 +116,14 @@ The following table gives an overview of these things.
  debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        68
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
  finan.BankStatement            finan.BankStatements            12        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
  finan.JournalEntry             finan.FinancialVouchers         11        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             12        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
+ fse.ClientSummary              fse.Summaries                   19        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           28        14
  households.Member              households.Members              14        63
@@ -162,7 +163,7 @@ The following table gives an overview of these things.
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    67        63
+ pcsw.Client                    pcsw.Clients                    68        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90

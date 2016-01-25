@@ -29,7 +29,7 @@ class Plugin(ad.Plugin):
 
     verbose_name = _("FSE")
 
-    needs_plugins = ['lino.modlib.wkhtmltopdf']
+    needs_plugins = ['lino.modlib.summaries', 'lino.modlib.wkhtmltopdf']
 
     # def setup_config_menu(self, site, profile, m):
     #     mg = site.plugins.integ
@@ -39,6 +39,6 @@ class Plugin(ad.Plugin):
     def setup_explorer_menu(self, site, profile, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('fse.AllDossiers')
+        m.add_action('fse.AllSummaries')
 
 
