@@ -35,7 +35,7 @@ This is the list of training types:
 
 >>> rt.login('robin').show(cv.EducationLevels)
 ====================== ================== ================== ======= ===========
- Description            Description (de)   Description (en)   Étude   Formation
+ Désignation            Désignation (de)   Désignation (en)   Étude   Formation
 ---------------------- ------------------ ------------------ ------- -----------
  Bachelor               Bachelor           Bachelor           Oui     Non
  Master                 Master             Master             Oui     Non
@@ -50,7 +50,7 @@ And the list of Study types:
 
 >>> rt.login('robin').show(cv.StudyTypes)
 ==== ======================= ==================== ================== ======= =========== ===================
- ID   Description             Description (de)     Description (en)   Étude   Formation   Niveau académique
+ ID   Désignation             Désignation (de)     Désignation (en)   Étude   Formation   Niveau académique
 ---- ----------------------- -------------------- ------------------ ------- ----------- -------------------
  11   Alpha                   Alpha                Alpha              Non     Oui
  4    Apprentissage           Lehre                Apprenticeship     Oui     Non
@@ -87,7 +87,7 @@ Obstacles
 
 >>> rt.show(cv.ObstacleTypes)
 ==== ================= ================== ==================
- ID   Description       Description (de)   Description (en)
+ ID   Désignation       Désignation (de)   Désignation (en)
 ---- ----------------- ------------------ ------------------
  1    Alcohol           Alkohol            Alcohol
  2    Santé             Gesundheit         Health

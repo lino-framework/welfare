@@ -231,7 +231,7 @@ see it.
 >>> from lino.mixins.duplicable import Duplicate
 >>> print(analyzer.show_action_permissions(Duplicate))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- accounts.Accounts.duplicate : visible for admin
+- accounts.Accounts.duplicate : visible for 510 admin
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - cal.EventTypes.duplicate : visible for 110 410 admin
 - cal.Events.duplicate : visible for 110 410 admin

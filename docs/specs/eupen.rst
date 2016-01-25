@@ -63,7 +63,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - System : Site-Parameter, Hilfetexte, Benutzer
+  - System : Site-Parameter, Hilfetexte, Benutzer, Update all summary data
   - Orte : Länder, Orte
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
@@ -88,7 +88,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, FSE Summaries
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
@@ -382,6 +382,9 @@ Each window layout defines a given set of fields.
 - finan.FinancialVouchers.insert : voucher_date, narration
 - finan.PaymentInstructions.detail : voucher_date, user, narration, total, workflow_buttons, id, journal, year, number, MovementsByVoucher
 - finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
+- fse.Summaries.insert : master, education_level, result, remark
+- fse.SummariesByClient.insert : education_level, result, remark
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -466,10 +469,10 @@ Each window layout is **viewable** by a given set of user profiles.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
 - about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- accounts.Accounts.detail : visible for admin
-- accounts.Accounts.insert : visible for admin
-- accounts.Groups.detail : visible for admin
-- accounts.Groups.insert : visible for admin
+- accounts.Accounts.detail : visible for 510 admin
+- accounts.Accounts.insert : visible for 510 admin
+- accounts.Groups.detail : visible for 510 admin
+- accounts.Groups.insert : visible for 510 admin
 - addresses.Addresses.detail : visible for admin
 - addresses.Addresses.insert : visible for admin
 - aids.AidTypes.detail : visible for 110 210 220 410 500 510 800 admin
@@ -564,6 +567,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - finan.FinancialVouchers.insert : visible for 500 510 admin
 - finan.PaymentInstructions.detail : visible for 500 510 admin
 - finan.PaymentOrders.detail : visible for 500 510 admin
+- fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- fse.Summaries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- fse.SummariesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
