@@ -14,7 +14,12 @@ Un document similaire existe en `allemand
 Pour des questions *commerciales* veuillez consulter
 `www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
 
-- `Tutoriel Lino Service Insertion <dl/Tutoriel_Lino.pdf>`_
+A côté de ces sites web maintenus par les auteurs du logiciel il
+existe deux documents maintenus par les centres qui utilisent Lino:
+
+- `Tutoriel Lino Service Insertion <dl/Tutoriel_Lino_Insertion.pdf>`__
+- `Tutoriel Lino Service Général <dl/Tutoriel_Lino_General.pdf>`__
+
 
 .. Il y avait également un `Wiki
     <http://trac.lino-framework.org/wiki/Welfare/FR>`_ qui ne semble
