@@ -68,7 +68,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Gastrollen, Kalendereintragsarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Zahlungsbedingungen
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -158,7 +158,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Termine, Kalendereintragsarten, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Kalendereintragsarten, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten

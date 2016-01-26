@@ -75,12 +75,12 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
- cal.Event                      cal.OneEvent                    24        528
+ cal.Event                      cal.OneEvent                    24        575
  cal.EventType                  cal.EventTypes                  20        10
  cal.Guest                      cal.Guests                      9         521
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
- cal.RecurrentEvent             cal.RecurrentEvents             22        9
+ cal.RecurrentEvent             cal.RecurrentEvents             22        16
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
  cal.Subscription               cal.Subscriptions               4         8
@@ -610,7 +610,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
+  - Calendrier : Calendriers, Locaux, Priorités, Recurrent event rules, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 

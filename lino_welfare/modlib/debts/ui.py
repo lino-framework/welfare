@@ -683,12 +683,13 @@ proportionally distributing the `Distributable amount` among the debtors.
             entries.append(e)
 
         for e in entries:
-            e.dist_perc = 100 * e.amount / total
-            #~ if e.dist_perc == 0:
-                #~ e.dist_amount = decimal.Decimal(0)
-            #~ else:
-            e.dist_amount = budget.dist_amount * e.dist_perc / 100
-            yield e
+            if e.amount is not None:
+                e.dist_perc = 100 * e.amount / total
+                #~ if e.dist_perc == 0:
+                    #~ e.dist_amount = decimal.Decimal(0)
+                #~ else:
+                e.dist_amount = budget.dist_amount * e.dist_perc / 100
+                yield e
 
     @dd.virtualfield(dd.PriceField(_("%")))
     def dist_perc(self, row, ar):
