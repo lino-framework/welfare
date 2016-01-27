@@ -30,7 +30,11 @@ Vor der Anmeldung
 
 
 Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
-Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
+Benutzer.  Lino spricht deshalb im folgenden Bildschirm noch
+Englisch (oder genauer gesagt die Sprache, die Sie in Ihrem
+Browser als bevorzugt eingestellt haben).
+
+Da es sich um eine Demo-Datenbank handelt, stehen hier
 alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
 Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
 und *Benutzerprofil* variieren.
