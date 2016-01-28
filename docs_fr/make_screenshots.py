@@ -17,10 +17,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from lino.api.selenium import Album, runserver
 
 
-def album1():
+def album1(driver):
 
-    driver = webdriver.Firefox()
-    driver.get("http://127.0.0.1:8000/")
     app = Album(
         driver, 'tour', title="Tour de Lino",
         ref="welfare.fr.tour", intro="""
@@ -111,8 +109,6 @@ def album1():
     """)
 
     app.write_index()
-
-    driver.quit()
 
 
 if __name__ == '__main__':

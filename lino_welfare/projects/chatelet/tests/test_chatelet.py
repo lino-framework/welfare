@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -85,8 +85,10 @@ class TestCase(TestCase):
         result = self.check_json_result(response, 'rows success message')
         self.assertEqual(result['success'], True)
         self.assertEqual(
+            # result['message'],
+            # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
             result['message'],
-            """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
+            """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
              '<span />', '<b>Obstacle object</b>',

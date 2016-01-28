@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -214,6 +214,9 @@ class Contract(JobSupplyment):
         verbose_name = _("Art60§7 job supplyment")
         verbose_name_plural = _('Art60§7 job supplyments')
 
+    quick_search_fields = 'job__name client__name '\
+                          'company__name client__national_id'
+
     type = dd.ForeignKey(
         "jobs.ContractType",
         verbose_name=_("Type"),
@@ -323,7 +326,8 @@ class Contracts(isip.ContractBaseTable):
 
     required_roles = dd.required(IntegrationAgent)
     model = 'jobs.Contract'
-    column_names = 'id client applies_from applies_until job user type *'
+    column_names = 'id client client__national_id ' \
+                   'applies_from applies_until job user type *'
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'
     detail_layout = ContractDetail()

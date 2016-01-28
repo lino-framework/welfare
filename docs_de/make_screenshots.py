@@ -18,10 +18,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from lino.api.selenium import Album, runserver
 
 
-def album1():
+def album1(driver):
 
-    driver = webdriver.Firefox()
-    driver.get("http://127.0.0.1:8000/")
     app = Album(
         driver, 'tour', title="Lino-Tour",
         ref="welfare.de.tour", intro="""
@@ -41,7 +39,11 @@ def album1():
     app.screenshot('login1.png', "Vor der Anmeldung", """
 
     Solange Sie sich nicht angemeldet haben, sind Sie ein anonymer
-    Benutzer.  Da es sich um eine Demo-Datenbank handelt, stehen hier
+    Benutzer.  Lino spricht deshalb im folgenden Bildschirm noch
+    Englisch (oder genauer gesagt die Sprache, die Sie in Ihrem
+    Browser als bevorzugt eingestellt haben).
+
+    Da es sich um eine Demo-Datenbank handelt, stehen hier
     alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
     Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
     und *Benutzerprofil* variieren.
@@ -49,6 +51,7 @@ def album1():
 
     """)
 
+    # elem = driver.find_element(By.XPATH, '//button[text()="Anmelden"]')
     elem = driver.find_element(By.XPATH, '//button[text()="Log in"]')
     elem.click()
 
@@ -123,8 +126,6 @@ def album1():
     """)
 
     app.write_index()
-
-    driver.quit()
 
 
 if __name__ == '__main__':

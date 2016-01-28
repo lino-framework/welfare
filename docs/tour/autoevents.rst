@@ -29,9 +29,9 @@ Technical stuff
 Some local settings which influence automatic generation of
 calendar events:
 
->>> print(settings.SITE.ignore_dates_before)
+>>> print(dd.plugins.cal.ignore_dates_before)
 None
->>> print(str(settings.SITE.ignore_dates_after))
+>>> print(str(dd.plugins.cal.ignore_dates_after))
 2019-05-22
 
 
