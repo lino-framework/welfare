@@ -309,7 +309,7 @@ Each window layout defines a given set of fields.
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, places, option, remark, request_date, user
 - courses.EnrolmentsByPupil.insert : course, places, option, remark, request_date, user
-- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, course_area, topic, fees_cat, tariff, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
+- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, topic, fees_cat, tariff, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
