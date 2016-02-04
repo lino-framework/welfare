@@ -21,3 +21,5 @@ class Site(Site):
 
 
 SITE = Site(globals())
+
+DEBUG = True

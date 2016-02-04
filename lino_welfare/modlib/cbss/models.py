@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2015 Luc Saffre
+# Copyright 2011-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -830,14 +830,24 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
 
     def get_print_language(self):
         if settings.SITE.get_language_info(self.language.value):
-        #~ if self.language.value in babel.AVAILABLE_LANGUAGES:
             return self.language.value
         return settings.SITE.DEFAULT_LANGUAGE.django_code
 
     def fill_from_person(self, person):
+        """Fill default values for some fields of this request from the person
+        (pcsw.Client).  
+
+        - The `national_id` is always taken
+
+        - The person's `language` is taken if it is one of the
+          possible `RequestLanguages`
+
+        """
         self.national_id = person.national_id
-        if RequestLanguages.get_by_value(person.language, None):
-            self.language = person.language  # .value # babel.DEFAULT_LANGUAGE
+        # The request's language as a Choice instance:
+        rlc = RequestLanguages.get_by_value(person.language, None)
+        if rlc:
+            self.language = rlc
 
     def get_service_reply(self, **kwargs):
         assert_pure(self.response_xml)
