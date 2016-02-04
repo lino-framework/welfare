@@ -11,7 +11,6 @@ Miscellaneous
     doctest init:
     
     >>> import os
-    >>> from __future__ import print_function
     >>> import lino
     >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *

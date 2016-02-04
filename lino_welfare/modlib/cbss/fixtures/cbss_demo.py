@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Luc Saffre
+# Copyright 2012-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ in order to avoid live requests to the CBSS.
 
 import os
 from django.conf import settings
-from lino.utils import IncompleteDate, Cycler
+from lino.utils import IncompleteDate
 from lino.api import rt
 
 
@@ -58,7 +58,8 @@ def objects():
             query_register=cbss.QueryRegisters.ALL,
         ), ''],
         [cbss.RetrieveTIGroupsRequest,
-         dict(national_id='680601 053-29', history=False, language='de'),
+         dict(national_id='680601 053-29', history=False,
+              language=cbss.RequestLanguages.de),
          'demo_tx25_1.xml'],
         [cbss.RetrieveTIGroupsRequest,
          dict(national_id='680307 001-74', history=True),
