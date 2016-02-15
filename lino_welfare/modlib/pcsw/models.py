@@ -1003,7 +1003,8 @@ class ClientsByNationality(Clients):
 
 
 class AllClients(Clients):
-    column_names = '*'
+    column_names = "name_column:20 client_state national_id:10 \
+    gsm:10 address_column age:10 email phone:10 id *"
     required_roles = dd.required(SocialStaff)
 
 
