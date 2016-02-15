@@ -131,19 +131,28 @@ Notes de discussion
   les "fiches stagiaire"? --> dans l'onglet "Historique"
 - Idéal serait d'avoir une checkbox "Générer fiches stagiaire" par
   bénéficiaire.
+
 - Bouton "Remplir les données"
+
 - la fiche est un document à usage interne utilisé par Sandra pour
   encoder les données dans un fichier Excel protégé issu par 
+
 - Colonne "Mise en situation professionnelle" : calculer les heures
   par stage d'immersion, en fonction des dates de début et de fin et
   de l'horaire de travail.
+
 - Colonne "Recherche d'emploi" : Somme des présences aux ateliers
   "Cyber-emploi", mais pour ces ateliers on note les heures d'arrivée
   et de départ par participation.
-- Il y a deux modes d'encodage de présences des ateliers: soit avec
-  soit sans les heures de d'arrivée de départ individuelles.  Par
-  exemple en Insertion si la personne arrive en retard, elle aura les
-  heures de présence de l'évènement. tant pis pour la statistique.
+
 - Colonne "Mise à l'emploi sous contrat a60" : comme pour 
   "Mise en situation professionnelle"
+
+- Tous les "champs statistiques" représentent des heures de présences.
+  Il y a deux modes d'encodage de présences des ateliers: soit avec
+  soit sans les heures de d'arrivée de départ individuelles.  Par
+  exemple en Insertion si la personne arrive en retard, elle aura les
+  heures de présence de l'évènement (tant pis pour la statistique).
+
+  
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -49,7 +49,7 @@ EventStates.published.text = _("Notified")
 
 class CloseMeeting(feedback.CloseMeeting):
     """Close the meeting (mark it as "took place") and check out all
-guests. Ask confirmation naming the guests who need to check out.
+    guests. Ask confirmation naming the guests who need to check out.
 
     """
     def execute(self, ar, obj):
@@ -421,7 +421,6 @@ Tasks.detail_layout = """
     """
 
 
-
 class TasksByController(TasksByController):
     column_names = 'start_date due_date summary user delegated workflow_buttons id'
     insert_layout = """
@@ -429,7 +428,6 @@ class TasksByController(TasksByController):
     start_date due_date
     user delegated
     """
-
 
 
 # add = TaskStates.add_item
