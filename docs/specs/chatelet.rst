@@ -101,7 +101,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
- courses.Enrolment              courses.Enrolments              14        100
+ courses.Enrolment              courses.Enrolments              13        100
  courses.Line                   courses.Lines                   21        7
  courses.Slot                   courses.Slots                   5         0
  courses.Topic                  courses.Topics                  5         0
@@ -305,7 +305,7 @@ Each window layout defines a given set of fields.
 - countries.Places.merge_row : merge_to, reason
 - courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday
 - courses.Courses.insert : start_date, line, teacher
-- courses.Enrolments.detail : request_date, user, course, pupil, remark, amount, workflow_buttons, printed, motivation, problems
+- courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, places, option, remark, request_date, user
 - courses.EnrolmentsByPupil.insert : course, places, option, remark, request_date, user

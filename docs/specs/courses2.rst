@@ -33,17 +33,15 @@ This is about *internal* courses
 ============ ======================= ============================ ============= ======= ===============
  Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   État
 ------------ ----------------------- ---------------------------- ------------- ------- ---------------
- 12/05/2014   12/05/2014              Cuisine                                            **Brouillon**
- 12/05/2014   12/05/2014              Créativité                                         **Brouillon**
- 12/05/2014   12/05/2014              Notre premier bébé                                 **Brouillon**
- 12/05/2014   12/05/2014              Mathématiques                                      **Brouillon**
- 12/05/2014   12/05/2014              Français                                           **Brouillon**
- 12/05/2014   12/05/2014              Activons-nous!                                     **Brouillon**
- 03/11/2013   03/11/2013              Psycho-social intervention                         **Brouillon**
+ 12/05/2014                           Cuisine                                            **Brouillon**
+ 12/05/2014                           Créativité                                         **Brouillon**
+ 12/05/2014                           Notre premier bébé                                 **Brouillon**
+ 12/05/2014                           Mathématiques                                      **Brouillon**
+ 12/05/2014                           Français                                           **Brouillon**
+ 12/05/2014                           Activons-nous!                                     **Brouillon**
+ 03/11/2013                           Psycho-social intervention                         **Brouillon**
 ============ ======================= ============================ ============= ======= ===============
 <BLANKLINE>
-
-
 
 >>> rt.modules.courses.Courses.params_layout.main
 u'topic line teacher user state active:10'
