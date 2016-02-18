@@ -11,6 +11,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+# from __future__ import unicode_literals
+
 import sys, os
 
 extlinks = {}
@@ -107,7 +109,7 @@ exclude_patterns = [
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = str('sphinx')
 
 
 # Options for HTML output
@@ -143,7 +145,7 @@ html_static_path = ['.static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-html_last_updated_fmt = '%b %d, %Y'
+html_last_updated_fmt = str('%b %d, %Y')
 #~ last_updated = True
 
 # If true, SmartyPants will be used to convert quotes and dashes to
