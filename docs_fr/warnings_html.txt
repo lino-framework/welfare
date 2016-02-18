@@ -1,0 +1,4 @@
+WARNING: The config value `html_style' has type `unicode', defaults to `NoneType.'
+WARNING: The config value `pygments_style' has type `unicode', defaults to `NoneType.'
+WARNING: The config value `language' has type `unicode', defaults to `NoneType.'
+WARNING: The config value `html_last_updated_fmt' has type `unicode', defaults to `NoneType.'

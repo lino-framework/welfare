@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+# from __future__ import unicode_literals
 
 extlinks = {}
 extensions = []
@@ -30,7 +30,7 @@ html_theme = 'alabaster'
 
 
 from django.conf import settings
-settings.SITE.title = "Benutzerhandbuch Lino für ÖSHZ"
+settings.SITE.title = u"Benutzerhandbuch Lino für ÖSHZ"
 
 primary_domain = 'py'
 
@@ -125,7 +125,7 @@ html_title = "Lino Welfare"
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-html_last_updated_fmt = '%b %d, %Y'
+html_last_updated_fmt = str('%b %d, %Y')
 #~ last_updated = True
 
 # If true, SmartyPants will be used to convert quotes and dashes to
