@@ -257,6 +257,9 @@ see it.
 - cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
 - cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin
+- countries.Places.duplicate : visible for 110 210 220 410 800 admin
+- countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- countries.PlacesByPlace.duplicate : visible for 110 210 220 410 800 admin
 - cv.EducationLevels.duplicate : visible for 110 admin
 - debts.Accounts.duplicate : visible for admin
 - debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
