@@ -17,7 +17,7 @@
 
 """Adds functionality for avoiding duplicate client records.
 
-Like :mod:`lino.modlib.dupable_partners`, but specialized for
+Like :mod:`lino_xl.lib.dupable_partners`, but specialized for
 `pcsw.Client`.
 
 Examples and test cases in

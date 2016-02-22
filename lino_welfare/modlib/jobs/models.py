@@ -42,7 +42,7 @@ from lino.utils.xmlgen.html import E
 from lino.utils.htmlgen import UL
 from lino.utils.report import Report
 
-from lino.modlib.cv.mixins import SectorFunction
+from lino_xl.lib.cv.mixins import SectorFunction
 
 from lino_welfare.modlib.pcsw.utils import only_coached_on
 

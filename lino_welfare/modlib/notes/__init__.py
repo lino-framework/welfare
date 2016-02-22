@@ -2,7 +2,7 @@
 # Copyright 2013-2015 Luc Saffre
 
 """
-Lino Welfare extension of :mod:`lino.modlib.notes`
+Lino Welfare extension of :mod:`lino_xl.lib.notes`
 
 .. autosummary::
    :toctree:
@@ -13,7 +13,7 @@ Lino Welfare extension of :mod:`lino.modlib.notes`
 
 """
 
-from lino.modlib.notes import Plugin
+from lino_xl.lib.notes import Plugin
 
 
 class Plugin(Plugin):

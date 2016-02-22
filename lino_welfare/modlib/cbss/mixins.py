@@ -51,7 +51,7 @@ from suds.sax.element import Element as E
 from suds.sax.parser import Parser
 PARSER = Parser()
 
-from lino.modlib.excerpts.mixins import Certifiable
+from lino_xl.lib.excerpts.mixins import Certifiable
 
 #~ except ImportError, e:
     #~ pass

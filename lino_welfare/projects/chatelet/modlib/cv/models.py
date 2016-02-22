@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""Database models for :mod:`lino_modlib.projects.chatelet.modlib.cv`.
+"""Database models for :mod:`lino_welfare.projects.chatelet.modlib.cv`.
 
 """
 
@@ -33,7 +33,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino.modlib.cv.models import *
+from lino_xl.lib.cv.models import *
 from lino.core.signals import pre_ui_save
 
 from lino_welfare.modlib.pcsw.choicelists import (

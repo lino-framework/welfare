@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from lino.modlib.cal.fixtures.demo2 import objects as lino_objects
+from lino_xl.lib.cal.fixtures.demo2 import objects as lino_objects
 from lino.api import rt
 from lino.utils import Cycler
 

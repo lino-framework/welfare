@@ -31,7 +31,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-from lino.modlib.cv.mixins import SectorFunction
+from lino_xl.lib.cv.mixins import SectorFunction
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractBase, ContractPartnerBase)
 

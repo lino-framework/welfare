@@ -27,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-from lino.modlib.cal.mixins import RecurrenceSet
+from lino_xl.lib.cal.mixins import RecurrenceSet
 
 from .mixins import (ContractEvents, ContractTypeBase,
                      ContractPartnerBase, ContractBase,
@@ -98,7 +98,7 @@ class ContractTypes(dd.Table):
 #
 class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
     """An **examination policy** is mostly a :class:`RecurrenceSet
-    <lino.modlib.cal.mixins.RecurrenceSet>` used for generating
+    <lino_xl.lib.cal.mixins.RecurrenceSet>` used for generating
     "evaluation meetings".  That is, Lino automatically suggests dates
     where the agent invites the client.
 
@@ -215,7 +215,7 @@ class Contract(ContractBase):
         The type of study that is going to be followed during this
         contract.
 
-        Pointer to :class:`lino.modlib.cv.models.StudyType`.
+        Pointer to :class:`lino_xl.lib.cv.models.StudyType`.
 
     """
     class Meta:

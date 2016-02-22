@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Lino-Welfare extension of :mod:`lino.modlib.reception`.
+"""Lino-Welfare extension of :mod:`lino_xl.lib.reception`.
 Technical specs see :doc:`/specs/reception`.
 
 .. autosummary::
@@ -26,7 +26,7 @@ Technical specs see :doc:`/specs/reception`.
 
 """
 
-from lino.modlib.reception import Plugin
+from lino_xl.lib.reception import Plugin
 
 
 class Plugin(Plugin):

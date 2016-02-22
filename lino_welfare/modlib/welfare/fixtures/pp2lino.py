@@ -55,11 +55,11 @@ from lino.utils.mdbtools import Loader
 from lino.core.utils import is_valid_url, is_valid_email
 
 from lino.modlib.countries.models import Place, Country
-from lino.modlib.notes.models import Note
+from lino_xl.lib.notes.models import Note
 from lino.modlib.users.models import User
-from lino.modlib.cal import models as cal
-#~ from lino.modlib.cal.utils import EventStatus
-from lino.modlib.properties import models as properties
+from lino_xl.lib.cal import models as cal
+#~ from lino_xl.lib.cal.utils import EventStatus
+from lino_xl.lib.properties import models as properties
 from lino_welfare.modlib.jobs import models as jobs
 from lino_welfare.modlib.isip import models as isip
 from lino_welfare.modlib.pcsw.models import PersonGroup

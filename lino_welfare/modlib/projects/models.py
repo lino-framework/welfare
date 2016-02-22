@@ -30,7 +30,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-from lino.modlib.excerpts.mixins import Certifiable
+from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.modlib.users.choicelists import SiteStaff
 
 

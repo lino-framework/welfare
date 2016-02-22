@@ -50,7 +50,8 @@ class Site(Site):
     auto_configure_logger_names = 'lino lino_welfare'
     # use_java = False  # temporarily
     # verbose_client_info_message = True
-    # default_build_method = "appyodt"
+
+    default_build_method = "appyodt"
     uppercase_last_name = True
 
     user_profiles_module = 'lino_welfare.modlib.welfare.roles'
@@ -62,7 +63,7 @@ class Site(Site):
         - :attr:`lino_cosi.lib.accounts.Plugin.ref_length` = 5
         
         - :attr:`excerpts.responsible_user
-          <lino.modlib.excerpts.Plugin.responsible_user>` is set to
+          <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
           ``'melanie'``.
 
         """
@@ -82,7 +83,7 @@ class Site(Site):
         super(Site, self).setup_choicelists()
 
         from django.utils.translation import ugettext_lazy as _
-        from lino.modlib.excerpts.choicelists import Shortcuts
+        from lino_xl.lib.excerpts.choicelists import Shortcuts
         Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
         from lino.modlib.uploads.choicelists import add_shortcut as add
@@ -93,7 +94,7 @@ class Site(Site):
         #     'pcsw.Client', 'id_document', _("Identifying document"),
         #     target='uploads.UploadsByClient')
 
-        from lino.modlib.notes.choicelists import SpecialTypes
+        from lino_xl.lib.notes.choicelists import SpecialTypes
         add = SpecialTypes.add_item
         add('100', _("First meeting"), 'first_meeting')
 
@@ -113,28 +114,29 @@ class Site(Site):
 
         yield 'lino_welfare.modlib.system'
         yield 'lino.modlib.gfks'
+        yield 'lino_xl.lib.appypod'
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
         yield 'lino.modlib.statbel.countries'
 
-        yield 'lino.modlib.properties'
+        yield 'lino_xl.lib.properties'
         yield 'lino_welfare.modlib.contacts'
-        yield 'lino.modlib.addresses'
+        yield 'lino_xl.lib.addresses'
 
         yield 'lino_welfare.modlib.uploads'
-        yield 'lino.modlib.outbox'
-        yield 'lino.modlib.excerpts'
+        yield 'lino_xl.lib.outbox'
+        yield 'lino_xl.lib.excerpts'
 
-        yield 'lino.modlib.extensible'
+        yield 'lino_xl.lib.extensible'
         yield 'lino_welfare.modlib.cal'
         yield 'lino_welfare.modlib.reception'
         yield 'lino_cosi.lib.accounts'
         yield 'lino_welfare.modlib.badges'
-        yield 'lino.modlib.boards'
+        yield 'lino_xl.lib.boards'
 
         if False:  # not yet ready
-            yield 'lino.modlib.families'
+            yield 'lino_xl.lib.families'
 
         yield 'lino_welfare.modlib.welfare'
 
@@ -165,7 +167,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.cbss'  # must come after pcsw
         yield 'lino_welfare.modlib.households'  # must come after pcsw
-        yield 'lino.modlib.humanlinks'  # must come after households
+        yield 'lino_xl.lib.humanlinks'  # must come after households
         yield 'lino_welfare.modlib.debts'  # must come after households
         # The `notes` demo fixture creates Notes for Clients.
         yield 'lino_welfare.modlib.notes'
@@ -174,7 +176,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.polls'
         yield 'lino_welfare.modlib.fse'
 
-        yield 'lino.modlib.beid'
+        yield 'lino_xl.lib.beid'
         yield 'lino.modlib.davlink'
 
         yield 'lino.modlib.export_excel'
@@ -187,8 +189,8 @@ class Site(Site):
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
         - :class:`lino_welfare.modlib.reception.models.MyWaitingVisitors`
-        - :class:`lino.modlib.cal.models.MyEvents`
-        - :class:`lino.modlib.cal.models.MyTasks`
+        - :class:`lino_xl.lib.cal.models.MyEvents`
+        - :class:`lino_xl.lib.cal.models.MyTasks`
         - ...
 
 

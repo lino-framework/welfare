@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-This module extends :mod:`lino.modlib.cal.models`
+This module extends :mod:`lino_xl.lib.cal.models`
 """
 
 from __future__ import unicode_literals

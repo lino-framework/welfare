@@ -30,14 +30,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 from lino.utils import i2d, Cycler
-from lino.modlib.beid.mixins import BeIdCardTypes
+from lino_xl.lib.beid.mixins import BeIdCardTypes
 from lino.utils.instantiator import Instantiator
 from lino.core.utils import resolve_model
 from lino.utils import mti
 from lino.utils.ssin import generate_ssin
 
-from lino.modlib.cal.choicelists import DurationUnits
-# from lino.modlib.cal.utils import WORKDAYS
+from lino_xl.lib.cal.choicelists import DurationUnits
+# from lino_xl.lib.cal.utils import WORKDAYS
 
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
@@ -98,7 +98,7 @@ COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
 #~ properties = models.get_app('properties')
 #char_pv = Instantiator('properties.CharPropValue').build
 #CharPropValue = resolve_model('properties.CharPropValue')
-# ~ from lino.modlib.properties import models as properties # CharPropValue, BooleanPropValue
+# ~ from lino_xl.lib.properties import models as properties # CharPropValue, BooleanPropValue
 #~ CHAR = ContentType.objects.get_for_model(properties.CharPropValue)
 #BOOL = ContentType.objects.get_for_model(properties.BooleanPropValue)
 #~ INT = ContentType.objects.get_for_model(properties.IntegerPropValue)

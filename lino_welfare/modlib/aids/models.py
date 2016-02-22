@@ -39,9 +39,9 @@ from lino.utils.xmlgen.html import E
 from lino.modlib.system.choicelists import PeriodEvents
 from lino.mixins.human import parse_name
 from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.addresses.mixins import AddressTypes
-from lino.modlib.boards.mixins import BoardDecision
-from lino.modlib.excerpts.mixins import ExcerptTitle
+from lino_xl.lib.addresses.mixins import AddressTypes
+from lino_xl.lib.boards.mixins import BoardDecision
+from lino_xl.lib.excerpts.mixins import ExcerptTitle
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from .roles import AidsUser, AidsStaff
@@ -97,14 +97,14 @@ class AidType(ContactRelated, ExcerptTitle):
 
         The text to print as title in confirmations.
         See also
-        :attr:`lino.modlib.excerpts.mixins.ExcerptTitle.excerpt_title`.
+        :attr:`lino_xl.lib.excerpts.mixins.ExcerptTitle.excerpt_title`.
 
     .. attribute:: body_template
 
         The body template to use when printing a confirmation of this type.
         If this field is empty, Lino uses the excerpt type's
         :attr:`body_template
-        <lino.modlib.excerpts.models.ExcerptType.body_template>`.
+        <lino_xl.lib.excerpts.models.ExcerptType.body_template>`.
         See also :doc:`/admin/printing`.
 
     .. attribute:: is_urgent
@@ -116,7 +116,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
     .. attribute:: board
 
-        Pointer to the default :class:`lino.modlib.boards.models.Board`
+        Pointer to the default :class:`lino_xl.lib.boards.models.Board`
         for aid projects of this type.
 
     .. attribute:: confirmed_by_primary_coach
@@ -251,7 +251,7 @@ class Granting(Confirmable, BoardDecision):
 
     .. attribute:: board
 
-    Pointer to the :class:`Board <lino.modlib.boards.models.Board>`
+    Pointer to the :class:`Board <lino_xl.lib.boards.models.Board>`
     which decided to allocate this aid project.
 
     .. attribute:: category

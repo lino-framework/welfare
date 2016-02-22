@@ -31,7 +31,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino.modlib.cal.choicelists import DurationUnits
+from lino_xl.lib.cal.choicelists import DurationUnits
 from lino_welfare.modlib.isip.mixins import (ContractPartnerBase,
                                              ContractBase)
 

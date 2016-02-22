@@ -38,7 +38,7 @@ from lino.core.tables import ButtonsTable
 
 #from lino.modlib.contacts.roles import ContactsUser
 
-from lino.modlib.reception.models import *
+from lino_xl.lib.reception.models import *
 
 pcsw = dd.resolve_app('pcsw')
 extensible = dd.resolve_app('extensible')
@@ -166,7 +166,7 @@ class CreateClientVisit(dd.Action):
 
 class CreateCoachingVisit(CreateClientVisit):
     """Call a prompt event from a :class:`Coaching`.  See also
-:func:`lino.modlib.reception.models.create_prompt_event`.
+:func:`lino_xl.lib.reception.models.create_prompt_event`.
 
     """
     help_text = _("Create a prompt event for this client with this coach.")
@@ -405,7 +405,7 @@ class CoachingsByClient(pcsw.CoachingsByClient):
 
 
 # Override library :mod:`WaitingVisitors
-# <lino.modlib.reception.models.WaitingVisitors>` table to change one
+# <lino_xl.lib.reception.models.WaitingVisitors>` table to change one
 # behaviour: when clicking in that table on the partner, :ref:`welfare`
 # should show the *Client's* and not the *Partner's* detail.
 

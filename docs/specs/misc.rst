@@ -184,7 +184,7 @@ Here is a list of the tables that have the
 :class:`lino.modlib.beid.mixins.FindByBeIdAction` and the user
 profiles that can see it.
 
->>> from lino.modlib.beid.mixins import FindByBeIdAction
+>>> from lino_xl.lib.beid.mixins import FindByBeIdAction
 >>> print(analyzer.show_action_permissions(FindByBeIdAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - debts.Clients.find_by_beid : visible for 300 admin

@@ -73,7 +73,7 @@ def migrate_from_1_1_16(globals_dict):
 
 def migrate_from_1_1_17(globals_dict):
 
-    from lino.modlib.cal.models import migrate_reminder
+    from lino_xl.lib.cal.models import migrate_reminder
     from lino.modlib.jobs.models import Job, Contract, JobProvider, \
         ContractEnding, ExamPolicy, ContractType
 
@@ -701,7 +701,7 @@ def migrate_from_1_2_6(globals_dict):
     - Rename fields `sex` to `gender` 
       in `contacts.Person`, `users.User`, `dsbe.PersonSearch`.
     - add previously hard-coded objects from 
-      :mod:`lino.modlib.cal.fixtures.std`
+      :mod:`lino_xl.lib.cal.fixtures.std`
     """
     from lino.utils.mti import insert_child
     contacts_Contact = resolve_model("contacts.Contact")
@@ -779,7 +779,7 @@ def migrate_from_1_2_6(globals_dict):
     objects = globals_dict['objects']
 
     def new_objects():
-        from lino.modlib.cal.fixtures import std
+        from lino_xl.lib.cal.fixtures import std
         yield std.objects()
         yield objects()
     globals_dict.update(objects=new_objects)
@@ -1126,7 +1126,7 @@ def migrate_from_1_4_2(globals_dict):
 def migrate_from_1_4_3(globals_dict):
     """
     - :mod:`lino.modlib.contacts` : renamed "Contact" to "Partner".
-    - :mod:`lino.modlib.outbox` : renamed "Mail.contact" to "Mail.partner".
+    - :mod:`lino_xl.lib.outbox` : renamed "Mail.contact" to "Mail.partner".
     - renamed "bcss" to "cbss"
     - renamed "lino.apps.dsbe" to "lino.apps.pcsw"
     - cal.Event.rset
@@ -1187,7 +1187,7 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(create_mails_recipient=create_mails_recipient)
 
     cal_Event = resolve_model("cal.Event")
-    from lino.modlib.cal.utils import EventStates, TaskState, GuestState
+    from lino_xl.lib.cal.utils import EventStates, TaskState, GuestState
     new_content_type_id = globals_dict['new_content_type_id']
 
     def create_cal_event(id, user_id, created, modified, owner_type_id, owner_id, project_id, build_time, calendar_id, uid, start_date, start_time, summary, description, access_class_id, sequence, auto_type, user_modified, rset_id, end_date, end_time, transparent, type_id, place_id, priority_id, status_id):
@@ -1452,7 +1452,7 @@ def migrate_from_1_4_3(globals_dict):
     objects = globals_dict['objects']
 
     def new_objects():
-        from lino.modlib.households.fixtures import std
+        from lino_xl.lib.households.fixtures import std
         yield std.objects()
         from lino.modlib.debts.fixtures import std
         yield std.objects()
@@ -2325,7 +2325,7 @@ class Migrator(Migrator):
             return isip_ExamPolicy(**kw)
         globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
 
-        from lino.modlib.cal.models import EventStates
+        from lino_xl.lib.cal.models import EventStates
         old2new = {
             '30': EventStates.draft.value,
             '80': EventStates.cancelled.value,
@@ -2426,7 +2426,7 @@ class Migrator(Migrator):
             return None
         globals_dict.update(create_postings_posting=create_postings_posting)
 
-        from lino.modlib.cal.models import EventStates
+        from lino_xl.lib.cal.models import EventStates
         old2new = {
             '60': EventStates.cancelled.value,
             '30': EventStates.took_place.value,

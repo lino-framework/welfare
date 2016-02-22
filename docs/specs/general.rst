@@ -37,7 +37,7 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-64 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, appypod, printing, system, contenttypes, gfks, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+64 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 154 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows

@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino Welfare extension of :mod:`lino.modlib.cal`
+Lino Welfare extension of :mod:`lino_xl.lib.cal`
 
 .. autosummary::
    :toctree:
@@ -30,7 +30,7 @@ Lino Welfare extension of :mod:`lino.modlib.cal`
 
 """
 
-from lino.modlib.cal import Plugin
+from lino_xl.lib.cal import Plugin
 
 
 class Plugin(Plugin):

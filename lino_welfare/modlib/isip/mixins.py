@@ -33,11 +33,11 @@ from atelier.utils import AttrDict
 from lino.api import dd, rt
 from lino import mixins
 
-from lino.modlib.excerpts.mixins import Certifiable
-from lino.modlib.cal.mixins import EventGenerator
+from lino_xl.lib.excerpts.mixins import Certifiable
+from lino_xl.lib.cal.mixins import EventGenerator
 from lino.modlib.contacts.mixins import ContactRelated
-from lino.modlib.cal.utils import update_auto_task
-from lino.modlib.cal.choicelists import DurationUnits
+from lino_xl.lib.cal.utils import update_auto_task
+from lino_xl.lib.cal.choicelists import DurationUnits
 # from lino.modlib.system.mixins import PeriodEvents
 
 from lino.utils.ranges import isrange
@@ -89,7 +89,7 @@ class ContractTypeBase(mixins.BabelNamed):
         defined on the excerpt type.
     
         See
-        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_excerpt_templates`.
+        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates`.
 
     """
 
@@ -315,7 +315,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
 
     def get_excerpt_templates(self, bm):
         """Overrides
-        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_excerpt_templates`.
+        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates`.
 
         """
         if self.type_id:
@@ -520,7 +520,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     @classmethod
     def get_printable_demo_objects(cls, excerpt_type):
         """All contracts of a demo project are being printed.  Overrides
-        :meth:`lino.modlib.excerpts.mixins.Certifiable.get_printable_demo_objects`.
+        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_printable_demo_objects`.
 
         """
         return cls.objects.all()

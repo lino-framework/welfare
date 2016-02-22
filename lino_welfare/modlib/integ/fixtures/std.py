@@ -30,7 +30,7 @@ from django.conf import settings
 from lino.api import dd, _
 from lino.utils.instantiator import Instantiator
 
-from lino.modlib.cal.choicelists import DurationUnits, WORKDAYS
+from lino_xl.lib.cal.choicelists import DurationUnits, WORKDAYS
 
 
 def objects():

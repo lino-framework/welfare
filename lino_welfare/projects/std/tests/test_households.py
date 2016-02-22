@@ -82,7 +82,7 @@ class BeIdTests(RemoteAuthTestCase):
         obj.full_clean()
         obj.save()
 
-        from lino.modlib.households.fixtures.std import objects
+        from lino_xl.lib.households.fixtures.std import objects
         for o in objects():
             o.save()
 
