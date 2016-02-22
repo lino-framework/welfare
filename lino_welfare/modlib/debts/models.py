@@ -38,7 +38,7 @@ from lino.utils.xmlgen.html import E
 from lino import mixins
 
 from lino_cosi.lib.accounts.choicelists import AccountTypes
-from lino.modlib.excerpts.mixins import Certifiable
+from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
 

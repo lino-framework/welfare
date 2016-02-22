@@ -35,11 +35,11 @@ from lino.api import dd, rt
 
 from lino.utils.xmlgen.html import E
 
-from lino.modlib.cal.models import *
+from lino_xl.lib.cal.models import *
 
-from lino.modlib.cal.utils import format_date
-from lino.modlib.cal.workflows import take, feedback
-from lino.modlib.reception.models import checkout_guest
+from lino_xl.lib.cal.utils import format_date
+from lino_xl.lib.cal.workflows import take, feedback
+from lino_xl.lib.reception.models import checkout_guest
 from lino.modlib.office.roles import OfficeUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 
@@ -186,7 +186,7 @@ class Event(Event):
 
     @dd.displayfield(_("When"))
     def when_text(self, ar):
-        # Overrides `lino.modlib.cal.models_event.Event.when_text`.
+        # Overrides `lino_xl.lib.cal.models_event.Event.when_text`.
         # It is a bit of redundant code, but making it configurable
         # would be nitpicky.
         if ar is None:
@@ -281,7 +281,7 @@ class Guest(Guest):
         Virtual field which returns the `partner` if it is a client.
 
         When clicking in :class:`WaitingVisitors
-        <lino.modlib.reception.models.WaitingVisitors>` on the partner
+        <lino_xl.lib.reception.models.WaitingVisitors>` on the partner
         show the *Client's* and not the *Partner's* detail.
 
     """

@@ -74,7 +74,7 @@ class DebtsTests(RemoteAuthTestCase):
         from lino_welfare.modlib.debts.fixtures.minimal import objects
         for o in objects():
             o.save()
-        # from lino.modlib.households.fixtures.std import objects
+        # from lino_xl.lib.households.fixtures.std import objects
         # for o in objects():
         #     o.save()
 

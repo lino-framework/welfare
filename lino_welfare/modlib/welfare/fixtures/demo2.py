@@ -28,7 +28,7 @@ import shutil
 
 from lino.api import rt, dd
 
-from lino.modlib.beid.mixins import get_image_path
+from lino_xl.lib.beid.mixins import get_image_path
 
 
 def objects():

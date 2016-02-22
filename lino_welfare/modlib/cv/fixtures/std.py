@@ -1,1 +1,1 @@
-from lino.modlib.cv.fixtures.std import objects
+from lino_xl.lib.cv.fixtures.std import objects

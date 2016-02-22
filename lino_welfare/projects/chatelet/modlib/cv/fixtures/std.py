@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""Standard fixture for :mod:`lino_modlib.projects.chatelet.modlib.cv`.
+"""Standard fixture for :mod:`lino_welfare.projects.chatelet.modlib.cv`.
 
 """
 
@@ -26,7 +26,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-from lino.modlib.cv.fixtures.std import objects as stdobjects
+from lino_xl.lib.cv.fixtures.std import objects as stdobjects
 
 from lino.api import dd, rt, _
 

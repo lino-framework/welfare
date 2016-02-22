@@ -16,13 +16,13 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Generates the objects in :mod:`lino.modlib.notes.fixtures.demo`
+"""Generates the objects in :mod:`lino_xl.lib.notes.fixtures.demo`
 plus one :attr:`important
 <lino_welfare.modlib.notes.models.Note.important>` note.
 
 """
 
-from lino.modlib.notes.fixtures.demo import objects as lib_objects
+from lino_xl.lib.notes.fixtures.demo import objects as lib_objects
 from lino.utils import Cycler
 from lino.api import dd, rt, _
 

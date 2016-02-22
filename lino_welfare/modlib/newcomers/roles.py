@@ -22,7 +22,7 @@
 
 """
 
-from lino.modlib.beid.roles import BeIdUser
+from lino_xl.lib.beid.roles import BeIdUser
 from lino.modlib.contacts.roles import ContactsUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 

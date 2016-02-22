@@ -38,7 +38,7 @@ from lino.utils.dpy import Migrator
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
 from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
-from lino.modlib.cal.choicelists import WORKDAYS
+from lino_xl.lib.cal.choicelists import WORKDAYS
 
 
 SINCE_ALWAYS = datetime.date(1990, 1, 1)
@@ -1022,7 +1022,7 @@ Moved model `system.HelpText` to `contenttypes.HelpText`.
 Convert field `Study.success` to `Study.state`.
 
 """
-        from lino.modlib.cv.mixins import SchoolingStates
+        from lino_xl.lib.cv.mixins import SchoolingStates
 
         bv2kw = globals_dict['bv2kw']
         new_content_type_id = globals_dict['new_content_type_id']

@@ -652,7 +652,7 @@ Visibility of eID reader actions
 Here is a list of the eid card reader actions and their availability
 per user profile.
 
->>> from lino.modlib.beid.mixins import BaseBeIdReadCardAction
+>>> from lino_xl.lib.beid.mixins import BaseBeIdReadCardAction
 >>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - debts.Clients.find_by_beid : visible for 300 admin

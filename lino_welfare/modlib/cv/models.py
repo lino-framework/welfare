@@ -28,12 +28,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino.modlib.cv.models import *
+from lino_xl.lib.cv.models import *
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 
-from lino.modlib.properties import models as properties
+from lino_xl.lib.properties import models as properties
 
 
 #
@@ -45,7 +45,7 @@ class PersonProperty(properties.PropertyOccurence):
 
     """
     The occurence of a given 
-    :mod:`Property <lino.modlib.properties.models.Property>` 
+    :mod:`Property <lino_xl.lib.properties.models.Property>` 
     on a given 
     :class:`Client <lino_welfare.modlib.pcsw.models.Client>`.
     """

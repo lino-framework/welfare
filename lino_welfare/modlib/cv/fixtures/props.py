@@ -29,7 +29,7 @@ from django.conf import settings
 from lino.utils.instantiator import Instantiator
 from lino.api.dd import babel_values
 #~ from lino.models import update_site_config
-from lino.modlib.properties.models import PropType
+from lino_xl.lib.properties.models import PropType
 
 
 def objects():

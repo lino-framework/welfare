@@ -31,7 +31,7 @@ from lino.utils.xmlgen.html import E
 from lino.modlib.summaries.mixins import Summary
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
-from lino.modlib.excerpts.mixins import Certifiable
+from lino_xl.lib.excerpts.mixins import Certifiable
 from .choicelists import ParticipationCertificates, StatisticalFields
 
 

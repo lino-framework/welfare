@@ -16,9 +16,9 @@
 # <http://www.gnu.org/licenses/>.
 
 """Chatelet version of CV management.  Adds Skills, Softskills and
-Obstacles to :mod:`lino.modlib.cv`.  At first glanse this looks like
+Obstacles to :mod:`lino_xl.lib.cv`.  At first glanse this looks like
 :mod:`lino_welfare.modlib.cv`, but it is a new implementation which
-does not use the deprecated :mod:`lino.modlib.properties` plugin.
+does not use the deprecated :mod:`lino_xl.lib.properties` plugin.
 
 .. autosummary::
    :toctree:
@@ -28,7 +28,7 @@ does not use the deprecated :mod:`lino.modlib.properties` plugin.
 
 """
 
-from lino.modlib.cv import Plugin
+from lino_xl.lib.cv import Plugin
 
 
 class Plugin(Plugin):

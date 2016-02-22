@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from lino.utils.instantiator import Instantiator
 from django.utils.translation import ugettext_lazy as _
-from lino.modlib.notes.choicelists import SpecialTypes
+from lino_xl.lib.notes.choicelists import SpecialTypes
 
 from lino.api import dd, rt
 

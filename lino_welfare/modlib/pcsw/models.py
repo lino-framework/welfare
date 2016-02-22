@@ -44,10 +44,10 @@ from lino.utils.xmlgen.html import E
 from lino.api import dd, rt
 from lino.core.utils import get_field
 
-from lino.modlib.cal.utils import update_reminder
-from lino.modlib.cal.choicelists import DurationUnits
+from lino_xl.lib.cal.utils import update_reminder
+from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
-from lino.modlib.notes.choicelists import SpecialTypes
+from lino_xl.lib.notes.choicelists import SpecialTypes
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -55,7 +55,7 @@ contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 users = dd.resolve_app('users')
-from lino.modlib.beid.mixins import BeIdCardHolder
+from lino_xl.lib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 # from lino.modlib.vatless.mixins import PartnerDetailMixin
 
@@ -120,7 +120,7 @@ class RefuseClient(dd.ChangeStateAction):
 class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
-    :class:`lino.modlib.beid.models.BeIdCardHolder`.
+    :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
 
     A :class:`Client` is a polymorphic specialization of :class:`Person`.
 
@@ -134,9 +134,9 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         (Curriculum Vitaes).
 
         This field is an excerpts shortcut
-        (:class:`lino.modlib.excerpts.models.Shortcuts`) and works only if
+        (:class:`lino_xl.lib.excerpts.models.Shortcuts`) and works only if
         the database has an :class:`ExcerptType
-        <lino.modlib.excerpts.models.ExcerptType>` whose `shortcut` points
+        <lino_xl.lib.excerpts.models.ExcerptType>` whose `shortcut` points
         to it.
 
     .. attribute:: id_document
@@ -561,7 +561,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     def get_beid_diffs(self, attrs):
         """Overrides
-        :meth:`lino.modlib.beid.mixins.BeIdCardHolder.get_beid_diffs`.
+        :meth:`lino_xl.lib.beid.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
         Address = rt.modules.addresses.Address

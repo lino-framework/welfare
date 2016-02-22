@@ -1,1 +1,1 @@
-from lino.modlib.notes.fixtures.std import *
+from lino_xl.lib.notes.fixtures.std import *

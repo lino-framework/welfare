@@ -17,7 +17,7 @@
 
 # import datetime
 
-from lino.modlib.households import Plugin
+from lino_xl.lib.households import Plugin
 
 
 class Plugin(Plugin):

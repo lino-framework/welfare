@@ -28,7 +28,7 @@ from django.db import models
 
 from lino import mixins
 from lino.api import dd, _
-from lino.modlib.notes.choicelists import SpecialTypes
+from lino_xl.lib.notes.choicelists import SpecialTypes
 
 
 class SequencedBudgetComponent(mixins.Sequenced):

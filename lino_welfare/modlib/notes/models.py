@@ -28,7 +28,7 @@ from django.conf import settings
 
 from lino.api import dd, rt
 
-from lino.modlib.notes.models import *
+from lino_xl.lib.notes.models import *
 
 
 class Note(Note):
@@ -45,7 +45,7 @@ class Note(Note):
 
     .. attribute:: person
 
-        An alias to :attr:`lino.modlib.notes.models.Note.project`.
+        An alias to :attr:`lino_xl.lib.notes.models.Note.project`.
 
     """
     class Meta:

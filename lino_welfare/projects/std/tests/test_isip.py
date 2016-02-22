@@ -34,7 +34,7 @@ from django.conf import settings
 from lino.utils.djangotest import RemoteAuthTestCase
 
 from lino.utils import i2d
-from lino.modlib.cal.choicelists import WORKDAYS
+from lino_xl.lib.cal.choicelists import WORKDAYS
 from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.system.choicelists import Genders
 

@@ -1,1 +1,1 @@
-from lino.modlib.households.fixtures.std import *
+from lino_xl.lib.households.fixtures.std import *

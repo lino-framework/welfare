@@ -57,7 +57,7 @@ from lino.utils import mti
 from lino.utils.daemoncommand import DaemonCommand
 
 from lino.utils.ssin import is_valid_ssin
-from lino.modlib.beid.mixins import BeIdCardTypes
+from lino_xl.lib.beid.mixins import BeIdCardTypes
 
 
 LONG_TIME_AGO = datetime.date(1990, 1, 1)
