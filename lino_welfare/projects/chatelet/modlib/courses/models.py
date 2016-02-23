@@ -116,5 +116,17 @@ class JobEnrolmentsByPupil(EnrolmentsByPupil):
     _course_area = CourseAreas.job
 
 
-ActiveCourses._label = _("Active workshops")
-DraftCourses._label = _("Draft workshops")
+class ActiveCourses(ActiveCourses):
+
+    label = _("Active workshops")
+    column_names = 'info enrolments free_places teacher room description *'
+    hide_sums = True
+
+# ActiveCourses._label = _("Active workshops")
+
+
+class DraftCourses(DraftCourses):
+    label = _("Draft workshops")
+    column_names = 'info teacher room description *'
+
+# DraftCourses._label = _("Draft workshops")
