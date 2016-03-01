@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -26,17 +26,24 @@ from lino_cosi.lib.finan.models import *
 from lino.api import _
 
 
-class PaymentInstructionDetail(JournalEntryDetail):
+class DisbursementOrderDetail(JournalEntryDetail):
     general = dd.Panel("""
-    voucher_date user narration total workflow_buttons
-    finan.ItemsByPaymentInstruction
+    journal number voucher_date entry_date accounting_period
+    item_account total workflow_buttons
+    narration item_remark
+    finan.ItemsByDisbursementOrder
     """, label=_("General"))
 
+    ledger = dd.Panel("""
+    state user id
+    ledger.MovementsByVoucher
+    """, label=_("Ledger"))
 
-class PaymentInstructions(PaymentOrders):
+
+class DisbursementOrders(PaymentOrders):
     """The table of all :class:`PaymentOrder` vouchers seen as payment
     instructions."""
-    detail_layout = PaymentInstructionDetail()
+    detail_layout = DisbursementOrderDetail()
     suggestions_table = 'finan.SuggestionsByPaymentOrder'
 
 
@@ -45,13 +52,31 @@ class ItemsByPaymentOrder(ItemsByPaymentOrder):
                    "amount remark *"
 
 
-class ItemsByPaymentInstruction(ItemsByPaymentOrder):
-    column_names = "seqno account project partner bank_account workflow_buttons match "\
-                   "amount remark *"
+class ItemsByDisbursementOrder(ItemsByPaymentOrder):
+    column_names = "seqno project partner bank_account workflow_buttons match "\
+                   "amount *"
 
 
-class PaymentInstructionsByJournal(ledger.ByJournal, PaymentInstructions):
-    pass
+class DisbursementOrdersByJournal(ledger.ByJournal, DisbursementOrders):
+    insert_layout = """
+    item_account
+    narration
+    item_remark
+    """
 
 
-VoucherTypes.add_item(PaymentOrder, PaymentInstructionsByJournal)
+VoucherTypes.add_item(PaymentOrder, DisbursementOrdersByJournal)
+
+
+@dd.receiver(dd.pre_analyze)
+def override_field_names(sender=None, **kwargs):
+    for m in rt.models_by_base(FinancialVoucher):
+        dd.update_field(
+            m, 'narration', verbose_name=_("Internal reference"))
+        dd.update_field(
+            m, 'item_remark', verbose_name=_("External reference"))
+    for m in rt.models_by_base(FinancialVoucherItem):
+        # dd.update_field(
+        #     m, 'narration', verbose_name=_("Internal reference"))
+        dd.update_field(
+            m, 'remark', verbose_name=_("External reference"))

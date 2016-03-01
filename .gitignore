@@ -25,3 +25,4 @@ htmlcov
 userdocs/gen
 .DS_Store
 .idea
+.coverage

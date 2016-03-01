@@ -36,7 +36,7 @@ Classic accounting:
 Lino Welfare accounting:
 
 #. Purchase invoice -> 4400
-#. (4400 ->) Payment instruction -> 4450
+#. (4400 ->) Disbursement order -> 4450
 #. (4450 ->) Payment order -> 5800
 #. (5800 ->) Bank Statement -> 5500
 #. (4450 ->) Bank Statement -> 5500
@@ -91,7 +91,7 @@ def objects():
     settings.SITE.site_config.update(suppliers_account=a4400)
 
     a4450 = account(
-        '4450', 'liabilities', _("Payment instructions to execute"),
+        '4450', 'liabilities', _("Disbursement orders to execute"),
         clearable=True, needs_partner=True)
     yield a4450
 
@@ -102,7 +102,7 @@ def objects():
 
     yield group('55', 'assets', _("Financial institutes"))
     yield account("5500", 'bank_accounts', "KBC")
-    # a5600 = account("5600", 'bank_accounts', _("Payment instructions"))
+    # a5600 = account("5600", 'bank_accounts', _("Disbursement orders"))
     # yield a5600
     yield account("5700", 'bank_accounts', _("Cash"))
 
