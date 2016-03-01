@@ -28,10 +28,16 @@ from lino.api import _
 
 class DisbursementOrderDetail(JournalEntryDetail):
     general = dd.Panel("""
-    voucher_date user narration total workflow_buttons
-    item_account item_remark
+    journal number voucher_date entry_date accounting_period
+    item_account total workflow_buttons
+    narration item_remark
     finan.ItemsByDisbursementOrder
     """, label=_("General"))
+
+    ledger = dd.Panel("""
+    state user id
+    ledger.MovementsByVoucher
+    """, label=_("Ledger"))
 
 
 class DisbursementOrders(PaymentOrders):
@@ -52,7 +58,11 @@ class ItemsByDisbursementOrder(ItemsByPaymentOrder):
 
 
 class DisbursementOrdersByJournal(ledger.ByJournal, DisbursementOrders):
-    pass
+    insert_layout = """
+    item_account
+    narration
+    item_remark
+    """
 
 
 VoucherTypes.add_item(PaymentOrder, DisbursementOrdersByJournal)
