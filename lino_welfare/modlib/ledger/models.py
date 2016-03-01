@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ from lino_cosi.lib.ledger.choicelists import TradeTypes
 JournalGroups.clear()
 add = JournalGroups.add_item
 add('10', _("Incoming invoices"), 'purchases')
-add('20', _("Payment instructions"), 'aids')
+add('20', _("Disbursement orders"), 'aids')
 add('40', _("Financial"), 'financial')
 
 

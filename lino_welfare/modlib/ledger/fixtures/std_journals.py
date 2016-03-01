@@ -32,7 +32,7 @@ def objects():
     JournalGroups = rt.modules.ledger.JournalGroups
     BankStatement = rt.modules.finan.BankStatement
     PaymentOrder = rt.modules.finan.PaymentOrder
-    PaymentInstructionsByJournal = rt.modules.finan.PaymentInstructionsByJournal
+    DisbursementOrdersByJournal = rt.modules.finan.DisbursementOrdersByJournal
     InvoicesByJournal = rt.modules.vatless.InvoicesByJournal
     ProjectInvoicesByJournal = rt.modules.vatless.ProjectInvoicesByJournal
     MatchRule = rt.modules.ledger.MatchRule
@@ -49,10 +49,10 @@ def objects():
     kw.update(dd.str2kw('name', _("Collective purchase invoices")))
     yield InvoicesByJournal.create_journal(**kw)
 
-    kw.update(dd.str2kw('name', _("Payment instructions")))
+    kw.update(dd.str2kw('name', _("Disbursement orders")))
     kw.update(account='4450', ref="AAW")
     kw.update(journal_group=JournalGroups.aids)
-    jnl = PaymentInstructionsByJournal.create_journal(**kw)
+    jnl = DisbursementOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4400)
 
