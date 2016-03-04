@@ -247,8 +247,12 @@ class Migrator(Migrator):
 
     def migrate_from_1_1_25(self, globals_dict):
         """
-- renamed PaymentInstruction to DisbursementOrder
-"""
+- rename PaymentInstructionsByJournal to DisbursementOrdersByJournal
+- remove all ledger vouchers
+- remove all plausibility problems because checker names have changed
+  (please run yourself checkdata after migration)
+
+        """
         
         ledger_Journal = rt.modules.ledger.Journal
         bv2kw = globals_dict['bv2kw']
@@ -274,10 +278,16 @@ class Migrator(Migrator):
             return ledger_Journal(**kw)
         globals_dict.update(create_ledger_journal=create_ledger_journal)
 
+        globals_dict.update(create_plausibility_problem=noop)
         globals_dict.update(create_ledger_voucher=noop)
+        globals_dict.update(create_ledger_movement=noop)
         globals_dict.update(create_finan_bankstatement=noop)
+        globals_dict.update(create_finan_bankstatementitem=noop)
         globals_dict.update(create_finan_journalentry=noop)
+        globals_dict.update(create_finan_journalentryitem=noop)
         globals_dict.update(create_finan_paymentorder=noop)
+        globals_dict.update(create_finan_paymentorderitem=noop)
         globals_dict.update(create_vatless_accountinvoice=noop)
+        globals_dict.update(create_vatless_invoiceitem=noop)
 
         return '1.1.26'

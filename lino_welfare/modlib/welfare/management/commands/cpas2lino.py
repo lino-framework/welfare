@@ -188,6 +188,9 @@ class TimLoader(TimLoader):
             return
         kw.update(voucher=imp)
         kw.update(seqno=int(row.line))
+        kw.update(amount=row.mont)
+        kw.update(dc=(row.dc == "A"))
+
         kw.update(account=acc)
         p = get_or_none(contacts.Partner, row.idpar2)
         if p:
@@ -310,6 +313,7 @@ class Command(BaseCommand):
         for pth in args:
             tim = TimLoader(pth)
             for obj in expand(tim.objects()):
+                obj.full_clean()
                 obj.save()
 
 
