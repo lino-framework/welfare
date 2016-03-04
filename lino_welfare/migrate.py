@@ -195,7 +195,6 @@ class Migrator(Migrator):
             loader.save(std_journals())
         self.after_load(after_load)
 
-
         bv2kw = globals_dict['bv2kw']
         accounts_Group = rt.modules.accounts.Group
         accounts_Account = rt.modules.accounts.Account
@@ -252,7 +251,7 @@ class Migrator(Migrator):
 """
         
         ledger_Journal = rt.modules.ledger.Journal
-
+        bv2kw = globals_dict['bv2kw']
 
         def create_ledger_journal(id, ref, build_method, template, seqno, name, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account_id, printed_name, dc):
             kw = dict()
