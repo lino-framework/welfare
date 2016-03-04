@@ -189,7 +189,6 @@ class TimLoader(TimLoader):
         kw.update(voucher=imp)
         kw.update(seqno=int(row.line))
         kw.update(amount=row.mont)
-        kw.update(dc=(row.dc == "A"))
 
         kw.update(account=acc)
         p = get_or_none(contacts.Partner, row.idpar2)
@@ -212,6 +211,7 @@ class TimLoader(TimLoader):
                     imp.full_clean()
                     imp.save()
         elif issubclass(voucher_model, finan.FinancialVoucher):
+            kw.update(dc=(row.dc == "A"))
             kw.update(remark=row.nb1.strip())
             # kw.update(title=row.nb2.strip())
             if match:
