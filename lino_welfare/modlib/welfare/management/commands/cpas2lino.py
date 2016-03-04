@@ -317,7 +317,9 @@ class Command(BaseCommand):
             for m in models:
                 qs = m.objects.all()
                 dd.logger.info("Delete %d rows from %s.", qs.count(), m)
-                qs.delete()
+                # qs.delete()
+                for obj in qs:
+                    obj.delete()
 
         for pth in args:
             tim = TimLoader(pth)
