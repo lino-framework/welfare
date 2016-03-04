@@ -191,13 +191,11 @@ class TimLoader(TimLoader):
         kw.update(amount=row.mont)
 
         kw.update(account=acc)
-        p = get_or_none(contacts.Partner, row.idpar2)
-        if p:
-            kw.update(partner=p)
-        p = get_or_none(pcsw.Client, row.idpar)
-        if p:
-            kw.update(project=p)
+        prj = get_or_none(pcsw.Client, row.idpar)
+        if prj:
+            kw.update(project=prj)
         match = row.match.strip()
+        par = get_or_none(contacts.Partner, row.idpar2)
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
             kw.update(title=row.nb2.strip())
@@ -210,17 +208,28 @@ class TimLoader(TimLoader):
                     imp.match = match
                     imp.full_clean()
                     imp.save()
+            if par:
+                if imp.partner:
+                    dd.logger.warning(
+                        "Ignoring non-empty partner of %(seqno)s in %(voucher)s",
+                        **kw)
+                else:
+                    imp.partner = par
+                    imp.full_clean()
+                    imp.save()
         elif issubclass(voucher_model, finan.FinancialVoucher):
             kw.update(dc=(row.dc == "A"))
             kw.update(remark=row.nb1.strip())
             # kw.update(title=row.nb2.strip())
             if match:
                 kw.update(match=match)
+            if par:
+                kw.update(partner=par)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
         obj = jnl.voucher_type.get_items_model()(**kw)
-        dd.logger.info("20160304 %s", obj)
+        # dd.logger.info("20160304 %s", obj)
         return obj
 
     def load_mvi(self, row, **kw):
