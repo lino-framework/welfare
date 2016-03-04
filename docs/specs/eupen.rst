@@ -51,9 +51,9 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
-  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
-  - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
+  - Purchase orders : Rechnungseingänge (REG), Sammelrechnungen (SREG)
+  - Rechnungseingänge : Ausgabeanweisungen (AAW)
+  - Ausgabeanweisungen : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -69,7 +69,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Externe Kalender
-  - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Zahlungsbedingungen
+  - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -686,4 +686,5 @@ Some choices lists:
 >>> fields = 'count rows'
 >>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
 >>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+
 

@@ -134,6 +134,9 @@ class SpecsTests(BaseTestCase):
     def test_eupen(self):
         return self.run_simple_doctests('docs/specs/eupen.rst')
 
+    def test_db_eupen(self):
+        return self.run_simple_doctests('docs/specs/db_eupen.rst')
+
     def test_misc(self):
         return self.run_simple_doctests('docs/specs/misc.rst')
 

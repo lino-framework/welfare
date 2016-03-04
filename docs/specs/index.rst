@@ -60,6 +60,7 @@ Eupen
    clients_eupen
    eupen
    b2c
+   db_eupen
 
 Châtelet
 ========
