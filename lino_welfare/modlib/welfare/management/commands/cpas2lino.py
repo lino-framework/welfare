@@ -182,9 +182,9 @@ class TimLoader(TimLoader):
         idjnl = row.idjnl.strip()
         jnl = ledger.Journal.get_by_ref(idjnl, None)
         if jnl is None:
-            if idjnl not in self.ignored:
+            if idjnl not in self.ignored_journals:
                 dd.logger.warning("Ignoring journal %s", idjnl)
-                self.ignored.add(idjnl)
+                self.ignored_journals.add(idjnl)
             return
         voucher_model = jnl.voucher_type.model
         ref = self.row2account(row)
@@ -253,7 +253,7 @@ class TimLoader(TimLoader):
 
     def objects(self):
 
-        self.ignored = set()
+        self.ignored_journals = set()
         self.ignored_accounts = set()
 
         # self.group = accounts.Group(name="Imported from TIM")
@@ -342,6 +342,8 @@ class Command(BaseCommand):
             for obj in expand(tim.objects()):
                 obj.full_clean()
                 obj.save()
+            dd.logger.info("Ignored journals : %s.", tim.ignored_journals)
+            dd.logger.info("Ignored accounts : %s.", tim.ignored_accounts)
 
 
 def expand(obj):
