@@ -281,4 +281,4 @@ class Migrator(Migrator):
         globals_dict.update(create_finan_paymentorder=noop)
         globals_dict.update(create_vatless_accountinvoice=noop)
 
-    return '1.1.26'
+        return '1.1.26'
