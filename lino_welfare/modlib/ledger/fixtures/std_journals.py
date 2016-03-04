@@ -40,7 +40,7 @@ def objects():
     a4450 = Account.objects.get(ref="4450")
     a5800 = Account.objects.get(ref="5800")
 
-    kw = dict(journal_group=JournalGroups.purchases)
+    kw = dict(journal_group=JournalGroups.reg)
     kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Incoming invoices")))
     yield ProjectInvoicesByJournal.create_journal(**kw)
@@ -51,12 +51,11 @@ def objects():
 
     kw.update(dd.str2kw('name', _("Disbursement orders")))
     kw.update(account='4450', ref="AAW")
-    kw.update(journal_group=JournalGroups.aids)
+    kw.update(journal_group=JournalGroups.anw)
     jnl = DisbursementOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4400)
 
-    kw = dict(journal_group=JournalGroups.financial)
     if dd.is_installed('client_vouchers'):
         ClientVoucher = rt.modules.client_vouchers.ClientVoucher
         kw = dict(journal_group=JournalGroups.aids)
@@ -66,7 +65,8 @@ def objects():
         yield jnl
         yield MatchRule(journal=jnl, account=a4400)
 
-    kw.update(journal_group=JournalGroups.financial)
+    kw = dict()
+    kw.update(journal_group=JournalGroups.tre)
     kw.update(dd.str2kw('name', _("KBC")))
     kw.update(account='5500', ref="KBC")
     jnl = BankStatement.create_journal(**kw)
@@ -74,7 +74,7 @@ def objects():
     yield MatchRule(journal=jnl, account=a4450)
     yield MatchRule(journal=jnl, account=a5800)
 
-    kw.update(journal_group=JournalGroups.financial)
+    kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account='5800', ref="ZKBC")
     jnl = PaymentOrder.create_journal(**kw)

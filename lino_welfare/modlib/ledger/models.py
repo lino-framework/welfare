@@ -29,9 +29,14 @@ from lino_cosi.lib.ledger.choicelists import TradeTypes
 
 JournalGroups.clear()
 add = JournalGroups.add_item
-add('10', _("Incoming invoices"), 'purchases')
-add('20', _("Disbursement orders"), 'aids')
-add('40', _("Financial"), 'financial')
+add('10', _("Purchase orders"), 'bst')
+add('20', _("Incoming invoices"), 'reg')
+add('30', _("Claimings"), 'ffo')
+add('40', _("Disbursement orders"), 'anw')
+add('50', _("Payment orders"), 'zau')
+add('60', _("Financial"), 'tre')
+add('70', _("Budgetary"), 'hhh')
+add('80', _("Domiciliations"), 'dom')
 
 
 TradeTypes.clear()
