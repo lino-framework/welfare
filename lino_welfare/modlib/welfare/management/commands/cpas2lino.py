@@ -50,6 +50,15 @@ def get_or_none(m, pk):
     except m.DoesNotExist:
         return None
 
+def get_user_or_none(m, pk):
+    pk = pk.strip()
+    if not pk:
+        return None
+    try:
+        return m.objects.get(pk=int(pk))
+    except m.DoesNotExist:
+        return None
+
 
 class TimLoader(TimLoader):
 
@@ -146,7 +155,14 @@ class TimLoader(TimLoader):
         imp.account = acc
         imp.voucher_date = row.date2
         imp.accounting_period = ap
-        imp.user = row.idusr
+        username = settings.TIM2LINO_USERNAME(row.idusr.strip())
+        if username:
+            try:
+                imp.user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                dd.logger.warning(
+                    "%s %s : Unknown username '%s'",
+                    row.idjnl, row.iddoc, row.idusr)
 
         if issubclass(voucher_model, vatless.AccountInvoice):
             kw.update(narration=row.nb1.strip())
