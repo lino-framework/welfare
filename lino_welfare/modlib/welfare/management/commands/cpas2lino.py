@@ -203,7 +203,7 @@ class TimLoader(TimLoader):
                 if imp.match:
                     dd.logger.warning(
                         "Ignoring non-empty match of %(seqno)s in %(voucher)s",
-                        **kw)
+                        kw)
                 else:
                     imp.match = match
                     imp.full_clean()
@@ -212,7 +212,7 @@ class TimLoader(TimLoader):
                 if imp.partner:
                     dd.logger.warning(
                         "Ignoring non-empty partner of %(seqno)s in %(voucher)s",
-                        **kw)
+                        kw)
                 else:
                     imp.partner = par
                     imp.full_clean()
