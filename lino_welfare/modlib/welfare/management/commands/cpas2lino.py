@@ -42,16 +42,6 @@ pcsw = rt.modules.pcsw
 # Account = rt.modules.accounts.Account
 
 
-def get_or_none(m, pk):
-    pk = pk.strip()
-    if not pk:
-        return None
-    try:
-        return m.objects.get(pk=int(pk))
-    except m.DoesNotExist:
-        return None
-
-
 def get_user_or_none(m, pk):
     pk = pk.strip()
     if not pk:
@@ -138,6 +128,16 @@ class TimLoader(TimLoader):
             ap.save()
         return ap
 
+    def get_or_none(self, m, pk):
+        pk = pk.strip()
+        if not pk:
+            return None
+        try:
+            return m.objects.get(pk=int(pk))
+        except m.DoesNotExist:
+            self.missing_partners.add(pk)
+            return None
+
     def load_imp(self, row, **kw):
         jnl = ledger.Journal.get_by_ref(row.idjnl.strip(), None)
         if jnl is None:
@@ -151,8 +151,8 @@ class TimLoader(TimLoader):
         except voucher_model.DoesNotExist:
             imp = voucher_model(journal=jnl, number=number)
 
-        imp.partner = get_or_none(contacts.Partner, row.idpar2)
-        imp.project = get_or_none(pcsw.Client, row.idpar)
+        imp.partner = self.get_or_none(contacts.Partner, row.idpar2)
+        imp.project = self.get_or_none(pcsw.Client, row.idpar)
         imp.entry_date = row.date1
         imp.account = acc
         imp.voucher_date = row.date2
@@ -210,11 +210,11 @@ class TimLoader(TimLoader):
         kw.update(amount=row.mont)
 
         kw.update(account=acc)
-        prj = get_or_none(pcsw.Client, row.idpar)
+        prj = self.get_or_none(pcsw.Client, row.idpar)
         if prj:
             kw.update(project=prj)
         match = row.match.strip()
-        par = get_or_none(contacts.Partner, row.idpar2)
+        par = self.get_or_none(contacts.Partner, row.idpar2)
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
             kw.update(title=row.nb2.strip())
@@ -222,8 +222,8 @@ class TimLoader(TimLoader):
                 if match != imp.match:
                     self.ignored_matches.collect(jnl.ref, 1)
                     dd.logger.warning(
-                        "Ignoring non-empty match in row %(seqno)s in %(voucher)s",
-                        kw)
+                        "Ignoring non-empty match in row %(seqno)s "
+                        "of %(voucher)s", kw)
                 else:
                     imp.match = match
                     imp.full_clean()
@@ -232,8 +232,8 @@ class TimLoader(TimLoader):
                 if par != imp.partner:
                     self.ignored_partners.collect(jnl.ref, 1)
                     dd.logger.warning(
-                        "Ignoring non-empty partner in row %(seqno)s in %(voucher)s",
-                        kw)
+                        "Ignoring non-empty partner in row %(seqno)s "
+                        "of %(voucher)s", kw)
                 else:
                     imp.partner = par
                     imp.full_clean()
@@ -260,6 +260,7 @@ class TimLoader(TimLoader):
 
         self.ignored_journals = set()
         self.ignored_accounts = set()
+        self.missing_partners = set()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
@@ -307,6 +308,7 @@ class TimLoader(TimLoader):
         dd.logger.info("Rows by year : %s.", self.rows_by_year)
         dd.logger.info("Ignored matches : %s.", self.ignored_matches)
         dd.logger.info("Ignored partners : %s.", self.ignored_partners)
+        dd.logger.info("Missing partners : %s.", self.missing_partners)
 
 
 class Command(BaseCommand):
