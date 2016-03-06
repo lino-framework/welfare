@@ -162,6 +162,7 @@ class TimLoader(TimLoader):
             try:
                 imp.user = User.objects.get(username=username)
             except User.DoesNotExist:
+                self.unknown_users.add(row.idusr)
                 dd.logger.warning(
                     "%s %s : Unknown username '%s'",
                     row.idjnl, row.iddoc, row.idusr)
@@ -261,6 +262,7 @@ class TimLoader(TimLoader):
         self.ignored_journals = set()
         self.ignored_accounts = set()
         self.missing_partners = set()
+        self.unknown_users = set()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
@@ -303,12 +305,12 @@ class TimLoader(TimLoader):
                     break
 
     def write_report(self):
-        dd.logger.info("Ignored journals : %s.", self.ignored_journals)
-        dd.logger.info("Ignored accounts : %s.", self.ignored_accounts)
-        dd.logger.info("Rows by year : %s.", self.rows_by_year)
-        dd.logger.info("Ignored matches : %s.", self.ignored_matches)
-        dd.logger.info("Ignored partners : %s.", self.ignored_partners)
-        dd.logger.info("Missing partners : %s.", self.missing_partners)
+        for k in ('ignored_journals', 'ignored_accounts',
+                  'rows_by_year', 'ignored_matches',
+                  'ignored_partners', 'missing_partners',
+                  'unknown_users'):
+
+            dd.logger.info("%s = %s", k, getattr(self, k))
 
 
 class Command(BaseCommand):
