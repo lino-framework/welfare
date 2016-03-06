@@ -25,6 +25,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from lino.utils import dpy
+from lino.utils import SumCollector
 from lino.api import rt
 
 from lino.api import dd
@@ -40,15 +41,6 @@ contacts = rt.modules.contacts
 pcsw = rt.modules.pcsw
 # Account = rt.modules.accounts.Account
 
-
-def get_or_none(m, pk):
-    pk = pk.strip()
-    if not pk:
-        return None
-    try:
-        return m.objects.get(pk=int(pk))
-    except m.DoesNotExist:
-        return None
 
 def get_user_or_none(m, pk):
     pk = pk.strip()
@@ -136,6 +128,16 @@ class TimLoader(TimLoader):
             ap.save()
         return ap
 
+    def get_or_none(self, m, pk):
+        pk = pk.strip()
+        if not pk:
+            return None
+        try:
+            return m.objects.get(pk=int(pk))
+        except m.DoesNotExist:
+            self.missing_partners.add(pk)
+            return None
+
     def load_imp(self, row, **kw):
         jnl = ledger.Journal.get_by_ref(row.idjnl.strip(), None)
         if jnl is None:
@@ -149,8 +151,8 @@ class TimLoader(TimLoader):
         except voucher_model.DoesNotExist:
             imp = voucher_model(journal=jnl, number=number)
 
-        imp.partner = get_or_none(contacts.Partner, row.idpar2)
-        imp.project = get_or_none(pcsw.Client, row.idpar)
+        imp.partner = self.get_or_none(contacts.Partner, row.idpar2)
+        imp.project = self.get_or_none(pcsw.Client, row.idpar)
         imp.entry_date = row.date1
         imp.account = acc
         imp.voucher_date = row.date2
@@ -160,23 +162,25 @@ class TimLoader(TimLoader):
             try:
                 imp.user = User.objects.get(username=username)
             except User.DoesNotExist:
+                self.unknown_users.add(row.idusr)
                 dd.logger.warning(
                     "%s %s : Unknown username '%s'",
                     row.idjnl, row.iddoc, row.idusr)
 
+        # dd.logger.info("20160304 %s", imp)
+        self.rows_by_year.collect(imp.entry_date.year, 1)
+        imp.full_clean()
+        # imp.save()
         if issubclass(voucher_model, vatless.AccountInvoice):
-            kw.update(narration=row.nb1.strip())
-            kw.update(your_ref=row.nb2.strip())
+            imp.narration = row.nb1.strip()
+            imp.your_ref = row.nb2.strip()
         elif issubclass(voucher_model, finan.FinancialVoucher):
-            kw.update(remark=row.nb2.strip())
+            imp.item_remark = row.nb2.strip()
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
 
-        dd.logger.info("20160304 %s", imp)
         return imp
-        # imp.full_clean()
-        # imp.save()
 
     def load_iml(self, row, **kw):
         idjnl = row.idjnl.strip()
@@ -207,28 +211,30 @@ class TimLoader(TimLoader):
         kw.update(amount=row.mont)
 
         kw.update(account=acc)
-        prj = get_or_none(pcsw.Client, row.idpar)
+        prj = self.get_or_none(pcsw.Client, row.idpar)
         if prj:
             kw.update(project=prj)
         match = row.match.strip()
-        par = get_or_none(contacts.Partner, row.idpar2)
+        par = self.get_or_none(contacts.Partner, row.idpar2)
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
             kw.update(title=row.nb2.strip())
             if match:
-                if imp.match:
+                if match != imp.match:
+                    self.ignored_matches.collect(jnl.ref, 1)
                     dd.logger.warning(
-                        "Ignoring non-empty match of %(seqno)s in %(voucher)s",
-                        kw)
+                        "Ignoring non-empty match in row %(seqno)s "
+                        "of %(voucher)s", kw)
                 else:
                     imp.match = match
                     imp.full_clean()
                     imp.save()
             if par:
-                if imp.partner:
+                if par != imp.partner:
+                    self.ignored_partners.collect(jnl.ref, 1)
                     dd.logger.warning(
-                        "Ignoring non-empty partner of %(seqno)s in %(voucher)s",
-                        kw)
+                        "Ignoring non-empty partner in row %(seqno)s "
+                        "of %(voucher)s", kw)
                 else:
                     imp.partner = par
                     imp.full_clean()
@@ -255,6 +261,11 @@ class TimLoader(TimLoader):
 
         self.ignored_journals = set()
         self.ignored_accounts = set()
+        self.missing_partners = set()
+        self.unknown_users = set()
+        self.rows_by_year = SumCollector()
+        self.ignored_matches = SumCollector()
+        self.ignored_partners = SumCollector()
 
         # self.group = accounts.Group(name="Imported from TIM")
         # self.group.full_clean()
@@ -292,6 +303,14 @@ class TimLoader(TimLoader):
                 if failures > 100:
                     dd.logger.warning("Abandoned after 100 failures.")
                     break
+
+    def write_report(self):
+        for k in ('ignored_journals', 'ignored_accounts',
+                  'rows_by_year', 'ignored_matches',
+                  'ignored_partners', 'missing_partners',
+                  'unknown_users'):
+
+            dd.logger.info("%s = %s", k, getattr(self, k))
 
 
 class Command(BaseCommand):
@@ -342,8 +361,7 @@ class Command(BaseCommand):
             for obj in expand(tim.objects()):
                 obj.full_clean()
                 obj.save()
-            dd.logger.info("Ignored journals : %s.", tim.ignored_journals)
-            dd.logger.info("Ignored accounts : %s.", tim.ignored_accounts)
+            tim.write_report()
 
 
 def expand(obj):

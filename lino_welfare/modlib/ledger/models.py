@@ -37,6 +37,7 @@ add('50', _("Payment orders"), 'zau')
 add('60', _("Financial"), 'tre')
 add('70', _("Budgetary"), 'hhh')
 add('80', _("Domiciliations"), 'dom')
+add('90', _("Closing entries"), 'clo')
 
 
 TradeTypes.clear()
