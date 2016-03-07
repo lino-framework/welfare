@@ -195,9 +195,11 @@ class TimLoader(TimLoader):
             imp.item_remark = row.nb2.strip()
             imp.item_account = acc
             if compte:
-                dd.logger.warning(
-                    "%s %s : Ignoring bank account '%s'",
-                    row.idjnl, row.iddoc, row.compte1)
+                if row.compte1.strip() not in self.ignored_bank_accounts:
+                    self.ignored_bank_accounts.add(row.compte1.strip())
+                    dd.logger.warning(
+                        "%s %s : Ignoring bank account '%s'",
+                        row.idjnl, row.iddoc, row.compte1)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
@@ -324,6 +326,7 @@ class TimLoader(TimLoader):
 
         self.ignored_journals = set()
         self.ignored_accounts = set()
+        self.ignored_bank_accounts = set()
         self.undefined_bank_accounts = set()
         self.unknown_users = set()
         self.missing_partners = SumCollector()
@@ -375,7 +378,8 @@ class TimLoader(TimLoader):
         for k in ('ignored_journals', 'ignored_accounts',
                   'rows_by_year', 'ignored_matches',
                   'ignored_partners', 'missing_partners',
-                  'unknown_users', 'undefined_bank_accounts'):
+                  'unknown_users', 'undefined_bank_accounts',
+                  'ignored_bank_accounts'):
 
             dd.logger.info("%s = %s", k, getattr(self, k))
 
