@@ -39,6 +39,7 @@ vatless = rt.modules.vatless
 finan = rt.modules.finan
 contacts = rt.modules.contacts
 pcsw = rt.modules.pcsw
+sepa = rt.modules.sepa
 # Account = rt.modules.accounts.Account
 
 
@@ -128,14 +129,15 @@ class TimLoader(TimLoader):
             ap.save()
         return ap
 
-    def get_or_none(self, m, pk):
+    def tim2partner(self, m, pk):
         pk = pk.strip()
         if not pk:
             return None
+        pk = int(pk)
         try:
-            return m.objects.get(pk=int(pk))
+            return m.objects.get(pk=pk)
         except m.DoesNotExist:
-            self.missing_partners.add(pk)
+            self.missing_partners.collect(m, pk)
             return None
 
     def load_imp(self, row, **kw):
@@ -151,10 +153,13 @@ class TimLoader(TimLoader):
         except voucher_model.DoesNotExist:
             imp = voucher_model(journal=jnl, number=number)
 
-        imp.partner = self.get_or_none(contacts.Partner, row.idpar2)
-        imp.project = self.get_or_none(pcsw.Client, row.idpar)
+        par, prj = self.row2parprj(row)
+        imp.partner = par
+        imp.project = prj
+        compte = self.tim2compte(row, par, prj)
+        if compte:
+            imp.bank_account = compte
         imp.entry_date = row.date1
-        imp.account = acc
         imp.voucher_date = row.date2
         imp.accounting_period = ap
         username = settings.TIM2LINO_USERNAME(row.idusr.strip())
@@ -172,15 +177,48 @@ class TimLoader(TimLoader):
         imp.full_clean()
         # imp.save()
         if issubclass(voucher_model, vatless.AccountInvoice):
+            imp.account = acc
             imp.narration = row.nb1.strip()
             imp.your_ref = row.nb2.strip()
         elif issubclass(voucher_model, finan.FinancialVoucher):
             imp.item_remark = row.nb2.strip()
+            imp.item_account = acc
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
 
         return imp
+
+    def row2parprj(self, row):
+        par = self.tim2partner(contacts.Partner, row.idpar2)
+        prj = self.tim2partner(pcsw.Client, row.idpar)
+        if prj is None and par is None:
+            par = self.tim2partner(contacts.Partner, row.idpar)
+        return par, prj
+
+    def tim2compte(self, row, par, prj):
+        compte = row.compte1.strip()
+        if not compte:
+            return None
+        a = compte.split(':')
+        if len(a) == 1:
+            iban = compte
+        else:
+            bic, iban = a
+        qs = sepa.Account.objects.filter(iban=iban)
+        if qs.count() == 1:
+            return qs[0]
+        else:
+            if par:
+                qs2 = qs.filter(partner=par)
+                if qs2.count() == 1:
+                    return qs2[0]
+            if prj:
+                qs2 = qs.filter(partner=prj)
+                if qs2.count() == 1:
+                    return qs2[0]
+        self.undefined_bank_accounts.add(compte)
+        return None
 
     def load_iml(self, row, **kw):
         idjnl = row.idjnl.strip()
@@ -211,11 +249,13 @@ class TimLoader(TimLoader):
         kw.update(amount=row.mont)
 
         kw.update(account=acc)
-        prj = self.get_or_none(pcsw.Client, row.idpar)
+        par, prj = self.row2parprj(row)
         if prj:
             kw.update(project=prj)
+        compte = self.tim2compte(row, par, prj)
+        if compte:
+            kw.update(bank_account=compte)
         match = row.match.strip()
-        par = self.get_or_none(contacts.Partner, row.idpar2)
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
             kw.update(title=row.nb2.strip())
@@ -261,7 +301,8 @@ class TimLoader(TimLoader):
 
         self.ignored_journals = set()
         self.ignored_accounts = set()
-        self.missing_partners = set()
+        self.undefined_bank_accounts = set()
+        self.missing_partners = SumCollector()
         self.unknown_users = set()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
@@ -308,7 +349,7 @@ class TimLoader(TimLoader):
         for k in ('ignored_journals', 'ignored_accounts',
                   'rows_by_year', 'ignored_matches',
                   'ignored_partners', 'missing_partners',
-                  'unknown_users'):
+                  'unknown_users', 'undefined_bank_accounts'):
 
             dd.logger.info("%s = %s", k, getattr(self, k))
 
