@@ -157,8 +157,6 @@ class TimLoader(TimLoader):
         imp.partner = par
         imp.project = prj
         compte = self.tim2compte(row, par, prj)
-        if compte:
-            imp.bank_account = compte
         imp.entry_date = row.date1
         imp.voucher_date = row.date2
         imp.accounting_period = ap
@@ -180,9 +178,15 @@ class TimLoader(TimLoader):
             imp.account = acc
             imp.narration = row.nb1.strip()
             imp.your_ref = row.nb2.strip()
+            if compte:
+                imp.bank_account = compte
         elif issubclass(voucher_model, finan.FinancialVoucher):
             imp.item_remark = row.nb2.strip()
             imp.item_account = acc
+            if compte:
+                dd.logger.warning(
+                    "%s %s : Ignoring bank account '%s'",
+                    row.idjnl, row.iddoc, row.compte1)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
@@ -253,8 +257,6 @@ class TimLoader(TimLoader):
         if prj:
             kw.update(project=prj)
         compte = self.tim2compte(row, par, prj)
-        if compte:
-            kw.update(bank_account=compte)
         match = row.match.strip()
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
@@ -279,6 +281,10 @@ class TimLoader(TimLoader):
                     imp.partner = par
                     imp.full_clean()
                     imp.save()
+            if compte:
+                dd.logger.warning(
+                    "%s %s : Ignoring bank account '%s'",
+                    row.idjnl, row.iddoc, row.compte1)
         elif issubclass(voucher_model, finan.FinancialVoucher):
             kw.update(dc=(row.dc == "A"))
             kw.update(remark=row.nb1.strip())
@@ -287,6 +293,8 @@ class TimLoader(TimLoader):
                 kw.update(match=match)
             if par:
                 kw.update(partner=par)
+            if compte:
+                kw.update(bank_account=compte)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
@@ -355,7 +363,8 @@ class TimLoader(TimLoader):
 
 
 class Command(BaseCommand):
-    args = "Input_file1.xls [Input_file2.xls] ..."
+    args = "/path/to/tim/data"
+
     help = """
 
     Import accounting data from TIM into this Lino database. To be
@@ -363,8 +372,7 @@ class Command(BaseCommand):
 
         python manage.py cpas2lino /path/to/tim/data
 
-    This is designed to be used several times in March 2016 during the
-    transitional phase.
+    This was used in March 2016 as part of the NBH project for weleup.
 
     """
 
