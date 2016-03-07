@@ -23,6 +23,7 @@ from clint.textui import puts, progress
 from django.conf import settings
 
 from django.core.management.base import BaseCommand, CommandError
+from django.core.exceptions import ValidationError
 
 from lino.utils import dpy
 from lino.utils import SumCollector
@@ -31,6 +32,7 @@ from lino.api import rt
 from lino.api import dd
 
 from lino_cosi.lib.tim2lino.utils import TimLoader
+from lino_cosi.lib.sepa.utils import be2iban
 
 User = rt.modules.users.User
 accounts = rt.modules.accounts
@@ -39,6 +41,7 @@ vatless = rt.modules.vatless
 finan = rt.modules.finan
 contacts = rt.modules.contacts
 pcsw = rt.modules.pcsw
+sepa = rt.modules.sepa
 # Account = rt.modules.accounts.Account
 
 
@@ -85,9 +88,18 @@ class TimLoader(TimLoader):
             return vcl, kw
         return super(TimLoader, self).load_jnl_alias(row, **kw)
 
-    def row2account(self, row):
+    def row2idbudref(self, row):
         # return row.dc + ' ' + '/'.join(row.idbud.strip().split())
         return '/'.join(row.idbud.strip().split())
+
+    def row2account(self, row):
+        ref = self.row2idbudref(row)
+        acc = accounts.Account.get_by_ref(ref, None)
+        if acc is None:
+            if ref not in self.ignored_accounts:
+                self.ignored_accounts.add(ref)
+                dd.logger.warning("Ignored %s : no such account", ref)
+        return acc
 
     def unused_load_bud(self, row, **kw):
         idbud = row.idbud.strip()
@@ -128,14 +140,15 @@ class TimLoader(TimLoader):
             ap.save()
         return ap
 
-    def get_or_none(self, m, pk):
+    def tim2partner(self, m, pk):
         pk = pk.strip()
         if not pk:
             return None
+        pk = int(pk)
         try:
-            return m.objects.get(pk=int(pk))
+            return m.objects.get(pk=pk)
         except m.DoesNotExist:
-            self.missing_partners.add(pk)
+            self.missing_partners.collect(m, pk)
             return None
 
     def load_imp(self, row, **kw):
@@ -151,10 +164,11 @@ class TimLoader(TimLoader):
         except voucher_model.DoesNotExist:
             imp = voucher_model(journal=jnl, number=number)
 
-        imp.partner = self.get_or_none(contacts.Partner, row.idpar2)
-        imp.project = self.get_or_none(pcsw.Client, row.idpar)
+        par, prj = self.row2parprj(row)
+        imp.partner = par
+        imp.project = prj
+        compte = self.tim2compte(row, par, prj)
         imp.entry_date = row.date1
-        imp.account = acc
         imp.voucher_date = row.date2
         imp.accounting_period = ap
         username = settings.TIM2LINO_USERNAME(row.idusr.strip())
@@ -172,15 +186,59 @@ class TimLoader(TimLoader):
         imp.full_clean()
         # imp.save()
         if issubclass(voucher_model, vatless.AccountInvoice):
+            imp.account = acc
             imp.narration = row.nb1.strip()
             imp.your_ref = row.nb2.strip()
+            if compte:
+                imp.bank_account = compte
         elif issubclass(voucher_model, finan.FinancialVoucher):
             imp.item_remark = row.nb2.strip()
+            imp.item_account = acc
+            if compte:
+                if row.compte1.strip() not in self.ignored_bank_accounts:
+                    self.ignored_bank_accounts.add(row.compte1.strip())
+                    dd.logger.warning(
+                        "%s %s : Ignoring bank account '%s'",
+                        row.idjnl, row.iddoc, row.compte1)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
 
         return imp
+
+    def row2parprj(self, row):
+        par = self.tim2partner(contacts.Partner, row.idpar2)
+        prj = self.tim2partner(pcsw.Client, row.idpar)
+        if prj is None and par is None:
+            par = self.tim2partner(contacts.Partner, row.idpar)
+        return par, prj
+
+    def tim2compte(self, row, par, prj):
+        compte = row.compte1.strip()
+        if not compte:
+            return None
+        a = compte.split(':')
+        if len(a) == 1:
+            try:
+                iban = be2iban(compte)
+            except ValidationError:
+                iban = compte
+        else:
+            bic, iban = a
+        qs = sepa.Account.objects.filter(iban=iban)
+        if qs.count() == 1:
+            return qs[0]
+        else:
+            if par:
+                qs2 = qs.filter(partner=par)
+                if qs2.count() == 1:
+                    return qs2[0]
+            if prj:
+                qs2 = qs.filter(partner=prj)
+                if qs2.count() == 1:
+                    return qs2[0]
+        self.undefined_bank_accounts.add(iban)
+        return None
 
     def load_iml(self, row, **kw):
         idjnl = row.idjnl.strip()
@@ -191,7 +249,7 @@ class TimLoader(TimLoader):
                 self.ignored_journals.add(idjnl)
             return
         voucher_model = jnl.voucher_type.model
-        ref = self.row2account(row)
+        acc = self.row2account(row)
         number = self.tim2number(row.iddoc)
         try:
             imp = voucher_model.objects.get(journal=jnl, number=number)
@@ -200,22 +258,18 @@ class TimLoader(TimLoader):
             imp.full_clean()
             imp.save()
             
-        acc = accounts.Account.get_by_ref(ref, None)
         if acc is None:
-            if ref not in self.ignored_accounts:
-                self.ignored_accounts.add(ref)
-                dd.logger.warning("Ignored %s : no such account", ref)
             return
         kw.update(voucher=imp)
         kw.update(seqno=int(row.line))
         kw.update(amount=row.mont)
 
         kw.update(account=acc)
-        prj = self.get_or_none(pcsw.Client, row.idpar)
+        par, prj = self.row2parprj(row)
         if prj:
             kw.update(project=prj)
+        compte = self.tim2compte(row, par, prj)
         match = row.match.strip()
-        par = self.get_or_none(contacts.Partner, row.idpar2)
         if issubclass(voucher_model, vatless.AccountInvoice):
             # kw.update(remark=row.nb1.strip())
             kw.update(title=row.nb2.strip())
@@ -239,6 +293,10 @@ class TimLoader(TimLoader):
                     imp.partner = par
                     imp.full_clean()
                     imp.save()
+            if compte:
+                dd.logger.warning(
+                    "%s %s : Ignoring bank account '%s'",
+                    row.idjnl, row.iddoc, row.compte1)
         elif issubclass(voucher_model, finan.FinancialVoucher):
             kw.update(dc=(row.dc == "A"))
             kw.update(remark=row.nb1.strip())
@@ -247,6 +305,13 @@ class TimLoader(TimLoader):
                 kw.update(match=match)
             if par:
                 kw.update(partner=par)
+            if compte:
+                if issubclass(voucher_model, finan.PaymentOrder):
+                    kw.update(bank_account=compte)
+                else:
+                    dd.logger.warning(
+                        "%s %s : Ignoring bank account '%s'",
+                        row.idjnl, row.iddoc, row.compte1)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
@@ -261,8 +326,10 @@ class TimLoader(TimLoader):
 
         self.ignored_journals = set()
         self.ignored_accounts = set()
-        self.missing_partners = set()
+        self.ignored_bank_accounts = set()
+        self.undefined_bank_accounts = set()
         self.unknown_users = set()
+        self.missing_partners = SumCollector()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
@@ -305,16 +372,21 @@ class TimLoader(TimLoader):
                     break
 
     def write_report(self):
+        self.ignored_accounts = sorted(self.ignored_accounts)
+        self.ignored_journals = sorted(self.ignored_journals)
+
         for k in ('ignored_journals', 'ignored_accounts',
                   'rows_by_year', 'ignored_matches',
                   'ignored_partners', 'missing_partners',
-                  'unknown_users'):
+                  'unknown_users', 'undefined_bank_accounts',
+                  'ignored_bank_accounts'):
 
             dd.logger.info("%s = %s", k, getattr(self, k))
 
 
 class Command(BaseCommand):
-    args = "Input_file1.xls [Input_file2.xls] ..."
+    args = "/path/to/tim/data"
+
     help = """
 
     Import accounting data from TIM into this Lino database. To be
@@ -322,8 +394,7 @@ class Command(BaseCommand):
 
         python manage.py cpas2lino /path/to/tim/data
 
-    This is designed to be used several times in March 2016 during the
-    transitional phase.
+    This was used in March 2016 as part of the NBH project for weleup.
 
     """
 
@@ -352,9 +423,9 @@ class Command(BaseCommand):
             for m in models:
                 qs = m.objects.all()
                 dd.logger.info("Delete %d rows from %s.", qs.count(), m)
-                # qs.delete()
-                for obj in qs:
-                    obj.delete()
+                qs.delete()
+                # for obj in qs:
+                #     obj.delete()
 
         for pth in args:
             tim = TimLoader(pth)

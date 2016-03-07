@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-01 03:30+0200\n"
-"PO-Revision-Date: 2016-03-01 03:31+0300\n"
+"POT-Creation-Date: 2016-03-07 01:15+0200\n"
+"PO-Revision-Date: 2016-03-07 01:18+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -85,7 +85,7 @@ msgid "Notes concerning child custody."
 msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:101
-#: lino_welfare/modlib/ledger/models.py:40
+#: lino_welfare/modlib/ledger/models.py:46
 #: lino_welfare/modlib/pcsw/models.py:699
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
 msgid "Aids"
@@ -660,7 +660,7 @@ msgstr "Notiz"
 #: lino_welfare/modlib/contacts/models.py:125
 #: lino_welfare/modlib/contacts/models.py:195
 #: lino_welfare/modlib/contacts/models.py:291
-#: lino_welfare/modlib/debts/ui.py:140 lino_welfare/modlib/finan/models.py:34
+#: lino_welfare/modlib/debts/ui.py:140 lino_welfare/modlib/finan/models.py:35
 #: lino_welfare/modlib/isip/models.py:272
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/models.py:115
@@ -1447,6 +1447,7 @@ msgid "Client voucher items"
 msgstr "Klientenkontakte"
 
 #: lino_welfare/modlib/client_vouchers/ui.py:57
+#: lino_welfare/modlib/finan/models.py:40
 #, fuzzy
 msgid "Ledger"
 msgstr "Kolonnenüberschrift"
@@ -2143,13 +2144,13 @@ msgstr "Dublettenkontrolle"
 msgid "Similar clients: {clients}"
 msgstr "Ähnliche Klienten: {clients}"
 
-#: lino_welfare/modlib/finan/models.py:65
+#: lino_welfare/modlib/finan/models.py:75
 #, fuzzy
 msgid "Internal reference"
 msgstr "Redundanter RÜckbezug"
 
-#: lino_welfare/modlib/finan/models.py:67
-#: lino_welfare/modlib/finan/models.py:72
+#: lino_welfare/modlib/finan/models.py:77
+#: lino_welfare/modlib/finan/models.py:82
 #, fuzzy
 msgid "External reference"
 msgstr "Redundanter RÜckbezug"
@@ -2969,40 +2970,62 @@ msgid "Nom du médiateur de dettes"
 msgstr "Name des Schuldnerberaters"
 
 #: lino_welfare/modlib/ledger/models.py:32
+msgid "Purchase orders"
+msgstr "Bestellungen Einkauf"
+
+#: lino_welfare/modlib/ledger/models.py:33
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:45
 msgid "Incoming invoices"
 msgstr "Rechnungseingänge"
 
-#: lino_welfare/modlib/ledger/models.py:33
+#: lino_welfare/modlib/ledger/models.py:34
+msgid "Claimings"
+msgstr "Forderungen"
+
+#: lino_welfare/modlib/ledger/models.py:35
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:52
 msgid "Disbursement orders"
 msgstr "Ausgabeanweisungen"
 
-#: lino_welfare/modlib/ledger/models.py:34
+#: lino_welfare/modlib/ledger/models.py:36
+msgid "Payment orders"
+msgstr " Zahlungsaufträge"
+
+#: lino_welfare/modlib/ledger/models.py:37
 #, fuzzy
 msgid "Financial"
 msgstr "Finanzielle Hilfen"
 
-#: lino_welfare/modlib/ledger/models.py:39
-#, fuzzy
-msgid "Purchases"
-msgstr "Kurse"
+#: lino_welfare/modlib/ledger/models.py:38
+msgid "Budgetary"
+msgstr "Haushalt und Rechnung"
 
-#: lino_welfare/modlib/ledger/models.py:41
-#, fuzzy
-msgid "Clearings"
-msgstr "Warnungen"
+#: lino_welfare/modlib/ledger/models.py:39
+msgid "Domiciliations"
+msgstr "Domizilierungen"
+
+#: lino_welfare/modlib/ledger/models.py:40
+msgid "Closing entries"
+msgstr "Abschlussbuchungen"
 
 #: lino_welfare/modlib/ledger/models.py:45
+msgid "Purchases"
+msgstr "Einkäufe"
+
+#: lino_welfare/modlib/ledger/models.py:47
+msgid "Clearings"
+msgstr "Lettrierungen"
+
+#: lino_welfare/modlib/ledger/models.py:51
 #, fuzzy
 msgid "Aids account"
 msgstr "Sozi"
 
-#: lino_welfare/modlib/ledger/models.py:49
+#: lino_welfare/modlib/ledger/models.py:55
 msgid "Budgetary article"
 msgstr "Haushaltsartikel"
 
-#: lino_welfare/modlib/ledger/models.py:50
+#: lino_welfare/modlib/ledger/models.py:56
 msgid "Budgetary articles"
 msgstr "Haushaltsartikel"
 
@@ -3132,7 +3155,7 @@ msgstr "Etappen"
 msgid "Collective purchase invoices"
 msgstr "Sammelrechnungen"
 
-#: lino_welfare/modlib/ledger/fixtures/std_journals.py:64
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:63
 msgid "Aid allocations"
 msgstr "Beihilfen"
 

@@ -7,9 +7,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: lino-welfare 1.1.25\n"
+"Project-Id-Version: lino-welfare 1.1.26\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-01 03:30+0200\n"
+"POT-Creation-Date: 2016-03-07 01:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgid "Notes concerning child custody."
 msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:101
-#: lino_welfare/modlib/ledger/models.py:40
+#: lino_welfare/modlib/ledger/models.py:46
 #: lino_welfare/modlib/pcsw/models.py:699
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
 msgid "Aids"
@@ -633,7 +633,7 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:125
 #: lino_welfare/modlib/contacts/models.py:195
 #: lino_welfare/modlib/contacts/models.py:291
-#: lino_welfare/modlib/debts/ui.py:140 lino_welfare/modlib/finan/models.py:34
+#: lino_welfare/modlib/debts/ui.py:140 lino_welfare/modlib/finan/models.py:35
 #: lino_welfare/modlib/isip/models.py:272
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/models.py:115
@@ -1413,6 +1413,7 @@ msgid "Client voucher items"
 msgstr ""
 
 #: lino_welfare/modlib/client_vouchers/ui.py:57
+#: lino_welfare/modlib/finan/models.py:40
 msgid "Ledger"
 msgstr ""
 
@@ -2090,12 +2091,12 @@ msgstr ""
 msgid "Similar clients: {clients}"
 msgstr ""
 
-#: lino_welfare/modlib/finan/models.py:65
+#: lino_welfare/modlib/finan/models.py:75
 msgid "Internal reference"
 msgstr ""
 
-#: lino_welfare/modlib/finan/models.py:67
-#: lino_welfare/modlib/finan/models.py:72
+#: lino_welfare/modlib/finan/models.py:77
+#: lino_welfare/modlib/finan/models.py:82
 msgid "External reference"
 msgstr ""
 
@@ -2886,36 +2887,60 @@ msgid "Nom du médiateur de dettes"
 msgstr ""
 
 #: lino_welfare/modlib/ledger/models.py:32
+msgid "Purchase orders"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:33
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:45
 msgid "Incoming invoices"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:33
+#: lino_welfare/modlib/ledger/models.py:34
+msgid "Claimings"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:35
 #: lino_welfare/modlib/ledger/fixtures/std_journals.py:52
 msgid "Disbursement orders"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:34
+#: lino_welfare/modlib/ledger/models.py:36
+msgid "Payment orders"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:37
 msgid "Financial"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:39
-msgid "Purchases"
+#: lino_welfare/modlib/ledger/models.py:38
+msgid "Budgetary"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:41
-msgid "Clearings"
+#: lino_welfare/modlib/ledger/models.py:39
+msgid "Domiciliations"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:40
+msgid "Closing entries"
 msgstr ""
 
 #: lino_welfare/modlib/ledger/models.py:45
+msgid "Purchases"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:47
+msgid "Clearings"
+msgstr ""
+
+#: lino_welfare/modlib/ledger/models.py:51
 msgid "Aids account"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:49
+#: lino_welfare/modlib/ledger/models.py:55
 msgid "Budgetary article"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/models.py:50
+#: lino_welfare/modlib/ledger/models.py:56
 msgid "Budgetary articles"
 msgstr ""
 
@@ -3043,7 +3068,7 @@ msgstr ""
 msgid "Collective purchase invoices"
 msgstr ""
 
-#: lino_welfare/modlib/ledger/fixtures/std_journals.py:64
+#: lino_welfare/modlib/ledger/fixtures/std_journals.py:63
 msgid "Aid allocations"
 msgstr ""
 
