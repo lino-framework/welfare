@@ -23,6 +23,7 @@ from clint.textui import puts, progress
 from django.conf import settings
 
 from django.core.management.base import BaseCommand, CommandError
+from django.core.exceptions import ValidationError
 
 from lino.utils import dpy
 from lino.utils import SumCollector
@@ -31,6 +32,7 @@ from lino.api import rt
 from lino.api import dd
 
 from lino_cosi.lib.tim2lino.utils import TimLoader
+from lino_cosi.lib.sepa.utils import be2iban
 
 User = rt.modules.users.User
 accounts = rt.modules.accounts
@@ -86,9 +88,18 @@ class TimLoader(TimLoader):
             return vcl, kw
         return super(TimLoader, self).load_jnl_alias(row, **kw)
 
-    def row2account(self, row):
+    def row2idbudref(self, row):
         # return row.dc + ' ' + '/'.join(row.idbud.strip().split())
         return '/'.join(row.idbud.strip().split())
+
+    def row2account(self, row):
+        ref = self.row2idbudref(row)
+        acc = accounts.Account.get_by_ref(ref, None)
+        if acc is None:
+            if ref not in self.ignored_accounts:
+                self.ignored_accounts.add(ref)
+                dd.logger.warning("Ignored %s : no such account", ref)
+        return acc
 
     def unused_load_bud(self, row, **kw):
         idbud = row.idbud.strip()
@@ -206,7 +217,10 @@ class TimLoader(TimLoader):
             return None
         a = compte.split(':')
         if len(a) == 1:
-            iban = compte
+            try:
+                iban = be2iban(compte)
+            except ValidationError:
+                iban = compte
         else:
             bic, iban = a
         qs = sepa.Account.objects.filter(iban=iban)
@@ -221,7 +235,7 @@ class TimLoader(TimLoader):
                 qs2 = qs.filter(partner=prj)
                 if qs2.count() == 1:
                     return qs2[0]
-        self.undefined_bank_accounts.add(compte)
+        self.undefined_bank_accounts.add(iban)
         return None
 
     def load_iml(self, row, **kw):
@@ -233,7 +247,7 @@ class TimLoader(TimLoader):
                 self.ignored_journals.add(idjnl)
             return
         voucher_model = jnl.voucher_type.model
-        ref = self.row2account(row)
+        acc = self.row2account(row)
         number = self.tim2number(row.iddoc)
         try:
             imp = voucher_model.objects.get(journal=jnl, number=number)
@@ -242,11 +256,7 @@ class TimLoader(TimLoader):
             imp.full_clean()
             imp.save()
             
-        acc = accounts.Account.get_by_ref(ref, None)
         if acc is None:
-            if ref not in self.ignored_accounts:
-                self.ignored_accounts.add(ref)
-                dd.logger.warning("Ignored %s : no such account", ref)
             return
         kw.update(voucher=imp)
         kw.update(seqno=int(row.line))
@@ -315,8 +325,8 @@ class TimLoader(TimLoader):
         self.ignored_journals = set()
         self.ignored_accounts = set()
         self.undefined_bank_accounts = set()
-        self.missing_partners = SumCollector()
         self.unknown_users = set()
+        self.missing_partners = SumCollector()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
@@ -359,6 +369,9 @@ class TimLoader(TimLoader):
                     break
 
     def write_report(self):
+        self.ignored_accounts = sorted(self.ignored_accounts)
+        self.ignored_journals = sorted(self.ignored_journals)
+
         for k in ('ignored_journals', 'ignored_accounts',
                   'rows_by_year', 'ignored_matches',
                   'ignored_partners', 'missing_partners',
@@ -406,9 +419,9 @@ class Command(BaseCommand):
             for m in models:
                 qs = m.objects.all()
                 dd.logger.info("Delete %d rows from %s.", qs.count(), m)
-                # qs.delete()
-                for obj in qs:
-                    obj.delete()
+                qs.delete()
+                # for obj in qs:
+                #     obj.delete()
 
         for pth in args:
             tim = TimLoader(pth)
