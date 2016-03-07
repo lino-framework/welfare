@@ -294,7 +294,12 @@ class TimLoader(TimLoader):
             if par:
                 kw.update(partner=par)
             if compte:
-                kw.update(bank_account=compte)
+                if issubclass(voucher_model, finan.PaymentOrder):
+                    kw.update(bank_account=compte)
+                else:
+                    dd.logger.warning(
+                        "%s %s : Ignoring bank account '%s'",
+                        row.idjnl, row.iddoc, row.compte1)
         else:
             raise Exception("Unknown voucher_model {}".format(
                 voucher_model))
