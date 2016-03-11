@@ -36,6 +36,7 @@ from lino_xl.lib.addresses.mixins import AddressOwner
 from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
 
 
+@dd.python_2_unicode_compatible
 class Partner(
         Partner,
         AddressOwner, mixins.CreatedModified, dd.ImportedFields):
@@ -103,7 +104,7 @@ für neue Operationen nicht benutzt werden können.""")
             return _("Cannot delete companies and persons imported from TIM")
         return super(Partner, self).disable_delete(ar)
 
-    def __unicode__(self):
+    def __str__(self):
         # 20150419 : print partner id only for clients because the
         # numbers become annoying when printing a debts.Budget.
         return self.get_full_name(nominative=True)

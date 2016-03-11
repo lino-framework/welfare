@@ -37,9 +37,15 @@ Implementation notes
 This project integrates several plugins into Lino Welfare which are
 also used by :ref:`cosi`: 
 
-- :mod:`lino_welfare.modlib.ledger` (a thin extension of :mod:`lino_cosi.lib.ledger`), 
-- :mod:`lino_cosi.lib.vatless` is for VAT-less invoices (mostly incoming invoices)
-- :mod:`lino_cosi.lib.finan`.
+- :mod:`lino_welfare.modlib.ledger` is a thin extension of
+  :mod:`lino_cosi.lib.ledger`,
+- :mod:`lino_cosi.lib.vatless` is for VAT-less invoices (mostly
+  incoming invoices)
+- :mod:`lino_cosi.lib.finan` is for "financial vouchers", i.e. bank
+  statements, payment orders, journal entries.
+  :mod:`lino_welfare.modlib.finan` extends this and adds a voucher
+  type called "Disbursement orders". A disbursement order is similar
+  to a payment order, but only used internally.
 
 
 Partner versus Project
@@ -56,9 +62,10 @@ ledger movement can additionally point to a *client* as the "project".
 
 The client of a transaction can be somebody else than the partner.
 
-The following models are
-:class:`lino_cosi.lib.ledger.mixins.ProjectRelated` (don't mix that up
-with :class:`lino.mixins.ProjectRelated`) and can point to a client:
+The following models are called "client related"
+(:class:`lino_cosi.lib.ledger.mixins.ProjectRelated` (don't mix that
+up with :class:`lino.mixins.ProjectRelated`), i.e. can point to a
+client:
 
 >>> from lino_cosi.lib.ledger.mixins import ProjectRelated
 >>> # from lino.mixins import ProjectRelated
@@ -73,14 +80,18 @@ with :class:`lino.mixins.ProjectRelated`) and can point to a client:
 <class 'lino_cosi.lib.vatless.models.InvoiceItem'>
 
 
-===================================== ========== =========
-Document type                          Partner    Client
-===================================== ========== =========
-Invoice (vatless.AccountInvoice)       voucher    item
-Journal Entry (finan.JournalEntry)     item       item
-Payment Order (finan.PaymentOrder)     item       item
-Bank Statement (finan.BankStatement)   item       item
-===================================== ========== =========
+>>> rt.show(ledger.VoucherTypes)
+=================================== ====== =====================================================
+ Wert                                name   Text
+----------------------------------- ------ -----------------------------------------------------
+ finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
+ finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
+ finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
+ finan.DisbursementOrdersByJournal          Zahlungsauftrag (finan.DisbursementOrdersByJournal)
+ vatless.InvoicesByJournal                  Rechnung (vatless.InvoicesByJournal)
+ vatless.ProjectInvoicesByJournal           Rechnung (vatless.ProjectInvoicesByJournal)
+=================================== ====== =====================================================
+<BLANKLINE>
 
 
 .. _wilfried:
@@ -88,7 +99,8 @@ Bank Statement (finan.BankStatement)   item       item
 The "accountant" user profile
 =============================
 
-Demo user Wilfried Willems has the user profile of an accountant
+A demo user with the fictive name *Wilfried Willems* has the user
+profile of an accountant
 (:class:`lino_welfare.modlib.welfare.roles.LedgerUser`).
 
 >>> p = rt.login('wilfried').get_user().profile
@@ -116,8 +128,9 @@ Here is the main menu for accountants:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
-  - Zahlungsanweisungen : Zahlungsanweisungen (AAW)
-  - Finanzjournale : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
+  - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
+  - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
+  - Finanzjournale : KBC (KBC)
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -127,7 +140,7 @@ Here is the main menu for accountants:
   - Lebenslauf : Sprachen
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Buchhaltung : Rechnungen
+  - Buchhaltung : Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -147,7 +160,6 @@ exactly what general accounts are in private sector accounting.
 The account chart is made of two models: :class:`Account
 <lino_cosi.lib.accounts.models.Account>` and :class:`Group
 <lino_cosi.lib.accounts.models.Group>`.
-
 
 >>> rt.show(accounts.Groups)
 ===== ======================== ===========
@@ -238,7 +250,7 @@ of numbered vouchers. All vouchers of a given journal are of same
 type, but there may be more than one journal per voucher type.  The
 demo database currently has the following journals defined:
 
->>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type")
+>>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type journal_group")
 ========== ====================== ======================================================
  Referenz   Bezeichnung            Belegart
 ---------- ---------------------- ------------------------------------------------------
@@ -249,6 +261,25 @@ demo database currently has the following journals defined:
  ZKBC       KBC Zahlungsaufträge   Zahlungsauftrag (finan.PaymentOrdersByJournal)
 ========== ====================== ======================================================
 <BLANKLINE>
+
+A default Lino Welfare has the following **journal groups**.
+
+>>> rt.show(ledger.JournalGroups)
+====== ====== =======================
+ Wert   name   Text
+------ ------ -----------------------
+ 10     bst    Bestellungen Einkauf
+ 20     reg    Rechnungseingänge
+ 30     ffo    Forderungen
+ 40     anw    Ausgabeanweisungen
+ 50     zau    Zahlungsaufträge
+ 60     tre    Finanzjournale
+ 70     hhh    Haushalt und Rechnung
+ 80     dom    Domizilierungen
+ 90     clo    Abschlussbuchungen
+====== ====== =======================
+<BLANKLINE>
+
 
 
 The state of a voucher

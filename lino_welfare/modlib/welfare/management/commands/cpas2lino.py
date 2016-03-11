@@ -148,7 +148,10 @@ class TimLoader(TimLoader):
         try:
             return m.objects.get(pk=pk)
         except m.DoesNotExist:
-            self.missing_partners.collect(m, pk)
+            if m.__name__ == "Client":
+                self.missing_clients.add(1)
+            else:
+                self.missing_partners.add(1)
             return None
 
     def load_imp(self, row, **kw):
@@ -176,10 +179,11 @@ class TimLoader(TimLoader):
             try:
                 imp.user = User.objects.get(username=username)
             except User.DoesNotExist:
-                self.unknown_users.add(row.idusr)
-                dd.logger.warning(
-                    "%s %s : Unknown username '%s'",
-                    row.idjnl, row.iddoc, row.idusr)
+                if row.idusr.strip() not in self.unknown_users:
+                    self.unknown_users.add(row.idusr.strip())
+                    dd.logger.warning(
+                        "%s %s : Unknown username '%s'",
+                        row.idjnl, row.iddoc, row.idusr)
 
         # dd.logger.info("20160304 %s", imp)
         self.rows_by_year.collect(imp.entry_date.year, 1)
@@ -329,7 +333,8 @@ class TimLoader(TimLoader):
         self.ignored_bank_accounts = set()
         self.undefined_bank_accounts = set()
         self.unknown_users = set()
-        self.missing_partners = SumCollector()
+        self.missing_partners = set()
+        self.missing_clients = set()
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
@@ -374,10 +379,12 @@ class TimLoader(TimLoader):
     def write_report(self):
         self.ignored_accounts = sorted(self.ignored_accounts)
         self.ignored_journals = sorted(self.ignored_journals)
+        self.missing_partners = sorted(self.missing_partners)
+        self.missing_clietns = sorted(self.missing_clients)
 
         for k in ('ignored_journals', 'ignored_accounts',
                   'rows_by_year', 'ignored_matches',
-                  'ignored_partners', 'missing_partners',
+                  'ignored_partners', 'missing_partners', 'missing_clients',
                   'unknown_users', 'undefined_bank_accounts',
                   'ignored_bank_accounts'):
 

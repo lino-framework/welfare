@@ -424,6 +424,7 @@ class MyContracts(Contracts):
         return kw
 
 
+@dd.python_2_unicode_compatible
 class Offer(SectorFunction):
 
     "A Job Offer"
@@ -451,7 +452,7 @@ class Offer(SectorFunction):
         verbose_name=_("Remark"),
         format='plain')
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name:
             return self.name
         return u'%s @ %s' % (self.function, self.provider)
@@ -470,6 +471,7 @@ class Offers(dd.Table):
     """
 
 
+@dd.python_2_unicode_compatible
 class Job(SectorFunction):
     """
     A **job** is a place where a Client can work. The Job Provider
@@ -506,7 +508,7 @@ class Job(SectorFunction):
         blank=True,
         verbose_name=_("Remark"))
 
-    def __unicode__(self):
+    def __str__(self):
         if self.provider:
             return _('%(job)s at %(provider)s') % dict(
                 job=self.name, provider=self.provider.name)
@@ -614,6 +616,7 @@ add('27', pgettext("jobs", "Working"), 'working')
 add('30', pgettext("jobs", "Inactive"), 'inactive')
 
 
+@dd.python_2_unicode_compatible
 class Candidature(SectorFunction):
     """A candidature is when a client applies for a known :class:`Job`.
 
@@ -652,7 +655,7 @@ class Candidature(SectorFunction):
         _("Art.61"), default=False, help_text=_(
             "Whether an art.61 contract can satisfy this candidature."))
 
-    def __unicode__(self):
+    def __str__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
 
@@ -777,6 +780,7 @@ class Jobs(dd.Table):
     """
 
 
+@dd.python_2_unicode_compatible
 class JobType(mixins.Sequenced):
 
     """
@@ -802,7 +806,7 @@ class JobType(mixins.Sequenced):
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
     is_social = models.BooleanField(_("Social economy"), default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.name)
 
 

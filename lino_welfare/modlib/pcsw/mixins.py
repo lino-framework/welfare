@@ -50,6 +50,7 @@ class unused_ClientRelated(dd.Model):
     recipient = property(get_recipient)
 
 
+@dd.python_2_unicode_compatible
 class ClientContactBase(ContactRelated):
     """Also used by :class:`aids.RefundPartner
     <lino_welfare.modlib.aids.models.RefundPartner>`.
@@ -74,7 +75,7 @@ class ClientContactBase(ContactRelated):
             qs = qs.filter(client_contact_type=type)
         return qs
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.contact_person or self.company or self.type)
 
 

@@ -79,6 +79,7 @@ def nodetext(node):
     return node.text
 
 
+@dd.python_2_unicode_compatible
 # class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
 class CBSSRequest(UserAuthored, mixins.Duplicable, Certifiable):
 
@@ -203,7 +204,7 @@ The raw XML response received.
             s = s % args
         self.info_messages += s + '\n'
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s #%s" % (self._meta.verbose_name, self.pk)
 
     def after_ui_save(self, ar, cw):

@@ -243,6 +243,7 @@ class Confirmable(mixins.DatePeriod):
         return unicode(self)
 
 
+@dd.python_2_unicode_compatible
 class Confirmation(
         Confirmable, UserAuthored, ContactRelated,
         mixins.Created, Certifiable):
@@ -283,7 +284,7 @@ class Confirmation(
         s |= set(['client', 'granting'])
         return s
 
-    def __unicode__(self):
+    def __str__(self):
         if self.granting is not None:
             return '%s/%s' % (self.granting, self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
