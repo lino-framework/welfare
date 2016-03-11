@@ -9,4 +9,6 @@ class Site(Site):
     use_java = False
 
 SITE = Site(globals())
+# SITE.appy_params.update(raiseOnError=False)
+
 DEBUG = True
