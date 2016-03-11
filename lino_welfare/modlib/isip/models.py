@@ -134,6 +134,7 @@ class ExamPolicies(dd.Table):
 JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 
 
+@dd.python_2_unicode_compatible
 class ContractEnding(dd.Model):
     """A possible reason for premature termination of a contract.
 
@@ -152,7 +153,7 @@ class ContractEnding(dd.Model):
     needs_date_ended = models.BooleanField(
         _("Require date ended"), default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.name)
 
 

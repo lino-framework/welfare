@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-07 01:15+0200\n"
-"PO-Revision-Date: 2016-03-07 01:18+0300\n"
+"PO-Revision-Date: 2016-03-07 16:33+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -2145,15 +2145,13 @@ msgid "Similar clients: {clients}"
 msgstr "Ähnliche Klienten: {clients}"
 
 #: lino_welfare/modlib/finan/models.py:75
-#, fuzzy
 msgid "Internal reference"
-msgstr "Redundanter RÜckbezug"
+msgstr "Interne Referenz"
 
 #: lino_welfare/modlib/finan/models.py:77
 #: lino_welfare/modlib/finan/models.py:82
-#, fuzzy
 msgid "External reference"
-msgstr "Redundanter RÜckbezug"
+msgstr "Externe Referenz"
 
 #: lino_welfare/modlib/fse/__init__.py:30
 #, fuzzy
@@ -2989,7 +2987,7 @@ msgstr "Ausgabeanweisungen"
 
 #: lino_welfare/modlib/ledger/models.py:36
 msgid "Payment orders"
-msgstr " Zahlungsaufträge"
+msgstr "Zahlungsaufträge"
 
 #: lino_welfare/modlib/ledger/models.py:37
 #, fuzzy

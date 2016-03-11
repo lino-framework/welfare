@@ -75,6 +75,7 @@ class CourseProviders(contacts.Companies):
     detail_layout = CourseProviderDetail()
 
 
+@dd.python_2_unicode_compatible
 class CourseContent(dd.Model):
 
     u"""
@@ -92,7 +93,7 @@ class CourseContent(dd.Model):
     Bezeichnung des Kursinhalts (nach Konvention des DSBE).
     """
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.name)
 
 
@@ -107,6 +108,7 @@ class CourseContents(dd.Table):
     """
 
 
+@dd.python_2_unicode_compatible
 class CourseOffer(dd.Model):
 
     """
@@ -139,7 +141,7 @@ class CourseOffer(dd.Model):
 
     description = dd.RichTextField(_("Description"), blank=True, format='html')
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s (%s)' % (self.title, self.provider)
 
 
@@ -167,6 +169,7 @@ class CourseOffersByContent(CourseOffers):
     master_key = 'content'
 
 
+@dd.python_2_unicode_compatible
 class Course(dd.Model):
 
     u"""
@@ -198,7 +201,7 @@ class Course(dd.Model):
     Bemerkung über diesen konkreten Kurs. Maximal 200 Zeichen.
     """
 
-    def __unicode__(self):
+    def __str__(self):
         s = dd.dtos(self.start_date)
         if self.title:
             s += " " + self.title

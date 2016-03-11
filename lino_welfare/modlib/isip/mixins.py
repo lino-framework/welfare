@@ -207,6 +207,7 @@ class OverlappingContractsChecker(ClientChecker):
 OverlappingContractsChecker.activate()
 
 
+@dd.python_2_unicode_compatible
 class ContractBase(Signers, Certifiable, EventGenerator):
     """Abstract base class for all *integration contracts* (an unofficial
     term), i.e.  :class:`isip.Contract
@@ -293,7 +294,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
     # hidden_columns = 'date_decided date_issued \
     # exam_policy user_asd ending date_ended signer1 signer2'
 
-    def __unicode__(self):
+    def __str__(self):
         kw = dict(type=unicode(self._meta.verbose_name))
         if self.pk is None:
             kw.update(client=unicode(self.client))

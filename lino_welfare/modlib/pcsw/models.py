@@ -117,6 +117,7 @@ class RefuseClient(dd.ChangeStateAction):
         ar.success(**kw)
 
 
+@dd.python_2_unicode_compatible
 class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
@@ -326,7 +327,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             #~ return links.Link.objects.filter(a=sc.job_office)
         return []
 
-    def __unicode__(self):
+    def __str__(self):
         if self.is_obsolete:
             return "%s %s (%s*)" % (
                 self.last_name.upper(), self.first_name, self.pk)
@@ -1061,6 +1062,7 @@ ClientCoachingsChecker.activate()
 #
 # PERSON GROUP
 #
+@dd.python_2_unicode_compatible
 class PersonGroup(dd.Model):
     name = models.CharField(_("Designation"), max_length=200)
     ref_name = models.CharField(_("Reference name"), max_length=20, blank=True)
@@ -1072,7 +1074,7 @@ class PersonGroup(dd.Model):
         verbose_name = _("Integration Phase")
         verbose_name_plural = _("Integration Phases")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -1087,6 +1089,7 @@ class PersonGroups(dd.Table):
 #
 # ACTIVITIY (Berufscode)
 #
+@dd.python_2_unicode_compatible
 class Activity(dd.Model):
 
     class Meta:
@@ -1096,7 +1099,7 @@ class Activity(dd.Model):
     name = models.CharField(max_length=80)
     lst104 = models.BooleanField(_("Appears in Listing 104"), default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.name)
 
 
@@ -1166,6 +1169,7 @@ class DispensesByClient(Dispenses):
     required_roles = dd.required(SocialAgent)
 
 
+@dd.python_2_unicode_compatible
 class ExclusionType(dd.Model):
 
     class Meta:
@@ -1175,7 +1179,7 @@ class ExclusionType(dd.Model):
 
     name = models.CharField(max_length=200)
 
-    def __unicode__(self):
+    def __str__(self):
         return unicode(self.name)
 
 
@@ -1186,6 +1190,7 @@ class ExclusionTypes(dd.Table):
     model = 'pcsw.ExclusionType'
 
 
+@dd.python_2_unicode_compatible
 class Exclusion(dd.Model):
 
     class Meta:
@@ -1203,7 +1208,7 @@ class Exclusion(dd.Model):
                                       verbose_name=_("until"))
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         s = unicode(self.type)
         if self.excluded_from:
             s += ' ' + unicode(self.excluded_from)
@@ -1226,6 +1231,7 @@ class ExclusionsByClient(Exclusions):
     auto_fit_column_widths = True
 
 
+@dd.python_2_unicode_compatible
 class Conviction(dd.Model):
 
     class Meta:
@@ -1244,7 +1250,7 @@ class Conviction(dd.Model):
             self.date = dd.today()
         super(Conviction, self).full_clean(*args, **kw)
 
-    def __unicode__(self):
+    def __str__(self):
         s = unicode(self.designation)
         if self.date:
             s += ' (%s)' % dd.fds(self.date)

@@ -50,6 +50,7 @@ class SequencedBudgetComponent(mixins.Sequenced):
             SequencedBudgetComponent, self).get_row_permission(user, state, ba)
 
 
+@dd.python_2_unicode_compatible
 class ActorBase:
     """Base class for both the volatile :class:`MainActor` and the
     :class:`Actor <lino_welfare.modlib.debts.models.Actor>` model.
@@ -83,7 +84,7 @@ class ActorBase:
     def household(self):
         return self.partner.get_mti_child('household')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.header
 
 

@@ -143,6 +143,7 @@ def cbss2address(obj, **data):
     return data
 
 
+@dd.python_2_unicode_compatible
 class Sector(mixins.BabelNamed):
 
     """
@@ -159,11 +160,11 @@ class Sector(mixins.BabelNamed):
     subcode = models.IntegerField(_("Subcode"), default=0)
     abbr = dd.BabelCharField(_("Abbreviation"), max_length=50, blank=True)
 
-    def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__unicode__(self)
+    def __str__(self):
+        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
         if self.subcode != 0:
-            return str(self.code) + '.' + str(self.subcode) + ' - ' + mixins.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + mixins.BabelNamed.__unicode__(self)
+            return str(self.code) + '.' + str(self.subcode) + ' - ' + mixins.BabelNamed.__str__(self)
+        return str(self.code) + ' - ' + mixins.BabelNamed.__str__(self)
 
 
 class Sectors(dd.Table):
@@ -173,6 +174,7 @@ class Sectors(dd.Table):
     order_by = ['code', 'subcode']
 
 
+@dd.python_2_unicode_compatible
 class Purpose(mixins.BabelNamed):
 
     u"""
@@ -191,9 +193,9 @@ class Purpose(mixins.BabelNamed):
     #~ code = models.CharField(max_length=3,verbose_name=_("Code"))
     code = models.IntegerField(_("Code"))
 
-    def __unicode__(self):
-        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__unicode__(self)
-        return str(self.code) + ' - ' + mixins.BabelNamed.__unicode__(self)
+    def __str__(self):
+        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
+        return str(self.code) + ' - ' + mixins.BabelNamed.__str__(self)
 
 
 class Purposes(dd.Table):

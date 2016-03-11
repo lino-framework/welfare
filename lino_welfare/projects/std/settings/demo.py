@@ -22,4 +22,6 @@ class Site(Site):
 
 SITE = Site(globals())
 
+SITE.appy_params.update(raiseOnError=False)
+
 DEBUG = True

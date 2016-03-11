@@ -79,6 +79,7 @@ class Group(mixins.BabelNamed):
     entries_layout = TableLayouts.field(_("Budget entries layout"), blank=True)
 
 
+@dd.python_2_unicode_compatible
 class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
     """An **account** is an item of an account chart used to collect
     ledger transactions or other accountable items.
@@ -126,7 +127,6 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
     periods = PeriodsField(_("Periods"))
     default_amount = dd.PriceField(_("Default amount"), blank=True, null=True)
 
-
     def full_clean(self, *args, **kw):
         if self.group_id is not None:
             if not self.ref:
@@ -137,12 +137,13 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
             self.type = self.group.account_type
         super(Account, self).full_clean(*args, **kw)
 
-    def __unicode__(self):
+    def __str__(self):
         return "(%(ref)s) %(title)s" % dict(
             ref=self.ref,
             title=settings.SITE.babelattr(self, 'name'))
 
 
+@dd.python_2_unicode_compatible
 class Budget(UserAuthored, Certifiable, mixins.Duplicable):
     """A document which expresses the financial situation of a partner at
     a given date.
@@ -184,7 +185,7 @@ Vielleicht mit Fußnoten?"""))
         help_text=_("""\
 The total monthly amount available for debts distribution."""))
 
-    def __unicode__(self):
+    def __str__(self):
         if self.pk is None:
             return unicode(_("New")) + ' ' + unicode(self._meta.verbose_name)
         return force_unicode(

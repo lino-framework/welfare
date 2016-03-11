@@ -113,6 +113,7 @@ class CoachingEndings(dd.Table):
     """
 
 
+@dd.python_2_unicode_compatible
 class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
     """A Coaching (Begleitung, intervention) is when a Client is being
@@ -197,7 +198,7 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
     #~ def update_system_note(self,note):
         #~ note.project = self.client
 
-    def __unicode__(self):
+    def __str__(self):
         #~ return _("Coaching of %(client)s by %(user)s") % dict(client=self.client,user=self.user)
         #~ return self.user.username+' / '+self.client.first_name+' '+self.client.last_name[0]
         cl = self.client

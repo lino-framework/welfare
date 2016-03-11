@@ -226,6 +226,7 @@ class GrantingManager(models.Manager):
         return None
 
 
+@dd.python_2_unicode_compatible
 class Granting(Confirmable, BoardDecision):
     """An **aid granting** is the principal promise that a given client
     gets a given aid during a given period.
@@ -285,7 +286,7 @@ class Granting(Confirmable, BoardDecision):
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
         
-    def __unicode__(self):
+    def __str__(self):
         if self.aid_type_id is not None:
             t1 = self.aid_type.short_name or unicode(self.aid_type)
             return "%s/%s/%s" % (t1, dd.fds(self.start_date), self.client.id)

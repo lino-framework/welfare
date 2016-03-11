@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 
 """
 
-import os
-HERE = os.path.dirname(__file__)
+# import os
+# HERE = os.path.dirname(__file__)
 
 from lino_cosi.lib.sepa.fixtures.demo import objects as lib_objects
 
@@ -103,6 +103,7 @@ def objects():
         kw.update(user=ses.get_user())
         for acc in ACCOUNTS:
             kw.update(narration=acc.name)
+            kw.update(item_account=acc)
             obj = PaymentOrder(**kw)
             yield obj
             for j in range(5):
@@ -110,9 +111,7 @@ def objects():
                 yield PaymentOrderItem(
                     seqno=j+1,
                     voucher=obj,
-                    account=acc,
-                    amount=AMOUNTS.pop(),
-                    project=cli, partner=cli)
+                    amount=AMOUNTS.pop(), project=cli)
             # this is especially slow in a sqlite :memory: databae
             # dd.logger.info(
             #     "20151211 Gonna register PaymentOrder %s %s %s",
