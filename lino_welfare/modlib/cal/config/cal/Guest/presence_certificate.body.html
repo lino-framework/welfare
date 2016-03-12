@@ -34,7 +34,7 @@
 {%- set times = (dd.strftime(obj.waiting_since), 
 dd.strftime(obj.gone_since or this.time)) -%}
 {%- if obj.waiting_since -%}
-<b>{%- if obj.waiting_since.date() == this.time.date() -%}
+<b>{%- if obj.waiting_since.date() == this.date -%}
 {{tr(en="was present today", 
      de="am heutigen Tage", 
      fr="s'est présenté aujourd'hui")}}
