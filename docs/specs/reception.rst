@@ -67,8 +67,9 @@ Client #127 is `ClientStates.coached` and has two coachings:
 >>> obj = pcsw.Client.objects.get(pk=127)
 >>> print(obj)
 EVERS Eberhart (127)
->>> print(obj.client_state)
-coached
+>>> obj.client_state
+<ClientStates.coached:30>
+
 >>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================
  Coach             Coaching type   Actions
@@ -87,8 +88,9 @@ have a non-zero :attr:`newcomer_quota
 >>> obj = pcsw.Client.objects.get(first_name="Bruno", last_name="Braun")
 >>> print(obj)
 BRAUN Bruno (259)
->>> print(obj.client_state)
-newcomer
+>>> obj.client_state
+<ClientStates.newcomer:10>
+
 >>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================
  Coach             Coaching type   Actions
