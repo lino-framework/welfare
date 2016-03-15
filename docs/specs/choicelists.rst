@@ -80,6 +80,7 @@ name to read the documentation):
     jobs.CandidatureStates : Candidature states
     ledger.FiscalYears : Fiscal Years
     ledger.JournalGroups : Journal groups
+    ledger.PeriodStates : States
     ledger.TradeTypes : Trade types
     ledger.VoucherStates : States
     ledger.VoucherTypes : Voucher types

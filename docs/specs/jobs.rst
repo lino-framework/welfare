@@ -182,7 +182,7 @@ LAMBERTZ Guido (142)
 (datetime.date(2012, 12, 3), datetime.date(2014, 12, 2))
 
 >>> obj.update_cal_rset()
-ExamPolicy #3 (u'Alle 3 Monate')
+ExamPolicy #3 ('Alle 3 Monate')
 
 >>> print(unicode(obj.update_cal_rset().event_type))
 Auswertung
@@ -236,7 +236,7 @@ conflicting events:
 
 >>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
 >>> e.event_type
-EventType #4 (u'Auswertung')
+EventType #4 ('Auswertung')
 >>> e.event_type.max_conflicting
 4
 

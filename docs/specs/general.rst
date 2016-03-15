@@ -38,7 +38,7 @@ The following table gives an overview of these things.
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 64 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-154 models:
+155 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -84,7 +84,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         155
+ contenttypes.ContentType       gfks.ContentTypes               3         156
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -117,11 +117,11 @@ The following table gives an overview of these things.
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
- finan.BankStatement            finan.BankStatements            12        0
+ finan.BankStatement            finan.BankStatements            14        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
- finan.JournalEntry             finan.FinancialVouchers         11        0
+ finan.JournalEntry             finan.FinancialVouchers         13        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             12        18
+ finan.PaymentOrder             finan.PaymentOrders             14        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
  fse.ClientSummary              fse.Summaries                   19        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -146,6 +146,7 @@ The following table gives an overview of these things.
  jobs.Offer                     jobs.Offers                     9         1
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
+ ledger.AccountingPeriod        ledger.AccountingPeriods        7         6
  ledger.Journal                 ledger.Journals                 20        5
  ledger.MatchRule               ledger.MatchRules               3         4
  ledger.Movement                ledger.Movements                10        320
@@ -194,7 +195,7 @@ The following table gives an overview of these things.
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
  users.User                     users.Users                     21        12
- vatless.AccountInvoice         vatless.Invoices                19        30
+ vatless.AccountInvoice         vatless.Invoices                18        30
  vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======
 <BLANKLINE>

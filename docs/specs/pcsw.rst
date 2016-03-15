@@ -137,9 +137,9 @@ to not work (bug has been fixed :blogref:`20150227`) :
 >>> ses = rt.login('robin')
 >>> ar = contacts.Partners.request_from(ses)
 >>> print(cli.get_detail_action(ses))
-<BoundAction(pcsw.Clients, <ShowDetailAction detail (u'Detail')>)>
+<BoundAction(pcsw.Clients, <ShowDetailAction detail ('Detail')>)>
 >>> print(cli.get_detail_action(ar))
-<BoundAction(pcsw.Clients, <ShowDetailAction detail (u'Detail')>)>
+<BoundAction(pcsw.Clients, <ShowDetailAction detail ('Detail')>)>
 
 And this tests a potential source of problems in `E.tostring` which I
 removed at the same time:

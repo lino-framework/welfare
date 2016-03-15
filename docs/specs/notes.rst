@@ -10,10 +10,8 @@ Notes
 
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 .. contents:: 
@@ -68,7 +66,7 @@ type.
 Client 124 has a first meeting, while client 125 doesn't:
 
 >>> rt.modules.pcsw.Client.objects.get(pk=124).get_first_meeting()
-Note #19 (u'Ereignis/Notiz #19')
+Note #19 ('Ereignis/Notiz #19')
 >>> rt.modules.pcsw.Client.objects.get(pk=125).get_first_meeting()
 
 

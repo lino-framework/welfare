@@ -5,6 +5,7 @@ CBSS connection
 ===============
 
 .. to test only this document:
+
   $ python setup.py test -s tests.SpecsTests.test_cbss
 
   doctest init:
@@ -21,7 +22,7 @@ We retrieve Tx25 no. 1 from the database:
 
 >>> obj = cbss.RetrieveTIGroupsRequest.objects.get(pk=1)
 >>> obj
-RetrieveTIGroupsRequest #1 (u'Tx25-Anfrage #1')
+RetrieveTIGroupsRequest #1 ('Tx25-Anfrage #1')
 
 So far this was standard Django API. To use Lino's extended API we 
 first need to "log in" as user `rolf` 

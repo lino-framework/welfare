@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -134,7 +134,7 @@ class BeIdTests(RemoteAuthTestCase):
         self.assertEqual(result['success'], True)
         expected = """\
 Click OK to apply the following changes for JEFFIN Jean (100) :\
-<br/>City : None -> Place #1 (u'Tallinn')
+<br/>City : None -> Place #1 ('Tallinn')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
 <br/>Street : '' -> 'Estland'
@@ -142,7 +142,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
 <br/>eID card type : None -> <BeIdCardTypes.belgian_citizen:1>
 <br/>eID card issuer : '' -> 'Tallinn'
 <br/>Birth place : '' -> 'Mons'
-<br/>Country : None -> Country #BE (u'Belgium')
+<br/>Country : None -> Country #BE ('Belgium')
 <br/>Birth date : '' -> 1968-06-01
 <br/>eID card number : '' -> '592345678901'
 <br/>Zip code : '' -> '1418'"""

@@ -34,8 +34,8 @@ Site settings
 The default language distribution (:attr:`languages
 <lino.core.site.Site.languages>`) is French, Dutch, German and English:
 
->>> ' '.join([lng.name for lng in settings.SITE.languages])
-'fr nl de en'
+>>> print(' '.join([lng.name for lng in settings.SITE.languages]))
+fr nl de en
 
 But Dutch is currently hidden because we don't yet have any Flemish
 speaking users (:attr:`hidden_languages

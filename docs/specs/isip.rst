@@ -89,33 +89,33 @@ Contracts and Grantings
 
 >>> for obj in isip.Contracts.request():
 ...    print obj.id, obj.applies_from, repr(obj.get_granting())
-1 2012-09-29 Granting #1 (u'EiEi/9/29/12/116')
+1 2012-09-29 Granting #1 ('EiEi/9/29/12/116')
 2 2013-08-08 None
-3 2012-10-09 Granting #3 (u'EiEi/10/9/12/118')
-4 2012-10-19 Granting #4 (u'Ausl\xe4nderbeihilfe/10/19/12/124')
+3 2012-10-09 Granting #3 ('EiEi/10/9/12/118')
+4 2012-10-19 Granting #4 ('Ausl\xe4nderbeihilfe/10/19/12/124')
 5 2014-02-12 None
 6 2014-03-15 None
-7 2012-11-03 Granting #7 (u'EiEi/11/3/12/152')
-8 2012-11-13 Granting #8 (u'Ausl\xe4nderbeihilfe/11/13/12/127')
-9 2012-11-23 Granting #9 (u'EiEi/11/23/12/130')
+7 2012-11-03 Granting #7 ('EiEi/11/3/12/152')
+8 2012-11-13 Granting #8 ('Ausl\xe4nderbeihilfe/11/13/12/127')
+9 2012-11-23 Granting #9 ('EiEi/11/23/12/130')
 10 2013-10-02 None
-11 2012-12-08 Granting #11 (u'EiEi/12/8/12/137')
+11 2012-12-08 Granting #11 ('EiEi/12/8/12/137')
 12 2014-04-03 None
 13 2014-05-04 None
-14 2012-12-18 Granting #14 (u'Ausl\xe4nderbeihilfe/12/18/12/139')
+14 2012-12-18 Granting #14 ('Ausl\xe4nderbeihilfe/12/18/12/139')
 15 2014-04-13 None
-16 2012-12-28 Granting #16 (u'Ausl\xe4nderbeihilfe/12/28/12/178')
-17 2013-01-12 Granting #17 (u'EiEi/1/12/13/146')
+16 2012-12-28 Granting #16 ('Ausl\xe4nderbeihilfe/12/28/12/178')
+17 2013-01-12 Granting #17 ('EiEi/1/12/13/146')
 18 2013-11-21 None
-19 2013-01-22 Granting #19 (u'EiEi/1/22/13/153')
-20 2013-02-01 Granting #20 (u'Ausl\xe4nderbeihilfe/2/1/13/157')
+19 2013-01-22 Granting #19 ('EiEi/1/22/13/153')
+20 2013-02-01 Granting #20 ('Ausl\xe4nderbeihilfe/2/1/13/157')
 21 2014-05-28 None
 22 2014-06-28 None
-23 2013-02-16 Granting #23 (u'EiEi/2/16/13/161')
+23 2013-02-16 Granting #23 ('EiEi/2/16/13/161')
 24 2014-06-12 None
 25 2014-07-13 None
-26 2013-02-26 Granting #26 (u'Ausl\xe4nderbeihilfe/2/26/13/165')
+26 2013-02-26 Granting #26 ('Ausl\xe4nderbeihilfe/2/26/13/165')
 27 2014-06-22 None
-28 2013-03-08 Granting #28 (u'Ausl\xe4nderbeihilfe/3/8/13/168')
+28 2013-03-08 Granting #28 ('Ausl\xe4nderbeihilfe/3/8/13/168')
 29 2014-07-02 None
 30 2014-08-02 None

@@ -170,6 +170,9 @@ class SpecsTests(BaseTestCase):
     def test_courses2(self):
         return self.run_simple_doctests('docs/specs/courses2.rst')
 
+    def test_cbss(self):
+        return self.run_docs_doctests('specs/cbss.rst')
+
 
 class DocsTests(BaseTestCase):
     
@@ -178,9 +181,6 @@ class DocsTests(BaseTestCase):
 
     def test_aids_de(self):
         return self.run_simple_doctests('docs_de/aids.rst')
-
-    def test_cbss(self):
-        return self.run_docs_doctests('specs/cbss.rst')
 
     def test_20150219(self):
         return self.run_simple_doctests('docs/tested/2015/0219.rst')

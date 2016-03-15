@@ -44,7 +44,7 @@ For the following examples we will use budget no. 3:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 (u'Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen')
+Budget #3 ('Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen')
 
 
 Actors

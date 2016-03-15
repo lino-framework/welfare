@@ -46,7 +46,7 @@ For example let's look at ISIP contract #26 of the demo database.
 
 >>> obj = isip.Contract.objects.get(pk=26)
 >>> obj.exam_policy
-ExamPolicy #1 (u'Every month')
+ExamPolicy #1 ('Every month')
 >>> rt.show(cal.EventsByController, obj)
 ========================= =============== ================= ============= ===============
  When                      Summary         Managed by        Assigned to   Workflow

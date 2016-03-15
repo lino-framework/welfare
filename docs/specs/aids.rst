@@ -170,7 +170,7 @@ True
 
 >>> obj = aids.Granting.objects.get(pk=mk)
 >>> obj
-Granting #3 (u'EiEi/09.10.12/124')
+Granting #3 ('EiEi/09.10.12/124')
 
 This granting has been confirmed once:
 
@@ -198,7 +198,7 @@ We test whether Theresia is allowed to create an income confirmation.
 200
 
 
->>> soup = BeautifulSoup(res.content)
+>>> soup = BeautifulSoup(res.content, 'lxml')
 >>> scripts = soup.head.find_all('script', type="text/javascript")
 
 The page header includes a lot of scripts:
@@ -255,7 +255,7 @@ The demo database has exactly one AidType with a nonempty
 
 >>> at = aids.AidType.objects.get(pharmacy_type__isnull=False)
 >>> at
-AidType #6 (u'\xdcbernahme von Arzt- und/oder Medikamentenkosten')
+AidType #6 ('\xdcbernahme von Arzt- und/oder Medikamentenkosten')
 
 
 There are 4 pharmacies altogether:
@@ -425,7 +425,7 @@ False
 >>> print(result.message)
 Arzt : [u'Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist']
 
-Doctor : [u'Cannot auto-create without doctor type']
+Doctor : ['Cannot auto-create without doctor type']
 
 
 The period of a confirmation

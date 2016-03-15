@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2015 Luc Saffre
+# Copyright 2002-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 # variable defined here will override the global namespace of modules
 # like `lino_welfare/__init__.py` who include this file with execfile
 
-# This module is part of the Lino test suite.
+# This module is part of the Lino Welfare test suite.
 # To test only this module:
 #
 #   $ python setup.py test -s tests.PackagesTests
@@ -157,6 +157,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.projects.eupen.modlib.pcsw',
     'lino_welfare.projects.eupen.settings',
     'lino_welfare.projects.eupen.tests',
+    'lino_welfare.projects.y2k',
+    'lino_welfare.projects.y2k.settings',
     'lino_welfare.scripts',
 ])
 
