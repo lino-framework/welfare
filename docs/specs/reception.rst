@@ -8,7 +8,6 @@ Reception
 
     $ python setup.py test -s tests.SpecsTests.test_reception
 
-    >>> from __future__ import print_function
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *

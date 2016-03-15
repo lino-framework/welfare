@@ -81,16 +81,16 @@ client:
 
 
 >>> rt.show(ledger.VoucherTypes)
-=================================== ====== =====================================================
+=================================== ====== =================================================
  Wert                                name   Text
------------------------------------ ------ -----------------------------------------------------
+----------------------------------- ------ -------------------------------------------------
  finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
  finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
  finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
- finan.DisbursementOrdersByJournal          Zahlungsauftrag (finan.DisbursementOrdersByJournal)
- vatless.InvoicesByJournal                  Rechnung (vatless.InvoicesByJournal)
- vatless.ProjectInvoicesByJournal           Rechnung (vatless.ProjectInvoicesByJournal)
-=================================== ====== =====================================================
+ finan.DisbursementOrdersByJournal          Ausgabeanweisungen
+ vatless.InvoicesByJournal                  Rechnungen
+ vatless.ProjectInvoicesByJournal           Project invoices
+=================================== ====== =================================================
 <BLANKLINE>
 
 
@@ -140,7 +140,7 @@ Here is the main menu for accountants:
   - Lebenslauf : Sprachen
 - Explorer :
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Buchhaltung : Journalgruppen, Rechnungen
+  - Buchhaltung : Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -215,17 +215,18 @@ proof for a transaction. A transaction is a set of accounting
 Lino Welfare uses the following **voucher types**:
 
 >>> rt.show(rt.modules.ledger.VoucherTypes)
-==================================== ====== ======================================================
- Wert                                 name   Text
------------------------------------- ------ ------------------------------------------------------
- finan.JournalEntriesByJournal               Diverse Buchung (finan.JournalEntriesByJournal)
- finan.PaymentOrdersByJournal                Zahlungsauftrag (finan.PaymentOrdersByJournal)
- finan.BankStatementsByJournal               Kontoauszug (finan.BankStatementsByJournal)
- finan.PaymentInstructionsByJournal          Zahlungsauftrag (finan.PaymentInstructionsByJournal)
- vatless.InvoicesByJournal                   Rechnung (vatless.InvoicesByJournal)
- vatless.ProjectInvoicesByJournal            Rechnung (vatless.ProjectInvoicesByJournal)
-==================================== ====== ======================================================
+=================================== ====== =================================================
+ Wert                                name   Text
+----------------------------------- ------ -------------------------------------------------
+ finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
+ finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
+ finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
+ finan.DisbursementOrdersByJournal          Ausgabeanweisungen
+ vatless.InvoicesByJournal                  Rechnungen
+ vatless.ProjectInvoicesByJournal           Project invoices
+=================================== ====== =================================================
 <BLANKLINE>
+
 
 Invoices are partner-related vouchers (often we simply say **partner
 voucher**). That is, you select one partner per voucher. Every
@@ -251,15 +252,15 @@ type, but there may be more than one journal per voucher type.  The
 demo database currently has the following journals defined:
 
 >>> rt.show(rt.modules.ledger.Journals, column_names="ref name voucher_type journal_group")
-========== ====================== ======================================================
- Referenz   Bezeichnung            Belegart
----------- ---------------------- ------------------------------------------------------
- REG        Rechnungseingänge      Rechnung (vatless.ProjectInvoicesByJournal)
- SREG       Sammelrechnungen       Rechnung (vatless.InvoicesByJournal)
- AAW        Zahlungsanweisungen    Zahlungsauftrag (finan.PaymentInstructionsByJournal)
- KBC        KBC                    Kontoauszug (finan.BankStatementsByJournal)
- ZKBC       KBC Zahlungsaufträge   Zahlungsauftrag (finan.PaymentOrdersByJournal)
-========== ====================== ======================================================
+========== ====================== ================================================ ====================
+ Referenz   Bezeichnung            Belegart                                         Journalgruppe
+---------- ---------------------- ------------------------------------------------ --------------------
+ REG        Rechnungseingänge      Project invoices                                 Rechnungseingänge
+ SREG       Sammelrechnungen       Rechnungen                                       Rechnungseingänge
+ AAW        Ausgabeanweisungen     Ausgabeanweisungen                               Ausgabeanweisungen
+ KBC        KBC                    Kontoauszug (finan.BankStatementsByJournal)      Finanzjournale
+ ZKBC       KBC Zahlungsaufträge   Zahlungsauftrag (finan.PaymentOrdersByJournal)   Zahlungsaufträge
+========== ====================== ================================================ ====================
 <BLANKLINE>
 
 A default Lino Welfare has the following **journal groups**.
@@ -394,7 +395,7 @@ Let's have a closer look at one of them.
 The partner is #222, and the costs are distributed over three clients:
 
 >>> obj.partner
-Partner #227 (u'Ethias s.a.')
+Partner #227 ('Ethias s.a.')
 
 >>> rt.login('wilfried').show(rt.modules.vatless.ItemsByProjectInvoice, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
@@ -440,7 +441,7 @@ Incoming invoices
 It is possible to create new invoices from the detail view of a partner.
 
 >>> obj.partner
-Partner #227 (u'Ethias s.a.')
+Partner #227 ('Ethias s.a.')
 
 >>> rt.login('rolf').show(rt.modules.vatless.VouchersByPartner, obj.partner)
 Beleg erstellen in Journal **Sammelrechnungen (SREG)**, **Rechnungseingänge (REG)**
@@ -451,21 +452,19 @@ AAW, has been registered) but the payment has not yet been executed.
 
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-====================== ========== ===================================================================== ======= =========== ============ ============
- Buchungsdatum          Beleg      Beschreibung                                                          Debit   Kredit      Match        Befriedigt
----------------------- ---------- --------------------------------------------------------------------- ------- ----------- ------------ ------------
- 22.05.14               *AAW#73*   *(4450) Auszuführende Zahlungsanweisungen* / *EVERS Eberhart (127)*           5,33        **REG#28**   Nein
- 22.05.14               *AAW#75*   *(4450) Auszuführende Zahlungsanweisungen* / *EMONTS Daniel (128)*            5,33        **REG#18**   Nein
- 17.04.14               *SREG#8*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                  5,33        **SREG#8**   Nein
- 17.04.14               *SREG#8*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                              10,00       **SREG#8**   Nein
- 17.04.14               *SREG#8*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                           25,00       **SREG#8**   Nein
- 17.04.14               *SREG#8*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                              12,50       **SREG#8**   Nein
- 17.04.14               *SREG#8*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                 29,95       **SREG#8**   Nein
- **Total (7 Zeilen)**                                                                                            **93,44**                **0**
-====================== ========== ===================================================================== ======= =========== ============ ============
+====================== =================== ==================================================================== ======= =========== ============ ============
+ Buchungsdatum          Beleg               Beschreibung                                                         Debit   Kredit      Match        Befriedigt
+---------------------- ------------------- -------------------------------------------------------------------- ------- ----------- ------------ ------------
+ 22.05.14               *AAW19 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*           5,33        **REG#28**   Nein
+ 22.05.14               *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*            5,33        **REG#18**   Nein
+ 17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                 5,33        **SREG#8**   Nein
+ 17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                             10,00       **SREG#8**   Nein
+ 17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                          25,00       **SREG#8**   Nein
+ 17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                             12,50       **SREG#8**   Nein
+ 17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                29,95       **SREG#8**   Nein
+ **Total (7 Zeilen)**                                                                                                    **93,44**                **0**
+====================== =================== ==================================================================== ======= =========== ============ ============
 <BLANKLINE>
-
-
 
 >>> client = rt.modules.pcsw.Client.objects.get(pk=128)
 >>> print(client)
@@ -474,31 +473,37 @@ EMONTS Daniel (128)
 Our client has invoices from different partners:
 
 >>> rt.show(ledger.MovementsByProject, client)
-======================= ========== =============================================================================================== ============== ============ ============== ============
- Buchungsdatum           Beleg      Beschreibung                                                                                    Debit          Kredit       Match          Befriedigt
------------------------ ---------- ----------------------------------------------------------------------------------------------- -------------- ------------ -------------- ------------
- 22.05.14                *AAW#31*   *(4450) Auszuführende Zahlungsanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                      **AAW#31:5**   Nein
- 22.05.14                *AAW#32*   *(4450) Auszuführende Zahlungsanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                      **AAW#32:5**   Nein
- 22.05.14                *AAW#33*   *(4450) Auszuführende Zahlungsanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                      **AAW#33:5**   Nein
- 22.05.14                *AAW#34*   *(4450) Auszuführende Zahlungsanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                      **AAW#34:5**   Nein
- 22.05.14                *AAW#35*   *(4450) Auszuführende Zahlungsanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                      **AAW#35:5**   Nein
- 22.05.14                *AAW#36*   *(4450) Auszuführende Zahlungsanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                      **AAW#36:5**   Nein
- 22.05.14                *AAW#73*   *(4450) Auszuführende Zahlungsanweisungen* / *Niederau Eupen AG*                                               120,00       **SREG#29**    Nein
- 22.05.14                *AAW#74*   *(4450) Auszuführende Zahlungsanweisungen* / *Ragn-Sells AS*                                                   29,95        **SREG#26**    Nein
- 22.05.14                *AAW#74*   *(4450) Auszuführende Zahlungsanweisungen* / *Eesti Energia AS*                                                54,95        **SREG#23**    Nein
- 22.05.14                *AAW#74*   *(4450) Auszuführende Zahlungsanweisungen* / *AS Express Post*                                                 10,00        **REG#21**     Nein
- 22.05.14                *AAW#75*   *(4450) Auszuführende Zahlungsanweisungen* / *Leffin Electronics*                                              25,00        **SREG#20**    Nein
- 22.05.14                *AAW#75*   *(4450) Auszuführende Zahlungsanweisungen* / *Ethias s.a.*                                                     5,33         **REG#18**     Nein
- 22.05.14                *AAW#75*   *(4450) Auszuführende Zahlungsanweisungen* / *Electrabel Customer Solutions*                                   12,50        **SREG#17**    Nein
- 22.05.14                *AAW#75*   *(4450) Auszuführende Zahlungsanweisungen* / *Ragn-Sells AS*                                                   29,95        **REG#16**     Nein
- 22.05.14                *AAW#76*   *(4450) Auszuführende Zahlungsanweisungen* / *IIZI kindlustusmaakler AS*                                       10,00        **SREG#14**    Nein
- 22.05.14                *AAW#76*   *(4450) Auszuführende Zahlungsanweisungen* / *Eesti Energia AS*                                                25,00        **REG#13**     Nein
- 22.05.14                *AAW#76*   *(4450) Auszuführende Zahlungsanweisungen* / *AS Express Post*                                                 15,33        **SREG#11**    Nein
- 17.05.14                *SREG#2*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                    29,95        **SREG#2**     Nein
- 02.05.14                *SREG#5*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                   120,00       **SREG#5**     Nein
- 17.04.14                *SREG#8*   *(4400) Lieferanten* / *Ethias s.a.*                                                                           5,33         **SREG#8**     Nein
- **Total (20 Zeilen)**                                                                                                              **4 277,53**   **493,29**                  **0**
-======================= ========== =============================================================================================== ============== ============ ============== ============
+======================= =================== ============================================================================================== ============== ============== ============== ============
+ Buchungsdatum           Beleg               Beschreibung                                                                                   Debit          Kredit         Match          Befriedigt
+----------------------- ------------------- ---------------------------------------------------------------------------------------------- -------------- -------------- -------------- ------------
+ 22.05.14                *AAW1 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                        **AAW#31:5**   Nein
+ 22.05.14                *AAW2 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                        **AAW#32:5**   Nein
+ 22.05.14                *AAW3 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                        **AAW#33:5**   Nein
+ 22.05.14                *AAW4 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                        **AAW#34:5**   Nein
+ 22.05.14                *AAW5 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                        **AAW#35:5**   Nein
+ 22.05.14                *AAW6 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                        **AAW#36:5**   Nein
+ 22.05.14                *AAW19 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Niederau Eupen AG*                                               120,00         **SREG#29**    Nein
+ 22.05.14                *AAW20 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Ragn-Sells AS*                                                   29,95          **SREG#26**    Nein
+ 22.05.14                *AAW20 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Eesti Energia AS*                                                54,95          **SREG#23**    Nein
+ 22.05.14                *AAW20 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *AS Express Post*                                                 10,00          **REG#21**     Nein
+ 22.05.14                *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Leffin Electronics*                                              25,00          **SREG#20**    Nein
+ 22.05.14                *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Ethias s.a.*                                                     5,33           **REG#18**     Nein
+ 22.05.14                *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Electrabel Customer Solutions*                                   12,50          **SREG#17**    Nein
+ 22.05.14                *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Ragn-Sells AS*                                                   29,95          **REG#16**     Nein
+ 22.05.14                *AAW22 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *IIZI kindlustusmaakler AS*                                       10,00          **SREG#14**    Nein
+ 22.05.14                *AAW22 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *Eesti Energia AS*                                                25,00          **REG#13**     Nein
+ 22.05.14                *AAW22 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *AS Express Post*                                                 15,33          **SREG#11**    Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        648,91         **AAW#43:5**   Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        817,36         **AAW#44:5**   Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        544,91         **AAW#45:5**   Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        800,08         **AAW#46:5**   Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        648,91         **AAW#47:5**   Nein
+ 22.05.14                *ZKBC1 (2014-05)*   *(4400) Lieferanten* / *Emonts Daniel*                                                                        817,36         **AAW#48:5**   Nein
+ 17.05.14                *SREG1 (2014-05)*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                   29,95          **SREG#2**     Nein
+ 02.05.14                *SREG2 (2014-05)*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                  120,00         **SREG#5**     Nein
+ 17.04.14                *SREG3 (2014-04)*   *(4400) Lieferanten* / *Ethias s.a.*                                                                          5,33           **SREG#8**     Nein
+ **Total (26 Zeilen)**                                                                                                                      **4 277,53**   **4 770,82**                  **0**
+======================= =================== ============================================================================================== ============== ============== ============== ============
 <BLANKLINE>
 
 
@@ -511,54 +516,54 @@ Bank statements
 The KBC journal contains the following statements:
 
 >>> rt.show(jnl.voucher_type.table_class, jnl)
-====================== ===== ======== ============= =============== ============= ==================
- Belegdatum             ID    number   Alter Saldo   Neuer Saldo     Zustand       Autor
----------------------- ----- -------- ------------- --------------- ------------- ------------------
- 29.04.14               132   1                      21 023,81       Registriert   Wilfried Willems
- **Total (1 Zeilen)**         **1**                  **21 023,81**
-====================== ===== ======== ============= =============== ============= ==================
+====================== ===== ======== =============== =============== ============= ==================
+ Belegdatum             ID    number   Alter Saldo     Neuer Saldo     Zustand       Autor
+---------------------- ----- -------- --------------- --------------- ------------- ------------------
+ 29.04.14               132   2        21 145,09       42 168,90       Registriert   Wilfried Willems
+ 29.03.14               131   1                        21 145,09       Registriert   Theresia Thelen
+ **Total (2 Zeilen)**         **3**    **21 145,09**   **63 313,99**
+====================== ===== ======== =============== =============== ============= ==================
 <BLANKLINE>
 
 >>> obj = jnl.voucher_type.model.objects.get(number=1, journal=jnl)
 >>> rt.login('wilfried').show(rt.modules.finan.ItemsByBankStatement, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================= ====================== ========================================== ========== =========== =============== ========= =============== ==========
- date                    Partner                Haushaltsartikel                           Match      Bemerkung   Eingang         Ausgabe   Arbeitsablauf   Seq.-Nr.
------------------------ ---------------------- ------------------------------------------ ---------- ----------- --------------- --------- --------------- ----------
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#37:1               544,91                                    1
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#37:2               800,08                                    2
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#37:3               648,91                                    3
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#37:4               817,36                                    4
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#37:5               544,91                                    5
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#38:1               800,08                                    6
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#38:2               648,91                                    7
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#38:3               817,36                                    8
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#38:4               544,91                                    9
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#38:5               800,08                                    10
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#39:1               648,91                                    11
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#39:2               817,36                                    12
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#39:3               544,91                                    13
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#39:4               800,08                                    14
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#39:5               648,91                                    15
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#40:1               817,36                                    16
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#40:2               544,91                                    17
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#40:3               800,08                                    18
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#40:4               648,91                                    19
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#40:5               817,36                                    20
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#41:1               544,91                                    21
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#41:2               800,08                                    22
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#41:3               648,91                                    23
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#41:4               817,36                                    24
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#41:5               544,91                                    25
-                         Ausdemwald Alfons      (4450) Auszuführende Zahlungsanweisungen   AAW#42:1               800,08                                    26
-                         Collard Charlotte      (4450) Auszuführende Zahlungsanweisungen   AAW#42:2               648,91                                    27
-                         Dobbelstein Dorothée   (4450) Auszuführende Zahlungsanweisungen   AAW#42:3               817,36                                    28
-                         Evers Eberhart         (4450) Auszuführende Zahlungsanweisungen   AAW#42:4               544,91                                    29
-                         Emonts Daniel          (4450) Auszuführende Zahlungsanweisungen   AAW#42:5               800,08                                    30
- **Total (30 Zeilen)**                                                                                            **21 023,81**                             **465**
-======================= ====================== ========================================== ========== =========== =============== ========= =============== ==========
+======================= ====================== ========================================= ========== ================== =============== ========= =============== ==========
+ date                    Partner                Haushaltsartikel                          Match      Externe Referenz   Eingang         Ausgabe   Arbeitsablauf   Seq.-Nr.
+----------------------- ---------------------- ----------------------------------------- ---------- ------------------ --------------- --------- --------------- ----------
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#43:1                      648,91                                    1
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#43:2                      817,36                                    2
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#43:3                      544,91                                    3
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#43:4                      800,08                                    4
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#43:5                      648,91                                    5
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#44:1                      817,36                                    6
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#44:2                      544,91                                    7
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#44:3                      800,08                                    8
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#44:4                      648,91                                    9
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#44:5                      817,36                                    10
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#45:1                      544,91                                    11
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#45:2                      800,08                                    12
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#45:3                      648,91                                    13
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#45:4                      817,36                                    14
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#45:5                      544,91                                    15
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#46:1                      800,08                                    16
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#46:2                      648,91                                    17
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#46:3                      817,36                                    18
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#46:4                      544,91                                    19
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#46:5                      800,08                                    20
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#47:1                      648,91                                    21
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#47:2                      817,36                                    22
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#47:3                      544,91                                    23
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#47:4                      800,08                                    24
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#47:5                      648,91                                    25
+                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#48:1                      817,36                                    26
+                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#48:2                      544,91                                    27
+                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#48:3                      800,08                                    28
+                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#48:4                      648,91                                    29
+                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#48:5                      817,36                                    30
+ **Total (30 Zeilen)**                                                                                                  **21 145,09**                             **465**
+======================= ====================== ========================================= ========== ================== =============== ========= =============== ==========
 <BLANKLINE>
-
 
 
 
@@ -572,17 +577,17 @@ Users can consult to movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
-====================== =========== ====================== ============ ======== ======= ============
- Buchungsdatum          Beleg       Beschreibung           Debit        Kredit   Match   Befriedigt
----------------------- ----------- ---------------------- ------------ -------- ------- ------------
- 22.05.14               *REG#1*     *AS Express Post*      10,00                         Ja
- 16.02.14               *SREG#20*   *Leffin Electronics*   29,95                         Ja
- 16.02.14               *SREG#20*   *Leffin Electronics*   5,33                          Ja
- 16.02.14               *SREG#20*   *Leffin Electronics*   120,00                        Ja
- 16.02.14               *SREG#20*   *Leffin Electronics*   25,00                         Ja
- 16.02.14               *SREG#20*   *Leffin Electronics*   12,50                         Ja
- **Total (6 Zeilen)**                                      **202,78**                    **6**
-====================== =========== ====================== ============ ======== ======= ============
+====================== =================== ====================== ============ ======== ======= ============
+ Buchungsdatum          Beleg               Beschreibung           Debit        Kredit   Match   Befriedigt
+---------------------- ------------------- ---------------------- ------------ -------- ------- ------------
+ 22.05.14               *REG1 (2014-05)*    *AS Express Post*      10,00                         Ja
+ 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   29,95                         Ja
+ 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   5,33                          Ja
+ 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   120,00                        Ja
+ 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   25,00                         Ja
+ 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   12,50                         Ja
+ **Total (6 Zeilen)**                                              **202,78**                    **6**
+====================== =================== ====================== ============ ======== ======= ============
 <BLANKLINE>
 
 
@@ -601,17 +606,7 @@ Schuldner
 <BLANKLINE>
 List of partners who are in debt towards us (usually customers).
 <BLANKLINE>
-========= ============== ====================== ========= =============== ===============================
- Alter     Zahlungsziel   Partner                ID        Saldo           Aktionen
---------- -------------- ---------------------- --------- --------------- -------------------------------
- 60        23.03.14       Ausdemwald Alfons      116       4 277,53        [Show debts] [Issue reminder]
- 60        23.03.14       Collard Charlotte      118       4 173,53        [Show debts] [Issue reminder]
- 60        23.03.14       Dobbelstein Dorothée   124       4 156,25        [Show debts] [Issue reminder]
- 60        23.03.14       Emonts Daniel          128       4 277,53        [Show debts] [Issue reminder]
- 60        23.03.14       Evers Eberhart         127       4 260,25        [Show debts] [Issue reminder]
- **300**                                         **613**   **21 145,09**
-========= ============== ====================== ========= =============== ===============================
-<BLANKLINE>
+Keine Daten anzuzeigen
 ---------
 Gläubiger
 ---------
@@ -634,6 +629,7 @@ List of partners who are giving credit to us (usually suppliers).
  **1104**                                                  **2245**   **2 658,64**
 ========== ============== =============================== ========== ============== ===============================
 <BLANKLINE>
+
 
 TODO in above report: 
 

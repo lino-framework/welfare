@@ -10,7 +10,6 @@ Uploads
 
     doctest init:
     
-    >>> from __future__ import print_function
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
@@ -223,8 +222,8 @@ They are a big "object" (in Python we call it a `dict`):
 
 It has 3 keys:
 
->>> d.keys()
-[u'record_id', u'param_values', u'base_params']
+>>> print(json.dumps(d.keys()))
+["record_id", "param_values", "base_params"]
 
 >>> d.record_id
 8

@@ -145,7 +145,7 @@ different agents at the same time:
 
 >>> obj = pcsw.Client.objects.get(pk=124)
 >>> obj
-Client #124 (u'DOBBELSTEIN Doroth\xe9e (124)')
+Client #124 ('DOBBELSTEIN Doroth\xe9e (124)')
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ====================== ===== ================= ========

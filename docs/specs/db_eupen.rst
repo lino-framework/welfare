@@ -93,7 +93,7 @@ Database structure
 - finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, item_account, item_remark
 - finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
 - finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, item_account, item_remark, total, execution_date
-- finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, bank_account
+- finan.PaymentOrderItem : id, seqno, project, match, bank_account, amount, dc, remark, account, partner, voucher
 - fse.ClientSummary : id, printed_by, year, month, fse10, fse20, fse21, fse30, fse40, fse41, fse42, fse43, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type
@@ -157,7 +157,7 @@ Database structure
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
 - users.User : id, modified, created, username, password, profile, initials, first_name, last_name, email, remarks, language, partner, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments, newcomer_quota
-- vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, your_ref, due_date, title, bank_account, amount
+- vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 <BLANKLINE>
 

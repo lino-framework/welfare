@@ -88,7 +88,7 @@ so, it will ask for user confirmation.
 >>> # rt.makedirs_if_missing(lcd)
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner
-Contract #2 (u'Immersion training#2 (Daniel EMONTS)')
+Contract #2 ('Immersion training#2 (Daniel EMONTS)')
 
 >>> ses.set_confirm_answer(False)
 >>> rv = ses.run(obj.edit_template)
@@ -287,8 +287,8 @@ see it.
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin
 - finan.BankStatementItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.ItemsByBankStatement.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- finan.ItemsByDisbursementOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.ItemsByJournalEntry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- finan.ItemsByPaymentInstruction.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.ItemsByPaymentOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.JournalEntryItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.PaymentOrderItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

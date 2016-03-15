@@ -51,9 +51,10 @@ Rolf is the local system administrator, he has a complete menu:
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
-  - Purchase orders : Rechnungseingänge (REG), Sammelrechnungen (SREG)
-  - Rechnungseingänge : Ausgabeanweisungen (AAW)
-  - Ausgabeanweisungen : KBC (KBC), KBC Zahlungsaufträge (ZKBC)
+  - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
+  - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
+  - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
+  - Finanzjournale : KBC (KBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -84,7 +85,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Teilnehmer, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Rechnungen
+  - Buchhaltung : Befriedigungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
@@ -376,12 +377,13 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - finan.BankStatements.insert : voucher_date, balance1, balance2
-- finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
+- finan.DisbursementOrdersByJournal.insert : item_account, narration, item_remark
+- finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - finan.FinancialVouchers.insert : voucher_date, narration
-- finan.PaymentInstructions.detail : voucher_date, user, narration, total, workflow_buttons, id, journal, year, number, MovementsByVoucher
-- finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, id, journal, year, number, MovementsByVoucher
+- finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
 - fse.Summaries.insert : master, education_level, result, remark
 - fse.SummariesByClient.insert : education_level, result, remark
@@ -453,10 +455,10 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
-- vatless.Invoices.detail : id, voucher_date, user, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, entry_date, journal, year, number, match, state, MovementsByVoucher
+- vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, voucher_date
 - vatless.InvoicesByJournal.insert : partner, voucher_date
-- vatless.ProjectInvoicesByJournal.detail : id, voucher_date, project, user, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, entry_date, journal, year, number, match, state, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, voucher_date
 <BLANKLINE>
 
@@ -563,9 +565,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - finan.BankStatements.detail : visible for 500 510 admin
 - finan.BankStatements.insert : visible for 500 510 admin
+- finan.DisbursementOrders.detail : visible for 500 510 admin
+- finan.DisbursementOrdersByJournal.insert : visible for 500 510 admin
 - finan.FinancialVouchers.detail : visible for 500 510 admin
 - finan.FinancialVouchers.insert : visible for 500 510 admin
-- finan.PaymentInstructions.detail : visible for 500 510 admin
 - finan.PaymentOrders.detail : visible for 500 510 admin
 - fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - fse.Summaries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

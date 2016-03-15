@@ -94,11 +94,10 @@ False
 Note that the Panel objects which are not visible continue to be in
 `lh.main.elements`:
 
->>> [e.name for e in lh.main.elements]
+>>> print(' '.join([e.name for e in lh.main.elements]))
 ... #doctest: +NORMALIZE_WHITESPACE
-[u'general', u'contact', u'coaching', u'aids_tab', u'work_tab_1',
-u'career', u'languages', u'competences', u'contracts', u'history',
-u'calendar', 'MovementsByProject', u'misc', u'debts']
+general contact coaching aids_tab work_tab_1 career languages 
+competences contracts history calendar MovementsByProject misc debts
 
 Lino filters them away only when generating the js files, py2js and
 declare_vars:
