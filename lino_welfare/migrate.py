@@ -253,7 +253,8 @@ class Migrator(Migrator):
   (please run yourself checkdata after migration)
 
         """
-        
+        if not dd.is_installed('ledger'):
+            return '1.1.26'
         ledger_Journal = rt.modules.ledger.Journal
         bv2kw = globals_dict['bv2kw']
 
