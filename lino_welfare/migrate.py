@@ -253,7 +253,9 @@ class Migrator(Migrator):
   (please run yourself checkdata after migration)
 
         """
-        
+        globals_dict.update(create_plausibility_problem=noop)
+        if not dd.is_installed('ledger'):
+            return '1.1.26'
         ledger_Journal = rt.modules.ledger.Journal
         bv2kw = globals_dict['bv2kw']
 
@@ -278,7 +280,6 @@ class Migrator(Migrator):
             return ledger_Journal(**kw)
         globals_dict.update(create_ledger_journal=create_ledger_journal)
 
-        globals_dict.update(create_plausibility_problem=noop)
         globals_dict.update(create_ledger_voucher=noop)
         globals_dict.update(create_ledger_movement=noop)
         globals_dict.update(create_finan_bankstatement=noop)

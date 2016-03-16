@@ -655,6 +655,25 @@ class Candidature(SectorFunction):
         _("Art.61"), default=False, help_text=_(
             "Whether an art.61 contract can satisfy this candidature."))
 
+    @classmethod
+    def get_parameter_fields(cls, **fields):
+        fields = super(Candidature, cls).get_parameter_fields(**fields)
+        fields.update(state=CandidatureStates.field(blank=True))
+        fields.update(job=models.ForeignKey(
+            'jobs.Job', blank=True, null=True))
+        fields.update(function=models.ForeignKey(
+            'cv.Function', blank=True, null=True))
+        fields.update(person=models.ForeignKey(
+            'pcsw.Client', blank=True, null=True))
+        return fields
+
+    @classmethod
+    def get_simple_parameters(cls):
+        """"""
+        s = super(Candidature, cls).get_simple_parameters()
+        s |= set(['state', 'job', 'function', 'person'])
+        return s
+
     def __str__(self):
         return force_unicode(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
@@ -678,14 +697,13 @@ class Candidature(SectorFunction):
 
 
 class Candidatures(dd.Table):
-
     """
     List of :class:`Candidatures <Candidature>`.
     """
     required_roles = dd.required(SocialStaff)
     model = 'jobs.Candidature'
     order_by = ['date_submitted']
-    column_names = 'date_submitted job:25 person state * id'
+    column_names = 'date_submitted job:25 function person state * id'
 
 
 class CandidaturesByPerson(Candidatures):
