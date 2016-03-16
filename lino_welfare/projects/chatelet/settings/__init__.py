@@ -40,7 +40,7 @@ class Site(Site):
         kw.update(finan=None)
         kw.update(ledger=None)
         kw.update(vatless=None)
-        kw.update(debts=None)
+        # kw.update(debts=None)
         # kw.update(aids=None)
         kw.update(sepa=None)
         kw.update(b2c=None)
