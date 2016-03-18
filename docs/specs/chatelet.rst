@@ -53,8 +53,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-56 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
-127 models:
+57 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
+132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -97,7 +97,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         128
+ contenttypes.ContentType       gfks.ContentTypes               3         133
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
@@ -122,8 +122,13 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
- excerpts.Excerpt               excerpts.Excerpts               12        69
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        17
+ debts.Account                  debts.Accounts                  13        51
+ debts.Actor                    debts.Actors                    6         63
+ debts.Budget                   debts.Budgets                   11        14
+ debts.Entry                    debts.Entries                   16        716
+ debts.Group                    debts.Groups                    8         8
+ excerpts.Excerpt               excerpts.Excerpts               12        70
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
  fse.ClientSummary              fse.Summaries                   19        126
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
@@ -161,7 +166,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  pcsw.AidType                   pcsw.AidTypes                   5         0
  pcsw.Client                    pcsw.Clients                    67        63
  pcsw.ClientContact             pcsw.ClientContacts             7         14
- pcsw.ClientContactType         pcsw.ClientContactTypes         6         10
+ pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
  pcsw.CoachingEnding            pcsw.CoachingEndings            7         0
  pcsw.CoachingType              pcsw.CoachingTypes              8         3
@@ -179,12 +184,12 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
- system.SiteConfig              system.SiteConfigs              27        1
+ system.SiteConfig              system.SiteConfigs              28        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     21        10
+ users.User                     users.Users                     21        11
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -326,6 +331,12 @@ Each window layout defines a given set of fields.
 - cv.StudyTypes.insert : name, name_nl, name_de, name_en, is_study, is_training, education_level
 - cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
 - cv.Trainings.insert : person, start_date, end_date, type, state, certificates, sector, function, school, country, city
+- debts.Accounts.detail : ref, name, name_nl, name_de, name_en, group, type, required_for_household, required_for_person, periods, default_amount
+- debts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
+- debts.Budgets.detail : date, partner, id, user, intro, ResultByBudget, DebtsByBudget, AssetsByBudgetSummary, conclusion, dist_amount, printed, total_debt, include_yearly_incomes, print_empty_rows, print_todos, DistByBudget, data_box, summary_box
+- debts.Budgets.insert : partner, date, user
+- debts.Groups.detail : ref, name, name_nl, name_de, name_en, id, account_type, entries_layout
+- debts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
 - excerpts.ExcerptTypes.detail : id, name, name_nl, name_de, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
@@ -391,7 +402,7 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- system.SiteConfigs.detail : site_company, next_partner_id, job_office, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, upload_area, type, description, owner
@@ -503,6 +514,12 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.StudyTypes.insert : visible for 110 admin
 - cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- debts.Accounts.detail : visible for admin
+- debts.Accounts.insert : visible for admin
+- debts.Budgets.detail : visible for admin
+- debts.Budgets.insert : visible for admin
+- debts.Groups.detail : visible for admin
+- debts.Groups.insert : visible for admin
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
@@ -601,6 +618,7 @@ Romain
 - Intégration : Bénéficiaires, PIISs, Mises à l'emploi art60§7, Services utilisateurs, Postes de travail, Offres d'emploi, Mises à l'emploi art61, Stages d'immersion
 - Ateliers : Ateliers en préparation, Ateliers actifs, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
+- Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
 - Rapports :
   - Système : Broken GFKs
@@ -618,6 +636,7 @@ Romain
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
   - BCSS : Secteurs, Codes fonction
+  - Médiation de dettes : Groupes de comptes, Comptes, Master budget
   - Questionnaires : Listes de choix
 - Explorateur :
   - Système : types de contenu, Procurations, Profils d'utilisateur, Notifications, Changes, Tests de données, Problèmes de données
@@ -630,6 +649,7 @@ Romain
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, FSE Summaries
   - Nouvelles demandes : Compétences
   - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
+  - Médiation de dettes : Budgets, Entrées
   - Questionnaires : Questionnaires, Questions, Choix, Interviews, Choix de réponse, Answer Remarks
 - Site : à propos
 
