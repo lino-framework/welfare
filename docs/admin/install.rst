@@ -10,14 +10,18 @@ If you need only a development server,
 just install Lino (the framework) as documented 
 in :ref:`lino.dev.install`, then:
 
-- Go to your `repositories` directory and 
-  download also a copy of the Lino Welfare repository::
+- Go to your `repositories` directory and clone some more
+  repositories::
 
     $ cd ~/repositories
+    $ git clone https://github.com/lino-framework/xl.git xl
+    $ git clone https://github.com/lsaffre/lino-cosi.git cosi
     $ git clone https://github.com/lsaffre/lino-welfare.git welfare
 
-- Use pip to install `welfare` as editable package::
+- Use pip to install them (note that the ordering is important here)::
 
+    pip install -e xl
+    pip install -e cosi
     pip install -e welfare
 
 - Lino Welfare needs two Java applets :ref:`davlink` and
@@ -37,8 +41,9 @@ in :ref:`lino.dev.install`, then:
     
   .. literalinclude:: settings.py
 
-- Create a :xfile:`media` directory and create symbolic links to your
-  local copies of :ref:`davlink` and :ref:`eidreader`::
+- (no longer needed:) Create a :xfile:`media` directory and create
+  symbolic links to your local copies of :ref:`davlink` and
+  :ref:`eidreader`::
 
 
     $ cd ~/mysite
@@ -57,5 +62,6 @@ in :ref:`lino.dev.install`, then:
 
 - Initialize the database and run the development server::
 
+    $ python manage.py collectstatic
     $ python manage.py initdb_demo
     $ python manage.py runserver

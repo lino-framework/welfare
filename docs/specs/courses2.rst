@@ -10,9 +10,8 @@ Internal courses
     
     doctest init:
     
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
 
@@ -48,7 +47,7 @@ u'topic line teacher user state active:10'
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
->>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 10)
+>>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 11)
 
 
 Yes, the demo database has no topics defined:
