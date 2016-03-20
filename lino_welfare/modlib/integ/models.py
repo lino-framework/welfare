@@ -14,7 +14,7 @@ import datetime
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from django.db.utils import OperationalError
+from django.db.utils import DatabaseError
 from django.conf import settings
 
 from lino.utils.xmlgen.html import E
@@ -229,7 +229,7 @@ def on_database_ready(sender, **kw):
             vf = dd.RequestField(w(pg), verbose_name=pg.name)
             self.add_virtual_field('G' + pg.ref_name, vf)
             self.column_names += ' ' + vf.name
-    except OperationalError:
+    except DatabaseError:
         pass  # happens e.g. if database isn't yet initialized
 
     self.column_names += ' primary_clients active_clients row_total'
