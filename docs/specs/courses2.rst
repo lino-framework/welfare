@@ -42,8 +42,8 @@ This is about *internal* courses
 ============ ======================= ============================ ============= ======= ===============
 <BLANKLINE>
 
->>> rt.modules.courses.Courses.params_layout.main
-u'topic line teacher user state active:10'
+>>> print(rt.modules.courses.Courses.params_layout.main)
+topic line teacher user state can_enroll:10
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)

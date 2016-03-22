@@ -616,7 +616,7 @@ Romain
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
 - Intégration : Bénéficiaires, PIISs, Mises à l'emploi art60§7, Services utilisateurs, Postes de travail, Offres d'emploi, Mises à l'emploi art61, Stages d'immersion
-- Ateliers : Ateliers en préparation, Ateliers actifs, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Ateliers : Ateliers en préparation, Ateliers actifs, Ateliers inactifs, Ateliers terminés, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
 - Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
@@ -666,7 +666,7 @@ sociales, freins.
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
-- Ateliers : Ateliers en préparation, Ateliers actifs, Séries d'ateliers
+- Ateliers : Ateliers en préparation, Ateliers actifs, Ateliers inactifs, Ateliers terminés, -, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
