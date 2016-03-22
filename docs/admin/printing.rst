@@ -39,7 +39,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
 
 .. Here is a list of these models:
 
-    >>> from lino.mixins import Printable
+    >>> from lino.modlib.printing.mixins import Printable
     >>> for m in rt.models_by_base(Printable):
     ...     print m
     <class 'lino_welfare.modlib.cal.models.Event'>
@@ -62,8 +62,9 @@ Main templates
 
 All main templates of a Lino Welfare default configuration are
 LibreOffice `.odt` files because they use some subclass of
-:class:`lino.mixins.printable.AppyBuildMethod` as :attr:`build_method
-<lino.mixins.printable.PrintableType.build_method>`.
+:class:`lino.modlib.printing.mixins.printable.AppyBuildMethod` as
+:attr:`build_method
+<lino.modlib.printing.mixins.printable.PrintableType.build_method>`.
 
 See :lino:`Appy POD template syntax </admin/appy_templates>` for
 documentation about the syntax and context variables available for

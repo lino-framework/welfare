@@ -55,8 +55,9 @@ def my_enrolment_workflows(sender=None, **kw):
     EnrolmentStates.finished.add_transition(
         required_states="started")
 
-    CourseStates.registered.add_transition(required_states="draft")
-    CourseStates.draft.add_transition(required_states="registered")
+    CourseStates.active.add_transition(required_states="draft inactive")
+    CourseStates.inactive.add_transition(required_states="draft active")
+    CourseStates.draft.add_transition(required_states="active inactive")
 
 
 class Course(Course):
@@ -130,3 +131,11 @@ class DraftCourses(DraftCourses):
     column_names = 'info teacher room description *'
 
 # DraftCourses._label = _("Draft workshops")
+
+
+class InactiveCourses(ActiveCourses):
+    label = _("Inactive workshops")
+
+
+class ClosedCourses(ActiveCourses):
+    label = _("Closed workshops")

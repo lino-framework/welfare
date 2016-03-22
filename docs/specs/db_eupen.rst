@@ -87,7 +87,7 @@ Database structure
 - debts.Group : id, name, ref, account_type, entries_layout, name_fr, name_en
 - dupable_clients.Word : id, word, owner
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
-- excerpts.ExcerptType : id, build_method, template, name, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
+- excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
 - finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, item_account, item_remark, balance1, balance2
 - finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
 - finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, item_account, item_remark
@@ -115,7 +115,7 @@ Database structure
 - jobs.Schedule : id, name, name_fr, name_en
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
-- ledger.Journal : id, ref, build_method, template, seqno, name, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, printed_name_fr, printed_name_en, name_fr, name_en
+- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, printed_name_fr, printed_name_en, name_fr, name_en
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, satisfied
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, name_fr, name_en
@@ -125,7 +125,7 @@ Database structure
 - newcomers.Faculty : id, name, weight, name_fr, name_en
 - notes.EventType : id, name, remark, body, body_fr, body_en, name_fr, name_en
 - notes.Note : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, date, time, type, event_type, subject, body, language, important
-- notes.NoteType : id, build_method, template, name, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
+- notes.NoteType : id, name, build_method, template, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
 - notifier.Notification : id, created, user, owner_type, owner_id, seen, message
 - outbox.Attachment : id, owner_type, owner_id, mail
 - outbox.Mail : id, project, user, owner_type, owner_id, date, subject, body, sent

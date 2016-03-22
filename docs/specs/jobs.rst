@@ -244,10 +244,9 @@ EventType #4 ('Auswertung')
 JobsOverview
 ------------
 
-Printing the document 
-:class:`welfare.jobs.JobsOverview`
-caused a "NotImplementedError: <i> inside <text:p>" traceback 
-when one of the jobs had a remark. 
+Printing the :class:`lino_welfare.modlib.jobs.ui.JobsOverview` report
+caused a "NotImplementedError: <i> inside <text:p>" traceback when one
+of the jobs had a remark.
 
 >>> settings.SITE.default_build_method = "appyodt"
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
