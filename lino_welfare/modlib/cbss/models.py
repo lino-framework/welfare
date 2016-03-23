@@ -161,10 +161,10 @@ class Sector(mixins.BabelNamed):
     abbr = dd.BabelCharField(_("Abbreviation"), max_length=50, blank=True)
 
     def __str__(self):
-        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
         if self.subcode != 0:
-            return str(self.code) + '.' + str(self.subcode) + ' - ' + mixins.BabelNamed.__str__(self)
-        return str(self.code) + ' - ' + mixins.BabelNamed.__str__(self)
+            return str(self.code) + '.' + str(self.subcode) + \
+                ' - ' + dd.babelattr(self, 'name')
+        return str(self.code) + ' - ' + dd.babelattr(self, 'name')
 
 
 class Sectors(dd.Table):
@@ -195,7 +195,7 @@ class Purpose(mixins.BabelNamed):
 
     def __str__(self):
         #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
-        return str(self.code) + ' - ' + mixins.BabelNamed.__str__(self)
+        return str(self.code) + ' - ' + dd.babelattr(self, 'name')
 
 
 class Purposes(dd.Table):

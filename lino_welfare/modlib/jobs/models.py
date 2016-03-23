@@ -993,18 +993,12 @@ class JobsOverviewByType(Jobs):
 
 
 class JobsOverview(Report):
-    """
-    This list helps integration agents to make decisions like:
-
-    - which jobs are soon going to be free, and which candidate(s) should we
-      suggest?
-
+    """Shows an overview of the jobs and the candidates working there or
+    applying for it. See also :ref:`welfare.specs.jobs`.
 
     """
     required_roles = dd.required(IntegrationAgent)
     label = _("Contracts Situation")
-    #~ detail_layout = JobsOverviewDetail()
-    detail_layout = "preview"
 
     parameters = dict(
         today=models.DateField(
@@ -1015,36 +1009,33 @@ class JobsOverview(Report):
     params_panel_hidden = True
 
     @classmethod
-    def create_instance(self, ar, **kw):
-        kw.update(today=ar.param_values.today or settings.SITE.today())
-        if ar.param_values.job_type:
-            kw.update(jobtypes=[ar.param_values.job_type])
-        else:
-            kw.update(jobtypes=JobType.objects.all())
-        return super(JobsOverview, self).create_instance(ar, **kw)
+    def param_defaults(self, ar, **kw):
+        kw = super(JobsOverview, self).param_defaults(ar, **kw)
+        kw.update(today=dd.today())
+        return kw
 
-    @dd.virtualfield(dd.HtmlBox())
-    def preview(cls, self, ar):
-        #~ logger.info("20130723 preview %s",self.jobtypes)
-        html = []
-        for jobtype in self.jobtypes:
-            html.append(E.h2(unicode(jobtype)))
-            sar = ar.spawn(JobsOverviewByType,
-                           master_instance=jobtype,
-                           param_values=dict(date=self.today))
-            html.append(sar.table2xhtml())
-        #~ logger.info("20130723 preview %s",html)
-        #~ return E.div(*html,class_='htmlText')
-        return E.div(*html)
+    # @classmethod
+    # def create_instance(self, ar, **kw):
+    #     kw.update(today=ar.param_values.today or settings.SITE.today())
+    #     if ar.param_values.job_type:
+    #         kw.update(jobtypes=[ar.param_values.job_type])
+    #     else:
+    #         kw.update(jobtypes=JobType.objects.all())
+    #     return super(JobsOverview, self).create_instance(ar, **kw)
 
     @classmethod
-    def to_rst(self, ar, column_names=None, **kwargs):
-        obj = self.create_instance(ar)
-        return """\
-        .. raw:: html
-        
-           %s
-        """ % E.tostring(obj.preview).replace('\n', ' ')
+    def get_story(cls, obj, ar):
+        if ar.param_values.job_type:
+            jobtypes = [ar.param_values.job_type]
+        else:
+            jobtypes = JobType.objects.all()
+
+        for jobtype in jobtypes:
+            yield E.h2(unicode(jobtype))
+            sar = ar.spawn(JobsOverviewByType,
+                           master_instance=jobtype,
+                           param_values=dict(date=ar.param_values.today))
+            yield sar
 
 
 @dd.receiver(dd.post_analyze)

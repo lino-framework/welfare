@@ -366,7 +366,7 @@ Each window layout defines a given set of fields.
 - jobs.JobProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
 - jobs.JobTypes.insert : id, name, is_social
 - jobs.Jobs.insert : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
-- jobs.JobsOverview.show : preview
+- jobs.JobsOverview.show : body
 - jobs.Offers.insert : name, provider, sector, function, selection_from, selection_until, start_date, remark
 - jobs.Schedules.insert : id, name, name_nl, name_de, name_en
 - languages.Languages.insert : id, iso2, name, name_nl, name_de, name_en
