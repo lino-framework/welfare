@@ -19,6 +19,8 @@
 
 """Database models for `lino_welfare.modlib.jobs`.
 
+See also :ref:`welfare.specs.jobs`.
+
 
 """
 from __future__ import unicode_literals
@@ -993,8 +995,8 @@ class JobsOverviewByType(Jobs):
 
 
 class JobsOverview(Report):
-    """Shows an overview of the jobs and the candidates working there or
-    applying for it. See also :ref:`welfare.specs.jobs`.
+    """An overview of the jobs and the candidates working there or
+    applying for it.
 
     """
     required_roles = dd.required(IntegrationAgent)

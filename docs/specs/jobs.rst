@@ -16,10 +16,23 @@ The Jobs plugin
     >>> from lino.api.doctest import *
 
 
-Lino Welfare helps integration agents to manage their work with job
-providers.
+The :mod:`lino_welfare.modlib.jobs` plugin provides functionality for
+managing *job supplyment* (German *Art-60§7-Konventionen*, French
+*Mise à l'emploi*).
 
- :mod:`lino_welfare.modlib.jobs`.
+A **job supplyment** is when the PCSW arranges a job for a client,
+with the aim to bring this person back into the social security system
+and the employment process. In most cases, the PSWC acts as the legal
+employer.  It can employ the person in its own services (internal
+contracts) or put him/her at the disposal of a third party employer
+(external contracts). (Adapted from `mi-is.be
+<http://www.mi-is.be/en/public-social-welfare-centers/article-60-7>`_).
+
+This plugin needs the :mod:`lino_welfare.modlib.isip` plugin. Job
+supplyment projects (:class:`jobs.Contract
+<lino_welfare.modlib.jobs.models.Contract>`) are a specialized form of
+*ISIP projects* (:class:`isip.Contract
+<lino_welfare.modlib.isip.models.Contract>`).
 
 .. contents::
    :local:
