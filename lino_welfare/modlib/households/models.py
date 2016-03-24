@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ This module extends :mod:`lino_xl.lib.households.models`
 
 from __future__ import unicode_literals
 
-import datetime
 from decimal import Decimal
 
 from lino_xl.lib.households.models import *
