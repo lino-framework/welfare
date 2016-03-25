@@ -267,3 +267,25 @@ JEANÉMART Jérôme (181) : 2 Erwachsene
 KASENNOVA Tatjana (213) : 1 Erwachsener und 1 Kind
 LAHM Lisa (176) : 2 Erwachsene
 VANDENMEULENBOS Marie-Louise (174) : 2 Erwachsene
+
+
+
+
+
+Member objects
+==============
+
+The following code snippet was used to reproduce :ticket:`844`:
+
+>>> translation.activate('en')
+>>> Member = households.Member
+>>> print(Member())
+Member object
+
+>>> person = contacts.Person.objects.get(pk=259)
+>>> print(Member(person=person))
+Mr Bruno BRAUN (Child)
+
+>>> print(Member(person=person, role=households.MemberRoles.head))
+Mr Bruno BRAUN (Head of household)
+

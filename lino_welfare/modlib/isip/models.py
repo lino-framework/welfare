@@ -33,6 +33,8 @@ from .mixins import (ContractEvents, ContractTypeBase,
                      ContractPartnerBase, ContractBase,
                      ContractBaseTable)
 
+from .choicelists import *
+
 config = dd.plugins.isip
 
 from lino_welfare.modlib.pcsw.choicelists import (

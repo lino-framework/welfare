@@ -1,7 +1,8 @@
+.. _welfare.specs.jobs:
 .. _welfare.tested.jobs:
 
 ===============
-Jobs
+The Jobs plugin
 ===============
 
 .. to test only this document:
@@ -10,17 +11,28 @@ Jobs
     
     doctest initialization:
     
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 
-Lino Welfare helps integration agents to manage their work with job
-providers.
+The :mod:`lino_welfare.modlib.jobs` plugin provides functionality for
+managing *job supplyment* (German *Art-60§7-Konventionen*, French
+*Mise à l'emploi*).
 
- :mod:`lino_welfare.modlib.jobs`.
+A **job supplyment** is when the PCSW arranges a job for a client,
+with the aim to bring this person back into the social security system
+and the employment process. In most cases, the PSWC acts as the legal
+employer.  It can employ the person in its own services (internal
+contracts) or put him/her at the disposal of a third party employer
+(external contracts). (Adapted from `mi-is.be
+<http://www.mi-is.be/en/public-social-welfare-centers/article-60-7>`_).
+
+This plugin needs the :mod:`lino_welfare.modlib.isip` plugin. Job
+supplyment projects (:class:`jobs.Contract
+<lino_welfare.modlib.jobs.models.Contract>`) are a specialized form of
+*ISIP projects* (:class:`isip.Contract
+<lino_welfare.modlib.isip.models.Contract>`).
 
 .. contents::
    :local:
@@ -244,9 +256,80 @@ EventType #4 ('Auswertung')
 JobsOverview
 ------------
 
-Printing the :class:`lino_welfare.modlib.jobs.ui.JobsOverview` report
-caused a "NotImplementedError: <i> inside <text:p>" traceback when one
-of the jobs had a remark.
+The :class:`JobsOverview
+<lino_welfare.modlib.jobs.models.JobsOverview>` report
+helps integration agents to make decisions like:
+
+    - which jobs are soon going to be free, and which candidate(s) should we
+      suggest?
+
+Example content:
+
+>>> ses.show(jobs.JobsOverview)
+----------------------------
+Sozialwirtschaft = "majorés"
+----------------------------
+<BLANKLINE>
++----------------------------------------------+---------------------------------------------+--------------------------+---------------------------+
+| Stelle                                       | Arbeitet                                    | Probezeit                | Kandidaten                |
++==============================================+=============================================+==========================+===========================+
+| *Kellner* bei *BISA* (1) *Sehr harte Stelle* |                                             | *RADERMACHER Hedi (161)* | *ENGELS Edgar (129)*      |
++----------------------------------------------+---------------------------------------------+--------------------------+---------------------------+
+| *Koch* bei *Pro Aktiv V.o.G.* (1)            | *VAN VEEN Vincent (166)* bis 31.01.15 |br|  | *EMONTS-GAST Erna (152)* | *JACOBS Jacqueline (137)* |
+|                                              | *FAYMONVILLE Luc (130*)* bis 03.11.14       |                          |                           |
++----------------------------------------------+---------------------------------------------+--------------------------+---------------------------+
+<BLANKLINE>
+------
+Intern
+------
+<BLANKLINE>
++------------------------------------------------------+-------------------------------------------+---------------------------+-------------------------+
+| Stelle                                               | Arbeitet                                  | Probezeit                 | Kandidaten              |
++======================================================+===========================================+===========================+=========================+
+| *Koch* bei *R-Cycle Sperrgutsortierzentrum* (1)      | *RADERMACHER Fritz (158)* bis 11.01.15    | *AUSDEMWALD Alfons (116)* | *MEESSEN Melissa (147)* |
++------------------------------------------------------+-------------------------------------------+---------------------------+-------------------------+
+| *Küchenassistent* bei *BISA* (1) *Sehr harte Stelle* | *LAMBERTZ Guido (142)* bis 02.12.14 |br|  | *BRECHT Bernd (177)*      | *JONAS Josef (139)*     |
+|                                                      | *RADERMECKER Rik (173)* bis 11.02.15      |                           |                         |
++------------------------------------------------------+-------------------------------------------+---------------------------+-------------------------+
+<BLANKLINE>
+----------------------------------------------
+Extern (Öffentl. VoE mit Kostenrückerstattung)
+----------------------------------------------
+<BLANKLINE>
++--------------------------------------------------------------------------------------------+--------------------------------------------+----------------------+---------------------------+
+| Stelle                                                                                     | Arbeitet                                   | Probezeit            | Kandidaten                |
++============================================================================================+============================================+======================+===========================+
+| *Küchenassistent* bei *Pro Aktiv V.o.G.* (1) *No supervisor. Only for independent people.* | *HILGERS Hildegard (133)* bis 12.11.14     | *JONAS Josef (139)*  |                           |
++--------------------------------------------------------------------------------------------+--------------------------------------------+----------------------+---------------------------+
+| *Tellerwäscher* bei *R-Cycle Sperrgutsortierzentrum* (1)                                   | *MALMENDIER Marc (146)* bis 13.12.14 |br|  | *ENGELS Edgar (129)* | *RADERMACHER Guido (159)* |
+|                                                                                            | *DENON Denis (180*)* bis 03.03.15          |                      |                           |
++--------------------------------------------------------------------------------------------+--------------------------------------------+----------------------+---------------------------+
+<BLANKLINE>
+------------------------------------
+Extern (Privat Kostenrückerstattung)
+------------------------------------
+<BLANKLINE>
+================================ ========== ====================== =======================
+ Stelle                           Arbeitet   Probezeit              Kandidaten
+-------------------------------- ---------- ---------------------- -----------------------
+ *Tellerwäscher* bei *BISA* (1)              *KAIVERS Karl (141)*   *EMONTS Daniel (128)*
+================================ ========== ====================== =======================
+<BLANKLINE>
+--------
+Sonstige
+--------
+<BLANKLINE>
+==================================================== ============================================ ========================== ==========================
+ Stelle                                               Arbeitet                                     Probezeit                  Kandidaten
+---------------------------------------------------- -------------------------------------------- -------------------------- --------------------------
+ *Kellner* bei *R-Cycle Sperrgutsortierzentrum* (1)   *RADERMACHER Christian (155)* bis 02.01.15   *FAYMONVILLE Luc (130*)*   *JEANÉMART Jérôme (181)*
+==================================================== ============================================ ========================== ==========================
+<BLANKLINE>
+
+
+
+Printing this report caused a "NotImplementedError: <i> inside
+<text:p>" traceback when one of the jobs had a remark.
 
 >>> settings.SITE.default_build_method = "appyodt"
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()

@@ -54,6 +54,71 @@ def get_user_or_none(m, pk):
     except m.DoesNotExist:
         return None
 
+WANTED_ACCOUNTS = """
+820/333/01        	Vorschüsse Vergütungen u.ä.             
+821/333/01        	Vorschüsse Pensionen                    
+822/333/01        	Vorschüsse Unfallentschäd./Berufskrankh.
+823/333/01        	Vorschüsse Kranken- und Invalidengeld   
+825/333/01        	Vorschüsse Familienzulagen/Geburtspräm. 
+826/333/01        	Vorschüsse auf Arbeitslosengeld         
+827/333/01        	Vorschüsse auf Behindertenzulagen       
+832/330/01        	Allgemeine Beihilfen                    
+832/330/02        	Beihilfen im Gesundheitsbereich         
+832/330/03        	Heizkosten- und Energiebeihilfen        
+832/330/03B       	Heizölzulage (durch Staat bezuschusst)  
+832/330/03F       	Fonds Gas und Elektrizität              
+832/330/04        	Mietkautionen                           
+832/330/05        	Sozio-kulturelle Beteiligung (Allgemein)
+832/330/06        	Sozio-kulturelle Beteiligung (Kinder)   
+832/333/22        	Mietbeihilfen                           
+832/3331/01       	EM/Eingliederungseinkommen              
+832/334/04        	Beihilfen zur Krankenhausunterbringung  
+832/334/07        	Unterbr. Kinder in eigenen Einricht.    
+832/334/08        	Unterbr. Kinder in auswärtigen Einricht.
+832/334/09        	Unterbringung von Behinderten           
+832/334/10        	Unterbringung Senioren St. Josef        
+832/334/11        	Unterbringung Senioren in ausw.Einricht.
+832/334/13        	Unterbring.in Aufnahmehäusern           
+832/334/16        	Unterbringung Krippen/Tagesmütterdienste
+832/334/18        	Interv.zu Leistungen Familienhilfsdienst
+832/334/26        	Beihilfen Beerdigungskosten             
+832/334/27        	LBA-Schecks                             
+832/334/28        	Förderung sozialer Zusammenhalt         
+832/334/29        	Neuansiedlung Flüchtlinge               
+832/3341/21       	Hospital.von Belgiern mit Unterstütz.ws.
+832/3342/03       	Transportbeihilfen                      
+832/3342/21       	Hospit.Ausl./Belgier ohne Unterstütz.ws.
+832/3343/21       	Ausländerbeihilfen (f. Rechnung Staat)  
+832/3344/21       	Rückführung belg. Bedürftiger aus Ausl. 
+832/3345/21       	Sozialh. f.Kinder <18 J.ohne Unterst.ws.
+832-380/04        	Erst. Interv. Energieversorgungssektor  
+832/435/02        	Zahl.an hilfeleist.Zentr.f.gel.Sozialh. 
+832-465/01        	Erst. Staatsinterv. EM/Einglied.einkomm.
+832-465/08        	Erst. Heizölzulagen Föderalstaat        
+832-465/11        	Erst. soziokultur. Beteilig.Staat       
+832-4652/03       	Erstatt. an Staat von Einn. 832/-3342/21
+832-4653/03       	Erstatt. an Staat von Einn. 832/-3343/21
+"""
+
+
+def wanted_accounts():
+    Account = rt.modules.accounts.Account
+    AccountTypes = rt.modules.accounts.AccountTypes
+    # Group = rt.modules.accounts.Group
+    # grp = Group.objects.all()
+    for ln in WANTED_ACCOUNTS.splitlines():
+        ln = ln.strip()
+        if not ln:
+            continue
+        ref, name = ln.split(None, 1)
+        obj = Account.get_by_ref(ref, None)
+        if obj is None:
+            obj = Account(
+                ref=ref, name=name,
+                # group=grp,
+                type=AccountTypes.expenses)
+            yield obj
+
 
 class TimLoader(TimLoader):
 
@@ -158,6 +223,8 @@ class TimLoader(TimLoader):
         jnl = ledger.Journal.get_by_ref(row.idjnl.strip(), None)
         if jnl is None:
             return
+        if jnl.journal_group != ledger.JournalGroups.anw:
+            return
         ap = self.tim2period(row.periode.strip())
         voucher_model = jnl.voucher_type.model
         acc = self.row2account(row)
@@ -252,6 +319,8 @@ class TimLoader(TimLoader):
                 dd.logger.warning("Ignoring journal %s", idjnl)
                 self.ignored_journals.add(idjnl)
             return
+        if jnl.journal_group != ledger.JournalGroups.anw:
+            return
         voucher_model = jnl.voucher_type.model
         acc = self.row2account(row)
         number = self.tim2number(row.iddoc)
@@ -338,6 +407,8 @@ class TimLoader(TimLoader):
         self.rows_by_year = SumCollector()
         self.ignored_matches = SumCollector()
         self.ignored_partners = SumCollector()
+
+        yield wanted_accounts()
 
         # self.group = accounts.Group(name="Imported from TIM")
         # self.group.full_clean()
