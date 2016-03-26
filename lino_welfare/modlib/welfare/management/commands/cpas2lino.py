@@ -528,10 +528,3 @@ def expand(obj):
     else:
         yield obj
 
-
-
-
-RUT016
-LYDIA
-BOSS
-THERESIA
