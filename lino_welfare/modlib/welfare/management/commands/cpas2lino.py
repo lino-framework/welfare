@@ -287,7 +287,7 @@ class TimLoader(TimLoader):
     def tim2compte(self, row, par, prj):
         compte = row.compte1.strip()
         if not compte:
-            return None
+            return
         a = compte.split(':')
         if len(a) == 1:
             try:
@@ -296,9 +296,16 @@ class TimLoader(TimLoader):
                 iban = compte
         else:
             bic, iban = a
+        if not iban:
+            return
         qs = sepa.Account.objects.filter(iban=iban)
         if qs.count() == 1:
             return qs[0]
+        elif qs.count() == 0:
+            acc = sepa.Account(iban=iban, partner=par or prj)
+            acc.full_clean()
+            acc.save()
+            return acc
         else:
             if par:
                 qs2 = qs.filter(partner=par)
@@ -309,7 +316,7 @@ class TimLoader(TimLoader):
                 if qs2.count() == 1:
                     return qs2[0]
         self.undefined_bank_accounts.add(iban)
-        return None
+        return
 
     def load_iml(self, row, **kw):
         idjnl = row.idjnl.strip()
@@ -522,5 +529,4 @@ def expand(obj):
                 yield so
     else:
         yield obj
-
 
