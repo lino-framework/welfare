@@ -299,6 +299,11 @@ class TimLoader(TimLoader):
         qs = sepa.Account.objects.filter(iban=iban)
         if qs.count() == 1:
             return qs[0]
+        elif qs.count() == 0:
+            acc = sepa.Account(iban=iban, partner=par or prj)
+            acc.full_clean()
+            acc.save()
+            return acc
         else:
             if par:
                 qs2 = qs.filter(partner=par)
@@ -524,3 +529,9 @@ def expand(obj):
         yield obj
 
 
+
+
+RUT016
+LYDIA
+BOSS
+THERESIA
