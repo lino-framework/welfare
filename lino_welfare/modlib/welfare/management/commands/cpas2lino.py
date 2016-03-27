@@ -116,6 +116,7 @@ def wanted_accounts():
             obj = Account(
                 ref=ref, name=name,
                 # group=grp,
+                clearable=True,
                 type=AccountTypes.expenses)
             yield obj
 
