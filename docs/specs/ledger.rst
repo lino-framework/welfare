@@ -417,9 +417,9 @@ This invoice is registered, and ledger movements have been created:
 >>> obj.state
 <VoucherStates.registered:20>
 >>> rt.show(rt.modules.ledger.MovementsByVoucher, obj)
-========== ============================ ============= =================================== =========== =========== ============ ============
- Seq.-Nr.   Klient                       Partner       Haushaltsartikel                    Debit       Kredit      Match        Befriedigt
----------- ---------------------------- ------------- ----------------------------------- ----------- ----------- ------------ ------------
+========== ============================ ============= =================================== =========== =========== ============ =========
+ Seq.-Nr.   Klient                       Partner       Haushaltsartikel                    Debit       Kredit      Match        Cleared
+---------- ---------------------------- ------------- ----------------------------------- ----------- ----------- ------------ ---------
  1                                                     (832/330/01) Allgemeine Beihilfen   12,50                                Ja
  2                                                     (832/330/01) Allgemeine Beihilfen   5,33                                 Ja
  3                                                     (832/330/01) Allgemeine Beihilfen   29,95                                Ja
@@ -431,7 +431,7 @@ This invoice is registered, and ledger movements have been created:
  9          COLLARD Charlotte (118)      Ethias s.a.   (4400) Lieferanten                              12,50       **SREG#8**   Nein
  10         EVERS Eberhart (127)         Ethias s.a.   (4400) Lieferanten                              29,95       **SREG#8**   Nein
  **55**                                                                                    **82,78**   **82,78**                **5**
-========== ============================ ============= =================================== =========== =========== ============ ============
+========== ============================ ============= =================================== =========== =========== ============ =========
 <BLANKLINE>
 
 
@@ -452,9 +452,9 @@ AAW, has been registered) but the payment has not yet been executed.
 
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-====================== =================== ==================================================================== ======= =========== ============ ============
- Buchungsdatum          Beleg               Beschreibung                                                         Debit   Kredit      Match        Befriedigt
----------------------- ------------------- -------------------------------------------------------------------- ------- ----------- ------------ ------------
+====================== =================== ==================================================================== ======= =========== ============ =========
+ Buchungsdatum          Beleg               Beschreibung                                                         Debit   Kredit      Match        Cleared
+---------------------- ------------------- -------------------------------------------------------------------- ------- ----------- ------------ ---------
  22.05.14               *AAW19 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*           5,33        **REG#28**   Nein
  22.05.14               *AAW21 (2014-05)*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*            5,33        **REG#18**   Nein
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                 5,33        **SREG#8**   Nein
@@ -463,7 +463,7 @@ AAW, has been registered) but the payment has not yet been executed.
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                             12,50       **SREG#8**   Nein
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                29,95       **SREG#8**   Nein
  **Total (7 Zeilen)**                                                                                                    **93,44**                **0**
-====================== =================== ==================================================================== ======= =========== ============ ============
+====================== =================== ==================================================================== ======= =========== ============ =========
 <BLANKLINE>
 
 >>> client = rt.modules.pcsw.Client.objects.get(pk=128)
@@ -473,9 +473,9 @@ EMONTS Daniel (128)
 Our client has invoices from different partners:
 
 >>> rt.show(ledger.MovementsByProject, client)
-======================= =================== ============================================================================================== ============== ============== ============== ============
- Buchungsdatum           Beleg               Beschreibung                                                                                   Debit          Kredit         Match          Befriedigt
------------------------ ------------------- ---------------------------------------------------------------------------------------------- -------------- -------------- -------------- ------------
+======================= =================== ============================================================================================== ============== ============== ============== =========
+ Buchungsdatum           Beleg               Beschreibung                                                                                   Debit          Kredit         Match          Cleared
+----------------------- ------------------- ---------------------------------------------------------------------------------------------- -------------- -------------- -------------- ---------
  22.05.14                *AAW1 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                        **AAW#31:5**   Nein
  22.05.14                *AAW2 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                        **AAW#32:5**   Nein
  22.05.14                *AAW3 (2014-05)*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                        **AAW#33:5**   Nein
@@ -503,7 +503,7 @@ Our client has invoices from different partners:
  02.05.14                *SREG2 (2014-05)*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                  120,00         **SREG#5**     Nein
  17.04.14                *SREG3 (2014-04)*   *(4400) Lieferanten* / *Ethias s.a.*                                                                          5,33           **SREG#8**     Nein
  **Total (26 Zeilen)**                                                                                                                      **4 277,53**   **4 770,82**                  **0**
-======================= =================== ============================================================================================== ============== ============== ============== ============
+======================= =================== ============================================================================================== ============== ============== ============== =========
 <BLANKLINE>
 
 
@@ -577,9 +577,9 @@ Users can consult to movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(rt.modules.ledger.MovementsByAccount, obj)
-====================== =================== ====================== ============ ======== ======= ============
- Buchungsdatum          Beleg               Beschreibung           Debit        Kredit   Match   Befriedigt
----------------------- ------------------- ---------------------- ------------ -------- ------- ------------
+====================== =================== ====================== ============ ======== ======= =========
+ Buchungsdatum          Beleg               Beschreibung           Debit        Kredit   Match   Cleared
+---------------------- ------------------- ---------------------- ------------ -------- ------- ---------
  22.05.14               *REG1 (2014-05)*    *AS Express Post*      10,00                         Ja
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   29,95                         Ja
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   5,33                          Ja
@@ -587,7 +587,7 @@ Users can consult to movements of a given general account.
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   25,00                         Ja
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   12,50                         Ja
  **Total (6 Zeilen)**                                              **202,78**                    **6**
-====================== =================== ====================== ============ ======== ======= ============
+====================== =================== ====================== ============ ======== ======= =========
 <BLANKLINE>
 
 
