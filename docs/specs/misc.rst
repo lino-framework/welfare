@@ -11,8 +11,8 @@ Miscellaneous
     doctest init:
     
     >>> import os
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     >>> ses = rt.login('rolf')
 
@@ -127,8 +127,6 @@ Yet another series of GET requests
 >>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
 >>> demo_get('rolf', 'api/contacts/Partners', json_fields, 175, **kw)
 
->>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
->>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
 >>> demo_get('rolf', 'api/countries/Countries', json_fields, 9, **kw)
 >>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
 >>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
@@ -138,7 +136,6 @@ Yet another series of GET requests
 ...     json_fields, 18, mt=mt, mk=1, **kw)
 
 >>> json_fields = 'count rows title success no_data_text param_values'
->>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
 >>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)

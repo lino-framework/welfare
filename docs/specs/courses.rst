@@ -10,10 +10,8 @@ External courses
     
     doctest init:
     
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     >>> ses = settings.SITE.login('rolf')
 
@@ -23,17 +21,66 @@ External courses
     :depth: 1
 
 
-
 This is about *external* courses
 :mod:`lino_welfare.modlib.courses.models` (not :doc:`courses2`).
 
 >>> rt.modules.courses.__name__
 'lino_welfare.modlib.courses.models'
 
+Requesting for JSON data
+========================
+
+>>> json_fields = 'count rows title success no_data_text'
+>>> kw = dict(fmt='json', limit=10, start=0)
+>>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
+>>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
+
+>>> ContentType = rt.modules.contenttypes.ContentType
+>>> json_fields = 'count rows title success no_data_text param_values'
+>>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
+
+Course providers
+================
+
+>>> ses.show(courses.CourseProviders)
+======= ============ ======== ========= ===== ===== =========
+ Name    Adresse      E-Mail   Telefon   GSM   ID    Sprache
+------- ------------ -------- --------- ----- ----- ---------
+ KAP     4700 Eupen                            231
+ Oikos   4700 Eupen                            230
+======= ============ ======== ========= ===== ===== =========
+<BLANKLINE>
+
+Course offers
+=============
+
+>>> ses.show(courses.CourseOffers)
+==== ========================= =========== ============= ============== =============
+ ID   Name                      Gastrolle   Kursinhalt    Kursanbieter   description
+---- ------------------------- ----------- ------------- -------------- -------------
+ 1    Deutsch für Anfänger                  Deutsch       Oikos
+ 2    Deutsch für Anfänger                  Deutsch       KAP
+ 3    Français pour débutants               Französisch   KAP
+==== ========================= =========== ============= ============== =============
+<BLANKLINE>
+
+>>> ses.show(courses.CourseRequests)  #doctest: +ELLIPSIS
+==== ============================ ============= ============= ============== ============================== ========= =============== =========== ==========
+ ID   Klient                       Kursangebot   Kursinhalt    Anfragedatum   professionelle Eingliederung   Zustand   Kurs gefunden   Bemerkung   Enddatum
+---- ---------------------------- ------------- ------------- -------------- ------------------------------ --------- --------------- ----------- ----------
+ 20   LAZARUS Line (144)                         Französisch   14.04.14       Nein                           Offen
+ 19   LAMBERTZ Guido (142)                       Deutsch       16.04.14       Nein                           Offen
+ 18   KELLER Karl (178)                          Französisch   18.04.14       Nein                           Offen
+ ...
+ 2    BRECHT Bernd (177)                         Französisch   20.05.14       Nein                           Offen
+ 1    AUSDEMWALD Alfons (116)                    Deutsch       22.05.14       Nein                           Offen
+==== ============================ ============= ============= ============== ============================== ========= =============== =========== ==========
+<BLANKLINE>
+
 
 
 catch_layout_exceptions
------------------------
+=======================
 
 Some general documentation about `catch_layout_exceptions`. 
 This should rather be somewhere in the general Lino documentation, 
@@ -81,7 +128,7 @@ Exception: Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Cli
 
 
 Changed since 20130422
-----------------------
+======================
 
 Yes it was a nice feature to silently ignore non installed app_labels
 but mistakenly specifying "person.first_name" instead of

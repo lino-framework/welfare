@@ -287,7 +287,7 @@ and passed when it was fixed:
 >>> settings.SITE.appy_params.update(raiseOnError=True)
 >>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
 >>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: -SKIP
->>> print(res.status_code)  #doctest: +SKIP
+>>> print(res.status_code)  #doctest: -SKIP
 200
 >>> result = json.loads(res.content)  #doctest: -SKIP
 >>> print(result)  #doctest: -SKIP
