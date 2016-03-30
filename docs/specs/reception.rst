@@ -117,12 +117,10 @@ It contains a table, and we want the cell at the first data row and
 third column:
 
 >>> td = soup.table.tbody.tr.contents[2]
->>> #print(td.div)
->>> #len(td.div.contents)
 
 The first button ("Visit") is here:
 
->>> btn = td.div.contents[0]
+>>> btn = td.contents[0]
 >>> print(btn.contents)
 [<img alt="hourglass" src="/static/images/mjames/hourglass.png"/>]
 
@@ -161,7 +159,7 @@ It has 4 keys:
 
 The button is here:
 
->>> btn = td.div.contents[2]
+>>> btn = td.contents[2]
 >>> print(btn.contents)
 [<img alt="calendar" src="/static/images/mjames/calendar.png"/>]
 
