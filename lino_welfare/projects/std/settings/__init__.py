@@ -47,7 +47,7 @@ class Site(Site):
     # ~ catch_layout_exceptions = False # 20130804
 
     userdocs_prefix = 'welfare.'
-    auto_configure_logger_names = 'lino lino_welfare'
+    auto_configure_logger_names = 'lino lino_xl lino_cosi lino_welfare'
     # use_java = False  # temporarily
     # verbose_client_info_message = True
 
