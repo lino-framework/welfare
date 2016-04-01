@@ -12,10 +12,8 @@ General PCSW
 
   doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
@@ -69,14 +67,13 @@ Coaching types
 >>> with translation.override('de'):
 ...    ses.show(pcsw.CoachingTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================== ===================== =================== ======= ======= =====================
- Bezeichnung            Bezeichnung (fr)      Bezeichnung (de)    DSBE    GSS     Role in evaluations
----------------------- --------------------- ------------------- ------- ------- ---------------------
- General                SSG                   ASD                 Nein    Ja      Kollege
- Integ                  SI                    DSBE                Ja      Nein    Kollege
- Debts mediation        Médiation de dettes   Schuldnerberatung   Nein    Nein
- **Total (3 Zeilen)**                                             **1**   **1**
-====================== ===================== =================== ======= ======= =====================
+================= ===================== =================== ====== ====== =====================
+ Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   GSS    Role in evaluations
+----------------- --------------------- ------------------- ------ ------ ---------------------
+ General           SSG                   ASD                 Nein   Ja     Kollege
+ Integ             SI                    DSBE                Ja     Nein   Kollege
+ Debts mediation   Médiation de dettes   Schuldnerberatung   Nein   Nein
+================= ===================== =================== ====== ====== =====================
 <BLANKLINE>
 
 

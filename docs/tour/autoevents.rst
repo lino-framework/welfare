@@ -10,10 +10,8 @@ Automatic calendar events
     
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 For every contract, Lino Welfare automatically generates a series of
@@ -153,15 +151,14 @@ coach to assign?
 To find an answer, we must look at the coachings of this client:
 
 >>> rt.show(pcsw.CoachingsByClient, obj.client)
-==================== ========== ================= ========= =============== ============================
- Coached from         until      Coach             Primary   Coaching type   Reason of termination
--------------------- ---------- ----------------- --------- --------------- ----------------------------
- 3/3/12                          Alicia Allmanns   No        General
- 3/13/12              3/8/13     Hubert Huppertz   No        Integ           Transfer to colleague
- 3/8/13               10/24/13   Mélanie Mélard    No        Integ           End of right on social aid
- 10/24/13                        Caroline Carnol   Yes       Integ
- **Total (4 rows)**                                **1**
-==================== ========== ================= ========= =============== ============================
+============== ========== ================= ========= =============== ============================
+ Coached from   until      Coach             Primary   Coaching type   Reason of termination
+-------------- ---------- ----------------- --------- --------------- ----------------------------
+ 3/3/12                    Alicia Allmanns   No        General
+ 3/13/12        3/8/13     Hubert Huppertz   No        Integ           Transfer to colleague
+ 3/8/13         10/24/13   Mélanie Mélard    No        Integ           End of right on social aid
+ 10/24/13                  Caroline Carnol   Yes       Integ
+============== ========== ================= ========= =============== ============================
 <BLANKLINE>
 
 ISIP contract #21 was signed by Hubert for a period from 2013-02-16
@@ -191,14 +188,13 @@ to `True`. You can configure this via :menuselection:`Configure -->
 PCSW --> Coaching types`. The default configuration is as follows:
 
 >>> ses.show(pcsw.CoachingTypes)
-==================== ===================== =================== ============= ======= =====================
- Designation          Designation (fr)      Designation (de)    Integration   GSS     Role in evaluations
--------------------- --------------------- ------------------- ------------- ------- ---------------------
- General              SSG                   ASD                 No            Yes     Colleague
- Integ                SI                    DSBE                Yes           No      Colleague
- Debts mediation      Médiation de dettes   Schuldnerberatung   No            No
- **Total (3 rows)**                                             **1**         **1**
-==================== ===================== =================== ============= ======= =====================
+================= ===================== =================== ============= ===== =====================
+ Designation       Designation (fr)      Designation (de)    Integration   GSS   Role in evaluations
+----------------- --------------------- ------------------- ------------- ----- ---------------------
+ General           SSG                   ASD                 No            Yes   Colleague
+ Integ             SI                    DSBE                Yes           No    Colleague
+ Debts mediation   Médiation de dettes   Schuldnerberatung   No            No
+================= ===================== =================== ============= ===== =====================
 <BLANKLINE>
 
 The above is coded in

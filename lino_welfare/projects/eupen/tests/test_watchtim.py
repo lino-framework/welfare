@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -455,12 +455,11 @@ class TestCase(TestCase):
             s = coachings_to_rst(obj)
             #~ print s
             self.assertEqual(s, """\
-====================== ===== =========== ======== ======== ==================
- Begleitet seit         bis   Begleiter   Primär   Dienst   Beendigungsgrund
----------------------- ----- ----------- -------- -------- ------------------
- 05.01.06                     alicia      Ja       DSBE
- **Total (1 Zeilen)**                     **1**
-====================== ===== =========== ======== ======== ==================
+================ ===== =========== ======== ======== ==================
+ Begleitet seit   bis   Begleiter   Primär   Dienst   Beendigungsgrund
+---------------- ----- ----------- -------- -------- ------------------
+ 05.01.06               alicia      Ja       DSBE
+================ ===== =========== ======== ======== ==================
 
 """)
 
@@ -472,12 +471,11 @@ class TestCase(TestCase):
             s = coachings_to_rst(obj)
             #~ print s
             self.assertEqual(s, """\
-====================== ========== =========== ======== ======== ==================
- Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
----------------------- ---------- ----------- -------- -------- ------------------
- 05.01.06               05.01.06   alicia      Ja       DSBE
- **Total (1 Zeilen)**                          **1**
-====================== ========== =========== ======== ======== ==================
+================ ========== =========== ======== ======== ==================
+ Begleitet seit   bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06         05.01.06   alicia      Ja       DSBE
+================ ========== =========== ======== ======== ==================
 
 """)
 
@@ -506,13 +504,12 @@ class TestCase(TestCase):
             s = coachings_to_rst(obj)
             #~ print s
             self.assertEqual(s, """\
-====================== ========== =========== ======== ======== ==================
- Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
----------------------- ---------- ----------- -------- -------- ------------------
- 05.01.06               05.01.06   alicia      Nein     DSBE
- 05.01.06                          alicia      Ja       DSBE
- **Total (2 Zeilen)**                          **1**
-====================== ========== =========== ======== ======== ==================
+================ ========== =========== ======== ======== ==================
+ Begleitet seit   bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06         05.01.06   alicia      Nein     DSBE
+ 05.01.06                    alicia      Ja       DSBE
+================ ========== =========== ======== ======== ==================
 
 """)
             ln = ln.replace('"IDUSR":"ALICIA"', '"IDUSR":"ROGER"')
@@ -520,14 +517,13 @@ class TestCase(TestCase):
             s = coachings_to_rst(obj)
             #~ print s
             self.assertEqual(s, """\
-====================== ========== =========== ======== ======== ==================
- Begleitet seit         bis        Begleiter   Primär   Dienst   Beendigungsgrund
----------------------- ---------- ----------- -------- -------- ------------------
- 05.01.06               05.01.06   alicia      Nein     DSBE
- 05.01.06               17.05.13   alicia      Nein     DSBE
- 17.05.13                          roger       Ja       ASD
- **Total (3 Zeilen)**                          **1**
-====================== ========== =========== ======== ======== ==================
+================ ========== =========== ======== ======== ==================
+ Begleitet seit   bis        Begleiter   Primär   Dienst   Beendigungsgrund
+---------------- ---------- ----------- -------- -------- ------------------
+ 05.01.06         05.01.06   alicia      Nein     DSBE
+ 05.01.06         17.05.13   alicia      Nein     DSBE
+ 17.05.13                    roger       Ja       ASD
+================ ========== =========== ======== ======== ==================
 
 """)
 

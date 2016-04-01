@@ -59,7 +59,7 @@ This is the list of upload types:
  9    Personalausweis              Nein     -1                                      1
  5    Vertrag                      Nein     -1                                      1
  6    Ärztliche Bescheinigung      Nein     -1                                      1
-                                   **5**    **-1**                                  **11**
+                                            **-1**                                  **11**
 ==== ============================ ======== ============= ========================= ====================== ============================
 <BLANKLINE>
 
@@ -84,7 +84,6 @@ Identifizierendes Dokument: *8*
 ---------------------------- ------------ ------- -------------- -------------------
  Identifizierendes Dokument   25.05.14     Ja                     Theresia Thelen
  Identifizierendes Dokument   22.04.14     Nein                   Theresia Thelen
- **Total (2 Zeilen)**                      **1**
 ============================ ============ ======= ============== ===================
 <BLANKLINE>
 
@@ -109,7 +108,6 @@ Führerschein: *11*
  Führerschein           01.06.14     Ja                     Caroline Carnol
  Arbeitserlaubnis       30.08.14     Ja                     Alicia Allmanns
  Aufenthaltserlaubnis   18.03.15     Ja                     Theresia Thelen
- **Total (3 Zeilen)**                **3**
 ====================== ============ ======= ============== ===================
 <BLANKLINE>
 
@@ -134,7 +132,6 @@ This is the MyUploads table for Theresia:
  9    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja
  8    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja
  7    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein
-                                                                                          **2**
 ==== ============================ ============================ ============ ============ ======= ============== =======
 <BLANKLINE>
 
@@ -146,7 +143,6 @@ And the same for Caroline:
  ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
 ---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
  11   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja
-                                                                            **1**
 ==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
 
@@ -159,7 +155,6 @@ This is the MyExpiringUploads table for :ref:`hubert`:
 ------------------------- ---------------------- ------------------- ------------ ------------ -------
  AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
  AUSDEMWALD Alfons (116)   Arbeitserlaubnis       Hubert Huppertz                  17.05.15     Ja
- **Total (2 Zeilen)**                                                                           **2**
 ========================= ====================== =================== ============ ============ =======
 <BLANKLINE>
 

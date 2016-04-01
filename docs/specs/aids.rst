@@ -14,7 +14,6 @@ This document describes the functionality implemented by the
 
     doctest initialization:
 
-    >>> from __future__ import print_function
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
@@ -71,7 +70,6 @@ This list can be modified by a user with admin level.
  Möbellager                                        Ja                          furniture.body.html             8
  Übernahme von Arzt- und/oder Medikamentenkosten   Ja                          medical_refund.body.html        6
  Übernahmeschein                                   Ja                          certificate.body.html           5
- **Total (11 Zeilen)**                             **10**
 ================================================= =========================== =============================== ====
 <BLANKLINE>
 

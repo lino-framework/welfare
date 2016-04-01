@@ -1,8 +1,8 @@
 .. _welfare.specs.ledger:
 
-=======================
-Ledger for Lino Welfare
-=======================
+===========================
+Accounting for Lino Welfare
+===========================
 
 .. How to test only this document:
 
@@ -10,7 +10,6 @@ Ledger for Lino Welfare
     
     doctest init:
 
-    >>> from __future__ import print_function
     >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
@@ -24,8 +23,12 @@ accounting package (or at least a subledger).
 
 A first prototype was developed between May and December 2015 as
 ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben") and
-child tickets. The code examples contain German texts for practical
-reasons to facilitate analysis.
+child tickets. The code examples may contain German texts for
+practical reasons to facilitate analysis.
+
+This document is based on and extends the following specifications:
+
+- :ref:`cosi.tested.ledger`
 
 .. contents::
    :depth: 1
@@ -204,7 +207,6 @@ Some expenses accounts:
 <BLANKLINE>
 
 
-
 Vouchers
 ========
 
@@ -214,7 +216,7 @@ proof for a transaction. A transaction is a set of accounting
 
 Lino Welfare uses the following **voucher types**:
 
->>> rt.show(rt.modules.ledger.VoucherTypes)
+>>> rt.show(ledger.VoucherTypes)
 =================================== ====== =================================================
  Wert                                name   Text
 ----------------------------------- ------ -------------------------------------------------
@@ -430,7 +432,7 @@ This invoice is registered, and ledger movements have been created:
  8          DOBBELSTEIN Dorothée (124)   Ethias s.a.   (4400) Lieferanten                              25,00       **SREG#8**   Nein
  9          COLLARD Charlotte (118)      Ethias s.a.   (4400) Lieferanten                              12,50       **SREG#8**   Nein
  10         EVERS Eberhart (127)         Ethias s.a.   (4400) Lieferanten                              29,95       **SREG#8**   Nein
- **55**                                                                                    **82,78**   **82,78**                **5**
+ **55**                                                                                    **82,78**   **82,78**
 ========== ============================ ============= =================================== =========== =========== ============ =========
 <BLANKLINE>
 
@@ -462,7 +464,7 @@ AAW, has been registered) but the payment has not yet been executed.
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                          25,00       **SREG#8**   Nein
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                             12,50       **SREG#8**   Nein
  17.04.14               *SREG3 (2014-04)*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                29,95       **SREG#8**   Nein
- **Total (7 Zeilen)**                                                                                                    **93,44**                **0**
+ **Total (7 Zeilen)**                                                                                                    **93,44**
 ====================== =================== ==================================================================== ======= =========== ============ =========
 <BLANKLINE>
 
@@ -502,7 +504,7 @@ Our client has invoices from different partners:
  17.05.14                *SREG1 (2014-05)*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                   29,95          **SREG#2**     Nein
  02.05.14                *SREG2 (2014-05)*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                  120,00         **SREG#5**     Nein
  17.04.14                *SREG3 (2014-04)*   *(4400) Lieferanten* / *Ethias s.a.*                                                                          5,33           **SREG#8**     Nein
- **Total (26 Zeilen)**                                                                                                                      **4 277,53**   **4 770,82**                  **0**
+ **Total (26 Zeilen)**                                                                                                                      **4 277,53**   **4 770,82**
 ======================= =================== ============================================================================================== ============== ============== ============== =========
 <BLANKLINE>
 
@@ -586,7 +588,7 @@ Users can consult to movements of a given general account.
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   120,00                        Ja
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   25,00                         Ja
  16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   12,50                         Ja
- **Total (6 Zeilen)**                                              **202,78**                    **6**
+ **Total (6 Zeilen)**                                              **202,78**
 ====================== =================== ====================== ============ ======== ======= =========
 <BLANKLINE>
 

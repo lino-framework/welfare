@@ -1,8 +1,8 @@
 .. _welfare.specs.excerpts:
 
-=============
-Excerpts
-=============
+==========================================
+Usage of database excerpts in Lino Welfare
+==========================================
 
 .. How to test only this document:
 
@@ -10,10 +10,8 @@ Excerpts
     
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 
@@ -51,7 +49,6 @@ Here is a more complete list of excerpt types:
  *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
  *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            eID-Inhalt                                         eid-content.odt
- **Total (17 Zeilen)**                                   **13**   **11**
 ======================================================= ======== =============== =========================== ====================== ================= ================================
 <BLANKLINE>
 

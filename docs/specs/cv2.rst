@@ -10,7 +10,6 @@ Career (new version)
     $ python setup.py test -s tests.SpecsTests.test_cv2
     
     doctest init:
-    >>> from __future__ import print_function
     >>> import lino
     >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
@@ -34,16 +33,15 @@ Configuration data
 This is the list of training types:
 
 >>> rt.login('robin').show(cv.EducationLevels)
-====================== ================== ================== ======= ===========
- Désignation            Désignation (de)   Désignation (en)   Étude   Formation
----------------------- ------------------ ------------------ ------- -----------
- Bachelor               Bachelor           Bachelor           Oui     Non
- Master                 Master             Master             Oui     Non
- Primaire               Primär             Primary            Oui     Non
- Secondaire             Sekundär           Secondary          Oui     Non
- Supérieur              Hochschule         Higher             Oui     Non
- **Total (5 lignes)**                                         **5**   **0**
-====================== ================== ================== ======= ===========
+============= ================== ================== ======= ===========
+ Désignation   Désignation (de)   Désignation (en)   Étude   Formation
+------------- ------------------ ------------------ ------- -----------
+ Bachelor      Bachelor           Bachelor           Oui     Non
+ Master        Master             Master             Oui     Non
+ Primaire      Primär             Primary            Oui     Non
+ Secondaire    Sekundär           Secondary          Oui     Non
+ Supérieur     Hochschule         Higher             Oui     Non
+============= ================== ================== ======= ===========
 <BLANKLINE>
 
 And the list of Study types:
@@ -63,7 +61,6 @@ And the list of Study types:
  1    École                   Schule               School             Oui     Non
  2    École spéciale          Sonderschule         Special school     Oui     Non
  5    École supérieure        Hochschule           Highschool         Oui     Non
-                                                                      **8**   **3**
 ==== ======================= ==================== ================== ======= =========== ===================
 <BLANKLINE>
 
