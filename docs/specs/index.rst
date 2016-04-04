@@ -18,7 +18,6 @@ General
   
    general
    choicelists
-   ledger
    clients
    users
    pcsw
@@ -61,6 +60,9 @@ Eupen
    eupen
    b2c
    db_eupen
+   ledger
+   vatless
+   finan
 
 Châtelet
 ========
@@ -74,3 +76,4 @@ Châtelet
    cv2
    courses2
    fse
+

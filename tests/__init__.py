@@ -74,6 +74,12 @@ class SpecsTests(BaseTestCase):
     def test_ledger(self):
         return self.run_simple_doctests('docs/specs/ledger.rst')
 
+    def test_vatless(self):
+        return self.run_simple_doctests('docs/specs/vatless.rst')
+
+    def test_finan(self):
+        return self.run_simple_doctests('docs/specs/finan.rst')
+
     def test_clients(self):
         return self.run_simple_doctests('docs/specs/clients.rst')
 
