@@ -24,11 +24,6 @@ This document is based on and extends the following specifications:
    :local:
 
 
-Some shortcuts:
-
->>> Journal = rt.modules.ledger.Journal
->>> Journals = rt.modules.ledger.Journals
-
 
 Incoming invoices
 =================
@@ -44,11 +39,11 @@ The demo database has two journals with *incoming invoices*, one for
 each type, referenced as "REG" (for German *Rechnungseingang*) and
 SREG (*Sammelrechnungen*).
 
->>> REG = Journal.get_by_ref('REG')
+>>> REG = ledger.Journal.get_by_ref('REG')
 >>> REG.voucher_type.table_class
 <class 'lino_cosi.lib.vatless.ui.ProjectInvoicesByJournal'>
 
->>> SREG = Journal.get_by_ref('SREG')
+>>> SREG = ledger.Journal.get_by_ref('SREG')
 >>> SREG.voucher_type.table_class
 <class 'lino_cosi.lib.vatless.ui.InvoicesByJournal'>
 
@@ -183,6 +178,13 @@ The match rules table defines how to clear these movements:
  Ausgabeanweisungen (AAW)
 ==========================
 <BLANKLINE>
+
+This rule means: "Uncleared amounts in the suppliers account may be
+cleared by the AAW (disbursement instructions) journal".
+
+Since AAW is a financial journal, our story continues in :doc:`finan`.
+
+
 
 
 
