@@ -29,7 +29,7 @@ Avant l'identification
 
 Tant que vous êtes anonyme, Lino parlera la langue préférée configurée de
 votre navigateur.
-Choisissez un des nom d'utilisateur pour vous connecter.
+Choisissez un des noms d'utilisateur pour vous connecter.
 Notez que la langue et les droits d'accès dépendront de votre choix.
 Voir également :doc:`/users`.
 
@@ -50,7 +50,10 @@ S'identifier
 
 
 
-Nous nous connectons avec le nom de "romain" et mot de passe "1234".
+
+Pour ce tour nous nous connectons avec le nom de "romain" et mot
+de passe "1234".
+
 
 
 .. image:: login2.png
@@ -134,7 +137,11 @@ Le panneau à paramètres
 
 
 
-    
+
+Le panneau à paramètres vous permet d'appliquer des conditions de
+filtre pour sélectionner les données voulues.
+
+
 
 .. image:: pcsw.Clients.grid.params.png
     :alt: Le panneau à paramètres
@@ -151,11 +158,36 @@ Le détail d'un bénéficiaire
 
 
 
-Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
+
+Pour voir le détail d'un bénéficiaire, vous double-cliquez sur la
+ligne en question.
+
 
 
 .. image:: pcsw.Clients.detail.png
     :alt: Le détail d'un bénéficiaire
+    :width: 500
+
+
+
+
+
+---------------------------------
+Les rendez-vous d'un bénéficiaire
+---------------------------------
+
+
+
+
+
+Pour voir tous les rendez-vous d'un bénéficiaire, cliquez sur le
+symbole dans le coin supérieur droit pour ouvrir le panneau dans
+sa propre fenetre.
+
+
+
+.. image:: pcsw.Clients.AppointmentsByPartner.png
+    :alt: Les rendez-vous d'un bénéficiaire
     :width: 500
 
 

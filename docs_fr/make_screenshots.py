@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre.
+# Copyright 2015-2016 Luc Saffre.
 # License: BSD, see LICENSE for more details.
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.
@@ -37,7 +37,7 @@ def album1(driver):
 
     Tant que vous êtes anonyme, Lino parlera la langue préférée configurée de
     votre navigateur.
-    Choisissez un des nom d'utilisateur pour vous connecter.
+    Choisissez un des noms d'utilisateur pour vous connecter.
     Notez que la langue et les droits d'accès dépendront de votre choix.
     Voir également :doc:`/users`.
 
@@ -52,7 +52,10 @@ def album1(driver):
     elem.send_keys("1234")
 
     app.screenshot('login2.png', "S'identifier", """
-    Nous nous connectons avec le nom de "romain" et mot de passe "1234".
+
+    Pour ce tour nous nous connectons avec le nom de "romain" et mot
+    de passe "1234".
+
     """)
 
     elem.send_keys(Keys.RETURN)
@@ -96,6 +99,10 @@ def album1(driver):
     elem.click()
     app.stabilize()
     app.screenshot('pcsw.Clients.grid.params.png', "Le panneau à paramètres", """
+
+    Le panneau à paramètres vous permet d'appliquer des conditions de
+    filtre pour sélectionner les données voulues.
+
     """)
 
     # find the first row and doubleclick it:
@@ -105,8 +112,43 @@ def album1(driver):
     app.stabilize()
 
     app.screenshot('pcsw.Clients.detail.png', "Le détail d'un bénéficiaire", """
-    Doppelklick auf eine Zeile, um das Detail dieses Klienten zu zeigen.
+
+    Pour voir le détail d'un bénéficiaire, vous double-cliquez sur la
+    ligne en question.
+
     """)
+
+    up_buttons = driver.find_elements(By.CLASS_NAME, 'x-tool-up')
+    print(len(up_buttons))
+    elem = up_buttons[0]
+    elem.click()
+
+    app.stabilize()
+
+    app.screenshot(
+        'pcsw.Clients.AppointmentsByPartner.png',
+        "Les rendez-vous d'un bénéficiaire", """
+
+    Pour voir tous les rendez-vous d'un bénéficiaire, cliquez sur le
+    symbole dans le coin supérieur droit pour ouvrir le panneau dans
+    sa propre fenetre.
+
+    """)
+
+    elem.send_keys(Keys.ESCAPE)
+
+    app.stabilize()
+
+    app.screenshot(
+        'pcsw.Clients.detail2.png',
+        "Intervenants d'un bénéficiaire", """
+
+    Pour voir tous les rendez-vous d'un bénéficiaire, cliquez sur le
+    symbole dans le coin supérieur droit pour ouvrir le panneau dans
+    sa propre fenetre.
+
+    """)
+
 
     app.write_index()
 
