@@ -139,16 +139,22 @@ def album1(driver):
 
     app.stabilize()
 
+    tab1 = driver.find_element(By.LINK_TEXT, 'Personne')
+    app.hover(tab1)
+    # tab2 = driver.find_element(By.LINK_TEXT, 'Situation familiale')
+    tabs = driver.find_elements(By.CLASS_NAME, 'x-tab-right')
+    print(len(tabs), [e.text for e in tabs])
+    tab2 = tabs[0]
+    tab2.click()
+    app.stabilize()
+
     app.screenshot(
         'pcsw.Clients.detail2.png',
         "Intervenants d'un bénéficiaire", """
 
-    Pour voir tous les rendez-vous d'un bénéficiaire, cliquez sur le
-    symbole dans le coin supérieur droit pour ouvrir le panneau dans
-    sa propre fenetre.
+    Le deuxième onglet du détail d'un bénéficiaire...
 
     """)
-
 
     app.write_index()
 
