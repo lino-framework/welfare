@@ -23,64 +23,69 @@ This document is based on and extends the following specifications:
    :local:
 
 
+Disbursment orders
+==================
 
-Bank statements
-===============
 
+>>> AAW = ledger.Journal.get_by_ref('AAW')
 
->>> KBC = ledger.Journal.get_by_ref('KBC')
+The AAW journal contains the following statements:
 
-The KBC journal contains the following statements:
-
->>> rt.show(KBC.voucher_type.table_class, KBC)
-====================== ===== ======== =============== =============== ============= ==================
- Belegdatum             ID    number   Alter Saldo     Neuer Saldo     Zustand       Autor
----------------------- ----- -------- --------------- --------------- ------------- ------------------
- 29.04.14               132   2        21 145,09       42 168,90       Registriert   Wilfried Willems
- 29.03.14               131   1                        21 145,09       Registriert   Theresia Thelen
- **Total (2 Zeilen)**         **3**    **21 145,09**   **63 313,99**
-====================== ===== ======== =============== =============== ============= ==================
+>>> rt.show(AAW.voucher_type.table_class, AAW)
+======================= ================================ =============== ================== ==== ========= =============
+ Belegdatum              Interne Referenz                 Total           Ausführungsdatum   ID   number    Zustand
+----------------------- -------------------------------- --------------- ------------------ ---- --------- -------------
+ 13.04.14                                                 553,39                             76   22        Registriert
+ 13.03.14                                                 585,84                             75   21        Registriert
+ 13.02.14                                                 483,01                             74   20        Registriert
+ 13.01.14                                                 350,61                             73   19        Registriert
+ 22.05.14                Beihilfe für Ausländer           3 628,62                           36   6         Registriert
+ 22.05.14                Sozialhilfe                      3 460,17                           35   5         Registriert
+ 22.05.14                Eingliederungseinkommen          3 611,34                           34   4         Registriert
+ 22.05.14                Fonds Gas und Elektrizität       3 356,17                           33   3         Registriert
+ 22.05.14                Heizkosten- u. Energiebeihilfe   3 628,62                           32   2         Registriert
+ 22.05.14                Allgemeine Beihilfen             3 460,17                           31   1         Registriert
+ 22.04.14                Beihilfe für Ausländer           3 611,34                           42   12        Registriert
+ 22.04.14                Sozialhilfe                      3 356,17                           41   11        Registriert
+ 22.04.14                Eingliederungseinkommen          3 628,62                           40   10        Registriert
+ 22.04.14                Fonds Gas und Elektrizität       3 460,17                           39   9         Registriert
+ 22.04.14                Heizkosten- u. Energiebeihilfe   3 611,34                           38   8         Registriert
+ 22.04.14                Allgemeine Beihilfen             3 356,17                           37   7         Registriert
+ 23.03.14                Beihilfe für Ausländer           3 628,62                           48   18        Registriert
+ 23.03.14                Sozialhilfe                      3 460,17                           47   17        Registriert
+ 23.03.14                Eingliederungseinkommen          3 611,34                           46   16        Registriert
+ 23.03.14                Fonds Gas und Elektrizität       3 356,17                           45   15        Registriert
+ 23.03.14                Heizkosten- u. Energiebeihilfe   3 628,62                           44   14        Registriert
+ 23.03.14                Allgemeine Beihilfen             3 460,17                           43   13        Registriert
+ **Total (22 Zeilen)**                                    **65 286,84**                           **253**
+======================= ================================ =============== ================== ==== ========= =============
 <BLANKLINE>
 
->>> obj = KBC.voucher_type.model.objects.get(number=1, journal=KBC)
->>> rt.login('wilfried').show(finan.ItemsByBankStatement, obj)
+
+Payment orders
+==============
+
+>>> ZKBC = ledger.Journal.get_by_ref('ZKBC')
+
+The ZKBC journal contains the following statements:
+
+>>> rt.show(ZKBC.voucher_type.table_class, ZKBC)
+====================== ================== =============== ================== ===== ======== =============
+ Belegdatum             Interne Referenz   Total           Ausführungsdatum   ID    number   Zustand
+---------------------- ------------------ --------------- ------------------ ----- -------- -------------
+ 21.04.14                                  21 145,09                          104   1        Registriert
+ **Total (1 Zeilen)**                      **21 145,09**                            **1**
+====================== ================== =============== ================== ===== ======== =============
+<BLANKLINE>
+
+
+>>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)
+>>> rt.modules.finan.ItemsByPaymentOrder.request(obj)
+
+>>> AAW.voucher_type.get_items_table()
+
+>>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================= ====================== ========================================= ========== ================== =============== ========= =============== ==========
- date                    Partner                Haushaltsartikel                          Match      Externe Referenz   Eingang         Ausgabe   Arbeitsablauf   Seq.-Nr.
------------------------ ---------------------- ----------------------------------------- ---------- ------------------ --------------- --------- --------------- ----------
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#43:1                      648,91                                    1
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#43:2                      817,36                                    2
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#43:3                      544,91                                    3
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#43:4                      800,08                                    4
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#43:5                      648,91                                    5
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#44:1                      817,36                                    6
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#44:2                      544,91                                    7
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#44:3                      800,08                                    8
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#44:4                      648,91                                    9
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#44:5                      817,36                                    10
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#45:1                      544,91                                    11
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#45:2                      800,08                                    12
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#45:3                      648,91                                    13
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#45:4                      817,36                                    14
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#45:5                      544,91                                    15
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#46:1                      800,08                                    16
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#46:2                      648,91                                    17
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#46:3                      817,36                                    18
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#46:4                      544,91                                    19
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#46:5                      800,08                                    20
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#47:1                      648,91                                    21
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#47:2                      817,36                                    22
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#47:3                      544,91                                    23
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#47:4                      800,08                                    24
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#47:5                      648,91                                    25
-                         Ausdemwald Alfons      (4450) Auszuführende Ausgabeanweisungen   AAW#48:1                      817,36                                    26
-                         Collard Charlotte      (4450) Auszuführende Ausgabeanweisungen   AAW#48:2                      544,91                                    27
-                         Dobbelstein Dorothée   (4450) Auszuführende Ausgabeanweisungen   AAW#48:3                      800,08                                    28
-                         Evers Eberhart         (4450) Auszuführende Ausgabeanweisungen   AAW#48:4                      648,91                                    29
-                         Emonts Daniel          (4450) Auszuführende Ausgabeanweisungen   AAW#48:5                      817,36                                    30
- **Total (30 Zeilen)**                                                                                                  **21 145,09**                             **465**
-======================= ====================== ========================================= ========== ================== =============== ========= =============== ==========
-<BLANKLINE>
 
 
 

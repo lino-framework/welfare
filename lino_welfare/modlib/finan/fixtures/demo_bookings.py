@@ -70,4 +70,4 @@ def objects():
 
     #     date += delta(months=1)
 
-    yield cosi_objects('AAW ZKBC KBC')
+    yield cosi_objects('AAW ZKBC')

@@ -60,8 +60,7 @@ class ItemsByDisbursementOrder(ItemsByPaymentOrder):
 class DisbursementOrdersByJournal(ledger.ByJournal, DisbursementOrders):
     insert_layout = """
     item_account
-    narration
-    item_remark
+    voucher_date
     """
 
 

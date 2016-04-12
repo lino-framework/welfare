@@ -16,24 +16,30 @@ Accounting for Lino Welfare
     >>> from lino.api import rt
 
 This document describes the functionalities for registering and
-keeping track of social aid expenses, including communication with the
-bank in both directions.  This will partly turn Lino Welfare into an
-accounting package (or at least a subledger).
+keeping track of social aid expenses, including client-related
+refunding of certain costs, disbursements of regular monthly social
+aid and communication with the bank in both directions.
 
-See also :doc:`vatless` and :doc:`finan`.
+These will partly turn Lino Welfare into an accounting package.
+Actually it produces a *subledger*, i.e. manages only *a part of* a
+complete accounting system.
 
-Social aid expenses include client-related disbursements of monthly
-social aid and refunding of certain costs.
-
-A first prototype was developed between May and December 2015 as
+A first prototype was developed between May 2015 and April 2016 as
 ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben") and
-child tickets. The code examples may contain German texts for
+related tickets. The code examples may contain German texts for
 practical reasons to facilitate analysis.
 
 This document is based on and extends the following specifications:
 
 - :ref:`cosi.specs.accounting`
 - :ref:`cosi.specs.ledger`
+
+This document is base for the following specifications:
+
+- :doc:`vatless` 
+- :doc:`finan`.
+
+
 
 .. contents::
    :depth: 1
