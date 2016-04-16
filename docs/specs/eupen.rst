@@ -54,7 +54,6 @@ Rolf is the local system administrator, he has a complete menu:
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
-  - Finanzjournale : KBC (KBC)
 - DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
@@ -380,7 +379,7 @@ Each window layout defines a given set of fields.
 - finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - finan.BankStatements.insert : voucher_date, balance1, balance2
 - finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
-- finan.DisbursementOrdersByJournal.insert : item_account, narration, item_remark
+- finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
 - finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - finan.FinancialVouchers.insert : voucher_date, narration
 - finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
@@ -410,7 +409,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
