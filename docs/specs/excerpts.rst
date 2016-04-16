@@ -42,6 +42,9 @@ Here is a more complete list of excerpt types:
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
  *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung                                                   payment_reminder.body.html
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
+ *finan.BankStatement (Kontoauszug)*                     Ja       Ja              Kontoauszug
+ *finan.JournalEntry (Diverse Buchung)*                  Ja       Ja              Diverse Buchung
+ *finan.PaymentOrder (Zahlungsauftrag)*                  Ja       Ja              Zahlungsauftrag
  *fse.ClientSummary (FSE Summary)*                       Ja       Ja              Training report             WkBuildMethod
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention

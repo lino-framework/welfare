@@ -88,12 +88,12 @@ Database structure
 - dupable_clients.Word : id, word, owner
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
-- finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, item_account, item_remark, balance1, balance2
+- finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, balance1, balance2
 - finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
-- finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, item_account, item_remark
+- finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark
 - finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
-- finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, item_account, item_remark, total, execution_date
-- finan.PaymentOrderItem : id, seqno, project, match, bank_account, amount, dc, remark, account, partner, voucher
+- finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
+- finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - fse.ClientSummary : id, printed_by, year, month, fse10, fse20, fse21, fse30, fse40, fse41, fse42, fse43, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type
@@ -115,7 +115,7 @@ Database structure
 - jobs.Schedule : id, name, name_fr, name_en
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
-- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, printed_name_fr, printed_name_en, name_fr, name_en
+- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, yearly_numbering, printed_name_fr, printed_name_en, name_fr, name_en
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, name_fr, name_en

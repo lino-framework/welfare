@@ -94,6 +94,9 @@ This is the list of excerpt types:
  Tx25 Request             Yes       Yes
  Partner                  No        No                             payment_reminder.body.html
  Budget                   Yes       Yes
+ Bank Statement           Yes       Yes
+ Journal Entry            Yes       Yes
+ Payment Order            Yes       Yes
  FSE Summary              Yes       Yes
  Immersion training       Yes       Yes                            immersion.body.html
  ISIP                     Yes       Yes
