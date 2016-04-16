@@ -1,2 +1,0 @@
-WARNING: The config value `pygments_style' has type `newstr', defaults to `NoneType.'
-WARNING: The config value `html_last_updated_fmt' has type `unicode', defaults to `NoneType.'

@@ -1,5 +1,5 @@
 .. _welfare.clients.parameters:
-.. _welfare.tested.clients:
+.. _welfare.specs.clients:
 
 =================
 Filtering clients
@@ -16,10 +16,8 @@ Most code is in :mod:`lino_welfare.modlib.pcsw` plugin.
     
     doctest init
     
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ClientEvents = pcsw.ClientEvents
@@ -129,15 +127,14 @@ on 08.03.2013:
 
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-====================== ========== ================= ========
- Begleitet seit         bis        Begleiter         Primär 
----------------------- ---------- ----------------- --------
-  03.03.12                          Hubert Huppertz   Nein
-  13.03.12               08.03.13   Mélanie Mélard    Nein
-  08.03.13               24.10.13   Alicia Allmanns   Nein
-  24.10.13                          Hubert Huppertz   Ja
-  **Total (4 Zeilen)**                                **1**
-====================== ========== ================= ========
+================ ========== ================= ========
+ Begleitet seit   bis        Begleiter         Primär 
+---------------- ---------- ----------------- --------
+  03.03.12                    Hubert Huppertz   Nein
+  13.03.12         08.03.13   Mélanie Mélard    Nein
+  08.03.13         24.10.13   Alicia Allmanns   Nein
+  24.10.13                    Hubert Huppertz   Ja
+================ ========== ================= ========
 <BLANKLINE>
 
 Another client is Dorothée Dobbelstein who is coached by three
@@ -148,14 +145,13 @@ different agents at the same time:
 Client #124 ('DOBBELSTEIN Doroth\xe9e (124)')
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-====================== ===== ================= ========
- Begleitet seit         bis   Begleiter         Primär
----------------------- ----- ----------------- --------
- 24.10.13                     Mélanie Mélard    Ja
- 13.12.13                     Caroline Carnol   Nein
- 02.04.14                     Hubert Huppertz   Nein
- **Total (3 Zeilen)**                           **1**
-====================== ===== ================= ========
+================ ===== ================= ========
+ Begleitet seit   bis   Begleiter         Primär
+---------------- ----- ----------------- --------
+ 24.10.13               Mélanie Mélard    Ja
+ 13.12.13               Caroline Carnol   Nein
+ 02.04.14               Hubert Huppertz   Nein
+================ ===== ================= ========
 <BLANKLINE>
 
 A third client is David DA VINCI:
@@ -165,14 +161,13 @@ A third client is David DA VINCI:
 DA VINCI David (165)
 >>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-====================== ========== ================= ========
- Begleitet seit         bis        Begleiter         Primär
----------------------- ---------- ----------------- --------
- 03.03.12                          Hubert Huppertz   Ja
- 08.03.13               04.10.13   Mélanie Mélard    Nein
- 04.10.13                          Alicia Allmanns   Nein
- **Total (3 Zeilen)**                                **1**
-====================== ========== ================= ========
+================ ========== ================= ========
+ Begleitet seit   bis        Begleiter         Primär
+---------------- ---------- ----------------- --------
+ 03.03.12                    Hubert Huppertz   Ja
+ 08.03.13         04.10.13   Mélanie Mélard    Nein
+ 04.10.13                    Alicia Allmanns   Nein
+================ ========== ================= ========
 <BLANKLINE>
 
 

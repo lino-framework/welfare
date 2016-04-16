@@ -10,10 +10,8 @@ ISIP contracts
     
     Doctest initialization:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('robin')
@@ -38,7 +36,6 @@ Configuration
  VSE Lehre             VSE Lehre             VSE Lehre             vsec        Every month          No
  VSE Vollzeitstudium   VSE Vollzeitstudium   VSE Vollzeitstudium   vsed        Every month          Yes
  VSE Sprachkurs        VSE Sprachkurs        VSE Sprachkurs        vsee        Every month          No
- **Total (5 rows)**                                                                                 **2**
 ===================== ===================== ===================== =========== ==================== ==================
 <BLANKLINE>
 

@@ -10,10 +10,8 @@ Integration Service
     
     Doctest initialization:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('robin')
@@ -31,15 +29,14 @@ Configuration
 
 >>> ses.show(isip.ContractEndings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================== ======= =============== ========= ====================
- designation          ISIP    Job supplying   Success   Require date ended
--------------------- ------- --------------- --------- --------------------
- Alcohol              Yes     Yes             No        Yes
- Force majeure        Yes     Yes             No        Yes
- Health               Yes     Yes             No        Yes
- Normal               Yes     Yes             No        No
- **Total (4 rows)**   **4**   **4**           **0**     **3**
-==================== ======= =============== ========= ====================
+=============== ====== =============== ========= ====================
+ designation     ISIP   Job supplying   Success   Require date ended
+--------------- ------ --------------- --------- --------------------
+ Alcohol         Yes    Yes             No        Yes
+ Force majeure   Yes    Yes             No        Yes
+ Health          Yes    Yes             No        Yes
+ Normal          Yes    Yes             No        No
+=============== ====== =============== ========= ====================
 <BLANKLINE>
 
 
@@ -97,7 +94,7 @@ Configuration
  2    2         Intern                                                    No
  5    5         Sonstige                                                  No
  1    1         Sozialwirtschaft = "majorés"                              No
-      **15**                                                              **0**
+      **15**
 ==== ========= ================================================ ======== ================
 <BLANKLINE>
 
@@ -287,7 +284,7 @@ and passed when it was fixed:
 >>> settings.SITE.appy_params.update(raiseOnError=True)
 >>> url = 'http://127.0.0.1:8000/api/integ/UsersWithClients?an=as_pdf'
 >>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: -SKIP
->>> print(res.status_code)  #doctest: +SKIP
+>>> print(res.status_code)  #doctest: -SKIP
 200
 >>> result = json.loads(res.content)  #doctest: -SKIP
 >>> print(result)  #doctest: -SKIP

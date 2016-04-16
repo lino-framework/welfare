@@ -24,6 +24,7 @@
 from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
+from lino_cosi.lib.accounts.utils import CREDIT
 
 
 def objects():
@@ -43,6 +44,7 @@ def objects():
     kw = dict(journal_group=JournalGroups.reg)
     kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Incoming invoices")))
+    kw.update(dc=CREDIT)
     yield ProjectInvoicesByJournal.create_journal(**kw)
 
     kw.update(ref="SREG")
@@ -52,6 +54,8 @@ def objects():
     kw.update(dd.str2kw('name', _("Disbursement orders")))
     kw.update(account='4450', ref="AAW")
     kw.update(journal_group=JournalGroups.anw)
+    # kw.update(dc=CREDIT)
+    # kw.update(invert_due_dc=False)
     jnl = DisbursementOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4400)
@@ -66,17 +70,18 @@ def objects():
         yield MatchRule(journal=jnl, account=a4400)
 
     kw = dict()
-    kw.update(journal_group=JournalGroups.tre)
-    kw.update(dd.str2kw('name', _("KBC")))
-    kw.update(account='5500', ref="KBC")
-    jnl = BankStatement.create_journal(**kw)
-    yield jnl
-    yield MatchRule(journal=jnl, account=a4450)
-    yield MatchRule(journal=jnl, account=a5800)
+    # kw.update(journal_group=JournalGroups.tre)
+    # kw.update(dd.str2kw('name', _("KBC")))
+    # kw.update(account='5500', ref="KBC")
+    # jnl = BankStatement.create_journal(**kw)
+    # yield jnl
+    # yield MatchRule(journal=jnl, account=a4450)
+    # yield MatchRule(journal=jnl, account=a5800)
 
     kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account='5800', ref="ZKBC")
+    kw.update(dc=CREDIT)
     jnl = PaymentOrder.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)

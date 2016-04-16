@@ -235,9 +235,6 @@ class Persons(Persons):
 
     params_panel_hidden = True
     parameters = dict(
-        gender=dd.Genders.field(
-            blank=True, help_text=_(
-                "Show only persons with the given gender.")),
         also_obsolete=models.BooleanField(
             _("Also obsolete data"),
             default=False, help_text=_("Show also obsolete records.")))
@@ -251,16 +248,12 @@ class Persons(Persons):
         qs = super(Persons, self).get_request_queryset(ar)
         if not ar.param_values.also_obsolete:
             qs = qs.filter(is_obsolete=False)
-        if ar.param_values.gender:
-            qs = qs.filter(gender__exact=ar.param_values.gender)
         return qs
 
     @classmethod
     def get_title_tags(self, ar):
         for t in super(Persons, self).get_title_tags(ar):
             yield t
-        if ar.param_values.gender:
-            yield unicode(ar.param_values.gender)
         if ar.param_values.also_obsolete:
             yield unicode(self.parameters['also_obsolete'].verbose_name)
 

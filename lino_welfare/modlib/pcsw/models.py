@@ -784,12 +784,6 @@ class Clients(contacts.Persons):
     detail_layout = ClientDetail()
 
     parameters = mixins.ObservedPeriod(
-        aged_from=models.IntegerField(
-            _("Aged from"), blank=True, null=True, help_text=u"""\
-Nur Klienten, die mindestens so alt sind."""),
-        aged_to=models.IntegerField(
-            _("Aged to"), blank=True, null=True, help_text=u"""\
-Nur Klienten, die höchstens so alt sind."""),
         coached_by=models.ForeignKey(
             'users.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
@@ -911,20 +905,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         if pv.nationality:
             qs = qs.filter(nationality__exact=pv.nationality)
-        today = dd.today()
-        if pv.aged_from:
-            min_date = today - \
-                datetime.timedelta(days=pv.aged_from * 365)
-            qs = qs.filter(birth_date__lte=min_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__lte=today-datetime.timedelta(days=search.aged_from*365))
-        if pv.aged_to:
-            #~ q1 = models.Q(birth_date__isnull=True)
-            #~ q2 = models.Q(birth_date__lte=today-datetime.timedelta(days=search.aged_to*365))
-            #~ qs = qs.filter(q1|q2)
-            max_date = today - \
-                datetime.timedelta(days=pv.aged_to * 365)
-            qs = qs.filter(birth_date__gte=max_date.strftime("%Y-%m-%d"))
-            #~ qs = qs.filter(birth_date__gte=today-datetime.timedelta(days=search.aged_to*365))
 
         # print(20150305, qs.query)
 
@@ -935,10 +915,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         for t in super(Clients, self).get_title_tags(ar):
             yield t
         pv = ar.param_values
-        if pv.aged_from or pv.aged_to:
-            yield unicode(_("Aged %(min)s to %(max)s") % dict(
-                min=pv.aged_from or'...',
-                max=pv.aged_to or '...'))
 
         if pv.observed_event:
             yield unicode(pv.observed_event)

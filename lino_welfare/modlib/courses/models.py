@@ -41,6 +41,7 @@ from .roles import CoursesUser, CoursesStaff
 
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
+CLIENTS_TABLE = pcsw.CoachedClients
 
 
 class CourseProvider(contacts.Company):
@@ -362,14 +363,6 @@ class CourseRequest(dd.Model):
                                  help_text=_("Check this if the request is needed for job search."))
         #~ help_text=u"Ankreuzen, wenn der Kurs für die Arbeitssuche benötigt wird.")
 
-    #~ """Empty means 'any provider'
-    #~ """
-    #~ provider = models.ForeignKey(CourseProvider,blank=True,null=True,
-        #~ verbose_name=_("Course provider"))
-
-    #~ @chooser()
-    #~ def provider_choices(cls):
-        #~ return CourseProviders.request().queryset
 
     state = CourseRequestStates.field(
         default=CourseRequestStates.candidate.as_callable)
@@ -380,12 +373,6 @@ class CourseRequest(dd.Model):
                     "Leave blank on open requests."),
         verbose_name=_("Course found"))
 
-    #~ """
-    #~ The person's feedback about how satisfied she was.
-    #~ """
-    #~ satisfied = StrengthField(verbose_name=_("Satisfied"),blank=True,null=True)
-
-    #~ remark = models.CharField(max_length=200,
     remark = models.TextField(
         blank=True, null=True,
         verbose_name=_("Remark"))
@@ -398,14 +385,6 @@ class CourseRequest(dd.Model):
     u"""
     Datum der effektives Beendigung dieser Kursteilname.
     """
-
-    #~ ending = models.ForeignKey("courses.CourseEnding",blank=True,null=True,
-        #~ verbose_name=_("Ending"))
-    #~ u"""
-    #~ Die Art der Beendigung
-    #~ (ein Objekt vom Typ :class:`CourseEnding`.)
-    #~ Das wird benutzt für spätere Statistiken.
-    #~ """
 
     def on_create(self, ar):
         self.date_submitted = settings.SITE.today()
@@ -437,6 +416,50 @@ class CourseRequest(dd.Model):
             if ar.actor.master is not Course or ar.master_instance is None:
                 return False
         return True
+
+    @classmethod
+    def get_parameter_fields(cls, **fields):
+        fields.update(
+            request_state=CourseRequestStates.field(blank=True),
+            course_content=models.ForeignKey(
+                "courses.CourseContent", blank=True),
+            course_offer=models.ForeignKey("courses.CourseOffer", blank=True),
+            course_provider=models.ForeignKey(
+                'courses.CourseProvider', blank=True))
+        fields.update(CLIENTS_TABLE.parameters)
+        return super(CourseRequest, cls).get_parameter_fields(**fields)
+
+    @classmethod
+    def get_request_queryset(self, ar):
+        #~ raise Exception(20130424)
+        qs = super(CourseRequest, self).get_request_queryset(ar)
+        clients_qs = CLIENTS_TABLE.get_request_queryset(ar)
+        #~ print 20130424, clients_qs
+        qs = qs.filter(person__in=clients_qs)
+        if ar.param_values.request_state:
+            qs = qs.filter(state=ar.param_values.request_state)
+        if ar.param_values.course_content:
+            qs = qs.filter(content=ar.param_values.course_content)
+        if ar.param_values.course_provider:
+            qs = qs.filter(offer__provider=ar.param_values.course_provider)
+        if ar.param_values.course_offer:
+            qs = qs.filter(offer=ar.param_values.course_offer)
+        return qs
+
+    @classmethod
+    def get_title_tags(self, ar):
+        if ar.param_values.request_state:
+            yield unicode(ar.param_values.request_state)
+        if ar.param_values.course_content:
+            yield unicode(ar.param_values.course_content)
+        if ar.param_values.course_provider:
+            yield unicode(ar.param_values.course_provider)
+        if ar.param_values.course_offer:
+            yield unicode(ar.param_values.course_offer)
+        for t in super(CourseRequest, self).get_title_tags(ar):
+            yield t
+        for t in CLIENTS_TABLE.get_title_tags(ar):
+            yield t
 
 
 class CourseRequests(dd.Table):
@@ -522,7 +545,6 @@ class CandidatesByCourse(RequestsByCourse):
         obj.course = None
         return obj
 
-CLIENTS_TABLE = pcsw.CoachedClients
 
 
 class PendingCourseRequests(CourseRequests):
@@ -534,14 +556,14 @@ class PendingCourseRequests(CourseRequests):
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)
-    parameters = dict(
-        request_state=CourseRequestStates.field(blank=True),
-        course_content=models.ForeignKey(
-            "courses.CourseContent", blank=True),
-        course_offer=models.ForeignKey("courses.CourseOffer", blank=True),
-        course_provider=models.ForeignKey(
-            'courses.CourseProvider', blank=True),
-        **CLIENTS_TABLE.parameters)
+    # parameters = dict(
+    #     request_state=CourseRequestStates.field(blank=True),
+    #     course_content=models.ForeignKey(
+    #         "courses.CourseContent", blank=True),
+    #     course_offer=models.ForeignKey("courses.CourseOffer", blank=True),
+    #     course_provider=models.ForeignKey(
+    #         'courses.CourseProvider', blank=True),
+    #     **CLIENTS_TABLE.parameters)
     params_layout = CLIENTS_TABLE.params_layout + """\
     request_state course_content course_provider course_offer
     """
@@ -615,38 +637,6 @@ class PendingCourseRequests(CourseRequests):
             return 1
         return 0
         #~ return obj._age_in_years is None
-
-    @classmethod
-    def get_request_queryset(self, ar):
-        #~ raise Exception(20130424)
-        qs = super(PendingCourseRequests, self).get_request_queryset(ar)
-        clients_qs = CLIENTS_TABLE.get_request_queryset(ar)
-        #~ print 20130424, clients_qs
-        qs = qs.filter(person__in=clients_qs)
-        if ar.param_values.request_state:
-            qs = qs.filter(state=ar.param_values.request_state)
-        if ar.param_values.course_content:
-            qs = qs.filter(content=ar.param_values.course_content)
-        if ar.param_values.course_provider:
-            qs = qs.filter(offer__provider=ar.param_values.course_provider)
-        if ar.param_values.course_offer:
-            qs = qs.filter(offer=ar.param_values.course_offer)
-        return qs
-
-    @classmethod
-    def get_title_tags(self, ar):
-        if ar.param_values.request_state:
-            yield unicode(ar.param_values.request_state)
-        if ar.param_values.course_content:
-            yield unicode(ar.param_values.course_content)
-        if ar.param_values.course_provider:
-            yield unicode(ar.param_values.course_provider)
-        if ar.param_values.course_offer:
-            yield unicode(ar.param_values.course_offer)
-        for t in super(PendingCourseRequests, self).get_title_tags(ar):
-            yield t
-        for t in CLIENTS_TABLE.get_title_tags(ar):
-            yield t
 
 
 def site_setup(self):

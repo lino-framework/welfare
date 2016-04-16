@@ -1,4 +1,4 @@
-.. _welfare.tested.addresses:
+.. _welfare.specs.addresses:
 
 =========================
 Multiple postal addresses
@@ -11,10 +11,8 @@ Multiple postal addresses
     
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     >>> from django.db.models import Q
 
@@ -37,12 +35,11 @@ Here are the addresses of one of these partners (123):
 
 >>> obj = contacts.Partner.objects.get(id=123)
 >>> rt.show(addresses.AddressesByPartner, obj)
-====================== =========== =========================== ========
- Adressenart            Bemerkung   Adresse                     Primär
----------------------- ----------- --------------------------- --------
- Offizielle Adresse                 Bahnhofstraße, 4700 Eupen   Ja
- Referenzadresse                    August-Thonnar-Str. 14      Nein
- **Total (2 Zeilen)**                                           **1**
-====================== =========== =========================== ========
+==================== =========== =========================== ========
+ Adressenart          Bemerkung   Adresse                     Primär
+-------------------- ----------- --------------------------- --------
+ Offizielle Adresse               Bahnhofstraße, 4700 Eupen   Ja
+ Referenzadresse                  August-Thonnar-Str. 14      Nein
+==================== =========== =========================== ========
 <BLANKLINE>
 

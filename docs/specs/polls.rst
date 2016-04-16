@@ -94,7 +94,7 @@ Configuration
  28          17   Utiliser le téléphone pour poser ma candidature                                                          Non
  29          18   Utiliser le téléphone pour relancer ma candidature                                                       Non
  30          19   Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm   Non
- **465**                                                                                                                   **2**
+ **465**
 =========== ==== ======================================================================================================== =======
 <BLANKLINE>
 
@@ -111,7 +111,7 @@ Configuration
  6           6    Candidature spontanée?                                   Non
  7           7    Antécédents judiciaires?                                 Non
  8                Temps de travail acceptés                                Non
- **36**                                                                    **0**
+ **36**
 =========== ==== ======================================================== =======
 <BLANKLINE>
 

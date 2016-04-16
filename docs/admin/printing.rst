@@ -10,7 +10,6 @@ Configuring print templates
 
    Initialize doctest:
 
-    >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
@@ -103,7 +102,6 @@ This is the list of excerpt types:
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt
  Client                   No        No           eid-content.odt
- **Total (18 rows)**      **14**    **12**
 ======================== ========= ============ ================= ================================
 <BLANKLINE>
 

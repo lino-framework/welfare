@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -23,9 +23,9 @@ and :mod:`lino_welfare.modlib.ledger.fixtures.std_journals`
 
 
 Purchase invoices go to 4400 (suppliers). Unlike default ledger, 4400
-is to be matched by a payment *instruction* (Zahlungsanweisung) which
-moves them to 4450 (instructions to execute). And then we write a
-payment *order* which satisfies the payment *instruction*.
+is to be matched by a *disbursement instruction* (Zahlungsanweisung)
+which moves them to 4450 (instructions to execute). And then we write
+a *payment order* which satisfies the *disbursement instruction*.
 
 Classic accounting:
 
@@ -62,7 +62,6 @@ def objects():
     Account = rt.modules.accounts.Account
     AccountTypes = rt.modules.accounts.AccountTypes
 
-
     def group(ref, type, name):
         global current_group
         current_group = Group(
@@ -80,13 +79,17 @@ def objects():
 
     # yield group('10', 'capital', _("Capital"))
     yield group('40', 'assets', _("Receivables"))
-    obj = account('4000', 'assets', _("Customers"), clearable=True)
+    obj = account(
+        '4000', 'assets', _("Customers"),
+        clearable=True, needs_partner=True)
     yield obj
     # if sales:
     #     settings.SITE.site_config.update(clients_account=obj)
 
     yield group('44', 'assets', _("Liabilities"))
-    a4400 = account('4400', 'liabilities', _("Suppliers"), clearable=True)
+    a4400 = account(
+        '4400', 'liabilities', _("Suppliers"),
+        clearable=True, needs_partner=True)
     yield a4400
     settings.SITE.site_config.update(suppliers_account=a4400)
 
@@ -108,7 +111,7 @@ def objects():
 
     yield group('58', 'assets', _("Current transactions"))
     a5800 = account("5800", 'bank_accounts', _("Payment Orders"),
-                    clearable=True)
+                    clearable=True, needs_partner=False)
     yield a5800
     # a5810 = account("5810", 'bank_accounts', _("Aid allocations"),
     #                 clearable=True)
@@ -136,7 +139,10 @@ def objects():
             ('P83/000/00', _("Unber. erh. Beträge + Erstatt.")),
             ('832/330/02', _("Gesundheitsbeihilfe")),
             ):
-        yield account(ref, 'expenses', name, purchases_allowed=True)
+        yield account(
+            ref, 'expenses', name,
+            # 20160413
+            purchases_allowed=True, clearable=False, needs_partner=False)
 
     yield group('7', 'incomes', _("Revenues"))
     obj = account('7000', 'incomes', _("Sales"), sales_allowed=True)

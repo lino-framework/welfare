@@ -34,10 +34,10 @@ add('20', _("Incoming invoices"), 'reg')
 add('30', _("Claimings"), 'ffo')
 add('40', _("Disbursement orders"), 'anw')
 add('50', _("Payment orders"), 'zau')
-add('60', _("Financial"), 'tre')
-add('70', _("Budgetary"), 'hhh')
-add('80', _("Domiciliations"), 'dom')
-add('90', _("Closing entries"), 'clo')
+# add('60', _("Financial"), 'tre')
+# add('70', _("Budgetary"), 'hhh')
+# add('80', _("Domiciliations"), 'dom')
+# add('90', _("Closing entries"), 'clo')
 
 
 TradeTypes.clear()
@@ -54,3 +54,15 @@ TradeTypes.aids.update(
 from lino_cosi.lib.accounts.models import Account
 Account._meta.verbose_name = _("Budgetary article")
 Account._meta.verbose_name_plural = _("Budgetary articles")
+
+
+def set_partner_verbose_name(m):
+    fld = m._meta.get_field('partner')
+    fld.verbose_name = _("Payment recipient")
+
+from lino_cosi.lib.ledger.models import Movement
+set_partner_verbose_name(Movement)
+from lino_cosi.lib.finan.mixins import FinancialVoucherItem
+set_partner_verbose_name(FinancialVoucherItem)
+from lino_cosi.lib.vatless.models import AccountInvoice
+set_partner_verbose_name(AccountInvoice)
