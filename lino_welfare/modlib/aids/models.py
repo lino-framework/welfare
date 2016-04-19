@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -210,9 +210,9 @@ class AidTypes(dd.Table):
     """
 
 
-##
-## Granting
-##
+#
+# Granting
+#
 
 class GrantingManager(models.Manager):
 
@@ -233,31 +233,30 @@ class Granting(Confirmable, BoardDecision):
 
     .. attribute:: client
 
-    Pointer to the :class:`lino_welfare.modlib.pcsw.models.Client`.
+        Pointer to the :class:`lino_welfare.modlib.pcsw.models.Client`.
 
     .. attribute:: aid_type
 
-    The type of aid being granted. Mandatory.
-    Pointer to the :class:`AidType`.
+        The type of aid being granted. Mandatory.
+        Pointer to the :class:`AidType`.
 
     .. attribute:: signer
 
-    Pointer to the :class:`User <lino.modlib.users.models.User>` who
-    is expected to "sign" this granting (i.e. to confirm that it is
-    real).
+        Pointer to the user who is expected to "sign" this granting
+        (i.e. to confirm that it is real).
 
-    The default value is the client's primary coach for grantings
-    whose :attr:`aid_type` has :attr:`confirmed_by_primary_coach
-    <AidType.confirmed_by_primary_coach>` checked.
+        The default value is the client's primary coach for grantings
+        whose :attr:`aid_type` has :attr:`confirmed_by_primary_coach
+        <AidType.confirmed_by_primary_coach>` checked.
 
     .. attribute:: board
 
-    Pointer to the :class:`Board <lino_xl.lib.boards.models.Board>`
-    which decided to allocate this aid project.
+        Pointer to the :class:`Board <lino_xl.lib.boards.models.Board>`
+        which decided to allocate this aid project.
 
     .. attribute:: category
 
-    Currently only used for printing an `isip.Contract`.
+        Currently only used for printing an `isip.Contract`.
 
     """
     class Meta:

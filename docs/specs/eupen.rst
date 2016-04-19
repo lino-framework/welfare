@@ -377,7 +377,7 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
-- finan.BankStatements.insert : voucher_date, balance1, balance2
+- finan.BankStatements.insert : voucher_date, balance1
 - finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
 - finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
