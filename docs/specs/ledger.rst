@@ -101,20 +101,6 @@ client:
 <class 'lino_cosi.lib.vatless.models.InvoiceItem'>
 
 
->>> rt.show(ledger.VoucherTypes)
-=================================== ====== =================================================
- Wert                                name   Text
------------------------------------ ------ -------------------------------------------------
- finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
- finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
- finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
- finan.DisbursementOrdersByJournal          Ausgabeanweisungen
- vatless.InvoicesByJournal                  Rechnungen
- vatless.ProjectInvoicesByJournal           Project invoices
-=================================== ====== =================================================
-<BLANKLINE>
-
-
 .. _wilfried:
 
 The "accountant" user profile
@@ -151,7 +137,6 @@ Here is the main menu for accountants:
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
-  - Finanzjournale : KBC (KBC)
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
@@ -238,12 +223,12 @@ Lino Welfare uses the following **voucher types**:
 =================================== ====== =================================================
  Wert                                name   Text
 ----------------------------------- ------ -------------------------------------------------
+ vatless.InvoicesByJournal                  Rechnungen
+ vatless.ProjectInvoicesByJournal           Project invoices
  finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
  finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
  finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
  finan.DisbursementOrdersByJournal          Ausgabeanweisungen
- vatless.InvoicesByJournal                  Rechnungen
- vatless.ProjectInvoicesByJournal           Project invoices
 =================================== ====== =================================================
 <BLANKLINE>
 
@@ -278,7 +263,6 @@ demo database currently has the following journals defined:
  REG        Rechnungseingänge      Project invoices                                 Rechnungseingänge
  SREG       Sammelrechnungen       Rechnungen                                       Rechnungseingänge
  AAW        Ausgabeanweisungen     Ausgabeanweisungen                               Ausgabeanweisungen
- KBC        KBC                    Kontoauszug (finan.BankStatementsByJournal)      Finanzjournale
  ZKBC       KBC Zahlungsaufträge   Zahlungsauftrag (finan.PaymentOrdersByJournal)   Zahlungsaufträge
 ========== ====================== ================================================ ====================
 <BLANKLINE>
@@ -286,21 +270,16 @@ demo database currently has the following journals defined:
 A default Lino Welfare has the following **journal groups**.
 
 >>> rt.show(ledger.JournalGroups)
-====== ====== =======================
+====== ====== ======================
  Wert   name   Text
------- ------ -----------------------
+------ ------ ----------------------
  10     bst    Bestellungen Einkauf
  20     reg    Rechnungseingänge
  30     ffo    Forderungen
  40     anw    Ausgabeanweisungen
  50     zau    Zahlungsaufträge
- 60     tre    Finanzjournale
- 70     hhh    Haushalt und Rechnung
- 80     dom    Domizilierungen
- 90     clo    Abschlussbuchungen
-====== ====== =======================
+====== ====== ======================
 <BLANKLINE>
-
 
 
 The state of a voucher
@@ -347,17 +326,17 @@ Users can consult the movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)
-====================== =================== ====================== ============ ======== ======= =========
- Buchungsdatum          Beleg               Beschreibung           Debit        Kredit   Match   Cleared
----------------------- ------------------- ---------------------- ------------ -------- ------- ---------
- 22.05.14               *REG1 (2014-05)*    *AS Express Post*      10,00                         Ja
- 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   29,95                         Ja
- 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   5,33                          Ja
- 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   120,00                        Ja
- 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   25,00                         Ja
- 16.02.14               *SREG7 (2014-02)*   *Leffin Electronics*   12,50                         Ja
- **Total (6 Zeilen)**                                              **202,78**
-====================== =================== ====================== ============ ======== ======= =========
+====================== ========== ===================================================== ============ ======== ======= ============
+ Buchungsdatum          Beleg      Beschreibung                                          Debit        Kredit   Match   Befriedigt
+---------------------- ---------- ----------------------------------------------------- ------------ -------- ------- ------------
+ 22.05.14               *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00                         Ja
+ 16.02.14               *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95                         Ja
+ 16.02.14               *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33                          Ja
+ 16.02.14               *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00                        Ja
+ 16.02.14               *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
+ 16.02.14               *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
+ **Total (6 Zeilen)**                                                                    **202,78**
+====================== ========== ===================================================== ============ ======== ======= ============
 <BLANKLINE>
 
 
@@ -410,6 +389,9 @@ TODO in above report:
 
 .. _welfare.specs.r20160105:
 
+
+>>> 1+1
+2
 
 Some choices requests
 =====================

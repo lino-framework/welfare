@@ -116,12 +116,12 @@ The following table gives an overview of these things.
  debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        68
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
- finan.BankStatement            finan.BankStatements            14        0
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        21
+ finan.BankStatement            finan.BankStatements            15        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
- finan.JournalEntry             finan.FinancialVouchers         13        0
+ finan.JournalEntry             finan.FinancialVouchers         14        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
- finan.PaymentOrder             finan.PaymentOrders             14        18
+ finan.PaymentOrder             finan.PaymentOrders             15        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
  fse.ClientSummary              fse.Summaries                   19        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -147,8 +147,8 @@ The following table gives an overview of these things.
  jobs.Schedule                  jobs.Schedules                  5         3
  languages.Language             languages.Languages             6         5
  ledger.AccountingPeriod        ledger.AccountingPeriods        7         6
- ledger.Journal                 ledger.Journals                 20        5
- ledger.MatchRule               ledger.MatchRules               3         4
+ ledger.Journal                 ledger.Journals                 21        4
+ ledger.MatchRule               ledger.MatchRules               3         2
  ledger.Movement                ledger.Movements                10        320
  ledger.PaymentTerm             ledger.PaymentTerms             9         7
  ledger.Voucher                 ledger.Vouchers                 9         48

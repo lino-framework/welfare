@@ -14,7 +14,9 @@ from unipath import Path
 # import os
 # os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
-from lino.utils.pythontest import TestCase
+# from lino.utils.pythontest import TestCase
+from atelier.test import TestCase
+
 
 import lino_welfare
 
@@ -55,7 +57,7 @@ class AdminTests(BaseTestCase):
         return self.run_simple_doctests('docs/admin/printing.rst')
 
 
-class SpecsTests(BaseTestCase):
+class SpecsTests(TestCase):
     def test_chatelet(self):
         return self.run_simple_doctests('docs/specs/chatelet.rst')
 
