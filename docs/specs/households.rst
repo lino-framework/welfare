@@ -230,14 +230,10 @@ Ehepaar
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
-"field_values": { 
-  "head": "DUBOIS Robin (179)", "headHidden": 179, 
-  "typeHidden": 1, 
-  "partner": null, "partnerHidden": null, 
-  "type": "Ehepaar" 
-}, "param_values": { 
-  "also_obsolete": false, "gender": null, "genderHidden": null 
-}, "base_params": {  } })
+"base_params": { }, "field_values": { "head": "DUBOIS Robin (179)",
+"headHidden": 179, "partner": null, "partnerHidden": null, "type":
+"Ehepaar", "typeHidden": 1 }, "param_values": { "also_obsolete":
+false, "gender": null, "genderHidden": null } })
 
 
 The :func:`lino.api.doctest.get_json_soup` automates this trick:

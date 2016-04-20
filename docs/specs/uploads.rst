@@ -224,8 +224,11 @@ It has 3 keys:
 8
 >>> d.base_params
 {u'mt': 51, u'type': 4, u'mk': 121}
->>> d.param_values
-{u'observed_event': u'Est active', u'upload_typeHidden': None, u'end_date': None, u'observed_eventHidden': u'20', u'userHidden': None, u'coached_by': None, u'user': None, u'coached_byHidden': None, u'start_date': None, u'upload_type': None}
+>>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
+{"userHidden": null, "upload_typeHidden": null, "end_date": null,
+"observed_eventHidden": "20", "observed_event": "Est active",
+"coached_by": null, "upload_type": null, "coached_byHidden": null,
+"start_date": null, "user": null}
 
 
 
