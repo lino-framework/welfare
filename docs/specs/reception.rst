@@ -167,7 +167,8 @@ And also here, the `href` attribute is a javascript snippet:
 
 >>> print(btn['href'])
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "su": 5, "base_params": { "su": 5, "prj": 127 } })
+javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "base_params": { "prj": 127, "su": 5 }, "su": 5 })
+
 
 This one is shorter, so we don't need to parse it for inspecting it.
 Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
