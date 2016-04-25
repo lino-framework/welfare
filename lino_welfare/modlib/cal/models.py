@@ -235,7 +235,7 @@ class EventsByClient(Events):
     # master = 'cal.Event'
     master = 'pcsw.Client'
     auto_fit_column_widths = True
-    column_names = 'linked_date user summary workflow_buttons'
+    column_names = 'when_html user summary workflow_buttons'
     # column_names = 'when_text user summary workflow_buttons'
     insert_layout = """
     event_type
@@ -398,7 +398,7 @@ if False:
 EventsByDay.column_names = 'start_time project summary user \
 assigned_to event_type room workflow_buttons *'
 
-EventsByController.column_names = 'when_text summary user \
+EventsByController.column_names = 'when_html summary user \
 assigned_to workflow_buttons *'
 
 

@@ -37,6 +37,7 @@ from lino.api import dd
 from lino.mixins.printable import DirectPrintAction
 
 from .roles import CoursesUser, CoursesStaff
+from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 
 pcsw = dd.resolve_app('pcsw')
@@ -476,12 +477,10 @@ class CourseRequests(dd.Table):
 
 
 class CourseRequestsByPerson(CourseRequests):
-
     """
-    Table of :class:`CourseRequest` instances of a 
-    :class:`lino.modlib.pcsw.models.Client`.
+    Shows the course requests of a client.
     """
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.required((CoursesUser, SocialAgent))
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'
