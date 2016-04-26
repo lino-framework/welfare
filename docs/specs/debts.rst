@@ -10,7 +10,6 @@ Debts mediation
     
     Doctest initialization:
 
-    >>> from __future__ import print_function
     >>> import lino
     >>> lino.startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
@@ -299,8 +298,8 @@ discovered :blogref:`20130527`:
 >>> print(res.status_code)
 200
 >>> result = json.loads(res.content)
->>> print(result.keys())
-[u'navinfo', u'data', u'disable_delete', u'id', u'title']
+>>> print(' '.join(sorted(result.keys())))
+data disable_delete id navinfo title
 
 
 Editability of tables

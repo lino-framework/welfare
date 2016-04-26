@@ -123,3 +123,12 @@ The ZKBC journal contains the following statements:
 
 
 
+
+
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)
+>>> demo_get(
+...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
+...    fields, 140, mk=obj.pk, **kw)
+

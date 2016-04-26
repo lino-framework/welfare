@@ -53,7 +53,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-57 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
+58 apps: lino_startup, staticfiles, about, extjs, jinja, bootstrap3, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, xl, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
 132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -612,7 +612,7 @@ Romain
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
-- Calendrier : Calendrier, Mes rendez-vous, Mes tâches, Mes visiteurs, Mes présences
+- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
 - Intégration : Bénéficiaires, PIISs, Mises à l'emploi art60§7, Services utilisateurs, Postes de travail, Offres d'emploi, Mises à l'emploi art61, Stages d'immersion

@@ -46,25 +46,25 @@ For example let's look at ISIP contract #26 of the demo database.
 >>> obj.exam_policy
 ExamPolicy #1 ('Every month')
 >>> rt.show(cal.EventsByController, obj)
-========================= =============== ================= ============= ===============
- When                      Summary         Managed by        Assigned to   Workflow
-------------------------- --------------- ----------------- ------------- ---------------
- *Tue 3/26/13 at 09:00*    Évaluation 1    Alicia Allmanns                 **Suggested**
- *Fri 4/26/13 at 09:00*    Évaluation 2    Alicia Allmanns                 **Suggested**
- *Mon 5/27/13 at 09:00*    Évaluation 3    Alicia Allmanns                 **Suggested**
- *Thu 6/27/13 at 09:00*    Évaluation 4    Alicia Allmanns                 **Suggested**
- *Mon 7/29/13 at 09:00*    Évaluation 5    Alicia Allmanns                 **Suggested**
- *Thu 8/29/13 at 09:00*    Évaluation 6    Alicia Allmanns                 **Suggested**
- *Mon 9/30/13 at 09:00*    Évaluation 7    Alicia Allmanns                 **Suggested**
- *Wed 10/30/13 at 09:00*   Évaluation 8    Alicia Allmanns                 **Suggested**
- *Mon 12/2/13 at 09:00*    Évaluation 9    Alicia Allmanns                 **Suggested**
- *Thu 1/2/14 at 09:00*     Évaluation 10   Alicia Allmanns                 **Suggested**
- *Mon 2/3/14 at 09:00*     Évaluation 11   Alicia Allmanns                 **Suggested**
- *Mon 3/3/14 at 09:00*     Évaluation 12   Alicia Allmanns                 **Suggested**
- *Thu 4/3/14 at 09:00*     Évaluation 13   Alicia Allmanns                 **Suggested**
- *Mon 5/5/14 at 09:00*     Évaluation 14   Alicia Allmanns                 **Suggested**
- *Thu 6/5/14 at 09:00*     Évaluation 15   Alicia Allmanns                 **Suggested**
-========================= =============== ================= ============= ===============
+========================== =============== ================= ============= ===============
+ When                       Summary         Managed by        Assigned to   Workflow
+-------------------------- --------------- ----------------- ------------- ---------------
+ **Tue 3/26/13 (09:00)**    Évaluation 1    Alicia Allmanns                 **Suggested**
+ **Fri 4/26/13 (09:00)**    Évaluation 2    Alicia Allmanns                 **Suggested**
+ **Mon 5/27/13 (09:00)**    Évaluation 3    Alicia Allmanns                 **Suggested**
+ **Thu 6/27/13 (09:00)**    Évaluation 4    Alicia Allmanns                 **Suggested**
+ **Mon 7/29/13 (09:00)**    Évaluation 5    Alicia Allmanns                 **Suggested**
+ **Thu 8/29/13 (09:00)**    Évaluation 6    Alicia Allmanns                 **Suggested**
+ **Mon 9/30/13 (09:00)**    Évaluation 7    Alicia Allmanns                 **Suggested**
+ **Wed 10/30/13 (09:00)**   Évaluation 8    Alicia Allmanns                 **Suggested**
+ **Mon 12/2/13 (09:00)**    Évaluation 9    Alicia Allmanns                 **Suggested**
+ **Thu 1/2/14 (09:00)**     Évaluation 10   Alicia Allmanns                 **Suggested**
+ **Mon 2/3/14 (09:00)**     Évaluation 11   Alicia Allmanns                 **Suggested**
+ **Mon 3/3/14 (09:00)**     Évaluation 12   Alicia Allmanns                 **Suggested**
+ **Thu 4/3/14 (09:00)**     Évaluation 13   Alicia Allmanns                 **Suggested**
+ **Mon 5/5/14 (09:00)**     Évaluation 14   Alicia Allmanns                 **Suggested**
+ **Thu 6/5/14 (09:00)**     Évaluation 15   Alicia Allmanns                 **Suggested**
+========================== =============== ================= ============= ===============
 <BLANKLINE>
 
 
@@ -128,20 +128,20 @@ For example, let's pick up ISIP contract #1.
 
 >>> obj = isip.Contract.objects.get(pk=1)
 >>> rt.show(cal.EventsByController, obj)
-========================= =============== ================= ============= ===============
- When                      Summary         Managed by        Assigned to   Workflow
-------------------------- --------------- ----------------- ------------- ---------------
- *Mon 10/29/12 at 09:00*   Evaluation 1    Hubert Huppertz                 **Suggested**
- *Thu 11/29/12 at 09:00*   Evaluation 2    Hubert Huppertz                 **Suggested**
- *Mon 12/31/12 at 09:00*   Evaluation 3    Hubert Huppertz                 **Suggested**
- *Thu 1/31/13 at 09:00*    Evaluation 4    Hubert Huppertz                 **Suggested**
- *Thu 2/28/13 at 09:00*    Evaluation 5    Hubert Huppertz                 **Suggested**
- *Thu 3/28/13 at 09:00*    Evaluation 6    Mélanie Mélard                  **Suggested**
- *Mon 4/29/13 at 09:00*    Evaluation 7    Mélanie Mélard                  **Suggested**
- *Wed 5/29/13 at 09:00*    Evaluation 8    Mélanie Mélard                  **Suggested**
- *Mon 7/1/13 at 09:00*     Evaluation 9    Mélanie Mélard                  **Suggested**
- *Thu 8/1/13 at 09:00*     Evaluation 10   Mélanie Mélard                  **Suggested**
-========================= =============== ================= ============= ===============
+========================== =============== ================= ============= ===============
+ When                       Summary         Managed by        Assigned to   Workflow
+-------------------------- --------------- ----------------- ------------- ---------------
+ **Mon 10/29/12 (09:00)**   Evaluation 1    Hubert Huppertz                 **Suggested**
+ **Thu 11/29/12 (09:00)**   Evaluation 2    Hubert Huppertz                 **Suggested**
+ **Mon 12/31/12 (09:00)**   Evaluation 3    Hubert Huppertz                 **Suggested**
+ **Thu 1/31/13 (09:00)**    Evaluation 4    Hubert Huppertz                 **Suggested**
+ **Thu 2/28/13 (09:00)**    Evaluation 5    Hubert Huppertz                 **Suggested**
+ **Thu 3/28/13 (09:00)**    Evaluation 6    Mélanie Mélard                  **Suggested**
+ **Mon 4/29/13 (09:00)**    Evaluation 7    Mélanie Mélard                  **Suggested**
+ **Wed 5/29/13 (09:00)**    Evaluation 8    Mélanie Mélard                  **Suggested**
+ **Mon 7/1/13 (09:00)**     Evaluation 9    Mélanie Mélard                  **Suggested**
+ **Thu 8/1/13 (09:00)**     Evaluation 10   Mélanie Mélard                  **Suggested**
+========================== =============== ================= ============= ===============
 <BLANKLINE>
 
 The above shows that appointments before 2013-11-10 are with Hubert,

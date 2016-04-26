@@ -210,7 +210,7 @@ Reached upper date limit 2014-12-02
 
 
 >>> ses.show(cal.EventsByController.request(obj),
-... column_names="linked_date summary")
+... column_names="when_html summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ================== ==================
  Wann               Kurzbeschreibung
