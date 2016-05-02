@@ -10,9 +10,8 @@ Lino Welfare à la Châtelet
 
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
 This document describes the *Châtelet* variant of Lino Welfare.
@@ -101,7 +100,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 30        7
- courses.Enrolment              courses.Enrolments              13        100
+ courses.Enrolment              courses.Enrolments              15        100
  courses.Line                   courses.Lines                   21        7
  courses.Slot                   courses.Slots                   5         0
  courses.Topic                  courses.Topics                  5         0
