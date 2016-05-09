@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, excerpts, extensible, xl, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
+58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
 132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
