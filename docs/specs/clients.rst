@@ -333,11 +333,11 @@ van Veen does have a training, but that started only two days later:
 >>> obj = pcsw.Client.objects.get(pk=166)
 >>> ses.show(cv.TrainingsByPerson, obj, column_names="type start_date end_date")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================ ============ ==========
+================ ============ ============
  Education Type   Start date   End date
----------------- ------------ ----------
- Alpha            3/13/11      3/13/12
-================ ============ ==========
+---------------- ------------ ------------
+ Alpha            13/03/2011   13/03/2012
+================ ============ ============
 <BLANKLINE>
 
 And he has no studies:
@@ -352,12 +352,9 @@ No data to display
 
 >>> ses.show(cv.ExperiencesByPerson, obj, column_names="start_date end_date")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============ ==========
+============ ============
  Start date   End date
------------- ----------
- 3/11/11      3/11/12
-============ ==========
+------------ ------------
+ 11/03/2011   11/03/2012
+============ ============
 <BLANKLINE>
-
-
-

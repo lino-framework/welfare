@@ -131,10 +131,10 @@ Here is a list of all demo excerpts.
  7    Art61 job supplyment     *Art61 job supplyment#3 (Josef JONAS)*                JONAS Josef (139)
  6    Art61 job supplyment     *Art61 job supplyment#2 (Josef JONAS)*                JONAS Josef (139)
  5    Art61 job supplyment     *Art61 job supplyment#1 (Daniel EMONTS)*              EMONTS Daniel (128)
- 4    Simple confirmation      *Erstattung/5/25/14/130/1*                            FAYMONVILLE Luc (130*)                                         de
- 3    Refund confirmation      *AMK/5/27/14/139/1*                                   JONAS Josef (139)                                              fr
- 2    Income confirmation      *EiEi/9/29/12/116/1*                                  AUSDEMWALD Alfons (116)                                        de
- 1    Simple confirmation      *Clothes bank/5/22/14/240/19*                         FRISCH Paul (240)             Belgisches Rotes Kreuz           de
+ 4    Simple confirmation      *Erstattung/25/05/2014/130/1*                         FAYMONVILLE Luc (130*)                                         de
+ 3    Refund confirmation      *AMK/27/05/2014/139/1*                                JONAS Josef (139)                                              fr
+ 2    Income confirmation      *EiEi/29/09/2012/116/1*                               AUSDEMWALD Alfons (116)                                        de
+ 1    Simple confirmation      *Clothes bank/22/05/2014/240/19*                      FRISCH Paul (240)             Belgisches Rotes Kreuz           de
 ==== ======================== ===================================================== ============================= ================================ ==========
 <BLANKLINE>
 

@@ -57,9 +57,9 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
 >>> rt.login('theresia').show(cal.EventsByDay, language='en', header_level=1)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================
-Thu 5/22/14 (22.05.2014)
-========================
+===========================
+Thu 22/05/2014 (22.05.2014)
+===========================
 ============ ====================== ============ ================= ============= ===================== ====== ============================
  Start time   Client                 Summary      Managed by        Assigned to   Calendar Event Type   Room   Workflow
 ------------ ---------------------- ------------ ----------------- ------------- --------------------- ------ ----------------------------
@@ -80,118 +80,103 @@ already), and how she set only her own event to [Notified].
 Users looking at their events
 =============================
 
-For Alicia, Hubert and Mélanie.
+The **My events** table (:class:`lino_xl.lib.cal.ui.MyEvents`) shows
+shows today's and all future appointments :attr:`show_appointments
+<lino_xl.lib.cal.ui.Events.show_appointments>` of the user who
+requests it.
+
+Here is what it says for Alicia.
 
 >>> rt.login('alicia').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= =========================== ===================== ==================== =================================
- When                      Client                      Calendar Event Type   Summary              Workflow
-------------------------- --------------------------- --------------------- -------------------- ---------------------------------
- *Thu 5/22/14 at 08:30*                                Meeting               Diner                **Suggested** → [Notified]
- *Fri 5/23/14 at 09:40*    AUSDEMWALD Alfons (116)     Appointment           Souper               **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 10:20*    BASTIAENSEN Laurent (117)   Evaluation            Petit-déjeuner       **Took place** → [Reset]
- *Sat 5/24/14 at 11:10*                                External meeting      Rencontre            **Cancelled**
- *Sun 5/25/14 at 13:30*                                Internal meeting      Consultation         **Omitted**
- *Mon 5/26/14 at 08:30*                                External meeting      Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 09:40*                                Private               Evaluation           **Suggested** → [Notified]
- *Tue 5/27/14 at 10:20*                                Meeting               Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 11:10*    COLLARD Charlotte (118)     Appointment           Interview            **Took place** → [Reset]
- *Wed 5/28/14 at 13:30*    CHANTRAINE Marc (120*)      Evaluation            Diner                **Cancelled**
- *Thu 5/29/14 at 08:30*                                External meeting      Souper               **Omitted**
- *Fri 5/30/14 at 09:40*                                Internal meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
-  ...
-========================= =========================== ===================== ==================== =================================
+=========================== =========================== ===================== ==================== =================================
+ When                        Client                      Calendar Event Type   Summary              Workflow
+--------------------------- --------------------------- --------------------- -------------------- ---------------------------------
+ *Thu 22/05/2014 at 08:30*                               Meeting               Diner                **Suggested** → [Notified]
+ *Fri 23/05/2014 at 09:40*   AUSDEMWALD Alfons (116)     Appointment           Souper               **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 10:20*   BASTIAENSEN Laurent (117)   Evaluation            Petit-déjeuner       **Took place** → [Reset]
+ *Sat 24/05/2014 at 11:10*                               External meeting      Rencontre            **Cancelled**
+ *Sun 25/05/2014 at 13:30*                               Internal meeting      Consultation         **Omitted**
+ *Mon 26/05/2014 at 08:30*                               External meeting      Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 09:40*                               Private               Evaluation           **Suggested** → [Notified]
+ *Tue 27/05/2014 at 10:20*                               Meeting               Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 11:10*   COLLARD Charlotte (118)     Appointment           Interview            **Took place** → [Reset]
+ *Wed 28/05/2014 at 13:30*   CHANTRAINE Marc (120*)      Evaluation            Diner                **Cancelled**
+ *Thu 29/05/2014 at 08:30*                               External meeting      Souper               **Omitted**
+ *Fri 30/05/2014 at 09:40*                               Internal meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ ...
+=========================== =========================== ===================== ==================== =================================
 <BLANKLINE>
 
-These are Alicia's calendar entries of the last two months:
+
+These are for Hubert:
+
+>>> rt.login('hubert').show(cal.MyEvents, language='en')
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=========================== ========================================= ===================== =============== =================================
+ When                        Client                                    Calendar Event Type   Summary         Workflow
+--------------------------- ----------------------------------------- --------------------- --------------- ---------------------------------
+ *Thu 22/05/2014 at 10:20*                                             External meeting      Treffen         **Suggested** → [Notified]
+ *Fri 23/05/2014 at 11:10*                                             Private               Beratung        **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 08:30*   DERICUM Daniel (121)                      Appointment           Auswertung      **Cancelled**
+ *Sat 24/05/2014 at 13:30*                                             Meeting               Seminar         **Took place** → [Reset]
+ *Sun 25/05/2014 at 09:40*   DEMEULENAERE Dorothée (122)               Evaluation            Erstgespräch    **Omitted**
+ *Mon 26/05/2014 at 10:20*                                             External meeting      Interview       **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 11:10*                                             Internal meeting      Mittagessen     **Suggested** → [Notified]
+ *Tue 27/05/2014 at 13:30*                                             External meeting      Abendessen      **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 08:30*                                             Private               Frühstück       **Took place** → [Reset]
+ *Wed 28/05/2014 at 09:00*   BRECHT Bernd (177)                        Evaluation            Évaluation 15   **Suggested** → [Notified]
+ *Wed 28/05/2014 at 09:40*                                             Meeting               Treffen         **Cancelled**
+ *Thu 29/05/2014 at 10:20*   DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Beratung        **Omitted**
+ ...
+ *Mon 09/03/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 8    **Suggested** → [Notified]
+ *Thu 19/03/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 9    **Suggested** → [Notified]
+ *Thu 09/04/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 9    **Suggested** → [Notified]
+ *Mon 20/04/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 10   **Suggested** → [Notified]
+=========================== ========================================= ===================== =============== =================================
+<BLANKLINE>
+
+
+And these for Mélanie:
+
+>>> rt.login('melanie').show(cal.MyEvents, language='en')
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+=========================== ============================= ===================== ==================== =================================
+ When                        Client                        Calendar Event Type   Summary              Workflow
+--------------------------- ----------------------------- --------------------- -------------------- ---------------------------------
+ *Thu 22/05/2014 at 09:40*   EVERS Eberhart (127)          Appointment           Diner                **Suggested** → [Notified]
+ *Fri 23/05/2014 at 10:20*   EMONTS Daniel (128)           Evaluation            Souper               **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 11:10*                                 External meeting      Petit-déjeuner       **Took place** → [Reset]
+ *Sat 24/05/2014 at 13:30*                                 Internal meeting      Rencontre            **Cancelled**
+ *Sun 25/05/2014 at 08:30*                                 External meeting      Consultation         **Omitted**
+ *Mon 26/05/2014 at 09:00*   ENGELS Edgar (129)            Evaluation            Évaluation 3         **Suggested** → [Notified]
+ *Mon 26/05/2014 at 09:40*                                 Private               Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 10:20*                                 Meeting               Evaluation           **Suggested** → [Notified]
+ *Tue 27/05/2014 at 11:10*   ENGELS Edgar (129)            Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 08:30*                                 External meeting      Diner                **Cancelled**
+ *Wed 28/05/2014 at 13:30*   FAYMONVILLE Luc (130*)        Evaluation            Interview            **Took place** → [Reset]
+ *Thu 29/05/2014 at 09:40*                                 Internal meeting      Souper               **Omitted**
+ *Fri 30/05/2014 at 10:20*                                 External meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ *Thu 05/06/2014 at 09:00*   LAZARUS Line (144)            Evaluation            Évaluation 2         **Suggested** → [Notified]
+ ...
+=========================== ============================= ===================== ==================== =================================
+<BLANKLINE>
+
+
+These are Alicia's calendar appointments of the last two months:
 
 >>> last_week = dict(start_date=dd.today(-30), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEvents, language='en',
 ...     param_values=last_week)
-======================= ========================= ===================== =============== ============================
- When                    Client                    Calendar Event Type   Summary         Workflow
------------------------ ------------------------- --------------------- --------------- ----------------------------
- *Wed 5/7/14 at 09:00*   DA VINCI David (165)      Evaluation            Évaluation 15   **Suggested** → [Notified]
- *Tue 5/13/14*           HILGERS Hildegard (133)   Evaluation            Évaluation 6    **Suggested** → [Notified]
-======================= ========================= ===================== =============== ============================
+=========================== ========================= ===================== =============== ============================
+ When                        Client                    Calendar Event Type   Summary         Workflow
+--------------------------- ------------------------- --------------------- --------------- ----------------------------
+ *Wed 07/05/2014 at 09:00*   DA VINCI David (165)      Evaluation            Évaluation 15   **Suggested** → [Notified]
+ *Tue 13/05/2014*            HILGERS Hildegard (133)   Evaluation            Évaluation 6    **Suggested** → [Notified]
+=========================== ========================= ===================== =============== ============================
 <BLANKLINE>
 
 
-These are Hubert's calendar entries of the last two months:
-
->>> rt.login('hubert').show(cal.MyEvents, language='en')
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ========================================= ===================== =============== =================================
- When                      Client                                    Calendar Event Type   Summary         Workflow
-------------------------- ----------------------------------------- --------------------- --------------- ---------------------------------
- *Thu 5/22/14 at 10:20*                                              External meeting      Treffen         **Suggested** → [Notified]
- *Fri 5/23/14 at 11:10*                                              Private               Beratung        **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 08:30*    DERICUM Daniel (121)                      Appointment           Auswertung      **Cancelled**
- *Sat 5/24/14 at 13:30*                                              Meeting               Seminar         **Took place** → [Reset]
- *Sun 5/25/14 at 09:40*    DEMEULENAERE Dorothée (122)               Evaluation            Erstgespräch    **Omitted**
- *Mon 5/26/14 at 10:20*                                              External meeting      Interview       **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 11:10*                                              Internal meeting      Mittagessen     **Suggested** → [Notified]
- *Tue 5/27/14 at 13:30*                                              External meeting      Abendessen      **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 08:30*                                              Private               Frühstück       **Took place** → [Reset]
- *Wed 5/28/14 at 09:00*    BRECHT Bernd (177)                        Evaluation            Évaluation 15   **Suggested** → [Notified]
- *Wed 5/28/14 at 09:40*                                              Meeting               Treffen         **Cancelled**
- *Thu 5/29/14 at 10:20*    DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Beratung        **Omitted**
- *Fri 5/30/14 at 11:10*    DOBBELSTEIN Dorothée (124)                Evaluation            Seminar         **Notified** → [Cancel] [Reset]
- *Tue 6/3/14*              DENON Denis (180*)                        Evaluation            Auswertung 1    **Suggested** → [Notified]
- *Wed 6/4/14*              LAMBERTZ Guido (142)                      Evaluation            Évaluation 6    **Suggested** → [Notified]
- *Thu 6/19/14 at 09:00*    JEANÉMART Jérôme (181)                    Evaluation            Évaluation 15   **Suggested** → [Notified]
- *Mon 7/14/14 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 1    **Suggested** → [Notified]
- *Mon 8/4/14 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 1    **Suggested** → [Notified]
- *Tue 8/5/14*              FAYMONVILLE Luc (130*)                    Evaluation            Auswertung 3    **Suggested** → [Notified]
- *Tue 8/12/14*             RADERMECKER Rik (173)                     Evaluation            Auswertung 2    **Suggested** → [Notified]
- *Thu 8/14/14 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 2    **Suggested** → [Notified]
- *Wed 9/3/14*              DENON Denis (180*)                        Evaluation            Auswertung 2    **Suggested** → [Notified]
- *Thu 9/4/14*              LAMBERTZ Guido (142)                      Evaluation            Évaluation 7    **Suggested** → [Notified]
- *Thu 9/4/14 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 2    **Suggested** → [Notified]
- *Mon 9/15/14 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 3    **Suggested** → [Notified]
- *Mon 10/6/14 at 09:00*    JEANÉMART Jérôme (181)                    Evaluation            Auswertung 3    **Suggested** → [Notified]
- *Wed 10/15/14 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 4    **Suggested** → [Notified]
- *Thu 11/6/14 at 09:00*    JEANÉMART Jérôme (181)                    Evaluation            Auswertung 4    **Suggested** → [Notified]
- *Wed 11/12/14*            RADERMECKER Rik (173)                     Evaluation            Auswertung 3    **Suggested** → [Notified]
- *Mon 11/17/14 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 5    **Suggested** → [Notified]
- *Wed 12/3/14*             DENON Denis (180*)                        Evaluation            Auswertung 3    **Suggested** → [Notified]
- *Mon 12/8/14 at 09:00*    JEANÉMART Jérôme (181)                    Evaluation            Auswertung 5    **Suggested** → [Notified]
- *Wed 12/17/14 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 6    **Suggested** → [Notified]
- *Thu 1/8/15 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 6    **Suggested** → [Notified]
- *Mon 1/19/15 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 7    **Suggested** → [Notified]
- *Mon 2/9/15 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 7    **Suggested** → [Notified]
- *Thu 2/19/15 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 8    **Suggested** → [Notified]
- *Tue 3/3/15*              DENON Denis (180*)                        Evaluation            Auswertung 4    **Suggested** → [Notified]
- *Mon 3/9/15 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 8    **Suggested** → [Notified]
- *Thu 3/19/15 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 9    **Suggested** → [Notified]
- *Thu 4/9/15 at 09:00*     JEANÉMART Jérôme (181)                    Evaluation            Auswertung 9    **Suggested** → [Notified]
- *Mon 4/20/15 at 09:00*    BRECHT Bernd (177)                        Evaluation            Auswertung 10   **Suggested** → [Notified]
-========================= ========================================= ===================== =============== =================================
-<BLANKLINE>
-
-
->>> rt.login('melanie').show(cal.MyEvents, language='en')
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ============================= ===================== ==================== =================================
- When                      Client                        Calendar Event Type   Summary              Workflow
-------------------------- ----------------------------- --------------------- -------------------- ---------------------------------
- *Thu 5/22/14 at 09:40*    EVERS Eberhart (127)          Appointment           Diner                **Suggested** → [Notified]
- *Fri 5/23/14 at 10:20*    EMONTS Daniel (128)           Evaluation            Souper               **Draft** → [Notified] [Cancel]
- *Sat 5/24/14 at 11:10*                                  External meeting      Petit-déjeuner       **Took place** → [Reset]
- *Sat 5/24/14 at 13:30*                                  Internal meeting      Rencontre            **Cancelled**
- *Sun 5/25/14 at 08:30*                                  External meeting      Consultation         **Omitted**
- *Mon 5/26/14 at 09:00*    ENGELS Edgar (129)            Evaluation            Évaluation 3         **Suggested** → [Notified]
- *Mon 5/26/14 at 09:40*                                  Private               Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 5/26/14 at 10:20*                                  Meeting               Evaluation           **Suggested** → [Notified]
- *Tue 5/27/14 at 11:10*    ENGELS Edgar (129)            Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 5/28/14 at 08:30*                                  External meeting      Diner                **Cancelled**
- *Wed 5/28/14 at 13:30*    FAYMONVILLE Luc (130*)        Evaluation            Interview            **Took place** → [Reset]
- *Thu 5/29/14 at 09:40*                                  Internal meeting      Souper               **Omitted**
- *Fri 5/30/14 at 10:20*                                  External meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
- *Thu 6/5/14 at 09:00*     LAZARUS Line (144)            Evaluation            Évaluation 2         **Suggested** → [Notified]
- ...
-========================= ============================= ===================== ==================== =================================
-<BLANKLINE>
 
 
 Calendars and Subscriptions
@@ -251,35 +236,36 @@ also those where this client is among the guests.
 ==============================
 Events of EVERS Eberhart (127)
 ==============================
-========================== ================= ================ ===============
- When                       Managed by        Summary          Workflow
--------------------------- ----------------- ---------------- ---------------
- **Mon 11/19/12 (09:00)**   Alicia Allmanns   Évaluation 1     **Suggested**
- **Wed 12/19/12 (09:00)**   Alicia Allmanns   Évaluation 2     **Suggested**
- **Mon 1/21/13 (09:00)**    Alicia Allmanns   Évaluation 3     **Suggested**
- **Thu 2/21/13 (09:00)**    Alicia Allmanns   Évaluation 4     **Suggested**
- **Thu 3/21/13 (09:00)**    Alicia Allmanns   Évaluation 5     **Suggested**
- **Mon 4/22/13 (09:00)**    Alicia Allmanns   Évaluation 6     **Suggested**
- **Wed 5/22/13 (09:00)**    Alicia Allmanns   Évaluation 7     **Suggested**
- **Mon 6/24/13 (09:00)**    Alicia Allmanns   Évaluation 8     **Suggested**
- **Wed 7/24/13 (09:00)**    Alicia Allmanns   Évaluation 9     **Suggested**
- **Mon 8/26/13 (09:00)**    Alicia Allmanns   Évaluation 10    **Suggested**
- **Thu 9/26/13 (09:00)**    Alicia Allmanns   Évaluation 11    **Suggested**
- **Mon 10/28/13 (09:00)**   Caroline Carnol   Évaluation 12    **Suggested**
- **Thu 11/28/13 (09:00)**   Caroline Carnol   Évaluation 13    **Suggested**
- **Mon 12/30/13 (09:00)**   Caroline Carnol   Évaluation 14    **Suggested**
- **Thu 1/30/14 (09:00)**    Caroline Carnol   Évaluation 15    **Suggested**
- **Wed 3/12/14 (09:00)**    Caroline Carnol   Auswertung 1     **Suggested**
- **Tue 4/15/14 (09:00)**    Caroline Carnol   Auswertung 1     **Suggested**
- **Thu 5/15/14 (09:00)**    Caroline Carnol   Auswertung 2     **Suggested**
- **Thu 5/22/14**            Mélanie Mélard    Urgent problem   **Notified**
- **Thu 5/22/14 (09:40)**    Mélanie Mélard    Diner            **Suggested**
- **Mon 6/16/14 (09:00)**    Caroline Carnol   Auswertung 3     **Suggested**
- **Wed 7/16/14 (09:00)**    Caroline Carnol   Auswertung 4     **Suggested**
- **Mon 8/18/14 (09:00)**    Caroline Carnol   Auswertung 5     **Suggested**
- **Thu 9/18/14 (09:00)**    Caroline Carnol   Auswertung 6     **Suggested**
- **Mon 10/20/14 (09:00)**   Caroline Carnol   Auswertung 7     **Suggested**
- **Thu 11/20/14 (09:00)**   Caroline Carnol   Auswertung 8     **Suggested**
- **Mon 12/22/14 (09:00)**   Caroline Carnol   Auswertung 9     **Suggested**
-========================== ================= ================ ===============
+============================ ================= ================ ===============
+ When                         Managed by        Summary          Workflow
+---------------------------- ----------------- ---------------- ---------------
+ **Mon 19/11/2012 (09:00)**   Alicia Allmanns   Évaluation 1     **Suggested**
+ **Wed 19/12/2012 (09:00)**   Alicia Allmanns   Évaluation 2     **Suggested**
+ **Mon 21/01/2013 (09:00)**   Alicia Allmanns   Évaluation 3     **Suggested**
+ **Thu 21/02/2013 (09:00)**   Alicia Allmanns   Évaluation 4     **Suggested**
+ **Thu 21/03/2013 (09:00)**   Alicia Allmanns   Évaluation 5     **Suggested**
+ **Mon 22/04/2013 (09:00)**   Alicia Allmanns   Évaluation 6     **Suggested**
+ **Wed 22/05/2013 (09:00)**   Alicia Allmanns   Évaluation 7     **Suggested**
+ **Mon 24/06/2013 (09:00)**   Alicia Allmanns   Évaluation 8     **Suggested**
+ **Wed 24/07/2013 (09:00)**   Alicia Allmanns   Évaluation 9     **Suggested**
+ **Mon 26/08/2013 (09:00)**   Alicia Allmanns   Évaluation 10    **Suggested**
+ **Thu 26/09/2013 (09:00)**   Alicia Allmanns   Évaluation 11    **Suggested**
+ **Mon 28/10/2013 (09:00)**   Caroline Carnol   Évaluation 12    **Suggested**
+ **Thu 28/11/2013 (09:00)**   Caroline Carnol   Évaluation 13    **Suggested**
+ **Mon 30/12/2013 (09:00)**   Caroline Carnol   Évaluation 14    **Suggested**
+ **Thu 30/01/2014 (09:00)**   Caroline Carnol   Évaluation 15    **Suggested**
+ **Wed 12/03/2014 (09:00)**   Caroline Carnol   Auswertung 1     **Suggested**
+ **Tue 15/04/2014 (09:00)**   Caroline Carnol   Auswertung 1     **Suggested**
+ **Thu 15/05/2014 (09:00)**   Caroline Carnol   Auswertung 2     **Suggested**
+ **Thu 22/05/2014**           Mélanie Mélard    Urgent problem   **Notified**
+ **Thu 22/05/2014 (09:40)**   Mélanie Mélard    Diner            **Suggested**
+ **Mon 16/06/2014 (09:00)**   Caroline Carnol   Auswertung 3     **Suggested**
+ **Wed 16/07/2014 (09:00)**   Caroline Carnol   Auswertung 4     **Suggested**
+ **Mon 18/08/2014 (09:00)**   Caroline Carnol   Auswertung 5     **Suggested**
+ **Thu 18/09/2014 (09:00)**   Caroline Carnol   Auswertung 6     **Suggested**
+ **Mon 20/10/2014 (09:00)**   Caroline Carnol   Auswertung 7     **Suggested**
+ **Thu 20/11/2014 (09:00)**   Caroline Carnol   Auswertung 8     **Suggested**
+ **Mon 22/12/2014 (09:00)**   Caroline Carnol   Auswertung 9     **Suggested**
+============================ ================= ================ ===============
 <BLANKLINE>
+

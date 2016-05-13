@@ -442,21 +442,21 @@ We define a utility function:
 ...     p = aids.IncomeConfirmation(
 ...         start_date=start_date, end_date=end_date)
 ...     for lang in ('en', 'de', 'fr'):
-...         translation.activate(lang)
-...         print(p.get_period_text())
+...         with translation.override(lang):
+...             print(p.get_period_text())
 
 
 A **single day**:
 
 >>> f(20140522, 20140522)
-on May 22, 2014
+on 22 May 2014
 am 22. Mai 2014
 le 22 mai 2014
 
 A **fully defined** date range:
 
 >>> f(20140522, 20140621)
-between May 22, 2014 and June 21, 2014
+between 22 May 2014 and 21 June 2014
 vom 22. Mai 2014 bis zum 21. Juni 2014
 entre le 22 mai 2014 et le 21 juin 2014
 
@@ -464,12 +464,12 @@ The text of a date range **with open end** can differ depending on whether
 it is in the future or in the past.
 
 >>> f(20140522, None)
-from May 22, 2014
+from 22 May 2014
 seit dem 22. Mai 2014
 depuis le 22 mai 2014
 
 >>> f(20140523, None)
-from May 23, 2014
+from 23 May 2014
 ab dem 23. Mai 2014
 à partir du 23 mai 2014
 
@@ -477,7 +477,7 @@ ab dem 23. Mai 2014
 No start date:
 
 >>> f(None, 20140501)
-until May 1, 2014
+until 1 May 2014
 bis zum 1. Mai 2014
 jusqu'au 1 mai 2014
 
@@ -497,11 +497,11 @@ been issued for this granting.
 
 >>> obj = aids.Granting.objects.get(pk=mk)
 >>> rt.show(aids.ConfirmationsByGranting, obj, column_names=" description_column user signer printed")
-========================= ================ ================ =========
- Description               Auteur           Signataire       Imprimé
-------------------------- ---------------- ---------------- ---------
- *EiEi/09/10/2012/124/4*   Judith Jousten   Mélanie Mélard
-========================= ================ ================ =========
+======================= ================ ================ =============
+ Beschreibung            Autor            Bestätiger       Ausgedruckt
+----------------------- ---------------- ---------------- -------------
+ *EiEi/09.10.12/124/4*   Judith Jousten   Mélanie Mélard
+======================= ================ ================ =============
 <BLANKLINE>
 
 The above was written to reproduce :ticket:`685`.

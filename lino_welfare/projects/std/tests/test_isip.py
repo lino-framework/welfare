@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -139,9 +139,9 @@ Update Guests for Event #3 Evaluation 3 (01.01.2015)...
 ============ ===========
  Start date   State
 ------------ -----------
- 7/1/14       Suggested
- 10/1/14      Suggested
- 1/1/15       Suggested
+ 01/07/2014   Suggested
+ 01/10/2014   Suggested
+ 01/01/2015   Suggested
 ============ ===========
 
 """)

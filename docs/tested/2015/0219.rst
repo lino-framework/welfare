@@ -58,13 +58,13 @@ Some preliminary tests, just to see whether we are at the right place:
 >>> obj
 Client #116 ('AUSDEMWALD Alfons (116)')
 >>> rt.login('robin').show(aids.GrantingsByClient, obj)
-================================ ============== ======= ================= ========================== =================== =========================
- Description                      Applies from   until   Signer            Workflow                   Board               Actions
--------------------------------- -------------- ------- ----------------- -------------------------- ------------------- -------------------------
- *EiEi/5/22/14/116*               5/22/14                Caroline Carnol   **Unconfirmed** → [Sign]   Social Board (SB)   **Create confirmation**
- *Ausländerbeihilfe/8/8/13/116*   8/8/13                 Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
- *EiEi/9/29/12/116*               9/29/12                Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
-================================ ============== ======= ================= ========================== =================== =========================
+==================================== ============== ======= ================= ========================== =================== =========================
+ Description                          Applies from   until   Signer            Workflow                   Board               Actions
+------------------------------------ -------------- ------- ----------------- -------------------------- ------------------- -------------------------
+ *EiEi/22/05/2014/116*                22/05/2014             Caroline Carnol   **Unconfirmed** → [Sign]   Social Board (SB)   **Create confirmation**
+ *Ausländerbeihilfe/08/08/2013/116*   08/08/2013             Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
+ *EiEi/29/09/2012/116*                29/09/2012             Caroline Carnol   **Unconfirmed** → [Sign]                       **Create confirmation**
+==================================== ============== ======= ================= ========================== =================== =========================
 <BLANKLINE>
 
 
