@@ -10,10 +10,8 @@ ISIP contracts (Chatelet)
     
     Doctest initialization:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.chatelet.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
     >>> ses = rt.login('robin')
@@ -31,38 +29,39 @@ Contracts
 ==== ============== =============== ============================ =================== =====================
  ID   applies from   applies until   Client                       Integration agent   Contract Type
 ---- -------------- --------------- ---------------------------- ------------------- ---------------------
- 1    9/29/12        8/7/13          AUSDEMWALD Alfons (116)      Hubert Huppertz     VSE Ausbildung
- 2    8/8/13         12/1/14         AUSDEMWALD Alfons (116)      Mélanie Mélard      VSE Arbeitssuche
- 3    10/9/12        8/17/13         COLLARD Charlotte (118)      Alicia Allmanns     VSE Lehre
- 4    10/19/12       2/11/14         DOBBELSTEIN Dorothée (124)   Alicia Allmanns     VSE Vollzeitstudium
- 5    2/12/14        3/14/14         DOBBELSTEIN Dorothée (124)   Caroline Carnol     VSE Sprachkurs
- 6    3/15/14        1/21/15         DOBBELSTEIN Dorothée (124)   Caroline Carnol     VSE Ausbildung
- 7    11/3/12        2/26/14         EMONTS-GAST Erna (152)       Alicia Allmanns     VSE Arbeitssuche
- 8    11/13/12       12/13/12        EVERS Eberhart (127)         Alicia Allmanns     VSE Lehre
- 9    11/23/12       10/1/13         FAYMONVILLE Luc (130*)       Mélanie Mélard      VSE Vollzeitstudium
- 10   10/2/13        1/25/15         FAYMONVILLE Luc (130*)       Hubert Huppertz     VSE Sprachkurs
- 11   12/8/12        4/2/14          JACOBS Jacqueline (137)      Alicia Allmanns     VSE Ausbildung
- 12   4/3/14         5/3/14          JACOBS Jacqueline (137)      Mélanie Mélard      VSE Arbeitssuche
- 13   5/4/14         3/12/15         JACOBS Jacqueline (137)      Mélanie Mélard      VSE Lehre
- 14   12/18/12       4/12/14         JONAS Josef (139)            Hubert Huppertz     VSE Vollzeitstudium
- 15   4/13/14        2/19/15         JONAS Josef (139)            Hubert Huppertz     VSE Sprachkurs
- 16   12/28/12       4/22/14         KELLER Karl (178)            Alicia Allmanns     VSE Ausbildung
- 17   1/12/13        11/20/13        MALMENDIER Marc (146)        Mélanie Mélard      VSE Arbeitssuche
- 18   11/21/13       3/16/15         MALMENDIER Marc (146)        Hubert Huppertz     VSE Lehre
- 19   1/22/13        11/30/13        RADERMACHER Alfons (153)     Alicia Allmanns     VSE Vollzeitstudium
- 20   2/1/13         5/27/14         RADERMACHER Edgard (157)     Alicia Allmanns     VSE Sprachkurs
- 21   5/28/14        6/27/14         RADERMACHER Edgard (157)     Hubert Huppertz     VSE Ausbildung
- 22   6/28/14        5/6/15          RADERMACHER Edgard (157)     Hubert Huppertz     VSE Arbeitssuche
- 23   2/16/13        6/11/14         RADERMACHER Hedi (161)       Alicia Allmanns     VSE Lehre
- 24   6/12/14        7/12/14         RADERMACHER Hedi (161)       Hubert Huppertz     VSE Vollzeitstudium
- 25   7/13/14        5/21/15         RADERMACHER Hedi (161)       Hubert Huppertz     VSE Sprachkurs
- 26   2/26/13        6/21/14         DA VINCI David (165)         Alicia Allmanns     VSE Ausbildung
- 27   6/22/14        4/30/15         DA VINCI David (165)         Alicia Allmanns     VSE Arbeitssuche
- 28   3/8/13         7/1/14          ÖSTGES Otto (168)            Mélanie Mélard      VSE Lehre
- 29   7/2/14         8/1/14          ÖSTGES Otto (168)            Hubert Huppertz     VSE Vollzeitstudium
- 30   8/2/14         6/10/15         ÖSTGES Otto (168)            Hubert Huppertz     VSE Sprachkurs
+ 1    29/09/2012     07/08/2013      AUSDEMWALD Alfons (116)      Hubert Huppertz     VSE Ausbildung
+ 2    08/08/2013     01/12/2014      AUSDEMWALD Alfons (116)      Mélanie Mélard      VSE Arbeitssuche
+ 3    09/10/2012     17/08/2013      COLLARD Charlotte (118)      Alicia Allmanns     VSE Lehre
+ 4    19/10/2012     11/02/2014      DOBBELSTEIN Dorothée (124)   Alicia Allmanns     VSE Vollzeitstudium
+ 5    12/02/2014     14/03/2014      DOBBELSTEIN Dorothée (124)   Caroline Carnol     VSE Sprachkurs
+ 6    15/03/2014     21/01/2015      DOBBELSTEIN Dorothée (124)   Caroline Carnol     VSE Ausbildung
+ 7    03/11/2012     26/02/2014      EMONTS-GAST Erna (152)       Alicia Allmanns     VSE Arbeitssuche
+ 8    13/11/2012     13/12/2012      EVERS Eberhart (127)         Alicia Allmanns     VSE Lehre
+ 9    23/11/2012     01/10/2013      FAYMONVILLE Luc (130*)       Mélanie Mélard      VSE Vollzeitstudium
+ 10   02/10/2013     25/01/2015      FAYMONVILLE Luc (130*)       Hubert Huppertz     VSE Sprachkurs
+ 11   08/12/2012     02/04/2014      JACOBS Jacqueline (137)      Alicia Allmanns     VSE Ausbildung
+ 12   03/04/2014     03/05/2014      JACOBS Jacqueline (137)      Mélanie Mélard      VSE Arbeitssuche
+ 13   04/05/2014     12/03/2015      JACOBS Jacqueline (137)      Mélanie Mélard      VSE Lehre
+ 14   18/12/2012     12/04/2014      JONAS Josef (139)            Hubert Huppertz     VSE Vollzeitstudium
+ 15   13/04/2014     19/02/2015      JONAS Josef (139)            Hubert Huppertz     VSE Sprachkurs
+ 16   28/12/2012     22/04/2014      KELLER Karl (178)            Alicia Allmanns     VSE Ausbildung
+ 17   12/01/2013     20/11/2013      MALMENDIER Marc (146)        Mélanie Mélard      VSE Arbeitssuche
+ 18   21/11/2013     16/03/2015      MALMENDIER Marc (146)        Hubert Huppertz     VSE Lehre
+ 19   22/01/2013     30/11/2013      RADERMACHER Alfons (153)     Alicia Allmanns     VSE Vollzeitstudium
+ 20   01/02/2013     27/05/2014      RADERMACHER Edgard (157)     Alicia Allmanns     VSE Sprachkurs
+ 21   28/05/2014     27/06/2014      RADERMACHER Edgard (157)     Hubert Huppertz     VSE Ausbildung
+ 22   28/06/2014     06/05/2015      RADERMACHER Edgard (157)     Hubert Huppertz     VSE Arbeitssuche
+ 23   16/02/2013     11/06/2014      RADERMACHER Hedi (161)       Alicia Allmanns     VSE Lehre
+ 24   12/06/2014     12/07/2014      RADERMACHER Hedi (161)       Hubert Huppertz     VSE Vollzeitstudium
+ 25   13/07/2014     21/05/2015      RADERMACHER Hedi (161)       Hubert Huppertz     VSE Sprachkurs
+ 26   26/02/2013     21/06/2014      DA VINCI David (165)         Alicia Allmanns     VSE Ausbildung
+ 27   22/06/2014     30/04/2015      DA VINCI David (165)         Alicia Allmanns     VSE Arbeitssuche
+ 28   08/03/2013     01/07/2014      ÖSTGES Otto (168)            Mélanie Mélard      VSE Lehre
+ 29   02/07/2014     01/08/2014      ÖSTGES Otto (168)            Hubert Huppertz     VSE Vollzeitstudium
+ 30   02/08/2014     10/06/2015      ÖSTGES Otto (168)            Hubert Huppertz     VSE Sprachkurs
 ==== ============== =============== ============================ =================== =====================
 <BLANKLINE>
+
 
 This contract has a slave table 
 :class:`EventsByContract<lino_welfare.modlib.isip.models.EventsByContract>`
@@ -70,20 +69,20 @@ which contains non-ascii characters:
 
 >>> obj = isip.Contract.objects.get(id=1)
 >>> rt.show(isip.EventsByContract, obj)
-=============== ==========
+=============== ============
  Summary         Date
---------------- ----------
- Évaluation 1    10/29/12
- Évaluation 2    11/29/12
- Évaluation 3    12/31/12
- Évaluation 4    1/31/13
- Évaluation 5    2/28/13
- Évaluation 6    3/28/13
- Évaluation 7    4/29/13
- Évaluation 8    5/29/13
- Évaluation 9    7/1/13
- Évaluation 10   8/1/13
-=============== ==========
+--------------- ------------
+ Évaluation 1    29/10/2012
+ Évaluation 2    29/11/2012
+ Évaluation 3    31/12/2012
+ Évaluation 4    31/01/2013
+ Évaluation 5    28/02/2013
+ Évaluation 6    28/03/2013
+ Évaluation 7    29/04/2013
+ Évaluation 8    29/05/2013
+ Évaluation 9    01/07/2013
+ Évaluation 10   01/08/2013
+=============== ============
 <BLANKLINE>
 
 

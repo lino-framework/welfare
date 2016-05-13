@@ -14,8 +14,8 @@ from unipath import Path
 # import os
 # os.environ['DJANGO_SETTINGS_MODULE'] = "lino_welfare.settings.test"
 
-# from lino.utils.pythontest import TestCase
-from atelier.test import TestCase
+from lino.utils.pythontest import TestCase
+# from atelier.test import TestCase
 
 
 import lino_welfare

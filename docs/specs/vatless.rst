@@ -277,3 +277,17 @@ Our client has invoices from different partners:
 ======================= ========== ============================================================================================== =============== ============== ============== ============
 <BLANKLINE>
 
+
+.. _welfare.specs.r20160105:
+
+
+Some choices requests
+=====================
+
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> mt = contenttypes.ContentType.objects.get_for_model(vatless.InvoiceItem).pk
+>>> demo_get(
+...    'wilfried', 'choices/vatless/ItemsByProjectInvoice/account',
+...    fields, 19, mt=mt, mk=1, **kw)
+

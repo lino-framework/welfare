@@ -355,7 +355,17 @@ Schuldner
 <BLANKLINE>
 List of partners who are in debt towards us (usually customers).
 <BLANKLINE>
-Keine Daten anzuzeigen
+========= ============== ====================== ========= =============== ===============================
+ Alter     Zahlungsziel   Partner                ID        Saldo           Aktionen
+--------- -------------- ---------------------- --------- --------------- -------------------------------
+ 60        23.03.14       Ausdemwald Alfons      116       8 433,78        [Show debts] [Issue reminder]
+ 60        23.03.14       Collard Charlotte      118       8 433,78        [Show debts] [Issue reminder]
+ 60        23.03.14       Dobbelstein Dorothée   124       8 433,78        [Show debts] [Issue reminder]
+ 60        23.03.14       Emonts Daniel          128       8 433,78        [Show debts] [Issue reminder]
+ 60        23.03.14       Evers Eberhart         127       8 433,78        [Show debts] [Issue reminder]
+ **300**                                         **613**   **42 168,90**
+========= ============== ====================== ========= =============== ===============================
+<BLANKLINE>
 ---------
 Gläubiger
 ---------
@@ -386,28 +396,4 @@ TODO in above report:
 - :ticket:`666` (Report title not shown, Report title must contain the date, ...)
 
 
-
-.. _welfare.specs.r20160105:
-
-
->>> 1+1
-2
-
-Some choices requests
-=====================
-
->>> ContentType = contenttypes.ContentType
->>> InvoiceItem = vatless.InvoiceItem
->>> BankStatement = finan.BankStatement
->>> kw = dict()
->>> fields = 'count rows'
->>> mt = ContentType.objects.get_for_model(InvoiceItem).pk
->>> demo_get(
-...    'wilfried', 'choices/vatless/ItemsByProjectInvoice/account',
-...    fields, 19, mt=mt, mk=1, **kw)
-
->>> mt = ContentType.objects.get_for_model(BankStatement).pk
->>> demo_get(
-...    'wilfried', 'choices/finan/ItemsByBankStatement/match',
-...    fields, 81, mt=mt, mk=132, **kw)
 

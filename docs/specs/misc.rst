@@ -241,6 +241,7 @@ see it.
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin
 - cal.OneEvent.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin
+- cal.OverdueAppointments.duplicate : visible for 110 410 admin
 - cal.RemoteCalendars.duplicate : visible for 110 410 admin
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin
 - cbss.AllManageAccessRequests.duplicate : visible for admin

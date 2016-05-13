@@ -7,7 +7,6 @@ Financial documents
 .. How to test only this document:
 
     $ python setup.py test -s tests.SpecsTests.test_finan
-    $ python -m doctest docs/specs/finan.rst
     
     doctest init:
 
@@ -83,43 +82,49 @@ The ZKBC journal contains the following statements:
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)
 >>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-========== ============================ ====================== =============== ==================================== ========== =============== ==================
- Seq.-Nr.   Klient                       Zahlungsempfänger      Arbeitsablauf   Bankkonto                            Match      Betrag          Externe Referenz
----------- ---------------------------- ---------------------- --------------- ------------------------------------ ---------- --------------- ------------------
- 1          AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#43:1   648,91
- 2          COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#43:2   817,36
- 3          DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#43:3   544,91
- 4          EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#43:4   800,08
- 5          EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#43:5   648,91
- 6          AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#44:1   817,36
- 7          COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#44:2   544,91
- 8          DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#44:3   800,08
- 9          EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#44:4   648,91
- 10         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#44:5   817,36
- 11         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#45:1   544,91
- 12         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#45:2   800,08
- 13         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#45:3   648,91
- 14         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#45:4   817,36
- 15         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#45:5   544,91
- 16         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#46:1   800,08
- 17         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#46:2   648,91
- 18         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#46:3   817,36
- 19         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#46:4   544,91
- 20         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#46:5   800,08
- 21         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#47:1   648,91
- 22         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#47:2   817,36
- 23         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#47:3   544,91
- 24         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#47:4   800,08
- 25         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#47:5   648,91
- 26         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#48:1   817,36
- 27         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#48:2   544,91
- 28         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#48:3   800,08
- 29         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#48:4   648,91
- 30         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#48:5   817,36
- **465**                                                                                                                        **21 145,09**
-========== ============================ ====================== =============== ==================================== ========== =============== ==================
+========= ============================ ====================== =============== ==================================== ========== =============== ==================
+ Nr.       Klient                       Zahlungsempfänger      Arbeitsablauf   Bankkonto                            Match      Betrag          Externe Referenz
+--------- ---------------------------- ---------------------- --------------- ------------------------------------ ---------- --------------- ------------------
+ 1         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#43:1   648,91
+ 2         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#43:2   817,36
+ 3         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#43:3   544,91
+ 4         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#43:4   800,08
+ 5         EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#43:5   648,91
+ 6         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#44:1   817,36
+ 7         COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#44:2   544,91
+ 8         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#44:3   800,08
+ 9         EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#44:4   648,91
+ 10        EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#44:5   817,36
+ 11        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#45:1   544,91
+ 12        COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#45:2   800,08
+ 13        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#45:3   648,91
+ 14        EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#45:4   817,36
+ 15        EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#45:5   544,91
+ 16        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#46:1   800,08
+ 17        COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#46:2   648,91
+ 18        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#46:3   817,36
+ 19        EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#46:4   544,91
+ 20        EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#46:5   800,08
+ 21        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#47:1   648,91
+ 22        COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#47:2   817,36
+ 23        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#47:3   544,91
+ 24        EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#47:4   800,08
+ 25        EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#47:5   648,91
+ 26        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                      BG45 LMDF 6875 2666 8474 93          AAW#48:1   817,36
+ 27        COLLARD Charlotte (118)      Collard Charlotte                      CY94 5951 8993 3551 8874 2318 3914   AAW#48:2   544,91
+ 28        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée                   DK09 0573 4385 9143 85               AAW#48:3   800,08
+ 29        EVERS Eberhart (127)         Evers Eberhart                         DO34 8944 3429 6388 1766 4829 8583   AAW#48:4   648,91
+ 30        EMONTS Daniel (128)          Emonts Daniel                          DO87 9470 5313 8589 9175 5390 3987   AAW#48:5   817,36
+ **465**                                                                                                                       **21 145,09**
+========= ============================ ====================== =============== ==================================== ========== =============== ==================
 <BLANKLINE>
 
 
 
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)
+>>> demo_get(
+...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
+...    fields, 140, mk=obj.pk, **kw)
 

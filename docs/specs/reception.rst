@@ -36,16 +36,16 @@ This client has the following appointments.
 ============ ============ ================= ================ =======================================================
  Start date   Start time   Managed by        Summary          Workflow
 ------------ ------------ ----------------- ---------------- -------------------------------------------------------
- 5/15/14      09:00:00     Caroline Carnol   Auswertung 2     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 5/22/14                   Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
- 5/22/14      09:40:00     Mélanie Mélard    Diner            **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 6/16/14      09:00:00     Caroline Carnol   Auswertung 3     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 7/16/14      09:00:00     Caroline Carnol   Auswertung 4     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 8/18/14      09:00:00     Caroline Carnol   Auswertung 5     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 9/18/14      09:00:00     Caroline Carnol   Auswertung 6     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 10/20/14     09:00:00     Caroline Carnol   Auswertung 7     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 11/20/14     09:00:00     Caroline Carnol   Auswertung 8     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 12/22/14     09:00:00     Caroline Carnol   Auswertung 9     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 22/05/2014                Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
+ 22/05/2014   09:40:00     Mélanie Mélard    Diner            **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     **Accepted** → [Excused] [Absent] [Present] [Checkin]
 ============ ============ ================= ================ =======================================================
 <BLANKLINE>
 
