@@ -60,13 +60,15 @@ ExamPolicy #1 ('Every month')
  **Mon 02/12/2013 (09:00)**   Évaluation 9    Alicia Allmanns                 **Suggested**
  **Thu 02/01/2014 (09:00)**   Évaluation 10   Alicia Allmanns                 **Suggested**
  **Mon 03/02/2014 (09:00)**   Évaluation 11   Alicia Allmanns                 **Suggested**
- **Mon 03/03/2014 (09:00)**   Évaluation 12   Alicia Allmanns                 **Suggested**
- **Thu 03/04/2014 (09:00)**   Évaluation 13   Alicia Allmanns                 **Suggested**
+ **Tue 04/03/2014 (09:00)**   Évaluation 12   Alicia Allmanns                 **Suggested**
+ **Fri 04/04/2014 (09:00)**   Évaluation 13   Alicia Allmanns                 **Suggested**
  **Mon 05/05/2014 (09:00)**   Évaluation 14   Alicia Allmanns                 **Suggested**
  **Thu 05/06/2014 (09:00)**   Évaluation 15   Alicia Allmanns                 **Suggested**
 ============================ =============== ================= ============= ===============
 <BLANKLINE>
 
+Note how Lino avoids Sundays and Saturdays by moving to the following
+Monday.
 
 
 .. the following verifies a related bugfix
