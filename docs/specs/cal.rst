@@ -1,9 +1,9 @@
 .. _welfare.tested.cal:
 .. _welfare.specs.cal:
 
-===================
-Calendar (tested)
-===================
+========
+Calendar
+========
 
 .. How to test only this document:
 
@@ -11,10 +11,8 @@ Calendar (tested)
     
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.cal` module.
@@ -269,3 +267,7 @@ Events of EVERS Eberhart (127)
 ============================ ================= ================ ===============
 <BLANKLINE>
 
+
+
+>>> obj = isip.Contract.objects(id=18)
+>>> ar.show(cal.EventsByController, obj)
