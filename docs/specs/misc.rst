@@ -229,6 +229,7 @@ see it.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Accounts.duplicate : visible for 510 admin
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
+- cal.ConflictingEvents.duplicate : visible for 110 410 admin
 - cal.EventTypes.duplicate : visible for 110 410 admin
 - cal.Events.duplicate : visible for 110 410 admin
 - cal.EventsByClient.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin
