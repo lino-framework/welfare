@@ -175,7 +175,7 @@ The following table gives an overview of these things.
  pcsw.Exclusion                 pcsw.Exclusions                 6         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
- plausibility.Problem           plausibility.Problems           6         69
+ plausibility.Problem           plausibility.Problems           6         60
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0
  polls.Choice                   polls.Choices                   7         35

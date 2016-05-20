@@ -388,7 +388,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, reason
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
-- plausibility.Checkers.detail : value, name, text
+- plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
 - polls.AnswerRemarks.insert : remark, response, question
 - polls.ChoiceSets.insert : name, name_nl, name_de, name_en
