@@ -73,7 +73,7 @@ class ClientHasContract(ObservedEvent):
         qs = qs.filter(flt).distinct()
         return qs
 
-ClientEvents.add_item_instance(ClientHasContract("jobs"))
+ClientEvents.add_item_instance(ClientHasContract("jobs", "jobs"))
 
 
 class Schedule(mixins.BabelNamed):
