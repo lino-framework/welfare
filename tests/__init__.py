@@ -58,6 +58,10 @@ class AdminTests(BaseTestCase):
 
 
 class SpecsTests(TestCase):
+
+    def test_checkdata(self):
+        return self.run_simple_doctests('docs/specs/checkdata.rst')
+
     def test_chatelet(self):
         return self.run_simple_doctests('docs/specs/chatelet.rst')
 
@@ -105,9 +109,6 @@ class SpecsTests(TestCase):
 
     def test_dupable(self):
         return self.run_simple_doctests('docs/specs/dupable_clients.rst')
-
-    def test_plausibility(self):
-        return self.run_simple_doctests('docs/specs/plausibility.rst')
 
     def test_users(self):
         return self.run_simple_doctests('docs/specs/users.rst')

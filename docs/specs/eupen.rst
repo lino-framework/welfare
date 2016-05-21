@@ -9,9 +9,8 @@ Lino Welfare à la Eupen
 
     $ python setup.py test -s tests.SpecsTests.test_eupen
 
-    >>> from __future__ import print_function
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     
 .. contents:: 
@@ -19,8 +18,8 @@ Lino Welfare à la Eupen
    :depth: 2
 
 
-The murder bug
-==============
+The murderer bug
+================
 
 Before 20150623 it was possible to inadvertently cause a cascaded
 delete by calling `delete` on an object in a script. For example the
@@ -431,7 +430,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, reason
 - pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
-- plausibility.Checkers.detail : value, name, text
+- plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
 - properties.PropGroups.insert : id, name, name_fr, name_en
 - properties.PropTypes.insert : id, name, name_fr, name_en, choicelist, default_value

@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 from django.db.models import Count
 
-from lino.mixins.periods import ObservedEvent
+from lino.modlib.system.choicelists import ObservedEvent
 from lino.api import dd, _
 
 from .utils import only_coached_on, has_contracts_filter

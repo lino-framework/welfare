@@ -25,8 +25,16 @@ configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 # Lino because we often use :rst:role:`ref` for refering to general
 # Lino docs.
 
-from atelier.sphinxconf import interproject
-interproject.configure(globals())
+
+from importlib import import_module
+intersphinx_mapping = {}
+for n in 'atelier lino_book lino_cosi'.split():
+    m = import_module(n)
+    n = n.replace('_', "")
+    intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
+
+# from atelier.sphinxconf import interproject
+# interproject.configure(globals())
 
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"

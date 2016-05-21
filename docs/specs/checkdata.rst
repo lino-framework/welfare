@@ -1,33 +1,69 @@
+.. _welfare.specs.checkdata:
 .. _welfare.tested.plausibility:
 
-==============================
-Managing plausibility problems
-==============================
+==========================================
+Checking for data problems in Lino Welfare
+==========================================
 
-Lino Welfare offers some functionality for managing 
-plausibility problems.
-See :mod:`<lino.modlib.plausibility`.
+.. to test only this doc:
 
+    $ python setup.py test -s tests.SpecsTests.test_checkdata
 
-..  This document is part of the test suite.  To test only this
-  document, run::
-
-    $ python setup.py test -s tests.SpecsTests.test_plausibility
-
-    doctest init:
-
-    >>> from __future__ import print_function, unicode_literals
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
+
+Lino Welfare offers some functionality for managing plausibility
+problems.
+
+See also :ref:`book.specs.checkdata`.
+
+
+Data checkers available in Lino Welfare
+=======================================
+
+In the web interface you can select :menuselection:`Explorer -->
+System --> Plausibility checkers` to see a table of all available
+checkers.
+
+.. 
+    >>> show_menu_path(plausibility.Checkers)
+    Explorer --> System --> Plausibility checkers
+    
+>>> rt.show(plausibility.Checkers)
+======================================= ==================================================
+ value                                   text
+--------------------------------------- --------------------------------------------------
+ printing.CachedPrintableChecker         Check for missing target files
+ cal.EventGuestChecker                   Check for missing participants
+ cal.ConflictingEventsChecker            Check for conflicting events
+ countries.PlaceChecker                  Check plausibility of geographical places.
+ addresses.AddressOwnerChecker           Check for missing or non-primary address records
+ mixins.DupableChecker                   Check for missing phonetic words
+ beid.BeIdCardHolderChecker              Check for invalid SSINs
+ pcsw.SSINChecker                        Check for valid identification
+ pcsw.ClientCoachingsChecker             Check coachings
+ isip.OverlappingContractsChecker        Check for overlapping contracts
+ sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
+ dupable_clients.SimilarClientsChecker   Check for similar clients
+======================================= ==================================================
+<BLANKLINE>
+
 
 
 Showing all problems
 ====================
+The demo database deliberately contains some data problems.
+In the web interface you can select :menuselection:`Explorer -->
+System --> Plausibility problems` to see them.
+
+..
+    >>> show_menu_path(plausibility.AllProblems)
+    Explorer --> System --> Plausibility problems
+
 
 >>> rt.show(plausibility.AllProblems)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================= =========================================== ============================================================== ================================
  Responsible       Controlled by                               Message                                                        Plausibility checker
 ----------------- ------------------------------------------- -------------------------------------------------------------- --------------------------------
@@ -94,13 +130,18 @@ Showing all problems
 ================= =========================================== ============================================================== ================================
 <BLANKLINE>
 
+Filtering data problems
+=======================
+
 The user can set the table parameters e.g. to see only problems of a
-given type ("checker"):
+given type ("checker"). The following snippet simulates the situation
+of selecting the :class:`SimilarClientsChecker
+<lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker>`.
 
 >>> Checkers = rt.modules.plausibility.Checkers
 >>> rt.show(plausibility.AllProblems,
 ...     param_values=dict(checker=Checkers.get_by_value(
-...     'lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker')))
+...     'dupable_clients.SimilarClientsChecker')))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================ =========================================== ========================================================== ===========================
  Responsible      Controlled by                               Message                                                    Plausibility checker
@@ -111,6 +152,17 @@ given type ("checker"):
 ================ =========================================== ========================================================== ===========================
 <BLANKLINE>
 
+
+My problems
+===========
+
+In the web interface you can select :menuselection:`Office -->
+Plausibility problems assigned to me` to see a list of all problems
+assigned to you.
+
+..
+    >>> show_menu_path(plausibility.MyProblems)
+    Office --> Plausibility problems assigned to me
 
 >>> rt.login('melanie').show(plausibility.MyProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF

@@ -25,7 +25,7 @@ General
    newcomers
    households
    dupable_clients
-   plausibility
+   checkdata
    aids
    cbss
    courses

@@ -74,12 +74,12 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         11
- cal.Event                      cal.OneEvent                    24        575
+ cal.Event                      cal.OneEvent                    24        569
  cal.EventType                  cal.EventTypes                  20        10
  cal.Guest                      cal.Guests                      9         521
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
- cal.RecurrentEvent             cal.RecurrentEvents             22        16
+ cal.RecurrentEvent             cal.RecurrentEvents             22        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
  cal.Subscription               cal.Subscriptions               4         8
@@ -388,7 +388,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, reason
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
-- plausibility.Checkers.detail : value, name, text
+- plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
 - polls.AnswerRemarks.insert : remark, response, question
 - polls.ChoiceSets.insert : name, name_nl, name_de, name_en
