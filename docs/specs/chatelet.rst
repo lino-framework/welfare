@@ -564,7 +564,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin
-- pcsw.ClientStates.wf1 : visible for 200 300 admin
+- pcsw.ClientStates.wf1 : visible for 120 200 300 admin
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

@@ -609,7 +609,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin
-- pcsw.ClientStates.wf1 : visible for 200 300 admin
+- pcsw.ClientStates.wf1 : visible for 120 200 300 admin
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
@@ -656,14 +656,14 @@ per user profile.
 >>> from lino_xl.lib.beid.mixins import BaseBeIdReadCardAction
 >>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- debts.Clients.find_by_beid : visible for 300 admin
-- debts.Clients.read_beid : visible for 300 admin
+- debts.Clients.find_by_beid : visible for 120 300 admin
+- debts.Clients.read_beid : visible for 120 300 admin
 - integ.Clients.find_by_beid : visible for 100 110 120 admin
 - integ.Clients.read_beid : visible for 100 110 120 admin
 - newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
 - newcomers.ClientsByFaculty.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- newcomers.NewClients.find_by_beid : visible for 200 300 admin
-- newcomers.NewClients.read_beid : visible for 200 300 admin
+- newcomers.NewClients.find_by_beid : visible for 120 200 300 admin
+- newcomers.NewClients.read_beid : visible for 120 200 300 admin
 - pcsw.AllClients.find_by_beid : visible for 110 410 admin
 - pcsw.AllClients.read_beid : visible for 110 410 admin
 - pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
