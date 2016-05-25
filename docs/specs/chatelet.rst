@@ -307,7 +307,7 @@ Each window layout defines a given set of fields.
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
-- courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+- courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, EnrolmentsByCourse
 - courses.Courses.insert : start_date, line, teacher
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
