@@ -22,7 +22,7 @@ Database structure
 
 >>> print(analyzer.show_database_structure())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- accounts.Account : id, ref, seqno, name, group, type, needs_partner, clearable, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, clearings_allowed
+- accounts.Account : id, ref, seqno, name, group, type, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, clearings_allowed
 - accounts.Group : id, name, ref, account_type, name_fr, name_en
 - addresses.Address : id, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, data_source, address_type, partner, remark, primary
 - aids.AidType : id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template, name_fr, name_en, excerpt_title_fr, excerpt_title_en
@@ -88,10 +88,10 @@ Database structure
 - dupable_clients.Word : id, word, owner
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
-- finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, balance1, balance2
-- finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
-- finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark
-- finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, voucher, date
+- finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
+- finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
+- finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark, last_item_date
+- finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
 - finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - fse.ClientSummary : id, printed_by, year, month, fse10, fse20, fse21, fse30, fse40, fse41, fse42, fse43, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark

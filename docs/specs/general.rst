@@ -41,7 +41,7 @@ The following table gives an overview of these things.
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               15        26
+ accounts.Account               accounts.Accounts               16        26
  accounts.Group                 accounts.Groups                 7         6
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        179
@@ -116,9 +116,9 @@ The following table gives an overview of these things.
  dupable_clients.Word           dupable_clients.Words           3         131
  excerpts.Excerpt               excerpts.Excerpts               12        69
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        21
- finan.BankStatement            finan.BankStatements            15        0
+ finan.BankStatement            finan.BankStatements            16        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
- finan.JournalEntry             finan.FinancialVouchers         14        0
+ finan.JournalEntry             finan.FinancialVouchers         15        0
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             15        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90

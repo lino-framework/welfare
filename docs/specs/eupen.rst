@@ -283,7 +283,7 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.Accounts.detail : ref, group, type, id, name, name_fr, name_en, needs_partner, clearable, MovementsByAccount
+- accounts.Accounts.detail : ref, group, type, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
 - accounts.Accounts.insert : ref, group, type, name, name_fr, name_en
 - accounts.Groups.detail : ref, name, name_fr, name_en, account_type, id
 - accounts.Groups.insert : name, name_fr, name_en, account_type, ref
