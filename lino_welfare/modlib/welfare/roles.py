@@ -82,9 +82,11 @@ class Supervisor(Supervisor, OfficeOperator, ContactsStaff, AidsStaff,
     pass
 
 
-class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator):
-    """A **newcomers reception clerk** is a *reception clerk* who also
-    can assign coaches to clients.
+class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
+                                DebtsUser):
+    """A **newcomers integration agent** is an *integration agent* who
+    also can assign coaches to clients and create budgets for debts
+    mediation.
 
     """
     pass

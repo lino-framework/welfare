@@ -184,10 +184,10 @@ profiles that can see it.
 >>> from lino_xl.lib.beid.mixins import FindByBeIdAction
 >>> print(analyzer.show_action_permissions(FindByBeIdAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- debts.Clients.find_by_beid : visible for 300 admin
+- debts.Clients.find_by_beid : visible for 120 300 admin
 - integ.Clients.find_by_beid : visible for 100 110 120 admin
 - newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- newcomers.NewClients.find_by_beid : visible for 200 300 admin
+- newcomers.NewClients.find_by_beid : visible for 120 200 300 admin
 - pcsw.AllClients.find_by_beid : visible for 110 410 admin
 - pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
 - pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
@@ -263,20 +263,20 @@ see it.
 - debts.Accounts.duplicate : visible for admin
 - debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - debts.Actors.duplicate : visible for admin
-- debts.ActorsByBudget.duplicate : visible for 300 admin
-- debts.ActorsByPartner.duplicate : visible for 300 admin
-- debts.AssetsByBudget.duplicate : visible for 300 admin
+- debts.ActorsByBudget.duplicate : visible for 120 300 admin
+- debts.ActorsByPartner.duplicate : visible for 120 300 admin
+- debts.AssetsByBudget.duplicate : visible for 120 300 admin
 - debts.Budgets.duplicate : visible for admin
-- debts.BudgetsByPartner.duplicate : visible for 300 admin
-- debts.DistByBudget.duplicate : visible for 300 admin
+- debts.BudgetsByPartner.duplicate : visible for 120 300 admin
+- debts.DistByBudget.duplicate : visible for 120 300 admin
 - debts.Entries.duplicate : visible for admin
 - debts.EntriesByAccount.duplicate : visible for admin
-- debts.EntriesByBudget.duplicate : visible for 300 admin
-- debts.EntriesByType.duplicate : visible for 300 admin
-- debts.ExpensesByBudget.duplicate : visible for 300 admin
-- debts.IncomesByBudget.duplicate : visible for 300 admin
-- debts.LiabilitiesByBudget.duplicate : visible for 300 admin
-- debts.MyBudgets.duplicate : visible for 300 admin
+- debts.EntriesByBudget.duplicate : visible for 120 300 admin
+- debts.EntriesByType.duplicate : visible for 120 300 admin
+- debts.ExpensesByBudget.duplicate : visible for 120 300 admin
+- debts.IncomesByBudget.duplicate : visible for 120 300 admin
+- debts.LiabilitiesByBudget.duplicate : visible for 120 300 admin
+- debts.MyBudgets.duplicate : visible for 120 300 admin
 - excerpts.AllExcerpts.duplicate : visible for admin
 - excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

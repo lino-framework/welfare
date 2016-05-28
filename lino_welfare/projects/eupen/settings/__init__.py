@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,6 +16,15 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 """Main settings module for `lino_welfare.projects.eupen`.
+
+.. autosummary::
+   :toctree:
+
+   demo
+   doctests
+   memory
+   mysql
+
 """
 
 from __future__ import print_function

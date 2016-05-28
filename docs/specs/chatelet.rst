@@ -57,7 +57,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               11        0
+ accounts.Account               accounts.Accounts               12        0
  accounts.Group                 accounts.Groups                 7         0
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        90
@@ -245,7 +245,7 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.Accounts.detail : ref, group, type, id, name, name_nl, name_de, name_en, needs_partner, clearable
+- accounts.Accounts.detail : ref, group, type, id, name, name_nl, name_de, name_en, needs_partner, clearable, default_amount
 - accounts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
 - accounts.Groups.detail : ref, name, name_nl, name_de, name_en, account_type, id
 - accounts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
@@ -307,7 +307,7 @@ Each window layout defines a given set of fields.
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
-- courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+- courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, EnrolmentsByCourse
 - courses.Courses.insert : start_date, line, teacher
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
@@ -564,7 +564,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - outbox.Mails.detail : visible for 110 410 admin
 - outbox.Mails.insert : visible for 110 410 admin
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin
-- pcsw.ClientStates.wf1 : visible for 200 300 admin
+- pcsw.ClientStates.wf1 : visible for 120 200 300 admin
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

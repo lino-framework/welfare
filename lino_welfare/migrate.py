@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2015 Luc Saffre
+# Copyright 2011-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,12 +16,11 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
-This is a real-world example of how the application developer
+"""This is a real-world example of how the application developer
 can provide automatic data migrations for :ref:`dpy`.
 
-This module is used because a :ref:`welfare`
-Site has :setting:`migration_class` set to
+This module is used because a :ref:`welfare` Site has
+:attr:`migration_class <lino.core.site.Site.migration_class>` set to
 ``"lino_welfare.migrate.Migrator"``.
 
 """

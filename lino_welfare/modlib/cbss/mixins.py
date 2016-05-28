@@ -145,12 +145,12 @@ The raw XML response received.
         do_print = mixins.DirectPrintAction()
 
     def on_duplicate(self, ar, master):
-        """
-        When duplicating a CBSS request, we want re-execute it. 
-        So please duplicate only the parameters, 
-        not the execution data like `ticket`, `sent` and `status`.
-        Note that also the `user` will be set to the user who asked to duplicate
-        (because this is a subclass of `UserAuthored`.
+        """When duplicating a CBSS request, we want re-execute it.  So please
+        duplicate only the parameters, not the execution data like
+        `ticket`, `sent` and `status`.  Note that also the `user` will
+        be set to the user who asked to duplicate (because this is a
+        subclass of `UserAuthored`.
+
         """
         self.user = ar.get_user()
         self.debug_messages = ''
