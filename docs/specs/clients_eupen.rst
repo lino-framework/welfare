@@ -29,9 +29,6 @@ the :class:`ClientDetail
 <lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail>` of a
 Lino Welfare à la Eupen.
 
-Some panels are not visible to everybody. Their modified visibility is marked 
-between brackets (e.g. `[visible for all except anonymous, 210]`).
-
 .. py2rst::
     from lino.api.doctest import *
     from lino.utils.diag import py2rst
@@ -134,3 +131,33 @@ between brackets (e.g. `[visible for all except anonymous, 210]`).
       - **Ist Hauptpartner in folgenden Budgets:** (debts.BudgetsByPartner)
       - **Ist Akteur in folgenden Budgets:** (debts.ActorsByPartner)
     <BLANKLINE>
+
+
+Some panels are not visible to everybody. Their visibility is marked
+between brackets (e.g. `[visible for all except anonymous, 210]`).
+
+The window itself is visible to everybody:
+
+>>> ui = dd.plugins.extjs
+>>> lh = rt.models.pcsw.Clients.detail_layout.get_layout_handle(ui)
+>>> lh.main
+<TabPanel main in ClientDetail on pcsw.Clients>
+>>> lh.main.required_roles
+set([])
+
+>>> lh['general'].required_roles
+set([])
+
+But the "Miscellaneous" tab is visible only to users having either the
+:class:`SocialStaff <lino_welfare.modlib.pcsw.roles.SocialStaff>` or
+the :class:`ContactsStaff <lino.modlib.contacts.roles.ContactsStaff>`
+role:
+
+>>> misc = lh['misc']
+>>> misc
+<Panel misc in ClientDetail on pcsw.Clients>
+>>> misc.required_roles
+set([(<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>, <class 'lino.modlib.contacts.roles.ContactsStaff'>)])
+
+
+

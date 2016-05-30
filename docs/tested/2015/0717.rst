@@ -27,7 +27,7 @@ occured while working on ticket :ticket:`340`.
 LayoutHandle for ParamsLayout on cal.Subscriptions has no variables
 
 
->>> from lino.utils.jsgen import with_user_profile
+>>> from lino.core.widgets import with_user_profile
 >>> class W:
 ...     def write(self, s):
 ...         pass
