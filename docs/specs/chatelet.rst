@@ -635,7 +635,7 @@ Romain
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
   - BCSS : Secteurs, Codes fonction
-  - Médiation de dettes : Groupes de comptes, Comptes, Master budget
+  - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
   - Questionnaires : Listes de choix
 - Explorateur :
   - Système : types de contenu, Procurations, Profils d'utilisateur, Notifications, Changes, Tests de données, Problèmes de données

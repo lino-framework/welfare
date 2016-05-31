@@ -31,6 +31,7 @@ import decimal
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
+from django.utils.encoding import force_text
 
 from lino.api import dd
 from lino.core.constants import _handle_attr_name
@@ -543,14 +544,15 @@ class SummaryTable(dd.VirtualTable):
 
     @dd.displayfield(_("Description"))
     def desc(self, row, ar):
-        return row[0]
+        # print("20160531 get_data_rows", force_text(row[0]))
+        return force_text(row[0])
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, row, ar):
         return row[1]
 
     @classmethod
-    def get_sum_text(self, ar):
+    def get_sum_text(self, ar, sums):
         """
         Return the text to display on the totals row.
         """
@@ -574,40 +576,51 @@ class ResultByBudget(SummaryTable):
         budget = ar.master_instance
         if budget is None:
             return
-        yield ["Monatliche Einkünfte", budget.sum('amount', 'I', periods=1)]
+        yield [_("Monthly incomes"), budget.sum('amount', 'I', periods=1)]
+        # yield ["Monatliche Einkünfte", budget.sum('amount', 'I', periods=1)]
         if budget.include_yearly_incomes:
             yi = budget.sum('amount', 'I', periods=12)
             if yi:
-                yield [
-                    ("Jährliche Einkünfte (%s / 12)"
-                     % dd.decfmt(yi * 12, places=2)),
-                    yi]
+                # txt = "Jährliche Einkünfte (%s / 12)"
+                txt = _("Yearly incomes ({0} / 12)")
+                txt = txt.format(dd.decfmt(yi * 12, places=2))
+                yield [txt, yi]
 
         a = budget.sum('amount', 'I', exclude=dict(periods__in=(1, 12)))
-        yield ["Einkünfte mit sonstiger Periodizität", a]
+        # yield ["Einkünfte mit sonstiger Periodizität", a]
+        yield [_("Incomes with other periodicity"), a]
 
-        yield ["Monatliche Ausgaben", -budget.sum('amount', 'E', periods=1)]
-        yield ["Ausgaben mit sonstiger Periodizität",
-               -budget.sum('amount', 'E', exclude=dict(periods__in=(1, 12)))]
+        # yield ["Monatliche Ausgaben", -budget.sum('amount', 'E', periods=1)]
+        yield [_("Monthly expenses"), -budget.sum('amount', 'E', periods=1)]
+
+        a = - budget.sum('amount', 'E', exclude=dict(periods__in=(1, 12)))
+        # yield ["Ausgaben mit sonstiger Periodizität", a]
+        yield [_("Expenses with other periodicity"), a]
 
         ye = budget.sum('amount', 'E', periods=12)
         if ye:
-            yield [
-                ("Monatliche Reserve für jährliche Ausgaben (%s / 12)"
-                 % dd.decfmt(ye * 12, places=2)),
-                -ye]
+            txt = _("Monthly reserve for yearly expenses ({0} / 12)")
+            txt = txt.format(dd.decfmt(ye * 12, places=2))
+            yield [txt, -ye]
+            # yield [
+            #     ("Monatliche Reserve für jährliche Ausgaben (%s / 12)"
+            #      % dd.decfmt(ye * 12, places=2)),
+            #     -ye]
 
-        #~ ye = budget.sum('amount','E',models.Q(periods__ne=1) & models.Q(periods__ne=12))
-        #~ if ye:
-            #~ yield [
-              #~ u"Monatliche Reserve für sonstige periodische Ausgaben",
-              #~ -ye]
+        # ye = budget.sum('amount','E',models.Q(periods__ne=1) & models.Q(periods__ne=12))
+        # if ye:
+        #     yield [
+        #       u"Monatliche Reserve für sonstige periodische Ausgaben",
+        #       -ye]
 
-        yield ["Raten der laufenden Kredite", -budget.sum('monthly_rate', 'L')]
+        # yield ["Raten der laufenden Kredite",
+        yield [_("Monthly installment for running credits"),
+               -budget.sum('monthly_rate', 'L')]
 
     @classmethod
-    def get_sum_text(self, ar):
-        return "Restbetrag für Kredite und Zahlungsrückstände"
+    def get_sum_text(self, ar, sums):
+        return _("Remaining for credits and debts")
+        # return _("Restbetrag für Kredite und Zahlungsrückstände")
 
 
 class DebtsByBudget(SummaryTable):

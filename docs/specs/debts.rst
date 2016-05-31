@@ -487,14 +487,14 @@ Bailiffs and cash collectors
 Incomes & Expenses
 ------------------
 <BLANKLINE>
-========================================================= ==============
- Description                                               Amount
---------------------------------------------------------- --------------
- Monatliche Einkünfte                                      4 600,00
- Monatliche Ausgaben                                       -543,00
- Monatliche Reserve für jährliche Ausgaben (257,00 / 12)   -21,42
- **Restbetrag für Kredite und Zahlungsrückstände**         **4 035,58**
-========================================================= ==============
+=================================================== ==============
+ Description                                         Amount
+--------------------------------------------------- --------------
+ Monthly incomes                                     4 600,00
+ Monthly expenses                                    -543,00
+ Monthly reserve for yearly expenses (257,00 / 12)   -21,42
+ **Remaining for credits and debts**                 **4 035,58**
+=================================================== ==============
 <BLANKLINE>
 -----------
 Liabilities
