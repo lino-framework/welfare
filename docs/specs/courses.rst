@@ -55,13 +55,13 @@ Course offers
 =============
 
 >>> ses.show(courses.CourseOffers)
-==== ========================= =========== ============= ============== ==============
- ID   Name                      Gastrolle   Kursinhalt    Kursanbieter   Beschreibung
----- ------------------------- ----------- ------------- -------------- --------------
+==== ========================= =========== ============= ============== =============
+ ID   Name                      Gastrolle   Kursinhalt    Kursanbieter   description
+---- ------------------------- ----------- ------------- -------------- -------------
  1    Deutsch für Anfänger                  Deutsch       Oikos
  2    Deutsch für Anfänger                  Deutsch       KAP
  3    Français pour débutants               Französisch   KAP
-==== ========================= =========== ============= ============== ==============
+==== ========================= =========== ============= ============== =============
 <BLANKLINE>
 
 >>> ses.show(courses.CourseRequests)  #doctest: +ELLIPSIS

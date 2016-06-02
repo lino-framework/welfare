@@ -148,7 +148,7 @@ The following table gives an overview of these things.
  ledger.AccountingPeriod        ledger.AccountingPeriods        7         6
  ledger.Journal                 ledger.Journals                 21        4
  ledger.MatchRule               ledger.MatchRules               3         2
- ledger.Movement                ledger.Movements                10        320
+ ledger.Movement                ledger.Movements                11        320
  ledger.PaymentTerm             ledger.PaymentTerms             9         7
  ledger.Voucher                 ledger.Vouchers                 9         48
  newcomers.Broker               newcomers.Brokers               2         2

@@ -117,12 +117,12 @@ part of :mod:`lino.utils.jsgen`, which is a general framework for
 generating Javascript.
 
 It uses functions like 
-:func:`with_user_profile <lino.core.widgets.with_user_profile>`,
+:func:`with_user_profile <lino.utils.jsgen.with_user_profile>`,
 :func:`declare_vars <lino.utils.jsgen.declare_vars>` and
 :func:`py2js <lino.utils.jsgen.py2js>`.
 
 >>> from lino.utils.jsgen import py2js, declare_vars
->>> from lino.core.widgets import with_user_profile
+>>> from lino.utils.jsgen import with_user_profile
 
 
 >>> ses = rt.login("robin")

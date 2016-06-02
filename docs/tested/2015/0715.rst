@@ -16,7 +16,7 @@ Reception clerk sees "Career" tab
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
-    >>> from lino.core.widgets import with_user_profile
+    >>> from lino.utils.jsgen import with_user_profile
 
 This document helped us to understand and solve ticket :ticket:`340`
 (discovered :blogref:`20150714`).
@@ -102,7 +102,7 @@ competences contracts history calendar MovementsByProject misc debts
 Lino filters them away only when generating the js files, py2js and
 declare_vars:
 
->>> from lino.core.widgets import with_user_profile
+>>> from lino.utils.jsgen import with_user_profile
 >>> from lino.utils.jsgen import py2js, declare_vars
 >>> def f():
 ...     print(py2js(lh.main.elements))
@@ -111,7 +111,7 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel797, contact_panel825, coaching_panel1047, aids_tab_panel1147, work_tab_1_panel1180, history_panel1908 ]
+[ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
 
 .. before 20160530: [ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
 
