@@ -209,18 +209,25 @@ admitted for payment (i.e. a disbursement instruction (AAW) has been
 registered), but the payment has not yet been executed.
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-========== ========== ==================================================================== ======= =========== ============ ==============
- Valuta     Beleg      Beschreibung                                                         Debit   Kredit      Match        Ausgeglichen
----------- ---------- -------------------------------------------------------------------- ------- ----------- ------------ --------------
- 22.05.14   *AAW 19*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*           5,33        **REG 19**   Nein
- 22.05.14   *AAW 21*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*            5,33        **REG 12**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                 5,33        **SREG 3**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                             10,00       **SREG 3**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                          25,00       **SREG 3**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                             12,50       **SREG 3**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                29,95       **SREG 3**   Nein
-                       **Saldo -93.44 (7 Bewegungen)**                                              **93,44**
-========== ========== ==================================================================== ======= =========== ============ ==============
+**7 open movements (-93.44 €)**
+
+>>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner, nosummary=True)
+========== ========== ==================================================================== =========== ============ ============ ==============
+ Valuta     Beleg      Beschreibung                                                         Debit       Kredit       Match        Ausgeglichen
+---------- ---------- -------------------------------------------------------------------- ----------- ------------ ------------ --------------
+ 22.05.14   *AAW 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19**   Ja
+ 22.05.14   *AAW 19*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*               5,33         **REG 19**   Nein
+ 22.05.14   *AAW 21*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12**   Ja
+ 22.05.14   *AAW 21*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*                5,33         **REG 12**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **SREG 3**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                                 10,00        **SREG 3**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                              25,00        **SREG 3**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                                 12,50        **SREG 3**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    29,95        **SREG 3**   Nein
+ 26.02.14   *REG 12*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **REG 12**   Ja
+ 07.01.14   *REG 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    5,33         **REG 19**   Ja
+                       **Saldo -93.44 (11 Bewegungen)**                                     **10,66**   **104,10**
+========== ========== ==================================================================== =========== ============ ============ ==============
 <BLANKLINE>
 
 Let's look at one of these movements via its client.
