@@ -152,6 +152,9 @@ class SpecsTests(TestCase):
     def test_aids(self):
         return self.run_simple_doctests('docs/specs/aids.rst')
 
+    def test_fse(self):
+        return self.run_simple_doctests('docs/specs/fse.rst')
+
     def test_pcsw(self):
         return self.run_simple_doctests('docs/specs/pcsw.rst')
 

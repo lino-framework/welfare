@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, plausibility, tinymce.
+58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, fse, beid, davlink, export_excel, plausibility, tinymce.
 132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -340,8 +340,6 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
-- fse.Summaries.insert : master, education_level, result, remark
-- fse.SummariesByClient.insert : education_level, result, remark
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -383,7 +381,7 @@ Each window layout defines a given set of fields.
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
 - pcsw.ClientStates.wf1 : reason, remark
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, SummariesByClient, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, reason
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
@@ -523,8 +521,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- fse.Summaries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- fse.SummariesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
+"""Defines database models for this plugin.
 """
 
 from __future__ import unicode_literals
@@ -36,6 +36,10 @@ from .choicelists import ParticipationCertificates, StatisticalFields
 
 
 class ClientSummary(Certifiable, Summary):
+    """An **FSE summary** is a database object which represents one "fiche
+    stagiaire".
+
+    """
 
     class Meta:
         verbose_name = _("FSE Summary")
@@ -89,6 +93,8 @@ class ClientSummary(Certifiable, Summary):
 
 
 class Summaries(dd.Table):
+    """Base class for all tables on :class:`Summary`.
+    """
     model = 'fse.ClientSummary'
     detail_layout = """
     master year month
@@ -96,14 +102,16 @@ class Summaries(dd.Table):
     education_level result remark
     results
     """
-    insert_layout = """
-    master
-    education_level result
-    remark
-    """
+    allow_create = False
+    # insert_layout = """
+    # master
+    # education_level result
+    # remark
+    # """
 
 
 class AllSummaries(Summaries):
+    """Lists all FSE summaries for all clients."""
     required_roles = dd.required(dd.SiteStaff)
 
 
@@ -111,10 +119,11 @@ class SummariesByClient(Summaries):
     """Lists the FSE summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
-    insert_layout = """
-    education_level result
-    remark
-    """
+    slave_grid_format = 'html'
+    # insert_layout = """
+    # education_level result
+    # remark
+    # """
 
     @classmethod
     def setup_columns(cls):

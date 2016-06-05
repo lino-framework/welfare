@@ -29,7 +29,7 @@ class Plugin(ad.Plugin):
 
     verbose_name = _("FSE")
 
-    needs_plugins = ['lino.modlib.summaries', 'lino.modlib.wkhtmltopdf']
+    needs_plugins = ['lino.modlib.summaries', 'lino.modlib.weasyprint']
 
     # def setup_config_menu(self, site, profile, m):
     #     mg = site.plugins.integ

@@ -45,7 +45,7 @@ Here is a more complete list of excerpt types:
  *finan.BankStatement (Kontoauszug)*                     Ja       Ja              Kontoauszug
  *finan.JournalEntry (Diverse Buchung)*                  Ja       Ja              Diverse Buchung
  *finan.PaymentOrder (Zahlungsauftrag)*                  Ja       Ja              Zahlungsauftrag
- *fse.ClientSummary (FSE Summary)*                       Ja       Ja              Training report             WkBuildMethod
+ *fse.ClientSummary (FSE Summary)*                       Ja       Ja              Training report             WeasyPdfBuildMethod
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
  *pcsw.Client (Klient)*                                  Ja       Nein            Aktenblatt                                         file_sheet.odt

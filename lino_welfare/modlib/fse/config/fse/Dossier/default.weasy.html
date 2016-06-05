@@ -1,0 +1,84 @@
+{% extends "fse/Dossier/base.weasy.html" %}
+{%- block head %}
+{{ super() }}
+<style type="text/css">
+table {
+    border-collapse: collapse;
+}
+table, td, th {
+    border: 1px solid black;
+}
+body { 
+    font-family: "Liberation sans", "arial";
+    font-size: 10pt;
+}
+
+p { 
+    padding: 0;
+    margin: 0;  
+}
+
+@page {
+    margin: 10mm; margin-top: 15mm; margin-bottom: 15mm; 
+    size: landscape;
+    @bottom-right {
+        content: counter(page) "/" counter(pages);
+    }
+}
+
+
+@media print {
+  tr.avoid {
+    page-break-inside: avoid !important;
+  } 
+}
+@media screen {
+    div.footer_div {
+        display: none;
+    }
+}
+@media print {
+    div.footer_div {
+        position: fixed;
+        bottom: -5mm;
+        width: 100%;
+        border-top: solid 1pt;
+        padding: 2pt;
+    }
+}
+
+</style>
+{%- endblock %}
+<body>
+
+Yes, {{obj}}.
+
+<table>
+<tr>
+<td width="50%">
+<ul>
+{% for k in ('client', 'education_level', 'children_at_charge') %}
+<li>
+{{obj._meta.get_field(k).verbose_name}} : {{getattr(obj, k)}}
+</li>
+{% endfor %}
+</ul>
+</td>
+
+<td width="50%">
+<ul>
+{% for k in ('children_at_charge', 'certified_handicap', 'other_difficulty') %}
+<li>
+{% if getattr(obj, k) %}
+&#x2611;
+{% else %}
+&#x2610;
+{% endif %}
+{{obj._meta.get_field(k).verbose_name}}
+</li>
+{% endfor %}
+</ul>
+</td>
+</table>
+
+</body>

@@ -383,8 +383,6 @@ Each window layout defines a given set of fields.
 - finan.FinancialVouchers.insert : voucher_date, narration
 - finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
-- fse.Summaries.insert : master, education_level, result, remark
-- fse.SummariesByClient.insert : education_level, result, remark
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -569,8 +567,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - finan.FinancialVouchers.insert : visible for 500 510 admin
 - finan.PaymentOrders.detail : visible for 500 510 admin
 - fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- fse.Summaries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- fse.SummariesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

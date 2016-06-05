@@ -4,15 +4,9 @@
 Statistiques pour le Fonds Social Européen
 ==========================================
 
-This is a first draft of a functional specification for a project to
-be implemented as a new plugin :mod:`lino_welfare.modlib.fse`.
-
-Ticket :ticket:`584` is to write a first prototype.
-
-
 ..  To test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_aids
+    $ python setup.py test -s tests.SpecsTests.test_fse
 
     doctest initialization:
 
@@ -21,17 +15,31 @@ Ticket :ticket:`584` is to write a first prototype.
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
+This is (a first draft) of the functional specification for the
+:mod:`lino_welfare.modlib.fse` plugin which helps generating yearly
+reports for the `ESF
+<http://ec.europa.eu/esf/main.jsp?catId=35&langId=en>`_.
+
+Ticket :ticket:`584` is to write a first prototype.
+
+
 .. contents::
    :local:
    :depth: 2
+
+The :mod:`lino_welfare.modlib.fse` plugin needs
+:mod:`lino.modlib.summaries` and :mod:`lino.modlib.weasyprint`:
+
+>>> dd.plugins.fse.needs_plugins
+['lino.modlib.summaries', 'lino.modlib.weasyprint']
 
 
 Dossier
 =======
 
-There will be one central database object model (:class:`Dossier
-<lino_welfare.modlib.fse.models.Dossier>`). Every *dossier* represents
-a document to be printed as "Fiche stagiaire".  
+The plugin adds one central database object model called
+:class:`Dossier <lino_welfare.modlib.fse.models.Dossier>`. Every
+*dossier* represents a document to be printed as "Fiche stagiaire".
 
 List of the data fields per *dossier*:
 

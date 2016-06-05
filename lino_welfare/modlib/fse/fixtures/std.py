@@ -26,7 +26,7 @@ def objects():
 
     ExcerptType = rt.modules.excerpts.ExcerptType
     kw = dict(
-        build_method='wkhtmltopdf',
+        build_method='weasy2pdf',
         certifying=True)
     kw.update(dd.str2kw('name', _("Training report")))
     yield ExcerptType.update_for_model('fse.ClientSummary', **kw)

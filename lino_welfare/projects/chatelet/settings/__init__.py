@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -28,6 +28,8 @@ class Site(Site):
     # verbose_name = "Lino pour CPAS"
     languages = "fr nl de en"
     # hidden_languages = None
+
+    # strict_choicelist_values = False
 
     demo_fixtures = """std std2 few_languages props all_countries
     demo cbss mini demo2 checksummaries local""".split()
