@@ -209,7 +209,7 @@ admitted for payment (i.e. a disbursement instruction (AAW) has been
 registered), but the payment has not yet been executed.
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-**7 open movements (-93.44 €)**
+**7 offene Bewegungen (-93.44 €)**
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner, nosummary=True)
 ========== ========== ==================================================================== =========== ============ ============ ==============

@@ -87,7 +87,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, FSE Summaries
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, ESF Summaries
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
@@ -372,6 +372,7 @@ Each window layout defines a given set of fields.
 - debts.Budgets.insert : partner, date, user
 - debts.Groups.detail : ref, name, name_fr, name_en, id, account_type, entries_layout
 - debts.Groups.insert : name, name_fr, name_en, account_type, ref
+- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
@@ -382,7 +383,6 @@ Each window layout defines a given set of fields.
 - finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - finan.FinancialVouchers.insert : voucher_date, narration
 - finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
-- fse.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
@@ -556,6 +556,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - debts.Budgets.insert : visible for admin
 - debts.Groups.detail : visible for admin
 - debts.Groups.insert : visible for admin
+- esf.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - excerpts.ExcerptTypes.detail : visible for admin
 - excerpts.ExcerptTypes.insert : visible for admin
 - excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
@@ -566,7 +567,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - finan.FinancialVouchers.detail : visible for 500 510 admin
 - finan.FinancialVouchers.insert : visible for 500 510 admin
 - finan.PaymentOrders.detail : visible for 500 510 admin
-- fse.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - gfks.ContentTypes.insert : visible for admin
 - households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin

@@ -1,0 +1,37 @@
+{% extends "esf/ClientSummary/base.weasy.html" %}
+{%- block main %}
+{{ super() }}
+
+Yes, {{obj}}.
+
+<table>
+<tr>
+<td width="50%">
+<ul>
+{% for k in ('master', 'education_level') %}
+<li>
+{{obj._meta.get_field(k).verbose_name}} : {{getattr(obj, k)}}
+</li>
+{% endfor %}
+</ul>
+</td>
+
+<td width="50%">
+<ul>
+{% for k in ('children_at_charge', 'certified_handicap', 'other_difficulty') %}
+<li>
+{% if getattr(obj, k) %}
+&#x2611;
+{% else %}
+&#x2610;
+{% endif %}
+{{obj._meta.get_field(k).verbose_name}}
+</li>
+{% endfor %}
+</ul>
+</td>
+</table>
+
+{{E.tostring(obj._meta.get_field('results').value_from_object(obj, ar))}}
+
+{%- endblock %}

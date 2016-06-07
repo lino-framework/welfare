@@ -23,7 +23,7 @@ Plugins which have been written specifically for Lino Welfare:
     aids
     badges
     immersion
-    fse
+    esf
 
 The following plugins are extensions of their respective version in
 :mod:`lino.modlib`:

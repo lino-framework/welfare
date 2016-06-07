@@ -1,4 +1,5 @@
 .. _welfare.specs.fse:
+.. _welfare.specs.esf:
 
 ==========================================
 Statistiques pour le Fonds Social Européen
@@ -6,7 +7,7 @@ Statistiques pour le Fonds Social Européen
 
 ..  To test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_fse
+    $ python setup.py test -s tests.SpecsTests.test_esf
 
     doctest initialization:
 
@@ -16,7 +17,7 @@ Statistiques pour le Fonds Social Européen
     >>> from lino.api.doctest import *
 
 This is (a first draft) of the functional specification for the
-:mod:`lino_welfare.modlib.fse` plugin which helps generating yearly
+:mod:`lino_welfare.modlib.esf` plugin which helps generating yearly
 reports for the `ESF
 <http://ec.europa.eu/esf/main.jsp?catId=35&langId=en>`_.
 
@@ -27,10 +28,10 @@ Ticket :ticket:`584` is to write a first prototype.
    :local:
    :depth: 2
 
-The :mod:`lino_welfare.modlib.fse` plugin needs
+The :mod:`lino_welfare.modlib.esf` plugin needs
 :mod:`lino.modlib.summaries` and :mod:`lino.modlib.weasyprint`:
 
->>> dd.plugins.fse.needs_plugins
+>>> dd.plugins.esf.needs_plugins
 ['lino.modlib.summaries', 'lino.modlib.weasyprint']
 
 
@@ -38,8 +39,12 @@ Dossier
 =======
 
 The plugin adds one central database object model called
-:class:`Dossier <lino_welfare.modlib.fse.models.Dossier>`. Every
-*dossier* represents a document to be printed as "Fiche stagiaire".
+:class:`Client summary
+<lino_welfare.modlib.esf.models.ClientSummary>`. Every *client
+summary* represents a document to be printed as "Fiche stagiaire".
+
+A client summary is a subclass of
+:class:`lino.modlib.summaries.mixins.Summary`
 
 List of the data fields per *dossier*:
 

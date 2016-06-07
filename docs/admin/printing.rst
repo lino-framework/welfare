@@ -10,9 +10,8 @@ Configuring print templates
 
    Initialize doctest:
 
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
     
 
@@ -81,31 +80,31 @@ This is the list of excerpt types:
 >>> rt.show(excerpts.ExcerptTypes,
 ... column_names="content_type primary certifying template body_template")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================== ========= ============ ================= ================================
- Model                    Primary   Certifying   Template          Body template
------------------------- --------- ------------ ----------------- --------------------------------
- Income confirmation      Yes       Yes          Default.odt       certificate.body.html
- Refund confirmation      Yes       Yes          Default.odt       certificate.body.html
- Simple confirmation      Yes       Yes          Default.odt       certificate.body.html
- Art61 job supplyment     Yes       Yes                            contract.body.html
- Participant              Yes       No           Default.odt       presence_certificate.body.html
+======================== ========= ============ ============================= ================================
+ Model                    Primary   Certifying   Template                      Body template
+------------------------ --------- ------------ ----------------------------- --------------------------------
+ Income confirmation      Yes       Yes          Default.odt                   certificate.body.html
+ Refund confirmation      Yes       Yes          Default.odt                   certificate.body.html
+ Simple confirmation      Yes       Yes          Default.odt                   certificate.body.html
+ Art61 job supplyment     Yes       Yes                                        contract.body.html
+ Participant              Yes       No           Default.odt                   presence_certificate.body.html
  IdentifyPerson Request   Yes       Yes
  ManageAccess Request     Yes       Yes
  Tx25 Request             Yes       Yes
- Partner                  No        No                             payment_reminder.body.html
+ Partner                  No        No           payment_reminder.weasy.html
  Budget                   Yes       Yes
+ ESF Summary              Yes       Yes
  Bank Statement           Yes       Yes
  Journal Entry            Yes       Yes
  Payment Order            Yes       Yes
- FSE Summary              Yes       Yes
- Immersion training       Yes       Yes                            immersion.body.html
+ Immersion training       Yes       Yes                                        immersion.body.html
  ISIP                     Yes       Yes
  Art60§7 job supplyment   Yes       Yes
- Client                   No        No           Default.odt       pac.body.html
+ Client                   No        No           Default.odt                   pac.body.html
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt
  Client                   No        No           eid-content.odt
-======================== ========= ============ ================= ================================
+======================== ========= ============ ============================= ================================
 <BLANKLINE>
 
 

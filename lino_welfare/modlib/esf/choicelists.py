@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Choicelists for `lino_welfare.modlib.fse`.
+"""Choicelists for `lino_welfare.modlib.esf`.
 
 """
 from __future__ import unicode_literals
@@ -41,18 +41,18 @@ class StatisticalField(dd.Choice):
     def __init__(self, value, text, name=None, **kwargs):
         super(StatisticalField, self).__init__(value, text, name, **kwargs)
         self.field = models.IntegerField(value, default=0, help_text=text)
-        self.field_name = "fse" + value
+        self.field_name = "esf" + value
 
     def collect_value_from_guest(self, obj):
-        sf = obj.event.event_type.fse_field
+        sf = obj.event.event_type.esf_field
         if sf is not None and sf.value == self.value:
             return 1
         return 0
 
 
 class StatisticalFields(dd.ChoiceList):
-    verbose_name = _("FSE field")
-    verbose_name_plural = _("FSE fields")
+    verbose_name = _("ESF field")
+    verbose_name_plural = _("ESF fields")
     item_class = StatisticalField
 
 add = StatisticalFields.add_item
@@ -70,7 +70,7 @@ add('43', _("Math and French"))
 def inject_statistical_fields(sender, **kw):
     for sf in StatisticalFields.items():
         if sf.field_name is not None:
-            dd.inject_field('fse.ClientSummary', sf.field_name, sf.field)
+            dd.inject_field('esf.ClientSummary', sf.field_name, sf.field)
 
 dd.inject_field(
-    'cal.EventType', 'fse_field', StatisticalFields.field(blank=True))
+    'cal.EventType', 'esf_field', StatisticalFields.field(blank=True))

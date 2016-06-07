@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Copyright 2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
@@ -14,31 +15,18 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-
-"""Adds functionality to produce "fiches de stages" for the European
-Social Fund. See :doc:`/specs/fse`.
-
+"""
+Standard data for `lino_welfare.modlib.esf`.
 """
 
-from lino.api import ad, _
+from lino.api import dd, rt, _
 
 
-class Plugin(ad.Plugin):
+def objects():
 
-    """See :class:`lino.core.plugin.Plugin`. """
-
-    verbose_name = _("FSE")
-
-    needs_plugins = ['lino.modlib.summaries', 'lino.modlib.weasyprint']
-
-    # def setup_config_menu(self, site, profile, m):
-    #     mg = site.plugins.integ
-    #     m = m.add_menu(mg.app_label, mg.verbose_name)
-    #     m.add_action('badges.Badges')
-
-    def setup_explorer_menu(self, site, profile, m):
-        mg = site.plugins.integ
-        m = m.add_menu(mg.app_label, mg.verbose_name)
-        m.add_action('fse.AllSummaries')
-
-
+    ExcerptType = rt.modules.excerpts.ExcerptType
+    kw = dict(
+        build_method='weasy2pdf',
+        certifying=True)
+    kw.update(dd.str2kw('name', _("Training report")))
+    yield ExcerptType.update_for_model('esf.ClientSummary', **kw)
