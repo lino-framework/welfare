@@ -38,6 +38,15 @@ class Plugin(ad.Plugin):
     "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("Integration")
 
+    only_primary = False
+    """Whether to show only primary coachings in the dynamic ventilation
+    columns (coachings per :class:`PersonGroup
+    <lino_welfare.modlib.pcsw.models.PersonGroup>) of the
+    :class:`UsersWithClients
+    <lino_welfare.modlib.integ.models.UsersWithClients>` table.
+
+    """
+
     def setup_reports_menu(config, site, profile, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         #~ m.add_action(site.modules.jobs.OldJobsOverview)

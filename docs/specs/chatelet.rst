@@ -167,14 +167,14 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  pcsw.ClientContact             pcsw.ClientContacts             7         14
  pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
  pcsw.Coaching                  pcsw.Coachings                  8         90
- pcsw.CoachingEnding            pcsw.CoachingEndings            7         0
+ pcsw.CoachingEnding            pcsw.CoachingEndings            7         4
  pcsw.CoachingType              pcsw.CoachingTypes              8         3
  pcsw.Conviction                pcsw.Convictions                5         0
  pcsw.Dispense                  pcsw.Dispenses                  6         0
- pcsw.DispenseReason            pcsw.DispenseReasons            6         0
+ pcsw.DispenseReason            pcsw.DispenseReasons            6         4
  pcsw.Exclusion                 pcsw.Exclusions                 6         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
- pcsw.PersonGroup               pcsw.PersonGroups               4         0
+ pcsw.PersonGroup               pcsw.PersonGroups               4         5
  plausibility.Problem           plausibility.Problems           6         0
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0

@@ -148,6 +148,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.projects.chatelet.modlib.cv.fixtures',
     'lino_welfare.projects.chatelet.modlib.isip',
     'lino_welfare.projects.chatelet.modlib.pcsw',
+    'lino_welfare.projects.chatelet.modlib.pcsw.fixtures',
     'lino_welfare.projects.chatelet.settings',
     'lino_welfare.projects.chatelet.tests',
     'lino_welfare.projects.std',

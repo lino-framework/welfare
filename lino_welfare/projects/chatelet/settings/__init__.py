@@ -55,14 +55,13 @@ class Site(Site):
         kw.update(isip='lino_welfare.projects.chatelet.modlib.isip')
         return kw
 
-    # def setup_plugins(self):
-    #     """
-    #     Change the default value of certain plugin settings.
+    def setup_plugins(self):
+        """
+        Change the default value of certain plugin settings.
 
-    #     """
-    #     self.plugins.courses.configure(pupil_model='pcsw.Client')
-    #     # self.plugins.courses.configure(teacher_model='users.User')
-    #     super(Site, self).setup_plugins()
+        """
+        super(Site, self).setup_plugins()
+        # self.plugins.integ.configure(only_primary=True)
 
     # def get_default_language(self):
     #     return 'fr'

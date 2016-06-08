@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -18,13 +18,12 @@ from django.db.utils import DatabaseError
 from django.conf import settings
 
 from lino.utils.xmlgen.html import E
-from lino.modlib.users.choicelists import UserProfiles
 from lino.utils.report import Report
 from lino.mixins import ObservedPeriod
+from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.system.choicelists import PeriodEvents
 
 from lino.api import dd
-from lino.modlib.system.choicelists import PeriodEvents
-from lino.modlib.users.choicelists import UserProfiles
 from .roles import IntegrationAgent
 
 config = dd.plugins.integ
@@ -137,13 +136,6 @@ class Clients(pcsw.CoachedClients):
 class UsersWithClients(dd.VirtualTable):
     """An overview table for agents of the integration service.
 
-    Example data:
-
-    .. django2rst::
-
-      rt.show(integ.UsersWithClients)
-
-
 
     """
     required_roles = dd.required(IntegrationAgent)
@@ -191,16 +183,17 @@ class UsersWithClients(dd.VirtualTable):
 
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
-        t = settings.SITE.today()
+        t = dd.today()
         return Clients.request(param_values=dict(
             only_primary=True, coached_by=obj, start_date=t, end_date=t))
 
     @dd.requestfield(_("Active clients"))
     def active_clients(self, obj, ar):
         #~ return MyActiveClients.request(ar.ui,subst_user=obj)
-        t = settings.SITE.today()
+        t = dd.today()
         return Clients.request(param_values=dict(
-            only_active=True, coached_by=obj, start_date=t, end_date=t))
+            only_active=True, only_primary=True,
+            coached_by=obj, start_date=t, end_date=t))
 
 
 # @dd.receiver(dd.database_ready)
@@ -214,17 +207,19 @@ def on_database_ready(sender, **kw):
     self = UsersWithClients
     self.column_names = 'user:10'
     try:
-        for pg in pcsw.PersonGroup.objects.exclude(ref_name='').order_by('ref_name'):
+        for pg in pcsw.PersonGroup.objects.exclude(
+                ref_name='').order_by('ref_name'):
             def w(pg):
-                # we must evaluate `today` for each request, not only once when
-                # `database_ready`
-                today = settings.SITE.today()
+                # we must evaluate `today` for each request, not only
+                # once on server startup
+                today = dd.today()
+                pv = dict(group=pg, start_date=today, end_date=today)
+                if dd.plugins.integ.only_primary:
+                    pv.update(only_primary=True)
 
                 def func(self, obj, ar):
-                    return Clients.request(
-                        param_values=dict(
-                            group=pg,
-                            coached_by=obj, start_date=today, end_date=today))
+                    pv.update(coached_by=obj)
+                    return Clients.request(param_values=pv)
                 return func
             vf = dd.RequestField(w(pg), verbose_name=pg.name)
             self.add_virtual_field('G' + pg.ref_name, vf)
@@ -595,8 +590,8 @@ class ActivityReport(Report):
     @classmethod
     def param_defaults(self, ar, **kw):
         D = datetime.date
-        kw.update(start_date=D(D.today().year, 1, 1))
-        kw.update(end_date=D(D.today().year, 12, 31))
+        kw.update(start_date=D(dd.today().year, 1, 1))
+        kw.update(end_date=D(dd.today().year, 12, 31))
         return kw
 
     @classmethod
@@ -608,6 +603,8 @@ sections, des tables et du texte libre.
 Dans la version écran cliquer sur un chiffre pour voir d'où
 il vient.
 """)
+        yield E.h2(UsersWithClients.label)
+        yield UsersWithClients
         yield E.h2(_("Indicateurs généraux"))
         yield CompareRequestsTable
         yield E.p('.')

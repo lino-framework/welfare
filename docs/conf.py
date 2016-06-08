@@ -239,7 +239,7 @@ latex_documents = [
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
 
-extlinks.update(ticket=('http://bugs.lino-framework.org/ticket/%s', '#'))
+extlinks.update(ticket=('http://bugs.lino-framework.org/tickets/Ticket/%s', '#'))
 extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
 
 # extlinks = {
