@@ -44,6 +44,8 @@ class StatisticalField(dd.Choice):
         self.field_name = "esf" + value
 
     def collect_value_from_guest(self, obj):
+        if obj.event.event_type is None:
+            return 0
         sf = obj.event.event_type.esf_field
         if sf is not None and sf.value == self.value:
             return 1
