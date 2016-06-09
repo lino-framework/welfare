@@ -294,6 +294,7 @@ The state of a voucher
  10     draft        Entwurf
  20     registered   Registriert
  30     signed       Unterschrieben
+ 40     cancelled    Storniert
 ====== ============ ================
 <BLANKLINE>
 
@@ -313,7 +314,7 @@ The state of a voucher
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(vatless.Invoices)
     >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
-    <span><b>Registriert</b> &#8594; [Entregistrieren]</span>
+    <span><b>Registriert</b> &#8594; [Entwurf]</span>
     
 
 Movements
