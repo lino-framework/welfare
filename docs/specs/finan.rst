@@ -32,33 +32,33 @@ Disbursment orders
 The AAW journal contains the following statements:
 
 >>> rt.show(AAW.voucher_type.table_class, AAW)
-========= ============ ================================ =============== ================== =============
- Nr.       Belegdatum   Interne Referenz                 Total           Ausführungsdatum   Zustand
---------- ------------ -------------------------------- --------------- ------------------ -------------
- 22        13.04.14                                      -553,39                            Registriert
- 21        13.03.14                                      -585,84                            Registriert
- 20        13.02.14                                      -483,01                            Registriert
- 19        13.01.14                                      -350,61                            Registriert
- 6         22.05.14     Beihilfe für Ausländer           3 628,62                           Registriert
- 5         22.05.14     Sozialhilfe                      3 460,17                           Registriert
- 4         22.05.14     Eingliederungseinkommen          3 611,34                           Registriert
- 3         22.05.14     Fonds Gas und Elektrizität       3 356,17                           Registriert
- 2         22.05.14     Heizkosten- u. Energiebeihilfe   3 628,62                           Registriert
- 1         22.05.14     Allgemeine Beihilfen             3 460,17                           Registriert
- 12        22.04.14     Beihilfe für Ausländer           3 611,34                           Registriert
- 11        22.04.14     Sozialhilfe                      3 356,17                           Registriert
- 10        22.04.14     Eingliederungseinkommen          3 628,62                           Registriert
- 9         22.04.14     Fonds Gas und Elektrizität       3 460,17                           Registriert
- 8         22.04.14     Heizkosten- u. Energiebeihilfe   3 611,34                           Registriert
- 7         22.04.14     Allgemeine Beihilfen             3 356,17                           Registriert
- 18        23.03.14     Beihilfe für Ausländer           3 628,62                           Registriert
- 17        23.03.14     Sozialhilfe                      3 460,17                           Registriert
- 16        23.03.14     Eingliederungseinkommen          3 611,34                           Registriert
- 15        23.03.14     Fonds Gas und Elektrizität       3 356,17                           Registriert
- 14        23.03.14     Heizkosten- u. Energiebeihilfe   3 628,62                           Registriert
- 13        23.03.14     Allgemeine Beihilfen             3 460,17                           Registriert
+========= ============ ================================ =============== ================== ================= =================
+ Nr.       Belegdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Arbeitsablauf
+--------- ------------ -------------------------------- --------------- ------------------ ----------------- -----------------
+ 18        23.03.14     Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
+ 17        23.03.14     Sozialhilfe                      3 460,17                           2014-03           **Registriert**
+ 16        23.03.14     Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
+ 15        23.03.14     Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
+ 14        23.03.14     Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
+ 13        23.03.14     Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
+ 12        22.04.14     Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
+ 11        22.04.14     Sozialhilfe                      3 356,17                           2014-04           **Registriert**
+ 10        22.04.14     Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
+ 9         22.04.14     Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
+ 8         22.04.14     Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
+ 7         22.04.14     Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
+ 22        13.04.14                                      -553,39                            2014-05           **Registriert**
+ 21        13.03.14                                      -585,84                            2014-05           **Registriert**
+ 20        13.02.14                                      -483,01                            2014-05           **Registriert**
+ 19        13.01.14                                      -350,61                            2014-05           **Registriert**
+ 6         22.05.14     Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
+ 5         22.05.14     Sozialhilfe                      3 460,17                           2014-05           **Registriert**
+ 4         22.05.14     Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
+ 3         22.05.14     Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
+ 2         22.05.14     Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
+ 1         22.05.14     Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
  **253**                                                 **61 341,14**
-========= ============ ================================ =============== ================== =============
+========= ============ ================================ =============== ================== ================= =================
 <BLANKLINE>
 
 
@@ -70,12 +70,12 @@ Payment orders
 The ZKBC journal contains the following statements:
 
 >>> rt.show(ZKBC.voucher_type.table_class, ZKBC)
-======= ============ ================== =============== ================== =============
- Nr.     Belegdatum   Interne Referenz   Total           Ausführungsdatum   Zustand
-------- ------------ ------------------ --------------- ------------------ -------------
- 1       21.04.14                        21 145,09                          Registriert
+======= ============ ================== =============== ================== ================= =================
+ Nr.     Belegdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Arbeitsablauf
+------- ------------ ------------------ --------------- ------------------ ----------------- -----------------
+ 1       21.04.14                        21 145,09                          2014-05           **Registriert**
  **1**                                   **21 145,09**
-======= ============ ================== =============== ================== =============
+======= ============ ================== =============== ================== ================= =================
 <BLANKLINE>
 
 
