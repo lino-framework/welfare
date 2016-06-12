@@ -94,6 +94,8 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.client_vouchers',
     'lino_welfare.modlib.contacts',
     'lino_welfare.modlib.contacts.fixtures',
+    'lino_welfare.modlib.contacts.management',
+    'lino_welfare.modlib.contacts.management.commands',
     'lino_welfare.modlib.courses',
     'lino_welfare.modlib.courses.fixtures',
     'lino_welfare.modlib.cv',
