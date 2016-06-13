@@ -35,6 +35,10 @@ The AAW journal contains the following statements:
 ========= ============ ================================ =============== ================== ================= =================
  Nr.       Belegdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Arbeitsablauf
 --------- ------------ -------------------------------- --------------- ------------------ ----------------- -----------------
+ 22        13.04.14                                      -553,39                            2014-05           **Registriert**
+ 21        13.03.14                                      -585,84                            2014-05           **Registriert**
+ 20        13.02.14                                      -483,01                            2014-05           **Registriert**
+ 19        13.01.14                                      -350,61                            2014-05           **Registriert**
  18        23.03.14     Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
  17        23.03.14     Sozialhilfe                      3 460,17                           2014-03           **Registriert**
  16        23.03.14     Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
@@ -47,10 +51,6 @@ The AAW journal contains the following statements:
  9         22.04.14     Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
  8         22.04.14     Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
  7         22.04.14     Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
- 22        13.04.14                                      -553,39                            2014-05           **Registriert**
- 21        13.03.14                                      -585,84                            2014-05           **Registriert**
- 20        13.02.14                                      -483,01                            2014-05           **Registriert**
- 19        13.01.14                                      -350,61                            2014-05           **Registriert**
  6         22.05.14     Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
  5         22.05.14     Sozialhilfe                      3 460,17                           2014-05           **Registriert**
  4         22.05.14     Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
