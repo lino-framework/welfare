@@ -67,6 +67,7 @@ Here is a list of all demo excerpts.
 ==== ======================== ===================================================== ============================= ================================ ==========
  ID   Excerpt Type             Controlled by                                         Client                        Recipient (Organization)         Language
 ---- ------------------------ ----------------------------------------------------- ----------------------------- -------------------------------- ----------
+ 69   Tx25 Request             *Tx25 Request #1*                                     AUSDEMWALD Alfons (116)                                        de
  68   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  67   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  66   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de

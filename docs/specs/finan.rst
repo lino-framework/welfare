@@ -1,8 +1,8 @@
 .. _welfare.specs.finan:
 
-===================
-Financial documents
-===================
+==================================
+Financial vouchers in Lino Welfare
+==================================
 
 .. How to test only this document:
 
@@ -14,9 +14,19 @@ Financial documents
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
 
-This document is based on and extends the following specifications:
+This document describes specific aspecs of *financial vouchers* in
+:ref:`welfare`, as implemented by the :mod:`lino_welfare.lib.finan`
+plugin.  
 
+It is based on the following other specifications:
+
+- :ref:`cosi.specs.accounting`
+- :ref:`cosi.specs.ledger`
+- :ref:`cosi.specs.finan`
 - :ref:`welfare.specs.ledger`
+
+
+Table of contents:
 
 .. contents::
    :depth: 1
@@ -28,6 +38,9 @@ Disbursment orders
 
 
 >>> AAW = ledger.Journal.get_by_ref('AAW')
+
+>>> print(AAW.voucher_type.model)
+<class 'lino_cosi.lib.finan.models.PaymentOrder'>
 
 The AAW journal contains the following statements:
 

@@ -87,7 +87,7 @@ class Site(Site):
         from lino_welfare.modlib.isip.models import ContractBase
         wc(ContractBase, master_key='client__partner_ptr')
 
-        from lino_welfare.modlib.cbss.models import CBSSRequest
+        from lino_welfare.modlib.cbss.mixins import CBSSRequest
         wc(CBSSRequest, master_key='person__partner_ptr')
 
 

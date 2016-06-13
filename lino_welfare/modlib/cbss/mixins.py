@@ -37,9 +37,9 @@ from lino.utils.ssin import ssin_validator
 
 from lino.modlib.users.mixins import UserAuthored
 
+from .utils import nodetext, xsdpath, CBSS_ENVS
 from .choicelists import *
 
-CBSS_ENVS = ('test', 'acpt', 'prod')
 
 #~ try:
 
@@ -68,15 +68,6 @@ def get_client(obj):
     return c
 
 
-def xsdpath(*parts):
-    p1 = os.path.abspath(os.path.dirname(__file__))
-    return os.path.join(p1, 'XSD', *parts)
-
-
-def nodetext(node):
-    if node is None:
-        return ''
-    return node.text
 
 
 @dd.python_2_unicode_compatible

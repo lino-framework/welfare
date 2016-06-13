@@ -53,7 +53,15 @@ Rolf is the local system administrator, he has a complete menu:
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
+- DSBE :
+  - Klienten
+  - VSEs
+  - Art.60§7-Konventionen
+  - Stellenanbieter
+  - Stellen
+  - Stellenangebote
+  - Art.61-Konventionen
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
@@ -110,7 +118,15 @@ Hubert is an Integration agent.
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
+- DSBE :
+  - Klienten
+  - VSEs
+  - Art.60§7-Konventionen
+  - Stellenanbieter
+  - Stellen
+  - Stellenangebote
+  - Art.61-Konventionen
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Berichte :
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
@@ -149,7 +165,15 @@ to explicitly override the language of :meth:`show_menu
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
-- DSBE : Klienten, VSEs, Art.60§7-Konventionen, Stellenanbieter, Stellen, Stellenangebote, Art.61-Konventionen
+- DSBE :
+  - Klienten
+  - VSEs
+  - Art.60§7-Konventionen
+  - Stellenanbieter
+  - Stellen
+  - Stellenangebote
+  - Art.61-Konventionen
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Kurse : Kursanbieter, Kursangebote, Offene Kursanfragen
 - Berichte :
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
@@ -195,6 +219,8 @@ Schuldenberater
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
+- DSBE :
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Konfigurierung :
@@ -227,6 +253,8 @@ Berater Erstempfang
 - Kalender : Kalender, Meine Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
+- DSBE :
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Konfigurierung :
   - Orte : Länder
@@ -256,6 +284,8 @@ Empfangsschalter
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Meine Auszüge, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
+- DSBE :
+  - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Konfigurierung :
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
@@ -328,11 +358,11 @@ Each window layout defines a given set of fields.
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
-- cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
-- cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, info_messages, debug_messages
 - cbss.ManageAccessRequests.insert : person, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date
-- cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, response_xml, info_messages, debug_messages
+- cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
@@ -466,180 +496,180 @@ Each window layout is **viewable** by a given set of user profiles.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- accounts.Accounts.detail : visible for 510 admin
-- accounts.Accounts.insert : visible for 510 admin
-- accounts.Groups.detail : visible for 510 admin
-- accounts.Groups.insert : visible for 510 admin
-- addresses.Addresses.detail : visible for admin
-- addresses.Addresses.insert : visible for admin
-- aids.AidTypes.detail : visible for 110 210 220 410 500 510 800 admin
-- aids.AidTypes.insert : visible for 110 210 220 410 500 510 800 admin
-- aids.Categories.insert : visible for 110 210 220 410 500 510 800 admin
-- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- art61.ContractTypes.insert : visible for 110 admin
-- art61.Contracts.detail : visible for 100 110 120 admin
-- art61.Contracts.insert : visible for 100 110 120 admin
-- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- boards.Boards.detail : visible for admin
-- boards.Boards.insert : visible for admin
-- cal.Calendars.detail : visible for 110 410 admin
-- cal.Calendars.insert : visible for 110 410 admin
-- cal.EventTypes.detail : visible for 110 410 admin
-- cal.EventTypes.insert : visible for 110 410 admin
-- cal.Events.detail : visible for 110 410 admin
-- cal.Events.insert : visible for 110 410 admin
-- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin
-- cal.GuestRoles.insert : visible for admin
-- cal.GuestStates.wf1 : visible for admin
-- cal.GuestStates.wf2 : visible for admin
-- cal.Guests.checkin : visible for admin
-- cal.Guests.detail : visible for admin
-- cal.Guests.insert : visible for admin
-- cal.RecurrentEvents.detail : visible for 110 410 admin
-- cal.RecurrentEvents.insert : visible for 110 410 admin
-- cal.Rooms.insert : visible for 110 410 admin
-- cal.Tasks.detail : visible for 110 410 admin
-- cal.Tasks.insert : visible for 110 410 admin
-- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin
-- cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
-- cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
-- cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
-- cbss.ManageAccessRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
-- cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin
-- cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin
-- changes.Changes.detail : visible for admin
-- contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Companies.merge_row : visible for 110 210 220 410 800 admin
-- contacts.Partners.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Partners.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- countries.Countries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- countries.Countries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- countries.Places.insert : visible for 110 210 220 410 800 admin
-- countries.Places.merge_row : visible for 110 210 220 410 800 admin
-- courses.CourseContents.insert : visible for 110 admin
-- courses.CourseOffers.detail : visible for 100 110 120 admin
-- courses.CourseOffers.insert : visible for 100 110 120 admin
-- courses.CourseProviders.detail : visible for 100 110 120 admin
-- courses.CourseRequests.insert : visible for 110 admin
-- courses.Courses.detail : visible for 110 admin
-- courses.Courses.insert : visible for 110 admin
-- cv.Durations.insert : visible for 110 admin
-- cv.EducationLevels.insert : visible for 110 admin
-- cv.Experiences.insert : visible for 110 admin
-- cv.Functions.insert : visible for 110 admin
-- cv.Regimes.insert : visible for 110 admin
-- cv.Sectors.insert : visible for 110 admin
-- cv.Statuses.insert : visible for 110 admin
-- cv.Studies.insert : visible for 110 admin
-- cv.StudyTypes.detail : visible for 110 admin
-- cv.StudyTypes.insert : visible for 110 admin
-- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- debts.Accounts.detail : visible for admin
-- debts.Accounts.insert : visible for admin
-- debts.Budgets.detail : visible for admin
-- debts.Budgets.insert : visible for admin
-- debts.Groups.detail : visible for admin
-- debts.Groups.insert : visible for admin
-- esf.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- excerpts.ExcerptTypes.detail : visible for admin
-- excerpts.ExcerptTypes.insert : visible for admin
-- excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- finan.BankStatements.detail : visible for 500 510 admin
-- finan.BankStatements.insert : visible for 500 510 admin
-- finan.DisbursementOrders.detail : visible for 500 510 admin
-- finan.DisbursementOrdersByJournal.insert : visible for 500 510 admin
-- finan.FinancialVouchers.detail : visible for 500 510 admin
-- finan.FinancialVouchers.insert : visible for 500 510 admin
-- finan.PaymentOrders.detail : visible for 500 510 admin
-- gfks.ContentTypes.insert : visible for admin
-- households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- households.Types.insert : visible for 110 210 220 410 800 admin
-- humanlinks.Links.insert : visible for 110 210 220 410 800 admin
-- integ.ActivityReport.show : visible for 100 110 120 admin
-- isip.ContractEndings.insert : visible for 110 410 admin
-- isip.ContractPartners.insert : visible for 110 admin
-- isip.ContractTypes.insert : visible for 110 410 admin
-- isip.Contracts.detail : visible for 100 110 120 admin
-- isip.Contracts.insert : visible for 100 110 120 admin
-- isip.ExamPolicies.insert : visible for 110 410 admin
-- jobs.ContractTypes.insert : visible for 110 410 admin
-- jobs.Contracts.detail : visible for 100 110 120 admin
-- jobs.Contracts.insert : visible for 100 110 120 admin
-- jobs.JobProviders.detail : visible for 100 110 120 admin
-- jobs.JobTypes.insert : visible for 110 410 admin
-- jobs.Jobs.insert : visible for 100 110 120 admin
-- jobs.JobsOverview.show : visible for 100 110 120 admin
-- jobs.Offers.insert : visible for 100 110 120 admin
-- jobs.Schedules.insert : visible for 110 410 admin
-- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 510 admin
-- ledger.ActivityReport.show : visible for 500 510 admin
-- ledger.Journals.detail : visible for 510 admin
-- ledger.Journals.insert : visible for 510 admin
-- ledger.Situation.show : visible for 500 510 admin
-- newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin
-- newcomers.Faculties.detail : visible for 110 410 admin
-- newcomers.Faculties.insert : visible for 110 410 admin
-- notes.EventTypes.insert : visible for 110 410 admin
-- notes.NoteTypes.detail : visible for 110 410 admin
-- notes.NoteTypes.insert : visible for 110 410 admin
-- notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- outbox.Mails.detail : visible for 110 410 admin
-- outbox.Mails.insert : visible for 110 410 admin
-- pcsw.ClientContactTypes.insert : visible for 110 410 admin
-- pcsw.ClientStates.wf1 : visible for 120 200 300 admin
-- pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin
-- pcsw.CoachingEndings.insert : visible for 110 410 admin
-- pcsw.Coachings.create_visit : visible for 110 410 admin
-- plausibility.Checkers.detail : visible for admin
-- plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- properties.PropGroups.insert : visible for admin
-- properties.PropTypes.insert : visible for admin
-- properties.Properties.insert : visible for admin
-- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin
-- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- system.SiteConfigs.detail : visible for admin
-- tinymce.TextFieldTemplates.detail : visible for admin
-- tinymce.TextFieldTemplates.insert : visible for admin
-- uploads.AllUploads.detail : visible for 110 410 admin
-- uploads.AllUploads.insert : visible for 110 410 admin
-- uploads.UploadTypes.detail : visible for 110 410 admin
-- uploads.UploadTypes.insert : visible for 110 410 admin
-- uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin
-- users.Users.change_password : visible for admin
-- users.Users.detail : visible for admin
-- users.Users.insert : visible for admin
-- vatless.Invoices.detail : visible for 500 510 admin
-- vatless.Invoices.insert : visible for 500 510 admin
-- vatless.InvoicesByJournal.insert : visible for 500 510 admin
-- vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin
-- vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin
+- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- accounts.Accounts.detail : visible for 510 admin 910
+- accounts.Accounts.insert : visible for 510 admin 910
+- accounts.Groups.detail : visible for 510 admin 910
+- accounts.Groups.insert : visible for 510 admin 910
+- addresses.Addresses.detail : visible for admin 910
+- addresses.Addresses.insert : visible for admin 910
+- aids.AidTypes.detail : visible for 110 210 220 410 500 510 800 admin 910
+- aids.AidTypes.insert : visible for 110 210 220 410 500 510 800 admin 910
+- aids.Categories.insert : visible for 110 210 220 410 500 510 800 admin 910
+- aids.Grantings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.Grantings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.GrantingsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- art61.ContractTypes.insert : visible for 110 admin 910
+- art61.Contracts.detail : visible for 100 110 120 admin 910
+- art61.Contracts.insert : visible for 100 110 120 admin 910
+- b2c.Accounts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- b2c.Statements.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- b2c.Transactions.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- boards.Boards.detail : visible for admin 910
+- boards.Boards.insert : visible for admin 910
+- cal.Calendars.detail : visible for 110 410 admin 910
+- cal.Calendars.insert : visible for 110 410 admin 910
+- cal.EventTypes.detail : visible for 110 410 admin 910
+- cal.EventTypes.insert : visible for 110 410 admin 910
+- cal.Events.detail : visible for 110 410 admin 910
+- cal.Events.insert : visible for 110 410 admin 910
+- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.GuestRoles.insert : visible for admin 910
+- cal.GuestStates.wf1 : visible for admin 910
+- cal.GuestStates.wf2 : visible for admin 910
+- cal.Guests.checkin : visible for admin 910
+- cal.Guests.detail : visible for admin 910
+- cal.Guests.insert : visible for admin 910
+- cal.RecurrentEvents.detail : visible for 110 410 admin 910
+- cal.RecurrentEvents.insert : visible for 110 410 admin 910
+- cal.Rooms.insert : visible for 110 410 admin 910
+- cal.Tasks.detail : visible for 110 410 admin 910
+- cal.Tasks.insert : visible for 110 410 admin 910
+- cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- cbss.ManageAccessRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 220 300 400 410 admin 910
+- changes.Changes.detail : visible for admin 910
+- contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Companies.merge_row : visible for 110 210 220 410 800 admin 910
+- contacts.Partners.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Partners.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- countries.Countries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- countries.Countries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- countries.Places.insert : visible for 110 210 220 410 800 admin 910
+- countries.Places.merge_row : visible for 110 210 220 410 800 admin 910
+- courses.CourseContents.insert : visible for 110 admin 910
+- courses.CourseOffers.detail : visible for 100 110 120 admin 910
+- courses.CourseOffers.insert : visible for 100 110 120 admin 910
+- courses.CourseProviders.detail : visible for 100 110 120 admin 910
+- courses.CourseRequests.insert : visible for 110 admin 910
+- courses.Courses.detail : visible for 110 admin 910
+- courses.Courses.insert : visible for 110 admin 910
+- cv.Durations.insert : visible for 110 admin 910
+- cv.EducationLevels.insert : visible for 110 admin 910
+- cv.Experiences.insert : visible for 110 admin 910
+- cv.Functions.insert : visible for 110 admin 910
+- cv.Regimes.insert : visible for 110 admin 910
+- cv.Sectors.insert : visible for 110 admin 910
+- cv.Statuses.insert : visible for 110 admin 910
+- cv.Studies.insert : visible for 110 admin 910
+- cv.StudyTypes.detail : visible for 110 admin 910
+- cv.StudyTypes.insert : visible for 110 admin 910
+- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- debts.Accounts.detail : visible for admin 910
+- debts.Accounts.insert : visible for admin 910
+- debts.Budgets.detail : visible for admin 910
+- debts.Budgets.insert : visible for admin 910
+- debts.Groups.detail : visible for admin 910
+- debts.Groups.insert : visible for admin 910
+- esf.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.ExcerptTypes.detail : visible for admin 910
+- excerpts.ExcerptTypes.insert : visible for admin 910
+- excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- finan.BankStatements.detail : visible for 500 510 admin 910
+- finan.BankStatements.insert : visible for 500 510 admin 910
+- finan.DisbursementOrders.detail : visible for 500 510 admin 910
+- finan.DisbursementOrdersByJournal.insert : visible for 500 510 admin 910
+- finan.FinancialVouchers.detail : visible for 500 510 admin 910
+- finan.FinancialVouchers.insert : visible for 500 510 admin 910
+- finan.PaymentOrders.detail : visible for 500 510 admin 910
+- gfks.ContentTypes.insert : visible for admin 910
+- households.Households.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- households.HouseholdsByType.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- households.Types.insert : visible for 110 210 220 410 800 admin 910
+- humanlinks.Links.insert : visible for 110 210 220 410 800 admin 910
+- integ.ActivityReport.show : visible for 100 110 120 admin 910
+- isip.ContractEndings.insert : visible for 110 410 admin 910
+- isip.ContractPartners.insert : visible for 110 admin 910
+- isip.ContractTypes.insert : visible for 110 410 admin 910
+- isip.Contracts.detail : visible for 100 110 120 admin 910
+- isip.Contracts.insert : visible for 100 110 120 admin 910
+- isip.ExamPolicies.insert : visible for 110 410 admin 910
+- jobs.ContractTypes.insert : visible for 110 410 admin 910
+- jobs.Contracts.detail : visible for 100 110 120 admin 910
+- jobs.Contracts.insert : visible for 100 110 120 admin 910
+- jobs.JobProviders.detail : visible for 100 110 120 admin 910
+- jobs.JobTypes.insert : visible for 110 410 admin 910
+- jobs.Jobs.insert : visible for 100 110 120 admin 910
+- jobs.JobsOverview.show : visible for 100 110 120 admin 910
+- jobs.Offers.insert : visible for 100 110 120 admin 910
+- jobs.Schedules.insert : visible for 110 410 admin 910
+- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- ledger.ActivityReport.show : visible for 500 510 admin 910
+- ledger.Journals.detail : visible for 510 admin 910
+- ledger.Journals.insert : visible for 510 admin 910
+- ledger.Situation.show : visible for 500 510 admin 910
+- newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin 910
+- newcomers.Faculties.detail : visible for 110 410 admin 910
+- newcomers.Faculties.insert : visible for 110 410 admin 910
+- notes.EventTypes.insert : visible for 110 410 admin 910
+- notes.NoteTypes.detail : visible for 110 410 admin 910
+- notes.NoteTypes.insert : visible for 110 410 admin 910
+- notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- outbox.Mails.detail : visible for 110 410 admin 910
+- outbox.Mails.insert : visible for 110 410 admin 910
+- pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
+- pcsw.ClientStates.wf1 : visible for 120 200 300 admin 910
+- pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin 910
+- pcsw.CoachingEndings.insert : visible for 110 410 admin 910
+- pcsw.Coachings.create_visit : visible for 110 410 admin 910
+- plausibility.Checkers.detail : visible for admin 910
+- plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- properties.PropGroups.insert : visible for admin 910
+- properties.PropTypes.insert : visible for admin 910
+- properties.Properties.insert : visible for admin 910
+- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- system.SiteConfigs.detail : visible for admin 910
+- tinymce.TextFieldTemplates.detail : visible for admin 910
+- tinymce.TextFieldTemplates.insert : visible for admin 910
+- uploads.AllUploads.detail : visible for 110 410 admin 910
+- uploads.AllUploads.insert : visible for 110 410 admin 910
+- uploads.UploadTypes.detail : visible for 110 410 admin 910
+- uploads.UploadTypes.insert : visible for 110 410 admin 910
+- uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.change_password : visible for admin 910
+- users.Users.detail : visible for admin 910
+- users.Users.insert : visible for admin 910
+- vatless.Invoices.detail : visible for 500 510 admin 910
+- vatless.Invoices.insert : visible for 500 510 admin 910
+- vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
+- vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin 910
+- vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin 910
 <BLANKLINE>
 
 
@@ -652,24 +682,24 @@ per user profile.
 >>> from lino_xl.lib.beid.mixins import BaseBeIdReadCardAction
 >>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- debts.Clients.find_by_beid : visible for 120 300 admin
-- debts.Clients.read_beid : visible for 120 300 admin
-- integ.Clients.find_by_beid : visible for 100 110 120 admin
-- integ.Clients.read_beid : visible for 100 110 120 admin
-- newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- newcomers.ClientsByFaculty.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- newcomers.NewClients.find_by_beid : visible for 120 200 300 admin
-- newcomers.NewClients.read_beid : visible for 120 200 300 admin
-- pcsw.AllClients.find_by_beid : visible for 110 410 admin
-- pcsw.AllClients.read_beid : visible for 110 410 admin
-- pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- pcsw.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- pcsw.ClientsByNationality.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- pcsw.CoachedClients.find_by_beid : visible for 100 110 120 200 300 400 410 admin
-- pcsw.CoachedClients.read_beid : visible for 100 110 120 200 300 400 410 admin
-- reception.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
-- reception.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin
+- debts.Clients.find_by_beid : visible for 120 300 admin 910
+- debts.Clients.read_beid : visible for 120 300 admin 910
+- integ.Clients.find_by_beid : visible for 100 110 120 admin 910
+- integ.Clients.read_beid : visible for 100 110 120 admin 910
+- newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- newcomers.ClientsByFaculty.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- newcomers.NewClients.find_by_beid : visible for 120 200 300 admin 910
+- newcomers.NewClients.read_beid : visible for 120 200 300 admin 910
+- pcsw.AllClients.find_by_beid : visible for 110 410 admin 910
+- pcsw.AllClients.read_beid : visible for 110 410 admin 910
+- pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- pcsw.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- pcsw.ClientsByNationality.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- pcsw.CoachedClients.find_by_beid : visible for 100 110 120 200 300 400 410 admin 910
+- pcsw.CoachedClients.read_beid : visible for 100 110 120 200 300 400 410 admin 910
+- reception.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- reception.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 <BLANKLINE>
 
 

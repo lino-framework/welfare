@@ -44,6 +44,7 @@ users.UserProfiles:410 Sozi (Manager)
 users.UserProfiles:500 Buchhalter
 users.UserProfiles:510 Accountant (Manager)
 users.UserProfiles.admin:900 Verwalter
+users.UserProfiles:910 Security advisor
 
 
 
@@ -58,22 +59,23 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ====================== ============ ================= ============= ===================== ====== ============================
- Start time   Client                 Summary      Managed by        Assigned to   Calendar Event Type   Room   Workflow
------------- ---------------------- ------------ ----------------- ------------- --------------------- ------ ----------------------------
- 08:30:00                            Diner        Alicia Allmanns                 Meeting                      **Suggested** → [Take]
- 08:30:00                            Auswertung   Rolf Rompen                     Internal meeting             **Suggested** → [Take]
- 09:40:00     EVERS Eberhart (127)   Diner        Mélanie Mélard                  Appointment                  **Suggested** → [Take]
- 10:20:00                            Treffen      Hubert Huppertz                 External meeting             **Suggested** → [Take]
- 10:20:00     JOHNEN Johann (138)    Lunch        Robin Rood                      Evaluation                   **Suggested** → [Take]
- 11:10:00                            Rencontre    Romain Raffault                 Private                      **Suggested** → [Take]
- 13:30:00                            Auswertung   Judith Jousten                  External meeting             **Suggested** → [Take]
- 13:30:00                            Treffen      Theresia Thelen                 Meeting                      **Suggested** → [Notified]
-============ ====================== ============ ================= ============= ===================== ====== ============================
+============ ====================== ============= ================== ============= ===================== ====== ============================
+ Start time   Client                 Summary       Managed by         Assigned to   Calendar Event Type   Room   Workflow
+------------ ---------------------- ------------- ------------------ ------------- --------------------- ------ ----------------------------
+ 08:30:00                            Diner         Alicia Allmanns                  Meeting                      **Suggested** → [Take]
+ 08:30:00                            Evaluation    Romain Raffault                  Internal meeting             **Suggested** → [Take]
+ 09:40:00     EVERS Eberhart (127)   Diner         Mélanie Mélard                   Appointment                  **Suggested** → [Take]
+ 09:40:00                            Auswertung    Theresia Thelen                  External meeting             **Suggested** → [Notified]
+ 10:20:00                            Treffen       Hubert Huppertz                  External meeting             **Suggested** → [Take]
+ 10:20:00     JOHNEN Johann (138)    Mittagessen   Rolf Rompen                      Evaluation                   **Suggested** → [Take]
+ 11:10:00                            Treffen       Patrick Paraneau                 Private                      **Suggested** → [Take]
+ 13:30:00                            Auswertung    Judith Jousten                   External meeting             **Suggested** → [Take]
+ 13:30:00                            Meeting       Robin Rood                       Meeting                      **Suggested** → [Take]
+============ ====================== ============= ================== ============= ===================== ====== ============================
 <BLANKLINE>
 
 Note how Theresia cannot [Take] her own event (because she has it
-already), and how she set only her own event to [Notified].
+already), and how she can set only her own event to [Notified].
 
 Users looking at their events
 =============================
@@ -222,7 +224,7 @@ following calendars:
 ==== ========== ===========
  ID   Kalender   versteckt
 ---- ---------- -----------
- 7    rolf       Nein
+ 8    rolf       Nein
 ==== ========== ===========
 <BLANKLINE>
 

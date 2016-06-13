@@ -20,6 +20,8 @@ Integration Service
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 See also :doc:`/tour/autoevents`.
 
+Table of contents:
+
 .. contents::
    :local:
 
@@ -170,14 +172,14 @@ No data to display
 --------------------------------
 Causes d'arrêt des interventions
 --------------------------------
-============================ ======== ======== ========= ======== ====== ======= =======
- Description                  alicia   hubert   melanie   romain   rolf   robin   Total
----------------------------- -------- -------- --------- -------- ------ ------- -------
+============================ ======== ======== ========= ========= ======== ====== ======= =======
+ Description                  alicia   hubert   melanie   patrick   romain   rolf   robin   Total
+---------------------------- -------- -------- --------- --------- -------- ------ ------- -------
  Transfer to colleague
  End of right on social aid
  Moved to another town
  Found a job
-============================ ======== ======== ========= ======== ====== ======= =======
+============================ ======== ======== ========= ========= ======== ====== ======= =======
 <BLANKLINE>
 =====
 ISIPs
@@ -195,6 +197,7 @@ PIIS par agent et type
  Kerstin Kerres
  Mélanie Mélard
  nicolas
+ Patrick Paraneau
  Robin Rood
  Rolf Rompen
  Romain Raffault
@@ -266,6 +269,7 @@ Art60§7 par agent et type
  Kerstin Kerres
  Mélanie Mélard
  nicolas
+ Patrick Paraneau
  Robin Rood
  Rolf Rompen
  Romain Raffault

@@ -16,30 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-u"""Database models foe `lino_welfare.modlib.cbss`.
-
-Lino currently knows the following requests (it is technically easy to
-add more of them):
-
-(French chunks of text collected from various documents issued by
-http://www.bcss.fgov.be):
-
-- :class:`IdentifyPersonRequest` : Identifier la personne par son NISS
-  ou ses données phonétiques et vérifier son identité par le numéro de
-  carte SIS, de carte d'identité ou par ses données phonétiques.
-
-- :class:`ManageAccessRequest`: Enregistrer, désenregistrer ou
-  consulter un dossier dans le registre du réseau de la sécurité
-  sociale (registre BCSS) et dans le répertoire sectoriel des CPAS
-  géré par la SmalS-MvM.
-  
-- :class:`RetrieveTIGroupsRequest
-  <lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsRequest>`: Obtenir
-  des informations à propos d’une personne dans le cadre de l’enquête
-  sociale.
-  
-
-"""
+"""Database models for this plugin. """
 
 import os
 import shutil
@@ -56,98 +33,26 @@ from django.utils.translation import ugettext_lazy as _
 # from appy.shared.xml_parser import XmlUnmarshaller
 
 from lino import mixins
-from lino.api import dd, rt
+from lino.api import dd
 from lino.utils import assert_pure
-from lino.utils import join_words
-from lino.utils import AttrDict
 
-from lino.modlib.users.mixins import ByUser
 from lino_welfare.modlib.pcsw import models as pcsw
 
-from .mixins import *
-from .choicelists import *
+from .mixins import SSDNRequest, WithPerson, NewStyleRequest, SSIN, get_client
+from .utils import xsdpath, CBSS_ENVS, gender2cbss
 
-from .roles import CBSSUser
-
+from .choicelists import (RequestStates, ManageActions,
+                          QueryRegisters, RequestLanguages)
 
 CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
-
-
-def gender2cbss(gender):
-    if gender == dd.Genders.male:
-        return '1'
-    elif gender == dd.Genders.female:
-        return '2'
-    else:
-        return '0'
-
-
-def cbss2gender(v):
-    if v == '1':
-        return dd.Genders.male
-    elif v == '2':
-        return dd.Genders.female
-    return None
-
-
-def cbss2date(s):
-    a = s.split('-')
-    assert len(a) == 3
-    a = [int(i) for i in a]
-    return dd.IncompleteDate(*a)
-
-
-def cbss2civilstate(node):
-    value = nodetext(node)
-    if not value:
-        return value
-    v = pcsw.CivilState.get_by_value(value)
-    #~ if v is None:
-        #~ print "20120601 cbss2civilstate None for ", repr(value)
-    return unicode(v)
-
-
-def cbss2country(code):
-    try:
-        return rt.modules.countries.Country.objects.get(inscode=code)
-    except Country.DoesNotExist:
-        logger.warning("Unknown country code %s", code)
-
-
-def cbss2address(obj, **data):
-    n = obj.childAtPath('/Basic/DiplomaticPost')
-    if n is not None:
-        data.update(
-            country=cbss2country(nodetext(n.childAtPath('/CountryCode'))))
-        #~ n.childAtPath('/Post')
-        data.update(address=nodetext(n.childAtPath('/AddressPlainText')))
-        return data
-    n = obj.childAtPath('/Basic/Address')
-    if n is not None:
-        data.update(
-            country=cbss2country(nodetext(n.childAtPath('/CountryCode'))))
-        #~ country = countries.Country.objects.get(
-            #~ inscode=n.childAtPath('/CountryCode').text)
-        addr = ''
-        #~ addr += n.childAtPath('/MunicipalityCode').text
-        addr += join_words(
-            nodetext(n.childAtPath('/Street')),
-            nodetext(n.childAtPath('/HouseNumber')),
-            nodetext(n.childAtPath('/Box'))
-        )
-        addr += ', ' + join_words(
-            nodetext(n.childAtPath('/PostalCode')),
-            nodetext(n.childAtPath('/Municipality'))
-        )
-        data.update(address=addr)
-    return data
 
 
 @dd.python_2_unicode_compatible
 class Sector(mixins.BabelNamed):
 
-    """
-    Default values filled from :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
+    """Default values filled from
+    :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
+
     """
     class Meta:
         app_label = 'cbss'
@@ -155,7 +60,7 @@ class Sector(mixins.BabelNamed):
         verbose_name_plural = _("Sectors")
         unique_together = ['code', 'subcode']
 
-    #~ code = models.CharField(max_length=2,verbose_name=_("Code"),primary_key=True)
+    # code = models.CharField(max_length=2,verbose_name=_("Code"),primary_key=True)
     code = models.IntegerField(_("Code"))
     subcode = models.IntegerField(_("Subcode"), default=0)
     abbr = dd.BabelCharField(_("Abbreviation"), max_length=50, blank=True)
@@ -165,13 +70,6 @@ class Sector(mixins.BabelNamed):
             return str(self.code) + '.' + str(self.subcode) + \
                 ' - ' + dd.babelattr(self, 'name')
         return str(self.code) + ' - ' + dd.babelattr(self, 'name')
-
-
-class Sectors(dd.Table):
-    model = 'cbss.Sector'
-    required_roles = dd.required(CBSSUser, dd.SiteStaff)
-    column_names = 'code subcode abbr name *'
-    order_by = ['code', 'subcode']
 
 
 @dd.python_2_unicode_compatible
@@ -188,21 +86,14 @@ class Purpose(mixins.BabelNamed):
         verbose_name_plural = _('Purposes')
         unique_together = ['sector_code', 'code']
     sector_code = models.IntegerField(_("Sector"), blank=True, null=True)
-    #~ sector_subcode = models.IntegerField(max_length=2,verbose_name=_("Subsector"),blank=True,null=True)
-    #~ sector = models.ForeignKey(Sector,blank=True,null=True)
-    #~ code = models.CharField(max_length=3,verbose_name=_("Code"))
+    # sector_subcode = models.IntegerField(max_length=2,verbose_name=_("Subsector"),blank=True,null=True)
+    # sector = models.ForeignKey(Sector,blank=True,null=True)
+    # code = models.CharField(max_length=3,verbose_name=_("Code"))
     code = models.IntegerField(_("Code"))
 
     def __str__(self):
-        #~ return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
+        # return '(' + str(self.code) + ') ' + mixins.BabelNamed.__str__(self)
         return str(self.code) + ' - ' + dd.babelattr(self, 'name')
-
-
-class Purposes(dd.Table):
-    model = 'cbss.Purpose'
-    required_roles = dd.required(CBSSUser, dd.SiteStaff)
-    column_names = 'sector_code code name *'
-    order_by = ['sector_code', 'code']
 
 
 NSCOMMON = ('common', 'http://www.ksz-bcss.fgov.be/XSD/SSDN/Common')
@@ -210,29 +101,6 @@ NSIPR = ('ipr',
          "http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson")
 NSMAR = ('mar', "http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/ManageAccess")
 NSWSC = ('wsc', "http://ksz-bcss.fgov.be/connectors/WebServiceConnector")
-
-
-class CBSSRequestDetail(dd.FormLayout):
-    #~ main = 'request response'
-    main = 'request technical'
-
-    request = dd.Panel("""
-    info
-    parameters
-    result
-    """, label=_("Request"))
-
-    technical = dd.Panel("""
-    environment ticket
-    response_xml
-    info_messages
-    debug_messages
-    """, label=_("Technical"),
-        required_roles=dd.required(CBSSUser, dd.SiteStaff))
-
-    info = dd.Panel("""
-    id person user sent status printed
-    """, label=_("Request information"))
 
 
 class IdentifyPersonRequest(SSDNRequest, WithPerson):
@@ -267,33 +135,33 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
       Gültige Werte: 0 bis 10.
       """)
       # 20120606 gridcolumn doesn't like tooltips containing HTML
-      #~ <p>Zum Beispiel
-      #~ <table border=1 class="htmlText">
-      #~ <tr>
-        #~ <td>Geburtsdatum</td>
-        #~ <td colspan="3">Toleranz</td>
-      #~ </tr><tr>
-        #~ <td></td>
-        #~ <td>0</td>
-        #~ <td>1</td>
-        #~ <td>10</td>
-      #~ </tr><tr>
-        #~ <td> 1968-00-00  </td>
-        #~ <td> im Jahr 1968 </td>
-        #~ <td> von 1967 bis 1969 </td>
-        #~ <td> 1958 bis 1978 </td>
-      #~ </tr><tr>
-        #~ <td> 1968-06-00  </td>
-        #~ <td> im Juni 1968 </td>
-        #~ <td> von Mai  bis Juli 1968 </td>
-        #~ <td>von Oktober 1967 bis April 1969</td>
-      #~ </tr>
-      #~ </table>
-      #~ </p>
+      # <p>Zum Beispiel
+      # <table border=1 class="htmlText">
+      # <tr>
+        # <td>Geburtsdatum</td>
+        # <td colspan="3">Toleranz</td>
+      # </tr><tr>
+        # <td></td>
+        # <td>0</td>
+        # <td>1</td>
+        # <td>10</td>
+      # </tr><tr>
+        # <td> 1968-00-00  </td>
+        # <td> im Jahr 1968 </td>
+        # <td> von 1967 bis 1969 </td>
+        # <td> 1958 bis 1978 </td>
+      # </tr><tr>
+        # <td> 1968-06-00  </td>
+        # <td> im Juni 1968 </td>
+        # <td> von Mai  bis Juli 1968 </td>
+        # <td>von Oktober 1967 bis April 1969</td>
+      # </tr>
+      # </table>
+      # </p>
 
-    #~ def on_create(self,ar):
-        #~ UserAuthored.on_create(self,ar)
-        #~ SSIN.on_create(self,ar)
+    # def on_create(self,ar):
+        # UserAuthored.on_create(self,ar)
+        # SSIN.on_create(self,ar)
     def get_result_table(self, ar):
         return ar.spawn(IdentifyPersonResult, master_instance=self)
 
@@ -308,9 +176,9 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
 
     def build_request(self):
         """Construct and return the root element of the (inner) service request."""
-        #~ if not self.birth_date:
-            #~ raise Warning("Empty birth date (a full_clean() would have told that, too!)")
-            #~ raise Warning(_("Birth date may not be empty."))
+        # if not self.birth_date:
+            # raise Warning("Empty birth date (a full_clean() would have told that, too!)")
+            # raise Warning(_("Birth date may not be empty."))
 
         national_id = self.get_ssin()
         gender = gender2cbss(self.gender)
@@ -332,15 +200,15 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
 
             pd = E('ipr:PersonData')
             vd.append(pd)
-            #~ if not self.last_name or not self.first_name:
-                #~ raise Warning("Fields last_name and first_name are mandatory.")
+            # if not self.last_name or not self.first_name:
+                # raise Warning("Fields last_name and first_name are mandatory.")
             pd.append(E('ipr:LastName').setText(self.last_name))
             pd.append(E('ipr:FirstName').setText(self.first_name))
             pd.append(E('ipr:MiddleName').setText(self.middle_name))
             pd.append(E('ipr:BirthDate').setText(str(self.birth_date)))
-            #~ if not self.birth_date.is_complete():
-                #~ pd.append(E('ipr:Tolerance').setText(self.tolerance))
-            #~ if gender is not None: pd.append(E('ipr:Gender').setText(gender))
+            # if not self.birth_date.is_complete():
+                # pd.append(E('ipr:Tolerance').setText(self.tolerance))
+            # if gender is not None: pd.append(E('ipr:Gender').setText(gender))
         pc = E('ipr:PhoneticCriteria')
         sc.append(pc)
         pc.append(E('ipr:LastName').setText(self.last_name))
@@ -353,39 +221,39 @@ class IdentifyPersonRequest(SSDNRequest, WithPerson):
         if full_reply is not None:
             return full_reply.childAtPath('/ServiceReply/IdentifyPersonReply')
         return PARSER.parse(string=self.response_xml.encode('utf-8')).root()
-        #~ return reply
+        # return reply
 
-        #~ if False:
+        # if False:
 
-            #~ try:
-                #~ res = self.cbss_namespace.execute(srvreq,str(self.id),now)
-            #~ except cbss.Warning,e:
-                #~ self.status = RequestStates.exception
-                #~ self.response_xml = unicode(e)
-                #~ self.save()
-                #~ return
-            #~ except Exception,e:
-                #~ self.status = RequestStates.exception
-                #~ self.response_xml = traceback.format_exc(e)
-                #~ self.save()
-                #~ return
-            #~ self.sent = now
-            #~ self.response_xml = res.data.xmlString
-            #~ reply = cbss.xml2reply(res.data.xmlString)
-            #~ rc = reply.ServiceReply.ResultSummary.ReturnCode
-            #~ if rc == '0':
-                #~ self.status = RequestStates.ok
-            #~ elif rc == '1':
-                #~ self.status = RequestStates.warnings
-            #~ elif rc == '10000':
-                #~ self.status = RequestStates.errors
-            #~ self.save()
+            # try:
+                # res = self.cbss_namespace.execute(srvreq,str(self.id),now)
+            # except cbss.Warning,e:
+                # self.status = RequestStates.exception
+                # self.response_xml = unicode(e)
+                # self.save()
+                # return
+            # except Exception,e:
+                # self.status = RequestStates.exception
+                # self.response_xml = traceback.format_exc(e)
+                # self.save()
+                # return
+            # self.sent = now
+            # self.response_xml = res.data.xmlString
+            # reply = cbss.xml2reply(res.data.xmlString)
+            # rc = reply.ServiceReply.ResultSummary.ReturnCode
+            # if rc == '0':
+                # self.status = RequestStates.ok
+            # elif rc == '1':
+                # self.status = RequestStates.warnings
+            # elif rc == '10000':
+                # self.status = RequestStates.errors
+            # self.save()
 
-            #~ if self.status != RequestStates.ok:
-                #~ msg = '\n'.join(list(cbss.reply2lines(reply)))
-                #~ raise Exception(msg)
+            # if self.status != RequestStates.ok:
+                # msg = '\n'.join(list(cbss.reply2lines(reply)))
+                # raise Exception(msg)
 
-            #~ self.on_cbss_ok(reply)
+            # self.on_cbss_ok(reply)
 
 
 dd.update_field(IdentifyPersonRequest, 'birth_date', blank=False)
@@ -394,159 +262,8 @@ DocumentInvalid
 Element '{http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson}BirthDate': [facet 'length'] The value has a length of '0'; this differs from the allowed length of '10'., line 7
 
 """
-#~ dd.update_field(IdentifyPersonRequest,'first_name',blank=True)
-#~ dd.update_field(IdentifyPersonRequest,'last_name',blank=True)
-
-
-class IdentifyPersonRequestDetail(CBSSRequestDetail):
-    p1 = dd.Panel("""
-    national_id
-    spacer
-    """, label=_("Using the national ID"))
-
-    p2 = dd.Panel("""
-    first_name middle_name last_name
-    birth_date tolerance  gender
-    """, label=_("Using phonetic search"))
-
-    parameters = dd.Panel("p1 p2", label=_("Parameters"))
-
-    # result = dd.Panel("IdentifyPersonResult", label=_("Result"))
-    result = "IdentifyPersonResult"
-
-
-class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
-    window_size = (60, 'auto')
-
-    main = """
-    person national_id
-    p2
-    """
-
-    p2 = dd.Panel("""
-    first_name middle_name last_name
-    birth_date tolerance gender
-    """, label=_("Phonetic search"))
-
-    #~ def setup_handle(self,lh):
-        #~ lh.p2.label = _("Phonetic search")
-
-
-class CBSSRequests(dd.Table):
-    pass
-
-
-class IdentifyPersonRequests(CBSSRequests):
-    required_roles = dd.required(CBSSUser)
-    model = 'cbss.IdentifyPersonRequest'
-    active_fields = 'person'
-    detail_layout = IdentifyPersonRequestDetail()
-    insert_layout = IdentifyPersonRequestInsert()
-
-    @dd.constant()
-    def spacer(self):
-        return '<br/>'
-
-
-class AllIdentifyPersonRequests(IdentifyPersonRequests):
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
-
-
-class MyIdentifyPersonRequests(ByUser, IdentifyPersonRequests):
-    pass
-
-
-class IdentifyRequestsByPerson(IdentifyPersonRequests):
-    required_roles = dd.required(CBSSUser)
-    master_key = 'person'
-    column_names = 'user sent status *'
-
-
-class IdentifyPersonResult(dd.VirtualTable):
-    """
-    Displays the response of an :class:`IdentifyPersonRequest`
-    as a table.
-    """
-    master = 'cbss.IdentifyPersonRequest'
-    master_key = None
-    label = _("Results")
-    column_names = 'national_id:10 last_name:20 first_name:10 address birth_date:10 birth_location civil_state *'
-
-    class Row(AttrDict):
-        @classmethod
-        def get_chooser_for_field(cls, fieldname):
-            return None
-
-    @classmethod
-    def get_data_rows(self, ar):
-        ipr = ar.master_instance
-        if ipr is None:
-            #~ print "20120606 ipr is None"
-            return
-        #~ if not ipr.status in (RequestStates.ok,RequestStates.fictive):
-        if not ipr.status in (RequestStates.ok, RequestStates.warnings):
-            #~ print "20120606 wrong status", ipr.status
-            return
-        service_reply = ipr.get_service_reply()
-        results = service_reply.childAtPath('/SearchResults').children
-        #~ print "20120606 got", service_reply
-        if results is None:
-            #~ print "20120606 no /SearchResults"
-            #~ return []
-            return
-        for obj in results:
-            data = dict()
-            data.update(
-                national_id=nodetext(
-                    obj.childAtPath('/Basic/SocialSecurityUser')))
-            data.update(
-                last_name=nodetext(obj.childAtPath('/Basic/LastName')))
-            data.update(
-                first_name=nodetext(obj.childAtPath('/Basic/FirstName')))
-            data.update(
-                gender=cbss2gender(nodetext(obj.childAtPath('/Basic/Gender'))))
-            data.update(
-                birth_date=cbss2date(nodetext(
-                    obj.childAtPath('/Basic/BirthDate'))))
-            data.update(civil_state=cbss2civilstate(
-                obj.childAtPath('/Extended/CivilState')))
-            data.update(
-                birth_location=nodetext(
-                    obj.childAtPath('/Extended/BirthLocation')))
-            data.update(cbss2address(obj))
-            yield self.Row(**data)
-
-    @dd.displayfield(_("National ID"))
-    def national_id(self, obj, ar):
-        return obj.national_id
-
-    @dd.displayfield(_("Last name"))
-    def last_name(self, obj, ar):
-        return obj.last_name
-
-    @dd.displayfield(_("First name"))
-    def first_name(self, obj, ar):
-        return obj.first_name
-
-    @dd.virtualfield(dd.Genders.field())
-    def gender(self, obj, ar):
-        return obj.gender
-
-    @dd.displayfield(_("Birth date"))
-    def birth_date(self, obj, ar):
-        return obj.birth_date
-
-    @dd.displayfield(_("Birth location"))
-    def birth_location(self, obj, ar):
-        return obj.birth_location
-
-    @dd.displayfield(_("Civil state"))
-    def civil_state(self, obj, ar):
-        return obj.civil_state
-
-    @dd.displayfield(_("Address"))
-    def address(self, obj, ar):
-        return obj.address
+# dd.update_field(IdentifyPersonRequest,'first_name',blank=True)
+# dd.update_field(IdentifyPersonRequest,'last_name',blank=True)
 
 
 class ManageAccessRequest(SSDNRequest, WithPerson):
@@ -592,18 +309,18 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
         verbose_name = _("ManageAccess Request")
         verbose_name_plural = _("ManageAccess Requests")
 
-    #~ purpose = models.IntegerField(verbose_name=_('Purpose'),
-      #~ default=0,help_text="""\
-#~ The purpose for which the inscription needs to be
-#~ registered/unregistered or listed.
-#~ For listing this field is optional,
-#~ for register/unregister it is obligated.""")
+    # purpose = models.IntegerField(verbose_name=_('Purpose'),
+      # default=0,help_text="""\
+# The purpose for which the inscription needs to be
+# registered/unregistered or listed.
+# For listing this field is optional,
+# for register/unregister it is obligated.""")
 
-    #~ sector = models.IntegerField(verbose_name=_('Sector'),
-      #~ blank=False,default=0,help_text="""\
-#~ For register and unregister this element is ignored.
-#~ It can be used for list,
-#~ when information about sectors is required.""")
+    # sector = models.IntegerField(verbose_name=_('Sector'),
+      # blank=False,default=0,help_text="""\
+# For register and unregister this element is ignored.
+# It can be used for list,
+# when information about sectors is required.""")
 
     sector = models.ForeignKey(
         'cbss.Sector', # on_delete=models.PROTECT,
@@ -614,7 +331,7 @@ when information about sectors is required.""")
 
     purpose = models.ForeignKey(
         'cbss.Purpose',
-        #~ blank=True,null=True,
+        # blank=True,null=True,
         help_text="""\
 The purpose for which the inscription needs to be
 registered/unregistered or listed.
@@ -622,10 +339,10 @@ For listing this field is optional,
 for register/unregister it is mandatory.""")
 
     start_date = models.DateField(
-        #~ blank=True,null=True,
+        # blank=True,null=True,
         verbose_name=_("Period from"))
     end_date = models.DateField(
-        #~ blank=True,null=True,
+        # blank=True,null=True,
         verbose_name=_("Period until"))
 
     # 20120527 : Django converts default value to unicode. didnt yet
@@ -634,7 +351,7 @@ for register/unregister it is mandatory.""")
         blank=False, default=ManageActions.LIST.as_callable)
     query_register = QueryRegisters.field(
         blank=False, default=QueryRegisters.ALL.as_callable)
-    #~ action = ManageActions.field(blank=False)
+    # action = ManageActions.field(blank=False)
     # ~ query_register = QueryRegisters.field(blank=False) # ,default=QueryRegisters.ALL.as_callable)
 
     def save(self, *args, **kw):
@@ -657,7 +374,7 @@ for register/unregister it is mandatory.""")
         national_id = self.get_ssin()
         main = E('mar:ManageAccessRequest', ns=NSMAR)
         main.append(E('mar:SSIN').setText(national_id))
-        #~ main.append(E('mar:Purpose').setText(str(self.purpose)))
+        # main.append(E('mar:Purpose').setText(str(self.purpose)))
         if self.purpose_id:
             main.append(E('mar:Purpose').setText(str(self.purpose.code)))
         period = E('mar:Period')
@@ -729,71 +446,6 @@ The SSIN of the person to register/unregister/list.
 """)
 
 
-class ManageAccessRequestDetail(CBSSRequestDetail):
-
-    p1 = dd.Panel("""
-    action start_date end_date
-    purpose query_register
-    """, label=_("Requested action"))
-
-    proof = dd.Panel("""
-    national_id sis_card_no id_card_no
-    first_name last_name birth_date
-    """, label=_("Proof of authentication"))
-    parameters = dd.Panel("p1 proof", label=_("Parameters"))
-
-    #~ def setup_handle(self,lh):
-        #~ lh.p1.label = _("Requested action")
-        #~ lh.proof.label = _("Proof of authentication")
-        #~ CBSSRequestDetail.setup_handle(self,lh)
-
-
-class ManageAccessRequestInsert(dd.FormLayout):
-    window_size = (60, 'auto')
-
-    p1 = dd.Panel("""
-    action start_date end_date
-    purpose query_register
-    """, label=_("Requested action"))
-
-    proof = dd.Panel("""
-    national_id sis_card_no id_card_no
-    first_name last_name birth_date
-    """, label=_("Proof of authentication"))
-
-    main = """
-    person
-    p1
-    proof
-    """
-
-    #~ def setup_handle(self,lh):
-        #~ lh.p1.label = _("Requested action")
-        #~ lh.proof.label = _("Proof of authentication")
-        #~ super(ManageAccessRequestInsert,self).setup_handle(lh)
-
-
-class ManageAccessRequests(CBSSRequests):
-    required_roles = dd.required(CBSSUser)
-    #~ window_size = (500,400)
-    model = 'cbss.ManageAccessRequest'
-    detail_layout = ManageAccessRequestDetail()
-    insert_layout = ManageAccessRequestInsert()
-    active_fields = 'person'
-
-
-class AllManageAccessRequests(ManageAccessRequests):
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
-
-
-class ManageAccessRequestsByPerson(ManageAccessRequests):
-    master_key = 'person'
-
-
-class MyManageAccessRequests(ManageAccessRequests, ByUser):
-    required_roles = dd.required(CBSSUser)
-
-
 ##
 ## RetrieveTIGroupsRequest ("Transaction 25")
 ##
@@ -857,8 +509,8 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
         meth = client.service.retrieveTI
         clientclass = meth.clientclass(kwargs)
         client = clientclass(meth.client, meth.method)
-        #~ print 20120613, portSelector[0]
-        #~ print '20120613b', dir(client)
+        # print 20120613, portSelector[0]
+        # print '20120613b', dir(client)
         s = self.response_xml.encode('utf-8')
         return client.succeeded(client.method.binding.input, s)
 
@@ -912,7 +564,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 raise Warning(msg)
             self.response_xml = reply.decode('utf-8')  # 20130201
 
-        #~ self.response_xml = unicode(reply)
+        # self.response_xml = unicode(reply)
         reply = self.get_service_reply()
         self.ticket = reply.informationCBSS.ticketCBSS
         self.status = RequestStates.warnings
@@ -920,63 +572,14 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
         reply_has_result(reply)
 
         self.status = RequestStates.ok
-        #~ self.response_xml = str(res)
-        #~ self.response_xml = "20120522 %s %s" % (res.__class__,res)
-        #~ print 20120523, res.informationCustomer
-        #~ print self.response_xml
+        # self.response_xml = str(res)
+        # self.response_xml = "20120522 %s %s" % (res.__class__,res)
+        # print 20120523, res.informationCustomer
+        # print self.response_xml
         return reply
 
     def Result(self, ar):
         return ar.spawn(RetrieveTIGroupsResult, master_instance=self)
-
-
-class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
-
-    parameters = dd.Panel("national_id language history",
-                          label=_("Parameters"))
-
-    result = "cbss.RetrieveTIGroupsResult"
-
-    #~ def setup_handle(self,lh):
-        #~ CBSSRequestDetail.setup_handle(self,lh)
-
-#~ class RetrieveTIGroupsRequestInsert(dd.FormLayout):
-    #~ window_size = (40,'auto')
-    #~ main = """
-    #~ person
-    #~ national_id language
-    #~ history
-    #~ """
-
-
-class RetrieveTIGroupsRequests(CBSSRequests):
-    #~ debug_permissions = True
-    required_roles = dd.login_required(CBSSUser)
-    model = RetrieveTIGroupsRequest
-    detail_layout = RetrieveTIGroupsRequestDetail()
-    column_names = 'id user person national_id language history status ticket sent environment'
-    #~ insert_layout = RetrieveTIGroupsRequestInsert()
-    insert_layout = dd.FormLayout("""
-    person
-    national_id language
-    history
-    """, window_size=(40, 'auto'))
-    #~ insert_layout = RetrieveTIGroupsRequestInsert(window_size=(400,'auto'))
-
-
-class AllRetrieveTIGroupsRequests(RetrieveTIGroupsRequests):
-    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
-
-
-class RetrieveTIGroupsRequestsByPerson(RetrieveTIGroupsRequests):
-    master_key = 'person'
-
-
-class MyRetrieveTIGroupsRequests(RetrieveTIGroupsRequests, ByUser):
-    required_roles = dd.login_required(CBSSUser)
-
-
-from .tx25 import RetrieveTIGroupsResult
 
 
 @dd.receiver(dd.pre_analyze)
@@ -1058,19 +661,13 @@ def cbss_summary(self, ar):
     """
     if ar is None:
         return ''
-    #~ qs = IdentifyPersonRequest.objects.filter(person=self,status=RequestStates.ok)
     html = '<p><ul>'
-    #~ for m in (IdentifyPersonRequest,ManageAccessRequest,RetrieveTIGroupsRequest):
-        #~ n = m.objects.filter(person=self).count()
-        #~ if n > 0:
-            #~ html += "<li>%d %s</li>" % (n,unicode(m._meta.verbose_name_plural))
-    #~ html += '</ul></p>'
-    #~ html += '<p>Using XyzByPerson:<ul>'
-    for t in (IdentifyRequestsByPerson, ManageAccessRequestsByPerson, RetrieveTIGroupsRequestsByPerson):
+    for t in (IdentifyRequestsByPerson, ManageAccessRequestsByPerson,
+              RetrieveTIGroupsRequestsByPerson):
         n = ar.spawn(t, master_instance=self).get_total_count()
         if n > 0:
-            html += "<li>%d %s</li>" % (n,
-                                        unicode(t.model._meta.verbose_name_plural))
+            html += "<li>%d %s</li>" % (
+                n, unicode(t.model._meta.verbose_name_plural))
     html += '</ul></p>'
     html = '<div class="htmlText">%s</div>' % html
     return html
@@ -1094,9 +691,10 @@ def setup_site_cache(self, force):
     if not environment:
         return  # silently return
 
-    if not environment in CBSS_ENVS:
-        raise Exception("Invalid `cbss_environment` %r: must be empty or one of %s." % (
-            environment, CBSS_ENVS))
+    if environment not in CBSS_ENVS:
+        raise Exception(
+            "Invalid `cbss_environment` %r: must be empty or one of %s." % (
+                environment, CBSS_ENVS))
 
     context = dict(cbss_environment=environment)
 
@@ -1116,10 +714,10 @@ def setup_site_cache(self, force):
 
     make_wsdl('RetrieveTIGroupsV3.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
     make_wsdl('WebServiceConnector.wsdl', SSDNRequest.wsdl_parts)
-    #~ make_wsdl('TestConnectionService.wsdl',TestConnectionRequest.wsdl_parts)
+    # make_wsdl('TestConnectionService.wsdl',TestConnectionRequest.wsdl_parts)
 
     # The following xsd files are needed, unmodified but in the same directory
-    #~ for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd', 'TestConnectionServiceV1.xsd':
+    # for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd', 'TestConnectionServiceV1.xsd':
     for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd':
         src = os.path.join(os.path.dirname(__file__), 'XSD', fn)
         target = os.path.join(settings.MEDIA_ROOT, 'cache', 'wsdl', fn)
@@ -1127,3 +725,4 @@ def setup_site_cache(self, force):
             shutil.copy(src, target)
 
 
+from .ui import *

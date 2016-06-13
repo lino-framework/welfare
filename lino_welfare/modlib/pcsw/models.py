@@ -64,6 +64,7 @@ from lino.modlib.contacts.roles import ContactsUser
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.cbss.choicelists import OK_STATES
 
 from lino.utils import ssin
 
@@ -601,7 +602,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
         elems = []
         sar = ar.spawn(
             SLAVE, master_instance=self,
-            filter=models.Q(status__in=cbss.OK_STATES))
+            filter=models.Q(status__in=OK_STATES))
         btn = SLAVE.insert_action.request_from(ar).ar2button()
         n = sar.get_total_count()
         if n > 0:

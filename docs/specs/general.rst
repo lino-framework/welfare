@@ -60,16 +60,16 @@ The following table gives an overview of these things.
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
- cal.Calendar                   cal.Calendars                   7         11
- cal.Event                      cal.OneEvent                    24        569
+ cal.Calendar                   cal.Calendars                   7         12
+ cal.Event                      cal.OneEvent                    24        581
  cal.EventType                  cal.EventTypes                  20        9
- cal.Guest                      cal.Guests                      9         524
+ cal.Guest                      cal.Guests                      9         525
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
- cal.Subscription               cal.Subscriptions               4         8
+ cal.Subscription               cal.Subscriptions               4         9
  cal.Task                       cal.Tasks                       19        34
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
@@ -115,7 +115,7 @@ The following table gives an overview of these things.
  debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
  esf.ClientSummary              esf.Summaries                   19        0
- excerpts.Excerpt               excerpts.Excerpts               12        69
+ excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        21
  finan.BankStatement            finan.BankStatements            16        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
@@ -193,7 +193,7 @@ The following table gives an overview of these things.
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     21        12
+ users.User                     users.Users                     21        13
  vatless.AccountInvoice         vatless.Invoices                18        30
  vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======

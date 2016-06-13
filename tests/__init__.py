@@ -183,7 +183,7 @@ class SpecsTests(TestCase):
         return self.run_simple_doctests('docs/specs/courses2.rst')
 
     def test_cbss(self):
-        return self.run_docs_doctests('specs/cbss.rst')
+        return self.run_simple_doctests('docs/specs/cbss.rst')
 
 
 class DocsTests(BaseTestCase):

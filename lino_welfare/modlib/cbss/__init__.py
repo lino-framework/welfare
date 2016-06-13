@@ -18,11 +18,7 @@
 
 """Adds functionality to make CBSS requests.
 
-CBSS (Crossroads Bank for Social Security, French *Banque Carrefour de
-la Sécurité Sociale*) is an information system for data exchange
-between different Belgian government agencies.
-`Official website <http://www.ksz-bcss.fgov.be>`__
-
+See :ref:`welfare.specs.cbss`.
 
 .. autosummary::
    :toctree:
@@ -30,6 +26,8 @@ between different Belgian government agencies.
     mixins
     choicelists
     models
+    ui
+    utils
     tx25
     fixtures.cbss_demo
     fixtures.cbss
@@ -48,6 +46,8 @@ from django.utils.translation import ugettext_lazy as _
 class Plugin(ad.Plugin):
     verbose_name = _("CBSS")
 
+    needs_plugins = ['lino_welfare.modlib.integ']
+
     cbss_live_requests = False
     """Whether executing requests should try to really connect to the
     CBSS.  Real requests would fail with a timeout if run from behind
@@ -65,14 +65,20 @@ class Plugin(ad.Plugin):
 
     """
 
+    def setup_main_menu(self, site, profile, m):
+        mg = site.plugins.integ
+        m = m.add_menu(mg.app_label, mg.verbose_name)
+        m = m.add_menu(self.app_label, self.verbose_name)
+        m.add_action('cbss.MyIdentifyPersonRequests')
+        m.add_action('cbss.MyManageAccessRequests')
+        m.add_action('cbss.MyRetrieveTIGroupsRequests')
+
     def setup_config_menu(self, site, profile, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cbss.Sectors')
         m.add_action('cbss.Purposes')
 
     def setup_explorer_menu(self, site, profile, m):
-        # if profile.cbss_level < site.modules.users.UserLevels.manager:
-        #     return
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cbss.AllIdentifyPersonRequests')
         m.add_action('cbss.AllManageAccessRequests')

@@ -238,14 +238,15 @@ It is not allowed to delete a person who is being used as the
  9    caroline
  5    hubert     Huppertz Hubert   183
  10   judith     Jousten Judith    186
- 12   kerstin
+ 13   kerstin
  4    melanie    Mélard Mélanie    182
  8    nicolas
+ 11   patrick
  1    robin
  3    rolf
  2    romain
  7    theresia   Thelen Theresia   185
- 11   wilfried
+ 12   wilfried
 ==== ========== ================= =====
 <BLANKLINE>
 

@@ -47,6 +47,7 @@ list of profiles:
  510                 Accountant (Manager)
  800                 Supervisor
  900     admin       Administrator
+ 910                 Security advisor
 ======= =========== ===============================
 <BLANKLINE>
 
