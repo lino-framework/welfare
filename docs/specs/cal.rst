@@ -44,6 +44,7 @@ users.UserProfiles:410 Sozi (Manager)
 users.UserProfiles:500 Buchhalter
 users.UserProfiles:510 Accountant (Manager)
 users.UserProfiles.admin:900 Verwalter
+users.UserProfiles:910 Security advisor
 
 
 
@@ -58,22 +59,23 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ====================== ============ ================= ============= ===================== ====== ============================
- Start time   Client                 Summary      Managed by        Assigned to   Calendar Event Type   Room   Workflow
------------- ---------------------- ------------ ----------------- ------------- --------------------- ------ ----------------------------
- 08:30:00                            Diner        Alicia Allmanns                 Meeting                      **Suggested** → [Take]
- 08:30:00                            Auswertung   Rolf Rompen                     Internal meeting             **Suggested** → [Take]
- 09:40:00     EVERS Eberhart (127)   Diner        Mélanie Mélard                  Appointment                  **Suggested** → [Take]
- 10:20:00                            Treffen      Hubert Huppertz                 External meeting             **Suggested** → [Take]
- 10:20:00     JOHNEN Johann (138)    Lunch        Robin Rood                      Evaluation                   **Suggested** → [Take]
- 11:10:00                            Rencontre    Romain Raffault                 Private                      **Suggested** → [Take]
- 13:30:00                            Auswertung   Judith Jousten                  External meeting             **Suggested** → [Take]
- 13:30:00                            Treffen      Theresia Thelen                 Meeting                      **Suggested** → [Notified]
-============ ====================== ============ ================= ============= ===================== ====== ============================
+============ ====================== ============= ================== ============= ===================== ====== ============================
+ Start time   Client                 Summary       Managed by         Assigned to   Calendar Event Type   Room   Workflow
+------------ ---------------------- ------------- ------------------ ------------- --------------------- ------ ----------------------------
+ 08:30:00                            Diner         Alicia Allmanns                  Meeting                      **Suggested** → [Take]
+ 08:30:00                            Evaluation    Romain Raffault                  Internal meeting             **Suggested** → [Take]
+ 09:40:00     EVERS Eberhart (127)   Diner         Mélanie Mélard                   Appointment                  **Suggested** → [Take]
+ 09:40:00                            Auswertung    Theresia Thelen                  External meeting             **Suggested** → [Notified]
+ 10:20:00                            Treffen       Hubert Huppertz                  External meeting             **Suggested** → [Take]
+ 10:20:00     JOHNEN Johann (138)    Mittagessen   Rolf Rompen                      Evaluation                   **Suggested** → [Take]
+ 11:10:00                            Treffen       Patrick Paraneau                 Private                      **Suggested** → [Take]
+ 13:30:00                            Auswertung    Judith Jousten                   External meeting             **Suggested** → [Take]
+ 13:30:00                            Meeting       Robin Rood                       Meeting                      **Suggested** → [Take]
+============ ====================== ============= ================== ============= ===================== ====== ============================
 <BLANKLINE>
 
 Note how Theresia cannot [Take] her own event (because she has it
-already), and how she set only her own event to [Notified].
+already), and how she can set only her own event to [Notified].
 
 Users looking at their events
 =============================
@@ -102,7 +104,18 @@ Here is what it says for Alicia.
  *Wed 28/05/2014 at 13:30*   CHANTRAINE Marc (120*)      Evaluation            Diner                **Cancelled**
  *Thu 29/05/2014 at 08:30*                               External meeting      Souper               **Omitted**
  *Fri 30/05/2014 at 09:40*                               Internal meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
- ...
+ *Mon 23/06/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 1         **Suggested** → [Notified] [▽]
+ *Mon 14/07/2014*            RADERMACHER Fritz (158)     Evaluation            Évaluation 6         **Suggested** → [Notified] [▽]
+ *Wed 23/07/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 2         **Suggested** → [Notified] [▽]
+ *Thu 14/08/2014*            HILGERS Hildegard (133)     Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 25/08/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 3         **Suggested** → [Notified] [▽]
+ *Thu 25/09/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 4         **Suggested** → [Notified] [▽]
+ *Tue 14/10/2014*            RADERMACHER Fritz (158)     Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 27/10/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 5         **Suggested** → [Notified] [▽]
+ *Thu 27/11/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 6         **Suggested** → [Notified] [▽]
+ *Mon 29/12/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
+ *Thu 29/01/2015 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 8         **Suggested** → [Notified] [▽]
+ *Mon 02/03/2015 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
 =========================== =========================== ===================== ==================== =================================
 <BLANKLINE>
 
@@ -123,14 +136,14 @@ These are for Hubert:
  *Mon 26/05/2014 at 11:10*                                             Internal meeting      Mittagessen     **Suggested** → [Notified]
  *Tue 27/05/2014 at 13:30*                                             External meeting      Abendessen      **Draft** → [Notified] [Cancel]
  *Wed 28/05/2014 at 08:30*                                             Private               Frühstück       **Took place** → [Reset]
- *Wed 28/05/2014 at 09:00*   BRECHT Bernd (177)                        Evaluation            Évaluation 15   **Suggested** → [Notified]
+ *Wed 28/05/2014 at 09:00*   BRECHT Bernd (177)                        Evaluation            Évaluation 15   **Suggested** → [Notified] [▽]
  *Wed 28/05/2014 at 09:40*                                             Meeting               Treffen         **Cancelled**
  *Thu 29/05/2014 at 10:20*   DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Beratung        **Omitted**
  ...
- *Mon 09/03/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 8    **Suggested** → [Notified]
- *Thu 19/03/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 9    **Suggested** → [Notified]
- *Thu 09/04/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 9    **Suggested** → [Notified]
- *Mon 20/04/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 10   **Suggested** → [Notified]
+ *Mon 09/03/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 8    **Suggested** → [Notified] [▽]
+ *Thu 19/03/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 9    **Suggested** → [Notified] [▽]
+ *Thu 09/04/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 9    **Suggested** → [Notified] [▽]
+ *Mon 20/04/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 10   **Suggested** → [Notified] [▽]
 =========================== ========================================= ===================== =============== =================================
 <BLANKLINE>
 
@@ -147,16 +160,20 @@ And these for Mélanie:
  *Sat 24/05/2014 at 11:10*                                 External meeting      Petit-déjeuner       **Took place** → [Reset]
  *Sat 24/05/2014 at 13:30*                                 Internal meeting      Rencontre            **Cancelled**
  *Sun 25/05/2014 at 08:30*                                 External meeting      Consultation         **Omitted**
- *Mon 26/05/2014 at 09:00*   ENGELS Edgar (129)            Evaluation            Évaluation 3         **Suggested** → [Notified]
+ *Mon 26/05/2014 at 09:00*   ENGELS Edgar (129)            Evaluation            Évaluation 3         **Suggested** → [Notified] [▽]
  *Mon 26/05/2014 at 09:40*                                 Private               Séminaire            **Notified** → [Cancel] [Reset]
  *Mon 26/05/2014 at 10:20*                                 Meeting               Evaluation           **Suggested** → [Notified]
  *Tue 27/05/2014 at 11:10*   ENGELS Edgar (129)            Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
  *Wed 28/05/2014 at 08:30*                                 External meeting      Diner                **Cancelled**
  *Wed 28/05/2014 at 13:30*   FAYMONVILLE Luc (130*)        Evaluation            Interview            **Took place** → [Reset]
  *Thu 29/05/2014 at 09:40*                                 Internal meeting      Souper               **Omitted**
- *Fri 30/05/2014 at 10:20*                                 External meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
- *Thu 05/06/2014 at 09:00*   LAZARUS Line (144)            Evaluation            Évaluation 2         **Suggested** → [Notified]
  ...
+ *Thu 19/03/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
+ *Thu 02/04/2015 at 09:00*   DUBOIS Robin (179)            Evaluation            Évaluation 8         **Suggested** → [Notified] [▽]
+ *Thu 09/04/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 20/04/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation            Évaluation 10        **Suggested** → [Notified] [▽]
+ *Mon 04/05/2015 at 09:00*   DUBOIS Robin (179)            Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 11/05/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation            Évaluation 10        **Suggested** → [Notified] [▽]
 =========================== ============================= ===================== ==================== =================================
 <BLANKLINE>
 
@@ -166,14 +183,13 @@ These are Alicia's calendar appointments of the last two months:
 >>> last_week = dict(start_date=dd.today(-30), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEvents, language='en',
 ...     param_values=last_week)
-=========================== ========================= ===================== =============== ============================
+=========================== ========================= ===================== =============== ================================
  When                        Client                    Calendar Event Type   Summary         Workflow
---------------------------- ------------------------- --------------------- --------------- ----------------------------
- *Wed 07/05/2014 at 09:00*   DA VINCI David (165)      Evaluation            Évaluation 15   **Suggested** → [Notified]
- *Wed 14/05/2014*            HILGERS Hildegard (133)   Evaluation            Évaluation 6    **Suggested** → [Notified]
-=========================== ========================= ===================== =============== ============================
+--------------------------- ------------------------- --------------------- --------------- --------------------------------
+ *Wed 07/05/2014 at 09:00*   DA VINCI David (165)      Evaluation            Évaluation 15   **Suggested** → [Notified] [▽]
+ *Wed 14/05/2014*            HILGERS Hildegard (133)   Evaluation            Évaluation 6    **Suggested** → [Notified] [▽]
+=========================== ========================= ===================== =============== ================================
 <BLANKLINE>
-
 
 
 
@@ -208,7 +224,7 @@ following calendars:
 ==== ========== ===========
  ID   Kalender   versteckt
 ---- ---------- -----------
- 7    rolf       Nein
+ 8    rolf       Nein
 ==== ========== ===========
 <BLANKLINE>
 

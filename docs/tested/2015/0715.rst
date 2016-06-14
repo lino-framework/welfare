@@ -102,7 +102,8 @@ competences contracts history calendar MovementsByProject misc debts
 Lino filters them away only when generating the js files, py2js and
 declare_vars:
 
->>> from lino.utils.jsgen import with_user_profile, py2js, declare_vars
+>>> from lino.utils.jsgen import with_user_profile
+>>> from lino.utils.jsgen import py2js, declare_vars
 >>> def f():
 ...     print(py2js(lh.main.elements))
 ...     for ln in declare_vars(lh.main):
@@ -110,11 +111,12 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
+[ general_panel797, contact_panel823, coaching_panel1029, aids_tab_panel1123, work_tab_1_panel1152, history_panel1839 ]
+
+.. before 20160530: [ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 
->>> from lino.utils.jsgen import with_user_profile
 >>> class W:
 ...     def write(self, s):
 ...         if "career" in s: print(s)

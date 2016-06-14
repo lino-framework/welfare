@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
+"""Defines database models for this plugin.
 """
 
 from __future__ import unicode_literals
@@ -36,10 +36,14 @@ from .choicelists import ParticipationCertificates, StatisticalFields
 
 
 class ClientSummary(Certifiable, Summary):
+    """An **ESF summary** is a database object which represents one "fiche
+    stagiaire".
+
+    """
 
     class Meta:
-        verbose_name = _("FSE Summary")
-        verbose_name_plural = _("FSE Summaries")
+        verbose_name = _("ESF Summary")
+        verbose_name_plural = _("ESF Summaries")
 
     summary_period = 'yearly'
 
@@ -62,7 +66,7 @@ class ClientSummary(Certifiable, Summary):
 
     @classmethod
     def get_summary_masters(cls):
-        return rt.modules.pcsw.Client.objects.filter(has_fse=True)
+        return rt.modules.pcsw.Client.objects.filter(has_esf=True)
 
     def get_summary_collectors(self):
         qs = rt.modules.cal.Guest.objects.all()
@@ -89,32 +93,37 @@ class ClientSummary(Certifiable, Summary):
 
 
 class Summaries(dd.Table):
-    model = 'fse.ClientSummary'
+    """Base class for all tables on :class:`Summary`.
+    """
+    model = 'esf.ClientSummary'
     detail_layout = """
     master year month
     children_at_charge certified_handicap other_difficulty id
     education_level result remark
     results
     """
-    insert_layout = """
-    master
-    education_level result
-    remark
-    """
+    allow_create = False
+    # insert_layout = """
+    # master
+    # education_level result
+    # remark
+    # """
 
 
 class AllSummaries(Summaries):
+    """Lists all ESF summaries for all clients."""
     required_roles = dd.required(dd.SiteStaff)
 
 
 class SummariesByClient(Summaries):
-    """Lists the FSE summaries for a given client."""
+    """Lists the ESF summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
-    insert_layout = """
-    education_level result
-    remark
-    """
+    # slave_grid_format = 'html'
+    # insert_layout = """
+    # education_level result
+    # remark
+    # """
 
     @classmethod
     def setup_columns(cls):
@@ -125,5 +134,5 @@ class SummariesByClient(Summaries):
         
 
 dd.inject_field(
-    'pcsw.Client', 'has_fse', models.BooleanField(_("FSE data"), default=True))
+    'pcsw.Client', 'has_esf', models.BooleanField(_("ESF data"), default=True))
 

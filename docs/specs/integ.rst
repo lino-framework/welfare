@@ -20,6 +20,8 @@ Integration Service
 A technical tour into the :mod:`lino_welfare.modlib.integ` module.
 See also :doc:`/tour/autoevents`.
 
+Table of contents:
+
 .. contents::
    :local:
 
@@ -108,12 +110,25 @@ UsersWithClients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
+ Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **3**            **7**
+ Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **11**           **19**
+ Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **11**           **18**
+ **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **25**           **44**
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+<BLANKLINE>
+
+Before 20160608:
+
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+ Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
+-------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
  Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **7**            **7**
  Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **19**           **19**
  Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **18**           **18**
  **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **44**           **44**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
-<BLANKLINE>
+
+
 
 
 Activity report
@@ -129,6 +144,21 @@ càd un document complet généré par Lino, contenant des
 sections, des tables et du texte libre.
 Dans la version écran cliquer sur un chiffre pour voir d'où
 il vient.
+<BLANKLINE>
+<BLANKLINE>
+------------------------
+Users with their Clients
+------------------------
+<BLANKLINE>
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+ Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
+-------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
+ Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **3**            **7**
+ Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **11**           **19**
+ Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **11**           **18**
+ **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **25**           **44**
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+<BLANKLINE>
 --------------------
 Indicateurs généraux
 --------------------
@@ -142,14 +172,14 @@ No data to display
 --------------------------------
 Causes d'arrêt des interventions
 --------------------------------
-============================ ======== ======== ========= ======== ====== ======= =======
- Description                  alicia   hubert   melanie   romain   rolf   robin   Total
----------------------------- -------- -------- --------- -------- ------ ------- -------
+============================ ======== ======== ========= ========= ======== ====== ======= =======
+ Description                  alicia   hubert   melanie   patrick   romain   rolf   robin   Total
+---------------------------- -------- -------- --------- --------- -------- ------ ------- -------
  Transfer to colleague
  End of right on social aid
  Moved to another town
  Found a job
-============================ ======== ======== ========= ======== ====== ======= =======
+============================ ======== ======== ========= ========= ======== ====== ======= =======
 <BLANKLINE>
 =====
 ISIPs
@@ -167,6 +197,7 @@ PIIS par agent et type
  Kerstin Kerres
  Mélanie Mélard
  nicolas
+ Patrick Paraneau
  Robin Rood
  Rolf Rompen
  Romain Raffault
@@ -238,6 +269,7 @@ Art60§7 par agent et type
  Kerstin Kerres
  Mélanie Mélard
  nicolas
+ Patrick Paraneau
  Robin Rood
  Rolf Rompen
  Romain Raffault

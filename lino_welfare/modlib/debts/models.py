@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Luc Saffre
+# Copyright 2012-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -63,7 +63,7 @@ if False:
         id_start = last + 1
     for i, obj in enumerate(obj_list):
         obj.id = id_start + i
-    #~ print 20130508, [dd.obj2str(o) for o in obj_list]
+    # print 20130508, [dd.obj2str(o) for o in obj_list]
     return model.objects.bulk_create(obj_list)
 
 
@@ -173,7 +173,8 @@ Vielleicht mit Fußnoten?"""))
     print_empty_rows = models.BooleanField(
         _("Print empty rows"),
         default=False,
-        help_text=_("""Check this to print also empty rows for later completion."""))
+        help_text=_("Check this to print also empty rows "
+                    "for later completion."))
     include_yearly_incomes = models.BooleanField(
         _("Include yearly incomes"),
         default=False,
@@ -181,9 +182,10 @@ Vielleicht mit Fußnoten?"""))
                     "Debts Overview table of this Budget."))
     intro = dd.RichTextField(_("Introduction"), format="html", blank=True)
     conclusion = dd.RichTextField(_("Conclusion"), format="html", blank=True)
-    dist_amount = dd.PriceField(_("Distributable amount"), default=120,
-        help_text=_("""\
-The total monthly amount available for debts distribution."""))
+    dist_amount = dd.PriceField(
+        _("Distributable amount"), default=120,
+        help_text=_("The total monthly amount available "
+                    "for debts distribution."))
 
     def __str__(self):
         if self.pk is None:
@@ -297,7 +299,7 @@ The total monthly amount available for debts distribution."""))
 
         """
         t = entries_table_for_group(group)
-        #~ print '20130327 entries_by_group', self, t
+        # print '20130327 entries_by_group', self, t
         if t is None:
             return None
         ar = ar.spawn(t,
@@ -305,7 +307,7 @@ The total monthly amount available for debts distribution."""))
                       title=unicode(group),
                       filter=models.Q(account__group=group), **kw)
 
-        #~ print 20120606, sar
+        # print 20120606, sar
         return ar
 
     def sum(self, fldname, types=None, exclude=None, *args, **kw):
@@ -347,8 +349,7 @@ The total monthly amount available for debts distribution."""))
         Entry = rt.modules.debts.Entry
         Actor = rt.modules.debts.Actor
         Account = rt.modules.debts.Account
-        #~ if self.closed:
-        if not self.partner or self.printed_by is not None:
+        if not self.partner_id or self.printed_by is not None:
             return
         if self.entry_set.all().count() > 0:
             return
@@ -364,7 +365,7 @@ The total monthly amount available for debts distribution."""))
                 e = Entry(account=acc, budget=self,
                           seqno=seqno, account_type=acc.type)
                 e.account_changed(ar)
-                #~ e.periods = e.account.periods
+                # e.periods = e.account.periods
                 if e.account.default_amount:
                     e.amount = e.account.default_amount
                 entries.append(e)
@@ -391,8 +392,8 @@ The total monthly amount available for debts distribution."""))
                 mrs = False
                 for m in household.member_set.filter(person__isnull=False):
                 # for m in household.member_set.all():
-                    #~ if m.role and m.role.header:
-                        #~ header = m.role.header
+                    # if m.role and m.role.header:
+                        # header = m.role.header
                     if m.person.gender == dd.Genders.male and not mr:
                         header = unicode(_("Mr."))
                         mr = True
@@ -495,24 +496,24 @@ class Entry(SequencedBudgetComponent):
     class Meta:
         verbose_name = _("Budget Entry")
         verbose_name_plural = _("Budget Entries")
-        #~ unique_together = ['budget','account','name']
-        #~ unique_together = ['actor','account']
+        # unique_together = ['budget','account','name']
+        # unique_together = ['actor','account']
 
     allow_cascaded_delete = ['budget']
 
-    #~ group = models.ForeignKey(AccountGroup)
+    # group = models.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
     account = models.ForeignKey('debts.Account')
     partner = models.ForeignKey('contacts.Partner', blank=True, null=True)
-    #~ name = models.CharField(_("Remark"),max_length=200,blank=True)
-    #~ amount = dd.PriceField(_("Amount"),default=0)
+    # name = models.CharField(_("Remark"),max_length=200,blank=True)
+    # amount = dd.PriceField(_("Amount"),default=0)
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
     actor = models.ForeignKey(Actor,
                               blank=True, null=True,
         help_text="""\
 Hier optional einen Akteur angeben, wenn der Eintrag 
 sich nicht auf den Gesamthaushalt bezieht.""")
-    #~ amount = dd.PriceField(_("Amount"),default=0)
+    # amount = dd.PriceField(_("Amount"),default=0)
     circa = models.BooleanField(_("Circa"),
         default=False)
     distribute = models.BooleanField(
@@ -554,22 +555,22 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         related_name='bailiff_debts_set',
         null=True, blank=True)
 
-    #~ duplicated_fields = """
-    #~ account_type account partner actor distribute
-    #~ circa todo remark description periods monthly_rate
-    #~ """.split()
+    # duplicated_fields = """
+    # account_type account partner actor distribute
+    # circa todo remark description periods monthly_rate
+    # """.split()
 
     def get_siblings(self):
         """
         Like super(), but adds account_type. 
         E.g. the Up/Down methods should work only within a given account_type.
         """
-        #~ return super(Entry,self).get_siblings().filter(account_type=self.account_type)
+        # return super(Entry,self).get_siblings().filter(account_type=self.account_type)
         return self.__class__.objects.filter(budget=self.budget, account_type=self.account_type).order_by('seqno')
 
     @dd.chooser()
     def account_choices(cls, account_type):
-        #~ print '20120918 account_choices', account_type
+        # print '20120918 account_choices', account_type
         return rt.modules.debts.Account.objects.filter(type=account_type)
 
     @dd.chooser()
@@ -578,27 +579,30 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 
-    #~ @dd.chooser(simple_values=True)
-    #~ def amount_choices(cls,account):
-        #~ return [decimal.Decimal("0"),decimal.Decimal("2.34"),decimal.Decimal("12.34")]
+    # @dd.chooser(simple_values=True)
+    # def amount_choices(cls,account):
+        # return [decimal.Decimal("0"),decimal.Decimal("2.34"),decimal.Decimal("12.34")]
     @dd.chooser()
     def actor_choices(cls, budget):
         return Actor.objects.filter(budget=budget).order_by('seqno')
 
     @dd.displayfield(_("Description"))
     def summary_description(row, ar):
-        #~ chunks = [row.account]
+        # chunks = [row.account]
         if row.description:
             desc = row.description
-        #~ if row.partner:
-            #~ chunks.append(row.partner)
-            #~ return "%s/%s" join_words(unicode(row.account),unicode(row.partner),row.name)
-            #~ return '/'.join([unicode(x) for x in words if x])
-        #~ return join_words(unicode(row.account),row.name)
+        # if row.partner:
+            # chunks.append(row.partner)
+            # return "%s/%s" join_words(unicode(row.account),unicode(row.partner),row.name)
+            # return '/'.join([unicode(x) for x in words if x])
+        # return join_words(unicode(row.account),row.name)
         else:
-            #~ parts = [row.remark,row.partner,row.account]
-            parts = [row.account, row.partner]
-            desc = ' / '.join([unicode(x) for x in parts if x])
+            parts = []
+            if row.account_id:
+                parts.append(unicode(row.account))
+            if row.partner_id:
+                parts.append(unicode(row.partner))
+            desc = ' / '.join(parts)
         if row.todo:
             desc += " [%s]" % row.todo
         return desc
@@ -614,26 +618,26 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
             raise ValidationError(_("Periods must be > 0"))
         if self.distribute and self.monthly_rate:
             raise ValidationError(
-                #~ _("Cannot set both 'Distribute' and 'Monthly rate'"))
+                # _("Cannot set both 'Distribute' and 'Monthly rate'"))
                 _("Cannot set 'Distribute' when 'Monthly rate' is %r") % self.monthly_rate)
-        #~ self.account_type = self.account.type
-        #~ if not self.account_type:
+        # self.account_type = self.account.type
+        # if not self.account_type:
             # ~ raise ValidationError(_("Budget entry #%d has no account_type") % obj2unicode(self))
         super(Entry, self).full_clean(*args, **kw)
 
     def save(self, *args, **kw):
-        #~ if not self.name:
-            #~ if self.partner:
-                #~ self.name = unicode(self.partner.name)
-            #~ else:
-                #~ self.name = self.account.name
+        # if not self.name:
+            # if self.partner:
+                # self.name = unicode(self.partner.name)
+            # else:
+                # self.name = self.account.name
         self.account_type = self.account.type
         if not self.description:
             self.description = dd.babelattr(
                 self.account, 'name', language=self.budget.partner.language)
-            #~ self.description = unicode(self.account)
-        #~ if self.periods is None:
-            #~ self.periods = self.account.periods
+            # self.description = unicode(self.account)
+        # if self.periods is None:
+            # self.periods = self.account.periods
         super(Entry, self).save(*args, **kw)
 
     def on_duplicate(self, ar, master):
@@ -686,7 +690,7 @@ def site_setup(site):
               site.modules.contacts.Persons,
               site.modules.pcsw.Clients,
               site.modules.households.Households):
-        #~ T.add_detail_tab('debts.BudgetsByPartner')
+        # T.add_detail_tab('debts.BudgetsByPartner')
         T.add_detail_tab('debts', """
         debts.BudgetsByPartner
         debts.ActorsByPartner

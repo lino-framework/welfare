@@ -121,7 +121,8 @@ It uses functions like
 :func:`declare_vars <lino.utils.jsgen.declare_vars>` and
 :func:`py2js <lino.utils.jsgen.py2js>`.
 
->>> from lino.utils.jsgen import py2js, declare_vars, with_user_profile
+>>> from lino.utils.jsgen import py2js, declare_vars
+>>> from lino.utils.jsgen import with_user_profile
 
 
 >>> ses = rt.login("robin")

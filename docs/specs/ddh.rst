@@ -94,7 +94,7 @@ Lino Welfare:
 - cv.Duration :
   - PROTECT : art61.Contract.cv_duration, cv.Experience.duration
 - cv.EducationLevel :
-  - PROTECT : cv.Study.education_level, cv.StudyType.education_level, fse.ClientSummary.education_level
+  - PROTECT : cv.Study.education_level, cv.StudyType.education_level, esf.ClientSummary.education_level
 - cv.Function :
   - PROTECT : cv.Experience.function, cv.Skill.function, cv.Training.function, immersion.Contract.function, jobs.Candidature.function, jobs.Job.function, jobs.Offer.function
 - cv.ObstacleType :
@@ -121,7 +121,7 @@ Lino Welfare:
 - debts.Group :
   - PROTECT : debts.Account.group
 - excerpts.Excerpt :
-  - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, finan.BankStatement.printed_by, finan.JournalEntry.printed_by, finan.PaymentOrder.printed_by, fse.ClientSummary.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
+  - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, esf.ClientSummary.printed_by, finan.BankStatement.printed_by, finan.JournalEntry.printed_by, finan.PaymentOrder.printed_by, immersion.Contract.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
 - excerpts.ExcerptType :
   - PROTECT : excerpts.Excerpt.excerpt_type
 - finan.BankStatement :
@@ -183,7 +183,7 @@ Lino Welfare:
   - PROTECT : pcsw.Client.aid_type
 - pcsw.Client :
   - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, dupable_clients.Word.owner, pcsw.Coaching.client, pcsw.Dispense.client
-  - PROTECT : active_job_search.Proof.client, aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, courses.CourseRequest.person, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, fse.ClientSummary.master, immersion.Contract.client, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.ClientContact.client, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project
+  - PROTECT : active_job_search.Proof.client, aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, courses.CourseRequest.person, esf.ClientSummary.master, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, immersion.Contract.client, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.ClientContact.client, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project
 - pcsw.ClientContactType :
   - PROTECT : aids.AidType.pharmacy_type, aids.RefundConfirmation.doctor_type, contacts.Partner.client_contact_type, pcsw.ClientContact.type
 - pcsw.CoachingEnding :
@@ -238,14 +238,15 @@ It is not allowed to delete a person who is being used as the
  9    caroline
  5    hubert     Huppertz Hubert   183
  10   judith     Jousten Judith    186
- 12   kerstin
+ 13   kerstin
  4    melanie    Mélard Mélanie    182
  8    nicolas
+ 11   patrick
  1    robin
  3    rolf
  2    romain
  7    theresia   Thelen Theresia   185
- 11   wilfried
+ 12   wilfried
 ==== ========== ================= =====
 <BLANKLINE>
 

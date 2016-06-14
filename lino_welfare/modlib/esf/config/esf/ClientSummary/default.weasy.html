@@ -1,4 +1,6 @@
-<body>
+{% extends "esf/ClientSummary/base.weasy.html" %}
+{%- block main %}
+{{ super() }}
 
 Yes, {{obj}}.
 
@@ -6,7 +8,7 @@ Yes, {{obj}}.
 <tr>
 <td width="50%">
 <ul>
-{% for k in ('client', 'education_level', 'children_at_charge') %}
+{% for k in ('master', 'education_level') %}
 <li>
 {{obj._meta.get_field(k).verbose_name}} : {{getattr(obj, k)}}
 </li>
@@ -30,4 +32,6 @@ Yes, {{obj}}.
 </td>
 </table>
 
-</body>
+{{E.tostring(obj._meta.get_field('results').value_from_object(obj, ar))}}
+
+{%- endblock %}

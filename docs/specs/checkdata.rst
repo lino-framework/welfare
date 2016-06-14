@@ -44,6 +44,7 @@ checkers.
  pcsw.SSINChecker                        Check for valid identification
  pcsw.ClientCoachingsChecker             Check coachings
  isip.OverlappingContractsChecker        Check for overlapping contracts
+ ledger.VoucherChecker                   Check integrity of ledger movements
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
  dupable_clients.SimilarClientsChecker   Check for similar clients
 ======================================= ==================================================

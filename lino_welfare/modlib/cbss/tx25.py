@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2015 Luc Saffre
+# Copyright 2011-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -63,19 +63,19 @@ See also:
 
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 
-from lino.api import dd, rt
+from lino.api import dd
 from lino.utils import AttrDict, IncompleteDate
 
 from lino.utils.xmlgen import html as xghtml
 E = xghtml.E
 
-
-from lino_welfare.modlib.cbss.models import cbss2gender, reply_has_result
+from .utils import cbss2gender
+from .models import reply_has_result
+from .ui import ConfidentialResultsTable
 
 
 def rn2date(rd):
@@ -92,11 +92,11 @@ def deldate(n):
     return []
 
 
-#~ def simpleattr(n,name):
-    #~ v = getattr(n,name,None)
-    #~ if v:
-        #~ return [ ', '+name+' ' + unicode(v)]
-    #~ return []
+# def simpleattr(n,name):
+    # v = getattr(n,name,None)
+    # if v:
+        # return [ ', '+name+' ' + unicode(v)]
+    # return []
 
 def simpletype(v):
     return Info(xghtml.E.b(unicode(v)))
@@ -141,11 +141,11 @@ class Info(object):
 
     def add_codelabel(self, n):
         self.chunks += code_label(n).chunks
-        #~ if hasattr(n,'Label'):
-            #~ self.addfrom(n,'Label')
-            #~ self.addfrom(n,'Code','(',simpletype,')')
-        #~ else:
-            #~ self.addfrom(n,'Code','[',boldstring,']')
+        # if hasattr(n,'Label'):
+            # self.addfrom(n,'Label')
+            # self.addfrom(n,'Code','(',simpletype,')')
+        # else:
+            # self.addfrom(n,'Code','[',boldstring,']')
         return self
 
 
@@ -158,10 +158,10 @@ def code_label(n):
     return Info(*chunks)
 
 
-#~ CodeLabel = code_label
-#~ def CodeLabel(n):
-    #~ info = Info()
-    #~ return info
+# CodeLabel = code_label
+# def CodeLabel(n):
+    # info = Info()
+    # return info
 
 
 def NameType(n):
@@ -175,15 +175,15 @@ def NameType(n):
     return info
 
 
-#~ def addinfo(node,name,prefix=None,fmt=simpletype,suffix=''):
-    #~ v = getattr(node,name,None)
-    #~ if not v: return []
-    #~ if prefix is None:
-        #~ prefix = ', %s ' % name
-    #~ info = [force_unicode(prefix)] + fmt(v)
-    #~ if suffix:
-        #~ info.append(force_unicode(suffix))
-    #~ return info
+# def addinfo(node,name,prefix=None,fmt=simpletype,suffix=''):
+    # v = getattr(node,name,None)
+    # if not v: return []
+    # if prefix is None:
+        # prefix = ', %s ' % name
+    # info = [force_unicode(prefix)] + fmt(v)
+    # if suffix:
+        # info.append(force_unicode(suffix))
+    # return info
 def DateType(n):
     return Info(dd.dtos(rn2date(n)))
 
@@ -211,8 +211,8 @@ def PlaceType(n):
 def GraphicPlaceType(n):
     info = CountryType(n.Country)
     info.addfrom(n, 'Graphic', '')
-    #~ if hasattr(n,'Graphic'):
-        #~ info.append(', graphic:'+n.Graphic)
+    # if hasattr(n,'Graphic'):
+        # info.append(', graphic:'+n.Graphic)
     return info
 
 
@@ -225,9 +225,9 @@ def BelgianJudgementType(n):
     info.addfrom(n, 'Tribunal', None, TribunalType)
     info.addfrom(n, 'Date', None, DateType)
     info.addfrom(n, 'Place', None, PlaceType)
-    #~ info += TribunalType(n.Tribunal)
-    #~ info += DateType(n.Date)
-    #~ info += PlaceType(n.Place)
+    # info += TribunalType(n.Tribunal)
+    # info += DateType(n.Date)
+    # info += PlaceType(n.Place)
     return info
 
 
@@ -238,19 +238,19 @@ def CountryType(n):
 def LieuType(n):
     info = Info()
     if hasattr(n, 'Place1'):
-        #~ info += code_label(n.Place1)
+        # info += code_label(n.Place1)
         info.addfrom(n, 'Place1', None, code_label)
     elif hasattr(n, 'Place2'):
         info.addfrom(n, 'Place2', None, GraphicPlaceType)
     else:
         place = n.Place3
-        #~ info += GraphicPlaceType(place)
+        # info += GraphicPlaceType(place)
         info.addfrom(place, 'BelgianJudgement', '', BelgianJudgementType)
         info.addfrom(place, 'ForeignJudgement', '', ForeignJudgementType)
-        #~ if hasattr(place,'BelgianJudgement'):
-            #~ info += BelgianJudgementType(place.BelgianJudgement)
-        #~ else:
-            #~ info += ForeignJudgementType(place.ForeignJudgement)
+        # if hasattr(place,'BelgianJudgement'):
+            # info += BelgianJudgementType(place.BelgianJudgement)
+        # else:
+            # info += ForeignJudgementType(place.ForeignJudgement)
     return info
 
 
@@ -291,7 +291,7 @@ def NationalNumberType(n):
 
 def PartnerType(n):
     info = Info().addfrom(n, 'NationalNumber', '', NationalNumberType)
-    #~ info.addfrom(n,'Name','',NameType)
+    # info.addfrom(n,'Name','',NameType)
     info.addfrom(n, 'Name', ' ', NameType)
     return info
 
@@ -330,7 +330,7 @@ def Residence(n):
 
 
 def IT003(n):  # AscertainedLegalMainAddresses : Détermination de résidence
-    #~ raise Exception(str(n))
+    # raise Exception(str(n))
     def InvestigationResultType(n):
         return code_label(n)
     info = Info().addfrom(n, 'InvestigationResult',
@@ -342,7 +342,7 @@ def IT003(n):  # AscertainedLegalMainAddresses : Détermination de résidence
 
 
 def IT005(n):  # AddressChangeIntention
-    #~ raise Exception(str(n))
+    # raise Exception(str(n))
     info = Info().addfrom(n, 'OriginPlace', _('Move from '), PlaceType)
     info.addfrom(n, 'DestinationPlace', _('Move to '), PlaceType)
     info.add_deldate(n)
@@ -446,7 +446,7 @@ def IT028(n):
 
 def IT208(n):
     info = Info()
-    #~ info.addfrom(n,'Date','',DateType)
+    # info.addfrom(n,'Date','',DateType)
     info.addfrom(n, 'PseudoNationalNumber', '')
     info.add_deldate(n)
     return info
@@ -483,9 +483,9 @@ def StreetType(n):
     # we don't print the code of streets
     info = Info()
     info.addfrom(n, 'Label', '')
-    #~ info.addfrom(n,'NationalNumber',' (',NationalNumberType,')')
+    # info.addfrom(n,'NationalNumber',' (',NationalNumberType,')')
     return info
-    #~ return code_label(n)
+    # return code_label(n)
 
 
 def IT020(n):
@@ -528,7 +528,7 @@ def IT113(n):  # Guardian : Personne qui représente ou assiste
 def IT140(n):
     info = Info().addfrom(n, 'Name', ' ', NameType)
     info.addfrom(n, 'NationalNumber', ' (', NationalNumberType, ')')
-    #~ info += _(' as ')
+    # info += _(' as ')
     info.addfrom(n, 'FamilyRole', _('as '), code_label)
     info.addfrom(n, 'Housing', None, HousingType)
     info.add_deldate(n)
@@ -571,8 +571,8 @@ def DeliveryType194(n):
     info = Info().addfrom(n, 'Place', _('in '), PlaceType)
     info.addfrom(n, 'Label', '')
     info.addfrom(n, 'Code', ' (', simpletype, ')')
-    #~ info.add_codelabel(n)
-    #~ info += code_label(n)
+    # info.add_codelabel(n)
+    # info += code_label(n)
     return info
 
 
@@ -590,11 +590,11 @@ def MedicalType(n):
 
 def LicenseCategoriesType(n):
     info = Info()
-    #~ raise Exception(str(n))
-    #~ for cat in n.Category:
-        #~ info.addfrom(cat,'Category',' ',CategoryType)
+    # raise Exception(str(n))
+    # for cat in n.Category:
+        # info.addfrom(cat,'Category',' ',CategoryType)
     info.chunks.append('/'.join([cat.Label for cat in n.Category]))
-    #~ info += code_label(n)
+    # info += code_label(n)
     return info
 
 
@@ -603,19 +603,19 @@ def ForfeitureReasonType(n):
 
 
 def IT191(n):
-    #~ info = code_label(n.TypeOfLicense)
+    # info = code_label(n.TypeOfLicense)
     info = Info().addfrom(n, 'TypeOfLicense', '', TypeOfLicenseType)
     info.addfrom(n, 'LicenseNumber', _('no. '))
     info.addfrom(n, 'Place', _('delivered in '), PlaceType)
     info.addfrom(n, 'DeliveryCountry', ' (', CountryType, ')')
     info.addfrom(n, 'ForfeitureReason', None, ForfeitureReasonType)
     info.addfrom(n, 'ForfeitureDate', None, ForfeitureDateType)
-    #~ info.append()
-    #~ info.append(E.b(n.LicenseNumber))
-    #~ info.append(', categories '
-      #~ + ' '.join([cat.Label for cat in n.Categories.Category]))
-    #~ info.append(_(' delivered in '))
-    #~ info += code_label(n.Delivery.Place)
+    # info.append()
+    # info.append(E.b(n.LicenseNumber))
+    # info.append(', categories '
+      # + ' '.join([cat.Label for cat in n.Categories.Category]))
+    # info.append(_(' delivered in '))
+    # info += code_label(n.Delivery.Place)
     info.add_deldate(n)
     return info
 
@@ -657,9 +657,9 @@ def PassportIdentType(n):
 
 def IT199(n):
     info = Info()
-    #~ info.chunks.append('Number ')
-    #~ info.chunks.append(E.b(n.PassportIdent.PassportNumber))
-    #~ info.append(', status ')
+    # info.chunks.append('Number ')
+    # info.chunks.append(E.b(n.PassportIdent.PassportNumber))
+    # info.append(', status ')
     info.addfrom(n, 'Status', _("status"), code_label)
     info.addfrom(n, 'PassportIdent', '', PassportIdentType)
     info.addfrom(n, 'Issuer', _('issued by '), IssuerType)
@@ -670,14 +670,14 @@ def IT199(n):
     info.addfrom(n, 'AdditionTo', _('addition to '), boldstring)
     info.addfrom(n, 'ProductionDate', _('produced '), DateType)
     info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
-    #~ info.append(', type ')
-    #~ info += code_label(n.PassportIdent.PassportType)
-    #~ info.append(', expires ')
-    #~ info.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
-    #~ info.append(', delivered by ')
-    #~ info += code_label(n.Issuer.PosteDiplomatique)
-    #~ info.append(_(' renewal no. '))
-    #~ info.append(E.b(n.RenewalNumber))
+    # info.append(', type ')
+    # info += code_label(n.PassportIdent.PassportType)
+    # info.append(', expires ')
+    # info.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
+    # info.append(', delivered by ')
+    # info += code_label(n.Issuer.PosteDiplomatique)
+    # info.append(_(' renewal no. '))
+    # info.append(E.b(n.RenewalNumber))
     info.add_deldate(n)
     return info
 
@@ -692,18 +692,18 @@ def ModificationTypeType(n):
 
 def AddressType(n):
     info = Info()
-    #~ pd = n.Address.Address
+    # pd = n.Address.Address
     info.addfrom(n, 'Country', '', CountryType)
-    #~ info.append(', ')
+    # info.append(', ')
     info.addfrom(n, 'Graphic1', '')
     info.addfrom(n, 'Graphic2', '')
     info.addfrom(n, 'Graphic3', '')
-    #~ info.append(E.b(pd.Graphic1))
-    #~ info.append(', ')
-    #~ info.append(E.b(pd.Graphic2))
-    #~ info.append(', ')
-    #~ info.append(E.b(pd.Graphic3))
-    #~ info.addfrom(pd,'Graphic3')
+    # info.append(E.b(pd.Graphic1))
+    # info.append(', ')
+    # info.append(E.b(pd.Graphic2))
+    # info.append(', ')
+    # info.append(E.b(pd.Graphic3))
+    # info.addfrom(pd,'Graphic3')
     return info
 
 
@@ -1040,8 +1040,8 @@ class RowFactory(object):
             itnum = ''
         if hasattr(node, 'Type'):
             group += " " + node.Type
-        #~ if hasattr(node,'Status'):
-            #~ group += " " + unicode(node.Status)
+        # if hasattr(node,'Status'):
+            # group += " " + unicode(node.Status)
         if hasattr(node, 'Structure'):
             group += " " + node.Structure
         return AttrDict(group=group,
@@ -1094,8 +1094,8 @@ class RowFactory(object):
     def AscertainedLegalMainAddresses(self, fo, name):
         # Détermination de résidence
         self.start_group(_("Ascertained Legal Main Addresses"))
-        #~ raise Exception(str(fo))
-        #~ raise Exception(repr([n for n in fo]))
+        # raise Exception(str(fo))
+        # raise Exception(repr([n for n in fo]))
         for n in fo.AscertainedLegalMainAddress:
             info = IT003(n)
             yield self.datarow(n, n.Date, info)
@@ -1127,7 +1127,7 @@ class RowFactory(object):
 
     def Names(self, node, name):
         self.start_group(_("Names"))
-        #~ group = name
+        # group = name
         for n in node.Name:
             info = Info().addfrom(n, 'Name', '', NameType)
             yield self.datarow(n, n.Date, info)
@@ -1149,10 +1149,10 @@ class RowFactory(object):
             info = Info()
             info.addfrom(n, 'Address', '', ResidenceAbroadAddressType)
 
-            #~ info += code_label(n.Address.PosteDiplomatique)
-            #~ info.append(', ')
-            #~ info += code_label(n.Address.Territory)
-            #~ info.append(', ')
+            # info += code_label(n.Address.PosteDiplomatique)
+            # info.append(', ')
+            # info += code_label(n.Address.Territory)
+            # info.append(', ')
             info.add_deldate(n)
             yield self.datarow(n, n.Date, info)
 
@@ -1198,16 +1198,16 @@ class RowFactory(object):
         for n in node.CivilState:
             info = code_label(n.CivilState)
             if hasattr(n, 'Spouse'):
-                #~ info.append(' with ')
-                #~ info += name2info(n.Spouse.Name)
+                # info.append(' with ')
+                # info += name2info(n.Spouse.Name)
                 info.addfrom(n.Spouse, 'Name', _('with '), NameType)
                 info.chunks.append(' (')
                 info.chunks.append(n.Spouse.NationalNumber.NationalNumber)
                 info.chunks.append(')')
             info.addfrom(n, 'Lieu', _('in '), LieuType)
-            #~ info += LieuType(n.Lieu)
+            # info += LieuType(n.Lieu)
             info.addfrom(n, 'ActNumber', _("Act no. "))
-            #~ info.addfrom(n,'ActNumber')
+            # info.addfrom(n,'ActNumber')
             info.addfrom(n, 'SuppletoryRegister')
             info.add_deldate(n)
             yield self.datarow(n, n.Date, info)
@@ -1244,10 +1244,10 @@ class RowFactory(object):
             info.chunks.append(_('no. '))
             info.chunks.append(E.b(n.CardNumber))
             info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
-            #~ info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
+            # info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
             info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType)
-            #~ info.chunks.append(', delivered in ')
-            #~ info += code_label(n.Delivery.Place)
+            # info.chunks.append(', delivered in ')
+            # info += code_label(n.Delivery.Place)
             yield self.datarow(n, n.Date, info)
 
     def LegalCohabitations(self, node, name):
@@ -1287,7 +1287,7 @@ class RowFactory(object):
         yield self.datarow(n, n.Date, info)
 
 
-class RetrieveTIGroupsResult(dd.VirtualTable):
+class RetrieveTIGroupsResult(ConfidentialResultsTable):
 
     """
     Displays the response of an :class:`RetrieveTIGroupsRequest`
@@ -1295,7 +1295,6 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
     """
     master = 'cbss.RetrieveTIGroupsRequest'
     master_key = None
-    label = _("Results")
     column_names = 'group:18 type:5 since:14 info:50'
 
     @dd.displayfield(_("Group"))
@@ -1322,23 +1321,25 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
     def get_data_rows(self, ar):
         rti = ar.master_instance
         if rti is None:
-            #~ print "20130425 rti is None"
+            # print "20130425 rti is None"
             return
-        #~ if not ipr.status in (RequestStates.ok,RequestStates.fictive):
-        #~ if not rti.status in (RequestStates.ok,RequestStates.warnings):
-            #~ return
+        self.check_permission(rti, ar)
+
+        # if not ipr.status in (RequestStates.ok,RequestStates.fictive):
+        # if not rti.status in (RequestStates.ok,RequestStates.warnings):
+            # return
         reply = rti.get_service_reply()
         if reply is None:
-            #~ print "20130425 reply is None"
+            # print "20130425 reply is None"
             return
-        #~ print "20130425 ok"
+        # print "20130425 ok"
         reply_has_result(reply)
 
         res = reply.rrn_it_implicit
 
         rf = RowFactory()
         for name, node in res:
-            #~ print 20130425, name, node.__class__
+            # print 20130425, name, node.__class__
             m = getattr(rf, node.__class__.__name__, None)
             if m is None:
                 m = rf.get_it_handler(node)
@@ -1349,10 +1350,3 @@ class RetrieveTIGroupsResult(dd.VirtualTable):
                 yield row
 
 
-# __all__ = [
-#     'RetrieveTIGroupsRequest',
-#     'RetrieveTIGroupsRequests',
-#     'RetrieveTIGroupsRequestsByPerson',
-#     'MyRetrieveTIGroupsRequests',
-#     'RetrieveTIGroupsResult',
-# ]

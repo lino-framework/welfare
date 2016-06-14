@@ -8,8 +8,7 @@ Lino Welfare offers some functionality for avoiding duplicate
 :class:`Client <lino_welfare.modlib.pcsw.models.Client>` records.
 
 
-..  This document is part of the test suite.  To test only this
-  document, run::
+..  To test just this document, run::
 
     $ python setup.py test -s tests.SpecsTests.test_dupable
 

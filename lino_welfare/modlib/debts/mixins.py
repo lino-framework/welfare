@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Luc Saffre
+# Copyright 2012-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -45,6 +45,7 @@ class SequencedBudgetComponent(mixins.Sequenced):
 
     def get_row_permission(self, user, state, ba):
         if not self.budget.get_row_permission(user, state, ba):
+            # print("20160531 veto for", ba)
             return False
         return super(
             SequencedBudgetComponent, self).get_row_permission(user, state, ba)
@@ -94,8 +95,9 @@ class MainActor(ActorBase):
 
     def __init__(self, budget, header):
         self.budget = budget
-        self.partner = budget.partner
         self.header = header
         self.remark = ''
+        if budget.partner_id:
+            self.partner = budget.partner
 
 

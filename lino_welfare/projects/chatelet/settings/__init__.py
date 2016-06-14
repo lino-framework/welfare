@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -29,6 +29,8 @@ class Site(Site):
     languages = "fr nl de en"
     # hidden_languages = None
 
+    # strict_choicelist_values = False
+
     demo_fixtures = """std std2 few_languages props all_countries
     demo cbss mini demo2 checksummaries local""".split()
 
@@ -53,14 +55,13 @@ class Site(Site):
         kw.update(isip='lino_welfare.projects.chatelet.modlib.isip')
         return kw
 
-    # def setup_plugins(self):
-    #     """
-    #     Change the default value of certain plugin settings.
+    def setup_plugins(self):
+        """
+        Change the default value of certain plugin settings.
 
-    #     """
-    #     self.plugins.courses.configure(pupil_model='pcsw.Client')
-    #     # self.plugins.courses.configure(teacher_model='users.User')
-    #     super(Site, self).setup_plugins()
+        """
+        super(Site, self).setup_plugins()
+        # self.plugins.integ.configure(only_primary=True)
 
     # def get_default_language(self):
     #     return 'fr'

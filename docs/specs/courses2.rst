@@ -47,7 +47,7 @@ topic line teacher state can_enroll:10     start_date end_date
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
->>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 11)
+>>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 12)
 
 
 Yes, the demo database has no topics defined:

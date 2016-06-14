@@ -297,7 +297,7 @@ def objects():
         newcomer_consultations=True, newcomer_appointments=True)
     yield alicia
 
-    theresia = person(first_name=u"Theresia", last_name=u"Thelen",
+    theresia = person(first_name="Theresia", last_name="Thelen",
                       email=settings.SITE.demo_email,
                       city=eupen, country='BE', gender=dd.Genders.female)
     yield theresia
@@ -331,6 +331,11 @@ def objects():
         coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield judith
+
+    yield users.User(
+        username="patrick", first_name="Patrick",
+        last_name="Paraneau", profile='910',
+        email=settings.SITE.demo_email)
 
     # for obj in pcsw.CoachingType.objects.all():
     #     yield users.Team(**dd.babelkw('name', **field2kw(obj, 'name')))

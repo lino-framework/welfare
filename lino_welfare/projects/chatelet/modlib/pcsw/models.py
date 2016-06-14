@@ -124,7 +124,7 @@ class ClientDetail(ClientDetail):
     history_right = """
     uploads.UploadsByClient
     excerpts.ExcerptsByProject
-    fse.SummariesByClient
+    esf.SummariesByClient
     """
 
     calendar = dd.Panel("""

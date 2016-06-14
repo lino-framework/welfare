@@ -40,7 +40,7 @@ Database structure
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
 - cal.Event : id, modified, created, project, build_time, build_method, user, owner_type, owner_id, start_date, start_time, end_date, end_time, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state, assigned_to
-- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, invite_client, name_fr, name_en, event_label_fr, event_label_en, fse_field
+- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
@@ -86,6 +86,7 @@ Database structure
 - debts.Entry : id, seqno, budget, account_type, account, partner, amount, actor, circa, distribute, todo, remark, description, periods, monthly_rate, bailiff
 - debts.Group : id, name, ref, account_type, entries_layout, name_fr, name_en
 - dupable_clients.Word : id, word, owner
+- esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
 - finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
@@ -94,7 +95,6 @@ Database structure
 - finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
 - finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
-- fse.ClientSummary : id, printed_by, year, month, fse10, fse20, fse21, fse30, fse40, fse41, fse42, fse43, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type
 - households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, primary, dependency
@@ -117,7 +117,7 @@ Database structure
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, yearly_numbering, printed_name_fr, printed_name_en, name_fr, name_en
 - ledger.MatchRule : id, account, journal
-- ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared
+- ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, name_fr, name_en
 - ledger.Voucher : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state
 - newcomers.Broker : id, name
@@ -132,7 +132,7 @@ Database structure
 - outbox.Recipient : id, mail, partner, type, address, name
 - pcsw.Activity : id, name, lst104
 - pcsw.AidType : id, name, name_fr, name_en
-- pcsw.Client : id, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, group, birth_place, birth_country, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, client_state, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_fse
+- pcsw.Client : id, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, group, birth_place, birth_country, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, client_state, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
 - pcsw.ClientContact : id, company, contact_person, contact_role, type, client, remark
 - pcsw.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
 - pcsw.Coaching : id, start_date, end_date, user, client, type, primary, ending

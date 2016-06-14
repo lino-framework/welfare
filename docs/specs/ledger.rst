@@ -294,6 +294,7 @@ The state of a voucher
  10     draft        Entwurf
  20     registered   Registriert
  30     signed       Unterschrieben
+ 40     cancelled    Storniert
 ====== ============ ================
 <BLANKLINE>
 
@@ -313,7 +314,7 @@ The state of a voucher
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(vatless.Invoices)
     >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
-    <span><b>Registriert</b> &#8594; [Entregistrieren]</span>
+    <span><b>Registriert</b> &#8594; [Entwurf]</span>
     
 
 Movements
@@ -326,17 +327,17 @@ Users can consult the movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)
-====================== ========== ===================================================== ============ ======== ======= ============
- Buchungsdatum          Beleg      Beschreibung                                          Debit        Kredit   Match   Befriedigt
----------------------- ---------- ----------------------------------------------------- ------------ -------- ------- ------------
- 22.05.14               *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00                         Ja
- 16.02.14               *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95                         Ja
- 16.02.14               *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33                          Ja
- 16.02.14               *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00                        Ja
- 16.02.14               *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
- 16.02.14               *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
- **Total (6 Zeilen)**                                                                    **202,78**
-====================== ========== ===================================================== ============ ======== ======= ============
+========== ========== ===================================================== ============ ======== ======= ==============
+ Valuta     Beleg      Beschreibung                                          Debit        Kredit   Match   Ausgeglichen
+---------- ---------- ----------------------------------------------------- ------------ -------- ------- --------------
+ 22.05.14   *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33                          Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00                        Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
+                       **Saldo 202.78 (6 Bewegungen)**                       **202,78**
+========== ========== ===================================================== ============ ======== ======= ==============
 <BLANKLINE>
 
 

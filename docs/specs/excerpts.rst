@@ -29,30 +29,30 @@ Here is a more complete list of excerpt types:
 
 >>> rt.show(excerpts.ExcerptTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================================================= ======== =============== =========================== ====================== ================= ================================
- Modell                                                  Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage           Textkörper-Vorlage
-------------------------------------------------------- -------- --------------- --------------------------- ---------------------- ----------------- --------------------------------
- *aids.IncomeConfirmation (Einkommensbescheinigung)*     Ja       Ja              Einkommensbescheinigung                            Default.odt       certificate.body.html
- *aids.RefundConfirmation (Kostenübernahmeschein)*       Ja       Ja              Kostenübernahmeschein                              Default.odt       certificate.body.html
- *aids.SimpleConfirmation (Einfache Bescheinigung)*      Ja       Ja              Einfache Bescheinigung                             Default.odt       certificate.body.html
- *art61.Contract (Art.61-Konvention)*                    Ja       Ja              Art.61-Konvention                                                    contract.body.html
- *cal.Guest (Teilnehmer)*                                Ja       Nein            Anwesenheitsbescheinigung                          Default.odt       presence_certificate.body.html
+======================================================= ======== =============== =========================== ====================== ============================= ================================
+ Modell                                                  Primär   Bescheinigend   Bezeichnung                 Konstruktionsmethode   Vorlage                       Textkörper-Vorlage
+------------------------------------------------------- -------- --------------- --------------------------- ---------------------- ----------------------------- --------------------------------
+ *aids.IncomeConfirmation (Einkommensbescheinigung)*     Ja       Ja              Einkommensbescheinigung                            Default.odt                   certificate.body.html
+ *aids.RefundConfirmation (Kostenübernahmeschein)*       Ja       Ja              Kostenübernahmeschein                              Default.odt                   certificate.body.html
+ *aids.SimpleConfirmation (Einfache Bescheinigung)*      Ja       Ja              Einfache Bescheinigung                             Default.odt                   certificate.body.html
+ *art61.Contract (Art.61-Konvention)*                    Ja       Ja              Art.61-Konvention                                                                contract.body.html
+ *cal.Guest (Teilnehmer)*                                Ja       Nein            Anwesenheitsbescheinigung                          Default.odt                   presence_certificate.body.html
  *cbss.IdentifyPersonRequest (IdentifyPerson-Anfrage)*   Ja       Ja              IdentifyPerson-Anfrage
  *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
- *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung                                                   payment_reminder.body.html
+ *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung          WeasyPdfBuildMethod    payment_reminder.weasy.html
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
+ *esf.ClientSummary (ESF Summary)*                       Ja       Ja              Training report             WeasyPdfBuildMethod
  *finan.BankStatement (Kontoauszug)*                     Ja       Ja              Kontoauszug
  *finan.JournalEntry (Diverse Buchung)*                  Ja       Ja              Diverse Buchung
  *finan.PaymentOrder (Zahlungsauftrag)*                  Ja       Ja              Zahlungsauftrag
- *fse.ClientSummary (FSE Summary)*                       Ja       Ja              Training report             WkBuildMethod
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
  *pcsw.Client (Klient)*                                  Ja       Nein            Aktenblatt                                         file_sheet.odt
- *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt       pac.body.html
+ *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt                   pac.body.html
  *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            eID-Inhalt                                         eid-content.odt
-======================================================= ======== =============== =========================== ====================== ================= ================================
+======================================================= ======== =============== =========================== ====================== ============================= ================================
 <BLANKLINE>
 
 
@@ -67,6 +67,7 @@ Here is a list of all demo excerpts.
 ==== ======================== ===================================================== ============================= ================================ ==========
  ID   Excerpt Type             Controlled by                                         Client                        Recipient (Organization)         Language
 ---- ------------------------ ----------------------------------------------------- ----------------------------- -------------------------------- ----------
+ 69   Tx25 Request             *Tx25 Request #1*                                     AUSDEMWALD Alfons (116)                                        de
  68   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  67   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  66   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de

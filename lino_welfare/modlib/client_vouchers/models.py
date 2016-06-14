@@ -81,15 +81,16 @@ class ClientVoucher(Voucher, ProjectRelated):
         sums_dict = self.get_vat_sums()
         #~ logger.info("20120901 get_wanted_movements %s",sums_dict)
         sum = Decimal()
-        for a, m in sums_dict.items():
+        for acc, m in sums_dict.items():
             if m:
-                yield self.create_movement(a, not self.journal.dc, m)
+                yield self.create_movement(
+                    None, acc, not self.journal.dc, m)
                 sum += m
 
-        a = self.get_trade_type().get_partner_account()
-        if a is not None:
+        acc = self.get_trade_type().get_partner_account()
+        if acc is not None:
             yield self.create_movement(
-                a, self.journal.dc, sum,
+                None, acc, self.journal.dc, sum,
                 partner=self.partner,
                 project=self.project,
                 match=self.match)
@@ -113,7 +114,6 @@ class VoucherItem(Matching, PartnerRelated, AccountVoucherItem):
         app_label = 'client_vouchers'
         verbose_name = _("Client voucher item")
         verbose_name_plural = _("Client voucher items")
-
 
     voucher = dd.ForeignKey(
         'client_vouchers.ClientVoucher', related_name='items')

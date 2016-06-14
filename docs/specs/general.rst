@@ -36,7 +36,7 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-65 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, wkhtmltopdf, fse, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
+65 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, properties, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, weasyprint, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, esf, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
 155 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -60,16 +60,16 @@ The following table gives an overview of these things.
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
- cal.Calendar                   cal.Calendars                   7         11
- cal.Event                      cal.OneEvent                    24        569
+ cal.Calendar                   cal.Calendars                   7         12
+ cal.Event                      cal.OneEvent                    24        581
  cal.EventType                  cal.EventTypes                  20        9
- cal.Guest                      cal.Guests                      9         524
+ cal.Guest                      cal.Guests                      9         525
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       5         0
- cal.Subscription               cal.Subscriptions               4         8
+ cal.Subscription               cal.Subscriptions               4         9
  cal.Task                       cal.Tasks                       19        34
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
@@ -114,7 +114,8 @@ The following table gives an overview of these things.
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
- excerpts.Excerpt               excerpts.Excerpts               12        69
+ esf.ClientSummary              esf.Summaries                   19        0
+ excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        21
  finan.BankStatement            finan.BankStatements            16        0
  finan.BankStatementItem        finan.BankStatementItemTable    11        0
@@ -122,7 +123,6 @@ The following table gives an overview of these things.
  finan.JournalEntryItem         finan.JournalEntryItemTable     11        0
  finan.PaymentOrder             finan.PaymentOrders             15        18
  finan.PaymentOrderItem         finan.PaymentOrderItemTable     11        90
- fse.ClientSummary              fse.Summaries                   19        0
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           28        14
  households.Member              households.Members              14        63
@@ -148,7 +148,7 @@ The following table gives an overview of these things.
  ledger.AccountingPeriod        ledger.AccountingPeriods        7         6
  ledger.Journal                 ledger.Journals                 21        4
  ledger.MatchRule               ledger.MatchRules               3         2
- ledger.Movement                ledger.Movements                10        320
+ ledger.Movement                ledger.Movements                11        320
  ledger.PaymentTerm             ledger.PaymentTerms             9         7
  ledger.Voucher                 ledger.Vouchers                 9         48
  newcomers.Broker               newcomers.Brokers               2         2
@@ -193,7 +193,7 @@ The following table gives an overview of these things.
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     21        12
+ users.User                     users.Users                     21        13
  vatless.AccountInvoice         vatless.Invoices                18        30
  vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======

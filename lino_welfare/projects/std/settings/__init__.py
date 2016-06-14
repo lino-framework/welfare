@@ -174,7 +174,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.aids'
         # yield 'lino_welfare.modlib.projects'
         yield 'lino_welfare.modlib.polls'
-        yield 'lino_welfare.modlib.fse'
+        yield 'lino_welfare.modlib.esf'
 
         yield 'lino_xl.lib.beid'
         yield 'lino.modlib.davlink'

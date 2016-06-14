@@ -30,7 +30,7 @@ from lino_cosi.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_cosi.lib.sepa.roles import SepaStaff
 from lino_cosi.lib.sepa.roles import SepaUser
 from lino_xl.lib.beid.roles import BeIdUser
-from lino_welfare.modlib.cbss.roles import CBSSUser
+from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.aids.roles import AidsStaff
@@ -100,6 +100,10 @@ class LedgerUser(LedgerUser, OfficeUser, AidsStaff, SepaStaff):
     pass
 
 
+class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
+    pass
+
+
 from lino.modlib.users.choicelists import UserProfiles
 from lino.api import _
 
@@ -122,3 +126,4 @@ add('500', _("Accountant"),                    LedgerUser)
 add('510', _("Accountant (Manager)"),          LedgerStaff)
 add('800', _("Supervisor"),                    Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')
+add('910', _("Security advisor"),              SecurityAdvisor)

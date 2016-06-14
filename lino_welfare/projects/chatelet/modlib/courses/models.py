@@ -42,6 +42,7 @@ add('J', _("Job search workshops"), 'job')  # requested #564
 # sociale" et "Module de détermination d'un projet socioprofessionnel"
 # par "Ateliers d'Insertion socioprofessionnelle".
 
+# We add two enrolment states:
 add = EnrolmentStates.add_item
 add('40', _("Started"), 'started', invoiceable=False, uses_a_place=True)
 add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
@@ -50,6 +51,10 @@ add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
 @dd.receiver(dd.pre_analyze)
 def my_enrolment_workflows(sender=None, **kw):
 
+    EnrolmentStates.requested.add_transition(
+        required_states="confirmed")
+    EnrolmentStates.confirmed.add_transition(
+        required_states="requested")
     EnrolmentStates.started.add_transition(
         required_states="confirmed requested")
     EnrolmentStates.finished.add_transition(
@@ -86,6 +91,11 @@ class Enrolment(Enrolment):
 
     # def suggest_guest_for(self, event):
     #     return self.state in GUEST_ENROLMENT_STATES
+
+    # default state is always "requested". In Welfare we do not want
+    # to automatically confirm enrolments, so we deactivate
+    # ConfirmedSubmitInsert set by `lino_cosi.lib.courses`
+    submit_insert = dd.SubmitInsert()
 
 Enrolments.detail_layout = """
 request_date user
