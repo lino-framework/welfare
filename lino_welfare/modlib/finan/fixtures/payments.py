@@ -41,7 +41,7 @@ finan = dd.resolve_app('finan')
 REQUEST = settings.SITE.login()  # BaseRequest()
 
 
-from lino_cosi.lib.finan.fixtures.demo_bookings import objects as cosi_objects
+from lino_cosi.lib.finan.fixtures.payments import objects as cosi_objects
 
 
 def objects():
