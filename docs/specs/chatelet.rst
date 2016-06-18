@@ -491,8 +491,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - countries.Places.merge_row : visible for 110 210 220 410 800 admin 910
 - courses.Courses.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.Courses.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- courses.Enrolments.detail : visible for admin 910
-- courses.Enrolments.insert : visible for admin 910
+- courses.Enrolments.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- courses.Enrolments.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.EnrolmentsByCourse.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.EnrolmentsByPupil.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.Lines.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
