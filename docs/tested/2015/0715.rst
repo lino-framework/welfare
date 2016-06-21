@@ -111,7 +111,7 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel797, contact_panel823, coaching_panel1029, aids_tab_panel1123, work_tab_1_panel1152, history_panel1839 ]
+[ general_panel817, contact_panel843, coaching_panel1049, aids_tab_panel1143, work_tab_1_panel1172, history_panel1859 ]
 
 .. before 20160530: [ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
 

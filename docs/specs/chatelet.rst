@@ -298,7 +298,7 @@ Each window layout defines a given set of fields.
 - changes.Changes.detail : time, user, type, master, object, id, diff
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
-- contacts.Companies.merge_row : merge_to, reason
+- contacts.Companies.merge_row : merge_to, addresses_Address, reason
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
@@ -384,7 +384,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text

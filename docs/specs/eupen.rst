@@ -367,7 +367,7 @@ Each window layout defines a given set of fields.
 - changes.Changes.detail : time, user, type, master, object, id, diff
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
-- contacts.Companies.merge_row : merge_to, reason
+- contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
@@ -455,7 +455,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text
