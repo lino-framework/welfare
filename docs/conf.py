@@ -272,3 +272,4 @@ inheritance_graph_attrs = dict(rankdir="TB")
 inheritance_graph_attrs.update(size='"12.0, 16.0"')
 inheritance_graph_attrs.update(fontsize=14, ratio='compress')
 
+from lino.sphinxcontrib.help_text_builder import setup
