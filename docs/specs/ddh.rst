@@ -254,11 +254,11 @@ The message is the same whether you try on the Person or on the Partner:
 
 >>> obj = contacts.Person.objects.get(id=184)
 >>> print(obj.disable_delete())
-Cannot delete Partner Allmanns Alicia because 29 Participants refer to it.
+Cannot delete Partner Allmanns Alicia because 29 Presences refer to it.
 
 >>> obj = contacts.Partner.objects.get(id=184)
 >>> print(obj.disable_delete())
-Cannot delete Partner Allmanns Alicia because 29 Participants refer to it.
+Cannot delete Partner Allmanns Alicia because 29 Presences refer to it.
 
 
 You can delete a partner when a person or some other MTI child exists:
