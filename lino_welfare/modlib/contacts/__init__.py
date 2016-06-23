@@ -1,4 +1,4 @@
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 Lino-Welfare extension of :mod:`lino.modlib.contacts`
 """
 
-from lino.modlib.contacts import Plugin
+from lino_cosi.lib.contacts import Plugin
 
 from django.utils.translation import string_concat
 from django.utils.translation import ugettext_lazy as _
