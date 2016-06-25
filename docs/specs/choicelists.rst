@@ -63,6 +63,7 @@ name to read the documentation):
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : States
     changes.ChangeTypes : Change Types
+    contacts.PartnerEvents : Observed events
     countries.PlaceTypes : PlaceTypes
     courses.CourseRequestStates : States
     cv.CefLevel : CEF levels

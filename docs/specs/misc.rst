@@ -121,14 +121,16 @@ Yet another series of GET requests
 >>> RetrieveTIGroupsRequest = rt.modules.cbss.RetrieveTIGroupsRequest
 >>> ContentType = rt.modules.contenttypes.ContentType
 
->>> json_fields = 'count rows title success no_data_text'
+>>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
 >>> demo_get('rolf', 'api/contacts/Companies', json_fields, 52, **kw)
 >>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
 >>> demo_get('rolf', 'api/contacts/Partners', json_fields, 175, **kw)
 
->>> demo_get('rolf', 'api/countries/Countries', json_fields, 9, **kw)
 >>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
+
+>>> json_fields = 'count rows title success no_data_text'
+>>> demo_get('rolf', 'api/countries/Countries', json_fields, 9, **kw)
 >>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
 
 >>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
