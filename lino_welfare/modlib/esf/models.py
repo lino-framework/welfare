@@ -88,8 +88,9 @@ class ClientSummary(Certifiable, Summary):
         for sf in StatisticalFields.objects():
             v = getattr(self, sf.field_name)
             cells.append(E.td(
-                unicode(sf.text), E.br(), unicode(v), **ar.cellattrs))
-        return E.table(E.tr(*cells), **ar.tableattrs)
+                unicode(sf.text), E.br(), unicode(v),
+                **ar.renderer.cellattrs))
+        return E.table(E.tr(*cells), **ar.renderer.tableattrs)
 
 
 class Summaries(dd.Table):
