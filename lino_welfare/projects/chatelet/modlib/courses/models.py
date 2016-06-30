@@ -133,19 +133,15 @@ class ActiveCourses(ActiveCourses):
     column_names = 'info enrolments free_places teacher room description *'
     hide_sums = True
 
-# ActiveCourses._label = _("Active workshops")
-
 
 class DraftCourses(DraftCourses):
     label = _("Draft workshops")
     column_names = 'info teacher room description *'
 
-# DraftCourses._label = _("Draft workshops")
 
-
-class InactiveCourses(ActiveCourses):
+class InactiveCourses(InactiveCourses):
     label = _("Inactive workshops")
 
 
-class ClosedCourses(ActiveCourses):
+class ClosedCourses(ClosedCourses):
     label = _("Closed workshops")
