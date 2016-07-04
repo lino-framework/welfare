@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -158,7 +158,7 @@ class ContractDetail(dd.FormLayout):
     type company contact_person contact_role
     applies_from duration applies_until exam_policy
     job_title status cv_duration regime
-    reference_person printed
+    reference_person remark printed
     date_decided date_issued date_ended ending:20
     subsidize_10 subsidize_20 subsidize_30 subsidize_40 subsidize_50
     # signer1 signer2
@@ -210,13 +210,14 @@ class Contracts(ContractBaseTable):
 
 
 class ContractsByClient(Contracts):
-    """
+    """Shows the *Art61 job supplyments* for this client.
     """
     label = _("Art61 job supplyments and activations")
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = ('applies_from applies_until duration type '
-                    'company contact_person user remark:20 *')
+    column_names = 'applies_from applies_until date_ended duration type '\
+                   'company contact_person user remark:20 '\
+                   'subsidize_10 subsidize_20 subsidize_30 subsidize_40 subsidize_50 *'
 
 
 class ContractsByProvider(Contracts):

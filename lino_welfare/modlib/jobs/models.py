@@ -200,11 +200,13 @@ class ContractTypes(dd.Table):
 
 class Contract(JobSupplyment):
 
-    """
-    A Contract
+    """An **Art60§7 job supplyment** is a contract bla bla...
 
-    [NOTE1] If applies_from and duration are set, then the default value
-    for applies_until is computed 26 workdays per month:
+.. attribute:: duration
+
+    If :attr:`applies_from` and :attr:`duration` are set, then the
+    default value for :attr:`applies_until` is computed assuming 26
+    workdays per month:
 
     - duration `312` -> 12 months
     - duration `468` -> 18 months
@@ -359,13 +361,12 @@ class Contracts(isip.ContractBaseTable):
 
 
 class ContractsByClient(Contracts):
-
-    """
+    """Shows the *Art60§7 job supplyments* for this client.
     """
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = ("applies_from applies_until duration type "
-                    "job company user remark:20 *")
+    column_names = "applies_from applies_until date_ended duration type " \
+                   "job company user remark:20 *"
     # hidden_columns = """
     # language contact_person contact_role
     # printed regime schedule hourly_rate
