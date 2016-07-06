@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notifier, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
+58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notify, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
 132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -157,7 +157,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  notes.EventType                notes.EventTypes                10        9
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notifier.Notification          notifier.Notifications          7         0
+ notify.Notification            notify.Notifications            9         3
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
@@ -266,7 +266,7 @@ Each window layout defines a given set of fields.
 - aids.SimpleConfirmations.insert : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert : start_date, end_date, company, contact_person, language, remark
 - art61.ContractTypes.insert : id, name, name_nl, name_de, name_en, ref
-- art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
+- art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
 - art61.Contracts.insert : client, company, type
 - boards.Boards.detail : id, name, name_nl, name_de, name_en
 - boards.Boards.insert : name, name_nl, name_de, name_en
@@ -376,7 +376,7 @@ Each window layout defines a given set of fields.
 - notes.NoteTypes.insert : name, name_nl, name_de, name_en, build_method
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- notifier.Notifications.insert : overview
+- notify.Notifications.insert : created, user, seen, sent, overview
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
@@ -557,7 +557,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.NoteTypes.insert : visible for 110 410 admin 910
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- notifier.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notify.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
