@@ -28,7 +28,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 
 from lino.modlib.uploads.models import *
-from lino.modlib.contacts.mixins import ContactRelated
+from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import Recurrencies
 

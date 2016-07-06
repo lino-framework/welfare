@@ -71,14 +71,14 @@ An integration agent (manager) has some staff permissions but is not a
 :class:`lino.core.roles.SiteStaff`:
 
 >>> from lino.core.roles import SiteStaff
->>> from lino.modlib.contacts.roles import ContactsStaff
+>>> from lino_xl.lib.contacts.roles import ContactsStaff
 
 >>> p110 = users.UserProfiles.get_by_value('110')
 >>> p110.has_required_roles([SiteStaff])
 False
 
 A reception clerk is a
-:class:`lino.modlib.contacts.roles.ContactsStaff`:
+:class:`lino_xl.lib.contacts.roles.ContactsStaff`:
 
 >>> p210 = users.UserProfiles.get_by_value('210')
 >>> p210.has_required_roles([SiteStaff])

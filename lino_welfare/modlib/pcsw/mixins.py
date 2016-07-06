@@ -22,7 +22,7 @@
 
 from lino.api import dd, rt
 
-from lino.modlib.contacts.mixins import ContactRelated
+from lino_xl.lib.contacts.mixins import ContactRelated
 
 
 class unused_ClientRelated(dd.Model):

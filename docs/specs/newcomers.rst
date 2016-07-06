@@ -194,7 +194,7 @@ The newcomers module distinguishes between **newcomer agents** and
 :class:`lino_welfare.modlib.newcomers.models.NewClients`
 
 
-:class:`lino.modlib.contacts.roles.ContactsUser`
+:class:`lino_xl.lib.contacts.roles.ContactsUser`
 :class:`lino.modlib.office.roles.OfficeOperator`
 
 -   The :class:`AvailableCoaches

@@ -32,7 +32,7 @@ from lino.utils.dpy import Migrator
 from lino.core.utils import resolve_model
 from lino.utils import mti
 from lino.utils import dblogger
-from lino.modlib.countries.models import PlaceTypes as CityTypes
+from lino_xl.lib.countries.models import PlaceTypes as CityTypes
 from lino.utils.mti import create_child
 
 
@@ -1125,7 +1125,7 @@ def migrate_from_1_4_2(globals_dict):
 
 def migrate_from_1_4_3(globals_dict):
     """
-    - :mod:`lino.modlib.contacts` : renamed "Contact" to "Partner".
+    - :mod:`lino_xl.lib.contacts` : renamed "Contact" to "Partner".
     - :mod:`lino_xl.lib.outbox` : renamed "Mail.contact" to "Mail.partner".
     - renamed "bcss" to "cbss"
     - renamed "lino.apps.dsbe" to "lino.apps.pcsw"

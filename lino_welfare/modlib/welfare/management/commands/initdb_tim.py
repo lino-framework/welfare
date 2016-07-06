@@ -38,9 +38,9 @@ from lino.utils import dbfreader
 from lino.utils import dblogger
 #~ from lino import diag
 
-from lino.modlib.contacts.utils import name2kw, street2kw
+from lino_xl.lib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
-#~ from lino.modlib.contacts.models import name2kw, street2kw, join_words
+#~ from lino_xl.lib.contacts.models import name2kw, street2kw, join_words
 from lino.utils.instantiator import Instantiator
 
 from lino.core.utils import resolve_model, obj2str

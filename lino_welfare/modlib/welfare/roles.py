@@ -24,7 +24,7 @@ See :ref:`welfare.specs.users`
 
 from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.office.roles import OfficeOperator
-from lino.modlib.contacts.roles import ContactsStaff
+from lino_xl.lib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
 from lino_cosi.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_cosi.lib.sepa.roles import SepaStaff

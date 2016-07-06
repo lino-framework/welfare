@@ -118,7 +118,7 @@ class Site(Site):
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
-        yield 'lino.modlib.statbel.countries'
+        yield 'lino_xl.lib.statbel.countries'
 
         yield 'lino_xl.lib.properties'
         yield 'lino_welfare.modlib.contacts'

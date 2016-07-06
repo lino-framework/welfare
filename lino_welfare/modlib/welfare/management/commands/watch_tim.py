@@ -46,7 +46,7 @@ from lino.core.utils import ChangeWatcher
 
 from lino.api import dd
 from lino.mixins.human import name2kw
-from lino.modlib.contacts.utils import street2kw
+from lino_xl.lib.contacts.utils import street2kw
 from lino.utils import join_words
 
 from lino.utils import dblogger

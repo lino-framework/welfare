@@ -28,7 +28,7 @@ from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 
-from lino.modlib.contacts.models import *
+from lino_xl.lib.contacts.models import *
 # from lino_cosi.lib.contacts.models import *
 
 from lino_xl.lib.addresses.mixins import AddressOwner
@@ -40,7 +40,7 @@ class Partner(
         Partner,
         AddressOwner, mixins.CreatedModified, dd.ImportedFields):
 
-    """Extends :class:`lino.modlib.contacts.models.Partner` by adding the
+    """Extends :class:`lino_xl.lib.contacts.models.Partner` by adding the
     following fields:
 
     .. attribute:: is_obsolete

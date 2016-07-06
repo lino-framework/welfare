@@ -59,7 +59,7 @@ from lino_xl.lib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 # from lino.modlib.vatless.mixins import PartnerDetailMixin
 
-from lino.modlib.contacts.roles import ContactsUser
+from lino_xl.lib.contacts.roles import ContactsUser
 # from lino.modlib.office.roles import OfficeOperator
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)

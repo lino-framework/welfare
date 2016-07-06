@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.modlib.contacts`
+Lino-Welfare extension of :mod:`lino_xl.lib.contacts`
 """
 
 from lino_cosi.lib.contacts import Plugin

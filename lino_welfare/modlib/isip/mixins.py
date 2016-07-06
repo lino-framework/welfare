@@ -35,7 +35,7 @@ from lino import mixins
 
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_xl.lib.cal.mixins import EventGenerator
-from lino.modlib.contacts.mixins import ContactRelated
+from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.cal.utils import update_auto_task
 from lino_xl.lib.cal.choicelists import DurationUnits
 # from lino.modlib.system.mixins import PeriodEvents

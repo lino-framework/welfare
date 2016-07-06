@@ -54,7 +54,7 @@ from lino.core.utils import resolve_model, full_model_name
 from lino.utils.mdbtools import Loader
 from lino.core.utils import is_valid_url, is_valid_email
 
-from lino.modlib.countries.models import Place, Country
+from lino_xl.lib.countries.models import Place, Country
 from lino_xl.lib.notes.models import Note
 from lino.modlib.users.models import User
 from lino_xl.lib.cal import models as cal

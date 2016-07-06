@@ -1,1 +1,1 @@
-from lino.modlib.contacts.management.commands.garble_persons import *
+from lino_xl.lib.contacts.management.commands.garble_persons import *

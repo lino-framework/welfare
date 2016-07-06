@@ -28,7 +28,7 @@ from lino.api import dd
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
-from lino.modlib.contacts.roles import ContactsStaff
+from lino_xl.lib.contacts.roles import ContactsStaff
 
 from lino_welfare.modlib.pcsw.models import *
 

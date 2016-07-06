@@ -35,7 +35,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd, rt
 
 from lino.core.roles import SiteStaff
-from lino.modlib.contacts.roles import ContactsStaff
+from lino_xl.lib.contacts.roles import ContactsStaff
 
 households = dd.resolve_app('households')
 #~ cal = dd.resolve_app('cal')
@@ -98,7 +98,7 @@ def customize_siteconfig(sender, **kw):
 @dd.receiver(dd.pre_analyze)
 def customize_contacts(sender, **kw):
     """
-    Injects application-specific fields to :mod:`contacts <lino.modlib.contacts>`.
+    Injects application-specific fields to :mod:`contacts <lino_xl.lib.contacts>`.
     """
     dd.inject_field(
         contacts.RoleType,
