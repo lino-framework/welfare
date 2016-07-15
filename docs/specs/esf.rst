@@ -148,7 +148,7 @@ Notes de discussion
 - Bouton "Remplir les données"
 
 - la fiche est un document à usage interne utilisé par Sandra pour
-  encoder les données dans un fichier Excel protégé issu par 
+  encoder les données dans un fichier Excel protégé issu par X.
 
 - Colonne "Mise en situation professionnelle" : calculer les heures
   par stage d'immersion, en fonction des dates de début et de fin et

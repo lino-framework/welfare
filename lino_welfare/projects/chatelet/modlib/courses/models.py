@@ -34,9 +34,11 @@ from lino_cosi.lib.courses.models import *
 
 CourseAreas.clear()
 add = CourseAreas.add_item
-add('S', _("Integration workshops"), 'integ')  # no longer used
-add('B', _("General integration workshops"), 'basic')  # requested #564
+# add('S', _("Integration workshops"), 'integ')  # no longer used
+add('B', _("Integration workshops"), 'default')  # requested #564
 add('J', _("Job search workshops"), 'job')  # requested #564
+# add('B', _("Social integration"), 'default')
+# add('J', _("Socio-professional integration"), 'job')
 
 # Dans l'onglet O.I., remplacer "Ateliers" par "Ateliers d'Insertion
 # sociale" et "Module de détermination d'un projet socioprofessionnel"
@@ -115,12 +117,20 @@ class Line(Line):
 EnrolmentsByPupil.column_names = 'request_date course workflow_buttons *'
 
 
-class IntegEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.integ
+class BasicCourses(Courses):
+    _course_area = CourseAreas.default
+
+
+class JobCourses(Courses):
+    _course_area = CourseAreas.job
+
+
+# class IntegEnrolmentsByPupil(EnrolmentsByPupil):
+#     _course_area = CourseAreas.integ
 
 
 class BasicEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.basic
+    _course_area = CourseAreas.default
 
 
 class JobEnrolmentsByPupil(EnrolmentsByPupil):

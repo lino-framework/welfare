@@ -30,7 +30,8 @@ add = ContractEvents.add_item
 add('10', _("Started"), 'started')
 add('20', _("Active"), 'active')
 add('30', _("Ended"), 'ended')
-add('40', _("Signed"), 'signed')
+add('40', _("Decided"), 'signed')
+add('50', _("Issued"), 'issued')
 
 
 class OverlapGroups(dd.ChoiceList):

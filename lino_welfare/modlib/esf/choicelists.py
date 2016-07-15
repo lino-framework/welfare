@@ -58,14 +58,14 @@ class StatisticalFields(dd.ChoiceList):
     item_class = StatisticalField
 
 add = StatisticalFields.add_item
-add('10', _("Informative sessions"))
-add('20', _("Individual consultation"))
-add('21', _("Evaluation session"))
-add('30', _("Certified SIS"))
-add('40', _("Level test"))
-add('41', _("ICT"))
-add('42', _("Mobility"))
-add('43', _("Math and French"))
+add('10', _("Informative sessions"))     # Séance d'info
+add('20', _("Individual consultation"))  # Entretien individuel
+add('21', _("Evaluation session"))       # Evaluation formation externe et art.61
+add('30', _("Certified SIS"))            # S.I.S. agréé
+add('40', _("Level test"))  # Test de niveau
+add('41', _("ICT"))  # Initiation informatique
+add('42', _("Mobility"))  # Mobilité
+add('43', _("Workshops"))  # 
 
 
 @dd.receiver(dd.pre_analyze)

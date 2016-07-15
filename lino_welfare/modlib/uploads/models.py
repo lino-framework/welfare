@@ -151,7 +151,7 @@ LibraryUploads = Uploads
 
 class Uploads(Uploads):
     column_names = 'user project type file start_date end_date ' \
-                   'description *'
+                   'description_link *'
 
     detail_layout = UploadDetail()
 
@@ -231,7 +231,7 @@ class UploadsByType(Uploads, UploadsByType):
 class MyUploads(My, Uploads):
     required_roles = dd.required((OfficeUser, OfficeOperator))
     column_names = "id project type start_date end_date \
-    needed description file *"
+    needed description_link file *"
 
 
 class MyExpiringUploads(MyUploads):
@@ -239,7 +239,8 @@ class MyExpiringUploads(MyUploads):
     required_roles = dd.required((OfficeUser, OfficeOperator))
     label = _("My expiring uploads")
     help_text = _("Show needed uploads whose validity expires soon")
-    column_names = "project type user start_date end_date needed *"
+    column_names = "project type description_link user \
+    start_date end_date needed *"
     order_by = ['end_date']
 
     @classmethod
@@ -268,7 +269,7 @@ class UploadsByClient(AreaUploads, UploadsByController):
     "Uploads by Client"
     master = 'pcsw.Client'
     master_key = 'project'
-    column_names = "type end_date needed description user *"
+    column_names = "type end_date needed description_link user *"
     # auto_fit_column_widths = True
     # debug_sql = "20140519"
 

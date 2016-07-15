@@ -239,7 +239,14 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         :class:`ContractEnding
         <lino_welfare.modlib.isip.choicelists.ContractEnding>`
 
+    .. attribute:: date_issued
+
+        When the contract was issued to the client and signed by them.
+
     .. attribute:: date_decided
+    
+        When the contract was ratified by the responsible board.
+
     .. attribute:: language
 
         The language of this contract. Default value is the client's
@@ -597,8 +604,10 @@ class ContractBaseTable(dd.Table):
                 qs = qs.filter(dd.inrange_filter('date_ended', period))
             elif ce == ContractEvents.started:
                 qs = qs.filter(dd.inrange_filter('applies_from', period))
-            elif ce == ContractEvents.signed:
+            elif ce == ContractEvents.decided:
                 qs = qs.filter(dd.inrange_filter('date_decided', period))
+            elif ce == ContractEvents.issued:
+                qs = qs.filter(dd.inrange_filter('date_issued', period))
             elif ce == ContractEvents.active:
                 f1 = Q(applies_until__isnull=True) | Q(
                     applies_until__gte=period[0])

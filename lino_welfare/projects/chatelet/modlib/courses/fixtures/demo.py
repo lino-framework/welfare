@@ -53,24 +53,24 @@ def objects():
     kw.update(body_template="enrolment.body.html")
     kw.update(dd.str2kw(
         'excerpt_title', _("Request for enrolment")))
-    obj = line(CourseAreas.basic, _("Kitchen"), **kw)
+    obj = line(CourseAreas.default, _("Kitchen"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
     
     kw.update(dd.str2kw('description', ""))
-    obj = line(CourseAreas.basic, _("Creativity"), **kw)
+    obj = line(CourseAreas.default, _("Creativity"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.basic, _("Our first baby"), **kw)
+    obj = line(CourseAreas.default, _("Our first baby"), **kw)
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.basic, _("Mathematics"))
+    obj = line(CourseAreas.default, _("Mathematics"))
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
-    obj = line(CourseAreas.basic, _("French"))
+    obj = line(CourseAreas.default, _("French"))
     yield obj
     yield Course(line=obj, start_date=dd.demo_date(-10))
 
