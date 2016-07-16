@@ -60,12 +60,16 @@ class StatisticalFields(dd.ChoiceList):
 add = StatisticalFields.add_item
 add('10', _("Informative sessions"))     # Séance d'info
 add('20', _("Individual consultation"))  # Entretien individuel
-add('21', _("Evaluation session"))       # Evaluation formation externe et art.61
-add('30', _("Certified SIS"))            # S.I.S. agréé
-add('40', _("Level test"))  # Test de niveau
-add('41', _("ICT"))  # Initiation informatique
+add('21', _("Evaluation of external training"))  # Evaluation formation externe et art.61
+add('30', _("Certified integration service"))  # S.I.S. agréé
+add('40', _("Level tests"))  # Tests de niveau
+add('41', _("IT basics"))  # Initiation informatique
 add('42', _("Mobility"))  # Mobilité
-add('43', _("Workshops"))  # 
+add('43', _("Remedial teaching"))  # Remédiation mathématique et français
+add('44', _("Wake up!"))  # Activons-nous
+add('50', _("Getting a professional situation")) # Mise en situation professionnelle
+add('60', _("Cyber Job"))  # Cyber-employ
+add('70', _("Art 60§7 job supplyment"))  # Mise à l’emploi sous contrat art.60§7
 
 
 @dd.receiver(dd.pre_analyze)

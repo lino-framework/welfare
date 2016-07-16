@@ -85,7 +85,7 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
-  - System : Datenbankmodelle, Vollmachten, Benutzerprofile, Notifications, Änderungen, Datentests, Datenprobleme
+  - System : Datenbankmodelle, Vollmachten, Benutzerprofile, Benachrichtigungen, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte

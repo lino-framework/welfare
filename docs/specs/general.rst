@@ -114,7 +114,7 @@ The following table gives an overview of these things.
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
  dupable_clients.Word           dupable_clients.Words           3         131
- esf.ClientSummary              esf.Summaries                   19        0
+ esf.ClientSummary              esf.Summaries                   23        0
  excerpts.Excerpt               excerpts.Excerpts               12        68
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        21
  finan.BankStatement            finan.BankStatements            16        0
