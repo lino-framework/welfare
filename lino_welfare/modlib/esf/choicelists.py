@@ -24,6 +24,8 @@ from __future__ import unicode_literals
 from django.db import models
 
 from lino.api import dd, _
+from lino.utils.dates import weekdays
+from lino.utils.quantities import Duration
 
 
 class ParticipationCertificates(dd.ChoiceList):
@@ -39,11 +41,28 @@ class StatisticalField(dd.Choice):
     field = None
 
     def __init__(self, value, text, name=None, **kwargs):
-        super(StatisticalField, self).__init__(value, text, name, **kwargs)
-        self.field = models.IntegerField(value, default=0, help_text=text)
+        super(StatisticalField, self).__init__(
+            value, text, name, **kwargs)
         self.field_name = "esf" + value
+        self.field = self.create_field()
 
-    def collect_value_from_guest(self, obj):
+    def collect_from_guest(self, obj):
+        pass
+
+    def collect_from_immersion_contract(self, obj):
+        pass
+
+    def collect_from_jobs_contract(self, obj):
+        pass
+
+
+class GuestCount(StatisticalField):
+
+    def create_field(self):
+        return models.IntegerField(
+            self.value, default=0, help_text=self.text)
+
+    def collect_from_guest(self, obj):
         if obj.event.event_type is None:
             return 0
         sf = obj.event.event_type.esf_field
@@ -51,25 +70,91 @@ class StatisticalField(dd.Choice):
             return 1
         return 0
 
+ZERO = Duration("0:00")
+
+class HoursField(StatisticalField):
+    def create_field(self):
+        return dd.DurationField(
+            self.value, default=ZERO,
+            help_text=self.text)
+
+
+class GuestHours(HoursField):
+    def collect_from_guest(self, obj):
+        # obj is a `cal.Guest` instance
+        if obj.event.event_type is None:
+            return
+        sf = obj.event.event_type.esf_field
+        if sf is None or sf.value != self.value:
+            return
+        if obj.gone_since is None or obj.busy_since is None:
+            return
+        return Duration(obj.gone_since - obj.busy_since)
+
+
+class ImmersionHours(HoursField):
+
+    def collect_from_immersion_contract(self, obj):
+        # obj is a `immersion.Contract` instance
+        sd = obj.applies_from
+        ed = obj.date_ended
+        if sd and ed:
+            nb_of_days = weekdays(sd, ed)
+            return Duration("8:00") * nb_of_days
+
+
+class Art60Hours(HoursField):
+    def collect_from_jobs_contract(self, obj):
+        # obj is a `jobs.Contract` instance
+        return Duration("8:00") * obj.duration
+
 
 class StatisticalFields(dd.ChoiceList):
     verbose_name = _("ESF field")
     verbose_name_plural = _("ESF fields")
     item_class = StatisticalField
 
-add = StatisticalFields.add_item
-add('10', _("Informative sessions"))     # Séance d'info
-add('20', _("Individual consultation"))  # Entretien individuel
-add('21', _("Evaluation of external training"))  # Evaluation formation externe et art.61
-add('30', _("Certified integration service"))  # S.I.S. agréé
-add('40', _("Level tests"))  # Tests de niveau
-add('41', _("IT basics"))  # Initiation informatique
-add('42', _("Mobility"))  # Mobilité
-add('43', _("Remedial teaching"))  # Remédiation mathématique et français
-add('44', _("Wake up!"))  # Activons-nous
-add('50', _("Getting a professional situation")) # Mise en situation professionnelle
-add('60', _("Cyber Job"))  # Cyber-employ
-add('70', _("Art 60§7 job supplyment"))  # Mise à l’emploi sous contrat art.60§7
+add = StatisticalFields.add_item_instance
+
+# Séance d'info
+add(GuestCount('10', _("Informative sessions")))
+
+# Entretien individuel
+add(GuestCount('20', _("Individual consultation")))
+
+# Evaluation formation externe et art.61
+add(GuestCount('21', _("Evaluation of external training")))
+
+# S.I.S. agréé
+add(GuestCount('30', _("Certified integration service")))
+
+# Tests de niveau
+add(GuestCount('40', _("Level tests")))
+
+# Initiation informatique
+add(GuestCount('41', _("IT basics")))
+
+# Mobilité
+add(GuestCount('42', _("Mobility")))
+
+# Remédiation mathématique et français
+add(GuestCount('43', _("Remedial teaching")))
+
+# Activons-nous
+add(GuestCount('44', _("Wake up!")))
+
+# Mise en situation professionnelle : calculer les heures par stage
+# d'immersion, en fonction des dates de début et de fin et de
+# l'horaire de travail.
+add(ImmersionHours('50', _("Getting a professional situation")))
+
+# Cyber-employ : Somme des présences aux ateliers "Cyber-emploi", mais
+# pour ces ateliers on note les heures d'arrivée et de départ par
+# participation.
+add(GuestHours('60', _("Cyber Job")))
+
+# Mise à l’emploi sous contrat art.60§7
+add(Art60Hours('70', _("Art 60§7 job supplyment")))
 
 
 @dd.receiver(dd.pre_analyze)

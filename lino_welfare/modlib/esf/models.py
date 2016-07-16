@@ -62,27 +62,52 @@ class ClientSummary(Certifiable, Summary):
 
     @classmethod
     def get_summary_master_model(cls):
-        return rt.modules.pcsw.Client
+        return rt.models.pcsw.Client
 
     @classmethod
     def get_summary_masters(cls):
-        return rt.modules.pcsw.Client.objects.filter(has_esf=True)
+        return rt.models.pcsw.Client.objects.filter(has_esf=True)
 
     def get_summary_collectors(self):
-        qs = rt.modules.cal.Guest.objects.all()
-        qs = self.add_date_filter(qs, 'event__start_date', partner=self.master)
+        """Loop over all presences of this client, then over all immersion
+        contracts and over all job supplyment contracts.
+
+        """
+        qs = rt.models.cal.Guest.objects.all()
+        qs = self.add_date_filter(
+            qs, 'event__start_date', partner=self.master)
         yield (self.collect_from_guest, qs)
+
+        qs = rt.models.immersion.Contract.objects.all()
+        qs = self.add_date_filter(
+            qs, 'applies_from', client=self.master)
+        yield (self.collect_from_immersion_contract, qs)
+
+        qs = rt.models.jobs.Contract.objects.all()
+        qs = self.add_date_filter(
+            qs, 'applies_from', client=self.master)
+        yield (self.collect_from_jobs_contract, qs)
 
     def reset_summary_data(self):
         for sf in StatisticalFields.objects():
             setattr(self, sf.field_name, sf.field.default)
 
-    def collect_from_guest(self, obj):
+    def add_from_fields(self, obj, meth_name):
         for sf in StatisticalFields.objects():
-            value = sf.collect_value_from_guest(obj)
+            meth = getattr(sf, meth_name)
+            value = meth(obj)
             if value:
                 value += getattr(self, sf.field_name)
                 setattr(self, sf.field_name, value)
+
+    def collect_from_guest(self, obj):
+        self.add_from_fields(obj, 'collect_from_guest')
+
+    def collect_from_immersion_contract(self, obj):
+        self.add_from_fields(obj, 'collect_from_immersion_contract')
+
+    def collect_from_jobs_contract(self, obj):
+        self.add_from_fields(obj, 'collect_from_jobs_contract')
 
     @dd.displayfield(_("Results"))
     def results(self, ar):
@@ -137,7 +162,6 @@ class SummariesByClient(Summaries):
             if sf.field_name is not None:
                 cls.column_names += ' ' + sf.field_name
         
-
 dd.inject_field(
     'pcsw.Client', 'has_esf', models.BooleanField(_("ESF data"), default=True))
 
