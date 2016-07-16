@@ -87,7 +87,7 @@ This is the list of excerpt types:
  Refund confirmation      Yes       Yes          Default.odt                   certificate.body.html
  Simple confirmation      Yes       Yes          Default.odt                   certificate.body.html
  Art61 job supplyment     Yes       Yes                                        contract.body.html
- Participant              Yes       No           Default.odt                   presence_certificate.body.html
+ Presence                 Yes       No           Default.odt                   presence_certificate.body.html
  IdentifyPerson Request   Yes       Yes
  ManageAccess Request     Yes       Yes
  Tx25 Request             Yes       Yes

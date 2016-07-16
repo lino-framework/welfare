@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 from lino.modlib.office.roles import OfficeUser, OfficeStaff
-from lino.modlib.polls.roles import PollsUser, PollsStaff
+from lino_xl.lib.polls.roles import PollsUser, PollsStaff
 from lino_xl.lib.beid.roles import BeIdUser
 from lino.modlib.plausibility.roles import PlausibilityUser
 from lino_welfare.modlib.cbss.roles import CBSSUser

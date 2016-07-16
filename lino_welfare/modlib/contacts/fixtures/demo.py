@@ -1,1 +1,1 @@
-from lino.modlib.contacts.fixtures.demo import *
+from lino_xl.lib.contacts.fixtures.demo import *

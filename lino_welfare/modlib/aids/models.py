@@ -38,7 +38,7 @@ from lino.utils.xmlgen.html import E
 
 from lino.modlib.system.choicelists import PeriodEvents
 from lino.mixins.human import parse_name
-from lino.modlib.contacts.mixins import ContactRelated
+from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.addresses.mixins import AddressTypes
 from lino_xl.lib.boards.mixins import BoardDecision
 from lino_xl.lib.excerpts.mixins import ExcerptTitle
@@ -817,7 +817,7 @@ class RefundConfirmation(Confirmation):
     .. attribute:: doctor
 
     Pointer to the doctor (an instance of :class:`contacts.Person
-    <lino.modlib.contacts.models.Person>`).
+    <lino_xl.lib.contacts.models.Person>`).
 
     .. attribute:: pharmacy
 
@@ -887,7 +887,7 @@ class RefundConfirmation(Confirmation):
         "first_name last_name" without title.
 
         Doctors are stored as :class:`contacts.Person
-        <lino.modlib.contacts.models.Person>`.
+        <lino_xl.lib.contacts.models.Person>`.
 
         The :attr:`title` field of the new doctor will be "Dr." (this
         is currently not configurable).

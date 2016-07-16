@@ -36,7 +36,7 @@ from lino.api import dd
 
 from lino.core.tables import ButtonsTable
 
-#from lino.modlib.contacts.roles import ContactsUser
+#from lino_xl.lib.contacts.roles import ContactsUser
 
 from lino_xl.lib.reception.models import *
 

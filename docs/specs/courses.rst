@@ -24,20 +24,23 @@ External courses
 This is about *external* courses
 :mod:`lino_welfare.modlib.courses.models` (not :doc:`courses2`).
 
->>> rt.modules.courses.__name__
+>>> rt.models.courses.__name__
 'lino_welfare.modlib.courses.models'
 
 Requesting for JSON data
 ========================
 
->>> json_fields = 'count rows title success no_data_text'
+>>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
 >>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
+
+>>> json_fields = 'count rows title success no_data_text'
 >>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
 
 >>> ContentType = rt.modules.contenttypes.ContentType
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
+
 
 Course providers
 ================

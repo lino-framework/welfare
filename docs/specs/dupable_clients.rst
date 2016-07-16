@@ -135,7 +135,7 @@ both first and last name. Punctuation characters (like "-" or "&" or
 ",") are ignored, and also the ordering of elements does not matter.
 
 The current implementation splits the :attr:`name
-<lino.modlib.contacts.models.Partner.name>` of each client into its parts,
+<lino_xl.lib.contacts.models.Partner.name>` of each client into its parts,
 removing punctuation characters, computes a phonetic version using the
 `NYSIIS algorithm
 <https://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System>`_

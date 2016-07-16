@@ -1,1 +1,1 @@
-from lino.modlib.polls.fixtures.std import objects
+from lino_xl.lib.polls.fixtures.std import objects

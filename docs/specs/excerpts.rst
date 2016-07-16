@@ -36,7 +36,7 @@ Here is a more complete list of excerpt types:
  *aids.RefundConfirmation (Kostenübernahmeschein)*       Ja       Ja              Kostenübernahmeschein                              Default.odt                   certificate.body.html
  *aids.SimpleConfirmation (Einfache Bescheinigung)*      Ja       Ja              Einfache Bescheinigung                             Default.odt                   certificate.body.html
  *art61.Contract (Art.61-Konvention)*                    Ja       Ja              Art.61-Konvention                                                                contract.body.html
- *cal.Guest (Teilnehmer)*                                Ja       Nein            Anwesenheitsbescheinigung                          Default.odt                   presence_certificate.body.html
+ *cal.Guest (Anwesenheit)*                               Ja       Nein            Anwesenheitsbescheinigung                          Default.odt                   presence_certificate.body.html
  *cbss.IdentifyPersonRequest (IdentifyPerson-Anfrage)*   Ja       Ja              IdentifyPerson-Anfrage
  *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
@@ -72,7 +72,7 @@ Here is a list of all demo excerpts.
  67   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  66   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
  65   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 64   Presence certificate     *Participant #1 (22.05.2014)*                         AUSDEMWALD Alfons (116)                                        de
+ 64   Presence certificate     *Presence #1 (22.05.2014)*                            AUSDEMWALD Alfons (116)                                        de
  63   Payment reminder         *Belgisches Rotes Kreuz*                                                                                             de
  62   Art60§7 job supplyment   *Art60§7 job supplyment#16 (Denis DENON)*             DENON Denis (180*)            R-Cycle Sperrgutsortierzentrum   de
  61   Art60§7 job supplyment   *Art60§7 job supplyment#15 (Denis DENON)*             DENON Denis (180*)            BISA                             de

@@ -126,7 +126,7 @@ Database structure
 - notes.EventType : id, name, remark, body, body_fr, body_en, name_fr, name_en
 - notes.Note : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, date, time, type, event_type, subject, body, language, important
 - notes.NoteType : id, name, build_method, template, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
-- notifier.Notification : id, created, user, owner_type, owner_id, seen, message
+- notify.Notification : id, created, user, owner_type, owner_id, seen, sent, subject, body
 - outbox.Attachment : id, owner_type, owner_id, mail
 - outbox.Mail : id, project, user, owner_type, owner_id, date, subject, body, sent
 - outbox.Recipient : id, mail, partner, type, address, name

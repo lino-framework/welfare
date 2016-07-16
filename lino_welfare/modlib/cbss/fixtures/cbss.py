@@ -22,7 +22,7 @@ Loads all cbss specific default data.
 
 from lino_welfare.modlib.cbss.fixtures import sectors, purposes
 from lino_welfare.modlib.cbss.fixtures import cbss_demo, democfg
-from lino.modlib.statbel.countries.fixtures import inscodes
+from lino_xl.lib.statbel.countries.fixtures import inscodes
 
 
 def objects():

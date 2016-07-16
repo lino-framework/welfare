@@ -30,7 +30,7 @@ from django.core.management import call_command
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
 
-from lino.modlib.contacts.utils import name2kw, street2kw
+from lino_xl.lib.contacts.utils import name2kw, street2kw
 from lino.utils import join_words
 from lino.utils.instantiator import Instantiator
 

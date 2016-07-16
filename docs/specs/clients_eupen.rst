@@ -150,14 +150,14 @@ set([])
 
 But the "Miscellaneous" tab is visible only to users having either the
 :class:`SocialStaff <lino_welfare.modlib.pcsw.roles.SocialStaff>` or
-the :class:`ContactsStaff <lino.modlib.contacts.roles.ContactsStaff>`
+the :class:`ContactsStaff <lino_xl.lib.contacts.roles.ContactsStaff>`
 role:
 
 >>> misc = lh['misc']
 >>> misc
 <Panel misc in ClientDetail on pcsw.Clients>
 >>> misc.required_roles
-set([(<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>, <class 'lino.modlib.contacts.roles.ContactsStaff'>)])
+set([(<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>, <class 'lino_xl.lib.contacts.roles.ContactsStaff'>)])
 
 
 

@@ -148,7 +148,7 @@ Notes de discussion
 - Bouton "Remplir les données"
 
 - la fiche est un document à usage interne utilisé par Sandra pour
-  encoder les données dans un fichier Excel protégé issu par 
+  encoder les données dans un fichier Excel protégé issu par X.
 
 - Colonne "Mise en situation professionnelle" : calculer les heures
   par stage d'immersion, en fonction des dates de début et de fin et
@@ -169,3 +169,37 @@ Notes de discussion
 
   
 
+>>> # rt.show(esf.AllSummaries)
+
+>>> obj = pcsw.Client.objects.get(pk=116)
+>>> print(obj)
+AUSDEMWALD Alfons (116)
+
+>>> dd.plugins.summaries.start_year
+2012
+>>> dd.plugins.summaries.end_year
+2014
+>>> rt.show(esf.SummariesByClient, obj)
+========== ======= ======= ======= ======== ======= ======= ======= =======
+ Year       10      20      21      30       40      41      42      43
+---------- ------- ------- ------- -------- ------- ------- ------- -------
+ 2012       0       0       0       3        0       0       0       0
+ 2013       0       0       0       11       0       0       0       0
+ 2014       0       0       1       11       1       0       0       0
+ **6039**   **0**   **0**   **1**   **25**   **1**   **0**   **0**   **0**
+========== ======= ======= ======= ======== ======= ======= ======= =======
+<BLANKLINE>
+
+>>> rt.login().run(obj.check_summaries)
+{'refresh': True}
+
+>>> rt.show(esf.SummariesByClient, obj)
+========== ======= ======= ======= ======== ======= ======= ======= =======
+ Year       10      20      21      30       40      41      42      43
+---------- ------- ------- ------- -------- ------- ------- ------- -------
+ 2012       0       0       0       3        0       0       0       0
+ 2013       0       0       0       11       0       0       0       0
+ 2014       0       0       1       11       1       0       0       0
+ **6039**   **0**   **0**   **1**   **25**   **1**   **0**   **0**   **0**
+========== ======= ======= ======= ======== ======= ======= ======= =======
+<BLANKLINE>

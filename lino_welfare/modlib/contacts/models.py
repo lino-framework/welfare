@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -26,11 +26,10 @@ doesn't need :mod:`lino_cosi.lib.vat`
 
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
+from lino.api import dd, rt, _
 
-from lino.api import dd, rt
-
-from lino.modlib.contacts.models import *
+from lino_xl.lib.contacts.models import *
+# from lino_cosi.lib.contacts.models import *
 
 from lino_xl.lib.addresses.mixins import AddressOwner
 from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
@@ -41,7 +40,7 @@ class Partner(
         Partner,
         AddressOwner, mixins.CreatedModified, dd.ImportedFields):
 
-    """Extends :class:`lino.modlib.contacts.models.Partner` by adding the
+    """Extends :class:`lino_xl.lib.contacts.models.Partner` by adding the
     following fields:
 
     .. attribute:: is_obsolete
@@ -116,7 +115,7 @@ für neue Operationen nicht benutzt werden können.""")
     #     return "%s (%s)" % (s, self.pk)
 
 
-class PartnerDetail(PartnerDetail, PartnerDetailMixin):
+class PartnerDetail(PartnerDetailMixin, PartnerDetail):
 
     main = "general contact ledger misc"
 
@@ -328,11 +327,13 @@ class PartnersByClientContactType(Partners):
     column_names = "name address_column phone gsm email *"
     auto_fit_column_widths = True
 
+Partners.set_detail_layout(PartnerDetail())
+Companies.set_detail_layout(CompanyDetail())
 
-@dd.receiver(dd.post_analyze)
-def my_details(sender, **kw):
-    contacts = sender.modules.contacts
-    contacts.Partners.set_detail_layout(contacts.PartnerDetail())
-    contacts.Companies.set_detail_layout(contacts.CompanyDetail())
+# @dd.receiver(dd.post_analyze)
+# def my_details(sender, **kw):
+#     contacts = sender.models.contacts
+#     contacts.Partners.set_detail_layout(contacts.PartnerDetail())
+#     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
 

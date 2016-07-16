@@ -19,4 +19,4 @@
 
 """
 
-from lino.modlib.polls.models import *
+from lino_xl.lib.polls.models import *

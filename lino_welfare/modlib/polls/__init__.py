@@ -15,7 +15,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""The Lino Welfare extension of :mod:`lino.modlib.polls`.
+"""The Lino Welfare extension of :mod:`lino_xl.lib.polls`.
 This just adds one fixture.
 Technical specs see :doc:`/specs/polls`.
 
@@ -28,4 +28,4 @@ Technical specs see :doc:`/specs/polls`.
 
 """
 
-from lino.modlib.polls import Plugin
+from lino_xl.lib.polls import Plugin

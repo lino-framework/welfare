@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from lino.modlib.contacts.roles import ContactsUser
+from lino_xl.lib.contacts.roles import ContactsUser
 
 
 class CBSSUser(ContactsUser):

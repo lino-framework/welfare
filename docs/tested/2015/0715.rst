@@ -4,7 +4,7 @@
 Reception clerk sees "Career" tab
 ====================================
 
-.. How to test only this document:
+.. How to test just this document:
 
     $ python setup.py test -s tests.DocsTests.test_20150715
     
@@ -111,9 +111,7 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel797, contact_panel823, coaching_panel1029, aids_tab_panel1123, work_tab_1_panel1152, history_panel1839 ]
-
-.. before 20160530: [ general_panel795, contact_panel821, coaching_panel1027, aids_tab_panel1121, work_tab_1_panel1150, history_panel1837 ]
+[ general_panel824, contact_panel850, coaching_panel1056, aids_tab_panel1150, work_tab_1_panel1179, history_panel1866 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 

@@ -71,7 +71,11 @@ class ClientSummary(Certifiable, Summary):
     def get_summary_collectors(self):
         qs = rt.modules.cal.Guest.objects.all()
         qs = self.add_date_filter(qs, 'event__start_date', partner=self.master)
-        yield self.collect_from_guest, qs
+        yield (self.collect_from_guest, qs)
+
+    def reset_summary_data(self):
+        for sf in StatisticalFields.objects():
+            setattr(self, sf.field_name, sf.field.default)
 
     def collect_from_guest(self, obj):
         for sf in StatisticalFields.objects():
@@ -88,8 +92,9 @@ class ClientSummary(Certifiable, Summary):
         for sf in StatisticalFields.objects():
             v = getattr(self, sf.field_name)
             cells.append(E.td(
-                unicode(sf.text), E.br(), unicode(v), **ar.cellattrs))
-        return E.table(E.tr(*cells), **ar.tableattrs)
+                unicode(sf.text), E.br(), unicode(v),
+                **ar.renderer.cellattrs))
+        return E.table(E.tr(*cells), **ar.renderer.tableattrs)
 
 
 class Summaries(dd.Table):

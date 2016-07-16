@@ -100,6 +100,7 @@ class Clients(pcsw.CoachedClients):
         kw = super(Clients, self).param_defaults(ar, **kw)
         kw.update(client_state=pcsw.ClientStates.coached)
         kw.update(coached_by=ar.get_user())
+        kw.update(only_primary=True)
         return kw
 
     @classmethod
@@ -359,7 +360,8 @@ class PeriodicNumbers(dd.VirtualTable):
             yield add(A, observed_event=isip.ContractEvents.started)
             yield add(A, observed_event=isip.ContractEvents.active)
             yield add(A, observed_event=isip.ContractEvents.ended)
-            yield add(A, observed_event=isip.ContractEvents.signed)
+            yield add(A, observed_event=isip.ContractEvents.decided)
+            yield add(A, observed_event=isip.ContractEvents.issued)
 
 
 class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
