@@ -35,10 +35,10 @@ checkers.
  value                                   text
 --------------------------------------- --------------------------------------------------
  printing.CachedPrintableChecker         Check for missing target files
- cal.EventGuestChecker                   Check for missing participants
- cal.ConflictingEventsChecker            Check for conflicting events
  countries.PlaceChecker                  Check plausibility of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
+ cal.EventGuestChecker                   Check for missing participants
+ cal.ConflictingEventsChecker            Check for conflicting events
  mixins.DupableChecker                   Check for missing phonetic words
  beid.BeIdCardHolderChecker              Check for invalid SSINs
  pcsw.SSINChecker                        Check for valid identification

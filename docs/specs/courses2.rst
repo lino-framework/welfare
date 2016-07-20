@@ -28,7 +28,7 @@ This is about *internal* courses
 'lino_welfare.projects.chatelet.modlib.courses.models'
 
 
->>> rt.show(courses.Courses)
+>>> rt.show(courses.Activities)
 ============ ======================= ============================ ============= ======= ===============
  Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   État
 ------------ ----------------------- ---------------------------- ------------- ------- ---------------

@@ -71,29 +71,21 @@ Default lists of coached clients
 
 >>> ses.show(integ.Clients, column_names="name_column")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============================
+=========================
  Name
-----------------------------
+-------------------------
  BRECHT Bernd (177)
  COLLARD Charlotte (118)
- DOBBELSTEIN Dorothée (124)
  DUBOIS Robin (179)
  EMONTS-GAST Erna (152)
- EVERS Eberhart (127)
- GROTECLAES Gregory (132)
  JEANÉMART Jérôme (181)
  JONAS Josef (139)
  KELLER Karl (178)
- LAMBERTZ Guido (142)
- LAZARUS Line (144)
  MALMENDIER Marc (146)
- MEESSEN Melissa (147)
- RADERMACHER Edgard (157)
- RADERMACHER Hedi (161)
  DA VINCI David (165)
  VAN VEEN Vincent (166)
  ÖSTGES Otto (168)
-============================
+=========================
 <BLANKLINE>
 
 
@@ -181,28 +173,21 @@ isn't):
 
 >>> ses.show(integ.Clients, column_names="name_column")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=============================
+============================
  Name
------------------------------
- BRECHT Bernd (177)
+----------------------------
  DOBBELSTEIN Dorothée (124)
  EMONTS Daniel (128)
  ENGELS Edgar (129)
- EVERS Eberhart (127)
  HILGERS Hildegard (133)
- JACOBS Jacqueline (137)
- JEANÉMART Jérôme (181)
  KAIVERS Karl (141)
  LAMBERTZ Guido (142)
  LAZARUS Line (144)
  MEESSEN Melissa (147)
  RADERMACHER Alfons (153)
- RADERMACHER Christian (155)
- RADERMACHER Edgard (157)
  RADERMACHER Guido (159)
  RADERMECKER Rik (173)
- VAN VEEN Vincent (166)
-=============================
+============================
 <BLANKLINE>
 
 Here is a list of Mélanies clients on 2013-04-01.  We get it by
@@ -217,16 +202,12 @@ manually filling that date into the
 >>> pv = dict(end_date=i2d(20130401))
 >>> ses.show(integ.Clients, column_names="name_column", param_values=pv)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=========================
+======================
  Name
--------------------------
- AUSDEMWALD Alfons (116)
+----------------------
  ENGELS Edgar (129)
- JONAS Josef (139)
  LAMBERTZ Guido (142)
- RADERMACHER Guido (159)
- DA VINCI David (165)
-=========================
+======================
 <BLANKLINE>
 
 

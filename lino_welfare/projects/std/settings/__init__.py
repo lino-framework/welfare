@@ -113,15 +113,16 @@ class Site(Site):
         yield super(Site, self).get_installed_apps()
 
         yield 'lino_welfare.modlib.system'
-        yield 'lino.modlib.gfks'
+        yield 'lino_xl.lib.statbel.countries'
+        yield 'lino_welfare.modlib.contacts'
+
+        # yield 'lino.modlib.gfks'
         yield 'lino_xl.lib.appypod'
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.changes'
-        yield 'lino_xl.lib.statbel.countries'
 
         yield 'lino_xl.lib.properties'
-        yield 'lino_welfare.modlib.contacts'
         yield 'lino_xl.lib.addresses'
 
         yield 'lino_welfare.modlib.uploads'
