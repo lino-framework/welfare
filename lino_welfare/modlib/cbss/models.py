@@ -662,7 +662,7 @@ def cbss_summary(self, ar):
     """
     if ar is None:
         return ''
-    html = '<p><ul>'
+    html = u'<p><ul>'
     for t in (IdentifyRequestsByPerson, ManageAccessRequestsByPerson,
               RetrieveTIGroupsRequestsByPerson):
         n = ar.spawn(t, master_instance=self).get_total_count()
@@ -670,8 +670,9 @@ def cbss_summary(self, ar):
             html += "<li>%d %s</li>" % (
                 n, unicode(t.model._meta.verbose_name_plural))
     html += '</ul></p>'
-    html = '<div class="htmlText">%s</div>' % html
-    return html
+    # html = '<div class="htmlText">%s</div>' % html
+    return ar.html_text(html)
+    # return html
 
 dd.inject_field(pcsw.Client,
                 'cbss_summary',
