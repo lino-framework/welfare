@@ -27,6 +27,8 @@ from lino.api import dd, _
 from lino.utils.dates import weekdays
 from lino.utils.quantities import Duration
 
+ZERO = Duration("0:00")
+
 
 class ParticipationCertificates(dd.ChoiceList):
     verbose_name = _("Participation Certificate")
@@ -70,7 +72,6 @@ class GuestCount(StatisticalField):
             return 1
         return 0
 
-ZERO = Duration("0:00")
 
 class HoursField(StatisticalField):
     def create_field(self):

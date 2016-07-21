@@ -90,7 +90,7 @@ class ClientSummary(Certifiable, Summary):
 
     def reset_summary_data(self):
         for sf in StatisticalFields.objects():
-            setattr(self, sf.field_name, sf.field.default)
+            setattr(self, sf.field_name, sf.field.get_default())
 
     def add_from_fields(self, obj, meth_name):
         for sf in StatisticalFields.objects():
