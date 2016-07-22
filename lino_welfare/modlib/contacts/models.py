@@ -37,8 +37,8 @@ from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
 
 @dd.python_2_unicode_compatible
 class Partner(
-        Partner,
-        AddressOwner, mixins.CreatedModified, dd.ImportedFields):
+        Partner, AddressOwner, mixins.CreatedModified,
+        dd.ImportedFields):
 
     """Extends :class:`lino_xl.lib.contacts.models.Partner` by adding the
     following fields:

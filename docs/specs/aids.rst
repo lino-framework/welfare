@@ -85,7 +85,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt in <em>Beratung mit COLLARD Charlotte (118)</em> (<b>Versammlung beenden</b>). </span>
-<span>Du hast 6 Eintr&#228;ge in <b>Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
+<span>Du hast<b>6 Eintr&#228;ge in Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 <b>Du hast 3 offene Datenkontrollen.</b>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
@@ -380,14 +380,14 @@ Number of children and adults in household
 
 >>> pv = dict(client=pcsw.Client.objects.get(pk=181))
 >>> rt.show(aids.IncomeConfirmations, column_names=cn, param_values=pv)
-==== ======================== ============= ===== ======== ========
- ID   Klient                   Periode vom   bis   Adults   Kinder
----- ------------------------ ------------- ----- -------- --------
- 49   JEANÉMART Jérôme (181)   02.07.14            2        0
- 48   JEANÉMART Jérôme (181)   08.03.13            2        0
- 47   JEANÉMART Jérôme (181)   08.03.13            2        0
-                                                   **6**    **0**
-==== ======================== ============= ===== ======== ========
+==== ======================== ============= ===== ============ ========
+ ID   Klient                   Periode vom   bis   Erwachsene   Kinder
+---- ------------------------ ------------- ----- ------------ --------
+ 49   JEANÉMART Jérôme (181)   02.07.14            2            0
+ 48   JEANÉMART Jérôme (181)   08.03.13            2            0
+ 47   JEANÉMART Jérôme (181)   08.03.13            2            0
+                                                   **6**        **0**
+==== ======================== ============= ===== ============ ========
 <BLANKLINE>
 
 

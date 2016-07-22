@@ -110,14 +110,25 @@ UsersWithClients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
+ Alicia Allmanns      **1**        **1**                        **1**     **3**             **3**            **3**
+ Hubert Huppertz      **1**        **3**       **4**    **2**   **1**     **11**            **11**           **11**
+ Mélanie Mélard       **2**                    **2**    **4**   **3**     **11**            **11**           **11**
+ **Total (3 rows)**   **4**        **4**       **6**    **6**   **5**     **25**            **25**           **25**
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+<BLANKLINE>
+
+Until 20160715:
+
+==================== ============ =========== ======== ======= ========= ================= ================ ========
+ Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
+-------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
  Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **3**            **7**
  Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **11**           **19**
  Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **11**           **18**
  **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **25**           **44**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
-<BLANKLINE>
 
-Before 20160608:
+Until 20160608:
 
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
@@ -134,11 +145,12 @@ Before 20160608:
 Activity report
 ===============
 
->>> ses.show(integ.ActivityReport)
+>>> ses.show(integ.ActivityReport, stripped=True)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ------------
 Introduction
 ------------
+<BLANKLINE>
 Ceci est un **rapport**,
 càd un document complet généré par Lino, contenant des
 sections, des tables et du texte libre.
@@ -153,10 +165,10 @@ Users with their Clients
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
  Coach                Evaluation   Formation   Search   Work    Standby   Primary clients   Active clients   Total
 -------------------- ------------ ----------- -------- ------- --------- ----------------- ---------------- --------
- Alicia Allmanns      **2**        **2**       **1**    **1**   **1**     **3**             **3**            **7**
- Hubert Huppertz      **3**        **5**       **6**    **3**   **2**     **11**            **11**           **19**
- Mélanie Mélard       **4**        **1**       **4**    **5**   **4**     **11**            **11**           **18**
- **Total (3 rows)**   **9**        **8**       **11**   **9**   **7**     **25**            **25**           **44**
+ Alicia Allmanns      **1**        **1**                        **1**     **3**             **3**            **3**
+ Hubert Huppertz      **1**        **3**       **4**    **2**   **1**     **11**            **11**           **11**
+ Mélanie Mélard       **2**                    **2**    **4**   **3**     **11**            **11**           **11**
+ **Total (3 rows)**   **4**        **4**       **6**    **6**   **5**     **25**            **25**           **25**
 ==================== ============ =========== ======== ======= ========= ================= ================ ========
 <BLANKLINE>
 --------------------
@@ -164,14 +176,13 @@ Indicateurs généraux
 --------------------
 <BLANKLINE>
 No data to display
-<BLANKLINE>
 .
 <BLANKLINE>
 No data to display
-<BLANKLINE>
 --------------------------------
 Causes d'arrêt des interventions
 --------------------------------
+<BLANKLINE>
 ============================ ======== ======== ========= ========= ======== ====== ======= =======
  Description                  alicia   hubert   melanie   patrick   romain   rolf   robin   Total
 ---------------------------- -------- -------- --------- --------- -------- ------ ------- -------
@@ -184,9 +195,11 @@ Causes d'arrêt des interventions
 =====
 ISIPs
 =====
+<BLANKLINE>
 ----------------------
 PIIS par agent et type
 ----------------------
+<BLANKLINE>
 ================== ================ ================== =========== ===================== ================ =======
  Description        VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
 ------------------ ---------------- ------------------ ----------- --------------------- ---------------- -------
@@ -208,8 +221,10 @@ PIIS par agent et type
 ----------------------------------
 Organisations externes et contrats
 ----------------------------------
+<BLANKLINE>
 Nombre de PIIS actifs par 
     organisation externe et type de contrat.
+<BLANKLINE>
 ======================== ================ ================== =========== ===================== ================ =======
  Organisation             VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
 ------------------------ ---------------- ------------------ ----------- --------------------- ---------------- -------
@@ -223,6 +238,7 @@ Nombre de PIIS actifs par
 ------------------------
 Contract endings by type
 ------------------------
+<BLANKLINE>
 =============== ================ ================== =========== ===================== ================ =======
  Description     VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
 --------------- ---------------- ------------------ ----------- --------------------- ---------------- -------
@@ -235,8 +251,10 @@ Contract endings by type
 --------------------------
 PIIS et types de formation
 --------------------------
+<BLANKLINE>
 Nombre de PIIS actifs par 
     type de formation et type de contrat.
+<BLANKLINE>
 ================= ================ ===================== =======
  Education Type    VSE Ausbildung   VSE Vollzeitstudium   Total
 ----------------- ---------------- --------------------- -------
@@ -256,9 +274,11 @@ Nombre de PIIS actifs par
 =======================
 Art60§7 job supplyments
 =======================
+<BLANKLINE>
 -------------------------
 Art60§7 par agent et type
 -------------------------
+<BLANKLINE>
 ================== ================ ============================ ======================= ============================ ====== =======
  Description        social economy   social economy - increased   social economy school   social economy with refund   town   Total
 ------------------ ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
@@ -280,6 +300,7 @@ Art60§7 par agent et type
 --------------------------
 Job providers and contrats
 --------------------------
+<BLANKLINE>
 ================================ ================ ============================ ======================= ============================ ====== =======
  Organisation                     social economy   social economy - increased   social economy school   social economy with refund   town   Total
 -------------------------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
@@ -291,6 +312,7 @@ Job providers and contrats
 ------------------------
 Contract endings by type
 ------------------------
+<BLANKLINE>
 =============== ================ ============================ ======================= ============================ ====== =======
  Description     social economy   social economy - increased   social economy school   social economy with refund   town   Total
 --------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------

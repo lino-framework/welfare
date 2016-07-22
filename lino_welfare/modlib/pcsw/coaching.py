@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -31,11 +31,14 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
+# from lino_xl.lib.notes.mixins import Notable
+from lino_xl.lib.notes.actions import NotifyingAction
 from lino.modlib.users.mixins import ByUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 
 
-class EndCoaching(dd.ChangeStateAction, dd.NotifyingAction):
+class EndCoaching(dd.ChangeStateAction, NotifyingAction):
+    # not being used
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")
     required_states = 'active standby'
@@ -152,7 +155,6 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
     @classmethod
     def on_analyze(cls, site):
         super(Coaching, cls).on_analyze(site)
-        #~ cls.declare_imported_fields('''client user primary start_date end_date''')
         cls.declare_imported_fields('''client user primary end_date''')
 
     @dd.chooser()
@@ -238,20 +240,17 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
     def summary_row(self, ar, **kw):
         return [ar.href_to(self.client), " (%s)" % self.state.text]
 
-    def get_related_project(self):
-        return self.client
+    # def get_notify_owner(self, ar):
+    #     return self.client
 
-    def get_system_note_type(self, request):
-        return settings.SITE.site_config.system_note_type
+    # def get_related_project(self):
+    #     return self.client
 
-    def get_system_note_recipients(self, request, silent):
-        if silent:
-            return
-        if self.user.email:
-            yield "%s <%s>" % (unicode(self.user), self.user.email)
-        for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True).exclude(email=''):
-            yield "%s <%s>" % (unicode(u), u.email)
+    # def get_notify_observers(self):
+    #     yield self.user
+    #     for u in settings.SITE.user_model.objects.filter(
+    #             coaching_supervisor=True).exclude(email=''):
+    #         yield u
 
 
 dd.update_field(Coaching, 'start_date', verbose_name=_("Coached from"))

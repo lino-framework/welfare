@@ -420,10 +420,12 @@ class MyPendingGrantings(Grantings):
         sar = ar.spawn(cls)
         num = sar.get_total_count()
         if num > 0:
-            chunks = [unicode(_("You have %s items in ")) % num]
+            chunks = [unicode(_("You have "))]
+            # chunks = [unicode(_("You have  ")) % num]
+            txt = _("{0} items in {1}").format(num, cls.label)
             # e = E.a(str(num), " ", unicode(cls.label),
             #         href=sar.get_request_url())
-            chunks.append(ar.href_to_request(sar, unicode(cls.label)))
+            chunks.append(ar.href_to_request(sar, txt))
             chunks.append('.')
             yield E.span(*chunks)
 

@@ -150,15 +150,15 @@ Yet another series of GET requests
 >>> demo_get(
 ...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
 ...    2, mt=50, mk=120, **kw)
->>> demo_get('alicia', 'api/integ/Clients', json_fields, 7, **kw)
->>> demo_get('hubert', 'api/integ/Clients', json_fields, 19, **kw)
+>>> demo_get('alicia', 'api/integ/Clients', json_fields, 3, **kw)
+>>> demo_get('hubert', 'api/integ/Clients', json_fields, 11, **kw)
 
 >>> alicia = settings.SITE.user_model.objects.get(username='alicia')
 
 Rolf working as Alicia:
 
 >>> kw = dict(fmt='json', limit=20, start=0, su=alicia.pk)
->>> demo_get('rolf', 'api/integ/Clients', json_fields, 7, **kw)
+>>> demo_get('rolf', 'api/integ/Clients', json_fields, 3, **kw)
 
 Some choices lists:
 

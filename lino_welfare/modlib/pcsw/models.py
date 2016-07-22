@@ -48,6 +48,7 @@ from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
 from lino_xl.lib.notes.choicelists import SpecialTypes
+from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -80,9 +81,8 @@ from .choicelists import (CivilState, ResidenceType, ClientEvents,
 
 
 class RefuseClient(dd.ChangeStateAction):
-
     """
-    This is not a docstring
+    Refuse this newcomer request.
     """
     label = _("Refuse")
     required_states = 'newcomer'
@@ -112,14 +112,13 @@ class RefuseClient(dd.ChangeStateAction):
         kw.update(message=subject)
         kw.update(alert=_("Success"))
         super(RefuseClient, self).run_from_ui(ar)
-        #~ self.add_system_note(ar,obj)
         silent = False
-        ar.add_system_note(obj, subject, body, silent)
+        obj.add_system_note(ar, obj, subject, body, silent)
         ar.success(**kw)
 
 
 @dd.python_2_unicode_compatible
-class Client(contacts.Person, BeIdCardHolder, DupableClient):
+class Client(contacts.Person, BeIdCardHolder, DupableClient, Notable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -356,8 +355,10 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
             qs = obj.coachings_by_client.filter(end_date__isnull=True)
             if qs.count():
                 def ok(ar):
+                    # subject = _("{0} state set to former")
+                    # obj.emit_system_note(ar, obj, subject, body)
                     for co in qs:
-                        #~ co.state = CoachingStates.ended
+                        # co.state = CoachingStates.ended
                         co.end_date = dd.today()
                         co.save()
                     ar.success(refresh=True)
@@ -534,20 +535,19 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient):
 
     @dd.displayfield(_("Coaches"))
     def coaches(self, ar):
-        today = settings.SITE.today()
+        today = dd.today()
         period = (today, today)
         items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
 
-    def get_system_note_type(self, request):
-        return settings.SITE.site_config.system_note_type
-
-    def get_system_note_recipients(self, request, silent):
-        if silent:
-            return
+    def get_notify_observers(self):
         for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True).exclude(email=''):
-            yield "%s <%s>" % (unicode(u), u.email)
+                coaching_supervisor=True):
+            yield u
+        today = dd.today()
+        period = (today, today)
+        for obj in self.get_coachings(period):
+            yield obj.user
 
     @dd.displayfield(_("Find appointment"))
     def find_appointment(self, ar):
@@ -1027,7 +1027,7 @@ class ClientCoachingsChecker(ClientChecker):
             if obj.is_obsolete:
                 yield (False, _("Both coached and obsolete."))
         if obj.client_state != ClientStates.coached:
-            today = settings.SITE.today()
+            today = dd.today()
             period = (today, today)
             qs = obj.get_coachings(period)
             if qs.count():

@@ -35,8 +35,8 @@ from lino_cosi.lib.courses.models import *
 CourseAreas.clear()
 add = CourseAreas.add_item
 # add('S', _("Integration workshops"), 'integ')  # no longer used
-add('B', _("Integration workshops"), 'default')
-add('J', _("Job search workshops"), 'job')
+add('B', _("Integration workshops"), 'default', 'courses.BasicCourses')
+add('J', _("Job search workshops"), 'job', 'courses.JobCourses')
 # add('B', _("Social integration"), 'default')
 # add('J', _("Socio-professional integration"), 'job')
 
@@ -118,11 +118,11 @@ class Line(Line):
 EnrolmentsByPupil.column_names = 'request_date course workflow_buttons *'
 
 
-class BasicCourses(Courses):
+class BasicCourses(Activities):
     _course_area = CourseAreas.default
 
 
-class JobCourses(Courses):
+class JobCourses(Activities):
     _course_area = CourseAreas.job
 
 

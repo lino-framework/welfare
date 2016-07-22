@@ -266,3 +266,24 @@ Theresia is rather going to use the overview tables:
 
 
 
+Create a visit
+==============
+
+>>> print(py2rst(pcsw.Clients.create_visit))
+Enregistrer consultation
+(main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+
+>>> show_fields(pcsw.Clients.create_visit)
+=============== ============== ===========
+ Internal name   Verbose name   Help text
+--------------- -------------- -----------
+ user            Utilisateur
+ summary         Raison
+=============== ============== ===========
+
+>>> show_choices('romain', '/apchoices/pcsw/Clients/create_visit/user')
+Alicia Allmanns
+Caroline Carnol
+Hubert Huppertz
+Judith Jousten
+

@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, contenttypes, gfks, appypod, humanize, users, notify, changes, office, countries, contacts, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
+58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
 132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -99,7 +99,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contenttypes.ContentType       gfks.ContentTypes               3         133
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
- courses.Course                 courses.Courses                 30        7
+ courses.Course                 courses.Activities              30        7
  courses.Enrolment              courses.Enrolments              15        100
  courses.Line                   courses.Lines                   21        7
  courses.Slot                   courses.Slots                   5         0
@@ -126,7 +126,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
- esf.ClientSummary              esf.Summaries                   19        126
+ esf.ClientSummary              esf.Summaries                   23        189
  excerpts.Excerpt               excerpts.Excerpts               12        70
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -154,7 +154,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  newcomers.Broker               newcomers.Brokers               2         2
  newcomers.Competence           newcomers.Competences           5         7
  newcomers.Faculty              newcomers.Faculties             6         5
- notes.EventType                notes.EventTypes                10        9
+ notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
  notify.Notification            notify.Notifications            9         3
@@ -308,13 +308,13 @@ Each window layout defines a given set of fields.
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
-- courses.Courses.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, EnrolmentsByCourse
-- courses.Courses.insert : start_date, line, teacher
+- courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, EnrolmentsByCourse
+- courses.Activities.insert : start_date, line, teacher
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, places, option, remark, request_date, user
-- courses.EnrolmentsByPupil.insert : course, places, option, remark, request_date, user
-- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, topic, fees_cat, fee, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
+- courses.EnrolmentsByPupil.insert : course_area, course, places, option, remark, request_date, user
+- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, course_area, topic, fees_cat, fee, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
@@ -376,7 +376,7 @@ Each window layout defines a given set of fields.
 - notes.NoteTypes.insert : name, name_nl, name_de, name_en, build_method
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- notify.Notifications.insert : created, user, seen, sent, overview
+- notify.Notifications.insert : created, user, seen, sent, owner, overview
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
@@ -489,8 +489,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - countries.Countries.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.Places.insert : visible for 110 210 220 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 220 410 800 admin 910
-- courses.Courses.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- courses.Courses.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- courses.Activities.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- courses.Activities.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.Enrolments.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.Enrolments.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.EnrolmentsByCourse.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -607,7 +607,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -621,7 +621,7 @@ Romain
   - Mises à l'emploi art61
   - Stages d'immersion
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Ateliers en préparation, Ateliers actifs, Ateliers inactifs, Ateliers terminés, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Ateliers : Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
 - Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
@@ -629,7 +629,7 @@ Romain
   - Système : Broken GFKs
   - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
 - Configuration :
-  - Système : Paramètres du Site, Textes d'aide, Utilisateurs, Update all summary data
+  - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
@@ -644,8 +644,8 @@ Romain
   - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
   - Questionnaires : Listes de choix
 - Explorateur :
-  - Système : types de contenu, Procurations, Profils d'utilisateur, Notifications, Changes, Tests de données, Problèmes de données
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
+  - Système : Procurations, Profils d'utilisateur, types de contenu, Notifications, Changes, Tests de données, Problèmes de données
   - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
@@ -669,11 +669,11 @@ sociales, freins. Elle peut faire des requètes CBSS.
 >>> rt.login('theresia').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
+- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Ateliers en préparation, Ateliers actifs, Ateliers inactifs, Ateliers terminés, -, Séries d'ateliers
+- Ateliers : Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
@@ -683,3 +683,56 @@ sociales, freins. Elle peut faire des requètes CBSS.
   - Ateliers : Ateliers
   - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
+
+
+Dialog actions
+==============
+
+Voici une liste des actions qui ont un dialogue, càd pour lesquelles,
+avant de les exécuter, Lino ouvre une fenêtre à part pour demander des
+options.
+
+>>> show_dialog_actions()
+- polls.AllResponses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.MyResponses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.Responses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.ResponsesByPartner.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.ResponsesByPoll.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- cal.GuestStates.wf1 : Accepter
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- cal.GuestStates.wf2 : Rejeter
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- cal.Guests.checkin : Arriver
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- contacts.Companies.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Adresses** (addresses_Address), **Raison** (reason)
+- contacts.Persons.create_household : Créer un ménage
+  (main) [visible for all]: **Partenaire** (partner), **Type de ménage** (type), **Chef de ménage** (head)
+- countries.Places.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- newcomers.AvailableCoachesByClient.assign_coach : Attribuer
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- pcsw.ClientStates.wf1 : Refuser
+  (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
+- pcsw.Clients.create_visit : Enregistrer consultation
+  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+- pcsw.Clients.merge_row : Fusionner
+  (main) [visible for all]:
+  - **vers...** (merge_to)
+  - **Also reassign volatile related objects** (keep_volatiles):
+    - (keep_volatiles_1): **Certificats de revenu** (aids_IncomeConfirmation), **Refund confirmations** (aids_RefundConfirmation)
+    - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (pcsw_Coaching)
+    - (keep_volatiles_3): **Dispenses** (pcsw_Dispense), **Connaissances de langue** (cv_LanguageKnowledge)
+    - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
+    - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
+  - **Raison** (reason)
+- pcsw.Coachings.create_visit : Enregistrer consultation
+  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+- users.Users.change_password : Changer mot de passe
+  (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
+<BLANKLINE>

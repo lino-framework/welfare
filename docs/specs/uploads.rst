@@ -79,12 +79,12 @@ DERICUM Daniel (121)
 Identifizierendes Dokument: *8*
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
-============================ ============ ======= ============== ===================
- Upload-Art                   Gültig bis   Nötig   Beschreibung   Hochgeladen durch
----------------------------- ------------ ------- -------------- -------------------
- Identifizierendes Dokument   25.05.14     Ja                     Theresia Thelen
- Identifizierendes Dokument   22.04.14     Nein                   Theresia Thelen
-============================ ============ ======= ============== ===================
+============================ ============ ======= ============================ ===================
+ Upload-Art                   Gültig bis   Nötig   Beschreibung                 Hochgeladen durch
+---------------------------- ------------ ------- ---------------------------- -------------------
+ Identifizierendes Dokument   25.05.14     Ja      Identifizierendes Dokument   Theresia Thelen
+ Identifizierendes Dokument   22.04.14     Nein    Identifizierendes Dokument   Theresia Thelen
+============================ ============ ======= ============================ ===================
 <BLANKLINE>
 
 Here is another client with three uploads:
@@ -102,13 +102,13 @@ Führerschein: *11*
 
 
 >>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
-====================== ============ ======= ============== ===================
- Upload-Art             Gültig bis   Nötig   Beschreibung   Hochgeladen durch
----------------------- ------------ ------- -------------- -------------------
- Führerschein           01.06.14     Ja                     Caroline Carnol
- Arbeitserlaubnis       30.08.14     Ja                     Alicia Allmanns
- Aufenthaltserlaubnis   18.03.15     Ja                     Theresia Thelen
-====================== ============ ======= ============== ===================
+====================== ============ ======= ====================== ===================
+ Upload-Art             Gültig bis   Nötig   Beschreibung           Hochgeladen durch
+---------------------- ------------ ------- ---------------------- -------------------
+ Führerschein           01.06.14     Ja      Führerschein           Caroline Carnol
+ Arbeitserlaubnis       30.08.14     Ja      Arbeitserlaubnis       Alicia Allmanns
+ Aufenthaltserlaubnis   18.03.15     Ja      Aufenthaltserlaubnis   Theresia Thelen
+====================== ============ ======= ====================== ===================
 <BLANKLINE>
 
 
@@ -126,13 +126,13 @@ Ablaufende Uploads
 This is the MyUploads table for Theresia:
 
 >>> rt.login('theresia').show(uploads.MyUploads)
-==== ============================ ============================ ============ ============ ======= ============== =======
- ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung   Datei
----- ---------------------------- ---------------------------- ------------ ------------ ------- -------------- -------
- 9    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja
- 8    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja
- 7    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein
-==== ============================ ============================ ============ ============ ======= ============== =======
+==== ============================ ============================ ============ ============ ======= ============================ =======
+ ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung                 Datei
+---- ---------------------------- ---------------------------- ------------ ------------ ------- ---------------------------- -------
+ 9    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
+ 8    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
+ 7    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
+==== ============================ ============================ ============ ============ ======= ============================ =======
 <BLANKLINE>
 
 
@@ -142,7 +142,7 @@ And the same for Caroline:
 ==== ============================ ============== ============ ============ ======= ============== =======
  ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
 ---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
- 11   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja
+ 11   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
 ==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
 
@@ -150,12 +150,12 @@ And the same for Caroline:
 This is the MyExpiringUploads table for :ref:`hubert`:
 
 >>> rt.login('hubert').show(uploads.MyExpiringUploads)
-========================= ====================== =================== ============ ============ =======
- Klient                    Upload-Art             Hochgeladen durch   Gültig von   Gültig bis   Nötig
-------------------------- ---------------------- ------------------- ------------ ------------ -------
- AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
- AUSDEMWALD Alfons (116)   Arbeitserlaubnis       Hubert Huppertz                  17.05.15     Ja
-========================= ====================== =================== ============ ============ =======
+========================= ====================== ====================== =================== ============ ============ =======
+ Klient                    Upload-Art             Beschreibung           Hochgeladen durch   Gültig von   Gültig bis   Nötig
+------------------------- ---------------------- ---------------------- ------------------- ------------ ------------ -------
+ AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
+ AUSDEMWALD Alfons (116)   Arbeitserlaubnis       Arbeitserlaubnis       Hubert Huppertz                  17.05.15     Ja
+========================= ====================== ====================== =================== ============ ============ =======
 <BLANKLINE>
 
 :ref:`theresia` does not coach anybody, so the `MyExpiringUploads`

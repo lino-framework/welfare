@@ -45,8 +45,10 @@ from lino.utils.choosers import chooser
 from lino import mixins
 from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
+from lino_xl.lib.notes.actions import NotifyingAction
 from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
+
 from lino.core.utils import ChangeWatcher
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
@@ -404,7 +406,7 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
         return obj._score
 
 
-class AssignCoach(dd.NotifyingAction):
+class AssignCoach(NotifyingAction):
     "Action to assign this agent as coach for this client."
     label = _("Assign")
     required_roles = dd.required((NewcomersAgent, NewcomersOperator))
@@ -419,13 +421,15 @@ class AssignCoach(dd.NotifyingAction):
 # nicht mehr angezeigt."""
 
     def get_notify_subject(self, ar, obj, **kw):
-        #~ return _('New client for %s') % obj
+        # return _('New client for %s') % obj
+        # obj is a User instance
         client = ar.master_instance
         if client:
             return _('%(client)s assigned to %(coach)s ') % dict(
                 client=client, coach=obj)
 
     def get_notify_body(self, ar, obj, **kw):
+        # obj is a User instance
         client = ar.master_instance
         if client:
             tpl = _("%(client)s is now coached by %(coach)s for %(faculty)s.")
@@ -434,6 +438,7 @@ class AssignCoach(dd.NotifyingAction):
 
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
+        # obj is a User instance
         client = ar.master_instance
         watcher = ChangeWatcher(client)
 
@@ -444,13 +449,12 @@ class AssignCoach(dd.NotifyingAction):
         coaching.full_clean()
         coaching.save()
         dd.on_ui_created.send(coaching, request=ar.request)
-        #~ changes.log_create(ar.request,coaching)
         client.client_state = pcsw.ClientStates.coached
         client.full_clean()
         client.save()
         watcher.send_update(ar.request)
 
-        self.add_system_note(ar, coaching)
+        self.add_system_note(ar, client)
 
         ar.success(ar.action_param_values.notify_body,
                    alert=True, refresh_all=True, **kw)
