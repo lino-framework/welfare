@@ -683,3 +683,56 @@ sociales, freins. Elle peut faire des requètes CBSS.
   - Ateliers : Ateliers
   - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
+
+
+Dialog actions
+==============
+
+Voici une liste des actions qui ont un dialogue, càd pour lesquelles,
+avant de les exécuter, Lino ouvre une fenêtre à part pour demander des
+options.
+
+>>> show_dialog_actions()
+- polls.AllResponses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.MyResponses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.Responses.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.ResponsesByPartner.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- polls.ResponsesByPoll.toggle_choice : toggle_choice
+  (main) [visible for all]: **Question** (question), **Choix** (choice)
+- cal.GuestStates.wf1 : Accepter
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- cal.GuestStates.wf2 : Rejeter
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- cal.Guests.checkin : Arriver
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- contacts.Companies.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Adresses** (addresses_Address), **Raison** (reason)
+- contacts.Persons.create_household : Créer un ménage
+  (main) [visible for all]: **Partenaire** (partner), **Type de ménage** (type), **Chef de ménage** (head)
+- countries.Places.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- newcomers.AvailableCoachesByClient.assign_coach : Attribuer
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+- pcsw.ClientStates.wf1 : Refuser
+  (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
+- pcsw.Clients.create_visit : Enregistrer consultation
+  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+- pcsw.Clients.merge_row : Fusionner
+  (main) [visible for all]:
+  - **vers...** (merge_to)
+  - **Also reassign volatile related objects** (keep_volatiles):
+    - (keep_volatiles_1): **Certificats de revenu** (aids_IncomeConfirmation), **Refund confirmations** (aids_RefundConfirmation)
+    - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (pcsw_Coaching)
+    - (keep_volatiles_3): **Dispenses** (pcsw_Dispense), **Connaissances de langue** (cv_LanguageKnowledge)
+    - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
+    - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
+  - **Raison** (reason)
+- pcsw.Coachings.create_visit : Enregistrer consultation
+  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+- users.Users.change_password : Changer mot de passe
+  (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
+<BLANKLINE>
