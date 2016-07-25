@@ -301,6 +301,8 @@ Art60§7 par agent et type
 Job providers and contrats
 --------------------------
 <BLANKLINE>
+Ventilates number of job supplyments by provider and type.
+<BLANKLINE>
 ================================ ================ ============================ ======================= ============================ ====== =======
  Organisation                     social economy   social economy - increased   social economy school   social economy with refund   town   Total
 -------------------------------- ---------------- ---------------------------- ----------------------- ---------------------------- ------ -------
