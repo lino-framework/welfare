@@ -387,7 +387,7 @@ general documentation)."""),
     'lino_welfare.modlib.uploads.models.UploadsByClient' : _("""Uploads by Client"""),
     'lino_welfare.modlib.pcsw.models.ClientContactType' : _("""A client contact type is the type or "role" which must be
 specified for a given ClientContact."""),
-    'lino_welfare.migrate.Migrator' : _("""The standard migrator for Lino Welfare."""),
+    'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
     'lino_welfare.modlib.debts.ui.ActorsByBudget' : _("""The table used to edit Actors in a Budget's detail."""),
     'lino_welfare.modlib.cbss.choicelists.QueryRegisters.PRIMARY' : _("""Query only the primary register."""),
     'lino_welfare.modlib.pcsw.roles.SocialAgent' : _("""A social agent is a user who does individual coaching of
@@ -441,7 +441,7 @@ lino_welfare.modlib.cbss.choicelists.ManageActions"""),
     'lino_welfare.modlib.aids.models.AidType.body_template' : _("""The body template to use when printing a confirmation of this type.
 If this field is empty, Lino uses the excerpt type's
 body_template.
-See also Configuring print templates."""),
+See also /admin/printing."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.modlib.jobs.models.JobsOverview' : _("""An overview of the jobs and the candidates working there or
 applying for it."""),

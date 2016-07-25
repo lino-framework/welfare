@@ -51,7 +51,7 @@ extensions += ['sphinx.ext.autosummary']
 autosummary_generate = True
 autodoc_default_flags = ['members']
 
-extensions += ['lino.sphinxcontrib.help_text_builder']
+extensions += ['lino.sphinxcontrib.help_texts_extractor']
 help_texts_builder_targets = {
     'lino_welfare.': 'lino_welfare.modlib.welfare'
 }
