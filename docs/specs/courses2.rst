@@ -28,7 +28,7 @@ This is about *internal* courses
 'lino_welfare.projects.chatelet.modlib.courses.models'
 
 
->>> rt.show(courses.Activities)
+>>> rt.show(rt.actors.courses.Activities)
 ============ ======================= ============================ ============= ======= ===============
  Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   État
 ------------ ----------------------- ---------------------------- ------------- ------- ---------------
@@ -42,7 +42,7 @@ This is about *internal* courses
 ============ ======================= ============================ ============= ======= ===============
 <BLANKLINE>
 
->>> print(rt.modules.courses.Courses.params_layout.main)
+>>> print(rt.actors.courses.Courses.params_layout.main)
 topic line teacher state can_enroll:10     start_date end_date
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
@@ -52,7 +52,7 @@ topic line teacher state can_enroll:10     start_date end_date
 
 Yes, the demo database has no topics defined:
 
->>> rt.show(courses.Topics)
+>>> rt.show(rt.actors.courses.Topics)
 No data to display
 
 

@@ -28,13 +28,13 @@ from lino.utils import Cycler
 
 
 def objects():
-    CourseAreas = rt.modules.courses.CourseAreas
-    Line = rt.modules.courses.Line
-    Course = rt.modules.courses.Course
+    CourseAreas = rt.models.courses.CourseAreas
+    Line = rt.models.courses.Line
+    Course = rt.models.courses.Course
     EventType = rt.modules.cal.EventType
     Pupil = rt.modules.pcsw.Client
-    Enrolment = rt.modules.courses.Enrolment
-    EnrolmentStates = rt.modules.courses.EnrolmentStates
+    Enrolment = rt.models.courses.Enrolment
+    EnrolmentStates = rt.models.courses.EnrolmentStates
 
     kw = dd.str2kw('name', _("Workshop"))
     event_type = EventType(**kw)
