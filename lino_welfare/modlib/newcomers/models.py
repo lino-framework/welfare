@@ -45,7 +45,7 @@ from lino.utils.choosers import chooser
 from lino import mixins
 from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
-from lino_xl.lib.notes.actions import NotifyingAction
+from lino_xl.lib.notes.actions import NotableAction
 from lino.modlib.users.choicelists import UserProfiles
 from lino.modlib.users.mixins import ByUser, UserAuthored
 
@@ -406,7 +406,7 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
         return obj._score
 
 
-class AssignCoach(NotifyingAction):
+class AssignCoach(NotableAction):
     "Action to assign this agent as coach for this client."
     label = _("Assign")
     required_roles = dd.required((NewcomersAgent, NewcomersOperator))
@@ -436,6 +436,15 @@ class AssignCoach(NotifyingAction):
             return tpl % dict(
                 client=client, coach=obj, faculty=client.faculty)
 
+    def get_notify_recipients(self, ar, owner):
+        """Yield a list of users to be notified.
+
+        """
+        # obj = ar.selected_rows[0]
+        # obj is a User instance
+        client = ar.master_instance
+        return client.get_change_observers()
+
     def run_from_ui(self, ar, **kw):
         obj = ar.selected_rows[0]
         # obj is a User instance
@@ -454,7 +463,7 @@ class AssignCoach(NotifyingAction):
         client.save()
         watcher.send_update(ar.request)
 
-        self.add_system_note(ar, client)
+        self.emit_system_note(ar, client)
 
         ar.success(ar.action_param_values.notify_body,
                    alert=True, refresh_all=True, **kw)

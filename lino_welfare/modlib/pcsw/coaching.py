@@ -31,18 +31,23 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-# from lino_xl.lib.notes.mixins import Notable
-from lino_xl.lib.notes.actions import NotifyingAction
+from lino_xl.lib.notes.actions import NotableAction
 from lino.modlib.users.mixins import ByUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 
 
-class EndCoaching(dd.ChangeStateAction, NotifyingAction):
+class EndCoaching(dd.ChangeStateAction, NotableAction):
     # not being used
     label = _("End coaching")
     help_text = _("User no longer coaches this client.")
     required_states = 'active standby'
     required_roles = dd.required(SocialAgent)
+
+    def get_notify_owner(self, obj):
+        return obj.client
+
+    def get_notify_recipients(self, ar, owner):
+        return owner.get_change_observers()
 
     def get_notify_subject(self, ar, obj, **kw):
         return _("%(client)s no longer coached by %(coach)s") % dict(

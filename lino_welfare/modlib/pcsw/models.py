@@ -47,8 +47,8 @@ from lino.core.utils import get_field
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
+from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.notes.choicelists import SpecialTypes
-from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -118,7 +118,7 @@ class RefuseClient(dd.ChangeStateAction):
 
 
 @dd.python_2_unicode_compatible
-class Client(contacts.Person, BeIdCardHolder, DupableClient, Notable):
+class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -540,7 +540,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient, Notable):
         items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
 
-    def get_notify_observers(self):
+    def get_change_observers(self):
         for u in settings.SITE.user_model.objects.filter(
                 coaching_supervisor=True):
             yield u

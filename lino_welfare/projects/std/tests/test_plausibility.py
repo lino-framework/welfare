@@ -40,11 +40,11 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.api import rt
 
 
-def create(m, **kw):
+def create(ar, m, **kw):
     obj = m(**kw)
     obj.full_clean()
     obj.save()
-    obj.after_ui_save(None, None)
+    obj.after_ui_save(ar, None)
     return obj
 
 
@@ -52,10 +52,11 @@ class TestCase(RemoteAuthTestCase):
     fixtures = ['few_countries', 'few_cities', 'demo_users']
 
     def test(self):
-        Client = rt.modules.pcsw.Client
-        Address = rt.modules.addresses.Address
-        Place = rt.modules.countries.Place
-        Problem = rt.modules.plausibility.Problem
+        Client = rt.models.pcsw.Client
+        Address = rt.models.addresses.Address
+        Place = rt.models.countries.Place
+        Problem = rt.models.plausibility.Problem
+        Notification = rt.models.notify.Notification
         eupen = Place.objects.get(name="Eupen")
 
         def assert_check(obj, *expected):
@@ -65,13 +66,16 @@ class TestCase(RemoteAuthTestCase):
 
         ar = rt.modules.pcsw.Clients.request()
         doe = create(
-            Client, first_name="John", last_name="Doe", city=eupen)
+            ar, Client, first_name="John", last_name="Doe", city=eupen)
 
         mow = create(
-            Client, first_name="John", last_name="Mow", city=eupen)
+            ar, Client, first_name="John", last_name="Mow", city=eupen)
 
         self.assertEqual(Client.objects.count(), 2)
         self.assertEqual(Address.objects.count(), 0)
+
+        # no notifications because there are no coachings:
+        self.assertEqual(Notification.objects.count(), 0)
 
         # "Owner with address, but no address record"
         # Detect problems for one client:
