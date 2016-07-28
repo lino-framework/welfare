@@ -450,11 +450,11 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
-- pcsw.ClientStates.wf1 : reason, remark
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
+- pcsw.Clients.refuse_client : reason, remark
 - pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text
@@ -634,11 +634,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
-- pcsw.ClientStates.wf1 : visible for 120 200 300 admin 910
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin 910
+- pcsw.Clients.refuse_client : visible for 120 200 300 admin 910
 - pcsw.CoachingEndings.insert : visible for 110 410 admin 910
 - pcsw.Coachings.create_visit : visible for 110 410 admin 910
 - plausibility.Checkers.detail : visible for admin 910
@@ -725,8 +725,6 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - newcomers.AvailableCoachesByClient.assign_coach : Zuweisen
   (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
-- pcsw.ClientStates.wf1 : Ablehnen
-  (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
 - pcsw.Clients.create_visit : Visite erstellen
   (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - pcsw.Clients.merge_row : Fusionieren
@@ -739,6 +737,8 @@ Global list of all actions that have a parameter dialog.
     - (keep_volatiles_4): **Dispenzen** (pcsw_Dispense), **Eigenschaften** (properties_PersonProperty)
     - (keep_volatiles_5): **Adressen** (addresses_Address), **Bankkonten** (sepa_Account)
   - **Begründung** (reason)
+- pcsw.Clients.refuse_client : Ablehnen
+  (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
 - pcsw.Coachings.create_visit : Visite erstellen
   (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - users.Users.change_password : Passwort ändern

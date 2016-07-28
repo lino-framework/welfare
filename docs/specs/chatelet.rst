@@ -380,11 +380,11 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
-- pcsw.ClientStates.wf1 : reason, remark
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
+- pcsw.Clients.refuse_client : reason, remark
 - pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
 - pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text
@@ -561,11 +561,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
-- pcsw.ClientStates.wf1 : visible for 120 200 300 admin 910
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin 910
+- pcsw.Clients.refuse_client : visible for 120 200 300 admin 910
 - pcsw.CoachingEndings.insert : visible for 110 410 admin 910
 - pcsw.Coachings.create_visit : visible for 110 410 admin 910
 - plausibility.Checkers.detail : visible for admin 910
@@ -717,8 +717,6 @@ options.
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
-- pcsw.ClientStates.wf1 : Refuser
-  (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - pcsw.Clients.create_visit : Enregistrer consultation
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - pcsw.Clients.merge_row : Fusionner
@@ -731,6 +729,8 @@ options.
     - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
     - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
   - **Raison** (reason)
+- pcsw.Clients.refuse_client : Refuser
+  (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - pcsw.Coachings.create_visit : Enregistrer consultation
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - users.Users.change_password : Changer mot de passe

@@ -49,6 +49,7 @@ from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
 from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.notes.choicelists import SpecialTypes
+from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -79,10 +80,12 @@ from .roles import SocialAgent, SocialStaff
 from .choicelists import (CivilState, ResidenceType, ClientEvents,
                           ClientStates, RefusalReasons)
 
-from .actions import RefuseClient
+from .actions import RefuseClient, MarkClientFormer
+
 
 @dd.python_2_unicode_compatible
-class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
+class Client(contacts.Person, BeIdCardHolder, DupableClient,
+             ChangeObservable, Notable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -220,6 +223,14 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
 
     refusal_reason = RefusalReasons.field(blank=True)
 
+    mark_former = MarkClientFormer()
+    refuse_client = RefuseClient()
+
+    mails_by_project = dd.ShowSlaveTable(
+        'outbox.MailsByProject',
+        sort_index=100,
+        icon_name="transmit")
+
     @classmethod
     def on_analyze(cls, site):
         super(Client, cls).on_analyze(site)
@@ -231,11 +242,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
             noble_condition card_issuer
             national_id nationality
             ''')  # coach1
-
-    mails_by_project = dd.ShowSlaveTable(
-        'outbox.MailsByProject',
-        sort_index=100,
-        icon_name="transmit")
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
@@ -313,8 +319,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
             elems += E.p(*notes, class_="lino-info-red")
         return elems
 
-    def before_state_change(obj, ar, oldstate, newstate):
-
+    def unused_before_state_change(obj, ar, oldstate, newstate):
+        # now implemented as MarkClientFormer
         if newstate.name == 'former':
             qs = obj.coachings_by_client.filter(end_date__isnull=True)
             if qs.count():
@@ -1338,13 +1344,9 @@ def setup_client_workflow(sender=None, **kw):
     """Set up workflow for :class:`ClientStates
     <lino_welfare.modlib.pcsw.choicelists.ClientStates>`.
 
-    Note that AssignNewcomer action also changes the state.
     """
-    ClientStates.refused.add_transition(RefuseClient)
-    ClientStates.former.add_transition(
-        _("Former"),
-        required_states='coached',
-        required_roles=dd.required(NewcomersAgent))
+    # ClientStates.refused.add_transition(RefuseClient)
+    # ClientStates.former.add_transition(MarkClientFormer)
     ClientStates.newcomer.add_transition(
         required_states='former',
         required_roles=dd.required(NewcomersAgent))

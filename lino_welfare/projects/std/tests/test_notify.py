@@ -32,18 +32,42 @@ Or::
 
 from __future__ import unicode_literals
 
+import json
 from urllib import urlencode
 from django.conf import settings
 
-from lino.api import rt
 from lino.utils.djangotest import TestCase
-from lino.utils import i2d
+from lino.utils import i2d, AttrDict
+
+from lino.api import rt
 
 from lino.modlib.users.choicelists import UserProfiles
 
 
 class TestCase(TestCase):
     maxDiff = None
+
+    def check_notifications(self, expected):
+        ar = rt.actors.notify.Notifications.request()
+        rst = ar.to_rst(column_names="subject owner user")
+        if not expected:
+            print rst
+        self.assertEquivalent(expected, rst)
+
+    def check_notes(self, expected):
+        ar = rt.actors.notes.Notes.request()
+        rst = ar.to_rst(column_names="id user project subject")
+        if not expected:
+            print rst
+        self.assertEquivalent(expected, rst)
+
+    def check_coachings(self, expected):
+        ar = rt.actors.pcsw.Coachings.request()
+        rst = ar.to_rst(
+            column_names="id client start_date end_date user primary")
+        if not expected:
+            print rst
+        self.assertEquivalent(expected, rst)
 
     def test_checkin_guest(self):
         """Test whether notifications are being emitted.
@@ -60,9 +84,9 @@ class TestCase(TestCase):
         Guest = rt.models.cal.Guest
         Event = rt.models.cal.Event
         EventType = rt.models.cal.EventType
-        GuestRole = rt.models.cal.GuestRole
         Client = rt.models.pcsw.Client
         Coaching = rt.models.pcsw.Coaching
+        ContentType = rt.models.contenttypes.ContentType
 
         self.create_obj(
             User, username='robin', profile=UserProfiles.admin)
@@ -107,6 +131,8 @@ class TestCase(TestCase):
 
         self.assertEqual(str(guest), 'Presence #1 (22.05.2014)')
 
+        # Checkin a guest of an event
+
         res = ses.run(guest.checkin)
         self.assertEqual(res, {
             'message': '', 'success': True, 'refresh': True})
@@ -131,13 +157,7 @@ class TestCase(TestCase):
 
         self.assertEqual(Notification.objects.count(), 2)
 
-        def check_notifications(expected):
-            ar = rt.actors.notify.Notifications.request()
-            rst = ar.to_rst(column_names="subject owner user")
-            # print rst
-            self.assertEquivalent(rst, expected)
-
-        check_notifications("""
+        self.check_notifications("""
 ====================================== ============================ ===========
  Subject                                About                        Recipient
 -------------------------------------- ---------------------------- -----------
@@ -159,10 +179,167 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        check_notifications("""
+        self.check_notifications("""
 ================================== ==================== ===========
  Subject                            About                Recipient
 ---------------------------------- -------------------- -----------
  Alicia modified roger / Client S   *roger / Client S*   roger
 ================================== ==================== ===========
 """)
+
+        # AssignCoach. we are going to Assign caroline as coach for
+        # first client.
+
+        # Request URL:http://127.0.0.1:8000/api/newcomers/AvailableCoachesByClient/5?_dc=1469707129689&fv=EVERS%20Eberhart%20(127)%20assigned%20to%20Hubert%20Huppertz%20&fv=EVERS%20Eberhart%20(127)%20is%20now%20coached%20by%20Hubert%20Huppertz%20for%20Laufende%20Beihilfe.&fv=false&mt=48&mk=127&an=assign_coach&sr=5
+        # Request Method:GET
+
+        # fv:EVERS Eberhart (127) assigned to Hubert Huppertz
+        # fv:EVERS Eberhart (127) is now coached by Hubert Huppertz for Laufende Beihilfe.
+        # fv:false
+        # mt:48
+        # mk:127
+        # an:assign_coach
+        # sr:5
+
+        Notification.objects.all().delete()
+        # self.assertEqual(Coaching.objects.count(), 1)
+        self.check_coachings("""
+==== ====================== ============== ============ ========== =========
+ ID   Client                 Coached from   until        Coach      Primary
+---- ---------------------- -------------- ------------ ---------- ---------
+ 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
+ 2    CLIENT Seconda (101)   02/05/2014                  roger      No
+ 3    CLIENT Seconda (101)   20/05/2014                  Alicia     No
+==== ====================== ============== ============ ========== =========
+""")
+
+        self.assertEqual(Note.objects.count(), 0)
+
+        data = dict(
+            fv=["First CLIENT assigned to caroline", "Body", 'false'],
+            an="assign_coach")
+        data.update(mt=ContentType.objects.get_for_model(Client).pk)
+        data.update(mk=first.pk)
+        kwargs = dict(data=data)
+        # kwargs = dict(data=urlencode(data))
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/api/newcomers/AvailableCoachesByClient/{}'.format(
+            caroline.pk)
+        res = self.client.get(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+
+        self.check_notifications("""
+=================================== ====================== ===========
+ Subject                             About                  Recipient
+----------------------------------- ---------------------- -----------
+ First CLIENT assigned to caroline   *CLIENT First (100)*   caroline
+=================================== ====================== ===========
+""")
+
+        self.check_coachings("""
+==== ====================== ============== ============ ========== =========
+ ID   Client                 Coached from   until        Coach      Primary
+---- ---------------------- -------------- ------------ ---------- ---------
+ 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
+ 2    CLIENT Seconda (101)   02/05/2014                  roger      No
+ 3    CLIENT Seconda (101)   20/05/2014                  Alicia     No
+ 4    CLIENT First (100)     22/05/2014                  caroline   No
+==== ====================== ============== ============ ========== =========
+""")
+
+        self.check_notes("""
+==== ======== ==================== ===================================
+ ID   Author   Client               Subject
+---- -------- -------------------- -----------------------------------
+ 1    Alicia   CLIENT First (100)   First CLIENT assigned to caroline
+==== ======== ==================== ===================================
+""")
+
+        # Mark client as former
+
+        # Request URL:http://127.0.0.1:8000/api/pcsw/Clients/181?_dc=1469714189945&an=mark_former&sr=181
+        # Request Method:GET
+        # an:mark_former
+
+        Notification.objects.all().delete()
+        Note.objects.all().delete()
+
+        data = dict(an="mark_former")
+        kwargs = dict(data=data)
+        # kwargs = dict(data=urlencode(data))
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/api/pcsw/Clients/{}'.format(second.pk)
+        res = self.client.get(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+        res = AttrDict(json.loads(res.content))
+        self.assertEqual(
+            res.message, 'This will end 2 coachings of CLIENT Seconda (101).')
+
+        self.assertEqual(res.xcallback['title'], "Confirmation")
+        kwargs = dict()
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/callbacks/{}/yes'.format(res.xcallback['id'])
+        res = self.client.get(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+        res = AttrDict(json.loads(res.content))
+        self.assertEqual(
+            res.message,
+            'Alicia marked CLIENT Seconda (101) as <b>Former</b>.')
+        self.assertTrue(res.success)
+
+        self.check_notifications("""
+====================================================== ======================== ===========
+ Subject                                                About                    Recipient
+------------------------------------------------------ ------------------------ -----------
+ Alicia marked CLIENT Seconda (101) as <b>Former</b>.   *CLIENT Seconda (101)*   roger
+====================================================== ======================== ===========
+""")
+
+        # check two coachings have now an end_date set:
+        self.check_coachings("""
+==== ====================== ============== ============ ========== =========
+ ID   Client                 Coached from   until        Coach      Primary
+---- ---------------------- -------------- ------------ ---------- ---------
+ 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
+ 2    CLIENT Seconda (101)   02/05/2014     22/05/2014   roger      No
+ 3    CLIENT Seconda (101)   20/05/2014     22/05/2014   Alicia     No
+ 4    CLIENT First (100)     22/05/2014                  caroline   No
+==== ====================== ============== ============ ========== =========
+""")
+        self.check_notes("""
+==== ======== ====================== ======================================================
+ ID   Author   Client                 Subject
+---- -------- ---------------------- ------------------------------------------------------
+ 2    Alicia   CLIENT Seconda (101)   Alicia marked CLIENT Seconda (101) as <b>Former</b>.
+==== ======== ====================== ======================================================
+""")
+
+        #
+        # RefuseClient
+        #
+
+        Notification.objects.all().delete()
+        Note.objects.all().delete()
+
+        data = dict(fv=["20", ""], an="refuse_client")
+        kwargs = dict(data=data)
+        # kwargs = dict(data=urlencode(data))
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/api/pcsw/Clients/{}'.format(first.pk)
+        res = self.client.get(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+        self.check_notifications("""
+===================================================== ====================== ===========
+ Subject                                               About                  Recipient
+----------------------------------------------------- ---------------------- -----------
+ Alicia marked CLIENT First (100) as <b>Refused</b>.   *CLIENT First (100)*   caroline
+===================================================== ====================== ===========
+""")
+        self.check_notes("""
+==== ======== ==================== =====================================================
+ ID   Author   Client               Subject
+---- -------- -------------------- -----------------------------------------------------
+ 3    Alicia   CLIENT First (100)   Alicia marked CLIENT First (100) as <b>Refused</b>.
+==== ======== ==================== =====================================================
+""")
+
