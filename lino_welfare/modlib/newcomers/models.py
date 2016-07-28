@@ -407,7 +407,12 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 
 
 class AssignCoach(NotableAction):
-    "Action to assign this agent as coach for this client."
+    """Assign this agent as coach for this client.
+
+    This action is available only in the
+    :class:`AvailableCoachesByClient` table.
+
+    """
     label = _("Assign")
     required_roles = dd.required((NewcomersAgent, NewcomersOperator))
     # required_roles = dd.required(NewcomersAgent)
@@ -445,8 +450,8 @@ class AssignCoach(NotableAction):
         client = ar.master_instance
         return client.get_change_observers()
 
-    # def get_notify_owner(self, obj):
-    #     return obj.client
+    def get_notify_owner(self, ar, obj):
+        return ar.master_instance
 
     def run_from_ui(self, ar, **kw):
         # replaces the default implementation

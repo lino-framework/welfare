@@ -220,6 +220,9 @@ it."""),
 for aid projects of this type."""),
     'lino_welfare.modlib.isip.mixins.ContractBase.language' : _("""The language of this contract. Default value is the client's
 language."""),
+    'lino_welfare.modlib.pcsw.choicelists.ClientCreated' : _("""The choice for ClientEvents which
+selects clients whose record has been created during the observed
+period."""),
     'lino_welfare.modlib.cbss.models.ManageAccessRequest' : _("""A request to the ManageAccess service."""),
     'lino_welfare.modlib.debts.ui.EntriesByBudget.master' : _("""alias of Budget"""),
     'lino_welfare.modlib.sepa.models.AccountsByClient' : _("""Shows the accounts for a given client. This includes additional
@@ -268,7 +271,7 @@ gets a given aid during a given period."""),
     'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment' : _("""Adds two text fields motivation and problems."""),
     'lino_welfare.modlib.pcsw.models.Client.civil_state' : _("""The civil state of this client. Allowed choices are defined in
 CivilState."""),
-    'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Action to assign this agent as coach for this client."""),
+    'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Assign this agent as coach for this client."""),
     'lino_welfare.modlib.jobs.models.ContractsSearch.model' : _("""alias of Contract"""),
     'lino_welfare.modlib.aids.models.AidType.confirmed_by_primary_coach' : _("""Whether grantings for this aid type are to be signed by the
 client's primary coach (see Client.get_primary_coach)."""),
@@ -319,9 +322,7 @@ pcsw.Client model."""),
     'lino_welfare.modlib.pcsw.models.Client.id_document' : _("""A virtual field displaying a group of buttons for managing the
 "identifying document", i.e. an uploaded document which has been
 used as alternative to the eID card."""),
-    'lino_welfare.modlib.pcsw.choicelists.ClientCreated' : _("""The choice for ClientEvents which
-selects clients whose record has been created during the observed
-period."""),
+    'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
     'lino_welfare.modlib.debts.models.Actor' : _("""An actor of a budget is a partner who is part of the household
 for which the budget has been established."""),
     'lino_welfare.modlib.isip.mixins.ContractBase.applies_until' : _("""The planned end date of this contract."""),
@@ -510,6 +511,8 @@ mandatory field Granting.aid_type which points to an
 AidType instance."""),
     'lino_welfare.modlib.isip.mixins.ContractBaseTable' : _("""Base for contract tables. Defines the following parameter fields:"""),
     'lino_welfare.modlib.aids.models.Granting.client' : _("""Pointer to the lino_welfare.modlib.pcsw.models.Client."""),
+    'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client's state to 'former'. This will also end any active
+coachings."""),
     'lino_welfare.modlib.cbss.models.ManageAccessRequest.query_register' : _("""The register to be query.
 This must be one of the values in
 lino_welfare.modlib.cbss.choicelists.QueryRegisters"""),
@@ -522,7 +525,6 @@ and NewStyleRequest"""),
     'lino_welfare.modlib.courses.models.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
     'lino_welfare.projects.eupen.scramble_tx25.Search.replacements' : _("""Alias for field number 2"""),
     'lino_welfare.modlib.debts.ui.EntriesByBudget.model' : _("""alias of Entry"""),
-    'lino_welfare.modlib.pcsw.models.RefuseClient' : _("""Refuse this newcomer request."""),
     'lino_welfare.modlib.notes.models.Note.important' : _("""Checking this will cause this note to appear in the
 overview panel of
 the person linked to this note."""),
