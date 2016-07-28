@@ -463,7 +463,7 @@ class AssignCoach(NotableAction):
         client.save()
         watcher.send_update(ar.request)
 
-        self.emit_system_note(ar, client)
+        self.emit_notification(ar, client)
 
         ar.success(ar.action_param_values.notify_body,
                    alert=True, refresh_all=True, **kw)
