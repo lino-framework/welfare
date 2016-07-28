@@ -24,7 +24,7 @@ from lino.api import dd, rt, _
 def objects():
 
     ExcerptType = rt.modules.excerpts.ExcerptType
-    Enrolment = rt.modules.courses.Enrolment
+    Enrolment = rt.models.courses.Enrolment
     # ContentType = rt.modules.contenttypes.ContentType
     kw = dict(
         # template='Default.odt',

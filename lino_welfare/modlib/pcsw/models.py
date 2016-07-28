@@ -47,8 +47,8 @@ from lino.core.utils import get_field
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
+from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.notes.choicelists import SpecialTypes
-from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
@@ -79,46 +79,10 @@ from .roles import SocialAgent, SocialStaff
 from .choicelists import (CivilState, ResidenceType, ClientEvents,
                           ClientStates, RefusalReasons)
 
-
-class RefuseClient(dd.ChangeStateAction):
-    """
-    Refuse this newcomer request.
-    """
-    label = _("Refuse")
-    required_states = 'newcomer'
-    required_roles = dd.required(NewcomersAgent)
-
-    #~ icon_file = 'flag_blue.png'
-    help_text = _("Refuse this newcomer request.")
-
-    parameters = dict(
-        reason=RefusalReasons.field(),
-        remark=dd.RichTextField(_("Remark"), blank=True),
-    )
-
-    params_layout = dd.Panel("""
-    reason
-    remark
-    """, window_size=(50, 15))
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        assert isinstance(obj, Client)
-        obj.refusal_reason = ar.action_param_values.reason
-        subject = _("%(client)s has been refused.") % dict(client=obj)
-        body = unicode(ar.action_param_values.reason)
-        if ar.action_param_values.remark:
-            body += '\n' + ar.action_param_values.remark
-        kw.update(message=subject)
-        kw.update(alert=_("Success"))
-        super(RefuseClient, self).run_from_ui(ar)
-        silent = False
-        obj.add_system_note(ar, obj, subject, body, silent)
-        ar.success(**kw)
-
+from .actions import RefuseClient
 
 @dd.python_2_unicode_compatible
-class Client(contacts.Person, BeIdCardHolder, DupableClient, Notable):
+class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -540,7 +504,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient, Notable):
         items = [unicode(obj.user) for obj in self.get_coachings(period)]
         return ', '.join(items)
 
-    def get_notify_observers(self):
+    def get_change_observers(self):
         for u in settings.SITE.user_model.objects.filter(
                 coaching_supervisor=True):
             yield u

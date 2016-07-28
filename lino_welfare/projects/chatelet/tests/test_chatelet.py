@@ -137,10 +137,10 @@ class TestCase(TestCase):
         GuestRole = rt.modules.cal.GuestRole
         Recurrencies = rt.modules.cal.Recurrencies
         Room = rt.modules.cal.Room
-        Enrolment = rt.modules.courses.Enrolment
-        Course = rt.modules.courses.Course
-        Line = rt.modules.courses.Line
-        EnrolmentStates = rt.modules.courses.EnrolmentStates
+        Enrolment = rt.models.courses.Enrolment
+        Course = rt.models.courses.Course
+        Line = rt.models.courses.Line
+        EnrolmentStates = rt.models.courses.EnrolmentStates
         Pupil = rt.modules.pcsw.Client
 
         robin = User(username='robin', profile=UserProfiles.admin)

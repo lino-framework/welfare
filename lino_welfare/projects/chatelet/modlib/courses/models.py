@@ -26,9 +26,7 @@ from __future__ import print_function
 import logging
 logger = logging.getLogger(__name__)
 
-from django.utils.translation import ugettext_lazy as _
-
-from lino.api import dd, rt
+from lino.api import dd, _
 
 from lino_cosi.lib.courses.models import *
 
@@ -100,13 +98,6 @@ class Enrolment(Enrolment):
     # ConfirmedSubmitInsert set by `lino_cosi.lib.courses`
     submit_insert = dd.SubmitInsert()
 
-Enrolments.detail_layout = """
-request_date user
-course pupil
-remark workflow_buttons printed
-motivation problems
-"""
-
 
 class Line(Line):
     class Meta:
@@ -114,45 +105,3 @@ class Line(Line):
         verbose_name_plural = _('Workshop lines')
         abstract = dd.is_abstract_model(__name__, 'Line')
 
-
-EnrolmentsByPupil.column_names = 'request_date course workflow_buttons *'
-
-
-class BasicCourses(Activities):
-    _course_area = CourseAreas.default
-
-
-class JobCourses(Activities):
-    _course_area = CourseAreas.job
-
-
-# class IntegEnrolmentsByPupil(EnrolmentsByPupil):
-#     _course_area = CourseAreas.integ
-
-
-class BasicEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.default
-
-
-class JobEnrolmentsByPupil(EnrolmentsByPupil):
-    _course_area = CourseAreas.job
-
-
-class ActiveCourses(ActiveCourses):
-
-    label = _("Active workshops")
-    column_names = 'info enrolments free_places teacher room description *'
-    hide_sums = True
-
-
-class DraftCourses(DraftCourses):
-    label = _("Draft workshops")
-    column_names = 'info teacher room description *'
-
-
-class InactiveCourses(InactiveCourses):
-    label = _("Inactive workshops")
-
-
-class ClosedCourses(ClosedCourses):
-    label = _("Closed workshops")

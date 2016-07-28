@@ -31,22 +31,9 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-# from lino_xl.lib.notes.mixins import Notable
-from lino_xl.lib.notes.actions import NotifyingAction
 from lino.modlib.users.mixins import ByUser
+from lino.modlib.notify.mixins import ChangeObservable
 from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
-
-
-class EndCoaching(dd.ChangeStateAction, NotifyingAction):
-    # not being used
-    label = _("End coaching")
-    help_text = _("User no longer coaches this client.")
-    required_states = 'active standby'
-    required_roles = dd.required(SocialAgent)
-
-    def get_notify_subject(self, ar, obj, **kw):
-        return _("%(client)s no longer coached by %(coach)s") % dict(
-            client=obj.client, coach=obj.user)
 
 
 INTEG_LABEL = dd.apps.integ.verbose_name
@@ -117,7 +104,7 @@ class CoachingEndings(dd.Table):
 
 
 @dd.python_2_unicode_compatible
-class Coaching(mixins.DatePeriod, dd.ImportedFields):
+class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
 
     """A Coaching (Begleitung, intervention) is when a Client is being
     coached by a User (a social assistant) during a given period.
@@ -245,6 +232,9 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
     # def get_related_project(self):
     #     return self.client
+
+    def get_change_observers(self):
+        return self.client.get_change_observers()
 
     # def get_notify_observers(self):
     #     yield self.user
