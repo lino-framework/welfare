@@ -176,6 +176,9 @@ class SpecsTests(TestCase):
     def test_notes(self):
         return self.run_simple_doctests('docs/specs/notes.rst')
 
+    def test_notify(self):
+        return self.run_simple_doctests('docs/specs/notify.rst')
+
     def test_courses(self):
         return self.run_simple_doctests('docs/specs/courses.rst')
 

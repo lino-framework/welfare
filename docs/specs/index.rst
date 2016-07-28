@@ -45,6 +45,7 @@ General
    tasks
    countries
    notes
+   notify
    ddh
    /tested/2015/0219
    /tested/2015/0715

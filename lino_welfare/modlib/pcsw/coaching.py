@@ -33,6 +33,7 @@ from lino import mixins
 
 from lino_xl.lib.notes.actions import NotableAction
 from lino.modlib.users.mixins import ByUser
+from lino.modlib.notify.mixins import ChangeObservable
 from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 
 
@@ -122,7 +123,7 @@ class CoachingEndings(dd.Table):
 
 
 @dd.python_2_unicode_compatible
-class Coaching(mixins.DatePeriod, dd.ImportedFields):
+class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
 
     """A Coaching (Begleitung, intervention) is when a Client is being
     coached by a User (a social assistant) during a given period.
@@ -250,6 +251,9 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields):
 
     # def get_related_project(self):
     #     return self.client
+
+    def get_change_observers(self):
+        return self.client.get_change_observers()
 
     # def get_notify_observers(self):
     #     yield self.user

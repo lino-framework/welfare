@@ -5,12 +5,13 @@
 
    test_beid
    test_ddh
-   test_isip
-   test_sql
-   test_sepa
-   test_households
    test_debts
    test_dupe_clients
+   test_households
+   test_isip
+   test_notify
+   test_sepa
+   test_sql
 
 """
 
