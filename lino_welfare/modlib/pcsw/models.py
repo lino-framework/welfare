@@ -79,43 +79,7 @@ from .roles import SocialAgent, SocialStaff
 from .choicelists import (CivilState, ResidenceType, ClientEvents,
                           ClientStates, RefusalReasons)
 
-
-class RefuseClient(dd.ChangeStateAction):
-    """
-    Refuse this newcomer request.
-    """
-    label = _("Refuse")
-    required_states = 'newcomer'
-    required_roles = dd.required(NewcomersAgent)
-
-    #~ icon_file = 'flag_blue.png'
-    help_text = _("Refuse this newcomer request.")
-
-    parameters = dict(
-        reason=RefusalReasons.field(),
-        remark=dd.RichTextField(_("Remark"), blank=True),
-    )
-
-    params_layout = dd.Panel("""
-    reason
-    remark
-    """, window_size=(50, 15))
-
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        assert isinstance(obj, Client)
-        obj.refusal_reason = ar.action_param_values.reason
-        subject = _("%(client)s has been refused.") % dict(client=obj)
-        body = unicode(ar.action_param_values.reason)
-        if ar.action_param_values.remark:
-            body += '\n' + ar.action_param_values.remark
-        kw.update(message=subject)
-        kw.update(alert=_("Success"))
-        super(RefuseClient, self).run_from_ui(ar)
-        silent = False
-        obj.add_system_note(ar, obj, subject, body, silent)
-        ar.success(**kw)
-
+from .actions import RefuseClient
 
 @dd.python_2_unicode_compatible
 class Client(contacts.Person, BeIdCardHolder, DupableClient, ChangeObservable):

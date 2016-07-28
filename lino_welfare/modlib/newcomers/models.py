@@ -445,7 +445,11 @@ class AssignCoach(NotableAction):
         client = ar.master_instance
         return client.get_change_observers()
 
+    # def get_notify_owner(self, obj):
+    #     return obj.client
+
     def run_from_ui(self, ar, **kw):
+        # replaces the default implementation
         obj = ar.selected_rows[0]
         # obj is a User instance
         client = ar.master_instance
