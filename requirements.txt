@@ -1,1 +1,1 @@
--e git+https://github.com/khchine5/lino_cosi.git#egg=lino_cosi
+-e git+https://github.com/khchine5/lino-cosi.git#egg=lino_cosi
