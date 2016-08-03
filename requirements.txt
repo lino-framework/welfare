@@ -1,5 +1,5 @@
--e git+https://github.com/oubiwann/metaphone.git#egg=metaphone
--e git+https://github.com/khchine5/atelier.git#egg=atelier
--e git+https://github.com/khchine5/lino.git#egg=lino
--e git+https://github.com/khchine5/xl.git#egg=lino_xl
--e git+https://github.com/khchine5/lino-cosi.git#egg=lino_cosi
+-e git+https://github.com/oubiwann/metaphone.git#egg=metafone
+-e git+https://github.com/lino-framework/atelier.git#egg=atelier
+-e git+https://github.com/lino-framework/lino.git#egg=lino
+-e git+https://github.com/lino-framework/xl.git#egg=lino_xl
+-e git+https://github.com/lino-framework/lino-cosi.git#egg=lino_cosi
