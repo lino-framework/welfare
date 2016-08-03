@@ -25,12 +25,18 @@
 #
 #   $ python setup.py test -s tests.PackagesTests
 
+import six
 
+requires = ['lino_cosi', 'vobject', 'django-iban', 'metafone']
+if six.PY2:
+    requires.append('suds')
+else:
+    requires.append('suds-py3')
+    
 SETUP_INFO = dict(
     name='lino-welfare',
     version='1.1.26',  # since 20150918
-    install_requires=['lino_cosi', 'suds', 'vobject', 'django-iban',
-                      'metaphone'],
+    install_requires=requires,
     test_suite='tests',
     description=u"A Lino application for Belgian Centres for Public Welfare",
     long_description="""\
