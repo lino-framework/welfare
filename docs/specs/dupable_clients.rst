@@ -33,41 +33,40 @@ See :class:`lino.mixins.dupable.PhoneticWordBase`.
 
 >>> rt.show(pcsw.CoachedClients, column_names="id name dupable_words")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-===== ======================= ======================
+===== ======================= =======================
  ID    Name                    dupable_words
------ ----------------------- ----------------------
- 116   Ausdemwald Alfons       *ASTM*, *ALFN*
+----- ----------------------- -----------------------
+ 116   Ausdemwald Alfons       *ASTMLT*, *ALFNS*
  177   Brecht Bernd            *PRKT*, *PRNT*
  118   Collard Charlotte       *KLRT*, *XRLT*
- 124   Dobbelstein Dorothée    *TPLS*, *TR0*
+ 124   Dobbelstein Dorothée    *TPLSTN*, *TR0*
  179   Dubois Robin            *TP*, *RPN*
- 128   Emonts Daniel           *AMNT*, *TNL*
- 152   Emonts-Gast Erna        *AMNT*, *KST*, *ARN*
- 129   Engels Edgar            *ANJL*, *ATKR*
- 127   Evers Eberhart          *AFRS*, *APRR*
- 132   Groteclaes Gregory      *KRTK*, *KRKR*
- 133   Hilgers Hildegard       *HLKR*, *HLTK*
+ 128   Emonts Daniel           *AMNTS*, *TNL*
+ 152   Emonts-Gast Erna        *AMNTS*, *KST*, *ARN*
+ 129   Engels Edgar            *ANJLS*, *ATKR*
+ 127   Evers Eberhart          *AFRS*, *APRRT*
+ 132   Groteclaes Gregory      *KRTKLS*, *KRKR*
+ 133   Hilgers Hildegard       *HLKRS*, *HLTKRT*
  137   Jacobs Jacqueline       *JKPS*, *JKLN*
- 181   Jeanémart Jérôme        *JNMR*, *JRM*
+ 181   Jeanémart Jérôme        *JNMRT*, *JRM*
  139   Jonas Josef             *JNS*, *JSF*
  141   Kaivers Karl            *KFRS*, *KRL*
  178   Keller Karl             *KLR*, *KRL*
- 142   Lambertz Guido          *LMPR*, *KT*
+ 142   Lambertz Guido          *LMPRTS*, *KT*
  144   Lazarus Line            *LSRS*, *LN*
- 146   Malmendier Marc         *MLMN*, *MRK*
+ 146   Malmendier Marc         *MLMNT*, *MRK*
  147   Meessen Melissa         *MSN*, *MLS*
- 153   Radermacher Alfons      *RTRM*, *ALFN*
- 155   Radermacher Christian   *RTRM*, *KRSX*
- 157   Radermacher Edgard      *RTRM*, *ATKR*
- 159   Radermacher Guido       *RTRM*, *KT*
- 161   Radermacher Hedi        *RTRM*, *HT*
- 173   Radermecker Rik         *RTRM*, *RK*
- 165   da Vinci David          *T*, *FNK*, *TFT*
- 166   van Veen Vincent        *FN*, *FNKN*
- 168   Östges Otto             *STJS*, *AT*
-===== ======================= ======================
+ 153   Radermacher Alfons      *RTRMKR*, *ALFNS*
+ 155   Radermacher Christian   *RTRMKR*, *KRSXN*
+ 157   Radermacher Edgard      *RTRMKR*, *ATKRT*
+ 159   Radermacher Guido       *RTRMKR*, *KT*
+ 161   Radermacher Hedi        *RTRMKR*, *HT*
+ 173   Radermecker Rik         *RTRMKR*, *RK*
+ 165   da Vinci David          *T*, *FNS*, *TFT*
+ 166   van Veen Vincent        *FN*, *FNSNT*
+ 168   Östges Otto             *ASTJS*, *AT*
+===== ======================= =======================
 <BLANKLINE>
-
 
 
 Similar Clients
@@ -88,15 +87,15 @@ The detail window of each of these records shows some of the other
 records in the `SimilarClients` table:
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=122))
-*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TMLN, TR0
+*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TMLNR, TR0
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=123))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-*DEMEULENAERE Dorothée (122)* *DOBBELSTEIN Dorothée (124)* Phonetic words: TPLS, TMLN, TR0
+*DEMEULENAERE Dorothée (122)* *DOBBELSTEIN Dorothée (124)* Phonetic words: TPLSTN, TMLNR, TR0
 
 >>> rt.show(dupable_clients.SimilarClients, pcsw.Client.objects.get(pk=124))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TPLS, TR0
+*DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TPLSTN, TR0
 
 Note how the result can differ depending on the partner.  Our
 algorithm is not perfect and does not detect all duplicates. 
