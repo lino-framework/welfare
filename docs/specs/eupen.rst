@@ -437,6 +437,7 @@ Each window layout defines a given set of fields.
 - ledger.ActivityReport.show : body
 - ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
+- ledger.PaymentTerms.insert : ref, name, name_fr, name_en, months, days, end_of_month, printed_text
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
@@ -621,6 +622,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - ledger.ActivityReport.show : visible for 500 510 admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
+- ledger.PaymentTerms.insert : visible for 510 admin 910
 - ledger.Situation.show : visible for 500 510 admin 910
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin 910
 - newcomers.Faculties.detail : visible for 110 410 admin 910
