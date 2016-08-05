@@ -157,6 +157,12 @@ Example:
 Show all contracts
 ------------------
 
+Via :menuselection`Explorer --> DSBE --> Art.60§7-Konventionen` you
+can see a list of all job supplyment contracts.
+
+>>> show_menu_path(jobs.Contracts)
+Explorer --> DSBE --> Art.60§7-Konventionen
+
 The demo database contains 16 job supplyment contracts:
 
 >>> ses.show(jobs.Contracts)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
@@ -181,6 +187,39 @@ The demo database contains 16 job supplyment contracts:
  16   DENON Denis (180*)            950810 001-04   03.03.14       03.03.15       Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   Hubert Huppertz           Stadt Eupen
 ==== ============================= =============== ============== ============== ================================================== ========================= ===========================
 <BLANKLINE>
+
+Use the filter parameters to show e.g. only contracts which were
+active on 05.10.2012:
+
+>>> pv = dict(observed_event=isip.ContractEvents.active,
+...     start_date=i2d(20121005), end_date=i2d(20121005))
+>>> kwargs = dict()
+>>> kwargs.update(param_values=pv)
+>>> ses.show(jobs.Contracts, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+==== ========================= =============== ============== ============== ================== ========================= ================
+ ID   Klient                    NR-Nummer       Laufzeit von   Laufzeit bis   Stelle             Verantwortlicher (DSBE)   Art
+---- ------------------------- --------------- -------------- -------------- ------------------ ------------------------- ----------------
+ 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13       Kellner bei BISA   Alicia Allmanns           Sozialökonomie
+==== ========================= =============== ============== ============== ================== ========================= ================
+<BLANKLINE>
+
+Use the filter parameters to show e.g. only contracts which started in
+October 2012:
+
+>>> pv.update(observed_event=isip.ContractEvents.started,
+...     start_date=i2d(20121001), end_date=i2d(20121030))
+>>> ses.show(jobs.Contracts, **kwargs)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+==== ========================= =============== ============== ============== ============================================ ========================= ===========================
+ ID   Klient                    NR-Nummer       Laufzeit von   Laufzeit bis   Stelle                                       Verantwortlicher (DSBE)   Art
+---- ------------------------- --------------- -------------- -------------- -------------------------------------------- ------------------------- ---------------------------
+ 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13       Kellner bei BISA                             Alicia Allmanns           Sozialökonomie
+ 2    EVERTZ Bernd (126)        890722 001-93   14.10.12       13.04.14       Kellner bei R-Cycle Sperrgutsortierzentrum   Alicia Allmanns           mit Rückerstattung Schule
+==== ========================= =============== ============== ============== ============================================ ========================= ===========================
+<BLANKLINE>
+
+
 
 
 Evaluations of a contract

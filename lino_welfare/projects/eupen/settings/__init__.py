@@ -41,8 +41,8 @@ class Site(Site):
     hidden_languages = None
     help_url = "http://de.welfare.lino-framework.org"
 
-    demo_fixtures = """std welfare_std std2 few_languages props all_countries
-    demo mini demo_bookings payments demo2 welfare_demo cbss checkdata local""".split()
+    demo_fixtures = """std std2 few_languages props all_countries
+    demo payments demo2 cbss checkdata""".split()
 
     def get_default_language(self):
         return 'de'
