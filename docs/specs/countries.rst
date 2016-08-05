@@ -1,3 +1,4 @@
+.. _welfare.specs.countries:
 .. _welfare.tested.countries:
 
 =============
@@ -14,10 +15,8 @@ Countries
 
 .. include:: /include/tested.rst
 
->>> from __future__ import print_function
->>> import os
->>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-...    'lino_welfare.projects.eupen.settings.doctests'
+>>> import lino
+>>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
 >>> from lino.api.doctest import *
 >>> from django.db.models import Q
 
@@ -36,6 +35,9 @@ points to another (the "real") country.
 270
 >>> countries.Country.objects.filter(actual_country__isnull=True).count()
 266
+>>> countries.Country.objects.filter(actual_country__isnull=False).count()
+4
+
 >>> rt.show(countries.Countries,
 ...     filter=Q(actual_country__isnull=False),
 ...     column_names="isocode name inscode actual_country actual_country__isocode")
