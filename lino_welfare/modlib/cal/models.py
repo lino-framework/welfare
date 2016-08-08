@@ -123,6 +123,7 @@ class EventType(EventType):
         #~ _("Invite team members"),default=False)
     # invite_team_members = dd.ForeignKey('users.Team', blank=True, null=True)
     invite_client = models.BooleanField(_("Invite client"), default=False)
+    esf_field = dd.DummyField()
 
 dd.inject_field(
     'users.User', 'calendar',
@@ -306,7 +307,7 @@ def customize_cal(sender, **kw):
     site.modules.cal.EventTypes.set_detail_layout("""
     name
     event_label
-    max_conflicting all_rooms locks_user
+    max_conflicting all_rooms locks_user esf_field
     id invite_client is_appointment email_template attach_to_email
     EventsByType
     """)
