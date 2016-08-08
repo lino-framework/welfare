@@ -167,25 +167,55 @@ Notes de discussion
   heures de présence de l'évènement (tant pis pour la statistique).
 
 
->>> rt.show(esf.StatisticalFields, language="fr")
-======= ====== ===================================
- value   name   text
-------- ------ -----------------------------------
- 10             Séance d’information
- 20             Entretien individuel
- 21             Evaluation formation externe
- 30             S.I.S. agréé
- 40             Tests de niveau
- 41             Initiation informatique
- 42             Mobilité
- 43             Remédiation
- 44             Activons-nous!
- 50             Mise en situation professionnelle
- 60             Cyber Emploi
- 70             Mise à l’emploi art.60§7
-======= ====== ===================================
+Par type d'entrée calendrier on doit configurer le champ FSE dans
+lequel seront totalisés les heures.
+
+>>> rt.show(cal.EventTypes, language="fr")
+======================================== ======================================== =============================== ===================================
+ Désignation                              Désignation (de)                         Désignation (en)                Champ FSE
+---------------------------------------- ---------------------------------------- ------------------------------- -----------------------------------
+ Jours fériés                             Feiertage                                Holidays                        Séance d’information
+ Réunion                                  Versammlung                              Meeting                         Entretien individuel
+ Internal meetings with client            Internal meetings with client            Internal meetings with client   Evaluation formation externe
+ Évaluation                               Auswertung                               Evaluation                      S.I.S. agréé
+ Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Tests de niveau
+ Réunions externes avec le bénéficiaire   Réunions externes avec le bénéficiaire   External meetings with client   Initiation informatique
+ Réunions interne                         Réunions interne                         Internal meetings               Mobilité
+ Réunions externe                         Réunions externe                         External meetings               Remédiation
+ Privé                                    Privat                                   Private                         Activons-nous!
+ Atelier                                  Atelier                                  Workshop                        Mise en situation professionnelle
+======================================== ======================================== =============================== ===================================
 <BLANKLINE>
 
+  
+
+>>> rt.show(esf.StatisticalFields, language="fr")
+======= ====== =================================== =================
+ value   name   text                                Type
+------- ------ ----------------------------------- -----------------
+ 10             Séance d’information                GuestHoursFixed
+ 20             Entretien individuel                GuestHoursFixed
+ 21             Evaluation formation externe        GuestHoursFixed
+ 30             S.I.S. agréé                        GuestHoursFixed
+ 40             Tests de niveau                     GuestHoursFixed
+ 41             Initiation informatique             GuestHoursFixed
+ 42             Mobilité                            GuestHoursFixed
+ 43             Remédiation                         GuestHoursFixed
+ 44             Activons-nous!                      GuestHours
+ 50             Mise en situation professionnelle   ImmersionHours
+ 60             Cyber Emploi                        GuestHours
+ 70             Mise à l’emploi art.60§7            Art60Hours
+======= ====== =================================== =================
+<BLANKLINE>
+
+.. currentmodule:: lino_welfare.modlib.esf.choicelists
+
+Les types de champ suivants sont disponibles par défaut:
+
+- :class:`GuestHoursFixed`
+- :class:`GuestHours>`
+- :class:`ImmersionHours`
+- :class:`Art60Hours`
 
 >>> # rt.show(esf.AllSummaries)
 

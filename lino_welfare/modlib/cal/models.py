@@ -118,6 +118,11 @@ dd.add_welcome_handler(you_are_busy_messages)
 
 
 class EventType(EventType):
+    """
+    .. attribute:: invite_client
+    .. attribute:: esf_field
+
+    """
 
     #~ invite_team_members = models.BooleanField(
         #~ _("Invite team members"),default=False)
@@ -236,7 +241,7 @@ class EventsByClient(Events):
     # master = 'cal.Event'
     master = 'pcsw.Client'
     auto_fit_column_widths = True
-    column_names = 'when_html user summary workflow_buttons'
+    column_names = 'when_html user summary workflow_buttons *'
     # column_names = 'when_text user summary workflow_buttons'
     insert_layout = """
     event_type
@@ -299,6 +304,7 @@ class Guest(Guest):
         except Client.DoesNotExist:
             return None
 
+EventTypes.column_names = 'name invite_client esf_field *'
 
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender, **kw):

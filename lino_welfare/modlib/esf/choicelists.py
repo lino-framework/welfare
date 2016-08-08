@@ -140,6 +140,7 @@ class Art60Hours(HoursField):
 class StatisticalFields(dd.ChoiceList):
     verbose_name = _("ESF field")
     verbose_name_plural = _("ESF fields")
+    column_names = 'value name text type'
     item_class = StatisticalField
 
 add = StatisticalFields.add_item_instance
