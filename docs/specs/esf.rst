@@ -171,22 +171,22 @@ Par type d'entrée calendrier on doit configurer le champ FSE dans
 lequel seront totalisés les heures.
 
 >>> rt.show(cal.EventTypes, language="fr")
-======================================== ======================================== =============================== ===================================
- Désignation                              Désignation (de)                         Désignation (en)                Champ FSE
----------------------------------------- ---------------------------------------- ------------------------------- -----------------------------------
- Jours fériés                             Feiertage                                Holidays                        Séance d’information
- Réunion                                  Versammlung                              Meeting                         Entretien individuel
- Internal meetings with client            Internal meetings with client            Internal meetings with client   Evaluation formation externe
- Évaluation                               Auswertung                               Evaluation                      S.I.S. agréé
- Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Tests de niveau
- Réunions externes avec le bénéficiaire   Réunions externes avec le bénéficiaire   External meetings with client   Initiation informatique
- Réunions interne                         Réunions interne                         Internal meetings               Mobilité
- Réunions externe                         Réunions externe                         External meetings               Remédiation
- Privé                                    Privat                                   Private                         Activons-nous!
- Atelier                                  Atelier                                  Workshop                        Mise en situation professionnelle
-======================================== ======================================== =============================== ===================================
+======================================== ======================================== =============================== ======================== ==============================
+ Désignation                              Désignation (de)                         Désignation (en)                Inviter le bénéficiare   Champ FSE
+---------------------------------------- ---------------------------------------- ------------------------------- ------------------------ ------------------------------
+ Jours fériés                             Feiertage                                Holidays                        Non
+ Réunion                                  Versammlung                              Meeting                         Non
+ Internal meetings with client            Internal meetings with client            Internal meetings with client   Oui                      Séance d’information
+ Évaluation                               Auswertung                               Evaluation                      Oui                      Entretien individuel
+ Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Non
+ Réunions externes avec le bénéficiaire   Réunions externes avec le bénéficiaire   External meetings with client   Oui                      Evaluation formation externe
+ Informational meetings                   Informational meetings                   Informational meetings          Oui                      S.I.S. agréé
+ Réunions interne                         Réunions interne                         Internal meetings               Non
+ Réunions externe                         Réunions externe                         External meetings               Non
+ Privé                                    Privat                                   Private                         Non
+ Atelier                                  Atelier                                  Workshop                        Non
+======================================== ======================================== =============================== ======================== ==============================
 <BLANKLINE>
-
   
 
 >>> rt.show(esf.StatisticalFields, language="fr")
@@ -227,6 +227,19 @@ Les types de champ suivants sont disponibles par défaut:
 >>> obj = pcsw.Client.objects.get(pk=116)
 >>> print(obj)
 AUSDEMWALD Alfons (116)
+
+The field :attr:`has_esf
+<lino_welfare.modlib.pcsw.models.Client.has_esf>` must be checked:
+
+>>> print(obj.has_esf)
+True
+
+>>> show_fields(rt.models.pcsw.Client, 'has_esf')
+=============== ============== =========================================================
+ Internal name   Verbose name   Help text
+--------------- -------------- ---------------------------------------------------------
+ has_esf         ESF data       Whether Lino should make ESF summaries for this client.
+=============== ============== =========================================================
 
 >>> rt.show(esf.SummariesByClient, obj)
 ========== ====== ====== ========== =========== ========== ====== ====== ====== ====== ====== ====== ======

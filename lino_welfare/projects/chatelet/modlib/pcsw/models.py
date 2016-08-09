@@ -137,7 +137,7 @@ class ClientDetail(ClientDetail):
     misc = dd.Panel("""
     activity client_state noble_condition \
     unavailable_until:15 unavailable_why:30 #aid_type
-    is_obsolete created modified
+    is_obsolete has_esf created modified
     remarks
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))

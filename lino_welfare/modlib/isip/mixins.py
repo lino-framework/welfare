@@ -441,7 +441,7 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         rset = self.update_cal_rset()
         return rset.get_next_suggested_date(ar, date)
 
-    def update_cal_calendar(self):
+    def update_cal_event_type(self):
         if self.exam_policy is not None:
             return self.exam_policy.event_type
 
