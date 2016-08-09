@@ -62,8 +62,8 @@ The following table gives an overview of these things.
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        581
- cal.EventType                  cal.EventTypes                  20        9
- cal.Guest                      cal.Guests                      9         525
+ cal.EventType                  cal.EventTypes                  20        10
+ cal.Guest                      cal.Guests                      9         540
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15

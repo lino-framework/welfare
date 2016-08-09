@@ -75,8 +75,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        581
- cal.EventType                  cal.EventTypes                  20        10
- cal.Guest                      cal.Guests                      9         523
+ cal.EventType                  cal.EventTypes                  20        11
+ cal.Guest                      cal.Guests                      9         535
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -381,7 +381,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, created, modified, remarks
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -736,3 +736,28 @@ options.
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 <BLANKLINE>
+
+
+
+UsersWithClients
+================
+
+>>> rt.show(integ.UsersWithClients)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+====================== ============ =========== ======== ========= ========= =================== ====================== ========
+ Intervenant            Évaluation   Formation   Search   Travail   Standby   Dossiers complèts   Bénéficiaires actifs   Total
+---------------------- ------------ ----------- -------- --------- --------- ------------------- ---------------------- --------
+ Alicia Allmanns        **1**        **1**                          **1**     **3**               **3**                  **7**
+ Hubert Huppertz        **1**        **3**       **4**    **2**     **1**     **11**              **11**                 **19**
+ Mélanie Mélard         **2**                    **2**    **4**     **3**     **11**              **11**                 **18**
+ **Total (3 lignes)**   **4**        **4**       **6**    **6**     **5**     **25**              **25**                 **44**
+====================== ============ =========== ======== ========= ========= =================== ====================== ========
+<BLANKLINE>
+
+Note that the numbers in this table depend on
+:attr:`lino_welfare.modlib.integ.Plugin.only_primary` whose default
+value in chatelet is `True`.
+
+>>> dd.plugins.integ.only_primary
+True
+
