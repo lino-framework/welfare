@@ -38,7 +38,7 @@ This client has the following appointments.
 ------------ ------------ ----------------- ---------------- -------------------------------------------------------
  15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     **Accepted** → [Excused] [Absent] [Present] [Checkin]
  22/05/2014                Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
- 22/05/2014   09:40:00     Mélanie Mélard    Diner            **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       **Accepted** → [Excused] [Absent] [Present] [Checkin]
  16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     **Accepted** → [Excused] [Absent] [Present] [Checkin]
  16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     **Accepted** → [Excused] [Absent] [Present] [Checkin]
  18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     **Accepted** → [Excused] [Absent] [Present] [Checkin]
