@@ -27,11 +27,14 @@
 
 import six
 
-requires = ['lino_cosi', 'vobject', 'django-iban', 'metafone']
+requires = ['lino_cosi', 'vobject', 'django-iban',
+            'metafone', 'weasyprint', 'cairocffi<0.7']
 if six.PY2:
     requires.append('suds')
 else:
     requires.append('suds-py3')
+
+    
     
 SETUP_INFO = dict(
     name='lino-welfare',

@@ -61,7 +61,7 @@ class Site(Site):
 
         """
         super(Site, self).setup_plugins()
-        # self.plugins.integ.configure(only_primary=True)
+        self.plugins.integ.configure(only_primary=True)
 
     # def get_default_language(self):
     #     return 'fr'

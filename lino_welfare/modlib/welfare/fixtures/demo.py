@@ -381,15 +381,14 @@ def objects():
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)
 
-    kw = dict(invite_client=False)
+    kw = dict(invite_client=True)
     kw.update(dd.str2kw("name", _("External meetings with client")))
     kw.update(dd.str2kw("event_label", _("External meeting")))
-    # dd.babelkw(
-    #     'name',
-    #     de="Klientengespräche extern",
-    #     fr="Rencontres client externes",
-    #     en="External meetings with client",
-    # )
+    yield calendar(**kw)
+
+    kw = dict(invite_client=True)
+    kw.update(dd.str2kw("name", _("Informational meetings")))
+    kw.update(dd.str2kw("event_label", _("Informational meeting")))
     yield calendar(**kw)
 
     kw = dict(invite_client=False)

@@ -95,7 +95,7 @@ class ClientSummary(Certifiable, Summary):
     def add_from_fields(self, obj, meth_name):
         for sf in StatisticalFields.objects():
             meth = getattr(sf, meth_name)
-            value = meth(obj)
+            value = meth(obj, self)
             if value:
                 value += getattr(self, sf.field_name)
                 setattr(self, sf.field_name, value)

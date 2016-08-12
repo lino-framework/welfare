@@ -59,19 +59,19 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ====================== ============= ================== ============= ===================== ====== ============================
- Start time   Client                 Summary       Managed by         Assigned to   Calendar Event Type   Room   Workflow
------------- ---------------------- ------------- ------------------ ------------- --------------------- ------ ----------------------------
- 08:30:00                            Diner         Alicia Allmanns                  Meeting                      **Suggested** → [Take]
- 08:30:00                            Evaluation    Romain Raffault                  Internal meeting             **Suggested** → [Take]
- 09:40:00     EVERS Eberhart (127)   Diner         Mélanie Mélard                   Appointment                  **Suggested** → [Take]
- 09:40:00                            Auswertung    Theresia Thelen                  External meeting             **Suggested** → [Notified]
- 10:20:00                            Treffen       Hubert Huppertz                  External meeting             **Suggested** → [Take]
- 10:20:00     JOHNEN Johann (138)    Mittagessen   Rolf Rompen                      Evaluation                   **Suggested** → [Take]
- 11:10:00                            Treffen       Patrick Paraneau                 Private                      **Suggested** → [Take]
- 13:30:00                            Auswertung    Judith Jousten                   External meeting             **Suggested** → [Take]
- 13:30:00                            Meeting       Robin Rood                       Meeting                      **Suggested** → [Take]
-============ ====================== ============= ================== ============= ===================== ====== ============================
+============ ============================ ============= ================== ============= ======================= ====== ============================
+ Start time   Client                       Summary       Managed by         Assigned to   Calendar Event Type     Room   Workflow
+------------ ---------------------------- ------------- ------------------ ------------- ----------------------- ------ ----------------------------
+ 08:30:00                                  Diner         Alicia Allmanns                  Meeting                        **Suggested** → [Take]
+ 08:30:00     MEIER Marie-Louise (149)     Evaluation    Romain Raffault                  Informational meeting          **Suggested** → [Take]
+ 09:40:00     JANSEN Jérémy (136)          Diner         Mélanie Mélard                   Informational meeting          **Suggested** → [Take]
+ 09:40:00                                  Auswertung    Theresia Thelen                  Meeting                        **Suggested** → [Notified]
+ 10:20:00     DOBBELSTEIN Dorothée (124)   Treffen       Hubert Huppertz                  Informational meeting          **Suggested** → [Take]
+ 10:20:00                                  Mittagessen   Rolf Rompen                      Meeting                        **Suggested** → [Take]
+ 11:10:00                                  Treffen       Patrick Paraneau                 Meeting                        **Suggested** → [Take]
+ 13:30:00                                  Auswertung    Judith Jousten                   Meeting                        **Suggested** → [Take]
+ 13:30:00     RADERMACHER Hedi (161)       Meeting       Robin Rood                       Informational meeting          **Suggested** → [Take]
+============ ============================ ============= ================== ============= ======================= ====== ============================
 <BLANKLINE>
 
 Note how Theresia cannot [Take] her own event (because she has it
@@ -89,34 +89,34 @@ Here is what it says for Alicia.
 
 >>> rt.login('alicia').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=========================== =========================== ===================== ==================== =================================
- When                        Client                      Calendar Event Type   Summary              Workflow
---------------------------- --------------------------- --------------------- -------------------- ---------------------------------
- *Thu 22/05/2014 at 08:30*                               Meeting               Diner                **Suggested** → [Notified]
- *Fri 23/05/2014 at 09:40*   AUSDEMWALD Alfons (116)     Appointment           Souper               **Draft** → [Notified] [Cancel]
- *Sat 24/05/2014 at 10:20*   BASTIAENSEN Laurent (117)   Evaluation            Petit-déjeuner       **Took place** → [Reset]
- *Sat 24/05/2014 at 11:10*                               External meeting      Rencontre            **Cancelled**
- *Sun 25/05/2014 at 13:30*                               Internal meeting      Consultation         **Omitted**
- *Mon 26/05/2014 at 08:30*                               External meeting      Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 26/05/2014 at 09:40*                               Private               Evaluation           **Suggested** → [Notified]
- *Tue 27/05/2014 at 10:20*                               Meeting               Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 28/05/2014 at 11:10*   COLLARD Charlotte (118)     Appointment           Interview            **Took place** → [Reset]
- *Wed 28/05/2014 at 13:30*   CHANTRAINE Marc (120*)      Evaluation            Diner                **Cancelled**
- *Thu 29/05/2014 at 08:30*                               External meeting      Souper               **Omitted**
- *Fri 30/05/2014 at 09:40*                               Internal meeting      Petit-déjeuner       **Notified** → [Cancel] [Reset]
- *Mon 23/06/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 1         **Suggested** → [Notified] [▽]
- *Mon 14/07/2014*            RADERMACHER Fritz (158)     Evaluation            Évaluation 6         **Suggested** → [Notified] [▽]
- *Wed 23/07/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 2         **Suggested** → [Notified] [▽]
- *Thu 14/08/2014*            HILGERS Hildegard (133)     Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
- *Mon 25/08/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 3         **Suggested** → [Notified] [▽]
- *Thu 25/09/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 4         **Suggested** → [Notified] [▽]
- *Tue 14/10/2014*            RADERMACHER Fritz (158)     Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
- *Mon 27/10/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 5         **Suggested** → [Notified] [▽]
- *Thu 27/11/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 6         **Suggested** → [Notified] [▽]
- *Mon 29/12/2014 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 7         **Suggested** → [Notified] [▽]
- *Thu 29/01/2015 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 8         **Suggested** → [Notified] [▽]
- *Mon 02/03/2015 at 09:00*   DA VINCI David (165)        Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
-=========================== =========================== ===================== ==================== =================================
+=========================== ========================================= ======================= ==================== =================================
+ When                        Client                                    Calendar Event Type     Summary              Workflow
+--------------------------- ----------------------------------------- ----------------------- -------------------- ---------------------------------
+ *Thu 22/05/2014 at 08:30*                                             Meeting                 Diner                **Suggested** → [Notified]
+ *Fri 23/05/2014 at 09:40*   AUSDEMWALD Alfons (116)                   Appointment             Souper               **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 10:20*   BASTIAENSEN Laurent (117)                 Evaluation              Petit-déjeuner       **Took place** → [Reset]
+ *Sat 24/05/2014 at 11:10*   COLLARD Charlotte (118)                   External meeting        Rencontre            **Cancelled**
+ *Sun 25/05/2014 at 13:30*   CHANTRAINE Marc (120*)                    Informational meeting   Consultation         **Omitted**
+ *Mon 26/05/2014 at 08:30*                                             Internal meeting        Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 09:40*                                             External meeting        Evaluation           **Suggested** → [Notified]
+ *Tue 27/05/2014 at 10:20*                                             Private                 Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 11:10*                                             Meeting                 Interview            **Took place** → [Reset]
+ *Wed 28/05/2014 at 13:30*   DERICUM Daniel (121)                      Appointment             Diner                **Cancelled**
+ *Thu 29/05/2014 at 08:30*   DEMEULENAERE Dorothée (122)               Evaluation              Souper               **Omitted**
+ *Fri 30/05/2014 at 09:40*   DOBBELSTEIN-DEMEULENAERE Dorothée (123)   External meeting        Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ *Mon 23/06/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Mon 14/07/2014*            RADERMACHER Fritz (158)                   Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Wed 23/07/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Thu 14/08/2014*            HILGERS Hildegard (133)                   Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 25/08/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Thu 25/09/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Tue 14/10/2014*            RADERMACHER Fritz (158)                   Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 27/10/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Thu 27/11/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Mon 29/12/2014 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Thu 29/01/2015 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Mon 02/03/2015 at 09:00*   DA VINCI David (165)                      Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+=========================== ========================================= ======================= ==================== =================================
 <BLANKLINE>
 
 
@@ -124,27 +124,52 @@ These are for Hubert:
 
 >>> rt.login('hubert').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=========================== ========================================= ===================== =============== =================================
- When                        Client                                    Calendar Event Type   Summary         Workflow
---------------------------- ----------------------------------------- --------------------- --------------- ---------------------------------
- *Thu 22/05/2014 at 10:20*                                             External meeting      Treffen         **Suggested** → [Notified]
- *Fri 23/05/2014 at 11:10*                                             Private               Beratung        **Draft** → [Notified] [Cancel]
- *Sat 24/05/2014 at 08:30*   DERICUM Daniel (121)                      Appointment           Auswertung      **Cancelled**
- *Sat 24/05/2014 at 13:30*                                             Meeting               Seminar         **Took place** → [Reset]
- *Sun 25/05/2014 at 09:40*   DEMEULENAERE Dorothée (122)               Evaluation            Erstgespräch    **Omitted**
- *Mon 26/05/2014 at 10:20*                                             External meeting      Interview       **Notified** → [Cancel] [Reset]
- *Mon 26/05/2014 at 11:10*                                             Internal meeting      Mittagessen     **Suggested** → [Notified]
- *Tue 27/05/2014 at 13:30*                                             External meeting      Abendessen      **Draft** → [Notified] [Cancel]
- *Wed 28/05/2014 at 08:30*                                             Private               Frühstück       **Took place** → [Reset]
- *Wed 28/05/2014 at 09:00*   BRECHT Bernd (177)                        Evaluation            Évaluation 15   **Suggested** → [Notified] [▽]
- *Wed 28/05/2014 at 09:40*                                             Meeting               Treffen         **Cancelled**
- *Thu 29/05/2014 at 10:20*   DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Appointment           Beratung        **Omitted**
- ...
- *Mon 09/03/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 8    **Suggested** → [Notified] [▽]
- *Thu 19/03/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 9    **Suggested** → [Notified] [▽]
- *Thu 09/04/2015 at 09:00*   JEANÉMART Jérôme (181)                    Evaluation            Auswertung 9    **Suggested** → [Notified] [▽]
- *Mon 20/04/2015 at 09:00*   BRECHT Bernd (177)                        Evaluation            Auswertung 10   **Suggested** → [Notified] [▽]
-=========================== ========================================= ===================== =============== =================================
+=========================== ============================ ======================= =============== =================================
+ When                        Client                       Calendar Event Type     Summary         Workflow
+--------------------------- ---------------------------- ----------------------- --------------- ---------------------------------
+ *Thu 22/05/2014 at 10:20*   DOBBELSTEIN Dorothée (124)   Informational meeting   Treffen         **Suggested** → [Notified]
+ *Fri 23/05/2014 at 11:10*                                Internal meeting        Beratung        **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 08:30*                                Private                 Auswertung      **Cancelled**
+ *Sat 24/05/2014 at 13:30*                                External meeting        Seminar         **Took place** → [Reset]
+ *Sun 25/05/2014 at 09:40*                                Meeting                 Erstgespräch    **Omitted**
+ *Mon 26/05/2014 at 10:20*   ERNST Berta (125)            Appointment             Interview       **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 11:10*   EVERTZ Bernd (126)           Evaluation              Mittagessen     **Suggested** → [Notified]
+ *Tue 27/05/2014 at 13:30*   EVERS Eberhart (127)         External meeting        Abendessen      **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 08:30*   EMONTS Daniel (128)          Informational meeting   Frühstück       **Took place** → [Reset]
+ *Wed 28/05/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Évaluation 15   **Suggested** → [Notified] [▽]
+ *Wed 28/05/2014 at 09:40*                                Internal meeting        Treffen         **Cancelled**
+ *Thu 29/05/2014 at 10:20*                                External meeting        Beratung        **Omitted**
+ *Fri 30/05/2014 at 11:10*                                Private                 Seminar         **Notified** → [Cancel] [Reset]
+ *Tue 03/06/2014*            DENON Denis (180*)           Evaluation              Auswertung 1    **Suggested** → [Notified] [▽]
+ *Wed 04/06/2014*            LAMBERTZ Guido (142)         Evaluation              Évaluation 6    **Suggested** → [Notified] [▽]
+ *Thu 19/06/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Évaluation 15   **Suggested** → [Notified] [▽]
+ *Mon 14/07/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 1    **Suggested** → [Notified] [▽]
+ *Mon 04/08/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 1    **Suggested** → [Notified] [▽]
+ *Tue 05/08/2014*            FAYMONVILLE Luc (130*)       Evaluation              Auswertung 3    **Suggested** → [Notified] [▽]
+ *Tue 12/08/2014*            RADERMECKER Rik (173)        Evaluation              Auswertung 2    **Suggested** → [Notified] [▽]
+ *Thu 14/08/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 2    **Suggested** → [Notified] [▽]
+ *Wed 03/09/2014*            DENON Denis (180*)           Evaluation              Auswertung 2    **Suggested** → [Notified] [▽]
+ *Thu 04/09/2014*            LAMBERTZ Guido (142)         Evaluation              Évaluation 7    **Suggested** → [Notified] [▽]
+ *Thu 04/09/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 2    **Suggested** → [Notified] [▽]
+ *Mon 15/09/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 3    **Suggested** → [Notified] [▽]
+ *Mon 06/10/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 3    **Suggested** → [Notified] [▽]
+ *Wed 15/10/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 4    **Suggested** → [Notified] [▽]
+ *Thu 06/11/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 4    **Suggested** → [Notified] [▽]
+ *Wed 12/11/2014*            RADERMECKER Rik (173)        Evaluation              Auswertung 3    **Suggested** → [Notified] [▽]
+ *Mon 17/11/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 5    **Suggested** → [Notified] [▽]
+ *Wed 03/12/2014*            DENON Denis (180*)           Evaluation              Auswertung 3    **Suggested** → [Notified] [▽]
+ *Mon 08/12/2014 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 5    **Suggested** → [Notified] [▽]
+ *Wed 17/12/2014 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 6    **Suggested** → [Notified] [▽]
+ *Thu 08/01/2015 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 6    **Suggested** → [Notified] [▽]
+ *Mon 19/01/2015 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 7    **Suggested** → [Notified] [▽]
+ *Mon 09/02/2015 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 7    **Suggested** → [Notified] [▽]
+ *Thu 19/02/2015 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 8    **Suggested** → [Notified] [▽]
+ *Tue 03/03/2015*            DENON Denis (180*)           Evaluation              Auswertung 4    **Suggested** → [Notified] [▽]
+ *Mon 09/03/2015 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 8    **Suggested** → [Notified] [▽]
+ *Thu 19/03/2015 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 9    **Suggested** → [Notified] [▽]
+ *Thu 09/04/2015 at 09:00*   JEANÉMART Jérôme (181)       Evaluation              Auswertung 9    **Suggested** → [Notified] [▽]
+ *Mon 20/04/2015 at 09:00*   BRECHT Bernd (177)           Evaluation              Auswertung 10   **Suggested** → [Notified] [▽]
+=========================== ============================ ======================= =============== =================================
 <BLANKLINE>
 
 
@@ -152,29 +177,83 @@ And these for Mélanie:
 
 >>> rt.login('melanie').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=========================== ============================= ===================== ==================== =================================
- When                        Client                        Calendar Event Type   Summary              Workflow
---------------------------- ----------------------------- --------------------- -------------------- ---------------------------------
- *Thu 22/05/2014 at 09:40*   EVERS Eberhart (127)          Appointment           Diner                **Suggested** → [Notified]
- *Fri 23/05/2014 at 10:20*   EMONTS Daniel (128)           Evaluation            Souper               **Draft** → [Notified] [Cancel]
- *Sat 24/05/2014 at 11:10*                                 External meeting      Petit-déjeuner       **Took place** → [Reset]
- *Sat 24/05/2014 at 13:30*                                 Internal meeting      Rencontre            **Cancelled**
- *Sun 25/05/2014 at 08:30*                                 External meeting      Consultation         **Omitted**
- *Mon 26/05/2014 at 09:00*   ENGELS Edgar (129)            Evaluation            Évaluation 3         **Suggested** → [Notified] [▽]
- *Mon 26/05/2014 at 09:40*                                 Private               Séminaire            **Notified** → [Cancel] [Reset]
- *Mon 26/05/2014 at 10:20*                                 Meeting               Evaluation           **Suggested** → [Notified]
- *Tue 27/05/2014 at 11:10*   ENGELS Edgar (129)            Appointment           Première rencontre   **Draft** → [Notified] [Cancel]
- *Wed 28/05/2014 at 08:30*                                 External meeting      Diner                **Cancelled**
- *Wed 28/05/2014 at 13:30*   FAYMONVILLE Luc (130*)        Evaluation            Interview            **Took place** → [Reset]
- *Thu 29/05/2014 at 09:40*                                 Internal meeting      Souper               **Omitted**
- ...
- *Thu 19/03/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
- *Thu 02/04/2015 at 09:00*   DUBOIS Robin (179)            Evaluation            Évaluation 8         **Suggested** → [Notified] [▽]
- *Thu 09/04/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
- *Mon 20/04/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation            Évaluation 10        **Suggested** → [Notified] [▽]
- *Mon 04/05/2015 at 09:00*   DUBOIS Robin (179)            Evaluation            Évaluation 9         **Suggested** → [Notified] [▽]
- *Mon 11/05/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation            Évaluation 10        **Suggested** → [Notified] [▽]
-=========================== ============================= ===================== ==================== =================================
+=========================== ============================= ======================= ==================== =================================
+ When                        Client                        Calendar Event Type     Summary              Workflow
+--------------------------- ----------------------------- ----------------------- -------------------- ---------------------------------
+ *Thu 22/05/2014 at 09:40*   JANSEN Jérémy (136)           Informational meeting   Diner                **Suggested** → [Notified]
+ *Fri 23/05/2014 at 10:20*                                 Internal meeting        Souper               **Draft** → [Notified] [Cancel]
+ *Sat 24/05/2014 at 11:10*                                 External meeting        Petit-déjeuner       **Took place** → [Reset]
+ *Sat 24/05/2014 at 13:30*                                 Private                 Rencontre            **Cancelled**
+ *Sun 25/05/2014 at 08:30*                                 Meeting                 Consultation         **Omitted**
+ *Mon 26/05/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Mon 26/05/2014 at 09:40*   JACOBS Jacqueline (137)       Appointment             Séminaire            **Notified** → [Cancel] [Reset]
+ *Mon 26/05/2014 at 10:20*   JOHNEN Johann (138)           Evaluation              Evaluation           **Suggested** → [Notified]
+ *Tue 27/05/2014 at 11:10*   JONAS Josef (139)             External meeting        Première rencontre   **Draft** → [Notified] [Cancel]
+ *Wed 28/05/2014 at 08:30*                                 Internal meeting        Diner                **Cancelled**
+ *Wed 28/05/2014 at 13:30*   JOUSTEN Jan (140*)            Informational meeting   Interview            **Took place** → [Reset]
+ *Thu 29/05/2014 at 09:40*                                 External meeting        Souper               **Omitted**
+ *Fri 30/05/2014 at 10:20*                                 Private                 Petit-déjeuner       **Notified** → [Cancel] [Reset]
+ *Thu 05/06/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Thu 05/06/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 15        **Suggested** → [Notified] [▽]
+ *Fri 13/06/2014*            MALMENDIER Marc (146)         Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Mon 16/06/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Thu 26/06/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Wed 02/07/2014*            RADERMACHER Christian (155)   Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Wed 02/07/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Mon 07/07/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Mon 14/07/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Wed 16/07/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Tue 22/07/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Mon 28/07/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Mon 04/08/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Thu 07/08/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Thu 14/08/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Mon 18/08/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Mon 25/08/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 1         **Suggested** → [Notified] [▽]
+ *Thu 28/08/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Thu 04/09/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Mon 08/09/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Mon 15/09/2014*            MALMENDIER Marc (146)         Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Mon 15/09/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Thu 18/09/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Thu 25/09/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 2         **Suggested** → [Notified] [▽]
+ *Mon 29/09/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Thu 02/10/2014*            RADERMACHER Christian (155)   Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Mon 06/10/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Wed 08/10/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Wed 15/10/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Mon 20/10/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Mon 27/10/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 3         **Suggested** → [Notified] [▽]
+ *Wed 29/10/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Thu 06/11/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Mon 10/11/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 17/11/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Thu 20/11/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Thu 27/11/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Mon 01/12/2014 at 09:00*   ENGELS Edgar (129)            Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 08/12/2014 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Wed 10/12/2014 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Wed 17/12/2014 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Mon 22/12/2014 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 29/12/2014 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 5         **Suggested** → [Notified] [▽]
+ *Fri 02/01/2015*            RADERMACHER Christian (155)   Evaluation              Évaluation 4         **Suggested** → [Notified] [▽]
+ *Thu 08/01/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Mon 12/01/2015 at 09:00*   LAZARUS Line (144)            Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 19/01/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Thu 22/01/2015 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Thu 29/01/2015 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 6         **Suggested** → [Notified] [▽]
+ *Mon 09/02/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Thu 19/02/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Mon 23/02/2015 at 09:00*   MEESSEN Melissa (147)         Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 02/03/2015 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 7         **Suggested** → [Notified] [▽]
+ *Mon 09/03/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Thu 19/03/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Thu 02/04/2015 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 8         **Suggested** → [Notified] [▽]
+ *Thu 09/04/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 20/04/2015 at 09:00*   RADERMACHER Guido (159)       Evaluation              Évaluation 10        **Suggested** → [Notified] [▽]
+ *Mon 04/05/2015 at 09:00*   DUBOIS Robin (179)            Evaluation              Évaluation 9         **Suggested** → [Notified] [▽]
+ *Mon 11/05/2015 at 09:00*   ÖSTGES Otto (168)             Evaluation              Évaluation 10        **Suggested** → [Notified] [▽]
+=========================== ============================= ======================= ==================== =================================
 <BLANKLINE>
 
 
@@ -272,7 +351,7 @@ Events of EVERS Eberhart (127)
  **Tue 15/04/2014 (09:00)**   Caroline Carnol   Auswertung 1     **Suggested**
  **Thu 15/05/2014 (09:00)**   Caroline Carnol   Auswertung 2     **Suggested**
  **Thu 22/05/2014**           Mélanie Mélard    Urgent problem   **Notified**
- **Thu 22/05/2014 (09:40)**   Mélanie Mélard    Diner            **Suggested**
+ **Tue 27/05/2014 (13:30)**   Hubert Huppertz   Abendessen       **Draft**
  **Mon 16/06/2014 (09:00)**   Caroline Carnol   Auswertung 3     **Suggested**
  **Wed 16/07/2014 (09:00)**   Caroline Carnol   Auswertung 4     **Suggested**
  **Mon 18/08/2014 (09:00)**   Caroline Carnol   Auswertung 5     **Suggested**

@@ -340,7 +340,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
-- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, all_rooms, locks_user, id, invite_client, is_appointment, email_template, attach_to_email
+- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, all_rooms, locks_user, esf_field, id, invite_client, is_appointment, email_template, attach_to_email
 - cal.EventTypes.insert : name, name_fr, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project

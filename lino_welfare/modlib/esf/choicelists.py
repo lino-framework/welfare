@@ -20,6 +20,7 @@
 
 """
 from __future__ import unicode_literals
+import datetime
 
 from django.db import models
 
@@ -48,23 +49,23 @@ class StatisticalField(dd.Choice):
         self.field_name = "esf" + value
         self.field = self.create_field()
 
-    def collect_from_guest(self, obj):
+    def collect_from_guest(self, obj, summary):
         pass
 
-    def collect_from_immersion_contract(self, obj):
+    def collect_from_immersion_contract(self, obj, summary):
         pass
 
-    def collect_from_jobs_contract(self, obj):
+    def collect_from_jobs_contract(self, obj, summary):
         pass
 
 
 class GuestCount(StatisticalField):
-
+    """Not used in reality."""
     def create_field(self):
         return models.IntegerField(
             self.value, default=0, help_text=self.text)
 
-    def collect_from_guest(self, obj):
+    def collect_from_guest(self, obj, summary):
         if obj.event.event_type is None:
             return 0
         sf = obj.event.event_type.esf_field
@@ -72,16 +73,29 @@ class GuestCount(StatisticalField):
             return 1
         return 0
 
-
+from atelier.utils import last_day_of_month
 class HoursField(StatisticalField):
     def create_field(self):
         return dd.DurationField(
             self.value, default=ZERO,
             help_text=self.text)
 
+    def daterange2hours(self, sd, ed, summary):
+        if sd and ed:
+            ssd = datetime.date(summary.year, summary.month or 1, 1)
+            sd = max(sd, ssd)
+            
+            sed = last_day_of_month(
+                datetime.date(summary.year, summary.month or 12, 1))
+            ed = min(ed, sed)
+            nb_of_days = weekdays(sd, ed)
+            return Duration("38:00") * nb_of_days / 7
+            # return Duration("8:00") * nb_of_days
+
 
 class GuestHours(HoursField):
-    def collect_from_guest(self, obj):
+    """Count the real hours of presence."""
+    def collect_from_guest(self, obj, summary):
         # obj is a `cal.Guest` instance
         if obj.event.event_type is None:
             return
@@ -93,56 +107,71 @@ class GuestHours(HoursField):
         return Duration(obj.gone_since - obj.busy_since)
 
 
+class GuestHoursFixed(HoursField):
+    """Count a fixed time for each presence."""
+    
+    hours_per_guest = Duration('1:00')
+    
+    def collect_from_guest(self, obj, summary):
+        if obj.event.event_type is None:
+            return
+        sf = obj.event.event_type.esf_field
+        if sf is None or sf.value != self.value:
+            return
+        return sf.hours_per_guest
+
+
 class ImmersionHours(HoursField):
 
-    def collect_from_immersion_contract(self, obj):
+    def collect_from_immersion_contract(self, obj, summary):
         # obj is a `immersion.Contract` instance
-        sd = obj.applies_from
-        ed = obj.date_ended
-        if sd and ed:
-            nb_of_days = weekdays(sd, ed)
-            return Duration("8:00") * nb_of_days
+        return self.daterange2hours(
+            obj.applies_from, obj.date_ended, summary)
 
 
 class Art60Hours(HoursField):
-    def collect_from_jobs_contract(self, obj):
+    def collect_from_jobs_contract(self, obj, summary):
         # obj is a `jobs.Contract` instance
-        return Duration("8:00") * obj.duration
+        return self.daterange2hours(
+            obj.applies_from, obj.date_ended, summary)
+        # return Duration("8:00") * obj.duration
 
 
 class StatisticalFields(dd.ChoiceList):
     verbose_name = _("ESF field")
     verbose_name_plural = _("ESF fields")
+    column_names = 'value name text type'
     item_class = StatisticalField
 
 add = StatisticalFields.add_item_instance
 
 # Séance d'info
-add(GuestCount('10', _("Informative sessions")))
+add(GuestHoursFixed('10', _("Informative sessions"),
+                    hours_per_guest=Duration('2:00')))
 
 # Entretien individuel
-add(GuestCount('20', _("Individual consultation")))
+add(GuestHoursFixed('20', _("Individual consultation")))
 
 # Evaluation formation externe et art.61
-add(GuestCount('21', _("Evaluation of external training")))
+add(GuestHoursFixed('21', _("Evaluation of external training")))
 
 # S.I.S. agréé
-add(GuestCount('30', _("Certified integration service")))
+add(GuestHoursFixed('30', _("Certified integration service")))
 
 # Tests de niveau
-add(GuestCount('40', _("Level tests")))
+add(GuestHoursFixed('40', _("Level tests")))
 
 # Initiation informatique
-add(GuestCount('41', _("IT basics")))
+add(GuestHoursFixed('41', _("IT basics")))
 
 # Mobilité
-add(GuestCount('42', _("Mobility")))
+add(GuestHoursFixed('42', _("Mobility")))
 
 # Remédiation mathématique et français
-add(GuestCount('43', _("Remedial teaching")))
+add(GuestHoursFixed('43', _("Remedial teaching")))
 
 # Activons-nous
-add(GuestCount('44', _("Wake up!")))
+add(GuestHours('44', _("Wake up!")))
 
 # Mise en situation professionnelle : calculer les heures par stage
 # d'immersion, en fonction des dates de début et de fin et de

@@ -167,25 +167,55 @@ Notes de discussion
   heures de présence de l'évènement (tant pis pour la statistique).
 
 
+Par type d'entrée calendrier on doit configurer le champ FSE dans
+lequel seront totalisés les heures.
+
+>>> rt.show(cal.EventTypes, language="fr")
+======================================== ======================================== =============================== ======================== ==============================
+ Désignation                              Désignation (de)                         Désignation (en)                Inviter le bénéficiare   Champ FSE
+---------------------------------------- ---------------------------------------- ------------------------------- ------------------------ ------------------------------
+ Jours fériés                             Feiertage                                Holidays                        Non
+ Réunion                                  Versammlung                              Meeting                         Non
+ Internal meetings with client            Internal meetings with client            Internal meetings with client   Oui                      Séance d’information
+ Évaluation                               Auswertung                               Evaluation                      Oui                      Entretien individuel
+ Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Non
+ Réunions externes avec le bénéficiaire   Réunions externes avec le bénéficiaire   External meetings with client   Oui                      Evaluation formation externe
+ Informational meetings                   Informational meetings                   Informational meetings          Oui                      S.I.S. agréé
+ Réunions interne                         Réunions interne                         Internal meetings               Non
+ Réunions externe                         Réunions externe                         External meetings               Non
+ Privé                                    Privat                                   Private                         Non
+ Atelier                                  Atelier                                  Workshop                        Non
+======================================== ======================================== =============================== ======================== ==============================
+<BLANKLINE>
+  
+
 >>> rt.show(esf.StatisticalFields, language="fr")
-======= ====== ===================================
- value   name   text
-------- ------ -----------------------------------
- 10             Séance d’information
- 20             Entretien individuel
- 21             Evaluation formation externe
- 30             S.I.S. agréé
- 40             Tests de niveau
- 41             Initiation informatique
- 42             Mobilité
- 43             Remédiation
- 44             Activons-nous!
- 50             Mise en situation professionnelle
- 60             Cyber-employ
- 70             Mise à l’emploi art.60§7
-======= ====== ===================================
+======= ====== =================================== =================
+ value   name   text                                Type
+------- ------ ----------------------------------- -----------------
+ 10             Séance d’information                GuestHoursFixed
+ 20             Entretien individuel                GuestHoursFixed
+ 21             Evaluation formation externe        GuestHoursFixed
+ 30             S.I.S. agréé                        GuestHoursFixed
+ 40             Tests de niveau                     GuestHoursFixed
+ 41             Initiation informatique             GuestHoursFixed
+ 42             Mobilité                            GuestHoursFixed
+ 43             Remédiation                         GuestHoursFixed
+ 44             Activons-nous!                      GuestHours
+ 50             Mise en situation professionnelle   ImmersionHours
+ 60             Cyber Emploi                        GuestHours
+ 70             Mise à l’emploi art.60§7            Art60Hours
+======= ====== =================================== =================
 <BLANKLINE>
 
+.. currentmodule:: lino_welfare.modlib.esf.choicelists
+
+Les types de champ suivants sont disponibles par défaut:
+
+- :class:`GuestHoursFixed`
+- :class:`GuestHours>`
+- :class:`ImmersionHours`
+- :class:`Art60Hours`
 
 >>> # rt.show(esf.AllSummaries)
 
@@ -198,43 +228,63 @@ Notes de discussion
 >>> print(obj)
 AUSDEMWALD Alfons (116)
 
+The field :attr:`has_esf
+<lino_welfare.modlib.pcsw.models.Client.has_esf>` must be checked:
+
+>>> print(obj.has_esf)
+True
+
+>>> show_fields(rt.models.pcsw.Client, 'has_esf')
+=============== ============== =========================================================
+ Internal name   Verbose name   Help text
+--------------- -------------- ---------------------------------------------------------
+ has_esf         ESF data       Whether Lino should make ESF summaries for this client.
+=============== ============== =========================================================
+
 >>> rt.show(esf.SummariesByClient, obj)
-========== ======= ======= ======= ======== ======= ======= ======= ======= ======= ====== ====== ======
- Year       10      20      21      30       40      41      42      43      44      50     60     70
----------- ------- ------- ------- -------- ------- ------- ------- ------- ------- ------ ------ ------
- 2012       0       0       0       3        0       0       0       0       0       0:00   0:00   0:00
- 2013       0       0       0       11       0       0       0       0       0       0:00   0:00   0:00
- 2014       0       0       1       11       1       0       0       0       0       0:00   0:00   0:00
- **6039**   **0**   **0**   **1**   **25**   **1**   **0**   **0**   **0**   **0**
-========== ======= ======= ======= ======== ======= ======= ======= ======= ======= ====== ====== ======
+========== ========== =========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+ Year       10         20          21     30     40     41     42     43     44     50     60     70
+---------- ---------- ----------- ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+ 2012       0:00       3:00        0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ 2013       0:00       11:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ 2014       2:00       11:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ **6039**   **2:00**   **25:00**
+========== ========== =========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
 <BLANKLINE>
+
+Running check_summaries will have no effect since data has been
+checked as part of :manage:`initdb_demo`:
 
 >>> rt.login().run(obj.check_summaries)
 {'refresh': True}
 
+The data has not changed:
+
 >>> rt.show(esf.SummariesByClient, obj)
-========== ======= ======= ======= ======== ======= ======= ======= ======= ======= ====== ====== ======
- Year       10      20      21      30       40      41      42      43      44      50     60     70
----------- ------- ------- ------- -------- ------- ------- ------- ------- ------- ------ ------ ------
- 2012       0       0       0       3        0       0       0       0       0       0:00   0:00   0:00
- 2013       0       0       0       11       0       0       0       0       0       0:00   0:00   0:00
- 2014       0       0       1       11       1       0       0       0       0       0:00   0:00   0:00
- **6039**   **0**   **0**   **1**   **25**   **1**   **0**   **0**   **0**   **0**
-========== ======= ======= ======= ======== ======= ======= ======= ======= ======= ====== ====== ======
+========== ========== =========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
+ Year       10         20          21     30     40     41     42     43     44     50     60     70
+---------- ---------- ----------- ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+ 2012       0:00       3:00        0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ 2013       0:00       11:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ 2014       2:00       11:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ **6039**   **2:00**   **25:00**
+========== ========== =========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ======
 <BLANKLINE>
 
+
+Same table for a client with job supplyments:
 
 >>> obj = pcsw.Client.objects.get(pk=177)
 >>> print(obj)
 BRECHT Bernd (177)
 
 >>> rt.show(esf.SummariesByClient, obj)
-========== ======= ======= ======= ======= ======= ======= ======= ======= ======= ====== ====== =============
- Year       10      20      21      30      40      41      42      43      44      50     60     70
----------- ------- ------- ------- ------- ------- ------- ------- ------- ------- ------ ------ -------------
- 2012       0       0       0       0       0       0       0       0       0       0:00   0:00   2496:00
- 2013       0       0       0       3       0       0       0       0       0       0:00   0:00   0:00
- 2014       0       0       0       0       1       0       0       0       0       0:00   0:00   0:00
- **6039**   **0**   **0**   **0**   **3**   **1**   **0**   **0**   **0**   **0**                 **2496:00**
-========== ======= ======= ======= ======= ======= ======= ======= ======= ======= ====== ====== =============
+========== ====== ========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ============
+ Year       10     20         21     30     40     41     42     43     44     50     60     70
+---------- ------ ---------- ------ ------ ------ ------ ------ ------ ------ ------ ------ ------------
+ 2012       0:00   0:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   342:00
+ 2013       0:00   3:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ 2014       0:00   0:00       0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
+ **6039**          **3:00**                                                                  **342:00**
+========== ====== ========== ====== ====== ====== ====== ====== ====== ====== ====== ====== ============
 <BLANKLINE>

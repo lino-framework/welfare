@@ -85,7 +85,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
 <span>Du bist besch&#228;ftigt in <em>Beratung mit COLLARD Charlotte (118)</em> (<b>Versammlung beenden</b>). </span>
-<span>Du hast<b>6 Eintr&#228;ge in Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
+<span>Du hast <b>6 Eintr&#228;ge in Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 <b>Du hast 3 offene Datenkontrollen.</b>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:

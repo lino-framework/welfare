@@ -100,7 +100,7 @@ class Clients(pcsw.CoachedClients):
         kw = super(Clients, self).param_defaults(ar, **kw)
         kw.update(client_state=pcsw.ClientStates.coached)
         kw.update(coached_by=ar.get_user())
-        kw.update(only_primary=True)
+        # kw.update(only_primary=True)
         return kw
 
     @classmethod

@@ -118,11 +118,17 @@ dd.add_welcome_handler(you_are_busy_messages)
 
 
 class EventType(EventType):
+    """
+    .. attribute:: invite_client
+    .. attribute:: esf_field
+
+    """
 
     #~ invite_team_members = models.BooleanField(
         #~ _("Invite team members"),default=False)
     # invite_team_members = dd.ForeignKey('users.Team', blank=True, null=True)
     invite_client = models.BooleanField(_("Invite client"), default=False)
+    esf_field = dd.DummyField()
 
 dd.inject_field(
     'users.User', 'calendar',
@@ -235,7 +241,7 @@ class EventsByClient(Events):
     # master = 'cal.Event'
     master = 'pcsw.Client'
     auto_fit_column_widths = True
-    column_names = 'when_html user summary workflow_buttons'
+    column_names = 'when_html user summary workflow_buttons *'
     # column_names = 'when_text user summary workflow_buttons'
     insert_layout = """
     event_type
@@ -298,6 +304,7 @@ class Guest(Guest):
         except Client.DoesNotExist:
             return None
 
+EventTypes.column_names = 'name invite_client esf_field *'
 
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender, **kw):
@@ -306,7 +313,7 @@ def customize_cal(sender, **kw):
     site.modules.cal.EventTypes.set_detail_layout("""
     name
     event_label
-    max_conflicting all_rooms locks_user
+    max_conflicting all_rooms locks_user esf_field
     id invite_client is_appointment email_template attach_to_email
     EventsByType
     """)

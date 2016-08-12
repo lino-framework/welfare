@@ -92,6 +92,13 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
 
     A :class:`Client` is a polymorphic specialization of :class:`Person`.
 
+    .. attribute:: has_esf
+
+        Whether Lino should make ESF summaries for this client.
+
+        This field exists only if :mod:`lino_welfasre.modlib.esf` is
+        installed.
+
     .. attribute:: overview
 
         A panel with general information about this client.
