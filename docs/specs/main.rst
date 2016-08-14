@@ -11,10 +11,10 @@ The admin main page
     doctest init:
     
     >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
+    >>> from lino.utils.html2text import html2text
 
 
 A technical tour into the :mod:`lino_welfare.modlib.main` module.
@@ -31,6 +31,7 @@ Test the content of the admin main page.
 >>> result = json.loads(res.content)
 >>> result['success']
 True
+>>> # print(html2text(result['html']))
 >>> soup = BeautifulSoup(result['html'])
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +SKIP

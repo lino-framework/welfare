@@ -62,20 +62,24 @@ Thu 22/05/2014 (22.05.2014)
 ============ ============================ ============= ================== ============= ======================= ====== ============================
  Start time   Client                       Summary       Managed by         Assigned to   Calendar Event Type     Room   Workflow
 ------------ ---------------------------- ------------- ------------------ ------------- ----------------------- ------ ----------------------------
- 08:30:00                                  Diner         Alicia Allmanns                  Meeting                        **Suggested** → [Take]
- 08:30:00     MEIER Marie-Louise (149)     Evaluation    Romain Raffault                  Informational meeting          **Suggested** → [Take]
- 09:40:00     JANSEN Jérémy (136)          Diner         Mélanie Mélard                   Informational meeting          **Suggested** → [Take]
+ 08:30:00                                  Diner         Alicia Allmanns                  Meeting                        **Suggested**
+ 08:30:00     MEIER Marie-Louise (149)     Evaluation    Romain Raffault                  Informational meeting          **Suggested**
+ 09:40:00     JANSEN Jérémy (136)          Diner         Mélanie Mélard                   Informational meeting          **Suggested**
  09:40:00                                  Auswertung    Theresia Thelen                  Meeting                        **Suggested** → [Notified]
- 10:20:00     DOBBELSTEIN Dorothée (124)   Treffen       Hubert Huppertz                  Informational meeting          **Suggested** → [Take]
- 10:20:00                                  Mittagessen   Rolf Rompen                      Meeting                        **Suggested** → [Take]
- 11:10:00                                  Treffen       Patrick Paraneau                 Meeting                        **Suggested** → [Take]
- 13:30:00                                  Auswertung    Judith Jousten                   Meeting                        **Suggested** → [Take]
- 13:30:00     RADERMACHER Hedi (161)       Meeting       Robin Rood                       Informational meeting          **Suggested** → [Take]
+ 10:20:00     DOBBELSTEIN Dorothée (124)   Treffen       Hubert Huppertz                  Informational meeting          **Suggested**
+ 10:20:00                                  Mittagessen   Rolf Rompen                      Meeting                        **Suggested**
+ 11:10:00                                  Treffen       Patrick Paraneau                 Meeting                        **Suggested**
+ 13:30:00                                  Auswertung    Judith Jousten                   Meeting                        **Suggested**
+ 13:30:00     RADERMACHER Hedi (161)       Meeting       Robin Rood                       Informational meeting          **Suggested**
 ============ ============================ ============= ================== ============= ======================= ====== ============================
 <BLANKLINE>
 
-Note how Theresia cannot [Take] her own event (because she has it
-already), and how she can set only her own event to [Notified].
+
+.. until 20160814 Note how Theresia cannot [Take] her own event
+   (because she has it already), and how she can set only her own
+   event to [Notified].
+
+Note how Theresia can set only her own event to [Notified].
 
 Users looking at their events
 =============================
