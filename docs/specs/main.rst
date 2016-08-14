@@ -10,7 +10,6 @@ The admin main page
     
     doctest init:
     
-    >>> from __future__ import print_function
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
