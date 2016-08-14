@@ -29,6 +29,12 @@ This document describes the functionality implemented by the
 Confirmation types
 ==================
 
+
+>>> from lino_welfare.modlib.pcsw.roles import SocialAgent
+>>> ses = rt.login('alicia')
+>>> ses.user.profile.has_required_roles([SocialAgent])
+True
+
 :class:`ConfirmationTypes
 <lino_welfare.modlib.aids.choicelists.ConfirmationTypes>` is a
 choicelist where each subclass of :class:`Confirmation
@@ -103,6 +109,7 @@ When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
  DA VINCI David (165)     Ausländerbeihilfe         27.01.13                          **Unbestätigt** → [Bestätigen]
 ======================== ========================= ============== ========== ======= ================================
 <BLANKLINE>
+
 
 
 Hilfebestätigungen

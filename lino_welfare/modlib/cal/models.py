@@ -38,7 +38,7 @@ from lino.utils.xmlgen.html import E
 from lino_xl.lib.cal.models import *
 
 from lino_xl.lib.cal.utils import format_date
-from lino_xl.lib.cal.workflows import take, feedback
+from lino_xl.lib.cal.workflows import feedback
 from lino_xl.lib.reception.models import checkout_guest
 from lino.modlib.office.roles import OfficeUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
