@@ -23,6 +23,7 @@ See :ref:`welfare.specs.users`
 """
 
 from lino.core.roles import UserRole, SiteAdmin, Supervisor
+from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeOperator
 from lino_xl.lib.contacts.roles import ContactsStaff
 from lino.modlib.office.roles import OfficeUser
@@ -53,12 +54,13 @@ class SiteAdmin(
         DebtsStaff, LedgerStaff,
         NewcomersAgent,
         OfficeOperator,
+        AuthorshipTaker,
         AidsStaff, SepaStaff):
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(OfficeOperator, ContactsStaff, AidsStaff,
-                     CBSSUser, BeIdUser, SepaUser):
+class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
+                     AidsStaff, CBSSUser, BeIdUser, SepaUser):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
@@ -76,8 +78,9 @@ class ReceptionClerkNewcomers(ReceptionClerk, NewcomersOperator):
     pass
 
 
-class Supervisor(Supervisor, OfficeOperator, ContactsStaff, AidsStaff,
-                 NewcomersOperator, SepaUser):
+class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
+                 ContactsStaff, AidsStaff, NewcomersOperator,
+                 SepaUser):
     """A backoffice user who can act as others."""
     pass
 
