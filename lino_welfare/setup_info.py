@@ -27,8 +27,9 @@
 
 import six
 
-requires = ['lino_cosi', 'vobject', 'django-iban',
-            'metafone', 'weasyprint', 'cairocffi<0.7']
+requires = ['lino_cosi',
+            # 'vobject',
+            'django-iban', 'metafone', 'weasyprint', 'cairocffi<0.7']
 if six.PY2:
     requires.append('suds')
 else:
