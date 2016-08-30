@@ -10,7 +10,6 @@ Clients (Eupen)
     
     doctest init:
 
-    >>> from __future__ import print_function
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
@@ -51,15 +50,15 @@ Lino Welfare à la Eupen.
           - (general2_5): **Zivilstand** (civil_state), **Geburtsland** (birth_country), **Geburtsort** (birth_place)
         - (general3): **Sprache** (language), **E-Mail** (email), **Telefon** (phone), **Fax** (fax), **GSM** (gsm)
         - **None** (image)
-      - (general_2) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+      - (general_2) [visible for all except anonymous]:
         - **Termine** (reception.AppointmentsByPartner)
         - **Termin machen mit** (AgentsByClient)
     - **Beziehungen** (contact):
-      - (contact_1): **Ähnliche Klienten** (SimilarClients), **Beziehungen** (LinksByHuman), **ZDSS** (cbss_relations)
-      - (contact_2):
-        - **Mitgliedschaft in Haushalten** (MembersByPerson)
-        - **Haushaltszusammensetzung** (households.SiblingsByPerson) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
-    - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+      - (contact_1): **Ähnliche Klienten** (SimilarClients) [visible for all except anonymous], **Beziehungen** (LinksByHuman) [visible for all except anonymous], **ZDSS** (cbss_relations)
+      - (contact_2) [visible for all except anonymous]:
+        - **Mitgliedschaft in Haushalten** (MembersByPerson) [visible for 110 210 220 410 800 admin 910]
+        - **Haushaltszusammensetzung** (households.SiblingsByPerson)
+    - **Begleiter** (coaching) [visible for all except anonymous]:
       - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
         - (newcomers_left):
           - (newcomers_left_1) [visible for all]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
@@ -79,8 +78,8 @@ Lino Welfare à la Eupen.
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)
           - **andere Einkommen** (income_misc)
-      - **Bankkonten** (sepa.AccountsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
-      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
+      - **Bankkonten** (sepa.AccountsByClient) [visible for all except anonymous]
+      - **Hilfebeschlüsse** (aids.GrantingsByClient) [visible for all except anonymous]
     - **Arbeitssuche** (work_tab_1):
       - (suche) [visible for 100 110 120 200 300 400 410 admin 910]:
         - **Dispenzen** (pcsw.DispensesByClient)
@@ -88,7 +87,7 @@ Lino Welfare à la Eupen.
       - (papers):
         - (papers_1): **Sucht Arbeit seit** (seeking_since), **Arbeitslos seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
-        - **Uploads** (UploadsByClient)
+        - **Uploads** (UploadsByClient) [visible for all except anonymous]
     - **Lebenslauf** (career) [visible for 100 110 120 admin 910]:
       - **Erstellte Lebensläufe** (cvs_emitted) [visible for all]
       - **Studien** (cv.StudiesByPerson)
@@ -109,8 +108,8 @@ Lino Welfare à la Eupen.
       - **VSEs** (isip.ContractsByClient)
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
-    - **Historie** (history):
-      - **Ereignisse/Notizen** (notes.NotesByProject) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
+    - **Historie** (history) [visible for all except anonymous]:
+      - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
     - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
       - **Termine** (cal.EventsByClient)
@@ -121,7 +120,7 @@ Lino Welfare à la Eupen.
       - (misc_2) [visible for all]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
       - (misc_3) [visible for all]: **Erstellt** (created), **Bearbeitet** (modified)
       - (misc_4) [visible for all]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
-      - (misc_5) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+      - (misc_5) [visible for all except anonymous]:
         - **Datenprobleme** (plausibility.ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
     - **ZDSS** (cbss) [visible for 100 110 120 200 300 400 410 admin 910]:

@@ -193,7 +193,7 @@ The following table gives an overview of these things.
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     21        13
+ users.User                     users.Users                     22        13
  vatless.AccountInvoice         vatless.Invoices                18        30
  vatless.InvoiceItem            vatless.InvoiceItems            7         80
 ============================== =============================== ========= =======
