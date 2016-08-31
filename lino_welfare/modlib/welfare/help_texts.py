@@ -204,7 +204,6 @@ votre partenaire est décédé"""),
     'lino_welfare.modlib.cbss.models.ManageAccessRequest.purpose' : _("""Pointer to Purpose."""),
     'lino_welfare.modlib.cbss.choicelists.QueryRegisters' : _("""Possible values for the query_register field of a
 lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
-    'lino_welfare.modlib.welfare.roles.LedgerStaff' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.isip.choicelists.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
 of a contract type."""),
@@ -471,6 +470,7 @@ should have active coachings"""),
     'lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting.master' : _("""alias of Granting"""),
     'lino_welfare.modlib.pcsw.models.Client.unemployed_since' : _("""The date when this client got unemployed and stopped to have a
 regular work."""),
+    'lino_welfare.modlib.welfare.roles.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.courses.models.CourseRequestsByPerson.master' : _("""alias of Client"""),
     'lino_welfare.modlib.isip.mixins.OverlappingContractsChecker' : _("""A given client cannot have two active contracts at the same time."""),
     'lino_welfare.modlib.debts.models.Entry.amount' : _("""The amount of money. An empty amount is different from a zero

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -34,7 +34,8 @@ class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
     """
 
 
-class SocialStaff(SocialAgent, OfficeStaff, AidsStaff, PollsStaff, SepaStaff):
+class SocialStaff(OfficeStaff, SocialAgent, AidsStaff, PollsStaff,
+                  SepaStaff):
     """A **social staff member** is a social agent who has access to more
     technical information about welfare clients.  For example the
     `Miscellaneous` panel.

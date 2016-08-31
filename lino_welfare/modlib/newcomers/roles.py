@@ -24,10 +24,11 @@
 
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_xl.lib.contacts.roles import ContactsUser
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+# from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 
-class NewcomersAgent(SocialAgent):
+# class NewcomersAgent(SocialAgent):
+class NewcomersAgent(BeIdUser):
     """A **newcomers agent** is a *social agent* who also manages
     newcomers.
 
