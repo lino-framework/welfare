@@ -27,3 +27,4 @@ userdocs/gen
 .idea
 .coverage
 .eggs/
+.cache
