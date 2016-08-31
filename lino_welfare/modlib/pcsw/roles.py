@@ -23,10 +23,11 @@ from lino.modlib.plausibility.roles import PlausibilityUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
 from lino_cosi.lib.sepa.roles import SepaUser, SepaStaff
+from lino_cosi.lib.courses.roles import CoursesUser
 
 
 class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
-                  AidsUser, PollsUser, SepaUser):
+                  AidsUser, PollsUser, SepaUser, CoursesUser):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.

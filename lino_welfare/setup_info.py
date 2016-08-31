@@ -27,7 +27,7 @@
 
 import six
 
-requires = ['lino_cosi',
+requires = ['lino-cosi',
             # 'vobject',
             'django-iban', 'metafone', 'weasyprint', 'cairocffi<0.7']
 if six.PY2:

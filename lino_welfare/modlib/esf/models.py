@@ -149,6 +149,7 @@ class SummariesByClient(Summaries):
     """Lists the ESF summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
+    required_roles = dd.required(IntegrationAgent)
     # slave_grid_format = 'html'
     # insert_layout = """
     # education_level result

@@ -30,6 +30,7 @@ from lino.modlib.office.roles import OfficeUser
 from lino_cosi.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_cosi.lib.sepa.roles import SepaStaff
 from lino_cosi.lib.sepa.roles import SepaUser
+from lino_cosi.lib.courses.roles import CoursesUser
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -63,7 +64,8 @@ class SiteAdmin(
 
 
 class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
-                     AidsStaff, CBSSUser, BeIdUser, SepaUser):
+                     AidsStaff, CBSSUser, BeIdUser, SepaUser,
+                     CoursesUser):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
@@ -76,6 +78,7 @@ class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
 class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
                               # OfficeUser,
                               # SocialAgent,
+                              CoursesUser,
                               NewcomersAgent,
                               BeIdUser):
                               # ContactsUser,
@@ -119,6 +122,9 @@ class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
     pass
 
 class NewcomersConsultant(NewcomersAgent, SocialAgent):
+    pass
+
+class Supervisor(Supervisor, CoursesUser):
     pass
 
 
