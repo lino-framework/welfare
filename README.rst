@@ -1,11 +1,8 @@
-==========================
-lino-welfare README
-==========================
+============================
+The ``lino-welfare`` package
+============================
 
-A Lino application for Belgian Centres for Public Welfare
 
-Description
------------
 
 Lino Welfare is a modular
 `Lino <http://www.lino-framework.org>`__
@@ -26,5 +23,3 @@ application for Belgian
 
 
 
-
-Read more on http://welfare.lino-framework.org
