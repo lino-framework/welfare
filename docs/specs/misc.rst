@@ -247,7 +247,7 @@ see it.
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.OneEvent.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.OneEvent.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910
 - cal.RemoteCalendars.duplicate : visible for 110 410 admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
@@ -309,7 +309,7 @@ see it.
 - notes.AllNotes.duplicate : visible for 110 410 admin 910
 - notes.MyNotes.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.Notes.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-  - notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910

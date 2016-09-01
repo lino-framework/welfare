@@ -168,25 +168,25 @@ assigned to you.
 
 >>> rt.login('melanie').show(plausibility.MyProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================ =========================================== ============================================================== ================================
- Responsible      Controlled by                               Message                                                        Plausibility checker
----------------- ------------------------------------------- -------------------------------------------------------------- --------------------------------
- Mélanie Mélard   *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*   Similar clients: DEMEULENAERE Dorothée (122)                   Check for similar clients
- Mélanie Mélard   *DOBBELSTEIN Dorothée (124)*                Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)       Check for similar clients
- Mélanie Mélard   *DOBBELSTEIN Dorothée (124)*                Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *EMONTS Daniel (128)*                       Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *ENGELS Edgar (129)*                        Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *FAYMONVILLE Luc (130*)*                    Both coached and obsolete.                                     Check coachings
- Mélanie Mélard   *FAYMONVILLE Luc (130*)*                    Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *HILGERS Hildegard (133)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *KAIVERS Karl (141)*                        Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *LAMBERTZ Guido (142)*                      Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *LAZARUS Line (144)*                        Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *MEESSEN Melissa (147)*                     Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *RADERMACHER Alfons (153)*                  Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *RADERMACHER Guido (159)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *RADERMECKER Rik (173)*                     Neither valid eId data nor alternative identifying document.   Check for valid identification
- Mélanie Mélard   *DENON Denis (180*)*                        Both coached and obsolete.                                     Check coachings
- Mélanie Mélard   *DENON Denis (180*)*                        Neither valid eId data nor alternative identifying document.   Check for valid identification
-================ =========================================== ============================================================== ================================
+================ ====================================================== ============================================================== ================================
+ Responsible      Controlled by                                          Message                                                        Plausibility checker
+---------------- ------------------------------------------------------ -------------------------------------------------------------- --------------------------------
+ Mélanie Mélard   `DOBBELSTEIN-DEMEULENAERE Dorothée (123) <Detail>`__   Similar clients: DEMEULENAERE Dorothée (122)                   Check for similar clients
+ Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)       Check for similar clients
+ Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `EMONTS Daniel (128) <Detail>`__                       Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `ENGELS Edgar (129) <Detail>`__                        Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `FAYMONVILLE Luc (130*) <Detail>`__                    Both coached and obsolete.                                     Check coachings
+ Mélanie Mélard   `FAYMONVILLE Luc (130*) <Detail>`__                    Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `HILGERS Hildegard (133) <Detail>`__                   Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `KAIVERS Karl (141) <Detail>`__                        Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `LAMBERTZ Guido (142) <Detail>`__                      Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `LAZARUS Line (144) <Detail>`__                        Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `MEESSEN Melissa (147) <Detail>`__                     Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `RADERMACHER Alfons (153) <Detail>`__                  Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `RADERMACHER Guido (159) <Detail>`__                   Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `RADERMECKER Rik (173) <Detail>`__                     Neither valid eId data nor alternative identifying document.   Check for valid identification
+ Mélanie Mélard   `DENON Denis (180*) <Detail>`__                        Both coached and obsolete.                                     Check coachings
+ Mélanie Mélard   `DENON Denis (180*) <Detail>`__                        Neither valid eId data nor alternative identifying document.   Check for valid identification
+================ ====================================================== ============================================================== ================================
 <BLANKLINE>
