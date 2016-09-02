@@ -55,7 +55,7 @@ Events today
 Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
 >>> rt.login('theresia').show(cal.EventsByDay, language='en', header_level=1)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
