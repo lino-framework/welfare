@@ -198,7 +198,7 @@ profiles that can see it.
 - pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 - pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 - pcsw.CoachedClients.find_by_beid : visible for 100 110 120 200 300 400 410 admin 910
-- reception.Clients.find_by_beid : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- reception.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 <BLANKLINE>
 
 
@@ -240,14 +240,14 @@ see it.
 - cal.Events.duplicate : visible for 110 410 admin 910
 - cal.EventsByClient.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.EventsByController.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.EventsByDay.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- cal.EventsByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EventsByProject.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.EventsByRoom.duplicate : visible for 110 410 admin 910
 - cal.EventsByType.duplicate : visible for 110 410 admin 910
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.OneEvent.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910
 - cal.RemoteCalendars.duplicate : visible for 110 410 admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
@@ -284,11 +284,11 @@ see it.
 - debts.LiabilitiesByBudget.duplicate : visible for 120 300 admin 910
 - debts.MyBudgets.duplicate : visible for 120 300 admin 910
 - excerpts.AllExcerpts.duplicate : visible for admin 910
-- excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - finan.BankStatementItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - finan.ItemsByBankStatement.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -307,15 +307,15 @@ see it.
 - newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - newcomers.MyCompetences.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.AllNotes.duplicate : visible for 110 410 admin 910
-- notes.MyNotes.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.Notes.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByType.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.NotesByX.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- notes.MyNotes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.Notes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByX.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.CoachingEndings.duplicate : visible for 110 410 admin 910
 - pcsw.DispenseReasons.duplicate : visible for 110 410 admin 910
 - polls.Choices.duplicate : visible for 110 410 admin 910

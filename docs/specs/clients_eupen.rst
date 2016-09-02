@@ -87,7 +87,7 @@ Lino Welfare à la Eupen.
       - (papers):
         - (papers_1): **Sucht Arbeit seit** (seeking_since), **Arbeitslos seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
-        - **Uploads** (UploadsByClient) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]
+        - **Uploads** (UploadsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
     - **Lebenslauf** (career) [visible for 100 110 120 admin 910]:
       - **Erstellte Lebensläufe** (cvs_emitted) [visible for all]
       - **Studien** (cv.StudiesByPerson)
@@ -108,7 +108,7 @@ Lino Welfare à la Eupen.
       - **VSEs** (isip.ContractsByClient)
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
-    - **Historie** (history) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
+    - **Historie** (history) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
     - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:

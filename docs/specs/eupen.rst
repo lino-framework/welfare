@@ -589,7 +589,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - esf.Summaries.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - excerpts.ExcerptTypes.detail : visible for admin 910
 - excerpts.ExcerptTypes.insert : visible for admin 910
-- excerpts.Excerpts.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- excerpts.Excerpts.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - finan.BankStatements.detail : visible for 500 510 admin 910
 - finan.BankStatements.insert : visible for 500 510 admin 910
 - finan.DisbursementOrders.detail : visible for 500 510 admin 910
@@ -630,8 +630,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.EventTypes.insert : visible for 110 410 admin 910
 - notes.NoteTypes.detail : visible for 110 410 admin 910
 - notes.NoteTypes.insert : visible for 110 410 admin 910
-- notes.Notes.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- notes.Notes.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notify.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
@@ -648,10 +648,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - properties.PropGroups.insert : visible for admin 910
 - properties.PropTypes.insert : visible for admin 910
 - properties.Properties.insert : visible for admin 910
-- reception.BusyVisitors.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- reception.GoneVisitors.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - system.SiteConfigs.detail : visible for admin 910
 - tinymce.TextFieldTemplates.detail : visible for admin 910
 - tinymce.TextFieldTemplates.insert : visible for admin 910
@@ -659,10 +659,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.AllUploads.insert : visible for 110 410 admin 910
 - uploads.UploadTypes.detail : visible for 110 410 admin 910
 - uploads.UploadTypes.insert : visible for 110 410 admin 910
-- uploads.Uploads.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- uploads.Uploads.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- uploads.UploadsByController.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.change_password : visible for admin 910
 - users.Users.detail : visible for admin 910
 - users.Users.insert : visible for admin 910
@@ -699,8 +699,8 @@ per user profile.
 - pcsw.ClientsByNationality.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 - pcsw.CoachedClients.find_by_beid : visible for 100 110 120 200 300 400 410 admin 910
 - pcsw.CoachedClients.read_beid : visible for 100 110 120 200 300 400 410 admin 910
-- reception.Clients.find_by_beid : visible for 100 110 120 200 210 300 400 410 800 admin 910
-- reception.Clients.read_beid : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- reception.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
+- reception.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 <BLANKLINE>
 
 
