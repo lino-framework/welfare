@@ -76,6 +76,7 @@ class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
 
 
 class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
+                              OfficeOperator,
                               # OfficeUser,
                               # SocialAgent,
                               # CoursesUser,

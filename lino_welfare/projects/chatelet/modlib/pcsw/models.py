@@ -92,17 +92,16 @@ class ClientDetail(ClientDetail):
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
     # pcsw.ConvictionsByClient
-    """)
+    """, required_roles=dd.required(ContactsUser))
 
     papers = dd.Panel("""
     active_job_search.ProofsByClient
     polls.ResponsesByPartner
-    """)
+    """, required_roles=dd.required(ContactsUser))
 
     job_search = dd.Panel("""
     suche:40 papers:40
-    """, label=dd.plugins.active_job_search.short_name,
-    required_roles=dd.required(ContactsUser))
+    """, label=dd.plugins.active_job_search.short_name)
 
     # projects_tab = dd.Panel("""
     # projects.ProjectsByClient
