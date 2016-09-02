@@ -42,6 +42,7 @@ SETUP_INFO = dict(
     version='1.1.26',  # since 20150918
     install_requires=requires,
     test_suite='tests',
+    tests_require=['pytest'],
     description=u"A Lino application for Belgian Centres for Public Welfare",
     long_description="""\
 Lino Welfare is a modular
