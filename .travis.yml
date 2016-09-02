@@ -1,6 +1,13 @@
 language: python
 python:
   - "2.7"
+
+before_install:
+  - sudo apt-get install tidy
+  - sudo apt-get install -y libreoffice python3-uno
+  - libreoffice '--accept=socket,host=127.0.0.1,port=8100;urp;' &
+
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U setuptools ; pip install -r requirements.txt ; pip install .
 # command to run tests, e.g. python setup.py test
