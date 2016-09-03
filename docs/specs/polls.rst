@@ -152,7 +152,7 @@ Responses
 
 >>> obj = polls.Response.objects.get(id=3)
 >>> rt.login('alicia').show(polls.AnswersByResponse, obj)
-Question *03/03/2014* 02/04/2014 *02/05/2014* 
+Question `03/03/2014 <Détail>`__ 02/04/2014 `02/05/2014 <Détail>`__ 
 <BLANKLINE>
 1) Cherchez-vous du travail actuellement? Oui
  ****[Oui]**** **Peut-être** **Non** (**Remarque**)
@@ -206,7 +206,7 @@ is not the author:
 
 >>> rt.login('hubert').show(polls.AnswersByResponse, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Question *03/03/2014* 02/04/2014 *02/05/2014* 
+Question `03/03/2014 <Détail>`__ 02/04/2014 `02/05/2014 <Détail>`__
 <BLANKLINE>
 1) Cherchez-vous du travail actuellement? Oui
  Oui

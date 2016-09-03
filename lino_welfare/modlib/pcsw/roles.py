@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -23,10 +23,11 @@ from lino.modlib.plausibility.roles import PlausibilityUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
 from lino_cosi.lib.sepa.roles import SepaUser, SepaStaff
+from lino_cosi.lib.courses.roles import CoursesUser
 
 
 class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
-                  AidsUser, PollsUser, SepaUser):
+                  AidsUser, PollsUser, SepaUser, CoursesUser):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.
@@ -34,7 +35,8 @@ class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
     """
 
 
-class SocialStaff(SocialAgent, OfficeStaff, AidsStaff, PollsStaff, SepaStaff):
+class SocialStaff(OfficeStaff, SocialAgent, AidsStaff, PollsStaff,
+                  SepaStaff):
     """A **social staff member** is a social agent who has access to more
     technical information about welfare clients.  For example the
     `Miscellaneous` panel.

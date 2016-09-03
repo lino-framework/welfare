@@ -1,3 +1,4 @@
+.. _welfare.specs.reception:
 .. _welfare.tested.reception:
 
 ===================
@@ -48,6 +49,28 @@ This client has the following appointments.
  22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     **Accepted** → [Excused] [Absent] [Present] [Checkin]
 ============ ============ ================= ================ =======================================================
 <BLANKLINE>
+
+Note that even Theresia who is a reception clerk and has no calendar
+functionality can click on the dates to see their detail:
+
+>>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
+...     language="en")  #doctest: +REPORT_UDIFF
+====================================== ================= =======================================================
+ When                                   Managed by        Workflow
+-------------------------------------- ----------------- -------------------------------------------------------
+ `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    **Waiting** → [Receive] [Checkout]
+ `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+====================================== ================= =======================================================
+<BLANKLINE>
+
 
 
 .. _welfare.tested.reception.AgentsByClient:
@@ -173,6 +196,7 @@ javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "base_params": { "prj":
 This one is shorter, so we don't need to parse it for inspecting it.
 Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
 And `prj` will become the value of the `project` field if a new event would be created.
+
 
 
 Some tables

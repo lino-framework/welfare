@@ -30,7 +30,8 @@
 
 import os
 
-execfile(os.path.join(os.path.dirname(__file__), 'setup_info.py'))
+fn = os.path.join(os.path.dirname(__file__), 'setup_info.py')
+exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
 doc_trees = ['docs', 'docs_de', 'docs_fr']
 intersphinx_urls = dict(docs="http://welfare.lino-framework.org")

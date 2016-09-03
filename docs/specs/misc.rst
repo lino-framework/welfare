@@ -193,7 +193,7 @@ profiles that can see it.
 - debts.Clients.find_by_beid : visible for 120 300 admin 910
 - integ.Clients.find_by_beid : visible for 100 110 120 admin 910
 - newcomers.ClientsByFaculty.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
-- newcomers.NewClients.find_by_beid : visible for 120 200 300 admin 910
+- newcomers.NewClients.find_by_beid : visible for 120 200 220 300 admin 910
 - pcsw.AllClients.find_by_beid : visible for 110 410 admin 910
 - pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
 - pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 800 admin 910
@@ -215,9 +215,9 @@ see it.
 >>> from lino.core.merge import MergeAction
 >>> print(analyzer.show_action_permissions(MergeAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- contacts.Companies.merge_row : visible for 110 210 220 410 800 admin 910
-- countries.Places.merge_row : visible for 110 210 220 410 800 admin 910
-- pcsw.Clients.merge_row : visible for 110 210 220 410 800 admin 910
+- contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
+- countries.Places.merge_row : visible for 110 210 410 800 admin 910
+- pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
 <BLANKLINE>
 
 
@@ -247,24 +247,24 @@ see it.
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.OneEvent.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910
 - cal.RemoteCalendars.duplicate : visible for 110 410 admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
 - cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin 910
-- cbss.IdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.IdentifyRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.ManageAccessRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.ManageAccessRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.MyIdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.MyManageAccessRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 admin 910
-- countries.Places.duplicate : visible for 110 210 220 410 800 admin 910
+- cbss.IdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.IdentifyRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.ManageAccessRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.ManageAccessRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.MyIdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.MyManageAccessRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- countries.Places.duplicate : visible for 110 210 410 800 admin 910
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- countries.PlacesByPlace.duplicate : visible for 110 210 220 410 800 admin 910
+- countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
 - cv.EducationLevels.duplicate : visible for 110 admin 910
 - debts.Accounts.duplicate : visible for admin 910
 - debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910

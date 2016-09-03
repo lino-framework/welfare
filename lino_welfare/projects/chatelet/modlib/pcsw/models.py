@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -26,6 +26,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
+from lino_xl.lib.contacts.roles import ContactsUser
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
@@ -37,8 +38,8 @@ from lino_welfare.modlib.pcsw.models import *
 class ClientDetail(ClientDetail):
 
     main = "general coaching family \
-    career competences obstacles_tab #aids_tab #sis_tab isip_tab \
-    courses_tab #projects_tab immersion_tab \
+    career competences obstacles_tab isip_tab \
+    courses_tab immersion_tab \
     job_search contracts history calendar misc"
 
     general = dd.Panel("""
@@ -67,7 +68,8 @@ class ClientDetail(ClientDetail):
     family = dd.Panel("""
     family_left:20 households.SiblingsByPerson:50
     humanlinks.LinksByHuman:30
-    """, label=_("Family situation"))
+    """, label=_("Family situation"),
+    required_roles=dd.required(ContactsUser))
 
     family_left = """
     households.MembersByPerson
@@ -90,15 +92,15 @@ class ClientDetail(ClientDetail):
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
     # pcsw.ConvictionsByClient
-    """)
+    """, required_roles=dd.required(ContactsUser))
 
     papers = dd.Panel("""
     active_job_search.ProofsByClient
     polls.ResponsesByPartner
-    """)
+    """, required_roles=dd.required(ContactsUser))
 
     job_search = dd.Panel("""
-    suche:40  papers:40
+    suche:40 papers:40
     """, label=dd.plugins.active_job_search.short_name)
 
     # projects_tab = dd.Panel("""

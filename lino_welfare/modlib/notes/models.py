@@ -29,6 +29,7 @@ from django.conf import settings
 from lino.api import dd, rt
 
 from lino_xl.lib.notes.models import *
+from lino.modlib.office.roles import OfficeUser, OfficeOperator
 
 
 class Note(Note):
@@ -90,14 +91,16 @@ project #company
 
 
 class NotesByProject(NotesByProject):
-    required_roles = dd.required()
+    required_roles = dd.required((OfficeUser, OfficeOperator))
+    # required_roles = dd.required()
     column_names = ("date:8 time:5 event_type:10 type:10 "
                     "subject:40 user:10 *")
     auto_fit_column_widths = True
 
 
 class NotesByCompany(NotesByCompany):
-    required_roles = dd.required()
+    required_roles = dd.required((OfficeUser, OfficeOperator))
+    # required_roles = dd.required()
     column_names = "date time project event_type type subject user *"
 
 
