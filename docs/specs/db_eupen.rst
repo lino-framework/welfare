@@ -118,7 +118,7 @@ Database structure
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account, printed_name, dc, yearly_numbering, printed_name_fr, printed_name_en, name_fr, name_en
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
-- ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, name_fr, name_en
+- ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
 - ledger.Voucher : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state
 - newcomers.Broker : id, name
 - newcomers.Competence : id, seqno, user, faculty, weight
