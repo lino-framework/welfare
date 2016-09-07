@@ -126,7 +126,7 @@ Database structure
 - notes.EventType : id, name, remark, body, body_fr, body_en, name_fr, name_en
 - notes.Note : id, project, build_time, build_method, company, contact_person, contact_role, user, owner_type, owner_id, date, time, type, event_type, subject, body, language, important
 - notes.NoteType : id, name, build_method, template, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
-- notify.Notification : id, created, user, owner_type, owner_id, seen, sent, subject, body
+- notify.Notification : id, created, user, owner_type, owner_id, seen, sent, subject, body, from_user
 - outbox.Attachment : id, owner_type, owner_id, mail
 - outbox.Mail : id, project, user, owner_type, owner_id, date, subject, body, sent
 - outbox.Recipient : id, mail, partner, type, address, name
@@ -151,7 +151,7 @@ Database structure
 - properties.PropType : id, name, choicelist, default_value, limit_to_choices, multiple_choices, name_fr, name_en
 - properties.Property : id, name, group, type, name_fr, name_en
 - sepa.Account : id, partner, iban, bic, remark, primary, account_type, managed
-- system.SiteConfig : id, default_build_method, simulate_today, signer1, signer2, signer1_function, signer2_function, next_partner_id, site_company, default_event_type, site_calendar, max_auto_events, prompt_calendar, client_calendar, client_guestrole, team_guestrole, propgroup_skills, propgroup_softskills, propgroup_obstacles, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, suppliers_account, aids_account, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfig : id, default_build_method, simulate_today, site_company, signer1, signer2, signer1_function, signer2_function, next_partner_id, default_event_type, site_calendar, max_auto_events, prompt_calendar, client_calendar, client_guestrole, team_guestrole, propgroup_skills, propgroup_softskills, propgroup_obstacles, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, suppliers_account, aids_account, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplate : id, user, name, description, text
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, company, contact_person, contact_role, user, owner_type, owner_id, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en

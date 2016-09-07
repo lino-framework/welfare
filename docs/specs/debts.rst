@@ -1,3 +1,4 @@
+.. _welfare.specs.debts:
 .. _welfare.tested.debts:
 
 ===============
@@ -76,7 +77,7 @@ Data entry panels
 
 Here is the textual representation of the "Expenses" panel:
 
->>> ses.show(debts.ExpensesByBudget.request(obj),
+>>> ses.show(debts.ExpensesByBudget, obj,
 ...   column_names="account description amount remark",
 ...   limit=10)
 ... #doctest: +NORMALIZE_WHITESPACE
@@ -114,7 +115,7 @@ The summary panel
 
 Here are some more slave tables.
 
->>> ses.show(debts.ResultByBudget.request(obj))
+>>> ses.show(debts.ResultByBudget, obj)
 ========================================================= ==============
  Beschreibung                                              Betrag
 --------------------------------------------------------- --------------
@@ -127,7 +128,7 @@ Here are some more slave tables.
 <BLANKLINE>
 
 >>> obj.include_yearly_incomes = True
->>> ses.show(debts.ResultByBudget.request(obj))
+>>> ses.show(debts.ResultByBudget, obj)
 ========================================================= ==============
  Beschreibung                                              Betrag
 --------------------------------------------------------- --------------
@@ -140,7 +141,7 @@ Here are some more slave tables.
 ========================================================= ==============
 <BLANKLINE>
 
->>> ses.show(debts.DebtsByBudget.request(obj))
+>>> ses.show(debts.DebtsByBudget, obj)
 ================================== ==============
  Beschreibung                       Betrag
 ---------------------------------- --------------
@@ -154,7 +155,7 @@ Here are some more slave tables.
 <BLANKLINE>
 
 >>> with translation.override('en'):
-...     ses.show(debts.DebtsByBudget.request(obj))
+...     ses.show(debts.DebtsByBudget, obj)
 ================================= ==============
  Description                       Amount
 --------------------------------- --------------
@@ -167,8 +168,7 @@ Here are some more slave tables.
 ================================= ==============
 <BLANKLINE>
 
->>> with translation.override('en'):
-...     ses.show(debts.DistByBudget.request(obj))
+>>> ses.show(debts.DistByBudget, obj, language="en")
 ==================== ================= ============== ============ ===========================
  Creditor             Description       Debt           %            Monthly payback suggested
 -------------------- ----------------- -------------- ------------ ---------------------------
@@ -258,7 +258,7 @@ Something in French
 ===================
 
 >>> with translation.override('fr'):
-...    ses.show(debts.DistByBudget.request(obj))
+...    ses.show(debts.DistByBudget, obj)
 ====================== ================= ============== ============ =======================
  Créancier              Description       Dette          %            Remboursement mensuel
 ---------------------- ----------------- -------------- ------------ -----------------------
@@ -272,7 +272,7 @@ Something in French
 Or the same in English:
 
 >>> with translation.override('en'):
-...     ses.show(debts.DistByBudget.request(obj))
+...     ses.show(debts.DistByBudget, obj)
 ==================== ================= ============== ============ ===========================
  Creditor             Description       Debt           %            Monthly payback suggested
 -------------------- ----------------- -------------- ------------ ---------------------------

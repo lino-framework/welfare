@@ -61,7 +61,7 @@ class Signers(dd.Model):
         kw = dict()
         if sc.signer1_function:
             kw.update(rolesbyperson__type=sc.signer1_function)
-        return settings.SITE.modules.contacts.Person.objects.filter(
+        return settings.SITE.models.contacts.Person.objects.filter(
             rolesbyperson__company=sc.site_company, **kw)
 
     @dd.chooser()
@@ -70,7 +70,7 @@ class Signers(dd.Model):
         kw = dict()
         if sc.signer2_function:
             kw.update(rolesbyperson__type=sc.signer2_function)
-        return settings.SITE.modules.contacts.Person.objects.filter(
+        return settings.SITE.models.contacts.Person.objects.filter(
             rolesbyperson__company=sc.site_company, **kw)
 
 

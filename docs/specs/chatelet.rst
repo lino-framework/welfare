@@ -157,7 +157,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notify.Notification            notify.Notifications            9         3
+ notify.Notification            notify.Notifications            10        3
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0

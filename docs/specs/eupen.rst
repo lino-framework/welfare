@@ -710,6 +710,7 @@ Dialog actions
 Global list of all actions that have a parameter dialog.
 
 >>> show_dialog_actions()
+... #doctest: +REPORT_UDIFF +NORMALIZE_WHITESPACE
 - cal.GuestStates.wf1 : Zusagen
   (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
 - cal.GuestStates.wf2 : Absagen
@@ -744,7 +745,8 @@ Global list of all actions that have a parameter dialog.
 - pcsw.Coachings.create_visit : Visite erstellen
   (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - users.Users.change_password : Passwort ändern
-  (main) [visible for all]: **Current password** (current), **New password** (new1), **New password again** (new2)
+  (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
+  
 <BLANKLINE>
 
 
