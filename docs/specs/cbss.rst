@@ -116,7 +116,7 @@ Here is the textual representation of the "Result" panel
 
 >>> ses = rt.login('hubert')
 >>> with translation.override('de'):
-...    ses.show(cbss.RetrieveTIGroupsResult.request(obj, limit=5))
+...    ses.show(cbss.RetrieveTIGroupsResult, obj, limit=5)
 ====================== ===== ========== ==================================================
  Gruppe                 TI    Seit       Information
 ---------------------- ----- ---------- --------------------------------------------------
@@ -130,7 +130,7 @@ Here is the textual representation of the "Result" panel
 
 >>> ses = rt.login('rolf')
 >>> with translation.override('de'):
-...    ses.show(cbss.RetrieveTIGroupsResult.request(obj, limit=5))
+...    ses.show(cbss.RetrieveTIGroupsResult, obj, limit=5)
 Confidential data
 
 
