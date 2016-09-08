@@ -104,6 +104,6 @@ name to read the documentation):
     system.YesNo : Yes or no
     uploads.Shortcuts : Upload shortcuts
     uploads.UploadAreas : Upload Areas
-    users.UserProfiles : User Profiles
+    users.UserProfiles : User types
 
 

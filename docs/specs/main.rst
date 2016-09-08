@@ -32,26 +32,27 @@ Test the content of the admin main page.
 True
 >>> # print(html2text(result['html']))
 >>> soup = BeautifulSoup(result['html'])
+
+We might test the complete content here, but currently we skip this as
+it is much work to maintain.
+
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +SKIP
 
 >>> links = soup.find_all('a')
 >>> len(links)
-134
+131
 
 >>> print(links[0].text)
 Kalender
 
 >>> tables = soup.find_all('table')
 >>> len(tables)
-5
+3
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Benutzer und ihre Klienten
-Meine Warteschlange
-Meine Termine
-Meine Aufgaben
-Wartende Besucher
-
+Benutzer und ihre Klienten 🗗
+Meine Termine 🗗
+Wartende Besucher 🗗
 
