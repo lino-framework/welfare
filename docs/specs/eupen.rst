@@ -86,7 +86,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - System : Vollmachten, Benutzerprofile, Datenbankmodelle, Benachrichtigungen, Änderungen, Datentests, Datenprobleme
+  - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
