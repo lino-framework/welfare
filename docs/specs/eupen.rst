@@ -712,11 +712,11 @@ Global list of all actions that have a parameter dialog.
 >>> show_dialog_actions()
 ... #doctest: +REPORT_UDIFF +NORMALIZE_WHITESPACE
 - cal.GuestStates.wf1 : Zusagen
-  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Benachrichtigung schicken** (notify_silent)
 - cal.GuestStates.wf2 : Absagen
-  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Benachrichtigung schicken** (notify_silent)
 - cal.Guests.checkin : Einchecken
-  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Benachrichtigung schicken** (notify_silent)
 - contacts.Companies.merge_row : Fusionieren
   (main) [visible for all]:
   - **nach...** (merge_to)
@@ -727,7 +727,7 @@ Global list of all actions that have a parameter dialog.
 - countries.Places.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - newcomers.AvailableCoachesByClient.assign_coach : Zuweisen
-  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Benachrichtigung schicken** (notify_silent)
 - pcsw.Clients.create_visit : Visite erstellen
   (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - pcsw.Clients.merge_row : Fusionieren
