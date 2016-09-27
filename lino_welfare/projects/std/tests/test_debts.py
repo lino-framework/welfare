@@ -99,8 +99,8 @@ class DebtsTests(RemoteAuthTestCase):
         b = Budget(partner=h, user=u)
         b.save()
         b.fill_defaults()
-        # from django.utils.encoding import force_unicode
-        # s = ' & '.join([force_unicode(a) for a in b.get_actors()])
+        # from django.utils.encoding import force_text
+        # s = ' & '.join([force_text(a) for a in b.get_actors()])
         # s = '{0} & {1}'.format(*b.get_actors())
         # self.assertEqual(s, "Mr. & Mrs.")
 

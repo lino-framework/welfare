@@ -65,7 +65,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from lino.api import dd
 from lino.utils import AttrDict, IncompleteDate
@@ -125,7 +125,7 @@ class Info(object):
         if prefix is None:
             prefix = '%s ' % name
         else:
-            prefix = force_unicode(prefix)
+            prefix = force_text(prefix)
             if prefix and prefix[-1] not in ' :(':
                 prefix += ': '
         if len(self.chunks):
@@ -133,7 +133,7 @@ class Info(object):
                 prefix = ', ' + prefix
         self.chunks += [prefix] + fmt(v).chunks
         if suffix:
-            self.chunks.append(force_unicode(suffix))
+            self.chunks.append(force_text(suffix))
         return self
 
     def add_deldate(self, n):
@@ -180,9 +180,9 @@ def NameType(n):
     # if not v: return []
     # if prefix is None:
         # prefix = ', %s ' % name
-    # info = [force_unicode(prefix)] + fmt(v)
+    # info = [force_text(prefix)] + fmt(v)
     # if suffix:
-        # info.append(force_unicode(suffix))
+        # info.append(force_text(suffix))
     # return info
 def DateType(n):
     return Info(dd.dtos(rn2date(n)))

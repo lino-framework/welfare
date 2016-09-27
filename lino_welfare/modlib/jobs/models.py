@@ -35,7 +35,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from lino.api import dd, rt
 from lino import mixins
@@ -678,7 +678,7 @@ class Candidature(SectorFunction):
         return s
 
     def __str__(self):
-        return force_unicode(_('Candidature by %(person)s') % dict(
+        return force_text(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
 
     #~ @dd.chooser()

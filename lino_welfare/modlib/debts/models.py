@@ -31,7 +31,7 @@ import decimal
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
@@ -190,7 +190,7 @@ Vielleicht mit Fußnoten?"""))
     def __str__(self):
         if self.pk is None:
             return unicode(_("New")) + ' ' + unicode(self._meta.verbose_name)
-        return force_unicode(
+        return force_text(
             _("Budget %(pk)d for %(partner)s")
             % dict(pk=self.pk, partner=self.partner))
 
